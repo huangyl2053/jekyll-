@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 
 /**
  * 履歴修正用のビジネスクラスです
@@ -28,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class RirekiShuseiDataPass implements Serializable {
+public class RirekiShuseiDataPass implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 2502561546047444606L;
 
@@ -246,5 +247,19 @@ public class RirekiShuseiDataPass implements Serializable {
         this.厚労省IF識別コード = dataPass.get厚労省IF識別コード();
         this.市町村コード = dataPass.get市町村コード();
 
+    }
+
+    /**
+     * このEntityのcloneを返します。
+     *
+     * @return このEntityのclone
+     */
+    @Override
+    public RirekiShuseiDataPass clone() {
+        try {
+            return (RirekiShuseiDataPass) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new SystemException(e);
+        }
     }
 }

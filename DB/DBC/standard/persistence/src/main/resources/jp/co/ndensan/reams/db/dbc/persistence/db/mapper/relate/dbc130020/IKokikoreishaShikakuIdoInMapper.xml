@@ -109,11 +109,17 @@
     </delete>
         
     <resultMap  id="後期高齢者情報ResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoRealEntity" autoMapping="false">
+        <id column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="件数" column="件数"/>
         <association property="取込後期高齢者情報Entity" resultMap="ResultMap_取込後期高齢者情報"/>
     </resultMap>
     
     <resultMap  id="後期高齢者情報作成用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoDataYoEntity" autoMapping="false">
+        <id column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="住民コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="データ件数" column="データ件数"/>
         <association property="取込後期高齢者情報Entity" resultMap="ResultMap_取込後期高齢者情報"/>
         <association property="宛名識別対象Entity"  resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>

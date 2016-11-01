@@ -57,10 +57,10 @@ public class PanelnlTotalHandler {
      * @param chohyo 帳票分類ID
      */
     public void onLoad(ShoriDateKanri shori, ChohyoBunruiKanri chohyo) {
-        if (shori != null && shori.get対象開始年月日() != null) {
+        if (shori != null && shori.get対象開始年月日() != null && !shori.get対象開始年月日().isEmpty()) {
             div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
         }
-        if (shori != null && shori.get対象終了年月日() != null) {
+        if (shori != null && shori.get対象終了年月日() != null && !shori.get対象終了年月日().isEmpty()) {
             div.getTxtZenkaiTaishobi().setToValue(new RDate(shori.get対象終了年月日().toString()));
             div.getTxtUketsukebi().setFromValue(new RDate(shori.get対象終了年月日().toString())
                     .plusDay(1));
@@ -134,10 +134,10 @@ public class PanelnlTotalHandler {
             div.getRadKetteishaUketsukeYM().setDisabled(false);
             ShoriDateKanri shori = ShokanbaraiShikyuFinder.createInstance()
                     .select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_決定者受付年月.get名称());
-            if (shori != null && shori.get対象開始年月日() != null) {
+            if (shori != null && shori.get対象開始年月日() != null && !shori.get対象開始年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
             }
-            if (shori != null && shori.get対象終了年月日() != null) {
+            if (shori != null && shori.get対象終了年月日() != null && !shori.get対象終了年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setToValue(new RDate(shori.get対象終了年月日().toString()));
             }
         }
@@ -155,10 +155,10 @@ public class PanelnlTotalHandler {
             div.getRadKetteishaUketsukeYM().setDisabled(false);
             ShoriDateKanri shori = ShokanbaraiShikyuFinder.createInstance()
                     .select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_決定日.get名称());
-            if (shori != null && shori.get対象開始年月日() != null) {
+            if (shori != null && shori.get対象開始年月日() != null && !shori.get対象開始年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
             }
-            if (shori != null && shori.get対象終了年月日() != null) {
+            if (shori != null && shori.get対象終了年月日() != null && !shori.get対象終了年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setToValue(new RDate(shori.get対象終了年月日().toString()));
             }
         }
@@ -176,10 +176,10 @@ public class PanelnlTotalHandler {
             div.getRadKetteishaUketsukeYM().setDisabled(false);
             ShoriDateKanri shori = ShokanbaraiShikyuFinder.createInstance()
                     .select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_受付日.get名称());
-            if (shori != null && shori.get対象開始年月日() != null) {
+            if (shori != null && shori.get対象開始年月日() != null && !shori.get対象開始年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
             }
-            if (shori != null && shori.get対象終了年月日() != null) {
+            if (shori != null && shori.get対象終了年月日() != null && !shori.get対象終了年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setToValue(new RDate(shori.get対象終了年月日().toString()));
             }
         }

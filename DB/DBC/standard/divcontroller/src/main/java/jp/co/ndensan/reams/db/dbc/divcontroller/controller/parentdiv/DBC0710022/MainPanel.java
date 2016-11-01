@@ -119,6 +119,8 @@ public class MainPanel {
                 ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
                 ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
                 ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
+                LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
+                RealInitialLocker.release(排他キー);
                 return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).parameter(画面モード_登録);
             }
         } else {
@@ -127,6 +129,8 @@ public class MainPanel {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
             ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
             ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
+            LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).respond();
         }
         return ResponseData.of(div).respond();
@@ -186,5 +190,19 @@ public class MainPanel {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「戻る」ボタンのメソッドです。
+     *
+     * @param div 画面DIV
+     * @return 住宅改修費支給申請_償還払決定情報登録
+     */
+    public ResponseData<MainPanelDiv> onClick_btnBack(MainPanelDiv div) {
+        ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索キー,
+                ShokanharaKeteiJyohoParameter.class);
+        LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
+        RealInitialLocker.release(排他キー);
+        return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.戻る).respond();
     }
 }

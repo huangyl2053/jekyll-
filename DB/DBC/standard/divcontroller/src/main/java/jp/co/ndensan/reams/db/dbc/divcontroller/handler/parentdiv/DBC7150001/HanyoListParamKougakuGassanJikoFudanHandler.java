@@ -231,8 +231,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (補正状況 != null) {
             if (ONE.equals(補正状況)) {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY1);
-            }
-            if (TWO.equals(補正状況)) {
+            } else if (TWO.equals(補正状況)) {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY2);
             } else {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY0);
@@ -241,7 +240,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     }
 
     private void restoreClear() {
-        div.getDdlDetaSakuseiKubun().setSelectedKey(KEY0);
+        div.getChushutsuJokenPanel().getDdlTaishoNendo().setSelectedKey(BLANK);
+        div.getDdlDetaSakuseiKubun().setSelectedValue(すべて);
         div.getChushutsuJokenPanel().getRadChushutsuKubun().clearSelectedItem();
         div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
         div.getChushutsuJokenPanel().getRadHoseuJokyo().clearSelectedItem();

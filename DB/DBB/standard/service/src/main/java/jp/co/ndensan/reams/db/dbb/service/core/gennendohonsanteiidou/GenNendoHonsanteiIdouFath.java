@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.GenNendoHonsanteiIdouProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaKozaKouseizengoEntity;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo4Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.HonsanteiIdoKekkaParameter;
@@ -55,6 +56,10 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyu
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
@@ -94,6 +99,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -283,6 +289,8 @@ public class GenNendoHonsanteiIdouFath {
      */
     public void calculateTokuchoIraikin4gatsuKaishi(FlexibleYear 調定年度, YMDHMS 調定日時) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
+        mapper.createDbT2002FukaJohoTemp();
+        
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
         kozaBuilder.set業務コード(GyomuCode.DB介護保険);
         kozaBuilder.set用途区分(new KozaYotoKubunCodeValue(用途区分コード));
@@ -320,12 +328,18 @@ public class GenNendoHonsanteiIdouFath {
                         = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(調定年度);
                 保険料率 = 前年度の保険料段階リスト.getBy段階区分(特徴依頼金情報.getZenNendoHokenryoDankai()).get保険料率();
             }
-            // TODO QAのNo.933(Redmine#91256) URD（保険系業務共通）特徴仮算定期割クラスの呼び出し
-            // jp.co.ndensan.reams.ur.urd.realservice.business.TokuchoKarisanteiKiwari
+            TokuchoKarisanteiKiwari 特徴仮算定期割クラス = new TokuchoKarisanteiKiwari();
+            TokuchoKarisanteiKiwariInput input = new TokuchoKarisanteiKiwariInput();
+            input.set前年度最終期別額(Decimal.ZERO);
+            input.set前年度賦課額(保険料率);
+            input.set現在特徴期(INT_1);
+            GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
+            set業務コンフィグ情報(業務コンフィグ情報, 調定年度);
+            TokuchoKarisanteiKiwariOutput output = 特徴仮算定期割クラス.getTokuchoKarisanteiKibetsuGaku(input);
             List<Decimal> 特徴期別金額 = new ArrayList<>();
-            特徴期別金額.add(保険料率);
-            特徴期別金額.add(保険料率);
-            特徴期別金額.add(保険料率);
+            特徴期別金額.add(output.get特徴期別額().get(0));
+            特徴期別金額.add(output.get特徴期別額().get(INT_1));
+            特徴期別金額.add(output.get特徴期別額().get(INT_2));
             特徴期別金額.add(Decimal.ZERO);
             特徴期別金額.add(Decimal.ZERO);
             特徴期別金額.add(Decimal.ZERO);
@@ -350,6 +364,28 @@ public class GenNendoHonsanteiIdouFath {
             DbT2002FukaJohoTempTableEntity fukaJohoTempTableEntity = new DbT2002FukaJohoTempTableEntity();
             set一時賦課情報(fukaJohoTempTableEntity, 賦課の情報);
             mapper.insert賦課の情報一時テーブル(fukaJohoTempTableEntity);
+        }
+    }
+
+    private void set業務コンフィグ情報(GyomuConfigJohoClass 業務コンフィグ情報, FlexibleYear 調定年度) {
+        RDate 適用基準日 = RDate.getNowDate();
+        RString 特徴定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数, 適用基準日, SubGyomuCode.DBB介護賦課);
+        業務コンフィグ情報.set特徴定期数(Integer.parseInt(特徴定期数.toString()));
+        RString 特徴仮算定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_仮算定期数, 適用基準日, SubGyomuCode.DBB介護賦課);
+        業務コンフィグ情報.set特徴仮算定期数(Integer.parseInt(特徴仮算定期数.toString()));
+        RString 特徴仮算定計算区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_4月開始,
+                new RDate(調定年度.plusYear(INT_1).toString()), SubGyomuCode.DBB介護賦課);
+        業務コンフィグ情報.set特徴仮算定計算区分(Integer.parseInt(特徴仮算定計算区分.toString()));
+        RString 端数区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        if (HasuChoseiTani._1.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(INT_1);
+        } else if (HasuChoseiTani._10.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(INT_2);
+        } else if (HasuChoseiTani._100.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(INT_3);
+        } else if (HasuChoseiTani._1000.getコード().equals(端数区分)) {
+            業務コンフィグ情報.set端数区分特徴仮算定期別額(INT_4);
         }
     }
 
@@ -1445,6 +1481,7 @@ public class GenNendoHonsanteiIdouFath {
 
         UrT0705ChoteiKyotsuEntity urT0705ChoteiKyotsuEntity = new UrT0705ChoteiKyotsuEntity();
         urT0705ChoteiKyotsuEntity.setChoteiId(Long.valueOf(rst.toString()));
+        urT0705ChoteiKyotsuEntity.setShunoId(Long.valueOf(rst.toString()));
         urT0705ChoteiKyotsuEntity.setChoteigaku(期別金額);
         List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
         entityList.add(urT0705ChoteiKyotsuEntity);

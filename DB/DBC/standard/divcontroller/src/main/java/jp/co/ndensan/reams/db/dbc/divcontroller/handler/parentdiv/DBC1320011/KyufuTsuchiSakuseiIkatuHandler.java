@@ -75,7 +75,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
     private static final RString 広域の場合市町村コード = new RString("000000");
     private static final RString SHARED_FILE_NAME = new RString("1_322");
     private static final RString 共有ファイル名 = new RString("国保連IF取込レコードファイル");
-    private static final RString FILTER = new RString("1_322*.CSV");
+    private static final RString FILTER = new RString("1_322*.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
 
     /**

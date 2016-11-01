@@ -55,6 +55,7 @@ public class DBB051001_GennendoIdoFukaParameter extends BatchParameterBase {
     private static final String KEY_随時フラグ = "随時フラグ";
     private static final String KEY_算定期 = "算定期";
     private static final String KEY_画面移動フラグ = "画面移動フラグ";
+    private static final String KEY_通常異動分の依頼金額計算 = "通常異動分の依頼金額計算";
 
     @BatchParameter(key = KEY_CHOTEINENDO, name = "調定年度")
     private FlexibleYear choteiNendo;
@@ -112,6 +113,8 @@ public class DBB051001_GennendoIdoFukaParameter extends BatchParameterBase {
     private RString 算定期;
     @BatchParameter(key = KEY_画面移動フラグ, name = "画面移動フラグ")
     private boolean 画面移動フラグ;
+    @BatchParameter(key = KEY_通常異動分の依頼金額計算, name = "通常異動分の依頼金額計算")
+    private boolean 通常異動分の依頼金額計算;
 
     /**
      * 本算定異動（現年度）通知書一括発行バッチ用のパラメータです。

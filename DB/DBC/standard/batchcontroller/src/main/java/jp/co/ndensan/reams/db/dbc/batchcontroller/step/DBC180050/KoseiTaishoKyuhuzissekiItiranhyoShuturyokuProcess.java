@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KyufuJissekiTorikes
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.koseitaishojissekiichiran.KoseiTaishoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200096.KyufuJissekiTorikeshiIchiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.koseitaishojissekiichiran.KoseiTaishoJissekiIchiranSource;
-import jp.co.ndensan.reams.db.dbz.business.config.KaigoToiawasesakiConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -81,17 +79,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private static final RString データ区分_明細 = new RString("M");
     private static final RString データ区分_合計 = new RString("G");
     private static List<PersonalData> hojinShikibetsuCodeList;
-    /**
-     * プロセス戻り値：対象月データありなしフラグ
-     */
-    public static final RString OUT_HAS_TARGET_DATA;
-
-    private OutputParameter<Boolean> 変換_FLAG;
-    private boolean 変換flag;
-
-    static {
-        OUT_HAS_TARGET_DATA = new RString("変換_FLAG");
-    }
 
     @BatchWriter
     private BatchReportWriter<KoseiTaishoJissekiIchiranSource> 給付実績一覧表ReportWriter;
@@ -118,9 +105,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private static final RString 給付実績一覧表CSVファイル名 = new RString("KoseiTaishoKyufuJissekiIchiran.csv");
     private static final RString 給付実績取消一覧CSVファイル名 = new RString("KyufuJissekiTorikeshiIchiran.csv");
     private static final RString 文言_対象データがありません = new RString("対象データがありません。");
-    private static final RString 文字コード_1 = new RString("1");
-    private static final RString 文字コード_2 = new RString("2");
-    private static final RString 文字コード_3 = new RString("3");
     private static final RString CSV出力有無_有り = new RString("有り");
     private static final RString 開始 = new RString("【開始】　");
     private static final RString 終了 = new RString("【終了】　");
@@ -128,7 +112,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private static final RString 出力順_コード_2 = new RString("2");
     private static final RString 出力順_1 = new RString("年度＞被保険者番号");
     private static final RString 出力順_2 = new RString("被保険者番号＞年度");
-    private RString 共通_文字コード;
     private Association 導入団体クラス;
 
     @Override
@@ -147,10 +130,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         給付実績一覧表合計Entity = new KoseiTaishoJissekiIchiranEntity();
         合計CSVEntity = new KoseiTaishoKyufuJissekiIchiranCsvEntity();
         hojinShikibetsuCodeList = new ArrayList<>();
-        KaigoToiawasesakiConfig config = new KaigoToiawasesakiConfig();
-        共通_文字コード = config.getEUC共通_文字コード();
-        変換flag = false;
-        変換_FLAG = new OutputParameter<>();
     }
 
     @Override
@@ -170,25 +149,13 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
                 ReportIdDBC.DBC200097.getReportId().value()).create();
         給付実績取消一覧表SourceWriter = new ReportSourceWriter<>(給付実績取消一覧表ReportWriter);
 
-        //TODO 文字コード変換の方法は分かりません。
-        Encode 文字コード = Encode.UTF_8withBOM;
-        if (文字コード_1.equals(共通_文字コード)) {
-            文字コード = Encode.UTF_8withBOM;
-        } else if (文字コード_2.equals(共通_文字コード)) {
-            文字コード = Encode.SJIS;
-        } else if (文字コード_3.equals(共通_文字コード)) {
-            文字コード = Encode.UTF_8withBOM;
-            変換flag = true;
-        }
-
-        変換_FLAG.setValue(変換flag);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, 給付実績一覧表EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         this.給付実績一覧表eucFilePath = Path.combinePath(spoolWorkPath, 給付実績一覧表CSVファイル名);
         給付実績一覧表csvWriter = new CsvWriter.InstanceBuilder(this.給付実績一覧表eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(文字コード).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
@@ -200,7 +167,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         給付実績取消一覧表csvWriter = new CsvWriter.InstanceBuilder(this.給付実績取消一覧eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(文字コード).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
@@ -283,8 +250,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         給付実績取消一覧表csvWriter.close();
         manager.spool(SubGyomuCode.DBC介護給付, 給付実績一覧表eucFilePath);
         給付実績取消一覧manager.spool(SubGyomuCode.DBC介護給付, 給付実績取消一覧eucFilePath);
-        processParameter.set給付実績ファイルパス(給付実績一覧表eucFilePath);
-        processParameter.set給付実績取消ファイルパス(給付実績取消一覧eucFilePath);
     }
 
     private List<RString> get出力条件() {

@@ -35,7 +35,6 @@ public class CareManagementHandler {
 
     private final CareManagementMainDiv div;
     private static final RString ZERO = new RString("0");
-    private static final int INT_ZERO = 0;
     private static final RString 後 = new RString("後");
     private static final RString 前月 = new RString("前月");
     private final RString 前事業者 = new RString("前事業者");
@@ -139,36 +138,47 @@ public class CareManagementHandler {
      */
     public void change年月(RString data, List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費データリスト,
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
-        int index = INT_ZERO;
+        FlexibleYearMonth 今提供年月 = get今提供年月(data, 給付実績ケアマネジメント費データリスト, サービス提供年月);
+        if (!今提供年月.isEmpty()) {
+            div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
+            set給付実績ケアマネジメント費データ(給付実績ケアマネジメント費データリスト, 今提供年月);
+        }
+    }
+
+    /**
+     * 今提供年月を取得。
+     *
+     * @param data RString
+     * @param 給付実績ケアマネジメント費データリスト List<KyufuJissekiCareManagementHiBusiness>
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return 今提供年月
+     */
+    public FlexibleYearMonth get今提供年月(RString data,
+            List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費データリスト,
+            FlexibleYearMonth サービス提供年月) {
         List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績ケアマネジメント費データリスト);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
-                index = i;
-                break;
+        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            if (前月.equals(data)) {
+                今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
+            } else {
+                今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
             }
         }
-        FlexibleYearMonth 今提供年月;
-        if (前月.equals(data)) {
-            今提供年月 = サービス提供年月リスト.get(index + 1);
-            div.getBtnJigetsu().setDisabled(false);
-        } else {
-            今提供年月 = サービス提供年月リスト.get(index - 1);
-            div.getBtnZengetsu().setDisabled(false);
-        }
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-        set給付実績ケアマネジメント費データ(給付実績ケアマネジメント費データリスト, 今提供年月);
+        return 今提供年月;
     }
 
     private void setGetsuBtn(List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費データリスト, FlexibleYearMonth サービス提供年月) {
-        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績ケアマネジメント費データリスト);
-        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
-            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-            if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-                div.getBtnZengetsu().setDisabled(true);
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (給付実績ケアマネジメント費データリスト != null && !給付実績ケアマネジメント費データリスト.isEmpty()) {
+            List<FlexibleYearMonth> getサービス提供年月リスト = getサービス提供年月リスト(給付実績ケアマネジメント費データリスト);
+            Collections.sort(getサービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+            if (!サービス提供年月.isBeforeOrEquals(getサービス提供年月リスト.get(getサービス提供年月リスト.size() - 1))) {
+                div.getBtnZengetsu().setDisabled(false);
             }
-            if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-                div.getBtnJigetsu().setDisabled(true);
+            if (!getサービス提供年月リスト.get(0).isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
             }
         }
     }
@@ -190,9 +200,9 @@ public class CareManagementHandler {
      * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
      */
     public void setJigyoshaBtn(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
+        div.getBtnMaeJigyosha().setDisabled(true);
+        div.getBtnAtoJigyosha().setDisabled(true);
         if (!事業者番号リスト.isEmpty()) {
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト);
             if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
@@ -391,4 +401,32 @@ public class CareManagementHandler {
 
     }
 
+    private static class DateComparatorServiceYM implements Comparator<FlexibleYearMonth>, Serializable {
+
+        @Override
+        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
+            return o1.compareTo(o2);
+        }
+    }
+
+    private FlexibleYearMonth get前月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト,
+            FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
+            if (サービス年月.isBefore(サービス提供年月)) {
+                return サービス年月;
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
+
+    private FlexibleYearMonth get次月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
+        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
+            if (サービス提供年月.isBefore(サービス年月)) {
+                return サービス年月;
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
 }

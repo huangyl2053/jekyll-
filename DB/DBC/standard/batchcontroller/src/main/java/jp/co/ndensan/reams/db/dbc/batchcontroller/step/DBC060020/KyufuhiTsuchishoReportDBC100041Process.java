@@ -45,7 +45,10 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 介護給付費福祉用具貸与品目一時TBLを作成します。
@@ -85,7 +88,25 @@ public class KyufuhiTsuchishoReportDBC100041Process extends BatchProcessBase<Kyu
 
     @Override
     protected IBatchReader createReader() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC100041.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC100041.value())
+                .addBreak(new BreakerCatalog<KyufuhiTsuchishoCoverReportSource>().new SimpleLayoutBreaker(
+
+                    KyufuhiTsuchishoCoverReportSource.LAYOUT_BREAK_KEYS) {
+            @Override
+                    public ReportLineRecord<KyufuhiTsuchishoCoverReportSource> occuredBreak(
+                            ReportLineRecord<KyufuhiTsuchishoCoverReportSource> currentRecord,
+                            ReportLineRecord<KyufuhiTsuchishoCoverReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                                int layout = currentRecord.getSource().layout.index();
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layout.index();
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
+                }).create();
+
         reportSourceWriter = new ReportSourceWriter(batchWrite);
         ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100041.getReportId(), new FlexibleDate(processParameter.get処理年月日()),
@@ -138,7 +159,7 @@ public class KyufuhiTsuchishoReportDBC100041Process extends BatchProcessBase<Kyu
         index++;
         被保険者番号 = entity.get被保険者番号();
         サービス年月 = entity.getサービス提供年月();
-        KyufuhiTsuchishoCoverReport report = new KyufuhiTsuchishoCoverReport(coverEntity);
+        KyufuhiTsuchishoCoverReport report = new KyufuhiTsuchishoCoverReport(coverEntity, index);
         report.writeBy(reportSourceWriter);
     }
 

@@ -37,7 +37,6 @@ public class KyufuJissekiKihonJouhouMain {
 
     private static final int INT_ZERO = 0;
     private static final int INT_ITI = 1;
-    private static final int INT_NI = 2;
 
     /**
      * 画面の初期化メソッドです。
@@ -135,19 +134,17 @@ public class KyufuJissekiKihonJouhouMain {
      */
     public ResponseData<KyufuJissekiKihonJouhouMainDiv> onClick_Zengetsu(KyufuJissekiKihonJouhouMainDiv div) {
         FlexibleYearMonth サービス提供年月
-                = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+                = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        FlexibleYearMonth 今提供年月;
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         HihokenshaNo 被保険者番号 = 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績基本情報);
-        int 事業者番号の位置 = getサービス提供年月の位置(サービス提供年月リスト, サービス提供年月);
         clear画面(div);
-        if (事業者番号の位置 < サービス提供年月リスト.size() - 1) {
-            今提供年月 = サービス提供年月リスト.get(事業者番号の位置 + 1);
+        FlexibleYearMonth 今提供年月 = getサービス提供年月(サービス提供年月リスト, サービス提供年月);
+        if (!今提供年月.isEmpty()) {
             div.getCcdKyufuJissekiHeader().initialize(
                     被保険者番号,
                     今提供年月,
@@ -166,6 +163,17 @@ public class KyufuJissekiKihonJouhouMain {
         return ResponseData.of(div).respond();
     }
 
+    private FlexibleYearMonth getサービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト,
+            FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
+            if (サービス年月.isBefore(サービス提供年月)) {
+                return サービス年月;
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
+
     /**
      * 「次月」ボタンを押下する場合、画面を表示します。
      *
@@ -174,19 +182,17 @@ public class KyufuJissekiKihonJouhouMain {
      */
     public ResponseData<KyufuJissekiKihonJouhouMainDiv> onClick_Jigetsu(KyufuJissekiKihonJouhouMainDiv div) {
         FlexibleYearMonth サービス提供年月
-                = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+                = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        FlexibleYearMonth 今提供年月;
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         HihokenshaNo 被保険者番号 = 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績基本情報);
-        int 事業者番号の位置 = getサービス提供年月の位置(サービス提供年月リスト, サービス提供年月);
+        FlexibleYearMonth 今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
         clear画面(div);
-        if (INT_ZERO < 事業者番号の位置) {
-            今提供年月 = サービス提供年月リスト.get(事業者番号の位置 - 1);
+        if (!今提供年月.isEmpty()) {
             div.getCcdKyufuJissekiHeader().initialize(
                     被保険者番号,
                     今提供年月,
@@ -328,16 +334,14 @@ public class KyufuJissekiKihonJouhouMain {
         return 提供年月リスト;
     }
 
-    private int getサービス提供年月の位置(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
-        int index = INT_ZERO;
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
-                index = i;
-                break;
+    private FlexibleYearMonth get次月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
+        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
+            if (サービス提供年月.isBefore(サービス年月)) {
+                return サービス年月;
             }
         }
-        return index;
+        return FlexibleYearMonth.EMPTY;
     }
 
     private void clear画面(KyufuJissekiKihonJouhouMainDiv div) {
@@ -443,6 +447,14 @@ public class KyufuJissekiKihonJouhouMain {
         @Override
         public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
             return o2.compareTo(o1);
+        }
+    }
+
+    private static class DateComparatorServiceYM implements Comparator<FlexibleYearMonth>, Serializable {
+
+        @Override
+        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
+            return o1.compareTo(o2);
         }
     }
 }

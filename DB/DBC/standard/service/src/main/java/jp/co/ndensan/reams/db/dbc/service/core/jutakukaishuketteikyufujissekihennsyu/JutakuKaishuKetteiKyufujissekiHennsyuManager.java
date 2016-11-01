@@ -71,6 +71,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
     private static final FlexibleYearMonth 平成２７年４月 = new FlexibleYearMonth("201504");
     private static final RString 宛名識別対象 = new RString("宛名識別対象");
     private static final RString 認定有効期間 = new RString("認定有効期間");
+    private static final RString DATA_0 = new RString("0");
     private static final RString DATA_01 = new RString("01");
     private static final RString DATA_2 = new RString("2");
     private static final RString DATA_08 = new RString("08");
@@ -250,9 +251,9 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
 
     private void edit給付実績集計entity(DbT3033KyufujissekiShukeiEntity 給付実績集計entity, DbT3053ShokanShukeiEntity 償還払請求集計Entity) {
         給付実績集計entity.setServiceJitsunissu(0);
-        給付実績集計entity.setAtoKohi1TanisuTotal(Decimal.ZERO);
-        給付実績集計entity.setAtoKohi2TanisuTotal(Decimal.ZERO);
-        給付実績集計entity.setAtoKohi3TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setKohi1TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setKohi2TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setKohi3TanisuTotal(Decimal.ZERO);
         給付実績集計entity.setKohi1Seikyugaku(Decimal.ZERO);
         給付実績集計entity.setKohi2Seikyugaku(Decimal.ZERO);
         給付実績集計entity.setKohi3Seikyugaku(Decimal.ZERO);
@@ -339,6 +340,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績基本entity.setAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
         給付実績基本entity.setKeikaiKubunCode(KeikokuKubun.警告なし.getコード());
         給付実績基本entity.setDokujiSakuseiKubun(独自作成);
+        給付実績基本entity.setKyuSochiNyushoshaTokureiCode(DATA_0);
     }
 
     private KokanShikibetsuNo getKokanShikibetsuNo(

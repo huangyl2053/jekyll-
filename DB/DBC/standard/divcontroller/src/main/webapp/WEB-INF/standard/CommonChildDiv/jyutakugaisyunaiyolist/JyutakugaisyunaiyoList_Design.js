@@ -87,10 +87,6 @@ var DBC;
                 return new UZA.Button(this.convFiledName("btnHonnijyusyoCopy"));
             };
 
-            Controls.prototype.txtJyusyo = function () {
-                return new UZA.TextBoxJusho(this.convFiledName("txtJyusyo"));
-            };
-
             Controls.prototype.txtTyakkoyotebi = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtTyakkoyotebi"));
             };
@@ -109,6 +105,10 @@ var DBC;
 
             Controls.prototype.btnDetailConfirm = function () {
                 return new UZA.Button(this.convFiledName("btnDetailConfirm"));
+            };
+
+            Controls.prototype.txtJyusyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtJyusyo"));
             };
             return Controls;
         })();

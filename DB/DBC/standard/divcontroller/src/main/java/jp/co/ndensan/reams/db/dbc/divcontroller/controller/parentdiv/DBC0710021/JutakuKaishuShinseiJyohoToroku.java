@@ -82,6 +82,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString 給付実績緋連動_受託あり = new RString("2");
     private static final RString 償還払決定情報を登録 = new RString("償還払決定情報を登録して");
     private static final int 前ゼロ付き10桁 = 10;
+    private static final int INDEX_6 = 6;
 
     /**
      * 画面ロードメソッドです。
@@ -236,12 +237,10 @@ public class JutakuKaishuShinseiJyohoToroku {
                         UrQuestionMessages.削除の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-        } else {
-            if (isCheckTow(保存の確認, 確認_汎用)) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                        UrQuestionMessages.保存の確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        } else if (isCheckTow(保存の確認, 確認_汎用)) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (is確認結果(削除の確認, 保存の確認)) {
             param.set住宅改修内容一覧_検索結果(ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_検索結果, Models.class));
@@ -442,6 +441,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (div.getTxtTeikyoYM().getValue() != null) {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月,
+                    new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().toDateString().substring(0, INDEX_6)));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月, null);
+        }
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         if (画面提供着工年月 != null) {
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
@@ -690,7 +695,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).respond();
         }
-        handler.支払結果の設定(被保険者番号);
+        handler.支払結果の設定(被保険者番号, 限度額チェック);
         JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報,
                 JutakuGaisuViewStateHolderParameter.class);
         JutakuGaisuDataParameter 住宅改修データ = new JutakuGaisuDataParameter();

@@ -45,7 +45,12 @@ public class JigyoHokokuDataTorokuProcess extends BatchProcessBase<JigyoJoukyouH
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toSelectDataMybitisParamter());
+        if (区分_1.equals(processParameter.get報告区分())) {
+            return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toSelectDataMybitisParamter());
+        } else {
+            return new BatchDbReader(MYBATIS_SELECT_ID.replace(new RString("getJigyoHokokuDataToroku"),
+                    new RString("getNennpouDataToroku")), processParameter.toNennpouDataMybitisParamter());
+        }
     }
 
     @Override

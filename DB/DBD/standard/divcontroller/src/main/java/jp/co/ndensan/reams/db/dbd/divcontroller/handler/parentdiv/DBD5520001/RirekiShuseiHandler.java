@@ -80,6 +80,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -308,9 +309,7 @@ public class RirekiShuseiHandler {
         受給者台帳Builder.set届出者_本人との関係(ObjectUtil.defaultIfNull(business.get本人との関係性(), RString.EMPTY));
         受給者台帳Builder.set受給申請年月日(ObjectUtil.defaultIfNull(business.get認定申請年月日(), FlexibleDate.EMPTY));
         受給者台帳Builder.set２号特定疾病コード(business.get二号特定疾病コード());
-        if (HihokenshaKubunCode.第１号被保険者.getコード().equals(business.get被保険者区分コード())) {
-            受給者台帳Builder.set要介護認定状態区分コード(business.get要介護状態区分コード());
-        }
+        受給者台帳Builder.set要介護認定状態区分コード(business.get要介護状態区分コード());
         受給者台帳Builder.set認定有効期間開始年月日(ObjectUtil.defaultIfNull(business.get認定有効開始年月日(), FlexibleDate.EMPTY));
         受給者台帳Builder.set認定有効期間終了年月日(ObjectUtil.defaultIfNull(business.get認定有効終了年月日(), FlexibleDate.EMPTY));
         受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(business.get認定年月日(), FlexibleDate.EMPTY));
@@ -335,7 +334,11 @@ public class RirekiShuseiHandler {
         受給者台帳Builder.set受給資格証明書発行年月日１(ObjectUtil.defaultIfNull(business.get受給資格証明書発行年月日１(), FlexibleDate.EMPTY));
         受給者台帳Builder.set受給資格証明書発行年月日２(ObjectUtil.defaultIfNull(business.get受給資格証明書発行年月日２(), FlexibleDate.EMPTY));
         受給者台帳Builder.set旧措置者フラグ(business.is旧措置フラグ());
-        受給者台帳Builder.set論理削除フラグ(false);
+        if (row.getTsuikaKubun().isValue()) {
+            受給者台帳Builder.set論理削除フラグ(true);
+        } else {
+            受給者台帳Builder.set論理削除フラグ(false);
+        }
         return 受給者台帳Builder.build();
     }
 
@@ -351,12 +354,10 @@ public class RirekiShuseiHandler {
         JukyushaDaichoBuilder 受給者台帳Builder = business.get受給者台帳().createBuilderForEdit();
         受給者台帳Builder.set直近異動年月日(FlexibleDate.getNowDate());
         受給者台帳Builder.set直近異動事由コード(new Code(ChokkinIdoJiyuCode.履歴修正.getコード()));
-        if (YokaigoJotaiKubun.非該当.getコード().equals(business.get受給者台帳().get要介護認定状態区分コード().value())
-                && Datakubun.開始日同日の区分変更前情報.getコード().equals(business.get受給者台帳().getデータ区分().value())
-                && business.get受給者台帳().get喪失年月日().isEmpty()) {
-            受給者台帳Builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
-        } else {
+        if (EDA_BAN_00.equals(row.getDataKubun()) || row.getDataKubun().startsWith(DATA_KU_BUN_2)) {
             受給者台帳Builder.set有効無効区分(new Code(YukoMukoKubun.有効.getコード()));
+        } else {
+            受給者台帳Builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
         }
         受給者台帳Builder.set削除事由コード(Code.EMPTY);
         受給者台帳Builder.set論理削除フラグ(false);
@@ -436,23 +437,12 @@ public class RirekiShuseiHandler {
 
     private void set有効無効区分(JukyushaDaichoBuilder 受給者台帳Builder, RirekiShuseiBusiness business, RirekiShuseiDataPass dataPass, boolean flag) {
         if (flag) {
-            if (YokaigoJotaiKubun.非該当.getコード().equals(business.get受給者台帳().get要介護認定状態区分コード().value())
-                    && Datakubun.開始日同日の区分変更前情報.getコード().equals(business.get受給者台帳().getデータ区分().value())
-                    && business.get受給者台帳().get喪失年月日().isEmpty()) {
-                受給者台帳Builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
-            } else {
-                受給者台帳Builder.set有効無効区分(new Code(YukoMukoKubun.有効.getコード()));
-            }
+            受給者台帳Builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
         } else {
-            if (!((YokaigoJotaiKubun.非該当.getコード().equals(business.get受給者台帳().get要介護認定状態区分コード().value())
-                    || YokaigoJotaiKubun.要支援1.getコード().equals(business.get受給者台帳().get要介護認定状態区分コード().value())
-                    || YokaigoJotaiKubun.要支援2.getコード().equals(business.get受給者台帳().get要介護認定状態区分コード().value()))
-                    && business.get受給者台帳().is旧措置者フラグ())) {
-                受給者台帳Builder.set要介護認定状態区分コード(dataPass.get要介護状態区分コード());
-            } else {
-                受給者台帳Builder.setみなし要介護区分コード(dataPass.get要介護状態区分コード());
-            }
-            if (YokaigoJotaiKubun.非該当.getコード().equals(business.get受給者台帳().get要介護認定状態区分コード().value())) {
+            受給者台帳Builder.set要介護認定状態区分コード(dataPass.get要介護状態区分コード());
+            受給者台帳Builder.setみなし要介護区分コード(dataPass.getみなし要介護区分コード());
+            if (YokaigoJotaiKubun.非該当.getコード().equals(business.get受給者台帳().get要介護認定状態区分コード().value())
+                    && !business.get受給者台帳().is旧措置者フラグ()) {
                 受給者台帳Builder.set有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
             } else {
                 受給者台帳Builder.set有効無効区分(new Code(YukoMukoKubun.有効.getコード()));
@@ -529,6 +519,7 @@ public class RirekiShuseiHandler {
             row.setKyusochi(business.get受給者台帳().is旧措置者フラグ());
             row.setShinsakaiIken(business.get要介護認定結果情報().get介護認定審査会意見());
             row.setDeserializedBusiness(DataPassingConverter.serialize(business));
+            row.getUpdateCount().setValue(new Decimal(business.getUpdateCount()));
             rowList.add(row);
         }
         div.getDgRirekiIchiran().setDataSource(rowList);
@@ -638,8 +629,6 @@ public class RirekiShuseiHandler {
         認定申請Builder.set訪問調査先住所(dataPass.get調査状況用情報().get訪問調査先住所());
         認定申請Builder.set訪問調査先名称(dataPass.get調査状況用情報().get訪問調査先名称());
         認定申請Builder.set訪問調査先電話番号(dataPass.get調査状況用情報().get訪問調査先電話番号());
-        // TODO QA1723#101483未回答ので、設定しない
-//        認定申請Builder.set市町村連絡事項();
         if (dataPass.get取下年月日() != null && !dataPass.get取下年月日().isEmpty()) {
             認定申請Builder.set取下年月日(ObjectUtil.defaultIfNull(dataPass.get取下年月日(), FlexibleDate.EMPTY));
             認定申請Builder.set取下理由(ObjectUtil.defaultIfNull(dataPass.get異動理由(), RString.EMPTY));
@@ -1013,6 +1002,7 @@ public class RirekiShuseiHandler {
         認定結果情報Builder.set二次判定認定有効期間(dataPass.get調査状況用情報().get二次判定認定有効期間());
         認定結果情報Builder.set二次判定認定有効開始年月日(dataPass.get調査状況用情報().get二次判定認定有効開始年月日());
         認定結果情報Builder.set二次判定認定有効終了年月日(dataPass.get調査状況用情報().get二次判定認定有効終了年月日());
+        認定結果情報Builder.set介護認定審査会意見(dataPass.get介護認定審査会意見());
         return 認定結果情報Builder.build();
     }
 
@@ -1033,6 +1023,7 @@ public class RirekiShuseiHandler {
         認定結果情報Builder.set二次判定認定有効期間(dataPass.get調査状況用情報().get二次判定認定有効期間());
         認定結果情報Builder.set二次判定認定有効開始年月日(dataPass.get調査状況用情報().get二次判定認定有効開始年月日());
         認定結果情報Builder.set二次判定認定有効終了年月日(dataPass.get調査状況用情報().get二次判定認定有効終了年月日());
+        認定結果情報Builder.set介護認定審査会意見(dataPass.get介護認定審査会意見());
         return 認定結果情報Builder.build().modifiedModel();
     }
 
@@ -1167,13 +1158,27 @@ public class RirekiShuseiHandler {
      *
      * @param previousRow 前回行
      * @param nextRow 次回行
+     * @param 申請履歴情報 選択行の申請履歴情報
      * @return 申請履歴情報
      */
-    public DbT4121ShinseiRirekiJoho set申請履歴情報For履歴削除(dgRirekiIchiran_Row previousRow, dgRirekiIchiran_Row nextRow) {
-        DbT4121ShinseiRirekiJoho 次回行申請履歴情報 = DataPassingConverter.deserialize(nextRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
-        DbT4121ShinseiRirekiJoho 前回行申請履歴情報 = DataPassingConverter.deserialize(previousRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
+    public DbT4121ShinseiRirekiJoho set申請履歴情報For履歴削除(dgRirekiIchiran_Row previousRow,
+            dgRirekiIchiran_Row nextRow, DbT4121ShinseiRirekiJoho 申請履歴情報) {
+        if (nextRow == null) {
+            return null;
+        }
+        DbT4121ShinseiRirekiJoho 次回行申請履歴情報
+                = DataPassingConverter.deserialize(nextRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
         DbT4121ShinseiRirekiJohoBuilder builder = 次回行申請履歴情報.createBuilderForEdit();
-        builder.set前回申請管理番号(前回行申請履歴情報.get申請管理番号());
+        if (previousRow == null) {
+            builder.set前回申請管理番号(申請履歴情報.get前回申請管理番号());
+        } else {
+            DbT4121ShinseiRirekiJoho 前回行申請履歴情報
+                    = DataPassingConverter.deserialize(previousRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
+            builder.set前回申請管理番号(前回行申請履歴情報.get申請管理番号());
+        }
+        if (KU_BUN_追.equals(nextRow.getKubun()) && !nextRow.getTsuikaKubun().isValue()) {
+            return builder.build();
+        }
         return builder.build().modifiedModel();
     }
 }

@@ -174,7 +174,7 @@ public class HanyoListParameHandler {
             div.getTxtKokuhorenSofuNengetu().setFromValue(new RDate(国保連送付年月From.getYearValue(), 国保連送付年月From.getMonthValue(), 国保連送付年月From.getLastDay()));
         }
         FlexibleYearMonth 国保連送付年月To = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_国保連送付年月TO);
-        if (国保連送付年月To != null) {
+        if (国保連送付年月To != null && !国保連送付年月To.isEmpty()) {
             div.getTxtKokuhorenSofuNengetu().setToValue(new RDate(国保連送付年月To.getYearValue(), 国保連送付年月To.getMonthValue(), 国保連送付年月To.getLastDay()));
         }
         FlexibleYearMonth サービス提供年月F = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_サービス提供年月開始);
@@ -182,7 +182,7 @@ public class HanyoListParameHandler {
             div.getTxtSabisuTeikyoNengetu().setFromValue(new RDate(サービス提供年月F.getYearValue(), サービス提供年月F.getMonthValue(), サービス提供年月F.getLastDay()));
         }
         FlexibleYearMonth サービス提供年月T = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_サービス提供年月終了);
-        if (サービス提供年月T != null) {
+        if (サービス提供年月T != null && !サービス提供年月T.isEmpty()) {
             div.getTxtSabisuTeikyoNengetu().setToValue(new RDate(サービス提供年月T.getYearValue(), サービス提供年月T.getMonthValue(), サービス提供年月T.getLastDay()));
         }
         RString 過誤申立給付区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_過誤申立給付区分);

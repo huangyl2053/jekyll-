@@ -48,6 +48,7 @@ public class RirekiShuseiBusiness implements Serializable {
     private final DbT4911ShujiiIryoKikanJohoEntity dbt4911Entity;
     private final DbT4912ShujiiJohoEntity dbt4912Entity;
     private final DbT4913ChosainJohoEntity dbt4913Entity;
+    private final int updateCount;
 
     /**
      * コンストラクタです。
@@ -125,6 +126,7 @@ public class RirekiShuseiBusiness implements Serializable {
         dbt4911Entity = entity.getDbt4911Entity();
         dbt4912Entity = entity.getDbt4912Entity();
         dbt4913Entity = entity.getDbt4913Entity();
+        updateCount = entity.getUpdateCount();
     }
 
     /**
@@ -224,6 +226,15 @@ public class RirekiShuseiBusiness implements Serializable {
      */
     public DbT4202NinteichosahyoGaikyoChosa get認定調査票_概況調査() {
         return dbt4202;
+    }
+
+    /**
+     * 更新回数を取得します
+     *
+     * @return 更新回数
+     */
+    public int getUpdateCount() {
+        return updateCount;
     }
 
     /**
@@ -380,7 +391,7 @@ public class RirekiShuseiBusiness implements Serializable {
     public RirekiShuseiDataPass get履歴修正情報(Code 厚労省IF識別コード) {
         RirekiShuseiDataPass dataPass = new RirekiShuseiDataPass();
         if (dbt4001 != null) {
-            dataPass.setデータ区分(dbt4001.getデータ区分());
+            dataPass.setデータ区分(Code.EMPTY);
             dataPass.set認定年月日(dbt4001.get認定年月日());
             dataPass.set要介護状態区分コード(Code.EMPTY);
             dataPass.set認定有効開始年月日(dbt4001.get認定有効期間開始年月日());

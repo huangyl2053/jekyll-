@@ -134,7 +134,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder setサービス種類コード(ServiceShuruiCode サービス種類コード) {
-//        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         entity.setServiceShuruiCode(サービス種類コード);
         return this;
     }
@@ -146,7 +145,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder setサービス実日数(int サービス実日数) {
-        requireNonNull(サービス実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス実日数"));
         entity.setServiceJitsunissu(サービス実日数);
         return this;
     }
@@ -158,7 +156,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set計画単位数(int 計画単位数) {
-        requireNonNull(計画単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("計画単位数"));
         entity.setPlanTanisu(計画単位数);
         return this;
     }
@@ -170,7 +167,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set限度額管理対象単位数(int 限度額管理対象単位数) {
-        requireNonNull(限度額管理対象単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額管理対象単位数"));
         entity.setGendogakuKanriTaishoTanisu(限度額管理対象単位数);
         return this;
     }
@@ -182,7 +178,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set限度額管理対象外単位数(int 限度額管理対象外単位数) {
-        requireNonNull(限度額管理対象外単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額管理対象外単位数"));
         entity.setGendogakuKanriTaishogaiTanisu(限度額管理対象外単位数);
         return this;
     }
@@ -194,7 +189,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set短期入所計画日数(int 短期入所計画日数) {
-        requireNonNull(短期入所計画日数, UrSystemErrorMessages.値がnull.getReplacedMessage("短期入所計画日数"));
         entity.setTankiNyushoPlanNissu(短期入所計画日数);
         return this;
     }
@@ -206,7 +200,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set短期入所実日数(int 短期入所実日数) {
-        requireNonNull(短期入所実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("短期入所実日数"));
         entity.setTankiNyushoJitsunissu(短期入所実日数);
         return this;
     }
@@ -218,7 +211,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set単位数合計(int 単位数合計) {
-        requireNonNull(単位数合計, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数合計"));
         entity.setTanisuTotal(単位数合計);
         return this;
     }
@@ -252,7 +244,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set利用者負担額(int 利用者負担額) {
-        requireNonNull(利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額"));
         entity.setRiyoshaFutangaku(利用者負担額);
         return this;
     }
@@ -264,7 +255,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set出来高医療費単位数合計(int 出来高医療費単位数合計) {
-        requireNonNull(出来高医療費単位数合計, UrSystemErrorMessages.値がnull.getReplacedMessage("出来高医療費単位数合計"));
         entity.setDekidakaIryohiTanisuTotal(出来高医療費単位数合計);
         return this;
     }
@@ -298,7 +288,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set審査方法区分コード(RString 審査方法区分コード) {
-        requireNonNull(審査方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査方法区分コード"));
         entity.setShinsaHohoKubunCode(審査方法区分コード);
         return this;
     }
@@ -310,7 +299,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set審査年月(FlexibleYearMonth 審査年月) {
-        requireNonNull(審査年月, UrSystemErrorMessages.値がnull.getReplacedMessage("審査年月"));
         entity.setShinsaYM(審査年月);
         return this;
     }
@@ -322,7 +310,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set支給区分コード(RString 支給区分コード) {
-        requireNonNull(支給区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支給区分コード"));
         entity.setShikyuKubunCode(支給区分コード);
         return this;
     }
@@ -334,7 +321,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set点数_金額(int 点数_金額) {
-        requireNonNull(点数_金額, UrSystemErrorMessages.値がnull.getReplacedMessage("点数_金額"));
         entity.setTensuKingaku(点数_金額);
         return this;
     }
@@ -346,7 +332,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set支払金額(int 支払金額) {
-        requireNonNull(支払金額, UrSystemErrorMessages.値がnull.getReplacedMessage("支払金額"));
         entity.setShikyuKingaku(支払金額);
         return this;
     }
@@ -358,7 +343,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set増減点(int 増減点) {
-        requireNonNull(増減点, UrSystemErrorMessages.値がnull.getReplacedMessage("増減点"));
         entity.setZougenten(増減点);
         return this;
     }
@@ -370,7 +354,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set請求額差額金額(int 請求額差額金額) {
-        requireNonNull(請求額差額金額, UrSystemErrorMessages.値がnull.getReplacedMessage("請求額差額金額"));
         entity.setSeikyugakuSagakuKingaku(請求額差額金額);
         return this;
     }
@@ -382,7 +365,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set出来高請求額差額金額(int 出来高請求額差額金額) {
-        requireNonNull(出来高請求額差額金額, UrSystemErrorMessages.値がnull.getReplacedMessage("出来高請求額差額金額"));
         entity.setDekidakaSeikyugakuSagaku(出来高請求額差額金額);
         return this;
     }
@@ -394,7 +376,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set増減理由等(RString 増減理由等) {
-        requireNonNull(増減理由等, UrSystemErrorMessages.値がnull.getReplacedMessage("増減理由等"));
         entity.setZougenRiyu(増減理由等);
         return this;
     }
@@ -406,7 +387,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set不支給理由等(RString 不支給理由等) {
-        requireNonNull(不支給理由等, UrSystemErrorMessages.値がnull.getReplacedMessage("不支給理由等"));
         entity.setHushikyuRiyu(不支給理由等);
         return this;
     }
@@ -418,7 +398,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set購入_改修履歴等(RString 購入_改修履歴等) {
-        requireNonNull(購入_改修履歴等, UrSystemErrorMessages.値がnull.getReplacedMessage("購入_改修履歴等"));
         entity.setKounyuKaishuRireki(購入_改修履歴等);
         return this;
     }

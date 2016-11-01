@@ -469,7 +469,6 @@ public class KanendoKoseiKeisan {
             } else if (Tsuki.翌年度4月.equals(出納整理期間増額用期月.get月()) || Tsuki.翌年度5月.equals(出納整理期間増額用期月.get月())) {
                 出納整理期間減額用期月 = 更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.減額更正);
                 set現在期月(kiwariKeisanInput, 出納整理期間増額用期月, 出納整理期間減額用期月, 今回保険料, 前回保険料);
-                kiwariKeisanInput.set現在調定年度(調定年度.minusYear(INT_1));
             }
         } else {
             過年度期月 = 更正月判定.find過年度更正月(算定日時.getDate());

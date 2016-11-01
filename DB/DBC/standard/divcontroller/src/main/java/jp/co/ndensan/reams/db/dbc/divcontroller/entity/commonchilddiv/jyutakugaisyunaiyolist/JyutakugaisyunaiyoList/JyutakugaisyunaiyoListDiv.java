@@ -9,11 +9,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListDataPassModel;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListHandler;
@@ -226,16 +226,6 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public TextBoxJusho getTxtJyusyo() {
-        return this.getPnlNyuryokuArea().getTxtJyusyo();
-    }
-
-    @JsonIgnore
-    public void  setTxtJyusyo(TextBoxJusho txtJyusyo) {
-        this.getPnlNyuryokuArea().setTxtJyusyo(txtJyusyo);
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtTyakkoyotebi() {
         return this.getPnlNyuryokuArea().getTxtTyakkoyotebi();
     }
@@ -283,6 +273,16 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     @JsonIgnore
     public void  setBtnDetailConfirm(Button btnDetailConfirm) {
         this.getPnlNyuryokuArea().setBtnDetailConfirm(btnDetailConfirm);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJyusyo() {
+        return this.getPnlNyuryokuArea().getTxtJyusyo();
+    }
+
+    @JsonIgnore
+    public void  setTxtJyusyo(TextBox txtJyusyo) {
+        this.getPnlNyuryokuArea().setTxtJyusyo(txtJyusyo);
     }
 
     // </editor-fold>

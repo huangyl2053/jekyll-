@@ -208,6 +208,12 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
 
     /**
      * コンストラクタです。
+     */
+    public DBC140020_JukyushaKyufujissekiIchiranParameter() {
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param 対象年月 対象年月
      * @param 年月範囲_開始 年月範囲_開始

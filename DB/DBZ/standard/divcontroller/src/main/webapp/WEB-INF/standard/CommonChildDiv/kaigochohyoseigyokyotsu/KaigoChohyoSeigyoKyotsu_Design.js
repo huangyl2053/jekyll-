@@ -32,10 +32,6 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("AtesakiJusho"));
             };
 
-            Controls.prototype.ccdKaigoAtesakiJushoSettei = function () {
-                return new DBZ.KaigoAtesakiJushoSettei.ModeController(this.convFiledName("ccdKaigoAtesakiJushoSettei"));
-            };
-
             Controls.prototype.ConfigInfo1 = function () {
                 return new UZA.Panel(this.convFiledName("ConfigInfo1"));
             };
@@ -138,10 +134,6 @@ var DBZ;
 
             Controls.prototype.btnKaigoToiawasesaki = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnKaigoToiawasesaki"));
-            };
-
-            Controls.prototype.ccdChohyoShutsuryokujun = function () {
-                return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("ccdChohyoShutsuryokujun"));
             };
             return Controls;
         })();

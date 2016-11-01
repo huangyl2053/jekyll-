@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShi
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -65,10 +64,9 @@ public class ShakaiFukushiHojinKeigengakuShokai {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RDate サービス提供 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         getHandler(div).setJigyoshaBtn(事業者番号リスト, 整理番号,
-                事業者番号, 様式番号, サービス提供.getYearMonth().toDateString(), 実績区分コード);
+                事業者番号, 様式番号, サービス提供年月.toDateString(), 実績区分コード);
         return ResponseData.of(div).respond();
     }
 
@@ -108,19 +106,19 @@ public class ShakaiFukushiHojinKeigengakuShokai {
      */
     public ResponseData<ShakaiFukushiHojinKeigengakuShokaiDiv> onClick_btnZengetsu(ShakaiFukushiHojinKeigengakuShokaiDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        FlexibleYearMonth サービス提供年月
+                = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufujissekiKihon 給付実績基本情報 = getCsData_A();
         RString 整理番号 = 給付実績基本情報.get整理番号();
         NyuryokuShikibetsuNo 識別番号検索キー = 給付実績基本情報.get入力識別番号();
-        FlexibleYearMonth 提供年月
-                = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         getHandler(div).change年月(new RString("前月"), getCsData_L(),
-                get給付実績ヘッダ情報2(getHandler(div).get今提供年月(new RString("前月"), getCsData_L(), 提供年月),
+                get給付実績ヘッダ情報2(getHandler(div).get今提供年月(new RString("前月"), getCsData_L(), サービス提供年月),
                         整理番号, 識別番号検索キー),
-                提供年月,
+                サービス提供年月,
                 整理番号,
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
                 識別番号検索キー);
-        FlexibleYearMonth 今提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth 今提供年月 = getHandler(div).get今提供年月(new RString("前月"), getCsData_L(), サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         return ResponseData.of(div).respond();
     }
@@ -133,19 +131,19 @@ public class ShakaiFukushiHojinKeigengakuShokai {
      */
     public ResponseData<ShakaiFukushiHojinKeigengakuShokaiDiv> onClick_btnJigetsu(ShakaiFukushiHojinKeigengakuShokaiDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        FlexibleYearMonth サービス提供年月
+                = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufujissekiKihon 給付実績基本情報 = getCsData_A();
         RString 整理番号 = 給付実績基本情報.get整理番号();
         NyuryokuShikibetsuNo 識別番号検索キー = 給付実績基本情報.get入力識別番号();
-        FlexibleYearMonth 提供年月
-                = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         getHandler(div).change年月(new RString("次月"), getCsData_L(),
-                get給付実績ヘッダ情報2(getHandler(div).get今提供年月(new RString("次月"), getCsData_L(), 提供年月),
+                get給付実績ヘッダ情報2(getHandler(div).get今提供年月(new RString("次月"), getCsData_L(), サービス提供年月),
                         整理番号, 識別番号検索キー),
-                提供年月,
+                サービス提供年月,
                 整理番号,
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
                 識別番号検索キー);
-        FlexibleYearMonth 今提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth 今提供年月 = getHandler(div).get今提供年月(new RString("次月"), getCsData_L(), サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         return ResponseData.of(div).respond();
     }

@@ -351,14 +351,15 @@
                 B."taishoYM" = D."taishoYM" AND
                 B."rirekiNo" = D."rirekiNo"
                 WHERE
-                (C."tekiyoKaishiYMD" <![CDATA[<=]]> '20161024' AND
-                (C."tekiyoShuryoYMD" <![CDATA[>=]]> '20161024' OR
+                (C."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日} AND
+                (C."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日}  OR
                 C."tekiyoShuryoYMD" IS NULL OR
                 C."tekiyoShuryoYMD" = '')) OR
-                (D."tekiyoKaishiYMD" <![CDATA[<=]]> '20161024' AND
-                (D."tekiyoShuryoYMD" <![CDATA[>=]]> '20161024' OR
+                (D."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日} AND
+                (D."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日} OR
                 D."tekiyoShuryoYMD" IS NULL OR
                 D."tekiyoShuryoYMD" = ''))
+
                 ) AS 基準日時点
                 WHERE
                 NOT EXISTS
@@ -369,7 +370,8 @@
                 rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
                 WHERE
                 基準日時点."hihokenshaNo" = B."hihokenshaNo" AND
-                基準日時点."taishoYM" <![CDATA[<]]> B."taishoYM"
+                基準日時点."taishoYM" <![CDATA[<]]> B."taishoYM" AND
+                #{基準年月日} <![CDATA[>=]]> B."taishoYM" || '01'
                 )
                 )
                 )

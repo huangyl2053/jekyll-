@@ -70,6 +70,7 @@ public class DBC040010ProcessParameter implements IBatchProcessParameter {
      * @return DBC020080MyBatisParameter
      */
     public DBC040010MyBatisParameter toDBC040010MyBatisParameter() {
-        return new DBC040010MyBatisParameter(出力順, ShoriName.高額合算自己負担額計算登録.get名称());
+        return new DBC040010MyBatisParameter(出力順, ShoriName.高額合算自己負担額計算登録.get名称(),
+                市町村コード == null ? RString.EMPTY : 市町村コード.value());
     }
 }

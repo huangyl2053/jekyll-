@@ -41,6 +41,7 @@ public class DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter extends Batc
     private static final String PSMSEINENGAPPIYMD_START = "psmSeinengappiYMD_Start";
     private static final String PSMSEINENGAPPIYMD_END = "psmSeinengappiYMD_End";
     private static final String PSMAGEKIJUNNI = "psmAgeKijunni";
+    private static final String HOKENSHACODE = "hokenshaCode";
     private static final String SHICHOSON_CODE = "shichoson_Code";
     private static final String SHICHOSON_NAME = "shichoson_Name";
     private static final String PSMCHIKU_KUBUN = "psmChiku_Kubun";
@@ -99,6 +100,8 @@ public class DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter extends Batc
     private RDate psmSeinengappiYMD_End;
     @BatchParameter(key = PSMAGEKIJUNNI, name = "年齢基準日")
     private RDate psmAgeKijunni;
+    @BatchParameter(key = HOKENSHACODE, name = "保険者コード")
+    private RString hokenshaCode;
     @BatchParameter(key = SHICHOSON_CODE, name = "市町村コード")
     private RString shichoson_Code;
     @BatchParameter(key = SHICHOSON_NAME, name = "市町村名称")
@@ -176,6 +179,7 @@ public class DBA740010_HanyoListRoreiFukushiNenkinJukyushaParameter extends Batc
                 psmSeinengappiYMD_Start,
                 psmSeinengappiYMD_End,
                 psmAgeKijunni,
+                hokenshaCode,
                 shichoson_Code,
                 shichoson_Name,
                 psmChiku_Kubun,

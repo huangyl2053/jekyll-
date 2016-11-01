@@ -6,11 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunjikofutangakukeisankekkaichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanjigyobunjikofutangakukeisankekkaichiran.GassanJigyobunJikofutangakuKeisanKekkaIchiranSource;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanjigyobunjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -54,28 +56,28 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     public GassanJigyobunJikofutangakuKeisanKekkaIchiranSource edit(GassanJigyobunJikofutangakuKeisanKekkaIchiranSource source) {
         source.list_1 = getColumnValue(帳票出力対象データ.get被保険者番号());
         source.list_2 = 帳票出力対象データ.get被保険者氏名();
-        if (宛名データ種別_1.equals(帳票出力対象データ.get宛名データ種別())) {
+        if (宛名データ種別_1.equals(帳票出力対象データ.get住民種別コード())) {
 
             source.list_3 = 帳票出力対象データ.get生年月日().wareki().firstYear(FirstYear.ICHI_NEN).toDateString();
-        } else if (宛名データ種別_2.equals(帳票出力対象データ.get宛名データ種別())) {
+        } else if (宛名データ種別_2.equals(帳票出力対象データ.get住民種別コード())) {
 
             source.list_3 = 帳票出力対象データ.get生年月日().seireki().toDateString();
         }
         source.list_4 = this.get性別(帳票出力対象データ.get性別());
-        source.list_5 = this.getColumnValue(帳票出力対象データ.get申請書整理番号());
+        source.list_5 = 帳票出力対象データ.get申請書整理番号();
         source.list_6 = 帳票出力対象データ.get申請年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        source.list_7 = 帳票出力対象データ.get申請対象年度();
-        if ((帳票出力対象データ.get介護加入期間_開始().isEmpty() && 帳票出力対象データ.get介護加入期間_終了().isEmpty())
-                || 帳票出力対象データ.get介護加入期間_終了().isEmpty()) {
-            source.list_8 = 帳票出力対象データ.get介護加入期間_開始();
+        source.list_7 = get年月(帳票出力対象データ.get申請対象年度());
+        if ((帳票出力対象データ.get介護加入期間開始().isEmpty() && 帳票出力対象データ.get介護加入期間開始().isEmpty())
+                || 帳票出力対象データ.get介護加入期間終了().isEmpty()) {
+            source.list_8 = get年月日(帳票出力対象データ.get介護加入期間開始());
         } else {
-            source.list_8 = 帳票出力対象データ.get介護加入期間_開始().concat(符号_1).concat(帳票出力対象データ.get介護加入期間_終了());
+            source.list_8 = get年月日(帳票出力対象データ.get介護加入期間開始()).concat(符号_1).concat(get年月日(帳票出力対象データ.get介護加入期間終了()));
         }
-        source.list_9 = this.get共通ポリシー金額(帳票出力対象データ.get一_自己負担額());
-        source.list_10 = this.get共通ポリシー金額(帳票出力対象データ.get二_高額支給額());
-        source.list_11 = this.get共通ポリシー金額(帳票出力対象データ.get一_二());
-        source.list_12 = this.get共通ポリシー金額(帳票出力対象データ.get自己負担額_内数());
+        source.list_9 = this.get共通ポリシー金額(帳票出力対象データ.get自己負担額());
+        source.list_10 = this.get共通ポリシー金額(帳票出力対象データ.get高額支給額());
+        source.list_11 = this.get共通ポリシー金額(帳票出力対象データ.getOneTwo());
+        source.list_12 = this.get共通ポリシー金額(帳票出力対象データ.get自己負担額内数());
         source.list_13 = this.get一覧表示区分(帳票出力対象データ.get一覧用確認区分(), 帳票出力対象データ.get一覧用確認区分２());
         return source;
     }
@@ -114,6 +116,20 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
             区分 = 一覧区分_4;
         }
         return 区分;
+    }
+
+    private RString get年月日(FlexibleDate 年月日) {
+        if (null != 年月日) {
+            return new RString(年月日.toString());
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get年月(FlexibleYear 年) {
+        if (null != 年) {
+            return 年.toDateString();
+        }
+        return RString.EMPTY;
     }
 
 }

@@ -13,9 +13,22 @@
         FROM
         rgur."UrT0508SeikatsuHogoJukyusha" AS A
         WHERE
-        A."shikibetsuCode" = #{識別コード}
+        A."shikibetsuCode" =#{識別コード}
         AND  A."gyomuCode" ='DB'
-        AND  A."jukyuKaishiYMD" = #{対象開始日}
-        AND  A."jukyuHaishiYMD" = #{対象終了日}
+        AND  (A."jukyuKaishiYMD"<![CDATA[<=]]> #{対象終了日}
+        AND COALESCE(対象開始日<![CDATA[<=]]>NULLIF(A."jukyuHaishiYMD", '99999999')))
+        ORDER BY A."jukyuKaishiYMD"
+    </select>
+
+    <select resultOrdered="true" id="get介護所得情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.riyoshafutanwariaihanteimanager.RiyoshaFutanWariaiHanteiParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2512KaigoShotokuNewestEntity"
+            fetchSize="500">
+        SELECT B.*
+        FROM
+        rgdb."DbV2512KaigoShotokuNewest" AS B
+        WHERE
+        B."shikibetsuCode" = #{識別コード}
+        AND  B."shotokuNendo" = #{所得年度}
     </select>
 </mapper>

@@ -134,14 +134,18 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
 
     private void editor宛名(HanyoListKyotakuServiceKeikakuEntity entity,
             HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+
+        if (entity.get宛名Entity() == null) {
+            return;
+        }
         ShikibetsuCode shikibetsuCode = entity.get宛名Entity().getShikibetsuCode();
         if (shikibetsuCode != null) {
             csvEntity.set識別コード(shikibetsuCode.getColumnValue());
         } else {
             csvEntity.set識別コード(RString.EMPTY);
         }
-        csvEntity.set住民種別(isNull(entity.get宛名Entity().getJuminShubetsuCode()) ? RString.EMPTY : entity.get宛名Entity()
-                .getJuminShubetsuCode());
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
+        csvEntity.set住民種別(宛名 != null && 宛名.get住民状態() != null ? 宛名.get住民状態().住民状態略称() : RString.EMPTY);
         AtenaMeisho atenaMeisho = entity.get宛名Entity().getKanjiShimei();
         if (atenaMeisho != null) {
             csvEntity.set氏名(atenaMeisho.getColumnValue());
@@ -156,7 +160,6 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         }
         csvEntity.set生年月日(dataToRString(entity.get宛名Entity().getSeinengappiYMD(), parameter));
 
-        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
         AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
                 宛名.get消除異動年月日());
         csvEntity.set年齢(ageCalculator.get年齢());
@@ -441,11 +444,11 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 ? RString.EMPTY : 喪失事由);
         csvEntity.set資格喪失日(dataToRString(entity.getDbV1001資格喪失年月日(), parameter));
         csvEntity.set資格喪失届日(dataToRString(entity.getDbV1001資格喪失届出年月日(), parameter));
-	if (entity.getDbV1001被保険者区分コード() != null && !entity.getDbV1001被保険者区分コード().isEmpty()) {
+        if (entity.getDbV1001被保険者区分コード() != null && !entity.getDbV1001被保険者区分コード().isEmpty()) {
             HihokenshaKubunCode hihokenshaKubunCode = HihokenshaKubunCode.toValue(entity.getDbV1001被保険者区分コード());
             csvEntity.set資格区分(isNull(hihokenshaKubunCode)
                     ? RString.EMPTY : hihokenshaKubunCode.get名称());
-	}
+        }
         if (FLAG.equals(entity.getDbV1001住所地特例フラグ())) {
             csvEntity.set住所地特例状態(特例状態住特);
         } else {

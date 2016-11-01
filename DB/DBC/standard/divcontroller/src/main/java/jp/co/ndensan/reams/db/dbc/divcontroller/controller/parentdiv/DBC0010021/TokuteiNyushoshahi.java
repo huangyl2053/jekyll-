@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShi
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -57,11 +56,9 @@ public class TokuteiNyushoshahi {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        RDate サービス提供 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
-        getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth()
-                .toDateString(), 実績区分コード);
-        getHandler(div).setDataGrid(getCsData_K());
+        getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString(), 実績区分コード);
+        getHandler(div).setDataGrid(getCsData_K(), サービス提供年月);
         return createResponse(div);
     }
 
@@ -74,13 +71,12 @@ public class TokuteiNyushoshahi {
     public ResponseData<TokuteiNyushoshahiDiv> onClick_btnZengetsu(TokuteiNyushoshahiDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
                 .getKojinKakuteiKey().get被保険者番号();
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader()
-                .getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         getHandler(div).change年月(new RString("前月"), getCsData_K(), サービス提供年月, 整理番号, 被保険者番号, 識別番号検索キー);
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth 提供年月 = getHandler(div).get前月サービス提供年月(getCsData_K(), サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
@@ -100,13 +96,13 @@ public class TokuteiNyushoshahi {
      */
     public ResponseData<TokuteiNyushoshahiDiv> onClick_btnJigetsu(TokuteiNyushoshahiDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         getHandler(div).change年月(new RString("次月"), getCsData_K(), サービス提供年月,
                 整理番号, 被保険者番号, 識別番号検索キー);
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth 提供年月 = getHandler(div).get次月サービス提供年月(getCsData_K(), サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
