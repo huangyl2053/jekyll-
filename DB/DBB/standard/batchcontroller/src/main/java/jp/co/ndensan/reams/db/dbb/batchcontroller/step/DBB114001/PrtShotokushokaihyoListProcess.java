@@ -95,7 +95,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString 定数_再発行対象リスト = new RString("再発行対象リスト");
-    private static final RString CSV出力有無_有り = new RString("有り");
+    private static final RString CSV出力有無_有り = new RString("あり");
     private static final RString CSVファイル名_一覧表 = new RString("所得照会票発行一覧表");
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
             + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.selectAll所得照会票2");

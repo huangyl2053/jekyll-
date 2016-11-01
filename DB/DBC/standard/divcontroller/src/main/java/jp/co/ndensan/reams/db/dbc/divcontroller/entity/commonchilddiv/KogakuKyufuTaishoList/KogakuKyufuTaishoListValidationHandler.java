@@ -38,6 +38,8 @@ public class KogakuKyufuTaishoListValidationHandler {
 
     private final KogakuKyufuTaishoListDiv div;
     private static final RString 事業者番号 = new RString("事業者番号");
+    private static final RString サービス種類 = new RString("サービス種類");
+    private static final RString ONE_RS = new RString("1");
     private static final RString サービス費用合計と利用者負担合計 = new RString("サービス費用合計と利用者負担合計");
     private static final RString 明細合計区分 = new RString("明細合計区分");
     private static final RString サービス種類コード = new RString("サービス種類コード");
@@ -68,6 +70,18 @@ public class KogakuKyufuTaishoListValidationHandler {
      */
     public ValidationMessageControlPairs 確定チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (ONE_RS.equals(div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey())) {
+            if (div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue() == null
+                    || div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue().isEmpty()) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.未入力, 事業者番号.toString())));
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() == null
+                    || div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().isEmpty()) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.未入力, サービス種類.toString())));
+            }
+        }
         SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.
                 createInstance().getServiceJigyoshaInputGuide(
                         JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(

@@ -80,6 +80,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString サービス提供年月_RPLC_MSG = new RString("サービス提供年月");
     private static final RString 給付実績連動_受託なし = new RString("1");
     private static final RString 給付実績緋連動_受託あり = new RString("2");
+    private static final RString 受託区分_1 = new RString("1");
     private static final RString 償還払決定情報を登録 = new RString("償還払決定情報を登録して");
     private static final int 前ゼロ付き10桁 = 10;
     private static final int INDEX_6 = 6;
@@ -264,7 +265,9 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
             }
         } else if (画面モード_修正.equals(画面モード)) {
-            if (isCheckTow(div.getBtnShokanKetteiJyoho().isDisabled(), 確認_汎用)) {
+            RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            if (isCheckTow(!受託区分_1.equals(受託区分), 確認_汎用)) {
                 QuestionMessage message = new QuestionMessage(
                         UrQuestionMessages.確認_汎用.getMessage().getCode(),
                         UrQuestionMessages.確認_汎用.getMessage().replace(償還払決定情報を登録.toString()).evaluate());
@@ -526,7 +529,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
                     && (!領収日.getYear().equals(画面提供着工年月.getYear()))) {
                 div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                        SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.getコード(),
+                        SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
                         new FlexibleYear(領収日.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
             }
         }

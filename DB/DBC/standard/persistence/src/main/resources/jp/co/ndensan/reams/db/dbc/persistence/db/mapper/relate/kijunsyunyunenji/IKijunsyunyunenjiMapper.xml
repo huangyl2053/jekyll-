@@ -622,7 +622,7 @@
           "shoriEdaban",
           "nendoNaiRenban",
           "nendo",
-          "kijunYMD"
+          "kijunTimestamp"
           )
         VALUES
         (

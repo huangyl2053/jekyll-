@@ -79,6 +79,7 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
         source.list_11 = this.get共通ポリシー金額(帳票出力対象データ.getOneTwo());
         source.list_12 = this.get共通ポリシー金額(帳票出力対象データ.get自己負担額内数());
         source.list_13 = this.get一覧表示区分(帳票出力対象データ.get一覧用確認区分(), 帳票出力対象データ.get一覧用確認区分２());
+        editFour(source);
         return source;
     }
 
@@ -130,6 +131,13 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
             return 年.toDateString();
         }
         return RString.EMPTY;
+    }
+
+    private void editFour(GassanJigyobunJikofutangakuKeisanKekkaIchiranSource source) {
+        source.yubinNo = 帳票出力対象データ.getYubinNo();
+        source.choikiCode = 帳票出力対象データ.getChoikiCode();
+        source.gyoseikuCode = 帳票出力対象データ.getGyoseikuCode();
+        source.hokenshaNo = 帳票出力対象データ.getHokenshaNo();
     }
 
 }

@@ -69,6 +69,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
 
     private void 居宅適用開始日終了日不整合チェックValidate(ValidationMessageControlPairs validPairs) {
         if (div.getTxtKeikakuTekiyoEndYMD() != null
+                && div.getTxtKeikakuTekiyoStartYMD() != null
                 && 0 < div.getTxtKeikakuTekiyoStartYMD().getValue().compareTo(
                         div.getTxtKeikakuTekiyoEndYMD().getValue())) {
             validPairs.add(new ValidationMessageControlPair(

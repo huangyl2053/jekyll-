@@ -299,7 +299,11 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @Override
     protected void afterExecute() {
-        outputPageCount.setValue(new RString(batchReportWriter_明細一覧表.getCount()));
+        if (batchReportWriter_明細一覧表 != null) {
+            outputPageCount.setValue(new RString(batchReportWriter_明細一覧表.getCount()));
+        } else {
+            outputPageCount.setValue(new RString("0"));
+        }
 
         if (parameter.get処理区分().getコード().equals(処理区分3)) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();

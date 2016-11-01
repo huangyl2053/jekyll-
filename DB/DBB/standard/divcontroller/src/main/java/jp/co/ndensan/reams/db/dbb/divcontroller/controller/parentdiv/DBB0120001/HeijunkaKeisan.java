@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0120001;
 
+import java.util.Iterator;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.DBB0120001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanValidationHandler;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -103,8 +104,11 @@ public class HeijunkaKeisan {
     private void createFlowParameter(HeijunkaKeisanDiv div, DBB012001_TokuchoHeinjunka6GatsuParameter parameter) {
         FlowParameters fp = new FlowParameters();
         boolean 通知書一括発行 = false;
-        for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
-            if (帳票分類ID_DBB100012.equals(row.getChohyoID())) {
+        Map<RString, RString> 出力帳票Map = div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        Iterator<Map.Entry<RString, RString>> it = 出力帳票Map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<RString, RString> 出力帳票 = it.next();
+            if (帳票分類ID_DBB100012.equals(出力帳票.getKey())) {
                 通知書一括発行 = true;
             }
         }

@@ -199,8 +199,11 @@ public class ScheduleSetting {
             QuestionMessage 保存の確認MESSAGE = new QuestionMessage(
                     UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate(),
-                    ButtonSelectPattern.OKCancel);
+                    ButtonSelectPattern.YesNo);
             return ResponseData.of(div).addMessage(保存の確認MESSAGE).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {

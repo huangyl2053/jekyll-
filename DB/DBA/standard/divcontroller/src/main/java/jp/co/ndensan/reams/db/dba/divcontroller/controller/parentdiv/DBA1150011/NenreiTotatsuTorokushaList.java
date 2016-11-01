@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1150011;
 
 import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsutoroku.DbT7022ShoriDateKanriBusiness;
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA150010.DBA150010_NenreitotatsuTorokuListParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011.NenreiTotatsuTorokushaListDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1150011.NenreiTotatsuTorokuValidationHandler;
@@ -47,7 +47,7 @@ public class NenreiTotatsuTorokushaList {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
         DbT7022ShoriDateKanriBusiness business = finder.getKaishiShuryobi();
         if (business == null || (business.getTaishoKaishiYMD() == null
-                                 && business.getTaishoShuryoYMD() == null)) {
+                && business.getTaishoShuryoYMD() == null)) {
             div.getBatchParamterInfo().getTxtkonkaikaishi().setValue(nowDate);
             div.getBatchParamterInfo().getTxtkonkaishuryo().setValue(nowDate);
 
@@ -73,8 +73,6 @@ public class NenreiTotatsuTorokushaList {
                         .setValue(nowDate);
             }
         }
-        // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
-//        loadChohyoMode(サブ業務コード, 帳票ID);
         div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA200008.getReportId());
         return ResponseData.of(div).respond();
     }

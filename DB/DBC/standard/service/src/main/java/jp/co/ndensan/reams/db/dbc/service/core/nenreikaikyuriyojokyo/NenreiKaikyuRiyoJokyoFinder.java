@@ -503,9 +503,11 @@ public class NenreiKaikyuRiyoJokyoFinder {
                 || updateEntity.get集計番号().equals(RSTRING_20) || updateEntity.get集計番号().equals(RSTRING_36)
                 || updateEntity.get集計番号().equals(RSTRING_40) || updateEntity.get集計番号().equals(RSTRING_41)
                 || updateEntity.get集計番号().equals(RSTRING_42)) {
-            if (サービス項目コード_1.equals(updateEntity.getサービス項目コード().substring(定数2, 定数3))) {
+            if (!RString.isNullOrEmpty(updateEntity.getサービス項目コード())
+                    && サービス項目コード_1.equals(updateEntity.getサービス項目コード().substring(定数2, 定数3))) {
                 update(updateEntity, RSTRING_51, mapper);
-            } else if (サービス項目コード_2.equals(updateEntity.getサービス項目コード().substring(定数2, 定数3))) {
+            } else if (!RString.isNullOrEmpty(updateEntity.getサービス項目コード())
+                    && サービス項目コード_2.equals(updateEntity.getサービス項目コード().substring(定数2, 定数3))) {
                 update(updateEntity, RSTRING_52, mapper);
             }
         }
