@@ -55,7 +55,7 @@ public class PanelnlTotal {
                 SubGyomuCode.DBC介護給付))) {
             処理名 = ShoriName.償還払い支給不支給決定通知書一括作成_決定者受付年月.get名称();
         }
-        ShoriDateKanri shori = ShokanbaraiShikyuFinder.createInstance().select前回対象日(処理名);
+        ShoriDateKanri shori = select前回対象日(処理名);
         ChohyoBunruiKanri chohyo = ShokanbaraiShikyuFinder.createInstance().select帳票分類ID();
         createHandler(div).onLoad(shori, chohyo);
         return ResponseData.of(div).respond();
@@ -79,7 +79,8 @@ public class PanelnlTotal {
      * @return ResponseData<PanelnlTotalDiv>
      */
     public ResponseData<PanelnlTotalDiv> onClick_uketsukebi(PanelnlTotalDiv div) {
-        createHandler(div).onClick_uketsukebi();
+        ShoriDateKanri shori = select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_受付日.get名称());
+        createHandler(div).onClick_uketsukebi(shori);
         return ResponseData.of(div).respond();
     }
 
@@ -90,7 +91,8 @@ public class PanelnlTotal {
      * @return ResponseData<PanelnlTotalDiv>
      */
     public ResponseData<PanelnlTotalDiv> onClick_ketteibi(PanelnlTotalDiv div) {
-        createHandler(div).onClick_ketteibi();
+        ShoriDateKanri shori = select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_決定日.get名称());
+        createHandler(div).onClick_ketteibi(shori);
         return ResponseData.of(div).respond();
     }
 
@@ -101,7 +103,8 @@ public class PanelnlTotal {
      * @return ResponseData<PanelnlTotalDiv>
      */
     public ResponseData<PanelnlTotalDiv> onClick_KetteishaUketsukeYM(PanelnlTotalDiv div) {
-        createHandler(div).onClick_KetteishaUketsukeYM();
+        ShoriDateKanri shori = select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_決定者受付年月.get名称());
+        createHandler(div).onClick_KetteishaUketsukeYM(shori);
         return ResponseData.of(div).respond();
     }
 
@@ -137,6 +140,10 @@ public class PanelnlTotal {
     public ResponseData<DBC030010_ShokanShikyuKetteiTsuchishoParameter> onClick_batch(PanelnlTotalDiv div) {
         DBC030010_ShokanShikyuKetteiTsuchishoParameter parameter = createHandler(div).onClick_btnJikouBatch();
         return ResponseData.of(parameter).respond();
+    }
+
+    private ShoriDateKanri select前回対象日(RString 処理名) {
+        return ShokanbaraiShikyuFinder.createInstance().select前回対象日(処理名);
     }
 
     private PanelnlTotalHandler createHandler(PanelnlTotalDiv div) {

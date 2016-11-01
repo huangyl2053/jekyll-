@@ -62,9 +62,8 @@
         ON
         宛名."setaiCode" = T."setaiCode"
         WHERE
-            B."shikakuSoshitsuYMD" IS NOT NULL
-        AND  B."shikakuSoshitsuYMD" <![CDATA[<>]]> ''
-        AND  #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD" 
+            B."shikakuSoshitsuYMD" = ''
+        OR  #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 異動情報抽出に本人の異動を「異動Temp」に追加する-->
@@ -150,9 +149,8 @@
         ON
         宛名."setaiCode" = T."setaiCode"
         WHERE
-            B."shikakuSoshitsuYMD" IS NOT NULL
-        AND  B."shikakuSoshitsuYMD" <![CDATA[<>]]> ''
-        AND #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD"
+            B."shikakuSoshitsuYMD" = ''
+        OR  #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 所得異動の取得に本人の異動を「異動Temp」に追加する-->
@@ -197,8 +195,8 @@
         WHERE
             #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND #{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
-        AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
+        OR (#{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
+        AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時})
     </select>
     
     <!-- 老齢の異動を「異動Temp」に追加する-->
@@ -212,8 +210,8 @@
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
         WHERE
-            #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
+        AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 境界層の異動を「異動Temp」に追加する-->

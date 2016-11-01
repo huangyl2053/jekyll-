@@ -9,13 +9,11 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_Shokan
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuParamter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000011.PanelnlTotalDiv;
-import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyu.ShokanbaraiShikyuFinder;
 import jp.co.ndensan.reams.db.dbc.service.report.shoukanbaraisuuchishoikkatsusakusei.ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -75,14 +73,26 @@ public class PanelnlTotalHandler {
                 SubGyomuCode.DBC介護給付))) {
             div.getRadUketsukebi().setSelectedKey(キー);
             div.getTxtUketsukebi().setDisabled(false);
+            if (div.getTxtUketsukebi().getFromValue() != null
+                    && div.getTxtUketsukebi().getToValue().isBefore(div.getTxtUketsukebi().getFromValue())) {
+                div.getTxtUketsukebi().setFromValue(div.getTxtUketsukebi().getToValue());
+            }
             div.getTxtKeteibiJoken().setDisabled(true);
+            div.getTxtKeteibiJoken().clearFromValue();
+            div.getTxtKeteibiJoken().clearToValue();
             div.getTxtKeteishaUketsukeYM().setDisabled(true);
         }
         if (抽出条件_2.equals(DbBusinessConfig.get(ConfigNameDBC.償還払支給不支給決定通知書一括作成_初期選択抽出条件, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付))) {
             div.getRadKetteibi().setSelectedKey(キー);
             div.getTxtKeteibiJoken().setDisabled(false);
+            if (div.getTxtKeteibiJoken().getFromValue() != null
+                    && div.getTxtKeteibiJoken().getToValue().isBefore(div.getTxtKeteibiJoken().getFromValue())) {
+                div.getTxtKeteibiJoken().setFromValue(div.getTxtKeteibiJoken().getToValue());
+            }
             div.getTxtUketsukebi().setDisabled(true);
+            div.getTxtUketsukebi().clearFromValue();
+            div.getTxtUketsukebi().clearToValue();
             div.getTxtKeteishaUketsukeYM().setDisabled(true);
         }
         if (抽出条件_3.equals(DbBusinessConfig.get(ConfigNameDBC.償還払支給不支給決定通知書一括作成_初期選択抽出条件, RDate.getNowDate(),
@@ -91,6 +101,10 @@ public class PanelnlTotalHandler {
             div.getTxtKeteishaUketsukeYM().setDisabled(false);
             div.getTxtUketsukebi().setDisabled(true);
             div.getTxtKeteibiJoken().setDisabled(true);
+            div.getTxtUketsukebi().clearFromValue();
+            div.getTxtUketsukebi().clearToValue();
+            div.getTxtKeteibiJoken().clearFromValue();
+            div.getTxtKeteibiJoken().clearToValue();
         }
         if (受託区分_2.equals(DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付))) {
@@ -125,15 +139,18 @@ public class PanelnlTotalHandler {
     /**
      * 決定者受付年月を処理します。
      *
+     * @param shori 前回対象日
      */
-    public void onClick_KetteishaUketsukeYM() {
+    public void onClick_KetteishaUketsukeYM(ShoriDateKanri shori) {
         if (キー.equals(div.getRadKetteishaUketsukeYM().getSelectedKey())) {
             div.getTxtUketsukebi().setDisabled(true);
             div.getTxtKeteibiJoken().setDisabled(true);
+            div.getTxtUketsukebi().clearFromValue();
+            div.getTxtUketsukebi().clearToValue();
+            div.getTxtKeteibiJoken().clearFromValue();
+            div.getTxtKeteibiJoken().clearToValue();
             div.getTxtKeteishaUketsukeYM().setDisabled(false);
             div.getRadKetteishaUketsukeYM().setDisabled(false);
-            ShoriDateKanri shori = ShokanbaraiShikyuFinder.createInstance()
-                    .select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_決定者受付年月.get名称());
             if (shori != null && shori.get対象開始年月日() != null && !shori.get対象開始年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
             }
@@ -146,20 +163,28 @@ public class PanelnlTotalHandler {
     /**
      * 決定日を処理します。
      *
+     * @param shori 前回対象日
      */
-    public void onClick_ketteibi() {
+    public void onClick_ketteibi(ShoriDateKanri shori) {
         if (キー.equals(div.getRadKetteibi().getSelectedKey())) {
             div.getTxtUketsukebi().setDisabled(true);
+            div.getTxtUketsukebi().clearFromValue();
+            div.getTxtUketsukebi().clearToValue();
             div.getTxtKeteishaUketsukeYM().setDisabled(true);
             div.getTxtKeteibiJoken().setDisabled(false);
             div.getRadKetteishaUketsukeYM().setDisabled(false);
-            ShoriDateKanri shori = ShokanbaraiShikyuFinder.createInstance()
-                    .select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_決定日.get名称());
+            div.getTxtKeteibiJoken().setToValue(RDate.getNowDate());
             if (shori != null && shori.get対象開始年月日() != null && !shori.get対象開始年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
             }
             if (shori != null && shori.get対象終了年月日() != null && !shori.get対象終了年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setToValue(new RDate(shori.get対象終了年月日().toString()));
+                div.getTxtKeteibiJoken().setFromValue(new RDate(shori.get対象終了年月日().toString())
+                        .plusDay(1));
+            }
+            if (div.getTxtKeteibiJoken().getFromValue() != null
+                    && div.getTxtKeteibiJoken().getToValue().isBefore(div.getTxtKeteibiJoken().getFromValue())) {
+                div.getTxtKeteibiJoken().setFromValue(div.getTxtKeteibiJoken().getToValue());
             }
         }
     }
@@ -167,20 +192,28 @@ public class PanelnlTotalHandler {
     /**
      * 受付日を処理します。
      *
+     * @param shori 前回対象日
      */
-    public void onClick_uketsukebi() {
+    public void onClick_uketsukebi(ShoriDateKanri shori) {
         if (キー.equals(div.getRadUketsukebi().getSelectedKey())) {
             div.getTxtUketsukebi().setDisabled(false);
             div.getTxtKeteibiJoken().setDisabled(true);
+            div.getTxtKeteibiJoken().clearFromValue();
+            div.getTxtKeteibiJoken().clearToValue();
             div.getTxtKeteishaUketsukeYM().setDisabled(true);
             div.getRadKetteishaUketsukeYM().setDisabled(false);
-            ShoriDateKanri shori = ShokanbaraiShikyuFinder.createInstance()
-                    .select前回対象日(ShoriName.償還払い支給不支給決定通知書一括作成_受付日.get名称());
+            div.getTxtUketsukebi().setToValue(RDate.getNowDate());
             if (shori != null && shori.get対象開始年月日() != null && !shori.get対象開始年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
             }
             if (shori != null && shori.get対象終了年月日() != null && !shori.get対象終了年月日().isEmpty()) {
                 div.getTxtZenkaiTaishobi().setToValue(new RDate(shori.get対象終了年月日().toString()));
+                div.getTxtUketsukebi().setFromValue(new RDate(shori.get対象終了年月日().toString())
+                        .plusDay(1));
+            }
+            if (div.getTxtUketsukebi().getFromValue() != null
+                    && div.getTxtUketsukebi().getToValue().isBefore(div.getTxtUketsukebi().getFromValue())) {
+                div.getTxtUketsukebi().setFromValue(div.getTxtUketsukebi().getToValue());
             }
         }
     }
