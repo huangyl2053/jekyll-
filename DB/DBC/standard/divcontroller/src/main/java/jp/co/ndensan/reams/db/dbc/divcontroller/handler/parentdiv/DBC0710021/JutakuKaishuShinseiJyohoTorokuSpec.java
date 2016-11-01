@@ -182,7 +182,7 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
             List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
             JyutakuGaisyunaiyoListParameter param;
             for (dgGaisyuList_Row row : gridList) {
-                RString 状態 = row.getRowState();
+                RString 状態 = new RString(row.getRowState().toString());
                 param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
                         状態, row.getTxtJutakuAddress(),
                         new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));
