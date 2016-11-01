@@ -6,9 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -19,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaTokusokujoHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -107,12 +105,12 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKijunDay() {
+    public TextBoxDate getTxtKijunDay() {
         return this.getHakkoJoken().getTxtKijunDay();
     }
 
     @JsonIgnore
-    public void  setTxtKijunDay(TextBoxFlexibleDate txtKijunDay) {
+    public void  setTxtKijunDay(TextBoxDate txtKijunDay) {
         this.getHakkoJoken().setTxtKijunDay(txtKijunDay);
     }
 
@@ -129,6 +127,16 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     @JsonIgnore
     public void  setTxtOverChosaIraiDay(TextBoxNum txtOverChosaIraiDay) {
         this.getYokaigoNinteiChosaTokusokujo().setTxtOverChosaIraiDay(txtOverChosaIraiDay);
+    }
+
+    @JsonIgnore
+    public Label getLabOverChosaIraiDay() {
+        return this.getYokaigoNinteiChosaTokusokujo().getLabOverChosaIraiDay();
+    }
+
+    @JsonIgnore
+    public void  setLabOverChosaIraiDay(Label labOverChosaIraiDay) {
+        this.getYokaigoNinteiChosaTokusokujo().setLabOverChosaIraiDay(labOverChosaIraiDay);
     }
 
     @JsonIgnore
@@ -172,12 +180,12 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtHakkoDay() {
+    public TextBoxDate getTxtHakkoDay() {
         return this.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay();
     }
 
     @JsonIgnore
-    public void  setTxtHakkoDay(TextBoxFlexibleDate txtHakkoDay) {
+    public void  setTxtHakkoDay(TextBoxDate txtHakkoDay) {
         this.getYokaigoNinteiChosaTokusokujo().setTxtHakkoDay(txtHakkoDay);
     }
 
