@@ -99,7 +99,6 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
             processParameter.setOrderByFlag(false);
         } else {
             processParameter.setOrderByFlag(true);
-            processParameter.setOrderBy(出力順Entity.get出力順OrderBy().replace("order by ", ","));
         }
         if (processParameter.isHihokenshadaichoFLG()) {
             processParameter = business.setPsetParameter(processParameter, uaFt200Psm);
@@ -110,12 +109,14 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         }
         if (processParameter.isTajushochitokureishakanriFLG()) {
             processParameter = business.setPsetParameter(processParameter, uaFt200Psm);
+            processParameter.setOrderBy(出力順Entity.get出力順OrderBy().replace("order by ", ","));
             JyukiRendoTorokushaListBatchMybatisParameter mybatisParameter
                     = processParameter.toJyukiRendoTorokushaListBatchMybatisParameter();
             jyukiRendoJouhouList.addAll(get他住所地特例者管理リスト(mybatisParameter));
         }
         if (processParameter.isTekiyojogaishadaichoFLG()) {
             processParameter = business.setPsetParameter(processParameter, uaFt200Psm);
+            processParameter.setOrderBy(出力順Entity.get出力順OrderBy().replace("order by ", ","));
             JyukiRendoTorokushaListBatchMybatisParameter mybatisParameter
                     = processParameter.toJyukiRendoTorokushaListBatchMybatisParameter();
             jyukiRendoJouhouList.addAll(get適用除外者台帳リスト(mybatisParameter));

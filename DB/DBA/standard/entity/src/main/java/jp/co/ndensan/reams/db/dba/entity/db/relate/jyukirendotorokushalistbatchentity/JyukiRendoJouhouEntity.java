@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -55,6 +56,7 @@ public class JyukiRendoJouhouEntity {
     private RString 異動情報データ4;
     private RString 異動情報データ5;
     private RString 異動情報データ6;
+    private LasdecCode 市町村コード;
     private HihokenshaNo 被保険者番号;
     private ShikibetsuCode 識別コード;
     private RString 取得情報_前_事由;
