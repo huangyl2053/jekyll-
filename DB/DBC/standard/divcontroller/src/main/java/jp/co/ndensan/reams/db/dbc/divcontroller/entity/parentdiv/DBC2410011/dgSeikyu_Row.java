@@ -3,14 +3,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2410011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 23 17:21:48 CST 2016 
+ * Mon Oct 31 16:57:54 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -20,155 +21,141 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgSeikyu_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
-    private Button shokai;
-    private Button shusei;
-    private Button sakujo;
-    private RString defaultDataName1;
-    private RString defaultDataName2;
-    private RString defaultDataName3;
-    private RString defaultDataName4;
-    private RString defaultDataName5;
-    private RString defaultDataName6;
-    private RString defaultDataName7;
+    private RString jigyoshaNo;
+    private RString jigyoshaMei;
+    private TextBoxDate seikyuJohoSakuseiYMD;
+    private TextBoxNum seikyuKensu;
+    private TextBoxNum seikyuKingaku;
+    private TextBoxDate uketsukeYMD;
+    private TextBoxDate ketteiYMD;
+    private RString ketteiKubun;
+    private RString hdnShukeiNo;
 
     public dgSeikyu_Row() {
         super();
-        this.shokai = new Button();
-        this.shusei = new Button();
-        this.sakujo = new Button();
-        this.defaultDataName1 = RString.EMPTY;
-        this.defaultDataName2 = RString.EMPTY;
-        this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = RString.EMPTY;
-        this.defaultDataName5 = RString.EMPTY;
-        this.defaultDataName6 = RString.EMPTY;
-        this.defaultDataName7 = RString.EMPTY;
-        this.setOriginalData("shokai", shokai);
-        this.setOriginalData("shusei", shusei);
-        this.setOriginalData("sakujo", sakujo);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
+        this.jigyoshaNo = RString.EMPTY;
+        this.jigyoshaMei = RString.EMPTY;
+        this.seikyuJohoSakuseiYMD = new TextBoxDate();
+        this.seikyuKensu = new TextBoxNum();
+        this.seikyuKingaku = new TextBoxNum();
+        this.uketsukeYMD = new TextBoxDate();
+        this.ketteiYMD = new TextBoxDate();
+        this.ketteiKubun = RString.EMPTY;
+        this.hdnShukeiNo = RString.EMPTY;
+        this.setOriginalData("jigyoshaNo", jigyoshaNo);
+        this.setOriginalData("jigyoshaMei", jigyoshaMei);
+        this.setOriginalData("seikyuJohoSakuseiYMD", seikyuJohoSakuseiYMD);
+        this.setOriginalData("seikyuKensu", seikyuKensu);
+        this.setOriginalData("seikyuKingaku", seikyuKingaku);
+        this.setOriginalData("uketsukeYMD", uketsukeYMD);
+        this.setOriginalData("ketteiYMD", ketteiYMD);
+        this.setOriginalData("ketteiKubun", ketteiKubun);
+        this.setOriginalData("hdnShukeiNo", hdnShukeiNo);
     }
 
-    public dgSeikyu_Row(Button shokai, Button shusei, Button sakujo, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5, RString defaultDataName6, RString defaultDataName7) {
+    public dgSeikyu_Row(RString jigyoshaNo, RString jigyoshaMei, TextBoxDate seikyuJohoSakuseiYMD, TextBoxNum seikyuKensu, TextBoxNum seikyuKingaku, TextBoxDate uketsukeYMD, TextBoxDate ketteiYMD, RString ketteiKubun, RString hdnShukeiNo) {
         super();
-        this.setOriginalData("shokai", shokai);
-        this.setOriginalData("shusei", shusei);
-        this.setOriginalData("sakujo", sakujo);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.shokai = shokai;
-        this.shusei = shusei;
-        this.sakujo = sakujo;
-        this.defaultDataName1 = defaultDataName1;
-        this.defaultDataName2 = defaultDataName2;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName4 = defaultDataName4;
-        this.defaultDataName5 = defaultDataName5;
-        this.defaultDataName6 = defaultDataName6;
-        this.defaultDataName7 = defaultDataName7;
+        this.setOriginalData("jigyoshaNo", jigyoshaNo);
+        this.setOriginalData("jigyoshaMei", jigyoshaMei);
+        this.setOriginalData("seikyuJohoSakuseiYMD", seikyuJohoSakuseiYMD);
+        this.setOriginalData("seikyuKensu", seikyuKensu);
+        this.setOriginalData("seikyuKingaku", seikyuKingaku);
+        this.setOriginalData("uketsukeYMD", uketsukeYMD);
+        this.setOriginalData("ketteiYMD", ketteiYMD);
+        this.setOriginalData("ketteiKubun", ketteiKubun);
+        this.setOriginalData("hdnShukeiNo", hdnShukeiNo);
+        this.jigyoshaNo = jigyoshaNo;
+        this.jigyoshaMei = jigyoshaMei;
+        this.seikyuJohoSakuseiYMD = seikyuJohoSakuseiYMD;
+        this.seikyuKensu = seikyuKensu;
+        this.seikyuKingaku = seikyuKingaku;
+        this.uketsukeYMD = uketsukeYMD;
+        this.ketteiYMD = ketteiYMD;
+        this.ketteiKubun = ketteiKubun;
+        this.hdnShukeiNo = hdnShukeiNo;
     }
 
-    public Button getShokai() {
-        return shokai;
+    public RString getJigyoshaNo() {
+        return jigyoshaNo;
     }
 
-    public Button getShusei() {
-        return shusei;
+    public RString getJigyoshaMei() {
+        return jigyoshaMei;
     }
 
-    public Button getSakujo() {
-        return sakujo;
+    public TextBoxDate getSeikyuJohoSakuseiYMD() {
+        return seikyuJohoSakuseiYMD;
     }
 
-    public RString getDefaultDataName1() {
-        return defaultDataName1;
+    public TextBoxNum getSeikyuKensu() {
+        return seikyuKensu;
     }
 
-    public RString getDefaultDataName2() {
-        return defaultDataName2;
+    public TextBoxNum getSeikyuKingaku() {
+        return seikyuKingaku;
     }
 
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public TextBoxDate getUketsukeYMD() {
+        return uketsukeYMD;
     }
 
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public TextBoxDate getKetteiYMD() {
+        return ketteiYMD;
     }
 
-    public RString getDefaultDataName5() {
-        return defaultDataName5;
+    public RString getKetteiKubun() {
+        return ketteiKubun;
     }
 
-    public RString getDefaultDataName6() {
-        return defaultDataName6;
+    public RString getHdnShukeiNo() {
+        return hdnShukeiNo;
     }
 
-    public RString getDefaultDataName7() {
-        return defaultDataName7;
+    public void setJigyoshaNo(RString jigyoshaNo) {
+        this.setOriginalData("jigyoshaNo", jigyoshaNo);
+        this.jigyoshaNo = jigyoshaNo;
     }
 
-    public void setShokai(Button shokai) {
-        this.setOriginalData("shokai", shokai);
-        this.shokai = shokai;
+    public void setJigyoshaMei(RString jigyoshaMei) {
+        this.setOriginalData("jigyoshaMei", jigyoshaMei);
+        this.jigyoshaMei = jigyoshaMei;
     }
 
-    public void setShusei(Button shusei) {
-        this.setOriginalData("shusei", shusei);
-        this.shusei = shusei;
+    public void setSeikyuJohoSakuseiYMD(TextBoxDate seikyuJohoSakuseiYMD) {
+        this.setOriginalData("seikyuJohoSakuseiYMD", seikyuJohoSakuseiYMD);
+        this.seikyuJohoSakuseiYMD = seikyuJohoSakuseiYMD;
     }
 
-    public void setSakujo(Button sakujo) {
-        this.setOriginalData("sakujo", sakujo);
-        this.sakujo = sakujo;
+    public void setSeikyuKensu(TextBoxNum seikyuKensu) {
+        this.setOriginalData("seikyuKensu", seikyuKensu);
+        this.seikyuKensu = seikyuKensu;
     }
 
-    public void setDefaultDataName1(RString defaultDataName1) {
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.defaultDataName1 = defaultDataName1;
+    public void setSeikyuKingaku(TextBoxNum seikyuKingaku) {
+        this.setOriginalData("seikyuKingaku", seikyuKingaku);
+        this.seikyuKingaku = seikyuKingaku;
     }
 
-    public void setDefaultDataName2(RString defaultDataName2) {
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.defaultDataName2 = defaultDataName2;
+    public void setUketsukeYMD(TextBoxDate uketsukeYMD) {
+        this.setOriginalData("uketsukeYMD", uketsukeYMD);
+        this.uketsukeYMD = uketsukeYMD;
     }
 
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.defaultDataName3 = defaultDataName3;
+    public void setKetteiYMD(TextBoxDate ketteiYMD) {
+        this.setOriginalData("ketteiYMD", ketteiYMD);
+        this.ketteiYMD = ketteiYMD;
     }
 
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName4 = defaultDataName4;
+    public void setKetteiKubun(RString ketteiKubun) {
+        this.setOriginalData("ketteiKubun", ketteiKubun);
+        this.ketteiKubun = ketteiKubun;
     }
 
-    public void setDefaultDataName5(RString defaultDataName5) {
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.defaultDataName5 = defaultDataName5;
-    }
-
-    public void setDefaultDataName6(RString defaultDataName6) {
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.defaultDataName6 = defaultDataName6;
-    }
-
-    public void setDefaultDataName7(RString defaultDataName7) {
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.defaultDataName7 = defaultDataName7;
+    public void setHdnShukeiNo(RString hdnShukeiNo) {
+        this.setOriginalData("hdnShukeiNo", hdnShukeiNo);
+        this.hdnShukeiNo = hdnShukeiNo;
     }
 
     // </editor-fold>
