@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunint
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.FutanyikkatsuShoninList;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.KaigoHokenFutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.KaigoHokenFutanGendogakuNinteiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futangendogakunintei.FutanGendogakuNinteiBatchResult;
 import jp.co.ndensan.reams.db.dbd.business.core.futangendogakuyikkatsushonin.FutangendogakuyikkatsuShoninEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
@@ -127,7 +129,6 @@ public class IkkatsuShoninKekkaIchiranService {
     public List<FutanGendogakuNinteiBatchResult> load一括承認結果取得(YMDHMS 一括認定バッチ処理日時, Boolean 承認済みフラグ) {
         RString 減免減額種類_負担限度額認定 = GemmenGengakuShurui.負担限度額認定.getコード();
         FutanyikkatsuShoninListMapperParameter 検索条件 = new FutanyikkatsuShoninListMapperParameter(一括認定バッチ処理日時, 減免減額種類_負担限度額認定);
-        FutanyikkatsuShoninListMapperParameter 検索条件2 = new FutanyikkatsuShoninListMapperParameter(減免減額種類_負担限度額認定);
         List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果 = new ArrayList<>();
         IFutanyikkatsuShoninkekkaListMapper mapper = mapperProvider.create(IFutanyikkatsuShoninkekkaListMapper.class);
         IFutanyikkatsuShoninkekkaListFalseMapper mapperfalse = mapperProvider.create(IFutanyikkatsuShoninkekkaListFalseMapper.class);
@@ -139,7 +140,7 @@ public class IkkatsuShoninKekkaIchiranService {
                 }
             }
         } else {
-            List<FutanGendogakuNinteiBatchResultEntity> entityList = mapperfalse.get一括承認結果情報を取得_承認済みフラグFALSE(検索条件2);
+            List<FutanGendogakuNinteiBatchResultEntity> entityList = mapperfalse.get一括承認結果情報を取得_承認済みフラグFALSE(検索条件);
             if (entityList != null && !entityList.isEmpty()) {
                 for (FutanGendogakuNinteiBatchResultEntity entity : entityList) {
                     負担限度額認定バッチ結果.add(new FutanGendogakuNinteiBatchResult(entity));
@@ -158,11 +159,11 @@ public class IkkatsuShoninKekkaIchiranService {
      * @return List<KaigoHokenFutanGendogakuNintei>
      */
     @Transaction
-    public DbT4018KaigoHokenFutanGendogakuNinteiEntity get介護保険負担限度額認定情報(ShoKisaiHokenshaNo shikisaihokenno,
+    public KaigoHokenFutanGendogakuNintei get介護保険負担限度額認定情報(ShoKisaiHokenshaNo shikisaihokenno,
             HihokenshaNo hihokenshano, int 履歴番号) {
         DbT4018KaigoHokenFutanGendogakuNinteiEntity dbt4018entity = dbT4018dac.selectByKey(shikisaihokenno, hihokenshano, 履歴番号);
         dbt4018entity.initializeMd5();
-        return dbt4018entity;
+        return new KaigoHokenFutanGendogakuNintei(dbt4018entity);
     }
 
     /**
@@ -175,12 +176,12 @@ public class IkkatsuShoninKekkaIchiranService {
      * @return List<GemmenGengakuShinsei>
      */
     @Transaction
-    public DbT4010GemmenGengakuShinseiEntity get減免減額申請情報(ShoKisaiHokenshaNo shokisaihokenno, HihokenshaNo hihokenshano,
+    public GemmenGengakuShinsei get減免減額申請情報(ShoKisaiHokenshaNo shokisaihokenno, HihokenshaNo hihokenshano,
             RString 減免減額種類,
             int 履歴番号) {
         DbT4010GemmenGengakuShinseiEntity dbt4010entity = dbT4010dac.selectByKey(shokisaihokenno, hihokenshano, 減免減額種類, 履歴番号);
         dbt4010entity.initializeMd5();
-        return dbt4010entity;
+        return new GemmenGengakuShinsei(dbt4010entity);
     }
 
     /**
@@ -202,8 +203,8 @@ public class IkkatsuShoninKekkaIchiranService {
      * @param kaigoHoken画面情報 DbT4035FutanGendogakuNinteiBatchEntity
      */
     @Transaction
-    public void saveDbT4018dac(DbT4018KaigoHokenFutanGendogakuNinteiEntity kaigoHoken画面情報) {
-        dbT4018dac.save(kaigoHoken画面情報);
+    public void saveDbT4018dac(KaigoHokenFutanGendogakuNintei kaigoHoken画面情報) {
+        dbT4018dac.save(kaigoHoken画面情報.toEntity());
     }
 
     /**
@@ -234,7 +235,7 @@ public class IkkatsuShoninKekkaIchiranService {
     public void ＤＢ処理_updata介護保険負担限度額認定(List<FutanGendogakuNinteiBatchResult> 画面更新用情報) {
         for (FutanGendogakuNinteiBatchResult futanresult : 画面更新用情報) {
             if (futanresult.get介護保険負担限度額認定の情報() != null) {
-                DbT4018KaigoHokenFutanGendogakuNinteiEntity kaigonintei = get介護保険負担限度額認定情報(
+                KaigoHokenFutanGendogakuNintei kaigonintei = get介護保険負担限度額認定情報(
                         futanresult.get介護保険負担限度額認定の情報().get証記載保険者番号(),
                         futanresult.get介護保険負担限度額認定の情報().get被保険者番号(),
                         futanresult.get介護保険負担限度額認定の情報().get履歴番号());
@@ -269,7 +270,7 @@ public class IkkatsuShoninKekkaIchiranService {
         for (FutanGendogakuNinteiBatchResult futanresult : 画面更新用情報) {
             if (futanresult.get介護保険負担限度額認定の情報() != null
                     && futanresult.get介護保険負担限度額認定の情報().getState().equals(EntityDataState.Modified)) {
-                DbT4018KaigoHokenFutanGendogakuNinteiEntity kaigonintei = get介護保険負担限度額認定情報(
+                KaigoHokenFutanGendogakuNintei kaigonintei = get介護保険負担限度額認定情報(
                         futanresult.get介護保険負担限度額認定の情報().get証記載保険者番号(),
                         futanresult.get介護保険負担限度額認定の情報().get被保険者番号(),
                         futanresult.get介護保険負担限度額認定の情報().get履歴番号());
@@ -297,47 +298,120 @@ public class IkkatsuShoninKekkaIchiranService {
         }
     }
 
-    private void get介護保険負担限度額(FutanGendogakuNinteiBatchResult futanresult, DbT4018KaigoHokenFutanGendogakuNinteiEntity kaigonintei) {
-        if (futanresult.get介護保険負担限度額認定の情報().get一括認定処理日時()
-                .equals(kaigonintei.getNinteiBatchExecutedTimestamp())) {
-            kaigonintei.setKyusochishaKubun(futanresult.get介護保険負担限度額認定の情報().get旧措置者区分());
-            kaigonintei.setShinseiRiyuKubun(futanresult.get介護保険負担限度額認定の情報().get申請理由区分());
-            kaigonintei.setRiyoshaFutanDankai(futanresult.get介護保険負担限度額認定の情報().get利用者負担段階());
-            kaigonintei.setKyokaisoGaitoshaKubun(futanresult.get介護保険負担限度額認定の情報().is境界層該当者区分());
-            kaigonintei.setGekihenKanwaSochiTaishoshaKubun(futanresult.get介護保険負担限度額認定の情報().is激変緩和措置対象者区分());
-            kaigonintei.setKyoshitsuShubetsu(futanresult.get介護保険負担限度額認定の情報().get居室種別());
-            kaigonintei.setShokuhiFutanGendogaku(futanresult.get介護保険負担限度額認定の情報().get食費負担限度額());
-            kaigonintei.setUnitTypeKoshitsu(futanresult.get介護保険負担限度額認定の情報().getユニット型個室());
-            kaigonintei.setUnitTypeJunKoshitsu(futanresult.get介護保険負担限度額認定の情報().getユニット型準個室());
-            kaigonintei.setJuraiTypeKoshitsu_Tokuyo(futanresult.get介護保険負担限度額認定の情報().get従来型個室_特養等());
-            kaigonintei.setJuraiTypeKoshitsu_Roken_Ryoyo(futanresult.get介護保険負担限度額認定の情報().get従来型個室_老健_療養等());
-            kaigonintei.setTashoshitsu(futanresult.get介護保険負担限度額認定の情報().get多床室());
-            kaigonintei.setHaigushaUmuFlag(futanresult.get介護保険負担限度額認定の情報().is配偶者の有無());
-            kaigonintei.setHaigushaShimei(futanresult.get介護保険負担限度額認定の情報().get配偶者氏名());
-            kaigonintei.setHaigushaShimeiKana(futanresult.get介護保険負担限度額認定の情報().get配偶者氏名カナ());
-            kaigonintei.setHaigushaSeinenGappiYMD(futanresult.get介護保険負担限度額認定の情報().get配偶者生年月日());
-            kaigonintei.setHaigushaJusho(futanresult.get介護保険負担限度額認定の情報().get配偶者住所());
-            kaigonintei.setHaigushaRenrakusaki(futanresult.get介護保険負担限度額認定の情報().get配偶者連絡先());
-            kaigonintei.setHaigushaJusho2(futanresult.get介護保険負担限度額認定の情報().get配偶者住所２());
-            kaigonintei.setHaigushaKazeiKubun(futanresult.get介護保険負担限度額認定の情報().get配偶者課税区分());
-            kaigonintei.setHaigushaShikibetsuCd(futanresult.get介護保険負担限度額認定の情報().get配偶者識別コード());
-            kaigonintei.setYochokinShinkokuKubun(futanresult.get介護保険負担限度額認定の情報().get預貯金申告区分());
-            kaigonintei.setYochokinGaku(futanresult.get介護保険負担限度額認定の情報().get預貯金額());
-            kaigonintei.setYukashoukenGaisangaku(futanresult.get介護保険負担限度額認定の情報().get有価証券評価概算額());
-            kaigonintei.setSonotaKingaku(futanresult.get介護保険負担限度額認定の情報().getその他金額());
-            kaigonintei.setShinseiYMD(futanresult.get介護保険負担限度額認定の情報().get申請年月日());
-            kaigonintei.setKetteiYMD(futanresult.get介護保険負担限度額認定の情報().get決定年月日());
-            kaigonintei.setTekiyoKaishiYMD(futanresult.get介護保険負担限度額認定の情報().get適用開始年月日());
-            kaigonintei.setTekiyoShuryoYMD(futanresult.get介護保険負担限度額認定の情報().get適用終了年月日());
-            kaigonintei.setKetteiKubun(futanresult.get介護保険負担限度額認定の情報().get決定区分());
-            kaigonintei.setHiShoninRiyu(futanresult.get介護保険負担限度額認定の情報().get非承認理由());
-            saveDbT4018dac(kaigonintei);
+    private void get介護保険負担限度額(FutanGendogakuNinteiBatchResult futanresult, KaigoHokenFutanGendogakuNintei kaigonintei) {
+        if (futanresult.get介護保険負担限度額認定の情報().get一括認定処理日時() != null
+                && futanresult.get介護保険負担限度額認定の情報().get一括認定処理日時()
+                .equals(kaigonintei.get一括認定バッチ処理日時())) {
+            KaigoHokenFutanGendogakuNinteiBuilder kaigohokenbuilder = kaigonintei.createBuilderForEdit();
+            if (kaigonintei.get旧措置者区分() != null && !kaigonintei.get旧措置者区分().isEmpty()) {
+                kaigohokenbuilder.set旧措置者区分(futanresult.get介護保険負担限度額認定の情報().get旧措置者区分());
+            }
+            if (kaigonintei.get申請理由区分() != null && !kaigonintei.get申請理由区分().isEmpty()) {
+                kaigohokenbuilder.set申請理由区分(futanresult.get介護保険負担限度額認定の情報().get申請理由区分());
+            }
+            if (kaigonintei.get利用者負担段階() != null && !kaigonintei.get利用者負担段階().isEmpty()) {
+                kaigohokenbuilder.set利用者負担段階(futanresult.get介護保険負担限度額認定の情報().get利用者負担段階());
+            }
+            kaigohokenbuilder.set境界層該当者区分(futanresult.get介護保険負担限度額認定の情報().is境界層該当者区分());
+            kaigohokenbuilder.set激変緩和措置対象者区分(futanresult.get介護保険負担限度額認定の情報().is激変緩和措置対象者区分());
+            if (kaigonintei.get居室種別() != null && !kaigonintei.get居室種別().isEmpty()) {
+                kaigohokenbuilder.set居室種別(futanresult.get介護保険負担限度額認定の情報().get居室種別());
+            }
+            if (kaigonintei.get食費負担限度額() != null && !kaigonintei.get食費負担限度額().toString().isEmpty()) {
+                kaigohokenbuilder.set食費負担限度額(futanresult.get介護保険負担限度額認定の情報().get食費負担限度額());
+            }
+            if (kaigonintei.getユニット型個室() != null && !kaigonintei.getユニット型個室().toString().isEmpty()) {
+                kaigohokenbuilder.setユニット型個室(futanresult.get介護保険負担限度額認定の情報().getユニット型個室());
+            }
+            if (kaigonintei.getユニット型準個室() != null && !kaigonintei.getユニット型準個室().toString().isEmpty()) {
+                kaigohokenbuilder.setユニット型準個室(futanresult.get介護保険負担限度額認定の情報().getユニット型準個室());
+            }
+            介護保険負担限度額設定一(kaigonintei, kaigohokenbuilder, futanresult);
+            介護保険負担限度額設定二(kaigonintei, kaigohokenbuilder, futanresult);
+            介護保険負担限度額設定三(kaigonintei, kaigohokenbuilder, futanresult);
+            saveDbT4018dac(kaigohokenbuilder.build().modifiedModel());
+        }
+    }
+
+    private void 介護保険負担限度額設定一(KaigoHokenFutanGendogakuNintei kaigonintei,
+            KaigoHokenFutanGendogakuNinteiBuilder kaigohokenbuilder, FutanGendogakuNinteiBatchResult futanresult) {
+        if (kaigonintei.get従来型個室_特養等() != null && !kaigonintei.get従来型個室_特養等().toString().isEmpty()) {
+            kaigohokenbuilder.set従来型個室_特養等(futanresult.get介護保険負担限度額認定の情報().get従来型個室_特養等());
+        }
+        if (kaigonintei.get従来型個室_老健_療養等() != null && !kaigonintei.get従来型個室_老健_療養等().toString().isEmpty()) {
+            kaigohokenbuilder.set従来型個室_老健_療養等(futanresult.get介護保険負担限度額認定の情報().get従来型個室_老健_療養等());
+        }
+        if (kaigonintei.get多床室() != null && !kaigonintei.get多床室().toString().isEmpty()) {
+            kaigohokenbuilder.set多床室(futanresult.get介護保険負担限度額認定の情報().get多床室());
+        }
+        kaigohokenbuilder.set配偶者の有無(futanresult.get介護保険負担限度額認定の情報().is配偶者の有無());
+        if (kaigonintei.get配偶者氏名() != null && !kaigonintei.get配偶者氏名().isEmpty()) {
+            kaigohokenbuilder.set配偶者氏名(futanresult.get介護保険負担限度額認定の情報().get配偶者氏名());
+        }
+        if (kaigonintei.get配偶者氏名カナ() != null && !kaigonintei.get配偶者氏名カナ().isEmpty()) {
+            kaigohokenbuilder.set配偶者氏名カナ(futanresult.get介護保険負担限度額認定の情報().get配偶者氏名カナ());
+        }
+        if (kaigonintei.get配偶者生年月日() != null && !kaigonintei.get配偶者生年月日().isEmpty()) {
+            kaigohokenbuilder.set配偶者生年月日(futanresult.get介護保険負担限度額認定の情報().get配偶者生年月日());
+        }
+        if (kaigonintei.get配偶者住所() != null && !kaigonintei.get配偶者住所().isEmpty()) {
+            kaigohokenbuilder.set配偶者住所(futanresult.get介護保険負担限度額認定の情報().get配偶者住所());
+        }
+        if (kaigonintei.get配偶者連絡先() != null && !kaigonintei.get配偶者連絡先().isEmpty()) {
+            kaigohokenbuilder.set配偶者連絡先(futanresult.get介護保険負担限度額認定の情報().get配偶者連絡先());
+        }
+    }
+
+    private void 介護保険負担限度額設定二(KaigoHokenFutanGendogakuNintei kaigonintei,
+            KaigoHokenFutanGendogakuNinteiBuilder kaigohokenbuilder, FutanGendogakuNinteiBatchResult futanresult) {
+        if (kaigonintei.get配偶者住所２() != null && !kaigonintei.get配偶者住所２().isEmpty()) {
+            kaigohokenbuilder.set配偶者住所２(futanresult.get介護保険負担限度額認定の情報().get配偶者住所２());
+        }
+        if (kaigonintei.get配偶者課税区分() != null && !kaigonintei.get配偶者課税区分().isEmpty()) {
+            kaigohokenbuilder.set配偶者課税区分(futanresult.get介護保険負担限度額認定の情報().get配偶者課税区分());
+        }
+        if (kaigonintei.get配偶者識別コード() != null && !kaigonintei.get配偶者識別コード().isEmpty()) {
+            kaigohokenbuilder.set配偶者識別コード(futanresult.get介護保険負担限度額認定の情報().get配偶者識別コード());
+        }
+        if (kaigonintei.get預貯金申告区分() != null && !kaigonintei.get預貯金申告区分().isEmpty()) {
+            kaigohokenbuilder.set預貯金申告区分(futanresult.get介護保険負担限度額認定の情報().get預貯金申告区分());
+        }
+        if (kaigonintei.get預貯金額() != null && !kaigonintei.get預貯金額().toString().isEmpty()) {
+            kaigohokenbuilder.set預貯金額(futanresult.get介護保険負担限度額認定の情報().get預貯金額());
+        }
+        if (kaigonintei.get有価証券評価概算額() != null && !kaigonintei.get有価証券評価概算額().toString().isEmpty()) {
+            kaigohokenbuilder.set有価証券評価概算額(futanresult.get介護保険負担限度額認定の情報().get有価証券評価概算額());
+        }
+        if (kaigonintei.getその他金額() != null && !kaigonintei.getその他金額().toString().isEmpty()) {
+            kaigohokenbuilder.setその他金額(futanresult.get介護保険負担限度額認定の情報().getその他金額());
+        }
+    }
+
+    private void 介護保険負担限度額設定三(KaigoHokenFutanGendogakuNintei kaigonintei,
+            KaigoHokenFutanGendogakuNinteiBuilder kaigohokenbuilder, FutanGendogakuNinteiBatchResult futanresult) {
+        if (kaigonintei.get申請年月日() != null && !kaigonintei.get申請年月日().isEmpty()) {
+            kaigohokenbuilder.set申請年月日(futanresult.get介護保険負担限度額認定の情報().get申請年月日());
+        }
+        if (kaigonintei.get決定年月日() != null && !kaigonintei.get決定年月日().isEmpty()) {
+            kaigohokenbuilder.set決定年月日(futanresult.get介護保険負担限度額認定の情報().get決定年月日());
+        }
+        if (kaigonintei.get適用開始年月日() != null && !kaigonintei.get適用開始年月日().isEmpty()) {
+            kaigohokenbuilder.set適用開始年月日(futanresult.get介護保険負担限度額認定の情報().get適用開始年月日());
+        }
+        if (kaigonintei.get適用終了年月日() != null && !kaigonintei.get適用終了年月日().isEmpty()) {
+            kaigohokenbuilder.set適用終了年月日(futanresult.get介護保険負担限度額認定の情報().get適用終了年月日());
+        }
+        if (kaigonintei.get決定区分() != null && !kaigonintei.get決定区分().isEmpty()) {
+            kaigohokenbuilder.set決定区分(futanresult.get介護保険負担限度額認定の情報().get決定区分());
+        }
+        if (kaigonintei.get非承認理由() != null && !kaigonintei.get非承認理由().isEmpty()) {
+            kaigohokenbuilder.set非承認理由(futanresult.get介護保険負担限度額認定の情報().get非承認理由());
         }
     }
 
     private void get減免減額リスト(FutanGendogakuNinteiBatchResult futanresult, List<GemmenGengakuShinsei> gemmengengakulist) {
         for (GemmenGengakuShinsei gemmenshinsei : gemmengengakulist) {
-            GemmenGengakuShinsei dbt4010gemmengen = new GemmenGengakuShinsei(
+            GemmenGengakuShinsei dbt4010gemmengen = get減免減額申請情報(
                     futanresult.get介護保険負担限度額認定の情報().get証記載保険者番号(),
                     futanresult.get介護保険負担限度額認定の情報().get被保険者番号(),
                     gemmenshinsei.get減免減額種類(),

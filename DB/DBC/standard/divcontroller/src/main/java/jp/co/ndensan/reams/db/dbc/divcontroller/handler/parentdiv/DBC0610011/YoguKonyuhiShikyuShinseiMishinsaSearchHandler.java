@@ -39,7 +39,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
     private final YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div;
     private final RString 承認する = new RString("承認する");
     private final RString 却下する = new RString("却下する");
-    private final RString 決定日R = new RString("決定日");
 
     /**
      * YoguKonyuhiShikyuShinseiMishinsaSearchHandler
@@ -96,28 +95,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
                 row.setTxtShinsaNo(ShinsaNaiyoKubun.却下する.getコード());
                 row.getTxtShinsaResult().setValue(却下する);
             }
-        }
-    }
-
-    /**
-     * 決定日入力チェック
-     *
-     * @param 決定日 RDate
-     */
-    public void 決定日入力チェック(RDate 決定日) {
-        if (決定日 == null) {
-            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定日R.toString()));
-        }
-    }
-
-    /**
-     * 選択チェック
-     */
-    public void 選択チェック() {
-        List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
-                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
-        if (selectedMishinsaShikyuShinsei == null || selectedMishinsaShikyuShinsei.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象行を選択.getMessage());
         }
     }
 

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207011.DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -22,7 +23,7 @@ public class ShiharaiHohoHenkoHaakuIchiran {
 
     private static final RString SELECTED_VALUE = new RString("0");
     private static final RString UN_SELECTED_VALUE = new RString("1");
-    private static final ReportId REPORTID = new ReportId("DBD200006_ShiharaiHohoHenkoHaakuIchiran");
+    private static final ReportId REPORTID = ReportIdDBD.DBD200006.getReportId();
 
     /**
      * コンストラクタです。

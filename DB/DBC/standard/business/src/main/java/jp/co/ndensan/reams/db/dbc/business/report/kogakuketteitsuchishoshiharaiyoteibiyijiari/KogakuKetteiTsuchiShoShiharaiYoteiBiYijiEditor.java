@@ -170,6 +170,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             source.torikeshi2 = 半角アスタリスク2;
         }
 
+        set取り消し持ちもの(source);
         set種別And種別タイトル(source);
         if (支給.equals(帳票情報.get支給_不支給決定区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())
                 && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
@@ -201,14 +202,15 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         return source;
     }
 
-    private void set種別And種別タイトル(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
-
-        if (支給.equals(帳票情報.get支給_不支給決定区分()) && !(Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0)) {
+    private void set取り消し持ちもの(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+        if (!(支給.equals(帳票情報.get支給_不支給決定区分()) && 窓口払い区分.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0)) {
             source.torikeshiMochimono1 = 半角アスタリスク;
             source.torikeshiMochimono2 = 半角アスタリスク;
             source.torikeshiShiharaibasho = 半角アスタリスク;
             source.torikeshiShiharaikikan = 半角アスタリスク;
         }
+
         if (支給.equals(帳票情報.get支給_不支給決定区分()) && 窓口払い区分.equals(帳票情報.get支払方法区分())
                 && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
             source.mochimono = 帳票情報.get持ちもの();
@@ -228,6 +230,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             source.shiharaiStartHMS = RString.EMPTY;
             source.shiharaiEndHMS = RString.EMPTY;
         }
+    }
+
+    private void set種別And種別タイトル(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
 
         if (支給.equals(帳票情報.get支給_不支給決定区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())
                 && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {

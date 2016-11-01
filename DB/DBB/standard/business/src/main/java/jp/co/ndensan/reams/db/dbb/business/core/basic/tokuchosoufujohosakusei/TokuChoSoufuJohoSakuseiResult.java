@@ -57,11 +57,10 @@ public final class TokuChoSoufuJohoSakuseiResult {
         }
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList();
         for (TokuChoSoufuJohoSakuseiEntity resultentitiy : resultentities) {
-            List<DbT2003FukaJohoEntity> dbt2003entities = resultentitiy.getDbt2003entities();
-            if (dbt2003entities == null || dbt2003entities.isEmpty()) {
+            DbT2003FukaJohoEntity dbt2003entitiy = resultentitiy.getDbt2003entities();
+            if (dbt2003entitiy == null) {
                 continue;
             }
-            DbT2003FukaJohoEntity dbt2003entitiy = dbt2003entities.get(0);
             DbT2003KibetsuEntity 介護期別entity = new DbT2003KibetsuEntity();
             介護期別entity.setKi(dbt2003entitiy.getKi());
             介護期別entity.setChoshuHouhou(dbt2003entitiy.getChoshuHouhou());

@@ -47,13 +47,4 @@ public class FutanyikkatsuShoninListMapperParameter implements IMyBatisParameter
         this.一括認定バッチ処理日時 = 一括認定バッチ処理日時;
         this.減免減額種類_負担限度額認定 = 減免減額種類_負担限度額認定;
     }
-
-    /**
-     * 負担一括承認結果一覧（画面）の引数を返します。
-     *
-     * @param 減免減額種類_負担限度額認定 RString
-     */
-    public FutanyikkatsuShoninListMapperParameter(RString 減免減額種類_負担限度額認定) {
-        this.減免減額種類_負担限度額認定 = 減免減額種類_負担限度額認定;
-    }
 }

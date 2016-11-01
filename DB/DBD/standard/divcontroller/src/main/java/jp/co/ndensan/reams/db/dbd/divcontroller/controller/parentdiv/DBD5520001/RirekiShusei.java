@@ -142,7 +142,13 @@ public class RirekiShusei {
                 = DataPassingConverter.deserialize(div.getHdnReceiveSerializeBusiness(), RirekiShuseiDataPass.class);
         dgRirekiIchiran_Row row = div.getDgRirekiIchiran().getSelectedItems().get(0);
         row.setDataPass(DataPassingConverter.serialize(business));
-        if (!KU_BUN_追.equals(row.getKubun())) {
+        if (KU_BUN_追.equals(row.getKubun())) {
+            row.setKubun(KU_BUN_追);
+        } else if (KU_BUN_回.equals(row.getKubun())) {
+            row.setKubun(KU_BUN_回);
+        } else if (row.getTsuikaKubun().isValue()) {
+            row.setKubun(KU_BUN_削);
+        } else {
             row.setKubun(KU_BUN_修);
         }
         row = getHandler(div).setデータグリッド状態(row);

@@ -120,10 +120,10 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
                 get後期高齢者情報インポート用Entitｙ(entity);
             }
             if (entity.get取込後期高齢者情報Entity() != null
-                    && entity.get現在後期高齢者情報() != null) {
+                    && entity.get現在後期高齢者情報() == null) {
                 取込後期高齢者情報より_項目設定(entity);
             }
-            if (entity.get取込後期高齢者情報Entity() != null
+            if (entity.get取込後期高齢者情報Entity() == null
                     && entity.get現在後期高齢者情報() != null) {
                 現在後期高齢者情報より_項目設定(entity);
             }
@@ -141,21 +141,19 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
     }
 
     private void 取込後期高齢者情報より_項目設定(KokiKoreshaJyohoResultEntity entity) {
-        if (!登録区分_画面登録.equals(entity.get取込後期高齢者情報Entity().get登録区分())) {
-            後期高齢者情報インポート用Entity.set識別コード(entity.get取込後期高齢者情報Entity().get住民コード());
-            後期高齢者情報インポート用Entity.set個人区分コード(entity.get取込後期高齢者情報Entity().get個人区分コード());
-            後期高齢者情報インポート用Entity.set後期高齢保険者番号_市町村(entity.get取込後期高齢者情報Entity().get後期高齢保険者番号_市町村());
-            後期高齢者情報インポート用Entity.set後期高齢保険者番号_広域(entity.get取込後期高齢者情報Entity().get後期高齢保険者番号_広域());
-            後期高齢者情報インポート用Entity.set後期高齢被保険者番号(entity.get取込後期高齢者情報Entity().get後期高齢被保険者番号());
-            後期高齢者情報インポート用Entity.set資格取得事由コード(entity.get取込後期高齢者情報Entity().get資格取得事由コード());
-            後期高齢者情報インポート用Entity.set資格喪失事由コード(entity.get取込後期高齢者情報Entity().get資格喪失事由コード());
-            後期高齢者情報インポート用Entity.set履歴番号(entity.get取込後期高齢者情報Entity().get履歴番号());
-            後期高齢者情報インポート用Entity.set登録区分(entity.get取込後期高齢者情報Entity().get登録区分());
-            後期高齢者情報インポート用Entity.set資格取得日(entity.get取込後期高齢者情報Entity().get資格取得年月日());
-            後期高齢者情報インポート用Entity.set資格喪失日(entity.get取込後期高齢者情報Entity().get資格喪失年月日());
-            後期高齢者情報インポート用Entity.set保険者適用開始日(entity.get取込後期高齢者情報Entity().get保険者適用開始年月日());
-            後期高齢者情報インポート用Entity.set保険者適用終了日(entity.get取込後期高齢者情報Entity().get保険者適用開始年月日());
-        }
+        後期高齢者情報インポート用Entity.set識別コード(entity.get取込後期高齢者情報Entity().get住民コード());
+        後期高齢者情報インポート用Entity.set個人区分コード(entity.get取込後期高齢者情報Entity().get個人区分コード());
+        後期高齢者情報インポート用Entity.set後期高齢保険者番号_市町村(entity.get取込後期高齢者情報Entity().get後期高齢保険者番号_市町村());
+        後期高齢者情報インポート用Entity.set後期高齢保険者番号_広域(entity.get取込後期高齢者情報Entity().get後期高齢保険者番号_広域());
+        後期高齢者情報インポート用Entity.set後期高齢被保険者番号(entity.get取込後期高齢者情報Entity().get後期高齢被保険者番号());
+        後期高齢者情報インポート用Entity.set資格取得事由コード(entity.get取込後期高齢者情報Entity().get資格取得事由コード());
+        後期高齢者情報インポート用Entity.set資格喪失事由コード(entity.get取込後期高齢者情報Entity().get資格喪失事由コード());
+        後期高齢者情報インポート用Entity.set履歴番号(entity.get取込後期高齢者情報Entity().get履歴番号());
+        後期高齢者情報インポート用Entity.set登録区分(entity.get取込後期高齢者情報Entity().get登録区分());
+        後期高齢者情報インポート用Entity.set資格取得日(entity.get取込後期高齢者情報Entity().get資格取得年月日());
+        後期高齢者情報インポート用Entity.set資格喪失日(entity.get取込後期高齢者情報Entity().get資格喪失年月日());
+        後期高齢者情報インポート用Entity.set保険者適用開始日(entity.get取込後期高齢者情報Entity().get保険者適用開始年月日());
+        後期高齢者情報インポート用Entity.set保険者適用終了日(entity.get取込後期高齢者情報Entity().get保険者適用開始年月日());
     }
 
     private void 現在後期高齢者情報より_項目設定(KokiKoreshaJyohoResultEntity entity) {

@@ -56,7 +56,7 @@ public class ShoHokenshaNoUpdateProcess extends BatchProcessBase<HihokenshaTempE
 
     @Override
     protected void process(HihokenshaTempEntity entity) {
-        entity.setExHihokenshaNo(保険者番号);
+        entity.setExHokenshaNo(保険者番号);
         entity.setExShoHokenshaNo(保険者番号);
         entity.setHenkanFlag(変換対象フラグ);
         被保険者一時TBL.update(entity);

@@ -155,7 +155,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                         .set訂正区分コード(TWO)
                         .set訂正年月日(FlexibleDate.getNowDate()).build();
                 出力用受給者訂正情報Entity.set受給者異動送付entity(変更後Entity);
-                setFlag(出力用受給者訂正情報Entity, 変更後Entity, 変更前受給者訂正情報Entity);
+                出力用受給者訂正情報Entity.set公費負担上限額減額有フラグ(変更後Entity.is公費負担上限額減額有フラグ());
+                出力用受給者訂正情報Entity.set小多機能居宅介護利用開始月利用有フラグ(
+                        変更後Entity.is小多機能居宅介護利用開始月利用有フラグ());
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
                         変更後受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
                 出力用受給者訂正情報Entity.set作成年月日(変更後受給者訂正情報Entity.get作成年月日());

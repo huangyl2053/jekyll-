@@ -416,35 +416,37 @@ public class JyukiRendoJouhouBusiness {
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"yubinNo\"")),
+        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"choikiCode\"")),
+        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString("banchiCode"), new RString("番地コード")),
+        番地コード(new RString("0003"), new RString("banchiCode"),
+                new RString("\"ShikibetsuTaisho_banchiCode1\",\"ShikibetsuTaisho_banchiCode2\","
+                        + "\"ShikibetsuTaisho_banchiCode3\",\"ShikibetsuTaisho_banchiCode4\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"gyoseikuCode\"")),
+        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
         /**
          * 地区１
          */
-        地区１(new RString("0005"), new RString("chiku1"), new RString("\"chikuCode1\"")),
+        地区１(new RString("0005"), new RString("chiku1"), new RString("\"ShikibetsuTaisho_chikuCode1\"")),
         /**
          * 地区２
          */
-        地区２(new RString("0006"), new RString("chiku2"), new RString("\"chikuCode2\"")),
+        地区２(new RString("0006"), new RString("chiku2"), new RString("\"ShikibetsuTaisho_chikuCode2\"")),
         /**
          * 地区３
          */
-        地区３(new RString("0007"), new RString("chiku3"), new RString("\"chikuCode3\"")),
+        地区３(new RString("0007"), new RString("chiku3"), new RString("\"ShikibetsuTaisho_chikuCode3\"")),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString("setaiCode"), new RString("\"setaiCode\"")),
+        世帯コード(new RString("0008"), new RString("setaiCode"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
         /**
          * 識別コード
          */
@@ -452,15 +454,15 @@ public class JyukiRendoJouhouBusiness {
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("\"kanaMeisho\"")),
+        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
         /**
          * 生年月日
          */
-        生年月日(new RString("0012"), new RString("seinengappiYMD"), new RString("\"seinengappiYMD\"")),
+        生年月日(new RString("0012"), new RString("seinengappiYMD"), new RString("\"ShikibetsuTaisho_seinengappiYMD\"")),
         /**
          * 性別
          */
-        性別(new RString("0013"), new RString("gender"), new RString("\"seibetsuCode\"")),
+        性別(new RString("0013"), new RString("gender"), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
         /**
          * 市町村コード
          */

@@ -157,9 +157,9 @@ public class KanendoKoseiKeisan {
         RDate date1 = new RDate(算定日時.getYearValue(), INT_3, INT_1);
         RDate date2 = new RDate(算定日時.getYearValue(), INT_5, INT_31);
         KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
-        Kitsuki 出納整理期間増額用期月 = 更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.増額更正);
         if (算定日時.getDate().isBeforeOrEquals(date2) && date1.isBeforeOrEquals(算定日時.getDate())
-                && (Tsuki.翌年度4月.equals(出納整理期間増額用期月.get月()) || Tsuki.翌年度5月.equals(出納整理期間増額用期月.get月()))) {
+                && (Tsuki.翌年度4月.equals(更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.増額更正).get月())
+                || Tsuki.翌年度5月.equals(更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.増額更正).get月()))) {
             if (賦課の情報1 == null && 賦課の情報3 == null && 賦課の情報4 == null && 賦課の情報5 == null && 賦課の情報2 != null
                     && 調定年度.equals(賦課の情報2.get調定年度()) && 調定年度.equals(賦課の情報2.get賦課年度().plusYear(INT_1))) {
                 賦課の情報1 = 賦課の情報2.createBuilderForEdit().set調定年度(調定年度.minusYear(INT_1)).build();
@@ -469,7 +469,6 @@ public class KanendoKoseiKeisan {
             } else if (Tsuki.翌年度4月.equals(出納整理期間増額用期月.get月()) || Tsuki.翌年度5月.equals(出納整理期間増額用期月.get月())) {
                 出納整理期間減額用期月 = 更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.減額更正);
                 set現在期月(kiwariKeisanInput, 出納整理期間増額用期月, 出納整理期間減額用期月, 今回保険料, 前回保険料);
-                kiwariKeisanInput.set現在調定年度(調定年度.minusYear(INT_1));
             }
         } else {
             過年度期月 = 更正月判定.find過年度更正月(算定日時.getDate());

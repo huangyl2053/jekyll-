@@ -63,6 +63,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 曜日_日 = new RString("日曜");
     private final RString 曜日_土 = new RString("土曜");
     private final ShiharaiHohoJyohoDiv div;
+    private static final char 全角空白 = '　';
 
     /**
      * コンストラクタです。
@@ -602,15 +603,10 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanShitenCode().setDisplayNone(true);
             div.getTxtYokinShubetsu().setDisplayNone(true);
         } else {
-            KinyuKikan kinyuKikan = 金融機関コードに対する名称(口座情報.get金融機関コード() == null
-                    ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード());
-            KinyuKikanShiten kinyuKikanShiten = 支店コードまたは店番に対する名称(口座情報.get金融機関コード() == null
-                    ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
-                    口座情報.get支店コード() == null ? KinyuKikanShitenCode.EMPTY : 口座情報.get支店コード());
-            口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
             div.getTxtKinyuKikanShitenCode().setDisplayNone(false);
             div.getTxtYokinShubetsu().setDisplayNone(false);
             div.getTxtTenban().setDisplayNone(true);
+            div.getTxtKinyuKikanName().setValue(口座情報.getCombined金融機関名and支店名(全角空白));
         }
         div.getTxtYokinShubetsu().setValue(口座情報.get預金種別名称() == null ? RString.EMPTY : 口座情報.get預金種別名称());
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
@@ -696,7 +692,7 @@ public class ShiharaiHohoJyohoHandler {
             builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString());
         }
         if (kinyuKikanShiten != null) {
-            builder.append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+            builder.append(全角空白).append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
         }
         if (builder != null) {
             div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
@@ -793,6 +789,14 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtStartYobi().setReadOnly(true);
         div.getTxtStartHHMM().setReadOnly(true);
         div.getTxtEndHHMM().setReadOnly(true);
+
+        div.getTxtShiharaiBasho().clearValue();
+        div.getTxtStartYMD().clearValue();
+        div.getTxtStartYobi().clearValue();
+        div.getTxtStartHHMM().clearValue();
+        div.getTxtEndYMD().clearValue();
+        div.getTxtEndYobi().clearValue();
+        div.getTxtEndHHMM().clearValue();
     }
 
     /**
@@ -811,6 +815,16 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana().setReadOnly(true);
         div.getTtxtMeigininKanji().setReadOnly(true);
         div.getTxtTenban().setReadOnly(true);
+
+        div.getDdlKozaID().setSelectedKey(RString.EMPTY);
+        div.getTxtKinyuKikanCode().clearDomain();
+        div.getTxtKinyuKikanShitenCode().clearDomain();
+        div.getTxtTenban().clearValue();
+        div.getTxtYokinShubetsu().clearValue();
+        div.getTxtKozaNo().clearValue();
+        div.getTxtKinyuKikanName().clearValue();
+        div.getTxtMeigininKana().clearDomain();
+        div.getTtxtMeigininKanji().clearDomain();
     }
 
     /**
@@ -951,6 +965,18 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
         div.getTxtTenban1().setReadOnly(true);
+
+        div.getTxtKeiyakuNo().clearValue();
+        div.getTxtKeiyakuCode().clearValue();
+        div.getTxtKeiyakuName().clearDomain();
+        div.getTxtKinyuKikanCode1().clearDomain();
+        div.getTxtKinyuKikanShitenCode1().clearDomain();
+        div.getTxtTenban1().clearValue();
+        div.getTxtYokinShubetsu1().clearValue();
+        div.getTxtKozaNo1().clearValue();
+        div.getTxtKinyuKikanName1().clearValue();
+        div.getTxtMeigininKana1().clearDomain();
+        div.getTxtMeigininKanji1().clearDomain();
     }
 
     /**

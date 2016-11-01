@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,7 +34,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends 
     private static final String KEY_DANTAICD = "dantaiCd";
 
     @BatchParameter(key = KEY_SHORITIME, name = "処理日時")
-    private RString shoriTime;
+    private RDateTime shoriTime;
     @BatchParameter(key = KEY_UKETORIYM, name = "受取年月")
     private FlexibleYearMonth uketoriym;
     @BatchParameter(key = KEY_HIHOKENSHANO, name = "被保険者番号")

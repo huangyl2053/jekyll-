@@ -146,4 +146,32 @@ public class DbT3114RiyoshaFutanWariaiMeisaiDac implements ISaveable<DbT3114Riyo
                 order(by(rirekiNo, Order.DESC)).
                 toList(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
     }
+
+    /**
+     * 利用者負担割合明細を取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @param 被保険者番号 HihokenshaNo
+     * @param 履歴番号 int
+     * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
+     */
+    @Transaction
+    public List<DbT3114RiyoshaFutanWariaiMeisaiEntity> selectBySomeKey(
+            FlexibleYear 年度,
+            HihokenshaNo 被保険者番号,
+            int 履歴番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        return accessor.select().
+                table(DbT3114RiyoshaFutanWariaiMeisai.class).
+                where(and(
+                                eq(nendo, 年度),
+                                eq(rirekiNo, 履歴番号),
+                                eq(logicalDeletedFlag, false),
+                                eq(hihokenshaNo, 被保険者番号))).
+                order(by(rirekiNo, Order.DESC)).
+                toList(DbT3114RiyoshaFutanWariaiMeisaiEntity.class);
+    }
 }

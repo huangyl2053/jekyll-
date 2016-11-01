@@ -28,7 +28,7 @@ public class InsKyufuJissekiKihonKogakuTmpProcess4 extends BatchProcessBase<DbT3
     private static final RString TABLE_給付実績基本情報高額一時4 = new RString("TempKyufujissekiKihon4");
 
     private InsKyufuJissekiKihonKogakuTmpProcess4Param processParameter;
-    private RString breakKey;
+    private DbT3017KyufujissekiKihonEntity beforeEntity;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 給付実績基本情報高額一時;
 
@@ -47,14 +47,26 @@ public class InsKyufuJissekiKihonKogakuTmpProcess4 extends BatchProcessBase<DbT3
 
     @Override
     protected void process(DbT3017KyufujissekiKihonEntity entity) {
-        if (breakKey != null && breakKey.equals(getBreakKey(entity))) {
+        if (beforeEntity == null) {
+            beforeEntity = entity;
+        }
+        if (getBreakKey(beforeEntity).equals(getBreakKey(entity))) {
+            beforeEntity = entity;
             return;
         }
-        breakKey = getBreakKey(entity);
-        if (processParameter.get処理年月().isBeforeOrEquals(entity.getShinsaYM())) {
+        if (processParameter.get処理年月().isBeforeOrEquals(beforeEntity.getShinsaYM())) {
+            beforeEntity = entity;
             return;
         }
-        給付実績基本情報高額一時.insert(entity);
+        給付実績基本情報高額一時.insert(beforeEntity);
+        beforeEntity = entity;
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (beforeEntity.getShinsaYM().isBefore(processParameter.get処理年月())) {
+            給付実績基本情報高額一時.insert(beforeEntity);
+        }
     }
 
     private RString getBreakKey(DbT3017KyufujissekiKihonEntity entity) {
@@ -64,5 +76,4 @@ public class InsKyufuJissekiKihonKogakuTmpProcess4 extends BatchProcessBase<DbT3
                 .concat(entity.getKyufuJissekiKubunCode())
                 .concat(entity.getJigyoshoNo().getColumnValue());
     }
-
 }

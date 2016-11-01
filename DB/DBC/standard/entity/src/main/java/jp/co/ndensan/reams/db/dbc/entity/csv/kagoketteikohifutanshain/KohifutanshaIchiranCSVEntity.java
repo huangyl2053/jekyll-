@@ -20,7 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KohifutanshaIchiranCSVEntity {
 
-    @CsvField(order = 10, name = "処理年月")
+    @CsvField(order = 10, name = "取込年月")
     private RString 処理年月;
     @CsvField(order = 20, name = "作成日時")
     private RString 作成日時;
@@ -36,7 +36,7 @@ public class KohifutanshaIchiranCSVEntity {
     private RString 事業者名;
     @CsvField(order = 80, name = "公費受給者番号")
     private RString 公費受給者番号;
-    @CsvField(order = 90, name = "公費受給者名")
+    @CsvField(order = 90, name = "公費受給者氏名")
     private RString 公費受給者名;
     @CsvField(order = 100, name = "証記載保険者番号")
     private RString 証記載保険者番号;

@@ -117,7 +117,7 @@ public class CalcKogakuShikyugakuProcess extends BatchProcessBase<CalcKogakuShik
         wKm_blnIchiranKBN1 = false;
         wKm_blnIchiranKBN2 = false;
         wKm_strIchiranhyoKBN = RString.EMPTY;
-        for (int i = 0; 1 < INDEX_16; i++) {
+        for (int i = 0; i < INDEX_16; i++) {
             wK_KogakuShikyugaku.set(i, Decimal.ZERO);
         }
     }

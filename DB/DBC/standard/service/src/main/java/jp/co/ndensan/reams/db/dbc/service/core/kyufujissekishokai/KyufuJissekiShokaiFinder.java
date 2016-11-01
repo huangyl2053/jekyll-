@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuJissekiShakaiFukushiH
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiFukushiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiJutakuKaishuhi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihonIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKyotakuService;
@@ -93,6 +94,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -363,12 +365,22 @@ public class KyufuJissekiShokaiFinder {
                 給付実績基本データリスト.add(new KyufujissekiKihon(entity.get給付実績基本データ()));
             }
         }
+        List<KyufujissekiKihon> 給付実績基本リスト = new ArrayList<>();
+        List<RString> 給付実績基本キーリスト = new ArrayList<>();
+        RString 給付実績基本キー;
+        for (KyufujissekiKihon 基本データ : 給付実績基本データリスト) {
+            給付実績基本キー = get給付実績基本キー(基本データ);
+            if (!給付実績基本キーリスト.contains(給付実績基本キー)) {
+                給付実績基本キーリスト.add(給付実績基本キー);
+                給付実績基本リスト.add(基本データ);
+            }
+        }
         for (DbT3028KyufujissekiKogakuKaigoServicehiEntity entity : kihonKogakuKaigoServicehiList) {
             if (check表示対象データ(entity.getShokisaiHokenshaNo())) {
                 給付実績基本高額介護サービス費表示対象データ.add(new KyufujissekiKogakuKaigoServicehi(entity));
             }
         }
-        for (KyufujissekiKihon 基本データ : 給付実績基本データリスト) {
+        for (KyufujissekiKihon 基本データ : 給付実績基本リスト) {
             FlexibleYearMonth サービス提供年月 = 基本データ.getサービス提供年月();
             給付実績集計データリスト.addAll(get給付実績集計データ(基本データ.get入力識別番号(), 被保険者番号, サービス提供年月,
                     サービス提供年月, 基本データ.get事業者番号(), 基本データ.get整理番号()));
@@ -419,7 +431,7 @@ public class KyufuJissekiShokaiFinder {
         検索データ.set給付実績高額介護サービス費データ(get高額介護サービス費表示対象データ(給付実績基本高額介護サービス費表示対象データ));
         給付実績情報照会用データ.setSearchData(検索データ);
         給付実績情報照会用データ.setCsData_Z(給付実績集計データリスト);
-        給付実績情報照会用データ.setCsData_A(給付実績基本データリスト);
+        給付実績情報照会用データ.setCsData_A(給付実績基本リスト);
         給付実績情報照会用データ.setCsData_B(給付実績明細データリスト);
         給付実績情報照会用データ.setCsData_C(給付実績緊急時施設療養データリスト);
         給付実績情報照会用データ.setCsData_D(給付実績特定診療費データリスト);
@@ -435,6 +447,22 @@ public class KyufuJissekiShokaiFinder {
         給付実績情報照会用データ.setCsData_N(給付実績明細住所地特例データリスト);
         給付実績情報照会用データ.setCsData_P(給付実績所定疾患施設療養費等データリスト);
         return 給付実績情報照会用データ;
+    }
+
+    private RString get給付実績基本キー(KyufujissekiKihon 基本データ) {
+        KyufujissekiKihonIdentifier 給付実績基本キー = 基本データ.createBuilderForEdit().build().identifier();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(給付実績基本キー.get交換情報識別番号().value())
+                .append(給付実績基本キー.get入力識別番号().value())
+                .append(給付実績基本キー.getレコード種別コード())
+                .append(給付実績基本キー.get給付実績情報作成区分コード())
+                .append(給付実績基本キー.get証記載保険者番号().value())
+                .append(給付実績基本キー.get被保険者番号().value())
+                .append(給付実績基本キー.getサービス提供年月().toDateString())
+                .append(給付実績基本キー.get給付実績区分コード())
+                .append(給付実績基本キー.get事業所番号().value())
+                .append(給付実績基本キー.get通し番号());
+        return builder.toRString();
     }
 
     /**

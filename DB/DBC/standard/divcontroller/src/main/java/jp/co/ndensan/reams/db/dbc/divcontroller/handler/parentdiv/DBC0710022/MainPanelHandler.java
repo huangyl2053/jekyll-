@@ -43,6 +43,7 @@ public final class MainPanelHandler {
     private final MainPanelDiv div;
     private static final RString 受託なし = new RString("1");
     private static final RString 受託あり = new RString("2");
+    private static final RString コロン = new RString(":");
 
     private MainPanelHandler(MainPanelDiv div) {
         this.div = div;
@@ -71,7 +72,8 @@ public final class MainPanelHandler {
         List<KeyValueDataSource> sources = new ArrayList<>();
         if (様式名称情報 != null && !様式名称情報.isEmpty()) {
             for (ShikibetsuNoKanri db : 様式名称情報) {
-                sources.add(new KeyValueDataSource(db.get識別番号(), db.get名称()));
+                sources.add(new KeyValueDataSource(db.get識別番号(), db.get識別番号().concat(コロン).concat(
+                        db.get名称() == null ? RString.EMPTY : db.get名称())));
             }
         }
         div.getDdlSyomeisyo().setDataSource(sources);
@@ -209,8 +211,9 @@ public final class MainPanelHandler {
 
         ShokanShukei dbt3053 = new ShokanShukei(被保険者番号, サービス年月, 整理番号,
                 new JigyoshaNo(整理番号), 整理番号, 整理番号, 証明書);
+        int 支払金額合計 = dbt3034.get支払金額合計() == null ? 0 : dbt3034.get支払金額合計().intValue();
         dbt3053 = dbt3053.createBuilderForEdit().set審査方法区分コード(dbt3034.get審査方法区分()).
-                set審査年月(決定日.getYearMonth()).set支給区分コード(支給区分).
+                set審査年月(決定日.getYearMonth()).set支給区分コード(支給区分).set点数_金額(支払金額合計).
                 set支払金額(支払金額.intValue()).
                 set増減点(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
                         getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue()).

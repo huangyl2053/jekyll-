@@ -553,43 +553,66 @@ public class TokuteiShinryohiInfoPanelHandler {
      * @param 整理番号 整理番号
      * @param 被保険者番号 被保険者番号
      * @param 識別番号 識別番号
+     * @param サービス提供年月 サービス提供年月
      */
     public void change年月(RString data, KyufuJissekiPrmBusiness 給付実績情報照会情報,
             List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
             List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等,
-            RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
-        int index = INT_ZERO;
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(to日期変換(div.getCcdKyufuJissekiHeader().getサービス提供年月()));
-        List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
+            RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号,
+            FlexibleYearMonth サービス提供年月) {
+        List<FlexibleYearMonth> サービス提供年月リスト;
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
             サービス提供年月リスト = this.get特別療養費サービス提供年月リスト(給付実績特定診療費_特別療養費等);
         } else {
-            this.get特定診療費サービス提供年月リスト(給付実績特定診療費等);
+            サービス提供年月リスト = this.get特定診療費サービス提供年月リスト(給付実績特定診療費等);
         }
-        if (サービス提供年月リスト.isEmpty()) {
-            return;
+        FlexibleYearMonth 今提供年月;
+        if (前月.equals(data)) {
+            今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
+        } else {
+            今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
         }
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
-                index = i;
-                break;
+        if (!今提供年月.isEmpty()) {
+            div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
+            if (提供年月.isBeforeOrEquals(今提供年月)) {
+                filt特別療養費リスト(給付実績特定診療費_特別療養費等);
+                this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, 今提供年月);
+            } else {
+                filt特定診療費リスト(給付実績特定診療費等);
+                set特定診療費前月と次月(給付実績特定診療費等, 今提供年月);
             }
         }
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
-            今提供年月 = サービス提供年月リスト.get(index + 1);
-        } else if (INT_ZERO < index && !前月.equals(data)) {
-            今提供年月 = サービス提供年月リスト.get(index - 1);
-        }
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-        if (提供年月.isBeforeOrEquals(今提供年月)) {
-            filt特別療養費リスト(給付実績特定診療費_特別療養費等);
-            this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, 今提供年月);
+
+    }
+
+    /**
+     * 今提供年月を取得。
+     *
+     * @param data RString
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 給付実績特定診療費_特別療養費等 給付実績特定診療費_特別療養費等
+     * @param 給付実績特定診療費等 給付実績特定診療費等
+     * @return 今提供年月
+     */
+    public FlexibleYearMonth get今提供年月(RString data,
+            FlexibleYearMonth サービス提供年月,
+            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
+            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等) {
+        List<FlexibleYearMonth> サービス提供年月リスト;
+        if (提供年月.isBeforeOrEquals(サービス提供年月)) {
+            サービス提供年月リスト = get特別療養費サービス提供年月リスト(給付実績特定診療費_特別療養費等);
         } else {
-            filt特定診療費リスト(給付実績特定診療費等);
-            set特定診療費前月と次月(給付実績特定診療費等, 今提供年月);
+            サービス提供年月リスト = get特定診療費サービス提供年月リスト(給付実績特定診療費等);
         }
+        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            if (前月.equals(data)) {
+                今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
+            } else {
+                今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
+            }
+        }
+        return 今提供年月;
     }
 
     private void set特別療養費前月と次月(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 特別療養費リスト, FlexibleYearMonth サービス提供年月) {
@@ -688,4 +711,32 @@ public class TokuteiShinryohiInfoPanelHandler {
 
     }
 
+    private static class DateComparatorServiceYM implements Comparator<FlexibleYearMonth>, Serializable {
+
+        @Override
+        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
+            return o1.compareTo(o2);
+        }
+    }
+
+    private FlexibleYearMonth get前月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト,
+            FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
+            if (サービス年月.isBefore(サービス提供年月)) {
+                return サービス年月;
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
+
+    private FlexibleYearMonth get次月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
+        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
+            if (サービス提供年月.isBefore(サービス年月)) {
+                return サービス年月;
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
 }

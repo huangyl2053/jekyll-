@@ -42,6 +42,8 @@ public class NijiyoboJohoTaishoshaTorokuPanelDiv extends Panel {
     private RString 被保険者番号;
     @JsonProperty("識別コード")
     private RString 識別コード;
+    @JsonProperty("排他失敗flag")
+    private RString 排他失敗flag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -164,6 +166,24 @@ public class NijiyoboJohoTaishoshaTorokuPanelDiv extends Panel {
     @JsonProperty("識別コード")
     public void set識別コード(RString 識別コード) {
         this.識別コード = 識別コード;
+    }
+
+    /*
+     * get排他失敗flag
+     * @return 排他失敗flag
+     */
+    @JsonProperty("排他失敗flag")
+    public RString get排他失敗flag() {
+        return 排他失敗flag;
+    }
+
+    /*
+     * set排他失敗flag
+     * @param 排他失敗flag 排他失敗flag
+     */
+    @JsonProperty("排他失敗flag")
+    public void set排他失敗flag(RString 排他失敗flag) {
+        this.排他失敗flag = 排他失敗flag;
     }
 
     /*
