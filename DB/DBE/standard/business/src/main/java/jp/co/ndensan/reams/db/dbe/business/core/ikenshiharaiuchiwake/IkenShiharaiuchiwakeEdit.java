@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiha
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshiharaiuchiwake.IkenShiharaiuchiwakeEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -56,9 +57,9 @@ public class IkenShiharaiuchiwakeEdit {
         if (口座情報 != null) {
             seikyuEntity.set口座種別(口座情報.get預金種別().get預金種別名称());
             seikyuEntity.set口座番号(口座情報.get口座番号());
-            seikyuEntity.set金融機関(口座情報.getCombined金融機関名and支店名());
+            seikyuEntity.set金融機関(口座情報.get金融機関().get金融機関名称());
             seikyuEntity.set口座名義人(口座情報.get口座名義人().value());
-            seikyuEntity.set支店(口座情報.get支店().get支店名称());
+            seikyuEntity.set支店(get支店(口座情報.get支店()));
         }
         seikyuEntity.set郵便番号(entity.getYubinNo().value());
         seikyuEntity.set住所(entity.getJusho());
@@ -75,5 +76,12 @@ public class IkenShiharaiuchiwakeEdit {
         seikyuEntity.set住所(entity.getJusho());
         seikyuEntity.set金額(new RString(entity.getIkenshoSakuseiryo()));
         return seikyuEntity;
+    }
+
+    private RString get支店(KinyuKikanShiten date) {
+        if (date != null) {
+            return date.get支店名称();
+        }
+        return RString.EMPTY;
     }
 }
