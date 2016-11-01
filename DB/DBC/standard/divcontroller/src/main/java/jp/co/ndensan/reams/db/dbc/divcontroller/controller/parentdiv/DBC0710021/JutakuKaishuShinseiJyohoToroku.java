@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710021;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
@@ -106,7 +107,14 @@ public class JutakuKaishuShinseiJyohoToroku {
         param.set償還払申請一覧_被保険者番号(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         param.set償還払申請一覧_整理番号(ViewStateHolder.get(ViewStateKeys.整理番号, RString.class));
-        handler.onLoad(識別コード, 被保険者番号, サービス提供年月, 整理番号, 画面モード, param);
+        Map<RString, FlexibleYearMonth> 事前Map
+                = handler.onLoad(識別コード, 被保険者番号, サービス提供年月, 整理番号, 画面モード, param);
+        if (事前Map != null) {
+            RString 事前申請整理番号 = 事前Map.keySet().iterator().next();
+            FlexibleYearMonth 事前サービス提供年月 = 事前Map.get(事前申請整理番号);
+            ViewStateHolder.put(ViewStateKeys.事前申請整理番号, 事前申請整理番号);
+            ViewStateHolder.put(ViewStateKeys.事前サービス提供年月, 事前サービス提供年月);
+        }
         ViewStateHolder.put(ViewStateKeys.申請情報, param);
         if (div.getTxtTeikyoYM().getValue() != null) {
             ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月,
@@ -243,12 +251,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuGaisuViewStateHolderParameter param) {
 
         if (画面モード_削除.equals(画面モード)) {
-            if (isCheckTow(削除の確認, 確認_汎用)) {
+            if (isCheckTow(削除の確認, 確認_汎用) && !保存終了) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                         UrQuestionMessages.削除の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-        } else if (isCheckTow(保存の確認, 確認_汎用)) {
+        } else if (isCheckTow(保存の確認, 確認_汎用) && !保存終了) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
