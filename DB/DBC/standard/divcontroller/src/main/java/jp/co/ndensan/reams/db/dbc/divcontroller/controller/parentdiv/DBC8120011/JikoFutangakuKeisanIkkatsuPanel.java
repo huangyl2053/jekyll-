@@ -123,7 +123,7 @@ public class JikoFutangakuKeisanIkkatsuPanel {
             出力フラグ = false;
             parameter.setShutsuryokujunId(null);
         }
-        parameter.setShoriTime(RDate.getNowDate().toDateString());
+        parameter.setShoriTime(RDate.getNowDateTime());
         parameter.setRadSakuseiJoken(出力対象区分);
         parameter.setShuturyokuFlg(出力フラグ);
         Association 市町村コード_Temp = AssociationFinderFactory.createInstance().getAssociation();

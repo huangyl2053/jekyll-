@@ -415,7 +415,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請, RString 画面モード,
             JutakuGaisuViewStateHolderParameter param, ShichosonSecurityJoho 導入形態) {
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.getコード(),
+                SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
                 new FlexibleYear(サービス提供年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         ShokanJutakuKaishuJizenShinsei 申請情報 = 住宅改修費事前申請.getJutakuKaishuJizenShinseiJyoho(被保険者番号,
                 サービス提供年月, 整理番号);
@@ -459,7 +459,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 FlexibleDate.getNowDate().getYearMonth().minusMonth(Integer.parseInt(month.toString())).toString());
         div.getTxtTeikyoYM().setValue(提供着工年月);
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.getコード(),
+                SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
                 new FlexibleYear(提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
         model.set被保険者番号(被保険者番号);
@@ -706,6 +706,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (償還事前申請情報.get事業者番号() != null) {
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo().setValue(
                     償還事前申請情報.get事業者番号().value());
+            set事業者名();
         }
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaNameKana().setValue(
                 償還事前申請情報.get申請者氏名カナ());
@@ -845,6 +846,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (償還払支給申請情報.get申請事業者コード() != null) {
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo().setValue(
                     償還払支給申請情報.get申請事業者コード().value());
+            set事業者名();
         }
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaNameKana().setValue(
                 償還払支給申請情報.get申請者氏名カナ());
@@ -1037,7 +1039,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (様式名称 != null && !様式名称.isEmpty()) {
             for (ShikibetsuNoKanri 識別番号 : 様式名称) {
                 RString 識別番号名 = 識別番号.get識別番号();
-                証明書ddl.add(new KeyValueDataSource(識別番号名, 識別番号名.concat(コロン).concat(識別番号名)));
+                証明書ddl.add(new KeyValueDataSource(識別番号名, 識別番号名.concat(コロン).concat(
+                        識別番号.get名称() == null ? RString.EMPTY : 識別番号.get名称())));
             }
         }
         div.getDdlSyomeisyo().setDataSource(証明書ddl);
@@ -2010,6 +2013,17 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         } else {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
                     .getTxtCreationJigyoshaName().setDomain(AtenaMeisho.EMPTY);
+        }
+    }
+
+    private void set事業者名() {
+        RString 事業者番号 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo().getValue();
+        if (!RString.isNullOrEmpty(事業者番号)) {
+            JigyoshaNo 事業者 = new JigyoshaNo(事業者番号);
+            AtenaMeisho 事業者名称 = JutakuKaishuJizenShinsei.createInstance().getJigyoshaName(事業者);
+            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaName().setDomain(事業者名称);
+        } else {
+            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaName().setDomain(AtenaMeisho.EMPTY);
         }
     }
 

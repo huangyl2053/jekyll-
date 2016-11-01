@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110040;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenSofuKokanJohoShikibetsuBango;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.RecordShubetsu;
@@ -26,23 +24,15 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
@@ -60,7 +50,7 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
     private static final RString コンマ = new RString(",");
     private static final RString ファイル名_前 = new RString("10_341");
     private static final RString ファイル名_後 = new RString(".csv");
-    private static final RString 国保連送付外字_変換区分_1 = new RString("1");
+    private static final RString COPY = new RString("copy");
     private static final int INT_0 = 0;
     private static final int INT_80 = 80;
     private static final RString RSTRING_000 = new RString("000");
@@ -74,23 +64,28 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
      */
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
     /**
-     * エントリ情報Listです。
+     * inputPathです。
      */
-    public static final RString PARAMETER_OUT_OUTPUTENTRY;
+    public static final RString INPUT_PATH;
+    /**
+     * outputPathです。
+     */
+    public static final RString OUTPUT_PATH;
 
     static {
         PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
-        PARAMETER_OUT_OUTPUTENTRY = new RString("outputEntry");
+        INPUT_PATH = new RString("inputPath");
+        OUTPUT_PATH = new RString("outputPath");
     }
 
     private OutputParameter<Integer> outputCount;
-    private OutputParameter<List> outputEntry;
-    private List<SharedFileDescriptor> entryList;
+    private OutputParameter<RString> inputPath;
+    private OutputParameter<RString> outputPath;
     private int 総出力件数;
     private int レコード番号;
-    private Encode 文字コード;
     private RString eucFilePath;
     private RString 出力ファイル名;
+    private RString 入力ファイルパス;
     @BatchWriter
     private CsvWriter eucCsvWriter;
 
@@ -99,17 +94,11 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
         mybatisParameter = new KogakuServicehiHanteiMybatisParameter();
         mybatisParameter.set保険者番号(parameter.get保険者番号());
         outputCount = new OutputParameter<>();
-        outputEntry = new OutputParameter<>();
-        entryList = new ArrayList<>();
+        inputPath = new OutputParameter<>();
+        outputPath = new OutputParameter<>();
+        入力ファイルパス = RString.EMPTY;
         総出力件数 = INT_0;
         レコード番号 = INT_0;
-        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
-            // TODO QA90831 文字コードがありません。
-            文字コード = Encode.UTF_8withBOM;
-        } else {
-            文字コード = Encode.SJIS;
-        }
     }
 
     @Override
@@ -123,10 +112,15 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
         出力ファイル名 = ファイル名_前
                 .concat(parameter.get保険者番号()).concat(parameter.get処理年月().toDateString()).concat(ファイル名_後);
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+        if (Encode.UTF_8.equals(parameter.get文字コード())) {
+            入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(出力ファイル名));
+        } else {
+            入力ファイルパス = eucFilePath;
+        }
+        eucCsvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス)
                 .setDelimiter(コンマ)
                 .setEnclosure(RString.EMPTY)
-                .setEncode(文字コード)
+                .setEncode(parameter.get文字コード())
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false)
                 .build();
@@ -150,13 +144,9 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
         レコード番号 = レコード番号 + 1;
         KogakuServicehiHanteiSofuFairuEndEntity endEntity = getEndEntity();
         eucCsvWriter.writeLine(endEntity);
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
-        sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
         outputCount.setValue(総出力件数);
-        entryList.add(sfd);
-        outputEntry.setValue(entryList);
+        outputPath.setValue(eucFilePath);
+        inputPath.setValue(入力ファイルパス);
         eucCsvWriter.close();
     }
 
@@ -173,7 +163,7 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
         controlEntity.set都道府県番号(RSTRING_00);
         controlEntity.set媒体区分(DbBusinessConfig
                 .get(ConfigNameDBC.国保連送付媒体_高額判定Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
-        controlEntity.set処理対象年月(parameter.get処理年月().seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+        controlEntity.set処理対象年月(parameter.get処理年月().toDateString());
         controlEntity.setファイル管理番号(RSTRING_000001);
         return controlEntity;
     }

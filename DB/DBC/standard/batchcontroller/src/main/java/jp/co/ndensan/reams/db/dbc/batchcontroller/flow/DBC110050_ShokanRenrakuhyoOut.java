@@ -152,7 +152,6 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
                     ShokanRenrakuhyoOutGetHokenshaNoProcess.PARAMETER_OUT_OUTHOKENSHANO);
             for (HokenshaNoShutokuEntity entity : 保険者番号list) {
                 processParameter.set保険者番号(entity.getHokenshaNo());
-                processParameter.set件数(entity.getCount());
                 executeStep(償還払請求基本の取得);
                 executeStep(償還払請求明細の取得);
                 executeStep(住所地特例の取得);

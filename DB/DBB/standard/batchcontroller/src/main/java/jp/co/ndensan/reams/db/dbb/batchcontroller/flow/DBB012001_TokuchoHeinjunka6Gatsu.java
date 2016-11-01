@@ -192,7 +192,6 @@ public class DBB012001_TokuchoHeinjunka6Gatsu extends BatchFlowBase<DBB012001_To
             出力帳票一覧.set出力順ID(parameter.get出力帳票entity().get(0).get出力順ID());
             param.set出力帳票一覧(出力帳票一覧);
         }
-        param.set出力対象(parameter.get出力対象());
         param.set調定日時(システム日時);
         param.set調定前年度(parameter.get調定年度().minusYear(YEAR_ONE));
         if (対象者ページ数 != null && 対象外ページ数 != null) {

@@ -117,7 +117,6 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         association = AssociationFinderFactory.createInstance().getAssociation();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
                 parameter.get帳票ID(), parameter.get改頁出力順ID());
-
         出力順 = get出力順(outputOrder);
     }
 
@@ -168,7 +167,6 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
                     new HokenshaNo(association.get地方公共団体コード().value()), association.get市町村名(),
                     outputOrder, reportData, new ShiharaiHohoHenkoEntity());
-
             finder.writeBy(reportSourceWriter);
         }
 
@@ -511,7 +509,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             }
         }
         if (!設定項目.isEmpty()) {
-            設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
+            list.add(バッチ出力条件出力順.concat(設定項目));
         }
         list.add(バッチ出力条件出力順.concat(設定項目));
         return list;

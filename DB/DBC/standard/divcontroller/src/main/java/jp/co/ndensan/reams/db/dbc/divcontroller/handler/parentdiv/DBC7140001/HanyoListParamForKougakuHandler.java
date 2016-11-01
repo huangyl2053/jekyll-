@@ -176,8 +176,9 @@ public class HanyoListParamForKougakuHandler {
     }
 
     private void restoreClear() {
-        div.getChushutsuJokenPanel().getDdlSinseiJokyoKubun().setSelectedKey(すべて);
-        div.getChushutsuJokenPanel().getDdlTaishoNendo().setSelectedKey(BLANK);
+
+        div.getDdlSinseiJokyoKubun().setSelectedValue(すべて);
+        div.getDdlTaishoNendo().setSelectedKey(BLANK);
         div.getChushutsuJokenPanel().getRadChushutsuKubun().clearSelectedItem();
         div.getChushutsuJokenPanel().getTxtSinseibi().clearFromValue();
         div.getChushutsuJokenPanel().getTxtSinseibi().clearToValue();

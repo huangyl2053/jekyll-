@@ -106,10 +106,22 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
         int 様式連番 = list.get(0).get様式連番();
 
+        if (毎ページ振込金額合算 == null) {
+            毎ページ振込金額合算 = Decimal.ZERO;
+        }
+        if (振込金額合算 == null) {
+            振込金額合算 = Decimal.ZERO;
+        }
         if (様式連番_1 == 様式連番) {
             総レコード数++;
-            毎ページ振込金額合算 = 毎ページ振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
-            振込金額合算 = 振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
+            if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
+                毎ページ振込金額合算 = 毎ページ振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
+            }
+
+            if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
+                振込金額合算 = 振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
+            }
+
         }
         if (ページ件数 == 毎ページ数) {
             毎ページ振込金額合算 = Decimal.ZERO;

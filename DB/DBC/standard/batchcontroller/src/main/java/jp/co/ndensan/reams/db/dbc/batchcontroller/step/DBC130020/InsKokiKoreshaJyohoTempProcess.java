@@ -120,10 +120,10 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
                 get後期高齢者情報インポート用Entitｙ(entity);
             }
             if (entity.get取込後期高齢者情報Entity() != null
-                    && entity.get現在後期高齢者情報() != null) {
+                    && entity.get現在後期高齢者情報() == null) {
                 取込後期高齢者情報より_項目設定(entity);
             }
-            if (entity.get取込後期高齢者情報Entity() != null
+            if (entity.get取込後期高齢者情報Entity() == null
                     && entity.get現在後期高齢者情報() != null) {
                 現在後期高齢者情報より_項目設定(entity);
             }
