@@ -288,27 +288,27 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         set一般状況集計年月選択ラジオ非活性();
         set保険給付決定集計年月選択ラジオ非活性();
     }
-    
+
     private FlexibleDate getSyukeiFromData(JigyoJokyoHokokuNempoSakueiDiv div) {
         RStringBuilder builder = new RStringBuilder();
         RString year = new RString(div.getDdlHokokuNendo().getSelectedKey().toString());
         RString month = new RString(div.getDdlShukeiFromYM().getSelectedKey().toString());
         if (Integer.parseInt(month.toString()) < INT_YOU) {
-            year = new RString(String.valueOf(Integer.parseInt(year.toString()) + 1)); 
+            year = new RString(String.valueOf(Integer.parseInt(year.toString()) + 1));
         }
         return new FlexibleDate(builder.append(year)
-                    .append(div.getDdlShukeiFromYM().getSelectedKey()).toRString());
+                .append(div.getDdlShukeiFromYM().getSelectedKey()).toRString());
     }
-    
+
     private FlexibleDate getSyukeiToData(JigyoJokyoHokokuNempoSakueiDiv div) {
         RStringBuilder builder = new RStringBuilder();
         RString year = new RString(div.getDdlHokokuNendo().getSelectedKey().toString());
         RString month = new RString(div.getDdlShukeiToYM().getSelectedKey().toString());
         if (Integer.parseInt(month.toString()) < INT_YOU) {
-            year = new RString(String.valueOf(Integer.parseInt(year.toString()) + 1)); 
+            year = new RString(String.valueOf(Integer.parseInt(year.toString()) + 1));
         }
         return new FlexibleDate(builder.append(year)
-                    .append(div.getDdlShukeiToYM().getSelectedKey()).toRString());
+                .append(div.getDdlShukeiToYM().getSelectedKey()).toRString());
     }
 
     /**
@@ -1335,11 +1335,22 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             出力区分リスト.add(選択無し);
         }
         parameter.set集計年度(集計年度);
-        parameter.set集計開始年月(集計開始年月);
-        parameter.set集計終了年月(集計終了年月);
+        parameter.set集計開始年月(get集計年月日(集計開始年月));
+        parameter.set集計終了年月(get集計年月日(集計終了年月));
         parameter.set作成日時(作成日時);
         parameter.set出力区分リスト(出力区分リスト);
         return parameter;
+    }
+
+    private List<RString> get集計年月日(List<RString> 集計年月) {
+        List<RString> 集計年月日 = new ArrayList<>();
+        for (RString 年月 : 集計年月) {
+            if (!RString.isNullOrEmpty(年月)) {
+                年月.concat(new RString("01"));
+            }
+            集計年月日.add(年月);
+        }
+        return 集計年月日;
     }
 
     private RString get集計年度(FlexibleDate 日期) {
