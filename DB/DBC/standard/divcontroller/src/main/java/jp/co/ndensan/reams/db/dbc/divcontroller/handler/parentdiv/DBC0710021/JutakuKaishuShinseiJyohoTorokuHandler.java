@@ -1960,7 +1960,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
         ShiharaiKekkaResult 住宅改修費支払結果 = 住宅改修費事前申請.getJutakuKaishuHi(
                 被保険者番号, 画面提供着工年月, 住宅住所);
-        前回まで支払結果の初期化(住宅改修費支払結果, true, 被保険者番号);
+        前回まで支払結果の初期化(住宅改修費支払結果, false, 被保険者番号);
         ShiharaiKekkaResult 前回までの支払結果 = param.get過去住宅改修費支払結果();
         RString 前回まで住宅住所 = RString.EMPTY;
         if (前回までの支払結果 != null) {
