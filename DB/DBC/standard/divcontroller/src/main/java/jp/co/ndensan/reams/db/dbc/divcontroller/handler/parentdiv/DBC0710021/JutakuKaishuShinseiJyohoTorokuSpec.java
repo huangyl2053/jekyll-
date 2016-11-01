@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.Jyutaku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -45,6 +46,38 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 @Override
                 public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
                     return SpecHelper.is領収日が入力(div);
+                }
+            },
+    /**
+     * 受給認定が無効チェック
+     */
+    受給認定が無効チェック {
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    boolean state = false;
+                    if (new RString("1").equals(div.getCommHeadPanel().getIs旧措置者フラグ())) {
+                        state = true;
+                    }
+                    if (div.getCommHeadPanel().get要介護認定情報() == null) {
+                        return false;
+                    } else {
+                        List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
+                        RString 要介護認定状態区分コード = div.getCommHeadPanel().get要介護認定情報();
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.非該当.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援_経過的要介護.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援1.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援2.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護1.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護2.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護3.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
+                        if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード)) {
+                            return false;
+                        }
+                        return YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード) && state;
+                    }
+
                 }
             },
     /**
@@ -108,6 +141,7 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 @Override
                 public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
                     return SpecHelper.is提供着工年月が申請日の年月と一致しない(div);
+
                 }
             };
 
@@ -122,7 +156,7 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
         }
 
         public static boolean is領収日が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue() != null;
+            return div.getJutakuKaishuShinseiContents().getTxtJigyoshaNo().getValue() != null || !div.getJutakuKaishuShinseiContents().getTxtJigyoshaNo().getValue().isEmpty();
         }
 
         public static boolean is申請日が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {

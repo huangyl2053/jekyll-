@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710021;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -24,7 +23,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKa
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHanntei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -34,14 +32,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -85,6 +81,8 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString 償還払決定情報を登録 = new RString("償還払決定情報を登録して");
     private static final int 前ゼロ付き10桁 = 10;
     private static final int INDEX_6 = 6;
+    private static final RString YES = new RString("1");
+    private static final RString NO = new RString("0");
 
     /**
      * 画面ロードメソッドです。
@@ -475,6 +473,8 @@ public class JutakuKaishuShinseiJyohoToroku {
      */
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_ryoshuYMDonFocus(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
@@ -484,30 +484,13 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
             YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(
                     被保険者番号, サービス提供年月);
-            if (要介護認定情報 == null) {
-                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
-                        エラー_RPLC_MSG.toString()));
+            if (要介護認定情報 != null) {
+                Code 要介護認定状態区分コード = 要介護認定情報.get要介護認定状態区分コード();
+                div.getCommHeadPanel().set要介護認定情報(要介護認定状態区分コード.getColumnValue());
+                set旧措置者フラグ(要介護認定情報, div);
             }
-            List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
-            Code 要介護認定状態区分コード = 要介護認定情報.get要介護認定状態区分コード();
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.非該当.getCode());
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援_経過的要介護.getCode());
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援1.getCode());
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援2.getCode());
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護1.getCode());
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護2.getCode());
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護3.getCode());
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
-            要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
-            if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード.getKey())) {
-                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
-                        エラー_RPLC_MSG.toString()));
-            }
-            if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード.getKey())
-                    && !要介護認定情報.is旧措置者フラグ()) {
-                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
-                        エラー_RPLC_MSG.toString()));
-            }
+            getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                    div, null, handler.住宅改修内容一覧チェック(), false).validate受給認定が無効チェック(pairs, div);
             if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
                 return ResponseData.of(div).respond();
             } else if (!ResponseHolder.isReRequest()) {
@@ -530,7 +513,6 @@ public class JutakuKaishuShinseiJyohoToroku {
             HokenKyufuRitsu 給付率 = 住宅改修費事前申請.getKyufuritsu(被保険者番号,
                     new FlexibleYearMonth(領収日.getYearMonth().toString()));
             div.getTxtKyufuritsu().setValue(給付率.value());
-            JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
             if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
@@ -539,7 +521,11 @@ public class JutakuKaishuShinseiJyohoToroku {
                         SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
                         new FlexibleYear(領収日.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
             }
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
         }
+
         return ResponseData.of(div).respond();
     }
 
@@ -826,6 +812,14 @@ public class JutakuKaishuShinseiJyohoToroku {
                     画面モード, div, 住宅改修内容チェックエラーメッセージ, is給付率);
         } else {
             return new JutakuKaishuShinseiJyohoTorokuValidationHandler(div);
+        }
+    }
+
+    private void set旧措置者フラグ(YokaigoNinteiJyoho 要介護認定情報, JutakuKaishuShinseiJyohoTorokuDiv div) {
+        if (要介護認定情報.is旧措置者フラグ()) {
+            div.getCommHeadPanel().setIs旧措置者フラグ(YES);
+        } else {
+            div.getCommHeadPanel().setIs旧措置者フラグ(NO);
         }
     }
 }

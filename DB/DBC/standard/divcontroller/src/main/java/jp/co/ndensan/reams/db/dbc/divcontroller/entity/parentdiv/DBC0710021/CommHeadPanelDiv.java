@@ -8,17 +8,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.IJyutakugaisyunaiyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * CommHeadPanel のクラスファイル
- *
- * @reamsid_L DBC-0992-120 yebangqiang
+ * CommHeadPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class CommHeadPanelDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -44,6 +46,10 @@ public class CommHeadPanelDiv extends Panel {
     private TextBoxNum txtKyufuritsu;
     @JsonProperty("tabShinseiContents")
     private tabShinseiContentsDiv tabShinseiContents;
+    @JsonProperty("Is旧措置者フラグ")
+    private RString Is旧措置者フラグ;
+    @JsonProperty("要介護認定情報")
+    private RString 要介護認定情報;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -214,6 +220,42 @@ public class CommHeadPanelDiv extends Panel {
     }
 
     /*
+     * getIs旧措置者フラグ
+     * @return Is旧措置者フラグ
+     */
+    @JsonProperty("Is旧措置者フラグ")
+    public RString getIs旧措置者フラグ() {
+        return Is旧措置者フラグ;
+    }
+
+    /*
+     * setIs旧措置者フラグ
+     * @param Is旧措置者フラグ Is旧措置者フラグ
+     */
+    @JsonProperty("Is旧措置者フラグ")
+    public void setIs旧措置者フラグ(RString Is旧措置者フラグ) {
+        this.Is旧措置者フラグ = Is旧措置者フラグ;
+    }
+
+    /*
+     * get要介護認定情報
+     * @return 要介護認定情報
+     */
+    @JsonProperty("要介護認定情報")
+    public RString get要介護認定情報() {
+        return 要介護認定情報;
+    }
+
+    /*
+     * set要介護認定情報
+     * @param 要介護認定情報 要介護認定情報
+     */
+    @JsonProperty("要介護認定情報")
+    public void set要介護認定情報(RString 要介護認定情報) {
+        this.要介護認定情報 = 要介護認定情報;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -222,7 +264,7 @@ public class CommHeadPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTabShinseiJyoho(tabShinseiJyohoDiv tabShinseiJyoho) {
+    public void  setTabShinseiJyoho(tabShinseiJyohoDiv tabShinseiJyoho) {
         this.getTabShinseiContents().setTabShinseiJyoho(tabShinseiJyoho);
     }
 
@@ -232,7 +274,7 @@ public class CommHeadPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setJutakuKaishuShinseiContents(JutakuKaishuShinseiContentsDiv JutakuKaishuShinseiContents) {
+    public void  setJutakuKaishuShinseiContents(JutakuKaishuShinseiContentsDiv JutakuKaishuShinseiContents) {
         this.getTabShinseiContents().getTabShinseiJyoho().setJutakuKaishuShinseiContents(JutakuKaishuShinseiContents);
     }
 
@@ -242,7 +284,7 @@ public class CommHeadPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTabKozaJyoho(tabKozaJyohoDiv tabKozaJyoho) {
+    public void  setTabKozaJyoho(tabKozaJyohoDiv tabKozaJyoho) {
         this.getTabShinseiContents().setTabKozaJyoho(tabKozaJyoho);
     }
 
@@ -257,7 +299,7 @@ public class CommHeadPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyohoDiv tabJutakuKaisyuJyoho) {
+    public void  setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyohoDiv tabJutakuKaisyuJyoho) {
         this.getTabShinseiContents().setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyoho);
     }
 
@@ -267,7 +309,7 @@ public class CommHeadPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setJutakuKaishuShinseiResetInfo(JutakuKaishuShinseiResetInfoDiv JutakuKaishuShinseiResetInfo) {
+    public void  setJutakuKaishuShinseiResetInfo(JutakuKaishuShinseiResetInfoDiv JutakuKaishuShinseiResetInfo) {
         this.getTabShinseiContents().getTabJutakuKaisyuJyoho().setJutakuKaishuShinseiResetInfo(JutakuKaishuShinseiResetInfo);
     }
 
