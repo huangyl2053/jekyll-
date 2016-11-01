@@ -86,6 +86,7 @@ public class HonnSanteiFuka {
     private static final RString 徴収方法修正 = new RString("T4");
     private static final RString 特別徴収対象者外 = new RString("T5");
     private static final RString 資格喪失特徴中止 = new RString("T6");
+    private static final RString 固定値_特別徴収_年金支払い日 = new RString("00000000");
     private static final int 固定値_4期 = 4;
     private static final int 固定値_本算定 = 3;
     private static final int INDEX_0 = 0;
@@ -694,15 +695,15 @@ public class HonnSanteiFuka {
         FukaJoho 賦課の情報_クローン = new FukaJoho(fukaJohoRelateEntity);
         Decimal 特徴期別金額01 = 賦課情報_更正前.get特徴期別金額01() == null
                 ? Decimal.ZERO : 賦課情報_更正前.get特徴期別金額01();
-        Decimal 特徴期別金額02 = 賦課情報_更正前.get特徴期別金額01() == null
+        Decimal 特徴期別金額02 = 賦課情報_更正前.get特徴期別金額02() == null
                 ? Decimal.ZERO : 賦課情報_更正前.get特徴期別金額02();
-        Decimal 特徴期別金額03 = 賦課情報_更正前.get特徴期別金額01() == null
+        Decimal 特徴期別金額03 = 賦課情報_更正前.get特徴期別金額03() == null
                 ? Decimal.ZERO : 賦課情報_更正前.get特徴期別金額03();
-        Decimal 特徴期別金額04 = 賦課情報_更正前.get特徴期別金額01() == null
+        Decimal 特徴期別金額04 = 賦課情報_更正前.get特徴期別金額04() == null
                 ? Decimal.ZERO : 賦課情報_更正前.get特徴期別金額04();
-        Decimal 特徴期別金額05 = 賦課情報_更正前.get特徴期別金額01() == null
+        Decimal 特徴期別金額05 = 賦課情報_更正前.get特徴期別金額05() == null
                 ? Decimal.ZERO : 賦課情報_更正前.get特徴期別金額05();
-        Decimal 特徴期別金額06 = 賦課情報_更正前.get特徴期別金額01() == null
+        Decimal 特徴期別金額06 = 賦課情報_更正前.get特徴期別金額06() == null
                 ? Decimal.ZERO : 賦課情報_更正前.get特徴期別金額06();
         Decimal 更正前特徴期別金額合計 = 特徴期別金額01.add(特徴期別金額02).add(特徴期別金額03)
                 .add(特徴期別金額04).add(特徴期別金額05).add(特徴期別金額06);
@@ -739,8 +740,8 @@ public class HonnSanteiFuka {
         kiwariKeisanInput.set現在期区分(Integer.parseInt(現在期区分.get区分().toString()));
         kiwariKeisanInput.set特徴停止可能期(固定値_4期);
         kiwariKeisanInput.set現在特徴期区分(固定値_本算定);
-        RString 現在過年期 = 更正月判定.find過年度更正月(処理日付).get期();
-        kiwariKeisanInput.set現在過年期(現在過年期);
+        int 現在過年期 = 更正月判定.find過年度更正月(処理日付).get期AsInt();
+        kiwariKeisanInput.set現在過年期(new RString(現在過年期));
         ITsukiShorkiKubun 現在過年期区分 = 更正月判定.find過年度更正月(処理日付).get月処理区分();
         kiwariKeisanInput.set現在過年期区分(現在過年期区分.get区分());
         GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
@@ -920,6 +921,9 @@ public class HonnSanteiFuka {
     private void set特徴停止とする期(KiwariKeisanInput kiwariKeisanInput, RString 資格喪失事由,
             FlexibleDate 資格喪失日, Kitsuki 特徴喪失日の特徴期, FlexibleDate 特別徴収_年金支払い日) {
         if (ChoteiJiyuCode.死亡.getコード().equals(資格喪失事由)) {
+            if (特別徴収_年金支払い日.isEmpty()) {
+                特別徴収_年金支払い日 = new FlexibleDate(固定値_特別徴収_年金支払い日);
+            }
             if (資格喪失日.isBeforeOrEquals(特別徴収_年金支払い日)) {
                 kiwariKeisanInput.set特徴開始停止期(特徴喪失日の特徴期.get期AsInt());
             } else {
@@ -980,34 +984,60 @@ public class HonnSanteiFuka {
         }
         ChoteiNendoKibetsuClass 調定年度期別 = new ChoteiNendoKibetsuClass();
         調定年度期別.set調定年度(賦課の情報.get調定年度());
-
-        List<Decimal> 普徴期別額List = new ArrayList<>();
-        普徴期別額List.add(賦課の情報.get普徴期別金額01());
-        普徴期別額List.add(賦課の情報.get普徴期別金額02());
-        普徴期別額List.add(賦課の情報.get普徴期別金額03());
-        普徴期別額List.add(賦課の情報.get普徴期別金額04());
-        普徴期別額List.add(賦課の情報.get普徴期別金額05());
-        普徴期別額List.add(賦課の情報.get普徴期別金額06());
-        普徴期別額List.add(賦課の情報.get普徴期別金額07());
-        普徴期別額List.add(賦課の情報.get普徴期別金額08());
-        普徴期別額List.add(賦課の情報.get普徴期別金額09());
-        普徴期別額List.add(賦課の情報.get普徴期別金額10());
-        普徴期別額List.add(賦課の情報.get普徴期別金額11());
-        普徴期別額List.add(賦課の情報.get普徴期別金額12());
-        普徴期別額List.add(賦課の情報.get普徴期別金額13());
-        普徴期別額List.add(賦課の情報.get普徴期別金額14());
-        調定年度期別.set普徴期別額(普徴期別額List);
-
-        List<Decimal> 特徴期別額List = new ArrayList<>();
-        特徴期別額List.add(賦課の情報.get特徴期別金額01());
-        特徴期別額List.add(賦課の情報.get特徴期別金額02());
-        特徴期別額List.add(賦課の情報.get特徴期別金額03());
-        特徴期別額List.add(賦課の情報.get特徴期別金額04());
-        特徴期別額List.add(賦課の情報.get特徴期別金額05());
-        特徴期別額List.add(賦課の情報.get特徴期別金額06());
-        調定年度期別.set特徴期別額(特徴期別額List);
+        set普徴期別額List(賦課の情報, 調定年度期別);
+        set特徴期別額List(賦課の情報, 調定年度期別);
 
         return 調定年度期別;
+    }
+
+    private void set特徴期別額List(FukaJoho 賦課の情報, ChoteiNendoKibetsuClass 調定年度期別) {
+        List<Decimal> 特徴期別額List = new ArrayList<>();
+        Decimal 特徴期別金額01 = 賦課の情報.get特徴期別金額01() == null ? Decimal.ZERO : 賦課の情報.get特徴期別金額01();
+        特徴期別額List.add(特徴期別金額01);
+        Decimal 特徴期別金額02 = 賦課の情報.get特徴期別金額02() == null ? Decimal.ZERO : 賦課の情報.get特徴期別金額02();
+        特徴期別額List.add(特徴期別金額02);
+        Decimal 特徴期別金額03 = 賦課の情報.get特徴期別金額03() == null ? Decimal.ZERO : 賦課の情報.get特徴期別金額03();
+        特徴期別額List.add(特徴期別金額03);
+        Decimal 特徴期別金額04 = 賦課の情報.get特徴期別金額04() == null ? Decimal.ZERO : 賦課の情報.get特徴期別金額04();
+        特徴期別額List.add(特徴期別金額04);
+        Decimal 特徴期別金額05 = 賦課の情報.get特徴期別金額05() == null ? Decimal.ZERO : 賦課の情報.get特徴期別金額05();
+        特徴期別額List.add(特徴期別金額05);
+        Decimal 特徴期別金額06 = 賦課の情報.get特徴期別金額06() == null ? Decimal.ZERO : 賦課の情報.get特徴期別金額06();
+        特徴期別額List.add(特徴期別金額06);
+        調定年度期別.set特徴期別額(特徴期別額List);
+    }
+
+    private void set普徴期別額List(FukaJoho 賦課の情報, ChoteiNendoKibetsuClass 調定年度期別) {
+        List<Decimal> 普徴期別額List = new ArrayList<>();
+        Decimal 普徴期別金額01 = 賦課の情報.get普徴期別金額01() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額01();
+        普徴期別額List.add(普徴期別金額01);
+        Decimal 普徴期別金額02 = 賦課の情報.get普徴期別金額02() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額02();
+        普徴期別額List.add(普徴期別金額02);
+        Decimal 普徴期別金額03 = 賦課の情報.get普徴期別金額03() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額03();
+        普徴期別額List.add(普徴期別金額03);
+        Decimal 普徴期別金額04 = 賦課の情報.get普徴期別金額04() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額04();
+        普徴期別額List.add(普徴期別金額04);
+        Decimal 普徴期別金額05 = 賦課の情報.get普徴期別金額05() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額05();
+        普徴期別額List.add(普徴期別金額05);
+        Decimal 普徴期別金額06 = 賦課の情報.get普徴期別金額06() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額06();
+        普徴期別額List.add(普徴期別金額06);
+        Decimal 普徴期別金額07 = 賦課の情報.get普徴期別金額07() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額07();
+        普徴期別額List.add(普徴期別金額07);
+        Decimal 普徴期別金額08 = 賦課の情報.get普徴期別金額08() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額08();
+        普徴期別額List.add(普徴期別金額08);
+        Decimal 普徴期別金額09 = 賦課の情報.get普徴期別金額09() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額09();
+        普徴期別額List.add(普徴期別金額09);
+        Decimal 普徴期別金額10 = 賦課の情報.get普徴期別金額10() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額10();
+        普徴期別額List.add(普徴期別金額10);
+        Decimal 普徴期別金額11 = 賦課の情報.get普徴期別金額11() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額11();
+        普徴期別額List.add(普徴期別金額11);
+        Decimal 普徴期別金額12 = 賦課の情報.get普徴期別金額12() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額12();
+        普徴期別額List.add(普徴期別金額12);
+        Decimal 普徴期別金額13 = 賦課の情報.get普徴期別金額13() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額13();
+        普徴期別額List.add(普徴期別金額13);
+        Decimal 普徴期別金額14 = 賦課の情報.get普徴期別金額14() == null ? Decimal.ZERO : 賦課の情報.get普徴期別金額14();
+        普徴期別額List.add(普徴期別金額14);
+        調定年度期別.set普徴期別額(普徴期別額List);
     }
 
     private List<Integer> get特徴月テーブル() {
