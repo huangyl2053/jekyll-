@@ -462,18 +462,28 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-        if (div.getTxtTeikyoYM().getValue() != null) {
-            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月,
-                    new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().toDateString().substring(0, INDEX_6)));
-        } else {
-            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月, null);
-        }
+        FlexibleYearMonth old提供着工年月 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_サービス年月, FlexibleYearMonth.class);
+
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         if (画面提供着工年月 != null) {
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
             handler.保険者ドロップダウンリストを再セット(画面提供着工年月);
+        }
+        if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
+                && (old提供着工年月 != null && 画面提供着工年月 != null
+                && old提供着工年月.getYear().getYearValue() != 画面提供着工年月.getYear().getYearValue())) {
+            div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
+                    SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
+                    new FlexibleYear(old提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
+        }
+
+        if (div.getTxtTeikyoYM().getValue() != null) {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月,
+                    new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().toDateString().substring(0, INDEX_6)));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月, null);
         }
         return ResponseData.of(div).respond();
     }
@@ -528,12 +538,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             div.getTxtKyufuritsu().setValue(給付率.value());
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
-            if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
-                    && (!領収日.getYear().equals(画面提供着工年月.getYear()))) {
-                div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                        SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
-                        new FlexibleYear(領収日.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
-            }
+
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
