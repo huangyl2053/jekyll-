@@ -23,15 +23,19 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdTaishoSeitai
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_KijunsyunygetsujiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.CreateShoriResultCsvFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.DBC190030ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.UpdTaishoSeitaiyinTemp5ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -95,8 +99,28 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
 
     @Step(INS世帯員所得情報一時表1)
     IBatchFlowCommand insSetaiyinShotokuJyohoTemp1Process() {
-        return loopBatch(InsSetaiyinShotokuJyohoTemp1Process.class).
-                arguments(getParameter().toDBC190030ProcessParameter()).define();
+        RString 抽出条件 = getParameter().get抽出条件();
+        RString 抽出対象 = getParameter().get抽出対象();
+        FlexibleYear 処理年度 = getParameter().get処理年度();
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(getParameter().get被保険者番号());
+        FlexibleDate 世帯員把握基準日 = getParameter().get世帯員把握基準日();
+        FlexibleDate 世帯員把握基準日2 = getParameter().get世帯員把握基準日2();
+        RString 提出期限 = getParameter().get提出期限();
+        FlexibleDate 作成日 = getParameter().get作成日();
+        Boolean 申請書出力フラグ = getParameter().get申請書出力フラグ();
+        Boolean お知らせ通知書出力フラグ = getParameter().getお知らせ通知書出力フラグ();
+        Boolean 一覧表CSV出力フラグ = getParameter().get一覧表CSV出力フラグ();
+        RString 文書番号 = getParameter().get文書番号();
+        Long 帳票出力順ID = getParameter().get帳票出力順ID();
+        LasdecCode 市町村コード = getParameter().get市町村コード();
+        RString 市町村名 = getParameter().get市町村名();
+        DBC190030ProcessParameter processParameter = new DBC190030ProcessParameter(抽出条件, 抽出対象,
+                処理年度, 被保険者番号,
+                世帯員把握基準日, 世帯員把握基準日2,
+                提出期限, 作成日, 申請書出力フラグ,
+                お知らせ通知書出力フラグ, 一覧表CSV出力フラグ,
+                文書番号, 帳票出力順ID, 市町村コード, 市町村名);
+        return loopBatch(InsSetaiyinShotokuJyohoTemp1Process.class).arguments(processParameter).define();
     }
 
     @Step(世帯員把握バッチ)
@@ -112,8 +136,28 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
 
     @Step(INS世帯員所得情報一時表2)
     IBatchFlowCommand insSetaiyinShotokuJyohoTemp2Process() {
-        return loopBatch(InsSetaiyinShotokuJyohoTemp2Process.class).
-                arguments(getParameter().toDBC190030ProcessParameter()).define();
+        RString 抽出条件 = getParameter().get抽出条件();
+        RString 抽出対象 = getParameter().get抽出対象();
+        FlexibleYear 処理年度 = getParameter().get処理年度();
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(getParameter().get被保険者番号());
+        FlexibleDate 世帯員把握基準日 = getParameter().get世帯員把握基準日();
+        FlexibleDate 世帯員把握基準日2 = getParameter().get世帯員把握基準日2();
+        RString 提出期限 = getParameter().get提出期限();
+        FlexibleDate 作成日 = getParameter().get作成日();
+        Boolean 申請書出力フラグ = getParameter().get申請書出力フラグ();
+        Boolean お知らせ通知書出力フラグ = getParameter().getお知らせ通知書出力フラグ();
+        Boolean 一覧表CSV出力フラグ = getParameter().get一覧表CSV出力フラグ();
+        RString 文書番号 = getParameter().get文書番号();
+        Long 帳票出力順ID = getParameter().get帳票出力順ID();
+        LasdecCode 市町村コード = getParameter().get市町村コード();
+        RString 市町村名 = getParameter().get市町村名();
+        DBC190030ProcessParameter processParameter = new DBC190030ProcessParameter(抽出条件, 抽出対象,
+                処理年度, 被保険者番号,
+                世帯員把握基準日, 世帯員把握基準日2,
+                提出期限, 作成日, 申請書出力フラグ,
+                お知らせ通知書出力フラグ, 一覧表CSV出力フラグ,
+                文書番号, 帳票出力順ID, 市町村コード, 市町村名);
+        return loopBatch(InsSetaiyinShotokuJyohoTemp2Process.class).arguments(processParameter).define();
     }
 
     @Step(世帯員所得情報一時テーブルに重複削除)

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.CalculateChoteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.NendobunFukaList;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
@@ -229,11 +230,11 @@ public class FukaKeisanFath {
         業務コンフィグ情報.set普徴月クラス(get普徴月クラスリスト(param.get賦課年度()));
         業務コンフィグ情報.set特徴月テーブル(get特徴月テーブル());
         kiwariKeisanInput.set業務コンフィグ情報(業務コンフィグ情報);
-        kiwariKeisanInput.set賦課更正情報(get賦課更正情報(param.get年度分賦課リスト_更正前().get現年度()));
+        kiwariKeisanInput.set賦課更正情報(get賦課更正情報(param.get年度分賦課リスト_更正前()));
         kiwariKeisanInput.set変更後_確定年税額(param.get年額保険料());
         kiwariKeisanInput.set減免額(Decimal.ZERO);
         kiwariKeisanInput.set生年月日(FlexibleDate.EMPTY);
-        kiwariKeisanInput.set全部喪失年月日(param.get資格の情報().get資格喪失年月日());
+        kiwariKeisanInput.set全部喪失年月日(param.get資格の情報() == null ? null : param.get資格の情報().get資格喪失年月日());
         set特徴開始停止区分と期(kiwariKeisanInput, param);
         kiwariKeisanInput.set期別徴収方法区分(get期別徴収方法区分(param.get徴収方法の情報_更正前()));
     }
@@ -361,11 +362,15 @@ public class FukaKeisanFath {
         return 特徴月テーブル;
     }
 
-    private FukaKoseiJohoClass get賦課更正情報(FukaJoho 賦課の情報) {
+    private FukaKoseiJohoClass get賦課更正情報(NendobunFukaList 年度分賦課リスト) {
         FukaKoseiJohoClass 賦課更正情報 = new FukaKoseiJohoClass();
-        if (賦課の情報 != null) {
-            賦課更正情報.set課税年度(賦課の情報.get賦課年度());
-            賦課更正情報.set変更前_確定年税額(賦課の情報.get確定介護保険料_年額());
+        FukaJoho 賦課の情報 = null;
+        if (年度分賦課リスト != null) {
+            賦課の情報 = 年度分賦課リスト.get現年度();
+            if (賦課の情報 != null) {
+                賦課更正情報.set課税年度(賦課の情報.get賦課年度());
+                賦課更正情報.set変更前_確定年税額(賦課の情報.get確定介護保険料_年額());
+            }
         }
         List<ChoteiNendoKibetsuClass> 調定年度期別クラス = new ArrayList<>();
         調定年度期別クラス.add(get調定年度期別クラス(賦課の情報));
@@ -380,39 +385,47 @@ public class FukaKeisanFath {
         ChoteiNendoKibetsuClass 調定年度期別 = new ChoteiNendoKibetsuClass();
         調定年度期別.set調定年度(賦課の情報.get調定年度());
         List<Decimal> 普徴期別額List = new ArrayList<>();
-        普徴期別額List.add(賦課の情報.get普徴期別金額01());
-        普徴期別額List.add(賦課の情報.get普徴期別金額02());
-        普徴期別額List.add(賦課の情報.get普徴期別金額03());
-        普徴期別額List.add(賦課の情報.get普徴期別金額04());
-        普徴期別額List.add(賦課の情報.get普徴期別金額05());
-        普徴期別額List.add(賦課の情報.get普徴期別金額06());
-        普徴期別額List.add(賦課の情報.get普徴期別金額07());
-        普徴期別額List.add(賦課の情報.get普徴期別金額08());
-        普徴期別額List.add(賦課の情報.get普徴期別金額09());
-        普徴期別額List.add(賦課の情報.get普徴期別金額10());
-        普徴期別額List.add(賦課の情報.get普徴期別金額11());
-        普徴期別額List.add(賦課の情報.get普徴期別金額12());
-        普徴期別額List.add(賦課の情報.get普徴期別金額13());
-        普徴期別額List.add(賦課の情報.get普徴期別金額14());
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額01()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額02()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額03()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額04()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額05()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額06()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額07()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額08()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額09()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額10()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額11()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額12()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額13()));
+        普徴期別額List.add(nullToZero(賦課の情報.get普徴期別金額14()));
         調定年度期別.set普徴期別額(普徴期別額List);
 
         List<Decimal> 特徴期別額List = new ArrayList<>();
-        特徴期別額List.add(賦課の情報.get特徴期別金額01());
-        特徴期別額List.add(賦課の情報.get特徴期別金額02());
-        特徴期別額List.add(賦課の情報.get特徴期別金額03());
-        特徴期別額List.add(賦課の情報.get特徴期別金額04());
-        特徴期別額List.add(賦課の情報.get特徴期別金額05());
-        特徴期別額List.add(賦課の情報.get特徴期別金額06());
+        特徴期別額List.add(nullToZero(賦課の情報.get特徴期別金額01()));
+        特徴期別額List.add(nullToZero(賦課の情報.get特徴期別金額02()));
+        特徴期別額List.add(nullToZero(賦課の情報.get特徴期別金額03()));
+        特徴期別額List.add(nullToZero(賦課の情報.get特徴期別金額04()));
+        特徴期別額List.add(nullToZero(賦課の情報.get特徴期別金額05()));
+        特徴期別額List.add(nullToZero(賦課の情報.get特徴期別金額06()));
         調定年度期別.set特徴期別額(特徴期別額List);
         return 調定年度期別;
     }
 
+    private Decimal nullToZero(Decimal decimal) {
+        return decimal == null ? Decimal.ZERO : decimal;
+    }
+
     private void set特徴開始停止区分と期(KiwariKeisanInput kiwariKeisanInput, CalculateChoteiParameter param) {
-        if (ChoteiJiyuCode.年金保険者からの通知.getコード().equals(param.get徴収方法の情報_更正前().get特別徴収停止事由コード())
+        if (param.get徴収方法の情報_更正前() == null) {
+            kiwariKeisanInput.set特徴開始停止区分(0);
+            kiwariKeisanInput.set特徴開始停止期(0);
+        } else if (ChoteiJiyuCode.年金保険者からの通知.getコード().equals(param.get徴収方法の情報_更正前().get特別徴収停止事由コード())
                 || ChoteiJiyuCode.徴収方法修正.getコード().equals(param.get徴収方法の情報_更正前().get特別徴収停止事由コード())) {
             kiwariKeisanInput.set特徴開始停止区分(INT_9);
             set特徴開始停止期(kiwariKeisanInput, param);
-        } else if (param.get資格の情報().get資格喪失年月日() != null && !param.get資格の情報().get資格喪失年月日().isEmpty()) {
+        } else if (param.get資格の情報() != null
+                && param.get資格の情報().get資格喪失年月日() != null && !param.get資格の情報().get資格喪失年月日().isEmpty()) {
             set資格喪失した場合(kiwariKeisanInput, param);
         } else {
             if (!特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法11月())
@@ -432,6 +445,10 @@ public class FukaKeisanFath {
     }
 
     private void set特徴開始停止期(KiwariKeisanInput kiwariKeisanInput, CalculateChoteiParameter param) {
+        if (param.get徴収方法の情報_更正前() == null) {
+            kiwariKeisanInput.set特徴開始停止期(0);
+            return;
+        }
         List<RString> 徴収方法リスト = new ArrayList<>();
         徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法4月());
         徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法5月());
@@ -461,7 +478,8 @@ public class FukaKeisanFath {
         boolean flag = false;
         for (int i = 0; i < 徴収方法リスト.size(); i++) {
             int 特徴開始停止期 = Integer.parseInt(map.get(new RString(i + INT_1)).toString());
-            Decimal 特徴期別金額 = param.get年度分賦課リスト_更正前().get現年度().get特徴期別金額(特徴開始停止期);
+            Decimal 特徴期別金額 = param.get年度分賦課リスト_更正前() == null || param.get年度分賦課リスト_更正前().get現年度() == null
+                    ? Decimal.ZERO : param.get年度分賦課リスト_更正前().get現年度().get特徴期別金額(特徴開始停止期);
             if (特徴期別金額 == null) {
                 特徴期別金額 = Decimal.ZERO;
             }
@@ -530,18 +548,20 @@ public class FukaKeisanFath {
 
     private List<RString> get期別徴収方法区分(ChoshuHoho 徴収方法の情報) {
         List<RString> 期別徴収方法区分 = new ArrayList<>();
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法4月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法5月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法6月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法7月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法8月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法9月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法10月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法11月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法12月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法1月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法2月()));
-        期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法3月()));
+        if (徴収方法の情報 != null) {
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法4月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法5月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法6月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法7月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法8月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法9月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法10月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法11月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法12月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法1月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法2月()));
+            期別徴収方法区分.add(set期別徴収方法(徴収方法の情報.get徴収方法3月()));
+        }
         return 期別徴収方法区分;
     }
 
@@ -1094,7 +1114,7 @@ public class FukaKeisanFath {
         if (段階List.isEmpty()) {
             return Decimal.ZERO;
         }
-        if (段階List.size() > index) {
+        if (index <= 段階List.size()) {
             return 段階List.get(index - INT_1).getHokenryoRitsu();
         }
         return Decimal.ZERO;
