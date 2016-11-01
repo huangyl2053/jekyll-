@@ -1037,7 +1037,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (様式名称 != null && !様式名称.isEmpty()) {
             for (ShikibetsuNoKanri 識別番号 : 様式名称) {
                 RString 識別番号名 = 識別番号.get識別番号();
-                証明書ddl.add(new KeyValueDataSource(識別番号名, 識別番号名.concat(コロン).concat(識別番号名)));
+                証明書ddl.add(new KeyValueDataSource(識別番号名, 識別番号名.concat(コロン).concat(
+                        識別番号.get名称() == null ? RString.EMPTY : 識別番号.get名称())));
             }
         }
         div.getDdlSyomeisyo().setDataSource(証明書ddl);
