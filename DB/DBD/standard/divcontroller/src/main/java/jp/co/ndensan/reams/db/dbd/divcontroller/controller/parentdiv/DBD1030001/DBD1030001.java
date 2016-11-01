@@ -204,9 +204,6 @@ public class DBD1030001 {
 
     private boolean 削除処理(DBD1030001Div div) {
         dgShinseiList_Row dataSouce = div.getDgShinseiList().getActiveRow();
-        if (dataSouce.getKetteiKubun() != null && !dataSouce.getKetteiKubun().isEmpty() && !状態_追加.equals(dataSouce.getJotai())) {
-            return false;
-        }
         RString 状態 = dataSouce.getJotai();
         if (状態.isEmpty() || 状態_修正.equals(状態)) {
             ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList
@@ -230,7 +227,7 @@ public class DBD1030001 {
         getHandler(div).onClick_radKetteiKubun();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 社会福祉法人等利用者負担軽減申請画面を「特例措置対象者」を押下する。<br/>
      *
