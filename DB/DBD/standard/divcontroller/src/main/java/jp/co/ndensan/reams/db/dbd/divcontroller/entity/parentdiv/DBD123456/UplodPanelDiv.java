@@ -21,10 +21,10 @@ public class UplodPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("Uploadtool")
-    private UploadPanel Uploadtool;
     @JsonProperty("upload")
     private Button upload;
+    @JsonProperty("TextBoxUrl")
+    private TextBox TextBoxUrl;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,6 @@ public class UplodPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getUploadtool
-     * @return Uploadtool
-     */
-    @JsonProperty("Uploadtool")
-    public UploadPanel getUploadtool() {
-        return Uploadtool;
-    }
-
-    /*
-     * setUploadtool
-     * @param Uploadtool Uploadtool
-     */
-    @JsonProperty("Uploadtool")
-    public void setUploadtool(UploadPanel Uploadtool) {
-        this.Uploadtool = Uploadtool;
-    }
-
     /*
      * getupload
      * @return upload
@@ -66,6 +48,24 @@ public class UplodPanelDiv extends Panel {
     @JsonProperty("upload")
     public void setUpload(Button upload) {
         this.upload = upload;
+    }
+
+    /*
+     * getTextBoxUrl
+     * @return TextBoxUrl
+     */
+    @JsonProperty("TextBoxUrl")
+    public TextBox getTextBoxUrl() {
+        return TextBoxUrl;
+    }
+
+    /*
+     * setTextBoxUrl
+     * @param TextBoxUrl TextBoxUrl
+     */
+    @JsonProperty("TextBoxUrl")
+    public void setTextBoxUrl(TextBox TextBoxUrl) {
+        this.TextBoxUrl = TextBoxUrl;
     }
 
     // </editor-fold>

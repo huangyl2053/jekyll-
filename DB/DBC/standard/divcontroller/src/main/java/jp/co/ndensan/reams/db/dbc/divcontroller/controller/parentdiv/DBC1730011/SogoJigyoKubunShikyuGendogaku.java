@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -66,6 +67,7 @@ public class SogoJigyoKubunShikyuGendogaku {
         } else {
             getHandler(div).initialize(businessList);
         }
+        set保存非活性(true);
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
     }
 
@@ -79,6 +81,7 @@ public class SogoJigyoKubunShikyuGendogaku {
 
         getHandler(div).set追加状態();
         ViewStateHolder.put(ViewStateKeys.保存モード, 登録);
+        set保存非活性(false);
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
     }
 
@@ -92,6 +95,7 @@ public class SogoJigyoKubunShikyuGendogaku {
 
         getHandler(div).set修正状態();
         ViewStateHolder.put(ViewStateKeys.保存モード, 修正);
+        set保存非活性(false);
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
     }
 
@@ -105,6 +109,7 @@ public class SogoJigyoKubunShikyuGendogaku {
 
         getHandler(div).set削除状態();
         ViewStateHolder.put(ViewStateKeys.保存モード, 削除);
+        set保存非活性(false);
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
     }
 
@@ -116,6 +121,7 @@ public class SogoJigyoKubunShikyuGendogaku {
      */
     public ResponseData<SogoJigyoKubunShikyuGendogakuDiv> onClick_btnBack(SogoJigyoKubunShikyuGendogakuDiv div) {
         getHandler(div).set入力前状態();
+        set保存非活性(true);
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
     }
 
@@ -155,6 +161,10 @@ public class SogoJigyoKubunShikyuGendogaku {
             }
         }
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
+    }
+
+    private void set保存非活性(boolean flag) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), flag);
     }
 
 }

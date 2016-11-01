@@ -108,6 +108,12 @@ public class JutakuKaishuShinseiJyohoToroku {
         param.set償還払申請一覧_整理番号(ViewStateHolder.get(ViewStateKeys.整理番号, RString.class));
         handler.onLoad(識別コード, 被保険者番号, サービス提供年月, 整理番号, 画面モード, param);
         ViewStateHolder.put(ViewStateKeys.申請情報, param);
+        if (div.getTxtTeikyoYM().getValue() != null) {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月,
+                    new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().toDateString().substring(0, INDEX_6)));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月, null);
+        }
         return ResponseData.of(div).respond();
     }
 
