@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChosainJohoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.chosajisshishajoho.ChosaJisshishaJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -109,8 +107,8 @@ public class ChosaJisshishaJohoHandler {
         } else {
             List<ChosainJoho> chosainJohoList = service.getKinyusha(key.get申請書管理番号()).records();
             if (chosainJohoList != null && !chosainJohoList.isEmpty()) {
-                div.getTxtShozokuKikanCode().setValue(chosainJohoList.get(0).get認定調査員コード());
-                div.getTxtShozokuKikanName().setValue(chosainJohoList.get(0).get調査員氏名());
+                div.getTxtKinyushaCode().setValue(chosainJohoList.get(0).get認定調査員コード());
+                div.getTxtKinyushaName().setValue(chosainJohoList.get(0).get調査員氏名());
             }
         }
 

@@ -59,7 +59,7 @@ public class GaikyoTokkiNyuroku {
         model.set認定申請日(ViewStateHolder.get(ViewStateKeys.申請日, RString.class));
         model.set調査実施日(ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class));
         model.set調査実施場所(ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class));
-        model.set調査実施場所(ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class));
+        model.set実施場所名称(ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class));
         model.set所属機関コード(ViewStateHolder.get(ViewStateKeys.所属機関コード, RString.class));
         model.set所属機関名称(ViewStateHolder.get(ViewStateKeys.所属機関名称, RString.class));
         model.set記入者コード(ViewStateHolder.get(ViewStateKeys.記入者コード, RString.class));
