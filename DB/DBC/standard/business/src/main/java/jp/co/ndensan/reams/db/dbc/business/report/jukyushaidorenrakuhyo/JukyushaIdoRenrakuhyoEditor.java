@@ -176,7 +176,9 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.shaTekiyoEDNengo = commonRStringEra(entity.get軽減率適用終了年月日());
             source.shaTekiyoEDYMD = commonRStringYMD(entity.get軽減率適用終了年月日());
             Boolean 小規模居宅ｻｰﾋﾞｽ = entity.get小規模居宅ｻｰﾋﾞｽ利用();
-            source.shokiboKyotakuUmu = new RString(小規模居宅ｻｰﾋﾞｽ.toString());
+            if (小規模居宅ｻｰﾋﾞｽ != null) {
+                source.shokiboKyotakuUmu = new RString(小規模居宅ｻｰﾋﾞｽ.toString());
+            }
             source.nijiYoboTaishoKbn = entity.get二次予防事業区分();
             source.nijiYoboSTNengo = commonEra(entity.get二次予防有効期間開始年月日());
             source.nijiYoboSTYMD = commonYMD(entity.get二次予防有効期間開始年月日());
