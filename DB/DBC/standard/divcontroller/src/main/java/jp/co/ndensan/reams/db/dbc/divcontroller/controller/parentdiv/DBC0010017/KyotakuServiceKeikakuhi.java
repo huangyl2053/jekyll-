@@ -70,13 +70,13 @@ public class KyotakuServiceKeikakuhi {
      */
     public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnZengetsu(KyotakuServiceKeikakuhiDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         getHandler(div).change年月(new RString("前月"), getCsData_F(), サービス提供年月,
                 整理番号, 被保険者番号, 識別番号検索キー);
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth 提供年月 = getHandler(div).get今提供年月(new RString("前月"), getCsData_F(), サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
@@ -96,13 +96,13 @@ public class KyotakuServiceKeikakuhi {
      */
     public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnJigetsu(KyotakuServiceKeikakuhiDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         getHandler(div).change年月(new RString("次月"), getCsData_F(), サービス提供年月, 整理番号,
                 被保険者番号, 識別番号検索キー);
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        FlexibleYearMonth 提供年月 = getHandler(div).get今提供年月(new RString("次月"), getCsData_F(), サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();

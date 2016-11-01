@@ -1,5 +1,9 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishocover;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -142,10 +146,53 @@ public class KyufuhiTsuchishoCoverReportSource implements IReportSource {
     public RString naisenLabel;
     @ReportItem(name = "naisenNo", length = 20, order = 65)
     public RString naisenNo;
+    @ReportItem(name = "key_hihokenshaName", length = 22, order = 66)
+    public RString key_hihokenshaName;
+    @ReportItem(name = "key_hokenshaNo", length = 10, order = 67)
+    public RString key_hokenshaNo;
+    @ReportItem(name = "key_shukeiserviceSTYM", length = 8, order = 68)
+    public RString key_shukeiserviceSTYM;
+    @ReportItem(name = "key_shukeiserviceEDYM", length = 8, order = 69)
+    public RString key_shukeiserviceEDYM;
+    @ReportItem(name = "key_listServiceIchiranUpper_1", length = 8, order = 70)
+    public RString key_listServiceIchiranUpper_1;
+    @ReportItem(name = "key_listServiceIchiranUpper_2", length = 15, order = 71)
+    public RString key_listServiceIchiranUpper_2;
+    @ReportItem(name = "key_listServiceIchiranUpper_3", length = 16, order = 72)
+    public RString key_listServiceIchiranUpper_3;
+    @ReportItem(name = "key_listServiceIchiranUpper_4", length = 3, order = 73)
+    public RString key_listServiceIchiranUpper_4;
+    @ReportItem(name = "key_listServiceIchiranUpper_5", length = 11, order = 74)
+    public RString key_listServiceIchiranUpper_5;
+    @ReportItem(name = "key_listServiceIchiranUpper_6", length = 11, order = 75)
+    public RString key_listServiceIchiranUpper_6;
+    @ReportItem(name = "key_listServiceIchiranLower_1", length = 15, order = 76)
+    public RString key_listServiceIchiranLower_1;
+    @ReportItem(name = "key_listServiceIchiranLower_2", length = 16, order = 77)
+    public RString key_listServiceIchiranLower_2;
+    @ReportItem(name = "key_tsuchibun1", length = 110, order = 78)
+    public RString key_tsuchibun1;
+    @ReportItem(name = "key_tsuchibun2", length = 110, order = 79)
+    public RString key_tsuchibun2;
+    @ReportItem(name = "key_pageBunshi", length = 3, order = 80)
+    public RString key_pageBunshi;
+    @ReportItem(name = "key_pageBunbo", length = 3, order = 81)
+    public RString key_pageBunbo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportItem(name = "layout", order = 999)
+    public Layouts layout;
+
+    /**
+     * レイアウトブレイク用キーの一覧です。
+     */
+    public static final List<RString> LAYOUT_BREAK_KEYS;
+
+    static {
+        LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
+    }
 // </editor-fold>
 }

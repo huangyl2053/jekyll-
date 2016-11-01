@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC010020.KogakuServicehiJuryoininKeiyakuShoninKakuninshoPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc040010.DBC040010DataUtil;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040010.DBC040010ProcessParameter;
@@ -92,7 +91,7 @@ public class DBC200029GassanKekkaIchiranReportProcess extends BatchKeyBreakBase<
             batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).create();
         } else {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).addBreak(
-                    new KogakuServicehiJuryoininKeiyakuShoninKakuninshoPageBreak(processCore.改頁項())).create();
+                    new DBC200029GassanKekkaIchiranPageBreak(processCore.改頁項())).create();
         }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }

@@ -94,7 +94,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString 定数_再発行対象リスト = new RString("再発行対象リスト");
-    private static final RString CSV出力有無_有り = new RString("有り");
+    private static final RString CSV出力有無_有り = new RString("あり");
     private static final RString CSVファイル名_一覧表 = new RString("所得照会票");
     private static final RString 所得照会票_EUCファイル名 = new RString("ShotokushokaihyoHakkoIchiran.csv");
     private static final ReportId 帳票分類ID = new ReportId("DBB100001_ShotokuShokaihyoDaihyo");

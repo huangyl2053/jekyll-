@@ -119,6 +119,7 @@ public class HonsanteiIdoHandler {
     private static final RString 本算定異動現年度通知書一括発行_通常月 = new RString("DBB0510003");
     private static final RString 口座対象者プリント条件KEY = new RString("口座対象者プリント条件");
     private static final RString すべて選択 = new RString("（すべて選択）");
+    private static final RString 定数_特別徴収捕捉対象者のみ = new RString("特別徴収捕捉対象者のみ");
 
     /**
      * コンストラクタです。
@@ -534,6 +535,9 @@ public class HonsanteiIdoHandler {
         paramter.set調定年度(new FlexibleYear(div.getTxtChoteiNendo().getDomain().toString()));
         paramter.set賦課年度(new FlexibleYear(div.getTxtFukaNendo().getDomain().toString()));
         paramter.set処理対象(div.getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey());
+        boolean 通常異動分の依頼金額計算 = !定数_特別徴収捕捉対象者のみ
+                .equals(div.getHonsanteiIdoShoriNaiyo().getRadShoriTaisho().getSelectedValue());
+        paramter.set通常異動分の依頼金額計算(通常異動分の依頼金額計算);
         set現年度異動賦課パラメータ(paramter);
         List<ChohyoMeter> 出力帳票一覧 = new ArrayList<>();
         Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();

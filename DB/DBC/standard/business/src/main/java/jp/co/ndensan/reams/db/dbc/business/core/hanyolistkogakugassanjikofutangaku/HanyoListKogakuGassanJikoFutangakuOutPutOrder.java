@@ -60,7 +60,7 @@ public enum HanyoListKogakuGassanJikoFutangakuOutPutOrder implements IReportItem
      *
      */
     整理番号(new RString("0337"), new RString(""),
-            new RString("高額合算自己負担額_整理番号\"")),
+            new RString("\"高額合算自己負担額_整理番号\"")),
     /**
      * 対象年度
      */

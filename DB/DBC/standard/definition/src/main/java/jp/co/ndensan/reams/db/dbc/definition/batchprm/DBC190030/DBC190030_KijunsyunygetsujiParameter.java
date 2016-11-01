@@ -62,7 +62,7 @@ public class DBC190030_KijunsyunygetsujiParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_処理年度, name = NAME_処理年度)
     private FlexibleYear 処理年度;
     @BatchParameter(key = KEY_被保険者番号, name = NAME_被保険者番号)
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     @BatchParameter(key = KEY_世帯員把握基準日, name = NAME_世帯員把握基準日)
     private FlexibleDate 世帯員把握基準日;
     @BatchParameter(key = KEY_世帯員把握基準日2, name = NAME_世帯員把握基準日2)
@@ -95,7 +95,7 @@ public class DBC190030_KijunsyunygetsujiParameter extends BatchParameterBase {
         return new DBC190030ProcessParameter(抽出条件,
                 抽出対象,
                 処理年度,
-                被保険者番号,
+                new HihokenshaNo(被保険者番号),
                 世帯員把握基準日,
                 世帯員把握基準日2,
                 提出期限,

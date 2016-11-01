@@ -93,6 +93,21 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData<SearchHihokenshaDiv>
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnSave(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
+        RString 被保険者番号 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
+                getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
+        RString 異動日 = new RString(div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
+                getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動年月日().toString());
+        RString 異動区分 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
+                getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動区分コード();
+        JukyushaIdoRenrakuhyoToroku jukyushaIdoRen = JukyushaIdoRenrakuhyoToroku.createInstance();
+        RString エラー有無 = jukyushaIdoRen.regJukyushaIdoJoho(被保険者番号, new RDate(異動日.toString()), 異動区分);
+        List<RString> チェック状態 = handler.getチェックボックス状態();
+        if (ZERO.equals(エラー有無) && !チェック状態.isEmpty()) {
+            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(起動);
+        } else {
+            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(停止);
+        }
         ValidationMessageControlPairs pair
                 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
         if (pair.iterator().hasNext() && !ResponseHolder.isReRequest()) {
@@ -109,14 +124,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RString 被保険者番号 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
-                    getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
-            RString 異動日 = new RString(div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
-                    getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動年月日().toString());
-            RString 異動区分 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
-                    getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動区分コード();
-            JukyushaIdoRenrakuhyoToroku jukyushaIdoRen = JukyushaIdoRenrakuhyoToroku.createInstance();
-            RString エラー有無 = jukyushaIdoRen.regJukyushaIdoJoho(被保険者番号, new RDate(異動日.toString()), 異動区分);
             boolean flag1 = getState(エラー有無, 被保険者番号, 異動日, div);
             if (flag1) {
                 RString 完了メッセージ対象情報1 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
@@ -150,7 +157,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         JukyushaIdoRenrakuhyoManager manager = InstanceProvider.create(JukyushaIdoRenrakuhyoManager.class);
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
         if (ZERO.equals(エラー有無)) {
-            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(起動);
             JukyushaIdoRenrakuhyo result = getDataEdit(被保険者番号, 異動日, div, manager);
             result.toEntity().setState(EntityDataState.Added);
             boolean flag = manager.save受給者異動送付(result);

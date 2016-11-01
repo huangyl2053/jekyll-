@@ -147,7 +147,7 @@ public class KanendoNonyuTsuchishoCVSKakukoPrintService {
                 List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSKakukoSource>> reportList
                         = new KanendoNonyuTsuchishoCVSKakukoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
                 reportList.get(0).writeBy(reportSourceWriterCover);
-                reportList.get(0).writeBy(reportSourceWriterDetail);
+                reportList.get(1).writeBy(reportSourceWriterDetail);
             }
         }
     }

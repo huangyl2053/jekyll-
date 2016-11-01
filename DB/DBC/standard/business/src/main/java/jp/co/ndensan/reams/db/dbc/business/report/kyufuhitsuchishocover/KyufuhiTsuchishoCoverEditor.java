@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishocover;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhitsuchishocover.KyufuhiTsuchishoCoverEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishocover.KyufuhiTsuchishoCoverReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -25,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class KyufuhiTsuchishoCoverEditor implements IKyufuhiTsuchishoCoverEditor {
 
     private final KyufuhiTsuchishoCoverEntity item;
-    private int index;
-    private static final int PAGECOUNT = 15;
 
     /**
      * インスタンスを生成します。
@@ -116,33 +115,7 @@ public class KyufuhiTsuchishoCoverEditor implements IKyufuhiTsuchishoCoverEditor
         source.telNo = item.getTelNo();
         source.naisenLabel = item.getNaisenLabel();
         source.naisenNo = item.getNaisenNo();
-        if (PAGECOUNT < index) {
-            source.hihokenshaName = item.getHihokenshaName();
-            source.hokenshaNo = item.getHokenshaNo();
-            source.shukeiserviceSTYM = new FlexibleYearMonth(item.getShukeiserviceSTYM()).
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK)
-                    .toDateString();
-            source.shukeiserviceEDYM = new FlexibleYearMonth(item.getShukeiserviceEDYM()).
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK)
-                    .toDateString();
-            source.listServiceIchiranUpper_1 = new FlexibleYearMonth(item.getListServiceIchiranUpper_1()).
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK)
-                    .toDateString();
-            source.listServiceIchiranUpper_2 = item.getListServiceIchiranUpper_2();
-            source.listServiceIchiranUpper_3 = item.getListServiceIchiranUpper_3();
-            source.listServiceIchiranUpper_4 = item.getListServiceIchiranUpper_4();
-            source.listServiceIchiranUpper_5
-                    = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getListServiceIchiranUpper_5().toString()), 0).concat("円");
-            source.listServiceIchiranUpper_6
-                    = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getListServiceIchiranUpper_6().toString()), 0).concat("円");
-            source.listServiceIchiranLower_1 = item.getListServiceIchiranLower_1();
-            source.listServiceIchiranLower_2 = item.getListServiceIchiranLower_2();
-            source.tsuchibun1 = item.getTsuchibun1();
-            source.tsuchibun2 = item.getTsuchibun2();
-            source.pageBunshi = new RString(item.getPageBunshi());
-            source.pageBunbo = new RString(item.getPageBunbo());
-            source.listServiceIchiranLower_2 = item.getListServiceIchiranLower_2();
-        }
+        source.layout = Layouts.鑑;
         return source;
     }
 }

@@ -192,7 +192,7 @@ public class ShotokuShokaiTaishoshaIchiranHandler {
                 LasdecCode.EMPTY,
                 new FlexibleYear(所得年度.toString()),
                 TsuchishoNo.EMPTY,
-                new FlexibleYear(所得年度.toString()));
+                FlexibleYear.EMPTY);
     }
 
     /**

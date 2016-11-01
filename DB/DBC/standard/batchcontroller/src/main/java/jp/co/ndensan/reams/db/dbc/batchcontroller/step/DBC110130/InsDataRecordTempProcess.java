@@ -169,6 +169,12 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
             } else {
                 入力ファイルパス = csvFilePath;
             }
+        }
+    }
+
+    @Override
+    protected void process(DbWT1111KyufuJissekiTempTempEntity entity) {
+        if (!configFlag && 出力件数 == INT_0) {
             csvListWriter = new CsvListWriter.InstanceBuilder(入力ファイルパス)
                     .setDelimiter(コンマ)
                     .setEnclosure(RString.EMPTY)
@@ -176,12 +182,6 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
                     .setNewLine(NewLine.CRLF)
                     .hasHeader(false)
                     .build();
-        }
-    }
-
-    @Override
-    protected void process(DbWT1111KyufuJissekiTempTempEntity entity) {
-        if (!configFlag && 出力件数 == INT_0) {
             出力件数 = 出力件数 + INT_1;
             List<RString> csvList = getコントロールlist();
             csvListWriter.writeLine(csvList);
@@ -220,7 +220,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
                 給付実績一時tableWriter.insert(給付実績一時entity);
             }
         }
-        if (!configFlag) {
+        if (!configFlag && 出力件数 != INT_0) {
             List<RString> csvList = getエンドレコードlist();
             csvListWriter.writeLine(csvList);
             csvListWriter.close();

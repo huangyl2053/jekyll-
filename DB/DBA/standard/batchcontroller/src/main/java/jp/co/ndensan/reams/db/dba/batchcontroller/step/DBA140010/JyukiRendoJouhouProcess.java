@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA140010;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.jyukirendotorokushalist.JyukiRendoJouhouBusiness;
@@ -64,13 +63,14 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         super.beforeExecute();
         jyukiRendoJouhouMapper = getMapper(IJyukiRendoJouhouMapper.class);
-        page_break_keys = Collections.unmodifiableList(Arrays.asList(改ページ));
         business = new JyukiRendoJouhouBusiness();
+        List<RString> 出力順 = new ArrayList<>();
+        出力順.add(改ページ);
         出力順Entity = get出力順項目();
         if (出力順Entity.getPageBreakKeys() != null) {
-            List<RString> pageBreakKeys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
-            page_break_keys.addAll(pageBreakKeys);
+            出力順.addAll(出力順Entity.getPageBreakKeys());
         }
+        page_break_keys = Collections.unmodifiableList(出力順);
     }
 
     @Override
@@ -95,11 +95,10 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         key.set住民状態(住名状態);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(
                 key.getPSM検索キー());
-        if (出力順Entity.get出力順OrderBy() == null) {
+        if (RString.isNullOrEmpty(出力順Entity.get出力順OrderBy())) {
             processParameter.setOrderByFlag(false);
         } else {
             processParameter.setOrderByFlag(true);
-            processParameter.setOrderBy(出力順Entity.get出力順OrderBy().replace("order by ", ","));
         }
         if (processParameter.isHihokenshadaichoFLG()) {
             processParameter = business.setPsetParameter(processParameter, uaFt200Psm);
@@ -110,12 +109,14 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         }
         if (processParameter.isTajushochitokureishakanriFLG()) {
             processParameter = business.setPsetParameter(processParameter, uaFt200Psm);
+            processParameter.setOrderBy(出力順Entity.get出力順OrderBy().replace("order by ", ","));
             JyukiRendoTorokushaListBatchMybatisParameter mybatisParameter
                     = processParameter.toJyukiRendoTorokushaListBatchMybatisParameter();
             jyukiRendoJouhouList.addAll(get他住所地特例者管理リスト(mybatisParameter));
         }
         if (processParameter.isTekiyojogaishadaichoFLG()) {
             processParameter = business.setPsetParameter(processParameter, uaFt200Psm);
+            processParameter.setOrderBy(出力順Entity.get出力順OrderBy().replace("order by ", ","));
             JyukiRendoTorokushaListBatchMybatisParameter mybatisParameter
                     = processParameter.toJyukiRendoTorokushaListBatchMybatisParameter();
             jyukiRendoJouhouList.addAll(get適用除外者台帳リスト(mybatisParameter));
