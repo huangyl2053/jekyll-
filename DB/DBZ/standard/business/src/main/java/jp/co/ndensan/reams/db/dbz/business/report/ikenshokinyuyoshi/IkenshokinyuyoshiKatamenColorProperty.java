@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi;
 
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -21,7 +20,7 @@ public class IkenshokinyuyoshiKatamenColorProperty extends ReportPropertyBase<Ik
      * インスタンスを生成します。
      */
     public IkenshokinyuyoshiKatamenColorProperty() {
-        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE231011KatamenColor.getReportId());
+        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
     }
 
 }
