@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
  * 年齢到達登録者のマッパーインタフェースです。
@@ -33,12 +32,4 @@ public interface INenreiTotatsuTorokushaMapper {
      * @return 更新件数
      */
     int updateShoriDateKanri(DbT7022ShoriDateKanriEntity entity);
-
-    /**
-     * 宛名識別対象を取得します。
-     *
-     * @param parameter 宛名識別対象PSM用パラメータ
-     * @return UaFt200FindShikibetsuTaishoEntity
-     */
-    UaFt200FindShikibetsuTaishoEntity getPsmShikibetsuTaisho(NenreiTotatsuTorokushaListMybatisParameter parameter);
 }
