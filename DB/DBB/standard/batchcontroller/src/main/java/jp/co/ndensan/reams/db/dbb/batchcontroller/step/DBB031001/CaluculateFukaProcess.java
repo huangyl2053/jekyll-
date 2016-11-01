@@ -430,6 +430,9 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
             List<RoreiFukushiNenkinJukyusha> 老福の情報のリスト,
             List<KyokaisoGaitosha> 境界層の情報のリスト,
             FlexibleYear 賦課の年度) {
+        if (世帯員所得情報List.isEmpty()) {
+            return;
+        }
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(processParameter.get賦課年度());
         SeigyoJoho 月別保険料制御情報 = manager.editor月別保険料制御情報(保険料段階List);
         NengakuSeigyoJoho 年額制御情報 = manager.editor年額制御情報(dbT2013HokenryoDankaiList);
