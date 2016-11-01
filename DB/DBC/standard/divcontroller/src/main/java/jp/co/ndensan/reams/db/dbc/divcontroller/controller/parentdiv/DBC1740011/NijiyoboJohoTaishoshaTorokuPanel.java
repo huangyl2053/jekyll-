@@ -50,10 +50,8 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
     private static final RString 排他キー_前 = new RString("DBCHihokenshaNo");
     private static final RString 削除 = new RString("削除");
     private static final RString BTN_保存する = new RString("btnUpdate");
-    private static final RString BTN_再検索する = new RString("btnResearch");
-    private static final RString BTN_検索結果一覧へ = new RString("btnSearchResult");
     private static final RString 引数_被保険者番号なし = new RString("被保険者番号なし");
-    private static final RString TRUE_排他失敗 = new RString("true");
+    private static final RString FALSE_排他失敗 = new RString("false");
 
     private NijiyoboJohoTaishoshaTorokuPanelHandler getHandler(NijiyoboJohoTaishoshaTorokuPanelDiv div) {
         return new NijiyoboJohoTaishoshaTorokuPanelHandler(div);
@@ -79,9 +77,9 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
         }
         LockingKey 前排他キー = new LockingKey(排他キー_前.concat(資格対象者.get被保険者番号().getColumnValue()));
         if (!RealInitialLocker.tryGetLock(前排他キー)) {
-            getHandler(div).排他失敗flagを設定する(true);
             throw new PessimisticLockingException();
         }
+        getHandler(div).排他失敗flagを設定する(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_保存する, false);
         NijiYoboJigyoTaishoshaManager manager = new NijiYoboJigyoTaishoshaManager();
         List<NijiYoboJigyoTaishosha> 二次予防情報対象一覧List
@@ -176,14 +174,12 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             NijiYoboJigyoTaishoshaHolder holder = ViewStateHolder.get(ViewStateHolderName.二次予防情報対象情報, NijiYoboJigyoTaishoshaHolder.class);
-            boolean isSuccess = getHandler(div).二次予防情報対象一覧のデータを保存する(
+            getHandler(div).二次予防情報対象一覧のデータを保存する(
                     div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource(),
                     new HihokenshaNo(div.get被保険者番号()), holder);
-            if (isSuccess) {
-                前排他のロックを解除し(div);
-                アクセスログの出力_更新(new ShikibetsuCode(div.get識別コード()), new HihokenshaNo(div.get被保険者番号()));
-                return ResponseData.of(div).setState(DBC1740011StateName.kanryo);
-            }
+            前排他のロックを解除し(div);
+            アクセスログの出力_更新(new ShikibetsuCode(div.get識別コード()), new HihokenshaNo(div.get被保険者番号()));
+            return ResponseData.of(div).setState(DBC1740011StateName.kanryo);
         }
         return ResponseData.of(div).respond();
     }
@@ -241,7 +237,7 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
     }
 
     private void 前排他のロックを解除し(NijiyoboJohoTaishoshaTorokuPanelDiv div) {
-        if ((!TRUE_排他失敗.equals(div.get排他失敗flag())) && (!RString.isNullOrEmpty(div.get被保険者番号()))) {
+        if (FALSE_排他失敗.equals(div.get排他失敗flag()) && (!RString.isNullOrEmpty(div.get被保険者番号()))) {
             LockingKey 前排他キー = new LockingKey(排他キー_前.concat(div.get被保険者番号()));
             RealInitialLocker.release(前排他キー);
         }

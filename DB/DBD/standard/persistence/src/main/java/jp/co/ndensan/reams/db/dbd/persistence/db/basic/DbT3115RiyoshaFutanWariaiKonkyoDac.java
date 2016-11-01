@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -67,6 +69,28 @@ public class DbT3115RiyoshaFutanWariaiKonkyoDac implements ISaveable<DbT3115Riyo
                                 eq(rirekiNo, 履歴番号),
                                 eq(edaNo, 枝番号),
                                 eq(setaiinHihokenshaNo, 世帯員被保険者番号))).
+                toObject(DbT3115RiyoshaFutanWariaiKonkyoEntity.class);
+    }
+
+    /**
+     * 利用者負担割合明細を取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT3115RiyoshaFutanWariaiKonkyoEntity>
+     */
+    @Transaction
+    public DbT3115RiyoshaFutanWariaiKonkyoEntity select履歴番号(
+            FlexibleYear 年度,
+            HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3115RiyoshaFutanWariaiKonkyo.class).
+                where(and(
+                                eq(nendo, 年度),
+                                eq(hihokenshaNo, 被保険者番号))).
+                order(by(rirekiNo, Order.DESC)).
+                limit(1).
                 toObject(DbT3115RiyoshaFutanWariaiKonkyoEntity.class);
     }
 

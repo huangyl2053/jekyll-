@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class DBD2020001ValidationHandler {
 
     private static final RString 年 = new RString("年");
-    private static final RString 月 = new RString("月");
+    private static final RString 月 = new RString("ヵ月");
     private static final int 月数_12 = 12;
     private static final int MIN = 0;
     private static final RString 基準日 = new RString("基準日");

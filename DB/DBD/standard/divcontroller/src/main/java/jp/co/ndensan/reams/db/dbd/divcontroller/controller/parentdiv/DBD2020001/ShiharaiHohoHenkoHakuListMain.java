@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207011.DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020001.DBD2020001ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
@@ -44,7 +45,7 @@ public class ShiharaiHohoHenkoHakuListMain {
         div.getTxtTainoNengetsuNinteiYMD().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanNinteiYMD().getValue()));
         div.getTxtTainoNengetsuShokanShinseisha().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanShinseisha().getValue()));
         div.getTxtTainoNengetsuShokanKettei().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanKettei().getValue()));
-
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200006.getReportId());
         return ResponseData.of(div).respond();
     }
 
