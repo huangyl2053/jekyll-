@@ -33,8 +33,19 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     private static final RString THREE = new RString("3");
     private static final RString CIRCLE = new RString("○");
     private static final RString DOT = new RString(".");
+    private static final int THREEE = 3;
+    private static final int FOUR = 4;
+    private static final int FIVE = 5;
+    private static final int SIX = 6;
+    private static final int TWENTYFIVE = 25;
     private static final RString 半角アスタリスク = new RString("*");
+    private static final RString 半角アスタリスクTHREE = new RString("***");
+    private static final RString 半角アスタリスクFOUR = new RString("****");
+    private static final RString 半角アスタリスクFIVE = new RString("*****");
     private static final RString 半角アスタリスクSIX = new RString("******");
+    private static final RString 半角アスタリスクEIGHT = new RString("********");
+    private static final RString 半角アスタリスクTEN = new RString("**********");
+    private static final RString 半角アスタリスクTWENTY = new RString("********************");
 
     /**
      * コンストラクタです
@@ -89,7 +100,8 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
                 source.seibetsu2 = 性別女の場合();
                 source.birthGengo = commonEra(entity.get生年月日());
                 source.birthYMD = commonYMD(entity.get生年月日());
-                source.hihokenshaNamaKana = entity.get被保険者氏名カナ();
+                source.hihokenshaNamaKana = entity.get被保険者氏名カナ()
+                        .padLeft(RString.HALF_SPACE, TWENTYFIVE);
             } else {
                 source.birthGengo = BLANK;
                 source.birthYMD = BLANK;
@@ -110,34 +122,31 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.yukoKikanEDYMD = commonRStringYMD(entity.get有効期間終了年月日());
             Boolean 公費負担限額減額 = entity.get公費負担上限額減額();
             source.kohiFutanJogenGaku = new RString(公費負担限額減額.toString());
-            source.sikyuGendoKijunGaKu1 = entity.get支給限度基準額1();
+            source.sikyuGendoKijunGaKu1 = entity.get支給限度基準額1().padRight(RString.HALF_SPACE, SIX);
             source.jogenTekiyoSTNengo1 = commonEra(entity.get上限管理適用開始年月日１());
             source.jogenKaTekiyoSTYMD1 = commonYMD(entity.get上限管理適用開始年月日１());
             source.jogenTekiyoEDNengo1 = commonRStringEra(entity.get上限管理終了年月日１());
             source.jogenTekiyoEDYMD1 = commonRStringYMD(entity.get上限管理終了年月日１());
             source.Hyodai2_2 = 旧訪問通所;
             source.Hyodai3_1 = 支給限度基準額;
-            source.sikyuGendoKijunGaKu2 = entity.get支給限度基準額２();
+            source.sikyuGendoKijunGaKu2 = entity.get支給限度基準額２().padRight(RString.HALF_SPACE, THREEE);
             source.jogenTekiyoSTNengo2 = commonEra(entity.get上限管理適用開始年月日２());
             source.jogenKaTekiyoSTYMD2 = commonYMD(entity.get上限管理適用開始年月日２());
             source.jogenTekiyoEDNengo2 = commonEra(entity.get上限管理終了年月日２());
             source.jogenTekiyoEDYMD2 = commonYMD(entity.get上限管理終了年月日２());
             source.Hyodai3_2 = 旧短期入所;
             source.keikakuSakuseiKbn = entity.get計画作成区分();
-            source.kyotakuShienJigyoshaNO = entity.get居宅支援事業者番号();
             source.kyoTekiyoSTNengo = commonRStringEra(entity.get居宅適用開始年月日());
             source.kyoTekiyoSTYMD = commonRStringYMD(entity.get居宅適用開始年月日());
             source.kyoTekiyoEDNengo = commonRStringEra(entity.get居宅適用終了年月日());
             source.kyoTekiyoEDYMD = commonRStringYMD(entity.get居宅適用終了年月日());
             source.genShinseichuKbn = entity.get減免申請中区分();
             source.riyoshaFutanKbn = entity.get利用者負担区分();
-            source.riyoKyufuRitsu = entity.get利用給付率();
             source.riyoTekiyoSTNengo = commonRStringEra(entity.get利用適用開始年月日());
             source.riyoTekiyoSTYMD = commonRStringYMD(entity.get利用適用開始年月日());
             source.riyoTekiyoEDNengo = commonRStringEra(entity.get利用適用終了年月日());
             source.riyoTekiyoEDYMD = commonRStringYMD(entity.get利用適用終了年月日());
             source.hyojunFutanKBN = entity.get標準負担区分();
-            source.hyojunFutanGaku = entity.get標準負担額();
             source.hyojunTekiyoSTNengo = commonRStringEra(entity.get標準適用開始年月日());
             source.hyojunTekiyoSTYMD = commonRStringYMD(entity.get標準適用開始年月日());
             source.hyojunTekiyoEDNengo = commonRStringEra(entity.get標準適用終了年月日());
@@ -153,15 +162,6 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.ninteiShinseiKbn = entity.get認定申請中区分();
             source.serviceKbn = entity.getｻｰﾋﾞｽ区分();
             source.tokuGenTaisho = entity.get特例減額措置対象();
-            source.shokuFutanGendoGaKu = entity.get食費負担限度額();
-            source.unitKoshitsu = entity.getﾕﾆｯﾄ型個室();
-            source.unitJunKoshitsu = entity.getﾕﾆｯﾄ型準個室();
-            source.juraiKoshitsuT = entity.get従来型個室特();
-            source.juraiKishitsuR = entity.get従来型個室老療();
-            source.tashoshitsu = entity.get多床室();
-            source.shin1 = entity.get新１();
-            source.shin2 = entity.get新２();
-            source.shin3 = entity.get新３();
             source.tokuTekiyoSTNengo = commonRStringEra(entity.get特定入所者適用開始年月日());
             source.tokuTekiyoSTYMD = commonRStringYMD(entity.get特定入所者適用開始年月日());
             source.tokuTekiyoEDNengo = commonRStringEra(entity.get特定入所者適用終了年月日());
@@ -169,7 +169,6 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.koikiHokenshaNO = entity.get広域保険者番号();
             source.rokenShichosonNo = entity.get老人保健市町村番号();
             source.rokenJukyushaNO = entity.get老人保健受給者番号();
-            source.shaKyufuritsu = entity.get軽減率();
             source.shaTekiyoSTNengo = commonRStringEra(entity.get軽減率適用開始年月日());
             source.shaTekiyoSTYMD = commonRStringYMD(entity.get軽減率適用開始年月日());
             source.shaTekiyoEDNengo = commonRStringEra(entity.get軽減率適用終了年月日());
@@ -185,13 +184,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.henkoShinseiKbn = entity.get変更申請中区分();
             source.shinseiNengo = commonEra(entity.get申請年月日());
             source.shinseiYMD = commonYMD(entity.get申請年月日());
-            source.kokuhoHokenshaNo = entity.get国保保険者番号();
-            source.kokuhoHihokenshashoNo = entity.get国保被保険者証番号();
-            source.kokuhoKojinNo = entity.get国保個人番号();
-            source.kokiHokenshaNo = entity.get後期高齢保険者番号();
-            source.kokiHihokenshaNo = entity.get後期高齢被保険者番号();
             source.jutokuTaishoKbn = entity.get住特対象者区分();
-            source.jutokuHokenshaNo = entity.get住特施設所在保険者番号();
             source.jutokuTekiyoSTNengo = commonRStringEra(entity.get住特適用開始年月日());
             source.jutokuTekiyoSTYMD = commonRStringYMD(entity.get住特適用開始年月日());
             source.jutokuTekiyoEDNengo = commonRStringEra(entity.get住特適用終了年月日());
@@ -200,8 +193,181 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.niFuTekiyoSTYMD = commonRStringYMD(entity.get二割負担適用開始年月日());
             source.niFuTekiyoEDNengo = commonRStringEra(entity.get二割負担適用終了年月日());
             source.niFuTekiyoEDYMD = commonRStringYMD(entity.get二割負担適用終了年月日());
+            特定入所者介護サービス(source);
+            利用者旧措置利用者負担(source);
+            社会福祉法人軽減情報(source);
+            標準負担特定標準負担(source);
+            居宅サービス計画届出(source);
+            後期高齢者医療資格(source);
+            国民健康保険資格(source);
+            住所地特例(source);
         }
         return source;
+    }
+
+    private void 国民健康保険資格(JukyushaIdoRenrakuhyoSource source) {
+        RString 国保保険者番号 = entity.get国保保険者番号();
+        if (国保保険者番号 != null && !国保保険者番号.isEmpty()
+                && 国保保険者番号.contains(半角アスタリスク)) {
+            source.kokuhoHokenshaNo = 半角アスタリスクEIGHT;
+        } else {
+            source.kokuhoHokenshaNo = 国保保険者番号;
+        }
+        RString 国保被保険者証番号 = entity.get国保被保険者証番号();
+        if (国保被保険者証番号 != null && !国保被保険者証番号.isEmpty()
+                && 国保被保険者証番号.contains(半角アスタリスク)) {
+            source.kokuhoHihokenshashoNo = 半角アスタリスクTWENTY;
+        } else {
+            source.kokuhoHihokenshashoNo = 国保被保険者証番号;
+        }
+        RString 国保個人番号 = entity.get国保個人番号();
+        if (国保個人番号 != null && !国保個人番号.isEmpty()
+                && 国保個人番号.contains(半角アスタリスク)) {
+            source.kokuhoKojinNo = 半角アスタリスクTEN;
+        } else {
+            source.kokuhoKojinNo = 国保個人番号;
+        }
+    }
+
+    private void 住所地特例(JukyushaIdoRenrakuhyoSource source) {
+        RString 住特施設所在保険者番号 = entity.get住特施設所在保険者番号();
+        if (住特施設所在保険者番号 != null && !住特施設所在保険者番号.isEmpty()
+                && 住特施設所在保険者番号.contains(半角アスタリスク)) {
+            source.jutokuHokenshaNo = 半角アスタリスクSIX;
+        } else {
+            source.jutokuHokenshaNo = 住特施設所在保険者番号;
+        }
+    }
+
+    private void 後期高齢者医療資格(JukyushaIdoRenrakuhyoSource source) {
+        RString 後期高齢保険者番号 = entity.get後期高齢保険者番号();
+        if (後期高齢保険者番号 != null && !後期高齢保険者番号.isEmpty()
+                && 後期高齢保険者番号.contains(半角アスタリスク)) {
+            source.kokiHokenshaNo = 半角アスタリスクEIGHT;
+        } else {
+            source.kokiHokenshaNo = 後期高齢保険者番号;
+        }
+        RString 後期高齢被保険者番号 = entity.get後期高齢被保険者番号();
+        if (後期高齢被保険者番号 != null && !後期高齢被保険者番号.isEmpty()
+                && 後期高齢被保険者番号.contains(半角アスタリスク)) {
+            source.kokiHihokenshaNo = 半角アスタリスクEIGHT;
+        } else {
+            source.kokiHihokenshaNo = 後期高齢被保険者番号;
+        }
+    }
+
+    private void 居宅サービス計画届出(JukyushaIdoRenrakuhyoSource source) {
+        RString 居宅支援事業者番号 = entity.get居宅支援事業者番号();
+        if (居宅支援事業者番号 != null && !居宅支援事業者番号.isEmpty()
+                && 居宅支援事業者番号.contains(半角アスタリスク)) {
+            source.kyotakuShienJigyoshaNO = 半角アスタリスクTEN;
+        } else {
+            source.kyotakuShienJigyoshaNO = 居宅支援事業者番号;
+        }
+    }
+
+    private void 標準負担特定標準負担(JukyushaIdoRenrakuhyoSource source) {
+        RString 標準負担額 = entity.get標準負担額();
+        if (標準負担額 != null && !標準負担額.isEmpty()
+                && 標準負担額.contains(半角アスタリスク)) {
+            source.hyojunFutanGaku = 半角アスタリスクFIVE;
+        } else {
+            source.hyojunFutanGaku = 標準負担額.padRight(RString.HALF_SPACE, FIVE);
+        }
+    }
+
+    private void 社会福祉法人軽減情報(JukyushaIdoRenrakuhyoSource source) {
+        RString 軽減率 = entity.get軽減率();
+        if (軽減率 != null && !軽減率.isEmpty()
+                && 軽減率.contains(半角アスタリスク)) {
+            source.shaKyufuritsu = 半角アスタリスクFOUR;
+        } else {
+            source.shaKyufuritsu = 軽減率.padRight(RString.HALF_SPACE, THREEE);
+        }
+    }
+
+    private void 利用者旧措置利用者負担(JukyushaIdoRenrakuhyoSource source) {
+        RString 給付率 = entity.get利用給付率();
+        if (給付率 != null && !給付率.isEmpty()
+                && 給付率.contains(半角アスタリスク)) {
+            source.riyoKyufuRitsu = 半角アスタリスクTHREE;
+        } else {
+            source.riyoKyufuRitsu = 給付率.padRight(RString.HALF_SPACE, THREEE);
+        }
+    }
+
+    private void 特定入所者介護サービス(JukyushaIdoRenrakuhyoSource source) {
+        居住費負担限度額(source);
+        RString 食費負担限度額 = entity.get食費負担限度額();
+        if (食費負担限度額 != null && !食費負担限度額.isEmpty()
+                && 食費負担限度額.contains(半角アスタリスク)) {
+            source.shokuFutanGendoGaKu = 半角アスタリスクFIVE;
+        } else {
+            source.shokuFutanGendoGaKu = 食費負担限度額.padRight(RString.HALF_SPACE, FOUR);
+        }
+    }
+
+    private void 居住費負担限度額(JukyushaIdoRenrakuhyoSource source) {
+        RString ﾕﾆｯﾄ型個室 = entity.getﾕﾆｯﾄ型個室();
+        if (ﾕﾆｯﾄ型個室 != null && !ﾕﾆｯﾄ型個室.isEmpty()
+                && ﾕﾆｯﾄ型個室.contains(半角アスタリスク)) {
+            source.unitKoshitsu = 半角アスタリスクFOUR;
+        } else {
+            source.unitKoshitsu = ﾕﾆｯﾄ型個室;
+        }
+        RString ﾕﾆｯﾄ型準個室 = entity.getﾕﾆｯﾄ型準個室();
+        if (ﾕﾆｯﾄ型準個室 != null && !ﾕﾆｯﾄ型準個室.isEmpty()
+                && ﾕﾆｯﾄ型準個室.contains(半角アスタリスク)) {
+            source.unitJunKoshitsu = 半角アスタリスクFOUR;
+        } else {
+            source.unitJunKoshitsu = ﾕﾆｯﾄ型準個室;
+        }
+        RString 従来型個室特 = entity.get従来型個室特();
+        if (従来型個室特 != null && !従来型個室特.isEmpty()
+                && 従来型個室特.contains(半角アスタリスク)) {
+            source.juraiKoshitsuT = 半角アスタリスクFOUR;
+        } else {
+            source.juraiKoshitsuT = 従来型個室特;
+        }
+        RString 従来型個室老療 = entity.get従来型個室老療();
+        if (従来型個室老療 != null && !従来型個室老療.isEmpty()
+                && 従来型個室老療.contains(半角アスタリスク)) {
+            source.juraiKishitsuR = 半角アスタリスクFOUR;
+        } else {
+            source.juraiKishitsuR = 従来型個室老療;
+        }
+        RString 多床室 = entity.get多床室();
+        if (多床室 != null && !多床室.isEmpty()
+                && 多床室.contains(半角アスタリスク)) {
+            source.tashoshitsu = 半角アスタリスクFOUR;
+        } else {
+            source.tashoshitsu = 多床室;
+        }
+        居宅費新負担限度額(source);
+    }
+
+    private void 居宅費新負担限度額(JukyushaIdoRenrakuhyoSource source) {
+        RString 新１ = entity.get新１();
+        if (新１ != null && !新１.isEmpty()
+                && 新１.contains(半角アスタリスク)) {
+            source.shin1 = 半角アスタリスクFOUR;
+        } else {
+            source.shin1 = 新１;
+        }
+        RString 新２ = entity.get新２();
+        if (新２ != null && !新２.isEmpty()
+                && 新２.contains(半角アスタリスク)) {
+            source.shin2 = 半角アスタリスクFOUR;
+        } else {
+            source.shin2 = 新２;
+        }
+        RString 新３ = entity.get新３();
+        if (新３ != null && !新３.isEmpty()
+                && 新３.contains(半角アスタリスク)) {
+            source.shin3 = 半角アスタリスクFOUR;
+        } else {
+            source.shin3 = 新３;
+        }
     }
 
     private RString commonEra(FlexibleDate 年月日) {
@@ -215,7 +381,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
 
     private RString commonRStringEra(RString 年月日) {
         if (年月日.contains(半角アスタリスク)) {
-            return 半角アスタリスクSIX;
+            return 年月日;
         }
         if (年月日 != null && !年月日.isEmpty()) {
             return new FlexibleDate(年月日).wareki()
@@ -237,7 +403,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
 
     private RString commonRStringYMD(RString 年月日) {
         if (年月日.contains(半角アスタリスク)) {
-            return 年月日;
+            return 半角アスタリスクSIX;
         }
         if (年月日 != null && !年月日.isEmpty()) {
             return new FlexibleDate(年月日).wareki()

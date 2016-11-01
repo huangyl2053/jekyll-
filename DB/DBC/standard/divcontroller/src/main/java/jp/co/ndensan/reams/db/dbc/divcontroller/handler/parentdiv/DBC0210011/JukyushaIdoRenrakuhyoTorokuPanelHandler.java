@@ -106,7 +106,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         }
         if ((!RString.isNullOrEmpty(entity.is課税層の特例減額措置対象フラグ()))
                 && RString.isNullOrEmpty(result.is課税層の特例減額措置対象フラグ())) {
-            resultEdit = resultEdit.set特定入所者介護サービス区分コード(半角アスタリスク);
+            resultEdit = resultEdit.set課税層の特例減額措置対象フラグ(半角アスタリスク);
         }
         if ((!RString.isNullOrEmpty(entity.get軽減率()))
                 && RString.isNullOrEmpty(result.get軽減率())) {
