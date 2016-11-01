@@ -122,7 +122,7 @@
         , teiKyoKihonJoho."teikyoNaiyo10"
         , teiKyoKihonJoho."misetteiJiyu10"
         , teiKyoKihonJoho."kokaiYMD"
-        FROM #{tempTableName} teiKyoKihonJoho
+        FROM ${tempTableName} AS teiKyoKihonJoho
         INNER JOIN rgua.${psmShikibetsuTaisho} AS PSM
         ON teiKyoKihonJoho."shikibetsuCode" = PSM."shikibetsuCode"
         <if test="isShinkiIdo">
