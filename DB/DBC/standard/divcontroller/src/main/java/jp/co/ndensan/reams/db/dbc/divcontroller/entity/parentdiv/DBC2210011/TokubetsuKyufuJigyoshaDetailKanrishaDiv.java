@@ -21,8 +21,8 @@ public class TokubetsuKyufuJigyoshaDetailKanrishaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnKanrishaCopy")
-    private Button btnKanrishaCopy;
+    @JsonProperty("btnCopyKanrisha")
+    private Button btnCopyKanrisha;
     @JsonProperty("txtKanrishaName")
     private TextBox txtKanrishaName;
     @JsonProperty("txtKanrishaNameKana")
@@ -41,21 +41,21 @@ public class TokubetsuKyufuJigyoshaDetailKanrishaDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnKanrishaCopy
-     * @return btnKanrishaCopy
+     * getbtnCopyKanrisha
+     * @return btnCopyKanrisha
      */
-    @JsonProperty("btnKanrishaCopy")
-    public Button getBtnKanrishaCopy() {
-        return btnKanrishaCopy;
+    @JsonProperty("btnCopyKanrisha")
+    public Button getBtnCopyKanrisha() {
+        return btnCopyKanrisha;
     }
 
     /*
-     * setbtnKanrishaCopy
-     * @param btnKanrishaCopy btnKanrishaCopy
+     * setbtnCopyKanrisha
+     * @param btnCopyKanrisha btnCopyKanrisha
      */
-    @JsonProperty("btnKanrishaCopy")
-    public void setBtnKanrishaCopy(Button btnKanrishaCopy) {
-        this.btnKanrishaCopy = btnKanrishaCopy;
+    @JsonProperty("btnCopyKanrisha")
+    public void setBtnCopyKanrisha(Button btnCopyKanrisha) {
+        this.btnCopyKanrisha = btnCopyKanrisha;
     }
 
     /*

@@ -21,8 +21,8 @@ public class TokubetsuKyufuJigyoshaDetailDaihyoshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnDaihyoshaCopy")
-    private Button btnDaihyoshaCopy;
+    @JsonProperty("btnCopyDaihyosha")
+    private Button btnCopyDaihyosha;
     @JsonProperty("txtDaihyoshaYakushoku")
     private TextBox txtDaihyoshaYakushoku;
     @JsonProperty("txtDaihyoshaName")
@@ -43,21 +43,21 @@ public class TokubetsuKyufuJigyoshaDetailDaihyoshaDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnDaihyoshaCopy
-     * @return btnDaihyoshaCopy
+     * getbtnCopyDaihyosha
+     * @return btnCopyDaihyosha
      */
-    @JsonProperty("btnDaihyoshaCopy")
-    public Button getBtnDaihyoshaCopy() {
-        return btnDaihyoshaCopy;
+    @JsonProperty("btnCopyDaihyosha")
+    public Button getBtnCopyDaihyosha() {
+        return btnCopyDaihyosha;
     }
 
     /*
-     * setbtnDaihyoshaCopy
-     * @param btnDaihyoshaCopy btnDaihyoshaCopy
+     * setbtnCopyDaihyosha
+     * @param btnCopyDaihyosha btnCopyDaihyosha
      */
-    @JsonProperty("btnDaihyoshaCopy")
-    public void setBtnDaihyoshaCopy(Button btnDaihyoshaCopy) {
-        this.btnDaihyoshaCopy = btnDaihyoshaCopy;
+    @JsonProperty("btnCopyDaihyosha")
+    public void setBtnCopyDaihyosha(Button btnCopyDaihyosha) {
+        this.btnCopyDaihyosha = btnCopyDaihyosha;
     }
 
     /*

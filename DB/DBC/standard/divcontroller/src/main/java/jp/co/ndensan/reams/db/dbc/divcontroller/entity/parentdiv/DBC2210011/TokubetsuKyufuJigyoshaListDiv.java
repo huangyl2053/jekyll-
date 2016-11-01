@@ -21,8 +21,8 @@ public class TokubetsuKyufuJigyoshaListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnJigyoshaAdd")
-    private Button btnJigyoshaAdd;
+    @JsonProperty("btnAddJigyosha")
+    private Button btnAddJigyosha;
     @JsonProperty("dgTokubetsuKyufuJigyoshaList")
     private DataGrid<dgTokubetsuKyufuJigyoshaList_Row> dgTokubetsuKyufuJigyoshaList;
 
@@ -33,21 +33,21 @@ public class TokubetsuKyufuJigyoshaListDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnJigyoshaAdd
-     * @return btnJigyoshaAdd
+     * getbtnAddJigyosha
+     * @return btnAddJigyosha
      */
-    @JsonProperty("btnJigyoshaAdd")
-    public Button getBtnJigyoshaAdd() {
-        return btnJigyoshaAdd;
+    @JsonProperty("btnAddJigyosha")
+    public Button getBtnAddJigyosha() {
+        return btnAddJigyosha;
     }
 
     /*
-     * setbtnJigyoshaAdd
-     * @param btnJigyoshaAdd btnJigyoshaAdd
+     * setbtnAddJigyosha
+     * @param btnAddJigyosha btnAddJigyosha
      */
-    @JsonProperty("btnJigyoshaAdd")
-    public void setBtnJigyoshaAdd(Button btnJigyoshaAdd) {
-        this.btnJigyoshaAdd = btnJigyoshaAdd;
+    @JsonProperty("btnAddJigyosha")
+    public void setBtnAddJigyosha(Button btnAddJigyosha) {
+        this.btnAddJigyosha = btnAddJigyosha;
     }
 
     /*

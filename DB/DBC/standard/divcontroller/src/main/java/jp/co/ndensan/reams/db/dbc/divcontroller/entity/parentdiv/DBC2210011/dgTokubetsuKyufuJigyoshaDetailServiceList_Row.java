@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Oct 20 15:05:24 CST 2016 
+ * Sat Oct 22 17:51:42 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -21,35 +22,32 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
+    private RString hdnServiceCode;
     private RString txtService;
     private RString txtKanrisha;
-    private RString txtJigyoKaishiYMD;
-    private RString txtJigyoKyushiYMD;
-    private RString txtJigyoHaishiYMD;
-    private RString txtJigyoSaikaiYMD;
-    private RString txtTorokuKaishiYMD;
-    private RString txtTorokuShuryoYMD;
+    private TextBoxDate txtJigyoKaishiYMD;
+    private TextBoxDate txtJigyoKyushiYMD;
+    private TextBoxDate txtJigyoHaishiYMD;
+    private TextBoxDate txtJigyoSaikaiYMD;
+    private TextBoxDate txtTorokuKaishiYMD;
+    private TextBoxDate txtTorokuShuryoYMD;
     private RString txtJuryoInin;
     private RString txtSeikatsuHogo;
-    private RString txtJigyoshaCode;
-    private RString txtServiceCode;
-    private RString txtRirekiNo;
 
     public dgTokubetsuKyufuJigyoshaDetailServiceList_Row() {
         super();
+        this.hdnServiceCode = RString.EMPTY;
         this.txtService = RString.EMPTY;
         this.txtKanrisha = RString.EMPTY;
-        this.txtJigyoKaishiYMD = RString.EMPTY;
-        this.txtJigyoKyushiYMD = RString.EMPTY;
-        this.txtJigyoHaishiYMD = RString.EMPTY;
-        this.txtJigyoSaikaiYMD = RString.EMPTY;
-        this.txtTorokuKaishiYMD = RString.EMPTY;
-        this.txtTorokuShuryoYMD = RString.EMPTY;
+        this.txtJigyoKaishiYMD = new TextBoxDate();
+        this.txtJigyoKyushiYMD = new TextBoxDate();
+        this.txtJigyoHaishiYMD = new TextBoxDate();
+        this.txtJigyoSaikaiYMD = new TextBoxDate();
+        this.txtTorokuKaishiYMD = new TextBoxDate();
+        this.txtTorokuShuryoYMD = new TextBoxDate();
         this.txtJuryoInin = RString.EMPTY;
         this.txtSeikatsuHogo = RString.EMPTY;
-        this.txtJigyoshaCode = RString.EMPTY;
-        this.txtServiceCode = RString.EMPTY;
-        this.txtRirekiNo = RString.EMPTY;
+        this.setOriginalData("hdnServiceCode", hdnServiceCode);
         this.setOriginalData("txtService", txtService);
         this.setOriginalData("txtKanrisha", txtKanrisha);
         this.setOriginalData("txtJigyoKaishiYMD", txtJigyoKaishiYMD);
@@ -60,13 +58,11 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         this.setOriginalData("txtTorokuShuryoYMD", txtTorokuShuryoYMD);
         this.setOriginalData("txtJuryoInin", txtJuryoInin);
         this.setOriginalData("txtSeikatsuHogo", txtSeikatsuHogo);
-        this.setOriginalData("txtJigyoshaCode", txtJigyoshaCode);
-        this.setOriginalData("txtServiceCode", txtServiceCode);
-        this.setOriginalData("txtRirekiNo", txtRirekiNo);
     }
 
-    public dgTokubetsuKyufuJigyoshaDetailServiceList_Row(RString txtService, RString txtKanrisha, RString txtJigyoKaishiYMD, RString txtJigyoKyushiYMD, RString txtJigyoHaishiYMD, RString txtJigyoSaikaiYMD, RString txtTorokuKaishiYMD, RString txtTorokuShuryoYMD, RString txtJuryoInin, RString txtSeikatsuHogo, RString txtJigyoshaCode, RString txtServiceCode, RString txtRirekiNo) {
+    public dgTokubetsuKyufuJigyoshaDetailServiceList_Row(RString hdnServiceCode, RString txtService, RString txtKanrisha, TextBoxDate txtJigyoKaishiYMD, TextBoxDate txtJigyoKyushiYMD, TextBoxDate txtJigyoHaishiYMD, TextBoxDate txtJigyoSaikaiYMD, TextBoxDate txtTorokuKaishiYMD, TextBoxDate txtTorokuShuryoYMD, RString txtJuryoInin, RString txtSeikatsuHogo) {
         super();
+        this.setOriginalData("hdnServiceCode", hdnServiceCode);
         this.setOriginalData("txtService", txtService);
         this.setOriginalData("txtKanrisha", txtKanrisha);
         this.setOriginalData("txtJigyoKaishiYMD", txtJigyoKaishiYMD);
@@ -77,9 +73,7 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         this.setOriginalData("txtTorokuShuryoYMD", txtTorokuShuryoYMD);
         this.setOriginalData("txtJuryoInin", txtJuryoInin);
         this.setOriginalData("txtSeikatsuHogo", txtSeikatsuHogo);
-        this.setOriginalData("txtJigyoshaCode", txtJigyoshaCode);
-        this.setOriginalData("txtServiceCode", txtServiceCode);
-        this.setOriginalData("txtRirekiNo", txtRirekiNo);
+        this.hdnServiceCode = hdnServiceCode;
         this.txtService = txtService;
         this.txtKanrisha = txtKanrisha;
         this.txtJigyoKaishiYMD = txtJigyoKaishiYMD;
@@ -90,9 +84,10 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         this.txtTorokuShuryoYMD = txtTorokuShuryoYMD;
         this.txtJuryoInin = txtJuryoInin;
         this.txtSeikatsuHogo = txtSeikatsuHogo;
-        this.txtJigyoshaCode = txtJigyoshaCode;
-        this.txtServiceCode = txtServiceCode;
-        this.txtRirekiNo = txtRirekiNo;
+    }
+
+    public RString getHdnServiceCode() {
+        return hdnServiceCode;
     }
 
     public RString getTxtService() {
@@ -103,27 +98,27 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         return txtKanrisha;
     }
 
-    public RString getTxtJigyoKaishiYMD() {
+    public TextBoxDate getTxtJigyoKaishiYMD() {
         return txtJigyoKaishiYMD;
     }
 
-    public RString getTxtJigyoKyushiYMD() {
+    public TextBoxDate getTxtJigyoKyushiYMD() {
         return txtJigyoKyushiYMD;
     }
 
-    public RString getTxtJigyoHaishiYMD() {
+    public TextBoxDate getTxtJigyoHaishiYMD() {
         return txtJigyoHaishiYMD;
     }
 
-    public RString getTxtJigyoSaikaiYMD() {
+    public TextBoxDate getTxtJigyoSaikaiYMD() {
         return txtJigyoSaikaiYMD;
     }
 
-    public RString getTxtTorokuKaishiYMD() {
+    public TextBoxDate getTxtTorokuKaishiYMD() {
         return txtTorokuKaishiYMD;
     }
 
-    public RString getTxtTorokuShuryoYMD() {
+    public TextBoxDate getTxtTorokuShuryoYMD() {
         return txtTorokuShuryoYMD;
     }
 
@@ -135,16 +130,9 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         return txtSeikatsuHogo;
     }
 
-    public RString getTxtJigyoshaCode() {
-        return txtJigyoshaCode;
-    }
-
-    public RString getTxtServiceCode() {
-        return txtServiceCode;
-    }
-
-    public RString getTxtRirekiNo() {
-        return txtRirekiNo;
+    public void setHdnServiceCode(RString hdnServiceCode) {
+        this.setOriginalData("hdnServiceCode", hdnServiceCode);
+        this.hdnServiceCode = hdnServiceCode;
     }
 
     public void setTxtService(RString txtService) {
@@ -157,32 +145,32 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         this.txtKanrisha = txtKanrisha;
     }
 
-    public void setTxtJigyoKaishiYMD(RString txtJigyoKaishiYMD) {
+    public void setTxtJigyoKaishiYMD(TextBoxDate txtJigyoKaishiYMD) {
         this.setOriginalData("txtJigyoKaishiYMD", txtJigyoKaishiYMD);
         this.txtJigyoKaishiYMD = txtJigyoKaishiYMD;
     }
 
-    public void setTxtJigyoKyushiYMD(RString txtJigyoKyushiYMD) {
+    public void setTxtJigyoKyushiYMD(TextBoxDate txtJigyoKyushiYMD) {
         this.setOriginalData("txtJigyoKyushiYMD", txtJigyoKyushiYMD);
         this.txtJigyoKyushiYMD = txtJigyoKyushiYMD;
     }
 
-    public void setTxtJigyoHaishiYMD(RString txtJigyoHaishiYMD) {
+    public void setTxtJigyoHaishiYMD(TextBoxDate txtJigyoHaishiYMD) {
         this.setOriginalData("txtJigyoHaishiYMD", txtJigyoHaishiYMD);
         this.txtJigyoHaishiYMD = txtJigyoHaishiYMD;
     }
 
-    public void setTxtJigyoSaikaiYMD(RString txtJigyoSaikaiYMD) {
+    public void setTxtJigyoSaikaiYMD(TextBoxDate txtJigyoSaikaiYMD) {
         this.setOriginalData("txtJigyoSaikaiYMD", txtJigyoSaikaiYMD);
         this.txtJigyoSaikaiYMD = txtJigyoSaikaiYMD;
     }
 
-    public void setTxtTorokuKaishiYMD(RString txtTorokuKaishiYMD) {
+    public void setTxtTorokuKaishiYMD(TextBoxDate txtTorokuKaishiYMD) {
         this.setOriginalData("txtTorokuKaishiYMD", txtTorokuKaishiYMD);
         this.txtTorokuKaishiYMD = txtTorokuKaishiYMD;
     }
 
-    public void setTxtTorokuShuryoYMD(RString txtTorokuShuryoYMD) {
+    public void setTxtTorokuShuryoYMD(TextBoxDate txtTorokuShuryoYMD) {
         this.setOriginalData("txtTorokuShuryoYMD", txtTorokuShuryoYMD);
         this.txtTorokuShuryoYMD = txtTorokuShuryoYMD;
     }
@@ -195,21 +183,6 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
     public void setTxtSeikatsuHogo(RString txtSeikatsuHogo) {
         this.setOriginalData("txtSeikatsuHogo", txtSeikatsuHogo);
         this.txtSeikatsuHogo = txtSeikatsuHogo;
-    }
-
-    public void setTxtJigyoshaCode(RString txtJigyoshaCode) {
-        this.setOriginalData("txtJigyoshaCode", txtJigyoshaCode);
-        this.txtJigyoshaCode = txtJigyoshaCode;
-    }
-
-    public void setTxtServiceCode(RString txtServiceCode) {
-        this.setOriginalData("txtServiceCode", txtServiceCode);
-        this.txtServiceCode = txtServiceCode;
-    }
-
-    public void setTxtRirekiNo(RString txtRirekiNo) {
-        this.setOriginalData("txtRirekiNo", txtRirekiNo);
-        this.txtRirekiNo = txtRirekiNo;
     }
 
     // </editor-fold>
