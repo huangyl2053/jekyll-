@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -23,20 +22,20 @@ public class TokubetsuKyufuJigyoshaDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("TokubetsuKyufuJigyoshaDetailCode")
-    private TokubetsuKyufuJigyoshaDetailCodeDiv TokubetsuKyufuJigyoshaDetailCode;
-    @JsonProperty("ddlHojinShubetsu")
-    private DropDownList ddlHojinShubetsu;
+    @JsonProperty("TokubetsuKyufuJigyoshaCode")
+    private TokubetsuKyufuJigyoshaCodeDiv TokubetsuKyufuJigyoshaCode;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailHojinShubetsu")
+    private TokubetsuKyufuJigyoshaDetailHojinShubetsuDiv TokubetsuKyufuJigyoshaDetailHojinShubetsu;
     @JsonProperty("radIdoKubun")
     private RadioButton radIdoKubun;
     @JsonProperty("txtIdoYMD")
     private TextBoxDate txtIdoYMD;
-    @JsonProperty("txtBiko")
-    private TextBox txtBiko;
-    @JsonProperty("tabTokubetsuKyufuJigyoshaDetail")
-    private tabTokubetsuKyufuJigyoshaDetailDiv tabTokubetsuKyufuJigyoshaDetail;
-    @JsonProperty("btnSaveTemp")
-    private Button btnSaveTemp;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailShinseisha")
+    private TokubetsuKyufuJigyoshaDetailShinseishaDiv TokubetsuKyufuJigyoshaDetailShinseisha;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailDaihyosha")
+    private TokubetsuKyufuJigyoshaDetailDaihyoshaDiv TokubetsuKyufuJigyoshaDetailDaihyosha;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailServiceList")
+    private TokubetsuKyufuJigyoshaDetailServiceListDiv TokubetsuKyufuJigyoshaDetailServiceList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -45,39 +44,39 @@ public class TokubetsuKyufuJigyoshaDetailDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getTokubetsuKyufuJigyoshaDetailCode
-     * @return TokubetsuKyufuJigyoshaDetailCode
+     * getTokubetsuKyufuJigyoshaCode
+     * @return TokubetsuKyufuJigyoshaCode
      */
-    @JsonProperty("TokubetsuKyufuJigyoshaDetailCode")
-    public TokubetsuKyufuJigyoshaDetailCodeDiv getTokubetsuKyufuJigyoshaDetailCode() {
-        return TokubetsuKyufuJigyoshaDetailCode;
+    @JsonProperty("TokubetsuKyufuJigyoshaCode")
+    public TokubetsuKyufuJigyoshaCodeDiv getTokubetsuKyufuJigyoshaCode() {
+        return TokubetsuKyufuJigyoshaCode;
     }
 
     /*
-     * setTokubetsuKyufuJigyoshaDetailCode
-     * @param TokubetsuKyufuJigyoshaDetailCode TokubetsuKyufuJigyoshaDetailCode
+     * setTokubetsuKyufuJigyoshaCode
+     * @param TokubetsuKyufuJigyoshaCode TokubetsuKyufuJigyoshaCode
      */
-    @JsonProperty("TokubetsuKyufuJigyoshaDetailCode")
-    public void setTokubetsuKyufuJigyoshaDetailCode(TokubetsuKyufuJigyoshaDetailCodeDiv TokubetsuKyufuJigyoshaDetailCode) {
-        this.TokubetsuKyufuJigyoshaDetailCode = TokubetsuKyufuJigyoshaDetailCode;
+    @JsonProperty("TokubetsuKyufuJigyoshaCode")
+    public void setTokubetsuKyufuJigyoshaCode(TokubetsuKyufuJigyoshaCodeDiv TokubetsuKyufuJigyoshaCode) {
+        this.TokubetsuKyufuJigyoshaCode = TokubetsuKyufuJigyoshaCode;
     }
 
     /*
-     * getddlHojinShubetsu
-     * @return ddlHojinShubetsu
+     * getTokubetsuKyufuJigyoshaDetailHojinShubetsu
+     * @return TokubetsuKyufuJigyoshaDetailHojinShubetsu
      */
-    @JsonProperty("ddlHojinShubetsu")
-    public DropDownList getDdlHojinShubetsu() {
-        return ddlHojinShubetsu;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailHojinShubetsu")
+    public TokubetsuKyufuJigyoshaDetailHojinShubetsuDiv getTokubetsuKyufuJigyoshaDetailHojinShubetsu() {
+        return TokubetsuKyufuJigyoshaDetailHojinShubetsu;
     }
 
     /*
-     * setddlHojinShubetsu
-     * @param ddlHojinShubetsu ddlHojinShubetsu
+     * setTokubetsuKyufuJigyoshaDetailHojinShubetsu
+     * @param TokubetsuKyufuJigyoshaDetailHojinShubetsu TokubetsuKyufuJigyoshaDetailHojinShubetsu
      */
-    @JsonProperty("ddlHojinShubetsu")
-    public void setDdlHojinShubetsu(DropDownList ddlHojinShubetsu) {
-        this.ddlHojinShubetsu = ddlHojinShubetsu;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailHojinShubetsu")
+    public void setTokubetsuKyufuJigyoshaDetailHojinShubetsu(TokubetsuKyufuJigyoshaDetailHojinShubetsuDiv TokubetsuKyufuJigyoshaDetailHojinShubetsu) {
+        this.TokubetsuKyufuJigyoshaDetailHojinShubetsu = TokubetsuKyufuJigyoshaDetailHojinShubetsu;
     }
 
     /*
@@ -117,120 +116,80 @@ public class TokubetsuKyufuJigyoshaDetailDiv extends Panel {
     }
 
     /*
-     * gettxtBiko
-     * @return txtBiko
+     * getTokubetsuKyufuJigyoshaDetailShinseisha
+     * @return TokubetsuKyufuJigyoshaDetailShinseisha
      */
-    @JsonProperty("txtBiko")
-    public TextBox getTxtBiko() {
-        return txtBiko;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailShinseisha")
+    public TokubetsuKyufuJigyoshaDetailShinseishaDiv getTokubetsuKyufuJigyoshaDetailShinseisha() {
+        return TokubetsuKyufuJigyoshaDetailShinseisha;
     }
 
     /*
-     * settxtBiko
-     * @param txtBiko txtBiko
+     * setTokubetsuKyufuJigyoshaDetailShinseisha
+     * @param TokubetsuKyufuJigyoshaDetailShinseisha TokubetsuKyufuJigyoshaDetailShinseisha
      */
-    @JsonProperty("txtBiko")
-    public void setTxtBiko(TextBox txtBiko) {
-        this.txtBiko = txtBiko;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailShinseisha")
+    public void setTokubetsuKyufuJigyoshaDetailShinseisha(TokubetsuKyufuJigyoshaDetailShinseishaDiv TokubetsuKyufuJigyoshaDetailShinseisha) {
+        this.TokubetsuKyufuJigyoshaDetailShinseisha = TokubetsuKyufuJigyoshaDetailShinseisha;
     }
 
     /*
-     * gettabTokubetsuKyufuJigyoshaDetail
-     * @return tabTokubetsuKyufuJigyoshaDetail
+     * getTokubetsuKyufuJigyoshaDetailDaihyosha
+     * @return TokubetsuKyufuJigyoshaDetailDaihyosha
      */
-    @JsonProperty("tabTokubetsuKyufuJigyoshaDetail")
-    public tabTokubetsuKyufuJigyoshaDetailDiv getTabTokubetsuKyufuJigyoshaDetail() {
-        return tabTokubetsuKyufuJigyoshaDetail;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailDaihyosha")
+    public TokubetsuKyufuJigyoshaDetailDaihyoshaDiv getTokubetsuKyufuJigyoshaDetailDaihyosha() {
+        return TokubetsuKyufuJigyoshaDetailDaihyosha;
     }
 
     /*
-     * settabTokubetsuKyufuJigyoshaDetail
-     * @param tabTokubetsuKyufuJigyoshaDetail tabTokubetsuKyufuJigyoshaDetail
+     * setTokubetsuKyufuJigyoshaDetailDaihyosha
+     * @param TokubetsuKyufuJigyoshaDetailDaihyosha TokubetsuKyufuJigyoshaDetailDaihyosha
      */
-    @JsonProperty("tabTokubetsuKyufuJigyoshaDetail")
-    public void setTabTokubetsuKyufuJigyoshaDetail(tabTokubetsuKyufuJigyoshaDetailDiv tabTokubetsuKyufuJigyoshaDetail) {
-        this.tabTokubetsuKyufuJigyoshaDetail = tabTokubetsuKyufuJigyoshaDetail;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailDaihyosha")
+    public void setTokubetsuKyufuJigyoshaDetailDaihyosha(TokubetsuKyufuJigyoshaDetailDaihyoshaDiv TokubetsuKyufuJigyoshaDetailDaihyosha) {
+        this.TokubetsuKyufuJigyoshaDetailDaihyosha = TokubetsuKyufuJigyoshaDetailDaihyosha;
     }
 
     /*
-     * getbtnSaveTemp
-     * @return btnSaveTemp
+     * getTokubetsuKyufuJigyoshaDetailServiceList
+     * @return TokubetsuKyufuJigyoshaDetailServiceList
      */
-    @JsonProperty("btnSaveTemp")
-    public Button getBtnSaveTemp() {
-        return btnSaveTemp;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailServiceList")
+    public TokubetsuKyufuJigyoshaDetailServiceListDiv getTokubetsuKyufuJigyoshaDetailServiceList() {
+        return TokubetsuKyufuJigyoshaDetailServiceList;
     }
 
     /*
-     * setbtnSaveTemp
-     * @param btnSaveTemp btnSaveTemp
+     * setTokubetsuKyufuJigyoshaDetailServiceList
+     * @param TokubetsuKyufuJigyoshaDetailServiceList TokubetsuKyufuJigyoshaDetailServiceList
      */
-    @JsonProperty("btnSaveTemp")
-    public void setBtnSaveTemp(Button btnSaveTemp) {
-        this.btnSaveTemp = btnSaveTemp;
+    @JsonProperty("TokubetsuKyufuJigyoshaDetailServiceList")
+    public void setTokubetsuKyufuJigyoshaDetailServiceList(TokubetsuKyufuJigyoshaDetailServiceListDiv TokubetsuKyufuJigyoshaDetailServiceList) {
+        this.TokubetsuKyufuJigyoshaDetailServiceList = TokubetsuKyufuJigyoshaDetailServiceList;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public tplShinseiDiv getTplShinsei() {
-        return this.getTabTokubetsuKyufuJigyoshaDetail().getTplShinsei();
+    public Space getSpc02() {
+        return this.getTokubetsuKyufuJigyoshaDetailHojinShubetsu().getSpc02();
     }
 
     @JsonIgnore
-    public void  setTplShinsei(tplShinseiDiv tplShinsei) {
-        this.getTabTokubetsuKyufuJigyoshaDetail().setTplShinsei(tplShinsei);
+    public void  setSpc02(Space spc02) {
+        this.getTokubetsuKyufuJigyoshaDetailHojinShubetsu().setSpc02(spc02);
     }
 
     @JsonIgnore
-    public TokubetsuKyufuJigyoshaDetailShinseishaDiv getTokubetsuKyufuJigyoshaDetailShinseisha() {
-        return this.getTabTokubetsuKyufuJigyoshaDetail().getTplShinsei().getTokubetsuKyufuJigyoshaDetailShinseisha();
+    public DropDownList getDdlHojinShubetsu() {
+        return this.getTokubetsuKyufuJigyoshaDetailHojinShubetsu().getDdlHojinShubetsu();
     }
 
     @JsonIgnore
-    public void  setTokubetsuKyufuJigyoshaDetailShinseisha(TokubetsuKyufuJigyoshaDetailShinseishaDiv TokubetsuKyufuJigyoshaDetailShinseisha) {
-        this.getTabTokubetsuKyufuJigyoshaDetail().getTplShinsei().setTokubetsuKyufuJigyoshaDetailShinseisha(TokubetsuKyufuJigyoshaDetailShinseisha);
-    }
-
-    @JsonIgnore
-    public TokubetsuKyufuJigyoshaDetailDaihyoshaDiv getTokubetsuKyufuJigyoshaDetailDaihyosha() {
-        return this.getTabTokubetsuKyufuJigyoshaDetail().getTplShinsei().getTokubetsuKyufuJigyoshaDetailDaihyosha();
-    }
-
-    @JsonIgnore
-    public void  setTokubetsuKyufuJigyoshaDetailDaihyosha(TokubetsuKyufuJigyoshaDetailDaihyoshaDiv TokubetsuKyufuJigyoshaDetailDaihyosha) {
-        this.getTabTokubetsuKyufuJigyoshaDetail().getTplShinsei().setTokubetsuKyufuJigyoshaDetailDaihyosha(TokubetsuKyufuJigyoshaDetailDaihyosha);
-    }
-
-    @JsonIgnore
-    public tplServiceDiv getTplService() {
-        return this.getTabTokubetsuKyufuJigyoshaDetail().getTplService();
-    }
-
-    @JsonIgnore
-    public void  setTplService(tplServiceDiv tplService) {
-        this.getTabTokubetsuKyufuJigyoshaDetail().setTplService(tplService);
-    }
-
-    @JsonIgnore
-    public TokubetsuKyufuJigyoshaDetailServiceListDiv getTokubetsuKyufuJigyoshaDetailServiceList() {
-        return this.getTabTokubetsuKyufuJigyoshaDetail().getTplService().getTokubetsuKyufuJigyoshaDetailServiceList();
-    }
-
-    @JsonIgnore
-    public void  setTokubetsuKyufuJigyoshaDetailServiceList(TokubetsuKyufuJigyoshaDetailServiceListDiv TokubetsuKyufuJigyoshaDetailServiceList) {
-        this.getTabTokubetsuKyufuJigyoshaDetail().getTplService().setTokubetsuKyufuJigyoshaDetailServiceList(TokubetsuKyufuJigyoshaDetailServiceList);
-    }
-
-    @JsonIgnore
-    public TokubetsuKyufuJigyoshaDetailServiceInfoDiv getTokubetsuKyufuJigyoshaDetailServiceInfo() {
-        return this.getTabTokubetsuKyufuJigyoshaDetail().getTplService().getTokubetsuKyufuJigyoshaDetailServiceInfo();
-    }
-
-    @JsonIgnore
-    public void  setTokubetsuKyufuJigyoshaDetailServiceInfo(TokubetsuKyufuJigyoshaDetailServiceInfoDiv TokubetsuKyufuJigyoshaDetailServiceInfo) {
-        this.getTabTokubetsuKyufuJigyoshaDetail().getTplService().setTokubetsuKyufuJigyoshaDetailServiceInfo(TokubetsuKyufuJigyoshaDetailServiceInfo);
+    public void  setDdlHojinShubetsu(DropDownList ddlHojinShubetsu) {
+        this.getTokubetsuKyufuJigyoshaDetailHojinShubetsu().setDdlHojinShubetsu(ddlHojinShubetsu);
     }
 
     // </editor-fold>
