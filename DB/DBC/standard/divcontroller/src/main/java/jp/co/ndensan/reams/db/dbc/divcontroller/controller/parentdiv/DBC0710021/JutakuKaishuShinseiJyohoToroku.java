@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -172,6 +173,8 @@ public class JutakuKaishuShinseiJyohoToroku {
                 ResponseHolder.getMessageCode());
         boolean 確認_汎用 = new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
+        boolean 保存終了 = new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode());
         JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報,
                 JutakuGaisuViewStateHolderParameter.class);
         if (!handler.is画面データが変更(画面モード, param)) {
@@ -211,7 +214,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).respond();
             }
         }
-        return to内容保存(div, 画面モード, 引き継ぎデータEntity, handler, 削除の確認, 保存の確認, 確認_汎用, param);
+        return to内容保存(div, 画面モード, 引き継ぎデータEntity, handler, 削除の確認, 保存の確認, 保存終了, 確認_汎用, param);
     }
 
     private boolean isCheckFour(boolean 限度額, boolean 削除の確認, boolean 保存の確認, boolean 確認_汎用) {
@@ -235,7 +238,9 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuHandler handler,
             boolean 削除の確認,
             boolean 保存の確認,
-            boolean 確認_汎用, JutakuGaisuViewStateHolderParameter param) {
+            boolean 保存終了,
+            boolean 確認_汎用,
+            JutakuGaisuViewStateHolderParameter param) {
 
         if (画面モード_削除.equals(画面モード)) {
             if (isCheckTow(削除の確認, 確認_汎用)) {
@@ -281,6 +286,14 @@ public class JutakuKaishuShinseiJyohoToroku {
                 set完了状態(div);
                 return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
             }
+        } else if (!保存終了 && 画面モード_審査.equals(画面モード)) {
+            InformationMessage infoMessage = new InformationMessage(
+                    UrInformationMessages.保存終了.getMessage().getCode(),
+                    UrInformationMessages.保存終了.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(infoMessage).respond();
+        }
+        if (保存終了 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
         }
         if (確認_汎用 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.set画面遷移パラメータ(引き継ぎデータEntity.get識別コード(),
@@ -308,7 +321,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     }
 
     private boolean is状態Check(RString 画面モード) {
-        return 画面モード_審査.equals(画面モード) || 画面モード_削除.equals(画面モード)
+        return 画面モード_削除.equals(画面モード)
                 || 画面モード_取消.equals(画面モード);
     }
 
@@ -525,7 +538,6 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
         }
-
         return ResponseData.of(div).respond();
     }
 
@@ -552,6 +564,9 @@ public class JutakuKaishuShinseiJyohoToroku {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
                     ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+                画面モード = set画面モード(param, 画面モード);
+
                 handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
                 ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
@@ -812,6 +827,15 @@ public class JutakuKaishuShinseiJyohoToroku {
                     画面モード, div, 住宅改修内容チェックエラーメッセージ, is給付率);
         } else {
             return new JutakuKaishuShinseiJyohoTorokuValidationHandler(div);
+        }
+    }
+
+    private RString set画面モード(JutakuGaisuViewStateHolderParameter param, RString 画面モード) {
+        if (param.get償還払支給判定結果() == null) {
+            return 画面モード_修正;
+        } else {
+            return 画面モード;
+
         }
     }
 
