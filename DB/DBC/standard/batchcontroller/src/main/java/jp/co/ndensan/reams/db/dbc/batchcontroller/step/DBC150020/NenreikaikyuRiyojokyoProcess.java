@@ -184,7 +184,7 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
         } else if (!processParameter.getSinsaYM().isEmpty()) {
             RStringBuilder rb = new RStringBuilder();
             rb.append(審査月);
-            rb.append((setDateFormat(processParameter.getServiceTeikyoYM())));
+            rb.append((setDateFormat(processParameter.getSinsaYM())));
             RString 条件１ = rb.toRString();
             entity.set条件1(条件１);
         }
