@@ -328,7 +328,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RecordShubetsu.コントロールレコード.getコード());
         tempList.add(new RString(レコード番号));
         tempList.add(RSTRING_0);
-        tempList.add(new RString(レコード件数 + parameter.get件数()));
+        tempList.add(new RString(レコード件数));
         tempList.add(ConfigKeysKokuhorenSofu.償還連絡票情報.getコード());
         tempList.add(RSTRING_00);
         tempList.add(parameter.get保険者番号().getColumnValue());
