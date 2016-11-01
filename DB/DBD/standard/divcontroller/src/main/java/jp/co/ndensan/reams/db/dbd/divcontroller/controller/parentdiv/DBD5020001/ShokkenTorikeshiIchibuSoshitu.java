@@ -68,6 +68,12 @@ public class ShokkenTorikeshiIchibuSoshitu {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        
+        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
+        if (今回情報 != null) {
+            div.setHdnKonkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(今回情報, true)));
+        }
+        
         //TODO sync-24 マージ 暫定
         return ResponseData.of(div).setState(DBD5020001StateName.要介護認定);
     }
