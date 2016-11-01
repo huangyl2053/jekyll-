@@ -349,12 +349,12 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setVisible(false);
             設定償還払決定情報ボタンの表示(償還, 償還払支給判定結果, 償還払支給申請情報,
-                    住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号, 支給申請情報);
+                    住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号, 支給申請情報, 画面モード);
             div.getCcdShiharaiHohoJyoho().initialize(
                     支給申請情報, 支払方法状態_修正);
         } else {
             設定償還払決定情報ボタンの表示(償還, 償還払支給判定結果, 償還払支給申請情報,
-                    住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号, 支給申請情報);
+                    住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号, 支給申請情報, 画面モード);
         }
         ShokanJutakuKaishuJizenShinsei 事前申請情報 = JutakuKaishuJizenShinsei.createInstance()
                 .getJutakuKaishuJizenShinseiJyoho(被保険者番号, サービス提供年月, 整理番号);
@@ -535,9 +535,15 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private void 設定償還払決定情報ボタンの表示(RString 償還, ShokanHanteiKekka 償還払支給判定結果,
             ShokanShinsei 償還払支給申請情報,
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請, ShokanKihon 償還払請求基本, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月, RString 整理番号, SikyuSinseiJyohoParameter 支給申請情報) {
+            FlexibleYearMonth サービス提供年月, RString 整理番号, SikyuSinseiJyohoParameter 支給申請情報, RString 画面モード) {
         if (給付実績連動_受託なし.equals(償還)) {
-            div.getBtnShokanKetteiJyoho().setDisabled(false);
+            div.getBtnShokanKetteiJyoho().setDisabled(true);
+            if (償還払支給判定結果 != null) {
+                div.getBtnShokanKetteiJyoho().setDisabled(false);
+            }
+            if (画面モード_修正.equals(画面モード)) {
+                div.getBtnShokanKetteiJyoho().setDisabled(false);
+            }
         } else if (給付実績緋連動_受託あり.equals(償還)) {
             if (償還払支給判定結果 == null && 償還払支給申請情報.get送付年月() != null) {
                 set画面照会モードに変更();
