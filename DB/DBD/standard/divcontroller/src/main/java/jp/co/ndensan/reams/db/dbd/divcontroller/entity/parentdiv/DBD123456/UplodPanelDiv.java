@@ -25,6 +25,8 @@ public class UplodPanelDiv extends Panel {
     private Button upload;
     @JsonProperty("TextBoxUrl")
     private TextBox TextBoxUrl;
+    @JsonProperty("Uploadetest")
+    private UploadPanel Uploadetest;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +68,24 @@ public class UplodPanelDiv extends Panel {
     @JsonProperty("TextBoxUrl")
     public void setTextBoxUrl(TextBox TextBoxUrl) {
         this.TextBoxUrl = TextBoxUrl;
+    }
+
+    /*
+     * getUploadetest
+     * @return Uploadetest
+     */
+    @JsonProperty("Uploadetest")
+    public UploadPanel getUploadetest() {
+        return Uploadetest;
+    }
+
+    /*
+     * setUploadetest
+     * @param Uploadetest Uploadetest
+     */
+    @JsonProperty("Uploadetest")
+    public void setUploadetest(UploadPanel Uploadetest) {
+        this.Uploadetest = Uploadetest;
     }
 
     // </editor-fold>
