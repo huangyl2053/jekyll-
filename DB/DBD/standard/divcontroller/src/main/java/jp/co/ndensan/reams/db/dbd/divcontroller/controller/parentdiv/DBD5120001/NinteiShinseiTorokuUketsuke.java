@@ -97,8 +97,8 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnIryoHokenGuide(NinteiShinseiTorokuUketsukeDiv div) {
-
         div.setHdnMode(照会);
+        ViewStateHolder.put(ViewStateKeys.識別コード, div.getHdnShikibetsuCode());
         return ResponseData.of(div).respond();
     }
 
@@ -109,7 +109,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnRenrakusaki(NinteiShinseiTorokuUketsukeDiv div) {
-
         return ResponseData.of(div).respond();
     }
 
@@ -120,7 +119,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_Renrakuski(NinteiShinseiTorokuUketsukeDiv div) {
-
         div.getBtnRenrakusaki().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
@@ -132,7 +130,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnNyuinAndShisetsuNyusho(NinteiShinseiTorokuUketsukeDiv div) {
-        
         div.setHdnMode(照会);
         return ResponseData.of(div).respond();
     }
@@ -144,7 +141,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ShisetsuNyutaisho(NinteiShinseiTorokuUketsukeDiv div) {
-
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
                 = ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
         this.getHandler(div).onOkClose_ShisetsuNyutaisho(施設入退所情報Model);
@@ -159,7 +155,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnShichosonRenrakuJiko(NinteiShinseiTorokuUketsukeDiv div) {
-
         NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
         model.set表示モード(HyojiMode.InputMode);
         model.set連絡事項(div.getHdnShichosonRenrakuJiko());
@@ -174,10 +169,8 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ShichosonRenrakuJiko(NinteiShinseiTorokuUketsukeDiv div) {
-
         NinteiShinseiCodeModel shinseiCodeModel = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
         div.setHdnShichosonRenrakuJiko(shinseiCodeModel.get連絡事項());
-
         div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
@@ -189,7 +182,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnChosaJokyo(NinteiShinseiTorokuUketsukeDiv div) {
-
         getHandler(div).onBeforeOpenDialog_btnChosaJokyo();
         return ResponseData.of(div).respond();
     }
@@ -201,7 +193,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ChosaJokyo(NinteiShinseiTorokuUketsukeDiv div) {
-
         div.getBtnChosaJokyo().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
@@ -213,7 +204,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnTainoJokyo(NinteiShinseiTorokuUketsukeDiv div) {
-
         return ResponseData.of(div).respond();
     }
 
@@ -224,7 +214,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_TainoJokyo(NinteiShinseiTorokuUketsukeDiv div) {
-
         div.getBtnTainoJokyo().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
@@ -236,7 +225,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onChange_ddlHihokenshaKubun(NinteiShinseiTorokuUketsukeDiv div) {
-
         if (new RString("2").equals(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey())) {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().setRequired(true);
@@ -283,7 +271,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnEnkiRiyuTeikeibun(NinteiShinseiTorokuUketsukeDiv div) {
-
         div.setHdn登録業務コード(GyomuCode.DB介護保険.getColumnValue());
         div.setHdn登録グループコード(new RString("1007"));
         return ResponseData.of(div).respond();
@@ -296,7 +283,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_btnEnkiRiyuTeikeibun(NinteiShinseiTorokuUketsukeDiv div) {
-
         div.getTxtEnkiRiyu().setValue(div.getHdnサンプル文書());
         return ResponseData.of(div).respond();
     }
@@ -308,7 +294,6 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onClick_btnUpdate(NinteiShinseiTorokuUketsukeDiv div) {
-
         //ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 //        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
 //            getValidationHandler().validateFor申請日の必須入力(pairs, div);
@@ -419,8 +404,8 @@ public class NinteiShinseiTorokuUketsuke {
         getHandler(div).edit状態_完了();
         div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
                 UrInformationMessages.正常終了.getMessage().replace(要介護認定申請情報登録.toString()).evaluate()));
-        RString 表示パターン = getHandler(div).get表示パターン(new HihokenshaNo(div.getHdnHihokenshaNo()), new ShikibetsuCode(div.getHdnShikibetsuCode()));
-        if (表示パターン_新規.equals(表示パターン)) {
+        boolean 表示パターン = getHandler(div).getShinseiDataUmu();
+        if (!表示パターン) {
             return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
         } else {
             return ResponseData.of(div).setState(DBD5120001StateName.削除修正完了);

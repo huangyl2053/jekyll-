@@ -67,6 +67,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoF
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -161,12 +163,8 @@ public class NinteiShinseiTorokuUketsukeHandler {
         }
         this.edit状態();
         div.getCcdKaigoAtenaInfo().initialize(識別コード);
-//        div.getCcdKaigoNinteiAtenaInfo().initialize();
-//        div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()), 識別コード);
-        // 被保険者台帳から市町村コードを取得
         RString 市町村コード = null;
         if (!RString.isNullOrEmpty(被保険者番号.getColumnValue())) {
-            // managerでレコード取得できた場合は市町村コードをそちらに書き換え
             if (result != null && result.getEntity().getT1001市町村コード() != null && 表示パターン_新規.equals(表示パターン)) {
                 市町村コード = result.getEntity().getT1001市町村コード().getColumnValue();
             } else if (result != null && result.getEntity().getT1001市町村コード() != null && 表示パターン_申請中.equals(表示パターン)) {
@@ -198,8 +196,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
             }
             div.setHdnRirekiNo(result.getEntity().get履歴番号());
             div.setHdnEdaban(result.getEntity().get枝番());
-            // TODO 初回表示時エラーとなるため一時コメントアウト　修正表示で必要になるかも  ---　龍野
-            // 仕様書より、パターンが1=申請中の場合のみ読み取る
             if (表示パターン_申請中.equals(表示パターン)) {
                 div.setHdnJukyuShinseiJiyu(result.getEntity().get受給申請事由().getColumnValue());
             } else {
@@ -235,9 +231,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
     private boolean 修正存在チェック(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         div.setHdnShinseishoKanriNo(null);
         JukyushaDaichoManager manager = new JukyushaDaichoManager();
-        List<JukyushaDaicho> resultList = manager.get受給者台帳(
-                被保険者番号,
-                識別コード);
+        List<JukyushaDaicho> resultList = manager.get受給者台帳情報(被保険者番号);
         boolean 存在フラグ = false;
         for (JukyushaDaicho jukyushaDaicho : resultList) {
             if (ZERO_4.equals(jukyushaDaicho.get履歴番号())) {
@@ -316,7 +310,15 @@ public class NinteiShinseiTorokuUketsukeHandler {
             shinseiKankeishaCodeList.add(code.getコード());
         }
         iNinteiShinseiTodokedeshaDiv.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
-
+        if (new RString("key0").equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
+            div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput().setDisplayNoneMode(ZenkokuJushoInputDiv.DisplayNoneSetMode.使用しない);
+            div.getCcdShinseiTodokedesha().getCcdChoikiInput().setDisplayNoneMode(ChoikiInputDiv.DisplayNoneSetMode.使用する);
+            div.getCcdShinseiTodokedesha().getTxtYubinNo().setDisplayNone(false);
+        } else {
+            div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput().setDisplayNoneMode(ZenkokuJushoInputDiv.DisplayNoneSetMode.使用する);
+            div.getCcdShinseiTodokedesha().getCcdChoikiInput().setDisplayNoneMode(ChoikiInputDiv.DisplayNoneSetMode.使用しない);
+            div.getCcdShinseiTodokedesha().getTxtYubinNo().setDisplayNone(true);
+        }
     }
 
     /**
@@ -333,6 +335,10 @@ public class NinteiShinseiTorokuUketsukeHandler {
             shinseiDataUmu = false;
             return 表示パターン_新規;
         }
+    }
+    
+    public boolean getShinseiDataUmu() {
+        return shinseiDataUmu;
     }
 
     /**
@@ -480,6 +486,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShinseiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(true);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -505,6 +514,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShinseiShuseiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(true);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -530,6 +542,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -555,6 +568,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.KubunHenkoMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(true);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -580,6 +596,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.KubunHenkoMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(true);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -605,6 +624,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -630,6 +650,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ServiceHenkoMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(true);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -655,6 +678,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ServiceHenkoMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(true);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -680,6 +706,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -705,6 +732,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ServiceHenkoMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -730,6 +758,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.TokushuTsuikaMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -755,6 +784,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.TokushuShuseiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -780,6 +810,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -805,6 +836,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -830,6 +862,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokkenKisaiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.InputMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
@@ -855,6 +888,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(true);
         div.getCcdShinseiTodokedesha().set状態(
                 new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
@@ -1852,7 +1886,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
             dataSource1.add(SELECT_KEY0);
         }
         介護認定申請Div.setChkShikakuShutokuMae(dataSource1);
-
         if (!RString.isNullOrEmpty(result.getEntity().get二号特定疾病コード().getColumnValue())) {
             介護認定申請Div.setTokuteiShippei(
                     TokuteiShippei.toValue(result.getEntity().get二号特定疾病コード().getColumnValue()));
