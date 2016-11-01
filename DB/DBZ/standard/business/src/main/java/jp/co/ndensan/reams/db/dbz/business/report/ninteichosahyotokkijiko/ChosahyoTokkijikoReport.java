@@ -22,12 +22,12 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
 
     private List<ChosahyoTokkijikoBusiness> businessList;
     private ChosahyoTokkijikoBusiness business;
-    private final ReportId id;
+    private ReportId id;
 
     /**
      * インスタンスを生成します。
      *
-     * @param business 要介護認定調査票（特記事項）のbusinessList
+     * @param businessList 要介護認定調査票（特記事項）のbusinessList
      */
     public ChosahyoTokkijikoReport(List<ChosahyoTokkijikoBusiness> businessList) {
         this.businessList = businessList;
