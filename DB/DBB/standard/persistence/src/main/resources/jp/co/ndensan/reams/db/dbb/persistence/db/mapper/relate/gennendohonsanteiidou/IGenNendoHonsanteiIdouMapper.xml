@@ -556,8 +556,8 @@
         WHERE
             #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND #{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
-        AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
+        OR (#{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
+        AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時})
     </select>
     
     <!-- 老齢の異動の取得 -->
@@ -572,8 +572,8 @@
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
         WHERE
-            #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
+        AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 境界層の異動の取得 -->
