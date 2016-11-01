@@ -27,6 +27,15 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
     /**
      * インスタンスを生成します。
      *
+     * @param business 要介護認定調査票（特記事項）のbusinessList
+     */
+    public ChosahyoTokkijikoReport(List<ChosahyoTokkijikoBusiness> businessList) {
+        this.businessList = businessList;
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
      * @param business 要介護認定調査票（特記事項）のbusiness
      * @param id 帳票ID
      */
