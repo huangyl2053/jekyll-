@@ -762,16 +762,16 @@
         WHERE
             給付実績基本."shinsaYM" IS NOT NULL
 	    AND 給付実績基本."shinsaYM" <![CDATA[ <> ]]> ''
-            #{ 最古のサービス提供年月 } <![CDATA[ <= ]]> 給付実績基本."serviceTeikyoYM" AND
-            給付実績基本."serviceTeikyoYM" <![CDATA[ <= ]]> #{ 最新のサービス提供年月 } AND
-            SUBSTRING(給付実績基本."inputShikibetsuNo", 1, 3) NOT IN ('812','21B','21C','21D','341','71P','816','71R','817')
+            AND #{ 最古のサービス提供年月 } <![CDATA[ <= ]]> 給付実績基本."serviceTeikyoYM"
+            AND 給付実績基本."serviceTeikyoYM" <![CDATA[ <= ]]> #{ 最新のサービス提供年月 }
+            AND SUBSTRING(給付実績基本."inputShikibetsuNo", 1, 3) NOT IN ('812','21B','21C','21D','341','71P','816','71R','817')
         ORDER BY
             給付実績基本."inputShikibetsuNo" ASC,
             給付実績基本."hiHokenshaNo" ASC,
             給付実績基本."serviceTeikyoYM" ASC,
             給付実績基本."kyufuJissekiKubunCode" ASC,
             給付実績基本."jigyoshoNo" ASC,
-            給付実績基本."shinsaYM" DESC,
+            給付実績基本."shinsaYM" ASC,
             給付実績基本."kyufuSakuseiKubunCode" ASC
     </select>
 
@@ -784,9 +784,9 @@
         WHERE
             給付実績基本."shinsaYM" IS NOT NULL 
             AND 給付実績基本."shinsaYM" <![CDATA[ <> ]]> ''
-            AND #{最古のサービス提供年月} <![CDATA[ <= ]]> 給付実績基本."serviceTeikyoYM" AND
-            給付実績基本."serviceTeikyoYM" <![CDATA[ <= ]]> #{最新のサービス提供年月} AND
-            SUBSTRING(給付実績基本."inputShikibetsuNo", 1, 3) NOT IN ('812','21B','21C','21D','341','71P','816','817')
+            AND #{最古のサービス提供年月} <![CDATA[ <= ]]> 給付実績基本."serviceTeikyoYM"
+            AND 給付実績基本."serviceTeikyoYM" <![CDATA[ <= ]]> #{最新のサービス提供年月}
+            AND SUBSTRING(給付実績基本."inputShikibetsuNo", 1, 3) NOT IN ('812','21B','21C','21D','341','71P','816','817')
         ORDER BY
             給付実績基本."inputShikibetsuNo" ASC,
             給付実績基本."hiHokenshaNo" ASC,
