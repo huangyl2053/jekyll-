@@ -66,6 +66,15 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranSource implements IRep
     @ReportItem(name = "list_13", length = 19, order = 26)
     public RString list_13;
 
+    @ReportItem(name = "yubinNo")
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode")
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode")
+    public RString gyoseikuCode;
+    @ReportItem(name = "hokenshaNo")
+    public RString hokenshaNo;
+
     /**
      * GassanJigyobunJikofutangakuKeisanKekkaIchiranSourceのENUM
      */
