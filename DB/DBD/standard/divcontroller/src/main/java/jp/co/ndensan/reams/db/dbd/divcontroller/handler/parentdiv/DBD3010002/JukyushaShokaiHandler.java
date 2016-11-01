@@ -29,6 +29,10 @@ import static jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -37,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -214,12 +219,27 @@ public class JukyushaShokaiHandler {
             row.getShuryoDate().setValue(joho.get受給者台帳_認定有効終了年月日());
             row.setSo(joho.is受給者台帳_旧措置フラグ() ? 措 : RString.EMPTY);
             row.setShinsakaiIken(joho.get要介護認定インタフェース情報_審査会意見());
-            if (joho.get要介護認定申請情報_厚労省IF識別コード() == null || joho.get要介護認定申請情報_厚労省IF識別コード().isEmpty()) {
-                row.setYokaigodo(get要介護度(new RString(""),
-                        joho.get受給者台帳_要介護認定状態区分コード()));
-            } else {
-                row.setYokaigodo(get要介護度(new RString(joho.get要介護認定申請情報_厚労省IF識別コード().toString()),
-                        joho.get受給者台帳_要介護認定状態区分コード()));
+            /* if (joho.get要介護認定申請情報_厚労省IF識別コード() == null || joho.get要介護認定申請情報_厚労省IF識別コード().isEmpty()) {
+             row.setYokaigodo(get要介護度(new RString(""),
+             joho.get受給者台帳_要介護認定状態区分コード()));
+             } else {
+             row.setYokaigodo(get要介護度(new RString(joho.get要介護認定申請情報_厚労省IF識別コード().toString()),
+             joho.get受給者台帳_要介護認定状態区分コード()));
+             }*/
+            FlexibleYearMonth yokaigoJotai = (joho.get受給者台帳_認定有効開始年月日() == null ? null : joho.get受給者台帳_認定有効開始年月日().getYearMonth());
+            if (yokaigoJotai == null) {
+                row.setYokaigodo(RString.EMPTY);
+            } else if (new FlexibleYearMonth("200004").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200203"))) {
+                row.setYokaigodo(YokaigoJotaiKubun99.toValue(joho.get受給者台帳_要介護認定状態区分コード().getKey()).get名称());
+            } else if (new FlexibleYearMonth("200204").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+                row.setYokaigodo(YokaigoJotaiKubun02.toValue(joho.get受給者台帳_要介護認定状態区分コード().getKey()).get名称());
+            } else if (new FlexibleYearMonth("200604").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
+                row.setYokaigodo(YokaigoJotaiKubun06.toValue(joho.get受給者台帳_要介護認定状態区分コード().getKey()).get名称());
+            } else if (new FlexibleYearMonth("200904").isBeforeOrEquals(yokaigoJotai)) {
+                row.setYokaigodo(YokaigoJotaiKubun09.toValue(joho.get受給者台帳_要介護認定状態区分コード().getKey()).get名称());
             }
             row.setShichosonCode(joho.get受給者台帳_市町村コード().getColumnValue());
             row.setRirekiNo(joho.get受給者台帳_履歴番号());
