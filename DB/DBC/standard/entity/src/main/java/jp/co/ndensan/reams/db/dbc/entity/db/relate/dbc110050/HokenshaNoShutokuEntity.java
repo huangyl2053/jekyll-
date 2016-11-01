@@ -5,7 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,4 +25,11 @@ public class HokenshaNoShutokuEntity {
 
     private HokenshaNo hokenshaNo;
     private int count;
+    private HihokenshaNo hiHokenshaNo;
+    private FlexibleYearMonth serviceTeikyoYM;
+    private RString seiriNo;
+    private RString dataKubun;
+    private JigyoshaNo jigyoshaNo;
+    private RString yoshikiNo;
+    private RString meisaiNo;
 }
