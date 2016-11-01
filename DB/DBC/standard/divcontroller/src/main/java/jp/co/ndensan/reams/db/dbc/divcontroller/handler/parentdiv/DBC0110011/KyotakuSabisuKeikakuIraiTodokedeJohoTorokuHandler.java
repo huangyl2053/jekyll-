@@ -187,6 +187,15 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         set認定申請中状況を活性制御(居宅給付計画届出.get被保険者番号());
         set届出内容エリア照会(居宅給付計画届出);
+
+        if (is届出区分新規(選択行)) {
+            div.getRadTodokedeKubun().setSelectedKey(KEY_0);
+        } else if (届出区分_新規.equals(居宅給付計画届出.get届出区分())) {
+            div.getRadTodokedeKubun().setSelectedKey(KEY_0);
+        } else if (届出区分_変更.equals(居宅給付計画届出.get届出区分())) {
+            div.getRadTodokedeKubun().setSelectedKey(KEY_1);
+        }
+
         if (is事業者作成の場合()) {
             set計画事業者エリア照会(居宅給付計画届出);
             onChange計画作成区分();
@@ -212,6 +221,15 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         set認定申請中状況を活性制御(居宅給付計画届出.get被保険者番号());
         set届出内容エリア照会(居宅給付計画届出);
+
+        if (is届出区分新規(選択行)) {
+            div.getRadTodokedeKubun().setSelectedKey(KEY_0);
+        } else if (届出区分_新規.equals(居宅給付計画届出.get届出区分())) {
+            div.getRadTodokedeKubun().setSelectedKey(KEY_0);
+        } else if (届出区分_変更.equals(居宅給付計画届出.get届出区分())) {
+            div.getRadTodokedeKubun().setSelectedKey(KEY_1);
+        }
+
         if (is事業者作成の場合()) {
             set計画事業者エリア照会(居宅給付計画届出);
         }
@@ -230,7 +248,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.setMode(計画追加モード);
         div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_新規登録);
         set認定申請中状況を活性制御(被保険者番号);
-        div.getRadTodokedeKubun().setSelectedKey(is届出区分新規() ? KEY_0 : KEY_1);
+        div.getRadTodokedeKubun().setSelectedKey(KEY_0);
         if (is事業者作成の場合()) {
             div.getRadKeikakuKubun().setVisible(false);
             div.getRadServiceShurui().setDataSource(getサービス種類DataSource());
@@ -267,8 +285,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         if (JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(
                 div.getRadKeikakuSakuseiKubun().getSelectedKey())) {
             div.getTxtItakusakiJigyoshaNo().setReadOnly(true);
+            div.getBtnItakuSakiJigyoshaKensaku().setDisabled(true);
         } else {
             div.getTxtItakusakiJigyoshaNo().setReadOnly(false);
+            div.getBtnItakuSakiJigyoshaKensaku().setDisabled(false);
         }
     }
 
@@ -823,19 +843,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         return dataSourceList;
     }
 
-    private boolean is届出区分新規() {
-        int rowSize = div.getRireki().getDgKyotakuServiceIchiran().getDataSource().size();
-        if (rowSize == ZERO) {
-            return Boolean.TRUE;
-        }
-        RString 直近作成区分 = RString.EMPTY;
-        int 履歴番号 = ZERO;
-        for (dgKyotakuServiceIchiran_Row row : div.getRireki().getDgKyotakuServiceIchiran().getDataSource()) {
-            if (履歴番号 < Integer.valueOf(row.getRirekiNo().toString())) {
-                履歴番号 = Integer.valueOf(row.getRirekiNo().toString());
-                直近作成区分 = row.getKeikakuSakuseiKubun();
-            }
-        }
-        return KyotakuservicekeikakuSakuseikubunCode.自己作成.get名称().equals(直近作成区分);
+    private boolean is届出区分新規(dgKyotakuServiceIchiran_Row 選択行) {
+        return FLAG_直近履歴.equals(選択行.getYukoMuko())
+                && KyotakuservicekeikakuSakuseikubunCode.自己作成.get名称().equals(選択行.getKeikakuSakuseiKubun());
     }
 }
