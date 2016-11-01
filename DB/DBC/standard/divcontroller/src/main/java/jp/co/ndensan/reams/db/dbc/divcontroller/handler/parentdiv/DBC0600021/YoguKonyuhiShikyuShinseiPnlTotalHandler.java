@@ -184,10 +184,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         }
         List<IKoseiShichosonMaster> kilist = KijuntsukiShichosonjohoFinder.createInstance().
                 getKijuntsukiShichosonjohos(基準年月, 導入形態);
+        List<RString> keyList = new ArrayList<>();
         for (IKoseiShichosonMaster list : kilist) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(
-                    list.get証記載保険者番号().getColumnValue(), list.get市町村名称());
-            dataSourceList.add(dataSource);
+            RString 証記載保険者番号 = list.get証記載保険者番号().getColumnValue();
+            if (!keyList.contains(証記載保険者番号)) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(
+                        list.get証記載保険者番号().getColumnValue(), list.get市町村名称());
+                keyList.add(証記載保険者番号);
+                dataSourceList.add(dataSource);
+            }
         }
         return dataSourceList;
     }
