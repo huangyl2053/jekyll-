@@ -716,18 +716,32 @@ public class RirekiShuseiHandler {
     public DbT4101NinteiShinseiJoho set認定申請For削除回復(dgRirekiIchiran_Row row, dgRirekiIchiran_Row previousRow) {
         RirekiShuseiBusiness business
                 = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-        RirekiShuseiBusiness previousBusiness
-                = DataPassingConverter.deserialize(previousRow.getDeserializedBusiness(), RirekiShuseiBusiness.class);
         DbT4101NinteiShinseiJohoBuilder 認定申請Builder = business.get要介護認定申請情報().createBuilderForEdit();
-
-        認定申請Builder.set前回要介護状態区分コード(
-                ObjectUtil.defaultIfNull(previousBusiness.get要介護認定申請情報().get前回要介護状態区分コード(), Code.EMPTY));
-        認定申請Builder.set前回認定年月日(
-                ObjectUtil.defaultIfNull(previousBusiness.get要介護認定申請情報().get前回認定年月日(), FlexibleDate.EMPTY));
-        認定申請Builder.set前回認定有効期間_開始(
-                ObjectUtil.defaultIfNull(previousBusiness.get要介護認定申請情報().get前回認定有効期間_開始(), FlexibleDate.EMPTY));
-        認定申請Builder.set前回認定有効期間_終了(
-                ObjectUtil.defaultIfNull(previousBusiness.get要介護認定申請情報().get前回認定有効期間_終了(), FlexibleDate.EMPTY));
+        if (previousRow != null) {
+            if (!RString.isNullOrEmpty(previousRow.getDataPass())) {
+                RirekiShuseiDataPass previousBusiness
+                        = DataPassingConverter.deserialize(previousRow.getDataPass(), RirekiShuseiDataPass.class);
+                認定申請Builder.set前回要介護状態区分コード(
+                        ObjectUtil.defaultIfNull(previousBusiness.get前回要介護状態区分コード(), Code.EMPTY));
+                認定申請Builder.set前回認定年月日(
+                        ObjectUtil.defaultIfNull(previousBusiness.get前回認定年月日(), FlexibleDate.EMPTY));
+                認定申請Builder.set前回認定有効期間_開始(
+                        ObjectUtil.defaultIfNull(previousBusiness.get前回認定有効開始年月日(), FlexibleDate.EMPTY));
+                認定申請Builder.set前回認定有効期間_終了(
+                        ObjectUtil.defaultIfNull(previousBusiness.get前回認定有効終了年月日(), FlexibleDate.EMPTY));
+            } else {
+                RirekiShuseiBusiness previousBusiness
+                        = DataPassingConverter.deserialize(previousRow.getDeserializedBusiness(), RirekiShuseiBusiness.class);
+                認定申請Builder.set前回要介護状態区分コード(
+                        ObjectUtil.defaultIfNull(previousBusiness.get要介護認定申請情報().get前回要介護状態区分コード(), Code.EMPTY));
+                認定申請Builder.set前回認定年月日(
+                        ObjectUtil.defaultIfNull(previousBusiness.get要介護認定申請情報().get前回認定年月日(), FlexibleDate.EMPTY));
+                認定申請Builder.set前回認定有効期間_開始(
+                        ObjectUtil.defaultIfNull(previousBusiness.get要介護認定申請情報().get前回認定有効期間_開始(), FlexibleDate.EMPTY));
+                認定申請Builder.set前回認定有効期間_終了(
+                        ObjectUtil.defaultIfNull(previousBusiness.get要介護認定申請情報().get前回認定有効期間_終了(), FlexibleDate.EMPTY));
+            }
+        }
         認定申請Builder.set論理削除フラグ(false);
         return 認定申請Builder.build().modifiedModel();
     }
@@ -742,19 +756,35 @@ public class RirekiShuseiHandler {
     public DbT4101NinteiShinseiJoho set認定申請For削除回復次回行(dgRirekiIchiran_Row row, dgRirekiIchiran_Row nextRow) {
         RirekiShuseiBusiness business
                 = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-        RirekiShuseiBusiness nextBusiness
-                = DataPassingConverter.deserialize(nextRow.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-        DbT4101NinteiShinseiJohoBuilder 認定申請Builder = nextBusiness.get要介護認定申請情報().createBuilderForEdit();
-
-        認定申請Builder.set前回要介護状態区分コード(
-                ObjectUtil.defaultIfNull(business.get受給者台帳().get要介護認定状態区分コード(), Code.EMPTY));
-        認定申請Builder.set前回認定年月日(
-                ObjectUtil.defaultIfNull(business.get受給者台帳().get認定年月日(), FlexibleDate.EMPTY));
-        認定申請Builder.set前回認定有効期間_開始(
-                ObjectUtil.defaultIfNull(business.get受給者台帳().get認定有効期間開始年月日(), FlexibleDate.EMPTY));
-        認定申請Builder.set前回認定有効期間_終了(
-                ObjectUtil.defaultIfNull(business.get受給者台帳().get認定有効期間終了年月日(), FlexibleDate.EMPTY));
-        return 認定申請Builder.build().modifiedModel();
+        if (nextRow != null) {
+            if (!RString.isNullOrEmpty(nextRow.getDataKubun()) && KU_BUN_直.equals(nextRow.getDataKubun())) {
+                RirekiShuseiDataPass nextBusiness
+                        = DataPassingConverter.deserialize(nextRow.getDataPass(), RirekiShuseiDataPass.class);
+                nextBusiness.set前回要介護状態区分コード(
+                        ObjectUtil.defaultIfNull(business.get受給者台帳().get要介護認定状態区分コード(), Code.EMPTY));
+                nextBusiness.set前回認定年月日(
+                        ObjectUtil.defaultIfNull(business.get受給者台帳().get認定年月日(), FlexibleDate.EMPTY));
+                nextBusiness.set前回認定有効開始年月日(
+                        ObjectUtil.defaultIfNull(business.get受給者台帳().get認定有効期間開始年月日(), FlexibleDate.EMPTY));
+                nextBusiness.set前回認定有効終了年月日(
+                        ObjectUtil.defaultIfNull(business.get受給者台帳().get認定有効期間終了年月日(), FlexibleDate.EMPTY));
+                nextRow.setDataPass(DataPassingConverter.serialize(nextBusiness));
+                return null;
+            }
+            RirekiShuseiBusiness nextBusiness
+                    = DataPassingConverter.deserialize(nextRow.getDeserializedBusiness(), RirekiShuseiBusiness.class);
+            DbT4101NinteiShinseiJohoBuilder 認定申請Builder = nextBusiness.get要介護認定申請情報().createBuilderForEdit();
+            認定申請Builder.set前回要介護状態区分コード(
+                    ObjectUtil.defaultIfNull(business.get受給者台帳().get要介護認定状態区分コード(), Code.EMPTY));
+            認定申請Builder.set前回認定年月日(
+                    ObjectUtil.defaultIfNull(business.get受給者台帳().get認定年月日(), FlexibleDate.EMPTY));
+            認定申請Builder.set前回認定有効期間_開始(
+                    ObjectUtil.defaultIfNull(business.get受給者台帳().get認定有効期間開始年月日(), FlexibleDate.EMPTY));
+            認定申請Builder.set前回認定有効期間_終了(
+                    ObjectUtil.defaultIfNull(business.get受給者台帳().get認定有効期間終了年月日(), FlexibleDate.EMPTY));
+            return 認定申請Builder.build().modifiedModel();
+        }
+        return null;
     }
 
     /**
@@ -1132,10 +1162,14 @@ public class RirekiShuseiHandler {
      * @return 申請履歴情報
      */
     public DbT4121ShinseiRirekiJoho set申請履歴情報For削除回復前回(dgRirekiIchiran_Row row, dgRirekiIchiran_Row previousRow) {
-        DbT4121ShinseiRirekiJoho 前回行申請履歴情報 = DataPassingConverter.deserialize(row.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
         DbT4121ShinseiRirekiJoho 申請履歴情報 = new DbT4121ShinseiRirekiJoho(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         DbT4121ShinseiRirekiJohoBuilder builder = 申請履歴情報.createBuilderForEdit();
-        builder.set前回申請管理番号(前回行申請履歴情報.get申請管理番号());
+        if (previousRow != null) {
+            DbT4121ShinseiRirekiJoho 前回行申請履歴情報 = DataPassingConverter.deserialize(previousRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
+            builder.set前回申請管理番号(前回行申請履歴情報.get申請管理番号());
+        } else {
+            builder.set前回申請管理番号(ShinseishoKanriNo.EMPTY);
+        }
         return builder.build();
     }
 
@@ -1147,10 +1181,13 @@ public class RirekiShuseiHandler {
      * @return 申請履歴情報
      */
     public DbT4121ShinseiRirekiJoho set申請履歴情報For削除回復次回(dgRirekiIchiran_Row row, dgRirekiIchiran_Row nextRow) {
-        DbT4121ShinseiRirekiJoho 次回行申請履歴情報 = DataPassingConverter.deserialize(nextRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
-        DbT4121ShinseiRirekiJohoBuilder builder = 次回行申請履歴情報.createBuilderForEdit();
-        builder.set前回申請管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-        return builder.build().modifiedModel();
+        if (nextRow != null) {
+            DbT4121ShinseiRirekiJoho 次回行申請履歴情報 = DataPassingConverter.deserialize(nextRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
+            DbT4121ShinseiRirekiJohoBuilder builder = 次回行申請履歴情報.createBuilderForEdit();
+            builder.set前回申請管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            return builder.build().modifiedModel();
+        }
+        return null;
     }
 
     /**
