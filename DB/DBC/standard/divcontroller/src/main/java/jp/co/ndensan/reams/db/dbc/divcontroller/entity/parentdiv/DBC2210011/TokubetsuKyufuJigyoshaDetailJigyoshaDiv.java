@@ -21,22 +21,22 @@ public class TokubetsuKyufuJigyoshaDetailJigyoshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnJigyoshaCopy")
-    private Button btnJigyoshaCopy;
+    @JsonProperty("btnCopyJigyosha")
+    private Button btnCopyJigyosha;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
     @JsonProperty("txtJigyoshaNameKana")
     private TextBoxKana txtJigyoshaNameKana;
     @JsonProperty("txtJigyoshaYubinNo")
     private TextBoxYubinNo txtJigyoshaYubinNo;
-    @JsonProperty("txtJigyoshaTelNo")
-    private TextBox txtJigyoshaTelNo;
-    @JsonProperty("txtJigyoshaFaxNo")
-    private TextBox txtJigyoshaFaxNo;
     @JsonProperty("txtJigyoshaJusho")
     private TextBox txtJigyoshaJusho;
     @JsonProperty("txtJigyoshaJushoKana")
     private TextBoxKana txtJigyoshaJushoKana;
+    @JsonProperty("txtJigyoshaTelNo")
+    private TextBox txtJigyoshaTelNo;
+    @JsonProperty("txtJigyoshaFaxNo")
+    private TextBox txtJigyoshaFaxNo;
     @JsonProperty("txtJigyoKaishiYMD")
     private TextBoxDate txtJigyoKaishiYMD;
     @JsonProperty("txtJigyoHaishiYMD")
@@ -53,8 +53,6 @@ public class TokubetsuKyufuJigyoshaDetailJigyoshaDiv extends Panel {
     private TextBoxDate txtTorokuShuryoYMD;
     @JsonProperty("radSeikatsuHogo")
     private RadioButton radSeikatsuHogo;
-    @JsonProperty("txtJigyoshaBiko")
-    private TextBox txtJigyoshaBiko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -63,21 +61,21 @@ public class TokubetsuKyufuJigyoshaDetailJigyoshaDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnJigyoshaCopy
-     * @return btnJigyoshaCopy
+     * getbtnCopyJigyosha
+     * @return btnCopyJigyosha
      */
-    @JsonProperty("btnJigyoshaCopy")
-    public Button getBtnJigyoshaCopy() {
-        return btnJigyoshaCopy;
+    @JsonProperty("btnCopyJigyosha")
+    public Button getBtnCopyJigyosha() {
+        return btnCopyJigyosha;
     }
 
     /*
-     * setbtnJigyoshaCopy
-     * @param btnJigyoshaCopy btnJigyoshaCopy
+     * setbtnCopyJigyosha
+     * @param btnCopyJigyosha btnCopyJigyosha
      */
-    @JsonProperty("btnJigyoshaCopy")
-    public void setBtnJigyoshaCopy(Button btnJigyoshaCopy) {
-        this.btnJigyoshaCopy = btnJigyoshaCopy;
+    @JsonProperty("btnCopyJigyosha")
+    public void setBtnCopyJigyosha(Button btnCopyJigyosha) {
+        this.btnCopyJigyosha = btnCopyJigyosha;
     }
 
     /*
@@ -135,42 +133,6 @@ public class TokubetsuKyufuJigyoshaDetailJigyoshaDiv extends Panel {
     }
 
     /*
-     * gettxtJigyoshaTelNo
-     * @return txtJigyoshaTelNo
-     */
-    @JsonProperty("txtJigyoshaTelNo")
-    public TextBox getTxtJigyoshaTelNo() {
-        return txtJigyoshaTelNo;
-    }
-
-    /*
-     * settxtJigyoshaTelNo
-     * @param txtJigyoshaTelNo txtJigyoshaTelNo
-     */
-    @JsonProperty("txtJigyoshaTelNo")
-    public void setTxtJigyoshaTelNo(TextBox txtJigyoshaTelNo) {
-        this.txtJigyoshaTelNo = txtJigyoshaTelNo;
-    }
-
-    /*
-     * gettxtJigyoshaFaxNo
-     * @return txtJigyoshaFaxNo
-     */
-    @JsonProperty("txtJigyoshaFaxNo")
-    public TextBox getTxtJigyoshaFaxNo() {
-        return txtJigyoshaFaxNo;
-    }
-
-    /*
-     * settxtJigyoshaFaxNo
-     * @param txtJigyoshaFaxNo txtJigyoshaFaxNo
-     */
-    @JsonProperty("txtJigyoshaFaxNo")
-    public void setTxtJigyoshaFaxNo(TextBox txtJigyoshaFaxNo) {
-        this.txtJigyoshaFaxNo = txtJigyoshaFaxNo;
-    }
-
-    /*
      * gettxtJigyoshaJusho
      * @return txtJigyoshaJusho
      */
@@ -204,6 +166,42 @@ public class TokubetsuKyufuJigyoshaDetailJigyoshaDiv extends Panel {
     @JsonProperty("txtJigyoshaJushoKana")
     public void setTxtJigyoshaJushoKana(TextBoxKana txtJigyoshaJushoKana) {
         this.txtJigyoshaJushoKana = txtJigyoshaJushoKana;
+    }
+
+    /*
+     * gettxtJigyoshaTelNo
+     * @return txtJigyoshaTelNo
+     */
+    @JsonProperty("txtJigyoshaTelNo")
+    public TextBox getTxtJigyoshaTelNo() {
+        return txtJigyoshaTelNo;
+    }
+
+    /*
+     * settxtJigyoshaTelNo
+     * @param txtJigyoshaTelNo txtJigyoshaTelNo
+     */
+    @JsonProperty("txtJigyoshaTelNo")
+    public void setTxtJigyoshaTelNo(TextBox txtJigyoshaTelNo) {
+        this.txtJigyoshaTelNo = txtJigyoshaTelNo;
+    }
+
+    /*
+     * gettxtJigyoshaFaxNo
+     * @return txtJigyoshaFaxNo
+     */
+    @JsonProperty("txtJigyoshaFaxNo")
+    public TextBox getTxtJigyoshaFaxNo() {
+        return txtJigyoshaFaxNo;
+    }
+
+    /*
+     * settxtJigyoshaFaxNo
+     * @param txtJigyoshaFaxNo txtJigyoshaFaxNo
+     */
+    @JsonProperty("txtJigyoshaFaxNo")
+    public void setTxtJigyoshaFaxNo(TextBox txtJigyoshaFaxNo) {
+        this.txtJigyoshaFaxNo = txtJigyoshaFaxNo;
     }
 
     /*
@@ -348,24 +346,6 @@ public class TokubetsuKyufuJigyoshaDetailJigyoshaDiv extends Panel {
     @JsonProperty("radSeikatsuHogo")
     public void setRadSeikatsuHogo(RadioButton radSeikatsuHogo) {
         this.radSeikatsuHogo = radSeikatsuHogo;
-    }
-
-    /*
-     * gettxtJigyoshaBiko
-     * @return txtJigyoshaBiko
-     */
-    @JsonProperty("txtJigyoshaBiko")
-    public TextBox getTxtJigyoshaBiko() {
-        return txtJigyoshaBiko;
-    }
-
-    /*
-     * settxtJigyoshaBiko
-     * @param txtJigyoshaBiko txtJigyoshaBiko
-     */
-    @JsonProperty("txtJigyoshaBiko")
-    public void setTxtJigyoshaBiko(TextBox txtJigyoshaBiko) {
-        this.txtJigyoshaBiko = txtJigyoshaBiko;
     }
 
     // </editor-fold>
