@@ -706,6 +706,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (償還事前申請情報.get事業者番号() != null) {
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo().setValue(
                     償還事前申請情報.get事業者番号().value());
+            set事業者名();
         }
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaNameKana().setValue(
                 償還事前申請情報.get申請者氏名カナ());
@@ -845,6 +846,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (償還払支給申請情報.get申請事業者コード() != null) {
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo().setValue(
                     償還払支給申請情報.get申請事業者コード().value());
+            set事業者名();
         }
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaNameKana().setValue(
                 償還払支給申請情報.get申請者氏名カナ());
@@ -2011,6 +2013,17 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         } else {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
                     .getTxtCreationJigyoshaName().setDomain(AtenaMeisho.EMPTY);
+        }
+    }
+
+    private void set事業者名() {
+        RString 事業者番号 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo().getValue();
+        if (!RString.isNullOrEmpty(事業者番号)) {
+            JigyoshaNo 事業者 = new JigyoshaNo(事業者番号);
+            AtenaMeisho 事業者名称 = JutakuKaishuJizenShinsei.createInstance().getJigyoshaName(事業者);
+            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaName().setDomain(事業者名称);
+        } else {
+            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaName().setDomain(AtenaMeisho.EMPTY);
         }
     }
 
