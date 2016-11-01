@@ -145,7 +145,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         }
         KokanShikibetsuNo 交換情報識別番号 = getKokanShikibetsuNo(サービス提供年月);
         DbT3017KyufujissekiKihonEntity 給付実績基本entity = new DbT3017KyufujissekiKihonEntity();
-        RString 通し番号 = Saiban.get(SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
+        RString 通し番号 = Saiban.get(SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.実績管理番号.get名称()).nextString();
         給付実績基本entity.setKokanShikibetsuNo(交換情報識別番号);
         if (償還払請求基本Entity.getYoshikiNo() != null) {
             給付実績基本entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求基本Entity.getYoshikiNo()));
