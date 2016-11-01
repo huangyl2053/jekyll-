@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -424,7 +425,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         int 著工日に対する年月不一致レコード = 0;
         int 対象住宅住所が不一致レコード = 0;
         for (dgGaisyuList_Row tmpRow : gridList) {
-            if (!行状態_削除.equals(tmpRow.getTxtJyotai())) {
+            if (!RowState.Deleted.equals(tmpRow.getRowState())) {
                 著工日に対する年月 = new FlexibleDate(new RDate(tmpRow.getTxtChakkoYoteibi().toString()).toDateString())
                         .getYearMonth().toDateString();
                 対象住宅住所 = tmpRow.getTxtJutakuAddress();
@@ -433,7 +434,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
 
         for (dgGaisyuList_Row tmpRow : gridList) {
-            if (行状態_削除.equals(tmpRow.getTxtJyotai())) {
+            if (RowState.Deleted.equals(tmpRow.getRowState())) {
                 削除レコード数 = 削除レコード数 + 1;
             } else {
                 RString tmp著工日 = RString.isNullOrEmpty(tmpRow.getTxtChakkoYoteibi()) ? RString.EMPTY
@@ -702,7 +703,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         Map<Integer, JutakuJizenShinseiEntity> 改修内容データMap = new HashMap<>();
         for (dgGaisyuList_Row row : 住宅改修内容一覧データ) {
             JutakuJizenShinseiEntity entity = new JutakuJizenShinseiEntity(
-                    row.getTxtJyotai(),
+                    new RString(row.getRowState().toString()),
                     row.getTxtKaishuNaiyo(),
                     row.getTxtJigyosha(),
                     row.getTxtJutakuAddress(),
@@ -722,7 +723,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
         Decimal 費用額合計 = Decimal.ZERO;
         for (dgGaisyuList_Row tmpRow : rowList) {
-            if (!行状態_削除.equals(tmpRow.getTxtJyotai()) && !tmpRow.getTxtKaishuKingaku().isNullOrEmpty()) {
+            if (!RowState.Deleted.equals(tmpRow.getRowState()) && !tmpRow.getTxtKaishuKingaku().isNullOrEmpty()) {
                 費用額合計 = 費用額合計.add(new Decimal(tmpRow.getTxtKaishuKingaku().replace(",", "").toString()));
             }
         }
@@ -957,11 +958,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private boolean getCheckFlag(List<dgGaisyuList_Row> 住宅改修内容一覧データ,
             Map<Integer, JutakuJizenShinseiEntity> 住宅改修内容一覧データMap) {
         for (dgGaisyuList_Row row : 住宅改修内容一覧データ) {
-            if (行状態_更新.equals(row.getTxtJyotai())
-                    || 行状態_削除.equals(row.getTxtJyotai())
-                    || 行状態_登録.equals(row.getTxtJyotai())) {
+            if (RowState.Modified.equals(row.getRowState())
+                    || RowState.Deleted.equals(row.getRowState())
+                    || RowState.Added.equals(row.getRowState())) {
                 JutakuJizenShinseiEntity entity = 住宅改修内容一覧データMap.get(row.getId());
-                if (!entity.get状態().equals(row.getTxtJyotai())) {
+                if (!entity.get状態().equals(row.getRowState())) {
                     return true;
                 }
                 if (!entity.get住宅改修内容().equals(row.getTxtKaishuNaiyo())) {
@@ -1118,7 +1119,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
         int maxIndex = 最大連番を取得する(gridList);
         for (dgGaisyuList_Row tmpRow : gridList) {
-            if (行状態_更新.equals(tmpRow.getTxtJyotai()) || 行状態_削除.equals(tmpRow.getTxtJyotai())) {
+            if (RowState.Modified.equals(tmpRow.getRowState()) || RowState.Deleted.equals(tmpRow.getRowState())) {
                 ShokanJutakuKaishu oldData = 住宅改修レコードの取得(tmpRow, oldDataList);
                 ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = oldData.createBuilderForEdit();
                 shokanJutakuKaishuBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
@@ -1136,12 +1137,12 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                         .concat(固定値_サービスコード)));
                 shokanJutakuKaishuBuilder.set事前申請サービス提供年月(updateData.getサービス提供年月());
                 shokanJutakuKaishuBuilder.set事前申請整理番号(updateData.get整理番号());
-                EntityDataState state = 行状態_更新.equals(tmpRow.getTxtJyotai()) ? EntityDataState.Modified
+                EntityDataState state = RowState.Modified.equals(tmpRow.getRowState()) ? EntityDataState.Modified
                         : EntityDataState.Deleted;
                 shokanJutakuKaishuBuilder.setステータス(state);
                 oldData = shokanJutakuKaishuBuilder.build();
                 kaishuList.add(oldData);
-            } else if (行状態_登録.equals(tmpRow.getTxtJyotai())) {
+            } else if (RowState.Added.equals(tmpRow.getRowState())) {
                 maxIndex++;
                 ShokanJutakuKaishu addData = new ShokanJutakuKaishu(hihokenshaNo, サービス提供年月, 整理番号,
                         new JigyoshaNo(固定値_事業者番号), 様式番号, 固定値_明細番号,
@@ -1252,16 +1253,16 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 builder.set支払窓口開始時間(new RString(String.format(連番フォーマット.toString(),
                         div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza()
                         .getStartHHMM().getHour())).concat(new RString(String.format(連番フォーマット.toString(),
-                                                div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                                                .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute()))));
+                        div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                        .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute()))));
             }
             if (div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM() != null) {
                 builder.set支払窓口終了時間(new RString(String.format(連番フォーマット.toString(),
                         div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                         .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getHour()))
                         .concat(new RString(String.format(連番フォーマット.toString(),
-                                                div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                                                .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
+                                div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                                .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
             }
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード)) {
             builder.set口座ID(Long.valueOf(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
@@ -1383,7 +1384,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 builder.set支払窓口開始時間(new RString(String.format(連番フォーマット.toString(),
                         div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getHour()))
                         .concat(new RString(String.format(連番フォーマット.toString(), div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                                                .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute()))));
+                                .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute()))));
             }
             if (div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza()
                     .getEndHHMM() != null) {
@@ -1391,7 +1392,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                         div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                         .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getHour()))
                         .concat(new RString(String.format(連番フォーマット.toString(), div.getKaigoShikakuKihonShaPanel()
-                                                .getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
+                                .getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
             }
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード) && !div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                 .getCcdJutakuKaishuJizenShinseiKoza().getKozaNo().isEmpty()) {
@@ -1913,9 +1914,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
         if (gridList != null && !gridList.isEmpty()) {
             for (dgGaisyuList_Row tmpRow : gridList) {
-                if (行状態_更新.equals(tmpRow.getTxtJyotai())
-                        || 行状態_削除.equals(tmpRow.getTxtJyotai())
-                        || 行状態_登録.equals(tmpRow.getTxtJyotai())) {
+                if (RowState.Modified.equals(tmpRow.getRowState())
+                        || RowState.Deleted.equals(tmpRow.getRowState())
+                        || RowState.Added.equals(tmpRow.getRowState())) {
                     div.setHidDataChangeFlg(非表示用フラグ_TRUE);
                     return true;
                 }
@@ -1953,14 +1954,14 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             if (!Decimal.valueOf(oldShinseiData.get給付額等_費用額合計()).equals(div.getKaigoShikakuKihonShaPanel()
                     .getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHiyoTotalNow().getValue())
                     || !Decimal.valueOf(oldShinseiData.get給付額等_保険対象費用額()).equals(div
-                            .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                            .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue())
+                    .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                    .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue())
                     || !Decimal.valueOf(oldShinseiData.get給付額等_保険給付費額()).equals(div
-                            .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                            .getTotalPanel().getTxtHokenKyufuAmountNow().getValue())
+                    .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                    .getTotalPanel().getTxtHokenKyufuAmountNow().getValue())
                     || !Decimal.valueOf(oldShinseiData.get給付額等_利用者自己負担額()).equals(div
-                            .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                            .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue())) {
+                    .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                    .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue())) {
                 div.setHidDataChangeFlg(非表示用フラグ_TRUE);
             }
         } else if (!Decimal.ZERO.equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()

@@ -76,6 +76,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -396,7 +397,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 住宅改修.setTxtJigyosha(row.getTxtJigyosha());
                 住宅改修.setTxtJigyoshaNo(row.getTxtJigyoshaNo());
                 住宅改修.setTxtJutakuAddress(row.getTxtJutakuAddress());
-                住宅改修.setTxtJyotai(row.getTxtJyotai());
+                住宅改修.setTxtJyotai(new RString(row.getRowState().toString()));
                 住宅改修.setTxtKaishuKingaku(row.getTxtKaishuKingaku().replace(",", ""));
                 住宅改修.setTxtKaishuNaiyo(row.getTxtKaishuNaiyo());
                 住宅改修.setTxtKanseiYoteibi(row.getTxtKanseiYoteibi());
@@ -1291,8 +1292,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         ServiceShuruiCode サービス種類コード = 住宅改修費事前申請.getServiceShuruiCode(引き継ぎ被保険者番号,
                 new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
         for (dgGaisyuList_Row tmpRow : gridList) {
-            if (!RString.isNullOrEmpty(tmpRow.getTxtRenban()) && (行状態_更新.equals(tmpRow.getTxtJyotai())
-                    || 行状態_削除.equals(tmpRow.getTxtJyotai()) || 行状態_更新なし.equals(tmpRow.getTxtJyotai()))) {
+            if (!RString.isNullOrEmpty(tmpRow.getTxtRenban()) && (RowState.Modified.equals(tmpRow.getRowState())
+                    || RowState.Deleted.equals(tmpRow.getRowState()) || RowState.Unchanged.equals(tmpRow.getRowState()))) {
                 ShokanJutakuKaishu oldData = 住宅改修レコードの取得(tmpRow, oldDataList);
                 ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = oldData.createBuilderForEdit();
                 shokanJutakuKaishuBuilder.set住宅改修内容(tmpRow.getTxtKaishuNaiyo());
@@ -1309,8 +1310,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 shokanJutakuKaishuBuilder.set改修金額(RString.isNullOrEmpty(tmpRow.getTxtKaishuKingaku())
                         ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().replace(コンマ, RString.EMPTY).toString()));
                 EntityDataState state = EntityDataState.Unchanged;
-                if (!行状態_更新なし.equals(tmpRow.getTxtJyotai())) {
-                    state = 行状態_更新.equals(tmpRow.getTxtJyotai())
+                if (!RowState.Unchanged.equals(tmpRow.getRowState())) {
+                    state = RowState.Modified.equals(tmpRow.getRowState())
                             ? EntityDataState.Modified : EntityDataState.Deleted;
                 }
                 shokanJutakuKaishuBuilder.setステータス(state);
@@ -1676,7 +1677,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 画面住宅住所.add(画面住宅住所非削除);
                 画面費用額合計 = 画面費用額合計.add(new Decimal(画面住宅住所非削除.getTxtKaishuKingaku().
                         replace(コンマ, RString.EMPTY).toString()));
-            } else if (!行状態_削除.equals(画面住宅住所非削除.getTxtJyotai())
+            } else if (!RowState.Deleted.equals(画面住宅住所非削除.getRowState())
                     && !RString.isNullOrEmpty(画面住宅住所非削除.getTxtRenban())) {
                 画面住宅住所.add(画面住宅住所非削除);
                 画面費用額合計 = 画面費用額合計.add(new Decimal(画面住宅住所非削除.getTxtKaishuKingaku().
@@ -1715,7 +1716,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         Decimal 費用額合計 = Decimal.ZERO;
         for (dgGaisyuList_Row tmpRow : gridList) {
             RString 改修金額 = tmpRow.getTxtKaishuKingaku().replace(コンマ, RString.EMPTY);
-            if ((!行状態_削除.equals(tmpRow.getTxtJyotai())) && 改修金額 != null) {
+            if ((!RowState.Deleted.equals(tmpRow.getRowState())) && 改修金額 != null) {
                 費用額合計 = 費用額合計.add(new Decimal(改修金額.toString()));
             }
         }
@@ -1859,7 +1860,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     .get住宅改修内容一覧();
             Decimal 画面費用額合計 = Decimal.ZERO;
             for (dgGaisyuList_Row 住宅住所非削除 : 画面住宅改修データ) {
-                if (RString.isNullOrEmpty(住宅住所非削除.getTxtRenban()) || (!行状態_削除.equals(住宅住所非削除.getTxtJyotai())
+                if (RString.isNullOrEmpty(住宅住所非削除.getTxtRenban()) || (!RowState.Deleted.equals(住宅住所非削除.getRowState())
                         && !RString.isNullOrEmpty(住宅住所非削除.getTxtRenban()))) {
                     画面費用額合計 = 画面費用額合計.add(new Decimal(
                             住宅住所非削除.getTxtKaishuKingaku().replace(コンマ, RString.EMPTY).toString()));
@@ -1888,7 +1889,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             JutakuGaisuListDataParameter param = 住宅改修データdgList.get(i);
             dgGaisyuList_Row gridRow = gridList.get(i);
             is住宅改修データ変更 = is住宅改修データ変更OK(param.getTxtJutakuAddress(), gridRow.getTxtJutakuAddress())
-                    || is住宅改修データ変更OK(param.getTxtJyotai(), gridRow.getTxtJyotai())
+                    || is住宅改修データ変更OK(param.getTxtJyotai(), new RString(gridRow.getRowState().toString()))
                     || is住宅改修データ変更OK(param.getTxtChakkoYoteibi(), gridRow.getTxtChakkoYoteibi())
                     || is住宅改修データ変更OK(param.getTxtJigyosha(), gridRow.getTxtJigyosha())
                     || is住宅改修データ変更OK(param.getTxtJigyoshaNo(), gridRow.getTxtJigyoshaNo())
@@ -2021,7 +2022,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         JyutakuGaisyunaiyoListParameter param;
         if (gridList != null) {
             for (dgGaisyuList_Row row : gridList) {
-                RString 状態 = RString.EMPTY.equals(row.getTxtJyotai()) ? 住宅改修_状態 : row.getTxtJyotai();
+                RString 状態 = new RString(row.getRowState().toString());
                 param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
                         状態, row.getTxtJutakuAddress(),
                         new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));

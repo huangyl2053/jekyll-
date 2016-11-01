@@ -282,7 +282,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                         UrQuestionMessages.確認_汎用.getMessage().getCode(),
                         UrQuestionMessages.確認_汎用.getMessage().replace(償還払決定情報を登録.toString()).evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
-            } else if (div.getBtnShokanKetteiJyoho().isDisabled()) {
+            } else if (!確認_汎用 && div.getBtnShokanKetteiJyoho().isDisabled()) {
                 set完了状態(div);
                 return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
             }
