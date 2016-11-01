@@ -380,10 +380,10 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     }
 
     private RString commonRStringEra(RString 年月日) {
-        if (年月日.contains(半角アスタリスク)) {
-            return 年月日;
-        }
         if (年月日 != null && !年月日.isEmpty()) {
+            if (年月日.contains(半角アスタリスク)) {
+                return 年月日;
+            }
             return new FlexibleDate(年月日).wareki()
                     .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.ZERO).getEra();
@@ -402,10 +402,10 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     }
 
     private RString commonRStringYMD(RString 年月日) {
-        if (年月日.contains(半角アスタリスク)) {
-            return 半角アスタリスクSIX;
-        }
         if (年月日 != null && !年月日.isEmpty()) {
+            if (年月日.contains(半角アスタリスク)) {
+                return 半角アスタリスクSIX;
+            }
             return new FlexibleDate(年月日).wareki()
                     .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.ZERO)
