@@ -51,12 +51,23 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     public void set介護認定審査会開催場所一覧(List<ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList) {
         List<dgKaisaibashoIchiran_Row> rowList = new ArrayList();
         for (ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho : shinsakaiKaisaiBashoJohoList) {
+            RString 開催地区コード = RString.EMPTY;
+            if (shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード() != null
+                    && !shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード().isEmpty()) {
+                開催地区コード = shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード().value();
+            }
+
+            RString 開催場所電話番号 = RString.EMPTY;
+            if (shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号() != null
+                    && !shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号().isEmpty()) {
+                開催場所電話番号 = shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号().value();
+            }
             dgKaisaibashoIchiran_Row row = new dgKaisaibashoIchiran_Row(RString.EMPTY,
                     shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所コード(),
                     shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所名称(),
-                    shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード().value(),
+                    開催地区コード,
                     shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所住所(),
-                    shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号().value(),
+                    開催場所電話番号,
                     RString.EMPTY);
             if (shinsakaiKaisaiBashoJoho.is介護認定審査会開催場所状況()) {
                 row.setKaisaibashoJokyo(通常);
