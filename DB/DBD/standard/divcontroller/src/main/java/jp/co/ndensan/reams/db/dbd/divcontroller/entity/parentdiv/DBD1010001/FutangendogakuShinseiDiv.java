@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class FutangendogakuShinseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -57,6 +57,10 @@ public class FutangendogakuShinseiDiv extends Panel {
     private RString lockKey;
     @JsonProperty("jotai")
     private RString jotai;
+    @JsonProperty("mode")
+    private RString mode;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -236,6 +240,42 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
+     * getmode
+     * @return mode
+     */
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    /*
+     * setmode
+     * @param mode mode
+     */
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode = mode;
+    }
+
+    /*
+     * getshikibetsuCode
+     * @return shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    /*
+     * setshikibetsuCode
+     * @param shikibetsuCode shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -329,11 +369,6 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return this.getHeader().getCcdShisetsuNyushoInfo();
-    }
-
-    @JsonIgnore
     public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
         return this.getHeader().getCcdAtenaInfo();
     }
@@ -341,6 +376,11 @@ public class FutangendogakuShinseiDiv extends Panel {
     @JsonIgnore
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return this.getHeader().getCcdKaigoShikakuKihon();
+    }
+
+    @JsonIgnore
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return this.getHeader().getCcdShisetsuNyushoInfo();
     }
 
     @JsonIgnore

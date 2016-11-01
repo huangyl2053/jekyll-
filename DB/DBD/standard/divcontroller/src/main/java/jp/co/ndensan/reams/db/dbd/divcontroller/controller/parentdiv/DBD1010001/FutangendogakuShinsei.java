@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakuninte
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -258,6 +259,19 @@ public class FutangendogakuShinsei {
     public ResponseData<FutangendogakuShinseiDiv> onBeforeOpenDialog_btnHiShoninRiyu(FutangendogakuShinseiDiv div) {
         div.setGyomuCode(GyomuCode.DB介護保険.getColumnValue());
         div.setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「施設入退所情報」ボタンの処理
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv>
+            onBeforeOpenDialog_btnDispShisetsuJoho(FutangendogakuShinseiDiv div) {
+        div.setShikibetsuCode(new RString(div.getCcdAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode().toString()));
+        div.setMode(new RString(ShisetsuNyutaishoRirekiKanriDiv.DisplayMode.照会.toString()));
         return ResponseData.of(div).respond();
     }
 

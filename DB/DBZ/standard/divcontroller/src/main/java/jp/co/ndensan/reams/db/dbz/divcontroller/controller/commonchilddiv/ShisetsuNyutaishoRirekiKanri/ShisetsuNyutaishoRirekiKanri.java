@@ -32,6 +32,7 @@ public class ShisetsuNyutaishoRirekiKanri {
             requestDiv.set表示モード(requestDiv.getSyokikaMode());
             getHandler(requestDiv).initialize(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
         }
+        requestDiv.setVisible(true);
         return ResponseData.of(requestDiv).respond();
     }
 
