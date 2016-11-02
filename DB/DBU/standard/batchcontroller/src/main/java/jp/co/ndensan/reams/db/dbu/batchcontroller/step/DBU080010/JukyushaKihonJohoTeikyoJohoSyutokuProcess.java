@@ -101,8 +101,8 @@ public class JukyushaKihonJohoTeikyoJohoSyutokuProcess extends BatchProcessBase<
         tempEntity.setMisetteiJiyu05(get未設定事由(entity.getNinteiYukoKikanShuryoYMD()));
         tempEntity.setTeikyoNaiyo06(getValue(entity.getJukyuShinseiYMD()));
         tempEntity.setMisetteiJiyu06(get未設定事由(entity.getJukyuShinseiYMD()));
-        tempEntity.setTeikyoNaiyo07(entity.getNinteishinsakaiIkenShurui());
-        tempEntity.setMisetteiJiyu07(get未設定事由(entity.getNinteishinsakaiIkenShurui()));
+        tempEntity.setTeikyoNaiyo07(entity.getShinsakaiIken());
+        tempEntity.setMisetteiJiyu07(get未設定事由(entity.getShinsakaiIken()));
         tempEntity.setTeikyoNaiyo08(RString.EMPTY);
         tempEntity.setMisetteiJiyu08(未設定事由８);
         tempEntity.setTeikyoNaiyo09(getValue(entity.getShikyuGendoTanisu()));
@@ -115,12 +115,17 @@ public class JukyushaKihonJohoTeikyoJohoSyutokuProcess extends BatchProcessBase<
     }
 
     private RString getデータセットキー(JukyushaTeikyoJohoKohoEntity entity) {
-        return entity.getHihokenshaNo().value().concat(
-                DataSetNo._0201受給者基本情報.getコード()).concat(
-                        entity.getJukyuShinseiYMD().toString());
+        if (entity.getJukyuShinseiYMD() == null) {
+            return entity.getHihokenshaNo().value().concat(DataSetNo._0201受給者基本情報.getコード());
+        }
+        return entity.getHihokenshaNo().value().concat(DataSetNo._0201受給者基本情報.getコード())
+                .concat(entity.getJukyuShinseiYMD().toString());
     }
 
     private RString get要介護状態区分コード(JukyushaTeikyoJohoKohoEntity entity) {
+        if (entity.getYokaigoJotaiKubunCode() == null || entity.getYokaigoJotaiKubunCode().isEmpty()) {
+            return ChukanHyojunLayoutYokaigoJotaiKubun.なし.getコード();
+        }
         if (YokaigoJotaiKubun.非該当.getコード().equals(entity.getYokaigoJotaiKubunCode().value())) {
             return ChukanHyojunLayoutYokaigoJotaiKubun.自立.getコード();
         } else if (YokaigoJotaiKubun.要支援_経過的要介護.getコード().equals(entity.getYokaigoJotaiKubunCode().value())) {

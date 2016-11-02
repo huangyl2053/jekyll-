@@ -74,7 +74,7 @@
         , dbT4001."lastUpdateTimestamp"
         , dbT4001."logicalDeletedFlag"
         , dbT4102."shinseishoKanriNo" AS ninteiShinseishoKanriNo
-        , dbT4102."ninteishinsakaiIkenShurui"
+        , dbT4102."shinsakaiIken"
         , dbT4102."lastUpdateTimestamp" AS ninteiLastUpdateTimestamp
         , dbT4102."isDeleted" AS ninteiLogicalDeletedFlag
         FROM rgdb."DbT4001JukyushaDaicho" dbT4001
@@ -105,7 +105,7 @@
             , dbT4001."lastUpdateTimestamp"
             , dbT4001."logicalDeletedFlag"
             , dbT4102."shinseishoKanriNo" AS ninteiShinseishoKanriNo
-            , dbT4102."ninteishinsakaiIkenShurui"
+            , dbT4102."shinsakaiIken"
             , dbT4102."lastUpdateTimestamp" AS ninteiLastUpdateTimestamp
             , dbT4102."isDeleted" AS ninteiLogicalDeletedFlag
             FROM rgdb."DbT4001JukyushaDaicho" dbT4001
