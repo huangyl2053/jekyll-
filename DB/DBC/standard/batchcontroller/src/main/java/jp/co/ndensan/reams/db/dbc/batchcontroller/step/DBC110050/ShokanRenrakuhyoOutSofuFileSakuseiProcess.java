@@ -22,16 +22,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -78,6 +71,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private static final RString STR_200604 = new RString("200604");
     private static final RString STR_200904 = new RString("200904");
     private static final RString RSTRING_0000 = new RString("0000");
+    private static final RString COPY = new RString("copy");
     private static final int INT_100 = 100;
     private static final int INT_10 = 10;
     private static final int INT_2 = 2;
@@ -90,25 +84,26 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private ShokanRenrakuhyoOutManager manager;
 
     private OutputParameter<Integer> outputCount;
-    private OutputParameter<List> outputEntry;
-    private List<SharedFileDescriptor> entryList;
+    private OutputParameter<RString> outputPath;
+    private OutputParameter<RString> inputPath;
 
     /**
      * 送付ファイルのレコード件数です
      */
     public static final RString PARAMETER_OUT_OUTCOUNT;
+    /**
+     * inputPathです
+     */
+    public static final RString INPUT_PATH;
+    /**
+     * outputPathです
+     */
+    public static final RString OUTPUT_PATH;
 
     static {
         PARAMETER_OUT_OUTCOUNT = new RString("outputCount");
-    }
-
-    /**
-     * 送付ファイルエントリ情報です
-     */
-    public static final RString PARANETER_OUT_OUTPUTENTITY;
-
-    static {
-        PARANETER_OUT_OUTPUTENTITY = new RString("outputEntry");
+        INPUT_PATH = new RString("inputPath");
+        OUTPUT_PATH = new RString("outputPath");
     }
 
     private DbWT2112ShokanMeisaiTempEntity beforeEntity;
@@ -147,8 +142,8 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private JigyoshaNo 事業者番号;
     private RString 様式番号;
     private RString 明細番号;
+    private RString 入力ファイルパス;
 
-    @BatchWriter
     private CsvListWriter csvWriter;
 
     @Override
@@ -157,8 +152,8 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         レコード番号 = INDEX_0;
         レコード順次番号 = INDEX_1;
         outputCount = new OutputParameter<>();
-        outputEntry = new OutputParameter<>();
-        entryList = new ArrayList<>();
+        inputPath = new OutputParameter<>();
+        outputPath = new OutputParameter<>();
         manager = ShokanRenrakuhyoOutManager.createInstance();
         レコード件数 = manager.getレコード件数(parameter.toSofuMeisaiParameter());
     }
@@ -169,13 +164,11 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         csvFileName = ファイル名_前.concat(parameter.get保険者番号().getColumnValue()).
                 concat(parameter.get処理年月().toDateString()).concat(ファイル名_後);
         csvFilePath = Path.combinePath(spoolWorkPath, csvFileName);
-        csvWriter = new CsvListWriter.InstanceBuilder(csvFilePath).
-                setDelimiter(コンマ).
-                setEnclosure(RString.EMPTY).
-                setEncode(Encode.UTF_8withBOM).
-                hasHeader(false).
-                setNewLine(NewLine.CRLF).
-                build();
+        if (Encode.UTF_8.equals(parameter.get文字コード())) {
+            入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(csvFileName));
+        } else {
+            入力ファイルパス = csvFilePath;
+        }
     }
 
     @Override
@@ -185,6 +178,15 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
 
     @Override
     protected void process(DbWT2112ShokanMeisaiTempEntity entity) {
+        if (csvWriter == null) {
+            csvWriter = new CsvListWriter.InstanceBuilder(入力ファイルパス).
+                    setDelimiter(コンマ).
+                    setEnclosure(RString.EMPTY).
+                    setEncode(parameter.get文字コード()).
+                    hasHeader(false).
+                    setNewLine(NewLine.CRLF).
+                    build();
+        }
         if (レコード番号 == INDEX_0) {
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getControlEntity());
@@ -227,15 +229,13 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             addEntityWriter(beforeEntity, true);
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getEndEntity());
+        }
+        if (csvWriter != null) {
             csvWriter.close();
-            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
-            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(csvFilePath), opts);
-            entryList.add(sfd);
         }
         outputCount.setValue(総出力件数);
-        outputEntry.setValue(entryList);
+        inputPath.setValue(入力ファイルパス);
+        outputPath.setValue(csvFilePath);
     }
 
     private void addEntityWriter(DbWT2112ShokanMeisaiTempEntity entity, boolean lastFlag) {

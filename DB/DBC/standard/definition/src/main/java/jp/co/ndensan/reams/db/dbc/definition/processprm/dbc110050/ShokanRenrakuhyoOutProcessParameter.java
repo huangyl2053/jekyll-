@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110050;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,7 +25,7 @@ public class ShokanRenrakuhyoOutProcessParameter implements IBatchProcessParamet
     private RString 再処理区分;
     private FlexibleYearMonth 処理年月;
     private HokenshaNo 保険者番号;
-    private int 件数;
+    private Encode 文字コード;
 
     /**
      * 送付対象データ取得のmybatisParameterを取得する。
