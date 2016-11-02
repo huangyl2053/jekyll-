@@ -545,7 +545,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                         事業者番号,
                         様式番号,
                         NUM1,
-                        new RString(String.valueOf(row.getId() + NUM_1))).
+                        new RString(String.format("%02d", row.getId() + NUM_1))).
                         createBuilderForEdit().build();
                 entityAdded = buildshokanFukushi(entityAdded, row);
                 entityList.add(entityAdded.added());
