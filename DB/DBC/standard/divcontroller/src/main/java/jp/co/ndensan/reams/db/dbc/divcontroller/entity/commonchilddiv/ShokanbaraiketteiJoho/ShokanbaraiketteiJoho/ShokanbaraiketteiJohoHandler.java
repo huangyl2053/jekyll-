@@ -107,7 +107,7 @@ public class ShokanbaraiketteiJohoHandler {
         RString 支給区分 = null;
         if (決定情報 == null) {
             div.getTxtKetebi().setValue(RDate.getNowDate());
-            setState(支給区分);
+            setState(支給区分_支給);
             div.getRdoShikyukubun().setDisabled(false);
             div.getRdoShikyukubun().setSelectedKey(支給区分_支給);
             div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
@@ -316,6 +316,12 @@ public class ShokanbaraiketteiJohoHandler {
             div.getRdoShikyukubun().setDisabled(false);
             div.getTxtFuSyikyuriyu1().setValue(RString.EMPTY);
             div.getTxtFushikyuriyu2().setValue(RString.EMPTY);
+        } else if (支給区分_支給.equals(支給区分)) {
+            div.getTxtZogenriyu().setDisabled(false);
+            div.getTxtZogentani().setDisabled(false);
+            div.getTxtShiharaikingakugoke().setDisabled(false);
+            div.getTxtFuSyikyuriyu1().setDisabled(true);
+            div.getTxtFushikyuriyu2().setDisabled(true);
         } else {
             div.getRdoShikyukubun().setDisabled(true);
         }
