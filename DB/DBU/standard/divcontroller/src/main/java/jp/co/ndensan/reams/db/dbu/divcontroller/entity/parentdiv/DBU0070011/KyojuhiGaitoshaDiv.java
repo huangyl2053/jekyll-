@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyojuhiGaitoshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -73,8 +73,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaiichiKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiKoshitsuGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtDaiichiKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaiichiJunKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaiichiJunKoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -83,8 +93,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiTokuyoGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaiichiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiTokuyoGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtDaiichiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaiichiTashoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaiichiTashoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -93,8 +113,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDainiKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDainiKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDainiKoshitsuGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtDainiKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaininoIchiJunKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaininoIchiJunKoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -103,8 +133,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaininoIchiTokuyoGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaininoIchiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaininoIchiTokuyoGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtDaininoIchiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaininoIchiTashoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaininoIchiTashoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -113,8 +153,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaisanKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaisanKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaisanKoshitsuGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtDaisanKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaininoNiJunKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaininoNiJunKoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -123,8 +173,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaininoNiTokuyoGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaininoNiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaininoNiTokuyoGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtDaininoNiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaininoNiTashoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaininoNiTashoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -133,8 +193,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoKijunHiyogakuKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuKoshitsuGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtKijunHiyogakuKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanJunKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaisanJunKoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -143,8 +213,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaininoSanTokuyoGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaininoSanTokuyoGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaininoSanTokuyoGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtDaininoSanTokuyoGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanTashoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaisanTashoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -153,8 +233,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuJunKoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoKijunHiyogakuJunKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuJunKoshitsuGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtKijunHiyogakuJunKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanTokuyoGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoDaisanTokuyoGaitosha();
     }
 
     @JsonIgnore
@@ -163,8 +253,18 @@ public class KyojuhiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuTashoshitsuGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoKijunHiyogakuTashoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuTashoshitsuGaitosha() {
         return this.getTblKyojuhiGaitosha().getTxtKijunHiyogakuTashoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoKijunHiyogakuTokuyoGaitosha() {
+        return this.getTblKyojuhiGaitosha().getIcoKijunHiyogakuTokuyoGaitosha();
     }
 
     @JsonIgnore

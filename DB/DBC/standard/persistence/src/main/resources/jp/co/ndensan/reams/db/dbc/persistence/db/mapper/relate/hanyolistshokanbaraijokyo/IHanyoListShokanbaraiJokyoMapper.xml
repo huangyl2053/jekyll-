@@ -203,8 +203,8 @@
         jukyu."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3034_all."serviceTeikyoYM" || '31') AND
         (DbT3034_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> jukyu."ninteiYukoKikanShuryoYMD"
         ORDER BY
-        "rirekiNo",
-        "edaban" LIMIT 1
+        "rirekiNo" DESC,
+        "edaban" DESC LIMIT 1
         )
         ) As DbT4001
         ON DbT4001."被保険者番号" = DbT3034."dbT3034ShokanShinsei_hiHokenshaNo"

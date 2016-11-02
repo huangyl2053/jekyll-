@@ -33,6 +33,5 @@ public class ShiharaiHohoKanriListData implements Serializable {
     private RString 償還決定登録者2の選択;
     private Long 改頁出力順ID;
     private ReportId 帳票ID;
-    private ReportId 帳票分類ID;
     private RDateTime 帳票作成日時;
 }

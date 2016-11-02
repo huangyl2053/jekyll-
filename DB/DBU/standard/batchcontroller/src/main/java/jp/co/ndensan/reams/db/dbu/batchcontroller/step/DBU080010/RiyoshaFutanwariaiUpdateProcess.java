@@ -54,7 +54,8 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeyikyouTa
 
     @Override
     protected IBatchReader createReader() {
-        mybatisParameter = RiyoshaFutanwariaiMybatisParameter.createParamter提供対象者(getMybitisParamter(),
+        mybatisParameter = RiyoshaFutanwariaiMybatisParameter.createParamter提供対象者(processParameter.get新規異動区分(),
+                getMybitisParamter(),
                 new RString("\"").concat(processParameter.get提供基本情報中間テーブル名()).concat("\""));
         return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParameter);
     }

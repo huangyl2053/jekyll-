@@ -47,19 +47,22 @@ public class InsDankaibetsuShunoritsuTmpProcessParameter implements IBatchProces
      * MYBATIS用パラメータを作成します。
      *
      * @param 科目リスト 科目リスト
+     * @param is未納分出力区分 is未納分出力区分
      * @return MYBATIS用パラメータ
      */
-    public InsDankaibetsuShunoritsuTmpMybatisParamter toMybatisParamter(List<RString> 科目リスト) {
+    public InsDankaibetsuShunoritsuTmpMybatisParamter toMybatisParamter(List<RString> 科目リスト, boolean is未納分出力区分) {
         return new InsDankaibetsuShunoritsuTmpMybatisParamter(開始調定年度,
                 終了調定年度,
                 開始賦課年度,
                 終了賦課年度,
+                会計年度,
                 基準年月,
                 開始生年月日,
                 終了生年月日,
                 広域判定区分,
                 選択対象区分,
                 選択対象リスト,
-                科目リスト);
+                科目リスト,
+                is未納分出力区分);
     }
 }

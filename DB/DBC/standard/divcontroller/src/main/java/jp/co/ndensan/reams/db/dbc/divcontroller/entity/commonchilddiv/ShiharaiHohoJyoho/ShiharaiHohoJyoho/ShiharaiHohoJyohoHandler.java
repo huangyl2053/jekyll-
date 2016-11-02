@@ -103,7 +103,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                getKozaId(), null, null)).records();
+                                        getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -204,6 +204,22 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanName1().clearValue();
         div.getTxtMeigininKana1().clearDomain();
         div.getTxtMeigininKanji1().clearDomain();
+    }
+
+    /**
+     * 必須項目をクリアします。
+     *
+     */
+    public void clear必須項目() {
+        div.getTxtShiharaiBasho().clearValue();
+        div.getTxtStartYMD().clearValue();
+        div.getTxtStartYobi().clearValue();
+        div.getTxtStartHHMM().clearValue();
+        div.getTxtEndYMD().clearValue();
+        div.getTxtEndYobi().clearValue();
+        div.getTxtEndHHMM().clearValue();
+        div.getDdlKozaID().setSelectedIndex(0);
+        div.getTxtKeiyakuNo().clearValue();
     }
 
     private void 償還払給付または高額給付の照会モード(ShiharaiHohoKubun 支払方法区分) {

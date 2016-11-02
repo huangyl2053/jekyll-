@@ -86,12 +86,16 @@
             ) AS "COUNT2"
             ON "COUNT2"."serviceTeikyoYM" = #{基準年月}
             AND "DbV2002Fuka"."dbT2002Fuka_hihokenshaNo" = "COUNT2"."hiHokenshaNo"
-            AND "TotalShunyu"."urT0700ShunoKanri_choteiNendo" <![CDATA[<=]]> #{終了調定年度}
+            WHERE
+            "TotalShunyu"."urT0700ShunoKanri_choteiNendo" <![CDATA[<=]]> #{終了調定年度}
             AND #{開始調定年度} <![CDATA[<=]]> "TotalShunyu"."urT0700ShunoKanri_choteiNendo"
             AND "TotalShunyu"."urT0700ShunoKanri_kazeiNendo" <![CDATA[<=]]> #{終了賦課年度}
             AND #{開始賦課年度} <![CDATA[<=]]> "TotalShunyu"."urT0700ShunoKanri_kazeiNendo"
+            <if test="is未納分出力区分"> 
+                AND "TotalShunyu"."caT0701Shunyu_kaikeiNendo" = #{会計年度}
+            </if>
             <if test="科目コードリスト != null">
-                AND "FunoKessonAll"."urT0700ShunoKanri_kamokuCode" IN
+                AND "TotalShunyu"."urT0700ShunoKanri_kamokuCode" IN
                 <foreach item="科目コード_ロープ"  collection="科目コードリスト" open="(" separator="," close=")">
                     #{科目コード_ロープ}
                 </foreach>

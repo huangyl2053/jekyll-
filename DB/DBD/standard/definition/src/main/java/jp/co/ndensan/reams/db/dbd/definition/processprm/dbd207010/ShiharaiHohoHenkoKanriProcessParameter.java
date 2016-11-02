@@ -33,7 +33,6 @@ public class ShiharaiHohoHenkoKanriProcessParameter implements IBatchProcessPara
     private RString 償還決定登録者_差止中あり者のみ１号の選択;
     private RString 償還決定登録者_保険料控除あり者のみ１号の選択;
     private Long 改頁出力順ID;
-    private ReportId 帳票分類ID;
     private ReportId 帳票ID;
     private RDateTime 帳票作成日時;
 
@@ -49,7 +48,6 @@ public class ShiharaiHohoHenkoKanriProcessParameter implements IBatchProcessPara
      * @param 償還決定登録者_差止中あり者のみ１号の選択 償還決定登録者_差止中あり者のみ１号の選択
      * @param 償還決定登録者_保険料控除あり者のみ１号の選択 償還決定登録者_保険料控除あり者のみ１号の選択
      * @param 改頁出力順ID 改頁出力順ID
-     * @param 帳票分類ID 帳票分類ID
      * @param 帳票ID 帳票ID
      * @param 帳票作成日時 帳票作成日時
      */
@@ -62,7 +60,6 @@ public class ShiharaiHohoHenkoKanriProcessParameter implements IBatchProcessPara
             RString 償還決定登録者_差止中あり者のみ１号の選択,
             RString 償還決定登録者_保険料控除あり者のみ１号の選択,
             Long 改頁出力順ID,
-            ReportId 帳票分類ID,
             ReportId 帳票ID,
             RDateTime 帳票作成日時) {
 
@@ -75,7 +72,6 @@ public class ShiharaiHohoHenkoKanriProcessParameter implements IBatchProcessPara
         this.償還決定登録者_差止中あり者のみ１号の選択 = 償還決定登録者_差止中あり者のみ１号の選択;
         this.償還決定登録者_保険料控除あり者のみ１号の選択 = 償還決定登録者_保険料控除あり者のみ１号の選択;
         this.改頁出力順ID = 改頁出力順ID;
-        this.帳票分類ID = 帳票分類ID;
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
     }
