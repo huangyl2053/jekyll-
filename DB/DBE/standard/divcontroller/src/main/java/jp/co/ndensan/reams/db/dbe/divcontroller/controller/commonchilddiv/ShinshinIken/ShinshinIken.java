@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.ShinshinIken;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.ShinshinIkenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenBakHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenHandler;
