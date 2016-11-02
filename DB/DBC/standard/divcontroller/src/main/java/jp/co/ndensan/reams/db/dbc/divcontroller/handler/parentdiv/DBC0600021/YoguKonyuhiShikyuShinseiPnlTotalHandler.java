@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.F
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.YoguKonyuhiShikyuShinseiPnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.dgSeikyuDetail_Row;
@@ -108,7 +109,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     private static final RString 申請を保存する = new RString("btnUpdate");
     private static final RString 種目コード = new RString("種目コード");
     private static final RString 品目コード = new RString("品目コード");
-    private static final RString 購入年月日 = new RString("購入年月日");
     private static final RString 領収年月日 = new RString(
             "領収年月日にサービス提供年月より前の日付が設定されています。");
 
@@ -423,10 +423,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
 
     /**
      * 今回の支払状況連動。
+     *
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void 今回の支払状況連動() {
+    public void 今回の支払状況連動(HihokenshaNo 被保険者番号) {
         Decimal 保険給付額 = Decimal.ZERO;
         Decimal 購入金額合計 = Decimal.ZERO;
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getTxtTeikyoYM().getValue().getYearMonth().toString());
+        FukushiyoguKonyuhiShikyuShinsei service = FukushiyoguKonyuhiShikyuShinsei.createInstance();
         List<dgSeikyuDetail_Row> rowList = div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getDgSeikyuDetail().getDataSource();
         for (dgSeikyuDetail_Row row : rowList) {
@@ -435,17 +440,28 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             }
         }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHiyogakuGokei().setValue(購入金額合計);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenTaishoHiyogakuGokei()
-                .setValue(購入金額合計);
+        Decimal 前回までの支払結果の保険対象費用額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
+                .getTxtZenkaiHokenTaishoHiyogakuGokei().getValue();
+        Decimal 今回の支払状況の費用額合計 = 購入金額合計;
+        Decimal 限度額 = service.getShikyuGendogaku(被保険者番号, サービス提供年月);
+        if (限度額.compareTo(今回の支払状況の費用額合計.add(前回までの支払結果の保険対象費用額)) < NUM_0) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
+                    .getTxtKonkaiHokenTaishoHiyogakuGokei().setValue(限度額.subtract(前回までの支払結果の保険対象費用額));
+        } else {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
+                    .getTxtKonkaiHokenTaishoHiyogakuGokei().setValue(今回の支払状況の費用額合計);
+        }
         Decimal 給付率 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue().
                 divide(NUM100).stripTrailingZeros();
+        Decimal 保険対象費用額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
+                .getTxtKonkaiHokenTaishoHiyogakuGokei().getValue();
         if (給付率 != null) {
-            保険給付額 = 購入金額合計.multiply(給付率);
+            保険給付額 = 保険対象費用額.multiply(給付率);
         }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenkyufugakuGokei()
                 .setValue(保険給付額);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiRiyoshaFutangakuGokei()
-                .setValue(購入金額合計.subtract(保険給付額));
+                .setValue(保険対象費用額.subtract(保険給付額));
     }
 
     /**
@@ -1018,7 +1034,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 .getTxtTeikyoYM().getValue().getYearMonth().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue().getYearMonth())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.入力値が不正_追加メッセージあり, 購入年月日.toString())));
+                    DbcErrorMessages.購入日の年月と提供_購入_年月の不一致)));
         }
         return validPairs;
     }
@@ -1095,7 +1111,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 .getTxtTeikyoYM().getValue().getYearMonth().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue().getYearMonth())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.入力値が不正_追加メッセージあり, 購入年月日.toString())));
+                    DbcErrorMessages.購入日の年月と提供_購入_年月の不一致)));
             return validPairs;
         }
         return validPairs;
