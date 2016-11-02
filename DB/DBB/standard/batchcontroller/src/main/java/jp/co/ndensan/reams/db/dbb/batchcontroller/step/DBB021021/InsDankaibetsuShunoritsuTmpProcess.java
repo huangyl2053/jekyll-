@@ -104,12 +104,11 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
     }
 
     private List<RString> get検索用科目リスト() {
-        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
-        IShunoKamoku 収納科目_国保特徴 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
-        IShunoKamoku 収納科目_国保普徴 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
+        IShunoKamoku 収納科目_国保特徴 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        IShunoKamoku 収納科目_国保普徴 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
         List<RString> kamokuList = new ArrayList<>();
-        kamokuList.add(収納科目_国保特徴.get表示用コードwithハイフン());
-        kamokuList.add(収納科目_国保普徴.get表示用コードwithハイフン());
+        kamokuList.add(収納科目_国保特徴.getコード().getColumnValue());
+        kamokuList.add(収納科目_国保普徴.getコード().getColumnValue());
         return kamokuList;
     }
 

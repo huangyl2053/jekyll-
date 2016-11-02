@@ -170,6 +170,10 @@ public class JutakuKaishuJizenShinseiToroku {
      * @return ResponseData<JutakuKaishuJizenShinseiTorokuDiv>
      */
     public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onClick_btnBackToSearch(JutakuKaishuJizenShinseiTorokuDiv div) {
+        if (照会.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).forwardWithEventName(DBC0700011TransitionEventName.該当者一覧).respond();
+        }
+        
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
