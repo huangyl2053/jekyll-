@@ -29,7 +29,6 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "ISougouJigyouJyohouMapper.get高額合算_当初_版改定_異動分データ");
-    private static final RString 転義符 = new RString("\"");
     private static final RString NOTACCEPTABLE = new RString("NotAcceptable");
     private SougouJigyouJyohouProcessParameter processParameter;
     private SougouJigyouJyohouMybatisParameter mybatisParameter;
