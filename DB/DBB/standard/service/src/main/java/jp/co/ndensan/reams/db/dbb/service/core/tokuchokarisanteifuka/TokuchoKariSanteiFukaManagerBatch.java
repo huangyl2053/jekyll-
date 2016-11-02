@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -353,14 +354,12 @@ public class TokuchoKariSanteiFukaManagerBatch {
             fukaKonkyo.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
         }
         fukaKonkyo.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
-        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
         if (前年度世帯課税区分 != null && !前年度世帯課税区分.isEmpty()) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度世帯課税区分));
+            fukaKonkyo.setZennendoSetaiKazeiKubun(SetaiKazeiKubun.toValue(前年度世帯課税区分));
         }
         if (前年度課税区分 != null && !前年度課税区分.isEmpty()) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度課税区分));
+            fukaKonkyo.setZennendoKazeiKubun(KazeiKubun.toValue(前年度課税区分));
         }
-        fukaKonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukaKonkyo.setGokeiShotoku(前年度合計所得金額);
         fukaKonkyo.setKotekiNenkinShunyu(前年度公的年金収入額);
         hokenryoDankaiHanteiParameter.setFukaKonkyo(fukaKonkyo);
@@ -839,14 +838,12 @@ public class TokuchoKariSanteiFukaManagerBatch {
             fukaKonkyo.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
         }
         fukaKonkyo.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
-        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
         if (前年度世帯課税区分 != null && !前年度世帯課税区分.isEmpty()) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度世帯課税区分));
+            fukaKonkyo.setZennendoSetaiKazeiKubun(SetaiKazeiKubun.toValue(前年度世帯課税区分));
         }
         if (前年度課税区分 != null && !前年度課税区分.isEmpty()) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度課税区分));
+            fukaKonkyo.setZennendoKazeiKubun(KazeiKubun.toValue(前年度課税区分));
         }
-        fukaKonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukaKonkyo.setGokeiShotoku(前年度合計所得金額);
         fukaKonkyo.setKotekiNenkinShunyu(前年度公的年金収入額);
         hokenryoDankaiHanteiParameter.setFukaKonkyo(fukaKonkyo);
