@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200007;
 
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200007.ShiharaiHohoHenkoKanriIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -27,6 +28,7 @@ public class ShiharaiHohoHenkoKanriIchiranReport extends Report<ShiharaiHohoHenk
     private final IOutputOrder 出力順;
     private final ShiharaiHohoHenkoEntity 支払方法変更リストEntity_上;
     private final ShiharaiHohoHenkoEntity 支払方法変更リストEntity_下;
+    private final ReportIdDBD 帳票ID;
     private static final int 行数17 = 17;
 
     /**
@@ -38,19 +40,21 @@ public class ShiharaiHohoHenkoKanriIchiranReport extends Report<ShiharaiHohoHenk
      * @param 出力順 出力順
      * @param 支払方法変更リストEntity_上 帳票上部の支払方法変更リストEntity
      * @param 支払方法変更リストEntity_下 帳票下部の支払方法変更リストEntity
+     * @param 帳票ID 帳票ID
      */
     public ShiharaiHohoHenkoKanriIchiranReport(RDateTime 作成日時,
             HokenshaNo 保険者番号,
             RString 保険者名称,
             IOutputOrder 出力順,
             ShiharaiHohoHenkoEntity 支払方法変更リストEntity_上,
-            ShiharaiHohoHenkoEntity 支払方法変更リストEntity_下) {
+            ShiharaiHohoHenkoEntity 支払方法変更リストEntity_下, ReportIdDBD 帳票ID) {
         this.作成日時 = 作成日時;
         this.保険者名称 = 保険者名称;
         this.保険者番号 = 保険者番号;
         this.出力順 = 出力順;
         this.支払方法変更リストEntity_上 = 支払方法変更リストEntity_上;
         this.支払方法変更リストEntity_下 = 支払方法変更リストEntity_下;
+        this.帳票ID = 帳票ID;
     }
 
     @Override
@@ -58,7 +62,7 @@ public class ShiharaiHohoHenkoKanriIchiranReport extends Report<ShiharaiHohoHenk
         for (int 行数 = 1; 行数 <= 行数17; 行数++) {
             IShiharaiHohoHenkoKanriIchiranEditor editor
                     = new ShiharaiHohoHenkoKanriIchiranEditorImpl(作成日時, 保険者番号, 保険者名称, 出力順,
-                            支払方法変更リストEntity_上, 支払方法変更リストEntity_下, 行数);
+                            支払方法変更リストEntity_上, 支払方法変更リストEntity_下, 帳票ID, 行数);
             IShiharaiHohoHenkoKanriIchiranBuilder builder
                     = new ShiharaiHohoHenkoKanriIchiranBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
