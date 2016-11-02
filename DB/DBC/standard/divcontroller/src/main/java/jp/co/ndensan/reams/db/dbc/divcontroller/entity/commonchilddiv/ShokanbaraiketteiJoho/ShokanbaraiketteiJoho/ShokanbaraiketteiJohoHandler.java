@@ -141,6 +141,7 @@ public class ShokanbaraiketteiJohoHandler {
         Decimal 支払金額合計 = Decimal.ZERO;
         Decimal 残上限金額 = 上限金額;
         Decimal 保険対象費用額;
+        int count = 1;
         for (SyokanbaraiketteJoho syokanbaraiketteJoho : 償還払決定一覧情報) {
             dgSyokanbaraikete_Row row = new dgSyokanbaraikete_Row();
             row.setNo(syokanbaraiketteJoho.getServiceCode().isEmpty() ? RString.EMPTY : new RString(index.toString()));
@@ -156,6 +157,9 @@ public class ShokanbaraiketteiJohoHandler {
             }
             保険対象費用額 = set支払金額(syokanbaraiketteJoho, 残上限金額, row, gyomuKbn);
             残上限金額 = 残上限金額.subtract(保険対象費用額);
+            if (count == 償還払決定一覧情報.size()) {
+                row.getShiharaiKingaku().setValue(上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundDownTo(0).subtract(支払金額合計));
+            }
             if (syokanbaraiketteJoho.getSagakuKingaku() != null) {
                 row.getSagakuKingaku().setValue(new Decimal(syokanbaraiketteJoho.getSagakuKingaku()));
             } else {
@@ -177,6 +181,7 @@ public class ShokanbaraiketteiJohoHandler {
             if (syokanbaraiketteJoho.getShiharaiKingaku() != null) {
                 支払金額合計 = 支払金額合計.add(row.getShiharaiKingaku().getValue());
             }
+            count++;
             dataRowList.add(row);
             if (!syokanbaraiketteJoho.getServiceCode().isEmpty()) {
                 index++;
@@ -344,10 +349,10 @@ public class ShokanbaraiketteiJohoHandler {
             row.getShiharaiKingaku().setValue(Decimal.ZERO);
         } else if (単位金額.compareTo(残上限金額) < 0) {
             保険対象費用額 = 単位金額;
-            row.getShiharaiKingaku().setValue(単位金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundHalfUpTo(0));
+            row.getShiharaiKingaku().setValue(単位金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundDownTo(0));
         } else {
             保険対象費用額 = 残上限金額;
-            row.getShiharaiKingaku().setValue(残上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundHalfUpTo(0));
+            row.getShiharaiKingaku().setValue(残上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundDownTo(0));
         }
         return 保険対象費用額;
     }
