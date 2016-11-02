@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -466,9 +465,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         boolean is項目が変更 = Boolean.FALSE;
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        if (居宅給付計画届出 == null) {
-            居宅給付計画届出 = new KyotakuKeikakuTodokede(被保険者番号, new FlexibleYearMonth(
-                    RDate.getNowDate().toDateString().substring(0, NUM_6)), 0);
+        if (居宅給付計画届出 != null) {
+            is項目が変更 = handler.is項目が変更(居宅給付計画届出);
+        } else {
+            is項目が変更 = handler.is項目が変更(被保険者番号);
         }
         is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         if (is項目が変更 && !ResponseHolder.isReRequest()) {
