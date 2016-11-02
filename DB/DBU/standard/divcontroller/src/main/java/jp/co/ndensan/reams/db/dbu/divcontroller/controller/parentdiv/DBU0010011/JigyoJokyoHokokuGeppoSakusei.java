@@ -332,6 +332,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter>
      */
     public ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter> onClick_Jikou(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        onClick_btnJikkoCheck(div);
         return ResponseData.of(getHandler(div).onClick_Jikou()).respond();
     }
 
@@ -341,7 +342,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @param div 事業報告月報作成Div
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
-    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnJikkoCheck(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+    private ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnJikkoCheck(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         RDate 報告年月 = div.getTxtHokokuYM().getValue();
         RString jkkouTani = div.getHdnJkkoutani();
 
