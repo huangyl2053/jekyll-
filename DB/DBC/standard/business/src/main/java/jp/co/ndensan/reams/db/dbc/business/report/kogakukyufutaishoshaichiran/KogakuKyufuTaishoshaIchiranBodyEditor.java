@@ -51,6 +51,9 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
     public KogakuKyufuTaishoshaIchiranSource edit(KogakuKyufuTaishoshaIchiranSource source) {
         DbWT3311KogakuKyufuTaishoshaTempEntity 対象者 = 帳票出力対象データ.get対象者();
         DbWT0001HihokenshaTempEntity 被保険者一時 = 帳票出力対象データ.get被保険者一時();
+        source.listUpper_2 = RString.EMPTY;
+        source.listUpper_3 = RString.EMPTY;
+        source.listLower_1 = RString.EMPTY;
         if (!集計Flag) {
             source.listUpper_1 = 対象者.getNo();
             source.listUpper_4 = getColumnValue(対象者.get事業所番号());

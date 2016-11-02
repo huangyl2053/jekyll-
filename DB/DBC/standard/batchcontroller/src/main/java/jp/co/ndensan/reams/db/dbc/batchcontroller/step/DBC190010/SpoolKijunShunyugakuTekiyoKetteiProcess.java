@@ -467,12 +467,12 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         基準収入額決定通知一覧表パラメータ.set市町村名(parameter.get市町村名());
         for (int i = 出力順リスト.size() - 1; i >= 0; i--) {
             if (出力順リスト.get(i) == null || 出力順リスト.get(i).isEmpty()) {
-                出力順リスト.get(i).remove(i);
+                出力順リスト.remove(i);
             }
         }
         for (int i = 改頁List.size() - 1; i >= 0; i--) {
             if (改頁List.get(i) == null || 改頁List.get(i).isEmpty()) {
-                改頁List.get(i).remove(i);
+                改頁List.remove(i);
             }
         }
         if (出力順リスト.size() > INT_0) {

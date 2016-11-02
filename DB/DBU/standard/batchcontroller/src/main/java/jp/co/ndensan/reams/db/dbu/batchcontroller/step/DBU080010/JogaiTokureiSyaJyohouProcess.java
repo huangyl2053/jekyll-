@@ -38,7 +38,6 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     private static final int 翌日 = 1;
     private static final RString 該当項目 = new RString("NotAcceptable");
     private static final RString 保有 = new RString("NotCovered");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private JogaiTokureiSyaJyohouProcessParameter processParameter;
     private JogaiTokureiSyaJyohouMybatisParameter mybatisParameter;
     @BatchWriter
@@ -77,7 +76,7 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
 
     @Override
     protected void createWriter() {
-        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
+        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(processParameter.get提供基本情報中間テーブル名(),
                 TeikyoKihonJohoNNTempEntity.class);
     }
 

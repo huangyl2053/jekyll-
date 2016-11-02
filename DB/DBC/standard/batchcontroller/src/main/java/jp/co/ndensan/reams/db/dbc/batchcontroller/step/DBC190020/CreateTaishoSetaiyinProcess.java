@@ -363,8 +363,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             eucCsvWriter.writeLine(申請書発行一覧CSV);
             KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 収入額適用申請書一覧表 = this.set申請一覧Entity(null);
             KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
-                        収入額適用申請書一覧表, parameter.get市町村コード().getColumnValue(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
-                申請一覧Report.writeBy(dBC200088SourceWriter);
+                    収入額適用申請書一覧表, parameter.get市町村コード().getColumnValue(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
+            申請一覧Report.writeBy(dBC200088SourceWriter);
         }
 
         List<CreateTaishoSetaiyinEntity> taishoSetaiyinList = new ArrayList();
@@ -773,7 +773,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private RString doDecimal編集(Decimal number) {
         if (null == number) {
-            return RString.EMPTY;
+            return new RString(INT_0);
         }
         return DecimalFormatter.toRString(number, 0);
     }
