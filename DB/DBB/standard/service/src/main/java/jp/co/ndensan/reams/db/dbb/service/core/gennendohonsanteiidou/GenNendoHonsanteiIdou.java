@@ -203,6 +203,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final RString 定数_2 = new RString("2");
     private static final RString 定数_3 = new RString("3");
     private static final RString 定数_10 = new RString("10");
+    private static final RString 特別徴収_厚生労働省 = new RString("1");
+    private static final RString 特別徴収_地共済 = new RString("2");
+    private static final RString 普通徴収 = new RString("3");
 
     /**
      * コンストラクタです
@@ -679,7 +682,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             RString 算定月) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         mapper.createDbT2002FukaJohoTemp();
-        
+
         ShunoKamokuAuthority auth = InstanceProvider.create(ShunoKamokuAuthority.class);
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
         kozaBuilder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
@@ -1308,12 +1311,12 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         RString 特徴定例納期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数, 処理日付, SubGyomuCode.DBB介護賦課);
         業務コンフィグ情報.set特徴定例納期数(Integer.parseInt(特徴定例納期数.toString()));
         List<FlexibleDate> 年金支払日List = new ArrayList<>();
-        RString 年金支払日_4月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_4月, 処理日付, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_6月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_6月, 処理日付, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_8月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_8月, 処理日付, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_10月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_10月, 処理日付, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_12月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_12月, 処理日付, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_2月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_2月, 処理日付, SubGyomuCode.DBB介護賦課);
+        RString 年金支払日_4月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_4月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_6月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_6月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_8月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_8月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_10月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_10月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_12月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_12月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_2月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_2月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
         年金支払日List.add(new FlexibleDate(年金支払日_4月));
         年金支払日List.add(new FlexibleDate(年金支払日_6月));
         年金支払日List.add(new FlexibleDate(年金支払日_8月));
@@ -1356,7 +1359,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         kiwariKeisanInput.set変更後_確定年税額(年額保険料);
         kiwariKeisanInput.set減免額(Decimal.ZERO);
         kiwariKeisanInput.set生年月日(FlexibleDate.EMPTY);
-        kiwariKeisanInput.set全部喪失年月日(FlexibleDate.EMPTY);
+        if (資格の情報 != null) {
+            kiwariKeisanInput.set全部喪失年月日(資格の情報.get資格喪失年月日());
+        }
         set特徴開始停止区分_停止期(kiwariKeisanInput, 処理日付, 賦課の情報_更正前, 徴収方法の情報_更正前, 資格の情報);
         kiwariKeisanInput.set期別徴収方法区分(get期別徴収方法区分(徴収方法の情報_更正前));
         return kiwariKeisanInput;
@@ -1447,17 +1452,17 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
 
     private FlexibleDate get特別徴収_年金支払い日(Tsuki 月, RDate 適用基準日) {
         RString 特別徴収_年金支払い日 = RString.EMPTY;
-        if (Tsuki._2月 == 月) {
+        if (Tsuki._2月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_2月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._4月 == 月) {
+        } else if (Tsuki._4月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_4月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._6月 == 月) {
+        } else if (Tsuki._6月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_6月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._8月 == 月) {
+        } else if (Tsuki._8月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_8月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._10月 == 月) {
+        } else if (Tsuki._10月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_10月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._12月 == 月) {
+        } else if (Tsuki._12月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_12月, 適用基準日, SubGyomuCode.DBB介護賦課);
         }
         if (特別徴収_年金支払い日.isEmpty()) {
@@ -1529,12 +1534,12 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     }
 
     private boolean is特徴停止とする期(RString 徴収方法) {
-        return jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.普通徴収.getコード().equals(徴収方法);
+        return 普通徴収.equals(徴収方法);
     }
 
     private boolean is徴収方法が特徴(RString 徴収方法) {
-        return jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法)
-                || jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法);
+        return 特別徴収_厚生労働省.equals(徴収方法)
+                || 特別徴収_地共済.equals(徴収方法);
     }
 
     private FukaKoseiJohoClass get賦課更正情報(FukaJoho 賦課の情報_更正前) {
@@ -1548,9 +1553,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     }
 
     private ChoteiNendoKibetsuClass get調定年度期別クラス(FukaJoho 賦課の情報) {
-        if (賦課の情報 == null) {
-            return new ChoteiNendoKibetsuClass();
-        }
         ChoteiNendoKibetsuClass 調定年度期別 = new ChoteiNendoKibetsuClass();
         調定年度期別.set調定年度(賦課の情報.get調定年度());
         List<Decimal> 普徴期別額List = new ArrayList<>();
@@ -1631,14 +1633,16 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         if (期月クラス != null) {
             Tsuki 月 = 期月クラス.get月();
 
-            if (Tsuki._4月 == 月 || Tsuki._5月 == 月
-                    || Tsuki._6月 == 月 || Tsuki._7月 == 月) {
+            if (Tsuki._4月.getコード().equals(月.getコード()) || Tsuki._5月.getコード().equals(月.getコード())
+                    || Tsuki._6月.getコード().equals(月.getコード()) || Tsuki._7月.getコード().equals(月.getコード())) {
                 特徴停止可能期 = INT_4;
-            } else if (Tsuki._9月 == 月 || Tsuki._11月 == 月) {
+            } else if (Tsuki._9月.getコード().equals(月.getコード()) || Tsuki._11月.getコード().equals(月.getコード())) {
                 特徴停止可能期 = 期月クラス.get期AsInt() + INT_2;
-            } else if (Tsuki._8月 == 月 || Tsuki._10月 == 月 || Tsuki._12月 == 月) {
+            } else if (Tsuki._8月.getコード().equals(月.getコード()) || Tsuki._10月.getコード().equals(月.getコード())
+                    || Tsuki._12月.getコード().equals(月.getコード())) {
                 特徴停止可能期 = get特徴停止可能期By基準日時(月, 期月クラス);
-            } else if (Tsuki._1月 == 月 || Tsuki._2月 == 月 || Tsuki._3月 == 月) {
+            } else if (Tsuki._1月.getコード().equals(月.getコード()) || Tsuki._2月.getコード().equals(月.getコード())
+                    || Tsuki._3月.getコード().equals(月.getコード())) {
                 特徴停止可能期 = 0;
             }
         }
@@ -1923,7 +1927,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         if (段階List.isEmpty()) {
             return Decimal.ZERO;
         }
-        if (段階List.size() > index) {
+        if (index <= 段階List.size()) {
             return 段階List.get(index - INT_1).getHokenryoRitsu();
         }
         return Decimal.ZERO;
