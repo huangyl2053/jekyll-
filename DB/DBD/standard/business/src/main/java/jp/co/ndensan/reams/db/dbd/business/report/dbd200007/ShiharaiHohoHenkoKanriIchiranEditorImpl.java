@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.common.TainoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.ShunoKibetsuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.ShunoNendoEntity;
@@ -49,8 +50,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     private final ShiharaiHohoHenkoEntity 支払方法変更リストEntity_上;
     private final ShiharaiHohoHenkoEntity 支払方法変更リストEntity_下;
     private final int count;
+    private ReportIdDBD 帳票ID;
     private static final RString 作成 = new RString("作成");
-    private static final RString タイトル = new RString("支払方法変更管理リスト");
+    private static final RString タイトル管理 = new RString("支払方法変更管理リスト");
+    private static final RString タイトル把握 = new RString("支払方法変更把握リスト");
     private static final RString 過年分 = new RString("過年分");
     private static final RString ホシ = new RString("＊");
     private static final RString 左括弧 = new RString("＜");
@@ -98,13 +101,14 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
      * @param 支払方法変更リストEntity_上 支払方法変更リストEntity_上
      * @param 支払方法変更リストEntity_下 支払方法変更リストEntity_下
      * @param count 印刷回数
+     * @param 帳票ID 帳票ID
      */
     protected ShiharaiHohoHenkoKanriIchiranEditorImpl(RDateTime 作成日時,
             HokenshaNo 保険者番号,
             RString 保険者名称,
             IOutputOrder 出力順,
             ShiharaiHohoHenkoEntity 支払方法変更リストEntity_上, ShiharaiHohoHenkoEntity 支払方法変更リストEntity_下,
-            int count) {
+            ReportIdDBD 帳票ID, int count) {
         this.作成日時 = 作成日時;
         this.保険者名称 = 保険者名称;
         this.保険者番号 = 保険者番号;
@@ -112,6 +116,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         this.支払方法変更リストEntity_上 = 支払方法変更リストEntity_上;
         this.支払方法変更リストEntity_下 = 支払方法変更リストEntity_下;
         this.count = count;
+        this.帳票ID = 帳票ID;
         this.日付関連_調定年度 = new FlexibleYear(DbBusinessConfig.
                 get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
     }
@@ -132,7 +137,12 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 .append(作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
                 .append(RString.FULL_SPACE)
                 .append(作成).toRString();
-        source.title = タイトル;
+
+        if (ReportIdDBD.DBD200007.getReportId().equals(帳票ID.getReportId())) {
+            source.title = タイトル管理;
+        } else {
+            source.title = タイトル把握;
+        }
         source.hokenshaNo = 保険者番号.value();
         source.hokenshaName = 保険者名称;
 

@@ -154,7 +154,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             createShiharaiHohoHenkoEntity(t, reportData1);
             ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
                     new HokenshaNo(association.get地方公共団体コード().value()), association.get市町村名(),
-                    outputOrder, reportData, reportData1);
+                    outputOrder, reportData, reportData1, REPORT_DBD200006);
 
             finder.writeBy(reportSourceWriter);
             count = 0;
@@ -166,7 +166,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         if (count == 1) {
             ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
                     new HokenshaNo(association.get地方公共団体コード().value()), association.get市町村名(),
-                    outputOrder, reportData, new ShiharaiHohoHenkoEntity());
+                    outputOrder, reportData, new ShiharaiHohoHenkoEntity(), REPORT_DBD200006);
             finder.writeBy(reportSourceWriter);
         }
 
