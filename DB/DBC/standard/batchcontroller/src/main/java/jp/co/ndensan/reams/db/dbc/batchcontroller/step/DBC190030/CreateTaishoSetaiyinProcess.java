@@ -636,15 +636,15 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             }
             申請一覧Entity.set年度(parameter.get処理年度());
             申請一覧Entity.set世帯課税(entity.get対象世帯員().getSetaikazeiKubun());
-            申請一覧Entity.set総合計(entity.get対象世帯員().getSoushuu());
+            申請一覧Entity.set総合計(checkNull(entity.get対象世帯員().getSoushuu()));
             申請一覧Entity.set被保番号(getColumnValue(entity.get対象世帯員().getHihokenshaNo()));
             申請一覧Entity.set氏名(entity.get対象世帯員().getHihokenshaName());
             申請一覧Entity.set識別コード(entity.get対象世帯員().getShikibetsuCode());
             申請一覧Entity.set年齢(entity.get対象世帯員().getAge());
             申請一覧Entity.set生年月日(entity.get対象世帯員().getSeinengappiYMD());
-            申請一覧Entity.set課税所得(entity.get対象世帯員().getKazeiShotokuGaku());
-            申請一覧Entity.set課税所得_控除後(entity.get対象世帯員().getKazeiShotokuGakuAfter());
-            申請一覧Entity.set年金収入(entity.get対象世帯員().getNenkinShunyuGaku());
+            申請一覧Entity.set課税所得(checkNull(entity.get対象世帯員().getKazeiShotokuGaku()));
+            申請一覧Entity.set課税所得_控除後(checkNull(entity.get対象世帯員().getKazeiShotokuGakuAfter()));
+            申請一覧Entity.set年金収入(checkNull(entity.get対象世帯員().getNenkinShunyuGaku()));
             申請一覧Entity.setその他合計所得(entity.get対象世帯員().getSonotanoGoukeiShotokuKingakuGoukei());
             申請一覧Entity.set合計(this.合計(entity.get対象世帯員().getNenkinShunyuGaku(), entity.get対象世帯員().getSonotanoGoukeiShotokuKingakuGoukei()));
             申請一覧Entity.set要介護度(entity.get対象世帯員().getNijiHanteiYokaigoJotaiKubunCode());
@@ -664,6 +664,14 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         }
         return 申請一覧Entity;
 
+    }
+
+    private Decimal checkNull(Decimal num) {
+        if (num == null) {
+            return Decimal.ZERO;
+        } else {
+            return num;
+        }
     }
 
     private IOutputOrder get並び順(ReportId 帳票分類ID, RString 出力順ID) {
