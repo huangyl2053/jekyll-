@@ -32,7 +32,6 @@ public class ShiharaiHohoHenkoKanrFiveProcessParameter implements IBatchProcessP
     private RString 差止中あり者のみの選択;
     private RString 保険料控除あり者のみの選択;
     private Long 改頁出力順ID;
-    private ReportId 帳票分類ID;
     private ReportId 帳票ID;
     private RDateTime 帳票作成日時;
 
@@ -54,7 +53,6 @@ public class ShiharaiHohoHenkoKanrFiveProcessParameter implements IBatchProcessP
      * @param 償還決定登録者１号_差止中あり者のみの選択 償還決定登録者１号_差止中あり者のみの選択
      * @param 償還決定登録者１号_保険料控除あり者のみの選択 償還決定登録者１号_保険料控除あり者のみの選択
      * @param 改頁出力順ID 改頁出力順ID
-     * @param 帳票分類ID 帳票分類ID
      * @param 帳票ID 帳票ID
      * @param 帳票作成日時 帳票作成日時
      */
@@ -67,7 +65,6 @@ public class ShiharaiHohoHenkoKanrFiveProcessParameter implements IBatchProcessP
             RString 償還決定登録者１号_差止中あり者のみの選択,
             RString 償還決定登録者１号_保険料控除あり者のみの選択,
             Long 改頁出力順ID,
-            ReportId 帳票分類ID,
             ReportId 帳票ID,
             RDateTime 帳票作成日時) {
         this.基準日 = 基準日;
@@ -79,7 +76,6 @@ public class ShiharaiHohoHenkoKanrFiveProcessParameter implements IBatchProcessP
         this.差止中あり者のみの選択 = 償還決定登録者１号_差止中あり者のみの選択;
         this.保険料控除あり者のみの選択 = 償還決定登録者１号_保険料控除あり者のみの選択;
         this.改頁出力順ID = 改頁出力順ID;
-        this.帳票分類ID = 帳票分類ID;
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
     }

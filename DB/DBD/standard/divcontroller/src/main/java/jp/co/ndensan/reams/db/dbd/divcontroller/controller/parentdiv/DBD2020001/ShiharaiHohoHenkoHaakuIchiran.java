@@ -66,7 +66,6 @@ public class ShiharaiHohoHenkoHaakuIchiran {
         parameter.setShokanKetteiYMDTo(div.getTxtShokanKetteiYMDTo().getValue());
         parameter.setTab(div.getCcdChohyoShutsuryokujun().get出力順ID());
         parameter.setReportId(REPORTID);
-        parameter.setReportTypeId(REPORTID);
         parameter.setReportCreateDateTime(RDateTime.now());
         return parameter;
     }
