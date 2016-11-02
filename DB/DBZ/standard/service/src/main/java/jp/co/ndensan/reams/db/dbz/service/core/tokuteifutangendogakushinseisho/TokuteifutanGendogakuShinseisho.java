@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -36,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -154,10 +154,27 @@ public class TokuteifutanGendogakuShinseisho {
         if (renrakusaki1 != null) {
             hihokenshaKihonEntity.set電話番号(renrakusaki1.value());
         }
-        AtenaJusho jusho = uaft200Entity.getJusho();
-        if (jusho != null) {
-            hihokenshaKihonEntity.set住所(jusho.value());
+        RStringBuilder jusho = new RStringBuilder();
+        if (uaft200Entity.getJusho() != null) {
+            jusho = jusho.append(uaft200Entity.getJusho().value());
         }
+        if (uaft200Entity.getBanchi() != null) {
+            jusho = jusho.append(uaft200Entity.getBanchi().value());
+        }
+        if (uaft200Entity.getBanchiCode1() != null) {
+            jusho = jusho.append(uaft200Entity.getBanchiCode1().value());
+        }
+        if (uaft200Entity.getBanchiCode2() != null) {
+            jusho = jusho.append(uaft200Entity.getBanchiCode2().value());
+        }
+        if (uaft200Entity.getBanchiCode3() != null) {
+            jusho = jusho.append(uaft200Entity.getBanchiCode3().value());
+        }
+        if (uaft200Entity.getBanchiCode4() != null) {
+            jusho = jusho.append(uaft200Entity.getBanchiCode4().value());
+        }
+
+        hihokenshaKihonEntity.set住所(jusho.toRString());
         hihokenshaKihonEntity.set住民種別コード(uaft200Entity.getJuminShubetsuCode());
         AtenaMeisho setainushiMei = uaft200Entity.getSetainushiMei();
         if (setainushiMei != null) {
