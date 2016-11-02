@@ -80,7 +80,7 @@ public class ShokanShinseiValidationHandler {
         if (requestDiv.getTxtServiceYMFrom().getValue() == null && requestDiv.getTxtServiceYMTo().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShokanShinseiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, サービス年月.toString())));
+                            UrErrorMessages.必須項目_追加メッセージあり, サービス年月.toString()), requestDiv.getTxtServiceYMFrom(), requestDiv.getTxtServiceYMTo()));
         }
         if ((requestDiv.getTxtServiceYMFrom().getValue() != null
                 && !RString.EMPTY.equals(requestDiv.getTxtServiceYMFrom().getValue().toDateString()))
@@ -92,7 +92,8 @@ public class ShokanShinseiValidationHandler {
                             requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().wareki().eraType(EraType.KANJI_RYAKU).
                             firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString().toString(),
                             requestDiv.getTxtServiceYMTo().getValue().getYearMonth().wareki().eraType(EraType.KANJI_RYAKU).
-                            firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString().toString())));
+                            firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString().toString()),
+                    requestDiv.getTxtServiceYMFrom(), requestDiv.getTxtServiceYMTo()));
         }
         return validationMessages;
     }

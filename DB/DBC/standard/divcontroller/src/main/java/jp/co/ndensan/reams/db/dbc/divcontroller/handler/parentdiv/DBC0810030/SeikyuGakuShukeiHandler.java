@@ -145,7 +145,7 @@ public class SeikyuGakuShukeiHandler {
                 shokanshukei.getShukei().get出来高医療費利用者負担額());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSagakukinngakuDekikata().setValue(
                 new Decimal(shokanshukei.getShukei().get出来高請求額差額金額()));
-        if (shokanshukei.getShukei().get審査年月() != null) {
+        if (shokanshukei.getShukei().get審査年月() != null && !shokanshukei.getShukei().get審査年月().toString().isEmpty()) {
             div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtShinsaYM().setValue(
                     new RDate(shokanshukei.getShukei().get審査年月().toString()));
         }
