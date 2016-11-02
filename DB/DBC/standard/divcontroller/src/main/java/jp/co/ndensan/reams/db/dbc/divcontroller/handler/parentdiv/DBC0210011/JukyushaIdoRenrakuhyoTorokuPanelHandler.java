@@ -309,7 +309,10 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
                         new RDate(idiv.get受給者異動送付().get異動年月日().toString()), チェック場合);
         JukyushaIdoRenrakuhyoPrintSevice printService
                 = new JukyushaIdoRenrakuhyoPrintSevice();
-        return printService.printSingle(受給者連絡票データ);
+        if (受給者連絡票データ.get異動年月日() != null) {
+            return printService.printSingle(受給者連絡票データ);
+        }
+        return null;
     }
 
     private RString チェック場合state() {

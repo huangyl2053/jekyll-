@@ -126,7 +126,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             }
             RString 支給限度基準額1 = entity.get支給限度基準額1();
             if (支給限度基準額1 != null) {
-                source.sikyuGendoKijunGaKu1 = 支給限度基準額1.padRight(RString.HALF_SPACE, SIX);
+                source.sikyuGendoKijunGaKu1 = 支給限度基準額1.padLeft(RString.HALF_SPACE, SIX);
             }
             source.jogenTekiyoSTNengo1 = commonEra(entity.get上限管理適用開始年月日１());
             source.jogenKaTekiyoSTYMD1 = commonYMD(entity.get上限管理適用開始年月日１());
@@ -136,7 +136,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.Hyodai3_1 = 支給限度基準額;
             RString 支給限度基準額2 = entity.get支給限度基準額２();
             if (支給限度基準額2 != null) {
-                source.sikyuGendoKijunGaKu2 = 支給限度基準額2.padRight(RString.HALF_SPACE, THREEE);
+                source.sikyuGendoKijunGaKu2 = 支給限度基準額2.padLeft(RString.HALF_SPACE, THREEE);
             }
             source.jogenTekiyoSTNengo2 = commonEra(entity.get上限管理適用開始年月日２());
             source.jogenKaTekiyoSTYMD2 = commonYMD(entity.get上限管理適用開始年月日２());
@@ -297,7 +297,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (標準負担額.contains(半角アスタリスク)) {
                 source.hyojunFutanGaku = 半角アスタリスクFIVE;
             } else {
-                source.hyojunFutanGaku = 標準負担額.padRight(RString.HALF_SPACE, FIVE);
+                source.hyojunFutanGaku = 標準負担額.padLeft(RString.HALF_SPACE, FIVE);
             }
         }
     }
@@ -308,7 +308,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (軽減率.contains(半角アスタリスク)) {
                 source.shaKyufuritsu = 半角アスタリスクFOUR;
             } else {
-                source.shaKyufuritsu = 軽減率.padRight(RString.HALF_SPACE, THREEE);
+                source.shaKyufuritsu = 軽減率.padLeft(RString.HALF_SPACE, THREEE);
             }
         }
     }
@@ -319,7 +319,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (給付率.contains(半角アスタリスク)) {
                 source.riyoKyufuRitsu = 半角アスタリスクTHREE;
             } else {
-                source.riyoKyufuRitsu = 給付率.padRight(RString.HALF_SPACE, THREEE);
+                source.riyoKyufuRitsu = 給付率.padLeft(RString.HALF_SPACE, THREEE);
             }
         }
     }
@@ -331,7 +331,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (食費負担限度額.contains(半角アスタリスク)) {
                 source.shokuFutanGendoGaKu = 半角アスタリスクFIVE;
             } else {
-                source.shokuFutanGendoGaKu = 食費負担限度額.padRight(RString.HALF_SPACE, FOUR);
+                source.shokuFutanGendoGaKu = 食費負担限度額.padZeroToLeft(FOUR);
             }
         }
     }
@@ -342,7 +342,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (ﾕﾆｯﾄ型個室.contains(半角アスタリスク)) {
                 source.unitKoshitsu = 半角アスタリスクFOUR;
             } else {
-                source.unitKoshitsu = ﾕﾆｯﾄ型個室;
+                source.unitKoshitsu = ﾕﾆｯﾄ型個室.padZeroToLeft(FOUR);
             }
         }
         RString ﾕﾆｯﾄ型準個室 = entity.getﾕﾆｯﾄ型準個室();
@@ -350,7 +350,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (ﾕﾆｯﾄ型準個室.contains(半角アスタリスク)) {
                 source.unitJunKoshitsu = 半角アスタリスクFOUR;
             } else {
-                source.unitJunKoshitsu = ﾕﾆｯﾄ型準個室;
+                source.unitJunKoshitsu = ﾕﾆｯﾄ型準個室.padZeroToLeft(FOUR);
             }
         }
         RString 従来型個室特 = entity.get従来型個室特();
@@ -358,7 +358,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (従来型個室特.contains(半角アスタリスク)) {
                 source.juraiKoshitsuT = 半角アスタリスクFOUR;
             } else {
-                source.juraiKoshitsuT = 従来型個室特;
+                source.juraiKoshitsuT = 従来型個室特.padZeroToLeft(FOUR);
             }
         }
         RString 従来型個室老療 = entity.get従来型個室老療();
@@ -366,7 +366,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (従来型個室老療.contains(半角アスタリスク)) {
                 source.juraiKishitsuR = 半角アスタリスクFOUR;
             } else {
-                source.juraiKishitsuR = 従来型個室老療;
+                source.juraiKishitsuR = 従来型個室老療.padZeroToLeft(FOUR);
             }
         }
         RString 多床室 = entity.get多床室();
@@ -374,7 +374,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (多床室.contains(半角アスタリスク)) {
                 source.tashoshitsu = 半角アスタリスクFOUR;
             } else {
-                source.tashoshitsu = 多床室;
+                source.tashoshitsu = 多床室.padZeroToLeft(FOUR);
             }
         }
         居宅費新負担限度額(source);
@@ -386,7 +386,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (新１.contains(半角アスタリスク)) {
                 source.shin1 = 半角アスタリスクFOUR;
             } else {
-                source.shin1 = 新１;
+                source.shin1 = 新１.padZeroToLeft(FOUR);
             }
         }
         RString 新２ = entity.get新２();
@@ -394,7 +394,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (新２.contains(半角アスタリスク)) {
                 source.shin2 = 半角アスタリスクFOUR;
             } else {
-                source.shin2 = 新２;
+                source.shin2 = 新２.padZeroToLeft(FOUR);
             }
         }
         RString 新３ = entity.get新３();
@@ -402,7 +402,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             if (新３.contains(半角アスタリスク)) {
                 source.shin3 = 半角アスタリスクFOUR;
             } else {
-                source.shin3 = 新３;
+                source.shin3 = 新３.padZeroToLeft(FOUR);
             }
         }
     }
