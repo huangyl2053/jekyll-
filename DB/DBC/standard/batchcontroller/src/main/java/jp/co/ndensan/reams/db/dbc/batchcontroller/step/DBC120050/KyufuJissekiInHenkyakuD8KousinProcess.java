@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigo
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111JKyufuJissekiD8Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.KyufuJissekiInHenkyakuD8DataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekiin.IKyufuJissekiInMasterTorokuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -32,8 +32,7 @@ public class KyufuJissekiInHenkyakuD8KousinProcess extends BatchProcessBase<Kyuf
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyufujissekiin.IKyufuJissekiInMasterTorokuMapper.select給付実績D8の新規修正データ");
-    @BatchWriter
-    private BatchPermanentTableWriter 給付実績高額tableWriter;
+    private IKyufuJissekiInMasterTorokuMapper mapper;
     @BatchWriter
     private IBatchTableWriter 給付実績D8tableWriter;
     @BatchWriter
@@ -42,14 +41,17 @@ public class KyufuJissekiInHenkyakuD8KousinProcess extends BatchProcessBase<Kyuf
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
 
     @Override
+    protected void initialize() {
+        mapper = getMapper(IKyufuJissekiInMasterTorokuMapper.class);
+    }
+
+    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID);
     }
 
     @Override
     protected void createWriter() {
-        給付実績高額tableWriter
-                = new BatchPermanentTableWriter(DbT3028KyufujissekiKogakuKaigoServicehiEntity.class);
         給付実績D8tableWriter
                 = new BatchEntityCreatedTempTableWriter(給付実績D8一時_TABLE_NAME, DbWT111JKyufuJissekiD8Entity.class);
         処理結果リスト一時tableWriter
@@ -64,8 +66,7 @@ public class KyufuJissekiInHenkyakuD8KousinProcess extends BatchProcessBase<Kyuf
         DbWT0001HihokenshaTempEntity 被保険者一時 = entity.get被保険者一時();
         if (給付実績D8.getShikyugaku() == 給付実績高額.getShikyugaku()) {
             給付実績高額.setState(EntityDataState.Deleted);
-            給付実績高額tableWriter.delete(給付実績高額);
-
+            mapper.delete給付実績高額介護サービス費byPK(給付実績高額);
             給付実績D8.setHokenshaHoyuKyufujissekiJohoSakujoZumiFlag(true);
             給付実績D8.setState(EntityDataState.Modified);
             給付実績D8tableWriter.update(給付実績D8);

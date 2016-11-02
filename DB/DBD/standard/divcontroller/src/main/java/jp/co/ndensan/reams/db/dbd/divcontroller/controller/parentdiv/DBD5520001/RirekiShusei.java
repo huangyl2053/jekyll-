@@ -272,7 +272,18 @@ public class RirekiShusei {
             }
         }
         div.getDgRirekiIchiran().getDataSource().add(rowId, addRow);
-        set申請履歴情報For履歴追加(addRow, row, true, div);
+        if (KU_BUN_削.equals(row.getKubun()) && SAKUJO_KUBUN.equals(row.getMaeGoKubun())) {
+            dgRirekiIchiran_Row nextRow = getHandler(div).getNextRow(rowId);
+            if (nextRow == null) {
+                set申請履歴情報For履歴追加(addRow, getHandler(div).getPreviousRow(rowId + 1), false, div);
+            } else {
+                set申請履歴情報For履歴追加(addRow, getHandler(div).getNextRow(rowId), true, div);
+            }
+
+        } else {
+            set申請履歴情報For履歴追加(addRow, row, true, div);
+        }
+
         set受給者台帳For履歴追加Upd(rowId, div.getDgRirekiIchiran().getDataSource());
         return ResponseData.of(div).respond();
     }
@@ -302,7 +313,17 @@ public class RirekiShusei {
 
         }
         div.getDgRirekiIchiran().getDataSource().add(rowId + 1, addRow);
-        set申請履歴情報For履歴追加(addRow, row, false, div);
+        if (KU_BUN_削.equals(row.getKubun()) && SAKUJO_KUBUN.equals(row.getMaeGoKubun())) {
+            dgRirekiIchiran_Row previousRow = getHandler(div).getPreviousRow(rowId);
+            if (previousRow == null) {
+                set申請履歴情報For履歴追加(addRow, getHandler(div).getNextRow(rowId + 1), true, div);
+            } else {
+                set申請履歴情報For履歴追加(addRow, getHandler(div).getPreviousRow(rowId), false, div);
+            }
+
+        } else {
+            set申請履歴情報For履歴追加(addRow, row, false, div);
+        }
         set受給者台帳For履歴追加Upd(rowId, div.getDgRirekiIchiran().getDataSource());
         return ResponseData.of(div).respond();
     }
@@ -473,7 +494,8 @@ public class RirekiShusei {
         for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
             DbT4121ShinseiRirekiJoho 申請履歴情報 = DataPassingConverter.deserialize(row.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
             ShinseishoKanriNo 申請書管理番号 = 申請履歴情報.get申請管理番号();
-            if (KU_BUN_削.equals(row.getKubun()) && !row.getTsuikaKubun().isValue() && !SAKUJO_KUBUN.equals(row.getMaeGoKubun())) {
+            if ((KU_BUN_削.equals(row.getKubun()) && !row.getTsuikaKubun().isValue()
+                    && !SAKUJO_KUBUN.equals(row.getMaeGoKubun())) || KU_BUN_回.equals(row.getKubun())) {
                 nextRow = getHandler(div).getNextRow(div.getDgRirekiIchiran().getDataSource().indexOf(row));
             }
             if (nextRow != null) {
@@ -483,7 +505,7 @@ public class RirekiShusei {
                     continue;
                 }
             }
-            if (!KU_BUN_削.equals(row.getKubun()) && !KU_BUN_追.equals(row.getKubun())) {
+            if (!KU_BUN_削.equals(row.getKubun()) && !KU_BUN_追.equals(row.getKubun()) && !KU_BUN_回.equals(row.getKubun())) {
                 resList.add(申請履歴情報);
             }
         }

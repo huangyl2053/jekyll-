@@ -67,6 +67,21 @@
         DELETE FROM "DbT3033KyufujissekiShukei" WHERE "torikomiYM" = #{処理年月};
     </delete>
     
+    <delete id="delete給付実績基本byPK" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity">
+        DELETE FROM rgdb."DbT3017KyufujissekiKihon" 
+        WHERE "kokanShikibetsuNo" = #{kokanShikibetsuNo} 
+        AND "inputShikibetsuNo" = #{inputShikibetsuNo}
+        AND "recodeShubetsuCode" = #{recodeShubetsuCode}
+        AND "shokisaiHokenshaNo" = #{shokisaiHokenshaNo}
+        AND "hiHokenshaNo" = #{hiHokenshaNo}
+        AND "serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND "jigyoshoNo" = #{jigyoshoNo}
+        AND "kyufuSakuseiKubunCode" = #{kyufuSakuseiKubunCode}
+        AND "kyufuJissekiKubunCode" = #{kyufuJissekiKubunCode}
+        AND "seiriNo" = #{seiriNo}
+        AND "keikaiKubunCode" = #{keikaiKubunCode}
+    </delete>
+    
     <select id="select給付実績H1の新規修正データ" resultMap="resultMap_KyufuJissekiInHenkyakuH1DataEntity" fetchSize="500" resultOrdered="true">
         SELECT H1.*, 基本.*
         FROM (
@@ -170,6 +185,18 @@
                 AND "${表名}"."jigyoshoNo" = 削除対象."dbWT3017_jigyoshoNo"
                 AND "${表名}"."toshiNo" = 削除対象."dbWT3017_toshiNo"	
         )
+    </delete>
+    
+    <delete id="delete給付実績高額介護サービス費byPK" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity">
+        DELETE FROM rgdb."DbT3017KyufujissekiKihon" 
+        WHERE "kokanJohoShikibetsuNo" = #{kokanJohoShikibetsuNo} 
+        AND "inputShikibetsuNo" = #{inputShikibetsuNo}
+        AND "recodeShubetsuCode" = #{recodeShubetsuCode}
+        AND "shokisaiHokenshaNo" = #{shokisaiHokenshaNo}
+        AND "hiHokenshaNo" = #{hiHokenshaNo}
+        AND "serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND "kyufuSakuseiKubunCode" = #{kyufuSakuseiKubunCode}
+        AND "kyufuJissekiKubunCode" = #{kyufuJissekiKubunCode}
     </delete>
     
     <select id="select給付実績D8の新規修正データ" resultMap="resultMap_KyufuJissekiInHenkyakuD8DataEntity" fetchSize="500" resultOrdered="true">

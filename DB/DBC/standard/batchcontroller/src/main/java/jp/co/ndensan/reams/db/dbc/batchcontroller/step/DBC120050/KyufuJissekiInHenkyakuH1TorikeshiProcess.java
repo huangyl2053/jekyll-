@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.KyufuJis
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekiin.IKyufuJissekiInMasterTorokuMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -30,8 +29,6 @@ public class KyufuJissekiInHenkyakuH1TorikeshiProcess extends BatchProcessBase<K
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyufujissekiin.IKyufuJissekiInMasterTorokuMapper.select給付実績H1の取消データ");
     private IKyufuJissekiInMasterTorokuMapper mapper;
-    @BatchWriter
-    private BatchPermanentTableWriter 給付実績基本tableWriter;
     @BatchWriter
     private IBatchTableWriter 給付実績H1tableWriter;
     private static final RString 給付実績H1一時_TABLE_NAME = new RString("DbWT111AKyufuJissekiH1");
@@ -64,8 +61,6 @@ public class KyufuJissekiInHenkyakuH1TorikeshiProcess extends BatchProcessBase<K
 
     @Override
     protected void createWriter() {
-        給付実績基本tableWriter
-                = new BatchPermanentTableWriter(DbT3017KyufujissekiKihonEntity.class);
         給付実績H1tableWriter
                 = new BatchEntityCreatedTempTableWriter(給付実績H1一時_TABLE_NAME, DbWT111AKyufuJissekiH1Entity.class);
     }
@@ -75,12 +70,10 @@ public class KyufuJissekiInHenkyakuH1TorikeshiProcess extends BatchProcessBase<K
         DbWT111AKyufuJissekiH1Entity 給付実績H1 = entity.get給付実績H1();
         DbT3017KyufujissekiKihonEntity 給付実績基本 = entity.get給付実績基本();
         給付実績基本.setState(EntityDataState.Deleted);
-        給付実績基本tableWriter.delete(給付実績基本);
-
+        mapper.delete給付実績基本byPK(給付実績基本);
         給付実績H1.setHokenshaHoyuKyufujissekiJohoSakujoFlag(true);
         給付実績H1.setState(EntityDataState.Modified);
         給付実績H1tableWriter.update(給付実績H1);
-
         データあり = true;
     }
 

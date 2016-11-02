@@ -113,6 +113,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private static final RString 出力順_1 = new RString("年度＞被保険者番号");
     private static final RString 出力順_2 = new RString("被保険者番号＞年度");
     private Association 導入団体クラス;
+    private static final int INT_1 = 1;
 
     @Override
     protected void initialize() {
@@ -120,8 +121,8 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         保険者番号 = 導入団体クラス.get地方公共団体コード();
         保険者番名 = 導入団体クラス.get市町村名();
         連番 = 0;
-        csv連番 = 0;
-        給付実績取消一覧CSV連番 = 0;
+        csv連番 = INT_1;
+        給付実績取消一覧CSV連番 = INT_1;
         改頁List = new ArrayList<>();
         get改頁List();
         開始flag = true;
@@ -290,7 +291,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private KoseiTaishoJissekiIchiranEntity get明細Entity(KoseitaishoKyuhuzissekiJohoTempEntity entity) {
         KoseiTaishoJissekiIchiranEntity 更正対象給付実績一覧表のEntity = new KoseiTaishoJissekiIchiranEntity();
         更正対象給付実績一覧表のEntity.set地方公共団体コード(保険者番号);
-        更正対象給付実績一覧表のEntity.set被保険者番号(entity.get被保険者番号());
+        更正対象給付実績一覧表のEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
         更正対象給付実績一覧表のEntity.set年度(entity.get年度());
         更正対象給付実績一覧表のEntity.setサービス提供年月(entity.getサービス提供年月());
         更正対象給付実績一覧表のEntity.set市町村名(保険者番名);
@@ -318,7 +319,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private void get合計Entity(KoseitaishoKyuhuzissekiJohoTempEntity entity) {
         if (開始flag) {
             給付実績一覧表合計Entity.set地方公共団体コード(保険者番号);
-            給付実績一覧表合計Entity.set被保険者番号(entity.get被保険者番号());
+            給付実績一覧表合計Entity.set被保険者番号(entity.get被保険者番号().getColumnValue());
             給付実績一覧表合計Entity.set年度(entity.get年度());
             給付実績一覧表合計Entity.setサービス提供年月(entity.getサービス提供年月());
             給付実績一覧表合計Entity.set市町村名(保険者番名);
@@ -343,7 +344,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         csvEntity.setデータ区分(データ区分_明細);
         csvEntity.set連番(new RString(csv連番++));
         csvEntity.set被保険者氏名(entity.get氏名());
-        csvEntity.set被保険者番号(entity.get被保険者番号());
+        csvEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
         csvEntity.set年度(entity.get年度());
         if (entity.getサービス提供年月() != null) {
             csvEntity.setサービス提供年月(entity.getサービス提供年月().seireki().
@@ -378,7 +379,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         if (開始flag) {
             合計CSVEntity.setデータ区分(データ区分_合計);
             合計CSVEntity.set被保険者氏名(entity.get氏名());
-            合計CSVEntity.set被保険者番号(entity.get被保険者番号());
+            合計CSVEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
             合計CSVEntity.set年度(entity.get年度());
             合計CSVEntity.setサービス提供年月(entity.getサービス提供年月().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
             if (entity.get入力識別番号() != null) {

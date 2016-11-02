@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc170010;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc170010.ServicecodeIdoRenrakuhyoOutMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
@@ -26,6 +27,7 @@ public class ServicecodeIdoRenrakuhyoOutProcessParameter implements IBatchProces
     private RString 出力順;
     private RString 出力対象区分;
     private RString 処理選択区分;
+    private Encode 文字コード;
 
     /**
      * コンストラクタ

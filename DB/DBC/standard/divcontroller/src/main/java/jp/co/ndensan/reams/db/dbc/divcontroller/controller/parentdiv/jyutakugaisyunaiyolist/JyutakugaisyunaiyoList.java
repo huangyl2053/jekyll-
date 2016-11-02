@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -162,7 +163,7 @@ public class JyutakugaisyunaiyoList {
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
             dgGaisyuListRow = new dgGaisyuList_Row();
-            dgGaisyuListRow.setTxtJyotai(モード_追加);
+            dgGaisyuListRow.setRowState(RowState.Added);
             dgGaisyuListRow.setTxtSeiriNo(RString.EMPTY);
             list.add(listRowSet(dgGaisyuListRow, requestDiv));
         } else {
@@ -183,15 +184,15 @@ public class JyutakugaisyunaiyoList {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
-            if (!モード_追加.equals(dgGaisyuListRow.getTxtJyotai())) {
-                dgGaisyuListRow.setTxtJyotai(モード_修正);
+            if (!RowState.Added.equals(dgGaisyuListRow.getRowState())) {
+                dgGaisyuListRow.setRowState(RowState.Modified);
             }
             listRowSet(dgGaisyuListRow, requestDiv);
         } else if (モード_削除.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-            if (モード_追加.equals(dgGaisyuListRow.getTxtJyotai())) {
+            if (RowState.Added.equals(dgGaisyuListRow.getRowState())) {
                 requestDiv.getDgGaisyuList().getDataSource().remove(dgGaisyuListRow);
             } else {
-                dgGaisyuListRow.setTxtJyotai(モード_削除);
+                dgGaisyuListRow.setRowState(RowState.Deleted);
             }
         }
         return null;

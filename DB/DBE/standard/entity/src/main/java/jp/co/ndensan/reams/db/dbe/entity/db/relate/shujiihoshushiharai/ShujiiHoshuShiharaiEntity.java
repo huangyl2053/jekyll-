@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiihoshushiharai;
 
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,7 +54,7 @@ public class ShujiiHoshuShiharaiEntity {
     private RString 検診料等の単価税込;
     private RString 検診料等の金額;
     private RString 合計金額;
-    private RDateTime 振込予定日;
+    private RString 振込予定日;
     private RString 種別;
     private RString 番号;
     private RString 金融機関;

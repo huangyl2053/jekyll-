@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekiin.IK
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -35,8 +34,6 @@ public class KyufuJissekiInHenkyakuH1KousinProcess extends BatchProcessBase<Kyuf
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyufujissekiin.IKyufuJissekiInMasterTorokuMapper.select給付実績H1の新規修正データ");
     private IKyufuJissekiInMasterTorokuMapper mapper;
-    @BatchWriter
-    private BatchPermanentTableWriter 給付実績基本tableWriter;
     @BatchWriter
     private IBatchTableWriter 給付実績H1tableWriter;
     @BatchWriter
@@ -70,8 +67,6 @@ public class KyufuJissekiInHenkyakuH1KousinProcess extends BatchProcessBase<Kyuf
 
     @Override
     protected void createWriter() {
-        給付実績基本tableWriter
-                = new BatchPermanentTableWriter(DbT3017KyufujissekiKihonEntity.class);
         給付実績H1tableWriter
                 = new BatchEntityCreatedTempTableWriter(給付実績H1一時_TABLE_NAME, DbWT111AKyufuJissekiH1Entity.class);
         処理結果リスト一時tableWriter
@@ -86,12 +81,10 @@ public class KyufuJissekiInHenkyakuH1KousinProcess extends BatchProcessBase<Kyuf
         DbWT0001HihokenshaTempEntity 被保険者一時 = entity.get被保険者一時();
         if (給付実績H1.getAtoHokenSeikyugaku().equals(給付実績基本.getAtoHokenSeikyugaku())) {
             給付実績基本.setState(EntityDataState.Deleted);
-            給付実績基本tableWriter.delete(給付実績基本);
-
+            mapper.delete給付実績基本byPK(給付実績基本);
             給付実績H1.setHokenshaHoyuKyufujissekiJohoSakujoFlag(true);
             給付実績H1.setState(EntityDataState.Modified);
             給付実績H1tableWriter.update(給付実績H1);
-
         } else {
             do削除対象なし(給付実績H1, 被保険者一時);
         }

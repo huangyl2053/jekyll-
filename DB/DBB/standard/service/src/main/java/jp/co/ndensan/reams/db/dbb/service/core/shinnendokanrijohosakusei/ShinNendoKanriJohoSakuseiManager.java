@@ -103,6 +103,7 @@ public class ShinNendoKanriJohoSakuseiManager {
                 new RYear(本年度.toString()), GennenKanen.過年度);
         for (Noki item : list) {
             UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setChoteiNendo(entity.getChoteiNendo().plusYear(1));
             entity.setNokigenYMD(日付取得(entity.getNokigenYMD().plusYear(1)));
             entity.setNokiKaishiYMD(日付取得(entity.getNokiKaishiYMD().plusYear(1)));
             entity.setNokiShuryoYMD(日付取得(entity.getNokiShuryoYMD().plusYear(1)));
@@ -117,6 +118,7 @@ public class ShinNendoKanriJohoSakuseiManager {
         }
         for (Noki item : list現年度) {
             UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setChoteiNendo(entity.getChoteiNendo().plusYear(1));
             entity.setNokigenYMD(日付取得(entity.getNokigenYMD().plusYear(1)));
             entity.setNokiKaishiYMD(日付取得(entity.getNokiKaishiYMD().plusYear(1)));
             entity.setNokiShuryoYMD(日付取得(entity.getNokiShuryoYMD().plusYear(1)));
@@ -131,6 +133,7 @@ public class ShinNendoKanriJohoSakuseiManager {
         }
         for (Noki item : list過年度) {
             UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setChoteiNendo(entity.getChoteiNendo().plusYear(1));
             entity.setNokigenYMD(日付取得(entity.getNokigenYMD().plusYear(1)));
             entity.setNokiKaishiYMD(日付取得(entity.getNokiKaishiYMD().plusYear(1)));
             entity.setNokiShuryoYMD(日付取得(entity.getNokiShuryoYMD().plusYear(1)));

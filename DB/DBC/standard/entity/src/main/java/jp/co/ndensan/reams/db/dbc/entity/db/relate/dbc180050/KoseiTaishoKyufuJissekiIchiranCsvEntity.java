@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,7 +27,7 @@ public class KoseiTaishoKyufuJissekiIchiranCsvEntity {
     @CsvField(order = 2, name = "連番")
     private RString 連番;
     @CsvField(order = 3, name = "被保険者番号")
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     @CsvField(order = 4, name = "被保険者氏名")
     private RString 被保険者氏名;
     @CsvField(order = 5, name = "年度")

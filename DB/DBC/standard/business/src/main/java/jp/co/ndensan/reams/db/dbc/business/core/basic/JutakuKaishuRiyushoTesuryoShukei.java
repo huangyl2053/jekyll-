@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -165,13 +166,41 @@ public class JutakuKaishuRiyushoTesuryoShukei
 //        return entity.getRiyushoSakuseiShinseiYMD();
 //    }
     /**
-     * 介護住宅改修理由書作成受付年月日を返します。
+     * 受付年月日を返します。
      *
      * @return 介護住宅改修理由書作成受付年月日
      */
-//    public FlexibleDate get介護住宅改修理由書作成受付年月日() {
-//        return entity.getRiyushoSakuseiUketsukeYMD();
-//    }
+    public FlexibleDate get受付年月日() {
+        return entity.getUketsukeYMD();
+    }
+
+    /**
+     * 請求情報作成日を返します。
+     *
+     * @return 請求情報作成日
+     */
+    public FlexibleDate get請求情報作成日() {
+        return entity.getSeikyuJohoSakuseiYMD();
+    }
+
+    /**
+     * 集計関連付け番号を返します。
+     *
+     * @return 集計関連付け番号
+     */
+    public RString get集計関連付け番号() {
+        return entity.getShukeiNo();
+    }
+
+    /**
+     * 申請年月日を返します。
+     *
+     * @return 申請年月日
+     */
+    public FlexibleDate get申請年月日() {
+        return entity.getShinseiYMD();
+    }
+
     /**
      * 介護支払方法区分を返します。
      *
@@ -215,6 +244,15 @@ public class JutakuKaishuRiyushoTesuryoShukei
      */
     public RString get口座番号() {
         return entity.getKozaNo();
+    }
+
+    /**
+     * 口座IDを返します。
+     *
+     * @return 口座ID
+     */
+    public Decimal get口座ID() {
+        return entity.getKozaID();
     }
 
     /**

@@ -42,7 +42,9 @@
          "DbT3096JutakuKaishuRiyushoTesuryoShukei"."kozaShubetsu" as "dbT3096_kozaShubetsu",
          "DbT3096JutakuKaishuRiyushoTesuryoShukei"."kozaNo" as "dbT3096_kozaNo",
          "DbT3096JutakuKaishuRiyushoTesuryoShukei"."kozaMeiginin" as "dbT3096_kozaMeiginin",
-         "DbT3096JutakuKaishuRiyushoTesuryoShukei"."kozaMeigininKana" as "dbT3096_kozaMeigininKana"
+         "DbT3096JutakuKaishuRiyushoTesuryoShukei"."kozaMeigininKana" as "dbT3096_kozaMeigininKana",
+        "DbT3096JutakuKaishuRiyushoTesuryoShukei"."shinseiYMD" as "dbT3096_shinseiYMD",
+        "DbT3096JutakuKaishuRiyushoTesuryoShukei"."uketsukeYMD" as "dbT3096_uketsukeYMD"
     </sql>
 
 
@@ -74,6 +76,8 @@
         <result property="kozaNo" column="dbT3096_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeiginin" column="dbT3096_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeigininKana" column="dbT3096_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="dbT3096_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="uketsukeYMD" column="dbT3096_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
 </mapper>
