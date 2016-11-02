@@ -91,7 +91,9 @@ public class DBC040010_KogakuGassanJikofutangakuKeisan
         executeStep(CALCKOGAKUSHIKYUGAKUPROCESS);
         executeStep(SETFUTANGAKUPROCESS);
         executeStep(SETFUTANGAKUAFTERPROCESS);
-        executeStep(DBC200029GASSANKEKKAICHIRANREPORTPROCESS);
+        if (getParameter().isShuturyokuFlg()) {
+            executeStep(DBC200029GASSANKEKKAICHIRANREPORTPROCESS);
+        }
         executeStep(DBC040010SHORICSVPROCESS);
         executeStep(DBC040010SHORIDATEKANRIUPDPROCESS);
     }
