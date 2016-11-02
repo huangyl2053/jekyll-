@@ -865,6 +865,9 @@ dbc/db/dbc/KogakuKaigoServiceMain/onClick_btnTokuteiShinryo
 dbc/db/dbc/KogakuKaigoServiceMain/onLoad
 dbc/db/dbc/KogakuKyufuTaishoList/onBeforeOpenDialog_btnJgyosha
 dbc/db/dbc/KogakuKyufuTaishoList/onBeforeOpenDialog_btnServiceSyurui
+dbc/db/dbc/KogakuKyufuTaishoList/onChange_rdbGekihenkanwaKubun
+dbc/db/dbc/KogakuKyufuTaishoList/onChange_rdbRiyoshafutanDai2dankai
+dbc/db/dbc/KogakuKyufuTaishoList/onChange_rdbRoreiFukushiNenkin
 dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnTorikeshi
 dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnTsuika
 dbc/db/dbc/KogakuKyufuTaishoList/onClick_btnkakutei
@@ -980,6 +983,7 @@ dbc/db/dbc/KyodoIdoRenrakuhyoHenkoMain/onClick_btnSave
 dbc/db/dbc/KyodoIdoRenrakuhyoHenkoMain/onClick_btnSearchResult
 dbc/db/dbc/KyodoIdoRenrakuhyoHenkoMain/onLoad
 dbc/db/dbc/KyodoIdoRenrakuhyoHenkoMain/toAfterPrint
+dbc/db/dbc/KyodoIdoRenrakuhyoTaishoshaKensakuMain/onActive
 dbc/db/dbc/KyodoIdoRenrakuhyoTaishoshaKensakuMain/onBlur_txtSearchHihokenshaNo
 dbc/db/dbc/KyodoIdoRenrakuhyoTaishoshaKensakuMain/onClick_btnModify_ccdTaishoshaIchiran
 dbc/db/dbc/KyodoIdoRenrakuhyoTaishoshaKensakuMain/onClick_btnResearch
@@ -1098,7 +1102,9 @@ dbc/db/dbc/KyotakuServiceSearch/onClick_SearchIchiran
 dbc/db/dbc/KyotsuPanel/onSelect_OnClick
 dbc/db/dbc/KyoutsuIdoReanrakuhyoEraTeisei/onLoad
 dbc/db/dbc/KyoutsuIdoReanrakuhyoEraTeisei/onSelectByModifyButton
+dbc/db/dbc/KyufuJissekiGaitosha/onBlur_txtHihoNo
 dbc/db/dbc/KyufuJissekiGaitosha/onClick_btnSearch
+dbc/db/dbc/KyufuJissekiGaitosha/onClick_btnSearchHihokensha
 dbc/db/dbc/KyufuJissekiGaitosha/onLoad
 dbc/db/dbc/KyufuJissekiGaitosha/onSelectBySelectButton
 dbc/db/dbc/KyufuJissekiGaitoshaListPanel/onClick_btnCancel

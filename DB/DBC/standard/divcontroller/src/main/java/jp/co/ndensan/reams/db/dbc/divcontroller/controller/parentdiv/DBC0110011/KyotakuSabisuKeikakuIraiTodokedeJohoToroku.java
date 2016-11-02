@@ -86,7 +86,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
     public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onLoad(
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.検索結果一覧).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.再検索).respond();
         }
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         TaishoshaKey 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -123,9 +123,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      */
     public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onBlur_txtJigyoshaNo(
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
-        if (div.getTxtJigyoshaNo().getValue().length() != NUM_10) {
-            return getResponseData(div);
-        }
         SearchResult<ServiceJigyoshaInputGuide> jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
                 JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
                                 div.getTxtJigyoshaNo().getValue()),
@@ -157,9 +154,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      */
     public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onBlur_txtItakusakiJigyoshaNo(
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
-        if (div.getTxtItakusakiJigyoshaNo().getValue().length() != NUM_10) {
-            return getResponseData(div);
-        }
         SearchResult<ServiceJigyoshaInputGuide> jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
                 JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
                                 div.getTxtItakusakiJigyoshaNo().getValue()),
@@ -298,7 +292,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         サービス種類.add(ServiceCategoryShurui.居宅支援.getコード());
         サービス種類.add(ServiceCategoryShurui.地小短外.getコード());
         mode.setサービス種類(サービス種類);
-        mode.setJigyoshaNo(new jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo(div.getTxtJigyoshaNo().getValue()));
+        if (!RString.isNullOrEmpty(div.getTxtJigyoshaNo().getValue())
+                && div.getTxtJigyoshaNo().getValue().length() == NUM_10) {
+            mode.setJigyoshaNo(new jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo(div.getTxtJigyoshaNo().getValue()));
+        }
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
     }
@@ -319,7 +316,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         サービス種類.add(ServiceCategoryShurui.予防支援.getコード());
         サービス種類.add(ServiceCategoryShurui.地予小外.getコード());
         mode.setサービス種類(サービス種類);
-        mode.setJigyoshaNo(new jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo(div.getTxtJigyoshaNo().getValue()));
+        if (!RString.isNullOrEmpty(div.getTxtItakusakiJigyoshaNo().getValue())
+                && div.getTxtItakusakiJigyoshaNo().getValue().length() == NUM_10) {
+            mode.setJigyoshaNo(new jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo(div.getTxtItakusakiJigyoshaNo().getValue()));
+        }
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
     }
