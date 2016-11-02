@@ -100,4 +100,9 @@ public interface IShiharaiHohoJyohoDiv extends ICommonChildDivBaseProperties {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateCheck();
+
+    /**
+     * クリアを行う。
+     */
+    public void clear();
 }

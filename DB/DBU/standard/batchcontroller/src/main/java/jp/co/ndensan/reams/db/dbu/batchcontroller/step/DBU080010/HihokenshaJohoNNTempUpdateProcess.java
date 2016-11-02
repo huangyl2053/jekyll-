@@ -50,7 +50,8 @@ public class HihokenshaJohoNNTempUpdateProcess extends BatchProcessBase<Jukyusha
 
     @Override
     protected void initialize() {
-        mybitisParamter = HihokenshaJohoMybatisParameter.createParamter提供対象者(getMybitisParamter(),
+        mybitisParamter = HihokenshaJohoMybatisParameter.createParamter提供対象者(processParameter.get新規異動区分(),
+                getMybitisParamter(),
                 new RString("\"").concat(processParameter.get提供基本情報中間テーブル名()).concat("\"")
         );
 

@@ -10,11 +10,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka8.HeijunkaKeisanPageJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigofukatokuchoheijunka8.ShoriDateKanriEntityResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8FlowParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendo.HonsanteiIdoKanendoEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendo.IHonsanteiIdoKanendoMapper;
+import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -26,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KaigoFukaTokuchoHeijunka8 {
 
     private final DbT7022ShoriDateKanriDac dbT7022ShoriDateKanriDac;
+    private final MapperProvider mapperProvider;
     private static final RString 年度内連番 = new RString("0001");
     private static final RString 処理枝番 = new RString("0001");
 
@@ -34,6 +39,7 @@ public class KaigoFukaTokuchoHeijunka8 {
      */
     public KaigoFukaTokuchoHeijunka8() {
         dbT7022ShoriDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -104,5 +110,19 @@ public class KaigoFukaTokuchoHeijunka8 {
             }
         }
         return true;
+    }
+
+    /**
+     * 処理日時取得
+     *
+     * @return RDateTime
+     */
+    public RDateTime getMax確定日時() {
+        IHonsanteiIdoKanendoMapper mapper = mapperProvider.create(IHonsanteiIdoKanendoMapper.class);
+        HonsanteiIdoKanendoEntity entity = mapper.select確定日時();
+        if (entity != null) {
+            return entity.get確定日時();
+        }
+        return null;
     }
 }

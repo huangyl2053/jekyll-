@@ -27,6 +27,7 @@ public class ShinseishoJohoSearchParameter implements IMyBatisParameter {
     private HokenshaNo 市町村コード;
     private FlexibleYear 申請対象年度;
     private FlexibleDate 申請日;
+    private FlexibleDate 申請日To;
     private RString 介護支給申請書整理番号;
     private RString 医療支給申請書整理番号;
     private boolean 申請基本情報検索有無;
@@ -45,6 +46,7 @@ public class ShinseishoJohoSearchParameter implements IMyBatisParameter {
      * @param 市町村コード 市町村コード
      * @param 申請対象年度 申請対象年度
      * @param 申請日 申請日
+     * @param 申請日To 申請日To
      * @param 介護支給申請書整理番号 介護支給申請書整理番号
      * @param 医療支給申請書整理番号 医療支給申請書整理番号
      * @param 申請基本情報検索有無 申請基本情報検索有無
@@ -61,6 +63,7 @@ public class ShinseishoJohoSearchParameter implements IMyBatisParameter {
             HokenshaNo 市町村コード,
             FlexibleYear 申請対象年度,
             FlexibleDate 申請日,
+            FlexibleDate 申請日To,
             RString 介護支給申請書整理番号,
             RString 医療支給申請書整理番号,
             boolean 申請基本情報検索有無,
@@ -75,6 +78,7 @@ public class ShinseishoJohoSearchParameter implements IMyBatisParameter {
         this.市町村コード = 市町村コード;
         this.申請対象年度 = 申請対象年度;
         this.申請日 = 申請日;
+        this.申請日To = 申請日To;
         this.介護支給申請書整理番号 = 介護支給申請書整理番号;
         this.医療支給申請書整理番号 = 医療支給申請書整理番号;
         this.申請基本情報検索有無 = 申請基本情報検索有無;

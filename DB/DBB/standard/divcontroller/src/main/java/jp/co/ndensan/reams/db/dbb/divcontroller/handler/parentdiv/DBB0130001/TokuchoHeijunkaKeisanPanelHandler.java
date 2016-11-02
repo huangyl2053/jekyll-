@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -38,6 +39,8 @@ public class TokuchoHeijunkaKeisanPanelHandler {
     private static final int THREE = 3;
     private static final RString 未 = new RString("未");
     private static final RString 済 = new RString("済");
+    private static final RString ハイフン = new RString("－");
+    private static final RString 最新_個人住民税課税確定 = new RString("【最新】個人住民税課税確定");
     private static final RString 実行するボタン = new RString("btnBatchRegister");
 
     /**
@@ -51,12 +54,10 @@ public class TokuchoHeijunkaKeisanPanelHandler {
     }
 
     private void get未処理の場合() {
-        RString 当初所得引出 = ShoriName.当初所得引出.get名称();
         RString 依頼金額計算 = ShoriName.依頼金額計算.get名称();
         RString 本算定賦課 = ShoriName.本算定賦課.get名称();
         RString 特徴異動情報作成 = ShoriName.特徴異動情報作成.get名称();
-        RDate nowDate = RDate.getNowDate();
-        KaigoFukaTokuchoHeijunka8 特徴平準化 = new KaigoFukaTokuchoHeijunka8();
+        KaigoFukaTokuchoHeijunka8 特徴平準化 = KaigoFukaTokuchoHeijunka8.createInstance();
         RDate 年度 = new RDate(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue().toString());
         FlexibleYear 調定年度 = new FlexibleYear(年度.getYear().toDateString());
         List<dgHeijunka8ShoriKakunin1_Row> rowList = new ArrayList<>();
@@ -66,25 +67,16 @@ public class TokuchoHeijunkaKeisanPanelHandler {
         for (ShoriDateKanriEntityResult 処理状況 : 処理状況リスト) {
             処理状況名リスト.add(処理状況.getEntity().getShoriName());
         }
-        if (処理状況名リスト.contains(当初所得引出)) {
-            row1.setTxtShoriMei(当初所得引出);
-            if (DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, nowDate, SubGyomuCode.DBB介護賦課).
-                    equals(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課))) {
-                row1.setTxtJokyo(済);
-                YMDHMS 処理日時 = 処理状況リスト.get(0).getEntity().getKijunTimestamp();
-                row1.setTxtShoriNichiji(get当月処理日時(処理日時));
-                rowList.add(row1);
-            } else {
-                row1.setTxtJokyo(未);
-                row1.setTxtShoriNichiji(RString.EMPTY);
-                rowList.add(row1);
-            }
+        row1.setTxtShoriMei(最新_個人住民税課税確定);
+        row1.setTxtJokyo(ハイフン);
+        RDateTime 確定日時 = 特徴平準化.getMax確定日時();
+        if (確定日時 != null) {
+            YMDHMS 日時 = new YMDHMS(確定日時);
+            row1.setTxtShoriNichiji(get当月処理日時(日時));
         } else {
-            row1.setTxtShoriMei(当初所得引出);
-            row1.setTxtJokyo(未);
             row1.setTxtShoriNichiji(RString.EMPTY);
-            rowList.add(row1);
         }
+        rowList.add(row1);
         dgHeijunka8ShoriKakunin1_Row row2 = new dgHeijunka8ShoriKakunin1_Row();
         if (処理状況名リスト.contains(依頼金額計算)) {
             int j = 0;
@@ -239,9 +231,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
      */
     public void setボタン制御() {
         boolean is処理状態1 = 済.equals(div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                getDataSource().get(0).getTxtJokyo())
-                && 済.equals(div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
-                        getDataSource().get(1).getTxtJokyo());
+                getDataSource().get(1).getTxtJokyo());
         boolean is処理状態2 = 未.equals(div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().
                 getDataSource().get(2).getTxtJokyo())
                 && 未.equals(div.getHeijunkaAugustKeisan().getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1().

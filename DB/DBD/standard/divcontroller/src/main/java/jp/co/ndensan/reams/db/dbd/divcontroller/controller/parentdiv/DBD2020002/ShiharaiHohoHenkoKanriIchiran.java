@@ -46,7 +46,6 @@ public class ShiharaiHohoHenkoKanriIchiran {
         tempData.set償還決定登録者2の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiKojoAriOnly().getSelectedKey());
         tempData.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         tempData.set帳票ID(ReportIdDBD.DBD200007.getReportId());
-        tempData.set帳票分類ID(ReportIdDBD.DBD200007.getReportId());
         tempData.set帳票作成日時(RDateTime.now());
         DBD207012_ShiharaiHohoHenkoKanriListParameter batchParameter = new DBD207012_ShiharaiHohoHenkoKanriListParameter();
         batchParameter.toDbd207010BatchParameter(tempData);

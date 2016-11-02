@@ -45,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -66,10 +65,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private int csv連番;
     private int 給付実績取消一覧CSV連番;
     private static final RString 給付実績情報作成区分_削除 = new RString("3");
-    private List<RString> 改頁List;
-    private static final RString キー_年度 = new RString("年度");
-    private static final RString キー_被保険者番号 = new RString("被保険者番号");
-    private static final RString キー_サービス提供年月 = new RString("サービス提供年月");
     private boolean 開始flag;
     private boolean 合計出力flag;
     private boolean データ存在flag;
@@ -123,8 +118,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         連番 = 0;
         csv連番 = INT_1;
         給付実績取消一覧CSV連番 = INT_1;
-        改頁List = new ArrayList<>();
-        get改頁List();
         開始flag = true;
         合計出力flag = false;
         データ存在flag = false;
@@ -140,10 +133,8 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
 
     @Override
     protected void createWriter() {
-        PageBreaker<KoseiTaishoJissekiIchiranSource> breaker
-                = new KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessPageBreak(改頁List);
         給付実績一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBC.DBC200096.getReportId().value()).addBreak(breaker).create();
+                ReportIdDBC.DBC200096.getReportId().value()).create();
         給付実績一覧表SourceWriter = new ReportSourceWriter<>(給付実績一覧表ReportWriter);
 
         給付実績取消一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(
@@ -424,12 +415,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         csvEntity.set更正前請求額(entity.get更正前請求額());
         csvEntity.set更正前自己負担額(entity.get更正前自己負担額());
         return csvEntity;
-    }
-
-    private void get改頁List() {
-        改頁List.add(キー_年度);
-        改頁List.add(キー_被保険者番号);
-        改頁List.add(キー_サービス提供年月);
     }
 
     private RString get和暦日時(RDateTime 日時) {

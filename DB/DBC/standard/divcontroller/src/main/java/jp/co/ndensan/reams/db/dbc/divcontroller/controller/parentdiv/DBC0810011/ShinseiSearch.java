@@ -74,7 +74,7 @@ public class ShinseiSearch {
             ViewStateHolder.put(ViewStateKeys.状態, 参照);
             PnlTotalParameter parameter = new PnlTotalParameter(被保険者番号, サービス年月, 整理番号,
                     事業者番号, yoshikiNo, 明細番号);
-            ViewStateHolder.put(ViewStateKeys.検索キー, parameter);
+            ViewStateHolder.put(ViewStateKeys.契約番号検索キー, parameter);
             return ResponseData.of(div).forwardWithEventName(福祉用具購入費支給).parameter(判定_21C);
         } else if (yoshikiNo.startsWith(判定_21D)) {
             ViewStateHolder.put(ViewStateKeys.表示モード, 照会_モード);

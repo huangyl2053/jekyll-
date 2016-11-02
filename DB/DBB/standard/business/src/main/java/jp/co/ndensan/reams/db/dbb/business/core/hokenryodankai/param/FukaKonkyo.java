@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 
 /**
  * 賦課根拠パラメータというクラスです。
@@ -22,9 +23,11 @@ public class FukaKonkyo {
     private FlexibleDate seihoEndYMD;
     private FlexibleDate roreiNenkinStartYMD;
     private FlexibleDate roreiNenkinEndYMD;
-    private List<KazeiKubun> setaiinKazeiKubunList;
+    private List<KazeiKubunHonninKubun> setaiinKazeiKubunList;
     private Decimal gokeiShotoku;
     private Decimal kotekiNenkinShunyu;
+    private KazeiKubun zennendoKazeiKubun;
+    private SetaiKazeiKubun zennendoSetaiKazeiKubun;
 
     /**
      * @return the fukakijunYMD
@@ -97,16 +100,16 @@ public class FukaKonkyo {
     }
 
     /**
-     * @return the List<KazeiKubun>
+     * @return the List<KazeiKubunHonninKubun>
      */
-    public List<KazeiKubun> getSetaiinKazeiKubunList() {
+    public List<KazeiKubunHonninKubun> getSetaiinKazeiKubunList() {
         return setaiinKazeiKubunList;
     }
 
     /**
      * @param setaiinKazeiKubunList the setaiinKazeiKubunList to set
      */
-    public void setSetaiinKazeiKubunList(List<KazeiKubun> setaiinKazeiKubunList) {
+    public void setSetaiinKazeiKubunList(List<KazeiKubunHonninKubun> setaiinKazeiKubunList) {
         this.setaiinKazeiKubunList = setaiinKazeiKubunList;
     }
 
@@ -139,14 +142,42 @@ public class FukaKonkyo {
     }
 
     /**
+     * @return the zennendoKazeiKubun
+     */
+    public KazeiKubun getZennendoKazeiKubun() {
+        return zennendoKazeiKubun;
+    }
+
+    /**
+     * @param zennendoKazeiKubun the zennendoKazeiKubun to set
+     */
+    public void setZennendoKazeiKubun(KazeiKubun zennendoKazeiKubun) {
+        this.zennendoKazeiKubun = zennendoKazeiKubun;
+    }
+
+    /**
+     * @return the zennendoSetaiKazeiKubun
+     */
+    public SetaiKazeiKubun getZennendoSetaiKazeiKubun() {
+        return zennendoSetaiKazeiKubun;
+    }
+
+    /**
+     * @param zennendoSetaiKazeiKubun the zennendoSetaiKazeiKubun to set
+     */
+    public void setZennendoSetaiKazeiKubun(SetaiKazeiKubun zennendoSetaiKazeiKubun) {
+        this.zennendoSetaiKazeiKubun = zennendoSetaiKazeiKubun;
+    }
+
+    /**
      * @param setaiinKazeiKubunList setaiinKazeiKubunList
      * @return 世帯課税
      */
-    public boolean is世帯課税(List<KazeiKubun> setaiinKazeiKubunList) {
+    public boolean is世帯課税(List<KazeiKubunHonninKubun> setaiinKazeiKubunList) {
 
         boolean 世帯課税 = false;
-        for (KazeiKubun honninKazeiKubun : setaiinKazeiKubunList) {
-            if (KazeiKubun.課税.getコード().equals(honninKazeiKubun.getコード())) {
+        for (KazeiKubunHonninKubun kazeiKubunHonninKubun : setaiinKazeiKubunList) {
+            if (KazeiKubun.課税.getコード().equals(kazeiKubunHonninKubun.get課税区分().getコード())) {
                 世帯課税 = true;
             }
         }

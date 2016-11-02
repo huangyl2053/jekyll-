@@ -77,6 +77,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshuru
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -969,33 +970,27 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         FlexibleDate 開始日 = new FlexibleDate(調定年度.toDateString().concat(RSTRING_0401).toString());
         if (生保開始日 == null || 生保開始日.isEmpty()) {
             賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
+        } else if (生保廃止日 == null || 生保廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
+            賦課根拠.setSeihoStartYMD(開始日);
         } else {
-            if (生保廃止日 == null || 生保廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
-                賦課根拠.setSeihoStartYMD(開始日);
-            } else {
-                賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
-            }
+            賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
         }
         賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
         if (老年開始日 == null || 老年開始日.isEmpty()) {
             賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
+        } else if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
+            賦課根拠.setRoreiNenkinStartYMD(開始日);
         } else {
-            if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
-                賦課根拠.setRoreiNenkinStartYMD(開始日);
-            } else {
-                賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
-            }
+            賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
         }
         賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
         // TODO
-        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
         if (!RString.isNullOrEmpty(課税区分)) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(課税区分));
+            賦課根拠.setZennendoKazeiKubun(KazeiKubun.toValue(課税区分));
         }
         if (!RString.isNullOrEmpty(世帯課税区分)) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(世帯課税区分));
+            賦課根拠.setZennendoSetaiKazeiKubun(SetaiKazeiKubun.toValue(世帯課税区分));
         }
-        賦課根拠.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         賦課根拠.setGokeiShotoku(前年度合計所得金額);
         賦課根拠.setKotekiNenkinShunyu(前年度公的年金収入額);
         HokenryoDankaiHanteiParameter parameter = new HokenryoDankaiHanteiParameter();
@@ -1006,7 +1001,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(parameter);
         RString 保険料段階 = RString.EMPTY;
         if (月別保険料段階 != null && 月別保険料段階.get保険料段階04月() != null) {
-            保険料段階 = 月別保険料段階.get保険料段階04月().getHokenryoDankai();
+            保険料段階 = 月別保険料段階.get保険料段階04月();
         }
         builder.set保険料段階_仮算定時(保険料段階);
         builder.set賦課市町村コード(get賦課市町村コード(資格情報));
@@ -1407,7 +1402,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             if (保険料段階 == null) {
                 TsukibetsuHokenryoDankai 月別保険料段階 = get月別保険料段階(資格取得Entity, 資格情報, 世帯員所得情報List,
                         賦課年度, 月別保険料制御情報);
-                保険料段階 = 月別保険料段階.get保険料段階12月().getHokenryoDankai();
+                保険料段階 = 月別保険料段階.get保険料段階12月();
             }
         } else if (RSTRING_12.equals(賦課方法)) {
             保険料段階 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定新規資格適用段階,
