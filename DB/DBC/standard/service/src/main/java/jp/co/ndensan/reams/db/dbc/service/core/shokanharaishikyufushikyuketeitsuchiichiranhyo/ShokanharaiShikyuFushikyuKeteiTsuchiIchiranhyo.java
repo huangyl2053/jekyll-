@@ -106,7 +106,8 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                     separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
             FlexibleYearMonth kizyuniti = new FlexibleDate(ichiranItem.getTeikyo()).getYearMonth();
-            if (shoShiharaiList.get要介護認定状態区分コード() != null) {
+            if (shoShiharaiList.get要介護認定状態区分コード() != null
+                    && !RString.isNullOrEmpty(shoShiharaiList.get要介護認定状態区分コード().getColumnValue())) {
                 ichiranItem.setYoKaigodo(YokaigoJotaiKubun.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
             }
             ichiranItem.setNinteiKaishibi(共通ポリシfomart(shoShiharaiList.get認定開始日()));
