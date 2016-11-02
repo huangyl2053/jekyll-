@@ -499,6 +499,8 @@ public class DBC040010DataUtil {
         result.setKey1(nonullRStr(entity.getHihokenshaNo()));
         if (KaigoGassan_ErrorKubun.高額支給額集計エラー.equals(errorKubun)) {
             result.setKey2(entity.getTaishoNendo());
+        } else {
+            result.setKey2(RString.EMPTY);
         }
         result.setKey3(RString.EMPTY);
         result.setKey4(RString.EMPTY);
@@ -684,7 +686,8 @@ public class DBC040010DataUtil {
         RString umareYMD = 実績負担額.getUmareYMD();
         RString hihokenshaShuryoYMD = 実績負担額.getHihokenshaShuryoYMD();
         IDateOfBirth dob = DateOfBirthFactory.createInstance(getFlexibleDate(umareYMD));
-        AgeCalculator ageCalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.当日, getFlexibleDate(hihokenshaShuryoYMD));
+        AgeCalculator ageCalculator
+                = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.当日, getFlexibleDate(hihokenshaShuryoYMD));
         int age = Integer.parseInt(ageCalculator.get年齢().toString());
         return age < NUM_75;
     }

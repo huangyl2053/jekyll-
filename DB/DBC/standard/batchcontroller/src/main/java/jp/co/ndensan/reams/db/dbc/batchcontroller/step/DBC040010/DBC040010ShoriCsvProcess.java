@@ -31,10 +31,10 @@ public class DBC040010ShoriCsvProcess extends BatchProcessBase<DBC040010ShoriKek
 
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040010."
             + "IKogakuGassanJikofutangakuKeisanMapper.get処理結果");
-    private static final RString EUCエンティティID = new RString("DBU900002");
+    private static final RString EUCエンティティID = new RString("DBC900004");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUCファイル名 = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString EUCファイル名 = new RString("処理結果確認リスト.csv");
     private FileSpoolManager spoolManager;
     private RString eucFilePath;
     private DBC040010DataUtil util;

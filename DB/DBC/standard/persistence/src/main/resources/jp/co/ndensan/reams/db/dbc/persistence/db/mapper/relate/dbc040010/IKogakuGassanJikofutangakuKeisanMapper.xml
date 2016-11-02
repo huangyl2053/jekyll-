@@ -5,6 +5,7 @@
     <!--シート「対象者抽出」-->
     <select id="get対象者抽出データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040010.TaishoshaChushuMyBatisParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DBC040010TaishoDataEntity" resultOrdered="true" fetchSize="500">
+        WITH master as(
         SELECT
         "B"."hihokenshaNo" AS "taishoHihokenshaNo"
         ,"B"."seiriNo" AS "seiriNo"
@@ -21,15 +22,7 @@
         ,"B"."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
         ,"V1001"."hihokenshaNo" AS "daichoHihokenshaNo"
         ,(CASE "V1001"."koikinaiJushochiTokureiFlag" WHEN '1' THEN "V1001"."koikinaiTokureiSochimotoShichosonCode"  ELSE "V1001"."shichosonCode" END) AS "shichosonCode"
-        ,"ShikibetsuTaisho"."kanaMeisho" AS "kanaMeisho"
-        ,"ShikibetsuTaisho"."meisho" AS "meisho"
-        ,"ShikibetsuTaisho"."seinengappiYMD" AS "seinengappiYMD"
-        ,"ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCode"
-        ,"ShikibetsuTaisho"."yubinNo" AS "yubinNo"
-        ,"ShikibetsuTaisho"."choikiCode" AS "choikiCode"
-        ,"ShikibetsuTaisho"."gyoseikuCode" AS "gyoseikuCode"
-        ,"ShikibetsuTaisho"."juminShubetsuCode" AS "juminShubetsuCode"
-        ,"ShikibetsuTaisho"."shikibetsuCode" AS "shikibetsuCode"
+        ,"V1001"."shikibetsuCode" AS "shikibetsuCode"
         FROM
         (SELECT
         "dbt3068"."hihokenshaNo"
@@ -52,23 +45,54 @@
         AND  "K"."rirekiNo" = "B"."rirekiNo"
         LEFT JOIN  rgdb."DbV1001HihokenshaDaicho"  AS "V1001"
         ON "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
-        LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode"="V1001"."shikibetsuCode"
         WHERE "B"."isDeleted" =False
         AND #{申請対象日開始} <![CDATA[<=]]> "B"."shinseiYMD"
         AND "B"."shinseiYMD"<![CDATA[<=]]>#{申請対象日終了}
         AND "B"."shinseiJokyoKubun" = '2'
         AND ("B"."shikyuShinseiKubun" ='1' or "B"."shikyuShinseiKubun"='2')
         AND (("B"."jikoFutan_KeisanYM"= '' OR "B"."jikoFutan_KeisanYM" is NULL)  OR ("B"."jikoFutan_KeisanYM" <![CDATA[<>]]>'' AND "B"."jikoFutan_KeisanYM" is NOT NULL AND "B"."saiKeisanKubun" = '1'))
+        )
+        SELECT
+        master."taishoHihokenshaNo" AS "taishoHihokenshaNo"
+        ,master."seiriNo" AS "seiriNo"
+        ,master."rirekiNo" AS "rirekiNo"
+        ,master."jikoFutanKeisanYM" AS "jikoFutanKeisanYM"
+        ,master."taishoNendo" AS "taishoNendo"
+        ,master."hokenshaNo" AS "hokenshaNo"
+        ,master."shikyuShinseishoSeiriNo" AS "shikyuShinseishoSeiriNo"
+        ,master."taishoKeisanKaishiYMD" AS "taishoKeisanKaishiYMD"
+        ,master."taishoKeisanShuryoYMD" AS "taishoKeisanShuryoYMD"
+        ,master."kanyuKaishiYMD" AS "kanyuKaishiYMD"
+        ,master."kanyuShuryoYMD" AS "kanyuShuryoYMD"
+        ,master."shinseiYMD" AS "shinseiYMD"
+        ,master."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
+        ,master."daichoHihokenshaNo" AS "daichoHihokenshaNo"
+        ,master."shichosonCode" AS "shichosonCode"
+        ,"ShikibetsuTaisho"."kanaMeisho" AS "kanaMeisho"
+        ,"ShikibetsuTaisho"."meisho" AS "meisho"
+        ,"ShikibetsuTaisho"."seinengappiYMD" AS "seinengappiYMD"
+        ,"ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCode"
+        ,"ShikibetsuTaisho"."yubinNo" AS "yubinNo"
+        ,"ShikibetsuTaisho"."choikiCode" AS "choikiCode"
+        ,"ShikibetsuTaisho"."gyoseikuCode" AS "gyoseikuCode"
+        ,"ShikibetsuTaisho"."juminShubetsuCode" AS "juminShubetsuCode"
+        ,"ShikibetsuTaisho"."shikibetsuCode" AS "shikibetsuCode"
+        FROM
+        master
+        LEFT JOIN
+        <include refid="tableName_PsmParamClassShikibetsuTaisho_left" />
+        (SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT)) FROM master) 
+        <include refid="tableName_PsmParamClassShikibetsuTaisho_right" />
+        AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode"=master."shikibetsuCode"
         ORDER BY
-        "B"."hihokenshaNo","B"."hokenshaNo","B"."taishoNendo","B"."seiriNo"
+        master."taishoHihokenshaNo",master."hokenshaNo",master."taishoNendo",master."seiriNo"
     </select>
 
     <!--シート「対象者抽出事業分」-->
     <select id="get対象者抽出事業分データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040010.TaishoshaChushuJigyobunMyBatisParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DBC040010TaishoDataEntity" resultOrdered="true" fetchSize="500">
+        WITH master AS (
         SELECT
         "B"."hihokenshaNo" AS "taishoHihokenshaNo"
         ,"B"."rirekiNo" AS "rirekiNo"
@@ -84,15 +108,7 @@
         ,"B"."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
         ,"V1001"."hihokenshaNo" AS "daichoHihokenshaNo"
         ,(CASE "V1001"."koikinaiJushochiTokureiFlag" WHEN '1' THEN "V1001"."koikinaiTokureiSochimotoShichosonCode"  ELSE "V1001"."shichosonCode" END) AS "shichosonCode"
-        ,"ShikibetsuTaisho"."kanaMeisho" AS "kanaMeisho"
-        ,"ShikibetsuTaisho"."meisho" AS "meisho"
-        ,"ShikibetsuTaisho"."seinengappiYMD" AS "seinengappiYMD"
-        ,"ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCode"
-        ,"ShikibetsuTaisho"."yubinNo" AS "yubinNo"
-        ,"ShikibetsuTaisho"."choikiCode" AS "choikiCode"
-        ,"ShikibetsuTaisho"."gyoseikuCode" AS "gyoseikuCode"
-        ,"ShikibetsuTaisho"."shikibetsuCode" AS "shikibetsuCode"
-        ,"ShikibetsuTaisho"."juminShubetsuCode" AS "juminShubetsuCode"
+        ,"V1001"."shikibetsuCode" AS "shikibetsuCode"
         FROM
         (SELECT
         "dbt3070"."hihokenshaNo"
@@ -115,10 +131,6 @@
         AND  "K"."rirekiNo" = "B"."rirekiNo"
         LEFT JOIN  rgdb."DbV1001HihokenshaDaicho"  AS "V1001"
         ON      "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
-        LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode"="V1001"."shikibetsuCode"
         WHERE "B"."isDeleted" = False
         AND     '2014'<![CDATA[<=]]>"B"."taishoNendo"
         AND "B"."dataSakuseiKubun"='1'
@@ -129,10 +141,43 @@
             AND "B"."taishoNendo" = #{年度}
             AND "B"."hihokenshaNo" =#{被保険者番号}
         </if>
+        )
+        SELECT
+        master."taishoHihokenshaNo" AS "taishoHihokenshaNo"
+        ,master."rirekiNo" AS "rirekiNo"
+        ,master."jikoFutanKeisanYM" AS "jikoFutanKeisanYM"
+        ,master."taishoNendo" AS "taishoNendo"
+        ,master."hokenshaNo" AS "hokenshaNo"
+        ,master."shikyuShinseishoSeiriNo" AS "shikyuShinseishoSeiriNo"
+        ,master."taishoKeisanKaishiYMD" AS "taishoKeisanKaishiYMD"
+        ,master."taishoKeisanShuryoYMD" AS "taishoKeisanShuryoYMD"
+        ,master."kanyuKaishiYMD" AS "kanyuKaishiYMD"
+        ,master."kanyuShuryoYMD" AS "kanyuShuryoYMD"
+        ,master."shinseiYMD" AS "shinseiYMD"
+        ,master."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
+        ,master."daichoHihokenshaNo" AS "daichoHihokenshaNo"
+        ,master."shichosonCode" AS "shichosonCode"
+        ,"ShikibetsuTaisho"."kanaMeisho" AS "kanaMeisho"
+        ,"ShikibetsuTaisho"."meisho" AS "meisho"
+        ,"ShikibetsuTaisho"."seinengappiYMD" AS "seinengappiYMD"
+        ,"ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCode"
+        ,"ShikibetsuTaisho"."yubinNo" AS "yubinNo"
+        ,"ShikibetsuTaisho"."choikiCode" AS "choikiCode"
+        ,"ShikibetsuTaisho"."gyoseikuCode" AS "gyoseikuCode"
+        ,"ShikibetsuTaisho"."shikibetsuCode" AS "shikibetsuCode"
+        ,"ShikibetsuTaisho"."juminShubetsuCode" AS "juminShubetsuCode"
+        FROM
+        master
+        LEFT JOIN
+        <include refid="tableName_PsmParamClassShikibetsuTaisho_left" />
+        (SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT)) FROM master)
+        <include refid="tableName_PsmParamClassShikibetsuTaisho_right" />
+        AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode"=master."shikibetsuCode"
         ORDER BY
-        "B"."hihokenshaNo","B"."hokenshaNo","B"."taishoNendo","B"."shikyuShinseishoSeiriNo"
+        master."taishoHihokenshaNo",master."hokenshaNo",master."taishoNendo",master."shikyuShinseishoSeiriNo"
     </select>
-    
+
     <!--BatchStep2.3<変更>-->
     <select id="get給付実績基本一時" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040010.InsShiharaihohoHenkoTempBeforeMyBatisParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity"
