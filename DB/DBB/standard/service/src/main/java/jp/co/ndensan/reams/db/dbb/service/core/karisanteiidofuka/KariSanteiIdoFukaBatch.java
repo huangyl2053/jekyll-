@@ -358,7 +358,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         Collections.sort(資格情報List, new Comparator<ShikakuShutokuTempEntity>() {
             @Override
             public int compare(ShikakuShutokuTempEntity o1, ShikakuShutokuTempEntity o2) {
-                if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
+                if (o1.get第1号資格取得年月日() != null && o2.get第1号資格取得年月日() != null
+                        && !o1.get第1号資格取得年月日().isEmpty() && !o2.get第1号資格取得年月日().isEmpty()
+                        && o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
                     return 1;
                 }
                 return -1;
@@ -405,7 +407,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         Collections.sort(資格の情報, new Comparator<ShikakuShutokuTempEntity>() {
             @Override
             public int compare(ShikakuShutokuTempEntity o1, ShikakuShutokuTempEntity o2) {
-                if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
+                if (o1.get第1号資格取得年月日() != null && o2.get第1号資格取得年月日() != null
+                        && !o1.get第1号資格取得年月日().isEmpty() && !o2.get第1号資格取得年月日().isEmpty()
+                        && o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
                     return 1;
                 }
                 return -1;
@@ -972,19 +976,14 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
         } else if (生保廃止日 == null || 生保廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
             賦課根拠.setSeihoStartYMD(開始日);
-        } else {
-            賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
         }
         賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
         if (老年開始日 == null || 老年開始日.isEmpty()) {
             賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
         } else if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
             賦課根拠.setRoreiNenkinStartYMD(開始日);
-        } else {
-            賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
         }
         賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
-        // TODO
         if (!RString.isNullOrEmpty(課税区分)) {
             賦課根拠.setZennendoKazeiKubun(KazeiKubun.toValue(課税区分));
         }
@@ -1608,7 +1607,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             Collections.sort(老齢福祉の情報リスト, new Comparator<RoreiFukushiNenkinJukyusha>() {
                 @Override
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
-                    if (o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
+                    if (o2.get受給開始年月日() != null && !o2.get受給開始年月日().isEmpty()
+                            && o1.get受給開始年月日() != null && !o1.get受給開始年月日().isEmpty()
+                            && o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
                         return -1;
                     }
                     return 1;

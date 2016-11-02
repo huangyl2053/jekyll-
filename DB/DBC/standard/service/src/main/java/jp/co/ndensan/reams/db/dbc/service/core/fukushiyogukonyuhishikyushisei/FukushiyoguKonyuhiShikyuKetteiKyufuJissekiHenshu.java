@@ -419,6 +419,9 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
      */
     private KokanShikibetsuNo get交換情報識別番号(FlexibleYearMonth serviceTeikyoYM) {
         KokanShikibetsuNo 交換情報識別番号 = new KokanShikibetsuNo("1131");
+        if (serviceTeikyoYM == null || serviceTeikyoYM.isEmpty()) {
+            return 交換情報識別番号;
+        }
         if (serviceTeikyoYM.isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
             return 交換情報識別番号;
         }
@@ -461,7 +464,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
      */
     private JigyoshaNo nullTOEmpty(JigyoshaNo 項目) {
         if (項目 == null || 項目.isEmpty()) {
-            return new JigyoshaNo("");
+            return JigyoshaNo.EMPTY;
         }
         return 項目;
     }
@@ -474,7 +477,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
      */
     private FlexibleDate nullTOEmpty(FlexibleDate 項目) {
         if (項目 == null || 項目.isEmpty()) {
-            return new FlexibleDate("");
+            return FlexibleDate.EMPTY;
         }
         return 項目;
     }
