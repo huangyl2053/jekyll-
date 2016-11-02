@@ -494,8 +494,13 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
         RString 設定項目 = RString.EMPTY;
         if (outputOrder != null) {
-            for (ISetSortItem item : outputOrder.get設定項目リスト()) {
-                設定項目 = 設定項目.concat(より).concat(item.get項目名());
+            for (int i = 0; i < outputOrder.get設定項目リスト().size(); i++) {
+                ISetSortItem item = outputOrder.get設定項目リスト().get(i);
+                if (0 == i) {
+                    設定項目 = item.get項目名();
+                } else {
+                    設定項目 = 設定項目.concat(より).concat(item.get項目名());
+                }
             }
         }
         if (!RString.EMPTY.equals(設定項目)) {
