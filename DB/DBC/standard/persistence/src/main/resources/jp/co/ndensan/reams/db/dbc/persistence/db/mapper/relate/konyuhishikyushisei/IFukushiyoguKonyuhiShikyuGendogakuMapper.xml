@@ -13,11 +13,11 @@
         ShokanKihon."jigyoshaNo" AS "jigyoshaNo",													
         ShokanKihon."yoshikiNo" AS "yoshikiNo",													
         ShokanKihon."meisaiNo" AS "meisaiNo",													
-        ShokanShinsei."shinseiYMD" AS "shinseiYMD",													
+        ShokanShinsei."shinseiYMD" AS "shinseiYMD",
         ShokanHanteiKekka."ketteiYMD" AS "ketteiYMD",													
         ShokanHanteiKekka."shikyuHushikyuKetteiKubun" AS "shikyuHushikyuKetteiKubun",													
-        ShokanKihon."serviceTanisu" AS "konyukingakugoke",													
-        DbT3048TEMP."fukushiYoguShohinName" AS "fukushiYoguShohinName"													
+        DbT3048TEMP."fukushiYoguShohinName" AS "fukushiYoguShohinName",	
+        MAX(ShokanShinsei."hokenTaishoHiyogaku") AS "hokenTaishoHiyogaku"												
       FROM													
         rgdb."DbT3038ShokanKihon" AS ShokanKihon,													
         rgdb."DbT3034ShokanShinsei" AS ShokanShinsei,													
@@ -60,7 +60,19 @@
             AND ShokanKihon."seiriNo" = DbT3048TEMP."seiriNo"													
             AND ShokanKihon."jigyoshaNo" = DbT3048TEMP."jigyoshaNo"													
             AND ShokanKihon."yoshikiNo" = DbT3048TEMP."yoshikiNo"													
-            AND ShokanKihon."meisaiNo" = DbT3048TEMP."meisaiNo"													
+            AND ShokanKihon."meisaiNo" = DbT3048TEMP."meisaiNo"
+      GROUP BY
+            ShokanKihon."hiHokenshaNo",													
+            ShokanKihon."serviceTeikyoYM",													
+            ShokanKihon."seiriNo",													
+            ShokanKihon."jigyoshaNo",													
+            ShokanKihon."yoshikiNo",													
+            ShokanKihon."meisaiNo",													
+            ShokanShinsei."shinseiYMD",
+            ShokanHanteiKekka."ketteiYMD",													
+            ShokanHanteiKekka."shikyuHushikyuKetteiKubun",													
+            DbT3048TEMP."fukushiYoguShohinName"
+        													
       ORDER BY													
             "serviceTeikyoYM" ASC,													
             "seiriNo" ASC,													
@@ -79,7 +91,7 @@
         <result property="支給_不支給決定区分" column="shikyuHushikyuKetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="決定日" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="商品名" column="fukushiYoguShohinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="購入金額合計" column="konyukingakugoke" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険対象費用額" column="hokenTaishoHiyogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
     <select id="select要介護認定状態区分コード"
