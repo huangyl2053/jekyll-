@@ -544,6 +544,7 @@ dbc/db/dbc/JutakuKaishuShinseiJyohoToroku/onClick_btnAddShikyuShinsei
 dbc/db/dbc/JutakuKaishuShinseiJyohoToroku/onClick_btnCancel
 dbc/db/dbc/JutakuKaishuShinseiJyohoToroku/onClick_btnCheckGendogaku
 dbc/db/dbc/JutakuKaishuShinseiJyohoToroku/onClick_btnCopyInfoOfAtena
+dbc/db/dbc/JutakuKaishuShinseiJyohoToroku/onClick_btnKeiyakuNo
 dbc/db/dbc/JutakuKaishuShinseiJyohoToroku/onClick_btnRireki
 dbc/db/dbc/JutakuKaishuShinseiJyohoToroku/onClick_btnShokaiKeteiJoho
 dbc/db/dbc/JutakuKaishuShinseiJyohoToroku/onClick_btnShowJizenShinsei
@@ -934,6 +935,7 @@ dbc/db/dbc/KokuhorenTorikomiList/onClick_btnScheduleSetting
 dbc/db/dbc/KokuhorenTorikomiList/onLoad
 dbc/db/dbc/KokuhorenTorikomiList/onSelect_dgKokuhorenTorikomiList_Row
 dbc/db/dbc/KoshinKekkaKakunin/onLoad
+dbc/db/dbc/KougakuKaigotaiShoushachuuShutsuMainPanel/btn_BeforeDialog
 dbc/db/dbc/KougakuKaigotaiShoushachuuShutsuMainPanel/onClick_btnBatchRegister
 dbc/db/dbc/KougakuKaigotaiShoushachuuShutsuMainPanel/onLoad
 dbc/db/dbc/KougakuKetteiTuutisyo/onChange_ddlKanliBanngou
@@ -1047,6 +1049,7 @@ dbc/db/dbc/KyotakuSabisuKeikakuIraiTodokedeJohoToroku/onBeforeOpen_btnItakuSakiJ
 dbc/db/dbc/KyotakuSabisuKeikakuIraiTodokedeJohoToroku/onBeforeOpen_btnJigyoshaKensaku
 dbc/db/dbc/KyotakuSabisuKeikakuIraiTodokedeJohoToroku/onBlur_txtItakusakiJigyoshaNo
 dbc/db/dbc/KyotakuSabisuKeikakuIraiTodokedeJohoToroku/onBlur_txtJigyoshaNo
+dbc/db/dbc/KyotakuSabisuKeikakuIraiTodokedeJohoToroku/onChange_ddlTodokedeshaKankeiKubun
 dbc/db/dbc/KyotakuSabisuKeikakuIraiTodokedeJohoToroku/onChange_radKeikakuSakuseiKubun
 dbc/db/dbc/KyotakuSabisuKeikakuIraiTodokedeJohoToroku/onClick_btnAdd
 dbc/db/dbc/KyotakuSabisuKeikakuIraiTodokedeJohoToroku/onClick_btnComplete
@@ -1449,15 +1452,16 @@ dbc/db/dbc/SeikyuGakuShukeiPanel/onClick_ddgDelete
 dbc/db/dbc/SeikyuGakuShukeiPanel/onClick_ddgModify
 dbc/db/dbc/SeikyuGakuShukeiPanel/onLoad
 dbc/db/dbc/SeikyuShinsaShuseiToroku/onBlur_hasChanged
+dbc/db/dbc/SeikyuShinsaShuseiToroku/onBlur_hasChangedCheck
 dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_Kensaku
 dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_MeisaiShowukai
 dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_Sakujo
 dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_Showukai
 dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_Shuwusei
+dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_btnComplete
+dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_btnContinue
 dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_btnHozon
-dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_btnKekkaIchiranHe
-dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_onBeforeOpenDialog
-dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_onOkClose
+dbc/db/dbc/SeikyuShinsaShuseiToroku/onClick_btnSaiKensaku
 dbc/db/dbc/SeikyuShinsaShuseiToroku/onLoad
 dbc/db/dbc/ServiceCodeCommonChildDiv/initialize
 dbc/db/dbc/ServiceCodeCommonChildDiv/onClick_Kensaku
