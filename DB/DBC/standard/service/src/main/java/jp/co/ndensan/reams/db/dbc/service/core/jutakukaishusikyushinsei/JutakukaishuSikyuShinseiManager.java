@@ -641,8 +641,8 @@ public class JutakukaishuSikyuShinseiManager {
      * @return 支払金額合計
      */
     public Decimal get支払金額合計(RDate サービス提供年月, RString 被保険者番号, RString 整理番号) {
-        DbT3034ShokanShinseiEntity entity = 償還払支給申請Dac.selectByKey(
+        DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(
                 new HihokenshaNo(被保険者番号), new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()), 整理番号);
-        return entity == null ? Decimal.ZERO : entity.getShiharaiKingakuTotal();
+        return entity == null ? Decimal.ZERO : entity.getShiharaiKingaku();
     }
 }
