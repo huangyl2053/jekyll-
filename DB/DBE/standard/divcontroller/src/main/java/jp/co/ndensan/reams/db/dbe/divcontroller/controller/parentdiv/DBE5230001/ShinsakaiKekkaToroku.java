@@ -417,10 +417,25 @@ public class ShinsakaiKekkaToroku {
             div.getDdlJotaiZo().setRequired(false);
         }
         RString shinseiKubunShinseiji = div.getTxtShinseiKubunShinseiji().getText();
-        RString zenkaiNijiHantei = div.getDgTaishoshaIchiran().getActiveRow().getZenkaiNijiHanteiCode();
+        RString zenkaiNijiHantei = new RString("");
+        FlexibleDate zenkaiYukoKikanShuryoDay = new FlexibleDate("");
+        if (!div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()) {
+            if (div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().size() == 1) {
+                zenkaiNijiHantei = div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().get(0).getZenkaiNijiHanteiCode();
+            } else {
+                zenkaiNijiHantei = div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getZenkaiNijiHanteiCode();
+            }
+        }
+        if (!div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()) {
+            if (div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().size() == 1) {
+                zenkaiYukoKikanShuryoDay = div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().get(0).getZenkaiYukoKikanShuryoDay().getValue();
+            } else {
+                zenkaiYukoKikanShuryoDay = div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getZenkaiYukoKikanShuryoDay().getValue();
+            }
+        }
+
         RString nijiHantei = div.getDdlNijiHantei().getSelectedKey();
         FlexibleDate shinseiDay = div.getTxtShinseiDay().getValue();
-        FlexibleDate zenkaiYukoKikanShuryoDay = div.getDgTaishoshaIchiran().getActiveRow().getZenkaiYukoKikanShuryoDay().getValue();
 
         /**
          * 申請区分（申請時）と二次判定より、申請区分（法令）を設定
