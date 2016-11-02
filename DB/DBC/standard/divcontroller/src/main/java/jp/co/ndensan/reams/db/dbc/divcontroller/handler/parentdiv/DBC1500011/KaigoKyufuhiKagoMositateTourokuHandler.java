@@ -155,10 +155,10 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         if (給付実績情報.get過誤申立情報() != null) {
             div.getTxtMeisaiMoshitateshaKubun().setValue(KagoMoshitate_MoshitateshaKubun.toValue(給付実績情報.get過誤申立情報().get申立者区分コード()).get名称());
             FlexibleYearMonth 送付年月 = 給付実績情報.get過誤申立情報().get国保連送付年月();
-            if (送付年月 != null) {
+            if (送付年月 != null && !送付年月.isEmpty()) {
                 div.getTxtMeisaiSendYM().setValue(new RDate(送付年月.toString()));
             }
-            if (給付実績情報.get過誤申立情報().get申立年月日() != null) {
+            if (給付実績情報.get過誤申立情報().get申立年月日() != null && !給付実績情報.get過誤申立情報().get申立年月日().isEmpty()) {
                 div.getTxtMeisaiMoshitateDate().setValue(new RDate(給付実績情報.get過誤申立情報().get申立年月日().toString()));
             }
             div.getDdlMeisaiKagoMoshitateRiyu().setSelectedKey(給付実績情報.get過誤申立情報().get申立事由コード().substring(2, 申立理由_ITN));
