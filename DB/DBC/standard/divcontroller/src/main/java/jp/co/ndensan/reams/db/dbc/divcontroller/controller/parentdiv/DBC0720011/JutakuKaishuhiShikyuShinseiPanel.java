@@ -338,9 +338,26 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      */
     public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onStateTransition(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         if (ResponseHolder.getState().equals(DBC0720011StateName.申請審査.getName())) {
-            if (div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getDataSource().isEmpty()) {
+            RDate 支給申請日開始 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue();
+            RDate 支給申請日終了 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue();
+            FlexibleDate 支給申請日開始FlexibleDate = null;
+            if (支給申請日開始 != null) {
+                支給申請日開始FlexibleDate = new FlexibleDate(支給申請日開始.toDateString());
+            }
+            FlexibleDate 支給申請日終了FlexibleDate = null;
+            if (支給申請日終了 != null) {
+                支給申請日終了FlexibleDate = new FlexibleDate(支給申請日終了.toDateString());
+            }
+            JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
+            List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(支給申請日開始FlexibleDate, 支給申請日終了FlexibleDate);
+            ViewStateHolder.put(ViewStateKeys.申請一覧, (Serializable) resultList);
+            MishinsaShikyuShinseiListHandler handler = MishinsaShikyuShinseiListHandler.of(div.getMishinsaShikyuShinseiListPanel());
+            handler.initializeDropDownList(resultList);
+            if (resultList.isEmpty()) {
+                div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, true);
             } else {
+                div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.FALSE);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, false);
             }
         }
