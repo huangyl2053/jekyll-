@@ -46,6 +46,7 @@ public class HokenryoDankaiHanteiCore {
             if (各段階判定(hokenryoDankaiHanteiParameter, hanteihohoList)) {
                 tsukibetsuHokenryoDankai = 出力データ作成(hokenryoDankaiHanteiParameter, key);
                 特例対象判定判断(hanteihohoList, tsukibetsuHokenryoDankai);
+                break;
             }
         }
 
