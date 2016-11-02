@@ -4,11 +4,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryoHoken
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryoHokenRirekiState;
@@ -24,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @author 自動生成
  */
 public class IryoHokenRirekiDialogButtonDiv extends Panel implements IIryoHokenRirekiDialogButtonDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
@@ -178,5 +182,13 @@ public class IryoHokenRirekiDialogButtonDiv extends Panel implements IIryoHokenR
 
         ArrayList<IryohokenKanyuJokyo> dataList = DataPassingConverter.deserialize(this.getSaveData(), ArrayList.class);
         return IryohokenKanyuJokyoManager.createInstance().saveAllIryoHokenJoho(dataList);
+    }
+
+    @Override
+    public List<IryohokenKanyuJokyo> get医療保険履歴() {
+        if (this.getSaveData() == null || this.getSaveData().isEmpty()) {
+            return Collections.<IryohokenKanyuJokyo>emptyList();
+        }
+        return DataPassingConverter.deserialize(this.getSaveData(), ArrayList.class);
     }
 }

@@ -28,4 +28,11 @@ public interface IRofukuNenkinDialogButtonDiv extends ICommonChildDivBasePropert
      * @return 保存した件数
      */
     int save();
+
+    /**
+     * ダイアログで入力した老齢福祉加入状況のデータを取得します。取得されるデータは、saveメソッドで保存対象になるデータと同一です。
+     *
+     * @return 保存データ
+     */
+    Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> get老福年金();
 }

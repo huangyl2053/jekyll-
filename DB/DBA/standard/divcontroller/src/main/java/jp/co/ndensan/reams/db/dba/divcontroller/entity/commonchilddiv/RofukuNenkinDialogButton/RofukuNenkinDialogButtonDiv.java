@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RofukuNen
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
+import java.util.Collections;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -182,5 +182,19 @@ public class RofukuNenkinDialogButtonDiv extends Panel implements IRofukuNenkinD
         }
         RoreiFukushiNenkinJukyushaManager manager = RoreiFukushiNenkinJukyushaManager.createInstance();
         return manager.save老齢福祉年金受給者All(roreiFukushiNenkinJukyusha);
+    }
+
+    @Override
+    public Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> get老福年金() {
+        if (this.getSaveData() == null || this.getSaveData().isEmpty()) {
+            return Models.create(Collections.<RoreiFukushiNenkinJukyusha>emptyList());
+        }
+
+        Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
+                = DataPassingConverter.deserialize(this.getSaveData(), Models.class);
+        if (roreiFukushiNenkinJukyusha == null) {
+            return Models.create(Collections.<RoreiFukushiNenkinJukyusha>emptyList());
+        }
+        return roreiFukushiNenkinJukyusha;
     }
 }

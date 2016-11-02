@@ -3,11 +3,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * このコードはツールによって生成されました。
@@ -99,4 +98,13 @@ public interface IShikakuTokusoRirekiDiv extends ICommonChildDivBaseProperties {
      *
      */
     void setDialogDisplay();
+
+    /**
+     * 引数の被保険者台帳を元にグリッドの表示をアップデートします。
+     *
+     * @param daicho 被保険者台帳
+     * @param beforeShutokuDate 変更前の取得日。変更前取得日と一致する取得日を持つ履歴を変更する
+     * @param shutokuDateListOfDeleted 削除対象データの取得日を要素とするList
+     */
+    void updateGridData(HihokenshaDaicho daicho, FlexibleDate beforeShutokuDate, List<FlexibleDate> shutokuDateListOfDeleted);
 }
