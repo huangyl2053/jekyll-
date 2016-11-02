@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.Toku
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -41,8 +43,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -61,10 +65,20 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     private static final RString SPLIT = new RString(",");
     private static final RString STR_01 = new RString("01");
     private static final RString STR_1 = new RString("1");
+    private static final RString STR_02 = new RString("02");
     private static final RString STR_2 = new RString("2");
+    private static final RString STR_03 = new RString("03");
     private static final RString STR_3 = new RString("3");
     private static final RString STR_4 = new RString("4");
     private static final RString STR_06 = new RString("06");
+    private static final RString STR_12 = new RString("12");
+    private static final RString STR_13 = new RString("13");
+    private static final RString STR_21 = new RString("21");
+    private static final RString STR_22 = new RString("22");
+    private static final RString STR_23 = new RString("23");
+    private static final RString STR_24 = new RString("24");
+    private static final RString STR_25 = new RString("25");
+    private static final RString STR_99 = new RString("99");
     private static final RString エラーあり = new RString("1");
     private static final RString エラーなし = new RString("0");
     private static final int ORDER_0 = 0;
@@ -97,7 +111,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     private static final Code コート_32 = new Code("32");
     private static final int 履歴番号 = 0000;
     private static final RString 資格取得事由 = new RString("11");
-
+    private static final RString 星 = new RString("*");
     private JukyushaIdoRenrakuhyoOutProcessParameter processParameter;
     private List<IdouTblEntity> 異動一時List;
     private Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map;
@@ -165,7 +179,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         社福減免処理(社福減免List, 処理年月);
         List<JushochitokureiInfoEntity> 住所地特例List = get住所地特例();
         住所地特例(住所地特例List, 処理年月);
-//        PSMInfoEntity 宛名情報 = get宛名();
+        PSMInfoEntity 宛名情報 = get宛名();
 //        List<DbT7124KokiKoreishaInfoEntity> 後期高齢者情報List = get後期高齢者情報();
 //        List<DbT7123KokuhoShikakuInfoEntity> 国保資格情報List = get国保資格();
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 二割負担List = get二割負担();
@@ -177,10 +191,12 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         for (IdoTblTmpEntity 異動一時 : 異動一時Map.values()) {
             allData.add(異動一時);
         }
+        引き継ぎ処理(allData);
         for (int i = allData.size() - 1; i > -1; i--) {
             異動一時entity = allData.get(i);
             不要データ削除(異動一時entity, i, allData);
         }
+        再編集(allData, 宛名情報, 処理年月);
         異動一時List.clear();
         異動一時Map.clear();
     }
@@ -1677,6 +1693,13 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         return date1.isBefore(date2);
     }
 
+    private boolean isBeforeOreqDate(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date1) || isDateEmpty(date2)) {
+            return false;
+        }
+        return date1.isBeforeOrEquals(date2);
+    }
+
     private boolean isBeforeYearMonth(FlexibleDate date1, FlexibleYearMonth date2) {
         if (date1 == null) {
             return false;
@@ -1813,13 +1836,48 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private List<UrT0508SeikatsuHogoJukyushaEntity> 生活保護受給者まとめる(List<UrT0508SeikatsuHogoJukyushaEntity> 生活保護受給者List) {
+        if (生活保護受給者List.isEmpty() || 生活保護受給者List.size() == 1) {
+            return 生活保護受給者List;
+        }
         sort生活保護受給者List(生活保護受給者List);
         List<UrT0508SeikatsuHogoJukyushaEntity> まとめるList = new ArrayList<>();
-        for (UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者 : 生活保護受給者List) {
-            まとめるList.add(生活保護受給者);
-            if (isDateEmpty(生活保護受給者.getJukyuHaishiYMD())) {
-                return まとめるList;
+        FlexibleDate tempStartDate = null;
+        FlexibleDate tempEndDate = null;
+        for (int i = 0; i < 生活保護受給者List.size(); i++) {
+            UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者 = 生活保護受給者List.get(i);
+            if (i == 0) {
+                tempStartDate = 生活保護受給者.getJukyuKaishiYMD();
+                tempEndDate = 生活保護受給者.getJukyuHaishiYMD();
+                continue;
             }
+            if (i == 生活保護受給者List.size() - 1) {
+                生活保護受給者.setJukyuKaishiYMD(tempStartDate);
+                生活保護受給者.setJukyuHaishiYMD(tempEndDate);
+                まとめるList.add(生活保護受給者);
+                break;
+            }
+            if (isBeforeDate(生活保護受給者.getJukyuKaishiYMD(), tempEndDate)) {
+                tempEndDate = 生活保護受給者.getJukyuHaishiYMD();
+                if (isDateEmpty(tempEndDate)) {
+                    UrT0508SeikatsuHogoJukyushaEntity tempEntity = 生活保護受給者List.get(i - 1);
+                    tempEntity.setJukyuKaishiYMD(tempStartDate);
+                    tempEntity.setJukyuHaishiYMD(tempEndDate);
+                    まとめるList.add(tempEntity);
+                    break;
+                }
+            } else {
+                UrT0508SeikatsuHogoJukyushaEntity tempEntity = 生活保護受給者List.get(i - 1);
+                tempEntity.setJukyuKaishiYMD(tempStartDate);
+                tempEntity.setJukyuHaishiYMD(tempEndDate);
+                まとめるList.add(tempEntity);
+                tempStartDate = 生活保護受給者.getJukyuKaishiYMD();
+                tempEndDate = 生活保護受給者.getJukyuHaishiYMD();
+                if (isDateEmpty(tempEndDate)) {
+                    まとめるList.add(生活保護受給者);
+                    break;
+                }
+            }
+
         }
         return まとめるList;
     }
@@ -1848,6 +1906,479 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             return 1;
         }
         return date1.compareTo(date2);
+    }
+
+    private void 引き継ぎ処理(List<IdoTblTmpEntity> allData) {
+        sort異動一時2データ(allData);
+        IdoTblTmpEntity 前履歴データ = null;
+        for (IdoTblTmpEntity entity : allData) {
+            if (前履歴データ == null) {
+                前履歴データ = entity;
+                continue;
+            }
+            if (entity.get証記載保険者番号() == null) {
+                entity.set証記載保険者番号(前履歴データ.get証記載保険者番号());
+            } else {
+                前履歴データ.set証記載保険者番号(entity.get証記載保険者番号());
+            }
+
+            if (entity.get資格取得年月日() == null) {
+                entity.set資格取得年月日(前履歴データ.get資格取得年月日());
+            } else {
+                前履歴データ.set資格取得年月日(entity.get資格取得年月日());
+            }
+
+            if (entity.get申請種別コード() == null) {
+                entity.set申請種別コード(前履歴データ.get申請種別コード());
+            } else {
+                前履歴データ.set申請種別コード(entity.get申請種別コード());
+            }
+            if (entity.get変更申請中区分コード() == null) {
+                entity.set変更申請中区分コード(前履歴データ.get変更申請中区分コード());
+            } else {
+                前履歴データ.set変更申請中区分コード(entity.get変更申請中区分コード());
+            }
+            if (entity.get申請年月日() == null) {
+                entity.set申請年月日(前履歴データ.get申請年月日());
+            } else {
+                前履歴データ.set申請年月日(entity.get申請年月日());
+            }
+            if (entity.getみなし要介護状態区分コード() == null) {
+                entity.setみなし要介護状態区分コード(前履歴データ.getみなし要介護状態区分コード());
+            } else {
+                前履歴データ.setみなし要介護状態区分コード(entity.getみなし要介護状態区分コード());
+            }
+            if (entity.get要介護状態区分コード() == null) {
+                entity.set要介護状態区分コード(前履歴データ.get要介護状態区分コード());
+            } else {
+                前履歴データ.set要介護状態区分コード(entity.get要介護状態区分コード());
+            }
+            if (entity.get認定有効期間開始年月日() == null) {
+                entity.set認定有効期間開始年月日(前履歴データ.get認定有効期間開始年月日());
+            } else {
+                前履歴データ.set認定有効期間開始年月日(entity.get認定有効期間開始年月日());
+            }
+            if (entity.get認定有効期間終了年月日() == null) {
+                entity.set認定有効期間終了年月日(前履歴データ.get認定有効期間終了年月日());
+            } else {
+                前履歴データ.set認定有効期間終了年月日(entity.get認定有効期間終了年月日());
+            }
+            if (entity.get居宅サービス計画作成区分コード() == null) {
+                entity.set居宅サービス計画作成区分コード(前履歴データ.get居宅サービス計画作成区分コード());
+            } else {
+                前履歴データ.set居宅サービス計画作成区分コード(entity.get居宅サービス計画作成区分コード());
+            }
+            if (entity.get居宅介護支援事業所番号() == null) {
+                entity.set居宅介護支援事業所番号(前履歴データ.get居宅介護支援事業所番号());
+            } else {
+                前履歴データ.set居宅介護支援事業所番号(entity.get居宅介護支援事業所番号());
+            }
+            if (entity.get居宅サービス計画適用開始年月日() == null) {
+                entity.set居宅サービス計画適用開始年月日(前履歴データ.get居宅サービス計画適用開始年月日());
+            } else {
+                前履歴データ.set居宅サービス計画適用開始年月日(entity.get居宅サービス計画適用開始年月日());
+            }
+            if (entity.get居宅サービス計画適用終了年月日() == null) {
+                entity.set居宅サービス計画適用終了年月日(前履歴データ.get居宅サービス計画適用終了年月日());
+            } else {
+                前履歴データ.set居宅サービス計画適用終了年月日(entity.get居宅サービス計画適用終了年月日());
+            }
+            if (entity.get要介護状態区分コード() == null) {
+                entity.set訪問通所サービス支給限度基準額(前履歴データ.get訪問通所サービス支給限度基準額());
+                entity.set訪問通所サービス上限管理適用期間開始年月日(前履歴データ.get訪問通所サービス上限管理適用期間開始年月日());
+                entity.set訪問通所サービス上限管理適用期間終了年月日(前履歴データ.get訪問通所サービス上限管理適用期間終了年月日());
+                entity.set短期入所サービス支給限度基準額(前履歴データ.get短期入所サービス支給限度基準額());
+                entity.set短期入所サービス上限管理適用期間開始年月日(前履歴データ.get短期入所サービス上限管理適用期間開始年月日());
+                entity.set短期入所サービス上限管理適用期間終了年月日(前履歴データ.get短期入所サービス上限管理適用期間終了年月日());
+            } else {
+                前履歴データ.set訪問通所サービス支給限度基準額(entity.get訪問通所サービス支給限度基準額());
+                前履歴データ.set訪問通所サービス上限管理適用期間開始年月日(entity.get訪問通所サービス上限管理適用期間開始年月日());
+                前履歴データ.set訪問通所サービス上限管理適用期間終了年月日(entity.get訪問通所サービス上限管理適用期間終了年月日());
+                前履歴データ.set短期入所サービス支給限度基準額(entity.get短期入所サービス支給限度基準額());
+                前履歴データ.set短期入所サービス上限管理適用期間開始年月日(entity.get短期入所サービス上限管理適用期間開始年月日());
+                前履歴データ.set短期入所サービス上限管理適用期間終了年月日(entity.get短期入所サービス上限管理適用期間終了年月日());
+            }
+            if (!entity.is公費負担上限額減額有フラグ()) {
+                entity.set公費負担上限額減額有フラグ(前履歴データ.is公費負担上限額減額有フラグ());
+            } else {
+                前履歴データ.set公費負担上限額減額有フラグ(entity.is公費負担上限額減額有フラグ());
+            }
+            if (entity.get償還払化開始年月日() == null) {
+                entity.set償還払化開始年月日(前履歴データ.get償還払化開始年月日());
+            } else {
+                前履歴データ.set償還払化開始年月日(entity.get償還払化開始年月日());
+            }
+            引き継ぎデータ処理(entity, 前履歴データ);
+        }
+    }
+
+    private void 引き継ぎデータ処理(IdoTblTmpEntity entity, IdoTblTmpEntity 前履歴データ) {
+        if (entity.get償還払化終了年月日() == null) {
+            entity.set償還払化終了年月日(前履歴データ.get償還払化終了年月日());
+        } else {
+            前履歴データ.set償還払化終了年月日(entity.get償還払化終了年月日());
+        }
+        if (entity.get給付率引下げ開始年月日() == null) {
+            entity.set給付率引下げ開始年月日(前履歴データ.get給付率引下げ開始年月日());
+        } else {
+            前履歴データ.set給付率引下げ開始年月日(entity.get給付率引下げ開始年月日());
+        }
+        if (entity.get給付率引下げ終了年月日() == null) {
+            entity.set給付率引下げ終了年月日(前履歴データ.get給付率引下げ終了年月日());
+        } else {
+            前履歴データ.set給付率引下げ終了年月日(entity.get給付率引下げ終了年月日());
+        }
+        if (entity.get減免申請中区分コード() == null) {
+            entity.set減免申請中区分コード(前履歴データ.get減免申請中区分コード());
+        } else {
+            前履歴データ.set減免申請中区分コード(entity.get減免申請中区分コード());
+        }
+        if (entity.get利用者負担区分コード() == null) {
+            entity.set利用者負担区分コード(前履歴データ.get利用者負担区分コード());
+            entity.set給付率(前履歴データ.get給付率());
+            entity.set適用開始年月日(前履歴データ.get適用開始年月日());
+            entity.set適用終了年月日(前履歴データ.get適用終了年月日());
+        } else {
+            前履歴データ.set利用者負担区分コード(entity.get利用者負担区分コード());
+            前履歴データ.set給付率(entity.get給付率());
+            前履歴データ.set適用開始年月日(entity.get適用開始年月日());
+            前履歴データ.set適用終了年月日(entity.get適用終了年月日());
+        }
+        if (entity.get標準負担区分コード() == null) {
+            entity.set標準負担区分コード(前履歴データ.get標準負担区分コード());
+            entity.set負担額(前履歴データ.get負担額());
+            entity.set負担額適用開始年月日(前履歴データ.get負担額適用開始年月日());
+            entity.set負担額適用終了年月日(前履歴データ.get負担額適用終了年月日());
+        } else {
+            前履歴データ.set標準負担区分コード(entity.get標準負担区分コード());
+            前履歴データ.set負担額(entity.get負担額());
+            前履歴データ.set負担額適用開始年月日(entity.get負担額適用開始年月日());
+            前履歴データ.set負担額適用終了年月日(entity.get負担額適用終了年月日());
+        }
+        if (entity.get特定入所者認定申請中区分コード() == null) {
+            entity.set特定入所者認定申請中区分コード(前履歴データ.get特定入所者認定申請中区分コード());
+        } else {
+            前履歴データ.set特定入所者認定申請中区分コード(entity.get特定入所者認定申請中区分コード());
+        }
+
+        if (entity.get負担限度額適用開始年月日() == null) {
+            entity.set特定入所者介護サービス区分コード(前履歴データ.get特定入所者介護サービス区分コード());
+            entity.set課税層の特例減額措置対象フラグ(前履歴データ.get課税層の特例減額措置対象フラグ());
+            entity.set食費負担限度額(前履歴データ.get食費負担限度額());
+            entity.set居住費ユニット型個室負担限度額(前履歴データ.get居住費ユニット型個室負担限度額());
+            entity.set居住費ユニット型準個室負担限度額(前履歴データ.get居住費ユニット型準個室負担限度額());
+            entity.set居住費従来型個室特養等負担限度額(前履歴データ.get居住費従来型個室特養等負担限度額());
+            entity.set居住費従来型個室老健療養等負担限度額(前履歴データ.get居住費従来型個室老健療養等負担限度額());
+            entity.set居住費多床室負担限度額(前履歴データ.get居住費多床室負担限度額());
+            entity.set負担限度額適用開始年月日(前履歴データ.get負担限度額適用開始年月日());
+            entity.set負担限度額適用終了年月日(前履歴データ.get負担限度額適用終了年月日());
+        } else {
+            前履歴データ.set特定入所者介護サービス区分コード(entity.get特定入所者介護サービス区分コード());
+            前履歴データ.set課税層の特例減額措置対象フラグ(entity.get課税層の特例減額措置対象フラグ());
+            前履歴データ.set食費負担限度額(entity.get食費負担限度額());
+            前履歴データ.set居住費ユニット型個室負担限度額(entity.get居住費ユニット型個室負担限度額());
+            前履歴データ.set居住費ユニット型準個室負担限度額(entity.get居住費ユニット型準個室負担限度額());
+            前履歴データ.set居住費ユニット型準個室負担限度額(entity.get居住費ユニット型準個室負担限度額());
+            前履歴データ.set居住費従来型個室特養等負担限度額(entity.get居住費従来型個室特養等負担限度額());
+            前履歴データ.set居住費従来型個室老健療養等負担限度額(entity.get居住費従来型個室老健療養等負担限度額());
+            前履歴データ.set居住費多床室負担限度額(entity.get居住費多床室負担限度額());
+            前履歴データ.set負担限度額適用開始年月日(entity.get負担限度額適用開始年月日());
+            前履歴データ.set負担限度額適用終了年月日(entity.get負担限度額適用終了年月日());
+        }
+        if (entity.get軽減率() == null) {
+            entity.set軽減率(前履歴データ.get軽減率());
+        } else {
+            前履歴データ.set軽減率(entity.get軽減率());
+        }
+        if (entity.get軽減率適用開始年月日() == null) {
+            entity.set軽減率適用開始年月日(前履歴データ.get軽減率適用開始年月日());
+        } else {
+            前履歴データ.set軽減率適用開始年月日(entity.get軽減率適用開始年月日());
+        }
+        if (entity.get軽減率適用終了年月日() == null) {
+            entity.set軽減率適用終了年月日(前履歴データ.get軽減率適用終了年月日());
+        } else {
+            前履歴データ.set軽減率適用終了年月日(entity.get軽減率適用終了年月日());
+        }
+
+        if (entity.get二次予防事業有効期間開始年月日() == null) {
+            entity.set二次予防事業区分コード(前履歴データ.get二次予防事業区分コード());
+            entity.set二次予防事業有効期間開始年月日(前履歴データ.get二次予防事業有効期間開始年月日());
+            entity.set二次予防事業有効期間終了年月日(前履歴データ.get二次予防事業有効期間終了年月日());
+        } else {
+            前履歴データ.set二次予防事業区分コード(entity.get二次予防事業区分コード());
+            前履歴データ.set二次予防事業有効期間開始年月日(entity.get二次予防事業有効期間開始年月日());
+            前履歴データ.set二次予防事業有効期間終了年月日(entity.get二次予防事業有効期間終了年月日());
+        }
+
+        if (entity.get二次予防事業有効期間開始年月日() == null) {
+            entity.set住所地特例対象者区分コード(前履歴データ.get住所地特例対象者区分コード());
+            entity.set施設所在保険者番号(前履歴データ.get施設所在保険者番号());
+            entity.set住所地特例適用開始日(前履歴データ.get住所地特例適用開始日());
+            entity.set住所地特例適用終了日(前履歴データ.get住所地特例適用終了日());
+        } else {
+            前履歴データ.set住所地特例対象者区分コード(entity.get住所地特例対象者区分コード());
+            前履歴データ.set施設所在保険者番号(entity.get施設所在保険者番号());
+            前履歴データ.set住所地特例適用開始日(entity.get住所地特例適用開始日());
+            前履歴データ.set住所地特例適用終了日(entity.get住所地特例適用終了日());
+        }
+
+        if (entity.get利用者負担割合有効開始日() == null) {
+            entity.set利用者負担割合有効開始日(前履歴データ.get利用者負担割合有効開始日());
+            entity.set利用者負担割合有効終了日(前履歴データ.get利用者負担割合有効終了日());
+        } else {
+            前履歴データ.set利用者負担割合有効開始日(entity.get利用者負担割合有効開始日());
+            前履歴データ.set利用者負担割合有効終了日(entity.get利用者負担割合有効終了日());
+        }
+    }
+
+    private void sort異動一時2データ(List<IdoTblTmpEntity> allData) {
+        Collections.sort(allData, new Comparator<IdoTblTmpEntity>() {
+            @Override
+            public int compare(IdoTblTmpEntity o1, IdoTblTmpEntity o2) {
+                if (isBeforeDate(o1.get異動年月日(), o2.get異動年月日())) {
+                    return -1;
+                }
+                if (isBeforeDate(o2.get異動年月日(), o1.get異動年月日())) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
+    }
+
+    private void 再編集(List<IdoTblTmpEntity> allData, PSMInfoEntity 宛名情報, FlexibleYearMonth 処理年月) {
+        IdoTblTmpEntity 最古の異動日の異動 = allData.get(ORDER_0);
+        if (STR_3.equals(最古の異動日の異動.get異動区分コード())
+                && is年月同じ(最古の異動日の異動.get認定有効期間開始年月日(), 最古の異動日の異動.get資格喪失年月日())) {
+            IdoTblTmpEntity cloneEntity = 最古の異動日の異動.clone();
+            最古の異動日の異動.set異動区分コード(STR_1);
+            最古の異動日の異動.set受給者異動事由(STR_01);
+            最古の異動日の異動.set資格喪失年月日(null);
+            FlexibleDate 次異動日 = 次異動日取得(allData, cloneEntity);
+            cloneEntity.set異動年月日(次異動日);
+            allData.add(cloneEntity);
+        }
+        再編集更新(allData);
+        int 履歴通番 = 1;
+        RString 計画終了日Flag = DbBusinessConfig.get(ConfigNameDBC.国保連受給異動_計画終了日_星, RDate.getNowDate(),
+                SubGyomuCode.DBC介護給付);
+        for (int i = 0; i < allData.size(); i++) {
+            IdoTblTmpEntity entity = allData.get(i);
+            entity.set履歴番号(履歴通番);
+            履歴通番++;
+            if (!isDateEmpty(entity.get資格喪失年月日())) {
+                entity.set異動区分コード(STR_3);
+                entity.set受給者異動事由(STR_02);
+            } else if (i == 0) {
+                entity.set異動区分コード(STR_1);
+                entity.set受給者異動事由(STR_01);
+            } else if (前履歴資格喪失年月日Check(entity, allData.get(i - 1))) {
+                entity.set異動区分コード(STR_1);
+                entity.set受給者異動事由(STR_01);
+            } else if (前履歴証記載保険者番号Check(entity, allData.get(i - 1))) {
+                entity.set異動区分コード(STR_1);
+                entity.set受給者異動事由(STR_03);
+            } else {
+                entity.set異動区分コード(STR_2);
+                entity.set受給者異動事由(STR_99);
+            }
+            entity.set被保険者氏名カナ(宛名情報.getカナ名称().getColumnValue());
+            entity.set生年月日(宛名情報.get生年月日());
+            entity.set性別コード(宛名情報.get性別());
+            if (RString.isNullOrEmpty(entity.get要介護状態区分コード())) {
+                entity.set要介護状態区分コード(STR_01);
+            }
+            if (!RString.isNullOrEmpty(entity.get償還払化開始年月日())
+                    && !RString.isNullOrEmpty(entity.get償還払化終了年月日())
+                    && (isBeforeDate(new FlexibleDate(entity.get償還払化開始年月日()), entity.get異動年月日())
+                    || isBeforeDate(new FlexibleDate(entity.get償還払化開始年月日()), entity.get資格取得年月日()))) {
+                entity.set償還払化開始年月日(星);
+                entity.set償還払化終了年月日(星);
+            }
+            if (要介護状態区分判断(entity, 計画終了日Flag)) {
+                entity.set居宅サービス計画作成区分コード(星);
+                entity.set居宅介護支援事業所番号(星);
+                entity.set居宅サービス計画適用開始年月日(星);
+                entity.set居宅サービス計画適用終了年月日(星);
+            } else if (STR_2.equals(entity.get居宅サービス計画作成区分コード())
+                    && !STR_1.equals(entity.get異動区分コード())) {
+                entity.set居宅介護支援事業所番号(星);
+            } else if (STR_1.equals(計画終了日Flag)
+                    && !STR_1.equals(entity.get異動区分コード())) {
+                entity.set居宅サービス計画適用終了年月日(星);
+            }
+            if (!entity.is公費負担上限額減額有フラグ()) {
+                entity.set公費負担上限額減額有フラグ(true);
+            }
+            再編集一部(entity);
+            entity.set小多機能居宅介護利用開始月利用有フラグ(true);
+//            entity.set後期高齢者医療保険者番号(entity.get);
+            entity.set後期高齢者医療被保険者番号(entity.get被保険者番号().getColumnValue());
+            entity.set国民健康保険被保険者証番号(entity.get被保険者番号().getColumnValue());
+            entity.set送付年月(処理年月);
+        }
+
+    }
+
+    private void 再編集更新(List<IdoTblTmpEntity> allData) {
+        List<FlexibleYearMonth> 同じ年月List = new ArrayList<>();
+        Map<FlexibleYearMonth, List<IdoTblTmpEntity>> 同じ年月Map = new HashMap<>();
+        for (IdoTblTmpEntity entity : allData) {
+//            if (!isDateEmpty(entity.get資格喪失年月日())
+//                    && !isBeforeOreqDate(entity.get認定有効期間開始年月日(), entity.get資格喪失年月日())) {
+//                return;
+//            }
+            FlexibleYearMonth 同じ年月 = entity.get認定有効期間開始年月日().getYearMonth();
+            List<IdoTblTmpEntity> updateList = 同じ年月Map.get(同じ年月);
+            if (updateList == null) {
+                updateList = new ArrayList<>();
+                同じ年月Map.put(同じ年月, updateList);
+            }
+            updateList.add(entity);
+            同じ年月List.add(同じ年月);
+        }
+
+        for (FlexibleYearMonth 年月 : 同じ年月List) {
+            List<IdoTblTmpEntity> updateList = 同じ年月Map.get(年月);
+            if (updateList.size() != 2) {
+                continue;
+            }
+            二件編集(updateList);
+
+        }
+    }
+
+    private void 二件編集(List<IdoTblTmpEntity> updateList) {
+        for (IdoTblTmpEntity entity : updateList) {
+            if (!isDateEmpty(entity.get資格喪失年月日())
+                    && !isBeforeOreqDate(entity.get認定有効期間開始年月日(), entity.get資格喪失年月日())) {
+                return;
+            }
+        }
+        IdoTblTmpEntity 最古の異動日 = updateList.get(ORDER_0);
+        最古の異動日.set異動区分コード(STR_1);
+        最古の異動日.set受給者異動事由(STR_01);
+        FlexibleDate 最古資格喪失年月日 = 最古の異動日.get資格喪失年月日();
+        最古の異動日.set資格喪失年月日(null);
+        IdoTblTmpEntity 最大の異動日 = updateList.get(ORDER_1);
+        最大の異動日.set異動区分コード(STR_3);
+        最大の異動日.set受給者異動事由(STR_02);
+        FlexibleDate 最大の喪失年月日 = 最大の異動日.get資格喪失年月日();
+        if (isBeforeDate(最古資格喪失年月日, 最大の喪失年月日)) {
+            最大の異動日.set資格喪失年月日(最大の喪失年月日);
+        } else {
+            最大の異動日.set資格喪失年月日(最古資格喪失年月日);
+        }
+
+    }
+
+    private void 再編集一部(IdoTblTmpEntity entity) {
+        if (isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get異動年月日())
+                || isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get資格取得年月日())) {
+            entity.set給付率引下げ開始年月日(星);
+            entity.set給付率引下げ終了年月日(星);
+        }
+        if (STR_3.equals(entity.get減免申請中区分コード())
+                && (RString.isNullOrEmpty(entity.get適用開始年月日())
+                || 星.equals(entity.get適用開始年月日())
+                || RString.isNullOrEmpty(entity.get負担額適用開始年月日())
+                || 星.equals(entity.get負担額適用開始年月日()))) {
+            entity.set減免申請中区分コード(STR_1);
+        }
+        if (isBeforeDate(new FlexibleDate(entity.get適用終了年月日()), entity.get異動年月日())
+                || isBeforeDate(new FlexibleDate(entity.get適用終了年月日()), entity.get資格取得年月日())) {
+            entity.set利用者負担区分コード(星);
+            //TODO
+//                entity.set給付率(星);
+            entity.set適用開始年月日(星);
+            entity.set適用終了年月日(星);
+        }
+
+        if (isBeforeDate(new FlexibleDate(entity.get負担額適用終了年月日()), entity.get異動年月日())
+                || isBeforeDate(new FlexibleDate(entity.get負担額適用終了年月日()), entity.get資格取得年月日())) {
+            entity.set標準負担区分コード(星);
+            //TODO
+//                entity.set負担額(星);
+            entity.set負担額適用開始年月日(星);
+            entity.set負担額適用終了年月日(星);
+        }
+
+        if (STR_3.equals(entity.get特定入所者認定申請中区分コード())
+                && (RString.isNullOrEmpty(entity.get負担限度額適用開始年月日())
+                || 星.equals(entity.get負担限度額適用開始年月日()))) {
+            entity.set特定入所者認定申請中区分コード(STR_1);
+        }
+
+        if (isBeforeDate(new FlexibleDate(entity.get負担限度額適用終了年月日()), entity.get異動年月日())
+                || isBeforeDate(new FlexibleDate(entity.get負担限度額適用終了年月日()), entity.get資格取得年月日())) {
+            entity.set特定入所者介護サービス区分コード(星);
+            entity.set課税層の特例減額措置対象フラグ(星);
+            entity.set食費負担限度額(星);
+            entity.set居住費ユニット型個室負担限度額(星);
+            entity.set居住費ユニット型準個室負担限度額(星);
+            entity.set居住費従来型個室特養等負担限度額(星);
+            entity.set居住費従来型個室老健療養等負担限度額(星);
+            entity.set居住費多床室負担限度額(星);
+            entity.set負担限度額適用開始年月日(星);
+            entity.set負担限度額適用終了年月日(星);
+        }
+
+        if (isBeforeDate(new FlexibleDate(entity.get軽減率適用終了年月日()), entity.get異動年月日())
+                || isBeforeDate(new FlexibleDate(entity.get軽減率適用終了年月日()), entity.get資格取得年月日())) {
+            entity.set軽減率(星);
+            entity.set軽減率適用開始年月日(星);
+            entity.set軽減率適用終了年月日(星);
+        }
+    }
+
+    private boolean 要介護状態区分判断(IdoTblTmpEntity entity, RString 計画終了日Flag) {
+        if ((STR_12.equals(entity.get要介護状態区分コード()) || STR_13.equals(entity.get要介護状態区分コード()))
+                && STR_1.equals(entity.get居宅サービス計画作成区分コード())) {
+            return true;
+        }
+        if ((STR_21.equals(entity.get要介護状態区分コード())
+                || STR_22.equals(entity.get要介護状態区分コード())
+                || STR_23.equals(entity.get要介護状態区分コード())
+                || STR_24.equals(entity.get要介護状態区分コード())
+                || STR_25.equals(entity.get要介護状態区分コード()))
+                && STR_3.equals(entity.get居宅サービス計画作成区分コード())) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean 前履歴資格喪失年月日Check(IdoTblTmpEntity entity, IdoTblTmpEntity 前履歴) {
+        if (!isDateEmpty(前履歴.get資格喪失年月日())) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean 前履歴証記載保険者番号Check(IdoTblTmpEntity entity, IdoTblTmpEntity 前履歴) {
+        if (!entity.get証記載保険者番号().equals(前履歴.get証記載保険者番号())) {
+            return true;
+        }
+        return false;
+    }
+
+    private FlexibleDate 次異動日取得(List<IdoTblTmpEntity> allData, IdoTblTmpEntity cloneEntity) {
+        FlexibleDate 次異動日 = cloneEntity.get異動年月日();
+        for (IdoTblTmpEntity idoTblTmpEntity : allData) {
+            if (次異動日.equals(idoTblTmpEntity.get異動年月日())) {
+                次異動日 = 次異動日.plusDay(ORDER_1);
+                continue;
+            }
+            return 次異動日;
+        }
+        return 次異動日;
+    }
+
+    private boolean is年月同じ(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date1) || isDateEmpty(date2)) {
+            return false;
+        }
+        return date1.getYearMonth().equals(date2.getYearMonth());
     }
 
 }

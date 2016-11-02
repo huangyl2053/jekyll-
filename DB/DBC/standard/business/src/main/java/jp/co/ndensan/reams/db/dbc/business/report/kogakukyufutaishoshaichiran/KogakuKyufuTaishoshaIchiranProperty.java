@@ -16,9 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.Breakers;
-import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
-import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票のプロパティです。
@@ -46,7 +44,7 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200014.getReportId());
 
         pageBreakKeys = new ArrayList<>();
-        pageBreakKeys.add(new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
+        pageBreakKeys.add(DBC200014ShutsuryokujunEnum.証記載保険者番号.get項目ID());
         RString 改頁２ = RString.EMPTY;
         RString 改頁３ = RString.EMPTY;
         RString 改頁４ = RString.EMPTY;
@@ -62,19 +60,19 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
         }
 
         if (INDEX_1 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_1).is改頁項目()) {
-            改頁２ = to帳票物理名(iSetSortItemList.get(INDEX_1).get項目ID());
+            改頁２ = iSetSortItemList.get(INDEX_1).get項目ID();
         }
         if (INDEX_2 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_2).is改頁項目()) {
-            改頁３ = to帳票物理名(iSetSortItemList.get(INDEX_2).get項目ID());
+            改頁３ = iSetSortItemList.get(INDEX_2).get項目ID();
         }
         if (INDEX_3 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_3).is改頁項目()) {
-            改頁４ = to帳票物理名(iSetSortItemList.get(INDEX_3).get項目ID());
+            改頁４ = iSetSortItemList.get(INDEX_3).get項目ID();
         }
         if (INDEX_4 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_4).is改頁項目()) {
-            改頁５ = to帳票物理名(iSetSortItemList.get(INDEX_4).get項目ID());
+            改頁５ = iSetSortItemList.get(INDEX_4).get項目ID();
         }
         if (INDEX_5 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_5).is改頁項目()) {
-            改頁６ = to帳票物理名(iSetSortItemList.get(INDEX_5).get項目ID());
+            改頁６ = iSetSortItemList.get(INDEX_5).get項目ID();
         }
 
         if (!改頁２.isEmpty()) {
@@ -94,47 +92,11 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
         }
     }
 
-    private RString to帳票物理名(RString 項目ID) {
-
-        RString 帳票物理名 = RString.EMPTY;
-
-        if (DBC200014ShutsuryokujunEnum.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.listUpper_2.name());
-        } else if (DBC200014ShutsuryokujunEnum.サービス提供年月.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.listUpper_3.name());
-        } else if (DBC200014ShutsuryokujunEnum.通知書番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.listUpper_1.name());
-        } else if (DBC200014ShutsuryokujunEnum.郵便番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.yubinNo.name());
-        } else if (DBC200014ShutsuryokujunEnum.町域コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.choikiCode.name());
-        } else if (DBC200014ShutsuryokujunEnum.行政区コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.gyoseikuCode.name());
-        } else if (DBC200014ShutsuryokujunEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.shimei50onKana.name());
-        }
-        return 帳票物理名;
-    }
-
     @Override
     public Breakers<KogakuKyufuTaishoshaIchiranSource> defineBreakers(
             Breakers<KogakuKyufuTaishoshaIchiranSource> breakers,
             BreakerCatalog<KogakuKyufuTaishoshaIchiranSource> catalog) {
-        return breakers.add(catalog.new SimplePageBreaker(
-
-
-            pageBreakKeys) {
-            @Override
-            public ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> occuredBreak(
-                    ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> currentRecord,
-                    ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> nextRecord,
-                    ReportDynamicChart dynamicChart) {
-                if (nextRecord == ReportLineRecord.LAST_RECORD) {
-                    return currentRecord;
-                }
-                return currentRecord;
-            }
-        }).fixed();
+        return breakers.add(new KogakuKyufuTaishoshaIchiranPageBreak(pageBreakKeys)).fixed();
     }
 
     /**

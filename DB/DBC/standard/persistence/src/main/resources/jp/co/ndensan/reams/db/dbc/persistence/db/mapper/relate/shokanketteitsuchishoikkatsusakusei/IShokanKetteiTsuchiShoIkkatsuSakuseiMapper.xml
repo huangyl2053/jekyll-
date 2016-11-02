@@ -405,8 +405,15 @@
         AND
         DbT3036ShokanHanteiKekka."shiharaiKingaku"<![CDATA[<>]]> '0' ) OR
         DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{hushikyu} )
-        AND
-        DbT3036ShokanHanteiKekka."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        <if test="isRiaruHakko">
+            AND
+            DbT3036ShokanHanteiKekka."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        </if>
+        <if test="isInshoKubun3">
+            AND(
+            DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" = ''
+            OR DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" IS NULL)
+        </if>
         <if test="chusyutuUketsukeFlag">
             AND
             DbT3034ShokanShinsei."uketsukeYMD" <![CDATA[>=]]> #{dataFrom}
@@ -861,7 +868,16 @@
             "DbT3034ShokanShinsei"."uketsukeYMD" <![CDATA[<=]]> #{dataTo}
         </if>
         WHERE
-        "DbT3036ShokanHanteiKekka"."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        1=1
+        <if test="isRiaruHakko">
+            AND
+            "DbT3036ShokanHanteiKekka"."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        </if>
+        <if test="isInshoKubun3">
+            AND(
+            "DbT3036ShokanHanteiKekka"."ketteiTsuchishoSakuseiYMD" = ''
+            OR "DbT3036ShokanHanteiKekka"."ketteiTsuchishoSakuseiYMD" IS NULL)
+        </if>
         <if test="chusyutuUketsukeFlag">
             AND
             "DbT3036ShokanHanteiKekka"."ketteiYMD" <![CDATA[>=]]> #{dataFrom}

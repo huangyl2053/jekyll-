@@ -66,9 +66,8 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
         RDate 決定日 = parameter.getKetteiYMD();
         if (決定日 != null) {
             entity.setKetteiYMD(new FlexibleDate(決定日.getYearValue(), 決定日.getMonthValue(), 決定日.getDayValue()));
-        } else {
-            entity.setKetteiYMD(null);
         }
+        entity.setKetteiTsuchishoSakuseiYMD(parameter.getHakkoYMD());
         dbT3036Writer.update(entity);
     }
 
