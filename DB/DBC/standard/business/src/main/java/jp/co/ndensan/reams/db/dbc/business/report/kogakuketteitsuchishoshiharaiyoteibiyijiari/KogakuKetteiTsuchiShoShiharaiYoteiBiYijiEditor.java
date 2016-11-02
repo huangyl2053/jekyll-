@@ -188,7 +188,10 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             source.kouzaMeigi = RString.EMPTY;
         }
 
-        source.shiharaiYoteiYMD = 年月日編集(帳票情報.get支払予定日());
+        if (支給.equals(帳票情報.get支給_不支給決定区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())
+                && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
+            source.shiharaiYoteiYMD = 年月日編集(帳票情報.get支払予定日());
+        }
         source.tsuchino = 帳票情報.get決定通知書番号();
         source.tsuban = new RString(連番);
         set通知文２(source);
