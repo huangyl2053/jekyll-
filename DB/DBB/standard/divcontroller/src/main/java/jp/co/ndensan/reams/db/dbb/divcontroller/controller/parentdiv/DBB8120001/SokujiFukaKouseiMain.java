@@ -838,6 +838,9 @@ public class SokujiFukaKouseiMain {
         }
         for (HihokenshaDaicho hihokenshaDaicho : 資格の情報リスト) {
             FlexibleDate 第1号資格取得年月日 = hihokenshaDaicho.get第1号資格取得年月日();
+            if (第1号資格取得年月日 == null || 第1号資格取得年月日.isEmpty()) {
+                continue;
+            }
             if (第1号資格取得年月日.isBeforeOrEquals(new FlexibleDate(賦課年度.toDateString().concat(四月一日)))) {
                 第1号資格取得年月日 = new FlexibleDate(賦課年度.toDateString().concat(四月一日));
             }

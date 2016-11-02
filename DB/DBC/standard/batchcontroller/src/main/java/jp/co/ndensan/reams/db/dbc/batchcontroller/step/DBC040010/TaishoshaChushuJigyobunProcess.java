@@ -1,5 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc040010.DBC040010DataUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040010.TaishoshaChushuJigyobunProcessParameter;
@@ -33,9 +35,9 @@ public class TaishoshaChushuJigyobunProcess extends BatchProcessBase<DBC040010Ta
     public static final RString OUTPUTNAME;
     private TaishoshaChushuJigyobunProcessParameter parameter;
     private DBC040010DataUtil util;
-    private RString beforeKey;
     private OutputParameter<Boolean> isデータがあり;
     private RString 市町村名;
+    private List<RString> keysOfShoriKekkaTemp;
     @BatchWriter
     private IBatchTableWriter 実績負担額データ;
     @BatchWriter
@@ -47,9 +49,9 @@ public class TaishoshaChushuJigyobunProcess extends BatchProcessBase<DBC040010Ta
 
     @Override
     protected void initialize() {
+        keysOfShoriKekkaTemp = new ArrayList<>();
         isデータがあり = new OutputParameter<>();
         isデータがあり.setValue(Boolean.FALSE);
-        beforeKey = RString.EMPTY;
         util = new DBC040010DataUtil();
         parameter.set宛名検索条件(util.get宛名検索条件());
         市町村名 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
@@ -78,12 +80,12 @@ public class TaishoshaChushuJigyobunProcess extends BatchProcessBase<DBC040010Ta
         }
         DBC040010ShoriKekkaTempEntity errorEntity
                 = util.toShoriKekkaTempEntity(result, KaigoGassan_ErrorKubun.被保険者情報取得エラー);
-        RString nowKey = util.getKeyOfShoriKekkaTemp(errorEntity);
-        if (nowKey.equals(beforeKey)) {
+        RString keyOfShoriKekkaTemp = util.getKeyOfShoriKekkaTemp(errorEntity);
+        if (keysOfShoriKekkaTemp.contains(keyOfShoriKekkaTemp)) {
             return;
         }
         処理結果リスト.insert(errorEntity);
-        beforeKey = nowKey;
+        keysOfShoriKekkaTemp.add(keyOfShoriKekkaTemp);
     }
 
 }

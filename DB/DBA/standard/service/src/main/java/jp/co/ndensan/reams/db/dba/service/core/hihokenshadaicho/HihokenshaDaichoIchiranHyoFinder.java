@@ -5,30 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.IkkatsuSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaicho.HihokenshaDaichoIchiranHyoRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IIkkatsuSakuseiMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,15 +42,12 @@ public class HihokenshaDaichoIchiranHyoFinder {
     private static final int LENGTH_50 = 50;
     private static final int LENGTH_60 = 60;
 
-    private final MapperProvider mapperProvider;
-    private IIkkatsuSakuseiMapper iIkkatsuSakuseiMapper;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac;
 
     /**
      * コンストラクタです。
      */
     public HihokenshaDaichoIchiranHyoFinder() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.被保険者台帳管理Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
     }
 
@@ -78,55 +66,65 @@ public class HihokenshaDaichoIchiranHyoFinder {
      * @param mapperProvider mapperProvider
      */
     HihokenshaDaichoIchiranHyoFinder(MapperProvider mapperProvider, DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac) {
-        this.mapperProvider = mapperProvider;
         this.被保険者台帳管理Dac = 被保険者台帳管理Dac;
     }
 
     /**
      * 被保険者台帳一覧表帳票用DataEntityを作成します。
      *
-     * @param hihokenshaList hihokenshaList
-     * @param shutsuryokujunId shutsuryokujunId
-     * @return List<HihokenshaDaichoIchiranHyoRelateEntity>
+     * @param entity entity
+     * @param uaFt200Entity uaFt200Entity
+     * @param リストNO リストNO
+     * @return HihokenshaDaichoIchiranHyoRelateEntity
      */
     @Transaction
-    public List<HihokenshaDaichoIchiranHyoRelateEntity> getChohyoIchiran(
-            Long shutsuryokujunId, List<HihokenshaDaichoSakusei> hihokenshaList) {
-        int リストNO = 0;
-        List<HihokenshaDaichoIchiranHyoRelateEntity> 被保険者台帳一覧表List = new ArrayList<>();
-
-        for (HihokenshaDaichoSakusei entity : hihokenshaList) {
-            HihokenshaDaichoIchiranHyoRelateEntity 被保険者台帳一覧表Entity = new HihokenshaDaichoIchiranHyoRelateEntity();
-            UaFt200FindShikibetsuTaishoEntity uaFt200Entity = get宛名識別対象取得(entity);
-            if (uaFt200Entity != null) {
-                IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.createKojin(uaFt200Entity);
-                被保険者台帳一覧表Entity.set年齢(get年齢(entity, 識別対象));
-                被保険者台帳一覧表Entity.set郵便番号(識別対象.to個人().get住所().get郵便番号());
-            }
-            被保険者台帳一覧表Entity.set作成日付(RDate.getNowDate());
-            被保険者台帳一覧表Entity.set市町村ID(entity.get市町村コード());
-            被保険者台帳一覧表Entity.set市町村名称(entity.get市町村名称());
-            // TODO 段站立　QA#73393
-            //被保険者台帳一覧表Entity.set並び順(RString.EMPTY);
-            //被保険者台帳一覧表Entity.set改頁(RString.EMPTY);
-            被保険者台帳一覧表Entity.set被保険者番号(entity.get被保険者番号());
-            被保険者台帳一覧表Entity.set氏名カナ(entity.get氏名カナ());
-            被保険者台帳一覧表Entity.set氏名(entity.get氏名());
-            被保険者台帳一覧表Entity.set性別(entity.get性別());
-            被保険者台帳一覧表Entity.set生年月日(entity.get生年月日());
-            被保険者台帳一覧表Entity.set行政区(get行政区(entity));
-            被保険者台帳一覧表Entity.set住所(get住所(entity));
-            被保険者台帳一覧表Entity.set識別コード(entity.get識別コード());
-            被保険者台帳一覧表Entity.set世帯コード(entity.get世帯コード());
-            被保険者台帳一覧表Entity.set状態区分(entity.get状態());
-            被保険者台帳一覧表Entity.set資格区分(get資格区分(entity));
-            被保険者台帳一覧表Entity.set生保(get生保(entity));
-            被保険者台帳一覧表Entity.set老福(get老福(entity));
-            被保険者台帳一覧表Entity.set備考(RString.EMPTY);
-            被保険者台帳一覧表Entity.setリストNO(リストNO++);
-            被保険者台帳一覧表List.add(被保険者台帳一覧表Entity);
+    public HihokenshaDaichoIchiranHyoRelateEntity getChohyoIchiran(HihokenshaDaichoSakusei entity,
+            UaFt200FindShikibetsuTaishoEntity uaFt200Entity, int リストNO) {
+        HihokenshaDaichoIchiranHyoRelateEntity 被保険者台帳一覧表Entity = new HihokenshaDaichoIchiranHyoRelateEntity();
+        if (uaFt200Entity != null) {
+            IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.createKojin(uaFt200Entity);
+            被保険者台帳一覧表Entity.set年齢(get年齢(entity, 識別対象));
+            被保険者台帳一覧表Entity.set郵便番号(識別対象.to個人().get住所().get郵便番号());
+            被保険者台帳一覧表Entity.set町域コード(get町域コード(uaFt200Entity.getChoikiCode()));
         }
-        return 被保険者台帳一覧表List;
+        被保険者台帳一覧表Entity.set作成日付(RDate.getNowDate());
+        被保険者台帳一覧表Entity.set市町村ID(entity.get市町村コード());
+        被保険者台帳一覧表Entity.set市町村名称(entity.get市町村名称());
+        被保険者台帳一覧表Entity.set被保険者番号(entity.get被保険者番号());
+        被保険者台帳一覧表Entity.set氏名カナ(entity.get氏名カナ());
+        被保険者台帳一覧表Entity.set氏名(entity.get氏名());
+        被保険者台帳一覧表Entity.set性別(entity.get性別());
+        被保険者台帳一覧表Entity.set生年月日(entity.get生年月日());
+        被保険者台帳一覧表Entity.set行政区(get行政区(entity));
+        被保険者台帳一覧表Entity.set住所(get住所(entity));
+        被保険者台帳一覧表Entity.set識別コード(entity.get識別コード());
+        被保険者台帳一覧表Entity.set世帯コード(entity.get世帯コード());
+        被保険者台帳一覧表Entity.set状態区分(entity.get状態());
+        被保険者台帳一覧表Entity.set資格区分(get資格区分(entity));
+        被保険者台帳一覧表Entity.set生保(get生保(entity));
+        被保険者台帳一覧表Entity.set老福(get老福(entity));
+        被保険者台帳一覧表Entity.set備考(RString.EMPTY);
+        被保険者台帳一覧表Entity.setリストNO(リストNO);
+        被保険者台帳一覧表Entity.set地区１(get地区(entity.get地区コード1()));
+        被保険者台帳一覧表Entity.set地区２(get地区(entity.get地区コード2()));
+        被保険者台帳一覧表Entity.set地区３(get地区(entity.get地区コード3()));
+        return 被保険者台帳一覧表Entity;
+    }
+
+    private RString get町域コード(ChoikiCode 町域コード) {
+        if (町域コード != null) {
+            return 町域コード.value();
+        }
+        return RString.EMPTY;
+
+    }
+
+    private RString get地区(ChikuCode 地区) {
+        if (地区 != null) {
+            return 地区.value();
+        }
+        return RString.EMPTY;
+
     }
 
     private RString get住所(HihokenshaDaichoSakusei entity) {
@@ -149,26 +147,6 @@ public class HihokenshaDaichoIchiranHyoFinder {
             行政区 = gyoseikuCode;
         }
         return 行政区;
-    }
-
-    @Transaction
-    private UaFt200FindShikibetsuTaishoEntity get宛名識別対象取得(HihokenshaDaichoSakusei entity) {
-        iIkkatsuSakuseiMapper = mapperProvider.create(IIkkatsuSakuseiMapper.class);
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        List<JuminShubetsu> juminShubetsu = new ArrayList<>();
-        juminShubetsu.add(JuminShubetsu.外国人);
-        juminShubetsu.add(JuminShubetsu.日本人);
-        juminShubetsu.add(JuminShubetsu.住登外個人_日本人);
-        juminShubetsu.add(JuminShubetsu.住登外個人_外国人);
-        key.set住民種別(juminShubetsu);
-        key.set識別コード(entity.get識別コード());
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        IkkatsuSakuseiMybatisParameter pram = IkkatsuSakuseiMybatisParameter.
-                createSelectByKeyParam(false, LasdecCode.EMPTY, ShikibetsuCode.EMPTY,
-                        new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
-                        RString.EMPTY);
-        return iIkkatsuSakuseiMapper.get識別対象(pram);
     }
 
     private RString get年齢(HihokenshaDaichoSakusei entity, IShikibetsuTaisho 識別対象) {
