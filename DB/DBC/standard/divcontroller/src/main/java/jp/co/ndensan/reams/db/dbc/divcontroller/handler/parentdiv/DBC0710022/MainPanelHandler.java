@@ -107,9 +107,12 @@ public final class MainPanelHandler {
         if (ShikyuFushikyuKubun.支給.getコード().equals(支給区分New)) {
 
             Decimal 支払金額合計New = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().getValue();
-            Decimal 支払金額合計Old = parameter.get支払金額合計();
+
+            Decimal 支払金額合計Old = get支払金額合計Old();
+
             if (!支払金額合計New.equals(支払金額合計Old)) {
                 return true;
+
             }
             Decimal 増減単位New = shokanbaraiketteiJohoDiv.getTxtZogentani().getValue();
             Decimal 増減単位Old = parameter.get増減単位();
@@ -129,6 +132,15 @@ public final class MainPanelHandler {
             RString fuSyikyuriyu2Old = parameter.get不支給理由２();
             return !fuSyikyuriyu2New.equals(fuSyikyuriyu2Old);
         }
+    }
+
+    private Decimal get支払金額合計Old() {
+        RDate サービス提供年月 = div.getTxtTeikyoYM().getValue();
+        RString 被保険者番号 = div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().get被保険者番号();
+        RString 整理番号 = div.getTxtSeiriNo().getValue();
+
+        JutakukaishuSikyuShinseiManager manager = JutakukaishuSikyuShinseiManager.createInstance();
+        return manager.get支払金額合計(サービス提供年月, 被保険者番号, 整理番号);
     }
 
     private boolean 増減理由チェック(RString 増減理由New, RString 増減理由Old) {
