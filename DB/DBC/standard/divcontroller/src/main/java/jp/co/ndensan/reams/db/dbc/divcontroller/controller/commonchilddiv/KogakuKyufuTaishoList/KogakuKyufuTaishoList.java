@@ -153,6 +153,48 @@ public class KogakuKyufuTaishoList {
     }
 
     /**
+     * 老齢福祉年金の取消ボタン
+     *
+     * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbRoreiFukushiNenkin(
+            KogakuKyufuTaishoListDiv div) {
+        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(false);
+        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(true);
+        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
+        return createResponse(div);
+    }
+
+    /**
+     * 利用者負担第２段階の取消ボタン
+     *
+     * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbRiyoshafutanDai2dankai(
+            KogakuKyufuTaishoListDiv div) {
+        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(true);
+        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(false);
+        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
+        return createResponse(div);
+    }
+
+    /**
+     * 激変緩和区分の取消ボタン
+     *
+     * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbGekihenkanwaKubun(
+            KogakuKyufuTaishoListDiv div) {
+        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(true);
+        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(true);
+        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(false);
+        return createResponse(div);
+    }
+
+    /**
      * 確定するタン
      *
      * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
