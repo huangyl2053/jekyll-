@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei;
 
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -41,4 +44,8 @@ public class ShisetsuNyutaishoEntity {
     private RString iryoHokenshaMeisho;
     private RString iryoHokenKigoNo;
     private RString iryoHokenShubetsuCode;
+    private RString 番地コード;
+    private DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity;
+    private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
+    private DbT1008IryohokenKanyuJokyoEntity 保険医療保険加入状況Entity;
 }

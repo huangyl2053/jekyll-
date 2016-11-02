@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.Rorei
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiLeftEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiRightEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiinJohoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiinShotokuEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionEntity;
@@ -393,11 +394,11 @@ public class HihokenshaDaichoSakuseiManager {
         List<SeikatsuHogoJukyushaDivisionEntity> 分割した生活保護受給者List = get分割した生活保護受給者リスト(
                 hihokenshaEntity.getShisetsuNyutaishoEntityList());
         List<SetaiDivisionEntity> 分割した世帯一覧情報List;
-//        if (flag) {
-        分割した世帯一覧情報List = get分割した世帯情報リスト(hihokenshaEntity.getSetaiinShotokuList());
-//        } else {
-//            分割した世帯一覧情報List = get分割した世帯一覧リスト(hihokenshaEntity.getSetaiinJohoEntityList());
-//        }
+        if (flag) {
+            分割した世帯一覧情報List = get分割した世帯情報リスト(hihokenshaEntity.getSetaiinShotokuList());
+        } else {
+            分割した世帯一覧情報List = get分割した世帯一覧リスト(hihokenshaEntity);
+        }
         int maxCount = getMaxList件数(分割した被保険者台帳管理List, 分割した老齢福祉年金受給者List,
                 分割した証交付回収List, 分割した生活保護受給者List, 分割した世帯一覧情報List);
         for (int i = 0; i < maxCount; i++) {
@@ -471,6 +472,73 @@ public class HihokenshaDaichoSakuseiManager {
             hihokenshaDaichoSakuseiList.add(hihokenshaDaichoSakuseiEntity);
         }
         return hihokenshaDaichoSakuseiList;
+    }
+
+    private List get分割した世帯一覧リスト(HihokenshaEntity hihokenshaEntity) {
+        List<SetaiinJohoEntity> setaiinJohoEntityList = hihokenshaEntity.getSetaiinJohoEntityList();
+        List<SetaiDivisionEntity> 分割した世帯情報List = new ArrayList<>();
+        SetaiDivisionEntity setaiDivisionEntity = new SetaiDivisionEntity();
+        int nocount = 0;
+        List<RString> 世帯左No = new ArrayList<>();
+        List<ShikibetsuCode> 世帯左識別コード = new ArrayList<>();
+        List<RString> 氏名 = new ArrayList<>();
+        List<RString> 世帯性別 = new ArrayList<>();
+        List<RString> 世帯生年月日 = new ArrayList<>();
+        List<RString> 世帯続柄 = new ArrayList<>();
+        List<HihokenshaNo> 世帯被保険者番号 = new ArrayList<>();
+        if (setaiinJohoEntityList == null || setaiinJohoEntityList.isEmpty()) {
+            setaiDivisionEntity.set世帯左No(世帯左No);
+            setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
+            分割した世帯情報List.add(setaiDivisionEntity);
+        } else {
+            for (SetaiinJohoEntity entity : setaiinJohoEntityList) {
+                世帯左No.add(new RString(String.valueOf(nocount + 1)));
+                世帯左識別コード.add(entity.getUaFt200Entity().getShikibetsuCode());
+                氏名.add(get氏名(entity.getUaFt200Entity().getKanjiShimei()));
+                世帯性別.add(entity.getUaFt200Entity().getSeibetsuCode());
+                世帯生年月日.add(flexRString(entity.getUaFt200Entity().getSeinengappiYMD()));
+                世帯続柄.add(entity.getUaFt200Entity().getTsuzukigara());
+                世帯被保険者番号.add(hihokenshaEntity.getHihokenshaNo());
+                if ((nocount + 1) % NOCOUNT_5 == 0) {
+                    setaiDivisionEntity.set世帯左No(世帯左No);
+                    setaiDivisionEntity.set世帯左識別コード(世帯左識別コード);
+                    setaiDivisionEntity.set氏名(氏名);
+                    setaiDivisionEntity.set世帯性別(世帯性別);
+                    setaiDivisionEntity.set世帯生年月日(世帯生年月日);
+                    setaiDivisionEntity.set世帯続柄(世帯続柄);
+                    setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
+                    分割した世帯情報List.add(setaiDivisionEntity);
+                    世帯左No = new ArrayList<>();
+                    世帯左識別コード = new ArrayList<>();
+                    氏名 = new ArrayList<>();
+                    世帯性別 = new ArrayList<>();
+                    世帯生年月日 = new ArrayList<>();
+                    世帯続柄 = new ArrayList<>();
+                    世帯被保険者番号 = new ArrayList<>();
+                    setaiDivisionEntity = new SetaiDivisionEntity();
+                } else if (setaiinJohoEntityList.size() - setaiinJohoEntityList.size() % NOCOUNT_10 < (nocount + 1)) {
+                    setaiDivisionEntity.set世帯左No(世帯左No);
+                    setaiDivisionEntity.set世帯左識別コード(世帯左識別コード);
+                    setaiDivisionEntity.set氏名(氏名);
+                    setaiDivisionEntity.set世帯性別(世帯性別);
+                    setaiDivisionEntity.set世帯生年月日(世帯生年月日);
+                    setaiDivisionEntity.set世帯続柄(世帯続柄);
+                    setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
+                }
+                nocount++;
+            }
+        }
+        if (nocount % NOCOUNT_5 != 0) {
+            分割した世帯情報List.add(setaiDivisionEntity);
+        }
+        return 分割した世帯情報List;
+    }
+
+    private RString get氏名(AtenaMeisho atenaMeisho) {
+        if (atenaMeisho != null) {
+            return atenaMeisho.value();
+        }
+        return RString.EMPTY;
     }
 
     private void set資格異動情報(HihokenshaDaichoSakuseiEntity hihokenshaDaichoSakuseiEntity,
