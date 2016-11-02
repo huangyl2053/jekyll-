@@ -130,4 +130,5 @@ public class FukushiyouguKonyuhiShikyuShinseiResult implements Serializable {
     public Decimal get購入金額合計() {
         return this.entity.get購入金額合計();
     }
+
 }
