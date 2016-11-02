@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -59,6 +60,8 @@ public class DBC170010_ServicecodeIdoRenrakuhyoOut extends BatchFlowBase<DBC1700
     private static final int INT_1 = 1;
     private static final RString SJIS類似 = new RString("SjisRuiji");
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
+    private static final RString エラーログファイル名 = new RString("errorLogFile_");
+    private static final RString ファイル_TYRPE = new RString(".csv");
 
     private int レコード件数 = 0;
     private List<SharedFileDescriptor> エントリ情報List;
@@ -131,6 +134,9 @@ public class DBC170010_ServicecodeIdoRenrakuhyoOut extends BatchFlowBase<DBC1700
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_CONVERT_TYPE), BatchTextFileConvert.CONVERTTYPE_TO);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_READ_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_LF);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_WRITE_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_CRLF);
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_ERROR_LOG_FILE_PATH),
+                出力ファイルパス.substring(0, 出力ファイルパス.lastIndexOf(File.separator) + 1)
+                .concat(エラーログファイル名.concat(YMDHMS.now().toString()).concat(ファイル_TYRPE)));
         return simpleBatch(BatchTextFileConvert.class)
                 .arguments(parameter)
                 .define();
