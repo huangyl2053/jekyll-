@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,5 +35,5 @@ public class SyokanbaraiketeJohoEntity implements Cloneable, Serializable {
     private RString tableKbn;
     private RString dekidakaKbn;
     private int updateCount;
-    private Decimal hokenKyufuritsu;
+    private HokenKyufuRitsu hokenKyufuritsu;
 }

@@ -20,6 +20,7 @@
         <result property="tableKbn" column="tableKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dekidakaKbn" column="dekidakaKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="updateCount" column="updateCount" />
+        <result property="hokenKyufuritsu" column="hokenKyufuritsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler" />
     </resultMap>
     <resultMap id="resultMap_SyokanbaraiketeJohoDekidakaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoDekidakaEntity" autoMapping="true">
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
@@ -54,6 +55,7 @@
         ,'2'               AS      tableKbn
         ,'0'               AS      dekidakaKbn
         ,DbT3048ShokanFukushiYoguHanbaihi."updateCount"
+        ,DbT3038ShokanKihon."hokenKyufuritsu"
         FROM
         rgdb."DbT3048ShokanFukushiYoguHanbaihi"  AS  DbT3048ShokanFukushiYoguHanbaihi
         INNER JOIN rgdb."DbT3038ShokanKihon"       AS  DbT3038ShokanKihon
@@ -89,6 +91,7 @@
         ,'1'               AS tableKbn
         ,'0'               AS dekidakaKbn
         ,DbT3049ShokanJutakuKaishu."updateCount"
+        ,DbT3038ShokanKihon."hokenKyufuritsu"
         FROM
         rgdb."DbT3049ShokanJutakuKaishu" AS DbT3049ShokanJutakuKaishu
         INNER JOIN rgdb."DbT7130KaigoServiceShurui" AS DbT7130KaigoServiceShurui

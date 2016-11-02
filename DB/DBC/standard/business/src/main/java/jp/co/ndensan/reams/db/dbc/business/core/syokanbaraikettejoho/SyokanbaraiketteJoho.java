@@ -152,6 +152,6 @@ public class SyokanbaraiketteJoho {
      * @return 給付率
      */
     public Decimal get給付率() {
-        return entity.getHokenKyufuritsu();
+        return entity.getHokenKyufuritsu().value();
     }
 }
