@@ -154,7 +154,7 @@ public class KyufuJissekiInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
         csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
