@@ -147,7 +147,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.taishoYM = 年月編集(帳票情報.get対象年月());
         source.kyufuShurui = 帳票情報.get給付の種類();
         source.kekka = ShikyuKubun.toValue(帳票情報.get支給_不支給決定区分()).get名称();
-        if (Decimal.ZERO.compareTo(帳票情報.get決定額()) < 0) {
+        if (Decimal.ZERO.compareTo(帳票情報.get支給金額()) <= 0) {
             source.ketteiGaku = 支給金額;
         } else {
             source.ketteiGaku = 決定額;
