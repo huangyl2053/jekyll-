@@ -62,6 +62,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -107,6 +111,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     private Association association;
     private IOutputOrder outputOrder;
     private RString 出力順;
+    private List<PersonalData> personalDataList;
 
     @BatchWriter
     private BatchReportWriter<ShiharaiHohoHenkoKanriIchiranReportSource> batchReportWrite;
@@ -114,6 +119,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
 
     @Override
     protected void initialize() {
+        personalDataList = new ArrayList<>();
         association = AssociationFinderFactory.createInstance().getAssociation();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
                 parameter.get帳票ID(), parameter.get改頁出力順ID());
@@ -159,6 +165,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             finder.writeBy(reportSourceWriter);
             count = 0;
         }
+        personalDataList.add(toPersonalData(t));
     }
 
     @Override
@@ -189,6 +196,15 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 get出力条件内容());
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+
+        AccessLogUUID reportLog = AccessLogger.logReport(personalDataList);
+        batchReportWrite.addPrivacy(reportLog);
+    }
+
+    private PersonalData toPersonalData(ShiharaiHohoHenkoHaakuFiveEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                entity.get資格情報_被保険者番号().getColumnValue());
+        return PersonalData.of(entity.get資格情報_識別コード() == null ? ShikibetsuCode.EMPTY : entity.get資格情報_識別コード(), expandedInfo);
     }
 
     private RString get出力順(IOutputOrder order) {
