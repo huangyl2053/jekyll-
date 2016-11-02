@@ -76,12 +76,14 @@ public class MainPanel {
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(被保険者番号);
 
         getHandler(div).set初期化(証明書, 整理番号, サービス年月, 給付率);
-
+        RString 元画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         if (修正.equals(画面モード)) {
+            if (画面モード_登録.equals(元画面モード)) {
+                div.getBtnShinseiJyoho().setDisabled(true);
+            }
             div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().
                     loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_修正);
         } else {
-            RString 元画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
             if (!照会.equals(元画面モード)) {
                 div.getBtnShinseiJyoho().setDisabled(true);
             } else {
