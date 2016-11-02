@@ -847,4 +847,52 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         return FLAG_直近履歴.equals(選択行.getYukoMuko())
                 && KyotakuservicekeikakuSakuseikubunCode.自己作成.get名称().equals(選択行.getKeikakuSakuseiKubun());
     }
+
+    /**
+     * 「一覧へ戻る」ボタン押下時のメソッドです。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return is項目が変更
+     */
+    public boolean is項目が変更(HihokenshaNo 被保険者番号) {
+        boolean is変更 = false;
+        is変更 = !equalsRString(KEY_0, div.getRadTodokedeKubun().getSelectedKey())
+                || div.getTxtKeikakuTekiyoStartYMD().getValue() != null
+                || div.getTxtKeikakuTekiyoEndYMD().getValue() != null
+                || div.getTxtTodokedeYM().getValue() != null
+                || div.getTxtTodokedeshaYubinNo().getValue() != null
+                || div.getTxtTodokedeshaJusho().getValue() != null;
+        if (is変更) {
+            return is変更;
+        }
+        is変更 = is事業者作成が変更(被保険者番号);
+        if (!is変更 && is自己作成の場合()) {
+            is変更 = is変更 || !equalsRString(KEY_0, div.getRadKeikakuKubun().getSelectedKey())
+                    || div.getRadKeikakuSakuseiKubun().getSelectedIndex() != 0;
+        }
+        return is変更;
+    }
+
+    private boolean is事業者作成が変更(HihokenshaNo 被保険者番号) {
+        if (!is事業者作成の場合()) {
+            return false;
+        }
+        return !equalsRString(get計画作成区分(被保険者番号), div.getRadKeikakuSakuseiKubun().getSelectedKey())
+                || div.getTxtJigyoshaNo().getValue() != null
+                || div.getTxtJigyoshaName().getValue() != null
+                || div.getTxtJigyoshaYubinNo().getValue() != null
+                || div.getTxtJigyoshaJusho().getValue() != null
+                || div.getTxtJigyoshaTelNo().getValue() != null
+                || div.getTxtItakusakiJigyoshaNo().getValue() != null
+                || div.getTxtItakusakiJigyoshaName().getValue() != null
+                || div.getTxtJigyoshaHenkoYMD().getValue() != null
+                || div.getTxtJigyoshaHenkoJiyu().getValue() != null;
+    }
+
+    private boolean equalsRString(RString rs1, RString rs2) {
+        if (rs1 == null) {
+            return rs2 == null;
+        }
+        return rs1.equals(rs2);
+    }
 }
