@@ -2527,6 +2527,7 @@
         <id  column="tmpSetaiinShotokuHanteiMeisai_hihokenshaNo"/>
         <id  column="tmpSetaiinShotokuHanteiMeisai_kijunYMD"/>
         <id  column="tmpSetaiinShotokuHanteiMeisai_setaiCode"/>
+        <id  column="tmpSetaiinShotokuHanteiMeisai_shikibetsuCode"/>
         <association property="判定明細Entity" resultMap="ResultMap_SetaiinShotokuHanteiMeisai"/>
         <association property="被保険者情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="老齢情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"/>
