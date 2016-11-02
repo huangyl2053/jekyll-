@@ -161,7 +161,7 @@ public class MainPanel {
         ShoukanFutsuKetteiJouhouTourokuParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.画面データ, ShoukanFutsuKetteiJouhouTourokuParameter.class);
         boolean flag = getHandler(div).is内容変更状態(parameter);
-        if (flag) {
+        if (flag || div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().getCount() == 0) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                         UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -181,7 +181,7 @@ public class MainPanel {
                         被保険者番号, 氏名漢字, true);
                 return ResponseData.of(div).setState(DBC0710022StateName.KanryoMessage);
             }
-        } else if (div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().getCount() > 0) {
+        } else {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
             }
