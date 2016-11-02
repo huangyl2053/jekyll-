@@ -65,6 +65,12 @@ public class PnlTotalRegister {
      * @return ResponseData
      */
     public ResponseData<PnlTotalRegisterDiv> onClick_btnSave(PnlTotalRegisterDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         PnlTotalRegisterHandler handler = getHandler(div);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         JuryoininKeiyakuJigyosha data = ViewStateHolder
