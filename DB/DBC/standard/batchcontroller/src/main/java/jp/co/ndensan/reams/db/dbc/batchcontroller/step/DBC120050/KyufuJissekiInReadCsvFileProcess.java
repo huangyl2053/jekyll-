@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
@@ -570,6 +571,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         登録H11Entity.setKohi2FutanshaNo(get非空文字列(h12CsvEntity.get公費２_負担者番号()));
         登録H11Entity.setKohi2JukyushaNo(get非空文字列(h12CsvEntity.get公費２_受給者番号()));
         登録H11Entity.setKohi3FutanshaNo(get非空文字列(h12CsvEntity.get公費３_負担者番号()));
+        登録H11Entity.setKohi3JukyushaNo(get非空文字列(h12CsvEntity.get公費３_受給者番号()));
         登録H11Entity.setUmareYMD(get非空年月日(h12CsvEntity.get生年月日()));
         登録H11Entity.setSeibetsuCode(get非空文字列(h12CsvEntity.get性別コード()));
         登録H11Entity.setYoKaigoJotaiKubunCode(get非空文字列(h12CsvEntity.get要介護状態区分コード()));
@@ -1061,8 +1063,13 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
                 beginIndex = endIndex - INDEX_4;
                 d6Entity.setMeisaiNo(d6CsvEntity.getサービスコード().getColumnValue()
                         .substringReturnAsPossible(beginIndex, endIndex));
+            } else {
+                d6Entity.setMeisaiNo(RString.EMPTY);
             }
             d6Entity.setServiceCode(d6CsvEntity.getサービスコード());
+        } else {
+            d6Entity.setMeisaiNo(RString.EMPTY);
+            d6Entity.setServiceCode(ServiceCode.EMPTY);
         }
         d6Entity.setFukushiyoguHanbaiYMD(get非空年月日(d6CsvEntity.get福祉用具販売年月日()));
         d6Entity.setFukushiyoguShohinName(get非空文字列(d6CsvEntity.get福祉用具商品名()));
@@ -1095,8 +1102,13 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
                 beginIndex = endIndex - INDEX_4;
                 d7Entity.setMeisaiNo(d7CsvEntity.getサービスコード().getColumnValue()
                         .substringReturnAsPossible(beginIndex, endIndex));
+            } else {
+                d7Entity.setMeisaiNo(RString.EMPTY);
             }
             d7Entity.setServiceCode(d7CsvEntity.getサービスコード());
+        } else {
+            d7Entity.setMeisaiNo(RString.EMPTY);
+            d7Entity.setServiceCode(ServiceCode.EMPTY);
         }
         d7Entity.setJutakuKaishuchakkoYMD(get非空年月日(d7CsvEntity.get住宅改修着工年月日()));
         d7Entity.setJutakuKaishuJigyoshaName(get非空文字列(d7CsvEntity.get住宅改修事業者名()));
