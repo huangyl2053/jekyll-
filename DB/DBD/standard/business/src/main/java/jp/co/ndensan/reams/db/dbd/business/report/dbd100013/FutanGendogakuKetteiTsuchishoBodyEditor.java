@@ -163,13 +163,13 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
             }
 
             setFutanGaku(source);
-
-            source.futanEn1 = 金額単位;
-            source.futanEn2 = 金額単位;
-            source.futanEn3 = 金額単位;
-            source.futanEn4 = 金額単位;
-            source.futanEn5 = 金額単位;
-            source.futanEn6 = 金額単位;
+            
+            source.futanEn1 = source.futanGaku1.isEmpty() ? RString.EMPTY : 金額単位;
+            source.futanEn2 = source.futanGaku2.isEmpty() ? RString.EMPTY : 金額単位;
+            source.futanEn3 = source.futanGaku3.isEmpty() ? RString.EMPTY : 金額単位;
+            source.futanEn4 = source.futanGaku4.isEmpty() ? RString.EMPTY : 金額単位;
+            source.futanEn5 = source.futanGaku5.isEmpty() ? RString.EMPTY : 金額単位;
+            source.futanEn6 = source.futanGaku6.isEmpty() ? RString.EMPTY : 金額単位;
 
             source.shoninsinai = RString.EMPTY;
             source.riyu1 = RString.EMPTY;
@@ -500,7 +500,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
             sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
         }
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
-        source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
+        source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
         // source.jusho4 = sofubutsuAtesakiSource.j;
         if (sofubutsuAtesakiSource.jushoText == null) {
             RStringBuilder jusho1 = new RStringBuilder(sofubutsuAtesakiSource.jusho1);
@@ -516,6 +516,8 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         // source.katagaki4 = RString.EMPTY;
         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
         // source.shimei3 = RString.EMPTY;
+        source.shimei1 = sofubutsuAtesakiSource.shimei1;
+        source.shimei2 = sofubutsuAtesakiSource.shimei2;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
         source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
