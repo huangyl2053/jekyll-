@@ -341,7 +341,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     private void edit認定情報について(ShiharaiHohoHenkoHaakuFiveEntity t, ShiharaiHohoHenkoEntity reportDataEntity) {
 
-        if (t.get認定情報_要介護認定状態区分コード() != null && Code.EMPTY.equals(t.get認定情報_要介護認定状態区分コード())) {
+        if (t.get認定情報_要介護認定状態区分コード() != null && !Code.EMPTY.equals(t.get認定情報_要介護認定状態区分コード())) {
             reportDataEntity.set要介護度(t.get認定情報_要介護認定状態区分コード().getColumnValue());
         }
 
