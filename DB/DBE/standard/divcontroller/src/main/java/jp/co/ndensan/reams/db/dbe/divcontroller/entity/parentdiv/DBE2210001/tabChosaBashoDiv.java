@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tabChosaBashoDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -105,23 +105,23 @@ public class tabChosaBashoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBox getTxtShichosonTokubetsuKyufu() {
-        return this.getTplZaitaku().getJutakuGaikyoChosa().getTxtShichosonTokubetsuKyufu();
+    public TextBoxMultiLine getTxtShichosonTokubetsuKyufu() {
+        return this.getTplZaitaku().getTxtShichosonTokubetsuKyufu();
     }
 
     @JsonIgnore
-    public void  setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.getTplZaitaku().getJutakuGaikyoChosa().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
+    public void  setTxtShichosonTokubetsuKyufu(TextBoxMultiLine txtShichosonTokubetsuKyufu) {
+        this.getTplZaitaku().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
     }
 
     @JsonIgnore
-    public TextBox getTxtKyufuIgaiJutakuService() {
-        return this.getTplZaitaku().getJutakuGaikyoChosa().getTxtKyufuIgaiJutakuService();
+    public TextBoxMultiLine getTxtKyufuIgaiJutakuService() {
+        return this.getTplZaitaku().getTxtKyufuIgaiJutakuService();
     }
 
     @JsonIgnore
-    public void  setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
-        this.getTplZaitaku().getJutakuGaikyoChosa().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
+    public void  setTxtKyufuIgaiJutakuService(TextBoxMultiLine txtKyufuIgaiJutakuService) {
+        this.getTplZaitaku().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
     }
 
     @JsonIgnore
