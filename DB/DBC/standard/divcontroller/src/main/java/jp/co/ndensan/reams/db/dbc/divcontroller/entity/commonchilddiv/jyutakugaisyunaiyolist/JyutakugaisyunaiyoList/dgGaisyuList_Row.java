@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakuga
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 19 10:36:15 CST 2016 
+ * Wed Nov 02 02:13:32 CST 2016 
  */
 
 
@@ -19,9 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgGaisyuList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
-    private RString txtJyotai;
     private RString txtJutakuAddress;
     private RString txtKaishuNaiyo;
     private RString txtSeiriNo;
@@ -35,7 +34,6 @@ public class dgGaisyuList_Row extends DataRow {
 
     public dgGaisyuList_Row() {
         super();
-        this.txtJyotai = RString.EMPTY;
         this.txtJutakuAddress = RString.EMPTY;
         this.txtKaishuNaiyo = RString.EMPTY;
         this.txtSeiriNo = RString.EMPTY;
@@ -46,7 +44,6 @@ public class dgGaisyuList_Row extends DataRow {
         this.txtJigyoshaNo = RString.EMPTY;
         this.txtMeseiNo = RString.EMPTY;
         this.txtRenban = RString.EMPTY;
-        this.setOriginalData("txtJyotai", txtJyotai);
         this.setOriginalData("txtJutakuAddress", txtJutakuAddress);
         this.setOriginalData("txtKaishuNaiyo", txtKaishuNaiyo);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
@@ -59,9 +56,8 @@ public class dgGaisyuList_Row extends DataRow {
         this.setOriginalData("txtRenban", txtRenban);
     }
 
-    public dgGaisyuList_Row(RString txtJyotai, RString txtJutakuAddress, RString txtKaishuNaiyo, RString txtSeiriNo, RString txtChakkoYoteibi, RString txtKanseiYoteibi, RString txtKaishuKingaku, RString txtJigyosha, RString txtJigyoshaNo, RString txtMeseiNo, RString txtRenban) {
+    public dgGaisyuList_Row(RString txtJutakuAddress, RString txtKaishuNaiyo, RString txtSeiriNo, RString txtChakkoYoteibi, RString txtKanseiYoteibi, RString txtKaishuKingaku, RString txtJigyosha, RString txtJigyoshaNo, RString txtMeseiNo, RString txtRenban) {
         super();
-        this.setOriginalData("txtJyotai", txtJyotai);
         this.setOriginalData("txtJutakuAddress", txtJutakuAddress);
         this.setOriginalData("txtKaishuNaiyo", txtKaishuNaiyo);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
@@ -72,7 +68,6 @@ public class dgGaisyuList_Row extends DataRow {
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
         this.setOriginalData("txtMeseiNo", txtMeseiNo);
         this.setOriginalData("txtRenban", txtRenban);
-        this.txtJyotai = txtJyotai;
         this.txtJutakuAddress = txtJutakuAddress;
         this.txtKaishuNaiyo = txtKaishuNaiyo;
         this.txtSeiriNo = txtSeiriNo;
@@ -83,10 +78,6 @@ public class dgGaisyuList_Row extends DataRow {
         this.txtJigyoshaNo = txtJigyoshaNo;
         this.txtMeseiNo = txtMeseiNo;
         this.txtRenban = txtRenban;
-    }
-
-    public RString getTxtJyotai() {
-        return txtJyotai;
     }
 
     public RString getTxtJutakuAddress() {
@@ -127,11 +118,6 @@ public class dgGaisyuList_Row extends DataRow {
 
     public RString getTxtRenban() {
         return txtRenban;
-    }
-
-    public void setTxtJyotai(RString txtJyotai) {
-        this.setOriginalData("txtJyotai", txtJyotai);
-        this.txtJyotai = txtJyotai;
     }
 
     public void setTxtJutakuAddress(RString txtJutakuAddress) {

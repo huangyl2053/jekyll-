@@ -191,8 +191,12 @@ public class HanyoListBatchParamHandler {
         }
         div.getChushutsuJokenPanel().getDetaShubetsu().getRadDetaShubetsu().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("データ種別")));
-        div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().setSelectedKey(
-                restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出区分")));
+
+        if (!restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出区分")).isEmpty()) {
+            div.getChushutsuJokenPanel().getChushutsuKubun().getRadChushutsuKubun().setSelectedKey(
+                    restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出区分")));
+        }
+
         RString 基準年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("基準年月"));
         RString 申請日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("申請日From"));
         RString 申請日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("申請日To"));

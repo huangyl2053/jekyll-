@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -37,8 +37,6 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
     private static final String NAME_GENGAKUHENJUNKAHOHO = "減額平準化方法";
     private static final String KEY_SHUTSURYOCHOHYO = "shutsuryokuchohyo";
     private static final String NAME_SHUTSURYOCHOHYO = "出力帳票entity";
-    private static final String KEY_SHUTSURYOTAISHO = "shutsuryokutaisho";
-    private static final String NAME_SHUTSURYOTAISHO = "出力対象";
     private static final String KEY_HAKOKI = "hakoki";
     private static final String NAME_HAKOKI = "発行日";
     private static final String KEY_BUNSHUBANGO = "bunshubango";
@@ -60,8 +58,6 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
     private RString 減額平準化方法;
     @BatchParameter(key = KEY_SHUTSURYOCHOHYO, name = NAME_SHUTSURYOCHOHYO)
     private ArrayList<OutputChohyoIchiran> 出力帳票entity;
-    @BatchParameter(key = KEY_SHUTSURYOTAISHO, name = NAME_SHUTSURYOTAISHO)
-    private RString 出力対象;
     @BatchParameter(key = KEY_HAKOKI, name = NAME_HAKOKI)
     private FlexibleDate 発行日;
     @BatchParameter(key = KEY_BUNSHUBANGO, name = NAME_BUNSHUBANGO)

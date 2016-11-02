@@ -4,19 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tabKozaJyoho のクラスファイル
- *
- * @reamsid_L DBC-0992-120 yebangqiang
+ * tabKozaJyoho のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class tabKozaJyohoDiv extends TabPanel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]

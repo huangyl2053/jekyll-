@@ -115,12 +115,15 @@ public class ShujiiHoshuShiharaiProcess extends BatchKeyBreakBase<HoshuShiharaiJ
             shiharaiEntity_bak = edit.getShujiiHoshuShiharaiEntity(getBefore(), 消費税率, get認証者(),
                     ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー),
                     shiharaiEntity_bak, shujiiIryokikanCode, false);
+            shiharaiEntity_bak.set振込予定日(dateFormat9(processParameter.getFurikomishiteiday()));
+            shiharaiEntity_bak.set対象期間(get対象期間());
             ShujiiHoshuShiharaiReport report = new ShujiiHoshuShiharaiReport(shiharaiEntity_bak);
             report.writeBy(reportSourceWriter);
         }
         shiharaiEntity = edit.getShujiiHoshuShiharaiEntity(entity, 消費税率, get認証者(),
                 ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー),
                 shiharaiEntity, shujiiIryokikanCode, true);
+        shiharaiEntity.set振込予定日(dateFormat9(processParameter.getFurikomishiteiday()));
         shiharaiEntity.set対象期間(get対象期間());
         shujiiIryokikanCode = entity.getShujiiIryoKikanCode();
     }

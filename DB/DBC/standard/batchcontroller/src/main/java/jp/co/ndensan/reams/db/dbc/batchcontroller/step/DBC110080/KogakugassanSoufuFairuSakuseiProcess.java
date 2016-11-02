@@ -627,6 +627,6 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
                 byteLenght = byteLenght + 1;
             }
         }
-        return str.substring(0, i + 1);
+        return str.substring(0, i);
     }
 }

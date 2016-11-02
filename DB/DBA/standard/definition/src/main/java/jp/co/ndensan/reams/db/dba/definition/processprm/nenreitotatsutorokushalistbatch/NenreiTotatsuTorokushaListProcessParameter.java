@@ -17,7 +17,8 @@ import lombok.Setter;
  * 年齢到達登録者リストのバッチ処理クラスのパラメータ。
  *
  * @reamsid_L DBA-0570-020 xuyannan
- * @deprecated 削除予定.{@link jp.co.ndensan.reams.db.dba.definition.processprm.dba150010.NenreiTotatsuTorokushaListProcessParameter}を利用してください。
+ * @deprecated
+ * 削除予定.{@link jp.co.ndensan.reams.db.dba.definition.processprm.dba150010.NenreiTotatsuTorokushaListProcessParameter}を利用してください。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -35,6 +36,8 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
     private Code henkoJiyu_Hihokensha;
     private List<Code> jutokuTekiyo;
     private List<Code> jutokuKaijo;
+    private RString orderBy;
+    private boolean orderByFlag;
 
     /**
      * コンストラクタ。
@@ -72,6 +75,8 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
                 soshitsuJiyu_Hihokensha,
                 henkoJiyu_Hihokensha,
                 jutokuTekiyo,
-                jutokuKaijo);
+                jutokuKaijo,
+                orderBy,
+                orderByFlag);
     }
 }

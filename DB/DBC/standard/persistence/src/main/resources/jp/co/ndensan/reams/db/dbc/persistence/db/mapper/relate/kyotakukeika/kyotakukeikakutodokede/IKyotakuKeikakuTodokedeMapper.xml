@@ -153,8 +153,8 @@
         WHERE
         "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = #{被保険者番号}
         ORDER BY
-        "DbT3005KyotakuKeikakuTodokede"."taishoYM" ASC,
-        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" ASC
+        "DbT3005KyotakuKeikakuTodokede"."taishoYM" DESC,
+        "DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" DESC
     </select>
 
     <select id="select居宅給付計画届出履歴" 

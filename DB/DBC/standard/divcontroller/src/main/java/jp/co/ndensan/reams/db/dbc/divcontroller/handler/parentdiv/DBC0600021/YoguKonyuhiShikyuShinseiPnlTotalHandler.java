@@ -184,10 +184,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         }
         List<IKoseiShichosonMaster> kilist = KijuntsukiShichosonjohoFinder.createInstance().
                 getKijuntsukiShichosonjohos(基準年月, 導入形態);
+        List<RString> keyList = new ArrayList<>();
         for (IKoseiShichosonMaster list : kilist) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(
-                    list.get証記載保険者番号().getColumnValue(), list.get市町村名称());
-            dataSourceList.add(dataSource);
+            RString 証記載保険者番号 = list.get証記載保険者番号().getColumnValue();
+            if (!keyList.contains(証記載保険者番号)) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(
+                        list.get証記載保険者番号().getColumnValue(), list.get市町村名称());
+                keyList.add(証記載保険者番号);
+                dataSourceList.add(dataSource);
+            }
         }
         return dataSourceList;
     }
@@ -1442,14 +1447,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         }
         div.getPnlButton().getBtnKetteiJoho().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getChkKokuhorenSend().setVisible(false);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
                 getGridSetting().setIsShowSelectButtonColumn(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setValue(
                 new RDate(RDate.getNowDate().getYearMonth().minusMonth(設定値).toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDataSource(
                 get保険者(new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                        getTxtTeikyoYM().getValue().getYearMonth().toString())));
+                                getTxtTeikyoYM().getValue().getYearMonth().toString())));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().clearValue();
         RString 給付率 = DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_保険給付率_標準給付率, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告);
@@ -1560,6 +1565,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
                 getTxtShohinName().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getBtnShohinmei().setDisabled(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
                 getTxtSeizoJigyosha().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
                 getTxtHanbaiJigyosha().setDisabled(true);
@@ -1629,6 +1636,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getDdlShumoku().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
                 getTxtShohinName().setDisabled(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getBtnShohinmei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
                 getTxtSeizoJigyosha().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().

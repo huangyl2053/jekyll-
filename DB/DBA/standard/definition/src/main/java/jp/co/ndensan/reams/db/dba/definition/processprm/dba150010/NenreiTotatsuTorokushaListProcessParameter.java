@@ -34,6 +34,8 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
     private Code henkoJiyu_Hihokensha;
     private List<Code> jutokuTekiyo;
     private List<Code> jutokuKaijo;
+    private RString orderBy;
+    private boolean orderByFlag;
 
     /**
      * コンストラクタ。
@@ -71,6 +73,8 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
                 soshitsuJiyu_Hihokensha,
                 henkoJiyu_Hihokensha,
                 jutokuTekiyo,
-                jutokuKaijo);
+                jutokuKaijo,
+                orderBy,
+                orderByFlag);
     }
 }

@@ -35,4 +35,5 @@ public class SyokanbaraiketeJohoDekidakaEntity implements Cloneable, Serializabl
     private Decimal dekidakaSeikyukaku;
     private Integer dekidakaSeikyugakuSagaku;
     private int updateCount;
+    private Decimal hokenKyufuritsu;
 }

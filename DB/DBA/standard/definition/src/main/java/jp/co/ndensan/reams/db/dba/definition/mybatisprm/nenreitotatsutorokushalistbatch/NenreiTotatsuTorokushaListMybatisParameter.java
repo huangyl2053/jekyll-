@@ -28,6 +28,8 @@ public class NenreiTotatsuTorokushaListMybatisParameter implements IMyBatisParam
     private final Code henkoJiyu_Hihokensha;
     private final List<Code> jutokuTekiyo;
     private final List<Code> jutokuKaijo;
+    private final RString orderBy;
+    private final boolean orderByFlag;
 
     /**
      * コンストラクタ。
@@ -40,6 +42,8 @@ public class NenreiTotatsuTorokushaListMybatisParameter implements IMyBatisParam
      * @param henkoJiyu_Hihokensha 介護資格変更事由（被保険者）
      * @param jutokuTekiyo 介護資格住特適用
      * @param jutokuKaijo 介護資格住特解除
+     * @param orderBy orderBy
+     * @param orderByFlag orderByFlag
      */
     public NenreiTotatsuTorokushaListMybatisParameter(
             RString konkaikaishiYMDHMS,
@@ -49,7 +53,9 @@ public class NenreiTotatsuTorokushaListMybatisParameter implements IMyBatisParam
             List<Code> soshitsuJiyu_Hihokensha,
             Code henkoJiyu_Hihokensha,
             List<Code> jutokuTekiyo,
-            List<Code> jutokuKaijo) {
+            List<Code> jutokuKaijo,
+            RString orderBy,
+            boolean orderByFlag) {
 
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
         this.konkaishuryoYMDHMS = konkaishuryoYMDHMS;
@@ -59,5 +65,7 @@ public class NenreiTotatsuTorokushaListMybatisParameter implements IMyBatisParam
         this.henkoJiyu_Hihokensha = henkoJiyu_Hihokensha;
         this.jutokuTekiyo = jutokuTekiyo;
         this.jutokuKaijo = jutokuKaijo;
+        this.orderBy = orderBy;
+        this.orderByFlag = orderByFlag;
     }
 }

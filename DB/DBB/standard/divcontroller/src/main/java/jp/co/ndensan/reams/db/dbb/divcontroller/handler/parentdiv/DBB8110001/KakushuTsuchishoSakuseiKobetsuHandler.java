@@ -277,14 +277,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * @param 賦課年度 FlexibleYear
      * @param 発行する帳票リスト List<RString>
      * @param 調定日時List List<YMDHMS>
+     * @param is初期状態 boolean
      * @return 帳票略称Map
      */
     public Map<RString, RString> put発行する帳票リスト(FukaJoho 賦課の情報,
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             List<RString> 発行する帳票リスト,
-            List<YMDHMS> 調定日時List) {
-        return set通知書作成パネル(発行する帳票リスト, 調定年度, 賦課年度, 調定日時List);
+            List<YMDHMS> 調定日時List,
+            boolean is初期状態) {
+        return set通知書作成パネル(発行する帳票リスト, 調定年度, 賦課年度, 調定日時List, is初期状態);
     }
 
     private void set調定パネルの共通エリア(FukaJoho 賦課の情報) {
@@ -1055,7 +1057,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private Map<RString, RString> set通知書作成パネル(List<RString> 発行する帳票リスト,
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
-            List<YMDHMS> 調定日時List) {
+            List<YMDHMS> 調定日時List,
+            boolean is初期状態) {
         List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
         dgChohyoSentaku_Row row;
         boolean 特徴開始通知書Flag = false;
@@ -1100,7 +1103,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             if (is調定事由(帳票)) {
                 調定事由Flag = true;
             }
-            if (is決定通知書と変更通知書(帳票リスト, 帳票略称)) {
+            if ((is初期状態 && is決定通知書と変更通知書(帳票リスト, 帳票略称))
+                    || (!is初期状態 && !(((変更通知書.equals(帳票略称) || 変更兼特別徴収中止通知書.equals(帳票略称))
+                    && div.getChkPublishHenkoTsuchiKobetsu().getSelectedKeys().isEmpty())
+                    || (決定通知書.equals(帳票略称) && div.getChkPublishKetteiTsuchiKobetsu().getSelectedKeys().isEmpty())))) {
                 row.setTxtChohyoSentaku(帳票略称);
                 rowList.add(row);
                 帳票リスト.add(帳票略称);

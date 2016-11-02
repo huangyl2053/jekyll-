@@ -287,18 +287,30 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
         if (Encode.UTF_8.equals(processParameter.get文字コード()) && レコード件数合計 != INT_0) {
             入力ファイルパス = getResult(
                     RString.class, new RString(送付ファイル作成), KogakugassanSoufuFairuSakuseiProcess.INPUT_PATH);
-            File file出力 = new File(出力ファイルパス.toString());
-            file出力.delete();
-            executeStep(文字コード変換);
-            File file入力 = new File(入力ファイルパス.toString());
-            file入力.delete();
+            File file = new File(出力ファイルパス.toString());
+            if ((file.exists() && file.delete()) || !file.exists()) {
+                executeStep(文字コード変換);
+            }
+            deleteTmpFile(入力ファイルパス);
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
-                FilesystemName.fromString(出力ファイルパス.substring(出力ファイルパス.lastIndexOf(File.separator) + INT_1)));
-        sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(出力ファイルパス), opts);
-        エントリ情報List.add(sfd);
+        if (レコード件数合計 != INT_0) {
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                    FilesystemName.fromString(出力ファイルパス.substring(出力ファイルパス.lastIndexOf(File.separator) + INT_1)));
+            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(出力ファイルパス), opts);
+            エントリ情報List.add(sfd);
+        }
+    }
+
+    private void deleteTmpFile(RString path) {
+        if (RString.isNullOrEmpty(path)) {
+            return;
+        }
+        File file = new File(path.toString());
+        if (file.exists()) {
+            file.getAbsoluteFile().deleteOnExit();
+        }
     }
 
 }

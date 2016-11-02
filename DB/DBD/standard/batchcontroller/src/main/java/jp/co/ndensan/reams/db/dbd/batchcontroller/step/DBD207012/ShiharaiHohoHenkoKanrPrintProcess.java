@@ -76,7 +76,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     private ShiharaiHohoHenkoKanrFiveProcessParameter parameter;
 
-    private static final ReportIdDBD REPORT_DBD200007 = ReportIdDBD.DBD200006;
+    private static final ReportIdDBD REPORT_DBD200007 = ReportIdDBD.DBD200007;
 
     private static final RString 選択あり = new RString("0");
     private static final RString SELECTED_VALUE_0 = new RString("0");
@@ -498,10 +498,10 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
                 設定項目 = 設定項目.concat(より).concat(item.get項目名());
             }
         }
-        if (!設定項目.isEmpty()) {
-            設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
+        if (!RString.EMPTY.equals(設定項目)) {
+            result.add(バッチ出力条件出力順.concat(設定項目));
         }
-        result.add(バッチ出力条件出力順.concat(設定項目));
+
         return result;
     }
 

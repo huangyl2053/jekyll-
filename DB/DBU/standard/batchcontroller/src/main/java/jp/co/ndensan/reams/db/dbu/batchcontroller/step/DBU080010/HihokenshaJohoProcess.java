@@ -110,9 +110,9 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
         tempEntity.setTeikyoNaiyo02(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         tempEntity.setMisetteiJiyu02(RString.EMPTY);
-        tempEntity.setTeikyoNaiyo03(entity.getShikakuShutokuYMD().wareki().toDateString());
+        tempEntity.setTeikyoNaiyo03(get日付(entity.getShikakuShutokuYMD()));
         tempEntity.setMisetteiJiyu03(RString.EMPTY);
-        tempEntity.setTeikyoNaiyo04(entity.getShikakuSoshitsuYMD().wareki().toDateString());
+        tempEntity.setTeikyoNaiyo04(get日付(entity.getShikakuSoshitsuYMD()));
         tempEntity.setMisetteiJiyu04(get未設定事由(entity.getShikakuSoshitsuYMD()));
         tempEntity.setTeikyoNaiyo05(get資格異動事由コード(entity));
         tempEntity.setMisetteiJiyu05(RString.EMPTY);
@@ -262,4 +262,10 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
         return RString.EMPTY;
     }
 
+    private RString get日付(FlexibleDate 日付) {
+        if (日付 != null && !日付.isEmpty()) {
+            return 日付.wareki().toDateString();
+        }
+        return RString.EMPTY;
+    }
 }

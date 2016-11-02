@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -33,6 +32,7 @@ public class JyutakugaisyunaiyoListValidationHandler {
     private static final RString CHAKOBI = new RString("着工日");
     private static final RString KANSEIBI = new RString("完成日");
     private static final RString KAISHUKENGAKU = new RString("改修金額");
+    private static final RString モード_修正 = new RString("修正");
     private final JyutakugaisyunaiyoListDiv div;
 
     /**
@@ -64,14 +64,10 @@ public class JyutakugaisyunaiyoListValidationHandler {
             return validPairs;
         }
         List<dgGaisyuList_Row> rowList = div.getDgGaisyuList().getDataSource();
-        if (rowList != null && rowList.isEmpty()) {
-            for (dgGaisyuList_Row row : rowList) {
-                if (!row.getRowState().equals(RowState.Deleted)
-                        && row.getTxtJutakuAddress().equals(div.getTxtJyusyo().getValue())) {
-                    validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                            DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
-                }
-            }
+        if (((rowList.size() == 1 && !モード_修正.equals(div.getPnlNyuryokuArea().getState()))
+                || (rowList.size() > 1)) && !rowList.get(0).getTxtJutakuAddress().equals(div.getTxtJyusyo().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
         }
         return validPairs;
     }

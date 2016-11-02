@@ -59,7 +59,7 @@ public class ShujiiHoshuShiharaiEditor implements IShujiiHoshuShiharaiEditor {
         source.tsuchibun1 = item.get通知文1();
         source.taishoKikan = item.get対象期間();
         source.gokei = kinngakuFormat(item.get合計金額());
-        source.furikomiyoteiYMD = (item.get振込予定日() == null ? RString.EMPTY : new RString(item.get振込予定日().toString()));
+        source.furikomiyoteiYMD = item.get振込予定日();
         source.shubetsu = item.get種別();
         source.bango = item.get番号();
         source.kinyukikan = item.get金融機関();

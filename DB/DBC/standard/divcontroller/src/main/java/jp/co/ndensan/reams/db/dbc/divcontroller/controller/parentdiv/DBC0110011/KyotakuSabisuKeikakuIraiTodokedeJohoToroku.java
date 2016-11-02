@@ -22,13 +22,21 @@ import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryS
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.servicechushutsukbn.ServiceChushutsuKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -38,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -58,6 +67,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
     private static final RString 自己作成届出完了メッセージ
             = new RString("「居宅サービス自己作成届出の登録が完了しました。」");
     private static final int NUM_1 = 1;
+    private static final int NUM_6 = 6;
+    private static final int NUM_10 = 10;
 
     /**
      * 画面の初期化メソッドです。
@@ -67,8 +78,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      */
     public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onLoad(
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
-        if (ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).respond();
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.検索結果一覧).respond();
         }
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         TaishoshaKey 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -79,6 +90,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             return ResponseData.of(div).addMessage(
                     DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
         }
+
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
         if (!handler.can前排他(被保険者番号.getColumnValue())) {
             throw new PessimisticLockingException();
@@ -94,6 +106,72 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         return getResponseData(div);
+    }
+
+    /**
+     * 事業者コードLostFocusする時のメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onBlur_txtJigyoshaNo(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        if (div.getTxtJigyoshaNo().getValue().length() != NUM_10) {
+            return ResponseData.of(div).respond();
+        }
+        SearchResult<ServiceJigyoshaInputGuide> jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
+                JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
+                                div.getTxtJigyoshaNo().getValue()),
+                        FlexibleDate.EMPTY,
+                        FlexibleDate.EMPTY,
+                        AtenaMeisho.EMPTY,
+                        YubinNo.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        FlexibleDate.getNowDate(),
+                        RString.EMPTY,
+                        0));
+
+        if (!jigyosha.records().isEmpty()) {
+            div.getTxtJigyoshaName().setValue(jigyosha.records().get(0).get事業者番号().value());
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 委託先事業者コードLostFocusする時のメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onBlur_txtItakusakiJigyoshaNo(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        if (div.getTxtItakusakiJigyoshaNo().getValue().length() != NUM_10) {
+            return ResponseData.of(div).respond();
+        }
+        SearchResult<ServiceJigyoshaInputGuide> jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
+                JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
+                                div.getTxtItakusakiJigyoshaNo().getValue()),
+                        FlexibleDate.EMPTY,
+                        FlexibleDate.EMPTY,
+                        AtenaMeisho.EMPTY,
+                        YubinNo.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        FlexibleDate.getNowDate(),
+                        RString.EMPTY,
+                        0));
+
+        if (!jigyosha.records().isEmpty()) {
+            div.getTxtItakusakiJigyoshaName().setValue(jigyosha.records().get(0).get事業者番号().value());
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -183,6 +261,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         サービス種類.add(ServiceCategoryShurui.居宅支援.getコード());
         サービス種類.add(ServiceCategoryShurui.地小短外.getコード());
         mode.setサービス種類(サービス種類);
+        mode.setJigyoshaNo(new jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo(div.getTxtJigyoshaNo().getValue()));
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
     }
@@ -203,6 +282,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         サービス種類.add(ServiceCategoryShurui.予防支援.getコード());
         サービス種類.add(ServiceCategoryShurui.地予小外.getコード());
         mode.setサービス種類(サービス種類);
+        mode.setJigyoshaNo(new jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo(div.getTxtJigyoshaNo().getValue()));
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
     }
@@ -385,9 +465,12 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
                 KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         boolean is項目が変更 = Boolean.FALSE;
-        if (居宅給付計画届出 != null) {
-            is項目が変更 = handler.is項目が変更(居宅給付計画届出);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        if (居宅給付計画届出 == null) {
+            居宅給付計画届出 = new KyotakuKeikakuTodokede(被保険者番号, new FlexibleYearMonth(
+                    RDate.getNowDate().toDateString().substring(0, NUM_6)), 0);
         }
+        is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         if (is項目が変更 && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
