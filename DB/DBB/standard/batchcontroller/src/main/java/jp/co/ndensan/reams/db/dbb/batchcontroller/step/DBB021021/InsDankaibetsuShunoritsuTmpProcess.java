@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu.InsDankaibetsuShunoritsuTmpProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuTempEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoKanriEntity;
@@ -130,7 +129,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setChoteiNendo(new FlexibleYear(収納管理Entity.getChoteiNendo().toDateString()));
         entity.setFukaNendo(new FlexibleYear(収納管理Entity.getKazeiNendo().toDateString()));
         entity.setKibetsu(収納管理Entity.getKibetsu());
-        entity.setTsuchishoNo(new TsuchishoNo(収納管理Entity.getTsuchishoNo().toString()));
+        entity.setTsuchishoNo(収納管理Entity.getTsuchishoNo());
         if ((広域保険者.equals(parameter.get広域判定区分())
                 || 単一市町村分.equals(parameter.get広域判定区分()))
                 && 市町村コード != null
