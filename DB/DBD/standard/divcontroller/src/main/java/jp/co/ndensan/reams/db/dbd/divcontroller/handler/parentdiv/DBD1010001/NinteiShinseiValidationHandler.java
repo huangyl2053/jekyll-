@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDivSpec;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -117,6 +120,25 @@ public class NinteiShinseiValidationHandler {
                 .thenAdd(NinteiShinseiValidationMessages.減免減額_適用期間重複).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().
                 add(NinteiShinseiValidationMessages.減免減額_適用期間重複, div.getDgShinseiList()).build().check(messages));
+        return pairs;
+    }
+    
+    /**
+     *  承認情報を確定するボタン押下時、減免減額_適用期間重複チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div DBD1030001Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 減免減額_適用期間重複のチェックon確定(ValidationMessageControlPairs pairs, FutangendogakuShinseiDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(FutangendogakuShinseiDivSpec.減免減額_適用期間重複のチェックon確定)
+                .thenAdd(NinteiShinseiValidationMessages.減免減額_適用期間重複).messages());
+        List<ViewControl> controls = new ArrayList<>();
+        controls.add(div.getTxtTekiyoYMD());
+        controls.add(div.getTxtYukoKigenYMD());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NinteiShinseiValidationMessages.減免減額_適用期間重複, controls).build().check(messages));
         return pairs;
     }
 

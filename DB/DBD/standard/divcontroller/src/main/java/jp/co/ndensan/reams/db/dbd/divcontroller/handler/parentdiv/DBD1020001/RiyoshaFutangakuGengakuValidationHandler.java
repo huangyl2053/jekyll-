@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDivSpec;
@@ -16,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -233,6 +236,26 @@ public class RiyoshaFutangakuGengakuValidationHandler {
                 NoInputMessages.減免減額_適用期間重複, div.getRiyoshaFutangakuGengakuShinseiList().getDdlShinseiIchiran()).build().check(messages));
         return pairs;
     }
+    
+        /**
+     *  承認情報を確定するボタン押下時、減免減額_適用期間重複チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div DBD1030001Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 減免減額_適用期間重複のチェックon確定(ValidationMessageControlPairs pairs, RiyoshaFutangakuGengakuPanelDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(RiyoshaFutangakuGengakuPanelDivSpec.減免減額_適用期間重複のチェックon確定)
+                .thenAdd(NoInputMessages.減免減額_適用期間重複).messages());
+        List<ViewControl> controls = new ArrayList<>();
+        controls.add(div.getTxtTekiyoYmd());
+        controls.add(div.getTxtYukoKigenYmd());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.減免減額_適用期間重複, controls).build().check(messages));
+        return pairs;
+    }
+    
 
     private static enum NoInputMessages implements IValidationMessage {
 

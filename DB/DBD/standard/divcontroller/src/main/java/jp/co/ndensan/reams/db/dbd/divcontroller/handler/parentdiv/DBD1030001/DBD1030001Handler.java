@@ -1442,17 +1442,17 @@ public class DBD1030001Handler {
     public void onCLick_chkTokureiTaisho() {
         List<RString> selectKeys = div.getChkTokureiTaisho().getSelectedKeys();
         if (selectKeys.isEmpty() || selectKeys.size() != 1) {
-            div.getChkKyotakuServiceGentei().setDisabled(true);
-            div.getChkKyojuhiShokuhiGentei().setDisabled(true);
-            div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(true);
+            div.getChkKyotakuServiceGentei().setDisabled(false);
+            div.getChkKyojuhiShokuhiGentei().setDisabled(false);
+            div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(false);
+        } else {
             List<RString> selectedKeys = new ArrayList<>();
             div.getChkKyotakuServiceGentei().setSelectedItemsByKey(selectedKeys);
             div.getChkKyojuhiShokuhiGentei().setSelectedItemsByKey(selectedKeys);
             div.getChkKyusochiUnitGataJunKoshitsu().setSelectedItemsByKey(selectedKeys); 
-        } else {
-            div.getChkKyotakuServiceGentei().setDisabled(false);
-            div.getChkKyojuhiShokuhiGentei().setDisabled(false);
-            div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(false);
+            div.getChkKyotakuServiceGentei().setDisabled(true);
+            div.getChkKyojuhiShokuhiGentei().setDisabled(true);
+            div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(true);
         } 
     }
     

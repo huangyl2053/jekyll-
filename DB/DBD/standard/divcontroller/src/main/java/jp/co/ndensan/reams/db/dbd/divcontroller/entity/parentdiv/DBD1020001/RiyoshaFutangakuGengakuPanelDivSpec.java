@@ -253,5 +253,24 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
                     }
                     return true;
                 }
-            }
+            },
+    減免減額_適用期間重複のチェックon確定 {
+                /**
+                 * 承認情報確認するボタン押下時、減免減額_適用期間重複のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not減免減額_適用期間重複です、false:減免減額_適用期間重複です。
+                 */
+                @Override
+                public boolean apply(RiyoshaFutangakuGengakuPanelDiv div) {
+                    List<ddlShinseiIchiran_Row> rows = div.getDdlShinseiIchiran().getDataSource();
+                    for (ddlShinseiIchiran_Row row : rows) {
+                        if (div.getTxtKettaiYmd().getValue().isBeforeOrEquals(row.getTxtYukoKigen().getValue()) 
+                                && div.getTxtYukoKigenYmd().getValue().isAfterOrEquals(row.getTxtTekiyoYMD().getValue())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+    };
 }

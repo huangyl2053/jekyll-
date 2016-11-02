@@ -157,5 +157,22 @@
         <association property="介護保険負担限度額認定Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"/>
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
+    
+    <select id = "get非課税年金勘案額" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500" resultOrdered = "true">
+        SELECT					
+        SUM(TO_NUMBER(A.dtkingaku1,'99999999999')) AS SUM_dtkingaku1			
+        FROM
+        (SELECT				
+        dtkingaku1,			
+        ROW_NUMBER() OVER (PARTITION BY dtnenkinhokenshacode,genkisonenkinno,SUBSTR(dtnenkincode,1,3) ORDER BY dtsakuseiymd DESC) AS 最大順			
+        FROM				
+        rgdb."DbT4037HikazeNenkinTaishosha" AS 非課税年金対象者			
+        WHERE				
+        hihokenshano = #{被保険者番号}			
+        AND dttaishoy = #{対象年}			
+        ) AS A				
+        WHERE					
+        A.最大順=1;
+    </select>
 
 </mapper>

@@ -185,6 +185,25 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                     return true;
                 }
 
-            };
-
+            },
+    
+        減免減額_適用期間重複のチェックon確定 {
+                /**
+                 * 承認情報確認するボタン押下時、減免減額_適用期間重複のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not減免減額_適用期間重複です、false:減免減額_適用期間重複です。
+                 */
+                @Override
+                public boolean apply(FutangendogakuShinseiDiv div) {
+                    List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+                    for (dgShinseiList_Row row : rows) {
+                        if (div.getTxtTekiyoYMD().getValue().isBeforeOrEquals(row.getTxtYukoKigenYMD().getValue()) 
+                                && div.getTxtYukoKigenYMD().getValue().isAfterOrEquals(row.getTxtTekiyoYMD().getValue())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+    };
 }

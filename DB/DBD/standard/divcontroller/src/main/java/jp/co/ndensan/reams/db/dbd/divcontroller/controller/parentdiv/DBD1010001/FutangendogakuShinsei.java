@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
@@ -78,12 +79,15 @@ public class FutangendogakuShinsei {
             div.getBtnDispShisetsuJoho().setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(共通エリア_保存する, true);
             データなし = false;
+        } else {
+            if (承認メニューID.equals(ResponseHolder.getMenuID())) {
+                データなし = FutangendogakuNinteiService.createInstance().canBe利用者(被保険者番号, FlexibleDate.getNowDate());
+            }
         }
-
         if (!ResponseHolder.isReRequest() && !データなし) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
-
+       
         div.setHihokenshaNo(被保険者番号.getColumnValue());
         List<FutanGendogakuNintei> 申請一覧情報 = getHandler(div).get申請一覧情報(被保険者番号);
         ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);
@@ -344,15 +348,19 @@ public class FutangendogakuShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        NinteiShinseiValidationHandler validationHandler = getValidationHandler();
         if (!KEY1.equals(div.getRadKetteiKubun().getSelectedKey())) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            NinteiShinseiValidationHandler validationHandler = getValidationHandler();
             pairs = validationHandler.負担限度額認定_適用開始日が法施行以前チェック(pairs, div);
             pairs = validationHandler.負担限度額認定_適用終了日が年度外チェック(pairs, div);
             pairs = validationHandler.負担限度額認定_適用終了日が開始日以前チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
+        }
+        RString メニューID = ResponseHolder.getMenuID();
+        if (!申請メニューID.equals(メニューID)) {
+            validationHandler.減免減額_適用期間重複のチェックon確定(pairs, div);
         }
 
         ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);

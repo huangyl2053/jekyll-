@@ -400,8 +400,12 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getCcdShinseiJoho().set減免減額申請情報(減免減額申請共有子Divの設定(joho), 申請日);
         div.getRadKetteiKubun().setSelectedKey(決定区分RadInx);
         div.getTxtKettaiYmd().setValue(決定日);
-        div.getTxtTekiyoYmd().setValue(適用日);
-        div.getTxtYukoKigenYmd().setValue(有効期限);
+        if (適用日.isEmpty()) {
+            get有効期限By適用日();
+        } else {
+            div.getTxtTekiyoYmd().setValue(適用日);
+            div.getTxtYukoKigenYmd().setValue(有効期限);
+        }
         div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
 
         if (旧措置有無) {

@@ -363,6 +363,12 @@ public class DBD1030001 {
             if (KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
                 validationHandler.承認情報相関チェック１(pairs, div);
             }
+            
+            RString メニューID = ResponseHolder.getMenuID();
+            if (!申請メニューID.equals(メニューID)) {
+                validationHandler.減免減額_適用期間重複のチェックon確定(pairs, div);
+            }
+            
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }

@@ -851,9 +851,29 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getRadKetteiKubun().setSelectedKey(
                 KetteiKubun.承認する.getコード().equals(futanGendogakuNintei.get決定区分()) ? SELECT_KEY0 : SELECT_KEY1);
         onChange_radKetteiKubun(false, 資格対象者);
-        div.getTxtKetteiYMD().setValue(futanGendogakuNintei.get決定年月日());
-        div.getTxtTekiyoYMD().setValue(futanGendogakuNintei.get適用開始年月日());
-        div.getTxtYukoKigenYMD().setValue(futanGendogakuNintei.get適用終了年月日());
+        
+        FlexibleDate 決定年月日 = futanGendogakuNintei.get決定年月日().isEmpty() ? FlexibleDate.getNowDate() : futanGendogakuNintei.get決定年月日();
+        FlexibleDate 適用開始年月日 = futanGendogakuNintei.get適用開始年月日();
+        FlexibleDate 有効期限 = futanGendogakuNintei.get適用終了年月日();
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        if (適用開始年月日.isEmpty()) {
+            if (rows.isEmpty()) {
+                適用開始年月日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
+                    RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+            } else {
+                適用開始年月日 = new FlexibleDate(rows.get(0).getTxtYukoKigenYMD().
+                    getValue().plusDay(1).toString());
+            }
+        } 
+        
+        if (有効期限.isEmpty()) {
+            有効期限 = FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue());
+        }
+        
+        div.getTxtKetteiYMD().setValue(決定年月日);
+        div.getTxtTekiyoYMD().setValue(適用開始年月日);
+        div.getTxtYukoKigenYMD().setValue(有効期限);
+        
         init旧措置DDL();
         div.getDdlKyusochisha().setSelectedKey(futanGendogakuNintei.get旧措置者区分());
         init負担段階DDL();
@@ -931,9 +951,9 @@ public class FutangendogakuNinteiShinseiHandler {
                 SELECT_KEY0.equals(div.getRadHaigushaKazeiKubun().getSelectedKey())
                 ? HaigushaKazeiKubun.課税.getコード() : HaigushaKazeiKubun.非課税.getコード());
         if (div.getChkYochokinKijunIka().getSelectedKeys().isEmpty()) {
-            builder.set預貯金申告区分(YochokinShinkokuKubun.以下.getコード());
-        } else {
             builder.set預貯金申告区分(YochokinShinkokuKubun.超過.getコード());
+        } else {
+            builder.set預貯金申告区分(YochokinShinkokuKubun.以下.getコード());
         }
         builder.set預貯金額(div.getTxtYochokinGaku().getValue());
         builder.set有価証券評価概算額(div.getTxtYukaShoken().getValue());
@@ -945,7 +965,6 @@ public class FutangendogakuNinteiShinseiHandler {
         }
         builder.set決定年月日(div.getTxtKetteiYMD().getValue());
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
-            builder.set決定区分(RString.EMPTY);
             builder.set決定年月日(FlexibleDate.EMPTY);
         }
         builder.set適用開始年月日(div.getTxtTekiyoYMD().getValue());
@@ -1457,7 +1476,7 @@ public class FutangendogakuNinteiShinseiHandler {
         FutanGendogakuNinteiBuilder builder = toFgn.createBuilderForEdit();
         builder.set申請年月日(formFgn.get申請年月日());
         builder.set申請理由区分(formFgn.get申請理由区分());
-        builder.set配偶者の有無(formFgn.is配偶者の有無());
+        builder.set配偶者の有無(formFgn.is配偶者の有無() == true ? true : false);
         builder.set配偶者識別コード(formFgn.get配偶者識別コード() == null ? ShikibetsuCode.EMPTY : formFgn.get配偶者識別コード());
         builder.set配偶者氏名カナ(formFgn.get配偶者氏名カナ() == null ? AtenaKanaMeisho.EMPTY : formFgn.get配偶者氏名カナ());
         builder.set配偶者氏名(formFgn.get配偶者氏名() == null ? AtenaMeisho.EMPTY : formFgn.get配偶者氏名());
@@ -1525,11 +1544,25 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getRadKetteiKubun().setSelectedKey(SELECT_KEY0);
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
             div.getTxtKetteiYMD().clearValue();
+            div.getTxtTekiyoYMD().clearValue();
+            div.getTxtYukoKigenYMD().clearValue();
         } else {
             div.getTxtKetteiYMD().setValue(FlexibleDate.getNowDate());
+            FlexibleDate 適用日;
+            List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+            if (rows.isEmpty()) {
+                適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
+                    RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+            } else {
+                適用日 = new FlexibleDate(rows.get(0).getTxtYukoKigenYMD().
+                    getValue().plusDay(1).toString());
+            }
+            div.getTxtTekiyoYMD().setValue(適用日);
+            FlexibleDate 有効期限 = FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue());
+            div.getTxtYukoKigenYMD().setValue(有効期限);
+            
         }
-        div.getTxtTekiyoYMD().clearValue();
-        div.getTxtYukoKigenYMD().clearValue();
+        
         init旧措置DDL();
         FutangendogakuNinteiService ninteiService = FutangendogakuNinteiService.createInstance();
         if (!申請メニューID.equals(ResponseHolder.getMenuID())
