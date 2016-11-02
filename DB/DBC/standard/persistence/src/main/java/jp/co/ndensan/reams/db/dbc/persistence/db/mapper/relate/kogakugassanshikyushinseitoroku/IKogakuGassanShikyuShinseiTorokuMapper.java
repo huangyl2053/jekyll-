@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinse
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinseitoroku.ShinseishoJohoSearchParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3069KogakuGassanShinseishoKanyurekiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshinseisho.KogakuGassanShinseishoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
@@ -36,6 +37,14 @@ public interface IKogakuGassanShikyuShinseiTorokuMapper {
      * @return KogakuGassanShinseisho
      */
     List<DbT3068KogakuGassanShinseishoEntity> select申請書情報(ShinseishoJohoSearchParameter parameter);
+
+    /**
+     * 高額合算申請書を取得する。
+     *
+     * @param parameter Map<String, Object>
+     * @return List<KogakuGassanShinseishoRelateEntity>
+     */
+    List<KogakuGassanShinseishoRelateEntity> select高額合算申請書(Map<String, Object> parameter);
 
     /**
      * 被保険者名を取得する。
