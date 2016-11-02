@@ -365,7 +365,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).readOnly福祉用具購入費明細(false);
+        getHandler(div).readOnly福祉用具購入費明細(true);
         dgSeikyuDetail_Row row;
         if (処理モード登録.equals(モード)) {
             row = new dgSeikyuDetail_Row();
