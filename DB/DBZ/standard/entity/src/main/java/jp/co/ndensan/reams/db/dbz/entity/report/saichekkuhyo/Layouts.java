@@ -27,7 +27,23 @@ public enum Layouts {
     /**
      * レイアウト四件目
      */
-    空白ページ(4);
+    四頁目(4),
+    /**
+     * レイアウト五件目
+     */
+    五頁目(5),
+    /**
+     * レイアウト六件目
+     */
+    六頁目(6),
+    /**
+     * レイアウト七件目
+     */
+    七頁目(7),
+    /**
+     * レイアウト四件目
+     */
+    空白ページ(8);
     private final int formGroupIndex;
 
     private Layouts(int formGroupIndex) {

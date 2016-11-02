@@ -508,7 +508,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         } else {
             is項目が変更 = handler.is項目が変更(被保険者番号);
         }
-        is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         if (is項目が変更 && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
