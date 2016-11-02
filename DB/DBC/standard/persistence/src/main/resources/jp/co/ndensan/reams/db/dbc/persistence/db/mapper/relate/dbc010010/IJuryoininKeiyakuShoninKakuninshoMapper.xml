@@ -31,7 +31,7 @@
             AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<=]]> #{契約決定日終了}
             AND  (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" <![CDATA[<>]]> ''
                  AND 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_ketteiYMD" is not null)
-              <if test="is発行済">
+             <if test="is発行済">
                  AND (
                      (償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" = ''
                       or 償還受領委任契約者."dbT3078ShokanJuryoininKeiyakusha_shoninKekkaTsuchiSakuseiYMD" is null)
@@ -42,10 +42,11 @@
                      )
                   )
             </if>
-                <if test="改頁出力順 != null">
+             and 被保険者台帳管理NEWEST. "shikibetsuCode" is not null
+             <if test="改頁出力順 != null">
                  ORDER BY
                   ${改頁出力順}
-                </if>
+             </if>
        )
        SELECT 
            master.*,
