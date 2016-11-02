@@ -26,6 +26,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
     private FlexibleYear 終了調定年度;
     private FlexibleYear 開始賦課年度;
     private FlexibleYear 終了賦課年度;
+    private FlexibleYear 会計年度;
     private FlexibleYearMonth 基準年月;
     private FlexibleDate 開始生年月日;
     private FlexibleDate 終了生年月日;
@@ -33,6 +34,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
     private RString 広域判定区分;
     private List<RString> 選択対象リスト;
     private List<RString> 科目コードリスト;
+    private boolean is未納分出力区分;
 
     private RString schema;
 
@@ -43,6 +45,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
      * @param 終了調定年度 終了調定年度
      * @param 開始賦課年度 開始賦課年度
      * @param 終了賦課年度 終了賦課年度
+     * @param 会計年度 会計年度
      * @param 基準年月 基準年月
      * @param 開始生年月日 開始生年月日
      * @param 終了生年月日 終了生年月日
@@ -50,18 +53,21 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
      * @param 選択対象区分 選択対象区分
      * @param 選択対象リスト 選択対象リスト
      * @param 科目コードリスト 科目コードリスト
+     * @param is未納分出力区分 is未納分出力区分
      */
     public InsDankaibetsuShunoritsuTmpMybatisParamter(FlexibleYear 開始調定年度,
             FlexibleYear 終了調定年度,
             FlexibleYear 開始賦課年度,
             FlexibleYear 終了賦課年度,
+            FlexibleYear 会計年度,
             FlexibleYearMonth 基準年月,
             FlexibleDate 開始生年月日,
             FlexibleDate 終了生年月日,
             RString 広域判定区分,
             RString 選択対象区分,
             List<RString> 選択対象リスト,
-            List<RString> 科目コードリスト) {
+            List<RString> 科目コードリスト,
+            boolean is未納分出力区分) {
         this.開始調定年度 = 開始調定年度;
         this.終了調定年度 = 終了調定年度;
         this.開始賦課年度 = 開始賦課年度;
