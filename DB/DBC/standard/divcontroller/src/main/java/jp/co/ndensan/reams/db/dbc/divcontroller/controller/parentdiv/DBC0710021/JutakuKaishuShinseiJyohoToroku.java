@@ -426,10 +426,10 @@ public class JutakuKaishuShinseiJyohoToroku {
      */
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnCancel(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
-        if (画面モード_照会.equals(ResponseHolder.getState())) {
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (画面モード.equals(ResponseHolder.getState())) {
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
         }
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());

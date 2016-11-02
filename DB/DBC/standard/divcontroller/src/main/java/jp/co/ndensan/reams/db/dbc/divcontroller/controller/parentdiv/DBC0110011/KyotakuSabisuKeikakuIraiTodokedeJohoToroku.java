@@ -147,6 +147,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         if (!jigyosha.records().isEmpty()) {
             AtenaMeisho 事業者名称 = jigyosha.records().get(0).get事業者名称();
             div.getTxtJigyoshaName().setValue(事業者名称 == null ? RString.EMPTY : 事業者名称.value());
+        } else {
+            div.getTxtJigyoshaName().setValue(RString.EMPTY);
         }
         return getResponseData(div);
     }
@@ -183,6 +185,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         if (!jigyosha.records().isEmpty()) {
             AtenaMeisho 事業者名称 = jigyosha.records().get(0).get事業者名称();
             div.getTxtItakusakiJigyoshaName().setValue(事業者名称 == null ? RString.EMPTY : 事業者名称.value());
+        } else {
+            div.getTxtItakusakiJigyoshaName().setValue(RString.EMPTY);
         }
         return getResponseData(div);
     }

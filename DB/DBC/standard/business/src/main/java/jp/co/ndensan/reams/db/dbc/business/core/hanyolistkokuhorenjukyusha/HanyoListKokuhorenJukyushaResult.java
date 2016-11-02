@@ -27,8 +27,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkokuhorenjukyusha.Ha
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistkokuhorenjukyusha.HanyoListKokuhorenJukyushaAriEUCEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistkokuhorenjukyusha.HanyoListKokuhorenJukyushaNashiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -768,7 +768,7 @@ public class HanyoListKokuhorenJukyushaResult {
         if (RString.isNullOrEmpty(要介護状態区分コード)) {
             return RString.EMPTY;
         }
-        return YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), 要介護状態区分コード).getName();
+        return YokaigoJotaiKubun.toValue(要介護状態区分コード).get名称();
     }
 
     private RString setみなし更新認定(RString みなし更新認定コード) {
@@ -847,10 +847,15 @@ public class HanyoListKokuhorenJukyushaResult {
     private RString set日付編集(RString value) {
         RString 日付 = RString.EMPTY;
         if (processParameter.is日付編集() && !RString.isNullOrEmpty(value)) {
+            日付 = value;
             if (value.length() == LENGTH) {
-                日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                if (FlexibleYearMonth.canConvert(value)) {
+                    日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                }
             } else {
-                日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                if (FlexibleDate.canConvert(value)) {
+                    日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                }
             }
         }
         return 日付;

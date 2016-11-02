@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -629,5 +630,19 @@ public class JutakukaishuSikyuShinseiManager {
             }
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * get支払金額合計のチェックメソッドです。
+     *
+     * @param サービス提供年月 サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param 整理番号 整理番号
+     * @return 支払金額合計
+     */
+    public Decimal get支払金額合計(RDate サービス提供年月, RString 被保険者番号, RString 整理番号) {
+        DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(
+                new HihokenshaNo(被保険者番号), new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()), 整理番号);
+        return entity == null ? Decimal.ZERO : entity.getShiharaiKingaku();
     }
 }
