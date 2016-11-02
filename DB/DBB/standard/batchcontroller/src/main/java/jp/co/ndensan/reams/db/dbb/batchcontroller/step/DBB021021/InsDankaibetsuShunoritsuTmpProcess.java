@@ -56,6 +56,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
     private static final int INT_0 = 0;
 
     private ShunoKamokuFinder shunoKamokuManager;
+    private boolean is未納分出力区分;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 保険料段階別収納率一時tableWriter;
@@ -63,11 +64,12 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
     @Override
     protected void initialize() {
         shunoKamokuManager = ShunoKamokuFinder.createInstance();
+        is未納分出力区分 = parameter.get出力区分().contains(完納出力区分_出力しない);
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_ID, parameter.toMybatisParamter(get検索用科目リスト()));
+        return new BatchDbReader(MYBATIS_ID, parameter.toMybatisParamter(get検索用科目リスト(), is未納分出力区分));
     }
 
     @Override
