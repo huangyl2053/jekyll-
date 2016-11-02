@@ -290,7 +290,7 @@ public class GenNendoHonsanteiIdouFath {
     public void calculateTokuchoIraikin4gatsuKaishi(FlexibleYear 調定年度, YMDHMS 調定日時) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         mapper.createDbT2002FukaJohoTemp();
-        
+
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
         kozaBuilder.set業務コード(GyomuCode.DB介護保険);
         kozaBuilder.set用途区分(new KozaYotoKubunCodeValue(用途区分コード));
@@ -335,6 +335,7 @@ public class GenNendoHonsanteiIdouFath {
             input.set現在特徴期(INT_1);
             GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
             set業務コンフィグ情報(業務コンフィグ情報, 調定年度);
+            input.set業務コンフィグ情報(業務コンフィグ情報);
             TokuchoKarisanteiKiwariOutput output = 特徴仮算定期割クラス.getTokuchoKarisanteiKibetsuGaku(input);
             List<Decimal> 特徴期別金額 = new ArrayList<>();
             特徴期別金額.add(output.get特徴期別額().get(0));
