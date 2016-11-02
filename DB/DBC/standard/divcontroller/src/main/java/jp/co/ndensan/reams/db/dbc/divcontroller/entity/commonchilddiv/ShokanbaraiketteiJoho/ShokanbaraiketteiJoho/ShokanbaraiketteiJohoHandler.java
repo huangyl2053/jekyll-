@@ -188,16 +188,12 @@ public class ShokanbaraiketteiJohoHandler {
 
     private void set決定情報(KetteJoho 決定情報, RString 支給区分) {
 
-        if (決定情報 != null && 決定情報.getShiharaiKingaku() == null) {
+        if (決定情報 != null) {
             if (支給区分_不支給.equals(支給区分)) {
                 div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
             } else {
                 div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
             }
-        } else if (決定情報 != null && 決定情報.getShiharaiKingaku() != null) {
-            div.getTxtShiharaikingakugoke().setValue(new Decimal(決定情報.getShiharaiKingaku()));
-        } else {
-            div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
         }
 
         if (支給区分_支給.equals(支給区分)) {
