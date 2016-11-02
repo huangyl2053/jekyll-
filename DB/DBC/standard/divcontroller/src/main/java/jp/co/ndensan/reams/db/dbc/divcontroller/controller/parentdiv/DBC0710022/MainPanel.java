@@ -181,7 +181,7 @@ public class MainPanel {
                         被保険者番号, 氏名漢字, true);
                 return ResponseData.of(div).setState(DBC0710022StateName.KanryoMessage);
             }
-        } else {
+        } else if (div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().getCount() > 0) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
             }
