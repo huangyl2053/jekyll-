@@ -331,12 +331,12 @@
         *
         FROM
         "koseitaishoKyuhuzissekiJohoTemp" AS K1
-        <if test="出力順 == '1'" >
+        <if test="出力順 == 1" >
             ORDER BY
             K1."年度", K1."被保険者番号", K1."サービス提供年月", K1."事業所番号", K1."整理番号", K1."サービス種類コード"
         </if>
         
-        <if test="出力順 == '2'" >
+        <if test="出力順 == 2" >
             ORDER BY
             K1."被保険者番号", K1."年度", K1."サービス提供年月", K1."事業所番号", K1."整理番号", K1."サービス種類コード"
         </if>
