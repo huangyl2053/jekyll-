@@ -299,8 +299,12 @@ public class NushiJuminJoho {
             return ResponseData.of(div).respond();
         }
         RString 編集した識別コード = RString.EMPTY;
+        List<ShikibetsuCode> 識別コードリスト = new ArrayList<>();
         for (ShotokuKanri entity : entityList) {
-            編集した識別コード = 編集した識別コード.concat(entity.getEntity().getShikibetsuCode().value()).concat(区切);
+            if (!識別コードリスト.contains(entity.getEntity().getShikibetsuCode())) {
+                編集した識別コード = 編集した識別コード.concat(entity.getEntity().getShikibetsuCode().value()).concat(区切);
+                識別コードリスト.add(entity.getEntity().getShikibetsuCode());
+            }
         }
         編集した識別コード = 編集した識別コード.substring(整数_0, 編集した識別コード.length() - 整数_1);
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
