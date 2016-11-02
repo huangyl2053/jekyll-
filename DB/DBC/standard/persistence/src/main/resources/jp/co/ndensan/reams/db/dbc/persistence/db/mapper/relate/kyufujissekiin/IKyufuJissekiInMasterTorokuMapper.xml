@@ -188,7 +188,7 @@
     </delete>
     
     <delete id="delete給付実績高額介護サービス費byPK" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity">
-        DELETE FROM rgdb."DbT3017KyufujissekiKihon" 
+        DELETE FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" 
         WHERE "kokanJohoShikibetsuNo" = #{kokanJohoShikibetsuNo} 
         AND "inputShikibetsuNo" = #{inputShikibetsuNo}
         AND "recodeShubetsuCode" = #{recodeShubetsuCode}
