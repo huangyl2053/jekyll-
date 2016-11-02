@@ -72,6 +72,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
         this.終了調定年度 = 終了調定年度;
         this.開始賦課年度 = 開始賦課年度;
         this.終了賦課年度 = 終了賦課年度;
+        this.会計年度 = 会計年度;
         this.基準年月 = 基準年月;
         this.開始生年月日 = 開始生年月日;
         this.終了生年月日 = 終了生年月日;
@@ -79,5 +80,6 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
         this.選択対象区分 = 選択対象区分;
         this.選択対象リスト = 選択対象リスト;
         this.科目コードリスト = 科目コードリスト;
+        this.is未納分出力区分 = is未納分出力区分;
     }
 }
