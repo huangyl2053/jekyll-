@@ -138,6 +138,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @Override
     protected void initialize() {
+        outputPageCount = new OutputParameter<>();
         if (parameter.get支払方法().getコード().equals(Furikomi_ShihraiHohoShitei.口座.getコード())) {
             項目名 = ChohyoSeigyoHanyoKomokuMei.帳票タイトル_口座.get名称();
         } else {
@@ -299,11 +300,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @Override
     protected void afterExecute() {
-        if (batchReportWriter_明細一覧表 != null) {
-            outputPageCount.setValue(new RString(batchReportWriter_明細一覧表.getCount()));
-        } else {
-            outputPageCount.setValue(new RString("0"));
-        }
+        outputPageCount.setValue(new RString(batchReportWriter_明細一覧表.getCount()));
 
         if (parameter.get処理区分().getコード().equals(処理区分3)) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();

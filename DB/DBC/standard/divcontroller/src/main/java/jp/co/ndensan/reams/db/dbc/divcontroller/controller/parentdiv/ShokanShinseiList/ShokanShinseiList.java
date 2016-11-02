@@ -14,8 +14,10 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinse
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -129,7 +131,9 @@ public class ShokanShinseiList {
                             serviceYMFrom,
                             serviceYMTo);
         }
-
+        if (shokandhinseiichiran == null || shokandhinseiichiran.records().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
         getHandler(requestDiv).initialize(mode, shokandhinseiichiran);
 
         return ResponseData.of(requestDiv)

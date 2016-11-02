@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.seikyushinsashuseitoroku;
 
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
@@ -26,7 +25,7 @@ public final class SeikyuShinsaShuseiTorokuMapperParameter {
     private final boolean 事業者番号フラグ;
     private final boolean 理由書作成年月フラグ;
     private final RString 事業者番号;
-    private final RDate 請求情報作成年月;
+    private final RString 請求情報作成年月;
     private static final RString DBCMNE_1004 = new RString("DBCMNE1004");
     private static final RString DBCMNE_1005 = new RString("DBCMNE1005");
 
@@ -38,7 +37,7 @@ public final class SeikyuShinsaShuseiTorokuMapperParameter {
             boolean is事業者番号フラグ,
             boolean is理由書作成年月フラグ,
             RString 事業者番号,
-            RDate 請求情報作成年月) {
+            RString 請求情報作成年月) {
         this.チェックオンフラグ = isチェックオンフラグ;
         this.チェックオフフラグ = isチェックオフフラグ;
         this.メニューID_1004 = isメニューID_1004;
@@ -59,7 +58,7 @@ public final class SeikyuShinsaShuseiTorokuMapperParameter {
      */
     public static SeikyuShinsaShuseiTorokuMapperParameter createSelectByKeyParam(
             RString 事業者番号,
-            RDate 請求情報作成年月,
+            RString 請求情報作成年月,
             boolean checkFlag) {
         boolean チェックオンフラグ = false;
         boolean チェックオフフラグ = false;
@@ -70,7 +69,7 @@ public final class SeikyuShinsaShuseiTorokuMapperParameter {
         if (事業者番号 != null && !事業者番号.isEmpty()) {
             事業者番号フラグ = true;
         }
-        if (請求情報作成年月 != null && !請求情報作成年月.toDateString().isEmpty()) {
+        if (!RString.isNullOrEmpty(請求情報作成年月)) {
             理由書作成年月フラグ = true;
         }
         if (checkFlag) {

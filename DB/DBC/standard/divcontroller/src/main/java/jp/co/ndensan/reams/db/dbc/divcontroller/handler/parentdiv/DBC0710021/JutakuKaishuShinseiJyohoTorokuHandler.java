@@ -1265,6 +1265,12 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     .set支払方法区分コード(支払方法区分コード).set支払場所(支払場所).set支払期間開始年月日(支払期間開始年月日)
                     .set支払期間終了年月日(支払期間終了年月日).set支払窓口開始時間(支払窓口開始時間)
                     .set支払窓口終了時間(支払窓口終了時間).set口座ID(口座ID).set受領委任契約番号(受領委任契約番号);
+            dbt3034Builder.set支払金額合計(div.getJutakuKaishuShinseiResetInfo().getTxtHiyoTotalNow().getValue())
+                    .set保険対象費用額(div.getJutakuKaishuShinseiResetInfo().getTxtHokenTaishoHiyoNow().getValue());
+            Decimal 保険給付額 = div.getJutakuKaishuShinseiResetInfo().getTxtHokenKyufuAmountNow().getValue();
+            if (保険給付額 != null) {
+                dbt3034Builder.set保険給付額(保険給付額.intValue());
+            }
             ShokanShukeiBuilder dbt3053Builder = dbt3053.createBuilderForEdit().set請求額(
                     div.getJutakuKaishuShinseiResetInfo()
                     .getTxtHokenKyufuAmountNow().getValue());
