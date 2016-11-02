@@ -309,7 +309,7 @@ public class JiGyoSyaHandler {
             div.getOtherTokureiShisetsu().setDisplayNone(true);
             div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null
                     ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
-            div.getKennsakuJyokenn().getTxtJIgyoshaNo().setValue(mode.getJigyoshaNo().value());
+            div.getKennsakuJyokenn().getTxtJIgyoshaNo().setValue(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value());
             search_GunshiCode(mode);
         }
 
