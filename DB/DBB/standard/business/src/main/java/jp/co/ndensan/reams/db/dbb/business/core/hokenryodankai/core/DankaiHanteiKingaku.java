@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -24,10 +27,13 @@ class DankaiHanteiKingaku implements IHanteiHoho {
 
     @Override
     public boolean matches(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-
-        Decimal gokeiKingaku = hokenryoDankaiHanteiParameter.getFukaKonkyo().getGokeiShotoku()
-                .add(hokenryoDankaiHanteiParameter.getFukaKonkyo().getKotekiNenkinShunyu());
-
+        Decimal gokeiKingaku;
+        if (isKasei(hokenryoDankaiHanteiParameter)) {
+            gokeiKingaku = hokenryoDankaiHanteiParameter.getFukaKonkyo().getGokeiShotoku();
+        } else {
+            gokeiKingaku = hokenryoDankaiHanteiParameter.getFukaKonkyo().getGokeiShotoku()
+                    .add(hokenryoDankaiHanteiParameter.getFukaKonkyo().getKotekiNenkinShunyu());
+        }
         if (getJogen().compareTo(new Decimal(-1)) == 0) {
             return (0 <= gokeiKingaku.compareTo(getKagen()));
         } else {
@@ -35,6 +41,15 @@ class DankaiHanteiKingaku implements IHanteiHoho {
             return (0 <= gokeiKingaku.compareTo(getKagen()) && gokeiKingaku.compareTo(getJogen()) <= 0);
         }
 
+    }
+
+    private Boolean isKasei(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
+        for (KazeiKubunHonninKubun kazeiKubunHonninKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
+            if (HonninKubun.本人 == kazeiKubunHonninKubun.get本人区分()) {
+                return KazeiKubun.課税 == kazeiKubunHonninKubun.get課税区分();
+            }
+        }
+        return false;
     }
 
     /**
