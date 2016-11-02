@@ -208,9 +208,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         dataSourceList.add(dataSourceBlank);
         List<UzT0007CodeEntity> costlist = CodeMaster.getCode(
                 SubGyomuCode.DBC介護給付, DBCCodeShubetsu.福祉用具購入費の種目.getコード(), FlexibleDate.getNowDate());
+        List<RString> keyList = new ArrayList<>();
         for (UzT0007CodeEntity list : costlist) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(list.getコード().value(), list.getコード名称());
-            dataSourceList.add(dataSource);
+            final RString key = list.getコード().value();
+            if (!keyList.contains(key)) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(key, list.getコード名称());
+                dataSourceList.add(dataSource);
+                keyList.add(key);
+            }
         }
         return dataSourceList;
     }
@@ -1425,9 +1430,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(BLANK, RString.EMPTY);
         dataSourceList.add(dataSourceBlank);
+        List<RString> keyList = new ArrayList<>();
         for (ShinseishaKubun 申請者区分 : ShinseishaKubun.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(申請者区分.getコード(), 申請者区分.get名称());
-            dataSourceList.add(dataSource);
+            final RString key = 申請者区分.getコード();
+            if (!keyList.contains(key)) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(key, 申請者区分.get名称());
+                dataSourceList.add(dataSource);
+                keyList.add(key);
+            }
         }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getDdlShinseisyakubun().
                 setDataSource(dataSourceList);

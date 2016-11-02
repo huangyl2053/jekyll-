@@ -123,7 +123,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         PnlTotalParameter param = new PnlTotalParameter(被保険者番号,
                 サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        ViewStateHolder.put(ViewStateKeys.検索キー, param);
+        ViewStateHolder.put(ViewStateKeys.契約番号検索キー, param);
         return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.修正).respond();
     }
 
