@@ -54,6 +54,7 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
     @Override
     protected void initialize() {
         RString 新規異動区分 = processParameter.get新規異動区分();
+        特定個人情報名コード = processParameter.get特定個人情報名コード();
         TokuteiKojinJohoHanKanri 特定個人情報版管理 = TokuteiKojinJohoTeikyoManager.createInstance()
                 .get版番号(新規異動区分, 特定個人情報名コード,
                         DataSetNo._0101被保険者情報.getコード(), FlexibleDate.getNowDate()).get(0);

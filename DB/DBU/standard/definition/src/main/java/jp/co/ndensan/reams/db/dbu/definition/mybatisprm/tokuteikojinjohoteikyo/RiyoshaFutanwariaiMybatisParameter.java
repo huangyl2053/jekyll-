@@ -111,17 +111,24 @@ public final class RiyoshaFutanwariaiMybatisParameter implements IMyBatisParamet
     /**
      * 提供対象者のMybatisParameterを生成します。
      *
+     * @param 新規異動区分 新規異動区分
      * @param 宛名 宛名
      * @param 提供基本情報中間テーブル名 提供基本情報中間テーブル名
      * @return RiyoshaFutanwariaiMybatisParameter
      */
-    public static RiyoshaFutanwariaiMybatisParameter createParamter提供対象者(RString 宛名,
+    public static RiyoshaFutanwariaiMybatisParameter createParamter提供対象者(
+            RString 新規異動区分,
+            RString 宛名,
             RString 提供基本情報中間テーブル名) {
+        boolean is異動 = false;
+        if (ShinkiIdoKubun.異動.getコード().equals(新規異動区分)) {
+            is異動 = true;
+        }
         return new RiyoshaFutanwariaiMybatisParameter(
                 RString.EMPTY,
                 false,
                 false,
-                false,
+                is異動,
                 RDateTime.MAX,
                 RDateTime.MAX,
                 RString.EMPTY,
