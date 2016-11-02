@@ -49,7 +49,7 @@
 		AND "DbT3096JutakuKaishuRiyushoTesuryoShukei"."riyushoSakuseiJigyoshaNo" = #{事業者番号}
                 </if>
                 <if test="理由書作成年月フラグ">
-		AND substring("DbT3096JutakuKaishuRiyushoTesuryoShukei"."seikyuJohoSakuseiYMD" from 0 for 7) = #{請求情報作成年月}
+		AND substring("DbT3096JutakuKaishuRiyushoTesuryoShukei"."seikyuJohoSakuseiYMD" from 1 for 6) = #{請求情報作成年月}
                 </if>
                 <if test="メニューID_1004">
 		AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" IS NULL 
