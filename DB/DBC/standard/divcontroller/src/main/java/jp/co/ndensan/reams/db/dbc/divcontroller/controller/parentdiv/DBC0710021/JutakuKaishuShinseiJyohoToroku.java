@@ -479,12 +479,14 @@ public class JutakuKaishuShinseiJyohoToroku {
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
             handler.保険者ドロップダウンリストを再セット(画面提供着工年月);
         }
+
         if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
-                && (old提供着工年月 != null && 画面提供着工年月 != null
-                && old提供着工年月.getYear().getYearValue() != 画面提供着工年月.getYear().getYearValue())) {
+                && 画面提供着工年月 != null
+                && (old提供着工年月 == null
+                || old提供着工年月.getYear().getYearValue() != 画面提供着工年月.getYear().getYearValue())) {
             div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
                     SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
-                    new FlexibleYear(old提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
+                    new FlexibleYear(画面提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         }
 
         if (div.getTxtTeikyoYM().getValue() != null) {
