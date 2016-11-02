@@ -113,7 +113,7 @@ public final class MainPanelHandler {
             }
             Decimal 増減単位New = shokanbaraiketteiJohoDiv.getTxtZogentani().getValue();
             Decimal 増減単位Old = parameter.get増減単位();
-            if ((増減単位New != null && 増減単位New.equals(増減単位Old)) || (増減単位New == null && 増減単位Old == null)) {
+            if ((増減単位New != null && !増減単位New.equals(増減単位Old))) {
                 return true;
             }
             RString 増減理由New = shokanbaraiketteiJohoDiv.getTxtZogenriyu().getValue();
