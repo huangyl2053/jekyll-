@@ -111,6 +111,7 @@ public class ShokanbaraiketteiJohoHandler {
             div.getRdoShikyukubun().setDisabled(false);
             div.getRdoShikyukubun().setSelectedKey(支給区分_支給);
             div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
+            div.getTxtZogentani().setValue(Decimal.ZERO);
         } else {
             支給区分 = 決定情報.getShikyuHushikyuKetteiKubun();
             if (RString.isNullOrEmpty(支給区分)) {
