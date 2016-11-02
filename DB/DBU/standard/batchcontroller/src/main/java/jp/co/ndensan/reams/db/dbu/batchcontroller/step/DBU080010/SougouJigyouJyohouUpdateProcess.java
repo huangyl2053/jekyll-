@@ -45,7 +45,7 @@ public class SougouJigyouJyohouUpdateProcess extends BatchProcessBase<TeyikyouTa
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "ISougouJigyouJyohouMapper.get提供対象者");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
+    private static final RString 転義符 = new RString("\"");
     private SougouJigyouJyohouProcessParameter processParameter;
     private SougouJigyouJyohouMybatisParameter mybatisParameter;
     @BatchWriter
@@ -77,6 +77,7 @@ public class SougouJigyouJyohouUpdateProcess extends BatchProcessBase<TeyikyouTa
                 RString.EMPTY,
                 RDateTime.MAX, RDateTime.MAX,
                 RString.EMPTY,
+                転義符.concat(processParameter.get提供基本情報中間テーブル名()).concat(転義符),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParameter);
     }
@@ -84,7 +85,7 @@ public class SougouJigyouJyohouUpdateProcess extends BatchProcessBase<TeyikyouTa
     @Override
     protected void createWriter() {
         dbT7301EntityWriter = new BatchPermanentTableWriter(DbT7301TokuteiKojinJohoHanKanriEntity.class);
-        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
+        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(processParameter.get提供基本情報中間テーブル名(),
                 TeikyoKihonJohoNNTempEntity.class);
     }
 
