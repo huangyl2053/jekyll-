@@ -344,10 +344,10 @@ public class ShokanbaraiketteiJohoHandler {
             row.getShiharaiKingaku().setValue(Decimal.ZERO);
         } else if (単位金額.compareTo(残上限金額) < 0) {
             保険対象費用額 = 単位金額;
-            row.getShiharaiKingaku().setValue(new Decimal(単位金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).intValue()));
+            row.getShiharaiKingaku().setValue(単位金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundHalfUpTo(0));
         } else {
             保険対象費用額 = 残上限金額;
-            row.getShiharaiKingaku().setValue(new Decimal(残上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).intValue()));
+            row.getShiharaiKingaku().setValue(残上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundHalfUpTo(0));
         }
         return 保険対象費用額;
     }
