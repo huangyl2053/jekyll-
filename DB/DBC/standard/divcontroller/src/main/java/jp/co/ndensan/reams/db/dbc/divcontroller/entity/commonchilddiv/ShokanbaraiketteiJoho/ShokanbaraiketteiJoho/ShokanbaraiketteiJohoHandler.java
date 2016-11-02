@@ -140,6 +140,7 @@ public class ShokanbaraiketteiJohoHandler {
         Decimal 差額支払金額合計 = Decimal.ZERO;
         Decimal 支払金額合計 = Decimal.ZERO;
         Decimal 残上限金額 = 上限金額;
+        Decimal 保険対象費用額;
         for (SyokanbaraiketteJoho syokanbaraiketteJoho : 償還払決定一覧情報) {
             dgSyokanbaraikete_Row row = new dgSyokanbaraikete_Row();
             row.setNo(syokanbaraiketteJoho.getServiceCode().isEmpty() ? RString.EMPTY : new RString(index.toString()));
@@ -153,8 +154,8 @@ public class ShokanbaraiketteiJohoHandler {
             } else {
                 row.getTaniKingaku().setValue(Decimal.ZERO);
             }
-            set支払金額(syokanbaraiketteJoho, 残上限金額, row, gyomuKbn);
-            残上限金額 = 残上限金額.subtract(syokanbaraiketteJoho.getKounyuKingaku());
+            保険対象費用額 = set支払金額(syokanbaraiketteJoho, 残上限金額, row, gyomuKbn);
+            残上限金額 = 残上限金額.subtract(保険対象費用額);
             if (syokanbaraiketteJoho.getSagakuKingaku() != null) {
                 row.getSagakuKingaku().setValue(new Decimal(syokanbaraiketteJoho.getSagakuKingaku()));
             } else {
@@ -320,26 +321,28 @@ public class ShokanbaraiketteiJohoHandler {
         }
     }
 
-    private void set支払金額(SyokanbaraiketteJoho syokanbaraiketteJoho,
+    private Decimal set支払金額(SyokanbaraiketteJoho syokanbaraiketteJoho,
             Decimal 残上限金額, dgSyokanbaraikete_Row row, RString mode) {
-        Decimal 単位金額 = syokanbaraiketteJoho.getShiharaiKingaku();
-        if (単位金額 == null) {
-            単位金額 = Decimal.ZERO;
+        Decimal 単位金額 = Decimal.ZERO;
+        if (syokanbaraiketteJoho.getKounyuKingaku() != null) {
+            単位金額 = new Decimal(syokanbaraiketteJoho.getKounyuKingaku());
         }
+        Decimal 保険対象費用額 = Decimal.ZERO;
         if (GYOKUKBN_償還払い費.equals(mode)) {
             if (syokanbaraiketteJoho.getShiharaiKingaku() != null) {
                 row.getShiharaiKingaku().setValue(syokanbaraiketteJoho.getShiharaiKingaku());
             } else {
                 row.getShiharaiKingaku().setValue(Decimal.ZERO);
             }
+        } else if (残上限金額.compareTo(Decimal.ZERO) <= 0 || syokanbaraiketteJoho.get給付率() == null) {
+            row.getShiharaiKingaku().setValue(Decimal.ZERO);
+        } else if (単位金額.compareTo(残上限金額) < 0) {
+            保険対象費用額 = 単位金額;
+            row.getShiharaiKingaku().setValue(new Decimal(単位金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).intValue()));
         } else {
-            if (残上限金額.compareTo(Decimal.ZERO) <= 0 || syokanbaraiketteJoho.get給付率() == null) {
-                row.getShiharaiKingaku().setValue(Decimal.ZERO);
-            } else if (単位金額.compareTo(残上限金額) < 0) {
-                row.getShiharaiKingaku().setValue(new Decimal(単位金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).intValue()));
-            } else {
-                row.getShiharaiKingaku().setValue(new Decimal(残上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).intValue()));
-            }
+            保険対象費用額 = 残上限金額;
+            row.getShiharaiKingaku().setValue(new Decimal(残上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).intValue()));
         }
+        return 保険対象費用額;
     }
 }
