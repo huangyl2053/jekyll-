@@ -37,6 +37,7 @@ public class HonsanteiFukaKeisanTotal {
     private static final RString 本算定通知書作成_帳票グループコード = new RString("DBB0310003");
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
+    private static final RString 本算定通知書作成 = new RString("本算定通知書作成");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -75,7 +76,9 @@ public class HonsanteiFukaKeisanTotal {
             div.getHonsanteiChohyoHakko2().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 本算定通知書作成_帳票グループコード);
         }
         getKanendoFukaKakuteiHandler(div).set帳票作成個別情報(期, 算定期, 遷移元区分, new FlexibleYear(年度));
-
+        if (本算定通知書作成メニュー.equals(ResponseHolder.getMenuID())) {
+            return ResponseData.of(div).rootTitle(本算定通知書作成).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

@@ -174,24 +174,10 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-        RString nowBreakKey = entity.get被保険者番号().value();
 
-        if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
-            preBreakKey = nowBreakKey;
-
-            preEntity = entity;
-            return;
-        }
-        if (!preBreakKey.equals(nowBreakKey)) {
-
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
-            連番 = 連番.add(Decimal.ONE);
-            personalDataList.add(toPersonalData(preEntity));
-            lstKinyuKikanEntity.clear();
-
-        }
-        preBreakKey = nowBreakKey;
-        preEntity = entity;
+        eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
+        連番 = 連番.add(Decimal.ONE);
+        personalDataList.add(toPersonalData(preEntity));
     }
 
     @Override

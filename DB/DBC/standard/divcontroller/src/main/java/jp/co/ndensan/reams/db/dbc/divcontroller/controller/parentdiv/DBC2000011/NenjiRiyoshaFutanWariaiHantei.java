@@ -56,8 +56,15 @@ public class NenjiRiyoshaFutanWariaiHantei {
             throw new ApplicationException(DbcErrorMessages.年次判定処理不可.getMessage());
 
         }
-        RYear 年次負担割合処理済年度 = new RYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
-                SubGyomuCode.DBC介護給付));
+        RString configValue = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
+                SubGyomuCode.DBC介護給付);
+        RYear 年次負担割合処理済年度;
+        if (configValue.isEmpty()) {
+            年次負担割合処理済年度 = RDate.getNowDate().getNendo();
+        } else {
+            年次負担割合処理済年度 = new RYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
+                    SubGyomuCode.DBC介護給付));
+        }
         RString 処理状態 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態, 現在時刻,
                 SubGyomuCode.DBC介護給付);
         div.getPanelAll().getTxtShoriJotai().setValue(未処理);

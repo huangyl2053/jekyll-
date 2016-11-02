@@ -23,11 +23,18 @@ public class UplodPanel {
     /**
      * 連携データを取込みするを押下。
      *
-     * @param div YogaigoNinteiKekkaRenkeiDataTorikomiDiv
-     * @param files FileData[]
+     * @param div UplodPanelDiv
+     * @param files FileData
      * @return ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv>
      */
     public ResponseData<UplodPanelDiv> onClick_appurodo(UplodPanelDiv div, FileData... files) {
+//        RString failname = div.getTextBoxUrl().getValue();
+//        FilesystemName filesystemName = new FilesystemName(failname);
+//        RString tmpPath = new RString("C:\\Users\\tianyh\\Desktop\\".concat(failname.toString()));
+//        FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
+//        SharedFile.defineSharedFile(filesystemName);
+//        SharedFile.copyToSharedFile(filesystemPath, filesystemName);
+
         for (FileData file : files) {
             File shareFile = new File(file.getFilePath().toString());
             RString localFilePath = new RString(shareFile.getPath());

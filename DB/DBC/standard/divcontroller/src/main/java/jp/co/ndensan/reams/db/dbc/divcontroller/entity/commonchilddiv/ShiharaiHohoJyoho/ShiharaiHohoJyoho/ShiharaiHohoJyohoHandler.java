@@ -62,6 +62,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 自己負担額証明書交付申請書登録 = new RString("DBCUC11100");
     private final RString 曜日_日 = new RString("日曜");
     private final RString 曜日_土 = new RString("土曜");
+    private final RString 非表示 = new RString("非表示");
     private final ShiharaiHohoJyohoDiv div;
     private static final char 全角空白 = '　';
 
@@ -84,6 +85,7 @@ public class ShiharaiHohoJyohoHandler {
     public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
         div.setHdnTxtSubGyomuCode(SubGyomuCode.DBC介護給付.value());
         div.setHdnTxtShikibetsuCode(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
+        div.setHdnGridSelectButtonDisplay(非表示);
 
         ShunoKamokuShubetsu 業務内区分コード = get業務内区分コード();
 
@@ -101,7 +103,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                        getKozaId(), null, null)).records();
+                                getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());

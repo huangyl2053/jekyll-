@@ -38,6 +38,10 @@ public class KaigoSienSenmonkaToroku {
 
     private static final LockingKey 前排他ロックキー = new LockingKey("DbT7064CareManeger");
     private static final RString 状態_追加 = new RString("追加");
+    private static final RString メニューID_追加 = new RString("DBCMNH2011");
+    private static final RString メニューID_修正 = new RString("DBCMNH2012");
+    private static final RString 追加タイトル = new RString("介護支援専門員登録・追加");
+    private static final RString 修正タイトル = new RString("介護支援専門員登録・修正");
 
     private static final RString 事業者入力モード = new RString("事業者入力モード");
 
@@ -59,8 +63,15 @@ public class KaigoSienSenmonkaToroku {
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             throw new PessimisticLockingException();
         }
+        RString メニューID = ResponseHolder.getMenuID();
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 事業者入力モード);
         getHandler(div).onLoad();
+        if (メニューID_追加.equals(メニューID)) {
+            return ResponseData.of(div).rootTitle(追加タイトル).respond();
+        }
+        if (メニューID_修正.equals(メニューID)) {
+            return ResponseData.of(div).rootTitle(修正タイトル).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

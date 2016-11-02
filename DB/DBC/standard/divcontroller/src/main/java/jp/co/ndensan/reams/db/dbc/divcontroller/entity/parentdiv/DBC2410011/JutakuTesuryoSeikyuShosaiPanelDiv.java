@@ -4,8 +4,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2410011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.IKinyuKikanInputDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.KinyuKikanInputDiv;
@@ -18,19 +16,23 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JutakuTesuryoSeikyuShosaiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtUketsukeYMD")
+    private TextBoxDate txtUketsukeYMD;
+    @JsonProperty("txtShinseiYMD")
+    private TextBoxDate txtShinseiYMD;
     @JsonProperty("txtJigyoshaNo")
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
     @JsonProperty("txtSeikyuSakuseiYMD")
-    private TextBox txtSeikyuSakuseiYMD;
+    private TextBoxDate txtSeikyuSakuseiYMD;
     @JsonProperty("txtHdnShikibetsuCode")
     private TextBoxCode txtHdnShikibetsuCode;
     @JsonProperty("ddlKozaShubetsu")
@@ -41,8 +43,6 @@ public class JutakuTesuryoSeikyuShosaiPanelDiv extends Panel {
     private TextBoxKana txtKozaNameKana;
     @JsonProperty("txtKozaName")
     private TextBox txtKozaName;
-    @JsonProperty("JutakuTesuryoSeikyuMeisai")
-    private JutakuTesuryoSeikyuMeisaiDiv JutakuTesuryoSeikyuMeisai;
     @JsonProperty("ccdKinyuKikanInput")
     private KinyuKikanInputDiv ccdKinyuKikanInput;
 
@@ -52,6 +52,42 @@ public class JutakuTesuryoSeikyuShosaiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtUketsukeYMD
+     * @return txtUketsukeYMD
+     */
+    @JsonProperty("txtUketsukeYMD")
+    public TextBoxDate getTxtUketsukeYMD() {
+        return txtUketsukeYMD;
+    }
+
+    /*
+     * settxtUketsukeYMD
+     * @param txtUketsukeYMD txtUketsukeYMD
+     */
+    @JsonProperty("txtUketsukeYMD")
+    public void setTxtUketsukeYMD(TextBoxDate txtUketsukeYMD) {
+        this.txtUketsukeYMD = txtUketsukeYMD;
+    }
+
+    /*
+     * gettxtShinseiYMD
+     * @return txtShinseiYMD
+     */
+    @JsonProperty("txtShinseiYMD")
+    public TextBoxDate getTxtShinseiYMD() {
+        return txtShinseiYMD;
+    }
+
+    /*
+     * settxtShinseiYMD
+     * @param txtShinseiYMD txtShinseiYMD
+     */
+    @JsonProperty("txtShinseiYMD")
+    public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
+        this.txtShinseiYMD = txtShinseiYMD;
+    }
+
     /*
      * gettxtJigyoshaNo
      * @return txtJigyoshaNo
@@ -93,7 +129,7 @@ public class JutakuTesuryoSeikyuShosaiPanelDiv extends Panel {
      * @return txtSeikyuSakuseiYMD
      */
     @JsonProperty("txtSeikyuSakuseiYMD")
-    public TextBox getTxtSeikyuSakuseiYMD() {
+    public TextBoxDate getTxtSeikyuSakuseiYMD() {
         return txtSeikyuSakuseiYMD;
     }
 
@@ -102,7 +138,7 @@ public class JutakuTesuryoSeikyuShosaiPanelDiv extends Panel {
      * @param txtSeikyuSakuseiYMD txtSeikyuSakuseiYMD
      */
     @JsonProperty("txtSeikyuSakuseiYMD")
-    public void setTxtSeikyuSakuseiYMD(TextBox txtSeikyuSakuseiYMD) {
+    public void setTxtSeikyuSakuseiYMD(TextBoxDate txtSeikyuSakuseiYMD) {
         this.txtSeikyuSakuseiYMD = txtSeikyuSakuseiYMD;
     }
 
@@ -197,223 +233,12 @@ public class JutakuTesuryoSeikyuShosaiPanelDiv extends Panel {
     }
 
     /*
-     * getJutakuTesuryoSeikyuMeisai
-     * @return JutakuTesuryoSeikyuMeisai
-     */
-    @JsonProperty("JutakuTesuryoSeikyuMeisai")
-    public JutakuTesuryoSeikyuMeisaiDiv getJutakuTesuryoSeikyuMeisai() {
-        return JutakuTesuryoSeikyuMeisai;
-    }
-
-    /*
-     * setJutakuTesuryoSeikyuMeisai
-     * @param JutakuTesuryoSeikyuMeisai JutakuTesuryoSeikyuMeisai
-     */
-    @JsonProperty("JutakuTesuryoSeikyuMeisai")
-    public void setJutakuTesuryoSeikyuMeisai(JutakuTesuryoSeikyuMeisaiDiv JutakuTesuryoSeikyuMeisai) {
-        this.JutakuTesuryoSeikyuMeisai = JutakuTesuryoSeikyuMeisai;
-    }
-
-    /*
      * getccdKinyuKikanInput
      * @return ccdKinyuKikanInput
      */
     @JsonProperty("ccdKinyuKikanInput")
     public IKinyuKikanInputDiv getCcdKinyuKikanInput() {
         return ccdKinyuKikanInput;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public DataGrid<dgSeikyuMeisai_Row> getDgSeikyuMeisai() {
-        return this.getJutakuTesuryoSeikyuMeisai().getDgSeikyuMeisai();
-    }
-
-    @JsonIgnore
-    public void  setDgSeikyuMeisai(DataGrid<dgSeikyuMeisai_Row> dgSeikyuMeisai) {
-        this.getJutakuTesuryoSeikyuMeisai().setDgSeikyuMeisai(dgSeikyuMeisai);
-    }
-
-    @JsonIgnore
-    public SeikyuMeisaiShosaiPanelDiv getSeikyuMeisaiShosaiPanel() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel();
-    }
-
-    @JsonIgnore
-    public void  setSeikyuMeisaiShosaiPanel(SeikyuMeisaiShosaiPanelDiv SeikyuMeisaiShosaiPanel) {
-        this.getJutakuTesuryoSeikyuMeisai().setSeikyuMeisaiShosaiPanel(SeikyuMeisaiShosaiPanel);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtHihokenshaNo() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getTxtHihokenshaNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().setTxtHihokenshaNo(txtHihokenshaNo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtHihokenshaName() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getTxtHihokenshaName();
-    }
-
-    @JsonIgnore
-    public void  setTxtHihokenshaName(TextBox txtHihokenshaName) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().setTxtHihokenshaName(txtHihokenshaName);
-    }
-
-    @JsonIgnore
-    public JutakuKaishuRiyushoPanelDiv getJutakuKaishuRiyushoPanel() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel();
-    }
-
-    @JsonIgnore
-    public void  setJutakuKaishuRiyushoPanel(JutakuKaishuRiyushoPanelDiv JutakuKaishuRiyushoPanel) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().setJutakuKaishuRiyushoPanel(JutakuKaishuRiyushoPanel);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtRiyushoSakuseiYMD() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().getTxtRiyushoSakuseiYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtRiyushoSakuseiYMD(TextBoxDate txtRiyushoSakuseiYMD) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().setTxtRiyushoSakuseiYMD(txtRiyushoSakuseiYMD);
-    }
-
-    @JsonIgnore
-    public TextBoxKana getTxtRiyushoSakuseishaMeiKana() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().getTxtRiyushoSakuseishaMeiKana();
-    }
-
-    @JsonIgnore
-    public void  setTxtRiyushoSakuseishaMeiKana(TextBoxKana txtRiyushoSakuseishaMeiKana) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().setTxtRiyushoSakuseishaMeiKana(txtRiyushoSakuseishaMeiKana);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtRiyushoSakuseishaMei() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().getTxtRiyushoSakuseishaMei();
-    }
-
-    @JsonIgnore
-    public void  setTxtRiyushoSakuseishaMei(TextBox txtRiyushoSakuseishaMei) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().setTxtRiyushoSakuseishaMei(txtRiyushoSakuseishaMei);
-    }
-
-    @JsonIgnore
-    public JutakuKaishuPanelDiv getJutakuKaishuPanel() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel();
-    }
-
-    @JsonIgnore
-    public void  setJutakuKaishuPanel(JutakuKaishuPanelDiv JutakuKaishuPanel) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().setJutakuKaishuPanel(JutakuKaishuPanel);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtKaishuShikyuShinseiYMD() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtKaishuShikyuShinseiYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaishuShikyuShinseiYMD(TextBoxDate txtKaishuShikyuShinseiYMD) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().setTxtKaishuShikyuShinseiYMD(txtKaishuShikyuShinseiYMD);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtJutakuKaishuChakkoYMD() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtJutakuKaishuChakkoYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtJutakuKaishuChakkoYMD(TextBoxDate txtJutakuKaishuChakkoYMD) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().setTxtJutakuKaishuChakkoYMD(txtJutakuKaishuChakkoYMD);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJutakuKaishuJigyoshaMeisho() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtJutakuKaishuJigyoshaMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtJutakuKaishuJigyoshaMeisho(TextBox txtJutakuKaishuJigyoshaMeisho) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().setTxtJutakuKaishuJigyoshaMeisho(txtJutakuKaishuJigyoshaMeisho);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKaishuTaishoJutakuJusho() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtKaishuTaishoJutakuJusho();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaishuTaishoJutakuJusho(TextBox txtKaishuTaishoJutakuJusho) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().setTxtKaishuTaishoJutakuJusho(txtKaishuTaishoJutakuJusho);
-    }
-
-    @JsonIgnore
-    public TextBoxMultiLine getTxtKaishuNaiyokashoKibo() {
-        return this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtKaishuNaiyokashoKibo();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaishuNaiyokashoKibo(TextBoxMultiLine txtKaishuNaiyokashoKibo) {
-        this.getJutakuTesuryoSeikyuMeisai().getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().setTxtKaishuNaiyokashoKibo(txtKaishuNaiyokashoKibo);
-    }
-
-    @JsonIgnore
-    public JutakuTesuryoSeikyuShukeiPanelDiv getJutakuTesuryoSeikyuShukeiPanel() {
-        return this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel();
-    }
-
-    @JsonIgnore
-    public void  setJutakuTesuryoSeikyuShukeiPanel(JutakuTesuryoSeikyuShukeiPanelDiv JutakuTesuryoSeikyuShukeiPanel) {
-        this.getJutakuTesuryoSeikyuMeisai().setJutakuTesuryoSeikyuShukeiPanel(JutakuTesuryoSeikyuShukeiPanel);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtRiyushoSakuseiTanka() {
-        return this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka();
-    }
-
-    @JsonIgnore
-    public void  setTxtRiyushoSakuseiTanka(TextBoxNum txtRiyushoSakuseiTanka) {
-        this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel().setTxtRiyushoSakuseiTanka(txtRiyushoSakuseiTanka);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtRiyushoSakuseiKensu() {
-        return this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiKensu();
-    }
-
-    @JsonIgnore
-    public void  setTxtRiyushoSakuseiKensu(TextBoxNum txtRiyushoSakuseiKensu) {
-        this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel().setTxtRiyushoSakuseiKensu(txtRiyushoSakuseiKensu);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtRiyushoSakuseiSeikyuKingaku() {
-        return this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiSeikyuKingaku();
-    }
-
-    @JsonIgnore
-    public void  setTxtRiyushoSakuseiSeikyuKingaku(TextBoxNum txtRiyushoSakuseiSeikyuKingaku) {
-        this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel().setTxtRiyushoSakuseiSeikyuKingaku(txtRiyushoSakuseiSeikyuKingaku);
-    }
-
-    @JsonIgnore
-    public Button getBtnShukei() {
-        return this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel().getBtnShukei();
-    }
-
-    @JsonIgnore
-    public void  setBtnShukei(Button btnShukei) {
-        this.getJutakuTesuryoSeikyuMeisai().getJutakuTesuryoSeikyuShukeiPanel().setBtnShukei(btnShukei);
     }
 
     // </editor-fold>

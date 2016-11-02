@@ -59,7 +59,7 @@ public class HihokenshaTempUpdateKouikiProcess5 extends BatchProcessBase<Hihoken
 
     @Override
     protected void process(HihokenshaTempEntity entity) {
-        entity.setExHihokenshaNo(保険者番号);
+        entity.setExHokenshaNo(保険者番号);
         entity.setExShoHokenshaNo(証記載保険者番号);
         if (編集区分_2.equals(保険者発足情報_認定有効期間_編集区分)) {
             entity.setHenkanFlag(変換対象フラグ_TRUE);

@@ -293,6 +293,9 @@ public class RirekiShuseiManager {
     }
 
     private boolean save要介護認定申請情報(DbT4101NinteiShinseiJoho 要介護認定申請情報) {
+        if (要介護認定申請情報 == null) {
+            return false;
+        }
         if (!要介護認定申請情報.hasChanged()) {
             return false;
         }

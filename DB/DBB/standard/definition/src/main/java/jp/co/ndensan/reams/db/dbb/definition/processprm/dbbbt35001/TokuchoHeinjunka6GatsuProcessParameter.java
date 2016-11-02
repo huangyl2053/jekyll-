@@ -31,7 +31,6 @@ public class TokuchoHeinjunka6GatsuProcessParameter implements IBatchProcessPara
     private OutputChohyoIchiran 出力帳票一覧;
     private RDate 発行日;
     private RString 文書番号;
-    private RString 出力対象;
     private RString 増額平準化方法;
     private RString 減額平準化方法;
     private FlexibleYear 調定前年度;

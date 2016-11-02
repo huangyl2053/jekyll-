@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC190030_KijunsyunygetsujiParameter extends BatchParameterBase {
+public class DBC190030_kijunsyunygetsujiParameter extends BatchParameterBase {
 
     private static final String NAME_抽出条件 = "抽出条件";
     private static final String NAME_抽出対象 = "抽出対象";

@@ -36,7 +36,7 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
 
     private static final int 先頭_作成日時_アカウント = 1;
     private static final RString 作成 = new RString("作成");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC900004");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
@@ -58,7 +58,7 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBU900002_ShoriKekkaKakuninList.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBC900004_ShoriKekkaKakuninList.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .alwaysWriteHeader(ShoriKekkaKakuninListCsvEntity.class)
                 .setEncode(Encode.SJIS)

@@ -370,6 +370,8 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
                 SubGyomuCode.DBB介護賦課, 納入通知書_帳票分類ID,
                 processParameter.get出力帳票一覧List().get(NUM_0).get出力順ID());
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        市町村コード = 導入団体クラス.get地方公共団体コード();
+        市町村名 = 導入団体クラス.get市町村名();
         出力順 = RString.EMPTY;
         出力順リスト設定();
         帳票ID = processParameter.get出力帳票一覧List().get(NUM_0).get帳票ID();
@@ -464,8 +466,6 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         if (entity.get賦課情報() != null && entity.get賦課情報().getFuka_ShunoId() != null) {
             shunoId = Long.valueOf(entity.get賦課情報().getFuka_ShunoId().toString());
         }
-        市町村コード = 導入団体クラス.get地方公共団体コード();
-        市町村名 = 導入団体クラス.get市町村名();
         List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
         KariSanteiTsuchiShoKyotsu 保険料納入通知書仮算定情報 = new KariSanteiTsuchiShoKyotsu();
         保険料納入通知書仮算定情報.set発行日(processParameter.get発行日());

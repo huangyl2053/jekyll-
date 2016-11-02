@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1000065;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_KijunsyunygetsujiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_kijunsyunygetsujiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.DBC1000065TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.ShinseishoTorokuDiv;
@@ -127,9 +127,9 @@ public class ShinseishoToroku {
      * @param div ShinseishoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<DBC190030_KijunsyunygetsujiParameter> onClick_btnExcute(ShinseishoTorokuDiv div) {
+    public ResponseData<DBC190030_kijunsyunygetsujiParameter> onClick_btnExcute(ShinseishoTorokuDiv div) {
         getHandler(div).set前排他();
-        DBC190030_KijunsyunygetsujiParameter parameter = getHandler(div).setバッチ();
+        DBC190030_kijunsyunygetsujiParameter parameter = getHandler(div).setバッチ();
         getHandler(div).release前排他();
         return ResponseData.of(parameter).respond();
     }

@@ -3,14 +3,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2410011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 23 17:21:48 CST 2016 
+ * Mon Oct 31 16:57:54 CST 2016 
  */
 
 
 
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumnCheckBox;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -20,127 +22,131 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgSeikyuMeisai_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
-    private Button shokai;
-    private Boolean defaultDataName0;
-    private RString defaultDataName1;
-    private RString defaultDataName3;
-    private RString defaultDataName4;
-    private RString defaultDataName5;
-    private RString defaultDataName6;
-    private RString defaultDataName7;
+    private DataGridColumnCheckBox chkTaishogaiFlag;
+    private RString hihokenshaNo;
+    private RString hihokenshaShimei;
+    private TextBoxDate riyushoSakuseiYMD;
+    private RString riyushoSakuseishaMei;
+    private TextBoxDate shikyushinseiYMD;
+    private TextBoxDate chakkoYMD;
 
     public dgSeikyuMeisai_Row() {
         super();
-        this.shokai = new Button();
-        this.defaultDataName0 = false;
-        this.defaultDataName1 = RString.EMPTY;
-        this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = RString.EMPTY;
-        this.defaultDataName5 = RString.EMPTY;
-        this.defaultDataName6 = RString.EMPTY;
-        this.defaultDataName7 = RString.EMPTY;
-        this.setOriginalData("shokai", shokai);
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
+        this.chkTaishogaiFlag = new DataGridColumnCheckBox();
+        this.hihokenshaNo = RString.EMPTY;
+        this.hihokenshaShimei = RString.EMPTY;
+        this.riyushoSakuseiYMD = new TextBoxDate();
+        this.riyushoSakuseishaMei = RString.EMPTY;
+        this.shikyushinseiYMD = new TextBoxDate();
+        this.chakkoYMD = new TextBoxDate();
+        this.setOriginalData("chkTaishogaiFlag", chkTaishogaiFlag);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("hihokenshaShimei", hihokenshaShimei);
+        this.setOriginalData("riyushoSakuseiYMD", riyushoSakuseiYMD);
+        this.setOriginalData("riyushoSakuseishaMei", riyushoSakuseishaMei);
+        this.setOriginalData("shikyushinseiYMD", shikyushinseiYMD);
+        this.setOriginalData("chakkoYMD", chakkoYMD);
     }
 
-    public dgSeikyuMeisai_Row(Button shokai, Boolean defaultDataName0, RString defaultDataName1, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5, RString defaultDataName6, RString defaultDataName7) {
+    public dgSeikyuMeisai_Row(DataGridColumnCheckBox chkTaishogaiFlag, RString hihokenshaNo, RString hihokenshaShimei, TextBoxDate riyushoSakuseiYMD, RString riyushoSakuseishaMei, TextBoxDate shikyushinseiYMD, TextBoxDate chakkoYMD) {
         super();
-        this.setOriginalData("shokai", shokai);
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.shokai = shokai;
-        this.defaultDataName0 = defaultDataName0;
-        this.defaultDataName1 = defaultDataName1;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName4 = defaultDataName4;
-        this.defaultDataName5 = defaultDataName5;
-        this.defaultDataName6 = defaultDataName6;
-        this.defaultDataName7 = defaultDataName7;
+        this.setOriginalData("chkTaishogaiFlag", chkTaishogaiFlag);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("hihokenshaShimei", hihokenshaShimei);
+        this.setOriginalData("riyushoSakuseiYMD", riyushoSakuseiYMD);
+        this.setOriginalData("riyushoSakuseishaMei", riyushoSakuseishaMei);
+        this.setOriginalData("shikyushinseiYMD", shikyushinseiYMD);
+        this.setOriginalData("chakkoYMD", chakkoYMD);
+        this.chkTaishogaiFlag = chkTaishogaiFlag;
+        this.hihokenshaNo = hihokenshaNo;
+        this.hihokenshaShimei = hihokenshaShimei;
+        this.riyushoSakuseiYMD = riyushoSakuseiYMD;
+        this.riyushoSakuseishaMei = riyushoSakuseishaMei;
+        this.shikyushinseiYMD = shikyushinseiYMD;
+        this.chakkoYMD = chakkoYMD;
     }
 
-    public Button getShokai() {
-        return shokai;
+    public dgSeikyuMeisai_Row(DataGridSetting gridSetting) {
+        super();
+        this.chkTaishogaiFlag = DataGridColumnCheckBox.createInstance(gridSetting.getColumn("chkTaishogaiFlag").getCellDetails());
+        this.hihokenshaNo = RString.EMPTY;
+        this.hihokenshaShimei = RString.EMPTY;
+        this.riyushoSakuseiYMD = new TextBoxDate();
+        this.riyushoSakuseishaMei = RString.EMPTY;
+        this.shikyushinseiYMD = new TextBoxDate();
+        this.chakkoYMD = new TextBoxDate();
+        this.setOriginalData("chkTaishogaiFlag", chkTaishogaiFlag);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("hihokenshaShimei", hihokenshaShimei);
+        this.setOriginalData("riyushoSakuseiYMD", riyushoSakuseiYMD);
+        this.setOriginalData("riyushoSakuseishaMei", riyushoSakuseishaMei);
+        this.setOriginalData("shikyushinseiYMD", shikyushinseiYMD);
+        this.setOriginalData("chakkoYMD", chakkoYMD);
     }
 
-    public Boolean getDefaultDataName0() {
-        return defaultDataName0;
+    public DataGridColumnCheckBox getChkTaishogaiFlag() {
+        return chkTaishogaiFlag;
     }
 
-    public RString getDefaultDataName1() {
-        return defaultDataName1;
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
     }
 
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public RString getHihokenshaShimei() {
+        return hihokenshaShimei;
     }
 
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public TextBoxDate getRiyushoSakuseiYMD() {
+        return riyushoSakuseiYMD;
     }
 
-    public RString getDefaultDataName5() {
-        return defaultDataName5;
+    public RString getRiyushoSakuseishaMei() {
+        return riyushoSakuseishaMei;
     }
 
-    public RString getDefaultDataName6() {
-        return defaultDataName6;
+    public TextBoxDate getShikyushinseiYMD() {
+        return shikyushinseiYMD;
     }
 
-    public RString getDefaultDataName7() {
-        return defaultDataName7;
+    public TextBoxDate getChakkoYMD() {
+        return chakkoYMD;
     }
 
-    public void setShokai(Button shokai) {
-        this.setOriginalData("shokai", shokai);
-        this.shokai = shokai;
+    public void setChkTaishogaiFlag(DataGridColumnCheckBox chkTaishogaiFlag) {
+        this.setOriginalData("chkTaishogaiFlag", chkTaishogaiFlag);
+        this.chkTaishogaiFlag = chkTaishogaiFlag;
     }
 
-    public void setDefaultDataName0(Boolean defaultDataName0) {
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.defaultDataName0 = defaultDataName0;
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.hihokenshaNo = hihokenshaNo;
     }
 
-    public void setDefaultDataName1(RString defaultDataName1) {
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.defaultDataName1 = defaultDataName1;
+    public void setHihokenshaShimei(RString hihokenshaShimei) {
+        this.setOriginalData("hihokenshaShimei", hihokenshaShimei);
+        this.hihokenshaShimei = hihokenshaShimei;
     }
 
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.defaultDataName3 = defaultDataName3;
+    public void setRiyushoSakuseiYMD(TextBoxDate riyushoSakuseiYMD) {
+        this.setOriginalData("riyushoSakuseiYMD", riyushoSakuseiYMD);
+        this.riyushoSakuseiYMD = riyushoSakuseiYMD;
     }
 
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName4 = defaultDataName4;
+    public void setRiyushoSakuseishaMei(RString riyushoSakuseishaMei) {
+        this.setOriginalData("riyushoSakuseishaMei", riyushoSakuseishaMei);
+        this.riyushoSakuseishaMei = riyushoSakuseishaMei;
     }
 
-    public void setDefaultDataName5(RString defaultDataName5) {
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.defaultDataName5 = defaultDataName5;
+    public void setShikyushinseiYMD(TextBoxDate shikyushinseiYMD) {
+        this.setOriginalData("shikyushinseiYMD", shikyushinseiYMD);
+        this.shikyushinseiYMD = shikyushinseiYMD;
     }
 
-    public void setDefaultDataName6(RString defaultDataName6) {
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.defaultDataName6 = defaultDataName6;
-    }
-
-    public void setDefaultDataName7(RString defaultDataName7) {
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.defaultDataName7 = defaultDataName7;
+    public void setChakkoYMD(TextBoxDate chakkoYMD) {
+        this.setOriginalData("chakkoYMD", chakkoYMD);
+        this.chakkoYMD = chakkoYMD;
     }
 
     // </editor-fold>

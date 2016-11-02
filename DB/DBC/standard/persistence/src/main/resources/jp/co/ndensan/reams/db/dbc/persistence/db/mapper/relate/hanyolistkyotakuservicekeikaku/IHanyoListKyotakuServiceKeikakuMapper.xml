@@ -371,7 +371,7 @@
                 WHERE
                 基準日時点."hihokenshaNo" = B."hihokenshaNo" AND
                 基準日時点."taishoYM" <![CDATA[<]]> B."taishoYM" AND
-                #{基準年月日} <![CDATA[>=]]> B."taishoYM" || '01'
+                #{基準年月日} <![CDATA[>=]]> (B."taishoYM" || '01')
                 )
                 )
                 )
@@ -524,7 +524,7 @@
         where 1=1
         AND DbT3005."hihokenshaNo" = #{被保険者番号}
         AND DbT3005."taishoYM" <![CDATA[>]]> #{対象年月}
-        AND DbT3005."taishoYM" || '01' <![CDATA[<=]]> #{基準年月日}
+        AND (DbT3005."taishoYM" || '01') <![CDATA[<=]]> #{基準年月日}
 
     </sql>
 

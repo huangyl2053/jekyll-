@@ -52,7 +52,6 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
     private static final int NUM_100 = 100;
     private static final int NUM_1000 = 1000;
     private static final int NUM_11 = 11;
-    private static final RString 平準化対象 = new RString("0");
     private static final RString 平準化対象外理由区分_最小値未満 = new RString("1");
     private static final RString 平準化対象外理由区分_計算方法より = new RString("2");
     private static final RString 平準化しない = new RString("0");
@@ -195,9 +194,7 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
     private RString get備考コード(HeijunkaOutput 平準化結果) {
         RString 平準化対象外理由区分 = 平準化結果.get平準化対象外理由区分();
         RString 備考コード = RString.EMPTY;
-        if (平準化対象.equals(平準化対象外理由区分)) {
-            備考コード = HeijunkaTaishogaiRiyu.変更なし.getコード();
-        } else if (平準化対象外理由区分_最小値未満.equals(平準化対象外理由区分)) {
+        if (平準化対象外理由区分_最小値未満.equals(平準化対象外理由区分)) {
             備考コード = HeijunkaTaishogaiRiyu.平準化の結果0円以下.getコード();
         } else if (平準化対象外理由区分_計算方法より.equals(平準化対象外理由区分)) {
             if (平準化しない.equals(parameter.get減額平準化方法())) {
@@ -205,6 +202,8 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
             } else if (平準化しない.equals(parameter.get増額平準化方法())) {
                 備考コード = HeijunkaTaishogaiRiyu.対象外_増額.getコード();
             }
+        } else {
+            備考コード = HeijunkaTaishogaiRiyu.変更なし.getコード();
         }
         return 備考コード;
     }
