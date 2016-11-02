@@ -165,7 +165,7 @@ public class PnlTotal {
     private void putViewStateHolder(PnlTotalDiv div, RString 状態) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         PnlTotalParameter parameter = getHandler(div).getViesStateParameter(被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.検索キー, parameter);
+        ViewStateHolder.put(ViewStateKeys.契約番号検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
     }
 

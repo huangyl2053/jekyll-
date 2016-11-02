@@ -528,7 +528,8 @@ public class KariSanteiIdoFukaBatchFath {
      */
     public FlexibleDate get賦課期日(ShikakuShutokuTempEntity 資格情報Entity, FlexibleYear 賦課年度) {
         FlexibleDate 賦課期日 = 資格情報Entity.get第1号資格取得年月日();
-        if (資格情報Entity.get第1号資格取得年月日()
+        if (資格情報Entity.get第1号資格取得年月日() != null && !資格情報Entity.get第1号資格取得年月日().isEmpty()
+                && 賦課年度 != null && 資格情報Entity.get第1号資格取得年月日()
                 .isBefore(new FlexibleDate(賦課年度.toDateString().concat(MONTHDATE)))) {
             賦課期日 = new FlexibleDate(賦課年度.toDateString().concat(MONTHDATE));
         }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110060;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -27,5 +28,6 @@ public class KogakugassanShikyushinseishoOutProcessParameter implements IBatchPr
     private HokenshaNo 保険者番号;
     private RString 保険者情報_保険者番号;
     private RString 保険者情報_保険者名称;
+    private Encode 文字コード;
 
 }

@@ -34,15 +34,15 @@ public enum ShiharaiHohoHenkoHaakuOrderKey implements IReportItems {
     /**
      * 項目ID:0009 フォームフィールド名:識別コード MyBatis項目名:定義なし
      */
-    識別コード("0009", "識別コード", "被保険者台帳管理_識別コード"),
+    識別コード("0009", "識別コード", "資格情報_識別コード"),
     /**
      * 項目ID:0010 フォームフィールド名:氏名５０音カナ MyBatis項目名:定義なし
      */
-    氏名５０音カナ("0010", "氏名５０音カナ", "\"ShikibetsuTaisho\".\"kanaShimei\""),
+    氏名５０音カナ("0010", "氏名５０音カナ", "\"ShikibetsuTaisho\".\"kanaMeisho\""),
     /**
      * 項目ID:0012 フォームフィールド名:生年月日 MyBatis項目名:定義なし
      */
-    市町村コード("0012", "市町村コード", "\"ShikibetsuTaisho\".\"shichosonCode\""),
+    市町村コード("0016", "市町村コード", "\"ShikibetsuTaisho\".\"shichosonCode\""),
     /**
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:定義なし
      */

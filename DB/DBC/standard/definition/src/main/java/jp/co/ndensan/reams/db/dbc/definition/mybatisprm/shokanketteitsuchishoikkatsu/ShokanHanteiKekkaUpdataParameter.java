@@ -21,12 +21,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class ShokanHanteiKekkaUpdataParameter implements IMyBatisParameter {
 
     private static final RString 印書_1 = new RString("1");
-    private static final RString 印書_2 = new RString("2");
     private static final RString 印書_3 = new RString("3");
     private static final RString 抽出モード_1 = new RString("1");
     private static final RString 抽出モード_2 = new RString("2");
     private static final RString 抽出モード_3 = new RString("3");
-    private static final RString 決定通知リアル発行区分_発行済 = new RString("1");
     private static final RString 決定通知リアル発行区分_未発行 = new RString("0");
 
     private FlexibleDate dataFrom;
@@ -35,10 +33,13 @@ public final class ShokanHanteiKekkaUpdataParameter implements IMyBatisParameter
     private boolean chusyutuUketsukeFlag;
     private boolean chusyutuKetteiFlag;
     private boolean chusyutuKetteiShaUketsukeFlag;
+    private boolean isRiaruHakko;
+    private boolean isInshoKubun3;
     private RString inshoKubun;
 
     private ShokanHanteiKekkaUpdataParameter(FlexibleDate dataFrom, FlexibleDate dataTo, FlexibleYearMonth ketteishaUketsukeYM,
-            boolean chusyutuUketsukeFlag, boolean chusyutuKetteiFlag, boolean chusyutuKetteiShaUketsukeFlag, RString inshoKubun) {
+            boolean chusyutuUketsukeFlag, boolean chusyutuKetteiFlag, boolean chusyutuKetteiShaUketsukeFlag,
+            boolean isRiaruHakko, boolean isInshoKubun3, RString inshoKubun) {
 
         this.dataFrom = dataFrom;
         this.dataTo = dataTo;
@@ -46,6 +47,8 @@ public final class ShokanHanteiKekkaUpdataParameter implements IMyBatisParameter
         this.chusyutuUketsukeFlag = chusyutuUketsukeFlag;
         this.chusyutuKetteiFlag = chusyutuKetteiFlag;
         this.chusyutuKetteiShaUketsukeFlag = chusyutuKetteiShaUketsukeFlag;
+        this.isRiaruHakko = isRiaruHakko;
+        this.isInshoKubun3 = isInshoKubun3;
         this.inshoKubun = inshoKubun;
     }
 
@@ -66,10 +69,14 @@ public final class ShokanHanteiKekkaUpdataParameter implements IMyBatisParameter
         boolean chusyutuKetteiFlag = false;
         boolean chusyutuKetteiShaUketsukeFlag = false;
         RString inshoKubun = RString.EMPTY;
-        if (印書_1.equals(insho) || 印書_2.equals(insho)) {
-            inshoKubun = 決定通知リアル発行区分_発行済;
-        } else if (印書_3.equals(insho)) {
+        boolean isRiaruHakko = false;
+        boolean isInshoKubun3 = false;
+        if (印書_1.equals(insho)) {
             inshoKubun = 決定通知リアル発行区分_未発行;
+            isRiaruHakko = true;
+        }
+        if (印書_3.equals(insho)) {
+            isInshoKubun3 = true;
         }
         if (抽出モード_1.equals(chusyuMode)) {
             chusyutuUketsukeFlag = true;
@@ -79,6 +86,6 @@ public final class ShokanHanteiKekkaUpdataParameter implements IMyBatisParameter
             chusyutuKetteiShaUketsukeFlag = true;
         }
         return new ShokanHanteiKekkaUpdataParameter(dataFrom, dataTo, ketteishaUketsukeYM, chusyutuUketsukeFlag,
-                chusyutuKetteiFlag, chusyutuKetteiShaUketsukeFlag, inshoKubun);
+                chusyutuKetteiFlag, chusyutuKetteiShaUketsukeFlag, isRiaruHakko, isInshoKubun3, inshoKubun);
     }
 }

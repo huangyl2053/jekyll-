@@ -77,6 +77,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private SpoolKijunShunyugakuTekiyoKetteiProcessParameter parameter;
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private IOutputOrder 並び順;
+    private int count;
     private RString 出力順;
     private List<RString> 改頁項目リスト;
     private List<RString> 出力順リスト;
@@ -106,6 +107,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
+    private static final int INT_31 = 31;
     private static final int 文字切れ対象文字列長 = 40;
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunshunyugakutekiyokettei."
@@ -122,6 +124,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     @Override
     protected void initialize() {
         一覧表_通番 = INT_0;
+        count = INT_0;
         改頁項目リスト = new ArrayList<>();
         出力順リスト = new ArrayList<>();
         finder = new TsuchishoTeikeibunFinder();
@@ -465,29 +468,64 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         KijunShunyugakuTekiyoKetteiTsuchiIchiran 基準収入額決定通知一覧表パラメータ = new KijunShunyugakuTekiyoKetteiTsuchiIchiran();
         基準収入額決定通知一覧表パラメータ.set市町村番号(parameter.get市町村コード());
         基準収入額決定通知一覧表パラメータ.set市町村名(parameter.get市町村名());
-        基準収入額決定通知一覧表パラメータ.set出力順１(出力順リスト.get(INT_0));
-        基準収入額決定通知一覧表パラメータ.set出力順２(出力順リスト.get(INT_1));
-        基準収入額決定通知一覧表パラメータ.set出力順３(出力順リスト.get(INT_2));
-        基準収入額決定通知一覧表パラメータ.set出力順４(出力順リスト.get(INT_3));
-        基準収入額決定通知一覧表パラメータ.set出力順５(出力順リスト.get(INT_4));
-        基準収入額決定通知一覧表パラメータ.set改頁１(改頁List.get(INT_0));
-        基準収入額決定通知一覧表パラメータ.set改頁２(改頁List.get(INT_1));
-        基準収入額決定通知一覧表パラメータ.set改頁３(改頁List.get(INT_2));
-        基準収入額決定通知一覧表パラメータ.set改頁４(改頁List.get(INT_3));
-        基準収入額決定通知一覧表パラメータ.set改頁５(改頁List.get(INT_4));
+        for (int i = 出力順リスト.size() - 1; i >= 0; i--) {
+            if (出力順リスト.get(i) == null || 出力順リスト.get(i).isEmpty()) {
+                出力順リスト.remove(i);
+            }
+        }
+        for (int i = 改頁List.size() - 1; i >= 0; i--) {
+            if (改頁List.get(i) == null || 改頁List.get(i).isEmpty()) {
+                改頁List.remove(i);
+            }
+        }
+        if (出力順リスト.size() > INT_0) {
+            基準収入額決定通知一覧表パラメータ.set出力順１(出力順リスト.get(INT_0));
+        }
+        if (出力順リスト.size() > INT_1) {
+            基準収入額決定通知一覧表パラメータ.set出力順２(出力順リスト.get(INT_1));
+        }
+        if (出力順リスト.size() > INT_2) {
+            基準収入額決定通知一覧表パラメータ.set出力順３(出力順リスト.get(INT_2));
+        }
+        if (出力順リスト.size() > INT_3) {
+            基準収入額決定通知一覧表パラメータ.set出力順４(出力順リスト.get(INT_3));
+        }
+        if (出力順リスト.size() > INT_4) {
+            基準収入額決定通知一覧表パラメータ.set出力順５(出力順リスト.get(INT_4));
+        }
+        if (改頁List.size() > INT_0) {
+            基準収入額決定通知一覧表パラメータ.set改頁１(改頁List.get(INT_0));
+        }
+        if (改頁List.size() > INT_1) {
+            基準収入額決定通知一覧表パラメータ.set改頁２(改頁List.get(INT_1));
+        }
+        if (改頁List.size() > INT_2) {
+            基準収入額決定通知一覧表パラメータ.set改頁３(改頁List.get(INT_2));
+        }
+        if (改頁List.size() > INT_3) {
+            基準収入額決定通知一覧表パラメータ.set改頁４(改頁List.get(INT_3));
+        }
+        if (改頁List.size() > INT_4) {
+            基準収入額決定通知一覧表パラメータ.set改頁５(改頁List.get(INT_4));
+        }
         基準収入額決定通知一覧表パラメータ.set出力順情報(出力順);
         return 基準収入額決定通知一覧表パラメータ;
     }
 
     private KijunShunyugakuTekiyoKetteiTsuchiIchiran get基準収入額決定通知一覧表パラメータ2(KijunShunyugakuTekiyoKetteiEntity entity,
             boolean 改頁Flag, KijunShunyugakuTekiyoKetteiTsuchiIchiran 基準収入額決定通知一覧表パラメータ) {
-        if (改頁Flag || 一覧表_世帯コード == null || !一覧表_世帯コード.equals(entity.get世帯コード())) {
+        count++;
+        if (改頁Flag || 一覧表_世帯コード == null || !一覧表_世帯コード.equals(entity.get世帯コード()) || count == INT_31) {
             一覧表_通番 = 一覧表_通番 + INT_1;
             基準収入額決定通知一覧表パラメータ.set通番(new RString(一覧表_通番));
             基準収入額決定通知一覧表パラメータ.set出力世帯コード(entity.get世帯コード());
         }
-        if (改頁Flag || 一覧表_年度 == null || !一覧表_年度.equals(entity.get年度())) {
+        if (改頁Flag || 一覧表_年度 == null || !一覧表_年度.equals(entity.get年度()) || count == INT_31) {
             基準収入額決定通知一覧表パラメータ.set年度(entity.get年度());
+        }
+
+        if (count == INT_31 || 改頁Flag) {
+            count = INT_1;
         }
 
         基準収入額決定通知一覧表パラメータ.set被保険者番号(entity.get被保険者番号());

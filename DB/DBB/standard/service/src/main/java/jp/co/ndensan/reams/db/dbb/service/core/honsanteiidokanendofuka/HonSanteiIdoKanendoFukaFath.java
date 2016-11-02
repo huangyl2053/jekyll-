@@ -167,7 +167,7 @@ public class HonSanteiIdoKanendoFukaFath {
         Collections.sort(資格の情報年度, new Comparator<HihokenshaDaicho>() {
             @Override
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
-                return o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日()) ? 1 : -1;
+                return o1.get第1号資格取得年月日() != null && o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日()) ? 1 : -1;
             }
         });
     }

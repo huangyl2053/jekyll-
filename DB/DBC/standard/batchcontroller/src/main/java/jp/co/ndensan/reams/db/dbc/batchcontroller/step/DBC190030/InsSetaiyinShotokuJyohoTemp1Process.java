@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.DBC190030ProcessParameter;
@@ -69,7 +68,7 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
 
     @Override
     protected void process(HihokenshaDaichoTempSixColumnEntity entity) {
-        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
+        if (!ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
             SetaiHaakuEntity 世帯員把握入力一時 = new SetaiHaakuEntity();
             世帯員把握入力一時.setHihokenshaNo(entity.getHihokenshaNo());
             世帯員把握入力一時.setShikibetsuCode(entity.getShikibetsuCode());

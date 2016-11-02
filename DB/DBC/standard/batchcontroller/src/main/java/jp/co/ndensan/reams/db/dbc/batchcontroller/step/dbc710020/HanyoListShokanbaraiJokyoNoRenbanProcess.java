@@ -172,20 +172,8 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
 
-        RString nowBreakKey = entity.get被保険者番号().value();
-
-        if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
-            preBreakKey = nowBreakKey;
-            preEntity = entity;
-            return;
-        }
-        if (!preBreakKey.equals(nowBreakKey)) {
-
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter));
-            personalDataList.add(toPersonalData(preEntity));
-            lstKinyuKikanEntity.clear();
-        }
-        preBreakKey = nowBreakKey;
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter));
+        personalDataList.add(toPersonalData(entity));
         preEntity = entity;
     }
 
@@ -196,10 +184,6 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
             eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoNoRenbanCSVEntity());
         }
 
-        if (preEntity != null) {
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter));
-            personalDataList.add(toPersonalData(preEntity));
-        }
         eucCsvWriter.close();
 
         if (personalDataList == null || personalDataList.isEmpty()) {

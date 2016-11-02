@@ -6,61 +6,66 @@
     <select id="select支給申請一覧"
             resultMap="Result_ShikyuShinseiList"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanShikyuShinseiParameter" fetchSize="500" resultOrdered="true">
-        SELECT
-        ShokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
-        ShokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
-        ShokanKihon."seiriNo" AS "seiriNo",
-        ShokanKihon."jigyoshaNo" AS "jigyoshaNo",
-        ShokanKihon."yoshikiNo" AS "yoshikiNo",
-        ShokanKihon."meisaiNo" AS "meisaiNo",
-        ShokanShinsei."shinseiYMD" AS "shinseiYMD",
-        ShokanHanteiKekka."ketteiYMD" AS "ketteiYMD",
-        ShokanHanteiKekka."shikyuHushikyuKetteiKubun" AS "shikyuHushikyuKetteiKubun",
-        ShokanKihon."serviceTanisu" AS "konyukingakugoke",
-        DbT3048TEMP."fukushiYoguShohinName" AS "fukushiYoguShohinName"
-        FROM
-        rgdb."DbT3038ShokanKihon" AS ShokanKihon,
-        rgdb."DbT3034ShokanShinsei" AS ShokanShinsei,
-        rgdb."DbT3036ShokanHanteiKekka" AS ShokanHanteiKekka,
-        (
-        SELECT
-        ShokanFukushiYoguHanbaihi."hiHokenshaNo",
-        ShokanFukushiYoguHanbaihi."serviceTeikyoYM",
-        ShokanFukushiYoguHanbaihi."seiriNo",
-        ShokanFukushiYoguHanbaihi."jigyoshaNo",
-        ShokanFukushiYoguHanbaihi."yoshikiNo",
-        MIN(ShokanFukushiYoguHanbaihi."meisaiNo") AS "meisaiNo",
-        SUM(ShokanFukushiYoguHanbaihi."kounyuKingaku") AS "konyukingakugoke",
-        ShokanFukushiYoguHanbaihi."fukushiYoguShohinName"
-        FROM
-        rgdb."DbT3048ShokanFukushiYoguHanbaihi" AS ShokanFukushiYoguHanbaihi
-        WHERE
-        ShokanFukushiYoguHanbaihi."hiHokenshaNo" = #{被保険者番号}
-        GROUP BY
-        ShokanFukushiYoguHanbaihi."hiHokenshaNo",
-        ShokanFukushiYoguHanbaihi."serviceTeikyoYM",
-        ShokanFukushiYoguHanbaihi."seiriNo",
-        ShokanFukushiYoguHanbaihi."jigyoshaNo",
-        ShokanFukushiYoguHanbaihi."yoshikiNo",
-        ShokanFukushiYoguHanbaihi."fukushiYoguShohinName"
-        ) AS DbT3048TEMP
-        WHERE
-        ShokanKihon."hiHokenshaNo" = #{被保険者番号}
-        AND SUBSTR(ShokanKihon."yoshikiNo", 1, 3) = #{福祉用具販売費}
-        AND ShokanKihon."hiHokenshaNo" = ShokanShinsei."hiHokenshaNo"
-        AND ShokanKihon."serviceTeikyoYM" = ShokanShinsei."serviceTeikyoYM"
-        AND ShokanKihon."seiriNo" = ShokanShinsei."seiriNo"
-        AND ShokanKihon."hiHokenshaNo" = ShokanHanteiKekka."hiHokenshaNo"
-        AND ShokanKihon."serviceTeikyoYM" = ShokanHanteiKekka."serviceTeikyoYM"
-        AND ShokanKihon."seiriNo" = ShokanHanteiKekka."seiriNo"
-        AND ShokanKihon."hiHokenshaNo" = DbT3048TEMP."hiHokenshaNo"
-        AND ShokanKihon."serviceTeikyoYM" = DbT3048TEMP."serviceTeikyoYM"
-        AND ShokanKihon."seiriNo" = DbT3048TEMP."seiriNo"
-        AND ShokanKihon."jigyoshaNo" = DbT3048TEMP."jigyoshaNo"
-        AND ShokanKihon."yoshikiNo" = DbT3048TEMP."yoshikiNo"
-        AND ShokanKihon."meisaiNo" = DbT3048TEMP."meisaiNo"
-        ORDER BY
-        "serviceTeikyoYM" ASC,"seiriNo" ASC,"jigyoshaNo"ASC
+      SELECT													
+        ShokanKihon."hiHokenshaNo" AS "hiHokenshaNo",													
+        ShokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",													
+        ShokanKihon."seiriNo" AS "seiriNo",													
+        ShokanKihon."jigyoshaNo" AS "jigyoshaNo",													
+        ShokanKihon."yoshikiNo" AS "yoshikiNo",													
+        ShokanKihon."meisaiNo" AS "meisaiNo",													
+        ShokanShinsei."shinseiYMD" AS "shinseiYMD",													
+        ShokanHanteiKekka."ketteiYMD" AS "ketteiYMD",													
+        ShokanHanteiKekka."shikyuHushikyuKetteiKubun" AS "shikyuHushikyuKetteiKubun",													
+        ShokanKihon."serviceTanisu" AS "konyukingakugoke",													
+        DbT3048TEMP."fukushiYoguShohinName" AS "fukushiYoguShohinName"													
+      FROM													
+        rgdb."DbT3038ShokanKihon" AS ShokanKihon,													
+        rgdb."DbT3034ShokanShinsei" AS ShokanShinsei,													
+        rgdb."DbT3036ShokanHanteiKekka" AS ShokanHanteiKekka,													
+        (													
+          SELECT													
+                ShokanFukushiYoguHanbaihi."hiHokenshaNo",													
+                ShokanFukushiYoguHanbaihi."serviceTeikyoYM",													
+                ShokanFukushiYoguHanbaihi."seiriNo",													
+                ShokanFukushiYoguHanbaihi."jigyoshaNo",													
+                ShokanFukushiYoguHanbaihi."yoshikiNo",													
+                ShokanFukushiYoguHanbaihi."fukushiYoguShohinName",													
+                ShokanFukushiYoguHanbaihi."meisaiNo"													
+           FROM													
+                rgdb."DbT3048ShokanFukushiYoguHanbaihi" AS ShokanFukushiYoguHanbaihi													
+           WHERE													
+                ShokanFukushiYoguHanbaihi."hiHokenshaNo" = #{被保険者番号}													
+           AND													
+                ShokanFukushiYoguHanbaihi."fukushiYoguShohinName" in (													
+                    select													
+                    "fukushiYoguShohinName"													
+                    from rgdb."DbT3048ShokanFukushiYoguHanbaihi" as ShokanFukushiYoguHanbaihi2													
+                    where 													
+                       ShokanFukushiYoguHanbaihi."seiriNo" = ShokanFukushiYoguHanbaihi2."seiriNo"													
+                    order by 													
+                        "fukushiYoguHanbaiYMD"													
+                    limit 1)													
+            ) AS DbT3048TEMP													
+       WHERE													
+            ShokanKihon."hiHokenshaNo" = #{被保険者番号}													
+            AND SUBSTR(ShokanKihon."yoshikiNo", 1, 3) = '21C'													
+            AND ShokanKihon."hiHokenshaNo" = ShokanShinsei."hiHokenshaNo"													
+            AND ShokanKihon."serviceTeikyoYM" = ShokanShinsei."serviceTeikyoYM"													
+            AND ShokanKihon."seiriNo" = ShokanShinsei."seiriNo"													
+            AND ShokanKihon."hiHokenshaNo" = ShokanHanteiKekka."hiHokenshaNo"													
+            AND ShokanKihon."serviceTeikyoYM" = ShokanHanteiKekka."serviceTeikyoYM"													
+            AND ShokanKihon."seiriNo" = ShokanHanteiKekka."seiriNo"													
+            AND ShokanKihon."hiHokenshaNo" = DbT3048TEMP."hiHokenshaNo"													
+            AND ShokanKihon."serviceTeikyoYM" = DbT3048TEMP."serviceTeikyoYM"													
+            AND ShokanKihon."seiriNo" = DbT3048TEMP."seiriNo"													
+            AND ShokanKihon."jigyoshaNo" = DbT3048TEMP."jigyoshaNo"													
+            AND ShokanKihon."yoshikiNo" = DbT3048TEMP."yoshikiNo"													
+            AND ShokanKihon."meisaiNo" = DbT3048TEMP."meisaiNo"													
+      ORDER BY													
+            "serviceTeikyoYM" ASC,													
+            "seiriNo" ASC,													
+            "jigyoshaNo" ASC													
+
     </select>
         
     <resultMap id="Result_ShikyuShinseiList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei" autoMapping="true">

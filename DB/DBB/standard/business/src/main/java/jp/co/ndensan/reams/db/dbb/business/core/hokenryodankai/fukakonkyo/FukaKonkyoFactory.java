@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -43,10 +44,13 @@ public class FukaKonkyoFactory {
         }
         FukaKonkyo 賦課根拠 = get賦課根拠(param.get生保の情報リスト(), param.get老齢の情報のリスト(), param.get賦課基準日());
 
-        List<KazeiKubun> 課税区分リスト = new ArrayList<>();
+        List<KazeiKubunHonninKubun> 課税区分リスト = new ArrayList<>();
         for (SetaiinShotoku 世帯員 : param.get世帯員所得情報List()) {
             if (世帯員.get課税区分_住民税減免前() != null && !世帯員.get課税区分_住民税減免前().isEmpty()) {
-                課税区分リスト.add(KazeiKubun.toValue(世帯員.get課税区分_住民税減免前()));
+                KazeiKubunHonninKubun kazeiKubunHonninKubun = new KazeiKubunHonninKubun();
+                kazeiKubunHonninKubun.set本人区分(HonninKubun.toValue(世帯員.get本人区分()));
+                kazeiKubunHonninKubun.set課税区分(KazeiKubun.toValue(世帯員.get課税区分_住民税減免前()));
+                課税区分リスト.add(kazeiKubunHonninKubun);
             }
             if (HonninKubun.本人.getCode().equals(世帯員.get本人区分())) {
                 賦課根拠.setGokeiShotoku(世帯員.get合計所得金額());
@@ -71,10 +75,13 @@ public class FukaKonkyoFactory {
         }
         FukaKonkyo 賦課根拠 = get賦課根拠(param.get生保の情報リスト(), param.get老齢の情報のリスト(), param.get賦課基準日());
 
-        List<KazeiKubun> 課税区分リスト = new ArrayList<>();
+        List<KazeiKubunHonninKubun> 課税区分リスト = new ArrayList<>();
         for (SetaiShotokuEntity 世帯員 : param.get世帯員所得情報List()) {
             if (世帯員.getKazeiKubun() != null && !世帯員.getKazeiKubun().isEmpty()) {
-                課税区分リスト.add(KazeiKubun.toValue(世帯員.getKazeiKubun()));
+                KazeiKubunHonninKubun kazeiKubunHonninKubun = new KazeiKubunHonninKubun();
+                kazeiKubunHonninKubun.set本人区分(HonninKubun.toValue(世帯員.getHonninKubun()));
+                kazeiKubunHonninKubun.set課税区分(KazeiKubun.toValue(世帯員.getKazeiKubun()));
+                課税区分リスト.add(kazeiKubunHonninKubun);
             }
             if (HonninKubun.本人.getCode().equals(世帯員.getHonninKubun())) {
                 賦課根拠.setGokeiShotoku(世帯員.getGokeiShotokuGaku());
@@ -82,6 +89,8 @@ public class FukaKonkyoFactory {
             }
         }
         賦課根拠.setSetaiinKazeiKubunList(課税区分リスト);
+        賦課根拠.setZennendoKazeiKubun(param.get前年度課税区分());
+        賦課根拠.setZennendoSetaiKazeiKubun(param.get前年度世帯課税区分());
         return 賦課根拠;
     }
 

@@ -481,7 +481,8 @@
         B."kouhoshakubun",
         A."honninKubun",
         B."tenyuzenzenkokuJushoCode",
-        A."hihokennshaKubunCode"
+        A."hihokennshaKubunCode",
+        B."juminShubetsuCode"
         FROM 
         <if test="出力対象 == 2">
         "TmpSetaiShotoku1" AS A
@@ -543,7 +544,8 @@
         C."chikuCode3",
         C."juminJotaiCode",
         C."kannaiKangaiKubun",
-        master."hihokennshaKubunCode"
+        master."hihokennshaKubunCode",
+        master."juminShubetsuCode"
         FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
@@ -589,6 +591,7 @@
         <result property="juminJotaiCode" column="juminJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokennshaKubunCode" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     
@@ -772,6 +775,7 @@
         <result property="chikuCode3" column="chikuCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="juminJotaiCode" column="juminJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <!--所得照会票データ再発行を取得する。-->
@@ -790,7 +794,8 @@
         B."atenaShimei",
         B."seinengappiYMD",
         B."torokuIdoYMD",
-        B."tenyuzenzenkokuJushoCode"
+        B."tenyuzenzenkokuJushoCode",
+        B."juminShubetsuCode"
         FROM "SaihaqkouTaishouTemp" AS A
         INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
@@ -826,7 +831,8 @@
         C."chikuCode1",
         C."chikuCode2",
         C."chikuCode3",
-        C."juminJotaiCode"
+        C."juminJotaiCode",
+        master."juminShubetsuCode"
         FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''

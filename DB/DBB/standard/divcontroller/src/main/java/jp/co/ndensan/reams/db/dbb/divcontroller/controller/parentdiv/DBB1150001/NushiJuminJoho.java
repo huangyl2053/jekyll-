@@ -101,16 +101,20 @@ public class NushiJuminJoho {
         FlexibleYear 日付関連_調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         List<KeyValueDataSource> 調定年度List = new ArrayList<>();
+        int selected調定年度index = 0;
         for (FlexibleYear 調定年度 = 日付関連_調定年度; 平成11年度.isBeforeOrEquals(調定年度)
                 && 調定年度.isBeforeOrEquals(日付関連_調定年度);) {
             KeyValueDataSource source = new KeyValueDataSource(調定年度.toDateString(), 調定年度.wareki()
                     .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
-            調定年度 = 調定年度.minusYear(整数_1);
             調定年度List.add(source);
+            if (調定年度.equals(賦課年度)) {
+                selected調定年度index = 調定年度List.size() - 1;
+            }
+            調定年度 = 調定年度.minusYear(整数_1);
         }
         div.getShotokuShokaiHyoHakkoIchiranPanel().getDdlJuminzeiNendo().setDataSource(調定年度List);
         if (!調定年度List.isEmpty()) {
-            div.getShotokuShokaiHyoHakkoIchiranPanel().getDdlJuminzeiNendo().setSelectedIndex(整数_0);
+            div.getShotokuShokaiHyoHakkoIchiranPanel().getDdlJuminzeiNendo().setSelectedIndex(selected調定年度index);
         }
 
         div.getShotokuShokaiHyoHakkoIchiranPanel().getTxtHakkoNengappi().setValue(RDate.getNowDate());
@@ -247,7 +251,7 @@ public class NushiJuminJoho {
         RString flag = div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
                 .getSofusakiNyuryokuPanel().getTextNo().getValue();
         if (!文字列_TWO.equals(flag)) {
-            return ResponseData.of(div).respond();
+            return this.return登録確認(div);
         }
         if (!ResponseHolder.isReRequest() && !hdnFlag.equals(文字列_ONE) && !hdnFlag.equals(文字列_TWO)) {
             div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
@@ -256,28 +260,7 @@ public class NushiJuminJoho {
                     .addMessage(NushiJuminJohoMessage.確認.createMessage(ButtonSelectPattern.OKCancel, 引数.toString())).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            List<ShotokuKanri> entityList = getHandler(div).get識別コード();
-            if (entityList == null || entityList.isEmpty()) {
-                return ResponseData.of(div).respond();
-            }
-            RString 編集した識別コード = RString.EMPTY;
-            for (ShotokuKanri entity : entityList) {
-                編集した識別コード = 編集した識別コード.concat(entity.getEntity().getShikibetsuCode().value()).concat(区切);
-            }
-            編集した識別コード = 編集した識別コード.substring(整数_0, 編集した識別コード.length() - 整数_1);
-            if (!hdnFlag.equals(文字列_TWO)) {
-                div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
-                        .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_TWO);
-                return ResponseData.of(div).addMessage(NushiJuminJohoMessage.登録確認
-                        .createMessage(ButtonSelectPattern.OKCancel, 編集した識別コード.toString())).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト
-                        = ViewStateHolder.get(ViewStateKeys.所得照会票発行対象世帯員, List.class);
-                getHandler(div).db出力(所得照会票発行対象世帯員リスト);
-                return ResponseData.of(div).respond();
-            }
-
+            return this.return登録確認(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -305,6 +288,36 @@ public class NushiJuminJoho {
         }
         return ResponseData.of(new ShotokuShokaihyoPrintSercive()
                 .printＡ４縦(所得照会票, 文書タイトル, 送付先担当課名称)).respond();
+    }
+
+    private ResponseData<NushiJuminJohoDiv> return登録確認(NushiJuminJohoDiv div) {
+        List<ShotokuKanri> entityList = getHandler(div).get識別コード();
+        if (entityList == null || entityList.isEmpty()) {
+            List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト
+                    = ViewStateHolder.get(ViewStateKeys.所得照会票発行対象世帯員, List.class);
+            getHandler(div).db出力(所得照会票発行対象世帯員リスト);
+            return ResponseData.of(div).respond();
+        }
+        RString 編集した識別コード = RString.EMPTY;
+        List<ShikibetsuCode> 識別コードリスト = new ArrayList<>();
+        for (ShotokuKanri entity : entityList) {
+            if (!識別コードリスト.contains(entity.getEntity().getShikibetsuCode())) {
+                編集した識別コード = 編集した識別コード.concat(entity.getEntity().getShikibetsuCode().value()).concat(区切);
+                識別コードリスト.add(entity.getEntity().getShikibetsuCode());
+            }
+        }
+        編集した識別コード = 編集した識別コード.substring(整数_0, 編集した識別コード.length() - 整数_1);
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト
+                    = ViewStateHolder.get(ViewStateKeys.所得照会票発行対象世帯員, List.class);
+            getHandler(div).db出力(所得照会票発行対象世帯員リスト);
+            return ResponseData.of(div).respond();
+        }
+        div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
+                .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_TWO);
+        return ResponseData.of(div).addMessage(NushiJuminJohoMessage.登録確認
+                .createMessage(ButtonSelectPattern.OKCancel, 編集した識別コード.toString())).respond();
+
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {

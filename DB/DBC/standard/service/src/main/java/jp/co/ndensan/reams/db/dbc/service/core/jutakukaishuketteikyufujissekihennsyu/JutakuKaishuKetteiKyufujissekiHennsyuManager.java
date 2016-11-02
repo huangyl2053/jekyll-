@@ -345,29 +345,31 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
 
     private KokanShikibetsuNo getKokanShikibetsuNo(
             FlexibleYearMonth サービス提供年月) {
-        KokanShikibetsuNo 交換情報識別番号;
-        if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(DATA_1131);
-        } else if (平成１５年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成１７年１０月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(DATA_1132);
-        } else if (平成１７年１０月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成１８年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(DATA_1133);
-        } else if (平成１８年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成２０年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(DATA_1134);
-        } else if (平成２０年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成２１年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(DATA_1135);
-        } else if (平成２１年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成２４年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(DATA_1136);
-        } else if (平成２４年４月.isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(平成２７年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(DATA_1137);
-        } else {
-            交換情報識別番号 = new KokanShikibetsuNo(DATA_1138);
+        KokanShikibetsuNo 交換情報識別番号 = KokanShikibetsuNo.EMPTY;
+        if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
+            if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+                交換情報識別番号 = new KokanShikibetsuNo(DATA_1131);
+            } else if (平成１５年４月.isBeforeOrEquals(サービス提供年月)
+                    && サービス提供年月.isBefore(平成１７年１０月)) {
+                交換情報識別番号 = new KokanShikibetsuNo(DATA_1132);
+            } else if (平成１７年１０月.isBeforeOrEquals(サービス提供年月)
+                    && サービス提供年月.isBefore(平成１８年４月)) {
+                交換情報識別番号 = new KokanShikibetsuNo(DATA_1133);
+            } else if (平成１８年４月.isBeforeOrEquals(サービス提供年月)
+                    && サービス提供年月.isBefore(平成２０年４月)) {
+                交換情報識別番号 = new KokanShikibetsuNo(DATA_1134);
+            } else if (平成２０年４月.isBeforeOrEquals(サービス提供年月)
+                    && サービス提供年月.isBefore(平成２１年４月)) {
+                交換情報識別番号 = new KokanShikibetsuNo(DATA_1135);
+            } else if (平成２１年４月.isBeforeOrEquals(サービス提供年月)
+                    && サービス提供年月.isBefore(平成２４年４月)) {
+                交換情報識別番号 = new KokanShikibetsuNo(DATA_1136);
+            } else if (平成２４年４月.isBeforeOrEquals(サービス提供年月)
+                    && サービス提供年月.isBefore(平成２７年４月)) {
+                交換情報識別番号 = new KokanShikibetsuNo(DATA_1137);
+            } else {
+                交換情報識別番号 = new KokanShikibetsuNo(DATA_1138);
+            }
         }
         return 交換情報識別番号;
     }

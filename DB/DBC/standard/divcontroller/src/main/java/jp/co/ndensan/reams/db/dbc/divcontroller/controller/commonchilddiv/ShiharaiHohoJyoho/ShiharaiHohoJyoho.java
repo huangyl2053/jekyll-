@@ -208,14 +208,13 @@ public class ShiharaiHohoJyoho {
      */
     public ResponseData<ShiharaiHohoJyohoDiv> onOkClose_ddlKozaID(ShiharaiHohoJyohoDiv div) {
 
-        ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
+        RString selectedKey = div.getDdlKozaID().getSelectedKey();
         ShunoKamokuShubetsu 業務内区分コード = getHandler(div).get業務内区分コード();
         SikyuSinseiJyohoParameter parameter = ViewStateHolder.
                 get(ViewStateKeys.支給申請情報パラメータ, SikyuSinseiJyohoParameter.class);
         getHandler(div).set口座ID(parameter, 業務内区分コード);
-        div.getDdlKozaID().setSelectedKey(RString.EMPTY);
-        response.data = div;
-        return response;
+        div.getDdlKozaID().setSelectedKey(selectedKey);
+        return onChange_ddlKozaID(div);
     }
 
     /**

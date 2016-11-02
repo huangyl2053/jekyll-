@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShot
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp2Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp3Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdTaishoSeitaiyinTemp5Process;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_KijunsyunygetsujiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_kijunsyunygetsujiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.CreateShoriResultCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.DBC190030ProcessParameter;
@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4640-030 jianglaisheng
  */
-public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_KijunsyunygetsujiParameter> {
+public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_kijunsyunygetsujiParameter> {
 
     private static final RString 世帯員把握BATCHID = new RString("DBB002001_SetaiinHaaku");
     private static final RString 管理識別区分 = SetaiinHaakuKanriShikibetsuKubun.高額介護.getコード();

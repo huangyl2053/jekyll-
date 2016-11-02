@@ -62,6 +62,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 自己負担額証明書交付申請書登録 = new RString("DBCUC11100");
     private final RString 曜日_日 = new RString("日曜");
     private final RString 曜日_土 = new RString("土曜");
+    private final RString 非表示 = new RString("非表示");
     private final ShiharaiHohoJyohoDiv div;
     private static final char 全角空白 = '　';
 
@@ -84,6 +85,7 @@ public class ShiharaiHohoJyohoHandler {
     public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
         div.setHdnTxtSubGyomuCode(SubGyomuCode.DBC介護給付.value());
         div.setHdnTxtShikibetsuCode(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
+        div.setHdnGridSelectButtonDisplay(非表示);
 
         ShunoKamokuShubetsu 業務内区分コード = get業務内区分コード();
 
@@ -202,6 +204,22 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanName1().clearValue();
         div.getTxtMeigininKana1().clearDomain();
         div.getTxtMeigininKanji1().clearDomain();
+    }
+
+    /**
+     * 必須項目をクリアします。
+     *
+     */
+    public void clear必須項目() {
+        div.getTxtShiharaiBasho().clearValue();
+        div.getTxtStartYMD().clearValue();
+        div.getTxtStartYobi().clearValue();
+        div.getTxtStartHHMM().clearValue();
+        div.getTxtEndYMD().clearValue();
+        div.getTxtEndYobi().clearValue();
+        div.getTxtEndHHMM().clearValue();
+        div.getDdlKozaID().setSelectedIndex(0);
+        div.getTxtKeiyakuNo().clearValue();
     }
 
     private void 償還払給付または高額給付の照会モード(ShiharaiHohoKubun 支払方法区分) {

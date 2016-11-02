@@ -239,15 +239,8 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<List<RStri
 
         DbWT0001HihokenshaIchijiEntity 被保険者 = new DbWT0001HihokenshaIchijiEntity();
         被保険者.setMeisaiRenban(連番);
-        FlexibleDate 対象年月末日 = new FlexibleDate(対象年月.toDateString().concat(new RString(対象年月.getLastDay())));
-        if (FlexibleDate.EMPTY.equals(被保険者番号変換基準日) || 被保険者番号変換基準日.isBeforeOrEquals(対象年月末日)) {
-            if (導入形態コード.is単一()) {
-                被保険者.setShoHokenshaNo(new ShoKisaiHokenshaNo(zenEntity.get保険者番号()));
-            } else {
-                被保険者.setShoHokenshaNo(null);
-            }
-        } else if (対象年月末日.isBefore(被保険者番号変換基準日)) {
-            被保険者.setShoHokenshaNo(new ShoKisaiHokenshaNo(zenEntity.get保険者番号()));
+        if (null != 対象年月 && !対象年月.isEmpty()) {
+            set証記載保険者番号(対象年月, 被保険者, zenEntity.get保険者番号());
         }
         HihokenshaNo 被保険者番号 = new HihokenshaNo(zenEntity.get被保険者番号());
         被保険者.setOrgHihokenshaNo(被保険者番号);
@@ -257,6 +250,19 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<List<RStri
         被保険者.setServiceTeikyoYmd(new FlexibleDate(date));
         被保険者.setHihokenshaNo(被保険者番号);
         被保険者一時tableWriter.insert(被保険者);
+    }
+
+    private void set証記載保険者番号(FlexibleYearMonth 対象年月, DbWT0001HihokenshaIchijiEntity 被保険者, RString 保険者番号) {
+        FlexibleDate 対象年月末日 = new FlexibleDate(対象年月.toDateString().concat(new RString(対象年月.getLastDay())));
+        if (FlexibleDate.EMPTY.equals(被保険者番号変換基準日) || 被保険者番号変換基準日.isBeforeOrEquals(対象年月末日)) {
+            if (導入形態コード.is単一()) {
+                被保険者.setShoHokenshaNo(new ShoKisaiHokenshaNo(保険者番号));
+            } else {
+                被保険者.setShoHokenshaNo(null);
+            }
+        } else if (対象年月末日.isBefore(被保険者番号変換基準日)) {
+            被保険者.setShoHokenshaNo(new ShoKisaiHokenshaNo(保険者番号));
+        }
     }
 
     private void 後データを一時TBLに登録する(KyufukanrihyoInMeisaiGoEntity goEntity, int 連番,
@@ -300,15 +306,8 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<List<RStri
 
         DbWT0001HihokenshaIchijiEntity 被保険者 = new DbWT0001HihokenshaIchijiEntity();
         被保険者.setMeisaiRenban(連番);
-        FlexibleDate 対象年月末日 = new FlexibleDate(対象年月.toDateString().concat(new RString(対象年月.getLastDay())));
-        if (FlexibleDate.EMPTY.equals(被保険者番号変換基準日) || 被保険者番号変換基準日.isBeforeOrEquals(対象年月末日)) {
-            if (導入形態コード.is単一()) {
-                被保険者.setShoHokenshaNo(new ShoKisaiHokenshaNo(goEntity.get保険者番号()));
-            } else {
-                被保険者.setShoHokenshaNo(null);
-            }
-        } else if (対象年月末日.isBefore(被保険者番号変換基準日)) {
-            被保険者.setShoHokenshaNo(new ShoKisaiHokenshaNo(goEntity.get保険者番号()));
+        if (null != 対象年月 && !対象年月.isEmpty()) {
+            set証記載保険者番号(対象年月, 被保険者, goEntity.get保険者番号());
         }
         HihokenshaNo 被保険者番号 = new HihokenshaNo(goEntity.get被保険者番号());
         被保険者.setOrgHihokenshaNo(被保険者番号);

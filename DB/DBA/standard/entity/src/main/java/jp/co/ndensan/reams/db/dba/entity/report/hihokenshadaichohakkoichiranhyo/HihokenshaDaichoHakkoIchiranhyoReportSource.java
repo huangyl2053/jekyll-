@@ -74,6 +74,17 @@ public class HihokenshaDaichoHakkoIchiranhyoReportSource implements IReportSourc
     public RString listLower_5;
     @ReportItem(name = "listLower_6", length = 1, order = 29)
     public RString listLower_6;
+    @ReportItem(name = "choikiCode", length = 1, order = 30)
+    public RString choikiCode;
+    @ReportItem(name = "番地コード", length = 1, order = 31)
+    public RString 番地コード;
+    @ReportItem(name = "chikuCode1", length = 1, order = 32)
+    public RString chikuCode1;
+    @ReportItem(name = "chikuCode2", length = 1, order = 33)
+    public RString chikuCode2;
+    @ReportItem(name = "chikuCode3", length = 1, order = 34)
+    public RString chikuCode3;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKyufugakugengakuDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -128,7 +128,7 @@ public class tblKyufugakugengakuDiv extends TablePanel {
  * @author 自動生成
  */
 class celKyufugakuAttblKyufugakugengaku extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("Kyufugakugengaku")
     private KyufugakugengakuDiv Kyufugakugengaku;
     @JsonProperty("Kyojuhi")
@@ -178,7 +178,7 @@ class celKyufugakuAttblKyufugakugengaku extends TableCell {
  * @author 自動生成
  */
 class cellKaigohokenAttblKyufugakugengaku extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("KaigoHokenryoIchiran")
     private KaigoHokenryoIchiranDiv KaigoHokenryoIchiran;
 
@@ -208,7 +208,7 @@ class cellKaigohokenAttblKyufugakugengaku extends TableCell {
  * @author 自動生成
  */
 class celShokuhiKogakuAttblKyufugakugengaku extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("ShokuhiFutan")
     private ShokuhiFutanDiv ShokuhiFutan;
     @JsonProperty("KogakuKaigoServiceHi")

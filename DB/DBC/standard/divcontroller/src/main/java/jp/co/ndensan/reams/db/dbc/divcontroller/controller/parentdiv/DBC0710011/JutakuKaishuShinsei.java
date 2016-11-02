@@ -178,7 +178,7 @@ public class JutakuKaishuShinsei {
         if (画面モード.equals(DBC0710011StateName.支給申請モード.getName())) {
             if (JutakukaishuShinseiKubun.事前申請.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 事前申請登録モード);
-            } else if (JutakukaishuShinseiKubun.支給申請.get名称().equals(申請区分)) {
+            } else if (JutakukaishuShinseiKubun.支給申請.get名称().equals(申請区分) || 申請区分.isEmpty()) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
             } else if (JutakukaishuShinseiKubun.取消.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
@@ -191,6 +191,8 @@ public class JutakuKaishuShinsei {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
                 ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_取消);
             }
+        } else {
+            ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
         }
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(div.getJutakuKaishuShinseiList()
                 .getDgJutakuKaishuShinseiList().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth()

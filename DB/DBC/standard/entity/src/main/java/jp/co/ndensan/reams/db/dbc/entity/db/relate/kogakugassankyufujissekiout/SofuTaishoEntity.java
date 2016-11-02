@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout;
 
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +21,7 @@ public class SofuTaishoEntity {
 
     private int 合計;
     private int 総出力件数;
-    private SharedFileDescriptor エントリ情報;
+    private RString 入力ファイルパス;
+    private RString 出力ファイルパス;
 
 }

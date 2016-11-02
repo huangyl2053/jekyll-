@@ -226,6 +226,16 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
+    public TextBox getTxtJyusyo() {
+        return this.getPnlNyuryokuArea().getTxtJyusyo();
+    }
+
+    @JsonIgnore
+    public void  setTxtJyusyo(TextBox txtJyusyo) {
+        this.getPnlNyuryokuArea().setTxtJyusyo(txtJyusyo);
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtTyakkoyotebi() {
         return this.getPnlNyuryokuArea().getTxtTyakkoyotebi();
     }
@@ -273,16 +283,6 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     @JsonIgnore
     public void  setBtnDetailConfirm(Button btnDetailConfirm) {
         this.getPnlNyuryokuArea().setBtnDetailConfirm(btnDetailConfirm);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJyusyo() {
-        return this.getPnlNyuryokuArea().getTxtJyusyo();
-    }
-
-    @JsonIgnore
-    public void  setTxtJyusyo(TextBox txtJyusyo) {
-        this.getPnlNyuryokuArea().setTxtJyusyo(txtJyusyo);
     }
 
     // </editor-fold>

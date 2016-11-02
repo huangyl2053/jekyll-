@@ -40,6 +40,7 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Te
 
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
+    private static final RString カンマ = new RString("～");
 
     private IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper;
 
@@ -94,14 +95,7 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Te
     @Override
     protected void afterExecute() {
         List<HihokenSeikatsuRoreiRelateEntity> 被保生保老齢情報List = mapper.select被保生保老齢情報();
-        boolean 課税区分flag = false;
-        for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
-            TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
-            if (KazeiKubun.課税.getコード().equals(判定明細Entity.getHonninKazeiKubun())) {
-                課税区分flag = true;
-                break;
-            }
-        }
+        boolean 課税区分flag = get課税区分flag(被保生保老齢情報List);
         for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
             TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
             List<UrT0508SeikatsuHogoJukyushaEntity> 生保情報List = 被保生保老齢情報.get生保情報List();
@@ -138,5 +132,34 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Te
             }
             mapper.update世帯員所得判定明細一時(判定明細Entity);
         }
+    }
+
+    private boolean get課税区分flag(List<HihokenSeikatsuRoreiRelateEntity> 被保生保老齢情報List) {
+        RString breakKey = RString.EMPTY;
+        boolean 課税区分flag = false;
+        for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
+            TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
+            RString nowBreakKey = getBreakKey(判定明細Entity);
+            if (breakKey.isEmpty() || breakKey.equals(nowBreakKey)) {
+                if (KazeiKubun.課税.getコード().equals(判定明細Entity.getHonninKazeiKubun())) {
+                    課税区分flag = true;
+                    break;
+                }
+                breakKey = nowBreakKey;
+            } else {
+                breakKey = RString.EMPTY;
+                if (KazeiKubun.課税.getコード().equals(判定明細Entity.getHonninKazeiKubun())) {
+                    課税区分flag = true;
+                    break;
+                }
+            }
+        }
+        return 課税区分flag;
+    }
+
+    private RString getBreakKey(TempSetaiinShotokuHanteiEntity 判定明細Entity) {
+        return 判定明細Entity.getHihokenshaNo().getColumnValue().concat(カンマ)
+                .concat(判定明細Entity.getSetaiCode().getColumnValue()).concat(カンマ)
+                .concat(new RString(判定明細Entity.getKijunYMD().toString()));
     }
 }

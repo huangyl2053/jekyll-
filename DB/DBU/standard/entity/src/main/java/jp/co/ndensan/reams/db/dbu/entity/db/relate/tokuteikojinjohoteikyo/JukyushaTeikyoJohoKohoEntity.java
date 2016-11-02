@@ -38,7 +38,7 @@ public class JukyushaTeikyoJohoKohoEntity {
     private RDateTime lastUpdateTimestamp;
     private boolean logicalDeletedFlag;
     private ShinseishoKanriNo ninteiShinseishoKanriNo;
-    private RString ninteishinsakaiIkenShurui;
+    private RString shinsakaiIken;
     private RDateTime ninteiLastUpdateTimestamp;
     private boolean ninteiLogicalDeletedFlag;
 }

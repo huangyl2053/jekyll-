@@ -165,6 +165,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private FileSpoolManager manager;
     private RString eucFilePath;
     private int 通番 = 1;
+    private int 改頁通番 = 1;
     private NinshoshaSource 確認書認証者情報;
     private List<CreateTaishoSetaiyinEntity> createTaishoSetaiyinList;
     private boolean 文字切れflag = false;
@@ -294,7 +295,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
             KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity = this.set申請一覧Entity(entity);
             KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
-                    申請一覧Entity, parameter.get市町村コード().code市町村RString(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
+                    申請一覧Entity, parameter.get市町村コード().getColumnValue(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
             申請一覧Report.writeBy(dBC200088SourceWriter);
             TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(entity.get対象世帯員());
             eucCsvWriter.writeLine(申請書発行一覧CSV);
@@ -303,6 +304,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         flag = true;
         this.createTaishoSetaiyinList.add(entity);
         this.exEntity = entity;
+        改頁通番++;
 
     }
 
@@ -356,17 +358,13 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
         }
 
-        if (!flag) {
-            if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
-                TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(null);
-                eucCsvWriter.writeLine(申請書発行一覧CSV);
-                KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 収入額適用申請書一覧表 = this.set申請一覧Entity(null);
-                KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
-                        収入額適用申請書一覧表, parameter.get市町村コード().code市町村RString(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
-                申請一覧Report.writeBy(dBC200088SourceWriter);
-
-            }
-
+        if (!flag && this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
+            TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(null);
+            eucCsvWriter.writeLine(申請書発行一覧CSV);
+            KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 収入額適用申請書一覧表 = this.set申請一覧Entity(null);
+            KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
+                    収入額適用申請書一覧表, parameter.get市町村コード().getColumnValue(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
+            申請一覧Report.writeBy(dBC200088SourceWriter);
         }
 
         List<CreateTaishoSetaiyinEntity> taishoSetaiyinList = new ArrayList();
@@ -707,7 +705,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 && !exEntity.get対象世帯員().getShichosonCode().equals(entity.get対象世帯員().getShichosonCode())) {
             flag = true;
         }
-        if (通番 % INT_30 == INT_0) {
+        if (改頁通番 % INT_30 == INT_1) {
             flag = true;
         }
         return flag;
@@ -775,7 +773,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private RString doDecimal編集(Decimal number) {
         if (null == number) {
-            return RString.EMPTY;
+            return new RString(INT_0);
         }
         return DecimalFormatter.toRString(number, 0);
     }

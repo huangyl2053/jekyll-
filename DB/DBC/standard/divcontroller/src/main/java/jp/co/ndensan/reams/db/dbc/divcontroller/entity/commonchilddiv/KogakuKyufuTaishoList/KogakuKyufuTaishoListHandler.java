@@ -37,7 +37,9 @@ public class KogakuKyufuTaishoListHandler {
     private static final RString 照会モード = new RString("照会モード");
     private static final RString 明細編集モード = new RString("明細編集モード");
     private static final RString 合計 = new RString("合計");
-    private static final RString 平成17年10月 = new RString("200510");
+    private static final FlexibleYearMonth 定値年月1 = new FlexibleYearMonth("200509");
+    private static final FlexibleYearMonth 定値年月2 = new FlexibleYearMonth("200606");
+    private static final FlexibleYearMonth 定値年月3 = new FlexibleYearMonth("200806");
     private static final RString 平成17年11月 = new RString("200511");
     private static final RString key0 = new RString("key0");
     private static final RString key1 = new RString("key1");
@@ -219,7 +221,7 @@ public class KogakuKyufuTaishoListHandler {
     }
 
     private void set高額判定根拠(FlexibleYearMonth サービス提供年月, RString 高額判定根拠) {
-        if (サービス提供年月 != null && サービス提供年月.compareTo(new FlexibleYearMonth(平成17年10月)) <= 0) {
+        if (サービス提供年月 != null && サービス提供年月.isBeforeOrEquals(定値年月1)) {
             if (高額判定根拠.contains(月)) {
                 div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setSelectedKey(key0);
             } else {
@@ -254,7 +256,7 @@ public class KogakuKyufuTaishoListHandler {
             } else {
                 div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(key1);
             }
-        } else if (サービス提供年月 != null && new FlexibleYearMonth(平成17年11月).compareTo(サービス提供年月) <= 0) {
+        } else {
             List<RString> list = 高額判定根拠.split(コンマ.toString());
             if (list.get(0).equals(低)) {
                 div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setSelectedKey(key0);
@@ -311,7 +313,6 @@ public class KogakuKyufuTaishoListHandler {
         if (div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue() != null) {
             row.getData7().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
         }
-        //TODO
         row.getData8().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue().
                 add(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue()));
         if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
@@ -326,7 +327,7 @@ public class KogakuKyufuTaishoListHandler {
             row.setData11(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue());
         }
         RStringBuilder builder = new RStringBuilder();
-        if (サービス提供年月 != null && サービス提供年月.compareTo(new FlexibleYearMonth(平成17年10月)) <= 0) {
+        if (サービス提供年月 != null && サービス提供年月.isBeforeOrEquals(定値年月1)) {
             if (div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().getSelectedKey().equals(key0)) {
                 builder.append(月);
                 builder.append(コンマ);
@@ -369,7 +370,7 @@ public class KogakuKyufuTaishoListHandler {
                 builder.append(コンマ);
             }
             row.setData9(builder.toRString());
-        } else if (サービス提供年月 != null && new FlexibleYearMonth(平成17年11月).compareTo(サービス提供年月) <= 0) {
+        } else {
             if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key0)) {
                 builder.append(低);
                 builder.append(コンマ);
@@ -407,9 +408,11 @@ public class KogakuKyufuTaishoListHandler {
                 builder.append(老);
                 builder.append(コンマ);
             }
-            if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key1)) {
+            if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key1)
+                    && !div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().isDisabled()) {
                 builder.append(緩１);
-            } else if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key2)) {
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key2)
+                    && !div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().isDisabled()) {
                 builder.append(緩１);
             }
             row.setData9(builder.toRString());
@@ -426,7 +429,7 @@ public class KogakuKyufuTaishoListHandler {
      * @param サービス提供年月 FlexibleYearMonth
      */
     public void 修正制御(FlexibleYearMonth サービス提供年月) {
-        if (サービス提供年月 != null && サービス提供年月.compareTo(new FlexibleYearMonth(平成17年10月)) <= 0) {
+        if (サービス提供年月 != null && サービス提供年月.isBeforeOrEquals(定値年月1)) {
             div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setDisabled(false);
@@ -434,7 +437,17 @@ public class KogakuKyufuTaishoListHandler {
             div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(true);
             div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
-        } else if (サービス提供年月 != null && new FlexibleYearMonth(平成17年11月).compareTo(サービス提供年月) <= 0) {
+        } else if (サービス提供年月 != null && 定値年月1.isBefore(サービス提供年月)
+                && サービス提供年月.isBeforeOrEquals(定値年月2)) {
+            div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbGassan().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
+        } else if (サービス提供年月 != null && 定値年月2.isBefore(サービス提供年月)
+                && サービス提供年月.isBeforeOrEquals(定値年月3)) {
             div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setDisabled(true);
             div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setDisabled(false);
@@ -442,6 +455,14 @@ public class KogakuKyufuTaishoListHandler {
             div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(false);
+        } else if (サービス提供年月 != null && 定値年月3.isBefore(サービス提供年月)) {
+            div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbGassan().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
         }
     }
 

@@ -273,7 +273,7 @@ public class KogakuServicehiDetailDivHandler {
      * @return Decimal
      */
     public Decimal get本人支払額() {
-        return div.getTxtHonninShiharaiGaku().getValue();
+        return div.getTxtHonninShiharaiGaku().getValue() == null ? Decimal.ZERO : div.getTxtHonninShiharaiGaku().getValue();
     }
 
     /**
@@ -326,7 +326,7 @@ public class KogakuServicehiDetailDivHandler {
      * @return Decimal
      */
     public Decimal get支給金額() {
-        return div.getTxtShikyuKingaku().getValue();
+        return div.getTxtShikyuKingaku().getValue() == null ? Decimal.ZERO : div.getTxtShikyuKingaku().getValue();
     }
 
     /**

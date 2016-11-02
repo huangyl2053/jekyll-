@@ -8,18 +8,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.IJyutakugaisyunaiyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * JutakuKaishuShinseiJyohoToroku のクラスファイル
- *
- * @reamsid_L DBC-0992-120 yebangqiang
+ * JutakuKaishuShinseiJyohoToroku のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -123,7 +124,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setUpLine(HorizontalLine UpLine) {
+    public void  setUpLine(HorizontalLine UpLine) {
         this.getCommHeadPanel().setUpLine(UpLine);
     }
 
@@ -133,7 +134,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnShinseiJyoho(Button btnShinseiJyoho) {
+    public void  setBtnShinseiJyoho(Button btnShinseiJyoho) {
         this.getCommHeadPanel().setBtnShinseiJyoho(btnShinseiJyoho);
     }
 
@@ -143,7 +144,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnShokanKetteiJyoho(Button btnShokanKetteiJyoho) {
+    public void  setBtnShokanKetteiJyoho(Button btnShokanKetteiJyoho) {
         this.getCommHeadPanel().setBtnShokanKetteiJyoho(btnShokanKetteiJyoho);
     }
 
@@ -153,7 +154,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDownLine(HorizontalLine DownLine) {
+    public void  setDownLine(HorizontalLine DownLine) {
         this.getCommHeadPanel().setDownLine(DownLine);
     }
 
@@ -163,7 +164,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTeikyoYM(TextBoxDate txtTeikyoYM) {
+    public void  setTxtTeikyoYM(TextBoxDate txtTeikyoYM) {
         this.getCommHeadPanel().setTxtTeikyoYM(txtTeikyoYM);
     }
 
@@ -173,7 +174,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSeiriNo(TextBoxCode txtSeiriNo) {
+    public void  setTxtSeiriNo(TextBoxCode txtSeiriNo) {
         this.getCommHeadPanel().setTxtSeiriNo(txtSeiriNo);
     }
 
@@ -183,7 +184,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlSyomeisyo(DropDownList ddlSyomeisyo) {
+    public void  setDdlSyomeisyo(DropDownList ddlSyomeisyo) {
         this.getCommHeadPanel().setDdlSyomeisyo(ddlSyomeisyo);
     }
 
@@ -193,7 +194,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
+    public void  setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
         this.getCommHeadPanel().setTxtKyufuritsu(txtKyufuritsu);
     }
 
@@ -203,7 +204,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTabShinseiContents(tabShinseiContentsDiv tabShinseiContents) {
+    public void  setTabShinseiContents(tabShinseiContentsDiv tabShinseiContents) {
         this.getCommHeadPanel().setTabShinseiContents(tabShinseiContents);
     }
 
@@ -213,7 +214,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTabShinseiJyoho(tabShinseiJyohoDiv tabShinseiJyoho) {
+    public void  setTabShinseiJyoho(tabShinseiJyohoDiv tabShinseiJyoho) {
         this.getCommHeadPanel().getTabShinseiContents().setTabShinseiJyoho(tabShinseiJyoho);
     }
 
@@ -223,7 +224,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setJutakuKaishuShinseiContents(JutakuKaishuShinseiContentsDiv JutakuKaishuShinseiContents) {
+    public void  setJutakuKaishuShinseiContents(JutakuKaishuShinseiContentsDiv JutakuKaishuShinseiContents) {
         this.getCommHeadPanel().getTabShinseiContents().getTabShinseiJyoho().setJutakuKaishuShinseiContents(JutakuKaishuShinseiContents);
     }
 
@@ -233,7 +234,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTabKozaJyoho(tabKozaJyohoDiv tabKozaJyoho) {
+    public void  setTabKozaJyoho(tabKozaJyohoDiv tabKozaJyoho) {
         this.getCommHeadPanel().getTabShinseiContents().setTabKozaJyoho(tabKozaJyoho);
     }
 
@@ -248,7 +249,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyohoDiv tabJutakuKaisyuJyoho) {
+    public void  setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyohoDiv tabJutakuKaisyuJyoho) {
         this.getCommHeadPanel().getTabShinseiContents().setTabJutakuKaisyuJyoho(tabJutakuKaisyuJyoho);
     }
 
@@ -258,7 +259,7 @@ public class JutakuKaishuShinseiJyohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setJutakuKaishuShinseiResetInfo(JutakuKaishuShinseiResetInfoDiv JutakuKaishuShinseiResetInfo) {
+    public void  setJutakuKaishuShinseiResetInfo(JutakuKaishuShinseiResetInfoDiv JutakuKaishuShinseiResetInfo) {
         this.getCommHeadPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().setJutakuKaishuShinseiResetInfo(JutakuKaishuShinseiResetInfo);
     }
 

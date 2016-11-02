@@ -46,8 +46,6 @@ public class DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter extends Batch
     private static final String SHOKANKETTEIYMDTO = "shokanKetteiYMDTo";
     private static final String TAB = "tab";
     private static final String REPORTID = "reportId";
-
-    private static final String REPORTTYPEID = "reportTypeId";
     private static final String REPORTCREATEDATETIME = "reportCreateDateTime";
 
     @BatchParameter(key = KIJUNYMD, name = "基準日")
@@ -88,8 +86,6 @@ public class DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter extends Batch
     private Long tab;
     @BatchParameter(key = REPORTID, name = "帳票ID")
     private ReportId reportId;
-    @BatchParameter(key = REPORTTYPEID, name = "帳票分類ID")
-    private ReportId reportTypeId;
     @BatchParameter(key = REPORTCREATEDATETIME, name = "帳票作成日時")
     private RDateTime reportCreateDateTime;
 
@@ -118,7 +114,6 @@ public class DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter extends Batch
                 shokanKetteiYMDTo,
                 tab,
                 reportId,
-                reportTypeId,
                 reportCreateDateTime);
     }
 
@@ -156,7 +151,6 @@ public class DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter extends Batch
                 shokanKetteiYMDTo,
                 tab,
                 reportId,
-                reportTypeId,
                 reportCreateDateTime);
     }
 }

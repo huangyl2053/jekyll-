@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyojuhiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -93,8 +93,18 @@ public class KyojuhiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiKoshitsu() {
+        return this.getTblKyojuhi().getIcoDaiichiKoshitsu();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiKoshitsu() {
         return this.getTblKyojuhi().getTxtDaiichiKoshitsu();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaiichiJunKoshitsu() {
+        return this.getTblKyojuhi().getIcoDaiichiJunKoshitsu();
     }
 
     @JsonIgnore
@@ -103,13 +113,28 @@ public class KyojuhiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiTokuyo() {
+        return this.getTblKyojuhi().getIcoDaiichiTokuyo();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiTokuyo() {
         return this.getTblKyojuhi().getTxtDaiichiTokuyo();
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiRokenRyoyogata() {
+        return this.getTblKyojuhi().getIcoDaiichiRokenRyoyogata();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiRokenRyoyogata() {
         return this.getTblKyojuhi().getTxtDaiichiRokenRyoyogata();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaiichiTashoshitsu() {
+        return this.getTblKyojuhi().getIcoDaiichiTashoshitsu();
     }
 
     @JsonIgnore
@@ -123,8 +148,18 @@ public class KyojuhiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDainiKoshitsu() {
+        return this.getTblKyojuhi().getIcoDainiKoshitsu();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDainiKoshitsu() {
         return this.getTblKyojuhi().getTxtDainiKoshitsu();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDainiJunKoshitsu() {
+        return this.getTblKyojuhi().getIcoDainiJunKoshitsu();
     }
 
     @JsonIgnore
@@ -133,13 +168,28 @@ public class KyojuhiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDainiTokuyo() {
+        return this.getTblKyojuhi().getIcoDainiTokuyo();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDainiTokuyo() {
         return this.getTblKyojuhi().getTxtDainiTokuyo();
     }
 
     @JsonIgnore
+    public Icon getIcoDainiRokenRyoyogata() {
+        return this.getTblKyojuhi().getIcoDainiRokenRyoyogata();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDainiRokenRyoyogata() {
         return this.getTblKyojuhi().getTxtDainiRokenRyoyogata();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDainiTashoshitsu() {
+        return this.getTblKyojuhi().getIcoDainiTashoshitsu();
     }
 
     @JsonIgnore
@@ -153,8 +203,18 @@ public class KyojuhiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaisanKoshitsu() {
+        return this.getTblKyojuhi().getIcoDaisanKoshitsu();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaisanKoshitsu() {
         return this.getTblKyojuhi().getTxtDaisanKoshitsu();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanJunKoshitsu() {
+        return this.getTblKyojuhi().getIcoDaisanJunKoshitsu();
     }
 
     @JsonIgnore
@@ -163,13 +223,28 @@ public class KyojuhiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaisanTokuyo() {
+        return this.getTblKyojuhi().getIcoDaisanTokuyo();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaisanTokuyo() {
         return this.getTblKyojuhi().getTxtDaisanTokuyo();
     }
 
     @JsonIgnore
+    public Icon getIcoDaisanRokenRyoyogata() {
+        return this.getTblKyojuhi().getIcoDaisanRokenRyoyogata();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaisanRokenRyoyogata() {
         return this.getTblKyojuhi().getTxtDaisanRokenRyoyogata();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanTashoshitsu() {
+        return this.getTblKyojuhi().getIcoDaisanTashoshitsu();
     }
 
     @JsonIgnore
@@ -183,8 +258,18 @@ public class KyojuhiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuKoshitsu() {
+        return this.getTblKyojuhi().getIcoKijunHiyogakuKoshitsu();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuKoshitsu() {
         return this.getTblKyojuhi().getTxtKijunHiyogakuKoshitsu();
+    }
+
+    @JsonIgnore
+    public Icon getIcoKijunHiyogakuJunKoshitsu() {
+        return this.getTblKyojuhi().getIcoKijunHiyogakuJunKoshitsu();
     }
 
     @JsonIgnore
@@ -193,13 +278,28 @@ public class KyojuhiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuTokuyo() {
+        return this.getTblKyojuhi().getIcoKijunHiyogakuTokuyo();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuTokuyo() {
         return this.getTblKyojuhi().getTxtKijunHiyogakuTokuyo();
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuRokenRyoyogata() {
+        return this.getTblKyojuhi().getIcoKijunHiyogakuRokenRyoyogata();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuRokenRyoyogata() {
         return this.getTblKyojuhi().getTxtKijunHiyogakuRokenRyoyogata();
+    }
+
+    @JsonIgnore
+    public Icon getIcoKijunHiyogakuTashoshitsu() {
+        return this.getTblKyojuhi().getIcoKijunHiyogakuTashoshitsu();
     }
 
     @JsonIgnore

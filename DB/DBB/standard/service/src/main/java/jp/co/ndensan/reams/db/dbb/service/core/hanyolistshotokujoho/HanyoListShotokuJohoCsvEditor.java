@@ -283,9 +283,13 @@ public class HanyoListShotokuJohoCsvEditor {
             HanyoListShotokuJohoEntity entity) {
         csvEntity.set市町村コード(isNull(entity.get市町村コード())
                 ? RString.EMPTY : entity.get市町村コード().value());
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード(),
-                FlexibleDate.getNowDate());
-        csvEntity.set市町村名(地方公共団体.get市町村名());
+        if (entity.get市町村コード() != null) {
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード(),
+                    FlexibleDate.getNowDate());
+            csvEntity.set市町村名(地方公共団体.get市町村名());
+        } else {
+            csvEntity.set市町村名(RString.EMPTY);
+        }
         AtenaMeisho atenaMeisho2 = entity.get宛先Entity().getKanjiShimei();
         if (atenaMeisho2 != null) {
             csvEntity.set送付先氏名(atenaMeisho2.value());
