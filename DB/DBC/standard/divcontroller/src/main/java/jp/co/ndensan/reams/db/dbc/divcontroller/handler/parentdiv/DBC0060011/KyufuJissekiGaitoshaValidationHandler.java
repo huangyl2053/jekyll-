@@ -23,6 +23,7 @@ public class KyufuJissekiGaitoshaValidationHandler {
 
     private final KyufuJissekiGaitoshaDiv div;
     private static final RString 必須項目 = new RString("被保番号、支援事業者番号");
+    private static final RString 被保険者台帳 = new RString("被保険者台帳");
 
     /**
      * コンストラクタです。
@@ -41,10 +42,22 @@ public class KyufuJissekiGaitoshaValidationHandler {
     public ValidationMessageControlPairs validateFor必須項目() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue().isEmpty()
-                || div.getSearchToKyufujissekiPanel().getTxtJigyoshaNo().getValue().isEmpty()) {
+                || RString.isNullOrEmpty(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo())) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, 必須項目.toString())));
         }
+        return validPairs;
+    }
+
+    /**
+     * 存在しないエラーメッセージを取得します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs get存在しないエラーメッセージ() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(
+                new IdocheckMessages(UrErrorMessages.存在しない, 被保険者台帳.toString())));
         return validPairs;
     }
 

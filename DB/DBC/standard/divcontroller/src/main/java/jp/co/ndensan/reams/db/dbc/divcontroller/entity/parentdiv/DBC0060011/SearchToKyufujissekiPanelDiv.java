@@ -5,6 +5,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SearchToKyufujissekiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,15 +28,13 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     @JsonProperty("txtHihoNo")
     private TextBoxCode txtHihoNo;
     @JsonProperty("btnSearchHihokensha")
-    private ButtonDialog btnSearchHihokensha;
+    private Button btnSearchHihokensha;
     @JsonProperty("txtHihoName")
     private TextBox txtHihoName;
-    @JsonProperty("txtJigyoshaNo")
-    private TextBoxCode txtJigyoshaNo;
-    @JsonProperty("btnSearchJigyosha")
-    private ButtonDialog btnSearchJigyosha;
-    @JsonProperty("txtJigyoshaName")
-    private TextBox txtJigyoshaName;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
+    @JsonProperty("ccdJigyoshaSentaku")
+    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaSentaku;
     @JsonProperty("txtTeikyoYMRange")
     private TextBoxDateRange txtTeikyoYMRange;
     @JsonProperty("lbl1")
@@ -69,7 +71,7 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
      * @return btnSearchHihokensha
      */
     @JsonProperty("btnSearchHihokensha")
-    public ButtonDialog getBtnSearchHihokensha() {
+    public Button getBtnSearchHihokensha() {
         return btnSearchHihokensha;
     }
 
@@ -78,7 +80,7 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
      * @param btnSearchHihokensha btnSearchHihokensha
      */
     @JsonProperty("btnSearchHihokensha")
-    public void setBtnSearchHihokensha(ButtonDialog btnSearchHihokensha) {
+    public void setBtnSearchHihokensha(Button btnSearchHihokensha) {
         this.btnSearchHihokensha = btnSearchHihokensha;
     }
 
@@ -101,57 +103,21 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     }
 
     /*
-     * gettxtJigyoshaNo
-     * @return txtJigyoshaNo
+     * getccdHokenshaList
+     * @return ccdHokenshaList
      */
-    @JsonProperty("txtJigyoshaNo")
-    public TextBoxCode getTxtJigyoshaNo() {
-        return txtJigyoshaNo;
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     /*
-     * settxtJigyoshaNo
-     * @param txtJigyoshaNo txtJigyoshaNo
+     * getccdJigyoshaSentaku
+     * @return ccdJigyoshaSentaku
      */
-    @JsonProperty("txtJigyoshaNo")
-    public void setTxtJigyoshaNo(TextBoxCode txtJigyoshaNo) {
-        this.txtJigyoshaNo = txtJigyoshaNo;
-    }
-
-    /*
-     * getbtnSearchJigyosha
-     * @return btnSearchJigyosha
-     */
-    @JsonProperty("btnSearchJigyosha")
-    public ButtonDialog getBtnSearchJigyosha() {
-        return btnSearchJigyosha;
-    }
-
-    /*
-     * setbtnSearchJigyosha
-     * @param btnSearchJigyosha btnSearchJigyosha
-     */
-    @JsonProperty("btnSearchJigyosha")
-    public void setBtnSearchJigyosha(ButtonDialog btnSearchJigyosha) {
-        this.btnSearchJigyosha = btnSearchJigyosha;
-    }
-
-    /*
-     * gettxtJigyoshaName
-     * @return txtJigyoshaName
-     */
-    @JsonProperty("txtJigyoshaName")
-    public TextBox getTxtJigyoshaName() {
-        return txtJigyoshaName;
-    }
-
-    /*
-     * settxtJigyoshaName
-     * @param txtJigyoshaName txtJigyoshaName
-     */
-    @JsonProperty("txtJigyoshaName")
-    public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.txtJigyoshaName = txtJigyoshaName;
+    @JsonProperty("ccdJigyoshaSentaku")
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return ccdJigyoshaSentaku;
     }
 
     /*
