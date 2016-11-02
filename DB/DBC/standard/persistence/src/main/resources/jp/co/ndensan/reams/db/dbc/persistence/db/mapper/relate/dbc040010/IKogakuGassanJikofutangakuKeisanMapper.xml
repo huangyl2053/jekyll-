@@ -80,13 +80,13 @@
         FROM
         master
         LEFT JOIN
-        <include refid="tableName_PsmParamClassShikibetsuTaisho_left" />
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
         (SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT)) FROM master) 
-        <include refid="tableName_PsmParamClassShikibetsuTaisho_right" />
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
         AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode"=master."shikibetsuCode"
         ORDER BY
-        master."taishoHihokenshaNo",master."hokenshaNo",master."taishoNendo",master."seiriNo"
+        master."taishoHihokenshaNo" ASC
     </select>
 
     <!--シート「対象者抽出事業分」-->
@@ -169,13 +169,13 @@
         FROM
         master
         LEFT JOIN
-        <include refid="tableName_PsmParamClassShikibetsuTaisho_left" />
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
         (SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT)) FROM master)
-        <include refid="tableName_PsmParamClassShikibetsuTaisho_right" />
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
         AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode"=master."shikibetsuCode"
         ORDER BY
-        master."taishoHihokenshaNo",master."hokenshaNo",master."taishoNendo",master."shikyuShinseishoSeiriNo"
+        master."taishoHihokenshaNo" ASC
     </select>
 
     <!--BatchStep2.3<変更>-->
@@ -263,7 +263,7 @@
         ,(SUM("hokenRiyoshaFutangaku")+SUM("hokenDekidakaIryohiRiyoshaFutangaku")) AS "riyoshaFutangaku"
         FROM rgdb."DbT3033KyufujissekiShukei" AS "A"
         WHERE "isDeleted"=FALSE
-        AND "serviceSyuruiCode" IN
+        AND "serviceSyuruiCode" NOT IN
         <choose>
             <when test="事業分フラグ">
                 <include refid="WKサービス種類コード集計対象事業分" />
@@ -1162,92 +1162,4 @@
         ,"temp"."biko107"as "temp_biko107"
         ,"temp"."serviceTeikyoYMs"as "temp_serviceTeikyoYMs"
     </sql>
-    <sql id="tableName_PsmParamClassShikibetsuTaisho_left">
-        rgua."UaFt200FindShikibetsuTaisho"(
-        #{uaft200_dataShutokuKubun},
-        #{uaft200_kijunYMD},
-        #{uaft200_jutogaiYusenFlag},
-        #{uaft200_gyomuCode},
-        #{uaft200_setaiinShutoku},
-        <if test="uaft200_isUseTableColumn">
-            ${uaft200_shikibetsuCode},
-        </if>
-        <if test="!uaft200_isUseTableColumn">
-            #{uaft200_shikibetsuCode},
-        </if>
-        #{uaft200_setaiCode},
-        #{uaft200_kojinNo},
-        #{uaft200_hojinNo},
-        #{uaft200_juminhyoCode},
-        #{uaft200_zairyuCardtoNo},
-        #{uaft200_shimei},
-        #{uaft200_shimeiBunkatsu1},
-        #{uaft200_shimeiBunkatsu2},
-        #{uaft200_shimeiBunkatsu3},
-        #{uaft200_shimei_joken},
-        #{uaft200_shimei_rirekiumu},
-        #{uaft200_seinengappiYmd},
-        #{uaft200_seibetsuCode},
-        #{uaft200_choikiCode},
-        #{uaft200_choiki},
-        #{uaft200_zenkokuJushoCode},
-        #{uaft200_zenkokuJusho},
-        #{uaft200_jushoMeisho_Joken},
-        #{uaft200_jusho_rirekiumu},
-        #{uaft200_gyoseikuCode},
-        #{uaft200_chikuCode1},
-        #{uaft200_chikuCode2},
-        #{uaft200_chikuCode3},
-        #{uaft200_banchiCode1},
-        #{uaft200_banchiCode2},
-        #{uaft200_banchiCode3},
-        #{uaft200_banchiCode4},
-        #{uaft200_katagakiMeisho},
-        #{uaft200_katagaki_Joken},
-        #{uaft200_yubinNo},
-        #{uaft200_juminJutonaiNihonjin},
-        #{uaft200_juminJutonaiGaikokujin},
-        #{uaft200_juminJutogaiNihonjin},
-        #{uaft200_juminJutogaiGaikokujin},
-        #{uaft200_jumin_Hojin},
-        #{uaft200_jumin_Kyoyusha},
-        #{uaft200_juminJotaiJumin},
-        #{uaft200_juminJotaiJutogai},
-        #{uaft200_juminJotaiShojosha},
-        #{uaft200_juminJotaiTenshutsusha},
-        #{uaft200_juminJotaiShibosha},
-        #{uaft200_renrakusaki},
-        #{uaft200_hojinKeitaiCode},
-        #{uaft200_daihyoShikibetsuCode},
-        #{uaft200_daihyoShimei},
-        #{uaft200_daihyoShimeiBunkatsu1},
-        #{uaft200_daihyoShimeiBunkatsu2},
-        #{uaft200_daihyoShimeiBunkatsu3},
-        #{uaft200_daihyoShimei_joken},
-        #{uaft200_daihyoShimei_rirekiumu},
-        #{uaft200_kokusekiChiikiCode},
-        #{uaft200_lasdecCode},
-        #{uaft200_sakujoShutoku},
-        #{uaft200_doitsuninYusen},
-        #{uaft200_kosekiShutoku},
-        #{uaft200_choikiCode_ST},
-        #{uaft200_choikiCode_ED},
-        #{uaft200_zenkokuJushoCode_ST},
-        #{uaft200_zenkokuJushoCode_ED},
-        #{uaft200_gyoseikuCode_ST},
-        #{uaft200_gyoseikuCode_ED},
-        #{uaft200_chikuCode1_ST},
-        #{uaft200_chikuCode1_ED},
-        #{uaft200_chikuCode2_ST},
-        #{uaft200_chikuCode2_ED},
-        #{uaft200_chikuCode3_ST},
-        #{uaft200_chikuCode3_ED},
-        #{uaft200_shikibetsuCode_ST},
-        #{uaft200_shikibetsuCode_ED},
-        #{uaft200_setaiCode_ST},
-        #{uaft200_setaiCode_ED},
-        #{uaft200_yubinNo_ST},
-        #{uaft200_yubinNo_ED},
-    </sql>
-    <sql id="tableName_PsmParamClassShikibetsuTaisho_right">)</sql>
 </mapper>  
