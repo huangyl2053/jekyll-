@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
+import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
+import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -57,10 +59,18 @@ public class TokuchoDouteiListJoho {
             this.基礎年金番号 = resultEntity.getUet0511entity().getKisoNenkinNo();
             this.年金コード = resultEntity.getUet0511entity().getNenkinCode();
             this.生年月日 = resultEntity.getUet0511entity().getDtBirthDay();
-            RString dtSeibetsu = resultEntity.getUet0511entity().getDtSeibetsu().getColumnValue();
+            RString dtSeibetsu = RString.EMPTY;
+            SeibetsuCodeNenkinTokucho 性別コード_Before = resultEntity.getUet0511entity().getDtSeibetsu();
+            if (性別コード_Before != null) {
+                dtSeibetsu = 性別コード_Before.getColumnValue();
+            }
             this.性別コード = dtSeibetsu;
             this.住所 = resultEntity.getUet0511entity().getDtKanjiJusho();
-            Code gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode().value();
+            Code gimushaCode = null;
+            TokubetsuChoshuGimushaCode 特徴義務者コード_Before = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode();
+            if (特徴義務者コード_Before != null) {
+                gimushaCode = 特徴義務者コード_Before.value();
+            }
             if (gimushaCode != null) {
                 this.特徴義務者コード = gimushaCode.value();
             }
