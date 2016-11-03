@@ -18,6 +18,7 @@
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter">
         SELECT
         DbT5101."hihokenshaName" AS "DbT5101_hihokenshaName",
+        DbT5101."hihokenshaKana" AS "DbT5101_hihokenshaKana",
         DbT5101."seinengappiYMD" AS "DbT5101_seinengappiYMD",
         DbT5101."age" AS "DbT5101_age",
         DbT5101."seibetsu" AS "DbT5101_seibetsu",
