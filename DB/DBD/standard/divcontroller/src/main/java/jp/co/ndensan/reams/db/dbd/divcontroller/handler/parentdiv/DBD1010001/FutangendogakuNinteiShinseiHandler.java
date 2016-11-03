@@ -89,6 +89,7 @@ public class FutangendogakuNinteiShinseiHandler {
     private static final RString 認定なし = new RString("認定なし");
     private static final RString 承認する = new RString("1");
     private static final RString 承認しない = new RString("0");
+    private static final RString 漢字承認する = new RString("承認する");
 
     /**
      * コンストラクタです。
@@ -855,16 +856,14 @@ public class FutangendogakuNinteiShinseiHandler {
         FlexibleDate 有効期限 = futanGendogakuNintei.get適用終了年月日();
         List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
         if (適用開始年月日.isEmpty() && !申請メニューID.equals(ResponseHolder.getMenuID())) {
-            if (rows.isEmpty() || rows.size() == 1) {
-                適用開始年月日 = new FlexibleDate(RDate.getNowDate().getYearValue(),
-                        RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue());
+            if (rows.size() == 1) {
+                適用開始年月日 = FlexibleDate.getNowDate();
             } else {
-                適用開始年月日 = new FlexibleDate(rows.get(1).getTxtYukoKigenYMD().
-                        getValue().plusDay(1).toString());
+                適用開始年月日 = get適用日初期値();
             }
         }
 
-        if (有効期限.isEmpty()) {
+        if (有効期限.isEmpty() && !申請メニューID.equals(ResponseHolder.getMenuID())) {
             有効期限 = FutangendogakuNinteiService.createInstance().estimate有効期限(適用開始年月日);
         }
 
@@ -1382,52 +1381,56 @@ public class FutangendogakuNinteiShinseiHandler {
         boolean added = false;
         FutanGendogakuNintei fgn;
         FutanGendogakuNintei fgn2;
-
+        int 履歴番号 = 0;
+        if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
+            履歴番号 = 1;
+        }
         for (int i = list.size() - 1; i >= 0; i--) {
             FutanGendogakuNinteiViewState ninteiViewState = list.get(i);
             FutanGendogakuNintei futanGendogakuNintei = ninteiViewState.getFutanGendogakuNintei();
             if (futanGendogakuNintei.get適用開始年月日().isBefore(申請情報.get適用開始年月日())) {
 
                 fgn = new FutanGendogakuNintei(
-                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号());
-                fgn = copyFutanGendogakuNintei(futanGendogakuNintei, fgn, futanGendogakuNintei.get履歴番号());
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), 履歴番号);
+                fgn = copyFutanGendogakuNintei(futanGendogakuNintei, fgn, 履歴番号);
                 ninteiViewState.setFutanGendogakuNintei(fgn);
                 newList.add(0, ninteiViewState);
-
+                履歴番号 += 1;
                 if (i == 0) {
                     fgn2 = new FutanGendogakuNintei(
-                            申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), futanGendogakuNintei.get履歴番号() + 1);
-                    fgn2 = copyFutanGendogakuNintei(申請情報, fgn2, futanGendogakuNintei.get履歴番号() + 1);
+                            申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), 履歴番号);
+                    fgn2 = copyFutanGendogakuNintei(申請情報, fgn2, 履歴番号);
                     FutanGendogakuNinteiViewState newNinteiViewState2
-                            = new FutanGendogakuNinteiViewState(fgn2, EntityDataState.Added, fgn2.get履歴番号());
+                            = new FutanGendogakuNinteiViewState(fgn2, EntityDataState.Added, 履歴番号);
                     newList.add(0, newNinteiViewState2);
                     added = true;
+                    履歴番号 += 1;
                 }
 
             } else if (!added || (futanGendogakuNintei.get適用開始年月日().equals(申請情報.get適用開始年月日())
                     && futanGendogakuNintei.get決定区分().equals(承認する) && 申請情報.get決定区分().equals(承認しない))) {
 
                 fgn = new FutanGendogakuNintei(
-                        申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), futanGendogakuNintei.get履歴番号());
-                fgn = copyFutanGendogakuNintei(申請情報, fgn, futanGendogakuNintei.get履歴番号());
-                FutanGendogakuNinteiViewState newNinteiViewState = new FutanGendogakuNinteiViewState(fgn, EntityDataState.Added, fgn.get履歴番号());
+                        申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), 履歴番号);
+                fgn = copyFutanGendogakuNintei(申請情報, fgn, 履歴番号);
+                FutanGendogakuNinteiViewState newNinteiViewState = new FutanGendogakuNinteiViewState(fgn, EntityDataState.Added, 履歴番号);
                 newList.add(0, newNinteiViewState);
-
+                履歴番号 += 1;
                 fgn2 = new FutanGendogakuNintei(
-                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号() + 1);
-                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, futanGendogakuNintei.get履歴番号() + 1);
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), 履歴番号);
+                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, 履歴番号);
                 ninteiViewState.setFutanGendogakuNintei(fgn2);
                 newList.add(0, ninteiViewState);
 
                 added = true;
-
+                履歴番号 += 1;
             } else {
                 fgn2 = new FutanGendogakuNintei(
-                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号() + 1);
-                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, futanGendogakuNintei.get履歴番号() + 1);
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), 履歴番号);
+                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, 履歴番号);
                 ninteiViewState.setFutanGendogakuNintei(fgn2);
                 newList.add(0, ninteiViewState);
-
+                履歴番号 += 1;
             }
         }
         return newList;
@@ -1439,49 +1442,55 @@ public class FutangendogakuNinteiShinseiHandler {
         boolean added = false;
         FutanGendogakuNintei fgn;
         FutanGendogakuNintei fgn2;
+        int 履歴番号 = 0;
+        if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
+            履歴番号 = 1;
+        }
         for (int i = list.size() - 1; i >= 0; i--) {
             FutanGendogakuNinteiViewState ninteiViewState = list.get(i);
             FutanGendogakuNintei futanGendogakuNintei = ninteiViewState.getFutanGendogakuNintei();
             if (futanGendogakuNintei.get適用開始年月日().isBefore(申請情報.get適用開始年月日())) {
 
                 fgn = new FutanGendogakuNintei(
-                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号());
-                fgn = copyFutanGendogakuNintei(futanGendogakuNintei, fgn, futanGendogakuNintei.get履歴番号());
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), 履歴番号);
+                fgn = copyFutanGendogakuNintei(futanGendogakuNintei, fgn, 履歴番号);
                 ninteiViewState.setFutanGendogakuNintei(fgn);
                 newList.add(0, ninteiViewState);
-
+                履歴番号 += 1;
                 if (i == 0) {
                     fgn2 = new FutanGendogakuNintei(
-                            申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), futanGendogakuNintei.get履歴番号() + 1);
-                    fgn2 = copyFutanGendogakuNintei(申請情報, fgn2, futanGendogakuNintei.get履歴番号() + 1);
+                            申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), 履歴番号);
+                    fgn2 = copyFutanGendogakuNintei(申請情報, fgn2, 履歴番号);
                     FutanGendogakuNinteiViewState newNinteiViewState2
-                            = new FutanGendogakuNinteiViewState(fgn2, EntityDataState.Modified, fgn2.get履歴番号());
+                            = new FutanGendogakuNinteiViewState(fgn2, EntityDataState.Modified, 履歴番号);
                     newList.add(0, newNinteiViewState2);
                     added = true;
+                    履歴番号 += 1;
                 }
 
             } else if (!added || (futanGendogakuNintei.get適用開始年月日().equals(申請情報.get適用開始年月日())
                     && futanGendogakuNintei.get決定区分().equals(承認する) && 申請情報.get決定区分().equals(承認しない))) {
 
                 fgn = new FutanGendogakuNintei(
-                        申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), futanGendogakuNintei.get履歴番号());
-                fgn = copyFutanGendogakuNintei(申請情報, fgn, futanGendogakuNintei.get履歴番号());
-                FutanGendogakuNinteiViewState newNinteiViewState = new FutanGendogakuNinteiViewState(fgn, EntityDataState.Modified, fgn.get履歴番号());
+                        申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), 履歴番号);
+                fgn = copyFutanGendogakuNintei(申請情報, fgn, 履歴番号);
+                FutanGendogakuNinteiViewState newNinteiViewState = new FutanGendogakuNinteiViewState(fgn, EntityDataState.Modified, 履歴番号);
                 newList.add(0, newNinteiViewState);
-
+                履歴番号 += 1;
                 fgn2 = new FutanGendogakuNintei(
-                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号() + 1);
-                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, futanGendogakuNintei.get履歴番号() + 1);
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), 履歴番号);
+                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, 履歴番号);
                 ninteiViewState.setFutanGendogakuNintei(fgn2);
                 newList.add(0, ninteiViewState);
-
+                履歴番号 += 1;
                 added = true;
             } else {
                 fgn2 = new FutanGendogakuNintei(
-                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号() + 1);
-                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, futanGendogakuNintei.get履歴番号() + 1);
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), 履歴番号);
+                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, 履歴番号);
                 ninteiViewState.setFutanGendogakuNintei(fgn2);
                 newList.add(0, ninteiViewState);
+                履歴番号 += 1;
             }
         }
         return newList;
@@ -1538,7 +1547,7 @@ public class FutangendogakuNinteiShinseiHandler {
     }
 
     private void clear申請情報エリア(TaishoshaKey 資格対象者) {
-        div.getTxtShinseiYMD().clearValue();
+        div.getTxtShinseiYMD().setValue(FlexibleDate.getNowDate());
         div.getDdlShinseiRiyu().setIsBlankLine(true);
         div.getDdlShinseiRiyu().setSelectedKey(SELECT_EMPTYKEY);
         div.getRadHaigushaUmu().setSelectedKey(SELECT_KEY1);
@@ -1563,16 +1572,7 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtYukoKigenYMD().clearValue();
         } else {
             div.getTxtKetteiYMD().setValue(FlexibleDate.getNowDate());
-            FlexibleDate 適用日;
-            List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
-            if (rows.isEmpty()) {
-                適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(),
-                        RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue());
-            } else {
-                適用日 = new FlexibleDate(rows.get(0).getTxtYukoKigenYMD().
-                        getValue().plusDay(1).toString());
-            }
-            div.getTxtTekiyoYMD().setValue(適用日);
+            div.getTxtTekiyoYMD().setValue(get適用日初期値());
             FlexibleDate 有効期限 = FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue());
             div.getTxtYukoKigenYMD().setValue(有効期限);
 
@@ -1596,6 +1596,21 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
         div.getDdlKyoshitsuShubetsu().setSelectedKey(SELECT_EMPTYKEY);
         div.getTxtHiShoninRiyu().clearValue();
+    }
+
+    private FlexibleDate get適用日初期値() {
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        if (rows.isEmpty()) {
+            return FlexibleDate.getNowDate();
+        } else {
+            for (dgShinseiList_Row row : rows) {
+                if (row.getKetteiKubun().equals(漢字承認する)) {
+                    return new FlexibleDate(row.getTxtYukoKigenYMD().
+                            getValue().plusDay(1).toString());
+                }
+            }
+        }
+        return FlexibleDate.getNowDate();
     }
 
     private void get利用者負担段階(ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList) {

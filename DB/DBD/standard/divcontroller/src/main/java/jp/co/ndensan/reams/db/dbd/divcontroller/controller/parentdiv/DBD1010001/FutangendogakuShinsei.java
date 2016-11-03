@@ -383,6 +383,11 @@ public class FutangendogakuShinsei {
         ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, getHandler(div).onClick_btnShinseiKakutei(list, 資格対象者));
+        for (FutanGendogakuNinteiViewState row : list) {
+            if (row.getFutanGendogakuNintei().get決定区分() != null || !row.getFutanGendogakuNintei().get決定区分().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(false);
+            }
+        }
         div.getShinseiDetail().setDisabled(true);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
@@ -578,4 +583,15 @@ public class FutangendogakuShinsei {
     private NinteiShinseiValidationHandler getValidationHandler() {
         return new NinteiShinseiValidationHandler();
     }
+
+    /**
+     * URZ.SampleBunshoToroku　をダイアログで表示し、選択する。
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     */
+    /*   public ResponseData<FutangendogakuShinseiDiv> onClose_btnOpenHiShoninRiyu(FutangendogakuShinseiDiv div) {
+     div.getTxtHiShoninRiyu().setValue(div.get);
+     return ResponseData.of(div).respond();
+     }*/
 }
