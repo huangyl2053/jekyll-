@@ -189,6 +189,9 @@ public class DBC1210011PanelHandler {
      * @param map Map
      */
     public void set連絡票整理番号(Map<FlexibleYear, Set<RString>> map) {
+        if (map.isEmpty()) {
+            return;
+        }
         RString select対象年度 = div.getDdlTaishoNendo().getSelectedKey();
         List<RString> 連絡票整理番号List = new ArrayList<>(map.get(new FlexibleYear(select対象年度)));
         if (!連絡票整理番号List.isEmpty()) {
@@ -217,6 +220,9 @@ public class DBC1210011PanelHandler {
      * @param map Map
      */
     public void set履歴番号(Map<RString, Set<RString>> map) {
+        if (map.isEmpty()) {
+            return;
+        }
         RString select連絡票整理番号 = div.getDdlTaishoNendo().getSelectedKey()
                 .concat(div.getDdlRearakuhyoSeiriNO().getSelectedKey());
         List<RString> 履歴番号List = new ArrayList<>(map.get(select連絡票整理番号));
@@ -248,10 +254,12 @@ public class DBC1210011PanelHandler {
     public void set前回発行日(KogakuGassanShikyuFushikyuKettei shikyuKettei) {
         div.getTxtZenkaiHakkoYMD().setDisabled(true);
         div.getTxtZenkaiHakkoYMD().clearValue();
-        RDate 前回発行日 = (shikyuKettei.get決定通知書作成年月日() != null && !shikyuKettei.get決定通知書作成年月日().isEmpty())
-                ? new RDate(shikyuKettei.get決定通知書作成年月日().toString()) : null;
-        if (前回発行日 != null) {
-            div.getTxtZenkaiHakkoYMD().setValue(前回発行日);
+        if (shikyuKettei != null) {
+            RDate 前回発行日 = (shikyuKettei.get決定通知書作成年月日() != null && !shikyuKettei.get決定通知書作成年月日().isEmpty())
+                    ? new RDate(shikyuKettei.get決定通知書作成年月日().toString()) : null;
+            if (前回発行日 != null) {
+                div.getTxtZenkaiHakkoYMD().setValue(前回発行日);
+            }
         }
     }
 

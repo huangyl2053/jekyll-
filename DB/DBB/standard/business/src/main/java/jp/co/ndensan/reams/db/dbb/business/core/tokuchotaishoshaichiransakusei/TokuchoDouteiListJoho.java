@@ -57,10 +57,10 @@ public class TokuchoDouteiListJoho {
             this.基礎年金番号 = resultEntity.getUet0511entity().getKisoNenkinNo();
             this.年金コード = resultEntity.getUet0511entity().getNenkinCode();
             this.生年月日 = resultEntity.getUet0511entity().getDtBirthDay();
-            RString dtSeibetsu = resultEntity.getUet0511entity().getDtSeibetsu();
+            RString dtSeibetsu = resultEntity.getUet0511entity().getDtSeibetsu().getColumnValue();
             this.性別コード = dtSeibetsu;
             this.住所 = resultEntity.getUet0511entity().getDtKanjiJusho();
-            Code gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode();
+            Code gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode().value();
             if (gimushaCode != null) {
                 this.特徴義務者コード = gimushaCode.value();
             }

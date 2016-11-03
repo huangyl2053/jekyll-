@@ -1849,6 +1849,27 @@
     </sql>
 
      <resultMap id="ResultMap_給付実績中間高額一時の作成7" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.inskyufujissekichukankogakutmpprocess.InsKyufuJissekiChukanKogakuTmpProcess7Entity" autoMapping="true">    
+         <id column="tempKyufujissekiTyukann_hiHokenshaNo"/>
+         <id column="tempKyufujissekiTyukann_shotokuHantei_shotokuNendo"/>
+         <id column="tempKyufujissekiTyukann_serviceTeikyoYM"/>
+         <id column="tempKyufujissekiShukei_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <id column="tempKyufujissekiShukei_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+         <id column="tempKyufujissekiShukei_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <id column="tempKyufujissekiShukei_serviceSyuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_serviceSyuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
          <association property="給付実績中間高額一時Entity"
                      resultMap="ResultMap_TempKyufujissekiTyukann"/>
          <association property="給付実績集計一時Entity"
@@ -2151,6 +2172,27 @@
     </select>
 
     <resultMap id="ResultMap_給付実績中間事業高額一時の作成7" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.inskyufujissekichukankogakutmpprocess.InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity" autoMapping="true">    
+         <id column="tempKyufujissekiTyukannJigyo_hiHokenshaNo"/>
+         <id column="tempKyufujissekiTyukannJigyo_shotokuHantei_shotokuNendo"/>
+         <id column="tempKyufujissekiTyukannJigyo_serviceTeikyoYM"/>
+         <id column="tempKyufujissekiShukei_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <id column="tempKyufujissekiShukei_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+         <id column="tempKyufujissekiShukei_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+         <id column="tempKyufujissekiShukei_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <id column="tempKyufujissekiShukei_serviceSyuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <id column="tempKyufuJissekiShakaiFukushiHojinKeigengaku_serviceSyuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
          <association property="給付実績中間事業高額一時Entity"
                      resultMap="ResultMap_TempKyufujissekiTyukannJigyo"/>
          <association property="給付実績集計一時Entity"

@@ -89,7 +89,7 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             this.未同定年金情報_年金コード = resultEntity.getDbt2019entity().getNenkinCode();
         }
         if (resultEntity != null && resultEntity.getUet0511entity() != null) {
-            Code gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode();
+            Code gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode().value();
             if (gimushaCode != null) {
                 this.未同定年金情報_特別徴収義務者コード = gimushaCode.value();
             }
@@ -98,7 +98,7 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             this.未同定年金情報_住所カナ = resultEntity.getUet0511entity().getDtKanaJusho();
             this.未同定年金情報_住所漢字 = resultEntity.getUet0511entity().getDtKanjiJusho();
             this.未同定年金情報_生年月日 = resultEntity.getUet0511entity().getDtBirthDay();
-            RString seibetsu = resultEntity.getUet0511entity().getDtSeibetsu();
+            RString seibetsu = resultEntity.getUet0511entity().getDtSeibetsu().getColumnValue();
             this.未同定年金情報_性別 = seibetsu;
             this.未同定年金情報_連番 = new RString(resultEntity.getUet0511entity().getRenban());
             if (resultEntity.getUet0511entity().getShoriNendo() != null) {
