@@ -54,8 +54,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -69,7 +67,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho."
-            + "IJukyushaDaichoMainMapper.get個人情報と要介護認定情報");
+            + "IJukyushaDaichoMainMapper.get個人情報と要介護認定情報new1");
     private IJukyushaDaichoMainMapper mapper;
     private IdoChushutsuDaichoProcessParameter processParamter;
     private List<PersonalData> personalDataList;
@@ -131,16 +129,17 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         生活保護情報EntityList = new ArrayList();
         ShichosonSecurityJohoFinder finder = ShichosonSecurityJohoFinder.createInstance();
         ShichosonSecurityJoho 市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村セキュリティ情報 != null) {
+        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
             導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+            if (導入形態コード.equals(DonyuKeitaiCode.事務広域)
+                    || 導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)) {
+                is広域 = true;
+            }
+            if (導入形態コード.equals(DonyuKeitaiCode.事務単一)) {
+                is単一 = true;
+            }
         }
-        if (導入形態コード.equals(DonyuKeitaiCode.事務広域)
-                || 導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)) {
-            is広域 = true;
-        }
-        if (導入形態コード.equals(DonyuKeitaiCode.事務単一)) {
-            is単一 = true;
-        }
+
     }
 
     @BatchWriter
@@ -228,7 +227,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             JukyushaDaichoReport report = new JukyushaDaichoReport(帳票出力用受給者台帳Entity, processParamter.get出力オプション区分());
             report.writeBy(reportSourceWriter);
         }
-        AccessLogger.log(AccessLogType.照会, personalDataList);
+//        AccessLogger.log(AccessLogType.照会, personalDataList);
         RString ページ数 = new RString(reportSourceWriter.pageCount().value());
         OutputJokenHyo outputJokenhyo = new OutputJokenHyo();
         outputJokenhyo.outputJokenhyoFactory(processParamter, ページ数);
