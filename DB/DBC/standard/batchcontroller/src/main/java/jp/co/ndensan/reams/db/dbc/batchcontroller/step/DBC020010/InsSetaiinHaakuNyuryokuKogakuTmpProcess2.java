@@ -67,7 +67,7 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess2 extends BatchProcessBase<S
                 && 適用年月日.isBeforeOrEquals(世帯員基準日)
                 && 世帯員基準日.isBefore(解除年月日))
                 || (適用年月日 != null && 適用年月日.isBeforeOrEquals(世帯員基準日)
-                && 解除年月日 == null)) {
+                && (解除年月日 == null || 解除年月日.isEmpty()))) {
             世帯員把握Entity.setJushochiTokureiFlag(住所地特例該当_1);
         } else {
             世帯員把握Entity.setJushochiTokureiFlag(住所地特例該当_0);
