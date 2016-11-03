@@ -459,7 +459,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             保険対象費用額 = Decimal.ZERO;
         }
         if (給付率 != null) {
-            保険給付額 = 保険対象費用額.multiply(給付率);
+            保険給付額 = 保険対象費用額.multiply(給付率).roundDownTo(0);
         }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenkyufugakuGokei()
                 .setValue(保険給付額);
