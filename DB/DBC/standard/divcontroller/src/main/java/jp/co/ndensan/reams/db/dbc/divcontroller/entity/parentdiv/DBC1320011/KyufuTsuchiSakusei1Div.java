@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuTsuchiSakusei1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,7 +32,7 @@ public class KyufuTsuchiSakusei1Div extends Panel {
     @JsonProperty("txtHihokenshaNo")
     private TextBoxCode txtHihokenshaNo;
     @JsonProperty("btnHihokenshaJoho")
-    private ButtonDialog btnHihokenshaJoho;
+    private Button btnHihokenshaJoho;
     @JsonProperty("txtHihokenshaName")
     private TextBox txtHihokenshaName;
 
@@ -137,7 +137,7 @@ public class KyufuTsuchiSakusei1Div extends Panel {
      * @return btnHihokenshaJoho
      */
     @JsonProperty("btnHihokenshaJoho")
-    public ButtonDialog getBtnHihokenshaJoho() {
+    public Button getBtnHihokenshaJoho() {
         return btnHihokenshaJoho;
     }
 
@@ -146,7 +146,7 @@ public class KyufuTsuchiSakusei1Div extends Panel {
      * @param btnHihokenshaJoho btnHihokenshaJoho
      */
     @JsonProperty("btnHihokenshaJoho")
-    public void setBtnHihokenshaJoho(ButtonDialog btnHihokenshaJoho) {
+    public void setBtnHihokenshaJoho(Button btnHihokenshaJoho) {
         this.btnHihokenshaJoho = btnHihokenshaJoho;
     }
 
