@@ -88,6 +88,8 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
         tempEntity.setSetaiCode(t.get世帯コード());
         tempEntity.setSeinengappiYMD(t.get生年月日());
         tempEntity.setTorokuIdoYMD(t.get登録異動年月日());
+        tempEntity.setTorokuTodokedeYMD(t.get登録届出年月日());
+        tempEntity.setSeibetsuCode(t.get性別コード());
         tempEntity.setTenyuzenzenkokuJushoCode(t.get転入前全国住所コード());
         tempEntity.setTenyuzenjusho(t.get転入前住所());
         tempEntity.setTenyuzenbanchi(t.get転入前番地());
