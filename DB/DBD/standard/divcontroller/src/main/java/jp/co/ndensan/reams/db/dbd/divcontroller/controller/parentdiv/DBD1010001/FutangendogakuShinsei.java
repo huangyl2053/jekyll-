@@ -88,7 +88,7 @@ public class FutangendogakuShinsei {
         if (!ResponseHolder.isReRequest() && !データなし) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
-       
+
         div.setHihokenshaNo(被保険者番号.getColumnValue());
         List<FutanGendogakuNintei> 申請一覧情報 = getHandler(div).get申請一覧情報(被保険者番号);
         ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);
@@ -374,7 +374,10 @@ public class FutangendogakuShinsei {
         }
         RString メニューID = ResponseHolder.getMenuID();
         if (!申請メニューID.equals(メニューID)) {
-            validationHandler.減免減額_適用期間重複のチェックon確定(pairs, div);
+            pairs = validationHandler.減免減額_適用期間重複のチェックon確定(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
         }
 
         ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);

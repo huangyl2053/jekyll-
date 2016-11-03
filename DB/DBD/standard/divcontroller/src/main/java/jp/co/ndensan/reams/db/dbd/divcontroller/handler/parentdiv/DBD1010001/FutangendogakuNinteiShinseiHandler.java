@@ -259,17 +259,15 @@ public class FutangendogakuNinteiShinseiHandler {
                 div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
             }
         } else {
-           承認しない時関連項目処理();
+            承認しない時関連項目処理();
         }
     }
-    
+
     private void 承認しない時関連項目処理() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
         dataSources.add(new KeyValueDataSource());
         div.getTxtTekiyoYMD().setDisabled(false);
-        div.getTxtTekiyoYMD().clearValue();
         div.getTxtYukoKigenYMD().setDisabled(false);
-        div.getTxtYukoKigenYMD().clearValue();
         div.getDdlKyusochisha().setDisabled(true);
         div.getDdlKyusochisha().setIsBlankLine(true);
         div.getDdlKyusochisha().setDataSource(dataSources);
@@ -296,8 +294,6 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getBtnHiShoninRiyu().setDisabled(false);
         div.getTxtHiShoninRiyu().setDisabled(false);
     }
-    
-    
 
     /**
      * 「申請情報を確定する」ボタンの処理
@@ -472,7 +468,7 @@ public class FutangendogakuNinteiShinseiHandler {
             set居室種類();
             set負担限度額();
         }
-        
+
         if (SELECT_KEY1.equals(div.getRadKetteiKubun().getSelectedKey())) {
             承認しない時関連項目処理();
         }
@@ -849,31 +845,33 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getTxtYukaShoken().setValue(futanGendogakuNintei.get有価証券評価概算額());
         div.getTxtSonota().setValue(futanGendogakuNintei.getその他金額());
         div.getRadKetteiKubun().setSelectedKey(
-                KetteiKubun.承認する.getコード().equals(futanGendogakuNintei.get決定区分()) ? SELECT_KEY0 : SELECT_KEY1);
+                KetteiKubun.承認する.getコード().equals(futanGendogakuNintei.get決定区分()) || futanGendogakuNintei.get決定区分().isEmpty() ? SELECT_KEY0 : SELECT_KEY1);
         onChange_radKetteiKubun(false, 資格対象者);
-        
-        FlexibleDate 決定年月日 = futanGendogakuNintei.get決定年月日().isEmpty() ? FlexibleDate.getNowDate() : futanGendogakuNintei.get決定年月日();
+        FlexibleDate 決定年月日 = FlexibleDate.EMPTY;
+        if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
+            決定年月日 = futanGendogakuNintei.get決定年月日().isEmpty() ? FlexibleDate.getNowDate() : futanGendogakuNintei.get決定年月日();
+        }
         FlexibleDate 適用開始年月日 = futanGendogakuNintei.get適用開始年月日();
         FlexibleDate 有効期限 = futanGendogakuNintei.get適用終了年月日();
         List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
-        if (適用開始年月日.isEmpty()) {
-            if (rows.isEmpty()) {
-                適用開始年月日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
-                    RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+        if (適用開始年月日.isEmpty() && !申請メニューID.equals(ResponseHolder.getMenuID())) {
+            if (rows.isEmpty() || rows.size() == 1) {
+                適用開始年月日 = new FlexibleDate(RDate.getNowDate().getYearValue(),
+                        RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue());
             } else {
-                適用開始年月日 = new FlexibleDate(rows.get(0).getTxtYukoKigenYMD().
-                    getValue().plusDay(1).toString());
+                適用開始年月日 = new FlexibleDate(rows.get(1).getTxtYukoKigenYMD().
+                        getValue().plusDay(1).toString());
             }
-        } 
-        
-        if (有効期限.isEmpty()) {
-            有効期限 = FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue());
         }
-        
+
+        if (有効期限.isEmpty()) {
+            有効期限 = FutangendogakuNinteiService.createInstance().estimate有効期限(適用開始年月日);
+        }
+
         div.getTxtKetteiYMD().setValue(決定年月日);
         div.getTxtTekiyoYMD().setValue(適用開始年月日);
         div.getTxtYukoKigenYMD().setValue(有効期限);
-        
+
         init旧措置DDL();
         div.getDdlKyusochisha().setSelectedKey(futanGendogakuNintei.get旧措置者区分());
         init負担段階DDL();
@@ -958,7 +956,9 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set預貯金額(div.getTxtYochokinGaku().getValue());
         builder.set有価証券評価概算額(div.getTxtYukaShoken().getValue());
         builder.setその他金額(div.getTxtSonota().getValue());
-        if (SELECT_KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
+        if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+            builder.set決定区分(RString.EMPTY);
+        } else if (SELECT_KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
             builder.set決定区分(KetteiKubun.承認する.getコード());
         } else {
             builder.set決定区分(KetteiKubun.承認しない.getコード());
@@ -1566,18 +1566,18 @@ public class FutangendogakuNinteiShinseiHandler {
             FlexibleDate 適用日;
             List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
             if (rows.isEmpty()) {
-                適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
-                    RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+                適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(),
+                        RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue());
             } else {
                 適用日 = new FlexibleDate(rows.get(0).getTxtYukoKigenYMD().
-                    getValue().plusDay(1).toString());
+                        getValue().plusDay(1).toString());
             }
             div.getTxtTekiyoYMD().setValue(適用日);
             FlexibleDate 有効期限 = FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue());
             div.getTxtYukoKigenYMD().setValue(有効期限);
-            
+
         }
-        
+
         init旧措置DDL();
         FutangendogakuNinteiService ninteiService = FutangendogakuNinteiService.createInstance();
         if (!申請メニューID.equals(ResponseHolder.getMenuID())
