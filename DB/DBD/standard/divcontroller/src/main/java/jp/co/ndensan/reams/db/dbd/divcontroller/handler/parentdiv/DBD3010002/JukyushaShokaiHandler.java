@@ -226,7 +226,7 @@ public class JukyushaShokaiHandler {
              row.setYokaigodo(get要介護度(new RString(joho.get要介護認定申請情報_厚労省IF識別コード().toString()),
              joho.get受給者台帳_要介護認定状態区分コード()));
              }*/
-            FlexibleYearMonth yokaigoJotai = (joho.get受給者台帳_認定有効開始年月日() == null ? null : joho.get受給者台帳_認定有効開始年月日().getYearMonth());
+            FlexibleYearMonth yokaigoJotai = ((joho.get受給者台帳_認定有効開始年月日() == null || joho.get受給者台帳_認定有効開始年月日().isEmpty()) ? null : joho.get受給者台帳_認定有効開始年月日().getYearMonth());
             if (yokaigoJotai == null) {
                 row.setYokaigodo(RString.EMPTY);
             } else if (new FlexibleYearMonth("200004").isBeforeOrEquals(yokaigoJotai)
