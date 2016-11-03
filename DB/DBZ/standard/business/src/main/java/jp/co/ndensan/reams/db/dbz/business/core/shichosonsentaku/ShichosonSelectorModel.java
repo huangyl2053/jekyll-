@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku;
+package jp.co.ndensan.reams.db.dbz.business.core.shichosonsentaku;
 
 import java.io.Serializable;
 import java.util.List;

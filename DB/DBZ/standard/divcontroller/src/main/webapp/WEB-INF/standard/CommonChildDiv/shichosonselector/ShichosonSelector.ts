@@ -1,5 +1,5 @@
 /// <reference path='ShichosonSelector_Design.ts' />
-module DBA
+module DBZ
 {
     export module ShichosonSelector
     {
@@ -26,7 +26,7 @@ module DBA
     }
 }
 
-module DBA
+module DBZ
 {
     export module ShichosonSelector
     {

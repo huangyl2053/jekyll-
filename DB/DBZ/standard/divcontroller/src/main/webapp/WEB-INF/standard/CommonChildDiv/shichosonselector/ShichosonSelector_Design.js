@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (ShichosonSelector) {
         var Events = (function () {
             function Events() {
@@ -28,11 +28,11 @@ var DBA;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBA.ShichosonSelector.Controls.myType();
+                return this._myName + "_" + DBZ.ShichosonSelector.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBA.ShichosonSelector.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.ShichosonSelector.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.ShichosonSelector = function () {
@@ -57,6 +57,6 @@ var DBA;
             return Controls;
         })();
         ShichosonSelector.Controls = Controls;
-    })(DBA.ShichosonSelector || (DBA.ShichosonSelector = {}));
-    var ShichosonSelector = DBA.ShichosonSelector;
-})(DBA || (DBA = {}));
+    })(DBZ.ShichosonSelector || (DBZ.ShichosonSelector = {}));
+    var ShichosonSelector = DBZ.ShichosonSelector;
+})(DBZ || (DBZ = {}));

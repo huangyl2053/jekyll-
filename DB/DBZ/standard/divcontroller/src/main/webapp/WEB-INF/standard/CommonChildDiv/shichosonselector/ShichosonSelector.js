@@ -1,5 +1,5 @@
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (ShichosonSelector) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBA;
             return ModeController;
         })();
         ShichosonSelector.ModeController = ModeController;
-    })(DBA.ShichosonSelector || (DBA.ShichosonSelector = {}));
-    var ShichosonSelector = DBA.ShichosonSelector;
-})(DBA || (DBA = {}));
+    })(DBZ.ShichosonSelector || (DBZ.ShichosonSelector = {}));
+    var ShichosonSelector = DBZ.ShichosonSelector;
+})(DBZ || (DBZ = {}));
 
-var DBA;
-(function (DBA) {
+var DBZ;
+(function (DBZ) {
     (function (ShichosonSelector) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBA;
             return PublicProperties;
         })();
         ShichosonSelector.PublicProperties = PublicProperties;
-    })(DBA.ShichosonSelector || (DBA.ShichosonSelector = {}));
-    var ShichosonSelector = DBA.ShichosonSelector;
-})(DBA || (DBA = {}));
+    })(DBZ.ShichosonSelector || (DBZ.ShichosonSelector = {}));
+    var ShichosonSelector = DBZ.ShichosonSelector;
+})(DBZ || (DBZ = {}));

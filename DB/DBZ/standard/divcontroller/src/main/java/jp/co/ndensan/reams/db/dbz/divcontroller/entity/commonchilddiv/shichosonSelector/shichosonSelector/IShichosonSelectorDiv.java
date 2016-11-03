@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector;
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  */
 public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
