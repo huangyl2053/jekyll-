@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 受給者基本情報のバッチ処理です。
@@ -31,10 +30,12 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
             + ".db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoMapper.getShoriDateKanriByShoriName");
     private static final RString ワークフローＩＤ_特定個人情報提供 = new RString("DBUWFC2001");
     private static final RString ワークフローＩＤ_スケジューラ = new RString("DBUWFC2002");
-    private static final RString 処理日付管理マスタ_全件版改定用 = new RString("特定個人情報提供（全件／版改定用）");
-    private static final RString 処理日付管理マスタ_異動用 = new RString("特定個人情報提供（異動用）");
+    private static final RString 処理名_全件版改定用 = new RString("特定個人情報提供（全件／版改定用）");
+    private static final RString 処理名_異動用 = new RString("特定個人情報提供（異動用）");
+    private static final RString 処理名_当初_版改定 = new RString("特定個人情報提供（当初_版改定）");
+    private static final RString 処理名_異動 = new RString("特定個人情報提供（異動）");
+    private static final RString 処理名_当初 = new RString("特定個人情報提供（当初）");
     private static final FlexibleDate システム日付 = FlexibleDate.getNowDate();
-    private RString ワークフローID;
 
     private TokuteiKojinJohoTeikyoProcessParameter processParameter;
     private TokuteiKojinJohoTeikyoMybatisParamater mybitisParamter;
@@ -44,17 +45,16 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
 
     @Override
     protected void initialize() {
-        ワークフローID = ResponseHolder.getFlowId();
         mybitisParamter = new TokuteiKojinJohoTeikyoMybatisParamater();
         mybitisParamter.setSubGyomuCode(SubGyomuCode.DBU介護統計報告.value());
-        if (ワークフローＩＤ_特定個人情報提供.equals(ワークフローID)) {
-            mybitisParamter.setShoriName1(処理日付管理マスタ_全件版改定用);
+        if (ワークフローＩＤ_特定個人情報提供.equals(processParameter.getワークフローID())) {
+            mybitisParamter.setShoriName1(処理名_全件版改定用);
             if (processParameter.get新規異動区分().equals(ShinkiIdoKubun.当初.getコード())) {
                 mybitisParamter.setTosyo(true);
-                mybitisParamter.setShoriName2(処理日付管理マスタ_異動用);
+                mybitisParamter.setShoriName2(処理名_異動用);
             }
-        } else if (ワークフローＩＤ_スケジューラ.equals(ワークフローID)) {
-            mybitisParamter.setShoriName1(処理日付管理マスタ_異動用);
+        } else if (ワークフローＩＤ_スケジューラ.equals(processParameter.getワークフローID())) {
+            mybitisParamter.setShoriName1(処理名_異動用);
         }
     }
 
@@ -70,7 +70,18 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
 
     @Override
     protected void process(DbT7022ShoriDateKanriEntity entity) {
+        if (ワークフローＩＤ_特定個人情報提供.equals(processParameter.getワークフローID())) {
+            if (entity.getShoriName().equals(処理名_全件版改定用)) {
+                entity.setShoriName(処理名_当初_版改定);
+            } else if (entity.getShoriName().equals(処理名_異動用)
+                    && ShinkiIdoKubun.当初.getコード().equals(processParameter.get新規異動区分())) {
+                entity.setShoriName(処理名_当初);
+            }
+        } else if (ワークフローＩＤ_スケジューラ.equals(processParameter.getワークフローID())) {
+            entity.setShoriName(処理名_異動);
+        }
         entity.setKijunYMD(システム日付);
+        entity.setKijunTimestamp(null);
         entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
         entity.setTaishoKaishiTimestamp(new YMDHMS(processParameter.get対象開始日時()));
         entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
