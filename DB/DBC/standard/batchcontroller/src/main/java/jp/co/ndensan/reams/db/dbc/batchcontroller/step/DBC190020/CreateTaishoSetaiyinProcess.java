@@ -637,7 +637,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 申請一覧Entity.set通番(new RString(通番));
                 申請一覧Entity.set世帯番号(entity.get対象世帯員().getShotaiCode());
                 通番++;
-            } else if (this.isChangeShotaiCode(exEntity.get対象世帯員(), entity.get対象世帯員()) || is改頁(exEntity, entity)) {
+            } else if (is改頁(exEntity, entity) || this.isChangeShotaiCode(exEntity.get対象世帯員(), entity.get対象世帯員())) {
                 申請一覧Entity.set通番(new RString(通番));
                 通番++;
                 申請一覧Entity.set世帯番号(entity.get対象世帯員().getShotaiCode());
@@ -664,9 +664,9 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 申請一覧Entity.set郵便番号(宛名.get住所().get郵便番号().getColumnValue());
                 申請一覧Entity.set町域コード(宛名.get住所().get町域コード().getColumnValue());
                 申請一覧Entity.set行政区コード(宛名.get行政区画().getGyoseiku().getコード().getColumnValue());
-                申請一覧Entity.set世帯コード(宛名.get世帯コード().getColumnValue());
             }
-            申請一覧Entity.set市町村コード(entity.get対象世帯員().getShichosonCode());
+            申請一覧Entity.set世帯コード(entity.get対象世帯員().getShotaiCode());
+            申請一覧Entity.set市町村コード(doRString編集(entity.get対象世帯員().getShichosonCode()));
 
         } else {
             申請一覧Entity.set氏名(MESSAGE_該当データなし);
@@ -686,33 +686,26 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private boolean is改頁(CreateTaishoSetaiyinEntity exEntity, CreateTaishoSetaiyinEntity entity) {
         boolean flag = false;
-        if (exEntity.get宛名() != null && entity.get宛名() != null) {
-            IShikibetsuTaisho ex宛名 = ShikibetsuTaishoFactory.createKojin(exEntity.get宛名());
-            IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
-            if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.郵便番号.get項目ID())
-                    && !ex宛名.get住所().get郵便番号().getColumnValue().equals(宛名.get住所().get郵便番号().getColumnValue())) {
-                flag = true;
-            } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.町域コード.get項目ID())
-                    && !ex宛名.get住所().get町域コード().getColumnValue().equals(宛名.get住所().get町域コード().getColumnValue())) {
-                flag = true;
-            } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.行政区コード.get項目ID())
-                    && !ex宛名.get行政区画().getGyoseiku().getコード().getColumnValue().equals(宛名.get行政区画().getGyoseiku().getコード().getColumnValue())) {
-                flag = true;
-            } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.世帯コード.get項目ID())
-                    && !ex宛名.get世帯コード().getColumnValue().equals(宛名.get世帯コード().getColumnValue())) {
-                flag = true;
-            } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.市町村コード.get項目ID())
-                    && !RString.isNullOrEmpty(exEntity.get対象世帯員().getShichosonCode())
-                    && !exEntity.get対象世帯員().getShichosonCode().equals(entity.get対象世帯員().getShichosonCode())) {
-                flag = true;
-            }
+        IShikibetsuTaisho ex宛名 = ShikibetsuTaishoFactory.createKojin(exEntity.get宛名());
+        IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.郵便番号.get項目ID())
+                && !ex宛名.get住所().get郵便番号().getColumnValue().equals(宛名.get住所().get郵便番号().getColumnValue())) {
+            flag = true;
+        } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.町域コード.get項目ID())
+                && !ex宛名.get住所().get町域コード().getColumnValue().equals(宛名.get住所().get町域コード().getColumnValue())) {
+            flag = true;
+        } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.行政区コード.get項目ID())
+                && !ex宛名.get行政区画().getGyoseiku().getコード().getColumnValue().equals(宛名.get行政区画().getGyoseiku().getコード().getColumnValue())) {
+            flag = true;
+        } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.世帯コード.get項目ID())
+                && !exEntity.get対象世帯員().getShotaiCode().equals(entity.get対象世帯員().getShotaiCode())) {
+            flag = true;
         } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.市町村コード.get項目ID())
-                && null != exEntity.get対象世帯員().getShichosonCode()
-                && !exEntity.get対象世帯員().getShichosonCode().equals(entity.get対象世帯員().getShichosonCode())) {
+                && !doRString編集(exEntity.get対象世帯員().getShichosonCode()).equals(doRString編集(entity.get対象世帯員().getShichosonCode()))) {
             flag = true;
         }
 
-        if (改頁通番 % INT_30 == INT_1) {
+        if (INT_1 != 改頁通番 && 改頁通番 % INT_30 == INT_1) {
             flag = true;
         }
         if (flag) {
@@ -786,6 +779,13 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             return new RString(INT_0);
         }
         return DecimalFormatter.toRString(number, 0);
+    }
+
+    private RString doRString編集(RString s) {
+        if (null == s) {
+            return RString.EMPTY;
+        }
+        return s;
     }
 
     private Decimal doDecimal(Decimal number) {
