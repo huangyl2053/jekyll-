@@ -91,8 +91,8 @@ public class IchiGojiHanteiKekkaJohoHandler {
                     dgIchijiHanteiKeikokuCode_Row row = new dgIchijiHanteiKeikokuCode_Row();
                     row.setNo(new RString(String.valueOf(i + 1)));
                     row.setCode(codeList.get(i));
-                    if (厚労省IF識別コード_09A.equals(厚労省IF識別コード.value())
-                            || 厚労省IF識別コード_09B.equals(厚労省IF識別コード.value())) {
+                    if (厚労省IF識別コード != null && (厚労省IF識別コード_09A.equals(厚労省IF識別コード.value())
+                            || 厚労省IF識別コード_09B.equals(厚労省IF識別コード.value()))) {
                         row.setSetsumei(IchijiHanteiKekkaCode09.toValue(codeList.get(i)).get名称());
                     }
                     rowList.add(row);
@@ -135,13 +135,12 @@ public class IchiGojiHanteiKekkaJohoHandler {
         IchiGojiHanteiKekkaJohoBuilder builder = 情報.createBuilderForEdit();
 
         builder.set要介護認定1_5次判定年月日(FlexibleDate.getNowDate());
-        // TODO QA#93089 JavaでDLLを呼び出し方のご提供がありません。
-        //        builder.set要介護認定1_5次判定結果コード(ビジネス情報.get判定結果コード());
-        //        builder.set要介護認定1_5次判定結果コード_認知症加算_(ビジネス情報.認知症加算後の一五次判定結果コード());
-        //        builder.set要介護認定状態の安定性コード(ビジネス情報.get安定性コード());
-        //        builder.set認知機能及び状態安定性から推定される給付区分コード(ビジネス情報.get給付区分コード());
-        //        builder.set認知症自立度Ⅱ以上の蓋然性(div.getTxtGaizensei().getValue());
-        //        builder.set要介護認定1_5次判定警告コード(ビジネス情報.get判定警告コード());
+        builder.set要介護認定1_5次判定結果コード(ビジネス情報.get判定結果コード());
+        builder.set要介護認定1_5次判定結果コード_認知症加算_(ビジネス情報.認知症加算後の一五次判定結果コード());
+        builder.set要介護認定状態の安定性コード(ビジネス情報.get安定性コード());
+        builder.set認知機能及び状態安定性から推定される給付区分コード(ビジネス情報.get給付区分コード());
+        builder.set認知症自立度Ⅱ以上の蓋然性(div.getTxtGaizensei().getValue());
+        builder.set要介護認定1_5次判定警告コード(ビジネス情報.get判定警告コード());
         builder.set要介護認定等基準時間(Integer.parseInt(div.getTxtKijunJikan().getValue().toString()));
         builder.set要介護認定等基準時間_食事_(div.getTxtShokuji().getValue().intValue());
         builder.set要介護認定等基準時間_排泄_(div.getTxtHaisetsu().getValue().intValue());

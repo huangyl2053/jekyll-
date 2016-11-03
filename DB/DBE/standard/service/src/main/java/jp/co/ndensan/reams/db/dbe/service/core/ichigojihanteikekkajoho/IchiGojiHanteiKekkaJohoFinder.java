@@ -136,6 +136,7 @@ public class IchiGojiHanteiKekkaJohoFinder {
         entity.set中間評価項目得点第三群(ビジネス情報.get中間評価項目得点第三群() / TEN);
         entity.set中間評価項目得点第四群(ビジネス情報.get中間評価項目得点第四群() / TEN);
         entity.set中間評価項目得点第五群(ビジネス情報.get中間評価項目得点第五群() / TEN);
+        entity.set厚労省IF識別コード(ビジネス情報.get厚労省IF識別コード());
 
         return new IchiGojiHanteiKekkaJohoBusiness(entity);
     }
