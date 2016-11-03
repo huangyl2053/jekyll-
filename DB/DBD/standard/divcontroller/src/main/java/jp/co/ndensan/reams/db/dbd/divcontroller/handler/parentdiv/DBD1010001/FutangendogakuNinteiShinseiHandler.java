@@ -142,7 +142,8 @@ public class FutangendogakuNinteiShinseiHandler {
 
         set申請一覧(new負担限度額認定申請の情報);
 
-        get利用者負担段階(申請一覧情報ArrayList);
+        FutangendogakuNinteiService service = FutangendogakuNinteiService.createInstance();
+        div.getTxtRiyoshaFutanDankai().setValue(service.judge利用者負担段階(被保険者番号, 識別コード).get名称());
 
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
         AccessLogger.log(AccessLogType.照会,
@@ -1611,25 +1612,6 @@ public class FutangendogakuNinteiShinseiHandler {
             }
         }
         return FlexibleDate.getNowDate();
-    }
-
-    private void get利用者負担段階(ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList) {
-        FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
-        RString 利用者負担段階 = RString.EMPTY;
-        for (FutanGendogakuNintei 負担限度情報 : 申請一覧情報ArrayList) {
-            if (KetteiKubun.承認する.getコード().equals(負担限度情報.get決定区分())
-                    && 負担限度情報.get適用開始年月日().isBeforeOrEquals(システム日付)
-                    && システム日付.isBeforeOrEquals(負担限度情報.get適用終了年月日())) {
-                利用者負担段階 = 負担限度情報.get利用者負担段階();
-                break;
-            }
-        }
-
-        if (!利用者負担段階.isEmpty()) {
-            div.getTxtRiyoshaFutanDankai().setValue(RiyoshaFutanDankai.toValue(利用者負担段階).get名称());
-        } else {
-            div.getTxtRiyoshaFutanDankai().setValue(認定なし);
-        }
     }
 
     private void set遺族年金and障害年金(FutanGendogakuNintei futanGendogakuNintei) {
