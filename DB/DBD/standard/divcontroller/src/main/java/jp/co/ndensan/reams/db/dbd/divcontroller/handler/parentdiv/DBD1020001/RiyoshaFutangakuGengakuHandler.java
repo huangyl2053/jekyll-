@@ -74,6 +74,7 @@ public class RiyoshaFutangakuGengakuHandler {
     private static final RString 承認情報を追加する = new RString("承認情報を追加する");
     private static final RString 申請情報 = new RString("申請情報");
     private static final RString 承認情報 = new RString("承認情報");
+    private static final RString 承認する_RString = new RString("承認する");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 承認しない_KEY = new RString("key1");
     private static final RString 承認する = new RString("1");
@@ -392,7 +393,8 @@ public class RiyoshaFutangakuGengakuHandler {
             FlexibleDate 以前有効期限日 = null;
             List<ddlShinseiIchiran_Row> shinseiIchiranList = div.getDdlShinseiIchiran().getDataSource();
             for (ddlShinseiIchiran_Row shinseiIchiran : shinseiIchiranList) {
-                if (shinseiIchiran.getTxtKetteiYMD().getValue() != null && !shinseiIchiran.getTxtKetteiYMD().getValue().isEmpty()) {
+                if (shinseiIchiran.getTxtYukoKigen().getValue() != null && !shinseiIchiran.getTxtYukoKigen().getValue().isEmpty()
+                        && shinseiIchiran.getKetteiKubun().equals(承認する_RString)) {
                     以前有効期限日 = shinseiIchiran.getTxtYukoKigen().getValue();
                     break;
                 }
