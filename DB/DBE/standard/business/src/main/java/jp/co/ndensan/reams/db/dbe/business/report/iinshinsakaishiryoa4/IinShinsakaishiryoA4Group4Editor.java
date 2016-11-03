@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa4;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
@@ -46,6 +47,7 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
     private static final int INT_14 = 14;
     private final List<TokkiA4Entity> 短冊情報リスト;
     private final List<RString> 短冊リスト;
+    private final RString reportId;
 
     /**
      * インスタンスを生成します。
@@ -55,14 +57,16 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
      * @param 短冊リスト List<RString>
      * @param 短冊情報リスト List<TokkiA4Entity>
      * @param page page
+     * @param reportId 帳票ＩＤ
      */
     protected IinShinsakaishiryoA4Group4Editor(TokkiText1A4Business item,
-            List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, int index, int page) {
+            List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, int index, int page, RString reportId) {
         this.item = item;
         this.index = index;
         this.page = page;
         this.短冊情報リスト = 短冊情報リスト;
         this.短冊リスト = 短冊リスト;
+        this.reportId = reportId;
     }
 
     @Override
@@ -112,7 +116,11 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
                 set特記事項イメージ(source);
             }
         }
-        source.layout = Layouts.四頁目;
+        if (ReportIdDBE.DBE517905.getReportId().value().equals(reportId)) {
+            source.layout = Layouts.四頁目;
+        } else {
+            source.layout = Layouts.六頁目;
+        }
         return source;
     }
 

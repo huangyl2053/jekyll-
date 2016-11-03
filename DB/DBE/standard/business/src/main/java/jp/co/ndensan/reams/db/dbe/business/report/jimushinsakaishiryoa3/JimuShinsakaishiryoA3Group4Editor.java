@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -27,14 +28,17 @@ public class JimuShinsakaishiryoA3Group4Editor implements IJimuShinsakaishiryoA3
 
     private static final int INT_4 = 4;
     private final JimuShinsakaiWariateJohoBusiness business;
+    private final RString reportId;
 
     /**
      * インスタンスを生成します。
      *
      * @param business {@link JimuShinsakaiWariateJohoBusiness}
+     * @param reportId 帳票ＩＤ
      */
-    protected JimuShinsakaishiryoA3Group4Editor(JimuShinsakaiWariateJohoBusiness business) {
+    protected JimuShinsakaishiryoA3Group4Editor(JimuShinsakaiWariateJohoBusiness business, RString reportId) {
         this.business = business;
+        this.reportId = reportId;
     }
 
     @Override
@@ -70,7 +74,11 @@ public class JimuShinsakaishiryoA3Group4Editor implements IJimuShinsakaishiryoA3
                 source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
             }
         }
-        source.layout = Layouts.任意;
+        if (ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
+            source.layout = Layouts.任意;
+        } else {
+            source.layout = Layouts.四頁目;
+        }
         return source;
     }
 

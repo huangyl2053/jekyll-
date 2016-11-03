@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD123456.Uplod
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
@@ -40,7 +42,9 @@ public class UplodPanel {
             RString localFilePath = new RString(shareFile.getPath());
             FilesystemPath path = new FilesystemPath(localFilePath);
             FilesystemName filesystemName = new FilesystemName(file.getFileName());
-            SharedFile.copyToSharedFile(path, filesystemName);
+            SharedFileDescriptor sfd = SharedFile.defineSharedFile(filesystemName);
+            CopyToSharedFileOpts opts = new CopyToSharedFileOpts();
+            SharedFile.copyToSharedFile(sfd, path, opts);
         }
         return ResponseData.of(div).respond();
     }

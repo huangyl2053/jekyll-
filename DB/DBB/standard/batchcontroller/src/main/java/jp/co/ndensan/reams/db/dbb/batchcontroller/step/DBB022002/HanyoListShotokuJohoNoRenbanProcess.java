@@ -244,7 +244,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
 
     private PersonalData toPersonalData(HanyoListShotokuJohoEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 定数_被保険者番号,
-                entity.getDbv1001被保険者番号().value());
+                null == entity.getDbv1001被保険者番号() ? RString.EMPTY : entity.getDbv1001被保険者番号().value());
         return PersonalData.of(entity.get宛名Entity().getShikibetsuCode(), expandedInfo);
     }
 

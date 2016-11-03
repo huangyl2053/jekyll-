@@ -986,15 +986,16 @@ public class DBC040010DataUtil {
             高額支給額加算額 = 給付対象者合計Entity.getKogakuShikyuGaku();
             wKm_blnIchiranKBN1 = true;
         } else if (審査依頼.equals(審査支払区分コード)) {
-            if (支給審査決定Entity.getShikyuKubunCode() == null
+            RString shikyuKubunCode = 支給審査決定Entity == null ? null : 支給審査決定Entity.getShikyuKubunCode();
+            if (shikyuKubunCode == null
                     && 支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
                 高額支給額加算額 = 支給判定結果Entity.getShikyuKingaku();
-            } else if (支給審査決定Entity.getShikyuKubunCode() == null
+            } else if (shikyuKubunCode == null
                     && 不支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
                 高額支給額加算額 = Decimal.ZERO;
-            } else if (支給.equals(支給審査決定Entity.getShikyuKubunCode())) {
-                高額支給額加算額 = 支給審査決定Entity.getKogakuShikyuGaku();
-            } else if (不支給.equals(支給審査決定Entity.getShikyuKubunCode())) {
+            } else if (支給.equals(shikyuKubunCode)) {
+                高額支給額加算額 = 支給審査決定Entity == null ? null : 支給審査決定Entity.getKogakuShikyuGaku();
+            } else if (不支給.equals(shikyuKubunCode)) {
                 高額支給額加算額 = Decimal.ZERO;
             }
         } else if (審査済み.equals(審査支払区分コード)) {
@@ -1219,6 +1220,7 @@ public class DBC040010DataUtil {
             RString 対象月 = suffixList.get(index);
             insertEntity.setTaishoM(対象月);
             set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, 対象月);
+            insertEntities.add(insertEntity);
         }
         return insertEntities;
     }

@@ -53,7 +53,6 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPageBreak extends PageBr
                 && !currentSource.getSource().setaiCode.equals(nextSource.getSource().setaiCode)) {
             flag = true;
         } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.市町村コード.get項目ID())
-                && null != currentSource.getSource().shichosonCode
                 && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             flag = true;
         }

@@ -415,15 +415,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-        RString 性別コード = 取込後期高齢者情報Entity.get性別コード();
-        if (!性別コード_1.equals(性別コード) && !性別コード_2.equals(性別コード) && !性別コード_3.equals(性別コード)) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_64);
-            if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_性別コード);
-                文言設定flag = false;
-            }
-            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-        }
         エラーチェック処理_電算２用部分2();
         エラーチェック処理_電算２用部分3();
     }
@@ -538,6 +529,15 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     }
 
     private void エラーチェック処理_電算２用部分3() {
+        RString 性別コード = 取込後期高齢者情報Entity.get性別コード();
+        if (!性別コード_1.equals(性別コード) && !性別コード_2.equals(性別コード) && !性別コード_3.equals(性別コード)) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_64);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(コード文言_性別コード);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
         RString 現住所 = 取込後期高齢者情報Entity.get住所();
         if (!RStringUtil.is全角Only(現住所)
                 && !Pattern.compile(正則表現_半角空白.toString()).matcher(現住所).matches()) {

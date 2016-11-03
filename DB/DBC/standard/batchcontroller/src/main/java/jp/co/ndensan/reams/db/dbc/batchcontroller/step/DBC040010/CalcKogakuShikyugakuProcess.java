@@ -42,12 +42,12 @@ public class CalcKogakuShikyugakuProcess extends BatchProcessBase<CalcKogakuShik
     private DBC040010DataUtil util;
     private JissekiFutangakuDataTempEntity updEntity;
     private boolean isあり;
-    private RString beforeKey;
     private CalcKogakuShikyugakuRelateEntity beforeEntity;
     private boolean wKm_blnIchiranKBN1;
     private boolean wKm_blnIchiranKBN2;
     private RString wKm_strIchiranhyoKBN;
     private List<Decimal> wK_KogakuShikyugaku;
+    private List<RString> keysOfShoriKekkaTemp;
     @BatchWriter
     private IBatchTableWriter 処理結果リスト;
     @BatchWriter
@@ -55,7 +55,7 @@ public class CalcKogakuShikyugakuProcess extends BatchProcessBase<CalcKogakuShik
 
     @Override
     protected void initialize() {
-        beforeKey = RString.EMPTY;
+        keysOfShoriKekkaTemp = new ArrayList<>();
         isあり = false;
         util = new DBC040010DataUtil();
         wKm_blnIchiranKBN1 = false;
@@ -148,11 +148,11 @@ public class CalcKogakuShikyugakuProcess extends BatchProcessBase<CalcKogakuShik
             return;
         }
         DBC040010ShoriKekkaTempEntity errorEntity = util.toShoriKekkaTempEntity(updEntity, KaigoGassan_ErrorKubun.高額支給額集計エラー);
-        RString nowKey = util.getKeyOfShoriKekkaTemp(errorEntity);
-        if (nowKey.equals(beforeKey)) {
+        RString keyOfShoriKekkaTemp = util.getKeyOfShoriKekkaTemp(errorEntity);
+        if (keysOfShoriKekkaTemp.contains(keyOfShoriKekkaTemp)) {
             return;
         }
         処理結果リスト.insert(errorEntity);
-        beforeKey = nowKey;
+        keysOfShoriKekkaTemp.add(keyOfShoriKekkaTemp);
     }
 }
