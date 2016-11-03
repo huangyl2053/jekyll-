@@ -94,7 +94,8 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess1 extends BatchProcessBase<I
         }
         FlexibleDate 資格取得年月日 = 被保険者台帳情報.getShikakuShutokuYMD();
         FlexibleYearMonth サービス提供年月 = 給付実績基本情報高額一時3情報.getServiceTeikyoYM();
-        if (資格取得年月日 != null && サービス提供年月 != null) {
+        if (資格取得年月日 != null && !資格取得年月日.isEmpty()
+                && サービス提供年月 != null && !サービス提供年月.isEmpty()) {
             if (資格取得年月日.getYearMonth().equals(サービス提供年月)) {
                 insertEntity.setKijunYMD(資格取得年月日);
             }
