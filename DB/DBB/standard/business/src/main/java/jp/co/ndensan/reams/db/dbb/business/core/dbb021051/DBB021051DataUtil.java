@@ -500,7 +500,6 @@ public class DBB021051DataUtil {
             住所 = 宛先PSM.getJusho();
             番地 = 宛先PSM.getBanchi();
             方書 = 宛先PSM.getKatagaki();
-            //        TODO QA Redmine#100667
             result.set住所(getWK管内管外区分が1の住所(parameter, wk管内管外区分, 住所));
             result.set番地(番地);
             result.set方書(方書);
