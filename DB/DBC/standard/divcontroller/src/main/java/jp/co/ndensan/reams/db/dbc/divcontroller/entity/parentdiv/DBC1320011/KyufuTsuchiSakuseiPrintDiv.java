@@ -19,17 +19,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KyufuTsuchiSakuseiPrintDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdBunsyobango")
-    private BunshoBangoInputDiv ccdBunsyobango;
     @JsonProperty("KyufuTsuchiSakuseiSetting")
     private PrintContentsSettingDiv KyufuTsuchiSakuseiSetting;
+    @JsonProperty("ccdBunsyobango")
+    private BunshoBangoInputDiv ccdBunsyobango;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,21 +38,21 @@ public class KyufuTsuchiSakuseiPrintDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdBunsyobango
-     * @return ccdBunsyobango
-     */
-    @JsonProperty("ccdBunsyobango")
-    public IBunshoBangoInputDiv getCcdBunsyobango() {
-        return ccdBunsyobango;
-    }
-
-    /*
      * getKyufuTsuchiSakuseiSetting
      * @return KyufuTsuchiSakuseiSetting
      */
     @JsonProperty("KyufuTsuchiSakuseiSetting")
     public IPrintContentsSettingDiv getKyufuTsuchiSakuseiSetting() {
         return KyufuTsuchiSakuseiSetting;
+    }
+
+    /*
+     * getccdBunsyobango
+     * @return ccdBunsyobango
+     */
+    @JsonProperty("ccdBunsyobango")
+    public IBunshoBangoInputDiv getCcdBunsyobango() {
+        return ccdBunsyobango;
     }
 
     // </editor-fold>
