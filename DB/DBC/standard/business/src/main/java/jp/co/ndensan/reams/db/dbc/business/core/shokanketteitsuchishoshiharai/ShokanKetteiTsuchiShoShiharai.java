@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -386,5 +387,14 @@ public class ShokanKetteiTsuchiShoShiharai {
      */
     public RString get申請者区分() {
         return entity.getShinseishaKubun();
+    }
+
+    /**
+     * 識別コードを取得します。
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード() {
+        return entity.getShikibetsuCode();
     }
 }
