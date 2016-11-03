@@ -71,7 +71,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranPrintService {
     public void printFukusu(List<KogakuKyufuKetteiChohyoDataEntity> 帳票出力対象データリスト,
             IOutputOrder 出力順情報, RDateTime 作成日時, ReportManager reportManager) {
         ChohyoJushoEditor 住所Editor = new ChohyoJushoEditor(SubGyomuCode.DBC介護給付, 帳票分類ID, GyomuBunrui.介護事務);
-        KogakuShikyuFushikyuKetteishaIchiranProperty property = new KogakuShikyuFushikyuKetteishaIchiranProperty();
+        KogakuShikyuFushikyuKetteishaIchiranProperty property = new KogakuShikyuFushikyuKetteishaIchiranProperty(出力順情報);
 
         try (ReportAssembler<KogakuShikyuFushikyuKetteishaIchiranSource> assembler
                 = createAssembler(property, reportManager)) {
