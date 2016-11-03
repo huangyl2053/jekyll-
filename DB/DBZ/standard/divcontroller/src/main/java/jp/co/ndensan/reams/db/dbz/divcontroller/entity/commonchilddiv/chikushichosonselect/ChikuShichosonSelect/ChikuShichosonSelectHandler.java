@@ -245,7 +245,7 @@ public class ChikuShichosonSelectHandler {
     public void onOkClose_町域選択ボタン() {
 
         Map<RString, RString> map = DataPassingConverter.deserialize(div.getHdnMapMultiSelect(), HashMap.class);
-        if (map != null && !map.isEmpty() && map.size() != 1) {
+        if (map != null && !map.isEmpty()) {
             List<ddlCodeList_Row> dataSource = new ArrayList<>();
             for (Map.Entry<RString, RString> entry : map.entrySet()) {
                 ddlCodeList_Row row = new ddlCodeList_Row();
@@ -264,7 +264,7 @@ public class ChikuShichosonSelectHandler {
     public void onOkClose_地区選択ボタン() {
 
         Map<RString, RString> map = DataPassingConverter.deserialize(div.getHdnMapMultiSelect(), HashMap.class);
-        if (map != null && !map.isEmpty() && map.size() > 1) {
+        if (map != null && !map.isEmpty()) {
             List<ddlCodeList_Row> dataSource = new ArrayList<>();
             for (Map.Entry<RString, RString> entry : map.entrySet()) {
                 ddlCodeList_Row row = new ddlCodeList_Row();
@@ -318,11 +318,11 @@ public class ChikuShichosonSelectHandler {
         }
         Collections.sort(dataSource,
                 new Comparator<KeyValueDataSource>() {
-                    @Override
-                    public int compare(KeyValueDataSource arg0, KeyValueDataSource arg1) {
-                        return arg0.getKey().toString().compareTo(arg1.getKey().toString());
-                    }
-                }
+            @Override
+            public int compare(KeyValueDataSource arg0, KeyValueDataSource arg1) {
+                return arg0.getKey().toString().compareTo(arg1.getKey().toString());
+            }
+        }
         );
         return dataSource;
     }
@@ -333,11 +333,11 @@ public class ChikuShichosonSelectHandler {
         }
         Collections.sort(dataSource,
                 new Comparator<ddlCodeList_Row>() {
-                    @Override
-                    public int compare(ddlCodeList_Row arg0, ddlCodeList_Row arg1) {
-                        return arg0.getCode().toString().compareTo(arg1.getCode().toString());
-                    }
-                }
+            @Override
+            public int compare(ddlCodeList_Row arg0, ddlCodeList_Row arg1) {
+                return arg0.getCode().toString().compareTo(arg1.getCode().toString());
+            }
+        }
         );
         return dataSource;
     }
