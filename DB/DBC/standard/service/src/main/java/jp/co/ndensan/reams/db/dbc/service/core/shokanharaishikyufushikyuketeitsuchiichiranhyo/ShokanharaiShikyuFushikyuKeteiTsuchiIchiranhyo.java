@@ -118,12 +118,8 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                     ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 1));
             ichiranItem.setShikyugaku(shoShiharaiList.get支給額() == null
                     ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 1));
-            RStringBuilder nituliki = new RStringBuilder();
-            nituliki.append(shoShiharaiList.get様式名称());
-            nituliki.append(new RString("("));
-            nituliki.append(DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(shoShiharaiList.get金額()), 1));
-            nituliki.append(new RString(")"));
-            ichiranItem.setYoshikigotoKingaku(nituliki.toRString());
+            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
+            ichiranItem.setKingaku(DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(shoShiharaiList.get金額()), 1));
             ichiranItem.setTuika(RString.EMPTY);
             ichiranItem.setShurui(shoShiharaiList.get種類());
             if (!RString.isNullOrEmpty(shoShiharaiList.get支給不支給決定区分())) {
