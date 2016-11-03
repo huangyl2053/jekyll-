@@ -1713,7 +1713,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtKonkaiHokenkyufugakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiRiyoshaFutangakuGokei().setDisabled(true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請を保存する, true);
     }
 
     /**
