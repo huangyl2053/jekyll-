@@ -144,6 +144,8 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
     private static final String 保険者名の取得 = "getHihokenshaName";
     private static final RString MSG_導入形態コード = new RString("導入形態コード");
     private static final RString MSG_被保険者番号変換基準日の取得 = new RString("被保険者番号変換基準日の取得");
+    private static final RString ERROR_前 = new RString("errorLogFile_");
+    private static final RString ERROR_後 = new RString(".csv");
 
     private static final String 被保険者_宛名情報取得 = "getHihokenshaAtena";
     private static final String エラー登録 = "doError";
@@ -774,6 +776,9 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_READ_FILE_PATH), 入力ファイルパス);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_WRITE_FILE_PATH), 出力ファイルパス);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_CONVERT_TABLE_NAME), SJIS類似);
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_ERROR_LOG_FILE_PATH),
+                出力ファイルパス.substring(0, 出力ファイルパス.lastIndexOf(File.separator) + INT_1)
+                .concat(ERROR_前.concat(YMDHMS.now().toString()).concat(ERROR_後)));
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_CONVERT_TYPE), BatchTextFileConvert.CONVERTTYPE_TO);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_READ_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_LF);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_WRITE_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_CRLF);

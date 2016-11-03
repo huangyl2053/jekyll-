@@ -136,7 +136,8 @@ public class HonSanteiIdoKanendoFukaBatch {
         } else if (異動賦課_前年度 != null && 過年度賦課_前年度 != null) {
             YMDHMS 異動賦課_終了日時 = 異動賦課_前年度.get対象終了日時();
             YMDHMS 過年度賦課_終了日時 = 過年度賦課_前年度.get対象終了日時();
-            if (異動賦課_終了日時 != null && 過年度賦課_終了日時 != null && 異動賦課_終了日時.isBefore(過年度賦課_終了日時)) {
+            if (異動賦課_終了日時 != null && !異動賦課_終了日時.isEmpty() && 過年度賦課_終了日時 != null
+                    && !過年度賦課_終了日時.isEmpty() && 異動賦課_終了日時.isBefore(過年度賦課_終了日時)) {
                 日付管理entity = get過年度賦課entity_初回(異動賦課_前年度, parameter);
             } else {
                 日付管理entity = get過年度賦課entity_初回(過年度賦課_前年度, parameter);
