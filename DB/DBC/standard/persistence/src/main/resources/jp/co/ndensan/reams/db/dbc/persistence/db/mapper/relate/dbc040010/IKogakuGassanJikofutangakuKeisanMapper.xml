@@ -203,7 +203,7 @@
         SELECT 
         <include refid="allColumns_JissekiFutangakuDataTempEntity" />
         ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
-        ,"henko".*
+        ,<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.allColumns_DbT4021ShiharaiHohoHenko" />
         FROM "JissekiFutangakuDataTemp" AS "temp"
         LEFT JOIN "KyufujissekiKihonTemp" as "DbT3017KyufujissekiKihon"
         ON "temp"."hihokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
@@ -212,10 +212,10 @@
         LEFT JOIN (SELECT * FROM rgdb."DbT4021ShiharaiHohoHenko"  as "B"
         WHERE "B"."isDeleted"= False
         AND "B"."mukoKubun"<![CDATA[<>]]>'1'
-        AND "B"."kanriKubun"= '3' ) AS "henko"
-        ON "henko"."hihokenshaNo"= "DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND substring("henko"."tekiyoKaishiYMD" from 1 for 6)<![CDATA[<=]]>"DbT3017KyufujissekiKihon"."serviceTeikyoYM"
-        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("henko"."tekiyoShuryoYMD" from 1 for 6)
+        AND "B"."kanriKubun"= '3' ) AS "DbT4021ShiharaiHohoHenko"
+        ON "DbT4021ShiharaiHohoHenko"."hihokenshaNo"= "DbT3017KyufujissekiKihon"."hiHokenshaNo"
+        AND substring("DbT4021ShiharaiHohoHenko"."tekiyoKaishiYMD" from 1 for 6)<![CDATA[<=]]>"DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("DbT4021ShiharaiHohoHenko"."tekiyoShuryoYMD" from 1 for 6)
         ORDER BY
         "temp"."hihokenshaNo","temp"."hokenshaNo","temp"."taishoNendo","temp"."shikyuShinseishoSeiriNo"
     </select>
@@ -284,6 +284,11 @@
         )
         ) AS "riyoshaFutan"
         ON "temp"."hihokenshaNo"="riyoshaFutan"."hiHokenshaNo"
+        ORDER BY         
+        "temp"."hihokenshaNo"
+        ,"temp"."taishoNendo"
+        ,"temp"."hokenshaNo"
+        ,"temp"."shikyuShinseishoSeiriNo"
     </select>
 
     <!--BatchStep 2.6-->
@@ -306,7 +311,7 @@
         SELECT <include refid="allColumns_JissekiFutangakuDataTempEntity" />
         FROM "JissekiFutangakuDataTemp" AS "temp"
     </select>
-    
+
     <select id="get帳票データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040010.DBC040010MyBatisParameter"
             resultMap="ResultMap_JissekiFutangakuDataTempEntity" resultOrdered="true" fetchSize="500">
         SELECT <include refid="allColumns_JissekiFutangakuDataTempEntity" />
@@ -536,6 +541,7 @@
         <id column="temp_taishoNendo" />
         <id column="temp_hokenshaNo" />
         <id column="temp_shikyuShinseishoSeiriNo" />
+        <id column="dbT3017_serviceTeikyoYM" />
         <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
         <association property="給付実績基本" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity" />
@@ -548,6 +554,7 @@
         <id column="temp_taishoNendo" />
         <id column="temp_hokenshaNo" />
         <id column="temp_shikyuShinseishoSeiriNo" />
+        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" />
         <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
         <association property="高額合算自己負担額"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.ResultMap_DbT3170JigyoKogakuGassanJikoFutanGakuEntity" />
@@ -559,6 +566,8 @@
         <id column="temp_taishoNendo" />
         <id column="temp_hokenshaNo" />
         <id column="temp_shikyuShinseishoSeiriNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="riyoshaFutangaku" />
         <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
         <association property="利用者負担" resultMap="ResultMap_RiyoshaFutangakuEntity" />
     </resultMap>
@@ -573,13 +582,13 @@
         <id property="taishoNendo" column="temp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="hokenshaNo" column="temp_hokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="shikyuShinseishoSeiriNo" column="temp_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="rirekiNo2" column="temp_rirekiNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="temp_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rirekiNo2" column="temp_rirekiNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sortArea" column="temp_sortArea" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kaipageArea" column="temp_kaipageArea" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseibiMikeisanKubun" column="temp_shinseibiMikeisanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chushuTaishoKubun" column="temp_chushuTaishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="seiriNo" column="temp_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="rirekiNo" column="temp_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanKeisanYMD" column="temp_jikoFutanKeisanYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenSeidoCode" column="temp_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenshaMei" column="temp_hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
