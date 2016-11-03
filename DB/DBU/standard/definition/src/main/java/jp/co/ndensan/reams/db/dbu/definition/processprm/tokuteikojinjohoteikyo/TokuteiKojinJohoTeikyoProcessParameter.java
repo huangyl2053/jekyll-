@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokuteiKojinJohoTeikyoProcessParameter implements IBatchProcessParameter {
 
+    private RString ワークフローID;
     private RString 新規異動区分;
     private RDateTime 対象開始日時;
     private RDateTime 対象終了日時;

@@ -36,6 +36,7 @@ public class DBU080010_TokuteiKojinJohoTeikyoParameter extends BatchParameterBas
     private static final String TAISHOSHURYOTIMESTAMP = "TaishoShuryoTimestamp";
     private static final String RENKEISAKIDANTAINAITOGOATENA = "RenkeisakiDantainaiTogoAtena";
     private static final String KOJINBANGOHIHOKENSHANO = "KojinbangoTsukekaeTaisyosyaHihokenshaNo";
+    private static final String WORKFLOWID = "WorkFlowID";
 
     @BatchParameter(key = TOKUTEIKOJINJOHO, name = "特定個人情報")
     private List<RString> 特定個人情報;
@@ -49,6 +50,8 @@ public class DBU080010_TokuteiKojinJohoTeikyoParameter extends BatchParameterBas
     private RString 連携先団体内統合宛名_連携方式;
     @BatchParameter(key = KOJINBANGOHIHOKENSHANO, name = "個人番号付替対象者被保険者番号")
     private HihokenshaNo 個人番号付替対象者被保険者番号;
+    @BatchParameter(key = WORKFLOWID, name = "ワークフローID")
+    private RString ワークフローID;
 
     /**
      * コンストラクタです。
@@ -152,6 +155,7 @@ public class DBU080010_TokuteiKojinJohoTeikyoParameter extends BatchParameterBas
         parameter.set新規異動区分(新規異動区分);
         parameter.set対象開始日時(対象開始日時);
         parameter.set対象終了日時(対象終了日時);
+        parameter.setワークフローID(ワークフローID);
         return parameter;
     }
 
