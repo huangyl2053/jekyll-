@@ -15,7 +15,7 @@
                 "DbT2003Kibetsu".*,
                 "UrT0705ChoteiKyotsu".*,
                 "DbT1001HihokenshaDaicho".*,
-                CASE WHEN "COUNT1" . "COUNT_1" IS NULL THEN 0 ELSE "COUNT2" . "COUNT_2" END,
+                CASE WHEN "COUNT1" . "COUNT_1" IS NULL THEN 0 ELSE "COUNT1" . "COUNT_1" END,
                 CASE WHEN "COUNT2" . "COUNT_2" IS NULL THEN 0 ELSE "COUNT2" . "COUNT_2" END,
                 "TotalShunyu"."urT0700ShunoKanri_shunoId" AS "totalShunyu_urT0700ShunoKanri_shunoId",
                 "TotalShunyu"."urT0700ShunoKanri_shikibetsuCode" AS "totalShunyu_urT0700ShunoKanri_shikibetsuCode"
@@ -121,7 +121,6 @@
         <if test="終了生年月日 != null">
             AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{終了生年月日}
         </if>
-       
         <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '町域' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."choikiCode" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
