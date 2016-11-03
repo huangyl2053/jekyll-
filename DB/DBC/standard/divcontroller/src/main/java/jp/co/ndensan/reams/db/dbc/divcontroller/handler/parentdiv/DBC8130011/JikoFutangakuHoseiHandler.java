@@ -273,7 +273,7 @@ public class JikoFutangakuHoseiHandler {
     }
 
     private boolean isFlexibleDateNullOrEmpty(FlexibleDate date) {
-        return null == FlexibleDate || date.isEmpty();
+        return null == date || date.isEmpty();
     }
 
     private void init事業自己負担管理情報１タブ(KogakuGassanJikoFutanGaku result) {
