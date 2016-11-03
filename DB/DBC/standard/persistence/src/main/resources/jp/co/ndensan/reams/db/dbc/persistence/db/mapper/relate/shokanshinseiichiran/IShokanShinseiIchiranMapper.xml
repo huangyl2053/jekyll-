@@ -36,9 +36,9 @@
         shokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
         shokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
         shokanKihon."seiriNo" AS "seiriNo",
-        shokanKihon."jigyoshaNo" AS "jigyoshaNo",
-        shokanKihon."yoshikiNo" AS "yoshikiNo",
-        shokanKihon."meisaiNo" AS "meisaiNo"
+        MIN(shokanKihon."jigyoshaNo") AS "jigyoshaNo",
+        MIN(shokanKihon."yoshikiNo") AS "yoshikiNo",
+        MIN(shokanKihon."meisaiNo") AS "meisaiNo"
         FROM
         rgdb."DbT3038ShokanKihon" AS shokanKihon
         WHERE
@@ -52,10 +52,7 @@
         GROUP BY
         shokanKihon."hiHokenshaNo",
         shokanKihon."serviceTeikyoYM",
-        shokanKihon."seiriNo",
-        shokanKihon."meisaiNo",
-        shokanKihon."jigyoshaNo",
-        shokanKihon."yoshikiNo"
+        shokanKihon."seiriNo"
         )AS T1
         ON
         T1."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
@@ -115,7 +112,7 @@
         shokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
         shokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
         shokanKihon."seiriNo" AS "seiriNo",
-        shokanKihon."yoshikiNo" AS "yoshikiNo"
+        MIN(shokanKihon."yoshikiNo") AS "yoshikiNo"
         FROM
         rgdb."DbT3038ShokanKihon" AS shokanKihon
         WHERE
@@ -131,8 +128,7 @@
         GROUP BY
         shokanKihon."hiHokenshaNo",
         shokanKihon."serviceTeikyoYM",
-        shokanKihon."seiriNo",
-        shokanKihon."yoshikiNo"
+        shokanKihon."seiriNo"
         )AS T1
         ON
         T1."hiHokenshaNo" = shokanShinsei."hiHokenshaNo" AND
