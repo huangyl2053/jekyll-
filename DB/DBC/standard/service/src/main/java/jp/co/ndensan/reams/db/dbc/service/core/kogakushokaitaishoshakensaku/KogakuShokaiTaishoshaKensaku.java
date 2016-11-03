@@ -162,13 +162,6 @@ public class KogakuShokaiTaishoshaKensaku {
                 } else {
                     result.set識別対象(null);
                 }
-                if (識別コード != null && !識別コード.isEmpty()) {
-                    IShikibetsuTaisho 識別対象 = ShikibetsuTaishoService.getShikibetsuTaishoFinder()
-                            .get識別対象(GyomuCode.DB介護保険, 識別コード, KensakuYusenKubun.住登外優先);
-                    result.set識別対象(識別対象);
-                } else {
-                    result.set識別対象(null);
-                }
                 resultList.add(result);
             }
         }
