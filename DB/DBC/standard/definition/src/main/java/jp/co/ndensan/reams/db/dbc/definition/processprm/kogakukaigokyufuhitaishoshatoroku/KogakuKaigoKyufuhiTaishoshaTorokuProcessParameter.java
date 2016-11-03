@@ -58,8 +58,8 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
      * @param 最新のサービス提供年月 FlexibleYearMonth
      */
     public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
-            FlexibleYearMonth 最新のサービス提供年月,
-            FlexibleYearMonth 最古のサービス提供年月) {
+            FlexibleYearMonth 最古のサービス提供年月,
+            FlexibleYearMonth 最新のサービス提供年月) {
         this.最新のサービス提供年月 = 最新のサービス提供年月;
         this.最古のサービス提供年月 = 最古のサービス提供年月;
     }
