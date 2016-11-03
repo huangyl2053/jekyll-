@@ -117,7 +117,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
 
     @Step(UPDSHAFUKUKEIGENTEMPPROCESS)
     IBatchFlowCommand updshafukuKeigenTempProcess() {
-        UpdshafukuKeigenTempProcessParameter param = new UpdshafukuKeigenTempProcessParameter(false);
+        UpdshafukuKeigenTempProcessParameter param = new UpdshafukuKeigenTempProcessParameter(true);
         return loopBatch(UpdshafukuKeigenTempProcess.class).arguments(param).define();
     }
 
@@ -141,7 +141,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
 
     @Step(SETFUTANGAKUPROCESS)
     IBatchFlowCommand setFutangakuProcess() {
-        SetFutangakuProcessParameter param = new SetFutangakuProcessParameter(false, RString.EMPTY);
+        SetFutangakuProcessParameter param = new SetFutangakuProcessParameter(true, RString.EMPTY);
         return loopBatch(SetFutangakuProcess.class).arguments(param).define();
     }
 

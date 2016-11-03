@@ -37,4 +37,5 @@ public class FuchoKarisanteiFukaMybatisParameter implements IMyBatisParameter {
     private RString 特別徴収対象者情報;
     private RString 特別徴収追加候補者情報;
     private RDateTime 処理日時;
+    private RString 普通徴収_仮算定賦課方法;
 }
