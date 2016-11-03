@@ -707,7 +707,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 flag = true;
             }
         } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.市町村コード.get項目ID())
-                && !null != exEntity.get対象世帯員().getShichosonCode()
+                && null != exEntity.get対象世帯員().getShichosonCode()
                 && !exEntity.get対象世帯員().getShichosonCode().equals(entity.get対象世帯員().getShichosonCode())) {
             flag = true;
         }
