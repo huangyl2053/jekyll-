@@ -59,6 +59,8 @@ public class FurikomimeisaiDataReportProcess extends BatchProcessBase<Furikomime
     private static final int INT_15 = 15;
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 処理結果確認リスト一時TBL = new RString("DbWT0512ShoriKekkaKakuninList");
+    private static final RString 高額合算KUNBUN = new RString("高額合算");
+    private static final RString 事業高額合算KUNBUN = new RString("事業高額合算");
     /**
      * 出力ページ数です。
      */
@@ -102,7 +104,11 @@ public class FurikomimeisaiDataReportProcess extends BatchProcessBase<Furikomime
         pageCount = new OutputParameter<>();
         get出力順情報();
         ページ件数 = INT_15;
-        帳票ID = ReportIdDBC.DBC200003.getReportId();
+        if (高額合算KUNBUN.equals(processParameter.getBatchKunbun())) {
+            帳票ID = ReportIdDBC.DBC200003.getReportId();
+        } else if (事業高額合算KUNBUN.equals(processParameter.getBatchKunbun())) {
+            帳票ID = ReportIdDBC.DBC200103.getReportId();
+        }
         if (Furikomi_ShihraiHohoShitei.口座.getコード().equals(processParameter.get支払方法())) {
             項目名 = ChohyoSeigyoHanyoKomokuMei.帳票タイトル_口座.get名称();
         } else {
@@ -162,11 +168,9 @@ public class FurikomimeisaiDataReportProcess extends BatchProcessBase<Furikomime
             FurikomiMeisaiIchiranReport report = new FurikomiMeisaiIchiranReport(getFurikaeGoMeisaiEntity(振込明細一時), 出力順情報, index);
             report.writeBy(reportSourceWriter);
         }
-        if (index == INT_0) {
-            if (index == INT_0 && Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(processParameter.get処理区分())) {
-                ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = get処理結果確認リスト一時();
-                shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
-            }
+        if (index == INT_0 && Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(processParameter.get処理区分())) {
+            ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = get処理結果確認リスト一時();
+            shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
         }
         pageCount.setValue(reportSourceWriter.pageCount().value());
     }
@@ -212,7 +216,7 @@ public class FurikomimeisaiDataReportProcess extends BatchProcessBase<Furikomime
 
     private void get設定値() {
         ChohyoSeigyoHanyo hanyoResult = ChohyoSeigyoHanyoManager.createInstance()
-                .get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200103.getReportId(), 管理年度, 項目名);
+                .get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票ID, 管理年度, 項目名);
         if (hanyoResult != null) {
             設定値 = hanyoResult.get設定値();
         } else {
