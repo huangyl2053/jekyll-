@@ -83,7 +83,7 @@ public class KariNonyuTsuchishoHakkoIchiranSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportPerson(id = "shikibetsuCode")
-    @ReportItem(name = "shikibetsuCode", length = 38, order = 32)
+    @ReportItem(name = "shikibetsuCode", length = 15, order = 33)
     public RString shikibetsuCode;
 // </editor-fold>
 }
