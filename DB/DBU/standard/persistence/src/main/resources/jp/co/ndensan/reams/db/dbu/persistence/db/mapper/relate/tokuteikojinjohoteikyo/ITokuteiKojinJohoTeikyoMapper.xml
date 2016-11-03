@@ -51,7 +51,7 @@
         WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode}
         AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName1}
         <if test="isTosyo">
-            AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName2}
+            OR "DbT7022ShoriDateKanri"."shoriName" = #{shoriName2}
         </if>
     </select>
 
