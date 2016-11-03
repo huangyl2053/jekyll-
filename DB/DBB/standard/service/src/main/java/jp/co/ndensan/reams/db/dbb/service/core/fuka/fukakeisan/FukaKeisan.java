@@ -1193,18 +1193,18 @@ public class FukaKeisan extends FukaKeisanFath {
             return;
         }
         List<RString> dankaiList = new ArrayList<>();
-        dankaiList.add(月別保険料段階.get保険料段階04月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階05月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階06月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階07月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階08月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階09月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階10月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階11月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階12月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階01月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階02月().get段階区分());
-        dankaiList.add(月別保険料段階.get保険料段階03月().get段階区分());
+        dankaiList.add(月別保険料段階.get保険料段階04月());
+        dankaiList.add(月別保険料段階.get保険料段階05月());
+        dankaiList.add(月別保険料段階.get保険料段階06月());
+        dankaiList.add(月別保険料段階.get保険料段階07月());
+        dankaiList.add(月別保険料段階.get保険料段階08月());
+        dankaiList.add(月別保険料段階.get保険料段階09月());
+        dankaiList.add(月別保険料段階.get保険料段階10月());
+        dankaiList.add(月別保険料段階.get保険料段階11月());
+        dankaiList.add(月別保険料段階.get保険料段階12月());
+        dankaiList.add(月別保険料段階.get保険料段階01月());
+        dankaiList.add(月別保険料段階.get保険料段階02月());
+        dankaiList.add(月別保険料段階.get保険料段階03月());
 
         RString 保険料算定段階1 = RString.EMPTY;
         RString 保険料算定段階2 = RString.EMPTY;
