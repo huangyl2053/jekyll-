@@ -88,7 +88,7 @@ public class DBC170010_ServicecodeIdoRenrakuhyoOut extends BatchFlowBase<DBC1700
             executeStep(送付ファイル作成);
             レコード件数 = getResult(
                     Integer.class, new RString(送付ファイル作成), IdoRenrakuhyoSofuFileSakuseiProcess.PARAMETER_OUT_OUTPUTCOUNT);
-            do文字コード変換(レコード件数);
+            do文字コード変換();
             if (本番処理.equals(getParameter().get処理選択区分())) {
                 executeStep(DB更新);
             }
@@ -193,10 +193,10 @@ public class DBC170010_ServicecodeIdoRenrakuhyoOut extends BatchFlowBase<DBC1700
         return param;
     }
 
-    private void do文字コード変換(int 件数) {
+    private void do文字コード変換() {
         出力ファイルパス = getResult(
                 RString.class, new RString(送付ファイル作成), IdoRenrakuhyoSofuFileSakuseiProcess.OUTPUT_PATH);
-        if (Encode.UTF_8.equals(文字コード) && 件数 != INT_0) {
+        if (Encode.UTF_8.equals(文字コード)) {
             入力ファイルパス = getResult(
                     RString.class, new RString(送付ファイル作成), IdoRenrakuhyoSofuFileSakuseiProcess.INPUT_PATH);
             File file = new File(出力ファイルパス.toString());

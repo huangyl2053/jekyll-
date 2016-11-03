@@ -155,6 +155,13 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
         } else {
             入力ファイルパス = eucFilePath;
         }
+        eucCsvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス)
+                .setDelimiter(コンマ)
+                .setEnclosure(RString.EMPTY)
+                .setEncode(processParameter.get文字コード())
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(false)
+                .build();
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -171,15 +178,6 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
 
     @Override
     protected void process(SogoJigyoServiceCodeTempEntity entity) {
-        if (eucCsvWriter == null) {
-            eucCsvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス)
-                    .setDelimiter(コンマ)
-                    .setEnclosure(RString.EMPTY)
-                    .setEncode(processParameter.get文字コード())
-                    .setNewLine(NewLine.CRLF)
-                    .hasHeader(false)
-                    .build();
-        }
         if (INT_0 == レコード番号) {
             コントロールレコード出力();
         }

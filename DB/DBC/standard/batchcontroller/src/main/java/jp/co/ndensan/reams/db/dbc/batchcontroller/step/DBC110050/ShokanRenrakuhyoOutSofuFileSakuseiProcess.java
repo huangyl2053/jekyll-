@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -144,6 +145,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private RString 明細番号;
     private RString 入力ファイルパス;
 
+    @BatchWriter
     private CsvListWriter csvWriter;
 
     @Override
@@ -169,6 +171,13 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         } else {
             入力ファイルパス = csvFilePath;
         }
+        csvWriter = new CsvListWriter.InstanceBuilder(入力ファイルパス).
+                setDelimiter(コンマ).
+                setEnclosure(RString.EMPTY).
+                setEncode(parameter.get文字コード()).
+                hasHeader(false).
+                setNewLine(NewLine.CRLF).
+                build();
     }
 
     @Override
@@ -178,15 +187,6 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
 
     @Override
     protected void process(DbWT2112ShokanMeisaiTempEntity entity) {
-        if (csvWriter == null) {
-            csvWriter = new CsvListWriter.InstanceBuilder(入力ファイルパス).
-                    setDelimiter(コンマ).
-                    setEnclosure(RString.EMPTY).
-                    setEncode(parameter.get文字コード()).
-                    hasHeader(false).
-                    setNewLine(NewLine.CRLF).
-                    build();
-        }
         if (レコード番号 == INDEX_0) {
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getControlEntity());
