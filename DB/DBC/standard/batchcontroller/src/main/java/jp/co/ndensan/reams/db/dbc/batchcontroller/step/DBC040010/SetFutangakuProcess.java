@@ -141,8 +141,11 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
             if (高額合算自己負担額明細 == null) {
                 return;
             }
-            util.update高額合算自己負担額明細(実績負担額データ, util.toDbT3071KogakuGassanJikoFutanGakuMeisaiEntity(高額合算自己負担額明細));
-            高額合算自己負担額明細Writer.update(高額合算自己負担額明細);
+            DbT3071KogakuGassanJikoFutanGakuMeisaiEntity updEntity = util.update高額合算自己負担額明細(実績負担額データ,
+                    util.toDbT3071KogakuGassanJikoFutanGakuMeisaiEntity(高額合算自己負担額明細));
+            if (updEntity != null) {
+                高額合算自己負担額明細Writer.update(updEntity);
+            }
         } else {
             if (!nowKey.endsWith(beforKeyOf高額合算自己負担額)) {
                 高額合算自己負担額Writer.update(util.getInsOrUpd高額合算自己負担額事業分(実績負担額データ, 高額合算自己負担額, true));
@@ -151,8 +154,11 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
             if (高額合算自己負担額明細 == null) {
                 return;
             }
-            util.update高額合算自己負担額明細(実績負担額データ, 高額合算自己負担額明細);
-            高額合算自己負担額明細Writer.update(高額合算自己負担額明細);
+            DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity updEntity = util.update高額合算自己負担額明細(実績負担額データ,
+                    高額合算自己負担額明細);
+            if (updEntity != null) {
+                高額合算自己負担額明細Writer.update(updEntity);
+            }
         }
     }
 }

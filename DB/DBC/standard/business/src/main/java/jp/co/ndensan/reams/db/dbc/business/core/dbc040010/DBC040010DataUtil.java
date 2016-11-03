@@ -1051,7 +1051,7 @@ public class DBC040010DataUtil {
             entity.setTaishoNendo(setFlexibleYearDataFromRString(実績負担額データ.getTaishoNendo()));
             entity.setHokenshaNo(setHokenshaNoDataFromRString(実績負担額データ.getHokenshaNo()));
             entity.setShikyuShinseishoSeiriNo(実績負担額データ.getShikyuShinseishoSeiriNo());
-            entity.setRirekiNo(setintDataFromRString(実績負担額データ.getRirekiNo()));
+            entity.setRirekiNo(1);
             entity.setHokenSeidoCode(実績負担額データ.getHokenSeidoCode());
             entity.setHokenshaMei(実績負担額データ.getHokenshaMei());
             entity.setKokuho_HihokenshaShoKigo(実績負担額データ.getKokuho_HihokenshaShoKigo());
@@ -1116,7 +1116,7 @@ public class DBC040010DataUtil {
             entity.setTaishoNendo(setFlexibleYearDataFromRString(実績負担額データ.getTaishoNendo()));
             entity.setHokenshaNo(setHokenshaNoDataFromRString(実績負担額データ.getHokenshaNo()));
             entity.setShikyuShinseishoSeiriNo(実績負担額データ.getShikyuShinseishoSeiriNo());
-            entity.setRirekiNo(setintDataFromRString(実績負担額データ.getRirekiNo()));
+            entity.setRirekiNo(1);
             entity.setHokenSeidoCode(実績負担額データ.getHokenSeidoCode());
             entity.setHokenshaMei(実績負担額データ.getHokenshaMei());
             entity.setKokuho_HihokenshaShoKigo(実績負担額データ.getKokuho_HihokenshaShoKigo());
@@ -1201,7 +1201,6 @@ public class DBC040010DataUtil {
     public List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> getIns高額合算自己負担額明細(
             JissekiFutangakuDataTempEntity 実績負担額データ) {
         List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> insertEntities = new ArrayList<>();
-        DbT3071KogakuGassanJikoFutanGakuMeisaiEntity insertEntity = new DbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
         int startIndex;
         RString taishoNendo = 実績負担額データ.getTaishoNendo();
         if (平成20年度.equals(実績負担額データ.getTaishoNendo())) {
@@ -1212,6 +1211,7 @@ public class DBC040010DataUtil {
             return Collections.EMPTY_LIST;
         }
         for (int index = startIndex; index < suffixList.size(); index++) {
+            DbT3071KogakuGassanJikoFutanGakuMeisaiEntity insertEntity = new DbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
             insertEntity.setHihokenshaNo(new HihokenshaNo(実績負担額データ.getHihokenshaNo()));
             insertEntity.setTaishoNendo(new FlexibleYear(実績負担額データ.getTaishoNendo()));
             insertEntity.setHokenshaNo(new HokenshaNo(実績負担額データ.getHokenshaNo()));
@@ -1219,7 +1219,7 @@ public class DBC040010DataUtil {
             insertEntity.setRirekiNo(1);
             RString 対象月 = suffixList.get(index);
             insertEntity.setTaishoM(対象月);
-            set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, 対象月);
+            insertEntity = set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, 対象月);
             insertEntities.add(insertEntity);
         }
         return insertEntities;
@@ -1234,7 +1234,6 @@ public class DBC040010DataUtil {
     public List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> getIns高額合算自己負担額明細事業分(
             JissekiFutangakuDataTempEntity 実績負担額データ) {
         List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> insertEntities = new ArrayList<>();
-        DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity insertEntity = new DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity();
         int startIndex;
         RString taishoNendo = 実績負担額データ.getTaishoNendo();
         if (平成20年度.equals(実績負担額データ.getTaishoNendo())) {
@@ -1245,6 +1244,7 @@ public class DBC040010DataUtil {
             return Collections.EMPTY_LIST;
         }
         for (int index = startIndex; index < suffixList.size(); index++) {
+            DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity insertEntity = new DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity();
             insertEntity.setHihokenshaNo(new HihokenshaNo(実績負担額データ.getHihokenshaNo()));
             insertEntity.setTaishoNendo(new FlexibleYear(実績負担額データ.getTaishoNendo()));
             insertEntity.setHokenshaNo(new HokenshaNo(実績負担額データ.getHokenshaNo()));
@@ -1252,7 +1252,7 @@ public class DBC040010DataUtil {
             insertEntity.setRirekiNo(1);
             RString 対象月 = suffixList.get(index);
             insertEntity.setTaishoM(対象月);
-            set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, 対象月);
+            insertEntity = set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, 対象月);
             insertEntities.add(insertEntity);
         }
         return insertEntities;
@@ -1263,13 +1263,14 @@ public class DBC040010DataUtil {
      *
      * @param 実績負担額データ JissekiFutangakuDataTempEntity
      * @param entity DbT3071KogakuGassanJikoFutanGakuMeisaiEntity
+     * @return DbT3071KogakuGassanJikoFutanGakuMeisaiEntity
      */
-    public void update高額合算自己負担額明細(JissekiFutangakuDataTempEntity 実績負担額データ,
+    public DbT3071KogakuGassanJikoFutanGakuMeisaiEntity update高額合算自己負担額明細(JissekiFutangakuDataTempEntity 実績負担額データ,
             DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity) {
         if (entity == null) {
-            return;
+            return null;
         }
-        set高額合算自己負担額明細項目(entity, 実績負担額データ, entity.getTaishoM());
+        return set高額合算自己負担額明細項目(entity, 実績負担額データ, entity.getTaishoM());
     }
 
     /**
@@ -1277,13 +1278,15 @@ public class DBC040010DataUtil {
      *
      * @param 実績負担額データ JissekiFutangakuDataTempEntity
      * @param entity DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity
+     * @return DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity
      */
-    public void update高額合算自己負担額明細(JissekiFutangakuDataTempEntity 実績負担額データ,
+    public DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity update高額合算自己負担額明細(
+            JissekiFutangakuDataTempEntity 実績負担額データ,
             DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity entity) {
         if (entity == null) {
-            return;
+            return null;
         }
-        set高額合算自己負担額明細項目(entity, 実績負担額データ, entity.getTaishoM());
+        return set高額合算自己負担額明細項目(entity, 実績負担額データ, entity.getTaishoM());
     }
 
     /**
@@ -1402,7 +1405,7 @@ public class DBC040010DataUtil {
         return target;
     }
 
-    private void set高額合算自己負担額明細項目(
+    private DbT3071KogakuGassanJikoFutanGakuMeisaiEntity set高額合算自己負担額明細項目(
             DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ, RString 対象月) {
         entity.setJikoFutanGaku(getDecimalFromToken(実績負担額データ, JIKOFUTANGAKU, 対象月));
         entity.setUchisu_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, UCHISU_70_74JIKOFUTANGAKU, 対象月));
@@ -1415,9 +1418,10 @@ public class DBC040010DataUtil {
                 getDecimalFromToken(実績負担額データ, SUMI_UNDER_70KOGAKUSHIKYUGAKU, 対象月));
         entity.setSumi_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74KOGAKUSHIKYUGAKU, 対象月));
         entity.setSumi_Tekiyo(getRStringFromToken(実績負担額データ, SUMI_TEKIYO, 対象月));
+        return entity;
     }
 
-    private void set高額合算自己負担額明細項目(
+    private DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity set高額合算自己負担額明細項目(
             DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ, RString 対象月) {
         entity.setJikoFutanGaku(getDecimalFromToken(実績負担額データ, JIKOFUTANGAKU, 対象月));
         entity.setUchisu_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, UCHISU_70_74JIKOFUTANGAKU, 対象月));
@@ -1430,6 +1434,7 @@ public class DBC040010DataUtil {
                 getDecimalFromToken(実績負担額データ, SUMI_UNDER_70KOGAKUSHIKYUGAKU, 対象月));
         entity.setSumi_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74KOGAKUSHIKYUGAKU, 対象月));
         entity.setSumi_Tekiyo(getRStringFromToken(実績負担額データ, SUMI_TEKIYO, 対象月));
+        return entity;
     }
 
     private HihokenshaNo setHihokenshaNoDataFromRString(RString data) {
