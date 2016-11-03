@@ -70,6 +70,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select比較処理データ");
     private static final RString CSV_FILENAME = new RString("JukyusyaIdouJohoRirekilist.csv");
+    private static final RString CSV_FILENAME_DBC200010 = new RString("JukyusyaIdouJohoSofuTaisyosyaList.csv");
     private static final EucEntityId EUC_ENTITY_ID_DBC200074 = new EucEntityId("DBC200074");
     private static final EucEntityId EUC_ENTITY_ID_DBC200010 = new EucEntityId("DBC200010");
     private static final int COUNT_0 = 0;
@@ -226,7 +227,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         spoolManager_DBC200010 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200010,
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath_DBC200010 = Path.combinePath(spoolManager_DBC200010.getEucOutputDirectry(),
-                CSV_FILENAME);
+                CSV_FILENAME_DBC200010);
         csvWriter_DBC200010 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200010).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
