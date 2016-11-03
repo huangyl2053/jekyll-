@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoseidokanifsakusei
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCopiedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -124,8 +124,8 @@ public class InsKaifuTempProcess extends BatchProcessBase<
 
     @Override
     protected void createWriter() {
-        特徴回付情報Temp = new BatchEntityCreatedTempTableWriter<>(T_特徴回付情報TMP,
-                UeT0511NenkinTokuchoKaifuJohoEntity.class);
+        特徴回付情報Temp = new BatchCopiedTempTableWriter<>(
+                UeT0511NenkinTokuchoKaifuJohoEntity.class, T_特徴回付情報TMP);
     }
 
     @Override
