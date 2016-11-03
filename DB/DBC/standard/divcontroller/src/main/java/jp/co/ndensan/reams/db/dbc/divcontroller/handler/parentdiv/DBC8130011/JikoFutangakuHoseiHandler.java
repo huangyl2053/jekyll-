@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuM
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.JigyoKogakuGassanJikofutangakuHosei;
 import jp.co.ndensan.reams.db.dbc.definition.core.jigyougassan.JigyouGassan_ShoumeishoyouDataKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.JikoFutangakuHoseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.JikoFutangakuHoseiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.dgJohoIchiran_Row;
@@ -214,12 +214,12 @@ public class JikoFutangakuHoseiHandler {
             row.setTxtRirekiNo(new RString(result.get履歴番号()));
             row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null ? RString.EMPTY
                     : result.get自己負担額証明書情報受取年月().toDateString());
-            row.setTxtKeisanYMD(result.get自己負担額計算年月日() == null ? RString.EMPTY
+            row.setTxtKeisanYMD(isFlexibleDateNullOrEmpty(result.get自己負担額計算年月日()) ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.get自己負担額計算年月日().toString())));
             row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
                     : JigyouGassan_ShoumeishoyouDataKubun.toValue(result.getデータ作成区分()).get名称());
-            row.setTxtHoseiYMDTan(result.getリアル補正実施年月日() == null ? RString.EMPTY
+            row.setTxtHoseiYMDTan(isFlexibleDateNullOrEmpty(result.getリアル補正実施年月日()) ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getリアル補正実施年月日().toString())));
             rowList.add(row);
@@ -247,29 +247,33 @@ public class JikoFutangakuHoseiHandler {
         detailDiv.getTxtTaishouNendo().setValue(new RDate(result.get対象年度().getYearValue()));
         detailDiv.getTxtShoukisaiHokenjaNO().setValue(result.get保険者番号().getColumnValue());
         detailDiv.getTxtShikyuShinseiSeiriNO().setValue(result.get支給申請書整理番号());
-        if (result.get自己負担額証明書情報受取年月() == null) {
+        if (null == result.get自己負担額証明書情報受取年月() || result.get自己負担額証明書情報受取年月().isEmpty()) {
             detailDiv.getTxtUketoriYM().clearValue();
         } else {
             detailDiv.getTxtUketoriYM().setValue(new RDate(
                     result.get自己負担額証明書情報受取年月().toString()));
         }
-        if (result.get自己負担額計算年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get自己負担額計算年月日())) {
             detailDiv.getTxtJikofutangakuKeisanYMD().clearValue();
         } else {
             detailDiv.getTxtJikofutangakuKeisanYMD().setValue(
                     new RDate(result.get自己負担額計算年月日().toString()));
         }
-        if (result.getリアル補正実施年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.getリアル補正実施年月日())) {
             detailDiv.getTxtHoseibiTan().clearValue();
         } else {
             detailDiv.getTxtHoseibiTan().setValue(new RDate(result.getリアル補正実施年月日().toString()));
         }
-        if (result.get自己負担額証明書作成年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get自己負担額証明書作成年月日())) {
             detailDiv.getTxtShoumeishoSakuseiYMD().clearValue();
         } else {
             detailDiv.getTxtShoumeishoSakuseiYMD().setValue(
                     new RDate(result.get自己負担額証明書作成年月日().toString()));
         }
+    }
+
+    private boolean isFlexibleDateNullOrEmpty(FlexibleDate date) {
+        return null == FlexibleDate || date.isEmpty();
     }
 
     private void init事業自己負担管理情報１タブ(KogakuGassanJikoFutanGaku result) {
@@ -325,30 +329,30 @@ public class JikoFutangakuHoseiHandler {
 
     private void 編集年月日(KogakuGassanJikoFutanGaku result,
             tplJikofutanKanriJoho1Div kanriJohoDiv1) throws IllegalArgumentException {
-        if (result.get申請年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get申請年月日())) {
             kanriJohoDiv1.getTxtShinseiYMD().clearValue();
         } else {
             kanriJohoDiv1.getTxtShinseiYMD().setValue(new RDate(result.get申請年月日().toString()));
         }
-        if (result.get対象計算期間開始年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get対象計算期間開始年月日())) {
             kanriJohoDiv1.getTxtTaishouKeisanKikan().clearFromValue();
         } else {
             kanriJohoDiv1.getTxtTaishouKeisanKikan().setFromValue(
                     new RDate(result.get対象計算期間開始年月日().toString()));
         }
-        if (result.get対象計算期間終了年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get対象計算期間終了年月日())) {
             kanriJohoDiv1.getTxtTaishouKeisanKikan().clearToValue();
         } else {
             kanriJohoDiv1.getTxtTaishouKeisanKikan().setToValue(
                     new RDate(result.get対象計算期間終了年月日().toString()));
         }
-        if (result.get被保険者期間開始年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get被保険者期間開始年月日())) {
             kanriJohoDiv1.getTxtHihokenshaKikan().clearFromValue();
         } else {
             kanriJohoDiv1.getTxtHihokenshaKikan().setFromValue(
                     new RDate(result.get被保険者期間開始年月日().toString()));
         }
-        if (result.get被保険者期間終了年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get被保険者期間終了年月日())) {
             kanriJohoDiv1.getTxtHihokenshaKikan().clearToValue();
         } else {
             kanriJohoDiv1.getTxtHihokenshaKikan().setToValue(
@@ -435,7 +439,7 @@ public class JikoFutangakuHoseiHandler {
     }
 
     private void set開始終了日(KogakuGassanJikoFutanGaku result) {
-        if (result.get支払期間開始年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get支払期間開始年月日())) {
             div.getTxtMadoguchiKaishiYMD().clearValue();
             div.getTxtMadoguchiKaishiYoubi().clearValue();
         } else {
@@ -452,7 +456,7 @@ public class JikoFutangakuHoseiHandler {
                     result.get支払期間開始時間().substring(INT_0, INT_2));
             div.getTxtMadoguchiKaishiFun().setValue(result.get支払期間開始時間().substring(INT_2, INT_4));
         }
-        if (result.get支払期間終了年月日() == null) {
+        if (isFlexibleDateNullOrEmpty(result.get支払期間終了年月日())) {
             div.getTxtMadoguchiShuryoYMD().clearValue();
             div.getTxtMadoguchiShuryoYoubi().clearValue();
         } else {
