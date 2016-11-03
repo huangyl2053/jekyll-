@@ -258,5 +258,13 @@ public class ShujiiIkenshoTorokuResult {
     public RString get厚労省IF識別コード() {
         return entity.getDbt5302Entity().getKoroshoIfShikibetsuCode();
     }
-
+    
+    /**
+     * 主治医意見書作成依頼履歴番号を取得します。
+     *
+     * @return 主治医意見書作成依頼履歴番号
+     */
+    public int get主治医意見書作成依頼履歴番号() {
+        return entity.getDbt5301Entity().getIkenshoIraiRirekiNo();
+    }
 }

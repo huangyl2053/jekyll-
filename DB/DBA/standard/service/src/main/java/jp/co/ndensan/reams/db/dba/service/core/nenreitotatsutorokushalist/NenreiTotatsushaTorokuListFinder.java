@@ -80,7 +80,8 @@ public class NenreiTotatsushaTorokuListFinder {
      * @param 今回開始日 今回開始日
      * @param 今回終了日 今回終了日
      * @param 出力順ID 出力順ID
-     * @return DBA150010_NenreitotatsuTorokuListParameter 年齢到達登録者リスト作成バッチパラメータクラス
+     * @return DBA150010_NenreitotatsuTorokuListParameter
+     * 年齢到達登録者リスト作成バッチパラメータクラス
      */
     public DBA150010_NenreitotatsuTorokuListParameter getNenreiTotatsushaTorokuListBatchParameter(
             FlexibleDate 前回開始日,
@@ -126,7 +127,7 @@ public class NenreiTotatsushaTorokuListFinder {
         今回終了日Builder.append(MAX_日時.toString());
         parameter.setKonkaikaishiYMDHMS(今回開始日Builder.toRString());
         parameter.setKonkaishuryoYMDHMS(今回終了日Builder.toRString());
-        parameter.setShuturyokujunID(出力順ID);
+        parameter.setShutsuryokujunID(出力順ID);
         return parameter;
     }
 }

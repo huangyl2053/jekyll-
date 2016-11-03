@@ -82,7 +82,7 @@ public class ShikakuShutokuIdoTotal {
 
         前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
         if ((!(hihokenshaNo == null || hihokenshaNo.isEmpty()))
-            && !RealInitialLocker.tryGetLock(前排他ロックキー)) {
+                && !RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
@@ -182,7 +182,7 @@ public class ShikakuShutokuIdoTotal {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
             releaseLock(div);
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
@@ -344,7 +344,7 @@ public class ShikakuShutokuIdoTotal {
             // 期間重複チェック
             if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()
-                && div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    && div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
                 validPairs.add(new ValidationMessageControlPair(validationErrorMessage.期間が不正_過去日付不可,
                         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
@@ -441,13 +441,13 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onBlur_txtShutokuDate(ShikakuShutokuIdoTotalDiv div) {
-        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
-                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()
-            && !div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
-                .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
-            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
-                    setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
-        }
+//        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+//                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()
+//            && !div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+//                .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+//            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
+//                    setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
+//        }
         return ResponseData.of(div).respond();
     }
 

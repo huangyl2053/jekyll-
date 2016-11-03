@@ -204,9 +204,6 @@ public class DBD1030001 {
 
     private boolean 削除処理(DBD1030001Div div) {
         dgShinseiList_Row dataSouce = div.getDgShinseiList().getActiveRow();
-        if (dataSouce.getKetteiKubun() != null && !dataSouce.getKetteiKubun().isEmpty() && !状態_追加.equals(dataSouce.getJotai())) {
-            return false;
-        }
         RString 状態 = dataSouce.getJotai();
         if (状態.isEmpty() || 状態_修正.equals(状態)) {
             ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList
@@ -232,15 +229,25 @@ public class DBD1030001 {
     }
 
     /**
+     * 社会福祉法人等利用者負担軽減申請画面を「特例措置対象者」を押下する。<br/>
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     */
+    public ResponseData<DBD1030001Div> onCLick_chkTokureiTaisho(DBD1030001Div div) {
+        getHandler(div).onCLick_chkTokureiTaisho();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 社会福祉法人等利用者負担軽減申請画面を「承認しない理由」を押下する。<br/>
      *
      * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_onBeforeOpenDialog(DBD1030001Div div) {
-        div.getShafukuRiyoshaKeigen().setGyomuCode(GyomuCode.DB介護保険.value());
-        div.getShafukuRiyoshaKeigen().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
-        div.getShafukuRiyoshaKeigen().setTeikeibun(RString.EMPTY);
+        div.setHidden登録業務コード(GyomuCode.DB介護保険.getColumnValue());
+        div.setHidden登録グループコード(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
         return ResponseData.of(div).respond();
     }
 
@@ -251,7 +258,7 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClose_btnOpenHiShoninRiyu(DBD1030001Div div) {
-        div.getTxtHiShoninRiyu().setValue(div.getShafukuRiyoshaKeigen().getTeikeibun());
+        div.getTxtHiShoninRiyu().setValue(div.getHiddenサンプル文書());
         return ResponseData.of(div).respond();
     }
 
@@ -355,6 +362,12 @@ public class DBD1030001 {
             if (KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
                 validationHandler.承認情報相関チェック１(pairs, div);
             }
+            
+            RString メニューID = ResponseHolder.getMenuID();
+            if (!申請メニューID.equals(メニューID)) {
+                validationHandler.減免減額_適用期間重複のチェックon確定(pairs, div);
+            }
+            
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }

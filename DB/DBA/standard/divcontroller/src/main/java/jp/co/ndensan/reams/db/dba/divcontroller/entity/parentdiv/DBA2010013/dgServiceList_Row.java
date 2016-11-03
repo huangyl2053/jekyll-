@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 17 11:33:44 CST 2016 
+ * Fri Oct 21 20:52:34 JST 2016 
  */
 
 
@@ -20,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgServiceList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
 
+    private RString state;
     private RString serviceShuruiCode;
     private RString serviceType;
     private TextBoxFlexibleDate kaishiDate;
@@ -31,12 +32,14 @@ public class dgServiceList_Row extends DataRow {
 
     public dgServiceList_Row() {
         super();
+        this.state = RString.EMPTY;
         this.serviceShuruiCode = RString.EMPTY;
         this.serviceType = RString.EMPTY;
         this.kaishiDate = new TextBoxFlexibleDate();
         this.shuryoDate = new TextBoxFlexibleDate();
         this.jigyoshaMei = RString.EMPTY;
         this.kanrishaMei = RString.EMPTY;
+        this.setOriginalData("state", state);
         this.setOriginalData("serviceShuruiCode", serviceShuruiCode);
         this.setOriginalData("serviceType", serviceType);
         this.setOriginalData("kaishiDate", kaishiDate);
@@ -45,20 +48,26 @@ public class dgServiceList_Row extends DataRow {
         this.setOriginalData("kanrishaMei", kanrishaMei);
     }
 
-    public dgServiceList_Row(RString serviceShuruiCode, RString serviceType, TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString jigyoshaMei, RString kanrishaMei) {
+    public dgServiceList_Row(RString state, RString serviceShuruiCode, RString serviceType, TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString jigyoshaMei, RString kanrishaMei) {
         super();
+        this.setOriginalData("state", state);
         this.setOriginalData("serviceShuruiCode", serviceShuruiCode);
         this.setOriginalData("serviceType", serviceType);
         this.setOriginalData("kaishiDate", kaishiDate);
         this.setOriginalData("shuryoDate", shuryoDate);
         this.setOriginalData("jigyoshaMei", jigyoshaMei);
         this.setOriginalData("kanrishaMei", kanrishaMei);
+        this.state = state;
         this.serviceShuruiCode = serviceShuruiCode;
         this.serviceType = serviceType;
         this.kaishiDate = kaishiDate;
         this.shuryoDate = shuryoDate;
         this.jigyoshaMei = jigyoshaMei;
         this.kanrishaMei = kanrishaMei;
+    }
+
+    public RString getState() {
+        return state;
     }
 
     public RString getServiceShuruiCode() {
@@ -83,6 +92,11 @@ public class dgServiceList_Row extends DataRow {
 
     public RString getKanrishaMei() {
         return kanrishaMei;
+    }
+
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
     public void setServiceShuruiCode(RString serviceShuruiCode) {

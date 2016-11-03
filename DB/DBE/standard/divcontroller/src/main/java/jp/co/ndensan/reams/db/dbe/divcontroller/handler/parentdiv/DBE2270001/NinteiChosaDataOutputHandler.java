@@ -79,8 +79,9 @@ public class NinteiChosaDataOutputHandler {
      */
     public void clear検索条件() {
         div.getCcdChosaltakusakiAndChosainInput().clear();
-        div.getNinteiKensakuJyoken().getTxtMaxCount().clearValue();
         div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**

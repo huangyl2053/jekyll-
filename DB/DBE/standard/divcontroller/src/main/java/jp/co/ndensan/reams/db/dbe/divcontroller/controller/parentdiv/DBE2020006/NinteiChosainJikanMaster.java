@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
@@ -73,6 +72,7 @@ public class NinteiChosainJikanMaster {
     private static final int 時間枠_10 = 10;
     private static final int 時間枠数 = 11;
     private final RString 予約フラグ_可 = new RString("key0");
+    private final RString 予約フラグ_不可 = new RString("key1");
     private final RString 処理区分_未処理 = new RString("0");
     private final RString 処理区分_削除 = new RString("3");
     private final RString 処理区分_新規 = new RString("1");
@@ -193,28 +193,8 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> ddlHenkou(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getMainPanel().getSearchConditionPanel().setTaishoChikuKey(div.getDdlTaishoChiku().getSelectedKey());
-            getHandler(div).onLoad(div.getTxtSettingMonth().getValue());
-        } else {
-            RString 変更前調査地区 = div.getMainPanel().getSearchConditionPanel().getTaishoChikuKey();
-            List<KeyValueDataSource> keyValueList = get調査地区ドロップダウンリスト();
-            for (KeyValueDataSource keyValue : keyValueList) {
-                if (変更前調査地区 == null || 変更前調査地区.isEmpty()) {
-                    div.getDdlTaishoChiku().setSelectedKey(RString.EMPTY);
-                    break;
-                } else if (変更前調査地区.equals(keyValue.getKey())) {
-                    div.getDdlTaishoChiku().setSelectedKey(変更前調査地区);
-                }
-            }
-        }
+        div.getMainPanel().getSearchConditionPanel().setTaishoChikuKey(div.getDdlTaishoChiku().getSelectedKey());
+        getHandler(div).onLoad(div.getTxtSettingMonth().getValue());
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
@@ -279,10 +259,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu1(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku01()), new RString("1"));
@@ -296,10 +283,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu2(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku02()), new RString("2"));
@@ -313,10 +307,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu3(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku03()), new RString("3"));
@@ -330,10 +331,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu4(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku04()), new RString("4"));
@@ -347,10 +355,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu5(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku05()), new RString("5"));
@@ -364,10 +379,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu6(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku06()), new RString("6"));
@@ -381,10 +403,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu7(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku07()), new RString("7"));
@@ -398,10 +427,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu8(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku08()), new RString("8"));
@@ -415,10 +451,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu9(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku09()), new RString("9"));
@@ -432,10 +475,17 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnHennsyu10(NinteiChosainJikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
-                    DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (未来日の確認(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode(),
+                        DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
         dgTimeScheduleList_Row 編集データ = div.getDgTimeScheduleList().getActiveRow();
         時間枠編集の設定(div, 編集データ, nullToEmpty(編集データ.getChosaJikanwaku10()), new RString("10"));
@@ -582,20 +632,9 @@ public class NinteiChosainJikanMaster {
             編集内容Flag = true;
             break;
         }
-        if (!ResponseHolder.isReRequest() && 編集内容Flag) {
-            return ResponseData.of(div).addMessage(DbQuestionMessages.入力内容の破棄.getMessage()).respond();
-        } else {
-            NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();
-            model.set設定年月(new FlexibleDate(div.getTxtSettingMonth().getValue().getYearMonth().toDateString()));
-            div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(model));
-        }
-        if (new RString(DbQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();
-            model.set設定年月(new FlexibleDate(div.getTxtSettingMonth().getValue().getYearMonth().toDateString()));
-            div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(model));
-        }
+        NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();
+        model.set設定年月(new FlexibleDate(div.getTxtSettingMonth().getValue().getYearMonth().toDateString()));
+        div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
@@ -688,12 +727,36 @@ public class NinteiChosainJikanMaster {
             NinteiChosainJikanMasterDiv div,
             dgTimeScheduleList_Row 編集データ,
             RString 調査時間枠,
-            RString 時間枠) {
-
-        if (new RString(DbeQuestionMessages.処理日より過去のスケジュールを変更.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (編集状態_既存.equals(編集状態の設定(調査時間枠))) {
+            RString 時間枠) { 
+        if (編集状態_既存.equals(編集状態の設定(調査時間枠))) {
+            Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+            RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
+            RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
+            LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
+            Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
+                    = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール情報, Models.class);
+            NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(
+                    new FlexibleDate(div.getTxtSetteiYMD().getValue().toDateString()),
+                    時間の処理(div.getTxtKaishiJikan().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm)),
+                    時間の処理(div.getTxtShuryoJikan().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm)),
+                    new Code(div.getTxtJikanWaku().getValue()),
+                    調査地区コード,
+                    認定調査委託先コード,
+                    認定調査員コード,
+                    市町村コード);
+            if (ninteichosaModels.contains(情報PK)) {
+                div.getTxtBiko().setValue( ninteichosaModels.get(情報PK).get備考());
+                div.getRadYoyaku().setSelectedKey(予約可否設定(ninteichosaModels.get(情報PK).is予約可能フラグ()));
+                div.getDdlTaishoChiku().setDisabled(true);
+                div.getTxtSettingMonth().setDisabled(true);
+                div.getBtnPrevious().setDisabled(true);
+                div.getBtnNext().setDisabled(true);
+                div.getBtnSearch().setDisabled(true);
+                div.getDgTimeScheduleList().setReadOnly(true);
+                div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(true);
+                div.getMainPanel().getSettingDetail().setDisplayNone(false);
+                div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_既存);
+            } else {
                 NinteiChosainBusiness 編集元 = 時間枠設定の編集元取得(
                         div,
                         編集データ,
@@ -702,11 +765,19 @@ public class NinteiChosainJikanMaster {
                         時間枠);
                 div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_既存);
                 getHandler(div).btnHennsyu(編集元, 時間枠, 編集データ);
-            } else {
-                div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_未指定);
-                getHandler(div).btnHennsyu(編集データ, 時間枠);
             }
-        }
+        } else {
+            div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_未指定);
+            getHandler(div).btnHennsyu(編集データ, 時間枠);
+        }   
+    }
+
+    private boolean 未来日の確認(NinteiChosainJikanMasterDiv div) {
+        RDate 当日 = RDate.getNowDate();
+        RString 設定年月 = new RString(div.getTxtSettingMonth().getValue().toString()).substring(0, 6);
+        RString 処理日_日 = div.getDgTimeScheduleList().getActiveRow().getDate().padZeroToLeft(2);
+        RString 処理日 = 設定年月.concat(処理日_日);
+        return 当日.compareTo(new RDate(処理日.toString())) > 0;
     }
 
     private NinteiChosainBusiness 時間枠設定の編集元取得(
@@ -737,14 +808,14 @@ public class NinteiChosainJikanMaster {
     }
 
     private RString 編集状態の設定(RString 時間枠) {
-        if (時間枠 == null || 時間枠.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠)) {
             return 編集状態_未指定;
         }
         return 編集状態_既存;
     }
 
     private RString nullToEmpty(RString 時間枠) {
-        if (時間枠 == null || 時間枠.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠)) {
             return RString.EMPTY;
         }
         return 時間枠;
@@ -777,10 +848,18 @@ public class NinteiChosainJikanMaster {
         }
     }
 
-    private boolean is予約可能フラグ(RString 予約可能フラグ) {
-        return 予約フラグ_可.equals(予約可能フラグ);
+    private RString 予約可否設定(boolean 予約可能フラグ) {
+        if (予約可能フラグ) {
+            return 予約フラグ_可;
+        } else {
+            return 予約フラグ_不可;
+        }
     }
 
+        private boolean is予約可能フラグ(RString 予約可能フラグ) {
+        return 予約フラグ_可.equals(予約可能フラグ);
+    }
+    
     private void 保存の処理(dgTimeScheduleList_Row row, FlexibleDate 予定年月日, Code 調査地区コード,
             RString 認定調査委託先コード,
             RString 認定調査員コード,

@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -111,7 +110,6 @@ public class ShikakuSoshitsuIdoTotal {
     private LockingKey create排他キー() {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        System.out.println(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
         return new LockingKey(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
     }
 
@@ -173,7 +171,7 @@ public class ShikakuSoshitsuIdoTotal {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
             releaseLock();
             div.getComplete().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
@@ -319,13 +317,13 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onBlur_shutokuDate(ShikakuSoshitsuIdoTotalDiv div) {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-        if (!div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate().getValue().isEmpty()
-            && div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
-            div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate()
-                    .setValue(new FlexibleDate(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                                    .getTxtShutokuDate().getValue().toString()));
-
-        }
+//        if (!div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate().getValue().isEmpty()
+//            && div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+//            div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate()
+//                    .setValue(new FlexibleDate(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+//                                    .getTxtShutokuDate().getValue().toString()));
+//
+//        }
         response.data = div;
         return response;
     }

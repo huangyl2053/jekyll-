@@ -43,6 +43,7 @@ public class HomonkaigoRiyoshaFutangakuGengaku {
                 getHandler(div).initialize(表示リスト);
             }
         }
+        div.setVisible(true);
         return ResponseData.of(div).respond();
     }
 

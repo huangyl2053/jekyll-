@@ -1,6 +1,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryoHokenRirekiDialogButton;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryoHokenRirekiState;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -25,4 +27,11 @@ public interface IIryoHokenRirekiDialogButtonDiv extends ICommonChildDivBaseProp
      * @return 保存件数
      */
     int save();
+
+    /**
+     * ダイアログで入力した医療保険履歴のデータを取得します。取得されるデータは、saveメソッドで保存対象になるデータと同一です。
+     *
+     * @return 保存データ
+     */
+    List<IryohokenKanyuJokyo> get医療保険履歴();
 }

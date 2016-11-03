@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
  * @author 自動生成
  */
 public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNinteiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -75,4 +75,24 @@ public class ShujiiIryokikanAndShujiiGuideFinder {
         }
         return SearchResult.of(businessList, 0, false);
     }
+    
+    /**
+     * 入力された検索条件によって、主治医医療機関情報を取得します。
+     *
+     * @param parameter 主治医医療機関情報検索パラメーター
+     * @return SearchResult<ShujiiIryokikanAndShujii>
+     */
+    @Transaction
+    public SearchResult<ShujiiIryokikanAndShujii> search主治医医療機関情報(
+            ShujiiIryokikanAndShujiiGuideParameter parameter) {
+        requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("パラメーター"));
+        IShujiiIryokikanAndShujiiGuideMapper mapper = mapperProvider.create(IShujiiIryokikanAndShujiiGuideMapper.class);
+        List<ShujiiIryokikanAndShujiiRelateEntity> shinsakaiiinJohoList;
+        shinsakaiiinJohoList = mapper.get主治医医療機関情報(parameter);
+        List<ShujiiIryokikanAndShujii> businessList = new ArrayList();
+        for (ShujiiIryokikanAndShujiiRelateEntity entity : shinsakaiiinJohoList) {
+            businessList.add(new ShujiiIryokikanAndShujii(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
+    }
 }

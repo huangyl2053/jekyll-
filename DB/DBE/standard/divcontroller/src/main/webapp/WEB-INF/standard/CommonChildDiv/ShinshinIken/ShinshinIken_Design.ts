@@ -245,6 +245,10 @@ module DBE {
                 return new UZA.CheckBoxList(this.convFiledName("chkHidariKashiMahiTeido"));
             }
 
+            public Sp1(): UZA.Space {
+                return new UZA.Space(this.convFiledName("Sp1"));
+            }
+
             public chkSonotaMahi(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkSonotaMahi"));
             }

@@ -150,28 +150,18 @@ public class ShinsaKaiKekkaToroku {
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnCompleteKekkaToroku(ShinsaKaiKekkaTorokuDiv div) {
 
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
+        if (存在チェック結果.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            if (存在チェック結果.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
-            }
-            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
-            if (validation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validation).respond();
-            } else {
-                申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
-                前排他キーの解除();
-                return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.審査会対象者個別結果登録へ遷移する).respond();
-            }
+        ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
+        if (validation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validation).respond();
+        } else {
+            申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
+            前排他キーの解除();
+            return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.審査会対象者個別結果登録へ遷移する).respond();
         }
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -216,27 +206,18 @@ public class ShinsaKaiKekkaToroku {
      * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnOCRToroku(ShinsaKaiKekkaTorokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
+        if (存在チェック結果.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            if (存在チェック結果.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
-            }
-            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
-            if (validation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validation).respond();
-            } else {
-                前排他キーの解除();
-                return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.介護認定審査会審査結果登録_OCR_へ遷移する).respond();
-            }
+        ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
+        if (validation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validation).respond();
+        } else {
+            ViewStateHolder.put(ViewStateKeys.開催番号, div.getCcdTaskList().getCheckbox().get(0).getNijihanteiKaisaiNumber());
+            前排他キーの解除();
+            return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.介護認定審査会審査結果登録_OCR_へ遷移する).respond();
         }
-        return ResponseData.of(div).respond();
     }
 
     /**

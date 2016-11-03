@@ -333,17 +333,17 @@
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
                 ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
+            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
                 ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp1."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp2
+            LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp2
                 ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp2."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1_1
+            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1_1
                 ON  DbT5121_temp2."zenkaiShinseishoKanriNo" = DbT5101_temp1_1."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho"
                 ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            INNER JOIN 
+            LEFT JOIN 
               (SELECT 
                   DbT5201NinteichosaIraiJoho.*
                FROM
@@ -358,7 +358,7 @@
                   AND DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = DbT5201_Temp."ninteichosaIraiRirekiNo") AS DbT5201
                 ON  DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND DbT5201."logicalDeletedFlag" = FALSE
-            INNER JOIN 
+            LEFT JOIN 
               (SELECT 
                   DbT7060KaigoJigyosha.*
                FROM
@@ -442,17 +442,17 @@
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
                 ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
+            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
                 ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp1."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp2
+            LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp2
                 ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp2."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1_1
+            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1_1
                 ON  DbT5121_temp2."zenkaiShinseishoKanriNo" = DbT5101_temp1_1."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            INNER JOIN 
+            LEFT JOIN 
               (SELECT 
                   DbT5201NinteichosaIraiJoho.*
                FROM
@@ -467,7 +467,7 @@
                   AND DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = DbT5201_Temp."ninteichosaIraiRirekiNo") AS DbT5201
                 ON  DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND DbT5201."logicalDeletedFlag" = FALSE
-            INNER JOIN 
+            LEFT JOIN 
               (SELECT 
                   DbT7060KaigoJigyosha.*
                FROM
@@ -509,6 +509,7 @@
                 AND DbT5105."centerSoshinYMD" IS NULL
                 AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
                 AND DbT5101."logicalDeletedFlag" = FALSE
+                AND DbT5105."ninteichosaIraiKanryoYMD" IS NULL
             ORDER BY  
                 DbT5101."hihokenshaKana",
                 DbT5101."ninteiShinseiYMD",
@@ -525,17 +526,17 @@
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
                 ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp_1
+            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp_1
                 ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp_1."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp_1
+            LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp_1
                 ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp_1."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temo_1_1
+            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temo_1_1
                 ON  DbT5121_temp_1."zenkaiShinseishoKanriNo" = DbT5101_temo_1_1."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho"
                 ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            INNER JOIN 
+            LEFT JOIN 
                 (SELECT 
                     DbT7060KaigoJigyosha.*
                  FROM
@@ -549,7 +550,7 @@
                     ON DbT7060KaigoJigyosha."jigyoshaNo" = DbT7060_Temp."jigyoshaNo"
                     AND DbT7060KaigoJigyosha."yukoKaishiYMD" = DbT7060_Temp."yukoKaishiYMD") AS DbT7060
                ON  DbT7060."jigyoshaNo"   =   DbT5101."nyushoShisetsuCode"
-            INNER JOIN 
+            LEFT JOIN 
                (SELECT 
                     DbT5301ShujiiIkenshoIraiJoho.*
                 FROM
@@ -566,7 +567,7 @@
                   DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
                 AND 
                   DbT5301."logicalDeletedFlag" = FALSE
-            INNER  JOIN  rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
+            LEFT  JOIN  rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
                 ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
             LEFT  JOIN  rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
@@ -636,17 +637,17 @@
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
                 ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp_1
+            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp_1
                 ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp_1."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp_1
+            LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp_1
                 ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp_1."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temo_1_1
+            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temo_1_1
                 ON  DbT5121_temp_1."zenkaiShinseishoKanriNo" = DbT5101_temo_1_1."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            INNER JOIN 
+            LEFT JOIN 
                 (SELECT 
                     DbT7060KaigoJigyosha.*
                  FROM
@@ -660,7 +661,7 @@
                     ON DbT7060KaigoJigyosha."jigyoshaNo" = DbT7060_Temp."jigyoshaNo"
                     AND DbT7060KaigoJigyosha."yukoKaishiYMD" = DbT7060_Temp."yukoKaishiYMD") AS DbT7060
                ON  DbT7060."jigyoshaNo"   =   DbT5101."nyushoShisetsuCode"
-            INNER JOIN 
+            LEFT JOIN 
                (SELECT 
                     DbT5301ShujiiIkenshoIraiJoho.*
                 FROM
@@ -677,7 +678,7 @@
                   DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
                 AND 
                   DbT5301."logicalDeletedFlag" = FALSE
-            INNER  JOIN  rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
+            LEFT  JOIN  rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
                 ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
             LEFT  JOIN  rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
@@ -708,6 +709,7 @@
             AND DbT5105."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
+            AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL
         ORDER BY  DbT5101."hihokenshaKana",
                   DbT5101."ninteiShinseiYMD",
                   DbT5101."shoKisaiHokenshaNo"
@@ -744,7 +746,7 @@
                 ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            INNER JOIN 
+            LEFT JOIN 
                   (SELECT 
                        DbT5201NinteichosaIraiJoho.*
                    FROM
@@ -761,7 +763,7 @@
                   DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
                 AND 
                   DbT5201."logicalDeletedFlag" = FALSE
-            INNER  JOIN  rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202
+            LEFT  JOIN  rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202
                 ON  DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND  DbT5201."ninteichosaIraiRirekiNo" = DbT4202."ninteichosaRirekiNo"
                 AND DbT4202."gaikyoChosaTextImageKubun" in ('1','2')
@@ -779,6 +781,7 @@
             AND DbT5105."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
+            AND DbT5105."ninteichosaKanryoYMD" IS NULL
         ORDER BY  DbT5101."hihokenshaKana",
                   DbT5101."ninteiShinseiYMD",
                   DbT5101."shoKisaiHokenshaNo"
@@ -799,7 +802,7 @@
                 ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            INNER JOIN 
+            LEFT JOIN 
                   (SELECT 
                        DbT5201NinteichosaIraiJoho.*
                    FROM
@@ -816,7 +819,7 @@
                   DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
                 AND 
                   DbT5201."logicalDeletedFlag" = FALSE
-            INNER  JOIN  rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202
+            LEFT  JOIN  rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202
                 ON  DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND  DbT5201."ninteichosaIraiRirekiNo" = DbT4202."ninteichosaRirekiNo"
                 AND DbT4202."gaikyoChosaTextImageKubun" in ('1','2')
@@ -868,7 +871,7 @@
             ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
         INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
             ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-        INNER JOIN 
+        LEFT JOIN 
             (SELECT 
                  DbT5301ShujiiIkenshoIraiJoho.*
              FROM
@@ -885,7 +888,7 @@
                DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
              AND 
                DbT5301."logicalDeletedFlag" = FALSE
-        INNER  JOIN  rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
+        LEFT  JOIN  rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
             ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo" 
         LEFT  JOIN  rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
@@ -923,7 +926,7 @@
             ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
         INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
             ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-        INNER JOIN 
+        LEFT JOIN 
             (SELECT 
                  DbT5301ShujiiIkenshoIraiJoho.*
              FROM
@@ -940,7 +943,7 @@
                DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
              AND 
                DbT5301."logicalDeletedFlag" = FALSE
-        INNER  JOIN  rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
+        LEFT  JOIN  rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
             ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                 AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo" 
         LEFT  JOIN  rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
@@ -1112,6 +1115,7 @@
             AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
             AND DbT5105."maskingKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
             AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND DbT5105."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
@@ -1242,7 +1246,7 @@
             AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
             AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND DbT5105."maskingKanryoYMD" IS NOT NULL
             AND DbT5105."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
@@ -1327,6 +1331,7 @@
             AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
             AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NOT NULL
             AND "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
         ORDER BY  DbT5101."hihokenshaKana",

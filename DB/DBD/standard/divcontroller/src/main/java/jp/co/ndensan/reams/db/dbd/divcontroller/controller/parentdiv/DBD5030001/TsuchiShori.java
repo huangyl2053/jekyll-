@@ -58,16 +58,16 @@ public class TsuchiShori {
      */
     public ResponseData<TsuchiShoriDiv> onClick_btnCsvoutput(TsuchiShoriDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            getValidationHandler().validateFor通知書発行対象者一覧データの存在チェック(pairs, div);
+            getValidationHandler().validateFor通知書発行対象者一覧データの行選択チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
-        }
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().validateFor通知書発行対象者一覧データの存在チェック(pairs, div);
-        getValidationHandler().validateFor通知書発行対象者一覧データの行選択チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -128,17 +128,17 @@ public class TsuchiShori {
      */
     public ResponseData<TsuchiShoriDiv> onClick_btnKanryo(TsuchiShoriDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            getValidationHandler().validateFor通知書発行対象者一覧データの存在チェック(pairs, div);
+            getValidationHandler().validateFor通知書発行対象者一覧データの行選択チェック(pairs, div);
+            getValidationHandler().validateFor通知書発行対象者一覧選択行の完了処理事前チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
-        }
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().validateFor通知書発行対象者一覧データの存在チェック(pairs, div);
-        getValidationHandler().validateFor通知書発行対象者一覧データの行選択チェック(pairs, div);
-        getValidationHandler().validateFor通知書発行対象者一覧選択行の完了処理事前チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         List<dgtsuchishohakko_Row> 画面更新情報 = div.getDgtsuchishohakko().getSelectedItems();
         getHandler().ＤＢ処理(画面更新情報);

@@ -42,6 +42,55 @@ public class HoshuMasutaKoshinValidationHandler {
     }
 
     /**
+     * 保存するボタンを押下するとき、バリデーションチェックを行う。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForUpdate() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+
+        List<dgIkenShohoshuTankaIchiran_Row> ikenShohoshuTankaIchiranList = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgIkenShohoshuTankaIchiran().getDataSource();
+        List<dgChosainhoshuTankaIchiran_Row> chosainhoshuTankaIchiranList = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgChosainhoshuTankaIchiran().getDataSource();
+        List<dgHomonChosahoshuTankaIchiran_Row> homonChosahoshuTankaIchiranList = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgHomonChosahoshuTankaIchiran().getDataSource();
+        List<dgShinsakaiIinBetuTanka_Row> shinsakaiIinBetuTankaList = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgShinsakaiIinBetuTanka().getDataSource();
+        boolean ikenShohoshuTankaIchirannotUpdate = true;
+        boolean chosainhoshuTankaIchirannotUpdate = true;
+        boolean homonChosahoshuTankaIchirannotUpdate = true;
+        boolean shinsakaiIinBetuTankanotUpdate = true;
+
+        for (dgIkenShohoshuTankaIchiran_Row row : ikenShohoshuTankaIchiranList) {
+            if (!RString.EMPTY.equals(row.getColumnState())) {
+                ikenShohoshuTankaIchirannotUpdate = false;
+                break;
+            }
+        }
+        for (dgChosainhoshuTankaIchiran_Row row : chosainhoshuTankaIchiranList) {
+            if (!RString.EMPTY.equals(row.getColumnState())) {
+                chosainhoshuTankaIchirannotUpdate = false;
+                break;
+            }
+        }
+        for (dgHomonChosahoshuTankaIchiran_Row row : homonChosahoshuTankaIchiranList) {
+            if (!RString.EMPTY.equals(row.getColumnState())) {
+                homonChosahoshuTankaIchirannotUpdate = false;
+                break;
+            }
+        }
+        for (dgShinsakaiIinBetuTanka_Row row : shinsakaiIinBetuTankaList) {
+            if (!RString.EMPTY.equals(row.getColumnState())) {
+                shinsakaiIinBetuTankanotUpdate = false;
+                break;
+            }
+        }
+        if (ikenShohoshuTankaIchirannotUpdate && chosainhoshuTankaIchirannotUpdate && homonChosahoshuTankaIchirannotUpdate && shinsakaiIinBetuTankanotUpdate) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new IdocheckMessages(UrErrorMessages.編集なしで更新不可),
+                    div.getHoshuMasutaTab()));
+        }
+        return validPairs;
+    }
+    
+    /**
      * 審査員報酬単価マスタの入力明細エリア入力チェックを実行します。
      *
      * @return ValidationMessageControlPairs
@@ -67,7 +116,8 @@ public class HoshuMasutaKoshinValidationHandler {
                 }
                 if (div.getHoshuMasutaTab().getDdlKaigoNinteiShinsaIinShubetsu().getSelectedKey().equals(
                         row.getKaigoNinteiShinsaIinShubetsuCode())
-                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
+                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -105,7 +155,8 @@ public class HoshuMasutaKoshinValidationHandler {
                         row.getZaitakuShisetsuKubunCode())
                         && div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedKey().equals(
                                 row.getIkenshoSakuseiKaisuKubunCode())
-                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
+                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -144,7 +195,8 @@ public class HoshuMasutaKoshinValidationHandler {
                         row.getChosaKubunCode())
                         && div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlHomonShubetsu().getSelectedKey().equals(
                                 row.getHomonShubetsuCode())
-                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
+                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -178,7 +230,8 @@ public class HoshuMasutaKoshinValidationHandler {
                     validationMessages.add(checkデータが既に存在());
                 }
                 if (div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue().equals(row.getShinsakaiIinCode())
-                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
+                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -243,9 +296,12 @@ public class HoshuMasutaKoshinValidationHandler {
         return validationMessages;
     }
 
-    private boolean is期間重複(FlexibleYearMonth 新規作成開始年月, FlexibleYearMonth 既に存在終了年月) {
-        return 新規作成開始年月.isBeforeOrEquals(既に存在終了年月);
+    private boolean is期間重複(FlexibleYearMonth 新規作成開始年月, FlexibleYearMonth 新規作成終了年月, FlexibleYearMonth 既に存在開始年月,  FlexibleYearMonth 既に存在終了年月) {
+        
+        return 新規作成開始年月.isBeforeOrEquals(既に存在終了年月)&&既に存在開始年月.isBeforeOrEquals(新規作成開始年月)
+                || 新規作成終了年月.isBeforeOrEquals(既に存在終了年月)&&既に存在開始年月.isBeforeOrEquals(新規作成終了年月);
     }
+
 
     private static enum RRVMessages implements IValidationMessage {
 
@@ -260,6 +316,20 @@ public class HoshuMasutaKoshinValidationHandler {
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+    
+        private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

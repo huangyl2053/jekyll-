@@ -32,10 +32,10 @@ public class NinteiChosaNyuryokuDiv extends Panel {
      */
     @JsonProperty("ChosaTaisho")
     private ChosaTaishoDiv ChosaTaisho;
+    @JsonProperty("ChosaJisshisha")
+    private ChosaJisshishaDiv ChosaJisshisha;
     @JsonProperty("tabChosaShurui")
     private tabChosaShuruiDiv tabChosaShurui;
-    @JsonProperty("ccdChosaJisshishaJoho")
-    private ChosaJisshishaJohoDiv ccdChosaJisshishaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,6 +62,24 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     /*
+     * getChosaJisshisha
+     * @return ChosaJisshisha
+     */
+    @JsonProperty("ChosaJisshisha")
+    public ChosaJisshishaDiv getChosaJisshisha() {
+        return ChosaJisshisha;
+    }
+
+    /*
+     * setChosaJisshisha
+     * @param ChosaJisshisha ChosaJisshisha
+     */
+    @JsonProperty("ChosaJisshisha")
+    public void setChosaJisshisha(ChosaJisshishaDiv ChosaJisshisha) {
+        this.ChosaJisshisha = ChosaJisshisha;
+    }
+
+    /*
      * gettabChosaShurui
      * @return tabChosaShurui
      */
@@ -80,25 +98,21 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     /*
-     * getccdChosaJisshishaJoho
-     * @return ccdChosaJisshishaJoho
-     */
-    @JsonProperty("ccdChosaJisshishaJoho")
-    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
-        return ccdChosaJisshishaJoho;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    }
+
     @JsonIgnore
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
+        return this.getChosaJisshisha().getCcdChosaJisshishaJoho();
     }
 
     @JsonIgnore
@@ -172,23 +186,23 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtShichosonTokubetsuKyufu() {
-        return this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().getTxtShichosonTokubetsuKyufu();
+    public TextBoxMultiLine getTxtShichosonTokubetsuKyufu() {
+        return this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getTxtShichosonTokubetsuKyufu();
     }
 
     @JsonIgnore
-    public void  setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
+    public void  setTxtShichosonTokubetsuKyufu(TextBoxMultiLine txtShichosonTokubetsuKyufu) {
+        this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
     }
 
     @JsonIgnore
-    public TextBox getTxtKyufuIgaiJutakuService() {
-        return this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().getTxtKyufuIgaiJutakuService();
+    public TextBoxMultiLine getTxtKyufuIgaiJutakuService() {
+        return this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getTxtKyufuIgaiJutakuService();
     }
 
     @JsonIgnore
-    public void  setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
-        this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
+    public void  setTxtKyufuIgaiJutakuService(TextBoxMultiLine txtKyufuIgaiJutakuService) {
+        this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
     }
 
     @JsonIgnore

@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class FutangendogakuShinseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -47,8 +47,8 @@ public class FutangendogakuShinseiDiv extends Panel {
     private ShinseiDetailDiv ShinseiDetail;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
-    @JsonProperty("subGyomuCode")
-    private RString subGyomuCode;
+    @JsonProperty("GyomuCode")
+    private RString GyomuCode;
     @JsonProperty("sampleBunshoGroupCode")
     private RString sampleBunshoGroupCode;
     @JsonProperty("hihokenshaNo")
@@ -57,6 +57,10 @@ public class FutangendogakuShinseiDiv extends Panel {
     private RString lockKey;
     @JsonProperty("jotai")
     private RString jotai;
+    @JsonProperty("mode")
+    private RString mode;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -146,21 +150,21 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
-     * getsubGyomuCode
-     * @return subGyomuCode
+     * getGyomuCode
+     * @return GyomuCode
      */
-    @JsonProperty("subGyomuCode")
-    public RString getSubGyomuCode() {
-        return subGyomuCode;
+    @JsonProperty("GyomuCode")
+    public RString getGyomuCode() {
+        return GyomuCode;
     }
 
     /*
-     * setsubGyomuCode
-     * @param subGyomuCode subGyomuCode
+     * setGyomuCode
+     * @param GyomuCode GyomuCode
      */
-    @JsonProperty("subGyomuCode")
-    public void setSubGyomuCode(RString subGyomuCode) {
-        this.subGyomuCode = subGyomuCode;
+    @JsonProperty("GyomuCode")
+    public void setGyomuCode(RString GyomuCode) {
+        this.GyomuCode = GyomuCode;
     }
 
     /*
@@ -236,6 +240,42 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
+     * getmode
+     * @return mode
+     */
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    /*
+     * setmode
+     * @param mode mode
+     */
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode = mode;
+    }
+
+    /*
+     * getshikibetsuCode
+     * @return shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    /*
+     * setshikibetsuCode
+     * @param shikibetsuCode shikibetsuCode
+     */
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -276,6 +316,16 @@ public class FutangendogakuShinseiDiv extends Panel {
     @JsonIgnore
     public void  setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
         this.getHeader().getHosokuJoho().setBtnDispSetaiJoho(btnDispSetaiJoho);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnShotokuJokyo() {
+        return this.getHeader().getHosokuJoho().getBtnShotokuJokyo();
+    }
+
+    @JsonIgnore
+    public void  setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
+        this.getHeader().getHosokuJoho().setBtnShotokuJokyo(btnShotokuJokyo);
     }
 
     @JsonIgnore
@@ -329,13 +379,13 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return this.getHeader().getCcdAtenaInfo();
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return this.getHeader().getCcdKaigoShikakuKihon();
     }
 
     @JsonIgnore
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return this.getHeader().getCcdKaigoShikakuKihon();
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return this.getHeader().getCcdAtenaInfo();
     }
 
     @JsonIgnore

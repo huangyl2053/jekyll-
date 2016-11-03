@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HosokuJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class HosokuJohoDiv extends Panel {
     private TextBox txtRiyoshaFutanDankai;
     @JsonProperty("btnDispSetaiJoho")
     private Button btnDispSetaiJoho;
+    @JsonProperty("btnShotokuJokyo")
+    private ButtonDialog btnShotokuJokyo;
     @JsonProperty("btnCloseSetaiJoho")
     private Button btnCloseSetaiJoho;
 
@@ -68,6 +70,24 @@ public class HosokuJohoDiv extends Panel {
     @JsonProperty("btnDispSetaiJoho")
     public void setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
         this.btnDispSetaiJoho = btnDispSetaiJoho;
+    }
+
+    /*
+     * getbtnShotokuJokyo
+     * @return btnShotokuJokyo
+     */
+    @JsonProperty("btnShotokuJokyo")
+    public ButtonDialog getBtnShotokuJokyo() {
+        return btnShotokuJokyo;
+    }
+
+    /*
+     * setbtnShotokuJokyo
+     * @param btnShotokuJokyo btnShotokuJokyo
+     */
+    @JsonProperty("btnShotokuJokyo")
+    public void setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
+        this.btnShotokuJokyo = btnShotokuJokyo;
     }
 
     /*

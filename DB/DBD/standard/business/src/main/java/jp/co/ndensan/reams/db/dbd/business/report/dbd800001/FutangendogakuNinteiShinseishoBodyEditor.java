@@ -38,22 +38,39 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
     }
 
     private FutangendogakuNinteiShinseishoReportSource bodyEdit(FutangendogakuNinteiShinseishoReportSource source) {
-        source.shiseibun = item.getShiseibun();
-        source.hihokenshaNameKana = item.getHihokenshaNameKana();
-        source.hihokenshaName = item.getHihokenshaName();
+        source.hiho_name_kana_1 = item.getHihokenshaNameKana().substringReturnAsPossible(0, 40);
+        if (item.getHihokenshaNameKana().length() > 40) {
+            source.hiho_name_kana_2 = item.getHihokenshaNameKana().substringReturnAsPossible(40, 80);
+        }
+        source.hiho_name_1 = item.getHihokenshaName().substringReturnAsPossible(0, 40);
+        if (item.getHihokenshaName().length() > 40) {
+            source.hiho_name_2 = item.getHihokenshaName().substringReturnAsPossible(40, 80);
+        }
+
         source.seibetsu = item.getSeibetsu();
-        source.birthYMD = item.getBirthYMD();
-        source.hihokenshaTelNo = item.getHihokenshaTelNo();
-        source.hihokenshaYubinNo = item.getHihokenshaYubinNo();
-        source.hihokenshaJusho = item.getHihokenJusho();
-        source.chuibun = item.getChuibun();
-        source.pageCnt = new RString("1");
-        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
-        source.hihokenshaNo = item.getHihokenshaNo();
-        source.sisetuYubinNo = item.getSisetuYubinNo();
-        source.sisetuTelNo = item.getSisetuTelNo();
-        source.sisetuJusho = item.getSisetuJusho();
-        source.sisetuName = item.getSisetuName();
+        source.umare_ymd = item.getBirthYMD();
+        source.hiho_tel_no = item.getHihokenshaTelNo();
+        source.yubin_no = item.getHihokenshaYubinNo();
+
+        source.hiho_jyusho_1 = item.getHihokenJusho().substringReturnAsPossible(0, 76);
+        if (item.getHihokenJusho().length() > 76) {
+            source.hiho_jyusho_2 = item.getHihokenJusho().substringReturnAsPossible(76, 152);
+        } else if (item.getHihokenJusho().length() > 152) {
+            source.hiho_jyusho_3 = item.getHihokenJusho().substringReturnAsPossible(152, 228);
+        }
+        source.PageCnt = new RString("1");
+        source.daihyo = item.getNinshoshaYakushokuMei();
+        source.hiho_no = item.getHihokenshaNo();
+        source.shisetsu_yubin_no = item.getSisetuYubinNo();
+        source.shisetsu_tel_no = item.getSisetuTelNo();
+        source.shisetsu_jusho1 = item.getSisetuJusho().substringReturnAsPossible(0, 76);
+        if (item.getSisetuJusho().length() > 76) {
+            source.shisetsu_jusho2 = item.getSisetuJusho().substringReturnAsPossible(76, 152);
+        }
+        source.shisetsu_name_1 = item.getSisetuName().substringReturnAsPossible(0, 76);
+        if (item.getSisetuName().length() > 76) {
+            source.shisetsu_name_2 = item.getSisetuName().substringReturnAsPossible(76, 152);
+        }
         return source;
     }
 }

@@ -70,4 +70,19 @@ public enum ShikakuJutokuKaijoJiyu {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("資格住特解除事由"));
     }
+
+    /**
+     * 引数から渡された異動事由が、住所地特例解除事由であるかどうかをチェックします。
+     *
+     * @param jiyu 異動事由
+     * @return 渡された引数が住所地特例解除事由である場合は{@code true}、それ以外の場合は{@code false}
+     */
+    public static boolean checkIdoJiyu(RString jiyu) {
+        for (ShikakuJutokuKaijoJiyu shikakuJutokuKaijoJiyu : ShikakuJutokuKaijoJiyu.values()) {
+            if (shikakuJutokuKaijoJiyu.getコード().equals(jiyu)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

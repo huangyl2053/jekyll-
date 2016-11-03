@@ -39,7 +39,7 @@ public class JogaishaValidationHandler {
     public JogaishaValidationHandler(JogaishaTorokuDiv div) {
         this.div = div;
     }
-
+    
     /**
      * 確定するボタン押下の場合、入力チェック実行します。
      *

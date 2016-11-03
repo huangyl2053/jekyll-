@@ -4,24 +4,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ShujiiIkenshoTokusokujo のクラスファイル
- *
+ * ShujiiIkenshoTokusokujo のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShujiiIkenshoTokusokujoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +25,8 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
      */
     @JsonProperty("txtOverChosaIraiDay")
     private TextBoxNum txtOverChosaIraiDay;
+    @JsonProperty("labOverChosaIraiDay")
+    private Label labOverChosaIraiDay;
     @JsonProperty("chkInsatsuzumiTaisho")
     private CheckBoxList chkInsatsuzumiTaisho;
     @JsonProperty("chkHakkoRireki")
@@ -39,7 +36,7 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     @JsonProperty("txtTokusokuMemo")
     private TextBoxMultiLine txtTokusokuMemo;
     @JsonProperty("txtHakkoDay")
-    private TextBoxFlexibleDate txtHakkoDay;
+    private TextBoxDate txtHakkoDay;
     @JsonProperty("ccdIryokikanShujii")
     private ShujiiIryokikanAndShujiiInputDiv ccdIryokikanShujii;
 
@@ -65,6 +62,24 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     @JsonProperty("txtOverChosaIraiDay")
     public void setTxtOverChosaIraiDay(TextBoxNum txtOverChosaIraiDay) {
         this.txtOverChosaIraiDay = txtOverChosaIraiDay;
+    }
+
+    /*
+     * getlabOverChosaIraiDay
+     * @return labOverChosaIraiDay
+     */
+    @JsonProperty("labOverChosaIraiDay")
+    public Label getLabOverChosaIraiDay() {
+        return labOverChosaIraiDay;
+    }
+
+    /*
+     * setlabOverChosaIraiDay
+     * @param labOverChosaIraiDay labOverChosaIraiDay
+     */
+    @JsonProperty("labOverChosaIraiDay")
+    public void setLabOverChosaIraiDay(Label labOverChosaIraiDay) {
+        this.labOverChosaIraiDay = labOverChosaIraiDay;
     }
 
     /*
@@ -144,7 +159,7 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
      * @return txtHakkoDay
      */
     @JsonProperty("txtHakkoDay")
-    public TextBoxFlexibleDate getTxtHakkoDay() {
+    public TextBoxDate getTxtHakkoDay() {
         return txtHakkoDay;
     }
 
@@ -153,7 +168,7 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
      * @param txtHakkoDay txtHakkoDay
      */
     @JsonProperty("txtHakkoDay")
-    public void setTxtHakkoDay(TextBoxFlexibleDate txtHakkoDay) {
+    public void setTxtHakkoDay(TextBoxDate txtHakkoDay) {
         this.txtHakkoDay = txtHakkoDay;
     }
 

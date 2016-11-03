@@ -25,10 +25,6 @@ public class JutakuGaikyoChosaDiv extends Panel {
     private RadioButton radJutakuKaishu;
     @JsonProperty("dgRiyoServiceJyokyo")
     private DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo;
-    @JsonProperty("txtShichosonTokubetsuKyufu")
-    private TextBox txtShichosonTokubetsuKyufu;
-    @JsonProperty("txtKyufuIgaiJutakuService")
-    private TextBox txtKyufuIgaiJutakuService;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -70,42 +66,6 @@ public class JutakuGaikyoChosaDiv extends Panel {
     @JsonProperty("dgRiyoServiceJyokyo")
     public void setDgRiyoServiceJyokyo(DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo) {
         this.dgRiyoServiceJyokyo = dgRiyoServiceJyokyo;
-    }
-
-    /*
-     * gettxtShichosonTokubetsuKyufu
-     * @return txtShichosonTokubetsuKyufu
-     */
-    @JsonProperty("txtShichosonTokubetsuKyufu")
-    public TextBox getTxtShichosonTokubetsuKyufu() {
-        return txtShichosonTokubetsuKyufu;
-    }
-
-    /*
-     * settxtShichosonTokubetsuKyufu
-     * @param txtShichosonTokubetsuKyufu txtShichosonTokubetsuKyufu
-     */
-    @JsonProperty("txtShichosonTokubetsuKyufu")
-    public void setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.txtShichosonTokubetsuKyufu = txtShichosonTokubetsuKyufu;
-    }
-
-    /*
-     * gettxtKyufuIgaiJutakuService
-     * @return txtKyufuIgaiJutakuService
-     */
-    @JsonProperty("txtKyufuIgaiJutakuService")
-    public TextBox getTxtKyufuIgaiJutakuService() {
-        return txtKyufuIgaiJutakuService;
-    }
-
-    /*
-     * settxtKyufuIgaiJutakuService
-     * @param txtKyufuIgaiJutakuService txtKyufuIgaiJutakuService
-     */
-    @JsonProperty("txtKyufuIgaiJutakuService")
-    public void setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
-        this.txtKyufuIgaiJutakuService = txtKyufuIgaiJutakuService;
     }
 
     // </editor-fold>

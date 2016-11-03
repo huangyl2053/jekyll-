@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.ddlShinseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
@@ -53,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -78,6 +76,8 @@ public class RiyoshaFutangakuGengakuHandler {
     private static final RString 承認情報 = new RString("承認情報");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 承認しない_KEY = new RString("key1");
+    private static final RString 承認する = new RString("1");
+    private static final RString 承認しない = new RString("0");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -166,13 +166,13 @@ public class RiyoshaFutangakuGengakuHandler {
 
         GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder
                 = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
-        RString 旧措置 = div.getDdlKyusochiKubun().getSelectedKey();
+        boolean 旧措置 = div.getChkKyuSochisha().isAllSelected();
         RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
         RString 決定区分コード;
         RString 決定区分TXT;
         HokenKyufuRitsu 給付率;
-        FlexibleDate 適用開始年月日 = FlexibleDate.EMPTY;
-        FlexibleDate 適用終了年月日 = FlexibleDate.EMPTY;
+        FlexibleDate 適用開始年月日;
+        FlexibleDate 適用終了年月日;
         RString 非承認理由 = RString.EMPTY;
         if (承認する_KEY.equals(決定区分)) {
             給付率 = new HokenKyufuRitsu(div.getTxtKyufuRitsu().getValue());
@@ -182,10 +182,12 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分TXT = KetteiKubun.承認する.get名称();
         } else {
             給付率 = HokenKyufuRitsu.ZERO;
+            適用開始年月日 = div.getTxtTekiyoYmd().getValue();
+            適用終了年月日 = div.getTxtYukoKigenYmd().getValue();
             決定区分コード = KetteiKubun.承認しない.getコード();
             決定区分TXT = KetteiKubun.承認しない.get名称();
             非承認理由 = div.getTxtHiShoninRiyu().getText();
-            旧措置 = KyuSochishaKubun.非該当.getコード();
+            旧措置 = false;
         }
         builder.set給付率(給付率);
         builder.set適用開始年月日(適用開始年月日);
@@ -194,7 +196,7 @@ public class RiyoshaFutangakuGengakuHandler {
         builder.set決定区分(決定区分コード);
         builder.set申請事由(div.getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getTxtShinseiYmd().getValue());
-        builder.set旧措置者有無(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
+        builder.set旧措置者有無(旧措置);
         builder.set決定年月日(div.getTxtKettaiYmd().getValue());
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
 
@@ -224,7 +226,7 @@ public class RiyoshaFutangakuGengakuHandler {
                 row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
                 row.getTxtTekiyoYMD().setValue(適用開始年月日);
                 row.getTxtYukoKigen().setValue(適用終了年月日);
-                row.setKyusochishaUmu(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
+                row.setKyusochishaUmu(旧措置);
                 if (給付率 == HokenKyufuRitsu.ZERO) {
                     row.getTxtKyufuritsu().clearValue();
                 } else {
@@ -244,7 +246,7 @@ public class RiyoshaFutangakuGengakuHandler {
             row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
             row.getTxtTekiyoYMD().setValue(適用開始年月日);
             row.getTxtYukoKigen().setValue(適用終了年月日);
-            row.setKyusochishaUmu(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
+            row.setKyusochishaUmu(旧措置);
             if (給付率 == HokenKyufuRitsu.ZERO) {
                 row.getTxtKyufuritsu().clearValue();
             } else {
@@ -336,6 +338,7 @@ public class RiyoshaFutangakuGengakuHandler {
      */
     public void 追加するボタン押下(TaishoshaKey taishoshaKey) {
         入力情報をクリア(taishoshaKey);
+        div.getTxtShinseiYmd().setValue(FlexibleDate.getNowDate());
         div.getBtnInputNew().setDisabled(true);
         div.getDdlShinseiIchiran().setDisabled(true);
 
@@ -345,6 +348,19 @@ public class RiyoshaFutangakuGengakuHandler {
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
             div.getTxtKettaiYmd().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
             承認情報エリア状態(承認する_KEY, true, false, true);
+            RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
+            List<ddlShinseiIchiran_Row> rows = div.getDdlShinseiIchiran().getDataSource();
+            FlexibleDate 適用日 ;
+            if (rows.isEmpty()) {
+                適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
+                        RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+            } else {
+                適用日 = new FlexibleDate(rows.get(0).getTxtYukoKigen().
+                        getValue().plusDay(1).toString());
+            }
+            FlexibleDate 有効期限 = service.estimate有効期限(適用日);
+            div.getTxtTekiyoYmd().setValue(適用日);
+            div.getTxtYukoKigenYmd().setValue(有効期限);
         }
     }
 
@@ -368,12 +384,41 @@ public class RiyoshaFutangakuGengakuHandler {
         if (KetteiKubun.承認しない.get名称().equals(決定区分)) {
             決定区分RadInx = 承認しない_KEY;
         }
-        FlexibleDate 決定日 = row.getTxtKetteiYMD().getValue();
-        if (ResponseHolder.getMenuID().equals(承認メニュー) && 決定日.isEmpty()) {
-            決定日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        if (KetteiKubun.承認する.get名称().equals(決定区分) || 決定区分.isEmpty()) {
+            FlexibleDate 決定日 = row.getTxtKetteiYMD().getValue();
+            if (決定日 == null || 決定日.isEmpty()) {
+                決定日 = FlexibleDate.getNowDate();
+            }
+            FlexibleDate 以前有効期限日 = null;
+            List<ddlShinseiIchiran_Row> shinseiIchiranList = div.getDdlShinseiIchiran().getDataSource();
+            for (ddlShinseiIchiran_Row shinseiIchiran : shinseiIchiranList) {
+                if (shinseiIchiran.getTxtKetteiYMD().getValue() != null && !shinseiIchiran.getTxtKetteiYMD().getValue().isEmpty()) {
+                    以前有効期限日 = shinseiIchiran.getTxtYukoKigen().getValue();
+                    break;
+                }
+            }
+            FlexibleDate 適用日 = row.getTxtTekiyoYMD().getValue();
+            FlexibleDate 有効期限 = row.getTxtYukoKigen().getValue();
+            if (ResponseHolder.getMenuID().equals(承認メニュー) && 決定日.equals(FlexibleDate.getNowDate()) && 以前有効期限日 != null && !以前有効期限日.isEmpty()) {
+                RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
+                適用日 = 以前有効期限日.plusDay(1);
+                有効期限 = service.estimate有効期限(適用日);
+            }
+            div.getTxtKettaiYmd().setValue(決定日);
+            if (適用日.isEmpty()) {
+                RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
+                div.getTxtTekiyoYmd().setValue(FlexibleDate.getNowDate());
+                div.getTxtYukoKigenYmd().setValue(service.estimate有効期限(FlexibleDate.getNowDate()));
+            } else {
+                div.getTxtTekiyoYmd().setValue(適用日);
+                div.getTxtYukoKigenYmd().setValue(有効期限);
+            }
+        } else {
+            div.getTxtKettaiYmd().setValue(null);
+            div.getTxtTekiyoYmd().setValue(null);
+            div.getTxtYukoKigenYmd().setValue(null);
         }
-        FlexibleDate 適用日 = row.getTxtTekiyoYMD().getValue();
-        FlexibleDate 有効期限 = row.getTxtYukoKigen().getValue();
+        
         boolean 旧措置有無 = row.getKyusochishaUmu();
         Decimal 給付率 = row.getTxtKyufuritsu().getValue();
         RString 承認しない理由 = row.getShoninShinaiRiyu();
@@ -382,15 +427,13 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtShinseiRiyu().setValue(申請理由);
         div.getCcdShinseiJoho().set減免減額申請情報(減免減額申請共有子Divの設定(joho), 申請日);
         div.getRadKetteiKubun().setSelectedKey(決定区分RadInx);
-        div.getTxtKettaiYmd().setValue(決定日);
-        div.getTxtTekiyoYmd().setValue(適用日);
-        div.getTxtYukoKigenYmd().setValue(有効期限);
-        div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
 
         if (旧措置有無) {
-            div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.旧措置者.getコード());
+            ArrayList<RString> selectItems = new ArrayList<>();
+            selectItems.add(new RString("key0"));
+            div.getChkKyuSochisha().setSelectedItemsByKey(selectItems);
         } else {
-            div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.非該当.getコード());
+            div.getChkKyuSochisha().setSelectedItemsByKey(new ArrayList<RString>());
         }
         div.getTxtKyufuRitsu().setValue(給付率);
         div.getTxtHiShoninRiyu().setValue(承認しない理由);
@@ -458,7 +501,7 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtKettaiYmd().setDisabled(true);
         div.getTxtTekiyoYmd().setDisabled(true);
         div.getTxtYukoKigenYmd().setDisabled(true);
-        div.getDdlKyusochiKubun().setDisabled(true);
+        div.getChkKyuSochisha().setDisabled(true);
         div.getTxtKyufuRitsu().setDisabled(true);
         div.getBtnHiShoninRiyu().setDisabled(true);
         div.getTxtHiShoninRiyu().setDisabled(true);
@@ -491,22 +534,23 @@ public class RiyoshaFutangakuGengakuHandler {
         if (承認する_KEY.equals(決定区分)) {
             div.getTxtTekiyoYmd().setDisabled(false);
             div.getTxtYukoKigenYmd().setDisabled(false);
-            div.getDdlKyusochiKubun().setDisabled(false);
+            div.getChkKyuSochisha().setDisabled(false);
             div.getTxtKyufuRitsu().setDisabled(false);
             div.getBtnHiShoninRiyu().setDisabled(true);
             div.getTxtHiShoninRiyu().setDisabled(true);
-            div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
             if (is初期) {
-                div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.非該当.getコード());
+                div.getChkKyuSochisha().setSelectedItemsByKey(new ArrayList<RString>());
             }
 
         } else {
-            div.getTxtTekiyoYmd().setDisabled(true);
-            div.getTxtYukoKigenYmd().setDisabled(true);
-            div.getDdlKyusochiKubun().setDisabled(true);
+            div.getTxtTekiyoYmd().setDisabled(false);
+            div.getTxtYukoKigenYmd().setDisabled(false);
+            div.getChkKyuSochisha().setDisabled(true);
             div.getTxtKyufuRitsu().setDisabled(true);
             div.getBtnHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
+            div.getChkKyuSochisha().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getTxtKyufuRitsu().clearValue();
         }
 
         if (isエリア活性) {
@@ -535,9 +579,19 @@ public class RiyoshaFutangakuGengakuHandler {
      */
     public void get有効期限By適用日() {
         RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
-
-        FlexibleDate 適用日 = div.getTxtTekiyoYmd().getValue();
-        if (適用日.isValid()) {
+        
+        FlexibleDate 適用日 ;
+        
+        List<ddlShinseiIchiran_Row> rowLis = div.getDdlShinseiIchiran().getDataSource();
+        if (rowLis.isEmpty() || rowLis.get(rowLis.size() - 1).getTxtTekiyoYMD() == null) {
+            適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
+                    RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+        } else {
+            適用日 = new FlexibleDate(rowLis.get(0).getTxtTekiyoYMD().
+                    getValue().toString());
+        }
+        
+        if (div.getTxtTekiyoYmd().getValue().isValid()) {
             FlexibleDate 有効期限 = service.estimate有効期限(適用日);
             div.getTxtYukoKigenYmd().setValue(有効期限);
         }
@@ -577,8 +631,7 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtKettaiYmd().clearValue();
         div.getTxtTekiyoYmd().clearValue();
         div.getTxtYukoKigenYmd().clearValue();
-        div.getDdlKyusochiKubun().getDataSource().clear();
-        div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
+        div.getChkKyuSochisha().setSelectedItemsByKey(new ArrayList<RString>());
         div.getTxtKyufuRitsu().clearValue();
         div.getTxtHiShoninRiyu().clearValue();
     }
@@ -607,7 +660,7 @@ public class RiyoshaFutangakuGengakuHandler {
         ddlShinseiIchiran_Row row;
         List<ddlShinseiIchiran_Row> rowList = new ArrayList<>();
 
-        RString 決定区分TXT = RString.EMPTY;
+        RString 決定区分TXT;
         for (RiyoshaFutangakuGengaku joho : 利用者負担額減額の情報List) {
 
             決定区分TXT = RString.EMPTY;
@@ -659,15 +712,6 @@ public class RiyoshaFutangakuGengakuHandler {
         gemmenGengakuShinseiBuilder.set申請届出者住所(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者住所());
         gemmenGengakuShinseiBuilder.set申請届出者電話番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者電話番号());
         return gemmenGengakuShinseiBuilder;
-    }
-
-    private List<KeyValueDataSource> getDdlKyusochiKubun() {
-        List<KeyValueDataSource> syuSochishaKubun = new ArrayList<>();
-        for (KyuSochishaKubun code : KyuSochishaKubun.values()) {
-            KeyValueDataSource data = new KeyValueDataSource(code.getコード(), code.get略称());
-            syuSochishaKubun.add(data);
-        }
-        return syuSochishaKubun;
     }
 
     private ShinseiJoho 減免減額申請共有子Divの設定(RiyoshaFutangakuGengakuViewState joho) {
@@ -775,7 +819,7 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分コード = KetteiKubun.承認しない.getコード();
         }
         boolean is旧措置者有無 = false;
-        if (div.getDdlKyusochiKubun().getSelectedValue().equals(KyuSochishaKubun.旧措置者.get略称())) {
+        if (div.getChkKyuSochisha().isAllSelected()) {
             is旧措置者有無 = true;
         }
 
@@ -954,17 +998,24 @@ public class RiyoshaFutangakuGengakuHandler {
         @Override
         public int compare(RiyoshaFutangakuGengakuViewState s1, RiyoshaFutangakuGengakuViewState s2) {
 
-            int result = !s1.getRiyoshaFutangakuGengaku().get申請年月日().isBeforeOrEquals(s2.getRiyoshaFutangakuGengaku().get申請年月日())
-                    ? 1 : (s1.getRiyoshaFutangakuGengaku().get申請年月日().equals(s2.getRiyoshaFutangakuGengaku().get申請年月日()) ? 0 : -1);
-
-            if (result == 0 && EntityDataState.Added != s1.getState() && EntityDataState.Added != s2.getState()) {
-                result = s1.getShorigoRirekiNo() > s2.getShorigoRirekiNo() ? 1 : -1;
-            }
-            if (result == 0 && EntityDataState.Added == s1.getState()) {
+            int result;
+            if (s1.getRiyoshaFutangakuGengaku().get適用開始年月日() == null) {
                 result = 1;
-            } else if (result == 0 && EntityDataState.Added == s2.getState()) {
+            } else if (s2.getRiyoshaFutangakuGengaku().get適用開始年月日() == null) {
                 result = -1;
+            } else {
+                result = !s1.getRiyoshaFutangakuGengaku().get適用開始年月日().isBeforeOrEquals(s2.getRiyoshaFutangakuGengaku().get適用開始年月日())
+                        ? 1 : (s1.getRiyoshaFutangakuGengaku().get適用開始年月日().equals(s2.getRiyoshaFutangakuGengaku().get適用開始年月日()) ? 0 : -1);
             }
+
+            if (result == 0) {
+                if (s1.getRiyoshaFutangakuGengaku().get決定区分() == 承認する && s2.getRiyoshaFutangakuGengaku().get決定区分() == 承認しない) {
+                    result = -1;
+                } else if (s1.getRiyoshaFutangakuGengaku().get決定区分() == 承認しない && s2.getRiyoshaFutangakuGengaku().get決定区分() == 承認する) {
+                    result = 1;
+                }
+            }
+
             return result;
         }
 
@@ -978,17 +1029,24 @@ public class RiyoshaFutangakuGengakuHandler {
         @Override
         public int compare(ddlShinseiIchiran_Row row1, ddlShinseiIchiran_Row row2) {
 
-            int result = !row2.getTxtShinseiYMD().getValue().isBeforeOrEquals(row1.getTxtShinseiYMD().getValue())
-                    ? 1 : (row2.getTxtShinseiYMD().getValue().equals(row1.getTxtShinseiYMD().getValue()) ? 0 : -1);
-
-            if (result == 0 && 追加.equals(row1.getJotai()) && 追加.equals(row2.getJotai())) {
-                result = row2.getHiddenShinseiRirekiNo().compareTo(row1.getHiddenShinseiRirekiNo());
-            }
-            if (result == 0 && 追加.equals(row2.getJotai())) {
-                result = 1;
-            } else if (result == 0 && 追加.equals(row1.getJotai())) {
+            int result;
+            if (row1.getTxtTekiyoYMD().getValue() == null || row1.getTxtTekiyoYMD().getValue().isEmpty()) {
                 result = -1;
+            } else if (row2.getTxtTekiyoYMD().getValue() == null || row2.getTxtTekiyoYMD().getValue().isEmpty()) {
+                result = 1;
+            } else {
+                result = !row1.getTxtTekiyoYMD().getValue().isBeforeOrEquals(row2.getTxtTekiyoYMD().getValue())
+                        ? -1 : (row1.getTxtTekiyoYMD().getValue().equals(row2.getTxtTekiyoYMD().getValue()) ? 0 : 1);
             }
+
+            if (result == 0) {
+                if (row1.getKetteiKubun() == KetteiKubun.承認する.get名称() && row2.getKetteiKubun() == KetteiKubun.承認しない.get名称()) {
+                    result = 1;
+                } else if (row1.getKetteiKubun() == KetteiKubun.承認しない.get名称() && row2.getKetteiKubun() == KetteiKubun.承認する.get名称()) {
+                    result = -1;
+                }
+            }
+
             return result;
         }
     }

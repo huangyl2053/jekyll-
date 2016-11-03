@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Oct 05 18:50:03 JST 2016 
+ * Thu Nov 03 13:56:56 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgShinseiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     private RString jotai;
     private RString kakuninNo;
@@ -38,6 +38,8 @@ public class dgShinseiList_Row extends DataRow {
     private RString kyusochiUnitGataKoshitsuGentei;
     private RString shoninShinaiRiyu;
     private RString dataId;
+    private RString hiddenShoKisaiHokenshaNo;
+    private RString hiddenShinseiRirekiNo;
 
     public dgShinseiList_Row() {
         super();
@@ -57,6 +59,8 @@ public class dgShinseiList_Row extends DataRow {
         this.kyusochiUnitGataKoshitsuGentei = RString.EMPTY;
         this.shoninShinaiRiyu = RString.EMPTY;
         this.dataId = RString.EMPTY;
+        this.hiddenShoKisaiHokenshaNo = RString.EMPTY;
+        this.hiddenShinseiRirekiNo = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("kakuninNo", kakuninNo);
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
@@ -73,9 +77,11 @@ public class dgShinseiList_Row extends DataRow {
         this.setOriginalData("kyusochiUnitGataKoshitsuGentei", kyusochiUnitGataKoshitsuGentei);
         this.setOriginalData("shoninShinaiRiyu", shoninShinaiRiyu);
         this.setOriginalData("dataId", dataId);
+        this.setOriginalData("hiddenShoKisaiHokenshaNo", hiddenShoKisaiHokenshaNo);
+        this.setOriginalData("hiddenShinseiRirekiNo", hiddenShinseiRirekiNo);
     }
 
-    public dgShinseiList_Row(RString jotai, RString kakuninNo, TextBoxFlexibleDate txtShinseiYMD, RString shinseiRiyu, RString ketteiKubun, TextBoxFlexibleDate txtKetteiYMD, TextBoxFlexibleDate txtTekiyoYMD, TextBoxFlexibleDate txtYukoKigenYMD, RString keigenJiyu, RString keigenRitsu, Boolean chkTokureisochiTaishosha, RString kyotakuServiceGentei, RString kojuhiShokuhiGentei, RString kyusochiUnitGataKoshitsuGentei, RString shoninShinaiRiyu, RString dataId) {
+    public dgShinseiList_Row(RString jotai, RString kakuninNo, TextBoxFlexibleDate txtShinseiYMD, RString shinseiRiyu, RString ketteiKubun, TextBoxFlexibleDate txtKetteiYMD, TextBoxFlexibleDate txtTekiyoYMD, TextBoxFlexibleDate txtYukoKigenYMD, RString keigenJiyu, RString keigenRitsu, Boolean chkTokureisochiTaishosha, RString kyotakuServiceGentei, RString kojuhiShokuhiGentei, RString kyusochiUnitGataKoshitsuGentei, RString shoninShinaiRiyu, RString dataId, RString hiddenShoKisaiHokenshaNo, RString hiddenShinseiRirekiNo) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("kakuninNo", kakuninNo);
@@ -93,6 +99,8 @@ public class dgShinseiList_Row extends DataRow {
         this.setOriginalData("kyusochiUnitGataKoshitsuGentei", kyusochiUnitGataKoshitsuGentei);
         this.setOriginalData("shoninShinaiRiyu", shoninShinaiRiyu);
         this.setOriginalData("dataId", dataId);
+        this.setOriginalData("hiddenShoKisaiHokenshaNo", hiddenShoKisaiHokenshaNo);
+        this.setOriginalData("hiddenShinseiRirekiNo", hiddenShinseiRirekiNo);
         this.jotai = jotai;
         this.kakuninNo = kakuninNo;
         this.txtShinseiYMD = txtShinseiYMD;
@@ -109,6 +117,8 @@ public class dgShinseiList_Row extends DataRow {
         this.kyusochiUnitGataKoshitsuGentei = kyusochiUnitGataKoshitsuGentei;
         this.shoninShinaiRiyu = shoninShinaiRiyu;
         this.dataId = dataId;
+        this.hiddenShoKisaiHokenshaNo = hiddenShoKisaiHokenshaNo;
+        this.hiddenShinseiRirekiNo = hiddenShinseiRirekiNo;
     }
 
     public RString getJotai() {
@@ -173,6 +183,14 @@ public class dgShinseiList_Row extends DataRow {
 
     public RString getDataId() {
         return dataId;
+    }
+
+    public RString getHiddenShoKisaiHokenshaNo() {
+        return hiddenShoKisaiHokenshaNo;
+    }
+
+    public RString getHiddenShinseiRirekiNo() {
+        return hiddenShinseiRirekiNo;
     }
 
     public void setJotai(RString jotai) {
@@ -253,6 +271,16 @@ public class dgShinseiList_Row extends DataRow {
     public void setDataId(RString dataId) {
         this.setOriginalData("dataId", dataId);
         this.dataId = dataId;
+    }
+
+    public void setHiddenShoKisaiHokenshaNo(RString hiddenShoKisaiHokenshaNo) {
+        this.setOriginalData("hiddenShoKisaiHokenshaNo", hiddenShoKisaiHokenshaNo);
+        this.hiddenShoKisaiHokenshaNo = hiddenShoKisaiHokenshaNo;
+    }
+
+    public void setHiddenShinseiRirekiNo(RString hiddenShinseiRirekiNo) {
+        this.setOriginalData("hiddenShinseiRirekiNo", hiddenShinseiRirekiNo);
+        this.hiddenShinseiRirekiNo = hiddenShinseiRirekiNo;
     }
 
     // </editor-fold>

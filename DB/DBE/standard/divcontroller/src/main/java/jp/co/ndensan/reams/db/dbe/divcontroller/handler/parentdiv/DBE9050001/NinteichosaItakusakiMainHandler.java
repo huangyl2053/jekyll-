@@ -190,14 +190,18 @@ public class NinteichosaItakusakiMainHandler {
         }
         row.setJusho(nullToEmpty(jusho));
         row.setJushoKana(nullToEmpty(jushoKana));
-        row.setTelNo(telNo.value());
+        if (telNo != null) {
+            row.setTelNo(telNo.value());
+        }
         if (!RString.isNullOrEmpty(chosaItakuKubun.trim())) {
             row.setChosaItakuKubun(nullToEmpty(ChosaItakuKubunCode.toValue(chosaItakuKubun).get名称()));
         }
         TextBoxNum num = new TextBoxNum();
         num.setValue(new Decimal(waritsukeTeiin));
         row.setWaritsukeTeiin(num);
-        row.setChiku(chiku.value());
+        if (chiku != null) {
+            row.setChiku(chiku.value());
+        }
         if (!RString.isNullOrEmpty(kikanKubun.trim())) {
             row.setKikanKubun(nullToEmpty(ChosaKikanKubun.toValue(kikanKubun).get名称()));
         }

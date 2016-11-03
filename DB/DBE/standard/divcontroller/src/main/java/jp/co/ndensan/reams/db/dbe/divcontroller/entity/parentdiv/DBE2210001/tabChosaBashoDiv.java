@@ -105,23 +105,23 @@ public class tabChosaBashoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBox getTxtShichosonTokubetsuKyufu() {
-        return this.getTplZaitaku().getJutakuGaikyoChosa().getTxtShichosonTokubetsuKyufu();
+    public TextBoxMultiLine getTxtShichosonTokubetsuKyufu() {
+        return this.getTplZaitaku().getTxtShichosonTokubetsuKyufu();
     }
 
     @JsonIgnore
-    public void  setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.getTplZaitaku().getJutakuGaikyoChosa().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
+    public void  setTxtShichosonTokubetsuKyufu(TextBoxMultiLine txtShichosonTokubetsuKyufu) {
+        this.getTplZaitaku().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
     }
 
     @JsonIgnore
-    public TextBox getTxtKyufuIgaiJutakuService() {
-        return this.getTplZaitaku().getJutakuGaikyoChosa().getTxtKyufuIgaiJutakuService();
+    public TextBoxMultiLine getTxtKyufuIgaiJutakuService() {
+        return this.getTplZaitaku().getTxtKyufuIgaiJutakuService();
     }
 
     @JsonIgnore
-    public void  setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
-        this.getTplZaitaku().getJutakuGaikyoChosa().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
+    public void  setTxtKyufuIgaiJutakuService(TextBoxMultiLine txtKyufuIgaiJutakuService) {
+        this.getTplZaitaku().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
     }
 
     @JsonIgnore

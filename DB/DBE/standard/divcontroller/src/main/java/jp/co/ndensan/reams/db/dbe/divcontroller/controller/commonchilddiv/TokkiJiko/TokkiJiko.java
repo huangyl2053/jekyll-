@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.TokkiJiko;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoIdentifier;
@@ -48,18 +49,26 @@ public class TokkiJiko {
         Image イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, Image.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-        if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
-            意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
-                    .createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+
+        ShujiiIkenshoJoho shujiiIkenshoJoho = null;
+
+        if (意見書情報 != null) {
+            if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
+                意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
+                        .createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+            }
+
+            shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
+                    .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
         }
-        ShujiiIkenshoJoho shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
-                .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
+
         if (shujiiIkenshoJoho != null && !RString.isNullOrEmpty(shujiiIkenshoJoho.get特記事項())) {
             div.setHdnTokkiJiko(shujiiIkenshoJoho.get特記事項());
             div.getTxtTokki().setValue(shujiiIkenshoJoho.get特記事項());
         } else {
             div.getTxtTokki().setValue(RString.EMPTY);
         }
+
         if (イメージ情報 == null || イメージ情報.getイメージ共有ファイルID() == null) {
             div.getImgTokkiJiko().setSrc(RString.EMPTY);
             if (イメージ情報 != null && イメージ情報.getイメージ共有ファイルID() == null) {
@@ -95,22 +104,36 @@ public class TokkiJiko {
                     UrQuestionMessages.確定の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if ((new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
-                || div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue())) {
-            if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
-                意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
-                        .createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+
+        if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+            if (意見書情報 == null) {
+                意見書情報 = new NinteiShinseiJoho(管理番号);
+                ShujiiIkenshoJoho shujiiIkenshoJoho = new ShujiiIkenshoJoho(管理番号, 履歴番号);
+                shujiiIkenshoJoho = shujiiIkenshoJoho.createBuilderForEdit().set特記事項(div.getTxtTokki().getValue()).build();
+                ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(管理番号, 履歴番号);
+                意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(shujiiIkenshoIraiJoho);
+                ViewStateHolder.put(ViewStateKeys.意見書情報, 意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(意見書情報.
+                        getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                        createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho).build()).build());
+                return ResponseData.of(div).dialogOKClose();
+            } else {
+                if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
+                    意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
+                            .createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+                }
+                ShujiiIkenshoJoho shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
+                        .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
+                shujiiIkenshoJoho = shujiiIkenshoJoho.createBuilderForEdit().set特記事項(div.getTxtTokki().getValue()).build();
+                ViewStateHolder.put(ViewStateKeys.意見書情報, 意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(意見書情報.
+                        getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                        createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho).build()).build());
+                return ResponseData.of(div).dialogOKClose();
             }
-            ShujiiIkenshoJoho shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
-                    .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
-            shujiiIkenshoJoho = shujiiIkenshoJoho.createBuilderForEdit().set特記事項(div.getTxtTokki().getValue()).build();
-            ViewStateHolder.put(ViewStateKeys.意見書情報, 意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(意見書情報.
-                    getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
-                    createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho).build()).build());
-            return ResponseData.of(div).dialogOKClose();
         }
-        return ResponseData.of(div).respond();
+
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**

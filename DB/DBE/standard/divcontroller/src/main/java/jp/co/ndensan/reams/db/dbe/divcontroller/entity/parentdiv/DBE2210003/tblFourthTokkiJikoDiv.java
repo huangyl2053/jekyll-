@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblFourthTokkiJikoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -232,7 +232,7 @@ public class tblFourthTokkiJikoDiv extends TablePanel {
  * @author 自動生成
  */
 class celTableCell25AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("txtFourthChosaKomokuNo")
     private TextBox txtFourthChosaKomokuNo;
 
@@ -262,7 +262,7 @@ class celTableCell25AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell27AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("lblFourthHyphen")
     private Label lblFourthHyphen;
 
@@ -292,7 +292,7 @@ class celTableCell27AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell28AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("txtFourthTokkiRenban")
     private TextBoxNum txtFourthTokkiRenban;
 
@@ -322,7 +322,7 @@ class celTableCell28AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell29AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("txtFourthTokkiJikoMeisho")
     private TextBox txtFourthTokkiJikoMeisho;
 
@@ -352,7 +352,7 @@ class celTableCell29AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell30AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
 
     // </editor-fold>
 }
@@ -362,7 +362,7 @@ class celTableCell30AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell31AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("txtFourthTokkiJiko")
     private TextBoxMultiLine txtFourthTokkiJiko;
 
@@ -392,7 +392,7 @@ class celTableCell31AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell32AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
 
     // </editor-fold>
 }
@@ -402,7 +402,7 @@ class celTableCell32AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell33AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("imgFourthTokkiJiko")
     private StaticImage imgFourthTokkiJiko;
 

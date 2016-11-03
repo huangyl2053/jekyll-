@@ -39,6 +39,7 @@ public class TokubetsuChiikiKasanGemmen {
                 return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_申請情報なし.getMessage()).respond();
             }
         }
+        div.setVisible(true);
         return ResponseData.of(div).respond();
     }
 

@@ -21,6 +21,7 @@ public class KaigoNinteiAtenaInfoRelateEntity {
     private RString shikibetsuCode;
     private RString shinseishoKanriNo;
     private RString hihokenshaName;
+    private RString hihokenshaKana;
     private RString seinengappiYMD;
     private RString age;
     private RString seibetsu;

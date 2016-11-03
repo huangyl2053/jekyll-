@@ -28,7 +28,9 @@ public class YokaigodoGuide {
      * @return ResponseData<YokaigodoGuideDiv>
      */
     public ResponseData<YokaigodoGuideDiv> onLoad(YokaigodoGuideDiv godoDiv) {
-        ResponseData<YokaigodoGuideDiv> responseData = new ResponseData<>();
+        if (RString.isNullOrEmpty(godoDiv.getKijunYMD())) {
+            godoDiv.setKijunYMD(new RString(FlexibleDate.getNowDate().toString()));
+        }
         FlexibleYearMonth kizyuniti = RString.isNullOrEmpty(godoDiv.getKijunYMD()) ? FlexibleYearMonth.EMPTY : new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
         if (FlexibleYearMonth.EMPTY.equals(kizyuniti) || kizyuniti.isBefore(new FlexibleYearMonth("200003"))) {
             ValidationMessageControlPairs validationMessages = createHandlerOf(godoDiv).check_btnKakuninn(godoDiv);
@@ -37,8 +39,7 @@ public class YokaigodoGuide {
             }
         }
         createHandlerOf(godoDiv).initialize();
-        responseData.data = godoDiv;
-        return responseData;
+        return ResponseData.of(godoDiv).respond();
     }
 
     /**
@@ -51,7 +52,7 @@ public class YokaigodoGuide {
         dgYokaigodoGuide_Row dgYokaigodoGuideRow = godoDiv.getDgYokaigodoGuide().getSelectedItems().get(0);
         godoDiv.setCode(dgYokaigodoGuideRow.getCode());
         godoDiv.setMeisho(dgYokaigodoGuideRow.getMeisho());
-        return createResponseData(godoDiv);
+        return ResponseData.of(godoDiv).respond();
     }
 
     /**
@@ -61,17 +62,11 @@ public class YokaigodoGuide {
      * @return ResponseData<YokaigodoGuideDiv>
      */
     public ResponseData<YokaigodoGuideDiv> onClick_btnModoru(YokaigodoGuideDiv godoDiv) {
-        return createResponseData(godoDiv);
+        return ResponseData.of(godoDiv).respond();
     }
 
     private YokaigodoGuideHandler createHandlerOf(YokaigodoGuideDiv godoDiv) {
         return new YokaigodoGuideHandler(godoDiv);
-    }
-
-    private ResponseData<YokaigodoGuideDiv> createResponseData(YokaigodoGuideDiv godoDiv) {
-        ResponseData<YokaigodoGuideDiv> response = new ResponseData();
-        response.data = godoDiv;
-        return response;
     }
 
 }

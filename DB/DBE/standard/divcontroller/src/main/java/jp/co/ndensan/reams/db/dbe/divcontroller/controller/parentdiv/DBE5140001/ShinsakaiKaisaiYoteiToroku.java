@@ -629,13 +629,16 @@ public class ShinsakaiKaisaiYoteiToroku {
             });
             for (ShinsakaiKaisaiYoteiJohoParameter entity : shinkiList) {
                 RString 開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー).nextString();
+                if (Integer.parseInt(開催番号.toString()) == INDEX_0) {
+                    開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー).nextString();
+                }
                 entity.set開催番号(開催番号);
                 entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号));
             }
             yoteiJohoEntityList2.addAll(shinkiList);
         }
     }
-
+    
     private boolean isKoshin(List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuranRowList) {
         for (dgKaisaiYoteiNyuryokuran_Row dgNyuryokuRow : nyuryokuranRowList) {
             if ((!dgNyuryokuRow.getKaisaiGogitai1().isDisabled() && !dgNyuryokuRow.getKaisaiGogitai1().getValue().isEmpty())

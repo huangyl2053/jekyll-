@@ -387,6 +387,20 @@ public class ShinsakaiIinJohoToroku {
         response.data = div;
         return response;
     }
+    
+    /**
+     * 検索条件入力値をクリアする
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnClear(ShinsakaiIinJohoTorokuDiv div) {
+        ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
+        handler.clear検索条件();
+        response.data = div;
+        return response;
+    }
 
     /**
      * 「入力内容を更新する」ボタンを押下します。
@@ -664,4 +678,23 @@ public class ShinsakaiIinJohoToroku {
     private ShinsakaiIinJohoTorokuHandler createHandOf(ShinsakaiIinJohoTorokuDiv div) {
         return new ShinsakaiIinJohoTorokuHandler(div);
     }
+
+    /**
+     * 審査会委員開始日・終了日の大小チェック。
+     *
+     * @param div ShinsakaiIinJohoTorokuDiv
+     * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
+     */
+    public ResponseData<ShinsakaiIinJohoTorokuDiv> onBlur_TxtShinsaIinYMD(ShinsakaiIinJohoTorokuDiv div) {
+        
+        if (!RString.isNullOrEmpty(div.getTxtShinsaIinYMDTo().getText()) && !RString.isNullOrEmpty(div.getTxtShinsaIinYMDFrom().getText())) {
+            ValidationMessageControlPairs validationMessages
+                    = new ShinsakaiIinJohoTorokuValidationHandler(div).審査会委員開始日終了日の大小チェック();
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+    
 }

@@ -44,24 +44,17 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @reamsid_L DBU-5600-010 linghuhang
  */
 public class JigyoJokyoHokokuNempoSakuei {
-
+    
+    private static final int INT_ITTI = 1;
     private static final int INT_NI = 2;
+    private static final int INT_YOU = 4;
+    private static final int INT_JUNI = 12;
     private static final RString 審査年月 = new RString("shinsaYM4");
-    private static final RString 年度 = new RString("0099");
+    private static final RString 処理枝番 = new RString("0099");
     private static final RString 年度内連番 = new RString("0001");
     private static final RString 実行単位選択集計のみ = new RString("ITI");
     private static final RString 実行単位選択集計後に印刷 = new RString("NI");
     private static final RString 実行単位選択過去の集計 = new RString("SAN");
-    private static final RString 年報報告様式１２処理名 = new RString("年報報告  様式１・２");
-    private static final RString 年報報告一般状況１１１処理名 = new RString("年報報告  一般状況１～１１");
-    private static final RString 年報報告一般状況１２１４現物分処理名 = new RString("年報報告  一般状況１２～１４  現物分");
-    private static final RString 年報報告保険給付決定現物分処理名 = new RString("年報報告  保険給付決定  現物分");
-    private static final RString 年報報告一般状況1２１４償還分審査処理名 = new RString("年報報告  一般状況1２～１４  償還分審査");
-    private static final RString 年報報告一般状況1２１４償還分決定処理名 = new RString("年報報告  一般状況1２～１４  償還分決定");
-    private static final RString 年報報告保険給付決定償還分審査処理名 = new RString("年報報告  保険給付決定  償還分審査");
-    private static final RString 年報報告保険給付決定償還分決定処理名 = new RString("年報報告  保険給付決定  償還分決定");
-    private static final RString 年報報告保険給付決定高額分処理名 = new RString("年報報告  保険給付決定  高額分");
-    private static final RString 年報報告保険給付決定高額合算分処理名 = new RString("年報報告  保険給付決定  高額合算分");
 
     /**
      * 画面初期化処理です。
@@ -72,9 +65,10 @@ public class JigyoJokyoHokokuNempoSakuei {
     public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onLoad(JigyoJokyoHokokuNempoSakueiDiv div) {
         RString 導入形態コード = RString.EMPTY;
         List<RString> 枝番 = new ArrayList<>();
-        枝番.add(年度);
+        枝番.add(処理枝番);
         RString 合併情報区分 = GappeiCityJohoBFinder.createInstance().getGappeijohokubun();
         div.setHiddenGappeiKoseiKubun(合併情報区分);
+        div.setKijun(new RString("nashi"));
         KanriJoho 管理情報 = ShichosonSecurityJoho.getKanriJoho(GyomuBunrui.介護事務);
         if (管理情報 != null && 管理情報.get導入形態コード() != null && !管理情報.get導入形態コード().isEmpty()) {
             導入形態コード = 管理情報.get導入形態コード().value();
@@ -171,34 +165,34 @@ public class JigyoJokyoHokokuNempoSakuei {
         ShoriDateKanri 給付決定高額合算分処理日付管理情報 = null;
         if (!RString.isNullOrEmpty(div.getDdlKakoHokokuNendo().getSelectedKey())) {
             様式12処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告様式１２処理名, 年度,
+                    Syorimei.年報報告様式１_２.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             一般状況111処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告一般状況１１１処理名, 年度,
+                    Syorimei.年報報告一般状況１_１１.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             一般状況1214現物分処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告一般状況１２１４現物分処理名, 年度,
+                    Syorimei.年報報告一般状況１２_１４現物分.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             給付決定現物分処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告保険給付決定現物分処理名, 年度,
+                    Syorimei.年報報告保険給付決定現物分.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             一般状況1214償還分審査処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告一般状況1２１４償還分審査処理名, 年度,
+                    Syorimei.年報報告一般状況1２_１４償還分審査.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             一般状況1214償還分決定処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告一般状況1２１４償還分決定処理名, 年度,
+                    Syorimei.年報報告一般状況1２_１４償還分決定.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             給付決定償還分審査処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告保険給付決定償還分審査処理名, 年度,
+                    Syorimei.年報報告保険給付決定償還分審査.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             給付決定償還分決定処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告保険給付決定償還分決定処理名, 年度,
+                    Syorimei.年報報告保険給付決定償還分決定.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             給付決定高額分処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告保険給付決定高額分処理名, 年度,
+                    Syorimei.年報報告保険給付決定高額分.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
             給付決定高額合算分処理日付管理情報 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
-                    年報報告保険給付決定高額合算分処理名, 年度,
+                    Syorimei.年報報告保険給付決定高額合算分.get名称(), 処理枝番,
                     new FlexibleYear(div.getDdlKakoHokokuNendo().getSelectedKey()), 年度内連番);
         }
         getHandler(div).onClick_onChangeKakoHokokuNendo(様式12処理日付管理情報,
@@ -348,52 +342,66 @@ public class JigyoJokyoHokokuNempoSakuei {
         ValidationMessageControlPairs validateForUpdate = getValidationHandler(div).validateForUpdate(
                 !RString.isNullOrEmpty(div.getHiddenGappei()), !RString.isNullOrEmpty(div.getHiddenKouiki()));
         respinseData(div, validateForUpdate);
+        if (!RString.isNullOrEmpty(div.getRadJikkoTaniShukeiOnly().getSelectedKey())
+                || !RString.isNullOrEmpty(div.getRadJikkoTani2().getSelectedKey())) {
+            if (RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedValue())
+                    || RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedValue())
+                    || RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedValue())) {
+                return ResponseData.of(div).addValidationMessages(
+                        new JigyoJokyoHokokuNempoSakueiValidationHandler(div).check出力対象の指定を確認()).respond();
+            }
+        } else {
+            if (RString.isNullOrEmpty(div.getDdlKakoHokokuNendo().getSelectedValue())) {
+                return ResponseData.of(div).addValidationMessages(
+                        new JigyoJokyoHokokuNempoSakueiValidationHandler(div).check出力対象の指定を確認()).respond();
+            }
+        }
         if (div.getCblShutsuryokuTaishoYoshiki1().isAllSelected()) {
             ValidationMessageControlPairs 年報報告様式１２ = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                    年報報告様式１２処理名,
+                    Syorimei.月報報告一般状況１_１１.get名称(),
                     div.getTxttxtShukeiNendo1().getValue().getYear(), div.getTxtShukeiFromYM1().getValue().getMonthValue(),
-                    div.getTxtShukeiToYM1().getValue().getMonthValue()), 年報報告様式１２処理名,
-                    div.getTxtShukeiFromYM1().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM1().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiToYM1().getValue().getMonthValue()), Syorimei.月報報告一般状況１_１１.get名称(),
+                    div.getTxtShukeiFromYM1().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM1().getValue().getYearMonth().toDateString());
             return respinseData(div, 年報報告様式１２);
         }
         if (div.getCblShutsuryokuTaishoIppan1to11().isAllSelected()) {
             ValidationMessageControlPairs 年報報告一般状況１１１ = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                    年報報告一般状況１１１処理名,
+                    Syorimei.月報報告一般状況１_１１.get名称(),
                     div.getTxtShukeiNendo2().getValue().getYear(), div.getTxtShukeiFromYM2().getValue().getMonthValue(),
-                    div.getTxtShukeiToYM2().getValue().getMonthValue()), 年報報告一般状況１１１処理名,
-                    div.getTxtShukeiFromYM2().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM2().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiToYM2().getValue().getMonthValue()), Syorimei.月報報告一般状況１_１１.get名称(),
+                    div.getTxtShukeiFromYM2().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM2().getValue().getYearMonth().toDateString());
             return respinseData(div, 年報報告一般状況１１１);
         }
         if (div.getCblShutsuryokuTaishoIppanGembutsu().isAllSelected()) {
             ValidationMessageControlPairs 年報報告一般状況１２１４現物分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                    年報報告一般状況１２１４現物分処理名,
+                    Syorimei.月報報告一般状況１２_１４現物分.get名称(),
                     div.getTxtShukeiNendo3().getValue().getYear(), div.getTxtShukeiFromYM3().getValue().getMonthValue(),
-                    div.getTxtShukeiToYM3().getValue().getMonthValue()), 年報報告一般状況１２１４現物分処理名,
-                    div.getTxtShukeiFromYM3().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM3().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiToYM3().getValue().getMonthValue()), Syorimei.月報報告一般状況１２_１４現物分.get名称(),
+                    div.getTxtShukeiFromYM3().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM3().getValue().getYearMonth().toDateString());
             return respinseData(div, 年報報告一般状況１２１４現物分);
         }
         if (div.getCblShutsuryokuTaishoHokenGembutsu().isAllSelected()) {
             ValidationMessageControlPairs 年報報告保険給付決定現物分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                    年報報告保険給付決定現物分処理名,
+                    Syorimei.月報報告保険給付決定現物分.get名称(),
                     div.getTxtShukeiNendo4().getValue().getYear(), div.getTxtShukeiFromYM4().getValue().getMonthValue(),
-                    div.getTxtShukeiToYM4().getValue().getMonthValue()), 年報報告保険給付決定現物分処理名,
-                    div.getTxtShukeiFromYM4().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM4().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiToYM4().getValue().getMonthValue()), Syorimei.月報報告保険給付決定現物分.get名称(),
+                    div.getTxtShukeiFromYM4().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM4().getValue().getYearMonth().toDateString());
             return respinseData(div, 年報報告保険給付決定現物分);
         }
         if (div.getCblShutsuryokuTaishoIppanShokan().isAllSelected()) {
             if (審査年月.equals(div.getRadlblShukeiType4().getSelectedKey())) {
                 ValidationMessageControlPairs 一般状況1214償還分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                        年報報告一般状況1２１４償還分審査処理名,
+                        Syorimei.月報報告一般状況１２_１４償還分審査.get名称(),
                         div.getTxtShukeiNendo5().getValue().getYear(), div.getTxtShukeiFromYM5().getValue().getMonthValue(),
-                        div.getTxtShukeiToYM5().getValue().getMonthValue()), 年報報告一般状況1２１４償還分審査処理名,
-                        div.getTxtShukeiFromYM5().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM5().getValue().getYearMonth().wareki().toDateString());
+                        div.getTxtShukeiToYM5().getValue().getMonthValue()), Syorimei.月報報告一般状況１２_１４償還分審査.get名称(),
+                        div.getTxtShukeiFromYM5().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM5().getValue().getYearMonth().toDateString());
                 return respinseData(div, 一般状況1214償還分);
             } else {
                 ValidationMessageControlPairs 一般状況1214償還分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                        年報報告一般状況1２１４償還分決定処理名,
+                        Syorimei.月報報告一般状況１２_１４償還分決定.get名称(),
                         div.getTxtShukeiNendo5().getValue().getYear(), div.getTxtShukeiFromYM5().getValue().getMonthValue(),
-                        div.getTxtShukeiToYM5().getValue().getMonthValue()), 年報報告一般状況1２１４償還分決定処理名,
-                        div.getTxtShukeiFromYM5().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM5().getValue().getYearMonth().wareki().toDateString());
+                        div.getTxtShukeiToYM5().getValue().getMonthValue()), Syorimei.月報報告一般状況１２_１４償還分決定.get名称(),
+                        div.getTxtShukeiFromYM5().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM5().getValue().getYearMonth().toDateString());
                 return respinseData(div, 一般状況1214償還分);
             }
         }
@@ -422,7 +430,7 @@ public class JigyoJokyoHokokuNempoSakuei {
                 HyojiUmu.表示する.getコード(), div.getHiddenDonyuKeitaiCode()).records();
         return ResponseData.of(getHandler(div).onClick_btnBatchParamSave(市町村情報, 引き継ぎデータ, 市町村識別, 現市町村情報, 合併市町村情報)).respond();
     }
-
+    
     private List<RString> get処理名() {
         List<RString> 処理名リスト = new ArrayList<>();
         for (Syorimei 処理名 : Syorimei.values()) {
@@ -430,72 +438,96 @@ public class JigyoJokyoHokokuNempoSakuei {
         }
         return 処理名リスト;
     }
-
+    
     private List<ShoriDateKanri> get処理日付管理情報(SubGyomuCode サブ業務コード, RString 処理名, FlexibleYear 年度, int 集計開始月, int 集計終了月) {
         List<ShoriDateKanri> 処理日付管理情報 = new ArrayList<>();
-        for (int i = 集計開始月; i <= 集計終了月; i++) {
+        for (int i = 集計開始月; i != 集計終了月;) {
             RStringBuilder builder = new RStringBuilder();
             builder.append(new RString("00"))
                     .append(new RString(i).padZeroToLeft(INT_NI));
-            ShoriDateKanri 処理日付管理 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(サブ業務コード,
-                    処理名, builder.toRString(), 年度, 年度内連番);
+            ShoriDateKanri 処理日付管理;
+            if (i >= INT_YOU) {
+                処理日付管理 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(サブ業務コード,
+                        処理名, builder.toRString(), 年度, 年度内連番);
+            } else {
+                処理日付管理 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(サブ業務コード,
+                        処理名, builder.toRString(), 年度.plusYear(INT_ITTI), 年度内連番);
+            }
             if (処理日付管理 != null) {
                 処理日付管理情報.add(処理日付管理);
             }
+            i++;
+            if (i > INT_JUNI) {
+                i = i - INT_JUNI;
+            }
+        }
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(new RString("00"))
+                .append(new RString(集計終了月).padZeroToLeft(INT_NI));
+        ShoriDateKanri 処理日付管理;
+        if (集計終了月 >= INT_YOU) {
+            処理日付管理 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(サブ業務コード,
+                    処理名, builder.toRString(), 年度, 年度内連番);
+        } else {
+            処理日付管理 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(サブ業務コード,
+                    処理名, builder.toRString(), 年度.plusYear(INT_ITTI), 年度内連番);
+        }
+        if (処理日付管理 != null) {
+            処理日付管理情報.add(処理日付管理);
         }
         return 処理日付管理情報;
     }
-
+    
     private ResponseData<JigyoJokyoHokokuNempoSakueiDiv> check月報未処理(JigyoJokyoHokokuNempoSakueiDiv div) {
         if (div.getCblShutsuryokuTaishoHokenShokan().isAllSelected()) {
             if (審査年月.equals(div.getRadlblShukeiType5().getSelectedKey())) {
                 ValidationMessageControlPairs 給付決定償還分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                        年報報告保険給付決定償還分審査処理名,
+                        Syorimei.月報報告保険給付決定償還分審査.get名称(),
                         div.getTxtShukeiNendo6().getValue().getYear(), div.getTxtShukeiFromYM6().getValue().getMonthValue(),
-                        div.getTxtShukeiToYM6().getValue().getMonthValue()), 年報報告保険給付決定償還分審査処理名,
-                        div.getTxtShukeiFromYM6().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM6().getValue().getYearMonth().wareki().toDateString());
+                        div.getTxtShukeiToYM6().getValue().getMonthValue()), Syorimei.月報報告保険給付決定償還分審査.get名称(),
+                        div.getTxtShukeiFromYM6().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM6().getValue().getYearMonth().toDateString());
                 return respinseData(div, 給付決定償還分);
             } else {
                 ValidationMessageControlPairs 給付決定償還分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                        年報報告保険給付決定償還分決定処理名,
+                        Syorimei.月報報告保険給付決定償還分決定.get名称(),
                         div.getTxtShukeiNendo6().getValue().getYear(), div.getTxtShukeiFromYM6().getValue().getMonthValue(),
-                        div.getTxtShukeiToYM6().getValue().getMonthValue()), 年報報告保険給付決定償還分決定処理名,
-                        div.getTxtShukeiFromYM6().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM6().getValue().getYearMonth().wareki().toDateString());
+                        div.getTxtShukeiToYM6().getValue().getMonthValue()), Syorimei.月報報告保険給付決定償還分決定.get名称(),
+                        div.getTxtShukeiFromYM6().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM6().getValue().getYearMonth().toDateString());
                 return respinseData(div, 給付決定償還分);
             }
         }
         if (div.getCblShutsuryokuTaishoHokenKogaku().isAllSelected()) {
             ValidationMessageControlPairs 給付決定高額分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                    年報報告保険給付決定高額分処理名,
+                    Syorimei.月報報告保険給付決定高額分.get名称(),
                     div.getTxtShukeiNendo7().getValue().getYear(), div.getTxtShukeiFromYM7().getValue().getMonthValue(),
-                    div.getTxtShukeiToYM7().getValue().getMonthValue()), 年報報告保険給付決定高額分処理名,
-                    div.getTxtShukeiFromYM7().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM7().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiToYM7().getValue().getMonthValue()), Syorimei.月報報告保険給付決定高額分.get名称(),
+                    div.getTxtShukeiFromYM7().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM7().getValue().getYearMonth().toDateString());
             return respinseData(div, 給付決定高額分);
         }
         if (div.getCblShutsuryokuTaishoHokenKogakuGassan().isAllSelected()) {
             ValidationMessageControlPairs 給付決定高額合算分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
-                    年報報告保険給付決定高額合算分処理名,
+                    Syorimei.月報報告保険給付決定高額合算分.get名称(),
                     div.getTxtShukeiNendo8().getValue().getYear(), div.getTxtShukeiFromYM8().getValue().getMonthValue(),
-                    div.getTxtShukeiToYM8().getValue().getMonthValue()), 年報報告保険給付決定高額合算分処理名,
-                    div.getTxtShukeiFromYM8().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM8().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiToYM8().getValue().getMonthValue()), Syorimei.月報報告保険給付決定高額合算分.get名称(),
+                    div.getTxtShukeiFromYM8().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM8().getValue().getYearMonth().toDateString());
             return respinseData(div, 給付決定高額合算分);
         }
         return ResponseData.of(div).respond();
     }
-
+    
     private ResponseData<JigyoJokyoHokokuNempoSakueiDiv> respinseData(JigyoJokyoHokokuNempoSakueiDiv div, ValidationMessageControlPairs validateForUpdate) {
         if (validateForUpdate.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validateForUpdate).respond();
         }
         return ResponseData.of(div).respond();
     }
-
+    
     private JigyoJokyoHokokuNempoSakueiHandler getHandler(JigyoJokyoHokokuNempoSakueiDiv div) {
         return new JigyoJokyoHokokuNempoSakueiHandler(div);
     }
-
+    
     private JigyoJokyoHokokuNempoSakueiValidationHandler getValidationHandler(JigyoJokyoHokokuNempoSakueiDiv div) {
         return new JigyoJokyoHokokuNempoSakueiValidationHandler(div);
     }
-
+    
 }

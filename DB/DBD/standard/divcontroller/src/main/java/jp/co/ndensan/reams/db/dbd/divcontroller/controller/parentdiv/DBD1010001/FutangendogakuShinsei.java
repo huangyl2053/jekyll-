@@ -21,15 +21,17 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakuninte
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
@@ -63,6 +65,7 @@ public class FutangendogakuShinsei {
     public ResponseData<FutangendogakuShinseiDiv> onLoad(FutangendogakuShinseiDiv div) {
 
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        div.setShikibetsuCode(taishoshaKey.get識別コード().getColumnValue());
         ShikibetsuCode 識別コード = null;
         HihokenshaNo 被保険者番号 = null;
         boolean データなし = true;
@@ -77,8 +80,9 @@ public class FutangendogakuShinsei {
             div.getBtnDispShisetsuJoho().setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(共通エリア_保存する, true);
             データなし = false;
+        } else if (承認メニューID.equals(ResponseHolder.getMenuID())) {
+            データなし = FutangendogakuNinteiService.createInstance().canBe利用者(被保険者番号, FlexibleDate.getNowDate());
         }
-
         if (!ResponseHolder.isReRequest() && !データなし) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
@@ -95,12 +99,10 @@ public class FutangendogakuShinsei {
         for (dgShinseiList_Row row : rows) {
             if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
                 div.getShinseiList().getBtnAddShinsei().setDisabled(true);
-            } else {
-                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
-                    row.setModifyButtonState(DataGridButtonState.Disabled);
-                    row.setDeleteButtonState(DataGridButtonState.Disabled);
-                    row.setSelectable(Boolean.FALSE);
-                }
+            } else if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                row.setModifyButtonState(DataGridButtonState.Disabled);
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+                row.setSelectable(Boolean.FALSE);
             }
         }
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
@@ -143,6 +145,19 @@ public class FutangendogakuShinsei {
                     .setText(申請メニューID.equals(ResponseHolder.getMenuID()) ? 文字列_申請情報を表示する : 文字列_承認情報を表示する);
             return ResponseData.of(div).setState(DBD1010001StateName.世帯情報From詳細);
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「所得状況」ボタン押下時の処理です。
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onBeforeOpenDialog_btnShotokuJokyo(FutangendogakuShinseiDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        div.setShikibetsuCode(識別コード.getColumnValue());
         return ResponseData.of(div).respond();
     }
 
@@ -225,12 +240,10 @@ public class FutangendogakuShinsei {
         for (dgShinseiList_Row row : rows) {
             if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
                 div.getBtnAddShinsei().setDisabled(true);
-            } else {
-                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
-                    row.setModifyButtonState((DataGridButtonState.Disabled));
-                    row.setDeleteButtonState(DataGridButtonState.Disabled);
-                    row.setSelectable(Boolean.FALSE);
-                }
+            } else if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                row.setModifyButtonState((DataGridButtonState.Disabled));
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+                row.setSelectable(Boolean.FALSE);
             }
         }
         return ResponseData.of(div).respond();
@@ -256,8 +269,21 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onBeforeOpenDialog_btnHiShoninRiyu(FutangendogakuShinseiDiv div) {
-        div.setSubGyomuCode(SubGyomuCode.DBD介護受給.getColumnValue());
+        div.setGyomuCode(GyomuCode.DB介護保険.getColumnValue());
         div.setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「施設入退所情報」ボタンの処理
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv>
+            onBeforeOpenDialog_btnDispShisetsuJoho(FutangendogakuShinseiDiv div) {
+        div.setShikibetsuCode(new RString(div.getCcdAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode().toString()));
+        div.setMode(new RString(ShisetsuNyutaishoRirekiKanriDiv.DisplayMode.照会.toString()));
         return ResponseData.of(div).respond();
     }
 
@@ -304,12 +330,10 @@ public class FutangendogakuShinsei {
         for (dgShinseiList_Row row : rows) {
             if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
                 div.getBtnAddShinsei().setDisabled(true);
-            } else {
-                if (申請メニューID.equals(ResponseHolder.getMenuID())) {
-                    row.setModifyButtonState((DataGridButtonState.Disabled));
-                    row.setDeleteButtonState(DataGridButtonState.Disabled);
-                    row.setSelectable(Boolean.FALSE);
-                }
+            } else if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                row.setModifyButtonState((DataGridButtonState.Disabled));
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+                row.setSelectable(Boolean.FALSE);
             }
         }
         div.getShinseiDetail().setDisabled(true);
@@ -330,20 +354,33 @@ public class FutangendogakuShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        NinteiShinseiValidationHandler validationHandler = getValidationHandler();
         if (!KEY1.equals(div.getRadKetteiKubun().getSelectedKey())) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            NinteiShinseiValidationHandler validationHandler = getValidationHandler();
             pairs = validationHandler.負担限度額認定_適用開始日が法施行以前チェック(pairs, div);
             pairs = validationHandler.負担限度額認定_適用終了日が年度外チェック(pairs, div);
             pairs = validationHandler.負担限度額認定_適用終了日が開始日以前チェック(pairs, div);
+//            pairs = validationHandler.減免減額_要介護認定チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
         }
+        RString メニューID = ResponseHolder.getMenuID();
+//        if (!申請メニューID.equals(メニューID)) {
+//            pairs = validationHandler.減免減額_適用期間重複のチェックon確定(pairs, div);
+//            if (pairs.iterator().hasNext()) {
+//                return ResponseData.of(div).addValidationMessages(pairs).respond();
+//            }
+//        }
 
         ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, getHandler(div).onClick_btnShinseiKakutei(list, 資格対象者));
+        for (FutanGendogakuNinteiViewState row : list) {
+            if (row.getFutanGendogakuNintei().get決定区分() != null || !row.getFutanGendogakuNintei().get決定区分().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(false);
+            }
+        }
         div.getShinseiDetail().setDisabled(true);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
@@ -460,7 +497,6 @@ public class FutangendogakuShinsei {
         div.getTxtHaigushaRenrakusaki().clearDomain();
         div.getTxtHaigushaJusho1().clearDomain();
         div.getTxtHaigushaJusho2().clearDomain();
-        div.getRadHaigushaUmu().setSelectedKey(KEY1);
         return ResponseData.of(div).respond();
     }
 
@@ -489,6 +525,50 @@ public class FutangendogakuShinsei {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「申請理由」変更時の処理
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onChange_ddlShinseiRiyu(FutangendogakuShinseiDiv div) {
+        getHandler(div).onChange_ddlShinseiRiyu();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「旧措置」変更時の処理
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onChange_ddlKyusochisha(FutangendogakuShinseiDiv div) {
+        getHandler(div).onChange_ddlKyusochisha();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「居室種別」変更時の処理
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onChange_ddlKyoshitsuShubetsu(FutangendogakuShinseiDiv div) {
+        getHandler(div).onChange_ddlKyoshitsuShubetsu();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「境界層」クリック時の処理
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onClick_chkKyokaiso(FutangendogakuShinseiDiv div) {
+        getHandler(div).onClick_chkKyokaiso();
+        return ResponseData.of(div).respond();
+    }
+
     private FutangendogakuNinteiShinseiHandler getHandler(FutangendogakuShinseiDiv div) {
         return new FutangendogakuNinteiShinseiHandler(div);
     }
@@ -496,4 +576,15 @@ public class FutangendogakuShinsei {
     private NinteiShinseiValidationHandler getValidationHandler() {
         return new NinteiShinseiValidationHandler();
     }
+
+    /**
+     * URZ.SampleBunshoToroku　をダイアログで表示し、選択する。
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     */
+    /*   public ResponseData<FutangendogakuShinseiDiv> onClose_btnOpenHiShoninRiyu(FutangendogakuShinseiDiv div) {
+     div.getTxtHiShoninRiyu().setValue(div.get);
+     return ResponseData.of(div).respond();
+     }*/
 }

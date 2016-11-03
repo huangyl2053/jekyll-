@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class RiyoshaFutangakuGengakuShinseiDetailDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -166,13 +166,13 @@ public class RiyoshaFutangakuGengakuShinseiDetailDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlKyusochiKubun() {
-        return this.getKetteiNaiyo().getDdlKyusochiKubun();
+    public CheckBoxList getChkKyuSochisha() {
+        return this.getKetteiNaiyo().getChkKyuSochisha();
     }
 
     @JsonIgnore
-    public void  setDdlKyusochiKubun(DropDownList ddlKyusochiKubun) {
-        this.getKetteiNaiyo().setDdlKyusochiKubun(ddlKyusochiKubun);
+    public void  setChkKyuSochisha(CheckBoxList chkKyuSochisha) {
+        this.getKetteiNaiyo().setChkKyuSochisha(chkKyuSochisha);
     }
 
     @JsonIgnore

@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dba.business.core.jigyoshaservice.JigyoshaServiceJoho;
-import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceItiranHyojiJohoBusiness;
-import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceJohoBusiness;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.DBA2010014StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.DBA2010014TransitionEventName;
@@ -19,7 +16,9 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.Jigy
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010014.JigyoshaServiceHandler;
 import jp.co.ndensan.reams.db.dba.service.core.jigyoshaservice.JigyoshaServiceManager;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -36,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -50,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 //CHECKSTYLE IGNORE ImportControl FOR NEXT 2 LINES
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  *
@@ -63,9 +61,7 @@ public class JigyoshaService {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final int 登録保険者番号_4桁 = 4;
     private static final int 登録保険者番号_6桁 = 6;
-    private static final int 登録保険者番号_8桁 = 8;
     private static final LockingKey 前排他ロックキー = new LockingKey("KaigoJigyoshaShiteiService");
 
     /**
@@ -78,7 +74,7 @@ public class JigyoshaService {
         setサービス種類(div);
         RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
         if (状態_追加.equals(画面状態)) {
-            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+            KaigoJigyosha 事業者登録情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報_事業者サービス引継, KaigoJigyosha.class);
             getHandler(div).set状態_追加(事業者登録情報);
             List<RString> chkKihonJunkyoFlag = new ArrayList<>();
             chkKihonJunkyoFlag.add(new RString("0"));
@@ -136,7 +132,7 @@ public class JigyoshaService {
     public ResponseData<JigyoshaServiceDiv> onChange_ChkKihonJunkyoFlag(JigyoshaServiceDiv div) {
         RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
         if (状態_追加.equals(画面状態)) {
-            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity 事業者登録情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+            KaigoJigyosha 事業者登録情報 = ViewStateHolder.get(ViewStateKeys.事業者登録情報_事業者サービス引継, KaigoJigyosha.class);
             if (!div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().getSelectedKeys().isEmpty()) {
                 getHandler(div).set状態_追加(事業者登録情報);
             } else {
@@ -164,9 +160,7 @@ public class JigyoshaService {
      */
     public ResponseData<JigyoshaServiceDiv> onBlur_TxtTorokuHokenshaNo(JigyoshaServiceDiv div) {
         if (!div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().isNullOrEmpty()
-            && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 登録保険者番号_4桁
-            && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 登録保険者番号_6桁
-            && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 登録保険者番号_8桁) {
+                && div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().getValue().length() != 登録保険者番号_6桁) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(JigyoshaErrorMessage.桁数が不正));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
@@ -233,15 +227,18 @@ public class JigyoshaService {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
+                    UrQuestionMessages.確定の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+
+        if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-            && click_hai(div)) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RealInitialLocker.release(前排他ロックキー);
+
+            set更新データ(div, create事業者サービスFor入力内容(div));
+
             RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
             if (状態_追加.equals(画面状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_追加);
@@ -252,6 +249,58 @@ public class JigyoshaService {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void set更新データ(JigyoshaServiceDiv div, KaigoJigyoshaShiteiService newService) {
+
+        Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> models = ViewStateHolder.get(ViewStateKeys.サービス一覧情報, Models.class);
+        if (models == null) {
+            models = Models.create(new ArrayList<KaigoJigyoshaShiteiService>());
+        }
+        KaigoJigyoshaShiteiService stateChangeNewService = newService;
+        KaigoJigyoshaShiteiService motoData = models.get(new KaigoJigyoshaShiteiServiceIdentifier(newService.get事業者番号(),
+                newService.getサービス種類コード(), newService.get有効開始日()));
+
+        RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
+        if (状態_追加.equals(画面状態)) {
+            if (models.contains(stateChangeNewService.identifier())) {
+                throw new ApplicationException(UrErrorMessages.既に存在.getMessage().replace("追加するサービス"));
+            }
+            models.add(stateChangeNewService);
+        } else if (状態_修正.equals(画面状態)) {
+            stateChangeNewService = getHandler(div).set事業者サービスDiv(motoData);
+            stateChangeNewService = stateChangeNewService.modifiedModel();
+            models.add(stateChangeNewService);
+        } else if (状態_削除.equals(画面状態)) {
+            if (motoData.isAdded()) {
+                models.deleteOrRemove(motoData.identifier());
+            } else {
+                stateChangeNewService = motoData.deleted();
+                models.add(stateChangeNewService);
+            }
+        }
+
+        ViewStateHolder.put(ViewStateKeys.サービス一覧情報, models);
+    }
+
+    private KaigoJigyoshaShiteiService create事業者サービスFor入力内容(JigyoshaServiceDiv div) {
+        KaigoJigyoshaShiteiService business = new KaigoJigyoshaShiteiService(new JigyoshaNo(div.getJigyoshaServiceKihon()
+                .getJigyosha().getTxtJigyoshaNo().getValue()),
+                new ServiceShuruiCode(div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey()),
+                div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue());
+        business = getHandler(div).set事業者サービスDiv(business);
+        データ更新チェック(div);
+        return business;
+    }
+
+    private void データ更新チェック(JigyoshaServiceDiv div) {
+        FlexibleDate yukoKaishiYMD = div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue();
+        FlexibleDate yukoShuryoYMD = div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue();
+        KaigoJogaiTokureiParameter 合理性パラメータ
+                = KaigoJogaiTokureiParameter.createParam(RString.EMPTY, yukoKaishiYMD, yukoShuryoYMD, null);
+        if (!getService().checkKikanGorisei(合理性パラメータ)) {
+            throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
+        }
     }
 
     /**
@@ -273,7 +322,7 @@ public class JigyoshaService {
         }
         if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || !changeFlg) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || !changeFlg) {
             RealInitialLocker.release(前排他ロックキー);
             RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
             if (状態_追加.equals(画面状態)) {
@@ -287,77 +336,24 @@ public class JigyoshaService {
         return ResponseData.of(div).respond();
     }
 
-    private boolean click_hai(JigyoshaServiceDiv div) {
-        RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
-        if (状態_追加.equals(画面状態)) {
-            KaigoJigyoshaShiteiService business = new KaigoJigyoshaShiteiService(new JigyoshaNo(div.getJigyoshaServiceKihon()
-                    .getJigyosha().getTxtJigyoshaNo().getValue()),
-                    new ServiceShuruiCode(div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey()),
-                    div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue());
-            business = getHandler(div).set事業者サービスDiv(business);
-            データ更新チェック(div);
-            return getService().insertJigyoshaServiceJoho(business);
-        } else if (状態_修正.equals(画面状態)) {
-            データ更新チェック(div);
-            return データ更新(div);
-        } else if (状態_削除.equals(画面状態)) {
-            return getService_Delete().情報を物理削除(ViewStateHolder.get(ViewStateKeys.サービス情報, KaigoJigyoshaShiteiService.class));
-        }
-        return false;
-    }
-
-    private boolean データ更新(JigyoshaServiceDiv div) {
-        KaigoJigyoshaShiteiService business = ViewStateHolder.get(ViewStateKeys.サービス情報, KaigoJigyoshaShiteiService.class);
-        KaigoJigyoshaShiteiService businessUpdate;
-        if (div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue().equals(business.get有効開始日())) {
-            businessUpdate = getHandler(div).set事業者サービスDiv(business);
-        } else {
-            KaigoJigyoshaShiteiService 更新データ = new KaigoJigyoshaShiteiService(new JigyoshaNo(div.getJigyoshaServiceKihon()
-                    .getJigyosha().getTxtJigyoshaNo().getValue()),
-                    new ServiceShuruiCode(div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey()),
-                    div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue());
-            businessUpdate = getHandler(div).set事業者サービスDiv(更新データ);
-        }
-        return getService().updateJigyoshaServiceJoho(business, businessUpdate);
-    }
-
-    private void データ更新チェック(JigyoshaServiceDiv div) {
-        FlexibleDate yukoKaishiYMD = div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue();
-        FlexibleDate yukoShuryoYMD = div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue();
-        KaigoJogaiTokureiParameter 合理性パラメータ
-                = KaigoJogaiTokureiParameter.createParam(RString.EMPTY, yukoKaishiYMD, yukoShuryoYMD, null);
-        if (!getService().checkKikanGorisei(合理性パラメータ)) {
-            throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
-        }
-        KaigoJogaiTokureiParameter サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
-                ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.有効開始日, FlexibleDate.class),
-                FlexibleDate.EMPTY, RDate.getNowDate().getYearMonth());
-        List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = getService().getServiceItiranHyojiJoho(サービス一覧パラメータ).records();
-        List<ServiceJohoBusiness> businessList = new ArrayList<>();
-        for (ServiceItiranHyojiJohoBusiness johoBusiness : サービス一覧表示情報List) {
-            ServiceJohoBusiness serviceJohoBusiness = new ServiceJohoBusiness(johoBusiness.get有効開始日(), johoBusiness.get有効終了日(), johoBusiness.getサービス種類略称());
-            businessList.add(serviceJohoBusiness);
-        }
-        getService().サービスと事業者期間関連のチェック(businessList, yukoKaishiYMD, yukoShuryoYMD);
-    }
-
     private JigyoshaServiceHandler getHandler(JigyoshaServiceDiv div) {
         return new JigyoshaServiceHandler(div);
     }
 
     private List<KaigoJigyoshaShiteiService> get事業者サービス情報取得() {
-        KaigoJigyoshaShisetsuKanriMapperParameter param = KaigoJigyoshaShisetsuKanriMapperParameter.createParam(ViewStateHolder
-                .get(ViewStateKeys.事業者番号, RString.class),
-                ViewStateHolder
-                .get(ViewStateKeys.有効開始日, FlexibleDate.class),
-                null,
-                ViewStateHolder
-                .get(ViewStateKeys.サービス種類コード, RString.class),
-                null);
-        List<KaigoJigyoshaShiteiService> service = KaigoJigyoshaShisetsuKanriManager.createInstance().getJigyoshaServiceJoho(param).records();
-        if (!service.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.サービス情報, service.get(0));
+        JigyoshaNo jigyoshaNo = new JigyoshaNo(ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class));
+        ServiceShuruiCode serviceShuruiCode = new ServiceShuruiCode(ViewStateHolder.get(ViewStateKeys.サービス種類コード, RString.class));
+        FlexibleDate yukoKaishiDate = ViewStateHolder.get(ViewStateKeys.有効開始日, FlexibleDate.class);
+
+        Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> models = ViewStateHolder.get(ViewStateKeys.サービス一覧情報, Models.class);
+        if (models == null) {
+            models = Models.create(new ArrayList<KaigoJigyoshaShiteiService>());
+        }
+        KaigoJigyoshaShiteiService サービス情報 = models.get(new KaigoJigyoshaShiteiServiceIdentifier(jigyoshaNo, serviceShuruiCode, yukoKaishiDate));
+        List<KaigoJigyoshaShiteiService> service = new ArrayList<>();
+        if (サービス情報 != null) {
+            ViewStateHolder.put(ViewStateKeys.サービス情報, サービス情報);
+            service.add(サービス情報);
         }
         return service;
     }
@@ -373,7 +369,7 @@ public class JigyoshaService {
     private enum JigyoshaErrorMessage implements IValidationMessage {
 
         排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中),
-        桁数が不正(UrErrorMessages.桁数が不正, "登録保険者番号", "４桁、６桁、８");
+        桁数が不正(UrErrorMessages.桁数が不正, "登録保険者番号", "６");
         private final Message message;
 
         private JigyoshaErrorMessage(IMessageGettable message, String... replacements) {

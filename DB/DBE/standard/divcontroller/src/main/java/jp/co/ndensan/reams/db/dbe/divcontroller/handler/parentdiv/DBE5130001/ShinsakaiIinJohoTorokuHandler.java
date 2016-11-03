@@ -37,6 +37,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 廃止 = new RString("廃止");
+    private static final RString 有効 = new RString("有効");
     private static final RString KEY_廃止 = new RString("key0");
     private static final RString KEY_有効 = new RString("key1");
     private final ShinsakaiIinJohoTorokuDiv div;
@@ -57,6 +58,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         kensakuJokenDiv_init(new RString("key1"));
         div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtDispMax().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         shinsakaiIinJohoIchiranDiv_init();
         shinsakaiIinJohoDiv_init();
         shozokuKikanIchiranDiv_init();
@@ -78,14 +81,25 @@ public class ShinsakaiIinJohoTorokuHandler {
             row.setStatus(RString.EMPTY);
             row.setShinsainCode(shinsakaiIinJoho.get介護認定審査会委員コード());
             row.getShinsakaiIinKaishiYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員開始年月日().toString()));
-            row.getShinsakaiIinShuryoYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員終了年月日().toString()));
+            if (!(shinsakaiIinJoho.get介護認定審査会委員終了年月日() == null || shinsakaiIinJoho.get介護認定審査会委員終了年月日().isEmpty())) {
+                if (!shinsakaiIinJoho.get介護認定審査会委員終了年月日().toString().equals("99999999")) {
+                    row.getShinsakaiIinShuryoYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員終了年月日().toString()));
+                }
+            }
             row.setShimei(shinsakaiIinJoho.get介護認定審査会委員氏名().value());
             row.setKanaShimei(shinsakaiIinJoho.get介護認定審査会委員氏名カナ().value());
             row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称());
             if (shinsakaiIinJoho.get生年月日() != null && !shinsakaiIinJoho.get生年月日().isEmpty()) {
                 row.getBarthYMD().setValue(new RDate(shinsakaiIinJoho.get生年月日().toString()));
             }
-            row.setShikakuCode(Sikaku.toValue(shinsakaiIinJoho.get介護認定審査員資格コード().value()).get名称());
+            RString shikakuCode;
+            try {
+                shikakuCode = Sikaku.toValue(shinsakaiIinJoho.get介護認定審査員資格コード().value()).get名称();
+            } catch (IllegalArgumentException e) {
+                shikakuCode = RString.EMPTY;
+            }
+            row.setShikakuCode(shikakuCode);
+
             if (shinsakaiIinJoho.get備考() == null) {
                 row.setBiko(RString.EMPTY);
             } else {
@@ -94,7 +108,7 @@ public class ShinsakaiIinJohoTorokuHandler {
             if (IsHaishi.廃止.equals(IsHaishi.toValue(shinsakaiIinJoho.is廃止フラグ()))) {
                 row.setJokyo(廃止);
             } else {
-                row.setJokyo(RString.EMPTY);
+                row.setJokyo(有効);
             }
             if (shinsakaiIinJoho.get担当地区コード() != null) {
                 row.setShinsakaiChikuCode(shinsakaiIinJoho.get担当地区コード().value());
@@ -268,6 +282,15 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtTelNo1().clearDomain();
         div.getTxtFaxNo().clearDomain();
     }
+    
+    /**
+     * 検索条件エリアをクリアする
+     */
+    public void clear検索条件() {
+        kensakuJokenDiv_init(new RString("key1"));
+        div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+    }
 
     /**
      * 更新モードで、審査会委員詳細情報エリア変更を判断します。
@@ -391,6 +414,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setBiko(div.getTxtBiko().getValue());
         if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             row.setJokyo(廃止);
+        } else {
+            row.setJokyo(有効);
         }
         row.setYubinNo(div.getTxtYubinNo().getValue().value());
         row.setYusoKubun(div.getDdlYusoKubun().getSelectedKey());
@@ -428,6 +453,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setBiko(div.getTxtBiko().getValue());
         if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             row.setJokyo(廃止);
+        } else {
+            row.setJokyo(有効);
         }
         row.setYubinNo(div.getTxtYubinNo().getValue().value());
         row.setYusoKubun(div.getDdlYusoKubun().getSelectedKey());

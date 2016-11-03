@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko;
 
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -27,6 +28,10 @@ public class ChosahyoTokkijikoProperty extends ReportPropertyBase<ChosahyoTokkij
      *
      * @param id 帳票ID
      */
+    public ChosahyoTokkijikoProperty() {
+        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221003.getReportId());
+    }
+
     public ChosahyoTokkijikoProperty(ReportId id) {
         super(SubGyomuCode.DBE認定支援, id);
     }
@@ -35,6 +40,7 @@ public class ChosahyoTokkijikoProperty extends ReportPropertyBase<ChosahyoTokkij
     public Breakers<ChosahyoTokkijikoReportSource> defineBreakers(Breakers<ChosahyoTokkijikoReportSource> breakers,
             BreakerCatalog<ChosahyoTokkijikoReportSource> catalog) {
         return breakers.add(catalog.new SimpleLayoutBreaker(
+
 
             ChosahyoTokkijikoReportSource.LAYOUT_BREAK_KEYS) {
             @Override

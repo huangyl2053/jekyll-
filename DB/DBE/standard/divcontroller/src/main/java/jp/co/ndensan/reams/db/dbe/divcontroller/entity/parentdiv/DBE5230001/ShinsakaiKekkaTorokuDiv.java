@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKekkaTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,6 +39,8 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     private RString hdnSubGyomuCd;
     @JsonProperty("hdnGroupCd")
     private RString hdnGroupCd;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -188,6 +190,24 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     @JsonProperty("hdnGroupCd")
     public void setHdnGroupCd(RString hdnGroupCd) {
         this.hdnGroupCd = hdnGroupCd;
+    }
+
+    /*
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
+    }
+
+    /*
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
     /*
@@ -454,13 +474,13 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtNinteiKikanMonth() {
-        return this.getKobetsuHyojiArea().getTxtNinteiKikanMonth();
+    public DropDownList getDdlNinteiKikanMonth() {
+        return this.getKobetsuHyojiArea().getDdlNinteiKikanMonth();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiKikanMonth(TextBoxNum txtNinteiKikanMonth) {
-        this.getKobetsuHyojiArea().setTxtNinteiKikanMonth(txtNinteiKikanMonth);
+    public void  setDdlNinteiKikanMonth(DropDownList ddlNinteiKikanMonth) {
+        this.getKobetsuHyojiArea().setDdlNinteiKikanMonth(ddlNinteiKikanMonth);
     }
 
     @JsonIgnore
@@ -511,16 +531,6 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     @JsonIgnore
     public void  setDdlShinsakaiIkenShurui(DropDownList ddlShinsakaiIkenShurui) {
         this.getKobetsuHyojiArea().setDdlShinsakaiIkenShurui(ddlShinsakaiIkenShurui);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
-        return this.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
-        this.getKobetsuHyojiArea().setBtnShinsakiIkenTeikeibunGuide(btnShinsakiIkenTeikeibunGuide);
     }
 
     @JsonIgnore
@@ -581,6 +591,16 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnNinteiChosaJokyoShokai(ButtonDialog btnNinteiChosaJokyoShokai) {
         this.getKobetsuHyojiArea().setBtnNinteiChosaJokyoShokai(btnNinteiChosaJokyoShokai);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
+        return this.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
+        this.getKobetsuHyojiArea().setBtnShinsakiIkenTeikeibunGuide(btnShinsakiIkenTeikeibunGuide);
     }
 
     @JsonIgnore

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0040011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.message.DbuErrorMessages;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0040011.JigyoJokyoHokokuNempoSakueiDiv;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -27,6 +29,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JigyoJokyoHokokuNempoSakueiValidationHandler {
 
     private final JigyoJokyoHokokuNempoSakueiDiv div;
+    private static final int INT_ZERO = 0;
+    private static final int INT_ITTI = 1;
+    private static final int INT_NI = 2;
+    private static final int INT_YOU = 4;
+    private static final int INT_JUSAN = 13;
+    private static final int INT_HYAKU = 100;
+    private static final int INT_1988 = 1988;
     private static final RString 旧市町村分KEY = new RString("kyuShichoson");
     private static final RString 構成市町村分KEY = new RString("koseiShichoson");
     private static final RString 集計開始日期 = new RString("200904");
@@ -90,13 +99,41 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             List<ShoriDateKanri> 処理日付管理情報, RString 処理名, RString 報告開始年月, RString 報告終了年月) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RStringBuilder builder = new RStringBuilder();
-        builder.append(メッセージ内容).append(処理名).append(new RString("<br>"))
-                .append(報告開始年月).append(new RString(":")).append(報告終了年月);
-        if (処理日付管理情報 == null || 処理日付管理情報.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(DbuErrorMessages.月報全て未処理, builder.toString())));
+        builder.append(メッセージ内容).append(処理名).append(new RString("<br>"));
+        int year = Integer.parseInt(報告開始年月.substring(INT_ZERO, INT_YOU).toString());
+        List<RString> ym = new ArrayList();
+        if (Integer.parseInt(報告開始年月.toString()) < Integer.parseInt(報告終了年月.toString())) {
+            for (int i = Integer.parseInt(報告開始年月.toString()); i <= Integer.parseInt(報告終了年月.toString()); i++) {
+                if (i == year * INT_HYAKU + INT_JUSAN) {
+                    i = (year + INT_ITTI) * INT_HYAKU + INT_ITTI;
+                }
+                ym.add(new RString(i));
+            }
+            for (RString 年日付 : ym) {
+                boolean flag = false;
+                for (ShoriDateKanri 処理日付管理 : 処理日付管理情報) {
+                    RString 処理日付 = 処理日付管理.get年度().seireki().getYear().concat(処理日付管理.get処理枝番().substring(INT_NI));
+                    if (年日付.equals(処理日付)) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    builder.append(toWareki(年日付)).append(new RString(":"));
+                }
+            }
+            if (処理日付管理情報 == null || 処理日付管理情報.isEmpty() || 処理日付管理情報.size() < ym.size()) {
+                validPairs.add(new ValidationMessageControlPair(
+                        new IdocheckMessages(DbuErrorMessages.月報全て未処理, builder.toString().substring(INT_ZERO, builder.lastIndexOf(":")))));
+            }
         }
         return validPairs;
+    }
+
+    private String toWareki(RString 処理日付) {
+        int year = Integer.parseInt(処理日付.toString().substring(INT_ZERO, INT_YOU));
+        RString month = new RString(処理日付.toString().substring(INT_YOU));
+        return new RString(year - INT_1988).insert(0, "平").concat("." + month).toString();
     }
 
     /**
@@ -116,6 +153,17 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
         return validPairs;
     }
 
+    /**
+     * DBUE00006 「出力対象の指定を確認してください。」
+     *
+     * @return validPairs
+     */
+    public ValidationMessageControlPairs check出力対象の指定を確認() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbuErrorMessages.出力対象未選択)));
+        return validPairs;
+    }
+
     private void doチェック(ValidationMessageControlPairs validPairs) {
         if (RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedKey())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.報告年度の必須入力チェック, div.getDdlHokokuNendo()));
@@ -127,12 +175,24 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.報告終了年月の必須入力チェック, div.getDdlShukeiToYM()));
         }
         if (!RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedKey()) && !RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedKey())) {
-            int 終了日 = Integer.parseInt(div.getDdlShukeiToYM().getSelectedKey().toString());
-            int 開始日 = Integer.parseInt(div.getDdlShukeiFromYM().getSelectedKey().toString());
+            int 終了日 = Integer.parseInt(get報告年月(div.getDdlShukeiToYM()).toString());
+            int 開始日 = Integer.parseInt(get報告年月(div.getDdlShukeiFromYM()).toString());
             if (終了日 < 開始日) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.報告開始年月と報告終了年月の範囲チェック, div.getDdlShukeiFromYM(), div.getDdlShukeiToYM()));
             }
         }
+    }
+
+    private RString get報告年月(DropDownList list) {
+        RString 報告年度 = new RString(div.getDdlHokokuNendo().getSelectedKey().toString());
+        RString 報告月 = new RString(list.getSelectedKey().toString());
+        int year = Integer.parseInt(報告年度.toString());
+        int month = Integer.parseInt(報告月.toString());
+        if (month < INT_YOU) {
+            year = year + INT_ITTI;
+            報告年度 = new RString(year);
+        }
+        return 報告年度.concat(報告月);
     }
 
     private void do保険給付決定状況_高額合算分(ValidationMessageControlPairs validPairs) {

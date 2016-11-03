@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJokyoDataPass;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -45,6 +47,7 @@ public class NinteiChosaJokyoHandler {
      * Divを初期化する
      */
     public void setLoad() {
+        RString 厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
         NinteiChosaJokyoDataPass konkaiDataPass = DataPassingConverter.deserialize(div.getHdnSerializedBusiness_Konkai(),
                 NinteiChosaJokyoDataPass.class);
         RString displayModeKey = div.getHdnDisplayModeKey();
@@ -59,41 +62,41 @@ public class NinteiChosaJokyoHandler {
             keyValueList.add(new KeyValueDataSource(chosaItaku.getコード(), chosaItaku.get名称()));
         }
         div.getDdlNinteiChosaItakusakiKubun().setDataSource(keyValueList);
-        if (konkaiDataPass != null) {
-            List<KeyValueDataSource> yokaigodoList = new ArrayList<>();
-            if (konkaiDataPass.get厚労省IF識別コード() != null && !konkaiDataPass.get厚労省IF識別コード().isEmpty()) {
-                switch (KoroshoIfShikibetsuCode.toValue(konkaiDataPass.get厚労省IF識別コード().value())) {
-                    case 認定ｿﾌﾄ2009:
-                    case 認定ｿﾌﾄ2009_SP3:
-                        for (YokaigoJotaiKubun09 yokaigoJotaiKubun09 : YokaigoJotaiKubun09.values()) {
-                            yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun09.getコード(),
-                                    yokaigoJotaiKubun09.get名称()));
-                        }
-                        break;
-                    case 認定ｿﾌﾄ2002:
-                        for (YokaigoJotaiKubun02 yokaigoJotaiKubun02 : YokaigoJotaiKubun02.values()) {
-                            yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun02.getコード(),
-                                    yokaigoJotaiKubun02.get名称()));
-                        }
-                        break;
-                    case 認定ｿﾌﾄ2006_新要介護認定適用区分が未適用:
-                        for (YokaigoJotaiKubun06 yokaigoJotaiKubun06 : YokaigoJotaiKubun06.values()) {
-                            yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun06.getコード(),
-                                    yokaigoJotaiKubun06.get名称()));
-                        }
-                        break;
-                    case 認定ｿﾌﾄ99:
-                        for (YokaigoJotaiKubun99 yokaigoJotaiKubun99 : YokaigoJotaiKubun99.values()) {
-                            yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun99.getコード(),
-                                    yokaigoJotaiKubun99.get名称()));
-                        }
-                        break;
-                    default:
-                }
-                div.getDdlYokaigodo().setDataSource(yokaigodoList);
-                div.getDdlNinchishoKasangoYokaigodo().setDataSource(yokaigodoList);
-                div.getDdlNijiHanteiKekka().setDataSource(yokaigodoList);
+        List<KeyValueDataSource> yokaigodoList = new ArrayList<>();
+        if (!厚労省IF識別コード.isEmpty() && 厚労省IF識別コード != null) {
+            switch (KoroshoIfShikibetsuCode.toValue(厚労省IF識別コード)) {
+                case 認定ｿﾌﾄ2009:
+                case 認定ｿﾌﾄ2009_SP3:
+                    for (YokaigoJotaiKubun09 yokaigoJotaiKubun09 : YokaigoJotaiKubun09.values()) {
+                        yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun09.getコード(),
+                                yokaigoJotaiKubun09.get名称()));
+                    }
+                    break;
+                case 認定ｿﾌﾄ2002:
+                    for (YokaigoJotaiKubun02 yokaigoJotaiKubun02 : YokaigoJotaiKubun02.values()) {
+                        yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun02.getコード(),
+                                yokaigoJotaiKubun02.get名称()));
+                    }
+                    break;
+                case 認定ｿﾌﾄ2006_新要介護認定適用区分が未適用:
+                    for (YokaigoJotaiKubun06 yokaigoJotaiKubun06 : YokaigoJotaiKubun06.values()) {
+                        yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun06.getコード(),
+                                yokaigoJotaiKubun06.get名称()));
+                    }
+                    break;
+                case 認定ｿﾌﾄ99:
+                    for (YokaigoJotaiKubun99 yokaigoJotaiKubun99 : YokaigoJotaiKubun99.values()) {
+                        yokaigodoList.add(new KeyValueDataSource(yokaigoJotaiKubun99.getコード(),
+                                yokaigoJotaiKubun99.get名称()));
+                    }
+                    break;
+                default:
             }
+            div.getDdlYokaigodo().setDataSource(yokaigodoList);
+            div.getDdlNinchishoKasangoYokaigodo().setDataSource(yokaigodoList);
+            div.getDdlNijiHanteiKekka().setDataSource(yokaigodoList);
+        }
+        if (konkaiDataPass != null) {
             set画面項目(konkaiDataPass);
             div.setHdnInput(get画面項目());
         }
@@ -150,13 +153,19 @@ public class NinteiChosaJokyoHandler {
         this.クリア認定調査();
         this.クリア訪問調査();
         this.クリア主治医();
-        div.getDdlYokaigodo().setSelectedIndex(0);
+        if (!div.getDdlYokaigodo().getDataSource().isEmpty() && div.getDdlYokaigodo().getDataSource() != null) {
+            div.getDdlYokaigodo().setSelectedIndex(0);
+        }
         div.getTxtIchijiHanteiDate().clearValue();
-        div.getDdlNinchishoKasangoYokaigodo().setSelectedIndex(0);
+        if (!div.getDdlNinchishoKasangoYokaigodo().getDataSource().isEmpty() && div.getDdlNinchishoKasangoYokaigodo().getDataSource() != null) {
+            div.getDdlNinchishoKasangoYokaigodo().setSelectedIndex(0);
+        }
         div.getTxtShinsakaiShiryoSakuseiDate().clearValue();
         div.getTxtShinsakaiKaisaiYoteiDate().clearValue();
         div.getTxtNijiHanteiDate().clearValue();
-        div.getDdlNijiHanteiKekka().setSelectedIndex(0);
+        if (!div.getDdlNijiHanteiKekka().getDataSource().isEmpty() && div.getDdlNijiHanteiKekka().getDataSource() != null) {
+            div.getDdlNijiHanteiKekka().setSelectedIndex(0);
+        }
         div.getTxtNijiHanteiYukoKikan().clearValue();
         div.getTxtNinteiYukoKikanFrom().clearValue();
         div.getTxtNinteiYukoKikanTo().clearValue();
@@ -256,16 +265,25 @@ public class NinteiChosaJokyoHandler {
         konkaiDataPass.set認定審査会予定年月日(div.getTxtShinsakaiKaisaiYoteiDate().getValue());
         konkaiDataPass.set二次判定年月日(div.getTxtNijiHanteiDate().getValue());
         konkaiDataPass.set二次判定要介護状態区分コード(new Code(div.getDdlNijiHanteiKekka().getSelectedKey()));
-        konkaiDataPass.set二次判定認定有効期間(Integer.parseInt(div.getTxtNijiHanteiYukoKikan().getValue().toString()));
+        if (div.getTxtNijiHanteiYukoKikan().getValue().isEmpty()) {
+            konkaiDataPass.set二次判定認定有効期間(0);
+        } else {
+            konkaiDataPass.set二次判定認定有効期間(Integer.parseInt(div.getTxtNijiHanteiYukoKikan().getValue().toString()));
+        }
         konkaiDataPass.set二次判定認定有効開始年月日(div.getTxtNinteiYukoKikanFrom().getValue());
         konkaiDataPass.set二次判定認定有効終了年月日(div.getTxtNinteiYukoKikanTo().getValue());
         konkaiDataPass.set延期通知発行年月日(div.getTxtEnkiTsuchiHakkoDay().getValue());
-        konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
+        if (div.getTxtEnkiTsuchiHakkoCount().getValue() != null) {
+            konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
+        }
         NinteiChosaJokyoDataPass dataPass = DataPassingConverter.deserialize(div.getHdnSerializedBusiness_Konkai(),
                 NinteiChosaJokyoDataPass.class);
-        konkaiDataPass.set市町村コード(dataPass.get市町村コード());
-        konkaiDataPass.set厚労省IF識別コード(dataPass.get厚労省IF識別コード());
-        konkaiDataPass.set申請書管理番号(dataPass.get申請書管理番号());
+        if (dataPass != null) {
+            konkaiDataPass.set市町村コード(dataPass.get市町村コード());
+            konkaiDataPass.set厚労省IF識別コード(dataPass.get厚労省IF識別コード());
+            konkaiDataPass.set申請書管理番号(dataPass.get申請書管理番号());
+        }
+
         div.setHdnSerializedBusiness_Konkai(DataPassingConverter.serialize(konkaiDataPass));
     }
 

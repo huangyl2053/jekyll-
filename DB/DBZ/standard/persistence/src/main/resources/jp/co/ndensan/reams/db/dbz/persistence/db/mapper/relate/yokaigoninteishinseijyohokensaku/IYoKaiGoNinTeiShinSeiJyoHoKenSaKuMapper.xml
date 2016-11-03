@@ -408,6 +408,7 @@
      <include refid="受給_一次判定" />
      <include refid="受給_前回情報" />
      <include refid="受給_完了情報" />
+     LIMIT (#{limitCount})
  </select>
  <select id="get介護認定申請情報認定" resultMap="ResultMap_DbT5101NinteiShinseiJohoEntity" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigonintei.YouKaiGoNinTeiShinNiTeiParameter"   fetchSize="500">

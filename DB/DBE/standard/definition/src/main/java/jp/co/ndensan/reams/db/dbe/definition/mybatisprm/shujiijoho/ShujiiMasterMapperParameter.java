@@ -35,6 +35,7 @@ public final class ShujiiMasterMapperParameter {
     private final AtenaKanaMeisho 主治医カナ氏名;
     private final RString 主治医カナ氏名キー;
     private final Decimal saidaiHyojiKensu;
+    private final RString 市町村識別ID;
 
     private final boolean uses市町村コード;
     private final boolean uses主治医医療機関コードFrom;
@@ -62,10 +63,12 @@ public final class ShujiiMasterMapperParameter {
     private final boolean uses2主治医カナ氏名;
     private final boolean uses3主治医カナ氏名;
     private final boolean usesSaidaiHyojiKensu;
+    private final boolean 市町村識別ID利用Flag;
     private static final RString KEY_0 = new RString("0");
     private static final RString KEY_1 = new RString("1");
     private static final RString KEY_2 = new RString("2");
     private static final RString KEY_3 = new RString("3");
+    private static final RString 構成市町村マスタ市町村コード重複 = new RString("1");
 
     private ShujiiMasterMapperParameter(
             LasdecCode 市町村コード,
@@ -108,7 +111,9 @@ public final class ShujiiMasterMapperParameter {
             boolean uses1主治医カナ氏名,
             boolean uses2主治医カナ氏名,
             boolean uses3主治医カナ氏名,
-            boolean usesSaidaiHyojiKensu
+            boolean usesSaidaiHyojiKensu,
+            RString 市町村識別ID,
+            boolean 市町村識別ID利用Flag
     ) {
         this.市町村コード = 市町村コード;
         this.状況フラグ = 状況フラグ;
@@ -151,6 +156,8 @@ public final class ShujiiMasterMapperParameter {
         this.uses2主治医カナ氏名 = uses2主治医カナ氏名;
         this.uses3主治医カナ氏名 = uses3主治医カナ氏名;
         this.usesSaidaiHyojiKensu = usesSaidaiHyojiKensu;
+        this.市町村識別ID = 市町村識別ID;
+        this.市町村識別ID利用Flag = 市町村識別ID利用Flag;
     }
 
     /**
@@ -171,6 +178,8 @@ public final class ShujiiMasterMapperParameter {
      * @param 主治医カナ氏名 主治医カナ氏名
      * @param 最大表示件数 最大表示件数
      * @param 主治医カナ氏名キー 主治医カナ氏名キー
+     * @param 市町村識別ID 市町村識別ID
+     * @param 構成市町村マスタ市町村コード重複種別 構成市町村マスタ市町村コード重複種別
      * @return 主治医マスタ検索パラメータ
      */
     public static ShujiiMasterMapperParameter createSelectByKeyParam(
@@ -188,7 +197,9 @@ public final class ShujiiMasterMapperParameter {
             RString 主治医氏名キー,
             AtenaKanaMeisho 主治医カナ氏名,
             RString 主治医カナ氏名キー,
-            Decimal 最大表示件数
+            Decimal 最大表示件数,
+            RString 市町村識別ID,
+            RString 構成市町村マスタ市町村コード重複種別
     ) {
         return new ShujiiMasterMapperParameter(市町村コード,
                 状況フラグ,
@@ -230,7 +241,9 @@ public final class ShujiiMasterMapperParameter {
                 KEY_1.equals(主治医カナ氏名キー),
                 KEY_2.equals(主治医カナ氏名キー),
                 KEY_3.equals(主治医カナ氏名キー),
-                最大表示件数 != null
+                最大表示件数 != null,
+                市町村識別ID,
+                構成市町村マスタ市町村コード重複.equals(構成市町村マスタ市町村コード重複種別)
         );
     }
 }

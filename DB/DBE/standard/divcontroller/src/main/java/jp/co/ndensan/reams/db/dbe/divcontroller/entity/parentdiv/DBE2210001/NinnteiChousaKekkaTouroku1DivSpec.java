@@ -48,7 +48,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    return !div.getCcdChosaJisshishaJoho().getDdlShozokuKikan().getSelectedKey().isNullOrEmpty();
+                    return !div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText().isNullOrEmpty();
                 }
             },
     記入者の非空チェック {
@@ -60,7 +60,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    return !div.getCcdChosaJisshishaJoho().getDdlKinyusha().getSelectedKey().isNullOrEmpty();
+                    return !div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText().isNullOrEmpty();
                 }
             },
     第1群の非空チェック {

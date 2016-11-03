@@ -80,6 +80,7 @@ public class YokaigoNinteiTaskListHandler {
     private static final RString 二次判定モード = new RString("二次判定モード");
     private static final RString 月例処理モード = new RString("月例処理モード");
     private static final RString 審査受付モード = new RString("審査受付モード");
+    private static final RString ヶ月 = new RString("ヶ月");
     private static final Code 認定ｿﾌﾄ99 = new Code(new RString("99A"));
     private static final Code 認定ｿﾌﾄ2002 = new Code(new RString("02A"));
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
@@ -347,7 +348,11 @@ public class YokaigoNinteiTaskListHandler {
                 ShinSaKaiBusiness 前審査受付Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前審査受付(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
-                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前審査受付Model.get要介護認定完了情報Lsit()));
+                if (前審査受付Model.get要介護認定完了情報Lsit() == null) {
+                    ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+                } else {
+                    ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前審査受付Model.get要介護認定完了情報Lsit()));
+                }
             } else {
                 ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
             }
@@ -1026,9 +1031,9 @@ public class YokaigoNinteiTaskListHandler {
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
             row.setShinseiKubunHorei(business.get認定申請区分法令コード() == null
                     ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード().getKey()).get名称());
-            if (business.get二次判定年月日() != null && !business.get二次判定年月日().isEmpty()) {
+            if (business.get認定審査会完了年月日() != null && !business.get認定審査会完了年月日().isEmpty()) {
                 completeCount++;
-                row.getNijihanteiKanryoDay().setValue(new RDate(business.get二次判定年月日().toString()));
+                row.getNijihanteiKanryoDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
             }
             if (business.get二次判定結果入力年月日() != null && !business.get二次判定結果入力年月日().isEmpty()) {
 
@@ -1037,7 +1042,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setNyuryokuHoho(business.get二次判定結果入力方法() == null ? RString.EMPTY
                     : NijiHanteiKekkaInputHoho.toValue(business.get二次判定結果入力方法().getKey()).get名称());
             row.setNijihanteiKekka(二次判定結果の名称を取得する(business.get厚労省IF識別コード(), business.get二次判定要介護状態区分コード()));
-            row.setNijihanteiYukoKikan(new RString(String.valueOf(business.get二次判定認定有効期間())));
+            row.setNijihanteiYukoKikan(new RString(String.valueOf(business.get二次判定認定有効期間()) + ヶ月));
             if (business.get介護認定審査会開催年月日() != null && !business.get介護認定審査会開催年月日().isEmpty()) {
                 row.getNijihanteiShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催年月日().toString()));
             }

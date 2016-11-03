@@ -4,7 +4,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshi
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /*
  * このコードはツールによって生成されました。
@@ -26,6 +28,18 @@ public interface IChosaJisshishaJohoDiv extends ICommonChildDivBaseProperties {
      */
     public void setMode_State(ChosaJisshishaJohoDiv.State value);
 
+    /*
+     * gettxtShinseiDate
+     * @return txtShinseiDate
+     */
+    public TextBoxFlexibleDate getTxtNinteiShinseiDate();
+
+    /*
+     * settxtShinseiDate
+     * @param txtShinseiDate txtShinseiDate
+     */
+    public void setTxtNinteiShinseiDate(TextBoxFlexibleDate txtNinteiShinseiDate);
+    
     /*
      * gettxtChosaJisshiDate
      * @return txtChosaJisshiDate
@@ -61,31 +75,55 @@ public interface IChosaJisshishaJohoDiv extends ICommonChildDivBaseProperties {
      * @param txtJisshiBashoMeisho txtJisshiBashoMeisho
      */
     public void setTxtJisshiBashoMeisho(TextBox txtJisshiBashoMeisho);
-
+    
     /*
-     * getddlShozokuKikan
-     * @return ddlShozokuKikan
+     * gettxtShozokuKikanCode
+     * @return txtShozokuKikanCode
      */
-    public DropDownList getDdlShozokuKikan();
-
+    public TextBoxCode getTxtShozokuKikanCode();
+    
     /*
-     * setddlShozokuKikan
-     * @param ddlShozokuKikan ddlShozokuKikan
+     * settxtShozokuKikanCode
+     * @param txtShozokuKikanCode txtShozokuKikanCode
      */
-    public void setDdlShozokuKikan(DropDownList ddlShozokuKikan);
-
+    public void setTxtShozokuKikanCode(TextBoxCode txtShozokuKikanCode);
+    
     /*
-     * getddlKinyusha
-     * @return ddlKinyusha
+     * gettxtShozokuKikanName
+     * @return txtShozokuKikanName
      */
-    public DropDownList getDdlKinyusha();
-
+    public TextBox getTxtShozokuKikanName();
+    
     /*
-     * setddlKinyusha
-     * @param ddlKinyusha ddlKinyusha
+     * settxtShozokuKikanName
+     * @param txtShozokuKikanName txtShozokuKikanName
      */
-    public void setDdlKinyusha(DropDownList ddlKinyusha);
-
+    public void setTxtShozokuKikanName(TextBox txtShozokuKikanName);
+    
+    /*
+     * gettxtKinyushaCode
+     * @return txtKinyushaCode
+     */
+    public TextBoxCode getTxtKinyushaCode();
+    
+    /*
+     * settxtKinyushaCode
+     * @param txtKinyushaCode txtKinyushaCode
+     */
+    public void setTxtKinyushaCode(TextBoxCode txtKinyushaCode);
+    
+    /*
+     * gettxtKinyushaName
+     * @return txtKinyushaName
+     */
+    public TextBox getTxtKinyushaName();
+    
+    /*
+     * settxtKinyushaName
+     * @param txtKinyushaName txtKinyushaName
+     */
+    public void setTxtKinyushaName(TextBox txtKinyushaName);
+    
     /*
      * gettxtChosaKubun
      * @return txtChosaKubun
@@ -97,5 +135,5 @@ public interface IChosaJisshishaJohoDiv extends ICommonChildDivBaseProperties {
      * @param txtChosaKubun txtChosaKubun
      */
     public void setTxtChosaKubun(TextBox txtChosaKubun);
-
+    
 }

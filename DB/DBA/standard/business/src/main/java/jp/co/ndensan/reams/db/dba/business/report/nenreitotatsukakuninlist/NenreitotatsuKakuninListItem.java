@@ -31,6 +31,8 @@ public class NenreitotatsuKakuninListItem {
     private final RString kaipage3;
     private final RString kaipage4;
     private final RString kaipage5;
+    private final RString chushutsukikanF;
+    private final RString chushutsukikanT;
     private final RString kaishiTitle;
     private final RString shuryoTitle;
     private final RString kubunTitle;
@@ -88,6 +90,8 @@ public class NenreitotatsuKakuninListItem {
      * @param kaipage3 改頁３
      * @param kaipage4 改頁４
      * @param kaipage5 改頁５
+     * @param chushutsukikanF 抽出期間From
+     * @param chushutsukikanT 抽出期間To
      * @param kaishiTitle 開始タイトル
      * @param shuryoTitle 終了タイトル
      * @param kubunTitle 区分タイトル
@@ -144,6 +148,8 @@ public class NenreitotatsuKakuninListItem {
             RString kaipage3,
             RString kaipage4,
             RString kaipage5,
+            RString chushutsukikanF,
+            RString chushutsukikanT,
             RString kaishiTitle,
             RString shuryoTitle,
             RString kubunTitle,
@@ -199,6 +205,8 @@ public class NenreitotatsuKakuninListItem {
         this.kaipage3 = kaipage3;
         this.kaipage4 = kaipage4;
         this.kaipage5 = kaipage5;
+        this.chushutsukikanF = chushutsukikanF;
+        this.chushutsukikanT = chushutsukikanT;
         this.kaishiTitle = kaishiTitle;
         this.shuryoTitle = shuryoTitle;
         this.kubunTitle = kubunTitle;

@@ -33,12 +33,14 @@ import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishoshaIdentifie
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -82,46 +84,51 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
      * @return ResponseData<ShikakuHenkouIdouDiv>
      */
     public ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv> onLoad(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 == null) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
         }
         DonyuKeitaiCode 導入形態コード = DonyuKeitaiCode.toValue(市町村セキュリティ情報.get導入形態コード().value());
         if (導入形態コード.is広域()) {
-            div.getTplTennyu().setVisible(false);
-            div.getTplTenshutsu().setVisible(false);
             div.getTabTennyuTenshutsuHoryuTaishosha().setSelectedItem(div.getTplKoiki());
         } else {
             div.getTplKoiki().setVisible(false);
-
         }
 //<<<<<<< HEAD
 //        save転入転出保留対象者情報ToViewState();
         List<TenshutsuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/> 転出保留対象者情報 = manager.getTenshutsuHoryuTaishoshas/*getTenshutsuHoryuTaishoshaList*/().records();
         List<TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/> 転入保留対象者情報 = manager.getTennyuHoryuTaishoshas/*getTennyuHoryuTaishoshaList*/().records();
         List<TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/> 広域保留対象者情報 = manager.getKoikiHoryuTaishoshas/*getKoikiHoryuTaishoshaList*/().records();
-        boolean 比較結果 = false;
-        for (TenshutsuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転出対象者情報 : 転出保留対象者情報) {
-            if ((転出対象者情報.get識別コード() != null) && (!転出対象者情報.get識別コード().isEmpty())
-                    && 転出対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
-                比較結果 = true;
-            }
-        }
-        for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転入対象者情報 : 転入保留対象者情報) {
-            if ((転入対象者情報.get識別コード() != null) && (!転入対象者情報.get識別コード().isEmpty())
-                    && 転入対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
-                比較結果 = true;
-            }
-        }
-        for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 広域対象者情報 : 広域保留対象者情報) {
-            if ((広域対象者情報.get識別コード() != null) && (!広域対象者情報.get識別コード().isEmpty())
-                    && 広域対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
-                比較結果 = true;
-            }
-        }
-        if (!比較結果) {
-            return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
 
+        RString 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, RString.class);
+        if (!RString.isNullOrEmpty(識別コード)) {
+            boolean 比較結果 = false;
+            for (TenshutsuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転出対象者情報 : 転出保留対象者情報) {
+                if ((転出対象者情報.get識別コード() != null) && (!転出対象者情報.get識別コード().isEmpty())
+                        && 転出対象者情報.get識別コード().getColumnValue().equals(識別コード)) {
+                    比較結果 = true;
+                }
+            }
+            for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転入対象者情報 : 転入保留対象者情報) {
+                if ((転入対象者情報.get識別コード() != null) && (!転入対象者情報.get識別コード().isEmpty())
+                        && 転入対象者情報.get識別コード().getColumnValue().equals(識別コード)) {
+                    比較結果 = true;
+                }
+            }
+            for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 広域対象者情報 : 広域保留対象者情報) {
+                if ((広域対象者情報.get識別コード() != null) && (!広域対象者情報.get識別コード().isEmpty())
+                        && 広域対象者情報.get識別コード().getColumnValue().equals(識別コード)) {
+                    比較結果 = true;
+                }
+            }
+            if (!比較結果) {
+                return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
+
+            }
         }
 
 //=======
@@ -132,9 +139,49 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
 //        save広域保留対象者情報ToViewState(広域保留対象者情報);
 //>>>>>>> origin/sync
         TennyuTenshutsuHoryuTaishoshaIchiranHandler handler = getHandler(div);
+        handler.load_転出情報(転出保留対象者情報);
         handler.load_転入情報(転入保留対象者情報);
         handler.load_広域情報(広域保留対象者情報);
-        return ResponseData.of(div).respond();
+
+        return getInfomationMessage(div, 転出保留対象者情報, 転入保留対象者情報, 広域保留対象者情報, 導入形態コード);
+    }
+
+    private ResponseData getInfomationMessage(TennyuTenshutsuHoryuTaishoshaIchiranDiv div, List<TenshutsuHoryuTaisho> 転出保留対象者情報,
+            List<TennyuHoryuTaisho> 転入保留対象者情報, List<TennyuHoryuTaisho> 広域保留対象者情報, DonyuKeitaiCode 導入形態コード) {
+        int 転出保留対象者数 = 転出保留対象者情報.size();
+        int 転入保留対象者数 = 転入保留対象者情報.size();
+        int 広域保留対象者数 = 広域保留対象者情報.size();
+
+        RStringBuilder builder = new RStringBuilder("");
+
+        if (転出保留対象者数 == 0) {
+            builder.append("転出保留対象者");
+            div.getTabTennyuTenshutsuHoryuTaishosha().getTplTenshutsu().getBtnIkkatsuSoshitsu().setDisabled(true);
+            div.getTabTennyuTenshutsuHoryuTaishosha().getTplTenshutsu().getDgTenshutsu().setDisabled(true);
+        }
+        if (転入保留対象者数 == 0) {
+            set区切り(builder);
+            builder.append("転入保留対象者");
+            div.getTabTennyuTenshutsuHoryuTaishosha().getTplTennyu().getDgTennyu().setDisabled(true);
+        }
+        if (導入形態コード.is広域() && 広域保留対象者数 == 0) {
+            set区切り(builder);
+            builder.append("広域保留対象者");
+            div.getTabTennyuTenshutsuHoryuTaishosha().getTplKoiki().getDgKoiki().setDisabled(true);
+        }
+
+        if (RString.isNullOrEmpty(builder.toRString())) {
+            return ResponseData.of(div).respond();
+        }
+
+        builder.append("の");
+        return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし_データ内容.getMessage().replace(builder.toString())).respond();
+    }
+
+    private void set区切り(RStringBuilder builder) {
+        if (!RString.isNullOrEmpty(builder.toRString())) {
+            builder.append("、");
+        }
     }
 
     /**

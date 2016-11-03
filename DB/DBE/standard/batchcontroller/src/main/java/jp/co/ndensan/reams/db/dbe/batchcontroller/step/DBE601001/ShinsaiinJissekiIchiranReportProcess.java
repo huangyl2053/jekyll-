@@ -89,7 +89,7 @@ public class ShinsaiinJissekiIchiranReportProcess extends BatchProcessBase<Shins
         RStringBuilder 審査会開催日FROM_SB = new RStringBuilder("【審査会開催日（From）】");
         審査会開催日FROM_SB.append(dateFormat(paramter.get審査会開催日FROM()));
         RStringBuilder 審査会開催日To_SB = new RStringBuilder("【審査会開催日（To）】");
-        審査会開催日To_SB.append(paramter.get審査会開催日TO());
+        審査会開催日To_SB.append(dateFormat(paramter.get審査会開催日TO()));
         出力条件.add(審査会開催日FROM_SB.toRString());
         出力条件.add(審査会開催日To_SB.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(

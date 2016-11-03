@@ -10,12 +10,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchiGojiHa
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchiGojiHanteiKekkaJoho.IchiGojiHanteiKekkaJohoHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoSearch;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 共有子Div 一五次判定結果情報のイベントを定義したDivControllerです。
@@ -33,7 +35,7 @@ public class IchiGojiHanteiKekkaJoho {
      * @return ResponseData<IchiGojiHanteiKekkaJohoDiv>
      */
     public ResponseData<IchiGojiHanteiKekkaJohoDiv> onLoad(IchiGojiHanteiKekkaJohoDiv div) {
-        RString 申請書管理番号 = div.getHdnShinseishoKanriNo();
+        RString 申請書管理番号 =  ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);;
         RString モード = div.getHdnMode();
         IchiGojiHanteiKekkaJohoMapperParameter parameter = IchiGojiHanteiKekkaJohoMapperParameter.createParamter(申請書管理番号);
         getHandler(div).onLoad(IchiGojiHanteiKekkaJohoFinder.createInstance().select一五次判定結果情報(parameter, モード));

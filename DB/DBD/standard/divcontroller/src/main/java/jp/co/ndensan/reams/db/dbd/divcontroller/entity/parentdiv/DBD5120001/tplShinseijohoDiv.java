@@ -1,5 +1,4 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001;
-
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -22,13 +21,12 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryo
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 
 /**
- * tplShinseijoho のクラスファイル
- *
+ * tplShinseijoho のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tplShinseijohoDiv extends TabPanel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -45,10 +43,10 @@ public class tplShinseijohoDiv extends TabPanel {
     private CheckBoxList chkJohoTeikyoDoi;
     @JsonProperty("ccdKaigoNinteiShinseiKihon")
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
-    @JsonProperty("ccdNinteiInput")
-    private NinteiInputDiv ccdNinteiInput;
     @JsonProperty("ccdShinseiTodokedesha")
     private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
+    @JsonProperty("ccdNinteiInput")
+    private NinteiInputDiv ccdNinteiInput;
     @JsonProperty("ccdShinseiSonotaJohoInput")
     private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
@@ -60,7 +58,7 @@ public class tplShinseijohoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
- /*
+    /*
      * getShujiiAndShujiiIryoKikan
      * @return ShujiiAndShujiiIryoKikan
      */
@@ -142,21 +140,21 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdNinteiInput
-     * @return ccdNinteiInput
-     */
-    @JsonProperty("ccdNinteiInput")
-    public INinteiInputDiv getCcdNinteiInput() {
-        return ccdNinteiInput;
-    }
-
-    /*
      * getccdShinseiTodokedesha
      * @return ccdShinseiTodokedesha
      */
     @JsonProperty("ccdShinseiTodokedesha")
     public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
         return ccdShinseiTodokedesha;
+    }
+
+    /*
+     * getccdNinteiInput
+     * @return ccdNinteiInput
+     */
+    @JsonProperty("ccdNinteiInput")
+    public INinteiInputDiv getCcdNinteiInput() {
+        return ccdNinteiInput;
     }
 
     /*

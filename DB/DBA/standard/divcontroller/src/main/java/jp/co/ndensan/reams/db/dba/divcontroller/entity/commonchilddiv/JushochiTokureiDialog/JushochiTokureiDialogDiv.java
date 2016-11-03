@@ -36,6 +36,8 @@ public class JushochiTokureiDialogDiv extends Panel implements IJushochiTokureiD
     private RString hihoData;
     @JsonProperty("shutokuDate")
     private RString shutokuDate;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -140,6 +142,24 @@ public class JushochiTokureiDialogDiv extends Panel implements IJushochiTokureiD
     @JsonProperty("shutokuDate")
     public void setShutokuDate(RString shutokuDate) {
         this.shutokuDate = shutokuDate;
+    }
+
+    /*
+     * gethihokenshaNo
+     * @return hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /*
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     // </editor-fold>

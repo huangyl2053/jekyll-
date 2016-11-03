@@ -63,6 +63,25 @@ public class NinteiShinseiTorokuUketsukeManager {
             return null;
         }
     }
+    
+    /**
+     * 
+     * @param param
+     * @return 
+     */
+    @Transaction
+    public NinteiShinseiTorokuUketsukeBusiness get初期化情報_申請区分変更サービス変更修正(NinteiShinseiTorokuUketsukeParameter param) {
+
+        INinteiShinseiTorokuUketsukeMapper mapper = mapperProvider.create(INinteiShinseiTorokuUketsukeMapper.class);
+
+        NinteiShinseiTorokuUketsukeEntity resultEntity
+                = mapper.get初期化情報_申請区分変更サービス変更修正(param);
+        if (resultEntity != null) {
+            return new NinteiShinseiTorokuUketsukeBusiness(resultEntity);
+        } else {
+            return null;
+        }
+    }
 
     /**
      * 初期化情報情報の検索

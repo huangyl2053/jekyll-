@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YokaigoNinteiChosaTokusokujoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class YokaigoNinteiChosaTokusokujoDiv extends Panel {
      */
     @JsonProperty("txtOverChosaIraiDay")
     private TextBoxNum txtOverChosaIraiDay;
+    @JsonProperty("labOverChosaIraiDay")
+    private Label labOverChosaIraiDay;
     @JsonProperty("chkInsatsuzumiTaisho")
     private CheckBoxList chkInsatsuzumiTaisho;
     @JsonProperty("chkHakkoRireki")
@@ -34,7 +36,7 @@ public class YokaigoNinteiChosaTokusokujoDiv extends Panel {
     @JsonProperty("txtTokusokuMemo")
     private TextBoxMultiLine txtTokusokuMemo;
     @JsonProperty("txtHakkoDay")
-    private TextBoxFlexibleDate txtHakkoDay;
+    private TextBoxDate txtHakkoDay;
     @JsonProperty("ccdItakusakiAndChosain")
     private ChosaItakusakiAndChosainInputDiv ccdItakusakiAndChosain;
 
@@ -60,6 +62,24 @@ public class YokaigoNinteiChosaTokusokujoDiv extends Panel {
     @JsonProperty("txtOverChosaIraiDay")
     public void setTxtOverChosaIraiDay(TextBoxNum txtOverChosaIraiDay) {
         this.txtOverChosaIraiDay = txtOverChosaIraiDay;
+    }
+
+    /*
+     * getlabOverChosaIraiDay
+     * @return labOverChosaIraiDay
+     */
+    @JsonProperty("labOverChosaIraiDay")
+    public Label getLabOverChosaIraiDay() {
+        return labOverChosaIraiDay;
+    }
+
+    /*
+     * setlabOverChosaIraiDay
+     * @param labOverChosaIraiDay labOverChosaIraiDay
+     */
+    @JsonProperty("labOverChosaIraiDay")
+    public void setLabOverChosaIraiDay(Label labOverChosaIraiDay) {
+        this.labOverChosaIraiDay = labOverChosaIraiDay;
     }
 
     /*
@@ -139,7 +159,7 @@ public class YokaigoNinteiChosaTokusokujoDiv extends Panel {
      * @return txtHakkoDay
      */
     @JsonProperty("txtHakkoDay")
-    public TextBoxFlexibleDate getTxtHakkoDay() {
+    public TextBoxDate getTxtHakkoDay() {
         return txtHakkoDay;
     }
 
@@ -148,7 +168,7 @@ public class YokaigoNinteiChosaTokusokujoDiv extends Panel {
      * @param txtHakkoDay txtHakkoDay
      */
     @JsonProperty("txtHakkoDay")
-    public void setTxtHakkoDay(TextBoxFlexibleDate txtHakkoDay) {
+    public void setTxtHakkoDay(TextBoxDate txtHakkoDay) {
         this.txtHakkoDay = txtHakkoDay;
     }
 

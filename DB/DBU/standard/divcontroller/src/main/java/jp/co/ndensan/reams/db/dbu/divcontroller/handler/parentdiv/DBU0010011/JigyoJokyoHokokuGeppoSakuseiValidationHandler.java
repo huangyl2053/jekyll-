@@ -29,13 +29,13 @@ public class JigyoJokyoHokokuGeppoSakuseiValidationHandler {
 
     /**
      * DBZE00002「必須項目を入力してください。:%1」
-     *
+     * @param 項目名 メッセージに付加したい項目名
      * @return check必須入力項目
      */
-    public ValidationMessageControlPairs check必須入力項目() {
+    public ValidationMessageControlPairs check必須入力項目(RString 項目名) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(new JigyoJokyoHokokuGeppoSakuseiValidationHandler.CheckMessages(
-                UrErrorMessages.必須項目_追加メッセージあり, "報告年月")));
+                UrErrorMessages.必須項目_追加メッセージあり, 項目名.toString())));
         return validPairs;
     }
 
@@ -63,6 +63,18 @@ public class JigyoJokyoHokokuGeppoSakuseiValidationHandler {
         validPairs.add(new ValidationMessageControlPair(new JigyoJokyoHokokuGeppoSakuseiValidationHandler.CheckMessages(
                 DbuErrorMessages.開始日不正,
                 "平成12年4月")));
+        return validPairs;
+    }
+    
+    /**
+     * DBUE00007 「報告年月を確定してください。」
+     *
+     * @return validPairs
+     */
+    public ValidationMessageControlPairs check報告年月を確定() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new JigyoJokyoHokokuGeppoSakuseiValidationHandler.CheckMessages(
+                DbuErrorMessages.報告年月未確定)));
         return validPairs;
     }
 

@@ -40,6 +40,7 @@ public class DeletePanel {
     private static final RString KEY_その他資料 = new RString("4");
     private RString 確認メッセージ出力区分;
     private static final RString 確認メッセージ出力要 = new RString("1");
+    private static final RString KEY_マスキングを削除 = new RString("2");
     private static final RString イメージファイルが存在区分_存在しない = new RString("1");
     private static final RString イメージファイルが存在区分_原本とマスキングが両方存在 = new RString("2");
     private ReadOnlySharedFileEntryDescriptor descriptor;
@@ -93,6 +94,13 @@ public class DeletePanel {
                 updateOrDelete(div);
                 return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
             } else {
+
+                if (div.getRadDeleteTaisho().getSelectedKey().equals(KEY_マスキングを削除)) {
+                    SharedFile.deleteEntry(descriptor);
+                    updateOrDelete(div);
+                    return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
+                }
+
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
                         UrQuestionMessages.確認_汎用.getMessage().replace("原本を削除します").evaluate());
                 return ResponseData.of(div).addMessage(message).respond();

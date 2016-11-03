@@ -5,15 +5,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJiss
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJohoHandler;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * ChosaJisshishaJoho のクラスファイル 
@@ -21,25 +25,41 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBE-3000-100 dongyabin
  */
 public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtNinteiShinseiDate")
+    private TextBoxFlexibleDate txtNinteiShinseiDate;
+    @JsonProperty("txtChosaKubun")
+    private TextBox txtChosaKubun;
+    @JsonProperty("txtShozokuKikanCode")
+    private TextBoxCode txtShozokuKikanCode;
+    @JsonProperty("btnChosaItakusakiGuide")
+    private ButtonDialog btnChosaItakusakiGuide;
+    @JsonProperty("txtShozokuKikanName")
+    private TextBox txtShozokuKikanName;
     @JsonProperty("txtChosaJisshiDate")
     private TextBoxDate txtChosaJisshiDate;
     @JsonProperty("ddlChosaJisshiBasho")
     private DropDownList ddlChosaJisshiBasho;
     @JsonProperty("txtJisshiBashoMeisho")
     private TextBox txtJisshiBashoMeisho;
-    @JsonProperty("ddlShozokuKikan")
-    private DropDownList ddlShozokuKikan;
-    @JsonProperty("ddlKinyusha")
-    private DropDownList ddlKinyusha;
-    @JsonProperty("txtChosaKubun")
-    private TextBox txtChosaKubun;
+    @JsonProperty("txtKinyushaCode")
+    private TextBoxCode txtKinyushaCode;
+    @JsonProperty("btnChosainGuide")
+    private ButtonDialog btnChosainGuide;
+    @JsonProperty("txtKinyushaName")
+    private TextBox txtKinyushaName;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
+    @JsonProperty("hdnShichosonCode")
+    private RString hdnShichosonCode;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -47,6 +67,96 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtNinteiShinseiDate
+     * @return txtNinteiShinseiDate
+     */
+    @JsonProperty("txtNinteiShinseiDate")
+    public TextBoxFlexibleDate getTxtNinteiShinseiDate() {
+        return txtNinteiShinseiDate;
+    }
+
+    /*
+     * settxtNinteiShinseiDate
+     * @param txtNinteiShinseiDate txtNinteiShinseiDate
+     */
+    @JsonProperty("txtNinteiShinseiDate")
+    public void setTxtNinteiShinseiDate(TextBoxFlexibleDate txtNinteiShinseiDate) {
+        this.txtNinteiShinseiDate = txtNinteiShinseiDate;
+    }
+
+    /*
+     * gettxtChosaKubun
+     * @return txtChosaKubun
+     */
+    @JsonProperty("txtChosaKubun")
+    public TextBox getTxtChosaKubun() {
+        return txtChosaKubun;
+    }
+
+    /*
+     * settxtChosaKubun
+     * @param txtChosaKubun txtChosaKubun
+     */
+    @JsonProperty("txtChosaKubun")
+    public void setTxtChosaKubun(TextBox txtChosaKubun) {
+        this.txtChosaKubun = txtChosaKubun;
+    }
+
+    /*
+     * gettxtShozokuKikanCode
+     * @return txtShozokuKikanCode
+     */
+    @JsonProperty("txtShozokuKikanCode")
+    public TextBoxCode getTxtShozokuKikanCode() {
+        return txtShozokuKikanCode;
+    }
+
+    /*
+     * settxtShozokuKikanCode
+     * @param txtShozokuKikanCode txtShozokuKikanCode
+     */
+    @JsonProperty("txtShozokuKikanCode")
+    public void setTxtShozokuKikanCode(TextBoxCode txtShozokuKikanCode) {
+        this.txtShozokuKikanCode = txtShozokuKikanCode;
+    }
+
+    /*
+     * getbtnChosaItakusakiGuide
+     * @return btnChosaItakusakiGuide
+     */
+    @JsonProperty("btnChosaItakusakiGuide")
+    public ButtonDialog getBtnChosaItakusakiGuide() {
+        return btnChosaItakusakiGuide;
+    }
+
+    /*
+     * setbtnChosaItakusakiGuide
+     * @param btnChosaItakusakiGuide btnChosaItakusakiGuide
+     */
+    @JsonProperty("btnChosaItakusakiGuide")
+    public void setBtnChosaItakusakiGuide(ButtonDialog btnChosaItakusakiGuide) {
+        this.btnChosaItakusakiGuide = btnChosaItakusakiGuide;
+    }
+
+    /*
+     * gettxtShozokuKikanName
+     * @return txtShozokuKikanName
+     */
+    @JsonProperty("txtShozokuKikanName")
+    public TextBox getTxtShozokuKikanName() {
+        return txtShozokuKikanName;
+    }
+
+    /*
+     * settxtShozokuKikanName
+     * @param txtShozokuKikanName txtShozokuKikanName
+     */
+    @JsonProperty("txtShozokuKikanName")
+    public void setTxtShozokuKikanName(TextBox txtShozokuKikanName) {
+        this.txtShozokuKikanName = txtShozokuKikanName;
+    }
+
     /*
      * gettxtChosaJisshiDate
      * @return txtChosaJisshiDate
@@ -102,57 +212,111 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     }
 
     /*
-     * getddlShozokuKikan
-     * @return ddlShozokuKikan
+     * gettxtKinyushaCode
+     * @return txtKinyushaCode
      */
-    @JsonProperty("ddlShozokuKikan")
-    public DropDownList getDdlShozokuKikan() {
-        return ddlShozokuKikan;
+    @JsonProperty("txtKinyushaCode")
+    public TextBoxCode getTxtKinyushaCode() {
+        return txtKinyushaCode;
     }
 
     /*
-     * setddlShozokuKikan
-     * @param ddlShozokuKikan ddlShozokuKikan
+     * settxtKinyushaCode
+     * @param txtKinyushaCode txtKinyushaCode
      */
-    @JsonProperty("ddlShozokuKikan")
-    public void setDdlShozokuKikan(DropDownList ddlShozokuKikan) {
-        this.ddlShozokuKikan = ddlShozokuKikan;
+    @JsonProperty("txtKinyushaCode")
+    public void setTxtKinyushaCode(TextBoxCode txtKinyushaCode) {
+        this.txtKinyushaCode = txtKinyushaCode;
     }
 
     /*
-     * getddlKinyusha
-     * @return ddlKinyusha
+     * getbtnChosainGuide
+     * @return btnChosainGuide
      */
-    @JsonProperty("ddlKinyusha")
-    public DropDownList getDdlKinyusha() {
-        return ddlKinyusha;
+    @JsonProperty("btnChosainGuide")
+    public ButtonDialog getBtnChosainGuide() {
+        return btnChosainGuide;
     }
 
     /*
-     * setddlKinyusha
-     * @param ddlKinyusha ddlKinyusha
+     * setbtnChosainGuide
+     * @param btnChosainGuide btnChosainGuide
      */
-    @JsonProperty("ddlKinyusha")
-    public void setDdlKinyusha(DropDownList ddlKinyusha) {
-        this.ddlKinyusha = ddlKinyusha;
+    @JsonProperty("btnChosainGuide")
+    public void setBtnChosainGuide(ButtonDialog btnChosainGuide) {
+        this.btnChosainGuide = btnChosainGuide;
     }
 
     /*
-     * gettxtChosaKubun
-     * @return txtChosaKubun
+     * gettxtKinyushaName
+     * @return txtKinyushaName
      */
-    @JsonProperty("txtChosaKubun")
-    public TextBox getTxtChosaKubun() {
-        return txtChosaKubun;
+    @JsonProperty("txtKinyushaName")
+    public TextBox getTxtKinyushaName() {
+        return txtKinyushaName;
     }
 
     /*
-     * settxtChosaKubun
-     * @param txtChosaKubun txtChosaKubun
+     * settxtKinyushaName
+     * @param txtKinyushaName txtKinyushaName
      */
-    @JsonProperty("txtChosaKubun")
-    public void setTxtChosaKubun(TextBox txtChosaKubun) {
-        this.txtChosaKubun = txtChosaKubun;
+    @JsonProperty("txtKinyushaName")
+    public void setTxtKinyushaName(TextBox txtKinyushaName) {
+        this.txtKinyushaName = txtKinyushaName;
+    }
+
+    /*
+     * gethdnDataPass
+     * @return hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
+    }
+
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
+    }
+
+    /*
+     * gethdnShichosonCode
+     * @return hdnShichosonCode
+     */
+    @JsonProperty("hdnShichosonCode")
+    public RString getHdnShichosonCode() {
+        return hdnShichosonCode;
+    }
+
+    /*
+     * sethdnShichosonCode
+     * @param hdnShichosonCode hdnShichosonCode
+     */
+    @JsonProperty("hdnShichosonCode")
+    public void setHdnShichosonCode(RString hdnShichosonCode) {
+        this.hdnShichosonCode = hdnShichosonCode;
+    }
+
+    /*
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
+    }
+
+    /*
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
     /*
@@ -212,5 +376,5 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     
     private ChosaJisshishaJohoHandler getHandler(ChosaJisshishaJohoDiv div) {
         return new ChosaJisshishaJohoHandler(div);
-    }
+    }    
 }

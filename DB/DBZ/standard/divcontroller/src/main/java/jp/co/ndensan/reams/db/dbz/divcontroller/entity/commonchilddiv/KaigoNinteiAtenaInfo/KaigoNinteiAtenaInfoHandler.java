@@ -146,6 +146,7 @@ public class KaigoNinteiAtenaInfoHandler {
         div.getTxtTelNo().setDomain(business.get連絡先());
         div.getTxtGyoseiku().setValue(business.get行政区名());
         div.getTxtSetaiCode().setDomain(business.get世帯コード());
+        div.setHdnShimeiKana(business.get氏名カナ());
         setImgJuminShubetsu();
     }
 

@@ -330,6 +330,27 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                     return true;
                 }
             },
+    
+    減免減額_適用期間重複のチェックon確定 {
+                /**
+                 * 承認情報確認するボタン押下時、減免減額_適用期間重複のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not減免減額_適用期間重複です、false:減免減額_適用期間重複です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+                    for (dgShinseiList_Row row : rows) {
+                        if (div.getTxtTekiyoYMD().getValue().isBeforeOrEquals(row.getTxtYukoKigenYMD().getValue()) 
+                                && div.getTxtYukoKigenYMD().getValue().isAfterOrEquals(row.getTxtTekiyoYMD().getValue())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+    },
+    
     減免減額_確認番号が既に存在のチェック {
                 /**
                  * 減免減額_確認番号が既に存在のチェックです。

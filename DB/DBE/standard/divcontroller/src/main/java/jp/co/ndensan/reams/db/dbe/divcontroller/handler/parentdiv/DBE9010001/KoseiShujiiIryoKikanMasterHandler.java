@@ -171,7 +171,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
      *
      * @param eventJotai 状態
      */
-    public void setShujiiIryoKikanJohoToIchiran(RString eventJotai) {
+    public void setShujiiIryoKikanJohoToIchiran(RString eventJotai, boolean 状態) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
         if (!状態_追加.equals(eventJotai)) {
             row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
@@ -179,7 +179,11 @@ public class KoseiShujiiIryoKikanMasterHandler {
         setRow(row);
         int index = div.getShujiiIchiran().getDgShujiiIchiran().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {
-            row.setJotai(eventJotai);
+            if (状態) {
+                row.setJotai(eventJotai);
+            } else {
+                row.setJotai(RString.EMPTY);
+            }
             div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().add(row);
         } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getJotai())) {
             div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().remove(index);

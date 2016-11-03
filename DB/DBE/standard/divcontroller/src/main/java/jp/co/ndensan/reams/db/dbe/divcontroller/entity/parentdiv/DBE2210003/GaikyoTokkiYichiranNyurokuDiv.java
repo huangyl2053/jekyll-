@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,6 +31,10 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
      */
     @JsonProperty("ChosaTaisho")
     private ChosaTaishoDiv ChosaTaisho;
+    @JsonProperty("RenrakusakiKihon")
+    private RenrakusakiKihonDiv RenrakusakiKihon;
+    @JsonProperty("ChosaJisshisha")
+    private ChosaJisshishaDiv ChosaJisshisha;
     @JsonProperty("TokkiNyuryoku")
     private TokkiNyuryokuDiv TokkiNyuryoku;
 
@@ -59,6 +63,42 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     }
 
     /*
+     * getRenrakusakiKihon
+     * @return RenrakusakiKihon
+     */
+    @JsonProperty("RenrakusakiKihon")
+    public RenrakusakiKihonDiv getRenrakusakiKihon() {
+        return RenrakusakiKihon;
+    }
+
+    /*
+     * setRenrakusakiKihon
+     * @param RenrakusakiKihon RenrakusakiKihon
+     */
+    @JsonProperty("RenrakusakiKihon")
+    public void setRenrakusakiKihon(RenrakusakiKihonDiv RenrakusakiKihon) {
+        this.RenrakusakiKihon = RenrakusakiKihon;
+    }
+
+    /*
+     * getChosaJisshisha
+     * @return ChosaJisshisha
+     */
+    @JsonProperty("ChosaJisshisha")
+    public ChosaJisshishaDiv getChosaJisshisha() {
+        return ChosaJisshisha;
+    }
+
+    /*
+     * setChosaJisshisha
+     * @param ChosaJisshisha ChosaJisshisha
+     */
+    @JsonProperty("ChosaJisshisha")
+    public void setChosaJisshisha(ChosaJisshishaDiv ChosaJisshisha) {
+        this.ChosaJisshisha = ChosaJisshisha;
+    }
+
+    /*
      * getTokkiNyuryoku
      * @return TokkiNyuryoku
      */
@@ -80,28 +120,18 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public RenrakusakiKihonDiv getRenrakusakiKihon() {
-        return this.getChosaTaisho().getRenrakusakiKihon();
-    }
-
-    @JsonIgnore
-    public void  setRenrakusakiKihon(RenrakusakiKihonDiv RenrakusakiKihon) {
-        this.getChosaTaisho().setRenrakusakiKihon(RenrakusakiKihon);
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
     public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getChosaTaisho().getRenrakusakiKihon().getCcdNinteiShinseiRenrakusakiKihon();
+        return this.getRenrakusakiKihon().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore
     public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
-        return this.getChosaTaisho().getCcdChosaJisshishaJoho();
-    }
-
-    @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+        return this.getChosaJisshisha().getCcdChosaJisshishaJoho();
     }
 
     @JsonIgnore

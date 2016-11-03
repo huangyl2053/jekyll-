@@ -92,7 +92,7 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
                 .thenAdd(NoInputMessages.所属機関の必須入力).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.所属機関の必須入力,
-                div.getCcdChosaJisshishaJoho().getDdlShozokuKikan()).build().check(messages));
+                div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode()).build().check(messages));
         return pairs;
     }
 
@@ -110,7 +110,7 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
                 .thenAdd(NoInputMessages.記入者の必須入力).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.記入者の必須入力,
-                div.getCcdChosaJisshishaJoho().getDdlKinyusha()).build().check(messages));
+                div.getCcdChosaJisshishaJoho().getTxtKinyushaCode()).build().check(messages));
         return pairs;
     }
 

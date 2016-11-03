@@ -47,7 +47,7 @@
         <collection property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
     </resultMap>
 
-    <select resultOrdered="true" id="ninteichosaItakusakiSearch" parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter" resultMap="resultMap_KoseiShichosonMasterEntity" fetchSize="500">
+    <select resultOrdered="true" id="ninteichosaItakusakiSearch" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter" resultMap="resultMap_KoseiShichosonMasterEntity" fetchSize="500">
         SELECT
         dbt7051."shichosonShokibetsuID" dbT5051KoseiShichosonMaster_shichosonShokibetsuID,
         dbt5910."shichosonCode",
@@ -123,6 +123,17 @@
         </if>
         <if test="kikanKubun!=null">
             AND dbt5910."kikanKubun" = #{kikanKubun}
+        </if>
+        <if test="市町村識別ID利用Flag">
+            AND dbt7051."shichosonShokibetsuID" NOT IN (
+                    SELECT "shichosonShokibetsuID"
+                    FROM rgdb."DbT7051KoseiShichosonMaster"
+                    WHERE  "shichosonCode"=(
+                                            SELECT "shichosonCode"  FROM rgdb."DbT7051KoseiShichosonMaster"
+                                            WHERE "shichosonShokibetsuID" = #{市町村識別ID}
+                                            )
+                    AND "shichosonShokibetsuID" <![CDATA[<>]]> #{市町村識別ID}
+                    )
         </if>
         ORDER BY
         dbt5910."shichosonCode",

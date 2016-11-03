@@ -5,15 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1050011;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
-import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.SikakuIdouTeiseiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1050011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1050011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.SikakuIdouTeiseiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1050011.SikakuIdouTeiseiHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -21,14 +25,17 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 資格異動訂正の画面処理クラスです。
@@ -41,6 +48,7 @@ public class SikakuIdouTeisei {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
+    private static final RString SAVE_BUTTON = new RString("btnUpdate");
 
     /**
      * 画面を初期化します。
@@ -49,11 +57,17 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onLoad(SikakuIdouTeiseiDiv div) {
-        SikakuIdouTeiseiJoho joho = getHandler(div).onLoad(getKey().get被保険者番号(), getKey().get識別コード());
-        ViewStateHolder.put(ViewStateKeys.初期化時医療保険情報, joho);
+        getHandler(div).onLoad(getKey().get被保険者番号(), getKey().get識別コード());
+
+        if (div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
+            div.setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(SAVE_BUTTON, true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保履歴情報")).respond();
+        }
+
         if (!RealInitialLocker.tryGetLock(create排他キー())) {
             div.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -61,7 +75,6 @@ public class SikakuIdouTeisei {
     private LockingKey create排他キー() {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        System.out.println(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
         return new LockingKey(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
     }
 
@@ -75,9 +88,11 @@ public class SikakuIdouTeisei {
      */
     public ResponseData<SikakuIdouTeiseiDiv> onActive(SikakuIdouTeiseiDiv div) {
         if (ResponseHolder.getBeforeEvent().equals(new RString("DBA1050021_資格異動の訂正を保存する"))) {
-            TaishoshaKey key = getKey();
-            div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki()
-                    .initialize(key.get被保険者番号(), key.get識別コード());
+            List<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報_修正後, ArrayList.class);
+            if (hihoDaicho == null) {
+                hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
+            }
+            getHandler(div).update資格得喪失履歴(hihoDaicho);
             getHandler(div).setButtonDisable();
         }
         return ResponseData.of(div).respond();
@@ -138,20 +153,50 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onClick_Save(SikakuIdouTeiseiDiv div) {
-        SikakuIdouTeiseiJoho joho = ViewStateHolder.get(ViewStateKeys.初期化時医療保険情報, SikakuIdouTeiseiJoho.class);
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).save(getKey().get識別コード(), joho);
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+            List<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報_修正後, ArrayList.class);
+            if (hihoDaicho == null) {
+                hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
+            }
+
+            ArrayList<FlexibleDate> sakujoHihoDataShutokuDateList = ViewStateHolder.get(ViewStateKeys.対象者_削除対象取得日, ArrayList.class);
+            if (sakujoHihoDataShutokuDateList != null) {
+                hihoDaicho = getHandler(div).delete被保険者(hihoDaicho, sakujoHihoDataShutokuDateList);
+            }
+
+            isSaveDataExists(hihoDaicho);
+
+            Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> models = ViewStateHolder.get(ViewStateKeys.対象者_施設入退所, Models.class);
+
+            getHandler(div).save(getKey().get識別コード(), hihoDaicho, models);
             RealInitialLocker.release(create排他キー());
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1050011StateName.完了状態);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void isSaveDataExists(List<HihokenshaDaicho> hihoDaicho) throws ApplicationException {
+        if (hihoDaicho == null || hihoDaicho.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+        }
+        boolean isSaved = false;
+        for (HihokenshaDaicho daicho : hihoDaicho) {
+            isSaved = daicho.hasChanged();
+            if (isSaved) {
+                break;
+            }
+        }
+        if (!isSaved) {
+            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+        }
     }
 
     /**
@@ -187,7 +232,7 @@ public class SikakuIdouTeisei {
     }
 
     private TaishoshaKey getKey() {
-        return ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        return ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
     }
 
     private enum SikakuIdouTeiseiErrorMessage implements IValidationMessage {

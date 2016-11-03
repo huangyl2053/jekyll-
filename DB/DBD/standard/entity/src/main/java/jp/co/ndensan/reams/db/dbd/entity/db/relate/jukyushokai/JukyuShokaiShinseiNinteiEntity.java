@@ -244,8 +244,8 @@ public class JukyuShokaiShinseiNinteiEntity {
     private ShinseishoKanriNo dbT4003YokaigoNinteiInterface_shinseishoKanriNo;
     private HihokenshaNo dbT4003YokaigoNinteiInterface_hihokenshaNo;
     private RString dbT4003YokaigoNinteiInterface_rirekiNo;
-    private RString dbT4003YokaigoNinteiInterface_torikomiTimestamp;
-    private YMDHMS dbT4003YokaigoNinteiInterface_torikomiKubun;
+    private YMDHMS dbT4003YokaigoNinteiInterface_torikomiTimestamp;
+    private RString dbT4003YokaigoNinteiInterface_torikomiKubun;
     private RString dbT4003YokaigoNinteiInterface_shinseiShubetsuCode;
     private RString dbT4003YokaigoNinteiInterface_torisageKubunCode;
     private FlexibleDate dbT4003YokaigoNinteiInterface_shinseiYMD;

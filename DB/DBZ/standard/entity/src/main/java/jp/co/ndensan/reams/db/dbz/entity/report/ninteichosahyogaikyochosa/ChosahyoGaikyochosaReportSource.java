@@ -168,6 +168,26 @@ public class ChosahyoGaikyochosaReportSource implements IReportSource {
     public RString zenkaiNinteiMM;
     @ReportItem(name = "zenkaiNinteiDD", length = 2, order = 76)
     public RString zenkaiNinteiDD;
+    @ReportItem(name = "hihokenshaNo1", length = 2, order = 101)
+    public RString hihokenshaNo1;
+    @ReportItem(name = "hihokenshaNo2", length = 2, order = 102)
+    public RString hihokenshaNo2;
+    @ReportItem(name = "hihokenshaNo3", length = 2, order = 103)
+    public RString hihokenshaNo3;
+    @ReportItem(name = "hihokenshaNo4", length = 2, order = 104)
+    public RString hihokenshaNo4;
+    @ReportItem(name = "hihokenshaNo5", length = 2, order = 105)
+    public RString hihokenshaNo5;
+    @ReportItem(name = "hihokenshaNo6", length = 2, order = 106)
+    public RString hihokenshaNo6;
+    @ReportItem(name = "hihokenshaNo7", length = 2, order = 107)
+    public RString hihokenshaNo7;
+    @ReportItem(name = "hihokenshaNo8", length = 2, order = 108)
+    public RString hihokenshaNo8;
+    @ReportItem(name = "hihokenshaNo9", length = 2, order = 109)
+    public RString hihokenshaNo9;
+    @ReportItem(name = "hihokenshaNo10", length = 2, order = 110)
+    public RString hihokenshaNo10;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

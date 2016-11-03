@@ -28,7 +28,8 @@ public class JushochiTokureiRirekiList {
      * 追加ボタンが押下された際に実行されます。<br/>
      * 住所地特例の情報を追加するための前処理を行います。
      *
-     * @param jutokuRirekiDiv {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnAdd(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
@@ -44,7 +45,8 @@ public class JushochiTokureiRirekiList {
      * 住所地特例履歴上の1行を選択した際に実行されます。<br/>
      * 選択行の内容を明細エリアに表示し、選択行の状態に応じて、修正・照会の前処理を行います。
      *
-     * @param jutokuRirekiDiv {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelect_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
@@ -56,7 +58,8 @@ public class JushochiTokureiRirekiList {
      * 住所地特例履歴上の修正ボタンを押下した際に実行されます。<br/>
      * 選択行の内容を明細エリアに表示し、選択行の状態に応じて、住所地特例情報を修正するための前処理を行います。
      *
-     * @param jutokuRirekiDiv {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelectByModifyButton_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
@@ -72,7 +75,8 @@ public class JushochiTokureiRirekiList {
      * 住所地特例履歴上の削除ボタンを押下した際に実行されます。<br/>
      * 選択行の内容を明細エリアに表示し、選択行の状態に応じて、住所地特例情報を削除するための前処理を行います。
      *
-     * @param jutokuRirekiDiv {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelectByDeleteButton_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
@@ -88,7 +92,8 @@ public class JushochiTokureiRirekiList {
      * 取消ボタンが押下された際に実行します。<br/>
      * 入力を取りやめる際、明細エリアに入力した情報を初期化してよいか確認するダイアログを表示します。
      *
-     * @param jutokuRirekiDiv {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuTorikeshi(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
@@ -114,7 +119,8 @@ public class JushochiTokureiRirekiList {
      * 取消ボタンを押下した時に表示される、ダイアログ上のはいを選択した際に実行されます。<br/>
      * 明細エリアの情報を破棄し、追加・修正等の処理が可能な状態にします。
      *
-     * @param jutokuRirekiDiv {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuTorikeshi_onYes(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
@@ -129,7 +135,8 @@ public class JushochiTokureiRirekiList {
      * 確定ボタンが押下された際に実行されます。<br/>
      * 明細エリアの情報を、住所地特例履歴Listに反映させます。
      *
-     * @param jutokuRirekiDiv {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
      * @return 住所地特例履歴ListDivを持つResponseData
      *
      */
@@ -142,7 +149,7 @@ public class JushochiTokureiRirekiList {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(jutokuRirekiDiv).addValidationMessages(validPairs).respond();
         }
-        
+
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
         handler.updateEntryData();
         handler.clearInputData();

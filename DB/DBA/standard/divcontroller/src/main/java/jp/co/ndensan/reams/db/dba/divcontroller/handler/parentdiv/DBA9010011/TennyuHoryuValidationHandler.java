@@ -60,15 +60,12 @@ public class TennyuHoryuValidationHandler {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
 
-        System.out.println("strLasdecCode:" + strLasdecCode);
-
         if (SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
 
             List<KoseiShichoson> koseiShichosonList = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
             List list = new ArrayList();
             for (KoseiShichoson koseiList : koseiShichosonList) {
                 list.add(koseiList.get市町村コード().value());
-                System.out.println("listMenbers:" + koseiList.get市町村コード().value());
             }
 
             if (!list.contains(strLasdecCode)) {
@@ -76,8 +73,6 @@ public class TennyuHoryuValidationHandler {
                         UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード")));
             }
         } else {
-
-            System.out.println("shichosonSecurity:" + 市町村セキュリティ情報.get市町村情報().get市町村コード());
             if (!strLasdecCode.equals(市町村セキュリティ情報.get市町村情報().get市町村コード().value())) {
                 validationMessages.add(new ValidationMessageControlPair(new TennyuHoryuValidationHandler.RRVMessages(
                         UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード")));

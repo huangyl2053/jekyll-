@@ -149,7 +149,7 @@ public class HanyoListTekiyoJogaishaResult {
         eucCsvEntity.set資格喪失日(set年月日(processParameter, entity.get資格喪失日()));
         eucCsvEntity.set資格喪失届日(set年月日(processParameter, entity.get資格喪失届日()));
         RString 資格区分 = entity.get資格区分();
-        if (資格区分 == null) {
+        if (RString.isNullOrEmpty(資格区分)) {
             eucCsvEntity.set資格区分(RString.EMPTY);
         } else {
             eucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
@@ -177,7 +177,7 @@ public class HanyoListTekiyoJogaishaResult {
         eucCsvEntity.set適用除外適用日(set年月日(processParameter, entity.get適用除外適用日()));
         eucCsvEntity.set適用除外適用届出日(set年月日(processParameter, entity.get適用除外適用届出日()));
         RString 適用除外解除事由 = entity.get適用除外解除事由();
-        if (適用除外解除事由.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(適用除外解除事由)) {
             eucCsvEntity.set適用除外解除事由(RString.EMPTY);
         } else {
             eucCsvEntity.set適用除外解除事由(JogaiKaijoJiyu.toValue(entity.get適用除外解除事由()).get名称());
@@ -277,7 +277,7 @@ public class HanyoListTekiyoJogaishaResult {
         eucRenbanCsvEntity.set資格喪失日(set年月日(processParameter, entity.get資格喪失日()));
         eucRenbanCsvEntity.set資格喪失届日(set年月日(processParameter, entity.get資格喪失届日()));
         RString 資格区分 = entity.get資格区分();
-        if (資格区分 == null) {
+        if (RString.isNullOrEmpty(資格区分)) {
             eucRenbanCsvEntity.set資格区分(RString.EMPTY);
         } else {
             eucRenbanCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
@@ -305,7 +305,7 @@ public class HanyoListTekiyoJogaishaResult {
         eucRenbanCsvEntity.set適用除外適用日(set年月日(processParameter, entity.get適用除外適用日()));
         eucRenbanCsvEntity.set適用除外適用届出日(set年月日(processParameter, entity.get適用除外適用届出日()));
         RString 適用除外解除事由 = entity.get適用除外解除事由();
-        if (適用除外解除事由 == null) {
+        if (RString.isNullOrEmpty(適用除外解除事由)) {
             eucRenbanCsvEntity.set適用除外解除事由(RString.EMPTY);
         } else {
             eucRenbanCsvEntity.set適用除外解除事由(JogaiKaijoJiyu.toValue(entity.get適用除外解除事由()).get名称());

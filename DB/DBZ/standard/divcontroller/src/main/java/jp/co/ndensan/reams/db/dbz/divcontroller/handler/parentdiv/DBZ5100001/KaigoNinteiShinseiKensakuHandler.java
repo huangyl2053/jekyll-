@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -56,6 +57,7 @@ public class KaigoNinteiShinseiKensakuHandler {
      */
     public void initialize() {
         div.getCcdNinteiShinseishaFinder().initialize();
+        div.getTxtMaxKensu().setValue(Decimal.valueOf(100L));
     }
 
     /**

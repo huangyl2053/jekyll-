@@ -138,7 +138,7 @@ public class RiyoshaFutangakuGengakuManager {
 
     private void save減免減額申請リスト(List<GemmenGengakuShinsei> 減免減額申請List) {
         for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
-            gemmenGengakuShinseiManager.save減免減額申請(減免減額申請);
+            gemmenGengakuShinseiManager.insert減免減額申請(減免減額申請);
         }
     }
 

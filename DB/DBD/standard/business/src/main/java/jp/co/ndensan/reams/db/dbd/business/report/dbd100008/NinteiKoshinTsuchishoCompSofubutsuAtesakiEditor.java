@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoR
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 負担限度額認定更新のお知らせ通知書
@@ -33,23 +34,28 @@ public class NinteiKoshinTsuchishoCompSofubutsuAtesakiEditor implements INinteiK
     public NinteiKoshinTsuchishoReportSource edit(NinteiKoshinTsuchishoReportSource source) {
         SofubutsuAtesakiSource atesakiSource = getSofubutsuAtesakiSource(item.get編集後宛先());
         source.yubinNo = atesakiSource.yubinNo;
-        source.gyoseiku1 = 空白;
-        source.jusho4 = 空白;
-        source.jushoText = atesakiSource.jushoText;
-        source.jusho5 = 空白;
-        source.jusho6 = 空白;
+        source.gyoseiku = 空白;
+        source.jusho1 = 空白;
+        if (atesakiSource.jushoText == null) {
+            RStringBuilder jusho1 = new RStringBuilder(atesakiSource.jusho1);
+            source.jushoText = jusho1.append(atesakiSource.jusho2).append(atesakiSource.jusho3).toRString();
+        } else {
+            source.jushoText = atesakiSource.jushoText;
+        }
+        source.jusho2 = 空白;
+        source.jusho3 = 空白;
         source.katagakiText = atesakiSource.katagakiText;
-        source.katagaki3 = 空白;
+        source.katagaki1 = 空白;
         source.katagakiSmall2 = atesakiSource.katagakiSmall2;
-        source.katagaki4 = 空白;
+        source.katagaki2 = 空白;
         source.katagakiSmall1 = atesakiSource.katagakiSmall1;
-        source.shimei3 = 空白;
+        source.shimei1 = atesakiSource.shimei1;
         source.shimeiSmall2 = atesakiSource.shimeiSmall2;
         source.shimeiText = atesakiSource.shimeiText;
         source.meishoFuyo2 = atesakiSource.meishoFuyo2;
         source.shimeiSmall1 = atesakiSource.shimeiSmall1;
         source.dainoKubunMei = atesakiSource.dainoKubunMei;
-        source.shimei4 = 空白;
+        source.shimei2 = atesakiSource.shimei2;
         source.meishoFuyo1 = atesakiSource.meishoFuyo1;
         source.samabunShimeiText = atesakiSource.samabunShimeiText;
         source.samabunShimeiSmall2 = atesakiSource.samabunShimeiSmall2;

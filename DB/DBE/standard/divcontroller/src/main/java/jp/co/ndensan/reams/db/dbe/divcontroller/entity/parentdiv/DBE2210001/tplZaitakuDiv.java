@@ -24,6 +24,10 @@ public class tplZaitakuDiv extends TabPanel {
      */
     @JsonProperty("JutakuGaikyoChosa")
     private JutakuGaikyoChosaDiv JutakuGaikyoChosa;
+    @JsonProperty("txtShichosonTokubetsuKyufu")
+    private TextBoxMultiLine txtShichosonTokubetsuKyufu;
+    @JsonProperty("txtKyufuIgaiJutakuService")
+    private TextBoxMultiLine txtKyufuIgaiJutakuService;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +54,42 @@ public class tplZaitakuDiv extends TabPanel {
     }
 
     /*
+     * gettxtShichosonTokubetsuKyufu
+     * @return txtShichosonTokubetsuKyufu
+     */
+    @JsonProperty("txtShichosonTokubetsuKyufu")
+    public TextBoxMultiLine getTxtShichosonTokubetsuKyufu() {
+        return txtShichosonTokubetsuKyufu;
+    }
+
+    /*
+     * settxtShichosonTokubetsuKyufu
+     * @param txtShichosonTokubetsuKyufu txtShichosonTokubetsuKyufu
+     */
+    @JsonProperty("txtShichosonTokubetsuKyufu")
+    public void setTxtShichosonTokubetsuKyufu(TextBoxMultiLine txtShichosonTokubetsuKyufu) {
+        this.txtShichosonTokubetsuKyufu = txtShichosonTokubetsuKyufu;
+    }
+
+    /*
+     * gettxtKyufuIgaiJutakuService
+     * @return txtKyufuIgaiJutakuService
+     */
+    @JsonProperty("txtKyufuIgaiJutakuService")
+    public TextBoxMultiLine getTxtKyufuIgaiJutakuService() {
+        return txtKyufuIgaiJutakuService;
+    }
+
+    /*
+     * settxtKyufuIgaiJutakuService
+     * @param txtKyufuIgaiJutakuService txtKyufuIgaiJutakuService
+     */
+    @JsonProperty("txtKyufuIgaiJutakuService")
+    public void setTxtKyufuIgaiJutakuService(TextBoxMultiLine txtKyufuIgaiJutakuService) {
+        this.txtKyufuIgaiJutakuService = txtKyufuIgaiJutakuService;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -70,26 +110,6 @@ public class tplZaitakuDiv extends TabPanel {
     @JsonIgnore
     public void  setDgRiyoServiceJyokyo(DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo) {
         this.getJutakuGaikyoChosa().setDgRiyoServiceJyokyo(dgRiyoServiceJyokyo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShichosonTokubetsuKyufu() {
-        return this.getJutakuGaikyoChosa().getTxtShichosonTokubetsuKyufu();
-    }
-
-    @JsonIgnore
-    public void  setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.getJutakuGaikyoChosa().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuIgaiJutakuService() {
-        return this.getJutakuGaikyoChosa().getTxtKyufuIgaiJutakuService();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
-        this.getJutakuGaikyoChosa().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
     }
 
     // </editor-fold>

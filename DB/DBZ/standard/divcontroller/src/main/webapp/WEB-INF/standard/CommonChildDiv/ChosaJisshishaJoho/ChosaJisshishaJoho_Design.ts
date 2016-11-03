@@ -8,8 +8,32 @@ module DBZ {
 
         export class Events {
 
+            public static onBlur_txtShozokuKikanCode(): string {
+                return "onBlur_txtShozokuKikanCode";
+            }
+
+            public static onOkClose_btnChosaItakusakiGuide(): string {
+                return "onOkClose_btnChosaItakusakiGuide";
+            }
+
+            public static onClick_btnChosaItakusakiGuide(): string {
+                return "onClick_btnChosaItakusakiGuide";
+            }
+
             public static onChange_ddlChosaJisshiBasho(): string {
                 return "onChange_ddlChosaJisshiBasho";
+            }
+
+            public static onBlur_txtKinyushaCode(): string {
+                return "onBlur_txtKinyushaCode";
+            }
+
+            public static onOkClose_btnChosainGuide(): string {
+                return "onOkClose_btnChosainGuide";
+            }
+
+            public static onClick_btnChosainGuide(): string {
+                return "onClick_btnChosainGuide";
             }
 
         }
@@ -37,6 +61,26 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
+            public txtNinteiShinseiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiShinseiDate"));
+            }
+
+            public txtChosaKubun(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtChosaKubun"));
+            }
+
+            public txtShozokuKikanCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtShozokuKikanCode"));
+            }
+
+            public btnChosaItakusakiGuide(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnChosaItakusakiGuide"));
+            }
+
+            public txtShozokuKikanName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShozokuKikanName"));
+            }
+
             public txtChosaJisshiDate(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtChosaJisshiDate"));
             }
@@ -49,16 +93,16 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtJisshiBashoMeisho"));
             }
 
-            public ddlShozokuKikan(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlShozokuKikan"));
+            public txtKinyushaCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKinyushaCode"));
             }
 
-            public ddlKinyusha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlKinyusha"));
+            public btnChosainGuide(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnChosainGuide"));
             }
 
-            public txtChosaKubun(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtChosaKubun"));
+            public txtKinyushaName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKinyushaName"));
             }
 
         }
