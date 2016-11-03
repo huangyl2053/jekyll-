@@ -161,19 +161,9 @@ public class TokuteifutanGendogakuShinseisho {
         if (uaft200Entity.getBanchi() != null) {
             jusho = jusho.append(uaft200Entity.getBanchi().value());
         }
-        if (uaft200Entity.getBanchiCode1() != null) {
-            jusho = jusho.append(uaft200Entity.getBanchiCode1().value());
+        if (uaft200Entity.getKatagaki() != null) {
+            jusho = jusho.append(uaft200Entity.getKatagaki().value());
         }
-        if (uaft200Entity.getBanchiCode2() != null) {
-            jusho = jusho.append(uaft200Entity.getBanchiCode2().value());
-        }
-        if (uaft200Entity.getBanchiCode3() != null) {
-            jusho = jusho.append(uaft200Entity.getBanchiCode3().value());
-        }
-        if (uaft200Entity.getBanchiCode4() != null) {
-            jusho = jusho.append(uaft200Entity.getBanchiCode4().value());
-        }
-
         hihokenshaKihonEntity.set住所(jusho.toRString());
         hihokenshaKihonEntity.set住民種別コード(uaft200Entity.getJuminShubetsuCode());
         AtenaMeisho setainushiMei = uaft200Entity.getSetainushiMei();
