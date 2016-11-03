@@ -312,45 +312,45 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
 
         switch (メニューID.toString()) {
             case "DBCMN61002":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_変更申請.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_変更申請.get略称();
                 set申請状態(two);
                 set申請状況(one);
                 break;
             case "DBCMN61003":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_取下げ申請.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_取下げ申請.get略称();
                 set申請状態(three);
                 set申請状況(one);
                 break;
             case "DBCMN61004":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書訂正.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書訂正.get略称();
                 set申請状況(one);
                 break;
             case "DBCMN61006":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_変更申請.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_変更申請.get略称();
                 set申請状態(two);
                 set申請状況(three);
                 break;
             case "DBCMN61007":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_取下げ申請.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_取下げ申請.get略称();
                 set申請状態(three);
                 set申請状況(three);
                 break;
             case "DBCMN61008":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_訂正.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_訂正.get略称();
                 set申請状況(three);
                 break;
             case "DBCMN61010":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_変更申請.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_変更申請.get略称();
                 set申請状態(two);
                 set申請状況(two);
                 break;
             case "DBCMN61011":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_取下げ申請.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_取下げ申請.get略称();
                 set申請状態(three);
                 set申請状況(two);
                 break;
             case "DBCMN61012":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書訂正.get名称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書訂正.get略称();
                 set申請状況(two);
                 break;
             default:
