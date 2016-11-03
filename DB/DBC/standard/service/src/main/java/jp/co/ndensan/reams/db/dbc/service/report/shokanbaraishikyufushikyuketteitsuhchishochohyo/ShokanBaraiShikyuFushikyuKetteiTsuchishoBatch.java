@@ -118,15 +118,6 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(), batchPram.getHakkoYMD(),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
 
-        IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
-        AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
-        宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-        宛先builder.set基準日(batchPram.getHakkoYMD());
-        宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
-        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
-        SofubutsuAtesakiSource atesakiSource
-                = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
-
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> 帳票ソースデータ = new ArrayList<>();
         ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
         RString key = RString.EMPTY;
@@ -157,6 +148,16 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
                 item.setKyufuShu2(kyufuShu.substring(文字数_38, 文字数_76));
                 item.setKyufuShu3(kyufuShu.substring(文字数_76));
             }
+            IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
+            AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
+            宛先builder.set識別コード(shiharai.get識別コード());
+            宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+            宛先builder.set基準日(batchPram.getHakkoYMD());
+            宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+            IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
+            SofubutsuAtesakiSource atesakiSource
+                    = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
+            
             item = create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, atesakiSource);
         }
         return 帳票ソースデータ;
