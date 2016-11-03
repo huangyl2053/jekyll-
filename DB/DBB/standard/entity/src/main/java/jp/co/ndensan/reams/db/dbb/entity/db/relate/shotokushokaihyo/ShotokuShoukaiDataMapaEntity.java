@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -42,7 +43,7 @@ public class ShotokuShoukaiDataMapaEntity {
     private RString honninKubun;
     private RString choikiCode;
     private RString gyoseikuCode;
-    private LasdecCode shichosonCode;
+    private ZenkokuJushoCode shichosonCode;
     private RString zenjushoCode;
     private YubinNo yubinNo;
     private RString chikuCode1;

@@ -79,5 +79,7 @@ public class ShotokuShoukaiKouhoshaTempEntity implements IDbAccessable, Serializ
     private RString tenyuzenbanchi;
     @TempTableColumnOrder(26)
     private RString tenyuzenkatagaki;
+    @TempTableColumnOrder(27)
+    private ZenkokuJushoCode tenshutsuKakuteiZenkokuJushoCode;
 
 }

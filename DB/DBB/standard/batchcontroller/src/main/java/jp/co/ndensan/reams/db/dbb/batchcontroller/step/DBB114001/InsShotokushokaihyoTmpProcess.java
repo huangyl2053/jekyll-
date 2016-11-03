@@ -35,7 +35,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShoukaiDataMapbEntity> {
 
     private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
     private static final int INT_2 = 2;
+    private static final int INT_6 = 6;
     private static final RString INDEX_112 = new RString("112");
     private static final RString INDEX_120 = new RString("120");
     private static final RString 管内_1 = new RString("1");
@@ -62,7 +64,6 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
     private RString 市町村名付与有無;
     private RDate 処理日付;
     private RString 導入形態コード;
-    private LasdecCode 導入団体コード;
     private ShotokuShoukaiDataTempEntity 所得照会票データ;
 
     @Override
@@ -75,7 +76,6 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         市町村名 = association.get市町村名();
         処理日付 = RDate.getNowDate();
         導入形態コード = processParameter.get導入形態コード();
-        導入団体コード = association.getLasdecCode_();
         都道府県名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
                 処理日付, SubGyomuCode.DBU介護統計報告);
         郡名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
@@ -101,7 +101,7 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
     protected void process(ShotokuShoukaiDataMapbEntity t) {
         所得照会票データ = creatEntity(t);
         editor住所を編集(導入形態コード);
-        所得照会票データwriter.insert(creat所得照会票データEntity(所得照会票データ));
+        所得照会票データwriter.insert(所得照会票データ);
     }
 
     private ShotokuShoukaiDataTempEntity creatEntity(ShotokuShoukaiDataMapbEntity t) {
@@ -125,7 +125,8 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         entity.setHonninKubun(t.getHonninKubun());
         entity.setChoikiCode(t.getChoikiCode());
         entity.setGyoseikuCode(t.getGyoseikuCode());
-        entity.setShichosonCode(t.getGenLasdecCode());
+        RString shichosonCode = t.getShichosonCode() == null ? RString.EMPTY : t.getShichosonCode().getColumnValue();
+        entity.setShichosonCode(shichosonCode);
         entity.setZenjushoCode(t.getZenjushoCode());
         entity.setYubinNo(t.getYubinNo());
         entity.setChikuCode1(t.getChikuCode1());
@@ -139,15 +140,6 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         RString torokuTodokedeYMD = t.getTorokuTodokedeYMD() == null
                 ? RString.EMPTY : new RString(t.getTorokuTodokedeYMD().toString());
         entity.setTorokuTodokedeYMD(torokuTodokedeYMD);
-        return entity;
-    }
-
-    private ShotokuShoukaiDataTempEntity creat所得照会票データEntity(ShotokuShoukaiDataTempEntity entity) {
-        if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
-            entity.setShichosonCode(導入団体コード);
-        } else {
-            entity.setShichosonCode(所得照会票データ.getGenLasdecCode());
-        }
         return entity;
     }
 
@@ -171,7 +163,10 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
                 所得照会票データ.setGenjusho(RString.EMPTY);
             }
         } else if (導入形態コード.equals(導入形態コード_111)) {
-            LasdecCode 市町村コード = 所得照会票データ.getShichosonCode();
+            LasdecCode 市町村コード = LasdecCode.EMPTY;
+            if (所得照会票データ.getShichosonCode().length() >= INT_6) {
+                市町村コード = new LasdecCode(所得照会票データ.getShichosonCode().substring(INT_1, INT_6));
+            }
             RString 市町村識別ID = manager.get市町村識別ID(市町村コード);
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho
                     .getKouseiShichosonJoho(市町村識別ID);
