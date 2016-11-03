@@ -27,7 +27,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class TsuchishoDataTempEntity extends DbTableEntityBase<TsuchishoDataTempEntity> implements IDbAccessable {
 
     private DbTKeisangoJohoTempTableEntity 計算後情報;
@@ -627,6 +627,7 @@ public class TsuchishoDataTempEntity extends DbTableEntityBase<TsuchishoDataTemp
         entity.setNenkinTokuchoKaifuJoho_dtTeishiYM(対象者_追加含む情報.getDtTeishiYM());
         entity.setNenkinTokuchoKaifuJoho_dtYobi4Juminzei(対象者_追加含む情報.getDtYobi4Juminzei());
         entity.setNenkinTokuchoKaifuJoho_dtKojinNo(対象者_追加含む情報.getDtKojinNo());
+        entity.setNenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun(対象者_追加含む情報.getKokuhoYoteiSoshitsuKubun());
 
     }
 }
