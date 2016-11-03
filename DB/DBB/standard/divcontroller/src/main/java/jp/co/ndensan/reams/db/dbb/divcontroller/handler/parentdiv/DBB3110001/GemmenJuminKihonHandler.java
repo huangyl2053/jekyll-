@@ -464,7 +464,7 @@ public class GemmenJuminKihonHandler {
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo5().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo5().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo6().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo6().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo7().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo7().getValue());
-        金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo7().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo8().getValue());
+        金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo8().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo8().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo9().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo9().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo10().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo10().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo11().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo11().getValue());
