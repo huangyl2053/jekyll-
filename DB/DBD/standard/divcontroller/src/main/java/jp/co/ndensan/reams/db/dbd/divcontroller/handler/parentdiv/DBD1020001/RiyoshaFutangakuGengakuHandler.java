@@ -338,6 +338,7 @@ public class RiyoshaFutangakuGengakuHandler {
      */
     public void 追加するボタン押下(TaishoshaKey taishoshaKey) {
         入力情報をクリア(taishoshaKey);
+        div.getTxtShinseiYmd().setValue(FlexibleDate.getNowDate());
         div.getBtnInputNew().setDisabled(true);
         div.getDdlShinseiIchiran().setDisabled(true);
 
@@ -383,12 +384,41 @@ public class RiyoshaFutangakuGengakuHandler {
         if (KetteiKubun.承認しない.get名称().equals(決定区分)) {
             決定区分RadInx = 承認しない_KEY;
         }
-        FlexibleDate 決定日 = row.getTxtKetteiYMD().getValue();
-        if (ResponseHolder.getMenuID().equals(承認メニュー) && 決定日.isEmpty()) {
-            決定日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        if (KetteiKubun.承認する.get名称().equals(決定区分) || 決定区分.isEmpty()) {
+            FlexibleDate 決定日 = row.getTxtKetteiYMD().getValue();
+            if (決定日 == null || 決定日.isEmpty()) {
+                決定日 = FlexibleDate.getNowDate();
+            }
+            FlexibleDate 以前有効期限日 = null;
+            List<ddlShinseiIchiran_Row> shinseiIchiranList = div.getDdlShinseiIchiran().getDataSource();
+            for (ddlShinseiIchiran_Row shinseiIchiran : shinseiIchiranList) {
+                if (shinseiIchiran.getTxtKetteiYMD().getValue() != null && !shinseiIchiran.getTxtKetteiYMD().getValue().isEmpty()) {
+                    以前有効期限日 = shinseiIchiran.getTxtYukoKigen().getValue();
+                    break;
+                }
+            }
+            FlexibleDate 適用日 = row.getTxtTekiyoYMD().getValue();
+            FlexibleDate 有効期限 = row.getTxtYukoKigen().getValue();
+            if (ResponseHolder.getMenuID().equals(承認メニュー) && 決定日.equals(FlexibleDate.getNowDate()) && 以前有効期限日 != null && !以前有効期限日.isEmpty()) {
+                RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
+                適用日 = 以前有効期限日.plusDay(1);
+                有効期限 = service.estimate有効期限(適用日);
+            }
+            div.getTxtKettaiYmd().setValue(決定日);
+            if (適用日.isEmpty()) {
+                RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
+                div.getTxtTekiyoYmd().setValue(FlexibleDate.getNowDate());
+                div.getTxtYukoKigenYmd().setValue(service.estimate有効期限(FlexibleDate.getNowDate()));
+            } else {
+                div.getTxtTekiyoYmd().setValue(適用日);
+                div.getTxtYukoKigenYmd().setValue(有効期限);
+            }
+        } else {
+            div.getTxtKettaiYmd().setValue(null);
+            div.getTxtTekiyoYmd().setValue(null);
+            div.getTxtYukoKigenYmd().setValue(null);
         }
-        FlexibleDate 適用日 = row.getTxtTekiyoYMD().getValue();
-        FlexibleDate 有効期限 = row.getTxtYukoKigen().getValue();
+        
         boolean 旧措置有無 = row.getKyusochishaUmu();
         Decimal 給付率 = row.getTxtKyufuritsu().getValue();
         RString 承認しない理由 = row.getShoninShinaiRiyu();
@@ -397,13 +427,6 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtShinseiRiyu().setValue(申請理由);
         div.getCcdShinseiJoho().set減免減額申請情報(減免減額申請共有子Divの設定(joho), 申請日);
         div.getRadKetteiKubun().setSelectedKey(決定区分RadInx);
-        div.getTxtKettaiYmd().setValue(決定日);
-        if (適用日.isEmpty()) {
-            get有効期限By適用日();
-        } else {
-            div.getTxtTekiyoYmd().setValue(適用日);
-            div.getTxtYukoKigenYmd().setValue(有効期限);
-        }
 
         if (旧措置有無) {
             ArrayList<RString> selectItems = new ArrayList<>();
