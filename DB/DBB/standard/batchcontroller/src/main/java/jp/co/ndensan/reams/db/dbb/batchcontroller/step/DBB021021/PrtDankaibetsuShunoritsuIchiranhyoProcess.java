@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.dankaibetsushunoritsu.ShotokuDankaiBetsuShunoritsuIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
@@ -72,8 +73,6 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private static final RString 抽出条件_認定者のみ = new RString("2");
     private static final RString 抽出条件_受給者のみ = new RString("3");
     private static final RString 抽出条件_認定者を除く１号被保険者 = new RString("4");
-    private static final RString 広域判定区分_広域保険者 = new RString("111");
-    private static final RString 広域判定区分_単一市町村 = new RString("120");
     private static final RString 調定年度 = new RString("調定年度");
     private static final RString 賦課年度 = new RString("賦課年度");
     private static final RString 科目コード = new RString("科目コード");
@@ -488,7 +487,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     }
 
     private void get出力条件表市町村の作成(List<RString> 出力条件リスト) {
-        if (広域判定区分_広域保険者.equals(parameter.get広域判定区分())) {
+        if (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is広域()) {
             RStringBuilder 市町村情報Builder = new RStringBuilder();
             市町村情報Builder.append(parameter.get市町村情報());
             市町村情報Builder.append(TEXT_全角空白);
@@ -502,7 +501,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
                 出力条件リスト.add(get条件(TEXT_旧市町村, 市町村情報Builder.toRString()));
             }
         }
-        if (広域判定区分_単一市町村.equals(parameter.get広域判定区分())
+        if (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is単一()
                 && !RString.isNullOrEmpty(parameter.get選択対象区分())
                 && !parameter.get選択対象リスト().entrySet().isEmpty()) {
             boolean is１件目 = Boolean.TRUE;
@@ -1084,7 +1083,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         IShunoKamoku 特別徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
         if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード())) {
             return 普通徴収;
-        } else if (特別徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード())) {
+        } else if (特別徴収科目 != null && kamokuCode.equals(特別徴収科目.getコード())) {
             return 特別徴収;
         }
         return RString.EMPTY;
@@ -1095,7 +1094,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         IShunoKamoku 特別徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
         if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード())) {
             return TEXT_普通徴収_完納分;
-        } else if (特別徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード())) {
+        } else if (特別徴収科目 != null && kamokuCode.equals(特別徴収科目.getコード())) {
             return TEXT_特別徴収_完納分;
         }
         return RString.EMPTY;

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu.InsDankaibetsuShunoritsuTmpProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuTempEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoKanriEntity;
@@ -48,8 +49,6 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
     private static final RString 抽出条件_認定者を除く１号被保険者 = new RString("4");
     private static final RString 認定者 = new RString("認定者");
     private static final RString 受給者 = new RString("受給者");
-    private static final RString 広域保険者 = new RString("111");
-    private static final RString 単一市町村分 = new RString("120");
     private static final RString 市町村分 = new RString("000000");
     private static final RString ONE = new RString("1");
     private static final int INT_0 = 0;
@@ -130,9 +129,9 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setFukaNendo(new FlexibleYear(収納管理Entity.getKazeiNendo().toDateString()));
         entity.setKibetsu(収納管理Entity.getKibetsu());
         entity.setTsuchishoNo(収納管理Entity.getTsuchishoNo());
-        if ((広域保険者.equals(parameter.get広域判定区分())
-                || 単一市町村分.equals(parameter.get広域判定区分()))
-                && 市町村コード != null
+        if (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is広域()
+                || (DonyuKeitaiCode.toValue(parameter.get広域判定区分())).is単一()
+                && null != 市町村コード
                 && 市町村分.equals(市町村コード.getColumnValue())) {
             if ((抽出条件_認定者のみ.equals(parameter.get抽出条件())
                     || 抽出条件_認定者を除く１号被保険者.equals(parameter.get抽出条件()))
@@ -154,7 +153,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setLasdecCode(市町村コード);
         LasdecCode 賦課市町村コード = 収納データ.get介護賦課().getFukaShichosonCode();
         if (市町村コード != null
-                && 広域保険者.equals(parameter.get広域判定区分())
+                && DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is広域()
                 && !市町村分.equals(市町村コード.getColumnValue())
                 && 賦課市町村コード != null
                 && (賦課市町村コード.getColumnValue().equals(parameter.get市町村情報())
