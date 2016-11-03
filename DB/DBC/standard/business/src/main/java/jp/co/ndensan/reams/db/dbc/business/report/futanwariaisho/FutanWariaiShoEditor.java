@@ -152,20 +152,20 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
 
     private void set利用者負担割合(FutanWariaiShoSource source) {
         source.futanWariai1 = entity.get負担割合1();
-        if (entity.get適用期間開始日1() != null) {
+        if (entity.get適用期間開始日1() != null && !entity.get適用期間開始日1().isEmpty()) {
             source.tekiyoKaishiYmd1 = 定数_開始年月日.concat(entity.get適用期間開始日1().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
-        if (entity.get適用期間終了日1() != null) {
+        if (entity.get適用期間終了日1() != null && !entity.get適用期間終了日1().isEmpty()) {
             source.tekiyoShuryoYmd1 = 定数_終了年月日.concat(entity.get適用期間終了日1().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         source.futanWariai2 = entity.get負担割合2();
-        if (entity.get適用期間開始日2() != null) {
+        if (entity.get適用期間開始日2() != null && !entity.get適用期間開始日2().isEmpty()) {
             source.tekiyoKaishiYmd2 = 定数_開始年月日.concat(entity.get適用期間開始日2().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
-        if (entity.get適用期間終了日2() != null) {
+        if (entity.get適用期間終了日2() != null && !entity.get適用期間終了日2().isEmpty()) {
             source.tekiyoShuryoYmd2 = 定数_終了年月日.concat(entity.get適用期間終了日2().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
