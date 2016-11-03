@@ -322,7 +322,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     private FlexibleDate get徴収猶予期間終了(RString 期, ChoshuYuyoJoho 徴収猶予の情報) {
-        if (定値_ゼロ.equals(期)) {
+        if (定値_ゼロ.equals(期) || 徴収猶予の情報 == null) {
             return null;
         }
         switch (Integer.valueOf(期.toString())) {
@@ -360,7 +360,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     private FlexibleDate get徴収猶予期間開始(RString 期, ChoshuYuyoJoho 徴収猶予の情報) {
-        if (定値_ゼロ.equals(期)) {
+        if (定値_ゼロ.equals(期) || 徴収猶予の情報 == null) {
             return null;
         }
         switch (Integer.valueOf(期.toString())) {
@@ -398,7 +398,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     private Decimal get普徴期別納付額(RString 期, ChoshuYuyoJoho 徴収猶予の情報) {
-        if (期 == null || 期.isEmpty()) {
+        if (期 == null || 期.isEmpty() || 徴収猶予の情報 == null) {
             return null;
         }
         switch (Integer.valueOf(期.toString())) {
