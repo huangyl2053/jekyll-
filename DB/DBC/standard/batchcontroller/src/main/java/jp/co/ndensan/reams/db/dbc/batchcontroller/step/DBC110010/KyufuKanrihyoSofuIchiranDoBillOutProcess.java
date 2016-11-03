@@ -424,18 +424,6 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
             output.set備考(RString.EMPTY);
         }
         output.set備考証記載保険者番号(被保険者一時Entity.getExShoHokenshaNo());
-        if (認定有効期間_編集区分_1.equals(自己作成管理一時Entity.getKoshinKubun())) {
-            合計件数_新規1 = 合計件数_新規1.add(1);
-
-        }
-        if (認定有効期間_編集区分_2.equals(自己作成管理一時Entity.getKoshinKubun())) {
-            合計件数_修正2 = 合計件数_修正2.add(1);
-
-        }
-        if (認定有効期間_編集区分_3.equals(自己作成管理一時Entity.getKoshinKubun())) {
-            合計件数_取消3 = 合計件数_取消3.add(1);
-
-        }
         ヘッダー項目は1行目++;
         return output;
     }

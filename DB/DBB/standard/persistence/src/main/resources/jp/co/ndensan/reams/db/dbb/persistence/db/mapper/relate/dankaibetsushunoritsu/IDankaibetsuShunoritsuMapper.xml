@@ -27,6 +27,7 @@
             AND "DbV2002Fuka"."dbT2002Fuka_choteiNendo" <![CDATA[<=]]> #{終了調定年度}
             AND #{開始賦課年度} <![CDATA[<=]]> "DbV2002Fuka"."dbT2002Fuka_fukaNendo"
             AND "DbV2002Fuka"."dbT2002Fuka_fukaNendo" <![CDATA[<=]]> #{終了賦課年度}
+            AND SUBSTRING("DbV2002Fuka"."dbT2002Fuka_choteiNichiji",1,6) <![CDATA[<=]]> #{調定基準年月}
             AND "DbV2002Fuka"."dbT2002Fuka_choteiNendo" = "TotalShunyu"."urT0700ShunoKanri_choteiNendo"
             AND "DbV2002Fuka"."dbT2002Fuka_fukaNendo" = "TotalShunyu"."urT0700ShunoKanri_kazeiNendo"
             AND (CAST("DbV2002Fuka" . "dbT2002Fuka_tsuchishoNo" AS numeric)) = "TotalShunyu" . "urT0700ShunoKanri_tsuchishoNo"
