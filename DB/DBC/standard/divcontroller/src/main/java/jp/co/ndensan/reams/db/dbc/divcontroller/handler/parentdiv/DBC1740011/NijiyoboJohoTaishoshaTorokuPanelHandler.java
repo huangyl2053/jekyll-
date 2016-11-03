@@ -103,12 +103,32 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     }
 
     private void sortDg二次予防情報対象一覧(List<dgNijiyoboJohoTaishoIchiran_Row> rowList) {
-        Collections.sort(rowList, new Comparator<dgNijiyoboJohoTaishoIchiran_Row>() {
-            @Override
-            public int compare(dgNijiyoboJohoTaishoIchiran_Row row1, dgNijiyoboJohoTaishoIchiran_Row row2) {
-                return row1.getTekiyoKaishiYMD().getValue().isBefore(row2.getTekiyoKaishiYMD().getValue()) ? -1 : 1;
+        List<dgNijiyoboJohoTaishoIchiran_Row> rowList1 = new ArrayList<>();
+        List<dgNijiyoboJohoTaishoIchiran_Row> rowList2 = new ArrayList<>();
+        for (dgNijiyoboJohoTaishoIchiran_Row row : rowList) {
+            if (null != row.getTekiyoKaishiYMD() && null != row.getTekiyoKaishiYMD().getValue()) {
+                rowList1.add(row);
+            } else {
+                rowList2.add(row);
             }
-        });
+        }
+        rowList.clear();
+        if (!rowList1.isEmpty()) {
+            Collections.sort(rowList1, new Comparator<dgNijiyoboJohoTaishoIchiran_Row>() {
+                @Override
+                public int compare(dgNijiyoboJohoTaishoIchiran_Row row1, dgNijiyoboJohoTaishoIchiran_Row row2) {
+                    return row1.getTekiyoKaishiYMD().getValue().isBefore(row2.getTekiyoKaishiYMD().getValue()) ? -1 : 1;
+                }
+            });
+            for (dgNijiyoboJohoTaishoIchiran_Row row : rowList1) {
+                rowList.add(row);
+            }
+        }
+        if (!rowList2.isEmpty()) {
+            for (dgNijiyoboJohoTaishoIchiran_Row row : rowList2) {
+                rowList.add(row);
+            }
+        }
     }
 
     /**
