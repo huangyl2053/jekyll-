@@ -27,6 +27,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
     private FlexibleYear 開始賦課年度;
     private FlexibleYear 終了賦課年度;
     private FlexibleYear 会計年度;
+    private FlexibleYearMonth 調定基準年月;
     private FlexibleYearMonth 基準年月;
     private FlexibleDate 開始生年月日;
     private FlexibleDate 終了生年月日;
@@ -46,6 +47,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
      * @param 開始賦課年度 開始賦課年度
      * @param 終了賦課年度 終了賦課年度
      * @param 会計年度 会計年度
+     * @param 調定基準年月 調定基準年月
      * @param 基準年月 基準年月
      * @param 開始生年月日 開始生年月日
      * @param 終了生年月日 終了生年月日
@@ -60,6 +62,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
             FlexibleYear 開始賦課年度,
             FlexibleYear 終了賦課年度,
             FlexibleYear 会計年度,
+            FlexibleYearMonth 調定基準年月,
             FlexibleYearMonth 基準年月,
             FlexibleDate 開始生年月日,
             FlexibleDate 終了生年月日,
@@ -73,6 +76,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
         this.開始賦課年度 = 開始賦課年度;
         this.終了賦課年度 = 終了賦課年度;
         this.会計年度 = 会計年度;
+        this.調定基準年月 = 調定基準年月;
         this.基準年月 = 基準年月;
         this.開始生年月日 = 開始生年月日;
         this.終了生年月日 = 終了生年月日;

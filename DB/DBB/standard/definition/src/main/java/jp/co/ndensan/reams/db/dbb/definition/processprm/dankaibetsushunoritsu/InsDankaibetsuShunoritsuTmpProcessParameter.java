@@ -56,6 +56,7 @@ public class InsDankaibetsuShunoritsuTmpProcessParameter implements IBatchProces
                 開始賦課年度,
                 終了賦課年度,
                 会計年度,
+                調定基準年月,
                 基準年月,
                 開始生年月日,
                 終了生年月日,
