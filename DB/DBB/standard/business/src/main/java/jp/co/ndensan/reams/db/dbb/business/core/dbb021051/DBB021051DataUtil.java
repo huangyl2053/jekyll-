@@ -56,7 +56,7 @@ public class DBB021051DataUtil {
     private static final RString SEVEN = new RString("7");
     private static final RString ERRORKUBUN = new RString("99");
     private static final RString 生活保護受給者情報 = new RString("【生活保護受給者情報】　　");
-    private static final RString 生活保護受給者情報2 = new RString("                                              ");
+    private static final RString 生活保護受給者情報2 = new RString("                          ");
     private static final RString 普通徴収 = new RString("普通徴収");
     private static final RString 特別徴収 = new RString("特別徴収");
     private static final RString 基準年月 = new RString("【基準年月】　");
@@ -78,7 +78,7 @@ public class DBB021051DataUtil {
     private static final RString 表示しない = new RString("表示しない");
     private static final RString 宛先住所設定 = new RString("【宛先住所設定】");
     private static final RString 出力順 = new RString("【出力順】　");
-    private static final RString 出力順2 = new RString("                     ");
+    private static final RString 出力順2 = new RString("            ");
     private static final RString 取込対象データなし = new RString("取込対象データなし");
     private RString tmp;
     private boolean 最優先住所がニ;
