@@ -118,15 +118,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(), batchPram.getHakkoYMD(),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
 
-        IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
-        AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
-        宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-        宛先builder.set基準日(batchPram.getHakkoYMD());
-        宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
-        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
-        SofubutsuAtesakiSource atesakiSource
-                = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
-
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> 帳票ソースデータ = new ArrayList<>();
         ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
         RString key = RString.EMPTY;
@@ -156,6 +147,17 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
                 item.setKyufuShu2(kyufuShu.substring(文字数_38, 文字数_76));
                 item.setKyufuShu3(kyufuShu.substring(文字数_76));
             }
+
+            IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
+            AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
+            宛先builder.set識別コード(shiharai.get識別コード());
+            宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+            宛先builder.set基準日(batchPram.getHakkoYMD());
+            宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+            IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
+            SofubutsuAtesakiSource atesakiSource
+                    = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
+
             item = create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, atesakiSource);
         }
         return 帳票ソースデータ;
@@ -222,19 +224,16 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         }
         if (ShiharaiHohoKubun.窓口払.getコード().equals(shiharai.get支払方法区分コード())) {
             item.setTorikeshi1(RString.EMPTY);
-            item.setTorikeshi2(RString.EMPTY);
-            item.setTorikeshiMochimono1(RString.EMPTY);
-            item.setTorikeshiMochimono2(RString.EMPTY);
-            item.setTorikeshiShiharaibasho(RString.EMPTY);
-            item.setTorikeshiShiharaikikan(RString.EMPTY);
+            item.setTorikeshi2(記号_星);
+            
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(shiharai.get支払方法区分コード())) {
             item.setTorikeshi1(記号_星);
-            item.setTorikeshi2(記号_星);
-            item.setTorikeshiMochimono1(記号_星);
-            item.setTorikeshiMochimono2(記号_星);
-            item.setTorikeshiShiharaibasho(記号_星);
-            item.setTorikeshiShiharaikikan(記号_星);
+            item.setTorikeshi2(RString.EMPTY);
         }
+        item.setTorikeshiMochimono1(RString.EMPTY);
+        item.setTorikeshiMochimono2(RString.EMPTY);
+        item.setTorikeshiShiharaibasho(RString.EMPTY);
+        item.setTorikeshiShiharaikikan(RString.EMPTY);
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         item.setMochimono1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言１));
         item.setMochimono2(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言２));
@@ -243,11 +242,11 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         item.setShiharaiStartYMD(shiharai.get支払期間開始年月日() == null
                 ? RString.EMPTY : shiharai.get支払期間開始年月日().wareki().eraType(
                         EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                        Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         item.setShiharaiEndYMD(shiharai.get支払期間終了年月日() == null
                 ? RString.EMPTY : shiharai.get支払期間終了年月日().wareki().eraType(
                         EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                        Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         item.setShiharaiStartHMS(setDataTimeFomart(shiharai.get支払窓口開始時間()));
         item.setShiharaiEndHMS(setDataTimeFomart(shiharai.get支払窓口終了期間()));
         if (!RString.isNullOrEmpty(shiharai.get支払窓口開始時間()) && !RString.isNullOrEmpty(shiharai.get支払窓口終了期間())) {
@@ -261,7 +260,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         item.setSihaYoYmd(batchPram.getHurikomiYMD() == null
                 ? RString.EMPTY : batchPram.getHurikomiYMD().wareki().eraType(
                         EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                        Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         item.setSeirino(shiharai.get整理番号());
         item.setTsuchino(shiharai.get決定通知No());
         RString タイトル = RString.EMPTY;

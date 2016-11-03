@@ -78,8 +78,10 @@
         DbT7063_Keikaku."kanrishaName"                                      AS dbT7063_Keikaku管理者氏名,
         DbT7063_Keikaku."kanrishaNameKana"                                  AS dbT7063_Keikaku管理者氏名カナ,
         DbT3006."itakusakiJigyoshaNo"                                       AS dbT3006委託先事業者番号,
-        DbT7063_Itaku."jigyoshaName"                                        AS dbT7063_Itaku事業者名称,
-        DbT7063_Itaku."jigyoshaNameKana"                                    AS dbT7063_Itaku事業者カナ名称,
+        DbT7060_Itaku."jigyoshaName"                                        AS dbT7060_Itaku事業者名称,
+
+        DbT7060_Itaku."jigyoshaNameKana"                                    AS dbT7060_Itaku事業者カナ名称,
+
         DbV4001."jukyuShinseiJiyu"                                          AS dbV4001受給申請事由,
         DbV4001."jukyuShinseiYMD"                                           AS dbV4001受給申請年月日,
         DbV4001."yokaigoJotaiKubunCode"                                     AS dbV4001要介護認定状態区分コード,
@@ -119,27 +121,27 @@
         GROUP BY "jigyoshaNo","serviceShuruiCode"
         ) AS A
         )
-        LEFT OUTER JOIN rgdb."DbT7063KaigoJigyoshaShiteiService" AS DbT7063_Itaku
-        ON DbT3006."itakusakiJigyoshaNo" = DbT7063_Itaku."jigyoshaNo"
-        AND DbT7063_Itaku."yukoKaishiYMD" IN
+        LEFT OUTER JOIN
+        rgdb."DbT7060KaigoJigyosha" AS DbT7060_Itaku ON
+        DbT3006."itakusakiJigyoshaNo" = DbT7060_Itaku."jigyoshaNo" AND
+        DbT7060_Itaku."yukoKaishiYMD" IN
         (
-        SELECT
-        A."yukoKaishiYMD"
-        FROM
-        (
-        SELECT
-        "jigyoshaNo",
-        MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
-        FROM
-        rgdb."DbT7063KaigoJigyoshaShiteiService"
-        WHERE
-        "jigyoshaNo" = DbT3006."itakusakiJigyoshaNo"
-        AND
-        "serviceShuruiCode" = DbT3006."serviceShuruiCode"
-        GROUP BY
-        "jigyoshaNo","serviceShuruiCode"
-        ) AS A
-        )
+            SELECT
+            A."yukoKaishiYMD"
+            FROM
+            (
+            SELECT
+                "jigyoshaNo",
+                MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
+            FROM
+                rgdb."DbT7060KaigoJigyosha"
+            WHERE
+                "jigyoshaNo" = DbT3006."itakusakiJigyoshaNo"                
+            GROUP BY
+                "jigyoshaNo"
+            ) AS A
+        )  
+
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" AS DbV1001
         ON DbT3005."hihokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN rgdb."DbV1004ShisetsuNyutaisho" AS DbV1004
@@ -468,8 +470,8 @@
         <result property="dbT7063_Keikaku管理者氏名" column="dbT7063_Keikaku管理者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="dbT7063_Keikaku管理者氏名カナ" column="dbT7063_Keikaku管理者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="dbT3006委託先事業者番号" column="dbT3006委託先事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <result property="dbT7063_Itaku事業者名称" column="dbT7063_Itaku事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <result property="dbT7063_Itaku事業者カナ名称" column="dbT7063_Itaku事業者カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="dbT7063_Itaku事業者名称" column="dbT7060_Itaku事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="dbT7063_Itaku事業者カナ名称" column="dbT7060_Itaku事業者カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="dbV4001受給申請事由" column="dbV4001受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="dbV4001受給申請年月日" column="dbV4001受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="dbV4001要介護認定状態区分コード" column="dbV4001要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>

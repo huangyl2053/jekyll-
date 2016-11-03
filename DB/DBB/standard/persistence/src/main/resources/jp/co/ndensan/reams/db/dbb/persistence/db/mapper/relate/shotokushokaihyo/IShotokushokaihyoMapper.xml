@@ -187,27 +187,6 @@
     
     
     <!--所得照会候補者を削除します。-->
-    <insert id="delete所得照会候補者" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYear">
-        DELETE FROM "ShotokuShoukaiKouhoshaTemp"
-        WHERE "shikibetsuCode" IN(
-        SELECT
-        DISTINCT "DbV2502KaigoShotoku"."shikibetsuCode"
-        FROM rgdb."DbV2502KaigoShotoku" AS "DbV2502KaigoShotoku"
-        LEFT JOIN(
-        SELECT
-        "shikibetsuCode",
-        MAX("rirekiNo") AS 履歴番号
-        FROM rgdb."DbV2502KaigoShotoku"
-        WHERE "shotokuNendo"=#{処理年度}
-        GROUP BY "shikibetsuCode", "shotokuNendo"
-        ORDER BY "shotokuNendo" ASC , "shikibetsuCode" ASC
-        ) AS 介護所得
-        ON "DbV2502KaigoShotoku"."shikibetsuCode"=介護所得."shikibetsuCode"
-        WHERE "DbV2502KaigoShotoku"."shotokuNendo"=#{処理年度}
-        )
-    </insert>
-    
-    <!--所得照会候補者を削除します。-->
     <insert id="delete所得照会候補者1" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShotokuNendoParameter">
         DELETE FROM "ShotokuShoukaiKouhoshaTemp"
         WHERE "shikibetsuCode" IN(
@@ -788,7 +767,7 @@
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshajusho" column="hihokenshajusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zenjusho" column="前住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="jusho" column="現住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="genjusho" column="現住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kanaMeisho" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="meisho" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

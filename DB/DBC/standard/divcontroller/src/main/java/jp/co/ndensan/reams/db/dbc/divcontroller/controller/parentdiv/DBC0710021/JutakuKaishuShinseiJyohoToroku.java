@@ -430,24 +430,14 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (画面モード.equals(ResponseHolder.getState())) {
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (画面モード_審査.equals(画面モード)) {
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
+        } else if (画面モード_照会.equals(画面モード)) {
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).
+                    parameter(画面モード_以外);
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (画面モード_審査.equals(画面モード)) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
-            } else if (画面モード_照会.equals(画面モード)) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
-            } else {
-                return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).
-                        parameter(画面モード_以外);
-            }
-        }
-        return ResponseData.of(div).respond();
     }
 
     /**
