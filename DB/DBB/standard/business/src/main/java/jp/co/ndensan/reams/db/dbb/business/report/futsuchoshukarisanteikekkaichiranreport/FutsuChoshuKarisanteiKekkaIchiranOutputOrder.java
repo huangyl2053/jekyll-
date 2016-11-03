@@ -18,7 +18,7 @@ public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems
     /**
      * 郵便番号
      */
-    郵便番号(new RString("0001"), new RString("町域コード"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
+    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
     /**
      * 町域コード
      */
@@ -62,11 +62,11 @@ public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems
     /**
      * 徴収方法
      */
-    徴収方法(new RString("0209"), new RString(""), new RString("\"dbT2015KeisangoJoho_choshuHohoRirekiNo\"")),
+    徴収方法(new RString("0209"), new RString(""), new RString("\"SortTemp_choshuHoho\"")),
     /**
      * 通知書番号
      */
-    特徴開始月(new RString("0213"), new RString(""), new RString("\"dbT2015KeisangoJoho_choshuHohoRirekiNo\""));
+    特徴開始月(new RString("0213"), new RString(""), new RString("\"SortTemp_tkKaishiM\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

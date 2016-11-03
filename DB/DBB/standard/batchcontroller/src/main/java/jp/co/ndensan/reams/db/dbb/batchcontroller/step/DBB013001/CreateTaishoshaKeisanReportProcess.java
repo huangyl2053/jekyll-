@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.PrtKaigoFukaTokuchoHeijunkaCore;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.DBB200005_HeijunkaKeisanIchiran;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.DBB200003_HeijunkaKeisanJuneKekkaIchiran;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TkChoshuHeijunkaKeisanJuneKekkaIchiranPageBreak;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TokuchoHeijunkaRokuBatchTaishoshaHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranSource;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -75,9 +75,9 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 特別徴収平準化計算（特別徴収8月分）結果一覧表対象者の帳票出力クラスです。
  *
- * @reamsid_L DBB-0860-030 jiangxiaolong
+ * @reamsid_L DBB-0860-030 yebangqiang
  */
-public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<TokuchoHeijunkaRokuBatchTaishoshaEntity> {
+public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<TokuchoHeijunkaRokuBatchTaishoshaHachiEntity> {
 
     /**
      * OutputParameter用キー REPORT_FLAG
@@ -128,7 +128,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         出力順 = RString.EMPTY;
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
-                    DBB200003_HeijunkaKeisanJuneKekkaIchiran.class, outputOrder);
+                    DBB200005_HeijunkaKeisanIchiran.class, outputOrder);
             for (ISetSortItem item : outputOrder.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     pageBreakKeys.add(item.get項目ID());
@@ -147,14 +147,13 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
 
     @Override
     protected IBatchReader createReader() {
-        TokuchoHeinjunka6GatsuMyBatisParameter myBatisParameter = new TokuchoHeinjunka6GatsuMyBatisParameter();
+        TokuchoHeinjunka8GatsuMyBatisParameter myBatisParameter = new TokuchoHeinjunka8GatsuMyBatisParameter();
         myBatisParameter.set調定年度(parameter.get調定年度());
         myBatisParameter.set賦課年度(parameter.get賦課年度());
+        myBatisParameter.set調定日時(parameter.get調定日時());
         myBatisParameter.set調定前年度(parameter.get調定年度().minusYear(1));
         myBatisParameter.set出力順(出力順設定(出力順));
         myBatisParameter.setShikibetsutaishoParam(parameter.getShikibetsutaishoParam());
-        //myBatisParameter.set調定日時(new YMDHMS("20160708173939"));
-        //todo
 
         return new BatchDbReader(MAPPERPATH, myBatisParameter);
     }
@@ -162,7 +161,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
     @Override
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue()).
-                addBreak(new TkChoshuHeijunkaKeisanJuneKekkaIchiranPageBreak(pageBreakKeys)).create();
+                addBreak(new TokubetsuChoshuHeijunkaKeisanIchiranPageBreak(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
@@ -179,7 +178,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
     }
 
     @Override
-    protected void usualProcess(TokuchoHeijunkaRokuBatchTaishoshaEntity entity) {
+    protected void usualProcess(TokuchoHeijunkaRokuBatchTaishoshaHachiEntity entity) {
         TokuchoHeijyunkaTaishoshaEntity taishoshaEntity = new TokuchoHeijyunkaTaishoshaEntity();
         特徴平準化計算対象者entity作成(entity, taishoshaEntity);
         RString 算定年額保険料 = taishoshaEntity.get保険料算定段階2() == null ? taishoshaEntity.get保険料算定段階1()
@@ -211,7 +210,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         count.setValue(new RString(batchReportWriter.getPageCount()));
     }
 
-    private void 特徴平準化計算対象者entity作成(TokuchoHeijunkaRokuBatchTaishoshaEntity entity,
+    private void 特徴平準化計算対象者entity作成(TokuchoHeijunkaRokuBatchTaishoshaHachiEntity entity,
             TokuchoHeijyunkaTaishoshaEntity taishoshaEntity) {
         final DbT2015KeisangoJohoEntity 計算後情報 = entity.get計算後情報();
         変更後項目設定(taishoshaEntity, 計算後情報, entity.get宛名(), entity.get特別徴収義務者コード());
@@ -549,6 +548,6 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
     }
 
     @Override
-    protected void keyBreakProcess(TokuchoHeijunkaRokuBatchTaishoshaEntity t) {
+    protected void keyBreakProcess(TokuchoHeijunkaRokuBatchTaishoshaHachiEntity t) {
     }
 }

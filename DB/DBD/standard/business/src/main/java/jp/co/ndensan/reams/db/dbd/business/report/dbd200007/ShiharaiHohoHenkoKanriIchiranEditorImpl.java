@@ -377,23 +377,21 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の収納情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        if (count == 1) {
-            source.nendoUpper1 = new RStringBuilder()
-                    .append(左括弧)
-                    .append(日付関連_調定年度.minusYear(2).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                    .append(右括弧).toRString();
-            source.nendoUpper2 = new RStringBuilder()
-                    .append(左括弧)
-                    .append(日付関連_調定年度.minusYear(1).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                    .append(右括弧).toRString();
-            source.nendoUpper3 = new RStringBuilder()
-                    .append(左括弧)
-                    .append(日付関連_調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                    .append(右括弧).toRString();
-        }
+        source.nendoUpper1 = new RStringBuilder()
+                .append(左括弧)
+                .append(日付関連_調定年度.minusYear(2).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(右括弧).toRString();
+        source.nendoUpper2 = new RStringBuilder()
+                .append(左括弧)
+                .append(日付関連_調定年度.minusYear(1).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(右括弧).toRString();
+        source.nendoUpper3 = new RStringBuilder()
+                .append(左括弧)
+                .append(日付関連_調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(右括弧).toRString();
 
         edit上部_年度１の期(source);
         edit上部_年度２の期(source);
@@ -796,23 +794,21 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の収納情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        if (count == 1) {
-            source.nendoLower1 = new RStringBuilder()
-                    .append(左括弧)
-                    .append(日付関連_調定年度.minusYear(2).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                    .append(右括弧).toRString();
-            source.nendoLower2 = new RStringBuilder()
-                    .append(左括弧)
-                    .append(日付関連_調定年度.minusYear(1).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                    .append(右括弧).toRString();
-            source.nendoLower3 = new RStringBuilder()
-                    .append(左括弧)
-                    .append(日付関連_調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
-                    .append(右括弧).toRString();
-        }
+        source.nendoLower1 = new RStringBuilder()
+                .append(左括弧)
+                .append(日付関連_調定年度.minusYear(2).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(右括弧).toRString();
+        source.nendoLower2 = new RStringBuilder()
+                .append(左括弧)
+                .append(日付関連_調定年度.minusYear(1).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(右括弧).toRString();
+        source.nendoLower3 = new RStringBuilder()
+                .append(左括弧)
+                .append(日付関連_調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .append(右括弧).toRString();
         edit下部_年度１の期(source);
         edit下部_年度２の期(source);
         edit下部_年度３の期(source);

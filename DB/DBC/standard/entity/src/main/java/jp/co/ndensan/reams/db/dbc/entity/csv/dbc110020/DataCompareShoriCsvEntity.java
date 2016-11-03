@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * データ比較処理を実行する。
+ * 国保連受給者異動情報履歴訂正リストCSVする。
  *
  * @reamsid_L DBC-2720-070 chenhui
  */

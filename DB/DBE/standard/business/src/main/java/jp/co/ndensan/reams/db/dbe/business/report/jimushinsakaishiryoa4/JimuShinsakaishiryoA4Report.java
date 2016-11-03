@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishi
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa4.JimuShinsakaishiryoA4ReportSource;
@@ -32,6 +33,7 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
     private final JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho;
     private final JimuSonotashiryoBusiness sonotashiryoBusiness;
     private final List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList;
+    private final RString reportId;
     private static final int LENGTH_20 = 20;
     private static final int MAXCOUNT = 30;
 
@@ -44,17 +46,20 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
      * @param tuikaSiryoBusinessList 追加資料鑑情報のBusinessの編集クラス
+     * @param reportId 帳票ＩＤ
      */
     public JimuShinsakaishiryoA4Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA4Entity ichijihanteiEntity, TokkiText1A4Business tokkiTextBusiness,
             JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness,
-            List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList) {
+            List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList,
+            RString reportId) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.ichijihanteiEntity = ichijihanteiEntity;
         this.tokkiTextBusiness = tokkiTextBusiness;
         this.shinsakaiWariateJoho = shinsakaiWariateJoho;
         this.sonotashiryoBusiness = sonotashiryoBusiness;
         this.tuikaSiryoBusinessList = tuikaSiryoBusinessList;
+        this.reportId = reportId;
     }
 
     @Override
@@ -76,19 +81,36 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
                 IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group3Editor(tokkiTextBusiness, 短冊情報リスト, 短冊リスト, i);
                 IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor1);
                 reportSourceWriter.writeLine(builder);
-            } else {
-                int page = (i + MAXCOUNT) / MAXCOUNT;
-                IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group4Editor(tokkiTextBusiness, 短冊情報リスト, 短冊リスト, i, page - 1);
-                IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
-                reportSourceWriter.writeLine(builder2);
             }
         }
-        IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho);
+        if (ReportIdDBE.DBE517901.getReportId().value().equals(reportId)) {
+            for (int i = 0; i < 短冊リスト.size(); i++) {
+                if (MAXCOUNT <= i) {
+                    int page = (i + MAXCOUNT) / MAXCOUNT;
+                    IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group4Editor(
+                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, i, page - 1, reportId);
+                    IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
+            }
+        }
+        IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
         IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
         reportSourceWriter.writeLine(builder);
-        IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho);
+        IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho, reportId);
         IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
         reportSourceWriter.writeLine(builder1);
+        if (ReportIdDBE.DBE517904.getReportId().value().equals(reportId)) {
+            for (int i = 0; i < 短冊リスト.size(); i++) {
+                if (MAXCOUNT <= i) {
+                    int page = (i + MAXCOUNT) / MAXCOUNT;
+                    IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group4Editor(
+                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, i, page - 1, reportId);
+                    IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
+            }
+        }
         //TODO 複数件の場合、実装なし。
         IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group7Editor(sonotashiryoBusiness);
         IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -15,13 +15,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 特徴平準化（特徴8月分）バッチ平準化前賦課Temp出力クラスです。
  *
  * @reamsid_L DBB-0860-030 yebangqiang
  */
-public class GetFukaJohoProcess extends BatchProcessBase<FukaJohoTmpEntity> {
+public class GetFukaJohoProcess extends BatchProcessBase<FukaJohoTmpHachiEntity> {
 
     private static final RString 平準化前賦課TEMP_TABLE_NAME = new RString("TmpHeijunkaMae");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
@@ -44,14 +45,14 @@ public class GetFukaJohoProcess extends BatchProcessBase<FukaJohoTmpEntity> {
     private static final int 期_14 = 14;
     private TokuchoHeinjunka8GatsuProcessParameter parameter;
     private TsuchishoNo tsuchishoNo = TsuchishoNo.EMPTY;
-    private FukaJohoTmpEntity fukaTmpEntity;
+    private FukaJohoTmpHachiEntity fukaTmpEntity;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 平準化前賦課一時tableWriter;
 
     @Override
     protected void createWriter() {
         平準化前賦課一時tableWriter = new BatchEntityCreatedTempTableWriter(平準化前賦課TEMP_TABLE_NAME,
-                FukaJohoTmpEntity.class, true);
+                FukaJohoTmpHachiEntity.class, true);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class GetFukaJohoProcess extends BatchProcessBase<FukaJohoTmpEntity> {
     }
 
     @Override
-    protected void process(FukaJohoTmpEntity fukaTmpEntity) {
+    protected void process(FukaJohoTmpHachiEntity fukaTmpEntity) {
         if (tsuchishoNo.equals(fukaTmpEntity.getTsuchishoNo())) {
             金額設定(fukaTmpEntity);
         } else {
@@ -83,82 +84,82 @@ public class GetFukaJohoProcess extends BatchProcessBase<FukaJohoTmpEntity> {
         }
     }
 
-    private void 金額設定(FukaJohoTmpEntity fukaTmpEntity) {
+    private void 金額設定(FukaJohoTmpHachiEntity fukaTmpEntity) {
         if (徴収方法_特別.equals(fukaTmpEntity.getChoshuHouhou())) {
-            特別徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi());
+            特別徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi(), fukaTmpEntity.getChoteigaku());
         } else if (徴収方法_普通.equals(fukaTmpEntity.getChoshuHouhou())) {
-            普通徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi());
+            普通徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi(), fukaTmpEntity.getChoteigaku());
         }
     }
 
-    private void 普通徴収金額設定(FukaJohoTmpEntity fukaTmpEntity, int ki) {
+    private void 普通徴収金額設定(FukaJohoTmpHachiEntity fukaTmpEntity, int ki, Decimal choteigaku) {
         switch (ki) {
             case 期_01:
-                fukaTmpEntity.setFuKibetsuGaku01(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku01(choteigaku);
                 break;
             case 期_02:
-                fukaTmpEntity.setFuKibetsuGaku02(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku02(choteigaku);
                 break;
             case 期_03:
-                fukaTmpEntity.setFuKibetsuGaku03(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku03(choteigaku);
                 break;
             case 期_04:
-                fukaTmpEntity.setFuKibetsuGaku04(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku04(choteigaku);
                 break;
             case 期_05:
-                fukaTmpEntity.setFuKibetsuGaku05(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku05(choteigaku);
                 break;
             case 期_06:
-                fukaTmpEntity.setFuKibetsuGaku06(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku06(choteigaku);
                 break;
             case 期_07:
-                fukaTmpEntity.setFuKibetsuGaku07(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku07(choteigaku);
                 break;
             case 期_08:
-                fukaTmpEntity.setFuKibetsuGaku08(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku08(choteigaku);
                 break;
             case 期_09:
-                fukaTmpEntity.setFuKibetsuGaku09(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku09(choteigaku);
                 break;
             case 期_10:
-                fukaTmpEntity.setFuKibetsuGaku10(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku10(choteigaku);
                 break;
             case 期_11:
-                fukaTmpEntity.setFuKibetsuGaku11(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku11(choteigaku);
                 break;
             case 期_12:
-                fukaTmpEntity.setFuKibetsuGaku12(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku12(choteigaku);
                 break;
             case 期_13:
-                fukaTmpEntity.setFuKibetsuGaku13(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku13(choteigaku);
                 break;
             case 期_14:
-                fukaTmpEntity.setFuKibetsuGaku14(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setFuKibetsuGaku14(choteigaku);
                 break;
             default:
                 break;
         }
     }
 
-    private void 特別徴収金額設定(FukaJohoTmpEntity fukaTmpEntity, int ki) {
+    private void 特別徴収金額設定(FukaJohoTmpHachiEntity fukaTmpEntity, int ki, Decimal choteigaku) {
         switch (ki) {
             case 期_01:
-                fukaTmpEntity.setTkKibetsuGaku01(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setTkKibetsuGaku01(choteigaku);
                 break;
             case 期_02:
-                fukaTmpEntity.setTkKibetsuGaku02(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setTkKibetsuGaku02(choteigaku);
                 break;
             case 期_03:
-                fukaTmpEntity.setTkKibetsuGaku03(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setTkKibetsuGaku03(choteigaku);
                 break;
             case 期_04:
-                fukaTmpEntity.setTkKibetsuGaku04(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setTkKibetsuGaku04(choteigaku);
                 break;
             case 期_05:
-                fukaTmpEntity.setTkKibetsuGaku05(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setTkKibetsuGaku05(choteigaku);
                 break;
             case 期_06:
-                fukaTmpEntity.setTkKibetsuGaku06(fukaTmpEntity.getChoteigaku());
+                fukaTmpEntity.setTkKibetsuGaku06(choteigaku);
                 break;
             default:
                 break;

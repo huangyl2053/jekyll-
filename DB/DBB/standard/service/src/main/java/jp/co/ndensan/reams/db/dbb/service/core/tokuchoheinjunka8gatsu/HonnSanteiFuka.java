@@ -27,9 +27,9 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.TaishoshaTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.LogBetsuSeigyoJouhouEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TaishoshaHachiTmpEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -97,91 +97,11 @@ public class HonnSanteiFuka {
     }
 
     /**
-     * 賦課の情報を作成のメソッドです。
+     * get賦課の情報
      *
      * @param 賦課の情報Entity FukaTempEntity
      * @return FukaJoho
      */
-//    public FukaJoho get賦課の情報(TokuchoHeijunkaHachiBatchTaishogaiTempEntity 賦課の情報Entity) {
-//
-//        if (賦課の情報Entity == null || 賦課の情報Entity.getChoteiNendo() == null || 賦課の情報Entity.getChoteiNendo().isEmpty()
-//                || 賦課の情報Entity.getFukaNendo() == null || 賦課の情報Entity.getFukaNendo().isEmpty()
-//                || 賦課の情報Entity.getTsuchishoNo() == null || 賦課の情報Entity.getTsuchishoNo().isEmpty()) {
-//            return null;
-//        }
-//        FukaJoho fuka = new FukaJoho(賦課の情報Entity.getChoteiNendo(), 賦課の情報Entity.getFukaNendo(),
-//                賦課の情報Entity.getTsuchishoNo(), 賦課の情報Entity.getRirekiNo());
-//        fuka = fuka.createBuilderForEdit().set被保険者番号(賦課の情報Entity.getHihokenshaNo())
-//                .set識別コード(賦課の情報Entity.getShikibetsuCode())
-//                .set世帯コード(賦課の情報Entity.getSetaiCode()).set世帯員数(賦課の情報Entity.getSetaiInsu())
-//                .set資格取得日(賦課の情報Entity.getShikakuShutokuYMD()).set資格取得事由(賦課の情報Entity.getShikakuShutokuJiyu())
-//                .set資格喪失日(賦課の情報Entity.getShikakuSoshitsuYMD()).set資格喪失事由(賦課の情報Entity.getShikakuSoshitsuJiyu())
-//                .set生活保護扶助種類(賦課の情報Entity.getSeihofujoShurui()).set生保開始日(賦課の情報Entity.getSeihoKaishiYMD())
-//                .set生保廃止日(賦課の情報Entity.getSeihoHaishiYMD()).set老年開始日(賦課の情報Entity.getRonenKaishiYMD())
-//                .set老年廃止日(賦課の情報Entity.getRonenHaishiYMD()).set賦課期日(賦課の情報Entity.getFukaYMD())
-//                .set課税区分(賦課の情報Entity.getKazeiKubun()).set世帯課税区分(賦課の情報Entity.getSetaikazeiKubun())
-//                .set合計所得金額(賦課の情報Entity.getGokeiShotokuGaku()).set公的年金収入額(賦課の情報Entity.getNenkinShunyuGaku())
-//                .set保険料段階(賦課の情報Entity.getHokenryoDankai()).set保険料算定段階1(賦課の情報Entity.getHokenryoDankai1())
-//                .set算定年額保険料1(賦課の情報Entity.getNengakuHokenryo1()).set保険料算定段階2(賦課の情報Entity.getHokenryoDankai2())
-//                .set算定年額保険料2(賦課の情報Entity.getNengakuHokenryo2()).set調定日時(賦課の情報Entity.getChoteiNichiji())
-//                .set調定事由1(賦課の情報Entity.getChoteiJiyu1()).set調定事由2(賦課の情報Entity.getChoteiJiyu2())
-//                .set調定事由3(賦課の情報Entity.getChoteiJiyu3()).set調定事由4(賦課の情報Entity.getChoteiJiyu4())
-//                .set更正月(賦課の情報Entity.getKoseiM()).set減免前介護保険料_年額(賦課の情報Entity.getGemmenMaeHokenryo())
-//                .set減免額(賦課の情報Entity.getGemmenGaku()).set確定介護保険料_年額(賦課の情報Entity.getKakuteiHokenryo())
-//                .set保険料段階_仮算定時(賦課の情報Entity.getHokenryoDankaiKarisanntei())
-//                .set徴収方法履歴番号(賦課の情報Entity.getChoshuHohoRirekiNo())
-//                .set異動基準日時(賦課の情報Entity.getIdoKijunNichiji()).set口座区分(賦課の情報Entity.getKozaKubun())
-//                .set境界層区分(賦課の情報Entity.getKyokaisoKubun()).set職権区分(賦課の情報Entity.getShokkenKubun())
-//                .set賦課市町村コード(賦課の情報Entity.getFukaShichosonCode()).set特徴歳出還付額(賦課の情報Entity.getTkSaishutsuKampuGaku())
-//                .set普徴歳出還付額(賦課の情報Entity.getFuSaishutsuKampuGaku()).set月割開始年月1(賦課の情報Entity.getTsukiwariStartYM1())
-//                .set月割終了年月1(賦課の情報Entity.getTsukiwariEndYM1()).set月割開始年月2(賦課の情報Entity.getTsukiwariStartYM2())
-//                .set月割終了年月2(賦課の情報Entity.getTsukiwariEndYM2()).build();
-//
-//        FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
-//        fukaJohoRelateEntity.set介護賦課Entity(fuka.toEntity());
-//        List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-//        for (int index = INDEX_1; index < INDEX_7; index++) {
-//            KibetsuEntity 介護期別Relate = new KibetsuEntity();
-//            DbT2003KibetsuEntity 介護期別Entity = new DbT2003KibetsuEntity();
-//            介護期別Entity.setChoteiNendo(賦課の情報Entity.getChoteiNendo());
-//            介護期別Entity.setFukaNendo(賦課の情報Entity.getFukaNendo());
-//            介護期別Entity.setTsuchishoNo(賦課の情報Entity.getTsuchishoNo());
-//            介護期別Entity.setRirekiNo(賦課の情報Entity.getRirekiNo());
-//            介護期別Entity.setChoteiId(new Decimal(index));
-//            介護期別Entity.setChoshuHouhou(ChoshuHohoKibetsu.特別徴収.getコード());
-//            介護期別Entity.setKi(index);
-//            List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
-//            UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
-//            調定共通Entity.setChoteiId(new Decimal(index).longValue());
-//            調定共通Entity.setChoteigaku(get特徴調定額(賦課の情報Entity, index));
-//            調定共通EntityList.add(調定共通Entity);
-//            介護期別Relate.set介護期別Entity(介護期別Entity);
-//            介護期別Relate.set調定共通Entity(調定共通EntityList);
-//            介護期別RelateEntity.add(介護期別Relate);
-//        }
-//        for (int index = INDEX_1; index <= INDEX_14; index++) {
-//            KibetsuEntity 介護期別Relate = new KibetsuEntity();
-//            DbT2003KibetsuEntity 介護期別Entity = new DbT2003KibetsuEntity();
-//            介護期別Entity.setChoteiNendo(賦課の情報Entity.getChoteiNendo());
-//            介護期別Entity.setFukaNendo(賦課の情報Entity.getFukaNendo());
-//            介護期別Entity.setTsuchishoNo(賦課の情報Entity.getTsuchishoNo());
-//            介護期別Entity.setRirekiNo(賦課の情報Entity.getRirekiNo());
-//            介護期別Entity.setChoteiId(new Decimal(index).add(Decimal.TEN));
-//            介護期別Entity.setChoshuHouhou(ChoshuHohoKibetsu.普通徴収.getコード());
-//            介護期別Entity.setKi(index);
-//            List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
-//            UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
-//            調定共通Entity.setChoteiId(new Decimal(index).add(Decimal.TEN).longValue());
-//            調定共通Entity.setChoteigaku(get普通調定額(賦課の情報Entity, index));
-//            調定共通EntityList.add(調定共通Entity);
-//            介護期別Relate.set介護期別Entity(介護期別Entity);
-//            介護期別Relate.set調定共通Entity(調定共通EntityList);
-//            介護期別RelateEntity.add(介護期別Relate);
-//        }
-//        fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
-//        FukaJoho 賦課情報 = new FukaJoho(fukaJohoRelateEntity);
-//        return 賦課情報;
-//    }
     public FukaJoho get賦課の情報(FukaTempEntity 賦課の情報Entity) {
 
         if (賦課の情報Entity == null || 賦課の情報Entity.getDbT2002_choteiNendo() == null || 賦課の情報Entity.getDbT2002_choteiNendo().isEmpty()
@@ -280,22 +200,6 @@ public class HonnSanteiFuka {
         }
     }
 
-//    private Decimal get特徴調定額(TokuchoHeijunkaHachiBatchTaishogaiTempEntity 賦課の情報Entity, int index) {
-//        switch (index) {
-//            case INDEX_1:
-//                return 賦課の情報Entity.getTokubetsuChoteigaku01();
-//            case INDEX_2:
-//                return 賦課の情報Entity.getTokubetsuChoteigaku02();
-//            case INDEX_3:
-//                return 賦課の情報Entity.getTokubetsuChoteigaku03();
-//            case INDEX_4:
-//                return 賦課の情報Entity.getTokubetsuChoteigaku04();
-//            case INDEX_5:
-//                return 賦課の情報Entity.getTokubetsuChoteigaku05();
-//            default:
-//                return 賦課の情報Entity.getTokubetsuChoteigaku06();
-//        }
-//    }
     private Decimal get普通調定額(FukaTempEntity 賦課の情報Entity, int index) {
         switch (index) {
             case INDEX_1:
@@ -328,38 +232,6 @@ public class HonnSanteiFuka {
                 return 賦課の情報Entity.getFuKibetsuGaku14();
         }
     }
-//    private Decimal get普通調定額(TokuchoHeijunkaHachiBatchTaishogaiTempEntity 賦課の情報Entity, int index) {
-//        switch (index) {
-//            case INDEX_1:
-//                return 賦課の情報Entity.getFuchoChoteigaku01();
-//            case INDEX_2:
-//                return 賦課の情報Entity.getFuchoChoteigaku02();
-//            case INDEX_3:
-//                return 賦課の情報Entity.getFuchoChoteigaku03();
-//            case INDEX_4:
-//                return 賦課の情報Entity.getFuchoChoteigaku04();
-//            case INDEX_5:
-//                return 賦課の情報Entity.getFuchoChoteigaku05();
-//            case INDEX_6:
-//                return 賦課の情報Entity.getFuchoChoteigaku06();
-//            case INDEX_7:
-//                return 賦課の情報Entity.getFuchoChoteigaku07();
-//            case INDEX_8:
-//                return 賦課の情報Entity.getFuchoChoteigaku08();
-//            case INDEX_9:
-//                return 賦課の情報Entity.getFuchoChoteigaku09();
-//            case INDEX_10:
-//                return 賦課の情報Entity.getFuchoChoteigaku10();
-//            case INDEX_11:
-//                return 賦課の情報Entity.getFuchoChoteigaku11();
-//            case INDEX_12:
-//                return 賦課の情報Entity.getFuchoChoteigaku12();
-//            case INDEX_13:
-//                return 賦課の情報Entity.getFuchoChoteigaku13();
-//            default:
-//                return 賦課の情報Entity.getFuchoChoteigaku14();
-//        }
-//    }
 
     /**
      * 一時賦課情報を設定のメソッドです。
@@ -1142,10 +1014,10 @@ public class HonnSanteiFuka {
     /**
      * 賦課情報類型転換
      *
-     * @param 対象データTempEntity
-     * @param fukaTmpEntity
+     * @param 対象データTempEntity TaishoshaHachiTmpEntity
+     * @param fukaTmpEntity FukaTempEntity
      */
-    public void do賦課情報類型転換(TaishoshaTmpEntity 対象データTempEntity, FukaTempEntity fukaTmpEntity) {
+    public void do賦課情報類型転換(TaishoshaHachiTmpEntity 対象データTempEntity, FukaTempEntity fukaTmpEntity) {
 
         対象データTempEntity.setChoteiNendo(fukaTmpEntity.getDbT2002_choteiNendo());
         対象データTempEntity.setFukaNendo(fukaTmpEntity.getDbT2002_fukaNendo());
@@ -1196,10 +1068,6 @@ public class HonnSanteiFuka {
         対象データTempEntity.setFukaShichosonCode(fukaTmpEntity.getDbT2002_fukaShichosonCode());
         対象データTempEntity.setTkSaishutsuKampuGaku(fukaTmpEntity.getDbT2002_tkSaishutsuKampuGaku());
         対象データTempEntity.setFuSaishutsuKampuGaku(fukaTmpEntity.getDbT2002_fuSaishutsuKampuGaku());
-
-//        対象データTempEntity.setChoteigaku(fukaTmpEntity.getDbT2002_choteigaku());
-//
-//        対象データTempEntity.setChoshuHouhou(fukaTmpEntity.getDbT2002_choshuHouhou());
         対象データTempEntity.setTokubetsuChoteigaku01(fukaTmpEntity.getTkKibetsuGaku01());
         対象データTempEntity.setTokubetsuChoteigaku02(fukaTmpEntity.getTkKibetsuGaku02());
         対象データTempEntity.setTokubetsuChoteigaku03(fukaTmpEntity.getTkKibetsuGaku03());

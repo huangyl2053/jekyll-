@@ -69,7 +69,7 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranPrintService {
      * @param reportManager ReportManager
      * @param システム日時 YMDHMS
      */
-    private void printFukusu(Long shutsuryokujunID, List<KogakuSogoJigyoServicehiHanteiErrorListEntity> entityList, ReportManager reportManager,
+    public void printFukusu(Long shutsuryokujunID, List<KogakuSogoJigyoServicehiHanteiErrorListEntity> entityList, ReportManager reportManager,
             YMDHMS システム日時) {
         KogakuSogoJigyoServicehiHanteiErrorIchiranProperty property = new KogakuSogoJigyoServicehiHanteiErrorIchiranProperty();
         IAssociationFinder finder = AssociationFinderFactory.createInstance();

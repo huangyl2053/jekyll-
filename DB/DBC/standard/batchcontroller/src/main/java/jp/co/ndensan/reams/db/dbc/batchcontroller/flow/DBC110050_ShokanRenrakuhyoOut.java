@@ -195,7 +195,7 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
                 executeStep(送付ファイル作成);
                 int レコード件数 = getResult(Integer.class, new RString(送付ファイル作成),
                         ShokanRenrakuhyoOutSofuFileSakuseiProcess.PARAMETER_OUT_OUTCOUNT);
-                do文字コード変換(レコード件数);
+                do文字コード変換();
                 総出力件数 = 総出力件数 + レコード件数;
             }
             executeStep(帳票出力_送付済);
@@ -679,10 +679,10 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
         return param;
     }
 
-    private void do文字コード変換(int 件数) {
+    private void do文字コード変換() {
         出力ファイルパス = getResult(
                 RString.class, new RString(送付ファイル作成), ShokanRenrakuhyoOutSofuFileSakuseiProcess.OUTPUT_PATH);
-        if (Encode.UTF_8.equals(processParameter.get文字コード()) && 件数 != INDEX_0) {
+        if (Encode.UTF_8.equals(processParameter.get文字コード())) {
             入力ファイルパス = getResult(
                     RString.class, new RString(送付ファイル作成), ShokanRenrakuhyoOutSofuFileSakuseiProcess.INPUT_PATH);
             File file = new File(出力ファイルパス.toString());

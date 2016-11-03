@@ -115,7 +115,9 @@ public class SogoJigyoKubunShikyuGendoGakuManager {
             result1 = get日常生活支援総合事業区分支給限度額(日常生活支援総合事業区分支給限度額, 要支援1, 適用開始日);
             result2 = get日常生活支援総合事業区分支給限度額(日常生活支援総合事業区分支給限度額, 要支援2, 適用開始日);
             result3 = get日常生活支援総合事業区分支給限度額(日常生活支援総合事業区分支給限度額, 二次予防, 適用開始日);
-            businessList.add(new SogoJigyoKubunEntity(result1, result2, result3));
+            if (result1 != null || result2 != null || result3 != null) {
+                businessList.add(new SogoJigyoKubunEntity(result1, result2, result3));
+            }
         }
         return businessList;
     }
@@ -139,8 +141,10 @@ public class SogoJigyoKubunShikyuGendoGakuManager {
      * @return 更新結果
      */
     @Transaction
-    public boolean save介護予防_日常生活支援総合事業区分支給限度額(SogoJigyoKubunShikyuGendoGaku 介護予防_日常生活支援総合事業区分支給限度額) {
-        requireNonNull(介護予防_日常生活支援総合事業区分支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業区分支給限度額"));
+    public boolean save介護予防_日常生活支援総合事業区分支給限度額(
+            SogoJigyoKubunShikyuGendoGaku 介護予防_日常生活支援総合事業区分支給限度額) {
+        requireNonNull(介護予防_日常生活支援総合事業区分支給限度額,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業区分支給限度額"));
         if (!介護予防_日常生活支援総合事業区分支給限度額.hasChanged()) {
             return false;
         }

@@ -7,13 +7,12 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheinjunka
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFukaJohoResult;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.setaiinhaakuinputtable.TmpSetaiHaaku;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.LogBetsuSeigyoJouhouEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
@@ -36,17 +35,17 @@ public interface ITokuchoHeinjunka8GatsuBatchMapper {
      * 平準化前賦課Temp情報を取得するメソッドです。
      *
      * @param parameter TokuchoHeinjunka8GatsuMyBatisParameter
-     * @return List<FukaJohoTmpEntity>
+     * @return List<FukaJohoTmpHachiEntity>
      */
-    List<FukaJohoTmpEntity> get平準化前賦課Temp(TokuchoHeinjunka8GatsuMyBatisParameter parameter);
+    List<FukaJohoTmpHachiEntity> get平準化前賦課Temp(TokuchoHeinjunka8GatsuMyBatisParameter parameter);
 
     /**
      * 特徴停止_賦課エラー一覧へ登録です。
      *
      * @param parameter TokuchoHeinjunka8GatsuMyBatisParameter
-     * @return List<FukaJohoTmpEntity>
+     * @return List<FukaJohoTmpHachiEntity>
      */
-    List<FukaJohoTmpEntity> do特徴停止_賦課エラー一覧へ登録(TokuchoHeinjunka8GatsuMyBatisParameter parameter);
+    List<FukaJohoTmpHachiEntity> do特徴停止_賦課エラー一覧へ登録(TokuchoHeinjunka8GatsuMyBatisParameter parameter);
 
     /**
      * ランク別制御情報です。
@@ -60,9 +59,9 @@ public interface ITokuchoHeinjunka8GatsuBatchMapper {
      * 賦課情報あり_賦課エラー一覧へ登録です。
      *
      *
-     * @return List<FukaJohoTmpEntity>
+     * @return List<FukaJohoTmpHachiEntity>
      */
-    List<FukaJohoTmpEntity> do賦課情報あり_賦課エラー一覧へ登録();
+    List<FukaJohoTmpHachiEntity> do賦課情報あり_賦課エラー一覧へ登録();
 
     /**
      * 月別ランクTemp一時テーブルに登録です。
@@ -83,9 +82,9 @@ public interface ITokuchoHeinjunka8GatsuBatchMapper {
     /**
      * 平準化前賦課Temp情報を取得するメソッドです。
      *
-     * @return List<FukaJohoTmpEntity>
+     * @return List<FukaJohoTmpHachiEntity>
      */
-    List<FukaJohoTmpEntity> getTmpHeijunkaMae();
+    List<FukaJohoTmpHachiEntity> getTmpHeijunkaMae();
 
     /**
      * 対象者データTemp情報を取得するメソッドです。
@@ -104,25 +103,25 @@ public interface ITokuchoHeinjunka8GatsuBatchMapper {
     /**
      * 対象者データの情報を取得するメソッドです。
      *
-     * @param parameter TokuchoHeinjunka6GatsuProcessParameter
+     * @param parameter TokuchoHeinjunka8GatsuProcessParameter
      * @return List<TokuchoHeijunkaRokuBatchTaishoshaEntity>
      */
-    List<TokuchoHeijunkaRokuBatchTaishoshaEntity> get対象者データ(TokuchoHeinjunka6GatsuMyBatisParameter parameter);
+    List<TokuchoHeijunkaRokuBatchTaishoshaEntity> get対象者データ(TokuchoHeinjunka8GatsuMyBatisParameter parameter);
 
     /**
      * get対象外データの情報を取得するメソッドです。
      *
-     * @param parameter TokuchoHeinjunka6GatsuProcessParameter
+     * @param parameter TokuchoHeinjunka8GatsuProcessParameter
      * @return List<TokuchoHeijunkaRokuBatchTaishogaiEntity>
      */
-    List<TokuchoHeijunkaRokuBatchTaishogaiEntity> get対象外データ(TokuchoHeinjunka6GatsuMyBatisParameter parameter);
+    List<TokuchoHeijunkaRokuBatchTaishogaiEntity> get対象外データ(TokuchoHeinjunka8GatsuMyBatisParameter parameter);
 
     /**
      * 処理日付管理テーブルを更新するメソッドです。
      *
-     * @param parameter TokuchoHeinjunka6GatsuProcessParameter
+     * @param parameter TokuchoHeinjunka8GatsuProcessParameter
      */
-    void updateShoriDateKanri(TokuchoHeinjunka6GatsuMyBatisParameter parameter);
+    void updateShoriDateKanri(TokuchoHeinjunka8GatsuMyBatisParameter parameter);
 
     /**
      * 平準化前賦課Tempテーブルに削除
@@ -132,7 +131,7 @@ public interface ITokuchoHeinjunka8GatsuBatchMapper {
     /**
      * 特徴停止_平準化前賦課Tempテーブルに削除
      *
-     * @param parameter TokuchoHeinjunka6GatsuMyBatisParameter
+     * @param parameter TokuchoHeinjunka8GatsuMyBatisParameter
      */
-    void do特徴停止_平準化前賦課Tempからデータを削除(TokuchoHeinjunka6GatsuMyBatisParameter parameter);
+    void do特徴停止_平準化前賦課Tempからデータを削除(TokuchoHeinjunka8GatsuMyBatisParameter parameter);
 }

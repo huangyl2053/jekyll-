@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoK
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -118,6 +119,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         OUTPUT_PATH = new RString("outputPath");
     }
 
+    @BatchWriter
     private CsvWriter csvWriter;
 
     @Override
@@ -164,20 +166,18 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         } else {
             入力ファイルパス = csvFilePath;
         }
+        csvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス).
+                setDelimiter(カンマ).
+                setEnclosure(RString.EMPTY).
+                setEncode(parameter.get文字コード()).
+                setNewLine(NewLine.CRLF).
+                hasHeader(false).
+                build();
     }
 
     @Override
     protected void process(KogakuGassanShinseishoSofuFileEntity entity) {
 
-        if (csvWriter == null) {
-            csvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス).
-                    setDelimiter(カンマ).
-                    setEnclosure(RString.EMPTY).
-                    setEncode(parameter.get文字コード()).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(false).
-                    build();
-        }
         if (beforeEntity == null) {
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getControlEntity());
@@ -224,9 +224,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getEndEntity());
         }
-        if (csvWriter != null) {
-            csvWriter.close();
-        }
+        csvWriter.close();
         outputCount.setValue(総出力件数);
         inputPath.setValue(入力ファイルパス);
         outputPath.setValue(csvFilePath);

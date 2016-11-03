@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWar
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.jimutokkitext.JimuTokkiTextA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
@@ -31,6 +32,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
     private final JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho;
     private final JimuSonotashiryoBusiness sonotashiryoBusiness;
     private final List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList;
+    private final RString reportId;
     private static final int MAXCOUNT = 30;
     private static final int PAGETWO_MAXCOUNT = 34;
 
@@ -42,15 +44,18 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
      * @param tuikaSiryoBusinessList 追加資料鑑情報のBusinessの編集クラス
+     * @param reportId 帳票ＩＤ
      */
     public JimuShinsakaishiryoA3Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             JimuTokkiTextA3Entity jimuTokkiTextA3Entity, JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho,
-            JimuSonotashiryoBusiness sonotashiryoBusiness, List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList) {
+            JimuSonotashiryoBusiness sonotashiryoBusiness, List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList,
+            RString reportId) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.jimuTokkiTextA3Entity = jimuTokkiTextA3Entity;
         this.shinsakaiWariateJoho = shinsakaiWariateJoho;
         this.sonotashiryoBusiness = sonotashiryoBusiness;
         this.tuikaSiryoBusinessList = tuikaSiryoBusinessList;
+        this.reportId = reportId;
     }
 
     @Override
@@ -68,18 +73,25 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
             IJimuShinsakaishiryoA3Builder builder = new JimuShinsakaishiryoA3Builder(editor);
             reportSourceWriter.writeLine(builder);
         }
-        IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho);
-        IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
-        reportSourceWriter.writeLine(builder1);
+        if (ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
+            IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
+            IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
+            reportSourceWriter.writeLine(builder1);
+        }
         if (MAXCOUNT < 短冊リスト.size()) {
             for (int i = 0; i < 短冊リスト.size(); i++) {
                 int page = (i + PAGETWO_MAXCOUNT) / PAGETWO_MAXCOUNT + 1;
                 if (page <= totalPages) {
-                    IJimuShinsakaishiryoA3Editor editor = new JimuShinsakaishiryoA3Group3Editor(jimuTokkiTextA3Entity, 短冊リスト, i, page);
+                    IJimuShinsakaishiryoA3Editor editor = new JimuShinsakaishiryoA3Group3Editor(jimuTokkiTextA3Entity, 短冊リスト, i, page, reportId);
                     IJimuShinsakaishiryoA3Builder builder = new JimuShinsakaishiryoA3Builder(editor);
                     reportSourceWriter.writeLine(builder);
                 }
             }
+        }
+        if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
+            IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
+            IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
+            reportSourceWriter.writeLine(builder1);
         }
         IJimuShinsakaishiryoA3Editor editor2 = new JimuShinsakaishiryoA3Group5Editor(sonotashiryoBusiness);
         IJimuShinsakaishiryoA3Builder builder2 = new JimuShinsakaishiryoA3Builder(editor2);

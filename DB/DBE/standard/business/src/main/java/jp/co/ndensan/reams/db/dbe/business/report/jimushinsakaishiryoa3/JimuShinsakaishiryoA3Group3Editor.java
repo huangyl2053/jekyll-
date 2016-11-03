@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.jimutokkitext.JimuTokkiTextA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
@@ -63,6 +64,7 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
+    private final RString reportId;
 
     /**
      * インスタンスを生成します。
@@ -71,12 +73,14 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
      * @param 特記事項List List<RString>
      * @param index int
      * @param page int
+     * @param reportId 帳票ＩＤ
      */
-    protected JimuShinsakaishiryoA3Group3Editor(JimuTokkiTextA3Entity item, List<RString> 特記事項List, int index, int page) {
+    protected JimuShinsakaishiryoA3Group3Editor(JimuTokkiTextA3Entity item, List<RString> 特記事項List, int index, int page, RString reportId) {
         this.item = item;
         this.特記事項List = 特記事項List;
         this.index = index;
         this.page = page;
+        this.reportId = reportId;
     }
 
     @Override
@@ -126,7 +130,11 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     item.get申請書管理番号());
         }
-        source.layout = Layouts.四頁目;
+        if (ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
+            source.layout = Layouts.四頁目;
+        } else {
+            source.layout = Layouts.任意;
+        }
         return source;
     }
 

@@ -36,8 +36,6 @@ public class UpDoInterfaceKanriKousinManager {
     private static final RString 交換情報識別番号 = new RString("交換情報識別番号");
     private static final RString ERROR_MESSAGE = new RString("国保連インターフェース管理に更新対象レコードが存在しません");
     private static final RString 再処理可能 = new RString("再処理可能");
-    private static final int 異動レコード件数 = 1;
-    private static final int 訂正レコード件数 = 1;
 
     /**
      * 国保連情報取込共通処理（国保連インタフェース管理TBL更新）のコンストラクタ。
@@ -63,10 +61,13 @@ public class UpDoInterfaceKanriKousinManager {
      * @param 処理対象年月 FlexibleYearMonth
      * @param 再処理区分 RString
      * @param 処理日時 YMDHMS
+     * @param 異動レコード件数 int
+     * @param 訂正レコード件数 int
      * @return 保存成功TRUE エントリ情報削除する時例外が発生したFALSE
      */
     @Transaction
-    public boolean updateInterfaceKanriTbl(RYearMonth 処理対象年月, RString 再処理区分, YMDHMS 処理日時) {
+    public boolean updateInterfaceKanriTbl(RYearMonth 処理対象年月, RString 再処理区分, YMDHMS 処理日時,
+            int 異動レコード件数, int 訂正レコード件数) {
         requireNonNull(処理対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_処理対象年月.toString()));
         requireNonNull(再処理区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_再処理区分.toString()));
         requireNonNull(処理日時, UrSystemErrorMessages.値がempty.getReplacedMessage(MESSAGE_処理日時.toString()));

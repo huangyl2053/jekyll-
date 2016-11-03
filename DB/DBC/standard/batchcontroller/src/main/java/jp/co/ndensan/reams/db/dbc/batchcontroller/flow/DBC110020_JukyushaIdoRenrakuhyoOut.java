@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdShafukuTempP
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdSogoJigyoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdTokuteNyushoTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110020.DBC110020_JukyushaIdoRenrakuhyoOutParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110020.JukyushaIdoRenrakuhyoOutProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020.JukyushaIdoRenrakuhyoOutFlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -69,6 +71,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 受給者異動の抽出 = "insJukyushaIdoRenrakuhyoTemp";
     private static final String データ比較処理 = "dataCompareShori";
     private static final String 国保連インタフェース管理更新 = "upDoInterfaceKanriKousin";
+    private JukyushaIdoRenrakuhyoOutFlowEntity returnEntity;
 
     @Override
     protected void defineFlow() {
@@ -98,6 +101,8 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         }
         executeStep(受給者異動の抽出);
         executeStep(データ比較処理);
+        returnEntity = getResult(JukyushaIdoRenrakuhyoOutFlowEntity.class, new RString(データ比較処理),
+                DataCompareShoriProcess.PARAMETER_OUT_RETURNENTITY);
         executeStep(国保連インタフェース管理更新);
 
     }
@@ -272,8 +277,11 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
 
     @Step(国保連インタフェース管理更新)
     IBatchFlowCommand upDoInterfaceKanriKousin() {
-        return simpleBatch(UpDoInterfaceKanriKousinProcess.class).arguments(getParameter().
-                toProcessParameter())
+        JukyushaIdoRenrakuhyoOutProcessParameter processParameter = getParameter().
+                toProcessParameter();
+        processParameter.set異動連絡票件数(returnEntity.get異動連絡票件数());
+        processParameter.set訂正連絡票件数(returnEntity.get訂正連絡票件数());
+        return simpleBatch(UpDoInterfaceKanriKousinProcess.class).arguments(processParameter)
                 .define();
     }
 }

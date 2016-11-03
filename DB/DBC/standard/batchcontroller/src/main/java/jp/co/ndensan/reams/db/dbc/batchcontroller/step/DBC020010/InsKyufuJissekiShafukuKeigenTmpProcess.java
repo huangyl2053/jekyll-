@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -43,7 +44,10 @@ public class InsKyufuJissekiShafukuKeigenTmpProcess extends BatchProcessBase<DbT
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH, parameter.toMybatisParameter());
+        KyufuJissekiKihonKogakuMybatisParameter mybatisParam = new KyufuJissekiKihonKogakuMybatisParameter();
+        mybatisParam.set最古のサービス提供年月(parameter.get最古のサービス提供年月());
+        mybatisParam.set最新のサービス提供年月(parameter.get最新のサービス提供年月());
+        return new BatchDbReader(MAPPERPATH, mybatisParam);
     }
 
     @Override

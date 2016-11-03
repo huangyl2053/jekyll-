@@ -14,7 +14,7 @@ import lombok.Setter;
 /**
  * ランク別制御情報取得のクラスです。
  *
- * @reamsid_L DBB-0860-030 jiangxiaolong
+ * @reamsid_L DBB-0860-030 yebangqiang
  */
 @Setter
 @Getter

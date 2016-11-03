@@ -195,7 +195,11 @@ public class KanendoFukaHandler {
             row.getTxtJokyo().setValue(定値状況);
             RDateTime 処理日時 = HonsanteiIdoKanendo.createInstance().get処理日時();
             if (処理日時 != null) {
-                row.getTxtShoriNichiji().setValue(new RString(処理日時.toString()));
+                RString 年月日 = 処理日時.getDate().wareki().toDateString();
+                RString 時刻 = 処理日時.getTime().
+                        toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+                RString 基準日時 = 年月日.concat(RString.HALF_SPACE).concat(時刻);
+                row.getTxtShoriNichiji().setValue(基準日時);
             }
         } else if (過年度異動通知書作成.equals(menuID)) {
             RString 処理名 = ShoriName.過年度賦課.get名称();

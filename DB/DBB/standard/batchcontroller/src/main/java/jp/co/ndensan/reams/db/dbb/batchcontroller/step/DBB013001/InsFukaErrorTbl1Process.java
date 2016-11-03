@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.InsFukaErrorTbl1TmpEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0860-030 yebangqiang
  */
-public class InsFukaErrorTbl1Process extends BatchProcessBase<FukaJohoTmpEntity> {
+public class InsFukaErrorTbl1Process extends BatchProcessBase<FukaJohoTmpHachiEntity> {
 
     private static final RString ERRORCODE_01 = new RString("01");
     private static final RString 賦課エラー一覧 = new RString("InsFukaErrorTbl1Temp");
@@ -45,8 +45,8 @@ public class InsFukaErrorTbl1Process extends BatchProcessBase<FukaJohoTmpEntity>
     }
 
     @Override
-    protected void process(FukaJohoTmpEntity fukaJohoResult) {
-        FukaJohoTmpEntity 賦課の情報 = fukaJohoResult;
+    protected void process(FukaJohoTmpHachiEntity fukaJohoResult) {
+        FukaJohoTmpHachiEntity 賦課の情報 = fukaJohoResult;
         InsFukaErrorTbl1TmpEntity insFukaErrorTbl1TmpEntity = new InsFukaErrorTbl1TmpEntity();
         insFukaErrorTbl1TmpEntity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
         insFukaErrorTbl1TmpEntity.setNaibuChouhouID(内部帳票ID);

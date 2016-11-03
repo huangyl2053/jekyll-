@@ -565,6 +565,8 @@ public class GenNendoHonsanteiIdouFath {
                 public int compare(SeikatsuHogoJukyusha o1, SeikatsuHogoJukyusha o2) {
                     if (o2.get受給開始日().isBeforeOrEquals(o1.get受給開始日())) {
                         return -1;
+                    } else if (o2.get受給開始日().equals(o1.get受給開始日())) {
+                        return 0;
                     }
                     return 1;
                 }
@@ -621,6 +623,8 @@ public class GenNendoHonsanteiIdouFath {
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
                     if (o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
                         return -1;
+                    } else if (o2.get受給開始年月日().equals(o1.get受給開始年月日())) {
+                        return 0;
                     }
                     return 1;
                 }

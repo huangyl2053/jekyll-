@@ -62,7 +62,7 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(PATH);
+        return new BatchDbReader(PATH, processParameter.toSetFutangakuMyBatisParameter());
     }
 
     @Override

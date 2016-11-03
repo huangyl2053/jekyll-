@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 賦課計算のEntity。
@@ -26,4 +27,6 @@ public class FuchoKarisanteiKekkaEntity {
     private UeT0511NenkinTokuchoKaifuJohoEntity 介護継承;
     private FukaJohoTempEntity 介護賦課前年度;
     private TsuchishoNo tsuchishoNo;
+    private RString choshuHoho;
+    private RString tkKaishiM;
 }

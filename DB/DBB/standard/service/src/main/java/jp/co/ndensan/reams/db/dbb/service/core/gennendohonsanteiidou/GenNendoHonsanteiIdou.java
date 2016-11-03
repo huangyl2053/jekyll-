@@ -467,6 +467,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
                 if (o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日())) {
                     return 1;
+                } else if (o2.get第1号資格取得年月日().equals(o1.get第1号資格取得年月日())) {
+                    return 0;
                 }
                 return -1;
             }
@@ -1652,9 +1654,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private Integer get特徴停止可能期By基準日時(Tsuki 月, Kitsuki 期月クラス) {
         RString 処理名 = ShoriName.特徴異動情報作成.get名称();
         RString 年度内連番;
-        if (Tsuki._8月 == 月) {
+        if (Tsuki._8月.getコード().equals(月.getコード())) {
             年度内連番 = 年度内連番_0005;
-        } else if (Tsuki._10月 == 月) {
+        } else if (Tsuki._10月.getコード().equals(月.getコード())) {
             年度内連番 = 年度内連番_0007;
         } else {
             年度内連番 = 年度内連番_0009;

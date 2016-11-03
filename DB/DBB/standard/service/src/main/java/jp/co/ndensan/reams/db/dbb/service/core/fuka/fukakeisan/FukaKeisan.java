@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan.KoseigoFukaResult;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
@@ -58,7 +59,6 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHohoBuilder;
-import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbx.business.util.NendoUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -68,7 +68,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
-
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
@@ -219,6 +218,8 @@ public class FukaKeisan extends FukaKeisanFath {
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
                 if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
                     return -1;
+                } else if (o1.get第1号資格取得年月日().equals(o2.get第1号資格取得年月日())) {
+                    return 0;
                 }
                 return 1;
             }
@@ -228,6 +229,8 @@ public class FukaKeisan extends FukaKeisanFath {
             public int compare(NendobunFukaList o1, NendobunFukaList o2) {
                 if (o1.get賦課期日().isBefore(o2.get賦課期日())) {
                     return -1;
+                } else if (o1.get賦課期日().equals(o2.get賦課期日())) {
+                    return 0;
                 }
                 return 1;
             }
@@ -985,6 +988,8 @@ public class FukaKeisan extends FukaKeisanFath {
                 public int compare(SeikatsuHogoJukyusha o1, SeikatsuHogoJukyusha o2) {
                     if (o2.get受給開始日().isBefore(o1.get受給開始日())) {
                         return -1;
+                    } else if (o2.get受給開始日().equals(o1.get受給開始日())) {
+                        return 0;
                     }
                     return 1;
                 }
@@ -1039,6 +1044,8 @@ public class FukaKeisan extends FukaKeisanFath {
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
                     if (o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
                         return -1;
+                    } else if (o2.get受給開始年月日().equals(o1.get受給開始年月日())) {
+                        return 0;
                     }
                     return 1;
                 }
@@ -1168,7 +1175,7 @@ public class FukaKeisan extends FukaKeisanFath {
         if (param.get年額保険料() != null) {
             builder.set減免前介護保険料_年額(param.get年額保険料())
                     .set確定介護保険料_年額(param.get年額保険料().subtract(param.get賦課の情報_設定前().get減免額() == null
-                            ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
+                                    ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
         } else {
             builder.set減免前介護保険料_年額(null).set確定介護保険料_年額(null);
         }

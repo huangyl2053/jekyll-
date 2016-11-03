@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoE
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.CalcKogakuShikyugakuRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DBC040010ShoriKekkaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DBC040010TaishoDataEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DbT3017MatchingEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DbT3170MatchingEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.JissekiFutangakuDataTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.RiyoshaFutanMatchingEntity;
@@ -78,9 +79,9 @@ public interface IKogakuGassanJikofutangakuKeisanMapper {
     /**
      * getShiharaihohoHenkoHosokuのメソッドです。
      *
-     * @return List<DbT3017KyufujissekiKihonEntity>
+     * @return List<DbT3017MatchingEntity>
      */
-    List<DbT3017KyufujissekiKihonEntity> getShiharaihohoHenkoHosoku();
+    List<DbT3017MatchingEntity> getShiharaihohoHenkoHosoku();
 
     /**
      * getShafukuKeigenTempHenkoのメソッドです。
