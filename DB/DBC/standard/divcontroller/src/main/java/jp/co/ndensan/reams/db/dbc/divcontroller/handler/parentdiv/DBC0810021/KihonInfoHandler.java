@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0810021;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.KaigoJigyoshaReturnEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810021.KihonInfoDiv;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -234,7 +234,9 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().setValue(new RDate(
                     shokanKihon.get退所_院年月日().toString()));
         }
-        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().setValue(new Decimal(shokanKihon.get外泊日数()));
+        if (shokanKihon.get外泊日数() != 0) {
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().setValue(new Decimal(shokanKihon.get外泊日数()));
+        }
         if (サービス年月.isBefore(平成２１年４月)
                 || (平成２１年４月.isBeforeOrEquals(サービス年月)
                 && !list.contains(様式番号))) {

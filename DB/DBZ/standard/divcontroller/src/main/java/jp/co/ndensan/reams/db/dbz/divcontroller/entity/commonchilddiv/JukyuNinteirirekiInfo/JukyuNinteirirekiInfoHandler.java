@@ -52,7 +52,10 @@ public class JukyuNinteirirekiInfoHandler {
             dgNinteiRireki_Row row = new dgNinteiRireki_Row();
             row.getShinseiYMD().setValue(list.get申請日());
             row.setShiseiShubetsu(new RString(JukyuShinseiJiyu.toValue(list.get申請種別().getKey()).name()));
-            FlexibleYearMonth yokaigoJotai = (list.get認定有効開始日() == null ? null : list.get認定有効開始日().getYearMonth());
+            FlexibleYearMonth yokaigoJotai = null;
+            if (list.get認定有効開始日() != null && !RString.EMPTY.equals(list.get認定有効開始日())) {
+                yokaigoJotai = list.get認定有効開始日().getYearMonth();
+            }
             if (yokaigoJotai == null) {
                 row.setYokaigoJotaiKubun(RString.EMPTY);
             } else if (new FlexibleYearMonth("200004").isBeforeOrEquals(yokaigoJotai)
