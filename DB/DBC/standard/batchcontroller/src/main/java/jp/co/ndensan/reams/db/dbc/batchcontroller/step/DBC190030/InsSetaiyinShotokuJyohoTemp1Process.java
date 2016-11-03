@@ -53,7 +53,7 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
     protected IBatchReader createReader() {
         RString 抽出条件 = parameter.get抽出条件();
         RString 抽出対象 = parameter.get抽出対象();
-        RString path = RString.EMPTY;
+        RString path = PATH2;
         if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(抽出条件)
                 || (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(抽出条件)
                 && ShinseishoTorokuChushutsuTaisho.基準収入額適用申請書の該当のみ抽出.getコード().equals(抽出対象))) {
