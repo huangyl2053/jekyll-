@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001.InsSetaiTempPro
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001.InsShikakuJyohoTaishoKeisanTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001.InsertKaigoFukaTblProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001.InsertKaigoKibetsuTblProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001.ReportOutputJokenhyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB013001.DBB013001_TokuchoHeinjunka8GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
@@ -64,6 +66,10 @@ public class DBB013001_TokuchoHeinjunka8Gatsu extends BatchFlowBase<DBB013001_To
     private static final String 資格情報対象計算TEMPテーブルに登録 = "insShikakuJyohoTaishoKeisanTemp";
     private static final String 賦課計算_世帯員 = "insSetaiTempProcess";
     private static final String 賦課計算 = "caluculateFuka";
+    private static final String バッチ出力条件表 = "prtReportOutputJokenhyoProcess";
+    private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
+    private static RString 対象者ページ数;
+    private static RString 対象外ページ数;
 
     private DBB013001_TokuchoHeinjunka8GatsuParameter parameter;
     private YMDHMS システム日時;
@@ -97,7 +103,13 @@ public class DBB013001_TokuchoHeinjunka8Gatsu extends BatchFlowBase<DBB013001_To
         executeStep(計算後情報作成);
 
         executeStep(対象者のデータ取得と帳票とEUCファイル出力);
+        対象者ページ数 = getResult(RString.class, new RString(対象者のデータ取得と帳票とEUCファイル出力),
+                CreateTaishoshaKeisanReportProcess.PAGE_COUNT);
         executeStep(対象外のデータ取得と帳票とEUCファイル出力);
+        対象外ページ数 = getResult(RString.class, new RString(対象外のデータ取得と帳票とEUCファイル出力),
+                CreateTaishogaiKeisanReprotProcess.PAGE_COUNT);
+        executeStep(バッチ出力条件表);
+        executeStep(処理日付管理テーブル更新);
     }
 
     /**
@@ -283,6 +295,27 @@ public class DBB013001_TokuchoHeinjunka8Gatsu extends BatchFlowBase<DBB013001_To
                 getParameter().toFukaJohoTorokuBatchParameter()).define();
     }
 
+    /**
+     * バッチ出力条件表を呼び出す。
+     *
+     * @return バッチコマンド
+     */
+    @Step(バッチ出力条件表)
+    protected IBatchFlowCommand prtReportOutputJokenhyoProcess() {
+
+        return simpleBatch(ReportOutputJokenhyoProcess.class).arguments(createParameter()).define();
+    }
+
+    /**
+     * 処理日付管理テーブル更新を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(処理日付管理テーブル更新)
+    protected IBatchFlowCommand updateSystemTimeProcess() {
+        return simpleBatch(UpdShoriDateKanriProcess.class).arguments(createParameter()).define();
+    }
+
     private TokuchoHeinjunka8GatsuProcessParameter createParameter() {
         TokuchoHeinjunka8GatsuProcessParameter param = new TokuchoHeinjunka8GatsuProcessParameter();
         param.set調定年度(parameter.get調定年度());
@@ -291,10 +324,14 @@ public class DBB013001_TokuchoHeinjunka8Gatsu extends BatchFlowBase<DBB013001_To
         param.set出力順ID(parameter.get出力順ID());
         param.set増額平準化方法(parameter.get増額平準化方法());
         param.set減額平準化方法(parameter.get減額平準化方法());
+        if (対象者ページ数 != null && 対象外ページ数 != null) {
+            param.set出力ページ数(Integer.parseInt(対象者ページ数.toString()) + Integer.parseInt(対象外ページ数.toString()));
+        }
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         param.setShikibetsutaishoParam(new UaFt200FindShikibetsuTaishoParam(searchKey));
         return param;
     }
+
 }

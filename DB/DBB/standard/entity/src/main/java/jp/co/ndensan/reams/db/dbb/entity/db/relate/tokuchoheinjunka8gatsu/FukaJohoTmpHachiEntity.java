@@ -34,7 +34,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class Tokuchoheinjunka8gatsu_FukaJohoTmpEntity extends DbTableEntityBase<FukaJohoTmpEntity> implements IDbAccessable {
+public class FukaJohoTmpHachiEntity extends DbTableEntityBase<FukaJohoTmpEntity> implements IDbAccessable {
 
     @TempTableColumnOrder(1)
     private RString insertDantaiCd;

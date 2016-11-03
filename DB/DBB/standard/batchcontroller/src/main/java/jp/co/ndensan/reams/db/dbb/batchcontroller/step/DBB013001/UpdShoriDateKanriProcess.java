@@ -11,27 +11,25 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheinjunka8
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
- * 特徴停止_平準化前賦課Tempテーブルに削除のクラスです。
+ * 「処理日付管理テーブル更新」処理クラスです。
  *
  * @reamsid_L DBB-0860-030 yebangqiang
  */
-public class DelHeijunkaZenFukaTemp2Process extends SimpleBatchProcessBase {
+public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
 
-    private ITokuchoHeinjunka8GatsuBatchMapper mapper;
-    private TokuchoHeinjunka8GatsuMyBatisParameter myBatisParameter;
     private TokuchoHeinjunka8GatsuProcessParameter processParameter;
+    private ITokuchoHeinjunka8GatsuBatchMapper mapper;
 
     @Override
     protected void beforeExecute() {
-        super.beforeExecute();
         mapper = getMapper(ITokuchoHeinjunka8GatsuBatchMapper.class);
     }
 
     @Override
     protected void process() {
-        myBatisParameter = new TokuchoHeinjunka8GatsuMyBatisParameter();
-        myBatisParameter.set調定年度(processParameter.get調定年度());
-        mapper.do特徴停止_平準化前賦課Tempからデータを削除(myBatisParameter);
+        TokuchoHeinjunka8GatsuMyBatisParameter parameter = new TokuchoHeinjunka8GatsuMyBatisParameter();
+        parameter.set調定年度(processParameter.get調定年度());
+        parameter.setシステーム日時(processParameter.get調定日時().getRDateTime());
+        mapper.updateShoriDateKanri(parameter);
     }
-
 }

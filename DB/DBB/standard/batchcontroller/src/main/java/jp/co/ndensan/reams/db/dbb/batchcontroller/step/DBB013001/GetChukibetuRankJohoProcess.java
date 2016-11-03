@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -68,7 +69,7 @@ public class GetChukibetuRankJohoProcess extends BatchProcessBase<DbT1001Hihoken
 
     @Override
     protected void process(DbT1001HihokenshaDaichoEntity entity) {
-        if (null == entity) {
+        if (null == entity || null == 導入形態コード) {
             return;
         }
         TsukibetsuRankTemp rankuEntity = new TsukibetsuRankTemp();
@@ -80,7 +81,7 @@ public class GetChukibetuRankJohoProcess extends BatchProcessBase<DbT1001Hihoken
 
                 get月別ランク情報(new HihokenshaDaicho(entity));
                 rankuEntity.setHihokenshaNo(entity.getHihokenshaNo());
-                rankuEntity = set月別ランク(rankuEntity, 月別ランク情報リスト);
+                set月別ランク(rankuEntity, 月別ランク情報リスト);
 
             }
         }
@@ -94,46 +95,48 @@ public class GetChukibetuRankJohoProcess extends BatchProcessBase<DbT1001Hihoken
         月別ランク情報リスト = rank.get月別ランク情報(資格の情報リスト, parameter.get賦課年度());
     }
 
-    private TsukibetsuRankTemp set月別ランク(TsukibetsuRankTemp rankuEntity, List<MonthShichoson> 月別ランク情報リスト) {
+    private void set月別ランク(TsukibetsuRankTemp rankuEntity, List<MonthShichoson> 月別ランク情報リスト) {
         for (MonthShichoson 月別ランク情報 : 月別ランク情報リスト) {
-            if (Tsuki._4月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun4Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode4Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._5月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun5Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode5Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._6月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun6Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode6Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._7月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun7Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode7Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._8月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun8Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode8Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._9月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun9Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode9Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._10月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun10Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode10Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._11月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun11Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode11Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._12月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun12Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode12Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._1月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun1Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode1Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._2月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun2Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode2Gatsu(月別ランク情報.get市町村コード());
-            } else if (Tsuki._3月.getコード().equals(月別ランク情報.get月().getコード())) {
-                rankuEntity.setRankKubun3Gatsu(月別ランク情報.getランク区分());
-                rankuEntity.setShichosonCode3Gatsu(月別ランク情報.get市町村コード());
+            RString コード = 月別ランク情報.get月().getコード();
+            RString 区分 = 月別ランク情報.getランク区分();
+            LasdecCode 市町村コード = 月別ランク情報.get市町村コード();
+            if (Tsuki._4月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun4Gatsu(区分);
+                rankuEntity.setShichosonCode4Gatsu(市町村コード);
+            } else if (Tsuki._5月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun5Gatsu(区分);
+                rankuEntity.setShichosonCode5Gatsu(市町村コード);
+            } else if (Tsuki._6月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun6Gatsu(区分);
+                rankuEntity.setShichosonCode6Gatsu(市町村コード);
+            } else if (Tsuki._7月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun7Gatsu(区分);
+                rankuEntity.setShichosonCode7Gatsu(市町村コード);
+            } else if (Tsuki._8月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun8Gatsu(区分);
+                rankuEntity.setShichosonCode8Gatsu(市町村コード);
+            } else if (Tsuki._9月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun9Gatsu(区分);
+                rankuEntity.setShichosonCode9Gatsu(市町村コード);
+            } else if (Tsuki._10月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun10Gatsu(区分);
+                rankuEntity.setShichosonCode10Gatsu(市町村コード);
+            } else if (Tsuki._11月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun11Gatsu(区分);
+                rankuEntity.setShichosonCode11Gatsu(市町村コード);
+            } else if (Tsuki._12月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun12Gatsu(区分);
+                rankuEntity.setShichosonCode12Gatsu(市町村コード);
+            } else if (Tsuki._1月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun1Gatsu(区分);
+                rankuEntity.setShichosonCode1Gatsu(市町村コード);
+            } else if (Tsuki._2月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun2Gatsu(区分);
+                rankuEntity.setShichosonCode2Gatsu(市町村コード);
+            } else if (Tsuki._3月.getコード().equals(コード)) {
+                rankuEntity.setRankKubun3Gatsu(区分);
+                rankuEntity.setShichosonCode3Gatsu(市町村コード);
             }
         }
-        return rankuEntity;
     }
 }

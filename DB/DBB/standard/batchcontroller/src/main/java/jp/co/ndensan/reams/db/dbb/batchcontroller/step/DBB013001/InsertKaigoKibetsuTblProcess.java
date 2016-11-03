@@ -31,11 +31,11 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjun
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.TaishoshaTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.CaluculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.KuBunnGaTsurakuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.LogBetsuSeigyoJouhouEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TaishoshaHachiTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheinjunka8gatsu.ITokuchoHeinjunka8GatsuBatchMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
@@ -183,9 +183,9 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
     @Override
     protected void createWriter() {
         対象外データ一時tableWriter = new BatchEntityCreatedTempTableWriter(対象外データTEMP_TABLE_NAME,
-                TaishoshaTmpEntity.class, true);
+                TaishoshaHachiTmpEntity.class, true);
         対象者データ一時tableWriter = new BatchEntityCreatedTempTableWriter(対象者データTEMP_TABLE_NAME,
-                TaishoshaTmpEntity.class, true);
+                TaishoshaHachiTmpEntity.class, true);
         fukaWriter = new BatchEntityCreatedTempTableWriter(賦課情報一時テーブル_NAME, FukaJohoTempEntity.class);
         資格の情報Writer = new BatchEntityCreatedTempTableWriter(資格情報TEMP_TABLE_NAME,
                 DbT1001HihokenshaDaichoEntity.class, true);
@@ -468,7 +468,7 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
             FlexibleYear 調定年度) {
         FukaTempEntity 賦課の情報Entity = entity.get賦課の情報Entity();
         if (賦課の情報Entity != null) {
-            if (Decimal.ZERO.compareTo(賦課の情報.get減免額()) == 1 && null != entity.get資格の情報Entity()) {
+            if (Decimal.ZERO.compareTo(賦課の情報.get減免額()) < 0 && null != entity.get資格の情報Entity()) {
                 資格の情報Writer.delete(entity.get資格の情報Entity());
             } else if (Decimal.ZERO.equals(賦課の情報Entity.getDbT2002_gemmenGaku())) {
                 FukaKonkyo 賦課根拠 = get賦課根拠(生保の情報のリスト, 老福の情報のリスト, 世帯員所得情報List);
@@ -486,10 +486,19 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
                 fukaKokyoBatchParameter.set境界層の情報のリスト(境界層の情報のリスト);
                 fukaKokyoBatchParameter.set調定日時(processParameter.get調定日時());
                 HeijunkaOutput 平準化計算処理結果 = get平準化計算処理結果(年額保険料);
-                do賦課情報出力(資格の情報, 賦課の情報, 徴収方法の情報, 口座List, fukaKokyoBatchParameter,
-                        processParameter.get調定日時(), 調定年度, 平準化計算処理結果);
-                do対象外データTempテーブルに挿入(平準化計算処理結果, 賦課の情報Entity);
+                do平準化計算処理(平準化計算処理結果, 資格の情報, 賦課の情報, 徴収方法の情報, fukaKokyoBatchParameter, 調定年度, 賦課の情報Entity);
             }
+        }
+    }
+
+    private void do平準化計算処理(HeijunkaOutput 平準化計算処理結果, HihokenshaDaicho 資格の情報,
+            FukaJoho 賦課の情報, ChoshuHoho 徴収方法の情報, FukaKokyoBatchParameter fukaKokyoBatchParameter,
+            FlexibleYear 調定年度, FukaTempEntity 賦課の情報Entity) {
+        if (平準化計算処理結果.is平準化済フラグ()) {
+            do賦課情報出力(資格の情報, 賦課の情報, 徴収方法の情報, 口座List, fukaKokyoBatchParameter,
+                    processParameter.get調定日時(), 調定年度, 平準化計算処理結果);
+        } else {
+            do対象外データTempテーブルに挿入(平準化計算処理結果, 賦課の情報Entity);
         }
     }
 
@@ -714,7 +723,7 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
 
     private void do対象外データTempテーブルに挿入(HeijunkaOutput 平準化結果, FukaTempEntity 賦課情報) {
         RString 備考コード = get備考コード(平準化結果);
-        TaishoshaTmpEntity 対象データ = new TaishoshaTmpEntity();
+        TaishoshaHachiTmpEntity 対象データ = new TaishoshaHachiTmpEntity();
         manager.do賦課情報類型転換(対象データ, 賦課情報);
         RString 備考コード1 = 対象データ.get備考コード();
         対象データ.set備考コード(備考コード);

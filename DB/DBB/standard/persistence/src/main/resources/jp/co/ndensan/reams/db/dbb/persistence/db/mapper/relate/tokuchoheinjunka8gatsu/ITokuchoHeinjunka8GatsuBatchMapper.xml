@@ -31,7 +31,7 @@
         ORDER BY "DbT2002Fuka"."tsuchishoNo"
     </select>
     <select id="do賦課情報あり_賦課エラー一覧へ登録" resultOrdered="true" 
-            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity">
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity">
         SELECT
         "TmpHeijunkaMae".*
         FROM
@@ -56,7 +56,7 @@
         )
     </delete>
     <select id="do特徴停止_賦課エラー一覧へ登録" resultOrdered="true" 
-            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity" 
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter">
         SELECT
         "TmpHeijunkaMae".*
@@ -123,7 +123,7 @@
         <result property="jushochiTokureiFlag" column="ShiKakuJohoTemp_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kijunYMD" column="TmpHeijunkaMae_fukaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    <resultMap id="resultMap_FukaInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity" autoMapping="true">
+    <resultMap id="resultMap_FukaInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
@@ -187,7 +187,7 @@
         <result property="fuSaishutsuKampuGaku" column="dbT2002Fuka_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
-    <resultMap id="resultMap_HenjunkaMaeInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity" autoMapping="true">
+    <resultMap id="resultMap_HenjunkaMaeInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
@@ -257,7 +257,7 @@
         <result property="tkKibetsuGaku06" column="tkKibetsuGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuKibetsuGaku01" column="fuKibetsuGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    <select id="getTmpHeijunkaMae" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity">
+    <select id="getTmpHeijunkaMae" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity">
         SELECT
         *
         FROM
@@ -268,17 +268,6 @@
         *
         FROM
         "TmpTaishosha"
-    </select>
-    <select id="get賦課の情報" resultOrdered="true" resultMap="resultMap_FukaHeijunkaKeisanKekaInfo">
-        SELECT
-        "TmpHeijunkaMae".*,
-        "TmpHeijunkaKeisanKeka".*
-        FROM
-        "TmpHeijunkaMae"
-        INNER JOIN
-        "TmpHeijunkaKeisanKeka"
-        ON
-        "TmpHeijunkaMae"."tsuchishoNo" = "TmpHeijunkaKeisanKeka"."通知書番号"
     </select>
     <resultMap id="resultMap_FukaHeijunkaKeisanKekaInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFukaJohoResult" autoMapping="true">
         <id column="tsuchishoNo"/>
@@ -291,7 +280,7 @@
         <result property="変更後特徴期別額_３期" column="henkogoTokuShoKibetsgaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="通知書番号" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler" />
     </resultMap>
-    <select id="get対象者データ" resultOrdered="true" resultMap="resultMap_Taishosha" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter">
+    <select id="get対象者データ" resultOrdered="true" resultMap="resultMap_Taishosha" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter">
         WITH 対象者データ AS(
         SELECT
         計算後情報.*,
@@ -301,12 +290,7 @@
 	対象者データTemp."tokubetsuChoteigaku04" AS "maeTkKibetsuGaku04",
 	対象者データTemp."tokubetsuChoteigaku05" AS "maeTkKibetsuGaku05",
 	対象者データTemp."tokubetsuChoteigaku06" AS "maeTkKibetsuGaku06",
-        <!--計算前情報."tkKibetsuGaku01" AS "maeTkKibetsuGaku01",
-        計算前情報."tkKibetsuGaku02" AS "maeTkKibetsuGaku02",
-        計算前情報."tkKibetsuGaku03" AS "maeTkKibetsuGaku03",
-        計算前情報."tkKibetsuGaku04" AS "maeTkKibetsuGaku04",
-        計算前情報."tkKibetsuGaku05" AS "maeTkKibetsuGaku05",
-        計算前情報."tkKibetsuGaku06" AS "maeTkKibetsuGaku06",-->
+
         年金特徴回付情報."dtTokubetsuChoshuGimushaCode"
         FROM 
         rgdb."DbT2015KeisangoJoho" AS 計算後情報
@@ -323,15 +307,11 @@
         AND 対象者データTemp."fukaNendo" = 計算後情報."fukaNendo"
         AND 対象者データTemp."tsuchishoNo" = 計算後情報."tsuchishoNo"
         AND 対象者データTemp."rirekiNo" = 計算後情報."fukaRirekiNo" - 1 
-<!--        LEFT JOIN
-        rgdb."DbT2015KeisangoJoho" AS 計算前情報
-        ON 
-        計算後情報."tsuchishoNo" = 計算前情報."tsuchishoNo"
-        AND 計算前情報."koseiZengoKubun" = '1'-->
+
         WHERE
         計算後情報."choteiNendo" = #{調定年度}
         AND 計算後情報."fukaNendo" = #{賦課年度}
-        <!--AND 計算後情報."choteiNichiji" = #{調定日時}-->
+        AND 計算後情報."choteiNichiji" = #{調定日時}
         AND 計算後情報."koseiZengoKubun" = '2'
         AND 計算後情報."sakuseiShoriName" = '特徴平準化計算_8月分'
         AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
@@ -353,7 +333,7 @@
         ON 対象者データ."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         ${出力順};
     </select>
-    <resultMap id="resultMap_Taishosha" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaEntity" autoMapping="false">
+    <resultMap id="resultMap_Taishosha" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TokuchoHeijunkaRokuBatchTaishoshaHachiEntity" autoMapping="false">
         <id column="choteiNendo"/>
         <id column="fukaNendo"/>
         <id column="tsuchishoNo"/>
@@ -501,7 +481,7 @@
         <result property="fuShunyuGaku13" column="fuShunyuGaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuShunyuGaku14" column="fuShunyuGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    <select id="get対象外データ" resultOrdered="true" resultMap="resultMap_Taishogai" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter">
+    <select id="get対象外データ" resultOrdered="true" resultMap="resultMap_Taishogai" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter">
         WITH 対象外データ AS (
         SELECT
         DISTINCT
@@ -543,7 +523,7 @@
         ON 対象外データ."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         ${出力順};
     </select>
-    <resultMap id="resultMap_Taishogai" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiEntity" autoMapping="true">
+    <resultMap id="resultMap_Taishogai" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TokuchoHeijunkaRokuBatchTaishogaiHachiEntity" autoMapping="true">
         <id column="choteiNendo"/>
         <id column="fukaNendo"/>
         <id column="hihokenshaNo"/>
@@ -563,7 +543,7 @@
         "updateCount" = "updateCount" + 1
         WHERE 1=1
         AND "subGyomuCode" = 'DBB'
-        AND "shoriName" = '特徴平準化計算_6月分'
+        AND "shoriName" = '特徴平準化計算_8月分'
         AND "shoriEdaban" = '0001'
         AND "nendo" = #{調定年度}
         AND "nendoNaiRenban" = '0001'
@@ -579,7 +559,7 @@
         "hihokennshaKubunCode" = '1'
         AND "ichigoShikakuShutokuYMD" <![CDATA[<=]]> ((CAST(CAST(#{調定年度} AS integer ) +1 AS character(4)))||'0331')
         AND ("shikakuSoshitsuYMD" IS NULL
-                OR (#{調定年度}||'0401')<![CDATA[<=]]> "shikakuSoshitsuYMD")
+                OR (#{調定年度}||'0401')<![CDATA[<]]> "shikakuSoshitsuYMD")
         AND "DbV1001HihokenshaDaicho"."logicalDeletedFlag" = FALSE
     </select>
     <resultMap id="resultMap_HihokenshaTaihoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.HihokenshataishoTempEntity" autoMapping="true">
@@ -670,7 +650,6 @@
         FROM "FukaCalculateTemp" AS "FukaCalculateTemp"
         LEFT JOIN
         rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
-        <!--ON "FukaCalculateTemp"."shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"-->
         LEFT JOIN
         rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
         ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
@@ -793,11 +772,8 @@
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <!--<association property="賦課の情報" typeHandler="jp.co.ndensan.reams.db.dbb.entity.typehandlers.HihokenshaNoTypeHandler"/>-->
         <association property="賦課の情報" resultMap="ResultMap_TaishoshaTmpEntity"/>
-        <!--<association property="賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.TaishoshaTmpEntity"/>-->
         <association property="資格の情報" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity"/>
-        <!--<association property="賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka8batch.TokuchoHeijunkaHachiBatchTaishogaiTempEntity"/>-->
         <association property="徴収方法の情報" resultMap="resultMap_DbT2001ChoshuHohoEntity"/>
         <association property="月別ランク" resultMap="ResultMap_KuBunnGaTsurakuTempEntity"/>
         <association property="特定口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
@@ -975,7 +951,6 @@
         <result property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="賦課計算中間Entity" resultMap="resultMap_賦課計算中間Entity"/>
-        <!--<association property="賦課計算中間Entity" resultMap="resultMap_FukaCalculateEntity"/>-->
         <association property="世帯員Entity" resultMap="resultMap_SetaiShotokuEntity"/>
     </resultMap>
     
@@ -2044,7 +2019,6 @@
         <result property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <result property="kijunYMD" column="dbT2002_fukaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="賦課の情報Entity" resultMap="resultMap_FukaTempEntity"/>
-        <!--<association property="賦課の情報Entity" resultMap="ResultMap_TaishoshaTmpEntity"/>-->
         <association property="資格の情報Entity" resultMap="resultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="月別ランクEntity" resultMap="resultMap_KuBunnGaTsurakuTempEntity"/>
         <association property="世帯員所得情報Entity" resultMap="resultMap_SetaiTempEntity"/>
