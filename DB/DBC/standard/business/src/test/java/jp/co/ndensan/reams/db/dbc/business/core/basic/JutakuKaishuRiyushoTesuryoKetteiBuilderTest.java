@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -35,7 +35,7 @@ public class JutakuKaishuRiyushoTesuryoKetteiBuilderTest extends DbcTestBase {
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         主キー名1 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_介護住宅改修理由書作成事業者番号;
-        主キー名2 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日;
+//        主キー名2 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日;
         主キー名3 = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_履歴番号;
     }
 
@@ -48,7 +48,7 @@ public class JutakuKaishuRiyushoTesuryoKetteiBuilderTest extends DbcTestBase {
         public void setUp() {
             JutakuKaishuRiyushoTesuryoKetteiEntity = new DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity();
             JutakuKaishuRiyushoTesuryoKetteiEntity.setRiyushoSakuseiJigyoshaNo(主キー名1);
-            JutakuKaishuRiyushoTesuryoKetteiEntity.setKetteiYMD(主キー名2);
+//            JutakuKaishuRiyushoTesuryoKetteiEntity.setKetteiYMD(主キー名2);
 
             business = new JutakuKaishuRiyushoTesuryoKettei(JutakuKaishuRiyushoTesuryoKetteiEntity);
 
@@ -64,8 +64,8 @@ public class JutakuKaishuRiyushoTesuryoKetteiBuilderTest extends DbcTestBase {
 
         @Test
         public void 戻り値の決定年月日は_設定した値と同じ決定年月日を返す() {
-            business = sut.set決定年月日(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日).build();
-            assertThat(business.get決定年月日(), is(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日));
+//            business = sut.set決定年月日(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日).build();
+//            assertThat(business.get決定年月日(), is(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_決定年月日));
         }
 
         @Test
