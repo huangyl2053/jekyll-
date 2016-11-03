@@ -47,6 +47,8 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
     private int 資格履歴番号;
     private HihokenshaJohoRelateEntity 退避レコード;
     private boolean 設定フラグ = true;
+    private static final int INT_SAN = 3;
+    private static final int INT_YON = 4;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter teikyoKihonJohoNNTemp;
@@ -92,7 +94,9 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
 
     @Override
     protected void afterExecute() {
-        if (!退避レコード.getShikakuShutokuYMD().toString().equals(退避レコード.getShikakuSoshitsuYMD().toString())) {
+        if (退避レコード != null
+                && !退避レコード.getShikakuShutokuYMD().toString().
+                equals(退避レコード.getShikakuSoshitsuYMD().toString())) {
             資格履歴番号 = 資格履歴番号 + 1;
             set中間DB(退避レコード);
         }
@@ -252,8 +256,14 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
     }
 
     private RString setデータセットキー(HihokenshaJohoRelateEntity entity) {
+        RString 番号 = new RString(String.valueOf(資格履歴番号));
+        for (int i = 0; i < INT_SAN; i++) {
+            if (番号.length() < INT_YON) {
+                番号 = new RString("0").concat(番号);
+            }
+        }
         return entity.getHihokenshaNo().value().concat(
-                DataSetNo._0101被保険者情報.getコード());
+                DataSetNo._0101被保険者情報.getコード()).concat(番号);
     }
 
     private RString get未設定事由(FlexibleDate 日付) {
