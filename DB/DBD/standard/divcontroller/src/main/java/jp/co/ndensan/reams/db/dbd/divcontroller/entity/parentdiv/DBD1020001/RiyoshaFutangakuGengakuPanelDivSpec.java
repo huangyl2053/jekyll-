@@ -264,13 +264,25 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
                 @Override
                 public boolean apply(RiyoshaFutangakuGengakuPanelDiv div) {
                     List<ddlShinseiIchiran_Row> rows = div.getDdlShinseiIchiran().getDataSource();
+                    if (div.getRadKetteiKubun().getSelectedKey().equals(new RString("key1"))) {
+                        return true;
+                    }
+                    if (rows.size() > 1 && div.getDdlShinseiIchiran().getActiveRow() != null) {
+                        rows.remove(div.getDdlShinseiIchiran().getActiveRow().getId());
+                    } else {
+                        return true;
+                    }
                     for (ddlShinseiIchiran_Row row : rows) {
-                        if (div.getTxtKettaiYmd().getValue().isBeforeOrEquals(row.getTxtYukoKigen().getValue()) 
-                                && div.getTxtYukoKigenYmd().getValue().isAfterOrEquals(row.getTxtTekiyoYMD().getValue())) {
-                            return false;
+                        if (row.getTxtYukoKigen().getValue() != null && row.getTxtTekiyoYMD().getValue() != null
+                        && !row.getTxtYukoKigen().getValue().isEmpty() && !row.getTxtTekiyoYMD().getValue().isEmpty()
+                        && row.getKetteiKubun().equals(new RString("承認する"))) {
+                            if (div.getTxtTekiyoYmd().getValue().isBeforeOrEquals(row.getTxtYukoKigen().getValue())
+                            && div.getTxtYukoKigenYmd().getValue().isAfterOrEquals(row.getTxtTekiyoYMD().getValue())) {
+                                return false;
+                            }
                         }
                     }
                     return true;
                 }
-    };
+            };
 }
