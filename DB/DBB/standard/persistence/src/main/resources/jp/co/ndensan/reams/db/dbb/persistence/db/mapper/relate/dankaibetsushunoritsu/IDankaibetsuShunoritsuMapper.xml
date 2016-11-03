@@ -94,7 +94,7 @@
             <if test="is未納分出力区分"> 
                 AND "TotalShunyu"."caT0701Shunyu_kaikeiNendo" = #{会計年度}
             </if>
-            <if test="科目コードリスト != null">
+            <if test="科目コードリスト != null and !科目コードリスト.isEmpty()">
                 AND "TotalShunyu"."urT0700ShunoKanri_kamokuCode" IN
                 <foreach item="科目コード_ロープ"  collection="科目コードリスト" open="(" separator="," close=")">
                     #{科目コード_ロープ}
@@ -121,35 +121,36 @@
         <if test="終了生年月日 != null">
             AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{終了生年月日}
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '町域' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+       
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '町域' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."choikiCode" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '行政区' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '行政区' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."gyoseikuCode" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '地区コード1' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分  == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区コード1' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode1" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '地区コード2' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区コード2' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode2" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '地区コード3' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区コード3' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode3" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
@@ -173,17 +174,17 @@
         "TEMP".*
         FROM "DankaibetsuShunoritsuTemp" AS "TEMP"
         WHERE 1 = 1
-        <if test="広域判定区分.toString() == '111' and 市町村情報.toString() != '000000'"> 
+        <if test="広域判定区分 == 111 and 市町村情報 != 000000"> 
             AND "TEMP"."lasdecCode" = #{市町村情報}
             AND "TEMP"."lasdecCode" = "TEMP"."fukaLasdecCode"
         </if>
-        <if test="抽出条件.toString() == '2'">
+        <if test="抽出条件 == 2">
             AND "TEMP"."taishouKubun" = '認定者'
         </if>
-        <if test="抽出条件.toString() == '4'"> 
+        <if test="抽出条件 == 4"> 
             AND "TEMP"."taishouKubun" <![CDATA[<>]]> '認定者'
         </if>
-        <if test="抽出条件.toString() == '3'"> 
+        <if test="抽出条件 == 3"> 
             AND "TEMP"."taishouKubun" = '受給者'
         </if>
         ORDER BY
