@@ -31,16 +31,16 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     private Button btnSearchHihokensha;
     @JsonProperty("txtHihoName")
     private TextBox txtHihoName;
-    @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
-    @JsonProperty("ccdJigyoshaSentaku")
-    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaSentaku;
     @JsonProperty("txtTeikyoYMRange")
     private TextBoxDateRange txtTeikyoYMRange;
     @JsonProperty("lbl1")
     private Label lbl1;
     @JsonProperty("btnSearch")
     private Button btnSearch;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
+    @JsonProperty("ccdJigyoshaSentaku")
+    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaSentaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -103,24 +103,6 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     }
 
     /*
-     * getccdHokenshaList
-     * @return ccdHokenshaList
-     */
-    @JsonProperty("ccdHokenshaList")
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return ccdHokenshaList;
-    }
-
-    /*
-     * getccdJigyoshaSentaku
-     * @return ccdJigyoshaSentaku
-     */
-    @JsonProperty("ccdJigyoshaSentaku")
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
-        return ccdJigyoshaSentaku;
-    }
-
-    /*
      * gettxtTeikyoYMRange
      * @return txtTeikyoYMRange
      */
@@ -172,6 +154,24 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     @JsonProperty("btnSearch")
     public void setBtnSearch(Button btnSearch) {
         this.btnSearch = btnSearch;
+    }
+
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
+    }
+
+    /*
+     * getccdJigyoshaSentaku
+     * @return ccdJigyoshaSentaku
+     */
+    @JsonProperty("ccdJigyoshaSentaku")
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return ccdJigyoshaSentaku;
     }
 
     // </editor-fold>

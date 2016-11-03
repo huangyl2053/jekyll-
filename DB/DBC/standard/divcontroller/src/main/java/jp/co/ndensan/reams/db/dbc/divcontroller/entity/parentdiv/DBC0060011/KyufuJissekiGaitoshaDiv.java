@@ -33,6 +33,8 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     private KyufuJissekiGaitoshaListPanelDiv KyufuJissekiGaitoshaListPanel;
     @JsonProperty("hdn支給限度額一本化年月")
     private RString hdn支給限度額一本化年月;
+    @JsonProperty("hidden件数 ")
+    private RString hidden件数 ;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -95,6 +97,24 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     }
 
     /*
+     * gethidden件数 
+     * @return hidden件数 
+     */
+    @JsonProperty("hidden件数 ")
+    public RString getHidden件数 () {
+        return hidden件数 ;
+    }
+
+    /*
+     * sethidden件数 
+     * @param hidden件数  hidden件数 
+     */
+    @JsonProperty("hidden件数 ")
+    public void setHidden件数 (RString hidden件数 ) {
+        this.hidden件数  = hidden件数 ;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -128,16 +148,6 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getSearchToKyufujissekiPanel().getCcdHokenshaList();
-    }
-
-    @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
-        return this.getSearchToKyufujissekiPanel().getCcdJigyoshaSentaku();
-    }
-
-    @JsonIgnore
     public TextBoxDateRange getTxtTeikyoYMRange() {
         return this.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange();
     }
@@ -165,6 +175,16 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     @JsonIgnore
     public void  setBtnSearch(Button btnSearch) {
         this.getSearchToKyufujissekiPanel().setBtnSearch(btnSearch);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getSearchToKyufujissekiPanel().getCcdHokenshaList();
+    }
+
+    @JsonIgnore
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return this.getSearchToKyufujissekiPanel().getCcdJigyoshaSentaku();
     }
 
     @JsonIgnore

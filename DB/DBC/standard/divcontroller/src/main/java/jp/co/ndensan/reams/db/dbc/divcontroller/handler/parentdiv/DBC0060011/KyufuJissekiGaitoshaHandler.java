@@ -61,33 +61,31 @@ public class KyufuJissekiGaitoshaHandler {
      * @param 給付管理票一覧 給付管理票一覧
      */
     public void onClick_btnSearch(List<KyufuKanrihyoShokaiBusiness> 給付管理票一覧) {
-        if (給付管理票一覧 != null) {
-            List<dgHihokenshaSearchGaitosha_Row> rowList = new ArrayList<>();
-            for (KyufuKanrihyoShokaiBusiness 給付管理票 : 給付管理票一覧) {
-                RString 給付管理票情報作成区分 = RString.EMPTY;
-                if (給付管理票.get給付管理票情報作成区分コード() != null) {
-                    給付管理票情報作成区分 = KyufukanrihyoSakuseiKubun.toValue(給付管理票.get給付管理票情報作成区分コード()).get名称();
-                }
-                RString 被保険者番号 = RString.EMPTY;
-                if (給付管理票.get被保険者番号() != null) {
-                    被保険者番号 = 給付管理票.get被保険者番号().value();
-                }
-                RString サービス事業所番号 = RString.EMPTY;
-                if (給付管理票.getサービス事業所番号() != null) {
-                    サービス事業所番号 = 給付管理票.getサービス事業所番号().value();
-                }
-                KyufuKanrihyoShokaiDataModel dataModel = new KyufuKanrihyoShokaiDataModel();
-                rowList.add(new dgHihokenshaSearchGaitosha_Row(
-                        給付管理票.getサービス提供年月().wareki().firstYear(FirstYear.ICHI_NEN).toDateString(),
-                        給付管理票.get審査年月().wareki().firstYear(FirstYear.ICHI_NEN).toDateString(),
-                        給付管理票情報作成区分,
-                        被保険者番号,
-                        サービス事業所番号,
-                        給付管理票.get氏名(),
-                        DataPassingConverter.serialize(dataModel.createDataModel(給付管理票))));
+        List<dgHihokenshaSearchGaitosha_Row> rowList = new ArrayList<>();
+        for (KyufuKanrihyoShokaiBusiness 給付管理票 : 給付管理票一覧) {
+            RString 給付管理票情報作成区分 = RString.EMPTY;
+            if (給付管理票.get給付管理票情報作成区分コード() != null) {
+                給付管理票情報作成区分 = KyufukanrihyoSakuseiKubun.toValue(給付管理票.get給付管理票情報作成区分コード()).get名称();
             }
-            div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().setDataSource(rowList);
+            RString 被保険者番号 = RString.EMPTY;
+            if (給付管理票.get被保険者番号() != null) {
+                被保険者番号 = 給付管理票.get被保険者番号().value();
+            }
+            RString サービス事業所番号 = RString.EMPTY;
+            if (給付管理票.getサービス事業所番号() != null) {
+                サービス事業所番号 = 給付管理票.getサービス事業所番号().value();
+            }
+            KyufuKanrihyoShokaiDataModel dataModel = new KyufuKanrihyoShokaiDataModel();
+            rowList.add(new dgHihokenshaSearchGaitosha_Row(
+                    給付管理票.getサービス提供年月().wareki().firstYear(FirstYear.ICHI_NEN).toDateString(),
+                    給付管理票.get審査年月().wareki().firstYear(FirstYear.ICHI_NEN).toDateString(),
+                    給付管理票情報作成区分,
+                    被保険者番号,
+                    サービス事業所番号,
+                    給付管理票.get氏名(),
+                    DataPassingConverter.serialize(dataModel.createDataModel(給付管理票))));
         }
+        div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().setDataSource(rowList);
     }
 
     /**

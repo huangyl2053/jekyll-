@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050.KyufuJissekiInG
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050.KyufuJissekiInGetToosibangoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050.KyufuJissekiInHenkyakuD8KousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050.KyufuJissekiInHenkyakuD8TorikeshiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050.KyufuJissekiInHenkyakuH1DeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050.KyufuJissekiInHenkyakuH1KousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050.KyufuJissekiInHenkyakuH1TorikeshiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050.KyufuJissekiInMasterTorokuD1Process;
@@ -76,6 +77,7 @@ public class DBC120050_KyufuJissekiIn extends BatchFlowBase<DBC120050_KyufuJisse
     private static final String 入力識別名称取得 = "getName";
     private static final String 返却データ削除_H1更新 = "deleteHenkyakuH1Kousin";
     private static final String 返却データ削除_H1取消 = "deleteHenkyakuH1Torikeshi";
+    private static final String 返却データ削除_H1削除 = "deleteHenkyakuH1Sakujyo";
     private static final String 返却データ削除_D8更新 = "deleteHenkyakuD8Kousin";
     private static final String 返却データ削除_D8取消 = "deleteHenkyakuD8Torikeshi";
     private static final String 通し番号の採番 = "getToosibango";
@@ -153,6 +155,7 @@ public class DBC120050_KyufuJissekiIn extends BatchFlowBase<DBC120050_KyufuJisse
                 }
                 executeStep(返却データ削除_H1更新);
                 executeStep(返却データ削除_H1取消);
+                executeStep(返却データ削除_H1削除);
                 executeStep(返却データ削除_D8更新);
                 executeStep(返却データ削除_D8取消);
                 executeStep(通し番号の採番);
@@ -275,6 +278,16 @@ public class DBC120050_KyufuJissekiIn extends BatchFlowBase<DBC120050_KyufuJisse
     @Step(返却データ削除_H1取消)
     protected IBatchFlowCommand callDeleteHenkyakuH1TorikeshiProcess() {
         return loopBatch(KyufuJissekiInHenkyakuH1TorikeshiProcess.class).define();
+    }
+
+    /**
+     * 返却データ削除・給付実績H1の関連データを削除する。
+     *
+     * @return バッチコマンド
+     */
+    @Step(返却データ削除_H1削除)
+    protected IBatchFlowCommand callDeleteHenkyakuH1Sakujyo() {
+        return simpleBatch(KyufuJissekiInHenkyakuH1DeleteProcess.class).define();
     }
 
     /**
