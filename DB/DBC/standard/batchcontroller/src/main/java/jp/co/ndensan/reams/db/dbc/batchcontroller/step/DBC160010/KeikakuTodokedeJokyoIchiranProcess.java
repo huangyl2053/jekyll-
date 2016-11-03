@@ -307,7 +307,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         if (entity.get受給申請事由() != null) {
             reportList.set申請事由(JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称());
         }
-        if (entity.get要介護認定状態区分コード() != null) {
+        if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
             reportList.set要介護度(YokaigoJotaiKubun.toValue(entity.get要介護認定状態区分コード().getColumnValue()).get名称());
         }
         reportList.set認定有効開始日(entity.get認定有効期間開始日());
