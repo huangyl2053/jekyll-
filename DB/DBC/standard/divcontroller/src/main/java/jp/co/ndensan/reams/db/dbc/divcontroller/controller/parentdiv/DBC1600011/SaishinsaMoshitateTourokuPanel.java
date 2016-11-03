@@ -490,7 +490,7 @@ public class SaishinsaMoshitateTourokuPanel {
                 new JigyoshaNo(div.getKagoMoshitatePanel().getTextBox2().getValue()),
                 new HihokenshaNo(div.getCommonKaigoshikakuKihonChildDiv2().get被保険者番号()),
                 new FlexibleYearMonth(new RYearMonth(div.getKagoMoshitatePanel().getTextBox5().getValue()).toDateString()),
-                new ServiceShuruiCode(サービス種類コード),
+                new ServiceShuruiCode(サービス種類コード.trim()),
                 サービス項目コード,
                 Integer.parseInt(div.getHdn履歴番号().toString()));
         SaishinsaMoshitateBuilder builder = data.createBuilderForEdit();
@@ -540,7 +540,7 @@ public class SaishinsaMoshitateTourokuPanel {
                 国保連再送付有フラグ = false;
             }
             builder.set国保連再送付有フラグ(国保連再送付有フラグ);
-            builder.setサービス種類コード(new ServiceShuruiCode(再審査申立情報.getサービス種類コード()));
+            builder.setサービス種類コード(new ServiceShuruiCode(再審査申立情報.getサービス種類コード().trim()));
             builder.setサービス項目コード(new ServiceKomokuCode(再審査申立情報.getサービス項目コード()));
             builder.set証記載保険者番号(new ShoKisaiHokenshaNo(再審査申立情報.get証記載保険者番号()));
             if (!RString.isNullOrEmpty(再審査申立情報.get国保連送付年月())) {
@@ -552,14 +552,14 @@ public class SaishinsaMoshitateTourokuPanel {
             business = new SaishinsaMoshitateTourokuBusiness(builder.build().toEntity());
             flag = manager.update再審査申立(
                     new SaishinsaMoshitate(business.getEntity()),
-                    new ServiceShuruiCode(サービス種類コード),
+                    new ServiceShuruiCode(サービス種類コード.trim()),
                     サービス項目コード);
         } else {
             SaishinsaMoshitateJohoBusiness 再審査申立情報 = DataPassingConverter.deserialize(
                     div.getHdn一覧検索条件(),
                     SaishinsaMoshitateTourokuCollect.class).get再審査申立情報List()
                     .get(Integer.parseInt(div.getHdnActiveRowId().toString()));
-            builder.setサービス種類コード(new ServiceShuruiCode(再審査申立情報.getサービス種類コード()));
+            builder.setサービス種類コード(new ServiceShuruiCode(再審査申立情報.getサービス種類コード().trim()));
             builder.setサービス項目コード(new ServiceKomokuCode(再審査申立情報.getサービス項目コード()));
             business = new SaishinsaMoshitateTourokuBusiness(builder.build().toEntity());
             business.setState(EntityDataState.Deleted);

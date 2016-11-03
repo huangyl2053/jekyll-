@@ -70,8 +70,8 @@ public final class PnlTotalHandler {
             if (shinsei.get商品名() != null) {
                 row.setTxtShohinmei(new RString(shinsei.get商品名().toString()));
             }
-            if (shinsei.get購入金額合計() != null) {
-                row.setTxtKonyuKingaku(new RString(shinsei.get購入金額合計().toString()));
+            if (shinsei.get保険対象費用額() != null) {
+                row.setTxtKonyuKingaku(new RString(shinsei.get保険対象費用額().toString()));
             }
             if (shinsei.get事業者番号() != null) {
                 row.setTxtJigyosyaNo(shinsei.get事業者番号().value());

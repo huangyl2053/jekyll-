@@ -83,8 +83,8 @@
         rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" jizenshinsei
         ON
         jizenshinsei."hiHokenshaNo"= shinsei."hiHokenshaNo"
-        AND jizenshinsei."serviceTeikyoYM"= shinsei."serviceTeikyoYM"
-        AND jizenshinsei."seiriNo"= shinsei."seiriNo"
+        AND jizenshinsei."serviceTeikyoYM"= shinsei."jizenServiceTeikyoYM"
+        AND jizenshinsei."seiriNo"= shinsei."jizenSeiriNo"
         WHERE
         shinsei."hiHokenshaNo"  = #{hiHokenshaNo}
     </select>

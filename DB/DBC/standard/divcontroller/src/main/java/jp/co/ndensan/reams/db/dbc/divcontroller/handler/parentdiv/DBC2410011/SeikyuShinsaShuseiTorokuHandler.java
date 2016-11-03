@@ -81,6 +81,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     public void onLoad(RString menuID) {
         if (DBCMNE_1004.equals(menuID)) {
             div.setTitle(TITLE_1004);
+            div.getChkSerchKetteiZumi().setVisible(true);
         }
         if (DBCMNE_1005.equals(menuID)) {
             div.setTitle(TITLE_1005);
@@ -197,11 +198,12 @@ public class SeikyuShinsaShuseiTorokuHandler {
      *
      */
     public void get情報一覧() {
-        if (照会.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
+        if (照会.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus()) || 削除.
+                equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
             div.getTxtRiyushoSakuseiTanka().setDisabled(true);
-        }
-        if (削除.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
-            div.getTxtRiyushoSakuseiTanka().setDisabled(true);
+            if (DBCMNE_1005.equals(ResponseHolder.getMenuID())) {
+                div.getJutakuTesuryoSeikyuKetteiPanel().setDisabled(true);
+            }
         }
         if (修正.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
             div.getJutakuTesuryoSeikyuShosaiPanel().setDisabled(false);
@@ -395,7 +397,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
             出力決定 = 決定更新(出力決定);
             出力決定 = 出力決定.modifiedModel();
         } else {
-            出力決定 = 決定追加(出力決定, 住宅改修理由書事業者明細情報);
+            出力決定 = 決定追加(出力決定);
         }
         SeikyuShinsaShuseiTorokuBusiness businessResult = new SeikyuShinsaShuseiTorokuBusiness();
         businessResult.setDbT3094(出力決定);
@@ -453,11 +455,11 @@ public class SeikyuShinsaShuseiTorokuHandler {
         return 出力決定;
     }
 
-    private JutakuKaishuRiyushoTesuryoKettei 決定追加(JutakuKaishuRiyushoTesuryoKettei 出力決定, SeikyuShinsaShuseiTorokuBusiness 住宅改修理由書事業者明細情報) {
+    private JutakuKaishuRiyushoTesuryoKettei 決定追加(JutakuKaishuRiyushoTesuryoKettei 出力決定) {
         RString 介護住宅改修理由書作成事業者番号 = div.getTxtJigyoshaNo().getValue();
-        RString 集計関連付け番号 = 住宅改修理由書事業者明細情報.getDbT3096().get集計関連付け番号();
+        // TODO  シート「DB出力(決定)」の16行目、仕様書の項目「決定年月日」は削除です、しかし、「決定年月日」はＤＢに存在する。    QA#1946
         出力決定 = new JutakuKaishuRiyushoTesuryoKettei(new JigyoshaNo(介護住宅改修理由書作成事業者番号.toString()),
-                new FlexibleDate(集計関連付け番号.toString()), Decimal.ONE);
+                FlexibleDate.getNowDate(), Decimal.ONE);
         if (div.getTxtJigyoshaNo().getValue() != null) {
             出力決定 = 出力決定.createBuilderForEdit().set介護住宅改修理由書作成事業者番号(new JigyoshaNo(div.getTxtJigyoshaNo().getValue().
                     toString())).build();
@@ -561,18 +563,31 @@ public class SeikyuShinsaShuseiTorokuHandler {
     public ValidationMessageControlPairs 決定区分チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (DBCMNE_1005.equals(ResponseHolder.getMenuID())) {
-            if (KEY_0.equals(div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().getSelectedKey()) && div.
-                    getJutakuTesuryoSeikyuShosaiPanel().getDdlKozaShubetsu().getSelectedKey().isEmpty() && div.
-                    getJutakuTesuryoSeikyuShosaiPanel().getTxtKozaNo().getValue().isEmpty() && div.getJutakuTesuryoSeikyuShosaiPanel().
-                    getTxtKozaNameKana().getValue().isEmpty() && div.getJutakuTesuryoSeikyuShosaiPanel().getTxtKozaName().getValue().isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(new SeikyuShinsaShuseiTorokuHandler.IdocheckMessages(UrErrorMessages.必須,
-                        支給決定.toString())));
+            if (KEY_0.equals(div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().getSelectedKey())) {
+                validPairs = 支給決定チェック(validPairs);
             }
-            if (KEY_1.equals(div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().getSelectedKey()) && div.
-                    getTxtFushikyuRiyu().getValue().isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(new SeikyuShinsaShuseiTorokuHandler.IdocheckMessages(UrErrorMessages.必須,
-                        不支給決定.toString())));
+            if (KEY_1.equals(div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().getSelectedKey())) {
+                validPairs = 不支給決定チェック(validPairs);
             }
+        }
+        return validPairs;
+    }
+
+    private ValidationMessageControlPairs 支給決定チェック(ValidationMessageControlPairs validPairs) {
+        if (div.getJutakuTesuryoSeikyuShosaiPanel().getDdlKozaShubetsu().getSelectedKey().isEmpty()
+                && div.getJutakuTesuryoSeikyuShosaiPanel().getTxtKozaNo().getValue().isEmpty()
+                && div.getJutakuTesuryoSeikyuShosaiPanel().getTxtKozaNameKana().getValue().isEmpty()
+                && div.getJutakuTesuryoSeikyuShosaiPanel().getTxtKozaName().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new SeikyuShinsaShuseiTorokuHandler.IdocheckMessages(UrErrorMessages.必須,
+                    支給決定.toString())));
+        }
+        return validPairs;
+    }
+
+    private ValidationMessageControlPairs 不支給決定チェック(ValidationMessageControlPairs validPairs) {
+        if (div.getTxtFushikyuRiyu().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new SeikyuShinsaShuseiTorokuHandler.IdocheckMessages(UrErrorMessages.必須,
+                    不支給決定.toString())));
         }
         return validPairs;
     }

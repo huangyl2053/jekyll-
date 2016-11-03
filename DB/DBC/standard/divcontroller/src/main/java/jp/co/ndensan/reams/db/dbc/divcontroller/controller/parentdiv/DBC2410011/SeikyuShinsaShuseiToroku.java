@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -46,6 +45,7 @@ public class SeikyuShinsaShuseiToroku {
     private static final RString 処理完了メッセージ = new RString("住宅改修理由書作成手数料請求審査情報の登録が完了しました。");
     private static final RString 事業者番号 = new RString("事業者番号：");
     private static final RString DBCMNE_1005 = new RString("DBCMNE1005");
+    private static final RString DBCMNE_1004 = new RString("DBCMNE1004");
 
     /**
      * 画面初期化処理です。
@@ -69,7 +69,10 @@ public class SeikyuShinsaShuseiToroku {
      */
     public ResponseData<SeikyuShinsaShuseiTorokuDiv> onClick_Kensaku(SeikyuShinsaShuseiTorokuDiv div) {
         RString 事業者番号 = div.getCcdJigyosha().getNyuryokuShisetsuKodo();
-        RDate 請求情報作成年月 = div.getSearchJutakuTesuryoSeikyuJohoPanel().getTxtSearchSakuseiYM().getValue();
+        RString 請求情報作成年月 = RString.EMPTY;
+        if (div.getSearchJutakuTesuryoSeikyuJohoPanel().getTxtSearchSakuseiYM().getValue() != null) {
+            請求情報作成年月 = new RString(div.getSearchJutakuTesuryoSeikyuJohoPanel().getTxtSearchSakuseiYM().getValue().getYearMonth().toString());
+        }
         SeikyuShinsaShuseiTorokuMapperParameter parameter = SeikyuShinsaShuseiTorokuMapperParameter.
                 createSelectByKeyParam(事業者番号, 請求情報作成年月, div.getChkSerchKetteiZumi().isAllSelected());
         SeikyuShinsaShuseiTorokuFinder seikyushinsashuseitorokufinder = SeikyuShinsaShuseiTorokuFinder.createInstance();
@@ -90,7 +93,7 @@ public class SeikyuShinsaShuseiToroku {
     public ResponseData<SeikyuShinsaShuseiTorokuDiv> onClick_Showukai(SeikyuShinsaShuseiTorokuDiv div) {
         div.getSearchJutakuTesuryoSeikyuJohoPanel().setExecutionStatus(照会);
         getHandler(div).get情報一覧();
-        return 画面の遷移(div);
+        return 画面の遷移_照会(div);
     }
 
     /**
@@ -144,6 +147,7 @@ public class SeikyuShinsaShuseiToroku {
                 .equals(ResponseHolder.getMessageCode()) && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             getHandler(div).get情報一覧();
             getHandler(div).クリアデータ();
+            div.getChkSerchKetteiZumi().setVisible(false);
             return 画面の戻る(div);
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
@@ -297,7 +301,23 @@ public class SeikyuShinsaShuseiToroku {
         return ResponseData.of(div).respond();
     }
 
+    private ResponseData<SeikyuShinsaShuseiTorokuDiv> 画面の遷移_照会(SeikyuShinsaShuseiTorokuDiv div) {
+        if (DBC2410011StateName.情報修正登録検索.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBC2410011StateName.情報修正登録照会);
+        }
+        if (DBC2410011StateName.審査結果登録検索.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBC2410011StateName.審査結果登録照会);
+        }
+        return ResponseData.of(div).respond();
+    }
+
     private ResponseData<SeikyuShinsaShuseiTorokuDiv> 画面の戻る(SeikyuShinsaShuseiTorokuDiv div) {
+        if (DBC2410011StateName.情報修正登録照会.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBC2410011StateName.情報修正登録検索戻る);
+        }
+        if (DBC2410011StateName.審査結果登録照会.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBC2410011StateName.審査結果登録検索戻る);
+        }
         if (DBC2410011StateName.情報修正登録.getName().equals(ResponseHolder.getState())) {
             return ResponseData.of(div).setState(DBC2410011StateName.情報修正登録検索戻る);
         }
@@ -310,12 +330,14 @@ public class SeikyuShinsaShuseiToroku {
     private ResponseData<SeikyuShinsaShuseiTorokuDiv> 画面リロード(SeikyuShinsaShuseiTorokuDiv div) {
 
         getHandler(div).クリアデータ();
-        getHandler(div).onLoad(ResponseHolder.getMenuID());
-        if (DBC2410011StateName.情報修正登録.getName().equals(ResponseHolder.getState())) {
-            return ResponseData.of(div).setState(DBC2410011StateName.情報修正登録検索);
+        List<SeikyuShinsaShuseiTorokuBusiness> 住宅改修理由書事業者情報リスト = ViewStateHolder
+                .get(ViewStateKeys.住宅改修理由書事業者情報, SeikyuShinsaShuseiTorokuCollect.class).get事業者情報List();
+        getHandler(div).get検索一覧(住宅改修理由書事業者情報リスト);
+        if (DBCMNE_1004.equals(ResponseHolder.getMenuID()) && DBC2410011StateName.処理完了.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBC2410011StateName.情報修正登録検索戻る);
         }
-        if (DBC2410011StateName.審査結果登録.getName().equals(ResponseHolder.getState())) {
-            return ResponseData.of(div).setState(DBC2410011StateName.審査結果登録検索);
+        if (DBCMNE_1005.equals(ResponseHolder.getMenuID()) && DBC2410011StateName.処理完了.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBC2410011StateName.審査結果登録検索戻る);
         }
         return ResponseData.of(div).respond();
     }

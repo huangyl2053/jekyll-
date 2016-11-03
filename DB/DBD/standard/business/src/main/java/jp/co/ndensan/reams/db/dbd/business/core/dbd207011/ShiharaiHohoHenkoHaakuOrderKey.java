@@ -42,7 +42,7 @@ public enum ShiharaiHohoHenkoHaakuOrderKey implements IReportItems {
     /**
      * 項目ID:0012 フォームフィールド名:生年月日 MyBatis項目名:定義なし
      */
-    市町村コード("0016", "市町村コード", "\"ShikibetsuTaisho\".\"shichosonCode\""),
+    市町村コード("0016", "市町村コード", "資格情報_市町村コード"),
     /**
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:定義なし
      */
