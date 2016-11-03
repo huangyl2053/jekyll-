@@ -48,21 +48,10 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess7 extends BatchProcessBas
 
     @Override
     protected void process(InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity entity) {
-        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時7Entity;
-        if (entity.get給付実績集計一時Entity() != null && entity.get給付実績社会福祉法人軽減額一時Entity() != null
-                && entity.get給付実績集計一時Entity().getInputShikibetsuNo().equals(entity.get給付実績社会福祉法人軽減額一時Entity().getInputShikibetsuNo())
-                && entity.get給付実績集計一時Entity().getHiHokenshaNo().equals(entity.get給付実績社会福祉法人軽減額一時Entity().getHiHokenshaNo())
-                && entity.get給付実績集計一時Entity().getServiceTeikyoYM().equals(entity.get給付実績社会福祉法人軽減額一時Entity().getServiceTeikyoYM())
-                && entity.get給付実績集計一時Entity().getToshiNo().equals(entity.get給付実績社会福祉法人軽減額一時Entity().getToshiNo())
-                && entity.get給付実績集計一時Entity().getJigyoshoNo().equals(entity.get給付実績社会福祉法人軽減額一時Entity().getJigyoshoNo())
-                && entity.get給付実績集計一時Entity().getServiceSyuruiCode().equals(entity.get給付実績社会福祉法人軽減額一時Entity().getServiceSyuruiCode())) {
-            給付実績中間事業高額一時7Entity = set給付実績中間事業高額一時7Entity(entity);
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時7Entity = set給付実績中間事業高額一時7Entity(entity);
+        if (entity.get給付実績社会福祉法人軽減額一時Entity() != null) {
             給付実績中間事業高額一時7Entity.setKyufuJissekiShakaiFukushiHojinKeiUmu(定数_1);
-            if (entity.get給付実績社会福祉法人軽減額一時Entity() != null) {
-                給付実績中間事業高額一時7Entity.setGoKeigengoRiyoshaFutangaku(entity.get給付実績社会福祉法人軽減額一時Entity().getAtoKeigengoRiyoshaFutangaku());
-            }
-        } else {
-            給付実績中間事業高額一時7Entity = set給付実績中間事業高額一時7Entity(entity);
+            給付実績中間事業高額一時7Entity.setGoKeigengoRiyoshaFutangaku(entity.get給付実績社会福祉法人軽減額一時Entity().getAtoKeigengoRiyoshaFutangaku());
         }
         給付実績中間事業高額一時7tableWriter.insert(給付実績中間事業高額一時7Entity);
     }

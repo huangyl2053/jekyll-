@@ -12,6 +12,7 @@
             fetchSize="500">
         SELECT COUNT("hanNo")
         FROM rgdb."DbT7301TokuteiKojinJohoHanKanri"
+        WHERE "shokaiTeikyoKubun" = #{shokaiTeikyoKubun}
     </select>
 
     <select id="getKijunYMD"

@@ -89,12 +89,8 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     private static final int NUM_3 = 3;
     private static final int NUM_6 = 6;
     private static final RString 対象外データテンプ_テーブル = new RString("対象外データ.");
-    private static final RString 識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 世帯コード = new RString("\"setaiCode\"");
-    private static final RString 賦課_識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 賦課_被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 賦課_世帯コード = new RString("\"setaiCode\"");
     private static final RString CSVファイル = new RString(".csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -142,7 +138,6 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     @Override
     protected void beforeExecute() {
         count = new OutputParameter<>();
-        parameter.set出力順(出力順再設定(出力順));
         保険料段階取得 = new HokenryoDankaiManager();
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200003.getReportId());
@@ -173,7 +168,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         myBatisParameter.set調定年度(parameter.get調定年度());
         myBatisParameter.set賦課年度(parameter.get賦課年度());
         myBatisParameter.set調定前年度(parameter.get調定前年度());
-        myBatisParameter.set出力順(parameter.get出力順());
+        myBatisParameter.set出力順(出力順再設定(出力順));
         myBatisParameter.setShikibetsutaishoParam(parameter.getShikibetsutaishoParam());
         return new BatchDbReader(MAPPERPATH, myBatisParameter);
     }
@@ -445,12 +440,6 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     }
 
     private RString 出力順再設定(RString 出力順) {
-        if (出力順.contains(世帯コード)) {
-            出力順 = 出力順.replace(世帯コード, 対象外データテンプ_テーブル.concat(賦課_世帯コード));
-        }
-        if (出力順.contains(識別コード)) {
-            出力順 = 出力順.replace(識別コード, 対象外データテンプ_テーブル.concat(賦課_識別コード));
-        }
         if (出力順.contains(被保険者番号)) {
             出力順 = 出力順.replace(被保険者番号, 対象外データテンプ_テーブル.concat(賦課_被保険者番号));
         }

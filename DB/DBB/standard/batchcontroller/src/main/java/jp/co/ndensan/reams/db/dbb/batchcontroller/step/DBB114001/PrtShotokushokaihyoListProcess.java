@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranBatchReport;
+import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranBreakKey;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.KoikiZenShichosonJohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.SaiHakkoParameter;
@@ -53,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -156,8 +158,10 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
 
     @Override
     protected void createWriter() {
+        PageBreaker<ShotokushokaihyoHakkoIchiranSource> breakPage
+                = new ShotokushokaihyoHakkoIchiranBreakKey(pageBreakKeys);
         reportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
+                ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
         sourceWriter = new ReportSourceWriter<>(reportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,

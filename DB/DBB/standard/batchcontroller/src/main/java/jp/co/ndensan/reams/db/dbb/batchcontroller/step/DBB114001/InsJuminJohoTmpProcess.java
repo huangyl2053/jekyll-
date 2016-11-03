@@ -77,6 +77,7 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
         tempEntity.setYubinNo(t.get郵便番号());
         tempEntity.setChoikiCode(t.get町域コード());
         tempEntity.setZenkokuJushoCode(t.get全国住所コード());
+        tempEntity.setTenshutsuKakuteiZenkokuJushoCode(t.get転出確定全国住所コード());
         tempEntity.setJusho(t.get住所());
         tempEntity.setBanchi(t.get番地());
         tempEntity.setKatagaki(t.get方書());

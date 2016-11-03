@@ -43,7 +43,7 @@ public class ShotokuShoukaiDataMapbEntity {
     private RString honninKubun;
     private RString choikiCode;
     private RString gyoseikuCode;
-    private LasdecCode shichosonCode;
+    private ZenkokuJushoCode shichosonCode;
     private RString zenjushoCode;
     private YubinNo yubinNo;
     private RString chikuCode1;
