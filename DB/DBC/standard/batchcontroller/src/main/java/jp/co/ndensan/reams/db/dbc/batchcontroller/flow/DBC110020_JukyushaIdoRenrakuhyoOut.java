@@ -279,8 +279,9 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     IBatchFlowCommand upDoInterfaceKanriKousin() {
         JukyushaIdoRenrakuhyoOutProcessParameter processParameter = getParameter().
                 toProcessParameter();
-        return simpleBatch(UpDoInterfaceKanriKousinProcess.class).arguments(getParameter().
-                toProcessParameter())
+        processParameter.set異動連絡票件数(returnEntity.get異動連絡票件数());
+        processParameter.set訂正連絡票件数(returnEntity.get訂正連絡票件数());
+        return simpleBatch(UpDoInterfaceKanriKousinProcess.class).arguments(processParameter)
                 .define();
     }
 }

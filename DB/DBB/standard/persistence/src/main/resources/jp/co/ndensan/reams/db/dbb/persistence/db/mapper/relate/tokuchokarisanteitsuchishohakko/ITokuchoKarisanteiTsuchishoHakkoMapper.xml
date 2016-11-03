@@ -27,7 +27,7 @@
             FROM
                 "DbT2015KeisangoJohoTemp" AS 計算後情報
             INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON  計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND  計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND  計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
@@ -692,6 +692,7 @@
         <result property="dtTeishiYM" column="nenkinTokuchoKaifuJoho_dtTeishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dtYobi4Juminzei" column="nenkinTokuchoKaifuJoho_dtYobi4Juminzei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dtKojinNo" column="nenkinTokuchoKaifuJoho_dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kokuhoYoteiSoshitsuKubun" column="nenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
     <resultMap id="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" autoMapping="true">
@@ -755,6 +756,7 @@
         <result property="dtTeishiYM" column="dtTeishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dtYobi4Juminzei" column="dtYobi4Juminzei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dtKojinNo" column="dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kokuhoYoteiSoshitsuKubun" column="kokuhoYoteiSoshitsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
     <resultMap id="resultMap_宛名情報" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity" autoMapping="true">

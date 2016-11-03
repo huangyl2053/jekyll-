@@ -91,7 +91,6 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
     private KogakugassanShikyushinseishoOutProcessParameter processParameter;
     private HokenshaShutokuEntity returnEntity;
     private int 総出力件数;
-    private int レコード出力件数;
     private List<SharedFileDescriptor> エントリList;
     private RString 入力ファイルパス;
     private RString 出力ファイルパス;
@@ -142,11 +141,9 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
                 processParameter.set件数(returnEntity.get件数List().get(i));
                 processParameter.set保険者番号(returnEntity.get保険者番号List().get(i));
                 executeStep(送付ファイル作成);
-                レコード出力件数 = getResult(Integer.class, new RString(送付ファイル作成),
+                int レコード出力件数 = getResult(Integer.class, new RString(送付ファイル作成),
                         KogakugassanShikyushinseishoOutSofuFileSakuseiProcess.PARAMETER_OUT_OUTCOUNT);
-                if (レコード出力件数 != INDEX_0) {
-                    do文字コード変換();
-                }
+                do文字コード変換();
                 総出力件数 = 総出力件数 + レコード出力件数;
             }
             RString 保険者情報_保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, date, SubGyomuCode.DBU介護統計報告);
