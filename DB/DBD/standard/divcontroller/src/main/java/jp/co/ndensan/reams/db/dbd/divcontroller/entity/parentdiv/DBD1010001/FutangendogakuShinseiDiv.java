@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class FutangendogakuShinseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -319,6 +319,16 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnShotokuJokyo() {
+        return this.getHeader().getHosokuJoho().getBtnShotokuJokyo();
+    }
+
+    @JsonIgnore
+    public void  setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
+        this.getHeader().getHosokuJoho().setBtnShotokuJokyo(btnShotokuJokyo);
+    }
+
+    @JsonIgnore
     public Button getBtnCloseSetaiJoho() {
         return this.getHeader().getHosokuJoho().getBtnCloseSetaiJoho();
     }
@@ -369,13 +379,13 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return this.getHeader().getCcdAtenaInfo();
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return this.getHeader().getCcdKaigoShikakuKihon();
     }
 
     @JsonIgnore
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return this.getHeader().getCcdKaigoShikakuKihon();
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return this.getHeader().getCcdAtenaInfo();
     }
 
     @JsonIgnore

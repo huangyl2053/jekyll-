@@ -1314,6 +1314,21 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtKetteiYMD().setDisabled(false);
             div.getBtnShinseiKakutei().setDisplayNone(true);
             div.getBtnShoninKakutei().setDisplayNone(false);
+            set負担限度額居室DDL使用可不可設定(div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0),
+                    div.getDdlKyusochisha().getSelectedKey(),
+                    div.getDdlKyoshitsuShubetsu().getSelectedKey());
+            if (RiyoshaFutanDankai.課税層第三段階.getコード().equals(div.getDdlRiyoshaFutanDankai().getSelectedKey())) {
+                div.getDdlKyusochisha().setDisabled(true);
+            }
+            if (KyuSochishaKubun.旧措置者.getコード().equals(div.getDdlKyusochisha().getSelectedKey())) {
+                if (!div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0)) {
+                    div.getDdlKyoshitsuShubetsu().setDisabled(true);
+                }
+            } else if (KyuSochishaKubun.非該当.getコード().equals(div.getDdlKyusochisha().getSelectedKey())) {
+                if (!div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0)) {
+                    div.getDdlKyoshitsuShubetsu().setDisabled(true);
+                }
+            }
         }
     }
 
@@ -1484,7 +1499,7 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set配偶者連絡先(formFgn.get配偶者連絡先() == null ? RString.EMPTY : formFgn.get配偶者連絡先());
         builder.set配偶者住所(formFgn.get配偶者住所() == null ? AtenaJusho.EMPTY : formFgn.get配偶者住所());
         builder.set配偶者住所２(formFgn.get配偶者住所２() == null ? AtenaJusho.EMPTY : formFgn.get配偶者住所２());
-        builder.set配偶者課税区分(formFgn.get配偶者課税区分());
+        builder.set配偶者課税区分(formFgn.get配偶者課税区分() == null ? RString.EMPTY : formFgn.get配偶者課税区分());
         builder.set預貯金申告区分(formFgn.get預貯金申告区分());
 
         builder.set預貯金額(formFgn.get預貯金額());

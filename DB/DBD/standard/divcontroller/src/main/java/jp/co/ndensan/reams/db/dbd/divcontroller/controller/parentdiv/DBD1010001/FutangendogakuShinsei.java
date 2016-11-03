@@ -65,6 +65,7 @@ public class FutangendogakuShinsei {
     public ResponseData<FutangendogakuShinseiDiv> onLoad(FutangendogakuShinseiDiv div) {
 
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        div.setShikibetsuCode(taishoshaKey.get識別コード().getColumnValue());
         ShikibetsuCode 識別コード = null;
         HihokenshaNo 被保険者番号 = null;
         boolean データなし = true;
@@ -148,6 +149,19 @@ public class FutangendogakuShinsei {
                     .setText(申請メニューID.equals(ResponseHolder.getMenuID()) ? 文字列_申請情報を表示する : 文字列_承認情報を表示する);
             return ResponseData.of(div).setState(DBD1010001StateName.世帯情報From詳細);
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「所得状況」ボタン押下時の処理です。
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onBeforeOpenDialog_btnShotokuJokyo(FutangendogakuShinseiDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        div.setShikibetsuCode(識別コード.getColumnValue());
         return ResponseData.of(div).respond();
     }
 
