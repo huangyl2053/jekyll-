@@ -106,8 +106,6 @@
     <resultMap id="resultMap_後期高齢者" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
         <id column="idouTemp_被保険者番号"/>
         <id column="idouTemp_連番"/>
-        <id column="dbT7124KokiKoreishaInfo_shikibetsuCd"/>
-        <id column="dbT7124KokiKoreishaInfo_rirekiNo"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <association property="後期高齢者情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7124KokiKoreishaInfoMapper.ResultMap_DbT7124KokiKoreishaInfoEntity"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
@@ -141,8 +139,6 @@
     <resultMap id="resultMap_国保資格" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
         <id column="idouTemp_被保険者番号"/>
         <id column="idouTemp_連番"/>
-        <id column="dbT7123KokuhoShikakuInfo_shikibetsuCode"/>
-        <id column="dbT7123KokuhoShikakuInfo_rirekiNo"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
         <association property="国保資格情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7123KokuhoShikakuInfoMapper.ResultMap_DbT7123KokuhoShikakuInfoEntity"/>
@@ -174,9 +170,6 @@
     <resultMap id="resultMap_生活保護受給者" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
         <id column="idouTemp_被保険者番号"/>
         <id column="idouTemp_連番"/>
-        <id column="UrT0508SeikatsuHogoJukyusha_shikibetsuCode"/>
-        <id column="UrT0508SeikatsuHogoJukyusha_gyomuCode"/>
-        <id column="UrT0508SeikatsuHogoJukyusha_jukyuKaishiYMD"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <association property="生活保護受給者" resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
@@ -203,7 +196,7 @@
          "TEMPCOUNT1"."HIHOCOUNT" AS "idouTemp_被保険者番号Max連番"
         FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS "DbT4018KaigoHokenFutanGendogakuNintei"
         INNER JOIN  "IdouTemp"
-        ON "IdouTemp"."被保険者番号" = "被保険者番号"
+        ON "IdouTemp"."被保険者番号" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
         INNER JOIN (
             SELECT
                 "被保険者番号",
@@ -244,7 +237,7 @@
          "TEMPCOUNT1"."HIHOCOUNT" AS "idouTemp_被保険者番号Max連番"
         FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
         INNER JOIN  "IdouTemp"
-        ON "IdouTemp"."被保険者番号" = "被保険者番号"
+        ON "IdouTemp"."被保険者番号" = "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo"
         INNER JOIN (
             SELECT
                 "被保険者番号",
@@ -457,7 +450,7 @@
           ON "DbT1004ShisetsuNyutaisho"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode" 
             AND "DbT1001HihokenshaDaicho"."jushochiTokureiFlag" = '1'
         INNER JOIN  "IdouTemp"
-        ON "IdouTemp"."被保険者番号" = "被保険者番号"
+        ON "IdouTemp"."被保険者番号" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
         INNER JOIN (
             SELECT
                 "被保険者番号",
@@ -474,6 +467,8 @@
     <resultMap id="resultMap_住所地特例" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
         <id column="idouTemp_被保険者番号"/>
         <id column="idouTemp_連番"/>
+        <id column="識別コード"/>
+        <id column="履歴番号"/>
         <association property="住所地特例" resultMap="resultMap_住所地特例Entity"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
     </resultMap>
@@ -683,8 +678,6 @@
                 "TEMPINFO"."被保険者番号"
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
-        WHERE 
-            "IdouTemp"."被保険者番号" = '2016092401'
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     

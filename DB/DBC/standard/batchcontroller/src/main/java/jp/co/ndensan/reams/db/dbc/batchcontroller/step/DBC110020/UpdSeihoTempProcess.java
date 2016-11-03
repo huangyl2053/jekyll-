@@ -113,8 +113,12 @@ public class UpdSeihoTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     private RString 生活保護受給者全項目(UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者) {
         RString 全項目 = RString.EMPTY;
-        全項目 = 全項目.concat(生活保護受給者.getJukyuKaishiYMD().toString()).concat(SPLIT)
-                .concat(生活保護受給者.getJukyuHaishiYMD().toString());
+        全項目 = 全項目.concat(生活保護受給者.getJukyuKaishiYMD().toString()).concat(SPLIT);
+        if (生活保護受給者.getJukyuHaishiYMD() != null && !生活保護受給者.getJukyuHaishiYMD().isEmpty()) {
+            全項目 = 全項目.concat(生活保護受給者.getJukyuHaishiYMD().toString());
+        } else {
+            全項目 = 全項目.concat(RString.EMPTY);
+        }
         return 全項目;
     }
 }
