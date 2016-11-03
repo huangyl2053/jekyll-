@@ -63,13 +63,18 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
         処理日付管理マスタ = manager.get処理日付管理マスタ(SubGyomuCode.DBC介護給付, 市町村コードTemp.get地方公共団体コード(),
                 ShoriName.事業分自己負担額計算.get名称(), 処理枝番);
-        FlexibleDate 基準年月日Temp = 処理日付管理マスタ.get基準年月日();
-        RDate 前回対象開始年月日Temp = new RDate(処理日付管理マスタ.get対象開始年月日().toString());
-        RString 前回対象開始年月日 = DateConverter.toWarekiHalf_Zero(前回対象開始年月日Temp);
-        RTime 前回対象開始日時Temp = 処理日付管理マスタ.get対象開始日時().getRDateTime().getTime();
-        RString 前回対象開始日時 = DateConverter.getTime141(前回対象開始日時Temp);
-        div.getTxtZenkaiUketoriYM().setValue(new RDate(基準年月日Temp.toString()));
-        div.getTxtZenkaiShoriYMD().setValue(前回対象開始年月日.concat(RString.FULL_SPACE).concat(前回対象開始日時));
+        if (処理日付管理マスタ != null) {
+            FlexibleDate 基準年月日Temp = 処理日付管理マスタ.get基準年月日();
+            RDate 前回対象開始年月日Temp = new RDate(処理日付管理マスタ.get対象開始年月日().toString());
+            RString 前回対象開始年月日 = DateConverter.toWarekiHalf_Zero(前回対象開始年月日Temp);
+            RTime 前回対象開始日時Temp = 処理日付管理マスタ.get対象開始日時().getRDateTime().getTime();
+            RString 前回対象開始日時 = DateConverter.getTime141(前回対象開始日時Temp);
+            div.getTxtZenkaiUketoriYM().setValue(new RDate(基準年月日Temp.toString()));
+            div.getTxtZenkaiShoriYMD().setValue(前回対象開始年月日.concat(RString.FULL_SPACE).concat(前回対象開始日時));
+        } else {
+            div.getTxtZenkaiUketoriYM().clearValue();
+            div.getTxtZenkaiShoriYMD().clearValue();
+        }
         KokuhorenInterfaceKanri 国保連インターフェース管理;
         KokuhorenInterfaceKanriManager 国保連インターフェース管理Manager = new KokuhorenInterfaceKanriManager();
         国保連インターフェース管理 = 国保連インターフェース管理Manager.get新国保連インターフェース管理(処理状態区分, 交換情報識別番号);
