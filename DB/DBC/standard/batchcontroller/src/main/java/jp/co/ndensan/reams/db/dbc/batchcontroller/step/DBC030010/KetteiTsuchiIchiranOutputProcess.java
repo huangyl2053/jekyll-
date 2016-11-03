@@ -87,7 +87,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
 
     @Override
     protected IBatchReader createReader() {
-        RString 出力順 = get出力順(ReportIdDBC.DBC100002.getReportId(), batchPram.getSyutujunId());
+        RString 出力順 = get出力順(ReportIdDBC.DBC100002_2.getReportId(), batchPram.getSyutujunId());
         if (!RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.replace(ORDER_BY, RString.EMPTY);
         }
