@@ -138,8 +138,8 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             開催番号 = 合議体名称.substring(1, 合議体名称.length() - LENGTH_4);
         }
         RString 開催年月日 = RString.EMPTY;
-        if (!div.getDgShinsakaiIchiran().getActiveRow().getKaisaiDay().getValue().isEmpty()) {
-            開催年月日 = new RString(div.getDgShinsakaiIchiran().getActiveRow().getKaisaiDay().getValue().toString());
+        if (!div.getDgShinsakaiIchiran().getActiveRow().getKaisaiYoteiDate().getValue().isEmpty()) {
+            開催年月日 = new RString(div.getDgShinsakaiIchiran().getActiveRow().getKaisaiYoteiDate().getValue().toString());
         }
         ViewStateHolder.put(ViewStateKeys.開催番号, 開催番号);
         ViewStateHolder.put(ViewStateKeys.開催年月日, 開催年月日);
