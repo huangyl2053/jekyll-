@@ -4,9 +4,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBA-0030-012 liangbc
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -314,7 +315,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             NinteiRirekiButtonWo[] enumArray = NinteiRirekiButtonWo.values();
 
             for (NinteiRirekiButtonWo enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -329,11 +330,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public NinteiRirekiButtonWo getMode_NinteiRirekiButtonWo() {
-        return (NinteiRirekiButtonWo) _CommonChildDivModeUtil.getMode( this.modes, NinteiRirekiButtonWo.class );
+        return (NinteiRirekiButtonWo) _CommonChildDivModeUtil.getMode(this.modes, NinteiRirekiButtonWo.class);
     }
 
-    public void setMode_NinteiRirekiButtonWo( NinteiRirekiButtonWo value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, NinteiRirekiButtonWo.class , value );
+    public void setMode_NinteiRirekiButtonWo(NinteiRirekiButtonWo value) {
+        _CommonChildDivModeUtil.setMode(this.modes, NinteiRirekiButtonWo.class, value);
     }
 
     public static enum HihoRirekiButtonWo implements ICommonChildDivMode {
@@ -351,7 +352,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             HihoRirekiButtonWo[] enumArray = HihoRirekiButtonWo.values();
 
             for (HihoRirekiButtonWo enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -366,11 +367,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public HihoRirekiButtonWo getMode_HihoRirekiButtonWo() {
-        return (HihoRirekiButtonWo) _CommonChildDivModeUtil.getMode( this.modes, HihoRirekiButtonWo.class );
+        return (HihoRirekiButtonWo) _CommonChildDivModeUtil.getMode(this.modes, HihoRirekiButtonWo.class);
     }
 
-    public void setMode_HihoRirekiButtonWo( HihoRirekiButtonWo value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, HihoRirekiButtonWo.class , value );
+    public void setMode_HihoRirekiButtonWo(HihoRirekiButtonWo value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HihoRirekiButtonWo.class, value);
     }
 
     // </editor-fold>
@@ -462,6 +463,12 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @JsonIgnore
     public FlexibleDate get資格喪失年月日() {
         return getTxtSoshitsuYmd().getValue();
+    }
+
+    @Override
+    @JsonIgnore
+    public FlexibleDate get要介護認定終了年月日() {
+        return new FlexibleDate(getTxtNinteiShuryoYmd().getText());
     }
 
     @JsonIgnore

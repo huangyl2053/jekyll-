@@ -368,6 +368,7 @@ public class FutangendogakuShinsei {
             pairs = validationHandler.負担限度額認定_適用開始日が法施行以前チェック(pairs, div);
             pairs = validationHandler.負担限度額認定_適用終了日が年度外チェック(pairs, div);
             pairs = validationHandler.負担限度額認定_適用終了日が開始日以前チェック(pairs, div);
+            pairs = validationHandler.減免減額_要介護認定チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }

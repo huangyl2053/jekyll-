@@ -122,9 +122,9 @@ public class NinteiShinseiValidationHandler {
                 add(NinteiShinseiValidationMessages.減免減額_適用期間重複, div.getDgShinseiList()).build().check(messages));
         return pairs;
     }
-    
+
     /**
-     *  承認情報を確定するボタン押下時、減免減額_適用期間重複チェックを行います。
+     * 承認情報を確定するボタン押下時、減免減額_適用期間重複チェックを行います。
      *
      * @param pairs バリデーションコントロール
      * @param div DBD1030001Div
@@ -142,6 +142,18 @@ public class NinteiShinseiValidationHandler {
         return pairs;
     }
 
+    public ValidationMessageControlPairs 減免減額_要介護認定チェック(ValidationMessageControlPairs pairs, FutangendogakuShinseiDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(FutangendogakuShinseiDivSpec.減免減額_要介護認定)
+                .thenAdd(NinteiShinseiValidationMessages.減免減額_要介護認定).messages());
+        List<ViewControl> controls = new ArrayList<>();
+        controls.add(div.getTxtTekiyoYMD());
+        controls.add(div.getTxtYukoKigenYMD());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NinteiShinseiValidationMessages.減免減額_要介護認定, controls).build().check(messages));
+        return pairs;
+    }
+
     private static enum NinteiShinseiValidationMessages implements IValidationMessage {
 
         受給共通_受給者_事業対象者登録なし(DbdErrorMessages.受給共通_受給者_事業対象者登録なし),
@@ -149,6 +161,7 @@ public class NinteiShinseiValidationHandler {
         減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
         減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),
         減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複),
+        減免減額_要介護認定(DbdErrorMessages.受給共通_受給者_事業対象者登録なし),
         預貯金チェック(DbdErrorMessages.預貯金チェック);
 
         private final Message message;

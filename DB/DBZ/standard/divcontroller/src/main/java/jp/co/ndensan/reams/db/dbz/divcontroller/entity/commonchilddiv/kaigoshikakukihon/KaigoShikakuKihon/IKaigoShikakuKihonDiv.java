@@ -61,4 +61,11 @@ public interface IKaigoShikakuKihonDiv extends ICommonChildDivBaseProperties {
      * @return 資格喪失年月日
      */
     FlexibleDate get資格喪失年月日();
+
+    /**
+     * 要介護認定終了年月日を取得
+     *
+     * @return 要介護認定終了年月日
+     */
+    FlexibleDate get要介護認定終了年月日();
 }

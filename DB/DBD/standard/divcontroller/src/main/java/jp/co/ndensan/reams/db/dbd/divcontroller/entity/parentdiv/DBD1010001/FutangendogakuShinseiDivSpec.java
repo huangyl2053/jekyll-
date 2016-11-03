@@ -216,5 +216,19 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                     }
                     return true;
                 }
+            },
+    減免減額_要介護認定 {
+                /**
+                 * 承認情報確認するボタン押下時、減免減額_適用期間重複のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not減免減額_適用期間重複です、false:減免減額_適用期間重複です。
+                 */
+                @Override
+                public boolean apply(FutangendogakuShinseiDiv div) {
+                    FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
+                    FlexibleDate 要介護認定終了年月日 = div.getCcdKaigoShikakuKihon().get要介護認定終了年月日();
+                    return 適用開始日.isBeforeOrEquals(要介護認定終了年月日);
+                }
             };
 }
