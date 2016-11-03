@@ -11,24 +11,34 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.report.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranReport;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200074.JukyushaIdoRirekiTeiseiIchiranReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020.DataCompareShoriCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020.JukyushaIdoRenrakuhyoOutFlowEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020.JukyushaIdorenrakuhyoSofuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200074.JukyushaIdoRirekiTeiseiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.DataCompareShoriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdoTblTmpEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200074.JukyushaIdoRirekiTeiseiIchiranSource;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoCsvManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -60,54 +70,20 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select比較処理データ");
     private static final RString CSV_FILENAME = new RString("JukyusyaIdouJohoRirekilist.csv");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200074");
+    private static final EucEntityId EUC_ENTITY_ID_DBC200074 = new EucEntityId("DBC200074");
+    private static final EucEntityId EUC_ENTITY_ID_DBC200010 = new EucEntityId("DBC200010");
     private static final int COUNT_0 = 0;
     private static final int COUNT_1 = 1;
-    private static final int COUNT_2 = 1;
-    private static final int COUNT_3 = 1;
-    private static final int COUNT_4 = 1;
-    private static final int COUNT_5 = 1;
-    private static final int COUNT_6 = 1;
-    private static final int COUNT_7 = 1;
-    private static final int COUNT_8 = 1;
-    private static final int COUNT_9 = 1;
-    private static final int COUNT_10 = 1;
+    private static final int COUNT_2 = 2;
+    private static final int COUNT_3 = 3;
+    private static final int COUNT_4 = 4;
+    private static final int COUNT_5 = 5;
+    private static final int COUNT_6 = 6;
+    private static final int COUNT_7 = 7;
+    private static final int COUNT_8 = 8;
+    private static final int COUNT_9 = 9;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString CSV_作成年月日 = new RString("作成年月日");
-    private static final RString CSV_ページ数 = new RString("ページ数");
-    private static final RString CSV_市町村コード = new RString("市町村コード");
-    private static final RString CSV_市町村名称 = new RString("市町村名称");
-    private static final RString CSV_被保険者番号1 = new RString("被保険者番号1");
-    private static final RString CSV_氏名1 = new RString("氏名1");
-    private static final RString CSV_異動年月日１ = new RString("異動年月日１");
-    private static final RString CSV_訂正情報_項目１ = new RString("訂正情報　項目１");
-    private static final RString CSV_訂正情報_項目２ = new RString("訂正情報　項目２");
-    private static final RString CSV_訂正情報_項目３ = new RString("訂正情報　項目３");
-    private static final RString CSV_訂正情報_項目４ = new RString("訂正情報　項目４");
-    private static final RString CSV_訂正情報_項目５ = new RString("訂正情報　項目５");
-    private static final RString CSV_訂正情報_項目６ = new RString("訂正情報　項目６");
-    private static final RString CSV_訂正情報_項目７ = new RString("訂正情報　項目７");
-    private static final RString CSV_訂正情報_項目８ = new RString("訂正情報　項目８");
-    private static final RString CSV_訂正情報_項目９ = new RString("訂正情報　項目９");
-    private static final RString CSV_訂正情報_項目１０ = new RString("訂正情報　項目１０");
-    private static final RString CSV_訂正情報_項目１１ = new RString("訂正情報　項目１１");
-    private static final RString CSV_訂正情報_項目１２ = new RString("訂正情報　項目１２");
-    private static final RString CSV_被保険者番号２ = new RString("被保険者番号２");
-    private static final RString CSV_氏名２ = new RString("氏名２");
-    private static final RString CSV_異動年月日２ = new RString("異動年月日２");
-    private static final RString CSV_訂正情報_送付済内容１ = new RString("訂正情報　送付済内容１");
-    private static final RString CSV_訂正情報_送付済内容２ = new RString("訂正情報　送付済内容２");
-    private static final RString CSV_訂正情報_送付済内容３ = new RString("訂正情報　送付済内容３");
-    private static final RString CSV_訂正情報_送付済内容４ = new RString("訂正情報　送付済内容４");
-    private static final RString CSV_訂正情報_送付済内容５ = new RString("訂正情報　送付済内容５");
-    private static final RString CSV_訂正情報_送付済内容６ = new RString("訂正情報　送付済内容６");
-    private static final RString CSV_訂正情報_送付済内容７ = new RString("訂正情報　送付済内容７");
-    private static final RString CSV_訂正情報_送付済内容８ = new RString("訂正情報　送付済内容７");
-    private static final RString CSV_訂正情報_送付済内容９ = new RString("証保険番号");
-    private static final RString CSV_訂正情報_送付済内容１０ = new RString("証保険番号");
-    private static final RString CSV_訂正情報_送付済内容１１ = new RString("証保険番号");
-    private static final RString CSV_訂正情報_送付済内容１２ = new RString("証保険番号");
     private static final RString 証保険番号 = new RString("証保険番号");
     private static final RString 資格取得日 = new RString("資格取得日");
     private static final RString 資格喪失日 = new RString("資格喪失日");
@@ -164,24 +140,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString 住特終了日 = new RString("住特終了日");
     private static final RString 二割開始日 = new RString("二割開始日");
     private static final RString 二割終了日 = new RString("二割終了日");
-
     private static final RString 記号 = new RString("*");
     private static final RString エラーあり = new RString("1");
-    private static final RString CSV_被保険者番号3 = new RString("証保険番号");
-    private static final RString CSV_氏名３ = new RString("証保険番号");
-    private static final RString CSV_異動年月日３ = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容1 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容2 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容3 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容4 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容5 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容6 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容7 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容8 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容9 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容10 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容11 = new RString("証保険番号");
-    private static final RString CSV_訂正情報_訂正内容12 = new RString("証保険番号");
     private static final RString RST_0 = new RString("0");
     private static final RString RST_1 = new RString("1");
     private static final RString RST_2 = new RString("2");
@@ -189,22 +149,44 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString RST_SPACE = new RString("　");
     private static final RString RST_TRUE = new RString("TRUE");
     private static final RString RST_FALSE = new RString("FALSE");
+    private int 異動連絡票件数;
+    private int 訂正連絡票件数;
 
-    private RString eucFilePath;
-    private BatchReportWriter<JukyushaIdoRirekiTeiseiIchiranSource> batchReportWriter;
-    private ReportSourceWriter<JukyushaIdoRirekiTeiseiIchiranSource> reportSourceWriter;
+    /**
+     * returnEntity
+     */
+    public static final RString PARAMETER_OUT_RETURNENTITY;
+    private OutputParameter<JukyushaIdoRenrakuhyoOutFlowEntity> returnEntity;
+
+    private RString eucFilePath_DBC200074;
+    private RString eucFilePath_DBC200010;
+    private BatchReportWriter<JukyushaIdoRirekiTeiseiIchiranSource> batchReportWriter_DBC200074;
+    private ReportSourceWriter<JukyushaIdoRirekiTeiseiIchiranSource> reportSourceWriter_DBC200074;
+
+    private BatchReportWriter<JukyushaIdorenrakuhyoSofuTaishoshachiranSource> batchReportWriter_DBC200010;
+    private ReportSourceWriter<JukyushaIdorenrakuhyoSofuTaishoshachiranSource> reportSourceWriter_DBC200010;
     Map<HihokenshaNo, List<IdoTblTmpEntity>> 異動一時2Map;
     Map<HihokenshaNo, List<DbT3001JukyushaIdoRenrakuhyoEntity>> 受給者異動送付Map;
     List<HihokenshaNo> 被保険者番号List;
     private RString 市町村コード = RString.EMPTY;
     private RString 市町村名称 = RString.EMPTY;
     private RString 作成年月日 = RString.EMPTY;
-    private FileSpoolManager spoolManager;
-    private CsvWriter csvWriter;
+    private FileSpoolManager spoolManager_DBC200074;
+    private CsvWriter csvWriter_DBC200074;
+    private FileSpoolManager spoolManager_DBC200010;
+    private CsvWriter csvWriter_DBC200010;
     private List<JukyushaIdoRenrakuhyoCsvEntity> entityList;
+    @BatchWriter
+    BatchPermanentTableWriter<DbT3001JukyushaIdoRenrakuhyoEntity> dbT3001TableWriter;
+
+    static {
+        PARAMETER_OUT_RETURNENTITY = new RString("returnEntity");
+    }
 
     @Override
     protected void initialize() {
+        異動連絡票件数 = 0;
+        訂正連絡票件数 = 0;
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         市町村名称 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records().get(COUNT_0).get市町村名称();
         RDateTime sysDate = RDate.getNowDateTime();
@@ -224,19 +206,35 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(new ReportId("").value()).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
+        batchReportWriter_DBC200074 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200074.getReportId().value()).create();
+        reportSourceWriter_DBC200074 = new ReportSourceWriter<>(batchReportWriter_DBC200074);
+
+        batchReportWriter_DBC200010 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200010.getReportId().value()).create();
+        reportSourceWriter_DBC200010 = new ReportSourceWriter<>(batchReportWriter_DBC200010);
+        spoolManager_DBC200074 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200074,
                 UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
+        eucFilePath_DBC200074 = Path.combinePath(spoolManager_DBC200074.getEucOutputDirectry(),
                 CSV_FILENAME);
-        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
+        csvWriter_DBC200074 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200074).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true)
                 //                .setHeader(getHeaderList())
                 .build();
+
+        spoolManager_DBC200010 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200010,
+                UzUDE0831EucAccesslogFileType.Csv);
+        eucFilePath_DBC200010 = Path.combinePath(spoolManager_DBC200010.getEucOutputDirectry(),
+                CSV_FILENAME);
+        csvWriter_DBC200010 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200010).setNewLine(NewLine.CRLF)
+                .setDelimiter(EUC_WRITER_DELIMITER)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setEncode(Encode.UTF_8withBOM)
+                .hasHeader(true)
+                //                .setHeader(getHeaderList())
+                .build();
+        this.dbT3001TableWriter = new BatchPermanentTableWriter<>(DbT3001JukyushaIdoRenrakuhyoEntity.class);
     }
 
     @Override
@@ -276,8 +274,15 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         被保険者番号マッチング();
         JukyushaIdoRenrakuhyoCsvManager manager = JukyushaIdoRenrakuhyoCsvManager.createInstance();
         manager.csvの出力(entityList);
-        csvWriter.close();
-        spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        csvWriter_DBC200074.close();
+        spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
+        csvWriter_DBC200010.close();
+        spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
+        returnEntity = new OutputParameter<>();
+        JukyushaIdoRenrakuhyoOutFlowEntity flowEntity = new JukyushaIdoRenrakuhyoOutFlowEntity();
+        flowEntity.set異動連絡票件数(異動連絡票件数);
+        flowEntity.set訂正連絡票件数(訂正連絡票件数);
+        returnEntity.setValue(flowEntity);
     }
 
     private void 受給者異動連絡票Entity出力処理(IdoTblTmpEntity 異動一時2entity) {
@@ -372,6 +377,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         csventity.set訂正年月日(異動一時2entity.get訂正年月日());
         csventity.set論理削除フラグ(異動一時2entity.is論理削除フラグ());
         entityList.add(csventity);
+        this.dbT3001TableWriter.insert(異動一時2entity.copyTo3001Entity());
     }
 
     private void 国保連受給者異動情報履歴削除(DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
@@ -422,10 +428,11 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         履歴訂正Entity.set訂正内容8(記号);
         履歴訂正Entity.set訂正内容9(記号);
         履歴訂正Entity.set訂正内容10(記号);
-        csvWriter.writeLine(to明細項目(履歴訂正Entity));
+        csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
+        異動連絡票件数++;
         JukyushaIdoRirekiTeiseiIchiranReport report
                 = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
-        report.writeBy(reportSourceWriter);
+        report.writeBy(reportSourceWriter_DBC200074);
     }
 
     private void 国保連受給者異動情報履歴訂正(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
@@ -498,10 +505,42 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             履歴訂正Entity.set送付済内容10(違う項目10.get(COUNT_1));
             履歴訂正Entity.set訂正内容10(違う項目10.get(COUNT_2));
         }
-        csvWriter.writeLine(to明細項目(履歴訂正Entity));
-        JukyushaIdoRirekiTeiseiIchiranReport report
+        RString 変更項目 = get変更項目(違う項目);
+        csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
+        csvWriter_DBC200010.writeLine(get送付対象者リスト(異動一時2entity, 変更項目));
+        異動連絡票件数++;
+        訂正連絡票件数++;
+        JukyushaIdoRirekiTeiseiIchiranReport report_200074
                 = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
-        report.writeBy(reportSourceWriter);
+        report_200074.writeBy(reportSourceWriter_DBC200074);
+
+        JukyushaIdorenrakuhyoSofuTaishoshachiranEntity 送付対象者
+                = get送付対象者(異動一時2entity, 変更項目);
+        JukyushaIdorenrakuhyoSofuTaishoshachiranReport report_200010
+                = new JukyushaIdorenrakuhyoSofuTaishoshachiranReport(送付対象者, 市町村コード, 市町村名称);
+        report_200010.writeBy(reportSourceWriter_DBC200010);
+    }
+
+    private JukyushaIdorenrakuhyoSofuTaishoshachiranEntity get送付対象者(IdoTblTmpEntity 異動一時2entity, RString 変更項目) {
+        JukyushaIdorenrakuhyoSofuTaishoshachiranEntity 送付対象者 = new JukyushaIdorenrakuhyoSofuTaishoshachiranEntity();
+        送付対象者.set被保険者番号(異動一時2entity.get被保険者番号().getColumnValue());
+        送付対象者.set氏名(異動一時2entity.get被保険者氏名カナ());
+        送付対象者.set区分(JukyushaIF_IdoKubunCode.toValue(異動一時2entity.get異動区分コード()).get名称());
+        送付対象者.set異動年月日(異動一時2entity.get異動年月日());
+        送付対象者.set要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
+                異動一時2entity.get要介護状態区分コード()).getName());
+        送付対象者.set開始認定日(異動一時2entity.get認定有効期間開始年月日());
+        送付対象者.set終了認定日(new FlexibleDate(異動一時2entity.get認定有効期間終了年月日()));
+        送付対象者.set変更項目(変更項目);
+        return 送付対象者;
+    }
+
+    private RString get変更項目(List<List<RString>> 違う項目) {
+        RStringBuilder 変更項目 = new RStringBuilder();
+        for (List<RString> 違う : 違う項目) {
+            変更項目.append(違う.get(COUNT_0));
+        }
+        return 変更項目.toRString();
     }
 
     private List get違う項目(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
@@ -980,7 +1019,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (!異動一時2entity.get利用者負担割合有効開始日().equals(
                 受給者異動送付.getRiyosyaFutanWariaiYukoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
-            違う.add(社福適用日);
+            違う.add(二割開始日);
             違う.add(受給者異動送付.getRiyosyaFutanWariaiYukoKaishiYMD());
             違う.add(異動一時2entity.get利用者負担割合有効開始日());
             違う項目.add(違う);
@@ -989,7 +1028,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (!異動一時2entity.get利用者負担割合有効終了日().equals(
                 受給者異動送付.getRiyosyaFutanWariaiYukoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
-            違う.add(社福終了日);
+            違う.add(二割終了日);
             違う.add(受給者異動送付.getRiyosyaFutanWariaiYukoShuryoYMD());
             違う.add(異動一時2entity.get利用者負担割合有効終了日());
             違う項目.add(違う);
@@ -1573,7 +1612,20 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         resultEntity.set訂正内容10(entity.get訂正内容10());
         resultEntity.set訂正内容11(RString.EMPTY);
         resultEntity.set訂正内容12(RString.EMPTY);
-
         return resultEntity;
+    }
+
+    private JukyushaIdorenrakuhyoSofuCsvEntity get送付対象者リスト(IdoTblTmpEntity 異動一時2entity, RString 変更項目) {
+        JukyushaIdorenrakuhyoSofuCsvEntity entity = new JukyushaIdorenrakuhyoSofuCsvEntity();
+        entity.set被保険者番号(異動一時2entity.get被保険者番号().getColumnValue());
+        entity.set氏名(異動一時2entity.get被保険者氏名カナ());
+        entity.set区分(JukyushaIF_IdoKubunCode.toValue(異動一時2entity.get異動区分コード()).get名称());
+        entity.set異動年月日(new RString(異動一時2entity.get異動年月日().toString()));
+        entity.set要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
+                異動一時2entity.get要介護状態区分コード()).getName());
+        entity.set開始認定日(new RString(異動一時2entity.get認定有効期間開始年月日().toString()));
+        entity.set終了認定日(異動一時2entity.get認定有効期間終了年月日());
+        entity.set変更項目(変更項目);
+        return entity;
     }
 }
