@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.ddlShinseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
@@ -53,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -168,7 +166,7 @@ public class RiyoshaFutangakuGengakuHandler {
 
         GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder
                 = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
-        RString 旧措置 = div.getDdlKyusochiKubun().getSelectedKey();
+        boolean 旧措置 = div.getChkKyuSochisha().isAllSelected();
         RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
         RString 決定区分コード;
         RString 決定区分TXT;
@@ -189,7 +187,7 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分コード = KetteiKubun.承認しない.getコード();
             決定区分TXT = KetteiKubun.承認しない.get名称();
             非承認理由 = div.getTxtHiShoninRiyu().getText();
-            旧措置 = KyuSochishaKubun.非該当.getコード();
+            旧措置 = false;
         }
         builder.set給付率(給付率);
         builder.set適用開始年月日(適用開始年月日);
@@ -198,7 +196,7 @@ public class RiyoshaFutangakuGengakuHandler {
         builder.set決定区分(決定区分コード);
         builder.set申請事由(div.getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getTxtShinseiYmd().getValue());
-        builder.set旧措置者有無(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
+        builder.set旧措置者有無(旧措置);
         builder.set決定年月日(div.getTxtKettaiYmd().getValue());
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
 
@@ -228,7 +226,7 @@ public class RiyoshaFutangakuGengakuHandler {
                 row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
                 row.getTxtTekiyoYMD().setValue(適用開始年月日);
                 row.getTxtYukoKigen().setValue(適用終了年月日);
-                row.setKyusochishaUmu(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
+                row.setKyusochishaUmu(旧措置);
                 if (給付率 == HokenKyufuRitsu.ZERO) {
                     row.getTxtKyufuritsu().clearValue();
                 } else {
@@ -248,7 +246,7 @@ public class RiyoshaFutangakuGengakuHandler {
             row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
             row.getTxtTekiyoYMD().setValue(適用開始年月日);
             row.getTxtYukoKigen().setValue(適用終了年月日);
-            row.setKyusochishaUmu(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
+            row.setKyusochishaUmu(旧措置);
             if (給付率 == HokenKyufuRitsu.ZERO) {
                 row.getTxtKyufuritsu().clearValue();
             } else {
@@ -406,12 +404,13 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getTxtTekiyoYmd().setValue(適用日);
             div.getTxtYukoKigenYmd().setValue(有効期限);
         }
-        div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
 
         if (旧措置有無) {
-            div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.旧措置者.getコード());
+            ArrayList<RString> selectItems = new ArrayList<>();
+            selectItems.add(new RString("key0"));
+            div.getChkKyuSochisha().setSelectedItemsByKey(selectItems);
         } else {
-            div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.非該当.getコード());
+            div.getChkKyuSochisha().setSelectedItemsByKey(new ArrayList<RString>());
         }
         div.getTxtKyufuRitsu().setValue(給付率);
         div.getTxtHiShoninRiyu().setValue(承認しない理由);
@@ -479,7 +478,7 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtKettaiYmd().setDisabled(true);
         div.getTxtTekiyoYmd().setDisabled(true);
         div.getTxtYukoKigenYmd().setDisabled(true);
-        div.getDdlKyusochiKubun().setDisabled(true);
+        div.getChkKyuSochisha().setDisabled(true);
         div.getTxtKyufuRitsu().setDisabled(true);
         div.getBtnHiShoninRiyu().setDisabled(true);
         div.getTxtHiShoninRiyu().setDisabled(true);
@@ -512,23 +511,22 @@ public class RiyoshaFutangakuGengakuHandler {
         if (承認する_KEY.equals(決定区分)) {
             div.getTxtTekiyoYmd().setDisabled(false);
             div.getTxtYukoKigenYmd().setDisabled(false);
-            div.getDdlKyusochiKubun().setDisabled(false);
+            div.getChkKyuSochisha().setDisabled(false);
             div.getTxtKyufuRitsu().setDisabled(false);
             div.getBtnHiShoninRiyu().setDisabled(true);
             div.getTxtHiShoninRiyu().setDisabled(true);
-            div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
             if (is初期) {
-                div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.非該当.getコード());
+                div.getChkKyuSochisha().setSelectedItemsByKey(new ArrayList<RString>());
             }
 
         } else {
             div.getTxtTekiyoYmd().setDisabled(false);
             div.getTxtYukoKigenYmd().setDisabled(false);
-            div.getDdlKyusochiKubun().setDisabled(true);
+            div.getChkKyuSochisha().setDisabled(true);
             div.getTxtKyufuRitsu().setDisabled(true);
             div.getBtnHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
-            div.getDdlKyusochiKubun().setSelectedValue(RString.EMPTY);
+            div.getChkKyuSochisha().setSelectedItemsByKey(new ArrayList<RString>());
             div.getTxtKyufuRitsu().clearValue();
         }
 
@@ -610,8 +608,7 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtKettaiYmd().clearValue();
         div.getTxtTekiyoYmd().clearValue();
         div.getTxtYukoKigenYmd().clearValue();
-        div.getDdlKyusochiKubun().getDataSource().clear();
-        div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
+        div.getChkKyuSochisha().setSelectedItemsByKey(new ArrayList<RString>());
         div.getTxtKyufuRitsu().clearValue();
         div.getTxtHiShoninRiyu().clearValue();
     }
@@ -692,15 +689,6 @@ public class RiyoshaFutangakuGengakuHandler {
         gemmenGengakuShinseiBuilder.set申請届出者住所(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者住所());
         gemmenGengakuShinseiBuilder.set申請届出者電話番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者電話番号());
         return gemmenGengakuShinseiBuilder;
-    }
-
-    private List<KeyValueDataSource> getDdlKyusochiKubun() {
-        List<KeyValueDataSource> syuSochishaKubun = new ArrayList<>();
-        for (KyuSochishaKubun code : KyuSochishaKubun.values()) {
-            KeyValueDataSource data = new KeyValueDataSource(code.getコード(), code.get略称());
-            syuSochishaKubun.add(data);
-        }
-        return syuSochishaKubun;
     }
 
     private ShinseiJoho 減免減額申請共有子Divの設定(RiyoshaFutangakuGengakuViewState joho) {
@@ -808,7 +796,7 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分コード = KetteiKubun.承認しない.getコード();
         }
         boolean is旧措置者有無 = false;
-        if (div.getDdlKyusochiKubun().getSelectedValue().equals(KyuSochishaKubun.旧措置者.get略称())) {
+        if (div.getChkKyuSochisha().isAllSelected()) {
             is旧措置者有無 = true;
         }
 
