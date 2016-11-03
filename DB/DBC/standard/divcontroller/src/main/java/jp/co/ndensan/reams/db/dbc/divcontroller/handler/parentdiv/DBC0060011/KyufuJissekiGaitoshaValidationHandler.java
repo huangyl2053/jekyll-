@@ -24,6 +24,7 @@ public class KyufuJissekiGaitoshaValidationHandler {
     private final KyufuJissekiGaitoshaDiv div;
     private static final RString 必須項目 = new RString("被保番号、支援事業者番号");
     private static final RString 被保険者台帳 = new RString("被保険者台帳");
+    private static final RString なし = new RString("なし");
 
     /**
      * コンストラクタです。
@@ -58,6 +59,20 @@ public class KyufuJissekiGaitoshaValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(
                 new IdocheckMessages(UrErrorMessages.存在しない, 被保険者台帳.toString())));
+        return validPairs;
+    }
+
+    /**
+     * 給付管理票一覧検索チェックを実施します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateFor検索チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (なし.equals(div.getHidden件数())) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new IdocheckMessages(UrErrorMessages.該当データなし)));
+        }
         return validPairs;
     }
 
