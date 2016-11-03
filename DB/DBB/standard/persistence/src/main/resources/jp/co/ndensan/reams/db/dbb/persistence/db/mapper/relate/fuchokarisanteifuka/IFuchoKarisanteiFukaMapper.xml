@@ -28,7 +28,7 @@
             </if> 
             ) "A" 
             WHERE "A"."rrkno"='1'  )  AS  "DbT1001HihokenshaDaicho"
-        INNER JOIN
+        FULL OUTER JOIN
             (
             (SELECT * FROM rgdb."DbV2002Fuka"  AS A
             WHERE "choteiNendo" = #{調定年度}
