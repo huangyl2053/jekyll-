@@ -773,7 +773,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private RString doDecimal編集(Decimal number) {
         if (null == number) {
-            return RString.EMPTY;
+            return new RString(INT_0);
         }
         return DecimalFormatter.toRString(number, 0);
     }
