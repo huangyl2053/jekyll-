@@ -224,19 +224,16 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         }
         if (ShiharaiHohoKubun.窓口払.getコード().equals(shiharai.get支払方法区分コード())) {
             item.setTorikeshi1(RString.EMPTY);
-            item.setTorikeshi2(RString.EMPTY);
-            item.setTorikeshiMochimono1(RString.EMPTY);
-            item.setTorikeshiMochimono2(RString.EMPTY);
-            item.setTorikeshiShiharaibasho(RString.EMPTY);
-            item.setTorikeshiShiharaikikan(RString.EMPTY);
+            item.setTorikeshi2(記号_星);
+            
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(shiharai.get支払方法区分コード())) {
             item.setTorikeshi1(記号_星);
-            item.setTorikeshi2(記号_星);
-            item.setTorikeshiMochimono1(記号_星);
-            item.setTorikeshiMochimono2(記号_星);
-            item.setTorikeshiShiharaibasho(記号_星);
-            item.setTorikeshiShiharaikikan(記号_星);
+            item.setTorikeshi2(RString.EMPTY);
         }
+        item.setTorikeshiMochimono1(RString.EMPTY);
+        item.setTorikeshiMochimono2(RString.EMPTY);
+        item.setTorikeshiShiharaibasho(RString.EMPTY);
+        item.setTorikeshiShiharaikikan(RString.EMPTY);
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         item.setMochimono1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言１));
         item.setMochimono2(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言２));
