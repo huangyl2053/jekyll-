@@ -304,7 +304,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
         if (parameter.get処理区分().getコード().equals(処理区分3)) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();
-            shoriKekkaKakuninList.setBiko(処理区分3);
+            shoriKekkaKakuninList.setErrorKubun(new RString("03"));
             shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
         }
         for (int i = 0; i < NUM11; i++) {
