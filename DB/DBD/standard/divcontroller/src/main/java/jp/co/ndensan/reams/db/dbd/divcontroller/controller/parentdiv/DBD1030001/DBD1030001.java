@@ -246,9 +246,8 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_onBeforeOpenDialog(DBD1030001Div div) {
-        div.getShafukuRiyoshaKeigen().setGyomuCode(GyomuCode.DB介護保険.value());
-        div.getShafukuRiyoshaKeigen().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
-        div.getShafukuRiyoshaKeigen().setTeikeibun(RString.EMPTY);
+        div.setHidden登録業務コード(GyomuCode.DB介護保険.getColumnValue());
+        div.setHidden登録グループコード(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
         return ResponseData.of(div).respond();
     }
 
@@ -259,7 +258,7 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClose_btnOpenHiShoninRiyu(DBD1030001Div div) {
-        div.getTxtHiShoninRiyu().setValue(div.getShafukuRiyoshaKeigen().getTeikeibun());
+        div.getTxtHiShoninRiyu().setValue(div.getHiddenサンプル文書());
         return ResponseData.of(div).respond();
     }
 
