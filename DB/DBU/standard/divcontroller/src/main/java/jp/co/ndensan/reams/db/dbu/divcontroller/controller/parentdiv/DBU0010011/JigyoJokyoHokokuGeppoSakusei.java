@@ -143,7 +143,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnKakutei(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         RDate 報告年月 = div.getTxtHokokuYM().getValue();
-        RDate 日付 = new RDate("平成12年5月");
+        RDate 日付 = new RDate("平成12年4月");
         if (報告年月 == null) {
             return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目()).respond();
         }
