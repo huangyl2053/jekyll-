@@ -133,6 +133,11 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
     private static final RString 認定有効期間_編集区分_1 = new RString("1");
     private static final RString 認定有効期間_編集区分_2 = new RString("2");
     private static final int NUM5 = 5;
+    private KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity;
+    private HihokenshaTempEntity 被保険者一時Entity;
+    private KyufuKanrihyoSofuIchiranEntity kyufuKanrihyoSofuIchiranEntity;
+    private KyufuKanrihyoSofuIchirancsvEntity kyufuKanrihyoSofuIchirancsvEntity;
+    private KyufukanrihyoOutDoBillOutEntity kyufukanrihyoOutDoBillOutEntity;
 
     @BatchWriter
     private BatchReportWriter<KyufuKanrihyoSofuIchiranReportSource> batchReportWriter;
@@ -141,6 +146,9 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
 
     @Override
     protected void initialize() {
+        kyufuKanrihyoSofuIchiranEntity = new KyufuKanrihyoSofuIchiranEntity();
+        kyufuKanrihyoSofuIchirancsvEntity = new KyufuKanrihyoSofuIchirancsvEntity();
+        kyufukanrihyoOutDoBillOutEntity = new KyufukanrihyoOutDoBillOutEntity();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         this.出力順情報 = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200009.getReportId(),
                 Long.parseLong(parameter.get出力順ID().toString()));
@@ -219,10 +227,9 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
 
     @Override
     protected void usualProcess(KyufukanrihyoOutDoBillOutEntity entity) {
-        KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity = entity.get自己作成管理一時Entity();
-        HihokenshaTempEntity 被保険者一時Entity = entity.get被保険者一時Entity();
+        自己作成管理一時Entity = entity.get自己作成管理一時Entity();
+        被保険者一時Entity = entity.get被保険者一時Entity();
         if (ヘッダー項目は1行目 == 0) {
-            editKyufuKanrihyoSofuIchiranEntity1(自己作成管理一時Entity);
             明細行数カウンター++;
             ヘッダー項目は1行目++;
             帳票通番カウンター++;
@@ -231,12 +238,29 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
             利用年月 = new RString(自己作成管理一時Entity.getRiyoYM().toString());
             被保険者番号 = 自己作成管理一時Entity.getHihokenshaNo().getColumnValue();
             居宅サービス区分 = 自己作成管理一時Entity.getKyotakuServiceKubun();
+            明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
+            editKyufuKanrihyoSofuIchiranEntity1(自己作成管理一時Entity);
+            kyufuKanrihyoSofuIchiranEntity = editKyufuKanrihyoSofuIchiranEntity(自己作成管理一時Entity, 被保険者一時Entity, 帳票通番カウンター, 明細合計単位数);
+            kyufuKanrihyoSofuIchirancsvEntity = csv明細作成(自己作成管理一時Entity, 被保険者一時Entity);
+            kyufukanrihyoOutDoBillOutEntity.set自己作成管理一時Entity(自己作成管理一時Entity);
+            kyufukanrihyoOutDoBillOutEntity.set被保険者一時Entity(被保険者一時Entity);
         } else {
-
             if (!(保険者番号.equals(自己作成管理一時Entity.getHokenshaNo()) && 利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
                     && 被保険者番号.equals(自己作成管理一時Entity.getHihokenshaNo().getColumnValue())
                     && 居宅サービス区分.equals(自己作成管理一時Entity.getKyotakuServiceKubun()))) {
-                editKyufuKanrihyoSofuIchiranEntity(自己作成管理一時Entity, 被保険者一時Entity, 帳票通番カウンター, 明細合計単位数);
+                KyufuKanrihyoSofuIchiranReport report = new KyufuKanrihyoSofuIchiranReport(kyufuKanrihyoSofuIchiranEntity,
+                        出力順Map,
+                        改頁リスト);
+                report.writeBy(reportSourceWriter);
+                合計件数_新規 = Decimal.ZERO;
+                合計件数_修正 = Decimal.ZERO;
+                合計件数_取消 = Decimal.ZERO;
+                kyufuKanrihyoSofuIchirancsvWriter.writeLine(kyufuKanrihyoSofuIchirancsvEntity);
+                アクセスログ対象追加(kyufukanrihyoOutDoBillOutEntity);
+                kyufukanrihyoOutDoBillOutEntity.set自己作成管理一時Entity(自己作成管理一時Entity);
+                kyufukanrihyoOutDoBillOutEntity.set被保険者一時Entity(被保険者一時Entity);
+                kyufuKanrihyoSofuIchirancsvEntity = csv明細作成(自己作成管理一時Entity, 被保険者一時Entity);
+                kyufuKanrihyoSofuIchiranEntity = editKyufuKanrihyoSofuIchiranEntity(自己作成管理一時Entity, 被保険者一時Entity, 帳票通番カウンター, 明細合計単位数);
                 editKyufuKanrihyoSofuIchiranEntity1(自己作成管理一時Entity);
                 保険者番号 = 自己作成管理一時Entity.getHokenshaNo();
                 利用年月 = new RString(自己作成管理一時Entity.getRiyoYM().toString());
@@ -245,25 +269,37 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
                 帳票通番カウンター = 0;
                 明細行数カウンター = 0;
                 明細合計単位数 = Decimal.ZERO;
+                明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
             } else {
-                editKyufuKanrihyoSofuIchiranEntity1(自己作成管理一時Entity);
-                if (明細行数カウンター < 固定15) {
-                    明細行数カウンター++;
-                    明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
-
-                } else if (明細行数カウンター == 固定15) {
-                    明細行数カウンター = 1;
-                    帳票通番カウンター++;
-                    明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
-
-                }
+                get明細行数カウンター(自己作成管理一時Entity);
+                kyufuKanrihyoSofuIchiranEntity = editKyufuKanrihyoSofuIchiranEntity(自己作成管理一時Entity, 被保険者一時Entity, 帳票通番カウンター, 明細合計単位数);
             }
+        }
+
+    }
+
+    private void get明細行数カウンター(KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity) {
+        editKyufuKanrihyoSofuIchiranEntity1(自己作成管理一時Entity);
+        if (明細行数カウンター < 固定15) {
+            明細行数カウンター++;
+            明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
+
+        } else if (明細行数カウンター == 固定15) {
+            明細行数カウンター = 1;
+            帳票通番カウンター++;
+            明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
 
         }
     }
 
     @Override
     protected void afterExecute() {
+        KyufuKanrihyoSofuIchiranReport report = new KyufuKanrihyoSofuIchiranReport(kyufuKanrihyoSofuIchiranEntity,
+                出力順Map,
+                改頁リスト);
+        report.writeBy(reportSourceWriter);
+        kyufuKanrihyoSofuIchirancsvWriter.writeLine(kyufuKanrihyoSofuIchirancsvEntity);
+        アクセスログ対象追加(kyufukanrihyoOutDoBillOutEntity);
         kyufuKanrihyoSofuIchirancsvWriter.writeLine(集計項目csv明細作成());
         kyufuKanrihyoSofuIchirancsvWriter.close();
         if (!personalDataList.isEmpty()) {
@@ -274,7 +310,7 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
         }
     }
 
-    private void editKyufuKanrihyoSofuIchiranEntity(KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity,
+    private KyufuKanrihyoSofuIchiranEntity editKyufuKanrihyoSofuIchiranEntity(KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity,
             HihokenshaTempEntity 被保険者一時Entity, int 帳票通番カウンター, Decimal 明細合計単位数) {
         KyufuKanrihyoSofuIchiranEntity 給付管理票送付一覧表entity = new KyufuKanrihyoSofuIchiranEntity();
         給付管理票送付一覧表entity.set作成日時(RDateTime.now());
@@ -312,34 +348,25 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
         給付管理票送付一覧表entity.set被保険者番号(自己作成管理一時Entity.getHihokenshaNo().getColumnValue());
         edit限度額管理開始年月日(自己作成管理一時Entity,
                 被保険者一時Entity, 給付管理票送付一覧表entity);
-        KyufuKanrihyoSofuIchiranReport report = new KyufuKanrihyoSofuIchiranReport(給付管理票送付一覧表entity,
-                出力順Map,
-                改頁リスト);
-        report.writeBy(reportSourceWriter);
-        合計件数_新規 = Decimal.ZERO;
-        合計件数_修正 = Decimal.ZERO;
-        合計件数_取消 = Decimal.ZERO;
-        KyufuKanrihyoSofuIchirancsvEntity output = new KyufuKanrihyoSofuIchirancsvEntity();
-        csv明細作成(output, 自己作成管理一時Entity, 被保険者一時Entity);
-        kyufuKanrihyoSofuIchirancsvWriter.writeLine(output);
-        KyufukanrihyoOutDoBillOutEntity entity = new KyufukanrihyoOutDoBillOutEntity();
-        entity.set自己作成管理一時Entity(自己作成管理一時Entity);
-        entity.set被保険者一時Entity(被保険者一時Entity);
-        アクセスログ対象追加(entity);
+        return 給付管理票送付一覧表entity;
+
     }
 
     private void editKyufuKanrihyoSofuIchiranEntity1(KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity) {
 
         if (認定有効期間_編集区分_1.equals(自己作成管理一時Entity.getKoshinKubun())) {
             合計件数_新規 = 合計件数_新規.add(1);
+            合計件数_新規1 = 合計件数_新規1.add(1);
 
         }
         if (認定有効期間_編集区分_2.equals(自己作成管理一時Entity.getKoshinKubun())) {
             合計件数_修正 = 合計件数_修正.add(1);
+            合計件数_修正2 = 合計件数_修正2.add(1);
 
         }
         if (認定有効期間_編集区分_3.equals(自己作成管理一時Entity.getKoshinKubun())) {
             合計件数_取消 = 合計件数_取消.add(1);
+            合計件数_取消3 = 合計件数_取消3.add(1);
 
         }
 
@@ -354,9 +381,9 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
         return 集計項目entity;
     }
 
-    private void csv明細作成(KyufuKanrihyoSofuIchirancsvEntity output, KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity,
+    private KyufuKanrihyoSofuIchirancsvEntity csv明細作成(KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity,
             HihokenshaTempEntity 被保険者一時Entity) {
-
+        KyufuKanrihyoSofuIchirancsvEntity output = new KyufuKanrihyoSofuIchirancsvEntity();
         if (ヘッダー項目は1行目 == 1) {
             output.set提出年月(parameter.get処理年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -410,6 +437,7 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
 
         }
         ヘッダー項目は1行目++;
+        return output;
     }
 
     private void edit限度額管理開始年月日(KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity,

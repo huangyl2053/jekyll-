@@ -58,6 +58,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -118,6 +122,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
     private Association association;
     private IOutputOrder outputOrder;
     private RString 出力順;
+    private List<PersonalData> personalDataList;
 
     @BatchWriter
     private BatchReportWriter<ShiharaiHohoHenkoKanriIchiranReportSource> batchReportWrite;
@@ -125,6 +130,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     @Override
     protected void initialize() {
+        personalDataList = new ArrayList<>();
         association = AssociationFinderFactory.createInstance().getAssociation();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
                 parameter.get帳票ID(), parameter.get改頁出力順ID());
@@ -167,11 +173,12 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
             ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
                     new HokenshaNo(association.get地方公共団体コード().value()), association.get市町村名(),
-                    outputOrder, new ShiharaiHohoHenkoEntity(), reportData);
+                    outputOrder, new ShiharaiHohoHenkoEntity(), reportData, REPORT_DBD200007);
 
             finder.writeBy(reportSourceWriter);
             count = 0;
         }
+        personalDataList.add(toPersonalData(t));
     }
 
     private RString get出力順(IOutputOrder order) {
@@ -277,7 +284,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         if (count == 1) {
             ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
                     new HokenshaNo(association.get地方公共団体コード().value()), association.get市町村名(),
-                    outputOrder, reportData, new ShiharaiHohoHenkoEntity());
+                    outputOrder, reportData, new ShiharaiHohoHenkoEntity(), REPORT_DBD200007);
 
             finder.writeBy(reportSourceWriter);
         }
@@ -300,6 +307,9 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
                 get出力条件内容());
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+
+        AccessLogUUID reportLog = AccessLogger.logReport(personalDataList);
+        batchReportWrite.addPrivacy(reportLog);
     }
 
     private void edit宛名情報について(ShiharaiHohoHenkoHaakuFiveEntity t, ShiharaiHohoHenkoEntity reportDataEntity) {
@@ -341,7 +351,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     private void edit認定情報について(ShiharaiHohoHenkoHaakuFiveEntity t, ShiharaiHohoHenkoEntity reportDataEntity) {
 
-        if (t.get認定情報_要介護認定状態区分コード() != null && Code.EMPTY.equals(t.get認定情報_要介護認定状態区分コード())) {
+        if (t.get認定情報_要介護認定状態区分コード() != null && !Code.EMPTY.equals(t.get認定情報_要介護認定状態区分コード())) {
             reportDataEntity.set要介護度(t.get認定情報_要介護認定状態区分コード().getColumnValue());
         }
 
@@ -494,8 +504,13 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
         RString 設定項目 = RString.EMPTY;
         if (outputOrder != null) {
-            for (ISetSortItem item : outputOrder.get設定項目リスト()) {
-                設定項目 = 設定項目.concat(より).concat(item.get項目名());
+            for (int i = 0; i < outputOrder.get設定項目リスト().size(); i++) {
+                ISetSortItem item = outputOrder.get設定項目リスト().get(i);
+                if (0 == i) {
+                    設定項目 = item.get項目名();
+                } else {
+                    設定項目 = 設定項目.concat(より).concat(item.get項目名());
+                }
             }
         }
         if (!RString.EMPTY.equals(設定項目)) {
@@ -575,5 +590,11 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         } else if (SELECTED_VALUE_2.equals(parameter.get保険料控除あり者のみの選択())) {
             result.add(抽出対象.concat(償還決定登録者_保険料控除あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(滞納保険料なしのみ));
         }
+    }
+
+    private PersonalData toPersonalData(ShiharaiHohoHenkoHaakuFiveEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                entity.get資格情報_被保険者番号().getColumnValue());
+        return PersonalData.of(entity.get資格情報_識別コード() == null ? ShikibetsuCode.EMPTY : entity.get資格情報_識別コード(), expandedInfo);
     }
 }

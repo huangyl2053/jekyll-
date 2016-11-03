@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class FukushiyouguKonyuhiShikyuShinsei implements Serializable {
 
     private HihokenshaNo 被保険者番号;
@@ -33,5 +33,5 @@ public class FukushiyouguKonyuhiShikyuShinsei implements Serializable {
     private RString 支給_不支給決定区分;
     private FlexibleDate 決定日;
     private RString 商品名;
-    private Decimal 購入金額合計;
+    private Decimal 保険対象費用額;
 }

@@ -229,6 +229,7 @@
             FROM
             rgdb."DbT4001JukyushaDaicho" AS DbT4001sub
             WHERE
+            DbT4001sub."hihokenshaNo" = DbV1001."hihokenshaNo" AND
             DbT4001sub."logicalDeletedFlag" = false
             AND (DbT4001sub."yukoMukoKubun" = '1' or (DbT4001sub."yukoMukoKubun" = '2'
             AND DbT4001sub."kyuSochishaFlag" = true
@@ -247,6 +248,7 @@
             FROM
             rgdb."DbT4001JukyushaDaicho" AS DbT4001sub
             WHERE
+            DbT4001sub."hihokenshaNo" = DbV1001."hihokenshaNo" AND
             DbT4001sub."logicalDeletedFlag" = false
             AND (DbT4001sub."yukoMukoKubun"='1' or (DbT4001sub."yukoMukoKubun"='2'
             AND DbT4001sub."kyuSochishaFlag"=true

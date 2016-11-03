@@ -89,7 +89,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
         }
 
         if (entity.get被保険者番号() != null) {
-            source.listKyufuJisseki_2 = entity.get被保険者番号().value();
+            source.listKyufuJisseki_2 = entity.get被保険者番号();
         }
 
         source.listKyufuJisseki_3 = entity.get氏名();

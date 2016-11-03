@@ -57,7 +57,8 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranPageBreak extends PageBreak
             flag = !checkNull(currentSource.getSource().gyoseikuCode).equals(nextSource.getSource().gyoseikuCode);
         }
         if (!flag
-                && this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.世帯コード.getフォームフィールド名())) {
+                && this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.世帯コード.getフォームフィールド名())
+                && nextSource.getSource().listHakkoTaishosha_2 != null && !nextSource.getSource().listHakkoTaishosha_2.isEmpty()) {
             flag = !checkNull(currentSource.getSource().listHakkoTaishosha_2).equals(nextSource.getSource().listHakkoTaishosha_2);
         }
         if (!flag

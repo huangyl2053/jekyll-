@@ -4,22 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutakuKaishuShinseiReason のクラスファイル
- *
- * @reamsid_L DBC-0992-120 yebangqiang
+ * JutakuKaishuShinseiReason のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class JutakuKaishuShinseiReasonDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]

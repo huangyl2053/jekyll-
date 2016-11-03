@@ -211,8 +211,8 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             get氏名漢字(source, 振込明細一時TBL);
 
             if (振込明細一時TBL.getYubinNo() != null) {
-                RString 郵便番号1 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(0, LISTINDEX_3);
-                RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_3);
+                RString 郵便番号1 = 振込明細一時TBL.getYubinNo().getYubinNo().substringEmptyOnError(0, LISTINDEX_3);
+                RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substringEmptyOnError(LISTINDEX_3);
                 source.listUpper_3 = 郵便番号1.concat(半角ハイフン).concat(郵便番号2);
             }
             set様式連番_1のUpper支払方法_口座以外情報(source, 振込明細一時TBL);

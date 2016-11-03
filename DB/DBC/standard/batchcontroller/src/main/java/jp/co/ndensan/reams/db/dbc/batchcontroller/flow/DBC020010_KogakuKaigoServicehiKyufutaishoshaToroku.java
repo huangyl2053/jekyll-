@@ -992,8 +992,8 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
 
     private KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter getKogakuKaigoKyufuhiTaishoshaTorokuProcessParameter() {
         KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter param = new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
-                returnEntity.get最古のサービス提供年月(),
-                returnEntity.get最新のサービス提供年月());
+                returnEntity.get最新のサービス提供年月(),
+                returnEntity.get最古のサービス提供年月());
         return param;
     }
 

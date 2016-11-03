@@ -149,12 +149,12 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
     private RString 被保険者番号 = RString.EMPTY;
     private RString 居宅サービス区分 = RString.EMPTY;
     private int ヘッダー項目は1行目 = 0;
-    private boolean is1行目 = true;
-    private boolean isn行目 = true;
+    private KyufuKanrihyoSokatsuhyoEntity kyufuKanrihyoSokatsuhyoEntity;
 
     @Override
 
     protected void initialize() {
+        kyufuKanrihyoSokatsuhyoEntity = new KyufuKanrihyoSokatsuhyoEntity();
         outputCount = new OutputParameter();
         outputEntry = new OutputParameter();
         送付ファイルエントリ情報 = new ArrayList<>();
@@ -194,9 +194,10 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
             被保険者番号 = 自己作成管理一時Entity.getHihokenshaNo().getColumnValue();
             居宅サービス区分 = 自己作成管理一時Entity.getKyotakuServiceKubun();
             editKyufuKanrihyoSokatsuhyoEntity(currentEntity, flag);
+            kyufuKanrihyoSokatsuhyoEntity = edit給付管理票総括票entity();
             給付管理票送付用EntityList.add(currentEntity);
         } else {
-            is1行目 = false;
+
             if (!(保険者番号.equals(自己作成管理一時Entity.getHokenshaNo()) && 利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
                     && 被保険者番号.equals(自己作成管理一時Entity.getHihokenshaNo().getColumnValue())
                     && 居宅サービス区分.equals(自己作成管理一時Entity.getKyotakuServiceKubun()))) {
@@ -210,9 +211,20 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
                 get給付管理票キー項目_明細行数カウンター(自己作成管理一時Entity);
             }
             if (!保険者番号1.equals(自己作成管理一時Entity.getHokenshaNo())) {
-                isn行目 = false;
-                KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(edit給付管理票総括票entity());
+                KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(kyufuKanrihyoSokatsuhyoEntity);
                 report.writeBy(reportSourceWriter);
+                総括票件数_短期新規 = Decimal.ZERO;
+                総括票件数_短期修正 = Decimal.ZERO;
+                総括票件数_短期取消 = Decimal.ZERO;
+                総括票件数_訪問_居宅新規 = Decimal.ZERO;
+                総括票件数_訪問_居宅修正 = Decimal.ZERO;
+                総括票件数_訪問_居宅取消 = Decimal.ZERO;
+                総括票枚数_短期新規 = Decimal.ZERO;
+                総括票枚数_短期修正 = Decimal.ZERO;
+                総括票枚数_短期取消 = Decimal.ZERO;
+                総括票枚数_訪問_居宅新規 = Decimal.ZERO;
+                総括票枚数_訪問_居宅修正 = Decimal.ZERO;
+                総括票枚数_訪問_居宅取消 = Decimal.ZERO;
                 明細行数カウンター++;
                 editKyufuKanrihyoSokatsuhyoEntity(currentEntity, flag);
                 SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
@@ -265,25 +277,14 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
         給付管理票総括票entity.set自県分_短期_取消分_枚数(総括票枚数_短期取消);
         給付管理票総括票entity.set自県分_短期_新規分_件数(総括票件数_短期新規);
         給付管理票総括票entity.set自県分_短期_新規分_枚数(総括票枚数_短期新規);
-        給付管理票総括票entity.set自県分_訪問_修正分_件数(総括票件数_訪問_居宅新規);
-        給付管理票総括票entity.set自県分_訪問_修正分_枚数(総括票枚数_訪問_居宅新規);
-        給付管理票総括票entity.set自県分_訪問_取消分_件数(総括票件数_訪問_居宅新規);
-        給付管理票総括票entity.set自県分_訪問_取消分_枚数(総括票枚数_訪問_居宅新規);
+        給付管理票総括票entity.set自県分_訪問_修正分_件数(総括票件数_訪問_居宅修正);
+        給付管理票総括票entity.set自県分_訪問_修正分_枚数(総括票枚数_訪問_居宅修正);
+        給付管理票総括票entity.set自県分_訪問_取消分_件数(総括票件数_訪問_居宅取消);
+        給付管理票総括票entity.set自県分_訪問_取消分_枚数(総括票枚数_訪問_居宅取消);
         給付管理票総括票entity.set自県分_訪問_新規分_件数(総括票件数_訪問_居宅新規);
         給付管理票総括票entity.set自県分_訪問_新規分_枚数(総括票枚数_訪問_居宅新規);
         給付管理票総括票entity.set保険者番号(保険者番号);
-        総括票件数_短期新規 = Decimal.ZERO;
-        総括票件数_短期修正 = Decimal.ZERO;
-        総括票件数_短期取消 = Decimal.ZERO;
-        総括票件数_訪問_居宅新規 = Decimal.ZERO;
-        総括票件数_訪問_居宅修正 = Decimal.ZERO;
-        総括票件数_訪問_居宅取消 = Decimal.ZERO;
-        総括票枚数_短期新規 = Decimal.ZERO;
-        総括票枚数_短期修正 = Decimal.ZERO;
-        総括票枚数_短期取消 = Decimal.ZERO;
-        総括票枚数_訪問_居宅新規 = Decimal.ZERO;
-        総括票枚数_訪問_居宅修正 = Decimal.ZERO;
-        総括票枚数_訪問_居宅取消 = Decimal.ZERO;
+
         return 給付管理票総括票entity;
     }
 
@@ -360,24 +361,14 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void afterExecute() {
-        if (is1行目) {
-            KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(edit給付管理票総括票entity());
-            report.writeBy(reportSourceWriter);
-            SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
-            entity.setレコード件数カウンター(1);
-            entity.set保険者番号(保険者番号1);
-            entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
-            送付ファイル用EntityList.add(entity);
-        }
-        if (isn行目) {
-            KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(edit給付管理票総括票entity());
-            report.writeBy(reportSourceWriter);
-            SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
-            entity.setレコード件数カウンター(明細レコード_件数カウンター);
-            entity.set保険者番号(保険者番号1);
-            entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
-            送付ファイル用EntityList.add(entity);
-        }
+        KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(kyufuKanrihyoSokatsuhyoEntity);
+        report.writeBy(reportSourceWriter);
+        SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
+        entity.setレコード件数カウンター(1);
+        entity.set保険者番号(保険者番号1);
+        entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
+        送付ファイル用EntityList.add(entity);
+
         for (int i = 0; i < 送付ファイル用EntityList.size(); i++) {
             int 出力件数 = 0;
             int レコード番号カウンター = 0;

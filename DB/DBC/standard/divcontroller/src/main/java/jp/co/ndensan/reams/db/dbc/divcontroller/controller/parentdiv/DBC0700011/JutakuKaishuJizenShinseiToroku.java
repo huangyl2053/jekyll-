@@ -99,8 +99,8 @@ public class JutakuKaishuJizenShinseiToroku {
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (state != null) {
-            FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-            RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+            FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.事前サービス提供年月, FlexibleYearMonth.class);
+            RString 整理番号 = ViewStateHolder.get(ViewStateKeys.事前申請整理番号, RString.class);
             ViewStateHolder.put(ViewStateKeys.償還払支給住宅改修事前申請情報,
                     handler.登録以外初期化(被保険者番号, サービス提供年月, 整理番号));
         } else {
@@ -170,6 +170,10 @@ public class JutakuKaishuJizenShinseiToroku {
      * @return ResponseData<JutakuKaishuJizenShinseiTorokuDiv>
      */
     public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onClick_btnBackToSearch(JutakuKaishuJizenShinseiTorokuDiv div) {
+        if (照会.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).forwardWithEventName(DBC0700011TransitionEventName.該当者一覧).respond();
+        }
+
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());

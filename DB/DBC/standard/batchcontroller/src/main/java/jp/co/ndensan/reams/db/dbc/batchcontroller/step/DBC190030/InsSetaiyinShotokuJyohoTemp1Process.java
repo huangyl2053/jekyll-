@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.DBC190030ProcessParameter;
@@ -54,7 +53,7 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
     protected IBatchReader createReader() {
         RString 抽出条件 = parameter.get抽出条件();
         RString 抽出対象 = parameter.get抽出対象();
-        RString path = RString.EMPTY;
+        RString path = PATH2;
         if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(抽出条件)
                 || (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(抽出条件)
                 && ShinseishoTorokuChushutsuTaisho.基準収入額適用申請書の該当のみ抽出.getコード().equals(抽出対象))) {
@@ -69,7 +68,7 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
 
     @Override
     protected void process(HihokenshaDaichoTempSixColumnEntity entity) {
-        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
+        if (!ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
             SetaiHaakuEntity 世帯員把握入力一時 = new SetaiHaakuEntity();
             世帯員把握入力一時.setHihokenshaNo(entity.getHihokenshaNo());
             世帯員把握入力一時.setShikibetsuCode(entity.getShikibetsuCode());

@@ -3,23 +3,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Aug 19 15:14:03 CST 2016 
+ * Tue Nov 01 18:25:43 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgHihokenshaSearchGaitosha_Row のクラスファイル 
- * 
+ * dgHihokenshaSearchGaitosha_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
-public class dgHihokenshaSearchGaitosha_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+public class dgHihokenshaSearchGaitosha_Row extends DataRow implements Serializable {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString txtTeikyoYM;
     private RString txtShinsaYM;

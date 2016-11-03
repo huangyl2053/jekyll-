@@ -67,7 +67,23 @@ public class DBC200029GassanKekkaIchiranReportProcess extends BatchKeyBreakBase<
         util = new DBC040010DataUtil();
         市町村コード = parameter.get市町村コード();
         市町村名称 = AssociationFinderFactory.createInstance().getAssociation(市町村コード).get市町村名();
+        作成日時 = new YMDHMS(parameter.get処理日時());
         Long 帳票出力順ID = parameter.get帳票出力順ID();
+        if (帳票出力順ID == null) {
+            processCore = null;
+            出力順1 = RString.EMPTY;
+            出力順2 = RString.EMPTY;
+            出力順3 = RString.EMPTY;
+            出力順4 = RString.EMPTY;
+            出力順5 = RString.EMPTY;
+            改頁1 = RString.EMPTY;
+            改頁2 = RString.EMPTY;
+            改頁3 = RString.EMPTY;
+            改頁4 = RString.EMPTY;
+            改頁5 = RString.EMPTY;
+            parameter.set出力順(null);
+            return;
+        }
         IOutputOrder 出力順情報 = get出力順ID(subGyomuCode, 帳票出力順ID, reportId);
         RString 出力順 = MyBatisOrderByClauseCreator.create(DBC200029GassanKekkaIchiranOutputOrder.class, 出力順情報);
         parameter.set出力順(出力順);
@@ -82,12 +98,11 @@ public class DBC200029GassanKekkaIchiranReportProcess extends BatchKeyBreakBase<
         改頁3 = processCore.get改頁3();
         改頁4 = processCore.get改頁4();
         改頁5 = processCore.get改頁5();
-        作成日時 = new YMDHMS(parameter.get処理日時());
     }
 
     @Override
     protected void createWriter() {
-        if (!processCore.is改頁()) {
+        if (processCore == null || !processCore.is改頁()) {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).create();
         } else {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).addBreak(
@@ -117,16 +132,8 @@ public class DBC200029GassanKekkaIchiranReportProcess extends BatchKeyBreakBase<
     protected void afterExecute() {
     }
 
-    private IOutputOrder get出力順ID(
-            SubGyomuCode subGyomuCode,
-            Long shutsuryokujunId,
-            ReportId reportId) {
-        if (shutsuryokujunId != null) {
-            IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-            return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,
-                    reportId,
-                    Long.valueOf(shutsuryokujunId.toString()));
-        }
-        return null;
+    private IOutputOrder get出力順ID(SubGyomuCode subGyomuCode, Long shutsuryokujunId, ReportId reportId) {
+        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        return chohyoShutsuryokujunFinder.get出力順(subGyomuCode, reportId, shutsuryokujunId);
     }
 }

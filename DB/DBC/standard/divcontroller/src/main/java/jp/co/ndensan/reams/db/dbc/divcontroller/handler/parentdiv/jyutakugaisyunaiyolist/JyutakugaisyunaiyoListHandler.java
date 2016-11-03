@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -79,7 +80,7 @@ public class JyutakugaisyunaiyoListHandler {
                 }
                 listRow.setTxtKaishuKingaku(DecimalFormatter.toコンマ区切りRString(new Decimal(jyutaku.get改修金額()), 0));
                 listRow.setTxtJigyosha(jyutaku.get住宅改修事業者名());
-                listRow.setTxtJyotai(RString.EMPTY);
+                listRow.setRowState(RowState.Unchanged);
                 listRow.setTxtJutakuAddress(jyutaku.get住宅改修住宅住所());
                 listRow.setTxtKaishuNaiyo(jyutaku.get住宅改修住宅内容());
                 listRow.setTxtSeiriNo(jyutaku.get整理番号());

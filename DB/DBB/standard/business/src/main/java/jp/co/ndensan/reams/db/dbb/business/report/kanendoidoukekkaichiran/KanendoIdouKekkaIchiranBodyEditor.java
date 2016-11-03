@@ -89,10 +89,6 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         }
         set出力順And改ページ(source);
         if (null != 計算後情報_宛名_口座_更正前Entity) {
-            if (null != 計算後情報_宛名_口座_更正前Entity.get通知書番号()) {
-                source.list1_1 = 計算後情報_宛名_口座_更正前Entity.get通知書番号().value();
-            }
-            set宛名口座_更正前(source);
             if (null != 計算後情報_宛名_口座_更正前Entity.get調定年度()) {
                 source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定年度().toDateString();
             }
@@ -111,6 +107,10 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
             set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
             set特徴期別金額_更正前(source);
             set普徴期別金額_更正前1(source);
+        }
+        set宛名口座_更正後(source);
+        if (null != 計算後情報_宛名_口座_更正後Entity.get通知書番号()) {
+            source.list1_1 = 計算後情報_宛名_口座_更正後Entity.get通知書番号().value();
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額()) {
             source.list2_18 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額().toString());
@@ -149,19 +149,19 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         return source;
     }
 
-    private void set宛名口座_更正前(KanendoIdouKekkaIchiranSource source) {
-        if (null != 計算後情報_宛名_口座_更正前Entity.get宛名Entity()) {
-            AtenaMeisho 氏名 = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getKanjiShimei();
+    private void set宛名口座_更正後(KanendoIdouKekkaIchiranSource source) {
+        if (null != 計算後情報_宛名_口座_更正後Entity.get宛名Entity()) {
+            AtenaMeisho 氏名 = 計算後情報_宛名_口座_更正後Entity.get宛名Entity().getKanjiShimei();
             if (null != 氏名) {
                 source.list1_2 = 氏名.value();
             }
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座_更正前Entity.get宛名Entity());
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座_更正後Entity.get宛名Entity());
             if (null != kojin && null != kojin.get住所()) {
                 source.list1_3 = kojin.get住所().get住所();
             }
         }
-        if (null != 計算後情報_宛名_口座_更正前Entity.get口座Entity()) {
-            IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+        if (null != 計算後情報_宛名_口座_更正後Entity.get口座Entity()) {
+            IKoza koza = new Koza(計算後情報_宛名_口座_更正後Entity.get口座Entity());
             if (null != koza.get金融機関コード()) {
                 source.list1_4 = koza.get金融機関コード().value();
             }

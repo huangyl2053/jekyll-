@@ -136,6 +136,9 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         entity.setHihokennshaKubunCode(t.getHihokennshaKubunCode());
         entity.setSeibetsuCode(t.getSeibetsuCode());
         entity.setJuminShubetsuCode(t.getJuminShubetsuCode());
+        RString torokuTodokedeYMD = t.getTorokuTodokedeYMD() == null
+                ? RString.EMPTY : new RString(t.getTorokuTodokedeYMD().toString());
+        entity.setTorokuTodokedeYMD(torokuTodokedeYMD);
         return entity;
     }
 

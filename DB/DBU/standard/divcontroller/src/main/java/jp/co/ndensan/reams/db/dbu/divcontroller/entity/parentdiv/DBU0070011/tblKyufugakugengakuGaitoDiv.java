@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKyufugakugengakuGaitoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -128,7 +128,7 @@ public class tblKyufugakugengakuGaitoDiv extends TablePanel {
  * @author 自動生成
  */
 class celKyufugakuGaitoshaAttblKyufugakugengakuGaito extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("KyufugakugengakuGaitosha")
     private KyufugakugengakuGaitoshaDiv KyufugakugengakuGaitosha;
     @JsonProperty("KyojuhiGaitosha")
@@ -178,7 +178,7 @@ class celKyufugakuGaitoshaAttblKyufugakugengakuGaito extends TableCell {
  * @author 自動生成
  */
 class cellKaigohokenGaitoshaAttblKyufugakugengakuGaito extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("KaigoHokenryoIchiranGaitosha")
     private KaigoHokenryoIchiranGaitoshaDiv KaigoHokenryoIchiranGaitosha;
 
@@ -208,7 +208,7 @@ class cellKaigohokenGaitoshaAttblKyufugakugengakuGaito extends TableCell {
  * @author 自動生成
  */
 class celShokuhiKogakuGaitoshaAttblKyufugakugengakuGaito extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("ShokuhiFutanGaitosha")
     private ShokuhiFutanGaitoshaDiv ShokuhiFutanGaitosha;
     @JsonProperty("KogakuKaigoServiceHiGaitosha")

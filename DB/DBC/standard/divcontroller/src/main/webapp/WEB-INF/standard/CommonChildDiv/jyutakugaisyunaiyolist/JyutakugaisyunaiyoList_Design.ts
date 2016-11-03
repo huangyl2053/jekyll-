@@ -93,6 +93,10 @@ module DBC {
                 return new UZA.Button(this.convFiledName("btnHonnijyusyoCopy"));
             }
 
+            public txtJyusyo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtJyusyo"));
+            }
+
             public txtTyakkoyotebi(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtTyakkoyotebi"));
             }
@@ -111,10 +115,6 @@ module DBC {
 
             public btnDetailConfirm(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnDetailConfirm"));
-            }
-
-            public txtJyusyo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJyusyo"));
             }
 
         }

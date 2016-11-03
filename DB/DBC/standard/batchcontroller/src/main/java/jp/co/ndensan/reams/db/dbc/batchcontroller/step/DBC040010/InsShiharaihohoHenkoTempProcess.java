@@ -57,6 +57,7 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
         isあり = true;
         JissekiFutangakuDataTempEntity 実績負担額 = entity.get実績負担額データ();
         if (entity.get給付実績基本() == null) {
+            insertHandle();
             insertEntity = null;
             return;
         }
@@ -70,9 +71,7 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
             loopHandle(entity);
             return;
         }
-        if (insertEntity != null) {
-            実績負担額2Writer.insert(insertEntity);
-        }
+        insertHandle();
         insertEntity = 実績負担額;
         initHandle();
         loopHandle(entity);
@@ -83,6 +82,12 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
         DbT4021ShiharaiHohoHenkoEntity 支払方法変更 = entity.get支払方法変更();
         if (支払方法変更 != null) {
             util.insShiharaihohoHenkoTemp(insertEntity, 給付実績基本.getServiceTeikyoYM().toDateString());
+        }
+    }
+
+    private void insertHandle() {
+        if (insertEntity != null) {
+            実績負担額2Writer.insert(insertEntity);
         }
     }
 

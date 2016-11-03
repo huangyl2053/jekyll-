@@ -93,10 +93,8 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
                 .concat(RString.HALF_SPACE).concat(SAKUSEI);
         if (entity != null) {
-            source.titleNengetsuKaishi = entity.get審査年月From().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.titleNengetsu1 = entity.get審査年月To().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.shinsaYm = entity.get審査年月().wareki().firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString();
             source.shichosonNo = entity.get市町村コード();
             source.shichosonName = association.get市町村名();
             source.shutsuryokujun1 = 並び順の１件目;

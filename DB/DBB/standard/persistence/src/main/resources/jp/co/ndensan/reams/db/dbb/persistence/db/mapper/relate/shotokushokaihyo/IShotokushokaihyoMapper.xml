@@ -27,6 +27,8 @@
         <result property="世帯コード" column="世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="登録異動年月日" column="登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録届出年月日" column="登録届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="性別コード " column="性別コード " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="転入前全国住所コード" column="転入前全国住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="転入前住所" column="転入前住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="転入前番地" column="転入前番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -38,7 +40,9 @@
     <!--候補者転入者を取得します。-->
     <select resultOrdered="true" id="select候補者転入者" resultMap="ResultMap_KouhoshaTenyuEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShotokuNendoParameter" fetchSize="500">
-        (SELECT
+        SELECT MIX.*
+        FROM
+        ((SELECT
         '1' AS 候補者区分,
         "ShikibetsuTaisho"."shikibetsuCode" AS 識別コード,
         "ShikibetsuTaisho"."juminShubetsuCode" AS 住民種別コード,
@@ -59,6 +63,8 @@
         "ShikibetsuTaisho"."setaiCode" AS 世帯コード,
         "ShikibetsuTaisho"."seinengappiYMD" AS 生年月日,
         "ShikibetsuTaisho"."torokuIdoYMD" AS 登録異動年月日,
+        "ShikibetsuTaisho"."torokuTodokedeYMD" AS 登録届出年月日,
+        "ShikibetsuTaisho"."seibetsuCode" AS 性別コード ,
         "ShikibetsuTaisho"."tennyumaeZenkokuJushoCode" AS 転入前全国住所コード,
         "ShikibetsuTaisho"."tennyumaeJusho" AS 転入前住所,
         "ShikibetsuTaisho"."tennyumaeBanchi" AS 転入前番地,
@@ -99,6 +105,8 @@
         "ShikibetsuTaisho"."setaiCode",
         "ShikibetsuTaisho"."seinengappiYMD",
         "ShikibetsuTaisho"."torokuIdoYMD",
+        "ShikibetsuTaisho"."torokuTodokedeYMD",
+        "ShikibetsuTaisho"."seibetsuCode",
         "ShikibetsuTaisho"."tennyumaeZenkokuJushoCode",
         "ShikibetsuTaisho"."tennyumaeJusho",
         "ShikibetsuTaisho"."tennyumaeBanchi",
@@ -128,6 +136,8 @@
         "FindShikibetsuTaisho"."setaiCode" AS 世帯コード,
         "FindShikibetsuTaisho"."seinengappiYMD" AS 生年月日,
         "FindShikibetsuTaisho"."torokuIdoYMD" AS 登録異動年月日,
+        "FindShikibetsuTaisho"."torokuTodokedeYMD" AS 登録届出年月日,
+        "FindShikibetsuTaisho"."seibetsuCode" AS 性別コード ,
         "FindShikibetsuTaisho"."tennyumaeZenkokuJushoCode" AS 転入前全国住所コード,
         "FindShikibetsuTaisho"."tennyumaeJusho" AS 転入前住所,
         "FindShikibetsuTaisho"."tennyumaeBanchi" AS 転入前番地,
@@ -160,12 +170,14 @@
         "FindShikibetsuTaisho"."setaiCode",
         "FindShikibetsuTaisho"."seinengappiYMD",
         "FindShikibetsuTaisho"."torokuIdoYMD",
+        "FindShikibetsuTaisho"."torokuTodokedeYMD",
+        "FindShikibetsuTaisho"."seibetsuCode",
         "FindShikibetsuTaisho"."tennyumaeZenkokuJushoCode",
         "FindShikibetsuTaisho"."tennyumaeJusho",
         "FindShikibetsuTaisho"."tennyumaeBanchi",
         "FindShikibetsuTaisho"."tennyumaeKatagaki",
-        "FindShikibetsuTaisho"."torokuJiyuCode"
-        ORDER BY 識別コード)
+        "FindShikibetsuTaisho"."torokuJiyuCode")) AS MIX
+        ORDER BY MIX."識別コード"
     </select>
     
     
@@ -235,7 +247,9 @@
     <!--処理年度内（4月1日～翌3月31日）の有資格者抽出-->
     <select resultOrdered="true" id="select年度内有資格者抽出" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.ShotokuNendoParameter"
              resultMap="resultMap_NendoNaiyuSikakuMonoTempEntity" fetchSize="500">
-     SELECT
+     SELECT MIX.*
+     FROM
+     (SELECT
         "hihokenshaNo",
         "idoYMD",
         "edaNo",
@@ -300,8 +314,8 @@
         ,'','','','','','','','','','','','','','','','','', '{  }' ) AS "ShikibetsuTaisho"
         WHERE
         "ShikibetsuTaisho"."juminJotaiCode"='1'
-        AND "ShikibetsuTaisho"."seinengappiYMD"<![CDATA[<]]>#{処理年度_minus64_0401}
-        ORDER BY "shikibetsuCode"
+        AND "ShikibetsuTaisho"."seinengappiYMD"<![CDATA[<]]>#{処理年度_minus64_0401}) AS MIX 
+        ORDER BY MIX."shikibetsuCode"
     </select>
         
     <!--世帯員所得_年度内有資格者を取得します。-->
@@ -481,7 +495,10 @@
         B."kouhoshakubun",
         A."honninKubun",
         B."tenyuzenzenkokuJushoCode",
-        A."hihokennshaKubunCode"
+        A."hihokennshaKubunCode",
+        B."juminShubetsuCode",
+        B."torokuTodokedeYMD",
+        B."seibetsuCode"
         FROM 
         <if test="出力対象 == 2">
         "TmpSetaiShotoku1" AS A
@@ -543,7 +560,10 @@
         C."chikuCode3",
         C."juminJotaiCode",
         C."kannaiKangaiKubun",
-        master."hihokennshaKubunCode"
+        master."hihokennshaKubunCode",
+        master."juminShubetsuCode",
+        master."torokuTodokedeYMD",
+        master."seibetsuCode"
         FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
@@ -589,6 +609,7 @@
         <result property="juminJotaiCode" column="juminJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokennshaKubunCode" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     
@@ -772,6 +793,9 @@
         <result property="chikuCode3" column="chikuCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="juminJotaiCode" column="juminJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torokuTodokedeYMD" column="torokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <!--所得照会票データ再発行を取得する。-->
@@ -790,7 +814,10 @@
         B."atenaShimei",
         B."seinengappiYMD",
         B."torokuIdoYMD",
-        B."tenyuzenzenkokuJushoCode"
+        B."tenyuzenzenkokuJushoCode",
+        B."juminShubetsuCode",
+        B."torokuTodokedeYMD",
+        B."seibetsuCode"
         FROM "SaihaqkouTaishouTemp" AS A
         INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
@@ -826,7 +853,10 @@
         C."chikuCode1",
         C."chikuCode2",
         C."chikuCode3",
-        C."juminJotaiCode"
+        C."juminJotaiCode",
+        master."juminShubetsuCode",
+        master."torokuTodokedeYMD",
+        master."seibetsuCode"
         FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''

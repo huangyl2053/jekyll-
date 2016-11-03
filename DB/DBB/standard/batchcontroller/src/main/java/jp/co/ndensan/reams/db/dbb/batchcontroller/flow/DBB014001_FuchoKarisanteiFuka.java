@@ -60,6 +60,15 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
 
     @Override
     protected void defineFlow() {
+        boolean flag = false;
+        for (HonsanteifukaBatchTyouhyou 出力帳票一覧 : getParameter().get出力帳票一覧()) {
+            if (帳票ID.equals(出力帳票一覧.get帳票ID())) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            return;
+        }
         バッチ起動日時 = RDateTime.now();
         executeStep(計算対象者抽出);
         executeStep(前年度データ取得);

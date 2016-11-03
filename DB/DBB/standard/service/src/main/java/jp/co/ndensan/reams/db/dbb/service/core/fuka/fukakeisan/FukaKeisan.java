@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.HokenryoDankaiHantei;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKonkyoParameter;
@@ -37,6 +36,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan.KoseigoFukaResult;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.NengakuHokenryo;
@@ -54,6 +55,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRel
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanendokoseikeisan.KanendoKoseiKeisan;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHohoBuilder;
@@ -216,6 +218,8 @@ public class FukaKeisan extends FukaKeisanFath {
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
                 if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
                     return -1;
+                } else if (o1.get第1号資格取得年月日().equals(o2.get第1号資格取得年月日())) {
+                    return 0;
                 }
                 return 1;
             }
@@ -225,6 +229,8 @@ public class FukaKeisan extends FukaKeisanFath {
             public int compare(NendobunFukaList o1, NendobunFukaList o2) {
                 if (o1.get賦課期日().isBefore(o2.get賦課期日())) {
                     return -1;
+                } else if (o1.get賦課期日().equals(o2.get賦課期日())) {
+                    return 0;
                 }
                 return 1;
             }
@@ -982,6 +988,8 @@ public class FukaKeisan extends FukaKeisanFath {
                 public int compare(SeikatsuHogoJukyusha o1, SeikatsuHogoJukyusha o2) {
                     if (o2.get受給開始日().isBefore(o1.get受給開始日())) {
                         return -1;
+                    } else if (o2.get受給開始日().equals(o1.get受給開始日())) {
+                        return 0;
                     }
                     return 1;
                 }
@@ -1036,6 +1044,8 @@ public class FukaKeisan extends FukaKeisanFath {
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
                     if (o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
                         return -1;
+                    } else if (o2.get受給開始年月日().equals(o1.get受給開始年月日())) {
+                        return 0;
                     }
                     return 1;
                 }
@@ -1182,7 +1192,7 @@ public class FukaKeisan extends FukaKeisanFath {
                     .set保険料段階(null);
             return;
         }
-        List<HokenryoDankai> dankaiList = new ArrayList<>();
+        List<RString> dankaiList = new ArrayList<>();
         dankaiList.add(月別保険料段階.get保険料段階04月());
         dankaiList.add(月別保険料段階.get保険料段階05月());
         dankaiList.add(月別保険料段階.get保険料段階06月());
@@ -1213,23 +1223,24 @@ public class FukaKeisan extends FukaKeisanFath {
         int count = 0;
         for (int i = 0; i < dankaiList.size(); i++) {
             count = count + INT_1;
-            if (!RString.isNullOrEmpty(dankaiList.get(i).get段階区分())) {
-                保険料算定段階1 = dankaiList.get(i).get段階区分();
-                builder.set保険料算定段階1(dankaiList.get(i).get段階区分())
-                        .set算定年額保険料1(dankaiList.get(i).get保険料率())
+            if (!RString.isNullOrEmpty(dankaiList.get(i))) {
+                保険料算定段階1 = dankaiList.get(i);
+                HokenryoDankai 保険料段階1 = getHokenryoDankaiBy段階区分(保険料算定段階1);
+                builder.set保険料算定段階1(dankaiList.get(i))
+                        .set算定年額保険料1(保険料段階1.get保険料率())
                         .set月割開始年月1(new FlexibleYearMonth(年月.get(i)));
                 break;
             }
         }
         if (count == dankaiList.size()) {
-            if (!RString.isNullOrEmpty(dankaiList.get(count - INT_1).get段階区分())) {
+            if (!RString.isNullOrEmpty(dankaiList.get(count - INT_1))) {
                 builder.set月割終了年月1(new FlexibleYearMonth(年月.get(count - INT_1)));
             } else {
                 builder.set保険料算定段階1(null).set算定年額保険料1(null).set月割開始年月1(null).set月割終了年月1(null);
             }
         }
         for (int i = count; i < dankaiList.size(); i++) {
-            if (!dankaiList.get(count - INT_1).get段階区分().equals(dankaiList.get(i).get段階区分())) {
+            if (!dankaiList.get(count - INT_1).equals(dankaiList.get(i))) {
                 builder.set月割終了年月1(new FlexibleYearMonth(年月.get(i - INT_1)));
                 break;
             }
@@ -1240,16 +1251,17 @@ public class FukaKeisan extends FukaKeisanFath {
         }
         for (int i = count; i < dankaiList.size(); i++) {
             count = count + INT_1;
-            if (!RString.isNullOrEmpty(dankaiList.get(i).get段階区分())) {
-                保険料算定段階2 = dankaiList.get(i).get段階区分();
-                builder.set保険料算定段階2(dankaiList.get(i).get段階区分())
-                        .set算定年額保険料2(dankaiList.get(i).get保険料率())
+            if (!RString.isNullOrEmpty(dankaiList.get(i))) {
+                保険料算定段階2 = dankaiList.get(i);
+                HokenryoDankai 保険料段階2 = getHokenryoDankaiBy段階区分(保険料算定段階2);
+                builder.set保険料算定段階2(dankaiList.get(i))
+                        .set算定年額保険料2(保険料段階2.get保険料率())
                         .set月割開始年月2(new FlexibleYearMonth(年月.get(i)));
                 break;
             }
         }
         for (int i = count; i < dankaiList.size(); i++) {
-            if (!dankaiList.get(count - INT_1).get段階区分().equals(dankaiList.get(i).get段階区分())) {
+            if (!dankaiList.get(count - INT_1).equals(dankaiList.get(i))) {
                 builder.set月割終了年月2(new FlexibleYearMonth(年月.get(i - INT_1)));
                 break;
             }
@@ -1264,6 +1276,11 @@ public class FukaKeisan extends FukaKeisanFath {
             builder.set保険料段階(保険料算定段階1)
                     .set保険料算定段階2(null).set算定年額保険料2(null).set月割開始年月2(null).set月割終了年月2(null);
         }
+    }
+
+    private HokenryoDankai getHokenryoDankaiBy段階区分(RString 段階区分) {
+        HokenryoDankaiList hokenryoDankaiList = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
+        return hokenryoDankaiList.getBy段階区分(段階区分);
     }
 
     /**

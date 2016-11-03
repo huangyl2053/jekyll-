@@ -172,8 +172,9 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
 
-        eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter));
-        personalDataList.add(toPersonalData(preEntity));
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter));
+        personalDataList.add(toPersonalData(entity));
+        preEntity = entity;
     }
 
     @Override
@@ -183,10 +184,6 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
             eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoNoRenbanCSVEntity());
         }
 
-        if (preEntity != null) {
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter));
-            personalDataList.add(toPersonalData(preEntity));
-        }
         eucCsvWriter.close();
 
         if (personalDataList == null || personalDataList.isEmpty()) {

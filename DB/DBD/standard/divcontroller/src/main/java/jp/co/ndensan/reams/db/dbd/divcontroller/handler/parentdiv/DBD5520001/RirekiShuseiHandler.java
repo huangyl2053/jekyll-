@@ -106,6 +106,7 @@ public class RirekiShuseiHandler {
     private static final RString EDA_BAN_00 = new RString("00");
     private static final RString SAKUJO_KUBUN = new RString("0");
     private static final RString EDABAN_CODE = new RString("000");
+    private static final int ZERO_17 = 17;
     private final RString 主治医意見書作成期限年月日;
     private final RString 調査依頼;
     private final RString 調査予定;
@@ -1168,7 +1169,7 @@ public class RirekiShuseiHandler {
             DbT4121ShinseiRirekiJoho 前回行申請履歴情報 = DataPassingConverter.deserialize(previousRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
             builder.set前回申請管理番号(前回行申請履歴情報.get申請管理番号());
         } else {
-            builder.set前回申請管理番号(ShinseishoKanriNo.EMPTY);
+            builder.set前回申請管理番号(new ShinseishoKanriNo(RString.EMPTY.padZeroToLeft(ZERO_17)));
         }
         return builder.build();
     }

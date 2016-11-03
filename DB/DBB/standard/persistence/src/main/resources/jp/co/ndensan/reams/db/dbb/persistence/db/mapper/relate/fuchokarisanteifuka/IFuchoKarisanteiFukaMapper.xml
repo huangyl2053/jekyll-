@@ -284,7 +284,9 @@
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho" />,
             <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
             <include refid="allColumns_FukaZenNendoTemp" />,
-            "ShinkiShikakuTaishoTemp"."tsuchishoNo" as "shinkiShikakuTaishoTemp_tsuchishoNo"
+            "ShinkiShikakuTaishoTemp"."tsuchishoNo" as "shinkiShikakuTaishoTemp_tsuchishoNo",
+            "SortTemp"."choshuHoho" AS "SortTemp_choshuHoho",
+            "SortTemp"."tkKaishiM" AS "SortTemp_tkKaishiM"
         FROM
             rgdb."DbT2015KeisangoJoho"  AS "DbT2015KeisangoJoho"
         INNER JOIN
@@ -343,6 +345,8 @@
         <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
         <id column="dbT2015KeisangoJoho_koseiZengoKubun"/>
         <result property="tsuchishoNo" column="shinkiShikakuTaishoTemp_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="choshuHoho" column="SortTemp_choshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tkKaishiM" column="SortTemp_tkKaishiM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報"  resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity" />
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="介護継承"  resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" />

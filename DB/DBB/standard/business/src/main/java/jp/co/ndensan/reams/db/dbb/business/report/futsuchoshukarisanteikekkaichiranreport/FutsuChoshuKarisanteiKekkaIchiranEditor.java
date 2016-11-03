@@ -20,14 +20,20 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaish
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -131,6 +137,7 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
         setListCenterTwo(source);
         setlistLower(source);
         setlistLowerTwo(source);
+        set出力順(source);
         return source;
     }
 
@@ -392,4 +399,25 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
         source.listLower_20 = RString.EMPTY;
     }
 
+    private void set出力順(FutsuChoshuKarisanteiKekkaIchiranSource source) {
+        source.世帯コード = 普徴仮算定計算後賦課.get世帯コード().getColumnValue();
+        LasdecCode 市町村コード = 普徴仮算定計算後賦課.get宛名の情報().getGenLasdecCode();
+        source.市町村コード = 市町村コード == null ? RString.EMPTY : 市町村コード.code市町村RString();
+        source.徴収方法 = 普徴仮算定計算後賦課.get徴収方法();
+        source.性別 = 普徴仮算定計算後賦課.get宛名の情報().getSeibetsuCode();
+        AtenaKanaMeisho 氏名５０音カナ = 普徴仮算定計算後賦課.get宛名の情報().getKanaShimei();
+        source.氏名５０音カナ = 氏名５０音カナ == null ? RString.EMPTY : 氏名５０音カナ.getColumnValue();
+        source.特徴開始月 = 普徴仮算定計算後賦課.get特徴開始月();
+        FlexibleDate 生年月日 = 普徴仮算定計算後賦課.get宛名の情報().getSeinengappiYMD();
+        source.生年月日 = 生年月日 == null ? RString.EMPTY : 生年月日.seireki().toDateString();
+        ChoikiCode 町域コード = 普徴仮算定計算後賦課.get宛名の情報().getChoikiCode();
+        source.町域コード = 町域コード == null ? RString.EMPTY : 町域コード.getColumnValue();
+        GyoseikuCode 行政区コード = 普徴仮算定計算後賦課.get宛名の情報().getGyoseikuCode();
+        source.行政区コード = 行政区コード == null ? RString.EMPTY : 行政区コード.getColumnValue();
+        source.被保険者番号 = 普徴仮算定計算後賦課.get被保険者番号().getColumnValue();
+        source.識別コード = 普徴仮算定計算後賦課.get識別コード().getColumnValue();
+        source.通知書番号 = 普徴仮算定計算後賦課.get通知書番号().getColumnValue();
+        YubinNo 郵便番号 = 普徴仮算定計算後賦課.get宛名の情報().getYubinNo();
+        source.郵便番号 = 郵便番号 == null ? RString.EMPTY : 郵便番号.getYubinNo();
+    }
 }

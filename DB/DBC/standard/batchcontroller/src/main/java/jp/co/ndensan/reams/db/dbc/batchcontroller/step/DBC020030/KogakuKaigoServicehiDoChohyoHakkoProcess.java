@@ -489,6 +489,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         }
         reportEntity.set対象年月1(entity.getServiceTeikyoYM());
         reportEntity.set支給金額1(entity.getKogakuShikyuGaku());
+        reportEntity.set支給金額(entity.getKogakuShikyuGaku());
         reportEntity.set支給不支給決定区分(entity.getKetteiShikyuKubunCode());
         reportEntity.set支払方法区分(entity.getShiharaiHohoKubunCode());
         if (口座情報 != null) {

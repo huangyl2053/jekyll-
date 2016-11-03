@@ -163,6 +163,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
         }
         if (TargetList.該当者リスト.getコード().equals(対象リスト.getコード())) {
             is対象リスト_該当者リスト = true;
+            is対象期間指定_基準日 = true;
         }
     }
 

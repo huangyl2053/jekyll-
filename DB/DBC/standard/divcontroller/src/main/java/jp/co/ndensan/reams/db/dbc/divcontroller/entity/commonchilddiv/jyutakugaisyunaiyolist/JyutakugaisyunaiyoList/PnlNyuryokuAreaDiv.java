@@ -29,6 +29,8 @@ public class PnlNyuryokuAreaDiv extends Panel {
     private Label lblTaisyojyutakujyusyo;
     @JsonProperty("btnHonnijyusyoCopy")
     private Button btnHonnijyusyoCopy;
+    @JsonProperty("txtJyusyo")
+    private TextBox txtJyusyo;
     @JsonProperty("txtTyakkoyotebi")
     private TextBoxDate txtTyakkoyotebi;
     @JsonProperty("txtKanseyotebi")
@@ -39,8 +41,6 @@ public class PnlNyuryokuAreaDiv extends Panel {
     private Button btnClear;
     @JsonProperty("btnDetailConfirm")
     private Button btnDetailConfirm;
-    @JsonProperty("txtJyusyo")
-    private TextBox txtJyusyo;
     @JsonProperty("state")
     private RString state;
 
@@ -120,6 +120,24 @@ public class PnlNyuryokuAreaDiv extends Panel {
     @JsonProperty("btnHonnijyusyoCopy")
     public void setBtnHonnijyusyoCopy(Button btnHonnijyusyoCopy) {
         this.btnHonnijyusyoCopy = btnHonnijyusyoCopy;
+    }
+
+    /*
+     * gettxtJyusyo
+     * @return txtJyusyo
+     */
+    @JsonProperty("txtJyusyo")
+    public TextBox getTxtJyusyo() {
+        return txtJyusyo;
+    }
+
+    /*
+     * settxtJyusyo
+     * @param txtJyusyo txtJyusyo
+     */
+    @JsonProperty("txtJyusyo")
+    public void setTxtJyusyo(TextBox txtJyusyo) {
+        this.txtJyusyo = txtJyusyo;
     }
 
     /*
@@ -210,24 +228,6 @@ public class PnlNyuryokuAreaDiv extends Panel {
     @JsonProperty("btnDetailConfirm")
     public void setBtnDetailConfirm(Button btnDetailConfirm) {
         this.btnDetailConfirm = btnDetailConfirm;
-    }
-
-    /*
-     * gettxtJyusyo
-     * @return txtJyusyo
-     */
-    @JsonProperty("txtJyusyo")
-    public TextBox getTxtJyusyo() {
-        return txtJyusyo;
-    }
-
-    /*
-     * settxtJyusyo
-     * @param txtJyusyo txtJyusyo
-     */
-    @JsonProperty("txtJyusyo")
-    public void setTxtJyusyo(TextBox txtJyusyo) {
-        this.txtJyusyo = txtJyusyo;
     }
 
     /*

@@ -28,6 +28,11 @@ public class HihokenshaDaichoHakkoIchiranhyoBodyItem {
     private final RString listLower_4;
     private final RString listLower_5;
     private final RString listLower_6;
+    private final RString 番地コード;
+    private final RString 町域コード;
+    private final RString 地区１;
+    private final RString 地区２;
+    private final RString 地区３;
 
     /**
      * インスタンスを生成します。
@@ -48,6 +53,11 @@ public class HihokenshaDaichoHakkoIchiranhyoBodyItem {
      * @param listLower_4 世帯コード
      * @param listLower_5 資格区分
      * @param listLower_6 老福
+     * @param 番地コード 番地コード
+     * @param 町域コード 町域コード
+     * @param 地区１ 地区１
+     * @param 地区２ 地区２
+     * @param 地区３ 地区３
      */
     public HihokenshaDaichoHakkoIchiranhyoBodyItem(
             RString listNo_1,
@@ -65,7 +75,12 @@ public class HihokenshaDaichoHakkoIchiranhyoBodyItem {
             RString listLower_3,
             RString listLower_4,
             RString listLower_5,
-            RString listLower_6) {
+            RString listLower_6,
+            RString 番地コード,
+            RString 町域コード,
+            RString 地区１,
+            RString 地区２,
+            RString 地区３) {
         this.listNo_1 = listNo_1;
         this.listUpper_1 = listUpper_1;
         this.listUpper_2 = listUpper_2;
@@ -82,5 +97,10 @@ public class HihokenshaDaichoHakkoIchiranhyoBodyItem {
         this.listLower_4 = listLower_4;
         this.listLower_5 = listLower_5;
         this.listLower_6 = listLower_6;
+        this.番地コード = 番地コード;
+        this.町域コード = 町域コード;
+        this.地区１ = 地区１;
+        this.地区２ = 地区２;
+        this.地区３ = 地区３;
     }
 }

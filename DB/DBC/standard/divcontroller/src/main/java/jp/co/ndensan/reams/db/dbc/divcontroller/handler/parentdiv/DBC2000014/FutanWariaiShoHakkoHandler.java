@@ -193,6 +193,8 @@ public class FutanWariaiShoHakkoHandler {
         FlexibleDate date = new FlexibleDate(dateTime.getDate().toDateString());
         FlexibleYear 処理年度 = date.getMonthValue() > NUM_SEVEN ? date.getYear() : date.getYear().minusYear(NUM_ONE);
         if (entity == null || entity.get年度().isBefore(処理年度)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, true);
+            div.setDisabled(true);
             throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.furikomimeisaiichiranjigyokogaku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -41,7 +40,6 @@ public class DbWT0510FurikomiMeisaiTempEntity extends DbTableEntityBase<DbWT0510
         implements IDbAccessable {
 
     @TempTableColumnOrder(1)
-    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(2)
     private FlexibleYearMonth serviceTeikyoYM;
@@ -52,7 +50,7 @@ public class DbWT0510FurikomiMeisaiTempEntity extends DbTableEntityBase<DbWT0510
     @TempTableColumnOrder(5)
     private int rirekiNo;
     @TempTableColumnOrder(6)
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private HokenshaNo shoKisaiHokenshaNo;
     @TempTableColumnOrder(7)
     private RString ketteiTsuchiNo;
     @TempTableColumnOrder(8)
@@ -78,9 +76,9 @@ public class DbWT0510FurikomiMeisaiTempEntity extends DbTableEntityBase<DbWT0510
     @TempTableColumnOrder(18)
     private FlexibleDate shiharaiShuryoYMD;
     @TempTableColumnOrder(19)
-    private RTime shiharaiKaishiTime;
+    private RString shiharaiKaishiTime;
     @TempTableColumnOrder(20)
-    private RTime shiharaiShuryoTime;
+    private RString shiharaiShuryoTime;
     @TempTableColumnOrder(21)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(22)
@@ -145,7 +143,10 @@ public class DbWT0510FurikomiMeisaiTempEntity extends DbTableEntityBase<DbWT0510
     private FlexibleDate sogoJigyoTekiyoKaishiYMD;
     @TempTableColumnOrder(52)
     private FlexibleDate sogoJigyoTekiyoShuryoYMD;
-//    @TempTableColumnOrder(53)
+    @PrimaryKey
+    @TempTableColumnOrder(53)
+    private int renban;
+//    @TempTableColumnOrder(54)
 //    private RString hihokenshaShime;
 
 }

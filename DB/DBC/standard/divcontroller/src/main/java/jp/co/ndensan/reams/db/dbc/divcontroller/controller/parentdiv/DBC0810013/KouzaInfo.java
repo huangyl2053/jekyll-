@@ -71,10 +71,10 @@ public class KouzaInfo {
             parameter.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
         }
         parameter.setKeiyakuNo(支給申請情報.get受領委任契約番号());
-        if (支給申請情報.get支払期間開始年月日() != null) {
+        if (支給申請情報.get支払期間開始年月日() != null && !支給申請情報.get支払期間開始年月日().toString().isEmpty()) {
             parameter.setStartYMD(new RDate(支給申請情報.get支払期間開始年月日().toString()));
         }
-        if (支給申請情報.get支払期間終了年月日() != null) {
+        if (支給申請情報.get支払期間終了年月日() != null && !支給申請情報.get支払期間終了年月日().toString().isEmpty()) {
             parameter.setEndYMD(new RDate(支給申請情報.get支払期間終了年月日().toString()));
         }
         RString 支払窓口開始時間 = 支給申請情報.get支払窓口開始時間();

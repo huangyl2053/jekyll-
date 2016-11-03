@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKyojuhiGaitoshaDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -97,8 +97,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiKoshitsuGaitosha() {
+        return this.celDaiichiKoshitsuGaitosha.getIcoDaiichiKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiKoshitsuGaitosha() {
         return this.celDaiichiKoshitsuGaitosha.getTxtDaiichiKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaiichiJunKoshitsuGaitosha() {
+        return this.celDaiichiJunKoshitsuGaitosha.getIcoDaiichiJunKoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -107,8 +117,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiTokuyoGaitosha() {
+        return this.celDaiichiTokuyoGaitosha.getIcoDaiichiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiTokuyoGaitosha() {
         return this.celDaiichiTokuyoGaitosha.getTxtDaiichiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaiichiTashoshitsuGaitosha() {
+        return this.celDaiichiTashoshitsuGaitosha.getIcoDaiichiTashoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -117,8 +137,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDainiKoshitsuGaitosha() {
+        return this.celDainiKoshitsuGaitosha.getIcoDainiKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDainiKoshitsuGaitosha() {
         return this.celDainiKoshitsuGaitosha.getTxtDainiKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaininoIchiJunKoshitsuGaitosha() {
+        return this.celDaininoIchiJunKoshitsuGaitosha.getIcoDaininoIchiJunKoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -127,8 +157,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaininoIchiTokuyoGaitosha() {
+        return this.celDaininoIchiTokuyoGaitosha.getIcoDaininoIchiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaininoIchiTokuyoGaitosha() {
         return this.celDaininoIchiTokuyoGaitosha.getTxtDaininoIchiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaininoIchiTashoshitsuGaitosha() {
+        return this.celDaininoIchiTashoshitsuGaitosha.getIcoDaininoIchiTashoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -137,8 +177,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaisanKoshitsuGaitosha() {
+        return this.celDaisanKoshitsuGaitosha.getIcoDaisanKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaisanKoshitsuGaitosha() {
         return this.celDaisanKoshitsuGaitosha.getTxtDaisanKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaininoNiJunKoshitsuGaitosha() {
+        return this.celDaininoNiJunKoshitsuGaitosha.getIcoDaininoNiJunKoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -147,8 +197,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaininoNiTokuyoGaitosha() {
+        return this.celDaininoNiTokuyoGaitosha.getIcoDaininoNiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaininoNiTokuyoGaitosha() {
         return this.celDaininoNiTokuyoGaitosha.getTxtDaininoNiTokuyoGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaininoNiTashoshitsuGaitosha() {
+        return this.celDaininoNiTashoshitsuGaitosha.getIcoDaininoNiTashoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -157,8 +217,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuKoshitsuGaitosha() {
+        return this.celKijunHiyogakuKoshitsuGaitosha.getIcoKijunHiyogakuKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuKoshitsuGaitosha() {
         return this.celKijunHiyogakuKoshitsuGaitosha.getTxtKijunHiyogakuKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanJunKoshitsuGaitosha() {
+        return this.celDaisanJunKoshitsuGaitosha.getIcoDaisanJunKoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -167,8 +237,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaininoSanTokuyoGaitosha() {
+        return this.celDaininoSanTokuyoGaitosha.getIcoDaininoSanTokuyoGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaininoSanTokuyoGaitosha() {
         return this.celDaininoSanTokuyoGaitosha.getTxtDaininoSanTokuyoGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanTashoshitsuGaitosha() {
+        return this.celDaisanTashoshitsuGaitosha.getIcoDaisanTashoshitsuGaitosha();
     }
 
     @JsonIgnore
@@ -177,8 +257,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuJunKoshitsuGaitosha() {
+        return this.celKijunHiyogakuJunKoshitsuGaitosha.getIcoKijunHiyogakuJunKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuJunKoshitsuGaitosha() {
         return this.celKijunHiyogakuJunKoshitsuGaitosha.getTxtKijunHiyogakuJunKoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanTokuyoGaitosha() {
+        return this.celDaisanTokuyoGaitosha.getIcoDaisanTokuyoGaitosha();
     }
 
     @JsonIgnore
@@ -187,8 +277,18 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuTashoshitsuGaitosha() {
+        return this.celKijunHiyogakuTashoshitsuGaitosha.getIcoKijunHiyogakuTashoshitsuGaitosha();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuTashoshitsuGaitosha() {
         return this.celKijunHiyogakuTashoshitsuGaitosha.getTxtKijunHiyogakuTashoshitsuGaitosha();
+    }
+
+    @JsonIgnore
+    public Icon getIcoKijunHiyogakuTokuyoGaitosha() {
+        return this.celKijunHiyogakuTokuyoGaitosha.getIcoKijunHiyogakuTokuyoGaitosha();
     }
 
     @JsonIgnore
@@ -642,7 +742,7 @@ public class tblKyojuhiGaitoshaDiv extends TablePanel {
  * @author 自動生成
  */
 class celYunittokoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblYunittokoshitsuGaitosha")
     private Label lblYunittokoshitsuGaitosha;
 
@@ -672,7 +772,7 @@ class celYunittokoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celYunitjunkoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblYunitjunkoshitsuGaitosha")
     private Label lblYunitjunkoshitsuGaitosha;
 
@@ -702,7 +802,7 @@ class celYunitjunkoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTokuyoGaitosha")
     private Label lblTokuyoGaitosha;
 
@@ -732,7 +832,7 @@ class celTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTashoGaitosha")
     private Label lblTashoGaitosha;
 
@@ -762,9 +862,29 @@ class celTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaiichiKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiKoshitsuGaitosha")
+    private Icon icoDaiichiKoshitsuGaitosha;
     @JsonProperty("txtDaiichiKoshitsuGaitosha")
     private TextBox txtDaiichiKoshitsuGaitosha;
+
+    /*
+     * geticoDaiichiKoshitsuGaitosha
+     * @return icoDaiichiKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaiichiKoshitsuGaitosha")
+    public Icon getIcoDaiichiKoshitsuGaitosha() {
+        return icoDaiichiKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaiichiKoshitsuGaitosha
+     * @param icoDaiichiKoshitsuGaitosha icoDaiichiKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaiichiKoshitsuGaitosha")
+    public void setIcoDaiichiKoshitsuGaitosha(Icon icoDaiichiKoshitsuGaitosha) {
+        this.icoDaiichiKoshitsuGaitosha = icoDaiichiKoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaiichiKoshitsuGaitosha
@@ -792,9 +912,29 @@ class celDaiichiKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaiichiJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiJunKoshitsuGaitosha")
+    private Icon icoDaiichiJunKoshitsuGaitosha;
     @JsonProperty("txtDaiichiJunKoshitsuGaitosha")
     private TextBox txtDaiichiJunKoshitsuGaitosha;
+
+    /*
+     * geticoDaiichiJunKoshitsuGaitosha
+     * @return icoDaiichiJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaiichiJunKoshitsuGaitosha")
+    public Icon getIcoDaiichiJunKoshitsuGaitosha() {
+        return icoDaiichiJunKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaiichiJunKoshitsuGaitosha
+     * @param icoDaiichiJunKoshitsuGaitosha icoDaiichiJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaiichiJunKoshitsuGaitosha")
+    public void setIcoDaiichiJunKoshitsuGaitosha(Icon icoDaiichiJunKoshitsuGaitosha) {
+        this.icoDaiichiJunKoshitsuGaitosha = icoDaiichiJunKoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaiichiJunKoshitsuGaitosha
@@ -822,9 +962,29 @@ class celDaiichiJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaiichiTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiTokuyoGaitosha")
+    private Icon icoDaiichiTokuyoGaitosha;
     @JsonProperty("txtDaiichiTokuyoGaitosha")
     private TextBox txtDaiichiTokuyoGaitosha;
+
+    /*
+     * geticoDaiichiTokuyoGaitosha
+     * @return icoDaiichiTokuyoGaitosha
+     */
+    @JsonProperty("icoDaiichiTokuyoGaitosha")
+    public Icon getIcoDaiichiTokuyoGaitosha() {
+        return icoDaiichiTokuyoGaitosha;
+    }
+
+    /*
+     * seticoDaiichiTokuyoGaitosha
+     * @param icoDaiichiTokuyoGaitosha icoDaiichiTokuyoGaitosha
+     */
+    @JsonProperty("icoDaiichiTokuyoGaitosha")
+    public void setIcoDaiichiTokuyoGaitosha(Icon icoDaiichiTokuyoGaitosha) {
+        this.icoDaiichiTokuyoGaitosha = icoDaiichiTokuyoGaitosha;
+    }
 
     /*
      * gettxtDaiichiTokuyoGaitosha
@@ -852,9 +1012,29 @@ class celDaiichiTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaiichiTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiTashoshitsuGaitosha")
+    private Icon icoDaiichiTashoshitsuGaitosha;
     @JsonProperty("txtDaiichiTashoshitsuGaitosha")
     private TextBox txtDaiichiTashoshitsuGaitosha;
+
+    /*
+     * geticoDaiichiTashoshitsuGaitosha
+     * @return icoDaiichiTashoshitsuGaitosha
+     */
+    @JsonProperty("icoDaiichiTashoshitsuGaitosha")
+    public Icon getIcoDaiichiTashoshitsuGaitosha() {
+        return icoDaiichiTashoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaiichiTashoshitsuGaitosha
+     * @param icoDaiichiTashoshitsuGaitosha icoDaiichiTashoshitsuGaitosha
+     */
+    @JsonProperty("icoDaiichiTashoshitsuGaitosha")
+    public void setIcoDaiichiTashoshitsuGaitosha(Icon icoDaiichiTashoshitsuGaitosha) {
+        this.icoDaiichiTashoshitsuGaitosha = icoDaiichiTashoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaiichiTashoshitsuGaitosha
@@ -882,9 +1062,29 @@ class celDaiichiTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDainiKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDainiKoshitsuGaitosha")
+    private Icon icoDainiKoshitsuGaitosha;
     @JsonProperty("txtDainiKoshitsuGaitosha")
     private TextBox txtDainiKoshitsuGaitosha;
+
+    /*
+     * geticoDainiKoshitsuGaitosha
+     * @return icoDainiKoshitsuGaitosha
+     */
+    @JsonProperty("icoDainiKoshitsuGaitosha")
+    public Icon getIcoDainiKoshitsuGaitosha() {
+        return icoDainiKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDainiKoshitsuGaitosha
+     * @param icoDainiKoshitsuGaitosha icoDainiKoshitsuGaitosha
+     */
+    @JsonProperty("icoDainiKoshitsuGaitosha")
+    public void setIcoDainiKoshitsuGaitosha(Icon icoDainiKoshitsuGaitosha) {
+        this.icoDainiKoshitsuGaitosha = icoDainiKoshitsuGaitosha;
+    }
 
     /*
      * gettxtDainiKoshitsuGaitosha
@@ -912,9 +1112,29 @@ class celDainiKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaininoIchiJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaininoIchiJunKoshitsuGaitosha")
+    private Icon icoDaininoIchiJunKoshitsuGaitosha;
     @JsonProperty("txtDaininoIchiJunKoshitsuGaitosha")
     private TextBox txtDaininoIchiJunKoshitsuGaitosha;
+
+    /*
+     * geticoDaininoIchiJunKoshitsuGaitosha
+     * @return icoDaininoIchiJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaininoIchiJunKoshitsuGaitosha")
+    public Icon getIcoDaininoIchiJunKoshitsuGaitosha() {
+        return icoDaininoIchiJunKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaininoIchiJunKoshitsuGaitosha
+     * @param icoDaininoIchiJunKoshitsuGaitosha icoDaininoIchiJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaininoIchiJunKoshitsuGaitosha")
+    public void setIcoDaininoIchiJunKoshitsuGaitosha(Icon icoDaininoIchiJunKoshitsuGaitosha) {
+        this.icoDaininoIchiJunKoshitsuGaitosha = icoDaininoIchiJunKoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaininoIchiJunKoshitsuGaitosha
@@ -942,9 +1162,29 @@ class celDaininoIchiJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaininoIchiTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaininoIchiTokuyoGaitosha")
+    private Icon icoDaininoIchiTokuyoGaitosha;
     @JsonProperty("txtDaininoIchiTokuyoGaitosha")
     private TextBox txtDaininoIchiTokuyoGaitosha;
+
+    /*
+     * geticoDaininoIchiTokuyoGaitosha
+     * @return icoDaininoIchiTokuyoGaitosha
+     */
+    @JsonProperty("icoDaininoIchiTokuyoGaitosha")
+    public Icon getIcoDaininoIchiTokuyoGaitosha() {
+        return icoDaininoIchiTokuyoGaitosha;
+    }
+
+    /*
+     * seticoDaininoIchiTokuyoGaitosha
+     * @param icoDaininoIchiTokuyoGaitosha icoDaininoIchiTokuyoGaitosha
+     */
+    @JsonProperty("icoDaininoIchiTokuyoGaitosha")
+    public void setIcoDaininoIchiTokuyoGaitosha(Icon icoDaininoIchiTokuyoGaitosha) {
+        this.icoDaininoIchiTokuyoGaitosha = icoDaininoIchiTokuyoGaitosha;
+    }
 
     /*
      * gettxtDaininoIchiTokuyoGaitosha
@@ -972,9 +1212,29 @@ class celDaininoIchiTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaininoIchiTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaininoIchiTashoshitsuGaitosha")
+    private Icon icoDaininoIchiTashoshitsuGaitosha;
     @JsonProperty("txtDaininoIchiTashoshitsuGaitosha")
     private TextBox txtDaininoIchiTashoshitsuGaitosha;
+
+    /*
+     * geticoDaininoIchiTashoshitsuGaitosha
+     * @return icoDaininoIchiTashoshitsuGaitosha
+     */
+    @JsonProperty("icoDaininoIchiTashoshitsuGaitosha")
+    public Icon getIcoDaininoIchiTashoshitsuGaitosha() {
+        return icoDaininoIchiTashoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaininoIchiTashoshitsuGaitosha
+     * @param icoDaininoIchiTashoshitsuGaitosha icoDaininoIchiTashoshitsuGaitosha
+     */
+    @JsonProperty("icoDaininoIchiTashoshitsuGaitosha")
+    public void setIcoDaininoIchiTashoshitsuGaitosha(Icon icoDaininoIchiTashoshitsuGaitosha) {
+        this.icoDaininoIchiTashoshitsuGaitosha = icoDaininoIchiTashoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaininoIchiTashoshitsuGaitosha
@@ -1002,9 +1262,29 @@ class celDaininoIchiTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaisanKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanKoshitsuGaitosha")
+    private Icon icoDaisanKoshitsuGaitosha;
     @JsonProperty("txtDaisanKoshitsuGaitosha")
     private TextBox txtDaisanKoshitsuGaitosha;
+
+    /*
+     * geticoDaisanKoshitsuGaitosha
+     * @return icoDaisanKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaisanKoshitsuGaitosha")
+    public Icon getIcoDaisanKoshitsuGaitosha() {
+        return icoDaisanKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaisanKoshitsuGaitosha
+     * @param icoDaisanKoshitsuGaitosha icoDaisanKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaisanKoshitsuGaitosha")
+    public void setIcoDaisanKoshitsuGaitosha(Icon icoDaisanKoshitsuGaitosha) {
+        this.icoDaisanKoshitsuGaitosha = icoDaisanKoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaisanKoshitsuGaitosha
@@ -1032,9 +1312,29 @@ class celDaisanKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaininoNiJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaininoNiJunKoshitsuGaitosha")
+    private Icon icoDaininoNiJunKoshitsuGaitosha;
     @JsonProperty("txtDaininoNiJunKoshitsuGaitosha")
     private TextBox txtDaininoNiJunKoshitsuGaitosha;
+
+    /*
+     * geticoDaininoNiJunKoshitsuGaitosha
+     * @return icoDaininoNiJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaininoNiJunKoshitsuGaitosha")
+    public Icon getIcoDaininoNiJunKoshitsuGaitosha() {
+        return icoDaininoNiJunKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaininoNiJunKoshitsuGaitosha
+     * @param icoDaininoNiJunKoshitsuGaitosha icoDaininoNiJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaininoNiJunKoshitsuGaitosha")
+    public void setIcoDaininoNiJunKoshitsuGaitosha(Icon icoDaininoNiJunKoshitsuGaitosha) {
+        this.icoDaininoNiJunKoshitsuGaitosha = icoDaininoNiJunKoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaininoNiJunKoshitsuGaitosha
@@ -1062,9 +1362,29 @@ class celDaininoNiJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaininoNiTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaininoNiTokuyoGaitosha")
+    private Icon icoDaininoNiTokuyoGaitosha;
     @JsonProperty("txtDaininoNiTokuyoGaitosha")
     private TextBox txtDaininoNiTokuyoGaitosha;
+
+    /*
+     * geticoDaininoNiTokuyoGaitosha
+     * @return icoDaininoNiTokuyoGaitosha
+     */
+    @JsonProperty("icoDaininoNiTokuyoGaitosha")
+    public Icon getIcoDaininoNiTokuyoGaitosha() {
+        return icoDaininoNiTokuyoGaitosha;
+    }
+
+    /*
+     * seticoDaininoNiTokuyoGaitosha
+     * @param icoDaininoNiTokuyoGaitosha icoDaininoNiTokuyoGaitosha
+     */
+    @JsonProperty("icoDaininoNiTokuyoGaitosha")
+    public void setIcoDaininoNiTokuyoGaitosha(Icon icoDaininoNiTokuyoGaitosha) {
+        this.icoDaininoNiTokuyoGaitosha = icoDaininoNiTokuyoGaitosha;
+    }
 
     /*
      * gettxtDaininoNiTokuyoGaitosha
@@ -1092,9 +1412,29 @@ class celDaininoNiTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaininoNiTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaininoNiTashoshitsuGaitosha")
+    private Icon icoDaininoNiTashoshitsuGaitosha;
     @JsonProperty("txtDaininoNiTashoshitsuGaitosha")
     private TextBox txtDaininoNiTashoshitsuGaitosha;
+
+    /*
+     * geticoDaininoNiTashoshitsuGaitosha
+     * @return icoDaininoNiTashoshitsuGaitosha
+     */
+    @JsonProperty("icoDaininoNiTashoshitsuGaitosha")
+    public Icon getIcoDaininoNiTashoshitsuGaitosha() {
+        return icoDaininoNiTashoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaininoNiTashoshitsuGaitosha
+     * @param icoDaininoNiTashoshitsuGaitosha icoDaininoNiTashoshitsuGaitosha
+     */
+    @JsonProperty("icoDaininoNiTashoshitsuGaitosha")
+    public void setIcoDaininoNiTashoshitsuGaitosha(Icon icoDaininoNiTashoshitsuGaitosha) {
+        this.icoDaininoNiTashoshitsuGaitosha = icoDaininoNiTashoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaininoNiTashoshitsuGaitosha
@@ -1122,9 +1462,29 @@ class celDaininoNiTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celKijunHiyogakuKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuKoshitsuGaitosha")
+    private Icon icoKijunHiyogakuKoshitsuGaitosha;
     @JsonProperty("txtKijunHiyogakuKoshitsuGaitosha")
     private TextBox txtKijunHiyogakuKoshitsuGaitosha;
+
+    /*
+     * geticoKijunHiyogakuKoshitsuGaitosha
+     * @return icoKijunHiyogakuKoshitsuGaitosha
+     */
+    @JsonProperty("icoKijunHiyogakuKoshitsuGaitosha")
+    public Icon getIcoKijunHiyogakuKoshitsuGaitosha() {
+        return icoKijunHiyogakuKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoKijunHiyogakuKoshitsuGaitosha
+     * @param icoKijunHiyogakuKoshitsuGaitosha icoKijunHiyogakuKoshitsuGaitosha
+     */
+    @JsonProperty("icoKijunHiyogakuKoshitsuGaitosha")
+    public void setIcoKijunHiyogakuKoshitsuGaitosha(Icon icoKijunHiyogakuKoshitsuGaitosha) {
+        this.icoKijunHiyogakuKoshitsuGaitosha = icoKijunHiyogakuKoshitsuGaitosha;
+    }
 
     /*
      * gettxtKijunHiyogakuKoshitsuGaitosha
@@ -1152,9 +1512,29 @@ class celKijunHiyogakuKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaisanJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanJunKoshitsuGaitosha")
+    private Icon icoDaisanJunKoshitsuGaitosha;
     @JsonProperty("txtDaisanJunKoshitsuGaitosha")
     private TextBox txtDaisanJunKoshitsuGaitosha;
+
+    /*
+     * geticoDaisanJunKoshitsuGaitosha
+     * @return icoDaisanJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaisanJunKoshitsuGaitosha")
+    public Icon getIcoDaisanJunKoshitsuGaitosha() {
+        return icoDaisanJunKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaisanJunKoshitsuGaitosha
+     * @param icoDaisanJunKoshitsuGaitosha icoDaisanJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoDaisanJunKoshitsuGaitosha")
+    public void setIcoDaisanJunKoshitsuGaitosha(Icon icoDaisanJunKoshitsuGaitosha) {
+        this.icoDaisanJunKoshitsuGaitosha = icoDaisanJunKoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaisanJunKoshitsuGaitosha
@@ -1182,9 +1562,29 @@ class celDaisanJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaininoSanTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaininoSanTokuyoGaitosha")
+    private Icon icoDaininoSanTokuyoGaitosha;
     @JsonProperty("txtDaininoSanTokuyoGaitosha")
     private TextBox txtDaininoSanTokuyoGaitosha;
+
+    /*
+     * geticoDaininoSanTokuyoGaitosha
+     * @return icoDaininoSanTokuyoGaitosha
+     */
+    @JsonProperty("icoDaininoSanTokuyoGaitosha")
+    public Icon getIcoDaininoSanTokuyoGaitosha() {
+        return icoDaininoSanTokuyoGaitosha;
+    }
+
+    /*
+     * seticoDaininoSanTokuyoGaitosha
+     * @param icoDaininoSanTokuyoGaitosha icoDaininoSanTokuyoGaitosha
+     */
+    @JsonProperty("icoDaininoSanTokuyoGaitosha")
+    public void setIcoDaininoSanTokuyoGaitosha(Icon icoDaininoSanTokuyoGaitosha) {
+        this.icoDaininoSanTokuyoGaitosha = icoDaininoSanTokuyoGaitosha;
+    }
 
     /*
      * gettxtDaininoSanTokuyoGaitosha
@@ -1212,9 +1612,29 @@ class celDaininoSanTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celDaisanTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanTashoshitsuGaitosha")
+    private Icon icoDaisanTashoshitsuGaitosha;
     @JsonProperty("txtDaisanTashoshitsuGaitosha")
     private TextBox txtDaisanTashoshitsuGaitosha;
+
+    /*
+     * geticoDaisanTashoshitsuGaitosha
+     * @return icoDaisanTashoshitsuGaitosha
+     */
+    @JsonProperty("icoDaisanTashoshitsuGaitosha")
+    public Icon getIcoDaisanTashoshitsuGaitosha() {
+        return icoDaisanTashoshitsuGaitosha;
+    }
+
+    /*
+     * seticoDaisanTashoshitsuGaitosha
+     * @param icoDaisanTashoshitsuGaitosha icoDaisanTashoshitsuGaitosha
+     */
+    @JsonProperty("icoDaisanTashoshitsuGaitosha")
+    public void setIcoDaisanTashoshitsuGaitosha(Icon icoDaisanTashoshitsuGaitosha) {
+        this.icoDaisanTashoshitsuGaitosha = icoDaisanTashoshitsuGaitosha;
+    }
 
     /*
      * gettxtDaisanTashoshitsuGaitosha
@@ -1242,9 +1662,29 @@ class celDaisanTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celKijunHiyogakuJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuJunKoshitsuGaitosha")
+    private Icon icoKijunHiyogakuJunKoshitsuGaitosha;
     @JsonProperty("txtKijunHiyogakuJunKoshitsuGaitosha")
     private TextBox txtKijunHiyogakuJunKoshitsuGaitosha;
+
+    /*
+     * geticoKijunHiyogakuJunKoshitsuGaitosha
+     * @return icoKijunHiyogakuJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoKijunHiyogakuJunKoshitsuGaitosha")
+    public Icon getIcoKijunHiyogakuJunKoshitsuGaitosha() {
+        return icoKijunHiyogakuJunKoshitsuGaitosha;
+    }
+
+    /*
+     * seticoKijunHiyogakuJunKoshitsuGaitosha
+     * @param icoKijunHiyogakuJunKoshitsuGaitosha icoKijunHiyogakuJunKoshitsuGaitosha
+     */
+    @JsonProperty("icoKijunHiyogakuJunKoshitsuGaitosha")
+    public void setIcoKijunHiyogakuJunKoshitsuGaitosha(Icon icoKijunHiyogakuJunKoshitsuGaitosha) {
+        this.icoKijunHiyogakuJunKoshitsuGaitosha = icoKijunHiyogakuJunKoshitsuGaitosha;
+    }
 
     /*
      * gettxtKijunHiyogakuJunKoshitsuGaitosha
@@ -1272,9 +1712,29 @@ class celKijunHiyogakuJunKoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell 
  * @author 自動生成
  */
 class celDaisanTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanTokuyoGaitosha")
+    private Icon icoDaisanTokuyoGaitosha;
     @JsonProperty("txtDaisanTokuyoGaitosha")
     private TextBox txtDaisanTokuyoGaitosha;
+
+    /*
+     * geticoDaisanTokuyoGaitosha
+     * @return icoDaisanTokuyoGaitosha
+     */
+    @JsonProperty("icoDaisanTokuyoGaitosha")
+    public Icon getIcoDaisanTokuyoGaitosha() {
+        return icoDaisanTokuyoGaitosha;
+    }
+
+    /*
+     * seticoDaisanTokuyoGaitosha
+     * @param icoDaisanTokuyoGaitosha icoDaisanTokuyoGaitosha
+     */
+    @JsonProperty("icoDaisanTokuyoGaitosha")
+    public void setIcoDaisanTokuyoGaitosha(Icon icoDaisanTokuyoGaitosha) {
+        this.icoDaisanTokuyoGaitosha = icoDaisanTokuyoGaitosha;
+    }
 
     /*
      * gettxtDaisanTokuyoGaitosha
@@ -1302,9 +1762,29 @@ class celDaisanTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
  * @author 自動生成
  */
 class celKijunHiyogakuTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuTashoshitsuGaitosha")
+    private Icon icoKijunHiyogakuTashoshitsuGaitosha;
     @JsonProperty("txtKijunHiyogakuTashoshitsuGaitosha")
     private TextBox txtKijunHiyogakuTashoshitsuGaitosha;
+
+    /*
+     * geticoKijunHiyogakuTashoshitsuGaitosha
+     * @return icoKijunHiyogakuTashoshitsuGaitosha
+     */
+    @JsonProperty("icoKijunHiyogakuTashoshitsuGaitosha")
+    public Icon getIcoKijunHiyogakuTashoshitsuGaitosha() {
+        return icoKijunHiyogakuTashoshitsuGaitosha;
+    }
+
+    /*
+     * seticoKijunHiyogakuTashoshitsuGaitosha
+     * @param icoKijunHiyogakuTashoshitsuGaitosha icoKijunHiyogakuTashoshitsuGaitosha
+     */
+    @JsonProperty("icoKijunHiyogakuTashoshitsuGaitosha")
+    public void setIcoKijunHiyogakuTashoshitsuGaitosha(Icon icoKijunHiyogakuTashoshitsuGaitosha) {
+        this.icoKijunHiyogakuTashoshitsuGaitosha = icoKijunHiyogakuTashoshitsuGaitosha;
+    }
 
     /*
      * gettxtKijunHiyogakuTashoshitsuGaitosha
@@ -1332,9 +1812,29 @@ class celKijunHiyogakuTashoshitsuGaitoshaAttblKyojuhiGaitosha extends TableCell 
  * @author 自動生成
  */
 class celKijunHiyogakuTokuyoGaitoshaAttblKyojuhiGaitosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuTokuyoGaitosha")
+    private Icon icoKijunHiyogakuTokuyoGaitosha;
     @JsonProperty("txtKijunHiyogakuTokuyoGaitosha")
     private TextBox txtKijunHiyogakuTokuyoGaitosha;
+
+    /*
+     * geticoKijunHiyogakuTokuyoGaitosha
+     * @return icoKijunHiyogakuTokuyoGaitosha
+     */
+    @JsonProperty("icoKijunHiyogakuTokuyoGaitosha")
+    public Icon getIcoKijunHiyogakuTokuyoGaitosha() {
+        return icoKijunHiyogakuTokuyoGaitosha;
+    }
+
+    /*
+     * seticoKijunHiyogakuTokuyoGaitosha
+     * @param icoKijunHiyogakuTokuyoGaitosha icoKijunHiyogakuTokuyoGaitosha
+     */
+    @JsonProperty("icoKijunHiyogakuTokuyoGaitosha")
+    public void setIcoKijunHiyogakuTokuyoGaitosha(Icon icoKijunHiyogakuTokuyoGaitosha) {
+        this.icoKijunHiyogakuTokuyoGaitosha = icoKijunHiyogakuTokuyoGaitosha;
+    }
 
     /*
      * gettxtKijunHiyogakuTokuyoGaitosha

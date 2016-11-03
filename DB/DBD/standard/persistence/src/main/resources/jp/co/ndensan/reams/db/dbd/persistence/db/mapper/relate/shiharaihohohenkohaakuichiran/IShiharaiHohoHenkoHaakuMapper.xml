@@ -141,8 +141,8 @@
                     償還払支給申請."jizenSeiriNo" as "dbT3034ShokanShinsei_jizenSeiriNo",
                     償還払支給申請."kaishuShinseiKubun" as "dbT3034ShokanShinsei_kaishuShinseiKubun",
                     償還払支給申請."kaishuShinseiTorikeshijiyuCode" as "dbT3034ShokanShinsei_kaishuShinseiTorikeshijiyuCode",
-                    償還払支給申請."ryoshuYMD" as "dbT3034ShokanShinsei_ryoshuYMD"
-				<!--,償還払支給判定結果.*-->
+                    償還払支給申請."ryoshuYMD" as "dbT3034ShokanShinsei_ryoshuYMD",
+                    償還払支給判定結果."ketteiYMD"
 			FROM
 				rgdb."DbT3034ShokanShinsei" AS 償還払支給申請
 			LEFT JOIN rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果

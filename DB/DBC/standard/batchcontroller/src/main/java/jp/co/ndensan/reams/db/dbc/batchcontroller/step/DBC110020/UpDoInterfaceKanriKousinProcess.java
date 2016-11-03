@@ -24,6 +24,6 @@ public class UpDoInterfaceKanriKousinProcess extends SimpleBatchProcessBase {
         UpDoInterfaceKanriKousinManager 国保連インタフェース管理更新Manager
                 = UpDoInterfaceKanriKousinManager.createInstance();
         国保連インタフェース管理更新Manager.updateInterfaceKanriTbl(parameter.get処理年月(), parameter.get再処理区分(),
-                YMDHMS.now());
+                YMDHMS.now(), parameter.get異動連絡票件数(), parameter.get訂正連絡票件数());
     }
 }

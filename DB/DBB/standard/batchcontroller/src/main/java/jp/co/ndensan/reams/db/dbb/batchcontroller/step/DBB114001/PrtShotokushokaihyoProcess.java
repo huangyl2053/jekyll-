@@ -324,6 +324,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         result.set内線番号(差出人情報.get内線番号());
         result.set差出人_郵便番号(差出人情報.get郵便番号());
         result.set電話番号(差出人情報.get電話番号());
+        result.set住民種別コード(所得照会票データ.getJuminShubetsuCode());
         return result;
     }
 

@@ -122,10 +122,10 @@
         , teiKyoKihonJoho."teikyoNaiyo10"
         , teiKyoKihonJoho."misetteiJiyu10"
         , teiKyoKihonJoho."kokaiYMD"
-        FROM #{tempTableName} teiKyoKihonJoho
+        FROM ${tempTableName} AS teiKyoKihonJoho
         INNER JOIN rgua.${psmShikibetsuTaisho} AS PSM
         ON teiKyoKihonJoho."shikibetsuCode" = PSM."shikibetsuCode"
-        <if test="isShinkiIdo">
+        <if test="is異動">
             WHERE NOT EXISTS (SELECT 1
             FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" dbT7304
             dbT7304."hihokenshaNo" = teiKyoKihonJoho."hihokenshaNo"

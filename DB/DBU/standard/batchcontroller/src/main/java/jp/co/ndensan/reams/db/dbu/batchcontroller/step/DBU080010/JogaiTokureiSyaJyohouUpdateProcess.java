@@ -46,7 +46,6 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "IJogaiTokureiSyaJyohouMapper.get提供対象者");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private JogaiTokureiSyaJyohouProcessParameter processParameter;
     private JogaiTokureiSyaJyohouMybatisParameter mybatisParameter;
     @BatchWriter
@@ -56,7 +55,6 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
 
     @Override
     protected IBatchReader createReader() {
-        // TODO 凌護行 パラメータの設定が不明です、QA回答まち、2016/10/20
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         List<JuminShubetsu> 住民種別List = new ArrayList<>();
@@ -86,7 +84,7 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
     @Override
     protected void createWriter() {
         dbT7301EntityWriter = new BatchPermanentTableWriter(DbT7301TokuteiKojinJohoHanKanriEntity.class);
-        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
+        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(processParameter.get提供基本情報中間テーブル名(),
                 TeikyoKihonJohoNNTempEntity.class);
     }
 

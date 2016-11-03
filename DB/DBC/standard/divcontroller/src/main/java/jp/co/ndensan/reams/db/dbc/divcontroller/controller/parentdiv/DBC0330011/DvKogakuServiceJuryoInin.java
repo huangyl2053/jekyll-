@@ -261,6 +261,12 @@ public class DvKogakuServiceJuryoInin {
      * @return 画面
      */
     public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_btnSave(DvKogakuServiceJuryoIninDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs pairs = getValidationHandler(div).validate修正追加();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -281,6 +287,12 @@ public class DvKogakuServiceJuryoInin {
      * @return 画面
      */
     public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_btnShuseiSave(DvKogakuServiceJuryoIninDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs pairs = getValidationHandler(div).validate修正追加();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();

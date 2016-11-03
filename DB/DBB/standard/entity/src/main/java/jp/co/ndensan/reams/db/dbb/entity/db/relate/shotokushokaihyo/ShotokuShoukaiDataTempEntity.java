@@ -84,4 +84,6 @@ public class ShotokuShoukaiDataTempEntity implements IDbAccessable, Serializable
     private RString seibetsuCode;
     @TempTableColumnOrder(28)
     private RString juminShubetsuCode;
+    @TempTableColumnOrder(29)
+    private RString torokuTodokedeYMD;
 }

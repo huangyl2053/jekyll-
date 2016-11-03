@@ -123,11 +123,12 @@ public class FukushiyouguKonyuhiShikyuShinseiResult implements Serializable {
     }
 
     /**
-     * 購入金額合計を取得する。
+     * 保険対象費用額を取得する。
      *
-     * @return Decimal 購入金額合計
+     * @return Decimal 保険対象費用額
      */
-    public Decimal get購入金額合計() {
-        return this.entity.get購入金額合計();
+    public Decimal get保険対象費用額() {
+        return this.entity.get保険対象費用額();
     }
+
 }

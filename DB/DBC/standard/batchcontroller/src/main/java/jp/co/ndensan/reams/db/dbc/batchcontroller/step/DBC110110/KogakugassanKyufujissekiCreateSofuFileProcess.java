@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110110;
 
-import java.io.File;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.RecordShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenSofu;
@@ -26,22 +25,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
-import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -65,7 +50,6 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
     private static final RString PREFIX = new RString("10_");
     private static final RString FILE_TYPE = new RString(".csv");
     private static final RString カンマ = new RString(",");
-    private static final RString 変換区分_1 = new RString("1");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final RString ボリュム通番 = new RString("000");
@@ -73,8 +57,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
     private static final RString 事業所番号 = new RString("0000000000");
     private static final RString ファイル管理番号 = new RString("0");
     private static final RString 処理結果リスト一時_NAME = new RString("DbWT1002KokuhorenSakuseiError");
-    private static final RString 拡張子_TEMP = new RString("temp");
-    private static final RString 拡張子 = new RString("\r\n");
+    private static final RString COPY = new RString("copy");
 
     private KogakugassanKyufujissekiCreateSofuFileProcessParameter parameter;
     private int 総出力件数;
@@ -84,6 +67,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
     private RString dbu保険者番号;
     private RString csvFileName;
     private RString csvFilePath;
+    private RString 入力ファイルパス;
     private int レコード件数;
 
     @BatchWriter
@@ -104,12 +88,13 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
         レコード件数 = KogakugassanKyufujissekiOutService.createInstance().get出力対象データ件数();
         総出力件数 = INT_0;
         レコード番号 = INT_0;
+        入力ファイルパス = RString.EMPTY;
         returnEntity = new SofuTaishoEntity();
         outReturnEntity = new OutputParameter<>();
         dbu保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         csvFileName = PREFIX.concat(parameter.get交換情報識別番号()).concat(dbu保険者番号)
-                .concat(parameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(FILE_TYPE);
+                .concat(parameter.get処理年月().toDateString()).concat(FILE_TYPE);
     }
 
     @Override
@@ -124,6 +109,11 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
                 DbWT1002KokuhorenSakuseiErrorTempEntity.class);
         RString spoolPath = Path.getTmpDirectoryPath();
         csvFilePath = Path.combinePath(spoolPath, csvFileName);
+        if (Encode.UTF_8.equals(parameter.get文字コード())) {
+            入力ファイルパス = Path.combinePath(spoolPath, COPY.concat(csvFileName));
+        } else {
+            入力ファイルパス = csvFilePath;
+        }
 
     }
 
@@ -131,9 +121,9 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
     protected void process(KogakuGassanKyufuJissekiSofuEntity entity) {
 
         if (レコード番号 == INT_0) {
-            csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).
+            csvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス).
                     setDelimiter(カンマ).
-                    setEncode(Encode.UTF_8withBOM).
+                    setEncode(parameter.get文字コード()).
                     setEnclosure(RString.EMPTY).
                     setNewLine(NewLine.CRLF).
                     hasHeader(false).
@@ -155,14 +145,9 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
         } else {
             csvWriter.writeLine(getEndEntity(INT_1));
             csvWriter.close();
-            do外字類似変換();
-            SharedFileDescriptor sdf = new SharedFileDescriptor(GyomuCode.DB介護保険,
-                    FilesystemName.fromString(csvFileName.replace(拡張子_TEMP, RString.EMPTY)));
-            sdf = SharedFile.defineSharedFile(sdf, 1, SharedFile.GROUP_ALL, null, true, null);
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sdf, FilesystemPath.fromString(csvFilePath.replace(拡張子_TEMP, RString.EMPTY)), opts);
             returnEntity.set総出力件数(総出力件数);
-            returnEntity.setエントリ情報(sdf);
+            returnEntity.set入力ファイルパス(入力ファイルパス);
+            returnEntity.set出力ファイルパス(csvFilePath);
             outReturnEntity.setValue(returnEntity);
         }
     }
@@ -232,42 +217,6 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
         endEntity.setレコード種別(RecordShubetsu.エンドレコード.getコード());
         endEntity.setレコード番号_連番(new RString(連番));
         return endEntity;
-    }
-
-    private void do外字類似変換() {
-        try (FileReader reader = new FileReader(csvFilePath, Encode.UTF_8);
-                ByteWriter writer = new ByteWriter(csvFilePath.replace(拡張子_TEMP, RString.EMPTY))) {
-            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
-                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
-                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
-                        .enabledConvertError(true)
-                        .build();
-                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
-                writer.write(converter.convert(record.concat(拡張子)));
-            }
-            writer.close();
-            reader.close();
-        }
-        deleteEmptyFile(csvFilePath);
-    }
-
-    private void deleteEmptyFile(RString filePath) {
-        if (RString.isNullOrEmpty(filePath)) {
-            return;
-        }
-        File file = new File(filePath.toString());
-        if (file.exists()) {
-            file.getAbsoluteFile().deleteOnExit();
-        }
-    }
-
-    private static CharacterConvertTable getCharacterConvertTable() {
-        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (!変換区分_1.equals(国保連送付外字_変換区分)) {
-            return CharacterConvertTable.Sjis;
-        } else {
-            return CharacterConvertTable.SjisRuiji;
-        }
     }
 
     private RString trimRString(RString str) {

@@ -144,6 +144,8 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
     private static final String 保険者名の取得 = "getHihokenshaName";
     private static final RString MSG_導入形態コード = new RString("導入形態コード");
     private static final RString MSG_被保険者番号変換基準日の取得 = new RString("被保険者番号変換基準日の取得");
+    private static final RString ERROR_前 = new RString("errorLogFile_");
+    private static final RString ERROR_後 = new RString(".csv");
 
     private static final String 被保険者_宛名情報取得 = "getHihokenshaAtena";
     private static final String エラー登録 = "doError";
@@ -774,6 +776,9 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_READ_FILE_PATH), 入力ファイルパス);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_WRITE_FILE_PATH), 出力ファイルパス);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_CONVERT_TABLE_NAME), SJIS類似);
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_ERROR_LOG_FILE_PATH),
+                出力ファイルパス.substring(0, 出力ファイルパス.lastIndexOf(File.separator) + INT_1)
+                .concat(ERROR_前.concat(YMDHMS.now().toString()).concat(ERROR_後)));
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_CONVERT_TYPE), BatchTextFileConvert.CONVERTTYPE_TO);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_READ_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_LF);
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_WRITE_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_CRLF);
@@ -785,21 +790,33 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
     private void do文字コード変換(int 件数) {
         出力ファイルパス = getResult(
                 RString.class, new RString(送付ファイル作成), InsDataRecordTempProcess.OUTPUT_PATH);
-        if (Encode.UTF_8.equals(processParameter.get文字コード()) && 件数 != INT_0) {
+        if (Encode.UTF_8.equals(processParameter.get文字コード())) {
             入力ファイルパス = getResult(
                     RString.class, new RString(送付ファイル作成), InsDataRecordTempProcess.INPUT_PATH);
-            File file出力 = new File(出力ファイルパス.toString());
-            file出力.delete();
-            executeStep(文字コード変換);
-            File file入力 = new File(入力ファイルパス.toString());
-            file入力.delete();
+            File file = new File(出力ファイルパス.toString());
+            if ((file.exists() && file.delete()) || !file.exists()) {
+                executeStep(文字コード変換);
+            }
+            deleteTmpFile(入力ファイルパス);
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
-                FilesystemName.fromString(出力ファイルパス.substring(出力ファイルパス.lastIndexOf(File.separator) + INT_1)));
-        sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(出力ファイルパス), opts);
-        エントリ情報List.add(sfd);
+        if (件数 != INT_0) {
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                    FilesystemName.fromString(出力ファイルパス.substring(出力ファイルパス.lastIndexOf(File.separator) + INT_1)));
+            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(出力ファイルパス), opts);
+            エントリ情報List.add(sfd);
+        }
+    }
+
+    private void deleteTmpFile(RString path) {
+        if (RString.isNullOrEmpty(path)) {
+            return;
+        }
+        File file = new File(path.toString());
+        if (file.exists()) {
+            file.getAbsoluteFile().deleteOnExit();
+        }
     }
 
 }

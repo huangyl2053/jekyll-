@@ -42,6 +42,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     private final RString 保存 = new RString("btnSave");
     private final RString 審査 = new RString("審査");
+    private static final RString 参照 = new RString("参照");
     private final RString 保存MSG = new RString(" 福祉用具購入費支給申請審査結果を更新");
 
     /**
@@ -117,13 +118,13 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         RString 明細番号 = row.getTxtMeisaiNo();
         ShikibetsuCode 識別コード = new ShikibetsuCode(row.getShikibetsuCode());
         RDate 決定日 = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
-        ViewStateHolder.put(ViewStateKeys.状態, 審査);
+        ViewStateHolder.put(ViewStateKeys.状態, 参照);
         ViewStateHolder.put(ViewStateKeys.決定日, 決定日);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         PnlTotalParameter param = new PnlTotalParameter(被保険者番号,
                 サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        ViewStateHolder.put(ViewStateKeys.検索キー, param);
+        ViewStateHolder.put(ViewStateKeys.契約番号検索キー, param);
         return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.修正).respond();
     }
 

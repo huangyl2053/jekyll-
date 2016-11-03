@@ -6,6 +6,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710022;
 
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.DBC0710022StateName;
@@ -43,7 +44,7 @@ public class MainPanel {
 
     private static final RString 修正 = new RString("修正モード");
     private static final RString 照会 = new RString("照会モード");
-    private static final RString モード_修正 = new RString("登録");
+    private static final RString モード_修正 = new RString("修正");
     private static final RString モード_照会 = new RString("照会");
     private static final RString 画面モード_登録 = new RString("登録モード");
     private static final RString 業務区分 = new RString("01");
@@ -76,12 +77,14 @@ public class MainPanel {
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(被保険者番号);
 
         getHandler(div).set初期化(証明書, 整理番号, サービス年月, 給付率);
-
+        RString 元画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         if (修正.equals(画面モード)) {
+            if (画面モード_登録.equals(元画面モード)) {
+                div.getBtnShinseiJyoho().setDisabled(true);
+            }
             div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().
                     loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_修正);
         } else {
-            RString 元画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
             if (!照会.equals(元画面モード)) {
                 div.getBtnShinseiJyoho().setDisabled(true);
             } else {
@@ -159,7 +162,10 @@ public class MainPanel {
         ShoukanFutsuKetteiJouhouTourokuParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.画面データ, ShoukanFutsuKetteiJouhouTourokuParameter.class);
         boolean flag = getHandler(div).is内容変更状態(parameter);
-        if (flag) {
+
+        KetteJoho 決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報, KetteJoho.class);
+
+        if (flag || 決定情報 == null) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                         UrQuestionMessages.保存の確認.getMessage().evaluate());

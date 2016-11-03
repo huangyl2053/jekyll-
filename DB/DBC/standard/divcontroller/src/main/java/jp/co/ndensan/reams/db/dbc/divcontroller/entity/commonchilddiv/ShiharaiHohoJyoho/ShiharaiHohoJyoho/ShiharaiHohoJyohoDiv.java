@@ -6,18 +6,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiH
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -27,9 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanShitenCode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShiharaiHohoJyoho のクラスファイル
@@ -117,6 +118,8 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private RString hdnTxtSubGyomuCode;
     @JsonProperty("hdnTxtShikibetsuCode")
     private RString hdnTxtShikibetsuCode;
+    @JsonProperty("hdnGridSelectButtonDisplay")
+    private RString hdnGridSelectButtonDisplay;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -773,6 +776,24 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /*
+     * gethdnGridSelectButtonDisplay
+     * @return hdnGridSelectButtonDisplay
+     */
+    @JsonProperty("hdnGridSelectButtonDisplay")
+    public RString getHdnGridSelectButtonDisplay() {
+        return hdnGridSelectButtonDisplay;
+    }
+
+    /*
+     * sethdnGridSelectButtonDisplay
+     * @param hdnGridSelectButtonDisplay hdnGridSelectButtonDisplay
+     */
+    @JsonProperty("hdnGridSelectButtonDisplay")
+    public void setHdnGridSelectButtonDisplay(RString hdnGridSelectButtonDisplay) {
+        this.hdnGridSelectButtonDisplay = hdnGridSelectButtonDisplay;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -996,4 +1017,15 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     public ValidationMessageControlPairs validateCheck() {
         return getValidationHandler().validateCheck();
     }
+
+    /**
+     * クリアを行う。
+     */
+    @Override
+    public void clear() {
+        getHandler().clear口座払い();
+        getHandler().clear受領委任払い();
+        getHandler().clear必須項目();
+    }
+
 }

@@ -86,12 +86,16 @@
             ) AS "COUNT2"
             ON "COUNT2"."serviceTeikyoYM" = #{基準年月}
             AND "DbV2002Fuka"."dbT2002Fuka_hihokenshaNo" = "COUNT2"."hiHokenshaNo"
-            AND "TotalShunyu"."urT0700ShunoKanri_choteiNendo" <![CDATA[<=]]> #{終了調定年度}
+            WHERE
+            "TotalShunyu"."urT0700ShunoKanri_choteiNendo" <![CDATA[<=]]> #{終了調定年度}
             AND #{開始調定年度} <![CDATA[<=]]> "TotalShunyu"."urT0700ShunoKanri_choteiNendo"
             AND "TotalShunyu"."urT0700ShunoKanri_kazeiNendo" <![CDATA[<=]]> #{終了賦課年度}
             AND #{開始賦課年度} <![CDATA[<=]]> "TotalShunyu"."urT0700ShunoKanri_kazeiNendo"
+            <if test="is未納分出力区分"> 
+                AND "TotalShunyu"."caT0701Shunyu_kaikeiNendo" = #{会計年度}
+            </if>
             <if test="科目コードリスト != null">
-                AND "FunoKessonAll"."urT0700ShunoKanri_kamokuCode" IN
+                AND "TotalShunyu"."urT0700ShunoKanri_kamokuCode" IN
                 <foreach item="科目コード_ロープ"  collection="科目コードリスト" open="(" separator="," close=")">
                     #{科目コード_ロープ}
                 </foreach>
@@ -157,7 +161,9 @@
         "master"."dbT2002Fuka_choteiNendo",
         "master"."dbT2002Fuka_fukaNendo",
         "master"."dbT2002Fuka_tsuchishoNo",
-        "master"."dbT2002Fuka_rirekiNo"
+        "master"."dbT2002Fuka_hokenryoDankai",
+        "master"."dbT2003Kibetsu_choshuHouhou",
+        "master"."dbT2003Kibetsu_ki"
     </select>
 
     <select id="select保険料段階別収納率一覧表"  resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuTempEntity"
@@ -192,14 +198,10 @@
 
     <resultMap id="resultMap_ShunyuTaishoData" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuDataEntity" autoMapping="false">
         <id column="urT0700ShunoKanri_shunoId" />
-        <id column="caT0701Shunyu_shunyuId"/>
-        <id column="caT0701Shunyu_rirekiNo"/>
-        <id column="caT0708FunoKesson_funoKessonId"/>
-        <id column="caT0708FunoKesson_rirekiNo"/>
         <id column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
-        <id column="dbT2002Fuka_rirekiNo" />
+        <id column="dbT2002Fuka_hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id column="dbT2003Kibetsu_ki" />
         <association property="収納管理マスタ" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.basic.IUrT0700ShunoKanriMapper.ResultMap_UrT0700ShunoKanriEntity"/>

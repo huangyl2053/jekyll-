@@ -193,13 +193,13 @@ public class KanendoFukaHandler {
         if (本算定異動_過年度.equals(menuID)) {
             row.getTxtShoriMei().setValue(定値処理名);
             row.getTxtJokyo().setValue(定値状況);
-        } else if (過年度異動通知書作成.equals(menuID)) {
-            RString 処理名 = ShoriName.過年度賦課.get名称();
-            row.getTxtShoriMei().setValue(処理名);
             RDateTime 処理日時 = HonsanteiIdoKanendo.createInstance().get処理日時();
             if (処理日時 != null) {
                 row.getTxtShoriNichiji().setValue(new RString(処理日時.toString()));
             }
+        } else if (過年度異動通知書作成.equals(menuID)) {
+            RString 処理名 = ShoriName.過年度賦課.get名称();
+            row.getTxtShoriMei().setValue(処理名);
             if (shdaList.isEmpty()) {
                 row.getTxtJokyo().setValue(未);
                 flag = true;
