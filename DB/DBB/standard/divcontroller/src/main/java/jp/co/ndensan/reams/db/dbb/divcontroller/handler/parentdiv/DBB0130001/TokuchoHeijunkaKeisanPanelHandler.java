@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
@@ -40,6 +40,7 @@ public class TokuchoHeijunkaKeisanPanelHandler {
     private static final RString 未 = new RString("未");
     private static final RString 済 = new RString("済");
     private static final RString ハイフン = new RString("－");
+    private static final RString BLANK = new RString(" ");
     private static final RString 最新_個人住民税課税確定 = new RString("【最新】個人住民税課税確定");
     private static final RString 実行するボタン = new RString("btnBatchRegister");
 
@@ -218,12 +219,12 @@ public class TokuchoHeijunkaKeisanPanelHandler {
 
     private RString get当月処理日時(YMDHMS 当月処理日時) {
         if (null != 当月処理日時 && !当月処理日時.isEmpty()) {
-            RDate date = 当月処理日時.getDate();
-            RTime time = 当月処理日時.getRDateTime().getTime();
-            return new RString(new YMDHMS(date, time).toString());
+            RString 年月日 = 当月処理日時.getRDateTime().getDate().wareki().toDateString();
+            RString 時刻 = 当月処理日時.getRDateTime().getTime().toFormattedTimeString(
+                    DisplayTimeFormat.HH_mm_ss);
+            return 年月日.concat(BLANK).concat(時刻);
         }
         return RString.EMPTY;
-
     }
 
     /**
