@@ -13,13 +13,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JutakuKaishuRiyushoTesuryoMeisai}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-2870-010 zhangruitao
  */
 public class JutakuKaishuRiyushoTesuryoMeisaiBuilder {
 
@@ -86,12 +87,11 @@ public class JutakuKaishuRiyushoTesuryoMeisaiBuilder {
      * @param 識別コード 識別コード
      * @return {@link JutakuKaishuRiyushoTesuryoMeisaiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoMeisaiBuilder set識別コード(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        entity.setShikibetsuCode(識別コード);
-        return this;
-    }
-
+//    public JutakuKaishuRiyushoTesuryoMeisaiBuilder set識別コード(ShikibetsuCode 識別コード) {
+//        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+//        entity.setShikibetsuCode(識別コード);
+//        return this;
+//    }
     /**
      * サービスコードを設定します。
      *
