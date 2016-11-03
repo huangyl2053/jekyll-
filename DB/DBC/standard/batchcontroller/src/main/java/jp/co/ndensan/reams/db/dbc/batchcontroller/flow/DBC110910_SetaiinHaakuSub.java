@@ -63,7 +63,7 @@ public class DBC110910_SetaiinHaakuSub extends BatchFlowBase<DBC110910_SetaiinHa
     @Step(住所地特例該当)
     protected IBatchFlowCommand 特例該当() {
         SetaiinHaakuSubTempProcessParameter parameter = new SetaiinHaakuSubTempProcessParameter(getParameter().get管理識別区分(),
-                RString.EMPTY, RString.EMPTY);
+                RString.EMPTY);
         return loopBatch(SetaiinHaakuSubTempProcess.class)
                 .arguments(parameter).define();
     }
@@ -76,7 +76,7 @@ public class DBC110910_SetaiinHaakuSub extends BatchFlowBase<DBC110910_SetaiinHa
     @Step(住所地特例該当以外)
     protected IBatchFlowCommand 特例該当以外() {
         SetaiinHaakuSubTempProcessParameter parameter = new SetaiinHaakuSubTempProcessParameter(getParameter().get管理識別区分(),
-                RString.EMPTY, RString.EMPTY);
+                RString.EMPTY);
         return loopBatch(SetaiinHaakuSubTempBProcess.class)
                 .arguments(parameter).define();
     }

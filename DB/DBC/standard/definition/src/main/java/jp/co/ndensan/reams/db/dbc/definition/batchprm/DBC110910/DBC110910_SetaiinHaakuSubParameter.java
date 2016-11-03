@@ -24,7 +24,6 @@ public class DBC110910_SetaiinHaakuSubParameter extends BatchParameterBase {
     private static final String 管理識別コード = "管理識別区分";
     @BatchParameter(key = 管理識別コード, name = "管理識別区分")
     private RString 管理識別区分;
-    private RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -36,11 +35,9 @@ public class DBC110910_SetaiinHaakuSubParameter extends BatchParameterBase {
      * コンストラクタです。
      *
      * @param 管理識別区分 管理識別区分
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
-    public DBC110910_SetaiinHaakuSubParameter(RString 管理識別区分, RString psmShikibetsuTaisho) {
+    public DBC110910_SetaiinHaakuSubParameter(RString 管理識別区分) {
         this.管理識別区分 = 管理識別区分;
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -50,6 +47,6 @@ public class DBC110910_SetaiinHaakuSubParameter extends BatchParameterBase {
      */
     public SetaiinHaakuSubTempProcessParameter
             toProcessParamter() {
-        return new SetaiinHaakuSubTempProcessParameter(管理識別区分, RString.EMPTY, psmShikibetsuTaisho);
+        return new SetaiinHaakuSubTempProcessParameter(管理識別区分, RString.EMPTY);
     }
 }
