@@ -93,12 +93,8 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final RString 対象外データテンプ_テーブル = new RString("対象外データ.");
-    private static final RString 識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 世帯コード = new RString("\"setaiCode\"");
-    private static final RString 賦課_識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 賦課_被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 賦課_世帯コード = new RString("\"setaiCode\"");
     private static final RString 編集コード_併徴者 = new RString("併徴者");
     private static final RString 編集コード_仮徴収額修正者 = new RString("仮徴収額修正者");
     private static final RString 編集コード_対象外_減額 = new RString("対象外_減額");
@@ -486,12 +482,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     }
 
     private RString 出力順再設定(RString 出力順) {
-        if (出力順.contains(世帯コード)) {
-            出力順 = 出力順.replace(世帯コード, 対象外データテンプ_テーブル.concat(賦課_世帯コード));
-        }
-        if (出力順.contains(識別コード)) {
-            出力順 = 出力順.replace(識別コード, 対象外データテンプ_テーブル.concat(賦課_識別コード));
-        }
         if (出力順.contains(被保険者番号)) {
             出力順 = 出力順.replace(被保険者番号, 対象外データテンプ_テーブル.concat(賦課_被保険者番号));
         }

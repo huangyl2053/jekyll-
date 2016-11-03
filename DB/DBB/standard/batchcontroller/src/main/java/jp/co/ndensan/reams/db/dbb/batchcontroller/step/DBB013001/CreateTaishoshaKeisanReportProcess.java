@@ -89,9 +89,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
     private static final int NUM_3 = 3;
     private static final int NUM_6 = 6;
     private static final RString 計算後情報_テーブル = new RString("対象者データ.");
-    private static final RString 識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 世帯コード = new RString("\"setaiCode\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200005"));
     private static final RString ファイル名_対象者一覧表 = new RString("介護保険特徴仮算定平準化対象者一覧表_");
     private static final RString CSVファイル = new RString(".csv");
@@ -371,12 +369,6 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
     }
 
     private RString 出力順設定(RString 出力順) {
-        if (出力順.contains(世帯コード)) {
-            出力順 = 出力順.replace(世帯コード, 計算後情報_テーブル.concat(世帯コード));
-        }
-        if (出力順.contains(識別コード)) {
-            出力順 = 出力順.replace(識別コード, 計算後情報_テーブル.concat(識別コード));
-        }
         if (出力順.contains(被保険者番号)) {
             出力順 = 出力順.replace(被保険者番号, 計算後情報_テーブル.concat(被保険者番号));
         }
