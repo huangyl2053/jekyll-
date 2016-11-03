@@ -228,8 +228,10 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().setValue(new RDate(
                     shokanKihon.get入所_院年月日().toString()));
         }
-        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().setValue(
-                new Decimal(shokanKihon.get入所_院実日数()));
+        if (shokanKihon.get入所_院実日数() != 0) {
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().setValue(
+                    new Decimal(shokanKihon.get入所_院実日数()));
+        }
         if (shokanKihon.get退所_院年月日() != null && !shokanKihon.get退所_院年月日().isEmpty()) {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().setValue(new RDate(
                     shokanKihon.get退所_院年月日().toString()));

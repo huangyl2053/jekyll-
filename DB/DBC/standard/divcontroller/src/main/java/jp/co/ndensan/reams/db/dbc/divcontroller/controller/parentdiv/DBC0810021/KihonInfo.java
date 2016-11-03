@@ -61,16 +61,16 @@ public class KihonInfo {
 
         ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbarayiSeikyukihonDetail(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-       
+
         if (shokanKihon != null) {
-        KaigoJigyoshaReturnEntity kaigoJigyoshaEntity = ShokanbaraiJyokyoShokai.createInstance()
-                .getKaigoJigyoshaInfo(サービス年月, 事業者番号);
-        getHandler(div).set基本内容エリア(shokanKihon, kaigoJigyoshaEntity, サービス年月, 様式番号);
-       }
-       
+            KaigoJigyoshaReturnEntity kaigoJigyoshaEntity = ShokanbaraiJyokyoShokai.createInstance()
+                    .getKaigoJigyoshaInfo(サービス年月, 事業者番号);
+            getHandler(div).set基本内容エリア(shokanKihon, kaigoJigyoshaEntity, サービス年月, 様式番号);
+        }
+
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
-        
+
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
 
         return createResponse(div);
