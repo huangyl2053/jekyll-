@@ -150,6 +150,11 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         }
         set生年月日(source);
         editorSource(source);
+        source.choikiCode = 所得照会票発行一覧.getChoikiCode();
+        source.gyoseikuCode = 所得照会票発行一覧.getGyoseikuCode();
+        source.shichosonCode = 所得照会票発行一覧.getShichosonCode();
+        source.torokuIdoYMD = 所得照会票発行一覧.getTorokuTodokedeYMD();
+        source.zenjushoCode = 所得照会票発行一覧.getZenjushoCode();
         return source;
     }
 

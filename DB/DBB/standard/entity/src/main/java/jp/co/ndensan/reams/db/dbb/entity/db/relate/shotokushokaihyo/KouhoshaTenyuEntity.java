@@ -33,6 +33,7 @@ public class KouhoshaTenyuEntity {
     private YubinNo 郵便番号;
     private RString 町域コード;
     private ZenkokuJushoCode 全国住所コード;
+    private ZenkokuJushoCode 転出確定全国住所コード;
     private RString 住所;
     private RString 番地;
     private RString 方書;

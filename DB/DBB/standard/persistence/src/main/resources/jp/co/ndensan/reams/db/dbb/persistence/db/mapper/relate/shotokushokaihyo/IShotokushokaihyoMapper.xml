@@ -16,6 +16,7 @@
         <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="町域コード" column="町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="全国住所コード" column="全国住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="転出確定全国住所コード" column="転出確定全国住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="番地" column="番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="方書" column="方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -52,6 +53,7 @@
         "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
         "ShikibetsuTaisho"."choikiCode" AS 町域コード,
         "ShikibetsuTaisho"."zenkokuJushoCode" AS 全国住所コード,
+        "ShikibetsuTaisho"."tenshutsuKakuteiZenkokuJushoCode" AS 転出確定全国住所コード,
         "ShikibetsuTaisho"."jusho" AS 住所,
         "ShikibetsuTaisho"."banchi" AS 番地,
         "ShikibetsuTaisho"."katagaki" AS 方書,
@@ -94,6 +96,7 @@
         "ShikibetsuTaisho"."yubinNo",
         "ShikibetsuTaisho"."choikiCode",
         "ShikibetsuTaisho"."zenkokuJushoCode",
+        "ShikibetsuTaisho"."tenshutsuKakuteiZenkokuJushoCode",
         "ShikibetsuTaisho"."jusho",
         "ShikibetsuTaisho"."banchi",
         "ShikibetsuTaisho"."katagaki",
@@ -125,6 +128,7 @@
         "FindShikibetsuTaisho"."yubinNo" AS 郵便番号,
         "FindShikibetsuTaisho"."choikiCode" AS 町域コード,
         "FindShikibetsuTaisho"."zenkokuJushoCode" AS 全国住所コード,
+        "FindShikibetsuTaisho"."tenshutsuKakuteiZenkokuJushoCode" AS 転出確定全国住所コード,
         "FindShikibetsuTaisho"."jusho" AS 住所,
         "FindShikibetsuTaisho"."banchi" AS 番地,
         "FindShikibetsuTaisho"."katagaki" AS 方書,
@@ -159,6 +163,7 @@
         "FindShikibetsuTaisho"."yubinNo",
         "FindShikibetsuTaisho"."choikiCode",
         "FindShikibetsuTaisho"."zenkokuJushoCode",
+        "FindShikibetsuTaisho"."tenshutsuKakuteiZenkokuJushoCode",
         "FindShikibetsuTaisho"."jusho",
         "FindShikibetsuTaisho"."banchi",
         "FindShikibetsuTaisho"."katagaki",
@@ -498,7 +503,8 @@
         A."hihokennshaKubunCode",
         B."juminShubetsuCode",
         B."torokuTodokedeYMD",
-        B."seibetsuCode"
+        B."seibetsuCode",
+        B."tenshutsuKakuteiZenkokuJushoCode"
         FROM 
         <if test="出力対象 == 2">
         "TmpSetaiShotoku1" AS A
@@ -563,7 +569,11 @@
         master."hihokennshaKubunCode",
         master."juminShubetsuCode",
         master."torokuTodokedeYMD",
-        master."seibetsuCode"
+        master."seibetsuCode",
+        CASE WHEN master."kouhoshakubun"='1' THEN master."tenyuzenzenkokuJushoCode"
+        WHEN master."kouhoshakubun"='2' THEN master."tenshutsuKakuteiZenkokuJushoCode"
+        ELSE ''
+        END AS "shichosonCode"
         FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
@@ -587,6 +597,7 @@
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="genLasdecCode" column="genLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="zenkokuJushoCode" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -767,11 +778,11 @@
         OR B."kazeiKubunGemmenGo"<![CDATA[<>]]>'4'
     </select>
     
-         
     <resultMap id="ResultMap_ShotokuShoukaiDataMapaEntity_bk" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataMapaEntity" autoMapping="true">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="genLasdecCode" column="genLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="zenkokuJushoCode" column="送付先全国住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -817,7 +828,8 @@
         B."tenyuzenzenkokuJushoCode",
         B."juminShubetsuCode",
         B."torokuTodokedeYMD",
-        B."seibetsuCode"
+        B."seibetsuCode",
+        B."tenshutsuKakuteiZenkokuJushoCode"
         FROM "SaihaqkouTaishouTemp" AS A
         INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
@@ -856,7 +868,11 @@
         C."juminJotaiCode",
         master."juminShubetsuCode",
         master."torokuTodokedeYMD",
-        master."seibetsuCode"
+        master."seibetsuCode",
+        CASE WHEN master."kouhoshakubun"='1' THEN master."tenyuzenzenkokuJushoCode"
+        WHEN master."kouhoshakubun"='2' THEN master."tenshutsuKakuteiZenkokuJushoCode"
+        ELSE ''
+        END AS "shichosonCode"
         FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
