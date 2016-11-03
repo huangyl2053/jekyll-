@@ -57,6 +57,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final int INDEX_28 = 28;
     private static final int INDEX_39 = 39;
     private static final int INDEX_47 = 47;
+    private static final int INDEX_54 = 54;
     private static final int INDEX_55 = 55;
     private static final int INDEX_62 = 62;
     private static final int INDEX_63 = 63;
@@ -76,7 +77,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final int INDEX_30 = 30;
     private static final int INDEX_38 = 38;
     private static final int INDEX_46 = 46;
-    private static final int INDEX_54 = 54;
     private static final int INDEX_12 = 12;
     private static final int INDEX_4 = 4;
     private static final int INDEX_8 = 8;
@@ -106,6 +106,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_10 = new RString("10");
     private static final RString エラーコード_52 = new RString("52");
     private static final RString エラーコード_53 = new RString("53");
+    private static final RString エラーコード_54 = new RString("54");
     private static final RString エラーコード_55 = new RString("55");
     private static final RString エラーコード_56 = new RString("56");
     private static final RString エラーコード_57 = new RString("57");
@@ -127,6 +128,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString コード文言_保険者番号 = new RString("項目設定エラー：保険者番号");
     private static final RString コード文言_履歴番号 = new RString("項目設定エラー：履歴番号");
     private static final RString コード文言_被保険者番号 = new RString("項目設定エラー：被保険者番号");
+    private static final RString コード文言_個人番号 = new RString("項目設定エラー：個人番号");
     private static final RString コード文言_資格取得日 = new RString("項目設定エラー：資格取得日");
     private static final RString コード文言_資格喪失日 = new RString("項目設定エラー：資格喪失日");
     private static final RString コード文言_保険者番号_市町村 = new RString("項目設定エラー：保険者番号（市町村）");
@@ -373,11 +375,20 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-
         if (個人区分コード_3.equals(個人区分コード)) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_53);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(文言_個人区分コード_住登外);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
+        RString 個人番号 = 取込後期高齢者情報Entity.get住民コード();
+        if (!Pattern.compile(正則表現_半角空白.toString()).matcher(個人番号).matches()
+                && !Pattern.compile(正則表現_数値.toString()).matcher(個人番号).matches()) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_54);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(コード文言_個人番号);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
