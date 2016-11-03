@@ -238,12 +238,12 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
                     executeStep(世帯員所得判定明細高額一時の作成３);
                 }
             }
-//            executeStep(給付実績中間高額一時の作成8);
-//            executeStep(高額介護サービス費一時の作成);
+            executeStep(給付実績中間高額一時の作成8);
+            executeStep(高額介護サービス費一時の作成);
             executeStep(高額対象者一覧表発行処理);
             executeStep(高額エラーリストの発行);
-//            executeStep(高額国保連ＩＦマスタ更新);
-//            executeStep(高額介護サービス費追加);
+            executeStep(高額国保連ＩＦマスタ更新);
+            executeStep(高額介護サービス費追加);
         } else if (is事業高額介護サービス(getParameter().getMenuId())) {
             executeStep(事業高額介護サービス費支給申請のバックアップ);
             executeStep(事業高額介護サービス費支給判定のバックアップ);
@@ -295,12 +295,12 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
                     executeStep(世帯員所得判定明細事業高額一時の作成３);
                 }
             }
-//            executeStep(給付実績中間事業高額一時の作成8);
-//            executeStep(事業高額介護サービス費一時の作成);
+            executeStep(給付実績中間事業高額一時の作成8);
+            executeStep(事業高額介護サービス費一時の作成);
             executeStep(事業高額対象者一覧表発行処理);
             executeStep(事業高額エラーリストの発行);
-//            executeStep(事業高額国保連ＩＦマスタ更新);
-//            executeStep(事業高額介護サービス費追加);
+            executeStep(事業高額国保連ＩＦマスタ更新);
+            executeStep(事業高額介護サービス費追加);
         }
     }
 
