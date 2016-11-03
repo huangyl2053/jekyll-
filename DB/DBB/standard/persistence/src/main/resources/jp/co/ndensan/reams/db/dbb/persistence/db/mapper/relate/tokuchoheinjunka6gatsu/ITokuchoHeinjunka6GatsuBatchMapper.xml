@@ -434,7 +434,7 @@
         ON
         対象外データTemp."fukaNendo" = 徴収方法Newest."fukaNendo"
         AND 対象外データTemp."hihokenshaNo" = 徴収方法Newest."hihokenshaNo"
-        LEFT JOIN
+        INNER JOIN
         rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
         ON
         徴収方法Newest."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
