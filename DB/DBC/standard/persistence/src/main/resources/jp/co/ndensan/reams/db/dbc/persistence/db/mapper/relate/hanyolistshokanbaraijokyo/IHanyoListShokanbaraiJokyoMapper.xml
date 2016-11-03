@@ -307,9 +307,9 @@
         <id column="dbT3048ShokanFukushiYoguHanbaihi_yoshikiNo"/>
         <id column="dbT3048ShokanFukushiYoguHanbaihi_meisaiNo"/>
         <id column="dbT3048ShokanFukushiYoguHanbaihi_renban"/>
-        <id column="dbT3049ShokanJutakuKaishu_jigyoshaNo"/>
         <id column="dbT3049ShokanJutakuKaishu_yoshikiNo"/>
         <id column="dbT3049ShokanJutakuKaishu_meisaiNo"/>
+        <id column="dbT3049ShokanJutakuKaishu_renban"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="資格取得事由コード" column="資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
