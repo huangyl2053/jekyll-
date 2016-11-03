@@ -121,6 +121,33 @@ public class FutsuChoshuKarisanteiKekkaIchiranSource implements IReportSource {
     public RString listLower_19;
     @ReportItem(name = "listLower_20", length = 23, order = 52)
     public RString listLower_20;
+
+    @ReportItem(name = "郵便番号", order = 55)
+    public RString 郵便番号;
+    @ReportItem(name = "町域コード", order = 56)
+    public RString 町域コード;
+    @ReportItem(name = "行政区コード", order = 57)
+    public RString 行政区コード;
+    @ReportItem(name = "世帯コード", order = 58)
+    public RString 世帯コード;
+    @ReportItem(name = "識別コード", order = 59)
+    public RString 識別コード;
+    @ReportItem(name = "氏名５０音カナ", order = 60)
+    public RString 氏名５０音カナ;
+    @ReportItem(name = "生年月日", order = 61)
+    public RString 生年月日;
+    @ReportItem(name = "性別", order = 62)
+    public RString 性別;
+    @ReportItem(name = "市町村コード", order = 63)
+    public RString 市町村コード;
+    @ReportItem(name = "被保険者番号", order = 64)
+    public RString 被保険者番号;
+    @ReportItem(name = "通知書番号", order = 65)
+    public RString 通知書番号;
+    @ReportItem(name = "徴収方法", order = 66)
+    public RString 徴収方法;
+    @ReportItem(name = "特徴開始月", order = 67)
+    public RString 特徴開始月;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

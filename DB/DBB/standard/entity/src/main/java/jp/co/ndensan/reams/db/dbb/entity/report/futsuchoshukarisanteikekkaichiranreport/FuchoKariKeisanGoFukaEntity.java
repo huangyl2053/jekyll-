@@ -158,4 +158,7 @@ public class FuchoKariKeisanGoFukaEntity {
     private FukaJohoTempEntity 前年度賦課の情報;
     private TsuchishoNo 資格適用対象の通知書番号;
 
+    private RString 徴収方法;
+    private RString 特徴開始月;
+
 }
