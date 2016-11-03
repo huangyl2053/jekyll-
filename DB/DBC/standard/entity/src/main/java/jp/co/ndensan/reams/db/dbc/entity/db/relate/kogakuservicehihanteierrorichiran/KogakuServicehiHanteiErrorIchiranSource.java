@@ -17,55 +17,53 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
  * @reamsid_L DBC-2010-110 sunhui
  */
 public class KogakuServicehiHanteiErrorIchiranSource implements IReportSource {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+// <editor-fold defaultstate="collapsed" desc="Generated Code">
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
-    @ReportItem(name = "titleNengetsuKaishi", length = 8, order = 2)
-    public RString titleNengetsuKaishi;
-    @ReportItem(name = "titleNengetsu1", length = 8, order = 3)
-    public RString titleNengetsu1;
-    @ReportItem(name = "shichosonNo", length = 6, order = 4)
+    @ReportItem(name = "shinsaYm", length = 8, order = 2)
+    public RString shinsaYm;
+    @ReportItem(name = "shichosonNo", length = 6, order = 3)
     public RString shichosonNo;
-    @ReportItem(name = "shichosonName", length = 12, order = 5)
+    @ReportItem(name = "shichosonName", length = 12, order = 4)
     public RString shichosonName;
-    @ReportItem(name = "shutsuryokujun1", length = 10, order = 6)
+    @ReportItem(name = "shutsuryokujun1", length = 10, order = 5)
     public RString shutsuryokujun1;
-    @ReportItem(name = "shutsuryokujun2", length = 10, order = 7)
+    @ReportItem(name = "shutsuryokujun2", length = 10, order = 6)
     public RString shutsuryokujun2;
-    @ReportItem(name = "shutsuryokujun3", length = 10, order = 8)
+    @ReportItem(name = "shutsuryokujun3", length = 10, order = 7)
     public RString shutsuryokujun3;
-    @ReportItem(name = "shutsuryokujun4", length = 10, order = 9)
+    @ReportItem(name = "shutsuryokujun4", length = 10, order = 8)
     public RString shutsuryokujun4;
-    @ReportItem(name = "shutsuryokujun5", length = 10, order = 10)
+    @ReportItem(name = "shutsuryokujun5", length = 10, order = 9)
     public RString shutsuryokujun5;
-    @ReportItem(name = "kaipage1", length = 20, order = 11)
+    @ReportItem(name = "kaipage1", length = 20, order = 10)
     public RString kaipage1;
-    @ReportItem(name = "kaipage2", length = 20, order = 12)
+    @ReportItem(name = "kaipage2", length = 20, order = 11)
     public RString kaipage2;
-    @ReportItem(name = "kaipage3", length = 20, order = 13)
+    @ReportItem(name = "kaipage3", length = 20, order = 12)
     public RString kaipage3;
-    @ReportItem(name = "kaipage4", length = 20, order = 14)
+    @ReportItem(name = "kaipage4", length = 20, order = 13)
     public RString kaipage4;
-    @ReportItem(name = "kaipage5", length = 20, order = 15)
+    @ReportItem(name = "kaipage5", length = 20, order = 14)
     public RString kaipage5;
-    @ReportItem(name = "listHanteiError_1", length = 4, order = 16)
+    @ReportItem(name = "listHanteiError_1", length = 4, order = 15)
     public RString listHanteiError_1;
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
-    @ReportItem(name = "listHanteiError_2", length = 10, order = 17)
+    @ReportItem(name = "listHanteiError_2", length = 10, order = 16)
     public RString listHanteiError_2;
-    @ReportItem(name = "listHanteiError_3", length = 6, order = 18)
+    @ReportItem(name = "listHanteiError_3", length = 6, order = 17)
     public RString listHanteiError_3;
-    @ReportItem(name = "listHanteiError_4", length = 18, order = 19)
+    @ReportItem(name = "listHanteiError_4", length = 18, order = 18)
     public RString listHanteiError_4;
-    @ReportItem(name = "listHanteiError_5", length = 15, order = 20)
+    @ReportItem(name = "listHanteiError_5", length = 15, order = 19)
     public RString listHanteiError_5;
-    @ReportItem(name = "listHanteiError_6", length = 15, order = 21)
+    @ReportItem(name = "listHanteiError_6", length = 15, order = 20)
     public RString listHanteiError_6;
-    @ReportItem(name = "listHanteiError_7", length = 60, order = 22)
+    @ReportItem(name = "listHanteiError_7", length = 60, order = 21)
     public RString listHanteiError_7;
     @ReportPerson(id = "A")
-    @ReportItem(name = "shikibetsuCode", length = 60, order = 23)
+    @ReportItem(name = "shikibetsuCode", length = 60, order = 22)
     public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
@@ -80,8 +78,7 @@ public class KogakuServicehiHanteiErrorIchiranSource implements IReportSource {
     public enum ReportSourceFields {
 
         printTimeStamp,
-        titleNengetsuKaishi,
-        titleNengetsu1,
+        shinsaYm,
         shichosonNo,
         shichosonName,
         shutsuryokujun1,

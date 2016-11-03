@@ -52,7 +52,7 @@ public class KogakuServicehiHanteiErrorIchiranPrintService {
      * @param システム日時 YMDHMS
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(Long shutsuryokujunID, List<KogakuServicehiHanteiErrorListEntity> entityList, YMDHMS システム日時) {
+    public SourceDataCollection print(long shutsuryokujunID, List<KogakuServicehiHanteiErrorListEntity> entityList, YMDHMS システム日時) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             printFukusu(shutsuryokujunID, entityList, reportManager, システム日時);
@@ -61,7 +61,15 @@ public class KogakuServicehiHanteiErrorIchiranPrintService {
         return collection;
     }
 
-    private void printFukusu(Long shutsuryokujunID, List<KogakuServicehiHanteiErrorListEntity> entityList,
+    /**
+     * printFukusu
+     *
+     * @param shutsuryokujunID long
+     * @param entityList List<KogakuServicehiHanteiErrorListEntity>
+     * @param reportManager ReportManager
+     * @param システム日時 YMDHMS
+     */
+    public void printFukusu(long shutsuryokujunID, List<KogakuServicehiHanteiErrorListEntity> entityList,
             ReportManager reportManager, YMDHMS システム日時) {
         KogakuServicehiHanteiErrorIchiranProperty property = new KogakuServicehiHanteiErrorIchiranProperty();
         IAssociationFinder finder = AssociationFinderFactory.createInstance();

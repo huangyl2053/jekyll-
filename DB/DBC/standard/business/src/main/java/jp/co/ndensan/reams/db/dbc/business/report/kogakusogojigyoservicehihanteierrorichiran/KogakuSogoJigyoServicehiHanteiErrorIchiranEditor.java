@@ -93,10 +93,8 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranEditor
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
                 .concat(RString.HALF_SPACE).concat(SAKUSEI);
         if (entity != null) {
-            source.shinsaYMKaishi = entity.get審査年月From().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.shinsaYMShuryo = entity.get審査年月To().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.shinsaYM = entity.get審査年月().wareki().firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString();
             source.hokenshaNo = entity.get市町村コード();
             source.hokenshaName = association.get市町村名();
             set出力順And改ページ(source);
