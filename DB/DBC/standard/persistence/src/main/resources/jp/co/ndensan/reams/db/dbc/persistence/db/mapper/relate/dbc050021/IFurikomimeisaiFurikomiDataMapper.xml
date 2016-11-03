@@ -22,19 +22,19 @@
             <if test="抽出対象 == 1">
                 AND ("DbT3074KogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" = '' OR "DbT3074KogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" IS NULL)
             </if>
-            <if test="抽出対象 == 2 and (対象作成年月日 == '' or 対象作成年月日 == null)">
+            <if test="抽出対象 == 2 and (対象作成年月日 == null or 対象作成年月日.isEmpty())">
                 AND "DbT3074KogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" <![CDATA[<>]]> '' AND "DbT3074KogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" IS NOT NULL
             </if>
-            <if test="抽出対象 == 2 and 対象作成年月日 != '' and 対象作成年月日 != null">
+            <if test="抽出対象 == 2 and 対象作成年月日 != null and !対象作成年月日.isEmpty()">
                 AND "DbT3074KogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" = #{対象作成年月日}
             </if>
             <if test="再処理フラグ">
                 AND ("DbT3074KogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" IS NULL OR "DbT3074KogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" IN ('', #{対象作成年月日}))
             </if>
-            <if test="開始年月日 != null and 開始年月日 != ''">
+            <if test="開始年月日 != null and !開始年月日.isEmpty()">
                 AND #{開始年月日} <![CDATA[<=]]> "DbT3074KogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD"
             </if>
-            <if test="終了年月日 != null and 終了年月日 != ''">
+            <if test="終了年月日 != null and !終了年月日.isEmpty()">
                 AND "DbT3074KogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD" <![CDATA[<=]]> #{終了年月日}
             </if>
             AND "DbT3074KogakuGassanShikyuFushikyuKettei"."isDeleted" = FALSE
@@ -78,25 +78,25 @@
             <if test="抽出対象 == 1">
                 AND ("DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" = '' OR "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" IS NULL)
             </if>
-            <if test="抽出対象 == 2 and 対象作成年月日 != '' and 対象作成年月日 != null">
+            <if test="抽出対象 == 2 and and 対象作成年月日 != null and !対象作成年月日.isEmpty()">
                 AND "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" = #{対象作成年月日}
             </if>
-            <if test="抽出対象 == 2 and (対象作成年月日 == '' or 対象作成年月日 == null)">
+            <if test="抽出対象 == 2 and (対象作成年月日 == null or 対象作成年月日.isEmpty())">
                 AND "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]> '' AND "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" IS NOT NULL
             </if>
             <if test="再処理フラグ">
                 AND ("DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" IS NULL OR "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" IN ('', #{対象作成年月日}))
             </if>
-            <if test="開始年月日 != null and 開始年月日 != ''">
+            <if test="開始年月日 != null and !開始年月日.isEmpty()">
                 AND #{開始年月日} <![CDATA[<=]]> "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiTsuchishoSakuseiYMD"
             </if>
-            <if test="終了年月日 != null and 終了年月日 != ''">
+            <if test="終了年月日 != null and !終了年月日.isEmpty()">
                 AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiTsuchishoSakuseiYMD" <![CDATA[<=]]> #{終了年月日}
             </if>
-            <if test="開始受取年月 != null and 開始受取年月 != ''">
+            <if test="開始受取年月 != null and !開始受取年月.isEmpty()">
                 AND #{開始受取年月} <![CDATA[<=]]> "DbT3112KogakuShikyuShinsaKettei"."ketteishaUketoriYM"
             </if>
-            <if test="終了受取年月 != null and 終了受取年月 != ''">
+            <if test="終了受取年月 != null and !終了受取年月.isEmpty()">
                 AND "DbT3112KogakuShikyuShinsaKettei"."ketteishaUketoriYM" <![CDATA[<=]]> #{終了受取年月}
             </if>
             AND "DbT3111JigyoKogakuShikyuHanteiKekka"."isDeleted" = FALSE
@@ -137,19 +137,19 @@
             <if test="抽出対象 == 1">
                 AND ("DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" = '' OR "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" IS NULL)
             </if>
-            <if test="抽出対象 == 2 and (対象作成年月日 == '' or 対象作成年月日 == null)">
+            <if test="抽出対象 == 2 and (対象作成年月日 == null or 対象作成年月日.isEmpty())">
                 AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" <![CDATA[<>]]> '' AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" IS NOT NULL
             </if>
-            <if test="抽出対象 == 2 and 対象作成年月日 != '' and 対象作成年月日 != null">
+            <if test="抽出対象 == 2 and 対象作成年月日 != null and !対象作成年月日.isEmpty()">
                 AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" = #{対象作成年月日}
             </if>
             <if test="再処理フラグ">
                 AND ("DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" IS NULL OR "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" IN ('', #{対象作成年月日}))
             </if>
-            <if test="開始年月日 != null and 開始年月日 != ''">
+            <if test="開始年月日 != null and !開始年月日.isEmpty()">
                 AND #{開始年月日} <![CDATA[<=]]> "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD"
             </if>
-            <if test="終了年月日 != null and 終了年月日 != ''">
+            <if test="終了年月日 != null and !終了年月日.isEmpty()">
                 AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD" <![CDATA[<=]]> #{終了年月日}
             </if>
             AND "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."isDeleted" = FALSE

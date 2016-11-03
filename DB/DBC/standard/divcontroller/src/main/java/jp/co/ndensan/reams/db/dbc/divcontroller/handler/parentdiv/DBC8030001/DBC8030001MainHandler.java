@@ -67,7 +67,7 @@ public class DBC8030001MainHandler {
         div.getTxtShoriTaisho().setValue(FurikomiGyomunaiKubun.toValue(業務内区分).get名称());
         List<RString> list = new ArrayList<>();
         list.add(RString.EMPTY);
-        div.getCcdFurikomiBaitaiSakusei().initialize(SubGyomuCode.DBC介護給付, 業務内区分, list, IFurikomiBaitaiSakuseiDiv.UnyoHohoShokiHyoji.媒体, GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), RString.EMPTY);
+        div.getCcdFurikomiBaitaiSakusei().initialize(SubGyomuCode.DBC介護給付, list, IFurikomiBaitaiSakuseiDiv.UnyoHohoShokiHyoji.媒体, GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), RString.EMPTY);
         div.getCcdFurikomiBaitaiSakusei().setTestBaitaiSakuseiMode(FurikomiBaitaiSakuseiDiv.TestBaitaiSakuseiMode.通常);
         div.getCcdFurikomiBaitaiSakusei().setCommonChohyoSakuseiMode(FurikomiBaitaiSakuseiDiv.CommonChohyoSakuseiMode.送付書＿明細書);
         div.getCcdFurikomiBaitaiSakusei().setSelectButtonDisplayMode(FurikomiBaitaiSakuseiDiv.SelectButtonDisplayMode.表示しない);

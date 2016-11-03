@@ -157,27 +157,27 @@
 		(認定情報."soshitsuYMD" IS null OR 認定情報."soshitsuYMD" = '')
 		AND 調定共通_介護継承."choteigaku" <![CDATA[>]]> 収入."shunyugaku" 
                <if test="is被保険者選択_被保険者全員_0">
-                   AND (#{被保険者全員の滞納期間} + 調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                   AND 調定共通_介護継承."nokigenYMD" <![CDATA[<=]]> #{基準日min被保険者全員}
                 </if>
                  <if test="is被保険者選択_被保険者全員以外_1">
                     <if test="is受給者全員">
-                       AND (#{受給者全員の滞納期間} + 調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                       AND 調定共通_介護継承."nokigenYMD" <![CDATA[<=]]> #{基準日min受給者全員}
                     </if>
                     <if test="is受給認定申請中者">
-                       AND (#{受給認定申請中者の滞納期間} +  調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
-                       AND 認定情報.申請状況区分 = '0'
+                       AND 調定共通_介護継承."nokigenYMD" <![CDATA[<=]]> #{基準日min受給認定申請中者}
+                       AND 認定情報."shinseiJokyoKubun" = '0'
                     </if>
                     <if test="is受給認定日抽出">
-                      AND (#{受給認定日抽出の滞納期間} +  調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                      AND  調定共通_介護継承."nokigenYMD" <![CDATA[<=]]> #{基準日min受給認定日抽出}
                       AND  #{受給認定日抽出の開始} <![CDATA[<=]]> 認定情報."ninteiYMD"
                       AND  認定情報."ninteiYMD" <![CDATA[<=]]> #{受給認定日抽出の終了}
                     </if>
                    <if test="is受給申請中者">
-                        AND (#{償還申請中者の滞納期間} +  調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                        AND 調定共通_介護継承."nokigenYMD" <![CDATA[<=]]> #{基準日min償還申請中者}
                         AND (償還."ketteiYMD" IS null OR 償還."ketteiYMD" = '')
                     </if>
                     <if test="is受給支給決定日抽出">
-                        AND (#{償還支給決定日抽出の滞納期間} + 調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日} 
+                        AND 調定共通_介護継承."nokigenYMD" <![CDATA[<=]]> #{基準日min償還支給決定日抽出} 
                         AND #{受給支給決定日抽出の開始} <![CDATA[<=]]> 償還."ketteiYMD"
                         AND 償還."ketteiYMD" <![CDATA[<=]]> #{受給支給決定日抽出の終了}
                     </if>

@@ -82,7 +82,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
         }
         RString flag = RString.EMPTY;
         if (entity != null) {
-            entity.get呼出し元画面区分();
+            flag = entity.get呼出し元画面区分();
         }
         if (照会画面.equals(flag)) {
             set照会画面(source);
@@ -115,7 +115,9 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
         source.ninshosha_denshiKoin = 認証者ソースデータ.denshiKoin;
         source.renban = 定数_ONE;
         source.ocrRenban = 定数_ONE;
-        source.compSofubutsuAtesakiSource = 送付物宛先ソースデータ;
+        if (送付物宛先ソースデータ != null) {
+            source.compSofubutsuAtesakiSource = 送付物宛先ソースデータ;
+        }
         return source;
     }
 
@@ -142,7 +144,9 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
             } else {
                 source.umareYmd = entity.get生年月日().seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            source.shikibetsuCode = 個人.get識別コード();
+            if (個人.get識別コード() != null) {
+                source.shikibetsuCode = 個人.get識別コード();
+            }
         }
     }
 
