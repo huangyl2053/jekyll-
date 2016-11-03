@@ -296,9 +296,8 @@
         T1."hiHokenshaNo" = T2."hihokenshaNo"
         AND substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
         AND (T1."serviceTeikyoYM" <![CDATA[<=]]> substring(T2."tekiyoShuryoYMD",1,6)
-        OR
-        (substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
-        AND (T2."tekiyoShuryoYMD" IS NULL OR T2."tekiyoShuryoYMD" = '')))
+        OR T2."tekiyoShuryoYMD" IS NULL 
+        OR T2."tekiyoShuryoYMD" = '')
     </update>
 
     <update id="update給付実績中間高額一時5の更新2">
@@ -313,9 +312,8 @@
         T1."hiHokenshaNo" = T2."hihokenshaNo"
         AND substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
         AND (T1."serviceTeikyoYM" <![CDATA[<=]]> substring(T2."tekiyoShuryoYMD",1,6)
-        OR
-        (substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
-        AND (T2."tekiyoShuryoYMD" IS NULL OR T2."tekiyoShuryoYMD" = '')))
+        OR T2."tekiyoShuryoYMD" IS NULL
+        OR T2."tekiyoShuryoYMD" = '')
         )
     </update>
 
@@ -364,9 +362,8 @@
         T1."hiHokenshaNo" = T2."hihokenshaNo"
         AND substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
         AND (T1."serviceTeikyoYM" <![CDATA[<=]]> substring(T2."tekiyoShuryoYMD",1,6)
-        OR
-        (substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
-        AND (T2."tekiyoShuryoYMD" IS NULL OR T2."tekiyoShuryoYMD" = '')))
+        OR T2."tekiyoShuryoYMD" IS NULL 
+        OR T2."tekiyoShuryoYMD" = '')
     </update>
 
     <update id="update給付実績中間事業高額一時5の更新2">
@@ -382,10 +379,8 @@
         WHERE
         T1."hiHokenshaNo" = T2."hihokenshaNo"
         AND substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
-        AND (T1."serviceTeikyoYM" <![CDATA[<=]]> substring(T2."tekiyoShuryoYMD",1,6)
-        OR
-        (substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
-        AND (T2."tekiyoShuryoYMD" IS NULL OR T2."tekiyoShuryoYMD" = '')))
+        AND T2."tekiyoShuryoYMD" IS NULL 
+        OR T2."tekiyoShuryoYMD" = '')
         )
     </update>
 
@@ -569,6 +564,9 @@
         <id column="dbT3017_kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id column="dbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id column="dbT3017_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="給付実績基本情報高額一時" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
         <association property="世帯員所得判定明細高額一時" resultMap="ResultMap_TempSetaiinShotokuHanteiEntity"/>
     </resultMap>
@@ -2486,6 +2484,13 @@
 
     <!--chenaoqi START-->
     <resultMap id="resultMap_SetaiHihokenshaResultEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity" autoMapping="true">
+        <id column="tmpSetaiShotoku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tmpSetaiShotoku_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id column="tmpSetaiShotoku_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="tmpSetaiShotoku_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="dbT1001HihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id column="dbT1001HihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="世帯員所得情報Entity" resultMap="ResultMap_世帯員所得情報"/>
         <association property="被保険者情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
     </resultMap>
