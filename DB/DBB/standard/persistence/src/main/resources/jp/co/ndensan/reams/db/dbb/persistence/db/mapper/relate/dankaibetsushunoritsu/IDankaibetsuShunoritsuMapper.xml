@@ -136,21 +136,21 @@
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分  == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区コード1' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分  == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区1' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode1" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区コード2' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区2' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode2" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区コード3' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区3' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode3" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
