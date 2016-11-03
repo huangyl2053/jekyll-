@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 
 import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.HeijunkaTaishogaiRiyu;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.TaishoshaTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TaishoshaHachiTmpEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0860-030 yebangqiang
  */
-public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJohoTmpEntity> {
+public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJohoTmpHachiEntity> {
 
     private static final RString 対象外データTEMP_TABLE_NAME = new RString("TmpTaishogai");
     private static final RString 対象者データTEMP_TABLE_NAME = new RString("TmpTaishosha");
@@ -41,9 +41,9 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
     @Override
     protected void createWriter() {
         対象外データ一時tableWriter = new BatchEntityCreatedTempTableWriter(対象外データTEMP_TABLE_NAME,
-                TaishoshaTmpEntity.class, true);
+                TaishoshaHachiTmpEntity.class, true);
         対象者データ一時tableWriter = new BatchEntityCreatedTempTableWriter(対象者データTEMP_TABLE_NAME,
-                TaishoshaTmpEntity.class, true);
+                TaishoshaHachiTmpEntity.class, true);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
     }
 
     @Override
-    protected void process(FukaJohoTmpEntity fukaTmpEntity) {
+    protected void process(FukaJohoTmpHachiEntity fukaTmpEntity) {
         RString 備考コード = RString.EMPTY;
         final RString 調定事由 = ChoteiJiyuCode.仮徴収額の変更.getコード();
         if (調定事由.equals(fukaTmpEntity.getChoteiJiyu1()) || 調定事由.equals(fukaTmpEntity.getChoteiJiyu2())
@@ -60,7 +60,7 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
             備考コード = HeijunkaTaishogaiRiyu.仮徴収額修正者.getコード();
         }
 
-        TaishoshaTmpEntity 対象データTempEntity = new TaishoshaTmpEntity();
+        TaishoshaHachiTmpEntity 対象データTempEntity = new TaishoshaHachiTmpEntity();
         対象データTempEntity.set備考コード(備考コード);
         類型転換(対象データTempEntity, fukaTmpEntity);
         if (!備考コード.isEmpty()) {
@@ -70,7 +70,7 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
         }
     }
 
-    private void 類型転換(TaishoshaTmpEntity 対象データTempEntity, FukaJohoTmpEntity fukaTmpEntity) {
+    private void 類型転換(TaishoshaHachiTmpEntity 対象データTempEntity, FukaJohoTmpHachiEntity fukaTmpEntity) {
 
         対象データTempEntity.setChoteiNendo(fukaTmpEntity.getChoteiNendo());
         対象データTempEntity.setFukaNendo(fukaTmpEntity.getFukaNendo());

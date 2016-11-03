@@ -29,5 +29,6 @@ public class TokuchoHeinjunka8GatsuProcessParameter implements IBatchProcessPara
     private RString 増額平準化方法;
     private RString 減額平準化方法;
     private RString 出力順ID;
+    private int 出力ページ数;
     private UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 }
