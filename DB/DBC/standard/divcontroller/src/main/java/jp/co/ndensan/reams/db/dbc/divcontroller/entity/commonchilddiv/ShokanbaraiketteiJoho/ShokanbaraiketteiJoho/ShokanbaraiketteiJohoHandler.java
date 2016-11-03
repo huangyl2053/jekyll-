@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-0950-010 zuotao
  */
 public class ShokanbaraiketteiJohoHandler {
-    
+
     private final ShokanbaraiketteiJohoDiv div;
     private static final RString 差止控除区分_10 = new RString("10");
     private static final RString 差止控除区分_20 = new RString("20");
@@ -96,7 +96,7 @@ public class ShokanbaraiketteiJohoHandler {
         }
         div.getTxtSagakuGoke().setValue(差額支払金額合計);
     }
-    
+
     private void init(List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString 差止控除区分,
             KetteJoho 決定情報, RString mode, Decimal 上限金額, RString gyomuKbn) {
         boolean 差額登録フラグ = false;
@@ -142,7 +142,7 @@ public class ShokanbaraiketteiJohoHandler {
             div.getRdoShikyukubun().setDisabled(true);
         }
     }
-    
+
     private List<dgSyokanbaraikete_Row> set償還払決定一覧情報(boolean 差額登録フラグ,
             List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString gyomuKbn, Decimal 上限金額) {
         List<dgSyokanbaraikete_Row> dataRowList = new ArrayList<>();
@@ -189,7 +189,7 @@ public class ShokanbaraiketteiJohoHandler {
                 差額支払金額合計 = 差額支払金額合計.add(syokanbaraiketteJoho.getSagakuKingaku());
             }
             if (syokanbaraiketteJoho.getShiharaiKingaku() != null) {
-                支払金額合計 = 支払金額合計.add(row.getShiharaiKingaku().getValue());
+                支払金額合計 = 支払金額合計.add(initDecimal(row.getShiharaiKingaku().getValue()));
             }
             count++;
             dataRowList.add(row);
@@ -201,9 +201,13 @@ public class ShokanbaraiketteiJohoHandler {
         ViewStateHolder.put(ViewStateKeys.支払金額合計, 支払金額合計);
         return dataRowList;
     }
-    
+
+    private Decimal initDecimal(Decimal kingaku) {
+        return kingaku == null ? new Decimal(0) : kingaku;
+    }
+
     private void set決定情報(KetteJoho 決定情報, RString 支給区分) {
-        
+
         if (決定情報 != null) {
             if (支給区分_不支給.equals(支給区分)) {
                 div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
@@ -211,7 +215,7 @@ public class ShokanbaraiketteiJohoHandler {
                 div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
             }
         }
-        
+
         if (支給区分_支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(false);
             div.getTxtZogentani().setDisabled(false);
@@ -226,7 +230,7 @@ public class ShokanbaraiketteiJohoHandler {
             div.getTxtFuSyikyuriyu1().setValue(RString.EMPTY);
             div.getTxtFushikyuriyu2().setValue(RString.EMPTY);
             if (決定情報 != null && 決定情報.getZougenten() != null) {
-                
+
                 div.getTxtZogentani().setValue(new Decimal(決定情報.getZougenten()));
             } else {
                 div.getTxtZogentani().setValue(Decimal.ZERO);
@@ -255,20 +259,20 @@ public class ShokanbaraiketteiJohoHandler {
             div.getRdoShikyukubun().setDisabled(false);
         }
     }
-    
+
     private List<SyokanbaraiketteJoho> get償還払決定一覧情報(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM,
             RString seiriNo, RString gyomuKbn) {
-        
+
         List<SyokanbaraiketteJoho> 償還払決定一覧情報 = null;
         SyokanbaraiketteJohoManager manager = SyokanbaraiketteJohoManager.createInstance();
         if (GYOKUKBN_住宅改修.equals(gyomuKbn)) {
-            
+
             償還払決定一覧情報 = manager.getSyokanbaraiketteJyutakuList(hiHokenshaNo, serviceTeikyoYM, seiriNo).records();
             div.getDgSyokanbaraikete().getGridSetting().getColumn("serviceShuruiName").setVisible(true);
             div.getDgSyokanbaraikete().getGridSetting().getColumn("fukushiYoguName").setVisible(false);
             div.getDgSyokanbaraikete().getGridSetting().getColumn("jigyoshaNo").setVisible(false);
         } else if (GYOKUKBN_福祉用具販売費.equals(gyomuKbn)) {
-            
+
             償還払決定一覧情報 = manager.getSyokanbaraiketteFukushiList(hiHokenshaNo, serviceTeikyoYM, seiriNo).records();
             div.getDgSyokanbaraikete().getGridSetting().getColumn("serviceShuruiName").setVisible(false);
             div.getDgSyokanbaraikete().getGridSetting().getColumn("fukushiYoguName").setVisible(true);
@@ -317,7 +321,7 @@ public class ShokanbaraiketteiJohoHandler {
         }
         return 償還払決定一覧情報;
     }
-    
+
     private void setState(RString 支給区分) {
         div.getTxtZogenriyu().setDisabled(true);
         div.getTxtZogentani().setDisabled(true);
@@ -341,7 +345,7 @@ public class ShokanbaraiketteiJohoHandler {
             div.getRdoShikyukubun().setDisabled(true);
         }
     }
-    
+
     private Decimal set支払金額(SyokanbaraiketteJoho syokanbaraiketteJoho,
             Decimal 残上限金額, dgSyokanbaraikete_Row row, RString mode) {
         Decimal 単位金額 = Decimal.ZERO;

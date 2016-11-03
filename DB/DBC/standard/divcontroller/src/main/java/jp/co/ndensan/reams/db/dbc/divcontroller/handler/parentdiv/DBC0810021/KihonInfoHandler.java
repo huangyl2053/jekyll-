@@ -168,8 +168,8 @@ public class KihonInfoHandler {
         if (shokanKihon.get居宅サービス計画作成区分コード() != null
                 && !shokanKihon.get居宅サービス計画作成区分コード().isEmpty()
                 && !自己作成.equals(shokanKihon.get居宅サービス計画作成区分コード())) {
-            if (shokanKihon.get事業者番号() != null) {
-                div.getPanelKihon().getPanelKyotaku().getTxtJigyosha().setValue(shokanKihon.get事業者番号().value());
+            if (shokanKihon.get居宅サービス計画事業者番号() != null) {
+                div.getPanelKihon().getPanelKyotaku().getTxtJigyosha().setValue(shokanKihon.get居宅サービス計画事業者番号().value());
             }
             if (kaigoJigyoshaEntity != null && kaigoJigyoshaEntity.getEntity() != null && kaigoJigyoshaEntity.getEntity()
                     .getJigyoshaName() != null) {

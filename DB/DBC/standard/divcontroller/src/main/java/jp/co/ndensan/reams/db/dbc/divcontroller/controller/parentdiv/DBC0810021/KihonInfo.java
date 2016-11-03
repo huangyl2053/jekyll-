@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0810021;
 
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.KaigoJigyoshaReturnEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810021.KihonInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0810021.KihonInfoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -63,8 +63,11 @@ public class KihonInfo {
                 .getShokanbarayiSeikyukihonDetail(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
 
         if (shokanKihon != null) {
-            KaigoJigyoshaReturnEntity kaigoJigyoshaEntity = ShokanbaraiJyokyoShokai.createInstance()
-                    .getKaigoJigyoshaInfo(サービス年月, 事業者番号);
+            KaigoJigyoshaReturnEntity kaigoJigyoshaEntity = null;
+            if (shokanKihon.get居宅サービス計画事業者番号() != null) {
+                kaigoJigyoshaEntity = ShokanbaraiJyokyoShokai.createInstance()
+                        .getKaigoJigyoshaInfo(サービス年月, shokanKihon.get居宅サービス計画事業者番号());
+            }
             getHandler(div).set基本内容エリア(shokanKihon, kaigoJigyoshaEntity, サービス年月, 様式番号);
         }
 
