@@ -37,7 +37,7 @@
         ON      "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"
             AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
             AND "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"
-        LEFT JOIN (SELECT 台帳A."shikibetsuCode",
+        INNER JOIN (SELECT 台帳A."shikibetsuCode",
                           台帳WK."最新被保険者番号",
                           台帳WK."サービス提供年月"
                    FROM rgdb."DbT1001HihokenshaDaicho" AS 台帳A
@@ -139,7 +139,7 @@
         ON      "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."hihokenshaNo"
             AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
             AND "DbT3110JigyoKogakuShikyuShinsei"."rirekiNo" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."rirekiNo"
-        LEFT JOIN (SELECT 台帳A."shikibetsuCode",
+        INNER JOIN (SELECT 台帳A."shikibetsuCode",
                           台帳WK."最新被保険者番号",
                           台帳WK."サービス提供年月"
                    FROM rgdb."DbT1001HihokenshaDaicho" AS 台帳A
