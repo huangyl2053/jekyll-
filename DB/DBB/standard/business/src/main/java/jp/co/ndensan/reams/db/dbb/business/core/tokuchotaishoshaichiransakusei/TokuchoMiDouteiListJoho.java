@@ -48,13 +48,13 @@ public class TokuchoMiDouteiListJoho {
             this.年金コード = resultEntity.getDbt2019entity().getNenkinCode();
         }
         if (resultEntity != null && resultEntity.getUet0511entity() != null) {
-            Code gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode();
+            Code gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode().value();
             if (gimushaCode != null) {
                 this.特別徴収義務者 = gimushaCode.value();
             }
             this.カナ氏名 = resultEntity.getUet0511entity().getDtKanaShimei();
             this.生年月日 = resultEntity.getUet0511entity().getDtBirthDay();
-            RString seibetsuCode = resultEntity.getUet0511entity().getDtSeibetsu();
+            RString seibetsuCode = resultEntity.getUet0511entity().getDtSeibetsu().getColumnValue();
             this.性別 = seibetsuCode;
         }
     }

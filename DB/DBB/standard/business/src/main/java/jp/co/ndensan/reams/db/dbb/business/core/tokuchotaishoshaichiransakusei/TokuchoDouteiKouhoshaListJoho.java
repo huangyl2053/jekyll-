@@ -56,7 +56,7 @@ public class TokuchoDouteiKouhoshaListJoho {
         if (resultEntity != null && resultEntity.getUet0511entity() != null) {
             this.年金情報_氏名 = resultEntity.getUet0511entity().getDtKanjiShimei();
             this.年金情報_生年月日 = resultEntity.getUet0511entity().getDtBirthDay();
-            RString seibetsuCode = resultEntity.getUet0511entity().getDtSeibetsu();
+            RString seibetsuCode = resultEntity.getUet0511entity().getDtSeibetsu().getColumnValue();
             this.年金情報_性別 = seibetsuCode;
             this.年金情報_連番 = new RString(resultEntity.getUet0511entity().getRenban());
             if (resultEntity.getUet0511entity().getShoriNendo() != null) {
