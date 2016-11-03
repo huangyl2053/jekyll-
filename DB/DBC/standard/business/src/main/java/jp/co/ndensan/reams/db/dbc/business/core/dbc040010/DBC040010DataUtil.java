@@ -1251,6 +1251,7 @@ public class DBC040010DataUtil {
             RString 対象月 = suffixList.get(index);
             insertEntity.setTaishoM(対象月);
             set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, 対象月);
+            insertEntities.add(insertEntity);
         }
         return insertEntities;
     }
