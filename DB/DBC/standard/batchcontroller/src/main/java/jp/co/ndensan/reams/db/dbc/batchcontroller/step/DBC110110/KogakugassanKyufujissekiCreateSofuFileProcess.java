@@ -145,11 +145,11 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
         } else {
             csvWriter.writeLine(getEndEntity(INT_1));
             csvWriter.close();
-            returnEntity.set総出力件数(総出力件数);
-            returnEntity.set入力ファイルパス(入力ファイルパス);
-            returnEntity.set出力ファイルパス(csvFilePath);
-            outReturnEntity.setValue(returnEntity);
         }
+        returnEntity.set総出力件数(総出力件数);
+        returnEntity.set入力ファイルパス(入力ファイルパス);
+        returnEntity.set出力ファイルパス(csvFilePath);
+        outReturnEntity.setValue(returnEntity);
     }
 
     private KogakuGassanKyufuJissekiSofuDataEntity setデータレコード(KogakuGassanKyufuJissekiSofuEntity entity, int 番号) {
