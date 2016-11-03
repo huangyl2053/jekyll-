@@ -141,11 +141,12 @@ public class KubunShikyuGendogaku {
      */
     public ResponseData<KubunShikyuGendogakuDiv> onSelect_Back(
             KubunShikyuGendogakuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        KubunShikyuGendogakuHandler handler = getHandler(div);
+        if (!ResponseHolder.isReRequest() && !div.getServiceShuruiShousai().getDdlServiceBunruiCode().isDisabled()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            KubunShikyuGendogakuHandler handler = getHandler(div);
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || div.getServiceShuruiShousai().getDdlServiceBunruiCode().isDisabled()) {
             handler.setEnable();
             handler.clearValue();
             handler.setServiceShuruiShousaiEnable(true);
@@ -167,10 +168,10 @@ public class KubunShikyuGendogaku {
         if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        if (!ResponseHolder.isReRequest() && !div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()) {
+        if (!ResponseHolder.isReRequest() && !div.getServiceShuruiShousai().getDdlServiceBunruiCode().isDisabled()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
-        if (!ResponseHolder.isReRequest() && div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()) {
+        if (!ResponseHolder.isReRequest() && div.getServiceShuruiShousai().getDdlServiceBunruiCode().isDisabled()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -182,7 +183,6 @@ public class KubunShikyuGendogaku {
             KaigoServiceShuruiIdentifier identifier = new KaigoServiceShuruiIdentifier(
                     new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
             KaigoServiceShurui result = holder.getKogakuGassanJikoFutanGaku(identifier);
-            FlexibleYearMonth 提供終了年月 = result.get提供終了年月();
             if (result == null) {
                 result = new KaigoServiceShurui(
                         new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
@@ -190,10 +190,10 @@ public class KubunShikyuGendogaku {
             } else {
                 if (div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()
                         && div.getServiceShuruiShousai().getTxtServiceMeisho().isDisabled()) {
-                    result = 削除(result, manager, サービス種類コード, 提供開始年月);
+                    result = 削除(result, manager);
                 } else {
                     if ((!div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().isDisabled())
-                            && 提供終了年月 != null && 提供終了年月.isEmpty()) {
+                            && result.get提供終了年月() != null && result.get提供終了年月().isEmpty()) {
                         result = result.createBuilderForEdit()
                                 .set提供終了年月(new FlexibleYearMonth(提供開始年月).minusMonth(1)).build();
                     } else {
@@ -256,13 +256,12 @@ public class KubunShikyuGendogaku {
         RealInitialLocker.release(排他キー);
     }
 
-    private KaigoServiceShurui 削除(KaigoServiceShurui result, KubunShikyuGendogakuManager manager,
-            RString サービス種類コード, RString 提供開始年月) {
+    private KaigoServiceShurui 削除(KaigoServiceShurui result, KubunShikyuGendogakuManager manager) {
         if (result.get提供開始年月().minusMonth(1) == result.get提供終了年月()) {
             result = result.createBuilderForEdit()
                     .set提供終了年月(new FlexibleYearMonth(RString.EMPTY)).build();
         } else {
-            manager.データを物理削除する(new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
+            manager.データを物理削除する(result.toEntity());
         }
         return result;
     }
