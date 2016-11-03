@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -15,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JutakuKaishuRiyushoTesuryoKettei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-2870-010 zhangruitao
  */
 public class JutakuKaishuRiyushoTesuryoKetteiBuilder {
 
@@ -54,12 +57,12 @@ public class JutakuKaishuRiyushoTesuryoKetteiBuilder {
     /**
      * 決定年月日を設定します。
      *
-     * @param 決定年月日 決定年月日
+     * @param 証記載保険者番号 証記載保険者番号
      * @return {@link JutakuKaishuRiyushoTesuryoKetteiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoKetteiBuilder set決定年月日(FlexibleDate 決定年月日) {
-        requireNonNull(決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定年月日"));
-        entity.setKetteiYMD(決定年月日);
+    public JutakuKaishuRiyushoTesuryoKetteiBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        entity.setShoKisaiHokenshaNo(証記載保険者番号);
         return this;
     }
 

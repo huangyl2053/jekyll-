@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001;
 
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb014001.FuchoKarisanteiFukaMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014001.FuchoKarisanteiFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FukaJohoCalculateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
@@ -17,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -45,17 +50,27 @@ public class SelectZenFukaDataProcess extends BatchKeyBreakBase<FukaJohoCalculat
     private static final int INDEX_12 = 12;
     private static final int INDEX_13 = 13;
     private static final int INDEX_14 = 14;
+    private static final int NUM_1 = 1;
+    private static final int NUM_4 = 4;
     private static final RString 徴収方法1 = new RString("1");
     private static final RString 徴収方法2 = new RString("2");
     private FukaJohoTempEntity 中間Entity;
     private FuchoKarisanteiFukaProcessParameter parameter;
+    private FuchoKarisanteiFukaMybatisParameter param;
+    private RDate 調定年度開始日;
+    private RString 普通徴収_仮算定賦課方法;
 
     @BatchWriter
     IBatchTableWriter tempTableWriter;
 
     @Override
     protected void initialize() {
+        調定年度開始日 = new RDate(parameter.get調定年度().getYearValue(), NUM_4, NUM_1);
         中間Entity = new FukaJohoTempEntity();
+        param = parameter.toMybatisParameter();
+        普通徴収_仮算定賦課方法
+                = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
+        param.set普通徴収_仮算定賦課方法(普通徴収_仮算定賦課方法);
     }
 
     @Override

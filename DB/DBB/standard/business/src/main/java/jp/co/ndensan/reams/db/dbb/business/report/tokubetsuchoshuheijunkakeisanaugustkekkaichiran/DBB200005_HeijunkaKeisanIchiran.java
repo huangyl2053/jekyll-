@@ -28,12 +28,12 @@ public enum DBB200005_HeijunkaKeisanIchiran implements IReportItems {
      * 世帯コード
      */
     世帯コード(new RString("0008"), new RString("世帯コード"),
-            new RString("\"").concat(new RString("setaiCode").concat(new RString("\"")))),
+            new RString("\"").concat(new RString("ShikibetsuTaisho_setaiCode").concat(new RString("\"")))),
     /**
      * 識別コード
      */
     識別コード(new RString("0009"), new RString("識別コード"),
-            new RString("\"").concat(new RString("shikibetsuCode").concat(new RString("\"")))),
+            new RString("\"").concat(new RString("ShikibetsuTaisho_shikibetsuCode").concat(new RString("\"")))),
     /**
      * 市町村コード
      */

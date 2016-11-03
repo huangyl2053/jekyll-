@@ -4,9 +4,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 住宅改修理由書作成手数料請求決定テーブルの項目定義クラスです。
+ *
+ * @reamsid_L DBC-2870-010 zhangruitao
  */
 public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     /**
      * insertDantaiCd
      */
@@ -81,6 +84,10 @@ public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition
      */
     furikomiTsuchiSakuseiYMD(2147483647, 0),
     /**
+     * 証記載保険者番号
+     */
+    shoKisaiHokenshaNo(2147483647, 0),
+    /**
      * 受取年月
      */
     uketoriYM(2147483647, 0),
@@ -99,7 +106,7 @@ public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -108,7 +115,7 @@ public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

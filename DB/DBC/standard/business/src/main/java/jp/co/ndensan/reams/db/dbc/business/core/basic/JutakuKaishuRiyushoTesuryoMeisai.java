@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -118,10 +117,9 @@ public class JutakuKaishuRiyushoTesuryoMeisai
      *
      * @return 識別コード
      */
-    public ShikibetsuCode get識別コード() {
-        return entity.getShikibetsuCode();
-    }
-
+//    public ShikibetsuCode get識別コード() {
+//        return entity.getShikibetsuCode();
+//    }
     /**
      * サービスコードを返します。
      *
