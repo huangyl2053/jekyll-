@@ -94,6 +94,9 @@ public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<Shoto
         entity.setHihokennshaKubunCode(RString.EMPTY);
         entity.setSeibetsuCode(所得照会票データ.getSeibetsuCode());
         entity.setJuminShubetsuCode(所得照会票データ.getJuminShubetsuCode());
+        RString torokuTodokedeYMD = 所得照会票データ.getTorokuTodokedeYMD() == null
+                ? RString.EMPTY : new RString(所得照会票データ.getTorokuTodokedeYMD().toString());
+        entity.setTorokuTodokedeYMD(torokuTodokedeYMD);
         return entity;
     }
 

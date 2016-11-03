@@ -441,7 +441,8 @@
                     rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD" AS 資格情報_資格喪失年月日,
                     rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" AS 資格情報_資格喪失事由コード,
                     rgdb."DbV1001HihokenshaDaicho"."hihokennshaKubunCode" AS 資格情報_被保険者区分コード,
-                    rgdb."DbV1001HihokenshaDaicho"."jushochiTokureiFlag" AS 資格情報_住所地特例フラグ
+                    rgdb."DbV1001HihokenshaDaicho"."jushochiTokureiFlag" AS 資格情報_住所地特例フラグ,
+                    rgdb."DbV1001HihokenshaDaicho"."shichosonCode" AS 資格情報_市町村コード
                FROM rgdb."DbV1001HihokenshaDaicho"
                WHERE rgdb."DbV1001HihokenshaDaicho"."shikakuShutokuYMD"  <![CDATA[<=]]> #{基準日}
                AND (rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NULL 

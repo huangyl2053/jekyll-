@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1110001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohoichiranhyo.TaishoShuryoYmd;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB111001.DBB111001_ShotokujohoIchiranhyoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001.ShotokuJohoIchiranHyoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001.dgShichosonIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohoichiranhyo.ShotokuJohoIchiranhyo;
@@ -229,7 +229,7 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
         RTime 抽出終了時分秒 = div.getTxtKakuteiEdTime().getValue();
         YMDHMS 抽出開始 = new YMDHMS(抽出開始年月日, 抽出開始時分秒);
         YMDHMS 抽出終了 = new YMDHMS(抽出終了年月日, 抽出終了時分秒);
-        if (抽出終了.isBefore(抽出開始)) {
+        if (!抽出終了.isEmpty() && !抽出開始.isEmpty() && 抽出終了.isBefore(抽出開始)) {
             return true;
         }
         return false;
@@ -250,7 +250,7 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
             RTime 抽出終了時分秒 = row.getTxtShoriEdTime().getValue();
             YMDHMS 抽出開始 = new YMDHMS(抽出開始年月日, 抽出開始時分秒);
             YMDHMS 抽出終了 = new YMDHMS(抽出終了年月日, 抽出終了時分秒);
-            if (抽出終了.isBefore(抽出開始)) {
+            if (!抽出終了.isEmpty() && !抽出開始.isEmpty() && 抽出終了.isBefore(抽出開始)) {
                 flag = true;
                 break;
             }

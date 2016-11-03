@@ -24,6 +24,7 @@ public class HihokenshaAtenaResultEntity {
     private LasdecCode 市町村コード;
     private RString 広域内住所地特例フラグ;
     private LasdecCode 広住特措置元市町村コード;
+    private FurikomiDetailTempTableEntity 振込明細Entity;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
 
 }

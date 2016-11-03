@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JigyobunShikyugakuCalcPanel {
 
     private static final RString イベント_対象者特定 = new RString("DBZ0200001_対象者特定");
-    private static final RString イベント_終了 = new RString("DBZ0200001_終了");
     private static final RString 被保険者台帳TXT = new RString("被保険者台帳");
 
     /**
@@ -54,7 +53,7 @@ public class JigyobunShikyugakuCalcPanel {
      */
     public ResponseData<JigyobunShikyugakuCalcPanelDiv> onActive(JigyobunShikyugakuCalcPanelDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
-        if (イベント_対象者特定.equals(イベント名) || イベント_終了.equals(イベント名)) {
+        if (イベント_対象者特定.equals(イベント名) && ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
             TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             HihokenshaNo 被保番号 = 資格対象者.get被保険者番号();
             if (被保番号 != null && !被保番号.isEmpty()) {

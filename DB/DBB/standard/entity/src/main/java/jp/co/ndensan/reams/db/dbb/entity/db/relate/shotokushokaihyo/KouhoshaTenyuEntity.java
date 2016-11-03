@@ -44,6 +44,8 @@ public class KouhoshaTenyuEntity {
     private SetaiCode 世帯コード;
     private FlexibleDate 生年月日;
     private FlexibleDate 登録異動年月日;
+    private FlexibleDate 登録届出年月日;
+    private RString 性別コード;
     private ZenkokuJushoCode 転入前全国住所コード;
     private RString 転入前住所;
     private RString 転入前番地;

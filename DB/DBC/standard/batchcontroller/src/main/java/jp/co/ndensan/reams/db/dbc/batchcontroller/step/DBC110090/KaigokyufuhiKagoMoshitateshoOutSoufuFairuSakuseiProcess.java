@@ -128,10 +128,9 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
                     .get(ConfigNameDBC.国保連送付媒体_過誤申立総合Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             this.交換情報識別番号 = KokuhorenSofuKokanJohoShikibetsuBango.総合事業費過誤申立書情報.getコード();
         }
-
+        RString spoolWorkPath = Path.getTmpDirectoryPath();
+        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         if (Encode.UTF_8.equals(processParameter.get文字コード())) {
-            RString spoolWorkPath = Path.getTmpDirectoryPath();
-            eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
             入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(出力ファイル名));
         } else {
             入力ファイルパス = eucFilePath;

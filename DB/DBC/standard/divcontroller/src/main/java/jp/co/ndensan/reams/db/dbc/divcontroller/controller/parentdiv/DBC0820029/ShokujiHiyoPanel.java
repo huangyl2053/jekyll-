@@ -93,7 +93,7 @@ public class ShokujiHiyoPanel {
         }
         getHandler(div).setヘッダーエリア(サービス提供年月, 申請日, 事業者番号, 明細番号, 様式番号);
 
-        if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+        if (!サービス提供年月.isEmpty() && サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
             getHandler(div).set平成１５年３月_状態();
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
@@ -108,12 +108,12 @@ public class ShokujiHiyoPanel {
             }
             ViewStateHolder.put(ViewStateKeys.食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
-        if (平成１５年３月.isBefore(サービス提供年月)
+        if (!サービス提供年月.isEmpty() && 平成１５年３月.isBefore(サービス提供年月)
                 && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
 
             getデータ(div, 被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         }
-        if (平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
+        if (!サービス提供年月.isEmpty() && 平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
             getHandler(div).set平成17年１０月_状態();
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
@@ -293,7 +293,7 @@ public class ShokujiHiyoPanel {
             RString 処理モード,
             FlexibleYearMonth サービス提供年月) {
         if (!ResponseHolder.isReRequest()) {
-            if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+            if (!サービス提供年月.isEmpty() && サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
                 ValidationMessageControlPairs validPairs = getValidationHandler(div).check食事費用登録エリア１必須入力();
                 validationCheck(validPairs, div);
             }
