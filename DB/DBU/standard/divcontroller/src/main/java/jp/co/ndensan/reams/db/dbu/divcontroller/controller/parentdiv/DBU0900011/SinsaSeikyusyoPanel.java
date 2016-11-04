@@ -36,7 +36,7 @@ public class SinsaSeikyusyoPanel {
     private static final RString 追加 = new RString("追加状態");
     private static final RString 修正 = new RString("修正状態");
     private static final RString 削除 = new RString("削除状態");
-    private static final RString 発行ボタン = new RString("btnReportPublish");    
+    private static final RString 発行ボタン = new RString("btnReportPublish");
     private static final RString 弁明登録 = new RString("DBUUC09100");
     private BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho;
     private final BenmeiTorokuManager benmeiTorokuManager = BenmeiTorokuManager.createInstance();
@@ -60,7 +60,7 @@ public class SinsaSeikyusyoPanel {
         getHandler(div).onLoad(sinsaSeikyusyoJohoList);
         return createResponse(div);
     }
-    
+
     /**
      * 審査請求書登録_一覧情報。
      *
@@ -70,7 +70,7 @@ public class SinsaSeikyusyoPanel {
     public ResponseData<SinsaSeikyusyoPanelDiv> onActive(SinsaSeikyusyoPanelDiv div) {
         return this.onLoad(div);
     }
-    
+
     /**
      * 追加ボタン。<br/>
      *
@@ -101,7 +101,7 @@ public class SinsaSeikyusyoPanel {
         }
         if (getHandler(div).getUIContainerId().equals(弁明登録)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(発行ボタン, false);
-        }        
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -132,7 +132,7 @@ public class SinsaSeikyusyoPanel {
      *
      * @param div SinsaSeikyusyoPanelDiv
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
-     */    
+     */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnSakuzyo(SinsaSeikyusyoPanelDiv div) {
         TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
         benmeiTorokuMeisaiJoho = benmeiTorokuManager.getBenmeiTorokuMeisaiJoho(key.get識別コード(),
@@ -140,7 +140,7 @@ public class SinsaSeikyusyoPanel {
                 new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue() == null
                         ? RString.EMPTY : div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
         if (benmeiTorokuMeisaiJoho == null) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("削除データ"));
+            throw new ApplicationException(UrErrorMessages.削除不可.getMessage().replace("弁明情報が登録されていない"));
         }
         ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
         ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
@@ -155,7 +155,7 @@ public class SinsaSeikyusyoPanel {
         }
         return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(削除);
     }
-    
+
     /**
      * 弁明書発行。<br/>
      *
@@ -183,5 +183,5 @@ public class SinsaSeikyusyoPanel {
 
     private ResponseData<SinsaSeikyusyoPanelDiv> createResponse(SinsaSeikyusyoPanelDiv div) {
         return ResponseData.of(div).respond();
-    }    
+    }
 }

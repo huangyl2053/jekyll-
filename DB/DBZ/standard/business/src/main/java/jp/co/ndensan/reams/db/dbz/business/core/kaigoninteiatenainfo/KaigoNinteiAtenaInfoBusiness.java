@@ -154,6 +154,15 @@ public class KaigoNinteiAtenaInfoBusiness {
     public RString get氏名() {
         return kaigoEntity.getHihokenshaName();
     }
+    
+    /**
+     * 氏名カナを返します。
+     *
+     * @return 氏名カナ
+     */
+    public RString get氏名カナ() {
+        return kaigoEntity.getHihokenshaKana();
+    }
 
     /**
      * 生年月日を返します。

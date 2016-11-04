@@ -38,6 +38,7 @@ public class KohoshaIchiran {
     public KohoshaIchiran(KohoshaIchiranEntity entity) {
         this.entity = new KohoshaIchiranEntity();
         this.entity.set介護認定審査会優先振分区分コード(checkNullForCode(entity.get介護認定審査会優先振分区分コード()));
+        this.entity.set厚労省IF識別コード(checkNullForCode(entity.get厚労省IF識別コード()));
         this.entity.set被保険者番号(checkNullForRString(entity.get被保険者番号()));
         this.entity.set被保険者氏名(checkNullForAtenaKanaMeisho(entity.get被保険者氏名()));
         this.entity.set性別(checkNullForCode(entity.get性別()));
@@ -47,6 +48,9 @@ public class KohoshaIchiran {
         this.entity.set前回認定有効期間_開始(checkNullForFlexibleDate(entity.get前回認定有効期間_開始()));
         this.entity.set前回認定有効期間_終了(checkNullForFlexibleDate(entity.get前回認定有効期間_終了()));
         this.entity.set要介護認定一次判定年月日(checkNullForFlexibleDate(entity.get要介護認定一次判定年月日()));
+        this.entity.set要介護認定一次判定結果コード(checkNullForCode(entity.get要介護認定一次判定結果コード()));
+        this.entity.set要介護認定前回一次判定結果コード(checkNullForCode(entity.get要介護認定前回一次判定結果コード()));
+        this.entity.set二次判定要介護状態区分コード(checkNullForCode(entity.get二次判定要介護状態区分コード()));
         this.entity.setマスキング完了年月日(checkNullForFlexibleDate(entity.getマスキング完了年月日()));
         this.entity.set市町村名称(checkNullForRString(entity.get市町村名称()));
         this.entity.set証記載保険者番号(checkNullForShoKisaiHokenshaNo(entity.get証記載保険者番号()));
@@ -279,4 +283,39 @@ public class KohoshaIchiran {
         return entity.get申請書管理番号();
     }
 
+    /**
+     * get厚労省IF識別コード
+     *
+     * @return 厚労省IF識別コード
+     */
+    public Code get厚労省IF識別コード() {
+        return entity.get厚労省IF識別コード();
+    }
+
+    /**
+     * get要介護認定一次判定結果コード
+     *
+     * @return 要介護認定一次判定結果コード
+     */
+    public Code get要介護認定一次判定結果コード() {
+        return entity.get要介護認定一次判定結果コード();
+    }
+
+    /**
+     * get要介護認定前回一次判定結果コード
+     *
+     * @return 要介護認定前回一次判定結果コード
+     */
+    public Code get要介護認定前回一次判定結果コード() {
+        return entity.get要介護認定前回一次判定結果コード();
+    }
+
+    /**
+     * get二次判定要介護状態区分コード
+     *
+     * @return 二次判定要介護状態区分コード
+     */
+    public Code get二次判定要介護状態区分コード() {
+        return entity.get二次判定要介護状態区分コード();
+    }
 }

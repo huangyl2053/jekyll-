@@ -137,8 +137,12 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         if (!RString.isNullOrEmpty(合議体名称)) {
             開催番号 = 合議体名称.substring(1, 合議体名称.length() - LENGTH_4);
         }
-
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.開催番号, 開催番号);
+        RString 開催年月日 = RString.EMPTY;
+        if (!div.getDgShinsakaiIchiran().getActiveRow().getKaisaiYoteiDate().getValue().isEmpty()) {
+            開催年月日 = new RString(div.getDgShinsakaiIchiran().getActiveRow().getKaisaiYoteiDate().getValue().toString());
+        }
+        ViewStateHolder.put(ViewStateKeys.開催番号, 開催番号);
+        ViewStateHolder.put(ViewStateKeys.開催年月日, 開催年月日);
         div.setHdnSelectedGridLine(new RString(String.valueOf(div.getDgShinsakaiIchiran().getActiveRow().getId())));
     }
 

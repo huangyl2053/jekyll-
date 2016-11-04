@@ -9,6 +9,7 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -33,23 +34,29 @@ public class JutakuKaishuRiyushoTesuryoKettei
      * コンストラクタです。<br/>
      * 住宅改修理由書作成手数料請求決定の新規作成時に使用します。
      *
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
      * @param 介護住宅改修理由書作成事業者番号 介護住宅改修理由書作成事業者番号
-     * @param 決定年月日 決定年月日
+     * @param 集計関連付け番号 ShoKisaiHokenshaNo
      * @param 履歴番号 履歴番号
      */
-    public JutakuKaishuRiyushoTesuryoKettei(JigyoshaNo 介護住宅改修理由書作成事業者番号,
-            FlexibleDate 決定年月日,
+    public JutakuKaishuRiyushoTesuryoKettei(
+            ShoKisaiHokenshaNo 証記載保険者番号,
+            JigyoshaNo 介護住宅改修理由書作成事業者番号,
+            RString 集計関連付け番号,
             Decimal 履歴番号) {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(介護住宅改修理由書作成事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成事業者番号"));
-        requireNonNull(決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定年月日"));
+        requireNonNull(集計関連付け番号, UrSystemErrorMessages.値がnull.getReplacedMessage("集計関連付け番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity();
+        this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setRiyushoSakuseiJigyoshaNo(介護住宅改修理由書作成事業者番号);
-        this.entity.setKetteiYMD(決定年月日);
+        this.entity.setShukeiNo(集計関連付け番号);
         this.entity.setRirekiNo(履歴番号.intValue());
         this.id = new JutakuKaishuRiyushoTesuryoKetteiIdentifier(
+                証記載保険者番号,
                 介護住宅改修理由書作成事業者番号,
-                決定年月日,
+                集計関連付け番号,
                 履歴番号
         );
     }
@@ -63,8 +70,9 @@ public class JutakuKaishuRiyushoTesuryoKettei
     public JutakuKaishuRiyushoTesuryoKettei(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修理由書作成手数料請求決定"));
         this.id = new JutakuKaishuRiyushoTesuryoKetteiIdentifier(
+                entity.getShoKisaiHokenshaNo(),
                 entity.getRiyushoSakuseiJigyoshaNo(),
-                entity.getKetteiYMD(),
+                entity.getShukeiNo(),
                 new Decimal(entity.getRirekiNo()));
     }
 
@@ -93,12 +101,12 @@ public class JutakuKaishuRiyushoTesuryoKettei
     }
 
     /**
-     * 決定年月日を返します。
+     * 集計関連付け番号を返します。
      *
-     * @return 決定年月日
+     * @return 集計関連付け番号
      */
-    public FlexibleDate get決定年月日() {
-        return entity.getKetteiYMD();
+    public RString get集計関連付け番号() {
+        return entity.getShukeiNo();
     }
 
     /**

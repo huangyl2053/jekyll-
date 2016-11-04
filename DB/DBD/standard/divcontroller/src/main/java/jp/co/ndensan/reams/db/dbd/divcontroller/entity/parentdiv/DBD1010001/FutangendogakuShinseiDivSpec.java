@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -163,14 +164,14 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                         row1 = list.get(i);
                         適用日１ = row1.getTxtTekiyoYMD().getValue();
                         有効期限１ = row1.getTxtYukoKigenYMD().getValue();
-                        if (削除.equals(row1.getJotai()) || 適用日１ == null || 適用日１.isEmpty() || 有効期限１ == null || 有効期限１.isEmpty()) {
+                        if (削除.equals(row1.getJotai()) || 適用日１ == null || 適用日１.isEmpty() || 有効期限１ == null || 有効期限１.isEmpty() || row1.getKetteiKubun().equals(KetteiKubun.承認しない.get名称())) {
                             continue;
                         }
                         for (int j = i + 1; j < size; j++) {
                             row2 = list.get(j);
                             適用日２ = row2.getTxtTekiyoYMD().getValue();
                             有効期限２ = row2.getTxtYukoKigenYMD().getValue();
-                            if (削除.equals(row2.getJotai()) || 適用日２ == null || 適用日２.isEmpty() || 有効期限２ == null || 有効期限２.isEmpty()) {
+                            if (削除.equals(row2.getJotai()) || 適用日２ == null || 適用日２.isEmpty() || 有効期限２ == null || 有効期限２.isEmpty() || row2.getKetteiKubun().equals(KetteiKubun.承認しない.get名称())) {
                                 continue;
                             }
                             if (適用日２.isBeforeOrEquals(適用日１) && 有効期限１.isBeforeOrEquals(有効期限２)

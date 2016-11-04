@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 特別地域加算減免・訪問介護利用者負担減額決定通知書ボディEditorです。
@@ -341,7 +342,12 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         // source.jusho4 = sofubutsuAtesakiSource.j;
-        source.jushoText = sofubutsuAtesakiSource.jushoText;
+        if (sofubutsuAtesakiSource.jushoText == null) {
+            RStringBuilder jusho1 = new RStringBuilder(sofubutsuAtesakiSource.jusho1);
+            source.jushoText = jusho1.append(sofubutsuAtesakiSource.jusho2).append(sofubutsuAtesakiSource.jusho3).toRString();
+        } else {
+            source.jushoText = sofubutsuAtesakiSource.jushoText;
+        }
         // source.jusho5 = RString.EMPTY;
         // source.jusho6 = RString.EMPTY;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;

@@ -82,7 +82,6 @@
     <delete id="delete高額合算支給決定通知書データ">
         DELETE FROM "KogakugassanShikyuKetteitsuchishoTemp"
     </delete>
-    <!--TODO QA1503-->
     <select id="select高額合算支給決定通知書データ" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoMybatisParameter"
             resultMap="resultMap_KogakugassanShikyuKetteitsuchishoEntity" fetchSize="500">
@@ -91,10 +90,6 @@
                 CASE WHEN "DbV1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" = '1' THEN "DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode"
                     ELSE "DbV1001HihokenshaDaicho"."shichosonCode" END AS "DbV1001_shichosonCode",
                "DbV1001HihokenshaDaicho"."shikibetsuCode" AS "DbV1001_shikibetsuCode"
-<!--               "ShikibetsuTaisho"."yubinNo" AS "ShikibetsuTaisho_yubinNo",
-               "ShikibetsuTaisho"."choikiCode" AS "ShikibetsuTaisho_choikiCode",
-               "ShikibetsuTaisho"."gyoseikuCode" AS "ShikibetsuTaisho_gyoseikuCode",
-               "ShikibetsuTaisho"."kanaMeisho" AS "ShikibetsuTaisho_kanaMeisho"-->
         FROM "KogakugassanShikyuKetteitsuchishoTemp" AS "KogakugassanShikyuKetteitsuchishoTemp"
         LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
         ON "DbV1001HihokenshaDaicho"."hihokenshaNo" = "KogakugassanShikyuKetteitsuchishoTemp"."hihokenshaNo"

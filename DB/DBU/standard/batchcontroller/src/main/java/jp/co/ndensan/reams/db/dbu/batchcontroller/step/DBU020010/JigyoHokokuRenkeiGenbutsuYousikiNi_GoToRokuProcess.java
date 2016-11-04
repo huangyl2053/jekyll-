@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -151,7 +150,6 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
     private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
     private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
     private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_総計Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
-    private RString csvFileName;
     private final RDate 基準日 = RDate.getNowDate();
     private JigyoHokokuRenkeiProcessParameter processParameter;
     private final JigyoHokokuRenkei24or26EucCsvEntity eucCsvEntity = new JigyoHokokuRenkei24or26EucCsvEntity();
@@ -186,7 +184,14 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
         }
         保険者番号data.put(番号, 保険者番号List);
         保険者名称data.put(名称, 保険者名称List);
-        csvFileName = new RString("tmp.csv");
+        RString spoolWorkPath = processParameter.getSpoolWorkPath();
+        RStringBuilder filePath = new RStringBuilder();
+        filePath.append("DUJRENF12_");
+        filePath.append(processParameter.get過去集計年月());
+        filePath.append("_");
+        filePath.append(保険者番号data.get(番号).get(0));
+        filePath.append(".csv");
+        eucFilePath = Path.combinePath(spoolWorkPath, filePath.toRString());
     }
 
     @BatchWriter
@@ -199,8 +204,6 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
 
     @Override
     protected void createWriter() {
-        RString spoolWorkPath = processParameter.getSpoolWorkPath();
-        eucFilePath = Path.combinePath(spoolWorkPath, csvFileName);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setEncode(Encode.SJIS)
                 .setDelimiter(EUC_WRITER_DELIMITER)
@@ -220,37 +223,23 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
 
     @Override
     protected void afterExecute() {
-        boolean flag = true;
         int i = 0;
         RString 保険者番号bak = RString.EMPTY;
         for (RString 保険者番号 : 保険者番号data.get(番号)) {
-            if (!保険者番号bak.equals(保険者番号)) {
-                eucCsvWriter.close();
-                tempCsv(flag);
-                flag = false;
-                RStringBuilder filePath = new RStringBuilder();
-                filePath.append("DUJRENF12_");
-                filePath.append(processParameter.get過去集計年月());
-                filePath.append("_");
-                filePath.append(保険者番号);
-                filePath.append(".csv");
-                setFilePath(filePath);
+            if (!保険者番号bak.equals(保険者番号) && i != 0) {
+                RStringBuilder fileName = new RStringBuilder();
+                fileName.append("DUJRENF12_");
+                fileName.append(processParameter.get過去集計年月());
+                fileName.append("_");
+                fileName.append(保険者番号);
+                fileName.append(".csv");
+                setFilePath(fileName);
                 保険者番号bak = 保険者番号;
             }
             get様式２の５_様式２の６のCSV出力(保険者番号, 保険者名称data.get(名称).get(i));
             i++;
+            eucCsvWriter.close();
         }
-        eucCsvWriter.close();
-    }
-
-    private boolean tempCsv(boolean flag) {
-        if (flag) {
-            File tmpfile = new File(eucFilePath.toString());
-            if (tmpfile.exists()) {
-                return tmpfile.delete();
-            }
-        }
-        return true;
     }
 
     private void setFilePath(RStringBuilder filePath) {
@@ -262,7 +251,7 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false).
                 build();
-    }
+            }  
 
     private void get様式２の５_様式２の６のCSV出力(RString 保険者番号, RString 保険者名称) {
         eucCsvWriter.writeLine(setヘッダレコード(ア_件数, イ_件数, 保険者番号, 保険者名称));

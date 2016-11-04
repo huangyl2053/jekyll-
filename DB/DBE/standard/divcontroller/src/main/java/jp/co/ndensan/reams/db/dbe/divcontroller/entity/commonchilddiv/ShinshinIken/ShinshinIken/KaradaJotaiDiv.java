@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaradaJotaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -53,6 +53,8 @@ public class KaradaJotaiDiv extends Panel {
     private CheckBoxList chkHidariKashiMahi;
     @JsonProperty("chkHidariKashiMahiTeido")
     private CheckBoxList chkHidariKashiMahiTeido;
+    @JsonProperty("Sp1")
+    private Space Sp1;
     @JsonProperty("chkSonotaMahi")
     private CheckBoxList chkSonotaMahi;
     @JsonProperty("txtSonotaMahiBui")
@@ -402,6 +404,24 @@ public class KaradaJotaiDiv extends Panel {
     @JsonProperty("chkHidariKashiMahiTeido")
     public void setChkHidariKashiMahiTeido(CheckBoxList chkHidariKashiMahiTeido) {
         this.chkHidariKashiMahiTeido = chkHidariKashiMahiTeido;
+    }
+
+    /*
+     * getSp1
+     * @return Sp1
+     */
+    @JsonProperty("Sp1")
+    public Space getSp1() {
+        return Sp1;
+    }
+
+    /*
+     * setSp1
+     * @param Sp1 Sp1
+     */
+    @JsonProperty("Sp1")
+    public void setSp1(Space Sp1) {
+        this.Sp1 = Sp1;
     }
 
     /*

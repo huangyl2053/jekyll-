@@ -149,8 +149,8 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
         if (index == INT_1) {
             PageBreaker<GassanHoseizumiJikofutangakuSofuchiranSource> breakPage
                     = new KogakugassanHoseisumiJikofutangakuOutPageBreak(pageBreakKeys);
-            batchReportWriter
-                    = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBC.DBC200033.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         }
         GassanHoseizumiJikofutangakuSofuchiranReport report

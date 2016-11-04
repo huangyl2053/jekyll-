@@ -54,7 +54,9 @@ public class InsKyufuJissekiKihonKogakuTmpProcess4 extends BatchProcessBase<DbT3
             beforeEntity = entity;
             return;
         }
-        if (processParameter.get処理年月().isBeforeOrEquals(beforeEntity.getShinsaYM())) {
+        if (processParameter.get処理年月() != null && !processParameter.get処理年月().isEmpty()
+                && beforeEntity.getShinsaYM() != null && !beforeEntity.getShinsaYM().isEmpty()
+                && processParameter.get処理年月().isBeforeOrEquals(beforeEntity.getShinsaYM())) {
             beforeEntity = entity;
             return;
         }
@@ -64,7 +66,9 @@ public class InsKyufuJissekiKihonKogakuTmpProcess4 extends BatchProcessBase<DbT3
 
     @Override
     protected void afterExecute() {
-        if (beforeEntity.getShinsaYM().isBefore(processParameter.get処理年月())) {
+        if (processParameter.get処理年月() != null && !processParameter.get処理年月().isEmpty()
+                && beforeEntity.getShinsaYM() != null && !beforeEntity.getShinsaYM().isEmpty()
+                && beforeEntity.getShinsaYM().isBefore(processParameter.get処理年月())) {
             給付実績基本情報高額一時.insert(beforeEntity);
         }
     }

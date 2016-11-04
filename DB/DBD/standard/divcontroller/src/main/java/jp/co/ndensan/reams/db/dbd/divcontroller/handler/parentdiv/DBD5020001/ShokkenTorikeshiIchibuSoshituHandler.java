@@ -256,8 +256,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         model.setJukyuShikakuHakkoDay2(認定情報.get受給資格証明書発行年月日２());
         model.setRiyu(認定情報.get異動理由());
         model.setSakujoJiyuCode(convertCodeToRString(認定情報.get削除事由コード()));
-        model.setShinseiKubunLaw(convertCodeToRString(認定情報.get認定申請区分法令コード受給()));
-        model.setShinseiKubunShinsei(convertCodeToRString(認定情報.get認定申請区分申請時コード受給()));
+        model.setShinseiKubunLaw(NinteiShinseiHoreiCode.toValue(認定情報.get認定申請区分法令コード受給().getColumnValue()).get名称());
+        model.setShinseiKubunShinsei(NinteiShinseiShinseijiKubunCode.toValue(認定情報.get認定申請区分申請時コード受給().getColumnValue()).get名称());
         model.setSoshitsuDay(認定情報.get喪失年月日());
         model.setTorisageDay(認定情報.get取下年月日受給());
         model.setToshoNinteiKikanFrom(認定情報.get当初認定有効開始年月日());
@@ -780,7 +780,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         if (null == 最大履歴番号 || 最大履歴番号.isEmpty()) {
             return new RString("0001");
         }
-        return new RString(Integer.parseInt(最大履歴番号.toString()) + 1).padZeroToLeft(INT_4);
+        return new RString(String.format("%04d", Integer.parseInt(最大履歴番号.toString().trim()) + 1));
     }
 
     private int get有効期間月数(FlexibleDate 開始年月日, FlexibleDate 終了年月日) {

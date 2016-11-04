@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019TokuchoMidoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
+import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -56,7 +57,11 @@ public class TokuchoDouteiKouhoshaListJoho {
         if (resultEntity != null && resultEntity.getUet0511entity() != null) {
             this.年金情報_氏名 = resultEntity.getUet0511entity().getDtKanjiShimei();
             this.年金情報_生年月日 = resultEntity.getUet0511entity().getDtBirthDay();
-            RString seibetsuCode = resultEntity.getUet0511entity().getDtSeibetsu();
+            RString seibetsuCode = RString.EMPTY;
+            SeibetsuCodeNenkinTokucho 性別_Before = resultEntity.getUet0511entity().getDtSeibetsu();
+            if (性別_Before != null) {
+                seibetsuCode = 性別_Before.getColumnValue();
+            }
             this.年金情報_性別 = seibetsuCode;
             this.年金情報_連番 = new RString(resultEntity.getUet0511entity().getRenban());
             if (resultEntity.getUet0511entity().getShoriNendo() != null) {

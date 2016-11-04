@@ -21,8 +21,8 @@ public class FutanWariaiShoOutputJokenhyo {
 
     private static final RString 年度 = new RString("【年度】　");
     private static final RString 発行区分 = new RString("【発行区分】　");
-    private static final RString 出力対象 = new RString("【出力対象】 　");
-    private static final RString 交付年月日 = new RString("【交付年月日】 　");
+    private static final RString 出力対象 = new RString("【出力対象】  ");
+    private static final RString 交付年月日 = new RString("【交付年月日】  ");
     private static final RString 定数_ZERO = new RString("0");
     private static final RString 定数_ONE = new RString("1");
     private static final RString 定数_TWO = new RString("2");

@@ -34,15 +34,19 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7068ChohyoBunruiKanriD
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
@@ -137,8 +141,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
         UaFt200FindShikibetsuTaishoEntity uaFt200Entity = get宛名情報(識別コード);
 
-        UaFt250FindAtesakiEntity uaFt250Entity = get宛先情報(識別コード);
-
         ReportId 帳票分類ID = get帳票分類ID();
 
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
@@ -165,7 +167,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
             NinteiKoshinTsuchishoItem item = new NinteiKoshinTsuchishoItem(
                     介護保険負担限度額認定,
                     ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
+                    get宛先情報(識別コード),
                     new ChohyoSeigyoKyotsu(dbT7065Entity),
                     dbT7067EntityList,
                     association,
@@ -230,15 +232,14 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         return shikibetsuTaishoPSMMapper.selectAtesakiPSMMybatis(shikibetsuTaishoPSMParameter);
     }
 
-    private UaFt250FindAtesakiEntity get宛先情報(ShikibetsuCode 識別コード) {
+    private IAtesaki get宛先情報(ShikibetsuCode 識別コード) {
         AtesakiPSMSearchKeyBuilder atesakiPSMKey
                 = new AtesakiPSMSearchKeyBuilder(AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         atesakiPSMKey.set識別コード(識別コード);
-        IAtesakiPSMSearchKey atesakiPSMSearchKey = atesakiPSMKey.build();
-        AtesakiPSMMybatisParameter atesakiPSMMybatisParameter = new AtesakiPSMMybatisParameter(atesakiPSMSearchKey);
-        atesakiPSMMybatisParameter.setPsmAtesaki(new RString(atesakiPSMMybatisParameter.toString()));
-        IAtesakiPSMMybatisMapper atesakiPSMMapper = this.mapperProvider.create(IAtesakiPSMMybatisMapper.class);
-        return atesakiPSMMapper.selectAtesakiPSMMybatis(atesakiPSMMybatisParameter);
+        atesakiPSMKey.set代納人利用区分(DainoRiyoKubun.利用しない);
+        atesakiPSMKey.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(atesakiPSMKey.build());
+        return 宛先;
     }
 
     private ReportId get帳票分類ID() {

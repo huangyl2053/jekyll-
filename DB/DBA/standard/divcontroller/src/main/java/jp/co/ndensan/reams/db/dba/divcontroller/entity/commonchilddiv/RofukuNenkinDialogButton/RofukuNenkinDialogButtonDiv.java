@@ -4,7 +4,9 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RofukuNen
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -23,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @author 自動生成
  */
 public class RofukuNenkinDialogButtonDiv extends Panel implements IRofukuNenkinDialogButtonDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
@@ -179,5 +182,10 @@ public class RofukuNenkinDialogButtonDiv extends Panel implements IRofukuNenkinD
         }
         RoreiFukushiNenkinJukyushaManager manager = RoreiFukushiNenkinJukyushaManager.createInstance();
         return manager.save老齢福祉年金受給者All(roreiFukushiNenkinJukyusha);
+    }
+    
+    @Override
+    public Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> get老福年金() {
+    	return DataPassingConverter.deserialize(this.getSaveData(), Models.class);
     }
 }

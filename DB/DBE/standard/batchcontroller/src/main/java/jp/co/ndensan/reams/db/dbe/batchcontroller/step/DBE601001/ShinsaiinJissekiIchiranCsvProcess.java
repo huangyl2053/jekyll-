@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -102,14 +103,21 @@ public class ShinsaiinJissekiIchiranCsvProcess extends BatchProcessBase<Shinsaii
         builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催日FROM_SB = new RStringBuilder("【審査会開催日（From）】");
-        審査会開催日FROM_SB.append(paramter.get審査会開催日FROM());
+        審査会開催日FROM_SB.append(dateFormat(paramter.get審査会開催日FROM()));
         RStringBuilder 審査会開催日To_SB = new RStringBuilder("【審査会開催日（To）】");
-        審査会開催日To_SB.append(paramter.get審査会開催日TO());
+        審査会開催日To_SB.append(dateFormat(paramter.get審査会開催日TO()));
         出力条件.add(審査会開催日FROM_SB.toRString());
         出力条件.add(審査会開催日To_SB.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("介護認定審査会委員実績集計CSV"), 導入団体コード, 市町村名, new RString(JobContextHolder.getJobId()),
                 CSV_NAME, EUC_ENTITY_ID.toRString(), builder.toRString(), 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
+    }
+
+    private static RString dateFormat(FlexibleDate date) {
+        if (date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.wareki().toDateString();
     }
 }

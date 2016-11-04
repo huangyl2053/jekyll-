@@ -60,11 +60,18 @@ public class INenreiToutatsuYoteishaCheckListProcessParameter implements IBatchP
     /**
      * mybatisのパラメータを生成します。
      *
+     * @param shutsuryokujun 出力順
      * @return mybatisパラメータ
      */
-    public INenreiToutatsuYoteishaCheckListMybatisParameter toINenreiToutatsuYoteishaCheckListMybatisParameter() {
+    public INenreiToutatsuYoteishaCheckListMybatisParameter toINenreiToutatsuYoteishaCheckListMybatisParameter(
+            RString shutsuryokujun) {
+        Boolean shutsuryokujunFlg = true;
+        if (shutsuryokujun == null || shutsuryokujun.isEmpty()) {
+
+            shutsuryokujunFlg = false;
+        }
         return new INenreiToutatsuYoteishaCheckListMybatisParameter(syutsuryokutaisyo, koumokumeiflg,
                 renbanfukaflg, nichihensyuflg, juminShubetsu, konkaikaishi,
-                konkaisyuryo, shutsuryokujunId);
+                konkaisyuryo, shutsuryokujun, shutsuryokujunFlg);
     }
 }

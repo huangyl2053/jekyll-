@@ -39,6 +39,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -48,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -85,6 +89,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final int INDEX_6 = 6;
     private static final RString YES = new RString("1");
     private static final RString NO = new RString("0");
+    private static final RString 申請を保存する = new RString("btnAddShikyuShinsei");
 
     /**
      * 画面ロードメソッドです。
@@ -98,7 +103,14 @@ public class JutakuKaishuShinseiJyohoToroku {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-
+        if (!画面モード_照会.equals(画面モード)) {
+            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            if (!RealInitialLocker.tryGetLock(排他キー)) {
+                throw new PessimisticLockingException();
+            }
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, false);
+        }
+        div.setDisabled(false);
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().initialize(識別コード);
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(識別コード);
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
@@ -264,6 +276,9 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (is確認結果(削除の確認, 保存の確認)) {
             param.set住宅改修内容一覧_検索結果(ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_検索結果, Models.class));
             getHandler(div).save(引き継ぎデータEntity, param);
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            RealInitialLocker.release(排他キー);
         } else if ((削除の確認 || 保存の確認) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
@@ -427,7 +442,10 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnCancel(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         if (画面モード.equals(ResponseHolder.getState())) {
+            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
         }
         if (!ResponseHolder.isReRequest()) {
@@ -438,6 +456,8 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            RealInitialLocker.release(排他キー);
             if (画面モード_審査.equals(画面モード)) {
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
             } else if (画面モード_照会.equals(画面モード)) {
@@ -587,17 +607,23 @@ public class JutakuKaishuShinseiJyohoToroku {
 
                 handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
                 ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
+                LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+                RealInitialLocker.release(排他キー);
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                         .parameter(画面モード_登録);
             }
         } else if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード_修正, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
+            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .parameter(画面モード_登録);
         } else {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
+            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .parameter(画面モード_照会);
         }

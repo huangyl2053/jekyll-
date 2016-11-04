@@ -455,8 +455,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 divide(NUM100).stripTrailingZeros();
         Decimal 保険対象費用額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
                 .getTxtKonkaiHokenTaishoHiyogakuGokei().getValue();
+        if (保険対象費用額 == null) {
+            保険対象費用額 = Decimal.ZERO;
+        }
         if (給付率 != null) {
-            保険給付額 = 保険対象費用額.multiply(給付率);
+            保険給付額 = 保険対象費用額.multiply(給付率).roundDownTo(0);
         }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenkyufugakuGokei()
                 .setValue(保険給付額);
@@ -1710,7 +1713,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtKonkaiHokenkyufugakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiRiyoshaFutangakuGokei().setDisabled(true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請を保存する, true);
     }
 
     /**

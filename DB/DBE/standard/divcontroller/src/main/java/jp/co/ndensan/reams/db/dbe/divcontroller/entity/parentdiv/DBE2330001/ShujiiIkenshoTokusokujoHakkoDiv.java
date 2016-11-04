@@ -4,26 +4,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ShujiiIkenshoTokusokujoHakko のクラスファイル
- *
+ * ShujiiIkenshoTokusokujoHakko のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -106,17 +100,17 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
+    public void  setRadChohyoSentaku(RadioButton radChohyoSentaku) {
         this.getHakkoJoken().setRadChohyoSentaku(radChohyoSentaku);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKijunDay() {
+    public TextBoxDate getTxtKijunDay() {
         return this.getHakkoJoken().getTxtKijunDay();
     }
 
     @JsonIgnore
-    public void setTxtKijunDay(TextBoxFlexibleDate txtKijunDay) {
+    public void  setTxtKijunDay(TextBoxDate txtKijunDay) {
         this.getHakkoJoken().setTxtKijunDay(txtKijunDay);
     }
 
@@ -131,8 +125,18 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtOverChosaIraiDay(TextBoxNum txtOverChosaIraiDay) {
+    public void  setTxtOverChosaIraiDay(TextBoxNum txtOverChosaIraiDay) {
         this.getShujiiIkenshoTokusokujo().setTxtOverChosaIraiDay(txtOverChosaIraiDay);
+    }
+
+    @JsonIgnore
+    public Label getLabOverChosaIraiDay() {
+        return this.getShujiiIkenshoTokusokujo().getLabOverChosaIraiDay();
+    }
+
+    @JsonIgnore
+    public void  setLabOverChosaIraiDay(Label labOverChosaIraiDay) {
+        this.getShujiiIkenshoTokusokujo().setLabOverChosaIraiDay(labOverChosaIraiDay);
     }
 
     @JsonIgnore
@@ -141,7 +145,7 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkInsatsuzumiTaisho(CheckBoxList chkInsatsuzumiTaisho) {
+    public void  setChkInsatsuzumiTaisho(CheckBoxList chkInsatsuzumiTaisho) {
         this.getShujiiIkenshoTokusokujo().setChkInsatsuzumiTaisho(chkInsatsuzumiTaisho);
     }
 
@@ -151,7 +155,7 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkHakkoRireki(CheckBoxList chkHakkoRireki) {
+    public void  setChkHakkoRireki(CheckBoxList chkHakkoRireki) {
         this.getShujiiIkenshoTokusokujo().setChkHakkoRireki(chkHakkoRireki);
     }
 
@@ -161,7 +165,7 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadTokusokuHoho(RadioButton radTokusokuHoho) {
+    public void  setRadTokusokuHoho(RadioButton radTokusokuHoho) {
         this.getShujiiIkenshoTokusokujo().setRadTokusokuHoho(radTokusokuHoho);
     }
 
@@ -171,17 +175,17 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTokusokuMemo(TextBoxMultiLine txtTokusokuMemo) {
+    public void  setTxtTokusokuMemo(TextBoxMultiLine txtTokusokuMemo) {
         this.getShujiiIkenshoTokusokujo().setTxtTokusokuMemo(txtTokusokuMemo);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtHakkoDay() {
+    public TextBoxDate getTxtHakkoDay() {
         return this.getShujiiIkenshoTokusokujo().getTxtHakkoDay();
     }
 
     @JsonIgnore
-    public void setTxtHakkoDay(TextBoxFlexibleDate txtHakkoDay) {
+    public void  setTxtHakkoDay(TextBoxDate txtHakkoDay) {
         this.getShujiiIkenshoTokusokujo().setTxtHakkoDay(txtHakkoDay);
     }
 
@@ -196,7 +200,7 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkInsatsuChohyo(CheckBoxList chkInsatsuChohyo) {
+    public void  setChkInsatsuChohyo(CheckBoxList chkInsatsuChohyo) {
         this.getNinteiChosaTokusokuTaishoshaIchiranhyo().setChkInsatsuChohyo(chkInsatsuChohyo);
     }
 
@@ -206,7 +210,7 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtInsatsuKikan(TextBoxDateRange txtInsatsuKikan) {
+    public void  setTxtInsatsuKikan(TextBoxDateRange txtInsatsuKikan) {
         this.getNinteiChosaTokusokuTaishoshaIchiranhyo().setTxtInsatsuKikan(txtInsatsuKikan);
     }
 

@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -103,6 +102,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     protected void initialize() {
         出力項目リスト = new ArrayList<>();
         改頁項目リスト = new ArrayList<>();
+        pageBreakKeys = new ArrayList<>();
         mybatisParameter = parameter.toMybatisParameter();
         mybatisParameter.set特別徴収対象者情報(TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード());
         mybatisParameter.set特別徴収追加候補者情報(TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード());
@@ -287,8 +287,9 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         普徴仮算定計算後賦課Entity.set普徴収入額13(計算後情報.getFuShunyuGaku13());
         普徴仮算定計算後賦課Entity.set普徴収入額14(計算後情報.getFuShunyuGaku14());
         普徴仮算定計算後賦課Entity.set宛名の情報(entity.get宛名());
-        Code 特別徴収業務者コード = entity.get介護継承().getDtTokubetsuChoshuGimushaCode();
-        普徴仮算定計算後賦課Entity.set特別徴収業務者コード(特別徴収業務者コード != null ? 特別徴収業務者コード.getColumnValue() : RString.EMPTY);
+        TokubetsuChoshuGimushaCode 特別徴収業務者コード = entity.get介護継承().getDtTokubetsuChoshuGimushaCode();
+        普徴仮算定計算後賦課Entity.set特別徴収業務者コード(特別徴収業務者コード != null
+                ? 特別徴収業務者コード.getColumnValue().getColumnValue() : RString.EMPTY);
         普徴仮算定計算後賦課Entity.set資格適用対象の通知書番号(計算後情報.getTsuchishoNo());
         普徴仮算定計算後賦課Entity.set前年度賦課の情報(entity.get介護賦課前年度());
         普徴仮算定計算後賦課Entity.set徴収方法(entity.getChoshuHoho());

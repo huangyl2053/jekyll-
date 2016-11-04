@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblJikkoTaniDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -208,7 +208,7 @@ public class tblJikkoTaniDiv extends TablePanel {
  * @author 自動生成
  */
 class celJikkoTaniTitleAttblJikkoTani extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("lblJikkoTaniTitle")
     private Label lblJikkoTaniTitle;
 
@@ -238,7 +238,7 @@ class celJikkoTaniTitleAttblJikkoTani extends TableCell {
  * @author 自動生成
  */
 class celJikkoTani1AttblJikkoTani extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("radJikkoTaniShukeiOnly")
     private RadioButton radJikkoTaniShukeiOnly;
 
@@ -268,7 +268,7 @@ class celJikkoTani1AttblJikkoTani extends TableCell {
  * @author 自動生成
  */
 class celHokokuYMAttblJikkoTani extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("HokokuNendo")
     private HokokuNendoDiv HokokuNendo;
 
@@ -298,7 +298,7 @@ class celHokokuYMAttblJikkoTani extends TableCell {
  * @author 自動生成
  */
 class celJikkoTani2AttblJikkoTani extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("radJikkoTani2")
     private RadioButton radJikkoTani2;
 
@@ -328,7 +328,7 @@ class celJikkoTani2AttblJikkoTani extends TableCell {
  * @author 自動生成
  */
 class celJikkoTani3AttblJikkoTani extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("radJikkoTani3")
     private RadioButton radJikkoTani3;
 
@@ -358,7 +358,7 @@ class celJikkoTani3AttblJikkoTani extends TableCell {
  * @author 自動生成
  */
 class celKakoHokokuYMAttblJikkoTani extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     @JsonProperty("ddlKakoHokokuNendo")
     private DropDownList ddlKakoHokokuNendo;
     @JsonProperty("radGappeiShichoson")

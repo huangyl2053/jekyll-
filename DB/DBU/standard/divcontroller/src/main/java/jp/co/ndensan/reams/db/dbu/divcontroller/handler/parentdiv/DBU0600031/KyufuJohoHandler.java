@@ -210,7 +210,7 @@ public class KyufuJohoHandler {
     }
 
     private void set作成区分(KyufuJohoBusiness kyufujoho) {
-        if (!RString.isNullOrEmpty(kyufujoho.get事業作成区分())) {
+        if (!RString.isNullOrEmpty(kyufujoho.get事業作成区分().trim())) {
             div.getTxtKeikakuSakuseiKubun().setValue(kyufujoho.get事業作成区分());
             if (!RString.isNullOrEmpty(kyufujoho.get事業適用開始())) {
                 div.getTxtTekyouKikan().setFromValue(new RDate(kyufujoho.get事業適用開始().toString()));
@@ -223,7 +223,7 @@ public class KyufuJohoHandler {
                 div.getTxtZigyoushaMesai().setValue(kyufujoho.get事業者名称().get事業者名称().value());
             }
         }
-        if (!RString.isNullOrEmpty(kyufujoho.get自己計画作成区分())) {
+        if (!RString.isNullOrEmpty(kyufujoho.get自己計画作成区分().trim())) {
             div.getTxtKeikakuSakuseiKubun().setValue(kyufujoho.get自己計画作成区分());
             if (!RString.isNullOrEmpty(kyufujoho.get自己適用開始())) {
                 div.getTxtTekyouKikan().setFromValue(new RDate(kyufujoho.get自己適用開始().toString()));

@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.Breakers;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
@@ -21,6 +24,12 @@ public class ChosahyoGaikyochosaProperty extends ReportPropertyBase<ChosahyoGaik
      * インスタンスを生成します。
      */
     public ChosahyoGaikyochosaProperty() {
-        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221011.getReportId());
+        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221001.getReportId());
+    }
+
+    @Override
+    protected Breakers<ChosahyoGaikyochosaReportSource> defineBreakers(Breakers<ChosahyoGaikyochosaReportSource> breakers,
+            BreakerCatalog<ChosahyoGaikyochosaReportSource> catalog) {
+        return breakers.add(catalog.simpleLayoutBreaker(new RString("hihokenshaNo1"), new RString("hishokenshaNo1"))).fixed();
     }
 }

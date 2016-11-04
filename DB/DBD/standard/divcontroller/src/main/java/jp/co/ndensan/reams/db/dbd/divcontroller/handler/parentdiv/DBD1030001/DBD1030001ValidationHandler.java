@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdWarningMessages;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -217,7 +219,26 @@ public class DBD1030001ValidationHandler {
                 NoInputMessages.減免減額_適用期間重複, div.getDgShinseiList()).build().check(messages));
         return pairs;
     }
-
+    
+    /**
+     *  承認情報を確定するボタン押下時、減免減額_適用期間重複チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div DBD1030001Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 減免減額_適用期間重複のチェックon確定(ValidationMessageControlPairs pairs, DBD1030001Div div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.減免減額_適用期間重複のチェックon確定)
+                .thenAdd(NoInputMessages.減免減額_適用期間重複).messages());
+        List<ViewControl> controls = new ArrayList<>();
+        controls.add(div.getTxtTekiyoYMD());
+        controls.add(div.getTxtYukoKigenYMD());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.減免減額_適用期間重複, controls).build().check(messages));
+        return pairs;
+    }
+    
     /**
      * 承認情報相関チェック１を行います。
      *

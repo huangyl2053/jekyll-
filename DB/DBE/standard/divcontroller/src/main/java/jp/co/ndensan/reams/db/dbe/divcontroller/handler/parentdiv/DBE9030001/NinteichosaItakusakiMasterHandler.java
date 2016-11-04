@@ -20,7 +20,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
+import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -41,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査委託先マスタ画面でのバリデーションを管理するハンドラークラスです。
@@ -51,6 +54,7 @@ public class NinteichosaItakusakiMasterHandler {
 
     private final NinteichosaItakusakiMasterDiv div;
     private static final int DROPDOWNLIST_BLANK = 0;
+    private final ChosainJohoManager chosainJohoManager;
     private final NinteichosaItakusakiJohoManager johoManager;
     private static final RString 状況フラグ有効 = new RString("有効");
     private static final RString 状況フラグ無効 = new RString("無効");
@@ -68,6 +72,13 @@ public class NinteichosaItakusakiMasterHandler {
     private static final RString BOOLEAN_FALSE = new RString("FALSE");
     private static final RString 有効 = new RString("yuko");
     private static final RString 前方一致KEY = new RString("0");
+    private static final RString 構成市町村マスタ市町村コード重複種別
+            = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+    private static final RString 四マスタ優先表示市町村識別ID
+            = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
+                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    
     /**
      * コンストラクタです。
      *
@@ -76,6 +87,7 @@ public class NinteichosaItakusakiMasterHandler {
     public NinteichosaItakusakiMasterHandler(NinteichosaItakusakiMasterDiv div) {
         this.div = div;
         johoManager = NinteichosaItakusakiJohoManager.createInstance();
+        chosainJohoManager = ChosainJohoManager.createInstance();
     }
 
     /**
@@ -163,7 +175,9 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue() == null
                 ? null : div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue().intValue(),
                 div.getChosainSearch().getDdlItakusakiMeisho().getSelectedKey(),
-                div.getChosainSearch().getDdlItakusakiKanaMeisho().getSelectedKey()
+                div.getChosainSearch().getDdlItakusakiKanaMeisho().getSelectedKey(),
+                四マスタ優先表示市町村識別ID,
+                構成市町村マスタ市町村コード重複種別
         );
 
         return NinteichosaItakusakiManager.createInstance().ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
@@ -222,6 +236,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(
                 SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), FlexibleDate.getNowDate());
         div.setHdnInputDiv(getChosaitakusakiJohoInputValue());
+        div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(false);
     }
 
     /**
@@ -247,6 +262,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().setDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(Boolean.FALSE);
+        div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(true);
         div.setHdnInputDiv(getChosaitakusakiJohoInputValue());
     }
 
@@ -268,6 +284,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
+        div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(true);
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(Boolean.FALSE);
     }
 
@@ -292,7 +309,7 @@ public class NinteichosaItakusakiMasterHandler {
      * 入力明細エリアの入力内容を調査委託先一覧に反映させる。
      *
      */
-    public void onClick_btnKakutei() {
+    public void onClick_btnKakutei(boolean 処理状態) {
         RString 状態 = RString.EMPTY;
         int selectID = -1;
         if (!RString.isNullOrEmpty(div.getHdnSelectID())) {
@@ -301,10 +318,15 @@ public class NinteichosaItakusakiMasterHandler {
         if (追加状態コード.equals(div.get状態())) {
             状態 = 追加状態コード;
         } else if (修正状態コード.equals(div.get状態())) {
-            if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
-                状態 = 追加状態コード;
+            if (処理状態) {
+                if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
+                    状態 = 追加状態コード;
+                } else {
+                    状態 = 修正状態コード;
+                }
             } else {
-                状態 = 修正状態コード;
+                状態 = RString.EMPTY;
+                ViewStateHolder.put(ViewStateKeys.状態, true);
             }
         } else if (削除状態コード.equals(div.get状態())) {
             if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
@@ -340,12 +362,14 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue());
-        if (selectID == -1) {
-            div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(
-                    div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()).concat(CSV_WRITER_DELIMITER));
-            div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().add(row);
-        } else {
-            div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().set(selectID, row);
+        if (処理状態) {
+            if (selectID == -1) {
+                div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(
+                        div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()).concat(CSV_WRITER_DELIMITER));
+                div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().add(row);
+            } else {
+                div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().set(selectID, row);
+            }
         }
     }
 
@@ -390,11 +414,10 @@ public class NinteichosaItakusakiMasterHandler {
      * @return 削除行データの整合性
      */
     public boolean 削除行データの整合性チェック(LasdecCode 市町村コード, RString 認定調査委託先コード) {
-        return false;
-//        int 件数 = chosainJohoManager.countByShichosonCodeAndNinteichosaItakusakiCode(市町村コード, 認定調査委託先コード);
-//        return 件数 <= 0;
+        int 件数 = chosainJohoManager.countByKey(市町村コード, 認定調査委託先コード);
+        return 件数 <= 0;
     }
-
+  
     private void set明細照会状態() {
         div.set状態(その他状態コード);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();

@@ -182,8 +182,18 @@ public class KihonChosaInputHandler7 {
 
     private void set認知症高齢者の日常生活自立度Keys(List<RString> 認知症高齢者の日常生活自立度Keys,
             List<RString> 前回認知症高齢者の日常生活自立度Keys, KihonChosaInput 認定調査基本情報) {
-        RString 認知症高齢者自立度RString = 認定調査基本情報.get認知症高齢者自立度().getColumnValue();
-        RString 前回認知症高齢者自立度RString = 認定調査基本情報.get前回認知症高齢者自立度().getColumnValue();
+        RString 認知症高齢者自立度RString;
+        RString 前回認知症高齢者自立度RString; 
+        if (認定調査基本情報.get認知症高齢者自立度() == null) {
+            認知症高齢者自立度RString = RString.EMPTY;
+        } else {
+            認知症高齢者自立度RString = 認定調査基本情報.get認知症高齢者自立度().getColumnValue();
+        }
+        if (認定調査基本情報.get前回認知症高齢者自立度() == null) {
+            前回認知症高齢者自立度RString = RString.EMPTY;
+        } else {
+            前回認知症高齢者自立度RString = 認定調査基本情報.get前回認知症高齢者自立度().getColumnValue();
+        }
         if (NinchishoNichijoSeikatsuJiritsudoCode.自立.getコード().equals(認知症高齢者自立度RString)) {
             認知症高齢者の日常生活自立度Keys.add(KEY0);
         } else if (NinchishoNichijoSeikatsuJiritsudoCode.Ⅰ.getコード().equals(認知症高齢者自立度RString)) {
@@ -264,8 +274,18 @@ public class KihonChosaInputHandler7 {
 
     private void set障害高齢者の日常生活自立度_寝たきり度Keys(List<RString> 障害高齢者の日常生活自立度_寝たきり度Keys,
             List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys, KihonChosaInput 認定調査基本情報) {
-        RString 障害高齢者自立度RString = 認定調査基本情報.get障害高齢者自立度().getColumnValue();
-        RString 前回障害高齢者自立度RString = 認定調査基本情報.get前回障害高齢者自立度().getColumnValue();
+        RString 障害高齢者自立度RString;
+        RString 前回障害高齢者自立度RString;
+        if (認定調査基本情報.get障害高齢者自立度() == null) {
+            障害高齢者自立度RString = RString.EMPTY;
+        } else {
+            障害高齢者自立度RString = 認定調査基本情報.get障害高齢者自立度().getColumnValue();
+        }
+        if (認定調査基本情報.get前回障害高齢者自立度() == null) {
+            前回障害高齢者自立度RString = RString.EMPTY;
+        } else {
+            前回障害高齢者自立度RString = 認定調査基本情報.get前回障害高齢者自立度().getColumnValue();
+        }
         if (ShogaiNichijoSeikatsuJiritsudoCode.自立.getコード().equals(障害高齢者自立度RString)) {
             障害高齢者の日常生活自立度_寝たきり度Keys.add(KEY0);
         } else if (ShogaiNichijoSeikatsuJiritsudoCode.J1.getコード().equals(障害高齢者自立度RString)) {

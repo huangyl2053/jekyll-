@@ -169,7 +169,8 @@ public class HihokenshaDaichoSakuseiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoSakuseiManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoSakuseiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoSakuseiManager}のインスタンス
      */
     public static HihokenshaDaichoSakuseiManager createInstance() {
         return InstanceProvider.create(HihokenshaDaichoSakuseiManager.class);
@@ -1305,7 +1306,7 @@ public class HihokenshaDaichoSakuseiManager {
             }
         }
         if (setaiinShotokuList != null && setaiinShotokuList.size() % NOCOUNT_5 > 0 && setaiinShotokuList.size() % NOCOUNT_5 < NOCOUNT_5) {
-            int j = NOCOUNT_5 - 分割した世帯情報List.size();
+            int j = NOCOUNT_5 - setaiDivisionEntity.get世帯左No().size();
             for (int i = 0; i < j; i++) {
                 setaiDivisionEntity.get世帯左No().add(RString.EMPTY);
                 setaiDivisionEntity.get世帯左識別コード().add(ShikibetsuCode.EMPTY);

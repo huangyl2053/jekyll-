@@ -104,6 +104,164 @@ public class HihokenshaDaichoListTest extends DbzTestBase {
         }
     }
 
+    public static class to降順List extends DbzTestBase {
+
+        private List<HihokenshaDaicho> hihoDaichoList;
+        private FlexibleDate idoDate1;
+        private FlexibleDate idoDate2;
+        private RString edaNo1;
+        private RString edaNo2;
+
+        @Before
+        public void setUp() {
+            hihoDaichoList = new ArrayList<>();
+            idoDate1 = new FlexibleDate("20150101");
+            idoDate2 = new FlexibleDate("20160101");
+            edaNo1 = new RString("0001");
+            edaNo2 = new RString("0002");
+
+            DbT1001HihokenshaDaichoEntity entity1 = createEntity();
+            entity1.setIdoYMD(idoDate1);
+            entity1.setShikakuShutokuYMD(idoDate1);
+            entity1.setEdaNo(edaNo1);
+            HihokenshaDaicho hihokenshaDaichoModel1 = new HihokenshaDaicho(entity1);
+
+            DbT1001HihokenshaDaichoEntity entity2 = createEntity();
+            entity2.setIdoYMD(idoDate1);
+            entity2.setShikakuShutokuYMD(idoDate1);
+            entity2.setEdaNo(edaNo2);
+            HihokenshaDaicho hihokenshaDaichoModel2 = new HihokenshaDaicho(entity2);
+
+            DbT1001HihokenshaDaichoEntity entity3 = createEntity();
+            entity3.setIdoYMD(idoDate2);
+            entity3.setShikakuShutokuYMD(idoDate2);
+            entity3.setEdaNo(edaNo1);
+            HihokenshaDaicho hihokenshaDaichoModel3 = new HihokenshaDaicho(entity3);
+
+            hihoDaichoList.add(hihokenshaDaichoModel1);
+            hihoDaichoList.add(hihokenshaDaichoModel3);
+            hihoDaichoList.add(hihokenshaDaichoModel2);
+        }
+
+        @Test
+        public void to降順Listで3件のデータが取得出来る() {
+            IItemList<HihokenshaDaicho> result = new HihokenshaDaichoList(ItemList.of(hihoDaichoList)).to降順List();
+            assertThat(result.size(), is(3));
+        }
+
+        @Test
+        public void to降順Listで取得したデータの1件目は_元データの2件目のデータとキーが一致する() {
+            IItemList<HihokenshaDaicho> result = new HihokenshaDaichoList(ItemList.of(hihoDaichoList)).to降順List();
+            HihokenshaDaicho testData = result.toList().get(0);
+            HihokenshaDaicho motoData = hihoDaichoList.get(1);
+            boolean isEqualKeys = testData.get被保険者番号().equals(motoData.get被保険者番号())
+                    && testData.get異動日().equals(motoData.get異動日())
+                    && testData.get枝番().equals(motoData.get枝番());
+            assertThat(isEqualKeys, is(true));
+        }
+
+        @Test
+        public void to降順Listで取得したデータの2件目は_元Listの3件のデータとキーが一致する() {
+            IItemList<HihokenshaDaicho> result = new HihokenshaDaichoList(ItemList.of(hihoDaichoList)).to降順List();
+            HihokenshaDaicho testData = result.toList().get(1);
+            HihokenshaDaicho motoData = hihoDaichoList.get(2);
+            boolean isEqualKeys = testData.get被保険者番号().equals(motoData.get被保険者番号())
+                    && testData.get異動日().equals(motoData.get異動日())
+                    && testData.get枝番().equals(motoData.get枝番());
+            assertThat(isEqualKeys, is(true));
+        }
+
+        @Test
+        public void to降順Listで取得したデータの3件目は_元Listの1件のデータとキーが一致する() {
+            IItemList<HihokenshaDaicho> result = new HihokenshaDaichoList(ItemList.of(hihoDaichoList)).to降順List();
+            HihokenshaDaicho testData = result.toList().get(2);
+            HihokenshaDaicho motoData = hihoDaichoList.get(0);
+            boolean isEqualKeys = testData.get被保険者番号().equals(motoData.get被保険者番号())
+                    && testData.get異動日().equals(motoData.get異動日())
+                    && testData.get枝番().equals(motoData.get枝番());
+            assertThat(isEqualKeys, is(true));
+        }
+    }
+
+    public static class to昇順List extends DbzTestBase {
+
+        private List<HihokenshaDaicho> hihoDaichoList;
+        private FlexibleDate idoDate1;
+        private FlexibleDate idoDate2;
+        private RString edaNo1;
+        private RString edaNo2;
+
+        @Before
+        public void setUp() {
+            hihoDaichoList = new ArrayList<>();
+            idoDate1 = new FlexibleDate("20150101");
+            idoDate2 = new FlexibleDate("20160101");
+            edaNo1 = new RString("0001");
+            edaNo2 = new RString("0002");
+
+            DbT1001HihokenshaDaichoEntity entity1 = createEntity();
+            entity1.setIdoYMD(idoDate1);
+            entity1.setShikakuShutokuYMD(idoDate1);
+            entity1.setEdaNo(edaNo1);
+            HihokenshaDaicho hihokenshaDaichoModel1 = new HihokenshaDaicho(entity1);
+
+            DbT1001HihokenshaDaichoEntity entity2 = createEntity();
+            entity2.setIdoYMD(idoDate1);
+            entity2.setShikakuShutokuYMD(idoDate1);
+            entity2.setEdaNo(edaNo2);
+            HihokenshaDaicho hihokenshaDaichoModel2 = new HihokenshaDaicho(entity2);
+
+            DbT1001HihokenshaDaichoEntity entity3 = createEntity();
+            entity3.setIdoYMD(idoDate2);
+            entity3.setShikakuShutokuYMD(idoDate2);
+            entity3.setEdaNo(edaNo1);
+            HihokenshaDaicho hihokenshaDaichoModel3 = new HihokenshaDaicho(entity3);
+
+            hihoDaichoList.add(hihokenshaDaichoModel3);
+            hihoDaichoList.add(hihokenshaDaichoModel1);
+            hihoDaichoList.add(hihokenshaDaichoModel2);
+        }
+
+        @Test
+        public void to昇順Listで3件のデータが取得出来る() {
+            IItemList<HihokenshaDaicho> result = new HihokenshaDaichoList(ItemList.of(hihoDaichoList)).to昇順List();
+            assertThat(result.size(), is(3));
+        }
+
+        @Test
+        public void to昇順Listで取得したデータの1件目は_元データの2件目のデータとキーが一致する() {
+            IItemList<HihokenshaDaicho> result = new HihokenshaDaichoList(ItemList.of(hihoDaichoList)).to昇順List();
+            HihokenshaDaicho testData = result.toList().get(0);
+            HihokenshaDaicho motoData = hihoDaichoList.get(1);
+            boolean isEqualKeys = testData.get被保険者番号().equals(motoData.get被保険者番号())
+                    && testData.get異動日().equals(motoData.get異動日())
+                    && testData.get枝番().equals(motoData.get枝番());
+            assertThat(isEqualKeys, is(true));
+        }
+
+        @Test
+        public void to昇順Listで取得したデータの2件目は_元Listの3件のデータとキーが一致する() {
+            IItemList<HihokenshaDaicho> result = new HihokenshaDaichoList(ItemList.of(hihoDaichoList)).to昇順List();
+            HihokenshaDaicho testData = result.toList().get(1);
+            HihokenshaDaicho motoData = hihoDaichoList.get(2);
+            boolean isEqualKeys = testData.get被保険者番号().equals(motoData.get被保険者番号())
+                    && testData.get異動日().equals(motoData.get異動日())
+                    && testData.get枝番().equals(motoData.get枝番());
+            assertThat(isEqualKeys, is(true));
+        }
+
+        @Test
+        public void to昇順Listで取得したデータの3件目は_元Listの1件のデータとキーが一致する() {
+            IItemList<HihokenshaDaicho> result = new HihokenshaDaichoList(ItemList.of(hihoDaichoList)).to昇順List();
+            HihokenshaDaicho testData = result.toList().get(2);
+            HihokenshaDaicho motoData = hihoDaichoList.get(0);
+            boolean isEqualKeys = testData.get被保険者番号().equals(motoData.get被保険者番号())
+                    && testData.get異動日().equals(motoData.get異動日())
+                    && testData.get枝番().equals(motoData.get枝番());
+            assertThat(isEqualKeys, is(true));
+        }
+    }
+
     public static class to資格得喪List extends DbzTestBase {
 
         //TODO #52997

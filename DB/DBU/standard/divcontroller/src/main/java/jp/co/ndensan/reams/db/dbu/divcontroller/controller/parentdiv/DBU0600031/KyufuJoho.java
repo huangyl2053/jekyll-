@@ -60,13 +60,93 @@ public class KyufuJoho {
     }
 
     /**
-     * 再検索するボタン押下します。
+     * 再検索するボタンを押下します。
      *
      * @param div KyufuJohoDiv
      * @return ResponseData<KyufuJohoDiv>
      */
     public ResponseData<KyufuJohoDiv> onClick_KensakuModoru(KyufuJohoDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBU0600031TransitionEventName.対象者検索に戻る).respond();
+    }
+
+    /**
+     * 受給者情報を表示するボタンを押下します。
+     *
+     * @param div KyufuJohoDiv
+     * @return ResponseData<KyufuJohoDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_btnJukyuInfo(KyufuJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 資格情報を表示するボタンを押下します。
+     *
+     * @param div KyufuJohoDiv
+     * @return ResponseData<KyufuJohoDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_btnShikakuInfo(KyufuJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 賦課情報を表示するボタンを押下します。
+     *
+     * @param div KyufuJohoDiv
+     * @return ResponseData<KyufuJohoDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_btnFukaInfo(KyufuJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 住民固有情報を表示するボタンを押下します。
+     *
+     * @param div KyufuJohoDiv
+     * @return ResponseData<KyufuJohoDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_btnJuminInfo(KyufuJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 居宅サービス計画情報を表示するボタンを押下します。
+     *
+     * @param div KaigoSikakuTokusouDiv
+     * @return ResponseData<KaigoSikakuTokusouDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_btnKyotakuSabisu(KyufuJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 償還払い情報を表示するボタンを押下します。
+     *
+     * @param div KyufuJohoDiv
+     * @return ResponseData<KyufuJohoDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_btnShoukanHaraiJoho(KyufuJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 高額介護サービス情報を表示するボタンを押下します。
+     *
+     * @param div KaigoSikakuTokusouDiv
+     * @return ResponseData<KaigoSikakuTokusouDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_btnKougakuSabisu(KyufuJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 給付実績情報を表示するボタンを押下します。
+     *
+     * @param div KaigoSikakuTokusouDiv
+     * @return ResponseData<KaigoSikakuTokusouDiv>
+     */
+    public ResponseData<KyufuJohoDiv> onClick_btnKyufuZisseki(KyufuJohoDiv div) {
+        return ResponseData.of(div).respond();
     }
 
     private KyufuJohoHandler getHandler(KyufuJohoDiv div) {

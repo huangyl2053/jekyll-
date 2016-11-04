@@ -69,7 +69,8 @@ public class ShisakaiIinJissekiShokaiHandler {
     public void onClick_BtnKensakuClear() {
         div.getTxtShinsakaiKaisaibi().clearFromValue();
         div.getTxtShinsakaiKaisaibi().clearToValue();
-        div.getTxtMaxKensu().clearValue();
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**

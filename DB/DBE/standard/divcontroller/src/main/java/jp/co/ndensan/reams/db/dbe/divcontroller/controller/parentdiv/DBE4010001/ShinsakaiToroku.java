@@ -136,33 +136,23 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnShinsakai(ShinsakaiTorokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
+        if (存在チェック結果.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            if (存在チェック結果.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
-            }
-            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
-            if (選択チェック.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(選択チェック).respond();
-            }
-            ValidationMessageControlPairs validation = getValidationHandler(div).割付可能チェック();
-            if (validation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validation).respond();
-            } else {
-                申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
-                前排他キーの解除();
-                return ResponseData.of(div).forwardWithEventName(DBE4010001TransitionEventName.審査会対象者個別割付へ遷移する)
-                        .parameter(new RString("申請書管理番号リスト"));
-            }
+        ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
+        if (選択チェック.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(選択チェック).respond();
         }
-        return ResponseData.of(div).respond();
+        ValidationMessageControlPairs validation = getValidationHandler(div).割付可能チェック();
+        if (validation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validation).respond();
+        } else {
+            申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
+            前排他キーの解除();
+            return ResponseData.of(div).forwardWithEventName(DBE4010001TransitionEventName.審査会対象者個別割付へ遷移する)
+                    .parameter(new RString("申請書管理番号リスト"));
+        }
     }
 
     /**

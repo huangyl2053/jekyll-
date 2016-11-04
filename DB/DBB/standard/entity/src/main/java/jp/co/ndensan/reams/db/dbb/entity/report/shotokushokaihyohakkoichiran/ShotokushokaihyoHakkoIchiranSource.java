@@ -87,6 +87,16 @@ public class ShotokushokaihyoHakkoIchiranSource implements IReportSource {
     public RString listLower_5;
     @ReportItem(name = "listLower_6", length = 10, order = 34)
     public RString listLower_6;
+    @ReportItem(name = "choikiCode", length = 10, order = 35)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 36)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shichosonCode ", length = 10, order = 37)
+    public RString shichosonCode;
+    @ReportItem(name = "torokuIdoYMD ", length = 10, order = 38)
+    public RString torokuIdoYMD;
+    @ReportItem(name = "zenjushoCode ", length = 10, order = 39)
+    public RString zenjushoCode;
 
     /**
      * ReportSourceFields

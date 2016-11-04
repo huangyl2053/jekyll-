@@ -129,6 +129,16 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
         source.yoshiendo = item.getYoshiendo();
         source.yokaigo = item.getYokaigo();
         source.yokaigodo = item.getYokaigodo();
+        source.hihokenshaNo1 = item.getHihokenshaNo1();
+        source.hihokenshaNo2 = item.getHihokenshaNo2();
+        source.hihokenshaNo3 = item.getHihokenshaNo3();
+        source.hihokenshaNo4 = item.getHihokenshaNo4();
+        source.hihokenshaNo5 = item.getHihokenshaNo5();
+        source.hihokenshaNo6 = item.getHihokenshaNo6();
+        source.hihokenshaNo7 = item.getHihokenshaNo7();
+        source.hihokenshaNo8 = item.getHihokenshaNo8();
+        source.hihokenshaNo9 = item.getHihokenshaNo9();
+        source.hihokenshaNo10 = item.getHihokenshaNo10();
         return source;
     }
 }

@@ -463,19 +463,16 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setTsuban2(RString.EMPTY);
         if (ShiharaiHohoKubun.窓口払.getコード().equals(business.get支払方法区分コード())) {
             ketteiTsuchiShoSealer.setTorikeshi1(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshi2(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshiMochimono1(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshiMochimono2(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshiShiharaibasho(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshiShiharaikikan(RString.EMPTY);
+            ketteiTsuchiShoSealer.setTorikeshi2(記号_星);
+            
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())) {
             ketteiTsuchiShoSealer.setTorikeshi1(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshi2(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshiMochimono1(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshiMochimono2(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshiShiharaibasho(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshiShiharaikikan(記号_星);
+            ketteiTsuchiShoSealer.setTorikeshi2(RString.EMPTY);
         }
+        ketteiTsuchiShoSealer.setTorikeshiMochimono1(RString.EMPTY);
+        ketteiTsuchiShoSealer.setTorikeshiMochimono2(RString.EMPTY);
+        ketteiTsuchiShoSealer.setTorikeshiShiharaibasho(RString.EMPTY);
+        ketteiTsuchiShoSealer.setTorikeshiShiharaikikan(RString.EMPTY);
         return ketteiTsuchiShoSealer;
     }
 

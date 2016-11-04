@@ -115,8 +115,8 @@ public class ShinshinIkenHandler {
     private final NinteiShinseiJoho 要介護認定申請情報;
     private final RString 管理番号;
     private final RString 履歴番号;
-    private final ShujiiIkenshoJoho 要介護認定主治医意見書情報_TMP;
-
+    private final ShujiiIkenshoIraiJohoIdentifier 主治医意見書作成依頼情報Key;
+    private final ShujiiIkenshoJohoIdentifier 要介護認定主治医意見書情報Key;
     /**
      * コンストラクタです。
      *
@@ -124,50 +124,47 @@ public class ShinshinIkenHandler {
      * @param 要介護認定申請情報 要介護認定申請情報
      * @param 管理番号 管理番号
      * @param 履歴番号 履歴番号
-     * @param 要介護認定主治医意見書情報_TMP 要介護認定主治医意見書情報_TMP
      */
     public ShinshinIkenHandler(ShinshinIkenDiv div,
             NinteiShinseiJoho 要介護認定申請情報,
             RString 管理番号,
-            RString 履歴番号,
-            ShujiiIkenshoJoho 要介護認定主治医意見書情報_TMP) {
+            RString 履歴番号) {
         this.div = div;
         this.要介護認定申請情報 = 要介護認定申請情報;
         this.管理番号 = 管理番号;
         this.履歴番号 = 履歴番号;
-        this.要介護認定主治医意見書情報_TMP = 要介護認定主治医意見書情報_TMP;
+        主治医意見書作成依頼情報Key = new ShujiiIkenshoIraiJohoIdentifier(new ShinseishoKanriNo(管理番号),
+                Integer.valueOf(履歴番号.toString()));
+        要介護認定主治医意見書情報Key = new ShujiiIkenshoJohoIdentifier(new ShinseishoKanriNo(管理番号),
+                Integer.valueOf(履歴番号.toString()));
     }
 
     /**
      * 心身の意見入力の初期化処理です。
      *
-     * @return ShujiiIkenshoJoho
      */
-    public ShujiiIkenshoJoho onLoad() {
-        ShujiiIkenshoIraiJohoIdentifier 主治医意見書作成依頼情報Key = new ShujiiIkenshoIraiJohoIdentifier(new ShinseishoKanriNo(管理番号),
-                Integer.valueOf(履歴番号.toString()));
-        ShujiiIkenshoJohoIdentifier 要介護認定主治医意見書情報Key = new ShujiiIkenshoJohoIdentifier(new ShinseishoKanriNo(管理番号),
-                Integer.valueOf(履歴番号.toString()));
-        if (要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
-                getShujiiIkenshoJohoList().isEmpty()) {
-            要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).createBuilderForEdit().
-                    setShujiiIkenshoJoho(new ShujiiIkenshoJoho(new ShinseishoKanriNo(管理番号), Integer.parseInt(履歴番号.toString())));
-        }
-        ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
-                getSeishinTechoNini(要介護認定主治医意見書情報Key);
-        if (要介護認定主治医意見書情報 != null) {
-            List<ShujiiIkenshoKinyuItem> 記入項目List = 要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList();
-            List<ShujiiIkenshoIkenItem> 意見項目List = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
-            set意見項目(意見項目List);
-            set記入項目(記入項目List);
-            for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
-                要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoIkenItem(意見項目).build();
+    public void onLoad() {
+        if (要介護認定申請情報 != null) {
+            if (要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                    getShujiiIkenshoJohoList().isEmpty()) {
+                要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).createBuilderForEdit().
+                        setShujiiIkenshoJoho(new ShujiiIkenshoJoho(new ShinseishoKanriNo(管理番号), Integer.parseInt(履歴番号.toString())));
             }
-            for (ShujiiIkenshoKinyuItem 記入項目 : 記入項目List) {
-                要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoKinyuItem(記入項目).build();
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                    getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            if (要介護認定主治医意見書情報 != null) {
+                List<ShujiiIkenshoKinyuItem> 記入項目List = 要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList();
+                List<ShujiiIkenshoIkenItem> 意見項目List = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
+                set意見項目(意見項目List);
+                set記入項目(記入項目List);
+                for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
+                    要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoIkenItem(意見項目).build();
+                }
+                for (ShujiiIkenshoKinyuItem 記入項目 : 記入項目List) {
+                    要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoKinyuItem(記入項目).build();
+                }
             }
-        }
-        return 要介護認定主治医意見書情報;
+        } 
     }
 
     /**
@@ -184,9 +181,11 @@ public class ShinshinIkenHandler {
         if (div.getChkNinchishoShuhenShojoUmu().getSelectedKeys().contains(チェックボックス_2)) {
             div.getChkNinchishoShuhenShojo().setReadOnly(false);
             div.getChkNinchishoShuhenShojoSonota().setReadOnly(false);
-            set幻視幻聴(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            setその他(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            setその他記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set幻視幻聴(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            setその他(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            setその他記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
         } else if (div.getChkNinchishoShuhenShojoUmu().getSelectedKeys().contains(チェックボックス_1)) {
             div.getChkNinchishoShuhenShojo().setReadOnly(true);
             div.getChkNinchishoShuhenShojoSonota().setReadOnly(true);
@@ -203,7 +202,9 @@ public class ShinshinIkenHandler {
     public void changeChkNinchishoShuhenShojoSonota() {
         if (div.getChkNinchishoShuhenShojoSonota().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtSonotaKinyu().setReadOnly(false);
-            setその他記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            setその他記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
         } else {
             div.getTxtSonotaKinyu().setReadOnly(true);
             div.getTxtSonotaKinyu().clearValue();
@@ -217,9 +218,11 @@ public class ShinshinIkenHandler {
         if (div.getChkSonotaShojo().getSelectedKeys().contains(チェックボックス_2)) {
             div.getTxtShojomei().setReadOnly(false);
             div.getChkSenmonJushin().setReadOnly(false);
-            setその他の精神神経症状記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
-            set専門医受診の有無(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            set専門医受診の有無記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            setその他の精神神経症状記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
+            set専門医受診の有無(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            set専門医受診の有無記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
         } else if (div.getChkSonotaShojo().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtShojomei().setReadOnly(true);
             div.getChkSenmonJushin().setReadOnly(true);
@@ -236,7 +239,9 @@ public class ShinshinIkenHandler {
     public void changeChkSenmonJushin() {
         if (div.getChkSenmonJushin().getSelectedKeys().contains(チェックボックス_2)) {
             div.getTxtShosaiTokkiJiko().setReadOnly(false);
-            set専門医受診の有無記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set専門医受診の有無記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
         } else if (div.getChkSenmonJushin().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtShosaiTokkiJiko().setReadOnly(true);
             div.getTxtShosaiTokkiJiko().clearValue();
@@ -249,7 +254,9 @@ public class ShinshinIkenHandler {
     public void changeChkShishiKesson() {
         if (div.getChkShishiKesson().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtShishiKessonBui().setReadOnly(false);
-            set四肢欠損記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set四肢欠損記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
         } else {
             div.getTxtShishiKessonBui().setReadOnly(true);
             div.getTxtShishiKessonBui().clearValue();
@@ -266,11 +273,13 @@ public class ShinshinIkenHandler {
             div.getChkMigiKashiMahi().setReadOnly(false);
             div.getChkHidariKashiMahi().setReadOnly(false);
             div.getChkSonotaMahi().setReadOnly(false);
-            set麻痺_右上肢(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            set麻痺_左上肢(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            set麻痺_右下肢(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            set麻痺_左下肢(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            set麻痺_その他(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set麻痺_右上肢(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            set麻痺_左上肢(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            set麻痺_右下肢(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            set麻痺_左下肢(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            set麻痺_その他(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getChkMigiJoshiMahi().setReadOnly(true);
             div.getChkHidariJoshiMahi().setReadOnly(true);
@@ -291,7 +300,9 @@ public class ShinshinIkenHandler {
     public void changeChkMigiJoshiMahi() {
         if (div.getChkMigiJoshiMahi().getSelectedKeys().contains(チェックボックス_1)) {
             div.getChkMigiJoshiMahiTeido().setReadOnly(false);
-            set麻痺_右上肢_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set麻痺_右上肢_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getChkMigiJoshiMahiTeido().setReadOnly(true);
             div.getChkMigiJoshiMahiTeido().setSelectedItemsByKey(チェックボックス_SELECT);
@@ -304,7 +315,9 @@ public class ShinshinIkenHandler {
     public void changeChkHidariJoshiMahi() {
         if (div.getChkHidariJoshiMahi().getSelectedKeys().contains(チェックボックス_1)) {
             div.getChkHidariJoshiMahiTeido().setReadOnly(false);
-            set麻痺_左上肢_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set麻痺_左上肢_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getChkHidariJoshiMahiTeido().setReadOnly(true);
             div.getChkHidariJoshiMahiTeido().setSelectedItemsByKey(チェックボックス_SELECT);
@@ -317,7 +330,9 @@ public class ShinshinIkenHandler {
     public void changeChkMigiKashiMahi() {
         if (div.getChkMigiKashiMahi().getSelectedKeys().contains(チェックボックス_1)) {
             div.getChkMigiKashiMahiTeido().setReadOnly(false);
-            set麻痺_右下肢_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set麻痺_右下肢_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getChkMigiKashiMahiTeido().setReadOnly(true);
             div.getChkMigiKashiMahiTeido().setSelectedItemsByKey(チェックボックス_SELECT);
@@ -330,7 +345,9 @@ public class ShinshinIkenHandler {
     public void changeChkHidariKashiMahi() {
         if (div.getChkHidariKashiMahi().getSelectedKeys().contains(チェックボックス_1)) {
             div.getChkHidariKashiMahiTeido().setReadOnly(false);
-            set麻痺_左下肢_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set麻痺_左下肢_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getChkHidariKashiMahiTeido().setReadOnly(true);
             div.getChkHidariKashiMahiTeido().setSelectedItemsByKey(チェックボックス_SELECT);
@@ -344,8 +361,10 @@ public class ShinshinIkenHandler {
         if (div.getChkSonotaMahi().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtSonotaMahiBui().setReadOnly(false);
             div.getSonotaMahiTeido().setReadOnly(false);
-            set麻痺_その他記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
-            set麻痺_その他_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set麻痺_その他記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
+            set麻痺_その他_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getSonotaMahiTeido().setReadOnly(true);
             div.getTxtSonotaMahiBui().setReadOnly(true);
@@ -361,8 +380,10 @@ public class ShinshinIkenHandler {
         if (div.getChkKinryokuTeika().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtKinryokuTeikaBui().setReadOnly(false);
             div.getChkKinryokuTeikaTeido().setReadOnly(false);
-            set筋力の低下記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
-            set筋力の低下_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set筋力の低下記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
+            set筋力の低下_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getChkKinryokuTeikaTeido().setReadOnly(true);
             div.getChkKinryokuTeikaTeido().setSelectedItemsByKey(チェックボックス_SELECT);
@@ -378,8 +399,10 @@ public class ShinshinIkenHandler {
         if (div.getChkKansetsuKoshuku().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtKansetsuKoshukuBui().setReadOnly(false);
             div.getChkKansetsuKoshukuTeido().setReadOnly(false);
-            set関節の拘縮記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
-            set関節の拘縮_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set関節の拘縮記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
+            set関節の拘縮_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getTxtKansetsuKoshukuBui().setReadOnly(true);
             div.getChkKansetsuKoshukuTeido().setReadOnly(true);
@@ -395,8 +418,10 @@ public class ShinshinIkenHandler {
         if (div.getChkKansetsuItami().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtKansetsuItamiBui().setReadOnly(false);
             div.getChkKansetsuItamiTeido().setReadOnly(false);
-            set関節の痛み記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
-            set関節の痛み_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set関節の痛み記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
+            set関節の痛み_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getTxtKansetsuItamiBui().setReadOnly(true);
             div.getChkKansetsuItamiTeido().setReadOnly(true);
@@ -413,9 +438,11 @@ public class ShinshinIkenHandler {
             div.getChkFuzuiiJoshi().setReadOnly(false);
             div.getChkFuzuiiKashi().setReadOnly(false);
             div.getChkTaikan().setReadOnly(false);
-            set失調不随意運動_上肢(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            set失調不随意運動_下肢(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
-            set失調不随意運動_体幹(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set失調不随意運動_上肢(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            set失調不随意運動_下肢(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
+            set失調不随意運動_体幹(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getChkFuzuiiJoshi().setReadOnly(true);
             div.getChkFuzuiiKashi().setReadOnly(true);
@@ -433,8 +460,10 @@ public class ShinshinIkenHandler {
         if (div.getChkJokuso().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtJokusoBui().setReadOnly(false);
             div.getChkJokusoTeido().setReadOnly(false);
-            set褥瘡記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
-            set褥瘡_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            set褥瘡記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
+            set褥瘡_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getTxtJokusoBui().setReadOnly(true);
             div.getChkJokusoTeido().setReadOnly(true);
@@ -450,8 +479,10 @@ public class ShinshinIkenHandler {
         if (div.getChkSonotaHifuShikkan().getSelectedKeys().contains(チェックボックス_1)) {
             div.getTxtSonotaHifuShikkanBui().setReadOnly(false);
             div.getChkSonotaHifuShikkanTeido().setReadOnly(false);
-            setその他の皮膚疾患記入項目(要介護認定主治医意見書情報_TMP.getShujiiIkenshoKinyuItemList());
-            setその他の皮膚疾患_程度(要介護認定主治医意見書情報_TMP.getShujiiIkenshoIkenItemList());
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            setその他の皮膚疾患記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
+            setその他の皮膚疾患_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
             div.getTxtJokusoBui().setReadOnly(true);
             div.getChkJokusoTeido().setReadOnly(true);

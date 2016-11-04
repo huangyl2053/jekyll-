@@ -464,7 +464,7 @@ public class GemmenJuminKihonHandler {
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo5().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo5().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo6().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo6().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo7().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo7().getValue());
-        金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo7().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo8().getValue());
+        金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo8().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo8().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo9().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo9().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo10().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo10().getValue());
         金額 = 金額.add(減免情報パネル.getTxtFuchoGemmemGo11().getValue() == null ? Decimal.ZERO : 減免情報パネル.getTxtFuchoGemmemGo11().getValue());
@@ -1575,10 +1575,10 @@ public class GemmenJuminKihonHandler {
         KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
         KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
         GemmenJohoBuilder builder = 最新減免の情報.createBuilderForEdit();
-        if (過年度2パネル.isVisible()) {
+        if (!過年度2パネル.isDisplayNone()) {
             RString 期 = 過年度2パネル.getKi2().getText().trimEnd(期R.toString().charAt(ゼロ_定値));
             builder = set普徴期別金額(期, builder, 過年度2パネル.getTxtGo2().getValue());
-        } else if (過年度1パネル.isVisible()) {
+        } else if (!過年度1パネル.isDisplayNone()) {
             RString 期 = 過年度1パネル.getKi1().getText().trimEnd(期R.toString().charAt(ゼロ_定値));
             builder = set普徴期別金額(期, builder, 過年度1パネル.getTxtGo1().getValue());
         } else {

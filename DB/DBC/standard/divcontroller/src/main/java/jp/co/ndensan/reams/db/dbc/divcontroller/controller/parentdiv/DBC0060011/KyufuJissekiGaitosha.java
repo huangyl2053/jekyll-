@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KyufuJissekiGaitosha {
 
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
+    private static final RString なし = new RString("なし");
 
     /**
      * 画面の初期化メソッドです。
@@ -76,7 +77,15 @@ public class KyufuJissekiGaitosha {
                 div.getSearchToKyufujissekiPanel().getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo(),
                 div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue().getYearMonth().toDateString(),
                 div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getToValue().getYearMonth().toDateString());
-        getHandler(div).onClick_btnSearch(給付管理票一覧);
+        if (給付管理票一覧 != null) {
+            getHandler(div).onClick_btnSearch(給付管理票一覧);
+        } else {
+            div.setHidden件数(なし);
+            ValidationMessageControlPairs pairs2 = getValidationHandler(div).validateFor検索チェック();
+            if (pairs2.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs2).respond();
+            }
+        }
         return ResponseData.of(div).respond();
     }
 

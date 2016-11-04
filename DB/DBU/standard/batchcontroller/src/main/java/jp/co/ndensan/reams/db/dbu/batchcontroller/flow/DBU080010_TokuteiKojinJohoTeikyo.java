@@ -121,7 +121,8 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
      */
     @Step(バッチパラメータの取得)
     protected IBatchFlowCommand exeHanKanriNoHantei() {
-        return simpleBatch(TokuteiKojinJohoTeikyoSetParameterProcess.class).define();
+        TokuteiKojinJohoTeikyoProcessParameter processParameter = parameter.toTokuteiKojinJohoTeikyoProcessParameter();
+        return simpleBatch(TokuteiKojinJohoTeikyoSetParameterProcess.class).arguments(processParameter).define();
     }
 
     /**

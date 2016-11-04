@@ -78,13 +78,13 @@ public class KaigoNinteiShikakuInfoHandler {
             div.getTxtSoshitsuYmd().setValue(new FlexibleDate(ninteiShikakuInfoBusiness.get資格喪失年月日().toString()));
         }
 //<<<<<<< HEAD
-        div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).get名称());
-        if (ninteiShikakuInfoBusiness.get住所地特例フラグ().equals(new RString("1"))) {
+//        div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).get名称());
+//        if (ninteiShikakuInfoBusiness.get住所地特例フラグ().equals(new RString("1"))) {
 //=======
-//        if (!RString.isNullOrEmpty(ninteiShikakuInfoBusiness.get資格喪失事由コード())) {
-//            div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).getName());
-//        }
-//        if (new RString("1").equals(ninteiShikakuInfoBusiness.get住所地特例フラグ())) {
+        if (!RString.isNullOrEmpty(ninteiShikakuInfoBusiness.get資格喪失事由コード())) {
+            div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).get名称());
+        }
+        if (new RString("1").equals(ninteiShikakuInfoBusiness.get住所地特例フラグ())) {
 //>>>>>>> origin/sync
             div.getTxtJutokuKubun().setValue(JushochitokureishaKubun.toValue(ninteiShikakuInfoBusiness.get住所地特例フラグ()).get名称());
         } else {

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GensenChoshuDataSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class GensenChoshuDataSakuseiDiv extends Panel {
      */
     @JsonProperty("txtNendo")
     private TextBoxDate txtNendo;
+    @JsonProperty("labNendo")
+    private Label labNendo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class GensenChoshuDataSakuseiDiv extends Panel {
     @JsonProperty("txtNendo")
     public void setTxtNendo(TextBoxDate txtNendo) {
         this.txtNendo = txtNendo;
+    }
+
+    /*
+     * getlabNendo
+     * @return labNendo
+     */
+    @JsonProperty("labNendo")
+    public Label getLabNendo() {
+        return labNendo;
+    }
+
+    /*
+     * setlabNendo
+     * @param labNendo labNendo
+     */
+    @JsonProperty("labNendo")
+    public void setLabNendo(Label labNendo) {
+        this.labNendo = labNendo;
     }
 
     // </editor-fold>

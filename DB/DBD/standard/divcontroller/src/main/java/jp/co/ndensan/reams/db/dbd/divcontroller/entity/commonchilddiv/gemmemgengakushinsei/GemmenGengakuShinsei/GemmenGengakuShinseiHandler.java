@@ -91,11 +91,23 @@ public class GemmenGengakuShinseiHandler {
             div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
             div.getCcdShisetsuJoho().setShisetsuMeisho(kaigoJigyosha.get事業者名称().getColumnValue());
         } else {
-            div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
+
+            div.getDdlJigyoshaKubun().setDataSource(getDdlJigyoshaKubun());
+            if (減免減額申請情報.get事業者区分() != null) {
+                div.getDdlJigyoshaKubun().setSelectedKey(減免減額申請情報.get事業者区分().getCode());
+            } else {
+                div.getDdlJigyoshaKubun().setSelectedKey(空白KEY);
+            }
+            if (減免減額申請情報.get申請届出代行事業者番号() != null && !減免減額申請情報.get申請届出代行事業者番号().isEmpty()) {
+                div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
+            } else {
+                div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
+            }
+
+            //TODO
             div.getCcdShisetsuJoho().setShisetsuMeisho(RString.EMPTY);
+
         }
-        div.getDdlJigyoshaKubun().setDataSource(getDdlJigyoshaKubun());
-        div.getDdlJigyoshaKubun().setSelectedKey(空白KEY);
         if (減免減額申請情報.get申請届出代行区分() != null) {
             div.getDdlShinseiDaikoKubun().setSelectedKey(減免減額申請情報.get申請届出代行区分().getCode());
         } else {

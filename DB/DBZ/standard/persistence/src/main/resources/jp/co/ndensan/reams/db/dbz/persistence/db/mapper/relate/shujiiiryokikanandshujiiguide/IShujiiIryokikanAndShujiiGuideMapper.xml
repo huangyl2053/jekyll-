@@ -59,35 +59,11 @@
                     DbT5911."shujiiIryokikanCode" = DbT5912."shujiiIryokikanCode"
                     AND
                     DbT5911."shichosonCode" = DbT5912."shichosonCode"
-            <if test = "shujiiCodeFromFlag">
-                AND
-                DbT5912."shujiiCode" <![CDATA[>=]]> #{shujiiCodeFrom}
-            </if>
-            <if test = "shujiiCodeToFlag">
-                AND
-                DbT5912."shujiiCode" <![CDATA[<=]]> #{shujiiCodeTo}
-            </if>
-            <if test = "shujiiJokyoFlag">
-                AND
-                DbT5912."jokyoFlag" = true
-            </if>
-            <if test = "!shujiiJokyoFlag">
-                AND
-                DbT5912."jokyoFlag" = false
-            </if>
-            <if test = "shujiiNameFlag">
-                AND
-                DbT5912."shujiiName" LIKE '%' || #{shujiiName} || '%'
-            </if>
-            <if test = "shujiiKanaFlag">
-                AND
-                DbT5912."shujiiKana" LIKE '%' || #{shujiiKana} || '%'
-            </if>
         WHERE
             1 = 1
             <if test = "hokenshaFlag">
                 AND
-                DbT5911."shichosonCode" = #{hokensha}
+                DbT5912."shichosonCode" = #{hokensha}
             </if>
             <if test = "shujiiIryokikanCodeFromFlag">
                 AND
@@ -112,6 +88,30 @@
             <if test = "iryoKikanMeishoKanaFlag">
                 AND
                 DbT5911."iryoKikanMeishoKana" LIKE '%' || #{iryoKikanMeishoKana} || '%'
+            </if>
+            <if test = "shujiiCodeFromFlag">
+                AND
+                DbT5912."shujiiCode" <![CDATA[>=]]> #{shujiiCodeFrom}
+            </if>
+            <if test = "shujiiCodeToFlag">
+                AND
+                DbT5912."shujiiCode" <![CDATA[<=]]> #{shujiiCodeTo}
+            </if>
+            <if test = "shujiiJokyoFlag">
+                AND
+                DbT5912."jokyoFlag" = true
+            </if>
+            <if test = "!shujiiJokyoFlag">
+                AND
+                DbT5912."jokyoFlag" = false
+            </if>
+            <if test = "shujiiNameFlag">
+                AND
+                DbT5912."shujiiName" LIKE '%' || #{shujiiName} || '%'
+            </if>
+            <if test = "shujiiKanaFlag">
+                AND
+                DbT5912."shujiiKana" LIKE '%' || #{shujiiKana} || '%'
             </if>
         LIMIT #{maxCount}
     </select>
@@ -201,6 +201,55 @@
             <if test = "shujiiKanaFlag">
                 AND
                 DbT4912."shujiiKana" LIKE '%' || #{shujiiKana} || '%'
+            </if>
+        LIMIT #{maxCount}
+    </select>
+    <select resultOrdered="true" id="get主治医医療機関情報" resultMap="resultMap_主治医医療機関_主治医情報" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
+            fetchSize="500">
+        SELECT
+            DbT5911."shichosonCode" AS "shichosonCode"
+            ,DbT5911."shujiiIryokikanCode" AS "shujiiIryokikanCode"
+            ,DbT5911."iryokikanCode" AS "iryokikanCode"
+            ,DbT5911."iryoKikanMeisho" AS "iryoKikanMeisho"
+            ,DbT5911."iryoKikanMeishoKana" AS "iryoKikanMeishoKana"
+            ,DbT5911."yubinNo" AS "shujiiIryoKikanyubinNo"
+            ,DbT5911."jusho" AS "shujiiIryoKikanjusho"
+            ,DbT5911."telNo" AS "shujiiIryoKikantelNo"
+            ,DbT5911."faxNo" AS "shujiiIryoKikanfaxNo"
+            ,DbT5911."daihyoshaName" AS "daihyoshaName"
+            ,DbT5911."jokyoFlag" AS "shujiiIryoKikanjokyoFlag"
+        FROM
+            rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
+        WHERE
+            1 = 1
+            <if test = "hokenshaFlag">
+                AND
+                DbT5911"shichosonCode" = #{hokensha}
+            </if>
+            <if test = "shujiiIryokikanCodeFromFlag">
+                AND
+                DbT5911."shujiiIryokikanCode" <![CDATA[>=]]> #{shujiiIryokikanCodeFrom}
+            </if>
+            <if test = "shujiiIryokikanCodeToFlag">
+                AND
+                DbT5911."shujiiIryokikanCode" <![CDATA[<=]]> #{shujiiIryokikanCodeTo}
+            </if>
+            <if test = "shujiiIryokikanCodeJokyoFlag">
+                AND
+                DbT5911."jokyoFlag" = true
+            </if>
+            <if test = "!shujiiIryokikanCodeJokyoFlag">
+                AND
+                DbT5911."jokyoFlag" = false
+            </if>
+            <if test = "iryoKikanMeishoFlag">
+                AND
+                DbT5911."iryoKikanMeisho" LIKE '%' || #{iryoKikanMeisho} || '%'
+            </if>
+            <if test = "iryoKikanMeishoKanaFlag">
+                AND
+                DbT5911."iryoKikanMeishoKana" LIKE '%' || #{iryoKikanMeishoKana} || '%'
             </if>
         LIMIT #{maxCount}
     </select>

@@ -19,20 +19,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class SetaiinHaakuSubTempProcessParameter implements IBatchProcessParameter {
 
     private final RString 管理識別区分;
-    private final RString psmShikibetsuTaisho;
     private final RString 住所地特例該当;
+    private RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
      *
      * @param 管理識別区分 管理識別区分
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @param 住所地特例該当 住所地特例該当
      */
-    public SetaiinHaakuSubTempProcessParameter(RString 管理識別区分, RString 住所地特例該当, RString psmShikibetsuTaisho) {
+    public SetaiinHaakuSubTempProcessParameter(RString 管理識別区分, RString 住所地特例該当) {
         this.管理識別区分 = 管理識別区分;
         this.住所地特例該当 = 住所地特例該当;
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**

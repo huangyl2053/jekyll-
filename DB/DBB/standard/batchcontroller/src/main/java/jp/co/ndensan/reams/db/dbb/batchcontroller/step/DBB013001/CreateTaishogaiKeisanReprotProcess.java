@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.PrtKaigoFukaTokuchoHeijunkaCore;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.DBB200005_HeijunkaKeisanIchiran;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.DBB200003_HeijunkaKeisanJuneKekkaIchiran;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TkChoshuHeijunkaKeisanJuneKekkaIchiranPageBreak;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishogaiEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TokuchoHeijunkaRokuBatchTaishogaiHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranSource;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -75,9 +75,9 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 特別徴収平準化計算（特別徴収8月分）結果一覧表対象外の帳票出力クラスです。
  *
- * @reamsid_L DBB-0860-030 jiangxiaolong
+ * @reamsid_L DBB-0860-030 yebangqiang
  */
-public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<TokuchoHeijunkaRokuBatchTaishogaiEntity> {
+public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<TokuchoHeijunkaRokuBatchTaishogaiHachiEntity> {
 
     /**
      * OutputParameter用キー REPORT_FLAG
@@ -93,12 +93,8 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final RString 対象外データテンプ_テーブル = new RString("対象外データ.");
-    private static final RString 識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 世帯コード = new RString("\"setaiCode\"");
-    private static final RString 賦課_識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 賦課_被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 賦課_世帯コード = new RString("\"setaiCode\"");
     private static final RString 編集コード_併徴者 = new RString("併徴者");
     private static final RString 編集コード_仮徴収額修正者 = new RString("仮徴収額修正者");
     private static final RString 編集コード_対象外_減額 = new RString("対象外_減額");
@@ -140,7 +136,7 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
         出力順 = RString.EMPTY;
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
-                    DBB200003_HeijunkaKeisanJuneKekkaIchiran.class, outputOrder);
+                    DBB200005_HeijunkaKeisanIchiran.class, outputOrder);
             for (ISetSortItem item : outputOrder.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     pageBreakKeys.add(item.get項目ID());
@@ -160,7 +156,7 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     @Override
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue()).
-                addBreak(new TkChoshuHeijunkaKeisanJuneKekkaIchiranPageBreak(pageBreakKeys)).create();
+                addBreak(new TokubetsuChoshuHeijunkaKeisanIchiranPageBreak(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
@@ -178,9 +174,10 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
 
     @Override
     protected IBatchReader createReader() {
-        TokuchoHeinjunka6GatsuMyBatisParameter myBatisParameter = new TokuchoHeinjunka6GatsuMyBatisParameter();
+        TokuchoHeinjunka8GatsuMyBatisParameter myBatisParameter = new TokuchoHeinjunka8GatsuMyBatisParameter();
         myBatisParameter.set調定年度(parameter.get調定年度());
         myBatisParameter.set賦課年度(parameter.get賦課年度());
+        myBatisParameter.set調定日時(parameter.get調定日時());
         myBatisParameter.set調定前年度(parameter.get調定年度().minusYear(1));
         myBatisParameter.set出力順(出力順再設定(出力順));
         myBatisParameter.setShikibetsutaishoParam(parameter.getShikibetsutaishoParam());
@@ -188,7 +185,7 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     }
 
     @Override
-    protected void usualProcess(TokuchoHeijunkaRokuBatchTaishogaiEntity entity) {
+    protected void usualProcess(TokuchoHeijunkaRokuBatchTaishogaiHachiEntity entity) {
         TokuchoHeijyunkaTaishogaiEntity taishogaiEntity = get特徴平準化計算対象外entity(
                 entity.get対象外データTemp(), entity);
         RString 算定年額保険料 = taishogaiEntity.get保険料算定段階2() == null ? taishogaiEntity.get保険料算定段階1()
@@ -374,8 +371,8 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
         return 今年度保険料率;
     }
 
-    private TokuchoHeijyunkaTaishogaiEntity get特徴平準化計算対象外entity(FukaJohoTmpEntity 対象外データTemp,
-            TokuchoHeijunkaRokuBatchTaishogaiEntity 対象外データ) {
+    private TokuchoHeijyunkaTaishogaiEntity get特徴平準化計算対象外entity(FukaJohoTmpHachiEntity 対象外データTemp,
+            TokuchoHeijunkaRokuBatchTaishogaiHachiEntity 対象外データ) {
         TokuchoHeijyunkaTaishogaiEntity taishogaiEntity = new TokuchoHeijyunkaTaishogaiEntity();
         taishogaiEntity.set調定年度(対象外データTemp.getChoteiNendo());
         taishogaiEntity.set賦課年度(対象外データTemp.getFukaNendo());
@@ -485,12 +482,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     }
 
     private RString 出力順再設定(RString 出力順) {
-        if (出力順.contains(世帯コード)) {
-            出力順 = 出力順.replace(世帯コード, 対象外データテンプ_テーブル.concat(賦課_世帯コード));
-        }
-        if (出力順.contains(識別コード)) {
-            出力順 = 出力順.replace(識別コード, 対象外データテンプ_テーブル.concat(賦課_識別コード));
-        }
         if (出力順.contains(被保険者番号)) {
             出力順 = 出力順.replace(被保険者番号, 対象外データテンプ_テーブル.concat(賦課_被保険者番号));
         }
@@ -498,6 +489,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     }
 
     @Override
-    protected void keyBreakProcess(TokuchoHeijunkaRokuBatchTaishogaiEntity t) {
+    protected void keyBreakProcess(TokuchoHeijunkaRokuBatchTaishogaiHachiEntity t) {
     }
 }

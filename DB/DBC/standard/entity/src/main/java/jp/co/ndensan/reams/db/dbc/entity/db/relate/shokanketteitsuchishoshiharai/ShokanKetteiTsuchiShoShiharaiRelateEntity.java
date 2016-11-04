@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -67,4 +68,5 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private GyoseikuCode gyoseikuCode;
     private AtenaKanaMeisho kanaMeisho;
     private LasdecCode genLasdecCode;
+    private ShikibetsuCode shikibetsuCode;
 }

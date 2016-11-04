@@ -40,7 +40,7 @@ public class NinteiChosaJokyoValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         FlexibleDate fromValue = div.getTxtNinteiYukoKikanFrom().getValue();
         FlexibleDate toValue = div.getTxtNinteiYukoKikanTo().getValue();
-        if (fromValue != null && toValue != null && toValue.compareTo(fromValue) < 0) {
+        if (!fromValue.isEmpty() && !toValue.isEmpty() && toValue.compareTo(fromValue) < 0) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.前後関係逆転,
                             "認定有効期間From", "認定有効期間To"),

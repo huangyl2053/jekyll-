@@ -82,7 +82,7 @@ public class ChosainJohoBuilder {
      * @return {@link ChosainJohoBuilder}
      */
     public ChosainJohoBuilder set調査員資格(RString 調査員資格) {
-        requireNonNull(調査員資格, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員資格"));
+       // requireNonNull(調査員資格, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員資格"));
         entity.setChosainShikaku(調査員資格);
         return this;
     }

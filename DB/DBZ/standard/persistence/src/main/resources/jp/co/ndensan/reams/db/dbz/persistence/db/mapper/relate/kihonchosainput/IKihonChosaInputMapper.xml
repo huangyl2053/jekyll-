@@ -70,7 +70,6 @@
         AND F."koroshoIfShikibetsuCode" = 前回認定調査票（基本調査）調査項目."koroshoIfShikibetsuCode"
         WHERE
         C."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND C."ninteichosaIraiKanryoYMD" IS NOT NULL
         AND C."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND C."ninteiShinsakaiKanryoYMD" IS NULL
         AND C."centerSoshinYMD" IS NULL

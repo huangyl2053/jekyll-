@@ -26,6 +26,13 @@ public interface INinteiShinseiTorokuUketsukeMapper {
      * @return NinteiShinseiTorokuUketsukeEntity
      */
     NinteiShinseiTorokuUketsukeEntity get初期化情報(NinteiShinseiTorokuUketsukeParameter param);
+    
+    /**
+     * 
+     * @param param
+     * @return 
+     */
+    NinteiShinseiTorokuUketsukeEntity get初期化情報_申請区分変更サービス変更修正(NinteiShinseiTorokuUketsukeParameter param);
 
     /**
      * 履歴情報を取得します。

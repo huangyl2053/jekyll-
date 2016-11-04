@@ -65,6 +65,31 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
     }
 
     /**
+     * 市町村コード、認定調査委託先コードで調査員情報一覧を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @return DbT5913ChosainJohoEntityの{@code list}
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5913ChosainJohoEntity> selectByKey(
+            LasdecCode 市町村コード,
+            ChosaItakusakiCode 認定調査委託先コード) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5913ChosainJoho.class).
+                where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード))).
+                toList(DbT5913ChosainJohoEntity.class);
+    }
+
+    /**
      * 調査員情報を全件返します。
      *
      * @return DbT5913ChosainJohoEntityの{@code list}

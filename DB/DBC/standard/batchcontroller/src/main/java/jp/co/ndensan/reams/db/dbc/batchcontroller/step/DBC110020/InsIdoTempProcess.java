@@ -55,7 +55,8 @@ public class InsIdoTempProcess extends BatchProcessBase<HihoNoTempEntity> {
             return;
         }
         保番NoList.add(entity.getHihokenshaNo());
-//        if (entity.getHihokenshaNo().equals(new HihokenshaNo("2016092401"))) {
+//        if (entity.getHihokenshaNo().equals(new HihokenshaNo("2016092401"))
+//                || entity.getHihokenshaNo().equals(new HihokenshaNo("2016092402"))) {
         異動対象一時tableWriter.insert(entity);
 //        }
     }

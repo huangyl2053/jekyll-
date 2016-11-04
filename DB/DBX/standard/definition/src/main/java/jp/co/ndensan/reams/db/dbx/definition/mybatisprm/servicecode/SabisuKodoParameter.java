@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode;
 
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -191,5 +192,30 @@ public final class SabisuKodoParameter {
                 サービス種類リスト,
                 !サービス分類リスト.isEmpty(),
                 !サービス種類リスト.isEmpty());
+    }
+
+    /**
+     * サービス種類による検索をおこなうための検索キーを用意します。
+     *
+     * @param サービス種類リスト サービス種類リスト
+     * @param 基準年月 基準年月
+     * @return サービス種類による検索キー
+     */
+    public static SabisuKodoParameter createServiceShuruiSearchKey(List<RString> サービス種類リスト, FlexibleYearMonth 基準年月) {
+        return new SabisuKodoParameter(RString.EMPTY,
+                false,
+                RString.EMPTY,
+                false,
+                基準年月,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                Collections.<RString>emptyList(),
+                サービス種類リスト,
+                false,
+                !(サービス種類リスト == null || サービス種類リスト.isEmpty()));
     }
 }

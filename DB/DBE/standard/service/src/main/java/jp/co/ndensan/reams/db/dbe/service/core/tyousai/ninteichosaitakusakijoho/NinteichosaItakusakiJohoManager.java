@@ -115,8 +115,7 @@ public class NinteichosaItakusakiJohoManager {
      * @return 認定調査委託先情報件数
      */
     public int countByKey(LasdecCode 市町村コード, RString 認定調査委託先コード) {
-        return 0;
-//        return 認定調査委託先情報Dac.countByKey(市町村コード, 認定調査委託先コード);
+        return 認定調査委託先情報Dac.countByKey(市町村コード, 認定調査委託先コード);
     }
 
     /**

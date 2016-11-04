@@ -431,4 +431,42 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
     }
 
 //TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    /**
+     * 被保険者台帳と同一のデータを持つ、新しい被保険者台帳情報を作成します。
+     * 被保険者台帳の前履歴データを元に、新規に履歴を発生させたい場合などに使用します。
+     *
+     * @return 新規被保険者台帳Entity
+     */
+    public HihokenshaDaicho createNewCopyData() {
+        DbT1001HihokenshaDaichoEntity newEntity = new DbT1001HihokenshaDaichoEntity();
+        newEntity.setHihokenshaNo(entity.getHihokenshaNo());
+        newEntity.setIdoYMD(entity.getIdoYMD());
+        newEntity.setEdaNo(entity.getEdaNo());
+        newEntity.setIdoJiyuCode(entity.getIdoJiyuCode());
+        newEntity.setShichosonCode(entity.getShichosonCode());
+        newEntity.setShikibetsuCode(entity.getShikibetsuCode());
+        newEntity.setShikakuShutokuJiyuCode(entity.getShikakuShutokuJiyuCode());
+        newEntity.setShikakuShutokuYMD(entity.getShikakuShutokuYMD());
+        newEntity.setShikakuShutokuTodokedeYMD(entity.getShikakuShutokuTodokedeYMD());
+        newEntity.setIchigoShikakuShutokuYMD(entity.getIchigoShikakuShutokuYMD());
+        newEntity.setHihokennshaKubunCode(entity.getHihokennshaKubunCode());
+        newEntity.setShikakuSoshitsuJiyuCode(entity.getShikakuSoshitsuJiyuCode());
+        newEntity.setShikakuSoshitsuYMD(entity.getShikakuSoshitsuYMD());
+        newEntity.setShikakuSoshitsuTodokedeYMD(entity.getShikakuSoshitsuTodokedeYMD());
+        newEntity.setShikakuHenkoJiyuCode(entity.getShikakuHenkoJiyuCode());
+        newEntity.setShikakuHenkoYMD(entity.getShikakuHenkoYMD());
+        newEntity.setShikakuHenkoTodokedeYMD(entity.getShikakuHenkoTodokedeYMD());
+        newEntity.setJushochitokureiTekiyoJiyuCode(entity.getJushochitokureiTekiyoJiyuCode());
+        newEntity.setJushochitokureiTekiyoYMD(entity.getJushochitokureiTekiyoYMD());
+        newEntity.setJushochitokureiTekiyoTodokedeYMD(entity.getJushochitokureiTekiyoTodokedeYMD());
+        newEntity.setJushochitokureiKaijoJiyuCode(entity.getJushochitokureiKaijoJiyuCode());
+        newEntity.setJushochitokureiKaijoYMD(entity.getJushochitokureiKaijoYMD());
+        newEntity.setJushochitokureiKaijoTodokedeYMD(entity.getJushochitokureiKaijoTodokedeYMD());
+        newEntity.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
+        newEntity.setKoikinaiJushochiTokureiFlag(entity.getKoikinaiJushochiTokureiFlag());
+        newEntity.setKoikinaiTokureiSochimotoShichosonCode(entity.getKoikinaiTokureiSochimotoShichosonCode());
+        newEntity.setKyuShichosonCode(entity.getKyuShichosonCode());
+        newEntity.setLogicalDeletedFlag(entity.getLogicalDeletedFlag());
+        return new HihokenshaDaicho(newEntity);
+    }
 }

@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 境界層該当者台帳管理Handlerクラスです。
@@ -63,6 +64,7 @@ public class KyokaisoGaitoshaPanelHandler {
     private static final RDate 申請年月日 = new RDate("20150401");
 
     private final KyokaisoGaitoshaPanelDiv div;
+    private static final RString 非該当フラグ = new RString("2");
 
     /**
      * コンストラクタです。
@@ -147,6 +149,11 @@ public class KyokaisoGaitoshaPanelHandler {
                 所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
         set境界層該当明細(row, 境界層保険料段階情報);
         set境界層該当明細活性();
+        onClick_radHyojunFutanGaku();
+        onClick_radkyojuhiFutanGakuGengaku();
+        onClick_radShokuhiFutangakuGengaku();
+        onClick_radGogakuServiceJoken();
+        onClick_radHokenryoNofuGengaku();
     }
 
     /**
@@ -165,6 +172,68 @@ public class KyokaisoGaitoshaPanelHandler {
                 所得段階ドロップダウンリスト(new RDate(row.getShinseiDate().toString())));
         set境界層該当明細(row, 境界層保険料段階情報);
         set境界層該当明細非活性();
+    }
+
+    /**
+     * 該当・非該当を押下された場合、標準負担額の項目が活性・不活性になる。
+     */
+    public void onClick_radHyojunFutanGaku() {
+        if (非該当フラグ.equals(div.getRadHyojunFutanGaku().getSelectedKey())) {
+            div.getTxtHyojunFutanKeigenAtoFutanGaku().setDisabled(true);
+        } else {
+            div.getTxtHyojunFutanKeigenAtoFutanGaku().setDisabled(false);
+        }
+    }
+
+    /**
+     * 該当・非該当を押下された場合、居住費等負担額減額の項目が活性・不活性になる。
+     */
+    public void onClick_radkyojuhiFutanGakuGengaku() {
+        if (非該当フラグ.equals(div.getRadKyojuhiFutanGakuGengaku().getSelectedKey())) {
+            div.getDdlKyoshituShurui().setDisabled(true);
+            div.getTxtKeigenAtoFutanGaku().setDisabled(true);
+        } else {
+            div.getDdlKyoshituShurui().setDisabled(false);
+            div.getTxtKeigenAtoFutanGaku().setDisabled(false);
+        }
+    }
+
+    /**
+     * 該当・非該当を押下された場合、食費負担額減額の項目が活性・不活性になる。
+     */
+    public void onClick_radShokuhiFutangakuGengaku() {
+        if (非該当フラグ.equals(div.getRadShokuhiFutangakuGengaku().getSelectedKey())) {
+            div.getTxtShokuhiGenkenAtoFutangaku().setDisabled(true);
+        } else {
+            div.getTxtShokuhiGenkenAtoFutangaku().setDisabled(false);
+        }
+    }
+
+    /**
+     * 該当・非該当を押下された場合、高額サービス費上限額減額の項目が活性・不活性になる。
+     */
+    public void onClick_radGogakuServiceJoken() {
+        if (非該当フラグ.equals(div.getRadGogakuServiceJokengaku().getSelectedKey())) {
+            div.getDdlSeidaiJogengaku().setDisabled(true);
+        } else {
+            div.getDdlSeidaiJogengaku().setDisabled(false);
+        }
+    }
+
+    /**
+     * 適用する・適用しないを押下された場合、項目が活性・不活性になる。
+     */
+    public void onClick_radHokenryoNofuGengaku() {
+        if (非該当フラグ.equals(div.getRadHokenryoNofuGengaku().getSelectedKey())) {
+            div.getHohenryoNofuPanel().setDisabled(true);
+            div.getTxtHohenryoNofuFromDate().setDisabled(true);
+            div.getTxtHohenryoNofuToDate().setDisabled(true);
+            div.getDdlTekiyouSuruShutokuDankai().setDisabled(true);
+            div.getBtnCancel().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
+        } else {
+            div.getHohenryoNofuPanel().setDisabled(false);
+        }
     }
 
     /**
@@ -726,10 +795,10 @@ public class KyokaisoGaitoshaPanelHandler {
     }
 
     private List<KeyValueDataSource> 居住費軽減後居室種類ドロップダウンリスト() {
-        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        FlexibleDate 基準日 = new FlexibleDate(RDate.getNowDate().toDateString());
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         List<UzT0007CodeEntity> dataSourceList = CodeMaster.getCode(SubGyomuCode.DBZ介護共通,
-                DBZCodeShubetsu.居室種類.getコード(), 基准日);
+                DBZCodeShubetsu.居室種類.getコード(), 基準日);
         for (UzT0007CodeEntity entity : dataSourceList) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(entity.getコード().getColumnValue());
@@ -765,29 +834,29 @@ public class KyokaisoGaitoshaPanelHandler {
         RDate 適用基準日 = RDate.getNowDate();
         if (申請日.isBefore(申請年月日)) {
             KeyValueDataSource 第1段階 = new KeyValueDataSource();
-            第1段階.setValue(ConfigNameDBC.第1段階_高額介護サービス費支給_自己負担上限月額.get名称());
+            第1段階.setValue(読替後高額介護世帯上限額カンマ処理(ConfigNameDBC.第1段階_高額介護サービス費支給_自己負担上限月額, 適用基準日));
             第1段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第1段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第2段階 = new KeyValueDataSource();
-            第2段階.setValue(ConfigNameDBC.第2段階_高額介護サービス費支給_自己負担上限月額.get名称());
+            第2段階.setValue(読替後高額介護世帯上限額カンマ処理(ConfigNameDBC.第2段階_高額介護サービス費支給_自己負担上限月額, 適用基準日));
             第2段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第2段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第3段階 = new KeyValueDataSource();
-            第3段階.setValue(ConfigNameDBC.第3段階_高額介護サービス費支給_自己負担上限月額.get名称());
+            第3段階.setValue(読替後高額介護世帯上限額カンマ処理(ConfigNameDBC.第3段階_高額介護サービス費支給_自己負担上限月額, 適用基準日));
             第3段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第3段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             dataSourceList.add(第1段階);
             dataSourceList.add(第2段階);
             dataSourceList.add(第3段階);
         } else {
             KeyValueDataSource 第1段階 = new KeyValueDataSource();
-            第1段階.setValue(ConfigNameDBC.第1段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
+            第1段階.setValue(読替後高額介護世帯上限額カンマ処理(ConfigNameDBC.第1段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日));
             第1段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第1段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第2段階 = new KeyValueDataSource();
-            第2段階.setValue(ConfigNameDBC.第2段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
+            第2段階.setValue(読替後高額介護世帯上限額カンマ処理(ConfigNameDBC.第2段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日));
             第2段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第2段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第3段階 = new KeyValueDataSource();
-            第3段階.setValue(ConfigNameDBC.第3段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
+            第3段階.setValue(読替後高額介護世帯上限額カンマ処理(ConfigNameDBC.第3段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日));
             第3段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第3段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第4段階 = new KeyValueDataSource();
-            第4段階.setValue(ConfigNameDBC.第4段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
+            第4段階.setValue(読替後高額介護世帯上限額カンマ処理(ConfigNameDBC.第4段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日));
             第4段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第4段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             dataSourceList.add(第1段階);
             dataSourceList.add(第2段階);
@@ -795,6 +864,11 @@ public class KyokaisoGaitoshaPanelHandler {
             dataSourceList.add(第4段階);
         }
         return dataSourceList;
+    }
+
+    private RString 読替後高額介護世帯上限額カンマ処理(ConfigNameDBC con, RDate 適用基準日) {
+        Decimal dec = new Decimal(DbBusinessConfig.get(con, 適用基準日, SubGyomuCode.DBC介護給付).toString());
+        return DecimalFormatter.toコンマ区切りRString(dec, 0);
     }
 
     private List<KeyValueDataSource> 所得段階ドロップダウンリスト(RDate 申請日) {

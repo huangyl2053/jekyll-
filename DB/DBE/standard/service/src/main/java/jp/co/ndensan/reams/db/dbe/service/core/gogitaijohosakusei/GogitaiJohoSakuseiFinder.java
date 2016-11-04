@@ -32,7 +32,9 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 合議体情報作成のサービスクラスです。
  *
@@ -88,18 +90,19 @@ public class GogitaiJohoSakuseiFinder {
      * 合議体情報一覧のデータを取得します。
      *
      * @param param 合議体情報作成のパラメータ
-     * @return SearchResult<GogitaiJohoSakuseiRsult>
+     * @return SearchResult<GogitaiJoho>
      */
-    public SearchResult<GogitaiJohoSakuseiRsult> getDateGridList(GogitaiJohoSakuseiParameter param) {
+    public SearchResult<GogitaiJoho> getDateGridList(GogitaiJohoSakuseiParameter param) {
 
-        List<GogitaiJohoSakuseiRsult> resultList = new ArrayList<>();
-        List<GogitaiJohoSakuseiRelateEntity> gogitaiRelateEntityList
-                = mapperProvider.create(IGogitaiJohoSakuseiMapper.class).getGogitaiJohoSakuseiGridList(param);
+        List<GogitaiJoho> resultList = new ArrayList<>();
+        List<GogitaiJohoRelateEntity> gogitaiRelateEntityList
+                = mapperProvider.create(IGogitaiJohoSakuseiMapper.class).selectGogitaiJohoSakusei(param);
         if (gogitaiRelateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
-        for (GogitaiJohoSakuseiRelateEntity entity : gogitaiRelateEntityList) {
-            resultList.add(new GogitaiJohoSakuseiRsult(entity));
+        for (GogitaiJohoRelateEntity entity : gogitaiRelateEntityList) {
+            entity.initializeMd5ToEntities();
+            resultList.add(new GogitaiJoho(entity));
         }
         return SearchResult.of(resultList, 0, false);
     }
@@ -194,17 +197,46 @@ public class GogitaiJohoSakuseiFinder {
      * CSV出力内容を取得します。
      *
      * @param param 合議体情報作成のパラメータ
-     * @return SearchResult<GogitaiJohoSakuseiRsult>
+     * @return SearchResult<GogitaiJohoSakuseiCSVEntity>
      */
-    public SearchResult<GogitaiJohoSakuseiRsult> getGogitaiJohoForCSV(GogitaiJohoSakuseiParameter param) {
-        List<GogitaiJohoSakuseiRsult> resultList = new ArrayList<>();
+    public SearchResult<GogitaiJohoSakuseiCSVEntity> getGogitaiJohoForCSV(GogitaiJohoSakuseiParameter param) {
+        List<GogitaiJohoSakuseiCSVEntity> resultList = new ArrayList<>();
         List<GogitaiJohoSakuseiRelateEntity> gogitaiJohoForCSVList
                 = mapperProvider.create(IGogitaiJohoSakuseiMapper.class).getGogitaiJohoForCSV(param);
         if (gogitaiJohoForCSVList.isEmpty()) {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         for (GogitaiJohoSakuseiRelateEntity entity : gogitaiJohoForCSVList) {
-            resultList.add(new GogitaiJohoSakuseiRsult(entity));
+            
+            GogitaiJohoSakuseiCSVEntity tmpEntity = new GogitaiJohoSakuseiCSVEntity();
+            tmpEntity.setGogitaiNo(new RString(entity.getGogitaiNo()));
+            tmpEntity.setGogitaiMei(entity.getGogitaiMei());
+            tmpEntity.setGogitaiYukoKikanKaishiYMD(entity.getGogitaiYukoKikanKaishiYMD().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            tmpEntity.setGogitaiYukoKikanShuryoYMD(entity.getGogitaiYukoKikanShuryoYMD().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            tmpEntity.setGogitaiKaishiYoteiTime(new RString(entity.getGogitaiKaishiYoteiTime().toString()));
+            tmpEntity.setGogitaiShuryoYoteiTime(new RString(entity.getGogitaiShuryoYoteiTime().toString()));
+            tmpEntity.setShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode());
+            tmpEntity.setShinsakaiYoteiTeiin(new RString(entity.getShinsakaiYoteiTeiin()));
+            tmpEntity.setShinsakaiJidoWariateTeiin(new RString(entity.getShinsakaiJidoWariateTeiin()));
+            tmpEntity.setShinsakaiIinTeiin(new RString(entity.getShinsakaiIinTeiin()));
+            if (entity.isGogitaiSeishinkaSonzaiFlag()) {
+                tmpEntity.setGogitaiSeishinkaSonzaiFlag(new RString("1"));
+            } else {
+                tmpEntity.setGogitaiSeishinkaSonzaiFlag(new RString("0"));
+            }
+            if (entity.isGogitaiDummyFlag()) {
+                tmpEntity.setGogitaiDummyFlag(new RString("1"));
+            } else {
+                tmpEntity.setGogitaiDummyFlag(new RString("0"));
+            }
+            tmpEntity.setShinsakaiIinCode(entity.getShinsakaiIinCode());
+            tmpEntity.setGogitaichoKubunCode(entity.getGogitaichoKubunCode().getColumnValue());
+            if (entity.isSubstituteFlag()) {
+                tmpEntity.setSubstituteFlag(new RString("1"));
+            } else {
+                tmpEntity.setSubstituteFlag(new RString("0"));
+            }
+            resultList.add(tmpEntity);
         }
         return SearchResult.of(resultList, 0, false);
     }

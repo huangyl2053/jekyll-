@@ -31,6 +31,8 @@ public class NenreiTotatsuTorokushaListTyouHyouListEntity {
     private RString 改頁３;
     private RString 改頁４;
     private RString 改頁５;
+    private RString 抽出期間From;
+    private RString 抽出期間To;
     private RString 開始タイトル;
     private RString 終了タイトル;
     private RString 区分タイトル;

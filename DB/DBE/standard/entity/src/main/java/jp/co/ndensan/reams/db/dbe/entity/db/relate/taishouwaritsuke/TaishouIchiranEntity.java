@@ -27,6 +27,7 @@ public class TaishouIchiranEntity {
 
     private int 介護認定審査会審査順;
     private boolean 介護認定審査会審査順確定フラグ;
+    private Code 厚労省IF識別コード;
     private Code 介護認定審査会優先振分区分コード;
     private RString 被保険者番号;
     private AtenaKanaMeisho 被保険者氏名;
@@ -37,6 +38,9 @@ public class TaishouIchiranEntity {
     private FlexibleDate 前回認定有効期間_開始;
     private FlexibleDate 前回認定有効期間_終了;
     private FlexibleDate 要介護認定一次判定年月日;
+    private Code 要介護認定一次判定結果コード;
+    private Code 要介護認定前回一次判定結果コード;
+    private Code 二次判定要介護状態区分コード;
     private FlexibleDate マスキング完了年月日;
     private RString 市町村名称;
     private ShoKisaiHokenshaNo 証記載保険者番号;

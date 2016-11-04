@@ -110,9 +110,6 @@ public class JigyoKogakuReportProcess extends BatchProcessBase<FurikomimeisaiDat
         get出力順情報();
         ページ件数 = INT_15;
         出力順リスト = new ArrayList<>();
-        for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
-            出力順リスト.add(item.get項目名());
-        }
         if (Furikomi_ShihraiHohoShitei.口座.getコード().equals(processParameter.get支払方法())) {
             項目名 = ChohyoSeigyoHanyoKomokuMei.帳票タイトル_口座.get名称();
         } else {
@@ -120,6 +117,9 @@ public class JigyoKogakuReportProcess extends BatchProcessBase<FurikomimeisaiDat
         }
         mybatisParameter = processParameter.toMybatisParameter();
         if (出力順情報 != null) {
+            for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
+                出力順リスト.add(item.get項目名());
+            }
             RString 出力順 = MyBatisOrderByClauseCreator.create(JigyoKogakuOutOrder.class, 出力順情報);
             出力順 = 出力順.replace(ORDER, RString.EMPTY).concat(コンマ);
             mybatisParameter.set出力順(出力順);
@@ -174,11 +174,9 @@ public class JigyoKogakuReportProcess extends BatchProcessBase<FurikomimeisaiDat
             FurikomiMeisaiIchiranJigyoKogakuReport report = new FurikomiMeisaiIchiranJigyoKogakuReport(target, is頁計, is総合計);
             report.writeBy(reportSourceWriter);
         }
-        if (index == INT_0) {
-            if (index == INT_0 && Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(processParameter.get処理区分())) {
-                ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = get処理結果確認リスト一時();
-                shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
-            }
+        if (index == INT_0 && Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(processParameter.get処理区分())) {
+            ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = get処理結果確認リスト一時();
+            shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
         }
         pageCount.setValue(reportSourceWriter.pageCount().value());
     }

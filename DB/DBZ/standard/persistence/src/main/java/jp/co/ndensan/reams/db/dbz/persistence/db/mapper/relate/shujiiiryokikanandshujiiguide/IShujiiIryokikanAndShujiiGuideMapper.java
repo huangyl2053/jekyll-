@@ -33,4 +33,13 @@ public interface IShujiiIryokikanAndShujiiGuideMapper {
      */
     List<ShujiiIryokikanAndShujiiRelateEntity> get子主治医医療機関_子主治医情報(
             ShujiiIryokikanAndShujiiGuideParameter parameter);
+
+    /**
+     * 入力された検索条件によって、主治医医療機関情報を取得します。
+     *
+     * @param parameter 主治医医療機関情報検索パラメータ
+     * @return ShujiiIryokikanAndShujiiRelateEntity
+     */
+    List<ShujiiIryokikanAndShujiiRelateEntity> get主治医医療機関情報(
+            ShujiiIryokikanAndShujiiGuideParameter parameter);
 }

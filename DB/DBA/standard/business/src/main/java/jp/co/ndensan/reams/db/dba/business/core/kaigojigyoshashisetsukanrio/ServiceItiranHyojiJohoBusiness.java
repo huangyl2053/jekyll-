@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.jigyoshaservice.JigyoshaServiceJoho;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.JigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -85,6 +89,15 @@ public class ServiceItiranHyojiJohoBusiness {
     }
 
     /**
+     * サービス種類略称を取得します。
+     *
+     * @return サービス種類略称
+     */
+    public RString get状態() {
+        return entity.getState();
+    }
+
+    /**
      * isDeletedのgetメソッドです。
      *
      * @return isDeleted
@@ -92,6 +105,37 @@ public class ServiceItiranHyojiJohoBusiness {
     @SuppressWarnings("PMD.BooleanGetMethodName")
     public boolean get削除フラグ() {
         return entity.isDeleted();
+    }
+
+    /**
+     * 介護事業者指定サービスのクラスを元に、表示用クラスを作成します。
+     *
+     * @param service 介護事業者指定サービス
+     * @param serviceTypeList サービス種類一覧。nullや空のListを渡すとサービス略称が設定されません。
+     * @return 表示用クラス
+     */
+    public static ServiceItiranHyojiJohoBusiness create(KaigoJigyoshaShiteiService service, List<JigyoshaServiceJoho> serviceTypeList) {
+
+        RString 合致サービス種類略称 = RString.EMPTY;
+        if (serviceTypeList != null) {
+            for (JigyoshaServiceJoho サービス種類 : serviceTypeList) {
+                if (サービス種類.getサービス種類コード().equals(service.getサービス種類コード())) {
+                    合致サービス種類略称 = サービス種類.getサービス種類略称();
+                }
+            }
+        }
+        JigyoshaShiteiServiceEntity entity = new JigyoshaShiteiServiceEntity();
+        entity.setDeleted(!service.hasChanged() && service.toEntity().getIsDeleted());
+        ViewExecutionStatus status = ViewExecutionStatus.toValue(new RString(service.toEntity().getState().name()));
+        entity.setState(status.get名称());
+        entity.setJigyoshaName(service.get事業者名称());
+        entity.setKanrishaName(service.get管理者氏名());
+        entity.setServiceShuruiCode(service.getサービス種類コード());
+        entity.setServiceShuruiRyakusho(合致サービス種類略称);
+        entity.setYukoKaishiYMD(service.get登録開始日());
+        entity.setYukoShuryoYMD(service.get登録終了日());
+
+        return new ServiceItiranHyojiJohoBusiness(entity);
     }
 
 }

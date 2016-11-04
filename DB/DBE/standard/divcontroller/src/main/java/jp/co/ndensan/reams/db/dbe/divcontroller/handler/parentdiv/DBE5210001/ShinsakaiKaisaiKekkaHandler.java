@@ -144,19 +144,19 @@ public class ShinsakaiKaisaiKekkaHandler {
 
     private List<KeyValueDataSource> setIssotaiUmu() {
         List<KeyValueDataSource> sotaiUmu = new ArrayList<>();
-        for (IssotaiUmu issotaiUmu : IssotaiUmu.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(issotaiUmu.is委員早退())), issotaiUmu.get名称());
-            sotaiUmu.add(dataSource);
-        }
+        KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(IssotaiUmu.早退なし.is委員早退())), RString.EMPTY);
+        sotaiUmu.add(dataSource);
+        KeyValueDataSource dataSource1 = new KeyValueDataSource(new RString(String.valueOf(IssotaiUmu.早退.is委員早退())), IssotaiUmu.早退.get名称());
+        sotaiUmu.add(dataSource1);
         return sotaiUmu;
     }
 
     private List<KeyValueDataSource> setIsChikokuUmu() {
         List<KeyValueDataSource> chikokuUmu = new ArrayList<>();
-        for (IsChikokuUmu isChikokuUmu : IsChikokuUmu.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(isChikokuUmu.is委員遅刻())), isChikokuUmu.get名称());
-            chikokuUmu.add(dataSource);
-        }
+        KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(IsChikokuUmu.遅刻なし.is委員遅刻())), RString.EMPTY);
+        chikokuUmu.add(dataSource);
+        KeyValueDataSource dataSource1 = new KeyValueDataSource(new RString(String.valueOf(IsChikokuUmu.遅刻.is委員遅刻())), IsChikokuUmu.遅刻.get名称());
+        chikokuUmu.add(dataSource1);
         return chikokuUmu;
     }
 

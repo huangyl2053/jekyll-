@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GaikyoTokkiNyurokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,12 +31,14 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
      */
     @JsonProperty("ChosaTaisho")
     private ChosaTaishoDiv ChosaTaisho;
+    @JsonProperty("RenrakusakiKihon")
+    private RenrakusakiKihonDiv RenrakusakiKihon;
+    @JsonProperty("ChosaJisshisha")
+    private ChosaJisshishaDiv ChosaJisshisha;
     @JsonProperty("GaikyoTokkiNyuryoku")
     private GaikyoTokkiNyuryokuDiv GaikyoTokkiNyuryoku;
     @JsonProperty("btnZenkaiCopy")
     private Button btnZenkaiCopy;
-    @JsonProperty("ccdChosaJisshishaJoho")
-    private ChosaJisshishaJohoDiv ccdChosaJisshishaJoho;
     @JsonProperty("hidden登録業務コード")
     private RString hidden登録業務コード;
     @JsonProperty("hidden登録グループコード")
@@ -67,6 +68,42 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     @JsonProperty("ChosaTaisho")
     public void setChosaTaisho(ChosaTaishoDiv ChosaTaisho) {
         this.ChosaTaisho = ChosaTaisho;
+    }
+
+    /*
+     * getRenrakusakiKihon
+     * @return RenrakusakiKihon
+     */
+    @JsonProperty("RenrakusakiKihon")
+    public RenrakusakiKihonDiv getRenrakusakiKihon() {
+        return RenrakusakiKihon;
+    }
+
+    /*
+     * setRenrakusakiKihon
+     * @param RenrakusakiKihon RenrakusakiKihon
+     */
+    @JsonProperty("RenrakusakiKihon")
+    public void setRenrakusakiKihon(RenrakusakiKihonDiv RenrakusakiKihon) {
+        this.RenrakusakiKihon = RenrakusakiKihon;
+    }
+
+    /*
+     * getChosaJisshisha
+     * @return ChosaJisshisha
+     */
+    @JsonProperty("ChosaJisshisha")
+    public ChosaJisshishaDiv getChosaJisshisha() {
+        return ChosaJisshisha;
+    }
+
+    /*
+     * setChosaJisshisha
+     * @param ChosaJisshisha ChosaJisshisha
+     */
+    @JsonProperty("ChosaJisshisha")
+    public void setChosaJisshisha(ChosaJisshishaDiv ChosaJisshisha) {
+        this.ChosaJisshisha = ChosaJisshisha;
     }
 
     /*
@@ -103,15 +140,6 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     @JsonProperty("btnZenkaiCopy")
     public void setBtnZenkaiCopy(Button btnZenkaiCopy) {
         this.btnZenkaiCopy = btnZenkaiCopy;
-    }
-
-    /*
-     * getccdChosaJisshishaJoho
-     * @return ccdChosaJisshishaJoho
-     */
-    @JsonProperty("ccdChosaJisshishaJoho")
-    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
-        return ccdChosaJisshishaJoho;
     }
 
     /*
@@ -177,18 +205,13 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public RenrakusakiKihonDiv getRenrakusakiKihon() {
-        return this.getChosaTaisho().getRenrakusakiKihon();
-    }
-
-    @JsonIgnore
-    public void  setRenrakusakiKihon(RenrakusakiKihonDiv RenrakusakiKihon) {
-        this.getChosaTaisho().setRenrakusakiKihon(RenrakusakiKihon);
-    }
-
-    @JsonIgnore
     public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getChosaTaisho().getRenrakusakiKihon().getCcdNinteiShinseiRenrakusakiKihon();
+        return this.getRenrakusakiKihon().getCcdNinteiShinseiRenrakusakiKihon();
+    }
+
+    @JsonIgnore
+    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
+        return this.getChosaJisshisha().getCcdChosaJisshishaJoho();
     }
 
     @JsonIgnore

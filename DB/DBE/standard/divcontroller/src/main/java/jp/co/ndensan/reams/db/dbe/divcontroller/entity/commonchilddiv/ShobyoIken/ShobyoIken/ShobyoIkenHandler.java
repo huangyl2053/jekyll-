@@ -63,34 +63,36 @@ public class ShobyoIkenHandler {
         NinteiShinseiJoho 意見書情報 = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-        if (new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(意見書情報.get厚労省IF識別コード())
-                && !意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
-                getShujiiIkenshoJohoList().isEmpty()) {
-            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 意見書情報.
-                    getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
-                    getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
-            div.getTxtShindanName1().setValue(要介護認定主治医意見書情報.get意見書_診断名1());
-            if (要介護認定主治医意見書情報.get意見書_発症年月日1() != null && !要介護認定主治医意見書情報.get意見書_発症年月日1().isEmpty()) {
-                div.getTxtShindanYMD1().setValue(new RDate(要介護認定主治医意見書情報.get意見書_発症年月日1().toString()));
+        
+        if (意見書情報 != null) { 
+            if (!意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                    getShujiiIkenshoJohoList().isEmpty()) {
+                ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 意見書情報.
+                        getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                        getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
+                div.getTxtShindanName1().setValue(要介護認定主治医意見書情報.get意見書_診断名1());
+                if (要介護認定主治医意見書情報.get意見書_発症年月日1() != null && !要介護認定主治医意見書情報.get意見書_発症年月日1().isEmpty()) {
+                    div.getTxtShindanYMD1().setValue(new RDate(要介護認定主治医意見書情報.get意見書_発症年月日1().toString()));
+                }
+                div.getTxtShindanName2().setValue(要介護認定主治医意見書情報.get意見書_診断名2());
+                if (要介護認定主治医意見書情報.get意見書_発症年月日2() != null && !要介護認定主治医意見書情報.get意見書_発症年月日2().isEmpty()) {
+                    div.getTxtShindanYMD2().setValue(new RDate(要介護認定主治医意見書情報.get意見書_発症年月日2().toString()));
+                }
+                div.getTxtShindanName().setValue(要介護認定主治医意見書情報.get意見書_診断名3());
+                if (要介護認定主治医意見書情報.get意見書_発症年月日3() != null && !要介護認定主治医意見書情報.get意見書_発症年月日3().isEmpty()) {
+                    div.getTxtShindanYMD3().setValue(new RDate(要介護認定主治医意見書情報.get意見書_発症年月日3().toString()));
+                }
+                div.setName1(要介護認定主治医意見書情報.get意見書_診断名1());
+                div.setYMD1(要介護認定主治医意見書情報.get意見書_発症年月日1());
+                div.setName2(要介護認定主治医意見書情報.get意見書_診断名2());
+                div.setYMD2(要介護認定主治医意見書情報.get意見書_発症年月日2());
+                div.setName3(要介護認定主治医意見書情報.get意見書_診断名3());
+                div.setYMD3(要介護認定主治医意見書情報.get意見書_発症年月日3());
+                原因疾患一覧を設定(意見書情報);
+                症状としての安定性エリアを設定(要介護認定主治医意見書情報);
+                div.getSeikatsuKinoGenin().getTxtNaiyo().setValue(要介護認定主治医意見書情報.get治療内容());
+                div.setNaiyo(要介護認定主治医意見書情報.get治療内容());
             }
-            div.getTxtShindanName2().setValue(要介護認定主治医意見書情報.get意見書_診断名2());
-            if (要介護認定主治医意見書情報.get意見書_発症年月日2() != null && !要介護認定主治医意見書情報.get意見書_発症年月日2().isEmpty()) {
-                div.getTxtShindanYMD2().setValue(new RDate(要介護認定主治医意見書情報.get意見書_発症年月日2().toString()));
-            }
-            div.getTxtShindanName().setValue(要介護認定主治医意見書情報.get意見書_診断名3());
-            if (要介護認定主治医意見書情報.get意見書_発症年月日3() != null && !要介護認定主治医意見書情報.get意見書_発症年月日3().isEmpty()) {
-                div.getTxtShindanYMD3().setValue(new RDate(要介護認定主治医意見書情報.get意見書_発症年月日3().toString()));
-            }
-            div.setName1(要介護認定主治医意見書情報.get意見書_診断名1());
-            div.setYMD1(要介護認定主治医意見書情報.get意見書_発症年月日1());
-            div.setName2(要介護認定主治医意見書情報.get意見書_診断名2());
-            div.setYMD2(要介護認定主治医意見書情報.get意見書_発症年月日2());
-            div.setName3(要介護認定主治医意見書情報.get意見書_診断名3());
-            div.setYMD3(要介護認定主治医意見書情報.get意見書_発症年月日3());
-            原因疾患一覧を設定(意見書情報);
-            症状としての安定性エリアを設定(要介護認定主治医意見書情報);
-            div.getSeikatsuKinoGenin().getTxtNaiyo().setValue(要介護認定主治医意見書情報.get治療内容());
-            div.setNaiyo(要介護認定主治医意見書情報.get治療内容());
         }
     }
 
@@ -401,7 +403,8 @@ public class ShobyoIkenHandler {
         NinteiShinseiJoho 主治医意見書登録_意見書情報 = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-        if (new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(主治医意見書登録_意見書情報.get厚労省IF識別コード())) {
+        
+        if (主治医意見書登録_意見書情報 != null) {
             if (!主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                     getShujiiIkenshoJohoList().isEmpty()) {
                 ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 主治医意見書登録_意見書情報.

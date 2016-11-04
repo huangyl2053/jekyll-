@@ -5,44 +5,44 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7130KaigoServiceShurui">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.allColumns_DbT7130KaigoServiceShurui" />
-     FROM
-         rgdb."DbT7130KaigoServiceShurui"
-     WHERE
-         rgdb."DbT7130KaigoServiceShurui"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.allColumns_DbT7130KaigoServiceShurui" />
+        FROM
+        rgdb."DbT7130KaigoServiceShurui"
+        WHERE
+        rgdb."DbT7130KaigoServiceShurui"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7130KaigoServiceShurui">
-         "DbT7130KaigoServiceShurui"."serviceShuruiCd" as "dbT7130KaigoServiceShurui_serviceShuruiCd",
-         "DbT7130KaigoServiceShurui"."teikyoKaishiYM" as "dbT7130KaigoServiceShurui_teikyoKaishiYM",
-         "DbT7130KaigoServiceShurui"."insertDantaiCd" as "dbT7130KaigoServiceShurui_insertDantaiCd",
-         "DbT7130KaigoServiceShurui"."insertTimestamp" as "dbT7130KaigoServiceShurui_insertTimestamp",
-         "DbT7130KaigoServiceShurui"."insertReamsLoginId" as "dbT7130KaigoServiceShurui_insertReamsLoginId",
-         "DbT7130KaigoServiceShurui"."insertContextId" as "dbT7130KaigoServiceShurui_insertContextId",
-         "DbT7130KaigoServiceShurui"."isDeleted" as "dbT7130KaigoServiceShurui_isDeleted",
-         "DbT7130KaigoServiceShurui"."updateCount" as "dbT7130KaigoServiceShurui_updateCount",
-         "DbT7130KaigoServiceShurui"."lastUpdateTimestamp" as "dbT7130KaigoServiceShurui_lastUpdateTimestamp",
-         "DbT7130KaigoServiceShurui"."lastUpdateReamsLoginId" as "dbT7130KaigoServiceShurui_lastUpdateReamsLoginId",
-         "DbT7130KaigoServiceShurui"."teikyoshuryoYM" as "dbT7130KaigoServiceShurui_teikyoshuryoYM",
-         "DbT7130KaigoServiceShurui"."serviceShuruiMeisho" as "dbT7130KaigoServiceShurui_serviceShuruiMeisho",
-         "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" as "dbT7130KaigoServiceShurui_serviceShuruiRyakusho",
-         "DbT7130KaigoServiceShurui"."serviceBunrruicode" as "dbT7130KaigoServiceShurui_serviceBunrruicode",
-         "DbT7130KaigoServiceShurui"."serviceShuruiNaibuCd" as "dbT7130KaigoServiceShurui_serviceShuruiNaibuCd",
-         "DbT7130KaigoServiceShurui"."gendogakuKubun" as "dbT7130KaigoServiceShurui_gendogakuKubun",
-         "DbT7130KaigoServiceShurui"."yusenJuni" as "dbT7130KaigoServiceShurui_yusenJuni",
-         "DbT7130KaigoServiceShurui"."kyotakuServiceKubun" as "dbT7130KaigoServiceShurui_kyotakuServiceKubun",
-         "DbT7130KaigoServiceShurui"."shiteiServiceKubun" as "dbT7130KaigoServiceShurui_shiteiServiceKubun",
-         "DbT7130KaigoServiceShurui"."kijunGaitoServiceKubun" as "dbT7130KaigoServiceShurui_kijunGaitoServiceKubun",
-         "DbT7130KaigoServiceShurui"."minashiKubun" as "dbT7130KaigoServiceShurui_minashiKubun",
-         "DbT7130KaigoServiceShurui"."gamenHyojiKubun" as "dbT7130KaigoServiceShurui_gamenHyojiKubun",
-         "DbT7130KaigoServiceShurui"."shien1InKahiKubun" as "dbT7130KaigoServiceShurui_shien1InKahiKubun",
-         "DbT7130KaigoServiceShurui"."shien2InKahiKubun" as "dbT7130KaigoServiceShurui_shien2InKahiKubun",
-         "DbT7130KaigoServiceShurui"."nijiyoboInKahiKubun" as "dbT7130KaigoServiceShurui_nijiyoboInKahiKubun",
-         "DbT7130KaigoServiceShurui"."serviceShoBunrui" as "dbT7130KaigoServiceShurui_serviceShoBunrui"
+        "DbT7130KaigoServiceShurui"."serviceShuruiCd" as "dbT7130KaigoServiceShurui_serviceShuruiCd",
+        "DbT7130KaigoServiceShurui"."teikyoKaishiYM" as "dbT7130KaigoServiceShurui_teikyoKaishiYM",
+        "DbT7130KaigoServiceShurui"."insertDantaiCd" as "dbT7130KaigoServiceShurui_insertDantaiCd",
+        "DbT7130KaigoServiceShurui"."insertTimestamp" as "dbT7130KaigoServiceShurui_insertTimestamp",
+        "DbT7130KaigoServiceShurui"."insertReamsLoginId" as "dbT7130KaigoServiceShurui_insertReamsLoginId",
+        "DbT7130KaigoServiceShurui"."insertContextId" as "dbT7130KaigoServiceShurui_insertContextId",
+        "DbT7130KaigoServiceShurui"."isDeleted" as "dbT7130KaigoServiceShurui_isDeleted",
+        "DbT7130KaigoServiceShurui"."updateCount" as "dbT7130KaigoServiceShurui_updateCount",
+        "DbT7130KaigoServiceShurui"."lastUpdateTimestamp" as "dbT7130KaigoServiceShurui_lastUpdateTimestamp",
+        "DbT7130KaigoServiceShurui"."lastUpdateReamsLoginId" as "dbT7130KaigoServiceShurui_lastUpdateReamsLoginId",
+        "DbT7130KaigoServiceShurui"."teikyoshuryoYM" as "dbT7130KaigoServiceShurui_teikyoshuryoYM",
+        "DbT7130KaigoServiceShurui"."serviceShuruiMeisho" as "dbT7130KaigoServiceShurui_serviceShuruiMeisho",
+        "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" as "dbT7130KaigoServiceShurui_serviceShuruiRyakusho",
+        "DbT7130KaigoServiceShurui"."serviceBunrruicode" as "dbT7130KaigoServiceShurui_serviceBunrruicode",
+        "DbT7130KaigoServiceShurui"."serviceShuruiNaibuCd" as "dbT7130KaigoServiceShurui_serviceShuruiNaibuCd",
+        "DbT7130KaigoServiceShurui"."gendogakuKubun" as "dbT7130KaigoServiceShurui_gendogakuKubun",
+        "DbT7130KaigoServiceShurui"."yusenJuni" as "dbT7130KaigoServiceShurui_yusenJuni",
+        "DbT7130KaigoServiceShurui"."kyotakuServiceKubun" as "dbT7130KaigoServiceShurui_kyotakuServiceKubun",
+        "DbT7130KaigoServiceShurui"."shiteiServiceKubun" as "dbT7130KaigoServiceShurui_shiteiServiceKubun",
+        "DbT7130KaigoServiceShurui"."kijunGaitoServiceKubun" as "dbT7130KaigoServiceShurui_kijunGaitoServiceKubun",
+        "DbT7130KaigoServiceShurui"."minashiKubun" as "dbT7130KaigoServiceShurui_minashiKubun",
+        "DbT7130KaigoServiceShurui"."gamenHyojiKubun" as "dbT7130KaigoServiceShurui_gamenHyojiKubun",
+        "DbT7130KaigoServiceShurui"."shien1InKahiKubun" as "dbT7130KaigoServiceShurui_shien1InKahiKubun",
+        "DbT7130KaigoServiceShurui"."shien2InKahiKubun" as "dbT7130KaigoServiceShurui_shien2InKahiKubun",
+        "DbT7130KaigoServiceShurui"."nijiyoboInKahiKubun" as "dbT7130KaigoServiceShurui_nijiyoboInKahiKubun",
+        "DbT7130KaigoServiceShurui"."serviceShoBunrui" as "dbT7130KaigoServiceShurui_serviceShoBunrui"
     </sql>
 
 
@@ -81,42 +81,43 @@
         FROM
         rgdb."DbT7130KaigoServiceShurui"
     </select>
-    
+
     <select resultOrdered="true" id="getserviceShuruiCdDDL" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity">
         SELECT
-          TEMP."serviceShuruiCd",
-          TEMP."serviceShuruiMeisho" 
+        TEMP."serviceShuruiCd",
+        TEMP."serviceShuruiMeisho"
         FROM
-          ( 
-            SELECT
-              DbT7130."serviceShuruiCd",
-              DbT7130. "serviceShuruiMeisho", 
-              DbT7130."teikyoKaishiYM",
-              row_number() OVER ( 
-                PARTITION BY
-                  DbT7130."serviceShuruiCd"
-                ORDER BY
-                  DbT7130."teikyoKaishiYM" DESC
-              ) AS rrkno 
-            FROM
-              rgdb."DbT7130KaigoServiceShurui" AS DbT7130
-            WHERE
-              DbT7130."teikyoKaishiYM" <![CDATA[<=]]> #{systemDate}
-          ) TEMP 
+        (
+        SELECT
+        DbT7130."serviceShuruiCd",
+        DbT7130. "serviceShuruiMeisho",
+        DbT7130."teikyoKaishiYM",
+        row_number() OVER (
+        PARTITION BY
+        DbT7130."serviceShuruiCd"
+        ORDER BY
+        DbT7130."teikyoKaishiYM" DESC
+        ) AS rrkno
+        FROM
+        rgdb."DbT7130KaigoServiceShurui" AS DbT7130
         WHERE
-          TEMP.rrkno = 1
+        DbT7130."teikyoKaishiYM" <![CDATA[<=]]> #{systemDate}
+        ) TEMP
+        WHERE
+        TEMP.rrkno = 1
     </select>
-    
-    <select resultOrdered="true" id="getServiceTypeList2" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity" 
+
+    <select resultOrdered="true" id="getServiceTypeList2" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity"
             parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode.SabisuKodoParameter" fetchSize="500">
-        SELECT 
-          "serviceShuruiCd" AS "dbT7130KaigoServiceShurui_serviceShuruiCd",
-          "serviceShuruiMeisho" AS "dbT7130KaigoServiceShurui_serviceShuruiMeisho"
-        FROM 
-          rgdb."DbT7130KaigoServiceShurui"
+        SELECT
+        "serviceShuruiCd" AS "dbT7130KaigoServiceShurui_serviceShuruiCd",
+        "serviceShuruiMeisho" AS "dbT7130KaigoServiceShurui_serviceShuruiMeisho",
+        "serviceShuruiRyakusho" AS "dbT7130KaigoServiceShurui_serviceShuruiRyakusho"
+        FROM
+        rgdb."DbT7130KaigoServiceShurui"
         WHERE
-          "teikyoKaishiYM" <![CDATA[<=]]> #{haakuKijunYM}
-          AND #{haakuKijunYM} <![CDATA[<=]]> "teikyoshuryoYM"
+        "teikyoKaishiYM" <![CDATA[<=]]> #{haakuKijunYM}
+        AND #{haakuKijunYM} <![CDATA[<=]]> "teikyoshuryoYM"
         <if test="serviceShuruiFlag">
             AND "serviceShuruiCd" IN
             <foreach collection="serviceShurui" item="shurui" open="(" separator="," close=")"> #{shurui}</foreach>
@@ -128,32 +129,32 @@
             </if>
             <if test="!serviceBunrruiFlag">
                 <if test="patan1">
-                     AND substring("serviceShuruiCd", 1, 1) = '1'
+                    AND substring("serviceShuruiCd", 1, 1) = '1'
                 </if>
                 <if test="patan2">
-                     AND substring("serviceShuruiCd", 1, 1) = '1'
-                     OR (substring("serviceShuruiCd", 1, 1) = '2'
-                     AND "serviceBunrruicode" = '01')
+                    AND substring("serviceShuruiCd", 1, 1) = '1'
+                    OR (substring("serviceShuruiCd", 1, 1) = '2'
+                    AND "serviceBunrruicode" = '01')
                 </if>
                 <if test="patan3">
-                     AND (substring("serviceShuruiCd", 1, 1) = '1'
-                     OR substring("serviceShuruiCd", 1, 1) = '2'
-                     OR substring("serviceShuruiCd", 1, 1) = '6'
-                     OR substring("serviceShuruiCd", 1, 1) = '7')
+                    AND (substring("serviceShuruiCd", 1, 1) = '1'
+                    OR substring("serviceShuruiCd", 1, 1) = '2'
+                    OR substring("serviceShuruiCd", 1, 1) = '6'
+                    OR substring("serviceShuruiCd", 1, 1) = '7')
                 </if>
                 <if test="patan4">
-                     AND substring("serviceShuruiCd", 1, 1) = '6'
-                     OR (substring("serviceShuruiCd", 1, 1) = '2'
-                     AND "serviceBunrruicode" = '05')
-                     OR (substring("serviceShuruiCd", 1, 1) = '7'
-                     AND "serviceBunrruicode" = '08')
+                    AND substring("serviceShuruiCd", 1, 1) = '6'
+                    OR (substring("serviceShuruiCd", 1, 1) = '2'
+                    AND "serviceBunrruicode" = '05')
+                    OR (substring("serviceShuruiCd", 1, 1) = '7'
+                    AND "serviceBunrruicode" = '08')
                 </if>
                 <if test="patan5">
-                     AND substring("serviceShuruiCd", 1, 1) = '1'
-                     OR (substring("serviceShuruiCd", 1, 1) = '2'
-                     AND "serviceBunrruicode" = '01')
-                     OR (substring("serviceShuruiCd", 1, 1) = '7'
-                     AND "serviceBunrruicode" = '07')
+                    AND substring("serviceShuruiCd", 1, 1) = '1'
+                    OR (substring("serviceShuruiCd", 1, 1) = '2'
+                    AND "serviceBunrruicode" = '01')
+                    OR (substring("serviceShuruiCd", 1, 1) = '7'
+                    AND "serviceBunrruicode" = '07')
                 </if>
             </if>
         </if>

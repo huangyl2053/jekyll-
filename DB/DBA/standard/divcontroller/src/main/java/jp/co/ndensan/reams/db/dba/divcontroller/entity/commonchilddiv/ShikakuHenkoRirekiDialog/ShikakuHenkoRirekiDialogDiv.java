@@ -40,6 +40,8 @@ public class ShikakuHenkoRirekiDialogDiv extends Panel implements IShikakuHenkoR
     private RString shutokuDate;
     @JsonProperty("shikibetsuCode")
     private RString shikibetsuCode;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -162,6 +164,24 @@ public class ShikakuHenkoRirekiDialogDiv extends Panel implements IShikakuHenkoR
     @JsonProperty("shikibetsuCode")
     public void setShikibetsuCode(RString shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /*
+     * gethihokenshaNo
+     * @return hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /*
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     // </editor-fold>

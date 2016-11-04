@@ -669,7 +669,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         要支援,
                         get要支援詳細(前回要介護状態区分コード),
                         get要介護(前回要介護状態区分コード),
-                        get要介護詳細(前回要介護状態区分コード));
+                        get要介護詳細(前回要介護状態区分コード),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY);
                 itemList.add(item);
             }
         }

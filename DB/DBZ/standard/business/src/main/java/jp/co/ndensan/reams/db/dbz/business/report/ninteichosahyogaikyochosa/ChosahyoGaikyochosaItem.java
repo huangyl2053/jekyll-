@@ -91,6 +91,16 @@ public class ChosahyoGaikyochosaItem {
     private final RString yoshiendo;
     private final RString yokaigo;
     private final RString yokaigodo;
+    private final RString hihokenshaNo1;
+    private final RString hihokenshaNo2;
+    private final RString hihokenshaNo3;
+    private final RString hihokenshaNo4;
+    private final RString hihokenshaNo5;
+    private final RString hihokenshaNo6;
+    private final RString hihokenshaNo7;
+    private final RString hihokenshaNo8;
+    private final RString hihokenshaNo9;
+    private final RString hihokenshaNo10;
 
     /**
      * コンストラクタです。
@@ -169,6 +179,16 @@ public class ChosahyoGaikyochosaItem {
      * @param yoshiendo 要支援詳細
      * @param yokaigo 要介護
      * @param yokaigodo 要介護詳細
+     * @param hihokenshaNo1 被保険者番号1
+     * @param hihokenshaNo2 被保険者番号2
+     * @param hihokenshaNo3 被保険者番号3
+     * @param hihokenshaNo4 被保険者番号4
+     * @param hihokenshaNo5 被保険者番号5
+     * @param hihokenshaNo6 被保険者番号6
+     * @param hihokenshaNo7 被保険者番号7
+     * @param hihokenshaNo8 被保険者番号8
+     * @param hihokenshaNo9 被保険者番号9
+     * @param hihokenshaNo10 被保険者番号10
      */
     public ChosahyoGaikyochosaItem(
             RString hokenshaNo1,
@@ -244,7 +264,12 @@ public class ChosahyoGaikyochosaItem {
             RString yoshien,
             RString yoshiendo,
             RString yokaigo,
-            RString yokaigodo) {
+            RString yokaigodo,
+            RString hihokenshaNo1, RString hihokenshaNo2,
+            RString hihokenshaNo3, RString hihokenshaNo4,
+            RString hihokenshaNo5, RString hihokenshaNo6,
+            RString hihokenshaNo7, RString hihokenshaNo8,
+            RString hihokenshaNo9, RString hihokenshaNo10) {
         this.hokenshaNo1 = hokenshaNo1;
         this.hokenshaNo2 = hokenshaNo2;
         this.hokenshaNo3 = hokenshaNo3;
@@ -319,5 +344,15 @@ public class ChosahyoGaikyochosaItem {
         this.yoshiendo = yoshiendo;
         this.yokaigo = yokaigo;
         this.yokaigodo = yokaigodo;
+        this.hihokenshaNo1 = hihokenshaNo1;
+        this.hihokenshaNo2 = hihokenshaNo2;
+        this.hihokenshaNo3 = hihokenshaNo3;
+        this.hihokenshaNo4 = hihokenshaNo4;
+        this.hihokenshaNo5 = hihokenshaNo5;
+        this.hihokenshaNo6 = hihokenshaNo6;
+        this.hihokenshaNo7 = hihokenshaNo7;
+        this.hihokenshaNo8 = hihokenshaNo8;
+        this.hihokenshaNo9 = hihokenshaNo9;
+        this.hihokenshaNo10 = hihokenshaNo10;
     }
 }

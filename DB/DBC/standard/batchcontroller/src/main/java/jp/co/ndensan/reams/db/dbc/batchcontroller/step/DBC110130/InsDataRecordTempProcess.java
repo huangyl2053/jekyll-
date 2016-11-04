@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
+import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -117,6 +119,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
     private int cnt12;
     private int cnt14;
     private RString 入力ファイルパス;
+    JournalWriter writer;
 
     private OutputParameter<Integer> outputCount;
     private OutputParameter<RString> inputPath;
@@ -148,6 +151,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
                 レコード件数 = 出力件数カウンター;
             }
         }
+        writer = new JournalWriter();
     }
 
     @Override
@@ -337,6 +341,8 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
                     .concat(サービス提供年月).concat(コロン)
                     .concat(事業者番号).concat(コロン)
                     .concat(entity.getToshiNo());
+            writer.writeErrorJournal(RDateTime.now(),
+                    new RString(DbcErrorMessages.給付実績組み合わせ不正.getMessage().replace(message.toString()).evaluate()));
             throw new BatchInterruptedException(DbcErrorMessages.給付実績組み合わせ不正.getMessage().replace(message.toString()).evaluate());
         }
     }

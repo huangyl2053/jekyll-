@@ -50,7 +50,6 @@ public class JyusinDataBaitaiTorikomu {
     private static final int ゼロ = 0;
     private final RString searchSharedFile = new RString("1\\_%");
     private static final int 一1 = 1;
-    private static final int 三 = 3;
     private static final int 四 = 4;
     private static final int 五 = 5;
     private static final int 六 = 6;
@@ -60,9 +59,9 @@ public class JyusinDataBaitaiTorikomu {
     private static final RString 識別番号011 = new RString("011");
     private static final RString 二 = new RString("2");
     private FlexibleYearMonth 審査年月;
-    private static FlexibleYearMonth 審査年月の翌月;
-    private static FlexibleYearMonth 処理年月;
-    private static FlexibleYearMonth 処理年月の前月;
+    private FlexibleYearMonth 審査年月の翌月;
+    private FlexibleYearMonth 処理年月;
+    private FlexibleYearMonth 処理年月の前月;
     private RString 識別番号;
 
     /**
@@ -150,11 +149,11 @@ public class JyusinDataBaitaiTorikomu {
             file = files[ゼロ];
             RString fileName = file.getFileName();
             RString filePath = file.getFilePath();
-            ViewStateHolder.put(ViewStateKeys.イメージ情報, (Serializable) fileName);
-            ViewStateHolder.put(ViewStateKeys.サービス情報, (Serializable) filePath);
+            ViewStateHolder.put(ViewStateKeys.共有ファイル名, (Serializable) fileName);
+            ViewStateHolder.put(ViewStateKeys.共有ファイルエントリ情報, (Serializable) filePath);
         } else {
-            file.setFileName(ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class));
-            file.setFilePath(ViewStateHolder.get(ViewStateKeys.サービス情報, RString.class));
+            file.setFileName(ViewStateHolder.get(ViewStateKeys.共有ファイル名, RString.class));
+            file.setFilePath(ViewStateHolder.get(ViewStateKeys.共有ファイルエントリ情報, RString.class));
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(file.getFileName()));
         sfd = SharedFile.defineSharedFile(sfd);
@@ -173,8 +172,6 @@ public class JyusinDataBaitaiTorikomu {
             RString 給付実績情報作成区分コード = データレコード.get(五);
             if (給付実績情報111.equals(データ種別)) {
                 審査年月 = getHandler(div).判断１(データレコード, 給付実績情報作成区分コード, myBatisParameter);
-            } else {
-                審査年月 = FlexibleYearMonth.MIN;
             }
             if (myBatisParameter.is同月過誤取下分フラグ()) {
                 識別番号 = 識別番号011;
@@ -199,27 +196,26 @@ public class JyusinDataBaitaiTorikomu {
             }
             getHandler(div).コントロールレコード配列内容チェック(コントロールレコード, file, データレコード, データ種別);
             処理年月 = getHandler(div).処理年月取得(データ種別);
+            処理年月の前月 = FlexibleYearMonth.EMPTY;
             if (処理年月 != null) {
                 処理年月の前月 = 処理年月.minusMonth(一1);
             }
 
             HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
             RString 二重取込チェック = getHandler(div).二重取込チェック(file, データ種別, myBatisParameter, コントロールレコード, entity);
-            if (二重取込チェック != null) {
+            if (二重取込チェック != null && 処理年月 != null) {
                 return getHandler(div).二重取込message(二重取込チェック, 処理年月, データ種別);
             }
 
             entity = HokenshaSofuFinder.createInstance().get国保連管理2(データ種別, 処理年月の前月);
             KokuhorenInterfaceKanri kanri = null;
-            if (entity != null && entity.getKokuhorenInterfaceKanriList() != null && !entity.getKokuhorenInterfaceKanriList().isEmpty()) {
+            if (判断(entity)) {
                 kanri = entity.getKokuhorenInterfaceKanriList().get(ゼロ);
-
             }
+            審査年月の翌月 = FlexibleYearMonth.EMPTY;
             if (kanri != null && kanri.get実績データ上審査年月() != null) {
                 if (!kanri.get実績データ上審査年月().isEmpty()) {
                     審査年月の翌月 = kanri.get実績データ上審査年月().plusMonth(一1);
-                } else {
-                    審査年月の翌月 = FlexibleYearMonth.EMPTY;
                 }
             }
             RString 審査年月チェック = getHandler(div).審査年月チェック(file, データ種別, 審査年月の翌月, 審査年月, kanri);
@@ -235,6 +231,10 @@ public class JyusinDataBaitaiTorikomu {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean 判断(HokenshaSofuResult entity) {
+        return entity != null && entity.getKokuhorenInterfaceKanriList() != null && !entity.getKokuhorenInterfaceKanriList().isEmpty();
     }
 
     private HokenshaSofuListHandler getHandler(JyusinDataBaitaiTorikomuDiv div) {

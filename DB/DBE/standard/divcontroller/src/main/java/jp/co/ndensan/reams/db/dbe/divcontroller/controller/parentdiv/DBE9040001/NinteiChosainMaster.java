@@ -101,6 +101,7 @@ public class NinteiChosainMaster {
             LasdecCode 市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
 
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().setValue(認定調査委託先コード);
+            div.getChosainSearch().getTxtSearchChosaItakusakiCodeTo().setValue(認定調査委託先コード);
             div.getChosainSearch().getHokenshaList().setSelectedShichosonIfExist(市町村コード);
             onClick_btnSearchShujii(div);
             return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
@@ -228,7 +229,9 @@ public class NinteiChosainMaster {
                 div.getTxtSearchChosainKanaShimei().getValue(),
                 div.getDdlChosainKanaMeisho().getSelectedKey(),
                 div.getDdlChikuCode().getSelectedKey(),
-                div.getTxtSaidaiHyojiKensu().getValue());
+                div.getTxtSaidaiHyojiKensu().getValue(),
+                四マスタ優先表示市町村識別ID,
+                構成市町村マスタ市町村コード重複種別);
         NinteiChosainMasterFinder ninteiChosainMasterFinder = NinteiChosainMasterFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster> 調査員情報List
                 = ninteiChosainMasterFinder.getChosainJohoIchiranList(
@@ -498,7 +501,7 @@ public class NinteiChosainMaster {
         }
 
         List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
-        if (!list.isEmpty()) {
+        if (list.isEmpty()) {
             div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
             return ResponseData.of(div).respond();
         }

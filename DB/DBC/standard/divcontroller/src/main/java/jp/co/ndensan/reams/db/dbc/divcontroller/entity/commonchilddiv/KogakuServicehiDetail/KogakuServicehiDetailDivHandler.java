@@ -134,6 +134,7 @@ public class KogakuServicehiDetailDivHandler {
         if (0 == KougakuSabisuhiShousaiNaiyou.createInstance().getTenshutsuNyuuHantei(被保険者番号, サービス年月)) {
             div.getTplShinseisha().getTxtHokenJyaBango().setDisabled(true);
         }
+        div.getTxtSetaiSyuyakuBango().setValue(RString.EMPTY);
     }
 
     /**

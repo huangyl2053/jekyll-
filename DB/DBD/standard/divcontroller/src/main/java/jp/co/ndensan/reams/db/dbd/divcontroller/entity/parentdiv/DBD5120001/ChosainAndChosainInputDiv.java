@@ -1,5 +1,4 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001;
-
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -11,13 +10,12 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitaku
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChosainAndChosainInput のクラスファイル
- *
+ * ChosainAndChosainInput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ChosainAndChosainInputDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,7 +31,7 @@ public class ChosainAndChosainInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
- /*
+    /*
      * getccdChosaItakusakiAndChosainInput
      * @return ccdChosaItakusakiAndChosainInput
      */

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tplGaikyoChosaDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -135,23 +135,23 @@ public class tplGaikyoChosaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public TextBox getTxtShichosonTokubetsuKyufu() {
-        return this.getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().getTxtShichosonTokubetsuKyufu();
+    public TextBoxMultiLine getTxtShichosonTokubetsuKyufu() {
+        return this.getTabChosaBasho().getTplZaitaku().getTxtShichosonTokubetsuKyufu();
     }
 
     @JsonIgnore
-    public void  setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
+    public void  setTxtShichosonTokubetsuKyufu(TextBoxMultiLine txtShichosonTokubetsuKyufu) {
+        this.getTabChosaBasho().getTplZaitaku().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
     }
 
     @JsonIgnore
-    public TextBox getTxtKyufuIgaiJutakuService() {
-        return this.getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().getTxtKyufuIgaiJutakuService();
+    public TextBoxMultiLine getTxtKyufuIgaiJutakuService() {
+        return this.getTabChosaBasho().getTplZaitaku().getTxtKyufuIgaiJutakuService();
     }
 
     @JsonIgnore
-    public void  setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
-        this.getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
+    public void  setTxtKyufuIgaiJutakuService(TextBoxMultiLine txtKyufuIgaiJutakuService) {
+        this.getTabChosaBasho().getTplZaitaku().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
     }
 
     @JsonIgnore

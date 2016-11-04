@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0600021
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600021.DBU0600021TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600021.SogoSyokaiJyukyusyaJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600021.SogoSyokaiJyukyusyaJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.jyukyusyajoho.SogoSyokaiJyukyusyaJohoFinder;
@@ -64,6 +65,66 @@ public class SogoSyokaiJyukyusyaJoho {
         getHandler(div).set総合事業対象者情報エリア(
                 SogoSyokaiJyukyusyaJohoFinder.createInstance().get総合事業_経過措置_対象者情報(new HihokenshaNo(被保険者番号)),
                 SogoSyokaiJyukyusyaJohoFinder.createInstance().get総合事業対象者(new HihokenshaNo(被保険者番号)));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 再検索するボタンを押下します。
+     *
+     * @param div SogoSyokaiJyukyusyaJohoDiv
+     * @return ResponseData<SogoSyokaiJyukyusyaJohoDiv>
+     */
+    public ResponseData<SogoSyokaiJyukyusyaJohoDiv> onClick_KensakuModoru(SogoSyokaiJyukyusyaJohoDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBU0600021TransitionEventName.対象者検索に戻る).respond();
+    }
+
+    /**
+     * 資格情報を表示するボタンを押下します。
+     *
+     * @param div SogoSyokaiJyukyusyaJohoDiv
+     * @return ResponseData<SogoSyokaiJyukyusyaJohoDiv>
+     */
+    public ResponseData<SogoSyokaiJyukyusyaJohoDiv> onClick_btnShikakuInfo(SogoSyokaiJyukyusyaJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 給付情報を表示するボタンを押下します。
+     *
+     * @param div SogoSyokaiJyukyusyaJohoDiv
+     * @return ResponseData<SogoSyokaiJyukyusyaJohoDiv>
+     */
+    public ResponseData<SogoSyokaiJyukyusyaJohoDiv> onClick_btnKyufuInfo(SogoSyokaiJyukyusyaJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 賦課情報を表示するボタンを押下します。
+     *
+     * @param div SogoSyokaiJyukyusyaJohoDiv
+     * @return ResponseData<SogoSyokaiJyukyusyaJohoDiv>
+     */
+    public ResponseData<SogoSyokaiJyukyusyaJohoDiv> onClick_btnFukaInfo(SogoSyokaiJyukyusyaJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 住民固有情報を表示するボタンを押下します。
+     *
+     * @param div SogoSyokaiJyukyusyaJohoDiv
+     * @return ResponseData<SogoSyokaiJyukyusyaJohoDiv>
+     */
+    public ResponseData<SogoSyokaiJyukyusyaJohoDiv> onClick_btnJuminInfo(SogoSyokaiJyukyusyaJohoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 受給情報を表示するボタンを押下します。
+     *
+     * @param div KaigoSikakuTokusouDiv
+     * @return ResponseData<KaigoSikakuTokusouDiv>
+     */
+    public ResponseData<SogoSyokaiJyukyusyaJohoDiv> onClick_btnJukyuInfo(SogoSyokaiJyukyusyaJohoDiv div) {
         return ResponseData.of(div).respond();
     }
 

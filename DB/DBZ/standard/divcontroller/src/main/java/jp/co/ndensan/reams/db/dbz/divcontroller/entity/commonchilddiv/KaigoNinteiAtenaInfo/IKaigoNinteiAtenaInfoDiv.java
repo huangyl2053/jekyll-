@@ -61,6 +61,8 @@ public interface IKaigoNinteiAtenaInfoDiv extends ICommonChildDivBaseProperties 
     RString get性別();
 
     RString get被保険者氏名();
+    
+    RString get被保険者氏名カナ();
 
     YubinNo get郵便番号();
 

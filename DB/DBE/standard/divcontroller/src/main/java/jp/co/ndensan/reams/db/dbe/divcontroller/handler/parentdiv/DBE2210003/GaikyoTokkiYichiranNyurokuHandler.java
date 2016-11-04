@@ -128,9 +128,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             int temp_認定調査履歴番号) {
 
         div.getChosaTaisho().getCcdNinteiShinseishaKihonInfo().initialize(temp_申請書管理番号);
-        div.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
-        div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
-        div.getCcdChosaJisshishaJoho().intialize(model);
+        div.getRenrakusakiKihon().getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
+        div.getChosaJisshisha().getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
+        div.getChosaJisshisha().getCcdChosaJisshishaJoho().intialize(model);
 
         当前ページ数 = 1;
         this.set各特記事項基本情報(temp_申請書管理番号, temp_認定調査履歴番号);

@@ -185,8 +185,10 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
         set金融機関(source);
         setTitle(source);
         set種別と番号と口座名義(source);
-
-        source.sihaYoYmd = 年月日編集(帳票情報.get支払予定日());
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
+            source.sihaYoYmd = 年月日編集(帳票情報.get支払予定日());
+        }
 
         source.tsuchiNo = 帳票情報.get決定通知書番号();
 

@@ -89,6 +89,9 @@ public class NinteiInputHandler {
         } else {
             div.getDgServiceIchiran().setReadOnly(true);
         }
+        if (new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))) {
+            div.getRadNinteiKubun().setReadOnly(false);
+        }
     }
 
     /**

@@ -497,7 +497,7 @@
         ON "temp"."hihokenshaNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo"
         AND "temp"."taishoNendo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"
         AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
-        AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"
+        AND "temp"."hokenshaNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"
         LEFT JOIN 
         <choose>
             <when test="事業分フラグ">
@@ -577,7 +577,6 @@
         <id column="temp_hokenshaNo" />
         <id column="temp_shikyuShinseishoSeiriNo" />
         <id column="serviceTeikyoYM" />
-        <id column="riyoshaFutangaku" />
         <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
         <association property="利用者負担" resultMap="ResultMap_RiyoshaFutangakuEntity" />
     </resultMap>

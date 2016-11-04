@@ -346,7 +346,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 = mapperProvider.create(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
         ShibaraiKekkaParameter parameter = ShibaraiKekkaParameter.createParameter(
                 被保険者番号,
-                サービス提供年月.getYear().toDateString(),
+                サービス提供年月.toDateString(),
                 NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード());
         SokanbaraiShiharaiKekka result = mapper.select支払結果情報(parameter);
         if (null == result) {

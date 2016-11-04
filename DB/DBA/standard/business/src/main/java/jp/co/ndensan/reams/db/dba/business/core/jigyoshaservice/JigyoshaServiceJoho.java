@@ -45,4 +45,13 @@ public class JigyoshaServiceJoho {
         return entity.getServiceShuruiMeisho();
     }
 
+    /**
+     * サービス種類略称を返します。
+     *
+     * @return サービス種類名称
+     */
+    public RString getサービス種類略称() {
+        return entity.getServiceShuruiRyakusho();
+    }
+
 }

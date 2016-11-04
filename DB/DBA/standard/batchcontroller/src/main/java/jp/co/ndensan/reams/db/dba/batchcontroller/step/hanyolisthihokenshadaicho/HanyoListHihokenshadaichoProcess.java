@@ -717,6 +717,9 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     }
 
     private RString get略称(CodeShubetsu コード種別, Code コード) {
+        if (コード == null) {
+            return RString.EMPTY;
+        }
         UzT0007CodeEntity entity = CodeMaster.getCode(コード種別, コード);
         if (entity == null) {
             return RString.EMPTY;

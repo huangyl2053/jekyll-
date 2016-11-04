@@ -70,7 +70,7 @@ public class ShujiiIryokikanGuide {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         RString 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
-        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
+        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関情報(
                 ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
                         市町村コード,
                         SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()),

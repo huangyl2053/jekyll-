@@ -46,15 +46,19 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoD
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -121,7 +125,6 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
             int 履歴番号, RString 減免減額種類, RDate 交付日, RDate 発行日, RString 文書番号, ReportManager reportManager) {
         Association association = get地方公共団体();
         UaFt200FindShikibetsuTaishoEntity uaFt200Entity = get宛名情報(識別コード);
-        UaFt250FindAtesakiEntity uaFt250Entity = get宛先情報(識別コード);
         for (RString 帳票タイプ : 帳票タイプリスト) {
             ReportId 帳票分類ID = get帳票分類ID(帳票タイプ);
             DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
@@ -131,7 +134,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
                 RiyoshaFutangakuGengaku 利用者負担額減額情報 = getRiyoshaFutanGengaku(
                         被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
                 RiysFutgGengMenjNinteishoPrintService service = new RiysFutgGengMenjNinteishoPrintService();
-                service.print(利用者負担額減額情報, ShikibetsuTaishoFactory.createKojin(uaFt200Entity), AtesakiFactory.createInstance(uaFt250Entity),
+                service.print(利用者負担額減額情報, ShikibetsuTaishoFactory.createKojin(uaFt200Entity), get宛先情報(識別コード),
                         new ChohyoSeigyoKyotsu(dbT7065Entity), dbT7067EntityList, association, 交付日, 発行日, 帳票分類ID, reportManager);
 
             } else if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除決定通知書.get名称().equals(帳票タイプ)) {
@@ -139,7 +142,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
                         被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
                 RiysFutgGengMenjKettTsuchishoPrintService service = new RiysFutgGengMenjKettTsuchishoPrintService();
                 service.print(利用者負担額減額情報, ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                        AtesakiFactory.createInstance(uaFt250Entity), new ChohyoSeigyoKyotsu(dbT7065Entity), dbT7067EntityList, association, 発行日,
+                        get宛先情報(識別コード), new ChohyoSeigyoKyotsu(dbT7065Entity), dbT7067EntityList, association, 発行日,
                         文書番号, 通知書定型文List, 帳票分類ID, reportManager);
 
             } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額認定証.get名称().equals(帳票タイプ)) {
@@ -151,8 +154,8 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
             } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額決定通知書.get名称().equals(帳票タイプ)) {
                 FutanGendogakuNintei 負担限度額認定 = getFutanGendogaKunintei(被保険者番号, GemmenGengakuShurui.負担限度額認定.getコード(), 履歴番号);
                 FutanGendogakuKetteiTsuchishoPrintService service = new FutanGendogakuKetteiTsuchishoPrintService();
-                service.print(負担限度額認定,
-                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity), AtesakiFactory.createInstance(uaFt250Entity),
+                    service.print(負担限度額認定,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity), get宛先情報(識別コード),
                         new ChohyoSeigyoKyotsu(dbT7065Entity), dbT7067EntityList, association, 発行日,
                         文書番号, 通知書定型文List, 帳票分類ID, reportManager);
 
@@ -168,7 +171,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
                         被保険者番号, GemmenGengakuShurui.訪問介護利用者負担額減額.getコード(), 履歴番号);
                 HomKaigRiysFutgGengKettTsuchishoPrintService service = new HomKaigRiysFutgGengKettTsuchishoPrintService();
                 service.print(訪問介護利用者負担額減額, ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                        AtesakiFactory.createInstance(uaFt250Entity), new ChohyoSeigyoKyotsu(dbT7065Entity), association, 発行日, 文書番号,
+                        get宛先情報(識別コード), new ChohyoSeigyoKyotsu(dbT7065Entity), association, 発行日, 文書番号,
                         通知書定型文List, 帳票分類ID, reportManager);
 
             } else if (GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減対象確認証.get名称().equals(帳票タイプ)) {
@@ -183,7 +186,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
                         被保険者番号, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(), 履歴番号);
                 ShakFukusHojRiysFutKeigTaisKetTsuchishoPrintService service = new ShakFukusHojRiysFutKeigTaisKetTsuchishoPrintService();
                 service.print(社会福祉法人等利用者負担軽減, ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                        AtesakiFactory.createInstance(uaFt250Entity), new ChohyoSeigyoKyotsu(dbT7065Entity), association, 発行日,
+                        get宛先情報(識別コード), new ChohyoSeigyoKyotsu(dbT7065Entity), association, 発行日,
                         文書番号, 通知書定型文List, 帳票分類ID, reportManager);
 
             } else if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算に係る訪問介護利用者負担減額確認証.get名称().equals(帳票タイプ)) {
@@ -197,7 +200,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
                 TokubetsuchiikiKasanGemmen 特別地域加算減免 = getTokubetsuChikiKasanGemmen(
                         被保険者番号, GemmenGengakuShurui.特別地域加算減免.getコード(), 履歴番号);
                 HomKaigRiysFutGenmKettTsuchishoPrintService service = new HomKaigRiysFutGenmKettTsuchishoPrintService();
-                service.print(特別地域加算減免, ShikibetsuTaishoFactory.createKojin(uaFt200Entity), AtesakiFactory.createInstance(uaFt250Entity),
+                service.print(特別地域加算減免, ShikibetsuTaishoFactory.createKojin(uaFt200Entity), get宛先情報(識別コード),
                         new ChohyoSeigyoKyotsu(dbT7065Entity), association, 発行日, 文書番号, 通知書定型文List, 帳票分類ID, reportManager);
             }
         }
@@ -332,15 +335,14 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
         return shikibetsuTaishoPSMMapper.selectShikibetsuTaishoPSMMybatis(shikibetsuTaishoPSMParameter);
     }
 
-    private UaFt250FindAtesakiEntity get宛先情報(ShikibetsuCode 識別コード) {
+    private IAtesaki get宛先情報(ShikibetsuCode 識別コード) {
         AtesakiPSMSearchKeyBuilder atesakiPSMKey
                 = new AtesakiPSMSearchKeyBuilder(AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         atesakiPSMKey.set識別コード(識別コード);
-        IAtesakiPSMSearchKey atesakiPSMSearchKey = atesakiPSMKey.build();
-        AtesakiPSMMybatisParameter atesakiPSMMybatisParameter = new AtesakiPSMMybatisParameter(atesakiPSMSearchKey);
-        atesakiPSMMybatisParameter.setPsmAtesaki(new RString(atesakiPSMMybatisParameter.toString()));
-        IAtesakiPSMMybatisMapper atesakiPSMMapper = this.mapperProvider.create(IAtesakiPSMMybatisMapper.class);
-        return atesakiPSMMapper.selectAtesakiPSMMybatis(atesakiPSMMybatisParameter);
+        atesakiPSMKey.set代納人利用区分(DainoRiyoKubun.利用しない);
+        atesakiPSMKey.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(atesakiPSMKey.build());
+        return 宛先;
     }
 
     /**

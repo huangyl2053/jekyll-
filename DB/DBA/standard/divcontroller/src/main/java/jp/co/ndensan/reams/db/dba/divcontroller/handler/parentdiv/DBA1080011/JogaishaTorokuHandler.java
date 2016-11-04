@@ -270,7 +270,7 @@ public class JogaishaTorokuHandler {
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().clearValue();
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiKaijyoYMD().clearValue();
     }
-
+    
     /**
      * 確定するボタン押下の場合、入力チェック実行します。
      *

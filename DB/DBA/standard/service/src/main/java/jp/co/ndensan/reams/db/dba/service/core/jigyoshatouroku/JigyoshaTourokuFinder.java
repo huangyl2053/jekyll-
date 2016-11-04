@@ -153,7 +153,7 @@ public class JigyoshaTourokuFinder {
     public boolean 事業者番号重複チェック(JigyoshaNo jigyoshaNo, FlexibleDate yukoKaishiYMD) {
         requireNonNull(jigyoshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者"));
         requireNonNull(yukoKaishiYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
-        DbT7060KaigoJigyoshaEntity dbt7060Entity = dbT7060Dac.selectByKey(jigyoshaNo, yukoKaishiYMD);
+        DbT7060KaigoJigyoshaEntity dbt7060Entity = dbT7060Dac.select有効事業者(jigyoshaNo, yukoKaishiYMD);
         return dbt7060Entity != null;
     }
 

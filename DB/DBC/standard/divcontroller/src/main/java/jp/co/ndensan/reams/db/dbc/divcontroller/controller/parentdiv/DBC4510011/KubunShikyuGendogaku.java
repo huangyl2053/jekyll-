@@ -156,7 +156,7 @@ public class KubunShikyuGendogaku {
     }
 
     /**
-     * 入力前の状態に戻る ボタンの処理です。
+     * 「保存する」ボタンクリック時のボタンの処理です。
      *
      * @param div div
      * @return ResponseData
@@ -183,22 +183,18 @@ public class KubunShikyuGendogaku {
             KaigoServiceShuruiIdentifier identifier = new KaigoServiceShuruiIdentifier(
                     new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
             KaigoServiceShurui result = holder.getKogakuGassanJikoFutanGaku(identifier);
+            List<KaigoServiceShurui> list = holder.getKaigoServiceShuruiList();
             if (result == null) {
                 result = new KaigoServiceShurui(
                         new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
                 result = handler.setResult追加(result);
+                追加(list, サービス種類コード, result, manager);
             } else {
                 if (div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()
                         && div.getServiceShuruiShousai().getTxtServiceMeisho().isDisabled()) {
-                    result = 削除(result, manager);
+                    result = 削除(list, サービス種類コード, result, manager);
                 } else {
-                    if ((!div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().isDisabled())
-                            && result.get提供終了年月() != null && result.get提供終了年月().isEmpty()) {
-                        result = result.createBuilderForEdit()
-                                .set提供終了年月(new FlexibleYearMonth(提供開始年月).minusMonth(1)).build();
-                    } else {
-                        result = handler.setResult修正(result);
-                    }
+                    result = handler.setResult修正(result);
                 }
             }
             manager.save(result);
@@ -256,14 +252,34 @@ public class KubunShikyuGendogaku {
         RealInitialLocker.release(排他キー);
     }
 
-    private KaigoServiceShurui 削除(KaigoServiceShurui result, KubunShikyuGendogakuManager manager) {
-        if (result.get提供開始年月().minusMonth(1) == result.get提供終了年月()) {
-            result = result.createBuilderForEdit()
-                    .set提供終了年月(new FlexibleYearMonth(RString.EMPTY)).build();
-        } else {
-            manager.データを物理削除する(result.toEntity());
+    private KaigoServiceShurui 削除(List<KaigoServiceShurui> list, RString サービス種類コード, KaigoServiceShurui result, KubunShikyuGendogakuManager manager) {
+//        if (result.get提供開始年月().minusMonth(1) == result.get提供終了年月()) {
+//            result = result.createBuilderForEdit()
+//                    .set提供終了年月(new FlexibleYearMonth(RString.EMPTY)).build();
+//        } else {
+//            manager.データを物理削除する(result.toEntity());
+//        }
+        for (KaigoServiceShurui lastResult : list) {
+            if (new ServiceShuruiCode(サービス種類コード).equals(lastResult.getサービス種類コード())
+                    && (result.get提供開始年月().minusMonth(1).equals(lastResult.get提供終了年月()))) {
+                lastResult = lastResult.createBuilderForEdit()
+                        .set提供終了年月(new FlexibleYearMonth(RString.EMPTY)).build();
+                manager.データを物理削除する(result.toEntity());
+                manager.save(lastResult);
+            }
         }
         return result;
+    }
+
+    private void 追加(List<KaigoServiceShurui> list, RString サービス種類コード, KaigoServiceShurui result, KubunShikyuGendogakuManager manager) {
+        for (KaigoServiceShurui lastResult : list) {
+            if (new ServiceShuruiCode(サービス種類コード).equals(lastResult.getサービス種類コード())
+                    && (lastResult.get提供終了年月() == null || lastResult.get提供終了年月().isEmpty())) {
+                lastResult = result.createBuilderForEdit()
+                        .set提供終了年月(result.get提供開始年月().minusMonth(1)).build();
+                manager.save(lastResult);
+            }
+        }
     }
 
     private KubunShikyuGendogakuHandler getHandler(KubunShikyuGendogakuDiv div) {

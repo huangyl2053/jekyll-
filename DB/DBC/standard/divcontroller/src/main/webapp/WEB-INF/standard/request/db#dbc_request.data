@@ -1338,6 +1338,7 @@ dbc/db/dbc/PanelnlTotal/onClick_ketteibi
 dbc/db/dbc/PanelnlTotal/onClick_uketsukebi
 dbc/db/dbc/PanelnlTotal/onLoad
 dbc/db/dbc/PnlKeteiJohoMsg/onClick_btnFree
+dbc/db/dbc/PnlKeteiJohoMsg/onClick_btnReturn
 dbc/db/dbc/PnlKeteiJohoMsg/onClick_btnUpdate
 dbc/db/dbc/PnlKeteiJohoMsg/onLoad
 dbc/db/dbc/PnlShokanHanteiKekka/onClick_btnDelete

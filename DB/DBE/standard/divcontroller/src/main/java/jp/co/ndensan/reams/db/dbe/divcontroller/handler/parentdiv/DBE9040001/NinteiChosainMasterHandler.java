@@ -209,8 +209,10 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
                 new Code(row.getChikuCode()));
         setDdlChosainShikaku();
-        if (!row.getChosainShikakuCode().isEmpty()) {
+        if (row.getChosainShikakuCode() != null && !row.getChosainShikakuCode().isNullOrEmpty()) {
             div.getChosainJohoInput().getDdlChosainShikaku().setSelectedKey(row.getChosainShikakuCode());
+        } else {
+            div.getChosainJohoInput().getDdlChosainShikaku().setSelectedKey(RString.EMPTY);
         }
         div.getChosainJohoInput().getTxtChosaKanoNinzu().setValue(row.getChosaKanoNinzu().getValue());
         div.getChosainJohoInput().getTxtYubinNo().setValue(new YubinNo(editYubinNo(row.getYubinNo())));
@@ -330,10 +332,14 @@ public class NinteiChosainMasterHandler {
         if (chosaKanoNinzu != null) {
             調査可能人数_月 = chosaKanoNinzu.intValue();
         }
+        RString chosainShikaku = div.getChosainJohoInput().getDdlChosainShikaku().getSelectedKey();
+        if (chosainShikaku.isNullOrEmpty()) {
+            chosainShikaku = null;
+        }
         return chosainJoho.createBuilderForEdit().set調査員氏名(div.getChosainJohoInput().getTxtChosainShimei().getValue())
                 .set調査員氏名カナ(div.getChosainJohoInput().getTxtChosainKanaShimei().getValue())
                 .set性別(div.getChosainJohoInput().getRadSeibetsu().getSelectedKey())
-                .set調査員資格(div.getChosainJohoInput().getDdlChosainShikaku().getSelectedKey())
+                .set調査員資格(chosainShikaku)
                 .set地区コード(div.getChosainJohoInput().getCcdChiku().getCode().value())
                 .set調査可能人数_月(調査可能人数_月)
                 .set郵便番号(div.getChosainJohoInput().getTxtYubinNo().getValue())

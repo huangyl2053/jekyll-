@@ -6,89 +6,82 @@
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.otheraddressinformation.IOtherAddressInformationMapper">
     <select id="get他市町村住所地特例者情報の取得処理" resultMap="resultMap_OtherAddressInfFromDBEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.otheraddressledger.OtherAddressInformationParameter"  fetchSize="500" resultOrdered="true">
-        SELECT A."識別コード" AS "識別コード",
-        A."異動日" AS "異動日",
-        A."枝番" AS "枝番",
-        A."市町村コード" AS "市町村コード",
-        A."他市町村住所地特例適用事由コード" AS "他市町村住所地特例適用事由コード",
-        A."適用年月日" AS "適用年月日",
-        A."適用届出年月日" AS "適用届出年月日",
-        A."他市町村住所地特例解除事由コード" AS "他市町村住所地特例解除事由コード",
-        A."解除年月日" AS "解除年月日",
-        A."解除届出年月日" AS "解除届出年月日",
-        A."措置保険者番号" AS "措置保険者番号",
-        A."措置被保険者番号" AS "措置被保険者番号",
-        A."保険者名称" AS "保険者名称",
-        B."daichoShubetsu" AS "台帳種別",
-        B."nyushoShisetsuCode" AS "入所施設コード",
-        B."nyushoShisetsuShurui" AS "入所施設種類",
-        B."nyushoYMD" AS "入所年月日",
-        B."taishoYMD" AS "退所年月日",
-        C."jigyoshaShubetsu" AS "事業者種別",
-        C."jigyoshaNo" AS "事業者番号",
-        C."jigyoshaMeisho" AS "事業者名称",
-        C."jigyoshaJusho" AS "事業者住所",
-        C."yubinNo" AS "郵便番号",
-        C."telNo" AS "電話番号"
-        FROM (SELECT  T4."識別コード" AS "識別コード",
-        T4."異動日" AS "異動日",
-        T4."枝番" AS "枝番",
-        T4."異動事由コード" AS "異動事由コード",
-        T4."市町村コード" AS "市町村コード",
-        T4."他市町村住所地特例適用事由コード" AS "他市町村住所地特例適用事由コード",
-        T4."適用年月日" AS "適用年月日",
-        T4."適用届出年月日" AS "適用届出年月日",
-        T4."適用受付年月日" AS "適用受付年月日",
-        T4."他市町村住所地特例解除事由コード" AS "他市町村住所地特例解除事由コード",
-        T4."解除年月日" AS "解除年月日",
-        T4."解除届出年月日" AS "解除届出年月日",
-        T4."解除受付年月日" AS "解除受付年月日",
-        T4."措置保険者番号" AS "措置保険者番号",
-        T4."措置被保険者番号" AS "措置被保険者番号",
-        T5."hokenjaName" AS "保険者名称"
+        SELECT  dbT1003."shikibetsuCode" AS "識別コード",
+        dbT1003."idoYMD" AS "異動日",
+        dbT1003."edaNo" AS "枝番",
+        dbT1003."shichosonCode" AS "市町村コード",
+        dbT1003."tekiyoJiyuCode" AS "他市町村住所地特例適用事由コード",
+        dbT1003."tekiyoYMD" AS "適用年月日",
+        dbT1003."tekiyoTodokedeYMD" AS "適用届出年月日",
+        dbT1003."kaijoJiyuCode" AS "他市町村住所地特例解除事由コード",
+        dbT1003."kaijoYMD" AS "解除年月日",
+        dbT1003."kaijoTodokedeYMD" AS "解除届出年月日",
+        dbT1003."sochiHokenshaNo" AS "措置保険者番号",
+        dbT1003."sochiHihokenshaNo" AS "措置被保険者番号",
+        urT0507."hokenjaName" AS "保険者名称",
+        dbT1004."daichoShubetsu" AS "台帳種別",
+        dbT1004."nyushoShisetsuCode" AS "入所施設コード",
+        dbT1004."nyushoShisetsuShurui" AS "入所施設種類",
+        dbT1004."nyushoYMD" AS "入所年月日",
+        dbT1004."taishoYMD" AS "退所年月日",
+        dbT1005."jigyoshaShubetsu" AS "事業者種別",
+        dbT1005."jigyoshaNo" AS "事業者番号",
+        dbT1005."jigyoshaMeisho" AS "事業者名称",
+        dbT1005."jigyoshaJusho" AS "事業者住所",
+        dbT1005."yubinNo" AS "郵便番号",
+        dbT1005."telNo" AS "電話番号"
+        FROM
+        (
+        SELECT
+        dbT1003Tashichoson."shikibetsuCode"               AS "shikibetsuCode",
+        dbT1003Tashichoson."idoYMD"                       AS "idoYMD",
+        dbT1003Tashichoson."edaNo"                        AS "edaNo",
+        dbT1003Tashichoson."idoJiyuCode"                  AS "idoJiyuCode",
+        dbT1003Tashichoson."shichosonCode"                AS "shichosonCode",
+        dbT1003Tashichoson."tekiyoJiyuCode"               AS "tekiyoJiyuCode",
+        dbT1003Tashichoson."tekiyoYMD"                    AS "tekiyoYMD",
+        dbT1003Tashichoson."tekiyoTodokedeYMD"            AS "tekiyoTodokedeYMD",
+        dbT1003Tashichoson."tekiyoUketsukeYMD"            AS "tekiyoUketsukeYMD",
+        dbT1003Tashichoson."kaijoJiyuCode"                AS "kaijoJiyuCode",
+        dbT1003Tashichoson."kaijoYMD"                     AS "kaijoYMD",
+        dbT1003Tashichoson."kaijoTodokedeYMD"             AS "kaijoTodokedeYMD",
+        dbT1003Tashichoson."kaijoUketsukeYMD"             AS "kaijoUketsukeYMD",
+        dbT1003Tashichoson."sochiHokenshaNo"              AS "sochiHokenshaNo",
+        dbT1003Tashichoson."sochiHihokenshaNo"            AS "sochiHihokenshaNo",
+        dbT1003Tashichoson."tatokuRenrakuhyoHakkoYMD"     AS "tatokuRenrakuhyoHakkoYMD",
+        dbT1003Tashichoson."shisetsuTaishoTsuchiHakkoYMD" AS "shisetsuTaishoTsuchiHakkoYMD",
+        dbT1003Tashichoson."shisetsuHenkoTsuchiHakkoYMD"  AS "shisetsuHenkoTsuchiHakkoYMD"
         FROM
         (SELECT
-        T3."識別コード" AS "識別コード",
-        T3."異動日" AS "異動日",
-        T3."枝番" AS "枝番",
-        T1."idoJiyuCode" AS "異動事由コード",
-        T1."shichosonCode" AS "市町村コード",
-        T1."tekiyoJiyuCode" AS "他市町村住所地特例適用事由コード",
-        T1."tekiyoYMD" AS "適用年月日",
-        T1."tekiyoTodokedeYMD" AS "適用届出年月日",
-        T1."tekiyoUketsukeYMD" AS "適用受付年月日",
-        T1."kaijoJiyuCode" AS "他市町村住所地特例解除事由コード",
-        T1."kaijoYMD" AS "解除年月日",
-        T1."kaijoTodokedeYMD" AS "解除届出年月日",
-        T1."kaijoUketsukeYMD" AS "解除受付年月日",
-        T1."sochiHokenshaNo" AS "措置保険者番号",
-        T1."sochiHihokenshaNo" AS "措置被保険者番号"
-        FROM rgdb."DbT1003TashichosonJushochiTokurei" T1,
-        (SELECT T2."shikibetsuCode" AS "識別コード",
-        T2."idoYMD" AS "異動日",
-        MAX(T2."edaNo") AS "枝番"
-        FROM rgdb."DbT1003TashichosonJushochiTokurei" T2
-        WHERE T2."shikibetsuCode"=#{shikibetsuCode} AND T2."logicalDeletedFlag"=FALSE
-        GROUP BY T2."shikibetsuCode",T2."idoYMD")AS T3
-        WHERE T1."shikibetsuCode"=T3."識別コード" AND T1."idoYMD"=T3."異動日" AND T1."edaNo"=T3."枝番")AS T4
-        LEFT JOIN rgur."UrT0507Hokenja" T5
-        ON T4."措置保険者番号"=T5."hokenjaNo" AND T5."hokenjaShubetsu"=#{保険者種別}) AS A
-        INNER JOIN rgdb."DbT1004ShisetsuNyutaisho" B
-        ON B."shikibetsuCode"=A."識別コード"
-        AND B."daichoShubetsu"='2'
-        LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" C
-        ON B."nyushoShisetsuCode"=C."jigyoshaNo"
-        AND B."nyushoShisetsuShurui"=C."jigyoshaShubetsu"
-        AND B."nyushoYMD" <![CDATA[>=]]> C."yukoKaishiYMD"
-        AND B."nyushoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
-        WHERE CASE WHEN ( A."解除年月日" IS NULL OR A."解除年月日" = '' )
-        THEN ( B."taishoYMD" IS NULL OR B."taishoYMD" = '' ) OR A."適用年月日" <![CDATA[<=]]> B."taishoYMD"
-        WHEN ( A."解除年月日" IS NOT NULL AND A."解除年月日" != '' )
-        THEN ( ( B."taishoYMD" IS NULL OR B."taishoYMD" = '' ) AND B."nyushoYMD" <![CDATA[<]]> A."解除年月日")
-        OR (B."nyushoYMD" <![CDATA[<]]> A."解除年月日" AND B."taishoYMD" <![CDATA[>]]> A."適用年月日")
-        END
-        ORDER BY B."nyushoYMD" DESC
-
+        *,
+        ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY
+        T1."shikibetsuCode" ASC,
+        T1."tekiyoYMD" ASC,
+        T1."idoYMD" DESC,
+        T1."edaNo" DESC) AS rrkno
+        FROM
+        rgdb."DbT1003TashichosonJushochiTokurei" AS T1
+        WHERE
+        T1."shikibetsuCode" = #{shikibetsuCode}
+        AND T1."logicalDeletedFlag" = FALSE) AS dbT1003Tashichoson
+        WHERE
+        dbT1003Tashichoson."rrkno" = 1
+        ) AS dbT1003
+        LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" AS dbT1004
+        ON dbT1004."shikibetsuCode" = dbT1003."shikibetsuCode"
+        AND dbT1004."daichoShubetsu" = '2'
+        AND
+        (( (dbT1003."kaijoYMD" IS NULL OR dbT1003."kaijoYMD" = '')  AND ( (dbT1004."taishoYMD" IS NULL OR dbT1004."taishoYMD" = '') OR dbT1003."tekiyoYMD" <![CDATA[<=]]> dbT1004."taishoYMD"))
+        OR (( (dbT1003."kaijoYMD" IS NOT NULL AND dbT1003."kaijoYMD" != '')
+        AND (( ( dbT1004."taishoYMD" IS NULL OR dbT1004."taishoYMD" = '' ) AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD")
+        OR (dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD" AND dbT1004."taishoYMD" <![CDATA[>]]> dbT1003."tekiyoYMD")))))
+        LEFT JOIN rgur."UrT0507Hokenja" AS urT0507
+        ON urT0507."hokenjaNo" = dbT1003."sochiHokenshaNo"
+        AND urT0507."hokenjaShubetsu" = #{保険者種別}
+        LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005
+        ON dbT1004."nyushoShisetsuCode"=dbT1005."jigyoshaNo"
+        ORDER BY
+        dbT1003."tekiyoYMD" DESC, dbT1003."idoYMD" DESC,dbT1003."edaNo" DESC, dbT1004."nyushoYMD" DESC, dbT1004."taishoYMD" DESC
 
     </select>
     <resultMap id="resultMap_OtherAddressInfFromDBEntity"

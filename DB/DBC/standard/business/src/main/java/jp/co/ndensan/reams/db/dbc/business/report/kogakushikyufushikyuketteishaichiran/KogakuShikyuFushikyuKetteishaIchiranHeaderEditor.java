@@ -27,11 +27,11 @@ public class KogakuShikyuFushikyuKetteishaIchiranHeaderEditor implements IKogaku
     private final List<RString> 出力項目リスト;
     private final List<RString> 改頁項目リスト;
     private final RDateTime 作成日時;
-    private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
 
     private static final RString SAKUSEI = new RString("作成");
 
@@ -63,16 +63,16 @@ public class KogakuShikyuFushikyuKetteishaIchiranHeaderEditor implements IKogaku
             source.shoKisaiHokenshaNo = 帳票出力対象データ.getKetteiTemp().get証記載保険者番号().getColumnValue();
         }
         source.shoKisaiHokenshaName = 帳票出力対象データ.getKetteiTemp().get証記載保険者名();
-        source.shutsuryokujun1 = get並び順(NUM_0);
-        source.shutsuryokujun2 = get並び順(NUM_1);
-        source.shutsuryokujun3 = get並び順(NUM_2);
-        source.shutsuryokujun4 = get並び順(NUM_3);
-        source.shutsuryokujun5 = get並び順(NUM_4);
-        source.kaipage1 = get改頁(NUM_0);
-        source.kaipage2 = get改頁(NUM_1);
-        source.kaipage3 = get改頁(NUM_2);
-        source.kaipage4 = get改頁(NUM_3);
-        source.kaipage5 = get改頁(NUM_4);
+        source.shutsuryokujun1 = get並び順(NUM_1);
+        source.shutsuryokujun2 = get並び順(NUM_2);
+        source.shutsuryokujun3 = get並び順(NUM_3);
+        source.shutsuryokujun4 = get並び順(NUM_4);
+        source.shutsuryokujun5 = get並び順(NUM_5);
+        source.kaipage1 = get改頁(NUM_1);
+        source.kaipage2 = get改頁(NUM_2);
+        source.kaipage3 = get改頁(NUM_3);
+        source.kaipage4 = get改頁(NUM_4);
+        source.kaipage5 = get改頁(NUM_5);
         return source;
     }
 

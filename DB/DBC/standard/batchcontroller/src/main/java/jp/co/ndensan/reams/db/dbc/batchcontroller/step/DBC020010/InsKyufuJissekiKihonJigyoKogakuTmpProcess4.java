@@ -52,6 +52,7 @@ public class InsKyufuJissekiKihonJigyoKogakuTmpProcess4 extends BatchProcessBase
         }
         breakKey = getBreakKey(entity);
         if (entity.getShinsaYM() != null && !entity.getShinsaYM().isEmpty()
+                && processParameter.get処理年月() != null && !processParameter.get処理年月().isEmpty()
                 && processParameter.get処理年月().isBeforeOrEquals(entity.getShinsaYM())) {
             return;
         }

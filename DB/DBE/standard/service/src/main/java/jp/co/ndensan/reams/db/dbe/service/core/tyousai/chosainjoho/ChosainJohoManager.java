@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5913ChosainJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -115,5 +116,17 @@ public class ChosainJohoManager {
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
         return dac.selectByKey(市町村コード, 認定調査委託先コード, 認定調査員コード);
+    }
+    
+    /**
+     * 主キーで調査員情報件数を取得します。
+     *
+     * @param 市町村コード ShichosonCode
+     * @param R認定調査委託先コード NinteichosaItakusakiCode
+     * @return 認定調査委託先情報件数
+     */
+    public int countByKey(LasdecCode 市町村コード, RString R認定調査委託先コード) {
+        ChosaItakusakiCode 認定調査委託先コード = new ChosaItakusakiCode(R認定調査委託先コード);
+        return dac.select調査員情報(市町村コード, 認定調査委託先コード).size();
     }
 }

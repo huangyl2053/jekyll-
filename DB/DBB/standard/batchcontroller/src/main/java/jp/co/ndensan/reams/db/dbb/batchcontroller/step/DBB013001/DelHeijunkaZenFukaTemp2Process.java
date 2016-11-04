@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheinjunka8gatsu.ITokuchoHeinjunka8GatsuBatchMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
@@ -17,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 public class DelHeijunkaZenFukaTemp2Process extends SimpleBatchProcessBase {
 
     private ITokuchoHeinjunka8GatsuBatchMapper mapper;
-    private TokuchoHeinjunka6GatsuMyBatisParameter myBatisParameter;
+    private TokuchoHeinjunka8GatsuMyBatisParameter myBatisParameter;
+    private TokuchoHeinjunka8GatsuProcessParameter processParameter;
 
     @Override
     protected void beforeExecute() {
@@ -27,6 +29,8 @@ public class DelHeijunkaZenFukaTemp2Process extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
+        myBatisParameter = new TokuchoHeinjunka8GatsuMyBatisParameter();
+        myBatisParameter.set調定年度(processParameter.get調定年度());
         mapper.do特徴停止_平準化前賦課Tempからデータを削除(myBatisParameter);
     }
 

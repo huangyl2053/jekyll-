@@ -6,16 +6,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoBusiness;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.StaticImage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -23,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * KaigoNinteiAtenaInfo のクラスファイル
@@ -84,6 +85,8 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     private RString hdnSubGyomuCode;
     @JsonProperty("MemoShikibetsuCode")
     private RString MemoShikibetsuCode;
+    @JsonProperty("hdnShimeiKana")
+    private RString hdnShimeiKana;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -488,6 +491,24 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     }
 
     /*
+     * gethdnShimeiKana
+     * @return hdnShimeiKana
+     */
+    @JsonProperty("hdnShimeiKana")
+    public RString getHdnShimeiKana() {
+        return hdnShimeiKana;
+    }
+
+    /*
+     * sethdnShimeiKana
+     * @param hdnShimeiKana hdnShimeiKana
+     */
+    @JsonProperty("hdnShimeiKana")
+    public void setHdnShimeiKana(RString hdnShimeiKana) {
+        this.hdnShimeiKana = hdnShimeiKana;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -495,9 +516,6 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
 
     public static enum ShoriType implements ICommonChildDivMode {
 
-//        NormalAddMode("NormalAddMode"),
-//        NormalUpdateMode("NormalUpdateMode"),
-//        SeihoAddMode("SeihoAddMode"),
         SeihoUpdateMode("SeihoUpdateMode"),
         ShokaiMode("ShokaiMode");
 
@@ -511,7 +529,7 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -526,11 +544,11 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
+        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
     }
 
-    public void setMode_ShoriType(ShoriType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
+    public void setMode_ShoriType( ShoriType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
     }
 
     public static enum AtenaType implements ICommonChildDivMode {
@@ -548,7 +566,7 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
             AtenaType[] enumArray = AtenaType.values();
 
             for (AtenaType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -563,11 +581,11 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     }
 
     public AtenaType getMode_AtenaType() {
-        return (AtenaType) _CommonChildDivModeUtil.getMode(this.modes, AtenaType.class);
+        return (AtenaType) _CommonChildDivModeUtil.getMode( this.modes, AtenaType.class );
     }
 
-    public void setMode_AtenaType(AtenaType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, AtenaType.class, value);
+    public void setMode_AtenaType( AtenaType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, AtenaType.class , value );
     }
 
     // </editor-fold>
@@ -620,7 +638,12 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     public RString get被保険者氏名() {
         return this.getTxtShimei().getValue();
     }
-
+     
+    @Override
+    public RString get被保険者氏名カナ() {
+        return this.getHdnShimeiKana();
+    }
+    
     @Override
     public YubinNo get郵便番号() {
         return this.getTxtYubinNo().getValue();

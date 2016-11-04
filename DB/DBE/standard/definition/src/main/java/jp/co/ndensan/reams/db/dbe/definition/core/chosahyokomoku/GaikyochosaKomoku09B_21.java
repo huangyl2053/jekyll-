@@ -13,7 +13,7 @@ public enum GaikyochosaKomoku09B_21 {
     /**
      * コード:021 名称:複合型サービス 略称:定義なし 選択項目名称1:回/月
      */
-    複合型サービス("021", "複合型サービス", "回/月");
+    複合型サービス("021", "看護小規模多機能型居宅介護", "回/月");
 
     private final RString code;
     private final RString fullName;

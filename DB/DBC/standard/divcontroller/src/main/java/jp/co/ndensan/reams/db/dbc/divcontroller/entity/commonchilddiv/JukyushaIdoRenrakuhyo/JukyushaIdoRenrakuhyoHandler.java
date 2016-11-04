@@ -171,7 +171,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().setValue(new FlexibleDate(受給者異動情報.get送付年月().toDateString()));
         }
         if (!(照会モード.equals(処理モード) && INT_1 == 履歴番号)
-                && 受給者異動情報.get訂正年月日() != null) {
+                && 受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
             div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
         }
         if (!照会モード.equals(処理モード) || INT_1 != 履歴番号) {

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002.DBE601002_Nintei
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojissekiichiran.IkenshoJissekiIchiranMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.IkenshoSakuseiJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6020001.IkenshoSakuseiJissekiShokaiHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6020001.IkenshoSakuseiJissekiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshosakuseijissekishokai.IkenshoSakuseiJissekiShokaiFindler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 意見書作成実績照会の画面処理クラスです。
@@ -99,6 +101,20 @@ public class IkenshoSakuseiJissekiShokai {
     }
 
     /**
+     * データの必須選択チェックを実施します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<IkenshoSakuseiJissekiShokaiDiv>
+     */
+    public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_BatchButton(IkenshoSakuseiJissekiShokaiDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForCheckedDataCount();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
      * 「CSVを出力する」ボタンを押します。
      *
      * @param div 画面情報
@@ -122,5 +138,9 @@ public class IkenshoSakuseiJissekiShokai {
 
     private IkenshoSakuseiJissekiShokaiHandler getHandler(IkenshoSakuseiJissekiShokaiDiv div) {
         return new IkenshoSakuseiJissekiShokaiHandler(div);
+    }
+    
+    private IkenshoSakuseiJissekiValidationHandler getValidationHandler(IkenshoSakuseiJissekiShokaiDiv div) {
+        return new IkenshoSakuseiJissekiValidationHandler(div);
     }
 }

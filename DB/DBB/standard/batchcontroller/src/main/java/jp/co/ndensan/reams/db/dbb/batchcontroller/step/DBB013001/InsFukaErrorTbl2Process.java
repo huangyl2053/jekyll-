@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.InsFukaErrorTbl1TmpEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -22,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0860-030 yebangqiang
  */
-public class InsFukaErrorTbl2Process extends BatchProcessBase<FukaJohoTmpEntity> {
+public class InsFukaErrorTbl2Process extends BatchProcessBase<FukaJohoTmpHachiEntity> {
 
     private static final RString 賦課エラー一覧 = new RString("InsFukaErrorTbl2Temp");
-    private static final RString エラーコード = new RString("04");
+    private static final RString エラーコード = new RString("XX");
     private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
     private static final RString バッチID = new RString("DBB0130001");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
@@ -48,8 +48,8 @@ public class InsFukaErrorTbl2Process extends BatchProcessBase<FukaJohoTmpEntity>
     }
 
     @Override
-    protected void process(FukaJohoTmpEntity fukaJohoResult) {
-        FukaJohoTmpEntity 賦課の情報 = fukaJohoResult;
+    protected void process(FukaJohoTmpHachiEntity fukaJohoResult) {
+        FukaJohoTmpHachiEntity 賦課の情報 = fukaJohoResult;
         InsFukaErrorTbl1TmpEntity insFukaErrorTbl1TmpEntity = new InsFukaErrorTbl1TmpEntity();
         insFukaErrorTbl1TmpEntity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
         insFukaErrorTbl1TmpEntity.setNaibuChouhouID(内部帳票ID);

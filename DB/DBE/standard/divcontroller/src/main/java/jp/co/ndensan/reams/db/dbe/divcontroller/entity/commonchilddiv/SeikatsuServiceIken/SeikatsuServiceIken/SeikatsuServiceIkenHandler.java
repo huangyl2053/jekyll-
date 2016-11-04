@@ -92,27 +92,36 @@ public class SeikatsuServiceIkenHandler {
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         RString 履歴番号STR = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class);
         int 履歴番号 = Integer.valueOf(履歴番号STR.toString());
-        ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
-        ShujiiIkenshoJohoIdentifier shujiiIkenshoJohoIdentifier = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
-        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);
-        if (shujiiIkenshoIraiJoho.getShujiiIkenshoJohoList().isEmpty()) {
-            shujiiIkenshoIraiJoho.createBuilderForEdit()
-                    .setShujiiIkenshoJoho(create要介護認定主治医意見書情報(管理番号, 履歴番号));
-        }
-        ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(shujiiIkenshoJohoIdentifier);
-        if (shujiiIkenshoJoho.getShujiiIkenshoIkenItemList().isEmpty()) {
-            shujiiIkenshoJoho = create意見項目(shujiiIkenshoJoho, 管理番号, 履歴番号);
-        }
-        if (shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList().isEmpty()) {
-            shujiiIkenshoJoho = create記入項目(shujiiIkenshoJoho, 管理番号, 履歴番号);
-        }
-        List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト = shujiiIkenshoJoho.getShujiiIkenshoIkenItemList();
-        List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト = shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList();
-        要介護認定主治医意見書意見項目リスト = 意見項目初期化編集(要介護認定主治医意見書意見項目リスト, 管理番号, 履歴番号);
-        要介護認定主治医意見書記入項目リスト = 記入項目初期化編集(要介護認定主治医意見書記入項目リスト, 管理番号, 履歴番号);
-        viewStateSave(ninteiShinseiJohoBusiness,
-                shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
-                要介護認定主治医意見書意見項目リスト, 要介護認定主治医意見書記入項目リスト);
+
+        if (ninteiShinseiJohoBusiness != null) {
+            ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
+            ShujiiIkenshoJohoIdentifier shujiiIkenshoJohoIdentifier = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);  
+            ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);  
+            if (shujiiIkenshoIraiJoho != null) {
+                if (shujiiIkenshoIraiJoho.getShujiiIkenshoJohoList().isEmpty()) {
+                    shujiiIkenshoIraiJoho.createBuilderForEdit()
+                            .setShujiiIkenshoJoho(create要介護認定主治医意見書情報(管理番号, 履歴番号));
+                }
+            }
+            ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(shujiiIkenshoJohoIdentifier);
+            
+            if (shujiiIkenshoJoho != null) {
+                if (shujiiIkenshoJoho.getShujiiIkenshoIkenItemList().isEmpty()) {
+                    shujiiIkenshoJoho = create意見項目(shujiiIkenshoJoho, 管理番号, 履歴番号);
+                }
+                if (shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList().isEmpty()) {
+                    shujiiIkenshoJoho = create記入項目(shujiiIkenshoJoho, 管理番号, 履歴番号);
+                }
+            }
+            
+            List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト = shujiiIkenshoJoho.getShujiiIkenshoIkenItemList();
+            List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト = shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList();
+            要介護認定主治医意見書意見項目リスト = 意見項目初期化編集(要介護認定主治医意見書意見項目リスト, 管理番号, 履歴番号);
+            要介護認定主治医意見書記入項目リスト = 記入項目初期化編集(要介護認定主治医意見書記入項目リスト, 管理番号, 履歴番号);
+            viewStateSave(ninteiShinseiJohoBusiness,
+                    shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
+                    要介護認定主治医意見書意見項目リスト, 要介護認定主治医意見書記入項目リスト);
+        }        
     }
 
     /**
@@ -170,15 +179,27 @@ public class SeikatsuServiceIkenHandler {
         int 履歴番号 = Integer.valueOf(履歴番号STR.toString());
 
         ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
-        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);
         ShujiiIkenshoJohoIdentifier shujiiIkenshoJohoIdentifier = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
-        ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(shujiiIkenshoJohoIdentifier);
-        List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト = shujiiIkenshoJoho.getShujiiIkenshoIkenItemList();
-        List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト = shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList();
-        連番リスト初期化処理();
-        viewStateSave(ninteiShinseiJohoBusiness,
-                shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
-                edit意見項目(要介護認定主治医意見書意見項目リスト), edit記入項目(要介護認定主治医意見書記入項目リスト));
+        List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト = new ArrayList<ShujiiIkenshoIkenItem>();
+        List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト = new ArrayList<ShujiiIkenshoKinyuItem>();
+        if (ninteiShinseiJohoBusiness != null) {
+            ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);
+            ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(shujiiIkenshoJohoIdentifier);
+            要介護認定主治医意見書意見項目リスト = shujiiIkenshoJoho.getShujiiIkenshoIkenItemList();
+            要介護認定主治医意見書記入項目リスト = shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList();
+            連番リスト初期化処理();
+            viewStateSave(ninteiShinseiJohoBusiness,
+                    shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
+                    edit意見項目(要介護認定主治医意見書意見項目リスト), edit記入項目(要介護認定主治医意見書記入項目リスト));
+        } else {
+            ninteiShinseiJohoBusiness = new NinteiShinseiJoho(管理番号);
+            ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(管理番号, 履歴番号);
+            ShujiiIkenshoJoho shujiiIkenshoJoho = new ShujiiIkenshoJoho(管理番号, 履歴番号);
+            連番リスト初期化処理();
+            viewStateSave(ninteiShinseiJohoBusiness,
+                    shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
+                    edit意見項目(要介護認定主治医意見書意見項目リスト), edit記入項目(要介護認定主治医意見書記入項目リスト));
+        }
     }
 
     private ShujiiIkenshoJoho create要介護認定主治医意見書情報(ShinseishoKanriNo 管理番号, int 履歴番号) {

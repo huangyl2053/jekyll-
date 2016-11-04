@@ -155,6 +155,17 @@
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE '%' || #{主治医カナ氏名} || '%'
                 </if>
             </if>
+            <if test="市町村識別ID利用Flag">
+                AND DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonShokibetsuID" NOT IN (
+                        SELECT "shichosonShokibetsuID"
+                        FROM rgdb."DbT7051KoseiShichosonMaster"
+                        WHERE  "shichosonCode"=(
+                                                SELECT "shichosonCode"  FROM rgdb."DbT7051KoseiShichosonMaster"
+                                                WHERE "shichosonShokibetsuID" = #{市町村識別ID}
+                                                )
+                        AND "shichosonShokibetsuID" <![CDATA[<>]]> #{市町村識別ID}
+                        )
+            </if>
         </where>
         ORDER BY
         DbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode",

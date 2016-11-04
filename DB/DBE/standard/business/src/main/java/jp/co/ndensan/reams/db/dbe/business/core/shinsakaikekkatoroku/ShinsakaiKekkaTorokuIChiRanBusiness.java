@@ -189,7 +189,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
         }
         return RString.EMPTY;
     }
-    
+
     /**
      * 今回二次判定を取得します。
      *
@@ -212,6 +212,19 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
         Code コード = entity.get二次判定要介護状態区分コード();
         if (コード != null && !コード.isEmpty()) {
             return entity.get二次判定要介護状態区分コード().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 厚労省IF識別コードを取得します。
+     *
+     * @return 二次判定コード
+     */
+    public RString 厚労省IF識別コード() {
+        Code コード = entity.get厚労省IF識別コード();
+        if (コード != null && !コード.isEmpty()) {
+            return entity.get厚労省IF識別コード().value();
         }
         return RString.EMPTY;
     }

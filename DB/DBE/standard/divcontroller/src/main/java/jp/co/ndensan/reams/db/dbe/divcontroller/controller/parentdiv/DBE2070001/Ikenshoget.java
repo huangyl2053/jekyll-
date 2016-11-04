@@ -235,7 +235,7 @@ public class Ikenshoget {
 
     private boolean get完了条件(dgNinteiTaskList_Row row) {
         RDate 意見書_定型_定形外 = row.getIkenshoNyushuTeikei().getValue();
-        return 意見書_定型_定形外 == null || IkenshogetManager.createInstance().完了処理事前チェック(row.getShinseishoKanriNo());
+        return 意見書_定型_定形外 == null || !IkenshogetManager.createInstance().完了処理事前チェック(row.getShinseishoKanriNo());
     }
 
     private IkenshoNyushuCsvEntity getCsvData(dgNinteiTaskList_Row row) {

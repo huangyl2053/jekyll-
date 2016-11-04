@@ -118,4 +118,19 @@ public enum ShikakuHenkoJiyu {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("資格変更事由"));
     }
+
+    /**
+     * 引数から渡された異動事由が、資格変更事由であるかどうかをチェックします。
+     *
+     * @param jiyu 異動事由
+     * @return 渡された引数が資格変更事由である場合は{@code true}、それ以外の場合は{@code false}
+     */
+    public static boolean checkIdoJiyu(RString jiyu) {
+        for (ShikakuHenkoJiyu shikakuHenkoJiyu : ShikakuHenkoJiyu.values()) {
+            if (shikakuHenkoJiyu.getコード().equals(jiyu)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

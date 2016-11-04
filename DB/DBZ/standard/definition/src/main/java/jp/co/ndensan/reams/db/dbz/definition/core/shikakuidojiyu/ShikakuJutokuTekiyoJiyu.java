@@ -66,4 +66,19 @@ public enum ShikakuJutokuTekiyoJiyu {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("資格住特適用事由"));
     }
+
+    /**
+     * 引数から渡された異動事由が、住所地特例適用事由であるかどうかをチェックします。
+     *
+     * @param jiyu 異動事由
+     * @return 渡された引数が住所地特例適用事由である場合は{@code true}、それ以外の場合は{@code false}
+     */
+    public static boolean checkIdoJiyu(RString jiyu) {
+        for (ShikakuJutokuTekiyoJiyu shikakuJutokuTekiyoJiyu : ShikakuJutokuTekiyoJiyu.values()) {
+            if (shikakuJutokuTekiyoJiyu.getコード().equals(jiyu)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

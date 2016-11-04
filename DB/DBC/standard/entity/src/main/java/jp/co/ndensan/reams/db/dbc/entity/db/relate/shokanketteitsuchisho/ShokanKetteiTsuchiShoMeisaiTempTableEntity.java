@@ -53,10 +53,8 @@ public class ShokanKetteiTsuchiShoMeisaiTempTableEntity
     private RString shikyuHushikyuKetteiKubun;
     private Decimal shiharaiKingaku;
     private Decimal shiharaiKingakuUchiwakeRiyoshabun;
-    @PrimaryKey
     private KinyuKikanCode kinyuKikanCode;
     private RString kinyuKikanCodeName;
-    @PrimaryKey
     private KinyuKikanShitenCode kinyuKikanShitenCode;
     private RString kinyuKikanShitenName;
     private RString yokinShubetsu;

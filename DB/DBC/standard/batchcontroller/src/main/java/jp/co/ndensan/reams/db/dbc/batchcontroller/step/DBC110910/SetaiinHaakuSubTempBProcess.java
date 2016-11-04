@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110910;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.setaiyin.SetaiYinEntity;
@@ -12,6 +14,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoF
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -41,10 +45,25 @@ public class SetaiinHaakuSubTempBProcess extends BatchProcessBase<SetaiYinEntity
     protected IBatchReader createReader() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
+        juminShubetsuList.add(JuminShubetsu.日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
+        juminShubetsuList.add(JuminShubetsu.外国人);
+        key.set住民種別(juminShubetsuList);
+        List<JuminJotai> juminJotaiList = new ArrayList<>();
+        juminJotaiList.add(JuminJotai.住民);
+        juminJotaiList.add(JuminJotai.住登外);
+        juminJotaiList.add(JuminJotai.死亡者);
+        juminJotaiList.add(JuminJotai.消除者);
+        juminJotaiList.add(JuminJotai.転出者);
+        key.set住民状態(juminJotaiList);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        SetaiinHaakuSubMybitisParamter meter = parameter.toSeigoseiBatchMybitisParamter().createParam(
-                parameter.get管理識別区分(), 特例該当, psmShikibetsuTaisho);
+        SetaiinHaakuSubMybitisParamter meter = parameter.toSeigoseiBatchMybitisParamter();
+        meter.set管理識別区分(parameter.get管理識別区分());
+        meter.set住所地特例該当(特例該当);
+        meter.setPsmShikibetsuTaisho(psmShikibetsuTaisho);
         return new BatchDbReader(MYBATIS_SELECT_ID, meter);
     }
 

@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -422,7 +423,7 @@ public class GemmenGengakuShoHakkoMain {
         if (!div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().isEmpty()) {
             発行日 = new RDate(div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().toString());
         }
-
+        RString 文書番号 = getHandler(div).form文書番号(div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoNo().get文書番号());
         RString 減免減額種類 = RString.EMPTY;
         List<RString> 帳票タイプリスト = new ArrayList<>();
         HashMap<Code, RString> hashMap = new HashMap();
@@ -485,8 +486,7 @@ public class GemmenGengakuShoHakkoMain {
         GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko service = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance();
         try (ReportManager reportManager = new ReportManager()) {
             service.publish(帳票タイプリスト, 被保険者番号, 識別コード, Integer.valueOf(div.getHiddenRirekiNo().toString()),
-                    減免減額種類, 交付日, 発行日,
-                    div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoNo().get文書番号(), reportManager);
+                    減免減額種類, 交付日, 発行日, 文書番号, reportManager);
 
             SourceDataCollection collection = reportManager.publish();
             for (SourceData data : collection) {

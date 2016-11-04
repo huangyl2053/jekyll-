@@ -29,6 +29,10 @@ import static jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -37,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -205,6 +210,7 @@ public class JukyushaShokaiHandler {
         boolean 要支援者認定申請区分;
 
         List<dgNinteiRireki_Row> dataSource = new ArrayList<>();
+        List<dgNinteiRireki_Row> New_dataSource = new ArrayList<>();
         for (JukyuShokaiShinseiJoho joho : 申請情報List) {
             row = new dgNinteiRireki_Row();
             row.getShinseiDate().setValue(joho.get受給者台帳_受給申請年月日());
@@ -213,12 +219,27 @@ public class JukyushaShokaiHandler {
             row.getShuryoDate().setValue(joho.get受給者台帳_認定有効終了年月日());
             row.setSo(joho.is受給者台帳_旧措置フラグ() ? 措 : RString.EMPTY);
             row.setShinsakaiIken(joho.get要介護認定インタフェース情報_審査会意見());
-            if (joho.get要介護認定申請情報_厚労省IF識別コード() == null || joho.get要介護認定申請情報_厚労省IF識別コード().isEmpty()) {
-                row.setYokaigodo(get要介護度(new RString(""), 
-                        joho.get受給者台帳_要介護認定状態区分コード()));
-            } else {
-                row.setYokaigodo(get要介護度(new RString(joho.get要介護認定申請情報_厚労省IF識別コード().toString()), 
-                    joho.get受給者台帳_要介護認定状態区分コード()));
+            /* if (joho.get要介護認定申請情報_厚労省IF識別コード() == null || joho.get要介護認定申請情報_厚労省IF識別コード().isEmpty()) {
+             row.setYokaigodo(get要介護度(new RString(""),
+             joho.get受給者台帳_要介護認定状態区分コード()));
+             } else {
+             row.setYokaigodo(get要介護度(new RString(joho.get要介護認定申請情報_厚労省IF識別コード().toString()),
+             joho.get受給者台帳_要介護認定状態区分コード()));
+             }*/
+            FlexibleYearMonth yokaigoJotai = (joho.get受給者台帳_認定有効開始年月日() == null ? null : joho.get受給者台帳_認定有効開始年月日().getYearMonth());
+            if (yokaigoJotai == null) {
+                row.setYokaigodo(RString.EMPTY);
+            } else if (new FlexibleYearMonth("200004").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200203"))) {
+                row.setYokaigodo(YokaigoJotaiKubun99.toValue(joho.get受給者台帳_要介護認定状態区分コード().getKey()).get名称());
+            } else if (new FlexibleYearMonth("200204").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+                row.setYokaigodo(YokaigoJotaiKubun02.toValue(joho.get受給者台帳_要介護認定状態区分コード().getKey()).get名称());
+            } else if (new FlexibleYearMonth("200604").isBeforeOrEquals(yokaigoJotai)
+                    && yokaigoJotai.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
+                row.setYokaigodo(YokaigoJotaiKubun06.toValue(joho.get受給者台帳_要介護認定状態区分コード().getKey()).get名称());
+            } else if (new FlexibleYearMonth("200904").isBeforeOrEquals(yokaigoJotai)) {
+                row.setYokaigodo(YokaigoJotaiKubun09.toValue(joho.get受給者台帳_要介護認定状態区分コード().getKey()).get名称());
             }
             row.setShichosonCode(joho.get受給者台帳_市町村コード().getColumnValue());
             row.setRirekiNo(joho.get受給者台帳_履歴番号());
@@ -260,7 +281,14 @@ public class JukyushaShokaiHandler {
             row.setNintei(認定編集値);
             dataSource.add(row);
         }
-        div.getNinteiRireki().getDgNinteiRireki().setDataSource(dataSource);
+        for (int i = dataSource.size() - 1; i >= 0; i--) {
+            if (dataSource.get(i).getRirekiNo().equals(履歴番号_0000)) {
+                New_dataSource.add(0, dataSource.get(i));
+                continue;
+            }
+            New_dataSource.add(dataSource.get(i));
+        }
+        div.getNinteiRireki().getDgNinteiRireki().setDataSource(New_dataSource);
     }
 
     private void ボタン詳細指示パネルの設定(HihokenshaNo 被保険者番号) {
@@ -404,14 +432,14 @@ public class JukyushaShokaiHandler {
         div.getTxtShinseisha().setValue(申請認定情報.get申請届出情報_申請届出者氏名());
         div.getTxtShinseiRiyu().setValue(申請認定情報.get要介護認定申請情報_認定申請理由());
         if (申請認定情報.get要介護認定申請情報_厚労省IF識別コード() == null || 申請認定情報.get要介護認定申請情報_厚労省IF識別コード().isEmpty()) {
-            div.getTxtYokaigodoCode().setValue(get要介護度コード(new RString(""), 
+            div.getTxtYokaigodoCode().setValue(get要介護度コード(new RString(""),
                     申請認定情報.get受給者台帳_要介護認定状態区分コード()));
-            div.getTxtYokaigodo().setValue(get要介護度(new RString(""), 
+            div.getTxtYokaigodo().setValue(get要介護度(new RString(""),
                     申請認定情報.get受給者台帳_要介護認定状態区分コード()));
         } else {
-            div.getTxtYokaigodoCode().setValue(get要介護度コード(new RString(申請認定情報.get要介護認定申請情報_厚労省IF識別コード().toString()), 
+            div.getTxtYokaigodoCode().setValue(get要介護度コード(new RString(申請認定情報.get要介護認定申請情報_厚労省IF識別コード().toString()),
                     申請認定情報.get受給者台帳_要介護認定状態区分コード()));
-            div.getTxtYokaigodo().setValue(get要介護度(new RString(申請認定情報.get要介護認定申請情報_厚労省IF識別コード().toString()), 
+            div.getTxtYokaigodo().setValue(get要介護度(new RString(申請認定情報.get要介護認定申請情報_厚労省IF識別コード().toString()),
                     申請認定情報.get受給者台帳_要介護認定状態区分コード()));
         }
         div.getTxtNinteiYMD().setValue(申請認定情報.get受給者台帳_認定年月日());
@@ -546,10 +574,10 @@ public class JukyushaShokaiHandler {
 
     private void set前回認定値パネル(JukyuShokaiShinseiNinteiJoho 申請認定情報) {
         if (申請認定情報.get前回厚労省IF識別コード() == null || 申請認定情報.get前回厚労省IF識別コード().isEmpty()) {
-            div.getNinteiDetail().getNinteichosa().getTxtZenkaiYokaigodo().setValue(get要介護度(new RString(""), 
+            div.getNinteiDetail().getNinteichosa().getTxtZenkaiYokaigodo().setValue(get要介護度(new RString(""),
                     申請認定情報.get前回要介護認定状態区分コード()));
         } else {
-            div.getNinteiDetail().getNinteichosa().getTxtZenkaiYokaigodo().setValue(get要介護度(new RString(申請認定情報.get前回厚労省IF識別コード().toString()), 
+            div.getNinteiDetail().getNinteichosa().getTxtZenkaiYokaigodo().setValue(get要介護度(new RString(申請認定情報.get前回厚労省IF識別コード().toString()),
                     申請認定情報.get前回要介護認定状態区分コード()));
         }
         div.getNinteiDetail().getNinteichosa().getTxtZenkaiNinteiDate().setValue(申請認定情報.get前回認定年月日());
@@ -573,9 +601,9 @@ public class JukyushaShokaiHandler {
         div.getNinteiDetail().getNinteiResult().getTxtHakkoDate1().setValue(申請認定情報.get受給者台帳_受給資格証明書発行年月日１());
         div.getNinteiDetail().getNinteiResult().getTxtHakkoDate2().setValue(申請認定情報.get受給者台帳_受給資格証明書発行年月日２());
     }
-    
+
     private RString get要介護度(RString koroshoInterfaceShikibetsuCode, Code code) {
-        if (koroshoInterfaceShikibetsuCode == null || koroshoInterfaceShikibetsuCode.toString().isEmpty() 
+        if (koroshoInterfaceShikibetsuCode == null || koroshoInterfaceShikibetsuCode.toString().isEmpty()
                 || code == null || code.isEmpty()) {
             return RString.EMPTY;
         }
@@ -586,7 +614,7 @@ public class JukyushaShokaiHandler {
     }
 
     private RString get要介護度コード(RString koroshoInterfaceShikibetsuCode, Code code) {
-        if (koroshoInterfaceShikibetsuCode == null || koroshoInterfaceShikibetsuCode.toString().isEmpty() 
+        if (koroshoInterfaceShikibetsuCode == null || koroshoInterfaceShikibetsuCode.toString().isEmpty()
                 || code == null || code.isEmpty()) {
             return RString.EMPTY;
         }

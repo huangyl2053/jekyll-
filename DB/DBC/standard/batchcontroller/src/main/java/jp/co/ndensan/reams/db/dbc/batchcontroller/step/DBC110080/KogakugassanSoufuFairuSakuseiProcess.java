@@ -100,6 +100,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     private int renben;
     private RString 入力ファイルパス;
     private KogakugassanSoufuFairuSakuseiMeisaiEntity meisEntity;
+    private RString 媒体区分;
 
     private CsvWriter eucCsvWriter;
     @BatchWriter
@@ -115,6 +116,8 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         meisEntity = new KogakugassanSoufuFairuSakuseiMeisaiEntity();
         総出力件数 = INT_0;
         レコード番号 = INT_0;
+        媒体区分 = DbBusinessConfig
+                .get(ConfigNameDBC.国保連送付媒体_補正自己負担Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
     }
 
     @Override
@@ -601,8 +604,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         controlEntity.set保険者番号(processParameter.get保険者情報_保険者番号());
         controlEntity.set事業所番号(RSTRING_0);
         controlEntity.set都道府県番号(RSTRING_0);
-        controlEntity.set媒体区分(DbBusinessConfig
-                .get(ConfigNameDBC.国保連送付媒体_補正自己負担Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+        controlEntity.set媒体区分(媒体区分);
         controlEntity.set処理対象年月(processParameter.getShoriYM().toDateString());
         controlEntity.setファイル管理番号(RSTRING_0);
         return controlEntity;

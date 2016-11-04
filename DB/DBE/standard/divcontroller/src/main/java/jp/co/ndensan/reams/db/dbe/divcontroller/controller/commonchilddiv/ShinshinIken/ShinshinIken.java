@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.ShinshinIken;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.ShinshinIkenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenBakHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenHandler;
@@ -36,7 +35,7 @@ public class ShinshinIken {
      * @return ResponseData<ShinshinIkenDiv>
      */
     public ResponseData<ShinshinIkenDiv> onLoad(ShinshinIkenDiv div) {
-        ViewStateHolder.put(ViewStateKeys.要介護認定主治医意見書情報, getHandler(div).onLoad());
+        getHandler(div).onLoad();
         getHandler(div).setSelectKey();
         return ResponseData.of(div).respond();
     }
@@ -283,8 +282,7 @@ public class ShinshinIken {
         return new ShinshinIkenHandler(div,
                 ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class),
                 ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, ShujiiIkenshoJoho.class));
+                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class));
     }
 
     private ShinshinIkenValidationHandler getValidationHandler(ShinshinIkenDiv div) {
@@ -295,7 +293,6 @@ public class ShinshinIken {
         return new ShinshinIkenBakHandler(div,
                 ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class),
                 ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, ShujiiIkenshoJoho.class));
+                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class));
     }
 }

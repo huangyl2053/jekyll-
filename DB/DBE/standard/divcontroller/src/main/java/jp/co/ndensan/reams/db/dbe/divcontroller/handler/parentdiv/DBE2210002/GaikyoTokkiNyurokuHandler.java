@@ -45,31 +45,15 @@ public class GaikyoTokkiNyurokuHandler {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査履歴番号 認定調査履歴番号
-     * @param 調査実施日 調査実施日
-     * @param 調査実施場所 調査実施場所
-     * @param 実施場所名称 実施場所名称
-     * @param 所属機関 所属機関
-     * @param 記入者 記入者
-     * @param 調査区分 調査区分
+     * @param model 調査実施者モデル
      * @return 認定調査票（概況特記）
      */
-    public GaikyoTokki initialize(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号,
-            RString 調査実施日, RString 調査実施場所, RString 実施場所名称,
-            RString 所属機関, RString 記入者, RString 調査区分) {
-
-        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
-        model.set調査実施日(調査実施日);
-        model.set調査実施場所(調査実施場所);
-        model.set実施場所名称(実施場所名称);
-        model.set所属機関(所属機関);
-        model.set記入者(記入者);
-        model.set調査区分(調査区分);
-        model.set申請書管理番号(申請書管理番号.getColumnValue());
+    public GaikyoTokki initialize(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号, ChosaJisshishaJohoModel model) {
 
         div.getChosaTaisho().getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
-        div.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon().initialize(申請書管理番号);
-        div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
-        div.getCcdChosaJisshishaJoho().intialize(model);
+        div.getRenrakusakiKihon().getCcdNinteiShinseiRenrakusakiKihon().initialize(申請書管理番号);
+        div.getChosaJisshisha().getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
+        div.getChosaJisshisha().getCcdChosaJisshishaJoho().intialize(model);
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
         RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);

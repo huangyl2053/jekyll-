@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiChosaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,10 +32,10 @@ public class NinteiChosaNyuryokuDiv extends Panel {
      */
     @JsonProperty("ChosaTaisho")
     private ChosaTaishoDiv ChosaTaisho;
+    @JsonProperty("ChosaJisshisha")
+    private ChosaJisshishaDiv ChosaJisshisha;
     @JsonProperty("tabChosaShurui")
     private tabChosaShuruiDiv tabChosaShurui;
-    @JsonProperty("ccdChosaJisshishaJoho")
-    private ChosaJisshishaJohoDiv ccdChosaJisshishaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,6 +62,24 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     /*
+     * getChosaJisshisha
+     * @return ChosaJisshisha
+     */
+    @JsonProperty("ChosaJisshisha")
+    public ChosaJisshishaDiv getChosaJisshisha() {
+        return ChosaJisshisha;
+    }
+
+    /*
+     * setChosaJisshisha
+     * @param ChosaJisshisha ChosaJisshisha
+     */
+    @JsonProperty("ChosaJisshisha")
+    public void setChosaJisshisha(ChosaJisshishaDiv ChosaJisshisha) {
+        this.ChosaJisshisha = ChosaJisshisha;
+    }
+
+    /*
      * gettabChosaShurui
      * @return tabChosaShurui
      */
@@ -80,15 +98,6 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     /*
-     * getccdChosaJisshishaJoho
-     * @return ccdChosaJisshishaJoho
-     */
-    @JsonProperty("ccdChosaJisshishaJoho")
-    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
-        return ccdChosaJisshishaJoho;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -99,6 +108,11 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     @JsonIgnore
     public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
         return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    }
+
+    @JsonIgnore
+    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
+        return this.getChosaJisshisha().getCcdChosaJisshishaJoho();
     }
 
     @JsonIgnore
@@ -171,25 +185,25 @@ public class NinteiChosaNyuryokuDiv extends Panel {
         this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setDgRiyoServiceJyokyo(dgRiyoServiceJyokyo);
     }
 
-    @JsonIgnore
-    public TextBox getTxtShichosonTokubetsuKyufu() {
-        return this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().getTxtShichosonTokubetsuKyufu();
-    }
-
-    @JsonIgnore
-    public void  setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuIgaiJutakuService() {
-        return this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().getTxtKyufuIgaiJutakuService();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
-        this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
-    }
+//    @JsonIgnore
+//    public TextBox getTxtShichosonTokubetsuKyufu() {
+//        return this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().getTxtShichosonTokubetsuKyufu();
+//    }
+//
+//    @JsonIgnore
+//    public void  setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
+//        this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
+//    }
+//
+//    @JsonIgnore
+//    public TextBox getTxtKyufuIgaiJutakuService() {
+//        return this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().getTxtKyufuIgaiJutakuService();
+//    }
+//
+//    @JsonIgnore
+//    public void  setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
+//        this.getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
+//    }
 
     @JsonIgnore
     public tplShisetsuDiv getTplShisetsu() {

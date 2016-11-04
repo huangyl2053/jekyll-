@@ -15,7 +15,7 @@
                 "DbT2003Kibetsu".*,
                 "UrT0705ChoteiKyotsu".*,
                 "DbT1001HihokenshaDaicho".*,
-                CASE WHEN "COUNT1" . "COUNT_1" IS NULL THEN 0 ELSE "COUNT2" . "COUNT_2" END,
+                CASE WHEN "COUNT1" . "COUNT_1" IS NULL THEN 0 ELSE "COUNT1" . "COUNT_1" END,
                 CASE WHEN "COUNT2" . "COUNT_2" IS NULL THEN 0 ELSE "COUNT2" . "COUNT_2" END,
                 "TotalShunyu"."urT0700ShunoKanri_shunoId" AS "totalShunyu_urT0700ShunoKanri_shunoId",
                 "TotalShunyu"."urT0700ShunoKanri_shikibetsuCode" AS "totalShunyu_urT0700ShunoKanri_shikibetsuCode"
@@ -27,6 +27,7 @@
             AND "DbV2002Fuka"."dbT2002Fuka_choteiNendo" <![CDATA[<=]]> #{終了調定年度}
             AND #{開始賦課年度} <![CDATA[<=]]> "DbV2002Fuka"."dbT2002Fuka_fukaNendo"
             AND "DbV2002Fuka"."dbT2002Fuka_fukaNendo" <![CDATA[<=]]> #{終了賦課年度}
+            AND SUBSTRING("DbV2002Fuka"."dbT2002Fuka_choteiNichiji",1,6) <![CDATA[<=]]> #{調定基準年月}
             AND "DbV2002Fuka"."dbT2002Fuka_choteiNendo" = "TotalShunyu"."urT0700ShunoKanri_choteiNendo"
             AND "DbV2002Fuka"."dbT2002Fuka_fukaNendo" = "TotalShunyu"."urT0700ShunoKanri_kazeiNendo"
             AND (CAST("DbV2002Fuka" . "dbT2002Fuka_tsuchishoNo" AS numeric)) = "TotalShunyu" . "urT0700ShunoKanri_tsuchishoNo"
@@ -50,6 +51,12 @@
             (<include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.relate.funokesson.IFunoKessonMapper.selectAllFunoKesson" />) AS "FunoKessonAll"
             ON
             "TotalShunyu"."urT0700ShunoKanri_shunoId" = "FunoKessonAll"."urT0700ShunoKanri_shunoId"
+            <if test="科目コードリスト != null and !科目コードリスト.isEmpty()">
+                AND "FunoKessonAll"."urT0700ShunoKanri_kamokuCode" IN
+                <foreach item="科目コード_ロープ"  collection="科目コードリスト" open="(" separator="," close=")">
+                    #{科目コード_ロープ}
+                </foreach>
+            </if>
             LEFT OUTER JOIN
             (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.noDeleted_DbT1001HihokenshaDaicho" />) AS "DbT1001HihokenshaDaicho"
             ON "DbT1001HihokenshaDaicho"."dbT1001HihokenshaDaicho_hihokenshaNo" = "DbV2002Fuka"."dbT2002Fuka_hihokenshaNo"
@@ -94,7 +101,7 @@
             <if test="is未納分出力区分"> 
                 AND "TotalShunyu"."caT0701Shunyu_kaikeiNendo" = #{会計年度}
             </if>
-            <if test="科目コードリスト != null">
+            <if test="科目コードリスト != null and !科目コードリスト.isEmpty()">
                 AND "TotalShunyu"."urT0700ShunoKanri_kamokuCode" IN
                 <foreach item="科目コード_ロープ"  collection="科目コードリスト" open="(" separator="," close=")">
                     #{科目コード_ロープ}
@@ -121,35 +128,35 @@
         <if test="終了生年月日 != null">
             AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{終了生年月日}
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '町域' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '町域' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."choikiCode" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '行政区' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '行政区' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."gyoseikuCode" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '地区コード1' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分  == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区1' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode1" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '地区コード2' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区2' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode2" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
                 #{選択対象リスト}
             </foreach>
         </if>
-        <if test="広域判定区分.toString() == '120' and 選択対象区分.toString() == '地区コード3' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
+        <if test="広域判定区分 == 120 and 選択対象区分!=null and 選択対象区分.toString() == '地区3' and 選択対象リスト != null and !選択対象リスト.isEmpty()"> 
             AND "ShikibetsuTaisho"."chikuCode3" IN
             <foreach item="選択対象リスト" index="index" collection="選択対象リスト"
                      open="(" separator="," close=")">
@@ -173,17 +180,17 @@
         "TEMP".*
         FROM "DankaibetsuShunoritsuTemp" AS "TEMP"
         WHERE 1 = 1
-        <if test="広域判定区分.toString() == '111' and 市町村情報.toString() != '000000'"> 
+        <if test="広域判定区分 == 111 and 市町村情報 != 000000"> 
             AND "TEMP"."lasdecCode" = #{市町村情報}
             AND "TEMP"."lasdecCode" = "TEMP"."fukaLasdecCode"
         </if>
-        <if test="抽出条件.toString() == '2'">
+        <if test="抽出条件 == 2">
             AND "TEMP"."taishouKubun" = '認定者'
         </if>
-        <if test="抽出条件.toString() == '4'"> 
+        <if test="抽出条件 == 4"> 
             AND "TEMP"."taishouKubun" <![CDATA[<>]]> '認定者'
         </if>
-        <if test="抽出条件.toString() == '3'"> 
+        <if test="抽出条件 == 3"> 
             AND "TEMP"."taishouKubun" = '受給者'
         </if>
         ORDER BY
