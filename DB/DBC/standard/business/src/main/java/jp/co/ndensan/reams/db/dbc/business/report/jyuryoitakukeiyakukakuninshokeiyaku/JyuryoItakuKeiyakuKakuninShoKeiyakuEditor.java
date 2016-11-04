@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 /**
  * 帳票設計_DBCMN31003_介護保険受領委任契約承認（不承認）確認書（事業者用）Editor
  *
- * @reamsid_L DBC-2130-020 liuxiaoyu
+ * @reamsid_L DBC-2130-060 liuxiaoyu
  */
 public class JyuryoItakuKeiyakuKakuninShoKeiyakuEditor
         implements IJyuryoItakuKeiyakuKakuninShoKeiyakuEditor {
