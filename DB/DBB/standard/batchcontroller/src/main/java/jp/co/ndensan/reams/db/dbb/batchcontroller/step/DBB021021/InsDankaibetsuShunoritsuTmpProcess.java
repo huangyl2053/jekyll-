@@ -52,6 +52,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
     private static final RString 市町村分 = new RString("000000");
     private static final RString ONE = new RString("1");
     private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
 
     private ShunoKamokuFinder shunoKamokuManager;
     private boolean is未納分出力区分;
@@ -62,7 +63,8 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
     @Override
     protected void initialize() {
         shunoKamokuManager = ShunoKamokuFinder.createInstance();
-        is未納分出力区分 = parameter.get出力区分().contains(完納出力区分_出力しない);
+        is未納分出力区分 = parameter.get出力区分().size() == INT_1
+                && parameter.get出力区分().contains(完納出力区分_出力しない);
     }
 
     @Override
@@ -87,7 +89,9 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
                 == 収納データ.get収入().getKaikeiNendo().getYearValue()
                 && parameter.get出力区分().contains(完納出力区分_出力しない)) {
             完納区分 = 未納分;
-        } else if (parameter.get出力区分().contains(完納出力区分_出力する)) {
+        } else if (parameter.get会計年度().getYearValue()
+                != 収納データ.get収入().getKaikeiNendo().getYearValue()
+                && parameter.get出力区分().contains(完納出力区分_出力する)) {
             完納区分 = 完納分;
         } else {
             return;
