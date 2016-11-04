@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  */
 public class HihokenshaKensakuJokenDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,7 +29,7 @@ public class HihokenshaKensakuJokenDiv extends Panel {
     @JsonProperty("txtHihoNo")
     private TextBoxCode txtHihoNo;
     @JsonProperty("btnSearchHihokensha")
-    private ButtonDialog btnSearchHihokensha;
+    private Button btnSearchHihokensha;
     @JsonProperty("txtHihoName")
     private TextBox txtHihoName;
     @JsonProperty("txtTeikyoYMRange")
@@ -68,7 +68,7 @@ public class HihokenshaKensakuJokenDiv extends Panel {
      * @return btnSearchHihokensha
      */
     @JsonProperty("btnSearchHihokensha")
-    public ButtonDialog getBtnSearchHihokensha() {
+    public Button getBtnSearchHihokensha() {
         return btnSearchHihokensha;
     }
 
@@ -77,7 +77,7 @@ public class HihokenshaKensakuJokenDiv extends Panel {
      * @param btnSearchHihokensha btnSearchHihokensha
      */
     @JsonProperty("btnSearchHihokensha")
-    public void setBtnSearchHihokensha(ButtonDialog btnSearchHihokensha) {
+    public void setBtnSearchHihokensha(Button btnSearchHihokensha) {
         this.btnSearchHihokensha = btnSearchHihokensha;
     }
 
