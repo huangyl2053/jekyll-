@@ -129,7 +129,7 @@ public class FuchoKariSanteiFukaBatch {
             }
         }
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
-        Kitsuki 期月 = koseiTsukiHantei.find更正月(RDate.getNowDate());
+        Kitsuki 期月 = koseiTsukiHantei.find更正月(調定日時.getDate());
         賦課情報.setKoseiM(期月.get月().getコード());
         FukaKeisan 賦課の計算 = FukaKeisan.createInstance();
         賦課情報.setFukaYMD(賦課の計算.findOut賦課基準日(調定年度, 資格情報));

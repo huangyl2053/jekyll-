@@ -93,7 +93,7 @@
         AND "DbT3068KogakuGassanShinseisho"."hokenshaNo" = "DbT3069KogakuGassanShinseishoKanyureki"."hokenshaNo"
         AND "DbT3068KogakuGassanShinseisho"."seiriNo" = "DbT3069KogakuGassanShinseishoKanyureki"."seiriNo"
         AND "DbT3068KogakuGassanShinseisho"."rirekiNo" = "DbT3069KogakuGassanShinseishoKanyureki"."rirekiNo"
-        AND "DbT3068KogakuGassanShinseisho"."isDeleted" = FALSE
+        AND "DbT3069KogakuGassanShinseishoKanyureki"."isDeleted" = FALSE
         WHERE "DbT3068KogakuGassanShinseisho"."taishoNendo" = #{対象年度}
         AND "DbT3068KogakuGassanShinseisho"."hokenshaNo" = #{保険者番号}
         AND "DbT3068KogakuGassanShinseisho"."seiriNo" = #{整理番号}

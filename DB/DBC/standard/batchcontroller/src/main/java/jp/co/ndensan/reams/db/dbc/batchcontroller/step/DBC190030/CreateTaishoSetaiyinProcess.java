@@ -170,6 +170,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private List<CreateTaishoSetaiyinEntity> createTaishoSetaiyinList;
     private boolean 文字切れflag = false;
     private boolean flag = false;
+    private boolean countFlag = false;
 
     private IBatchReportWriterWithCheckList<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063ReportWriter1;
     private ReportSourceWriter<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063SourceWriter1;
@@ -298,6 +299,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         }
 
         flag = true;
+        countFlag = true;
         this.createTaishoSetaiyinList.add(entity);
         this.exEntity = entity;
         改頁通番++;
@@ -308,7 +310,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     protected void afterExecute() {
 
         if (!ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())
-                && (null == dBC100063SourceWriter1 && null == dBC100064SourceWriter1)) {
+                && (null == dBC100063SourceWriter1 && null == dBC100064SourceWriter1)
+                && countFlag) {
             if (文字切れflag) {
                 ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBC介護給付,
                         parameter.get市町村コード(), parameter.get市町村名());
@@ -678,33 +681,33 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     }
 
     private boolean is改頁(CreateTaishoSetaiyinEntity exEntity, CreateTaishoSetaiyinEntity entity) {
-        boolean flag = false;
+        boolean 改頁flag = false;
         IShikibetsuTaisho ex宛名 = ShikibetsuTaishoFactory.createKojin(exEntity.get宛名());
         IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.郵便番号.get項目ID())
                 && !ex宛名.get住所().get郵便番号().getColumnValue().equals(宛名.get住所().get郵便番号().getColumnValue())) {
-            flag = true;
+            改頁flag = true;
         } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.町域コード.get項目ID())
                 && !ex宛名.get住所().get町域コード().getColumnValue().equals(宛名.get住所().get町域コード().getColumnValue())) {
-            flag = true;
+            改頁flag = true;
         } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.行政区コード.get項目ID())
                 && !ex宛名.get行政区画().getGyoseiku().getコード().getColumnValue().equals(宛名.get行政区画().getGyoseiku().getコード().getColumnValue())) {
-            flag = true;
+            改頁flag = true;
         } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.世帯コード.get項目ID())
                 && !exEntity.get対象世帯員().getShotaiCode().equals(entity.get対象世帯員().getShotaiCode())) {
-            flag = true;
+            改頁flag = true;
         } else if (this.改頁項目リスト.contains(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.市町村コード.get項目ID())
                 && !doRString編集(exEntity.get対象世帯員().getShichosonCode()).equals(doRString編集(entity.get対象世帯員().getShichosonCode()))) {
-            flag = true;
+            改頁flag = true;
         }
 
         if (INT_1 != 改頁通番 && 改頁通番 % INT_30 == INT_1) {
-            flag = true;
+            改頁flag = true;
         }
-        if (flag) {
+        if (改頁flag) {
             改頁通番 = INT_1;
         }
-        return flag;
+        return 改頁flag;
 
     }
 

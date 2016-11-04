@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.honsantei;
+package jp.co.ndensan.reams.db.dbb.business.report.karisantei;
 
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険料納入通知書（本算定）発行一覧表の出力順クラスです。
+ * 特別徴収開始通知書（仮算定）発行一覧表の出力順クラスです。
  *
- * @reamsid_L DBB-0880-030 xicongwang
+ * @reamsid_L DBB-0880-040 xicongwang
  */
-public enum IdoNonyuTsuchishoOutPutOrder implements IReportItems {
+public enum IdoKarisanteigakuTsuchishoOutPutOrder implements IReportItems {
 
     /**
      * 郵便番号
@@ -84,6 +84,10 @@ public enum IdoNonyuTsuchishoOutPutOrder implements IReportItems {
      */
     被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"dbT2015KeisangoJoho_hihokenshaNo\"")),
     /**
+     * 年金コード
+     */
+    年金コード(new RString("0206"), new RString("年金コード"), new RString("\"UeT0511after_nenkinCode\"")),
+    /**
      * 納組コード
      */
     納組コード(new RString("0208"), new RString("納組コード"), new RString("\"CaT0714nokumiCode\"")),
@@ -92,25 +96,27 @@ public enum IdoNonyuTsuchishoOutPutOrder implements IReportItems {
      */
     生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"生活保護区分\"")),
     /**
-     * 現金口座区分
+     * 調定事由1
      */
-    現金口座区分(new RString("0210"), new RString("現金口座区分"), new RString("\"dbT2015KeisangoJoho_kozaKubun\"")),
+    調定事由1(new RString("0212"), new RString("調定事由1"), new RString("\"dbT2015KeisangoJoho_choteiJiyu1\"")),
     /**
-     * 8月特徴開始者
+     * 調定事由2
      */
-    //QA1854 確認中
-    八月特徴開始者(new RString("0220"), new RString("八月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\"")),
+    調定事由2(new RString("0212"), new RString("調定事由2"), new RString("\"dbT2015KeisangoJoho_choteiJiyu2\"")),
     /**
-     * 10月特徴開始者
+     * 調定事由3
      */
-    //QA1854 確認中
-    十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\""));
+    調定事由3(new RString("0212"), new RString("調定事由3"), new RString("\"dbT2015KeisangoJoho_choteiJiyu3\"")),
+    /**
+     * 調定事由4
+     */
+    調定事由4(new RString("0212"), new RString("調定事由4"), new RString("\"dbT2015KeisangoJoho_choteiJiyu4\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
     private final RString myBatis項目名;
 
-    private IdoNonyuTsuchishoOutPutOrder(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+    private IdoKarisanteigakuTsuchishoOutPutOrder(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
         this.項目ID = 項目ID;
         this.フォームフィールド名 = フォームフィールド名;
         this.myBatis項目名 = myBatis項目名;
