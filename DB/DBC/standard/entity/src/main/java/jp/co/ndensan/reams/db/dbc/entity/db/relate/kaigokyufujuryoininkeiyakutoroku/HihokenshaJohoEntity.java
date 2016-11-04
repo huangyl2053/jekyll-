@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保険者情報Entityクラスです。
  *
- * @reamsid_L DBC-2130-020 cuilin
+ * @reamsid_L DBC-2130-050 cuilin
  */
 @lombok.Getter
 @lombok.Setter

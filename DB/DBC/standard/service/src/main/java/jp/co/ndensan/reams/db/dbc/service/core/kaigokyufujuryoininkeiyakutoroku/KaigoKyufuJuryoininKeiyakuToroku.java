@@ -59,7 +59,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 介護保険受領委任契約承認（不承認）確認書のビジネスクラスです。
  *
- * @reamsid_L DBC-2130-020 cuilin
+ * @reamsid_L DBC-2130-050 cuilin
  */
 public class KaigoKyufuJuryoininKeiyakuToroku {
 
