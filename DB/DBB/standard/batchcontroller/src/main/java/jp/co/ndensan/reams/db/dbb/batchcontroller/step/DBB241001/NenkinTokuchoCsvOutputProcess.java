@@ -349,7 +349,8 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         if (ueT0511Entity == null) {
             ueT0511Writer.insert(insertEditor.get対象者or追加候補者情報CsvEntity(entity.getデータレコードEntity(), param,
                     parameter.getShoriYMDHM(), parameter.getFileName().substring(INT_0, INT_3),
-                    get処理対象年月(entity.getデータレコードEntity().getSakuseiYMD())));
+                    get処理対象年月(entity.getデータレコードEntity().getTsuchiNaiyoCode(),
+                            entity.getデータレコードEntity().getSakuseiYMD())));
         }
     }
 
@@ -357,7 +358,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     protected void afterExecute() {
         if (tmpEntity != null) {
             editOutPutKennSuuCsv();
-            shoriTaishoYM.setValue(get処理対象年月(tmpEntity.getSakuseiYMD()));
+            shoriTaishoYM.setValue(get処理対象年月(tmpEntity.getTsuchiNaiyoCode(), tmpEntity.getSakuseiYMD()));
         }
         if (!異動処理結果情報件数表List.isEmpty()) {
             int 資格喪失件数 = INT_0;
@@ -406,7 +407,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
 
     private void editOutPutIchiranCsv(TorikomiFileKaifuJohoTempEntity entity) {
         boolean is出力 = is出力(entity.getTsuchiNaiyoCode(),
-                get処理対象年月(entity.getSakuseiYMD()));
+                get処理対象年月(entity.getTsuchiNaiyoCode(), entity.getSakuseiYMD()));
         if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(entity.getTsuchiNaiyoCode()) && is出力) {
             対象者情報一覧CsvWriter.writeLine(ichiranCsvEditor.getCsvEntity(entity));
         } else if (TsuchiNaiyoCodeType.特別徴収依頼処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode()) && is出力) {
@@ -427,7 +428,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
 
     private void editOutPutKennSuuCsv() {
         boolean is出力 = is出力(tmpEntity.getTsuchiNaiyoCode(),
-                get処理対象年月(tmpEntity.getSakuseiYMD()));
+                get処理対象年月(tmpEntity.getTsuchiNaiyoCode(), tmpEntity.getSakuseiYMD()));
         RString 市町村名 = get市町村名(tmpEntity.getShichosoCode());
         if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode()) && is出力) {
             対象者情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get対象者or追加候補者情報CsvEntity(tmpEntity, entityList, 市町村名));
@@ -447,14 +448,39 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
 
     }
 
-    private FlexibleYearMonth get処理対象年月(FlexibleDate 作成年月日) {
-        if (作成年月日.getMonthValue() == INT_11 || 作成年月日.getMonthValue() == INT_12) {
-            return new FlexibleDate(作成年月日.plusYear(INT_1).getYearValue(), INT_1, 作成年月日.getDayValue()).getYearMonth();
-        } else if (作成年月日.getMonthValue() % INT_2 == INT_0) {
+    private FlexibleYearMonth get処理対象年月(RString 通知内容コード, FlexibleDate 作成年月日) {
+        if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(通知内容コード)) {
+            return new FlexibleDate(作成年月日.getYearValue(), INT_5, 作成年月日.getDayValue()).getYearMonth();
+        } else if (TsuchiNaiyoCodeType.特別徴収依頼処理結果通知.get通知内容コード().equals(通知内容コード)) {
+            return new FlexibleDate(作成年月日.getYearValue(), INT_9, 作成年月日.getDayValue()).getYearMonth();
+        } else if (TsuchiNaiyoCodeType.特別徴収結果通知.get通知内容コード().equals(通知内容コード)) {
+            if (作成年月日.getMonthValue() == INT_11 || 作成年月日.getMonthValue() == INT_12) {
+                return new FlexibleDate(作成年月日.plusYear(INT_1).getYearValue(), INT_1, 作成年月日.getDayValue()).getYearMonth();
+            } else if (作成年月日.getMonthValue() % INT_2 == INT_0) {
+                return 作成年月日.plusMonth(INT_1).getYearMonth();
+            } else {
+                return 作成年月日.plusMonth(INT_2).getYearMonth();
+            }
+        } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(通知内容コード)) {
+            if (作成年月日.getMonthValue() == INT_12) {
+                return new FlexibleDate(作成年月日.plusYear(INT_1).getYearValue(), INT_2, 作成年月日.getDayValue()).getYearMonth();
+            } else if (作成年月日.getMonthValue() % INT_2 == INT_0) {
+                return 作成年月日.plusMonth(INT_2).getYearMonth();
+            } else {
+                return 作成年月日.plusMonth(INT_1).getYearMonth();
+            }
+        } else if (TsuchiNaiyoCodeType.特別徴収追加依頼処理結果通知.get通知内容コード().equals(通知内容コード)) {
+            if (作成年月日.getMonthValue() % INT_2 == INT_0) {
+                return 作成年月日.plusMonth(INT_6).getYearMonth();
+            } else {
+                return 作成年月日.plusMonth(INT_5).getYearMonth();
+            }
+        } else if (TsuchiNaiyoCodeType.資格喪失等処理結果通知.get通知内容コード().equals(通知内容コード)
+                || TsuchiNaiyoCodeType.仮徴収額変更処理結果通知.get通知内容コード().equals(通知内容コード)
+                || TsuchiNaiyoCodeType.住所地特例該当者処理結果通知.get通知内容コード().equals(通知内容コード)) {
             return 作成年月日.plusMonth(INT_1).getYearMonth();
-        } else {
-            return 作成年月日.plusMonth(INT_2).getYearMonth();
         }
+        return FlexibleYearMonth.EMPTY;
     }
 
     private FlexibleYear get処理年度(FlexibleDate 作成年月日) {
@@ -510,7 +536,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         param.setGyomuCode(GyomuCode.DB介護保険);
         param.setShoriNendo(get処理年度(entity.getSakuseiYMD()));
         param.setTsuchiNaiyoCode(entity.getTsuchiNaiyoCode());
-        param.setShoriTaishoYM(get処理対象年月(entity.getSakuseiYMD()));
+        param.setShoriTaishoYM(get処理対象年月(entity.getTsuchiNaiyoCode(), entity.getSakuseiYMD()));
         param.setKisoNenkinNo(entity.getKisoNenkinNo());
         param.setNenkinCode(entity.getNenkinCode());
         param.setKoseiCityCode(entity.getShichosoCode());
