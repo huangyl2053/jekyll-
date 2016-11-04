@@ -363,7 +363,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
 
     @Override
     protected void initialize() {
-        連番 = Decimal.ZERO;
+        連番 = Decimal.ONE;
         スプール = new HashMap<>();
         reportWriter = new HashMap<>();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
