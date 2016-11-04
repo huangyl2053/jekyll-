@@ -112,8 +112,10 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
             } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {
+                判断();
                 headCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvHeadEntity.class, data);
             } else if (帳票レコード種別_D1.equals(data.get(INDEX_3))) {
+                判断();
                 meisaiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity.class, data);
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
                 gokeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvGokeiEntity.class, data);
