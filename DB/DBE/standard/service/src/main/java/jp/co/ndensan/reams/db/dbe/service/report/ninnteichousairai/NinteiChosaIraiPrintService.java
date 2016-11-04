@@ -227,7 +227,7 @@ public class NinteiChosaIraiPrintService {
     public void print認定調査票_特記事項_デザイン用紙(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
         List<ChosahyoTokkijikoReport> list = new ArrayList<>();
         if (!認定調査票_特記事項List.isEmpty()) {
-            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
+            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List, ReportIdDBZ.DBE221003.getReportId()));
         }
         ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
         try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
@@ -237,6 +237,7 @@ public class NinteiChosaIraiPrintService {
             }
         }
     }
+
     public void print認定調査票_特記事項(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
 //        List<ChosahyoTokkijikoReport> list = new ArrayList<>();
 //        if (!認定調査票_特記事項List.isEmpty()) {
@@ -259,7 +260,7 @@ public class NinteiChosaIraiPrintService {
     public void print認定調査票_特記事項_OCR両面(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
         List<ChosahyoTokkijikoReport> list = new ArrayList<>();
         if (!認定調査票_特記事項List.isEmpty()) {
-            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
+            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List, ReportIdDBZ.DBE221031.getReportId()));
         }
         ChosahyoTokkijikoOcrRyomenProperty property = new ChosahyoTokkijikoOcrRyomenProperty();
         try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
@@ -278,7 +279,7 @@ public class NinteiChosaIraiPrintService {
     public void print認定調査票_特記事項_OCR片面(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
         List<ChosahyoTokkijikoReport> list = new ArrayList<>();
         if (!認定調査票_特記事項List.isEmpty()) {
-            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
+            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List, ReportIdDBZ.DBE221032.getReportId()));
         }
         ChosahyoTokkijikoOcrKatamenProperty property = new ChosahyoTokkijikoOcrKatamenProperty();
         try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {

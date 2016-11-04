@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.Breakers;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
@@ -21,5 +24,11 @@ public class ChosahyoTokkijikoOcrRyomenProperty extends ReportPropertyBase<Chosa
      */
     public ChosahyoTokkijikoOcrRyomenProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221031.getReportId());
+    }
+
+    @Override
+    protected Breakers<ChosahyoTokkijikoReportSource> defineBreakers(Breakers<ChosahyoTokkijikoReportSource> breakers,
+            BreakerCatalog<ChosahyoTokkijikoReportSource> catalog) {
+        return breakers.add(catalog.simpleLayoutBreaker(new RString("hihokenshaNo1"), new RString("hishokenshaNo1"))).fixed();
     }
 }

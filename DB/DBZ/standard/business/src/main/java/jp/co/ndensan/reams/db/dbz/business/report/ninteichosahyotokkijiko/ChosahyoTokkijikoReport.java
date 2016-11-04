@@ -22,16 +22,7 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
 
     private List<ChosahyoTokkijikoBusiness> businessList;
     private ChosahyoTokkijikoBusiness business;
-    private ReportId id;
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param businessList 要介護認定調査票（特記事項）のbusinessList
-     */
-    public ChosahyoTokkijikoReport(List<ChosahyoTokkijikoBusiness> businessList) {
-        this.businessList = businessList;
-    }
+    private final ReportId id;
 
     /**
      * インスタンスを生成します。
@@ -138,6 +129,19 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
             } else {
                 IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoKatamenEditorImpl(business);
                 IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoKatamenBuilderImpl(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else if (ReportIdDBZ.DBE221003.getReportId().equals(id) || ReportIdDBZ.DBE221031.getReportId().equals(id)
+                || ReportIdDBZ.DBE221032.getReportId().equals(id)) {
+            if (business == null) {
+                for (ChosahyoTokkijikoBusiness chosahyoTokkijikoBusiness : businessList) {
+                    IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(chosahyoTokkijikoBusiness);
+                    IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoBuilderImpl(editor);
+                    reportSourceWriter.writeLine(builder);
+                }
+            } else {
+                IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(business);
+                IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoBuilderImpl(editor);
                 reportSourceWriter.writeLine(builder);
             }
         }
