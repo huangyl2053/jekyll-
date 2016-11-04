@@ -18,6 +18,14 @@ public enum ReportIdDBE {
     /**
      * 委員用審査会資料組み合わせ一覧A4版の帳票ID。
      */
+    DBE517915(new ReportId("DBE517915_ShinsakaishiryoA3_iin_text"), new RString("委員用審査会資料組み合わせ一覧A3版")),
+    /**
+     * 委員用審査会資料組み合わせ一覧A4版の帳票ID。
+     */
+    DBE517916(new ReportId("DBE517916_ShinsakaishiryoA3_iin_text"), new RString("委員用審査会資料組み合わせ一覧A3版")),
+    /**
+     * 委員用審査会資料組み合わせ一覧A4版の帳票ID。
+     */
     DBE517906(new ReportId("DBE517906_ShinsakaishiryoA4_iin_text"), new RString("委員用審査会資料組み合わせ一覧A4版")),
     /**
      * 委員用審査会資料組み合わせ一覧A4版の帳票ID。
