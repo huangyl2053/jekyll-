@@ -108,7 +108,6 @@ public class TokubetsuChoshuIraiJohoIchiranBodyEditor implements ITokubetsuChosh
         if (!RString.isNullOrEmpty(帳票出力対象データ.get住所())) {
             source.listLower_6 = 帳票出力対象データ.get住所();
         }
-        source.shichosonCode = RString.EMPTY;
         return source;
     }
 

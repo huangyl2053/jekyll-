@@ -381,7 +381,6 @@
         AND substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
         AND T2."tekiyoShuryoYMD" IS NULL 
         OR T2."tekiyoShuryoYMD" = '')
-        )
     </update>
 
     <update id="世帯員把握入力一時の更新1">
@@ -2571,7 +2570,40 @@
         SELECT   <include refid="allColumns_TmpSetaiShotoku"/>
         FROM "TmpSetaiShotoku" AS "TmpSetaiShotoku"
     </select>
-
+    
+     <insert id="insert世帯員所得判定明細一時" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity">
+        INSERT INTO "TempSetaiinShotokuHanteiMeisai"
+        VALUES 
+        (
+        #{hihokenshaNo},
+        #{shikibetsuCode},
+        #{kijunYMD},
+        #{shotokuNendo},
+        #{jushochiTokureiFlag},
+        #{setaiCode},
+        #{honninKubun},
+        #{kazeiKubun},
+        #{kazeiKubunGemmenGo},
+        #{gekihenKanwaKubun},
+        #{gokeiShotokuGaku},
+        #{nenkiniShunyuGaku},
+        #{nenkiniShotokuGaku},
+        #{kazeiShotokuGaku},
+        #{torokuGyomu},
+        #{shichosonCode},
+        #{shoboKubun},
+        #{roreiFukushi},
+        #{setaiinHihokenshaNo},
+        #{setaiinHihokenshakubun},
+        #{honninKazeiKubun},
+        #{setaiKazeiKubun},
+        #{tsuzukigaraCodeNen},
+        #{atena_tsuzukigaraCode},
+        #{atena_juminShubetsuCode},
+        #{atena_seinengappiYMD}
+         )
+    </insert>
+    
     <resultMap id="ResultMap_被保生保老齢情報" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.HihokenSeikatsuRoreiRelateEntity" autoMapping="true">
         <id  column="tmpSetaiinShotokuHanteiMeisai_hihokenshaNo"/>
         <id  column="tmpSetaiinShotokuHanteiMeisai_kijunYMD"/>
@@ -2580,7 +2612,7 @@
         <association property="判定明細Entity" resultMap="ResultMap_SetaiinShotokuHanteiMeisai"/>
         <association property="被保険者情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="老齢情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"/>
-        <collection property="生保情報List" resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity"/>
+        <association property="生保情報Entity" resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity"/>
     </resultMap>
 
     <select resultOrdered="true" id="select被保生保老齢情報"

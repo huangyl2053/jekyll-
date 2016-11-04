@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaKozaKouseizengoEntity;
+import jp.co.ndensan.reams.db.dbb.business.report.karisanteiidokekkaichiran.KarisanteiIdoKekkaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
@@ -98,6 +99,7 @@ import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamoku
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -1073,9 +1075,17 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         IKozaSearchKey kozaSearchKey = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+        RString 出力順 = RString.EMPTY;
+        if (outputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.class,
+                    outputOrder);
+        }
         KariSanteiIdoFukaMybatisParameter parameter = new KariSanteiIdoFukaMybatisParameter(
                 賦課年度, 調定年度, null, null,
                 kozaSearchKey, list, 調定日時);
+        parameter.set出力順(出力順);
         List<KarisanteiIdoKekkaEntity> entityList = kekkaMapper.select仮算定異動賦課(parameter);
         List<KeisanjohoAtenaKozaEntity> 更正前EntityList = new ArrayList<>();
         List<KeisanjohoAtenaKozaEntity> 更正後EntityList = new ArrayList<>();
@@ -1139,8 +1149,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         出力条件リスト.add(rstbuilder.toRString());
         rstbuilder = new RStringBuilder();
         rstbuilder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
-        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {

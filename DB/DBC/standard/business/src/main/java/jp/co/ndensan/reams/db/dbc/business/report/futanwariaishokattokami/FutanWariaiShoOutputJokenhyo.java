@@ -21,8 +21,8 @@ public class FutanWariaiShoOutputJokenhyo {
 
     private static final RString 年度 = new RString("【年度】　");
     private static final RString 発行区分 = new RString("【発行区分】　");
-    private static final RString 出力対象 = new RString("【出力対象】  ");
-    private static final RString 交付年月日 = new RString("【交付年月日】  ");
+    private static final RString 出力対象 = new RString("【出力対象】");
+    private static final RString 交付年月日 = new RString("【交付年月日】");
     private static final RString 定数_ZERO = new RString("0");
     private static final RString 定数_ONE = new RString("1");
     private static final RString 定数_TWO = new RString("2");
@@ -77,10 +77,10 @@ public class FutanWariaiShoOutputJokenhyo {
         } else if (定数_TWO.equals(parameter.get出力対象())) {
             temp = 定数_新規認定分;
         }
-        builder.append(出力対象.concat(temp));
+        builder.append(出力対象.concat(RString.EMPTY).concat(temp));
         outputJokenhyo.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(交付年月日.concat(parameter.get交付年月日().wareki().toDateString()));
+        builder.append(交付年月日.concat(RString.EMPTY).concat(parameter.get交付年月日().wareki().toDateString()));
         outputJokenhyo.add(builder.toRString());
         if (出力順 != null) {
             builder = new RStringBuilder();
@@ -120,7 +120,7 @@ public class FutanWariaiShoOutputJokenhyo {
         } else if (定数_TWO.equals(parameter.get出力対象())) {
             temp = 定数_新規認定分;
         }
-        builder.append(出力対象.concat(temp));
+        builder.append(出力対象.concat(RString.EMPTY).concat(temp));
         outputJokenhyo.add(builder.toRString());
         return outputJokenhyo;
     }

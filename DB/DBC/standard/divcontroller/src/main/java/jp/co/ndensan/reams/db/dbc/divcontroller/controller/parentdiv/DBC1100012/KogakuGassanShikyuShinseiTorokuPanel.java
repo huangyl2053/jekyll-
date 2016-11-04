@@ -336,7 +336,7 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
                 set申請状況(three);
                 break;
             case "DBCMN61008":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_訂正.get略称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_訂正.get名称();
                 set申請状況(three);
                 break;
             case "DBCMN61010":
@@ -350,7 +350,7 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
                 set申請状況(two);
                 break;
             case "DBCMN61012":
-                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書訂正.get略称();
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書訂正.get名称();
                 set申請状況(two);
                 break;
             default:

@@ -173,9 +173,9 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private RString 市町村名称 = RString.EMPTY;
     private RString 作成年月日 = RString.EMPTY;
     private FileSpoolManager spoolManager_DBC200074;
-    private CsvWriter csvWriter_DBC200074;
+    private CsvWriter<DataCompareShoriCsvEntity> csvWriter_DBC200074;
     private FileSpoolManager spoolManager_DBC200010;
-    private CsvWriter csvWriter_DBC200010;
+    private CsvWriter<JukyushaIdorenrakuhyoSofuCsvEntity> csvWriter_DBC200010;
     private List<JukyushaIdoRenrakuhyoCsvEntity> entityList;
     @BatchWriter
     BatchPermanentTableWriter<DbT3001JukyushaIdoRenrakuhyoEntity> dbT3001TableWriter;
@@ -221,7 +221,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true)
-                //                .setHeader(getHeaderList())
                 .build();
 
         spoolManager_DBC200010 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200010,
@@ -233,7 +232,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true)
-                //                .setHeader(getHeaderList())
                 .build();
         this.dbT3001TableWriter = new BatchPermanentTableWriter<>(DbT3001JukyushaIdoRenrakuhyoEntity.class);
     }

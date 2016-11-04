@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KyuhuzissekiJohoSakuseiYoResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KyuhuzissekiJohoSakuseiYoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -36,7 +37,6 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
     private KyuhuzissekiJohoSakuseiYoTempEntity tempTable;
     private List<KyuhuzissekiJohoSakuseiYoResultEntity> emptyResultList;
     private List<KyuhuzissekiJohoSakuseiYoResultEntity> bigestResultList;
-    private static final RString 給付実績情報作成区分_新規 = new RString("1");
     private boolean 開始Flag;
     private boolean emptyFlag;
     private FlexibleYearMonth 審査年月;
@@ -79,6 +79,7 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
                 && 入力識別番号.equals(entity.get入力識別番号())
                 && 事業所番号.equals(entity.get事業所番号())
                 && 通し番号.equals(entity.get通し番号()))) {
+            set判断引数の値(entity);
             getResultList(entity);
             開始Flag = false;
         } else {
@@ -103,10 +104,15 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
                 getTempTable(emptyResultEntity);
             }
         } else {
+            boolean has新規 = false;
             for (KyuhuzissekiJohoSakuseiYoResultEntity bigestResultEntity : bigestResultList) {
-                if (給付実績情報作成区分_新規.equals(bigestResultEntity.get給付実績情報作成区分コード())) {
+                if (KyufuSakuseiKubun.新規.getコード().equals(bigestResultEntity.get給付実績情報作成区分コード())) {
                     getTempTable(bigestResultEntity);
+                    has新規 = true;
                 }
+            }
+            if (!has新規) {
+                set削除対象データ();
             }
         }
     }
@@ -154,5 +160,13 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
         入力識別番号 = entity.get入力識別番号();
         事業所番号 = entity.get事業所番号();
         通し番号 = entity.get通し番号();
+    }
+
+    private void set削除対象データ() {
+        for (KyuhuzissekiJohoSakuseiYoResultEntity bigestResultEntity : bigestResultList) {
+            if (KyufuSakuseiKubun.削除.getコード().equals(bigestResultEntity.get給付実績情報作成区分コード())) {
+                getTempTable(bigestResultEntity);
+            }
+        }
     }
 }

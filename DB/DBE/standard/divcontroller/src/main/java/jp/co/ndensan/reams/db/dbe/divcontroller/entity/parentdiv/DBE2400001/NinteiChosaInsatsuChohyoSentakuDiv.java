@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaInsatsuChohyoSentakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,8 @@ public class NinteiChosaInsatsuChohyoSentakuDiv extends Panel {
     private CheckBoxList chkNinteiChosahyoSonota;
     @JsonProperty("Chkchosairaihakko")
     private CheckBoxList Chkchosairaihakko;
+    @JsonProperty("ChkchosairaiRireki")
+    private CheckBoxList ChkchosairaiRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -146,6 +148,24 @@ public class NinteiChosaInsatsuChohyoSentakuDiv extends Panel {
     @JsonProperty("Chkchosairaihakko")
     public void setChkchosairaihakko(CheckBoxList Chkchosairaihakko) {
         this.Chkchosairaihakko = Chkchosairaihakko;
+    }
+
+    /*
+     * getChkchosairaiRireki
+     * @return ChkchosairaiRireki
+     */
+    @JsonProperty("ChkchosairaiRireki")
+    public CheckBoxList getChkchosairaiRireki() {
+        return ChkchosairaiRireki;
+    }
+
+    /*
+     * setChkchosairaiRireki
+     * @param ChkchosairaiRireki ChkchosairaiRireki
+     */
+    @JsonProperty("ChkchosairaiRireki")
+    public void setChkchosairaiRireki(CheckBoxList ChkchosairaiRireki) {
+        this.ChkchosairaiRireki = ChkchosairaiRireki;
     }
 
     // </editor-fold>

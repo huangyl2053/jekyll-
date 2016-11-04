@@ -51,12 +51,9 @@
         LEFT OUTER JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
              ON koza."uaT0310Koza_shikibetsuCode" = master."shikibetsuCode"
-        ORDER BY 
-                master."choteiNendo",
-                master."fukaNendo",
-                master."tsuchishoNo",
-                master."koseiZengoKubun",
-                master."sakuseiShoriName"
+        <if test="出力順 !=null and !出力順.isEmpty()">
+            ${出力順}
+        </if>
     </select>
     
     <resultMap id="ResultMap_特別徴収依頼金額明細"  type="jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.FukaJohoPsmChoshuRelateEntity" autoMapping="true">

@@ -299,11 +299,11 @@ public class NofugakuIchiranShinkokuyoEditor implements
     private void get収入額以外分(NofugakuIchiranSource source, Decimal middle2, Decimal middle5, Decimal middle6) {
         if (納付額情報.get調定年度().compareTo(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)).minusYear(NUM_1)) == NUM_0) {
             if (納付額情報.get賦課年度().compareTo(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)).minusYear(NUM_1)) == NUM_0) {
-                source.list11_14 = doカンマ編集(middle2.divide(納付額情報.get特徴収入額06()), NUM_7);
+                source.list11_14 = doカンマ編集(doNullDecimal(middle2).divide(納付額情報.get特徴収入額06()), NUM_7);
             }
             if ((対象年 != null && 納付額情報.get賦課年度() != null)
                     && (!new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)).minusYear(NUM_1).isBefore(納付額情報.get賦課年度()))) {
-                source.list13_14 = doカンマ編集(middle5.add(doNullDecimal(納付額情報.get普徴収入額07()))
+                source.list13_14 = doカンマ編集(doNullDecimal(middle5).add(doNullDecimal(納付額情報.get普徴収入額07()))
                         .add(doNullDecimal(納付額情報.get普徴収入額08()))
                         .add(doNullDecimal(納付額情報.get普徴収入額09())), NUM_7);
             }

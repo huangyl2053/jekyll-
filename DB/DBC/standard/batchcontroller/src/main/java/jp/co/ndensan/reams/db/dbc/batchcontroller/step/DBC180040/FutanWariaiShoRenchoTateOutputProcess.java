@@ -133,7 +133,7 @@ public class FutanWariaiShoRenchoTateOutputProcess extends BatchProcessBase<Riyo
         FutanWariaiShoOutputJokenhyo output = new FutanWariaiShoOutputJokenhyo(parameter, 出力順);
         List<RString> outputJokenhyoList = output.getOutputJokenhyoParam();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                ReportIdDBC.DBC100066.getReportId().value(),
+                ReportIdDBC.DBC100066.getReportId().getColumnValue(),
                 導入団体クラス.getLasdecCode_().value(),
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),

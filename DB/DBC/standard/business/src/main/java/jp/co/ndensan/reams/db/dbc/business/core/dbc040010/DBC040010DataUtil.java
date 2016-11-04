@@ -979,6 +979,7 @@ public class DBC040010DataUtil {
         DbT3058KogakuShikyuShinsaKetteiEntity 支給審査決定Entity = entity.get支給審査決定Entity();
         DbT3055KogakuKyufuTaishoshaGokeiEntity 給付対象者合計Entity = entity.get給付対象者合計Entity();
         RString 審査支払区分コード = 支給判定結果Entity.getShinsaHohoKubun();
+        RString shikyuKubunCode = 支給審査決定Entity == null ? null : 支給審査決定Entity.getShikyuKubunCode();
         Decimal 高額支給額加算額 = Decimal.ZERO;
         boolean wKm_blnIchiranKBN1 = false;
         boolean wKm_blnIchiranKBN2 = false;
@@ -986,12 +987,11 @@ public class DBC040010DataUtil {
             高額支給額加算額 = 給付対象者合計Entity.getKogakuShikyuGaku();
             wKm_blnIchiranKBN1 = true;
         } else if (審査依頼.equals(審査支払区分コード)) {
-            RString shikyuKubunCode = 支給審査決定Entity == null ? null : 支給審査決定Entity.getShikyuKubunCode();
-            if (shikyuKubunCode == null
-                    && 支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
+            if (RString.isNullOrEmpty(shikyuKubunCode)
+                    && 支給.equals(shikyuKubunCode)) {
                 高額支給額加算額 = 支給判定結果Entity.getShikyuKingaku();
-            } else if (shikyuKubunCode == null
-                    && 不支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
+            } else if (RString.isNullOrEmpty(shikyuKubunCode)
+                    && 不支給.equals(shikyuKubunCode)) {
                 高額支給額加算額 = Decimal.ZERO;
             } else if (支給.equals(shikyuKubunCode)) {
                 高額支給額加算額 = 支給審査決定Entity == null ? null : 支給審査決定Entity.getKogakuShikyuGaku();
@@ -999,9 +999,9 @@ public class DBC040010DataUtil {
                 高額支給額加算額 = Decimal.ZERO;
             }
         } else if (審査済み.equals(審査支払区分コード)) {
-            if (支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
+            if (支給.equals(shikyuKubunCode)) {
                 高額支給額加算額 = 支給判定結果Entity.getShikyuKingaku();
-            } else if (不支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
+            } else if (不支給.equals(shikyuKubunCode)) {
                 高額支給額加算額 = Decimal.ZERO;
             }
         }

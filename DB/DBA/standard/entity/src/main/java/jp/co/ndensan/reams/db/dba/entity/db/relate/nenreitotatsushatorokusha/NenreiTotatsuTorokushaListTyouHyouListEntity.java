@@ -5,6 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha;
 
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -73,4 +79,14 @@ public class NenreiTotatsuTorokushaListTyouHyouListEntity {
     private RString リスト下_異動情報4;
     private RString リスト下_異動情報5;
     private RString リスト下_異動情報6;
+    private YubinNo yubinNo;
+    private ChoikiCode choikiCode;
+    private RString banchiCode;
+    private GyoseikuCode gyoseikuCode;
+    private ChikuCode chiku1;
+    private ChikuCode chiku2;
+    private ChikuCode chiku3;
+    private AtenaKanaMeisho shimei50onKana;
+    private FlexibleDate seinengappiYMD;
+    private RString gender;
 }
