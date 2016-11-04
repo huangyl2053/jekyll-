@@ -30,10 +30,10 @@ public class ShiharaiHohoHenkoShunouStatusService {
 
     private static final int 年_3 = 3;
 
-    private static boolean is時効起算日;
-    private static boolean is督促状発行年月日;
-    private static boolean is納期限の翌日;
-    private static boolean is収入年月日;
+    private boolean is時効起算日;
+    private boolean is督促状発行年月日;
+    private boolean is納期限の翌日;
+    private boolean is収入年月日;
 
     /**
      * Intanceを作成します。

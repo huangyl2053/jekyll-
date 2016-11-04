@@ -25,10 +25,11 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
     重複の入力チェック {
                 @Override
                 public boolean apply(KubunShikyuGendogakuDiv div) {
-                    if (div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() == null) {
+                    if (!div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().isDisabled()) {
+                        return SpecHelper.is重複の入力チェック(div);
+                    } else {
                         return true;
                     }
-                    return SpecHelper.is重複の入力チェック(div);
                 }
             },
     /**

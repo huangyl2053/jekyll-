@@ -9,12 +9,7 @@
    "transitionList": [
     {
      "id": "1",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0200001",
-     "layoutTitle": "対象者検索",
-     "eventName": "対象者特定",
-     "destroy": false,
+     "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC8120011",
@@ -33,7 +28,26 @@
     },
     {
      "id": "3",
-     "type": "start",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC8120011",
+     "layoutTitle": "事業高額合算　事業分自己負担額計算（括）",
+     "eventName": "対象者検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件sub"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC8120011",
@@ -41,18 +55,18 @@
      "toState": ""
     },
     {
-     "id": "4",
+     "id": "5",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC8120011",
-     "layoutTitle": "事業高額合算　事業分自己負担額計算（括）",
-     "eventName": "該当者検索へ",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "戻る",
      "destroy": false,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "検索条件"
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC8120011",
+     "toLayoutTitle": "事業高額合算　事業分自己負担額計算（括）",
+     "toState": ""
     }
    ]
   }

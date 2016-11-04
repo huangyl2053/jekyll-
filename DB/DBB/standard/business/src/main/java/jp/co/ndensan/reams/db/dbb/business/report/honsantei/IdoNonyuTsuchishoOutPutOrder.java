@@ -18,43 +18,55 @@ public enum IdoNonyuTsuchishoOutPutOrder implements IReportItems {
     /**
      * 郵便番号
      */
-    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
+    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"Atesaki_yubinNo\"")),
     /**
      * 町域コード
      */
-    町域コード(new RString("0002"), new RString("町域コード"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
+    町域コード(new RString("0002"), new RString("町域コード"), new RString("\"Atesaki_choikiCode\"")),
     /**
-     * 番地コード
+     * 番地コード1
      */
-    番地コード(new RString("0003"), new RString("番地コード"), new RString("\"ShikibetsuTaisho_banchiCode1\"")),
+    番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"Atesaki_banchiCode1\"")),
+    /**
+     * 番地コード2
+     */
+    番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"Atesaki_banchiCode2\"")),
+    /**
+     * 番地コード3
+     */
+    番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"Atesaki_banchiCode3\"")),
+    /**
+     * 番地コード4
+     */
+    番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"Atesaki_banchiCode4\"")),
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"Atesaki_gyoseikuCode\"")),
     /**
      * 地区１
      */
-    地区１(new RString("0005"), new RString("地区１"), new RString("\"ShikibetsuTaisho_chikuCode1\"")),
+    地区１(new RString("0005"), new RString("地区１"), new RString("\"Atesaki_chikuCode1\"")),
     /**
      * 地区２
      */
-    地区２(new RString("0006"), new RString("地区２"), new RString("\"ShikibetsuTaisho_chikuCode2\"")),
+    地区２(new RString("0006"), new RString("地区２"), new RString("\"Atesaki_chikuCode2\"")),
     /**
      * 地区３
      */
-    地区３(new RString("0007"), new RString("地区３"), new RString("\"ShikibetsuTaisho_chikuCode3\"")),
+    地区３(new RString("0007"), new RString("地区３"), new RString("\"Atesaki_chikuCode3\"")),
     /**
      * 世帯コード
      */
-    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"dbT2015KeisangoJoho_setaiCode\"")),
+    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
     /**
      * 識別コード
      */
-    識別コード(new RString("0009"), new RString("識別コード"), new RString("\"dbT2015KeisangoJoho_shikibetsuCode\"")),
+    識別コード(new RString("0009"), new RString("識別コード"), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_meisho\"")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
     /**
      * 生年月日
      */
@@ -66,7 +78,7 @@ public enum IdoNonyuTsuchishoOutPutOrder implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_insertDantaiCd\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_fukaShichosonCode\"")),
     /**
      * 被保険者番号
      */
@@ -86,10 +98,12 @@ public enum IdoNonyuTsuchishoOutPutOrder implements IReportItems {
     /**
      * 8月特徴開始者
      */
+    //QA1854 確認中
     八月特徴開始者(new RString("0220"), new RString("八月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\"")),
     /**
      * 10月特徴開始者
      */
+    //QA1854 確認中
     十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\""));
 
     private final RString 項目ID;

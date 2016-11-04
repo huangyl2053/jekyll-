@@ -149,7 +149,7 @@ public class KaigoHihokenshaInfoPanel {
         RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
         ShikibetsuCode 識別コード = div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().getDomain();
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
-        if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) && 履歴番号.isNullOrEmpty()) {
+        if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
             KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
             Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
             if (最新履歴番号 == null) {

@@ -25,5 +25,5 @@ public class RiyoshaFutangakuEntity extends DbTableEntityBase<RiyoshaFutangakuEn
     private HihokenshaNo hiHokenshaNo;
     private RString serviceTeikyoYM;
     private Decimal riyoshaFutangaku;
-
+    private int dataShubetsu;
 }

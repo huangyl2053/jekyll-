@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000015.DBC
 import jp.co.ndensan.reams.db.dbc.service.core.koseitaishokyufujissekiichiran.KoseiTaishoKyufuJissekiIchiran;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -41,9 +42,12 @@ public class DBCMNK4001PanelAll {
     public ResponseData<DBCMNK4001PanelAllDiv> onClick_onBeforeOpenDialog(DBCMNK4001PanelAllDiv div) {
         YMDHMS 今回抽出期間終了日時 = new YMDHMS(div.getTxtKonkaiShuryoDate().getValue(),
                 div.getTxtKonkaiShuryoTime().getValue());
-        YMDHMS 今回抽出期間開始日時 = new YMDHMS(div.getTxtKonkaiKaishiDate().getValue(),
-                div.getTxtKonkaiKaishiTime().getValue());
-        if (今回抽出期間終了日時.isBefore(今回抽出期間開始日時)) {
+        YMDHMS 今回抽出期間開始日時 = new YMDHMS(RString.EMPTY);
+        if (div.getTxtKonkaiKaishiDate().getValue() != null && div.getTxtKonkaiKaishiTime().getValue() != null) {
+            今回抽出期間開始日時 = new YMDHMS(div.getTxtKonkaiKaishiDate().getValue(),
+                    div.getTxtKonkaiKaishiTime().getValue());
+        }
+        if (!今回抽出期間開始日時.isEmpty() && 今回抽出期間終了日時.isBefore(今回抽出期間開始日時)) {
             ValidationMessageControlPairs validPairs = getValidationHandler().大小関係が不正();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -61,8 +65,11 @@ public class DBCMNK4001PanelAll {
     public ResponseData<DBC180050_KoseiTaishoKyufuJissekiIchiranParameter> onClick_btnBatchRegister(DBCMNK4001PanelAllDiv div) {
         YMDHMS 今回抽出期間終了日時 = new YMDHMS(div.getTxtKonkaiShuryoDate().getValue(),
                 div.getTxtKonkaiShuryoTime().getValue());
-        YMDHMS 今回抽出期間開始日時 = new YMDHMS(div.getTxtKonkaiKaishiDate().getValue(),
-                div.getTxtKonkaiKaishiTime().getValue());
+        YMDHMS 今回抽出期間開始日時 = new YMDHMS(RString.EMPTY);
+        if (div.getTxtKonkaiKaishiDate().getValue() != null && div.getTxtKonkaiKaishiTime().getValue() != null) {
+            今回抽出期間開始日時 = new YMDHMS(div.getTxtKonkaiKaishiDate().getValue(),
+                    div.getTxtKonkaiKaishiTime().getValue());
+        }
         DBC180050_KoseiTaishoKyufuJissekiIchiranParameter parameter = KoseiTaishoKyufuJissekiIchiran.createInstance().
                 getBatchiParameter(今回抽出期間開始日時, 今回抽出期間終了日時, div.getPanelSort().getRadSort().getSelectedKey());
         return ResponseData.of(parameter).respond();
