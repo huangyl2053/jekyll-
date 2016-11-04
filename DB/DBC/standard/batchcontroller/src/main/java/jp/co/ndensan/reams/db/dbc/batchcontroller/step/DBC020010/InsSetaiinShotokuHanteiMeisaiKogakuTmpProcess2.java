@@ -29,8 +29,8 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2 extends BatchProcess
     private static final RString TABLE_世帯員所得判定明細高額一時2 = new RString("TempSetaiinShotokuHantei2");
     private static final FlexibleYear YEAR_2006 = new FlexibleYear("2006");
     private static final FlexibleYear YEAR_2015 = new FlexibleYear("2015");
+    private static final RString RS_01 = new RString("01");
     private static final int MINUS_1 = -1;
-    private static final int INT_1 = 1;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
     private static final int INT_6 = 6;
@@ -79,9 +79,9 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2 extends BatchProcess
             年調整フラグ = true;
         }
         if (年調整フラグ) {
-            ｗｋ年月日 = 基準年月日.plusDay(INT_1).plusYear(MINUS_1);
+            ｗｋ年月日 = new FlexibleDate(基準年月日.getYearMonth().toDateString().concat(RS_01)).plusYear(MINUS_1);
         } else {
-            ｗｋ年月日 = 基準年月日.plusDay(INT_1);
+            ｗｋ年月日 = new FlexibleDate(基準年月日.getYearMonth().toDateString().concat(RS_01));
         }
         年度 = ｗｋ年月日.getNendo();
         entity.setTsuzukigaraCodeNen(年度);
