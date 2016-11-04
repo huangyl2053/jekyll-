@@ -270,6 +270,6 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
     }
 
     private boolean isデータ存在() {
-        return 負担割合情報一時表.get年度() != null && 負担割合情報一時表.get年度() != null;
+        return 負担割合情報一時表.get被保険者番号() != null && 負担割合情報一時表.get年度() != null;
     }
 }
