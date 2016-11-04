@@ -71,7 +71,7 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
                     REPLACE_OLD, RStringUtil.convert半角to全角(new RString(item.get帳票情報().get適用終了年月日().wareki()
                                     .eraType(EraType.KANJI).getYear().toString())));
         }
-        source.shikibetsuCode = item.getIKojin().get識別コード();
+//        source.shikibetsuCode = item.getIKojin().get識別コード();
         return source;
     }
 

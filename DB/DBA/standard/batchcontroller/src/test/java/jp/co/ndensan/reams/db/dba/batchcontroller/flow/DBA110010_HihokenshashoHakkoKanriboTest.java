@@ -83,7 +83,7 @@ public class DBA110010_HihokenshashoHakkoKanriboTest {
             parameter.setRenbanfukaflg(false);
             parameter.setSeyisinjyohoflg(false);
             parameter.setSiyuturiyokudaysyou(new RString("1"));
-            parameter.setSyuturyokujunid(RString.EMPTY);
+//            parameter.setSyuturyokujunid(RString.EMPTY);
 
         }
     }
