@@ -1020,14 +1020,12 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             return validPairs;
         }
         for (dgSeikyuDetail_Row row : rowList) {
-            if (ddlShumoku.equals(row.getTxtShumoku().getValue()) && !RowState.Deleted.equals(row.getRowState())
-                    && !処理モード登録.equals(モード)) {
+            if (ddlShumoku.equals(row.getTxtShumoku().getValue()) && !RowState.Deleted.equals(row.getRowState())) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrErrorMessages.既に登録済, 種目コード.toString())));
             }
             if (hinmokuCode != null && hinmokuCode.equals(row.getHinmokuCode().getValue())
-                    && !RowState.Deleted.equals(row.getRowState())
-                    && !処理モード登録.equals(モード)) {
+                    && !RowState.Deleted.equals(row.getRowState())) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrErrorMessages.既に登録済, 品目コード.toString())));
             }

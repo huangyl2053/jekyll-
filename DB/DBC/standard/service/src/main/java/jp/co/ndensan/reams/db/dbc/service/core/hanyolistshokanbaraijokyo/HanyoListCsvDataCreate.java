@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishu.JutakukaishuShinseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
@@ -583,7 +584,11 @@ public class HanyoListCsvDataCreate {
         if (RString.isNullOrEmpty(entity.get様式番号s())) {
             return RString.EMPTY;
         }
-        List<RString> lst様式番号 = new ArrayList<>(new LinkedHashSet<>(entity.get様式番号s().split(",")));
+        List<RString> lst様式番号 = new ArrayList<>();
+        for (RString yosikiNo : new LinkedHashSet<>(entity.get様式番号s().split(","))) {
+            lst様式番号.add(KyufuJissekiYoshikiKubun.toValue(yosikiNo).get様式番号());
+        }
+
 
         RStringBuilder builder = new RStringBuilder();
 

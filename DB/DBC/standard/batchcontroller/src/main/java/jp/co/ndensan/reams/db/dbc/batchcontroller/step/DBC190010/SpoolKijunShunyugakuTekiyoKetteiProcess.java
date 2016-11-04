@@ -134,10 +134,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         基準収入額適用管理manager = new KijunShunyugakuTekiyoKanriManager();
         帳票制御共通 = new ChohyoSeigyoKyotsuManager()
                 .get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100074.getReportId());
-    }
-
-    @Override
-    protected void beforeExecute() {
         並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, 帳票ID_通知書, Long.parseLong(parameter.get帳票出力順ID().toString()));
         if (並び順 != null) {

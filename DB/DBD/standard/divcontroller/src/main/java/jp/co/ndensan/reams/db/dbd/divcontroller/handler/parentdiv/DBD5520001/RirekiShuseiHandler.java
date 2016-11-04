@@ -594,8 +594,11 @@ public class RirekiShuseiHandler {
         if (!RString.isNullOrEmpty(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
             認定申請Builder.set性別(new Code(Seibetsu.valueOf(div.getCcdKaigoNinteiAtenaInfo().get性別().toString()).getコード()));
         }
-        // TODO 介護認定宛名情報のIFがない、介護認定宛名情報を変更しまたの場合、対応
-        認定申請Builder.set被保険者氏名カナ(AtenaKanaMeisho.EMPTY);
+        if (div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名カナ() == null) {
+            認定申請Builder.set被保険者氏名カナ(AtenaKanaMeisho.EMPTY);
+        } else {
+            認定申請Builder.set被保険者氏名カナ(new AtenaKanaMeisho(div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名カナ()));
+        }
         認定申請Builder.set被保険者氏名(new AtenaMeisho(div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名()));
         認定申請Builder.set郵便番号(div.getCcdKaigoNinteiAtenaInfo().get郵便番号());
         認定申請Builder.set住所(new AtenaJusho(div.getCcdKaigoNinteiAtenaInfo().get住所()));

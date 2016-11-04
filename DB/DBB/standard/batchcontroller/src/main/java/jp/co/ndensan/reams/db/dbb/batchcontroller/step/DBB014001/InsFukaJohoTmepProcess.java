@@ -45,6 +45,7 @@ public class InsFukaJohoTmepProcess extends BatchKeyBreakBase<FukaJohoCalculateE
     private static final int INDEX_14 = 14;
     private static final RString 徴収方法1 = new RString("1");
     private static final RString 徴収方法2 = new RString("2");
+    private static final RString 徴収方法3 = new RString("3");
     private static final RString TABLE_NAME = new RString("FukaJohoTemp");
     private FuchoKarisanteiFukaProcessParameter parameter;
     private FukaJohoTempEntity 中間Entity;
@@ -153,10 +154,10 @@ public class InsFukaJohoTmepProcess extends BatchKeyBreakBase<FukaJohoCalculateE
         UrT0705ChoteiKyotsuEntity urT0705Entity = entity.get調定共通Entity();
         DbT2003KibetsuEntity dbT2003Entity = entity.get介護期別Entity();
         if (urT0705Entity != null && dbT2003Entity != null) {
-            if (dbT2003Entity.getChoshuHouhou().equals(徴収方法1)) {
+            if (徴収方法1.equals(dbT2003Entity.getChoshuHouhou()) || 徴収方法2.equals(dbT2003Entity.getChoshuHouhou())) {
                 中間Entity = set特徴期期別金額(urT0705Entity.getChoteigaku(), dbT2003Entity.getKi(), 中間Entity);
             }
-            if (dbT2003Entity.getChoshuHouhou().equals(徴収方法2)) {
+            if (徴収方法3.equals(dbT2003Entity.getChoshuHouhou())) {
                 中間Entity = set普徴期期別金額(urT0705Entity.getChoteigaku(), dbT2003Entity.getKi(), 中間Entity);
             }
         }

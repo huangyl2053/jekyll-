@@ -84,8 +84,8 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private static final String 振込データ作成 = "FurikomiData";
     private static final String 振込データ登録_口座振込一時処理 = "FurikomiDataTouroku";
     private static final String 依頼済登録_償還 = "ShokanHanteiKekkaUpdate";
-    private static final String 依頼済登録_高額介護 = "ShokanHanteiKekkaUpdate";
-    private static final String 依頼済取消_償還 = "ShokanHanteiKekkaUpdate";
+    private static final String 依頼済登録_高額介護 = "KogakuShikyuHanteiKekkaUpdate";
+    private static final String 依頼済取消_償還 = "ShokanHanteiKekkaCancelProcess";
     private static final String 依頼済取消_高額介護 = "KogakuShikyuHanteiKekkaCancel";
     private static final String 振込明細一覧表作成_受給取得状況 = "FurikomiMeisaiListStatus";
     private static final String 振込明細一覧表作成_申請データ有無確認 = "ShinseiDataKakunin";
