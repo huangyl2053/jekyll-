@@ -89,12 +89,12 @@
         rgdb."UrT0705ChoteiKyotsu"  AS  "UrT0705"
         ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
         ORDER BY 
-        "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" ,
+        "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" ,
         "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" ,
         "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" ,
         "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ,
         "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM" ,
-        "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" ,
         "UeT0511NenkinTokuchoKaifuJoho"."koseiCityCode" ,
         "UeT0511NenkinTokuchoKaifuJoho"."renban",
         "DbT2002Fuka"."choteiNendo",
