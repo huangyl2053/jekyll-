@@ -198,7 +198,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             IdoTblTmpEntity 異動一時entity = allData.get(i);
             不要データ削除(異動一時entity, i, allData);
         }
-        再編集(allData, 宛名情報, 処理年月);
+        if (!allData.isEmpty()) {
+            再編集(allData, 宛名情報, 処理年月);
+        }
         異動一時List.clear();
         異動一時Map.clear();
     }
@@ -450,15 +452,17 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
 
     private boolean 前後履歴の有効Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List, DbT4001JukyushaDaichoEntity 受給者台帳) {
         DbT4001JukyushaDaichoEntity 前履歴 = get前履歴の有効データ(受給者台帳List, 受給者台帳);
-        if (!コート_12.equals(前履歴.getYokaigoJotaiKubunCode()) && !コート_13.equals(前履歴.getYokaigoJotaiKubunCode())) {
-            return false;
-        }
-        if (isBeforeDate(前履歴.getNinteiYukoKikanKaishiYMD(), 受給者台帳.getNinteiYMD())
-                && isBeforeDate(受給者台帳.getNinteiYMD(), 前履歴.getNinteiYukoKikanShuryoYMD())) {
-            return true;
+        if (前履歴 != null) {
+            if (!コート_12.equals(前履歴.getYokaigoJotaiKubunCode()) && !コート_13.equals(前履歴.getYokaigoJotaiKubunCode())) {
+                return false;
+            }
+            if (isBeforeDate(前履歴.getNinteiYukoKikanKaishiYMD(), 受給者台帳.getNinteiYMD())
+                    && isBeforeDate(受給者台帳.getNinteiYMD(), 前履歴.getNinteiYukoKikanShuryoYMD())) {
+                return true;
+            }
         }
         DbT4001JukyushaDaichoEntity 後履歴 = get後履歴の有効データ(受給者台帳List, 受給者台帳);
-        if (isBeforeDate(後履歴.getNinteiYukoKikanKaishiYMD(), 受給者台帳.getNinteiYMD())
+        if (後履歴 != null && isBeforeDate(後履歴.getNinteiYukoKikanKaishiYMD(), 受給者台帳.getNinteiYMD())
                 && isBeforeDate(受給者台帳.getNinteiYMD(), 後履歴.getNinteiYukoKikanShuryoYMD())) {
             return true;
         }
@@ -1776,6 +1780,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             }
         }
         sort受給者台帳List(小さいList);
+        if (小さいList.isEmpty()) {
+            return null;
+        }
         return 小さいList.get(ORDER_0);
     }
 
@@ -1791,6 +1798,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             }
         }
         sort受給者台帳List(大きいList);
+        if (大きいList.isEmpty()) {
+            return null;
+        }
         return 大きいList.get(大きいList.size() - ORDER_1);
     }
 
@@ -2228,9 +2238,12 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 entity.set異動区分コード(STR_2);
                 entity.set受給者異動事由(STR_99);
             }
-            entity.set被保険者氏名カナ(宛名情報.getカナ名称().getColumnValue());
-            entity.set生年月日(宛名情報.get生年月日());
-            entity.set性別コード(宛名情報.get性別());
+            if (宛名情報 != null) {
+                entity.set被保険者氏名カナ(宛名情報.getカナ名称() == null
+                        ? RString.EMPTY : 宛名情報.getカナ名称().getColumnValue());
+                entity.set生年月日(宛名情報.get生年月日());
+                entity.set性別コード(宛名情報.get性別());
+            }
             if (RString.isNullOrEmpty(entity.get要介護状態区分コード())) {
                 entity.set要介護状態区分コード(STR_01);
             }
@@ -2274,6 +2287,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
 //                    && !isBeforeOreqDate(entity.get認定有効期間開始年月日(), entity.get資格喪失年月日())) {
 //                return;
 //            }
+            if (isDateEmpty(entity.get認定有効期間開始年月日())) {
+                continue;
+            }
             FlexibleYearMonth 同じ年月 = entity.get認定有効期間開始年月日().getYearMonth();
             List<IdoTblTmpEntity> updateList = 同じ年月Map.get(同じ年月);
             if (updateList == null) {
@@ -2319,8 +2335,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private void 再編集一部(IdoTblTmpEntity entity) {
-        if (isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get異動年月日())
-                || isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get資格取得年月日())) {
+        if (!RString.isNullOrEmpty(entity.get給付率引下げ開始年月日())
+                && (isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get異動年月日())
+                || isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get資格取得年月日()))) {
             entity.set給付率引下げ開始年月日(星);
             entity.set給付率引下げ終了年月日(星);
         }
