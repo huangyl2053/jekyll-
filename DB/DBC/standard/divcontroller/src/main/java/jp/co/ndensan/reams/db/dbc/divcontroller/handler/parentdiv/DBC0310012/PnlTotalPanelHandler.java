@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -602,12 +603,13 @@ public class PnlTotalPanelHandler {
      * 帳票発行メソッドです。
      *
      * @param 償還受領委任契約者 ShokanJuryoininKeiyakusha
+     * @return SourceDataCollection
      */
-    public void publish帳票(ShokanJuryoininKeiyakusha 償還受領委任契約者) {
+    public SourceDataCollection publish帳票(ShokanJuryoininKeiyakusha 償還受領委任契約者) {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
         JuryoininKeiyakuJigyosha 受領委任契約事業者 = finder.get受領委任契約事業者(償還受領委任契約者.get契約事業者番号());
         if (受領委任契約事業者 == null) {
-            return;
+            return new SourceDataCollection();
         }
         RString 文書番号 = div.getPnlMsgPrint().getPnlPrint().getCcdBunshoBangoInput().get文書番号();
         KaigoKyufuJuryoininKeiyakuToroku toroku = KaigoKyufuJuryoininKeiyakuToroku.createInstance();
@@ -615,6 +617,6 @@ public class PnlTotalPanelHandler {
                 受領委任契約事業者, 文書番号);
         new JyuryoItakuKeiyakuKakuninShoPrintService().printSingle(result.get利用者向けEntity());
 
-        new JyuryoItakuKeiyakuKakuninShoKeiyakuPrintService().printSingle(result.get事業者用Entity());
+        return new JyuryoItakuKeiyakuKakuninShoKeiyakuPrintService().printSingle(result.get事業者用Entity());
     }
 }
