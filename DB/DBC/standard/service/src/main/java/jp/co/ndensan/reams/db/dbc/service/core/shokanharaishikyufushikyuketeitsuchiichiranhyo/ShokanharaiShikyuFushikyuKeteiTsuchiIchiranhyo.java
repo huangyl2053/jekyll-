@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.shokanharaishikyufushikyuketeits
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
@@ -39,6 +40,8 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
     private static final int 数字_5 = 5;
     private static final int 数字_4 = 4;
     private static final int 数字_3 = 3;
+    private static final int ZERO = 0;
+    private static final int TEN = 10;
 
     /**
      * 帳票データを作成します。
@@ -47,11 +50,12 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
      * @param batchPram バッチパラメータ
      * @param 出力順 出力順
      * @param 改ページ 改ページ
+     * @param 種類Map 種類Map
      * @return List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
      */
     public List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
             getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(List<ShokanKetteiTsuchiShoShiharai> businessList,
-                    ShokanKetteiTsuchiShoSealerBatchParameter batchPram, List<RString> 出力順, List<RString> 改ページ) {
+                    ShokanKetteiTsuchiShoSealerBatchParameter batchPram, List<RString> 出力順, List<RString> 改ページ, Map<RString, RString> 種類Map) {
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> tsuchiIchiranItemsList = new ArrayList<>();
         if (businessList == null || businessList.isEmpty()) {
             ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem();
@@ -121,7 +125,7 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
             ichiranItem.setKingaku(DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(shoShiharaiList.get金額()), 1));
             ichiranItem.setTuika(RString.EMPTY);
-            ichiranItem.setShurui(shoShiharaiList.get種類());
+            ichiranItem.setShurui(種類Map.get(getJufukuKey(shoShiharaiList)));
             if (!RString.isNullOrEmpty(shoShiharaiList.get支給不支給決定区分())) {
                 ichiranItem.setKeteiKubun(new RString(ShikyuFushikyuKubun.toValue(shoShiharaiList.get支給不支給決定区分()).get名称().toString()));
             }
@@ -149,6 +153,14 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             tsuchiIchiranItemsList.add(ichiranItem);
         }
         return tsuchiIchiranItemsList;
+    }
+            
+    private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
+        RStringBuilder key = new RStringBuilder();
+        key.append(shiharai.get被保険者番号().value());
+        key.append(shiharai.get提供年月().wareki().toDateString());
+        key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
+        return key.toRString();
     }
 
     /**
