@@ -377,7 +377,6 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                 = div.getJikoFutangakuHoseiDetail().getTplJikofutanKanriJoho1();
         kanriJohoDiv1.getTxtIdouKBN().setValue(result.get異動区分() == null ? RString.EMPTY
                 : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
-        kanriJohoDiv1.getDdlShotokuKBN().getDataSource().clear();
         kanriJohoDiv1.getDdlShotokuKBN().setIsBlankLine(false);
         kanriJohoDiv1.getDdlShotokuKBN().setDataSource(set所得区分(result.get対象年度()));
         if (result.get所得区分() == null) {

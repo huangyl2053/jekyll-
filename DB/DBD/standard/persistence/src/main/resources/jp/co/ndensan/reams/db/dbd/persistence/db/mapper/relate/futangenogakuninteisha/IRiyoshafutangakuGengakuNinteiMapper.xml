@@ -47,8 +47,8 @@
         </if>
         <if test="is対象リスト_該当者リスト">
             <if test="is受給者区分_受給者">
-                AND 受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{課税判定等基準日}
-                AND #{課税判定等基準日} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
+                AND 受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準日}
+                AND #{基準日} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
                 AND 受給者台帳."logicalDeletedFlag" = false 
                 AND 受給者台帳."yukoMukoKubun" = #{有効無効区分_有効}
             </if>
@@ -313,7 +313,7 @@
                 AND A.利用者負担段階 = #{利用者負担2段階}
             </if>
             <if test="利用者負担3段階is">
-                AND A.利用者負担段階 = #{利用者負担3段階CODE}
+                AND A.利用者負担段階 = #{利用者負担3段階}
             </if>
             <if test="利用者負担4段階_高齢者複数世帯is">
                 AND A.利用者負担段階 = #{利用者負担4段階_高齢者複数世帯} 

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -143,18 +144,25 @@ public class KijunShunyuShinseiTouroku {
      * @return ResponseData
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnCommonUpdate(KijunShunyuShinseiTourokuDiv div) {
-        Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = ViewStateHolder.get(
-                ViewStateKeys.基準収入額適用管理情報, Map.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        try {
-            getHandler(div).to保存(基準収入Map);
-        } catch (SystemException | ApplicationException e) {
-            throw new ApplicationException(e.getMessage());
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
-        AccessLogger.log(AccessLogType.更新, getHandler(div).toPersonalData(識別コード, 被保険者番号.getColumnValue()));
-        getHandler(div).前排他キーの解除(被保険者番号.getColumnValue());
-        return ResponseData.of(div).setState(DBC1000062StateName.完了状態);
+        if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = ViewStateHolder.get(
+                    ViewStateKeys.基準収入額適用管理情報, Map.class);
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+            try {
+                getHandler(div).to保存(基準収入Map);
+            } catch (SystemException | ApplicationException e) {
+                throw new ApplicationException(e.getMessage());
+            }
+            AccessLogger.log(AccessLogType.更新, getHandler(div).toPersonalData(識別コード, 被保険者番号.getColumnValue()));
+            getHandler(div).前排他キーの解除(被保険者番号.getColumnValue());
+            return ResponseData.of(div).setState(DBC1000062StateName.完了状態);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**

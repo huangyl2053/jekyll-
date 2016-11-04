@@ -345,7 +345,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
     }
 
     private void edit生活保護受給者について(ShiharaiHohoHenkoHaakuFiveEntity t, ShiharaiHohoHenkoEntity reportDataEntity) {
-        if (t.get生活保護受給者_識別コード() != null && ShikibetsuCode.EMPTY.equals(t.get生活保護受給者_識別コード())) {
+        if (t.get生活保護受給者_識別コード() != null && !ShikibetsuCode.EMPTY.equals(t.get生活保護受給者_識別コード())) {
             reportDataEntity.set生保(true);
         } else {
             reportDataEntity.set生保(false);

@@ -577,7 +577,6 @@
         <id column="temp_hokenshaNo" />
         <id column="temp_shikyuShinseishoSeiriNo" />
         <id column="serviceTeikyoYM" />
-        <id column="riyoshaFutangaku" />
         <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
         <association property="利用者負担" resultMap="ResultMap_RiyoshaFutangakuEntity" />
     </resultMap>
