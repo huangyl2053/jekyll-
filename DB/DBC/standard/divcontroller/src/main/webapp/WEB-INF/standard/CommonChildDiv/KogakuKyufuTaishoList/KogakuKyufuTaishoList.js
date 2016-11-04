@@ -16,16 +16,12 @@ var DBC;
 
             ModeController.prototype.priorities = function () {
                 return [
-                    "DisplayMode",
-                    "MeisaiGokeiKubunMode"
+                    "DisplayMode"
                 ];
             };
 
             ModeController.prototype.DisplayMode = function () {
                 return new Modes.DisplayMode(this.controls);
-            };
-            ModeController.prototype.MeisaiGokeiKubunMode = function () {
-                return new Modes.MeisaiGokeiKubunMode(this.controls);
             };
             return ModeController;
         })();
@@ -64,23 +60,6 @@ var DBC;
                 return DisplayMode;
             })();
             Modes.DisplayMode = DisplayMode;
-
-            var MeisaiGokeiKubunMode = (function () {
-                function MeisaiGokeiKubunMode(controls) {
-                    this.controls = controls;
-                }
-                MeisaiGokeiKubunMode.prototype.Meisai = function () {
-                    this.controls.GokeiPanel().displayNone = true;
-                    this.controls.KogakuKyufuKonkyoPanel().displayNone = false;
-                };
-
-                MeisaiGokeiKubunMode.prototype.Gokei = function () {
-                    this.controls.GokeiPanel().displayNone = false;
-                    this.controls.KogakuKyufuKonkyoPanel().displayNone = true;
-                };
-                return MeisaiGokeiKubunMode;
-            })();
-            Modes.MeisaiGokeiKubunMode = MeisaiGokeiKubunMode;
         })(KogakuKyufuTaishoList.Modes || (KogakuKyufuTaishoList.Modes = {}));
         var Modes = KogakuKyufuTaishoList.Modes;
     })(DBC.KogakuKyufuTaishoList || (DBC.KogakuKyufuTaishoList = {}));
