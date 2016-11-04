@@ -76,12 +76,8 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
             RString システム時 = システム日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
             source.printTimeStamp = システム日.concat(RString.HALF_SPACE).concat(システム時).concat(RString.HALF_SPACE).concat(SAKUSEI);
         }
-        if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get審査年月From() != null) {
-            source.shinsaYMKaishi = 高額総合事業サービス費対象者一覧表.get審査年月From().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        }
-        if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get審査年月To() != null) {
-            source.shinsaYMShuryo = 高額総合事業サービス費対象者一覧表.get審査年月To().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+        if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get審査年月() != null) {
+            source.shinsaYM = 高額総合事業サービス費対象者一覧表.get審査年月().wareki().firstYear(FirstYear.ICHI_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get市町村コード() != null) {

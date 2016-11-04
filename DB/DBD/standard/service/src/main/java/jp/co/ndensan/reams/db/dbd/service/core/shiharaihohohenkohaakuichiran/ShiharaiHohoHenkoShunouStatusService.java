@@ -411,6 +411,8 @@ public class ShiharaiHohoHenkoShunouStatusService {
     public RString edit以前滞納区分(FlexibleDate 最古滞納期Date, FlexibleDate 以前納期限, Decimal 以前滞納額) {
         RString 以前滞納区分 = TainoKubun.空白.get名称();
         if ((以前納期限 != null && !FlexibleDate.EMPTY.equals(以前納期限))
+                && 最古滞納期Date != null && !最古滞納期Date.isEmpty()
+                && 以前滞納額 != null
                 && 以前納期限.equals(最古滞納期Date)
                 && 以前滞納額.compareTo(Decimal.ZERO) > 0) {
             以前滞納区分 = TainoKubun.最古滞納期.get名称();

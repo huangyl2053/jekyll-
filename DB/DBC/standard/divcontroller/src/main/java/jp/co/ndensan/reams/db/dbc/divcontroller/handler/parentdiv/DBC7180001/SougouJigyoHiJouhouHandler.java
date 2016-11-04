@@ -38,6 +38,9 @@ public class SougouJigyoHiJouhouHandler {
     private static final RString 作成区分_KEY3 = new RString("key3");
     private static final RString 全て市町村 = new RString("000000");
     private static final RString 基本情報 = new RString("基本情報のみ");
+    private static final RString 基本明細情報 = new RString("基本情報＋明細情報");
+    private static final RString 基本集計情報 = new RString("基本情報＋集計情報");
+    private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
     private final SougouJigyoHiJouhouDiv div;
 
     /**
@@ -68,7 +71,7 @@ public class SougouJigyoHiJouhouHandler {
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
         div.getCcdJigyoshaBango().initialize();
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701018.getReportId());
-        div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701018.getReportId().value(), SubGyomuCode.DBC介護給付);
+//        div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701018.getReportId().value(), SubGyomuCode.DBC介護給付);
     }
 
     /**
@@ -127,17 +130,26 @@ public class SougouJigyoHiJouhouHandler {
         parameter.set事業者名(div.getCcdJigyoshaBango().getNyuryokuShisetsuMeisho());
         parameter.setサービス種類コード(div.getDdlSabisuSyurui().getSelectedKey());
         parameter.setサービス名称(div.getDdlSabisuSyurui().getSelectedValue());
+
         RString 市町村コード = RString.EMPTY;
-        if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value().equals(全て市町村)) {
-            市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名 = RString.EMPTY;
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
             if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
                 市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
             } else {
-                市町村コード = 全て市町村;
+                保険者コード = 全て市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
             }
         }
-        parameter.set保険者コード(市町村コード);
+        parameter.set保険者コード(保険者コード);
+        parameter.set保険者名(保険者名);
+        parameter.set市町村コード(市町村コード);
         parameter.set抽出方法(div.getRadSakuseiKubun().getSelectedValue());
         if (div.getTxtSabisuTeikyoNengetsu().getFromValue() != null) {
             parameter.setサービス提供年月開始年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getFromValue()));
@@ -186,7 +198,7 @@ public class SougouJigyoHiJouhouHandler {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             } else {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
+                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("市町村コード"))));
             }
         }
         RString 抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出方法"));
@@ -228,6 +240,18 @@ public class SougouJigyoHiJouhouHandler {
         }
         if (!RString.isNullOrEmpty(取込年月終了年月)) {
             div.getChushutsuJokenPanel().getTxtTorikomiNengetsu().setToValue(new RDate(取込年月終了年月.toString()));
+        }
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("出力順ID"));
+        if (出力順ID != null) {
+            if (基本情報.equals(抽出方法)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701018.getReportId(), 出力順ID);
+            } else if (基本明細情報.equals(抽出方法)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701022.getReportId(), 出力順ID);
+            } else if (基本集計情報.equals(抽出方法)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701023.getReportId(), 出力順ID);
+            } else if (基本ケアマネジメント情報.equals(抽出方法)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701024.getReportId(), 出力順ID);
+            }
         }
     }
 

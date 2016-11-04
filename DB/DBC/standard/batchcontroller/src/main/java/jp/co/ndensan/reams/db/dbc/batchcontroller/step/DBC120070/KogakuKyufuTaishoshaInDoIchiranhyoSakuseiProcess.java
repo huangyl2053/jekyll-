@@ -149,11 +149,13 @@ public class KogakuKyufuTaishoshaInDoIchiranhyoSakuseiProcess extends SimpleBatc
                 RString 作成時 = 作成日時.getTime()
                         .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
                 output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(作成));
+                output.set国保連合会名(対象者.get国保連合会名());
             } else {
                 output.set処理年月(RString.EMPTY);
                 output.set作成日時(RString.EMPTY);
+                output.set国保連合会名(RString.EMPTY);
             }
-            output.set国保連合会名(対象者.get国保連合会名());
+
             output.set証記載保険者番号(getColumnValue(対象者.get証記載保険者番号()));
             output.set証記載保険者名(対象者.get証記載保険者名());
             output.set通知書番号(対象者.getNo());

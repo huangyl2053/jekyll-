@@ -29,6 +29,9 @@
             <if test="削除データ検索 == false">
             AND DbT3002."logicalDeletedFlag"= false
             </if>
+            <if test="削除データ検索 == true">
+            AND DbT3002."logicalDeletedFlag"= true
+            </if>
             order by DbT3002."idoYMD" DESC
     </sql>
     
@@ -77,6 +80,9 @@
             <if test="削除データ検索 == false">
             AND DbT3003."logicalDeletedFlag"= false
             </if>
+             <if test="削除データ検索 == true">
+            AND DbT3003."logicalDeletedFlag"= true
+            </if>
             order by DbT3003."idoYMD" DESC
     </sql>
     
@@ -105,6 +111,9 @@
             </if>
             <if test="削除データ検索 == false">
             AND DbT3004."logicalDeletedFlag"= false
+            </if>
+            <if test="削除データ検索 == true">
+            AND DbT3004."logicalDeletedFlag"= true
             </if>
             order by DbT3004."idoYMD" DESC
     </sql>

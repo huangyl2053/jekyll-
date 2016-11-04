@@ -85,6 +85,7 @@ public class HonsanteiIdoGennendo {
     private final ReportId 決定通知書_変更通知書 = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private final ReportId 納入通知書 = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private final ReportId 本算定異動_現年度_結果一覧表 = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
+    private final ReportId 特別徴収依頼金額明細一覧表 = new ReportId("DBB200023_TokubetsuChoshuIraikingakuMeisaiIchiran");
     private final RString 特徴開始者_12月 = new RString("12月特徴開始者のみ");
     private final RString 特徴開始者_2月 = new RString("2月特徴開始者のみ");
     private final RString 特徴開始者_4月 = new RString("4月特徴開始者のみ");
@@ -760,6 +761,12 @@ public class HonsanteiIdoGennendo {
                     resultList.add(result);
                 }
             }
+            if (特別徴収依頼金額明細一覧表.equals(choParameter.get帳票分類ID())) {
+                result = new ChohyoResult();
+                result.set帳票分類ID(choParameter.get帳票分類ID());
+                result.set出力順ID(choParameter.get出力順ID());
+                resultList.add(result);
+            }
             if (本算定異動_現年度_結果一覧表.equals(choParameter.get帳票分類ID())) {
                 result = new ChohyoResult();
                 result.set帳票分類ID(choParameter.get帳票分類ID());
@@ -785,6 +792,7 @@ public class HonsanteiIdoGennendo {
         result.set抽出終了日時(parameter.get抽出終了日時());
         result.set特徴捕捉分(parameter.get特徴捕捉分());
         result.set依頼金額計算(parameter.get依頼金額計算());
+        result.set通常異動分の依頼金額計算(parameter.is通常異動分の依頼金額計算());
         List<ChohyoResult> choResult = this.getChohyoID(parameter.get調定年度(),
                 parameter.get算定期(), parameter.get出力帳票一覧List());
         result.set出力帳票List(choResult);

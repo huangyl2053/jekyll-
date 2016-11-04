@@ -39,7 +39,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
     private final YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div;
     private final RString 承認する = new RString("承認する");
     private final RString 却下する = new RString("却下する");
-    private final RString 決定日R = new RString("決定日");
 
     /**
      * YoguKonyuhiShikyuShinseiMishinsaSearchHandler
@@ -72,6 +71,11 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         setグリッド(resultList);
+        if (resultList.size() > 0) {
+            div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getBtnIkkatsuShinsa().setDisabled(false);
+        } else {
+            div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getBtnIkkatsuShinsa().setDisabled(true);
+        }
         div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setIsOpen(false);
         div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setIsOpen(true);
         return resultList;
@@ -82,7 +86,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
      */
     public void 審査決定処理() {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
-                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getDataSource();
+                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
             if (限度額チェック(row) && !品目チェック(row)) {
                 row.setTxtShinsaNo(ShinsaNaiyoKubun.承認する.getコード());
@@ -91,28 +95,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
                 row.setTxtShinsaNo(ShinsaNaiyoKubun.却下する.getコード());
                 row.getTxtShinsaResult().setValue(却下する);
             }
-        }
-    }
-
-    /**
-     * 決定日入力チェック
-     *
-     * @param 決定日 RDate
-     */
-    public void 決定日入力チェック(RDate 決定日) {
-        if (決定日 == null) {
-            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定日R.toString()));
-        }
-    }
-
-    /**
-     * 選択チェック
-     */
-    public void 選択チェック() {
-        List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
-                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
-        if (selectedMishinsaShikyuShinsei == null || selectedMishinsaShikyuShinsei.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象行を選択.getMessage());
         }
     }
 
@@ -127,6 +109,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
                 .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
+            if (row.getTxtShinsaNo() == null || row.getTxtShinsaNo().isEmpty()) {
+                return;
+            }
             ShokanShinseiEntityResult entity = entityList.get(row.getRowNum().getValue().intValue());
             entity.getEntity().get償還払請求基本Entity().setHiHokenshaNo(new HihokenshaNo(row.getTxtHihoNo().getValue()));
             entity.getEntity().get償還払請求基本Entity().setServiceTeikyoYM(
@@ -145,7 +130,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             entity.getEntity().set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
             updList.add(entity);
         }
-        //FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance().updShikyuShinsei(決定日, updList);
+        FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance().updShikyuShinsei(決定日, updList);
     }
 
     private void setグリッド(List<ShokanShinseiEntityResult> resultList) {
@@ -181,6 +166,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             if (識別コード != null) {
                 row.setShikibetsuCode(識別コード.getColumnValue());
             }
+            row.setSelected(Boolean.TRUE);
             row.getTxtHokenKyufuAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getHokenKyufugaku()));
             row.getTxtRiyoshaFutanAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getRiyoshaFutangaku()));
             row.getTxtHiyoTotal().setValue(entity.getEntity().get償還払支給申請Entity().getShiharaiKingakuTotal());

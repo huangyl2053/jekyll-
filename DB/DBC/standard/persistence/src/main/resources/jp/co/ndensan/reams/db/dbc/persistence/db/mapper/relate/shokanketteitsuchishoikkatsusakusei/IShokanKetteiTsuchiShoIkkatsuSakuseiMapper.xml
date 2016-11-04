@@ -405,8 +405,15 @@
         AND
         DbT3036ShokanHanteiKekka."shiharaiKingaku"<![CDATA[<>]]> '0' ) OR
         DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{hushikyu} )
-        AND
-        DbT3036ShokanHanteiKekka."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        <if test="isRiaruHakko">
+            AND
+            DbT3036ShokanHanteiKekka."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        </if>
+        <if test="isInshoKubun3">
+            AND(
+            DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" = ''
+            OR DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" IS NULL)
+        </if>
         <if test="chusyutuUketsukeFlag">
             AND
             DbT3034ShokanShinsei."uketsukeYMD" <![CDATA[>=]]> #{dataFrom}
@@ -861,7 +868,16 @@
             "DbT3034ShokanShinsei"."uketsukeYMD" <![CDATA[<=]]> #{dataTo}
         </if>
         WHERE
-        "DbT3036ShokanHanteiKekka"."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        1=1
+        <if test="isRiaruHakko">
+            AND
+            "DbT3036ShokanHanteiKekka"."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        </if>
+        <if test="isInshoKubun3">
+            AND(
+            "DbT3036ShokanHanteiKekka"."ketteiTsuchishoSakuseiYMD" = ''
+            OR "DbT3036ShokanHanteiKekka"."ketteiTsuchishoSakuseiYMD" IS NULL)
+        </if>
         <if test="chusyutuUketsukeFlag">
             AND
             "DbT3036ShokanHanteiKekka"."ketteiYMD" <![CDATA[>=]]> #{dataFrom}
@@ -873,13 +889,23 @@
             "DbT3036ShokanHanteiKekka"."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
         </if>
     </select>
-    <select resultOrdered="true" id="get最大年度内連番"
-            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+    <select resultOrdered="true" id="get最大枝番"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.SelectMaxEdabanParameter"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
             fetchSize="1">
         SELECT
-        MAX(CAST(DbT7022ShoriDateKanri."nendoNaiRenban" AS INT))
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
-        rgdb."DbT7022ShoriDateKanri" AS DbT7022ShoriDateKanri
+        rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
+        WHERE
+        "DbT7022ShoriDateKanri"."subGyomuCode"=#{subGyomuCode}
+        AND "DbT7022ShoriDateKanri"."shichosonCode"=#{shichosonCode}
+        AND "DbT7022ShoriDateKanri"."shoriName"=#{shoriName}
+        AND "DbT7022ShoriDateKanri"."nendo"=#{nendo}
+        ORDER BY
+        "DbT7022ShoriDateKanri"."shoriEdaban" DESC
+        ,"DbT7022ShoriDateKanri"."nendoNaiRenban" DESC
+        LIMIT 1
     </select>
     <select resultOrdered="true" id="get帳票データ"
             resultMap="resultMap_chohyoData"

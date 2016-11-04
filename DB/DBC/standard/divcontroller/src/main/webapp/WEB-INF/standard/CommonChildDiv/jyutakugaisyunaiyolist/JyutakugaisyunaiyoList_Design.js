@@ -88,7 +88,7 @@ var DBC;
             };
 
             Controls.prototype.txtJyusyo = function () {
-                return new UZA.TextBoxJusho(this.convFiledName("txtJyusyo"));
+                return new UZA.TextBox(this.convFiledName("txtJyusyo"));
             };
 
             Controls.prototype.txtTyakkoyotebi = function () {

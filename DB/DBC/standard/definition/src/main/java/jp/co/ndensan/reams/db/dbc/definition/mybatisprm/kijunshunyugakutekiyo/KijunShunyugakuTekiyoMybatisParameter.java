@@ -22,6 +22,8 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
 
     private final RString 保険者コード;
     private final boolean is保険者コード;
+    private final RString 保険者名;
+    private final RString 市町村コード;
     private final RString 対象年度;
     private final boolean is対象年度NULL;
     private final boolean is削除含める;
@@ -48,6 +50,8 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
      * コンストラクタです。
      *
      * @param 保険者コード 保険者コード
+     * @param 保険者名 保険者名
+     * @param 市町村コード 市町村コード
      * @param 対象年度 対象年度
      * @param is削除含める is削除含める
      * @param データ種別 データ種別
@@ -62,6 +66,8 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
     private KijunShunyugakuTekiyoMybatisParameter(
             RString 保険者コード,
             boolean is保険者コード,
+            RString 保険者名,
+            RString 市町村コード,
             RString 対象年度,
             boolean is対象年度NULL,
             boolean is削除含める,
@@ -85,6 +91,8 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
             RString 出力順) {
         this.保険者コード = 保険者コード;
         this.is保険者コード = is保険者コード;
+        this.保険者名 = 保険者名;
+        this.市町村コード = 市町村コード;
         this.対象年度 = 対象年度;
         this.is対象年度NULL = is対象年度NULL;
         this.is削除含める = is削除含める;
@@ -112,6 +120,8 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
      * MybatisParameterの作成です。
      *
      * @param 保険者コード 保険者コード
+     * @param 保険者名 保険者名
+     * @param 市町村コード 市町村コード
      * @param 対象年度 対象年度
      * @param is削除含める is削除含める
      * @param データ種別 データ種別
@@ -127,6 +137,8 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
      * @return KijunShunyugakuTekiyoMybatisParameter
      */
     public static KijunShunyugakuTekiyoMybatisParameter createMybatisParameter(RString 保険者コード,
+            RString 保険者名,
+            RString 市町村コード,
             RString 対象年度,
             boolean is削除含める,
             RString データ種別,
@@ -165,6 +177,8 @@ public final class KijunShunyugakuTekiyoMybatisParameter implements IMyBatisPara
         }
         return new KijunShunyugakuTekiyoMybatisParameter(保険者コード,
                 is保険者コード,
+                保険者名,
+                市町村コード,
                 対象年度,
                 is対象年度,
                 is削除含める,

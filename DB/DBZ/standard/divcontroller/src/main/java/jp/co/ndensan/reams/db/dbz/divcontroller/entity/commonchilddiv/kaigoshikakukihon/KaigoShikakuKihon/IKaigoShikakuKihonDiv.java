@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
@@ -61,4 +62,25 @@ public interface IKaigoShikakuKihonDiv extends ICommonChildDivBaseProperties {
      * @return 資格喪失年月日
      */
     FlexibleDate get資格喪失年月日();
+
+    /**
+     * 要介護状態区分名称を取得
+     *
+     * @return 要介護状態区分名称
+     */
+    RString get要介護状態区分名称();
+
+    /**
+     * 認定開始年月日を取得
+     *
+     * @return 認定開始年月日
+     */
+    RDate get認定開始年月日();
+
+    /**
+     * 認定終了年月日を取得
+     *
+     * @return　認定終了年月日
+     */
+    RDate get認定終了年月日();
 }

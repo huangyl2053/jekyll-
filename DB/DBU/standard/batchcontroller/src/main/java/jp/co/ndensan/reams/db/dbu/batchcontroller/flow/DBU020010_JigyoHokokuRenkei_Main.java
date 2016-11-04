@@ -18,24 +18,18 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenk
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiHokenYousikiIchi_NiProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiHokenYousikiIchi_SanProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiHokenYousikiIchi_YonProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiMainProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiShokanYousikiNi_GoToRokuProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiShokanYousikiNi_SitiProcess;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU020010.DBU020010_JigyoHokokuRenkei_MainParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 様式別連携情報作成のバッチフ処理クラスです。
@@ -45,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class DBU020010_JigyoHokokuRenkei_Main extends BatchFlowBase<DBU020010_JigyoHokokuRenkei_MainParameter> {
 
+    private static final String JIGYOHOKOKURENKEIMAINPROCESS = "JigyoHokokuRenkeiMainProcess";
     private static final String YOUSIKIICHIPROCESS = "yousikiIchiProcess";
     private static final String YOUSIKIICHI_NIPROCESS = "yousikiIchi_NiProcess";
     private static final String YOUSIKIICHI_SANPROCESS = "yousikiIchi_SanProcess";
@@ -61,15 +56,12 @@ public class DBU020010_JigyoHokokuRenkei_Main extends BatchFlowBase<DBU020010_Ji
     private static final String SHOKANYOUSIKINI_GOPROCESS = "shokanYousikiNi_GoProcess";
     private static final String SHOKANYOUSIKINI_ICHIPROCESS = "shokanYousikiNi_IchiProcess";
     private static final String SHOKANYOUSIKINI_SITIPROCESS = "shokanYousikiNi_SitiProcess";
-    private FileSpoolManager manager;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU020011"));
 
     @Override
     protected void defineFlow() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-                
+        RString spoolWorkPath = Directory.createTmpDirectory();
         getParameter().setSpoolWorkPath(spoolWorkPath);
+        executeStep(JIGYOHOKOKURENKEIMAINPROCESS);
         if (getParameter().is出力_一般状況1_10()) {
             executeStep(YOUSIKIICHIPROCESS);
             executeStep(YOUSIKIICHI_NIPROCESS);
@@ -107,10 +99,19 @@ public class DBU020010_JigyoHokokuRenkei_Main extends BatchFlowBase<DBU020010_Ji
         RString csvFileName = new RString("jigyoJokyoHokoku_"
                 + getParameter().get過去集計年月()
                 + "_"
-                + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) + ".zip");
+                + getResult(RString.class, new RString(JIGYOHOKOKURENKEIMAINPROCESS), JigyoHokokuRenkeiMainProcess.保険者番号) + ".zip");
         RString zipPath = Path.combinePath(spoolWorkPath, csvFileName);
         ZipUtil.createFromFolder(zipPath, spoolWorkPath);
-        manager.spool(zipPath);
+    }
+
+    /**
+     * 様式別連携情報作成のバッチ処理です。
+     *
+     * @return CSVファイル
+     */
+    @Step(JIGYOHOKOKURENKEIMAINPROCESS)
+    protected IBatchFlowCommand createJigyoHokokuRenkeiMainProcess() {
+        return loopBatch(JigyoHokokuRenkeiMainProcess.class).arguments(getParameter().toJigyoHokokuRenkeiProcessParameter()).define();
     }
 
     /**

@@ -10,7 +10,29 @@
         <include refid="selectHanyouRisutoSyuturyokuEntity" />
     </select>
     <sql id="selectHanyouRisutoSyuturyokuEntity">
-        WITH master AS(
+        WITH JukyushaDaicho as (																									
+	SELECT																								
+	    DbT4001."hihokenshaNo",																								
+	    DbT4001."rirekiNo",																								
+	    DbT4001."edaban",																								
+	    DbT4001."jukyuShinseiJiyu",																								
+	    DbT4001."jukyuShinseiYMD",																								
+	    DbT4001."yokaigoJotaiKubunCode",																								
+	    DbT4001."ninteiYukoKikanKaishiYMD",																								
+	    DbT4001."ninteiYukoKikanShuryoYMD",																								
+	    DbT4001."ninteiYMD",																								
+	    DbT4001."kyuSochishaFlag",																								
+	    DbT4001."minashiCode",																								
+	    DbT4001."chokkinIdoJiyuCode"																								
+	FROM																								
+	    rgdb."DbT4001JukyushaDaicho" AS DbT4001																								
+	WHERE																								
+	    DbT4001."logicalDeletedFlag" = false AND																								
+	    (																								
+	        DbT4001."yukoMukoKubun" = '1' OR 																								
+	        (DbT4001."yukoMukoKubun" = '0' AND DbT4001."kyuSochishaFlag" = true AND DbT4001."yokaigoJotaiKubunCode" = '01')																								
+	    )																								
+        ), master AS(
         SELECT ROW_NUMBER() over(order by A."区分" , A."被保険者番号key" , A."サービス提供年月key" , A."履歴番号key")as row ,* FROM
         ( 
         SELECT
@@ -116,22 +138,13 @@
         koza.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         From
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.noDeleted_DbT3055KogakuKyufuTaishoshaGokei" />
-        <!-- 被保険者毎の最新を取得する。-->
-        AND NOT EXISTS (
-        SELECT 1
-        FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS a
-        WHERE "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"  = a."hihokenshaNo"
-        AND "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = a."serviceTeikyoYM"
-        AND "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"))
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.noDeleted_DbT3055KogakuKyufuTaishoshaGokei" />)
         As  DbT3055
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.noDeleted_DbT3056KogakuShikyuShinsei" />) As DbT3056
         ON DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
-        AND DbT3056."dbT3056KogakuShikyuShinsei_rirekiNo" = (select MAX("rirekiNo") from
-        rgdb."DbT3056KogakuShikyuShinsei" where  "hihokenshaNo"=DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
-        AND "serviceTeikyoYM"=DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM")
+        AND DbT3056."dbT3056KogakuShikyuShinsei_rirekiNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_rirekiNo"
         <choose>
             <when test="(hokemonoKeteihiFrom != null and !hokemonoKeteihiFrom.isEmpty()) or (hokemonoKeteihiTo != null and !hokemonoKeteihiTo.isEmpty())">
                 INNER JOIN
@@ -140,7 +153,16 @@
                 LEFT OUTER JOIN
             </otherwise>
         </choose>
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.noDeleted_DbT3057KogakuShikyuHanteiKekka" />) As DbT3057
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.noDeleted_DbT3057KogakuShikyuHanteiKekka" />
+        AND NOT EXISTS (																		
+           SELECT 1																		
+           FROM rgdb."DbT3057KogakuShikyuHanteiKekka" b																		
+           WHERE																		
+             "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo" = b."hihokenshaNo" and																		
+             "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM" = b."serviceTeikyoYM" and																		
+             "DbT3057KogakuShikyuHanteiKekka"."rirekiNo" = b."rirekiNo" and																		
+             "DbT3057KogakuShikyuHanteiKekka"."rirekiEdaNo" <![CDATA[<]]> b."rirekiEdaNo"																		
+        )) AS DbT3057																		
         ON DbT3057."dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" = DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo"
         AND DbT3057."dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" = DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
         AND DbT3057."dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" = DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo"
@@ -149,11 +171,7 @@
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.noDeleted_DbT3058KogakuShikyuShinsaKettei" />) As DbT3058
         ON DbT3058."dbT3058KogakuShikyuShinsaKettei_hihokenshaNo" = DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo"
         AND DbT3058."dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM" = DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
-        AND DbT3058."dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo" = DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo"
-        AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" =(select MAX("ketteishaUketoriYM") from
-        rgdb."DbT3058KogakuShikyuShinsaKettei" where  "hihokenshaNo"=DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo"
-        AND "serviceTeikyoYM"=DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
-        AND "shoKisaiHokenshaNo"=DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo")
+        AND DbT3058."dbT3058KogakuShikyuShinsaKettei_rirekiNo" = DbT3056."dbT3056KogakuShikyuShinsei_rirekiNo"
         LEFT OUTER JOIN
         (SELECT
         "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"             AS "dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo"
@@ -174,17 +192,38 @@
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" As DbV1001
         ON DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN (
-        SELECT *
-        FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho"
-        <!-- 被保険者毎の最新を取得する。-->
-        WHERE NOT EXISTS (
-        SELECT 1
-        FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS a
-        WHERE "DbV1004HihokenshaShisetsuNyutaisho"."shikibetsuCode" = a."shikibetsuCode"
-        AND "DbV1004HihokenshaShisetsuNyutaisho"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"
-        ))
-        As DbV1004
-        ON DbV1001."shikibetsuCode" = DbV1004."shikibetsuCode"
+          SELECT																		
+            t."serviceTeikyoYM",																		
+            t."hihokenshaNo",																		
+            t."rirekiNo",																		
+            b."nyushoShisetsuCode",  																		
+            b."nyushoYMD",																		
+            b."taishoYMD",																		
+            b."nyushoShisetsuShurui"																		
+          FROM																		
+            rgdb."DbV1004HihokenshaShisetsuNyutaisho" b																		
+          INNER JOIN																		
+            rgdb."DbV1001HihokenshaDaicho" h on																		
+            b."shikibetsuCode" = h."shikibetsuCode"																		
+          INNER JOIN																		
+            rgdb."DbT3055KogakuKyufuTaishoshaGokei" t on																		
+            t."hihokenshaNo" = h."hihokenshaNo"																		
+          WHERE																		
+            b."rirekiNo" = ( SELECT "rirekiNo" 																		
+              FROM																		
+                rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS a																		
+              WHERE																		
+                a."nyushoYMD" <![CDATA[<=]]> (t."serviceTeikyoYM" || '31') 																		
+                AND (a."taishoYMD" IS NULL OR a."taishoYMD" = '' OR																		
+                     a."taishoYMD" <![CDATA[>=]]> (t."serviceTeikyoYM" || '01')) 																		
+                AND b."shikibetsuCode" = a."shikibetsuCode"																		
+              ORDER BY "rirekiNo" DESC LIMIT 1																		
+              )																		
+        )																		
+        As DbV1004 ON
+          DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" = DbV1004."hihokenshaNo" AND																			
+          DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM" = DbV1004."serviceTeikyoYM" AND																			
+          DbT3055."dbT3055KogakuKyufuTaishoshaGokei_rirekiNo" = DbV1004."rirekiNo"																			
         LEFT OUTER JOIN rgdb."DbV1005KaigoJogaiTokureiTaishoShisetsu" As DbV1005
         ON DbV1004."nyushoShisetsuShurui" = DbV1005."jigyoshaShubetsu"
         AND DbV1004."nyushoShisetsuCode" = DbV1005."jigyoshaNo"
@@ -197,35 +236,40 @@
         AND DbT7062."yukoKaishiYMD"=(select MAX("yukoKaishiYMD") from
         rgdb."DbT7062KaigoJigyoshaDaihyosha" where  "jigyoshaNo"=DbV1004."nyushoShisetsuCode")
         LEFT OUTER JOIN (
-        SELECT
-        *
-        FROM (
-        SELECT
-        DbT3055_all."hihokenshaNo" as 被保険者番号,
-        DbT3055_all."serviceTeikyoYM" as サービス提供年月,
-        DbT3055_all."rirekiNo" as 履歴番号,
-        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
-        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
-        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
-        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,	
-        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,	
-        DbT4001."ninteiYMD" as 受給認定日,
-        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
-        DbT4001."minashiCode" as みなし要介護区分コード,
-        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード
-        <!--ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号-->
-        FROM
-        rgdb."DbT3055KogakuKyufuTaishoshaGokei" As DbT3055_all
-        INNER JOIN
-        rgdb."DbT4001JukyushaDaicho" As DbT4001
-        ON	DbT4001."hihokenshaNo" = DbT3055_all."hihokenshaNo"
-        AND	DbT4001."logicalDeletedFlag" = false
-        AND	DbT4001."yukoMukoKubun" = '1'
-        AND	DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3055_all."serviceTeikyoYM" || '31')
-        AND	(DbT3055_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
-        ) AS DbT4001_corresponding
-        <!--                WHERE
-        DbT4001_corresponding.番号 = 1-->
+          SELECT																							
+            DbT3055_all."hihokenshaNo" AS 被保険者番号,																								
+            DbT3055_all."serviceTeikyoYM" AS サービス提供年月,																								
+            DbT3055_all."rirekiNo" AS 履歴番号,																								
+            DbT4001."jukyuShinseiJiyu" AS 受給申請事由,																								
+            DbT4001."jukyuShinseiYMD" AS 受給申請年月日,																								
+            DbT4001."yokaigoJotaiKubunCode" AS 要介護認定状態区分コード,																								
+            DbT4001."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始日,																								
+            DbT4001."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了日,																								
+            DbT4001."ninteiYMD" AS 受給認定日,																								
+            DbT4001."kyuSochishaFlag" AS 旧措置フラグ,																								
+            DbT4001."minashiCode" AS みなし要介護区分コード,																								
+            DbT4001."chokkinIdoJiyuCode" AS 直近異動事由コード																								
+	  FROM																							
+	    rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS DbT3055_all																							
+	  INNER JOIN																							
+	  JukyushaDaicho AS DbT4001 ON																							
+	  DbT4001."hihokenshaNo" = DbT3055_all."hihokenshaNo" AND																							
+	  DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3055_all."serviceTeikyoYM" || '31') AND																							
+	  (DbT3055_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD" AND																							
+	  (DbT4001."rirekiNo",DbT4001."edaban") IN (																							
+                    SELECT																				
+	                "rirekiNo",																			
+		        "edaban"																			
+		    FROM																				
+		        JukyushaDaicho jukyu																			
+		    WHERE																				
+			jukyu."hihokenshaNo" = DbT3055_all."hihokenshaNo" AND																			
+			jukyu."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3055_all."serviceTeikyoYM" || '31') AND																			
+			(DbT3055_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> jukyu."ninteiYukoKikanShuryoYMD"																			
+                    ORDER BY																				
+		        "rirekiNo" DESC,																			
+			"edaban" DESC LIMIT 1																			
+			)																				
         ) As DbT4001
         ON	DbT4001."被保険者番号" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND	DbT4001."サービス提供年月" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"

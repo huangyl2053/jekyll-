@@ -95,7 +95,7 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
         if (getParameter().get旧市町村情報() != null) {
             parameter.set旧市町村情報(getParameter().get旧市町村情報().get市町村コード());
         }
-        parameter.set完納出力区分(getParameter().get完納出力区分());
+        parameter.set出力区分(getParameter().get完納出力区分());
         return parameter;
     }
 

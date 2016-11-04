@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -353,14 +354,12 @@ public class TokuchoKariSanteiFukaManagerBatch {
             fukaKonkyo.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
         }
         fukaKonkyo.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
-        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
         if (前年度世帯課税区分 != null && !前年度世帯課税区分.isEmpty()) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度世帯課税区分));
+            fukaKonkyo.setZennendoSetaiKazeiKubun(SetaiKazeiKubun.toValue(前年度世帯課税区分));
         }
         if (前年度課税区分 != null && !前年度課税区分.isEmpty()) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度課税区分));
+            fukaKonkyo.setZennendoKazeiKubun(KazeiKubun.toValue(前年度課税区分));
         }
-        fukaKonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukaKonkyo.setGokeiShotoku(前年度合計所得金額);
         fukaKonkyo.setKotekiNenkinShunyu(前年度公的年金収入額);
         hokenryoDankaiHanteiParameter.setFukaKonkyo(fukaKonkyo);
@@ -510,7 +509,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
         FlexibleDate 最新老齢受給開始年月日 = null;
         RoreiFukushiNenkinJukyusha 最新老齢の情報 = null;
         for (RoreiFukushiNenkinJukyusha 老齢の情報 : 老齢の情報List) {
-            if (老齢の情報.get受給開始年月日() == null || 老齢の情報.get受給終了年月日() == null) {
+            if (老齢の情報.get受給開始年月日() == null || 老齢の情報.get受給開始年月日().isEmpty()
+                    || 老齢の情報.get受給終了年月日() == null || 老齢の情報.get受給終了年月日().isEmpty()) {
                 continue;
             }
             if (!調定年度廃止日.isBeforeOrEquals(老齢の情報.get受給開始年月日()) && 調定年度開始日.isBefore(老齢の情報.get受給終了年月日())) {
@@ -550,7 +550,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
         FlexibleDate 最新受給開始日 = null;
         SeikatsuHogoJukyusha 最新生保の情報 = null;
         for (SeikatsuHogoJukyusha 生保の情報 : 生保の情報List) {
-            if (生保の情報.get受給開始日() == null || 生保の情報.get受給廃止日() == null) {
+            if (生保の情報.get受給開始日() == null || 生保の情報.get受給開始日().isEmpty()
+                    || 生保の情報.get受給廃止日() == null || 生保の情報.get受給廃止日().isEmpty()) {
                 continue;
             }
             if (!調定年度廃止日.isBeforeOrEquals(生保の情報.get受給開始日()) && 調定年度開始日.isBefore(生保の情報.get受給廃止日())) {
@@ -839,14 +840,12 @@ public class TokuchoKariSanteiFukaManagerBatch {
             fukaKonkyo.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
         }
         fukaKonkyo.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
-        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
         if (前年度世帯課税区分 != null && !前年度世帯課税区分.isEmpty()) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度世帯課税区分));
+            fukaKonkyo.setZennendoSetaiKazeiKubun(SetaiKazeiKubun.toValue(前年度世帯課税区分));
         }
         if (前年度課税区分 != null && !前年度課税区分.isEmpty()) {
-            setaiinKazeiKubunList.add(KazeiKubun.toValue(前年度課税区分));
+            fukaKonkyo.setZennendoKazeiKubun(KazeiKubun.toValue(前年度課税区分));
         }
-        fukaKonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukaKonkyo.setGokeiShotoku(前年度合計所得金額);
         fukaKonkyo.setKotekiNenkinShunyu(前年度公的年金収入額);
         hokenryoDankaiHanteiParameter.setFukaKonkyo(fukaKonkyo);
@@ -976,7 +975,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
         FlexibleDate 最新老齢受給開始年月日 = null;
         RoreiFukushiNenkinJukyusha 最新老齢の情報 = null;
         for (RoreiFukushiNenkinJukyusha 老齢の情報 : 老齢の情報List) {
-            if (老齢の情報.get受給開始年月日() == null || 老齢の情報.get受給終了年月日() == null) {
+            if (老齢の情報.get受給開始年月日() == null || 老齢の情報.get受給開始年月日().isEmpty()
+                    || 老齢の情報.get受給終了年月日() == null || 老齢の情報.get受給終了年月日().isEmpty()) {
                 continue;
             }
             if (調定年度開始日.isBeforeOrEquals(老齢の情報.get受給終了年月日()) || 老齢の情報.get受給開始年月日().isBeforeOrEquals(調定年度廃止日)) {
@@ -1003,7 +1003,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
         FlexibleDate 最新受給開始日 = null;
         SeikatsuHogoJukyusha 最新生保の情報 = null;
         for (SeikatsuHogoJukyusha 生保の情報 : 生保の情報List) {
-            if (生保の情報.get受給廃止日() == null || 生保の情報.get受給開始日() == null) {
+            if (生保の情報.get受給廃止日() == null || 生保の情報.get受給廃止日().isEmpty()
+                    || 生保の情報.get受給開始日() == null || 生保の情報.get受給開始日().isEmpty()) {
                 continue;
             }
             if (調定年度開始日.isBeforeOrEquals(生保の情報.get受給廃止日()) || 生保の情報.get受給開始日().isBeforeOrEquals(調定年度廃止日)) {

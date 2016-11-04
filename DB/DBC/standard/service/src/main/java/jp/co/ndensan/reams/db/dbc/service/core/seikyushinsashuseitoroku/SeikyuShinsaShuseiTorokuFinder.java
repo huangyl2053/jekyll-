@@ -69,17 +69,20 @@ public class SeikyuShinsaShuseiTorokuFinder {
             return SearchResult.of(Collections.<SeikyuShinsaShuseiTorokuBusiness>emptyList(), 0, false);
         }
         List<SeikyuShinsaShuseiTorokuBusiness> resultList = new ArrayList<>();
-
         for (SeikyuShinsaShuseiTorokuRelateEntity entity : entityList) {
             SeikyuShinsaShuseiTorokuBusiness bussiness = new SeikyuShinsaShuseiTorokuBusiness();
-            entity.getDbT3094().initializeMd5();
-            entity.getDbT3095().initializeMd5();
+            if (entity.getDbT3094() != null) {
+                entity.getDbT3094().initializeMd5();
+                JutakuKaishuRiyushoTesuryoKettei dbT3094 = new JutakuKaishuRiyushoTesuryoKettei(entity.getDbT3094());
+                bussiness.setDbT3094(dbT3094);
+            }
+            if (entity.getDbT3095() != null) {
+                entity.getDbT3095().initializeMd5();
+                JutakuKaishuRiyushoTesuryoMeisai dbT3095 = new JutakuKaishuRiyushoTesuryoMeisai(entity.getDbT3095());
+                bussiness.setDbT3095(dbT3095);
+            }
             entity.getDbT3096().initializeMd5();
-            JutakuKaishuRiyushoTesuryoKettei dbT3094 = new JutakuKaishuRiyushoTesuryoKettei(entity.getDbT3094());
-            JutakuKaishuRiyushoTesuryoMeisai dbT3095 = new JutakuKaishuRiyushoTesuryoMeisai(entity.getDbT3095());
             JutakuKaishuRiyushoTesuryoShukei dbT3096 = new JutakuKaishuRiyushoTesuryoShukei(entity.getDbT3096());
-            bussiness.setDbT3094(dbT3094);
-            bussiness.setDbT3095(dbT3095);
             bussiness.setDbT3096(dbT3096);
             resultList.add(bussiness);
         }

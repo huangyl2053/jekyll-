@@ -41,6 +41,7 @@ public class ShinseiSearch {
      * @return ResponseData
      */
     public ResponseData<ShinseiSearchDiv> onLoad(ShinseiSearchDiv div) {
+        ViewStateHolder.put(ViewStateKeys.モード, 照会);
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().initialize(識別コード);
@@ -73,7 +74,7 @@ public class ShinseiSearch {
             ViewStateHolder.put(ViewStateKeys.状態, 参照);
             PnlTotalParameter parameter = new PnlTotalParameter(被保険者番号, サービス年月, 整理番号,
                     事業者番号, yoshikiNo, 明細番号);
-            ViewStateHolder.put(ViewStateKeys.検索キー, parameter);
+            ViewStateHolder.put(ViewStateKeys.契約番号検索キー, parameter);
             return ResponseData.of(div).forwardWithEventName(福祉用具購入費支給).parameter(判定_21C);
         } else if (yoshikiNo.startsWith(判定_21D)) {
             ViewStateHolder.put(ViewStateKeys.表示モード, 照会_モード);

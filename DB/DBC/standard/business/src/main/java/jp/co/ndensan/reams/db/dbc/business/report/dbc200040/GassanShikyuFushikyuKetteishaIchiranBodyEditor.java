@@ -88,6 +88,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
 
         source.listCerter_1 = new RString(entity.get帳票通番());
         source.listCerter_2 = getColumnValue(entity.get被保険者番号());
+        source.shikibetuCode = entity.get識別コード();
         if (区分_1.equals(entity.get支給区分コード())) {
             source.listCerter_3 = 支給;
         } else if (区分_2.equals(entity.get支給区分コード())) {

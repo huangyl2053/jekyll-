@@ -52,13 +52,12 @@
 	B."fukaNendo"                                                       AS 賦課年度,
 	B."hihokenshaNo"                                                    AS 被保険者番号,
 	B."hokenryoDankai"                                                  AS 保険料段階,
-	B."hokenryoDankaiKarisanntei"                                       AS 保険料段階仮算定時,
 	<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
 
         FROM
                 rgdb."DbV2502KaigoShotoku" AS DbV2502
-                INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS DbV1001
+                LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS DbV1001
                 ON DbV1001."shikibetsuCode" = DbV2502."shikibetsuCode"
                 INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
                 ON "ShikibetsuTaisho"."shikibetsuCode"=DbV2502."shikibetsuCode"
@@ -80,12 +79,11 @@
                 </if>
                 INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
                 ON "Atesaki"."shikibetsuCode"=DbV2502."shikibetsuCode"
-                INNER JOIN (
+                LEFT JOIN (
                         SELECT
                                 DbT2002."fukaNendo",
                                 DbT2002."hihokenshaNo",
-                                DbT2002."hokenryoDankai",
-                                DbT2002."hokenryoDankaiKarisanntei"
+                                DbT2002."hokenryoDankai"
                         FROM
                                 rgdb."DbT2002Fuka" AS DbT2002
                         INNER JOIN (
@@ -118,6 +116,15 @@
                         )
                     )
                 </if>
+                AND ( DbV2502."shotokuNendo" || DbV2502."shikibetsuCode" || DbV2502."rirekiNo") IN
+                (
+                    SELECT  D."shotokuNendo" || D."shikibetsuCode" || D."maxrirekiNo"
+                    FROM(
+                        SELECT MAX(C."rirekiNo") AS "maxrirekiNo",C."shotokuNendo",C."shikibetsuCode"
+                        FROM rgdb."DbV2502KaigoShotoku" AS C
+                        GROUP BY C."shotokuNendo",C."shikibetsuCode"
+                        )AS D
+                )
                 AND DbV2502."shotokuNendo" = #{賦課年度}
                 <if test="課税区分減免前s != null and !課税区分減免前s.isEmpty()">
                 AND DbV2502."kazeiKubun" IN 
@@ -186,7 +193,6 @@
         <result property="賦課年度" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="保険料段階" column="保険料段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="保険料段階仮算定時" column="保険料段階仮算定時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="宛名Entity"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先Entity"

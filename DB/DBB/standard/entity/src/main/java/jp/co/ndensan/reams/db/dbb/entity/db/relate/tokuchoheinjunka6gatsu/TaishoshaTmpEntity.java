@@ -196,4 +196,6 @@ public class TaishoshaTmpEntity extends DbTableEntityBase<TaishoshaTmpEntity> im
     private Decimal fuchoChoteigaku13;
     @TempTableColumnOrder(80)
     private Decimal fuchoChoteigaku14;
+    @TempTableColumnOrder(81)
+    private int ki;
 }

@@ -30,6 +30,8 @@ public class DBC710040_HanyoListKokuhorenJukyushaParameter extends BatchParamete
     private static final String RENBANFUKA = "renbanFuka";
     private static final String HITSUKEHENSHU = "hitsukeHenshu";
     private static final String HOKENSHAKODO = "hokenshaKodo";
+    private static final String HOKENSHANAME = "hokenshaName";
+    private static final String SHICHOSONCODE = "shichosonCode";
     private static final String HITSUKECHUSHUTSUKUBUN = "hitsukeChushutsuKubun";
     private static final String SHORITAISHONENGETSUFROM = "shoriTaishoNengetsuFrom";
     private static final String SHORITAISHONENGETSUTO = "shoriTaishoNengetsuTo";
@@ -58,6 +60,10 @@ public class DBC710040_HanyoListKokuhorenJukyushaParameter extends BatchParamete
     private boolean hitsukeHenshu;
     @BatchParameter(key = HOKENSHAKODO, name = "保険者コード")
     private RString hokenshaKodo;
+    @BatchParameter(key = HOKENSHANAME, name = "保険者名")
+    private RString hokenshaName;
+    @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
+    private RString shichosonCode;
     @BatchParameter(key = HITSUKECHUSHUTSUKUBUN, name = "日付抽出区分")
     private RString hitsukeChushutsuKubun;
     @BatchParameter(key = SHORITAISHONENGETSUFROM, name = "処理対象年月From")
@@ -98,6 +104,8 @@ public class DBC710040_HanyoListKokuhorenJukyushaParameter extends BatchParamete
                 renbanFuka,
                 hitsukeHenshu,
                 hokenshaKodo,
+                hokenshaName,
+                shichosonCode,
                 hitsukeChushutsuKubun,
                 shoriTaishoNengetsuFrom,
                 shoriTaishoNengetsuTo,

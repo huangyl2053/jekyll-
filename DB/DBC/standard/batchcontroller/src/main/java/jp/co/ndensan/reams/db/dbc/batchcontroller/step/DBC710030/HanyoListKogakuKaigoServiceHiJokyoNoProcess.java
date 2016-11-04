@@ -232,7 +232,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, eucEntityId, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, eucEntityId, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
         eucNoCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, eucEntityId).
@@ -261,7 +261,8 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
                 .concat(entity.get履歴番号key().toString());
         if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
             preBreakKey = nowBreakKey;
-            if (entity.get口座情報() != null && entity.get口座情報() != null) {
+            if (entity.get口座情報() != null && entity.get口座情報().getUaT0310KozaEntity() != null
+                    && entity.get口座情報().getUaT0310KozaEntity().getKozaId() != 0L) {
                 lstKinyuKikanEntity.addAll(entity.get口座情報().getKinyuKikanEntity());
             }
             preEntity = entity;
@@ -284,7 +285,8 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
             lstKinyuKikanEntity.clear();
-            if (entity.get口座情報() != null && entity.get口座情報() != null) {
+            if (entity.get口座情報() != null && entity.get口座情報().getUaT0310KozaEntity() != null
+                    && entity.get口座情報().getUaT0310KozaEntity().getKozaId() != 0L) {
                 lstKinyuKikanEntity.addAll(entity.get口座情報().getKinyuKikanEntity());
             }
         }

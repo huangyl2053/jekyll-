@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu;
 
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -44,5 +45,5 @@ public class DankaibetsuShunoritsuIchiran {
     private RString 収納率;
     private LasdecCode 市町村コード;
     private RString 市町村名;
-    private RString 科目コード;
+    private KamokuCode 科目コード;
 }

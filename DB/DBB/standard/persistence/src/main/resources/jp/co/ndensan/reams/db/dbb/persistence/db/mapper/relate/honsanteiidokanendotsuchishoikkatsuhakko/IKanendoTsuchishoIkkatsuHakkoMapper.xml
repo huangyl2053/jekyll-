@@ -1044,7 +1044,7 @@
         FROM 
           "DbT2015KeisangoJoho" AS 計算後情報
           INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
@@ -2263,7 +2263,7 @@
         FROM 
           "DbT2015KeisangoJoho" AS 計算後情報
         INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
@@ -3348,7 +3348,7 @@
          "UeT0511_dtTeishiYM" = B."dtTeishiYM",
          "UeT0511_dtYobi4Juminzei" = B."dtYobi4Juminzei",
          "UeT0511_dtKojinNo" = B."dtKojinNo"
-        FROM rgue."UeT0511NenkinTokuchoKaifuJoho" AS B
+        FROM rgdb."UeT0511NenkinTokuchoKaifuJoho" AS B
         WHERE A."honNenkinNo" = B."kisoNenkinNo"
              AND A."honNenkinCode" = B."nenkinCode"
              AND A."honHosokuM" = B."hosokuTsuki"

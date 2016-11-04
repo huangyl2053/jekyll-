@@ -353,7 +353,7 @@
     <!-- 住基（宛名）異動の取得に本人以外の異動情報の判断 -->
     <select resultOrdered="true" id="get住基異動_本人以外の異動情報" resultMap="resultMap_IdoEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
-            B."hihokenshaNo"
+           DISTINCT B."hihokenshaNo"
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS B
         INNER JOIN
@@ -457,7 +457,7 @@
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
-            rgdb."DbV2502KaigoShotoku" AS B
+                "TmpShotoku" AS B
         ON  
             A."shikibetsuCode" = B."shikibetsuCode"
     </select>
@@ -529,12 +529,6 @@
             DISTINCT A."hihokenshaNo"
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
-        INNER JOIN 
-            rgdb."DbV1001HihokenshaDaicho" AS DbV1001
-        ON 
-            A."hihokenshaNo" = DbV1001."hihokenshaNo"
-        AND A."idoYMD" = DbV1001."idoYMD"
-        AND A."edaNo" = DbV1001."edaNo"
         WHERE
             A."hihokennshaKubunCode" = '1'
         AND A."logicalDeletedFlag" = FALSE
@@ -562,8 +556,8 @@
         WHERE
             #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND #{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
-        AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
+        OR (#{抽出開始日時} <![CDATA[<=]]> C."lastUpdateTimestamp"
+        AND C."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時})
     </select>
     
     <!-- 老齢の異動の取得 -->
@@ -578,8 +572,8 @@
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
         WHERE
-            #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
+            #{抽出開始日時} <![CDATA[<=]]> B."lastUpdateTimestamp"
+        AND B."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 境界層の異動の取得 -->
@@ -589,7 +583,7 @@
            DISTINCT A."hihokenshaNo"
         FROM
             rgdb."DbT1006KyokaisoGaitosha" AS A
-        LEFT JOIN
+        INNER JOIN
             rgdb."DbT1007KyokaisoHokenryoDankai" AS B
         ON
             A."hihokenshaNo" = B."hihokenshaNo"
@@ -681,7 +675,9 @@
     <!-- 口座異動情報の取得 -->
     <select resultOrdered="true" id="get賦課情報一時" resultMap="resultMap_FukaJouhouEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter" fetchSize="500">
-        SELECT
+        SELECT * 
+        FROM
+       ( SELECT
             A."choteiNendo",
             A."fukaNendo",
             A."tsuchishoNo",
@@ -689,23 +685,23 @@
             A."hihokenshaNo",
             A."shikibetsuCode",
             A."kozaKubun",
-            調定共通１期."choteigaku" AS fuchoKibetsuGaku1,
-            調定共通２期."choteigaku" AS fuchoKibetsuGaku2,
-            調定共通３期."choteigaku" AS fuchoKibetsuGaku3,
-            調定共通４期."choteigaku" AS fuchoKibetsuGaku4,
-            調定共通５期."choteigaku" AS fuchoKibetsuGaku5,
-            調定共通６期."choteigaku" AS fuchoKibetsuGaku6,
-            調定共通７期."choteigaku" AS fuchoKibetsuGaku7,
-            調定共通８期."choteigaku" AS fuchoKibetsuGaku8,
-            調定共通９期."choteigaku" AS fuchoKibetsuGaku9,
-            調定共通１０期."choteigaku" AS fuchoKibetsuGaku10,
-            調定共通１１期."choteigaku" AS fuchoKibetsuGaku11,
-            調定共通１２期."choteigaku" AS fuchoKibetsuGaku12,
-            調定共通１３期."choteigaku" AS fuchoKibetsuGaku13,
-            調定共通１４期."choteigaku" AS fuchoKibetsuGaku14
+            調定共通１期."choteigaku" AS "fuchoKibetsuGaku1",
+            調定共通２期."choteigaku" AS "fuchoKibetsuGaku2",
+            調定共通３期."choteigaku" AS "fuchoKibetsuGaku3",
+            調定共通４期."choteigaku" AS "fuchoKibetsuGaku4",
+            調定共通５期."choteigaku" AS "fuchoKibetsuGaku5",
+            調定共通６期."choteigaku" AS "fuchoKibetsuGaku6",
+            調定共通７期."choteigaku" AS "fuchoKibetsuGaku7",
+            調定共通８期."choteigaku" AS "fuchoKibetsuGaku8",
+            調定共通９期."choteigaku" AS "fuchoKibetsuGaku9",
+            調定共通１０期."choteigaku" AS "fuchoKibetsuGaku10",
+            調定共通１１期."choteigaku" AS "fuchoKibetsuGaku11",
+            調定共通１２期."choteigaku" AS "fuchoKibetsuGaku12",
+            調定共通１３期."choteigaku" AS "fuchoKibetsuGaku13",
+            調定共通１４期."choteigaku" AS "fuchoKibetsuGaku14"
         FROM
             rgdb."DbV2002Fuka" AS A
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１期
             ON
                 A."choteiNendo" = 介護期別１期."choteiNendo"
             AND A."fukaNendo" = 介護期別１期."fukaNendo"
@@ -713,10 +709,10 @@
             AND A."rirekiNo" = 介護期別１期."rirekiNo"
             AND 介護期別１期."choshuHouhou" = '2'
             AND 介護期別１期."ki" = 1
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１期
             ON
                 介護期別１期."choteiId" = 調定共通１期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別２期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別２期
             ON
                 A."choteiNendo" = 介護期別２期."choteiNendo"
             AND A."fukaNendo" = 介護期別２期."fukaNendo"
@@ -724,10 +720,10 @@
             AND A."rirekiNo" = 介護期別２期."rirekiNo"
             AND 介護期別２期."choshuHouhou" = '2'
             AND 介護期別２期."ki" = 2
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通２期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通２期
             ON
                 介護期別２期."choteiId" = 調定共通２期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別３期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別３期
             ON
                 A."choteiNendo" = 介護期別３期."choteiNendo"
             AND A."fukaNendo" = 介護期別３期."fukaNendo"
@@ -735,10 +731,10 @@
             AND A."rirekiNo" = 介護期別３期."rirekiNo"
             AND 介護期別３期."choshuHouhou" = '2'
             AND 介護期別３期."ki" = 3
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通３期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通３期
             ON
                 介護期別３期."choteiId" = 調定共通３期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別４期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別４期
             ON
                 A."choteiNendo" = 介護期別４期."choteiNendo"
             AND A."fukaNendo" = 介護期別４期."fukaNendo"
@@ -746,10 +742,10 @@
             AND A."rirekiNo" = 介護期別４期."rirekiNo"
             AND 介護期別４期."choshuHouhou" = '2'
             AND 介護期別４期."ki" = 4
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通４期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通４期
             ON
                 介護期別４期."choteiId" = 調定共通４期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別５期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別５期
             ON
                 A."choteiNendo" = 介護期別５期."choteiNendo"
             AND A."fukaNendo" = 介護期別５期."fukaNendo"
@@ -757,10 +753,10 @@
             AND A."rirekiNo" = 介護期別５期."rirekiNo"
             AND 介護期別５期."choshuHouhou" = '2'
             AND 介護期別５期."ki" = 5
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通５期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通５期
             ON
                 介護期別５期."choteiId" = 調定共通５期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別６期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別６期
             ON
                 A."choteiNendo" = 介護期別６期."choteiNendo"
             AND A."fukaNendo" = 介護期別６期."fukaNendo"
@@ -768,10 +764,10 @@
             AND A."rirekiNo" = 介護期別６期."rirekiNo"
             AND 介護期別６期."choshuHouhou" = '2'
             AND 介護期別６期."ki" = 6
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通６期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通６期
             ON
                 介護期別６期."choteiId" = 調定共通６期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別７期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別７期
             ON
                 A."choteiNendo" = 介護期別７期."choteiNendo"
             AND A."fukaNendo" = 介護期別７期."fukaNendo"
@@ -779,10 +775,10 @@
             AND A."rirekiNo" = 介護期別７期."rirekiNo"
             AND 介護期別７期."choshuHouhou" = '2'
             AND 介護期別７期."ki" = 7
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通７期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通７期
             ON
                 介護期別７期."choteiId" = 調定共通７期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別８期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別８期
             ON
                 A."choteiNendo" = 介護期別８期."choteiNendo"
             AND A."fukaNendo" = 介護期別８期."fukaNendo"
@@ -790,10 +786,10 @@
             AND A."rirekiNo" = 介護期別８期."rirekiNo"
             AND 介護期別８期."choshuHouhou" = '2'
             AND 介護期別８期."ki" = 8
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通８期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通８期
             ON
                 介護期別８期."choteiId" = 調定共通８期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別９期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別９期
             ON
                 A."choteiNendo" = 介護期別９期."choteiNendo"
             AND A."fukaNendo" = 介護期別９期."fukaNendo"
@@ -801,10 +797,10 @@
             AND A."rirekiNo" = 介護期別９期."rirekiNo"
             AND 介護期別９期."choshuHouhou" = '2'
             AND 介護期別９期."ki" = 9
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通９期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通９期
             ON
                 介護期別９期."choteiId" = 調定共通９期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１０期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１０期
             ON
                 A."choteiNendo" = 介護期別１０期."choteiNendo"
             AND A."fukaNendo" = 介護期別１０期."fukaNendo"
@@ -812,10 +808,10 @@
             AND A."rirekiNo" = 介護期別１０期."rirekiNo"
             AND 介護期別１０期."choshuHouhou" = '2'
             AND 介護期別１０期."ki" = 10
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１０期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１０期
             ON
                 介護期別１０期."choteiId" = 調定共通１０期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１１期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１１期
             ON
                 A."choteiNendo" = 介護期別１１期."choteiNendo"
             AND A."fukaNendo" = 介護期別１１期."fukaNendo"
@@ -823,10 +819,10 @@
             AND A."rirekiNo" = 介護期別１１期."rirekiNo"
             AND 介護期別１１期."choshuHouhou" = '2'
             AND 介護期別１１期."ki" = 11
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１１期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１１期
             ON
                 介護期別１１期."choteiId" = 調定共通１１期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１２期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１２期
             ON
                 A."choteiNendo" = 介護期別１２期."choteiNendo"
             AND A."fukaNendo" = 介護期別１２期."fukaNendo"
@@ -834,10 +830,10 @@
             AND A."rirekiNo" = 介護期別１２期."rirekiNo"
             AND 介護期別１２期."choshuHouhou" = '2'
             AND 介護期別１２期."ki" = 12
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１２期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１２期
             ON
                 介護期別１２期."choteiId" = 調定共通１２期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１３期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１３期
             ON
                 A."choteiNendo" = 介護期別１３期."choteiNendo"
             AND A."fukaNendo" = 介護期別１３期."fukaNendo"
@@ -845,10 +841,10 @@
             AND A."rirekiNo" = 介護期別１３期."rirekiNo"
             AND 介護期別１３期."choshuHouhou" = '2'
             AND 介護期別１３期."ki" = 13
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１３期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１３期
             ON
                 介護期別１３期."choteiId" = 調定共通１３期."choteiId"
-            INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１４期
+            LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別１４期
             ON
                 A."choteiNendo" = 介護期別１４期."choteiNendo"
             AND A."fukaNendo" = 介護期別１４期."fukaNendo"
@@ -856,12 +852,28 @@
             AND A."rirekiNo" = 介護期別１４期."rirekiNo"
             AND 介護期別１４期."choshuHouhou" = '2'
             AND 介護期別１４期."ki" = 14
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１４期
+            LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通１４期
             ON
                 介護期別１４期."choteiId" = 調定共通１４期."choteiId"
         WHERE
             A."choteiNendo" = #{調定年度}
         AND A."fukaNendo" = #{賦課年度}
+        ) AS A
+        WHERE '0' <![CDATA[<]]> (COALESCE(A."fuchoKibetsuGaku1",0)
+                +COALESCE(A."fuchoKibetsuGaku2", 0) 
+                +COALESCE(A."fuchoKibetsuGaku3", 0) 
+                +COALESCE(A."fuchoKibetsuGaku4", 0) 
+                +COALESCE(A."fuchoKibetsuGaku5", 0) 
+                +COALESCE(A."fuchoKibetsuGaku6", 0) 
+                +COALESCE(A."fuchoKibetsuGaku7", 0) 
+                +COALESCE(A."fuchoKibetsuGaku8", 0) 
+                +COALESCE(A."fuchoKibetsuGaku9", 0) 
+                +COALESCE(A."fuchoKibetsuGaku10", 0)
+                +COALESCE(A."fuchoKibetsuGaku11", 0) 
+                +COALESCE(A."fuchoKibetsuGaku12", 0)
+                +COALESCE(A."fuchoKibetsuGaku13", 0) 
+                +COALESCE(A."fuchoKibetsuGaku14", 0) 
+              ) 		
     </select>
     
     <!-- 口座異動一時テーブルを作成します。 -->
@@ -889,7 +901,7 @@
     <select resultOrdered="true" id="get口座の異動" resultMap="resultMap_CozaIdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter"  fetchSize="500">
         SELECT
-            A."hihokenshaNo"
+           DISTINCT  A."hihokenshaNo"
         FROM
             "TmpFukaJouhou" AS A
         INNER JOIN
@@ -897,29 +909,14 @@
         ON
             口座."uaT0310Koza_shikibetsuCode" = A."shikibetsuCode"
         WHERE
-            '0' <![CDATA[<]]> (COALESCE(A."fuchoKibetsuGaku1",0)
-                +COALESCE(A."fuchoKibetsuGaku2", 0) 
-                +COALESCE(A."fuchoKibetsuGaku3", 0) 
-                +COALESCE(A."fuchoKibetsuGaku4", 0) 
-                +COALESCE(A."fuchoKibetsuGaku5", 0) 
-                +COALESCE(A."fuchoKibetsuGaku6", 0) 
-                +COALESCE(A."fuchoKibetsuGaku7", 0) 
-                +COALESCE(A."fuchoKibetsuGaku8", 0) 
-                +COALESCE(A."fuchoKibetsuGaku9", 0) 
-                +COALESCE(A."fuchoKibetsuGaku10", 0)
-                +COALESCE(A."fuchoKibetsuGaku11", 0) 
-                +COALESCE(A."fuchoKibetsuGaku12", 0)
-                +COALESCE(A."fuchoKibetsuGaku13", 0) 
-                +COALESCE(A."fuchoKibetsuGaku14", 0) 
-              )  
-       AND A."kozaKubun" = '0'
+             A."kozaKubun" = '0'
     </select>
     
     <!-- 現金の異動の取得します。-->
     <select resultOrdered="true" id="get現金の異動" resultMap="resultMap_CozaIdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter" fetchSize="500">
         SELECT
-            A."hihokenshaNo"
+           DISTINCT A."hihokenshaNo"
         FROM
             "TmpFukaJouhou" AS A
         WHERE
@@ -933,21 +930,6 @@
             ON
                 口座."uaT0310Koza_shikibetsuCode" = B."shikibetsuCode"
             )
-        AND '0' <![CDATA[<]]> (COALESCE(A."fuchoKibetsuGaku1",0)
-                +COALESCE(A."fuchoKibetsuGaku2", 0) 
-                +COALESCE(A."fuchoKibetsuGaku3", 0) 
-                +COALESCE(A."fuchoKibetsuGaku4", 0) 
-                +COALESCE(A."fuchoKibetsuGaku5", 0) 
-                +COALESCE(A."fuchoKibetsuGaku6", 0) 
-                +COALESCE(A."fuchoKibetsuGaku7", 0) 
-                +COALESCE(A."fuchoKibetsuGaku8", 0) 
-                +COALESCE(A."fuchoKibetsuGaku9", 0) 
-                +COALESCE(A."fuchoKibetsuGaku10", 0)
-                +COALESCE(A."fuchoKibetsuGaku11", 0) 
-                +COALESCE(A."fuchoKibetsuGaku12", 0)
-                +COALESCE(A."fuchoKibetsuGaku13", 0) 
-                +COALESCE(A."fuchoKibetsuGaku14", 0) 
-              ) 
         AND A."kozaKubun" = '1'
     </select>
     
@@ -1975,4 +1957,180 @@
         "dbT2015KeisangoJoho_koseiZengoKubun",
         "dbT2015KeisangoJoho_sakuseiShoriName"
     </select>
+    
+    <select resultOrdered="true" id="get特別徴収依頼金額明細情報"
+    resultMap="resultMap_特別徴収依頼金額明細情報"
+    parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.PrtMeisaiIchiranMyBatisParameter" >
+        WITH master AS(
+            SELECT
+                賦課の情報一時テーブル.*,
+                <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
+                <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho"/>
+            FROM "DbT2002FukaJohoTemp" AS 賦課の情報一時テーブル
+            LEFT JOIN
+                rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
+                ON "DbV2001ChoshuHoho"."fukaNendo" :: Integer = 賦課の情報一時テーブル."fukaNendo" :: Integer - 1
+                AND "DbV2001ChoshuHoho"."hihokenshaNo" = 賦課の情報一時テーブル."hihokenshaNo"
+                AND "DbV2001ChoshuHoho"."yokunendoKariNenkinNo" IS NOT NULL
+                AND "DbV2001ChoshuHoho"."yokunendoKariNenkinNo" <![CDATA[<>]]> ''
+           LEFT JOIN
+                rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
+                ON "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = "DbV2001ChoshuHoho"."fukaNendo"
+                AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = #{通知内容コード}
+                <if test="!is6月捕捉が04">
+                    AND "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM" = CONCAT("DbV2001ChoshuHoho"."fukaNendo",'12')
+                </if>
+                <if test="is6月捕捉が04">
+                    AND "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM" BETWEEN CONCAT("DbV2001ChoshuHoho"."fukaNendo",'08')
+                    AND CONCAT("DbV2001ChoshuHoho"."fukaNendo",'12')
+                </if>
+                AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbV2001ChoshuHoho"."yokunendoKariNenkinNo"
+                AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbV2001ChoshuHoho"."yokunendoKariNenkinCode")
+          SELECT
+            master.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.columns_ShikibetsuTaisho" />
+          FROM
+            master AS master
+          LEFT JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>
+            (SELECT
+                ARRAY_AGG(CAST(master."shikibetsuCode" AS TEXT) )
+            FROM
+                master
+            )
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+            AS "ShikibetsuTaisho"
+            ON master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+            ${出力順}
+    </select>
+    
+    <resultMap id="resultMap_特別徴収依頼金額明細情報" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity" autoMapping="true">
+        <id column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id column="rirekiNo" />
+        <association property="賦課の情報一時テーブル" resultMap="resultMap_賦課の情報一時テーブル"/>
+        <association property="徴収方法Newest" resultMap="ResultMap_DbT2001ChoshuHohoEntity"/>
+        <association property="年金特徴回付情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
+        <association property="宛名PSMの戻り値" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    
+    <!--テーブルDbV2001ChoshuHohoの項目をDbV2001ChoshuHohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity" autoMapping="true">
+        <id property="fukaNendo" column="dbV2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hihokenshaNo" column="dbV2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbV2001ChoshuHoho_rirekiNo" />
+        <result property="insertDantaiCd" column="dbV2001ChoshuHoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbV2001ChoshuHoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbV2001ChoshuHoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbV2001ChoshuHoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbV2001ChoshuHoho_isDeleted" />
+        <result property="updateCount" column="dbV2001ChoshuHoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbV2001ChoshuHoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbV2001ChoshuHoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho4gatsu" column="dbV2001ChoshuHoho_choshuHoho4gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho5gatsu" column="dbV2001ChoshuHoho_choshuHoho5gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho6gatsu" column="dbV2001ChoshuHoho_choshuHoho6gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho7gatsu" column="dbV2001ChoshuHoho_choshuHoho7gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho8gatsu" column="dbV2001ChoshuHoho_choshuHoho8gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho9gatsu" column="dbV2001ChoshuHoho_choshuHoho9gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho10gatsu" column="dbV2001ChoshuHoho_choshuHoho10gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho11gatsu" column="dbV2001ChoshuHoho_choshuHoho11gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho12gatsu" column="dbV2001ChoshuHoho_choshuHoho12gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho1gatsu" column="dbV2001ChoshuHoho_choshuHoho1gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho2gatsu" column="dbV2001ChoshuHoho_choshuHoho2gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHoho3gatsu" column="dbV2001ChoshuHoho_choshuHoho3gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHohoYoku4gatsu" column="dbV2001ChoshuHoho_choshuHohoYoku4gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHohoYoku5gatsu" column="dbV2001ChoshuHoho_choshuHohoYoku5gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHohoYoku6gatsu" column="dbV2001ChoshuHoho_choshuHohoYoku6gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHohoYoku7gatsu" column="dbV2001ChoshuHoho_choshuHohoYoku7gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHohoYoku8gatsu" column="dbV2001ChoshuHoho_choshuHohoYoku8gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHohoYoku9gatsu" column="dbV2001ChoshuHoho_choshuHohoYoku9gatsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kariNenkinNo" column="dbV2001ChoshuHoho_kariNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kariNenkinCode" column="dbV2001ChoshuHoho_kariNenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kariHosokuM" column="dbV2001ChoshuHoho_kariHosokuM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honNenkinNo" column="dbV2001ChoshuHoho_honNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honNenkinCode" column="dbV2001ChoshuHoho_honNenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honHosokuM" column="dbV2001ChoshuHoho_honHosokuM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunendoKariNenkinNo" column="dbV2001ChoshuHoho_yokunendoKariNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunendoKariNenkinCode" column="dbV2001ChoshuHoho_yokunendoKariNenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunendoKariHosokuM" column="dbV2001ChoshuHoho_yokunendoKariHosokuM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="iraiSohuzumiFlag" column="dbV2001ChoshuHoho_iraiSohuzumiFlag" />
+        <result property="tsuikaIraiSohuzumiFlag" column="dbV2001ChoshuHoho_tsuikaIraiSohuzumiFlag" />
+        <result property="tokuchoTeishiNichiji" column="dbV2001ChoshuHoho_tokuchoTeishiNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="tokuchoTeishiJiyuCode" column="dbV2001ChoshuHoho_tokuchoTeishiJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_賦課の情報一時テーブル" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity">
+        <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="rirekiNo" column="rirekiNo" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="setaiInsu" column="setaiInsu" />
+        <result property="shikakuShutokuYMD" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuJiyu" column="shikakuShutokuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuJiyu" column="shikakuSoshitsuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seihofujoShurui" column="seihofujoShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seihoKaishiYMD" column="seihoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seihoHaishiYMD" column="seihoHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ronenKaishiYMD" column="ronenKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ronenHaishiYMD" column="ronenHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="fukaYMD" column="fukaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kazeiKubun" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaikazeiKubun" column="setaikazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkinShunyuGaku" column="nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hokenryoDankai" column="hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenryoDankai1" column="hokenryoDankai1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nengakuHokenryo1" column="nengakuHokenryo1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tsukiwariStartYM1" column="tsukiwariStartYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="tsukiwariEndYM1" column="tsukiwariEndYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="hokenryoDankai2" column="hokenryoDankai2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nengakuHokenryo2" column="nengakuHokenryo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tsukiwariStartYM2" column="tsukiwariStartYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="tsukiwariEndYM2" column="tsukiwariEndYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="choteiNichiji" column="choteiNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="choteiJiyu1" column="choteiJiyu1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choteiJiyu2" column="choteiJiyu2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choteiJiyu3" column="choteiJiyu3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choteiJiyu4" column="choteiJiyu4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koseiM" column="koseiM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gemmenMaeHokenryo" column="gemmenMaeHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gemmenGaku" column="gemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kakuteiHokenryo" column="kakuteiHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hokenryoDankaiKarisanntei" column="hokenryoDankaiKarisanntei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choshuHohoRirekiNo" column="choshuHohoRirekiNo" />
+        <result property="idoKijunNichiji" column="idoKijunNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="kozaKubun" column="kozaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyokaisoKubun" column="kyokaisoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokkenKubun" column="shokkenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukaShichosonCode" column="fukaShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="tkSaishutsuKampuGaku" column="tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuSaishutsuKampuGaku" column="fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku01" column="tkKibetsuGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku02" column="tkKibetsuGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku03" column="tkKibetsuGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku04" column="tkKibetsuGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku05" column="tkKibetsuGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku06" column="tkKibetsuGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku01" column="fuKibetsuGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku02" column="fuKibetsuGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku03" column="fuKibetsuGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku04" column="fuKibetsuGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku05" column="fuKibetsuGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku06" column="fuKibetsuGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku07" column="fuKibetsuGaku07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku08" column="fuKibetsuGaku08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku09" column="fuKibetsuGaku09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku10" column="fuKibetsuGaku10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku11" column="fuKibetsuGaku11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku12" column="fuKibetsuGaku12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku13" column="fuKibetsuGaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku14" column="fuKibetsuGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
 </mapper>

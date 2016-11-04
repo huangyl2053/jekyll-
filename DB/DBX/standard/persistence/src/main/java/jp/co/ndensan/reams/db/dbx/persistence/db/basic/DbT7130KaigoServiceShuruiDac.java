@@ -43,6 +43,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT7130KaigoServiceShuruiDac {
 
+    private static final RString 定値_エンティティ
+            = new RString("居宅サービス区分支給限度額エンティティ");
+
     @InjectSession
     private SqlSession session;
 
@@ -343,5 +346,17 @@ public class DbT7130KaigoServiceShuruiDac {
                         in(serviceShuruiCd, list)).
                 order(by(serviceShuruiCd, Order.ASC)).limit(1).
                 toObject(DbT7130KaigoServiceShuruiEntity.class);
+    }
+
+    /**
+     * データを物理削除する
+     *
+     * @param entity DbT7130KaigoServiceShuruiEntity
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    public int delete(DbT7130KaigoServiceShuruiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_エンティティ.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
     }
 }

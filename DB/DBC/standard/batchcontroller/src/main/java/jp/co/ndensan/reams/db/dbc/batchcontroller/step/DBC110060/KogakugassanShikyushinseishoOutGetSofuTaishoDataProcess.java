@@ -191,7 +191,7 @@ public class KogakugassanShikyushinseishoOutGetSofuTaishoDataProcess extends Bat
             }
             RString strNo = entity.get高額合算申請書Entity().getShikyuShinseishoSeiriNo();
             RString 証記載保険者番号 = RString.EMPTY;
-            if (null != strNo && !strNo.isEmpty()) {
+            if (null != strNo && !strNo.isEmpty() && INDEX_11 < strNo.length()) {
                 証記載保険者番号 = strNo.substring(INDEX_5, INDEX_11);
                 dbwt3711Entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(証記載保険者番号));
             }
@@ -211,7 +211,7 @@ public class KogakugassanShikyushinseishoOutGetSofuTaishoDataProcess extends Bat
         dbwt1001Entity.setExHokenshaName(RString.EMPTY);
         if (null != entity.get高額合算申請書Entity()) {
             RString strNo = entity.get高額合算申請書Entity().getShikyuShinseishoSeiriNo();
-            if (null != strNo && !strNo.isEmpty()) {
+            if (null != strNo && !strNo.isEmpty() && INDEX_11 < strNo.length()) {
                 RString 証記載保険者番号 = strNo.substring(INDEX_5, INDEX_11);
                 dbwt1001Entity.setExShoHokenshaNo(new ShoKisaiHokenshaNo(証記載保険者番号));
             }

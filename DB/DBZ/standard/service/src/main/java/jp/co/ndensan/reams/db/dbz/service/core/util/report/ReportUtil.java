@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
@@ -184,9 +185,15 @@ public final class ReportUtil {
             int patternNo,
             int sentenceNo,
             FlexibleDate kijunDate) {
-        TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定形文検索(subGyomuCode, reportId,
-                kamokuCode, patternNo, sentenceNo, kijunDate);
+        TsuchishoTeikeibunManager tsuchishoTeikeibunManager = TsuchishoTeikeibunManager.createInstance();
+        List<TsuchishoTeikeibun> tsuchishoTeikeibunList = tsuchishoTeikeibunManager.get通知書定型文(subGyomuCode, reportId,
+                kamokuCode, patternNo, kijunDate);
+        TsuchishoTeikeibun info = null;
+        for (TsuchishoTeikeibun tsuchishoTeikeibun : tsuchishoTeikeibunList) {
+            if (tsuchishoTeikeibun.get項目番号() == sentenceNo) {
+                info = tsuchishoTeikeibun;
+            }
+        }
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
         if (info == null) {
             return textHenkanRule.editText(RString.EMPTY);
@@ -248,6 +255,8 @@ public final class ReportUtil {
         IOutputOrder outputOrder = finder.get出力順(サブ業務コード, 帳票ID, 出力順ID);
         ReportItemsMap reportItems = new ReportItemsMap(Arrays.<IReportItems>asList(clazz.getEnumConstants()));
         if (outputOrder == null) {
+            entity.setPageBreakKeys(new ArrayList<RString>());
+            entity.set出力順OrderBy(RString.EMPTY);
             return entity;
         }
         orderByClause = new RStringBuilder("order by");
@@ -264,6 +273,8 @@ public final class ReportUtil {
             改頁List.add(RString.EMPTY);
         }
         if (outputOrder.get設定項目リスト().isEmpty()) {
+            entity.setPageBreakKeys(new ArrayList<RString>());
+            entity.set出力順OrderBy(RString.EMPTY);
             return entity;
         }
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {

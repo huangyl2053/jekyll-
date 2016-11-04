@@ -24,6 +24,8 @@ public class KijunShunyugakuTekiyoProcessParameter implements IBatchProcessParam
     private final boolean is項目名付加;
     private final boolean is日付編集;
     private final RString 保険者コード;
+    private final RString 保険者名;
+    private final RString 市町村コード;
     private final RString 対象年度;
     private final boolean is削除含める;
     private final RString データ種別;
@@ -43,6 +45,8 @@ public class KijunShunyugakuTekiyoProcessParameter implements IBatchProcessParam
      * @param is項目名付加 is項目名付加
      * @param is日付編集 is日付編集
      * @param 保険者コード 保険者コード
+     * @param 保険者名 保険者名
+     * @param 市町村コード 市町村コード
      * @param 対象年度 対象年度
      * @param is削除含める is削除含める
      * @param データ種別 データ種別
@@ -59,6 +63,8 @@ public class KijunShunyugakuTekiyoProcessParameter implements IBatchProcessParam
             boolean is項目名付加,
             boolean is日付編集,
             RString 保険者コード,
+            RString 保険者名,
+            RString 市町村コード,
             RString 対象年度,
             boolean is削除含める,
             RString データ種別,
@@ -74,6 +80,8 @@ public class KijunShunyugakuTekiyoProcessParameter implements IBatchProcessParam
         this.is項目名付加 = is項目名付加;
         this.is日付編集 = is日付編集;
         this.保険者コード = 保険者コード;
+        this.保険者名 = 保険者名;
+        this.市町村コード = 市町村コード;
         this.対象年度 = 対象年度;
         this.is削除含める = is削除含める;
         this.データ種別 = データ種別;

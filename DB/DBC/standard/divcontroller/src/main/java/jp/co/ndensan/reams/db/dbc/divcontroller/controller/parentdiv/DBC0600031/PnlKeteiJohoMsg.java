@@ -1,6 +1,6 @@
 /**
- * To change this license header, choose License Headers in Project Properties. To change this template file, choose
- * Tools | Templates and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this template file, choose Tools | Templates and open the
+ * template in the editor.
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0600031;
 
@@ -281,5 +281,15 @@ public class PnlKeteiJohoMsg {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一覧に戻る
+     *
+     * @param div 画面DIV
+     * @return 一覧へ遷移す
+     */
+    public ResponseData<PnlKeteiJohoMsgDiv> onClick_btnReturn(PnlKeteiJohoMsgDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
     }
 }

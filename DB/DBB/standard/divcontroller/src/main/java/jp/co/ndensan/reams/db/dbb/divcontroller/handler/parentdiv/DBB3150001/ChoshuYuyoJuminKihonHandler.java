@@ -322,7 +322,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     private FlexibleDate get徴収猶予期間終了(RString 期, ChoshuYuyoJoho 徴収猶予の情報) {
-        if (定値_ゼロ.equals(期)) {
+        if (定値_ゼロ.equals(期) || 徴収猶予の情報 == null) {
             return null;
         }
         switch (Integer.valueOf(期.toString())) {
@@ -360,7 +360,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     private FlexibleDate get徴収猶予期間開始(RString 期, ChoshuYuyoJoho 徴収猶予の情報) {
-        if (定値_ゼロ.equals(期)) {
+        if (定値_ゼロ.equals(期) || 徴収猶予の情報 == null) {
             return null;
         }
         switch (Integer.valueOf(期.toString())) {
@@ -398,7 +398,7 @@ public class ChoshuYuyoJuminKihonHandler {
     }
 
     private Decimal get普徴期別納付額(RString 期, ChoshuYuyoJoho 徴収猶予の情報) {
-        if (期 == null || 期.isEmpty()) {
+        if (期 == null || 期.isEmpty() || 徴収猶予の情報 == null) {
             return null;
         }
         switch (Integer.valueOf(期.toString())) {
@@ -776,44 +776,12 @@ public class ChoshuYuyoJuminKihonHandler {
         決定情報パネル.getTxtKetteiYMD().setReadOnly(false);
         決定情報パネル.getRadKetteiKubun().setDisabled(false);
         決定情報パネル.getTxtKetteiRiyu().setReadOnly(false);
-        期間の表示のみ();
+        期間の表示制御(false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(訂正をやめるボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(訂正をやめるボタン, false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取消をやめるボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存ボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
-    }
-
-    private void 期間の表示のみ() {
-        FuchoTablePanelDiv 普通徴収猶予情報パネル = div.getChoshuYuyoMain().getFuchoTablePanel();
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi4().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo4().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi5().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo5().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi6().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo6().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi7().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo7().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi8().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo8().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi9().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo9().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi10().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo10().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi11().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo11().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi12().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo12().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi1().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo1().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi2().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo2().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi3().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo3().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi13().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo13().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanKaishi14().setReadOnly(true);
-        普通徴収猶予情報パネル.getTxtYuyoKikanShuryo14().setReadOnly(true);
     }
 
     /**
@@ -890,93 +858,31 @@ public class ChoshuYuyoJuminKihonHandler {
      * @return 更新確認メッセージの判断
      */
     public RString メッセージ判断(ChoshuYuyoJoho 徴収猶予の情報) {
+        KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
         RString 状況 = div.getChoshuYuyoMain().getTxtShinseiJokyo().getValue();
-        boolean 申請_入力 = is申請情報入力(徴収猶予の情報);
-        boolean 決定_入力 = is決定情報入力(徴収猶予の情報);
-        boolean 取消_入力 = is取消情報入力();
+        RDate 決定日 = 決定情報パネル.getTxtKetteiYMD().getValue();
+        RDate 取消日 = div.getChoshuYuyoMain().getTorikeshiJoho().getTxtTorikeshiYMD().getValue();
         if (状況_新規.equals(状況)) {
-            if (申請_入力 && !決定_入力) {
+            if (決定日 == null) {
                 return 入力状況_新規申請;
-            } else if (決定_入力) {
+            } else {
                 return 入力状況_新規決定;
             }
         } else if (状況_申請中.equals(状況)) {
-            if (取消_入力) {
+            if (取消日 == null && 決定日 == null) {
+                return 入力状況_申請中申請;
+            } else if (取消日 == null && 決定日 != null) {
+                return 入力状況_申請中決定;
+            } else {
                 return 入力状況_申請中取消;
             }
-            if (申請_入力 && !決定_入力) {
-                return 入力状況_申請中申請;
-            } else if (決定_入力) {
-                return 入力状況_申請中決定;
-            }
-        } else if (状況_決定済.equals(状況)) {
-            if (取消_入力) {
+        } else {
+            if (取消日 == null) {
+                return 入力状況_決定済訂正;
+            } else {
                 return 入力状況_決定済取消;
             }
-            if (申請_入力 || 決定_入力) {
-                return 入力状況_決定済訂正;
-            }
         }
-        return 空;
-    }
-
-    private boolean is申請情報入力(ChoshuYuyoJoho 徴収猶予の情報) {
-        List<ChoshuYuyo> 介護賦課徴収猶予List = 徴収猶予の情報.getChoshuYuyoList();
-        ShinseiJohoDiv 申請情報パネル = div.getChoshuYuyoMain().getShinseiJoho();
-        if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
-            ChoshuYuyo 介護賦課徴収猶予 = 介護賦課徴収猶予List.get(ゼロ_定値);
-            boolean flag1 = checkDate(介護賦課徴収猶予.get徴収猶予申請年月日(), 申請情報パネル.getTxtShinseiYMD().getValue());
-            Code 徴収猶予種類コード = 介護賦課徴収猶予.get徴収猶予種類コード();
-            boolean flag2 = checkRString(徴収猶予種類コード == null || 徴収猶予種類コード.isEmpty()
-                    ? null : CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料徴収猶予種類.getコード(),
-                            徴収猶予種類コード, FlexibleDate.getNowDate()), 申請情報パネル.getTxtYuyoShurui().getValue());
-            boolean flag3 = checkRString(介護賦課徴収猶予.get申請事由(), 申請情報パネル.getTxtShinseiRiyu().getValue());
-            return flag1 || flag2 || flag3;
-        } else {
-            RDate 申請日 = 申請情報パネル.getTxtShinseiYMD().getValue();
-            boolean flag1 = 申請日 != null;
-            RString 取消種類 = 申請情報パネル.getTxtYuyoShurui().getValue();
-            boolean flag2 = !(取消種類 == null || 取消種類.isEmpty());
-            RString 申請事由 = 申請情報パネル.getTxtShinseiRiyu().getValue();
-            boolean flag3 = !(申請事由 == null || 申請事由.isEmpty());
-            return flag1 || flag2 || flag3;
-        }
-    }
-
-    private boolean is決定情報入力(ChoshuYuyoJoho 徴収猶予の情報) {
-        List<ChoshuYuyo> 介護賦課徴収猶予List = 徴収猶予の情報.getChoshuYuyoList();
-        KetteiJohoDiv 決定情報パネル = div.getChoshuYuyoMain().getKetteiJoho();
-        boolean flag1;
-        boolean flag2;
-        boolean flag3;
-        if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
-            ChoshuYuyo 介護賦課徴収猶予 = 介護賦課徴収猶予List.get(ゼロ_定値);
-            flag1 = checkDate(介護賦課徴収猶予.get徴収猶予決定年月日(), 決定情報パネル.getTxtKetteiYMD().getValue());
-            RString 決定区分 = 決定情報パネル.getRadKetteiKubun().getSelectedValue();
-            if (承認.equals(決定区分)) {
-                flag2 = checkRString(定値_イチ, 介護賦課徴収猶予.get徴収猶予状態区分());
-            } else {
-                flag2 = checkRString(定値_二, 介護賦課徴収猶予.get徴収猶予状態区分());
-            }
-            flag3 = checkRString(介護賦課徴収猶予.get徴収猶予事由(), 決定情報パネル.getTxtKetteiRiyu().getValue());
-        } else {
-            RDate 決定日 = 決定情報パネル.getTxtKetteiYMD().getValue();
-            flag1 = 決定日 != null;
-            flag2 = !(承認.equals(決定情報パネル.getRadKetteiKubun().getSelectedValue()));
-            RString 徴収猶予事由 = 決定情報パネル.getTxtKetteiRiyu().getValue();
-            flag3 = !(徴収猶予事由 == null || 徴収猶予事由.isEmpty());
-        }
-        return flag1 || flag2 || flag3;
-    }
-
-    private boolean is取消情報入力() {
-        TorikeshiJohoDiv 取消情報パネル = div.getChoshuYuyoMain().getTorikeshiJoho();
-        boolean flag1 = 取消情報パネル.getTxtTorikeshiYMD().getValue() != null;
-        RString 取消種類 = 取消情報パネル.getTxtTorikeshiShurui().getValue();
-        boolean flag2 = !(取消種類 == null || 取消種類.isEmpty());
-        RString 取消理由 = 取消情報パネル.getTxtTorikeshiRiyu().getValue();
-        boolean flag3 = !(取消理由 == null || 取消理由.isEmpty());
-        return flag1 || flag2 || flag3;
     }
 
     private List<KeyValueDataSource> get決定区分() {
@@ -1166,22 +1072,6 @@ public class ChoshuYuyoJuminKihonHandler {
         RString 状況 = div.getChoshuYuyoMain().getTxtShinseiJokyo().getValue();
         if (!状況_決定済.equals(状況)) {
             div.getChoshuYuyoMain().getShinseiJoho().getTxtShinseiYMD().setRequired(true);
-        }
-    }
-
-    private boolean checkDate(FlexibleDate fDate, RDate rDate) {
-        if (fDate == null || fDate.isEmpty()) {
-            return !(rDate == null);
-        } else {
-            return !(new RDate(fDate.toString()).equals(rDate));
-        }
-    }
-
-    private boolean checkRString(RString str1, RString str2) {
-        if (str1 == null || str1.isEmpty()) {
-            return !(str2 == null || str2.isEmpty());
-        } else {
-            return !str1.equals(str2);
         }
     }
 

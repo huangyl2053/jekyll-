@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dba.definition.processprm.dba140010.JyukiRendoToro
 import jp.co.ndensan.reams.db.dba.entity.db.relate.jyukirendotorokushalistbatchentity.JyukiRendoJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -61,9 +63,12 @@ public class JyukiRendoJouhouBusiness {
      * パラメータを作成します。
      *
      * @param processParameter 住基連動登録者リストのバッチパラメータ
+     * @param uaFt200Psm 宛名PSM
      * @return JyukiRendoTorokushaListBatchProcessParameter
      */
-    public JyukiRendoTorokushaListBatchProcessParameter setPsetParameter(JyukiRendoTorokushaListBatchProcessParameter processParameter) {
+    public JyukiRendoTorokushaListBatchProcessParameter setPsetParameter(
+            JyukiRendoTorokushaListBatchProcessParameter processParameter,
+            UaFt200FindShikibetsuTaishoFunction uaFt200Psm) {
         List<Code> 取得事由被保険者Codes = new ArrayList<>();
         List<Code> 適用事由他特例者Codes = new ArrayList<>();
         List<Code> 適用事由除外者Codes = new ArrayList<>();
@@ -133,6 +138,8 @@ public class JyukiRendoJouhouBusiness {
         processParameter.setIdouJiyu_tensyutu(転出);
         processParameter.setIdouJiyu_sibou(死亡);
         processParameter.setIdouJiyu_tenkyo(転居);
+        processParameter.setPsmShikibetsuTaisho(
+                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         return processParameter;
     }
 
@@ -399,5 +406,95 @@ public class JyukiRendoJouhouBusiness {
                 codeShubetsu,
                 new Code(code),
                 new FlexibleDate(RDate.getNowDate().toDateString()));
+    }
+
+    /**
+     * 帳票分類ID「DBA200007_JukiRendoTorokuList」住記連動登録リスト出力順設定可能項目です。
+     */
+    public enum ShutsuryokujunEnum implements IReportItems {
+
+        /**
+         * 郵便番号
+         */
+        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
+        /**
+         * 町域コード
+         */
+        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
+        /**
+         * 番地コード
+         */
+        番地コード(new RString("0003"), new RString("banchiCode"),
+                new RString("\"ShikibetsuTaisho_banchiCode1\",\"ShikibetsuTaisho_banchiCode2\","
+                        + "\"ShikibetsuTaisho_banchiCode3\",\"ShikibetsuTaisho_banchiCode4\"")),
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
+        /**
+         * 地区１
+         */
+        地区１(new RString("0005"), new RString("chiku1"), new RString("\"ShikibetsuTaisho_chikuCode1\"")),
+        /**
+         * 地区２
+         */
+        地区２(new RString("0006"), new RString("chiku2"), new RString("\"ShikibetsuTaisho_chikuCode2\"")),
+        /**
+         * 地区３
+         */
+        地区３(new RString("0007"), new RString("chiku3"), new RString("\"ShikibetsuTaisho_chikuCode3\"")),
+        /**
+         * 世帯コード
+         */
+        世帯コード(new RString("0008"), new RString("setaiCode"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
+        /**
+         * 識別コード
+         */
+        識別コード(new RString("0009"), new RString("shikibetsuCode"), new RString("\"shikibetsuCode\"")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
+        /**
+         * 生年月日
+         */
+        生年月日(new RString("0012"), new RString("seinengappiYMD"), new RString("\"ShikibetsuTaisho_seinengappiYMD\"")),
+        /**
+         * 性別
+         */
+        性別(new RString("0013"), new RString("gender"), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("\"shichosonCode\"")),
+        /**
+         * 被保険者番号
+         */
+        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("\"hihokenshaNo\""));
+
+        private final RString 項目ID;
+        private final RString フォームフィールド名;
+        private final RString myBatis項目名;
+
+        private ShutsuryokujunEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+            this.項目ID = 項目ID;
+            this.フォームフィールド名 = フォームフィールド名;
+            this.myBatis項目名 = myBatis項目名;
+        }
+
+        @Override
+        public RString get項目ID() {
+            return 項目ID;
+        }
+
+        @Override
+        public RString getフォームフィールド名() {
+            return フォームフィールド名;
+        }
+
+        @Override
+        public RString getMyBatis項目名() {
+            return myBatis項目名;
+        }
     }
 }

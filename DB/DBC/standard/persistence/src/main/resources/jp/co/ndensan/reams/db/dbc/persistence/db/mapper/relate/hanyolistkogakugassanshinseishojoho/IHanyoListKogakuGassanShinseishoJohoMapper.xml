@@ -106,16 +106,16 @@
         最新被保台帳."shikakuSoshitsuTodokedeYMD" AS 最新被保台帳_資格喪失届出年月日,
         最新被保台帳."hihokennshaKubunCode" AS 最新被保台帳_被保険者区分コード,
         最新被保台帳."jushochiTokureiFlag" AS 最新被保台帳_住所地特例フラグ,
-        受給者台帳_受給申請事由 AS 受給者台帳_受給申請事由,
-        受給者台帳_要支援者認定申請区分 AS 受給者台帳_要支援者認定申請区分,
-        受給者台帳_受給申請年月日 AS 受給者台帳_受給申請年月日,
-        受給者台帳_要介護認定状態区分コード AS 受給者台帳_要介護認定状態区分コード,
-        受給者台帳_認定有効期間開始年月日 AS 受給者台帳_認定有効期間開始年月日,
-        受給者台帳_認定有効期間終了年月日 AS 受給者台帳_認定有効期間終了年月日,
-        受給者台帳_認定年月日 AS 受給者台帳_認定年月日,
-        受給者台帳_旧措置者フラグ AS 受給者台帳_旧措置者フラグ,
-        受給者台帳_みなし要介護区分コード AS 受給者台帳_みなし要介護区分コード,
-        受給者台帳_直近異動事由コード AS 受給者台帳_直近異動事由コード
+        受給者台帳."jukyuShinseiJiyu" AS 受給者台帳_受給申請事由,
+        受給者台帳."yoshienshaNinteiShinseiFlag" AS 受給者台帳_要支援者認定申請区分,
+        受給者台帳."jukyuShinseiYMD" AS 受給者台帳_受給申請年月日, 
+        受給者台帳."yokaigoJotaiKubunCode" AS 受給者台帳_要介護認定状態区分コード,
+        受給者台帳."ninteiYukoKikanKaishiYMD" AS 受給者台帳_認定有効期間開始年月日,
+        受給者台帳."ninteiYukoKikanShuryoYMD" AS 受給者台帳_認定有効期間終了年月日, 
+        受給者台帳."ninteiYMD" AS 受給者台帳_認定年月日,
+        受給者台帳."kyuSochishaFlag" AS 受給者台帳_旧措置者フラグ,
+        <!--  TODO QA1790   受給者台帳."minashiCode" AS 受給者台帳_みなし要介護区分コード,-->
+        受給者台帳."chokkinIdoJiyuCode" AS 受給者台帳_直近異動事由コード
         FROM 
         rgdb."DbT3068KogakuGassanShinseisho" AS 高額合算申請書 
         LEFT JOIN 
@@ -202,48 +202,9 @@
         rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳 
         ON 最新被保台帳."hihokenshaNo" = 高額合算申請書."hihokenshaNo"  
        
-        LEFT JOIN (
-        SELECT * 
-        FROM (SELECT 
-        合算申請書_受給."hihokenshaNo" AS 被保険者番号_受給者台帳, 
-        合算申請書_受給."taishoNendo" AS 受給者台帳_対象年度, 
-        合算申請書_受給."hokenshaNo" AS 受給者台帳_保険者番号, 
-        合算申請書_受給."seiriNo" AS 受給者台帳_整理番号, 
-        合算申請書_受給."taishoKeisanKaishiYMD" AS 受給者台帳_対象計算期間開始年月日,
-        合算申請書_受給."taishoKeisanShuryoYMD" AS 受給者台帳_対象計算期間終了年月日, 
-        受給JOIN."shichosonCode" AS 受給者台帳_市町村コード,
-        受給JOIN."hihokenshaNo" AS 受給者台帳_被保険者番号,
-        受給JOIN."rirekiNo" AS 受給者台帳_履歴番号,
-        受給JOIN."edaban" AS 受給者台帳_枝番, 
-        受給JOIN."jukyuShinseiJiyu" AS 受給者台帳_受給申請事由,
-        受給JOIN."yoshienshaNinteiShinseiFlag" AS 受給者台帳_要支援者認定申請区分,
-        受給JOIN."jukyuShinseiYMD" AS 受給者台帳_受給申請年月日, 
-        受給JOIN."yokaigoJotaiKubunCode" AS 受給者台帳_要介護認定状態区分コード,
-        受給JOIN."ninteiYukoKikanKaishiYMD" AS 受給者台帳_認定有効期間開始年月日,
-        受給JOIN."ninteiYukoKikanShuryoYMD" AS 受給者台帳_認定有効期間終了年月日, 
-        受給JOIN."ninteiYMD" AS 受給者台帳_認定年月日,
-        受給JOIN."kyuSochishaFlag" AS 受給者台帳_旧措置者フラグ,
-        受給JOIN."minashiCode" AS 受給者台帳_みなし要介護区分コード,
-        受給JOIN."chokkinIdoJiyuCode" AS 受給者台帳_直近異動事由コード, 
-        row_number() over(partition by 受給JOIN."shichosonCode",
-        受給JOIN."hihokenshaNo"
-        order by 受給JOIN."rirekiNo" DESC ,
-        受給JOIN."edaban" DESC) AS 受給者台帳_番号 
-        FROM rgdb."DbT3068KogakuGassanShinseisho" AS 合算申請書_受給 
-        INNER JOIN 
-        rgdb."DbT4001JukyushaDaicho" AS 受給JOIN 
-        ON 受給JOIN."hihokenshaNo" = 合算申請書_受給."hihokenshaNo" AND 
-        受給JOIN."yukoMukoKubun" = '1' AND 
-        受給JOIN."logicalDeletedFlag" = False
-        <!--TODO QA1350-->
-<!--        AND  SUBSTR(受給JOIN."ninteiYukoKikanKaishiYMD",1, 6)  <![CDATA[<=]]> 合算申請書_受給.サービス提供年月
-        AND  SUBSTR(受給JOIN."ninteiYukoKikanShuryoYMD", 1,6)  <![CDATA[>=]]> 合算申請書_受給.サービス提供年月 -->
-        ) AS 受給者台帳Tmp 
-        WHERE 受給者台帳Tmp.受給者台帳_番号 = '1' )  AS 受給者台帳
-        ON 被保険者番号_受給者台帳 = 高額合算申請書."hihokenshaNo" AND
-        受給者台帳_対象年度 = 高額合算申請書."taishoNendo" AND
-        受給者台帳_保険者番号 = 高額合算申請書."hokenshaNo" AND
-        受給者台帳_整理番号 = 高額合算申請書."seiriNo"
+        LEFT JOIN
+        rgdb."DbV4001JukyushaDaicho" AS 受給者台帳
+        ON  受給者台帳."hihokenshaNo"=   高額合算申請書."hihokenshaNo"
 
         <if test="抽出区分 != null and !抽出区分.isEmpty()"> 
             INNER JOIN (
@@ -324,8 +285,9 @@
        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON 最新被保台帳_識別コード = koza."uaT0310Koza_shikibetsuCode"
         </if> 
-<!--        TODO QA1490
-        ${出力順}-->
+        <if test="出力項目!=null">
+         ${出力項目}
+        </if>
     </sql>
         
     <resultMap id="resultMap_HanyoListKogakuGassanShinseishoJohoEntity" autoMapping="true"

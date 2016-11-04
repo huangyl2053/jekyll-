@@ -8,18 +8,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710022;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.UpdSyokanbaraiketeJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishinsa.ShikyushinseiShinsaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710022.ShoukanFutsuKetteiJouhouTourokuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -43,6 +45,7 @@ public final class MainPanelHandler {
     private final MainPanelDiv div;
     private static final RString 受託なし = new RString("1");
     private static final RString 受託あり = new RString("2");
+    private static final RString コロン = new RString(":");
 
     private MainPanelHandler(MainPanelDiv div) {
         this.div = div;
@@ -71,7 +74,8 @@ public final class MainPanelHandler {
         List<KeyValueDataSource> sources = new ArrayList<>();
         if (様式名称情報 != null && !様式名称情報.isEmpty()) {
             for (ShikibetsuNoKanri db : 様式名称情報) {
-                sources.add(new KeyValueDataSource(db.get識別番号(), db.get名称()));
+                sources.add(new KeyValueDataSource(db.get識別番号(), db.get識別番号().concat(コロン).concat(
+                        db.get名称() == null ? RString.EMPTY : db.get名称())));
             }
         }
         div.getDdlSyomeisyo().setDataSource(sources);
@@ -103,13 +107,16 @@ public final class MainPanelHandler {
         if (ShikyuFushikyuKubun.支給.getコード().equals(支給区分New)) {
 
             Decimal 支払金額合計New = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().getValue();
-            Decimal 支払金額合計Old = parameter.get支払金額合計();
+
+            Decimal 支払金額合計Old = get支払金額合計Old();
+
             if (!支払金額合計New.equals(支払金額合計Old)) {
                 return true;
+
             }
             Decimal 増減単位New = shokanbaraiketteiJohoDiv.getTxtZogentani().getValue();
             Decimal 増減単位Old = parameter.get増減単位();
-            if (増減単位New.equals(増減単位Old)) {
+            if ((増減単位New != null && !増減単位New.equals(増減単位Old))) {
                 return true;
             }
             RString 増減理由New = shokanbaraiketteiJohoDiv.getTxtZogenriyu().getValue();
@@ -127,10 +134,19 @@ public final class MainPanelHandler {
         }
     }
 
+    private Decimal get支払金額合計Old() {
+        RDate サービス提供年月 = div.getTxtTeikyoYM().getValue();
+        RString 被保険者番号 = div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().get被保険者番号();
+        RString 整理番号 = div.getTxtSeiriNo().getValue();
+
+        JutakukaishuSikyuShinseiManager manager = JutakukaishuSikyuShinseiManager.createInstance();
+        return manager.get支払金額合計(サービス提供年月, 被保険者番号, 整理番号);
+    }
+
     private boolean 増減理由チェック(RString 増減理由New, RString 増減理由Old) {
-        if (増減理由New.isNullOrEmpty() && 増減理由Old.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(増減理由New) && RString.isNullOrEmpty(増減理由Old)) {
             return false;
-        } else if (増減理由New.isNullOrEmpty() || 増減理由Old.isNullOrEmpty()) {
+        } else if (RString.isNullOrEmpty(増減理由New) || RString.isNullOrEmpty(増減理由Old)) {
             return true;
         } else {
             return !増減理由New.equals(増減理由Old);
@@ -207,10 +223,25 @@ public final class MainPanelHandler {
                     set審査年月日(null).set審査結果(null).build();
         }
 
+        List<ShokanJutakuKaishu> dbt3049List = new ArrayList<>();
+        List<dgSyokanbaraikete_Row> rowList = div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel()
+                .getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
+        for (dgSyokanbaraikete_Row row : rowList) {
+            ShokanJutakuKaishu dbt3049 = new ShokanJutakuKaishu(被保険者番号, サービス年月, 整理番号,
+                    new JigyoshaNo(row.getJigyoshaNo()), row.getYoshikiNo(), row.getMeisaiNo(), row.getRenban());
+            int 差額金額値 = 0;
+            if (row.getSagakuKingaku() != null && row.getSagakuKingaku().getValue() != null) {
+                差額金額値 = row.getSagakuKingaku().getValue().intValue();
+            }
+            dbt3049 = dbt3049.createBuilderForEdit().set差額金額(差額金額値).build();
+            dbt3049List.add(dbt3049);
+        }
+
         ShokanShukei dbt3053 = new ShokanShukei(被保険者番号, サービス年月, 整理番号,
                 new JigyoshaNo(整理番号), 整理番号, 整理番号, 証明書);
+        int 支払金額合計 = dbt3034.get支払金額合計() == null ? 0 : dbt3034.get支払金額合計().intValue();
         dbt3053 = dbt3053.createBuilderForEdit().set審査方法区分コード(dbt3034.get審査方法区分()).
-                set審査年月(決定日.getYearMonth()).set支給区分コード(支給区分).
+                set審査年月(決定日.getYearMonth()).set支給区分コード(支給区分).set点数_金額(支払金額合計).
                 set支払金額(支払金額.intValue()).
                 set増減点(div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().
                         getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue()).
@@ -225,7 +256,7 @@ public final class MainPanelHandler {
 
         JutakukaishuSikyuShinseiManager manager = JutakukaishuSikyuShinseiManager.createInstance();
 
-        return manager.updSyokanbaraiketeJoho(parameter, dbt3034, dbt3053);
+        return manager.updSyokanbaraiketeJoho(parameter, dbt3034, dbt3049List, dbt3053);
     }
 
 }

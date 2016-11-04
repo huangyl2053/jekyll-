@@ -28,5 +28,6 @@ public class SougouJigyouJyohouProcessParameter implements IBatchProcessParamete
     private RString 版番号;
     private RString processParameter;
     private RString 特定個人情報名コード;
+    private RString 提供基本情報中間テーブル名;
 
 }

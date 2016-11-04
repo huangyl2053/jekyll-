@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei.ketteiYMD;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei.riyushoSakuseiJigyoshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei.shoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei.shukeiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -25,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 住宅改修理由書作成手数料請求決定のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-2870-010 zhangruitao
  */
 public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDac implements ISaveable<DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity> {
 
@@ -35,18 +39,21 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDac implements ISaveable<DbT
      * 主キーで住宅改修理由書作成手数料請求決定を取得します。
      *
      * @param 介護住宅改修理由書作成事業者番号 RiyushoSakuseiJigyoshaNo
-     * @param 決定年月日 KetteiYMD
+     * @param 集計関連付け番号 ShoKisaiHokenshaNo
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
      * @param 履歴番号 RirekiNo
      * @return DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity selectByKey(
+            ShoKisaiHokenshaNo 証記載保険者番号,
             JigyoshaNo 介護住宅改修理由書作成事業者番号,
-            FlexibleDate 決定年月日,
+            RString 集計関連付け番号,
             int 履歴番号) throws NullPointerException {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(介護住宅改修理由書作成事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成事業者番号"));
-        requireNonNull(決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定年月日"));
+        requireNonNull(集計関連付け番号, UrSystemErrorMessages.値がnull.getReplacedMessage("集計関連付け番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -54,8 +61,9 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDac implements ISaveable<DbT
         return accessor.select().
                 table(DbT3094JutakuKaishuRiyushoTesuryoKettei.class).
                 where(and(
+                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                                 eq(riyushoSakuseiJigyoshaNo, 介護住宅改修理由書作成事業者番号),
-                                eq(ketteiYMD, 決定年月日),
+                                eq(shukeiNo, 集計関連付け番号),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity.class);
     }

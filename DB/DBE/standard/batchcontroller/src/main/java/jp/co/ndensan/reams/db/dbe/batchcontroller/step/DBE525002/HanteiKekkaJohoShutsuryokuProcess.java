@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE525002;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranReport;
@@ -43,9 +41,10 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
             + "IHanteiKekkaJohoShutsuryokuMapper.get出力対象者明細一覧");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE525005.getReportId();
     private KaigoKekkaTaishouIchiranHeadItem headItem;
-    private List<KaigoKekkaTaishouIchiranBodyItem> bodyItemList;
+    private KaigoKekkaTaishouIchiranBodyItem bodyItem;
     private HanteiKekkaJohoShutsuryokuProcessParamter processPrm;
     private HanteiKekkaJohoShutsuryokuMybitisParamter mybatisPrm;
+    private static int gokai;
     @BatchWriter
     private BatchReportWriter<KekkatsuchiTaishoshaIchiranReportSource> batchWrite;
     private ReportSourceWriter<KekkatsuchiTaishoshaIchiranReportSource> reportSourceWriter;
@@ -53,7 +52,6 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
     @Override
     protected void initialize() {
         mybatisPrm = processPrm.toHanteiKekkaJohoShutsuryokuMybitisParamter();
-        bodyItemList = new ArrayList<>();
     }
 
     @Override
@@ -69,21 +67,16 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
 
     @Override
     protected void process(HanteiKekkaJohoShutsuryokuRelateEntity entity) {
-        bodyItemList.add(setBodyItem(entity));
-    }
-
-    @Override
-    protected void afterExecute() {
-        if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
-                    DbBusinessConfig.get(広域連合, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
-                    processPrm.getNijiHanteiYMDFrom(),
-                    processPrm.getNijiHanteiYMDTo(),
-                    RDate.getNowDate().toDateString(),
-                    bodyItemList.size());
-            KaigoKekkaTaishouIchiranReport report = KaigoKekkaTaishouIchiranReport.createFrom(headItem, bodyItemList);
-            report.writeBy(reportSourceWriter);
-        }
+        bodyItem = setBodyItem(entity);
+        gokai++;
+        headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
+                DbBusinessConfig.get(広域連合, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
+                processPrm.getNijiHanteiYMDFrom(),
+                processPrm.getNijiHanteiYMDTo(),
+                RDate.getNowDate().toDateString(),
+                gokai);
+        KaigoKekkaTaishouIchiranReport report = KaigoKekkaTaishouIchiranReport.createFrom(headItem, bodyItem);
+        report.writeBy(reportSourceWriter);
     }
 
     private KaigoKekkaTaishouIchiranBodyItem setBodyItem(HanteiKekkaJohoShutsuryokuRelateEntity entity) {

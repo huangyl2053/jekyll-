@@ -35,11 +35,6 @@ public class SelRiyoushaHutanwariaitorigaDataProcess extends BatchProcessBase<Se
     private static final int 十二 = 12;
 
     @Override
-
-    protected void initialize() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toSelRiyoushaHutanwariaitorigaDataMybatisParameter());
     }

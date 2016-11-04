@@ -78,12 +78,14 @@ public enum SogoJigyoKubunShikyuGendogakuSpec implements IPredicate<SogoJigyoKub
 
             RString 保存モード = ViewStateHolder.get(ViewStateKeys.保存モード, RString.class);
             List<SogoJigyoKubunEntity> 総合事業区分情報 = ViewStateHolder.get(ViewStateKeys.総合事業区分情報, List.class);
-            SogoJigyoKubunEntity firstEntity = 総合事業区分情報.get(0);
-            SogoJigyoKubunEntity lastEntity = 総合事業区分情報.get(総合事業区分情報.size() - 1);
-            FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getDomain().toDateString());
-            if (登録.equals(保存モード) && div.getTxtTekiyoKaishiYM().getDomain() != null) {
-                return !(適用開始年月.isBeforeOrEquals(firstEntity.get要支援1().get適用開始年月())
-                        && lastEntity.get要支援1().get適用開始年月().isBeforeOrEquals(適用開始年月));
+            if (総合事業区分情報.size() >= 2) {
+                SogoJigyoKubunEntity firstEntity = 総合事業区分情報.get(0);
+                SogoJigyoKubunEntity lastEntity = 総合事業区分情報.get(総合事業区分情報.size() - 1);
+                FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getDomain().toDateString());
+                if (登録.equals(保存モード) && div.getTxtTekiyoKaishiYM().getDomain() != null) {
+                    return !(適用開始年月.isBeforeOrEquals(firstEntity.get要支援1().get適用開始年月())
+                            && lastEntity.get要支援1().get適用開始年月().isBeforeOrEquals(適用開始年月));
+                }
             }
             return Boolean.TRUE;
         }

@@ -149,8 +149,7 @@
     <select resultOrdered="true" id="get保険者番号データ"
             resultMap="resultMap_HokenshaNoShutokuEntity" fetchSize="500" >
         SELECT 
-            dbwt2111."hokenshaNo",
-            COUNT(DISTINCT(dbwt2111."hiHokenshaNo" || dbwt2111."serviceTeikyoYM" || dbwt2111."seiriNo")) AS num_count
+            dbwt2111."hokenshaNo"
         FROM "DbWT2111ShokanShinsei" AS dbwt2111
         WHERE 
             dbwt2111."sofuJogaiFlag" = false
@@ -160,7 +159,6 @@
     <resultMap autoMapping="true" id="resultMap_HokenshaNoShutokuEntity"
                 type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.HokenshaNoShutokuEntity">
         <id property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <result property="count" column="num_count" />
     </resultMap> 
     
     <select resultOrdered="true" id="get償還払請求基本情報データ"
@@ -808,12 +806,64 @@
         <association property="被保険者一時Entity" resultMap="ResultMap_DbWT1001HihokenshaTempEntity"/>
     </resultMap>
     
-    <select resultOrdered="true" id="get送付ファイルのレコード件数" fetchSize="500" resultType="int">
-        SELECT count(*)
-        FROM "DbWT2112ShokanMeisai"
+    <select resultOrdered="true" id="get送付ファイルのレコード件数" fetchSize="500" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
+            resultMap="resultMap_count_HokenshaNoShutokuEntity">
+        SELECT
+            sub."hiHokenshaNo",
+            sub."serviceTeikyoYM",
+            sub."seiriNo",
+            sub."jigyoshaNo",
+            sub."yoshikiNo",
+            sub."meisaiNo",
+            sa."num_count"
+        FROM (SELECT vi."hiHokenshaNo",
+               vi."serviceTeikyoYM",
+               vi."seiriNo",
+               vi."jigyoshaNo",
+               vi."yoshikiNo",
+               vi."meisaiNo",
+               vi."dataKubun"
+        FROM "DbWT2112ShokanMeisai" AS vi
         WHERE
-            "DbWT2112ShokanMeisai"."hokenshaNo" = #{保険者番号}
+            vi."hokenshaNo" = #{保険者番号}
+            AND vi."dataKubun" = '01'
+        ) AS sub
+        INNER JOIN (
+            SELECT st."hiHokenshaNo",
+               st."serviceTeikyoYM",
+               st."seiriNo",
+               st."jigyoshaNo",
+               st."yoshikiNo",
+               st."meisaiNo",
+               COUNT(*) AS "num_count"
+          FROM "DbWT2112ShokanMeisai" AS st
+          WHERE st."hokenshaNo" = #{保険者番号}
+          GROUP BY st."hiHokenshaNo",
+                   st."serviceTeikyoYM",
+                   st."seiriNo",
+                   st."jigyoshaNo",
+                   st."yoshikiNo",
+                   st."meisaiNo"
+        ) AS sa
+        ON  sa."hiHokenshaNo" = sub."hiHokenshaNo"
+            AND sa."serviceTeikyoYM" = sub."serviceTeikyoYM"
+            AND sa."seiriNo" = sub."seiriNo"
+            AND sa."jigyoshaNo" = sub."jigyoshaNo"
+            AND sa."yoshikiNo" = sub."yoshikiNo"
+            AND sa."meisaiNo" = sub."meisaiNo"
     </select>
+    
+    <resultMap autoMapping="true" id="resultMap_count_HokenshaNoShutokuEntity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.HokenshaNoShutokuEntity">
+        <id property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="meisaiNo" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="count" column="num_count" />
+    </resultMap> 
     
     <select resultOrdered="true" id="get送付ファイルデータ"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
@@ -890,6 +940,11 @@
      
      <resultMap id="result_ShokanRenrakuhyoOutputReportEntity" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanrenrakuhyooutputreport.ShokanRenrakuhyoOutputReportEntity" autoMapping="true">
+        <id column="renban" />
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
         <result property="基本_事業者番号" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="基本_様式番号" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="識別番号_略称" column="ryakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

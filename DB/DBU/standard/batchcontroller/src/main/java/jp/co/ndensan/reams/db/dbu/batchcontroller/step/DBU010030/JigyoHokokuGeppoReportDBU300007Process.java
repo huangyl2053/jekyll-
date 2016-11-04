@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyouHoukokuTokTyhyouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki153.JigyohokokuCompYoshiki153Variables;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki153.JigyohokokuCompYoshiki153ReportSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -38,6 +40,8 @@ public class JigyoHokokuGeppoReportDBU300007Process extends BatchProcessBase<Jig
             + "IJigyoHokokuGeppoIppanGenbutsuMapper.getJigyouHoukokuTokeiTyouhyou");
     private static final ReportId REPORT_DBU300007 = ReportIdDBU.DBU300007.getReportId();
     private static final RString 年報月報区分 = new RString("1");
+    private static final RString 過去集計分旧市町村区分 = new RString("1");
+    private static final RString 固定文字列_旧 = new RString("（旧）");
     private static final int 数値_100 = 10;
     private static final Decimal 数値_101 = new Decimal(101);
     private static final Decimal 数値_102 = new Decimal(102);
@@ -87,6 +91,8 @@ public class JigyoHokokuGeppoReportDBU300007Process extends BatchProcessBase<Jig
     private static final Decimal 数値_410 = new Decimal(410);
     private static final Decimal 数値_411 = new Decimal(411);
     private static final Decimal 数値_412 = new Decimal(412);
+    private RString 保険者番号;
+    private RString 保険者名;
     private Map<Decimal, Decimal> syukeiNo1391;
     private Map<Decimal, Decimal> syukeiNo1392;
     private Map<Decimal, Decimal> syukeiNo1393;
@@ -102,6 +108,13 @@ public class JigyoHokokuGeppoReportDBU300007Process extends BatchProcessBase<Jig
         syukeiNo1391 = new HashMap<>();
         syukeiNo1392 = new HashMap<>();
         syukeiNo1393 = new HashMap<>();
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        保険者番号 = 地方公共団体.get地方公共団体コード().value();
+        if (過去集計分旧市町村区分.equals(processParameter.get過去集計分旧市町村区分())) {
+            保険者名 = 固定文字列_旧.concat(地方公共団体.get市町村名());
+        } else {
+            保険者名 = 地方公共団体.get市町村名();
+        }
     }
 
     @Override
@@ -129,7 +142,8 @@ public class JigyoHokokuGeppoReportDBU300007Process extends BatchProcessBase<Jig
     @Override
     protected void afterExecute() {
         JigyohokokuCompYoshiki153Variables reportData = new JigyohokokuCompYoshiki153Variables();
-        // TODO  内部QA：1757 Redmine：#102256(保険者番号,保険者名の取得方式が知らない)
+        reportData.set保険者番号(保険者番号);
+        reportData.set保険者名(保険者名);
         reportData.set年報月報区分(年報月報区分);
         reportData.set処理日時(processParameter.get処理日時().toDateString());
         reportData.set給付区分(processParameter.get給付集計区分());

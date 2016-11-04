@@ -60,7 +60,7 @@ public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchi
     private final RString csvFileName = new RString("ServiceCodeIchiran.csv");
     private ServicecodeIchiranProcessParameter parameter;
     private static final int INT_0 = 0;
-    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
     private Association 地方公共団体情報;
     private List<RString> headerList;
     private List<TaniSuShikibetsuEntity> taniList;
@@ -74,7 +74,6 @@ public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchi
     private static final FlexibleYearMonth 終了年月 = new FlexibleYearMonth("999999");
     private static final Code CODE_05 = new Code("05");
     private static final RString HOSHI = new RString("※");
-    private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_05 = new RString("05");
@@ -140,11 +139,7 @@ public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchi
         serviceList = new ArrayList<>();
         for (UzT0007CodeEntity サービス分類略称 : サービス分類略称Entity) {
             ServiceBunruiEntity serviceEntity = new ServiceBunruiEntity();
-            if (サービス分類略称.getコード().getColumnValue().length() == INT_1) {
-                serviceEntity.setコード(new Code(RSTRING_0.concat(サービス分類略称.getコード().getColumnValue())));
-            } else {
-                serviceEntity.setコード(サービス分類略称.getコード());
-            }
+            serviceEntity.setコード(new Code(サービス分類略称.getコード().getColumnValue().padZeroToLeft(INT_2)));
             serviceEntity.set略称(サービス分類略称.getコード略称());
             serviceList.add(serviceEntity);
         }

@@ -14,9 +14,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuuketteitsuchishosakusei.KougakuSabisuhiShikyuuKetteiTsuchishoSakusei;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -55,6 +53,8 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
     private static final RString 実行するボタン2 = new RString("Execute2");
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
+    private static final ReportId 高額サービス帳票ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
+    private static final ReportId 高額総合事業サービス帳票ID = new ReportId("DBC100061_JigyoKogakuKetteiTsuchisho");
 
     /**
      * コンストラクタです。
@@ -96,22 +96,16 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().setValue(システム日付);
         div.getShikyuKetteiTsuchisho().getTxtHakkobi().setValue(システム日付);
         onClick_radKetteibiIkkatsuKoshinKubun();
-        ChohyoBunruiKanri code = null;
         if (高額サービス費支給決定通知書作成メニューID.equals(ResponseHolder.getMenuID())) {
-            code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
-                    new ReportId(高額サービス費支給決定通知書作成帳票ID));
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額サービス帳票ID);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(実行するボタン2, false);
             div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().initialize(new ReportId(高額サービス費支給決定通知書作成帳票ID));
         } else if (高額総合事業サービス費支給決定通知書メニューID.equals(ResponseHolder.getMenuID())) {
-            code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
-                    new ReportId(高額総合事業サービス費支給決定通知書帳票ID));
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額総合事業サービス帳票ID);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(実行するボタン1, false);
             div.getChushutsuJoken().getRadHizukeSentaku().getDataSource().remove(INT_2);
             div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().setVisible(false);
             div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().initialize(new ReportId(高額総合事業サービス費支給決定通知書帳票ID));
-        }
-        if (code != null) {
-            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
         }
         div.getCcdShiharaiHoho().initialize(ShiharaiHohoKinoKubun.高額介護.getコード());
     }

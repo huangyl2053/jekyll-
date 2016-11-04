@@ -10,10 +10,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU050010.DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0710011.KoikinaiJushochiTokureiDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -70,6 +72,7 @@ public class KoikinaiJushochiTokureiHandler {
         div.getBatchParamterInfo().getDdlShichosonShitei().setDataSource(市町村DDL);
         div.getBatchParamterInfo().getDdlShichosonShitei().setSelectedKey(市町村DDL1件目コード);
         div.getBatchParamterInfo().getTxtKijunYMD().setDisabled(true);
+        div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBU200005.getReportId());
         div.getBatchParamterInfo().getTxtKonkaiKaishibi().setDisabled(true);
         div.getBatchParamterInfo().getTxtKonkaiShuryobi().setDisabled(true);
     }
@@ -133,8 +136,7 @@ public class KoikinaiJushochiTokureiHandler {
                 .getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().substring(0, 市町村コード));
         batchparam.setShichosonName(div.getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().isEmpty() ? RString.EMPTY : div
                 .getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().substring(市町村名称));
-        batchparam.setNarabiId(div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().get出力順ID() == null ? RString.EMPTY : new RString(div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().get出力順ID().toString()));
-
+        batchparam.setNarabiId(div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().get出力順ID());
         if (!div.getBatchParamterInfo().getRadChokin().getSelectedKey().isEmpty()) {
             batchparam.setModel(直近);
             batchparam.setKijyunbi(null);

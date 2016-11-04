@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko;
 
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -60,6 +61,7 @@ public class ChosahyoTokkijikoKatamenEditorImpl implements IChosahyoTokkijikoEdi
         source.oCR_hishokenshaNo4 = business.getHihokenshaNo4();
         source.oCR_hishokenshaNo5 = business.getHihokenshaNo5();
         source.oCR_hishokenshaNo6 = business.getHihokenshaNo6();
+        source.layout = Layouts.鑑;
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         builder.append(business.getHihokenshaNo1());

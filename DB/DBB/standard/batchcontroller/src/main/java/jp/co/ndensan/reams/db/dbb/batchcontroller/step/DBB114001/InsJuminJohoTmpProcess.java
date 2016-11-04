@@ -77,6 +77,7 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
         tempEntity.setYubinNo(t.get郵便番号());
         tempEntity.setChoikiCode(t.get町域コード());
         tempEntity.setZenkokuJushoCode(t.get全国住所コード());
+        tempEntity.setTenshutsuKakuteiZenkokuJushoCode(t.get転出確定全国住所コード());
         tempEntity.setJusho(t.get住所());
         tempEntity.setBanchi(t.get番地());
         tempEntity.setKatagaki(t.get方書());
@@ -88,6 +89,8 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
         tempEntity.setSetaiCode(t.get世帯コード());
         tempEntity.setSeinengappiYMD(t.get生年月日());
         tempEntity.setTorokuIdoYMD(t.get登録異動年月日());
+        tempEntity.setTorokuTodokedeYMD(t.get登録届出年月日());
+        tempEntity.setSeibetsuCode(t.get性別コード());
         tempEntity.setTenyuzenzenkokuJushoCode(t.get転入前全国住所コード());
         tempEntity.setTenyuzenjusho(t.get転入前住所());
         tempEntity.setTenyuzenbanchi(t.get転入前番地());

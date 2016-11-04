@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.Jyutaku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -33,83 +34,116 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
      * 提供着工年月入力必須チェック
      */
     提供着工年月が入力 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is提供着工年月が入力(div);
-                }
-            },
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is提供着工年月が入力(div);
+        }
+    },
     /**
      * 領収日入力必須チェック
      */
     領収日が入力 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is領収日が入力(div);
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is領収日が入力(div);
+        }
+    },
+    /**
+     * 受給認定が無効チェック
+     */
+    受給認定が無効チェック {
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            boolean state = false;
+            if (new RString("1").equals(div.getCommHeadPanel().getIs旧措置者フラグ())) {
+                state = true;
+            }
+            if (div.getCommHeadPanel().get要介護認定情報() == null) {
+                return false;
+            } else {
+                List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
+                RString 要介護認定状態区分コード = div.getCommHeadPanel().get要介護認定情報();
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.非該当.getCode());
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援_経過的要介護.getCode());
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援1.getCode());
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援2.getCode());
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護1.getCode());
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護2.getCode());
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護3.getCode());
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
+                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
+                if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード)) {
+                    return false;
                 }
-            },
+                return YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード) && state;
+            }
+
+        }
+    },
     /**
      * 申請日入力必須チェック
      */
     申請日が入力 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is申請日が入力(div);
-                }
-            },
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is申請日が入力(div);
+        }
+    },
     /**
      * 申請取消事由入力必須チェック
      */
     申請取消事由が入力 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is申請取消事由が入力(div);
-                }
-            },
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is申請取消事由が入力(div);
+        }
+    },
     /**
      * 住宅所有者入力必須チェック
      */
     住宅所有者が入力 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is住宅所有者が入力(div);
-                }
-            },
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is住宅所有者が入力(div);
+        }
+    },
     /**
      * 証明書入力必須チェック
      */
     証明書が入力 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is証明書が入力(div);
-                }
-            },
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is証明書が入力(div);
+        }
+    },
     /**
      * 住宅改修内容一覧が妥当チェック
      */
     住宅改修内容一覧が妥当 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is住宅改修内容一覧妥当(div);
-                }
-            },
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is住宅改修内容一覧妥当(div);
+        }
+    },
     /**
      * 給付率入力必須チェック
      */
     給付率が入力 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is給付率が入力(div);
-                }
-            },
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is給付率が入力(div);
+        }
+    },
     /**
      * 住宅所有者入力必須チェック
      */
     提供着工年月が申請日の年月と一致しない {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is提供着工年月が申請日の年月と一致しない(div);
-                }
-            };
+        @Override
+        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return SpecHelper.is提供着工年月が申請日の年月と一致しない(div);
+
+        }
+    };
 
     private static class SpecHelper {
 
@@ -122,7 +156,7 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
         }
 
         public static boolean is領収日が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue() != null;
+            return div.getJutakuKaishuShinseiContents().getTxtJigyoshaNo().getValue() != null || !div.getJutakuKaishuShinseiContents().getTxtJigyoshaNo().getValue().isEmpty();
         }
 
         public static boolean is申請日が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
@@ -134,8 +168,8 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
         }
 
         public static boolean is申請取消事由が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return !div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu()
-                    .getSelectedKey().isNullOrEmpty();
+            return !RString.isNullOrEmpty(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu()
+                    .getSelectedKey());
         }
 
         public static boolean is給付率が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
@@ -143,13 +177,12 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
         }
 
         public static boolean is住宅改修内容一覧妥当(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            RString 住宅改修_状態 = new RString("Unchanged");
-            List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
+            List<dgGaisyuList_Row> gridList = div.getCcdJutakugaisyunaiyoList()
                     .get住宅改修内容一覧();
             List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
             JyutakuGaisyunaiyoListParameter param;
             for (dgGaisyuList_Row row : gridList) {
-                RString 状態 = RString.EMPTY.equals(row.getTxtJyotai()) ? 住宅改修_状態 : row.getTxtJyotai();
+                RString 状態 = new RString(row.getRowState().toString());
                 param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
                         状態, row.getTxtJutakuAddress(),
                         new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));
@@ -158,7 +191,7 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
             RString 住宅改修内容一覧チェック = JutakukaishuSikyuShinseiManager.createInstance()
                     .checkJyutakuGaisyunaiyoList(paramList,
                             new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
-            return 住宅改修内容一覧チェック.isNullOrEmpty();
+            return RString.isNullOrEmpty(住宅改修内容一覧チェック);
         }
 
         public static boolean is提供着工年月が申請日の年月と一致しない(JutakuKaishuShinseiJyohoTorokuDiv div) {

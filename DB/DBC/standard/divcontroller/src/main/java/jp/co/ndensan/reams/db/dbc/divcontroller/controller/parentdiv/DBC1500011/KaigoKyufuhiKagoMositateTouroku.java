@@ -69,7 +69,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
     private static final RString MENUID_DBCMN91003 = new RString("DBCMN91003");
     private static final List<RString> 同月審査用_EMPTY = new ArrayList<>();
     private static final RString 介護給付費過誤申立書 = new RString("介護給付費過誤申立書");
-    private static final RString 総合事業費過誤申立書_経過措置 = new RString("総合事業費過誤申立書（経過措置）");
+    private static final RString 総合事業費過誤申立書_経過措置 = new RString("総合事業費過誤申立書情報作成（経過措置）");
     private static final RString 総合事業費過誤申立書 = new RString("総合事業費過誤申立書");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString MESSAGE_REPLACE_コンフィグのキー = new RString("該当の給付実績データ");
@@ -288,11 +288,12 @@ public class KaigoKyufuhiKagoMositateTouroku {
     }
 
     private ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> setデータ保存(KaigoKyufuhiKagoMositateTourokuDiv div) {
-        if (!div.getChkMeisaiForDogetsuShinsa().getSelectedKeys().contains(new RString("forDogetsuShinsa"))
+        if (!削除モード.equals(div.getHdnState())
+                && !div.getChkMeisaiForDogetsuShinsa().getSelectedKeys().contains(new RString("forDogetsuShinsa"))
                 && (申立理由_12.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
-                || 申立理由_49.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey()))
+                || 申立理由_49.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
                 || 申立理由_59.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
-                || 申立理由_69.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())) {
+                || 申立理由_69.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey()))) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.同月審査用の確認.getMessage().getCode(),
                     DbcQuestionMessages.同月審査用の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();

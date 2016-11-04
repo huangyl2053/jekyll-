@@ -7,17 +7,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1140011
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.DBB1140011StateName;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.DBB1140011TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.ShotokuJohoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140011.ShotokuJohoTorokuHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140011.ShotokuJohoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -132,6 +135,22 @@ public class ShotokuJohoTorokuTotal {
         RString 氏名又は名称 = div.getAtenaInfo().getKaigoAtenaInfo().get氏名漢字();
         div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(処理名, 識別コード.value(), 氏名又は名称, success);
         return ResponseData.of(div).setState(DBB1140011StateName.完了状態);
+    }
+
+    /**
+     * 「検索する」ボタンを押下します。
+     *
+     * @param div {@link ShotokuJohoTorokuTotalDiv 所得照会回答内容登録Div}
+     * @return 所得照会回答内容登録Divを持つResponseData
+     */
+    public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_saiKensaku(ShotokuJohoTorokuTotalDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBB1140011TransitionEventName.再検索).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     private ShotokuJohoTorokuHandler getHandler(ShotokuJohoTorokuTotalDiv div) {

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class HanyoListParamForKougaku {
 
-    private static final ReportId 帳票ID = new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho");
+    private static final ReportId 帳票ID = new ReportId("DBC701014_HanyoListKogakuGassanShinseishoJoho");
 
     /**
      * 画面の初期化メソッドです。
@@ -38,6 +38,29 @@ public class HanyoListParamForKougaku {
     }
 
     /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div HanyoListParamForKougakuDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnBatchParamSave(HanyoListParamForKougakuDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).getBatchParamter());
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div HanyoListParamForKougakuDiv
+     * @return ResponseData
+     */
+    public ResponseData<HanyoListParamForKougakuDiv> onClick_btnBatchParamRestore(HanyoListParamForKougakuDiv div) {
+        getHandler(div).pamaRestore();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 入力項目チェックです。
      *
      * @param div HanyoListParamDiv
@@ -50,29 +73,6 @@ public class HanyoListParamForKougaku {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         return createResponse(div);
-    }
-
-    /**
-     * 条件を保存するボタン押下です。
-     *
-     * @param div HanyoListParamDiv
-     * @return ResponseData<BatchParameterMap>
-     */
-    public ResponseData<BatchParameterMap> onClick_btnSeikatsuKogakuParamSave(HanyoListParamForKougakuDiv div) {
-        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        DBC710140_HanyoListKogakuGassanShinseishoJohoParameter parameter = getHandler(div).onClick_btnKogakuParamSave();
-        responseData.data = new BatchParameterMap(parameter);
-        return responseData;
-    }
-
-    /**
-     * 条件を復元するボタン押下です。
-     *
-     * @param div HanyoListParamDiv
-     * @return ResponseData<HanyoListParamDiv>
-     */
-    public ResponseData<HanyoListParamForKougakuDiv> onClick_tekiyoJyokenFukugen(HanyoListParamForKougakuDiv div) {
-        return ResponseData.of(div).respond();
     }
 
     /**

@@ -32,7 +32,6 @@ public class ServicecodeIchiranProcessParameter implements IBatchProcessParamete
     private RDateTime 処理日時;
     private boolean is帳票で出力;
     private boolean isＣＳＶファイルで出力;
-    private RString 表題;
     private boolean is項目名付加;
     private boolean is連番付加;
     private boolean is日付編集;

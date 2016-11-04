@@ -162,6 +162,14 @@ public interface IKyufuJissekiInMasterTorokuMapper {
     int delete給付実績集計(KyufuJissekiInMybatisParameter parameter);
 
     /**
+     * PKより、給付実績基本TBLのデータを物理削除する。
+     *
+     * @param entity DbT3017KyufujissekiKihonEntity
+     * @return int
+     */
+    int delete給付実績基本byPK(DbT3017KyufujissekiKihonEntity entity);
+
+    /**
      * 付実績H1の新規、修正データを物理削除する。
      *
      * @return List<KyufuJissekiInHenkyakuH1DataEntity>
@@ -190,6 +198,14 @@ public interface IKyufuJissekiInMasterTorokuMapper {
      * @return int
      */
     int delete給付実績H1の取消関連データ(KyufuJissekiInMybatisParameter parameter);
+
+    /**
+     * PKより、給付実績高額介護サービス費TBLのデータを物理削除する。
+     *
+     * @param entity DbT3028KyufujissekiKogakuKaigoServicehiEntity
+     * @return int
+     */
+    int delete給付実績高額介護サービス費byPK(DbT3028KyufujissekiKogakuKaigoServicehiEntity entity);
 
     /**
      * 付実績D8の新規、修正データを物理削除する。

@@ -383,9 +383,9 @@ public enum ReportIdDBB {
      */
     DBB200012(new ReportId("DBB200012_KaigoHokenryogakuKetteiTsuchiHakkoIchiran"), new RString("介護保険料額決定通知書発行一覧表")),
     /**
-     * 特別徴収開始通知書（本算定）発行一覧表の帳票ID
+     * 特別徴収開始通知書（仮算定）発行一覧表の帳票ID
      */
-    DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書 本算定")),
+    DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書（仮算定）発行一覧表")),
     /**
      * 特別徴収開始通知書（本算定）発行一覧表の帳票ID
      */

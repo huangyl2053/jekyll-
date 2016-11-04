@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.koseitaishojissekiichiran;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class KoseiTaishoJissekiIchiranEntity {
 
     private LasdecCode 地方公共団体コード;
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     private FlexibleYear 年度;
     private FlexibleYearMonth サービス提供年月;
     private RString 市町村名;

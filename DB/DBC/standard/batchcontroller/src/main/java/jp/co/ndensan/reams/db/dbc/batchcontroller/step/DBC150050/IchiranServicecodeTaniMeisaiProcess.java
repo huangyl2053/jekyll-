@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.dbc150050.DbWT3470chohyouShutsuryok
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.DbWT3470chohyouShutsuryokuTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -164,7 +164,6 @@ public class IchiranServicecodeTaniMeisaiProcess
     }
 
     private void setCSVヘッダー(DbWT3470chohyouShutsuryokuyouCSVEntity csvEntity) {
-        csvEntity.set送付年月(パターン56(parameter.get開始年月()));
         RDateTime 作成日時 = RDateTime.now();
         RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
@@ -187,7 +186,11 @@ public class IchiranServicecodeTaniMeisaiProcess
         csvEntity.set生年月日(doパターン4(entity.getSeinengappiYMD()));
         csvEntity.set年齢(entity.getAge());
         csvEntity.set性別(entity.getSeibetsu());
-        csvEntity.set性別名称(Seibetsu.toValue(entity.getSeibetsu()).get名称());
+        if (!RString.isNullOrEmpty(entity.getSeibetsu())) {
+            csvEntity.set性別名称(Seibetsu.toValue(entity.getSeibetsu()).get名称());
+        } else {
+            csvEntity.set性別名称(RString.EMPTY);
+        }
         csvEntity.set続柄コード(getColumnValue(entity.getTsuzukigaraCode()));
         csvEntity.set世帯コード(getColumnValue(entity.getSetaiCode()));
         csvEntity.set世帯主名(getColumnValue(entity.getSetainushiMei()));
@@ -205,24 +208,44 @@ public class IchiranServicecodeTaniMeisaiProcess
         csvEntity.set空白(entity.getBlank());
         csvEntity.set資格区分(entity.getHihokennshaKubunCode());
         csvEntity.set広域内住所地特例(entity.getKoikinaiJushochiTokureiFlag());
-        csvEntity.set広域内住所地名称(JushochitokureishaKubun.
-                toValue(entity.getKoikinaiJushochiTokureiFlag()).get名称());
+        if (!RString.isNullOrEmpty(entity.getKoikinaiJushochiTokureiFlag())) {
+            csvEntity.set広域内住所地名称(JushochitokureishaKubun.
+                    toValue(entity.getKoikinaiJushochiTokureiFlag()).get名称());
+        } else {
+            csvEntity.set広域内住所地名称(RString.EMPTY);
+        }
         csvEntity.set入力識別番号(getColumnValue(entity.getInputShikibetsuNo()));
         csvEntity.set給付実績情報作成区分コード(entity.getKyufuSakuseiKubunCode());
-        csvEntity.set給付実績情報作成区分名称(KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()).get名称());
+        if (!RString.isNullOrEmpty(entity.getKyufuSakuseiKubunCode())) {
+            csvEntity.set給付実績情報作成区分名称(KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()).get名称());
+        } else {
+            csvEntity.set給付実績情報作成区分名称(RString.EMPTY);
+        }
         csvEntity.set証記載保険者番号(entity.getShokisaiHokenshaNo());
         csvEntity.set証記載保険者名(entity.getShokisaiHokenshaName());
         csvEntity.set被保険者番号(getColumnValue(entity.getHiHokenshaNo()));
         csvEntity.setサービス提供年月(doパターン54(entity.getServiceTeikyoYM()));
         csvEntity.set給付実績区分コード(entity.getKyufuJissekiKubunCode());
-        csvEntity.set給付実績区分名称(KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()).get名称());
+        if (!RString.isNullOrEmpty(entity.getKyufuJissekiKubunCode())) {
+            csvEntity.set給付実績区分名称(KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()).get名称());
+        } else {
+            csvEntity.set給付実績区分名称(RString.EMPTY);
+        }
         csvEntity.set事業所番号(getColumnValue(entity.getJigyoshoNo()));
         csvEntity.set事業所名(entity.getJigyoshoName());
         csvEntity.set要介護状態区分コード(entity.getYoKaigoJotaiKubunCode());
-        csvEntity.set要介護状態区分名称(YokaigoJotaiKubun.toValue(entity.getYoKaigoJotaiKubunCode()).getName());
+        if (!RString.isNullOrEmpty(entity.getYoKaigoJotaiKubunCode())) {
+            csvEntity.set要介護状態区分名称(YokaigoJotaiKubun.toValue(entity.getYoKaigoJotaiKubunCode()).get名称());
+        } else {
+            csvEntity.set要介護状態区分名称(RString.EMPTY);
+        }
         csvEntity.set旧措置入所者特例コード(entity.getKyuSochiNyushoshaTokureiCode());
-        csvEntity.set旧措置入所者特例名称(KyuSochiNyushoshaTokureiCode.
-                toValue(entity.getKyuSochiNyushoshaTokureiCode()).get名称());
+        if (!RString.isNullOrEmpty(entity.getKyuSochiNyushoshaTokureiCode())) {
+            csvEntity.set旧措置入所者特例名称(KyuSochiNyushoshaTokureiCode.
+                    toValue(entity.getKyuSochiNyushoshaTokureiCode()).get名称());
+        } else {
+            csvEntity.set旧措置入所者特例名称(RString.EMPTY);
+        }
         csvEntity.set認定有効期間_開始年月日(doパターン4(entity.getNinteiYukoKaishiYMD()));
         csvEntity.set認定有効期間_終了年月日(doパターン4(entity.getNinteiYukoShuryoYMD()));
         csvEntity.set老人保健市町村番号(entity.getRojinHokenShichosonNo());
@@ -270,14 +293,6 @@ public class IchiranServicecodeTaniMeisaiProcess
             return entity.getColumnValue();
         }
         return RString.EMPTY;
-    }
-
-    private RString パターン56(FlexibleYearMonth 年月) {
-        if (null == 年月) {
-            return RString.EMPTY;
-        }
-        return 年月.wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString doパターン4(FlexibleDate 年月日) {

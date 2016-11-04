@@ -20,10 +20,12 @@ import lombok.NonNull;
 public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportSource> {
 
     private final List<HihokenshaDaichoSakusei> items;
+    private final HihokenshaDaichoSakusei hihokenshaDaichoSakusei;
     private static final int ZERO = 0;
 
-    private HihokenshaDaichoReport(List<HihokenshaDaichoSakusei> items) {
+    private HihokenshaDaichoReport(List<HihokenshaDaichoSakusei> items, HihokenshaDaichoSakusei item) {
         this.items = items;
+        this.hihokenshaDaichoSakusei = item;
     }
 
     /**
@@ -33,13 +35,27 @@ public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportS
      * @return HihokenshashoHakkoIchiranHyoReport
      */
     public static HihokenshaDaichoReport createReport(@NonNull List<HihokenshaDaichoSakusei> items) {
-        return new HihokenshaDaichoReport(items);
+        return new HihokenshaDaichoReport(items, null);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param item 一覧表証発行者Entity
+     * @return HihokenshashoHakkoIchiranHyoReport
+     */
+    public static HihokenshaDaichoReport createReport(@NonNull HihokenshaDaichoSakusei item) {
+        return new HihokenshaDaichoReport(null, item);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<HihokenshaDaichoReportSource> writer) {
-        for (HihokenshaDaichoSakusei item : items) {
-            writeChohyo(item, writer);
+        if (items == null) {
+            writeChohyo(hihokenshaDaichoSakusei, writer);
+        } else {
+            for (HihokenshaDaichoSakusei item : items) {
+                writeChohyo(item, writer);
+            }
         }
     }
 

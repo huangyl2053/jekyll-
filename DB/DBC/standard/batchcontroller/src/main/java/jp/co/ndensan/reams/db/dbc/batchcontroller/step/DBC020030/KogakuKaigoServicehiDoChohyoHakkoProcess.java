@@ -489,6 +489,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         }
         reportEntity.set対象年月1(entity.getServiceTeikyoYM());
         reportEntity.set支給金額1(entity.getKogakuShikyuGaku());
+        reportEntity.set支給金額(entity.getKogakuShikyuGaku());
         reportEntity.set支給不支給決定区分(entity.getKetteiShikyuKubunCode());
         reportEntity.set支払方法区分(entity.getShiharaiHohoKubunCode());
         if (口座情報 != null) {
@@ -501,13 +502,13 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.setゆうちょ銀行フラグ(口座情報.isゆうちょ銀行());
         if (フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) {
             if (!口座情報.isゆうちょ銀行()) {
-                reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
-                reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+                reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+                reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
                 reportEntity.set口座種別(口座情報.get預金種別名称());
                 reportEntity.set口座番号(口座情報.get口座番号());
             } else {
-                reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
-                reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+                reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+                reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
                 reportEntity.set通帳記号(口座情報.get通帳記号());
                 reportEntity.set通帳番号(口座情報.get通帳番号());
             }
@@ -534,13 +535,13 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
                 : 口座情報.get金融機関コード().getColumnValue());
         if (フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) {
             if (!口座情報.isゆうちょ銀行()) {
-                reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
-                reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+                reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+                reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
                 reportEntity.set口座種別(口座情報.get預金種別名称());
                 reportEntity.set口座番号(口座情報.get口座番号());
             } else {
-                reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
-                reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+                reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+                reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
                 reportEntity.set通帳記号(口座情報.get通帳記号());
                 reportEntity.set通帳番号(口座情報.get通帳番号());
             }
@@ -566,13 +567,13 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.set金融機関コード(口座情報.get金融機関コード() == null ? RString.EMPTY
                 : 口座情報.get金融機関コード().getColumnValue());
         if (!口座情報.isゆうちょ銀行()) {
-            reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
-            reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+            reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+            reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
             reportEntity.set口座種別(口座情報.get預金種別名称());
             reportEntity.set口座番号(口座情報.get口座番号());
         } else {
-            reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
-            reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+            reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+            reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
             reportEntity.set通帳記号(口座情報.get通帳記号());
             reportEntity.set通帳番号(口座情報.get通帳番号());
         }

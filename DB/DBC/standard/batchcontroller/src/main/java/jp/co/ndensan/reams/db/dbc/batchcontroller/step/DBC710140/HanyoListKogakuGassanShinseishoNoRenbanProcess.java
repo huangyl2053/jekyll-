@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.hanyolistkogakugassanshinseisho.HanyoListKogakuGassanShinseishoOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity;
@@ -23,8 +24,12 @@ import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubun
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -256,7 +261,13 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private static final RString HEAD_加入１０証明書番号 = new RString("加入１０証明書番号");
     private static final RString HEAD_支給申請書情報送付年月 = new RString("支給申請書情報送付年月");
     private static final RString HEAD_自己負担額計算年月 = new RString("自己負担額計算年月");
-
+    private static final RString ORDER_BY = new RString("ORDER BY ");
+    private static final RString 出力順_被保険者番号 = new RString("\"高額合算申請書_被保険者番号\" ASC, ");
+    private static final RString 出力順_対象年度 = new RString("\"高額合算申請書_対象年度\" ASC, ");
+    private static final RString 出力順_支給申請書整理番号_6_11
+            = new RString("SUBSTR(\"高額合算申請書_支給申請書整理番号\",6,11) ASC, ");
+    private static final RString 出力順_支給申請書整理番号 = new RString("\"高額合算申請書_支給申請書整理番号\" ASC, ");
+    private static final RString 出力順_履歴番号 = new RString("\"高額合算申請書_履歴番号\" ASC");
     private RString 出力有無;
     private HanyoListKogakuGassanShinseishoJohoProcessParameter parameter;
     private HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate dataCreate;
@@ -266,9 +277,6 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private Association 地方公共団体;
     private FlexibleDate システム日付;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
-//    TODO QA1490
-//    private static final RString デフォルト出力順 = new RString("order by 高額合算申請書_被保険者番号,"
-//            + "高額合算申請書_対象年度,高額合算申請書_保険者番号,高額合算申請書_整理番号");
 
     @BatchWriter
     private CsvWriter<HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity> eucCsvWriter;
@@ -289,19 +297,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(parameter.getReamsLoginId());
         parameter.setList(list);
-//        TODO QA1490
-//        if (RString.isNullOrEmpty(parameter.get抽出区分())) {
-//            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-//            IOutputOrder 出力順;
-//            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
-//                    ReportIdDBC.DBC701014.getReportId(), parameter.get出力順());
-//            if (出力順 != null) {
-//                parameter.set出力順(Long.valueOf(MyBatisOrderByClauseCreator.create(
-//                        HanyoListKogakuGassanShinseishoJohoProperty.DBC701014ShutsuryokujunEnum.class, 出力順).toString()));
-//            } else {
-//                parameter.set出力順(Long.valueOf(デフォルト出力順.toString()));
-//            }
-//        }
+        parameter.set出力項目(get出力順());
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
     }
 
@@ -704,5 +700,25 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         csvEntity.set加入１０証明書番号(HEAD_加入１０証明書番号);
         csvEntity.set支給申請書情報送付年月(HEAD_支給申請書情報送付年月);
         csvEntity.set自己負担額計算年月(HEAD_自己負担額計算年月);
+    }
+
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder order = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
+                parameter.get出力順());
+        RString 出力順 = RString.EMPTY;
+        if (order != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(HanyoListKogakuGassanShinseishoOutPutOrder.class, order);
+            出力順 = 出力順.concat(EUC_WRITER_DELIMITER);
+        }
+        if (RString.isNullOrEmpty(出力順)) {
+            出力順 = 出力順.concat(ORDER_BY);
+        }
+        出力順 = 出力順.concat(出力順_被保険者番号);
+        出力順 = 出力順.concat(出力順_対象年度);
+        出力順 = 出力順.concat(出力順_支給申請書整理番号_6_11);
+        出力順 = 出力順.concat(出力順_支給申請書整理番号);
+        出力順 = 出力順.concat(出力順_履歴番号);
+        return 出力順;
     }
 }

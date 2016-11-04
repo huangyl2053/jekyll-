@@ -58,10 +58,10 @@
         )
         )
         ) AS 自己作成管理
-        ON 居宅給付."dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_hihokenshaNo" = 自己作成管理."hihokenshaNo"
-        AND 居宅給付."dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_taishoYM" = 自己作成管理."taishoYM" 
-        AND 居宅給付."dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_rirekiNo" = 自己作成管理."rirekiNo"
-        AND 居宅給付."dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_riyoYM" = 自己作成管理."riyoYM"
+        ON 居宅給付."dbT3010_hihokenshaNo" = 自己作成管理."hihokenshaNo"
+        AND 居宅給付."dbT3010_taishoYM" = 自己作成管理."taishoYM" 
+        AND 居宅給付."dbT3010_rirekiNo" = 自己作成管理."rirekiNo"
+        AND 居宅給付."dbT3010_riyoYM" = 自己作成管理."riyoYM"
         ORDER BY
         自己作成管理."hihokenshaNo"
         ,自己作成管理."riyoYM"

@@ -25,6 +25,7 @@ public class ShotokuDankaiBetsuShunoritsuIchiranPageBreak extends PageBreaker<Sh
     private static final RString 賦課年度 = new RString("賦課年度");
     private static final RString 科目コード = new RString("科目コード");
     private static final RString 構成市町村コード = new RString("構成市町村コード");
+    private static final RString 収納データ区分 = new RString("収納データ区分");
     private static final RString TEXT_過年度 = new RString("*過年度*");
     private static final RString TEXT_総過年度 = new RString("*総過年度*");
 
@@ -66,6 +67,9 @@ public class ShotokuDankaiBetsuShunoritsuIchiranPageBreak extends PageBreaker<Sh
             flag = true;
         } else if (this.breakKeysList.contains(構成市町村コード)
                 && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(収納データ区分)
+                && !currentSource.getSource().choshu.equals(nextSource.getSource().choshu)) {
             flag = true;
         }
         return flag;

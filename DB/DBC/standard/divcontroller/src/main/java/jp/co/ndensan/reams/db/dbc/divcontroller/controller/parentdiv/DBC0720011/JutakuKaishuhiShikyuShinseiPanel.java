@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.SaveIkkatuShinsaDate;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishinsa.Shikyushin
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011StateName;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011StateName.申請審査;
-import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011StateName.申請審査_保存不可;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011StateName.申請検索;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.JutakuKaishuhiShikyuShinseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.JutakuKaishuhiShikyuShinseiPanelVlaidationHandler;
@@ -29,6 +28,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJy
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKaishuShikyuGendogakuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinseiikkatushinsa.JutakukaishuSikyuShinseiIkkatuShinsaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -158,25 +158,58 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         }
         RDate 支給申請日開始 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue();
         RDate 支給申請日終了 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue();
-        JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
-        List<MiShinsaSikyuShinsei> resultList;
+        FlexibleDate 支給申請日開始FlexibleDate = null;
         if (支給申請日開始 != null) {
-            resultList = manager.getMiShinasaShikyuShinseiList(new FlexibleDate(支給申請日開始.toDateString()),
-                    new FlexibleDate(支給申請日終了.toDateString()));
-        } else {
-            resultList = manager.getMiShinasaShikyuShinseiList(null, new FlexibleDate(支給申請日終了.toDateString()));
+            支給申請日開始FlexibleDate = new FlexibleDate(支給申請日開始.toDateString());
         }
+        FlexibleDate 支給申請日終了FlexibleDate = null;
+        if (支給申請日終了 != null) {
+            支給申請日終了FlexibleDate = new FlexibleDate(支給申請日終了.toDateString());
+        }
+        JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
+        List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(支給申請日開始FlexibleDate, 支給申請日終了FlexibleDate);
         ViewStateHolder.put(ViewStateKeys.申請一覧, (Serializable) resultList);
         MishinsaShikyuShinseiListHandler handler = MishinsaShikyuShinseiListHandler.of(div.getMishinsaShikyuShinseiListPanel());
         handler.initializeDropDownList(resultList);
         div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD().setValue(RDate.getNowDate());
         if (resultList.isEmpty()) {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
-            return ResponseData.of(div).setState(申請審査_保存不可);
+            return ResponseData.of(div).setState(申請審査);
         } else {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.FALSE);
             return ResponseData.of(div).setState(申請審査);
         }
+    }
+
+    /**
+     * 再検索ボタン押下処理
+     *
+     * @param div JutakuKaishuhiShikyuShinseiPanelDiv
+     * @return ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv>
+     */
+    public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onClick_btnResearch(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+
+        boolean is入力内容の破棄 = false;
+        List<dgMishinsaShikyuShinsei_Row> list = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getSelectedItems();
+        if (list != null && !list.isEmpty()) {
+            for (dgMishinsaShikyuShinsei_Row row : list) {
+                if (row.getTxtShinsaResult() != null && !row.getTxtShinsaResult().isEmpty()) {
+                    is入力内容の破棄 = true;
+                    break;
+                }
+            }
+        }
+
+        if (!ResponseHolder.isReRequest() && is入力内容の破棄) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        return ResponseData.of(div).setState(申請検索);
+
     }
 
     /**
@@ -213,12 +246,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                 } else {
                     row.setTxtShinsaResult(却下する);
                 }
-                if (改修住所重複判定) {
-                    row.setTxtTenkyoReset(Boolean.TRUE);
-                }
-                if (要介護状態３段階変更判定) {
-                    row.setTxt3DankaiReset(Boolean.TRUE);
-                }
+                row.setTxtTenkyoReset(!改修住所重複判定);
+                row.setTxt3DankaiReset(要介護状態３段階変更判定);
             }
         }
 
@@ -299,6 +328,40 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
         return ResponseData.of(div).setState(DBC0720011StateName.完了);
+    }
+
+    /**
+     * 保存パターン状態判断メソッド
+     *
+     * @param div JutakuKaishuhiShikyuShinseiPanelDiv
+     * @return ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv>
+     */
+    public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onStateTransition(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+        if (ResponseHolder.getState().equals(DBC0720011StateName.申請審査.getName())) {
+            RDate 支給申請日開始 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue();
+            RDate 支給申請日終了 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue();
+            FlexibleDate 支給申請日開始FlexibleDate = null;
+            if (支給申請日開始 != null) {
+                支給申請日開始FlexibleDate = new FlexibleDate(支給申請日開始.toDateString());
+            }
+            FlexibleDate 支給申請日終了FlexibleDate = null;
+            if (支給申請日終了 != null) {
+                支給申請日終了FlexibleDate = new FlexibleDate(支給申請日終了.toDateString());
+            }
+            JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
+            List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(支給申請日開始FlexibleDate, 支給申請日終了FlexibleDate);
+            ViewStateHolder.put(ViewStateKeys.申請一覧, (Serializable) resultList);
+            MishinsaShikyuShinseiListHandler handler = MishinsaShikyuShinseiListHandler.of(div.getMishinsaShikyuShinseiListPanel());
+            handler.initializeDropDownList(resultList);
+            if (resultList.isEmpty()) {
+                div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, true);
+            } else {
+                div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.FALSE);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, false);
+            }
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -404,7 +467,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                             .set住宅住所変更(row.getTxtTenkyoReset()).set要介護状態３段階変更(row.getTxt3DankaiReset())
                             .set審査結果(row.getTxtShinsaResult()).set支給申請審査区分(ShikyushinseiShinsaKubun.審査済.getコード())
                             .set要介護状態３段階変更(要介護状態３段階変更).set住宅住所変更(住宅住所変更)
-                            .set審査年月日(FlexibleDate.getNowDate()).set審査結果(審査結果).build();
+                            .set審査年月日(決定年月日).set審査結果(審査結果).build();
                     SaveIkkatuShinsaDate date = new SaveIkkatuShinsaDate(entity, 被保険者番号, サービス提供年月, 整理番号,
                             証記載保険者番号, 決定年月日, new ShikibetsuCode(row.getTxtSikibetsuCode()), 支給決定区分, 支払金額);
                     parameterList.add(date);

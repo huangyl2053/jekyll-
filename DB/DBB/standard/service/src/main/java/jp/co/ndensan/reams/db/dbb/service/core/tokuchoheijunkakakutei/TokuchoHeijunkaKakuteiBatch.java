@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -667,7 +668,11 @@ public class TokuchoHeijunkaKakuteiBatch {
             RString 今年度保険料率 = DecimalFormatter.toコンマ区切りRString(保険料段階.get保険料率(), 整数_ZREO);
             entity.set今年度保険料率(今年度保険料率);
         }
-        Code 特別徴収業務者コード = 特徴平準化確定一覧.get年金特徴回付情報_介護継承().getDtTokubetsuChoshuGimushaCode();
+        Code 特別徴収業務者コード = null;
+        TokubetsuChoshuGimushaCode 特別徴収業務者コード_Before = 特徴平準化確定一覧.get年金特徴回付情報_介護継承().getDtTokubetsuChoshuGimushaCode();
+        if (特別徴収業務者コード_Before != null) {
+            特別徴収業務者コード = 特別徴収業務者コード_Before.value();
+        }
         if (特別徴収業務者コード != null) {
             entity.set特別徴収業務者コード(特別徴収業務者コード.getColumnValue());
             RString 特別徴収業務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,

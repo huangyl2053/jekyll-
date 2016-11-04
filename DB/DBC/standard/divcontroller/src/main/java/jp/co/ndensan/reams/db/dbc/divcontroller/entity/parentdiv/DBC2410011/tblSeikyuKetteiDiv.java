@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblSeikyuKetteiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -107,7 +107,7 @@ public class tblSeikyuKetteiDiv extends TablePanel {
  * @author 自動生成
  */
 class celSeikyuKettei1AttblSeikyuKettei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtKetteiYMD")
     private TextBoxDate txtKetteiYMD;
     @JsonProperty("radShikyuFushikyuKubun")
@@ -177,7 +177,7 @@ class celSeikyuKettei1AttblSeikyuKettei extends TableCell {
  * @author 自動生成
  */
 class celSeikyuKettei2AttblSeikyuKettei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("spaSeikyuKettei")
     private Space spaSeikyuKettei;
     @JsonProperty("txtFushikyuRiyu")

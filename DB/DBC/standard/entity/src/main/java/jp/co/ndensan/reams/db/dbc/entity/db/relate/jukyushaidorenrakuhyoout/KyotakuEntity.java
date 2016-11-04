@@ -33,4 +33,5 @@ public class KyotakuEntity {
     private FlexibleDate 届出年月日;
     private RString サービス種類コード;
     private FlexibleDate 有効終了日;
+    private int 履歴番号;
 }

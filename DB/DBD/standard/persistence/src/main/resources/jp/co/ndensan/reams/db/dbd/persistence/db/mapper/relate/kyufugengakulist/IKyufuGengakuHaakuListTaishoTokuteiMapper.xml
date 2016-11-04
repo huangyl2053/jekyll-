@@ -48,7 +48,7 @@
             AND A."tmp_choteiNendo" = 時効起算日管理."choteiNendo"
             AND A."tmp_fukaNendo" = 時効起算日管理."fukaNendo"
             AND A."tmp_tsuchishoNo" = 時効起算日管理."tsuchishoNo"
-            AND A."tmp_kibetsu" = 時効起算日管理."shuno_Ki_Tsuki"
+            AND LPAD(A."tmp_kibetsu"::varchar,3,'0') = 時効起算日管理."shuno_Ki_Tsuki"
             AND A."tmp_tokucho_fuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
             )
         </if>
@@ -81,7 +81,7 @@
             AND A."tmp_choteiNendo" = 時効起算日管理."choteiNendo"
             AND A."tmp_fukaNendo" = 時効起算日管理."fukaNendo"
             AND A."tmp_tsuchishoNo" = 時効起算日管理."tsuchishoNo"
-            AND A."tmp_kibetsu" = 時効起算日管理."shuno_Ki_Tsuki" 
+            AND LPAD(A."tmp_kibetsu"::varchar,3,'0') = 時効起算日管理."shuno_Ki_Tsuki" 
             AND A."tmp_tokucho_fuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
             )
         </if>

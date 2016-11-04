@@ -187,7 +187,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
     private static final int INDEX_14 = 14;
     private static final RString 降順 = new RString("DESC,");
     private static final RString 昇順 = new RString("ASC,");
-    private static final RString 英数字ファイル名 = new RString("TokubetsuChoshuHeijunkaKakuteiData.csv");
+    private static final RString 英数字ファイル名 = new RString("KariNonyuTsuchishoHakkoIchiranData.csv");
     private static final RString 生活保護区分 = new RString("seikatsuHogoKubun");
     private static final RString 口座区分 = new RString("dbT2015KeisangoJoho_kozaKubun");
     private static final int 月_4 = 4;
@@ -363,13 +363,15 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
 
     @Override
     protected void initialize() {
-        連番 = Decimal.ONE;
+        連番 = Decimal.ZERO;
         スプール = new HashMap<>();
         reportWriter = new HashMap<>();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBB介護賦課, 納入通知書_帳票分類ID,
                 processParameter.get出力帳票一覧List().get(NUM_0).get出力順ID());
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        市町村コード = 導入団体クラス.get地方公共団体コード();
+        市町村名 = 導入団体クラス.get市町村名();
         出力順 = RString.EMPTY;
         出力順リスト設定();
         帳票ID = processParameter.get出力帳票一覧List().get(NUM_0).get帳票ID();
@@ -434,6 +436,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         final FukaJohoZenendoTmpEntity 賦課情報 = entity.get賦課情報();
         if (賦課情報 == null || 賦課情報.getFuka_FukaNendo() == null) {
             保険料納入通知書発行(entity, null);
+            連番 = 連番.add(Decimal.ONE);
         } else if (choteiNendo == null) {
             lastEntity = entity;
             set賦課情報集計前データ(賦課情報);
@@ -464,8 +467,6 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         if (entity.get賦課情報() != null && entity.get賦課情報().getFuka_ShunoId() != null) {
             shunoId = Long.valueOf(entity.get賦課情報().getFuka_ShunoId().toString());
         }
-        市町村コード = 導入団体クラス.get地方公共団体コード();
-        市町村名 = 導入団体クラス.get市町村名();
         List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
         KariSanteiTsuchiShoKyotsu 保険料納入通知書仮算定情報 = new KariSanteiTsuchiShoKyotsu();
         保険料納入通知書仮算定情報.set発行日(processParameter.get発行日());
@@ -1215,13 +1216,13 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             bodyList.add(編集後仮算定通知書共通情報.get編集後宛先().get町域());
             bodyList.add(編集後仮算定通知書共通情報.get編集後宛先().get番地());
         }
-        if (isNull(編集後仮算定通知書共通情報.get更正後())) {
+        if (isNull(編集後仮算定通知書共通情報.get前年度情報()) || isNull(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階())) {
             bodyList.add(RString.EMPTY);
         } else {
-            bodyList.add(編集後仮算定通知書共通情報.get更正後().get保険料段階());
+            bodyList.add(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階());
         }
-        bodyList.add(isNull(編集後仮算定通知書共通情報.get今後納付すべき額())
-                ? RString.EMPTY : new RString(編集後仮算定通知書共通情報.get今後納付すべき額().toString()));
+        bodyList.add(isNull(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計())
+                ? RString.EMPTY : new RString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計().toString()));
         set次期以降(編集後仮算定通知書共通情報, 出力期, bodyList);
         bodyList.add(get口座情報(編集後仮算定通知書共通情報));
         return bodyList;
@@ -1829,7 +1830,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             boolean 区分 = false;
             List<UniversalPhase> 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get更正後普徴期別金額リスト();
             if (NUM_1 == 普徴期別金額リスト.size() && NUM_1 == 普徴期別金額リスト.get(0).get期()) {
-                bodyList.add(isNull(普徴期別金額リスト.get(0).get金額()) ? RString.EMPTY
+                bodyList.add(isNull(普徴期別金額リスト.get(0).get金額()) ? new RString(NUM_0)
                         : DecimalFormatter.toコンマ区切りRString(普徴期別金額リスト.get(0).get金額(), 0));
                 return;
             }

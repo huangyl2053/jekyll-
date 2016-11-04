@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -30,6 +32,7 @@ public class JyutakugaisyunaiyoListValidationHandler {
     private static final RString CHAKOBI = new RString("着工日");
     private static final RString KANSEIBI = new RString("完成日");
     private static final RString KAISHUKENGAKU = new RString("改修金額");
+    private static final RString モード_修正 = new RString("修正");
     private final JyutakugaisyunaiyoListDiv div;
 
     /**
@@ -60,8 +63,9 @@ public class JyutakugaisyunaiyoListValidationHandler {
                     DbcErrorMessages.着工日不一致), div.getTxtTyakkoyotebi()));
             return validPairs;
         }
-        if (div.getDgGaisyuList().getDataSource().size() > 1
-                && !div.getDgGaisyuList().getDataSource().get(0).getTxtJutakuAddress().equals(div.getTxtJyusyo().getDomain().value())) {
+        List<dgGaisyuList_Row> rowList = div.getDgGaisyuList().getDataSource();
+        if (((rowList.size() == 1 && !モード_修正.equals(div.getPnlNyuryokuArea().getState()))
+                || (rowList.size() > 1)) && !rowList.get(0).getTxtJutakuAddress().equals(div.getTxtJyusyo().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
         }
@@ -98,7 +102,7 @@ public class JyutakugaisyunaiyoListValidationHandler {
         if (RString.isNullOrEmpty(div.getTxtJigyosya().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, JIGYOSYA.toString()), div.getTxtJigyosya()));
         }
-        if (RString.isNullOrEmpty(div.getTxtJyusyo().getDomain().value())) {
+        if (RString.isNullOrEmpty(div.getTxtJyusyo().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, JYUSHO.toString()), div.getTxtJyusyo()));
         }
         if (div.getTxtTyakkoyotebi().getValue() == null) {

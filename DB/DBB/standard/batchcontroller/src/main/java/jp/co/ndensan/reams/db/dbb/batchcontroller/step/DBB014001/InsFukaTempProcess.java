@@ -59,6 +59,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuchokarisanteifuka."
                     + "IFuchoKarisanteiFukaMapper.get賦課計算");
     private static final RString 仮算定賦課方法_01 = new RString("01");
+    private static final RString 本人区分_本人 = new RString("1");
     private static final RString 仮算定賦課方法_02 = new RString("02");
     private static final RString 仮算定賦課方法_03 = new RString("03");
     private static final RString 仮算定賦課方法_04 = new RString("04");
@@ -161,6 +162,12 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
 
     private RString get段階区分(FukaKeisanEntity entity) {
         if (仮算定賦課方法_11.equals(仮算定賦課方法)) {
+            if (本人区分_本人.equals(entity.get世帯員所得情報Entity().getSetai_honninKubun_1())) {
+                ShinkiShikakuTaishoTempEntity shinkiShikakuTaishoTempEntity = new ShinkiShikakuTaishoTempEntity();
+                shinkiShikakuTaishoTempEntity.setTsuchishoNo(entity.get普徴仮算定抽出().getTsuchishoNo());
+                shinkiShikakuTaishoTempWriter.insert(shinkiShikakuTaishoTempEntity);
+                return 普通徴収_仮算定新規資格適用段階;
+            }
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
                     get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
             SeigyoJoho 月別保険料制御情報 = manager.editor月別保険料制御情報(保険料段階List);
@@ -176,8 +183,8 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             保険料段階パラメータ.setFukaNendo(entity.get普徴仮算定抽出().getFukaNendo());
             保険料段階パラメータ.setFukaKonkyo(賦課根拠);
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
-            TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
-            return 月別保険料段階.get保険料段階04月().get段階区分();
+            TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine仮算定保険料段階(保険料段階パラメータ);
+            return 月別保険料段階.get保険料段階04月();
         } else if (entity.get介護賦課前年度() != null) {
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
                     get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
@@ -190,7 +197,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             保険料段階パラメータ.setFukaKonkyo(賦課根拠);
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
             TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
-            return 月別保険料段階.get保険料段階04月().get段階区分();
+            return 月別保険料段階.get保険料段階04月();
         }
         ShinkiShikakuTaishoTempEntity shinkiShikakuTaishoTempEntity = new ShinkiShikakuTaishoTempEntity();
         shinkiShikakuTaishoTempEntity.setTsuchishoNo(entity.get普徴仮算定抽出().getTsuchishoNo());

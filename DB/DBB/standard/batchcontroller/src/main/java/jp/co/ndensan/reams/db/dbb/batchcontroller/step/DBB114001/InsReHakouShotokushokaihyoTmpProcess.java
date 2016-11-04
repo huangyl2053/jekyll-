@@ -80,9 +80,11 @@ public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<Shoto
         entity.setChoikiCode(所得照会票データ.getChoikiCode());
         entity.setGyoseikuCode(所得照会票データ.getGyoseikuCode());
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
-            entity.setShichosonCode(導入団体コード);
+            entity.setShichosonCode(導入団体コード.getColumnValue());
         } else {
-            entity.setShichosonCode(所得照会票データ.getGenLasdecCode());
+            RString shichosonCode = 所得照会票データ.getGenLasdecCode() == null
+                    ? RString.EMPTY : 所得照会票データ.getGenLasdecCode().getColumnValue();
+            entity.setShichosonCode(shichosonCode);
         }
         entity.setZenjushoCode(所得照会票データ.getZenjushoCode());
         entity.setYubinNo(所得照会票データ.getYubinNo());
@@ -94,6 +96,9 @@ public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<Shoto
         entity.setHihokennshaKubunCode(RString.EMPTY);
         entity.setSeibetsuCode(所得照会票データ.getSeibetsuCode());
         entity.setJuminShubetsuCode(所得照会票データ.getJuminShubetsuCode());
+        RString torokuTodokedeYMD = 所得照会票データ.getTorokuTodokedeYMD() == null
+                ? RString.EMPTY : new RString(所得照会票データ.getTorokuTodokedeYMD().toString());
+        entity.setTorokuTodokedeYMD(torokuTodokedeYMD);
         return entity;
     }
 

@@ -80,8 +80,6 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDac implements ISaveable<DbT30
     @Override
     public int save(DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額受領委任契約事業者エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 

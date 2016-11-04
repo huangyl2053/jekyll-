@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.HokenryoDankaiHantei;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyojohoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
@@ -316,7 +316,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
                 dankaiProcessEntityList.get生保の情報(),
                 dankaiProcessEntityList.get老齢の情報(),
                 dankaiProcessEntityList.get被保険者対象Temp().getHukaSystemDate());
-        List<KazeiKubun> 課税区分リスト = new ArrayList<>();
+        List<KazeiKubunHonninKubun> 課税区分リスト = new ArrayList<>();
         set課税区分リスト(dankaiProcessEntityList, 課税区分リスト, 賦課根拠);
         賦課根拠.setSetaiinKazeiKubunList(課税区分リスト);
         HokenshaDankaiTemp hokenshaDankaiTemp = new HokenshaDankaiTemp();
@@ -334,7 +334,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         SeigyoJoho 月別保険料制御情報 = get月別保険料制御情報(hokenryoDankaiList);
         保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
-        Map<Integer, HokenryoDankai> 月別保険料制御情報Map = new HashMap<>();
+        Map<Integer, RString> 月別保険料制御情報Map = new HashMap<>();
         月別保険料制御情報Map.put(ONE, 月別保険料段階.get保険料段階04月());
         月別保険料制御情報Map.put(TWO, 月別保険料段階.get保険料段階05月());
         月別保険料制御情報Map.put(THR, 月別保険料段階.get保険料段階06月());
@@ -350,18 +350,18 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         int i;
         for (i = ONE; i <= TWE; i++) {
             if (null != 月別保険料制御情報Map.get(i)
-                    && null != 月別保険料制御情報Map.get(i).get段階区分()
-                    && RString.EMPTY != 月別保険料制御情報Map.get(i).get段階区分()) {
-                hokenshaDankaiTemp.set保険者設定段階1(月別保険料制御情報Map.get(i).get段階区分());
+                    && null != 月別保険料制御情報Map.get(i)
+                    && RString.EMPTY != 月別保険料制御情報Map.get(i)) {
+                hokenshaDankaiTemp.set保険者設定段階1(月別保険料制御情報Map.get(i));
                 break;
             }
         }
         for (int j = i + ONE; j <= TWE; j++) {
             if (null != 月別保険料制御情報Map.get(j)
-                    && null != 月別保険料制御情報Map.get(j).get段階区分()
-                    && RString.EMPTY != 月別保険料制御情報Map.get(j).get段階区分()
-                    && 月別保険料制御情報Map.get(i).get段階区分() != 月別保険料制御情報Map.get(j).get段階区分()) {
-                hokenshaDankaiTemp.set保険者設定段階2(月別保険料制御情報Map.get(j).get段階区分());
+                    && null != 月別保険料制御情報Map.get(j)
+                    && RString.EMPTY != 月別保険料制御情報Map.get(j)
+                    && 月別保険料制御情報Map.get(i) != 月別保険料制御情報Map.get(j)) {
+                hokenshaDankaiTemp.set保険者設定段階2(月別保険料制御情報Map.get(j));
                 break;
             }
         }
@@ -390,28 +390,31 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         int k;
         for (k = ONE; k <= TWE; k++) {
             if (null != 月別保険料制御情報Map.get(k)
-                    && null != 月別保険料制御情報Map.get(k).get段階区分()
-                    && RString.EMPTY != 月別保険料制御情報Map.get(k).get段階区分()) {
-                hyojunDankaiTemp.set標準設定段階1(月別保険料制御情報Map.get(k).get段階区分());
+                    && null != 月別保険料制御情報Map.get(k)
+                    && RString.EMPTY != 月別保険料制御情報Map.get(k)) {
+                hyojunDankaiTemp.set標準設定段階1(月別保険料制御情報Map.get(k));
                 break;
             }
         }
         for (int l = k + ONE; l <= TWE; l++) {
             if (null != 月別保険料制御情報Map.get(l)
-                    && null != 月別保険料制御情報Map.get(l).get段階区分()
-                    && RString.EMPTY != 月別保険料制御情報Map.get(l).get段階区分()
-                    && 月別保険料制御情報Map.get(k).get段階区分() != 月別保険料制御情報Map.get(l).get段階区分()) {
-                hyojunDankaiTemp.set標準設定段階2(月別保険料制御情報Map.get(l).get段階区分());
+                    && null != 月別保険料制御情報Map.get(l)
+                    && RString.EMPTY != 月別保険料制御情報Map.get(l)
+                    && 月別保険料制御情報Map.get(k) != 月別保険料制御情報Map.get(l)) {
+                hyojunDankaiTemp.set標準設定段階2(月別保険料制御情報Map.get(l));
                 break;
             }
         }
         標準設定段階Writer.insert(hyojunDankaiTemp);
     }
 
-    private void set課税区分リスト(DankaiProcessEntityList dankaiProcessEntityList, List<KazeiKubun> 課税区分リスト, FukaKonkyo 賦課根拠) {
+    private void set課税区分リスト(DankaiProcessEntityList dankaiProcessEntityList, List<KazeiKubunHonninKubun> 課税区分リスト, FukaKonkyo 賦課根拠) {
         for (SetaiShotokuEntity 世帯員 : dankaiProcessEntityList.get世帯員所得情報Temp()) {
             if (世帯員.getKazeiKubun() != null && !世帯員.getKazeiKubun().isEmpty()) {
-                課税区分リスト.add(KazeiKubun.toValue(世帯員.getKazeiKubun()));
+                KazeiKubunHonninKubun kazeiKubunHonninKubun = new KazeiKubunHonninKubun();
+                kazeiKubunHonninKubun.set課税区分(KazeiKubun.toValue(世帯員.getKazeiKubun()));
+                kazeiKubunHonninKubun.set本人区分(HonninKubun.toValue(世帯員.getHonninKubun()));
+                課税区分リスト.add(kazeiKubunHonninKubun);
             }
             if (HonninKubun.本人.getCode().equals(世帯員.getHonninKubun())) {
                 賦課根拠.setGokeiShotoku(世帯員.getGokeiShotokuGaku());

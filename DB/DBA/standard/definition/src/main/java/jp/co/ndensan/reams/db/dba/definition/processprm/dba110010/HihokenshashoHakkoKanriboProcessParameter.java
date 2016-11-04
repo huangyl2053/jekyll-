@@ -27,14 +27,13 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
     private final FlexibleDate koufusiuryouhi;
     private final FlexibleDate kasyuukayisihi;
     private final FlexibleDate kasyuusiuryouhi;
-    private final boolean seyisinjyohoflg;
+    private final boolean saisinjyohoflg;
     private final boolean renbanfukaflg;
     private final boolean koumukumeyifukaflg;
     private final boolean hizikehensyuuflg;
     private final List<RString> kofuJiyulist;
     private final List<RString> kaishuJiyulist;
-    private final RString syuturyokujunid;
-    private final long jobId;
+    private final long syuturyokujunid;
 
     /**
      * 非公開コンストラクタです。
@@ -50,9 +49,8 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
      * @param 日付編集フラグ boolean
      * @param 交付事由 List<RString>
      * @param 回収事由 List<RString>
-     * @param 出力順ID RString
+     * @param 出力順ID long
      * @param 出力対象 RString
-     * @param jobId ジョブID
      */
     private HihokenshashoHakkoKanriboProcessParameter(
             RString 証発行モード,
@@ -67,8 +65,7 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
             boolean 日付編集フラグ,
             List<RString> 交付事由,
             List<RString> 回収事由,
-            RString 出力順ID,
-            long jobId
+            long 出力順ID
     ) {
         this.akasihakoumod = 証発行モード;
         this.siyuturiyokudaysyou = 出力対象;
@@ -76,14 +73,13 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
         this.koufusiuryouhi = 交付終了日;
         this.kasyuukayisihi = 回収開始日;
         this.kasyuusiuryouhi = 回収終了日;
-        this.seyisinjyohoflg = 最新情報フラグ;
+        this.saisinjyohoflg = 最新情報フラグ;
         this.renbanfukaflg = 連番付加フラグ;
         this.koumukumeyifukaflg = 項目名付加フラグ;
         this.hizikehensyuuflg = 日付編集フラグ;
         this.kofuJiyulist = 交付事由;
         this.kaishuJiyulist = 回収事由;
         this.syuturyokujunid = 出力順ID;
-        this.jobId = jobId;
     }
 
     /**
@@ -100,9 +96,8 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
      * @param 日付編集フラグ boolean
      * @param 交付事由 List<RString>
      * @param 回収事由 List<RString>
-     * @param 出力順ID RString
-     * @param 出力対象 RString
-     * @param jobId long
+     * @param 出力順ID long
+     * @param 出力対象 long
      * @return 被保険者証発行管理簿バッチ処理パラメータークラス
      */
     public static HihokenshashoHakkoKanriboProcessParameter processParameter(
@@ -118,9 +113,8 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
             boolean 日付編集フラグ,
             List<RString> 交付事由,
             List<RString> 回収事由,
-            RString 出力順ID,
-            long jobId) {
-        
+            long 出力順ID) {
+
         return new HihokenshashoHakkoKanriboProcessParameter(
                 証発行モード,
                 出力対象,
@@ -134,8 +128,6 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
                 日付編集フラグ,
                 交付事由,
                 回収事由,
-                出力順ID,
-                jobId
-                );
+                出力順ID);
     }
 }

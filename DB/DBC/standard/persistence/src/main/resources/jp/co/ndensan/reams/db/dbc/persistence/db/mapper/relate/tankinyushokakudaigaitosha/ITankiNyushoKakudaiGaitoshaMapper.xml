@@ -179,6 +179,10 @@
         DbT1001."koikinaiJushochiTokureiFlag",
         DbT1001."koikinaiTokureiSochimotoShichosonCode",
         DbT1001."kyuShichosonCode",
+        CASE DbT1001."koikinaiJushochiTokureiFlag" WHEN '1' THEN 
+	DbT1001."koikinaiJushochiTokureiFlag" ELSE 
+	DbT1001."shichosonCode"
+	END AS 証記載保険者番号 ,
         ROW_NUMBER() OVER (PARTITION BY DbT1001."hihokenshaNo", DbT1001."shikakuShutokuYMD" ORDER BY DbT1001."idoYMD" DESC, DbT1001."edaNo" DESC) As 番号
         FROM
         抽出対象 AS 抽出対象

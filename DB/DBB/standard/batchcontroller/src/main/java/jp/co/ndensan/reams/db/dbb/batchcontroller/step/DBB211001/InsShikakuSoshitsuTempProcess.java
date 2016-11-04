@@ -162,10 +162,10 @@ public class InsShikakuSoshitsuTempProcess extends BatchProcessBase<ShikakuSoshi
 
         if (資格の情報.getShikakuSoshitsuJiyuCode() != null
                 && 資格喪失事由コード_転出.equals(資格の情報.getShikakuSoshitsuJiyuCode())) {
-            return DT各種区分_01;
+            return DT各種区分_02;
         } else if (資格の情報.getShikakuSoshitsuJiyuCode() != null
                 && 資格喪失事由コード_死亡.equals(資格の情報.getShikakuSoshitsuJiyuCode())) {
-            return DT各種区分_02;
+            return DT各種区分_01;
         } else if (資格の情報.getShikakuSoshitsuJiyuCode() != null
                 && 資格喪失事由コード_除外者.equals(資格の情報.getShikakuSoshitsuJiyuCode())) {
             return DT各種区分_04;

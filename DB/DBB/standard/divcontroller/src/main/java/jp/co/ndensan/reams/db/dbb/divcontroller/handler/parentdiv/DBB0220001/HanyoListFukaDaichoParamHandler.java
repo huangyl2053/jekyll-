@@ -309,7 +309,7 @@ public class HanyoListFukaDaichoParamHandler {
         }
         RString 出力項目ID = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力項目ID);
         if (出力項目ID != null && !出力項目ID.isEmpty()) {
-            div.getCcdShutsuryokuKoumoku().load(出力項目ID, SubGyomuCode.DBB介護賦課);
+            div.getCcdShutsuryokuKoumoku().load(出力項目帳票ID, SubGyomuCode.DBB介護賦課, 出力項目ID);
         }
         AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap.getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
         if (宛名抽出条件 != null) {

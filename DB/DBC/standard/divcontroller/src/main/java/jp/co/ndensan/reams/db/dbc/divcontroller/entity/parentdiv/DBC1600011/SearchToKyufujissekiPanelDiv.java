@@ -18,15 +18,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SearchToKyufujissekiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdJigyoshaSentaku")
-    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaSentaku;
     @JsonProperty("txtHihoNo")
     private TextBoxCode txtHihoNo;
     @JsonProperty("btnSearchHihokensha")
@@ -41,6 +39,8 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     private Button Button1;
     @JsonProperty("HokenshaList")
     private HokenshaListDiv HokenshaList;
+    @JsonProperty("ccdJigyoshaSentaku")
+    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaSentaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,15 +48,6 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdJigyoshaSentaku
-     * @return ccdJigyoshaSentaku
-     */
-    @JsonProperty("ccdJigyoshaSentaku")
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
-        return ccdJigyoshaSentaku;
-    }
-
     /*
      * gettxtHihoNo
      * @return txtHihoNo
@@ -172,6 +163,15 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     @JsonProperty("HokenshaList")
     public IHokenshaListDiv getHokenshaList() {
         return HokenshaList;
+    }
+
+    /*
+     * getccdJigyoshaSentaku
+     * @return ccdJigyoshaSentaku
+     */
+    @JsonProperty("ccdJigyoshaSentaku")
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return ccdJigyoshaSentaku;
     }
 
     // </editor-fold>

@@ -31,11 +31,13 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.CaluculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KuBunnGaTsurakuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka.CreatFukaEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka.HonnSanteiFuka;
@@ -52,6 +54,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
@@ -113,6 +116,9 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
     private HihokenshaDaicho 資格の情報;
     private KuBunnGaTsurakuTempEntity 月別ランク;
     private List<SetaiShotokuEntity> 世帯員所得情報List;
+    private List<DbT2013HokenryoDankaiEntity> dbT2013HokenryoDankaiList;
+    private DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity;
+    private IHonnSanteiFukaMapper mapper;
     private FukaJoho 賦課の情報;
     private ShikibetsuCode 識別コード;
     private GyomuCode 業務コード;
@@ -127,6 +133,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
 
     @Override
     public void initialize() {
+        mapper = getMapper(IHonnSanteiFukaMapper.class);
         count = INDEX_1;
         manager = HonnSanteiFuka.createInstance();
         世帯員所得情報List = new ArrayList<>();
@@ -137,6 +144,8 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         生活保護扶助種類EntityList = new ArrayList<>();
         境界層保険料段階EntityList = new ArrayList<>();
         creatEntity = CreatFukaEntity.createInstance();
+        dbT2013HokenryoDankaiList = mapper.select年額保険料(processParameter.get賦課年度());
+        dbT7022ShoriDateKanriEntity = mapper.select処理状況();
     }
 
     @Override
@@ -421,9 +430,12 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
             List<RoreiFukushiNenkinJukyusha> 老福の情報のリスト,
             List<KyokaisoGaitosha> 境界層の情報のリスト,
             FlexibleYear 賦課の年度) {
-        HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課の年度);
+        if (世帯員所得情報List.isEmpty()) {
+            return;
+        }
+        HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(processParameter.get賦課年度());
         SeigyoJoho 月別保険料制御情報 = manager.editor月別保険料制御情報(保険料段階List);
-        NengakuSeigyoJoho 年額制御情報 = manager.editor年額制御情報();
+        NengakuSeigyoJoho 年額制御情報 = manager.editor年額制御情報(dbT2013HokenryoDankaiList);
         FukaKonkyoBatchParameter 賦課根拠param = new FukaKonkyoBatchParameter();
         賦課根拠param.set賦課基準日(entity.getKijunYMD());
         賦課根拠param.set生保の情報リスト(生保の情報のリスト);
@@ -440,7 +452,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
 
         NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
-        年額保険料パラメータ.set賦課年度(賦課の年度);
+        年額保険料パラメータ.set賦課年度(processParameter.get賦課年度());
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
         NengakuFukaKonkyo 年額賦課根拠;
         if (月別ランク == null) {
@@ -468,7 +480,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
 
         FukaKokyoBatchParameter fukaKokyoBatchParameter = new FukaKokyoBatchParameter();
-        fukaKokyoBatchParameter.set賦課年度(賦課の年度);
+        fukaKokyoBatchParameter.set賦課年度(processParameter.get賦課年度());
         fukaKokyoBatchParameter.set資格の情報(資格の情報);
         fukaKokyoBatchParameter.set世帯員所得情報List(世帯員所得情報List);
         fukaKokyoBatchParameter.set生保の情報のリスト(生保の情報のリスト);
@@ -503,7 +515,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
                 && !賦課の情報_更正後.get減免前介護保険料_年額().equals(年額保険料.getHokenryoNengaku()))
                 || !RString.isNullOrEmpty(徴収方法の情報.get特別徴収停止事由コード())) {
             CalculateChoteiResult choteiResult = manager.caluculateChotei(調定日時, 賦課の情報_更正後,
-                    徴収方法の情報, 年額保険料, 資格の情報);
+                    徴収方法の情報, 年額保険料, 資格の情報, dbT7022ShoriDateKanriEntity);
             賦課の情報_更正後 = choteiResult.get賦課情報();
             徴収方法の情報_更正後 = choteiResult.get徴収方法情報();
         }
@@ -554,7 +566,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         fukaKokyoBatchParameter.set賦課の情報_設定前(新しい賦課の情報);
         FukaJoho 賦課の情報_設定後 = FukaKeisan.createInstance().reflect賦課根拠(fukaKokyoBatchParameter);
         CalculateChoteiResult choteiResult = manager.caluculateChotei(調定日時, 賦課の情報_設定後,
-                徴収方法の情報, 年額保険料, 資格の情報);
+                徴収方法の情報, 年額保険料, 資格の情報, dbT7022ShoriDateKanriEntity);
         FukaJoho 賦課の情報_更正後 = choteiResult.get賦課情報();
         ChoshuHoho 徴収方法の情報_更正後 = choteiResult.get徴収方法情報();
         FukaJohoBuilder fukaBuilder = 賦課の情報_更正後.createBuilderForEdit();

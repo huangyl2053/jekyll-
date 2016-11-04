@@ -68,7 +68,6 @@ public class HanyoListShotokuJohoEntity {
     private FlexibleYear 賦課年度;
     private HihokenshaNo 被保険者番号;
     private RString 保険料段階;
-    private RString 保険料段階仮算定時;
 
     /**
      * -- GETTER -- 宛名Entity。

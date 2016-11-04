@@ -93,6 +93,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
                 TaishoshaKensakuHoho.年月指定.getコード(), TaishoshaKensakuHoho.年月指定.get名称()));
         div.getKogakuServicehiSearch().getRadHihokenshaShitei().setDataSource(dataSource_被保険者);
         div.getKogakuServicehiSearch().getRadNengetsuShitei().setDataSource(dataSource_年月);
+        div.getKogakuServicehiSearch().getRadNengetsuShitei().setDisabled(true);
     }
 
     /**

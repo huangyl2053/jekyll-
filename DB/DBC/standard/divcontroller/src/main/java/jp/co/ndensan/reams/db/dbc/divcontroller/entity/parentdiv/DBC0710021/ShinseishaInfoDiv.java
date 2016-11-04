@@ -4,28 +4,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShinseishaInfo のクラスファイル
- *
- * @reamsid_L DBC-0992-120 yebangqiang
+ * ShinseishaInfo のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShinseishaInfoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,12 +32,14 @@ public class ShinseishaInfoDiv extends Panel {
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("btnJigyosha")
     private ButtonDialog btnJigyosha;
+    @JsonProperty("txtJigyoshaName")
+    private TextBoxAtenaMeisho txtJigyoshaName;
+    @JsonProperty("txtShinseishaName")
+    private TextBox txtShinseishaName;
     @JsonProperty("btnHonninJohoCopy")
     private Button btnHonninJohoCopy;
     @JsonProperty("txtShinseishaNameKana")
     private TextBox txtShinseishaNameKana;
-    @JsonProperty("txtShinseishaName")
-    private TextBox txtShinseishaName;
     @JsonProperty("txtTelNo")
     private TextBoxTelNo txtTelNo;
     @JsonProperty("ddlShinseiTorikesuJiyu")
@@ -154,6 +146,42 @@ public class ShinseishaInfoDiv extends Panel {
     }
 
     /*
+     * gettxtJigyoshaName
+     * @return txtJigyoshaName
+     */
+    @JsonProperty("txtJigyoshaName")
+    public TextBoxAtenaMeisho getTxtJigyoshaName() {
+        return txtJigyoshaName;
+    }
+
+    /*
+     * settxtJigyoshaName
+     * @param txtJigyoshaName txtJigyoshaName
+     */
+    @JsonProperty("txtJigyoshaName")
+    public void setTxtJigyoshaName(TextBoxAtenaMeisho txtJigyoshaName) {
+        this.txtJigyoshaName = txtJigyoshaName;
+    }
+
+    /*
+     * gettxtShinseishaName
+     * @return txtShinseishaName
+     */
+    @JsonProperty("txtShinseishaName")
+    public TextBox getTxtShinseishaName() {
+        return txtShinseishaName;
+    }
+
+    /*
+     * settxtShinseishaName
+     * @param txtShinseishaName txtShinseishaName
+     */
+    @JsonProperty("txtShinseishaName")
+    public void setTxtShinseishaName(TextBox txtShinseishaName) {
+        this.txtShinseishaName = txtShinseishaName;
+    }
+
+    /*
      * getbtnHonninJohoCopy
      * @return btnHonninJohoCopy
      */
@@ -187,24 +215,6 @@ public class ShinseishaInfoDiv extends Panel {
     @JsonProperty("txtShinseishaNameKana")
     public void setTxtShinseishaNameKana(TextBox txtShinseishaNameKana) {
         this.txtShinseishaNameKana = txtShinseishaNameKana;
-    }
-
-    /*
-     * gettxtShinseishaName
-     * @return txtShinseishaName
-     */
-    @JsonProperty("txtShinseishaName")
-    public TextBox getTxtShinseishaName() {
-        return txtShinseishaName;
-    }
-
-    /*
-     * settxtShinseishaName
-     * @param txtShinseishaName txtShinseishaName
-     */
-    @JsonProperty("txtShinseishaName")
-    public void setTxtShinseishaName(TextBox txtShinseishaName) {
-        this.txtShinseishaName = txtShinseishaName;
     }
 
     /*

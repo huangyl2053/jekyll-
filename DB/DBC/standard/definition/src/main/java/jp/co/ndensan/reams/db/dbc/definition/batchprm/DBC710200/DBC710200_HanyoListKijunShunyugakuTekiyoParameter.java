@@ -29,6 +29,8 @@ public class DBC710200_HanyoListKijunShunyugakuTekiyoParameter extends BatchPara
     private static final String KEY_RENBANFUKA = "is連番付加";
     private static final String KEY_ISDATEEDIT = "is日付編集";
     private static final String KEY_HONKENSHACODE = "保険者コード";
+    private static final String KEY_HONKENSHAMEI = "保険者名";
+    private static final String KEY_SHICHOSONCODE = "市町村コード";
     private static final String KEY_TAISHONENDO = "対象年度";
     private static final String KEY_ISDELETEFLAG = "is削除含める";
     private static final String KEY_DATASHUBETSU = "データ種別";
@@ -38,6 +40,7 @@ public class DBC710200_HanyoListKijunShunyugakuTekiyoParameter extends BatchPara
     private static final String KEY_SHINSEIYMDTO = "申請日To";
     private static final String KEY_KETTIYMDFROM = "決定日From";
     private static final String KEY_KETTIYMDTO = "決定日To";
+    private static final long serialVersionUID = 1L;
 
     @BatchParameter(key = KEY_REPORTID, name = "帳票ID")
     private RString 帳票ID;
@@ -53,6 +56,10 @@ public class DBC710200_HanyoListKijunShunyugakuTekiyoParameter extends BatchPara
     private boolean is日付編集;
     @BatchParameter(key = KEY_HONKENSHACODE, name = "保険者コード")
     private RString 保険者コード;
+    @BatchParameter(key = KEY_HONKENSHAMEI, name = "保険者名")
+    private RString 保険者名;
+    @BatchParameter(key = KEY_SHICHOSONCODE, name = "市町村コード")
+    private RString 市町村コード;
     @BatchParameter(key = KEY_TAISHONENDO, name = "対象年度")
     private RString 対象年度;
     @BatchParameter(key = KEY_ISDELETEFLAG, name = "is削除含める")
@@ -84,6 +91,8 @@ public class DBC710200_HanyoListKijunShunyugakuTekiyoParameter extends BatchPara
                 is項目名付加,
                 is日付編集,
                 保険者コード,
+                保険者名,
+                市町村コード,
                 対象年度,
                 is削除含める,
                 データ種別,

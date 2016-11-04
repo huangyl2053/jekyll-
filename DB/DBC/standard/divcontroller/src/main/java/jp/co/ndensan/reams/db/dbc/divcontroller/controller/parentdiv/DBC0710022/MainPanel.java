@@ -6,6 +6,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710022;
 
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.DBC0710022StateName;
@@ -31,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -42,15 +42,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class MainPanel {
 
-    private static final RString 照会 = new RString("照会モード");
     private static final RString 修正 = new RString("修正モード");
-    private static final RString 審査 = new RString("審査モード");
-    private static final RString モード_修正 = new RString("登録");
+    private static final RString 照会 = new RString("照会モード");
+    private static final RString モード_修正 = new RString("修正");
     private static final RString モード_照会 = new RString("照会");
+    private static final RString 画面モード_登録 = new RString("登録モード");
     private static final RString 業務区分 = new RString("01");
     private static final RString MSG_決定日 = new RString("決定日");
     private static final RString MSG_理由 = new RString("不支給理由等");
-    private static final RString 申請を保存する = new RString("btnAddShikyuShinsei");
     private static final RString 被保険者番号KEY = new RString("DBCHihokenshaNo");
 
     /**
@@ -78,14 +77,21 @@ public class MainPanel {
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(被保険者番号);
 
         getHandler(div).set初期化(証明書, 整理番号, サービス年月, 給付率);
-
+        RString 元画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         if (修正.equals(画面モード)) {
+            if (画面モード_登録.equals(元画面モード)) {
+                div.getBtnShinseiJyoho().setDisabled(true);
+            }
             div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().
                     loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_修正);
         } else {
+            if (!照会.equals(元画面モード)) {
+                div.getBtnShinseiJyoho().setDisabled(true);
+            } else {
+                div.getBtnShinseiJyoho().setDisabled(false);
+            }
             div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().
                     loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_照会);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
         }
 
         ShoukanFutsuKetteiJouhouTourokuParameter 画面データ = getHandler(div).set画面データ();
@@ -116,7 +122,9 @@ public class MainPanel {
                 ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
                 ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
                 ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
-                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).respond();
+                LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
+                RealInitialLocker.release(排他キー);
+                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).parameter(画面モード_登録);
             }
         } else {
             ViewStateHolder.put(ViewStateKeys.識別コード, parameter.get識別コード());
@@ -124,57 +132,9 @@ public class MainPanel {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
             ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
             ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
+            LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).respond();
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 住宅改修費支給申請_償還払決定情報登録の個人検索へ戻る
-     *
-     * @param div 画面DIV
-     * @return 個人検索画面へ遷移
-     */
-    public ResponseData<MainPanelDiv> onClick_btnBackToSearch(MainPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.検索に戻る).respond();
-        } else {
-            return ResponseData.of(div).respond();
-        }
-
-    }
-
-    /**
-     * 住宅改修費支給申請_償還払決定情報登録の申請一覧へ戻る
-     *
-     * @param div 画面DIV
-     * @return 償還払い状況照会画面
-     */
-    public ResponseData<MainPanelDiv> onClick_btnCancel(MainPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索キー,
-                    ShokanharaKeteiJyohoParameter.class);
-            if (照会.equals(parameter.get画面モード())) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
-            } else if (審査.equals(parameter.get画面モード())) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
-            } else {
-                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
-            }
         }
         return ResponseData.of(div).respond();
     }
@@ -202,7 +162,10 @@ public class MainPanel {
         ShoukanFutsuKetteiJouhouTourokuParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.画面データ, ShoukanFutsuKetteiJouhouTourokuParameter.class);
         boolean flag = getHandler(div).is内容変更状態(parameter);
-        if (flag) {
+
+        KetteJoho 決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報, KetteJoho.class);
+
+        if (flag || 決定情報 == null) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                         UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -233,5 +196,19 @@ public class MainPanel {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「戻る」ボタンのメソッドです。
+     *
+     * @param div 画面DIV
+     * @return 住宅改修費支給申請_償還払決定情報登録
+     */
+    public ResponseData<MainPanelDiv> onClick_btnBack(MainPanelDiv div) {
+        ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索キー,
+                ShokanharaKeteiJyohoParameter.class);
+        LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
+        RealInitialLocker.release(排他キー);
+        return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.戻る).respond();
     }
 }

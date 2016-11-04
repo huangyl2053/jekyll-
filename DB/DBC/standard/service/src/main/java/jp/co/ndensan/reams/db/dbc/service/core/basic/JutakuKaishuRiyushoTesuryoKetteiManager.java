@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JutakuKaishuRiyushoTesuryo
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -44,24 +44,24 @@ public class JutakuKaishuRiyushoTesuryoKetteiManager {
     /**
      * 主キーに合致する住宅改修理由書作成手数料請求決定を返します。
      *
-     * @param 介護住宅改修理由書作成事業者番号 RiyushoSakuseiJigyoshaNo
-     * @param 決定年月日 KetteiYMD
-     * @param 履歴番号 RirekiNo
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     * @param 介護住宅改修理由書作成事業者番号 JigyoshaNo
+     * @param 集計関連付け番号 RString
+     * @param 履歴番号 int
      * @return JutakuKaishuRiyushoTesuryoKettei
      */
     @Transaction
     public JutakuKaishuRiyushoTesuryoKettei get住宅改修理由書作成手数料請求決定(
+            ShoKisaiHokenshaNo 証記載保険者番号,
             JigyoshaNo 介護住宅改修理由書作成事業者番号,
-            FlexibleDate 決定年月日,
-            Decimal 履歴番号) {
+            RString 集計関連付け番号,
+            int 履歴番号) {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(介護住宅改修理由書作成事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成事業者番号"));
-        requireNonNull(決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定年月日"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(集計関連付け番号, UrSystemErrorMessages.値がnull.getReplacedMessage("集計関連付け番号"));
 
-        DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity = dac.selectByKey(
-                介護住宅改修理由書作成事業者番号,
-                決定年月日,
-                履歴番号.intValue());
+        DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity
+                = dac.selectByKey(証記載保険者番号, 介護住宅改修理由書作成事業者番号, 集計関連付け番号, 履歴番号);
         if (entity == null) {
             return null;
         }

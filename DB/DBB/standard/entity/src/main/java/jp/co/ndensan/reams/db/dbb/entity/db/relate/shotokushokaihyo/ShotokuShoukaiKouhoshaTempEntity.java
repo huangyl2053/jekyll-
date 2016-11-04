@@ -68,12 +68,18 @@ public class ShotokuShoukaiKouhoshaTempEntity implements IDbAccessable, Serializ
     @TempTableColumnOrder(20)
     private FlexibleDate torokuIdoYMD;
     @TempTableColumnOrder(21)
-    private ZenkokuJushoCode tenyuzenzenkokuJushoCode;
+    private FlexibleDate torokuTodokedeYMD;
     @TempTableColumnOrder(22)
-    private RString tenyuzenjusho;
+    private RString seibetsuCode;
     @TempTableColumnOrder(23)
-    private RString tenyuzenbanchi;
+    private ZenkokuJushoCode tenyuzenzenkokuJushoCode;
     @TempTableColumnOrder(24)
+    private RString tenyuzenjusho;
+    @TempTableColumnOrder(25)
+    private RString tenyuzenbanchi;
+    @TempTableColumnOrder(26)
     private RString tenyuzenkatagaki;
+    @TempTableColumnOrder(27)
+    private ZenkokuJushoCode tenshutsuKakuteiZenkokuJushoCode;
 
 }

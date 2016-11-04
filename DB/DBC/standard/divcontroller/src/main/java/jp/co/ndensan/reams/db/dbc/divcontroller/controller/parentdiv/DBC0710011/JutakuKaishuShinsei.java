@@ -15,13 +15,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -44,6 +42,7 @@ public class JutakuKaishuShinsei {
     private final RString 処理モード_修正 = new RString("修正");
     private final RString 処理モード_取消 = new RString("取消");
     private final RString 処理モード_削除 = new RString("削除");
+    private static final int INDEX_6 = 6;
 
     /**
      * 画面ロードメソッド
@@ -144,14 +143,7 @@ public class JutakuKaishuShinsei {
      * @return 本画面
      */
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnBackSearch(JutakuKaishuShinseiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
     }
 
     /**
@@ -161,12 +153,21 @@ public class JutakuKaishuShinsei {
      * @return 本画面
      */
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnBackResult(JutakuKaishuShinseiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.該当者一覧).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.該当者一覧).respond();
+    }
+
+    /**
+     * サービス年月変更メソッド
+     *
+     * @param div JutakuKaishuShinseiDiv
+     * @return ResponseData<JutakuKaishuShinseiDiv>
+     */
+    public ResponseData<JutakuKaishuShinseiDiv> onBlur_txtServiceYM(JutakuKaishuShinseiDiv div) {
+        if (div.getJutakuKaishuShinseiList().getTxtServiceYM().getValue() != null) {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月,
+                    new FlexibleYearMonth(div.getJutakuKaishuShinseiList().getTxtServiceYM().getValue().toDateString().substring(0, INDEX_6)));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月, null);
         }
         return ResponseData.of(div).respond();
     }
@@ -177,7 +178,7 @@ public class JutakuKaishuShinsei {
         if (画面モード.equals(DBC0710011StateName.支給申請モード.getName())) {
             if (JutakukaishuShinseiKubun.事前申請.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 事前申請登録モード);
-            } else if (JutakukaishuShinseiKubun.支給申請.get名称().equals(申請区分)) {
+            } else if (JutakukaishuShinseiKubun.支給申請.get名称().equals(申請区分) || 申請区分.isEmpty()) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
             } else if (JutakukaishuShinseiKubun.取消.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
@@ -190,6 +191,8 @@ public class JutakuKaishuShinsei {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
                 ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_取消);
             }
+        } else {
+            ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
         }
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(div.getJutakuKaishuShinseiList()
                 .getDgJutakuKaishuShinseiList().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth()

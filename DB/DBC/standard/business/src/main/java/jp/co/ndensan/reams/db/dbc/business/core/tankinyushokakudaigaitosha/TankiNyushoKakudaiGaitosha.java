@@ -583,10 +583,9 @@ public class TankiNyushoKakudaiGaitosha {
     /**
      * 出力条件を作成するメッソドです。
      *
-     * @param 市町村名 市町村名
      * @return List<RString>
      */
-    public List<RString> set出力条件(RString 市町村名) {
+    public List<RString> set出力条件() {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出条件】"));
@@ -602,7 +601,7 @@ public class TankiNyushoKakudaiGaitosha {
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.get保険者コード());
             市町村名builder.append(RString.HALF_SPACE);
-            市町村名builder.append(市町村名);
+            市町村名builder.append(processParameter.get保険者名());
             jokenBuilder.append(市町村名builder.toRString());
         }
         出力条件List.add(jokenBuilder.toRString());

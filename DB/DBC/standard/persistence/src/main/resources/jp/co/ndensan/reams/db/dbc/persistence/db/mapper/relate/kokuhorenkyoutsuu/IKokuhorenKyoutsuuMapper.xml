@@ -299,7 +299,13 @@
         ON TEMP."henkanHihokenshaNo" = DAICHO."hihokenshaNo"
         left join rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,false,false,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,false,true,'','','','','','','','','','','','','','','','','','','{}') as ATENA
+        true,'','','','','','','','',true,'','',true,false,true,'','','','','','','','','','','','','','','','','','', 
+                (SELECT 
+               ARRAY_AGG(CAST(rgdb."DbV1001HihokenshaDaicho"."shikibetsuCode" AS TEXT))
+               FROM 
+               rgdb."DbV1001HihokenshaDaicho"
+               )
+        ) as ATENA
         ON DAICHO."shikibetsuCode" = ATENA."shikibetsuCode"
     </select>
 

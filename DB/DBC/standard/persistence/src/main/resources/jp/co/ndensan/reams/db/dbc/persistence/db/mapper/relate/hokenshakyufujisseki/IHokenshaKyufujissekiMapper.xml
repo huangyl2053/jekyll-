@@ -613,6 +613,7 @@
 
     <select resultOrdered="true" id="get給付実績Temp"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujisseki.DbWT1111KyufuJissekiTempTempEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hokenshakyufujisseki.HokenshaKyufujissekiMybatisParameter"
             fetchSize="500">
         SELECT A.*
         FROM
@@ -620,6 +621,7 @@
                 *
             FROM "DbWT1111KyufuJissekiTemp"
             WHERE "DbWT1111KyufuJissekiTemp"."dataKunbun" <![CDATA[<>]]> '14'
+            AND   "DbWT1111KyufuJissekiTemp"."dbWT1131_hokenshaNo" = #{保険者番号}
             AND   ("DbWT1111KyufuJissekiTemp"."dataKunbun" = '00'
                OR ("DbWT1111KyufuJissekiTemp"."dbT3018_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3018_hiHokenshaNo" IS NOT NULL)
                OR ("DbWT1111KyufuJissekiTemp"."dbT3019_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3019_hiHokenshaNo" IS NOT NULL)
@@ -648,6 +650,7 @@
                     *
                 FROM "DbWT1111KyufuJissekiTemp"
                 WHERE "DbWT1111KyufuJissekiTemp"."dataKunbun" = '14'
+                AND   "DbWT1111KyufuJissekiTemp"."dbWT1132_hokenshaNo" = #{保険者番号}
                 ORDER BY "DbWT1111KyufuJissekiTemp"."inputShikibetsuNo",
                          "DbWT1111KyufuJissekiTemp"."hiHokenshaNo",
                          "DbWT1111KyufuJissekiTemp"."serviceTeikyoYM",

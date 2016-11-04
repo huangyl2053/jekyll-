@@ -12,10 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyukette
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.IAssociation;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -109,21 +106,9 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                     separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
             FlexibleYearMonth kizyuniti = new FlexibleDate(ichiranItem.getTeikyo()).getYearMonth();
-            if (shoShiharaiList.get要介護認定状態区分コード() != null) {
-                if (new FlexibleYearMonth("200904").isBeforeOrEquals(kizyuniti)) {
-                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun09.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-                }
-                if (new FlexibleYearMonth("200604").isBeforeOrEquals(kizyuniti)
-                        && kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
-                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun06.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-                }
-                if (new FlexibleYearMonth("200204").isBeforeOrEquals(kizyuniti)
-                        && kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
-                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun02.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-                }
-                if (kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200203"))) {
-                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun99.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-                }
+            if (shoShiharaiList.get要介護認定状態区分コード() != null
+                    && !RString.isNullOrEmpty(shoShiharaiList.get要介護認定状態区分コード().getColumnValue())) {
+                ichiranItem.setYoKaigodo(YokaigoJotaiKubun.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
             }
             ichiranItem.setNinteiKaishibi(共通ポリシfomart(shoShiharaiList.get認定開始日()));
             ichiranItem.setNinteiShuryobi(共通ポリシfomart(shoShiharaiList.get認定終了日()));
@@ -133,12 +118,8 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                     ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 1));
             ichiranItem.setShikyugaku(shoShiharaiList.get支給額() == null
                     ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 1));
-            RStringBuilder nituliki = new RStringBuilder();
-            nituliki.append(shoShiharaiList.get様式名称());
-            nituliki.append(new RString("("));
-            nituliki.append(DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(shoShiharaiList.get金額()), 1));
-            nituliki.append(new RString(")"));
-            ichiranItem.setYoshikigotoKingaku(nituliki.toRString());
+            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
+            ichiranItem.setKingaku(DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(shoShiharaiList.get金額()), 1));
             ichiranItem.setTuika(RString.EMPTY);
             ichiranItem.setShurui(shoShiharaiList.get種類());
             if (!RString.isNullOrEmpty(shoShiharaiList.get支給不支給決定区分())) {

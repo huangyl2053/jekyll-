@@ -132,18 +132,21 @@ public class JyutakuKayisyuHiHandler {
      *
      * @param 引き継ぎ情報 KyufuJissekiPrmBusiness
      * @param 給付実績住宅改修費List 給付実績住宅改修費List
+     * @param サービス提供年月 サービス提供年月
+     * @param ヘッダ情報2 List<KyufuJissekiHedajyoho2>
      */
     public void setデータグリッド(KyufuJissekiPrmBusiness 引き継ぎ情報,
-            List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List) {
+            List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List,
+            FlexibleYearMonth サービス提供年月,
+            List<KyufuJissekiHedajyoho2> ヘッダ情報2) {
         List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
-        RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         for (KyufujissekiJutakuKaishuhiBusiness business : 給付実績住宅改修費List) {
             KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = business.get給付実績住宅改修費情報();
-            if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()))
+            if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(サービス提供年月)
                     && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
                     && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
                     && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
@@ -158,9 +161,8 @@ public class JyutakuKayisyuHiHandler {
             }
         }
         div.getDgJutakuKaishuhi().setDataSource(rowList);
-        set前月と次月の状態(給付実績住宅改修費List, new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()));
-        List<KyufuJissekiHedajyoho2> ヘッダ情報2 = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
-        set前事業者と後事業者の状態(ヘッダ情報2, new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()),
+        set前月と次月の状態(給付実績住宅改修費List, サービス提供年月);
+        set前事業者と後事業者の状態(ヘッダ情報2, サービス提供年月,
                 事業者番号, 実績区分コード, 整理番号, 様式番号);
     }
 
@@ -211,7 +213,7 @@ public class JyutakuKayisyuHiHandler {
      * @param 給付実績住宅改修費List 給付実績住宅改修費List
      * @return サービス提供年月
      */
-    public FlexibleYearMonth get直近サービス提供年月(RString 月Flg, RDate サービス提供年月,
+    public FlexibleYearMonth get直近サービス提供年月(RString 月Flg, FlexibleYearMonth サービス提供年月,
             KyufuJissekiPrmBusiness 引き継ぎ情報,
             List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List) {
         Collections.sort(給付実績住宅改修費List, new DateComparatorServiceTeikyoYM());
@@ -220,18 +222,20 @@ public class JyutakuKayisyuHiHandler {
         if (サービス提供年月 != null) {
             for (KyufujissekiJutakuKaishuhiBusiness business : 給付実績住宅改修費List) {
                 KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = business.get給付実績住宅改修費情報();
-                if (new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()).isBefore(kyufujissekiJutakuKaishuhi.getサービス提供年月())) {
+                if (サービス提供年月.isBefore(kyufujissekiJutakuKaishuhi.getサービス提供年月())) {
                     サービス提供年月後.add(kyufujissekiJutakuKaishuhi);
                 }
-                if (kyufujissekiJutakuKaishuhi.getサービス提供年月().isBefore(new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()))) {
+                if (kyufujissekiJutakuKaishuhi.getサービス提供年月().isBefore(サービス提供年月)) {
                     サービス提供年月前.add(kyufujissekiJutakuKaishuhi);
                 }
             }
         }
-        if (前月.equals(月Flg)) {
+        if (前月.equals(月Flg) && 0 < サービス提供年月前.size()) {
             return サービス提供年月前.get(0).getサービス提供年月();
-        } else {
+        } else if (0 < サービス提供年月後.size()) {
             return サービス提供年月後.get(サービス提供年月後.size() - 1).getサービス提供年月();
+        } else {
+            return FlexibleYearMonth.EMPTY;
         }
     }
 
@@ -252,7 +256,7 @@ public class JyutakuKayisyuHiHandler {
         Collections.sort(給付実績住宅改修費List, new DateComparatorServiceTeikyoYM());
         div.getBtnZengetsu().setDisabled(true);
         div.getBtnJigetsu().setDisabled(true);
-        if (給付実績住宅改修費List != null && !給付実績住宅改修費List.isEmpty()) {
+        if (給付実績住宅改修費List != null && !給付実績住宅改修費List.isEmpty() && サービス提供年月KEY != null && !サービス提供年月KEY.isEmpty()) {
             div.getBtnZengetsu().setDisabled(!給付実績住宅改修費List.
                     get(給付実績住宅改修費List.size() - 1).get給付実績住宅改修費情報().getサービス提供年月().isBefore(サービス提供年月KEY));
             div.getBtnJigetsu().setDisabled(!サービス提供年月KEY.isBefore(

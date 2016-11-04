@@ -116,6 +116,7 @@
         <if test="isEmptyShichosonCode">
             AND B."koikinaiTokureiSochimotoShichosonCode" = #{shichosonCode}
         </if>
+        ${出力順}
     </select>
 
     <select resultOrdered="true" id="get基準日広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
@@ -202,6 +203,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         WHERE
         rank_number = 1
+        ${出力順}
     </select>
 
     <select resultOrdered="true" id="get範囲広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
@@ -289,6 +291,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         WHERE
         rank_number = 1
+        ${出力順}
     </select>
 
     <select resultOrdered="true" id="get広域特解除情報" resultMap="getKoikinaiJushochiTokureiListResultMap"

@@ -6,6 +6,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060011;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -16,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuJissekiGaitoshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +33,8 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     private KyufuJissekiGaitoshaListPanelDiv KyufuJissekiGaitoshaListPanel;
     @JsonProperty("hdn支給限度額一本化年月")
     private RString hdn支給限度額一本化年月;
+    @JsonProperty("hidden件数 ")
+    private RString hidden件数 ;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -91,6 +97,24 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     }
 
     /*
+     * gethidden件数 
+     * @return hidden件数 
+     */
+    @JsonProperty("hidden件数 ")
+    public RString getHidden件数 () {
+        return hidden件数 ;
+    }
+
+    /*
+     * sethidden件数 
+     * @param hidden件数  hidden件数 
+     */
+    @JsonProperty("hidden件数 ")
+    public void setHidden件数 (RString hidden件数 ) {
+        this.hidden件数  = hidden件数 ;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -104,12 +128,12 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnSearchHihokensha() {
+    public Button getBtnSearchHihokensha() {
         return this.getSearchToKyufujissekiPanel().getBtnSearchHihokensha();
     }
 
     @JsonIgnore
-    public void  setBtnSearchHihokensha(ButtonDialog btnSearchHihokensha) {
+    public void  setBtnSearchHihokensha(Button btnSearchHihokensha) {
         this.getSearchToKyufujissekiPanel().setBtnSearchHihokensha(btnSearchHihokensha);
     }
 
@@ -121,36 +145,6 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     @JsonIgnore
     public void  setTxtHihoName(TextBox txtHihoName) {
         this.getSearchToKyufujissekiPanel().setTxtHihoName(txtHihoName);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtJigyoshaNo() {
-        return this.getSearchToKyufujissekiPanel().getTxtJigyoshaNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtJigyoshaNo(TextBoxCode txtJigyoshaNo) {
-        this.getSearchToKyufujissekiPanel().setTxtJigyoshaNo(txtJigyoshaNo);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnSearchJigyosha() {
-        return this.getSearchToKyufujissekiPanel().getBtnSearchJigyosha();
-    }
-
-    @JsonIgnore
-    public void  setBtnSearchJigyosha(ButtonDialog btnSearchJigyosha) {
-        this.getSearchToKyufujissekiPanel().setBtnSearchJigyosha(btnSearchJigyosha);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJigyoshaName() {
-        return this.getSearchToKyufujissekiPanel().getTxtJigyoshaName();
-    }
-
-    @JsonIgnore
-    public void  setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.getSearchToKyufujissekiPanel().setTxtJigyoshaName(txtJigyoshaName);
     }
 
     @JsonIgnore
@@ -181,6 +175,16 @@ public class KyufuJissekiGaitoshaDiv extends Panel {
     @JsonIgnore
     public void  setBtnSearch(Button btnSearch) {
         this.getSearchToKyufujissekiPanel().setBtnSearch(btnSearch);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getSearchToKyufujissekiPanel().getCcdHokenshaList();
+    }
+
+    @JsonIgnore
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return this.getSearchToKyufujissekiPanel().getCcdJigyoshaSentaku();
     }
 
     @JsonIgnore

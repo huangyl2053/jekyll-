@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 住宅改修理由書作成手数料請求明細エンティティのテスト用インスタンスを作成する補助クラスです。
+ *
+ * @reamsid_L DBC-2870-010 zhangruitao
  */
 public final class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator {
 
@@ -47,7 +49,7 @@ public final class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator {
         entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setRirekiNo(DEFAULT_履歴番号);
-        entity.setShikibetsuCode(DEFAULT_識別コード);
+//        entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setServiceCode(DEFAULT_サービスコード);
         entity.setJutakuKaishuJigyoshaMeisho(DEFAULT_介護住宅改修事業者名称);
         entity.setJutakuKaishuChakkoYMD(DEFAULT_介護住宅改修着工年月日);

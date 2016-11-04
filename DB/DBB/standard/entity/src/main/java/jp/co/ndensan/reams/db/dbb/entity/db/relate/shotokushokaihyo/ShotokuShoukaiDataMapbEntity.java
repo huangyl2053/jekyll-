@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
  * 所得照会票データTempのクラスです。
@@ -42,10 +41,9 @@ public class ShotokuShoukaiDataMapbEntity {
     private FlexibleDate idoYMD;
     private RString kouhoshakubun;
     private RString honninKubun;
-    @TempTableColumnOrder(16)
     private RString choikiCode;
     private RString gyoseikuCode;
-    private LasdecCode shichosonCode;
+    private ZenkokuJushoCode shichosonCode;
     private RString zenjushoCode;
     private YubinNo yubinNo;
     private RString chikuCode1;
@@ -56,4 +54,5 @@ public class ShotokuShoukaiDataMapbEntity {
     private RString hihokennshaKubunCode;
     private RString seibetsuCode;
     private RString juminShubetsuCode;
+    private FlexibleDate torokuTodokedeYMD;
 }

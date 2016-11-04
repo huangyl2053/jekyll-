@@ -16,6 +16,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems {
 
     /**
+     * 郵便番号
+     */
+    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
+    /**
+     * 町域コード
+     */
+    町域コード(new RString("0002"), new RString("町域コード"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
+    /**
+     * 行政区コード
+     */
+    行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
+    /**
+     * 世帯コード
+     */
+    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
+    /**
+     * 識別コード
+     */
+    識別コード(new RString("0009"), new RString("識別コード"), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
+    /**
+     * 氏名５０音カナ
+     */
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
+    /**
+     * 生年月日
+     */
+    生年月日(new RString("0012"), new RString("生年月日"), new RString("\"ShikibetsuTaisho_seinengappiYMD\"")),
+    /**
      * 性別
      */
     性別(new RString("0013"), new RString(""), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
@@ -30,15 +58,15 @@ public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems
     /**
      * 通知書番号
      */
-    通知書番号(new RString("0202"), new RString(""), new RString("dbT2015KeisangoJoho_tsuchishoNo")),
+    通知書番号(new RString("0202"), new RString(""), new RString("\"dbT2015KeisangoJoho_tsuchishoNo\"")),
     /**
      * 徴収方法
      */
-    徴収方法(new RString("0209"), new RString(""), new RString("dbT2015KeisangoJoho_choshuHohoRirekiNo")),
+    徴収方法(new RString("0209"), new RString(""), new RString("\"SortTemp_choshuHoho\"")),
     /**
      * 通知書番号
      */
-    特徴開始月(new RString("0213"), new RString(""), new RString("dbT2015KeisangoJoho_choshuHohoRirekiNo"));
+    特徴開始月(new RString("0213"), new RString(""), new RString("\"SortTemp_tkKaishiM\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

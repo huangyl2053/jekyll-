@@ -96,6 +96,8 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
             RString 生年月日 = 特徴異動追加情報.getDtBirthDay();
             if (null != 生年月日) {
                 source.listUpper_4 = new FlexibleDate(生年月日).wareki().toDateString();
+            } else {
+                source.listUpper_4 = RString.EMPTY;
             }
             source.listUpper_9 = getDT各種金額欄(特徴異動追加情報.getDtKakushuKingaku1());
             source.listUpper_10 = getDT各種金額欄(特徴異動追加情報.getDtKakushuKingaku2());
@@ -103,6 +105,8 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
             ShikibetsuCode 識別コード = 特徴異動追加情報.getShikibetsuCode();
             if (null != 識別コード) {
                 source.listLower_1 = 識別コード.value();
+            } else {
+                source.listLower_1 = RString.EMPTY;
             }
             source.listLower_2 = 特徴異動追加情報.getNenkinCode();
             source.listLower_3 = 特徴異動追加情報.getDtKanjiShimei();
@@ -114,6 +118,13 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
             source.listLower_6 = KakushuKubun.toValue(特徴異動追加情報.getTsuchiNaiyoCode(), 特徴異動追加情報.getDtKakushuKubun()).get各種区分名称();
             source.listLower_7 = 特徴異動追加情報.getDtYubinNo();
             source.listLower_8 = 特徴異動追加情報.getDtKanjiJusho();
+        } else {
+            source.listUpper_1 = RString.EMPTY;
+            source.listUpper_2 = RString.EMPTY;
+            source.listUpper_3 = RString.EMPTY;
+            source.listUpper_4 = RString.EMPTY;
+            source.listLower_2 = RString.EMPTY;
+            source.listLower_4 = RString.EMPTY;
         }
         source.hokenshaNo = 保険者番号;
         source.hokenshaName = 保険者名称;
@@ -138,6 +149,8 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
         }
         if (null != 特徴異動情報.get編集後宛先()) {
             source.listUpper_5 = 特徴異動情報.get編集後宛先().get行政区コード().getColumnValue();
+        } else {
+            source.listUpper_5 = RString.EMPTY;
         }
 
         return source;

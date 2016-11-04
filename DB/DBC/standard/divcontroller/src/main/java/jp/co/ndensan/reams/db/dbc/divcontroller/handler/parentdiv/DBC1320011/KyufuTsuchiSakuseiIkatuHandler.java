@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1320011;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.kyufutsuchisakuseiikatu.KyufuTsuchiSakuseiIkatuCollect;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060020.DBC060020_KyufuhiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011.KyufuTsuchiSakuseiIkatuCsvEntity;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011.Kyuf
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011.grdTuuchiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
@@ -23,6 +25,8 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
@@ -39,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 給付費通知書作成(一括)のHandlerです。
@@ -75,8 +80,9 @@ public class KyufuTsuchiSakuseiIkatuHandler {
     private static final RString 広域の場合市町村コード = new RString("000000");
     private static final RString SHARED_FILE_NAME = new RString("1_322");
     private static final RString 共有ファイル名 = new RString("国保連IF取込レコードファイル");
-    private static final RString FILTER = new RString("1_322*.CSV");
+    private static final RString FILTER = new RString("1_322*.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final ReportId 帳票ID = ReportIdDBC.DBC100041.getReportId();
 
     /**
      * コンストラクタです。
@@ -107,11 +113,9 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         set保険者リスト();
         div.getKyufuTsuchiSakuseiPrint().getKyufuTsuchiSakuseiSetting().
                 initialize(true, RDate.getNowDate(), true, false, null, false);
-        div.getCcdBunsyobango().initialize(ReportIdDBC.DBC100041_２ページ目以降.getReportId());
+        div.getCcdBunsyobango().initialize(帳票ID);
         div.getOptServiceType().setSelectedValue(すべて選択);
-        // TODO 出力順の相関方針が確定しないので、実装ができません。
-//        div.getKyufuTsuchiSakuseiPrint().getCcdChohyoShutsuryokujun().load(
-//                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100041_２ページ目以降.getReportId());
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
     }
 
     /**
@@ -180,7 +184,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
             }
         }
         parameter.set被保険者番号(div.getKyufuTsuchiSakusei().getTxtHihokenshaNo().getValue());
-        // TODO 出力順の相関方針が確定しないので、実装ができません
+        parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID()));
         parameter.set文書番号(div.getKyufuTsuchiSakuseiPrint().getCcdBunsyobango().get文書番号());
         return parameter;
     }
@@ -306,5 +310,93 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         ReadOnlySharedFileEntryDescriptor ro_entry = ReadOnlySharedFileEntryDescriptor.fromEntity(entity);
         FilesystemPath copiedPath = SharedFile.copyToLocal(ro_entry, local複写先フォルダパス);
         return copiedPath;
+    }
+
+    /**
+     * 画面データを取得します。
+     *
+     * @return 画面データ
+     */
+    public KyufuTsuchiSakuseiIkatuCollect get画面データ() {
+        KyufuTsuchiSakuseiIkatuCollect 画面データ = new KyufuTsuchiSakuseiIkatuCollect();
+        if (div.getTdrServiceYM().getFromValue() != null) {
+            画面データ.setサービス年月開始(div.getTdrServiceYM().getFromValue().toDateString());
+        }
+        if (div.getTdrServiceYM().getToValue() != null) {
+            画面データ.setサービス年月終了(div.getTdrServiceYM().getToValue().toDateString());
+        }
+        if (!div.getChkServiceSyuruiSyuyaku().getSelectedValues().isEmpty()) {
+            画面データ.setサービス種類集約区分(ONE);
+        }
+        if (div.getCcdHokenshaList() != null && div.getCcdHokenshaList().getSelectedItem() != null) {
+            画面データ.set保険者番号(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
+        }
+        if (!div.getChkYokaigodo().getSelectedKeys().isEmpty()) {
+            画面データ.set要介護度(DataPassingConverter.serialize(
+                    (ArrayList<RString>) div.getChkYokaigodo().getSelectedKeys()));
+        }
+        画面データ.setサービス種類(div.getOptServiceType().getSelectedValue());
+        if (!div.getChkTyusyutuJoken().getSelectedKeys().isEmpty()) {
+            画面データ.set抽出条件(DataPassingConverter.serialize(
+                    (ArrayList<RString>) div.getChkTyusyutuJoken().getSelectedKeys()));
+        }
+        画面データ.set被保険者番号(div.getTxtHihokenshaNo().getValue());
+        画面データ.set被保険者名称(div.getTxtHihokenshaName().getValue());
+        画面データ.set給付費通知情報序列(DataPassingConverter.serialize(
+                (ArrayList<grdTuuchiJoho_Row>) div.getGrdTuuchiJoho().getDataSource()));
+        画面データ.set発行日(div.getKyufuTsuchiSakuseiSetting().getIssueDate().toDateString());
+        画面データ.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID()));
+        画面データ.set文書番号(div.getKyufuTsuchiSakuseiPrint().getCcdBunsyobango().get文書番号());
+        return 画面データ;
+    }
+
+    /**
+     * 画面データで画面にデータを復元します。
+     *
+     * @param 画面データ 画面データ
+     */
+    public void 復元画面データ(KyufuTsuchiSakuseiIkatuCollect 画面データ) {
+        if (!RString.isNullOrEmpty(画面データ.getサービス年月開始())) {
+            div.getTdrServiceYM().setFromValue(new RDate(画面データ.getサービス年月開始().toString()));
+        }
+        if (!RString.isNullOrEmpty(画面データ.getサービス年月終了())) {
+            div.getTdrServiceYM().setToValue(new RDate(画面データ.getサービス年月終了().toString()));
+        }
+        if (!RString.isNullOrEmpty(画面データ.getサービス種類集約区分()) && ONE.equals(画面データ.getサービス種類集約区分())) {
+            List<RString> keys = new ArrayList<>();
+            keys.add(KEY0);
+            div.getChkServiceSyuruiSyuyaku().setSelectedItemsByKey(keys);
+        }
+        if (!RString.isNullOrEmpty(画面データ.get保険者番号())) {
+            div.getCcdHokenshaList().setSelectedShoKisaiHokenshaNoIfExist(
+                    new ShoKisaiHokenshaNo(画面データ.get保険者番号()));
+        }
+        if (!RString.isNullOrEmpty(画面データ.get要介護度())) {
+            div.getChkYokaigodo().setSelectedItemsByKey(
+                    DataPassingConverter.deserialize(画面データ.get要介護度(), List.class));
+        }
+        if (!RString.isNullOrEmpty(画面データ.getサービス種類())) {
+            div.getOptServiceType().setSelectedValue(画面データ.getサービス種類());
+        }
+        if (!RString.isNullOrEmpty(画面データ.get抽出条件())) {
+            div.getChkTyusyutuJoken().setSelectedItemsByKey(
+                    DataPassingConverter.deserialize(画面データ.get抽出条件(), List.class));
+        }
+        div.getTxtHihokenshaNo().setValue(画面データ.get被保険者番号());
+        div.getTxtHihokenshaName().setValue(画面データ.get被保険者名称());
+        div.getGrdTuuchiJoho().setDataSource(
+                DataPassingConverter.deserialize(画面データ.get給付費通知情報序列(), List.class));
+        if (!RString.isNullOrEmpty(画面データ.get発行日())) {
+            div.getKyufuTsuchiSakuseiSetting().initialize(
+                    true, new RDate(画面データ.get発行日().toString()), true, false, null, false);
+        }
+        if (!RString.isNullOrEmpty(画面データ.get出力順ID())) {
+            div.getCcdChohyoShutsuryokujun().load(
+                    SubGyomuCode.DBC介護給付, 帳票ID, Long.parseLong(画面データ.get出力順ID().toString()));
+        }
+        // TODO 文書番号共有子divに文書番号をセットの方がありませんので、文書番号共有子divに画面データで復元できません。
+//        if (!RString.isNullOrEmpty(画面データ.get文書番号())) {
+//            div.getCcdBunsyobango().set文書番号(画面データ.get文書番号());
+//        }
     }
 }

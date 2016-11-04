@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntit
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * サービス種類登録Mangerです。
@@ -64,6 +65,17 @@ public class KubunShikyuGendogakuManager {
      */
     public void save(KaigoServiceShurui entity) {
         kaigoServiceDac.save(entity.toEntity());
+    }
+
+    /**
+     * 主キーに合致する居宅サービス区分支給限度額を削除する。
+     *
+     * @param entity DbT7130KaigoServiceShuruiEntity
+     */
+    @Transaction
+    public void データを物理削除する(DbT7130KaigoServiceShuruiEntity entity) {
+        entity.initializeMd5();
+        kaigoServiceDac.delete(entity);
     }
 
 }

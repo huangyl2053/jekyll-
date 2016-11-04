@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
@@ -501,7 +501,7 @@ public class HanyoListCsvDataCreate {
         if (entity.get要介護認定状態区分コード() == null || entity.get要介護認定状態区分コード().isEmpty()) {
             csvEntity.set受給要介護度(RString.EMPTY);
         } else {
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, codeToRString(entity.get要介護認定状態区分コード())).getName());
+            csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(codeToRString(entity.get要介護認定状態区分コード())).get名称());
         }
 
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始日(), parameter));
@@ -520,19 +520,21 @@ public class HanyoListCsvDataCreate {
             if (口座.isゆうちょ銀行()) {
                 csvEntity.set銀行郵便区分(INDEX_2);
                 csvEntity.set支店コード(口座.get店番());
+                csvEntity.set支店名カナ(RString.EMPTY);
+                csvEntity.set支店名(口座.get店名());
             } else {
                 csvEntity.set銀行郵便区分(INDEX_1);
                 KinyuKikanShitenCode 支店コード = 口座.get支店コード();
                 csvEntity.set支店コード(支店コード != null ? 支店コード.getColumnValue() : RString.EMPTY);
+                KinyuKikanShiten 支店 = 口座.get支店();
+                csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);
+                csvEntity.set支店名(支店 != null ? 支店.get支店名称() : RString.EMPTY);
             }
             KinyuKikanCode 銀行コード = 口座.get金融機関コード();
             KinyuKikan 金融機関 = 口座.get金融機関();
-            KinyuKikanShiten 支店 = 口座.get支店();
             csvEntity.set銀行コード(銀行コード != null ? 銀行コード.getColumnValue() : RString.EMPTY);
             csvEntity.set銀行名カナ(金融機関 != null ? 金融機関.get金融機関カナ名称() : RString.EMPTY);
             csvEntity.set銀行名(金融機関 != null ? 金融機関.get金融機関名称() : RString.EMPTY);
-            csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);
-            csvEntity.set支店名(支店 != null ? 支店.get支店名称() : RString.EMPTY);
             YokinShubetsuPattern 口座種目 = 口座.get預金種別();
             csvEntity.set口座種目(口座種目 != null ? 口座種目.get預金種別名称() : RString.EMPTY);
             csvEntity.set口座番号(口座.get口座番号());

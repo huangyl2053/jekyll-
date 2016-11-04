@@ -126,7 +126,11 @@ public class UpdFutanWariaiTempProcess extends BatchProcessBase<IdouTempEntity> 
         全項目 = 全項目.concat(new RString(二割負担.getSetaiIchigouHihokenshaSu())).concat(SPLIT);
         全項目 = cancatDecimal(二割負担.getNenkinShunyuGoukei(), 全項目);
         全項目 = cancatDecimal(二割負担.getSonotanoGoukeiShotokuKingakuGoukei(), 全項目);
-        全項目 = 全項目.concat(二割負担.getKoseiRiyu()).concat(SPLIT);
+        if (RString.isNullOrEmpty(二割負担.getKoseiRiyu())) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(二割負担.getKoseiRiyu()).concat(SPLIT);
+        }
         全項目 = cancatSetaiCode(二割負担.getSetaiCd(), 全項目);
         全項目 = 全項目.concat(二割負担.getIsDeleted() ? RST_TRUE : RST_FALSE);
         return 全項目;

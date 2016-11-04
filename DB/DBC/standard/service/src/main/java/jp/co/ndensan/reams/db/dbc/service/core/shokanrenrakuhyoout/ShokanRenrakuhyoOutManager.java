@@ -5,12 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.shokanrenrakuhyoout;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2111ShokanShinseiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2112ShokanMeisaiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.HokenshaNoShutokuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110050.IShokanRenrakuhyoOutMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -19,6 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBC-2570-030 wangxue
  */
 public class ShokanRenrakuhyoOutManager {
+
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
 
     private final MapperProvider mapperProvider;
 
@@ -150,7 +158,27 @@ public class ShokanRenrakuhyoOutManager {
      */
     public int getレコード件数(ShokanRenrakuhyoOutMybatisParameter parameter) {
         IShokanRenrakuhyoOutMapper mapper = mapperProvider.create(IShokanRenrakuhyoOutMapper.class);
-        return mapper.get送付ファイルのレコード件数(parameter);
+        List<HokenshaNoShutokuEntity> tempList = mapper.get送付ファイルのレコード件数(parameter);
+        int count = INDEX_0;
+        int count1 = INDEX_0;
+        HihokenshaNo hiHokenshaNo = HihokenshaNo.EMPTY;
+        FlexibleYearMonth serviceTeikyoYM = FlexibleYearMonth.EMPTY;
+        RString seiriNo = RString.EMPTY;
+        if (tempList == null || INDEX_0 == tempList.size()) {
+            return INDEX_0;
+        }
+        for (HokenshaNoShutokuEntity entity : tempList) {
+            if (!hiHokenshaNo.equals(entity.getHiHokenshaNo())
+                    || !serviceTeikyoYM.equals(entity.getServiceTeikyoYM())
+                    || !seiriNo.equals(entity.getSeiriNo())) {
+                count1 = count1 + INDEX_1;
+                hiHokenshaNo = entity.getHiHokenshaNo();
+                serviceTeikyoYM = entity.getServiceTeikyoYM();
+                seiriNo = entity.getSeiriNo();
+            }
+            count = count + entity.getCount();
+        }
+        return count + count1;
     }
 
 }

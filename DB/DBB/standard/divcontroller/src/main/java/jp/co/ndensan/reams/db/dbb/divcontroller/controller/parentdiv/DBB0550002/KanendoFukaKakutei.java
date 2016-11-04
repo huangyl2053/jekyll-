@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofukakakutei.KanendoIdoFukaKakutei;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.DBB0550002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.KanendoFukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgKanendoFukaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550002.KanendoFukaKakuteiHandler;
@@ -134,9 +135,8 @@ public class KanendoFukaKakutei {
      * @return ResponseData<KanendoFukaKakuteiDiv>
      */
     public ResponseData<KanendoFukaKakuteiDiv> onClick_dgKanendoFukaIchiran(KanendoFukaKakuteiDiv div) {
-        // TODO 介護保険料賦課比較画面（DBB0320005）画面へ遷移する
         setViewState(div);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBB0550002TransitionEventName.選択).respond();
     }
 
     /**

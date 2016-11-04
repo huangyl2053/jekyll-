@@ -188,7 +188,7 @@ public class FukushiyoguShohinGuide {
                     new FlexibleDate(fukuDiv.getTxtKanriKaishiDay().getValue().toString()));
             FukushiyoguShohin fukushiyoguShohin = models.get(key);
             FukushiyoguShohinBuilder builder = fukushiyoguShohin.createBuilderForEdit();
-            if (fukuDiv.getTxtKanriShuryoDay() != null) {
+            if (fukuDiv.getTxtKanriShuryoDay().getValue() != null && !fukuDiv.getTxtKanriShuryoDay().getValue().toString().isEmpty()) {
                 builder.set管理終了年月日(new FlexibleDate(fukuDiv.getTxtKanriShuryoDay().getValue().toString()));
             }
             builder.set商品名(nullToEmpty(fukuDiv.getTxtShohinmei().getValue()));

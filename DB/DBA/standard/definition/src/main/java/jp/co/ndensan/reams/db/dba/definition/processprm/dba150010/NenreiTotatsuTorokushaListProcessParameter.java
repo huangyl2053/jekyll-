@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.definition.processprm.dba150010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,13 +27,15 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
     private RString zenkaishuryoYMDHMS;
     private RString konkaikaishiYMDHMS;
     private RString konkaishuryoYMDHMS;
-    private Long shutsuryokujunID;
+    private Long shuturyokujunID;
     private RString psmShikibetsuTaisho;
     private Code shutokuJiyu_Hihokensha;
     private List<Code> soshitsuJiyu_Hihokensha;
     private Code henkoJiyu_Hihokensha;
     private List<Code> jutokuTekiyo;
     private List<Code> jutokuKaijo;
+    private RString orderBy;
+    private boolean orderByFlag;
 
     /**
      * コンストラクタ。
@@ -43,36 +44,27 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
      * @param zenkaishuryoYMDHMS 前回終了日時
      * @param konkaikaishiYMDHMS 今回開始日時
      * @param konkaishuryoYMDHMS 今回終了日時
-     * @param shutsuryokujunID 出力順ID
+     * @param shuturyokujunID 出力順ID
      */
     public NenreiTotatsuTorokushaListProcessParameter(
             RString zenkaikaishiYMDHMS,
             RString zenkaishuryoYMDHMS,
             RString konkaikaishiYMDHMS,
             RString konkaishuryoYMDHMS,
-            Long shutsuryokujunID) {
+            Long shuturyokujunID) {
         this.zenkaikaishiYMDHMS = zenkaikaishiYMDHMS;
         this.zenkaishuryoYMDHMS = zenkaishuryoYMDHMS;
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
         this.konkaishuryoYMDHMS = konkaishuryoYMDHMS;
-        this.shutsuryokujunID = shutsuryokujunID;
+        this.shuturyokujunID = shuturyokujunID;
     }
 
     /**
      * Mybatisのパラメータを作成します。
      *
-     * @param shutsuryokujun 出力順
-     * @param key 宛名キー
      * @return NenreiTotatsuTorokushaListMybatisParameter
      */
-    public NenreiTotatsuTorokushaListMybatisParameter toNenreiTotatsushaTorokuListMybatisParameter(
-            RString shutsuryokujun,
-            IShikibetsuTaishoPSMSearchKey key) {
-        Boolean shutsuryokujunFlg = true;
-        if (shutsuryokujun == null || shutsuryokujun.isEmpty()) {
-
-            shutsuryokujunFlg = false;
-        }
+    public NenreiTotatsuTorokushaListMybatisParameter toNenreiTotatsushaTorokuListMybatisParameter() {
         return new NenreiTotatsuTorokushaListMybatisParameter(
                 konkaikaishiYMDHMS,
                 konkaishuryoYMDHMS,
@@ -82,8 +74,7 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
                 henkoJiyu_Hihokensha,
                 jutokuTekiyo,
                 jutokuKaijo,
-                shutsuryokujun,
-                shutsuryokujunFlg,
-                key);
+                orderBy,
+                orderByFlag);
     }
 }

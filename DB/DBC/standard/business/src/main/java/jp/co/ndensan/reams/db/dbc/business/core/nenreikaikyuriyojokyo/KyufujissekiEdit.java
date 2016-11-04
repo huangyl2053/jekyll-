@@ -12,9 +12,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.Syorike
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpKyufujissekiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpSyuturyokuYoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -123,6 +127,9 @@ public class KyufujissekiEdit {
     private static final RString RSTRING_43 = new RString("43");
     private static final RString RSTRING_51 = new RString("51");
     private static final RString RSTRING_52 = new RString("52");
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
     private boolean first = true;
 
     /**
@@ -149,6 +156,7 @@ public class KyufujissekiEdit {
     }
 
     private void set集計番号(RString serviceSyuruiCode, TmpKyufujissekiRelateEntity tmpEntity) {
+        tmpEntity.setShuukeibangou(RSTRING_43);
         set集計番号1(serviceSyuruiCode, tmpEntity);
         set集計番号2(serviceSyuruiCode, tmpEntity);
         set集計番号3(serviceSyuruiCode, tmpEntity);
@@ -158,29 +166,21 @@ public class KyufujissekiEdit {
     private void set集計番号1(RString serviceSyuruiCode, TmpKyufujissekiRelateEntity tmpEntity) {
         if (ServiceCategoryShurui.訪問介護.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予訪介護.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_11);
-        }
-        if (ServiceCategoryShurui.訪問入浴.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予訪入浴.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.訪問入浴.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予訪入浴.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_12);
-        }
-        if (ServiceCategoryShurui.訪問看護.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予訪看護.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.訪問看護.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予訪看護.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_13);
-        }
-        if (ServiceCategoryShurui.訪問リハ.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予訪リハ.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.訪問リハ.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予訪リハ.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_14);
-        }
-        if (ServiceCategoryShurui.通所介護.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予通介護.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.通所介護.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予通介護.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_15);
-        }
-        if (ServiceCategoryShurui.通所リハ.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予通リハ.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.通所リハ.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予通リハ.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_16);
-        }
-        if (ServiceCategoryShurui.用具貸与.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予用貸与.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.用具貸与.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予用貸与.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_17);
-        }
-        if (ServiceCategoryShurui.短期生活.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予短介護.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.短期生活.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予短介護.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_18);
-        }
-        if (ServiceCategoryShurui.短期老健.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予短老健.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.短期老健.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予短老健.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_19);
         }
     }
@@ -188,26 +188,19 @@ public class KyufujissekiEdit {
     private void set集計番号2(RString serviceSyuruiCode, TmpKyufujissekiRelateEntity tmpEntity) {
         if (ServiceCategoryShurui.短期医療.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予短医療.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_20);
-        }
-        if (ServiceCategoryShurui.療養指導.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予療養指.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.療養指導.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予療養指.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_21);
-        }
-        if (ServiceCategoryShurui.特施短外.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予特施設.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.特施短外.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予特施設.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_22);
-        }
-        if (ServiceCategoryShurui.特施短期.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.特施短期.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_23);
-        }
-        if (ServiceCategoryShurui.地夜間訪.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地夜間訪.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_24);
-        }
-        if (ServiceCategoryShurui.地通所介.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予通所.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地通所介.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予通所.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_25);
-        }
-        if (ServiceCategoryShurui.地小短外.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予小外.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地小短外.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予小外.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_26);
-        }
-        if (ServiceCategoryShurui.地小規単.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予小短.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地小規単.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予小短.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_27);
         }
     }
@@ -215,29 +208,21 @@ public class KyufujissekiEdit {
     private void set集計番号3(RString serviceSyuruiCode, TmpKyufujissekiRelateEntity tmpEntity) {
         if (ServiceCategoryShurui.地共同介.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予共同.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_28);
-        }
-        if (ServiceCategoryShurui.地施短外.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地施短外.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_29);
-        }
-        if (ServiceCategoryShurui.地施短期.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地施短期.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_30);
-        }
-        if (ServiceCategoryShurui.地共同短.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予共短.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地共同短.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.地予共短.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_31);
-        }
-        if (ServiceCategoryShurui.定期随時.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.定期随時.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_32);
-        }
-        if (ServiceCategoryShurui.看小短外.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.看小短外.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_33);
-        }
-        if (ServiceCategoryShurui.看小規短.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.看小規短.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_34);
-        }
-        if (ServiceCategoryShurui.地域通所.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地域通所.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_35);
-        }
-        if (ServiceCategoryShurui.地福祉生.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.地福祉生.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_36);
         }
     }
@@ -245,23 +230,16 @@ public class KyufujissekiEdit {
     private void set集計番号4(RString serviceSyuruiCode, TmpKyufujissekiRelateEntity tmpEntity) {
         if (ServiceCategoryShurui.用具販売.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予用販売.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_37);
-        }
-        if (ServiceCategoryShurui.住宅改修.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予住改修.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.住宅改修.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予住改修.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_38);
-        }
-        if (ServiceCategoryShurui.居宅支援.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予防支援.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.居宅支援.getコード().equals(serviceSyuruiCode) || ServiceCategoryShurui.予防支援.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_39);
-        }
-        if (ServiceCategoryShurui.福祉施設.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.福祉施設.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_40);
-        }
-        if (ServiceCategoryShurui.老健施設.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.老健施設.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_41);
-        }
-        if (ServiceCategoryShurui.医療施設.getコード().equals(serviceSyuruiCode)) {
+        } else if (ServiceCategoryShurui.医療施設.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_42);
-        } else {
-            tmpEntity.setShuukeibangou(RSTRING_43);
         }
     }
 
@@ -354,145 +332,106 @@ public class KyufujissekiEdit {
             一時Entity.setGoikei(Decimal.ZERO);
             一時Entity.setBikou(RString.EMPTY);
             一時Entity.setKubun(nenreiKaikyuList.get(j));
-            set集計番号1(サービス種類コード名, 一時Entity);
-            set集計番号2(サービス種類コード名, 一時Entity);
-            set集計番号3(サービス種類コード名, 一時Entity);
+            set集番1(サービス種類コード名, 一時Entity);
+            set集番2(サービス種類コード名, 一時Entity);
+            set集番3(サービス種類コード名, 一時Entity);
             一時Entity.setNenrenCd(j + 1);
             一時EntityList.add(一時Entity);
         }
     }
 
-    private void set集計番号1(RString サービス種類コード名, TmpSyuturyokuYoRelateEntity 一時Entity) {
+    private void set集番1(RString サービス種類コード名, TmpSyuturyokuYoRelateEntity 一時Entity) {
         if (訪問通所計.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_01);
-        }
-        if (短期入所系.equals(サービス種類コード名)) {
+        } else if (短期入所系.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_02);
-        }
-        if (標準的居宅.equals(サービス種類コード名)) {
+        } else if (標準的居宅.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_03);
-        }
-        if (居宅.equals(サービス種類コード名)) {
+        } else if (居宅.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_04);
-        }
-        if (施設.equals(サービス種類コード名)) {
+        } else if (施設.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_05);
-        }
-        if (地域密着.equals(サービス種類コード名)) {
+        } else if (地域密着.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_06);
-        }
-        if (総合計.equals(サービス種類コード名)) {
+        } else if (総合計.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_07);
-        }
-        if (訪問介護.equals(サービス種類コード名)) {
+        } else if (訪問介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_11);
-        }
-        if (訪問入浴介護.equals(サービス種類コード名)) {
+        } else if (訪問入浴介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_12);
-        }
-        if (訪問看護.equals(サービス種類コード名)) {
+        } else if (訪問看護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_13);
-        }
-        if (訪問リハビリ.equals(サービス種類コード名)) {
+        } else if (訪問リハビリ.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_14);
-        }
-        if (通所介護.equals(サービス種類コード名)) {
+        } else if (通所介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_15);
-        }
-        if (通所リハビリ.equals(サービス種類コード名)) {
+        } else if (通所リハビリ.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_16);
-        }
-        if (福祉用具貸与.equals(サービス種類コード名)) {
+        } else if (福祉用具貸与.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_17);
         }
     }
 
-    private void set集計番号2(RString サービス種類コード名, TmpSyuturyokuYoRelateEntity 一時Entity) {
+    private void set集番2(RString サービス種類コード名, TmpSyuturyokuYoRelateEntity 一時Entity) {
         if (短期入所生活介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_18);
-        }
-        if (短期入所老健施設.equals(サービス種類コード名)) {
+        } else if (短期入所老健施設.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_19);
-        }
-        if (短期入所医療施設.equals(サービス種類コード名)) {
+        } else if (短期入所医療施設.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_20);
-        }
-        if (居宅療養管理指導.equals(サービス種類コード名)) {
+        } else if (居宅療養管理指導.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_21);
-        }
-        if (特定施設生活介護.equals(サービス種類コード名)) {
+        } else if (特定施設生活介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_22);
-        }
-        if (特定施設生活介護短期.equals(サービス種類コード名)) {
+        } else if (特定施設生活介護短期.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_23);
-        }
-        if (夜間対応型訪問介護.equals(サービス種類コード名)) {
+        } else if (夜間対応型訪問介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_24);
-        }
-        if (認知症対応型通所介護.equals(サービス種類コード名)) {
+        } else if (認知症対応型通所介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_25);
-        }
-        if (小規模多機能型居宅介護.equals(サービス種類コード名)) {
+        } else if (小規模多機能型居宅介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_26);
-        }
-        if (小規模多機能型居宅介護短期.equals(サービス種類コード名)) {
+        } else if (小規模多機能型居宅介護短期.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_27);
-        }
-        if (認知症対応型共同生活.equals(サービス種類コード名)) {
+        } else if (認知症対応型共同生活.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_28);
-        }
-        if (地域密着型短期以外.equals(サービス種類コード名)) {
+        } else if (地域密着型短期以外.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_29);
-        }
-        if (地域密着型短期.equals(サービス種類コード名)) {
+        } else if (地域密着型短期.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_30);
-        }
-        if (認知症対応型共同生活短期.equals(サービス種類コード名)) {
+        } else if (認知症対応型共同生活短期.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_31);
         }
     }
 
-    private void set集計番号3(RString サービス種類コード名, TmpSyuturyokuYoRelateEntity 一時Entity) {
+    private void set集番3(RString サービス種類コード名, TmpSyuturyokuYoRelateEntity 一時Entity) {
         if (随時対応型訪問介護看護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_32);
-        }
-        if (複合型サービス.equals(サービス種類コード名)) {
+        } else if (複合型サービス.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_33);
-        }
-        if (看護小規模多機能型居宅介護短期.equals(サービス種類コード名)) {
+        } else if (看護小規模多機能型居宅介護短期.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_34);
-        }
-        if (地域密着型通所介護.equals(サービス種類コード名)) {
+        } else if (地域密着型通所介護.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_35);
-        }
-        if (地域密着型介護老人福祉施設.equals(サービス種類コード名)) {
+        } else if (地域密着型介護老人福祉施設.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_36);
-        }
-        if (特定福祉用具販売費.equals(サービス種類コード名)) {
+        } else if (特定福祉用具販売費.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_37);
-        }
-        if (住宅改修費.equals(サービス種類コード名)) {
+        } else if (住宅改修費.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_38);
-        }
-        if (介護予防支援.equals(サービス種類コード名)) {
+        } else if (介護予防支援.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_39);
-        }
-        if (介護福祉施設.equals(サービス種類コード名)) {
+        } else if (介護福祉施設.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_40);
-        }
-        if (介護老健施設.equals(サービス種類コード名)) {
+        } else if (介護老健施設.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_41);
-        }
-        if (介護医療施設.equals(サービス種類コード名)) {
+        } else if (介護医療施設.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_42);
-        }
-        if (市町村特別給付.equals(サービス種類コード名)) {
+        } else if (市町村特別給付.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_43);
-        }
-        if (特定入所者介護食費.equals(サービス種類コード名)) {
+        } else if (特定入所者介護食費.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_51);
-        }
-        if (特定入所者介護居住費.equals(サービス種類コード名)) {
+        } else if (特定入所者介護居住費.equals(サービス種類コード名)) {
             一時Entity.setShuukeiBangouCd(RSTRING_52);
         }
     }
@@ -507,7 +446,7 @@ public class KyufujissekiEdit {
         SyorikekkaCyouHyouEucCsvEntity csvEntity = new SyorikekkaCyouHyouEucCsvEntity();
         if (first) {
             first = false;
-            csvEntity.set作成日時(setDateFormat(new RString(RDateTime.now().toString())));
+            csvEntity.set作成日時(setDateFormat(RDateTime.now()));
         }
         csvEntity.set処理名(entity.getShoriMei());
         csvEntity.set証記載保険者番号(RString.EMPTY);
@@ -524,11 +463,21 @@ public class KyufujissekiEdit {
 
     }
 
-    private RString setDateFormat(RString date) {
-        RString formatDate = RString.EMPTY;
-        if (!RString.isNullOrEmpty(date)) {
-            formatDate = new FlexibleDate(date).wareki().toDateString();
-        }
-        return formatDate;
+    private RString setDateFormat(RDateTime printdate) {
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append("作成");
+
+        return printTimeStampSb.toRString();
     }
 }

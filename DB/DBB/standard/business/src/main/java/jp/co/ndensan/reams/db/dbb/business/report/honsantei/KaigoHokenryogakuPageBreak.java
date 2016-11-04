@@ -39,7 +39,7 @@ public class KaigoHokenryogakuPageBreak extends PageBreaker<KaigoHokenryogakuSou
     public boolean isBreak(ReportLineRecord<KaigoHokenryogakuSource> currentSource,
             ReportLineRecord<KaigoHokenryogakuSource> nextSource) {
         boolean flag = false;
-        //QA971 保留中
+        //QA1854 確認中
         if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
             flag = true;

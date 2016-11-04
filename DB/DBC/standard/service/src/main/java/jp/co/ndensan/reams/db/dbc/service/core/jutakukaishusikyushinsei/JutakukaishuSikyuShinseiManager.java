@@ -53,7 +53,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -424,12 +426,13 @@ public class JutakukaishuSikyuShinseiManager {
      *
      * @param parameter parameter
      * @param dbt3034 dbt3034
+     * @param dbt3049InfoList dbt3049InfoList
      * @param dbt3053 dbt3053
      * @return 完了ステータス
      */
     @Transaction
     public boolean updSyokanbaraiketeJoho(UpdSyokanbaraiketeJoho parameter,
-            ShokanShinsei dbt3034, ShokanShukei dbt3053) {
+            ShokanShinsei dbt3034, List<ShokanJutakuKaishu> dbt3049InfoList, ShokanShukei dbt3053) {
         HokenshaNo 証記載保険者番号 = null;
         if (dbt3034 != null) {
             DbT3034ShokanShinseiEntity dbt3034Entity = 償還払支給申請Dac.selectByKey(
@@ -454,7 +457,8 @@ public class JutakukaishuSikyuShinseiManager {
             dbt3036entity.setKetteiYMD(parameter.get決定年月日());
             dbt3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給決定区分());
             dbt3036entity.setShiharaiKingaku(parameter.get支払金額());
-            dbt3036entity.setZenkaiShiharaiKingaku(parameter.get前回支払金額());
+            dbt3036entity.setShiharaiKingakuUchiwakeRiyoshabun(Decimal.ZERO);
+            dbt3036entity.setZenkaiShiharaiKingaku(Decimal.ZERO);
             dbt3036entity.setSagakuKingakuGokei(parameter.get差額金額合計());
             dbt3036entity.setState(EntityDataState.Added);
             償還払支給判定結果Dac.save(dbt3036entity);
@@ -466,6 +470,15 @@ public class JutakukaishuSikyuShinseiManager {
             dbt3036entity.setSagakuKingakuGokei(parameter.get差額金額合計());
             dbt3036entity.setState(EntityDataState.Modified);
             償還払支給判定結果Dac.save(dbt3036entity);
+        }
+
+        for (ShokanJutakuKaishu dbt3049 : dbt3049InfoList) {
+            DbT3049ShokanJutakuKaishuEntity dbt3049Entity = 償還払請求住宅改修Dac.selectByKey(
+                    dbt3049.get被保険者番号(), dbt3049.getサービス提供年月(), dbt3049.get整理番号(), dbt3049.get事業者番号(),
+                    dbt3049.get様式番号(), dbt3049.get明細番号(), dbt3049.get連番());
+            dbt3049Entity.setSagakuKingaku(dbt3049.get差額金額());
+            dbt3049Entity.setState(EntityDataState.Modified);
+            償還払請求住宅改修Dac.save(dbt3049Entity);
         }
 
         DbT3053ShokanShukeiEntity dbT3053Entity = null;
@@ -617,5 +630,19 @@ public class JutakukaishuSikyuShinseiManager {
             }
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * get支払金額合計のチェックメソッドです。
+     *
+     * @param サービス提供年月 サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param 整理番号 整理番号
+     * @return 支払金額合計
+     */
+    public Decimal get支払金額合計(RDate サービス提供年月, RString 被保険者番号, RString 整理番号) {
+        DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(
+                new HihokenshaNo(被保険者番号), new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()), 整理番号);
+        return entity == null ? Decimal.ZERO : entity.getShiharaiKingaku();
     }
 }

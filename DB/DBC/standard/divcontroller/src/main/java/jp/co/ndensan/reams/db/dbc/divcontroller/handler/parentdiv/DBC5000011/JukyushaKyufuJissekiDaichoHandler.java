@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5000011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC140020.DBC140020_JukyushaKyufujissekiIchiranParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5000011.JukyushaKyufuJissekiDaichoDiv;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -118,11 +118,9 @@ public class JukyushaKyufuJissekiDaichoHandler {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         if (MENUID_DBCMNJ1001.equals(menuID)) {
-            //TODO 帳票出力順共有子(URZ.ChohyoShutsuryokujun)
-            div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(new RString("DBC100055_JukyushaKyufuJissekidaicho")));
+            div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100055.getReportId());
         } else if (MENUID_DBCMNJ1002.equals(menuID)) {
-            //TODO 帳票出力順共有子(URZ.ChohyoShutsuryokujun)
-            div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(new RString("DBC200002_JukyushaKyufuJissekiIchiran")));
+            div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200002.getReportId());
         }
     }
 
@@ -512,5 +510,6 @@ public class JukyushaKyufuJissekiDaichoHandler {
         if (!div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().toString().isEmpty()) {
             batchParameter.set給付率(new RString(div.getTxtKyufuritsu().getValue().toString()));
         }
+        batchParameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
     }
 }

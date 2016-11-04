@@ -153,8 +153,7 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
 
     private KogakuServicehiHanteiErrorListEntity createReportData(HanteiEraaResultEntity entity) {
         KogakuServicehiHanteiErrorListEntity 高額介護サービス費判定エラーEntity = new KogakuServicehiHanteiErrorListEntity();
-        高額介護サービス費判定エラーEntity.set審査年月From(parameter.get処理年月());
-        高額介護サービス費判定エラーEntity.set審査年月To(parameter.get審査年月To());
+        高額介護サービス費判定エラーEntity.set審査年月(parameter.get処理年月());
         高額介護サービス費判定エラーEntity.set市町村コード(getColumnValue(entity.get市町村コード()));
         高額介護サービス費判定エラーEntity.set被保険者番号(getColumnValue(entity.get被保険者番号()));
         高額介護サービス費判定エラーEntity.set被保険者名(getColumnValue(entity.get被保険者名()));

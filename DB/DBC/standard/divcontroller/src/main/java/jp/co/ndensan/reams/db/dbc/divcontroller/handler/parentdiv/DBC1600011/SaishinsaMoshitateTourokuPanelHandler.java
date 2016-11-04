@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitatetouroku.Tokute
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitate_MoshitateshaKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1600011.SaishinsaMoshitateTourokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1600011.dgHihokenshaSearchGaitosha_Row;
+import jp.co.ndensan.reams.db.dbc.service.core.saishinsamoshitatetouroku.ShoKisaiHokenshameiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -70,6 +72,7 @@ public class SaishinsaMoshitateTourokuPanelHandler {
     private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final int TWO = 2;
+    private static final int SIX = 6;
     private static final RString WIDTH_L = new RString("L");
     private static final RString WIDTH_XL = new RString("XL");
     private static final RString KEY0 = new RString("key0");
@@ -78,6 +81,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
     private static final RString 削除モード = new RString("削除モード");
     private static final RString 再審査申立情報一覧モード = new RString("再審査申立情報一覧");
     private static final RString 給付実績該当者一覧モード = new RString("給付実績該当者一覧");
+    private static final RString 再審査対象_サービス種類 = new RString("key0");
+    private static final RString 再審査対象_サービスコード = new RString("key1");
+    private static final RString 再審査対象_特定診療識別 = new RString("key2");
 
     /**
      * コンストラクタです。
@@ -274,7 +280,13 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         div.getKagoMoshitatePanel().getTextBox2().setValue(row.getTxtJigyoshaNo());
         div.getKagoMoshitatePanel().getTextBox3().setValue(row.getTxtJigyoshaName());
         div.getKagoMoshitatePanel().getTextBox5().setValue(row.getTxtTeikyoYM());
-        div.getKagoMoshitatePanel().getTextBox7().setValue(row.getTxtShokisaiNo());
+        RString row証記載保険者番号 = row.getTxtShokisaiNo();
+        if (!RString.isNullOrEmpty(row証記載保険者番号) && row証記載保険者番号.length() > SIX) {
+            row証記載保険者番号 = row証記載保険者番号.substring(row証記載保険者番号.length() - SIX, row証記載保険者番号.length());
+        }
+        div.getKagoMoshitatePanel().getTextBox7().setValue(row証記載保険者番号);
+        div.getKagoMoshitatePanel().getTextBox11().setValue(
+                ShoKisaiHokenshameiFinder.createInstance().get名称(div.getTextBox7().getValue()));
         div.setHdn履歴番号(new RString(ONE));
         set申立理由DDL();
         set申立対象項目DDL();
@@ -292,36 +304,30 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             div.getKagoMoshitatePanel().getCommonKaigpAtenainfoChildDiv1().initialize(
                     new ShikibetsuCode(給付実績情報.get識別コード()));
             div.setHdn識別コード(給付実績情報.get識別コード());
-            div.getKagoMoshitatePanel().getTextBox11().setValue(給付実績情報.get証記載保険者名());
             div.getKagoMoshitatePanel().getRadioButton1().setSelectedIndex(ZERO);
-            if (!div.getKagoMoshitatePanel().getDropDownList3().getDataSource().isEmpty()) {
+            if (div.getKagoMoshitatePanel().getDropDownList3().getDataSource().size() >= TWO) {
+                div.getKagoMoshitatePanel().getDropDownList3().setSelectedIndex(ONE);
+            } else {
                 div.getKagoMoshitatePanel().getDropDownList3().setSelectedIndex(ZERO);
             }
-            if (!div.getKagoMoshitatePanel().getDropDownList6().getDataSource().isEmpty()) {
-                div.getKagoMoshitatePanel().getDropDownList6().setSelectedIndex(ZERO);
-            }
-            if (!div.getKagoMoshitatePanel().getDropDownList7().getDataSource().isEmpty()) {
-                div.getKagoMoshitatePanel().getDropDownList7().setSelectedIndex(ZERO);
-            }
+            div.getKagoMoshitatePanel().getDropDownList6().setSelectedIndex(ZERO);
+            div.getKagoMoshitatePanel().getDropDownList7().setSelectedIndex(ZERO);
             div.getTextBoxDate1().setReadOnly(false);
-            div.getTextBox12().setReadOnly(false);
+            div.getTextBoxNum12().setReadOnly(false);
             div.getDropDownList2().setReadOnly(false);
             div.getDropDownList4().setReadOnly(false);
             div.getDropDownList5().setReadOnly(false);
             div.getKagoMoshitatePanel().getDropDownList3().setReadOnly(false);
             div.getKagoMoshitatePanel().getDropDownList6().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList7().setReadOnly(true);
-            div.getKagoMoshitatePanel().getDropDownList2().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList4().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList5().setSelectedIndex(ZERO);
             div.getKagoMoshitatePanel().getTextBoxDate1().setValue(null);
-            div.getKagoMoshitatePanel().getTextBox12().setValue(RString.EMPTY);
             div.getKagoMoshitatePanel().getCheckBoxList1().setSelectedItemsByKey(new ArrayList());
             if (RString.isNullOrEmpty(div.getKagoMoshitatePanel().getTextBox6().getValue())) {
                 div.getKagoMoshitatePanel().getCheckBoxList1().setReadOnly(true);
             } else {
                 div.getKagoMoshitatePanel().getCheckBoxList1().setReadOnly(false);
             }
+            div.getRadioButton1().setReadOnly(false);
             div.setHdn画面モード(登録モード);
         } else {
             SaishinsaMoshitateJohoBusiness 再審査申立情報 = collect.get再審査申立情報List().get(activeRowId);
@@ -334,10 +340,6 @@ public class SaishinsaMoshitateTourokuPanelHandler {
                 div.getKagoMoshitatePanel().getTextBox6().setValue(new FlexibleYearMonth(再審査申立情報.get国保連送付年月())
                         .wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
             }
-            div.getKagoMoshitatePanel().getTextBox11().setValue(再審査申立情報.get証記載保険者名());
-            div.getDropDownList3().setIsBlankLine(true);
-            div.getDropDownList6().setIsBlankLine(true);
-            div.getDropDownList7().setIsBlankLine(true);
             if (特定診療費.equals(再審査申立情報.get申立事由コード().substring(ZERO, TWO))) {
                 setDDLSelectedByKey(div.getKagoMoshitatePanel().getDropDownList7(), 再審査申立情報.getサービス種類コード()
                         .concat(再審査申立情報.getサービス項目コード()));
@@ -350,7 +352,7 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             }
             div.getKagoMoshitatePanel().getTextBoxDate1().setValue(new RDate(再審査申立情報.get申立年月日().toString()));
             div.getKagoMoshitatePanel().getDropDownList2().setSelectedKey(再審査申立情報.get申立者区分コード());
-            div.getKagoMoshitatePanel().getTextBox12().setValue(再審査申立情報.get申立単位数());
+            div.getKagoMoshitatePanel().getTextBoxNum12().setValue(new Decimal(再審査申立情報.get申立単位数().toString()));
             div.getKagoMoshitatePanel().getDropDownList4().setSelectedKey(再審査申立情報.get申立事由コード().substring(ZERO, TWO));
             List<RString> keys = new ArrayList();
             if (TRUE.equals(再審査申立情報.get国保連再送付有フラグ())) {
@@ -430,7 +432,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             List<KyufuJissekiGaitoshaBusiness> 給付実績一覧) {
         SaishinsaMoshitateTourokuCollect collect = new SaishinsaMoshitateTourokuCollect();
         collect.set被保険者番号(div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue());
+        collect.set被保険者名称(div.getSearchToKyufujissekiPanel().getTxtHihoName().getValue());
         collect.set事業所番号(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo());
+        collect.set事業者名称(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuMeisho());
         collect.set保険者番号(get保険者リストの値());
         if (div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue() != null) {
             collect.set提供年月開始(div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue()
@@ -460,7 +464,7 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         div.getTextBox6().clearValue();
         div.getTextBox7().clearValue();
         div.getTextBox11().clearValue();
-        div.getTextBox12().clearValue();
+        div.getTextBoxNum12().clearValue();
         div.getRadioButton1().clearSelectedItem();
         div.getTextBoxDate1().clearValue();
         div.getDropDownList2().getDataSource().clear();
@@ -478,15 +482,22 @@ public class SaishinsaMoshitateTourokuPanelHandler {
     }
 
     private void setDDLSelectedByKey(DropDownList ddl, RString value) {
-        if (!ddl.getDataSource().isEmpty()) {
+        if (ddl.getDataSource().size() >= TWO) {
             ddl.setSelectedKey(value);
         }
     }
 
     private void setState再審査申立書登録表示初期化(SaishinsaMoshitateJohoBusiness 再審査申立情報, RString 画面モード) {
+        if (特定診療費.equals(再審査申立情報.get申立事由コード().substring(ZERO, TWO))) {
+            div.getKagoMoshitatePanel().getRadioButton1().setSelectedIndex(TWO);
+        } else if (RString.isNullOrEmpty(再審査申立情報.getサービス項目コード())) {
+            div.getKagoMoshitatePanel().getRadioButton1().setSelectedIndex(ZERO);
+        } else if (!RString.isNullOrEmpty(再審査申立情報.getサービス項目コード())) {
+            div.getKagoMoshitatePanel().getRadioButton1().setSelectedIndex(ONE);
+        }
         if (修正モード.equals(画面モード)) {
             div.getTextBoxDate1().setReadOnly(false);
-            div.getTextBox12().setReadOnly(false);
+            div.getTextBoxNum12().setReadOnly(false);
             div.getDropDownList2().setReadOnly(false);
             div.getDropDownList4().setReadOnly(false);
             div.getDropDownList5().setReadOnly(false);
@@ -508,25 +519,20 @@ public class SaishinsaMoshitateTourokuPanelHandler {
                 div.getKagoMoshitatePanel().getDropDownList6().setReadOnly(false);
                 div.getKagoMoshitatePanel().getDropDownList7().setReadOnly(true);
             }
+            div.getRadioButton1().setReadOnly(false);
             div.setHdn画面モード(修正モード);
         } else {
             div.getKagoMoshitatePanel().getTextBoxDate1().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList2().setReadOnly(true);
-            div.getKagoMoshitatePanel().getTextBox12().setReadOnly(true);
+            div.getKagoMoshitatePanel().getTextBoxNum12().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList4().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList5().setReadOnly(true);
             div.getKagoMoshitatePanel().getCheckBoxList1().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList3().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList6().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList7().setReadOnly(true);
+            div.getRadioButton1().setReadOnly(true);
             div.setHdn画面モード(削除モード);
-        }
-        if (特定診療費.equals(再審査申立情報.get申立事由コード().substring(ZERO, TWO))) {
-            div.getKagoMoshitatePanel().getRadioButton1().setSelectedIndex(TWO);
-        } else if (RString.isNullOrEmpty(再審査申立情報.getサービス項目コード())) {
-            div.getKagoMoshitatePanel().getRadioButton1().setSelectedIndex(ZERO);
-        } else if (!RString.isNullOrEmpty(再審査申立情報.getサービス項目コード())) {
-            div.getKagoMoshitatePanel().getRadioButton1().setSelectedIndex(ONE);
         }
     }
 
@@ -545,6 +551,10 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList5().setDataSource(申立理由DateSource);
         div.getKagoMoshitatePanel().getDropDownList5().setIsBlankLine(true);
+        if (!申立理由DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList5().setSelectedIndex(ZERO);
+        }
+
     }
 
     private void set申立対象項目DDL() {
@@ -562,6 +572,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList4().setDataSource(申立対象項目DateSource);
         div.getKagoMoshitatePanel().getDropDownList4().setIsBlankLine(true);
+        if (!申立対象項目DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList4().setSelectedIndex(ZERO);
+        }
     }
 
     private void set申立者区分DDL() {
@@ -575,5 +588,42 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList2().setDataSource(申立者区分DateSource);
         div.getKagoMoshitatePanel().getDropDownList2().setIsBlankLine(true);
+        if (!申立者区分DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList2().setSelectedIndex(ZERO);
+        }
+    }
+
+    /**
+     * 再審査申立書登録画面「再審査対象」ラジオボタンを押します。
+     */
+    public void onChange_btnSaishinsaTaishou() {
+        if (再審査対象_サービス種類.equals(div.getRadioButton1().getSelectedKey())) {
+            if (div.getDropDownList3().getDataSource().size() >= TWO) {
+                div.getDropDownList3().setSelectedIndex(ONE);
+            }
+            div.getDropDownList6().setSelectedIndex(ZERO);
+            div.getDropDownList7().setSelectedIndex(ZERO);
+            div.getDropDownList3().setReadOnly(false);
+            div.getDropDownList6().setReadOnly(true);
+            div.getDropDownList7().setReadOnly(true);
+        } else if (再審査対象_サービスコード.equals(div.getRadioButton1().getSelectedKey())) {
+            if (div.getDropDownList6().getDataSource().size() >= TWO) {
+                div.getDropDownList6().setSelectedIndex(ONE);
+            }
+            div.getDropDownList3().setSelectedIndex(ZERO);
+            div.getDropDownList7().setSelectedIndex(ZERO);
+            div.getDropDownList3().setReadOnly(true);
+            div.getDropDownList6().setReadOnly(false);
+            div.getDropDownList7().setReadOnly(true);
+        } else if (再審査対象_特定診療識別.equals(div.getRadioButton1().getSelectedKey())) {
+            if (div.getDropDownList7().getDataSource().size() >= TWO) {
+                div.getDropDownList7().setSelectedIndex(ONE);
+            }
+            div.getDropDownList3().setSelectedIndex(ZERO);
+            div.getDropDownList6().setSelectedIndex(ZERO);
+            div.getDropDownList3().setReadOnly(true);
+            div.getDropDownList6().setReadOnly(true);
+            div.getDropDownList7().setReadOnly(false);
+        }
     }
 }

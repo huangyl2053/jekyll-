@@ -15,9 +15,12 @@ public enum DBC2210011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    検索初期("検索初期"),
-    一覧("一覧"),
-    詳細情報("詳細情報");
+    検索表示("検索表示"),
+    事業者詳細入力("事業者詳細入力"),
+    事業者詳細照会("事業者詳細照会"),
+    サービス詳細入力("サービス詳細入力"),
+    サービス詳細照会("サービス詳細照会"),
+    処理完了("処理完了");
 
     private final RString name;
 

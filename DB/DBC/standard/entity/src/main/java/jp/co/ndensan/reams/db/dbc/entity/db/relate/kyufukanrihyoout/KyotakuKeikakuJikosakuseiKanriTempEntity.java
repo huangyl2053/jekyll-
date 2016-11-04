@@ -115,7 +115,6 @@ public class KyotakuKeikakuJikosakuseiKanriTempEntity extends DbTableEntityBase<
     private FlexibleYearMonth tankiShikyuGendoShuryoYM;
     @TempTableColumnOrder(42)
     private RString serviceTeikyoJigyoshaName;
-    @PrimaryKey
     @TempTableColumnOrder(43)
     private RString hokenshaNo;
     @TempTableColumnOrder(44)

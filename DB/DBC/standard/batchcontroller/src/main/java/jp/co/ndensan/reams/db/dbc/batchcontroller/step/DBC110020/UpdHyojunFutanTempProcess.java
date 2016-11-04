@@ -32,7 +32,7 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select標準負担");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
-
+    private static final RString 区分_1 = new RString("1");
     private static final RString SPLIT = new RString(",");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
@@ -61,6 +61,15 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
 
     @Override
     protected void process(IdouTempEntity entity) {
+        HyojunFutanEntity 標準負担entity = entity.get標準負担();
+        if (区分_1.equals(標準負担entity.get決定区分())
+                && (isDateEmpty(標準負担entity.get適用開始日()) || isDateEmpty(標準負担entity.get適用終了日()))) {
+            return;
+        }
+        if (RString.isNullOrEmpty(標準負担entity.get決定区分())
+                && (!isDateEmpty(標準負担entity.get適用開始日()) || !isDateEmpty(標準負担entity.get適用終了日()))) {
+            return;
+        }
         RString 標準負担Key = get標準負担Key(entity.get標準負担());
         if (標準負担KeyList.contains(標準負担Key)) {
             return;
@@ -133,4 +142,10 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
         return 全項目;
     }
 
+    private boolean isDateEmpty(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 }

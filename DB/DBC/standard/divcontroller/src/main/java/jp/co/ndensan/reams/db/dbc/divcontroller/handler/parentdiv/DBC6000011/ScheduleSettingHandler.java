@@ -248,7 +248,6 @@ public class ScheduleSettingHandler {
     public List<dgDataSofu_Row> スケジュール履歴情報処理_送付(List<KokuhorenInterfaceKanri> 送付List) {
         List<KeyValueDataSource> 初期状態dataSource = new ArrayList<>();
         List<KeyValueDataSource> 追加状態dataSource = new ArrayList<>();
-        初期状態dataSource.add(new KeyValueDataSource(KEY空白, RString.EMPTY));
         初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
         初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.終了.getコード(), ShoriJotaiKubun.終了.get名称()));
         初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.起動.getコード(), ShoriJotaiKubun.起動.get名称()));
@@ -371,7 +370,6 @@ public class ScheduleSettingHandler {
     public List<dgDataTorikomi_Row> スケジュール履歴情報処理_取込(List<KokuhorenInterfaceKanri> 取込List) {
         List<KeyValueDataSource> 初期状態dataSource = new ArrayList<>();
         List<KeyValueDataSource> 追加状態dataSource = new ArrayList<>();
-        初期状態dataSource.add(new KeyValueDataSource(KEY空白, RString.EMPTY));
         初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
         初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.終了.getコード(), ShoriJotaiKubun.終了.get名称()));
         初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.起動.getコード(), ShoriJotaiKubun.起動.get名称()));

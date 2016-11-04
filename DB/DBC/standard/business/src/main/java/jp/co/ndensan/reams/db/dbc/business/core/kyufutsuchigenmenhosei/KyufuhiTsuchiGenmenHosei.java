@@ -43,7 +43,7 @@ public class KyufuhiTsuchiGenmenHosei {
         reportEntity.set改ページ条件4(出力順entity.get改頁項目4());
         reportEntity.set改ページ条件5(出力順entity.get改頁項目5());
         reportEntity.set被保険者番号(entity.getHiHokenshaNo().value());
-        reportEntity.set被保険者名(entity.getPsmName());
+        reportEntity.set被保険者名(entity.getMeisho());
         reportEntity.set年月(entity.getServiceTeikyoYM().toDateString());
         reportEntity.setサービス事業者コード(entity.getJigyoshoNo().value());
         reportEntity.setサービス事業者(entity.getJigyoshaName());

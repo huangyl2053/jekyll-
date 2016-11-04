@@ -51,7 +51,9 @@ public class InsKyufuJissekiKihonJigyoKogakuTmpProcess4 extends BatchProcessBase
             return;
         }
         breakKey = getBreakKey(entity);
-        if (processParameter.get処理年月().isBeforeOrEquals(entity.getShinsaYM())) {
+        if (entity.getShinsaYM() != null && !entity.getShinsaYM().isEmpty()
+                && processParameter.get処理年月() != null && !processParameter.get処理年月().isEmpty()
+                && processParameter.get処理年月().isBeforeOrEquals(entity.getShinsaYM())) {
             return;
         }
         給付実績基本情報事業高額一時.insert(entity);

@@ -43,9 +43,11 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
     private final RString サービス年月開始;
     private final RString サービス年月終了;
     private final RString 証記載保険者番号;
+    private final boolean 全市町村フラグ;
     private final List list要介護度;
     private static final RString 数値_1 = new RString("1");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString 全市町村 = new RString("000000");
 
     /**
      * コンストラクタです。
@@ -74,6 +76,7 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
      * @param サービス年月開始 サービス年月開始
      * @param サービス年月終了 サービス年月終了
      * @param 証記載保険者番号 証記載保険者番号
+     * @param 全市町村フラグ 全市町村フラグ
      * @param list要介護度 要介護度
      */
     protected KyufuhiTsuchishoBatchMybitisParameter(
@@ -101,6 +104,7 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
             RString サービス年月開始,
             RString サービス年月終了,
             RString 証記載保険者番号,
+            boolean 全市町村フラグ,
             List list要介護度) {
         this.サービス種類フラグ1 = サービス種類フラグ1;
         this.サービス種類フラグ2 = サービス種類フラグ2;
@@ -126,6 +130,7 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
         this.サービス年月開始 = サービス年月開始;
         this.サービス年月終了 = サービス年月終了;
         this.証記載保険者番号 = 証記載保険者番号;
+        this.全市町村フラグ = 全市町村フラグ;
         this.list要介護度 = list要介護度;
     }
 
@@ -174,6 +179,7 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
         boolean 特定入所者介護を対象フラグ = false;
         boolean 償還分を対象フラグ = false;
         boolean 福祉用具貸与ページ出力区分フラグ = false;
+        boolean 全市町村フラグ = false;
         if (サービス種類.equals(new RString("居宅サービスのみ"))) {
             サービス種類フラグ1 = true;
         }
@@ -207,11 +213,14 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
         if (数値_1.equals(福祉用具貸与ページ出力区分)) {
             福祉用具貸与ページ出力区分フラグ = true;
         }
+        if (!全市町村.equals(証記載保険者番号)) {
+            全市町村フラグ = true;
+        }
         return new KyufuhiTsuchishoBatchMybitisParameter(サービス種類フラグ1, サービス種類フラグ2, サービス種類フラグ3, サービス種類, 死亡者分を対象フラグ,
                 死亡者分を対象としない, ゼロ査定実績を対象フラグ, ゼロ査定実績を対象としない, 再審査分を対象フラグ, 再審査分を対象としない, 過誤分を対象フラグ,
                 過誤分を対象としない, 施設分を対象フラグ, 施設分を対象としない, 特定入所者介護を対象フラグ, 特定入所者介護を対象としない, 償還分を対象フラグ,
                 償還分を対象としない, 福祉用具貸与ページ出力区分フラグ, 福祉用具貸与ページ出力区分, psmAtesaki, サービス年月開始, サービス年月終了,
-                証記載保険者番号, 要介護度.split(EUC_WRITER_DELIMITER.toString()));
+                証記載保険者番号, 全市町村フラグ, 要介護度.split(EUC_WRITER_DELIMITER.toString()));
     }
 
 }

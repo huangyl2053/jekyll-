@@ -32,8 +32,6 @@ public class HihokenshaDaichoIchiranHyoRelateEntity {
     private int ページ数;
     private LasdecCode 市町村ID;
     private RString 市町村名称;
-    private RString 並び順;
-    private RString 改頁;
     private HihokenshaNo 被保険者番号;
     private AtenaKanaMeisho 氏名カナ;
     private AtenaMeisho 氏名;
@@ -44,6 +42,11 @@ public class HihokenshaDaichoIchiranHyoRelateEntity {
     private RString 住所;
     private YubinNo 郵便番号;
     private ShikibetsuCode 識別コード;
+    private RString 番地コード;
+    private RString 町域コード;
+    private RString 地区１;
+    private RString 地区２;
+    private RString 地区３;
     private SetaiCode 世帯コード;
     private RString 状態区分;
     private RString 資格区分;

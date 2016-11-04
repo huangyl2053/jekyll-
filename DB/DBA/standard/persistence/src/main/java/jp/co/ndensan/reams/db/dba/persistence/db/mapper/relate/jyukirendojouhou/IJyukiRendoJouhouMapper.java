@@ -6,11 +6,9 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.jyukirendojouhou
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.PsmShikibetsuTaishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.jyukirendotorokushalistbatchentity.JyukiRendoJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
  * 住基連動情報のマッパーインタフェースです。
@@ -97,11 +95,4 @@ public interface IJyukiRendoJouhouMapper {
      */
     int updateShoriDateKanri(DbT7022ShoriDateKanriEntity entity);
 
-    /**
-     * 宛名識別対象を取得します。
-     *
-     * @param parameter 宛名識別対象PSM用パラメータ
-     * @return UaFt200FindShikibetsuTaishoEntity
-     */
-    UaFt200FindShikibetsuTaishoEntity getPsmShikibetsuTaisho(PsmShikibetsuTaishoMybatisParameter parameter);
 }

@@ -198,18 +198,18 @@ public class TokuChoSoufuJohoSakuseiBatch {
         tempEntity.setShoriTimestamp(処理日時);
         tempEntity.setDtCityCode(sakuseiResult.get対象者の情報().getDT市町村コード());
         if (sakuseiResult.get対象者の情報().getDT特別徴収義務者コード() != null) {
-            tempEntity.setDtTokubetsuChoshuGimushaCode(sakuseiResult.get対象者の情報().getDT特別徴収義務者コード().value());
+            tempEntity.setDtTokubetsuChoshuGimushaCode(sakuseiResult.get対象者の情報().getDT特別徴収義務者コード().value().value());
         }
-        if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(
-                sakuseiResult.get対象者の情報().getDT通知内容コード())) {
+        if (TsuchiNaiyoCodeType.特別徴収対象者情報.equals(
+                sakuseiResult.get対象者の情報().getDT通知内容コード().value())) {
             tempEntity.setDtTsuchiNaiyoCode(TsuchiNaiyoCodeType.特別徴収依頼通知.get通知内容コード());
-        } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(
-                sakuseiResult.get対象者の情報().getDT通知内容コード())) {
+        } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.equals(
+                sakuseiResult.get対象者の情報().getDT通知内容コード().value())) {
             tempEntity.setDtTsuchiNaiyoCode(TsuchiNaiyoCodeType.特別徴収追加依頼通知.get通知内容コード());
         }
         tempEntity.setDtBaitaiCode(定値_DT媒体コード);
         if (sakuseiResult.get対象者の情報().getDT特別徴収制度コード() != null) {
-            tempEntity.setDtTokubetsuChoshuSeidoCode(sakuseiResult.get対象者の情報().getDT特別徴収制度コード());
+            tempEntity.setDtTokubetsuChoshuSeidoCode(sakuseiResult.get対象者の情報().getDT特別徴収制度コード().getColumnValue());
         }
         setEntityValue(tempEntity, sakuseiResult, 特徴開始月, 処理日時, 基準日時, 特徴開始月_6月捕捉, 特徴開始月_8月捕捉);
         return tempEntity;
@@ -228,7 +228,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
         tokuchotempentity.setYobi(RString.FULL_SPACE);
         tokuchotempentity.setDtBirthDay(entity.get対象者の情報().getDT生年月日());
         if (entity.get対象者の情報().getDT性別() != null) {
-            tokuchotempentity.setDtSeibetsu(entity.get対象者の情報().getDT性別());
+            tokuchotempentity.setDtSeibetsu(entity.get対象者の情報().getDT性別().getColumnValue());
         }
         tokuchotempentity.setDtKanaShimei(entity.get対象者の情報().getDTカナ氏名());
         tokuchotempentity.setDtShiftCode1(entity.get対象者の情報().getDTシフトコード１());
@@ -330,16 +330,16 @@ public class TokuChoSoufuJohoSakuseiBatch {
     private void setDT各種金額欄12(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
             TokuChoSoufuJohoSakuseiResult entity, RDate 特徴開始月) {
         FukaJoho 賦課の情報 = entity.get賦課の情報();
-        if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(
-                entity.get対象者の情報().getDT通知内容コード())) {
+        if (TsuchiNaiyoCodeType.特別徴収対象者情報.equals(
+                entity.get対象者の情報().getDT通知内容コード().value())) {
             if (賦課の情報.get特徴期別金額04() != null) {
                 tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額04().toString()));
             }
             if (賦課の情報.get特徴期別金額05() != null) {
                 tokuchotempentity.setDtKakushuKingaku2(new RString(賦課の情報.get特徴期別金額05().toString()));
             }
-        } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(
-                entity.get対象者の情報().getDT通知内容コード())) {
+        } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.equals(
+                entity.get対象者の情報().getDT通知内容コード().value())) {
             TokuchoKiUtil tokuchokiutil = new TokuchoKiUtil();
             RString 期 = tokuchokiutil.get期月リスト().get月の期(Tsuki.toValue(
                     new RString(特徴開始月.getMonthValue()).padZeroToLeft(NUM2))).get期();

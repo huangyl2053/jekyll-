@@ -34,7 +34,7 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
     BatchPermanentTableWriter tableWriter;
     Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
 
-    private static final RString 処理名 = new RString("負担割合証発行（一括）");
+    private static final RString 処理名 = new RString("負担割合証一括発行");
     private static final RString 処理枝番_0000 = new RString("0000");
     private static final RString 処理枝番_0001 = new RString("0001");
     private static final RString 処理枝番_0002 = new RString("0002");

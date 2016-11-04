@@ -160,13 +160,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.is項目名付加()).
                 build();
@@ -174,24 +174,10 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-        RString nowBreakKey = entity.get被保険者番号().value();
 
-        if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
-            preBreakKey = nowBreakKey;
-
-            preEntity = entity;
-            return;
-        }
-        if (!preBreakKey.equals(nowBreakKey)) {
-
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
-            連番 = 連番.add(Decimal.ONE);
-            personalDataList.add(toPersonalData(preEntity));
-            lstKinyuKikanEntity.clear();
-
-        }
-        preBreakKey = nowBreakKey;
-        preEntity = entity;
+        eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
+        連番 = 連番.add(Decimal.ONE);
+        personalDataList.add(toPersonalData(preEntity));
     }
 
     @Override

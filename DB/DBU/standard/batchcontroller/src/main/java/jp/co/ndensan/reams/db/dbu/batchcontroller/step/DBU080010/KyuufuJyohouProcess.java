@@ -29,7 +29,6 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "ISougouJigyouJyohouMapper.get高額合算_当初_版改定_異動分データ");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private static final RString NOTACCEPTABLE = new RString("NotAcceptable");
     private SougouJigyouJyohouProcessParameter processParameter;
     private SougouJigyouJyohouMybatisParameter mybatisParameter;
@@ -44,7 +43,7 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
         }
         mybatisParameter = SougouJigyouJyohouMybatisParameter.create_Parameter(processParameter.get新規異動区分(),
                 個人番号付替対象者被保険者番号.value(), processParameter.get対象開始日時(), processParameter.get対象終了日時(),
-                processParameter.get版番号(), RString.EMPTY);
+                processParameter.get版番号(), processParameter.get提供基本情報中間テーブル名(), RString.EMPTY);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
 
     @Override
     protected void createWriter() {
-        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
+        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(processParameter.get提供基本情報中間テーブル名(),
                 TeikyoKihonJohoNNTempEntity.class);
     }
 

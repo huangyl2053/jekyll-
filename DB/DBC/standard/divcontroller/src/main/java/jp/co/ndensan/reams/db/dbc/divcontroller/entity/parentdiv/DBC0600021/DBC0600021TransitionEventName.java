@@ -16,7 +16,8 @@ public enum DBC0600021TransitionEventName implements IContainerEvents {
 
     決定情報("決定情報"),
     一覧に戻る("一覧に戻る"),
-    処理終了("処理終了");
+    処理終了("処理終了"),
+    契約事業者検索("契約事業者検索");
 
     private final RString name;
 
