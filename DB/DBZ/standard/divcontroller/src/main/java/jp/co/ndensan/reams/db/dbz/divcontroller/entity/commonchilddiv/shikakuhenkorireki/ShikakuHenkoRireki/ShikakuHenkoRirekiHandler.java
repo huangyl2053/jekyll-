@@ -29,7 +29,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sikakukanrenido.SikakuKanrenIdoParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkorireki.ShikakuhenkorirekiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.sikakukanrenidoa.SikakuKanrenIdoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
@@ -656,8 +658,7 @@ public class ShikakuHenkoRirekiHandler {
      */
     private static dgHenko_Row toRow(HihokenshaDaicho hihoDaicho) {
         dgHenko_Row row = new dgHenko_Row();
-        ViewExecutionStatus status = ViewExecutionStatus.toValue(new RString(hihoDaicho.toEntity().getState().name()));
-        row.setState(status.get名称());
+        row.setState(new RString(""));
         row.setShichosonCode(hihoDaicho.get市町村コード() == null
                 ? RString.EMPTY
                 : hihoDaicho.get市町村コード().getColumnValue());

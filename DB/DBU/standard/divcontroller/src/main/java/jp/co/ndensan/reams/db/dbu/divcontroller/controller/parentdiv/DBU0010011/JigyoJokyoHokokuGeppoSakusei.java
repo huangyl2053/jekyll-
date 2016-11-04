@@ -174,7 +174,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
             getHandler(div).set月報報告_一般状況12_14_償還分();
             getHandler(div).set月報報告_保険給付決定_償還分();
             getHandler(div).set月報報告_保険給付決定_高額分();
-            //getHandler(div).set月報報告_保険給付決定_高額合算分();
+            getHandler(div).set月報報告_保険給付決定_高額合算分();
             getHandler(div).setチェックボックス設定();
         } else {
             getHandler(div).set日付時刻の空白設定();
@@ -276,7 +276,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho4(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-//        getHandler(div).onChange一般状況12to14集計年月();
+        getHandler(div).onChange一般状況12to14集計年月();
         setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
@@ -288,7 +288,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho5(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        //getHandler(div).onChange保険給付決定状況集計年月();
+        getHandler(div).onChange保険給付決定状況集計年月();
         setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
@@ -332,7 +332,6 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter>
      */
     public ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter> onClick_Jikou(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        onClick_btnJikkoCheck(div);
         return ResponseData.of(getHandler(div).onClick_Jikou()).respond();
     }
 
@@ -342,7 +341,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @param div 事業報告月報作成Div
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
-    private ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnJikkoCheck(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnJikkoCheck(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         RDate 報告年月 = div.getTxtHokokuYM().getValue();
         RString jkkouTani = div.getHdnJkkoutani();
 

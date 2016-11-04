@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinnteiChousaKekkaTouroku1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -339,6 +339,21 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    }
+
+    @JsonIgnore
+    public ChosaJisshishaDiv getChosaJisshisha() {
+        return this.getNinteiChosaNyuryoku().getChosaJisshisha();
+    }
+
+    @JsonIgnore
+    public void  setChosaJisshisha(ChosaJisshishaDiv ChosaJisshisha) {
+        this.getNinteiChosaNyuryoku().setChosaJisshisha(ChosaJisshisha);
+    }
+
+    @JsonIgnore
+    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
+        return this.getNinteiChosaNyuryoku().getChosaJisshisha().getCcdChosaJisshishaJoho();
     }
 
     @JsonIgnore

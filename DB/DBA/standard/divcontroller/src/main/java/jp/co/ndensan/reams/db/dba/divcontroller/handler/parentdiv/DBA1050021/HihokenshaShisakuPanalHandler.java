@@ -29,9 +29,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -148,7 +145,7 @@ public class HihokenshaShisakuPanalHandler {
         if (inputData.getSoshitsuDate() != null && !inputData.getSoshitsuDate().isEmpty()) {
             HihokenshaDaicho soshitsuDaicho = new HihokenshaDaicho(被保番号, inputData.getSoshitsuDate(), new RString("0001"));
             HihokenshaDaichoBuilder soshitsuBuilder = soshitsuDaicho.createBuilderForEdit();
-            soshitsuBuilder.set識別コード(識別コード);
+            builder.set識別コード(識別コード);
             soshitsuBuilder.set資格取得年月日(inputData.getShutokuDate());
             soshitsuBuilder.set資格取得届出年月日(inputData.getShutokuTodokedeDate());
             soshitsuBuilder.set資格取得事由コード(inputData.getShutokuJiyuKey());
@@ -294,7 +291,7 @@ public class HihokenshaShisakuPanalHandler {
                 所在保険者List.add(keyValue);
                 panelDiv.getShikakuShosai().getDdlShutokuShozaiHokensha().setDataSource(所在保険者List);
                 KeyValueDataSource keyValue2 = new KeyValueDataSource();
-                keyValue2.setKey(資格得喪情報.get市町村コード().getColumnValue());
+                keyValue2.setKey(資格得喪情報.get広住特措置元市町村コード().getColumnValue());
                 keyValue2.setValue(RString.EMPTY);
                 措置元保険者List.add(keyValue2);
                 panelDiv.getShikakuShosai().getDdlShutokuSochimotoHokensha().setDataSource(措置元保険者List);
@@ -307,10 +304,9 @@ public class HihokenshaShisakuPanalHandler {
                 keyValue.setKey(所在保険者.getShichosonCode().getColumnValue());
                 keyValue.setValue(new RString(所在保険者.getShoKisaiHokenshaNo().getColumnValue() + " " + 所在保険者.getShichosonMeisho()));
                 所在保険者List.add(keyValue);
-                措置元保険者List.add(keyValue);
             }
             panelDiv.getShikakuShosai().getDdlShutokuShozaiHokensha().setDataSource(所在保険者List);
-            panelDiv.getShikakuShosai().getDdlShutokuSochimotoHokensha().setDataSource(措置元保険者List);
+            panelDiv.getShikakuShosai().getDdlShutokuSochimotoHokensha().setDataSource(所在保険者List);
         }
     }
 
@@ -326,7 +322,7 @@ public class HihokenshaShisakuPanalHandler {
                 panelDiv.getShikakuShosai().getDdlShutokuKyuHokensha().setDataSource(keyValueList);
             }
         } else {
-            if (単一保険者.equals(広域と市町村判断())) {
+            if (状態_追加.equals(viewState)) {
                 旧保険者情報の設定(所在保険者の取得(), RString.EMPTY);
             } else {
                 旧保険者情報の設定(資格得喪情報.get市町村コード().getColumnValue(), 資格得喪情報.get広住特措置元市町村コード().getColumnValue());
@@ -583,88 +579,6 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     /**
-     * 資格得喪情報に変更があるかを判定します。
-     *
-     * @param 被保険者台帳情報 被保険者台帳情報のList。前画面からViewStateで渡ってきたものを受け取る前提。
-     * @param 資格取得日 資格取得年月日。前画面からViewStateで渡ってきたものを受け取る前提。
-     * @return 変更有りと判断した場合true、それ以外の場合false
-     */
-    public boolean is資格得喪情報変更有り(List<HihokenshaDaicho> 被保険者台帳情報, FlexibleDate 資格取得日) {
-
-        HihokenshaDaichoList hihoList = new HihokenshaDaichoList(ItemList.of(被保険者台帳情報));
-        IItemList<HihokenshaDaicho> oneSeasonList = hihoList.toOneSeasonList(資格取得日);
-        if (oneSeasonList.isEmpty()) {
-            return true;
-        }
-
-        boolean is変更有り = false;
-        Optional<HihokenshaDaicho> 最新データ = oneSeasonList.findFirst();
-        HihokenshaDaicho 資格得喪情報 = 最新データ.get();
-
-        FlexibleDate 取得日 = 資格得喪情報.get資格取得年月日();
-        FlexibleDate 入力取得日 = panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuDate().getValue();
-        if (!取得日.equals(入力取得日)) {
-            is変更有り = true;
-        }
-
-        FlexibleDate 取得届出日 = valueOrEmptyIfNull(資格得喪情報.get資格取得届出年月日());
-        FlexibleDate 入力取得届出日 = panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuTodokedeDate().getValue();
-        if (!取得届出日.equals(入力取得届出日)) {
-            is変更有り = true;
-        }
-
-        RString 取得事由 = valueOrEmptyIfNull(資格得喪情報.get資格取得事由コード());
-        RString 入力取得事由 = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuJiyu().getSelectedKey();
-        if (!取得事由.equals(入力取得事由)) {
-            is変更有り = true;
-        }
-
-        FlexibleDate 喪失日 = valueOrEmptyIfNull(資格得喪情報.get資格喪失年月日());
-        FlexibleDate 入力喪失日 = panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuDate().getValue();
-        if (!喪失日.isEmpty() && !喪失日.equals(入力喪失日)) {
-            is変更有り = true;
-        }
-
-        FlexibleDate 喪失届出日 = valueOrEmptyIfNull(資格得喪情報.get資格喪失届出年月日());
-        FlexibleDate 入力喪失届出日 = panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuTodokedeDate().getValue();
-        if (!喪失届出日.isEmpty() && !喪失届出日.equals(入力喪失届出日)) {
-            is変更有り = true;
-        }
-
-        RString 喪失事由 = valueOrEmptyIfNull(資格得喪情報.get資格喪失事由コード());
-        RString 入力喪失事由 = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlSoshitsuJiyu().getSelectedKey();
-        if (!喪失事由.isEmpty() && !喪失事由.equals(入力喪失事由)) {
-            is変更有り = true;
-        }
-
-        RString 被保区分 = valueOrEmptyIfNull(資格得喪情報.get被保険者区分コード());
-        RString 入力被保区分 = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlHihoKubun().getSelectedKey();
-        if (!被保区分.equals(入力被保区分)) {
-            is変更有り = true;
-        }
-
-        LasdecCode 所在保険者 = valueOrEmptyIfNull(資格得喪情報.get市町村コード());
-        RString 入力所在保険者 = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuShozaiHokensha().getSelectedKey();
-        if (!所在保険者.isEmpty() && !所在保険者.getColumnValue().equals(入力所在保険者)) {
-            is変更有り = true;
-        }
-
-        LasdecCode 措置元保険者 = valueOrEmptyIfNull(資格得喪情報.get広住特措置元市町村コード());
-        RString 入力措置元保険者 = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuSochimotoHokensha().getSelectedKey();
-        if (!措置元保険者.isEmpty() && !措置元保険者.getColumnValue().equals(入力措置元保険者)) {
-            is変更有り = true;
-        }
-
-        LasdecCode 旧保険者 = valueOrEmptyIfNull(資格得喪情報.get旧市町村コード());
-        RString 入力旧保険者 = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().getSelectedKey();
-        if (!旧保険者.isEmpty() && !旧保険者.getColumnValue().equals(入力旧保険者)) {
-            is変更有り = true;
-        }
-
-        return is変更有り;
-    }
-
-    /**
      * 資格詳細情報の取得を処理します。
      *
      * @return ShikakuRirekiJoho 資格詳細情報 setShutokuJiyuKey
@@ -692,41 +606,6 @@ public class HihokenshaShisakuPanalHandler {
         RString 旧保険者 = panelDiv.getDdlShutokuKyuHokensha().getSelectedKey();
         shikakuRirekiJoho.setKyuHokensha(旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
         return shikakuRirekiJoho;
-    }
-
-    /**
-     * 住所地特例ダイアログに設定されている情報を取得します。更新未更新関わらず、住特のデータだと判断できるもの全てを取得します。
-     *
-     * @return 住所地特例情報のList
-     */
-    public List<HihokenshaDaicho> get住所地特例List() {
-        List<HihokenshaDaicho> 住所地特例情報 = panelDiv.getCcdJutokuDialogButton().get修正後被保険者データ().toList();
-        List<HihokenshaDaicho> retList = new ArrayList<>();
-        for (HihokenshaDaicho daicho : 住所地特例情報) {
-            if (ShikakuJutokuTekiyoJiyu.checkIdoJiyu(daicho.get異動事由コード())) {
-                retList.add(daicho);
-            } else if (ShikakuJutokuKaijoJiyu.checkIdoJiyu(daicho.get異動事由コード())) {
-                retList.add(daicho);
-            }
-        }
-        return retList;
-
-    }
-
-    /**
-     * 資格変更ダイアログに設定されている情報を取得します。更新未更新関わらず、変更のデータだと判断できるもの全てを取得します。
-     *
-     * @return 資格変更情報のList
-     */
-    public List<HihokenshaDaicho> get資格変更List() {
-        List<HihokenshaDaicho> 資格変更履歴情報 = panelDiv.getCcdShikakuHenkoDialogButton().get修正後被保険者データ().toList();
-        List<HihokenshaDaicho> retList = new ArrayList<>();
-        for (HihokenshaDaicho daicho : 資格変更履歴情報) {
-            if (ShikakuHenkoJiyu.checkIdoJiyu(daicho.get異動事由コード())) {
-                retList.add(daicho);
-            }
-        }
-        return retList;
     }
 
     /**
@@ -874,28 +753,26 @@ public class HihokenshaShisakuPanalHandler {
         for (HihokenshaDaicho daicho : daichoList) {
             boolean is修正 = false;
 
-            if (daicho.is論理削除フラグ() || daicho.isDeleted()) {
+            if (daicho.is論理削除フラグ()) {
+                afterReflectList.add(daicho);
+                continue;
+            }
+            if (beforeData == null) {
+                beforeData = daicho;
                 afterReflectList.add(daicho);
                 continue;
             }
 
             HihokenshaDaichoBuilder builder = daicho.createBuilderForEdit();
+            set識別コード(daicho, beforeData, builder);
+            set市町村コード(daicho, beforeData, builder);
             is修正 = set資格取得情報For資格詳細情報入力(daicho, 資格詳細情報, builder, is修正);
-            if (beforeData != null) {
-                set識別コード(daicho, beforeData, builder);
-                set市町村コード(daicho, beforeData, builder);
-                is修正 = set資格取得情報(daicho, beforeData, builder, is修正);
-                is修正 = set資格取得届出情報(daicho, beforeData, builder, is修正);
-                is修正 = set1号年齢到達情報(daicho, beforeData, builder, is修正);
-                is修正 = set被保険者区分情報(daicho, beforeData, builder, is修正);
-                is修正 = set資格変更情報(daicho, beforeData, builder, is修正);
-                is修正 = set住所地特例情報(beforeData, daicho, builder, is修正);
-                is修正 = set住所地特例フラグ(beforeData, daicho, builder, is修正);
-                is修正 = set広域内住所地特例フラグ(beforeData, daicho, builder, is修正);
-                is修正 = set被保険者区分(beforeData, daicho, builder, is修正);
-                is修正 = set旧市町村コード(beforeData, daicho, builder, is修正);
-                is修正 = set広住特措置元市町村コード(beforeData, daicho, builder, is修正);
-            }
+            is修正 = set資格取得情報(daicho, beforeData, builder, is修正);
+            is修正 = set資格取得届出情報(daicho, beforeData, builder, is修正);
+            is修正 = set1号年齢到達情報(daicho, beforeData, builder, is修正);
+            is修正 = set被保険者区分情報(daicho, beforeData, builder, is修正);
+            is修正 = set資格変更情報(daicho, beforeData, builder, is修正);
+            is修正 = set住所地特例情報(beforeData, daicho, builder, is修正);
 
             if (is修正) {
                 HihokenshaDaicho newData = builder.build();
@@ -949,46 +826,6 @@ public class HihokenshaShisakuPanalHandler {
             if (nullOrEmpty(daicho.get適用年月日()) && !nullOrEmpty(beforeData.get適用年月日())) {
                 is修正 = true;
             }
-        }
-        return is修正;
-    }
-
-    private boolean set住所地特例フラグ(HihokenshaDaicho beforeData, HihokenshaDaicho daicho, HihokenshaDaichoBuilder builder, boolean is修正) {
-        if (nullOrEmpty(daicho.get住所地特例フラグ()) && !nullOrEmpty(beforeData.get住所地特例フラグ())) {
-            builder.set住所地特例フラグ(beforeData.get住所地特例フラグ());
-            is修正 = true;
-        }
-        return is修正;
-    }
-
-    private boolean set広域内住所地特例フラグ(HihokenshaDaicho beforeData, HihokenshaDaicho daicho, HihokenshaDaichoBuilder builder, boolean is修正) {
-        if (nullOrEmpty(daicho.get広域内住所地特例フラグ()) && !nullOrEmpty(beforeData.get広域内住所地特例フラグ())) {
-            builder.set広域内住所地特例フラグ(beforeData.get広域内住所地特例フラグ());
-            is修正 = true;
-        }
-        return is修正;
-    }
-
-    private boolean set被保険者区分(HihokenshaDaicho beforeData, HihokenshaDaicho daicho, HihokenshaDaichoBuilder builder, boolean is修正) {
-        if (nullOrEmpty(daicho.get被保険者区分コード()) && !nullOrEmpty(beforeData.get被保険者区分コード())) {
-            builder.set被保険者区分コード(beforeData.get被保険者区分コード());
-            is修正 = true;
-        }
-        return is修正;
-    }
-
-    private boolean set旧市町村コード(HihokenshaDaicho beforeData, HihokenshaDaicho daicho, HihokenshaDaichoBuilder builder, boolean is修正) {
-        if (nullOrEmpty(daicho.get旧市町村コード()) && !nullOrEmpty(beforeData.get旧市町村コード())) {
-            builder.set旧市町村コード(beforeData.get旧市町村コード());
-            is修正 = true;
-        }
-        return is修正;
-    }
-
-    private boolean set広住特措置元市町村コード(HihokenshaDaicho beforeData, HihokenshaDaicho daicho, HihokenshaDaichoBuilder builder, boolean is修正) {
-        if (nullOrEmpty(daicho.get広住特措置元市町村コード()) && !nullOrEmpty(beforeData.get広住特措置元市町村コード())) {
-            builder.set広住特措置元市町村コード(beforeData.get広住特措置元市町村コード());
-            is修正 = true;
         }
         return is修正;
     }

@@ -216,7 +216,6 @@ public class GogitaiJohoSakuseiHandler {
      */
     public void 合議体詳細情報修正モード設定() {
         合議体詳細情報項目状態設定(false);
-        div.getTxtGogitaiNumber().setDisabled(true);
         div.getTxtYukoKaishiYMD().setDisabled(true);
         div.getBtnTsuika().setDisabled(true);
         div.getDgGogitaiIchiran().setReadOnly(true);

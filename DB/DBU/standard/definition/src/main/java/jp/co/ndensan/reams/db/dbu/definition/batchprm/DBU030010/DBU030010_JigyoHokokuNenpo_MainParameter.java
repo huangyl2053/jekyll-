@@ -230,8 +230,8 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         parameter.set市町村コード(市町村コード.concat(市町村分));
         parameter.set構成市町村区分(構成市町村区分);
         parameter.set旧市町村区分(旧市町村区分);
-        parameter.set構成市町村コードリスト(addCode_kosei(構成市町村コードリスト));
-        parameter.set旧市町村コードリスト(addCode_kyu(旧市町村コードリスト));
+        parameter.set構成市町村コードリスト(構成市町村コードリスト);
+        parameter.set旧市町村コードリスト(旧市町村コードリスト);
         parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
         parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
         parameter.setバッチID(new RString("DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassan"));
@@ -244,30 +244,16 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
 
     private List<RString> addCode_kosei(List<RString> コードリスト) {
         List<RString> codelist = new ArrayList();
-        if (コードリスト.isEmpty()) {
-            return コードリスト;
-        }
         for (RString code : コードリスト) {
-            if (!RString.isNullOrEmpty(code)) {
-                codelist.add(code.concat(構成市町村分));
-            } else {
-                codelist.add(code);
-            }
+            codelist.add(code.concat(構成市町村分));
         }
         return codelist;
     }
-
+    
     private List<RString> addCode_kyu(List<RString> コードリスト) {
         List<RString> codelist = new ArrayList();
-        if (コードリスト.isEmpty()) {
-            return コードリスト;
-        }
         for (RString code : コードリスト) {
-            if (!RString.isNullOrEmpty(code)) {
-                codelist.add(code.concat(旧市町村分));
-            } else {
-                codelist.add(code);
-            }
+            codelist.add(code.concat(旧市町村分));
         }
         return codelist;
     }

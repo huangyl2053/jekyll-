@@ -49,15 +49,15 @@ public class TokkiJiko {
         Image イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, Image.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-
+        
         ShujiiIkenshoJoho shujiiIkenshoJoho = null;
-
+        
         if (意見書情報 != null) {
             if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
                 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
                         .createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
             }
-
+            
             shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
                     .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
         }
@@ -68,7 +68,7 @@ public class TokkiJiko {
         } else {
             div.getTxtTokki().setValue(RString.EMPTY);
         }
-
+        
         if (イメージ情報 == null || イメージ情報.getイメージ共有ファイルID() == null) {
             div.getImgTokkiJiko().setSrc(RString.EMPTY);
             if (イメージ情報 != null && イメージ情報.getイメージ共有ファイルID() == null) {
@@ -104,10 +104,10 @@ public class TokkiJiko {
                     UrQuestionMessages.確定の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-
+        
         if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
+            
             if (意見書情報 == null) {
                 意見書情報 = new NinteiShinseiJoho(管理番号);
                 ShujiiIkenshoJoho shujiiIkenshoJoho = new ShujiiIkenshoJoho(管理番号, 履歴番号);
@@ -133,7 +133,7 @@ public class TokkiJiko {
             }
         }
 
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     /**

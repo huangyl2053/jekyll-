@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1050011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
+import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.SikakuIdouTeiseiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1050011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.DBA1050011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.SikakuIdouTeiseiDiv;
@@ -25,14 +26,12 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -48,7 +47,6 @@ public class SikakuIdouTeisei {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
-    private static final RString SAVE_BUTTON = new RString("btnUpdate");
 
     /**
      * 画面を初期化します。
@@ -57,17 +55,11 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onLoad(SikakuIdouTeiseiDiv div) {
-        getHandler(div).onLoad(getKey().get被保険者番号(), getKey().get識別コード());
-
-        if (div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
-            div.setReadOnly(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(SAVE_BUTTON, true);
-            return ResponseData.of(div).addMessage(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保履歴情報")).respond();
-        }
-
+        SikakuIdouTeiseiJoho joho = getHandler(div).onLoad(getKey().get被保険者番号(), getKey().get識別コード());
+        ViewStateHolder.put(ViewStateKeys.初期化時医療保険情報, joho);
         if (!RealInitialLocker.tryGetLock(create排他キー())) {
             div.setReadOnly(true);
-            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
         return ResponseData.of(div).respond();
     }
@@ -88,11 +80,8 @@ public class SikakuIdouTeisei {
      */
     public ResponseData<SikakuIdouTeiseiDiv> onActive(SikakuIdouTeiseiDiv div) {
         if (ResponseHolder.getBeforeEvent().equals(new RString("DBA1050021_資格異動の訂正を保存する"))) {
-            List<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報_修正後, ArrayList.class);
-            if (hihoDaicho == null) {
-                hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
-            }
-            getHandler(div).update資格得喪失履歴(hihoDaicho);
+            ArrayList<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報_修正後, ArrayList.class);
+            getHandler(div).initialize資格得喪失履歴(hihoDaicho);
             getHandler(div).setButtonDisable();
         }
         return ResponseData.of(div).respond();
@@ -165,12 +154,6 @@ public class SikakuIdouTeisei {
             if (hihoDaicho == null) {
                 hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
             }
-
-            ArrayList<FlexibleDate> sakujoHihoDataShutokuDateList = ViewStateHolder.get(ViewStateKeys.対象者_削除対象取得日, ArrayList.class);
-            if (sakujoHihoDataShutokuDateList != null) {
-                hihoDaicho = getHandler(div).delete被保険者(hihoDaicho, sakujoHihoDataShutokuDateList);
-            }
-
             isSaveDataExists(hihoDaicho);
 
             Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> models = ViewStateHolder.get(ViewStateKeys.対象者_施設入退所, Models.class);
@@ -232,7 +215,7 @@ public class SikakuIdouTeisei {
     }
 
     private TaishoshaKey getKey() {
-        return ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        return ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
     }
 
     private enum SikakuIdouTeiseiErrorMessage implements IValidationMessage {

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KetteiNaiyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,8 +29,8 @@ public class KetteiNaiyoDiv extends Panel {
     private TextBoxFlexibleDate txtTekiyoYmd;
     @JsonProperty("txtYukoKigenYmd")
     private TextBoxFlexibleDate txtYukoKigenYmd;
-    @JsonProperty("chkKyuSochisha")
-    private CheckBoxList chkKyuSochisha;
+    @JsonProperty("ddlKyusochiKubun")
+    private DropDownList ddlKyusochiKubun;
     @JsonProperty("txtKyufuRitsu")
     private TextBoxNum txtKyufuRitsu;
     @JsonProperty("btnHiShoninRiyu")
@@ -117,21 +117,21 @@ public class KetteiNaiyoDiv extends Panel {
     }
 
     /*
-     * getchkKyuSochisha
-     * @return chkKyuSochisha
+     * getddlKyusochiKubun
+     * @return ddlKyusochiKubun
      */
-    @JsonProperty("chkKyuSochisha")
-    public CheckBoxList getChkKyuSochisha() {
-        return chkKyuSochisha;
+    @JsonProperty("ddlKyusochiKubun")
+    public DropDownList getDdlKyusochiKubun() {
+        return ddlKyusochiKubun;
     }
 
     /*
-     * setchkKyuSochisha
-     * @param chkKyuSochisha chkKyuSochisha
+     * setddlKyusochiKubun
+     * @param ddlKyusochiKubun ddlKyusochiKubun
      */
-    @JsonProperty("chkKyuSochisha")
-    public void setChkKyuSochisha(CheckBoxList chkKyuSochisha) {
-        this.chkKyuSochisha = chkKyuSochisha;
+    @JsonProperty("ddlKyusochiKubun")
+    public void setDdlKyusochiKubun(DropDownList ddlKyusochiKubun) {
+        this.ddlKyusochiKubun = ddlKyusochiKubun;
     }
 
     /*

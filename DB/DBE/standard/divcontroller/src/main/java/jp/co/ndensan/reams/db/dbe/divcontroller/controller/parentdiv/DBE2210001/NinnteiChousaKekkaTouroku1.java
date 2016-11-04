@@ -154,8 +154,17 @@ public class NinnteiChousaKekkaTouroku1 {
         if (is再調査の場合) {
             getHandler(div).住宅改修_既存初期化(temp_申請書管理番号, temp_認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.住宅改修rad, div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.市町村特別給付TXT, div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().getValue());
-            ViewStateHolder.put(ViewStateKeys.介護保険給付以外の在宅サービスTXT, div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().getValue());
+            if (div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu() == null) {
+                ViewStateHolder.put(ViewStateKeys.市町村特別給付TXT, RString.EMPTY);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.市町村特別給付TXT, div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().getValue());
+            }
+            if (div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService() == null) {
+                ViewStateHolder.put(ViewStateKeys.介護保険給付以外の在宅サービスTXT, RString.EMPTY);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.介護保険給付以外の在宅サービスTXT, div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().getValue());
+            }
+
             ChosaJisshishaJohoFinder service = ChosaJisshishaJohoFinder.createInstance();
             List<NinteichosaItakusakiJoho> ninteichosaItakusakiJohoList = service.getSyozokuKikan(temp_申請書管理番号.getColumnValue()).records();
             for (NinteichosaItakusakiJoho joho : ninteichosaItakusakiJohoList) {
@@ -247,7 +256,7 @@ public class NinnteiChousaKekkaTouroku1 {
             ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 現在の選択);
             return ResponseData.of(div).respond();
         }
-
+        
         boolean 入力あり = Boolean.FALSE;
         if (予防給付サービス_選択.equals(元の選択)) {
             List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
@@ -438,7 +447,7 @@ public class NinnteiChousaKekkaTouroku1 {
             div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
             return ResponseData.of(div).respond();
         }
-
+        
         RString temp_厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
         ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 施設);
         getHandler(div).施設の表示(temp_厚労省IF識別コード);
@@ -466,7 +475,7 @@ public class NinnteiChousaKekkaTouroku1 {
                     DbeWarningMessages.在宅で自宅外.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-
+        
         if (new RString(DbeWarningMessages.自宅内で施設.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
@@ -482,14 +491,14 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).respond();
         }
         ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
-
+        
         if (!ChosaJisshiBashoCode.自宅内.getコード().equals(現在の実施場所)) {
             div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(false);
         } else {
             div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().clearValue();
             div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(true);
         }
-
+        
         return ResponseData.of(div).respond();
     }
 
@@ -847,7 +856,7 @@ public class NinnteiChousaKekkaTouroku1 {
         } else if (ChosaJisshiBashoCode.自宅外.get名称().equals(実施場所) && 在宅.equals(概況調査場所)) {
             throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("調査実施場所が自宅外ですが調査場所が在宅"));
         }
-
+        
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -1126,9 +1135,7 @@ public class NinnteiChousaKekkaTouroku1 {
         dbt5202builder.set認定調査委託先コード(new JigyoshaNo(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText()));
         dbt5202builder.set認定調査員コード(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText());
         dbt5202builder.set認定調査実施場所コード(new Code(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey()));
-        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
-            dbt5202builder.set認定調査実施場所名称(RString.EMPTY);
-        } else {
+        if (!ChosaJisshiBashoCode.自宅内.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
             dbt5202builder.set認定調査実施場所名称(div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getValue());
         }
         dbt5202builder.set認定調査_サービス区分コード(new Code(サービス区分コード));

@@ -24,26 +24,18 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
-import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
-import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyo;
-import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
-import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
-import jp.co.ndensan.reams.db.dbz.service.core.iryohokenkanyujokyo.IryohokenKanyuJokyoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCodeJoho;
@@ -71,11 +63,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳管理（資格訂正）を管理するクラスです。
@@ -567,7 +557,8 @@ public class HihokenshaShikakuTeiseiManager {
             }
 
             if (資格訂正登録Entity.get資格取得事由コード() != null && !資格訂正登録Entity.get資格取得事由コード().isEmpty()) {
-                checkShikakuShutoku(資格訂正登録Entity.get資格取得年月日(), 資格訂正登録Entity.get資格取得事由コード(),
+                checkShikakuShutoku(資格訂正登録Entity.get異動日(), 資格訂正登録Entity.get資格取得事由コード(),
+                        //checkShikakuShutoku(資格訂正登録Entity.get資格取得年月日(), 資格訂正登録Entity.get資格取得事由コード(),
                         資格訂正登録Entity.get被保険者区分コード(), 資格訂正登録Entity.get第1号資格取得年月日(), 当該識別対象の生年月日);
             }
             if (資格訂正登録Entity.get資格喪失事由コード() != null && !資格訂正登録Entity.get資格喪失事由コード().isEmpty()) {
@@ -699,11 +690,15 @@ public class HihokenshaShikakuTeiseiManager {
             throw new ApplicationException(UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().
                     replace(MESSAGE_REPLACE_喪失年月日.toString(), MESSAGE_REPLACE_資格取得年月日.toString()));
         }
+        List<SikakuKikan> sikakuKikanList = new ArrayList<>();
         List<TokusoRireki> tokusoRirekitList = new ArrayList<>();
         for (ShikakuTokuso shikakuTokuso : 得喪履歴List) {
+            SikakuKikan sikakuKikan = new SikakuKikan(shikakuTokuso.get資格取得年月日(), shikakuTokuso.get資格喪失年月日());
+            sikakuKikanList.add(sikakuKikan);
             TokusoRireki tokusoRirekit = new TokusoRireki(shikakuTokuso.get資格取得年月日(), shikakuTokuso.get資格喪失年月日());
             tokusoRirekitList.add(tokusoRirekit);
         }
+        getIdoCheckManager.sikakuKikanRirekiChofukuCheck(sikakuKikanList);
         getIdoCheckManager.tokusouTanoKikanChofukuCheck(tokusoRirekitList, 最新データ.getShikibetsuCode());
     }
 
@@ -717,6 +712,10 @@ public class HihokenshaShikakuTeiseiManager {
      */
     public void checkShikakuHenko(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 変更日, RString 変更事由コード,
             IDateOfBirth 当該識別対象の生年月日) {
+        //TODO 城間 この条件をチェックする理由が不明。場合によってはどんなデータでもエラーを返してしまう。
+//        if (変更日.isBefore(最新データ.getIdoYMD())) {
+//            throw new ApplicationException(DbzErrorMessages.変更日移行新資格異動有り.getMessage());
+//        }
         int age = Integer.valueOf(get年齢(当該識別対象の生年月日, 変更日).toString());
         if (RSTRING_1.equals(最新データ.getHihokennshaKubunCode())) {
             if (age >= AGE_65 && ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)) {
@@ -887,36 +886,6 @@ public class HihokenshaShikakuTeiseiManager {
     private RString get年齢(IDateOfBirth dateOfBirth, FlexibleDate ichigoShikakuShutokuYMD) {
         getAge = new AgeCalculator(dateOfBirth, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, ichigoShikakuShutokuYMD);
         return getAge.get年齢();
-    }
-
-    /**
-     * 資格異動訂正処理により追加・修正・削除されたデータを一括で保存します。
-     *
-     * @param shikibetsuCode 対象者の識別コード
-     * @param joho 被保険者台帳情報
-     * @param models 施設入退所情報
-     * @param iryoHokenList 医療保険情報
-     * @param rohukuNenkinJukyusha 老齢福祉年金情報
-     * @return 保存件数。
-     */
-    @Transaction
-    public int save資格異動訂正データ(ShikibetsuCode shikibetsuCode, List<HihokenshaDaicho> joho,
-            Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> models,
-            List<IryohokenKanyuJokyo> iryoHokenList, Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> rohukuNenkinJukyusha) {
-        int saveNum = 0;
-        if (joho != null && !joho.isEmpty()) {
-            saveNum += HihokenshaDaichoManager.createInstance().save被保険者台List(joho);
-        }
-        if (models != null && !models.values().isEmpty()) {
-            saveNum += KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().save(models, shikibetsuCode);
-        }
-        if (iryoHokenList != null && !iryoHokenList.isEmpty()) {
-            saveNum += IryohokenKanyuJokyoManager.createInstance().saveAllIryoHokenJoho(iryoHokenList);
-        }
-        if (rohukuNenkinJukyusha != null && !rohukuNenkinJukyusha.values().isEmpty()) {
-            saveNum += RoreiFukushiNenkinJukyushaManager.createInstance().save老齢福祉年金受給者All(rohukuNenkinJukyusha);
-        }
-        return saveNum;
     }
 
     private static class DateComparator implements Comparator<DbT1001HihokenshaDaichoEntity>, Serializable {

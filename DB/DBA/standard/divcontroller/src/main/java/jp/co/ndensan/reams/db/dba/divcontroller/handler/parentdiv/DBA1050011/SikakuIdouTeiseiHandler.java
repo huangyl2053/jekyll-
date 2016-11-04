@@ -7,16 +7,16 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1050011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.IryoHokenJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakuidouteisei.ShikakuRirekiJoho;
+import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.SikakuIdouTeiseiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.SikakuIdouTeiseiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
-import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyo;
-import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
-import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -24,9 +24,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenR
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RofukuNenkinState;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -41,6 +42,8 @@ public class SikakuIdouTeiseiHandler {
 
     private static final RString 認定履歴ボタン = new RString("HihokenrirekiNashiMode");
     private static final RString 被保履歴ボタン = new RString("NinteirirekiNashiMode");
+//    private static final RString チェックNG = new RString("チェックNG");
+//    private static final RString 状態_登録 = new RString("登録");
     private static final RString 表示モード = new RString("HihokenrirekiNashiMode");
     private final SikakuIdouTeiseiDiv div;
 
@@ -58,11 +61,13 @@ public class SikakuIdouTeiseiHandler {
      *
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
+     * @return SikakuIdouTeiseiJoho
      */
-    public void onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+    public SikakuIdouTeiseiJoho onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
         kaigoNinteiAtenaInfo_onload(識別コード);
 
+        //新初期化
         HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
         List<HihokenshaDaicho> hihoDaichoList = manager.get最新被保険者台帳(被保険者番号);
         initialize資格得喪失履歴(hihoDaichoList);
@@ -70,10 +75,22 @@ public class SikakuIdouTeiseiHandler {
         ArrayList<HihokenshaDaicho> serialHihoDaicho = new ArrayList<>();
         serialHihoDaicho.addAll(hihoDaichoList);
         ViewStateHolder.put(ViewStateKeys.対象者_被保険者台帳情報, serialHihoDaicho);
+
+        if (div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
+            div.setReadOnly(true);
+            throw new ApplicationException(
+                    UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保履歴情報"));
+        }
+
         setButtonDisable();
 
         div.getCcdIryoHokenDialogButton().initialize(被保険者番号, 識別コード, IryoHokenRirekiState.登録);
         div.getCcdRofukuNenkinDialogButton().initialize(被保険者番号, 識別コード, RofukuNenkinState.登録);
+
+        SikakuIdouTeiseiJoho joho = new SikakuIdouTeiseiJoho();
+        joho.setIryoHokenJohoList(set初期化時の医療保険情報());
+        joho.setRoreiFukushiJohoList(set初期化時の老福年金情報());
+        return joho;
     }
 
     /**
@@ -83,28 +100,8 @@ public class SikakuIdouTeiseiHandler {
      */
     public void initialize資格得喪失履歴(List<HihokenshaDaicho> hihoDaichoList) {
         HihokenshaDaichoList sortedHihoDaichoList = new HihokenshaDaichoList(ItemList.of(hihoDaichoList));
-        IItemList<HihokenshaDaicho> tokusoList = sortedHihoDaichoList.to論理削除データ除外List();
-        tokusoList = new HihokenshaDaichoList(tokusoList).to資格得喪List();
+        IItemList<HihokenshaDaicho> tokusoList = sortedHihoDaichoList.to資格得喪List();
         div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().initialize(tokusoList);
-    }
-
-    /**
-     * 資格の取得・喪失履歴に表示されている項目を、詳細画面での入力結果に合わせて最新化します。
-     *
-     * @param hihoDaichoList 初期化する際の元データとなるリスト
-     */
-    public void update資格得喪失履歴(List<HihokenshaDaicho> hihoDaichoList) {
-        FlexibleDate shikakuShutokuDate = ViewStateHolder.get(ViewStateKeys.対象者_資格取得日, FlexibleDate.class);
-        FlexibleDate changedShikakuShutokuDate = ViewStateHolder.get(ViewStateKeys.対象者_変更後資格取得日, FlexibleDate.class);
-        ArrayList<FlexibleDate> sakujoHihoDataShutokuDateList = ViewStateHolder.get(ViewStateKeys.対象者_削除対象取得日, ArrayList.class);
-
-        HihokenshaDaichoList sortedHihoDaichoList = new HihokenshaDaichoList(ItemList.of(hihoDaichoList));
-        IItemList<HihokenshaDaicho> tokusoList = sortedHihoDaichoList.to論理削除データ除外List();
-        tokusoList = new HihokenshaDaichoList(tokusoList).toOneSeasonList(changedShikakuShutokuDate);
-        tokusoList = new HihokenshaDaichoList(tokusoList).to資格得喪List();
-
-        HihokenshaDaicho daicho = tokusoList.findJustOne().get();
-        div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().updateGridData(daicho, shikakuShutokuDate, sakujoHihoDataShutokuDateList);
     }
 
     /**
@@ -121,6 +118,58 @@ public class SikakuIdouTeiseiHandler {
         }
         div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().setDataGridDataSource(dataSource);
     }
+
+    private List<IryoHokenJoho> set初期化時の医療保険情報() {
+        List<IryoHokenJoho> oldList = new ArrayList<>();
+        //初期化はダイアログ内で行うので不要
+//        for (dgIryohokenIchiran_Row row : div.getShikakuShutokuJoho().getTplIryoHoken()
+//                .getIryoHokenRirekii().getCcdIryoHokenRireki().getDataGridList()) {
+//            IryoHokenJoho joho = new IryoHokenJoho();
+//            joho.set医療保険加入年月日(row.getKanyuDate().getValue());
+//            joho.set医療保険種別コード(row.getShubetsuCode());
+//            joho.set医療保険者名称(row.getHokenshaName());
+//            joho.set医療保険者番号(row.getHokenshaCode());
+//            joho.set医療保険脱退年月日(row.getDattaiDate().getValue());
+//            joho.set医療保険記号番号(row.getKigoNo());
+//            joho.set履歴番号(row.getRirekiNo().getValue().intValue());
+//            joho.set市町村コード(new LasdecCode(row.getShichosonCode()));
+//            joho.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
+//            oldList.add(joho);
+//        }
+        return oldList;
+    }
+
+    private List<RoreiFukushiJoho> set初期化時の老福年金情報() {
+        List<RoreiFukushiJoho> roreiFukushiJohoList = new ArrayList<>();
+        //初期化はダイアログ内で行うので不要
+//        for (datagridRireki_Row row : div.getShikakuShutokuJoho()
+//                .getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().getDataGridList()) {
+//            RoreiFukushiJoho joho = new RoreiFukushiJoho();
+//            joho.set識別コード(識別コード);
+//            joho.set状態(row.getJotai());
+//            joho.set受給開始年月日(rdateToFlexibleDate(row.getStartDate().getValue()));
+//            joho.set受給廃止年月日(rdateToFlexibleDate(row.getEndDate().getValue()));
+//            roreiFukushiJohoList.add(joho);
+//        }
+        return roreiFukushiJohoList;
+    }
+//
+//    private FlexibleDate stringToFlexibleDate(RString date) {
+//        FlexibleDate flexDate = FlexibleDate.EMPTY;
+//        if (!RString.isNullOrEmpty(date)) {
+//            RDate date_tmp = new RDate(date.toString());
+//            flexDate = new FlexibleDate(date_tmp.toDateString());
+//        }
+//        return flexDate;
+//    }
+//
+//    private FlexibleDate rdateToFlexibleDate(RDate date) {
+//        FlexibleDate flexDate = FlexibleDate.EMPTY;
+//        if (date != null) {
+//            flexDate = new FlexibleDate(date.toDateString());
+//        }
+//        return flexDate;
+//    }
 
     /**
      * 画面遷移のパラメータの設定します。
@@ -153,8 +202,8 @@ public class SikakuIdouTeiseiHandler {
             joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
             joho.setState(row.getState());
 
+            //選択した行の資格取得日を保持する。
             ViewStateHolder.put(ViewStateKeys.対象者_資格取得日, row.getShutokuDate().getValue());
-            ViewStateHolder.put(ViewStateKeys.対象者_変更後資格取得日, row.getShutokuDate().getValue());
         }
 
         return joho;
@@ -168,9 +217,10 @@ public class SikakuIdouTeiseiHandler {
      * @param models 施設入退所情報Models
      */
     public void save(ShikibetsuCode 識別コード, List<HihokenshaDaicho> joho, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> models) {
-        List<IryohokenKanyuJokyo> iryoHokenList = div.getCcdIryoHokenDialogButton().get医療保険履歴();
-        Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> rohukuNenkinJukyusha = div.getCcdRofukuNenkinDialogButton().get老福年金();
-        HihokenshaShikakuTeiseiManager.createInstance().save資格異動訂正データ(識別コード, joho, models, iryoHokenList, rohukuNenkinJukyusha);
+        HihokenshaDaichoManager.createInstance().save被保険者台List(joho);
+        KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().save(models, 識別コード);
+        div.getCcdIryoHokenDialogButton().save();
+        div.getCcdRofukuNenkinDialogButton().save();
     }
 
     private void kaigoShikakuKihon_onload(HihokenshaNo 被保険者番号, RString 表示モード) {
@@ -190,23 +240,6 @@ public class SikakuIdouTeiseiHandler {
 
     private void kaigoNinteiAtenaInfo_onload(ShikibetsuCode 識別コード) {
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
-    }
-
-    /**
-     * 引数から受けとった被保険者台帳データのうち、削除対象の取得日を持つデータを全て論理削除します。
-     *
-     * @param 削除対象 削除対象の被保険者台帳List
-     * @param 取得日List 削除対象の日付をまとめたList
-     * @return 論理削除された被保険者台帳データ
-     */
-    public List<HihokenshaDaicho> delete被保険者(List<HihokenshaDaicho> 削除対象, List<FlexibleDate> 取得日List) {
-        List<HihokenshaDaicho> deleteList = new ArrayList<>();
-        for (HihokenshaDaicho daicho : 削除対象) {
-            if (取得日List.contains(daicho.get資格取得年月日())) {
-                deleteList.add(daicho.createBuilderForEdit().set論理削除フラグ(true).build());
-            }
-        }
-        return deleteList;
     }
 
 }

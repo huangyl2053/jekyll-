@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dba.batchcontroller.flow;
 
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA110010.DBA110010_HihokenshashoHakkoKanriboParameter;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.config.BatchSettings;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.BatchFlowTestHelper;
-import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -83,7 +83,7 @@ public class DBA110010_HihokenshashoHakkoKanriboTest {
             parameter.setRenbanfukaflg(false);
             parameter.setSeyisinjyohoflg(false);
             parameter.setSiyuturiyokudaysyou(new RString("1"));
-            //parameter.setSyuturyokujunid(RString.EMPTY);
+            parameter.setSyuturyokujunid(RString.EMPTY);
 
         }
     }

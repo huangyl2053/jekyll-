@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HeaderDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,10 +34,10 @@ public class HeaderDiv extends Panel {
     private HosokuJohoDiv HosokuJoho;
     @JsonProperty("Dialogs")
     private DialogsDiv Dialogs;
-    @JsonProperty("ccdKaigoShikakuKihon")
-    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
+    @JsonProperty("ccdKaigoShikakuKihon")
+    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("ccdShisetsuNyushoInfo")
     private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
 
@@ -102,21 +102,21 @@ public class HeaderDiv extends Panel {
     }
 
     /*
-     * getccdKaigoShikakuKihon
-     * @return ccdKaigoShikakuKihon
-     */
-    @JsonProperty("ccdKaigoShikakuKihon")
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return ccdKaigoShikakuKihon;
-    }
-
-    /*
      * getccdAtenaInfo
      * @return ccdAtenaInfo
      */
     @JsonProperty("ccdAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
         return ccdAtenaInfo;
+    }
+
+    /*
+     * getccdKaigoShikakuKihon
+     * @return ccdKaigoShikakuKihon
+     */
+    @JsonProperty("ccdKaigoShikakuKihon")
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return ccdKaigoShikakuKihon;
     }
 
     /*
@@ -149,16 +149,6 @@ public class HeaderDiv extends Panel {
     @JsonIgnore
     public void  setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
         this.getHosokuJoho().setBtnDispSetaiJoho(btnDispSetaiJoho);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnShotokuJokyo() {
-        return this.getHosokuJoho().getBtnShotokuJokyo();
-    }
-
-    @JsonIgnore
-    public void  setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
-        this.getHosokuJoho().setBtnShotokuJokyo(btnShotokuJokyo);
     }
 
     @JsonIgnore

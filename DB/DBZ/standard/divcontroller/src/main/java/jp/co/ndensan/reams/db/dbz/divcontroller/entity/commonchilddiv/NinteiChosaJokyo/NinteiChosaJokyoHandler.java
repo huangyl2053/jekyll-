@@ -276,14 +276,12 @@ public class NinteiChosaJokyoHandler {
         if (div.getTxtEnkiTsuchiHakkoCount().getValue() != null) {
             konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
         }
+        konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
         NinteiChosaJokyoDataPass dataPass = DataPassingConverter.deserialize(div.getHdnSerializedBusiness_Konkai(),
                 NinteiChosaJokyoDataPass.class);
-        if (dataPass != null) {
-            konkaiDataPass.set市町村コード(dataPass.get市町村コード());
-            konkaiDataPass.set厚労省IF識別コード(dataPass.get厚労省IF識別コード());
-            konkaiDataPass.set申請書管理番号(dataPass.get申請書管理番号());
-        }
-
+        konkaiDataPass.set市町村コード(dataPass.get市町村コード());
+        konkaiDataPass.set厚労省IF識別コード(dataPass.get厚労省IF識別コード());
+        konkaiDataPass.set申請書管理番号(dataPass.get申請書管理番号());
         div.setHdnSerializedBusiness_Konkai(DataPassingConverter.serialize(konkaiDataPass));
     }
 
