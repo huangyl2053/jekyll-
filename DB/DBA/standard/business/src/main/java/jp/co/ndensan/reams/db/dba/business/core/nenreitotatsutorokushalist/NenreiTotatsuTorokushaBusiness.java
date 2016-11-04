@@ -134,9 +134,7 @@ public class NenreiTotatsuTorokushaBusiness {
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString("banchiCode"),
-                new RString("\"ShikibetsuTaisho_banchiCode1\",\"ShikibetsuTaisho_banchiCode2\","
-                        + "\"ShikibetsuTaisho_banchiCode3\",\"ShikibetsuTaisho_banchiCode4\"")),
+        番地コード(new RString("0003"), new RString("banchiCode"), new RString("\"banchiCode\"")),
         /**
          * 行政区コード
          */
@@ -156,11 +154,11 @@ public class NenreiTotatsuTorokushaBusiness {
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString("setaiCode"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
+        世帯コード(new RString("0008"), new RString("listUpper_1"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString("shikibetsuCode"), new RString("\"shikibetsuCode\"")),
+        識別コード(new RString("0009"), new RString("listLower_1"), new RString("\"shikibetsuCode\"")),
         /**
          * 氏名５０音カナ
          */
@@ -180,7 +178,7 @@ public class NenreiTotatsuTorokushaBusiness {
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("\"hihokenshaNo\""));
+        被保険者番号(new RString("0104"), new RString("listHihokenshaNo_1"), new RString("\"hihokenshaNo\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

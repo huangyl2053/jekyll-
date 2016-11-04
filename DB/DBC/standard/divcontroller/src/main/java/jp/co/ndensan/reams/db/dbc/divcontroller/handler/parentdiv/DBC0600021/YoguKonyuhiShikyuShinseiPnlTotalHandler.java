@@ -1020,12 +1020,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             return validPairs;
         }
         for (dgSeikyuDetail_Row row : rowList) {
-            if (ddlShumoku.equals(row.getTxtShumoku().getValue()) && !RowState.Deleted.equals(row.getRowState())) {
+            if (ddlShumoku.equals(row.getTxtShumoku().getValue()) && !RowState.Deleted.equals(row.getRowState())
+                    && !処理モード登録.equals(モード)) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrErrorMessages.既に登録済, 種目コード.toString())));
             }
             if (hinmokuCode != null && hinmokuCode.equals(row.getHinmokuCode().getValue())
-                    && !RowState.Deleted.equals(row.getRowState())) {
+                    && !RowState.Deleted.equals(row.getRowState())
+                    && !処理モード登録.equals(モード)) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrErrorMessages.既に登録済, 品目コード.toString())));
             }
@@ -1189,7 +1191,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         if (処理モード修正.equals(処理モード)) {
             boolean flag = checkState(row);
             if (flag) {
-                row.setRowState(RowState.Modified);
+                row.setRowState(RowState.Added.equals(row.getRowState()) ? RowState.Added : RowState.Modified);
                 setDgSeikyuDetail(row, 処理モード);
             }
         } else if (処理モード削除.equals(処理モード)) {

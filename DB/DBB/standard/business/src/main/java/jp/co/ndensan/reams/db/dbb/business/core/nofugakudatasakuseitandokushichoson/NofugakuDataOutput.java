@@ -25,51 +25,43 @@ public class NofugakuDataOutput {
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("町域コード"), FORMAT
-                .concat(new RString("ShikibetsuTaisho_choikiCode")).concat(FORMAT)),
+        町域コード(new RString("0002"), new RString("町域コード"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("行政区コード"), FORMAT
-                .concat(new RString("ShikibetsuTaisho_gyoseikuCode")).concat(FORMAT)),
+        行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString("世帯コード"), FORMAT
-                .concat(new RString("ShikibetsuTaisho_setaiCode")).concat(FORMAT)),
+        世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString("識別コード"), FORMAT
-                .concat(new RString("ShikibetsuTaisho_shikibetsuCode")).concat(FORMAT)),
+        識別コード(new RString("0009"), new RString("識別コード"), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("")),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
         /**
          * 生年月日
          */
-        生年月日(new RString("0012"), new RString("生年月日"), FORMAT
-                .concat(new RString("ShikibetsuTaisho_seinengappiYMD")).concat(FORMAT)),
+        生年月日(new RString("0012"), new RString("生年月日"), new RString("\"ShikibetsuTaisho_seinengappiYMD\"")),
         /**
          * 性別
          */
-        性別(new RString("0013"), new RString("性別"), FORMAT
-                .concat(new RString("ShikibetsuTaisho_seibetsuCode")).concat(FORMAT)),
+        性別(new RString("0013"), new RString("性別"), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), FORMAT
-                .concat(new RString("dbT2016NofugakuJohoTemp_fukaShichosonCode")).concat(FORMAT)),
+        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("master.\"dbT2016NofugakuJohoTemp_fukaShichosonCode\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), FORMAT
-                .concat(new RString("dbT2016NofugakuJohoTemp_hihokenshaNo")).concat(FORMAT)),
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("master.\"dbT2016NofugakuJohoTemp_hihokenshaNo\"")),
         /**
          * 徴収方法
          */
-        徴収方法(new RString("0209"), new RString("徴収方法"), new RString(""));
+        徴収方法(new RString("0209"), new RString("徴収方法"), new RString("master.\"dbT2016NofugakuJohoTemp_choshuHouhou\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

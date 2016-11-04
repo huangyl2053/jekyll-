@@ -91,6 +91,8 @@ public class TennyuTenshutsuMitorokuIchiranhyoReportSource implements IReportSou
     public RString listLower_5;
     @ReportItem(name = "listLower_6", length = 6, order = 39)
     public RString listLower_6;
+    @ReportItem(name = "listLower_7", length = 6, order = 40)
+    public RString listLower_7;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

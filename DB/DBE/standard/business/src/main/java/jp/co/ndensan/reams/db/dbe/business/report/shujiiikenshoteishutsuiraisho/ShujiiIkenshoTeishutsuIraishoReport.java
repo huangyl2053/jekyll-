@@ -18,6 +18,24 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public final class ShujiiIkenshoTeishutsuIraishoReport extends Report<ShujiiIkenshoTeishutsuIraishoReportSource> {
 
     private final List<ShujiiIkenshoTeishutsuIraishoItem> itemList;
+    private final ShujiiIkenshoTeishutsuIraishoItem item;
+
+    private ShujiiIkenshoTeishutsuIraishoReport(ShujiiIkenshoTeishutsuIraishoItem item, List<ShujiiIkenshoTeishutsuIraishoItem> itemList) {
+        this.itemList = itemList;
+        this.item = item;
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param item 介護保険指定医依頼兼主治医意見書提出依頼書のITEM
+     * @return 介護保険指定医依頼兼主治医意見書提出依頼書のReport
+     */
+    public static ShujiiIkenshoTeishutsuIraishoReport createFrom(
+            ShujiiIkenshoTeishutsuIraishoItem item) {
+
+        return new ShujiiIkenshoTeishutsuIraishoReport(item, null);
+    }
 
     /**
      * インスタンスを生成します。
@@ -28,11 +46,7 @@ public final class ShujiiIkenshoTeishutsuIraishoReport extends Report<ShujiiIken
     public static ShujiiIkenshoTeishutsuIraishoReport createFrom(
             List<ShujiiIkenshoTeishutsuIraishoItem> itemList) {
 
-        return new ShujiiIkenshoTeishutsuIraishoReport(itemList);
-    }
-
-    private ShujiiIkenshoTeishutsuIraishoReport(List<ShujiiIkenshoTeishutsuIraishoItem> itemList) {
-        this.itemList = itemList;
+        return new ShujiiIkenshoTeishutsuIraishoReport(null, itemList);
     }
 
     /**
@@ -40,7 +54,13 @@ public final class ShujiiIkenshoTeishutsuIraishoReport extends Report<ShujiiIken
      */
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoTeishutsuIraishoReportSource> reportSourceWriter) {
-        for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
+        if (itemList != null) {
+            for (ShujiiIkenshoTeishutsuIraishoItem shujiiIkenshoTeishutsuIraishoitem : itemList) {
+                ShujiiIkenshoTeishutsuIraishoEditor editor = new ShujiiIkenshoTeishutsuIraishoEditor(shujiiIkenshoTeishutsuIraishoitem);
+                IShujiiIkenshoTeishutsuIraishoBuilder builder = new ShujiiIkenshoTeishutsuIraishoBuilderImpl(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else {
             ShujiiIkenshoTeishutsuIraishoEditor editor = new ShujiiIkenshoTeishutsuIraishoEditor(item);
             IShujiiIkenshoTeishutsuIraishoBuilder builder = new ShujiiIkenshoTeishutsuIraishoBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);

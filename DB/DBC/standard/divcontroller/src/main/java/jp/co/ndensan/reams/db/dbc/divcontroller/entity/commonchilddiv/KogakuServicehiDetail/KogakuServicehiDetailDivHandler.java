@@ -175,6 +175,15 @@ public class KogakuServicehiDetailDivHandler {
     }
 
     /**
+     * 提供年月を取得します。
+     *
+     * @return RDate
+     */
+    public RDate get提供年月() {
+        return div.getTxtTeikyoYM().getValue();
+    }
+
+    /**
      * 申請日を取得します。
      *
      * @return RDate

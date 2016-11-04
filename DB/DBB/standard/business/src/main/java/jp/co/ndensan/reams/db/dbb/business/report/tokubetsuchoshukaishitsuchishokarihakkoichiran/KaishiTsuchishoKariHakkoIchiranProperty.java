@@ -53,6 +53,8 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
 
 
 
+
+
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> occuredBreak(
@@ -111,7 +113,7 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("atena_shimei50onKana")),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("atena_shimei50onKana")).concat(FORMAT)),
         /**
          * 生年月日
          */
@@ -123,7 +125,7 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("")),
+        市町村コード(new RString("0016"), new RString("市町村コード"), FORMAT.concat(new RString("atena_genLasdecCode")).concat(FORMAT)),
         /**
          * 被保険者番号
          */

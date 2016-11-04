@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.tennyutenshutsumitorokuichiranhyo;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.report.tennyutenshutsumitorokuichiranhyo.TennyuTenshutsuMitorokuIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -18,36 +17,36 @@ import lombok.NonNull;
  */
 public class TennyuTenshutsuMiTorokuIchiranhyoReport extends Report<TennyuTenshutsuMitorokuIchiranhyoReportSource> {
 
-    private final List<TennyuTenshutsuMiTorokuIchiranhyoBodyItem> bodyItemList;
+    private final TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem;
     private final TennyuTenshutsuMiTorokuIchiranhyoHeadItem headItem;
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 転入転出未登録一覧表ヘッダのITEM
-     * @param itemList 転入転出未登録一覧表ボディのITEMリスト
+     * @param bodyItem 転入転出未登録一覧表ボディのITEM
      * @return 転入転出未登録一覧表のReport
      */
     public static TennyuTenshutsuMiTorokuIchiranhyoReport createFrom(
             TennyuTenshutsuMiTorokuIchiranhyoHeadItem headItem,
-            @NonNull List<TennyuTenshutsuMiTorokuIchiranhyoBodyItem> itemList) {
+            @NonNull TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem) {
 
         return new TennyuTenshutsuMiTorokuIchiranhyoReport(
                 headItem,
-                itemList);
+                bodyItem);
     }
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 転入転出未登録一覧表ヘッダのITEM
-     * @param itemList 転入転出未登録一覧表のITEMリスト
+     * @param bodyItem 転入転出未登録一覧表のITEM
      */
     protected TennyuTenshutsuMiTorokuIchiranhyoReport(
             TennyuTenshutsuMiTorokuIchiranhyoHeadItem headItem,
-            List<TennyuTenshutsuMiTorokuIchiranhyoBodyItem> itemList) {
+            TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem) {
         this.headItem = headItem;
-        this.bodyItemList = itemList;
+        this.bodyItem = bodyItem;
     }
 
     /**
@@ -57,11 +56,9 @@ public class TennyuTenshutsuMiTorokuIchiranhyoReport extends Report<TennyuTenshu
      */
     @Override
     public void writeBy(ReportSourceWriter<TennyuTenshutsuMitorokuIchiranhyoReportSource> reportSourceWriter) {
-        for (TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem : bodyItemList) {
-            ITennyuTenshutsuMiTorokuIchiranhyoEditor headerEditor = new TennyuTenshutsuMiTorokuIchiranhyoHeaderEditor(headItem);
-            TennyuTenshutsuMiTorokuIchiranhyoBodyEditor bodyEditor = new TennyuTenshutsuMiTorokuIchiranhyoBodyEditor(bodyItem);
-            ITennyuTenshutsuMiTorokuIchiranhyoBuilder builder = new TennyuTenshutsuMiTorokuIchiranhyoBuilderImpl(headerEditor, bodyEditor);
-            reportSourceWriter.writeLine(builder);
-        }
+        ITennyuTenshutsuMiTorokuIchiranhyoEditor headerEditor = new TennyuTenshutsuMiTorokuIchiranhyoHeaderEditor(headItem);
+        TennyuTenshutsuMiTorokuIchiranhyoBodyEditor bodyEditor = new TennyuTenshutsuMiTorokuIchiranhyoBodyEditor(bodyItem);
+        ITennyuTenshutsuMiTorokuIchiranhyoBuilder builder = new TennyuTenshutsuMiTorokuIchiranhyoBuilderImpl(headerEditor, bodyEditor);
+        reportSourceWriter.writeLine(builder);
     }
 }

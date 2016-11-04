@@ -93,6 +93,7 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
             source.listUpper_1 = 特徴異動追加情報.getHihokenshaNo();
             source.listUpper_2 = 特徴異動追加情報.getKisoNenkinNo();
             source.listUpper_3 = 特徴異動追加情報.getDtKanaShimei();
+            source.shichosonCode = 特徴異動追加情報.getKoseiCityCode();
             RString 生年月日 = 特徴異動追加情報.getDtBirthDay();
             if (null != 生年月日) {
                 source.listUpper_4 = new FlexibleDate(生年月日).wareki().toDateString();

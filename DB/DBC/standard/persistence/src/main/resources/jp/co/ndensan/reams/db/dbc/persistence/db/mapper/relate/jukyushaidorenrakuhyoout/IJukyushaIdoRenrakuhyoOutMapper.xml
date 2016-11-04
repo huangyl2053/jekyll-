@@ -430,6 +430,7 @@
     <resultMap id="resultMap_居宅計画" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
         <id column="idouTemp_被保険者番号"/>
         <id column="idouTemp_連番"/>
+        <id column="居宅計画種類"/>
         <association property="居宅計画" resultMap="resultMap_居宅計画Entity"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
     </resultMap>

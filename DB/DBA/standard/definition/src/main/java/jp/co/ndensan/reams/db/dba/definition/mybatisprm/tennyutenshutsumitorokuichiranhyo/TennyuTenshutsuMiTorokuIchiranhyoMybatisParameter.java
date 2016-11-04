@@ -25,6 +25,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoMybatisParameter implements IMyBat
     private final List<RString> tennyusakuseijiyucode;
     private final FlexibleDate kaishinichi;
     private final FlexibleDate syuryonichi;
+    private final RString 出力順;
 
     /**
      * コンストラクタです。
@@ -34,14 +35,16 @@ public class TennyuTenshutsuMiTorokuIchiranhyoMybatisParameter implements IMyBat
      * @param tennyusakuseijiyucode 転入作成事由コードList
      * @param kaishinichi 開始日
      * @param syuryonichi 終了日
+     * @param 出力順 出力順
      */
     public TennyuTenshutsuMiTorokuIchiranhyoMybatisParameter(List<LasdecCode> shichosoncode, List<RString> tensyutsusakuseiJiyucode,
-            List<RString> tennyusakuseijiyucode, FlexibleDate kaishinichi, FlexibleDate syuryonichi) {
+            List<RString> tennyusakuseijiyucode, FlexibleDate kaishinichi, FlexibleDate syuryonichi, RString 出力順) {
         this.shichosoncode = shichosoncode;
         this.tensyutsusakuseiJiyucode = tensyutsusakuseiJiyucode;
         this.tennyusakuseijiyucode = tennyusakuseijiyucode;
         this.kaishinichi = kaishinichi;
         this.syuryonichi = syuryonichi;
+        this.出力順 = 出力順;
     }
 
 }
