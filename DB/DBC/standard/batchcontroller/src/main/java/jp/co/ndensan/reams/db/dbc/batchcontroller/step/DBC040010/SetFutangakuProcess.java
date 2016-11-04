@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * ビジネス設計_DBCMN62006_自己負担額計算（一括）の<br/>
@@ -48,7 +47,6 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
     private SetFutangakuProcessParameter processParameter;
     private Decimal 抽出対象自己負担基準額;
     private DbT3170MatchingEntity beforeEntity;
-    private JissekiFutangakuDataTempEntity updEntity;
     private RString beforKeyOf高額合算自己負担額;
 
     @Override
@@ -80,7 +78,6 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
     protected void process(DbT3170MatchingEntity entity) {
         JissekiFutangakuDataTempEntity 実績負担額 = entity.get実績負担額データ();
         if (beforeEntity == null) {
-            updEntity = 実績負担額;
             loopHandle(entity);
             beforeEntity = entity;
             return;
@@ -90,8 +87,6 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
             beforeEntity = entity;
             return;
         }
-        updEntity.setState(EntityDataState.Modified);
-        updEntity = 実績負担額;
         loopHandle(entity);
         beforeEntity = entity;
     }
