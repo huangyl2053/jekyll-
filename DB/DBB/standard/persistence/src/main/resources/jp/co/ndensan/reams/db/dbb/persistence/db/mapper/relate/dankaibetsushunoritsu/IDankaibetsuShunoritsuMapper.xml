@@ -51,6 +51,12 @@
             (<include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.relate.funokesson.IFunoKessonMapper.selectAllFunoKesson" />) AS "FunoKessonAll"
             ON
             "TotalShunyu"."urT0700ShunoKanri_shunoId" = "FunoKessonAll"."urT0700ShunoKanri_shunoId"
+            <if test="科目コードリスト != null and !科目コードリスト.isEmpty()">
+                AND "FunoKessonAll"."urT0700ShunoKanri_kamokuCode" IN
+                <foreach item="科目コード_ロープ"  collection="科目コードリスト" open="(" separator="," close=")">
+                    #{科目コード_ロープ}
+                </foreach>
+            </if>
             LEFT OUTER JOIN
             (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.noDeleted_DbT1001HihokenshaDaicho" />) AS "DbT1001HihokenshaDaicho"
             ON "DbT1001HihokenshaDaicho"."dbT1001HihokenshaDaicho_hihokenshaNo" = "DbV2002Fuka"."dbT2002Fuka_hihokenshaNo"
