@@ -102,7 +102,7 @@ public class KogakuGassanShinseishoRelate extends ParentModelBase<
                 entity.get高額合算申請書().getHihokenshaNo(),
                 entity.get高額合算申請書().getTaishoNendo(),
                 entity.get高額合算申請書().getHokenshaNo(),
-                entity.get高額合算申請書().getShikyuShinseishoSeiriNo(),
+                entity.get高額合算申請書().getSeiriNo(),
                 entity.get高額合算申請書().getRirekiNo());
         List<KogakuGassanShinseishoKanyureki> 高額合算申請書加入歴list = new ArrayList();
         for (DbT3069KogakuGassanShinseishoKanyurekiEntity 高額合算申請書加入歴entity : entity.get高額合算申請書加入歴リスト()) {

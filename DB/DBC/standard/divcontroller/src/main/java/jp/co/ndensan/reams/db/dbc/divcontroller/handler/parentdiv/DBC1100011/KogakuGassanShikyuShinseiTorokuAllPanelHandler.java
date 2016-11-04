@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyureki;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoDataResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoHoji;
@@ -106,6 +105,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final int 年度_2013 = 2013;
     private static final int 年度_2014 = 2014;
     private static final int 年度_2015 = 2015;
+    private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_3 = new RString("3");
@@ -375,19 +375,20 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
      * 申請情報グリッド「修正」ボタンのイベントです。
      *
      * @param 高額合算申請書 KogakuGassanShinseishoRelate
+     * @param 申請状況 RString
      */
-    public void onClick_dgShinseiJohoModify(KogakuGassanShinseishoRelate 高額合算申請書) {
+    public void onClick_dgShinseiJohoModify(KogakuGassanShinseishoRelate 高額合算申請書, RString 申請状況) {
         onClick_btnShinseiJohoModoru();
         申請情報データで設定(高額合算申請書);
         申請登録データで設定(高額合算申請書);
-        if (div.getTabShinseiTorokuPanel2().isVisible()) {
+        if (!RSTRING_2.equals(申請状況)) {
             国保後期資格情報TABデータで設定(高額合算申請書);
             加入履歴グリッドへ反映(高額合算申請書);
         }
         申請情報パネル制御(false);
         申請登録パネル制御(false);
         画面内共有子DIV初期化処理(高額合算申請書);
-        if (!div.getTabShinseiTorokuPanel2().isVisible()) {
+        if (RSTRING_2.equals(申請状況)) {
             div.getCcdShiharaiHohoJoho().clear();
         }
     }
@@ -408,19 +409,20 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
      * 申請情報グリッド「選択」ボタンのイベントです。
      *
      * @param 高額合算申請書 KogakuGassanShinseisho
+     * @param 申請状況 RString
      */
-    public void onClick_dgShinseiJohoSelect(KogakuGassanShinseishoRelate 高額合算申請書) {
+    public void onClick_dgShinseiJohoSelect(KogakuGassanShinseishoRelate 高額合算申請書, RString 申請状況) {
         onClick_btnShinseiJohoModoru();
         申請情報データで設定(高額合算申請書);
         申請登録データで設定(高額合算申請書);
-        if (div.getTabShinseiTorokuPanel2().isVisible()) {
+        if (!RSTRING_2.equals(申請状況)) {
             国保後期資格情報TABデータで設定(高額合算申請書);
             加入履歴グリッドへ反映(高額合算申請書);
         }
         申請情報パネル制御(true);
         申請登録パネル制御(true);
         画面内共有子DIV初期化処理(高額合算申請書);
-        if (!div.getTabShinseiTorokuPanel2().isVisible()) {
+        if (RSTRING_2.equals(申請状況)) {
             div.getCcdShiharaiHohoJoho().clear();
         }
     }
@@ -474,8 +476,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
      */
     public KogakuGassanShinseishoRelate 加入歴編集(KogakuGassanShinseishoKanyureki 加入歴,
             KogakuGassanShinseishoRelate 高額合算申請書, RString 加入歴状態) {
-        EntityDataState 状態 = 加入歴.toEntity().getState();
         if (修正.equals(加入歴状態)) {
+            EntityDataState 状態 = 加入歴.toEntity().getState();
             if (EntityDataState.Deleted.equals(状態)) {
                 加入歴.toEntity().setState(EntityDataState.Modified);
                 加入歴.toEntity().setIsDeleted(false);
@@ -485,13 +487,13 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 加入歴 = 加入歴編集(加入歴);
                 高額合算申請書 = 高額合算申請書.createBuilderForEdit().set高額合算申請書加入歴(加入歴).build();
             }
-        } else if (追加.equals(加入歴状態)) {
+        } else if (追加.equals(加入歴状態) || 加入歴 == null) {
             HihokenshaNo 被保険者番号 = 高額合算申請書.get被保険者番号();
             FlexibleYear 対象年度 = 高額合算申請書.get対象年度();
             HokenshaNo 保険者番号 = 高額合算申請書.get保険者番号();
             RString 整理番号New = 高額合算申請書.get整理番号();
             RString 加入歴番号 = 加入歴番号編集(高額合算申請書.get高額合算申請書加入歴list());
-            int 履歴番号 = INT_1;
+            int 履歴番号 = 高額合算申請書.get履歴番号().intValue();
             KogakuGassanShinseishoKanyureki 加入歴New = new KogakuGassanShinseishoKanyureki(
                     被保険者番号, 対象年度, 保険者番号, 整理番号New, 加入歴番号, 履歴番号);
             加入歴New = 加入歴編集(加入歴New);
@@ -1064,7 +1066,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         KogakuGassanShikyuShinseiToroku bussiness = KogakuGassanShikyuShinseiToroku.createInstance();
         List<KogakuGassanShinseishoRelate> 高額合算申請書List
                 = bussiness.getKogakuKaigoShinseisho(対象年度, 保険者番号, 整理番号, 履歴番号);
-        if (!高額合算申請書List.isEmpty()) {
+        if (!高額合算申請書List.isEmpty() && RSTRING_0.equals(高額合算申請書保持.get申請状態())) {
             高額合算申請書保持.set申請状態(高額合算申請書List.get(INT_0).get支給申請区分());
         }
         高額合算申請書保持.set高額合算申請書(高額合算申請書List);
@@ -1419,10 +1421,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     /**
      * 高額合算申請書変更判定メソッドです。
      *
-     * @param 高額合算申請書Result KogakuGassanShinseisho
-     * @return KogakuGassanShinseisho
+     * @param 高額合算申請書Result KogakuGassanShinseishoRelate
+     * @return KogakuGassanShinseishoRelate
      */
-    public KogakuGassanShinseisho 高額合算申請書変更判定(KogakuGassanShinseisho 高額合算申請書Result) {
+    public KogakuGassanShinseishoRelate 高額合算申請書変更判定(KogakuGassanShinseishoRelate 高額合算申請書Result) {
         return 高額合算申請書Result.createBuilderForEdit()
                 .set申請年月日(rDateToFixibleDate(div.getTxtShinseiYMD().getValue()))
                 .set支給申請書整理番号(RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
