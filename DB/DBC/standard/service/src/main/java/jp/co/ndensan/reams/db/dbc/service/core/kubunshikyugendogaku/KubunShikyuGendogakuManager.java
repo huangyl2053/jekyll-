@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservices
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -62,9 +63,16 @@ public class KubunShikyuGendogakuManager {
      * サービス種類登録を取得します。
      *
      * @param entity DbT7130KaigoServiceShuruiEntity
+     * @param flag boolean
      */
-    public void save(KaigoServiceShurui entity) {
-        kaigoServiceDac.save(entity.toEntity());
+    public void save(KaigoServiceShurui entity, boolean flag) {
+        DbT7130KaigoServiceShuruiEntity dbT7130Entity = entity.toEntity();
+        if (flag) {
+            dbT7130Entity.setState(EntityDataState.Added);
+        } else {
+            dbT7130Entity.setState(EntityDataState.Modified);
+        }
+        kaigoServiceDac.save(dbT7130Entity);
     }
 
     /**
