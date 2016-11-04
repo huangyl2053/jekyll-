@@ -266,7 +266,7 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         FutanWariaiShoDivParameter parameter = new FutanWariaiShoDivParameter();
         parameter.set呼出し元画面区分(パラメータ);
-        parameter.set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().toString()));
+        parameter.set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().getValue().toString()));
         parameter.set住所(RString.EMPTY);
         parameter.setカナ氏名(RString.EMPTY);
         parameter.set氏名(RString.EMPTY);
