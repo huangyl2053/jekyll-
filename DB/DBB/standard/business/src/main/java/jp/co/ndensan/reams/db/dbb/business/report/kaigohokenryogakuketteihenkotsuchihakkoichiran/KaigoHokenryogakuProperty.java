@@ -36,43 +36,55 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString("郵便番号"), FORMAT.concat(new RString("ShikibetsuTaisho_yubinNo")).concat(FORMAT)),
+        郵便番号(new RString("0001"), new RString("郵便番号"), FORMAT.concat(new RString("Atesaki_yubinNo")).concat(FORMAT)),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("町域コード"), FORMAT.concat(new RString("ShikibetsuTaisho_choikiCode")).concat(FORMAT)),
+        町域コード(new RString("0002"), new RString("町域コード"), FORMAT.concat(new RString("Atesaki_choikiCode")).concat(FORMAT)),
         /**
-         * 番地コード
+         * 番地コード1
          */
-        番地コード(new RString("0003"), new RString("番地コード"), FORMAT.concat(new RString("ShikibetsuTaisho_banchiCode1")).concat(FORMAT)),
+        番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"Atesaki_banchiCode1\"")),
+        /**
+         * 番地コード2
+         */
+        番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"Atesaki_banchiCode2\"")),
+        /**
+         * 番地コード3
+         */
+        番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"Atesaki_banchiCode3\"")),
+        /**
+         * 番地コード4
+         */
+        番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"Atesaki_banchiCode4\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("行政区コード"), FORMAT.concat(new RString("ShikibetsuTaisho_gyoseikuCode")).concat(FORMAT)),
+        行政区コード(new RString("0004"), new RString("行政区コード"), FORMAT.concat(new RString("Atesaki_gyoseikuCode")).concat(FORMAT)),
         /**
          * 地区１
          */
-        地区１(new RString("0005"), new RString("地区１"), FORMAT.concat(new RString("ShikibetsuTaisho_chikuCode1")).concat(FORMAT)),
+        地区１(new RString("0005"), new RString("地区１"), FORMAT.concat(new RString("Atesaki_chikuCode1")).concat(FORMAT)),
         /**
          * 地区２
          */
-        地区２(new RString("0006"), new RString("地区２"), FORMAT.concat(new RString("ShikibetsuTaisho_chikuCode2")).concat(FORMAT)),
+        地区２(new RString("0006"), new RString("地区２"), FORMAT.concat(new RString("Atesaki_chikuCode2")).concat(FORMAT)),
         /**
          * 地区３
          */
-        地区３(new RString("0007"), new RString("地区３"), FORMAT.concat(new RString("ShikibetsuTaisho_chikuCode3")).concat(FORMAT)),
+        地区３(new RString("0007"), new RString("地区３"), FORMAT.concat(new RString("Atesaki_chikuCode3")).concat(FORMAT)),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString("世帯コード"), FORMAT.concat(new RString("dbT2015KeisangoJoho_setaiCode")).concat(FORMAT)),
+        世帯コード(new RString("0008"), new RString("世帯コード"), FORMAT.concat(new RString("ShikibetsuTaisho_setaiCode")).concat(FORMAT)),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString("識別コード"), FORMAT.concat(new RString("dbT2015KeisangoJoho_shikibetsuCode")).concat(FORMAT)),
+        識別コード(new RString("0009"), new RString("識別コード"), FORMAT.concat(new RString("ShikibetsuTaisho_shikibetsuCode")).concat(FORMAT)),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("ShikibetsuTaisho_meisho")).concat(FORMAT)),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("ShikibetsuTaisho_kanaMeisho")).concat(FORMAT)),
         /**
          * 生年月日
          */
@@ -85,7 +97,7 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
          * 市町村コード
          */
         市町村コード(new RString("0016"), new RString("市町村コード"), FORMAT
-                .concat(new RString("dbT2015KeisangoJoho_insertDantaiCd")).concat(FORMAT)),
+                .concat(new RString("dbT2015KeisangoJoho_fukaShichosonCode")).concat(FORMAT)),
         /**
          * 被保険者番号
          */
@@ -94,7 +106,8 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
         /**
          * 年金コード
          */
-        年金コード(new RString("0206"), new RString("年金コード"), new RString("UeT0511after_nenkinCode")),
+        年金コード(new RString("0206"), new RString("年金コード"), FORMAT
+                .concat(new RString("UeT0511after_nenkinCode")).concat(FORMAT)),
         /**
          * 納組コード
          */
@@ -114,11 +127,13 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
         /**
          * 8月特徴開始者
          */
+        //QA1854 確認中
         八月特徴開始者(new RString("0220"), new RString("八月特徴開始者"), FORMAT
                 .concat(new RString("dbT2015KeisangoJoho_sakuseiShoriName")).concat(FORMAT)),
         /**
          * 10月特徴開始者
          */
+        //QA1854 確認中
         十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), FORMAT
                 .concat(new RString("dbT2015KeisangoJoho_sakuseiShoriName")).concat(FORMAT));
 
