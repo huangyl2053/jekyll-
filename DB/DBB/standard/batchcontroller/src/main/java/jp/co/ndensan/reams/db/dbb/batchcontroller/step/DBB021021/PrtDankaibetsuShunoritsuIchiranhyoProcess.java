@@ -117,7 +117,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private static final RString TEXT_総次年度 = new RString("*総次年度*");
     private static final RString TEXT_総合計 = new RString("*総 合 計*");
     private static final RString TEXT_完納分 = new RString("（完納分）");
-    private static final RString TEXT_普通徴収 = new RString("普通徴収");
+    private static final RString TEXT_普通徴収 = new RString("（普通徴収）");
     private static final RString TEXT_特別徴収 = new RString("（特別徴収）");
     private static final RString TEXT_普通徴収_完納分 = new RString("（普通徴収　完納分）");
     private static final RString TEXT_特別徴収_完納分 = new RString("（特別徴収　完納分）");
@@ -813,7 +813,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         int 合計_還付件数 = 合計_過年度_還付件数 + 合計_現年度_還付件数 + 合計_次年度_還付件数;
         Decimal 合計_充当額負 = 合計_過年度_充当額負.add(合計_現年度_充当額負).add(合計_次年度_充当額負);
         int 合計_充当額負件数 = 合計_過年度_充当額負件数 + 合計_現年度_充当額負件数 + 合計_次年度_充当額負件数;
-        Decimal 合計_充当額 = 合計_過年度_充当額負.add(合計_現年度_充当額負).add(合計_次年度_充当額負);
+        Decimal 合計_充当額 = 合計_過年度_充当額.add(合計_現年度_充当額).add(合計_次年度_充当額);
         int 合計_充当額件数 = 合計_過年度_充当額件数 + 合計_現年度_充当額件数 + 合計_次年度_充当額件数;
         Decimal 未納額 = 合計_調定額.subtract(合計_収入額.subtract(合計_還付額).add(合計_充当額).
                 subtract(合計_充当額負)).subtract(合計_不納欠損額);
@@ -1023,7 +1023,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         int 総合計_還付件数 = 総合計_過年度_還付件数 + 総合計_現年度_還付件数 + 総合計_次年度_還付件数;
         Decimal 総合計_充当額負 = 総合計_過年度_充当額負.add(総合計_現年度_充当額負).add(総合計_次年度_充当額負);
         int 総合計_充当額負件数 = 総合計_過年度_充当額負件数 + 総合計_現年度_充当額負件数 + 総合計_次年度_充当額負件数;
-        Decimal 総合計_充当額 = 総合計_過年度_充当額負.add(総合計_現年度_充当額負).add(総合計_次年度_充当額負);
+        Decimal 総合計_充当額 = 総合計_過年度_充当額.add(総合計_現年度_充当額).add(総合計_次年度_充当額);
         int 総合計_充当額件数 = 総合計_過年度_充当額件数 + 総合計_現年度_充当額件数 + 総合計_次年度_充当額件数;
         Decimal 未納額 = 総合計_調定額.subtract(総合計_収入額.subtract(総合計_還付額).add(総合計_充当額).
                 subtract(総合計_充当額負)).subtract(総合計_不納欠損額);

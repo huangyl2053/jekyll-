@@ -92,12 +92,12 @@
     
      <!-- 世帯員把握入力のデータの取得-->
     <select resultOrdered="true" id="get世帯員把握入力Temp" resultMap="resultMap_SetaiHakuEntity" fetchSize="500">
-        SELECT 
+        SELECT DISTINCT 
         A."hihokenshaNo",
         A."shikibetsuCode",
         A."kijunYMD",
-        A."jushochiTokureiFlag",
-        A."shotokuNendo"
+        A."shotokuNendo",
+        A."jushochiTokureiFlag"
         from "TmpSetaiHaaku" AS A
         WHERE A."hihokenshaNo" not in(SELECT DISTINCT
         B."hihokenshaNo" from "TmpSetaiShotoku" AS B)

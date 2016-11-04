@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.definition.processprm.dba090010;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateShutsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
@@ -32,13 +33,6 @@ public class AtenaSealCreateProcessParameter implements IBatchProcessParameter {
     private static final RString 抽出対象者_住所地特例者のみ = new RString("4");
     private static final RString 抽出対象者_受給認定申請中を除く = new RString("5");
     private static final RString 業務コード = new RString("DBA");
-    private static final RString 資格区分_ICHI = new RString("1");
-    private static final RString 資格区分_NI = new RString("2");
-    private static final RString 市町村指定_ICHI = new RString("1");
-    private static final RString 市町村指定_ZERO = new RString("0");
-    private static final RString 市町村指定_NI = new RString("2");
-    private static final RString 市町村指定_SAN = new RString("3");
-    private static final RString 市町村指定_YOU = new RString("4");
     private static final RString 資格区分_1号日本人 = new RString("1");
     private static final RString 資格区分_2号日本人 = new RString("2");
     private static final RString 資格区分_1号外国人 = new RString("3");
@@ -48,6 +42,12 @@ public class AtenaSealCreateProcessParameter implements IBatchProcessParameter {
     private static final RString 資格区分_全て = new RString("7");
     private static final RString 年齢到達日 = new RString("lblToutatubi");
     private static final RString 送付先又は代納人 = new RString("sofusakiOrDainonin");
+    private static final RString 資格区分_1 = new RString("1");
+    private static final RString 資格区分_2 = new RString("2");
+    private static final RString 住民種別_2 = new RString("2");
+    private static final RString 住民種別_1 = new RString("1");
+    private static final RString 住民状態_1 = new RString("1");
+    private static final RString 住民状態_2 = new RString("2");
 
     private RString chuushutsutaishousha;
     private RString chuyshutsukukantxt;
@@ -142,13 +142,17 @@ public class AtenaSealCreateProcessParameter implements IBatchProcessParameter {
         List<RString> kubun_2 = new ArrayList<>();
         List<RString> shubetsu_1 = new ArrayList<>();
         List<RString> shubetsu_2 = new ArrayList<>();
+        List<RString> 資格区分 = new ArrayList<>();
+        List<RString> 住民種別 = new ArrayList<>();
+        List<RString> 住民状態 = new ArrayList<>();
         if (送付先又は代納人.equals(saiyuusenjyusho)) {
             is送付先または代納人 = true;
         }
         if (年齢到達日.equals(chuyshutsukukantxt)) {
             is年齢到達日 = true;
         }
-        if (!全市町村.equals(shichousonshitei)) {
+        if (!全市町村.equals(shichousonshitei)
+                && !RString.isNullOrEmpty(shichousonshitei)) {
             is市町村指定 = true;
             has市町村指定 = true;
         }
@@ -170,74 +174,42 @@ public class AtenaSealCreateProcessParameter implements IBatchProcessParameter {
         kankaishibi_第２号 = get開始年月日(toFlexibleDate(chuushutsukikankaishibi), 第２号被保険者到達基準年齢);
         shuuryoubi_第２号 = get開始年月日(toFlexibleDate(chuushutsukikankaishibi), 第２号被保険者到達基準年齢);
         if (資格区分_1号日本人.equals(shikakukubun)) {
-            is第１号開始年月日 = true;
-            kubun_1.add(資格区分_ICHI);
-            kubun_2.add(資格区分_ICHI);
-            shubetsu_1.add(市町村指定_ICHI);
-            shubetsu_2.add(市町村指定_ZERO);
+            資格区分.add(資格区分_1);
+            住民種別.add(住民種別_1);
+            住民状態.add(住民状態_1);
         } else if (資格区分_2号日本人.equals(shikakukubun)) {
-            is第２号開始年月日 = true;
-            kubun_1.add(資格区分_NI);
-            kubun_2.add(資格区分_ICHI);
-            shubetsu_1.add(市町村指定_ICHI);
-            shubetsu_2.add(市町村指定_ZERO);
+            資格区分.add(資格区分_1);
+            住民種別.add(住民種別_1);
+            住民状態.add(住民状態_1);
         } else if (資格区分_1号外国人.equals(shikakukubun)) {
-            is第１号開始年月日 = true;
-            kubun_1.add(資格区分_ICHI);
-            kubun_2.add(資格区分_NI);
-            shubetsu_1.add(市町村指定_NI);
-            shubetsu_2.add(市町村指定_ZERO);
+            資格区分.add(資格区分_1);
+            住民種別.add(住民種別_2);
+            住民状態.add(住民状態_1);
         } else if (資格区分_2号外国人.equals(shikakukubun)) {
-            is第２号開始年月日 = true;
-            kubun_1.add(資格区分_NI);
-            kubun_2.add(資格区分_NI);
-            shubetsu_1.add(市町村指定_NI);
-            shubetsu_2.add(市町村指定_ZERO);
+            資格区分.add(資格区分_2);
+            住民種別.add(住民種別_2);
+            住民状態.add(住民状態_1);
         } else if (資格区分_1号全て.equals(shikakukubun)) {
-            is第１号開始年月日 = true;
-            kubun_1.add(資格区分_ICHI);
-            kubun_1.add(資格区分_NI);
-            kubun_2.add(資格区分_NI);
-            shubetsu_1.add(市町村指定_ICHI);
-            shubetsu_1.add(市町村指定_NI);
-            shubetsu_2.add(市町村指定_ZERO);
+            資格区分.add(資格区分_1);
+            住民種別.add(住民種別_1);
+            住民種別.add(住民種別_2);
+            住民状態.add(住民状態_1);
         } else if (資格区分_2号全て.equals(shikakukubun)) {
-            is第２号開始年月日 = true;
-            kubun_1.add(資格区分_NI);
-            kubun_2.add(資格区分_ICHI);
-            kubun_2.add(資格区分_NI);
-            shubetsu_1.add(市町村指定_SAN);
-            shubetsu_1.add(市町村指定_YOU);
-            shubetsu_2.add(市町村指定_NI);
+            資格区分.add(資格区分_2);
+            住民種別.add(住民種別_1);
+            住民種別.add(住民種別_2);
+            住民状態.add(住民状態_1);
+            住民状態.add(住民状態_2);
         } else if (資格区分_全て.equals(shikakukubun)) {
-            is資格区分_全て = true;
-            kubun_1.add(資格区分_NI);
-            kubun_2.add(資格区分_ICHI);
-            kubun_2.add(資格区分_ICHI);
-            kubun_2.add(資格区分_NI);
-            shubetsu_1.add(市町村指定_ICHI);
-            shubetsu_1.add(市町村指定_NI);
-            shubetsu_1.add(市町村指定_SAN);
-            shubetsu_1.add(市町村指定_YOU);
-            shubetsu_2.add(市町村指定_ICHI);
-            shubetsu_2.add(市町村指定_NI);
+            資格区分.add(資格区分_1);
+            資格区分.add(資格区分_2);
+            住民種別.add(住民種別_1);
+            住民種別.add(住民種別_2);
+            住民状態.add(住民状態_1);
+            住民状態.add(住民状態_2);
         }
         return AtenaSealCreateMybatisParameter.creatParameter(
-                chuushutsutaishousha,
-                chuyshutsukukantxt,
-                toFlexibleDate(chuushutsukikankaishibi),
-                toFlexibleDate(chuushutsukikanshuuryoubi),
-                shikakukubun,
                 shichousonshitei,
-                saiyuusenjyusho,
-                keishou,
-                hitemotsubangouhyouji,
-                iskatagaki,
-                isshichosonmeisho,
-                istodofukenmeisho,
-                isgunmeisho,
-                shutsutuokujyunid,
-                gyoumucode,
                 is資格区分_全て,
                 is年齢到達日,
                 has市町村指定,
@@ -256,9 +228,24 @@ public class AtenaSealCreateProcessParameter implements IBatchProcessParameter {
                 is抽出対象者1,
                 isDBA業務コード,
                 is受給認定申請中を除く,
+                資格区分,
+                住民種別,
+                住民状態,
                 psmShikibetsuTaisho,
                 psmAtesaki
         );
+    }
+
+    /**
+     * 出力順のパラメータを作成します。
+     *
+     * @param has出力順 has出力順
+     * @param 出力順 出力順
+     * @return AtenaSealCreateShutsuMybatisParameter
+     */
+    public AtenaSealCreateShutsuMybatisParameter toAtenaSealCreateShutsuMybatisParameter(boolean has出力順,
+            RString 出力順) {
+        return AtenaSealCreateShutsuMybatisParameter.creatParameter(has出力順, 出力順);
     }
 
     private FlexibleDate get開始年月日(FlexibleDate 抽出期間開始日, RString 第１号被保険者到達基準年齢) {

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2180-030 x_lilh
  */
-public class KogakuShikyuHanteiKekkaCancelProcess extends BatchProcessBase<DbT3036ShokanHanteiKekkaEntity> {
+public class KogakuShikyuHanteiKekkaCancelProcess extends BatchProcessBase<DbT3057KogakuShikyuHanteiKekkaEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
             + "relate.dbc050010.IFurikomiDataTourokuMapper.select依頼済取消_高額介護サービス費支給判定結果情報");
@@ -39,7 +38,7 @@ public class KogakuShikyuHanteiKekkaCancelProcess extends BatchProcessBase<DbT30
     }
 
     @Override
-    protected void process(DbT3036ShokanHanteiKekkaEntity t) {
+    protected void process(DbT3057KogakuShikyuHanteiKekkaEntity t) {
         t.setFurikomiMeisaishoSakuseiYMD(FlexibleDate.EMPTY);
         高額介護支給判定結果tableWriter.update(t);
     }

@@ -44,13 +44,13 @@ public class JukyuNinteiShinseityuIgaiEntity {
     private RString 管内管外区分;
     private AtenaMeisho 世帯主名称;
     private RString 代納区分名称;
-    private BanchiCode 番地ｺｰド;
-    private GyoseikuCode 行政区ｺｰド;
+    private BanchiCode 番地コード;
+    private GyoseikuCode 行政区コード;
     private ChikuCode 地区コード1;
     private ChikuCode 地区コード2;
     private ChikuCode 地区コード3;
-    private SetaiCode 世帯ｺｰﾄﾞ;
-    private ZenkokuJushoCode 住所ｺｰド;
+    private SetaiCode 世帯コード;
+    private ZenkokuJushoCode 住所コード;
     private HihokenshaNo 被保険者番号;
     private RString 性別;
 

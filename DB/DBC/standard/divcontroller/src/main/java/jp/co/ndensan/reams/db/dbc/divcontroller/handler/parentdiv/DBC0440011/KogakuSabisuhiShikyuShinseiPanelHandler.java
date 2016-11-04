@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -72,8 +72,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString アンダーライン = new RString("_");
-    private static final RYear 定値所得年度1 = new RYear("200606");
-    private static final RYear 定値所得年度2 = new RYear("201607");
+    private static final RYearMonth 定値所得年度1 = new RYearMonth("200606");
+    private static final RYearMonth 定値所得年度2 = new RYearMonth("201607");
     private static final Decimal NUMBER_0 = new Decimal(0);
     private static final NyuryokuShikibetsuNo 定値_識別番号 = new NyuryokuShikibetsuNo("3411");
     private static final KokanShikibetsuNo 定値_交換情報識別番号 = new KokanShikibetsuNo("1131");
@@ -84,8 +84,6 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_7 = 7;
-    private static final int NUM_8 = 8;
-    private static final int NUM_12 = 12;
 
     /**
      * 初期化
@@ -156,16 +154,16 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
 
     private FlexibleYear get所得年度(RDate date) {
         FlexibleYear 所得年度 = new FlexibleYear(date.getYear().toDateString());
-        if (date.getYear() != null && date.getYear().isBeforeOrEquals(定値所得年度1)) {
+        if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度1)) {
             if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_5) {
                 所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
             }
-        } else if (date.getYear() != null && date.getYear().isBeforeOrEquals(定値所得年度2)
-                && 定値所得年度1.isBefore(date.getYear())) {
+        } else if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度2)
+                && 定値所得年度1.isBefore(date.getYearMonth())) {
             if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_6) {
                 所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
             }
-        } else if (定値所得年度2.isBefore(date.getYear())) {
+        } else if (定値所得年度2.isBefore(date.getYearMonth())) {
             if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_7) {
                 所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
             }
