@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -33,6 +34,7 @@ public class NofugakuJohoTempEntity extends DbTableEntityBase<NofugakuJohoTempEn
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
     private LasdecCode fukaShichosonCode;
+    private RString choshuHouhou;
     private Decimal tkSaishutsuKampuGaku;
     private Decimal fuSaishutsuKampuGaku;
     private Decimal tkChoteiGaku01;

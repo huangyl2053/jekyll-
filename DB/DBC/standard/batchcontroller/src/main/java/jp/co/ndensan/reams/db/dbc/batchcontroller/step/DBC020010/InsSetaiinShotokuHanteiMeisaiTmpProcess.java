@@ -32,10 +32,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2010-040 chenaoqi
  */
-public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<TempSetaiinShotokuHanteiEntity> {
+public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<HihokenSeikatsuRoreiRelateEntity> {
 
     private static final RString MYBATISPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
-            + ".kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.select世帯員所得情報一時");
+            + ".kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.select被保生保老齢情報");
     private static final RString TABLE_世帯員所得判定明細一時 = new RString("TempSetaiinShotokuHanteiMeisai");
 
     private static final RString 区分_1 = new RString("1");
@@ -48,18 +48,40 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Te
     private RString 所得調査中課税区分;
     private RString 課税取消課税区分;
     private RString 減免前後課税区分;
+    private boolean 課税区分flag;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tableWriter;
 
     @Override
-    protected void initialize() {
+    protected void beforeExecute() {
         mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
         RDate nowDate = RDate.getNowDate();
         未申告課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分, nowDate, SubGyomuCode.DBB介護賦課);
         所得調査中課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中課税区分, nowDate, SubGyomuCode.DBB介護賦課);
         課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分, nowDate, SubGyomuCode.DBB介護賦課);
         減免前後課税区分 = DbBusinessConfig.get(ConfigNameDBC.減免前後課税区分, nowDate, SubGyomuCode.DBC介護給付);
+
+        List<TempSetaiinShotokuHanteiEntity> 世帯員所得情報一時List = mapper.select世帯員所得情報一時();
+        for (TempSetaiinShotokuHanteiEntity entity : 世帯員所得情報一時List) {
+            if (区分_1.equals(減免前後課税区分)) {
+                entity.setHonninKazeiKubun(entity.getKazeiKubun());
+            } else if (区分_2.equals(減免前後課税区分)) {
+                entity.setHonninKazeiKubun(entity.getKazeiKubunGemmenGo());
+            }
+            if (KazeiKubun.未申告.getコード().equals(entity.getHonninKazeiKubun())) {
+                entity.setHonninKazeiKubun(未申告課税区分);
+            } else if (KazeiKubun.所得調査中.getコード().equals(entity.getHonninKazeiKubun())) {
+                entity.setHonninKazeiKubun(所得調査中課税区分);
+            } else if (KazeiKubun.課税取消.getコード().equals(entity.getHonninKazeiKubun())) {
+                entity.setHonninKazeiKubun(課税取消課税区分);
+            } else if (entity.getHonninKazeiKubun() == null || entity.getHonninKazeiKubun().isEmpty()) {
+                entity.setHonninKazeiKubun(KazeiKubun.非課税.getコード());
+            }
+            mapper.insert世帯員所得判定明細一時(entity);
+        }
+        List<HihokenSeikatsuRoreiRelateEntity> 被保生保老齢情報List = mapper.select被保生保老齢情報();
+        課税区分flag = get課税区分flag(被保生保老齢情報List);
     }
 
     @Override
@@ -74,69 +96,48 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Te
     }
 
     @Override
-    protected void process(TempSetaiinShotokuHanteiEntity entity) {
-        if (区分_1.equals(減免前後課税区分)) {
-            entity.setHonninKazeiKubun(entity.getKazeiKubun());
-        } else if (区分_2.equals(減免前後課税区分)) {
-            entity.setHonninKazeiKubun(entity.getKazeiKubunGemmenGo());
+    protected void process(HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報) {
+        TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
+        UrT0508SeikatsuHogoJukyushaEntity 生保情報Entity = 被保生保老齢情報.get生保情報Entity();
+        DbT7006RoreiFukushiNenkinJukyushaEntity 老齢情報Entity = 被保生保老齢情報.get老齢情報Entity();
+        boolean flag = false;
+        if (生保情報Entity == null || 生保情報Entity.getShikibetsuCode() == null || 生保情報Entity.getShikibetsuCode().isEmpty()) {
+            flag = true;
         }
-        if (KazeiKubun.未申告.getコード().equals(entity.getHonninKazeiKubun())) {
-            entity.setHonninKazeiKubun(未申告課税区分);
-        } else if (KazeiKubun.所得調査中.getコード().equals(entity.getHonninKazeiKubun())) {
-            entity.setHonninKazeiKubun(所得調査中課税区分);
-        } else if (KazeiKubun.課税取消.getコード().equals(entity.getHonninKazeiKubun())) {
-            entity.setHonninKazeiKubun(課税取消課税区分);
-        } else if (entity.getHonninKazeiKubun() == null || entity.getHonninKazeiKubun().isEmpty()) {
-            entity.setHonninKazeiKubun(KazeiKubun.非課税.getコード());
+        if (!flag) {
+            判定明細Entity.setShoboKubun(区分_1);
         }
-        tableWriter.insert(entity);
+        if (老齢情報Entity != null && 老齢情報Entity.getShikibetsuCode() != null) {
+            判定明細Entity.setRoreiFukushi(区分_1);
+        }
+        if (被保生保老齢情報.get被保険者情報Entity() != null) {
+            HihokenshaDaicho 被保険者情報 = new HihokenshaDaicho(被保生保老齢情報.get被保険者情報Entity());
+            HihokenshaNo 被保険者番号 = 被保険者情報.get被保険者番号();
+            FlexibleDate 資格取得日 = 被保険者情報.get資格取得年月日();
+            FlexibleDate 資格喪失年月日 = 被保険者情報.get資格喪失年月日();
+            FlexibleDate 基準年月日 = 判定明細Entity.getKijunYMD();
+            if (被保険者番号 != null && 資格取得日 != null && 資格喪失年月日 != null
+                    && 基準年月日 != null && 資格取得日.isBeforeOrEquals(基準年月日) && 基準年月日.isBefore(資格喪失年月日)) {
+                判定明細Entity.setSetaiinHihokenshaNo(被保険者番号);
+                判定明細Entity.setSetaiinHihokenshakubun(被保険者情報.get被保険者区分コード());
+            }
+        }
+        if (課税区分flag) {
+            判定明細Entity.setSetaiKazeiKubun(KazeiKubun.課税.getコード());
+        } else {
+            判定明細Entity.setSetaiKazeiKubun(KazeiKubun.非課税.getコード());
+        }
+        mapper.update世帯員所得判定明細一時(判定明細Entity);
     }
 
     @Override
     protected void afterExecute() {
-        List<HihokenSeikatsuRoreiRelateEntity> 被保生保老齢情報List = mapper.select被保生保老齢情報();
-        boolean 課税区分flag = get課税区分flag(被保生保老齢情報List);
-        for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
-            TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
-            List<UrT0508SeikatsuHogoJukyushaEntity> 生保情報List = 被保生保老齢情報.get生保情報List();
-            DbT7006RoreiFukushiNenkinJukyushaEntity 老齢情報Entity = 被保生保老齢情報.get老齢情報Entity();
-            boolean flag = false;
-            for (UrT0508SeikatsuHogoJukyushaEntity 生保情報 : 生保情報List) {
-                if (生保情報.getShikibetsuCode() == null || 生保情報.getShikibetsuCode().isEmpty()) {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
-                判定明細Entity.setShoboKubun(区分_1);
-            }
-            if (老齢情報Entity != null && 老齢情報Entity.getShikibetsuCode() != null) {
-                判定明細Entity.setRoreiFukushi(区分_1);
-            }
-            if (被保生保老齢情報.get被保険者情報Entity() != null) {
-                HihokenshaDaicho 被保険者情報 = new HihokenshaDaicho(被保生保老齢情報.get被保険者情報Entity());
-                HihokenshaNo 被保険者番号 = 被保険者情報.get被保険者番号();
-                FlexibleDate 資格取得日 = 被保険者情報.get資格取得年月日();
-                FlexibleDate 資格喪失年月日 = 被保険者情報.get資格喪失年月日();
-                FlexibleDate 基準年月日 = 判定明細Entity.getKijunYMD();
-                if (被保険者番号 != null && 資格取得日 != null && 資格喪失年月日 != null
-                        && 基準年月日 != null && 資格取得日.isBeforeOrEquals(基準年月日) && 基準年月日.isBefore(資格喪失年月日)) {
-                    判定明細Entity.setSetaiinHihokenshaNo(被保険者番号);
-                    判定明細Entity.setSetaiinHihokenshakubun(被保険者情報.get被保険者区分コード());
-                }
-            }
-            if (課税区分flag) {
-                判定明細Entity.setSetaiKazeiKubun(KazeiKubun.課税.getコード());
-            } else {
-                判定明細Entity.setSetaiKazeiKubun(KazeiKubun.非課税.getコード());
-            }
-            mapper.update世帯員所得判定明細一時(判定明細Entity);
-        }
+        tableWriter.getInsertCount();
     }
 
     private boolean get課税区分flag(List<HihokenSeikatsuRoreiRelateEntity> 被保生保老齢情報List) {
         RString breakKey = RString.EMPTY;
-        boolean 課税区分flag = false;
+        課税区分flag = false;
         for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
             TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
             RString nowBreakKey = getBreakKey(判定明細Entity);

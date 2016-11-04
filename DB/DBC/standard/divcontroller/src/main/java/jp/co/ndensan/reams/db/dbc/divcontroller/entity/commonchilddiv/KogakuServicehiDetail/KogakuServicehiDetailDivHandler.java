@@ -134,6 +134,7 @@ public class KogakuServicehiDetailDivHandler {
         if (0 == KougakuSabisuhiShousaiNaiyou.createInstance().getTenshutsuNyuuHantei(被保険者番号, サービス年月)) {
             div.getTplShinseisha().getTxtHokenJyaBango().setDisabled(true);
         }
+        div.getTxtSetaiSyuyakuBango().setValue(RString.EMPTY);
     }
 
     /**
@@ -171,6 +172,15 @@ public class KogakuServicehiDetailDivHandler {
      */
     public void set画面tap() {
         div.getTabKogakuServicehiDetail().setSelectedItem(div.getTplShinseisha());
+    }
+
+    /**
+     * 提供年月を取得します。
+     *
+     * @return RDate
+     */
+    public RDate get提供年月() {
+        return div.getTxtTeikyoYM().getValue();
     }
 
     /**

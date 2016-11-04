@@ -295,6 +295,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getRadShinsaMethod().setDisabled(flag);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnClear().setDisabled(flag);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnModifyDetail().setDisabled(flag);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnShohinmei().setDisabled(flag);
     }
 
     /**
@@ -1107,15 +1108,17 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                         DbcWarningMessages.福祉用具限度額確認)));
             }
         }
-        if (null != div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                getTxtTeikyoYM().getValue() && div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue() != null && !div.
-                getYoguKonyuhiShikyuShinseiContentsPanel()
-                .getTxtTeikyoYM().getValue().getYearMonth().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                        getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue().getYearMonth())) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbcErrorMessages.購入日の年月と提供_購入_年月の不一致)));
-            return validPairs;
+        List<dgSeikyuDetail_Row> rowData = div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getDgSeikyuDetail().getDataSource();
+        RDate 提供年月 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue();
+        if (null != div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue()) {
+            for (dgSeikyuDetail_Row row : rowData) {
+                if (!RowState.Deleted.equals(row.getRowState()) && !提供年月.getYearMonth().equals(row.getTxtBuyYMD().getValue().getYearMonth())) {
+                    validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                            DbcErrorMessages.購入日の年月と提供_購入_年月の不一致)));
+                    break;
+                }
+            }
         }
         return validPairs;
     }
@@ -1189,7 +1192,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         if (処理モード修正.equals(処理モード)) {
             boolean flag = checkState(row);
             if (flag) {
-                row.setRowState(RowState.Modified);
+                row.setRowState(RowState.Added.equals(row.getRowState()) ? RowState.Added : RowState.Modified);
                 setDgSeikyuDetail(row, 処理モード);
             }
         } else if (処理モード削除.equals(処理モード)) {
@@ -1580,7 +1583,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getBtnAddDetail().setDisabled(true);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
                 getGridSetting().setIsShowSelectButtonColumn(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
@@ -1651,7 +1653,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getBtnAddDetail().setDisabled(true);
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShiharaiHoho().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
                 getGridSetting().setIsShowSelectButtonColumn(true);

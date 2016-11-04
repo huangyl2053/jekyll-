@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0810030;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030.SeikyuGakuShukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030.dgdSeikyugakushukei_Row;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -201,7 +201,7 @@ public class SeikyuGakuShukeiHandler {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().get所定疾患施設療養設定区分())
-                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
+                && (サービス年月 != null && !サービス年月.isEmpty()) && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelHead().getBtnKinkyujiShoteishikkan().setDisplayNone(false);
             div.getPanelHead().getBtnKinkyujiShoteishikkan().setVisible(true);
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);

@@ -38,16 +38,23 @@ public enum TsuuchishoHakkoSpec implements IPredicate<TsuuchishoHakkoDiv> {
     private static class SpecHelper {
 
         public static boolean 申請年月日判定(TsuuchishoHakkoDiv div) {
-            RDate 申請年月日_終了日 = div.getTxtShinseiYMD().getToValue();
-            RDate 申請年月日_開始日 = div.getTxtShinseiYMD().getFromValue();
-            return 申請年月日_開始日.isBefore(申請年月日_終了日);
+            if (div.getTxtShinseiYMD().getToValue() != null && div.getTxtShinseiYMD().getFromValue() != null) {
+                RDate 申請年月日_終了日 = div.getTxtShinseiYMD().getToValue();
+                RDate 申請年月日_開始日 = div.getTxtShinseiYMD().getFromValue();
+                return 申請年月日_開始日.isBefore(申請年月日_終了日);
+            } else {
+                return true;
+            }
         }
 
         public static boolean 決定年月日判定(TsuuchishoHakkoDiv div) {
-            RDate 決定年月日_終了日 = div.getTxtKetteiYMD().getToValue();
-            RDate 決定年月日_開始日 = div.getTxtKetteiYMD().getFromValue();
-            return 決定年月日_開始日.isBefore(決定年月日_終了日);
+            if (div.getTxtKetteiYMD().getToValue() != null && div.getTxtKetteiYMD().getFromValue() != null) {
+                RDate 決定年月日_終了日 = div.getTxtKetteiYMD().getToValue();
+                RDate 決定年月日_開始日 = div.getTxtKetteiYMD().getFromValue();
+                return 決定年月日_開始日.isBefore(決定年月日_終了日);
+            } else {
+                return true;
+            }
         }
-
     }
 }

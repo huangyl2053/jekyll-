@@ -102,7 +102,8 @@ public class JigyobunShikyugakuCalcPanelHandler {
 
     private List<KeyValueDataSource> createDropDownList(FlexibleYear 処理年度, FlexibleYear 処理開始年度) {
         List<KeyValueDataSource> list = new ArrayList<>();
-        while (処理開始年度.isBeforeOrEquals(処理年度)) {
+        while ((処理年度 != null && !処理年度.isEmpty()) && (処理開始年度 != null && !処理開始年度.isEmpty()
+                && 処理開始年度.isBeforeOrEquals(処理年度))) {
             KeyValueDataSource kv = new KeyValueDataSource(処理年度.toDateString(), 処理年度.wareki().toDateString());
             list.add(kv);
             処理年度 = 処理年度.minusYear(1);
@@ -204,6 +205,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         parameter.set処理時間(RTime.now());
         parameter.set決定年月日(div.getKoshinNaiyo().getTxtKetteiDate().getValue());
         parameter.set窓口払開始年月日(div.getKoshinNaiyo().getTxtKaishiDate().getValue());
+        parameter.set窓口払開始時刻(div.getKoshinNaiyo().getTxtKaishiTime().getValue());
         parameter.set窓口払終了年月日(div.getKoshinNaiyo().getTxtShuryoDate().getValue());
         parameter.set窓口払終了時刻(div.getKoshinNaiyo().getTxtShuryoTime().getValue());
         parameter.set出力順ID(div.getCcdShutsuryokujun().get出力順ID());

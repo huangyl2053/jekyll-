@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +23,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class KariSanteiIdoFukaMybatisParameter extends KozaSearchParameter {
 
     private FlexibleYear 賦課年度;
@@ -30,6 +31,7 @@ public class KariSanteiIdoFukaMybatisParameter extends KozaSearchParameter {
     private RDateTime 抽出開始日時;
     private RDateTime 抽出終了日時;
     private YMDHMS 調定日時;
+    private RString 出力順;
 
     /**
      * コンストラクタです。
@@ -57,5 +59,4 @@ public class KariSanteiIdoFukaMybatisParameter extends KozaSearchParameter {
         this.抽出終了日時 = 抽出終了日時;
         this.調定日時 = 調定日時;
     }
-
 }

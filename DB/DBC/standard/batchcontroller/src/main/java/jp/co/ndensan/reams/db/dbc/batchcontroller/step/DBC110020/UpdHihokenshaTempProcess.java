@@ -113,10 +113,11 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = concatDate(全項目, 被保険者台帳.getShikakuShutokuYMD());
         全項目 = concatDate(全項目, 被保険者台帳.getShikakuSoshitsuYMD());
         if (RString.isNullOrEmpty(被保険者台帳.getJushochiTokureiFlag())) {
-            全項目 = 全項目.concat(RString.EMPTY);
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         } else {
-            全項目 = 全項目.concat(被保険者台帳.getJushochiTokureiFlag());
+            全項目 = 全項目.concat(被保険者台帳.getJushochiTokureiFlag()).concat(SPLIT);
         }
+        全項目 = 全項目.concat(被保険者台帳.getShichosonCode().getColumnValue());
         return 全項目;
     }
 

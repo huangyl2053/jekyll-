@@ -22,21 +22,7 @@ import lombok.Setter;
 @Setter
 public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
 
-    private final RString chuushutsutaishousha;
-    private final RString chuyshutsukukantxt;
-    private final FlexibleDate chuushutsukikankaishibi;
-    private final FlexibleDate chuushutsukikanshuuryoubi;
-    private final RString shikakukubun;
     private final RString shichousonshitei;
-    private final RString saiyuusenjyusho;
-    private final RString keishou;
-    private final RString hitemotsubangouhyouji;
-    private final boolean iskatagaki;
-    private final boolean isshichosonmeisho;
-    private final boolean istodofukenmeisho;
-    private final boolean isgunmeisho;
-    private final Long shutsutuokujyunid;
-    private final RString gyoumucode;
     private final boolean is資格区分_全て;
     private final boolean is年齢到達日;
     private final boolean has市町村指定;
@@ -55,27 +41,16 @@ public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
     private final boolean is抽出対象者1;
     private final boolean isDBA業務コード;
     private final boolean is受給認定申請中を除く;
+    private final List<RString> 資格区分;
+    private final List<RString> 住民種別;
+    private final List<RString> 住民状態;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
 
     /**
      * コンストラクタです。
      *
-     * @param chuushutsutaishousha chuushutsutaishousha
-     * @param chuyshutsukukantxt chuyshutsukukantxt
-     * @param chuushutsukikankaishibi chuushutsukikankaishibi
-     * @param chuushutsukikanshuuryoubi chuushutsukikanshuuryoubi
-     * @param shikakukubun shikakukubun
      * @param shichousonshitei shichousonshitei
-     * @param saiyuusenjyusho saiyuusenjyusho
-     * @param keishou keishou
-     * @param hitemotsubangouhyouji hitemotsubangouhyouji
-     * @param iskatagaki iskatagaki
-     * @param isshichosonmeisho isshichosonmeisho
-     * @param istodofukenmeisho istodofukenmeisho
-     * @param isgunmeisho isgunmeisho
-     * @param shutsutuokujyunid shutsutuokujyunid
-     * @param gyoumucode gyoumucode
      * @param is資格区分_全て is資格区分_全て
      * @param is年齢到達日 is年齢到達日
      * @param has市町村指定 has市町村指定
@@ -94,25 +69,14 @@ public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
      * @param is抽出対象者1 is抽出対象者1
      * @param isDBA業務コード isDBA業務コード
      * @param is受給認定申請中を除く is受給認定申請中を除く
+     * @param 資格区分 資格区分
+     * @param 住民種別 住民種別
+     * @param 住民状態 住民状態
      * @param is第2号開始年月日 is第2号開始年月日
      * @param psmAtesaki 宛先抽出PSM
      */
     protected AtenaSealCreateMybatisParameter(
-            RString chuushutsutaishousha,
-            RString chuyshutsukukantxt,
-            FlexibleDate chuushutsukikankaishibi,
-            FlexibleDate chuushutsukikanshuuryoubi,
-            RString shikakukubun,
             RString shichousonshitei,
-            RString saiyuusenjyusho,
-            RString keishou,
-            RString hitemotsubangouhyouji,
-            boolean iskatagaki,
-            boolean isshichosonmeisho,
-            boolean istodofukenmeisho,
-            boolean isgunmeisho,
-            Long shutsutuokujyunid,
-            RString gyoumucode,
             boolean is資格区分_全て,
             boolean is年齢到達日,
             boolean has市町村指定,
@@ -131,24 +95,13 @@ public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
             boolean is抽出対象者1,
             boolean isDBA業務コード,
             boolean is受給認定申請中を除く,
+            List<RString> 資格区分,
+            List<RString> 住民種別,
+            List<RString> 住民状態,
             RString psmShikibetsuTaisho,
             RString psmAtesaki
     ) {
-        this.chuushutsutaishousha = chuushutsutaishousha;
-        this.chuyshutsukukantxt = chuyshutsukukantxt;
-        this.chuushutsukikankaishibi = chuushutsukikankaishibi;
-        this.chuushutsukikanshuuryoubi = chuushutsukikanshuuryoubi;
-        this.shikakukubun = shikakukubun;
         this.shichousonshitei = shichousonshitei;
-        this.saiyuusenjyusho = saiyuusenjyusho;
-        this.keishou = keishou;
-        this.hitemotsubangouhyouji = hitemotsubangouhyouji;
-        this.iskatagaki = iskatagaki;
-        this.isshichosonmeisho = isshichosonmeisho;
-        this.istodofukenmeisho = istodofukenmeisho;
-        this.isgunmeisho = isgunmeisho;
-        this.shutsutuokujyunid = shutsutuokujyunid;
-        this.gyoumucode = gyoumucode;
         this.is資格区分_全て = is資格区分_全て;
         this.is年齢到達日 = is年齢到達日;
         this.has市町村指定 = has市町村指定;
@@ -167,6 +120,9 @@ public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
         this.is抽出対象者1 = is抽出対象者1;
         this.isDBA業務コード = isDBA業務コード;
         this.is受給認定申請中を除く = is受給認定申請中を除く;
+        this.資格区分 = 資格区分;
+        this.住民種別 = 住民種別;
+        this.住民状態 = 住民状態;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
     }
@@ -174,21 +130,7 @@ public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
     /**
      * パラメータを作成します。
      *
-     * @param chuushutsutaishousha chuushutsutaishousha
-     * @param chuyshutsukukantxt chuyshutsukukantxt
-     * @param chuushutsukikankaishibi chuushutsukikankaishibi
-     * @param chuushutsukikanshuuryoubi chuushutsukikanshuuryoubi
-     * @param shikakukubun shikakukubun
      * @param shichousonshitei shichousonshitei
-     * @param saiyuusenjyusho saiyuusenjyusho
-     * @param keishou keishou
-     * @param hitemotsubangouhyouji hitemotsubangouhyouji
-     * @param iskatagaki iskatagaki
-     * @param isshichosonmeisho isshichosonmeisho
-     * @param istodofukenmeisho istodofukenmeisho
-     * @param isgunmeisho isgunmeisho
-     * @param shutsutuokujyunid shutsutuokujyunid
-     * @param gyoumucode gyoumucode
      * @param is資格区分_全て is資格区分_全て
      * @param is年齢到達日 is年齢到達日
      * @param has市町村指定 has市町村指定
@@ -207,26 +149,15 @@ public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
      * @param is抽出対象者1 is抽出対象者1
      * @param isDBA業務コード isDBA業務コード
      * @param is受給認定申請中を除く is受給認定申請中を除く
+     * @param 資格区分 資格区分
+     * @param 住民種別 住民種別
+     * @param 住民状態 住民状態
      * @param kubun_2 kubun_2
      * @param shubetsu_1 shubetsu_1
      * @return AtenaSealCreateMybatisParameter
      */
     public static AtenaSealCreateMybatisParameter creatParameter(
-            RString chuushutsutaishousha,
-            RString chuyshutsukukantxt,
-            FlexibleDate chuushutsukikankaishibi,
-            FlexibleDate chuushutsukikanshuuryoubi,
-            RString shikakukubun,
             RString shichousonshitei,
-            RString saiyuusenjyusho,
-            RString keishou,
-            RString hitemotsubangouhyouji,
-            boolean iskatagaki,
-            boolean isshichosonmeisho,
-            boolean istodofukenmeisho,
-            boolean isgunmeisho,
-            Long shutsutuokujyunid,
-            RString gyoumucode,
             boolean is資格区分_全て,
             boolean is年齢到達日,
             boolean has市町村指定,
@@ -245,24 +176,13 @@ public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
             boolean is抽出対象者1,
             boolean isDBA業務コード,
             boolean is受給認定申請中を除く,
+            List<RString> 資格区分,
+            List<RString> 住民種別,
+            List<RString> 住民状態,
             RString psmShikibetsuTaisho,
             RString psmAtesaki) {
         return new AtenaSealCreateMybatisParameter(
-                chuushutsutaishousha,
-                chuyshutsukukantxt,
-                chuushutsukikankaishibi,
-                chuushutsukikanshuuryoubi,
-                shikakukubun,
                 shichousonshitei,
-                saiyuusenjyusho,
-                keishou,
-                hitemotsubangouhyouji,
-                iskatagaki,
-                isshichosonmeisho,
-                istodofukenmeisho,
-                isgunmeisho,
-                shutsutuokujyunid,
-                gyoumucode,
                 is資格区分_全て,
                 is年齢到達日,
                 has市町村指定,
@@ -281,6 +201,9 @@ public class AtenaSealCreateMybatisParameter implements IMyBatisParameter {
                 is抽出対象者1,
                 isDBA業務コード,
                 is受給認定申請中を除く,
+                資格区分,
+                住民種別,
+                住民状態,
                 psmShikibetsuTaisho,
                 psmAtesaki);
     }

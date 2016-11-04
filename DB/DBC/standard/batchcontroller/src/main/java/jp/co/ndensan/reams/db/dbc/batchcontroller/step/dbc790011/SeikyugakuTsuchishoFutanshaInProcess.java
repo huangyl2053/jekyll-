@@ -78,16 +78,12 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
     private OutputParameter<FlowEntity> outFlowEntity;
 
     private int renban;
-    private boolean 合計;
-    private boolean 累計;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 請求額通知書一時tableWriter;
 
     @Override
     protected void initialize() {
-        合計 = false;
-        累計 = false;
         renban = parameter.getRenban();
         flowEntity = new FlowEntity();
         outFlowEntity = new OutputParameter<>();
@@ -116,10 +112,10 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
             } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {
-                ヘッダ判断();
+                判断();
                 headCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvHeadEntity.class, data);
             } else if (帳票レコード種別_D1.equals(data.get(INDEX_3))) {
-                明細判断();
+                判断();
                 meisaiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity.class, data);
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
                 gokeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvGokeiEntity.class, data);
@@ -127,14 +123,40 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
                 ruikeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity.class, data);
             } else if (帳票レコード種別_T3.equals(data.get(INDEX_3))) {
                 tesuuyouCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileToreraRecode3Entity.class, data);
-                累計判断();
             }
+        }
+    }
+
+    private void 判断() {
+        boolean 合計 = false;
+        boolean 累計 = false;
+        boolean 手数料合計 = false;
+        if (gokeiCsvEntity != null) {
+            合計 = true;
+        }
+        if (ruikeiCsvEntity != null) {
+            累計 = true;
+        }
+        if (tesuuyouCsvEntity != null) {
+            手数料合計 = true;
+        }
+        if (meisaiCsvEntity != null) {
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 手数料合計);
+            請求額通知書一時tableWriter.insert(suchishoTempentity);
+            meisaiCsvEntity = null;
+            gokeiCsvEntity = null;
+            ruikeiCsvEntity = null;
+            tesuuyouCsvEntity = null;
         }
     }
 
     @Override
     protected void afterExecute() {
-        ヘッダ判断();
+        判断();
         int レコード件数合算 = INDEX_0;
         if (controlCsvEntity != null && controlCsvEntity.getCodeNum() != null) {
             レコード件数合算 = Integer.parseInt(controlCsvEntity.getCodeNum().toString());
@@ -147,65 +169,6 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
         flowEntity.set明細データ登録件数(renban);
 
         outFlowEntity.setValue(flowEntity);
-    }
-
-    private void ヘッダ判断() {
-        if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null && gokeiCsvEntity != null) {
-            合計 = true;
-            累計 = false;
-            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
-            set明細レコード(suchishoTempentity, meisaiCsvEntity);
-            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
-            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
-            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
-            請求額通知書一時tableWriter.insert(suchishoTempentity);
-            headCsvEntity = null;
-            meisaiCsvEntity = null;
-            gokeiCsvEntity = null;
-        } else if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null) {
-            合計 = false;
-            累計 = false;
-            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
-            set明細レコード(suchishoTempentity, meisaiCsvEntity);
-            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
-            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
-            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
-            請求額通知書一時tableWriter.insert(suchishoTempentity);
-            headCsvEntity = null;
-            meisaiCsvEntity = null;
-        }
-    }
-
-    private void 明細判断() {
-        if (meisaiCsvEntity != null) {
-            合計 = false;
-            累計 = false;
-            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
-            set明細レコード(suchishoTempentity, meisaiCsvEntity);
-            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
-            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
-            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
-            請求額通知書一時tableWriter.insert(suchishoTempentity);
-            meisaiCsvEntity = null;
-        }
-    }
-
-    private void 累計判断() {
-        if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null && gokeiCsvEntity != null && ruikeiCsvEntity != null) {
-            合計 = true;
-            累計 = true;
-            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
-            set明細レコード(suchishoTempentity, meisaiCsvEntity);
-            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
-            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
-            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
-            請求額通知書一時tableWriter.insert(suchishoTempentity);
-            headCsvEntity = null;
-            meisaiCsvEntity = null;
-            gokeiCsvEntity = null;
-            ruikeiCsvEntity = null;
-            tesuuyouCsvEntity = null;
-        }
     }
 
     private void set共通レコード(DbWT1511SeikyugakuTsuchishoTempEntity suchishoTempentity, KagoKetteiHokenshaInControlCsvEntity controlCsvEntity,

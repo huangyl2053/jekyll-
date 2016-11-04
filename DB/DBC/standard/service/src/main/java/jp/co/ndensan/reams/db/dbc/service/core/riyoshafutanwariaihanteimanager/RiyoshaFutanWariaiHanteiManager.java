@@ -509,14 +509,20 @@ public class RiyoshaFutanWariaiHanteiManager {
         FlexibleDate 受給開始日 = 生活保護受給者情報.get(0).getJukyuKaishiYMD();
         FlexibleDate 受給廃止日 = 生活保護受給者情報.get(0).getJukyuHaishiYMD();
         for (UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者 : 生活保護受給者情報) {
-            if (生活保護受給者.getJukyuKaishiYMD().isBefore(受給開始日)) {
+            if ((生活保護受給者.getJukyuKaishiYMD() != null && !生活保護受給者.getJukyuKaishiYMD().isEmpty())
+                    && (受給開始日 != null && !受給開始日.isEmpty())
+                    && 生活保護受給者.getJukyuKaishiYMD().isBefore(受給開始日)) {
                 受給開始日 = 生活保護受給者.getJukyuKaishiYMD();
             }
-            if (受給廃止日 != null && !受給廃止日.isEmpty() && 受給廃止日.isBefore(生活保護受給者.getJukyuHaishiYMD())) {
+            if (受給廃止日 != null && !受給廃止日.isEmpty() && 生活保護受給者.getJukyuHaishiYMD() != null
+                    && !生活保護受給者.getJukyuHaishiYMD().isEmpty()
+                    && 受給廃止日.isBefore(生活保護受給者.getJukyuHaishiYMD())) {
                 受給廃止日 = 生活保護受給者.getJukyuHaishiYMD();
             }
         }
-        生活保護該当情報Temp.setJukyuKaishiYMD(new RString(受給開始日.toString()));
+        if (受給開始日 != null && !受給開始日.isEmpty()) {
+            生活保護該当情報Temp.setJukyuKaishiYMD(new RString(受給開始日.toString()));
+        }
         生活保護該当情報Temp.setJukyuHaishiYMD(受給廃止日 == null || 受給廃止日.isEmpty()
                 ? RString.EMPTY : new RString(受給廃止日.toString()));
     }
@@ -651,8 +657,12 @@ public class RiyoshaFutanWariaiHanteiManager {
         List<JukyushaDaicho> result = new ArrayList<>();
         for (JukyushaDaicho jukydai : 受給者台帳) {
             if (!定値_履歴番号.equals(jukydai.get履歴番号())
-                    && (jukydai.get認定有効期間開始年月日().isBefore(判定基準日)
-                    || 判定基準日.isBefore(jukydai.get認定有効期間終了年月日()))
+                    && ((jukydai.get認定有効期間開始年月日() != null && !jukydai.get認定有効期間開始年月日().isEmpty()
+                    && 判定基準日 != null && !判定基準日.isEmpty()
+                    && jukydai.get認定有効期間開始年月日().isBefore(判定基準日))
+                    || (判定基準日 != null && !判定基準日.isEmpty()
+                    && jukydai.get認定有効期間終了年月日() != null && !jukydai.get認定有効期間終了年月日().isEmpty()
+                    && 判定基準日.isBefore(jukydai.get認定有効期間終了年月日())))
                     && jukydai.get要介護認定状態区分コード().value().equals(ZERO_ONE)) {
                 result.add(jukydai);
             }
@@ -665,7 +675,9 @@ public class RiyoshaFutanWariaiHanteiManager {
             FlexibleDate 判定基準日) {
         List<SogoJigyoTaishosha> result = new ArrayList<>();
         for (SogoJigyoTaishosha 総合事業対象者 : 総合事業対象者情報) {
-            if ((総合事業対象者.get適用終了年月日() != null && !総合事業対象者.get適用終了年月日().isEmpty())
+            if (総合事業対象者.get適用開始年月日() != null && !総合事業対象者.get適用開始年月日().isEmpty()
+                    && 総合事業対象者.get適用終了年月日() != null && !総合事業対象者.get適用終了年月日().isEmpty()
+                    && 判定基準日 != null && !判定基準日.isEmpty()
                     && (総合事業対象者.get適用開始年月日().isBefore(判定基準日)
                     && 判定基準日.isBefore(総合事業対象者.get適用終了年月日()))) {
                 result.add(総合事業対象者);
@@ -693,8 +705,12 @@ public class RiyoshaFutanWariaiHanteiManager {
         List<JukyushaDaicho> result = new ArrayList<>();
         for (JukyushaDaicho jukydai : 受給者台帳情報) {
             if (定値_履歴番号.equals(jukydai.get履歴番号())
-                    && (jukydai.get受給申請年月日().isBefore(判定基準日)
-                    || 判定基準日.equals(jukydai.get受給申請年月日()))) {
+                    && ((jukydai.get受給申請年月日() != null && !jukydai.get受給申請年月日().isEmpty()
+                    && 判定基準日 != null && !判定基準日.isEmpty()
+                    && jukydai.get受給申請年月日().isBefore(判定基準日))
+                    || (判定基準日 != null && !判定基準日.isEmpty()
+                    && jukydai.get受給申請年月日() != null && !jukydai.get受給申請年月日().isEmpty()
+                    && 判定基準日.equals(jukydai.get受給申請年月日())))) {
                 result.add(jukydai);
             }
         }

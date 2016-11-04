@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IraishoIkkatsuHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -322,6 +322,16 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkchosairaiRireki() {
+        return this.getNinteiChosa().getNinteiChosaInsatsuChohyoSentaku().getChkchosairaiRireki();
+    }
+
+    @JsonIgnore
+    public void  setChkchosairaiRireki(CheckBoxList ChkchosairaiRireki) {
+        this.getNinteiChosa().getNinteiChosaInsatsuChohyoSentaku().setChkchosairaiRireki(ChkchosairaiRireki);
+    }
+
+    @JsonIgnore
     public ShujiiIkenshoKensakujokenDiv getShujiiIkenshoKensakujoken() {
         return this.getShujiiIkensho().getShujiiIkenshoKensakujoken();
     }
@@ -484,6 +494,16 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     @JsonIgnore
     public void  setChkikenshiiraihakko(CheckBoxList Chkikenshiiraihakko) {
         this.getShujiiIkensho().getShujiiIkenshoInsatsuChohyo().setChkikenshiiraihakko(Chkikenshiiraihakko);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkikenshiiraiRireki() {
+        return this.getShujiiIkensho().getShujiiIkenshoInsatsuChohyo().getChkikenshiiraiRireki();
+    }
+
+    @JsonIgnore
+    public void  setChkikenshiiraiRireki(CheckBoxList ChkikenshiiraiRireki) {
+        this.getShujiiIkensho().getShujiiIkenshoInsatsuChohyo().setChkikenshiiraiRireki(ChkikenshiiraiRireki);
     }
 
     @JsonIgnore

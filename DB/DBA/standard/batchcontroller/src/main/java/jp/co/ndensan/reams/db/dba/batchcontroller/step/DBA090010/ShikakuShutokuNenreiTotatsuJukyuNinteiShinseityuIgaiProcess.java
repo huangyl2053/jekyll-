@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 宛名シール作成、抽出対象者が資格取得者＋年齢到達予定者または抽出対象者に受給認定申請中を除くの場合、データを作成します。
+ * 宛名識別対象一時テーブル4の作成、データを作成します。
  *
  * @reamsid_L DBA-1210-030 zhengsongling
  */
@@ -24,10 +24,13 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess extends
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate.IJukyuNinteiShinseityuIgaiMapper.getList");
-    private static final RString TABLE_宛名識別対象一時テーブル4 = new RString("DbWT2009AtenaShikibetuTaisyou4");
+    private static final RString TABLE_宛名識別対象一時テーブル1 = new RString("DbWT2009AtenaShikibetuTaisyou1");
     private static final RString TABLE_宛名識別対象一時テーブル3 = new RString("DbWT2009AtenaShikibetuTaisyou3");
+    private static final RString TABLE_宛名識別対象一時テーブル4 = new RString("DbWT2009AtenaShikibetuTaisyou4");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル3;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル1;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル4;
 
@@ -40,6 +43,8 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess extends
     protected void createWriter() {
         宛名識別対象一時テーブル3 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル3,
                 DbTAtenaSealCreateTempTableEntity.class);
+        宛名識別対象一時テーブル1 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル1,
+                DbTAtenaSealCreateTempTableEntity.class);
         宛名識別対象一時テーブル4 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル4,
                 DbTAtenaSealCreateTempTableEntity.class);
     }
@@ -48,5 +53,4 @@ public class ShikakuShutokuNenreiTotatsuJukyuNinteiShinseityuIgaiProcess extends
     protected void process(JukyuNinteiShinseityuIgaiEntity entity) {
         宛名識別対象一時テーブル4.insert(new AtenaSealCreateResult().set宛名識別対象一時テーブル4(entity));
     }
-
 }

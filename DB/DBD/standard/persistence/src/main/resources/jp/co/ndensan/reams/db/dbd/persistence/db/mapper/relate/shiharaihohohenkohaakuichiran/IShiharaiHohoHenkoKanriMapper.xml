@@ -71,7 +71,7 @@
         (
         SELECT
         "shunoId",
-        SUM(収入temp."shunyugaku")
+        SUM(収入temp."shunyugaku") AS 収入額
         FROM
         rgca."CaT0701Shunyu" AS 収入temp
         WHERE
@@ -159,10 +159,10 @@
                 AND 支払方法変更."kanriKubun"  = '2'
                 AND 支払方法変更."torokuKubun" = '11'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
-                AND 支払方法変更."shuryoKubun" IS NULL また Empty
-                AND (収納情報."nokigenYMD" + #{支払方法変更_支払方法変更期限}) <![CDATA[>=]]> #{基準日}
-                AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日}
-                AND 収納情報."choteigaku" <![CDATA[>]]> 収入."shunyugaku"
+                AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" ='')
+                AND (収納情報."nokigenYMD" + #{支払方法変更_支払方法変更期限}) <![CDATA[>=]]> #{基準日RDate}
+                AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日RDate}
+                AND 収納情報."choteigaku" <![CDATA[>]]> 収入.収入額
             </if>
             <if test="is1号償還予告登録者の選択_4">
                 AND 支払方法変更."kanriKubun"  = '2'
@@ -194,8 +194,8 @@
                 AND 支払方法変更."torokuKubun" = '12'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."shuryoKubun" IS NULL OR 支払方法変更."shuryoKubun" = '')
-                AND 収納情報."nokigenYMD" + #{支払方法変更_支払方法変更期限} <![CDATA[>=]]> #{基準日}
-                AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日}
+                AND 収納情報."nokigenYMD" + #{支払方法変更_支払方法変更期限} <![CDATA[>=]]> #{基準日RDate}
+                AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日RDate}
                 AND 収納情報."choteigaku" <![CDATA[>=]]> 収入.収入額
             </if>
             <if test="is1号償還決定登録者の選択_4">
@@ -226,15 +226,15 @@
                 AND (支払方法変更差止."kojo_TsuchiHakkoYMD" = '' OR 支払方法変更差止."kojo_TsuchiHakkoYMD" IS NULL)
             </if>
             <if test="is1号償還決定登録者_差止中あり者のみの選択_2">
-                支払方法変更."kanriKubun"  = '2' AND
+                AND 支払方法変更."kanriKubun"  = '2' AND
                 支払方法変更."torokuKubun" = '12' AND
                 支払方法変更."logicalDeletedFlag"  = false AND
                 支払方法変更差止."johoBunruiKubun" = '1' AND
                 支払方法変更差止."logicalDeletedFlag"  =  false AND
                 支払方法変更差止."sashitomeKojoJotaiKubun" = '01' AND
-                支払方法変更差止."sashitomeKojoNo" IS NULL また Empty AND
-                (収納情報."nokigenYMD" + #{支払方法変更_支払一時差止期限}) <![CDATA[>=]]> #{基準日} AND
-                収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日} AND
+                (支払方法変更差止."sashitomeKojoNo" IS NULL OR 支払方法変更差止."sashitomeKojoNo" = '') AND
+                (収納情報."nokigenYMD" + #{支払方法変更_支払一時差止期限}) <![CDATA[>=]]> #{基準日RDate} AND
+                収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日RDate} AND
                 収納情報."choteigaku" <![CDATA[>=]]> 収入.収入額
             </if>
         </if>
@@ -266,8 +266,8 @@
                 AND 支払方法変更差止."logicalDeletedFlag"  =  false
                 AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
                 AND (支払方法変更差止."sashitomeKojoNo" is null or 支払方法変更差止."sashitomeKojoNo" = '')
-                AND (収納情報."nokigenYMD" + #{支払方法変更_支払一時差止期限}) <![CDATA[>=]]>  #{基準日}
-                AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日}
+                AND (収納情報."nokigenYMD" + #{支払方法変更_支払一時差止期限}) <![CDATA[>=]]>  #{基準日RDate}
+                AND 収納情報."nokigenYMD" <![CDATA[<=]]> #{基準日RDate}
                 AND 収納情報."choteigaku" <![CDATA[>=]]> 収入.収入額
             </if>
         </if>

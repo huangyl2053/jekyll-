@@ -45,6 +45,7 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
             + "IHanteiKekkaJohoShuturyokuMapper.getShinsakaiKaisaiKekkaJoho");
     private HanteiKekkaJohoShuturyokuProcessParameter processParameter;
     private RDateTime システム時刻;
+    private Map<Integer, RString> 通知文;
 
     @BatchWriter
     private BatchReportWriter<HanteikekkaKagamiReportSource> batchReportWriter;
@@ -53,6 +54,7 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
     @Override
     protected void initialize() {
         システム時刻 = RDateTime.now();
+        通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号);
     }
 
     @Override
@@ -78,7 +80,6 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
                 KenmeiFuyoKubunType.付与なし,
                 reportSourceWriter));
-        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号);
         hanteikekkaKagamiEntity.setTsuchibun1(通知文.get(INDEX_1));
         hanteikekkaKagamiEntity.setTsuchibun2(通知文.get(INDEX_2));
         HanteikekkaKagamiReport report = new HanteikekkaKagamiReport(hanteikekkaKagamiEntity);

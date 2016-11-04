@@ -6,24 +6,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
-import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
-import static jp.co.ndensan.reams.db.dbz.definition.core.GappeiJohoKubun.合併あり;
-import static jp.co.ndensan.reams.db.dbz.definition.core.GappeiJohoKubun.合併なし;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
@@ -35,15 +26,18 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.db.dbz.service.core.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -448,8 +442,9 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
         if (市町村情報セキュリティ情報 != null && 市町村情報セキュリティ情報.get導入形態コード() != null) {
             if (new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
                     || new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-                    && new RString(合併なし.getCode().toString()).equals(
-                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+ //                    && new RString(合併なし.getCode().toString()).equals(
+                    //                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
+                    ) {
 
                 // 単一で合併無し・・・「所在保険者」「措置元保険者」「旧保険者」「識別コード」の全て非表示。
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(false);
@@ -458,8 +453,9 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(false);
             } else if ((new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
                     || new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value()))
-                    && new RString(合併あり.getCode().toString()).equals(
-                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+ //                    && new RString(合併あり.getCode().toString()).equals(
+                    //                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
+                    ) {
 
                 // 単一で合併有り・・・「旧保険者」は表示、以外は非表示。
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(false);
@@ -467,8 +463,9 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(true);
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(false);
             } else if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-                    && new RString(合併なし.getCode().toString()).equals(
-                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+ //                    && new RString(合併なし.getCode().toString()).equals(
+                    //                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
+                    ) {
 
                 // 広域で合併無し・・・「旧保険者」は非表示、以外は表示。
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(true);
@@ -476,8 +473,9 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(false);
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
             } else if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-                    && new RString(合併あり.getCode().toString()).equals(
-                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+ //                    && new RString(合併あり.getCode().toString()).equals(
+                    //                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
+                    ) {
 
                 // 広域で合併有り・・・「所在保険者」「措置元保険者」「旧保険者」「識別コード」の全て表示。
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(true);
@@ -671,6 +669,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
         this.getDgShikakuShutokuRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
         this.getDgShikakuShutokuRireki().getGridSetting().getColumn(new RString("shosai")).setVisible(false);
         this.getBtnClose().setDisplayNone(false);
+    }
+
+    @Override
+    public void updateGridData(HihokenshaDaicho daicho, FlexibleDate beforeShutokuDate, List<FlexibleDate> shutokuDateListOfDeleted) {
+        // 競合の一旦解消
     }
 
 }

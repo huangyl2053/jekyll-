@@ -4,10 +4,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon.KaigoAtenaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
@@ -22,15 +27,11 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * KaigoShikakuKihon のクラスファイル
@@ -38,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBA-0030-012 liangbc
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -64,10 +64,10 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     private TextBoxDate txtNinteiKaishiYmd;
     @JsonProperty("txtNinteiShuryoYmd")
     private TextBoxDate txtNinteiShuryoYmd;
-    @JsonProperty("btnNinteiRireki")
-    private ButtonDialog btnNinteiRireki;
     @JsonProperty("btnHihoRireki")
     private ButtonDialog btnHihoRireki;
+    @JsonProperty("btnNinteiRireki")
+    private ButtonDialog btnNinteiRireki;
     @JsonProperty("mode")
     private RString mode;
 
@@ -240,24 +240,6 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     /*
-     * getbtnNinteiRireki
-     * @return btnNinteiRireki
-     */
-    @JsonProperty("btnNinteiRireki")
-    public ButtonDialog getBtnNinteiRireki() {
-        return btnNinteiRireki;
-    }
-
-    /*
-     * setbtnNinteiRireki
-     * @param btnNinteiRireki btnNinteiRireki
-     */
-    @JsonProperty("btnNinteiRireki")
-    public void setBtnNinteiRireki(ButtonDialog btnNinteiRireki) {
-        this.btnNinteiRireki = btnNinteiRireki;
-    }
-
-    /*
      * getbtnHihoRireki
      * @return btnHihoRireki
      */
@@ -273,6 +255,24 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @JsonProperty("btnHihoRireki")
     public void setBtnHihoRireki(ButtonDialog btnHihoRireki) {
         this.btnHihoRireki = btnHihoRireki;
+    }
+
+    /*
+     * getbtnNinteiRireki
+     * @return btnNinteiRireki
+     */
+    @JsonProperty("btnNinteiRireki")
+    public ButtonDialog getBtnNinteiRireki() {
+        return btnNinteiRireki;
+    }
+
+    /*
+     * setbtnNinteiRireki
+     * @param btnNinteiRireki btnNinteiRireki
+     */
+    @JsonProperty("btnNinteiRireki")
+    public void setBtnNinteiRireki(ButtonDialog btnNinteiRireki) {
+        this.btnNinteiRireki = btnNinteiRireki;
     }
 
     /*
@@ -314,7 +314,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             NinteiRirekiButtonWo[] enumArray = NinteiRirekiButtonWo.values();
 
             for (NinteiRirekiButtonWo enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -329,11 +329,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public NinteiRirekiButtonWo getMode_NinteiRirekiButtonWo() {
-        return (NinteiRirekiButtonWo) _CommonChildDivModeUtil.getMode(this.modes, NinteiRirekiButtonWo.class);
+        return (NinteiRirekiButtonWo) _CommonChildDivModeUtil.getMode( this.modes, NinteiRirekiButtonWo.class );
     }
 
-    public void setMode_NinteiRirekiButtonWo(NinteiRirekiButtonWo value) {
-        _CommonChildDivModeUtil.setMode(this.modes, NinteiRirekiButtonWo.class, value);
+    public void setMode_NinteiRirekiButtonWo( NinteiRirekiButtonWo value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, NinteiRirekiButtonWo.class , value );
     }
 
     public static enum HihoRirekiButtonWo implements ICommonChildDivMode {
@@ -351,7 +351,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             HihoRirekiButtonWo[] enumArray = HihoRirekiButtonWo.values();
 
             for (HihoRirekiButtonWo enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -366,11 +366,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public HihoRirekiButtonWo getMode_HihoRirekiButtonWo() {
-        return (HihoRirekiButtonWo) _CommonChildDivModeUtil.getMode(this.modes, HihoRirekiButtonWo.class);
+        return (HihoRirekiButtonWo) _CommonChildDivModeUtil.getMode( this.modes, HihoRirekiButtonWo.class );
     }
 
-    public void setMode_HihoRirekiButtonWo(HihoRirekiButtonWo value) {
-        _CommonChildDivModeUtil.setMode(this.modes, HihoRirekiButtonWo.class, value);
+    public void setMode_HihoRirekiButtonWo( HihoRirekiButtonWo value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, HihoRirekiButtonWo.class , value );
     }
 
     // </editor-fold>

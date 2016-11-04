@@ -684,10 +684,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
             source.listLower1_8 = 支払方法変更リストEntity_下.get資格区分().get名称();
         }
         if (住特フラグ_1.equals(支払方法変更リストEntity_下.get住特フラグ())) {
-            source.listUpper1_9 = ホシ;
+            source.listLower1_9 = ホシ;
         }
         if (支払方法変更リストEntity_下.is生保()) {
-            source.listUpper1_10 = ホシ;
+            source.listLower1_10 = ホシ;
         }
         return source;
     }

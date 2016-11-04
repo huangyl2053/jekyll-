@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufujuryoininkeiyakutor
 /**
  * 介護保険受領委任契約承認（不承認）確認書のMapperクラスです。
  *
- * @reamsid_L DBC-2130-020 cuilin
+ * @reamsid_L DBC-2130-050 cuilin
  */
 public interface IKaigoKyufuJuryoininKeiyakuTorokuMapper {
 

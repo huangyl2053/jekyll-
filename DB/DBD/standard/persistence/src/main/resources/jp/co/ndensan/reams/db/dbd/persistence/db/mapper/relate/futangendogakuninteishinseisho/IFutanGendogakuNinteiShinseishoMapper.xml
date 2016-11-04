@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBA-0540-690 dongyabin-->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogakuninteishinseisho.IFutanGendogakuNinteiShinseishoMapper">
+    <select id="get施設入退所"
+                resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseishoEntity"
+                parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseishoParamter"
+            resultOrdered="true">
+        SELECT
+          DbT1004."nyushoShisetsuShurui" AS 入所施設種類
+          , DbT1004."nyushoShisetsuCode" AS 入所施設コード
+          , DbT1004."nyushoYMD" AS 入所年月日
+          , DbT1004."taishoYMD" AS 退所年月日 
+        FROM
+          rgdb."DbT1004ShisetsuNyutaisho" AS DbT1004 
+        WHERE
+          DbT1004."shikibetsuCode" = #{識別コード} 
+          AND DbT1004."daichoShubetsu" = #{被保険者} 
+          AND DbT1004."taishoYMD" IS NULL 
+          AND DbT1004."nyushoYMD" = ( 
+            SELECT
+              MAX(T1."nyushoYMD") AS 入所年月日1 
+            FROM
+              rgdb."DbT1004ShisetsuNyutaisho" AS T1 
+            WHERE
+              T1."shikibetsuCode" = #{識別コード}
+            AND T1."daichoShubetsu" = #{被保険者}
+          ) 
+    </select>
+    
+    <select id="get介護事業者"
+                resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseishoEntity"
+                parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseishoParamter"
+            resultOrdered="true">
+        SELECT
+          DbT7060."yubinNo" AS 事業者郵便番号
+          , DbT7060."jigyoshaAddress" AS 事業者住所
+          , DbT7060."telNo" AS 事業者電話番号
+          , DbT7060."jigyoshaName" AS 事業者名称 
+        FROM
+          rgdb."DbT7060KaigoJigyosha" AS DbT7060 
+        WHERE
+          DbT7060."jigyoshaNo" = #{入所施設コード} 
+          AND DbT7060."yukoKaishiYMD" = ( 
+            SELECT
+              MAX("yukoKaishiYMD") AS 有効開始年月日 
+            FROM
+              rgdb."DbT7060KaigoJigyosha" 
+            WHERE
+              "jigyoshaNo" = #{入所施設コード} 
+          ) 
+    </select>
+    
+    <select id="get介護除外住所地特例対象施設"
+                resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseishoEntity"
+                parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseishoParamter"
+            resultOrdered="true">
+        SELECT
+          DbT1005."yubinNo" AS 事業者郵便番号
+          , DbT1005."jigyoshaJusho" AS 事業者住所
+          , DbT1005."telNo" AS 事業者電話番号
+          , DbT1005."jigyoshaMeisho" AS 事業者名称 
+        FROM
+          rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
+        WHERE 
+          DbT1005."jigyoshaShubetsu" = #{入所施設コード} 
+          AND DbT1005."jigyoshaNo" = #{住所地特例対象施設}
+          AND DbT1005."yukoKaishiYMD" = (
+           SELECT 
+             MAX("yukoKaishiYMD") AS 有効開始年月日
+           FROM 
+             rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+           WHERE 
+             "jigyoshaShubetsu" = #{入所施設コード} 
+             AND "jigyoshaNo" = #{住所地特例対象施設}
+             )
+      
+  
+
+    </select>
+    
+    
+</mapper>

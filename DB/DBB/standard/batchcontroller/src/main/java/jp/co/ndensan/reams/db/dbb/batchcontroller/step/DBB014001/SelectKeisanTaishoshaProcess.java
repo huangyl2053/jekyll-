@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -131,7 +130,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
             return 賦課年度開始日;
         }
         FlexibleDate temp = entity.get資格().getIchigoShikakuShutokuYMD();
-        if (!賦課年度開始日.isBefore(temp)) {
+        if (!賦課年度開始日.isBeforeOrEquals(temp)) {
             return 賦課年度開始日;
         } else {
             return temp;
@@ -142,7 +141,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
         DbT2010FukaErrorListEntity item = new DbT2010FukaErrorListEntity();
         item.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
         item.setInternalReportId(ReportIdDBB.DBB200006.getReportId().getColumnValue());
-        item.setInternalReportCreationDateTime(RDateTime.MAX);
+        item.setInternalReportCreationDateTime(parameter.getバッチ起動日時());
         item.setFukaNendo(parameter.get賦課年度());
         item.setTsuchishoNo(entity.get賦課().getTsuchishoNo());
         item.setBatchId(BATCH_ID);

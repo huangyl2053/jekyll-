@@ -183,4 +183,9 @@ public class RofukuNenkinDialogButtonDiv extends Panel implements IRofukuNenkinD
         RoreiFukushiNenkinJukyushaManager manager = RoreiFukushiNenkinJukyushaManager.createInstance();
         return manager.save老齢福祉年金受給者All(roreiFukushiNenkinJukyusha);
     }
+    
+    @Override
+    public Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> get老福年金() {
+    	return DataPassingConverter.deserialize(this.getSaveData(), Models.class);
+    }
 }

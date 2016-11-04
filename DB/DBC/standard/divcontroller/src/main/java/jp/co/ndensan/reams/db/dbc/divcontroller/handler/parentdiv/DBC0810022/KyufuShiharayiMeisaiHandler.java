@@ -136,7 +136,7 @@ public class KyufuShiharayiMeisaiHandler {
             div.getPanelTwo().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().get所定疾患施設療養設定区分())
-                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
+                && (サービス年月 != null && !サービス年月.isEmpty()) && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(true);
             div.getPanelTwo().getBtnKinkyushisetuRyoyouhi().setVisible(false);

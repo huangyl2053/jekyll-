@@ -1,6 +1,6 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBC {
 
@@ -24,6 +24,10 @@ module DBC {
                 return "onMulti_dgKyufuJissekiMeisaiList";
             }
 
+            public static onChange_rdbMisaiGkeiKbun(): string {
+                return "onChange_rdbMisaiGkeiKbun";
+            }
+
             public static onOkClose_btnJgyosha(): string {
                 return "onOkClose_btnJgyosha";
             }
@@ -38,6 +42,18 @@ module DBC {
 
             public static onBeforeOpenDialog_btnServiceSyurui(): string {
                 return "onBeforeOpenDialog_btnServiceSyurui";
+            }
+
+            public static onChange_rdbRoreiFukushiNenkin(): string {
+                return "onChange_rdbRoreiFukushiNenkin";
+            }
+
+            public static onChange_rdbRiyoshafutanDai2dankai(): string {
+                return "onChange_rdbRiyoshafutanDai2dankai";
+            }
+
+            public static onChange_rdbGekihenkanwaKubun(): string {
+                return "onChange_rdbGekihenkanwaKubun";
             }
 
             public static onClick_btnTorikeshi(): string {
@@ -121,10 +137,6 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtRiyoshafutanGokei"));
             }
 
-            public GokeiPanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("GokeiPanel"));
-            }
-
             public txtSanteiKijunGaku(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtSanteiKijunGaku"));
             }
@@ -137,8 +149,8 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtKogakuShikyuGaku"));
             }
 
-            public txtSetaiSyuyakuBango(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtSetaiSyuyakuBango"));
+            public txtSetaiSyuyakuBango(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtSetaiSyuyakuBango"));
             }
 
             public rdbKogakuJidoSyokanTaisyo(): UZA.RadioButton {
@@ -147,10 +159,6 @@ module DBC {
 
             public lin1(): UZA.HorizontalLine {
                 return new UZA.HorizontalLine(this.convFiledName("lin1"));
-            }
-
-            public KogakuKyufuKonkyoPanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("KogakuKyufuKonkyoPanel"));
             }
 
             public rdbTsukiOkure(): UZA.RadioButton {

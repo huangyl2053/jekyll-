@@ -31,8 +31,8 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -50,7 +50,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBA-0570-020 xuyannan
  */
-public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotatsushaJouhouEntity> {
+public class NenreiTotatsuTorokushaProcess extends BatchKeyBreakBase<NenreiTotatsushaJouhouEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutorokusha."
@@ -81,11 +81,6 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         nenreiTotatsushaJouhoulist = new ArrayList<>();
         business = new NenreiTotatsuTorokushaBusiness();
         出力順Entity = get出力順項目();
-        if (出力順Entity.getPageBreakKeys() != null) {
-            page_break_keys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
-        } else {
-            page_break_keys = new ArrayList<>();
-        }
     }
 
     @Override
@@ -124,9 +119,15 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200008.getReportId().value())
-                .addBreak(new BreakerCatalog<NenreitotatsuKakuninListReportSource>().simplePageBreaker(page_break_keys)).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        page_break_keys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
+        if (page_break_keys != null && !page_break_keys.isEmpty()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200008.getReportId().value())
+                    .addBreak(new BreakerCatalog<NenreitotatsuKakuninListReportSource>().simplePageBreaker(page_break_keys)).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200008.getReportId().value()).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        }
         tableWriter = new BatchPermanentTableWriter<>(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -137,7 +138,11 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     }
 
     @Override
-    protected void process(NenreiTotatsushaJouhouEntity entity) {
+    protected void keyBreakProcess(NenreiTotatsushaJouhouEntity entity) {
+    }
+
+    @Override
+    protected void usualProcess(NenreiTotatsushaJouhouEntity entity) {
         getPSM宛名情報(entity);
         nenreiTotatsushaJouhoulist.add(business.setCodeToName(entity));
     }

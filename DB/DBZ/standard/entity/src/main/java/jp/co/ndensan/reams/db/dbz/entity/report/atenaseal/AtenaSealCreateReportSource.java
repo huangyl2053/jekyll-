@@ -775,7 +775,29 @@ public class AtenaSealCreateReportSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
     @ReportPerson(id = "X")
-    public ShikibetsuCode 識別コード;
+    public ShikibetsuCode 識別コード1;
+    @ReportPerson(id = "X1")
+    public ShikibetsuCode 識別コード2;
+    @ReportPerson(id = "X2")
+    public ShikibetsuCode 識別コード3;
+    @ReportPerson(id = "X3")
+    public ShikibetsuCode 識別コード4;
+    @ReportPerson(id = "X4")
+    public ShikibetsuCode 識別コード5;
+    @ReportPerson(id = "X5")
+    public ShikibetsuCode 識別コード6;
+    @ReportPerson(id = "X6")
+    public ShikibetsuCode 識別コード7;
+    @ReportPerson(id = "X7")
+    public ShikibetsuCode 識別コード8;
+    @ReportPerson(id = "X8")
+    public ShikibetsuCode 識別コード9;
+    @ReportPerson(id = "X9")
+    public ShikibetsuCode 識別コード10;
+    @ReportPerson(id = "X10")
+    public ShikibetsuCode 識別コード11;
+    @ReportPerson(id = "X11")
+    public ShikibetsuCode 識別コード12;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation 拡張情報;
 }

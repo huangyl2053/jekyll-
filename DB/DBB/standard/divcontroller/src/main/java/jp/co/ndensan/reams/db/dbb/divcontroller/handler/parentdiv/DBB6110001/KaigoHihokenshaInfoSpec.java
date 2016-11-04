@@ -88,6 +88,19 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
          * @param div KaigoHihokenshaInfoDiv
          */
         public static boolean is開始日と終了日の前後順(KaigoHihokenshaInfoPanelDiv div) {
+            if (div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue() == null) {
+                return true;
+            }
+            return div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue().isBeforeOrEquals(
+                    div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue());
+        }
+
+        /**
+         * 同一日における複数連帯納付義務者登録です。
+         *
+         * @param div KaigoHihokenshaInfoDiv
+         */
+        public static boolean is同一日における複数連帯納付義務者登録(KaigoHihokenshaInfoPanelDiv div) {
             return div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue().isBeforeOrEquals(
                     div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue());
         }

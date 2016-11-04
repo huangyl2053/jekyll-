@@ -66,6 +66,7 @@ class TennyuTenshutsuMiTorokuIchiranhyoBodyEditor implements ITennyuTenshutsuMiT
         source.listLower_2 = RString.isNullOrEmpty(氏名) ? RString.EMPTY : maxLength13(氏名);
         source.listLower_3 = item.get登録届出日();
         source.listLower_4 = item.get消除届出日();
+        source.listLower_7 = item.get全国住所コード();
         return source;
     }
 

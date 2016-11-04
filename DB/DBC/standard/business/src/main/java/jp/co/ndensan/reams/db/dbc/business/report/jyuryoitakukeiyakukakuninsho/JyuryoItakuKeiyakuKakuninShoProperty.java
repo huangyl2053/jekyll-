@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 帳票設計_DBCMN31003_介護保険受領委任契約承認（不承認）確認書（利用者向け）Property
  *
- * @reamsid_L DBC-2130-020 liuxiaoyu
+ * @reamsid_L DBC-2130-070 liuxiaoyu
  */
 public class JyuryoItakuKeiyakuKakuninShoProperty
         extends ReportPropertyBase<JyuryoItakuKeiyakuKakuninShoSource> {

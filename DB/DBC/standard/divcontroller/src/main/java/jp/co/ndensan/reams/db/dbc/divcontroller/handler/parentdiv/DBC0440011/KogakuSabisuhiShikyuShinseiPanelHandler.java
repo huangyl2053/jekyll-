@@ -42,11 +42,13 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -66,16 +68,22 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final RString 定値_レコード種別コード = new RString("01");
     private static final RString 定値_通し番号 = new RString("01");
     private static final RString THREE = new RString("3");
+    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString アンダーライン = new RString("_");
+    private static final RYearMonth 定値所得年度1 = new RYearMonth("200606");
+    private static final RYearMonth 定値所得年度2 = new RYearMonth("201607");
     private static final Decimal NUMBER_0 = new Decimal(0);
     private static final NyuryokuShikibetsuNo 定値_識別番号 = new NyuryokuShikibetsuNo("3411");
     private static final KokanShikibetsuNo 定値_交換情報識別番号 = new KokanShikibetsuNo("1131");
     private static final int NUM_0 = 0;
+    private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_5 = 5;
+    private static final int NUM_6 = 6;
+    private static final int NUM_7 = 7;
 
     /**
      * 初期化
@@ -126,6 +134,41 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     public void initialize高額介護サービス給付対象明細(RString メニューID, RString 画面モード,
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, int 履歴番号) {
         div.getCcdKogakuKyufuTaishoList().initialize(メニューID, 画面モード, 被保険者番号, サービス提供年月, 履歴番号);
+    }
+
+    /**
+     * 世帯所得一覧初期化です。
+     *
+     * @param 識別コード ShikibetsuCode
+     */
+    public void initialize世帯所得一覧(ShikibetsuCode 識別コード) {
+        RDate date = div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get提供年月();
+        FlexibleDate 世帯基準年月日 = FlexibleDate.EMPTY;
+        FlexibleYear 所得年度 = FlexibleYear.EMPTY;
+        if (date != null) {
+            世帯基準年月日 = new FlexibleDate(date.getYear().toDateString().concat(定値_通し番号));
+            所得年度 = get所得年度(date);
+        }
+        div.getShinseiTorokuPanel().getCcdSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, null);
+    }
+
+    private FlexibleYear get所得年度(RDate date) {
+        FlexibleYear 所得年度 = new FlexibleYear(date.getYear().toDateString());
+        if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度1)) {
+            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_5) {
+                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
+            }
+        } else if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度2)
+                && 定値所得年度1.isBefore(date.getYearMonth())) {
+            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_6) {
+                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
+            }
+        } else if (定値所得年度2.isBefore(date.getYearMonth())) {
+            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_7) {
+                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
+            }
+        }
+        return 所得年度;
     }
 
     /**
@@ -314,9 +357,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     RStringBuilder builder = new RStringBuilder();
-                    builder.append(row.getData12().getValue());
+                    builder.append(row.getData12());
                     builder.append(アンダーライン);
-                    builder.append(row.getData13().getValue());
+                    builder.append(row.getData13());
                     builder.append(アンダーライン);
                     builder.append(row.getData1());
                     builder.append(アンダーライン);
@@ -331,9 +374,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     RStringBuilder builder = new RStringBuilder();
-                    builder.append(row.getData12().getValue());
+                    builder.append(row.getData12());
                     builder.append(アンダーライン);
-                    builder.append(row.getData13().getValue());
+                    builder.append(row.getData13());
                     builder.append(アンダーライン);
                     builder.append(row.getData14().getValue().intValue());
                     KogakuKyufuTaishoshaGokei 給付対象者合計entity
@@ -418,9 +461,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     RStringBuilder builder = new RStringBuilder();
-                    builder.append(row.getData12().getValue());
+                    builder.append(row.getData12());
                     builder.append(アンダーライン);
-                    builder.append(row.getData13().getValue());
+                    builder.append(row.getData13());
                     builder.append(アンダーライン);
                     builder.append(row.getData1());
                     builder.append(アンダーライン);
@@ -435,9 +478,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     RStringBuilder builder = new RStringBuilder();
-                    builder.append(row.getData12().getValue());
+                    builder.append(row.getData12());
                     builder.append(アンダーライン);
-                    builder.append(row.getData13().getValue());
+                    builder.append(row.getData13());
                     builder.append(アンダーライン);
                     builder.append(row.getData14().getValue().intValue());
                     JigyoKogakuKyufuTaishoshaGokei 給付対象者合計entity
@@ -505,7 +548,13 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().set利用者負担額合計(row.getData5().getValue()).build();
         entity = entity.createBuilderForEdit().set算定基準額(row.getData6().getValue()).build();
         entity = entity.createBuilderForEdit().set支払済金額合計(row.getData7().getValue()).build();
-        entity = entity.createBuilderForEdit().set高額支給額(row.getData8().getValue()).build();
+        entity = entity.createBuilderForEdit().set高額支給額(row.getData8().getValue()).
+                set世帯集約番号(row.getData15()).build();
+        if (ZERO.equals(row.getData16())) {
+            entity = entity.createBuilderForEdit().set自動償還対象フラグ(true).build();
+        } else {
+            entity = entity.createBuilderForEdit().set自動償還対象フラグ(false).build();
+        }
         if (削除.equals(row.getData0())) {
             entity = entity.deleted();
         } else if (追加.equals(row.getData0())) {
@@ -522,7 +571,13 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().set利用者負担額合計(row.getData5().getValue()).build();
         entity = entity.createBuilderForEdit().set算定基準額(row.getData6().getValue()).build();
         entity = entity.createBuilderForEdit().set支払済金額合計(row.getData7().getValue()).build();
-        entity = entity.createBuilderForEdit().set事業高額支給額(row.getData8().getValue()).build();
+        entity = entity.createBuilderForEdit().set事業高額支給額(row.getData8().getValue()).
+                set世帯集約番号(row.getData15()).build();
+        if (ZERO.equals(row.getData16())) {
+            entity = entity.createBuilderForEdit().set自動償還対象フラグ(true).build();
+        } else {
+            entity = entity.createBuilderForEdit().set自動償還対象フラグ(false).build();
+        }
         if (削除.equals(row.getData0())) {
             entity = entity.deleted();
         } else if (追加.equals(row.getData0())) {
