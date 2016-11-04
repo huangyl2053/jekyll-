@@ -1513,6 +1513,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getBtnModifyDetail().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
                 getBtnClear().setDisabled(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getBtnShohinmei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsakekka().setVisible(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtUkechikebi().clearValue();
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD().clearValue();
