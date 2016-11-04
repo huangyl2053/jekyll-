@@ -7,14 +7,13 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE230003;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouHeadItem;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.ShujiiIkenshoSakuseiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoSakuseiRelateEntity;
-import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.syujiyikensho.IkenshoSakuseiIraiHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -37,8 +36,9 @@ public class ShujiiIkenshoSakuseiProcess extends BatchKeyBreakBase<ShujiiIkensho
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoSakuseiMapper."
             + "get主治医意見書作成依頼発行一覧表");
     private static final RString 帳票ID = ReportIdDBE.DBE230003.getReportId().value();
-    private List<SyujiyikenshosakuseyiraihakouBodyItem> bodyItemList;
     private ShujiiIkenshoSakuseiProcessParamter processParamter;
+    private ShujiiIkenshoSakuseiBusiness business;
+    private int count;
     private static final List<RString> PAGE_BREAK_KEYS = new ArrayList<>();
 
     static {
@@ -52,7 +52,8 @@ public class ShujiiIkenshoSakuseiProcess extends BatchKeyBreakBase<ShujiiIkensho
 
     @Override
     protected void initialize() {
-        bodyItemList = new ArrayList<>();
+        business = new ShujiiIkenshoSakuseiBusiness();
+        count = 1;
     }
 
     @Override
@@ -70,9 +71,10 @@ public class ShujiiIkenshoSakuseiProcess extends BatchKeyBreakBase<ShujiiIkensho
     @Override
     protected void keyBreakProcess(ShujiiIkenshoSakuseiRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
-            SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(setHeaderItem(), bodyItemList);
+            count = 1;
+            SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.
+                    createFrom(business.setHeaderItem(processParamter), business.setBodyItem(current), count++);
             report.writeBy(reportSourceWriter);
-            bodyItemList = new ArrayList<>();
         }
     }
 
@@ -84,36 +86,12 @@ public class ShujiiIkenshoSakuseiProcess extends BatchKeyBreakBase<ShujiiIkensho
 
     @Override
     protected void usualProcess(ShujiiIkenshoSakuseiRelateEntity entity) {
-        bodyItemList.add(setBodyItem(entity));
+        SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.
+                createFrom(business.setHeaderItem(processParamter), business.setBodyItem(entity), count++);
+        report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
-        if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(setHeaderItem(), bodyItemList);
-            report.writeBy(reportSourceWriter);
-        }
-    }
-
-    private SyujiyikenshosakuseyiraihakouHeadItem setHeaderItem() {
-        return new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
-                processParamter.getIraiToYMD(),
-                processParamter.getShujiiIkenshoSakuseiIraisho());
-    }
-
-    private SyujiyikenshosakuseyiraihakouBodyItem setBodyItem(ShujiiIkenshoSakuseiRelateEntity entity) {
-        return new SyujiyikenshosakuseyiraihakouBodyItem(entity.get被保険者番号(),
-                entity.get被保険者氏名(),
-                entity.get依頼日(),
-                entity.get医療機関名称(),
-                entity.get代表者名(),
-                entity.get連絡先(),
-                entity.get主治医名(),
-                RString.EMPTY,
-                RString.EMPTY,
-                entity.get依頼書作成日(),
-                entity.get依頼書提出期限(),
-                entity.get市町村コード(),
-                entity.get市町村名称());
     }
 }

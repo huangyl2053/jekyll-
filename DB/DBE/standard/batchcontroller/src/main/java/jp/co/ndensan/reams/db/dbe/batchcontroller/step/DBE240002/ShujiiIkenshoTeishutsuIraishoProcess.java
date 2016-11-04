@@ -5,11 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
@@ -46,7 +43,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
     private static final ReportId 帳票ID = ReportIdDBE.DBE236001.getReportId();
-    private List<ShujiiIkenshoTeishutsuIraishoItem> itemList;
     private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
 
     @BatchWriter
@@ -55,7 +51,6 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
 
     @Override
     protected void initialize() {
-        itemList = new ArrayList<>();
     }
 
     @Override
@@ -78,15 +73,13 @@ public class ShujiiIkenshoTeishutsuIraishoProcess extends BatchProcessBase<Shuji
                 reportSourceWriter);
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
         RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, 帳票ID, FlexibleDate.getNowDate());
-        itemList.add(new IraishoIkkatsuHakkoBusiness(entity, processParamter).setDBE236001Item(ninshoshaSource, 文書番号, 通知文Map));
+        ShujiiIkenshoTeishutsuIraishoReport report = ShujiiIkenshoTeishutsuIraishoReport.createFrom(
+                new IraishoIkkatsuHakkoBusiness(entity, processParamter).setDBE236001Item(ninshoshaSource, 文書番号, 通知文Map));
+        report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
-        if (!itemList.isEmpty()) {
-            ShujiiIkenshoTeishutsuIraishoReport report = ShujiiIkenshoTeishutsuIraishoReport.createFrom(itemList);
-            report.writeBy(reportSourceWriter);
-        }
         バッチ出力条件リストの出力();
     }
 
