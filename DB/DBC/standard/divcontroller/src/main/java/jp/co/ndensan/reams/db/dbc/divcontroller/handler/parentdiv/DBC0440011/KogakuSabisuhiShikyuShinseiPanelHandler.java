@@ -66,6 +66,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final RString 定値_レコード種別コード = new RString("01");
     private static final RString 定値_通し番号 = new RString("01");
     private static final RString THREE = new RString("3");
+    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString アンダーライン = new RString("_");
@@ -314,9 +315,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     RStringBuilder builder = new RStringBuilder();
-                    builder.append(row.getData12().getValue());
+                    builder.append(row.getData12());
                     builder.append(アンダーライン);
-                    builder.append(row.getData13().getValue());
+                    builder.append(row.getData13());
                     builder.append(アンダーライン);
                     builder.append(row.getData1());
                     builder.append(アンダーライン);
@@ -331,9 +332,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     RStringBuilder builder = new RStringBuilder();
-                    builder.append(row.getData12().getValue());
+                    builder.append(row.getData12());
                     builder.append(アンダーライン);
-                    builder.append(row.getData13().getValue());
+                    builder.append(row.getData13());
                     builder.append(アンダーライン);
                     builder.append(row.getData14().getValue().intValue());
                     KogakuKyufuTaishoshaGokei 給付対象者合計entity
@@ -418,9 +419,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     RStringBuilder builder = new RStringBuilder();
-                    builder.append(row.getData12().getValue());
+                    builder.append(row.getData12());
                     builder.append(アンダーライン);
-                    builder.append(row.getData13().getValue());
+                    builder.append(row.getData13());
                     builder.append(アンダーライン);
                     builder.append(row.getData1());
                     builder.append(アンダーライン);
@@ -435,9 +436,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     KougakuSabisuhiShikyuuShinnseiTourokuResult result
                             = new KougakuSabisuhiShikyuuShinnseiTourokuResult();
                     RStringBuilder builder = new RStringBuilder();
-                    builder.append(row.getData12().getValue());
+                    builder.append(row.getData12());
                     builder.append(アンダーライン);
-                    builder.append(row.getData13().getValue());
+                    builder.append(row.getData13());
                     builder.append(アンダーライン);
                     builder.append(row.getData14().getValue().intValue());
                     JigyoKogakuKyufuTaishoshaGokei 給付対象者合計entity
@@ -505,7 +506,13 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().set利用者負担額合計(row.getData5().getValue()).build();
         entity = entity.createBuilderForEdit().set算定基準額(row.getData6().getValue()).build();
         entity = entity.createBuilderForEdit().set支払済金額合計(row.getData7().getValue()).build();
-        entity = entity.createBuilderForEdit().set高額支給額(row.getData8().getValue()).build();
+        entity = entity.createBuilderForEdit().set高額支給額(row.getData8().getValue()).
+                set世帯集約番号(row.getData15()).build();
+        if (ZERO.equals(row.getData16())) {
+            entity = entity.createBuilderForEdit().set自動償還対象フラグ(true).build();
+        } else {
+            entity = entity.createBuilderForEdit().set自動償還対象フラグ(false).build();
+        }
         if (削除.equals(row.getData0())) {
             entity = entity.deleted();
         } else if (追加.equals(row.getData0())) {
@@ -522,7 +529,13 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().set利用者負担額合計(row.getData5().getValue()).build();
         entity = entity.createBuilderForEdit().set算定基準額(row.getData6().getValue()).build();
         entity = entity.createBuilderForEdit().set支払済金額合計(row.getData7().getValue()).build();
-        entity = entity.createBuilderForEdit().set事業高額支給額(row.getData8().getValue()).build();
+        entity = entity.createBuilderForEdit().set事業高額支給額(row.getData8().getValue()).
+                set世帯集約番号(row.getData15()).build();
+        if (ZERO.equals(row.getData16())) {
+            entity = entity.createBuilderForEdit().set自動償還対象フラグ(true).build();
+        } else {
+            entity = entity.createBuilderForEdit().set自動償還対象フラグ(false).build();
+        }
         if (削除.equals(row.getData0())) {
             entity = entity.deleted();
         } else if (追加.equals(row.getData0())) {

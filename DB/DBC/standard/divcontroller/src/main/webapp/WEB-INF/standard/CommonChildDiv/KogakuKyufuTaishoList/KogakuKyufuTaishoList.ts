@@ -22,16 +22,12 @@ module DBC
             
             public priorities(): Array {
                 return [
-                    "DisplayMode",
-                    "MeisaiGokeiKubunMode"
+                    "DisplayMode"
                 ];
             }
 
             public DisplayMode() {
                 return new Modes.DisplayMode(this.controls);
-            }
-            public MeisaiGokeiKubunMode() {
-                return new Modes.MeisaiGokeiKubunMode(this.controls);
             }
         }
 
@@ -116,25 +112,6 @@ module DBC
                     this.controls.dgTaishoshaIchiran().gridSetting = gridSetting;
                     this.controls.dgTaishoshaIchiran()._control.afterPropertiesSet();
                 }
-            }
-            
-            export class MeisaiGokeiKubunMode {
-                private controls: Controls;
-
-                constructor(controls: Controls) {
-                    this.controls = controls;
-                }
-
-                public Meisai(): void {
-                    this.controls.GokeiPanel().displayNone = true;
-                    this.controls.KogakuKyufuKonkyoPanel().displayNone = false;
-                }
-                
-                public Gokei(): void {
-                    this.controls.GokeiPanel().displayNone = false;
-                    this.controls.KogakuKyufuKonkyoPanel().displayNone = true;
-                }
-                
             }
         }
     }
