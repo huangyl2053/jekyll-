@@ -403,12 +403,12 @@ var DBC;
                 return new UZA.Panel(this.convFiledName("KyufuSeigenPanel"));
             };
 
-            Controls.prototype.btnKyufuSeigenRireki = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnKyufuSeigenRireki"));
-            };
-
             Controls.prototype.radKohiFutanJogenGengakuAriFlag = function () {
                 return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
+            };
+
+            Controls.prototype.btnKyufuSeigenRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnKyufuSeigenRireki"));
             };
 
             Controls.prototype.txtShokanbaraikaYMD = function () {
