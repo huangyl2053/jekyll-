@@ -497,7 +497,7 @@
         ON "temp"."hihokenshaNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo"
         AND "temp"."taishoNendo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"
         AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
-        AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"
+        AND "temp"."hokenshaNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"
         LEFT JOIN 
         <choose>
             <when test="事業分フラグ">
