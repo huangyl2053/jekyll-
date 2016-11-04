@@ -23,12 +23,8 @@ public class HosokuJohoDiv extends Panel {
      */
     @JsonProperty("txtRiyoshaFutanDankai")
     private TextBox txtRiyoshaFutanDankai;
-    @JsonProperty("btnDispSetaiJoho")
-    private Button btnDispSetaiJoho;
     @JsonProperty("btnShotokuJokyo")
     private ButtonDialog btnShotokuJokyo;
-    @JsonProperty("btnCloseSetaiJoho")
-    private Button btnCloseSetaiJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,24 +51,6 @@ public class HosokuJohoDiv extends Panel {
     }
 
     /*
-     * getbtnDispSetaiJoho
-     * @return btnDispSetaiJoho
-     */
-    @JsonProperty("btnDispSetaiJoho")
-    public Button getBtnDispSetaiJoho() {
-        return btnDispSetaiJoho;
-    }
-
-    /*
-     * setbtnDispSetaiJoho
-     * @param btnDispSetaiJoho btnDispSetaiJoho
-     */
-    @JsonProperty("btnDispSetaiJoho")
-    public void setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
-        this.btnDispSetaiJoho = btnDispSetaiJoho;
-    }
-
-    /*
      * getbtnShotokuJokyo
      * @return btnShotokuJokyo
      */
@@ -88,24 +66,6 @@ public class HosokuJohoDiv extends Panel {
     @JsonProperty("btnShotokuJokyo")
     public void setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
         this.btnShotokuJokyo = btnShotokuJokyo;
-    }
-
-    /*
-     * getbtnCloseSetaiJoho
-     * @return btnCloseSetaiJoho
-     */
-    @JsonProperty("btnCloseSetaiJoho")
-    public Button getBtnCloseSetaiJoho() {
-        return btnCloseSetaiJoho;
-    }
-
-    /*
-     * setbtnCloseSetaiJoho
-     * @param btnCloseSetaiJoho btnCloseSetaiJoho
-     */
-    @JsonProperty("btnCloseSetaiJoho")
-    public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
-        this.btnCloseSetaiJoho = btnCloseSetaiJoho;
     }
 
     // </editor-fold>

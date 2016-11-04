@@ -142,16 +142,6 @@ public class HeaderDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnDispSetaiJoho() {
-        return this.getHosokuJoho().getBtnDispSetaiJoho();
-    }
-
-    @JsonIgnore
-    public void  setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
-        this.getHosokuJoho().setBtnDispSetaiJoho(btnDispSetaiJoho);
-    }
-
-    @JsonIgnore
     public ButtonDialog getBtnShotokuJokyo() {
         return this.getHosokuJoho().getBtnShotokuJokyo();
     }
@@ -159,16 +149,6 @@ public class HeaderDiv extends Panel {
     @JsonIgnore
     public void  setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
         this.getHosokuJoho().setBtnShotokuJokyo(btnShotokuJokyo);
-    }
-
-    @JsonIgnore
-    public Button getBtnCloseSetaiJoho() {
-        return this.getHosokuJoho().getBtnCloseSetaiJoho();
-    }
-
-    @JsonIgnore
-    public void  setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
-        this.getHosokuJoho().setBtnCloseSetaiJoho(btnCloseSetaiJoho);
     }
 
     @JsonIgnore

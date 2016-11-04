@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
@@ -47,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -149,20 +147,6 @@ public class FutangendogakuNinteiShinseiHandler {
         AccessLogger.log(AccessLogType.照会,
                 PersonalData.of(識別コード, new ExpandedInformation(new Code("0003"), 拡張情報NAME, 被保険者番号.value())));
         return new負担限度額認定申請の情報;
-    }
-
-    /**
-     * 世帯所得一覧の初期化処理です。
-     *
-     * @param 資格対象者 TaishoshaKey
-     */
-    public void 世帯所得一覧の初期化(TaishoshaKey 資格対象者) {
-        YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
-        ShikibetsuCode 識別コード = get識別コードFromViewState(資格対象者);
-        div.getCcdSetaiShotokuIchiran().initialize(識別コード,
-                new FlexibleDate(現在年月日日時時分秒.getDate().toDateString()),
-                new HizukeConfig().get所得年度(),
-                現在年月日日時時分秒);
     }
 
     /**
@@ -1510,7 +1494,7 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set配偶者住所(formFgn.get配偶者住所() == null ? AtenaJusho.EMPTY : formFgn.get配偶者住所());
         builder.set配偶者住所２(formFgn.get配偶者住所２() == null ? AtenaJusho.EMPTY : formFgn.get配偶者住所２());
         builder.set配偶者課税区分(formFgn.get配偶者課税区分() == null ? RString.EMPTY : formFgn.get配偶者課税区分());
-        builder.set預貯金申告区分(formFgn.get預貯金申告区分());
+        builder.set預貯金申告区分(formFgn.get預貯金申告区分() == null ? RString.EMPTY : formFgn.get預貯金申告区分());
 
         builder.set預貯金額(formFgn.get預貯金額());
         builder.set有価証券評価概算額(formFgn.get有価証券評価概算額());
