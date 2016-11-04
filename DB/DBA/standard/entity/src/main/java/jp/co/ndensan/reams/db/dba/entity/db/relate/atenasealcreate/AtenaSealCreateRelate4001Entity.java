@@ -40,5 +40,7 @@ public class AtenaSealCreateRelate4001Entity {
     private AtenaMeisho 世帯主名称;
     private LasdecCode 市町村コード_受給者台帳;
     private ShikibetsuCode 識別コード_受給者台帳;
+    private RString 町域コード;
+    private RString 生年月日;
     private UaFt250FindAtesakiEntity atesakiEntity;
 }

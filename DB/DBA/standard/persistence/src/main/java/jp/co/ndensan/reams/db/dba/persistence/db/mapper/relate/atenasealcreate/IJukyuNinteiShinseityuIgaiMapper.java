@@ -21,4 +21,11 @@ public interface IJukyuNinteiShinseityuIgaiMapper {
      * @return List<JukyuNinteiShinseityuIgaiEntity>
      */
     List<JukyuNinteiShinseityuIgaiEntity> getList();
+
+    /**
+     * 宛名識別対象一時テーブル5
+     *
+     * @return List<JukyuNinteiShinseityuIgaiEntity>
+     */
+    List<JukyuNinteiShinseityuIgaiEntity> getTaishouSha5List();
 }

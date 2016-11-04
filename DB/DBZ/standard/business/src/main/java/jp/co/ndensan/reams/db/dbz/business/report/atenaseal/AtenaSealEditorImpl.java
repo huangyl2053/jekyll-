@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class AtenaSealEditorImpl implements IAtenaSealEditor {
 
-    private static final ShikibetsuCode SHIKIBETSUCODE = new ShikibetsuCode("000000");
     private static final Code CODE = Code.EMPTY;
     private static final RString RSTRING = RString.EMPTY;
     private final AtenaSealReportBusiness business;
@@ -27,7 +26,7 @@ public class AtenaSealEditorImpl implements IAtenaSealEditor {
     /**
      * インスタンスを生成します。
      *
-     * @param business {@link GaikyotokkiA4Business}
+     * @param business business
      */
     protected AtenaSealEditorImpl(AtenaSealReportBusiness business) {
         this.business = business;
@@ -47,7 +46,7 @@ public class AtenaSealEditorImpl implements IAtenaSealEditor {
     private AtenaSealCreateReportSource editSource(AtenaSealCreateReportSource source) {
         partOne(source);
         partTwo(source);
-        source.識別コード = SHIKIBETSUCODE;
+        get識別コード(source);
         source.拡張情報 = new ExpandedInformation(CODE, RSTRING, RSTRING);
         source.kakkoLeft16 = business.getKakkoLeft16();
         source.kakkoRight15 = business.getKakkoRight15();
@@ -368,7 +367,7 @@ public class AtenaSealEditorImpl implements IAtenaSealEditor {
         source.kakkoRight9 = business.getKakkoRight9();
         source.samaBun11 = business.getSamaBun11();
         source.samabunShimei12 = business.getSamabunShimei12();
-        source.samaBun9 = business.getSamaBun8();
+        source.samaBun9 = business.getSamaBun9();
         source.samabunShimei10 = business.getSamabunShimei10();
         source.yubinNo7 = business.getYubinNo7();
         source.gyoseiku7 = business.getGyoseiku7();
@@ -420,5 +419,44 @@ public class AtenaSealEditorImpl implements IAtenaSealEditor {
         source.kakkoLeft13 = business.getKakkoLeft13();
         source.samaBun14 = business.getSamaBun14();
         source.kakkoRight14 = business.getKakkoRight14();
+    }
+
+    private void get識別コード(AtenaSealCreateReportSource source) {
+        if (!RString.isNullOrEmpty(business.get識別コード1())) {
+            source.識別コード1 = new ShikibetsuCode(business.get識別コード1());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード2())) {
+            source.識別コード2 = new ShikibetsuCode(business.get識別コード2());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード3())) {
+            source.識別コード3 = new ShikibetsuCode(business.get識別コード3());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード4())) {
+            source.識別コード4 = new ShikibetsuCode(business.get識別コード4());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード5())) {
+            source.識別コード5 = new ShikibetsuCode(business.get識別コード5());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード6())) {
+            source.識別コード6 = new ShikibetsuCode(business.get識別コード6());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード7())) {
+            source.識別コード7 = new ShikibetsuCode(business.get識別コード7());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード8())) {
+            source.識別コード8 = new ShikibetsuCode(business.get識別コード8());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード9())) {
+            source.識別コード9 = new ShikibetsuCode(business.get識別コード9());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード10())) {
+            source.識別コード10 = new ShikibetsuCode(business.get識別コード10());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード11())) {
+            source.識別コード11 = new ShikibetsuCode(business.get識別コード11());
+        }
+        if (!RString.isNullOrEmpty(business.get識別コード12())) {
+            source.識別コード12 = new ShikibetsuCode(business.get識別コード12());
+        }
     }
 }
