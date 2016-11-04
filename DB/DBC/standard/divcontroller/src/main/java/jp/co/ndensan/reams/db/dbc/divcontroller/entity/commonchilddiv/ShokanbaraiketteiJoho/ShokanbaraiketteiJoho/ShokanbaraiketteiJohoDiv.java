@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBC-0950-010 zuotao
  */
 public class ShokanbaraiketteiJohoDiv extends Panel implements IShokanbaraiketteiJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-25_08-20-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -55,6 +55,16 @@ public class ShokanbaraiketteiJohoDiv extends Panel implements IShokanbaraikette
     private Label lblKokuhorenkete;
     @JsonProperty("lblGyomuCode")
     private Label lblGyomuCode;
+    @JsonProperty("lblKetteiTsuchiJoho")
+    private Label lblKetteiTsuchiJoho;
+    @JsonProperty("txtKetteiTsuchiSakuseiYMD")
+    private TextBoxDate txtKetteiTsuchiSakuseiYMD;
+    @JsonProperty("txtKetteiTsuchiNo")
+    private TextBoxNum txtKetteiTsuchiNo;
+    @JsonProperty("lblFurikomiMeisaiJoho")
+    private Label lblFurikomiMeisaiJoho;
+    @JsonProperty("txtFurikomiMeisaiSakuseiYMD")
+    private TextBoxDate txtFurikomiMeisaiSakuseiYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -276,6 +286,96 @@ public class ShokanbaraiketteiJohoDiv extends Panel implements IShokanbaraikette
     @JsonProperty("lblGyomuCode")
     public void setLblGyomuCode(Label lblGyomuCode) {
         this.lblGyomuCode = lblGyomuCode;
+    }
+
+    /*
+     * getlblKetteiTsuchiJoho
+     * @return lblKetteiTsuchiJoho
+     */
+    @JsonProperty("lblKetteiTsuchiJoho")
+    public Label getLblKetteiTsuchiJoho() {
+        return lblKetteiTsuchiJoho;
+    }
+
+    /*
+     * setlblKetteiTsuchiJoho
+     * @param lblKetteiTsuchiJoho lblKetteiTsuchiJoho
+     */
+    @JsonProperty("lblKetteiTsuchiJoho")
+    public void setLblKetteiTsuchiJoho(Label lblKetteiTsuchiJoho) {
+        this.lblKetteiTsuchiJoho = lblKetteiTsuchiJoho;
+    }
+
+    /*
+     * gettxtKetteiTsuchiSakuseiYMD
+     * @return txtKetteiTsuchiSakuseiYMD
+     */
+    @JsonProperty("txtKetteiTsuchiSakuseiYMD")
+    public TextBoxDate getTxtKetteiTsuchiSakuseiYMD() {
+        return txtKetteiTsuchiSakuseiYMD;
+    }
+
+    /*
+     * settxtKetteiTsuchiSakuseiYMD
+     * @param txtKetteiTsuchiSakuseiYMD txtKetteiTsuchiSakuseiYMD
+     */
+    @JsonProperty("txtKetteiTsuchiSakuseiYMD")
+    public void setTxtKetteiTsuchiSakuseiYMD(TextBoxDate txtKetteiTsuchiSakuseiYMD) {
+        this.txtKetteiTsuchiSakuseiYMD = txtKetteiTsuchiSakuseiYMD;
+    }
+
+    /*
+     * gettxtKetteiTsuchiNo
+     * @return txtKetteiTsuchiNo
+     */
+    @JsonProperty("txtKetteiTsuchiNo")
+    public TextBoxNum getTxtKetteiTsuchiNo() {
+        return txtKetteiTsuchiNo;
+    }
+
+    /*
+     * settxtKetteiTsuchiNo
+     * @param txtKetteiTsuchiNo txtKetteiTsuchiNo
+     */
+    @JsonProperty("txtKetteiTsuchiNo")
+    public void setTxtKetteiTsuchiNo(TextBoxNum txtKetteiTsuchiNo) {
+        this.txtKetteiTsuchiNo = txtKetteiTsuchiNo;
+    }
+
+    /*
+     * getlblFurikomiMeisaiJoho
+     * @return lblFurikomiMeisaiJoho
+     */
+    @JsonProperty("lblFurikomiMeisaiJoho")
+    public Label getLblFurikomiMeisaiJoho() {
+        return lblFurikomiMeisaiJoho;
+    }
+
+    /*
+     * setlblFurikomiMeisaiJoho
+     * @param lblFurikomiMeisaiJoho lblFurikomiMeisaiJoho
+     */
+    @JsonProperty("lblFurikomiMeisaiJoho")
+    public void setLblFurikomiMeisaiJoho(Label lblFurikomiMeisaiJoho) {
+        this.lblFurikomiMeisaiJoho = lblFurikomiMeisaiJoho;
+    }
+
+    /*
+     * gettxtFurikomiMeisaiSakuseiYMD
+     * @return txtFurikomiMeisaiSakuseiYMD
+     */
+    @JsonProperty("txtFurikomiMeisaiSakuseiYMD")
+    public TextBoxDate getTxtFurikomiMeisaiSakuseiYMD() {
+        return txtFurikomiMeisaiSakuseiYMD;
+    }
+
+    /*
+     * settxtFurikomiMeisaiSakuseiYMD
+     * @param txtFurikomiMeisaiSakuseiYMD txtFurikomiMeisaiSakuseiYMD
+     */
+    @JsonProperty("txtFurikomiMeisaiSakuseiYMD")
+    public void setTxtFurikomiMeisaiSakuseiYMD(TextBoxDate txtFurikomiMeisaiSakuseiYMD) {
+        this.txtFurikomiMeisaiSakuseiYMD = txtFurikomiMeisaiSakuseiYMD;
     }
 
     // </editor-fold>
