@@ -8,10 +8,6 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_BeforeOpenDialog(): string {
-                return "onClick_BeforeOpenDialog";
-            }
-
         }
 
         export class Controls {
@@ -73,12 +69,12 @@ module DBZ {
                 return new UZA.TextBoxDate(this.convFiledName("txtNinteiShuryoYmd"));
             }
 
-            public btnNinteiRireki(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnNinteiRireki"));
-            }
-
             public btnHihoRireki(): UZA.ButtonDialog {
                 return new UZA.ButtonDialog(this.convFiledName("btnHihoRireki"));
+            }
+
+            public btnNinteiRireki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnNinteiRireki"));
             }
 
         }
