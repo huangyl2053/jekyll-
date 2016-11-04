@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 帳票設計_DBCMN31003_介護保険受領委任契約承認（不承認）確認書（事業者用）Source
  *
- * @author DBC-2130- liuxiaoyu
+ * @author DBC-2130-060 liuxiaoyu
  */
 public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
