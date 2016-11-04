@@ -35,7 +35,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoPrintService {
 
     private static List<TennyuTenshutsuMiTorokuIchiranhyoReport> toReports(TennyuTenshutsuMiTorokuIchiranhyoReportJoho joho) {
         List<TennyuTenshutsuMiTorokuIchiranhyoReport> list = new ArrayList<>();
-        list.add(TennyuTenshutsuMiTorokuIchiranhyoReport.createFrom(joho.getHeadItem(), joho.getBodyItemList()));
+        list.add(TennyuTenshutsuMiTorokuIchiranhyoReport.createFrom(joho.getHeadItem(), joho.getBodyItem()));
         return list;
     }
 

@@ -66,7 +66,7 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
         RDate システム日時 = RDate.getNowDate();
         source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, システム日時, SubGyomuCode.DBU介護統計報告);
         source.hokenshaName = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, システム日時, SubGyomuCode.DBU介護統計報告);
-        if (!parameter.get処理対象月().isNullOrEmpty() && EIGHT != parameter.get処理対象月()
+        if (!RString.isNullOrEmpty(parameter.get処理対象月()) && EIGHT != parameter.get処理対象月()
                 && (Integer.parseInt(parameter.get処理対象月().toString())) % TWO == ZERO) {
             source.tsukairaiTitleLeft = 特徴追加依頼;
             source.tsukairaiTitleRight = 特徴追加依頼;

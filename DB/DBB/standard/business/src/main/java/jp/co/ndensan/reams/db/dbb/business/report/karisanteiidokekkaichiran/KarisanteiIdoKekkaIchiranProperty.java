@@ -33,7 +33,6 @@ public class KarisanteiIdoKekkaIchiranProperty extends ReportPropertyBase<Karisa
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
-    private static final RString FORMAT = new RString("\"");
 
     /**
      * コンストラクタです。
@@ -120,6 +119,15 @@ public class KarisanteiIdoKekkaIchiranProperty extends ReportPropertyBase<Karisa
         return breakers.add(catalog.new SimplePageBreaker(
 
 
+
+
+
+
+
+
+
+
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KarisanteiIdoKekkaIchiranSource> occuredBreak(
@@ -142,31 +150,31 @@ public class KarisanteiIdoKekkaIchiranProperty extends ReportPropertyBase<Karisa
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
+        町域コード(new RString("0002"), new RString("町域コード"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
         /**
          * 生年月日
          */
-        生年月日(new RString("0012"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
+        生年月日(new RString("0012"), new RString("生年月日"), new RString("\"ShikibetsuTaisho_seinengappiYMD\"")),
         /**
          * 性別
          */
-        性別(new RString("0013"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
+        性別(new RString("0013"), new RString("性別"), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
+        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("master.\"fukaShichosonCode\"")),
         /**
          * 通知書番号
          */
-        通知書番号(new RString("0202"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
+        通知書番号(new RString("0202"), new RString("通知書番号"), new RString("master.\"tsuchishoNo\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT));
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("master.\"hihokenshaNo\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

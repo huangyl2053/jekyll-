@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -314,12 +315,12 @@ public class PnlTotalPanel {
      * 「発行する」ボタン
      *
      * @param div PnlTotalPanelDiv
-     * @return ResponseData<PnlTotalPanelDiv>
+     * @return ResponseData<SourceDataCollection>
      */
-    public ResponseData<PnlTotalPanelDiv> onClick_btnPublish(PnlTotalPanelDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnPublish(PnlTotalPanelDiv div) {
         ShokanJuryoininKeiyakusha 償還受領委任契約者 = ViewStateHolder.get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
-        getHandler(div).publish帳票(償還受領委任契約者);
-        return ResponseData.of(div).respond();
+        SourceDataCollection sourceDataCollection = getHandler(div).publish帳票(償還受領委任契約者);
+        return ResponseData.of(sourceDataCollection).respond();
     }
 
     /**

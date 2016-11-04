@@ -125,5 +125,25 @@ public class NenreitotatsuKakuninListReportSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportItem(name = "yubinNo", length = 10, order = 55)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 56)
+    public RString choikiCode;
+    @ReportItem(name = "banchiCode", length = 10, order = 57)
+    public RString banchiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 58)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chiku1", length = 10, order = 59)
+    public RString chiku1;
+    @ReportItem(name = "chiku2", length = 10, order = 60)
+    public RString chiku2;
+    @ReportItem(name = "chiku3", length = 10, order = 61)
+    public RString chiku3;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 62)
+    public RString shimei50onKana;
+    @ReportItem(name = "seinengappiYMD", length = 10, order = 63)
+    public RString seinengappiYMD;
+    @ReportItem(name = "gender", length = 10, order = 64)
+    public RString gender;
 // </editor-fold>
 }

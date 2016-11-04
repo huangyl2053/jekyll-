@@ -20,8 +20,10 @@ import lombok.NonNull;
  */
 public class ChosaIraiHakkoIchiranhyoReport extends Report<ChosaIraiHakkoIchiranhyoReportSource> {
 
+    private final ChosaIraiHakkoIchiranhyoBodyItem item;
     private final List<ChosaIraiHakkoIchiranhyoBodyItem> bodyItemList;
     private final ChosaIraiHakkoIchiranhyoHeadItem headItem;
+    private final int count;
 
     /**
      * インスタンスを生成します。
@@ -36,39 +38,75 @@ public class ChosaIraiHakkoIchiranhyoReport extends Report<ChosaIraiHakkoIchiran
 
         return new ChosaIraiHakkoIchiranhyoReport(
                 headItem,
-                itemList);
+                null,
+                itemList,
+                0);
     }
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 認定調査依頼発行一覧表ヘッダのITEM
-     * @param itemList 認定調査依頼発行一覧表のITEMリスト
+     * @param item 認定調査依頼発行一覧表ボディのITEM
+     * @param count count
+     * @return 認定調査依頼発行一覧表のReport
+     */
+    public static ChosaIraiHakkoIchiranhyoReport createFrom(
+            ChosaIraiHakkoIchiranhyoHeadItem headItem,
+            ChosaIraiHakkoIchiranhyoBodyItem item,
+            int count) {
+
+        return new ChosaIraiHakkoIchiranhyoReport(
+                headItem,
+                item,
+                null,
+                count);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param headItem 認定調査依頼発行一覧表ヘッダのITEM
+     * @param bodyItem bodyItem
+     * @param bodyItemList bodyItemList
+     * @param count count
      */
     protected ChosaIraiHakkoIchiranhyoReport(
             ChosaIraiHakkoIchiranhyoHeadItem headItem,
-            List<ChosaIraiHakkoIchiranhyoBodyItem> itemList) {
+            ChosaIraiHakkoIchiranhyoBodyItem bodyItem,
+            List<ChosaIraiHakkoIchiranhyoBodyItem> bodyItemList,
+            int count) {
 
         this.headItem = headItem;
-        this.bodyItemList = itemList;
+        this.item = bodyItem;
+        this.bodyItemList = bodyItemList;
+        this.count = count;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraiHakkoIchiranhyoReportSource> reportSourceWriter) {
-        int renban = 0;
-        RString breakKey = RString.EMPTY;
-        for (ChosaIraiHakkoIchiranhyoBodyItem bodyItem : bodyItemList) {
-            if (!breakKey.equals(setBreakKey(bodyItem))) {
-                renban = 1;
-            } else {
-                renban++;
+        if (bodyItemList != null) {
+            int renban = 0;
+            RString breakKey = RString.EMPTY;
+            for (ChosaIraiHakkoIchiranhyoBodyItem bodyItem : bodyItemList) {
+                if (!breakKey.equals(setBreakKey(bodyItem))) {
+                    renban = 1;
+                } else {
+                    renban++;
+                }
+                bodyItem.setRenban(renban);
+                ChosaIraiHakkoIchiranhyoHeaderEditor headerEditor = new ChosaIraiHakkoIchiranhyoHeaderEditor(headItem);
+                ChosaIraiHakkoIchiranhyoBodyEditor bodyEditor = new ChosaIraiHakkoIchiranhyoBodyEditor(bodyItem);
+                IChosaIraiHakkoIchiranhyoBuilder builder = new ChosaIraiHakkoIchiranhyoBuilderImpl(headerEditor, bodyEditor);
+                reportSourceWriter.writeLine(builder);
+                breakKey = setBreakKey(bodyItem);
             }
-            bodyItem.setRenban(renban);
+        } else {
+            item.setRenban(count);
             ChosaIraiHakkoIchiranhyoHeaderEditor headerEditor = new ChosaIraiHakkoIchiranhyoHeaderEditor(headItem);
-            ChosaIraiHakkoIchiranhyoBodyEditor bodyEditor = new ChosaIraiHakkoIchiranhyoBodyEditor(bodyItem);
+            ChosaIraiHakkoIchiranhyoBodyEditor bodyEditor = new ChosaIraiHakkoIchiranhyoBodyEditor(item);
             IChosaIraiHakkoIchiranhyoBuilder builder = new ChosaIraiHakkoIchiranhyoBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
-            breakKey = setBreakKey(bodyItem);
         }
     }
 

@@ -30,22 +30,42 @@ public class DBE220010_IraishoIkkatu extends BatchFlowBase<DBE220010_IraishoIkka
 
     @Override
     protected void defineFlow() {
-        callHomonChosaIraisho();
+        call訪問調査依頼書発行バッチ();
+        call主治医意見書提出依頼書発行バッチ();
+        if (getParameter().isNinteiChosairaiHakkou()) {
+            executeStep(CALL_NINTEICHOSAIRAIFLOW);
+        }
+        if (getParameter().isIkenshoSakuseiIraiHakkou()) {
+            executeStep(CALL_SHUJIIIKENSHOSAKUSEIFLOW);
+        }
+    }
+
+    private void call訪問調査依頼書発行バッチ() {
+        if (getParameter().isNinteiChosaIraisyo()
+                || getParameter().isNinteiChosaIraiChohyo()
+                || getParameter().isNinteiChosahyoKihon()
+                || getParameter().isNinteiChosahyoTokki()
+                || getParameter().isNinteiChosahyoGaikyou()
+                || getParameter().isNinteiChosahyoOCRKihon()
+                || getParameter().isNinteiChosahyoOCRTokki()
+                || getParameter().isNinteiChosahyoOCRGaikyou()
+                || getParameter().isNinteiChosaCheckHyo()
+                || getParameter().isZenkoNinteiChosahyo()
+                || getParameter().is認定調査依頼履歴一覧()) {
+            executeStep(CALL_HOMONCHOSAIRAISHOFLOW);
+        }
+    }
+
+    private void call主治医意見書提出依頼書発行バッチ() {
         if (getParameter().isIkenshoSakuseiirai()
                 || getParameter().isIkenshoSakuseiSeikyuu()
                 || getParameter().isShujiiIkenshoSakuseiIraisho()
                 || getParameter().isIkenshoKinyuu()
                 || getParameter().isIkenshoKinyuuOCR()
                 || getParameter().isIkenshoSakuseiSeikyuusho()
-                || getParameter().isIkenshoTeishutu()) {
-
+                || getParameter().isIkenshoTeishutu()
+                || getParameter().is主治医意見書依頼履歴一覧()) {
             executeStep(CALL_TEISHUTSUIRAISHOHAKKOFLOW);
-        }
-        if (getParameter().isNinteiChosairaiHakkou()) {
-            executeStep(CALL_NINTEICHOSAIRAIFLOW);
-        }
-        if (getParameter().isIkenshoSakuseiIraiHakkou()) {
-            executeStep(CALL_SHUJIIIKENSHOSAKUSEIFLOW);
         }
     }
 
@@ -89,18 +109,4 @@ public class DBE220010_IraishoIkkatu extends BatchFlowBase<DBE220010_IraishoIkka
         return otherBatchFlow(TEISHUTSUIRAISHOHAKKO_FLOWID, SubGyomuCode.DBE認定支援, getParameter()).define();
     }
 
-    private void callHomonChosaIraisho() {
-        if (getParameter().isNinteiChosaIraisyo()
-                || getParameter().isNinteiChosaIraiChohyo()
-                || getParameter().isNinteiChosahyoKihon()
-                || getParameter().isNinteiChosahyoTokki()
-                || getParameter().isNinteiChosahyoGaikyou()
-                || getParameter().isNinteiChosahyoOCRKihon()
-                || getParameter().isNinteiChosahyoOCRTokki()
-                || getParameter().isNinteiChosahyoOCRGaikyou()
-                || getParameter().isNinteiChosaCheckHyo()
-                || getParameter().isZenkoNinteiChosahyo()) {
-            executeStep(CALL_HOMONCHOSAIRAISHOFLOW);
-        }
-    }
 }

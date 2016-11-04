@@ -19,27 +19,27 @@ public enum DBB200021_TokubetsuChoshuIdojohoIchiranEnum implements IReportItems 
      * 行政区コード
      */
     行政区コード(new RString("0004"), new RString("行政区コード"),
-            Contents.ENCLOSURE.concat(new RString("ShikibetsuTaisho_gyoseikuCode").concat(Contents.ENCLOSURE))),
+            Contents.ENCLOSURE.concat(new RString("Atesaki_gyoseikuCode").concat(Contents.ENCLOSURE))),
     /**
      * 識別コード
      */
     識別コード(new RString("0009"), new RString("識別コード"),
-            Contents.ENCLOSURE.concat(new RString("ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode").concat(Contents.ENCLOSURE))),
+            Contents.ENCLOSURE.concat(new RString("ShikibetsuTaisho_shikibetsuCode").concat(Contents.ENCLOSURE))),
     /**
      * 氏名５０音カナ
      */
     氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"),
-            Contents.ENCLOSURE.concat(new RString("ueT0511NenkinTokuchoKaifuJoho_dtKanaShimei").concat(Contents.ENCLOSURE))),
+            Contents.ENCLOSURE.concat(new RString("ShikibetsuTaisho_kanaMeisho").concat(Contents.ENCLOSURE))),
     /**
      * 生年月日
      */
     生年月日(new RString("0012"), new RString("生年月日"),
-            Contents.ENCLOSURE.concat(new RString("ueT0511NenkinTokuchoKaifuJoho_dtBirthDay").concat(Contents.ENCLOSURE))),
+            Contents.ENCLOSURE.concat(new RString("ShikibetsuTaisho_seinengappiYMD").concat(Contents.ENCLOSURE))),
     /**
      * 性別
      */
     性別(new RString("0013"), new RString("性別"),
-            Contents.ENCLOSURE.concat(new RString("ueT0511NenkinTokuchoKaifuJoho_dtSeibetsu").concat(Contents.ENCLOSURE))),
+            Contents.ENCLOSURE.concat(new RString("ShikibetsuTaisho_seibetsuCode").concat(Contents.ENCLOSURE))),
     /**
      * 市町村コード
      */

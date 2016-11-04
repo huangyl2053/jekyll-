@@ -54,11 +54,12 @@ public class TennyuTensyutsuMiTorokuIchiranhyoProcessParameter implements IBatch
     /**
      * Mybatisのパラメータを作成します。
      *
+     * @param 出力順 出力順
      * @return TennyuTensyutsuMiTorokuIchiranhyoMybatisParameter
      */
-    public TennyuTenshutsuMiTorokuIchiranhyoMybatisParameter toTennyuTensyutsuMiTorokuIchiranhyoMybatisParameter() {
+    public TennyuTenshutsuMiTorokuIchiranhyoMybatisParameter toTennyuTensyutsuMiTorokuIchiranhyoMybatisParameter(RString 出力順) {
         return new TennyuTenshutsuMiTorokuIchiranhyoMybatisParameter(shichosoncode, tensyutsusakuseiJiyucode, tennyusakuseijiyucode,
-                kaishinichi, syuryonichi);
+                kaishinichi, syuryonichi, 出力順);
     }
 
 }

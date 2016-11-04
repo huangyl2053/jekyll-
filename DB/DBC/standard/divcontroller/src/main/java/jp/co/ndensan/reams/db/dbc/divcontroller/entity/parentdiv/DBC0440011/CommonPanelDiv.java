@@ -13,13 +13,13 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshika
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * 画面設計_DBCMN42001_高額サービス費支給申請登録
+ * CommonPanel のクラスファイル
  *
  * @reamsid_L DBC-2020-040 quxiaodong
  */
 public class CommonPanelDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

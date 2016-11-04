@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -227,6 +227,16 @@ public class ShujiiIkenshoDiv extends Panel {
     @JsonIgnore
     public void  setChkikenshiiraihakko(CheckBoxList Chkikenshiiraihakko) {
         this.getShujiiIkenshoInsatsuChohyo().setChkikenshiiraihakko(Chkikenshiiraihakko);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkikenshiiraiRireki() {
+        return this.getShujiiIkenshoInsatsuChohyo().getChkikenshiiraiRireki();
+    }
+
+    @JsonIgnore
+    public void  setChkikenshiiraiRireki(CheckBoxList ChkikenshiiraiRireki) {
+        this.getShujiiIkenshoInsatsuChohyo().setChkikenshiiraiRireki(ChkikenshiiraiRireki);
     }
 
     // </editor-fold>
