@@ -21,15 +21,15 @@
     FROM														
         rgdb."DbT3038ShokanKihon" AS ShokanKihon														
         LEFT JOIN														
-        rgdb."DbT3036ShokanHanteiKekka" AS ShokanHanteiKekka ON														
-        ShokanKihon."hiHokenshaNo" = ShokanHanteiKekka."hiHokenshaNo" AND														
-        ShokanKihon."serviceTeikyoYM" = ShokanHanteiKekka."serviceTeikyoYM" AND														
-        ShokanKihon."seiriNo" = ShokanHanteiKekka."seiriNo"														
+            rgdb."DbT3036ShokanHanteiKekka" AS ShokanHanteiKekka ON														
+            ShokanKihon."hiHokenshaNo" = ShokanHanteiKekka."hiHokenshaNo" AND														
+            ShokanKihon."serviceTeikyoYM" = ShokanHanteiKekka."serviceTeikyoYM" AND														
+            ShokanKihon."seiriNo" = ShokanHanteiKekka."seiriNo"														
         LEFT JOIN														
-        rgdb."DbT3034ShokanShinsei" AS ShokanShinsei ON														
-        ShokanKihon."hiHokenshaNo" = ShokanShinsei."hiHokenshaNo" AND														
-        ShokanKihon."serviceTeikyoYM" = ShokanShinsei."serviceTeikyoYM" AND														
-        ShokanKihon."seiriNo" = ShokanShinsei."seiriNo"														
+            rgdb."DbT3034ShokanShinsei" AS ShokanShinsei ON														
+            ShokanKihon."hiHokenshaNo" = ShokanShinsei."hiHokenshaNo" AND														
+            ShokanKihon."serviceTeikyoYM" = ShokanShinsei."serviceTeikyoYM" AND														
+            ShokanKihon."seiriNo" = ShokanShinsei."seiriNo"														
         LEFT JOIN														
         (														
         SELECT														
