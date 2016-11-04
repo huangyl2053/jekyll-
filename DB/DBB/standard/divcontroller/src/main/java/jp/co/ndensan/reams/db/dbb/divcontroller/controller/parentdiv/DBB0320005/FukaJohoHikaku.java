@@ -34,8 +34,14 @@ public class FukaJohoHikaku {
         }
 
         FukaHikakuInput input = ViewStateHolder.get(ViewStateKeys.賦課比較キー, FukaHikakuInput.class);
-        FukaHikakuTargets 比較対象 = input.get比較対象();
-        if (!ResponseHolder.isReRequest() && !比較対象.canCompare()) {
+        FukaHikakuTargets 比較対象 = null;
+        if (input != null) {
+            比較対象 = input.get比較対象();
+        }
+        if (!ResponseHolder.isReRequest() && input != null && !比較対象.canCompare()) {
+            return ResponseData.of(div).addMessage(DbbInformationMessages.比較対象データなし.getMessage()).respond();
+        }
+        if (!ResponseHolder.isReRequest() && input == null) {
             return ResponseData.of(div).addMessage(DbbInformationMessages.比較対象データなし.getMessage()).respond();
         }
         new FukaHikakuHandler(div).diplayComparingValues(比較対象);
@@ -52,7 +58,7 @@ public class FukaJohoHikaku {
     public ResponseData<FukaJohoHikakuDiv> onClick_btnBack(FukaJohoHikakuDiv div) {
         RString eventName;
         FukaHikakuInput input = ViewStateHolder.get(ViewStateKeys.賦課比較キー, FukaHikakuInput.class);
-        if (input.isBackTo賦課照会画面()) {
+        if (input != null && input.isBackTo賦課照会画面()) {
             eventName = new RString("賦課照会に戻る");
         } else {
             eventName = new RString("世帯員所得に戻る");

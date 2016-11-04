@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiH
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
@@ -129,11 +130,10 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
         this.有効無効区分_有効 = YukoMukoKubun.有効.getコード();
         this.減免減額種類_介護保険負担限度額認定 = GemmenGengakuShurui.負担限度額認定.getコード();
         this.決定区分_承認する = KetteiKubun.承認する.getコード();
-        this.利用者負担1から3段階 = RiyoshaFutanDankaiHanni.利用者負担1から3段階.getコード();
-        this.利用者負担1段階 = RiyoshaFutanDankaiHanni.利用者負担1段階.getコード();
-        this.利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.getコード();
-        this.利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.getコード();
-        this.利用者負担4段階_高齢者複数世帯 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード();
+        this.利用者負担1段階 = RiyoshaFutanDankai.第一段階.getコード();
+        this.利用者負担2段階 = RiyoshaFutanDankai.第二段階.getコード();
+        this.利用者負担3段階 = RiyoshaFutanDankai.第三段階.getコード();
+        this.利用者負担4段階_高齢者複数世帯 = RiyoshaFutanDankai.第四段階.getコード();
         if (null != 対象リスト) {
             edit対象リスト(対象リスト, 対象期間指定);
         }

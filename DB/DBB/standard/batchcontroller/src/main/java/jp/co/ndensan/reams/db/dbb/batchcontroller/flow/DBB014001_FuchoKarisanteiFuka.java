@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJo
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014001.DBB014001_FuchoKarisanteiFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014001.FuchoKarisanteiFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -56,6 +59,17 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final RString 計算後情報作成BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
 
+    private static final int NUM_1 = 1;
+    private static final int NUM_4 = 4;
+    private static final RString 仮算定賦課方法_01 = new RString("01");
+    private static final RString 仮算定賦課方法_02 = new RString("02");
+    private static final RString 仮算定賦課方法_03 = new RString("03");
+    private static final RString 仮算定賦課方法_04 = new RString("04");
+    private static final RString 仮算定賦課方法_05 = new RString("05");
+    private static final RString 仮算定賦課方法_06 = new RString("06");
+    private static final RString 仮算定賦課方法_10 = new RString("10");
+    private static final RString 仮算定賦課方法_11 = new RString("11");
+
     private RDateTime バッチ起動日時;
 
     @Override
@@ -71,7 +85,15 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
         }
         バッチ起動日時 = RDateTime.now();
         executeStep(計算対象者抽出);
-        executeStep(前年度データ取得);
+        RDate 調定年度開始日 = new RDate(getParameter().get調定年度().getYearValue(), NUM_4, NUM_1);
+        RString 普通徴収_仮算定賦課方法
+                = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
+        if (仮算定賦課方法_01.equals(普通徴収_仮算定賦課方法) || 仮算定賦課方法_02.equals(普通徴収_仮算定賦課方法)
+                || 仮算定賦課方法_03.equals(普通徴収_仮算定賦課方法) || 仮算定賦課方法_04.equals(普通徴収_仮算定賦課方法)
+                || 仮算定賦課方法_05.equals(普通徴収_仮算定賦課方法) || 仮算定賦課方法_06.equals(普通徴収_仮算定賦課方法)
+                || 仮算定賦課方法_11.equals(普通徴収_仮算定賦課方法) || 仮算定賦課方法_10.equals(普通徴収_仮算定賦課方法)) {
+            executeStep(前年度データ取得);
+        }
         executeStep(世帯員把握);
         executeStep(世帯員把握フロー);
         executeStep(賦課計算_賦課);

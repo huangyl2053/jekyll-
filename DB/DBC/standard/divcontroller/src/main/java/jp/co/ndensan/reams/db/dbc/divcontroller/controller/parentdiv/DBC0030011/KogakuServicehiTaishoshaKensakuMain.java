@@ -146,6 +146,17 @@ public class KogakuServicehiTaishoshaKensakuMain {
     }
 
     /**
+     * 「被保番号」onBlur事件です。
+     *
+     * @param div KogakuServicehiTaishoshaKensakuMainDiv
+     * @return 高額介護サービス費照会（対象者検索）画面
+     */
+    public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onBlur_txtHihoNo(KogakuServicehiTaishoshaKensakuMainDiv div) {
+        getHandler(div).clear一覧エリア();
+        return ResponseData.of(div).setState(DBC0030011StateName.検索条件);
+    }
+
+    /**
      * データグリッドの「選択」ボタンを押下した際に実行します。
      *
      * @param div KogakuServicehiTaishoshaKensakuMainDiv

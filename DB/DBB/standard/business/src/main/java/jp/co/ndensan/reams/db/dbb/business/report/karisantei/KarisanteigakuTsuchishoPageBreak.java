@@ -39,7 +39,7 @@ public class KarisanteigakuTsuchishoPageBreak extends PageBreaker<TokubetsuChosh
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> nextSource) {
         boolean flag = false;
-        //QA971 保留中
+        //TODO QA1859確認中
         if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flag = true;

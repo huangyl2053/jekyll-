@@ -41,4 +41,5 @@ public class TennyuTenshutsuMiTorokuIchiranhyoBodyItem {
     private RString 氏名;
     private RString 登録届出日;
     private RString 消除届出日;
+    private RString 全国住所コード;
 }

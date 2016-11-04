@@ -53,7 +53,7 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
                 executeStep(一覧表の出力および年金特徴回付情報の登録及び件数表の出力);
                 対象年月 = getResult(FlexibleYearMonth.class, new RString(一覧表の出力および年金特徴回付情報の登録及び件数表の出力),
                         NenkinTokuchoCsvOutputProcess.PARAMETER_OUT_OUTPUTSAKUSEIYMD);
-//                executeStep(バッチ特徴分配集約を呼び出し);
+                executeStep(バッチ特徴分配集約を呼び出し);
                 対象年月 = FlexibleYearMonth.EMPTY;
             }
         }

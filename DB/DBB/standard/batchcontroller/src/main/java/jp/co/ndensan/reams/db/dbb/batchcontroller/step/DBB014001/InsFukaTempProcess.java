@@ -155,9 +155,9 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     }
 
     private boolean isBreak(FukaKeisanEntity current, FukaKeisanEntity before) {
-        return !current.get普徴仮算定抽出().getHihokenshaNo().equals(before.get普徴仮算定抽出().getHihokenshaNo())
-                || !current.get普徴仮算定抽出().getIdoYMD().equals(before.get普徴仮算定抽出().getIdoYMD())
-                || !current.get普徴仮算定抽出().getEdaNo().equals(before.get普徴仮算定抽出().getEdaNo());
+        return !current.get普徴仮算定抽出().getChoteiNendo().equals(before.get普徴仮算定抽出().getChoteiNendo())
+                || !current.get普徴仮算定抽出().getFukaYMD().equals(before.get普徴仮算定抽出().getFukaYMD())
+                || !current.get普徴仮算定抽出().getTsuchishoNo().equals(before.get普徴仮算定抽出().getTsuchishoNo());
     }
 
     private RString get段階区分(FukaKeisanEntity entity) {

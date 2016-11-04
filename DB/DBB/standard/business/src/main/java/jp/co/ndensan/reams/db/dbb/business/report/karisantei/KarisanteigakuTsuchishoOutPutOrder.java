@@ -18,43 +18,55 @@ public enum KarisanteigakuTsuchishoOutPutOrder implements IReportItems {
     /**
      * 郵便番号
      */
-    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"shikibetsuTaisho_yubinNo\"")),
+    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"atesaki_yubinNo\"")),
     /**
      * 町域コード
      */
-    町域コード(new RString("0002"), new RString("町域コード"), new RString("\"shikibetsuTaisho_choikiCode\"")),
+    町域コード(new RString("0002"), new RString("町域コード"), new RString("\"atesaki_choikiCode\"")),
     /**
-     * 番地コード
+     * 番地コード1
      */
-    番地コード(new RString("0003"), new RString("番地コード"), new RString("\"shikibetsuTaisho_banchiCode1\"")),
+    番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"atesaki_banchiCode1\"")),
+    /**
+     * 番地コード2
+     */
+    番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"atesaki_banchiCode2\"")),
+    /**
+     * 番地コード3
+     */
+    番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"atesaki_banchiCode3\"")),
+    /**
+     * 番地コード4
+     */
+    番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"atesaki_banchiCode4\"")),
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"shikibetsuTaisho_gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"atesaki_gyoseikuCode\"")),
     /**
      * 地区１
      */
-    地区１(new RString("0005"), new RString("地区１"), new RString("\"shikibetsuTaisho_chikuCode1\"")),
+    地区１(new RString("0005"), new RString("地区１"), new RString("\"atesaki_chikuCode1\"")),
     /**
      * 地区２
      */
-    地区２(new RString("0006"), new RString("地区２"), new RString("\"shikibetsuTaisho_chikuCode2\"")),
+    地区２(new RString("0006"), new RString("地区２"), new RString("\"atesaki_chikuCode2\"")),
     /**
      * 地区３
      */
-    地区３(new RString("0007"), new RString("地区３"), new RString("\"shikibetsuTaisho_chikuCode3\"")),
+    地区３(new RString("0007"), new RString("地区３"), new RString("\"atesaki_chikuCode3\"")),
     /**
      * 世帯コード
      */
-    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"dbT2015KeisangoJoho_setaiCode\"")),
+    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"shikibetsuTaisho_setaiCode\"")),
     /**
      * 識別コード
      */
-    識別コード(new RString("0009"), new RString("識別コード"), new RString("\"dbT2015KeisangoJoho_shikibetsuCode\"")),
+    識別コード(new RString("0009"), new RString("識別コード"), new RString("\"shikibetsuTaisho_shikibetsuCode\"")),
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"shikibetsuTaisho_meisho\"")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"shikibetsuTaisho_kanaMeisho\"")),
     /**
      * 生年月日
      */
@@ -66,7 +78,7 @@ public enum KarisanteigakuTsuchishoOutPutOrder implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_insertDantaiCd\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_fukaShichosonCode\"")),
     /**
      * 被保険者番号
      */
@@ -84,9 +96,21 @@ public enum KarisanteigakuTsuchishoOutPutOrder implements IReportItems {
      */
     生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"生活保護区分\"")),
     /**
-     * 調定事由
+     * 調定事由1
      */
-    調定事由(new RString("0212"), new RString("調定事由"), new RString("\"dbT2015KeisangoJoho_choteiJiyu1\""));
+    調定事由1(new RString("0212"), new RString("調定事由1"), new RString("\"dbT2015KeisangoJoho_choteiJiyu1\"")),
+    /**
+     * 調定事由2
+     */
+    調定事由2(new RString("0212"), new RString("調定事由2"), new RString("\"dbT2015KeisangoJoho_choteiJiyu2\"")),
+    /**
+     * 調定事由3
+     */
+    調定事由3(new RString("0212"), new RString("調定事由3"), new RString("\"dbT2015KeisangoJoho_choteiJiyu3\"")),
+    /**
+     * 調定事由4
+     */
+    調定事由4(new RString("0212"), new RString("調定事由4"), new RString("\"dbT2015KeisangoJoho_choteiJiyu4\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

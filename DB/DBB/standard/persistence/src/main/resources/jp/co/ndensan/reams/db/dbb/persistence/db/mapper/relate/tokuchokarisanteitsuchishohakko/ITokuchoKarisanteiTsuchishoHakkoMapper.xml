@@ -346,21 +346,21 @@
     <select resultOrdered="true" id="select出力対象データ" resultMap="resultMap_出力対象情報の取得"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoMybatisParameter" fetchSize="500">
         SELECT
-            A.*
+            *
         FROM
-            "KarisanteiIkkatsuHakkoTemp" AS A
+            "KarisanteiIkkatsuHakkoTemp"
         WHERE 1=1
            <if test="出力対象 == 1">
-            AND A."hihokenshaKubun" = '0'
+            AND "hihokenshaKubun" = '0'
            </if>
            <if test="出力対象 == 2">
-            AND A."hihokenshaKubun" = '1' or A."hihokenshaKubun" = '2'
+            AND "hihokenshaKubun" = '1' or "hihokenshaKubun" = '2'
            </if>
            <if test="出力対象 == 3">
-            AND A."hihokenshaKubun" = '1'
+            AND "hihokenshaKubun" = '1'
            </if>
             <if test="出力対象 == 4">
-            AND A."hihokenshaKubun" = '2'
+            AND "hihokenshaKubun" = '2'
            </if>
              ${出力順}
     </select>

@@ -443,42 +443,12 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
         taishogaiEntity.set普徴期期別金額12(対象外データTemp.getFuKibetsuGaku12());
         taishogaiEntity.set普徴期期別金額13(対象外データTemp.getFuKibetsuGaku13());
         taishogaiEntity.set普徴期期別金額14(対象外データTemp.getFuKibetsuGaku14());
-        taishogaiEntity.set備考コード(備考名を転換(対象外データ.get備考コード()));
+        taishogaiEntity.set備考コード(対象外データ.get備考コード());
         taishogaiEntity.set仮徴収年金コード(対象外データ.get徴収方法Newest_仮徴収_年金コード());
         taishogaiEntity.set宛名の情報(対象外データ.get宛名());
         taishogaiEntity.set特別徴収業務者コード(対象外データ.get特別徴収義務者コード());
         taishogaiEntity.set平準化済フラグ(false);
         return taishogaiEntity;
-    }
-
-    private RString 備考名を転換(RString 編集コード) {
-        RString 備考名 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(編集コード)) {
-            switch (Integer.parseInt(編集コード.toString())) {
-                case NUM_1:
-                    備考名 = 編集コード_併徴者;
-                    break;
-                case NUM_2:
-                    備考名 = 編集コード_仮徴収額修正者;
-                    break;
-                case NUM_3:
-                    備考名 = 編集コード_仮徴収額修正者;
-                    break;
-                case NUM_4:
-                    備考名 = 編集コード_対象外_減額;
-                    break;
-                case NUM_5:
-                    備考名 = 編集コード_対象外_増額;
-                    break;
-                case NUM_6:
-                    備考名 = 編集コード_特徴6月開始者;
-                    break;
-                default:
-                    break;
-            }
-            return 備考名;
-        }
-        return RString.EMPTY;
     }
 
     private RString 出力順再設定(RString 出力順) {
