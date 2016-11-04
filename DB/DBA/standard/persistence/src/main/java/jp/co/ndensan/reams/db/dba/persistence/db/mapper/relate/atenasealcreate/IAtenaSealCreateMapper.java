@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.IChiJiTBLEntity;
 
 /**
  * 宛名シール作成のマッパーインタフェースです。
@@ -25,13 +26,6 @@ public interface IAtenaSealCreateMapper {
     List<AtenaSealCreateRelateEntity> getTekiyoKaisha(AtenaSealCreateMybatisParameter parameter);
 
     /**
-     * 取込件数確認します。
-     *
-     * @return int
-     */
-    int getIttoki();
-
-    /**
      * 年齢到達予定者選択しないの場合、データを取得します。
      *
      * @param parameter AtenaSealCreateShitaMybatisParameter
@@ -39,4 +33,10 @@ public interface IAtenaSealCreateMapper {
      */
     List<AtenaSealCreateRelateEntity> getHihokenshadai(AtenaSealCreateMybatisParameter parameter);
 
+    /**
+     * 処理結果リスト一時TBL、データを取得します
+     *
+     * @return List<IChiJiTBLEntity>
+     */
+    List<IChiJiTBLEntity> getIChiJiTBLEntity();
 }

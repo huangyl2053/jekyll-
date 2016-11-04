@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA090010;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.atenasealcreate.AtenaSealCreateResult;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba090010.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelateEntity;
@@ -31,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 宛名シール作成、年齢到達予定者選択したの場合、データを作成します。
+ * 宛名シール作成、年齢到達予定者選択したの場合、宛名識別対象一時テーブル1の作成、データを作成します。
  *
  * @reamsid_L DBA-1210-030 zhengsongling
  */
@@ -42,7 +41,7 @@ public class NenreiTotatsuSenTakuShiTaProcess extends BatchProcessBase<AtenaSeal
     private AtenaSealCreateProcessParameter processParamter;
     private static final RString TABLE_宛名識別対象一時テーブル1 = new RString("DbWT2009AtenaShikibetuTaisyou1");
     private static final RString TABLE_処理結果リスト一時TBL = new RString("ShorikekkarisutoichijiTBL");
-    private List<KoikiZenShichosonJoho> koikiZenShichosonJoho;
+    private KoikiZenShichosonJoho koikiZenShichosonJoho;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル1;
     @BatchWriter
@@ -50,7 +49,7 @@ public class NenreiTotatsuSenTakuShiTaProcess extends BatchProcessBase<AtenaSeal
 
     @Override
     protected void initialize() {
-        koikiZenShichosonJoho = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
+        koikiZenShichosonJoho = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records().get(0);
     }
 
     @Override

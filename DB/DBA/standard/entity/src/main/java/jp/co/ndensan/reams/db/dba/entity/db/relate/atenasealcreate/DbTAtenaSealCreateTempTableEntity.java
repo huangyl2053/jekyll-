@@ -68,5 +68,9 @@ public class DbTAtenaSealCreateTempTableEntity extends DbTableEntityBase<DbTAten
     private RString hihokenshaNo;
     @TempTableColumnOrder(23)
     private RString seibetsuCode;
+    @TempTableColumnOrder(24)
+    private RString choikiCode;
+    @TempTableColumnOrder(25)
+    private RString seinengappiYMD;
 
 }

@@ -54,7 +54,12 @@ public class NinteiChosaDataOutputHandler {
     public void load() {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
         div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("SimpleInputMode"));
+        div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
+        div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("InputMode"),
+                div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue(),
+                RString.EMPTY,
+                div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue(),
+                RString.EMPTY);
         div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
