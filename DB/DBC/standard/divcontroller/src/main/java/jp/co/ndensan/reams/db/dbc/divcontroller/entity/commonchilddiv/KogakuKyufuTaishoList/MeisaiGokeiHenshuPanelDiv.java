@@ -4,16 +4,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * 画面設計_DBCKD00006_高額給付対象一覧共有子Div
@@ -21,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBC-2020-030 quxiaodong
  */
 public class MeisaiGokeiHenshuPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,6 +43,12 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     private TextBoxNum txtSanteiKijunGaku;
     @JsonProperty("txtSiharaiZumiGaku")
     private TextBoxNum txtSiharaiZumiGaku;
+    @JsonProperty("txtKogakuShikyuGaku")
+    private TextBoxNum txtKogakuShikyuGaku;
+    @JsonProperty("txtSetaiSyuyakuBango")
+    private TextBox txtSetaiSyuyakuBango;
+    @JsonProperty("rdbKogakuJidoSyokanTaisyo")
+    private RadioButton rdbKogakuJidoSyokanTaisyo;
     @JsonProperty("lin1")
     private HorizontalLine lin1;
     @JsonProperty("rdbTsukiOkure")
@@ -274,6 +272,60 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     @JsonProperty("txtSiharaiZumiGaku")
     public void setTxtSiharaiZumiGaku(TextBoxNum txtSiharaiZumiGaku) {
         this.txtSiharaiZumiGaku = txtSiharaiZumiGaku;
+    }
+
+    /*
+     * gettxtKogakuShikyuGaku
+     * @return txtKogakuShikyuGaku
+     */
+    @JsonProperty("txtKogakuShikyuGaku")
+    public TextBoxNum getTxtKogakuShikyuGaku() {
+        return txtKogakuShikyuGaku;
+    }
+
+    /*
+     * settxtKogakuShikyuGaku
+     * @param txtKogakuShikyuGaku txtKogakuShikyuGaku
+     */
+    @JsonProperty("txtKogakuShikyuGaku")
+    public void setTxtKogakuShikyuGaku(TextBoxNum txtKogakuShikyuGaku) {
+        this.txtKogakuShikyuGaku = txtKogakuShikyuGaku;
+    }
+
+    /*
+     * gettxtSetaiSyuyakuBango
+     * @return txtSetaiSyuyakuBango
+     */
+    @JsonProperty("txtSetaiSyuyakuBango")
+    public TextBox getTxtSetaiSyuyakuBango() {
+        return txtSetaiSyuyakuBango;
+    }
+
+    /*
+     * settxtSetaiSyuyakuBango
+     * @param txtSetaiSyuyakuBango txtSetaiSyuyakuBango
+     */
+    @JsonProperty("txtSetaiSyuyakuBango")
+    public void setTxtSetaiSyuyakuBango(TextBox txtSetaiSyuyakuBango) {
+        this.txtSetaiSyuyakuBango = txtSetaiSyuyakuBango;
+    }
+
+    /*
+     * getrdbKogakuJidoSyokanTaisyo
+     * @return rdbKogakuJidoSyokanTaisyo
+     */
+    @JsonProperty("rdbKogakuJidoSyokanTaisyo")
+    public RadioButton getRdbKogakuJidoSyokanTaisyo() {
+        return rdbKogakuJidoSyokanTaisyo;
+    }
+
+    /*
+     * setrdbKogakuJidoSyokanTaisyo
+     * @param rdbKogakuJidoSyokanTaisyo rdbKogakuJidoSyokanTaisyo
+     */
+    @JsonProperty("rdbKogakuJidoSyokanTaisyo")
+    public void setRdbKogakuJidoSyokanTaisyo(RadioButton rdbKogakuJidoSyokanTaisyo) {
+        this.rdbKogakuJidoSyokanTaisyo = rdbKogakuJidoSyokanTaisyo;
     }
 
     /*

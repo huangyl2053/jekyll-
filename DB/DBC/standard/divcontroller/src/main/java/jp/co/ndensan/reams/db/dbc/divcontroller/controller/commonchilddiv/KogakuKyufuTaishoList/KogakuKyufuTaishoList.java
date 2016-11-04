@@ -153,7 +153,19 @@ public class KogakuKyufuTaishoList {
     }
 
     /**
-     * 老齢福祉年金の取消ボタン
+     * 明細合計区分ボタン
+     *
+     * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbMisaiGkeiKbun(
+            KogakuKyufuTaishoListDiv div) {
+        getHandler(div).set明細合計区分制御();
+        return createResponse(div);
+    }
+
+    /**
+     * 老齢福祉年金ボタン
      *
      * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
      * @return ResponseData
@@ -167,7 +179,7 @@ public class KogakuKyufuTaishoList {
     }
 
     /**
-     * 利用者負担第２段階の取消ボタン
+     * 利用者負担第２段階ボタン
      *
      * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
      * @return ResponseData
@@ -181,7 +193,7 @@ public class KogakuKyufuTaishoList {
     }
 
     /**
-     * 激変緩和区分の取消ボタン
+     * 激変緩和区分ボタン
      *
      * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
      * @return ResponseData
