@@ -131,7 +131,7 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        if (parameter.get課税判定等基準日() != null || !parameter.get課税判定等基準日().isEmpty()) {
+        if (parameter.get課税判定等基準日() != null && !parameter.get課税判定等基準日().isEmpty()) {
             key.set基準日(parameter.get課税判定等基準日());
         }
 
