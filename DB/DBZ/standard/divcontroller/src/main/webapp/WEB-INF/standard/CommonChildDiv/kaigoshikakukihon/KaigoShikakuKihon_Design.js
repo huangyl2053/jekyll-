@@ -4,9 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_BeforeOpenDialog = function () {
-                return "onClick_BeforeOpenDialog";
-            };
             return Events;
         })();
         KaigoShikakuKihon.Events = Events;
@@ -67,12 +64,12 @@ var DBZ;
                 return new UZA.TextBoxDate(this.convFiledName("txtNinteiShuryoYmd"));
             };
 
-            Controls.prototype.btnNinteiRireki = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnNinteiRireki"));
-            };
-
             Controls.prototype.btnHihoRireki = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnHihoRireki"));
+            };
+
+            Controls.prototype.btnNinteiRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnNinteiRireki"));
             };
             return Controls;
         })();
