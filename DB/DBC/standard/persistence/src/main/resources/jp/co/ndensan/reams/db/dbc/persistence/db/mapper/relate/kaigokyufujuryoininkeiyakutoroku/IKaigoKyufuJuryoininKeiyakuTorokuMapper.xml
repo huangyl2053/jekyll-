@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBC-2130-020 cuilin -->
+<!-- @reamsid_L DBC-2130-050 cuilin -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufujuryoininkeiyakutoroku.IKaigoKyufuJuryoininKeiyakuTorokuMapper">
  
     <resultMap id="resultMap_HihokenshaJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufujuryoininkeiyakutoroku.HihokenshaJohoEntity" autoMapping="true">
