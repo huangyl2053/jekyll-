@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
@@ -18,10 +17,8 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGeng
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001Div;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.dgShinseiList_Row;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler.RiyoshaFutangakuGengakuRowComparator;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenManager;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
@@ -62,7 +59,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenService;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  *
@@ -92,9 +88,6 @@ public class DBD1030001Handler {
     private static final RString NAME_被保険者番号 = new RString("被保険者番号");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
-    private static final RString 追加 = new RString("追加");
-    private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
     private static final Decimal DECIMAL_25 = new Decimal("25.0");
     private static final Decimal DECIMAL_100 = new Decimal("100");
 
@@ -731,73 +724,24 @@ public class DBD1030001Handler {
         ShoKisaiHokenshaNo 証記載保険者番号;
         RString 履歴番号;
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList;
-        EntityDataState state;
-        RString 決定区分 = get決定区分(get決定区分From画面());
+        RString 決定区分;
         if (null == 編集情報) {
             証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
             履歴番号 = RString.EMPTY;
-            state = EntityDataState.Added;
+            決定区分 = RString.EMPTY;
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報
                     = get社会福祉法人等利用者負担軽減申請の情報From画面(true, 0, 決定区分, 証記載保険者番号, 追加履歴番号, 被保険者番号);
             new情報と状態ArrayList = 追加社会福祉法人等利用者負担軽減申請の情報(画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList);
         } else {
             証記載保険者番号 = 編集情報.get社会福祉法人等利用者負担軽減情報().get証記載保険者番号();
             履歴番号 = new RString(編集情報.get社会福祉法人等利用者負担軽減情報().get履歴番号());
-            state = EntityDataState.Modified;
+            決定区分 = 編集情報.get社会福祉法人等利用者負担軽減情報().get決定区分();
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報
                     = get社会福祉法人等利用者負担軽減申請の情報From画面(
                             false, 編集情報.get社会福祉法人等利用者負担軽減情報().get履歴番号(), 決定区分, 証記載保険者番号, 追加履歴番号, 被保険者番号);
             new情報と状態ArrayList = 修正社会福祉法人等利用者負担軽減申請の情報(
                     画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList, 編集情報, 最初情報);
         }
-//
-//        List<dgShinseiList_Row> pageList = div.getDgShinseiList().getDataSource();
-//        boolean is新規 = true;
-//        RString 状態 = RString.EMPTY;
-//        if (EntityDataState.Added == state) {
-//            状態 = 追加;
-//        } else if (EntityDataState.Modified == state) {
-//            状態 = 修正;
-//        }
-//        for (dgShinseiList_Row row : pageList) {
-//            if (row.getHiddenShoKisaiHokenshaNo().equals(証記載保険者番号.getColumnValue())
-//                    && row.getHiddenShinseiRirekiNo().equals(履歴番号)) {
-//                row.getTxtShinseiYMD().setValue(div.getTxtShinseiYMD().getValue());
-//                row.setShinseiRiyu(div.getTxtShinseiRiyu().getValue());
-//                row.setJotai(状態);
-//                row.setKetteiKubun(決定区分);
-//                row.getTxtKetteiYMD().setValue(div.getTxtKetteiYMD().getValue());
-//                row.getTxtTekiyoYMD().setValue(div.getTxtTekiyoYMD().getValue());
-//                row.getTxtYukoKigenYMD().setValue(div.getTxtYukoKigenYMD().getValue());
-//                row.setKeigenJiyu(div.getDdlKeigenJiyu().getSelectedKey());
-//                if (div.getTxtKeigenRitsuBunshi().getValue() != null && div.getTxtKeigenRitsuBunbo().getValue() != null) {
-//                    RString 軽減率 = div.getTxtKeigenRitsuBunshi().getText().concat("/").concat(div.getTxtKeigenRitsuBunbo().getText());
-//                    row.setKeigenRitsu(軽減率);
-//                }
-//                row.setChkTokureisochiTaishosha(is特例措置対象者チェックオン());
-//                if (is居宅サービス限定チェックオン()) {
-//                    row.setKyotakuServiceGentei(制限あり);
-//                } else {
-//                    row.setKyotakuServiceGentei(RString.EMPTY);
-//                }
-//                if (is居住費_食費限定チェックオン()) {
-//                    row.setKojuhiShokuhiGentei(制限あり);
-//                } else {
-//                    row.setKojuhiShokuhiGentei(RString.EMPTY);
-//                }
-//                if (is旧措置ユニット型個室限定チェックオン()) {
-//                    row.setKyusochiUnitGataKoshitsuGentei(制限あり);
-//                } else {
-//                    row.setKyusochiUnitGataKoshitsuGentei(RString.EMPTY);
-//                }
-//                row.setKakuninNo(div.getTxtKakuninNo().getValue());
-//                row.setShoninShinaiRiyu(div.getTxtHiShoninRiyu().getValue());
-//                is新規 = false;
-//            }
-//        }
-//        List<dgShinseiList_Row> newRowList = new ArrayList<>(pageList);
-//        Collections.sort(newRowList, new ShakaiFukushiHojinRiyoshaFutanKeigenRowComparator());
-//        div.getDgShinseiList().setDataSource(newRowList);
 
         情報エリアクリア();
         一覧パネルをClose状態表示か(false);
