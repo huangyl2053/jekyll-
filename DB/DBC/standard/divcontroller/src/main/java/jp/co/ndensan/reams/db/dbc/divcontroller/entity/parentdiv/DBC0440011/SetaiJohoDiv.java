@@ -6,16 +6,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.IKogakuKyufuTaishoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KogakuKyufuTaishoListPanel のクラスファイル
+ * SetaiJoho のクラスファイル
  *
  * @reamsid_L DBC-2020-040 quxiaodong
  */
-public class KogakuKyufuTaishoListPanelDiv extends Panel {
+public class SetaiJohoDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
@@ -24,8 +24,8 @@ public class KogakuKyufuTaishoListPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKogakuKyufuTaishoList")
-    private KogakuKyufuTaishoListDiv ccdKogakuKyufuTaishoList;
+    @JsonProperty("ccdSetaiShotokuIchiran")
+    private SetaiShotokuIchiranDiv ccdSetaiShotokuIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,12 +34,12 @@ public class KogakuKyufuTaishoListPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKogakuKyufuTaishoList
-     * @return ccdKogakuKyufuTaishoList
+     * getccdSetaiShotokuIchiran
+     * @return ccdSetaiShotokuIchiran
      */
-    @JsonProperty("ccdKogakuKyufuTaishoList")
-    public IKogakuKyufuTaishoListDiv getCcdKogakuKyufuTaishoList() {
-        return ccdKogakuKyufuTaishoList;
+    @JsonProperty("ccdSetaiShotokuIchiran")
+    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
+        return ccdSetaiShotokuIchiran;
     }
 
     // </editor-fold>

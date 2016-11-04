@@ -63,6 +63,13 @@ public interface IKogakuServicehiDetailDiv extends ICommonChildDivBaseProperties
     public KougakuSabisuhiShousaiNaiyouResult get画面初期化データ();
 
     /**
+     * 提供年月を取得します。
+     *
+     * @return RDate
+     */
+    public RDate get提供年月();
+
+    /**
      * 申請日を取得します。
      *
      * @return RDate

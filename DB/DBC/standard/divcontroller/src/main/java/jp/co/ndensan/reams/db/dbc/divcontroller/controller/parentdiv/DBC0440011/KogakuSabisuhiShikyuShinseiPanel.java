@@ -288,6 +288,18 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         }
     }
 
+    /**
+     * onStateTransition ボタンです。
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onStateTransition(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(true);
+        return ResponseData.of(div).respond();
+    }
+
     private ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> save対象者情報(
             KogakuSabisuhiShikyuShinseiPanelDiv div, RString 画面モード) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
@@ -410,6 +422,34 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnSerchResult(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0440011TransitionEventName.検索に戻る).respond();
+    }
+
+    /**
+     * 「世帯情報を表示する」ボタン
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnSetaiJohoHyoji(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(true);
+        div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(false);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        getHandler(div).initialize世帯所得一覧(識別コード);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「高額明細を表示する」ボタン
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnKogakuMeisaiHyoji(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(true);
+        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(false);
+        return ResponseData.of(div).respond();
     }
 
     /**
