@@ -81,9 +81,11 @@ public class NofugakuJohoCreate {
     public void set期別金額(NofugakuJohoResultEntity entity, NofugakuJohoTempEntity tempEntity) {
         if (ChoshuHohoKibetsu.特別徴収.getコード().equals(entity.get徴収方法())) {
             set特徴期期別金額(entity.get調定額(), entity.get期(), tempEntity);
+            tempEntity.setChoshuHouhou(ChoshuHohoKibetsu.特別徴収.getコード());
         }
         if (ChoshuHohoKibetsu.普通徴収.getコード().equals(entity.get徴収方法())) {
             set普徴期期別金額(entity.get調定額(), entity.get期(), tempEntity);
+            tempEntity.setChoshuHouhou(ChoshuHohoKibetsu.普通徴収.getコード());
         }
     }
 

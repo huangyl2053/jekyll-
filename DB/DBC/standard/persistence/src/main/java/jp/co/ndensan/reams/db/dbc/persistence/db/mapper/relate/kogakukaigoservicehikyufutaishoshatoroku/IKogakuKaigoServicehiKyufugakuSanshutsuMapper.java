@@ -630,4 +630,6 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      * @return List<KyufuJissekiChukanKogaku8Entity>
      */
     List<KyufuJissekiChukanKogaku8Entity> select給付実績中間事業高額一時の作成8();
+
+    void insert世帯員所得判定明細一時(TempSetaiinShotokuHanteiEntity entity);
 }
