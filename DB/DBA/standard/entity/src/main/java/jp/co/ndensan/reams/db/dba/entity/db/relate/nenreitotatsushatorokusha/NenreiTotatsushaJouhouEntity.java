@@ -51,6 +51,7 @@ public class NenreiTotatsushaJouhouEntity {
     private RString 異動情報データ4;
     private RString 異動情報データ5;
     private RString 異動情報データ6;
+    private RString 番地コード;
     private LasdecCode 市町村コード;
     private HihokenshaNo 被保険者番号;
     private ShikibetsuCode 識別コード;

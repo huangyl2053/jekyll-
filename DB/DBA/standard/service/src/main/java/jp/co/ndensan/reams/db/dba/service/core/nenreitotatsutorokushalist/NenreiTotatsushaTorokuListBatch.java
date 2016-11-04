@@ -84,7 +84,38 @@ public class NenreiTotatsushaTorokuListBatch {
             }
             tyouHyouListEntity.setリスト上_区分(リスト上_区分Builder.toRString());
             tyouHyouListEntity.setリスト下_区分(リスト下_区分Builder.toRString());
-
+            RString yubinNo = RString.EMPTY;
+            RString choikiCode = RString.EMPTY;
+            RString gyoseikuCode = RString.EMPTY;
+            RString chiku1 = RString.EMPTY;
+            RString chiku2 = RString.EMPTY;
+            RString chiku3 = RString.EMPTY;
+            RString shimei50onKana = RString.EMPTY;
+            RString seinengappiYMD = RString.EMPTY;
+            if (tyouHyouListEntity.getYubinNo() != null) {
+                yubinNo = tyouHyouListEntity.getYubinNo().value();
+            }
+            if (tyouHyouListEntity.getChoikiCode() != null) {
+                choikiCode = tyouHyouListEntity.getChoikiCode().value();
+            }
+            if (tyouHyouListEntity.getGyoseikuCode() != null) {
+                gyoseikuCode = tyouHyouListEntity.getGyoseikuCode().value();
+            }
+            if (tyouHyouListEntity.getChiku1() != null) {
+                chiku1 = tyouHyouListEntity.getChiku1().value();
+            }
+            if (tyouHyouListEntity.getChiku2() != null) {
+                chiku2 = tyouHyouListEntity.getChiku2().value();
+            }
+            if (tyouHyouListEntity.getChiku3() != null) {
+                chiku3 = tyouHyouListEntity.getChiku3().value();
+            }
+            if (tyouHyouListEntity.getShimei50onKana() != null) {
+                shimei50onKana = tyouHyouListEntity.getShimei50onKana().value();
+            }
+            if (tyouHyouListEntity.getSeinengappiYMD() != null) {
+                seinengappiYMD = tyouHyouListEntity.getSeinengappiYMD().wareki().toDateString();
+            }
             NenreitotatsuKakuninListItem nenreitotatsuKakuninListItem = new NenreitotatsuKakuninListItem(
                     tyouHyouListEntity.get印刷日時(),
                     tyouHyouListEntity.get対象情報タイトル(),
@@ -141,7 +172,17 @@ public class NenreiTotatsushaTorokuListBatch {
                     tyouHyouListEntity.getリスト下_区分(),
                     tyouHyouListEntity.getリスト下_異動情報4(),
                     tyouHyouListEntity.getリスト下_異動情報5(),
-                    tyouHyouListEntity.getリスト下_異動情報6());
+                    tyouHyouListEntity.getリスト下_異動情報6(),
+                    yubinNo,
+                    choikiCode,
+                    tyouHyouListEntity.getBanchiCode(),
+                    gyoseikuCode,
+                    chiku1,
+                    chiku2,
+                    chiku3,
+                    shimei50onKana,
+                    seinengappiYMD,
+                    tyouHyouListEntity.getGender());
             list.add(nenreitotatsuKakuninListItem);
         }
         return list;
@@ -258,6 +299,16 @@ public class NenreiTotatsushaTorokuListBatch {
         tyouHyouListEntity.setリスト下_異動情報4(nenreiTotatsushaJouhouEntity.get異動情報データ4());
         tyouHyouListEntity.setリスト下_異動情報5(nenreiTotatsushaJouhouEntity.get異動情報データ5());
         tyouHyouListEntity.setリスト下_異動情報6(nenreiTotatsushaJouhouEntity.get異動情報データ6());
+        tyouHyouListEntity.setYubinNo(nenreiTotatsushaJouhouEntity.getPsmEntity().getYubinNo());
+        tyouHyouListEntity.setChoikiCode(nenreiTotatsushaJouhouEntity.getPsmEntity().getChoikiCode());
+        tyouHyouListEntity.setBanchiCode(nenreiTotatsushaJouhouEntity.get番地コード());
+        tyouHyouListEntity.setGyoseikuCode(nenreiTotatsushaJouhouEntity.getPsmEntity().getGyoseikuCode());
+        tyouHyouListEntity.setChiku1(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode1());
+        tyouHyouListEntity.setChiku2(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode2());
+        tyouHyouListEntity.setChiku3(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode3());
+        tyouHyouListEntity.setShimei50onKana(nenreiTotatsushaJouhouEntity.getPsmEntity().getKanaShimei());
+        tyouHyouListEntity.setSeinengappiYMD(nenreiTotatsushaJouhouEntity.getPsmEntity().getSeinengappiYMD());
+        tyouHyouListEntity.setGender(nenreiTotatsushaJouhouEntity.getPsmEntity().getSeibetsuCode());
     }
 
     private static RString get印刷日時() {

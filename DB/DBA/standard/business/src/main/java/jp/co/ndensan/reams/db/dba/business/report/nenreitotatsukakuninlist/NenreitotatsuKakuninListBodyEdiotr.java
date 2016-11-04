@@ -78,6 +78,16 @@ class NenreitotatsuKakuninListBodyEdiotr implements INenreitotatsuKakuninListEdi
         source.kaishiTitle = item.getKaishiTitle();
         source.kaishiYmdTitle = item.getKaishiYmdTitle();
         source.kubunTitle = item.getKubunTitle();
+        source.yubinNo = item.getYubinNo();
+        source.choikiCode = item.getChoikiCode();
+        source.banchiCode = item.getBanchiCode();
+        source.gyoseikuCode = item.getGyoseikuCode();
+        source.chiku1 = item.getChiku1();
+        source.chiku2 = item.getChiku2();
+        source.chiku3 = item.getChiku3();
+        source.shimei50onKana = item.getShimei50onKana();
+        source.seinengappiYMD = item.getSeinengappiYMD();
+        source.gender = item.getGender();
         return source;
     }
 
