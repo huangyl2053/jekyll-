@@ -78,6 +78,9 @@ public class PrtTokuchoIdojohoIchiranhyoProcessPageBreak extends PageBreaker<Tok
         if (!flag && this.keys.contains(DBB200021_TokubetsuChoshuIdojohoIchiranEnum.年金番号.get項目ID())) {
             flag = !currentRecord.getSource().listUpper_2.equals(nextRecord.getSource().listUpper_2);
         }
+        if (!flag && this.keys.contains(DBB200021_TokubetsuChoshuIdojohoIchiranEnum.市町村コード.get項目ID())) {
+            flag = !currentRecord.getSource().shichosonCode.equals(nextRecord.getSource().shichosonCode);
+        }
         return flag;
     }
 
