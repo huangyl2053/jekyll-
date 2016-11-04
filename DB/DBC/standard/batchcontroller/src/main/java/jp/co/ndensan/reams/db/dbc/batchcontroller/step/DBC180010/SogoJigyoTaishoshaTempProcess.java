@@ -54,8 +54,6 @@ public class SogoJigyoTaishoshaTempProcess extends BatchProcessBase<SogoJigyoTai
             resultListEntity.setErrorKubun(RiyoshaFutanWaritaiHantei_ErrorKubun.総合事業対象者_被保険者台帳取得.getコード());
             resultListEntity.setHihokenshaNo(entity.getDbT3105SogoJigyoTaishosha_hihokenshaNo().value());
             tempResultListDbWriter.insert(resultListEntity);
-        } else {
-            tempDbWriter.insert(entity);
         }
         if (entity.getUaFt200FindShikibetsuTaisho_shikibetsuCode() == null) {
             resultListEntity.setErrorKubun(RiyoshaFutanWaritaiHantei_ErrorKubun.総合事業対象者_宛名取得.getコード());

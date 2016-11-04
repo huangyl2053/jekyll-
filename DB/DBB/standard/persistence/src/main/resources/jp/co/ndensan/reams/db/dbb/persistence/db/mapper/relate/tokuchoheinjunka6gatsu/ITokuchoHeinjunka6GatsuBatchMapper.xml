@@ -234,7 +234,7 @@
         FROM 
         rgdb."DbT2015KeisangoJoho" AS 計算後情報
         LEFT JOIN
-        rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
         ON
         計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
         AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
@@ -435,7 +435,7 @@
         対象外データTemp."fukaNendo" = 徴収方法Newest."fukaNendo"
         AND 対象外データTemp."hihokenshaNo" = 徴収方法Newest."hihokenshaNo"
         INNER JOIN
-        rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
         ON
         徴収方法Newest."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
         AND 徴収方法Newest."kariNenkinCode" = 年金特徴回付情報."nenkinCode"

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokaritsuchishoikkatsuhak
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteitsuchishohakko.TmpIdoFukaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 
 /**
  * 異動賦課情報一時テーブル
