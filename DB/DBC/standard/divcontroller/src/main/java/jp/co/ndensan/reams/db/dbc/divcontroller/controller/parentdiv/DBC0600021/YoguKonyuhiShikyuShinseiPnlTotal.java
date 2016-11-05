@@ -213,6 +213,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             償還払支給判定結果を取得する(div);
             ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue()));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.福祉償還払請求基本, null);
+            ViewStateHolder.put(ViewStateKeys.福祉償還払支給申請, null);
+            ViewStateHolder.put(ViewStateKeys.福祉償還払請求集計, null);
         }
         if (shshResult != null) {
             getHandler(div).償還払支給申請情報(shshResult);
