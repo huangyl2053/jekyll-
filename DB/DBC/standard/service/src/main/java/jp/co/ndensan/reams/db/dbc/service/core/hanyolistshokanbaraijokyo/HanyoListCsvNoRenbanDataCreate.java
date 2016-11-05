@@ -394,7 +394,7 @@ public class HanyoListCsvNoRenbanDataCreate {
             csvEntity.set完成年月日(dataToRString(entity.get請求住宅Entity().getJutakuKaishuKanseiYMD(), parameter));
             csvEntity.set改修事業者名(entity.get請求住宅Entity().getJutakuKaishuJigyoshaName());
             csvEntity.set住宅住所(entity.get請求住宅Entity().getJutakuKaishuJutakuAddress());
-            csvEntity.set購入金額(new RString(String.valueOf(entity.get請求住宅Entity().getKaishuKingaku())));
+            csvEntity.set改修金額(new RString(String.valueOf(entity.get請求住宅Entity().getKaishuKingaku())));
         }
     }
 
@@ -539,10 +539,18 @@ public class HanyoListCsvNoRenbanDataCreate {
         }
 
         if (entity.get直近異動事由コード() != null && !entity.get直近異動事由コード().isEmpty()) {
-            csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード().value()).get名称());
+            csvEntity.set受給直近事由(get受給直近事由(entity.get直近異動事由コード()));
         }
-        csvEntity.set受給直近事由(codeToRString(entity.get直近異動事由コード()));
 
+    }
+
+    private RString get受給直近事由(Code code) {
+        for (ChokkinIdoJiyuCode chokkinIdoJiyuCode : ChokkinIdoJiyuCode.values()) {
+            if (chokkinIdoJiyuCode.getコード().equals(code.getColumnValue())) {
+                return chokkinIdoJiyuCode.get名称();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private RString get受給みなし更新認定(RString みなし要介護区分コード) {
@@ -551,8 +559,8 @@ public class HanyoListCsvNoRenbanDataCreate {
         for (MinashiCode minashiCode : MinashiCode.values()) {
             minashiCodeList.add(minashiCode.getコード());
         }
-        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
-            受給みなし更新認定 = new RString("みなし");
+        if (minashiCodeList.contains(みなし要介護区分コード)) {
+            受給みなし更新認定 = MinashiCode.toValue(住特).get名称();
         }
         return 受給みなし更新認定;
     }
