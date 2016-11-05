@@ -562,11 +562,11 @@ public class JukyushaIdoRenrakuhyoHandler {
         } else {
             div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().setSelectedKey(受給者異動情報.get二次予防事業区分コード());
         }
-        if (受給者異動情報.get二次予防事業有効期間開始年月日() != null) {
+        if (受給者異動情報.get二次予防事業有効期間開始年月日() != null && !受給者異動情報.get二次予防事業有効期間開始年月日().isEmpty()) {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setFromValue(
                     new RDate(受給者異動情報.get二次予防事業有効期間開始年月日().toString()));
         }
-        if (受給者異動情報.get二次予防事業有効期間終了年月日() != null) {
+        if (受給者異動情報.get二次予防事業有効期間終了年月日() != null && !受給者異動情報.get二次予防事業有効期間終了年月日().isEmpty()) {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setToValue(
                     new RDate(受給者異動情報.get二次予防事業有効期間終了年月日().toString()));
         }
