@@ -583,22 +583,22 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         if (月割終了年月2 != null) {
             終了月2 = 月割終了年月2.getMonthValue();
         }
-        if (entity.get保険料算定段階1() != null && entity.get保険料算定段階2().length() >= NUM_2) {
+        if (entity.get保険料算定段階2() != null && entity.get保険料算定段階2().length() >= NUM_2) {
             RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);
-            if (!月割開始年月2.isEmpty() && !月割終了年月2.isEmpty() && !保険料算定段階2.isEmpty()) {
-                set月別取得段階(source, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
-            }
+            set月別取得段階(source, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
         }
     }
 
     private void set月別取得段階(HonsanteiKekkaIcihiranReportSource source, int 開始月, int 終了月,
             RString 保険料算定段階, RString 更正前後区分) {
-        for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) {
-            int currentMonth = (i - 1) % NUM_12 + 1;
-            if (更正前後区分_更正前.equals(更正前後区分)) {
-                set更正前_保険料算定段階(source, currentMonth, 保険料算定段階);
-            } else if (更正前後区分_更正後.equals(更正前後区分)) {
-                set更正後_保険料算定段階(source, currentMonth, 保険料算定段階);
+        if (!保険料算定段階.isEmpty()) {
+            for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) {
+                int currentMonth = (i - 1) % NUM_12 + 1;
+                if (更正前後区分_更正前.equals(更正前後区分)) {
+                    set更正前_保険料算定段階(source, currentMonth, 保険料算定段階);
+                } else if (更正前後区分_更正後.equals(更正前後区分)) {
+                    set更正後_保険料算定段階(source, currentMonth, 保険料算定段階);
+                }
             }
         }
     }

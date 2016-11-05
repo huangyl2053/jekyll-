@@ -26,11 +26,11 @@ public enum HonsanteiKekkaIcihiranOutPutOrder implements IReportItems {
     /**
      * 世帯コード
      */
-    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"setaiCode\"")),
+    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"dbT2015KeisangoJoho_setaiCode\"")),
     /**
      * 識別コード
      */
-    識別コード(new RString("0009"), new RString("識別コード"), new RString("\"shikibetsuCode\"")),
+    識別コード(new RString("0009"), new RString("識別コード"), new RString("\"dbT2015KeisangoJoho_shikibetsuCode\"")),
     /**
      * 氏名５０音カナ
      */
@@ -50,7 +50,7 @@ public enum HonsanteiKekkaIcihiranOutPutOrder implements IReportItems {
     /**
      * 通知書番号
      */
-    通知書番号(new RString("0202"), new RString("通知書番号"), new RString("\"tsuchishoNo\"")),
+    通知書番号(new RString("0202"), new RString("通知書番号"), new RString("\"dbT2015KeisangoJoho_tsuchishoNo\"")),
     /**
      * 徴収方法
      */
@@ -58,7 +58,7 @@ public enum HonsanteiKekkaIcihiranOutPutOrder implements IReportItems {
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"hihokenshaNo\""));
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"dbT2015KeisangoJoho_hihokenshaNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
