@@ -128,4 +128,29 @@
                #{code} 
             </foreach>);
     </select>
+    
+     <select id="getDbT7021JigyoHokokuTokeiDataEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuMybatisParamter" 
+            resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7021JigyoHokokuTokeiDataMapper.ResultMap_DbT7021JigyoHokokuTokeiDataEntity"
+            resultOrdered="true" fetchSize="500">
+        SELECT
+       <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7021JigyoHokokuTokeiDataMapper.allColumns_DbT7021JigyoHokokuTokeiData" />
+        FROM
+            rgdb."DbT7021JigyoHokokuTokeiData"
+       WHERE 
+            "DbT7021JigyoHokokuTokeiData"."hokokuYSeireki" = #{報告年}
+            AND
+            "DbT7021JigyoHokokuTokeiData"."hokokuM" = #{報告月}
+            AND
+            "DbT7021JigyoHokokuTokeiData"."shukeiTaishoYSeireki" = #{集計対象年}
+            AND
+            "DbT7021JigyoHokokuTokeiData"."shukeiTaishoM" = #{集計対象月}
+            AND
+            "DbT7021JigyoHokokuTokeiData"."toukeiTaishoKubun" = #{統計対象区分}
+            AND
+            "DbT7021JigyoHokokuTokeiData"."shichosonCode" = #{市町村コード}
+            AND
+            "DbT7021JigyoHokokuTokeiData"."hyoNo" = #{表番号}
+    </select>
+    
 </mapper>
