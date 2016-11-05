@@ -248,7 +248,13 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.setMode(計画追加モード);
         div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_新規登録);
         set認定申請中状況を活性制御(被保険者番号);
-        div.getRadTodokedeKubun().setSelectedKey(KEY_0);
+        if (null != div.getRireki().getDgKyotakuServiceIchiran() && div.getRireki().getDgKyotakuServiceIchiran().getDataSource().size() > 0) {
+            if (!自己作成.equals(div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(ZERO).getKeikakuSakuseiKubun())) {
+                div.getRadTodokedeKubun().setSelectedKey(KEY_1);
+            } else {
+                div.getRadTodokedeKubun().setSelectedKey(KEY_0);
+            }
+        }
         if (is事業者作成の場合()) {
             div.getRadKeikakuKubun().setVisible(false);
             div.getRadServiceShurui().setDataSource(getサービス種類DataSource());
@@ -274,7 +280,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.getTxtTodokedeshaTelNo().clearDomain();
         div.getDdlTodokedeshaKankeiKubun().setDataSource(get届出者関係区分DataSource());
         div.getServiceAddAndServicePlanCreate().setReadOnly(false);
-        div.getTxtTodokedeYM().setValue(RDate.getNowDate());
+        div.getTxtTodokedeYM().clearValue();
     }
 
     /**
@@ -546,7 +552,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             div.getRadKeikakuKubun().setDisplayNone(true);
             div.getTxtKeikakuTekiyoStartYMD().setValue(new RDate(
                     居宅給付計画事業者作成.get適用開始年月日().toString()));
-            if (居宅給付計画事業者作成.get適用終了年月日().isEmpty()) {
+            if (null == 居宅給付計画事業者作成.get適用終了年月日() || 居宅給付計画事業者作成.get適用終了年月日().isEmpty()) {
                 div.getTxtKeikakuTekiyoEndYMD().clearValue();
             } else {
                 div.getTxtKeikakuTekiyoEndYMD().setValue(new RDate(居宅給付計画事業者作成.get適用終了年月日().toString()));
@@ -565,7 +571,11 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 div.getRadKeikakuKubun().setSelectedKey(KEY_1);
             }
             div.getTxtKeikakuTekiyoStartYMD().setValue(new RDate(居宅給付計画自己作成.get適用開始年月日().toString()));
-            div.getTxtKeikakuTekiyoEndYMD().setValue(new RDate(居宅給付計画自己作成.get適用終了年月日().toString()));
+            if (null != 居宅給付計画自己作成.get適用終了年月日() && !居宅給付計画自己作成.get適用終了年月日().isEmpty()) {
+                div.getTxtKeikakuTekiyoEndYMD().setValue(new RDate(居宅給付計画自己作成.get適用終了年月日().toString()));
+            } else {
+                div.getTxtKeikakuTekiyoEndYMD().clearValue();
+            }
             div.setKeikakuTekiyoStartYM(居宅給付計画自己作成.get適用開始年月日().getYearMonth().toDateString());
             div.getRadKeikakuSakuseiKubun().setDataSource(get自己作成DataSource());
             div.getRadKeikakuSakuseiKubun().setSelectedKey(居宅給付計画自己作成.get作成区分コード());
@@ -795,6 +805,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
 
     private List<KeyValueDataSource> get届出者関係区分DataSource() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        KeyValueDataSource source = new KeyValueDataSource();
+        dataSourceList.add(source);
         for (TodokedeshaKankeiKBN 届出者関係区分 : TodokedeshaKankeiKBN.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource(
                     届出者関係区分.getコード(), 届出者関係区分.get名称());

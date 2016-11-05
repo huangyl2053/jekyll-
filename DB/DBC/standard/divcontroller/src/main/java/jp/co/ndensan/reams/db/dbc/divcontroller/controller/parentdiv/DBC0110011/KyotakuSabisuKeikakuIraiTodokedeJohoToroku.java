@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -76,6 +77,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             = new RString("「居宅サービス自己作成届出の登録が完了しました。」");
     private static final int NUM_1 = 1;
     private static final int NUM_10 = 10;
+    private static final RString 計画削除モード = new RString("delete");
+    private static final RString 計画修正モード = new RString("modify");
 
     /**
      * 画面の初期化メソッドです。
@@ -444,6 +447,18 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         if (質問チェックの結果 != null) {
             return 質問チェックの結果;
         }
+        if (計画削除モード.equals(div.getMode())) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+            }
+        } else {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+            }
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         KyotakuKeikakuTodokedeManager manager = KyotakuKeikakuTodokedeManager.createInstance();
         manager.saveByForDeletePhysical(居宅給付計画届出);
         AccessLogger.log(AccessLogType.更新, handler.toPersonalData(識別コード, 被保険者番号.getColumnValue()));
@@ -522,10 +537,17 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         } else {
             is項目が変更 = handler.is項目が変更(被保険者番号);
         }
-        if (is項目が変更 && !ResponseHolder.isReRequest()) {
+        if ((is項目が変更 && !ResponseHolder.isReRequest()) || (計画修正モード.equals(div.getMode()) && !ResponseHolder.isReRequest())) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
         if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTxtTodokedeYM().clearValue();
+            div.getTxtTodokedeshaShimei().clearDomain();
+            div.getTxtTodokedeshaShimeiKana().clearDomain();
+            div.getTxtTodokedeshaYubinNo().clearValue();
+            div.getTxtTodokedeshaJusho().clearValue();
+            div.getTxtTodokedeshaTelNo().clearDomain();
+            div.getDdlTodokedeshaKankeiKubun().getDataSource().clear();
             return ResponseData.of(div).setState(DBC0110011StateName.履歴一覧);
         }
         return ResponseData.of(div).respond();
