@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.SyokanbaraiketteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraikettejoho.SyokanbaraiketteJohoManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
@@ -114,7 +115,7 @@ public class ShokanbaraiketteiJohoHandler {
             div.getTxtZogentani().setValue(Decimal.ZERO);
         } else {
             支給区分 = 決定情報.getShikyuHushikyuKetteiKubun();
-            if (RString.isNullOrEmpty(支給区分)) {
+            if (RString.isNullOrEmpty(支給区分) || 差額登録フラグ) {
                 支給区分 = 支給区分_支給;
             }
             set決定情報(決定情報, 支給区分);
@@ -132,11 +133,13 @@ public class ShokanbaraiketteiJohoHandler {
         } else {
             div.getTxtKetebi().setDisabled(false);
         }
+        if (差額登録フラグ) {
+            div.getRdoShikyukubun().setDisabled(true);
+            div.getRdoShikyukubun().setSelectedKey(ShikyuFushikyuKubun.支給.getコード());
+        }
         if (モード_照会.equals(mode)) {
             div.getTxtKetebi().setDisabled(true);
             div.getTxtZogenriyu().setDisabled(true);
-            div.getTxtZogentani().setDisabled(true);
-            div.getTxtShiharaikingakugoke().setDisabled(true);
             div.getTxtFuSyikyuriyu1().setDisabled(true);
             div.getTxtFushikyuriyu2().setDisabled(true);
             div.getRdoShikyukubun().setDisabled(true);
@@ -218,8 +221,6 @@ public class ShokanbaraiketteiJohoHandler {
 
         if (支給区分_支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(false);
-            div.getTxtZogentani().setDisabled(false);
-            div.getTxtShiharaikingakugoke().setDisabled(false);
             div.getTxtFuSyikyuriyu1().setDisabled(true);
             div.getTxtFushikyuriyu2().setDisabled(true);
             if (決定情報 != null && 決定情報.getZougenRiyu() != null) {
@@ -237,8 +238,6 @@ public class ShokanbaraiketteiJohoHandler {
             }
         } else if (支給区分_不支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(true);
-            div.getTxtZogentani().setDisabled(true);
-            div.getTxtShiharaikingakugoke().setDisabled(true);
             div.getTxtFuSyikyuriyu1().setDisabled(false);
             div.getTxtFushikyuriyu2().setDisabled(false);
             if (決定情報 != null && 決定情報.getHushikyuRiyu() != null) {
@@ -324,8 +323,6 @@ public class ShokanbaraiketteiJohoHandler {
 
     private void setState(RString 支給区分) {
         div.getTxtZogenriyu().setDisabled(true);
-        div.getTxtZogentani().setDisabled(true);
-        div.getTxtShiharaikingakugoke().setDisabled(true);
         div.getTxtFuSyikyuriyu1().setDisabled(true);
         div.getTxtFushikyuriyu2().setDisabled(true);
         if (支給区分 == null) {
@@ -337,8 +334,6 @@ public class ShokanbaraiketteiJohoHandler {
             div.getTxtFushikyuriyu2().setValue(RString.EMPTY);
         } else if (支給区分_支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(false);
-            div.getTxtZogentani().setDisabled(false);
-            div.getTxtShiharaikingakugoke().setDisabled(false);
             div.getTxtFuSyikyuriyu1().setDisabled(true);
             div.getTxtFushikyuriyu2().setDisabled(true);
         } else {
