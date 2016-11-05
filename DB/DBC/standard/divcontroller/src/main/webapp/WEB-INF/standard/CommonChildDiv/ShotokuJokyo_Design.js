@@ -4,12 +4,12 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnClose = function () {
-                return "onClick_btnClose";
-            };
-
             Events.onClick_btnKakutei = function () {
                 return "onClick_btnKakutei";
+            };
+
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
             };
             return Events;
         })();
@@ -55,12 +55,12 @@ var DBC;
                 return new UZA.DataGrid(this.convFiledName("dgSteaiinShotoku"));
             };
 
-            Controls.prototype.btnClose = function () {
-                return new UZA.Button(this.convFiledName("btnClose"));
-            };
-
             Controls.prototype.btnKakutei = function () {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
             };
             return Controls;
         })();
