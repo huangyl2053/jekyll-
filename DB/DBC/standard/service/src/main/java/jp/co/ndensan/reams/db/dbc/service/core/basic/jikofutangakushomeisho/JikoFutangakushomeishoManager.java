@@ -110,7 +110,7 @@ public class JikoFutangakushomeishoManager {
         parameter.set申請状況区分(申請状況区分);
         parameter.set支給申請区分(支給申請区分);
         DbT3068KogakuGassanShinseishoEntity 対象者データ = mapper.get対象者データ(parameter);
-        if (対象者データ == null) {
+        if (対象者データ != null) {
             return new KogakuGassanShinseisho(対象者データ);
         } else {
             return null;
