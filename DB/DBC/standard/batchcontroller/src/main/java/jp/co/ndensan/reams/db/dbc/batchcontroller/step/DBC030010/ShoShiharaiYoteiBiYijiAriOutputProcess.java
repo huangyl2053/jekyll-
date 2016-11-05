@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
@@ -34,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -44,9 +47,13 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ShoShiharaiYoteiBiYijiAriOutputProcess extends BatchProcessBase<ShokanKetteiTsuchiShoShiharaiRelateEntity> {
 
     private static final RString 帳票取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.get帳票データ");
+            + "shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.get決定通知一覧表帳票データ");
     private static final RString FLAG_FALSE = new RString("0");
     List<ShokanKetteiTsuchiShoShiharai> 帳票データリスト = new ArrayList<>();
+    Map<RString, RString> 種類Map = new HashMap<RString, RString>();
+    private static final int ZERO = 0;
+    private static final int TEN = 10;
+    private static final RString カンマ = new RString(",");
     ShokanKetteiTsuchiShoSealerBatchParameter batchPram;
     @BatchWriter
     private BatchReportWriter<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> batchWrite;
@@ -75,9 +82,35 @@ public class ShoShiharaiYoteiBiYijiAriOutputProcess extends BatchProcessBase<Sho
 
     @Override
     protected void process(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
-        帳票データリスト.add(new ShokanKetteiTsuchiShoShiharai(entity));
+        ShokanKetteiTsuchiShoShiharai データ = new ShokanKetteiTsuchiShoShiharai(entity);
+        RString key = getJufukuKey(データ);
+        if (種類Map.containsKey(key)) {
+            種類Map.put(key, set種類(種類Map.get(key), データ.get種類()));
+        } else {
+            帳票データリスト.add(データ);
+            種類Map.put(key, データ.get種類());
+                    
+        }
     }
 
+    private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
+        RStringBuilder key = new RStringBuilder();
+        key.append(shiharai.get被保険者番号().value());
+        key.append(shiharai.get提供年月().wareki().toDateString());
+        key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
+        return key.toRString();
+    }
+    private RString set種類(RString kyufuShu, RString 種類) {
+        if (RString.isNullOrEmpty(kyufuShu)) {
+            return 種類;
+        }
+        RStringBuilder builder = new RStringBuilder(kyufuShu);
+        if (!RString.isNullOrEmpty(種類)) {
+            builder.append(カンマ);
+            builder.append(種類);
+        }
+        return builder.toRString();
+    }
     @Override
     protected void afterExecute() {
         if (帳票データリスト.isEmpty()) {
@@ -86,10 +119,10 @@ public class ShoShiharaiYoteiBiYijiAriOutputProcess extends BatchProcessBase<Sho
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> itemList;
         if (FLAG_FALSE.equals(batchPram.get受領委任者向け決定通知書フラグ())) {
             ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke ichiranhyo = new ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke();
-            itemList = ichiranhyo.getShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMukeData(帳票データリスト, batchPram, reportSourceWriter, null);
+            itemList = ichiranhyo.getShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMukeData(帳票データリスト, batchPram, reportSourceWriter, 種類Map);
         } else {
             ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch sbsfktb = new ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch();
-            itemList = sbsfktb.getShokanHaraiShikyuFushikyuKetteiTsuhchishoChohyoData(帳票データリスト, batchPram, reportSourceWriter, null);
+            itemList = sbsfktb.getShokanHaraiShikyuFushikyuKetteiTsuhchishoChohyoData(帳票データリスト, batchPram, reportSourceWriter, 種類Map);
         }
         ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report
                 = ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport.createFrom(itemList);
