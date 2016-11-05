@@ -213,7 +213,7 @@
                 AND 支払方法変更差止."johoBunruiKubun" = '1'
                 AND 支払方法変更差止."logicalDeletedFlag"  =  false
                 AND 支払方法変更差止."sashitomeKojoJotaiKubun" = '01'
-                AND (支払方法変更差止."sashitomeKojoNo" IS NOT NULL AND 支払方法変更差止."sashitomeKojoNo" != '')
+                AND (支払方法変更差止."sashitomeKojoNo" IS NULL OR 支払方法変更差止."sashitomeKojoNo" = '')
             </if>
             <if test="is1号償還決定登録者_差止中あり者のみの選択_1">
                 AND 支払方法変更."kanriKubun"  = '2'
