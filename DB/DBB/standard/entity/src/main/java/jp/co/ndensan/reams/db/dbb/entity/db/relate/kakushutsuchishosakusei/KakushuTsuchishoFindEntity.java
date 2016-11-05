@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 宛名、納組、納期、宛先、口座情報を取得するEntityクラスです。
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KakushuTsuchishoFindEntity implements Serializable {
 
+    private ShikibetsuCode 識別コード;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private UaFt250FindAtesakiEntity 宛先;
     private CaFt703FindNokumiEntity 納組;
