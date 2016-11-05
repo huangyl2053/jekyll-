@@ -125,6 +125,15 @@ public class ShokanbaraiketteiJohoHandler {
                 div.getTxtKetebi().setValue(new RDate(決定情報.getKetteiYMD().toString()));
             }
             div.getRdoShikyukubun().setSelectedKey(支給区分);
+            if (決定情報.getKetteiTsuchishoSakuseiYMD() != null) {
+                div.getTxtKetteiTsuchiSakuseiYMD().setValue(new RDate(決定情報.getKetteiTsuchishoSakuseiYMD().toString()));
+            }
+            if (決定情報.getKetteiTsuchiNo() != null && !RString.EMPTY.equals(決定情報.getKetteiTsuchiNo())) {
+                div.getTxtKetteiTsuchiNo().setValue(new Decimal(決定情報.getKetteiTsuchiNo().toString()));
+            }
+            if (決定情報.getFurikomiMeisaishoSakuseiYMD() != null) {
+                div.getTxtFurikomiMeisaiSakuseiYMD().setValue(new RDate(決定情報.getFurikomiMeisaishoSakuseiYMD().toString()));
+            }
         }
         if (差止控除区分_10.equals(差止控除区分) || モード_照会.equals(mode)) {
             setState(支給区分);

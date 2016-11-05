@@ -289,6 +289,9 @@ public class SyokanbaraiketteJohoManager {
         } else {
             entity.setShiharaiKingaku(0);
         }
+        entity.setKetteiTsuchishoSakuseiYMD(償還払支給判定結果Entity.getKetteiTsuchishoSakuseiYMD());
+        entity.setKetteiTsuchiNo(償還払支給判定結果Entity.getKetteiTsuchiNo());
+        entity.setFurikomiMeisaishoSakuseiYMD(償還払支給判定結果Entity.getFurikomiMeisaishoSakuseiYMD());
         DbT3053ShokanShukeiEntity 償還払請求集計Entity = 償還払請求集計Dac.select償還払請求集計(mybatisParameter);
 
         if (償還払請求集計Entity != null) {
