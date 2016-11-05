@@ -809,17 +809,20 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         } else {
             entity = entity.createBuilderForEdit().set審査方法区分(NUMB2).build();
         }
-        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseibi() != null) {
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseibi() != null
+                && div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseibi().getValue() != null) {
             entity = entity.createBuilderForEdit().set申請年月日(new FlexibleDate(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().
                     getTxtShinseibi().getValue().toString())).build();
         }
-        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtUkechikebi() != null) {
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtUkechikebi() != null
+                && div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtUkechikebi().getValue() != null) {
             entity = entity.createBuilderForEdit().set受付年月日(new FlexibleDate(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().
                     getPnlShinsesyaJoho().getTxtUkechikebi().getValue().toString())).build();
         }
-        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD() != null) {
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD() != null
+                && div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD().getValue() != null) {
             entity = entity.createBuilderForEdit().set領収年月日(new FlexibleDate(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().
                     getPnlShinsesyaJoho().getTxtRyosyuYMD().getValue().toString())).build();
