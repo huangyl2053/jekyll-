@@ -540,9 +540,9 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 list.add(滞納期間.concat(new RString(parameter.get受給申請中者の滞納期間())).concat(ヵ月経過));
             }
 
-            if (選択あり.equals(parameter.get受給認定申請中者())) {
+            if (選択あり.equals(parameter.get受給支給決定日抽出())) {
                 list.add(償還支給決定日抽出);
-                list.add(対象期間.concat(format日期(parameter.get受給認定日抽出の開始()))
+                list.add(対象期間.concat(format日期(parameter.get受給支給決定日抽出の開始()))
                         .concat(カラ).concat(format日期(parameter.get受給支給決定日抽出の終了())));
                 list.add(滞納期間.concat(new RString(parameter.get受給支給決定日抽出の滞納期間())).concat(ヵ月経過));
             }
