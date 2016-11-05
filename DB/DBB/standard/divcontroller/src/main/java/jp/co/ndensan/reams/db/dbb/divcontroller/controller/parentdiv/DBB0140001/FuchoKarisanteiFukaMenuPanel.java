@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class FuchoKarisanteiFukaMenuPanel {
 
     private static final RString 普徴仮算定賦課メニュー = new RString("DBBMN34001");
+    private static final RString 特徴仮算定賦課 = new RString("普徴仮算定賦課");
+    private static final RString 通知書一括発行 = new RString("普徴仮算定通知書作成");
 
     /**
      * 普徴仮算定賦課のonLoad事件です。
@@ -43,9 +45,11 @@ public class FuchoKarisanteiFukaMenuPanel {
         handler.load帳票作成個別情報(システム日時);
         ViewStateHolder.put(ViewStateKeys.実行フラグ, is非活性);
         if (普徴仮算定賦課メニュー.equals(メニューID)) {
-            return ResponseData.of(div).setState(DBB0140001StateName.普徴仮算定賦課);
+            return ResponseData.of(ResponseData.of(div).setState(
+                    DBB0140001StateName.普徴仮算定賦課).data).rootTitle(特徴仮算定賦課).respond();
         } else {
-            return ResponseData.of(div).setState(DBB0140001StateName.普徴仮算定通知書一括発行);
+            return ResponseData.of(ResponseData.of(div).setState(
+                    DBB0140001StateName.普徴仮算定通知書一括発行).data).rootTitle(通知書一括発行).respond();
         }
     }
 

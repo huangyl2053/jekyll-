@@ -4,9 +4,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0150001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.OutputChohyoIchiranDiv;
@@ -14,13 +14,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KarisanteiIdoFukaChohyoHakko のクラスファイル
- *
- * @reamsid_L DBB-0890-010 wangkanglei
+ * KarisanteiIdoFukaChohyoHakko のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -74,7 +73,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblTokuKaishiTsuchi(Label lblTokuKaishiTsuchi) {
+    public void  setLblTokuKaishiTsuchi(Label lblTokuKaishiTsuchi) {
         this.getKariSanteiTsuchiKobetsuJoho().setLblTokuKaishiTsuchi(lblTokuKaishiTsuchi);
     }
 
@@ -84,7 +83,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTokuKaishiTsuchiHakkoYMD(TextBoxDate txtTokuKaishiTsuchiHakkoYMD) {
+    public void  setTxtTokuKaishiTsuchiHakkoYMD(TextBoxDate txtTokuKaishiTsuchiHakkoYMD) {
         this.getKariSanteiTsuchiKobetsuJoho().setTxtTokuKaishiTsuchiHakkoYMD(txtTokuKaishiTsuchiHakkoYMD);
     }
 
@@ -94,7 +93,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblKariHenkoTsuchi(Label lblKariHenkoTsuchi) {
+    public void  setLblKariHenkoTsuchi(Label lblKariHenkoTsuchi) {
         this.getKariSanteiTsuchiKobetsuJoho().setLblKariHenkoTsuchi(lblKariHenkoTsuchi);
     }
 
@@ -104,7 +103,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKariHenkoTsuchiHakkoYMD(TextBoxDate txtKariHenkoTsuchiHakkoYMD) {
+    public void  setTxtKariHenkoTsuchiHakkoYMD(TextBoxDate txtKariHenkoTsuchiHakkoYMD) {
         this.getKariSanteiTsuchiKobetsuJoho().setTxtKariHenkoTsuchiHakkoYMD(txtKariHenkoTsuchiHakkoYMD);
     }
 
@@ -114,7 +113,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblNotsu(Label lblNotsu) {
+    public void  setLblNotsu(Label lblNotsu) {
         this.getKariSanteiTsuchiKobetsuJoho().setLblNotsu(lblNotsu);
     }
 
@@ -124,7 +123,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNotsuHakkoYMD(TextBoxDate txtNotsuHakkoYMD) {
+    public void  setTxtNotsuHakkoYMD(TextBoxDate txtNotsuHakkoYMD) {
         this.getKariSanteiTsuchiKobetsuJoho().setTxtNotsuHakkoYMD(txtNotsuHakkoYMD);
     }
 
@@ -134,7 +133,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNotsuShutsuryokuKi(TextBox txtNotsuShutsuryokuKi) {
+    public void  setTxtNotsuShutsuryokuKi(TextBox txtNotsuShutsuryokuKi) {
         this.getKariSanteiTsuchiKobetsuJoho().setTxtNotsuShutsuryokuKi(txtNotsuShutsuryokuKi);
     }
 
@@ -144,7 +143,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlNotsuShuturyokuki(DropDownList ddlNotsuShuturyokuki) {
+    public void  setDdlNotsuShuturyokuki(DropDownList ddlNotsuShuturyokuki) {
         this.getKariSanteiTsuchiKobetsuJoho().setDdlNotsuShuturyokuki(ddlNotsuShuturyokuki);
     }
 
@@ -154,7 +153,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkNotsuTaishosha(CheckBoxList chkNotsuTaishosha) {
+    public void  setChkNotsuTaishosha(CheckBoxList chkNotsuTaishosha) {
         this.getKariSanteiTsuchiKobetsuJoho().setChkNotsuTaishosha(chkNotsuTaishosha);
     }
 
@@ -164,7 +163,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadNotsuSeikatsuHogo(RadioButton radNotsuSeikatsuHogo) {
+    public void  setRadNotsuSeikatsuHogo(RadioButton radNotsuSeikatsuHogo) {
         this.getKariSanteiTsuchiKobetsuJoho().setRadNotsuSeikatsuHogo(radNotsuSeikatsuHogo);
     }
 
@@ -174,7 +173,7 @@ public class KarisanteiIdoFukaChohyoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadNotsuYamawake(RadioButton radNotsuYamawake) {
+    public void  setRadNotsuYamawake(RadioButton radNotsuYamawake) {
         this.getKariSanteiTsuchiKobetsuJoho().setRadNotsuYamawake(radNotsuYamawake);
     }
 

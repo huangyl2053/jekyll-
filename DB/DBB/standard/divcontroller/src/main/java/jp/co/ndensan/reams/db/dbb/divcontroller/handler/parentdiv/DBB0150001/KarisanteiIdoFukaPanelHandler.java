@@ -212,7 +212,7 @@ public class KarisanteiIdoFukaPanelHandler {
                 row = new dgHokenryoDankai_Row();
                 row.setHokenryoDankai(保険料段階.get表記());
                 if (保険料段階.get保険料率() != null) {
-                    row.setHokenryoRitsu(new RString(保険料段階.get保険料率().toString()));
+                    row.getHokenryoRitsu().setValue(保険料段階.get保険料率());
                 }
                 rowList.add(row);
             }
