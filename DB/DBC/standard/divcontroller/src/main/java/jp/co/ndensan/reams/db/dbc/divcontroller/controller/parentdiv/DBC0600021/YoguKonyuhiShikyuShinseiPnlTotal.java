@@ -311,6 +311,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      * @return ResponseData
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onFocusout(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue() == null) {
+            return createResponse(div);
+        }
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.
                 getYoguKonyuhiShikyuShinseiContentsPanel().
