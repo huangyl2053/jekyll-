@@ -96,7 +96,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IShoka
         source.seirino = item.getSeirino();
         source.tsuchino = item.getTsuchino();
         source.remban = item.getRemban();
-        if (!item.get定型文文字サイズ().isEmpty()) {
+        if (item.get定型文文字サイズ() != null && !item.get定型文文字サイズ().isEmpty()) {
             set通知書データ(source);
         } else {
             source.tsuchibun2 = item.getTsuchibun２();

@@ -8,6 +8,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,6 +40,24 @@ public class ShokanKetteiTsuchiShoShiharai {
      */
     public ShokanKetteiTsuchiShoShiharai(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
         this.entity = entity;
+    }
+
+    /**
+     * 宛名情報を取得します。
+     *
+     * @return 宛名情報
+     */
+    public IShikibetsuTaisho get宛名情報() {
+        return ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
+    }
+
+    /**
+     * 宛先情報を取得します。
+     *
+     * @return 宛先情報
+     */
+    public IAtesaki get宛先情報() {
+        return AtesakiFactory.createInstance(entity.get宛先Entity());
     }
 
     /**
@@ -350,7 +372,7 @@ public class ShokanKetteiTsuchiShoShiharai {
      * @return 町域コード
      */
     public ChoikiCode get町域コード() {
-        return entity.getChoikiCode();
+        return entity.get宛名Entity().getChoikiCode();
     }
 
     /**
@@ -359,7 +381,7 @@ public class ShokanKetteiTsuchiShoShiharai {
      * @return 行政区コード
      */
     public GyoseikuCode get行政区コード() {
-        return entity.getGyoseikuCode();
+        return entity.get宛名Entity().getGyoseikuCode();
     }
 
     /**
@@ -368,7 +390,7 @@ public class ShokanKetteiTsuchiShoShiharai {
      * @return 氏名５０音カナ
      */
     public AtenaKanaMeisho get氏名５０音カナ() {
-        return entity.getKanaMeisho();
+        return entity.get宛名Entity().getKanaMeisho();
     }
 
     /**
@@ -377,7 +399,7 @@ public class ShokanKetteiTsuchiShoShiharai {
      * @return 市町村コード
      */
     public LasdecCode get市町村コード() {
-        return entity.getGenLasdecCode();
+        return entity.get宛名Entity().getGenLasdecCode();
     }
 
     /**

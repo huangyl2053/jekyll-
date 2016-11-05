@@ -213,6 +213,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             償還払支給判定結果を取得する(div);
             ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue()));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.福祉償還払請求基本, null);
+            ViewStateHolder.put(ViewStateKeys.福祉償還払支給申請, null);
+            ViewStateHolder.put(ViewStateKeys.福祉償還払請求集計, null);
         }
         if (shshResult != null) {
             getHandler(div).償還払支給申請情報(shshResult);
@@ -307,6 +311,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      * @return ResponseData
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onFocusout(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue() == null) {
+            return createResponse(div);
+        }
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.
                 getYoguKonyuhiShikyuShinseiContentsPanel().
@@ -445,6 +452,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         getHandler(div).set福祉用具購入費明細();
         ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード削除);
+        getHandler(div).readOnly福祉用具購入費明細(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().setDisabled(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnModifyDetail().setDisabled(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getBtnClear().setDisabled(false);

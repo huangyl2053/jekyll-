@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishu.JutakukaishuShinseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.Han
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -24,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
@@ -366,7 +369,13 @@ public class HanyoListCsvDataCreate {
         if (entity.get福祉用具Entity() != null) {
             csvEntity.set購入年月日(dataToRString(entity.get福祉用具Entity().getFukushiYoguHanbaiYMD(), parameter));
             csvEntity.set商品名(entity.get福祉用具Entity().getFukushiYoguShohinName());
-            csvEntity.set種目名(entity.get福祉用具Entity().getFukushiYoguShumokuCode());
+            RString 福祉用具種目 = RString.EMPTY;
+            RString 福祉用具種目コード = entity.get福祉用具Entity().getFukushiYoguShumokuCode();
+            if (福祉用具種目コード != null && !福祉用具種目コード.isEmpty()) {
+                福祉用具種目 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.福祉用具購入費の種目.getコード(),
+                        new Code(福祉用具種目コード), FlexibleDate.getNowDate());
+            }
+            csvEntity.set種目名(福祉用具種目);
             csvEntity.set製造事業者名(entity.get福祉用具Entity().getFukushiYoguSeizoJigyoshaName());
             csvEntity.set販売事業者名(entity.get福祉用具Entity().getFukushiYoguHanbaiJigyoshaName());
             csvEntity.set購入金額(new RString(String.valueOf(entity.get福祉用具Entity().getKounyuKingaku())));
@@ -382,7 +391,7 @@ public class HanyoListCsvDataCreate {
             csvEntity.set完成年月日(dataToRString(entity.get請求住宅Entity().getJutakuKaishuKanseiYMD(), parameter));
             csvEntity.set改修事業者名(entity.get請求住宅Entity().getJutakuKaishuJigyoshaName());
             csvEntity.set住宅住所(entity.get請求住宅Entity().getJutakuKaishuJutakuAddress());
-            csvEntity.set購入金額(new RString(String.valueOf(entity.get請求住宅Entity().getKaishuKingaku())));
+            csvEntity.set改修金額(new RString(String.valueOf(entity.get請求住宅Entity().getKaishuKingaku())));
         }
     }
 
@@ -508,9 +517,33 @@ public class HanyoListCsvDataCreate {
         csvEntity.set受給認定終了日(dataToRString(entity.get認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.get受給認定日(), parameter));
         csvEntity.set受給旧措置(entity.get旧措置者フラグ());
-        csvEntity.set受給みなし更新認定(codeToRString(entity.getみなし要介護区分コード()));
-        csvEntity.set受給直近事由(codeToRString(entity.get直近異動事由コード()));
 
+        if (null != entity.getみなし要介護区分コード() && !entity.getみなし要介護区分コード().isEmpty()) {
+            csvEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード().getColumnValue()));
+        }
+        csvEntity.set受給直近事由(get受給直近事由(entity.get直近異動事由コード()));
+
+    }
+
+    private RString get受給みなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
+        if (minashiCodeList.contains(みなし要介護区分コード)) {
+            受給みなし更新認定 = MinashiCode.toValue(みなし要介護区分コード).get名称();
+        }
+        return 受給みなし更新認定;
+    }
+
+    private RString get受給直近事由(Code code) {
+        for (ChokkinIdoJiyuCode chokkinIdoJiyuCode : ChokkinIdoJiyuCode.values()) {
+            if (chokkinIdoJiyuCode.getコード().equals(code.getColumnValue())) {
+                return chokkinIdoJiyuCode.get名称();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private void set口座情報(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
@@ -583,7 +616,10 @@ public class HanyoListCsvDataCreate {
         if (RString.isNullOrEmpty(entity.get様式番号s())) {
             return RString.EMPTY;
         }
-        List<RString> lst様式番号 = new ArrayList<>(new LinkedHashSet<>(entity.get様式番号s().split(",")));
+        List<RString> lst様式番号 = new ArrayList<>();
+        for (RString yosikiNo : new LinkedHashSet<>(entity.get様式番号s().split(","))) {
+            lst様式番号.add(KyufuJissekiYoshikiKubun.toValue(yosikiNo).get様式番号());
+        }
 
         RStringBuilder builder = new RStringBuilder();
 
