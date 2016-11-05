@@ -1767,15 +1767,11 @@
     <!--計算後情報と宛名識別対象PSM、口座情報取得PSMをもとに取得した情報-->
     <select resultOrdered="true" id="select本算定計算後賦課情報" resultMap="resultMap_HonsenteiKeisangojohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.HonsenteiKeisangojohoParameter" fetchSize="500">
+        WITH master AS (
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho"/>,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         koza.*
         FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','',''
-        ,'','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','',''
-        ,'','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }' ) AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
         LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode"="DbT2015KeisangoJoho"."shikibetsuCode"
         LEFT JOIN "ShuturyokuTemp" AS "ShuturyokuTemp"
@@ -1784,7 +1780,20 @@
         "DbT2015KeisangoJoho"."choteiNendo"=#{調定年度}
         AND "DbT2015KeisangoJoho"."fukaNendo"=#{賦課年度}
         AND "DbT2015KeisangoJoho"."koseiZengoKubun"='2'
-        AND "DbT2015KeisangoJoho"."sakuseiShoriName"='本算定賦課'
+        AND "DbT2015KeisangoJoho"."sakuseiShoriName"='本算定賦課')
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM master
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','',''
+        ,'','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','',''
+        ,'','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         ${出力順}
     </select>
     

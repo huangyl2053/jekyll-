@@ -43,6 +43,7 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
     private final List<TokkiA4Entity> 短冊情報リスト;
     private final TokkiText1A4Business item;
     private final List<RString> 短冊リスト;
+    private final List<RString> テキスト全面List;
     private final int index;
 
     /**
@@ -51,14 +52,16 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
      * @param item TokkiText1A4Entity
      * @param 短冊情報リスト List<TokkiA4Entity>
      * @param 短冊リスト List<RString>
+     * @param テキスト全面List List<RString>
      * @param index Index
      */
     protected IinShinsakaishiryoA4Group3Editor(TokkiText1A4Business item, List<TokkiA4Entity> 短冊情報リスト,
-            List<RString> 短冊リスト, int index) {
+            List<RString> 短冊リスト, List<RString> テキスト全面List, int index) {
         this.item = item;
         this.index = index;
         this.短冊情報リスト = 短冊情報リスト;
         this.短冊リスト = 短冊リスト;
+        this.テキスト全面List = テキスト全面List;
     }
 
     @Override
@@ -107,7 +110,7 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン())) {
-            source.two_tokkiText = item.getTokkiText();
+            source.two_tokkiText = テキスト全面List.get(index);
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {
@@ -116,7 +119,7 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン())) {
-            source.two_tokkiImg = item.getTokkiImg();
+            source.two_tokkiImg = item.getTokkiImg(1);
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {

@@ -1011,7 +1011,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getDgSeikyuDetail().getDataSource();
         List<dgSeikyuDetail_Row> rowList = new ArrayList<>();
         rowList.addAll(rowData);
-        rowList.remove(div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().getClickedItem());
+        if (!処理モード登録.equals(モード)) {
+            rowList.remove(div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().getClickedItem());
+        }
         RString ddlShumoku = div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey();
         RString hinmokuCode = div.getYoguKonyuhiShikyuShinseiContentsPanel().

@@ -19,9 +19,11 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadai
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.HyojunFutanGengakuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.ItakuKeikakuTodokedejohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.KyufugakuGengakujohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.RiyoshaFutanGenmenJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.RoreiFukushiNenkinjohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.SeikatsuHogojohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.SentoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.ShafuHojinKeigenJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.ShiharaHohoHenkojohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.ShikakujohoEntity;
@@ -54,6 +56,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -81,8 +85,10 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
     private RString 保険者名称の取得;
     private boolean is広域;
     private boolean is単一;
+    private SentoEntity 先頭情報;
     private List<FutanGendogakuNinteiJohoEntity> 負担限度額認定情報EntityList;
-    private List<YokaigoNinteiJohoEntity> 要介護認定情報List;
+    private YokaigoNinteiJohoEntity 要介護認定情報List;
+    private List<NinteiKekkaJohoEntity> 要介護認定情報;
     private List<ShafuHojinKeigenJohoEntity> 社福法人軽減情報EntityList;
     private List<RiyoshaFutanGenmenJohoEntity> 利用者負担減免情報EntityList;
     private List<HomonKaigoGenmenJohoEntity> 訪問介護等減額情報EntityList;
@@ -112,8 +118,10 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         保険者名称の取得 = RString.EMPTY;
         明細 = 0;
         帳票出力用受給者台帳Entity = new TyohyoShutuRyokuYoJukyushaDaichoEntity();
+        先頭情報 = new SentoEntity();
         負担限度額認定情報EntityList = new ArrayList();
-        要介護認定情報List = new ArrayList();
+        要介護認定情報List = new YokaigoNinteiJohoEntity();
+        要介護認定情報 = new ArrayList();
         社福法人軽減情報EntityList = new ArrayList();
         利用者負担減免情報EntityList = new ArrayList();
         訪問介護等減額情報EntityList = new ArrayList();
@@ -177,14 +185,16 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
     protected void process(IdoChushutsuDaichoNewEntity t) {
         明細 = 明細 + 1;
         if (被保険者番号 == HihokenshaNo.EMPTY || 被保険者番号 == null) {
-            被保険者番号 = t.get要介護認定情報().get受給者台帳_被保険者番号();
-        } else if (!被保険者番号.equals(t.get要介護認定情報().get受給者台帳_被保険者番号())) {
+            被保険者番号 = t.get先頭情報().get受給者台帳_被保険者番号();
+        } else if (!被保険者番号.equals(t.get先頭情報().get受給者台帳_被保険者番号())) {
             JukyushaDaichoReport report = new JukyushaDaichoReport(帳票出力用受給者台帳Entity, processParamter.get出力オプション区分());
             report.writeBy(reportSourceWriter);
-            被保険者番号 = t.get要介護認定情報().get受給者台帳_被保険者番号();
+            被保険者番号 = t.get先頭情報().get受給者台帳_被保険者番号();
             帳票出力用受給者台帳Entity = new TyohyoShutuRyokuYoJukyushaDaichoEntity();
             負担限度額認定情報EntityList = new ArrayList();
-            要介護認定情報List = new ArrayList();
+            要介護認定情報List = new YokaigoNinteiJohoEntity();
+            先頭情報 = new SentoEntity();
+            要介護認定情報 = new ArrayList();
             社福法人軽減情報EntityList = new ArrayList();
             利用者負担減免情報EntityList = new ArrayList();
             訪問介護等減額情報EntityList = new ArrayList();
@@ -216,18 +226,18 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         帳票出力用受給者台帳Entity.set老齢福祉年金情報EntityList(老齢福祉年金情報EntityList);
         帳票出力用受給者台帳Entity.set生活保護情報EntityList(生活保護情報EntityList);
         ExpandedInformation expandedInformations
-                = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), t.get要介護認定情報().get受給者台帳_被保険者番号().getColumnValue());
-        PersonalData personalData = PersonalData.of(t.get要介護認定情報().getPsm_識別コード(), expandedInformations);
+                = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), t.get先頭情報().get受給者台帳_被保険者番号().getColumnValue());
+        PersonalData personalData = PersonalData.of(t.get先頭情報().get受給者台帳_識別コード(), expandedInformations);
         personalDataList.add(personalData);
     }
 
     @Override
     protected void afterExecute() {
-        if (!帳票出力用受給者台帳Entity.get要介護認定情報EntityList().isEmpty()) {
+        if (帳票出力用受給者台帳Entity.get要介護認定情報EntityList().get先頭Entity() != null) {
             JukyushaDaichoReport report = new JukyushaDaichoReport(帳票出力用受給者台帳Entity, processParamter.get出力オプション区分());
             report.writeBy(reportSourceWriter);
         }
-//        AccessLogger.log(AccessLogType.照会, personalDataList);
+        AccessLogger.log(AccessLogType.照会, personalDataList);
         RString ページ数 = new RString(reportSourceWriter.pageCount().value());
         OutputJokenHyo outputJokenhyo = new OutputJokenHyo();
         outputJokenhyo.outputJokenhyoFactory(processParamter, ページ数);
@@ -240,8 +250,10 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
     private void set帳票出力用受給者台帳Entity(IdoChushutsuDaichoNewEntity t) {
         JukyushaDaichoCyouhyoujouhou 帳票出力用受給者台帳 = new JukyushaDaichoCyouhyoujouhou();
         RString 通知文情報通知文 = get通知文情報通知文(ReportIdDBD.DBD100026.getReportId(), 1, 1);
-        要介護認定情報List = 帳票出力用受給者台帳.set要介護認定情報List(t, 導入形態コード, 保険者番号の取得, 保険者名称の取得,
-                通知文情報通知文, 要介護認定情報List);
+        先頭情報 = 帳票出力用受給者台帳.set先頭情報(t, 導入形態コード, 保険者番号の取得, 保険者名称の取得, 通知文情報通知文);
+        要介護認定情報 = 帳票出力用受給者台帳.set要介護認定情報(t, 導入形態コード, 要介護認定情報);
+        要介護認定情報List.set要介護認定情報(要介護認定情報);
+        要介護認定情報List.set先頭Entity(先頭情報);
         負担限度額認定情報EntityList = 帳票出力用受給者台帳.set負担限度額認定情報EntityList(t, 負担限度額認定情報EntityList);
         社福法人軽減情報EntityList = 帳票出力用受給者台帳.set社福法人軽減情報EntityList(t, 社福法人軽減情報EntityList);
         利用者負担減免情報EntityList = 帳票出力用受給者台帳.set利用者負担減免情報EntityList(t, 利用者負担減免情報EntityList);
