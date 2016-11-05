@@ -142,6 +142,13 @@ public class IchijihanteikekkahyoA3Entity {
     private RString 特記事項テキスト_イメージ区分;
     private RString 特記パターン;
     private List<TokkiJikou> 特記事項_listChosa1;
-    private RString 特記事項_tokkiText;
-    private RString 特記事項_tokkiImg;
+    private List<RString> 特記事項_tokkiText;
+    private List<RString> 特記事項_tokkiImg;
+
+    private RString 名前;
+    private FlexibleDate 認定申請年月日;
+    private FlexibleDate 認定調査実施年月日;
+    private FlexibleDate 介護認定審査会開催年月日;
+    private RString 特記事項保険者番号;
+    private RString 特記事項被保険者番号;
 }

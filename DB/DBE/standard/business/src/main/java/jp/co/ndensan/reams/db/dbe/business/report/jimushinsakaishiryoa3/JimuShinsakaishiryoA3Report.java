@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishi
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.jimutokkitext.JimuTokkiTextA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -26,28 +26,29 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3ReportSource> {
 
+    private static final RString テキスト全面イメージ = new RString("1");
     private static final int INT_25 = 25;
+    private static final int MAXCOUNT = 30;
+    private static final int PAGETWO_MAXCOUNT = 34;
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
-    private final JimuTokkiTextA3Entity jimuTokkiTextA3Entity;
+    private final IchijihanteikekkahyoA3Entity jimuTokkiTextA3Entity;
     private final JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho;
     private final JimuSonotashiryoBusiness sonotashiryoBusiness;
     private final List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList;
     private final RString reportId;
-    private static final int MAXCOUNT = 30;
-    private static final int PAGETWO_MAXCOUNT = 34;
 
     /**
      * インスタンスを生成します。
      *
      * @param shinsakaishiryoList List<JimuShinsakaishiryoBusiness>
-     * @param jimuTokkiTextA3Entity JimuTokkiTextA3Entity
+     * @param jimuTokkiTextA3Entity IchijihanteikekkahyoA3Entity
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
      * @param tuikaSiryoBusinessList 追加資料鑑情報のBusinessの編集クラス
      * @param reportId 帳票ＩＤ
      */
     public JimuShinsakaishiryoA3Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
-            JimuTokkiTextA3Entity jimuTokkiTextA3Entity, JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho,
+            IchijihanteikekkahyoA3Entity jimuTokkiTextA3Entity, JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho,
             JimuSonotashiryoBusiness sonotashiryoBusiness, List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList,
             RString reportId) {
         this.shinsakaishiryoList = shinsakaishiryoList;
@@ -67,6 +68,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
         }
         List<TokkiJikou> 短冊情報リスト = jimuTokkiTextA3Entity.get特記事項_listChosa1();
         List<RString> 短冊リスト = get短冊リスト(短冊情報リスト);
+        List<RString> テキスト全面List = jimuTokkiTextA3Entity.get特記事項_tokkiText();
         int totalPages = (int) Math.ceil((double) 短冊情報リスト.size() / PAGETWO_MAXCOUNT);
         for (int i = 0; i < MAXCOUNT; i++) {
             IJimuShinsakaishiryoA3Editor editor = new JimuShinsakaishiryoA3Group2Editor(jimuTokkiTextA3Entity, 短冊リスト, i);
@@ -78,11 +80,18 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
             IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
             reportSourceWriter.writeLine(builder1);
         }
-        if (MAXCOUNT < 短冊リスト.size()) {
+        if (テキスト全面イメージ.equals(jimuTokkiTextA3Entity.get特記パターン())) {
+            for (int i = 0; i < テキスト全面List.size(); i++) {
+                IJimuShinsakaishiryoA3Editor editor = new JimuShinsakaishiryoA3Group3Editor(jimuTokkiTextA3Entity, 短冊リスト, i, i + 1, reportId);
+                IJimuShinsakaishiryoA3Builder builder = new JimuShinsakaishiryoA3Builder(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else if (MAXCOUNT < 短冊リスト.size()) {
             for (int i = 0; i < 短冊リスト.size(); i++) {
                 int page = (i + PAGETWO_MAXCOUNT) / PAGETWO_MAXCOUNT + 1;
                 if (page <= totalPages) {
-                    IJimuShinsakaishiryoA3Editor editor = new JimuShinsakaishiryoA3Group3Editor(jimuTokkiTextA3Entity, 短冊リスト, i, page, reportId);
+                    IJimuShinsakaishiryoA3Editor editor = new JimuShinsakaishiryoA3Group3Editor(
+                            jimuTokkiTextA3Entity, 短冊リスト, i, page, reportId);
                     IJimuShinsakaishiryoA3Builder builder = new JimuShinsakaishiryoA3Builder(editor);
                     reportSourceWriter.writeLine(builder);
                 }

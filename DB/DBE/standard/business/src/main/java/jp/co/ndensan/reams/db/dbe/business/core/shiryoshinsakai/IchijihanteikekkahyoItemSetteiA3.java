@@ -132,6 +132,12 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             項目.set特記事項_listChosa1(tokkijiko.get短冊情報リスト());
             項目.set特記事項_tokkiText(tokkijiko.getTokkiText());
             項目.set特記事項_tokkiImg(tokkijiko.getTokkiImg());
+            項目.set名前(tokkijiko.get名前());
+            項目.set認定申請年月日(tokkijiko.get認定申請年月日());
+            項目.set認定調査実施年月日(tokkijiko.get認定調査実施年月日());
+            項目.set介護認定審査会開催年月日(tokkijiko.get介護認定審査会開催年月日());
+            項目.set特記事項保険者番号(tokkijiko.get保険者番号());
+            項目.set特記事項被保険者番号(tokkijiko.get被保険者番号());
         }
         List<RString> 認定調査特記事項 = settei.get認定調査特記事項番号(認定調査票_特記情報);
         項目.set第１群リスト(get第１群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果, 主治医意見書項目, 認定調査特記事項));

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,11 +39,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class IchijihanteiekkahyoTokkijiko {
 
-    private static final RString ファイルID_C4101 = new RString("C4101.png");
-    private static final RString ファイルID_C4101BAK = new RString("C4101_BAK.png");
     private static final RString テキスト全面イメージ = new RString("1");
     private static final RString ハイフン = new RString("-");
     private static final int 最大連番 = 10;
+    private static final int 最大ページ = 6;
     private final List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List;
     private final ShinsakaiSiryoKyotsuEntity kyotsuEntity;
     private final RString 特記パターン;
@@ -61,6 +61,69 @@ public class IchijihanteiekkahyoTokkijiko {
         this.特記情報List = 特記情報List;
         this.kyotsuEntity = kyotsuEntity;
         ページ表示行数 = 0;
+    }
+
+    /**
+     * 申請書管理番号を取得します。
+     *
+     * @return 申請書管理番号
+     */
+    public RString get申請書管理番号() {
+        return kyotsuEntity.getShinseishoKanriNo().value();
+    }
+
+    /**
+     * 保険者番号を取得します。
+     *
+     * @return 保険者番号
+     */
+    public RString get保険者番号() {
+        return kyotsuEntity.getShoKisaiHokenshaNo();
+    }
+
+    /**
+     * 被保険者番号を取得します。
+     *
+     * @return 被保険者番号
+     */
+    public RString get被保険者番号() {
+        return kyotsuEntity.getHihokenshaNo();
+    }
+
+    /**
+     * 名前を取得します。
+     *
+     * @return 名前
+     */
+    public RString get名前() {
+        return kyotsuEntity.getHihokenshaName().getColumnValue();
+    }
+
+    /**
+     * 認定申請年月日を取得します。
+     *
+     * @return 認定申請年月日
+     */
+    public FlexibleDate get認定申請年月日() {
+        return kyotsuEntity.getNinteiShinseiYMD();
+    }
+
+    /**
+     * 認定調査実施年月日を取得します。
+     *
+     * @return 認定調査実施年月日
+     */
+    public FlexibleDate get認定調査実施年月日() {
+        return kyotsuEntity.getNinteichosaJisshiYMD();
+    }
+
+    /**
+     * 介護認定審査会開催年月日を取得します。
+     *
+     * @return 介護認定審査会開催年月日
+     */
+    public FlexibleDate get介護認定審査会開催年月日() {
+        return kyotsuEntity.getShinsakaiKaisaiYMD();
     }
 
     /**
@@ -94,12 +157,19 @@ public class IchijihanteiekkahyoTokkijiko {
      *
      * @return 全面特記事項イメージを取得します
      */
-    public RString getTokkiImg() {
-        if (kyotsuEntity.isJimukyoku()) {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101BAK);
-        } else {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C4101);
+    public List<RString> getTokkiImg() {
+        List<RString> filePathList = new ArrayList<>();
+        for (int i = 1; i <= 最大ページ; i++) {
+            RStringBuilder ファイル名 = new RStringBuilder();
+            ファイル名.append("C140");
+            ファイル名.append(1);
+            if (kyotsuEntity.isJimukyoku()) {
+                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.toRString()));
+            } else {
+                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.toRString()));
+            }
         }
+        return filePathList;
     }
 
     /**
@@ -107,11 +177,12 @@ public class IchijihanteiekkahyoTokkijiko {
      *
      * @return 全面特記事項テキストを取得します
      */
-    public RString getTokkiText() {
+    public List<RString> getTokkiText() {
+        List<RString> テキスト全面List = new ArrayList<>();
         if (テキスト全面イメージ.equals(特記パターン)) {
-            return getTextByテキスト全面イメージ();
+            テキスト全面List.addAll(getTextByテキスト全面イメージ());
         }
-        return RString.EMPTY;
+        return テキスト全面List;
     }
 
     /**
@@ -128,30 +199,31 @@ public class IchijihanteiekkahyoTokkijiko {
         return TokkijikoTextImageKubun.イメージ.getコード();
     }
 
-    private RString getTextByテキスト全面イメージ() {
-        boolean isテキスト = false;
+    private List<RString> getTextByテキスト全面イメージ() {
+        List<RString> テキスト全面List = new ArrayList<>();
         RStringBuilder テキスト全面 = new RStringBuilder();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
-                isテキスト = true;
-                RStringBuilder テキスト = new RStringBuilder();
-                テキスト.append(get特記事項テキスト(
-                        kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                テキスト.append(entity.getTokkiJiko());
-                if ((int) (テキスト.length() / 最大文字数) == 2) {
-                    テキスト.insert(最大文字数 * 2, System.lineSeparator());
+        int 表示行数 = 0;
+        for (int i = 0; i < 特記情報List.size(); i++) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記情報List.get(i).getTokkijikoTextImageKubun())) {
+                RStringBuilder テキストBuilder = new RStringBuilder();
+                テキストBuilder.append(get特記事項テキスト(kyotsuEntity.getKoroshoIfShikibetsuCode(),
+                        特記情報List.get(i).getNinteichosaTokkijikoNo(), 特記情報List.get(i).getNinteichosaTokkijikoRemban()));
+                テキストBuilder.append(特記情報List.get(i).getTokkiJiko());
+                テキストBuilder.append(System.lineSeparator());
+                表示行数 = 表示行数 + (int) Math.ceil((double) テキストBuilder.length() / 最大文字数);
+                if (表示行数 <= ページ表示行数) {
+                    テキスト全面.append(テキストBuilder);
+                } else {
+                    テキスト全面List.add(テキスト全面.toRString());
+                    テキスト全面 = new RStringBuilder();
+                    表示行数 = 0;
                 }
-                if (テキスト.length() % 最大文字数 == 0) {
-                    テキスト.insert(最大文字数, System.lineSeparator());
+                if (i == 特記情報List.size() - 1) {
+                    テキスト全面List.add(テキスト全面.toRString());
                 }
-                テキスト.append(System.lineSeparator());
-                テキスト全面.append(テキスト.toRString());
             }
         }
-        if (isテキスト) {
-            return テキスト全面.toRString();
-        }
-        return RString.EMPTY;
+        return テキスト全面List;
     }
 
     private RString getFilePathByRemban(RString 特記事項番号, int 特記事項連番) {
