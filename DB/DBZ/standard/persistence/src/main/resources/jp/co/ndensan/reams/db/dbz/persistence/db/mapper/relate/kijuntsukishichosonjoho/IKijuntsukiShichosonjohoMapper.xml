@@ -19,11 +19,9 @@
         rgdb."DbT7055GappeiJoho" DbT7055GappeiJoho
         WHERE
         DbT7055GappeiJoho."kokuhorenDataFromYMD" = (SELECT MAX(DbT7055GappeiJoho."kokuhorenDataFromYMD")
-        FROM rgdb."DbT7055GappeiJoho" DbT7055GappeiJoho
-        WHERE
-        left(DbT7055GappeiJoho."kokuhorenDataFromYMD", 6) <![CDATA[<=]]> #{基準年月})
+        FROM rgdb."DbT7055GappeiJoho" DbT7055GappeiJoho)
         AND
-        left(DbT7055GappeiJoho."kokuhorenDataFromYMD", 6) <![CDATA[<=]]> #{基準年月}
+        left(DbT7055GappeiJoho."kokuhorenDataFromYMD", 6) <![CDATA[<=]]> left(#{基準年月}, 6)
     </select>
     <resultMap id="resultMap_DbT7055GappeiJohoEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity" autoMapping="true">
         <result property="chiikiNo" column="dbT7055GappeiJoho_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -65,15 +63,15 @@
         AND
         DbT7055GappeiJoho."chiikiNo"  = DbT7056GappeiShichoson."chiikiNo"
         WHERE
-        left(DbT7056GappeiShichoson."unyoKaishiYMD", 6) <![CDATA[<=]]>  #{基準年月}
+        left(DbT7056GappeiShichoson."unyoKaishiYMD", 6) <![CDATA[<=]]> left(#{基準年月}, 6)
         AND
-        #{基準年月} <![CDATA[<=]]> left(DbT7056GappeiShichoson."unyoShuryoYMD", 6)
+        left(#{基準年月}, 6) <![CDATA[<=]]> left(DbT7056GappeiShichoson."unyoShuryoYMD", 6)
         ORDER BY
         DbT7055GappeiJoho."gappeiYMD" asc
         ,DbT7055GappeiJoho."chiikiNo" asc
     </select>
     <resultMap id="resultMap_GappeiShichosonEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.GappeiShichosonEntity" autoMapping="true">
-        <result property="shichosonCode" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="kyuShichosonCode" column="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kyuHokenshaNo" column="kyuHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
         <result property="kyuShichosonMeisho" column="kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="todofukenMeisho" column="todofukenMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -134,9 +132,9 @@
         ON
         DbT7055GappeiJoho."chiikiNo" = DbT7051KoseiShichosonMaster."gappeiChiikiNo"
         WHERE
-        left(DbT7051KoseiShichosonMaster."kanyuYMD", 6) <![CDATA[<=]]> #{基準年月}
+        left(DbT7051KoseiShichosonMaster."kanyuYMD", 6) <![CDATA[<=]]> left(#{基準年月}, 6)
         AND
-        #{基準年月} <![CDATA[<=]]> left(DbT7051KoseiShichosonMaster."ridatsuYMD", 6)
+        left(#{基準年月}, 6) <![CDATA[<=]]> left(DbT7051KoseiShichosonMaster."ridatsuYMD", 6)
     </select>
     <resultMap id="resultMap_ShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.KoseiShichosonMasterEntity" autoMapping="true">
         <result property="shichosonShokibetsuID" column="shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -217,7 +215,7 @@
         AND
         DbT7051KoseiShichosonMaster."gappeiKyuShichosonKubun" = '0'
         AND
-        left(DbT7051KoseiShichosonMaster."kanyuYMD", 6) <![CDATA[<=]]> #{基準年月}
+        left(DbT7051KoseiShichosonMaster."kanyuYMD", 6) <![CDATA[<=]]> left(#{基準年月}, 6)
     </select>
     <resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.KoseiShichosonMasterEntity" autoMapping="true">
         <result property="shichosonShokibetsuID" column="shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
