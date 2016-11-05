@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KarisanteiIdoFukaPanel {
 
     private static final RString 仮算定異動賦課_MENU = new RString("DBBMN36001");
+    private static final RString 特徴仮算定賦課 = new RString("仮算定異動賦課");
+    private static final RString 通知書一括発行 = new RString("仮算定異動通知書作成");
 
     /**
      * 画面初期化のメソッドます。
@@ -44,9 +46,11 @@ public class KarisanteiIdoFukaPanel {
         boolean flag = getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
         if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(div).setState(DBB0150001StateName.仮算定異動賦課);
+            return ResponseData.of(ResponseData.of(div).setState(
+                    DBB0150001StateName.仮算定異動賦課).data).rootTitle(特徴仮算定賦課).respond();
         } else {
-            return ResponseData.of(div).setState(DBB0150001StateName.通知書一括発行);
+            return ResponseData.of(ResponseData.of(div).setState(
+                    DBB0150001StateName.通知書一括発行).data).rootTitle(通知書一括発行).respond();
         }
     }
 

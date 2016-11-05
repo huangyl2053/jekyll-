@@ -10,13 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KarisanteiIdoFukaPanel のクラスファイル
- *
- * @reamsid_L DBB-0890-010 wangkanglei
+ * KarisanteiIdoFukaPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KarisanteiIdoFukaPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -59,7 +58,7 @@ public class KarisanteiIdoFukaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setShoriJokyo(ShoriJokyoDiv ShoriJokyo) {
+    public void  setShoriJokyo(ShoriJokyoDiv ShoriJokyo) {
         this.getKarisanteiIdoFukaBatchParameter().setShoriJokyo(ShoriJokyo);
     }
 
@@ -69,7 +68,7 @@ public class KarisanteiIdoFukaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKarisanteiIdoFukaKanriInfo(KarisanteiIdoFukaKanriInfoDiv KarisanteiIdoFukaKanriInfo) {
+    public void  setKarisanteiIdoFukaKanriInfo(KarisanteiIdoFukaKanriInfoDiv KarisanteiIdoFukaKanriInfo) {
         this.getKarisanteiIdoFukaBatchParameter().setKarisanteiIdoFukaKanriInfo(KarisanteiIdoFukaKanriInfo);
     }
 
@@ -79,7 +78,7 @@ public class KarisanteiIdoFukaPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKarisanteiIdoFukaChohyoHakko(KarisanteiIdoFukaChohyoHakkoDiv KarisanteiIdoFukaChohyoHakko) {
+    public void  setKarisanteiIdoFukaChohyoHakko(KarisanteiIdoFukaChohyoHakkoDiv KarisanteiIdoFukaChohyoHakko) {
         this.getKarisanteiIdoFukaBatchParameter().setKarisanteiIdoFukaChohyoHakko(KarisanteiIdoFukaChohyoHakko);
     }
 
