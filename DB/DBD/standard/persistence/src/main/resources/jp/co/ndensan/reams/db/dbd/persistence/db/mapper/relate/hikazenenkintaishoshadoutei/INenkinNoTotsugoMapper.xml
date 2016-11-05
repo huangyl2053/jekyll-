@@ -179,7 +179,7 @@
         CASE
         WHEN A."dtseinenngappi" != B."atenaSeinenngappi" THEN '1'
         WHEN A."dtseibetsu" != B."atenaSeibetsu" THEN '2'
-        WHEN A."dtkanaShimei" != B."atenaKanaShimei" THEN '3'
+        WHEN translate(trim(A."dtkanaShimei"), 'ｧｨｩｪｫｯｬｭｮﾞﾟ', 'ｱｲｳｴｵﾂﾔﾕﾖ') != translate(trim( B."atenaKanaShimei"), 'ｧｨｩｪｫｯｬｭｮﾞﾟ', 'ｱｲｳｴｵﾂﾔﾕﾖ') THEN '3'
         ELSE''
         END 不一致項目
         FROM
