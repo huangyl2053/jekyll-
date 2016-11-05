@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraikettejoho.Syokanbaraik
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -119,19 +120,19 @@ public class ShokanbaraiketteiJohoHandler {
                 支給区分 = 支給区分_支給;
             }
             set決定情報(決定情報, 支給区分);
-            if (決定情報.getKetteiYMD() == null) {
+            if (isFlexibleDateNullOrEmpty(決定情報.getKetteiYMD())) {
                 div.getTxtKetebi().setValue(RDate.getNowDate());
             } else {
                 div.getTxtKetebi().setValue(new RDate(決定情報.getKetteiYMD().toString()));
             }
             div.getRdoShikyukubun().setSelectedKey(支給区分);
-            if (決定情報.getKetteiTsuchishoSakuseiYMD() != null) {
+            if (!isFlexibleDateNullOrEmpty(決定情報.getKetteiTsuchishoSakuseiYMD())) {
                 div.getTxtKetteiTsuchiSakuseiYMD().setValue(new RDate(決定情報.getKetteiTsuchishoSakuseiYMD().toString()));
             }
             if (決定情報.getKetteiTsuchiNo() != null && !RString.EMPTY.equals(決定情報.getKetteiTsuchiNo())) {
                 div.getTxtKetteiTsuchiNo().setValue(new Decimal(決定情報.getKetteiTsuchiNo().toString()));
             }
-            if (決定情報.getFurikomiMeisaishoSakuseiYMD() != null) {
+            if (!isFlexibleDateNullOrEmpty(決定情報.getFurikomiMeisaishoSakuseiYMD())) {
                 div.getTxtFurikomiMeisaiSakuseiYMD().setValue(new RDate(決定情報.getFurikomiMeisaishoSakuseiYMD().toString()));
             }
         }
@@ -153,6 +154,10 @@ public class ShokanbaraiketteiJohoHandler {
             div.getTxtFushikyuriyu2().setDisabled(true);
             div.getRdoShikyukubun().setDisabled(true);
         }
+    }
+
+    private boolean isFlexibleDateNullOrEmpty(FlexibleDate date) {
+        return null == date || date.isEmpty();
     }
 
     private List<dgSyokanbaraikete_Row> set償還払決定一覧情報(boolean 差額登録フラグ,
