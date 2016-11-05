@@ -409,12 +409,12 @@ module DBC {
                 return new UZA.Panel(this.convFiledName("KyufuSeigenPanel"));
             }
 
-            public btnKyufuSeigenRireki(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnKyufuSeigenRireki"));
-            }
-
             public radKohiFutanJogenGengakuAriFlag(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
+            }
+
+            public btnKyufuSeigenRireki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKyufuSeigenRireki"));
             }
 
             public txtShokanbaraikaYMD(): UZA.TextBoxDateRange {

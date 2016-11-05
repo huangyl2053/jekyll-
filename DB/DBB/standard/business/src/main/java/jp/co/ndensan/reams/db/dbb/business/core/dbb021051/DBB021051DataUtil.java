@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB021051DataUtil {
 
+    private static final RString なし = new RString("なし");
     private static final RString ERROR_市町村コード = new RString("000000");
     private static final int 市町村コード長さ = 6;
     private final RString str都道府県 = new RString("都道府県");
@@ -55,12 +56,12 @@ public class DBB021051DataUtil {
     private static final RString SIX = new RString("6");
     private static final RString SEVEN = new RString("7");
     private static final RString ERRORKUBUN = new RString("99");
-    private static final RString 生活保護受給者情報 = new RString("【生活保護受給者情報】　　");
-    private static final RString 生活保護受給者情報2 = new RString("                          ");
+    private static final RString 生活保護受給者情報 = new RString("【生活保護受給者情報】");
+    private static final RString 生活保護受給者情報2 = new RString("                      ");
     private static final RString 普通徴収 = new RString("普通徴収");
     private static final RString 特別徴収 = new RString("特別徴収");
-    private static final RString 基準年月 = new RString("【基準年月】　");
-    private static final RString 資格区分 = new RString("【資格区分】　");
+    private static final RString 基準年月 = new RString("【基準年月】");
+    private static final RString 資格区分 = new RString("【資格区分】");
     private static final RString 日本人1号 = new RString("1号(日本人)");
     private static final RString 日本人2号 = new RString("2号(日本人)");
     private static final RString 外国人1号 = new RString("1号(外国人)");
@@ -68,17 +69,17 @@ public class DBB021051DataUtil {
     private static final RString 全て1号 = new RString("1号(全て)");
     private static final RString 全て2号 = new RString("2号(全て)");
     private static final RString 全て = new RString("全て");
-    private static final RString 市町村指定 = new RString("【市町村指定】　");
-    private static final RString 最優先住所 = new RString("【最優先住所】　");
+    private static final RString 市町村指定 = new RString("【市町村指定】");
+    private static final RString 最優先住所 = new RString("【最優先住所】");
     private static final RString 現住所 = new RString("現住所");
     private static final RString 送付先または代納人 = new RString("送付先または代納人");
-    private static final RString 敬称 = new RString("【敬称】　");
-    private static final RString 被保番号表示 = new RString("【被保番号表示】　");
+    private static final RString 敬称 = new RString("【敬称】");
+    private static final RString 被保番号表示 = new RString("【被保番号表示】");
     private static final RString 表示する = new RString("表示する");
     private static final RString 表示しない = new RString("表示しない");
     private static final RString 宛先住所設定 = new RString("【宛先住所設定】");
-    private static final RString 出力順 = new RString("【出力順】　");
-    private static final RString 出力順2 = new RString("            ");
+    private static final RString 出力順 = new RString("【出力順】");
+    private static final RString 出力順2 = new RString("          ");
     private static final RString 取込対象データなし = new RString("取込対象データなし");
     private RString tmp;
     private boolean 最優先住所がニ;
@@ -311,7 +312,7 @@ public class DBB021051DataUtil {
         return new ReportOutputJokenhyoItem(
                 ReportIdDBB.DBZ100001.getReportId().value(),
                 導入団体コード, 市町村名, ジョブ番号, ReportIdDBB.DBZ100001.getReportName(), new RString(出力ページ数),
-                RString.EMPTY, RString.EMPTY, outputJoukenList);
+                なし, なし, outputJoukenList);
     }
 
     private List<RString> getOutputJoukenList(DBB021051ProcessParameter parameter, List<RString> 出力順設定リスト) {

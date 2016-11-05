@@ -5,7 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,11 +23,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter implements IMyBatisParameter {
+public final class ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private final RString 出力順;
     private final boolean has出力順;
-    private final RString psmShikibetsuTaisho;
+    private final GyomuCode uaft250_gyomuCode;
+    private final SubGyomuCode uaft250_subGyomuCode;
+    private final KamokuCode uaft250_kamokuCode;
+    private final boolean uaft250_gyomuKoyuKeyRiyoFlag;
+    private final RString uaft250_gyomuKoyuKey;
+    private final RString uaft250_shikibetsuCode;
+    private final boolean uaft250_isUseTableColumn;
+    private final boolean uaft250_sofusakiRiyoFlag;
+    private final boolean uaft250_dainoRiyoFlag;
+    private final boolean uaft250_setaiNushiRiyoFlag;
+    private final boolean uaft250_daihyoshaRiyokuFlag;
+    private final FlexibleDate uaft250_kijunYMD;
 
     /**
      * コンストラクタです。
@@ -29,20 +47,37 @@ public final class ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter implements 
      * @param 出力順 出力順
      * @param psmShikibetsuTaisho 宛名識別対象
      */
-    private ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter(boolean has出力順, RString 出力順, RString psmShikibetsuTaisho) {
+    private ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter(boolean has出力順, RString 出力順,
+            IShikibetsuTaishoPSMSearchKey key,
+            IAtesakiPSMSearchKey atesakiKey) {
+        super(key);
         this.has出力順 = has出力順;
         this.出力順 = 出力順;
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.uaft250_gyomuCode = atesakiKey.get業務判定キー().get業務コード();
+        this.uaft250_subGyomuCode = atesakiKey.get業務判定キー().getサブ業務コード();
+        this.uaft250_kamokuCode = atesakiKey.get業務判定キー().get科目コード();
+        this.uaft250_gyomuKoyuKeyRiyoFlag = atesakiKey.get業務固有キー利用区分().isGyomuKoyuKeyRiyo();
+        this.uaft250_gyomuKoyuKey = atesakiKey.get業務判定キー().get業務固有キー();
+        this.uaft250_shikibetsuCode = RString.EMPTY;
+        this.uaft250_isUseTableColumn = Boolean.FALSE;
+        this.uaft250_sofusakiRiyoFlag = atesakiKey.get送付先利用区分().isSofusakiRiyo();
+        this.uaft250_dainoRiyoFlag = atesakiKey.get代納人利用区分().isDainoRiyo();
+        this.uaft250_setaiNushiRiyoFlag = atesakiKey.get世帯主利用区分().isSetainushiRiyo();
+        this.uaft250_daihyoshaRiyokuFlag = atesakiKey.get法人代表者利用区分().isHojinDaihyoshaRiyo();
+        this.uaft250_kijunYMD = atesakiKey.get基準日();
     }
 
     /**
      * コンストラクタです。
      *
      * @param 出力順 出力順
-     * @param psmShikibetsuTaisho 宛名識別対象
+     * @param key 宛名PSMキー
+     * @param atesakiKey 宛先PSMキー
      * @return 償還払い支給（不支給）決定通知書一括作成_決定通知一覧表帳票データ取得のMyBatisパラメータクラス
      */
-    public static ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter toMybatisParameter(RString 出力順, RString psmShikibetsuTaisho) {
-        return new ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter(!RString.isNullOrEmpty(出力順), 出力順, psmShikibetsuTaisho);
+    public static ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter toMybatisParameter(RString 出力順,
+            IShikibetsuTaishoPSMSearchKey key,
+            IAtesakiPSMSearchKey atesakiKey) {
+        return new ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter(!RString.isNullOrEmpty(出力順), 出力順, key, atesakiKey);
     }
 }

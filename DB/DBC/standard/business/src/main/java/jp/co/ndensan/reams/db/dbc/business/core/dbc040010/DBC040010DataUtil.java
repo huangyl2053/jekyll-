@@ -260,7 +260,7 @@ public class DBC040010DataUtil {
         result.setTaishoKeisanKaishiYMD(nonullRStr(entity.getTaishoKeisanKaishiYMD()));
         result.setTaishoKeisanShuryoYMD(nonullRStr(entity.getTaishoKeisanShuryoYMD()));
         RString 被保険者期間開始 = nonullRStr(entity.getKanyuKaishiYMD());
-        RString 被保険者期間終了 = nonullRStr(entity.getKanyuKaishiYMD());
+        RString 被保険者期間終了 = nonullRStr(entity.getKanyuShuryoYMD());
         result.setHihokenshaKaishiYMD(被保険者期間開始);
         result.setHihokenshaShuryoYMD(被保険者期間終了);
         result.setShinseiYMD(nonullRStr(entity.getShinseiYMD()));
@@ -904,6 +904,30 @@ public class DBC040010DataUtil {
         KogakuShikyugakuJoho joho = editor高額支給額加算額(entity);
         wK_KogakuShikyugaku.set(index, addDecimalNonull(wK_KogakuShikyugaku.get(index), joho.get高額支給額加算額()));
         return joho;
+    }
+
+    /**
+     * set高額支給額加算額のメソッドです。
+     *
+     * @param updEntity JissekiFutangakuDataTempEntity
+     * @param wK_KogakuShikyugaku List<Decimal>
+     */
+    public void update高額支給額加算額(JissekiFutangakuDataTempEntity updEntity, List<Decimal> wK_KogakuShikyugaku) {
+        Decimal sum = Decimal.ZERO;
+        for (int index = 0; index < wK_KogakuShikyugaku.size(); index++) {
+            Decimal 高額支給額加算額 = nonullDecimal(wK_KogakuShikyugaku.get(index));
+            高額支給額加算額 = 高額支給額加算額.compareTo(Decimal.ZERO) < 0 ? Decimal.ZERO : 高額支給額加算額;
+            sum = sum.add(高額支給額加算額);
+            RString suffix = suffixList.get(index);
+            Method method;
+            try {
+                method = CLS.getMethod(SET.concat(SUMI_UNDER_70KOGAKUSHIKYUGAKU).concat(suffix).toString(), DECIMALCLS);
+                method.invoke(updEntity, 高額支給額加算額);
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        updEntity.setSumi_Gokei_Under70KogakuShikyuGaku(sum);
     }
 
     /**

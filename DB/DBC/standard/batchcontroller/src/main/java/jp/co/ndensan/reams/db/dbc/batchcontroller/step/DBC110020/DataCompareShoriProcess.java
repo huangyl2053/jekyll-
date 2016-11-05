@@ -272,7 +272,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     protected void afterExecute() {
         被保険者番号マッチング();
         JukyushaIdoRenrakuhyoCsvManager manager = JukyushaIdoRenrakuhyoCsvManager.createInstance();
-        manager.csvの出力(entityList);
+        manager.csvの出力(entityList, null);
         csvWriter_DBC200074.close();
         spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
         csvWriter_DBC200010.close();

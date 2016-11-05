@@ -295,6 +295,7 @@ public class ChikuShichosonSelectHandler {
                     List<KeyValueDataSource> dataSource = new ArrayList<>();
                     dataSource.add(new KeyValueDataSource(KEY, 文字_全市町村));
                     List<RString> keyList = new ArrayList<>();
+                    keyList.add(KEY);
                     for (KyuShichosonCode item : 旧市町村コード情報List) {
                         RString 旧市町村Code = item.get旧市町村コード().getColumnValue();
                         RString 旧市町村名称 = item.get旧市町村名称();
@@ -318,11 +319,11 @@ public class ChikuShichosonSelectHandler {
         }
         Collections.sort(dataSource,
                 new Comparator<KeyValueDataSource>() {
-            @Override
-            public int compare(KeyValueDataSource arg0, KeyValueDataSource arg1) {
-                return arg0.getKey().toString().compareTo(arg1.getKey().toString());
-            }
-        }
+                    @Override
+                    public int compare(KeyValueDataSource arg0, KeyValueDataSource arg1) {
+                        return arg0.getKey().toString().compareTo(arg1.getKey().toString());
+                    }
+                }
         );
         return dataSource;
     }
@@ -333,11 +334,11 @@ public class ChikuShichosonSelectHandler {
         }
         Collections.sort(dataSource,
                 new Comparator<ddlCodeList_Row>() {
-            @Override
-            public int compare(ddlCodeList_Row arg0, ddlCodeList_Row arg1) {
-                return arg0.getCode().toString().compareTo(arg1.getCode().toString());
-            }
-        }
+                    @Override
+                    public int compare(ddlCodeList_Row arg0, ddlCodeList_Row arg1) {
+                        return arg0.getCode().toString().compareTo(arg1.getCode().toString());
+                    }
+                }
         );
         return dataSource;
     }

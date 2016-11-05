@@ -69,7 +69,7 @@
 			賦課Newest."choteiNendo" = 時効起算日管理."dbT4023JikoKisambiKanri_choteiNendo" AND
 			賦課Newest."fukaNendo" = 時効起算日管理."dbT4023JikoKisambiKanri_fukaNendo" AND
 			賦課Newest."tsuchishoNo" = 時効起算日管理."dbT4023JikoKisambiKanri_tsuchishoNo" AND
-			cast(介護期別."ki" as varchar(3)) = 時効起算日管理."dbT4023JikoKisambiKanri_shuno_Ki_Tsuki" AND
+			LPAD(介護期別."ki"::varchar,3,'0') = 時効起算日管理."dbT4023JikoKisambiKanri_shuno_Ki_Tsuki" AND
 			介護期別."choshuHouhou" = 時効起算日管理."dbT4023JikoKisambiKanri_tokucho_FuchoKubun"
 	INNER JOIN rgdb."DbT4001JukyushaDaicho" AS 認定情報
 		ON   賦課Newest."hihokenshaNo" = 認定情報."hihokenshaNo"

@@ -18,19 +18,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -130,15 +122,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
                 item.setKyufuShu3(kyufuShu.substring(文字数_76));
             }
 
-            IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
-            AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
-            宛先builder.set識別コード(shiharai.get識別コード());
-            宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-            宛先builder.set基準日(batchPram.getHakkoYMD());
-            宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
-            IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
             SofubutsuAtesakiSource atesakiSource
-                    = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
+                    = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(shiharai.get宛先情報()).build()).buildSource();
 
             item = create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, atesakiSource);
             帳票ソースデータ.add(item);
@@ -152,18 +137,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         key.append(shiharai.get提供年月().wareki().toDateString());
         key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
         return key.toRString();
-    }
-
-    private RString set種類(RString kyufuShu, RString 種類) {
-        if (RString.isNullOrEmpty(kyufuShu)) {
-            return 種類;
-        }
-        RStringBuilder builder = new RStringBuilder(kyufuShu);
-        if (!RString.isNullOrEmpty(種類)) {
-            builder.append(カンマ);
-            builder.append(種類);
-        }
-        return builder.toRString();
     }
 
     private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem create帳票ソースデータ(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item,

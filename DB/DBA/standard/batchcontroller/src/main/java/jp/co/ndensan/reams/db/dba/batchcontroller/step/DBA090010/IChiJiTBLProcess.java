@@ -11,14 +11,11 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.Shorikekkaris
 import jp.co.ndensan.reams.db.dba.entity.euc.atenasealcreate.AtenaSeelEUCEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -61,14 +58,14 @@ public class IChiJiTBLProcess extends BatchProcessBase<IChiJiTBLEntity> {
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), FILENAME);
-        eucCsvWriter = BatchWriters.csvWriter(AtenaSeelEUCEntity.class)
-                .filePath(eucFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true)
-                .build();
+//        eucCsvWriter = BatchWriters.csvWriter(AtenaSeelEUCEntity.class)
+//                .filePath(eucFilePath)
+//                .setDelimiter(コンマ)
+//                .setEnclosure(ダブル引用符)
+//                .setEncode(Encode.UTF_8withBOM)
+//                .setNewLine(NewLine.CRLF)
+//                .hasHeader(true)
+//                .build();
         処理結果リスト一時TBL = new BatchEntityCreatedTempTableWriter(TABLE_処理結果リスト一時TBL,
                 ShorikekkarisutoichijiTBLEntity.class);
     }
