@@ -293,11 +293,11 @@ public class JukyushaIdoRenrakuhyoHandler {
         }
         div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setValue(
                 new Decimal(受給者異動情報.get短期入所サービス支給限度基準額()));
-        if (受給者異動情報.get短期入所サービス上限管理適用期間開始年月日() != null) {
+        if (受給者異動情報.get短期入所サービス上限管理適用期間開始年月日() != null && !受給者異動情報.get短期入所サービス上限管理適用期間開始年月日().isEmpty()) {
             div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setFromValue(
                     new RDate(受給者異動情報.get短期入所サービス上限管理適用期間開始年月日().toString()));
         }
-        if (受給者異動情報.get短期入所サービス上限管理適用期間終了年月日() != null) {
+        if (受給者異動情報.get短期入所サービス上限管理適用期間終了年月日() != null && !受給者異動情報.get短期入所サービス上限管理適用期間終了年月日().isEmpty()) {
             div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setToValue(
                     new RDate(受給者異動情報.get短期入所サービス上限管理適用期間終了年月日().toString()));
         }
