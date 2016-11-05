@@ -339,13 +339,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         return item;
     }
 
-    private RString getSortKey(ShokanKetteiTsuchiShoShiharai shiharai) {
-        RStringBuilder result = new RStringBuilder();
-        result.append(getJufukuKey(shiharai));
-        result.append(shiharai.getサービス種類コード());
-        return result.toRString();
-    }
-
     private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem set通知文(
             ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item, ShokanKetteiTsuchiShoSealerBatchParameter batchPram) {
         RString 定型文文字サイズ = ReportUtil.get定型文文字サイズ(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId());
@@ -366,6 +359,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
             item.setTsuchibunMixtwo2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
                     KamokuCode.EMPTY, FOUR, THREE, batchPram.getHakkoYMD()));
         }
+        item.set定型文文字サイズ(定型文文字サイズ);
         return item;
     }
 
