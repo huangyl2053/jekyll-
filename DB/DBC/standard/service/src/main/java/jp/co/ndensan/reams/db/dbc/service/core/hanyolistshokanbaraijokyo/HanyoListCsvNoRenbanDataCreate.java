@@ -560,7 +560,7 @@ public class HanyoListCsvNoRenbanDataCreate {
             minashiCodeList.add(minashiCode.getコード());
         }
         if (minashiCodeList.contains(みなし要介護区分コード)) {
-            受給みなし更新認定 = MinashiCode.toValue(住特).get名称();
+            受給みなし更新認定 = MinashiCode.toValue(みなし要介護区分コード).get名称();
         }
         return 受給みなし更新認定;
     }
