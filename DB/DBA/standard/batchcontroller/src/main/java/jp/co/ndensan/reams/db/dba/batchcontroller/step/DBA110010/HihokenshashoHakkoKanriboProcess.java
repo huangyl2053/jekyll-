@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihohenshashohakkokanribochohyodatasakusei.HihohenshashoHakkoKanriboChohyoDataSakusei;
 import jp.co.ndensan.reams.db.dba.business.core.hihohenshashohakokanribocsvdatasakusei.HihohenshashoHakoKanriboCsvDataSakusei;
+//import jp.co.ndensan.reams.db.dba.business.core.hihohenshashohakokanribocsvdatasakusei.HihohenshashoHakoKanriboCsvDataSakusei;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoHeadItem;
-import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReport;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba110010.HihokenshashoHakkoKanriboProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
@@ -154,11 +154,14 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
         List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataSakuseiEntityList
                 = chohyoDataSakusei.getShohakkoKanriChohyoDataList(relateEntityList);
         HihohenshashoHakoKanriboCsvDataSakusei checkListCsv = new HihohenshashoHakoKanriboCsvDataSakusei();
-        List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> eucCsvEntityList;
-        eucCsvEntityList = checkListCsv.getShohakkoKanriCSVDataListAddRenban(
-                chohyoDataSakuseiEntityList,
-                processParameter.isKoumukumeyifukaflg(),
-                processParameter.isHizikehensyuuflg());
+        List<HihohenshashoHakoKanriboCsvDataSakuseiEntity> eucCsvEntityList = new ArrayList<>();
+//        for (HihohenshashoHakkoKanriboChohyoDataSakuseiEntity ent : chohyoDataSakuseiEntityList) {
+//            eucCsvEntityList.add(checkListCsv.getShohakkoKanriCSVDataList(
+//                    ent,
+//                    processParameter.isKoumukumeyifukaflg(),
+//                    processParameter.isHizikehensyuuflg()));
+//        }
+
         if (!eucCsvEntityList.isEmpty()) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
             RString spoolWorkPath = manager.getEucOutputDirectry();
@@ -204,8 +207,8 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
             List<HihokenshashoHakkoKanriIchiranhyoBodyItem> bodyItemList = chohyoDataSakusei.setShohakkoKanriChohyoDataList(relateEntityList);
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200004.getReportId().value()).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-            HihokenshashoHakkoKanriIchiranhyoReport report = HihokenshashoHakkoKanriIchiranhyoReport.createFrom(headItem, bodyItemList);
-            report.writeBy(reportSourceWriter);
+//            HihokenshashoHakkoKanriIchiranhyoReport report = HihokenshashoHakkoKanriIchiranhyoReport.createFrom(headItem, bodyItemList);
+//            report.writeBy(reportSourceWriter);
             batchReportWriter.close();
         }
     }

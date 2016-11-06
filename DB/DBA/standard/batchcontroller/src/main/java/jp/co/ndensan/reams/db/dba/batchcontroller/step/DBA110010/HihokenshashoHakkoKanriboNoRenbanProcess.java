@@ -167,10 +167,18 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
         List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataSakuseiEntityList
                 = chohyoDataSakusei.getShohakkoKanriChohyoDataList(relateEntityList);
         HihohenshashoHakoKanriboCsvDataSakusei checkListCsv = new HihohenshashoHakoKanriboCsvDataSakusei();
-        List<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity> eucCsvEntityList;
-        eucCsvEntityList = checkListCsv.getShohakkoKanriCSVDataList(chohyoDataSakuseiEntityList,
-                processParameter.isKoumukumeyifukaflg(),
-                processParameter.isHizikehensyuuflg());
+        List<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity> eucCsvEntityList = new ArrayList<>();
+        int i = 0;
+        for (HihohenshashoHakkoKanriboChohyoDataSakuseiEntity ent : chohyoDataSakuseiEntityList) {
+            eucCsvEntityList.add(checkListCsv.getShohakkoKanriCSVDataList(chohyoDataSakuseiEntityList.get(i),
+                    processParameter.isKoumukumeyifukaflg(),
+                    processParameter.isHizikehensyuuflg()));
+            i = i + 1;
+        }
+
+//        eucCsvEntityList = checkListCsv.getShohakkoKanriCSVDataList(chohyoDataSakuseiEntityList,
+//                processParameter.isKoumukumeyifukaflg(),
+//                processParameter.isHizikehensyuuflg());
         if (!eucCsvEntityList.isEmpty()) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
             RString spoolWorkPath = manager.getEucOutputDirectry();
@@ -216,7 +224,39 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
             List<HihokenshashoHakkoKanriIchiranhyoBodyItem> bodyItemList = chohyoDataSakusei.setShohakkoKanriChohyoDataList(relateEntityList);
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200004.getReportId().value()).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-            HihokenshashoHakkoKanriIchiranhyoReport report = HihokenshashoHakkoKanriIchiranhyoReport.createFrom(headItem, bodyItemList);
+//            HihokenshashoHakkoKanriIchiranhyoReport report = HihokenshashoHakkoKanriIchiranhyoReport.createFrom(headItem, bodyItemList);
+            HihohenshashoHakkoKanriboChohyoDataSakuseiEntity ent = new HihohenshashoHakkoKanriboChohyoDataSakuseiEntity();
+            ent.setソート順１(headItem.getShutsuryokujun1());
+            ent.setソート順２(headItem.getShutsuryokujun2());
+            ent.setソート順３(headItem.getShutsuryokujun3());
+            ent.setソート順４(headItem.getShutsuryokujun4());
+            ent.setソート順５(headItem.getShutsuryokujun5());
+            ent.setページ数(Integer.parseInt(headItem.getPageCount().toString()));
+            ent.set交付事由コード(RString.EMPTY);
+            ent.set交付事由名称(交付事由);
+            ent.set交付年月日(交付年月日);
+            ent.set住所(カラ);
+            ent.set印刷日時(headItem.getPrintTimeStamp());
+            ent.set回収事由コード(回収事由);
+            ent.set回収事由名称(回収事由);
+            ent.set回収年月日(回収年月日);
+            ent.set市町村コード(コンマ);
+            ent.set市町村名(抽出条件);
+            ent.set帳票タイトル(headItem.getTitle());
+            ent.set改頁１(headItem.getKaipage1());
+            ent.set改頁２(headItem.getKaipage2());
+            ent.set改頁３(headItem.getKaipage3());
+            ent.set改頁４(headItem.getKaipage4());
+            ent.set改頁５(headItem.getKaipage5());
+            ent.set有効期限(抽出条件);
+            ent.set様式(カラ);
+            ent.set氏名(カラ);
+            ent.set被保険者番号(被保険者番号);
+            ent.set識別コード(コンマ);
+            ent.set郵便番号(被保険者番号);
+
+//            HihokenshashoHakkoKanriIchiranhyoReport report = new HihokenshashoHakkoKanriIchiranhyoReport(headItem, bodyItemList);
+            HihokenshashoHakkoKanriIchiranhyoReport report = new HihokenshashoHakkoKanriIchiranhyoReport(ent);
             report.writeBy(reportSourceWriter);
             batchReportWriter.close();
         }
