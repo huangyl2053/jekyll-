@@ -893,7 +893,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     /**
      * 「月報報告 保険給付決定 高額合算分」の処理日付管理情報を取得する。
      */
-    public void set月報報告_保険給付決定_高額分算分() {
+    public void set月報報告_保険給付決定_高額合算分() {
         RDate 過去報告年月_Date = new RDate(div.getTblJikkoTani().getDdlKakoHokokuYM().getSelectedValue().toString());
         RString 処理枝番 = new RString("00").concat(過去報告年月_Date.minusMonth(2).getYearMonth().toDateString().substring(月別));
         ShoriDateKanri 月報報告_保険給付決定_高額合算分 = shoriDateKanriManager.get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,

@@ -4,17 +4,6 @@
             <actionName>CUSTOM-build_no_test</actionName>
             <displayName>build_no_test</displayName>
             <goals>
-                <goal>install</goal>
-                
-            </goals>
-            <properties>
-                <skipTests>true</skipTests>
-            </properties>
-        </action>
-        <action>
-            <actionName>CUSTOM-clean_build_no_test</actionName>
-            <displayName>clean_build_no_test</displayName>
-            <goals>
                 <goal>clean</goal>
                 <goal>install</goal>
             </goals>

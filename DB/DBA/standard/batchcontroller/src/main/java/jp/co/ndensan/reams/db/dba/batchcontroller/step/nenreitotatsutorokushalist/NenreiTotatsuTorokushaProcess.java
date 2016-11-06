@@ -124,10 +124,10 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(
                 key.getPSM検索キー());
         if (RString.isNullOrEmpty(出力順Entity.get出力順OrderBy())) {
-            processParameter.setOrderByFlag(false);
+            processParameter.setUserShutsuryokuSort(false);
         } else {
-            processParameter.setOrderByFlag(true);
-            processParameter.setOrderBy(出力順Entity.get出力順OrderBy());
+            processParameter.setUserShutsuryokuSort(true);
+            processParameter.setShutsuryokuSort(出力順Entity.get出力順OrderBy());
         }
         processParameter.setPsmShikibetsuTaisho(new RString(uaFt200Psm.getParameterMap()
                 .get("psmShikibetsuTaisho").toString()));
@@ -200,14 +200,14 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     }
 
     private void getPSM宛名情報(NenreiTotatsushaJouhouEntity entity) {
-        if (entity.getPsmEntity() != null) {
+        if (entity.get宛名対象者() != null) {
             entity.set世帯コード(ShikibetsuTaishoFactory
-                    .createKojin(entity.getPsmEntity()).get世帯コード());
+                    .createKojin(entity.get宛名対象者()).get世帯コード());
             entity.set被保険者カナ氏名(ShikibetsuTaishoFactory
-                    .createShikibetsuTaisho(entity.getPsmEntity()).get名称()
+                    .createShikibetsuTaisho(entity.get宛名対象者()).get名称()
                     .getKana());
             entity.set被保険者氏名(ShikibetsuTaishoFactory
-                    .createShikibetsuTaisho(entity.getPsmEntity()).get名称()
+                    .createShikibetsuTaisho(entity.get宛名対象者()).get名称()
                     .getName());
         }
     }

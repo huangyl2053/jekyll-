@@ -227,7 +227,7 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
-                    FlexibleDate 要介護認定終了年月日 = div.getCcdKaigoShikakuKihon().get要介護認定終了年月日();
+                    FlexibleDate 要介護認定終了年月日 = new FlexibleDate(div.getCcdKaigoShikakuKihon().get認定終了年月日().toDateString());
                     return 適用開始日.isBeforeOrEquals(要介護認定終了年月日);
                 }
             };

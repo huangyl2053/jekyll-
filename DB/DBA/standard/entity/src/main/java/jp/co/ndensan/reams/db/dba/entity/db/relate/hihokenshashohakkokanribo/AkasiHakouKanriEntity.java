@@ -33,6 +33,9 @@ public class AkasiHakouKanriEntity {
     private FlexibleDate kaishuYMD;
     private RString kaishuJiyu;
     private RString shoYoshikiKubunCode;
+    private RString meisho;
+    private RString yubinNo;
+    private RString jusho;
     private Code kofuJiyuCode;
     private RString kofuJiyuRyakusho;
     private Code kaishuJiyuCode;

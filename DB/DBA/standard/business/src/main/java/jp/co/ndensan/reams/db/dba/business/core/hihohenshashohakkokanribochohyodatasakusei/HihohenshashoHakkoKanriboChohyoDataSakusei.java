@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.Aka
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoYoshikiKubun;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -219,5 +220,81 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_作成);
         return printTimeStampSb.toRString();
+    }
+
+    /**
+     * 帳票分類ID「DBA200004_HihokenshashoHakkoKanriIchiranhyo」（被保険者証発行管理一覧表）出力順設定可能項目です。
+     */
+    public enum ShutsuryokujunEnum implements IReportItems {
+
+        /**
+         * 郵便番号
+         */
+        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
+        /**
+         * 町域コード
+         */
+        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
+        /**
+         * 被保険者番号
+         */
+        被保険者番号(new RString("0104"), new RString("listUpper_1"), new RString("\"shoKofuKaishu_hihokenshaNo\"")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0016"), new RString("listLower_1"), new RString("\"shoKofuKaishu_shichosonCode\"")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0010"), new RString("kanaMeisho"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
+        /**
+         * 交付年月日
+         */
+        交付年月日(new RString("0122"), new RString("listUpper_4"), new RString("\"shoKofuKaishu_kofuYMD\"")),
+        /**
+         * 交付事由
+         */
+        交付事由(new RString("0123"), new RString("listUpper_5"), new RString("\"shoKofuKaishu_kofuJiyu\"")),
+        /**
+         * 回収年月日
+         */
+        回収年月日(new RString("0124"), new RString("listLower_4"), new RString("\"shoKofuKaishu_kaishuYMD\"")),
+        /**
+         * 回収事由
+         */
+        回収事由(new RString("0125"), new RString("listLower_5"), new RString("\"shoKofuKaishu_kaishuJiyu\"")),
+        /**
+         * 有効期限
+         */
+        有効期限(new RString("0126"), new RString("listUpper_8"), new RString("\"shoKofuKaishu_yukoKigenYMD\""));
+
+        private final RString 項目ID;
+        private final RString フォームフィールド名;
+        private final RString myBatis項目名;
+
+        private ShutsuryokujunEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+            this.項目ID = 項目ID;
+            this.フォームフィールド名 = フォームフィールド名;
+            this.myBatis項目名 = myBatis項目名;
+        }
+
+        @Override
+        public RString get項目ID() {
+            return 項目ID;
+        }
+
+        @Override
+        public RString getフォームフィールド名() {
+            return フォームフィールド名;
+        }
+
+        @Override
+        public RString getMyBatis項目名() {
+            return myBatis項目名;
+        }
     }
 }
