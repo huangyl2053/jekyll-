@@ -228,8 +228,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         onChange_cblOutputTaisho1(div);
         onChange_cblOutputTaisho2(div);
         onChange_celOutputTaisho3(div);
-        onChange_cblOutputTaisho4(div);
-        onChange_cblOutputTaisho5(div);
+//        onChange_cblOutputTaisho4(div);
+//        onChange_cblOutputTaisho5(div);
         return ResponseData.of(div).respond();
     }
 
