@@ -150,7 +150,7 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchKeyBreakBase
         eucCsvWriter.writeLine(
                 new KyufuTsuchiGenmenHoseiCsvEntity(
                         entity.getHiHokenshaNo().getColumnValue(),
-                        entity.getPsmName(),
+                        entity.getMeisho(),
                         entity.getServiceTeikyoYM().toDateString(),
                         entity.getJigyoshoNo().getColumnValue(),
                         entity.getJigyoshaName(),

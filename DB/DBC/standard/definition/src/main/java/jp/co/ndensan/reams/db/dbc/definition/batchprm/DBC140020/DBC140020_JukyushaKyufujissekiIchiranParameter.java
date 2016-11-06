@@ -81,6 +81,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
     private static final String KEY_K_RITU_KUBUN = "給付率区分";
     private static final String KEY_KYUHU_RITU = "給付率";
     private static final String KEY_SHUTURYOKU_JUN_ID = "出力順ID";
+    private static final long serialVersionUID = -2683662837649125483L;
 
     @BatchParameter(key = KEY_TAISH_YM, name = "対象年月")
     private RString 対象年月;
@@ -203,7 +204,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
     @BatchParameter(key = KEY_KYUHU_RITU, name = "給付率")
     private RString 給付率;
     @BatchParameter(key = KEY_SHUTURYOKU_JUN_ID, name = "出力順ID")
-    private RString 出力順ID;
+    private long 出力順ID;
 
     /**
      * コンストラクタです。
@@ -336,7 +337,7 @@ public class DBC140020_JukyushaKyufujissekiIchiranParameter extends BatchParamet
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
-            RString 出力順ID) {
+            long 出力順ID) {
         this.対象年月 = 対象年月;
         this.年月範囲_開始 = 年月範囲_開始;
         this.年月範囲_終了 = 年月範囲_終了;

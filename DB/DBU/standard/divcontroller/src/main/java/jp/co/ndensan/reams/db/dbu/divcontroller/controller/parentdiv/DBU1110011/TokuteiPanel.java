@@ -51,8 +51,6 @@ public class TokuteiPanel {
      * @return ResponseData<TokuteiPanelDiv>
      */
     public ResponseData<TokuteiPanelDiv> onLoad(TokuteiPanelDiv div) {
-        // TODO 凌護行 個人番号のアクセス権限については現時点で
-//        未確定の部分があるため、実装できません。 QA1704_#100662
         int 版番号カウント = TokuteiKojinJohoTeikyoManager.createInstance().get版番号カウント();
         getHandler(div).onLoad(版番号カウント);
         RDate 基準日 = RDate.getNowDate();

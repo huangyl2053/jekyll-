@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,7 @@ import lombok.Setter;
 public class TorikomiKokiKoreshaJyohoImportEntity extends DbTableEntityBase<TorikomiKokiKoreshaJyohoImportEntity> implements IDbAccessable {
 
     @CsvField(order = 10, name = "識別コード")
+    @PrimaryKey
     private RString 識別コード;
     @CsvField(order = 20, name = "履歴番号")
     private RString 履歴番号;
@@ -31,6 +33,7 @@ public class TorikomiKokiKoreshaJyohoImportEntity extends DbTableEntityBase<Tori
     @CsvField(order = 40, name = "後期高齢保険者番号(広域)")
     private RString 後期高齢保険者番号_広域;
     @CsvField(order = 50, name = "後期高齢被保険者番号")
+    @PrimaryKey
     private RString 後期高齢被保険者番号;
     @CsvField(order = 60, name = "資格取得事由コード")
     private RString 資格取得事由コード;

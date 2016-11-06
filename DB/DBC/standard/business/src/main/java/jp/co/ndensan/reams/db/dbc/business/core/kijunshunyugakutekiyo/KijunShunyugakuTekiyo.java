@@ -644,10 +644,9 @@ public class KijunShunyugakuTekiyo {
     /**
      * 出力条件を作成するメッソドです。
      *
-     * @param 市町村名 市町村名
      * @return List<RString>
      */
-    public List<RString> set出力条件(RString 市町村名) {
+    public List<RString> set出力条件() {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出条件】"));
@@ -660,11 +659,10 @@ public class KijunShunyugakuTekiyo {
             jokenBuilder.append(new RString("000000 全市町村"));
         } else {
             jokenBuilder.append(new RString("保険者："));
-
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.get保険者コード());
             市町村名builder.append(RString.HALF_SPACE);
-            市町村名builder.append(市町村名);
+            市町村名builder.append(processParameter.get保険者名());
             jokenBuilder.append(市町村名builder.toRString());
         }
         出力条件List.add(jokenBuilder.toRString());
@@ -746,6 +744,8 @@ public class KijunShunyugakuTekiyo {
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         return KijunShunyugakuTekiyoMybatisParameter.createMybatisParameter(processParameter.get保険者コード(),
+                processParameter.get保険者名(),
+                processParameter.get市町村コード(),
                 new RDate(processParameter.get対象年度().toString()).getYear().toDateString(),
                 processParameter.is削除含める(),
                 processParameter.getデータ種別(),

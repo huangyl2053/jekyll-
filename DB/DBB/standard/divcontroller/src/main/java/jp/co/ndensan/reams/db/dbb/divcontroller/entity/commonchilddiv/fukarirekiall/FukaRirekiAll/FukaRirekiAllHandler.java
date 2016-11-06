@@ -200,26 +200,46 @@ public class FukaRirekiAllHandler {
         List<dgFukaRirekiAll_Row> rowList = new ArrayList<>();
         for (Fuka model : new FukaRireki(modelList.toList()).getグループ化賦課履歴()) {
 
-            Optional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), model.get保険料段階());
+            Optional<HokenryoDankai> 保険料段階 = Optional.empty();
+            if (model.get保険料段階() != null && !model.get保険料段階().isEmpty()) {
+                保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), model.get保険料段階());
+            }
+
             Optional<Kiwarigaku> 期割額 = kiwarigakuManager.load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get履歴番号());
 
             if (!期割額.isPresent()) {
                 continue;
             }
+            if (Optional.empty().equals(保険料段階)) {
+                rowList.add(new dgFukaRirekiAll_Row(
+                        model.get調定年度().wareki().toDateString(),
+                        model.get調定年度().toDateString(),
+                        model.get賦課年度().wareki().toDateString(),
+                        model.get賦課年度().toDateString(),
+                        model.get通知書番号().value(),
+                        RString.EMPTY,
+                        FukaMapper.addComma(model.get減免前介護保険料_年額()),
+                        FukaMapper.addComma(model.get減免額()),
+                        FukaMapper.addComma(model.get確定介護保険料_年額()),
+                        FukaMapper.addComma(期割額.get().get特徴期別額合計()),
+                        FukaMapper.addComma(期割額.get().get普徴期別額合計())
+                ));
+            } else {
+                rowList.add(new dgFukaRirekiAll_Row(
+                        model.get調定年度().wareki().toDateString(),
+                        model.get調定年度().toDateString(),
+                        model.get賦課年度().wareki().toDateString(),
+                        model.get賦課年度().toDateString(),
+                        model.get通知書番号().value(),
+                        HokenryoDankaiUtil.edit表示用保険料段階(保険料段階.get()),
+                        FukaMapper.addComma(model.get減免前介護保険料_年額()),
+                        FukaMapper.addComma(model.get減免額()),
+                        FukaMapper.addComma(model.get確定介護保険料_年額()),
+                        FukaMapper.addComma(期割額.get().get特徴期別額合計()),
+                        FukaMapper.addComma(期割額.get().get普徴期別額合計())
+                ));
+            }
 
-            rowList.add(new dgFukaRirekiAll_Row(
-                    model.get調定年度().wareki().toDateString(),
-                    model.get調定年度().toDateString(),
-                    model.get賦課年度().wareki().toDateString(),
-                    model.get賦課年度().toDateString(),
-                    model.get通知書番号().value(),
-                    HokenryoDankaiUtil.edit表示用保険料段階(保険料段階.get()),
-                    FukaMapper.addComma(model.get減免前介護保険料_年額()),
-                    FukaMapper.addComma(model.get減免額()),
-                    FukaMapper.addComma(model.get確定介護保険料_年額()),
-                    FukaMapper.addComma(期割額.get().get特徴期別額合計()),
-                    FukaMapper.addComma(期割額.get().get普徴期別額合計())
-            ));
         }
         div.getDgFukaRirekiAll().setDataSource(rowList);
 
@@ -230,8 +250,8 @@ public class FukaRirekiAllHandler {
         List<dgFukaRirekiAll_Row> selectedItem = new ArrayList<>();
         for (dgFukaRirekiAll_Row row : div.getDgFukaRirekiAll().getDataSource()) {
             if (row.getChoteiNendoHidden().equals(調定年度.value().toDateString())
-                && row.getFukaNendoHidden().equals(賦課年度.value().toDateString())
-                && row.getTsuchishoNo().equals(通知書番号.value())) {
+                    && row.getFukaNendoHidden().equals(賦課年度.value().toDateString())
+                    && row.getTsuchishoNo().equals(通知書番号.value())) {
                 selectedItem.add(row);
             }
         }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * [2_世帯所得・課税判定（バッチ）]のMyBatis用パラメータクラスです。
@@ -16,11 +17,12 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
+@Setter
 public final class SetaiinHaakuSubMybitisParamter implements IMyBatisParameter {
 
-    private final RString 管理識別区分;
-    private final RString 住所地特例該当;
-    private final RString psmShikibetsuTaisho;
+    private RString 管理識別区分;
+    private RString 住所地特例該当;
+    private RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。

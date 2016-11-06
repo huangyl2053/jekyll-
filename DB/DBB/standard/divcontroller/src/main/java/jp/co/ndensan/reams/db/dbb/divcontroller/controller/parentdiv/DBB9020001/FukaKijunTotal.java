@@ -16,11 +16,14 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020001.Fuk
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020001.FukaKijunTotalSaveHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020001.FukaKijunTotalValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -258,13 +261,20 @@ public class FukaKijunTotal {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getSaveHandler(div).変更内容を保存(変更内容List, now);
-        FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
-        div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(MESSAGE,
-                new RString(MESSAGE_KEY.toString().replace(引数_XX, 賦課年度.wareki().toDateString())),
-                RString.EMPTY,
-                true);
-        return ResponseData.of(div).setState(DBB9020001StateName.完了);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+        }
+        if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            getSaveHandler(div).変更内容を保存(変更内容List, now);
+            FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
+            div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(MESSAGE,
+                    new RString(MESSAGE_KEY.toString().replace(引数_XX, 賦課年度.wareki().toDateString())),
+                    RString.EMPTY,
+                    true);
+            return ResponseData.of(div).setState(DBB9020001StateName.完了);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private FukaKijunTotalHandler getHandler(FukaKijunTotalDiv div) {

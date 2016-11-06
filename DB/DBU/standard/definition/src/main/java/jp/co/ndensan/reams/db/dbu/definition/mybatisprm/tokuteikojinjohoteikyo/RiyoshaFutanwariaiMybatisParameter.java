@@ -32,6 +32,7 @@ public final class RiyoshaFutanwariaiMybatisParameter implements IMyBatisParamet
     private final RString 提供区分_個人番号未設定;
     private final RString 提供区分_その他エラー;
     private final RString psmShikibetsuTaisho;
+    private final RString tempTableName;
 
     private RiyoshaFutanwariaiMybatisParameter(
             RString 新規異動区分,
@@ -44,7 +45,8 @@ public final class RiyoshaFutanwariaiMybatisParameter implements IMyBatisParamet
             RString データセット番号_0202利用者割合,
             RString 提供区分_個人番号未設定,
             RString 提供区分_その他エラー,
-            RString psmShikibetsuTaisho
+            RString psmShikibetsuTaisho,
+            RString tempTableName
     ) {
         this.新規異動区分 = 新規異動区分;
         this.is当初または版改定 = is当初または版改定;
@@ -57,6 +59,7 @@ public final class RiyoshaFutanwariaiMybatisParameter implements IMyBatisParamet
         this.提供区分_個人番号未設定 = 提供区分_個人番号未設定;
         this.提供区分_その他エラー = 提供区分_その他エラー;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.tempTableName = tempTableName;
     }
 
     /**
@@ -66,13 +69,15 @@ public final class RiyoshaFutanwariaiMybatisParameter implements IMyBatisParamet
      * @param 対象開始日時 対象開始日時
      * @param 対象終了日時 対象終了日時
      * @param 個人番号付替対象者被保険者番号 個人番号付替対象者被保険者番号
+     * @param 提供基本情報中間テーブル名 提供基本情報中間テーブル名
      * @return RiyoshaFutanwariaiMybatisParameter
      */
     public static RiyoshaFutanwariaiMybatisParameter createParamter提供情報_候補(
             RString 新規異動区分,
             RDateTime 対象開始日時,
             RDateTime 対象終了日時,
-            RString 個人番号付替対象者被保険者番号
+            RString 個人番号付替対象者被保険者番号,
+            RString 提供基本情報中間テーブル名
     ) {
         boolean is当初または版改定 = false;
         boolean is再登録 = false;
@@ -98,28 +103,39 @@ public final class RiyoshaFutanwariaiMybatisParameter implements IMyBatisParamet
                 DataSetNo._0202負担割合.getコード(),
                 TeikyoKubun.個人番号未設定により未提供.getコード(),
                 TeikyoKubun.その他エラーにより未提供.getコード(),
-                RString.EMPTY
+                RString.EMPTY,
+                提供基本情報中間テーブル名
         );
     }
 
     /**
      * 提供対象者のMybatisParameterを生成します。
      *
+     * @param 新規異動区分 新規異動区分
      * @param 宛名 宛名
+     * @param 提供基本情報中間テーブル名 提供基本情報中間テーブル名
      * @return RiyoshaFutanwariaiMybatisParameter
      */
-    public static RiyoshaFutanwariaiMybatisParameter createParamter提供対象者(RString 宛名) {
+    public static RiyoshaFutanwariaiMybatisParameter createParamter提供対象者(
+            RString 新規異動区分,
+            RString 宛名,
+            RString 提供基本情報中間テーブル名) {
+        boolean is異動 = false;
+        if (ShinkiIdoKubun.異動.getコード().equals(新規異動区分)) {
+            is異動 = true;
+        }
         return new RiyoshaFutanwariaiMybatisParameter(
                 RString.EMPTY,
                 false,
                 false,
-                false,
+                is異動,
                 RDateTime.MAX,
                 RDateTime.MAX,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                宛名);
+                宛名,
+                提供基本情報中間テーブル名);
     }
 }

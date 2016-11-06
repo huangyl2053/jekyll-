@@ -129,9 +129,11 @@ public class DBC050010_FurikomimeisaiFurikomiDataParameter extends BatchParamete
      * 処理日付管理マスタ更新とバッチ出力条件パラメターを取得します．
      *
      * @param 処理名 処理名
+     * @param 帳票ページCount 帳票ページCount
      * @return 処理日付管理マスタ更新とバッチ出力条件パラメター
      */
-    public KanendoUpdateFutanwariaiHanteProcessParameter toKanendoUpdateFutanwariaiHanteProcessParameter(ShoriName 処理名) {
+    public KanendoUpdateFutanwariaiHanteProcessParameter toKanendoUpdateFutanwariaiHanteProcessParameter(ShoriName 処理名,
+            RString 帳票ページCount) {
         return new KanendoUpdateFutanwariaiHanteProcessParameter(開始年月日,
                 終了年月日, 処理名,
                 処理区分,
@@ -144,7 +146,8 @@ public class DBC050010_FurikomimeisaiFurikomiDataParameter extends BatchParamete
                 開始受取年月,
                 終了受取年月,
                 抽出対象,
-                対象作成年月日);
+                対象作成年月日,
+                帳票ページCount);
     }
 
     /**

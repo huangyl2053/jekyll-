@@ -38,6 +38,7 @@
         <result property="異動情報データ4" column="idojyohoudata_4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="異動情報データ5" column="idojyohoudata_5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="異動情報データ6" column="idojyohoudata_6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="取得情報_前_事由" column="shutokujyohou_zen_jiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -54,7 +55,7 @@
         <result property="取得情報_後_届出年月日" column="shutokujyohou_go_todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="区分_前_資格" column="kubun_zen_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="区分_後_資格" column="kubun_go_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <association property="宛名対象者" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="getHiHokenshaDaichoList" resultMap="resultMap_getHiHokenshaDaichoList"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter"
@@ -90,6 +91,7 @@
         ,NULL AS "idojyohoudata_3"
         ,NULL AS "idojyohoudata_5"
         ,NULL AS "idojyohoudata_6"
+        ,dbT1001."shichosonCode" AS "shichosonCode"
         ,dbT1001."hihokenshaNo" AS "hihokenshaNo"
         ,dbT1001."shikibetsuCode" AS "shikibetsuCode"
         ,CASE WHEN dbT1001."logicalDeletedFlag" = TRUE
@@ -352,22 +354,23 @@
         ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1001HihokenshaDaicho" AS dbT1001
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
-        AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON        dbT1001."shikibetsuCode"  =
-                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        LEFT JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> 
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON dbT1001."shikibetsuCode" = 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         WHERE
         TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> dbT1001."lastUpdateTimestamp"
         AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
-        AND dbT1001."insertReamsLoginId" = 'anonymous'
         AND (
         dbT1001."idoJiyuCode" = #{idouJiyu_tennyu}
         OR dbT1001."idoJiyuCode" = #{idouJiyu_tensyutu}
         OR dbT1001."idoJiyuCode" = #{idouJiyu_sibou}
         OR dbT1001."idoJiyuCode" = #{idouJiyu_tenkyo}
         )
-        ORDER BY
-        #{shutsuryokuSort}
+        <if test="orderByFlag">
+            ${orderBy}
+        </if>
     </select>
 
     <resultMap id="resultMap_getTaJushochiTokureiShaKanriList" type="jp.co.ndensan.reams.db.dba.entity.db.relate.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity" autoMapping="true">
@@ -382,13 +385,18 @@
         <result property="nyushoShisetsuCode" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nyushoYMD" column="nyushoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="taishoYMD" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <association property="宛名対象者" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="getTaJushochiTokureiShaKanriList_0008Code" resultMap="resultMap_getTaJushochiTokureiShaKanriList"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter"
             fetchSize="500">
         SELECT
-        T1."shikibetsuCode" AS "shikibetsuCode"
+        <!-- TODO "hihokenshaNo"はＤＢに存在しません。-->
+        NULL AS "hihokenshaNo"
+        ,T1."shichosonCode" AS "shichosonCode"
+        ,T1."shikibetsuCode" AS "shikibetsuCode"
         ,T1."idoJiyuCode" AS "idoJiyuCode"
         ,T1."tekiyoYMD" AS "tekiyoYMD"
         ,T1."tekiyoTodokedeYMD" AS "tekiyoTodokedeYMD"
@@ -402,10 +410,11 @@
         ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1003TashichosonJushochiTokurei" T1
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
-        AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON        T1."shikibetsuCode"  =
-                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        LEFT JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> 
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON T1."shikibetsuCode" = 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" A ON
         A."shikibetsuCode" = T1."shikibetsuCode"
         AND A."daichoShubetsu" = '2'
@@ -418,7 +427,9 @@
         AND T1."insertReamsLoginId" = #{loginId}
         ORDER BY
         T1."shikibetsuCode" DESC
-        ,#{shutsuryokuSort}
+        <if test="orderByFlag">
+            ${orderBy}
+        </if>
     </select>
 
     <select resultOrdered="true" id="getShisetsuNyutaisho_2Code" resultMap="resultMap_getTaJushochiTokureiShaKanriList"
@@ -435,13 +446,8 @@
         ,B."nyushoShisetsuCode" AS "nyushoShisetsuCode"
         ,B."nyushoYMD" AS "nyushoYMD"
         ,B."taishoYMD" AS "taishoYMD"
-        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1004ShisetsuNyutaisho" B
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
-        AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON        B."shikibetsuCode"  =
-                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         WHERE
         TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
@@ -449,7 +455,6 @@
         AND B."insertReamsLoginId" = #{loginId}
         ORDER BY
         B."shikibetsuCode" DESC
-        ,#{shutsuryokuSort}
     </select>
 
     <select resultOrdered="true" id="getTaJushochiTokureiShaKanriList_0011Code" resultMap="resultMap_getTaJushochiTokureiShaKanriList"
@@ -467,13 +472,8 @@
         ,C."nyushoShisetsuCode" AS "nyushoShisetsuCode"
         ,C."nyushoYMD" AS "nyushoYMD"
         ,C."taishoYMD" AS "taishoYMD"
-        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1003TashichosonJushochiTokurei" T1
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
-        AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON        T1."shikibetsuCode"  =
-                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" C ON
         C."shikibetsuCode" = T1."shikibetsuCode"
         AND C."daichoShubetsu" = '2'
@@ -486,7 +486,6 @@
         AND T1."insertReamsLoginId" = #{loginId}
         ORDER BY
         T1."shikibetsuCode" DESC
-        ,#{shutsuryokuSort}
     </select>
 
     <resultMap id="resultMap_getTekiyoJogaishaDaichoList" type="jp.co.ndensan.reams.db.dba.entity.db.relate.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity" autoMapping="true">
@@ -501,13 +500,17 @@
         <result property="nyushoShisetsuCode" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nyushoYMD" column="nyushoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="taishoYMD" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <association property="宛名対象者" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>   
     </resultMap>
     <select resultOrdered="true" id="getTekiyoJogaishaDaichoList_0009Code" resultMap="resultMap_getTekiyoJogaishaDaichoList"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter"
             fetchSize="500">
         SELECT
-        T1."shikibetsuCode" AS "shikibetsuCode"
+        NULL AS "hihokenshaNo"
+        ,T1."shichosonCode" AS "shichosonCode"
+        ,T1."shikibetsuCode" AS "shikibetsuCode"
         ,T1."idoJiyuCode" AS "idoJiyuCode"
         ,T1."tekiyoYMD" AS "tekiyoYMD"
         ,T1."tekiyoTodokedeYMD" AS "tekiyoTodokedeYMD"
@@ -521,10 +524,11 @@
         ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1002TekiyoJogaisha" T1
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
-        AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON        T1."shikibetsuCode"  =
-                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        LEFT JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> 
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON T1."shikibetsuCode" = 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" A ON
         A."shikibetsuCode" = T1."shikibetsuCode"
         AND A."daichoShubetsu" = '3'
@@ -537,7 +541,9 @@
         AND T1."insertReamsLoginId" = #{loginId}
         ORDER BY
         T1."shikibetsuCode"
-        ,#{shutsuryokuSort}
+        <if test="orderByFlag">
+            ${orderBy}
+        </if>
     </select>
 
     <select resultOrdered="true" id="getShisetsuNyutaisho_3Code" resultMap="resultMap_getTekiyoJogaishaDaichoList"
@@ -554,13 +560,8 @@
         ,B."nyushoShisetsuCode" AS "nyushoShisetsuCode"
         ,B."nyushoYMD" AS "nyushoYMD"
         ,B."taishoYMD" AS "taishoYMD"
-        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1004ShisetsuNyutaisho" B
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
-        AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON        B."shikibetsuCode"  =
-                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         WHERE
         TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> B."lastUpdateTimestamp"
         AND B."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
@@ -568,7 +569,6 @@
         AND B."insertReamsLoginId" = #{loginId}
         ORDER BY
         B."shikibetsuCode"
-        ,#{shutsuryokuSort}
     </select>
 
     <select resultOrdered="true" id="getTekiyoJogaishaDaichoList_0012Code" resultMap="resultMap_getTekiyoJogaishaDaichoList"
@@ -586,13 +586,8 @@
         ,C."nyushoShisetsuCode" AS "nyushoShisetsuCode"
         ,C."nyushoYMD" AS "nyushoYMD"
         ,C."taishoYMD" AS "taishoYMD"
-        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1002TekiyoJogaisha" T1
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
-        AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON        T1."shikibetsuCode"  =
-                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" C ON
         C."shikibetsuCode" = T1."shikibetsuCode"
         AND C."daichoShubetsu" = '3'
@@ -605,7 +600,6 @@
         AND T1."insertReamsLoginId" = #{loginId}
         ORDER BY
         T1."shikibetsuCode"
-        ,#{shutsuryokuSort}
     </select>
 
     <insert id="insertShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >
@@ -638,14 +632,4 @@
         "subGyomuCode" = #{subGyomuCode}
         AND "shoriName" = #{shoriName}
     </update>
-
-    <select resultOrdered="true" id="getPsmShikibetsuTaisho" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.PsmShikibetsuTaishoMybatisParameter"
-            fetchSize="500">
-        SELECT
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-        FROM
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
-        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-    </select>
 </mapper>

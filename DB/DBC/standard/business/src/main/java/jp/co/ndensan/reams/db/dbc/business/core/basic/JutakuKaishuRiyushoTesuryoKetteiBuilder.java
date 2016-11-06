@@ -7,14 +7,17 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JutakuKaishuRiyushoTesuryoKettei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-2870-010 zhangruitao
  */
 public class JutakuKaishuRiyushoTesuryoKetteiBuilder {
 
@@ -54,12 +57,12 @@ public class JutakuKaishuRiyushoTesuryoKetteiBuilder {
     /**
      * 決定年月日を設定します。
      *
-     * @param 決定年月日 決定年月日
+     * @param 証記載保険者番号 証記載保険者番号
      * @return {@link JutakuKaishuRiyushoTesuryoKetteiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoKetteiBuilder set決定年月日(FlexibleDate 決定年月日) {
-        requireNonNull(決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定年月日"));
-        entity.setKetteiYMD(決定年月日);
+    public JutakuKaishuRiyushoTesuryoKetteiBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        entity.setShoKisaiHokenshaNo(証記載保険者番号);
         return this;
     }
 
@@ -120,6 +123,42 @@ public class JutakuKaishuRiyushoTesuryoKetteiBuilder {
     public JutakuKaishuRiyushoTesuryoKetteiBuilder set住宅改修理由書作成手数料支払予定日(FlexibleDate 住宅改修理由書作成手数料支払予定日) {
         requireNonNull(住宅改修理由書作成手数料支払予定日, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修理由書作成手数料支払予定日"));
         entity.setTesuryoShiharaiYoteiYMD(住宅改修理由書作成手数料支払予定日);
+        return this;
+    }
+
+    /**
+     * 決定通知書作成年月日を設定します。
+     *
+     * @param 決定通知書作成年月日 決定通知書作成年月日
+     * @return {@link JutakuKaishuRiyushoTesuryoKetteiBuilder}
+     */
+    public JutakuKaishuRiyushoTesuryoKetteiBuilder set決定通知書作成年月日(FlexibleDate 決定通知書作成年月日) {
+        requireNonNull(決定通知書作成年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定通知書作成年月日"));
+        entity.setKetteiTsuchiSakuseiYMD(決定通知書作成年月日);
+        return this;
+    }
+
+    /**
+     * 振込通知書作成年月日を設定します。
+     *
+     * @param 振込通知書作成年月日 振込通知書作成年月日
+     * @return {@link JutakuKaishuRiyushoTesuryoKetteiBuilder}
+     */
+    public JutakuKaishuRiyushoTesuryoKetteiBuilder set振込通知書作成年月日(FlexibleDate 振込通知書作成年月日) {
+        requireNonNull(振込通知書作成年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("振込通知書作成年月日"));
+        entity.setFurikomiTsuchiSakuseiYMD(振込通知書作成年月日);
+        return this;
+    }
+
+    /**
+     * 集計関連付け番号を設定します。
+     *
+     * @param 集計関連付け番号 集計関連付け番号
+     * @return {@link JutakuKaishuRiyushoTesuryoKetteiBuilder}
+     */
+    public JutakuKaishuRiyushoTesuryoKetteiBuilder set集計関連付け番号(RString 集計関連付け番号) {
+        requireNonNull(集計関連付け番号, UrSystemErrorMessages.値がnull.getReplacedMessage("集計関連付け番号"));
+        entity.setShukeiNo(集計関連付け番号);
         return this;
     }
 

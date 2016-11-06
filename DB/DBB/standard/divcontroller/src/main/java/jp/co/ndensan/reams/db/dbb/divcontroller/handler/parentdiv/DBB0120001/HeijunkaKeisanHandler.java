@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.ShorijyokyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.HeijunkaKeisanPageJoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
@@ -193,12 +195,19 @@ public class HeijunkaKeisanHandler {
 
         ArrayList<OutputChohyoIchiran> outputChohyoIchiranList = new ArrayList<>();
         OutputChohyoIchiran outputChohyoIchiran;
-        for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
-            outputChohyoIchiran = new OutputChohyoIchiran();
-            outputChohyoIchiran.set帳票分類ID(row.getChohyoID());
-            outputChohyoIchiran.set帳票名(row.getChohyoName());
-            outputChohyoIchiran.set出力順ID(row.getShutsuryokujunID());
-            outputChohyoIchiranList.add(outputChohyoIchiran);
+        Map<RString, RString> 出力帳票Map = div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        Iterator<Map.Entry<RString, RString>> it = 出力帳票Map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<RString, RString> 出力帳票 = it.next();
+            for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
+                if (出力帳票.getKey().equals(row.getChohyoID())) {
+                    outputChohyoIchiran = new OutputChohyoIchiran();
+                    outputChohyoIchiran.set帳票分類ID(row.getChohyoID());
+                    outputChohyoIchiran.set帳票名(row.getChohyoName());
+                    outputChohyoIchiran.set出力順ID(row.getShutsuryokujunID());
+                    outputChohyoIchiranList.add(outputChohyoIchiran);
+                }
+            }
         }
         data.set出力帳票一覧List(outputChohyoIchiranList);
         data.set発行日(div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue());
@@ -214,7 +223,7 @@ public class HeijunkaKeisanHandler {
         }
         data.set出力対象指示フラグ(出力対象);
         data.set一括発行フラグ(false);
-
+        data.set文書番号(div.getTokuchoHeijunkaChohyoHakko().getCcdHeijunkaHenkoTsuchishoBunshoNo().get文書番号());
         KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = KaigoFukaTokuchoHeijunka6.createInstance();
         return kaigoFukaTokuchoHeijunka6.getBatchiPara(data);
     }
@@ -252,12 +261,19 @@ public class HeijunkaKeisanHandler {
 
         ArrayList<OutputChohyoIchiran> outputChohyoIchiranList = new ArrayList<>();
         OutputChohyoIchiran outputChohyoIchiran;
-        for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
-            outputChohyoIchiran = new OutputChohyoIchiran();
-            outputChohyoIchiran.set帳票分類ID(row.getChohyoID());
-            outputChohyoIchiran.set帳票名(row.getChohyoName());
-            outputChohyoIchiran.set出力順ID(row.getShutsuryokujunID());
-            outputChohyoIchiranList.add(outputChohyoIchiran);
+        Map<RString, RString> 出力帳票Map = div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        Iterator<Map.Entry<RString, RString>> it = 出力帳票Map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<RString, RString> 出力帳票 = it.next();
+            for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
+                if (出力帳票.getKey().equals(row.getChohyoID())) {
+                    outputChohyoIchiran = new OutputChohyoIchiran();
+                    outputChohyoIchiran.set帳票分類ID(row.getChohyoID());
+                    outputChohyoIchiran.set帳票名(row.getChohyoName());
+                    outputChohyoIchiran.set出力順ID(row.getShutsuryokujunID());
+                    outputChohyoIchiranList.add(outputChohyoIchiran);
+                }
+            }
         }
         data.set出力帳票一覧List(outputChohyoIchiranList);
         data.set発行日(div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue());

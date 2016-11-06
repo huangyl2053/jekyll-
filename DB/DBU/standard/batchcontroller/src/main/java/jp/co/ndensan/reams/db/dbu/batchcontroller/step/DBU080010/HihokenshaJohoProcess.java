@@ -47,6 +47,8 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
     private int 資格履歴番号;
     private HihokenshaJohoRelateEntity 退避レコード;
     private boolean 設定フラグ = true;
+    private static final int INT_SAN = 3;
+    private static final int INT_YON = 4;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter teikyoKihonJohoNNTemp;
@@ -54,9 +56,10 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
     @Override
     protected void initialize() {
         RString 新規異動区分 = processParameter.get新規異動区分();
+        特定個人情報名コード = processParameter.get特定個人情報名コード();
         TokuteiKojinJohoHanKanri 特定個人情報版管理 = TokuteiKojinJohoTeikyoManager.createInstance()
                 .get版番号(新規異動区分, 特定個人情報名コード,
-                        DataSetNo._0201受給者基本情報.getコード(), FlexibleDate.getNowDate()).get(0);
+                        DataSetNo._0101被保険者情報.getコード(), FlexibleDate.getNowDate()).get(0);
         版番号 = 特定個人情報版管理.get版番号();
         特定個人情報名コード = 特定個人情報版管理.get特定個人情報名コード();
         HihokenshaNo 個人番号付替対象者被保険者番号 = processParameter.get個人番号付替対象者被保険者番号();
@@ -91,7 +94,9 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
 
     @Override
     protected void afterExecute() {
-        if (!退避レコード.getShikakuShutokuYMD().toString().equals(退避レコード.getShikakuSoshitsuYMD().toString())) {
+        if (退避レコード != null
+                && !退避レコード.getShikakuShutokuYMD().toString().
+                equals(退避レコード.getShikakuSoshitsuYMD().toString())) {
             資格履歴番号 = 資格履歴番号 + 1;
             set中間DB(退避レコード);
         }
@@ -110,9 +115,9 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
         tempEntity.setTeikyoNaiyo02(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         tempEntity.setMisetteiJiyu02(RString.EMPTY);
-        tempEntity.setTeikyoNaiyo03(entity.getShikakuShutokuYMD().wareki().toDateString());
+        tempEntity.setTeikyoNaiyo03(get日付(entity.getShikakuShutokuYMD()));
         tempEntity.setMisetteiJiyu03(RString.EMPTY);
-        tempEntity.setTeikyoNaiyo04(entity.getShikakuSoshitsuYMD().wareki().toDateString());
+        tempEntity.setTeikyoNaiyo04(get日付(entity.getShikakuSoshitsuYMD()));
         tempEntity.setMisetteiJiyu04(get未設定事由(entity.getShikakuSoshitsuYMD()));
         tempEntity.setTeikyoNaiyo05(get資格異動事由コード(entity));
         tempEntity.setMisetteiJiyu05(RString.EMPTY);
@@ -251,8 +256,14 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
     }
 
     private RString setデータセットキー(HihokenshaJohoRelateEntity entity) {
+        RString 番号 = new RString(String.valueOf(資格履歴番号));
+        for (int i = 0; i < INT_SAN; i++) {
+            if (番号.length() < INT_YON) {
+                番号 = new RString("0").concat(番号);
+            }
+        }
         return entity.getHihokenshaNo().value().concat(
-                DataSetNo._0101被保険者情報.getコード());
+                DataSetNo._0101被保険者情報.getコード()).concat(番号);
     }
 
     private RString get未設定事由(FlexibleDate 日付) {
@@ -262,4 +273,10 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
         return RString.EMPTY;
     }
 
+    private RString get日付(FlexibleDate 日付) {
+        if (日付 != null && !日付.isEmpty()) {
+            return 日付.wareki().toDateString();
+        }
+        return RString.EMPTY;
+    }
 }

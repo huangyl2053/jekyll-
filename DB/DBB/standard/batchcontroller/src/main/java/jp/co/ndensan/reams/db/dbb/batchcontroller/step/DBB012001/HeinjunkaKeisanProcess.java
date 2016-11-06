@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.HeijunkaTaishogaiRiyu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity;
@@ -45,12 +46,15 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
+    private static final int NUM_10 = 10;
+    private static final int NUM_100 = 100;
+    private static final int NUM_1000 = 1000;
     private static final int NUM_11 = 11;
     private static final RString 平準化対象外理由区分_最小値未満 = new RString("1");
     private static final RString 平準化対象外理由区分_計算方法より = new RString("2");
-    private static final RString 備考コード_結果0円以下 = new RString("3");
-    private static final RString 備考コード_対象外減額 = new RString("4");
-    private static final RString 備考コード_対象外増額 = new RString("5");
+    private static final RString 平準化しない = new RString("0");
     private static RString 特徴期情報_設定納期数;
     private static RString 特徴期情報_仮算定期数;
     private static RString 特別徴収_期別端数;
@@ -133,7 +137,7 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
         業務コンフィグ情報.set特徴仮算定期数(Integer.parseInt(特徴期情報_仮算定期数.toString()));
         業務コンフィグ情報.set平準化計算方法増額分(Integer.parseInt(平準化計算方法_増額.toString()));
         業務コンフィグ情報.set平準化計算方法減額分(Integer.parseInt(平準化計算方法_減額.toString()));
-        業務コンフィグ情報.set端数区分特徴期別額(Integer.parseInt(特別徴収_期別端数.toString()));
+        業務コンフィグ情報.set端数区分特徴期別額(端数区分特徴期別額転換(Integer.parseInt(特別徴収_期別端数.toString())));
         業務コンフィグ情報.set基準となる差額幅(Decimal.ZERO);
         業務コンフィグ情報.set基準となる差額率(Decimal.ZERO);
         業務コンフィグ情報.set平準化対象期別額最小値(Decimal.ONE);
@@ -141,6 +145,27 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
         期別リスト作成(期別リスト);
         業務コンフィグ情報.set期別クラス(期別リスト);
         heijunkaInput.set業務コンフィグ情報(業務コンフィグ情報);
+    }
+
+    private int 端数区分特徴期別額転換(int 特別徴収_期別端数) {
+        int 期別端数 = 0;
+        switch (特別徴収_期別端数) {
+            case NUM_1:
+                期別端数 = NUM_1;
+                break;
+            case NUM_10:
+                期別端数 = NUM_2;
+                break;
+            case NUM_100:
+                期別端数 = NUM_3;
+                break;
+            case NUM_1000:
+                期別端数 = NUM_4;
+                break;
+            default:
+                break;
+        }
+        return 期別端数;
     }
 
     private Decimal getFuchoChoteigaku(Decimal fuchoChoteigaku) {
@@ -169,18 +194,16 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
     private RString get備考コード(HeijunkaOutput 平準化結果) {
         RString 平準化対象外理由区分 = 平準化結果.get平準化対象外理由区分();
         RString 備考コード = RString.EMPTY;
-        List<Decimal> 変更後特徴期別額 = 平準化結果.get変更後特徴期別額();
-        final Decimal 変更後特徴期別額ひとつ = 変更後特徴期別額.get(NUM_0);
-        final Decimal 変更後特徴期別額ふたつ = 変更後特徴期別額.get(NUM_1);
         if (平準化対象外理由区分_最小値未満.equals(平準化対象外理由区分)) {
-            備考コード = 備考コード_結果0円以下;
-        } else if (変更後特徴期別額ひとつ != null && 変更後特徴期別額ふたつ != null) {
-            final boolean is平準化対象外理由区分計算方法より = 平準化対象外理由区分_計算方法より.equals(平準化対象外理由区分);
-            if (is平準化対象外理由区分計算方法より && 変更後特徴期別額ふたつ.compareTo(変更後特徴期別額ひとつ) < 0) {
-                備考コード = 備考コード_対象外減額;
-            } else if (is平準化対象外理由区分計算方法より && 変更後特徴期別額ひとつ.compareTo(変更後特徴期別額ふたつ) < 0) {
-                備考コード = 備考コード_対象外増額;
+            備考コード = HeijunkaTaishogaiRiyu.平準化の結果0円以下.getコード();
+        } else if (平準化対象外理由区分_計算方法より.equals(平準化対象外理由区分)) {
+            if (平準化しない.equals(parameter.get減額平準化方法())) {
+                備考コード = HeijunkaTaishogaiRiyu.対象外_減額.getコード();
+            } else if (平準化しない.equals(parameter.get増額平準化方法())) {
+                備考コード = HeijunkaTaishogaiRiyu.対象外_増額.getコード();
             }
+        } else {
+            備考コード = HeijunkaTaishogaiRiyu.変更なし.getコード();
         }
         return 備考コード;
     }

@@ -106,7 +106,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         }
         if ((!RString.isNullOrEmpty(entity.is課税層の特例減額措置対象フラグ()))
                 && RString.isNullOrEmpty(result.is課税層の特例減額措置対象フラグ())) {
-            resultEdit = resultEdit.set特定入所者介護サービス区分コード(半角アスタリスク);
+            resultEdit = resultEdit.set課税層の特例減額措置対象フラグ(半角アスタリスク);
         }
         if ((!RString.isNullOrEmpty(entity.get軽減率()))
                 && RString.isNullOrEmpty(result.get軽減率())) {
@@ -309,7 +309,10 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
                         new RDate(idiv.get受給者異動送付().get異動年月日().toString()), チェック場合);
         JukyushaIdoRenrakuhyoPrintSevice printService
                 = new JukyushaIdoRenrakuhyoPrintSevice();
-        return printService.printSingle(受給者連絡票データ);
+        if (受給者連絡票データ.get異動年月日() != null) {
+            return printService.printSingle(受給者連絡票データ);
+        }
+        return null;
     }
 
     private RString チェック場合state() {

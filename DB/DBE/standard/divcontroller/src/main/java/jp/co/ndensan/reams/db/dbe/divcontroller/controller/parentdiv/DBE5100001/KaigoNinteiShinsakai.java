@@ -49,6 +49,8 @@ public class KaigoNinteiShinsakai {
     private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN62003");
     private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN62002");
     private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN62004");
+    private static final RString メニューID_介護認定審査会委員割付 = new RString("DBEMN61010");
+    private static final RString 遷移モード_介護認定審査会委員割付 = new RString("shinsakaiShiryoSakusei");
     private static final int 数字_0 = 0;
 
     /**
@@ -195,6 +197,7 @@ public class KaigoNinteiShinsakai {
         mode.put(メニューID_審査会審査結果登録, 遷移モード_介護認定審査会委員事前審査結果登録);
         mode.put(メニューID_介護認定審査会審査結果データ取込み, 遷移モード_介護認定審査会審査結果データ取込み);
         mode.put(メニューID_介護認定審査会審査結果登録, 遷移モード_介護認定審査会審査結果登録);
+        mode.put(メニューID_介護認定審査会委員割付, 遷移モード_介護認定審査会委員割付);
         return mode;
     }
 
@@ -210,6 +213,7 @@ public class KaigoNinteiShinsakai {
         state.put(メニューID_審査会審査結果登録, DBE5100001StateName.審査結果登録);
         state.put(メニューID_介護認定審査会審査結果データ取込み, DBE5100001StateName.データ取込み_モバイル);
         state.put(メニューID_介護認定審査会審査結果登録, DBE5100001StateName.結果登録_OCR);
+        state.put(メニューID_介護認定審査会委員割付, DBE5100001StateName.審査会資料);
         return state;
     }
 }

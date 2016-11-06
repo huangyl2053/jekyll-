@@ -99,7 +99,7 @@ public class KaigojuminHyotrukuProcess {
      * @param 処理日時 RDateTime
      * @return entity
      */
-    public DbT7022ShoriDateKanriEntity データ編集(KaigojuminHyotrukuProcessParameter processParameter,
+    public DbT7022ShoriDateKanriEntity データ更新(KaigojuminHyotrukuProcessParameter processParameter,
             RDateTime 処理日時, DbT7022ShoriDateKanriEntity dateentity) {
         processParameter.setShoriTimestamp(YMDHMS.now().getRDateTime());
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
@@ -128,7 +128,7 @@ public class KaigojuminHyotrukuProcess {
      * @param 処理日時 RDateTime
      * @return entity
      */
-    public DbT7022ShoriDateKanriEntity データ更新(KaigojuminHyotrukuProcessParameter processParameter,
+    public DbT7022ShoriDateKanriEntity データ編集(KaigojuminHyotrukuProcessParameter processParameter,
             RDateTime 処理日時, DbT7022ShoriDateKanriEntity dateentity) {
         processParameter.setShoriTimestamp(YMDHMS.now().getRDateTime());
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();

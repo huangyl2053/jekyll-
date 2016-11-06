@@ -147,12 +147,12 @@ public class NenreiKaikyuRiyoJokyoFinder {
             集計番号 = entityList.get(0).getShuukeibangou();
         }
         for (int i = 0; i < entityList.size(); i++) {
+            edit対象レコード(updateParEntityList, entityList.get(i), mapper);
             if (!集計番号.equals(entityList.get(i).getShuukeibangou())) {
                 updateDB出力出力用一時TBL(updateParEntityList, mapper);
                 updateParEntityList = createntitylist();
                 集計番号 = entityList.get(i).getShuukeibangou();
             }
-            edit対象レコード(updateParEntityList, entityList.get(i), mapper);
         }
     }
 
@@ -503,9 +503,11 @@ public class NenreiKaikyuRiyoJokyoFinder {
                 || updateEntity.get集計番号().equals(RSTRING_20) || updateEntity.get集計番号().equals(RSTRING_36)
                 || updateEntity.get集計番号().equals(RSTRING_40) || updateEntity.get集計番号().equals(RSTRING_41)
                 || updateEntity.get集計番号().equals(RSTRING_42)) {
-            if (サービス項目コード_1.equals(updateEntity.getサービス項目コード().substring(定数2, 定数3))) {
+            if (!RString.isNullOrEmpty(updateEntity.getサービス項目コード())
+                    && サービス項目コード_1.equals(updateEntity.getサービス項目コード().substring(定数2, 定数3))) {
                 update(updateEntity, RSTRING_51, mapper);
-            } else if (サービス項目コード_2.equals(updateEntity.getサービス項目コード().substring(定数2, 定数3))) {
+            } else if (!RString.isNullOrEmpty(updateEntity.getサービス項目コード())
+                    && サービス項目コード_2.equals(updateEntity.getサービス項目コード().substring(定数2, 定数3))) {
                 update(updateEntity, RSTRING_52, mapper);
             }
         }

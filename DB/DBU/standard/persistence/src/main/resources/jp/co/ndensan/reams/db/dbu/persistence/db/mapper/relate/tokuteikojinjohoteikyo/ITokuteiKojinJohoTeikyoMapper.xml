@@ -12,6 +12,7 @@
             fetchSize="500">
         SELECT COUNT("hanNo")
         FROM rgdb."DbT7301TokuteiKojinJohoHanKanri"
+        WHERE "shokaiTeikyoKubun" = #{shokaiTeikyoKubun}
     </select>
 
     <select id="getKijunYMD"
@@ -34,9 +35,24 @@
         , "taishoShuryoTimestamp"
         FROM rgdb."DbT7022ShoriDateKanri"
         WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode}
-        AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName}
+        AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName1}
         ORDER BY "DbT7022ShoriDateKanri"."kijunTimestamp" DESC
         LIMIT 1
+    </select>
+
+    <select id="getShoriDateKanriByShoriName"
+            resultOrdered="true"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoMybatisParamater"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>
+        FROM rgdb."DbT7022ShoriDateKanri"
+        WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode}
+        AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName1}
+        <if test="isTosyo">
+            OR "DbT7022ShoriDateKanri"."shoriName" = #{shoriName2}
+        </if>
     </select>
 
     <select id="getJukyushaDaichoTeikyoJohoKoho"
@@ -59,7 +75,7 @@
         , dbT4001."lastUpdateTimestamp"
         , dbT4001."logicalDeletedFlag"
         , dbT4102."shinseishoKanriNo" AS ninteiShinseishoKanriNo
-        , dbT4102."ninteishinsakaiIkenShurui"
+        , dbT4102."shinsakaiIken"
         , dbT4102."lastUpdateTimestamp" AS ninteiLastUpdateTimestamp
         , dbT4102."isDeleted" AS ninteiLogicalDeletedFlag
         FROM rgdb."DbT4001JukyushaDaicho" dbT4001
@@ -90,7 +106,7 @@
             , dbT4001."lastUpdateTimestamp"
             , dbT4001."logicalDeletedFlag"
             , dbT4102."shinseishoKanriNo" AS ninteiShinseishoKanriNo
-            , dbT4102."ninteishinsakaiIkenShurui"
+            , dbT4102."shinsakaiIken"
             , dbT4102."lastUpdateTimestamp" AS ninteiLastUpdateTimestamp
             , dbT4102."isDeleted" AS ninteiLogicalDeletedFlag
             FROM rgdb."DbT4001JukyushaDaicho" dbT4001

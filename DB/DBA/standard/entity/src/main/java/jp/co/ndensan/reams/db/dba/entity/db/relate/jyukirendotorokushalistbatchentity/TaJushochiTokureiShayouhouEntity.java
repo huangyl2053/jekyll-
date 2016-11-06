@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.jyukirendotorokushalistbatchentity;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,5 +33,7 @@ public class TaJushochiTokureiShayouhouEntity {
     private RString nyushoShisetsuCode;
     private FlexibleDate nyushoYMD;
     private FlexibleDate taishoYMD;
-    private UaFt200FindShikibetsuTaishoEntity 宛名対象者;
+    private LasdecCode shichosonCode;
+    private HihokenshaNo hihokenshaNo;
+    private UaFt200FindShikibetsuTaishoEntity psmEntity;
 }

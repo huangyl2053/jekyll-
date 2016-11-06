@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -110,7 +111,11 @@ public class DvKogakuServiceJoho {
     public ResponseData<BatchParameterMap> onClick_btnKogakuParamSave(DvKogakuServiceJohoDiv div) {
         RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        responseData.data = new BatchParameterMap(getHandler(div).getBatchParamter(市町村判定));
+        DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter parameter = getHandler(div).getBatchParamter(市町村判定);
+        parameter.setKinyuKikanShitenCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
+                .getKinyuKikanShitenCode() == null ? KinyuKikanShitenCode.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanShitenCode());
+        responseData.data = new BatchParameterMap(parameter);
         return responseData;
     }
 

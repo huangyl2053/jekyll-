@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassankyufujissekiout;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -21,4 +22,5 @@ public class KogakugassanKyufujissekiCreateSofuFileProcessParameter implements I
 
     private FlexibleYearMonth 処理年月;
     private RString 交換情報識別番号;
+    private Encode 文字コード;
 }

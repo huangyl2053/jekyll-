@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600011;
 
 import java.util.ArrayList;
 import java.util.List;
+import static jp.co.ndensan.reams.bb.bbx.business.util.KingakuUtil.nullToZero;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinseiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 福祉用具購入費支給申請_検索のHandlerです
@@ -70,8 +72,8 @@ public final class PnlTotalHandler {
             if (shinsei.get商品名() != null) {
                 row.setTxtShohinmei(new RString(shinsei.get商品名().toString()));
             }
-            if (shinsei.get購入金額合計() != null) {
-                row.setTxtKonyuKingaku(new RString(shinsei.get購入金額合計().toString()));
+            if (shinsei.get保険対象費用額() != null) {
+                row.setTxtKonyuKingaku(DecimalFormatter.toコンマ区切りRString(nullToZero(shinsei.get保険対象費用額()), 0));
             }
             if (shinsei.get事業者番号() != null) {
                 row.setTxtJigyosyaNo(shinsei.get事業者番号().value());

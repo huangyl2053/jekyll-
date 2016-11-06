@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.ca.cax.definition.core.shuno.shunyu.ShunoDataKubun;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokudankaibetsushunoritsuichiran.ShotokuDankaiBetsuShunoritsuIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokudankaibetsushunoritsuichiran.ShotokuDankaiBetsuShunoritsuIchiranReport;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu.PrtDankaibetsuShunoritsuIchiranhyoParameter;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.dankaibetsushunoritsu.ShotokuDankaiBetsuShunoritsuIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -62,12 +65,6 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int INT_0 = 0;
-    private static final int INT_50 = 50;
-    private static final int INT_51 = 51;
-    private static final int INT_52 = 52;
-    private static final int INT_56 = 56;
-    private static final int INT_60 = 60;
-    private static final int INT_70 = 70;
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString RSTRING_0 = new RString("0.00");
@@ -76,12 +73,11 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private static final RString 抽出条件_認定者のみ = new RString("2");
     private static final RString 抽出条件_受給者のみ = new RString("3");
     private static final RString 抽出条件_認定者を除く１号被保険者 = new RString("4");
-    private static final RString 広域判定区分_広域保険者 = new RString("111");
-    private static final RString 広域判定区分_単一市町村 = new RString("120");
     private static final RString 調定年度 = new RString("調定年度");
     private static final RString 賦課年度 = new RString("賦課年度");
     private static final RString 科目コード = new RString("科目コード");
     private static final RString 構成市町村コード = new RString("構成市町村コード");
+    private static final RString 収納区分 = new RString("収納データ区分");
     private static final RString FORMAT_TYPE = new RString("0.00");
     private static final RString TEXT_中括弧_左 = new RString("【");
     private static final RString TEXT_中括弧_右 = new RString("】");
@@ -104,8 +100,8 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private static final RString TEXT_収納区分 = new RString("収納区分");
     private static final RString TEXT_完納分を出力する = new RString("完納分を出力する");
     private static final RString TEXT_未納分を出力する = new RString("未納分を出力する");
-    private static final RString 未納分 = new RString("未納分");
-    private static final RString 完納分 = new RString("完納分");
+    private static final RString 未納分 = new RString("0");
+    private static final RString 完納分 = new RString("1");
     private static final RString 保険料段階の小計 = new RString("**");
     private static final Decimal 負数_1 = new Decimal(-1);
     private static final Decimal NUM_100 = new Decimal(100);
@@ -288,6 +284,14 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (beforeEntity == null) {
             beforeEntity = entity;
         }
+        if (!entity.getKannnouKunbun().equals(beforeEntity.getKannnouKunbun())) {
+            prt小計合計();
+            prt総合計();
+            clear小計();
+            clear合計();
+            clear総合計();
+            beforeEntity = entity;
+        }
         boolean is科目コード改頁 = new ShotokuDankaiBetsuShunoritsuIchiranPageBreak(改頁List).
                 is科目コード改頁(entity, beforeEntity);
         boolean is市町村コード改頁 = new ShotokuDankaiBetsuShunoritsuIchiranPageBreak(改頁List).
@@ -335,10 +339,12 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
                 通知書report.writeBy(reportSourceWriter_一覧表);
             }
             clear合計();
-            get合計集計(entity);
-        } else {
-            get合計集計(entity);
         }
+        if (is市町村コード改頁) {
+            prt総合計();
+            clear総合計();
+        }
+        get合計集計(entity);
         DankaibetsuShunoritsuIchiran 険料段階別収納率通知書Data = get険料段階別収納率通知書パラメータ(entity);
         ShotokuDankaiBetsuShunoritsuIchiranReport 通知書report
                 = new ShotokuDankaiBetsuShunoritsuIchiranReport(険料段階別収納率通知書Data);
@@ -359,31 +365,8 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
             batchReportWriter_一覧表.close();
             return;
         }
-        DankaibetsuShunoritsuIchiran 険料段階別収納率通知書集計Data
-                = get険料段階別収納率通知書小計集計パラメータ(lastEntity);
-        険料段階別収納率通知書集計Data.set保険料段階(保険料段階の小計);
-        険料段階別収納率通知書集計Data.set年度(RString.EMPTY);
-        ShotokuDankaiBetsuShunoritsuIchiranReport 通知書集計report
-                = new ShotokuDankaiBetsuShunoritsuIchiranReport(険料段階別収納率通知書集計Data);
-        通知書集計report.writeBy(reportSourceWriter_一覧表);
-        csvListWriter.writeLine(getCSVData(険料段階別収納率通知書集計Data, lastEntity));
-
-        List<DankaibetsuShunoritsuIchiran> 年度分険料段階別収納率通知書リスト
-                = get年度分険料段階別収納率通知書パラメータ(lastEntity);
-        for (DankaibetsuShunoritsuIchiran data : 年度分険料段階別収納率通知書リスト) {
-            ShotokuDankaiBetsuShunoritsuIchiranReport 通知書report
-                    = new ShotokuDankaiBetsuShunoritsuIchiranReport(data);
-            通知書report.writeBy(reportSourceWriter_一覧表);
-        }
-
-        List<DankaibetsuShunoritsuIchiran> 総年度分険料段階別収納率通知書リスト
-                = get総年度分険料段階別収納率通知書パラメータ(lastEntity);
-        for (DankaibetsuShunoritsuIchiran data : 総年度分険料段階別収納率通知書リスト) {
-            ShotokuDankaiBetsuShunoritsuIchiranReport 通知書report
-                    = new ShotokuDankaiBetsuShunoritsuIchiranReport(data);
-            通知書report.writeBy(reportSourceWriter_一覧表);
-        }
-
+        prt小計合計();
+        prt総合計();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBB.DBB300003.getReportId().getColumnValue(),
@@ -401,11 +384,41 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         batchReportWriter_一覧表.close();
     }
 
+    private void prt小計合計() {
+        DankaibetsuShunoritsuIchiran 険料段階別収納率通知書集計Data
+                = get険料段階別収納率通知書小計集計パラメータ(lastEntity);
+        険料段階別収納率通知書集計Data.set保険料段階(保険料段階の小計);
+        険料段階別収納率通知書集計Data.set年度(RString.EMPTY);
+        ShotokuDankaiBetsuShunoritsuIchiranReport 通知書集計report
+                = new ShotokuDankaiBetsuShunoritsuIchiranReport(険料段階別収納率通知書集計Data);
+        通知書集計report.writeBy(reportSourceWriter_一覧表);
+        csvListWriter.writeLine(getCSVData(険料段階別収納率通知書集計Data, lastEntity));
+
+        List<DankaibetsuShunoritsuIchiran> 年度分険料段階別収納率通知書リスト
+                = get年度分険料段階別収納率通知書パラメータ(lastEntity);
+        for (DankaibetsuShunoritsuIchiran data : 年度分険料段階別収納率通知書リスト) {
+            ShotokuDankaiBetsuShunoritsuIchiranReport 通知書report
+                    = new ShotokuDankaiBetsuShunoritsuIchiranReport(data);
+            通知書report.writeBy(reportSourceWriter_一覧表);
+        }
+    }
+
+    private void prt総合計() {
+        List<DankaibetsuShunoritsuIchiran> 総年度分険料段階別収納率通知書リスト
+                = get総年度分険料段階別収納率通知書パラメータ(lastEntity);
+        for (DankaibetsuShunoritsuIchiran data : 総年度分険料段階別収納率通知書リスト) {
+            ShotokuDankaiBetsuShunoritsuIchiranReport 通知書report
+                    = new ShotokuDankaiBetsuShunoritsuIchiranReport(data);
+            通知書report.writeBy(reportSourceWriter_一覧表);
+        }
+    }
+
     private void get改頁List() {
         改頁List.add(調定年度);
         改頁List.add(賦課年度);
         改頁List.add(科目コード);
         改頁List.add(構成市町村コード);
+        改頁List.add(収納区分);
     }
 
     private RString get百分率で表示(double num) {
@@ -474,7 +487,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     }
 
     private void get出力条件表市町村の作成(List<RString> 出力条件リスト) {
-        if (広域判定区分_広域保険者.equals(parameter.get広域判定区分())) {
+        if (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is広域()) {
             RStringBuilder 市町村情報Builder = new RStringBuilder();
             市町村情報Builder.append(parameter.get市町村情報());
             市町村情報Builder.append(TEXT_全角空白);
@@ -488,7 +501,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
                 出力条件リスト.add(get条件(TEXT_旧市町村, 市町村情報Builder.toRString()));
             }
         }
-        if (広域判定区分_単一市町村.equals(parameter.get広域判定区分())
+        if (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is単一()
                 && !RString.isNullOrEmpty(parameter.get選択対象区分())
                 && !parameter.get選択対象リスト().entrySet().isEmpty()) {
             boolean is１件目 = Boolean.TRUE;
@@ -536,30 +549,33 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         int 充当額負件数 = INT_0;
         Decimal 充当額 = Decimal.ZERO;
         int 充当額件数 = INT_0;
-        int 収納データ区分 = entity.getShunoDataKubun();
-        if (収納データ区分 < INT_50) {
+        int 収納データ区分 = Integer.parseInt(entity.getShunoDataKubun().toString());
+        if (収納データ区分 < Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
-        } else if (収納データ区分 == INT_50 || 収納データ区分 == INT_70) {
-            収入額 = 収入額.add(entity.getShunyugaku());
-            収入件数++;
-        } else if (収納データ区分 == INT_51) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当元.value().toString())) {
             充当額負 = 充当額負.add(entity.getShunyugaku().multiply(負数_1));
             充当額負件数++;
-        } else if (収納データ区分 == INT_52) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当先.value().toString())) {
             充当額 = 充当額.add(entity.getShunyugaku());
             充当額件数++;
-        } else if (収納データ区分 == INT_56) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.還付.value().toString())) {
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
-        } else if (収納データ区分 == INT_60) {
+        }
+        if (Decimal.ZERO.compareTo(entity.getShunyugaku()) < 0) {
+            収入額 = 収入額.add(entity.getShunyugaku());
+            収入件数++;
+        }
+        if (Decimal.ZERO.compareTo(entity.getFunougaku()) < 0) {
             不納欠損額 = 不納欠損額.add(entity.getFunougaku());
             不納欠損件数++;
         }
         Decimal 未納額 = 調定額.subtract(収入額.subtract(還付額).add(充当額).subtract(充当額負)).subtract(不納欠損額);
-        RString 収納率 = get百分率で表示((収入額.subtract(還付額).add(充当額).subtract(充当額負)).
-                divide(調定額.subtract(不納欠損額)).
-                multiply(NUM_100).doubleValue());
+        RString 収納率 = Decimal.ZERO.equals(調定額.subtract(不納欠損額)) ? get百分率で表示(0L)
+                : get百分率で表示((収入額.subtract(還付額).add(充当額).subtract(充当額負)).
+                        divide(調定額.subtract(不納欠損額)).
+                        multiply(NUM_100).doubleValue());
         data.set年度(entity.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(entity.getFukaNendo().wareki().toDateString()));
         data.setHdn年度(entity.getChoteiNendo().wareki().toDateString().concat(斜線).
@@ -596,9 +612,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         DankaibetsuShunoritsuIchiran data = new DankaibetsuShunoritsuIchiran();
         Decimal 未納額 = 小計_調定額.subtract(小計_収入額.subtract(小計_還付額).add(小計_充当額).
                 subtract(小計_充当額負)).subtract(小計_不納欠損額);
-        RString 収納率 = get百分率で表示((小計_収入額.subtract(小計_還付額).add(小計_充当額).subtract(小計_充当額負)).
-                divide(小計_調定額.subtract(小計_不納欠損額)).
-                multiply(NUM_100).doubleValue());
+        RString 収納率 = Decimal.ZERO.equals(小計_調定額.subtract(小計_不納欠損額)) ? get百分率で表示(0L)
+                : get百分率で表示((小計_収入額.subtract(小計_還付額).add(小計_充当額).subtract(小計_充当額負)).
+                        divide(小計_調定額.subtract(小計_不納欠損額)).
+                        multiply(NUM_100).doubleValue());
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
         data.setHdn年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
@@ -657,9 +674,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (合計_過年度_調定額.subtract(合計_過年度_不納欠損額).equals(Decimal.ZERO)) {
             収納率 = RSTRING_0;
         } else {
-            収納率 = get百分率で表示((合計_過年度_収入額.subtract(合計_過年度_還付額).add(合計_過年度_充当額).
-                    subtract(合計_過年度_充当額負)).divide(合計_過年度_調定額.subtract(合計_過年度_不納欠損額)).
-                    multiply(NUM_100).doubleValue());
+            収納率 = Decimal.ZERO.equals(合計_過年度_調定額.subtract(合計_過年度_不納欠損額)) ? get百分率で表示(0L)
+                    : get百分率で表示((合計_過年度_収入額.subtract(合計_過年度_還付額).add(合計_過年度_充当額).
+                            subtract(合計_過年度_充当額負)).divide(合計_過年度_調定額.subtract(合計_過年度_不納欠損額)).
+                            multiply(NUM_100).doubleValue());
         }
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -701,9 +719,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (合計_現年度_調定額.subtract(合計_現年度_不納欠損額).equals(Decimal.ZERO)) {
             収納率 = RSTRING_0;
         } else {
-            収納率 = get百分率で表示((合計_現年度_収入額.subtract(合計_現年度_還付額).add(合計_現年度_充当額).
-                    subtract(合計_現年度_充当額負)).divide(合計_現年度_調定額.subtract(合計_現年度_不納欠損額)).
-                    multiply(NUM_100).doubleValue());
+            収納率 = Decimal.ZERO.equals(合計_現年度_調定額.subtract(合計_現年度_不納欠損額)) ? get百分率で表示(0L)
+                    : get百分率で表示((合計_現年度_収入額.subtract(合計_現年度_還付額).add(合計_現年度_充当額).
+                            subtract(合計_現年度_充当額負)).divide(合計_現年度_調定額.subtract(合計_現年度_不納欠損額)).
+                            multiply(NUM_100).doubleValue());
         }
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -745,9 +764,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (合計_次年度_調定額.subtract(合計_次年度_不納欠損額).equals(Decimal.ZERO)) {
             収納率 = RSTRING_0;
         } else {
-            収納率 = get百分率で表示((合計_次年度_収入額.subtract(合計_次年度_還付額).add(合計_次年度_充当額).
-                    subtract(合計_次年度_充当額負)).divide(合計_次年度_調定額.subtract(合計_次年度_不納欠損額)).
-                    multiply(NUM_100).doubleValue());
+            収納率 = Decimal.ZERO.equals(合計_次年度_調定額.subtract(合計_次年度_不納欠損額)) ? get百分率で表示(0L)
+                    : get百分率で表示((合計_次年度_収入額.subtract(合計_次年度_還付額).add(合計_次年度_充当額).
+                            subtract(合計_次年度_充当額負)).divide(合計_次年度_調定額.subtract(合計_次年度_不納欠損額)).
+                            multiply(NUM_100).doubleValue());
         }
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -801,9 +821,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (合計_調定額.subtract(合計_不納欠損額).equals(Decimal.ZERO)) {
             収納率 = RSTRING_0;
         } else {
-            収納率 = get百分率で表示((合計_収入額.subtract(合計_還付額).add(合計_充当額).
-                    subtract(合計_充当額負)).divide(合計_調定額.subtract(合計_不納欠損額)).
-                    multiply(NUM_100).doubleValue());
+            収納率 = Decimal.ZERO.equals(合計_調定額.subtract(合計_不納欠損額)) ? get百分率で表示(0L)
+                    : get百分率で表示((合計_収入額.subtract(合計_還付額).add(合計_充当額).
+                            subtract(合計_充当額負)).divide(合計_調定額.subtract(合計_不納欠損額)).
+                            multiply(NUM_100).doubleValue());
         }
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -863,9 +884,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (総合計_過年度_調定額.subtract(総合計_過年度_不納欠損額).equals(Decimal.ZERO)) {
             収納率 = RSTRING_0;
         } else {
-            収納率 = get百分率で表示((総合計_過年度_収入額.subtract(総合計_過年度_還付額).add(総合計_過年度_充当額).
-                    subtract(総合計_過年度_充当額負)).divide(総合計_過年度_調定額.subtract(総合計_過年度_不納欠損額)).
-                    multiply(NUM_100).doubleValue());
+            収納率 = Decimal.ZERO.equals(総合計_過年度_調定額.subtract(総合計_過年度_不納欠損額))
+                    ? get百分率で表示(0L) : get百分率で表示((総合計_過年度_収入額.subtract(総合計_過年度_還付額).add(総合計_過年度_充当額).
+                            subtract(総合計_過年度_充当額負)).divide(総合計_過年度_調定額.subtract(総合計_過年度_不納欠損額)).
+                            multiply(NUM_100).doubleValue());
         }
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -907,9 +929,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (総合計_現年度_調定額.subtract(総合計_現年度_不納欠損額).equals(Decimal.ZERO)) {
             収納率 = RSTRING_0;
         } else {
-            収納率 = get百分率で表示((総合計_現年度_収入額.subtract(総合計_現年度_還付額).add(総合計_現年度_充当額).
-                    subtract(総合計_現年度_充当額負)).divide(総合計_現年度_調定額.subtract(総合計_現年度_不納欠損額)).
-                    multiply(NUM_100).doubleValue());
+            収納率 = Decimal.ZERO.equals(総合計_現年度_調定額.subtract(総合計_現年度_不納欠損額))
+                    ? get百分率で表示(0L) : get百分率で表示((総合計_現年度_収入額.subtract(総合計_現年度_還付額).add(総合計_現年度_充当額).
+                            subtract(総合計_現年度_充当額負)).divide(総合計_現年度_調定額.subtract(総合計_現年度_不納欠損額)).
+                            multiply(NUM_100).doubleValue());
         }
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -951,9 +974,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (総合計_次年度_調定額.subtract(総合計_次年度_不納欠損額).equals(Decimal.ZERO)) {
             収納率 = RSTRING_0;
         } else {
-            収納率 = get百分率で表示((総合計_次年度_収入額.subtract(総合計_次年度_還付額).add(総合計_次年度_充当額).
-                    subtract(総合計_次年度_充当額負)).divide(総合計_次年度_調定額.subtract(総合計_次年度_不納欠損額)).
-                    multiply(NUM_100).doubleValue());
+            収納率 = Decimal.ZERO.equals(総合計_次年度_調定額.subtract(総合計_次年度_不納欠損額))
+                    ? get百分率で表示(0L) : get百分率で表示((総合計_次年度_収入額.subtract(総合計_次年度_還付額).add(総合計_次年度_充当額).
+                            subtract(総合計_次年度_充当額負)).divide(総合計_次年度_調定額.subtract(総合計_次年度_不納欠損額)).
+                            multiply(NUM_100).doubleValue());
         }
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -1007,9 +1031,10 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (総合計_調定額.subtract(総合計_不納欠損額).equals(Decimal.ZERO)) {
             収納率 = RSTRING_0;
         } else {
-            収納率 = get百分率で表示((総合計_収入額.subtract(総合計_還付額).add(総合計_充当額).
-                    subtract(総合計_充当額負)).divide(総合計_調定額.subtract(総合計_不納欠損額)).
-                    multiply(NUM_100).doubleValue());
+            収納率 = Decimal.ZERO.equals(総合計_調定額.subtract(総合計_不納欠損額))
+                    ? get百分率で表示(0L) : get百分率で表示((総合計_収入額.subtract(総合計_還付額).add(総合計_充当額).
+                            subtract(総合計_充当額負)).divide(総合計_調定額.subtract(総合計_不納欠損額)).
+                            multiply(NUM_100).doubleValue());
         }
         data.set年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -1042,34 +1067,34 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         return data;
     }
 
-    private RString get徴収方法(RString kamokuCode) {
+    private RString get徴収方法(KamokuCode kamokuCode) {
         IShunoKamoku 普通徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
         IShunoKamoku 特別徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
-        if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
+        if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード())) {
             return TEXT_普通徴収;
-        } else if (特別徴収科目 != null && kamokuCode.equals(特別徴収科目.getコード().value())) {
+        } else if (特別徴収科目 != null && kamokuCode.equals(特別徴収科目.getコード())) {
             return TEXT_特別徴収;
         }
         return RString.EMPTY;
     }
 
-    private RString getCSV徴収方法(RString kamokuCode) {
+    private RString getCSV徴収方法(KamokuCode kamokuCode) {
         IShunoKamoku 普通徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
         IShunoKamoku 特別徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
-        if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
+        if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード())) {
             return 普通徴収;
-        } else if (特別徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
+        } else if (特別徴収科目 != null && kamokuCode.equals(特別徴収科目.getコード())) {
             return 特別徴収;
         }
         return RString.EMPTY;
     }
 
-    private RString get完納分徴収方法(RString kamokuCode) {
+    private RString get完納分徴収方法(KamokuCode kamokuCode) {
         IShunoKamoku 普通徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
         IShunoKamoku 特別徴収科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
-        if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
+        if (普通徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード())) {
             return TEXT_普通徴収_完納分;
-        } else if (特別徴収科目 != null && kamokuCode.equals(普通徴収科目.getコード().value())) {
+        } else if (特別徴収科目 != null && kamokuCode.equals(特別徴収科目.getコード())) {
             return TEXT_特別徴収_完納分;
         }
         return RString.EMPTY;
@@ -1199,27 +1224,28 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     }
 
     private void get小計集計(DankaibetsuShunoritsuTempEntity entity) {
-        int 収納データ区分 = entity.getShunoDataKubun();
-        if (収納データ区分 < INT_50) {
+        int 収納データ区分 = Integer.parseInt(entity.getShunoDataKubun().toString());
+        if (収納データ区分 < Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
             小計_調定額 = 小計_調定額.add(entity.getChoteigaku());
             小計_調定件数++;
-        } else if (収納データ区分 == INT_50 || 収納データ区分 == INT_70) {
-            小計_収入額 = 小計_収入額.add(entity.getShunyugaku());
-            小計_収入件数++;
-        } else if (収納データ区分 == INT_51) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当元.value().toString())) {
             小計_充当額負 = 小計_充当額負.add(entity.getShunyugaku().multiply(負数_1));
             小計_充当額負件数++;
-        } else if (収納データ区分 == INT_52) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当先.value().toString())) {
             小計_充当額 = 小計_充当額.add(entity.getShunyugaku());
             小計_充当額件数++;
-        } else if (収納データ区分 == INT_56) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.還付.value().toString())) {
             小計_還付額 = 小計_還付額.add(entity.getShunyugaku().multiply(負数_1));
             小計_還付件数++;
-        } else if (収納データ区分 == INT_60) {
+        }
+        if (Decimal.ZERO.compareTo(entity.getShunyugaku()) < 0) {
+            小計_収入額 = 小計_収入額.add(entity.getShunyugaku());
+            小計_収入件数++;
+        }
+        if (Decimal.ZERO.compareTo(entity.getFunougaku()) < 0) {
             小計_不納欠損額 = 小計_不納欠損額.add(entity.getFunougaku());
             小計_不納欠損件数++;
         }
-
     }
 
     private void get合計集計(DankaibetsuShunoritsuTempEntity entity) {
@@ -1235,23 +1261,25 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         int 充当額負件数 = INT_0;
         Decimal 充当額 = Decimal.ZERO;
         int 充当額件数 = INT_0;
-        int 収納データ区分 = entity.getShunoDataKubun();
-        if (収納データ区分 < INT_50) {
+        int 収納データ区分 = Integer.parseInt(entity.getShunoDataKubun().toString());
+        if (収納データ区分 < Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
-        } else if (収納データ区分 == INT_50 || 収納データ区分 == INT_70) {
-            収入額 = 収入額.add(entity.getShunyugaku());
-            収入件数++;
-        } else if (収納データ区分 == INT_51) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当元.value().toString())) {
             充当額負 = 充当額負.add(entity.getShunyugaku().multiply(負数_1));
             充当額負件数++;
-        } else if (収納データ区分 == INT_52) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当先.value().toString())) {
             充当額 = 充当額.add(entity.getShunyugaku());
             充当額件数++;
-        } else if (収納データ区分 == INT_56) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.還付.value().toString())) {
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
-        } else if (収納データ区分 == INT_60) {
+        }
+        if (Decimal.ZERO.compareTo(entity.getShunyugaku()) < 0) {
+            収入額 = 収入額.add(entity.getShunyugaku());
+            収入件数++;
+        }
+        if (Decimal.ZERO.compareTo(entity.getFunougaku()) < 0) {
             不納欠損額 = 不納欠損額.add(entity.getFunougaku());
             不納欠損件数++;
         }
@@ -1310,23 +1338,25 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         int 充当額負件数 = INT_0;
         Decimal 充当額 = Decimal.ZERO;
         int 充当額件数 = INT_0;
-        int 収納データ区分 = entity.getShunoDataKubun();
-        if (収納データ区分 < INT_50) {
+        int 収納データ区分 = Integer.parseInt(entity.getShunoDataKubun().toString());
+        if (収納データ区分 < Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
-        } else if (収納データ区分 == INT_50 || 収納データ区分 == INT_70) {
-            収入額 = 収入額.add(entity.getShunyugaku());
-            収入件数++;
-        } else if (収納データ区分 == INT_51) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当元.value().toString())) {
             充当額負 = 充当額負.add(entity.getShunyugaku().multiply(負数_1));
             充当額負件数++;
-        } else if (収納データ区分 == INT_52) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当先.value().toString())) {
             充当額 = 充当額.add(entity.getShunyugaku());
             充当額件数++;
-        } else if (収納データ区分 == INT_56) {
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.還付.value().toString())) {
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
-        } else if (収納データ区分 == INT_60) {
+        }
+        if (Decimal.ZERO.compareTo(entity.getShunyugaku()) < 0) {
+            収入額 = 収入額.add(entity.getShunyugaku());
+            収入件数++;
+        }
+        if (Decimal.ZERO.compareTo(entity.getFunougaku()) < 0) {
             不納欠損額 = 不納欠損額.add(entity.getFunougaku());
             不納欠損件数++;
         }

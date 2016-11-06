@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0130001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka8.HeijunkaKeisanPageJoho;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8FlowParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB013001.DBB013001_TokuchoHeinjunka8GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130001.TokuchoHeijunkaKeisanPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0130001.TokuchoHeijunkaKeisanPanelHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8;
@@ -60,9 +60,9 @@ public class TokuchoHeijunkaKeisanPanel {
      * @param div TokuchoHeijunkaKeisanPanelDiv
      * @return ResponseData
      */
-    public ResponseData<KaigoFukaTokuchoHeijunka8FlowParameter> onClick_btnBatchRegister(TokuchoHeijunkaKeisanPanelDiv div) {
+    public ResponseData<DBB013001_TokuchoHeinjunka8GatsuParameter> onClick_btnBatchRegister(TokuchoHeijunkaKeisanPanelDiv div) {
 
-        KaigoFukaTokuchoHeijunka8FlowParameter parameter = new KaigoFukaTokuchoHeijunka8FlowParameter();
+        DBB013001_TokuchoHeinjunka8GatsuParameter parameter = new DBB013001_TokuchoHeinjunka8GatsuParameter();
         KaigoFukaTokuchoHeijunka8 特徴平準化 = new KaigoFukaTokuchoHeijunka8();
         HeijunkaKeisanPageJoho pageData = new HeijunkaKeisanPageJoho();
         for (int i = 0, len = div.getTokuchoHeijunkaPanel().getCcdOutputChohyoIchiran().get出力帳票一覧().size(); i < len; i++) {

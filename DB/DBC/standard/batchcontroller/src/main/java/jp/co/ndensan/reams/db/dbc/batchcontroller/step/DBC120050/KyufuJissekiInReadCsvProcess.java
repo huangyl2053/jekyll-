@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KyufuJissekiRecordShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukyufuketteiin.KogakuKyufuKetteiReadCsvFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufujissekikoshinin.KyufuJissekiKoshinReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenkyotsu.KokuhorenkyoutsuControlCsvEntity;
@@ -59,7 +59,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
      */
     public static final RString PARAMETER_OUT_FLOWENTITY;
 
-    private KogakuKyufuKetteiReadCsvFileProcessParameter parameter;
+    private KyufuJissekiKoshinReadCsvFileProcessParameter parameter;
 
     static {
         PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
@@ -76,8 +76,8 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_2 = 2;
     private static final Integer INDEX_4 = 4;
-    private static final RString エラー区分_登録対象なし = new RString("99");
-    int 連番;
+    private int 連番;
+    private int 挿入件数;
 
     private KokuhorenkyoutsuControlCsvEntity controlCsvEntity;
     private ShinseiSentouDataEntity dataEntity;
@@ -127,7 +127,8 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
         listCsvShinseiJouhouCsvEntity = new ArrayList<>();
         returnEntity = new FlowEntity();
         flowEntity = new OutputParameter<>();
-        連番 = INDEX_0;
+        連番 = parameter.get連番();
+        挿入件数 = parameter.getデータ登録件数();
         reset件数();
     }
 
@@ -176,12 +177,20 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
     @Override
     protected void afterExecute() {
         settei();
-        if (連番 == INDEX_0) {
+        if (parameter.isLast() && 挿入件数 == INDEX_0) {
             DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-            errorTempentity.setエラー区分(エラー区分_登録対象なし);
+            errorTempentity.set被保険者番号(HihokenshaNo.EMPTY);
+            errorTempentity.set証記載保険者番号(ShoKisaiHokenshaNo.EMPTY);
+            if (parameter.get明細登録件数() == 0) {
+                errorTempentity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
+            } else {
+                errorTempentity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.必須レコードなし.getコード());
+            }
             処理結果リスト一時tableWriter.insert(errorTempentity.toEntity());
         }
-        returnEntity.set明細データ登録件数(連番);
+
+        returnEntity.set明細データ登録件数(挿入件数);
+        returnEntity.set集計データ登録件数(連番);
         returnEntity.setCodeNum(Integer.valueOf(controlCsvEntity.getCodeNum().toString()));
         flowEntity.setValue(returnEntity);
     }
@@ -199,8 +208,12 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
         temp.setKyufuJissekiSakuseiKubunCode(sentouCsvEntity.get給付実績情報作成区分コード());
         temp.setServiceTeikyoYM(new FlexibleYearMonth(sentouCsvEntity.getサービス提供年月()));
         temp.setKyufuJissekiKubun(sentouCsvEntity.get給付実績区分コード());
-        temp.setJigyoshoNo(new JigyoshaNo(sentouCsvEntity.get事業所番号()));
-        temp.setSeiriNo(sentouCsvEntity.get整理番号());
+        if (!RString.isNullOrEmpty(sentouCsvEntity.get事業所番号())) {
+            temp.setJigyoshoNo(new JigyoshaNo(sentouCsvEntity.get事業所番号()));
+        } else {
+            temp.setJigyoshoNo(JigyoshaNo.EMPTY);
+        }
+        temp.setSeiriNo(get非空文字列(sentouCsvEntity.get整理番号()));
         temp.setRecordKensuH1(recordKensu.get件数_H1());
         temp.setRecordKensuD1(recordKensu.get件数_D1());
         temp.setRecordKensuDD(recordKensu.get件数_DD());
@@ -217,7 +230,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
         temp.setRecordKensuD9(recordKensu.get件数_D9());
         temp.setRecordKensuDA(recordKensu.get件数_DA());
         temp.setRecordKensuDB(recordKensu.get件数_DB());
-        temp.setKeikokuKubunCode(sentouCsvEntity.get警告区分コード());
+        temp.setKeikokuKubunCode(get非空文字列(sentouCsvEntity.get警告区分コード()));
         temp.setHokenshaNo(new HokenshaNo(controlCsvEntity.getHokenshaNo()));
         HokenshaNyuryokuHojoFinder hokenshaNyuryokuHojoFinder = HokenshaNyuryokuHojoFinder.createInstance();
         Hokensha hokensha = hokenshaNyuryokuHojoFinder.getHokensha(new HokenjaNo(controlCsvEntity.getHokenshaNo()));
@@ -279,10 +292,11 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
 
     private void settei() {
         if (null != sentouCsvEntity) {
+            連番 = 連番 + 1;
             dataEntity = addMeisai(sentouCsvEntity, listCsvShinseiJouhouCsvEntity, 処理結果リスト一時tableWriter);
             if (null != dataEntity) {
+                挿入件数 = 挿入件数 + 1;
                 recordKensu = dataEntity.getRecordNumber();
-                連番 = 連番 + 1;
                 insert給付実績一時TBL(連番, recordKensu, controlCsvEntity, sentouCsvEntity, 給付実績一時tableWriter);
                 insert被保険者一時TBL(連番, sentouCsvEntity, 被保険者一時tableWriter);
             }
@@ -338,8 +352,10 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
             errorTempentity.setKey1(sentouCsvEntity.get交換情報識別番号());
             errorTempentity.setKey2(sentouCsvEntity.get入力識別番号());
             errorTempentity.setKey3(sentouCsvEntity.getサービス提供年月());
-            errorTempentity.setKey4(sentouCsvEntity.get事業所番号());
-            errorTempentity.setKey5(sentouCsvEntity.get整理番号());
+            errorTempentity.setKey4(get非空文字列(sentouCsvEntity.get事業所番号()));
+            errorTempentity.setKey5(get非空文字列(sentouCsvEntity.get整理番号()));
+            errorTempentity.setHihokenshaKanaShimei(RString.EMPTY);
+            errorTempentity.setHihokenshaShimei(RString.EMPTY);
             組み合わせ不正登録(errorTempentity, tableWriter);
             必須レコードなし登録(errorTempentity, tableWriter);
             複数レコード不可登録(errorTempentity, tableWriter);
@@ -390,9 +406,12 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
                     errorTempentity.setKey1(jouhouCsvEntity.get交換情報識別番号());
                     errorTempentity.setKey2(jouhouCsvEntity.get入力識別番号());
                     errorTempentity.setKey3(jouhouCsvEntity.getサービス提供年月());
-                    errorTempentity.setKey4(jouhouCsvEntity.get事業所番号());
-                    errorTempentity.setKey5(jouhouCsvEntity.get整理番号());
+                    errorTempentity.setKey4(get非空文字列(jouhouCsvEntity.get事業所番号()));
+                    errorTempentity.setKey5(get非空文字列(jouhouCsvEntity.get整理番号()));
                     errorTempentity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.キー項目不一致.getコード());
+                    errorTempentity.setHihokenshaKanaShimei(RString.EMPTY);
+                    errorTempentity.setHihokenshaShimei(RString.EMPTY);
+                    errorTempentity.setBiko(RString.EMPTY);
                     errorTempentity.setState(EntityDataState.Added);
                     tableWriter.insert(errorTempentity);
                     listCsvShinseiJouhouCsvEntity.remove(index);
@@ -1190,6 +1209,13 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
         件数_DE = 0;
         件数_H1 = 0;
         件数_T1 = 0;
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (null == 文字列) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }

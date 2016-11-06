@@ -3,23 +3,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Sep 27 13:08:27 CST 2016 
+ * Wed Nov 02 17:49:50 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * grdTuuchiJoho_Row のクラスファイル 
- * 
+ * grdTuuchiJoho_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
-public class grdTuuchiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+public class grdTuuchiJoho_Row extends DataRow implements Serializable {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString txtFileName;
     private RString txtHokenshaName;

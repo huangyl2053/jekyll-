@@ -37,30 +37,12 @@ public class KyufuJissekiGaitoshaBusiness implements Serializable {
     }
 
     /**
-     * 証記載保険者名を取得します。
-     *
-     * @return 証記載保険者名
-     */
-    public RString get証記載保険者名() {
-        return entity.get証記載保険者名();
-    }
-
-    /**
      * 事業者名を取得します。
      *
      * @return 事業者名
      */
     public RString get事業者名() {
         return entity.get事業者名();
-    }
-
-    /**
-     * 行番号を取得します。
-     *
-     * @return 行番号
-     */
-    public RString get行番号() {
-        return entity.get行番号();
     }
 
     /**

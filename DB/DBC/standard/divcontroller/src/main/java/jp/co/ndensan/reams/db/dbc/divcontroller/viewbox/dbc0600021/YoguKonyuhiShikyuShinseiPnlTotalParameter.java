@@ -64,4 +64,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalParameter implements Serializable {
     private RString 受領委任払い_金融機関名;
     private RString 受領委任払い_名義人_カナ;
     private RString 受領委任払い_名義人_漢字;
+    private Decimal 今回保険対象費用額;
+    private Decimal 今回保険給付額;
+    private Decimal 今回利用者負担額;
 }

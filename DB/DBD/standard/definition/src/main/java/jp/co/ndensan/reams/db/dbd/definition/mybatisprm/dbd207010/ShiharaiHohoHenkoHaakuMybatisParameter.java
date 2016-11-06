@@ -27,6 +27,12 @@ public class ShiharaiHohoHenkoHaakuMybatisParameter implements IMyBatisParameter
     private static final RString 選択_チェックオン = new RString("0");
 
     private RDate 基準日;
+    private RDate 基準日min被保険者全員;
+    private RDate 基準日min受給者全員;
+    private RDate 基準日min受給認定申請中者;
+    private RDate 基準日min受給認定日抽出;
+    private RDate 基準日min償還申請中者;
+    private RDate 基準日min償還支給決定日抽出;
     private RString 出力順;
 
     private boolean is被保険者選択_被保険者全員_0;
@@ -114,6 +120,7 @@ public class ShiharaiHohoHenkoHaakuMybatisParameter implements IMyBatisParameter
         set選択_受給認定日抽出(受給認定日抽出);
         set選択_受給申請中者(受給申請中者);
         set選択_受給支給決定日抽出(受給支給決定日抽出);
+        set基準日から計算した日期();
     }
 
     private void set被保険者選択について(RString 被保険者選択) {
@@ -152,6 +159,18 @@ public class ShiharaiHohoHenkoHaakuMybatisParameter implements IMyBatisParameter
     private void set選択_受給支給決定日抽出(RString 受給支給決定日抽出) {
         if (選択_チェックオン.equals(受給支給決定日抽出)) {
             is受給支給決定日抽出 = true;
+        }
+    }
+
+    private void set基準日から計算した日期() {
+        if (is被保険者選択_被保険者全員_0) {
+            基準日min被保険者全員 = 基準日.minusMonth(被保険者全員の滞納期間);
+        } else {
+            基準日min受給者全員 = 基準日.minusMonth(受給者全員の滞納期間);
+            基準日min受給認定申請中者 = 基準日.minusMonth(受給認定申請中者の滞納期間);
+            基準日min受給認定日抽出 = 基準日.minusMonth(受給認定日抽出の滞納期間);
+            基準日min償還申請中者 = 基準日.minusMonth(償還申請中者の滞納期間);
+            基準日min償還支給決定日抽出 = 基準日.minusMonth(償還支給決定日抽出の滞納期間);
         }
     }
 }

@@ -8,36 +8,40 @@ package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinseiikkatush
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.SaveIkkatuShinsaDate;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinseiikkatushinsa.MiShinasaShikyuShinseiParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinsei.GeifuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinseiEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3034ShokanShinseiDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinsei.GeifuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3049ShokanJutakuKaishuDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishusikyushinseiikkatushinsa.IJutakukaishuSikyuShinseiIkkatuShinsaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuketteikyufujissekihennsyu.JutakuKaishuKetteiKyufujissekiHennsyuManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3034ShokanShinseiDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -153,6 +157,9 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
                 entity.setKetteiYMD(parameter.get決定年月日());
                 entity.setShikyuHushikyuKetteiKubun(parameter.get支給区分コード());
                 entity.setShiharaiKingaku(parameter.get支払金額());
+                entity.setShiharaiKingakuUchiwakeRiyoshabun(Decimal.ZERO);
+                entity.setZenkaiShiharaiKingaku(Decimal.ZERO);
+                entity.setSagakuKingakuGokei(Decimal.ZERO);
                 entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(entity);
                 List<DbT3053ShokanShukeiEntity> dbt3053EntityList
@@ -161,6 +168,14 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
                 DbT3053ShokanShukeiEntity dbt3053Entity = dbt3053EntityList.get(0);
                 dbt3053Entity.setShinsaYM(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString().toString()));
                 dbt3053Entity.setShikyuKubunCode(parameter.get支給区分コード());
+                dbt3053Entity.setShinsaHohoKubunCode(DbBusinessConfig
+                        .get(ConfigNameDBC.償還支給申請書_審査方法初期表示, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                dbt3053Entity.setShinsaYM(parameter.get決定年月日().getYearMonth());
+                Decimal 費用額合計 = dbt3034entity.getShiharaiKingakuTotal();
+                if (費用額合計 != null) {
+                    dbt3053Entity.setTensuKingaku(費用額合計.intValue());
+                }
+                dbt3053Entity.setShikyuKingaku(dbt3034entity.getHokenKyufugaku());
                 dbt3053Entity.setState(EntityDataState.Modified);
                 償還払請求集計Dac.save(dbt3053Entity);
                 GeifuEntity kyufuentity = new GeifuEntity();

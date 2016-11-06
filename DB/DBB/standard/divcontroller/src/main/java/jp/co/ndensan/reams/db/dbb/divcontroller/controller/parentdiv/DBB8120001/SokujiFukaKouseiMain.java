@@ -290,7 +290,7 @@ public class SokujiFukaKouseiMain {
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onClick_btnKouseiNext(SokujiFukaKouseiMainDiv div) {
-        if (is特殊処理()) {
+        if (is賦課対象者一覧()) {
             return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.再検索する).respond();
         } else {
             return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.前画面に戻る).respond();
@@ -838,6 +838,9 @@ public class SokujiFukaKouseiMain {
         }
         for (HihokenshaDaicho hihokenshaDaicho : 資格の情報リスト) {
             FlexibleDate 第1号資格取得年月日 = hihokenshaDaicho.get第1号資格取得年月日();
+            if (第1号資格取得年月日 == null || 第1号資格取得年月日.isEmpty()) {
+                continue;
+            }
             if (第1号資格取得年月日.isBeforeOrEquals(new FlexibleDate(賦課年度.toDateString().concat(四月一日)))) {
                 第1号資格取得年月日 = new FlexibleDate(賦課年度.toDateString().concat(四月一日));
             }
@@ -928,6 +931,10 @@ public class SokujiFukaKouseiMain {
     }
 
     private boolean is特殊処理() {
+        return メニューID_特殊処理.equals(ResponseHolder.getMenuID());
+    }
+
+    private boolean is賦課対象者一覧() {
         return メニューID_即時賦課更正.equals(ResponseHolder.getMenuID())
                 || メニューID_特殊処理.equals(ResponseHolder.getMenuID());
     }
@@ -983,7 +990,7 @@ public class SokujiFukaKouseiMain {
     }
 
     private ResponseData<SokujiFukaKouseiMainDiv> getResponseData(SokujiFukaKouseiMainDiv div) {
-        if (is特殊処理()) {
+        if (is賦課対象者一覧()) {
             return ResponseData.of(div).setState(DBB8120001StateName.即時賦課更正);
         } else {
             return ResponseData.of(div).setState(DBB8120001StateName.即時賦課更正_対象者検索以外);
@@ -991,7 +998,7 @@ public class SokujiFukaKouseiMain {
     }
 
     private ResponseData<SokujiFukaKouseiMainDiv> toSearchResultResponseData(SokujiFukaKouseiMainDiv div) {
-        if (is特殊処理()) {
+        if (is賦課対象者一覧()) {
             if (ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
                 return ResponseData.of(div).forwardWithEventName(DBB8120001TransitionEventName.検索結果一覧に戻る).respond();
             } else {

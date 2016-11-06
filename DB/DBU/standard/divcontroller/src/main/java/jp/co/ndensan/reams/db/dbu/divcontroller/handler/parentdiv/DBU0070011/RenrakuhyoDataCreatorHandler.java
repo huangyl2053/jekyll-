@@ -48,9 +48,10 @@ public class RenrakuhyoDataCreatorHandler {
     private static final RString 給付額減額記載_有 = new RString("key1");
     private static final RString 食事の負担限度日額 = new RString("key0");
     private static final RString 段階区分 = new RString("0");
-    private static final int INT_3 = 3;
-    private static final int INT_1 = 1;
-    private static final int INT_2 = 2;
+    private static final int INT_SAN = 3;
+    private static final int INT_ICHI = 1;
+    private static final int INT_NI = 2;
+    private static final int INT_ZERO = 0;
     private static final RString 黄色 = new RString("DBUFontcolor_yellow");
     private final RenrakuhyoDataCreatorDiv div;
 
@@ -76,21 +77,63 @@ public class RenrakuhyoDataCreatorHandler {
      * @param 介護賦課 介護賦課
      * @param 基準日 基準日
      */
-    public void onLoad(
-            TaishoshaKey 資格対象者キー,
-            ShiharaiHohoHenko 支払方法変更,
-            Decimal 利用者負担額,
-            FutangakuGengakuBusiness 負担限度額,
-            List<HokenryoDankai> 保険料段階情報,
-            Decimal 算定基準額,
-            boolean is非該当,
-            Fuka 介護賦課,
-            FlexibleDate 基準日) {
+    public void onLoad(TaishoshaKey 資格対象者キー, ShiharaiHohoHenko 支払方法変更,
+            Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額,
+            List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額,
+            boolean is非該当, Fuka 介護賦課, FlexibleDate 基準日) {
         div.getCcdKaigoAtenaInfo().initialize(資格対象者キー.get識別コード());
         div.getCcdKaigoShikakuKihon().initialize(資格対象者キー.get識別コード());
         if (is非該当) {
+            div.getIcoDaiichiKoshitsu().setVisible(false);
+            div.getIcoDaiichiJunKoshitsu().setVisible(false);
+            div.getIcoDaiichiTokuyo().setVisible(false);
+            div.getIcoDaiichiRokenRyoyogata().setVisible(false);
+            div.getIcoDaiichiTashoshitsu().setVisible(false);
+
+            div.getIcoDainiKoshitsu().setVisible(false);
+            div.getIcoDainiJunKoshitsu().setVisible(false);
+            div.getIcoDainiTokuyo().setVisible(false);
+            div.getIcoDainiRokenRyoyogata().setVisible(false);
+            div.getIcoDainiTashoshitsu().setVisible(false);
+
+            div.getIcoDaisanKoshitsu().setVisible(false);
+            div.getIcoDaisanJunKoshitsu().setVisible(false);
+            div.getIcoDaisanTokuyo().setVisible(false);
+            div.getIcoDaisanRokenRyoyogata().setVisible(false);
+            div.getIcoDaisanTashoshitsu().setVisible(false);
+
+            div.getIcoKijunHiyogakuKoshitsu().setVisible(false);
+            div.getIcoKijunHiyogakuJunKoshitsu().setVisible(false);
+            div.getIcoKijunHiyogakuTokuyo().setVisible(false);
+            div.getIcoKijunHiyogakuRokenRyoyogata().setVisible(false);
+            div.getIcoKijunHiyogakuTashoshitsu().setVisible(false);
             set非該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当, 基準日);
         } else {
+            div.getIcoDaiichiKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaiichiJunKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaiichiTokuyoGaitosha().setVisible(false);
+            div.getIcoDaiichiTashoshitsuGaitosha().setVisible(false);
+
+            div.getIcoDainiKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaininoIchiJunKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaininoIchiTokuyoGaitosha().setVisible(false);
+            div.getIcoDaininoIchiTashoshitsuGaitosha().setVisible(false);
+
+            div.getIcoDaisanKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaininoNiJunKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaininoNiTokuyoGaitosha().setVisible(false);
+            div.getIcoDaininoNiTashoshitsuGaitosha().setVisible(false);
+
+            div.getIcoKijunHiyogakuKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaisanJunKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaininoSanTokuyoGaitosha().setVisible(false);
+            div.getIcoDaisanTashoshitsuGaitosha().setVisible(false);
+
+            div.getIcoKijunHiyogakuJunKoshitsuGaitosha().setVisible(false);
+            div.getIcoDaisanTokuyoGaitosha().setVisible(false);
+            div.getIcoKijunHiyogakuTashoshitsuGaitosha().setVisible(false);
+
+            div.getIcoKijunHiyogakuTokuyoGaitosha().setVisible(false);
             set該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当, 基準日);
         }
     }
@@ -194,31 +237,7 @@ public class RenrakuhyoDataCreatorHandler {
             Code 旧措置者区分 = new Code(負担限度額.get旧措置者区分());
             RString 利用者負担段階 = 負担限度額.get利用者負担段階();
             Decimal 食費負担限度額 = 負担限度額.get食費負担限度額();
-            if (RiyoshaFutanDankai.第1段階.getコード().equals(利用者負担段階)) {
-                div.getTxtDaiichiKoshitsu().setDecorationClass(黄色);
-                div.getTxtDaiichiJunKoshitsu().setDecorationClass(黄色);
-                div.getTxtDaiichiTokuyo().setDecorationClass(黄色);
-                div.getTxtDaiichiRokenRyoyogata().setDecorationClass(黄色);
-                div.getTxtDaiichiTashoshitsu().setDecorationClass(黄色);
-            } else if (RiyoshaFutanDankai.第2段階.getコード().equals(利用者負担段階)) {
-                div.getTxtDainiKoshitsu().setDecorationClass(黄色);
-                div.getTxtDainiJunKoshitsu().setDecorationClass(黄色);
-                div.getTxtDainiTokuyo().setDecorationClass(黄色);
-                div.getTxtDainiRokenRyoyogata().setDecorationClass(黄色);
-                div.getTxtDainiTashoshitsu().setDecorationClass(黄色);
-            } else if (RiyoshaFutanDankai.第3段階.getコード().equals(利用者負担段階)) {
-                div.getTxtDaisanKoshitsu().setDecorationClass(黄色);
-                div.getTxtDaisanJunKoshitsu().setDecorationClass(黄色);
-                div.getTxtDaisanTokuyo().setDecorationClass(黄色);
-                div.getTxtDaisanRokenRyoyogata().setDecorationClass(黄色);
-                div.getTxtDaisanTashoshitsu().setDecorationClass(黄色);
-            } else if (RiyoshaFutanDankai.課税層第3段階.getコード().equals(利用者負担段階)) {
-                div.getTxtKijunHiyogakuKoshitsu().setDecorationClass(黄色);
-                div.getTxtKijunHiyogakuJunKoshitsu().setDecorationClass(黄色);
-                div.getTxtKijunHiyogakuTokuyo().setDecorationClass(黄色);
-                div.getTxtKijunHiyogakuRokenRyoyogata().setDecorationClass(黄色);
-                div.getTxtKijunHiyogakuTashoshitsu().setDecorationClass(黄色);
-            }
+            set非該当のアイコン表示(利用者負担段階);
             div.getTxtDaiichiKoshitsu().setValue(set金額フォマート(toDecimal(特定入所者負担限度.getユニット型個室１(基準日, 旧措置者区分))));
             div.getTxtDaiichiJunKoshitsu().setValue(set金額フォマート(toDecimal(特定入所者負担限度.getユニット型準個室１(基準日, 旧措置者区分))));
             div.getTxtDaiichiTokuyo().setValue(set金額フォマート(toDecimal(特定入所者負担限度.get従個特養１(基準日, 旧措置者区分))));
@@ -249,10 +268,38 @@ public class RenrakuhyoDataCreatorHandler {
             }
             set非該当食事の負担限度日額(利用者負担金額);
         }
-
         set保険料段階(保険料段階情報, 介護賦課, is非該当);
         set非該当高額介護サービス費(基準日);
         set非該当高額介護サービス費額(算定基準額);
+    }
+
+    private void set非該当のアイコン表示(RString 利用者負担段階) {
+
+        if (RiyoshaFutanDankai.第1段階.getコード().equals(利用者負担段階)) {
+            div.getIcoDaiichiKoshitsu().setVisible(true);
+            div.getIcoDaiichiJunKoshitsu().setVisible(true);
+            div.getIcoDaiichiTokuyo().setVisible(true);
+            div.getIcoDaiichiRokenRyoyogata().setVisible(true);
+            div.getIcoDaiichiTashoshitsu().setVisible(true);
+        } else if (RiyoshaFutanDankai.第2段階.getコード().equals(利用者負担段階)) {
+            div.getIcoDainiKoshitsu().setVisible(true);
+            div.getIcoDainiJunKoshitsu().setVisible(true);
+            div.getIcoDainiTokuyo().setVisible(true);
+            div.getIcoDainiRokenRyoyogata().setVisible(true);
+            div.getIcoDainiTashoshitsu().setVisible(true);
+        } else if (RiyoshaFutanDankai.第3段階.getコード().equals(利用者負担段階)) {
+            div.getIcoDaisanKoshitsu().setVisible(true);
+            div.getIcoDaisanJunKoshitsu().setVisible(true);
+            div.getIcoDaisanTokuyo().setVisible(true);
+            div.getIcoDaisanRokenRyoyogata().setVisible(true);
+            div.getIcoDaisanTashoshitsu().setVisible(true);
+        } else if (RiyoshaFutanDankai.課税層第3段階.getコード().equals(利用者負担段階)) {
+            div.getIcoKijunHiyogakuKoshitsu().setVisible(true);
+            div.getIcoKijunHiyogakuJunKoshitsu().setVisible(true);
+            div.getIcoKijunHiyogakuTokuyo().setVisible(true);
+            div.getIcoKijunHiyogakuRokenRyoyogata().setVisible(true);
+            div.getIcoKijunHiyogakuTashoshitsu().setVisible(true);
+        }
     }
 
     private void set該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額,
@@ -271,7 +318,6 @@ public class RenrakuhyoDataCreatorHandler {
         }
 
         if (負担限度額 != null) {
-            RString 利用者負担段階 = 負担限度額.get利用者負担段階();
             Decimal 食費負担限度額 = 負担限度額.get食費負担限度額();
 
             div.getTxtDaiichiKoshitsuGaitosha().setValue(set金額フォマート(toDecimal(特定入所者負担限度.get旧措軽減ユニット型個室１(基準日))));
@@ -298,73 +344,129 @@ public class RenrakuhyoDataCreatorHandler {
             div.getTxtDaisanTokuyoGaitosha().setValue(set金額フォマート(toDecimal(特定入所者負担限度.get旧措軽減従個特養３(基準日))));
             div.getTxtKijunHiyogakuTashoshitsuGaitosha().setValue(set金額フォマート(toDecimal(特定入所者負担限度.get多床室_基準費用額(基準日))));
             div.getTxtKijunHiyogakuTokuyoGaitosha().setValue(set金額フォマート(toDecimal(特定入所者負担限度.get従個特養_基準費用額(基準日))));
-            set該当黄色(利用者負担段階, 特定入所者負担限度, 基準日, 負担限度額);
+            set該当のアイコン表示(特定入所者負担限度, 基準日, 負担限度額);
             set該当食事の負担限度(基準日, 特定入所者負担限度);
             if (食費負担限度額 != null) {
                 利用者負担金額 = 食費負担限度額;
             }
             set該当食事の負担限度日額(利用者負担金額);
         }
-
         set保険料段階(保険料段階情報, 介護賦課, is非該当);
         set該当高額介護サービス費(基準日);
         set該当高額介護サービス費額(算定基準額);
     }
 
-    private void set該当黄色(RString 利用者負担段階, TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度, FlexibleDate 基準日, FutangakuGengakuBusiness 負担限度額) {
-        if (RiyoshaFutanDankai.第1段階.getコード().equals(利用者負担段階)) {
-            div.getTxtDaiichiKoshitsuGaitosha().setDecorationClass(黄色);
-            div.getTxtDaiichiJunKoshitsuGaitosha().setDecorationClass(黄色);
-            div.getTxtDaiichiTokuyoGaitosha().setDecorationClass(黄色);
-            div.getTxtDaiichiTashoshitsuGaitosha().setDecorationClass(黄色);
-        } else if (RiyoshaFutanDankai.第2段階.getコード().equals(利用者負担段階)) {
-            div.getTxtDainiKoshitsuGaitosha().setDecorationClass(黄色);
-            if (toDecimal(特定入所者負担限度.get旧措軽減ユニット型準個室２の１(基準日)).equals(負担限度額.getユニット型準個室())) {
-                div.getTxtDaininoIchiJunKoshitsuGaitosha().setDecorationClass(黄色);
-            }
-            if (toDecimal(特定入所者負担限度.get旧措軽減従個特養２の１(基準日)).equals(負担限度額.get従来型個室_特養等())) {
-                div.getTxtDaininoIchiTokuyoGaitosha().setDecorationClass(黄色);
-            }
-            if (toDecimal(特定入所者負担限度.get旧措軽減多床室２の１(基準日)).equals(負担限度額.get多床室())) {
-                div.getTxtDaininoIchiTashoshitsuGaitosha().setDecorationClass(黄色);
-            }
-            if (toDecimal(特定入所者負担限度.get旧措軽減ユニット型準個室２の２(基準日)).equals(負担限度額.getユニット型準個室())) {
-                div.getTxtDaininoNiJunKoshitsuGaitosha().setDecorationClass(黄色);
-            }
-            if (toDecimal(特定入所者負担限度.get旧措軽減従個特養２の２(基準日)).equals(負担限度額.get従来型個室_特養等())) {
-                div.getTxtDaininoNiTokuyoGaitosha().setDecorationClass(黄色);
-            }
-            if (toDecimal(特定入所者負担限度.get旧措軽減多床室２の２(基準日)).equals(負担限度額.get多床室())) {
-                div.getTxtDaininoNiTashoshitsuGaitosha().setDecorationClass(黄色);
-            }
-            if (toDecimal(特定入所者負担限度.get旧措軽減従個特養２の３(基準日)).equals(負担限度額.get従来型個室_特養等())) {
-                div.getTxtDaininoSanTokuyoGaitosha().setDecorationClass(黄色);
-            }
-        } else if (RiyoshaFutanDankai.第3段階.getコード().equals(利用者負担段階)) {
-            div.getTxtDaisanKoshitsuGaitosha().setDecorationClass(黄色);
-            div.getTxtDaisanJunKoshitsuGaitosha().setDecorationClass(黄色);
-            div.getTxtDaisanTashoshitsuGaitosha().setDecorationClass(黄色);
-            div.getTxtDaisanTokuyoGaitosha().setDecorationClass(黄色);
-        } else if (RiyoshaFutanDankai.課税層第3段階.getコード().equals(利用者負担段階)) {
-            div.getTxtKijunHiyogakuJunKoshitsuGaitosha().setDecorationClass(黄色);
-            div.getTxtKijunHiyogakuTashoshitsuGaitosha().setDecorationClass(黄色);
-            div.getTxtKijunHiyogakuTokuyoGaitosha().setDecorationClass(黄色);
+    private void set該当のアイコン表示(TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度, FlexibleDate 基準日, FutangakuGengakuBusiness 負担限度額) {
+        int 負担限度額認定_ユニット型個室 = get金額(負担限度額.getユニット型個室());
+        int 負担限度額認定_ユニット型準個室 = get金額(負担限度額.getユニット型準個室());
+        int 負担限度額認定_従来型個室_特養 = get金額(負担限度額.get従来型個室_特養等());
+        int 負担限度額認定_多床室 = get金額(負担限度額.get多床室());
+        set第1段階アイコン表示(負担限度額認定_ユニット型個室, 負担限度額認定_ユニット型準個室,
+                負担限度額認定_従来型個室_特養, 負担限度額認定_多床室, 特定入所者負担限度, 基準日);
+        set第2段階アイコン表示(負担限度額認定_ユニット型個室, 負担限度額認定_ユニット型準個室,
+                負担限度額認定_従来型個室_特養, 負担限度額認定_多床室, 特定入所者負担限度, 基準日);
+        set第2段階の2アイコン表示(負担限度額認定_ユニット型個室, 負担限度額認定_ユニット型準個室,
+                負担限度額認定_従来型個室_特養, 負担限度額認定_多床室, 特定入所者負担限度, 基準日);
+        set第3段階アイコン表示(負担限度額認定_ユニット型個室, 負担限度額認定_ユニット型準個室,
+                負担限度額認定_従来型個室_特養, 負担限度額認定_多床室, 特定入所者負担限度, 基準日);
+        set基準費用額アイコン表示(負担限度額認定_ユニット型個室, 負担限度額認定_ユニット型準個室,
+                負担限度額認定_従来型個室_特養, 負担限度額認定_多床室, 特定入所者負担限度, 基準日);
+    }
+
+    private void set第1段階アイコン表示(int 負担限度額認定_ユニット型個室, int 負担限度額認定_ユニット型準個室,
+            int 負担限度額認定_従来型個室_特養, int 負担限度額認定_多床室,
+            TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度, FlexibleDate 基準日) {
+        if (負担限度額認定_ユニット型個室 <= get金額(toDecimal(特定入所者負担限度.get旧措軽減ユニット型個室１(基準日)))) {
+            div.getIcoDaiichiKoshitsuGaitosha().setVisible(true);
         }
-        if (toDecimal(特定入所者負担限度.getユニット型個室_基準費用額(基準日)).equals(負担限度額.getユニット型個室())) {
-            div.getTxtKijunHiyogakuKoshitsuGaitosha().setDecorationClass(黄色);
+        if (負担限度額認定_ユニット型準個室 <= get金額(toDecimal(特定入所者負担限度.get旧措軽減ユニット型準個室１(基準日)))) {
+            div.getIcoDaiichiJunKoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_従来型個室_特養 <= get金額(toDecimal(特定入所者負担限度.get旧措軽減従個特養１(基準日)))) {
+            div.getIcoDaiichiTokuyoGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_多床室 <= get金額(toDecimal(特定入所者負担限度.get旧措軽減多床室１(基準日)))) {
+            div.getIcoDaiichiTashoshitsuGaitosha().setVisible(true);
+        }
+    }
+
+    private void set第2段階アイコン表示(int 負担限度額認定_ユニット型個室, int 負担限度額認定_ユニット型準個室,
+            int 負担限度額認定_従来型個室_特養, int 負担限度額認定_多床室,
+            TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度, FlexibleDate 基準日) {
+        if (負担限度額認定_ユニット型個室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減ユニット型個室２(基準日)))) {
+            div.getIcoDainiKoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_ユニット型準個室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減ユニット型準個室２の１(基準日)))) {
+            div.getIcoDaininoIchiJunKoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_従来型個室_特養 == get金額(toDecimal(特定入所者負担限度.get旧措軽減従個特養２の１(基準日)))) {
+            div.getIcoDaininoIchiTokuyoGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_多床室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減多床室２の１(基準日)))) {
+            div.getIcoDaininoIchiTashoshitsuGaitosha().setVisible(true);
+        }
+    }
+
+    private void set第2段階の2アイコン表示(int 負担限度額認定_ユニット型個室, int 負担限度額認定_ユニット型準個室,
+            int 負担限度額認定_従来型個室_特養, int 負担限度額認定_多床室,
+            TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度, FlexibleDate 基準日) {
+        if (負担限度額認定_ユニット型個室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減ユニット型個室３(基準日)))) {
+            div.getIcoDaisanKoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_ユニット型準個室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減ユニット型準個室２の２(基準日)))) {
+            div.getIcoDaininoNiJunKoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_従来型個室_特養 == get金額(toDecimal(特定入所者負担限度.get旧措軽減従個特養２の２(基準日)))) {
+            div.getIcoDaininoNiTokuyoGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_多床室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減多床室２の２(基準日)))) {
+            div.getIcoDaininoNiTashoshitsuGaitosha().setVisible(true);
+        }
+    }
+
+    private void set第3段階アイコン表示(int 負担限度額認定_ユニット型個室, int 負担限度額認定_ユニット型準個室,
+            int 負担限度額認定_従来型個室_特養, int 負担限度額認定_多床室,
+            TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度, FlexibleDate 基準日) {
+        if (負担限度額認定_ユニット型個室 == get金額(toDecimal(特定入所者負担限度.getユニット型個室_基準費用額(基準日)))) {
+            div.getIcoKijunHiyogakuKoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_ユニット型準個室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減ユニット型準個室３(基準日)))) {
+            div.getIcoDaisanJunKoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_従来型個室_特養 == get金額(toDecimal(特定入所者負担限度.get旧措軽減従個特養２の３(基準日)))) {
+            div.getIcoDaininoSanTokuyoGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_多床室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減多床室３(基準日)))) {
+            div.getIcoDaisanTashoshitsuGaitosha().setVisible(true);
+        }
+    }
+
+    private void set基準費用額アイコン表示(int 負担限度額認定_ユニット型個室, int 負担限度額認定_ユニット型準個室,
+            int 負担限度額認定_従来型個室_特養, int 負担限度額認定_多床室,
+            TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度, FlexibleDate 基準日) {
+        if (負担限度額認定_ユニット型個室 == get金額(toDecimal(特定入所者負担限度.getユニット型準個室_基準費用額(基準日)))) {
+            div.getIcoKijunHiyogakuJunKoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_ユニット型準個室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減従個特養３(基準日)))) {
+            div.getIcoDaisanTokuyoGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_従来型個室_特養 == get金額(toDecimal(特定入所者負担限度.get多床室_基準費用額(基準日)))) {
+            div.getIcoKijunHiyogakuTashoshitsuGaitosha().setVisible(true);
+        }
+        if (負担限度額認定_多床室 == get金額(toDecimal(特定入所者負担限度.get従個特養_基準費用額(基準日)))) {
+            div.getIcoKijunHiyogakuTokuyoGaitosha().setVisible(true);
         }
     }
 
     private void set保険料段階(List<HokenryoDankai> 保険料段階情報, Fuka 介護賦課, boolean is非該当) {
         List<dgKaigoHokenryo_Row> rowList = new ArrayList<>();
-
         List<dgKaigoHokenryoGaitosha_Row> gaitoshaRowList = new ArrayList<>();
         if (is非該当) {
             for (HokenryoDankai 保険料段階 : 保険料段階情報) {
                 dgKaigoHokenryo_Row row = new dgKaigoHokenryo_Row();
                 row.setDankaiKubun(保険料段階.get段階区分());
                 row.setDankai(保険料段階の編集(保険料段階.get段階区分()));
-                if (!段階区分.equals(保険料段階.get段階区分().padZeroToLeft(INT_3).substring(INT_2, INT_3))) {
+                if (!段階区分.equals(保険料段階.get段階区分().padZeroToLeft(INT_SAN).substring(INT_NI, INT_SAN))) {
                     row.setTokureiHyoki(保険料段階.get特例表記());
                 } else {
                     row.setTokureiHyoki(RString.EMPTY);
@@ -379,7 +481,7 @@ public class RenrakuhyoDataCreatorHandler {
                 dgKaigoHokenryoGaitosha_Row row = new dgKaigoHokenryoGaitosha_Row();
                 row.setDankaiKubun(保険料段階.get段階区分());
                 row.setDankai(保険料段階の編集(保険料段階.get段階区分()));
-                if (!段階区分.equals(保険料段階.get段階区分().padZeroToLeft(INT_3).substring(INT_2, INT_3))) {
+                if (!段階区分.equals(保険料段階.get段階区分().padZeroToLeft(INT_SAN).substring(INT_NI, INT_SAN))) {
                     row.setTokureiHyoki(保険料段階.get特例表記());
                 } else {
                     row.setTokureiHyoki(RString.EMPTY);
@@ -655,7 +757,8 @@ public class RenrakuhyoDataCreatorHandler {
     private RString 保険料段階の編集(RString 段階区分) {
         RStringBuilder builder = new RStringBuilder();
         if (!RString.isNullOrEmpty(段階区分)) {
-            return builder.append("第").append(段階区分.padZeroToLeft(INT_3).substring(INT_1, INT_2)).append("段階").toRString();
+            return builder.append("第").append(段階区分.padZeroToLeft(INT_SAN)
+                    .substring(INT_ICHI, INT_NI)).append("段階").toRString();
         }
         return RString.EMPTY;
     }
@@ -666,5 +769,12 @@ public class RenrakuhyoDataCreatorHandler {
             return 保険料段階;
         }
         return builder.append(保険料段階).append(特例表記).toRString();
+    }
+
+    private int get金額(Decimal 金額) {
+        if (金額 != null) {
+            return 金額.intValue();
+        }
+        return INT_ZERO;
     }
 }

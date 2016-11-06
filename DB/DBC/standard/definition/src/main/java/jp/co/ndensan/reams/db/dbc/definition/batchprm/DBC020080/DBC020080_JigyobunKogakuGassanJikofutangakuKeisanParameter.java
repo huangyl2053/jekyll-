@@ -5,52 +5,48 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020080;
 
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080ProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 画面設計_DBCMN62006_自己負担額計算（一括）のクラスです。
+ * 画面設計_DBCMNN1001_事業高額合算・事業分自己負担額計算（括）のクラスです。
  *
- * @reamsid_L DBC-2060-010 chenyadong
+ * @reamsid_L DBC-4790-010 chenyadong
  */
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends BatchParameterBase {
 
-    private static final String KEY_SHORITIMESTAMP = "shoriTimestamp";
-    private static final String KEY_TAISHOKAISHIDAY = "taishoKaishiDay";
-    private static final String KEY_TAISHOSHURYODAY = "taishoShuryoDay";
+    private static final String KEY_SHORITIME = "shoriTime";
+    private static final String KEY_UKETORIYM = "uketoriym";
+    private static final String KEY_HIHOKENSHANO = "hihokenshano";
+    private static final String KEY_NENDO = "nendo";
+    private static final String KEY_RADSAKUSEIJOKEN = "radSakuseiJoken";
     private static final String KEY_SHUTURYOKUFLG = "shuturyokuFlg";
     private static final String KEY_SHUTSURYOKUJUNID = "shutsuryokujunId";
     private static final String KEY_DANTAICD = "dantaiCd";
 
-    @BatchParameter(key = KEY_SHORITIMESTAMP, name = "処理日時")
-    private RDateTime shoriTimestamp;
-    @BatchParameter(key = KEY_TAISHOKAISHIDAY, name = "申請対象開始日")
-    private FlexibleDate taishoKaishiDay;
-    @BatchParameter(key = KEY_TAISHOSHURYODAY, name = "申請対象日終了日")
-    private FlexibleDate taishoShuryoDay;
+    @BatchParameter(key = KEY_SHORITIME, name = "処理日時")
+    private RDateTime shoriTime;
+    @BatchParameter(key = KEY_UKETORIYM, name = "受取年月")
+    private FlexibleYearMonth uketoriym;
+    @BatchParameter(key = KEY_HIHOKENSHANO, name = "被保険者番号")
+    private RString hihokenshano;
+    @BatchParameter(key = KEY_NENDO, name = "年度")
+    private RString nendo;
+    @BatchParameter(key = KEY_RADSAKUSEIJOKEN, name = "出力対象区分")
+    private RString radSakuseiJoken;
     @BatchParameter(key = KEY_SHUTURYOKUFLG, name = "出力フラグ")
     private boolean shuturyokuFlg;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "帳票出力順ID")
     private Long shutsuryokujunId;
     @BatchParameter(key = KEY_DANTAICD, name = "市町村コード")
     private LasdecCode dantaiCd;
-
-    /**
-     * toDBC020080ProcessParameter のメソッドです。
-     *
-     * @return DBC020080ProcessParameter
-     */
-    public DBC020080ProcessParameter toDBC020080ProcessParameter() {
-        return new DBC020080ProcessParameter(
-                shoriTimestamp, taishoKaishiDay, taishoShuryoDay, shuturyokuFlg, shutsuryokujunId, dantaiCd);
-    }
 }

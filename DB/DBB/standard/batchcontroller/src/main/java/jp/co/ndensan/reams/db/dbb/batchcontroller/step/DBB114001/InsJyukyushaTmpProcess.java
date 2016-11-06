@@ -147,7 +147,7 @@ public class InsJyukyushaTmpProcess extends BatchProcessBase<JukyuusyaEntity> {
         ShotokuNendoParameter param = new ShotokuNendoParameter();
         FlexibleYear 処理年度 = processParameter.get処理年度();
         param.set処理年度_0801(new FlexibleDate(処理年度.getYearValue(), INDEX_8, INDEX_1));
-        param.set処理年度_plus1_0731(new FlexibleDate(処理年度.getYearValue(), INDEX_7, INDEX_31));
+        param.set処理年度_plus1_0731(new FlexibleDate(処理年度.getYearValue() + INDEX_1, INDEX_7, INDEX_31));
         return param;
     }
 

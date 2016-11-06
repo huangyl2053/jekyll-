@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokuteiKojinJohoTeikyoMybatisParamater implements IMyBatisParameter {
 
     private RString subGyomuCode;
-    private RString shoriName;
+    private RString shoriName1;
+    private RString shoriName2;
+    private boolean isTosyo;
 
 }

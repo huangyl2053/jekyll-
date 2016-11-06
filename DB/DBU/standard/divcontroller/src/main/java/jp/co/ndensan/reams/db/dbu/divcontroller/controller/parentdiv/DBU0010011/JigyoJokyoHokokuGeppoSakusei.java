@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0010011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010010.DBU010010_JigyoHokokuGeppo_MainParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiValidationHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -147,7 +147,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnKakutei(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         RDate 報告年月 = div.getTxtHokokuYM().getValue();
-        RDate 日付 = new RDate("平成12年5月");
+        RDate 日付 = new RDate("平成12年4月");
         if (報告年月 == null) {
             return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目(new RString("報告年月"))).respond();
         }

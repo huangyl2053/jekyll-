@@ -41,7 +41,6 @@ public class ShiharaiHohoHenkoHaakoFiveProcessParameter implements IBatchProcess
     private FlexibleDate 受給支給決定日抽出の開始;
     private FlexibleDate 受給支給決定日抽出の終了;
     private Long 改頁出力順ID;
-    private ReportId 帳票分類ID;
     private ReportId 帳票ID;
     private RDateTime 帳票作成日時;
 
@@ -66,7 +65,6 @@ public class ShiharaiHohoHenkoHaakoFiveProcessParameter implements IBatchProcess
      * @param 受給支給決定日抽出の開始 受給支給決定日抽出の開始
      * @param 受給支給決定日抽出の終了 受給支給決定日抽出の終了
      * @param 改頁出力順ID 改頁出力順ID
-     * @param 帳票分類ID 帳票分類ID
      * @param 帳票ID 帳票ID
      * @param 帳票作成日時 帳票作成日時
      */
@@ -89,7 +87,6 @@ public class ShiharaiHohoHenkoHaakoFiveProcessParameter implements IBatchProcess
             FlexibleDate 受給支給決定日抽出の開始,
             FlexibleDate 受給支給決定日抽出の終了,
             Long 改頁出力順ID,
-            ReportId 帳票分類ID,
             ReportId 帳票ID,
             RDateTime 帳票作成日時) {
         this.基準日 = 基準日;
@@ -110,7 +107,6 @@ public class ShiharaiHohoHenkoHaakoFiveProcessParameter implements IBatchProcess
         this.受給支給決定日抽出の開始 = 受給支給決定日抽出の開始;
         this.受給支給決定日抽出の終了 = 受給支給決定日抽出の終了;
         this.改頁出力順ID = 改頁出力順ID;
-        this.帳票分類ID = 帳票分類ID;
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
     }

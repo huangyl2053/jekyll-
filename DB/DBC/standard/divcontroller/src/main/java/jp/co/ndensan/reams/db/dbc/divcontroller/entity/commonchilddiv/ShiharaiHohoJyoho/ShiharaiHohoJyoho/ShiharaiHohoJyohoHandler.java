@@ -53,6 +53,8 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 住宅改修費支給申請 = new RString("DBCUC07100");
     private final RString 住宅改修費事前申請 = new RString("DBCUC07000");
     private final RString 償還払い費支給申請 = new RString("DBCUC08100");
+    private final RString 住宅改修費支給申請一括審査_決定 = new RString("DBCUC07200");
+    private final RString 福祉用具購入費支給申請一括審査_決定 = new RString("DBCUC06100");
     private final RString 高額サービス費支給申請 = new RString("DBCUC04400");
     private final RString 総合事業高額サービス費支給申請 = new RString("DBCUC04401");
     private final RString 高額合算支給申請 = new RString("DBCUC11000");
@@ -60,7 +62,9 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 自己負担額証明書交付申請書登録 = new RString("DBCUC11100");
     private final RString 曜日_日 = new RString("日曜");
     private final RString 曜日_土 = new RString("土曜");
+    private final RString 非表示 = new RString("非表示");
     private final ShiharaiHohoJyohoDiv div;
+    private static final char 全角空白 = '　';
 
     /**
      * コンストラクタです。
@@ -81,6 +85,7 @@ public class ShiharaiHohoJyohoHandler {
     public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
         div.setHdnTxtSubGyomuCode(SubGyomuCode.DBC介護給付.value());
         div.setHdnTxtShikibetsuCode(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
+        div.setHdnGridSelectButtonDisplay(非表示);
 
         ShunoKamokuShubetsu 業務内区分コード = get業務内区分コード();
 
@@ -98,7 +103,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                getKozaId(), null, null)).records();
+                                        getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -199,6 +204,22 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanName1().clearValue();
         div.getTxtMeigininKana1().clearDomain();
         div.getTxtMeigininKanji1().clearDomain();
+    }
+
+    /**
+     * 必須項目をクリアします。
+     *
+     */
+    public void clear必須項目() {
+        div.getTxtShiharaiBasho().clearValue();
+        div.getTxtStartYMD().clearValue();
+        div.getTxtStartYobi().clearValue();
+        div.getTxtStartHHMM().clearValue();
+        div.getTxtEndYMD().clearValue();
+        div.getTxtEndYobi().clearValue();
+        div.getTxtEndHHMM().clearValue();
+        div.getDdlKozaID().setSelectedIndex(0);
+        div.getTxtKeiyakuNo().clearValue();
     }
 
     private void 償還払給付または高額給付の照会モード(ShiharaiHohoKubun 支払方法区分) {
@@ -600,21 +621,12 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanShitenCode().setDisplayNone(true);
             div.getTxtYokinShubetsu().setDisplayNone(true);
         } else {
-            KinyuKikan kinyuKikan = 金融機関コードに対する名称(口座情報.get金融機関コード() == null
-                    ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード());
-            KinyuKikanShiten kinyuKikanShiten = 支店コードまたは店番に対する名称(口座情報.get金融機関コード() == null
-                    ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
-                    口座情報.get支店コード() == null ? KinyuKikanShitenCode.EMPTY : 口座情報.get支店コード());
-            口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
             div.getTxtKinyuKikanShitenCode().setDisplayNone(false);
             div.getTxtYokinShubetsu().setDisplayNone(false);
             div.getTxtTenban().setDisplayNone(true);
+            div.getTxtKinyuKikanName().setValue(口座情報.getCombined金融機関名and支店名(全角空白));
         }
-        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(口座情報.get預金種別().get預金種別コード()));
-        if (uzT0007CodeBusiness != null) {
-
-            div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード名称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード名称());
-        }
+        div.getTxtYokinShubetsu().setValue(口座情報.get預金種別名称() == null ? RString.EMPTY : 口座情報.get預金種別名称());
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
         div.getTtxtMeigininKanji().setDomain(口座情報.get口座名義人漢字());
@@ -698,7 +710,7 @@ public class ShiharaiHohoJyohoHandler {
             builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString());
         }
         if (kinyuKikanShiten != null) {
-            builder.append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+            builder.append(全角空白).append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
         }
         if (builder != null) {
             div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
@@ -795,6 +807,14 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtStartYobi().setReadOnly(true);
         div.getTxtStartHHMM().setReadOnly(true);
         div.getTxtEndHHMM().setReadOnly(true);
+
+        div.getTxtShiharaiBasho().clearValue();
+        div.getTxtStartYMD().clearValue();
+        div.getTxtStartYobi().clearValue();
+        div.getTxtStartHHMM().clearValue();
+        div.getTxtEndYMD().clearValue();
+        div.getTxtEndYobi().clearValue();
+        div.getTxtEndHHMM().clearValue();
     }
 
     /**
@@ -813,6 +833,16 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana().setReadOnly(true);
         div.getTtxtMeigininKanji().setReadOnly(true);
         div.getTxtTenban().setReadOnly(true);
+
+        div.getDdlKozaID().setSelectedKey(RString.EMPTY);
+        div.getTxtKinyuKikanCode().clearDomain();
+        div.getTxtKinyuKikanShitenCode().clearDomain();
+        div.getTxtTenban().clearValue();
+        div.getTxtYokinShubetsu().clearValue();
+        div.getTxtKozaNo().clearValue();
+        div.getTxtKinyuKikanName().clearValue();
+        div.getTxtMeigininKana().clearDomain();
+        div.getTtxtMeigininKanji().clearDomain();
     }
 
     /**
@@ -898,6 +928,24 @@ public class ShiharaiHohoJyohoHandler {
     }
 
     /**
+     * 契約事業者名を取得します。
+     *
+     * @param 契約事業者名 AtenaMeisho
+     */
+    public void set契約事業者名(AtenaMeisho 契約事業者名) {
+        div.getTxtKeiyakuName().setDomain(契約事業者名);
+    }
+
+    /**
+     * 契約事業者を取得します。
+     *
+     * @param 契約事業者 RString
+     */
+    public void set契約事業者(RString 契約事業者) {
+        div.getTxtKeiyakuCode().setValue(契約事業者);
+    }
+
+    /**
      * 支払場所を取得します。
      *
      * @return RString
@@ -935,6 +983,18 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
         div.getTxtTenban1().setReadOnly(true);
+
+        div.getTxtKeiyakuNo().clearValue();
+        div.getTxtKeiyakuCode().clearValue();
+        div.getTxtKeiyakuName().clearDomain();
+        div.getTxtKinyuKikanCode1().clearDomain();
+        div.getTxtKinyuKikanShitenCode1().clearDomain();
+        div.getTxtTenban1().clearValue();
+        div.getTxtYokinShubetsu1().clearValue();
+        div.getTxtKozaNo1().clearValue();
+        div.getTxtKinyuKikanName1().clearValue();
+        div.getTxtMeigininKana1().clearDomain();
+        div.getTxtMeigininKanji1().clearDomain();
     }
 
     /**
@@ -963,7 +1023,9 @@ public class ShiharaiHohoJyohoHandler {
                 || 福祉用具購入費支給申請.equals(uiContainerId)
                 || 住宅改修費支給申請.equals(uiContainerId)
                 || 住宅改修費事前申請.equals(uiContainerId)
-                || 償還払い費支給申請.equals(uiContainerId)) {
+                || 償還払い費支給申請.equals(uiContainerId)
+                || 住宅改修費支給申請一括審査_決定.equals(uiContainerId)
+                || 福祉用具購入費支給申請一括審査_決定.equals(uiContainerId)) {
 
             return ShunoKamokuShubetsu.介護給付_償還;
 

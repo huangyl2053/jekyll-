@@ -72,7 +72,7 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
         source.list1_4 = パターン4編集(振込明細一覧Entity.get申請年月日());
 
         RString 名称 = RString.EMPTY;
-        if (振込明細一覧Entity.get申請区分コード() != null) {
+        if (振込明細一覧Entity.get申請区分コード() != null && !振込明細一覧Entity.get申請区分コード().isEmpty()) {
             名称 = NinteiShinseiShinseijiKubunCode.toValue(振込明細一覧Entity.get申請区分コード()).get名称();
         }
         if (名称.length() <= LENGTH_FOUR) {
@@ -94,7 +94,7 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
         source.ｌist3_1 = new RString(番号);
 
         if (振込明細一覧Entity.get支払区分方法コード() != null) {
-            source.list4_1 = ShiharaiHohoKubun.toValue(振込明細一覧Entity.get支払区分方法コード()).get名称();
+            source.list4_1 = ShiharaiHohoKubun.toValue(振込明細一覧Entity.get支払区分方法コード()).get略称();
         }
 
         if (件数値TWO <= 振込明細一覧Entity.get名寄せ件数()) {

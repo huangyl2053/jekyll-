@@ -27,14 +27,14 @@ public class TokubetsuKyufuJigyoshaDetailShinseishaDiv extends Panel {
     private TextBoxKana txtShinseishaNameKana;
     @JsonProperty("txtShinseishaYubinNo")
     private TextBoxYubinNo txtShinseishaYubinNo;
-    @JsonProperty("txtShinseishaTelNo")
-    private TextBox txtShinseishaTelNo;
-    @JsonProperty("txtShinseishaFaxNo")
-    private TextBox txtShinseishaFaxNo;
     @JsonProperty("txtShinseishaJusho")
     private TextBox txtShinseishaJusho;
     @JsonProperty("txtShinseishaJushoKana")
     private TextBoxKana txtShinseishaJushoKana;
+    @JsonProperty("txtShinseishaTelNo")
+    private TextBox txtShinseishaTelNo;
+    @JsonProperty("txtShinseishaFaxNo")
+    private TextBox txtShinseishaFaxNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -97,42 +97,6 @@ public class TokubetsuKyufuJigyoshaDetailShinseishaDiv extends Panel {
     }
 
     /*
-     * gettxtShinseishaTelNo
-     * @return txtShinseishaTelNo
-     */
-    @JsonProperty("txtShinseishaTelNo")
-    public TextBox getTxtShinseishaTelNo() {
-        return txtShinseishaTelNo;
-    }
-
-    /*
-     * settxtShinseishaTelNo
-     * @param txtShinseishaTelNo txtShinseishaTelNo
-     */
-    @JsonProperty("txtShinseishaTelNo")
-    public void setTxtShinseishaTelNo(TextBox txtShinseishaTelNo) {
-        this.txtShinseishaTelNo = txtShinseishaTelNo;
-    }
-
-    /*
-     * gettxtShinseishaFaxNo
-     * @return txtShinseishaFaxNo
-     */
-    @JsonProperty("txtShinseishaFaxNo")
-    public TextBox getTxtShinseishaFaxNo() {
-        return txtShinseishaFaxNo;
-    }
-
-    /*
-     * settxtShinseishaFaxNo
-     * @param txtShinseishaFaxNo txtShinseishaFaxNo
-     */
-    @JsonProperty("txtShinseishaFaxNo")
-    public void setTxtShinseishaFaxNo(TextBox txtShinseishaFaxNo) {
-        this.txtShinseishaFaxNo = txtShinseishaFaxNo;
-    }
-
-    /*
      * gettxtShinseishaJusho
      * @return txtShinseishaJusho
      */
@@ -166,6 +130,42 @@ public class TokubetsuKyufuJigyoshaDetailShinseishaDiv extends Panel {
     @JsonProperty("txtShinseishaJushoKana")
     public void setTxtShinseishaJushoKana(TextBoxKana txtShinseishaJushoKana) {
         this.txtShinseishaJushoKana = txtShinseishaJushoKana;
+    }
+
+    /*
+     * gettxtShinseishaTelNo
+     * @return txtShinseishaTelNo
+     */
+    @JsonProperty("txtShinseishaTelNo")
+    public TextBox getTxtShinseishaTelNo() {
+        return txtShinseishaTelNo;
+    }
+
+    /*
+     * settxtShinseishaTelNo
+     * @param txtShinseishaTelNo txtShinseishaTelNo
+     */
+    @JsonProperty("txtShinseishaTelNo")
+    public void setTxtShinseishaTelNo(TextBox txtShinseishaTelNo) {
+        this.txtShinseishaTelNo = txtShinseishaTelNo;
+    }
+
+    /*
+     * gettxtShinseishaFaxNo
+     * @return txtShinseishaFaxNo
+     */
+    @JsonProperty("txtShinseishaFaxNo")
+    public TextBox getTxtShinseishaFaxNo() {
+        return txtShinseishaFaxNo;
+    }
+
+    /*
+     * settxtShinseishaFaxNo
+     * @param txtShinseishaFaxNo txtShinseishaFaxNo
+     */
+    @JsonProperty("txtShinseishaFaxNo")
+    public void setTxtShinseishaFaxNo(TextBox txtShinseishaFaxNo) {
+        this.txtShinseishaFaxNo = txtShinseishaFaxNo;
     }
 
     // </editor-fold>

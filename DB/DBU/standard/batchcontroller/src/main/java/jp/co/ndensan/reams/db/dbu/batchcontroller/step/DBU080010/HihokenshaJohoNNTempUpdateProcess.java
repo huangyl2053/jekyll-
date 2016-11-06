@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -47,10 +48,13 @@ public class HihokenshaJohoNNTempUpdateProcess extends BatchProcessBase<Jukyusha
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter teikyoKihonJohoNNTemp;
+    @BatchWriter
+    private BatchPermanentTableWriter<DbT7301TokuteiKojinJohoHanKanriEntity> dbT7301EntityWriter;
 
     @Override
     protected void initialize() {
-        mybitisParamter = HihokenshaJohoMybatisParameter.createParamter提供対象者(getMybitisParamter(),
+        mybitisParamter = HihokenshaJohoMybatisParameter.createParamter提供対象者(processParameter.get新規異動区分(),
+                getMybitisParamter(),
                 new RString("\"").concat(processParameter.get提供基本情報中間テーブル名()).concat("\"")
         );
 
@@ -63,6 +67,7 @@ public class HihokenshaJohoNNTempUpdateProcess extends BatchProcessBase<Jukyusha
 
     @Override
     protected void createWriter() {
+        dbT7301EntityWriter = new BatchPermanentTableWriter(DbT7301TokuteiKojinJohoHanKanriEntity.class);
         teikyoKihonJohoNNTemp = new BatchEntityCreatedTempTableWriter(
                 processParameter.get提供基本情報中間テーブル名(), TeikyoKihonJohoNNTempEntity.class);
     }
@@ -84,10 +89,12 @@ public class HihokenshaJohoNNTempUpdateProcess extends BatchProcessBase<Jukyusha
                 processParameter.get特定個人情報名コード(),
                 DataSetNo._0101被保険者情報.getコード(),
                 processParameter.get版番号());
-        for (TokuteiKojinJohoHanKanri 個人情報提供 : 特定個人情報提供Manager.get版番号(
-                RString.EMPTY, processParameter.get特定個人情報名コード(), DataSetNo._0101被保険者情報.getコード(), FlexibleDate.EMPTY)) {
+        List<TokuteiKojinJohoHanKanri> businessList = 特定個人情報提供Manager.get版番号(
+                RString.EMPTY, processParameter.get特定個人情報名コード(), DataSetNo._0101被保険者情報.getコード(), FlexibleDate.EMPTY);
+        for (TokuteiKojinJohoHanKanri 個人情報提供 : businessList) {
             DbT7301TokuteiKojinJohoHanKanriEntity entity = 個人情報提供.toEntity();
             entity.setShokaiTeikyoKubun(ShokaiTeikyoKubun.初回提供済み.getコード());
+            dbT7301EntityWriter.update(entity);
         }
     }
 

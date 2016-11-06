@@ -371,7 +371,7 @@
         WHERE 
              A."shikakuShutokuYMD" <![CDATA[<=]]>  #{世帯員把握基準日2}
         AND  
-             A."shikakuSoshitsuYMD" <![CDATA[<=]]>  #{世帯員把握基準日2} 
+             #{世帯員把握基準日2}  <![CDATA[<]]>  A."shikakuSoshitsuYMD"
          <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
         AND   A."hihokenshaNo" =  #{被保険者番号}  
          </if> 
@@ -598,7 +598,7 @@
         UPDATE
         rgdb."DbT7022ShoriDateKanri"
         SET
-        "kijunYMD" = #{システム日付}
+        "kijunTimestamp" = #{基準日時}
         WHERE 
                "subGyomuCode" = 'DBC'
          AND
@@ -622,7 +622,7 @@
           "shoriEdaban",
           "nendoNaiRenban",
           "nendo",
-          "kijunYMD"
+          "kijunTimestamp"
           )
         VALUES
         (
@@ -632,7 +632,7 @@
         '0000',
         '0000',
         #{処理年度},
-        #{システム日付}
+        #{基準日時}
         )
     </insert>
     

@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SaishinsaMoshitateTourokuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -255,11 +255,6 @@ public class SaishinsaMoshitateTourokuPanelDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
-        return this.getSearchToKyufujissekiPanel().getCcdJigyoshaSentaku();
-    }
-
-    @JsonIgnore
     public TextBoxCode getTxtHihoNo() {
         return this.getSearchToKyufujissekiPanel().getTxtHihoNo();
     }
@@ -322,6 +317,11 @@ public class SaishinsaMoshitateTourokuPanelDiv extends Panel {
     @JsonIgnore
     public IHokenshaListDiv getHokenshaList() {
         return this.getSearchToKyufujissekiPanel().getHokenshaList();
+    }
+
+    @JsonIgnore
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return this.getSearchToKyufujissekiPanel().getCcdJigyoshaSentaku();
     }
 
     @JsonIgnore
@@ -465,13 +465,13 @@ public class SaishinsaMoshitateTourokuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTextBox12() {
-        return this.getKagoMoshitatePanel().getTextBox12();
+    public TextBoxNum getTextBoxNum12() {
+        return this.getKagoMoshitatePanel().getTextBoxNum12();
     }
 
     @JsonIgnore
-    public void  setTextBox12(TextBox TextBox12) {
-        this.getKagoMoshitatePanel().setTextBox12(TextBox12);
+    public void  setTextBoxNum12(TextBoxNum TextBoxNum12) {
+        this.getKagoMoshitatePanel().setTextBoxNum12(TextBoxNum12);
     }
 
     @JsonIgnore

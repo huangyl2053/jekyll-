@@ -7,22 +7,25 @@ package jp.co.ndensan.reams.db.dbc.service.core.shokanharaishikyufushikyuketeits
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.chohyojushoeditor.ChohyoJushoEditor;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.business.core.association.IAssociation;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,6 +45,8 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
     private static final int 数字_5 = 5;
     private static final int 数字_4 = 4;
     private static final int 数字_3 = 3;
+    private static final int ZERO = 0;
+    private static final int TEN = 10;
 
     /**
      * 帳票データを作成します。
@@ -50,11 +55,12 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
      * @param batchPram バッチパラメータ
      * @param 出力順 出力順
      * @param 改ページ 改ページ
+     * @param 種類Map 種類Map
      * @return List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
      */
     public List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
             getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(List<ShokanKetteiTsuchiShoShiharai> businessList,
-                    ShokanKetteiTsuchiShoSealerBatchParameter batchPram, List<RString> 出力順, List<RString> 改ページ) {
+                    ShokanKetteiTsuchiShoSealerBatchParameter batchPram, List<RString> 出力順, List<RString> 改ページ, Map<RString, RString> 種類Map) {
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> tsuchiIchiranItemsList = new ArrayList<>();
         if (businessList == null || businessList.isEmpty()) {
             ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem();
@@ -102,28 +108,18 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             ichiranItem.setKeteiTsuchiNo(shoShiharaiList.get決定通知No());
             ichiranItem.setHihokenshaNo(shoShiharaiList.get被保険者番号().value());
             ichiranItem.setHihokenshaName(shoShiharaiList.get被保険者氏名());
-            ichiranItem.setJusho(shoShiharaiList.get住所());
+
+            RString 編集住所 = get編集住所(shoShiharaiList.get宛名情報(), association.get地方公共団体コード());
+            ichiranItem.setJusho(編集住所);
+
             ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
             ichiranItem.setTeikyo(shoShiharaiList.get提供年月().wareki().
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
-            FlexibleYearMonth kizyuniti = new FlexibleDate(ichiranItem.getTeikyo()).getYearMonth();
-            if (shoShiharaiList.get要介護認定状態区分コード() != null) {
-                if (new FlexibleYearMonth("200904").isBeforeOrEquals(kizyuniti)) {
-                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun09.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-                }
-                if (new FlexibleYearMonth("200604").isBeforeOrEquals(kizyuniti)
-                        && kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
-                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun06.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-                }
-                if (new FlexibleYearMonth("200204").isBeforeOrEquals(kizyuniti)
-                        && kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
-                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun02.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-                }
-                if (kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200203"))) {
-                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun99.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-                }
+            if (shoShiharaiList.get要介護認定状態区分コード() != null
+                    && !RString.isNullOrEmpty(shoShiharaiList.get要介護認定状態区分コード().getColumnValue())) {
+                ichiranItem.setYoKaigodo(YokaigoJotaiKubun.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
             }
             ichiranItem.setNinteiKaishibi(共通ポリシfomart(shoShiharaiList.get認定開始日()));
             ichiranItem.setNinteiShuryobi(共通ポリシfomart(shoShiharaiList.get認定終了日()));
@@ -133,14 +129,10 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                     ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 1));
             ichiranItem.setShikyugaku(shoShiharaiList.get支給額() == null
                     ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 1));
-            RStringBuilder nituliki = new RStringBuilder();
-            nituliki.append(shoShiharaiList.get様式名称());
-            nituliki.append(new RString("("));
-            nituliki.append(DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(shoShiharaiList.get金額()), 1));
-            nituliki.append(new RString(")"));
-            ichiranItem.setYoshikigotoKingaku(nituliki.toRString());
+            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
+            ichiranItem.setKingaku(DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(shoShiharaiList.get金額()), 1));
             ichiranItem.setTuika(RString.EMPTY);
-            ichiranItem.setShurui(shoShiharaiList.get種類());
+            ichiranItem.setShurui(種類Map.get(getJufukuKey(shoShiharaiList)));
             if (!RString.isNullOrEmpty(shoShiharaiList.get支給不支給決定区分())) {
                 ichiranItem.setKeteiKubun(new RString(ShikyuFushikyuKubun.toValue(shoShiharaiList.get支給不支給決定区分()).get名称().toString()));
             }
@@ -168,6 +160,24 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             tsuchiIchiranItemsList.add(ichiranItem);
         }
         return tsuchiIchiranItemsList;
+    }
+
+    private RString get編集住所(IShikibetsuTaisho 宛名識別対象, LasdecCode 市町村コード) {
+        ChohyoJushoEditor 住所Editor = new ChohyoJushoEditor(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200023.getReportId().value(), GyomuBunrui.介護事務);
+        RString 管内管外区分 = 宛名識別対象.get住所().get管内管外().toRString();
+        RString 住所 = 宛名識別対象.get住所().get住所();
+        RString 番地 = 宛名識別対象.get住所().get番地().getBanchi().getColumnValue();
+        RString 方書 = 宛名識別対象.get住所().get方書().getColumnValue();
+        RString 行政区名 = 宛名識別対象.get行政区画().getGyoseiku().get名称();
+        return 住所Editor.editJusho(管内管外区分, 住所, 番地, 方書, 行政区名, 市町村コード);
+    }
+
+    private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
+        RStringBuilder key = new RStringBuilder();
+        key.append(shiharai.get被保険者番号().value());
+        key.append(shiharai.get提供年月().wareki().toDateString());
+        key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
+        return key.toRString();
     }
 
     /**

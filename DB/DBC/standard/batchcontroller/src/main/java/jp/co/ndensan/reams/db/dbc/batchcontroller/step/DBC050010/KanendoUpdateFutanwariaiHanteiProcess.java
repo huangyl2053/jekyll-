@@ -141,7 +141,7 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 new RString(JobContextHolder.getJobId()),
                 get設定値(),
-                new RString("0"),
+                parameter.get帳票ページCount(),
                 出力有無,
                 RString.EMPTY,
                 get出力条件表());

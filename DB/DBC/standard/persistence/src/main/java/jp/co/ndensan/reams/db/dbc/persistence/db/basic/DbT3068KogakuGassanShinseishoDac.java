@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseisho;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseisho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseisho.hokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseisho.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseisho.saiKeisanKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseisho.seiriNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseisho.shikyuShinseishoSeiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseisho.taishoNendo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -26,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -110,6 +113,41 @@ public class DbT3068KogakuGassanShinseishoDac implements ISaveable<DbT3068Kogaku
                 order(by(seiriNo, Order.DESC),
                         by(hihokenshaNo, Order.DESC)).
                 toList(DbT3068KogakuGassanShinseishoEntity.class);
+    }
+
+    /**
+     * 再計算区分の取得方法
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 FlexibleYear
+     * @param 支給申請書整理番号 RString
+     * @param 保険者番号 HokenshaNo
+     * @return <DbT3068KogakuGassanShinseishoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3068KogakuGassanShinseishoEntity selectSaikeisannkubun(
+            HihokenshaNo 被保険者番号,
+            RString 保険者番号,
+            FlexibleYear 対象年度,
+            RString 支給申請書整理番号
+    ) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(saiKeisanKubun, max(rirekiNo)).
+                table(DbT3068KogakuGassanShinseisho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(hokenshaNo, 保険者番号),
+                                eq(taishoNendo, 対象年度),
+                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号)
+                        )).groupBy(saiKeisanKubun).
+                toObject(DbT3068KogakuGassanShinseishoEntity.class);
     }
 
     /**

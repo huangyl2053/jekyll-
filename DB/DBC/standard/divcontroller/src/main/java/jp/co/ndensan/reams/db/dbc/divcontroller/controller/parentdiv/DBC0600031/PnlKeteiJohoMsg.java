@@ -1,6 +1,6 @@
 /**
- * To change this license header, choose License Headers in Project Properties. To change this template file, choose
- * Tools | Templates and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this template file, choose Tools | Templates and open the
+ * template in the editor.
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0600031;
 
@@ -233,10 +233,8 @@ public class PnlKeteiJohoMsg {
                                         getTxtSagakuGoke().getValue().toString()))
                         .set増減理由等(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                 .getTxtZogenriyu().getValue())
-                        .set不支給理由等(new RString(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().
-                                        getValue().toString()))
-                        .set購入_改修履歴等(new RString(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                                        .getTxtFushikyuriyu2().getValue().toString()))
+                        .set不支給理由等(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().getValue()
+                                .concat(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue()))
                         .build();
                 ShokanHanteiKekka shokanhanteikekka = new ShokanHanteiKekka(被保険者番号, サービス年月, 整理番号)
                         .createBuilderForEdit()
@@ -281,5 +279,15 @@ public class PnlKeteiJohoMsg {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一覧に戻る
+     *
+     * @param div 画面DIV
+     * @return 一覧へ遷移す
+     */
+    public ResponseData<PnlKeteiJohoMsgDiv> onClick_btnReturn(PnlKeteiJohoMsgDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
     }
 }

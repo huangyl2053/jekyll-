@@ -782,10 +782,9 @@ public class JigyoBunKogakuGassanShikyuKettei {
     /**
      * 出力条件を作成するメッソドです。
      *
-     * @param 市町村名 市町村名
      * @return List<RString>
      */
-    public List<RString> set出力条件(RString 市町村名) {
+    public List<RString> set出力条件() {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出条件】"));
@@ -801,7 +800,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.get保険者コード());
             市町村名builder.append(RString.HALF_SPACE);
-            市町村名builder.append(市町村名);
+            市町村名builder.append(processParameter.get保険者名());
             jokenBuilder.append(市町村名builder.toRString());
         }
         出力条件List.add(jokenBuilder.toRString());
@@ -865,7 +864,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
         IKozaSearchKey iKozaSearchKey = keyBuilder.build();
         return JigyoBunKogakuGassanShikyuKetteiMybatisParameter.createMybatisParameter(iKozaSearchKey,
                 kamokuList,
-                processParameter.get保険者コード(),
+                processParameter.get市町村コード(),
                 processParameter.get対象年度(),
                 processParameter.get支給区分List(),
                 processParameter.get支払方法区分List(),
@@ -919,16 +918,21 @@ public class JigyoBunKogakuGassanShikyuKettei {
         /**
          * 整理番号
          */
-        整理番号(new RString("0305"), new RString(""), new RString("shikyuSeiriNo\"")),
+        整理番号(new RString("0337"), new RString(""), new RString("\"shikyuSeiriNo\"")),
         /**
          * 支払方法
          */
-        支払方法(new RString("0312"), new RString(""), new RString("shiharaiHohoKubun\"")),
+        支払方法(new RString("0312"), new RString(""), new RString("\"shiharaiHohoKubun\"")),
         /**
          * 通知書作成日
          *
          */
-        通知書作成日(new RString("0410"), new RString(""), new RString("ketteiTsuchiSakuseiYMD\""));
+        通知書作成日(new RString("0410"), new RString(""), new RString("\"ketteiTsuchiSakuseiYMD\"")),
+        /**
+         * 対象年度
+         *
+         */
+        対象年度(new RString("0334"), new RString(""), new RString("\"taishoNendo\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

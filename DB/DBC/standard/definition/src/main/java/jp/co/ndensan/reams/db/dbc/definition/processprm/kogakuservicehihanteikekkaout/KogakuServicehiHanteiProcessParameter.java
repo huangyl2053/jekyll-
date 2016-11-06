@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakuservicehihanteike
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,5 +26,6 @@ public class KogakuServicehiHanteiProcessParameter implements IBatchProcessParam
     private List<RString> 送付ファイルエントリ情報List;
     private RString 保険者番号;
     private int レコード件数;
+    private Encode 文字コード;
 
 }

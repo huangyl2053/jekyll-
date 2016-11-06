@@ -59,19 +59,19 @@ public enum TokubetsuChoshuDoteiIchiranOutputOrder implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0021"), new RString("市町村コード"), new RString("\"genLasdecCode\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"genLasdecCode\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0031"), new RString("被保険者番号"), new RString("\"hihokenshaNo\"")),
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"hihokenshaNo\"")),
     /**
      * 年金コード
      */
-    年金コード(new RString("0051"), new RString("年金コード"), new RString("\"nenkinCode\"")),
+    年金コード(new RString("0206"), new RString("年金コード"), new RString("\"nenkinCode\"")),
     /**
      * 年金番号
      */
-    年金番号(new RString("0052"), new RString("年金番号"), new RString("\"kisoNenkinNo\""));
+    年金番号(new RString("0207"), new RString("年金番号"), new RString("\"kisoNenkinNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

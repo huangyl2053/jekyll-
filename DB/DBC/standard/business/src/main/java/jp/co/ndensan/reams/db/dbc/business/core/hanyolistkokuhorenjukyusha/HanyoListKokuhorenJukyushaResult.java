@@ -27,8 +27,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkokuhorenjukyusha.Ha
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistkokuhorenjukyusha.HanyoListKokuhorenJukyushaAriEUCEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistkokuhorenjukyusha.HanyoListKokuhorenJukyushaNashiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -149,10 +149,6 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set保険者コード(asociation.get地方公共団体コード().value());
         eucEntity.set保険者名(asociation.get市町村名());
         eucEntity.set空白(RString.HALF_SPACE);
-        eucEntity.set二次予防適用開始日(set日付編集(entity.get二次予防事業対象者_適用開始年月日()));
-        eucEntity.set二次予防適用終了日(set日付編集(entity.get二次予防事業対象者_適用終了年月日()));
-        eucEntity.set二次予防調査実施日(set日付編集(entity.get調査実施日()));
-        eucEntity.set二次予防決定日(set日付編集(entity.get決定年月日()));
         eucEntity.set処理対象年月(set日付編集(entity.get送付年月()));
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set履歴番号(new RString(String.valueOf(entity.get履歴番号())));
@@ -224,6 +220,15 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set二次予防事業開始日(set日付編集(entity.get二次予防事業有効期間開始年月日()));
         eucEntity.set二次予防事業終了日(set日付編集(entity.get二次予防事業有効期間終了年月日()));
         eucEntity.set二次予防事業区分(set二次予防事業区分(entity.get二次予防事業区分コード()));
+        eucEntity.set住所地特例対象者区分コード(entity.get住所地特例対象者区分コード());
+        eucEntity.set施設所在保険者番号(entity.get施設所在保険者番号());
+        eucEntity.set住所地特例適用開始日(set日付編集(entity.get住所地特例適用開始日()));
+        eucEntity.set住所地特例適用終了日(set日付編集(entity.get住所地特例適用終了日()));
+        eucEntity.set居宅費新１負担限度額(entity.get居宅費新1負担限度額());
+        eucEntity.set居宅費新２負担限度額(entity.get居宅費新2負担限度額());
+        eucEntity.set居宅費新３負担限度額(entity.get居宅費新3負担限度額());
+        eucEntity.set利用者負担割合有効開始日(set日付編集(entity.get利用者負担割合有効開始日()));
+        eucEntity.set利用者負担割合有効終了日(set日付編集(entity.get利用者負担割合有効終了日()));
         return eucEntity;
     }
 
@@ -278,10 +283,6 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set保険者コード(null);
         eucEntity.set保険者名(null);
         eucEntity.set空白(null);
-        eucEntity.set二次予防適用開始日(null);
-        eucEntity.set二次予防適用終了日(null);
-        eucEntity.set二次予防調査実施日(null);
-        eucEntity.set二次予防決定日(null);
         eucEntity.set処理対象年月(null);
         eucEntity.set被保険者番号(null);
         eucEntity.set履歴番号(null);
@@ -353,6 +354,15 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set二次予防事業開始日(null);
         eucEntity.set二次予防事業終了日(null);
         eucEntity.set二次予防事業区分(null);
+        eucEntity.set住所地特例対象者区分コード(null);
+        eucEntity.set施設所在保険者番号(null);
+        eucEntity.set住所地特例適用開始日(null);
+        eucEntity.set住所地特例適用終了日(null);
+        eucEntity.set居宅費新１負担限度額(null);
+        eucEntity.set居宅費新２負担限度額(null);
+        eucEntity.set居宅費新３負担限度額(null);
+        eucEntity.set利用者負担割合有効開始日(null);
+        eucEntity.set利用者負担割合有効終了日(null);
         return eucEntity;
     }
 
@@ -420,10 +430,6 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set保険者コード(asociation.get地方公共団体コード().value());
         eucEntity.set保険者名(asociation.get市町村名());
         eucEntity.set空白(RString.HALF_SPACE);
-        eucEntity.set二次予防適用開始日(set日付編集(entity.get二次予防事業対象者_適用開始年月日()));
-        eucEntity.set二次予防適用終了日(set日付編集(entity.get二次予防事業対象者_適用終了年月日()));
-        eucEntity.set二次予防調査実施日(set日付編集(entity.get調査実施日()));
-        eucEntity.set二次予防決定日(set日付編集(entity.get決定年月日()));
         eucEntity.set処理対象年月(set日付編集(entity.get送付年月()));
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set履歴番号(new RString(String.valueOf(entity.get履歴番号())));
@@ -495,6 +501,15 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set二次予防事業開始日(set日付編集(entity.get二次予防事業有効期間開始年月日()));
         eucEntity.set二次予防事業終了日(set日付編集(entity.get二次予防事業有効期間終了年月日()));
         eucEntity.set二次予防事業区分(set二次予防事業区分(entity.get二次予防事業区分コード()));
+        eucEntity.set住所地特例対象者区分コード(entity.get住所地特例対象者区分コード());
+        eucEntity.set施設所在保険者番号(entity.get施設所在保険者番号());
+        eucEntity.set住所地特例適用開始日(set日付編集(entity.get住所地特例適用開始日()));
+        eucEntity.set住所地特例適用終了日(set日付編集(entity.get住所地特例適用終了日()));
+        eucEntity.set居宅費新１負担限度額(entity.get居宅費新1負担限度額());
+        eucEntity.set居宅費新２負担限度額(entity.get居宅費新2負担限度額());
+        eucEntity.set居宅費新３負担限度額(entity.get居宅費新3負担限度額());
+        eucEntity.set利用者負担割合有効開始日(set日付編集(entity.get利用者負担割合有効開始日()));
+        eucEntity.set利用者負担割合有効終了日(set日付編集(entity.get利用者負担割合有効終了日()));
         return eucEntity;
     }
 
@@ -548,10 +563,6 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set保険者コード(null);
         eucEntity.set保険者名(null);
         eucEntity.set空白(null);
-        eucEntity.set二次予防適用開始日(null);
-        eucEntity.set二次予防適用終了日(null);
-        eucEntity.set二次予防調査実施日(null);
-        eucEntity.set二次予防決定日(null);
         eucEntity.set処理対象年月(null);
         eucEntity.set被保険者番号(null);
         eucEntity.set履歴番号(null);
@@ -623,6 +634,15 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set二次予防事業開始日(null);
         eucEntity.set二次予防事業終了日(null);
         eucEntity.set二次予防事業区分(null);
+        eucEntity.set住所地特例対象者区分コード(null);
+        eucEntity.set施設所在保険者番号(null);
+        eucEntity.set住所地特例適用開始日(null);
+        eucEntity.set住所地特例適用終了日(null);
+        eucEntity.set居宅費新１負担限度額(null);
+        eucEntity.set居宅費新２負担限度額(null);
+        eucEntity.set居宅費新３負担限度額(null);
+        eucEntity.set利用者負担割合有効開始日(null);
+        eucEntity.set利用者負担割合有効終了日(null);
         return eucEntity;
     }
 
@@ -748,7 +768,7 @@ public class HanyoListKokuhorenJukyushaResult {
         if (RString.isNullOrEmpty(要介護状態区分コード)) {
             return RString.EMPTY;
         }
-        return YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), 要介護状態区分コード).getName();
+        return YokaigoJotaiKubun.toValue(要介護状態区分コード).get名称();
     }
 
     private RString setみなし更新認定(RString みなし更新認定コード) {
@@ -827,10 +847,15 @@ public class HanyoListKokuhorenJukyushaResult {
     private RString set日付編集(RString value) {
         RString 日付 = RString.EMPTY;
         if (processParameter.is日付編集() && !RString.isNullOrEmpty(value)) {
+            日付 = value;
             if (value.length() == LENGTH) {
-                日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                if (FlexibleYearMonth.canConvert(value)) {
+                    日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                }
             } else {
-                日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                if (FlexibleDate.canConvert(value)) {
+                    日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+                }
             }
         }
         return 日付;
@@ -893,7 +918,7 @@ public class HanyoListKokuhorenJukyushaResult {
      * @param 市町村名 市町村名
      * @return List<RString>
      */
-    public List<RString> set出力条件(RString 市町村名) {
+    public List<RString> set出力条件() {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出条件】"));
@@ -909,7 +934,7 @@ public class HanyoListKokuhorenJukyushaResult {
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.get保険者コード());
             市町村名builder.append(new RString(" "));
-            市町村名builder.append(市町村名);
+            市町村名builder.append(processParameter.get保険者名());
             jokenBuilder.append(市町村名builder.toRString());
         }
         出力条件List.add(jokenBuilder.toRString());
@@ -1062,6 +1087,7 @@ public class HanyoListKokuhorenJukyushaResult {
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         return HanyoListKokuhorenJukyushaMybatisParameter.createMybatisParameter(processParameter.get保険者コード(),
+                processParameter.get市町村コード(),
                 processParameter.get日付抽出区分(),
                 processParameter.get処理対象年月From(),
                 processParameter.get処理対象年月To(),

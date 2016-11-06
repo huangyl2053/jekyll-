@@ -69,7 +69,7 @@
         SELECT 
             psm."kojinNo",
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IRiyoshaFutanwariaiMapper.allColumns_TeikyoKihonJoho" />
-         FROM "TeikyoKihonJohoNNTemp" AS teikyoKihonJoho
+         FROM ${tempTableName} AS teikyoKihonJoho
         INNER JOIN rgua.${psmShikibetsuTaisho} AS psm
             ON psm."shikibetsuCode" = teikyoKihonJoho."shikibetsuCode"
         <if test = "is異動">

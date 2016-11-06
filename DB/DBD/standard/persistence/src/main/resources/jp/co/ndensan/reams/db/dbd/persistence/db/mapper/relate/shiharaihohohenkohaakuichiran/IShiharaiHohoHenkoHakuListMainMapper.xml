@@ -283,7 +283,7 @@
            収納情報."tsuchishoNo",
            収納情報."k_ki" ASC,
            収納情報.収納ID ASC,
-           収入."shunoId" ASC
+           収入."shunyuYMD" ASC
     </select>
 
     <!--償還未払い情報を取得して、償還未払い情報一時テーブルに登録する-->
@@ -441,7 +441,8 @@
                     rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD" AS 資格情報_資格喪失年月日,
                     rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" AS 資格情報_資格喪失事由コード,
                     rgdb."DbV1001HihokenshaDaicho"."hihokennshaKubunCode" AS 資格情報_被保険者区分コード,
-                    rgdb."DbV1001HihokenshaDaicho"."jushochiTokureiFlag" AS 資格情報_住所地特例フラグ
+                    rgdb."DbV1001HihokenshaDaicho"."jushochiTokureiFlag" AS 資格情報_住所地特例フラグ,
+                    rgdb."DbV1001HihokenshaDaicho"."shichosonCode" AS 資格情報_市町村コード
                FROM rgdb."DbV1001HihokenshaDaicho"
                WHERE rgdb."DbV1001HihokenshaDaicho"."shikakuShutokuYMD"  <![CDATA[<=]]> #{基準日}
                AND (rgdb."DbV1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NULL 
@@ -528,7 +529,7 @@
         <result property="滞納者対策情報_適用終了日" column="滞納者対策情報_適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_終了受付日" column="滞納者対策情報_終了受付日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_予告発行日" column="滞納者対策情報_予告発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="滞納者対策情報_弁明期限" column="滞納者対策情報_弁明期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="滞納者対策情報_弁明期限" column="滞納者対策情報_弁明期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_弁明受付日" column="滞納者対策情報_弁明受付日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_償還発行日" column="滞納者対策情報_償還発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_償還証期限" column="滞納者対策情報_償還証期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -567,6 +568,7 @@
         <result property="収納状況_収入日" column="収納状況_収入日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="収納状況_収入額" column="収納状況_収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="収納状況_督促状発行日" column="収納状況_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="収納状況_時効起算日" column="収納状況_時効起算日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="収納状況_時効区分" column="収納状況_時効区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="収納状況_未納額" column="収納状況_未納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="収納状況_時効起算事由" column="収納状況_時効起算事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -124,6 +124,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
             構成市町村マスタ.put(現市町村情報.get(i).get市町村コード(), 現市町村情報.get(i));
         }
         personalDataList = new ArrayList<>();
+
     }
 
     @Override

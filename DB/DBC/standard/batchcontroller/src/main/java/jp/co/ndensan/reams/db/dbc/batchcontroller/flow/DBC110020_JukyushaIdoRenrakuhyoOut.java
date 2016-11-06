@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DataCompareShoriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DelJukyushaIdoRenrakuhyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsIdoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsIdomaiDataTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsJukyushaIdoRenrakuhyoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.SoufuErrorOutProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdAtenaTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdFutanWariaiTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdGengakuTempProcess;
@@ -29,6 +31,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdShafukuTempP
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdSogoJigyoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdTokuteNyushoTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110020.DBC110020_JukyushaIdoRenrakuhyoOutParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110020.JukyushaIdoRenrakuhyoOutProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020.JukyushaIdoRenrakuhyoOutFlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -62,9 +66,12 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 被保険者台帳の情報の抽出 = "updHihokenshaTemp";
     private static final String 異動一時１テーブルの作成 = "insShiharaihohoTemp1";
     private static final String 送付エラー一時出力 = "soufuErrorOutTemp";
+    private static final String 異動日毎データ抽出 = "insIdomaiDataTemp";
     private static final String 受給者異動送付削除産 = "delJukyushaIdoRenrakuhyo";
     private static final String 受給者異動の抽出 = "insJukyushaIdoRenrakuhyoTemp";
     private static final String データ比較処理 = "dataCompareShori";
+    private static final String 国保連インタフェース管理更新 = "upDoInterfaceKanriKousin";
+    private JukyushaIdoRenrakuhyoOutFlowEntity returnEntity;
 
     @Override
     protected void defineFlow() {
@@ -88,11 +95,15 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         executeStep(被保険者台帳の情報の抽出);
         executeStep(異動一時１テーブルの作成);
         executeStep(送付エラー一時出力);
+        executeStep(異動日毎データ抽出);
         if (再処理.equals(getParameter().get再処理区分())) {
             executeStep(受給者異動送付削除産);
         }
         executeStep(受給者異動の抽出);
         executeStep(データ比較処理);
+        returnEntity = getResult(JukyushaIdoRenrakuhyoOutFlowEntity.class, new RString(データ比較処理),
+                DataCompareShoriProcess.PARAMETER_OUT_RETURNENTITY);
+        executeStep(国保連インタフェース管理更新);
 
     }
 
@@ -236,6 +247,13 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
                 .define();
     }
 
+    @Step(異動日毎データ抽出)
+    IBatchFlowCommand insIdomaiDataTemp() {
+        return loopBatch(InsIdomaiDataTempProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
+
     @Step(受給者異動送付削除産)
     IBatchFlowCommand delJukyushaIdoRenrakuhyo() {
         return simpleBatch(DelJukyushaIdoRenrakuhyoProcess.class).arguments(getParameter().
@@ -254,6 +272,16 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     IBatchFlowCommand dataCompareShori() {
         return loopBatch(DataCompareShoriProcess.class).arguments(getParameter().
                 toProcessParameter())
+                .define();
+    }
+
+    @Step(国保連インタフェース管理更新)
+    IBatchFlowCommand upDoInterfaceKanriKousin() {
+        JukyushaIdoRenrakuhyoOutProcessParameter processParameter = getParameter().
+                toProcessParameter();
+        processParameter.set異動連絡票件数(returnEntity.get異動連絡票件数());
+        processParameter.set訂正連絡票件数(returnEntity.get訂正連絡票件数());
+        return simpleBatch(UpDoInterfaceKanriKousinProcess.class).arguments(processParameter)
                 .define();
     }
 }

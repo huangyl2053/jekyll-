@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.ShoriKekkaKakuninCs
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -38,7 +38,6 @@ public class ShoriKekkaKakuninProcess extends BatchProcessBase<DbWT1801ShoriKekk
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc180050.IKoseiTaishoKyufuJissekiIchiranMapper.get処理結果確認リスト");
-    @BatchWriter
     private CsvWriter<ShoriKekkaKakuninCsvEntity> csvWriter;
 
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU900002"));
@@ -69,23 +68,29 @@ public class ShoriKekkaKakuninProcess extends BatchProcessBase<DbWT1801ShoriKekk
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         this.eucFilePath = Path.combinePath(spoolWorkPath, CSVファイル名);
-        csvWriter = new CsvWriter.InstanceBuilder(this.eucFilePath).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(true).
-                build();
     }
 
     @Override
     protected void process(DbWT1801ShoriKekkaKakuninListEntity entity) {
+        if (開始flag) {
+            csvWriter = new CsvWriter.InstanceBuilder(this.eucFilePath).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(true).
+                    build();
+        }
         csvWriter.writeLine(getCsvEntity(entity));
         開始flag = false;
     }
 
     @Override
     protected void afterExecute() {
+        if (!開始flag) {
+            csvWriter.close();
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        }
     }
 
     private ShoriKekkaKakuninCsvEntity getCsvEntity(DbWT1801ShoriKekkaKakuninListEntity entity) {

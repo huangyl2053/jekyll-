@@ -132,7 +132,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
     private final boolean 給付率区分flag3;
     private final RString 給付率;
     private final boolean 給付率flag;
-    private final RString 出力順ID;
+    private final RString 出力順;
     private final RString psmShikibetsuTaisho;
 
     /**
@@ -252,10 +252,10 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 給付率区分flag3 給付率区分flag3
      * @param 給付率 給付率
      * @param 給付率flag 給付率flag
-     * @param 出力順ID 出力順ID
+     * @param 出力順 出力順
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
-    protected JukyushaKyufujissekiIchiranMybatisParameter(boolean flag,
+    public JukyushaKyufujissekiIchiranMybatisParameter(boolean flag,
             RString 対象年月,
             boolean 対象年月flag,
             RString 年月範囲_開始,
@@ -369,7 +369,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             boolean 給付率区分flag3,
             RString 給付率,
             boolean 給付率flag,
-            RString 出力順ID,
+            RString 出力順,
             RString psmShikibetsuTaisho) {
         this.flag = flag;
         this.対象年月 = 対象年月;
@@ -485,7 +485,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
         this.給付率区分flag3 = 給付率区分flag3;
         this.給付率 = 給付率;
         this.給付率flag = 給付率flag;
-        this.出力順ID = 出力順ID;
+        this.出力順 = 出力順;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
@@ -552,7 +552,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 計画作成事業者番号 計画作成事業者番号
      * @param 給付率区分 給付率区分
      * @param 給付率 給付率
-     * @param 出力順ID 出力順ID
+     * @param 出力順 出力順
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @return JukyushaKyufujissekiIchiranMybatisParameter
      */
@@ -617,7 +617,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
-            RString 出力順ID,
+            RString 出力順,
             RString psmShikibetsuTaisho
     ) {
         boolean flag = false;
@@ -757,7 +757,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
                 new RString("3").equals(給付率区分),
                 給付率,
                 RString.isNullOrEmpty(給付率),
-                出力順ID,
+                出力順,
                 psmShikibetsuTaisho
         );
     }

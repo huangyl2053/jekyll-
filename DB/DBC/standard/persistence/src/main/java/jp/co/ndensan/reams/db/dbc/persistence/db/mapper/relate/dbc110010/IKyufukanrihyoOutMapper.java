@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KyotakuKeika
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KyufukanrihyoOutDoBillOutEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.ShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.YoboKeikakuJikoSakuseiEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付管理票作成のMapper
@@ -73,7 +73,7 @@ public interface IKyufukanrihyoOutMapper {
      *
      * @return hihokenshaNo hihokenshaNo
      */
-    List<HihokenshaNo> get支給限度額情報の取得チェック();
+    List<RString> get支給限度額情報の取得チェック();
 
     /**
      * get保険者番号登録

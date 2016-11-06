@@ -33,10 +33,11 @@ public final class ShokanKetteiTsuchiShoSealerBatchParameter implements IBatchPr
     private FlexibleYearMonth ketteishaUketukeYM;
     private RString shiharaiBasho;
     private RString 受領委任者向け決定通知書フラグ;
+    private RString 文書番号;
 
     private ShokanKetteiTsuchiShoSealerBatchParameter(FlexibleDate hakkoYMD, FlexibleDate hurikomiYMD, RString chusyutuMode,
             RString syutujunId, RDate dataFrom, RDate dataTo, FlexibleYearMonth ketteishaUketukeYM,
-            RString shiharaiBasho, RString 受領委任者向け決定通知書フラグ) {
+            RString shiharaiBasho, RString 受領委任者向け決定通知書フラグ, RString 文書番号) {
 
         this.hakkoYMD = hakkoYMD;
         this.hurikomiYMD = hurikomiYMD;
@@ -47,6 +48,7 @@ public final class ShokanKetteiTsuchiShoSealerBatchParameter implements IBatchPr
         this.ketteishaUketukeYM = ketteishaUketukeYM;
         this.shiharaiBasho = shiharaiBasho;
         this.受領委任者向け決定通知書フラグ = 受領委任者向け決定通知書フラグ;
+        this.文書番号 = 文書番号;
     }
 
     /**
@@ -73,6 +75,6 @@ public final class ShokanKetteiTsuchiShoSealerBatchParameter implements IBatchPr
                 batchParamter.get振込予定日() == null ? null : new FlexibleDate(batchParamter.get振込予定日().toDateString()),
                 batchParamter.get抽出モード(), batchParamter.get出力順ID(), dataFrom, dataTo,
                 batchParamter.get決定者受付年月() == null ? null : new FlexibleYearMonth(batchParamter.get決定者受付年月().toDateString()),
-                batchParamter.get支払場所(), batchParamter.get受領委任者向け決定通知書フラグ());
+                batchParamter.get支払場所(), batchParamter.get受領委任者向け決定通知書フラグ(), batchParamter.get文書番号());
     }
 }

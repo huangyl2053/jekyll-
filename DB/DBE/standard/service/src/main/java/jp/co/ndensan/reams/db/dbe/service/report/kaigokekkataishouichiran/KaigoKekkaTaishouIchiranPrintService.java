@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.report.kaigokekkataishouichiran;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranReport;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranReportJoho;
@@ -33,12 +30,8 @@ public class KaigoKekkaTaishouIchiranPrintService {
         return new Printer<KekkatsuchiTaishoshaIchiranReportSource>().spool(property, toReports(kaigoJoho));
     }
 
-    private static List<KaigoKekkaTaishouIchiranReport> toReports(KaigoKekkaTaishouIchiranReportJoho kaigoJoho) {
-        List<KaigoKekkaTaishouIchiranReport> list = new ArrayList<>();
-        List<KaigoKekkaTaishouIchiranBodyItem> bodyItemList = kaigoJoho.getBodyItemList();
-        list.add(KaigoKekkaTaishouIchiranReport.createFrom(
-                kaigoJoho.getHeadItem(),
-                bodyItemList));
-        return list;
+    private static KaigoKekkaTaishouIchiranReport toReports(KaigoKekkaTaishouIchiranReportJoho kaigoJoho) {
+        return KaigoKekkaTaishouIchiranReport.createFrom(
+                kaigoJoho.getHeadItem(), kaigoJoho.getBodyItem());
     }
 }

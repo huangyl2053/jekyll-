@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoMybatisParamater;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 版改定の判定のバッチ処理です。
@@ -40,6 +40,7 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
     private static final int 年最後の日 = 31;
     private static final int 西暦年最後の月 = 12;
     private static final int 五年 = 5;
+    private TokuteiKojinJohoTeikyoProcessParameter processParameter;
     private ITokuteiKojinJohoTeikyoMapper mapper;
     private DbT7022ShoriDateKanriEntity 処理日付管理_全件版改定用;
     private DbT7022ShoriDateKanriEntity 処理日付管理_異動用;
@@ -96,7 +97,7 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
 
     @Override
     protected void beforeExecute() {
-        ワークフローID = ResponseHolder.getFlowId();
+        ワークフローID = processParameter.getワークフローID();
         shinkiIdoKubun = new OutputParameter<>();
         taishoKaishiTimestamp = new OutputParameter<>();
         taishoShuryoTimestamp = new OutputParameter<>();
@@ -105,9 +106,9 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
         mapper = getMapper(ITokuteiKojinJohoTeikyoMapper.class);
         TokuteiKojinJohoTeikyoMybatisParamater parameter = new TokuteiKojinJohoTeikyoMybatisParamater();
         parameter.setSubGyomuCode(SubGyomuCode.DBU介護統計報告.value());
-        parameter.setShoriName(処理日付管理マスタ_全件版改定用);
+        parameter.setShoriName1(処理日付管理マスタ_全件版改定用);
         処理日付管理_全件版改定用 = mapper.getKijunYMD(parameter);
-        parameter.setShoriName(処理日付管理マスタ_異動用);
+        parameter.setShoriName1(処理日付管理マスタ_異動用);
         処理日付管理_異動用 = mapper.getKijunYMD(parameter);
     }
 
@@ -156,11 +157,11 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
     private void setParameter_対象開始日時() {
         RDate システム日付 = システム日時.getDate();
         if (ワークフローＩＤ_特定個人情報提供.equals(ワークフローID)) {
-            if (年開始の月 <= システム日付.getMonthValue() || システム日付.getMonthValue() <= 西暦年最後の月) {
-                taishoKaishiTimestamp.setValue(RDateTime.of(new RDate(システム日付.getMonthValue() + 1, 年最後の月, 年最後の日)
+            if (年開始の月 <= システム日付.getMonthValue() && システム日付.getMonthValue() <= 西暦年最後の月) {
+                taishoKaishiTimestamp.setValue(RDateTime.of(new RDate(システム日付.getYearValue() + 1, 年最後の月, 年最後の日)
                         .minusYear(五年).toDateString(), 時00分00秒00));
             } else {
-                taishoKaishiTimestamp.setValue(RDateTime.of(new RDate(システム日付.getMonthValue(), 年最後の月, 年最後の日)
+                taishoKaishiTimestamp.setValue(RDateTime.of(new RDate(システム日付.getYearValue(), 年最後の月, 年最後の日)
                         .minusYear(五年).toDateString(), 時00分00秒00));
             }
         } else if (ワークフローＩＤ_特定個人情報変更.equals(ワークフローID)) {

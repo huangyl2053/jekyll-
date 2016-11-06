@@ -14,6 +14,7 @@ import lombok.NonNull;
 public final class HihokenshaDaichoHakkoIchiranhyoReport extends Report<HihokenshaDaichoHakkoIchiranhyoReportSource> {
 
     private final HihokenshaDaichoHakkoIchiranhyoHeaderItem headerItem;
+    private final HihokenshaDaichoHakkoIchiranhyoBodyItem bodyItem;
     private final List<HihokenshaDaichoHakkoIchiranhyoBodyItem> bodyItemList;
 
     /**
@@ -23,8 +24,9 @@ public final class HihokenshaDaichoHakkoIchiranhyoReport extends Report<Hihokens
      * @param bodyItemList 被保険者台帳一覧表ボディーItemリスト
      */
     private HihokenshaDaichoHakkoIchiranhyoReport(HihokenshaDaichoHakkoIchiranhyoHeaderItem headerItem,
-            List<HihokenshaDaichoHakkoIchiranhyoBodyItem> bodyItemList) {
+            HihokenshaDaichoHakkoIchiranhyoBodyItem bodyItem, List<HihokenshaDaichoHakkoIchiranhyoBodyItem> bodyItemList) {
         this.headerItem = headerItem;
+        this.bodyItem = bodyItem;
         this.bodyItemList = bodyItemList;
     }
 
@@ -38,7 +40,20 @@ public final class HihokenshaDaichoHakkoIchiranhyoReport extends Report<Hihokens
     public static HihokenshaDaichoHakkoIchiranhyoReport createReport(
             @NonNull HihokenshaDaichoHakkoIchiranhyoHeaderItem headerItem,
             @NonNull List<HihokenshaDaichoHakkoIchiranhyoBodyItem> bodyItemList) {
-        return new HihokenshaDaichoHakkoIchiranhyoReport(headerItem, bodyItemList);
+        return new HihokenshaDaichoHakkoIchiranhyoReport(headerItem, null, bodyItemList);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param headerItem 被保険者台帳一覧表ヘッダーItem
+     * @param bodyItem 被保険者台帳一覧表ボディーItem
+     * @return 被保険者台帳一覧表
+     */
+    public static HihokenshaDaichoHakkoIchiranhyoReport createReport(
+            @NonNull HihokenshaDaichoHakkoIchiranhyoHeaderItem headerItem,
+            HihokenshaDaichoHakkoIchiranhyoBodyItem bodyItem) {
+        return new HihokenshaDaichoHakkoIchiranhyoReport(headerItem, bodyItem, null);
     }
 
     /**
@@ -47,11 +62,20 @@ public final class HihokenshaDaichoHakkoIchiranhyoReport extends Report<Hihokens
      */
     @Override
     public void writeBy(ReportSourceWriter<HihokenshaDaichoHakkoIchiranhyoReportSource> writer) {
-        for (HihokenshaDaichoHakkoIchiranhyoBodyItem item : bodyItemList) {
-            HihokenshaDaichoHakkoIchiranhyoHeaderEditor header = new HihokenshaDaichoHakkoIchiranhyoHeaderEditor(headerItem);
-            HihokenshaDaichoHakkoIchiranhyoBodyEditor body = new HihokenshaDaichoHakkoIchiranhyoBodyEditor(item);
-            IHihokenshaDaichoHakkoIchiranhyoBuilder builder = new HihokenshaDaichoHakkoIchiranhyoBuilderImpl(header, body);
-            writer.writeLine(builder);
+        if (bodyItemList == null) {
+            writeline(writer, bodyItem);
+        } else {
+            for (HihokenshaDaichoHakkoIchiranhyoBodyItem item : bodyItemList) {
+                writeline(writer, item);
+            }
         }
+    }
+
+    private void writeline(ReportSourceWriter<HihokenshaDaichoHakkoIchiranhyoReportSource> writer,
+            HihokenshaDaichoHakkoIchiranhyoBodyItem bodyItem) {
+        HihokenshaDaichoHakkoIchiranhyoHeaderEditor header = new HihokenshaDaichoHakkoIchiranhyoHeaderEditor(headerItem);
+        HihokenshaDaichoHakkoIchiranhyoBodyEditor body = new HihokenshaDaichoHakkoIchiranhyoBodyEditor(bodyItem);
+        IHihokenshaDaichoHakkoIchiranhyoBuilder builder = new HihokenshaDaichoHakkoIchiranhyoBuilderImpl(header, body);
+        writer.writeLine(builder);
     }
 }

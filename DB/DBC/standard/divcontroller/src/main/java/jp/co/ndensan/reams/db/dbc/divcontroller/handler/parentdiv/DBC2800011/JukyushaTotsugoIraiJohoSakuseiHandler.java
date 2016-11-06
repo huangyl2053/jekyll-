@@ -65,11 +65,14 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
             div.getTxtTaishoYM().setDisabled(false);
             div.getTxtNinteiYM().setDisabled(true);
             div.getTxtNinteiYM().clearValue();
+            div.getTxtTaishoYM().setFromValue(RDate.getNowDate());
+            div.getTxtTaishoYM().setToValue(RDate.getNowDate());
         } else {
             div.getTxtTaishoYM().setDisabled(true);
             div.getTxtTaishoYM().clearFromValue();
             div.getTxtTaishoYM().clearToValue();
             div.getTxtNinteiYM().setDisabled(false);
+            div.getTxtNinteiYM().setValue(RDate.getNowDate());
         }
     }
 

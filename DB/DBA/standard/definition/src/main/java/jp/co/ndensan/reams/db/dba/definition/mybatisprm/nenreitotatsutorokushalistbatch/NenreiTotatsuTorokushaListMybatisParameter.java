@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch;
 
 import java.util.List;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,8 +18,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class NenreiTotatsuTorokushaListMybatisParameter
-        extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class NenreiTotatsuTorokushaListMybatisParameter implements IMyBatisParameter {
 
     private final RString konkaikaishiYMDHMS;
     private final RString konkaishuryoYMDHMS;
@@ -31,9 +28,8 @@ public class NenreiTotatsuTorokushaListMybatisParameter
     private final Code henkoJiyu_Hihokensha;
     private final List<Code> jutokuTekiyo;
     private final List<Code> jutokuKaijo;
-    private final RString shutsuryokuSort;
-
-    private final Boolean userShutsuryokuSort;
+    private final RString orderBy;
+    private final boolean orderByFlag;
 
     /**
      * コンストラクタ。
@@ -46,9 +42,8 @@ public class NenreiTotatsuTorokushaListMybatisParameter
      * @param henkoJiyu_Hihokensha 介護資格変更事由（被保険者）
      * @param jutokuTekiyo 介護資格住特適用
      * @param jutokuKaijo 介護資格住特解除
-     * @param shutsuryokuSort 出力順
-     * @param userShutsuryokuSort uses出力順
-     * @param key 宛名PSMキー
+     * @param orderBy orderBy
+     * @param orderByFlag orderByFlag
      */
     public NenreiTotatsuTorokushaListMybatisParameter(
             RString konkaikaishiYMDHMS,
@@ -59,13 +54,9 @@ public class NenreiTotatsuTorokushaListMybatisParameter
             Code henkoJiyu_Hihokensha,
             List<Code> jutokuTekiyo,
             List<Code> jutokuKaijo,
-            RString shutsuryokuSort,
-            Boolean userShutsuryokuSort,
-            IShikibetsuTaishoPSMSearchKey key) {
-        super(key);
-        if (Boolean.FALSE.equals(userShutsuryokuSort)) {
-            shutsuryokuSort = new RString("");
-        }
+            RString orderBy,
+            boolean orderByFlag) {
+
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
         this.konkaishuryoYMDHMS = konkaishuryoYMDHMS;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
@@ -74,8 +65,7 @@ public class NenreiTotatsuTorokushaListMybatisParameter
         this.henkoJiyu_Hihokensha = henkoJiyu_Hihokensha;
         this.jutokuTekiyo = jutokuTekiyo;
         this.jutokuKaijo = jutokuKaijo;
-        this.shutsuryokuSort = shutsuryokuSort;
-
-        this.userShutsuryokuSort = userShutsuryokuSort;
+        this.orderBy = orderBy;
+        this.orderByFlag = orderByFlag;
     }
 }

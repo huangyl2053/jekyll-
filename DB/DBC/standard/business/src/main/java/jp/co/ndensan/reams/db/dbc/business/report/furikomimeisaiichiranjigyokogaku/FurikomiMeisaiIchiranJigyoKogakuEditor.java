@@ -40,16 +40,18 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
     private final FurikomiMeisaiIchiranJigyoKogakuParameter target;
     private final boolean is頁計;
     private final boolean is総合計;
-    private final RString 作成 = new RString("作成");
-    private final RString 申請中 = new RString("申請中");
-    private final RString 未申請 = new RString("未申請");
-    private final RString 事業対象 = new RString("事業対象");
-    private final RString 期間 = new RString("～");
-    private final RString 有 = new RString("有");
-    private final RString 数字 = new RString("1");
+    private static final RString 作成 = new RString("作成");
+    private static final RString 申請中 = new RString("申請中");
+    private static final RString 未申請 = new RString("未申請");
+    private static final RString 事業対象 = new RString("事業対象");
+    private static final RString 期間 = new RString("～");
+    private static final RString 有 = new RString("有");
+    private static final RString 数字 = new RString("1");
     private static final RString 文_被保険者番号 = new RString("被保険者番号");
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
+    private static final int INT_0 = 0;
+    private static final RString コロン = new RString(":");
 
     /**
      * コンストラクタです
@@ -158,10 +160,14 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
                 source.list1_7 = 振込明細.getShiharaiBasho();
                 FlexibleDate 支払期間開始年月日 = 振込明細.getShiharaiKaishiYMD();
                 FlexibleDate 支払期間終了年月日 = 振込明細.getShiharaiShuryoYMD();
-                RString 支払窓口開始時間 = 振込明細.getShiharaiKaishiTime().toFormattedTimeString(DisplayTimeFormat.HH_mm);
-                RString 支払窓口終了時間 = 振込明細.getShiharaiShuryoTime().toFormattedTimeString(DisplayTimeFormat.HH_mm);
-                RString 開始 = パターン4(支払期間開始年月日).concat(RString.HALF_SPACE).concat(支払窓口開始時間);
-                RString 終了 = パターン4(支払期間終了年月日).concat(RString.HALF_SPACE).concat(支払窓口終了時間);
+                RString 支払窓口開始時間 = 振込明細.getShiharaiKaishiTime();
+                RString 支払窓口終了時間 = 振込明細.getShiharaiShuryoTime();
+                RString 支払窓口開始時間R = 支払窓口開始時間 == null || 支払窓口開始時間.isEmpty()
+                        ? RString.EMPTY : 支払窓口開始時間.substring(INT_0, INT_2).concat(コロン).concat(支払窓口開始時間.substring(INT_2));
+                RString 支払窓口終了時間R = 支払窓口終了時間 == null || 支払窓口終了時間.isEmpty()
+                        ? RString.EMPTY : 支払窓口終了時間.substring(INT_0, INT_2).concat(コロン).concat(支払窓口終了時間.substring(INT_2));
+                RString 開始 = パターン4(支払期間開始年月日).concat(RString.HALF_SPACE).concat(支払窓口開始時間R);
+                RString 終了 = パターン4(支払期間終了年月日).concat(RString.HALF_SPACE).concat(支払窓口終了時間R);
                 source.list2_7 = 開始.concat(期間).concat(終了);
             } else {
                 RString 金融機関名称 = 振込明細.getKinyuKikanName();
@@ -200,7 +206,8 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
             if (!振込明細.getYokaigoJotaiKubunCode().isEmpty()) {
                 source.list1_6 = パターン4(振込明細.getNinteiYukoKikanKaishiYMD());
 
-                FlexibleYearMonth 終了年月 = 振込明細.getKeisanShuryoYMD().getYearMonth();
+                FlexibleYearMonth 終了年月 = 振込明細.getKeisanShuryoYMD() == null || 振込明細.getKeisanShuryoYMD().isEmpty()
+                        ? FlexibleYearMonth.EMPTY : 振込明細.getKeisanShuryoYMD().getYearMonth();
                 source.list2_4 = YokaigoJotaiKubunSupport.toValue(終了年月,
                         振込明細.getYokaigoJotaiKubunCode().value()).getName();
                 source.list2_5 = パターン4(振込明細.getNinteiYukoKikanKaishiYMD());

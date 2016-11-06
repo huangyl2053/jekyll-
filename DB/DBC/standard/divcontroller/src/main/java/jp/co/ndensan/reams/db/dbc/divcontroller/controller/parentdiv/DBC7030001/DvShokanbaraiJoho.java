@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvS
 import jp.co.ndensan.reams.db.dbc.service.core.dvshokanbaraijoho.DvShokanbaraiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -63,7 +64,11 @@ public class DvShokanbaraiJoho {
     public ResponseData<BatchParameterMap> onClick_btnShokanParamSave(DvShokanbaraiJohoDiv div) {
         RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        responseData.data = new BatchParameterMap(getHandler(div).setBatchParamter(市町村判定));
+        DBC710020_HanyoListShokanbaraiJokyoParameter parameter = getHandler(div).setBatchParamter(市町村判定);
+        parameter.setKinyuKikanShitenCode(div.getCcdKogakuKinyuKikan()
+                .getKinyuKikanShitenCode() == null ? KinyuKikanShitenCode.EMPTY : div
+                        .getCcdKogakuKinyuKikan().getKinyuKikanShitenCode());
+        responseData.data = new BatchParameterMap(parameter);
         return responseData;
     }
 
@@ -139,6 +144,7 @@ public class DvShokanbaraiJoho {
         pairs.add(validationHandler.validate決定日());
         pairs.add(validationHandler.validate申請日());
         pairs.add(validationHandler.validate金融機関コード());
+        pairs.add(validationHandler.validate出力順未設定());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

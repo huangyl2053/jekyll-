@@ -119,4 +119,31 @@ public class KetteJoho implements Serializable {
     public RString getKounyuKaishuRireki() {
         return entity.getKounyuKaishuRireki();
     }
+
+    /**
+     * 作成年月日を取得します。
+     *
+     * @return 作成年月日
+     */
+    public FlexibleDate getKetteiTsuchishoSakuseiYMD() {
+        return entity.getKetteiTsuchishoSakuseiYMD();
+    }
+
+    /**
+     * 決定通知№を取得します。
+     *
+     * @return 決定通知№
+     */
+    public RString getKetteiTsuchiNo() {
+        return entity.getKetteiTsuchiNo();
+    }
+
+    /**
+     * 購入・改修履歴等を取得します。
+     *
+     * @return 購入・改修履歴等
+     */
+    public FlexibleDate getFurikomiMeisaishoSakuseiYMD() {
+        return entity.getFurikomiMeisaishoSakuseiYMD();
+    }
 }

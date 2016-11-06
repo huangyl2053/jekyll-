@@ -49,6 +49,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
     private RString honjinShiharaigaku;
     private RString shikyugaku;
     private RString yoshikigotoKingaku;
+    private RString kingaku;
     private RString tuika;
     private RString shurui;
     private RString keteiKubun;
@@ -99,7 +100,8 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
      * @param keteiYMD 決定年月日
      * @param honjinShiharaigaku 本人支払額
      * @param shikyugaku 支給額
-     * @param yoshikigotoKingaku 様式毎の金額
+     * @param yoshikigotoKingaku 様式名称
+     * @param kingaku 様式毎の金額
      * @param tuika 追加
      * @param shurui 種類
      * @param keteiKubun 支給（不支給）決定区分
@@ -117,7 +119,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
             RString kaipage2, RString kaipage3, RString kaipage4, RString kaipage5, RString renban, RString seiriNo,
             RString keteiTsuchiNo, RString hihokenshaNo, RString hihokenshaName, RString jusho, RString yubinBango,
             RString teikyo, RString yoKaigodo, RString ninteiKaishibi, RString ninteiShuryobi, RString uketsukeYMD,
-            RString keteiYMD, RString honjinShiharaigaku, RString shikyugaku, RString yoshikigotoKingaku, RString tuika,
+            RString keteiYMD, RString honjinShiharaigaku, RString shikyugaku, RString yoshikigotoKingaku, RString kingaku, RString tuika,
             RString shurui, RString keteiKubun, RString shiharaiHoho, RString choikiCode, RString gyoseikuCode, RString kanaMeisho,
             RString shoKisaiHokenshaNo, RString ketteiTsuchiNo, RString shinseishaKubun) {
         this.printTimeStamp = printTimeStamp;
@@ -149,6 +151,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
         this.honjinShiharaigaku = honjinShiharaigaku;
         this.shikyugaku = shikyugaku;
         this.yoshikigotoKingaku = yoshikigotoKingaku;
+        this.kingaku = kingaku;
         this.tuika = tuika;
         this.shurui = shurui;
         this.keteiKubun = keteiKubun;

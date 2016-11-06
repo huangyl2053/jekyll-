@@ -31,6 +31,8 @@ public class DBC710180_HanyoListSogoJigyoHiParameter extends BatchParameterBase 
     private static final String KEY_JIGYOSYACODE = "事業者コード";
     private static final String KEY_SABISUCODE = "サービス種類コード";
     private static final String KEY_HOKENSYACODE = "保険者コード";
+    private static final String KEY_HONKENSHAMEI = "保険者名";
+    private static final String KEY_SHICHOSONCODE = "市町村コード";
     private static final String KEY_TYUSHUTUHOHO = "抽出方法";
     private static final String KEY_KAISHIYM = "サービス提供年月開始年月";
     private static final String KEY_SYURYOYM = "サービス提供年月終了年月";
@@ -40,6 +42,7 @@ public class DBC710180_HanyoListSogoJigyoHiParameter extends BatchParameterBase 
     private static final String KEY_TORIKOMITO = "取込年月終了年月";
     private static final String KEY_JIGYOSYAMEI = "事業者名";
     private static final String KEY_SABISUMESYU = "サービス名称";
+    private static final long serialVersionUID = 1L;
 
     @BatchParameter(key = KEY_REPORTID, name = "帳票ID")
     private RString 帳票ID;
@@ -59,6 +62,10 @@ public class DBC710180_HanyoListSogoJigyoHiParameter extends BatchParameterBase 
     private RString サービス種類コード;
     @BatchParameter(key = KEY_HOKENSYACODE, name = "保険者コード")
     private RString 保険者コード;
+    @BatchParameter(key = KEY_HONKENSHAMEI, name = "保険者名")
+    private RString 保険者名;
+    @BatchParameter(key = KEY_SHICHOSONCODE, name = "市町村コード")
+    private RString 市町村コード;
     @BatchParameter(key = KEY_TYUSHUTUHOHO, name = "抽出方法")
     private RString 抽出方法;
     @BatchParameter(key = KEY_KAISHIYM, name = "サービス提供年月開始年月")
@@ -93,6 +100,8 @@ public class DBC710180_HanyoListSogoJigyoHiParameter extends BatchParameterBase 
                 事業者コード,
                 サービス種類コード,
                 保険者コード,
+                保険者名,
+                市町村コード,
                 抽出方法,
                 サービス提供年月開始年月,
                 サービス提供年月終了年月,

@@ -46,4 +46,5 @@ public class RirekiShuseiRelateEntity {
     private DbT4911ShujiiIryoKikanJohoEntity dbt4911Entity;
     private DbT4912ShujiiJohoEntity dbt4912Entity;
     private DbT4913ChosainJohoEntity dbt4913Entity;
+    private int updateCount;
 }

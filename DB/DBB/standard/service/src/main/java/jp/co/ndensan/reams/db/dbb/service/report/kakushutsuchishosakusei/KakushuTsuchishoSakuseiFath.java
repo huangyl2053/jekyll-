@@ -180,7 +180,8 @@ public class KakushuTsuchishoSakuseiFath {
             for (DainoninRelate 代納人情報 : 代納人情報リスト) {
                 Dainonin 代納人 = 代納人情報.get代納人();
                 FlexibleDate 発行日 = new FlexibleDate(RDate.getNowDate().toDateString());
-                if (代納人.get開始年月日().isBeforeOrEquals(発行日) && 発行日.isBeforeOrEquals(代納人.get終了年月日())) {
+                if (代納人.get開始年月日().isBeforeOrEquals(発行日) && (代納人.get終了年月日() == null
+                        || 代納人.get終了年月日().isEmpty() || 発行日.isBeforeOrEquals(代納人.get終了年月日()))) {
                     識別対象 = 代納人情報.get識別対象();
                     break;
                 }

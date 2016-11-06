@@ -75,7 +75,7 @@ public class KaigoFukaKihonHandler {
             div.getTxtTsuchishoNo().setValue(searchKey.get通知書番号().value());
 
             Optional<Fuka> fuka = fukaMiscManager.get最新介護賦課(searchKey.get賦課年度(), searchKey.get通知書番号());
-            if (fuka.isPresent() && fuka.get().get保険料段階() != null) {
+            if (fuka.isPresent() && fuka.get().get保険料段階() != null && !fuka.get().get保険料段階().isEmpty()) {
                 Optional<HokenryoDankai> dankai = hokenryoDankaiManager.get保険料段階(searchKey.get賦課年度(), fuka.get().get保険料段階());
                 if (dankai.isPresent()) {
                     div.getTxtHokenryoDankai().setValue(HokenryoDankaiUtil.edit表示用保険料段階(dankai.get()));

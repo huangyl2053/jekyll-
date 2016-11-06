@@ -131,26 +131,28 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
         boolean テスト出力 = false;
         RString 年度 = get年度(div.getKogakuTaishoshaShoriPanel().getTxtShinsaYM().getValue());
         RString 処理年月日 = get処理年月日(div.getKogakuTaishoshaShoriPanel().getTxtShinsaYM().getValue());
-        RString 処理日 = get処理年月日(div.getKogakuTaishoshaShoriPanel().getTxtShoriYMD().getValue());
-        RString 処理時 = div.getKogakuTaishoshaShoriPanel().getTxtShoriHMD().getText();
+        RString 処理日 = div.getTxtShoriYMDKonkai().getValue().toDateString();
+        RString 処理時 = div.getTxtShoriHMKonkai().getText();
         RString 処理日時 = 処理日.concat(処理時);
-        RString 抽出期間開始日時 = get処理年月(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());
-        RString 抽出期間終了日時 = get処理年月(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getToValue());
+        RString 抽出期間開始日 = div.getTxtChushutsuKikanKonkai().getFromDateValue().toDateString();
+        RString 抽出期間開始時 = get抽出期間(div.getTxtChushutsuKikanKonkai().getFromTimeValue());
+        RString 抽出期間開始日時 = 抽出期間開始日.concat(抽出期間開始時);
+        RString 抽出期間終了日時 = 処理日時;
         RString 帳票ID = 帳票コード;
         Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
-        RString 開始年月日１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());
-        RString 終了年月日１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getToValue());
-        RString 開始年月日２;
-        RString 終了年月日２;
-        if (RString.isNullOrEmpty(終了年月日１)) {
-            開始年月日２ = RString.EMPTY;
+        RString 開始年月１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());
+        RString 終了年月１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getToValue());
+        RString 開始年月２;
+        RString 終了年月２;
+        if (RString.isNullOrEmpty(終了年月１)) {
+            開始年月２ = RString.EMPTY;
         } else {
-            開始年月日２ = new RDate(終了年月日１.toString()).minusYear(年前_5).toDateString();
+            開始年月２ = new RDate(終了年月１.toString()).minusYear(年前_5).toDateString();
         }
-        if (RString.isNullOrEmpty(開始年月日１)) {
-            終了年月日２ = RString.EMPTY;
+        if (RString.isNullOrEmpty(開始年月１)) {
+            終了年月２ = RString.EMPTY;
         } else {
-            終了年月日２ = new RDate(開始年月日１.toString()).minusMonth(1).toDateString();
+            終了年月２ = new RDate(開始年月１.toString()).minusMonth(1).toDateString();
         }
         if (div.getChkTesutoShuturyoku().isAllSelected()) {
             テスト出力 = true;
@@ -163,10 +165,10 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
                 抽出期間終了日時,
                 帳票ID,
                 出力順ID,
-                開始年月日１,
-                終了年月日１,
-                開始年月日２,
-                終了年月日２,
+                開始年月１,
+                終了年月１,
+                開始年月２,
+                終了年月２,
                 テスト出力);
     }
 
@@ -174,15 +176,18 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
         if (value == null) {
             return RString.EMPTY;
         } else {
-            return value.toDateString();
+            return value.getYearMonth().toDateString();
         }
     }
 
-    private RString get処理年月(RDate value) {
+    private RString get抽出期間(RTime value) {
         if (value == null) {
             return RString.EMPTY;
         } else {
-            return value.getYearMonth().toDateString();
+            int hour = value.getHour();
+            int minute = value.getMinute();
+            int second = value.getSecond();
+            return new RString(String.valueOf(hour).concat(String.valueOf(minute)).concat(String.valueOf(second)));
         }
     }
 

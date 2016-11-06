@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho;
 
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
@@ -23,7 +24,6 @@ public class FutanWariaiShoSource implements IReportSource {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     @ReportItem(name = "kofuYmd", length = 20, order = 1)
     public RString kofuYmd;
-    @ReportPerson(id = "A")
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 25, order = 2)
     public RString hihokenshaNo;
@@ -87,12 +87,15 @@ public class FutanWariaiShoSource implements IReportSource {
     public RString ninshoshaYakushokuMei2;
     @ReportItem(name = "ninshoshaYakushokuMei1", order = 32)
     public RString ninshoshaYakushokuMei1;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 60, order = 33)
+    public ShikibetsuCode shikibetsuCode;
+    @ReportItemGroup(groupName = "CompSofubutsuAtesaki", order = 34)
+    public SofubutsuAtesakiSource compSofubutsuAtesakiSource;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-    @ReportItemGroup(groupName = "CompSofubutsuAtesaki", order = 33)
-    public SofubutsuAtesakiSource compSofubutsuAtesakiSource;
 // </editor-fold>
 }

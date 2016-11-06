@@ -87,6 +87,7 @@ public class TokubetsuChiikiKasanGemmenService {
         List<TokubetsuchiikiKasanGemmenEntity> entityList = mapper.select特別地域加算減免申請情報の取得(検索条件);
         if (entityList != null && !entityList.isEmpty()) {
             for (TokubetsuchiikiKasanGemmenEntity entity : entityList) {
+                entity.initializeMd5ToEntities();
                 特別地域加算減免申請の情報List.add(new TokubetsuchiikiKasanGemmen(entity));
             }
         }

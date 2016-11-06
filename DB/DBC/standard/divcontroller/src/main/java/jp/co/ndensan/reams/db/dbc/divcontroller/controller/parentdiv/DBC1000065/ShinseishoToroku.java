@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1000065;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_KijunsyunygetsujiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_kijunsyunygetsujiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.DBC1000065TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.ShinseishoTorokuDiv;
@@ -13,11 +13,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000065.Shi
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000065.ShinseishoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -116,11 +114,6 @@ public class ShinseishoToroku {
                 return ResponseData.of(div).addValidationMessages(valid2).respond();
             }
         }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(
-                    new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                            UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
-        }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).年次処理が実行済みか確認();
             return ResponseData.of(div).respond();
@@ -134,9 +127,9 @@ public class ShinseishoToroku {
      * @param div ShinseishoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<DBC190030_KijunsyunygetsujiParameter> onClick_btnExcute(ShinseishoTorokuDiv div) {
+    public ResponseData<DBC190030_kijunsyunygetsujiParameter> onClick_btnExcute(ShinseishoTorokuDiv div) {
         getHandler(div).set前排他();
-        DBC190030_KijunsyunygetsujiParameter parameter = getHandler(div).setバッチ();
+        DBC190030_kijunsyunygetsujiParameter parameter = getHandler(div).setバッチ();
         getHandler(div).release前排他();
         return ResponseData.of(parameter).respond();
     }

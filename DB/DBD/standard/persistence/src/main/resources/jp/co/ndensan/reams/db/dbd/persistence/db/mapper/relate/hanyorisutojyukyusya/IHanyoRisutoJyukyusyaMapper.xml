@@ -600,7 +600,7 @@
         FROM
         rgdb."DbT1004ShisetsuNyutaisho" AS dbT1004_2
         WHERE
-        dbT1004."shikibetsuCode" = dbT1004_2."shikibetsuCode" AND dbT1004."nyushoYMD" = dbT1004_2."nyushoYMD"
+        dbT1004."shikibetsuCode" = dbT1004_2."shikibetsuCode" AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1004_2."nyushoYMD"
         )
         ) AS 施設入所 ON 施設入所."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
         LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS 除外他特適用施設

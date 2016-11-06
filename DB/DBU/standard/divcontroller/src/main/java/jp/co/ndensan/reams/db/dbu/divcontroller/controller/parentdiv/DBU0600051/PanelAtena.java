@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbu.business.core.jyumikonyujyoho.JyuMiKoNyuJyoHoBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jyumikonyujyoho.JyuMiKoNyuJyoHoParameter;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600051.DBU0600051TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600051.PanelAtenaDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600051.PanelAtenaHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.basic.jyumikonyujyoho.JyuMiKoNyuJyoHoFinder;
@@ -57,7 +58,56 @@ public class PanelAtena {
         List<JyuMiKoNyuJyoHoBusiness> 境界層管理情報 = get境界層管理情報取得(被保険者番号);
         HokenryoDankaiList 保険料段階リスト = get保険料段階リスト(div, 境界層管理情報);
         getHandler(div).editSyori(老齢福祉年金受給者情報, 生保受給者情報, 生活保護扶助種類, 境界層管理情報, 保険料段階リスト);
-        // TODO QA1569
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 再検索するボタンを押下します。
+     *
+     * @param div PanelAtenaDiv
+     * @return ResponseData<PanelAtenaDiv>
+     */
+    public ResponseData<PanelAtenaDiv> onClick_KensakuModoru(PanelAtenaDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBU0600051TransitionEventName.対象者検索に戻る).respond();
+    }
+
+    /**
+     * 資格情報を表示するボタンを押下します。
+     *
+     * @param div PanelAtenaDiv
+     * @return ResponseData<PanelAtenaDiv>
+     */
+    public ResponseData<PanelAtenaDiv> onClick_btnShikakuInfo(PanelAtenaDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 受給情報を表示するボタンを押下します。
+     *
+     * @param div KaigoSikakuTokusouDiv
+     * @return ResponseData<KaigoSikakuTokusouDiv>
+     */
+    public ResponseData<PanelAtenaDiv> onClick_btnJukyuInfo(PanelAtenaDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 給付情報を表示するボタンを押下します。
+     *
+     * @param div PanelAtenaDiv
+     * @return ResponseData<PanelAtenaDiv>
+     */
+    public ResponseData<PanelAtenaDiv> onClick_btnKyufuInfo(PanelAtenaDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 賦課情報を表示するボタンを押下します。
+     *
+     * @param div PanelAtenaDiv
+     * @return ResponseData<PanelAtenaDiv>
+     */
+    public ResponseData<PanelAtenaDiv> onClick_btnFukaInfo(PanelAtenaDiv div) {
         return ResponseData.of(div).respond();
     }
 

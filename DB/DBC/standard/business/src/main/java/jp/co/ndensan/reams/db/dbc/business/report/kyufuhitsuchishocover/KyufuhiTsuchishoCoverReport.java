@@ -17,16 +17,21 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KyufuhiTsuchishoCoverReport extends Report<KyufuhiTsuchishoCoverReportSource> {
 
+    private static final int PAGECOUNT = 15;
     private final KyufuhiTsuchishoCoverEntity entity;
+    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param entity 介護保険給付費通知書のITEM
+     * @param index 連番
      */
     public KyufuhiTsuchishoCoverReport(
-            KyufuhiTsuchishoCoverEntity entity) {
+            KyufuhiTsuchishoCoverEntity entity,
+            int index) {
         this.entity = entity;
+        this.index = index;
     }
 
     /**
@@ -36,8 +41,15 @@ public class KyufuhiTsuchishoCoverReport extends Report<KyufuhiTsuchishoCoverRep
      */
     @Override
     public void writeBy(ReportSourceWriter<KyufuhiTsuchishoCoverReportSource> reportSourceWriter) {
-        IKyufuhiTsuchishoCoverEditor editor = new KyufuhiTsuchishoCoverEditor(entity);
-        IKyufuhiTsuchishoCoverBuilder builder = new KyufuhiTsuchishoCoverBuilder(editor);
-        reportSourceWriter.writeLine(builder);
+        if (PAGECOUNT >= index) {
+            IKyufuhiTsuchishoCoverEditor editor = new KyufuhiTsuchishoCoverEditor(entity);
+            IKyufuhiTsuchishoCoverBuilder builder = new KyufuhiTsuchishoCoverBuilder(editor);
+            reportSourceWriter.writeLine(builder);
+        } else {
+            IKyufuhiTsuchishoCoverEditor editor = new KyufuhiTsuchishoCoverTwoEditor(entity);
+            IKyufuhiTsuchishoCoverBuilder builder = new KyufuhiTsuchishoCoverBuilder(editor);
+            reportSourceWriter.writeLine(builder);
+
+        }
     }
 }

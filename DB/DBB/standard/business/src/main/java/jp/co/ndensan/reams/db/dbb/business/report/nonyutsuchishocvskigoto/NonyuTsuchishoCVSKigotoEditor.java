@@ -47,6 +47,7 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
 
     private static final int INT_2 = 2;
     private static final int INT_6 = 6;
+    private static final RString 金額_ZERO = new RString("0");
 
     /**
      * インスタンスを生成します。
@@ -205,7 +206,7 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
             source.gimushaShimei = item.get納付書共通().get被代納人氏名();
         }
         NonyuTsuchiShoKiJoho 納付書 = null;
-        if (item.get納入通知書期情報リスト() != null) {
+        if (item.get納入通知書期情報リスト() != null && !item.get納入通知書期情報リスト().isEmpty()) {
             納付書 = item.get納入通知書期情報リスト().get(0);
         }
 
@@ -387,13 +388,13 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
                         && item.get出力期リスト().get(0) != null
                         && item.get出力期リスト().get(0).get期AsInt() == 普徴期別金額.get期()) {
                     source.keisanMeisaishoNofuGaku1
-                            = new RString(普徴期別金額.get金額().toString());
+                            = 普徴期別金額.get金額() == null ? 金額_ZERO : new RString(普徴期別金額.get金額().toString());
                 }
                 if (item.get出力期リスト() != null
                         && item.get出力期リスト().get(0) != null
                         && item.get出力期リスト().get(0).get期AsInt() + 1 == 普徴期別金額.get期()) {
                     source.keisanMeisaishoNofuGaku2
-                            = new RString(普徴期別金額.get金額().toString());
+                            = 普徴期別金額.get金額() == null ? 金額_ZERO : new RString(普徴期別金額.get金額().toString());
                 }
             }
         }

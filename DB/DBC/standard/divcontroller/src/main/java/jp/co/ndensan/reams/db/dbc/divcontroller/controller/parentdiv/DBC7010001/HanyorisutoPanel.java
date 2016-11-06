@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7010001
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710010.DBC710010_HanyoListKyotakuServiceKeikakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7010001.HanyorisutoPanelHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7010001.HanyorisutoValidationHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -112,6 +114,22 @@ public class HanyorisutoPanel {
     }
 
     private ResponseData<HanyorisutoPanelDiv> createResponse(HanyorisutoPanelDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * バッチ起動前のチェックです。
+     *
+     * @param div HanyorisutoPanelDiv
+     * @return ResponseData<HanyorisutoPanelDiv>
+     */
+    public ResponseData<HanyorisutoPanelDiv> before_checkOrder(HanyorisutoPanelDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        HanyorisutoValidationHandler validationHandler = new HanyorisutoValidationHandler();
+        validationHandler.出力順未設定チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         return ResponseData.of(div).respond();
     }
 }

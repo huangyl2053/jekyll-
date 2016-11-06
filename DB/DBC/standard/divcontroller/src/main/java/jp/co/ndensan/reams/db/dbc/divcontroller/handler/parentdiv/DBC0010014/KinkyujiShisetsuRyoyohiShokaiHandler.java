@@ -57,18 +57,15 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
     public void setKinkyujiShisetsuRyoyohi(List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データリスト,
             RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月) {
         List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
-        List<dgKinkyujiShisetsuRyoyohi_Row> rowListKo = new ArrayList<>();
         List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ
                 = get給付実績データ(所定疾患施設療養費等データリスト, 整理番号, 事業者番号, 様式番号, サービス提供年月);
         for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等 : 所定疾患施設療養費等データ) {
             rowList.add(setRow(所定疾患施設療養費等));
+            rowList.add(setRow_後(所定疾患施設療養費等));
         }
-        for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等 : 所定疾患施設療養費等データ) {
-            rowListKo.add(setRow_後(所定疾患施設療養費等));
-        }
-        rowList.addAll(rowListKo);
         div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
-        setGetsuBtn(getサービス提供年月リスト(所定疾患施設療養費等データリスト), new FlexibleYearMonth(サービス提供年月));
+        setGetsuBtn(getサービス提供年月リスト(所定疾患施設療養費等データリスト),
+                new FlexibleYearMonth(サービス提供年月));
     }
 
     private dgKinkyujiShisetsuRyoyohi_Row setRow(KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ) {
@@ -369,39 +366,56 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
      * @param サービス提供年月 サービス提供年月
      * @param 識別番号 識別番号
      * @param 所定疾患施設療養費等データ取得リスト 所定疾患施設療養費等データ取得リスト
+     * @param 事業者番号リスト 事業者番号リスト
      */
     public void change年月(RString data, List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得リスト,
+            List<KyufuJissekiHedajyoho2> 事業者番号リスト,
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
         List<dgKinkyujiShisetsuRyoyohi_Row> rowList = new ArrayList<>();
-        int index = INT_ZERO;
         List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(所定疾患施設療養費等データ取得リスト);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
-                index = i;
-                break;
+        FlexibleYearMonth 今提供年月 = get今提供年月(data, 所定疾患施設療養費等データ取得リスト, サービス提供年月);
+        if (!今提供年月.isEmpty()) {
+            div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
+            List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得
+                    = get給付実績データ(所定疾患施設療養費等データ取得リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
+                            div.getCcdKyufuJissekiHeader().get事業者番号(),
+                            div.getCcdKyufuJissekiHeader().get様式番号(),
+                            今提供年月.toDateString());
+            for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ : 所定疾患施設療養費等データ取得) {
+                rowList.add(setRow(所定疾患施設療養費等データ));
+                rowList.add(setRow_後(所定疾患施設療養費等データ));
             }
+            div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
+            setGetsuBtn(サービス提供年月リスト, 今提供年月);
+            RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+            RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+            RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
+            check事業者btn(事業者番号リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
+                    事業者番号, 様式番号, 今提供年月.toDateString(), 実績区分コード);
         }
+    }
+
+    /**
+     * 今提供年月を取得。
+     *
+     * @param data RString
+     * @param 所定疾患施設療養費等データ取得リスト List<KyufujissekiShoteiShikkanShisetsuRyoyo>
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return 今提供年月
+     */
+    public FlexibleYearMonth get今提供年月(RString data,
+            List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得リスト,
+            FlexibleYearMonth サービス提供年月) {
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(所定疾患施設療養費等データ取得リスト);
         FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (INT_ZERO < index && index < サービス提供年月リスト.size() - 1) {
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
             if (前月.equals(data)) {
-                今提供年月 = サービス提供年月リスト.get(index + 1);
+                今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
             } else {
-                今提供年月 = サービス提供年月リスト.get(index - 1);
+                今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
             }
         }
-        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得
-                = get給付実績データ(所定疾患施設療養費等データ取得リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
-                        div.getCcdKyufuJissekiHeader().get事業者番号(),
-                        div.getCcdKyufuJissekiHeader().get様式番号(),
-                        今提供年月.toDateString());
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-        for (KyufujissekiShoteiShikkanShisetsuRyoyo 所定疾患施設療養費等データ : 所定疾患施設療養費等データ取得) {
-            rowList.add(setRow(所定疾患施設療養費等データ));
-            rowList.add(setRow_後(所定疾患施設療養費等データ));
-        }
-        div.getDgKinkyujiShisetsuRyoyohi().setDataSource(rowList);
-        setGetsuBtn(サービス提供年月リスト, 今提供年月);
+        return 今提供年月;
     }
 
     /**
@@ -435,6 +449,8 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
             div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
             div.getCcdKyufuJissekiHeader().set事業者番号(事業者番号リスト.get(index + i).get事業所番号().value());
             div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
+            List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(所定疾患施設療養費);
+            setGetsuBtn(サービス提供年月リスト, new FlexibleYearMonth(サービス提供年月));
             List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得リスト
                     = get給付実績データ(所定疾患施設療養費, 事業者番号リスト.get(index + i).get整理番号(),
                             事業者番号リスト.get(index + i).get事業所番号().value(),
@@ -524,10 +540,10 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
      * @param サービス提供年月 サービス提供年月
      */
     public void setGetsuBtn(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
         div.getBtnZengetsu().setDisabled(true);
         div.getBtnJigetsu().setDisabled(true);
         if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
             if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
                 div.getBtnZengetsu().setDisabled(false);
             }
@@ -556,5 +572,34 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
         public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
             return o2.compareTo(o1);
         }
+    }
+
+    private static class DateComparatorServiceYM implements Comparator<FlexibleYearMonth>, Serializable {
+
+        @Override
+        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
+            return o1.compareTo(o2);
+        }
+    }
+
+    private FlexibleYearMonth get前月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト,
+            FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
+            if (サービス年月.isBefore(サービス提供年月)) {
+                return サービス年月;
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
+
+    private FlexibleYearMonth get次月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
+        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
+            if (サービス提供年月.isBefore(サービス年月)) {
+                return サービス年月;
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
     }
 }

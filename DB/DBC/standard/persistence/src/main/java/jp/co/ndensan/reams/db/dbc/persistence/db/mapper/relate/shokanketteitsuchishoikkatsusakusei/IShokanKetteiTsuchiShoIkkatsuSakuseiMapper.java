@@ -6,11 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanketteitsuchishoikkatsusakusei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.SelectMaxEdabanParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoTempTableEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 償還払い支給（不支給）決定通知書一括作成のマッパーインタフェースです。
@@ -66,9 +67,10 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
     List<ShokanKetteiTsuchiShoMeisaiTempTableEntity> getサービス種類();
 
     /**
-     * 最大年度内連番を取得します。
+     * サブ業務コード、市町村コード、処理名のグループ内での枝番の最大値を取得します。
      *
-     * @return 最大年度内連番
+     * @param parameter 検索用パラメータ
+     * @return DbT7022ShoriDateKanriの項目定義クラス
      */
-    RString get最大年度内連番();
+    DbT7022ShoriDateKanriEntity get最大枝番(SelectMaxEdabanParameter parameter);
 }

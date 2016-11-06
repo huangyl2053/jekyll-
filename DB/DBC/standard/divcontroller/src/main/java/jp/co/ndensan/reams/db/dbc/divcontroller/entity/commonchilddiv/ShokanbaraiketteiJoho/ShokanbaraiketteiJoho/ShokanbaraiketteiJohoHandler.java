@@ -10,9 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.SyokanbaraiketteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraikettejoho.SyokanbaraiketteJohoManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,6 +41,7 @@ public class ShokanbaraiketteiJohoHandler {
     private static final RString GYOKUKBN_住宅改修 = new RString("01");
     private static final RString GYOKUKBN_福祉用具販売費 = new RString("02");
     private static final RString GYOKUKBN_償還払い費 = new RString("03");
+    private static final Decimal 数字_100 = new Decimal("100");
 
     /**
      * コンストラクタです。
@@ -59,9 +64,18 @@ public class ShokanbaraiketteiJohoHandler {
     public void initialize(HihokenshaNo hihokenshaNo, FlexibleYearMonth serviceTekyoYM, RString seiriNo, RString gyomuKbn, RString mode) {
         SyokanbaraiketteJohoManager manager = SyokanbaraiketteJohoManager.createInstance();
         KetteJoho 決定情報 = manager.getKetteJoho(hihokenshaNo, serviceTekyoYM, seiriNo, gyomuKbn);
+        Decimal 上限金額 = Decimal.ZERO;
+        if (GYOKUKBN_住宅改修.equals(gyomuKbn) || GYOKUKBN_福祉用具販売費.equals(gyomuKbn)) {
+            ShokanShinsei 償還払支給申請情報 = manager.getShokanShinsei(hihokenshaNo, serviceTekyoYM, seiriNo);
+            if (償還払支給申請情報 == null) {
+                上限金額 = JutakuKaishuJizenShinsei.createInstance().getShikyuGendoGaku(hihokenshaNo, serviceTekyoYM);
+            } else {
+                上限金額 = 償還払支給申請情報.get保険対象費用額();
+            }
+        }
         init(get償還払決定一覧情報(hihokenshaNo, serviceTekyoYM, seiriNo, gyomuKbn),
                 manager.getShashitomeKojyoKubun(mode, hihokenshaNo, serviceTekyoYM, seiriNo),
-                決定情報, mode);
+                決定情報, mode, 上限金額, gyomuKbn);
         ViewStateHolder.put(ViewStateKeys.決定情報, 決定情報);
     }
 
@@ -85,27 +99,41 @@ public class ShokanbaraiketteiJohoHandler {
         div.getTxtSagakuGoke().setValue(差額支払金額合計);
     }
 
-    private void init(List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString 差止控除区分, KetteJoho 決定情報, RString mode) {
+    private void init(List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString 差止控除区分,
+            KetteJoho 決定情報, RString mode, Decimal 上限金額, RString gyomuKbn) {
         boolean 差額登録フラグ = false;
         if (モード_修正.equals(mode) && (差止控除区分_20.equals(差止控除区分) || 差止控除区分_21.equals(差止控除区分))) {
             差額登録フラグ = true;
         }
-        div.getDgSyokanbaraikete().setDataSource(set償還払決定一覧情報(差額登録フラグ, 償還払決定一覧情報));
+        div.getDgSyokanbaraikete().setDataSource(set償還払決定一覧情報(差額登録フラグ, 償還払決定一覧情報, gyomuKbn, 上限金額));
         RString 支給区分 = null;
         if (決定情報 == null) {
             div.getTxtKetebi().setValue(RDate.getNowDate());
-            setState(支給区分);
+            setState(支給区分_支給);
             div.getRdoShikyukubun().setDisabled(false);
+            div.getRdoShikyukubun().setSelectedKey(支給区分_支給);
+            div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
+            div.getTxtZogentani().setValue(Decimal.ZERO);
         } else {
             支給区分 = 決定情報.getShikyuHushikyuKetteiKubun();
+            if (RString.isNullOrEmpty(支給区分) || 差額登録フラグ) {
+                支給区分 = 支給区分_支給;
+            }
             set決定情報(決定情報, 支給区分);
-            if (決定情報.getKetteiYMD() == null) {
+            if (isFlexibleDateNullOrEmpty(決定情報.getKetteiYMD())) {
                 div.getTxtKetebi().setValue(RDate.getNowDate());
             } else {
                 div.getTxtKetebi().setValue(new RDate(決定情報.getKetteiYMD().toString()));
             }
-            if (支給区分 != null && !RString.EMPTY.equals(支給区分)) {
-                div.getRdoShikyukubun().setSelectedKey(決定情報.getShikyuHushikyuKetteiKubun());
+            div.getRdoShikyukubun().setSelectedKey(支給区分);
+            if (!isFlexibleDateNullOrEmpty(決定情報.getKetteiTsuchishoSakuseiYMD())) {
+                div.getTxtKetteiTsuchiSakuseiYMD().setValue(new RDate(決定情報.getKetteiTsuchishoSakuseiYMD().toString()));
+            }
+            if (決定情報.getKetteiTsuchiNo() != null && !RString.EMPTY.equals(決定情報.getKetteiTsuchiNo())) {
+                div.getTxtKetteiTsuchiNo().setValue(new Decimal(決定情報.getKetteiTsuchiNo().toString()));
+            }
+            if (!isFlexibleDateNullOrEmpty(決定情報.getFurikomiMeisaishoSakuseiYMD())) {
+                div.getTxtFurikomiMeisaiSakuseiYMD().setValue(new RDate(決定情報.getFurikomiMeisaishoSakuseiYMD().toString()));
             }
         }
         if (差止控除区分_10.equals(差止控除区分) || モード_照会.equals(mode)) {
@@ -115,13 +143,32 @@ public class ShokanbaraiketteiJohoHandler {
         } else {
             div.getTxtKetebi().setDisabled(false);
         }
+        if (差額登録フラグ) {
+            div.getRdoShikyukubun().setDisabled(true);
+            div.getRdoShikyukubun().setSelectedKey(ShikyuFushikyuKubun.支給.getコード());
+        }
+        if (モード_照会.equals(mode)) {
+            div.getTxtKetebi().setDisabled(true);
+            div.getTxtZogenriyu().setDisabled(true);
+            div.getTxtFuSyikyuriyu1().setDisabled(true);
+            div.getTxtFushikyuriyu2().setDisabled(true);
+            div.getRdoShikyukubun().setDisabled(true);
+        }
     }
 
-    private List<dgSyokanbaraikete_Row> set償還払決定一覧情報(boolean 差額登録フラグ, List<SyokanbaraiketteJoho> 償還払決定一覧情報) {
+    private boolean isFlexibleDateNullOrEmpty(FlexibleDate date) {
+        return null == date || date.isEmpty();
+    }
+
+    private List<dgSyokanbaraikete_Row> set償還払決定一覧情報(boolean 差額登録フラグ,
+            List<SyokanbaraiketteJoho> 償還払決定一覧情報, RString gyomuKbn, Decimal 上限金額) {
         List<dgSyokanbaraikete_Row> dataRowList = new ArrayList<>();
         Integer index = 1;
-        Decimal 差額支払金額合計 = new Decimal(0);
-        Decimal 支払金額合計 = new Decimal(0);
+        Decimal 差額支払金額合計 = Decimal.ZERO;
+        Decimal 支払金額合計 = Decimal.ZERO;
+        Decimal 残上限金額 = 上限金額;
+        Decimal 保険対象費用額;
+        int count = 1;
         for (SyokanbaraiketteJoho syokanbaraiketteJoho : 償還払決定一覧情報) {
             dgSyokanbaraikete_Row row = new dgSyokanbaraikete_Row();
             row.setNo(syokanbaraiketteJoho.getServiceCode().isEmpty() ? RString.EMPTY : new RString(index.toString()));
@@ -135,10 +182,10 @@ public class ShokanbaraiketteiJohoHandler {
             } else {
                 row.getTaniKingaku().setValue(Decimal.ZERO);
             }
-            if (syokanbaraiketteJoho.getShiharaiKingaku() != null) {
-                row.getShiharaiKingaku().setValue(syokanbaraiketteJoho.getShiharaiKingaku());
-            } else {
-                row.getShiharaiKingaku().setValue(Decimal.ZERO);
+            保険対象費用額 = set支払金額(syokanbaraiketteJoho, 残上限金額, row, gyomuKbn);
+            残上限金額 = 残上限金額.subtract(保険対象費用額);
+            if (count == 償還払決定一覧情報.size()) {
+                row.getShiharaiKingaku().setValue(上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundDownTo(0).subtract(支払金額合計));
             }
             if (syokanbaraiketteJoho.getSagakuKingaku() != null) {
                 row.getSagakuKingaku().setValue(new Decimal(syokanbaraiketteJoho.getSagakuKingaku()));
@@ -159,8 +206,9 @@ public class ShokanbaraiketteiJohoHandler {
                 差額支払金額合計 = 差額支払金額合計.add(syokanbaraiketteJoho.getSagakuKingaku());
             }
             if (syokanbaraiketteJoho.getShiharaiKingaku() != null) {
-                支払金額合計 = 支払金額合計.add(syokanbaraiketteJoho.getShiharaiKingaku());
+                支払金額合計 = 支払金額合計.add(initDecimal(row.getShiharaiKingaku().getValue()));
             }
+            count++;
             dataRowList.add(row);
             if (!syokanbaraiketteJoho.getServiceCode().isEmpty()) {
                 index++;
@@ -171,21 +219,22 @@ public class ShokanbaraiketteiJohoHandler {
         return dataRowList;
     }
 
+    private Decimal initDecimal(Decimal kingaku) {
+        return kingaku == null ? new Decimal(0) : kingaku;
+    }
+
     private void set決定情報(KetteJoho 決定情報, RString 支給区分) {
-        if (決定情報 != null && 決定情報.getShiharaiKingaku() == null) {
+
+        if (決定情報 != null) {
             if (支給区分_不支給.equals(支給区分)) {
                 div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
             } else {
                 div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
             }
-        } else if (決定情報 != null && 決定情報.getShiharaiKingaku() != null) {
-            div.getTxtShiharaikingakugoke().setValue(new Decimal(決定情報.getShiharaiKingaku()));
         }
 
         if (支給区分_支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(false);
-            div.getTxtZogentani().setDisabled(false);
-            div.getTxtShiharaikingakugoke().setDisabled(false);
             div.getTxtFuSyikyuriyu1().setDisabled(true);
             div.getTxtFushikyuriyu2().setDisabled(true);
             if (決定情報 != null && 決定情報.getZougenRiyu() != null) {
@@ -203,8 +252,6 @@ public class ShokanbaraiketteiJohoHandler {
             }
         } else if (支給区分_不支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(true);
-            div.getTxtZogentani().setDisabled(true);
-            div.getTxtShiharaikingakugoke().setDisabled(true);
             div.getTxtFuSyikyuriyu1().setDisabled(false);
             div.getTxtFushikyuriyu2().setDisabled(false);
             if (決定情報 != null && 決定情報.getHushikyuRiyu() != null) {
@@ -236,17 +283,20 @@ public class ShokanbaraiketteiJohoHandler {
             償還払決定一覧情報 = manager.getSyokanbaraiketteJyutakuList(hiHokenshaNo, serviceTeikyoYM, seiriNo).records();
             div.getDgSyokanbaraikete().getGridSetting().getColumn("serviceShuruiName").setVisible(true);
             div.getDgSyokanbaraikete().getGridSetting().getColumn("fukushiYoguName").setVisible(false);
+            div.getDgSyokanbaraikete().getGridSetting().getColumn("jigyoshaNo").setVisible(false);
         } else if (GYOKUKBN_福祉用具販売費.equals(gyomuKbn)) {
 
             償還払決定一覧情報 = manager.getSyokanbaraiketteFukushiList(hiHokenshaNo, serviceTeikyoYM, seiriNo).records();
             div.getDgSyokanbaraikete().getGridSetting().getColumn("serviceShuruiName").setVisible(false);
             div.getDgSyokanbaraikete().getGridSetting().getColumn("fukushiYoguName").setVisible(true);
+            div.getDgSyokanbaraikete().getGridSetting().getColumn("jigyoshaNo").setVisible(true);
         } else if (GYOKUKBN_償還払い費.equals(gyomuKbn)) {
             償還払決定一覧情報 = new ArrayList<>();
             List<SyokanbaraiketteJoho> temp償還払決定一覧情報
                     = manager.getSyokanbaraiketteSyokanList(hiHokenshaNo, serviceTeikyoYM, seiriNo).records();
             div.getDgSyokanbaraikete().getGridSetting().getColumn("serviceShuruiName").setVisible(true);
             div.getDgSyokanbaraikete().getGridSetting().getColumn("fukushiYoguName").setVisible(false);
+            div.getDgSyokanbaraikete().getGridSetting().getColumn("jigyoshaNo").setVisible(true);
             List<RString> yoshikiNoList = new ArrayList<>();
             yoshikiNoList.add(KyufuJissekiYoshikiKubun._2141_様式第三.getコード());
             yoshikiNoList.add(KyufuJissekiYoshikiKubun._2142_様式第三.getコード());
@@ -287,8 +337,6 @@ public class ShokanbaraiketteiJohoHandler {
 
     private void setState(RString 支給区分) {
         div.getTxtZogenriyu().setDisabled(true);
-        div.getTxtZogentani().setDisabled(true);
-        div.getTxtShiharaikingakugoke().setDisabled(true);
         div.getTxtFuSyikyuriyu1().setDisabled(true);
         div.getTxtFushikyuriyu2().setDisabled(true);
         if (支給区分 == null) {
@@ -298,8 +346,37 @@ public class ShokanbaraiketteiJohoHandler {
             div.getRdoShikyukubun().setDisabled(false);
             div.getTxtFuSyikyuriyu1().setValue(RString.EMPTY);
             div.getTxtFushikyuriyu2().setValue(RString.EMPTY);
+        } else if (支給区分_支給.equals(支給区分)) {
+            div.getTxtZogenriyu().setDisabled(false);
+            div.getTxtFuSyikyuriyu1().setDisabled(true);
+            div.getTxtFushikyuriyu2().setDisabled(true);
         } else {
             div.getRdoShikyukubun().setDisabled(true);
         }
+    }
+
+    private Decimal set支払金額(SyokanbaraiketteJoho syokanbaraiketteJoho,
+            Decimal 残上限金額, dgSyokanbaraikete_Row row, RString mode) {
+        Decimal 単位金額 = Decimal.ZERO;
+        if (syokanbaraiketteJoho.getKounyuKingaku() != null) {
+            単位金額 = new Decimal(syokanbaraiketteJoho.getKounyuKingaku());
+        }
+        Decimal 保険対象費用額 = Decimal.ZERO;
+        if (GYOKUKBN_償還払い費.equals(mode)) {
+            if (syokanbaraiketteJoho.getShiharaiKingaku() != null) {
+                row.getShiharaiKingaku().setValue(syokanbaraiketteJoho.getShiharaiKingaku());
+            } else {
+                row.getShiharaiKingaku().setValue(Decimal.ZERO);
+            }
+        } else if (残上限金額.compareTo(Decimal.ZERO) <= 0 || syokanbaraiketteJoho.get給付率() == null) {
+            row.getShiharaiKingaku().setValue(Decimal.ZERO);
+        } else if (単位金額.compareTo(残上限金額) < 0) {
+            保険対象費用額 = 単位金額;
+            row.getShiharaiKingaku().setValue(単位金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundDownTo(0));
+        } else {
+            保険対象費用額 = 残上限金額;
+            row.getShiharaiKingaku().setValue(残上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundDownTo(0));
+        }
+        return 保険対象費用額;
     }
 }

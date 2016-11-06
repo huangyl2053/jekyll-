@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranBatchReport;
+import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranBreakKey;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.KoikiZenShichosonJohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.SaiHakkoParameter;
@@ -53,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -95,7 +97,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString 定数_再発行対象リスト = new RString("再発行対象リスト");
-    private static final RString CSV出力有無_有り = new RString("有り");
+    private static final RString CSV出力有無_有り = new RString("あり");
     private static final RString CSVファイル名_一覧表 = new RString("所得照会票発行一覧表");
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
             + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.selectAll所得照会票2");
@@ -156,8 +158,10 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
 
     @Override
     protected void createWriter() {
+        PageBreaker<ShotokushokaihyoHakkoIchiranSource> breakPage
+                = new ShotokushokaihyoHakkoIchiranBreakKey(pageBreakKeys);
         reportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
+                ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
         sourceWriter = new ReportSourceWriter<>(reportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
@@ -209,6 +213,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定数_出力対象).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(processParameter.get出力対象()));
+        出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         RString 有無し;
         if (processParameter.isテストプリント()) {
@@ -272,7 +277,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
         RString 性別 = set性別コード(tempEntity);
         entity.set性別(性別);
         entity.set転出日(tempEntity.getIdoYMD());
-        entity.set被保険者番号(tempEntity.getHihokenshaNo());
+        entity.set被保険者番号(tempEntity.getHihokenshaNo().getColumnValue());
         eucCsvWriter.writeLine(entity);
     }
 

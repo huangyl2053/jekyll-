@@ -50,6 +50,9 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
 
 
 
+
+
+
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> occuredBreak(
@@ -134,7 +137,11 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
         /**
          * 納組コード
          */
-        納組コード(new RString("0208"), new RString("納組コード"), FORMAT.concat(new RString("caT0714SeikyuHoho_nokumiCode")).concat(FORMAT));
+        納組コード(new RString("0208"), new RString("納組コード"), FORMAT.concat(new RString("caT0714SeikyuHoho_nokumiCode")).concat(FORMAT)),
+        /**
+         * 調定事由
+         */
+        調定事由(new RString("0212"), new RString("調定事由"), FORMAT.concat(new RString("dbT2015KeisangoJoho_choteiJiyu1")).concat(FORMAT));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

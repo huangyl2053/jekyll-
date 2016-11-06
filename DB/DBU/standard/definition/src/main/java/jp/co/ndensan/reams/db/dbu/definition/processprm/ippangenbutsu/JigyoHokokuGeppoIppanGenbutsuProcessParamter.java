@@ -128,7 +128,7 @@ public class JigyoHokokuGeppoIppanGenbutsuProcessParamter implements IBatchProce
      */
     public JigyoHokokuGeppoIppanGenbutsuMybatisParamter toInsertDataMybitisParamter() {
         return JigyoHokokuGeppoIppanGenbutsuMybatisParamter.createInsertDataParam(市町村コード,
-                構成市町村区分, 構成市町村コードList, 集計年月, 給付集計区分, 作成日時, 処理日時);
+                構成市町村区分, 旧市町村区分, 構成市町村コードList, 旧市町村コードList, 集計年月, 給付集計区分, 作成日時, 処理日時);
     }
 
     /**
@@ -137,8 +137,8 @@ public class JigyoHokokuGeppoIppanGenbutsuProcessParamter implements IBatchProce
      * @return JigyoHokokuGeppoIppanGenbutsuMybatisParamter
      */
     public JigyoHokokuGeppoIppanGenbutsuMybatisParamter to事業報告統計データ_12_13MybitisParamter() {
-        return JigyoHokokuGeppoIppanGenbutsuMybatisParamter.create事業報告統計データ_12_13Param(過去集計分市町村コードList,
-                集計年月, 給付集計区分, 過去集計分旧市町村区分);
+        return JigyoHokokuGeppoIppanGenbutsuMybatisParamter.create事業報告統計データ_12_13Param(プリントコントロール区分, 市町村コード,
+                過去集計分市町村コードList, 集計年月, 給付集計区分, 過去集計分旧市町村区分);
     }
 
     /**
@@ -147,7 +147,8 @@ public class JigyoHokokuGeppoIppanGenbutsuProcessParamter implements IBatchProce
      * @return JigyoHokokuGeppoIppanGenbutsuMybatisParamter
      */
     public JigyoHokokuGeppoIppanGenbutsuMybatisParamter to事業報告統計データ_14MybitisParamter() {
-        return JigyoHokokuGeppoIppanGenbutsuMybatisParamter.create事業報告統計データ_14Param(過去集計分市町村コードList,
+        return JigyoHokokuGeppoIppanGenbutsuMybatisParamter.create事業報告統計データ_14Param(プリントコントロール区分, 市町村コード,
+                過去集計分市町村コードList,
                 集計年月, 給付集計区分, 過去集計分旧市町村区分);
     }
 }

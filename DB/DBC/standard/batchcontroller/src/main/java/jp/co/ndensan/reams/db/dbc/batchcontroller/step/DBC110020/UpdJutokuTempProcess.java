@@ -61,11 +61,11 @@ public class UpdJutokuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
-        RString 住所地特例Key = get住所地特例Key(entity.get住所地特例());
-        if (住所地特例KeyList.contains(住所地特例Key)) {
-            return;
-        }
-        住所地特例KeyList.add(住所地特例Key);
+//        RString 住所地特例Key = get住所地特例Key(entity.get住所地特例());
+//        if (住所地特例KeyList.contains(住所地特例Key)) {
+//            return;
+//        }
+//        住所地特例KeyList.add(住所地特例Key);
         RString 全項目 = 住所地特例全項目(entity.get住所地特例());
         Decimal 連番 = 連番Map.get(entity.get住所地特例().get被保険者番号());
         if (連番 == null) {

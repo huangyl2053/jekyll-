@@ -3,19 +3,24 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shokanbar
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 30 19:09:00 CST 2016
+ * Fri Nov 04 14:41:50 JST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
+
 /**
- * dgSyokanbaraikete_Row のクラスファイル
- *
+ * dgSyokanbaraikete_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgSyokanbaraikete_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     private RString no;
     private RString jigyoshaNo;

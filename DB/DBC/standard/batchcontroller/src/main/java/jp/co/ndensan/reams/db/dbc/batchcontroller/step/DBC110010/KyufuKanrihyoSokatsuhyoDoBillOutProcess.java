@@ -149,12 +149,12 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
     private RString 被保険者番号 = RString.EMPTY;
     private RString 居宅サービス区分 = RString.EMPTY;
     private int ヘッダー項目は1行目 = 0;
-    private boolean is1行目 = true;
-    private boolean isn行目 = true;
+    private KyufuKanrihyoSokatsuhyoEntity kyufuKanrihyoSokatsuhyoEntity;
 
     @Override
 
     protected void initialize() {
+        kyufuKanrihyoSokatsuhyoEntity = new KyufuKanrihyoSokatsuhyoEntity();
         outputCount = new OutputParameter();
         outputEntry = new OutputParameter();
         送付ファイルエントリ情報 = new ArrayList<>();
@@ -194,9 +194,10 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
             被保険者番号 = 自己作成管理一時Entity.getHihokenshaNo().getColumnValue();
             居宅サービス区分 = 自己作成管理一時Entity.getKyotakuServiceKubun();
             editKyufuKanrihyoSokatsuhyoEntity(currentEntity, flag);
+            kyufuKanrihyoSokatsuhyoEntity = edit給付管理票総括票entity();
             給付管理票送付用EntityList.add(currentEntity);
         } else {
-            is1行目 = false;
+
             if (!(保険者番号.equals(自己作成管理一時Entity.getHokenshaNo()) && 利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
                     && 被保険者番号.equals(自己作成管理一時Entity.getHihokenshaNo().getColumnValue())
                     && 居宅サービス区分.equals(自己作成管理一時Entity.getKyotakuServiceKubun()))) {
@@ -210,9 +211,20 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
                 get給付管理票キー項目_明細行数カウンター(自己作成管理一時Entity);
             }
             if (!保険者番号1.equals(自己作成管理一時Entity.getHokenshaNo())) {
-                isn行目 = false;
-                KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(edit給付管理票総括票entity());
+                KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(kyufuKanrihyoSokatsuhyoEntity);
                 report.writeBy(reportSourceWriter);
+                総括票件数_短期新規 = Decimal.ZERO;
+                総括票件数_短期修正 = Decimal.ZERO;
+                総括票件数_短期取消 = Decimal.ZERO;
+                総括票件数_訪問_居宅新規 = Decimal.ZERO;
+                総括票件数_訪問_居宅修正 = Decimal.ZERO;
+                総括票件数_訪問_居宅取消 = Decimal.ZERO;
+                総括票枚数_短期新規 = Decimal.ZERO;
+                総括票枚数_短期修正 = Decimal.ZERO;
+                総括票枚数_短期取消 = Decimal.ZERO;
+                総括票枚数_訪問_居宅新規 = Decimal.ZERO;
+                総括票枚数_訪問_居宅修正 = Decimal.ZERO;
+                総括票枚数_訪問_居宅取消 = Decimal.ZERO;
                 明細行数カウンター++;
                 editKyufuKanrihyoSokatsuhyoEntity(currentEntity, flag);
                 SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
@@ -265,25 +277,14 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
         給付管理票総括票entity.set自県分_短期_取消分_枚数(総括票枚数_短期取消);
         給付管理票総括票entity.set自県分_短期_新規分_件数(総括票件数_短期新規);
         給付管理票総括票entity.set自県分_短期_新規分_枚数(総括票枚数_短期新規);
-        給付管理票総括票entity.set自県分_訪問_修正分_件数(総括票件数_訪問_居宅新規);
-        給付管理票総括票entity.set自県分_訪問_修正分_枚数(総括票枚数_訪問_居宅新規);
-        給付管理票総括票entity.set自県分_訪問_取消分_件数(総括票件数_訪問_居宅新規);
-        給付管理票総括票entity.set自県分_訪問_取消分_枚数(総括票枚数_訪問_居宅新規);
+        給付管理票総括票entity.set自県分_訪問_修正分_件数(総括票件数_訪問_居宅修正);
+        給付管理票総括票entity.set自県分_訪問_修正分_枚数(総括票枚数_訪問_居宅修正);
+        給付管理票総括票entity.set自県分_訪問_取消分_件数(総括票件数_訪問_居宅取消);
+        給付管理票総括票entity.set自県分_訪問_取消分_枚数(総括票枚数_訪問_居宅取消);
         給付管理票総括票entity.set自県分_訪問_新規分_件数(総括票件数_訪問_居宅新規);
         給付管理票総括票entity.set自県分_訪問_新規分_枚数(総括票枚数_訪問_居宅新規);
         給付管理票総括票entity.set保険者番号(保険者番号);
-        総括票件数_短期新規 = Decimal.ZERO;
-        総括票件数_短期修正 = Decimal.ZERO;
-        総括票件数_短期取消 = Decimal.ZERO;
-        総括票件数_訪問_居宅新規 = Decimal.ZERO;
-        総括票件数_訪問_居宅修正 = Decimal.ZERO;
-        総括票件数_訪問_居宅取消 = Decimal.ZERO;
-        総括票枚数_短期新規 = Decimal.ZERO;
-        総括票枚数_短期修正 = Decimal.ZERO;
-        総括票枚数_短期取消 = Decimal.ZERO;
-        総括票枚数_訪問_居宅新規 = Decimal.ZERO;
-        総括票枚数_訪問_居宅修正 = Decimal.ZERO;
-        総括票枚数_訪問_居宅取消 = Decimal.ZERO;
+
         return 給付管理票総括票entity;
     }
 
@@ -360,24 +361,14 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void afterExecute() {
-        if (is1行目) {
-            KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(edit給付管理票総括票entity());
-            report.writeBy(reportSourceWriter);
-            SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
-            entity.setレコード件数カウンター(1);
-            entity.set保険者番号(保険者番号1);
-            entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
-            送付ファイル用EntityList.add(entity);
-        }
-        if (isn行目) {
-            KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(edit給付管理票総括票entity());
-            report.writeBy(reportSourceWriter);
-            SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
-            entity.setレコード件数カウンター(明細レコード_件数カウンター);
-            entity.set保険者番号(保険者番号1);
-            entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
-            送付ファイル用EntityList.add(entity);
-        }
+        KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(kyufuKanrihyoSokatsuhyoEntity);
+        report.writeBy(reportSourceWriter);
+        SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
+        entity.setレコード件数カウンター(1);
+        entity.set保険者番号(保険者番号1);
+        entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
+        送付ファイル用EntityList.add(entity);
+
         for (int i = 0; i < 送付ファイル用EntityList.size(); i++) {
             int 出力件数 = 0;
             int レコード番号カウンター = 0;
@@ -386,7 +377,6 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
             SofuFileSakuseiEntity sofuFileSakuseiEntity = 送付ファイル用EntityList.get(i);
             List<KyufukanrihyoOutDoBillOutEntity> 給付管理票送付用 = sofuFileSakuseiEntity.get給付管理票送付用EntityList();
             RString spoolWorkPath = Path.getTmpDirectoryPath();
-
             csvFileName = ファイル名_前.concat(sofuFileSakuseiEntity.get保険者番号()).
                     concat(parameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
             eucFilePath = Path.combinePath(spoolWorkPath, csvFileName);
@@ -399,49 +389,52 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
                     build();
             KyufukanrihyoOutSofuFairucontrolcsvEntity controlEntity = getControlEntity(レコード番号カウンター, sofuFileSakuseiEntity);
             eucCsvWriter.writeLine(controlEntity);
-            RString 給付管理票送付用_保険者番号 = 給付管理票送付用.get(0).get自己作成管理一時Entity().getHokenshaNo();
-            RString 給付管理票送付用_利用年月 = new RString(給付管理票送付用.get(0).get自己作成管理一時Entity().getRiyoYM().toString());
-            RString 給付管理票送付用_被保険者番号 = 給付管理票送付用.get(0).get自己作成管理一時Entity().getHihokenshaNo().getColumnValue();
-            RString 給付管理票送付用_居宅サービス区分 = new RString(給付管理票送付用.get(0).get自己作成管理一時Entity().getKyufuKeikakuTaniSu().toString());
-            for (int j = 0; j < 給付管理票送付用.size(); j++) {
-                総出力件数++;
-                出力件数++;
-                KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity = 給付管理票送付用.get(i).get自己作成管理一時Entity();
-                HihokenshaTempEntity 被保険者一時Entity = 給付管理票送付用.get(i).get被保険者一時Entity();
-                KyufukanrihyoOutSofuFairulistcsvEntity listcsvEntity = getlistcsvEntity(給付管理票送付用_明細行数カウンター,
-                        被保険者一時Entity, レコード番号カウンター, 自己作成管理一時Entity);
-                eucCsvWriter.writeLine(listcsvEntity);
-                if (!(給付管理票送付用_保険者番号.equals(自己作成管理一時Entity.getHokenshaNo())
-                        && 給付管理票送付用_利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
-                        && 給付管理票送付用_被保険者番号.equals(自己作成管理一時Entity.getHihokenshaNo().getColumnValue())
-                        && 給付管理票送付用_居宅サービス区分.equals(自己作成管理一時Entity.getKyotakuServiceKubun()))) {
-                    給付管理票送付用_保険者番号 = 自己作成管理一時Entity.getHokenshaNo();
-                    給付管理票送付用_利用年月 = new RString(自己作成管理一時Entity.getRiyoYM().toString());
-                    給付管理票送付用_被保険者番号 = 自己作成管理一時Entity.getHihokenshaNo().getColumnValue();
-                    給付管理票送付用_居宅サービス区分 = new RString(自己作成管理一時Entity.getKyufuKeikakuTaniSu().toString());
-                    KyufukanrihyoOutSofuFairulistcsvEntity 合計レコード = get合計レコード(明細合計単位数, レコード番号カウンター, 自己作成管理一時Entity, 被保険者一時Entity);
-                    eucCsvWriter.writeLine(合計レコード);
-                    レコード番号カウンター = 0;
-                    給付管理票送付用_明細行数カウンター = 0;
-                    明細合計単位数 = Decimal.ZERO;
+            if (0 < 給付管理票送付用.size()) {
+                RString 給付管理票送付用_保険者番号 = 給付管理票送付用.get(0).get自己作成管理一時Entity().getHokenshaNo();
+                RString 給付管理票送付用_利用年月 = new RString(給付管理票送付用.get(0).get自己作成管理一時Entity().getRiyoYM().toString());
+                RString 給付管理票送付用_被保険者番号 = 給付管理票送付用.get(0).get自己作成管理一時Entity().getHihokenshaNo().getColumnValue();
+                RString 給付管理票送付用_居宅サービス区分 = new RString(給付管理票送付用.get(0).get自己作成管理一時Entity().getKyufuKeikakuTaniSu().toString());
+                for (int j = 0; j < 給付管理票送付用.size(); j++) {
+                    総出力件数++;
+                    出力件数++;
+                    KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity = 給付管理票送付用.get(i).get自己作成管理一時Entity();
+                    HihokenshaTempEntity 被保険者一時Entity = 給付管理票送付用.get(i).get被保険者一時Entity();
+                    KyufukanrihyoOutSofuFairulistcsvEntity listcsvEntity = getlistcsvEntity(給付管理票送付用_明細行数カウンター,
+                            被保険者一時Entity, レコード番号カウンター, 自己作成管理一時Entity);
+                    eucCsvWriter.writeLine(listcsvEntity);
+                    if (!(給付管理票送付用_保険者番号.equals(自己作成管理一時Entity.getHokenshaNo())
+                            && 給付管理票送付用_利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
+                            && 給付管理票送付用_被保険者番号.equals(自己作成管理一時Entity.getHihokenshaNo().getColumnValue())
+                            && 給付管理票送付用_居宅サービス区分.equals(自己作成管理一時Entity.getKyotakuServiceKubun()))) {
+                        給付管理票送付用_保険者番号 = 自己作成管理一時Entity.getHokenshaNo();
+                        給付管理票送付用_利用年月 = new RString(自己作成管理一時Entity.getRiyoYM().toString());
+                        給付管理票送付用_被保険者番号 = 自己作成管理一時Entity.getHihokenshaNo().getColumnValue();
+                        給付管理票送付用_居宅サービス区分 = new RString(自己作成管理一時Entity.getKyufuKeikakuTaniSu().toString());
+                        KyufukanrihyoOutSofuFairulistcsvEntity 合計レコード = get合計レコード(明細合計単位数, レコード番号カウンター, 自己作成管理一時Entity, 被保険者一時Entity);
+                        eucCsvWriter.writeLine(合計レコード);
+                        レコード番号カウンター = 0;
+                        給付管理票送付用_明細行数カウンター = 0;
+                        明細合計単位数 = Decimal.ZERO;
+                    }
+                    レコード番号カウンター++;
+                    給付管理票送付用_明細行数カウンター++;
+                    明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
                 }
-                レコード番号カウンター++;
-                給付管理票送付用_明細行数カウンター++;
-                明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
+                KyufukanrihyoOutSofuFairuendcsvEntity endEntity = getEndEntity(出力件数);
+                eucCsvWriter.writeLine(endEntity);
+                eucCsvWriter.close();
+                do外字類似変換();
+                SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                        FilesystemName.fromString(csvFileName.replace(拡張子_TEMP, RString.EMPTY)));
+                sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+                CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+                SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath.replace(拡張子_TEMP, RString.EMPTY)), opts);
+                送付ファイルエントリ情報.add(sfd);
             }
-            KyufukanrihyoOutSofuFairuendcsvEntity endEntity = getEndEntity(出力件数);
-            eucCsvWriter.writeLine(endEntity);
-            eucCsvWriter.close();
-            do外字類似変換();
-            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
-                    FilesystemName.fromString(csvFileName.replace(拡張子_TEMP, RString.EMPTY)));
-            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath.replace(拡張子_TEMP, RString.EMPTY)), opts);
-            送付ファイルエントリ情報.add(sfd);
+            outputCount.setValue(総出力件数);
+            outputEntry.setValue(送付ファイルエントリ情報);
         }
-        outputCount.setValue(総出力件数);
-        outputEntry.setValue(送付ファイルエントリ情報);
+
     }
 
     private KyufukanrihyoOutSofuFairuendcsvEntity getEndEntity(int レコード番号カウンター) {
@@ -541,8 +534,8 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
         controlEntity.set事業所番号(RSTRING_0);
         controlEntity.set都道府県番号(RSTRING_0);
         controlEntity.set媒体区分(DbBusinessConfig
-                .get(ConfigNameDBC.国保連取込媒体_給付管理Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
-        controlEntity.set処理対象年月(parameter.get処理年月().seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+                .get(ConfigNameDBC.国保連送付媒体_給付管理票Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+        controlEntity.set処理対象年月(parameter.get処理年月().seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString());
         controlEntity.setファイル管理番号(RSTRING_0);
         return controlEntity;
     }
@@ -595,20 +588,27 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
         FlexibleYearMonth 市町村脱退年月日 = getFlexibleYearMonth(被保険者一時Entity.getShichosonDattaiYmd());
 
         if (認定有効期間_編集区分_1.equals(DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_認定有効期間_編集区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
-            meisaiEntity.set限度額適用期間_開始(trimRString(new RString(自己作成管理一時Entity.getShikyuGendoKaishiYM().toString())));
+            meisaiEntity.set限度額適用期間_開始(trimRString(doパターン54(支給限度有効開始年月)));
         } else if (認定有効期間_編集区分_2.equals(DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_認定有効期間_編集区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             if (!支給限度有効終了年月.isEmpty() && !市町村加入年月日.isEmpty() && !支給限度有効開始年月.isEmpty() && !市町村加入年月日.isEmpty()
                     && 支給限度有効開始年月.isBefore(市町村加入年月日) && 市町村加入年月日.isBeforeOrEquals(支給限度有効終了年月)
                     && 市町村脱退年月日.isEmpty()) {
-                meisaiEntity.set限度額適用期間_開始(trimRString(new RString(市町村加入年月日.toString())));
+                meisaiEntity.set限度額適用期間_開始(trimRString(doパターン54(市町村加入年月日)));
             } else if (!市町村加入年月日.isEmpty() && !支給限度有効開始年月.isEmpty() && !支給限度有効終了年月.isEmpty()
                     && 支給限度有効開始年月.isBefore(市町村加入年月日) && 市町村加入年月日.isBeforeOrEquals(支給限度有効終了年月)
                     && !市町村脱退年月日.isEmpty() && 支給限度有効終了年月.isBeforeOrEquals(市町村脱退年月日)) {
-                meisaiEntity.set限度額適用期間_開始(trimRString(new RString(市町村加入年月日.toString())));
+                meisaiEntity.set限度額適用期間_開始(trimRString(doパターン54(市町村加入年月日)));
             } else {
-                meisaiEntity.set限度額適用期間_開始(trimRString(new RString(支給限度有効開始年月.toString())));
+                meisaiEntity.set限度額適用期間_開始(trimRString(doパターン54(支給限度有効開始年月)));
             }
         }
+    }
+
+    private RString doパターン54(FlexibleYearMonth 年月) {
+        if (null == 年月 || 年月.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private FlexibleYearMonth getFlexibleYearMonth(FlexibleDate fb) {

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * バッチ設計_DBCMNK4001_更正対象給付実績一覧(支払方法変更情報の取得ResultEntity)
@@ -18,6 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class UpdShiharaihohoHenkoTempResultEntity {
 
-    private FlexibleYear 年度;
+    private FutanWariaiTempEntity 負担割合TempEntity;
     private DbT4021ShiharaiHohoHenkoEntity 支払方法変更;
 }

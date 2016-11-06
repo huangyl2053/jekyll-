@@ -5,14 +5,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
  * 不正な動作の原因になります。
  */
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
-import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon.KaigoAtenaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
@@ -27,11 +22,15 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * KaigoShikakuKihon のクラスファイル
@@ -380,6 +379,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     private static final RDate 有効期間2006年04月 = new RDate(2006, 04, 01);
     private static final RDate 有効期間2002年04月 = new RDate(2002, 04, 01);
     private static final RDate 有効期間2000年04月 = new RDate(2000, 04, 01);
+    private static final RString 最大年月日 = new RString("99991231");
 
     /**
      * 介護資格基本の初期化
@@ -465,12 +465,6 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         return getTxtSoshitsuYmd().getValue();
     }
 
-    @Override
-    @JsonIgnore
-    public FlexibleDate get要介護認定終了年月日() {
-        return new FlexibleDate(getTxtNinteiShuryoYmd().getText());
-    }
-
     @JsonIgnore
     private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
         if (認定有効期間終了年月日 == null || 要介護認定状態区分コード == null || 認定有効期間終了年月日.isBefore(有効期間2000年04月)) {
@@ -508,7 +502,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         RDate 認定有効期間終了年月日 = result.get認定有効期間終了年月日() == null ? null : new RDate(result.get認定有効期間終了年月日().toString());
         this.txtYokaigoJotaiKubun.setValue(get要介護状態区分コード(認定有効期間終了年月日, result.get要介護認定状態区分コード()));
         this.txtNinteiKaishiYmd.setValue(認定有効期間開始年月日);
-        this.txtNinteiShuryoYmd.setValue(認定有効期間終了年月日);
+        RString st認定有効終了年月日 = result.get認定有効期間終了年月日() == null
+                ? RString.EMPTY : new RString(result.get認定有効期間終了年月日().toString());
+        if (!(st認定有効終了年月日.equals(最大年月日))) {
+            this.txtNinteiShuryoYmd.setValue(認定有効期間終了年月日);
+        }
         setReadOnly();
     }
 
@@ -523,4 +521,20 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         this.txtNinteiKaishiYmd.setReadOnly(true);
         this.txtNinteiShuryoYmd.setReadOnly(true);
     }
+
+    @Override
+    public RString get要介護状態区分名称() {
+        return this.txtYokaigoJotaiKubun.getValue();
+    }
+
+    @Override
+    public RDate get認定開始年月日() {
+        return this.txtNinteiKaishiYmd.getValue();
+    }
+
+    @Override
+    public RDate get認定終了年月日() {
+        return this.txtNinteiShuryoYmd.getValue();
+    }
+
 }

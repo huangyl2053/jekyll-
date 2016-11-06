@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippangenbutsu;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
@@ -40,10 +41,10 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
     private final List<RString> 構成市町村コードList;
     private final RString 集計年月;
     private final RString 給付集計区分;
-    private static final int INDEX = 8;
     private static final int INDEX_4 = 4;
     private static final int INDEX_6 = 6;
     private static final RString 市町村区分_構成市町村 = new RString("1");
+    private static final RString 市町村区分_旧市町村 = new RString("1");
     private static final RString 給付集計区分_現物分 = new RString("1");
     private static final RString 給付集計区分_償還分審査 = new RString("2");
     private static final RString 過去集計分旧市町村区分_2 = new RString("2");
@@ -129,7 +130,9 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
      *
      * @param 市町村コード 市町村コード
      * @param 構成市町村区分 構成市町村区分
+     * @param 旧市町村区分 旧市町村区分
      * @param 構成市町村コードリスト 構成市町村コードリスト
+     * @param 旧市町村コードList 旧市町村コードList
      * @param 集計年月 集計年月
      * @param 給付集計区分 給付集計区分
      * @param 作成日時 作成日時
@@ -140,13 +143,21 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
     public static JigyoHokokuGeppoIppanGenbutsuMybatisParamter createInsertDataParam(
             RString 市町村コード,
             RString 構成市町村区分,
+            RString 旧市町村区分,
             List<RString> 構成市町村コードリスト,
+            List<RString> 旧市町村コードList,
             RString 集計年月,
             RString 給付集計区分,
             RString 作成日時,
             YMDHMS 処理日時) {
         List<RString> 市町村コードリスト = new ArrayList<>();
         市町村コードリスト.add(市町村コード);
+        if (市町村区分_構成市町村.equals(構成市町村区分)) {
+            市町村コードリスト.addAll(構成市町村コードリスト);
+        }
+        if (市町村区分_旧市町村.equals(旧市町村区分)) {
+            市町村コードリスト.addAll(旧市町村コードList);
+        }
         RString 処理名 = RString.EMPTY;
         if (給付集計区分_現物分.equals(給付集計区分)) {
             処理名 = Syorimei.月報報告一般状況１２_１４現物分.get名称();
@@ -169,6 +180,8 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
     /**
      * 事業報告統計データ_12-13mybatisのパラメータを生成します。
      *
+     * @param プリントコントロール区分 プリントコントロール区分
+     * @param 市町村コード 市町村コード
      * @param 過去集計分市町村コードList 過去集計分市町村コードList
      * @param 集計年月 集計年月
      * @param 給付集計区分 給付集計区分
@@ -177,12 +190,22 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
      * @return JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter
      */
     public static JigyoHokokuGeppoIppanGenbutsuMybatisParamter create事業報告統計データ_12_13Param(
+            RString プリントコントロール区分,
+            RString 市町村コード,
             List<RString> 過去集計分市町村コードList,
             RString 集計年月,
             RString 給付集計区分,
             RString 過去集計分旧市町村区分) {
         List<RString> 市町村コードリスト = new ArrayList<>();
-        市町村コードリスト.addAll(過去集計分市町村コードList);
+        if (PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
+            市町村コードリスト.add(市町村コード);
+        } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
+            if (過去集計分市町村コードList == null || 過去集計分市町村コードList.isEmpty()) {
+                市町村コードリスト.add(市町村コード);
+            } else {
+                市町村コードリスト.addAll(過去集計分市町村コードList);
+            }
+        }
         List<RString> 表番号List = new ArrayList<>();
         if (過去集計分旧市町村区分_2.equals(過去集計分旧市町村区分)) {
             if (給付集計区分_1.equals(給付集計区分)) {
@@ -208,6 +231,8 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
     /**
      * 事業報告統計データ_12-13mybatisのパラメータを生成します。
      *
+     * @param プリントコントロール区分 プリントコントロール区分
+     * @param 市町村コード 市町村コード
      * @param 過去集計分市町村コードList 過去集計分市町村コードList
      * @param 集計年月 集計年月
      * @param 給付集計区分 給付集計区分
@@ -216,12 +241,22 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
      * @return JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter
      */
     public static JigyoHokokuGeppoIppanGenbutsuMybatisParamter create事業報告統計データ_14Param(
+            RString プリントコントロール区分,
+            RString 市町村コード,
             List<RString> 過去集計分市町村コードList,
             RString 集計年月,
             RString 給付集計区分,
             RString 過去集計分旧市町村区分) {
         List<RString> 市町村コードリスト = new ArrayList<>();
-        市町村コードリスト.addAll(過去集計分市町村コードList);
+        if (PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
+            市町村コードリスト.add(市町村コード);
+        } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
+            if (過去集計分市町村コードList == null || 過去集計分市町村コードList.isEmpty()) {
+                市町村コードリスト.add(市町村コード);
+            } else {
+                市町村コードリスト.addAll(過去集計分市町村コードList);
+            }
+        }
         List<RString> 表番号List = new ArrayList<>();
         if (過去集計分旧市町村区分_2.equals(過去集計分旧市町村区分)) {
             if (給付集計区分_1.equals(給付集計区分)) {

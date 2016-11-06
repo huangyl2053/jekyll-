@@ -37,7 +37,7 @@
         "DbT4022ShiharaiHohoHenkoTaino"."hihokenshaNo" = 収納状況一時テーブル."tmp_hihokenshaNo"
         AND "DbT4022ShiharaiHohoHenkoTaino"."choteiNendo" = 収納状況一時テーブル."tmp_choteiNendo"
         AND "DbT4022ShiharaiHohoHenkoTaino"."fukaNendo" = 収納状況一時テーブル."tmp_fukaNendo"
-        AND "DbT4022ShiharaiHohoHenkoTaino"."shuno_Ki_Tsuki" = 収納状況一時テーブル."tmp_kibetsu"
+        AND "DbT4022ShiharaiHohoHenkoTaino"."shuno_Ki_Tsuki" = LPAD(収納状況一時テーブル."tmp_kibetsu"::varchar,3,'0')
         AND "DbT4022ShiharaiHohoHenkoTaino"."tsuchishoNo" = 収納状況一時テーブル."tmp_tsuchishoNo"
         AND "DbT4022ShiharaiHohoHenkoTaino"."Tokucho_fuchoKubun" = 収納状況一時テーブル."tmp_tokucho_fuchoKubun"
         ORDER BY "tmp_hihokenshaNo" ASC, "tmp_nokigen" ASC

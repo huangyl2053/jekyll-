@@ -53,7 +53,7 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
     protected IBatchReader createReader() {
         RString 抽出条件 = parameter.get抽出条件();
         RString 抽出対象 = parameter.get抽出対象();
-        RString path = RString.EMPTY;
+        RString path = PATH2;
         if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(抽出条件)
                 || (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(抽出条件)
                 && ShinseishoTorokuChushutsuTaisho.基準収入額適用申請書の該当のみ抽出.getコード().equals(抽出対象))) {
@@ -68,13 +68,14 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
 
     @Override
     protected void process(HihokenshaDaichoTempSixColumnEntity entity) {
-        SetaiHaakuEntity 世帯員把握入力一時 = new SetaiHaakuEntity();
-        世帯員把握入力一時.setHihokenshaNo(entity.getHihokenshaNo());
-        世帯員把握入力一時.setShikibetsuCode(entity.getShikibetsuCode());
-        世帯員把握入力一時.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
-        世帯員把握入力一時.setKijunYMD(世帯員把握基準日);
-        世帯員把握入力一時.setShotokuNendo(世帯員把握基準日の年度);
-        世帯員把握入力一時Writer.insert(世帯員把握入力一時);
+        if (!ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
+            SetaiHaakuEntity 世帯員把握入力一時 = new SetaiHaakuEntity();
+            世帯員把握入力一時.setHihokenshaNo(entity.getHihokenshaNo());
+            世帯員把握入力一時.setShikibetsuCode(entity.getShikibetsuCode());
+            世帯員把握入力一時.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
+            世帯員把握入力一時.setKijunYMD(世帯員把握基準日);
+            世帯員把握入力一時.setShotokuNendo(世帯員把握基準日の年度);
+            世帯員把握入力一時Writer.insert(世帯員把握入力一時);
+        }
     }
-
 }

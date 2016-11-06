@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -38,6 +39,7 @@ public class PnlTotal {
     private static final RString 差止控除区分_21 = new RString("21");
     private static final RString 差止控除区分_10 = new RString("10");
 
+
     /**
      * 画面初期化
      *
@@ -52,6 +54,23 @@ public class PnlTotal {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         div.getKaigoCommonPanel().getCcdAtenaInfo().initialize(識別コード);
         div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(被保険者番号);
+        RString 要介護状態区分名称 = div.getKaigoCommonPanel().getCcdShikakuKihon().get要介護状態区分名称() == null
+                ? RString.EMPTY : div.getKaigoCommonPanel().getCcdShikakuKihon().get要介護状態区分名称();
+        RDate 認定開始年月日 = div.getKaigoCommonPanel().getCcdShikakuKihon().get認定開始年月日();
+        RDate 認定終了年月日 = div.getKaigoCommonPanel().getCcdShikakuKihon().get認定終了年月日();
+        if (RString.isNullOrEmpty(要介護状態区分名称)) {
+            div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
+        }
+        
+        if (認定開始年月日 != null && 認定終了年月日 != null 
+                && !(認定開始年月日.compareTo(RDate.getNowDate()) <= 0
+                    && RDate.getNowDate().compareTo(認定終了年月日) <= 0)) {
+            div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
+        }
+        
+        if (認定開始年月日 == null && 認定終了年月日 == null) {
+            div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
+        }
         PnlTotalHandler handler = getHandler(div);
         List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getShokanShikyuShinseiList(被保険者番号);
@@ -138,7 +157,7 @@ public class PnlTotal {
     private void putViewStateHolder(PnlTotalDiv div, RString 状態) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         PnlTotalParameter parameter = getHandler(div).getViesStateParameter(被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.検索キー, parameter);
+        ViewStateHolder.put(ViewStateKeys.契約番号検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
     }
 

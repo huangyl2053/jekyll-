@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassan;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassan.KogakugassanMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,6 +29,7 @@ public class KogakugassanProcessParameter implements IBatchProcessParameter {
     private RString shoriKunbun;
     private RString 保険者情報_保険者番号;
     private RString 保険者情報_保険者名称;
+    private Encode 文字コード;
 
     /**
      * コンストラクタです。

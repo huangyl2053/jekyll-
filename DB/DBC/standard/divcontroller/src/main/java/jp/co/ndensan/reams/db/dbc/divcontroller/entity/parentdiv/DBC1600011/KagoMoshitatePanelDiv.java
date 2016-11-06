@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KagoMoshitatePanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -52,8 +52,8 @@ public class KagoMoshitatePanelDiv extends Panel {
     private TextBoxDate TextBoxDate1;
     @JsonProperty("DropDownList2")
     private DropDownList DropDownList2;
-    @JsonProperty("TextBox12")
-    private TextBox TextBox12;
+    @JsonProperty("TextBoxNum12")
+    private TextBoxNum TextBoxNum12;
     @JsonProperty("DropDownList4")
     private DropDownList DropDownList4;
     @JsonProperty("CheckBoxList1")
@@ -308,21 +308,21 @@ public class KagoMoshitatePanelDiv extends Panel {
     }
 
     /*
-     * getTextBox12
-     * @return TextBox12
+     * getTextBoxNum12
+     * @return TextBoxNum12
      */
-    @JsonProperty("TextBox12")
-    public TextBox getTextBox12() {
-        return TextBox12;
+    @JsonProperty("TextBoxNum12")
+    public TextBoxNum getTextBoxNum12() {
+        return TextBoxNum12;
     }
 
     /*
-     * setTextBox12
-     * @param TextBox12 TextBox12
+     * setTextBoxNum12
+     * @param TextBoxNum12 TextBoxNum12
      */
-    @JsonProperty("TextBox12")
-    public void setTextBox12(TextBox TextBox12) {
-        this.TextBox12 = TextBox12;
+    @JsonProperty("TextBoxNum12")
+    public void setTextBoxNum12(TextBoxNum TextBoxNum12) {
+        this.TextBoxNum12 = TextBoxNum12;
     }
 
     /*

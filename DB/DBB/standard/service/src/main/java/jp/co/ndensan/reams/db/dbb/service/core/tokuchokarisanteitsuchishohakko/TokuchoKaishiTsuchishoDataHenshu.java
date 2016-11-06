@@ -81,7 +81,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
     private static final RString 定値_3 = new RString("3");
     private static final RString 定値_4 = new RString("4");
     private static final ReportId 帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
-    private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
+    private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A20_DaikoPrintNoCheck");
     private static final int INT_1 = 1;
     private static final int INT_5 = 5;
     private static final int INT_7 = 7;
@@ -290,6 +290,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
             UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
             調定共通Entity.setChoteiId(new Decimal(index).longValue());
+            調定共通Entity.setShunoId(new Decimal(index).longValue());
             調定共通Entity.setChoteigaku(get特徴調定額(計算後情報, index));
             調定共通EntityList.add(調定共通Entity);
             介護期別Relate.set介護期別Entity(介護期別Entity);
@@ -309,6 +310,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
             UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
             調定共通Entity.setChoteiId(new Decimal(index).add(Decimal.TEN).longValue());
+            調定共通Entity.setShunoId(new Decimal(index).add(Decimal.TEN).longValue());
             調定共通Entity.setChoteigaku(get普通調定額(計算後情報, index));
             調定共通EntityList.add(調定共通Entity);
             介護期別Relate.set介護期別Entity(介護期別Entity);

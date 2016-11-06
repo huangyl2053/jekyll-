@@ -333,12 +333,13 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             dankaiEntity.setDogetsuFlag(1);
             if (調定年度.equals(賦課年度)) {
                 if (shoriDateKanriData == null || shoriDateKanriData.getKijunTimestamp() == null
-                    || shoriDateKanriData.getKijunTimestamp().isEmpty()
-                    || (entity.getChoteiNichiji().isBefore(shoriDateKanriData.getKijunTimestamp())
+                        || shoriDateKanriData.getKijunTimestamp().isEmpty()
+                        || entity.getChoteiNichiji() == null || entity.getChoteiNichiji().isEmpty()
+                        || (entity.getChoteiNichiji().isBefore(shoriDateKanriData.getKijunTimestamp())
                         && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo()))) {
                     dankaiEntity.setKarisanFlag(仮算定);
                 } else if (shoriDateKanriData.getKijunTimestamp().isBeforeOrEquals(entity.getChoteiNichiji())
-                           && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo())) {
+                        && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo())) {
                     dankaiEntity.setKarisanFlag(本算定);
                 }
             } else {
@@ -365,12 +366,13 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             dankaiEntity.setDogetsuFlag(0);
             if (調定年度.equals(賦課年度)) {
                 if (shoriDateKanriData == null || shoriDateKanriData.getKijunTimestamp() == null
-                    || shoriDateKanriData.getKijunTimestamp().isEmpty()
-                    || (entity.getChoteiNichiji().isBefore(shoriDateKanriData.getKijunTimestamp())
+                        || shoriDateKanriData.getKijunTimestamp().isEmpty()
+                        || entity.getChoteiNichiji() == null || entity.getChoteiNichiji().isEmpty()
+                        || (entity.getChoteiNichiji().isBefore(shoriDateKanriData.getKijunTimestamp())
                         && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo()))) {
                     dankaiEntity.setKarisanFlag(仮算定);
                 } else if (shoriDateKanriData.getKijunTimestamp().isBeforeOrEquals(entity.getChoteiNichiji())
-                           && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo())) {
+                        && entity.getChoteiNendo().equals(shoriDateKanriData.getNendo())) {
                     dankaiEntity.setKarisanFlag(本算定);
                 }
             } else {

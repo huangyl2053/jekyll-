@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000011;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class PnlShokanbaraiShikyuKeteiTuchishoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,8 +26,8 @@ public class PnlShokanbaraiShikyuKeteiTuchishoDiv extends Panel {
      */
     @JsonProperty("txtHakkobi")
     private TextBoxDate txtHakkobi;
-    @JsonProperty("txtBunshoNo")
-    private TextBox txtBunshoNo;
+    @JsonProperty("BunshoBangoInput")
+    private BunshoBangoInputDiv BunshoBangoInput;
     @JsonProperty("lblHakkoShijiMsg")
     private Label lblHakkoShijiMsg;
     @JsonProperty("PnlTestOutput")
@@ -58,21 +60,12 @@ public class PnlShokanbaraiShikyuKeteiTuchishoDiv extends Panel {
     }
 
     /*
-     * gettxtBunshoNo
-     * @return txtBunshoNo
+     * getBunshoBangoInput
+     * @return BunshoBangoInput
      */
-    @JsonProperty("txtBunshoNo")
-    public TextBox getTxtBunshoNo() {
-        return txtBunshoNo;
-    }
-
-    /*
-     * settxtBunshoNo
-     * @param txtBunshoNo txtBunshoNo
-     */
-    @JsonProperty("txtBunshoNo")
-    public void setTxtBunshoNo(TextBox txtBunshoNo) {
-        this.txtBunshoNo = txtBunshoNo;
+    @JsonProperty("BunshoBangoInput")
+    public IBunshoBangoInputDiv getBunshoBangoInput() {
+        return BunshoBangoInput;
     }
 
     /*

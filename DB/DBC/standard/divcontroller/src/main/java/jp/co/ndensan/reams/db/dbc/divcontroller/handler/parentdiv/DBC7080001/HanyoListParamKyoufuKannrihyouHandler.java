@@ -14,8 +14,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.Hany
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -31,6 +34,17 @@ public class HanyoListParamKyoufuKannrihyouHandler {
     private static final RString KEY_項目名付加 = new RString("項目名付加");
     private static final RString KEY_連番付加 = new RString("連番付加");
     private static final RString KEY_日付編集 = new RString("日付編集");
+    private static final RString KEY_給付対象年月FROM = new RString("給付対象年月From");
+    private static final RString KEY_給付対象年月TO = new RString("給付対象年月To");
+    private static final RString KEY_居宅支援事業者コード = new RString("居宅支援事業者コード");
+    private static final RString KEY_居宅支援事業者名 = new RString("居宅支援事業者名");
+    private static final RString KEY_保険者コード = new RString("保険者コード");
+    private static final RString KEY_委託先支援事業者コード = new RString("委託先支援事業者コード");
+    private static final RString KEY_委託先支援事業者名 = new RString("委託先支援事業者名");
+    private static final RString KEY_明細行出力有無 = new RString("明細行出力有無");
+    private static final RString KEY_日付スラッシュ付加 = new RString("日付スラッシュ付加");
+    private static final RString KEY_出力順 = new RString("出力順");
+    private static final RString KEY_出力項目 = new RString("出力項目");
 
     /**
      * コンストラクタです。
@@ -123,5 +137,78 @@ public class HanyoListParamKyoufuKannrihyouHandler {
         }
 
         return parameter;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     */
+    public void pamaRestore() {
+        BatchParameterMap restoreBatchParameterMap = div.getJokenFukugenHozonl().getBtnBatchParameterRestore()
+                .getRestoreBatchParameterMap();
+        RDate 給付対象年月From = restoreBatchParameterMap.getParameterValue(RDate.class, KEY_給付対象年月FROM);
+        div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().clearToValue();
+        if (給付対象年月From != null) {
+            div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().setFromValue(給付対象年月From);
+        }
+        RDate 給付対象年月To = restoreBatchParameterMap.getParameterValue(RDate.class, KEY_給付対象年月TO);
+        if (給付対象年月To != null) {
+            div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().setToValue(給付対象年月To);
+        }
+        RString 居宅支援事業者コード = restoreBatchParameterMap.getParameterValue(RString.class, KEY_居宅支援事業者コード);
+        if (居宅支援事業者コード != null) {
+            div.getChushutsuJokenPanel().getＣｃｄKyotakuSienJigyoshaBango().setNyuryokuShisetsuKodo(居宅支援事業者コード);
+        }
+        RString 居宅支援事業者名 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_居宅支援事業者名);
+        if (居宅支援事業者名 != null) {
+            div.getChushutsuJokenPanel().getＣｃｄKyotakuSienJigyoshaBango().setShisetsuMeisho(居宅支援事業者名);
+        }
+        RString 委託先支援事業者コード = restoreBatchParameterMap.getParameterValue(RString.class, KEY_委託先支援事業者コード);
+        if (委託先支援事業者コード != null) {
+            div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().setNyuryokuShisetsuKodo(委託先支援事業者コード);
+        }
+        RString 委託先支援事業者名 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_委託先支援事業者名);
+        if (委託先支援事業者名 != null) {
+            div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().setShisetsuMeisho(委託先支援事業者名);
+        }
+        RString 明細行出力有無 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_明細行出力有無);
+        if (!RString.isNullOrEmpty(明細行出力有無)) {
+            div.getChushutsuJokenPanel().getRadMeisaigyoSyuturyokuUmu().setSelectedKey(KEY_0);
+        } else {
+            div.getChushutsuJokenPanel().getRadMeisaigyoSyuturyokuUmu().setSelectedKey(KEY_1);
+        }
+        List<RString> csv編集方法リスト = new ArrayList<>();
+        boolean 項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_項目名付加);
+        if (項目名付加) {
+            csv編集方法リスト.add(KEY_項目名付加);
+        }
+        boolean 連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_連番付加);
+        if (連番付加) {
+            csv編集方法リスト.add(KEY_連番付加);
+        }
+        boolean 日付スラッシュ付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_日付スラッシュ付加);
+        if (日付スラッシュ付加) {
+            csv編集方法リスト.add(KEY_日付編集);
+        }
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
+        LasdecCode 保険者コード = restoreBatchParameterMap.getParameterValue(LasdecCode.class, KEY_保険者コード);
+
+        if (保険者コード != null) {
+            div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
+            if (!保険者コード.isEmpty()) {
+                div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(保険者コード);
+            }
+        }
+        Long 出力順 = restoreBatchParameterMap.getParameterValue(Long.class, KEY_出力順);
+        if (出力順 != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701008.getReportId(), 出力順);
+        }
+        RString 出力項目 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力項目);
+        if (RString.isNullOrEmpty(出力項目)) {
+            div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701008.getReportId().getColumnValue(),
+                    SubGyomuCode.DBC介護給付, 出力項目);
+        }
+
     }
 }

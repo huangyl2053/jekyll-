@@ -27,4 +27,5 @@ public class JogaiTokureiSyaJyohouProcessParameter implements IBatchProcessParam
     private HihokenshaNo 個人番号付替対象者被保険者番号;
     private RString 版番号;
     private RString 特定個人情報名コード;
+    private RString 提供基本情報中間テーブル名;
 }

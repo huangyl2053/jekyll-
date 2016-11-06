@@ -328,6 +328,7 @@
          "UeT0511after_dtTeishiYM" character varying(6),
          "UeT0511after_dtYobi4Juminzei" character varying(15),
          "UeT0511after_dtKojinNo" character varying(12),
+         "UeT0511after_kokuhoYoteiSoshitsuKubun" character varying(1),
          "UeT0511_insertDantaiCd" rshare."UDD050ReamsDonyuDantaiCode",
          "UeT0511_insertTimestamp" timestamp without time zone,
          "UeT0511_insertReamsLoginId" text,
@@ -1891,7 +1892,7 @@
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
              ON "Nokumi"."CaT0714shikibetsuCode" = 賦課Newest."shikibetsuCode"
           INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 徴収方法Newest."yokunendoKariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 徴収方法Newest."yokunendoKariNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 徴収方法Newest."yokunendoKariHosokuM" = 年金特徴回付情報."hosokuTsuki"
@@ -2615,7 +2616,7 @@
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
              ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
           INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
@@ -2766,7 +2767,67 @@
             null,
             null,
             null,
-            年金特徴回付情報.*,
+              年金特徴回付情報."insertDantaiCd"
+            , 年金特徴回付情報."insertTimestamp"
+            , 年金特徴回付情報."insertReamsLoginId"
+            , 年金特徴回付情報."insertContextId"
+            , 年金特徴回付情報."isDeleted"
+            , 年金特徴回付情報."updateCount"
+            , 年金特徴回付情報."lastUpdateTimestamp"
+            , 年金特徴回付情報."lastUpdateReamsLoginId"
+            , 年金特徴回付情報."gyomuCode"
+            , 年金特徴回付情報."shoriNendo"
+            , 年金特徴回付情報."tsuchiNaiyoCode"
+            , 年金特徴回付情報."shoriTaishoYM"
+            , 年金特徴回付情報."kisoNenkinNo"
+            , 年金特徴回付情報."nenkinCode"
+            , 年金特徴回付情報."koseiCityCode"
+            , 年金特徴回付情報."renban"
+            , 年金特徴回付情報."shoriTimestamp"
+            , 年金特徴回付情報."renkeiShubetsu"
+            , 年金特徴回付情報."hosokuTsuki"
+            , 年金特徴回付情報."tenbikiTsuki"
+            , 年金特徴回付情報."shikibetsuCode"
+            , 年金特徴回付情報."hihokenshaNo"
+            , 年金特徴回付情報."kokuhoSetaiCode"
+            , 年金特徴回付情報."dtCityCode"
+            , 年金特徴回付情報."dtTokubetsuChoshuGimushaCode"
+            , 年金特徴回付情報."dtTsuchiNaiyoCode"
+            , 年金特徴回付情報."dtBaitaiCode"
+            , 年金特徴回付情報."dtTokubetsuChoshuSeidoCode"
+            , 年金特徴回付情報."dtSakuseiYMD"
+            , 年金特徴回付情報."dtKisoNenkinNo"
+            , 年金特徴回付情報."dtNenkinCode"
+            , 年金特徴回付情報."dtYobi1"
+            , 年金特徴回付情報."dtBirthDay"
+            , 年金特徴回付情報."dtSeibetsu"
+            , 年金特徴回付情報."dtKanaShimei"
+            , 年金特徴回付情報."dtShiftCode1"
+            , 年金特徴回付情報."dtKanjiShimei"
+            , 年金特徴回付情報."dtShiftCode2"
+            , 年金特徴回付情報."dtYubinNo"
+            , 年金特徴回付情報."dtKanaJusho"
+            , 年金特徴回付情報."dtShiftCode3"
+            , 年金特徴回付情報."dtKanjiJusho"
+            , 年金特徴回付情報."dtShiftCode4"
+            , 年金特徴回付情報."dtKakushuKubun"
+            , 年金特徴回付情報."dtShoriKekka"
+            , 年金特徴回付情報."dtKokiIkanCode"
+            , 年金特徴回付情報."dtKakushuYMD"
+            , 年金特徴回付情報."dtKakushuKingaku1"
+            , 年金特徴回付情報."dtKakushuKingaku2"
+            , 年金特徴回付情報."dtKakushuKingaku3"
+            , 年金特徴回付情報."dtYobi2"
+            , 年金特徴回付情報."dtKyosaiNenkinshoshoKigoNo"
+            , 年金特徴回付情報."dtKakushuKingaku4"
+            , 年金特徴回付情報."dtKakushuKingaku5"
+            , 年金特徴回付情報."dtKakushuKingaku6"
+            , 年金特徴回付情報."dtKakushuKingaku7"
+            , 年金特徴回付情報."dtKakushuKingaku8"
+            , 年金特徴回付情報."dtTeishiYM"
+            , 年金特徴回付情報."dtYobi4Juminzei"
+            , 年金特徴回付情報."dtKojinNo"
+            , 年金特徴回付情報."kokuhoYoteiSoshitsuKubun",
             null,
             null,
             null,
@@ -3295,7 +3356,7 @@
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
              ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
           INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
@@ -3647,7 +3708,7 @@
          "UeT0511_dtTeishiYM" = B."dtTeishiYM",
          "UeT0511_dtYobi4Juminzei" = B."dtYobi4Juminzei",
          "UeT0511_dtKojinNo" = B."dtKojinNo"
-        FROM rgue."UeT0511NenkinTokuchoKaifuJoho" AS B
+        FROM rgdb."UeT0511NenkinTokuchoKaifuJoho" AS B
         WHERE A."honNenkinNo" = B."kisoNenkinNo"
              AND A."honNenkinCode" = B."nenkinCode"
              AND A."honHosokuM" = B."hosokuTsuki"

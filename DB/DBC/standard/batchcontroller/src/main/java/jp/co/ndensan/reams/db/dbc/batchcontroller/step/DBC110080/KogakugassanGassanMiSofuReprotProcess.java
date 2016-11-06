@@ -79,7 +79,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan."
             + "IKogakugassanHoseisumiJikofutangakuOutMapper.get未送付一覧表出力対象データ");
-    private static final ReportId 帳票ID = ReportIdDBC.DBC200033.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBC.DBC200032.getReportId();
     private static final RString メッセージ引数 = new RString("帳票出力順の取得");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
@@ -149,8 +149,8 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
         if (index == INT_1) {
             PageBreaker<GassanHoseizumiJikofutangakuSofuchiranSource> breakPage
                     = new KogakugassanHoseisumiJikofutangakuOutPageBreak(pageBreakKeys);
-            batchReportWriter
-                    = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBC.DBC200033.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         }
         GassanHoseizumiJikofutangakuSofuchiranReport report
@@ -258,7 +258,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
 
     private void get設定値() {
         ChohyoSeigyoHanyo hanyoResult = ChohyoSeigyoHanyoManager.createInstance()
-                .get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票ID, 管理年度, ChohyoSeigyoHanyoKomokuMei.帳票タイトル.get名称());
+                .get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200033.getReportId(), 管理年度, ChohyoSeigyoHanyoKomokuMei.帳票タイトル.get名称());
         if (hanyoResult != null) {
             設定値 = hanyoResult.get設定値();
         } else {

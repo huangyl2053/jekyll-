@@ -171,7 +171,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().setValue(new FlexibleDate(受給者異動情報.get送付年月().toDateString()));
         }
         if (!(照会モード.equals(処理モード) && INT_1 == 履歴番号)
-                && 受給者異動情報.get訂正年月日() != null) {
+                && 受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
             div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
         }
         if (!照会モード.equals(処理モード) || INT_1 != 履歴番号) {
@@ -1171,12 +1171,16 @@ public class JukyushaIdoRenrakuhyoHandler {
             entity.set公費負担上限額減額(Boolean.TRUE);
         }
         entity.set償還払化適用開始年月日(div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
+                getFromValue() == null ? null : div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
                 getFromValue().toDateString());
         entity.set償還払化適用終了年月日(div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
+                getToValue() == null ? null : div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
                 getToValue().toDateString());
         entity.set給付率引下げ適用開始年月日(div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().
+                getFromValue() == null ? null : div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().
                 getFromValue().toDateString());
         entity.set給付率引下げ適用終了年月日(div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().
+                getToValue() == null ? null : div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().
                 getToValue().toDateString());
         entity.set認定申請中区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                 getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey());

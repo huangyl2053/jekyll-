@@ -29,6 +29,7 @@ public class KubunShikyuGendogakuHandler {
 
     private final KubunShikyuGendogakuDiv div;
     private static final RString 入力前の状態に戻る = new RString("btnReset");
+    private static final RString 保存する = new RString("btnUpdate");
 
     /**
      * コンストラクタです。
@@ -55,8 +56,11 @@ public class KubunShikyuGendogakuHandler {
             }
             FlexibleYearMonth teikyoshuryoYM = result.toEntity().getTeikyoshuryoYM();
             if (teikyoshuryoYM != null) {
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
                 row.setDefaultDataName3(teikyoshuryoYM.wareki()
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
+            } else {
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
             }
             if (result.toEntity().getServiceShuruiMeisho() != null) {
                 row.setDefaultDataName4(result.toEntity().getServiceShuruiMeisho());
@@ -76,11 +80,12 @@ public class KubunShikyuGendogakuHandler {
     public void modify(dgServiceShurui_Row row) {
         div.getServiceShuruiShousai().getTxtServiceCode().setValue(row.getDefaultDataName1());
         div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().setValue(new RDate(row.getDefaultDataName2().toString()));
-        if (!row.getDefaultDataName3().isNullOrEmpty()) {
+        if ((!row.getDefaultDataName3().isEmpty()) && row.getDefaultDataName3() != null) {
             div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().setValue(new RDate(row.getDefaultDataName3().toString()));
         }
         div.getServiceShuruiShousai().getTxtServiceMeisho().setValue(row.getDefaultDataName4());
         div.getServiceShuruiShousai().getTxtServiceRyakusho().setValue(row.getDefaultDataName5());
+        div.getServiceShuruiShousai().getDdlServiceBunruiCode().setSelectedKey(row.getDefaultDataName6());
     }
 
     /**
@@ -104,7 +109,11 @@ public class KubunShikyuGendogakuHandler {
         div.getBtnTsuika().setDisabled(false);
         List<dgServiceShurui_Row> dataSource = div.getDgServiceShurui().getDataSource();
         for (dgServiceShurui_Row row : dataSource) {
-            row.setDeleteButtonState(DataGridButtonState.Enabled);
+            if (row.getDefaultDataName3() != null && (!row.getDefaultDataName3().isEmpty())) {
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+            } else {
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
+            }
             row.setModifyButtonState(DataGridButtonState.Enabled);
         }
     }
@@ -143,6 +152,7 @@ public class KubunShikyuGendogakuHandler {
      */
     public void setCommonButtonVisible(boolean flag) {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(入力前の状態に戻る, flag);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(保存する, flag);
     }
 
     /**
@@ -175,7 +185,7 @@ public class KubunShikyuGendogakuHandler {
     public KaigoServiceShurui setResult修正(KaigoServiceShurui result) {
         return result.createBuilderForEdit()
                 .setサービス種類名称(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
-                .setサービス分類コード(Code.EMPTY)
+                .setサービス分類コード(new Code(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
                 .setサービス種類略称(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue())
                 .set提供終了年月(new FlexibleYearMonth(div.getServiceShuruiShousai()
                                 .getTxtTeikyoShuryoYM().getValue().getYearMonth().toDateString()))

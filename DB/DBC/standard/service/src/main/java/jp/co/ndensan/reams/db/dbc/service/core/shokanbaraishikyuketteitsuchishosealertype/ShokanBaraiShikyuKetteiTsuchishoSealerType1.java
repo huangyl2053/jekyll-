@@ -19,15 +19,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.daikoprint.DaikoPrintItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -38,7 +31,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.DaikoPrintFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -128,16 +120,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD(),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD());
+        RString 文書番号 = batchPram.get文書番号();
 
-        IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
-        AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
-        宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-        宛先builder.set基準日(batchPram.getHakkoYMD());
-        宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
-        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
-        SofubutsuAtesakiSource atesakiSource
-                = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
         RString タイトル = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_5, ONE, FlexibleDate.getNowDate());
         RString 通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
@@ -167,6 +151,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                     pageCount++;
                 }
             }
+            SofubutsuAtesakiSource atesakiSource
+                    = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(shiharai.get宛先情報()).build()).buildSource();
             sealer = create帳票ソースデータ(sealer, count, ninshoshaSource, shiharai, batchPram, 文書番号, 通知文,
                     情報文, タイトル, atesakiSource, pageCount);
             count++;
@@ -222,20 +208,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         抽出条件.add(抽出条件Builder.toRString());
         List<Decimal> ページ数 = new ArrayList<>();
         ページ数.add(Decimal.ONE);
-        // TODO 出力順関連
-//        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().
-//                get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(),
-//                        Long.parseLong(batchPram.getSyutujunId().toString()));
-        List<RString> 出力順項目 = new ArrayList<>();
-        List<RString> 改ページ項目 = new ArrayList<>();
-//        if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
-//            for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
-//                出力順項目.add(sortItem.get項目ID());
-//                if (sortItem.is改頁項目()) {
-//                    改ページ項目.add(sortItem.get項目ID());
-//                }
-//            }
-//        }
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         DaikoPrintItem daikoPrintItem = new DaikoPrintItem(SubGyomuCode.DBC介護給付,
                 導入団体クラス.getLasdecCode_(), 導入団体クラス.get市町村名(),
@@ -243,7 +215,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 ReportIdDBC.DBC100004.getReportName(),
                 ReportId.代行プリント送付票チェックなし.value(),
                 帳票名, ページ数, 抽出条件,
-                出力順項目, 改ページ項目, Collections.<RString>emptyList());
+                Collections.<RString>emptyList(),
+                Collections.<RString>emptyList(), Collections.<RString>emptyList());
         IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(daikoPrintItem);
         return new TensoData(帳票ソースデータ, daikoPrint);
     }
@@ -476,19 +449,16 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setTsuban2(RString.EMPTY);
         if (ShiharaiHohoKubun.窓口払.getコード().equals(business.get支払方法区分コード())) {
             ketteiTsuchiShoSealer.setTorikeshi1(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshi2(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshiMochimono1(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshiMochimono2(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshiShiharaibasho(RString.EMPTY);
-            ketteiTsuchiShoSealer.setTorikeshiShiharaikikan(RString.EMPTY);
+            ketteiTsuchiShoSealer.setTorikeshi2(記号_星);
+            
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())) {
             ketteiTsuchiShoSealer.setTorikeshi1(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshi2(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshiMochimono1(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshiMochimono2(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshiShiharaibasho(記号_星);
-            ketteiTsuchiShoSealer.setTorikeshiShiharaikikan(記号_星);
+            ketteiTsuchiShoSealer.setTorikeshi2(RString.EMPTY);
         }
+        ketteiTsuchiShoSealer.setTorikeshiMochimono1(RString.EMPTY);
+        ketteiTsuchiShoSealer.setTorikeshiMochimono2(RString.EMPTY);
+        ketteiTsuchiShoSealer.setTorikeshiShiharaibasho(RString.EMPTY);
+        ketteiTsuchiShoSealer.setTorikeshiShiharaikikan(RString.EMPTY);
         return ketteiTsuchiShoSealer;
     }
 

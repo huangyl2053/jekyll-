@@ -242,7 +242,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
     protected void afterExecute() {
         csvWriter.close();
         if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(一覧ファイルパス, accessLogUUID);
         } else {
             manager.spool(一覧ファイルパス);

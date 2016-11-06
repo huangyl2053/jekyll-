@@ -32,26 +32,24 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
     private final List<RString> kofuJiyulist;
     private final List<RString> kaishuJiyulist;
     private final RString psmShikibetsuTaisho;
-    private final boolean isSaisinJohoFlg;
-    private final boolean isMikaisyushaList;
+    private final RString 出力順;
 
     /**
      * 非公開コンストラクタです。
      *
-     * @param 証発行モード RString
-     * @param 交付開始日 FlexibleDate
-     * @param 交付終了日 FlexibleDate
-     * @param 回収開始日 FlexibleDate
-     * @param 回収終了日 FlexibleDate
+     * @param 証発行モード 証発行モード
+     * @param 交付開始日 交付開始日
+     * @param 交付終了日 交付終了日
+     * @param 回収開始日 回収開始日
+     * @param 回収終了日 回収終了日
      * @param 交付開始日あり 交付開始日あり
      * @param 交付終了日あり 交付終了日あり
      * @param 回収開始日あり 回収開始日あり
      * @param 回収終了日あり 回収終了日あり
-     * @param 交付事由 List<RString>
-     * @param 回収事由 List<RString>
-     * @param 最新情報フラグ boolean
-     * @param is未回収者出力 boolean
-     * 
+     * @param 交付事由 交付事由リスト
+     * @param 回収事由 回収事由リスト
+     * @param psmShikibetsuTaisho 宛名識別対象取得キー
+     * @param 出力順 出力順
      */
     private HihokenshashoHakkoKanriboMybatisParameter(
             RString 証発行モード,
@@ -66,8 +64,7 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
             List<RString> 交付事由,
             List<RString> 回収事由,
             RString psmShikibetsuTaisho,
-            boolean 最新情報フラグ,
-            boolean is未回収者出力) {
+            RString 出力順) {
         this.akasihakouMod = 証発行モード;
         this.koufukayisihi = 交付開始日;
         this.koufusiuryouhi = 交付終了日;
@@ -80,23 +77,21 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
         this.kofuJiyulist = 交付事由;
         this.kaishuJiyulist = 回収事由;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
-        this.isSaisinJohoFlg = 最新情報フラグ;
-        this.isMikaisyushaList = is未回収者出力;
+        this.出力順 = 出力順;
     }
-    
-    
+
     /**
      * 被保険者証発行管理簿_バッチ用のパラメータクラス作成
-     * @param 証発行モード RString
-     * @param 交付開始日 FlexibleDate
-     * @param 交付終了日 FlexibleDate
-     * @param 回収開始日 FlexibleDate
-     * @param 回収終了日 FlexibleDate
-     * @param 交付事由 List<RString>
-     * @param 回収事由 List<RString>
-     * @param psmShikibetsuTaisho PSM
-     * @param 最新情報フラグ boolean
-     * @param 出力対象 RString
+     *
+     * @param 証発行モード 証発行モード
+     * @param 交付開始日 交付開始日
+     * @param 交付終了日 交付終了日
+     * @param 回収開始日 回収開始日
+     * @param 回収終了日 回収終了日
+     * @param 交付事由 交付事由リスト
+     * @param 回収事由 回収事由リスト
+     * @param psmShikibetsuTaisho 宛名識別対象取得キー
+     * @param 出力順 出力順
      * @return 被保険者証発行管理簿_バッチ用のパラメータ
      */
     public static HihokenshashoHakkoKanriboMybatisParameter create_Param(
@@ -108,14 +103,11 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
             List<RString> 交付事由,
             List<RString> 回収事由,
             RString psmShikibetsuTaisho,
-            boolean 最新情報フラグ,
-            RString 出力対象
-            ) {
+            RString 出力順) {
         boolean 交付開始日あり = false;
         boolean 交付終了日あり = false;
         boolean 回収開始日あり = false;
         boolean 回収終了日あり = false;
-        boolean is未回収者出力 = false;
         if (交付開始日 != null && !交付開始日.isEmpty()) {
             交付開始日あり = true;
         }
@@ -127,9 +119,6 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
         }
         if (回収終了日 != null && !回収終了日.isEmpty()) {
             回収終了日あり = true;
-        }
-        if (出力対象.equals(new RString("2"))) {
-            is未回収者出力 = true;
         }
         return new HihokenshashoHakkoKanriboMybatisParameter(
                 証発行モード,
@@ -144,8 +133,7 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
                 交付事由,
                 回収事由,
                 psmShikibetsuTaisho,
-                最新情報フラグ,
-                is未回収者出力);
+                出力順);
     }
 
 }
