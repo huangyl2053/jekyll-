@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dba.definition.processprm.dba140010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -45,9 +47,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private Code idouJiyu_tensyutu;
     private Code idouJiyu_sibou;
     private Code idouJiyu_tenkyo;
-    private RString psmShikibetsuTaisho;
-    private RString orderBy;
-    private boolean orderByFlag;
+    private RString PsmShikibetsuTaisho;
 
     /**
      * コンストラクタ。
@@ -86,9 +86,18 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     /**
      * Mybatisのパラメータを作成します。
      *
+     * @param shutsuryokujun 出力順
+     * @param key 宛名キー
      * @return JyukiRendoTorokushaListBatchMybatisParameter
      */
-    public JyukiRendoTorokushaListBatchMybatisParameter toJyukiRendoTorokushaListBatchMybatisParameter() {
+    public JyukiRendoTorokushaListBatchMybatisParameter toJyukiRendoTorokushaListBatchMybatisParameter(
+            RString shutsuryokujun,
+            IShikibetsuTaishoPSMSearchKey key) {
+        Boolean shutsuryokujunFlg = true;
+        if (shutsuryokujun == null || shutsuryokujun.isEmpty()) {
+
+            shutsuryokujunFlg = false;
+        }
         return new JyukiRendoTorokushaListBatchMybatisParameter(
                 konkaikaishiYMDHMS,
                 konkaishuryoYMDHMS,
@@ -106,8 +115,9 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
                 idouJiyu_tensyutu,
                 idouJiyu_sibou,
                 idouJiyu_tenkyo,
-                psmShikibetsuTaisho,
-                orderBy,
-                orderByFlag);
+                shutsuryokujun,
+                shutsuryokujunFlg,
+                key
+        );
     }
 }

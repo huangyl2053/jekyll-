@@ -114,7 +114,7 @@ public class KyotakuServiceKeikakuIchiranHandler {
                 row.setYukomuko(MUKO);
             }
 
-            dgList.add(row);
+            dgList.add(0, row);
         }
 
         div.getDgKyotakuServiceKeikakuIchiran().setDataSource(dgList);

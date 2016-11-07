@@ -98,7 +98,7 @@ public class ShakaiFukushiHojinKeigenHandler {
         if (申請情報.get軽減率_分子() != null && 申請情報.get軽減率_分母() != null) {
             dataSource.setKeigenRitsu(new RString(申請情報.get軽減率_分子().toString()).concat("/").concat(申請情報.get軽減率_分母().toString()));
         }
-        if (申請情報.get減免区分() != null) {
+        if (申請情報.get減免区分() != null && !申請情報.get減免区分().isEmpty()) {
             dataSource.setKeigenJiyu(GemmenKubun.toValue(申請情報.get減免区分()).get名称());
         }
         dataSource.setKyotakuServiceOnly(get制限(申請情報.is居宅サービス限定()));

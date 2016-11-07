@@ -55,6 +55,21 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaicho> {
     }
 
     /**
+     * 論理削除フラグが{@code false}となっている、削除されていないデータのみを抽出します。
+     *
+     * @return 論理削除されていない被保険者台帳のList
+     */
+    public IItemList<HihokenshaDaicho> to論理削除データ除外List() {
+        List<HihokenshaDaicho> list = new ArrayList<>();
+        for (HihokenshaDaicho daicho : daichoList) {
+            if (!daicho.is論理削除フラグ()) {
+                list.add(daicho);
+            }
+        }
+        return ItemList.of(list);
+    }
+
+    /**
      * 被保険者台帳Listから、資格を取得してから喪失するまでの、1期間分の履歴を抽出します。
      *
      * @param 資格取得日 資格取得日

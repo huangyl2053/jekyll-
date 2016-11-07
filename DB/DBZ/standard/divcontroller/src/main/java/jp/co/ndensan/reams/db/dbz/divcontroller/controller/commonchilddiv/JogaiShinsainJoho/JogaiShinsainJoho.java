@@ -33,10 +33,9 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class JogaiShinsainJoho {
 
-    private static final RString 追加 = new RString("追加");
-    private static final RString 選択 = new RString("選択");
     private static final RString 所属機関_TMP = new RString("・");
-
+    private static final RString 入力モード = new RString("入力");
+    
     /**
      * 画面項目の初期化を行します。
      *
@@ -45,7 +44,7 @@ public class JogaiShinsainJoho {
      */
     public ResponseData<JogaiShinsainJohoDiv> onLoad(JogaiShinsainJohoDiv div) {
         getHandler(div).画面項目にセットされている値をクリア();
-        getHandler(div).set画面状態();
+        getHandler(div).set画面初期状態();
         set画面情報(div);
         return ResponseData.of(div).respond();
     }
@@ -58,7 +57,9 @@ public class JogaiShinsainJoho {
      */
     public ResponseData<JogaiShinsainJohoDiv> onClick_btnShinkiTsuika(JogaiShinsainJohoDiv div) {
         div.getShinsakaiIinJoho().setReadOnly(false);
-        div.setHdnModel(追加);
+        div.getTxtShinsakaiIinCode().setDisabled(false);
+        div.getBtnShinsakaiIinGuide().setDisabled(false);
+        div.getBtnToroku().setDisabled(false);
         getHandler(div).画面項目にセットされている値をクリア();
         return ResponseData.of(div).respond();
     }
@@ -81,10 +82,12 @@ public class JogaiShinsainJoho {
      * @return ResponseData<JogaiShinsainJohoDiv>
      */
     public ResponseData<JogaiShinsainJohoDiv> onSelect_ShinsakaiIinIchiran(JogaiShinsainJohoDiv div) {
-        div.setHdnModel(選択);
         RString 審査会委員コード = div.getDgShinsakaiIinIchiran().getActiveRow().getShinsakaiIinCode();
         set所属機関一覧(審査会委員コード, div, true);
         div.getTxtShinsakaiIinCode().setValue(審査会委員コード);
+        div.getTxtShinsakaiIinCode().setDisabled(true);
+        div.getBtnShinsakaiIinGuide().setDisabled(true);
+        div.getBtnToroku().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -203,6 +206,45 @@ public class JogaiShinsainJoho {
     }
 
     private void set画面情報(JogaiShinsainJohoDiv div) {
+        ShinsakaiIinItiranData shinsakaiIinItiranData = DataPassingConverter.deserialize(
+                div.getHdnShinsakaiIinItiran(), ShinsakaiIinItiranData.class);
+
+        if (shinsakaiIinItiranData != null) {
+            // 修正状態(二回目以降ダイアログ画面を呼び出し)
+            List<ShinsakaiIinItiran> shinsakaiIinItiranList = shinsakaiIinItiranData.getShinsakaiIinItiranList();
+            List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList<>();
+            for (ShinsakaiIinItiran joho : shinsakaiIinItiranList) {
+                rowList.add(new dgShinsakaiIinIchiran_Row(joho.getShinsakaiIinCode(), joho.getShimei(), joho.getShozokuKikan()));
+            }
+            div.getDgShinsakaiIinIchiran().setDataSource(rowList);
+            
+        } else {
+            // 新規状態(初回ダイアログ画面を呼び出し)
+            if (入力モード.equals(div.getHdnModel())) {
+                // 前回の除外審査会委員情報を取得する。
+                get前回除外審査会委員情報(div);
+            } else {
+                // 今回の除外審査会委員情報を取得する。
+                get今回除外審査会委員情報(div);
+            }
+        }
+    }
+
+    private void get前回除外審査会委員情報(JogaiShinsainJohoDiv div) {
+        RString 申請書管理番号 = div.getHdnShinseishoKanriNo();
+        List<ShinsakaiIinRelateJoho> johoList = getService().get審査会委員一覧検索して前回審査会委員情報(申請書管理番号).records();
+        List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList<>();
+        for (ShinsakaiIinRelateJoho joho : johoList) {
+            RStringBuilder 所属機関 = new RStringBuilder();
+            所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), joho.get主治医医療機関コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
+            rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), joho.get介護認定審査会委員氏名().value(), 所属機関.toRString()));
+        }
+        div.getDgShinsakaiIinIchiran().setDataSource(rowList);
+    }
+            
+    private void get今回除外審査会委員情報(JogaiShinsainJohoDiv div) {
         RString 申請書管理番号 = div.getHdnShinseishoKanriNo();
         List<ShinsakaiIinRelateJoho> johoList = getService().get審査会委員一覧検索して審査会委員情報(申請書管理番号).records();
         List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList<>();
@@ -215,7 +257,7 @@ public class JogaiShinsainJoho {
         }
         div.getDgShinsakaiIinIchiran().setDataSource(rowList);
     }
-
+    
     private RStringBuilder nullToEmpty(RStringBuilder 所属機関, RString 名称) {
         if (!RString.isNullOrEmpty(名称)) {
             if (RString.isNullOrEmpty(所属機関.toRString())) {
@@ -235,5 +277,4 @@ public class JogaiShinsainJoho {
     private JogaiShinsainJohoFinder getService() {
         return JogaiShinsainJohoFinder.createInstance();
     }
-
 }

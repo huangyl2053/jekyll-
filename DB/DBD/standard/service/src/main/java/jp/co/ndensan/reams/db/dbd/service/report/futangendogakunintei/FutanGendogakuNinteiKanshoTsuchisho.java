@@ -12,10 +12,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.NinteiKoshinTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.AtesakiPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.ShikibetsuTaishoPSMMybatisParameter;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogakunintei.IAtesakiPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogakunintei.IShikibetsuTaishoPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.ninteikoshintsuchisho.NinteiKoshinTsuchishoService;
@@ -33,7 +31,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoD
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7068ChohyoBunruiKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
@@ -42,10 +39,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
@@ -90,7 +85,8 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
     /**
      * {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiKanshoTsuchisho}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiKanshoTsuchisho}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiKanshoTsuchisho}のインスタンス
      */
     public static FutanGendogakuNinteiKanshoTsuchisho createInstance() {
         return InstanceProvider.create(FutanGendogakuNinteiKanshoTsuchisho.class);
@@ -149,7 +145,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
         Ninshosha ninshosha = get認証者情報(new FlexibleDate(発行日.toDateString()));
 
-        if (new RString("DBD100008_FutanGendoGakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
+        if (new RString("DBD100008_FutanGendogakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
             int パターン番号;
             if (介護保険負担限度額認定.get旧措置者区分() == null || 介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
                 パターン番号 = 1;

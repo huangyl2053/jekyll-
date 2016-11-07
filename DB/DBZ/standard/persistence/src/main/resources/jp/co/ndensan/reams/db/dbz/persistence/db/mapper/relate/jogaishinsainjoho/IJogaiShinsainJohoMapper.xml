@@ -62,16 +62,58 @@
             , TBL4."sonotaKikanCode" AS TBL4_sonotaKikanCode
             , TBL5."shichosonCode" AS TBL5_shichosonCode
             , TBL2."jogaiTaishoShinsakaiIinCode" AS TBL2_jogaiTaishoShinsakaiIinCode
-        FROM rgdb."DbT5594ShinsakaiIinJoho" AS TBL3
-          LEFT JOIN rgdb."DbT5590ShinsakaiIinJogaiJoho" AS TBL2
+        FROM rgdb."DbT5590ShinsakaiIinJogaiJoho" AS TBL2
+          INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS TBL3
             ON TBL2."jogaiTaishoShinsakaiIinCode" = TBL3."shinsakaiIinCode"
-          INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS TBL1 
-            ON TBL1."zenkaiShinseishoKanriNo" = TBL2."shinseishoKanriNo"
-          LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS TBL4 
-            ON TBL2."jogaiTaishoShinsakaiIinCode" = TBL4."shinsakaiIinCode"
+          INNER JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS TBL4 
+            ON TBL3."shinsakaiIinCode" = TBL4."shinsakaiIinCode"
+            AND TBL4.remban = 1
           INNER JOIN rgdb."DbT7051KoseiShichosonMaster"AS TBL5
             ON TBL5."shoKisaiHokenshaNo" = TBL4."shoKisaiHokenshaNo"
-          WHERE TBL1."zenkaiShinseishoKanriNo" = #{shinseishoKanriNo}
+          INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS TBL1 
+            ON TBL1."zenkaiShinseishoKanriNo" = TBL2."shinseishoKanriNo"
+          WHERE TBL1."shinseishoKanriNo" = #{shinseishoKanriNo}
+            ORDER BY TBL2.renban
+    </select>
+    
+    <select resultOrdered="true" id="getShinsakaiIinJoho2" resultMap="resultMap_ShinsakaiIinJohoEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+            TBL3."shinsakaiIinCode" AS TBL3_shinsakaiIinCode
+            , TBL3."shinsakaiIinKaishiYMD" AS TBL3_shinsakaiIinKaishiYMD
+            , TBL3."shinsakaiIinShuryoYMD" AS TBL3_shinsakaiIinShuryoYMD
+            , TBL3."shinsakaiIinShimei" AS TBL3_shinsakaiIinShimei
+            , TBL3."shinsakaiIinKanaShimei" AS TBL3_shinsakaiIinKanaShimei
+            , TBL3."seibetsu" AS TBL3_seibetsu
+            , TBL3."shinsakaiIinShikakuCode" AS TBL3_shinsakaiIinShikakuCode
+            , TBL3."shinsainYusoKubun" AS TBL3_shinsainYusoKubun
+            , TBL3."tantoChikuCode" AS TBL3_tantoChikuCode
+            , TBL3."yubinNo" AS TBL3_yubinNo
+            , TBL3."Jusho" AS TBL3_Jusho
+            , TBL3."telNo" AS TBL3_telNo
+            , TBL3."faxNo" AS TBL3_faxNo
+            , TBL3."seinengappiYMD" AS TBL3_seinengappiYMD
+            , TBL3."biko" AS TBL3_biko
+            , TBL3."haishiFlag" AS TBL3_haishiFlag
+            , TBL3."haishiYMD" AS TBL3_haishiYMD
+            , TBL4."remban" AS TBL4_remban
+            , TBL4."shoKisaiHokenshaNo" AS TBL4_shoKisaiHokenshaNo
+            , TBL4."shujiiIryokikanCode" AS TBL4_shujiiIryokikanCode
+            , TBL4."shujiiCode" AS TBL4_shujiiCode
+            , TBL4."ninteichosaItakusakiCode" AS TBL4_ninteichosaItakusakiCode
+            , TBL4."ninteiChosainNo" AS TBL4_ninteiChosainNo
+            , TBL4."sonotaKikanCode" AS TBL4_sonotaKikanCode
+            , TBL5."shichosonCode" AS TBL5_shichosonCode
+            , TBL2."jogaiTaishoShinsakaiIinCode" AS TBL2_jogaiTaishoShinsakaiIinCode
+        FROM rgdb."DbT5590ShinsakaiIinJogaiJoho" AS TBL2
+          INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS TBL3
+            ON TBL2."jogaiTaishoShinsakaiIinCode" = TBL3."shinsakaiIinCode"
+          INNER JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS TBL4 
+            ON TBL3."shinsakaiIinCode" = TBL4."shinsakaiIinCode"
+            AND TBL4.remban = 1
+          INNER JOIN rgdb."DbT7051KoseiShichosonMaster"AS TBL5
+            ON TBL5."shoKisaiHokenshaNo" = TBL4."shoKisaiHokenshaNo"
+          WHERE TBL2."shinseishoKanriNo" = #{shinseishoKanriNo}
+            ORDER BY TBL2.renban
     </select>
     
     <select resultOrdered="true" id="getShinsakaiIinJohoByCode" resultMap="resultMap_ShinsakaiIinJohoEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">

@@ -1242,7 +1242,11 @@ public class NinteiChosaIraiHandler {
                     row.getHihokenshaShimei());
             itemList.add(item);
             if (両面出力フラグ) {
-                itemList.add(item);
+                itemList.add(new ChosahyoTokkijikoBusiness(
+                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
             }
         }
         return itemList;

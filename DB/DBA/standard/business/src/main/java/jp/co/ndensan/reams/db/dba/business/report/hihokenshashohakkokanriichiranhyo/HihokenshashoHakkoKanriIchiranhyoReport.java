@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo;
 
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihokenshashoHakkoKanriIchiranhyoEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class HihokenshashoHakkoKanriIchiranhyoReport extends Report<HihokenshashoHakkoKanriIchiranhyoReportSource> {
 
-    private final HihokenshashoHakkoKanriIchiranhyoEntity headEntity;
+//    private final HihokenshashoHakkoKanriIchiranhyoEntity headEntity;
+    private final HihohenshashoHakkoKanriboChohyoDataSakuseiEntity headEntity;
+//    private List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> headEntity;
 
     /**
      * インスタンスを生成します。
@@ -25,7 +27,7 @@ public class HihokenshashoHakkoKanriIchiranhyoReport extends Report<Hihokenshash
      * @param headEntity 被保険者証発行管理一覧表ヘッダのEntity
      */
     public HihokenshashoHakkoKanriIchiranhyoReport(
-            HihokenshashoHakkoKanriIchiranhyoEntity headEntity) {
+            HihohenshashoHakkoKanriboChohyoDataSakuseiEntity headEntity) {
         this.headEntity = headEntity;
     }
 

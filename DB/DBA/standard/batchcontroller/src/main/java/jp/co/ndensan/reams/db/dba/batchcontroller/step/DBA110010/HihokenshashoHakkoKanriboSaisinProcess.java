@@ -109,6 +109,7 @@ public class HihokenshashoHakkoKanriboSaisinProcess extends BatchKeyBreakBase<Ak
                 processParameter.getKofuJiyulist(),
                 processParameter.getKaishuJiyulist(),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
+                processParameter.isSeyisinjyohoflg(),
                 出力順Entity.get出力順OrderBy().replace(ORDERBYCLAUSE, COMMA));
         relateEntity = new AkasiHakouKanriRelateEntity();
         relateEntity.setAkasihakoumode(processParameter.getAkasihakoumod());
@@ -161,14 +162,20 @@ public class HihokenshashoHakkoKanriboSaisinProcess extends BatchKeyBreakBase<Ak
         HihohenshashoHakoKanriboCsvDataSakusei checkListCsv = new HihohenshashoHakoKanriboCsvDataSakusei();
         csvWriter.writeLine(checkListCsv.getShohakkoKanriCSVDataListAddRenban(
                 entity, processParameter.isKoumukumeyifukaflg(),
-                processParameter.isHizikehensyuuflg(), renban));
+                processParameter.isHizikehensyuuflg()
+        //                , renban
+        ));
         ExpandedInformation expandedInformations = new ExpandedInformation(new Code(ログコード),
                 ログ表示名, entity.getHihokenshaNo());
         personalDataList.add(PersonalData.of(entity.getShikibetsuCode(), expandedInformations));
         HihohenshashoHakkoKanriboChohyoDataSakusei chohyoDataSakusei = new HihohenshashoHakkoKanriboChohyoDataSakusei();
-        relateEntity.setAkasiHakouKanriEntity(entity);
+//        relateEntity.setAkasiHakouKanriEntity(entity);
+        List<AkasiHakouKanriEntity> entities = new ArrayList<>();
+        entities.add(entity);
+        relateEntity.setAkasiHakouKanriEntityList(entities);
         HihokenshashoHakkoKanriIchiranhyoReport report = new HihokenshashoHakkoKanriIchiranhyoReport(
-                chohyoDataSakusei.getShohakkoKanriChohyoDataList(relateEntity, 出力順Entity));
+                chohyoDataSakusei.getShohakkoKanriChohyoDataList(relateEntity).get(0) //                , 出力順Entity
+                );
         report.writeBy(reportSourceWriter);
     }
 
@@ -187,7 +194,7 @@ public class HihokenshashoHakkoKanriboSaisinProcess extends BatchKeyBreakBase<Ak
         return ReportUtil.get出力順情報(HihohenshashoHakkoKanriboChohyoDataSakusei.ShutsuryokujunEnum.class,
                 SubGyomuCode.DBA介護資格,
                 ReportIdDBA.DBA200004.getReportId(),
-                processParameter.getSyuturyokujunid());
+                Long.parseLong(processParameter.getSyuturyokujunid().toString()));
     }
 
 }

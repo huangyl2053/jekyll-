@@ -185,6 +185,50 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                     return true;
                 }
 
+            },
+    減免減額_適用期間重複のチェックon確定 {
+                /**
+                 * 承認情報確認するボタン押下時、減免減額_適用期間重複のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not減免減額_適用期間重複です、false:減免減額_適用期間重複です。
+                 */
+                @Override
+                public boolean apply(FutangendogakuShinseiDiv div) {
+                    List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+                    if (div.getRadKetteiKubun().getSelectedKey().equals(new RString("key1"))) {
+                        return true;
+                    }
+                    if (rows.size() > 1 && div.getDgShinseiList().getActiveRow() != null) {
+                        rows.remove(div.getDgShinseiList().getActiveRow().getId());
+                    } else {
+                        return true;
+                    }
+                    for (dgShinseiList_Row row : rows) {
+                        if (row.getTxtYukoKigenYMD().getValue() != null && row.getTxtTekiyoYMD().getValue() != null
+                        && !row.getTxtYukoKigenYMD().getValue().isEmpty() && !row.getTxtTekiyoYMD().getValue().isEmpty()
+                        && row.getKetteiKubun().equals(new RString("承認する"))) {
+                            if (div.getTxtTekiyoYMD().getValue().isBeforeOrEquals(row.getTxtYukoKigenYMD().getValue())
+                            && div.getTxtYukoKigenYMD().getValue().isAfterOrEquals(row.getTxtTekiyoYMD().getValue())) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                }
+            },
+    減免減額_要介護認定 {
+                /**
+                 * 承認情報確認するボタン押下時、減免減額_適用期間重複のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not減免減額_適用期間重複です、false:減免減額_適用期間重複です。
+                 */
+                @Override
+                public boolean apply(FutangendogakuShinseiDiv div) {
+                    FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
+                    FlexibleDate 要介護認定終了年月日 = new FlexibleDate(div.getCcdKaigoShikakuKihon().get認定終了年月日().toDateString());
+                    return 適用開始日.isBeforeOrEquals(要介護認定終了年月日);
+                }
             };
-
 }

@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgeng
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.IGemmenGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.IShisetSunyushoInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.ShisetSunyushoInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
@@ -30,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class FutangendogakuShinseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,8 +37,6 @@ public class FutangendogakuShinseiDiv extends Panel {
      */
     @JsonProperty("Header")
     private HeaderDiv Header;
-    @JsonProperty("SetaiJoho")
-    private SetaiJohoDiv SetaiJoho;
     @JsonProperty("ShinseiList")
     private ShinseiListDiv ShinseiList;
     @JsonProperty("ShinseiDetail")
@@ -84,24 +80,6 @@ public class FutangendogakuShinseiDiv extends Panel {
     @JsonProperty("Header")
     public void setHeader(HeaderDiv Header) {
         this.Header = Header;
-    }
-
-    /*
-     * getSetaiJoho
-     * @return SetaiJoho
-     */
-    @JsonProperty("SetaiJoho")
-    public SetaiJohoDiv getSetaiJoho() {
-        return SetaiJoho;
-    }
-
-    /*
-     * setSetaiJoho
-     * @param SetaiJoho SetaiJoho
-     */
-    @JsonProperty("SetaiJoho")
-    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
-        this.SetaiJoho = SetaiJoho;
     }
 
     /*
@@ -309,23 +287,13 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnDispSetaiJoho() {
-        return this.getHeader().getHosokuJoho().getBtnDispSetaiJoho();
+    public ButtonDialog getBtnShotokuJokyo() {
+        return this.getHeader().getHosokuJoho().getBtnShotokuJokyo();
     }
 
     @JsonIgnore
-    public void  setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
-        this.getHeader().getHosokuJoho().setBtnDispSetaiJoho(btnDispSetaiJoho);
-    }
-
-    @JsonIgnore
-    public Button getBtnCloseSetaiJoho() {
-        return this.getHeader().getHosokuJoho().getBtnCloseSetaiJoho();
-    }
-
-    @JsonIgnore
-    public void  setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
-        this.getHeader().getHosokuJoho().setBtnCloseSetaiJoho(btnCloseSetaiJoho);
+    public void  setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
+        this.getHeader().getHosokuJoho().setBtnShotokuJokyo(btnShotokuJokyo);
     }
 
     @JsonIgnore
@@ -369,23 +337,18 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return this.getHeader().getCcdAtenaInfo();
-    }
-
-    @JsonIgnore
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return this.getHeader().getCcdKaigoShikakuKihon();
     }
 
     @JsonIgnore
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return this.getHeader().getCcdShisetsuNyushoInfo();
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return this.getHeader().getCcdAtenaInfo();
     }
 
     @JsonIgnore
-    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
-        return this.getSetaiJoho().getCcdSetaiShotokuIchiran();
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return this.getHeader().getCcdShisetsuNyushoInfo();
     }
 
     @JsonIgnore
