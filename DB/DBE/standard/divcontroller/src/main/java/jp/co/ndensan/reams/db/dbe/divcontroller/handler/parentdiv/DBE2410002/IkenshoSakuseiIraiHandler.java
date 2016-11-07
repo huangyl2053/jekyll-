@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.Sh
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudou;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.ShujiiIkenshoTeishutsuIraishoBusiness;
-import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouBodyItem;
@@ -28,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
@@ -97,6 +97,7 @@ public class IkenshoSakuseiIraiHandler {
     private static final RString 文字列_まで = new RString("まで");
     private static final RString 連結 = new RString("～");
     private static final RString 初期連番 = new RString("*000001#");
+    private static final RString CONFIGVALUE1 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -137,6 +138,15 @@ public class IkenshoSakuseiIraiHandler {
         RString 介護保険診断命令書 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_介護保険診断命令書);
         RString 介護保険指定医依頼兼主治医意見書提出意見書 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書);
         RString 主治医意見書依頼該当者履歴一覧 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書依頼該当者履歴一覧);
+        RString 意見書用紙タイプ = getConfigValue(ConfigNameDBE.意見書用紙タイプ);
+        List<RString> disabledItem = new ArrayList<>();
+        if (CONFIGVALUE1.equals(意見書用紙タイプ)) {
+            disabledItem.add(SELECTED_KEY0);
+            div.getChkPrint().setDisabledItemsByKey(disabledItem);
+        } else {
+            disabledItem.add(SELECTED_KEY1);
+            div.getChkPrint().setDisabledItemsByKey(disabledItem);
+        }
         List<RString> key = new ArrayList<>();
         if (選択.equals(意見書作成依頼書)) {
             key.add(SELECTED_KEY0);
@@ -149,10 +159,10 @@ public class IkenshoSakuseiIraiHandler {
         }
         div.getChkIrai().setSelectedItemsByKey(key);
         key = new ArrayList<>();
-        if (選択.equals(主治医意見書記入用紙)) {
+        if (選択.equals(主治医意見書記入用紙) && !CONFIGVALUE1.equals(意見書用紙タイプ)) {
             key.add(SELECTED_KEY0);
         }
-        if (選択.equals(主治医意見書記入用紙OCR)) {
+        if (選択.equals(主治医意見書記入用紙OCR) && CONFIGVALUE1.equals(意見書用紙タイプ)) {
             key.add(SELECTED_KEY1);
         }
         if (選択.equals(主治医意見書作成料請求書)) {
@@ -253,7 +263,7 @@ public class IkenshoSakuseiIraiHandler {
      * @param business 主治医意見書記入情報
      * @return 主治医意見書記入情報1
      */
-    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報1_パラメータ(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business) {
+    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報_パラメータ(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business) {
 
         List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
         List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
@@ -307,87 +317,87 @@ public class IkenshoSakuseiIraiHandler {
         itemList.add(item);
         return itemList;
     }
-
-    /**
-     * 主治医意見書記入情報2印刷用パラメータを作成します。
-     *
-     * @param business 主治医意見書記入情報
-     * @return 主治医意見書記入情報2
-     */
-    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報2_パラメータ(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business) {
-
-        List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
-        List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
-        List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
-        IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
-        item.setHokenshaNo1(保険者番号リスト.get(数字_0));
-        item.setHokenshaNo2(保険者番号リスト.get(数字_1));
-        item.setHokenshaNo3(保険者番号リスト.get(数字_2));
-        item.setHokenshaNo4(保険者番号リスト.get(数字_3));
-        item.setHokenshaNo5(保険者番号リスト.get(数字_4));
-        item.setHokenshaNo6(保険者番号リスト.get(数字_5));
-        item.setHihokenshaNo1(被保険者番号リスト.get(数字_0));
-        item.setHihokenshaNo2(被保険者番号リスト.get(数字_1));
-        item.setHihokenshaNo3(被保険者番号リスト.get(数字_2));
-        item.setHihokenshaNo4(被保険者番号リスト.get(数字_3));
-        item.setHihokenshaNo5(被保険者番号リスト.get(数字_4));
-        item.setHihokenshaNo6(被保険者番号リスト.get(数字_5));
-        item.setHihokenshaNo7(被保険者番号リスト.get(数字_6));
-        item.setHihokenshaNo8(被保険者番号リスト.get(数字_7));
-        item.setHihokenshaNo9(被保険者番号リスト.get(数字_8));
-        item.setHihokenshaNo10(被保険者番号リスト.get(数字_9));
-        RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
-                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        item.setShinseiYY1(ninteiShinseiDay.substring(数字_1, 数字_2));
-        item.setShinseiYY2(ninteiShinseiDay.substring(数字_2, 数字_3));
-        item.setShinseiMM1(ninteiShinseiDay.substring(数字_4, 数字_5));
-        item.setShinseiMM2(ninteiShinseiDay.substring(数字_5, 数字_6));
-        item.setShinseiDD1(ninteiShinseiDay.substring(数字_7, 数字_8));
-        item.setShinseiDD2(ninteiShinseiDay.substring(数字_8));
-        itemList.add(item);
-        return itemList;
-    }
-
-    /**
-     * 主治医意見書記入情報3印刷用パラメータを作成します。
-     *
-     * @param business 主治医意見書記入情報
-     * @return 主治医意見書記入情報3
-     */
-    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報3_パラメータ(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business) {
-
-        List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
-        List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
-        List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
-        IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
-        item.setHokenshaNo1(保険者番号リスト.get(数字_0));
-        item.setHokenshaNo2(保険者番号リスト.get(数字_1));
-        item.setHokenshaNo3(保険者番号リスト.get(数字_2));
-        item.setHokenshaNo4(保険者番号リスト.get(数字_3));
-        item.setHokenshaNo5(保険者番号リスト.get(数字_4));
-        item.setHokenshaNo6(保険者番号リスト.get(数字_5));
-        item.setHihokenshaNo1(被保険者番号リスト.get(数字_0));
-        item.setHihokenshaNo2(被保険者番号リスト.get(数字_1));
-        item.setHihokenshaNo3(被保険者番号リスト.get(数字_2));
-        item.setHihokenshaNo4(被保険者番号リスト.get(数字_3));
-        item.setHihokenshaNo5(被保険者番号リスト.get(数字_4));
-        item.setHihokenshaNo6(被保険者番号リスト.get(数字_5));
-        item.setHihokenshaNo7(被保険者番号リスト.get(数字_6));
-        item.setHihokenshaNo8(被保険者番号リスト.get(数字_7));
-        item.setHihokenshaNo9(被保険者番号リスト.get(数字_8));
-        item.setHihokenshaNo10(被保険者番号リスト.get(数字_9));
-        item.setHihokenshaTel(business.get電話番号());
-        RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
-                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        item.setShinseiYY1(ninteiShinseiDay.substring(数字_1, 数字_2));
-        item.setShinseiYY2(ninteiShinseiDay.substring(数字_2, 数字_3));
-        item.setShinseiMM1(ninteiShinseiDay.substring(数字_4, 数字_5));
-        item.setShinseiMM2(ninteiShinseiDay.substring(数字_5, 数字_6));
-        item.setShinseiDD1(ninteiShinseiDay.substring(数字_7, 数字_8));
-        item.setShinseiDD2(ninteiShinseiDay.substring(数字_8));
-        itemList.add(item);
-        return itemList;
-    }
+//
+//    /**
+//     * 主治医意見書記入情報2印刷用パラメータを作成します。
+//     *
+//     * @param business 主治医意見書記入情報
+//     * @return 主治医意見書記入情報2
+//     */
+//    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報2_パラメータ(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business) {
+//
+//        List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
+//        List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
+//        List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
+//        IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
+//        item.setHokenshaNo1(保険者番号リスト.get(数字_0));
+//        item.setHokenshaNo2(保険者番号リスト.get(数字_1));
+//        item.setHokenshaNo3(保険者番号リスト.get(数字_2));
+//        item.setHokenshaNo4(保険者番号リスト.get(数字_3));
+//        item.setHokenshaNo5(保険者番号リスト.get(数字_4));
+//        item.setHokenshaNo6(保険者番号リスト.get(数字_5));
+//        item.setHihokenshaNo1(被保険者番号リスト.get(数字_0));
+//        item.setHihokenshaNo2(被保険者番号リスト.get(数字_1));
+//        item.setHihokenshaNo3(被保険者番号リスト.get(数字_2));
+//        item.setHihokenshaNo4(被保険者番号リスト.get(数字_3));
+//        item.setHihokenshaNo5(被保険者番号リスト.get(数字_4));
+//        item.setHihokenshaNo6(被保険者番号リスト.get(数字_5));
+//        item.setHihokenshaNo7(被保険者番号リスト.get(数字_6));
+//        item.setHihokenshaNo8(被保険者番号リスト.get(数字_7));
+//        item.setHihokenshaNo9(被保険者番号リスト.get(数字_8));
+//        item.setHihokenshaNo10(被保険者番号リスト.get(数字_9));
+//        RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+//                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+//        item.setShinseiYY1(ninteiShinseiDay.substring(数字_1, 数字_2));
+//        item.setShinseiYY2(ninteiShinseiDay.substring(数字_2, 数字_3));
+//        item.setShinseiMM1(ninteiShinseiDay.substring(数字_4, 数字_5));
+//        item.setShinseiMM2(ninteiShinseiDay.substring(数字_5, 数字_6));
+//        item.setShinseiDD1(ninteiShinseiDay.substring(数字_7, 数字_8));
+//        item.setShinseiDD2(ninteiShinseiDay.substring(数字_8));
+//        itemList.add(item);
+//        return itemList;
+//    }
+//
+//    /**
+//     * 主治医意見書記入情報3印刷用パラメータを作成します。
+//     *
+//     * @param business 主治医意見書記入情報
+//     * @return 主治医意見書記入情報3
+//     */
+//    public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報3_パラメータ(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business) {
+//
+//        List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
+//        List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
+//        List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
+//        IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
+//        item.setHokenshaNo1(保険者番号リスト.get(数字_0));
+//        item.setHokenshaNo2(保険者番号リスト.get(数字_1));
+//        item.setHokenshaNo3(保険者番号リスト.get(数字_2));
+//        item.setHokenshaNo4(保険者番号リスト.get(数字_3));
+//        item.setHokenshaNo5(保険者番号リスト.get(数字_4));
+//        item.setHokenshaNo6(保険者番号リスト.get(数字_5));
+//        item.setHihokenshaNo1(被保険者番号リスト.get(数字_0));
+//        item.setHihokenshaNo2(被保険者番号リスト.get(数字_1));
+//        item.setHihokenshaNo3(被保険者番号リスト.get(数字_2));
+//        item.setHihokenshaNo4(被保険者番号リスト.get(数字_3));
+//        item.setHihokenshaNo5(被保険者番号リスト.get(数字_4));
+//        item.setHihokenshaNo6(被保険者番号リスト.get(数字_5));
+//        item.setHihokenshaNo7(被保険者番号リスト.get(数字_6));
+//        item.setHihokenshaNo8(被保険者番号リスト.get(数字_7));
+//        item.setHihokenshaNo9(被保険者番号リスト.get(数字_8));
+//        item.setHihokenshaNo10(被保険者番号リスト.get(数字_9));
+//        item.setHihokenshaTel(business.get電話番号());
+//        RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+//                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+//        item.setShinseiYY1(ninteiShinseiDay.substring(数字_1, 数字_2));
+//        item.setShinseiYY2(ninteiShinseiDay.substring(数字_2, 数字_3));
+//        item.setShinseiMM1(ninteiShinseiDay.substring(数字_4, 数字_5));
+//        item.setShinseiMM2(ninteiShinseiDay.substring(数字_5, 数字_6));
+//        item.setShinseiDD1(ninteiShinseiDay.substring(数字_7, 数字_8));
+//        item.setShinseiDD2(ninteiShinseiDay.substring(数字_8));
+//        itemList.add(item);
+//        return itemList;
+//    }
 
     /**
      * 意見書作成依頼書情報印刷用パラメータを作成します。

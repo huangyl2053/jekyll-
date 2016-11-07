@@ -12,19 +12,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.Sh
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudou;
-import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
-import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
-import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
-import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouReportJoho;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.IkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiValidationHandler;
-import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshosakuseiirai.IkenshoSakuseiIraiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiReportOutputService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -32,7 +24,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -71,9 +72,6 @@ public class IkenshoSakuseiIrai {
     private static final RString SELECTED_KEY5 = new RString("key5");
     private static final RString 依頼書印刷処理 = new RString("依頼書印刷処理");
     private static final int 数字_0 = 0;
-    private static final RString DBE231012 = new RString("DBE231012_ikenshokinyuyoshiOCR.rse");
-    private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR.rse");
-    private static final RString DBE231002 = new RString("DBE231002_ikenshokinyuyoshi.rse");
     private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString CONFIGVALUE3 = new RString("3");
@@ -92,7 +90,7 @@ public class IkenshoSakuseiIrai {
         IkenshoirairirekiichiranShudou 主治医意見書作成依頼 = manager.get主治医意見書作成依頼(申請書管理番号);
         NinteiShinseiJoho 要介護認定申請情報 = manager.get要介護認定申請情報(申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
-        div.getCcdShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleInputMode);
+        div.getCcdShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.InputMode);
         div.getCcdShujiiInput().initialize(主治医意見書作成依頼.get市町村コード(), new ShinseishoKanriNo(申請書管理番号), SubGyomuCode.DBE認定支援,
                 主治医意見書作成依頼.get主治医医療機関コード(), 主治医意見書作成依頼.get医療機関名称(),
                 主治医意見書作成依頼.get主治医コード(), 主治医意見書作成依頼.get主治医氏名());
@@ -309,10 +307,16 @@ public class IkenshoSakuseiIrai {
             意見書PrintService.print主治医意見書作成依頼発行一覧表(主治医意見書作成依頼発行一覧表List, reportManager);
         }
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY0)) {
-            call主治医意見書記入用紙(div, printService);
+            RString 用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            RString reportId = getReportId(用紙タイプ);
+            if (CONFIGVALUE3.equals(用紙タイプ)) {
+                意見書PrintService.print主治医意見書記入用紙(get主治医意見書記入用紙(div, printService), reportManager, reportId);
+            } else if (CONFIGVALUE2.equals(用紙タイプ)) {
+                意見書PrintService.print主治医意見書記入用紙OCR(get主治医意見書記入用紙(div, printService), reportManager, reportId);
+            }
         }
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY1)) {
-            call主治医意見書記入用紙OCR(div, printService);
+            意見書PrintService.print主治医意見書記入用紙D(get主治医意見書記入用紙(div, printService), reportManager, getOCRReportId());
         }
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                 = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号);
@@ -339,78 +343,46 @@ public class IkenshoSakuseiIrai {
         }
     }
 
-    private void call主治医意見書記入用紙(IkenshoSakuseiIraiDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+    private RString getReportId(RString 用紙タイプ) {
         RDate date = RDate.getNowDate();
-        if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目3, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目3, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面3, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+        RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援);
+        RString reportId = RString.EMPTY;
+        if (CONFIGVALUE2.equals(用紙タイプ)) {
+            if (CONFIGVALUE1.equals(印刷タイプ)) {
+                reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面, date, SubGyomuCode.DBE認定支援);
+            } else if (CONFIGVALUE2.equals(印刷タイプ)) {
+                reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面, date, SubGyomuCode.DBE認定支援);
             }
         }
-        if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目3, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目3, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面3, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+        if (CONFIGVALUE3.equals(用紙タイプ)) {
+            if (CONFIGVALUE1.equals(印刷タイプ)) {
+                reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面, date, SubGyomuCode.DBE認定支援);
+            } else if (CONFIGVALUE2.equals(印刷タイプ)) {
+                reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面, date, SubGyomuCode.DBE認定支援);
             }
         }
+        if (RString.isNullOrEmpty(reportId)) {
+            return RString.EMPTY;
+        }
+        return reportId;
     }
 
-    private void call主治医意見書記入用紙OCR(IkenshoSakuseiIraiDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+    private RString getOCRReportId() {
         RDate date = RDate.getNowDate();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面3, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面3, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
-            }
+        RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援);
+        RString reportId = RString.EMPTY;
+        if (CONFIGVALUE1.equals(印刷タイプ)) {
+            reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date, SubGyomuCode.DBE認定支援);
+        } else if (CONFIGVALUE2.equals(印刷タイプ)) {
+            reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面, date, SubGyomuCode.DBE認定支援);
         }
+        if (RString.isNullOrEmpty(reportId)) {
+            return RString.EMPTY;
+        }
+        return reportId;
     }
 
-    private void getExecuteStep(RString rseValue, IkenshoSakuseiIraiDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+    private List<IkenshokinyuyoshiBusiness> get主治医意見書記入用紙(IkenshoSakuseiIraiDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
 
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                 = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.
@@ -419,16 +391,6 @@ public class IkenshoSakuseiIrai {
         List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
                 .get主治医意見書記入用紙(parameter).records();
         ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(数字_0);
-        if (DBE231012.equals(rseValue)) {
-            printService.print主治医意見書記入用紙(createHandler(div).create主治医意見書記入情報1_パラメータ(business));
-        }
-
-        if (DBE231014.equals(rseValue)) {
-            printService.print主治医意見書記入用紙(createHandler(div).create主治医意見書記入情報2_パラメータ(business));
-        }
-
-        if (DBE231002.equals(rseValue)) {
-            printService.print主治医意見書記入用紙(createHandler(div).create主治医意見書記入情報3_パラメータ(business));
-        }
+        return createHandler(div).create主治医意見書記入情報_パラメータ(business);
     }
 }
