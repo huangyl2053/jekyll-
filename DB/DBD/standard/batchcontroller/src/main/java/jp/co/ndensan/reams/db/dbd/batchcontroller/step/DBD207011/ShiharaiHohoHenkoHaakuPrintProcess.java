@@ -285,6 +285,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             reportDataEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             reportDataEntity.set郵便番号(kojin.get住所().get郵便番号());
             reportDataEntity.set住所(kojin.get住所().get住所());
+            reportDataEntity.set町域コード(kojin.get住所().get町域コード().getColumnValue());
         } else {
             reportDataEntity.set識別コード(ShikibetsuCode.EMPTY);
             reportDataEntity.set被保険者氏名カナ(RString.EMPTY);
@@ -296,6 +297,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             reportDataEntity.set住所コード(RString.EMPTY);
             reportDataEntity.set郵便番号(new YubinNo(RString.EMPTY));
             reportDataEntity.set住所(RString.EMPTY);
+            reportDataEntity.set町域コード(RString.EMPTY);
         }
     }
 
@@ -401,9 +403,8 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         return FlexibleDate.EMPTY;
     }
 
-    List<FlexibleYear> 賦課年度List = new ArrayList<>();
-
     private List<ShunoNendoEntity> edit収納情報List(List<ShunoStatusJohoEntity> 収納状況情報List) {
+        List<FlexibleYear> 賦課年度List = new ArrayList<>();
 
         List<ShunoNendoEntity> 帳票用収納状況情報List = new ArrayList<>();
         Map<FlexibleYear, List<ShunoStatusJohoEntity>> 収納状況情報Map = new HashMap<>();
