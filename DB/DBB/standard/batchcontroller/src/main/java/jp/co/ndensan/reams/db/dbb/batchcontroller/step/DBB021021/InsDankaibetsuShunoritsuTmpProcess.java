@@ -89,8 +89,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
                 == 収納データ.get収入().getKaikeiNendo().getYearValue()
                 && parameter.get出力区分().contains(完納出力区分_出力しない)) {
             完納区分 = 未納分;
-        } else if (parameter.get会計年度().getYearValue()
-                != 収納データ.get収入().getKaikeiNendo().getYearValue()
+        } else if (収納データ.get収入().getKaikeiNendo().getYearValue() < parameter.get会計年度().getYearValue()
                 && parameter.get出力区分().contains(完納出力区分_出力する)) {
             完納区分 = 完納分;
         } else {
@@ -135,7 +134,6 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setTsuchishoNo(収納管理Entity.getTsuchishoNo());
         if (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is単一()
                 || (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is広域()
-                && null != 市町村コード
                 && 市町村分.equals(市町村コード.getColumnValue()))) {
             if ((抽出条件_認定者のみ.equals(parameter.get抽出条件())
                     || 抽出条件_認定者を除く１号被保険者.equals(parameter.get抽出条件()))
