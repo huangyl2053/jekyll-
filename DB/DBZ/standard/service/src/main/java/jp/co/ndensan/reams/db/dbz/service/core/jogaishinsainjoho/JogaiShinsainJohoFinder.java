@@ -82,12 +82,12 @@ public class JogaiShinsainJohoFinder {
     }
 
     /**
-     * 審査会委員一覧検索して審査会委員情報を取得します。
+     * 審査会委員一覧検索して前回審査会委員情報を取得します。
      *
      * @param 申請書管理番号 申請書管理番号
      * @return SearchResult<ShinsakaiIinRelateJoho>
      */
-    public SearchResult<ShinsakaiIinRelateJoho> get審査会委員一覧検索して審査会委員情報(RString 申請書管理番号) {
+    public SearchResult<ShinsakaiIinRelateJoho> get審査会委員一覧検索して前回審査会委員情報(RString 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         IJogaiShinsainJohoMapper mapper = mapperProvider.create(IJogaiShinsainJohoMapper.class);
         List<ShinsakaiIinRelateJoho> shinsakaiIinRelateJohoList = new ArrayList<>();
@@ -97,7 +97,24 @@ public class JogaiShinsainJohoFinder {
         }
         return SearchResult.of(shinsakaiIinRelateJohoList, 0, false);
     }
-
+    
+    /**
+     * 審査会委員一覧検索して審査会委員情報を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return SearchResult<ShinsakaiIinRelateJoho>
+     */
+    public SearchResult<ShinsakaiIinRelateJoho> get審査会委員一覧検索して審査会委員情報(RString 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        IJogaiShinsainJohoMapper mapper = mapperProvider.create(IJogaiShinsainJohoMapper.class);
+        List<ShinsakaiIinRelateJoho> shinsakaiIinRelateJohoList = new ArrayList<>();
+        List<ShinsakaiIinJohoRelateEntity> shinsakaiIinJohoList = mapper.getShinsakaiIinJoho2(申請書管理番号);
+        for (ShinsakaiIinJohoRelateEntity entity : shinsakaiIinJohoList) {
+            shinsakaiIinRelateJohoList.add(new ShinsakaiIinRelateJoho(entity));
+        }
+        return SearchResult.of(shinsakaiIinRelateJohoList, 0, false);
+    }
+    
     /**
      * 審査会委員一覧検索して審査会委員情報を取得します
      *

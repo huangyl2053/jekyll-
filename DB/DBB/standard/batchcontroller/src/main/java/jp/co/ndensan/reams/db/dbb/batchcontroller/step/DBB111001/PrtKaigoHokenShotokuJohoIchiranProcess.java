@@ -7,8 +7,11 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB111001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranBreakKeys;
+import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.PrtKaigoHokenShotokuJohoIchiranParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.ShotokujohoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuCSVEntity;
@@ -21,11 +24,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -52,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -101,6 +107,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private ReportSourceWriter<KaigoHokenShotokuJohoIchiranSource> hokenShotokuJohoIchiranSourceWriter;
     @BatchWriter
     private CsvWriter<KaigoHokenShotokuCSVEntity> eucCsvWriter;
+    private PrtKaigoHokenShotokuJohoIchiranParameter myBatisParameter;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private Association association;
@@ -109,6 +116,9 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private LasdecCode 市町村コード;
     private RString 導入形態コード;
     private RString 市町村名称;
+    private IOutputOrder 出力順情報;
+    private List<RString> pageBreakKeys;
+    private RString 出力順;
     private Long 出力順ID;
     private RString チェックボックス;
     private RString ラジオボタン;
@@ -141,20 +151,35 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         終了日時 = parameter.get終了日時();
         処理年度 = parameter.get処理年度();
         連番 = INDEX_1;
-
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200008.getReportId(), 出力順ID);
-
-        出力順項目リスト = get出力順(並び順);
-        改頁項目リスト = get改頁項目(並び順);
+        get出力順();
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         association = finder.getAssociation();
-
-        reportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB200008.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
-        hokenShotokuJohoIchiranSourceWriter = new ReportSourceWriter<>(reportWriter);
         表示場合 = DbBusinessConfig.get(ConfigNameDBB.所得引出_住民税減免前後表示区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+    }
+
+    private void get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        if (出力順ID == null) {
+            return;
+        } else {
+            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200008.getReportId(),
+                    出力順ID);
+            出力順 = MyBatisOrderByClauseCreator.create(KaigoHokenShotokuJohoIchiranOutPutOrder.class, 出力順情報);
+        }
+        if (出力順情報 == null) {
+            return;
+        }
+        出力順項目リスト = new ArrayList<>();
+        改頁項目リスト = new ArrayList();
+        pageBreakKeys = new ArrayList<>();
+        for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
+            出力順項目リスト.add(item.get項目名());
+            if (item.is改頁項目()) {
+                改頁項目リスト.add(item.get項目名());
+                pageBreakKeys.add(item.get項目ID());
+            }
+        }
     }
 
     @Override
@@ -164,11 +189,19 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECTALL);
+        myBatisParameter = new PrtKaigoHokenShotokuJohoIchiranParameter();
+        myBatisParameter.set出力順(出力順);
+        return new BatchDbReader(SELECTALL, myBatisParameter);
     }
 
     @Override
     protected void createWriter() {
+        PageBreaker<KaigoHokenShotokuJohoIchiranSource> breakPage
+                = new KaigoHokenShotokuJohoIchiranBreakKeys(pageBreakKeys);
+        reportWriter = BatchReportFactory.createBatchReportWriter(
+                ReportIdDBB.DBB200008.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
+        hokenShotokuJohoIchiranSourceWriter = new ReportSourceWriter<>(reportWriter);
+
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
@@ -238,22 +271,28 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             if (開始日時 != null) {
                 builder = new RStringBuilder();
-                builder.append((FORMAT_LEFT).concat(出力_抽出期間開始日時).concat(FORMAT_RIGHT).concat(new RString(開始日時.toString())));
+                builder.append((FORMAT_LEFT).concat(出力_抽出期間開始日時).concat(FORMAT_RIGHT)
+                        .concat(new RString(開始日時.toString())));
                 出力条件リスト.add(builder.toRString());
             }
             if (終了日時 != null) {
                 builder = new RStringBuilder();
-                builder.append((FORMAT_LEFT).concat(出力_抽出期間終了日時).concat(FORMAT_RIGHT).concat(new RString(終了日時.toString())));
+                builder.append((FORMAT_LEFT).concat(出力_抽出期間終了日時).concat(FORMAT_RIGHT)
+                        .concat(new RString(終了日時.toString())));
                 出力条件リスト.add(builder.toRString());
             }
         } else if (INDEX_111.equals(導入形態コード)) {
             for (ShichosonJouhouResult result : 市町村情報リスト) {
-                if (result != null && result.get市町村コード() != null && result.get開始年月日() != null && result.get終了年月日() != null
-                        && result.get市町村識別ID() != null && result.get開始時刻() != null && result.get終了時刻() != null) {
+                if (result != null && result.get市町村コード() != null && result.get開始年月日() != null
+                        && result.get終了年月日() != null && result.get市町村識別ID() != null
+                        && result.get開始時刻() != null && result.get終了時刻() != null) {
                     builder = new RStringBuilder();
-                    builder.append((FORMAT_LEFT).concat(出力_市町村情報リスト).concat(FORMAT_RIGHT).concat(result.get市町村コード().value())
-                            .concat(出力_コンマ).concat(result.get市町村識別ID()).concat(出力_コンマ).concat(new RString(result.get開始年月日().toString()))
-                            .concat(出力_コンマ).concat(result.get開始時刻()).concat(出力_コンマ).concat(new RString(result.get終了年月日().toString()))
+                    builder.append((FORMAT_LEFT).concat(出力_市町村情報リスト).concat(FORMAT_RIGHT)
+                            .concat(result.get市町村コード().value())
+                            .concat(出力_コンマ).concat(result.get市町村識別ID()).concat(出力_コンマ)
+                            .concat(new RString(result.get開始年月日().toString()))
+                            .concat(出力_コンマ).concat(result.get開始時刻()).concat(出力_コンマ)
+                            .concat(new RString(result.get終了年月日().toString()))
                             .concat(出力_コンマ).concat(result.get終了時刻()));
                     出力条件リスト.add(builder.toRString());
                 }
@@ -286,28 +325,6 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
                 出力条件リスト);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
-    }
-
-    private List<RString> get出力順(IOutputOrder 並び順) {
-        List<RString> 並び順List = new ArrayList<>();
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                並び順List.add(item.get項目名());
-            }
-        }
-        return 並び順List;
-    }
-
-    private List<RString> get改頁項目(IOutputOrder 並び順) {
-        List<RString> 改頁項目List = new ArrayList<>();
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁項目List.add(item.get項目名());
-                }
-            }
-        }
-        return 改頁項目List;
     }
 
     private void publish所得情報一覧表(KaigoHokenShotokuTempEntity item) {

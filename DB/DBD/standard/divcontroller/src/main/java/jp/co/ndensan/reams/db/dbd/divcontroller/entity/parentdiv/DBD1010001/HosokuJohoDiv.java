@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HosokuJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,10 +23,8 @@ public class HosokuJohoDiv extends Panel {
      */
     @JsonProperty("txtRiyoshaFutanDankai")
     private TextBox txtRiyoshaFutanDankai;
-    @JsonProperty("btnDispSetaiJoho")
-    private Button btnDispSetaiJoho;
-    @JsonProperty("btnCloseSetaiJoho")
-    private Button btnCloseSetaiJoho;
+    @JsonProperty("btnShotokuJokyo")
+    private ButtonDialog btnShotokuJokyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,39 +51,21 @@ public class HosokuJohoDiv extends Panel {
     }
 
     /*
-     * getbtnDispSetaiJoho
-     * @return btnDispSetaiJoho
+     * getbtnShotokuJokyo
+     * @return btnShotokuJokyo
      */
-    @JsonProperty("btnDispSetaiJoho")
-    public Button getBtnDispSetaiJoho() {
-        return btnDispSetaiJoho;
+    @JsonProperty("btnShotokuJokyo")
+    public ButtonDialog getBtnShotokuJokyo() {
+        return btnShotokuJokyo;
     }
 
     /*
-     * setbtnDispSetaiJoho
-     * @param btnDispSetaiJoho btnDispSetaiJoho
+     * setbtnShotokuJokyo
+     * @param btnShotokuJokyo btnShotokuJokyo
      */
-    @JsonProperty("btnDispSetaiJoho")
-    public void setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
-        this.btnDispSetaiJoho = btnDispSetaiJoho;
-    }
-
-    /*
-     * getbtnCloseSetaiJoho
-     * @return btnCloseSetaiJoho
-     */
-    @JsonProperty("btnCloseSetaiJoho")
-    public Button getBtnCloseSetaiJoho() {
-        return btnCloseSetaiJoho;
-    }
-
-    /*
-     * setbtnCloseSetaiJoho
-     * @param btnCloseSetaiJoho btnCloseSetaiJoho
-     */
-    @JsonProperty("btnCloseSetaiJoho")
-    public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
-        this.btnCloseSetaiJoho = btnCloseSetaiJoho;
+    @JsonProperty("btnShotokuJokyo")
+    public void setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
+        this.btnShotokuJokyo = btnShotokuJokyo;
     }
 
     // </editor-fold>

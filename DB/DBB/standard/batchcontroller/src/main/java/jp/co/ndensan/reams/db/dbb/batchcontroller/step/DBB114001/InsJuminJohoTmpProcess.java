@@ -32,7 +32,7 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
     private static final int INT_31 = 31;
     private static final int INT_39 = 39;
     private static final int 一月 = 1;
-    private static final int 三月 = 1;
+    private static final int 三月 = 3;
     private static final int 四月 = 4;
     private static final int 七月 = 7;
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"

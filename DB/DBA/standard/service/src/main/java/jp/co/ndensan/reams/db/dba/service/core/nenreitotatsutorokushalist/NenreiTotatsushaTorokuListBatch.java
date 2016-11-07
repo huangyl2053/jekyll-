@@ -299,16 +299,16 @@ public class NenreiTotatsushaTorokuListBatch {
         tyouHyouListEntity.setリスト下_異動情報4(nenreiTotatsushaJouhouEntity.get異動情報データ4());
         tyouHyouListEntity.setリスト下_異動情報5(nenreiTotatsushaJouhouEntity.get異動情報データ5());
         tyouHyouListEntity.setリスト下_異動情報6(nenreiTotatsushaJouhouEntity.get異動情報データ6());
-        tyouHyouListEntity.setYubinNo(nenreiTotatsushaJouhouEntity.getPsmEntity().getYubinNo());
-        tyouHyouListEntity.setChoikiCode(nenreiTotatsushaJouhouEntity.getPsmEntity().getChoikiCode());
-        tyouHyouListEntity.setBanchiCode(nenreiTotatsushaJouhouEntity.get番地コード());
-        tyouHyouListEntity.setGyoseikuCode(nenreiTotatsushaJouhouEntity.getPsmEntity().getGyoseikuCode());
-        tyouHyouListEntity.setChiku1(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode1());
-        tyouHyouListEntity.setChiku2(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode2());
-        tyouHyouListEntity.setChiku3(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode3());
-        tyouHyouListEntity.setShimei50onKana(nenreiTotatsushaJouhouEntity.getPsmEntity().getKanaShimei());
-        tyouHyouListEntity.setSeinengappiYMD(nenreiTotatsushaJouhouEntity.getPsmEntity().getSeinengappiYMD());
-        tyouHyouListEntity.setGender(nenreiTotatsushaJouhouEntity.getPsmEntity().getSeibetsuCode());
+//        tyouHyouListEntity.setYubinNo(nenreiTotatsushaJouhouEntity.getPsmEntity().getYubinNo());
+//        tyouHyouListEntity.setChoikiCode(nenreiTotatsushaJouhouEntity.getPsmEntity().getChoikiCode());
+//        tyouHyouListEntity.setBanchiCode(nenreiTotatsushaJouhouEntity.get番地コード());
+//        tyouHyouListEntity.setGyoseikuCode(nenreiTotatsushaJouhouEntity.getPsmEntity().getGyoseikuCode());
+//        tyouHyouListEntity.setChiku1(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode1());
+//        tyouHyouListEntity.setChiku2(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode2());
+//        tyouHyouListEntity.setChiku3(nenreiTotatsushaJouhouEntity.getPsmEntity().getChikuCode3());
+//        tyouHyouListEntity.setShimei50onKana(nenreiTotatsushaJouhouEntity.getPsmEntity().getKanaShimei());
+//        tyouHyouListEntity.setSeinengappiYMD(nenreiTotatsushaJouhouEntity.getPsmEntity().getSeinengappiYMD());
+//        tyouHyouListEntity.setGender(nenreiTotatsushaJouhouEntity.getPsmEntity().getSeibetsuCode());
     }
 
     private static RString get印刷日時() {

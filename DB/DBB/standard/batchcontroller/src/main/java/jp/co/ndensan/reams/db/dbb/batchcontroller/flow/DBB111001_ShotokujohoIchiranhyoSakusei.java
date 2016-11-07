@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB111001.KoikiShichosonS
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB111001.PrtKaigoHokenShotokuJohoIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB111001.RegistShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB111001.TanitsuShichosonShotokuIchiarnProcess;
-import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB111001.DBB111001_ShotokujohoIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.RegistShoriDateKanriProcessParameter;
@@ -48,7 +48,6 @@ public class DBB111001_ShotokujohoIchiranhyoSakusei extends BatchFlowBase<DBB111
     private RegistShoriDateKanriProcessParameter parameter;
     private ShotokujohoIchiranhyoSakuseiProcessParameter 広域param;
     private RString 出力順;
-    private RString 改頁項目ID;
 
     @Override
     protected void defineFlow() {
@@ -59,8 +58,7 @@ public class DBB111001_ShotokujohoIchiranhyoSakusei extends BatchFlowBase<DBB111
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBB介護賦課, 帳票ID, getParameter().get出力順ID());
         出力順 = MyBatisOrderByClauseCreator.create(
-                KaigoHokenShotokuJohoIchiranProperty.DBB200008ShutsuryokujunEnum.class, outputOrder);
-        改頁項目ID = outputOrder.get改頁項目ID();
+                KaigoHokenShotokuJohoIchiranOutPutOrder.class, outputOrder);
         RString 導入形態コード = getParameter().get導入形態コード();
         if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
             executeStep(所得情報一覧表のデータ取得_単一);
@@ -148,8 +146,6 @@ public class DBB111001_ShotokujohoIchiranhyoSakusei extends BatchFlowBase<DBB111
     @Step(介護保険所得情報一覧表出力)
     protected IBatchFlowCommand prtKaigoHokenShotokuJohoIchiranProcess() {
         ShotokujohoIchiranhyoSakuseiProcessParameter param = creatBatchParameter();
-        param.set出力順(出力順);
-        param.set改頁(改頁項目ID);
         return loopBatch(PrtKaigoHokenShotokuJohoIchiranProcess.class).arguments(param).define();
     }
 

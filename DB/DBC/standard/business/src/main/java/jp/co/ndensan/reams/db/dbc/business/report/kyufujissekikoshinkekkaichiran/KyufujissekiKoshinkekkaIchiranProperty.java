@@ -79,6 +79,8 @@ public class KyufujissekiKoshinkekkaIchiranProperty extends ReportPropertyBase<K
             帳票物理名 = new RString(ReportSourceFields.shimei50onKana.name());
         } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.shichosonCode.name());
+        } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.現物償還の別.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.kyufuJissekiKubun.name());
         }
         return 帳票物理名;
     }

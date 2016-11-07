@@ -6,15 +6,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
+import static jp.co.ndensan.reams.db.dbz.definition.core.GappeiJohoKubun.合併あり;
+import static jp.co.ndensan.reams.db.dbz.definition.core.GappeiJohoKubun.合併なし;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
@@ -22,22 +34,21 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -442,9 +453,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
         if (市町村情報セキュリティ情報 != null && 市町村情報セキュリティ情報.get導入形態コード() != null) {
             if (new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
                     || new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value())
- //                    && new RString(合併なし.getCode().toString()).equals(
-                    //                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
-                    ) {
+                    && new RString(合併なし.getCode().toString()).equals(
+                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
 
                 // 単一で合併無し・・・「所在保険者」「措置元保険者」「旧保険者」「識別コード」の全て非表示。
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(false);
@@ -453,9 +463,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(false);
             } else if ((new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
                     || new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value()))
- //                    && new RString(合併あり.getCode().toString()).equals(
-                    //                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
-                    ) {
+                    && new RString(合併あり.getCode().toString()).equals(
+                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
 
                 // 単一で合併有り・・・「旧保険者」は表示、以外は非表示。
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(false);
@@ -463,9 +472,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(true);
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(false);
             } else if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
- //                    && new RString(合併なし.getCode().toString()).equals(
-                    //                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
-                    ) {
+                    && new RString(合併なし.getCode().toString()).equals(
+                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
 
                 // 広域で合併無し・・・「旧保険者」は非表示、以外は表示。
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(true);
@@ -473,9 +481,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(false);
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
             } else if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
- //                    && new RString(合併あり.getCode().toString()).equals(
-                    //                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
-                    ) {
+                    && new RString(合併あり.getCode().toString()).equals(
+                            DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
 
                 // 広域で合併有り・・・「所在保険者」「措置元保険者」「旧保険者」「識別コード」の全て表示。
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(true);
@@ -503,32 +510,40 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
         List<ShikakuTokuso> shikakuTokusoData = new ArrayList<>();
         SearchResult<KoikiZenShichosonJoho> shichosons = KoikiShichosonJohoFinder.createInstance().getZenShichosonJoho();
 
+        ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        DonyuKeitaiCode 導入形態コード = DonyuKeitaiCode.toValue(市町村情報セキュリティ情報.get導入形態コード().getColumnValue());
+
         for (HihokenshaDaicho daicho : hihoData) {
-            ServiceShikakuRelateEntity entity = new ServiceShikakuRelateEntity();
-            entity.setHihokenshaNo(daicho.get被保険者番号());
-            entity.setIdoYMD(daicho.get異動日());
-            entity.setEdaNo(daicho.get枝番());
-            entity.setShikibetsuCode(daicho.get識別コード());
-            entity.setShikakuShutokuYMD(daicho.get資格取得年月日());
-            entity.setShikakuShutokuTodokedeYMD(daicho.get資格取得届出年月日());
-            entity.setShikakuShutokuJiyuCode(daicho.get資格取得事由コード());
-            entity.setHihokennshaKubunCode(daicho.get被保険者区分コード());
-            entity.setShikakuSoshitsuYMD(daicho.get資格喪失年月日());
-            entity.setShikakuSoshitsuTodokedeYMD(daicho.get資格喪失届出年月日());
-            entity.setShikakuSoshitsuJiyuCode(daicho.get資格喪失事由コード());
-            entity.setJushochiTokureiFlag(daicho.get住所地特例フラグ());
-            entity.setShichosonCode(daicho.get市町村コード());
-            entity.setShichosonMeisho(searchShichosonName(shichosons, daicho.get市町村コード()));
-            entity.setShichosonCode2(daicho.get広住特措置元市町村コード());
-            entity.setShichosonMeisho2(searchShichosonName(shichosons, daicho.get広住特措置元市町村コード()));
-            entity.setKyuShichosonCode(daicho.get旧市町村コード());
-            entity.setKyuShichosonMeisho(searchShichosonName(shichosons, daicho.get旧市町村コード()));
-            entity.setLastUpdateTimestamp(daicho.toEntity().getLastUpdateTimestamp());
-            shikakuTokusoData.add(new ShikakuTokuso(entity));
+            shikakuTokusoData.add(createShukakuTokusoData(daicho, shichosons, 導入形態コード));
         }
         SearchResult<ShikakuTokuso> result = SearchResult.of(shikakuTokusoData, shikakuTokusoData.size(), false);
         createGridData(result);
         this.getBtnAddShikakuShutoku().setDisabled(true);
+    }
+
+    private ShikakuTokuso createShukakuTokusoData(HihokenshaDaicho daicho, SearchResult<KoikiZenShichosonJoho> shichosons,
+            DonyuKeitaiCode 導入形態コード) {
+        ServiceShikakuRelateEntity entity = new ServiceShikakuRelateEntity();
+        entity.setHihokenshaNo(daicho.get被保険者番号());
+        entity.setIdoYMD(daicho.get異動日());
+        entity.setEdaNo(daicho.get枝番());
+        entity.setShikibetsuCode(daicho.get識別コード());
+        entity.setShikakuShutokuYMD(daicho.get資格取得年月日());
+        entity.setShikakuShutokuTodokedeYMD(daicho.get資格取得届出年月日());
+        entity.setShikakuShutokuJiyuCode(daicho.get資格取得事由コード());
+        entity.setHihokennshaKubunCode(daicho.get被保険者区分コード());
+        entity.setShikakuSoshitsuYMD(daicho.get資格喪失年月日());
+        entity.setShikakuSoshitsuTodokedeYMD(daicho.get資格喪失届出年月日());
+        entity.setShikakuSoshitsuJiyuCode(daicho.get資格喪失事由コード());
+        entity.setJushochiTokureiFlag(daicho.get住所地特例フラグ());
+        entity.setShichosonCode(daicho.get市町村コード());
+        entity.setShichosonMeisho(searchShichosonName(shichosons, daicho.get市町村コード()));
+        entity.setShichosonCode2(daicho.get広住特措置元市町村コード());
+        entity.setShichosonMeisho2(searchShichosonName(shichosons, daicho.get広住特措置元市町村コード()));
+        entity.setKyuShichosonCode(daicho.get旧市町村コード());
+        entity.setKyuShichosonMeisho(searchKyuShichosonName(daicho, 導入形態コード));
+        entity.setLastUpdateTimestamp(daicho.toEntity().getLastUpdateTimestamp());
+        return new ShikakuTokuso(entity);
     }
 
     private RString searchShichosonName(SearchResult<KoikiZenShichosonJoho> shichosonList, LasdecCode lasdecCode) {
@@ -541,81 +556,105 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 return shichoson.get市町村名称();
             }
         }
-        return RString.EMPTY;
+        return new RString("不正な市町村");
+    }
+
+    private RString searchKyuShichosonName(HihokenshaDaicho daicho, DonyuKeitaiCode 導入形態コード) {
+        LasdecCode kyuLasdecCode = daicho.get旧市町村コード();
+        if (kyuLasdecCode == null || kyuLasdecCode.isEmpty()) {
+            return RString.EMPTY;
+        }
+
+        LasdecCode lasdecCode = daicho.get市町村コード();
+        LasdecCode koikiSochimotoLasdecCode = daicho.get広住特措置元市町村コード();
+        LasdecCode searchLasdecCode = koikiSochimotoLasdecCode;
+        if (searchLasdecCode == null || searchLasdecCode.isEmpty()) {
+            searchLasdecCode = lasdecCode;
+        }
+
+        List<Shichoson> kyuShichosons = HihousyosaiFinder.createInstance().getGappeiShichosonList(searchLasdecCode, 導入形態コード).records();
+        for (Shichoson shichoson : kyuShichosons) {
+            if (shichoson.get旧市町村コード().equals(kyuLasdecCode)) {
+                return shichoson.get旧市町村名称();
+            }
+        }
+        return new RString("不正な市町村");
     }
 
     private void createGridData(SearchResult<ShikakuTokuso> result) {
 
         List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList<>();
         for (ShikakuTokuso shikakuTokuso : result.records()) {
-            dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
-
-            TextBoxFlexibleDate 資格取得日 = new TextBoxFlexibleDate();
-            資格取得日.setValue(shikakuTokuso.get資格取得年月日());
-            row.setShutokuDate(資格取得日);
-            TextBoxFlexibleDate 資格取得届出日 = new TextBoxFlexibleDate();
-            資格取得届出日.setValue(shikakuTokuso.get資格取得届出年月日());
-            row.setShutokuTodokedeDate(資格取得届出日);
-            if (!RString.isNullOrEmpty(shikakuTokuso.get取得事由コード())) {
-                row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).get名称());
-                row.setShutokuJiyuKey(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getコード());
-            } else {
-                row.setShutokuJiyu(RString.EMPTY);
-                row.setShutokuJiyuKey(RString.EMPTY);
-            }
-            if (!RString.isNullOrEmpty(shikakuTokuso.get被保険者区分コード())) {
-                row.setHihokenshaKubun(ShikakuKubun.toValue(shikakuTokuso.get被保険者区分コード()).get略称());
-                row.setHihokenshaKubunKey(shikakuTokuso.get被保険者区分コード());
-            } else {
-                row.setHihokenshaKubun(RString.EMPTY);
-                row.setHihokenshaKubunKey(RString.EMPTY);
-            }
-            TextBoxFlexibleDate 資格喪失日 = new TextBoxFlexibleDate();
-            資格喪失日.setValue(shikakuTokuso.get資格喪失年月日());
-            row.setSoshitsuDate(資格喪失日);
-            TextBoxFlexibleDate 資格喪失届出日 = new TextBoxFlexibleDate();
-            資格喪失届出日.setValue(shikakuTokuso.get資格喪失届出年月日());
-            row.setSoshitsuTodokedeDate(資格喪失届出日);
-            if (!RString.isNullOrEmpty(shikakuTokuso.get喪失事由コード())) {
-                row.setSoshitsuJiyu(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).get名称());
-                row.setSoshitsuJiyuKey(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).getコード());
-            } else {
-                row.setSoshitsuJiyu(RString.EMPTY);
-                row.setSoshitsuJiyuKey(RString.EMPTY);
-            }
-            if (!RString.isNullOrEmpty(shikakuTokuso.get住所地特例フラグ())) {
-                row.setJutokuKubun(JushochitokureishaKubun.toValue(shikakuTokuso.get住所地特例フラグ()).get名称());
-            } else {
-                row.setJutokuKubun(RString.EMPTY);
-            }
-
-            row.setShozaiHokensha(shikakuTokuso.get市町村名称());
-            row.setShozaiHokenshaCode(codeToRString(shikakuTokuso.get市町村コード()));
-            row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
-            row.setSochimotoHokenshaCode(shikakuTokuso.get広住特措置元市町村コード() == null ? RString.EMPTY : shikakuTokuso.get広住特措置元市町村コード().value());
-            row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
-            row.setKyuHokenshaCode(shikakuTokuso.get旧市町村コード() == null ? RString.EMPTY : shikakuTokuso.get旧市町村コード().value());
-            row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
-            row.setHihokenshaNo(shikakuTokuso.get被保険者番号().getColumnValue());
-            row.setDaNo(shikakuTokuso.get枝番());
-            RDateTime 処理日時 = shikakuTokuso.get処理日時();
-            RStringBuilder 処理日時表示 = new RStringBuilder();
-            if (処理日時 != null) {
-                処理日時表示.append(処理日時.getDate().wareki().toDateString());
-                処理日時表示.append(RString.HALF_SPACE);
-                処理日時表示.append(String.format("%02d", 処理日時.getHour()));
-                処理日時表示.append(":");
-                処理日時表示.append(String.format("%02d", 処理日時.getMinute()));
-                処理日時表示.append(":");
-                処理日時表示.append(String.format("%02d", 処理日時.getSecond()));
-                row.setShoriDateTime(処理日時表示.toRString());
-            }
-            row.setDeleteButtonState(DataGridButtonState.Disabled);
-            row.setModifyButtonState(DataGridButtonState.Disabled);
-            dgShikakuShutokuRirekiList.add(row);
+            dgShikakuShutokuRirekiList.add(createRowData(shikakuTokuso));
         }
 
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
+    }
+
+    private dgShikakuShutokuRireki_Row createRowData(ShikakuTokuso shikakuTokuso) {
+        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
+        TextBoxFlexibleDate 資格取得日 = new TextBoxFlexibleDate();
+        資格取得日.setValue(shikakuTokuso.get資格取得年月日());
+        row.setShutokuDate(資格取得日);
+        TextBoxFlexibleDate 資格取得届出日 = new TextBoxFlexibleDate();
+        資格取得届出日.setValue(shikakuTokuso.get資格取得届出年月日());
+        row.setShutokuTodokedeDate(資格取得届出日);
+        if (!RString.isNullOrEmpty(shikakuTokuso.get取得事由コード())) {
+            row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).get名称());
+            row.setShutokuJiyuKey(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getコード());
+        } else {
+            row.setShutokuJiyu(RString.EMPTY);
+            row.setShutokuJiyuKey(RString.EMPTY);
+        }
+        if (!RString.isNullOrEmpty(shikakuTokuso.get被保険者区分コード())) {
+            row.setHihokenshaKubun(ShikakuKubun.toValue(shikakuTokuso.get被保険者区分コード()).get略称());
+            row.setHihokenshaKubunKey(shikakuTokuso.get被保険者区分コード());
+        } else {
+            row.setHihokenshaKubun(RString.EMPTY);
+            row.setHihokenshaKubunKey(RString.EMPTY);
+        }
+        TextBoxFlexibleDate 資格喪失日 = new TextBoxFlexibleDate();
+        資格喪失日.setValue(shikakuTokuso.get資格喪失年月日());
+        row.setSoshitsuDate(資格喪失日);
+        TextBoxFlexibleDate 資格喪失届出日 = new TextBoxFlexibleDate();
+        資格喪失届出日.setValue(shikakuTokuso.get資格喪失届出年月日());
+        row.setSoshitsuTodokedeDate(資格喪失届出日);
+        if (!RString.isNullOrEmpty(shikakuTokuso.get喪失事由コード())) {
+            row.setSoshitsuJiyu(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).get名称());
+            row.setSoshitsuJiyuKey(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).getコード());
+        } else {
+            row.setSoshitsuJiyu(RString.EMPTY);
+            row.setSoshitsuJiyuKey(RString.EMPTY);
+        }
+        if (!RString.isNullOrEmpty(shikakuTokuso.get住所地特例フラグ())) {
+            row.setJutokuKubun(JushochitokureishaKubun.toValue(shikakuTokuso.get住所地特例フラグ()).get名称());
+        } else {
+            row.setJutokuKubun(RString.EMPTY);
+        }
+        row.setShozaiHokensha(shikakuTokuso.get市町村名称());
+        row.setShozaiHokenshaCode(codeToRString(shikakuTokuso.get市町村コード()));
+        row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
+        row.setSochimotoHokenshaCode(shikakuTokuso.get広住特措置元市町村コード() == null ? RString.EMPTY : shikakuTokuso.get広住特措置元市町村コード().value());
+        row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
+        row.setKyuHokenshaCode(shikakuTokuso.get旧市町村コード() == null ? RString.EMPTY : shikakuTokuso.get旧市町村コード().value());
+        row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
+        row.setHihokenshaNo(shikakuTokuso.get被保険者番号().getColumnValue());
+        row.setDaNo(shikakuTokuso.get枝番());
+        RDateTime 処理日時 = shikakuTokuso.get処理日時();
+        RStringBuilder 処理日時表示 = new RStringBuilder();
+        if (処理日時 != null) {
+            処理日時表示.append(処理日時.getDate().wareki().toDateString());
+            処理日時表示.append(RString.HALF_SPACE);
+            処理日時表示.append(String.format("%02d", 処理日時.getHour()));
+            処理日時表示.append(":");
+            処理日時表示.append(String.format("%02d", 処理日時.getMinute()));
+            処理日時表示.append(":");
+            処理日時表示.append(String.format("%02d", 処理日時.getSecond()));
+            row.setShoriDateTime(処理日時表示.toRString());
+        }
+        row.setDeleteButtonState(DataGridButtonState.Disabled);
+        row.setModifyButtonState(DataGridButtonState.Disabled);
+        return row;
     }
 
     private RString codeToRString(LasdecCode code) {
@@ -673,7 +712,42 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
     @Override
     public void updateGridData(HihokenshaDaicho daicho, FlexibleDate beforeShutokuDate, List<FlexibleDate> shutokuDateListOfDeleted) {
-        // 競合の一旦解消
-    }
+        if (daicho == null || beforeShutokuDate == null || beforeShutokuDate.isEmpty()) {
+            return;
+        }
 
+        SearchResult<KoikiZenShichosonJoho> shichosons = KoikiShichosonJohoFinder.createInstance().getZenShichosonJoho();
+        ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        DonyuKeitaiCode 導入形態コード = DonyuKeitaiCode.toValue(市町村情報セキュリティ情報.get導入形態コード().getColumnValue());
+
+        ShikakuTokuso tokuso = createShukakuTokusoData(daicho, shichosons, 導入形態コード);
+        dgShikakuShutokuRireki_Row newRow = createRowData(tokuso);
+        RString rowState;
+
+        List<dgShikakuShutokuRireki_Row> gridRows = this.getDgShikakuShutokuRireki().getDataSource();
+        for (int i = 0; i < gridRows.size(); i++) {
+            dgShikakuShutokuRireki_Row gridRow = gridRows.get(i);
+            if (gridRow.getShutokuDate().getValue().equals(beforeShutokuDate)) {
+                rowState = ViewExecutionStatus.Modify.get名称();
+                if (shutokuDateListOfDeleted != null && shutokuDateListOfDeleted.contains(beforeShutokuDate)) {
+                    rowState = ViewExecutionStatus.Delete.get名称();
+                }
+                newRow.setState(rowState);
+                gridRows.remove(i);
+                gridRows.add(i, newRow);
+                return;
+            }
+        }
+
+        rowState = ViewExecutionStatus.Add.get名称();
+        newRow.setState(rowState);
+        for (int i = 0; i < gridRows.size(); i++) {
+            dgShikakuShutokuRireki_Row gridRow = gridRows.get(i);
+            if (gridRow.getShutokuDate().getValue().isBeforeOrEquals(beforeShutokuDate)) {
+                gridRows.add(i, newRow);
+                return;
+            }
+        }
+        gridRows.add(gridRows.size(), newRow);
+    }
 }

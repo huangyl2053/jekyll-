@@ -38,6 +38,8 @@ public class JukyushaShokai {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        // TODO こちらのメソッドが呼ばれる前にダイアログのinitializeが実行されている。そのため、識別コードのセットをonloadで行う。フレームワークの対応が完了後修正。
+        div.setHiddenShikibetsuCode(識別コード.getColumnValue());
 
         return getHandler(div).initialize(識別コード, 被保険者番号);
     }
@@ -149,6 +151,7 @@ public class JukyushaShokai {
      * @return レスポンスデータ
      */
     public ResponseData<JukyushaShokaiDiv> onBeforeOpenDialog_btnShotokuJokyo(JukyushaShokaiDiv div) {
+        // TODO こちらのメソッドが呼ばれる前にダイアログのinitializeが実行されている。そのため、識別コードのセットをonloadで行う。フレームワークの対応が完了後修正。
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         div.setHiddenShikibetsuCode(識別コード.getColumnValue());

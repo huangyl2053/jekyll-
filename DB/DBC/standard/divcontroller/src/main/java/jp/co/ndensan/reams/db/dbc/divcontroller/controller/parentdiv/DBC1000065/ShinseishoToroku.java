@@ -128,9 +128,7 @@ public class ShinseishoToroku {
      * @return ResponseData
      */
     public ResponseData<DBC190030_kijunsyunygetsujiParameter> onClick_btnExcute(ShinseishoTorokuDiv div) {
-        getHandler(div).set前排他();
         DBC190030_kijunsyunygetsujiParameter parameter = getHandler(div).setバッチ();
-        getHandler(div).release前排他();
         return ResponseData.of(parameter).respond();
     }
 

@@ -66,12 +66,16 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -405,7 +409,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
             自己負担総額の合計金額 = Decimal.ZERO;
             支給額の合計金額 = Decimal.ZERO;
         }
-        if (getBefore() != null && new GassanShikyuFushikyuKetteishaIchiranPageBreak(改頁項目リスト).is改頁(entity, getBefore())) {
+        if (getBefore() != null && is改頁(entity, getBefore())) {
             連番 = INT_0;
         }
         連番++;
@@ -797,5 +801,55 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
                 j = j + 1;
             }
         }
+    }
+
+    private boolean is改頁(KogakugassanShikyuKetteitsuchishoEntity currentSource,
+            KogakugassanShikyuKetteitsuchishoEntity nextSource) {
+        boolean flag = false;
+        if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.被保険者番号.get項目ID())
+                && !currentSource.getHihokenshaNo().equals(nextSource.getHihokenshaNo())) {
+            flag = true;
+        } else if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請年月日.get項目ID())
+                && !currentSource.getShinseiYMD().equals(nextSource.getShinseiYMD())) {
+            flag = true;
+        } else if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.対象年度.get項目ID())
+                && !currentSource.getTaishoNendo().equals(nextSource.getTaishoNendo())) {
+            flag = true;
+        } else if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.get項目ID())
+                && !currentSource.getShikyuSeiriNo().equals(nextSource.getShikyuSeiriNo())) {
+            flag = true;
+        } else {
+            set改頁Flag(currentSource, nextSource);
+        }
+        return flag;
+    }
+
+    private boolean set改頁Flag(KogakugassanShikyuKetteitsuchishoEntity currentSource,
+            KogakugassanShikyuKetteitsuchishoEntity nextSource) {
+        boolean flag = false;
+        AtenaKanaMeisho 氏名 = currentSource.get宛名().getKanaMeisho();
+        ChoikiCode 町域コード = currentSource.get宛名().getChoikiCode();
+        GyoseikuCode 行政区コード = currentSource.get宛名().getGyoseikuCode();
+        YubinNo 郵便番号 = currentSource.get宛名().getYubinNo();
+        if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.証記載保険者番号.get項目ID())
+                && !currentSource.getShikyuSeiriNo().equals(nextSource.getShikyuSeiriNo())) {
+            flag = true;
+        } else if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.市町村コード.get項目ID())
+                && !currentSource.get被保検者情報().get市町村コード().equals(nextSource.get被保検者情報().get市町村コード())) {
+            flag = true;
+        } else if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.氏名５０音カナ.get項目ID())
+                && 氏名 != null && !氏名.equals(nextSource.get宛名().getKanaMeisho())) {
+            flag = true;
+        } else if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.町域コード.get項目ID())
+                && 町域コード != null && !町域コード.equals(nextSource.get宛名().getChoikiCode())) {
+            flag = true;
+        } else if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.行政区コード.get項目ID())
+                && 行政区コード != null && !行政区コード.equals(nextSource.get宛名().getGyoseikuCode())) {
+            flag = true;
+        } else if (改頁項目リスト.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.郵便番号.get項目ID())
+                && 郵便番号 != null && !郵便番号.equals(nextSource.get宛名().getYubinNo())) {
+            flag = true;
+        }
+        return flag;
     }
 }

@@ -225,8 +225,8 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         setaiInn.set転出日(processParameter.get照会年月日());
         setaiInn.set転入異動日(所得照会票データ.getIdoYMD());
         setaiInn.set識別コード(所得照会票データ.getShikibetsuCode());
-        setaiInn.setカナ氏名(所得照会票データ.getAtenaKanaShimei().getColumnValue());
-        setaiInn.set氏名(所得照会票データ.getAtenaShimei().getColumnValue());
+        setaiInn.setカナ氏名(所得照会票データ.getKanaMeisho().getColumnValue());
+        setaiInn.set氏名(所得照会票データ.getMeisho().getColumnValue());
         setaiInn.set生年月日(所得照会票データ.getSeinengappiYMD());
         世帯員リスト.add(setaiInn);
     }

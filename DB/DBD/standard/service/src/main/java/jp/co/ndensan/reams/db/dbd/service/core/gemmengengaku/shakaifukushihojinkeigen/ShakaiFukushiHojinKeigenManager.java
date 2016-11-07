@@ -238,13 +238,13 @@ public class ShakaiFukushiHojinKeigenManager {
             RString 決定区分 = 社会福祉法人等利用者負担軽減情報.get決定区分();
             builder.set決定区分(決定区分);
             builder.set決定年月日(社会福祉法人等利用者負担軽減情報.get決定年月日());
+            builder.set適用開始年月日(社会福祉法人等利用者負担軽減情報.get適用開始年月日());
+            builder.set適用終了年月日(社会福祉法人等利用者負担軽減情報.get適用終了年月日());
             if (承認する.equals(決定区分)) {
                 builder.set生保扶助見直し特例有無(社会福祉法人等利用者負担軽減情報.is生保扶助見直し特例有無());
                 builder.set減免区分(社会福祉法人等利用者負担軽減情報.get減免区分());
                 builder.set軽減率_分子(社会福祉法人等利用者負担軽減情報.get軽減率_分子());
                 builder.set軽減率_分母(社会福祉法人等利用者負担軽減情報.get軽減率_分母());
-                builder.set適用開始年月日(社会福祉法人等利用者負担軽減情報.get適用開始年月日());
-                builder.set適用終了年月日(社会福祉法人等利用者負担軽減情報.get適用終了年月日());
                 builder.set居宅サービス限定(社会福祉法人等利用者負担軽減情報.is居宅サービス限定());
                 builder.set居住費_食費のみ(社会福祉法人等利用者負担軽減情報.is居住費_食費のみ());
                 builder.set旧措置者ユニット型個室のみ(社会福祉法人等利用者負担軽減情報.is旧措置者ユニット型個室のみ());
@@ -255,8 +255,6 @@ public class ShakaiFukushiHojinKeigenManager {
                         ? RString.EMPTY : 社会福祉法人等利用者負担軽減情報.get非承認理由());
                 builder.set生保扶助見直し特例有無(false);
                 builder.set減免区分(RString.EMPTY);
-                builder.set適用開始年月日(FlexibleDate.EMPTY);
-                builder.set適用終了年月日(FlexibleDate.EMPTY);
                 builder.set軽減率_分子(null);
                 builder.set軽減率_分母(null);
                 builder.set居宅サービス限定(false);

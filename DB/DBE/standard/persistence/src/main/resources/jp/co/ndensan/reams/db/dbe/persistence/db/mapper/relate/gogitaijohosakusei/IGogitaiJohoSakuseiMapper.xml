@@ -185,8 +185,8 @@
         DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" = DbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
         <where>
             <if test="is現在有効な合議体のみ">
-                AND DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{gogitaiYukoKikanKaishiYMD}
-                AND #{gogitaiYukoKikanKaishiYMD} <![CDATA[<=]]> DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanShuryoYMD"
+                AND DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{nowDate}
+                AND #{nowDate} <![CDATA[<=]]> DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanShuryoYMD"
             </if>
         </where>
         ORDER BY 

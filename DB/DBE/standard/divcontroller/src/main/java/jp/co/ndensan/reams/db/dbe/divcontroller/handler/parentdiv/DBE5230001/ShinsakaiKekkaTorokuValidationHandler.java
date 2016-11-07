@@ -68,9 +68,7 @@ public class ShinsakaiKekkaTorokuValidationHandler {
      * @return ValidationMessageControlPairs ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 有効月数チェック(ValidationMessageControlPairs validPairs) {
-        Decimal ninteiKikanMonth = new Decimal(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
-        if (div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().isNullOrEmpty()
-                || ninteiKikanMonth.compareTo(Decimal.ONE) == 0) {
+        if (div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().isNullOrEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
                     new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
         }
