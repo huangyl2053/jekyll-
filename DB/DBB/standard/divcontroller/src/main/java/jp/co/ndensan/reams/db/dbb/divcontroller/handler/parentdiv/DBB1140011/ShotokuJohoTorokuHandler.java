@@ -398,9 +398,7 @@ public final class ShotokuJohoTorokuHandler {
                 ? 激変緩和_対象 : RString.EMPTY);
         row.setTxtKetsugo03(合計所得金額.concat(改行タグ).concat(課税所得額));
         row.setTxtKetsugo04(年金収入額.concat(改行タグ).concat(年金所得額));
-        row.setRowState(RowState.Modified);
         boolean hasChange = false;
-
         if ((!div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().isDisplayNone()
                 && !div.getHidJuminzeiGenmenMae().equals(div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().getSelectedValue()))) {
             hasChange = true;
@@ -434,9 +432,10 @@ public final class ShotokuJohoTorokuHandler {
             hasChange = true;
         }
         if (hasChange) {
+            row.setRowState(RowState.Modified);
             row.setTxtJotai(状態_編集あり);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         changeTo初期状態(true);
     }
 
