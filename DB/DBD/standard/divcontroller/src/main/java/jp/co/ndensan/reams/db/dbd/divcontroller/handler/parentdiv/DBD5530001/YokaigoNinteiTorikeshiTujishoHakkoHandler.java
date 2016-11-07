@@ -132,6 +132,7 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
     public void insert(JukyushaDaicho daicho, RString riYu, RString 区分コード, FlexibleDate fromDate, FlexibleDate toDate, FlexibleDate 作成日) {
         Long 履歴 = Long.parseLong(daicho.get履歴番号().toString()) + 1;
         RString 履歴番号 = new RString(String.format("%04d", 履歴));
+        Code 二号特定疾病コード = daicho.get２号特定疾病コード() == null ? Code.EMPTY : daicho.get２号特定疾病コード();
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(daicho.get市町村コード(),
                 daicho.get被保険者番号(), 履歴番号, daicho.get枝番(), daicho.get受給申請事由());
         JukyushaDaichoManager manager = new JukyushaDaichoManager();
@@ -145,7 +146,7 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
                 .set届出者_申請者関係コード(daicho.get届出者_申請者関係コード())
                 .set届出者_本人との関係(daicho.get届出者_本人との関係())
                 .set受給申請年月日(daicho.get受給申請年月日())
-                .set２号特定疾病コード(daicho.get２号特定疾病コード())
+                .set２号特定疾病コード(二号特定疾病コード)
                 .set審査会依頼年月日(daicho.get審査会依頼年月日())
                 .set要介護認定状態区分コード(new Code(区分コード))
                 .set認定有効期間開始年月日(fromDate)
