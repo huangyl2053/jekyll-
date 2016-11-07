@@ -242,7 +242,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     @Override
     protected void afterExecute() {
-        if (count == 1) {
+        if (reportData != null) {
             ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
                     new HokenshaNo(association.get地方公共団体コード().value()), association.get市町村名(),
                     outputOrder, reportData, new ShiharaiHohoHenkoEntity(), REPORT_DBD200007);
