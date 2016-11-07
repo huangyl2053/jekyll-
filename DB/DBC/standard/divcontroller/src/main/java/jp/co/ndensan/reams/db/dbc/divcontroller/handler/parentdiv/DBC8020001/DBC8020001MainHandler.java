@@ -66,7 +66,6 @@ public class DBC8020001MainHandler {
     private static final RString INDEX_2 = new RString("2");
     private static final int INDEXSTART = 0;
     private static final int INDEX_4 = 4;
-    private static final int INDEX_5 = 5;
     private static final int INDEXEND = 6;
 
     /**
@@ -132,7 +131,9 @@ public class DBC8020001MainHandler {
                 get(0).get振込委託者Entity().getItakushamei());
         div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
                 get(0).get振込委託者Entity().getItakushaId().toString()));
-        div.getItakusha().getTxtFurikomiGroupCode().setValue(代表金融機関コード.value().concat(振込グループコード));
+        if (null != 代表金融機関コード) {
+            div.getItakusha().getTxtFurikomiGroupCode().setValue(代表金融機関コード.value().concat(振込グループコード));
+        }
         div.getItakusha().getTxtFurikomiGroupMeisho().setValue(entity.getFurikomiGroupItakushaRelateEntity().
                 get振込グループEntity().getFurikomiGroupMeisho());
 
