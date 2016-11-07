@@ -46,27 +46,27 @@ public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems
     /**
      * 性別
      */
-    性別(new RString("0013"), new RString(""), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
+    性別(new RString("0013"), new RString("性別"), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString(""), new RString("\"dbT2015KeisangoJoho_choshuHohoRirekiNo\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_choshuHohoRirekiNo\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString(""), new RString("\"dbT2015KeisangoJoho_hihokenshaNo\"")),
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"dbT2015KeisangoJoho_hihokenshaNo\"")),
     /**
      * 通知書番号
      */
-    通知書番号(new RString("0202"), new RString(""), new RString("\"dbT2015KeisangoJoho_tsuchishoNo\"")),
+    通知書番号(new RString("0202"), new RString("通知書番号"), new RString("\"dbT2015KeisangoJoho_tsuchishoNo\"")),
     /**
      * 徴収方法
      */
-    徴収方法(new RString("0209"), new RString(""), new RString("\"SortTemp_choshuHoho\"")),
+    徴収方法(new RString("0209"), new RString("徴収方法"), new RString("\"SortTemp_choshuHoho\"")),
     /**
      * 通知書番号
      */
-    特徴開始月(new RString("0213"), new RString(""), new RString("\"SortTemp_tkKaishiM\""));
+    特徴開始月(new RString("0213"), new RString("特徴開始月"), new RString("\"SortTemp_tkKaishiM\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

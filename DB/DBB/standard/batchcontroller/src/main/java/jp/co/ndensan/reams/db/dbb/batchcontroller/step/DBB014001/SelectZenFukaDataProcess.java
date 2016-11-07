@@ -76,7 +76,7 @@ public class SelectZenFukaDataProcess extends BatchKeyBreakBase<FukaJohoCalculat
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, param);
     }
 
     @Override

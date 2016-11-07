@@ -99,8 +99,11 @@
              AND "DbT2002Fuka"."choteiNendo" = #{調定前年度}
             </if>
          ORDER BY
-            "DbT2002Fuka"."hihokenshaNo" ,
-            "DbT2002Fuka"."tsuchishoNo"  DESC          
+            "DbT2002Fuka"."hihokenshaNo"
+            <if test="普通徴収_仮算定賦課方法!=null and 普通徴収_仮算定賦課方法.toString() != '01'">
+             , "DbT2002Fuka"."choteiNendo" DESC
+            </if>    
+             ,"DbT2002Fuka"."tsuchishoNo"  DESC 
     </select>
 
 

@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -182,7 +181,7 @@ public class InsFukaKeisanTempProcess extends BatchKeyBreakBase<FukaKeisanEntity
         DbT2010FukaErrorListEntity item = new DbT2010FukaErrorListEntity();
         item.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
         item.setInternalReportId(ReportIdDBB.DBB200006.getReportId().getColumnValue());
-        item.setInternalReportCreationDateTime(RDateTime.MAX);
+        item.setInternalReportCreationDateTime(parameter.getバッチ起動日時());
         item.setFukaNendo(parameter.get賦課年度());
         item.setTsuchishoNo(entity.get普徴仮算定抽出().getTsuchishoNo());
         item.setBatchId(BATCH_ID);

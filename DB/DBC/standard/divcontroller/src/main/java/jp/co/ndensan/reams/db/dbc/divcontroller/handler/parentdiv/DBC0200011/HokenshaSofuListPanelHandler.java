@@ -84,7 +84,7 @@ public class HokenshaSofuListPanelHandler {
         if (当月処理状態 != null && ShoriJotaiKubun.toValue(当月処理状態) != null) {
             row.setTxtTogetsuJotai(ShoriJotaiKubun.toValue(当月処理状態).get名称());
         }
-        row.setTxtShoriNichiji(model.get当月処理実施日時() != null ? model.get当月処理実施日時().getDate()
+        row.setTxtShoriNichiji(model.get当月処理実施日時() != null && !model.get当月処理実施日時().isEmpty() ? model.get当月処理実施日時().getDate()
                 .wareki().toDateString().concat(RString.HALF_SPACE)
                 .concat(model.get当月処理実施日時().getRDateTime().getTime().toString().substring(0, NUM)) : RString.EMPTY);
         row.setSaishoriFlag(get再処理可否区分(model.is再処理可能区分()));
