@@ -29,6 +29,7 @@
     <!-- 基準収入額適用管理の取得 -->
     <select resultOrdered="true" id="select基準収入額適用管理" resultMap="resultMap_KijunShunyugakuTekiyoKetteiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunshunyugakutekiyokettei.KijunShunyugakuTekiyoKetteiMybatisParameter" fetchSize="500">
+        WITH master AS(
         SELECT "DbT3116KijunShunyugakuTekiyoKanri"."setaiCode" AS "setaiCode",
                "DbT3116KijunShunyugakuTekiyoKanri"."nendo",
                "DbT3116KijunShunyugakuTekiyoKanri"."rirekiNo",
@@ -39,7 +40,6 @@
                "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD",
                "DbT3116KijunShunyugakuTekiyoKanri"."atesakiInjiTaishoshaFlag",
                "DbV1001HihokenshaDaicho"."shikibetsuCode" AS "Temp_識別コード",
-               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
                "Atesaki"."yubinNo" AS "yubinNo",
                "Atesaki"."choikiCode" AS "choikiCode",
@@ -59,11 +59,6 @@
         ON "DbT3116KijunShunyugakuTekiyoKanri"."setaiCode" = "世帯代表者"."setaiCode"
         INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
         ON "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo" = "DbV1001HihokenshaDaicho"."hihokenshaNo"
-        INNER JOIN 
-        rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,FALSE,FALSE,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,FALSE,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
         INNER JOIN
         rgua."UaFt250FindAtesaki"('DB','DBC','','false','','','true','true','false','false','') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
@@ -79,7 +74,23 @@
         </if>
         <if test="印書 == 2">
             AND （"DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" = '' OR "DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" IS NULL）
-        </if>
+        </if>)
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM
+        master
+        INNER JOIN 
+        rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,FALSE,FALSE,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,FALSE,true,'','','','','','','','','','','','','','','','','','',
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."Temp_識別コード" AS TEXT))
+                    FROM
+                        master
+                 ) ) AS "ShikibetsuTaisho" 
+        ON master."Temp_識別コード" = "ShikibetsuTaisho"."shikibetsuCode"
         ORDER BY <if test="temp_出力順 != null and !temp_出力順.isEmpty()">
                     ${temp_出力順},
                  </if>
