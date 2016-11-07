@@ -102,7 +102,6 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     private static final RString 償還申請中者 = new RString("【抽出対象】 償還申請中者");
     private static final RString 償還支給決定日抽出 = new RString("【抽出方法】 償還支給決定日抽出");
     private static final RString バッチ出力条件出力順 = new RString("出力順:");
-    private static final int 帳票期別リストSIZE = 3;
     private static final RString より = new RString("＞");
 
     private Association association;
@@ -405,7 +404,8 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
 
     private List<ShunoNendoEntity> edit収納情報List(List<ShunoStatusJohoEntity> 収納状況情報List) {
         List<FlexibleYear> 賦課年度List = new ArrayList<>();
-
+        RString configValue = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        FlexibleYear 日付関連_調定年度 = new FlexibleYear(configValue);
         List<ShunoNendoEntity> 帳票用収納状況情報List = new ArrayList<>();
         Map<FlexibleYear, List<ShunoStatusJohoEntity>> 収納状況情報Map = new HashMap<>();
         for (ShunoStatusJohoEntity 収納状況情報Data : 収納状況情報List) {
@@ -452,36 +452,43 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                     帳票用収納状況情報.set期別情報(期別情報List);
                 }
             }
-            RString configValue = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-            FlexibleYear 日付関連_調定年度 = new FlexibleYear(configValue);
+
             if (帳票用収納状況情報.get賦課年度().equals(日付関連_調定年度.minusYear(2))) {
                 帳票用収納状況情報List.add(帳票用収納状況情報);
-            } else {
-                帳票用収納状況情報List.add(new ShunoNendoEntity());
             }
 
             if (帳票用収納状況情報.get賦課年度().equals(日付関連_調定年度.minusYear(1))) {
                 帳票用収納状況情報List.add(帳票用収納状況情報);
-            } else {
-                帳票用収納状況情報List.add(new ShunoNendoEntity());
             }
-
             if (帳票用収納状況情報.get賦課年度().equals(日付関連_調定年度)) {
                 帳票用収納状況情報List.add(帳票用収納状況情報);
-            } else {
-                帳票用収納状況情報List.add(new ShunoNendoEntity());
-            }
-
-            if (!(帳票用収納状況情報.get賦課年度().equals(日付関連_調定年度.minusYear(2))
-                    || 帳票用収納状況情報.get賦課年度().equals(日付関連_調定年度.minusYear(1))
-                    || 帳票用収納状況情報.get賦課年度().equals(日付関連_調定年度))) {
-                帳票用収納状況情報List.add(帳票用収納状況情報);
-                while (帳票用収納状況情報List.size() < 帳票期別リストSIZE) {
-                    帳票用収納状況情報List.add(new ShunoNendoEntity());
-                }
             }
         }
-        return 帳票用収納状況情報List;
+        return getNew帳票用収納状況情報List(帳票用収納状況情報List, 日付関連_調定年度);
+    }
+
+    private List<ShunoNendoEntity> getNew帳票用収納状況情報List(List<ShunoNendoEntity> old帳票用収納状況情報List, FlexibleYear 日付関連_調定年度) {
+        List<ShunoNendoEntity> new帳票用収納状況情報List = new ArrayList<>();
+
+        int i = 0;
+        for (ShunoNendoEntity data : old帳票用収納状況情報List) {
+            if (i == 0 && !data.get賦課年度().equals(日付関連_調定年度.minusYear(2))) {
+                new帳票用収納状況情報List.add(new ShunoNendoEntity());
+            } else if (i == 1 && !data.get賦課年度().equals(日付関連_調定年度.minusYear(1))) {
+                new帳票用収納状況情報List.add(new ShunoNendoEntity());
+            } else if (i == 2 && !data.get賦課年度().equals(日付関連_調定年度)) {
+                new帳票用収納状況情報List.add(new ShunoNendoEntity());
+            } else {
+                new帳票用収納状況情報List.add(data);
+            }
+            i++;
+        }
+
+        while (new帳票用収納状況情報List.size() < 3) {
+            new帳票用収納状況情報List.add(new ShunoNendoEntity());
+        }
+
+        return new帳票用収納状況情報List;
     }
 
     private List<RString> get出力条件内容() {
@@ -497,7 +504,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 list.add(滞納期間.concat(new RString(parameter.get受給者全員の滞納期間())).concat(ヵ月経過));
             }
 
-            if (選択あり.equals(parameter.get受給申請中者())) {
+            if (選択あり.equals(parameter.get受給認定申請中者())) {
                 list.add(受給認定申請中者);
                 list.add(滞納期間.concat(new RString(parameter.get受給認定申請中者の滞納期間())).concat(ヵ月経過));
             }
@@ -506,9 +513,9 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 list.add(受給認定日抽出);
                 list.add(対象期間.concat(format日期(parameter.get受給認定日抽出の開始()))
                         .concat(カラ).concat(format日期(parameter.get受給認定日抽出の終了())));
+                list.add(滞納期間.concat(new RString(parameter.get受給認定日抽出の滞納期間())).concat(ヵ月経過));
             }
-
-            if (選択あり.equals(parameter.get受給認定申請中者())) {
+            if (選択あり.equals(parameter.get受給申請中者())) {
                 list.add(償還申請中者);
                 list.add(滞納期間.concat(new RString(parameter.get受給申請中者の滞納期間())).concat(ヵ月経過));
             }
