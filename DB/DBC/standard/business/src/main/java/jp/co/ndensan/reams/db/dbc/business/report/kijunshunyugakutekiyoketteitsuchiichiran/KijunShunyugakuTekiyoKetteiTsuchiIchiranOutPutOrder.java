@@ -18,23 +18,23 @@ public enum KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder implements IRepo
     /**
      * 郵便番号
      */
-    郵便番号("0001", "郵便番号", "yubinNo"),
+    郵便番号("0001", "郵便番号", "\"yubinNo\""),
     /**
      * 町域コード
      */
-    町域コード("0002", "町域コード", "choikiCode"),
+    町域コード("0002", "町域コード", "\"choikiCode\""),
     /**
      * 行政区コード
      */
-    行政区コード("0004", "行政区コード", "gyoseikuCode"),
+    行政区コード("0004", "行政区コード", "\"gyoseikuCode\""),
     /**
      * 世帯コード
      */
-    世帯コード("0008", "世帯コード", "setaiCode"),
+    世帯コード("0008", "世帯コード", "\"ShikibetsuTaisho\".\"setaiCode\""),
     /**
      * 市町村コード
      */
-    市町村コード("0016", "市町村コード", "shichosonCode");
+    市町村コード("0016", "市町村コード", "\"shichosonCode\"");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

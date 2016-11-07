@@ -137,8 +137,16 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
             FlexibleDate 適用開始 = div.getMeisai().getTxtTekiyoStartYM().getValue();
             FlexibleDate 決定年月日 = div.getMeisai().getTxtKetteiYMD().getValue();
             RString 算定基準額 = div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue();
-            return ((適用開始 != null && !適用開始.isEmpty()) && (決定年月日 != null && !決定年月日.isEmpty())
-                    && (算定基準額 != null && !算定基準額.isEmpty()));
+            return (isNullDate(適用開始) && isNullDate(決定年月日) && isNullRString(算定基準額))
+                    || (!isNullDate(適用開始) && !isNullDate(決定年月日) && !isNullRString(算定基準額));
+        }
+
+        private static boolean isNullDate(FlexibleDate date) {
+            return date == null || date.isEmpty();
+        }
+
+        private static boolean isNullRString(RString str) {
+            return str.isNullOrEmpty();
         }
 
         public static boolean is処理年度チェック(KijunShunyuShinseiTourokuDiv div) {

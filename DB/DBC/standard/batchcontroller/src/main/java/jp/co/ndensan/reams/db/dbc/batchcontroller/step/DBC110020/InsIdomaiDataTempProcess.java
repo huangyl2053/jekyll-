@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7123KokuhoShikakuInfoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7124KokiKoreishaInfoEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -182,8 +181,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         List<JushochitokureiInfoEntity> 住所地特例List = get住所地特例();
         住所地特例(住所地特例List, 処理年月);
         PSMInfoEntity 宛名情報 = get宛名();
-//        List<DbT7124KokiKoreishaInfoEntity> 後期高齢者情報List = get後期高齢者情報();
-//        List<DbT7123KokuhoShikakuInfoEntity> 国保資格情報List = get国保資格();
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 二割負担List = get二割負担();
         負担割合処理(二割負担List, 処理年月);
         List<UrT0508SeikatsuHogoJukyushaEntity> 生活保護受給者List = get生活保護受給者();
@@ -1475,18 +1472,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         return 後期高齢者List;
     }
 
-    private List<DbT7123KokuhoShikakuInfoEntity> get国保資格() {
-        List<DbT7123KokuhoShikakuInfoEntity> 国保資格List = new ArrayList<>();
-        for (IdouTblEntity 異動一時 : 異動一時List) {
-            DbT7123KokuhoShikakuInfoEntity 国保資格 = get国保資格entity(異動一時.get国保資格情報());
-            if (国保資格 == null) {
-                continue;
-            }
-            国保資格List.add(国保資格);
-        }
-        return 国保資格List;
-    }
-
     private List<DbT3100NijiYoboJigyoTaishoshaEntity> get二次予防() {
         List<DbT3100NijiYoboJigyoTaishoshaEntity> 二次予防List = new ArrayList<>();
         for (IdouTblEntity 異動一時 : 異動一時List) {
@@ -1677,17 +1662,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         return entity;
     }
 
-    private DbT7123KokuhoShikakuInfoEntity get国保資格entity(RString 国保資格) {
-        if (RString.isNullOrEmpty(国保資格)) {
-            return null;
-        }
-        DbT7123KokuhoShikakuInfoEntity entity = new DbT7123KokuhoShikakuInfoEntity();
-        List<RString> 国保資格Info = 国保資格.split(SPLIT.toString());
-        entity.setKokuhoHokenshaNo(国保資格Info.get(ORDER_0));
-        entity.setKokuhoKojinNo(国保資格Info.get(ORDER_1));
-        return entity;
-    }
-
     private DbT3100NijiYoboJigyoTaishoshaEntity get二次予防entity(RString 二次予防) {
         if (RString.isNullOrEmpty(二次予防)) {
             return null;
@@ -1846,7 +1820,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 && !isDateEmpty(異動一時entity.get資格取得年月日())
                 && isBeforeDate(異動一時entity.get二次予防事業有効期間開始年月日(), 異動一時entity.get資格取得年月日())) {
             allData.remove(i);
-            return;
         }
     }
 
@@ -1880,7 +1853,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private boolean is月末(FlexibleDate date) {
-        if ((date == null || date.isEmpty())) {
+        if (date == null || date.isEmpty()) {
             return false;
         }
         int 月末 = date.getYearMonth().getLastDay();
@@ -2216,8 +2189,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
         再編集更新(allData);
         int 履歴通番 = 1;
-        RString 計画終了日Flag = DbBusinessConfig.get(ConfigNameDBC.国保連受給異動_計画終了日_星, RDate.getNowDate(),
-                SubGyomuCode.DBC介護給付);
         for (int i = 0; i < allData.size(); i++) {
             IdoTblTmpEntity entity = allData.get(i);
             entity.set履歴番号(履歴通番);
@@ -2253,18 +2224,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                     || isBeforeDate(new FlexibleDate(entity.get償還払化開始年月日()), entity.get資格取得年月日()))) {
                 entity.set償還払化開始年月日(星);
                 entity.set償還払化終了年月日(星);
-            }
-            if (要介護状態区分判断(entity, 計画終了日Flag)) {
-                entity.set居宅サービス計画作成区分コード(星);
-                entity.set居宅介護支援事業所番号(星);
-                entity.set居宅サービス計画適用開始年月日(星);
-                entity.set居宅サービス計画適用終了年月日(星);
-            } else if (STR_2.equals(entity.get居宅サービス計画作成区分コード())
-                    && !STR_1.equals(entity.get異動区分コード())) {
-                entity.set居宅介護支援事業所番号(星);
-            } else if (STR_1.equals(計画終了日Flag)
-                    && !STR_1.equals(entity.get異動区分コード())) {
-                entity.set居宅サービス計画適用終了年月日(星);
             }
             if (!entity.is公費負担上限額減額有フラグ()) {
                 entity.set公費負担上限額減額有フラグ(true);
@@ -2335,6 +2294,20 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private void 再編集一部(IdoTblTmpEntity entity) {
+        RString 計画終了日Flag = DbBusinessConfig.get(ConfigNameDBC.国保連受給異動_計画終了日_星, RDate.getNowDate(),
+                SubGyomuCode.DBC介護給付);
+        if (要介護状態区分判断(entity, 計画終了日Flag)) {
+            entity.set居宅サービス計画作成区分コード(星);
+            entity.set居宅介護支援事業所番号(星);
+            entity.set居宅サービス計画適用開始年月日(星);
+            entity.set居宅サービス計画適用終了年月日(星);
+        } else if (STR_2.equals(entity.get居宅サービス計画作成区分コード())
+                && !STR_1.equals(entity.get異動区分コード())) {
+            entity.set居宅介護支援事業所番号(星);
+        } else if (STR_1.equals(計画終了日Flag)
+                && !STR_1.equals(entity.get異動区分コード())) {
+            entity.set居宅サービス計画適用終了年月日(星);
+        }
         if (!RString.isNullOrEmpty(entity.get給付率引下げ開始年月日())
                 && (isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get異動年月日())
                 || isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get資格取得年月日()))) {
@@ -2451,5 +2424,4 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
         return date1.getYearMonth().equals(date2.getYearMonth());
     }
-
 }

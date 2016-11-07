@@ -411,7 +411,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                     return;
                 }
                 FlexibleDate 資格取得日 = 被保険者台帳.getShikakuShutokuYMD();
-                if (資格取得日 != null && 資格取得日.isBeforeOrEquals(認定開始日)) {
+                if (!isDateEmpty(資格取得日) && 資格取得日.isBeforeOrEquals(認定開始日)) {
                     hasError = false;
                     break;
                 }

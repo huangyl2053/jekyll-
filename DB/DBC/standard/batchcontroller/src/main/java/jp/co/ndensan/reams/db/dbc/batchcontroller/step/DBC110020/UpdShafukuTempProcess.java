@@ -77,13 +77,21 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
             異動一時tableWriter.update(update);
             return;
         }
-        if (entity.get異動一時().get連番() <= 連番.intValue()) {
+        Decimal 連番temp = 連番.add(Decimal.ONE);
+        if (連番temp.intValue() <= entity.get異動一時().get被保険者番号Max連番()) {
+            if (連番temp.intValue() != entity.get異動一時().get連番()) {
+                return;
+            }
+            連番Map.put(entity.get社福減免().get被保険者番号(), 連番temp);
+            IdouTblEntity update = entity.get異動一時();
+            update.set社福減免(全項目);
+            異動一時tableWriter.update(update);
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
             連番Map.put(entity.get社福減免().get被保険者番号(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
-            insert.set被保険者番号(entity.get被保険者番号());
+            insert.set被保険者番号(entity.get社福減免().get被保険者番号());
             insert.set連番(連番.add(Decimal.ONE).intValue());
             insert.set支払方法変更_支払方法(RString.EMPTY);
             insert.set支払方法変更_給付費減額(RString.EMPTY);
@@ -103,11 +111,6 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
             insert.set総合事業対象者(RString.EMPTY);
             insert.set被保険者台帳管理(RString.EMPTY);
             異動一時tableWriter.insert(insert);
-        } else {
-            連番Map.put(entity.get社福減免().get被保険者番号(), new Decimal(entity.get異動一時().get連番()));
-            IdouTblEntity update = entity.get異動一時();
-            update.set社福減免(全項目);
-            異動一時tableWriter.update(update);
         }
     }
 

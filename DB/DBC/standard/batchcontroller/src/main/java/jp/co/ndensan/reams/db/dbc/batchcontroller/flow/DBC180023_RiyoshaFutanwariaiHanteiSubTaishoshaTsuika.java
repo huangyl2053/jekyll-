@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainJohoSakus
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainTuikaProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.HanteiKijunYMDInstance;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180023.DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
@@ -30,8 +30,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class SetainHakunyuryokuFlow
-        extends BatchFlowBase<DBC180022_RiyoshaFutanwariaiHanteiSubParameter> {
+public class DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuika
+        extends BatchFlowBase<DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter> {
 
     private static final String 判定基準日設定 = "hanteiKijunbiSetteiProcess";
     private static final String CLEAR世帯員情報 = "clearSetaiinJohoTempProcess";
@@ -60,7 +60,7 @@ public class SetainHakunyuryokuFlow
         getParameter().set対象終了日(service.getTaishoShuryobi(nendo));
         List<RString> hanteiKijunbi = getParameter().getHanteiKijunbi();
         kijunbiSize = hanteiKijunbi == null ? 0 : hanteiKijunbi.size();
-        processPrm = util.toProcessParameter(getParameter());
+        processPrm = util.toProcessParameter(getParameter().toDBC180022_RiyoshaFutanwariaiHanteiSubParameter());
     }
 
     @Override
@@ -68,7 +68,8 @@ public class SetainHakunyuryokuFlow
         List<RString> hanteiKijunbi = getParameter().getHanteiKijunbi();
         kijunbiSize = hanteiKijunbi == null ? 0 : hanteiKijunbi.size();
         for (int i = 0; i < kijunbiSize; i++) {
-            loopProcessPrm = new RiyoshaFutanWariaiHanteiUtil().toProcessParameter(getParameter(), i);
+            loopProcessPrm = new RiyoshaFutanWariaiHanteiUtil().toProcessParameter(
+                    getParameter().toDBC180022_RiyoshaFutanwariaiHanteiSubParameter(), i);
             executeStep(判定基準日設定);
             loopProcessPrm.getHanteiKijunbi().set(i, HanteiKijunYMDInstance.getInstance().get判定基準日());
             executeStep(世帯員把握入力);

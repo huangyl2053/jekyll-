@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.report.shokanketteissuchishosealer;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer2ReportSource;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のEditorです。
@@ -54,13 +56,17 @@ public class ShokanKetteiTsuchiShoSealer2HeadEditor implements IShokanKetteiTsuc
         source.hihokenshaNo10 = item.getHihokenshaNo10();
         source.uketsukeYMD = item.getUketsukeYMD();
         source.ketteiYMD = item.getKetteiYMD();
-        source.shiharaiGaku = item.getShiharaiGaku();
+        if (item.getShiharaiGaku() != null && !item.getShiharaiGaku().isEmpty()) {
+            source.shiharaiGaku = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getShiharaiGaku().toString()), 0);
+        }
         source.taishoYM = item.getTaishoYM();
         source.kyufuShurui1 = item.getKyufuShurui1();
         source.kyufuShurui2 = item.getKyufuShurui2();
         source.kyufuShurui3 = item.getKyufuShurui3();
         source.kekka = item.getKekka();
-        source.shikyuGaku = item.getShikyuGaku();
+        if (item.getShikyuGaku() != null && !item.getShikyuGaku().isEmpty()) {
+            source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getShikyuGaku().toString()), 0);
+        }
         source.riyu1 = item.getRiyu1();
         source.riyuTitle = item.getRiyuTitle();
         source.riyu2 = item.getRiyu2();
