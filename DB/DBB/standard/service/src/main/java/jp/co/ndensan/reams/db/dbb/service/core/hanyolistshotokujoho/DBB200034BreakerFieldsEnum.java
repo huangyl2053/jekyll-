@@ -38,19 +38,19 @@ public enum DBB200034BreakerFieldsEnum implements IReportItems {
     /**
      * 課税区分
      */
-    課税区分(new RString("0218"), new RString(""), new RString("DbV2502.\"kazeiKubun\"")),
+    課税区分(new RString("0218"), new RString(""), new RString("master.\"課税区分減免前\"")),
     /**
      * 識別コード
      */
-    識別コード(new RString("0009"), new RString(""), new RString("DbV2502.\"shikibetsuCode\"")),
+    識別コード(new RString("0009"), new RString(""), new RString("master.\"識別コード\"")),
     /**
      * 保険料段階
      */
-    保険料段階(new RString("0201"), new RString(""), new RString("B.\"hokenryoDankai\"")),
+    保険料段階(new RString("0201"), new RString(""), new RString("master.\"保険料段階\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString(""), new RString("B.\"hihokenshaNo\""));
+    被保険者番号(new RString("0104"), new RString(""), new RString("master.\"被保険者番号\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
