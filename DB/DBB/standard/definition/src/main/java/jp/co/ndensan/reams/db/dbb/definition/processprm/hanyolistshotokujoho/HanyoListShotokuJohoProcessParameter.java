@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistshotokujoho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.hanyolistshotokujoho.HanyoListShotokuJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -45,7 +45,7 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
     private RString 住民税減免前後表示区分;
     private List<RString> 課税区分減免前s;
     private List<RString> 課税区分減免後s;
-    private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+    private UaFt200FindShikibetsuTaishoParam 宛名検索条件;
     private RString 年齢層抽出方法;
     private Decimal 年齢範囲開始;
     private Decimal 年齢範囲終了;
@@ -58,9 +58,9 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
     /**
      * コンストラクタ
      *
-     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
+     * @param 宛名検索条件 UaFt200FindShikibetsuTaishoParam
      */
-    public HanyoListShotokuJohoProcessParameter(IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+    public HanyoListShotokuJohoProcessParameter(UaFt200FindShikibetsuTaishoParam 宛名検索条件) {
         this.宛名検索条件 = 宛名検索条件;
     }
 

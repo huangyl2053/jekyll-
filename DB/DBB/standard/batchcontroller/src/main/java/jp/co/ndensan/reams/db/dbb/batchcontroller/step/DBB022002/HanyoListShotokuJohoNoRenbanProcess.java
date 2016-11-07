@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -211,7 +212,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
             processParameter.set生年月日範囲終了1(生年月日範囲終了1);
         }
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        processParameter.set宛名検索条件(searchKey);
+        processParameter.set宛名検索条件(new UaFt200FindShikibetsuTaishoParam(searchKey));
         processParameter.set年齢層抽出方法(年齢層抽出方法);
         if (生年月日範囲開始 != null) {
             processParameter.set生年月日範囲開始(new FlexibleDate(生年月日範囲開始.toDateString()));

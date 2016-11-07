@@ -931,15 +931,17 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 || 計画照会モード.equals(div.getMode())) {
             return true;
         }
-        boolean is変更;
-        is変更 = !equalsRString(KEY_0, div.getRadTodokedeKubun().getSelectedKey())
-                || div.getTxtKeikakuTekiyoStartYMD().getValue() != null
+        boolean is変更 = div.getTxtKeikakuTekiyoStartYMD().getValue() != null
                 || div.getTxtKeikakuTekiyoEndYMD().getValue() != null
                 || div.getTxtTodokedeYM().getValue() != null
-                || div.getTxtTodokedeshaYubinNo().getValue() != null
-                || div.getTxtTodokedeshaJusho().getValue() != null;
+                || (div.getTxtTodokedeshaYubinNo().getValue() != null && !div.getTxtTodokedeshaYubinNo().getValue().isEmpty())
+                || (div.getTxtTodokedeshaJusho().getValue() != null && !div.getTxtTodokedeshaJusho().getValue().isEmpty())
+                || div.getTodokedesha().getTxtTodokedeshaShimei() != null
+                || div.getTodokedesha().getTxtTodokedeshaShimeiKana() != null
+                || div.getTodokedesha().getTxtTodokedeshaJusho() != null
+                || div.getTodokedesha().getTxtTodokedeshaTelNo() != null;
         if (is変更) {
-            return is変更;
+            return false;
         }
         is変更 = is事業者作成が変更(被保険者番号);
         if (!is変更 && is自己作成の場合()) {
