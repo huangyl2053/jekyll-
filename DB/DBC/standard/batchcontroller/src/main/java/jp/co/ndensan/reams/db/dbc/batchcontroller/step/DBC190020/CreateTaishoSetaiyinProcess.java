@@ -281,12 +281,14 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         TaishoSetaiinEntity 対象世帯員 = entity.get対象世帯員();
         対象世帯員.setAtenaInnjiKubun(null == 宛先 ? RString.EMPTY : RSTRING_1);
         IJusho 住所 = 宛名.get住所();
-        int 文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().getBanchi().getColumnValue().length();
-        if (INT_80 < 文字列長) {
-            文字切れflag = true;
-            対象世帯員.setInnjiGirisiamojiKubun(true);
-        } else {
-            対象世帯員.setInnjiGirisiamojiKubun(false);
+        if (!flag || isChangeShotaiCode(this.exEntity.get対象世帯員(), entity.get対象世帯員())) {
+            int 文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().getBanchi().getColumnValue().length();
+            if (INT_80 < 文字列長) {
+                文字切れflag = true;
+                対象世帯員.setInnjiGirisiamojiKubun(true);
+            } else {
+                対象世帯員.setInnjiGirisiamojiKubun(false);
+            }
         }
         if (RSTRING_1.equals(entity.get対象世帯員().getShuturyokuUmu())) {
             対象世帯員fla = true;
@@ -341,6 +343,12 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                         .reportId(ReportIdDBC.DBC100064.getReportId().value())
                         .build();
                 dBC100064SourceWriter1 = new ReportSourceWriter<>(dBC100064ReportWriter1);
+
+                dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
+                dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
+
+                dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
+                dBC100064SourceWriter0 = new ReportSourceWriter<>(dBC100064ReportWriter0);
             } else {
                 dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
                 dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
@@ -372,7 +380,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
             if (i == this.createTaishoSetaiyinList.size() - 1) {
                 this.write帳票(taishoSetaiyinList);
-
             } else if (isChangeShotaiCode(this.createTaishoSetaiyinList.get(i).get対象世帯員(),
                     this.createTaishoSetaiyinList.get(i + 1).get対象世帯員())) {
                 this.write帳票(taishoSetaiyinList);
@@ -423,14 +430,18 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             if (index164 != INT_1) {
                 this.write申請書出力帳票(kijunEntity1);
             }
-            this.writeお知らせ通知書帳票(kijunEntity);
+            IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(taishoSetaiyinList.get(0).get宛名());
+            IJusho 住所 = 宛名.get住所();
+            int 文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().getBanchi().getColumnValue().length();
+            this.writeお知らせ通知書帳票(kijunEntity, 文字列長);
             index = 1;
             index164 = 1;
         }
     }
 
-    private void writeお知らせ通知書帳票(KijunShunyugakuTekiyoShinseishoEntity kijunEntity) {
-        if (文字切れflag) {
+    private void writeお知らせ通知書帳票(KijunShunyugakuTekiyoShinseishoEntity kijunEntity, int 文字列長) {
+
+        if (INT_80 < 文字列長) {
             if (this.parameter.getお知らせ通知書出力フラグ()) {
                 KijunShunyugakuTekiyoOshiraseTsuchishoReport kijunReport
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
@@ -449,9 +460,12 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     }
 
-    private void write申請書出力帳票(
-            KijunShunyugakuTekiyoShinseishoEntity kijunEntity1) {
-        if (文字切れflag) {
+    private void write申請書出力帳票(KijunShunyugakuTekiyoShinseishoEntity kijunEntity1) {
+        int 住所 = kijunEntity1.get住所１().length();
+        if (null != kijunEntity1.get住所２()) {
+            住所 = 住所 + kijunEntity1.get住所２().length();
+        }
+        if (INT_80 < 住所) {
             if (this.parameter.get申請書出力フラグ()) {
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter1);
