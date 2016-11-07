@@ -369,6 +369,7 @@ public final class ShotokuJohoTorokuHandler {
             生年月日Str = 生年月日Str.substring(0, 生年月日Str.lastIndexOf(RString.FULL_SPACE));
             生年月日 = new FlexibleDate((new RDate(生年月日Str.toString())).toString());
         }
+        save所得照会回答内容登録();
         set金額制御TO内容登録(生年月日, is被保険者);
         set住民税減免前_後表示制御情報TO内容登録();
         set激変緩和表示制御情報TO内容登録();
@@ -398,7 +399,43 @@ public final class ShotokuJohoTorokuHandler {
         row.setTxtKetsugo03(合計所得金額.concat(改行タグ).concat(課税所得額));
         row.setTxtKetsugo04(年金収入額.concat(改行タグ).concat(年金所得額));
         row.setRowState(RowState.Modified);
-        row.setTxtJotai(状態_編集あり);
+        boolean hasChange = false;
+
+        if ((!div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().isDisplayNone()
+                && !div.getHidJuminzeiGenmenMae().equals(div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().getSelectedValue()))) {
+            hasChange = true;
+        }
+        if ((!div.getShotokuJohoToroku().getDdlJuminzeiGenmenAto().isDisplayNone()
+                && !div.getHidJuminzeiGenmenAto().equals(div.getShotokuJohoToroku().getDdlJuminzeiGenmenAto().getSelectedValue()))) {
+            hasChange = true;
+        }
+        if ((!div.getShotokuJohoToroku().getDdlJuminzei().isDisplayNone()
+                && !div.getHidJuminzei().equals(div.getShotokuJohoToroku().getDdlJuminzei().getSelectedValue()))) {
+            hasChange = true;
+        }
+        if ((!div.getShotokuJohoToroku().getDdlGekihenKanwa().isDisplayNone()
+                && !div.getHidGekihenKanwa().equals(div.getShotokuJohoToroku().getDdlGekihenKanwa().getSelectedValue()))) {
+            hasChange = true;
+        }
+        if ((!div.getShotokuJohoToroku().getTxtGokeiShotokuGaku().isDisplayNone()
+                && !div.getHidGokeiShotokuGaku().equals(new RString(div.getShotokuJohoToroku().getTxtGokeiShotokuGaku().getValue().toString())))) {
+            hasChange = true;
+        }
+        if ((!div.getShotokuJohoToroku().getTxtNenkinShunyuGaku().isDisplayNone()
+                && !div.getHidNenkinShunyuGaku().equals(new RString(div.getShotokuJohoToroku().getTxtNenkinShunyuGaku().getValue().toString())))) {
+            hasChange = true;
+        }
+        if ((!div.getShotokuJohoToroku().getTxtNenkinShotokuGaku().isDisplayNone()
+                && !div.getHidNenkinShotokuGaku().equals(new RString(div.getShotokuJohoToroku().getTxtNenkinShotokuGaku().getValue().toString())))) {
+            hasChange = true;
+        }
+        if ((!div.getShotokuJohoToroku().getTxtKazeiShotokuGaku().isDisplayNone()
+                && !div.getHidKazeiShotokuGaku().equals(new RString(div.getShotokuJohoToroku().getTxtKazeiShotokuGaku().getValue().toString())))) {
+            hasChange = true;
+        }
+        if (hasChange) {
+            row.setTxtJotai(状態_編集あり);
+        }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
         changeTo初期状態(true);
     }
@@ -515,6 +552,17 @@ public final class ShotokuJohoTorokuHandler {
     private void changeTo初期状態(boolean isDisplay) {
         div.getSetaiShotokuInfo().setDisplayNone(!isDisplay);
         div.getShotokuJohoToroku().setDisplayNone(isDisplay);
+    }
+
+    private void save所得照会回答内容登録() {
+        div.setHidJuminzeiGenmenMae(div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().getSelectedValue());
+        div.setHidJuminzeiGenmenAto(div.getShotokuJohoToroku().getDdlJuminzeiGenmenAto().getSelectedValue());
+        div.setHidJuminzei(div.getShotokuJohoToroku().getDdlJuminzei().getSelectedValue());
+        div.setHidGekihenKanwa(div.getShotokuJohoToroku().getDdlGekihenKanwa().getSelectedValue());
+        div.setHidGokeiShotokuGaku(new RString(div.getShotokuJohoToroku().getTxtGokeiShotokuGaku().getValue().toString()));
+        div.setHidNenkinShunyuGaku(new RString(div.getShotokuJohoToroku().getTxtNenkinShunyuGaku().getValue().toString()));
+        div.setHidNenkinShotokuGaku(new RString(div.getShotokuJohoToroku().getTxtNenkinShotokuGaku().getValue().toString()));
+        div.setHidKazeiShotokuGaku(new RString(div.getShotokuJohoToroku().getTxtKazeiShotokuGaku().getValue().toString()));
     }
 
 }
