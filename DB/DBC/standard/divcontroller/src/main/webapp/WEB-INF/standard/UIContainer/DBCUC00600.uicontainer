@@ -131,7 +131,7 @@
      "layoutName": "DBC0060011",
      "layoutTitle": "給付管理票照会",
      "eventName": "対象者検索",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
