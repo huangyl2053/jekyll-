@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -148,7 +149,6 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
-    int count = 0;
     ShiharaiHohoHenkoEntity reportData;
     ShiharaiHohoHenkoEntity reportData1;
 
@@ -283,12 +283,25 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
             if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
                 reportDataEntity.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
+            } else {
+                reportDataEntity.set世帯番号(new Code(RString.EMPTY));
             }
             reportDataEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             reportDataEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
             reportDataEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             reportDataEntity.set郵便番号(kojin.get住所().get郵便番号());
             reportDataEntity.set住所(kojin.get住所().get住所());
+        } else {
+            reportDataEntity.set識別コード(ShikibetsuCode.EMPTY);
+            reportDataEntity.set被保険者氏名カナ(RString.EMPTY);
+            reportDataEntity.set被保険者氏名(RString.EMPTY);
+            reportDataEntity.set世帯番号(new Code(RString.EMPTY));
+
+            reportDataEntity.set行政区コード(RString.EMPTY);
+            reportDataEntity.set行政区(RString.EMPTY);
+            reportDataEntity.set住所コード(RString.EMPTY);
+            reportDataEntity.set郵便番号(new YubinNo(RString.EMPTY));
+            reportDataEntity.set住所(RString.EMPTY);
         }
     }
 
