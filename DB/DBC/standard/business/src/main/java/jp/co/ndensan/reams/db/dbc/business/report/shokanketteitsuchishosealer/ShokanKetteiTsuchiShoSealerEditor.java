@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishosealer;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoSealerReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）Editorです。
@@ -56,20 +58,28 @@ public class ShokanKetteiTsuchiShoSealerEditor implements IShokanKetteiTsuchiSho
         source.shiharaiYoteiYMD = item.getShiharaiYoteiYMD();
         source.kyufuShurui1 = item.getKyufuShurui1();
         source.taishoYM1 = item.getTaishoYM1();
-        source.shikyuGaku1 = item.getShikyuGaku1();
+        if (item.getShikyuGaku1() != null && !item.getShikyuGaku1().isEmpty()) {
+            source.shikyuGaku1 = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getShikyuGaku1().toString()), 0);
+        }
         source.yen1 = item.getYen1();
         source.info = item.getInfo();
         source.kyufuShurui2 = item.getKyufuShurui2();
         source.taishoYM2 = item.getTaishoYM2();
-        source.shikyuGaku2 = item.getShikyuGaku2();
+        if (item.getShikyuGaku2() != null && !item.getShikyuGaku2().isEmpty()) {
+            source.shikyuGaku2 = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getShikyuGaku2().toString()), 0);
+        }
         source.yen2 = item.getYen2();
         source.kyufuShurui3 = item.getKyufuShurui3();
         source.taishoYM3 = item.getTaishoYM3();
-        source.shikyuGaku3 = item.getShikyuGaku3();
+        if (item.getShikyuGaku3() != null && !item.getShikyuGaku3().isEmpty()) {
+            source.shikyuGaku3 = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getShikyuGaku3().toString()), 0);
+        }
         source.yen3 = item.getYen3();
         source.kyufuShurui4 = item.getKyufuShurui4();
         source.taishoYM4 = item.getTaishoYM4();
-        source.shikyuGaku4 = item.getShikyuGaku4();
+        if (item.getShikyuGaku4() != null && !item.getShikyuGaku4().isEmpty()) {
+            source.shikyuGaku4 = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getShikyuGaku4().toString()), 0);
+        }
         source.yen4 = item.getYen4();
         source.bankName = item.getBankName();
         source.branchBankName = item.getBranchBankName();
