@@ -47,9 +47,9 @@ public class ShotokuShoukaiDataTempEntity implements IDbAccessable, Serializable
     @TempTableColumnOrder(9)
     private RString genjusho;
     @TempTableColumnOrder(10)
-    private AtenaKanaMeisho atenaKanaShimei;
+    private AtenaKanaMeisho kanaMeisho;
     @TempTableColumnOrder(11)
-    private AtenaMeisho atenaShimei;
+    private AtenaMeisho meisho;
     @TempTableColumnOrder(12)
     private FlexibleDate seinengappiYMD;
     @TempTableColumnOrder(13)

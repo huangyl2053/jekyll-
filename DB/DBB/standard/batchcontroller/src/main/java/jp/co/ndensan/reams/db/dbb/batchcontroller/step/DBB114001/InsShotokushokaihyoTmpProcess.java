@@ -117,8 +117,8 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         entity.setHihokenshajusho(t.getHihokenshajusho());
         entity.setZenjusho(t.getZenjusho());
         entity.setGenjusho(t.getGenjusho());
-        entity.setAtenaKanaShimei(t.getAtenaKanaShimei());
-        entity.setAtenaShimei(t.getAtenaShimei());
+        entity.setKanaMeisho(t.getKanaMeisho());
+        entity.setMeisho(t.getMeisho());
         entity.setSeinengappiYMD(t.getSeinengappiYMD());
         entity.setIdoYMD(t.getIdoYMD());
         entity.setKouhoshakubun(t.getKouhoshakubun());

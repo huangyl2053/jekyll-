@@ -34,7 +34,7 @@ public enum ShotokushokaihyoHakkoIchiranOutPutOrder implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"atenaKanaShimei\"")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"kanaMeisho\"")),
     /**
      * 生年月日
      */
@@ -42,7 +42,7 @@ public enum ShotokushokaihyoHakkoIchiranOutPutOrder implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"shichosonCode\"")),
     /**
      * 異動年月日
      */
