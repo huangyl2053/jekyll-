@@ -7,7 +7,7 @@
     <resultMap id="NNinteishinsehhinseirirekininteikekkajohoResult" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5610001.KoshinTaishoshaKanriEntity">
         <association  property="dbT4101NinteiShinseiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association  property="dbT4121ShinseiRirekJohoEntity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.ResultMap_DbT4121ShinseiRirekiJohoEntity"/>
-        <association  property="dbT4102NinteiKekkaJohoEntity"   resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
+        <association  property="dbT4001JukyushaDaichoEntity"   resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
         <association  property="seihoDbT4101NinteiShinseiJohoEntity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
     </resultMap>
 <select id="get更新申請対象者情報"
@@ -27,7 +27,7 @@
     ON A."shinseishoKanriNo" =A1."shinseishoKanriNo"
     LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" as A2
     ON A1."zenkaiShinseishoKanriNo" =A2."shinseishoKanriNo"
-    LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" as B
+    LEFT JOIN rgdb."DbV4001JukyushaDaicho" as B
     ON A."shinseishoKanriNo"=B."shinseishoKanriNo"
     WHERE 
     (A."ninteiShinseiShinseijiKubunCode"='2' 
@@ -37,11 +37,11 @@
     AND A."logicalDeletedFlag"=false 
     AND A."shoriJotaiKubun"=#{shoriJotaiKubun}
     <if test="前回以降の未処理分" >
-        AND LEFT(B."nijiHanteiNinteiYukoShuryoYMD",6)=#{対象月}
+        AND LEFT(B."ninteiYukoKikanShuryoYMD",6)=#{対象月}
         </if>
         <if test="有効期間終了日を範囲指定する">
-            AND #{有効期間終了日From}<![CDATA[<=]]> B."nijiHanteiNinteiYukoShuryoYMD"
-            AND B."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]>#{有効期間終了日To}                 
+            AND #{有効期間終了日From}<![CDATA[<=]]> B."ninteiYukoKikanShuryoYMD"
+            AND B."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]>#{有効期間終了日To}                 
         </if>
      AND A."shinseishoKanriNo" NOT IN (SELECT rgdb."DbT4131Tenshutsu"."shinseishoKanriNo" 
                                        FROM rgdb."DbT4131Tenshutsu"
