@@ -247,7 +247,11 @@ public class HanyoListParameteHandler {
             parameter.set金融機関名称(panel.getCcdKinyuKikan().get金融機関名());
         }
 
-        parameter.set対象年度(panel.getDdlTaishoNendo().getSelectedKey());
+        if (panel.getDdlTaishoNendo().getSelectedValue() != null) {
+            parameter.set対象年度(panel.getDdlTaishoNendo().getSelectedValue());
+        } else {
+            parameter.set対象年度(RString.EMPTY);
+        }
 
         if (panel.getTxtKetteiJohoUketoriNengetsu().getFromValue() != null) {
             parameter.set決定情報受取年月From(new FlexibleYearMonth(panel.getTxtKetteiJohoUketoriNengetsu()
