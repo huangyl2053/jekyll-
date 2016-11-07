@@ -118,11 +118,9 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
             if (レコード種別.equals(data.get(INDEX_0))) {
                 controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);
             } else if (帳票レコード種別_H1.equals(data.get(INDEX_3))) {
-//                ヘッダ判断();
                 判断();
                 headRecordEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileHeadRecordEntity.class, data);
             } else if (帳票レコード種別_D1.equals(data.get(INDEX_3))) {
-//                明細判断();
                 判断();
                 meisaiEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileMeisaiEntity.class, data);
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
@@ -131,7 +129,6 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
                 toreraRecord2Entity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileToreraRecode2Entity.class, data);
             } else if (帳票レコード種別_T3.equals(data.get(INDEX_3))) {
                 toreraRecord3Entity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileToreraRecode3Entity.class, data);
-//                累計判断();
             }
         }
     }
@@ -163,63 +160,6 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
         }
     }
 
-//    private void ヘッダ判断() {
-//        if (meisaiEntity != null && toreraRecord1Entity == null) {
-//            合計 = false;
-//            累計 = false;
-//            set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
-//            set明細レコード(shoTempentity, meisaiEntity);
-//            setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
-//            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
-//            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
-//            請求額通知書一時tableWriter.insert(shoTempentity);
-//            meisaiEntity = null;
-//        } else if (meisaiEntity != null && toreraRecord1Entity != null) {
-//            合計 = true;
-//            累計 = false;
-//            set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
-//            set明細レコード(shoTempentity, meisaiEntity);
-//            setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
-//            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
-//            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
-//            請求額通知書一時tableWriter.insert(shoTempentity);
-//            toreraRecord1Entity = null;
-//            headRecordEntity = null;
-//            meisaiEntity = null;
-//        }
-//    }
-//
-//    private void 明細判断() {
-//        if (meisaiEntity != null) {
-//            合計 = false;
-//            累計 = false;
-//            set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
-//            set明細レコード(shoTempentity, meisaiEntity);
-//            setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
-//            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
-//            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
-//            請求額通知書一時tableWriter.insert(shoTempentity);
-//            meisaiEntity = null;
-//        }
-//    }
-//
-//    private void 累計判断() {
-//        if (controlCsvEntity != null && headRecordEntity != null && meisaiEntity != null
-//                && toreraRecord1Entity != null && toreraRecord2Entity != null) {
-//            合計 = true;
-//            累計 = true;
-//            set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
-//            set明細レコード(shoTempentity, meisaiEntity);
-//            setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
-//            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
-//            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
-//            請求額通知書一時tableWriter.insert(shoTempentity);
-//            headRecordEntity = null;
-//            meisaiEntity = null;
-//            toreraRecord1Entity = null;
-//            toreraRecord2Entity = null;
-//        }
-//    }
     private void set共通レコード(DbWT1511SeikyugakuTsuchishoTempEntity shoTempentity, KagoKetteiHokenshaInControlCsvEntity controlCsvEntity,
             SeikyugakuTsuchishoCsvFileHeadRecordEntity headRecordEntity) {
         連番 = 連番 + 1;
@@ -272,26 +212,6 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
 
     @Override
     protected void afterExecute() {
-//        if (controlCsvEntity != null && headRecordEntity != null && meisaiEntity != null
-//                && toreraRecord1Entity != null) {
-//            合計 = true;
-//            累計 = false;
-//            set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
-//            set明細レコード(shoTempentity, meisaiEntity);
-//            setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
-//            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
-//            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
-//            請求額通知書一時tableWriter.insert(shoTempentity);
-//        } else if (controlCsvEntity != null && headRecordEntity != null && meisaiEntity != null) {
-//            合計 = false;
-//            累計 = false;
-//            set共通レコード(shoTempentity, controlCsvEntity, headRecordEntity);
-//            set明細レコード(shoTempentity, meisaiEntity);
-//            setトレーラレコード1_合計(shoTempentity, toreraRecord1Entity, 合計);
-//            setトレーラレコード2_累計(shoTempentity, toreraRecord2Entity, 累計);
-//            setトレーラレコード3_審査支払手数料(shoTempentity, toreraRecord3Entity, 累計);
-//            請求額通知書一時tableWriter.insert(shoTempentity);
-//        }
         判断();
 
         if (null == returnEntity.getShoriYM()) {
