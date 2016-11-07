@@ -163,7 +163,7 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
         eucCsvEntity.set性別(set性別コード(t.getDtSeibetsu()));
         eucCsvEntity.setカナ氏名市町村データ(t.getAtenaKanaShimei());
         eucCsvEntity.setカナ氏名年金保険者データ(t.getDtKanaShimei());
-        eucCsvEntity.set漢字氏名(t.getAtenaKanaShimei());
+        eucCsvEntity.set漢字氏名(t.getDtKanjiShimei());
         eucCsvEntity.set郵便番号(setフォ(t.getDtYubinNo()));
         eucCsvEntity.set住所(t.getDtKanajusyo());
         eucCsvEntity.set訂正表示コード(t.getDtTeiseiHyouji());
