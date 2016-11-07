@@ -30,7 +30,7 @@ public enum HanyoListKagoMoshitateOutputOrder implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
     /**
      * 市町村コード
      */
@@ -44,19 +44,19 @@ public enum HanyoListKagoMoshitateOutputOrder implements IReportItems {
      */
     被保険者番号(new RString("0104"), new RString(""), new RString("\"dbT3059KagoMoshitate_hiHokenshaNo\"")),
     /**
-     * 支給区分コード
+     * 要介護度
      */
     要介護度(new RString("0403"), new RString(""), new RString("\"JukyushaDaicho_yokaigoJotaiKubunCode\"")),
     /**
-     * 申請書整理番号
+     * 認定開始日
      */
     認定開始日(new RString("0411"), new RString(""), new RString("\"JukyushaDaicho_ninteiYukoKikanKaishiYMD\"")),
     /**
-     * 新規継続区分
+     * サービス年月
      */
     サービス年月(new RString("0301"), new RString(""), new RString("\"dbT3059KagoMoshitate_serviceTeikyoYM\"")),
     /**
-     * 新規継続区分
+     * 事業者番号
      */
     事業者番号(new RString("0366"), new RString(""), new RString("\"dbT3059KagoMoshitate_jigyoshoNo\""));
 
