@@ -30,7 +30,7 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
     private final KogakuKetteiTsuchiShoEntity 帳票情報;
     private final RString 文書番号;
     private final List<RString> 通知書定型文list;
-    private final List<RString> インフォlist;
+    private final RString インフォ;
     private final NinshoshaSource 認証者ソースデータ;
     private final List<RString> titleList;
     private final int 通番;
@@ -88,16 +88,16 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
      * @param 帳票情報 KogakuKetteiTsuchiShoEntity
      * @param 文書番号 RString
      * @param 通知書定型文list List<RString>
-     * @param インフォlist List<RString>
+     * @param インフォ List<RString>
      * @param 認証者ソースデータ NinshoshaSource
-     * @param titleList List<RString>
+     * @param titleList RString
      * @param 通番 int
      */
     public KogakuKetteiTsuchiShoSealerEditor(
             KogakuKetteiTsuchiShoEntity 帳票情報,
             RString 文書番号,
             List<RString> 通知書定型文list,
-            List<RString> インフォlist,
+            RString インフォ,
             NinshoshaSource 認証者ソースデータ,
             List<RString> titleList,
             int 通番) {
@@ -105,7 +105,7 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
         this.帳票情報 = 帳票情報;
         this.文書番号 = 文書番号;
         this.通知書定型文list = 通知書定型文list;
-        this.インフォlist = インフォlist;
+        this.インフォ = インフォ;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.titleList = titleList;
         this.通番 = 通番;
@@ -122,7 +122,7 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
         source.bunshoNo = 文書番号;
         setValueFrom帳票情報(source);
         set円(source);
-        setインフォ(source);
+        source.info = インフォ;
         set通知文(source);
         setタイトル(source);
         set雛形部品CompNinshosha(source);
@@ -257,21 +257,6 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
         source.yen4 = RString.EMPTY;
     }
 
-    private void setインフォ(KogakuKetteiTsuchiShoSealerSource source) {
-
-        source.info1 = getインフォ(INDEX_ZERO);
-        source.info2 = getインフォ(INDEX_ONE);
-        source.info3 = getインフォ(INDEX_TWO);
-        source.info4 = getインフォ(INDEX_THREE);
-        source.info5 = getインフォ(INDEX_FOUR);
-        source.info6 = getインフォ(INDEX_FIVE);
-        source.info7 = getインフォ(INDEX_SIX);
-        source.info8 = getインフォ(INDEX_SEVEN);
-        source.info9 = getインフォ(INDEX_EIGHT);
-        source.info10 = getインフォ(INDEX_NINE);
-
-    }
-
     private void set通知文(KogakuKetteiTsuchiShoSealerSource source) {
         source.tsuchibun1 = get通知文(INDEX_ZERO);
         source.tsuchibun2 = get通知文(INDEX_ONE);
@@ -321,10 +306,6 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
-    }
-
-    private RString getインフォ(int index) {
-        return index < インフォlist.size() ? インフォlist.get(index) : RString.EMPTY;
     }
 
     private RString get通知文(int index) {
