@@ -39,15 +39,18 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
     private List<KyuhuzissekiJohoSakuseiYoResultEntity> bigestResultList;
     private boolean 開始Flag;
     private boolean emptyFlag;
+    private boolean 審査年月Flag;
     private FlexibleYearMonth 審査年月;
     private HihokenshaNo 被保険者番号;
     private FlexibleYearMonth サービス提供年月;
     private NyuryokuShikibetsuNo 入力識別番号;
     private JigyoshaNo 事業所番号;
     private RString 通し番号;
+    private static final int INT_1 = 1;
 
     @Override
     protected void initialize() {
+        審査年月Flag = true;
         開始Flag = true;
         emptyFlag = false;
         審査年月 = FlexibleYearMonth.EMPTY;
@@ -103,16 +106,13 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
             for (KyuhuzissekiJohoSakuseiYoResultEntity emptyResultEntity : emptyResultList) {
                 getTempTable(emptyResultEntity);
             }
+        } else if (bigestResultList.size() == INT_1) {
+            getTempTable(bigestResultList.get(0));
         } else {
-            boolean has新規 = false;
             for (KyuhuzissekiJohoSakuseiYoResultEntity bigestResultEntity : bigestResultList) {
                 if (KyufuSakuseiKubun.新規.getコード().equals(bigestResultEntity.get給付実績情報作成区分コード())) {
                     getTempTable(bigestResultEntity);
-                    has新規 = true;
                 }
-            }
-            if (!has新規) {
-                set削除対象データ();
             }
         }
     }
@@ -140,9 +140,10 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
             emptyFlag = true;
         } else {
             if (!emptyFlag) {
-                if (開始Flag || 審査年月.equals(entity.get審査年月())) {
+                if (審査年月Flag || 審査年月.equals(entity.get審査年月())) {
                     審査年月 = entity.get審査年月();
                     bigestResultList.add(entity);
+                    審査年月Flag = false;
                 }
 
                 if (審査年月.isBefore(entity.get審査年月())) {
@@ -160,13 +161,7 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
         入力識別番号 = entity.get入力識別番号();
         事業所番号 = entity.get事業所番号();
         通し番号 = entity.get通し番号();
+        審査年月Flag = true;
     }
 
-    private void set削除対象データ() {
-        for (KyuhuzissekiJohoSakuseiYoResultEntity bigestResultEntity : bigestResultList) {
-            if (KyufuSakuseiKubun.削除.getコード().equals(bigestResultEntity.get給付実績情報作成区分コード())) {
-                getTempTable(bigestResultEntity);
-            }
-        }
-    }
 }

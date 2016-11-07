@@ -392,7 +392,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         KyufuJissekiTorikeshiIchiranCsvEntity csvEntity = new KyufuJissekiTorikeshiIchiranCsvEntity();
         csvEntity.set連番(new RString(給付実績取消一覧CSV連番++));
         csvEntity.set被保険者氏名(entity.get氏名());
-        csvEntity.set被保険者番号(entity.get被保険者番号());
+        csvEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
         csvEntity.set年度(entity.get年度());
         if (entity.getサービス提供年月() != null) {
             csvEntity.setサービス提供年月(entity.getサービス提供年月().seireki().
