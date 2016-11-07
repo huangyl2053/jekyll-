@@ -79,6 +79,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
     private static final int NUM_10 = 10;
     private static final RString 計画削除モード = new RString("delete");
     private static final RString 計画修正モード = new RString("modify");
+    private static final RString KEY_0 = new RString("key0");
 
     /**
      * 画面の初期化メソッドです。
@@ -115,6 +116,24 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         handler.initialize(被保険者番号, 識別コード, 居宅給付計画届出履歴一覧);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        return getResponseData(div);
+    }
+
+    /**
+     * 届出区分が選択されてものメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onChange_radTodokedeKubun(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        if (KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey())) {
+            div.getTxtJigyoshaHenkoJiyu().setReadOnly(true);
+            div.getTxtJigyoshaHenkoYMD().setReadOnly(true);
+        } else {
+            div.getTxtJigyoshaHenkoJiyu().setReadOnly(false);
+            div.getTxtJigyoshaHenkoYMD().setReadOnly(false);
+        }
         return getResponseData(div);
     }
 
@@ -395,14 +414,15 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         int 履歴番号 = get履歴番号の採番(被保険者番号);
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
+        ValidationMessageControlPairs valid = getValidationHandler(div).validate(居宅給付計画届出, 被保険者番号);
+        if (valid.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid).respond();
+        }
         if (居宅給付計画届出 == null) {
             居宅給付計画届出 = handler.create居宅給付計画届出(被保険者番号, 履歴番号);
         }
         居宅給付計画届出 = handler.set保存処理(居宅給付計画届出);
-        ValidationMessageControlPairs valid = getValidationHandler(div).validate(居宅給付計画届出);
-        if (valid.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid).respond();
-        }
+
         boolean isReRequest = ResponseHolder.isReRequest();
         if (isReRequest && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
@@ -530,17 +550,18 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        boolean is項目が変更 = Boolean.FALSE;
+        boolean is項目が変更;
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         if (居宅給付計画届出 != null) {
             is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         } else {
             is項目が変更 = handler.is項目が変更(被保険者番号);
         }
-        if ((is項目が変更 && !ResponseHolder.isReRequest()) || (計画修正モード.equals(div.getMode()) && !ResponseHolder.isReRequest())) {
+        if ((!is項目が変更 && !ResponseHolder.isReRequest())
+                || (計画修正モード.equals(div.getMode()) && !ResponseHolder.isReRequest())) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
-        if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getTxtTodokedeYM().clearValue();
             div.getTxtTodokedeshaShimei().clearDomain();
             div.getTxtTodokedeshaShimeiKana().clearDomain();
