@@ -720,7 +720,7 @@
            FROM
                rgdb."DbT3017KyufujissekiKihon"
            WHERE
-               "shinsaYM" <![CDATA[<>]]> '' 
+               ("shinsaYM" <![CDATA[<>]]> '' or "shinsaYM" is not null)
                AND "shinsaYM" <![CDATA[<=]]> #{処理年月} 
                AND #{開始年月} <![CDATA[<=]]> "serviceTeikyoYM" 
                AND "serviceTeikyoYM" <![CDATA[<=]]> #{終了年月}
@@ -751,7 +751,7 @@
         SELECT
              <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" />
         FROM
-             "Tempkeisantaisyo"
+             "Tempkeisantaisyo" as 一時 
         WHERE
            "shotsicode" is null or "shotsicode" = ''
     </select>
