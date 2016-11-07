@@ -94,6 +94,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         reportSource.kozaMeigi = 口座情報.get口座名義人優先();
         reportSource.kozaNo = 口座情報.get口座番号Or通帳記号番号();
         reportSource.kozaShurui = 口座情報.get口座種別略称();
+        reportSource.kongoNofusubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
         reportSource.nofuzumiGaku = decimalToRString(編集後本算定通知書共通情報.get納付済額_未到来期含む());
         reportSource.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
@@ -128,11 +129,11 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
 
         Decimal 増減額 = 編集後本算定通知書共通情報.get増減額();
-        if (0 < Decimal.ZERO.compareTo(増減額)) {
+        if (Decimal.ZERO.compareTo(増減額) < 0) {
             reportSource.koseiNaiyo = 更正内容;
             reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(増減額, 0);
             reportSource.koseiRiyu = new RString("円の増額です。");
-        } else if (Decimal.ZERO.compareTo(増減額) < 0) {
+        } else if (0 < Decimal.ZERO.compareTo(増減額)) {
             reportSource.koseiNaiyo = 更正内容;
             reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(増減額.multiply(-1), 0);
             reportSource.koseiRiyu = new RString("円の減額です。");
