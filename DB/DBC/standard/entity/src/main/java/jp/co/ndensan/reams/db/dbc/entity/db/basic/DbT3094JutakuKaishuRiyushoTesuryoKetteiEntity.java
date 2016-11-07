@@ -7,7 +7,6 @@ import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -48,8 +47,8 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     private FlexibleDate tesuryoShiharaiYoteiYMD;
     private FlexibleDate ketteiTsuchiSakuseiYMD;
     private FlexibleDate furikomiTsuchiSakuseiYMD;
-    private FlexibleYearMonth uketoriYM;
-    private long kozaID;
+//    private FlexibleYearMonth uketoriYM;
+//    private long kozaID;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -292,39 +291,35 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
      *
      * @return 受取年月
      */
-    @CheckForNull
-    public FlexibleYearMonth getUketoriYM() {
-        return uketoriYM;
-    }
-
+//    @CheckForNull
+//    public FlexibleYearMonth getUketoriYM() {
+//        return uketoriYM;
+//    }
     /**
      * 受取年月のsetメソッドです。
      *
      * @param uketoriYM 受取年月
      */
-    public void setUketoriYM(FlexibleYearMonth uketoriYM) {
-        this.uketoriYM = uketoriYM;
-    }
-
+//    public void setUketoriYM(FlexibleYearMonth uketoriYM) {
+//        this.uketoriYM = uketoriYM;
+//    }
     /**
      * 口座IDのgetメソッドです。
      *
      * @return 口座ID
      */
-    @CheckForNull
-    public long getKozaID() {
-        return kozaID;
-    }
-
+//    @CheckForNull
+//    public long getKozaID() {
+//        return kozaID;
+//    }
     /**
      * 口座IDのsetメソッドです。
      *
      * @param kozaID 口座ID
      */
-    public void setKozaID(long kozaID) {
-        this.kozaID = kozaID;
-    }
-
+//    public void setKozaID(long kozaID) {
+//        this.kozaID = kozaID;
+//    }
     /**
      * このエンティティの主キーが他の{@literal DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}と等しいか判定します。
      *
@@ -366,8 +361,8 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
         this.shukeiNo = entity.shukeiNo;
         this.ketteiTsuchiSakuseiYMD = entity.ketteiTsuchiSakuseiYMD;
         this.furikomiTsuchiSakuseiYMD = entity.furikomiTsuchiSakuseiYMD;
-        this.uketoriYM = entity.uketoriYM;
-        this.kozaID = entity.kozaID;
+//        this.uketoriYM = entity.uketoriYM;
+//        this.kozaID = entity.kozaID;
     }
 
     /**
@@ -377,7 +372,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(riyushoSakuseiJigyoshaNo, shoKisaiHokenshaNo, rirekiNo, shikyu_FushikyuKetteiYMD, shikyu_FushikyuKubun, fushikyuRiyu, tesuryoShiharaiYoteiYMD, shukeiNo, ketteiTsuchiSakuseiYMD, furikomiTsuchiSakuseiYMD, uketoriYM, kozaID);
+        return super.toMd5(riyushoSakuseiJigyoshaNo, shoKisaiHokenshaNo, rirekiNo, shikyu_FushikyuKetteiYMD, shikyu_FushikyuKubun, fushikyuRiyu, tesuryoShiharaiYoteiYMD, shukeiNo, ketteiTsuchiSakuseiYMD, furikomiTsuchiSakuseiYMD);
     }
 
 // </editor-fold>
