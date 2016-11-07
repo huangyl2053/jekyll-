@@ -68,6 +68,12 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchKeyBreakBase<
         bodyItemList = new ArrayList<>();
         出力順Entity = get出力順項目();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        if (processParamter.getShichosoncode().size() > 1) {
+            setFilePath(RString.EMPTY, manager.getEucOutputDirectry());
+        } else {
+            RString shichosonCode = processParamter.getShichosoncode().get(0).getColumnValue();
+            setFilePath(shichosonCode, manager.getEucOutputDirectry());
+        }
         editHeader();
     }
 
@@ -105,12 +111,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchKeyBreakBase<
         new TennyuTenshutsuMiTorokuIchiranhyoResult().setNyuBodyItem(entity, csvEntity, bodyItem);
         TennyuTenshutsuMiTorokuIchiranhyoReport report = TennyuTenshutsuMiTorokuIchiranhyoReport.createFrom(headItem, bodyItem);
         report.writeBy(reportSourceWriter);
-        if (processParamter.getShichosoncode().size() > 1) {
-            setFilePath(RString.EMPTY, manager.getEucOutputDirectry());
-            eucCsvWriter.writeLine(csvEntity);
-        } else {
-            set市町村コードCsv(manager.getEucOutputDirectry(), csvEntity);
-        }
+        eucCsvWriter.writeLine(csvEntity);
     }
 
     @Override
@@ -119,12 +120,6 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchKeyBreakBase<
             eucCsvWriter.close();
             manager.spool(eucFilePath);
         }
-    }
-
-    private void set市町村コードCsv(RString spoolWorkPath, TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity csvEntity) {
-        RString shichosonCode = csvEntity.getShichosonCode();
-        setFilePath(shichosonCode, spoolWorkPath);
-        eucCsvWriter.writeLine(csvEntity);
     }
 
     private void setFilePath(RString shichosonCode, RString spoolWorkPath) {
