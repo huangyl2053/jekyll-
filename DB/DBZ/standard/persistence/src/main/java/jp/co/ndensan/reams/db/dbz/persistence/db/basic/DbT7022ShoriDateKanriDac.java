@@ -123,8 +123,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
-     * requireNonNull(entity,
-     * UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
+     * requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
      *
      * DbT7022ShoriDateKanriEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
@@ -1555,22 +1554,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, 処理名),
                                 eq(shoriEdaban, 処理枝番))).
                 toList(DbT7022ShoriDateKanriEntity.class);
-    }
-
-    /**
-     * 処理日付管理マスタから、処理名より、前回対象年月日期間のデータを取得する。
-     *
-     * @param 処理名 RString
-     * @return ShoriDateKanri
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public DbT7022ShoriDateKanriEntity select前回対象年月日期間(RString 処理名) throws NullPointerException {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.select().
-                table(DbT7022ShoriDateKanri.class).
-                where(eq(shoriName, 処理名)).
-                toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
     /**
