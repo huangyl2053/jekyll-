@@ -27,11 +27,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeDefinition</artifactId>
-            <scope>test</scope>
-        </dependency>
         <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
@@ -42,8 +37,6 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzService</artifactId>
         </dependency>
-        <!-- 公開系 -->
-        <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
