@@ -4,19 +4,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNin
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * ZenkaiNinteiKekkaJoho のクラスファイル
@@ -24,8 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBE-3000-020 dongyabin
  */
 public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekkaJohoDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -260,7 +260,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
             DivSize[] enumArray = DivSize.values();
 
             for (DivSize enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -275,11 +275,11 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     }
 
     public DivSize getMode_DivSize() {
-        return (DivSize) _CommonChildDivModeUtil.getMode(this.modes, DivSize.class);
+        return (DivSize) _CommonChildDivModeUtil.getMode( this.modes, DivSize.class );
     }
 
-    public void setMode_DivSize(DivSize value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DivSize.class, value);
+    public void setMode_DivSize( DivSize value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DivSize.class , value );
     }
 
     public static enum ShokaiButtonType implements ICommonChildDivMode {
@@ -297,7 +297,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
             ShokaiButtonType[] enumArray = ShokaiButtonType.values();
 
             for (ShokaiButtonType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -312,11 +312,11 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     }
 
     public ShokaiButtonType getMode_ShokaiButtonType() {
-        return (ShokaiButtonType) _CommonChildDivModeUtil.getMode(this.modes, ShokaiButtonType.class);
+        return (ShokaiButtonType) _CommonChildDivModeUtil.getMode( this.modes, ShokaiButtonType.class );
     }
 
-    public void setMode_ShokaiButtonType(ShokaiButtonType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShokaiButtonType.class, value);
+    public void setMode_ShokaiButtonType( ShokaiButtonType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShokaiButtonType.class , value );
     }
 
     // </editor-fold>
