@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiEnkiTsuchiHakkoJyoken1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,10 +23,10 @@ public class NinteiEnkiTsuchiHakkoJyoken1Div extends Panel {
      */
     @JsonProperty("radEnkiTsuchiHakkoIchiranhyo")
     private RadioButton radEnkiTsuchiHakkoIchiranhyo;
-    @JsonProperty("txtMikomiDateIchiran")
-    private TextBoxDateRange txtMikomiDateIchiran;
     @JsonProperty("txtInsatsuDate")
     private TextBoxDate txtInsatsuDate;
+    @JsonProperty("txtMikomiDateIchiran")
+    private TextBoxDateRange txtMikomiDateIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,24 +53,6 @@ public class NinteiEnkiTsuchiHakkoJyoken1Div extends Panel {
     }
 
     /*
-     * gettxtMikomiDateIchiran
-     * @return txtMikomiDateIchiran
-     */
-    @JsonProperty("txtMikomiDateIchiran")
-    public TextBoxDateRange getTxtMikomiDateIchiran() {
-        return txtMikomiDateIchiran;
-    }
-
-    /*
-     * settxtMikomiDateIchiran
-     * @param txtMikomiDateIchiran txtMikomiDateIchiran
-     */
-    @JsonProperty("txtMikomiDateIchiran")
-    public void setTxtMikomiDateIchiran(TextBoxDateRange txtMikomiDateIchiran) {
-        this.txtMikomiDateIchiran = txtMikomiDateIchiran;
-    }
-
-    /*
      * gettxtInsatsuDate
      * @return txtInsatsuDate
      */
@@ -86,6 +68,24 @@ public class NinteiEnkiTsuchiHakkoJyoken1Div extends Panel {
     @JsonProperty("txtInsatsuDate")
     public void setTxtInsatsuDate(TextBoxDate txtInsatsuDate) {
         this.txtInsatsuDate = txtInsatsuDate;
+    }
+
+    /*
+     * gettxtMikomiDateIchiran
+     * @return txtMikomiDateIchiran
+     */
+    @JsonProperty("txtMikomiDateIchiran")
+    public TextBoxDateRange getTxtMikomiDateIchiran() {
+        return txtMikomiDateIchiran;
+    }
+
+    /*
+     * settxtMikomiDateIchiran
+     * @param txtMikomiDateIchiran txtMikomiDateIchiran
+     */
+    @JsonProperty("txtMikomiDateIchiran")
+    public void setTxtMikomiDateIchiran(TextBoxDateRange txtMikomiDateIchiran) {
+        this.txtMikomiDateIchiran = txtMikomiDateIchiran;
     }
 
     // </editor-fold>

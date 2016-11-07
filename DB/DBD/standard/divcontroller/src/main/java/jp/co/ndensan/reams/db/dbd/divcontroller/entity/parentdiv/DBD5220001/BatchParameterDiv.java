@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class BatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -274,16 +274,6 @@ public class BatchParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public Button getBtnSearch() {
-        return this.getKensakuJoken().getBtnSearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnSearch(Button btnSearch) {
-        this.getKensakuJoken().setBtnSearch(btnSearch);
-    }
-
-    @JsonIgnore
     public DataGrid<dgHakkotaishosha_Row> getDgHakkotaishosha() {
         return this.getEnkiTsuchiHakkoTaishosha().getDgHakkotaishosha();
     }
@@ -394,16 +384,6 @@ public class BatchParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public TextBoxDateRange getTxtMikomiDateIchiran() {
-        return this.getNinteiEnkiTsuchiHakkoJyoken1().getTxtMikomiDateIchiran();
-    }
-
-    @JsonIgnore
-    public void  setTxtMikomiDateIchiran(TextBoxDateRange txtMikomiDateIchiran) {
-        this.getNinteiEnkiTsuchiHakkoJyoken1().setTxtMikomiDateIchiran(txtMikomiDateIchiran);
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtInsatsuDate() {
         return this.getNinteiEnkiTsuchiHakkoJyoken1().getTxtInsatsuDate();
     }
@@ -411,6 +391,16 @@ public class BatchParameterDiv extends PanelBatchParameter {
     @JsonIgnore
     public void  setTxtInsatsuDate(TextBoxDate txtInsatsuDate) {
         this.getNinteiEnkiTsuchiHakkoJyoken1().setTxtInsatsuDate(txtInsatsuDate);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtMikomiDateIchiran() {
+        return this.getNinteiEnkiTsuchiHakkoJyoken1().getTxtMikomiDateIchiran();
+    }
+
+    @JsonIgnore
+    public void  setTxtMikomiDateIchiran(TextBoxDateRange txtMikomiDateIchiran) {
+        this.getNinteiEnkiTsuchiHakkoJyoken1().setTxtMikomiDateIchiran(txtMikomiDateIchiran);
     }
 
     // </editor-fold>
