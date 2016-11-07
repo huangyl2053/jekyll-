@@ -192,10 +192,10 @@ public class KijunShunyuShinseiTourokuHandler {
         Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = new HashMap<>();
         if (被保険者台帳 == null) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace(
-                    MESSAGE_被保険者.toString(), MESSAGE_処理.toString()).evaluate());
+                    MESSAGE_被保険者.toString(), MESSAGE_処理.toString()));
         } else if (被保険者台帳.is論理削除フラグ()) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace(
-                    MESSAGE_被保険者.toString(), MESSAGE_処理.toString()).evaluate());
+                    MESSAGE_被保険者.toString(), MESSAGE_処理.toString()));
         } else {
             div.getIchiran().getCcdKaigoAtenaInfo().initialize(識別コード);
             List<KijunShunyugakuTekiyoKanri> 基準収入額適用管理情報List = KijunShunyuShinseiTourokuManager
@@ -625,6 +625,16 @@ public class KijunShunyuShinseiTourokuHandler {
         }
     }
 
+    /**
+     * 12/31状況ボタン押した時、状況隠し項目再設定
+     */
+    public void set1231状況隠し項目() {
+        FlexibleYear 処理年度 = new FlexibleYear(div.getMeisai().getTxtShoriNendo().getValue().toString().substring(NUM_0, NUM_4));
+        FlexibleDate 計算基準日 = new FlexibleDate(処理年度.minusYear(NUM_1).toDateString().concat(KEY_月日).toString());
+        div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(計算基準日));
+        div.getMeisai().setHdnHenkomaeSetaiinHaakuKijunYMD(DataPassingConverter.serialize(計算基準日));
+    }
+
     private void set隠し項目(ShikibetsuCode 識別コード) {
         RString 世帯コード = div.getMeisai().getTxtSetaiCode().getValue();
         FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
@@ -662,17 +672,17 @@ public class KijunShunyuShinseiTourokuHandler {
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             if (世帯員所得List == null || 世帯員所得List.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                        .replace(MESSAGE_登録されている住民.replace(MESSAGE_XXXX, システム日付).toString()).evaluate());
+                        .replace(MESSAGE_登録されている住民.replace(MESSAGE_XXXX, システム日付).toString()));
             } else if (is非課税(世帯員所得List)) {
                 throw new ApplicationException(DbzErrorMessages.実行不可.getMessage()
-                        .replace(MESSAGE_世帯課税区分.toString(), MESSAGE_登録.toString()).evaluate());
+                        .replace(MESSAGE_世帯課税区分.toString(), MESSAGE_登録.toString()));
             } else {
-                count = count + set基準収入額データ(世帯員所得List, 基準収入額データList, count, 世帯員把握基準日);
+                count = count + set基準収入額データ(世帯員所得List, 基準収入額データList, 世帯員把握基準日);
             }
         }
         if (NUM_0 == count) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage()
-                    .replace(MESSAGE_世帯員に第１号被保険者.toString(), MESSAGE_世帯員を表示.toString()).evaluate());
+                    .replace(MESSAGE_世帯員に第１号被保険者.toString(), MESSAGE_世帯員を表示.toString()));
         }
         if (!基準収入額データList.isEmpty()) {
             sort基準収入額データ(基準収入額データList);
@@ -682,11 +692,11 @@ public class KijunShunyuShinseiTourokuHandler {
 
     private int set基準収入額データ(List<SetaiinShotoku> 世帯員所得List,
             List<KijunShunyuShinseiDate> 基準収入額データList,
-            int count,
             FlexibleDate 世帯員把握基準日) {
         KijunShunyuShinseiDate 基準収入額データ;
         FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
         FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
+        int count = NUM_0;
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
             HihokenshaNo 被保険者番号 = 世帯員所得.get被保険者番号();
             基準収入額データ = new KijunShunyuShinseiDate();
@@ -706,7 +716,7 @@ public class KijunShunyuShinseiTourokuHandler {
             基準収入額データ.set年金_給与以外の収入(null);
             int 受給者台帳カウント = KijunShunyuShinseiTourokuManager.createInstance().get受給(被保険者番号,
                     世帯員把握基準日, true);
-            if (NUM_1 < 受給者台帳カウント) {
+            if (NUM_0 < 受給者台帳カウント) {
                 基準収入額データ.set受給(KEY_受給);
                 count = count + NUM_1;
             } else {
@@ -715,7 +725,7 @@ public class KijunShunyuShinseiTourokuHandler {
 
             int 事業対象者カウント = KijunShunyuShinseiTourokuManager.createInstance().get事業対象(
                     被保険者番号, 世帯員把握基準日);
-            if (NUM_1 < 事業対象者カウント) {
+            if (NUM_0 < 事業対象者カウント) {
                 基準収入額データ.set事業対象(KEY_事業対象);
                 count = count + NUM_1;
             } else {
@@ -937,7 +947,7 @@ public class KijunShunyuShinseiTourokuHandler {
         for (KijunShunyugakuDate 選択世帯員 : 選択世帯員List) {
             if (識別コードList.contains(選択世帯員.get識別コード())) {
                 throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage()
-                        .replace(MESSAGE_識別コード.replace(MESSAGE_XXXX, 選択世帯員.get識別コード()).toString()).evaluate());
+                        .replace(MESSAGE_識別コード.replace(MESSAGE_XXXX, 選択世帯員.get識別コード()).toString()));
             }
         }
         set世帯員(選択世帯員List, rowList);

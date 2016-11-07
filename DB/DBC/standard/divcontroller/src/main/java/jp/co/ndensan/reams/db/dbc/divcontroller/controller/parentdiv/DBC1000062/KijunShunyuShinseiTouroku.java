@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -138,6 +139,17 @@ public class KijunShunyuShinseiTouroku {
     }
 
     /**
+     * 12/31状況ボタンのメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnBefore_ShotokuJokyo(KijunShunyuShinseiTourokuDiv div) {
+        getHandler(div).set1231状況隠し項目();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 保存ボタンのメソッドです。
      *
      * @param div 画面Div
@@ -160,6 +172,8 @@ public class KijunShunyuShinseiTouroku {
             }
             AccessLogger.log(AccessLogType.更新, getHandler(div).toPersonalData(識別コード, 被保険者番号.getColumnValue()));
             getHandler(div).前排他キーの解除(被保険者番号.getColumnValue());
+            div.getKanryo().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                    RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBC1000062StateName.完了状態);
         }
         return ResponseData.of(div).respond();
