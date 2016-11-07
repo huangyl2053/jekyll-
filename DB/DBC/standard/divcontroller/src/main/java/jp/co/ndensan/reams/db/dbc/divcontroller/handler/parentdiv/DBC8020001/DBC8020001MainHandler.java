@@ -383,10 +383,9 @@ public class DBC8020001MainHandler {
             if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
                 parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
             }
-        } else if (振込指定日を修正する.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedValue())) {
-            if (null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
-                parameter.set振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
-            }
+        } else if (振込指定日を修正する.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedValue())
+                && null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
+            parameter.set振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
         }
         if (null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
             parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
