@@ -353,6 +353,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             ViewStateHolder.put(ViewStateKeys.申請一覧, (Serializable) resultList);
             MishinsaShikyuShinseiListHandler handler = MishinsaShikyuShinseiListHandler.of(div.getMishinsaShikyuShinseiListPanel());
             handler.initializeDropDownList(resultList);
+
+            this.選択行のみチェックON(div);
             if (resultList.isEmpty()) {
                 div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, true);
@@ -476,5 +478,22 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             }
         }
         return parameterList;
+    }
+
+    private void 選択行のみチェックON(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        List<dgMishinsaShikyuShinsei_Row> lists = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getDataSource();
+        if (被保険者番号 != null && サービス提供年月 != null && 整理番号 != null) {
+            for (dgMishinsaShikyuShinsei_Row row : lists) {
+                if (!(row.getTxtHihoNo().equals(被保険者番号.getColumnValue())
+                        && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().toDateString()).equals(サービス提供年月)
+                        && row.getTxtSeiriNo().getValue().equals(整理番号))) {
+                    row.setSelected(Boolean.FALSE);
+                }
+            }
+        }
     }
 }
