@@ -4,14 +4,14 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmensho
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -21,8 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBD-4342-010 wangjie2
  */
 public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -205,7 +204,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigoNinteiJokyo(TextBox txtYokaigoNinteiJokyo) {
+    public void  setTxtYokaigoNinteiJokyo(TextBox txtYokaigoNinteiJokyo) {
         this.getYokaigoNinteiJoho().setTxtYokaigoNinteiJokyo(txtYokaigoNinteiJokyo);
     }
 
@@ -215,7 +214,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigoNinteiShinseiYmd(TextBoxFlexibleDate txtYokaigoNinteiShinseiYmd) {
+    public void  setTxtYokaigoNinteiShinseiYmd(TextBoxFlexibleDate txtYokaigoNinteiShinseiYmd) {
         this.getYokaigoNinteiJoho().setTxtYokaigoNinteiShinseiYmd(txtYokaigoNinteiShinseiYmd);
     }
 
@@ -225,7 +224,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigoNinteiShinseiShurui(TextBox txtYokaigoNinteiShinseiShurui) {
+    public void  setTxtYokaigoNinteiShinseiShurui(TextBox txtYokaigoNinteiShinseiShurui) {
         this.getYokaigoNinteiJoho().setTxtYokaigoNinteiShinseiShurui(txtYokaigoNinteiShinseiShurui);
     }
 
@@ -235,7 +234,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigoNinteiKyuSochiKubun(TextBox txtYokaigoNinteiKyuSochiKubun) {
+    public void  setTxtYokaigoNinteiKyuSochiKubun(TextBox txtYokaigoNinteiKyuSochiKubun) {
         this.getYokaigoNinteiJoho().setTxtYokaigoNinteiKyuSochiKubun(txtYokaigoNinteiKyuSochiKubun);
     }
 
@@ -245,7 +244,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigodo(TextBox txtYokaigodo) {
+    public void  setTxtYokaigodo(TextBox txtYokaigodo) {
         this.getYokaigoNinteiJoho().setTxtYokaigodo(txtYokaigodo);
     }
 
@@ -255,7 +254,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigoNinteiKaishiYmd(TextBoxFlexibleDate txtYokaigoNinteiKaishiYmd) {
+    public void  setTxtYokaigoNinteiKaishiYmd(TextBoxFlexibleDate txtYokaigoNinteiKaishiYmd) {
         this.getYokaigoNinteiJoho().setTxtYokaigoNinteiKaishiYmd(txtYokaigoNinteiKaishiYmd);
     }
 
@@ -265,7 +264,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigoNinteiShuryoYmd(TextBoxFlexibleDate txtYokaigoNinteiShuryoYmd) {
+    public void  setTxtYokaigoNinteiShuryoYmd(TextBoxFlexibleDate txtYokaigoNinteiShuryoYmd) {
         this.getYokaigoNinteiJoho().setTxtYokaigoNinteiShuryoYmd(txtYokaigoNinteiShuryoYmd);
     }
 
@@ -275,7 +274,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigoNinteiNinteiYmd(TextBoxFlexibleDate txtYokaigoNinteiNinteiYmd) {
+    public void  setTxtYokaigoNinteiNinteiYmd(TextBoxFlexibleDate txtYokaigoNinteiNinteiYmd) {
         this.getYokaigoNinteiJoho().setTxtYokaigoNinteiNinteiYmd(txtYokaigoNinteiNinteiYmd);
     }
 
@@ -285,7 +284,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShinseiChuShinseiYmd(TextBoxFlexibleDate txtShinseiChuShinseiYmd) {
+    public void  setTxtShinseiChuShinseiYmd(TextBoxFlexibleDate txtShinseiChuShinseiYmd) {
         this.getShinseiChuJoho().setTxtShinseiChuShinseiYmd(txtShinseiChuShinseiYmd);
     }
 
@@ -295,7 +294,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShinseiChuShinseiShurui(TextBox txtShinseiChuShinseiShurui) {
+    public void  setTxtShinseiChuShinseiShurui(TextBox txtShinseiChuShinseiShurui) {
         this.getShinseiChuJoho().setTxtShinseiChuShinseiShurui(txtShinseiChuShinseiShurui);
     }
 
@@ -305,7 +304,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblKetteiKubun(Label lblKetteiKubun) {
+    public void  setLblKetteiKubun(Label lblKetteiKubun) {
         this.getKakushuGemmenJoho().setLblKetteiKubun(lblKetteiKubun);
     }
 
@@ -315,7 +314,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblKaishiYMD(Label lblKaishiYMD) {
+    public void  setLblKaishiYMD(Label lblKaishiYMD) {
         this.getKakushuGemmenJoho().setLblKaishiYMD(lblKaishiYMD);
     }
 
@@ -325,7 +324,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblShuryoYMD(Label lblShuryoYMD) {
+    public void  setLblShuryoYMD(Label lblShuryoYMD) {
         this.getKakushuGemmenJoho().setLblShuryoYMD(lblShuryoYMD);
     }
 
@@ -335,7 +334,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblShinseiJokyo(Label lblShinseiJokyo) {
+    public void  setLblShinseiJokyo(Label lblShinseiJokyo) {
         this.getKakushuGemmenJoho().setLblShinseiJokyo(lblShinseiJokyo);
     }
 
@@ -345,7 +344,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanGendoGakuKetteiKubun(TextBox txtFutanGendoGakuKetteiKubun) {
+    public void  setTxtFutanGendoGakuKetteiKubun(TextBox txtFutanGendoGakuKetteiKubun) {
         this.getKakushuGemmenJoho().setTxtFutanGendoGakuKetteiKubun(txtFutanGendoGakuKetteiKubun);
     }
 
@@ -355,7 +354,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanGendoGakuKaishiYMD(TextBoxFlexibleDate txtFutanGendoGakuKaishiYMD) {
+    public void  setTxtFutanGendoGakuKaishiYMD(TextBoxFlexibleDate txtFutanGendoGakuKaishiYMD) {
         this.getKakushuGemmenJoho().setTxtFutanGendoGakuKaishiYMD(txtFutanGendoGakuKaishiYMD);
     }
 
@@ -365,7 +364,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanGendoGakuShuryoYMD(TextBoxFlexibleDate txtFutanGendoGakuShuryoYMD) {
+    public void  setTxtFutanGendoGakuShuryoYMD(TextBoxFlexibleDate txtFutanGendoGakuShuryoYMD) {
         this.getKakushuGemmenJoho().setTxtFutanGendoGakuShuryoYMD(txtFutanGendoGakuShuryoYMD);
     }
 
@@ -375,7 +374,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutanDankai(TextBox txtRiyoshaFutanDankai) {
+    public void  setTxtRiyoshaFutanDankai(TextBox txtRiyoshaFutanDankai) {
         this.getKakushuGemmenJoho().setTxtRiyoshaFutanDankai(txtRiyoshaFutanDankai);
     }
 
@@ -385,7 +384,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanGendoGakuKyuSochi(TextBox txtFutanGendoGakuKyuSochi) {
+    public void  setTxtFutanGendoGakuKyuSochi(TextBox txtFutanGendoGakuKyuSochi) {
         this.getKakushuGemmenJoho().setTxtFutanGendoGakuKyuSochi(txtFutanGendoGakuKyuSochi);
     }
 
@@ -395,7 +394,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanGendoGakuShinseiJokyo(TextBox txtFutanGendoGakuShinseiJokyo) {
+    public void  setTxtFutanGendoGakuShinseiJokyo(TextBox txtFutanGendoGakuShinseiJokyo) {
         this.getKakushuGemmenJoho().setTxtFutanGendoGakuShinseiJokyo(txtFutanGendoGakuShinseiJokyo);
     }
 
@@ -405,7 +404,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanGendoGakuShinseiYMD(TextBoxFlexibleDate txtFutanGendoGakuShinseiYMD) {
+    public void  setTxtFutanGendoGakuShinseiYMD(TextBoxFlexibleDate txtFutanGendoGakuShinseiYMD) {
         this.getKakushuGemmenJoho().setTxtFutanGendoGakuShinseiYMD(txtFutanGendoGakuShinseiYMD);
     }
 
@@ -415,7 +414,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutanKetteiKubun(TextBox txtRiyoshaFutanKetteiKubun) {
+    public void  setTxtRiyoshaFutanKetteiKubun(TextBox txtRiyoshaFutanKetteiKubun) {
         this.getKakushuGemmenJoho().setTxtRiyoshaFutanKetteiKubun(txtRiyoshaFutanKetteiKubun);
     }
 
@@ -425,7 +424,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutanKaishiYMD(TextBoxFlexibleDate txtRiyoshaFutanKaishiYMD) {
+    public void  setTxtRiyoshaFutanKaishiYMD(TextBoxFlexibleDate txtRiyoshaFutanKaishiYMD) {
         this.getKakushuGemmenJoho().setTxtRiyoshaFutanKaishiYMD(txtRiyoshaFutanKaishiYMD);
     }
 
@@ -435,7 +434,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutanShuryoYMD(TextBoxFlexibleDate txtRiyoshaFutanShuryoYMD) {
+    public void  setTxtRiyoshaFutanShuryoYMD(TextBoxFlexibleDate txtRiyoshaFutanShuryoYMD) {
         this.getKakushuGemmenJoho().setTxtRiyoshaFutanShuryoYMD(txtRiyoshaFutanShuryoYMD);
     }
 
@@ -445,7 +444,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutanKyufuRitsu(TextBox txtRiyoshaFutanKyufuRitsu) {
+    public void  setTxtRiyoshaFutanKyufuRitsu(TextBox txtRiyoshaFutanKyufuRitsu) {
         this.getKakushuGemmenJoho().setTxtRiyoshaFutanKyufuRitsu(txtRiyoshaFutanKyufuRitsu);
     }
 
@@ -455,7 +454,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutanShinseiJokyo(TextBox txtRiyoshaFutanShinseiJokyo) {
+    public void  setTxtRiyoshaFutanShinseiJokyo(TextBox txtRiyoshaFutanShinseiJokyo) {
         this.getKakushuGemmenJoho().setTxtRiyoshaFutanShinseiJokyo(txtRiyoshaFutanShinseiJokyo);
     }
 
@@ -465,7 +464,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutanShinseiYMD(TextBoxFlexibleDate txtRiyoshaFutanShinseiYMD) {
+    public void  setTxtRiyoshaFutanShinseiYMD(TextBoxFlexibleDate txtRiyoshaFutanShinseiYMD) {
         this.getKakushuGemmenJoho().setTxtRiyoshaFutanShinseiYMD(txtRiyoshaFutanShinseiYMD);
     }
 
@@ -475,7 +474,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtHomonKaigoKetteiKubun(TextBox txtHomonKaigoKetteiKubun) {
+    public void  setTxtHomonKaigoKetteiKubun(TextBox txtHomonKaigoKetteiKubun) {
         this.getKakushuGemmenJoho().setTxtHomonKaigoKetteiKubun(txtHomonKaigoKetteiKubun);
     }
 
@@ -485,7 +484,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtHomonKaigoKaishiYMD(TextBoxFlexibleDate txtHomonKaigoKaishiYMD) {
+    public void  setTxtHomonKaigoKaishiYMD(TextBoxFlexibleDate txtHomonKaigoKaishiYMD) {
         this.getKakushuGemmenJoho().setTxtHomonKaigoKaishiYMD(txtHomonKaigoKaishiYMD);
     }
 
@@ -495,7 +494,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtHomonKaigoShuryoYMD(TextBoxFlexibleDate txtHomonKaigoShuryoYMD) {
+    public void  setTxtHomonKaigoShuryoYMD(TextBoxFlexibleDate txtHomonKaigoShuryoYMD) {
         this.getKakushuGemmenJoho().setTxtHomonKaigoShuryoYMD(txtHomonKaigoShuryoYMD);
     }
 
@@ -505,7 +504,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtHomonKaigoKyufuRitsu(TextBox txtHomonKaigoKyufuRitsu) {
+    public void  setTxtHomonKaigoKyufuRitsu(TextBox txtHomonKaigoKyufuRitsu) {
         this.getKakushuGemmenJoho().setTxtHomonKaigoKyufuRitsu(txtHomonKaigoKyufuRitsu);
     }
 
@@ -515,7 +514,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtHomonKaigoBango(TextBox txtHomonKaigoBango) {
+    public void  setTxtHomonKaigoBango(TextBox txtHomonKaigoBango) {
         this.getKakushuGemmenJoho().setTxtHomonKaigoBango(txtHomonKaigoBango);
     }
 
@@ -525,7 +524,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtHomonKaigoHobetsuKubun(TextBox txtHomonKaigoHobetsuKubun) {
+    public void  setTxtHomonKaigoHobetsuKubun(TextBox txtHomonKaigoHobetsuKubun) {
         this.getKakushuGemmenJoho().setTxtHomonKaigoHobetsuKubun(txtHomonKaigoHobetsuKubun);
     }
 
@@ -535,7 +534,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShaFukuKetteiKubun(TextBox txtShaFukuKetteiKubun) {
+    public void  setTxtShaFukuKetteiKubun(TextBox txtShaFukuKetteiKubun) {
         this.getKakushuGemmenJoho().setTxtShaFukuKetteiKubun(txtShaFukuKetteiKubun);
     }
 
@@ -545,7 +544,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShaFukuKaishiYMD(TextBoxFlexibleDate txtShaFukuKaishiYMD) {
+    public void  setTxtShaFukuKaishiYMD(TextBoxFlexibleDate txtShaFukuKaishiYMD) {
         this.getKakushuGemmenJoho().setTxtShaFukuKaishiYMD(txtShaFukuKaishiYMD);
     }
 
@@ -555,7 +554,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShaFukuShuryoYMD(TextBoxFlexibleDate txtShaFukuShuryoYMD) {
+    public void  setTxtShaFukuShuryoYMD(TextBoxFlexibleDate txtShaFukuShuryoYMD) {
         this.getKakushuGemmenJoho().setTxtShaFukuShuryoYMD(txtShaFukuShuryoYMD);
     }
 
@@ -565,7 +564,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShaFukuKyufuRitsu(TextBox txtShaFukuKyufuRitsu) {
+    public void  setTxtShaFukuKyufuRitsu(TextBox txtShaFukuKyufuRitsu) {
         this.getKakushuGemmenJoho().setTxtShaFukuKyufuRitsu(txtShaFukuKyufuRitsu);
     }
 
@@ -575,7 +574,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShaFukuBango(TextBox txtShaFukuBango) {
+    public void  setTxtShaFukuBango(TextBox txtShaFukuBango) {
         this.getKakushuGemmenJoho().setTxtShaFukuBango(txtShaFukuBango);
     }
 
@@ -585,7 +584,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShaFukuShinseiJokyo(TextBox txtShaFukuShinseiJokyo) {
+    public void  setTxtShaFukuShinseiJokyo(TextBox txtShaFukuShinseiJokyo) {
         this.getKakushuGemmenJoho().setTxtShaFukuShinseiJokyo(txtShaFukuShinseiJokyo);
     }
 
@@ -595,7 +594,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShaFukuShinseiYMD(TextBoxFlexibleDate txtShaFukuShinseiYMD) {
+    public void  setTxtShaFukuShinseiYMD(TextBoxFlexibleDate txtShaFukuShinseiYMD) {
         this.getKakushuGemmenJoho().setTxtShaFukuShinseiYMD(txtShaFukuShinseiYMD);
     }
 
@@ -605,7 +604,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokubetsuChiikiKasanKetteiKubun(TextBox txtTokubetsuChiikiKasanKetteiKubun) {
+    public void  setTxtTokubetsuChiikiKasanKetteiKubun(TextBox txtTokubetsuChiikiKasanKetteiKubun) {
         this.getKakushuGemmenJoho().setTxtTokubetsuChiikiKasanKetteiKubun(txtTokubetsuChiikiKasanKetteiKubun);
     }
 
@@ -615,7 +614,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokubetsuChiikiKasanKaishiYMD(TextBoxFlexibleDate txtTokubetsuChiikiKasanKaishiYMD) {
+    public void  setTxtTokubetsuChiikiKasanKaishiYMD(TextBoxFlexibleDate txtTokubetsuChiikiKasanKaishiYMD) {
         this.getKakushuGemmenJoho().setTxtTokubetsuChiikiKasanKaishiYMD(txtTokubetsuChiikiKasanKaishiYMD);
     }
 
@@ -625,7 +624,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokubetsuChiikiKasanShuryoYMD(TextBoxFlexibleDate txtTokubetsuChiikiKasanShuryoYMD) {
+    public void  setTxtTokubetsuChiikiKasanShuryoYMD(TextBoxFlexibleDate txtTokubetsuChiikiKasanShuryoYMD) {
         this.getKakushuGemmenJoho().setTxtTokubetsuChiikiKasanShuryoYMD(txtTokubetsuChiikiKasanShuryoYMD);
     }
 
@@ -635,7 +634,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokubetsuChiikiKasanKyufuRitsu(TextBox txtTokubetsuChiikiKasanKyufuRitsu) {
+    public void  setTxtTokubetsuChiikiKasanKyufuRitsu(TextBox txtTokubetsuChiikiKasanKyufuRitsu) {
         this.getKakushuGemmenJoho().setTxtTokubetsuChiikiKasanKyufuRitsu(txtTokubetsuChiikiKasanKyufuRitsu);
     }
 
@@ -645,7 +644,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokubetsuChiikiKasanKetteiKubunBango(TextBox txtTokubetsuChiikiKasanKetteiKubunBango) {
+    public void  setTxtTokubetsuChiikiKasanKetteiKubunBango(TextBox txtTokubetsuChiikiKasanKetteiKubunBango) {
         this.getKakushuGemmenJoho().setTxtTokubetsuChiikiKasanKetteiKubunBango(txtTokubetsuChiikiKasanKetteiKubunBango);
     }
 
@@ -655,7 +654,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokubetsuChiikiKasanShinseiJokyo(TextBox txtTokubetsuChiikiKasanShinseiJokyo) {
+    public void  setTxtTokubetsuChiikiKasanShinseiJokyo(TextBox txtTokubetsuChiikiKasanShinseiJokyo) {
         this.getKakushuGemmenJoho().setTxtTokubetsuChiikiKasanShinseiJokyo(txtTokubetsuChiikiKasanShinseiJokyo);
     }
 
@@ -665,7 +664,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokubetsuChiikiKasanShinseiYMD(TextBoxFlexibleDate txtTokubetsuChiikiKasanShinseiYMD) {
+    public void  setTxtTokubetsuChiikiKasanShinseiYMD(TextBoxFlexibleDate txtTokubetsuChiikiKasanShinseiYMD) {
         this.getKakushuGemmenJoho().setTxtTokubetsuChiikiKasanShinseiYMD(txtTokubetsuChiikiKasanShinseiYMD);
     }
 
@@ -675,7 +674,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblRoreiFukushiNenkin(Label lblRoreiFukushiNenkin) {
+    public void  setLblRoreiFukushiNenkin(Label lblRoreiFukushiNenkin) {
         this.getRoreiSeihoJoho().setLblRoreiFukushiNenkin(lblRoreiFukushiNenkin);
     }
 
@@ -685,7 +684,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRoreiJukyuKaishiYMD(TextBoxFlexibleDate txtRoreiJukyuKaishiYMD) {
+    public void  setTxtRoreiJukyuKaishiYMD(TextBoxFlexibleDate txtRoreiJukyuKaishiYMD) {
         this.getRoreiSeihoJoho().setTxtRoreiJukyuKaishiYMD(txtRoreiJukyuKaishiYMD);
     }
 
@@ -695,7 +694,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtRoreiJukyuShuryoYMD(TextBoxFlexibleDate txtRoreiJukyuShuryoYMD) {
+    public void  setTxtRoreiJukyuShuryoYMD(TextBoxFlexibleDate txtRoreiJukyuShuryoYMD) {
         this.getRoreiSeihoJoho().setTxtRoreiJukyuShuryoYMD(txtRoreiJukyuShuryoYMD);
     }
 
@@ -705,7 +704,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblSeikatsuHogo(Label lblSeikatsuHogo) {
+    public void  setLblSeikatsuHogo(Label lblSeikatsuHogo) {
         this.getRoreiSeihoJoho().setLblSeikatsuHogo(lblSeikatsuHogo);
     }
 
@@ -715,7 +714,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtSeihoJukyuKaishiYMD(TextBoxFlexibleDate txtSeihoJukyuKaishiYMD) {
+    public void  setTxtSeihoJukyuKaishiYMD(TextBoxFlexibleDate txtSeihoJukyuKaishiYMD) {
         this.getRoreiSeihoJoho().setTxtSeihoJukyuKaishiYMD(txtSeihoJukyuKaishiYMD);
     }
 
@@ -725,7 +724,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtSeihoJukyuHaishiYMD(TextBoxFlexibleDate txtSeihoJukyuHaishiYMD) {
+    public void  setTxtSeihoJukyuHaishiYMD(TextBoxFlexibleDate txtSeihoJukyuHaishiYMD) {
         this.getRoreiSeihoJoho().setTxtSeihoJukyuHaishiYMD(txtSeihoJukyuHaishiYMD);
     }
 
@@ -735,7 +734,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtSeihoShubetsu(TextBox txtSeihoShubetsu) {
+    public void  setTxtSeihoShubetsu(TextBox txtSeihoShubetsu) {
         this.getRoreiSeihoJoho().setTxtSeihoShubetsu(txtSeihoShubetsu);
     }
 
@@ -745,7 +744,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblShiharaiHohoHenko(Label lblShiharaiHohoHenko) {
+    public void  setLblShiharaiHohoHenko(Label lblShiharaiHohoHenko) {
         this.getKyufuSeigenJoho().setLblShiharaiHohoHenko(lblShiharaiHohoHenko);
     }
 
@@ -755,7 +754,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShiharaiHohoHenkoTorokuKubun(TextBox txtShiharaiHohoHenkoTorokuKubun) {
+    public void  setTxtShiharaiHohoHenkoTorokuKubun(TextBox txtShiharaiHohoHenkoTorokuKubun) {
         this.getKyufuSeigenJoho().setTxtShiharaiHohoHenkoTorokuKubun(txtShiharaiHohoHenkoTorokuKubun);
     }
 
@@ -765,7 +764,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShiharaiHohoHenkoKaishiYMD(TextBoxFlexibleDate txtShiharaiHohoHenkoKaishiYMD) {
+    public void  setTxtShiharaiHohoHenkoKaishiYMD(TextBoxFlexibleDate txtShiharaiHohoHenkoKaishiYMD) {
         this.getKyufuSeigenJoho().setTxtShiharaiHohoHenkoKaishiYMD(txtShiharaiHohoHenkoKaishiYMD);
     }
 
@@ -775,7 +774,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtShiharaiHohoHenkoShuryoYMD(TextBoxFlexibleDate txtShiharaiHohoHenkoShuryoYMD) {
+    public void  setTxtShiharaiHohoHenkoShuryoYMD(TextBoxFlexibleDate txtShiharaiHohoHenkoShuryoYMD) {
         this.getKyufuSeigenJoho().setTxtShiharaiHohoHenkoShuryoYMD(txtShiharaiHohoHenkoShuryoYMD);
     }
 
@@ -785,7 +784,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblKyufuGakuGengaku(Label lblKyufuGakuGengaku) {
+    public void  setLblKyufuGakuGengaku(Label lblKyufuGakuGengaku) {
         this.getKyufuSeigenJoho().setLblKyufuGakuGengaku(lblKyufuGakuGengaku);
     }
 
@@ -795,7 +794,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtKyufuGakuGengakuTorokuKubun(TextBox txtKyufuGakuGengakuTorokuKubun) {
+    public void  setTxtKyufuGakuGengakuTorokuKubun(TextBox txtKyufuGakuGengakuTorokuKubun) {
         this.getKyufuSeigenJoho().setTxtKyufuGakuGengakuTorokuKubun(txtKyufuGakuGengakuTorokuKubun);
     }
 
@@ -805,7 +804,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtKyufuGakuGengakuKaishiYMD(TextBoxFlexibleDate txtKyufuGakuGengakuKaishiYMD) {
+    public void  setTxtKyufuGakuGengakuKaishiYMD(TextBoxFlexibleDate txtKyufuGakuGengakuKaishiYMD) {
         this.getKyufuSeigenJoho().setTxtKyufuGakuGengakuKaishiYMD(txtKyufuGakuGengakuKaishiYMD);
     }
 
@@ -815,7 +814,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtKyufuGakuGengakuShuryoYMD(TextBoxFlexibleDate txtKyufuGakuGengakuShuryoYMD) {
+    public void  setTxtKyufuGakuGengakuShuryoYMD(TextBoxFlexibleDate txtKyufuGakuGengakuShuryoYMD) {
         this.getKyufuSeigenJoho().setTxtKyufuGakuGengakuShuryoYMD(txtKyufuGakuGengakuShuryoYMD);
     }
 
@@ -825,7 +824,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanWariai(TextBox txtFutanWariai) {
+    public void  setTxtFutanWariai(TextBox txtFutanWariai) {
         this.getFutanWariaiJoho().setTxtFutanWariai(txtFutanWariai);
     }
 
@@ -835,7 +834,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanWariaiKaishiYMD(TextBoxFlexibleDate txtFutanWariaiKaishiYMD) {
+    public void  setTxtFutanWariaiKaishiYMD(TextBoxFlexibleDate txtFutanWariaiKaishiYMD) {
         this.getFutanWariaiJoho().setTxtFutanWariaiKaishiYMD(txtFutanWariaiKaishiYMD);
     }
 
@@ -845,7 +844,7 @@ public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtFutanWariaiShuryoYMD(TextBoxFlexibleDate txtFutanWariaiShuryoYMD) {
+    public void  setTxtFutanWariaiShuryoYMD(TextBoxFlexibleDate txtFutanWariaiShuryoYMD) {
         this.getFutanWariaiJoho().setTxtFutanWariaiShuryoYMD(txtFutanWariaiShuryoYMD);
     }
 
