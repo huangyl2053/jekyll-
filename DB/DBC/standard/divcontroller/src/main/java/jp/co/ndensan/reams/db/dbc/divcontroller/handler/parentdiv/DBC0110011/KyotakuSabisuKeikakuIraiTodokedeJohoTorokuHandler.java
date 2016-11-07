@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0110011;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujigyoshasakusei.KyotakuKeikakuJigyoshaSakusei;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujigyoshasakusei.KyotakuKeikakuJigyoshaSakuseiBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujigyoshasakusei.KyotakuKeikakuJigyoshaSakuseiIdentifier;
@@ -423,14 +424,73 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      */
     public boolean is項目が変更(KyotakuKeikakuTodokede 居宅給付計画届出) {
         if (!DBC0110011StateName.追加状態.getName().equals(ResponseHolder.getState())) {
-            return Boolean.FALSE;
+            return true;
         }
         if (計画削除モード.equals(div.getMode())
                 || 計画照会モード.equals(div.getMode())) {
-            return Boolean.FALSE;
+            return true;
         }
-        居宅給付計画届出 = set保存処理(居宅給付計画届出);
-        return 居宅給付計画届出.hasChanged();
+        FlexibleDate 届出年月日now = div.getTxtTodokedeYM().getValue() == null ? null : new FlexibleDate(div.getTxtTodokedeYM().getValue().toDateString());
+        boolean is居宅給付計画届出が変更
+                = !Objects.equals(居宅給付計画届出.get届出区分(), KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey()) ? 届出区分_新規 : 届出区分_変更)
+                || !Objects.equals(居宅給付計画届出.get届出年月日(), 届出年月日now)
+                || !Objects.equals(居宅給付計画届出.get届出者氏名(), div.getTxtTodokedeshaShimei().getDomain())
+                || !Objects.equals(居宅給付計画届出.get届出者氏名カナ(), div.getTxtTodokedeshaShimeiKana().getDomain())
+                || !Objects.equals(居宅給付計画届出.get届出者郵便番号(), div.getTxtTodokedeshaYubinNo().getValue())
+                || !Objects.equals(居宅給付計画届出.get届出者住所(), div.getTxtTodokedeshaJusho().getValue())
+                || !Objects.equals(居宅給付計画届出.get届出者電話番号(), div.getTxtTodokedeshaTelNo().getDomain())
+                || !Objects.equals(居宅給付計画届出.get届出者関係区分(), div.getDdlTodokedeshaKankeiKubun().getSelectedKey());
+        if (is事業者作成の場合()) {
+            return is事業者作成が変更(居宅給付計画届出, is居宅給付計画届出が変更);
+        }
+        if (is自己作成の場合()) {
+            return is自己作成が変更(居宅給付計画届出, is居宅給付計画届出が変更);
+        }
+        return is居宅給付計画届出が変更;
+    }
+
+    private boolean is自己作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) throws IllegalArgumentException {
+        KyotakuKeikakuJikoSakuseiIdentifier identifier = new KyotakuKeikakuJikoSakuseiIdentifier(
+                居宅給付計画届出.get被保険者番号(), 居宅給付計画届出.get対象年月(), 居宅給付計画届出.get履歴番号());
+        KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = 居宅給付計画届出.getKyotakuKeikakuJikoSakusei(identifier);
+        RString 居宅_総合事業区分now = KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey()) ? 居宅 : 総合事業;
+        FlexibleDate 適用開始年月日now = div.getTxtKeikakuTekiyoStartYMD().getValue() == null ? null
+                : new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString());
+        FlexibleDate 適用終了年月日now = div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? null
+                : new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString());
+        boolean is居宅給付計画自己作成が変更
+                = !居宅_総合事業区分now.equals(居宅給付計画自己作成.get居宅_総合事業区分())
+                || !Objects.equals(適用開始年月日now, 居宅給付計画自己作成.get適用開始年月日())
+                || !Objects.equals(適用終了年月日now, 居宅給付計画自己作成.get適用終了年月日())
+                || !Objects.equals(div.getRadKeikakuSakuseiKubun().getSelectedKey(), 居宅給付計画自己作成.get作成区分コード());
+        return is居宅給付計画届出が変更 || is居宅給付計画自己作成が変更;
+    }
+
+    private boolean is事業者作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) throws IllegalArgumentException {
+        KyotakuKeikakuJigyoshaSakuseiIdentifier identifier = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
+                居宅給付計画届出.get被保険者番号(), 居宅給付計画届出.get対象年月(), 居宅給付計画届出.get履歴番号());
+        KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成
+                = 居宅給付計画届出.getKyotakuKeikakuJigyoshaSakusei(identifier);
+        RString 作成区分コードold = 居宅給付計画事業者作成.get作成区分コード() == null ? RString.EMPTY : 居宅給付計画事業者作成.get作成区分コード();
+        FlexibleDate 適用開始年月日now = div.getTxtKeikakuTekiyoStartYMD().getValue() == null ? null
+                : new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString());
+        FlexibleDate 適用終了年月日now = div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? null
+                : new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString());
+        RString 計画事業者番号old = 居宅給付計画事業者作成.get計画事業者番号() == null ? RString.EMPTY : 居宅給付計画事業者作成.get計画事業者番号().value();
+        RString 委託先事業者番号old = 居宅給付計画事業者作成.get委託先事業者番号() == null ? RString.EMPTY : 居宅給付計画事業者作成.get委託先事業者番号().value();
+        FlexibleDate 事業者変更年月日now = div.getTxtJigyoshaHenkoYMD().getValue() == null ? null : new FlexibleDate(div.getTxtJigyoshaHenkoYMD().getValue().toDateString());
+        RString 事業者変更事由old = 居宅給付計画事業者作成.get事業者変更事由() == null ? RString.EMPTY : 居宅給付計画事業者作成.get事業者変更事由();
+        RString サービス種類コードold = 居宅給付計画事業者作成.getサービス種類コード() == null ? RString.EMPTY : 居宅給付計画事業者作成.getサービス種類コード().value();
+        boolean is居宅給付計画事業者作成が変更
+                = !Objects.equals(居宅給付計画事業者作成.get適用開始年月日(), 適用開始年月日now)
+                || !Objects.equals(居宅給付計画事業者作成.get適用終了年月日(), 適用終了年月日now)
+                || !作成区分コードold.equals(div.getRadKeikakuSakuseiKubun().getSelectedKey())
+                || !計画事業者番号old.equals(div.getTxtJigyoshaNo().getValue())
+                || !委託先事業者番号old.equals(div.getTxtItakusakiJigyoshaNo().getValue())
+                || !Objects.equals(居宅給付計画事業者作成.get事業者変更年月日(), 事業者変更年月日now)
+                || !事業者変更事由old.equals(div.getTxtJigyoshaHenkoJiyu().getValue())
+                || !サービス種類コードold.equals(div.getRadServiceShurui().getSelectedKey());
+        return is居宅給付計画届出が変更 || is居宅給付計画事業者作成が変更;
     }
 
     /**
@@ -677,7 +737,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         List<dgKyotakuServiceIchiran_Row> rows = new ArrayList<>();
         for (int i = 0; i < 居宅給付計画届出履歴一覧.size(); i++) {
-            boolean is直近履歴 = Boolean.FALSE;
+            boolean is直近履歴;
             KyotakuKeikakuTodokede 居宅給付計画届出履歴 = 居宅給付計画届出履歴一覧.get(i);
             if (居宅給付計画届出履歴一覧.size() == i + 1) {
                 is直近履歴 = Boolean.TRUE;
@@ -867,7 +927,11 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      * @return is項目が変更
      */
     public boolean is項目が変更(HihokenshaNo 被保険者番号) {
-        boolean is変更 = false;
+        if (計画削除モード.equals(div.getMode())
+                || 計画照会モード.equals(div.getMode())) {
+            return true;
+        }
+        boolean is変更;
         is変更 = !equalsRString(KEY_0, div.getRadTodokedeKubun().getSelectedKey())
                 || div.getTxtKeikakuTekiyoStartYMD().getValue() != null
                 || div.getTxtKeikakuTekiyoEndYMD().getValue() != null

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011.KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -47,11 +48,12 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
      * 実行と条件保存ボタンクリック時のバリデーションチェック。
      *
      * @param 居宅給付計画届出 居宅給付計画届出
+     * @param 被保険者番号 被保険者番号
      * @return バリデーション突合結果
      */
-    public ValidationMessageControlPairs validate(KyotakuKeikakuTodokede 居宅給付計画届出) {
+    public ValidationMessageControlPairs validate(KyotakuKeikakuTodokede 居宅給付計画届出, HihokenshaNo 被保険者番号) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        編集なしで更新不可チェックValidate(validPairs, 居宅給付計画届出);
+        編集なしで更新不可チェックValidate(validPairs, 居宅給付計画届出, 被保険者番号);
         居宅適用開始日終了日不整合チェックValidate(validPairs);
         事業者サービス種類チェックチェックValidate(validPairs);
         計画適用開始日チェックValidate(validPairs);
@@ -59,8 +61,15 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
     }
 
     private void 編集なしで更新不可チェックValidate(ValidationMessageControlPairs validPairs,
-            KyotakuKeikakuTodokede 居宅給付計画届出) {
-        if (!居宅給付計画届出.hasChanged()) {
+            KyotakuKeikakuTodokede 居宅給付計画届出, HihokenshaNo 被保険者番号) {
+        boolean is編集なしで更新;
+        KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler(div);
+        if (null != 居宅給付計画届出) {
+            is編集なしで更新 = handler.is項目が変更(居宅給付計画届出);
+        } else {
+            is編集なしで更新 = handler.is項目が変更(被保険者番号);
+        }
+        if (!is編集なしで更新) {
             validPairs.add(new ValidationMessageControlPair(
                     new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(
                             UrErrorMessages.編集なしで更新不可)));
