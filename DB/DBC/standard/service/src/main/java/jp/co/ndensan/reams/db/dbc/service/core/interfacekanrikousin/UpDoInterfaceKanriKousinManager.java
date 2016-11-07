@@ -27,15 +27,15 @@ public class UpDoInterfaceKanriKousinManager {
 
     private final DbT3104KokuhorenInterfaceKanriDac 国保連インターフェース管理Dac;
 
-    private static boolean 再処理;
-    private static Decimal 処理実行回数;
     private static final RString 処理状態区分_終了 = new RString("3");
+    private static final RString 交換情報識別番号 = new RString("531");
     private static final RString MESSAGE_処理対象年月 = new RString("処理対象年月");
     private static final RString MESSAGE_再処理区分 = new RString("再処理区分");
     private static final RString MESSAGE_処理日時 = new RString("処理日時");
-    private static final RString 交換情報識別番号 = new RString("交換情報識別番号");
     private static final RString ERROR_MESSAGE = new RString("国保連インターフェース管理に更新対象レコードが存在しません");
-    private static final RString 再処理可能 = new RString("再処理可能");
+    private static final RString 再処理可能 = new RString("1");
+    private static final int INT_2 = 2;
+    private static final int INT_0 = 0;
 
     /**
      * 国保連情報取込共通処理（国保連インタフェース管理TBL更新）のコンストラクタ。
@@ -62,40 +62,36 @@ public class UpDoInterfaceKanriKousinManager {
      * @param 再処理区分 RString
      * @param 処理日時 YMDHMS
      * @param 異動レコード件数 int
-     * @param 訂正レコード件数 int
      * @return 保存成功TRUE エントリ情報削除する時例外が発生したFALSE
      */
     @Transaction
     public boolean updateInterfaceKanriTbl(RYearMonth 処理対象年月, RString 再処理区分, YMDHMS 処理日時,
-            int 異動レコード件数, int 訂正レコード件数) {
+            int 異動レコード件数) {
         requireNonNull(処理対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_処理対象年月.toString()));
         requireNonNull(再処理区分, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_再処理区分.toString()));
         requireNonNull(処理日時, UrSystemErrorMessages.値がempty.getReplacedMessage(MESSAGE_処理日時.toString()));
-        DbT3104KokuhorenInterfaceKanriEntity entity = 国保連インターフェース管理Dac.selectByKeyUndeleted(new FlexibleYearMonth(処理対象年月.toString()), 交換情報識別番号);
-        処理実行回数 = Decimal.ZERO;
+        DbT3104KokuhorenInterfaceKanriEntity entity = 国保連インターフェース管理Dac.
+                selectByKeyUndeleted(new FlexibleYearMonth(処理対象年月.toString()), 交換情報識別番号);
         if (null != entity) {
             entity.setShoriJotaiKubun(処理状態区分_終了);
             entity.setShoriJisshiTimestamp(処理日時);
             if (再処理可能.equals(再処理区分)) {
-                再処理 = true;
+                entity.setSaiShoriKanoKubun(true);
             } else {
-                再処理 = false;
+                entity.setSaiShoriKanoKubun(false);
             }
-            entity.setSaiShoriKanoKubun(再処理);
-            if (entity.getShoriJikkoKaisu() != null) {
-                処理実行回数 = entity.getShoriJikkoKaisu();
+            Decimal 処理実行回数 = entity.getShoriJikkoKaisu();
+            if (処理実行回数 != null) {
                 処理実行回数 = 処理実行回数.add(Decimal.ONE);
+                entity.setShoriJikkoKaisu(処理実行回数);
             }
-            entity.setShoriJikkoKaisu(処理実行回数);
-            entity.setFileKensu1(異動レコード件数 + 2);
-            entity.setFileKensu2(訂正レコード件数 + 2);
-            entity.setCtrlRecordKensu(異動レコード件数 + 訂正レコード件数);
+            entity.setFileKensu1(異動レコード件数 + INT_2);
+            entity.setFileKensu2(INT_0);
+            entity.setCtrlRecordKensu(異動レコード件数);
             entity.setCtrlShoriYM(new FlexibleYearMonth(処理対象年月.toString()));
         } else {
             throw new BatchInterruptedException(ERROR_MESSAGE.toString());
-
         }
-
         return 1 == 国保連インターフェース管理Dac.save(entity);
     }
 }

@@ -60,10 +60,6 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
-        HihokenshaNo aa = new HihokenshaNo(new RString("2016092402"));
-        if (!aa.equals(entity.get異動一時().get被保険者番号())) {
-            return;
-        }
         RString 全項目 = 居宅計画全項目(entity.get居宅計画());
         if (居宅計画List.contains(全項目)) {
             return;
@@ -77,10 +73,21 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
             異動一時tableWriter.update(update);
             return;
         }
-        if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+        Decimal 連番temp = 連番.add(Decimal.ONE);
+        if (連番temp.intValue() <= entity.get異動一時().get被保険者番号Max連番()) {
+            if (連番temp.intValue() != entity.get異動一時().get連番()) {
+                return;
+            }
+            連番Map.put(entity.get居宅計画().get被保険者番号(), 連番temp);
+            IdouTblEntity update = entity.get異動一時();
+            update.set居宅計画(全項目);
+            異動一時tableWriter.update(update);
+            return;
+        }
+        if (entity.get異動一時().get被保険者番号Max連番() < 連番temp.intValue()) {
             連番Map.put(entity.get居宅計画().get被保険者番号(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
-            insert.set被保険者番号(entity.get被保険者番号());
+            insert.set被保険者番号(entity.get居宅計画().get被保険者番号());
             insert.set連番(連番.add(Decimal.ONE).intValue());
             insert.set支払方法変更_支払方法(RString.EMPTY);
             insert.set支払方法変更_給付費減額(RString.EMPTY);
@@ -100,15 +107,7 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
             insert.set総合事業対象者(RString.EMPTY);
             insert.set被保険者台帳管理(RString.EMPTY);
             異動一時tableWriter.insert(insert);
-            return;
         }
-        if (entity.get異動一時().get連番() <= 連番.intValue()) {
-            return;
-        }
-        連番Map.put(entity.get居宅計画().get被保険者番号(), new Decimal(entity.get異動一時().get連番()));
-        IdouTblEntity update = entity.get異動一時();
-        update.set居宅計画(全項目);
-        異動一時tableWriter.update(update);
     }
 
     private RString 居宅計画全項目(KyotakuEntity 居宅計画) {
