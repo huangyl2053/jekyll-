@@ -231,8 +231,19 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onBeforeOpenDialog_btnHiShoninRiyu(FutangendogakuShinseiDiv div) {
-        div.setGyomuCode(GyomuCode.DB介護保険.getColumnValue());
-        div.setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        div.setHidden登録業務コード(GyomuCode.DB介護保険.getColumnValue());
+        div.setHidden登録グループコード(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ダイアログで選択された承認しない理由を本画面にセットします。
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onClose_btnOpenHiShoninRiyu(FutangendogakuShinseiDiv div) {
+        div.getTxtHiShoninRiyu().setValue(div.getHiddenサンプル文書());
         return ResponseData.of(div).respond();
     }
 
@@ -541,14 +552,4 @@ public class FutangendogakuShinsei {
         return new NinteiShinseiValidationHandler();
     }
 
-    /**
-     * URZ.SampleBunshoToroku　をダイアログで表示し、選択する。
-     *
-     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
-     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
-     */
-    /*   public ResponseData<FutangendogakuShinseiDiv> onClose_btnOpenHiShoninRiyu(FutangendogakuShinseiDiv div) {
-     div.getTxtHiShoninRiyu().setValue(div.get);
-     return ResponseData.of(div).respond();
-     }*/
 }
