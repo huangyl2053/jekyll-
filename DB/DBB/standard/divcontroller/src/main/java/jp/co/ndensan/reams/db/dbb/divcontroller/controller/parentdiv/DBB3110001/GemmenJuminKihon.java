@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKe
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -107,6 +108,24 @@ public class GemmenJuminKihon {
      * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onSelectBySelectButton_dgFukaRirekiAll(GemmenJuminKihonDiv div) {
+        if (!ResponseHolder.isReRequest() && !div.getGemmenMain().getShinseiinfo().isDisplayNone()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            全賦課履歴情報グリッドの選択処理(div);
+            return createResponse(div);
+        }
+        if (div.getGemmenMain().getShinseiinfo().isDisplayNone()) {
+            全賦課履歴情報グリッドの選択処理(div);
+        }
+        return createResponse(div);
+    }
+
+    private void 全賦課履歴情報グリッドの選択処理(GemmenJuminKihonDiv div) {
         GemmenJuminKihonHandler handler = getHandler(div);
         handler.clearパネル();
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
@@ -115,7 +134,6 @@ public class GemmenJuminKihon {
         load(減免リスト, div);
         handler.set全賦課履歴情報Visible(true);
         handler.clear減免後();
-        return createResponse(div);
     }
 
     private void load(NendobunFukaGemmenListResult 減免リスト, GemmenJuminKihonDiv div) {
