@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdoRenrakuhyoEntity> {
 
+    private static final RString KUBUN_0 = new RString("0");
     private static final RString KUBUN_1 = new RString("1");
     private static final RString KUBUN_2 = new RString("2");
     private static final RString KUBUN_3 = new RString("3");
@@ -293,13 +294,20 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         record2Entity.set施設所在保険者番号(trim(entity.getShisetsuShozaiHokenjaNo()));
         record2Entity.set住所地特例適用開始日(trim(entity.getJushochiTokureiTekiyoKaishiYMD()));
         record2Entity.set住所地特例適用終了日(trim(entity.getJushochiTokureiTekiyoShuryoYMD()));
-        record2Entity.set居宅費新1負担限度額(entity.getKyotakuhiShin1FutanGendogaku());
-        record2Entity.set居宅費新2負担限度額(entity.getKyotakuhiShin2FutanGendogaku());
-        record2Entity.set居宅費新3負担限度額(entity.getKyotakuhiShin3FutanGendogaku());
+        record2Entity.set居宅費新1負担限度額(get負担限度額(entity.getKyotakuhiShin1FutanGendogaku()));
+        record2Entity.set居宅費新2負担限度額(get負担限度額(entity.getKyotakuhiShin2FutanGendogaku()));
+        record2Entity.set居宅費新3負担限度額(get負担限度額(entity.getKyotakuhiShin3FutanGendogaku()));
         record2Entity.set二割負担適用開始年月日(trim(entity.getRiyosyaFutanWariaiYukoKaishiYMD()));
         record2Entity.set二割負担適用終了年月日(trim(entity.getRiyosyaFutanWariaiYukoShuryoYMD()));
         return record2Entity;
 
+    }
+
+    private RString get負担限度額(RString 負担限度額) {
+        if (RString.isNullOrEmpty(負担限度額)) {
+            return KUBUN_0;
+        }
+        return 負担限度額;
     }
 
     private RString change(FlexibleDate date) {
