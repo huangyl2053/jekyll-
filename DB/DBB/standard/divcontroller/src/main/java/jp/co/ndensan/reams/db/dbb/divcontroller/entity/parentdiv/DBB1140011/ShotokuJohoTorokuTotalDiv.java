@@ -4,30 +4,24 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.IKaigoFukaKihonDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYear;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShotokuJohoTorokuTotal のクラスファイル
- *
- * @reamsid_L DBB-1750-010 zhangrui
+ * ShotokuJohoTorokuTotal のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShotokuJohoTorokuTotalDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,6 +36,22 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     private ShotokuJohoTorokuDiv ShotokuJohoToroku;
     @JsonProperty("KanryoMessage")
     private KanryoMessageDiv KanryoMessage;
+    @JsonProperty("hidJuminzeiGenmenMae")
+    private RString hidJuminzeiGenmenMae;
+    @JsonProperty("hidJuminzeiGenmenAto")
+    private RString hidJuminzeiGenmenAto;
+    @JsonProperty("hidJuminzei")
+    private RString hidJuminzei;
+    @JsonProperty("hidGekihenKanwa")
+    private RString hidGekihenKanwa;
+    @JsonProperty("hidGokeiShotokuGaku")
+    private RString hidGokeiShotokuGaku;
+    @JsonProperty("hidNenkinShunyuGaku")
+    private RString hidNenkinShunyuGaku;
+    @JsonProperty("hidNenkinShotokuGaku")
+    private RString hidNenkinShotokuGaku;
+    @JsonProperty("hidKazeiShotokuGaku")
+    private RString hidKazeiShotokuGaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -122,6 +132,150 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     /*
+     * gethidJuminzeiGenmenMae
+     * @return hidJuminzeiGenmenMae
+     */
+    @JsonProperty("hidJuminzeiGenmenMae")
+    public RString getHidJuminzeiGenmenMae() {
+        return hidJuminzeiGenmenMae;
+    }
+
+    /*
+     * sethidJuminzeiGenmenMae
+     * @param hidJuminzeiGenmenMae hidJuminzeiGenmenMae
+     */
+    @JsonProperty("hidJuminzeiGenmenMae")
+    public void setHidJuminzeiGenmenMae(RString hidJuminzeiGenmenMae) {
+        this.hidJuminzeiGenmenMae = hidJuminzeiGenmenMae;
+    }
+
+    /*
+     * gethidJuminzeiGenmenAto
+     * @return hidJuminzeiGenmenAto
+     */
+    @JsonProperty("hidJuminzeiGenmenAto")
+    public RString getHidJuminzeiGenmenAto() {
+        return hidJuminzeiGenmenAto;
+    }
+
+    /*
+     * sethidJuminzeiGenmenAto
+     * @param hidJuminzeiGenmenAto hidJuminzeiGenmenAto
+     */
+    @JsonProperty("hidJuminzeiGenmenAto")
+    public void setHidJuminzeiGenmenAto(RString hidJuminzeiGenmenAto) {
+        this.hidJuminzeiGenmenAto = hidJuminzeiGenmenAto;
+    }
+
+    /*
+     * gethidJuminzei
+     * @return hidJuminzei
+     */
+    @JsonProperty("hidJuminzei")
+    public RString getHidJuminzei() {
+        return hidJuminzei;
+    }
+
+    /*
+     * sethidJuminzei
+     * @param hidJuminzei hidJuminzei
+     */
+    @JsonProperty("hidJuminzei")
+    public void setHidJuminzei(RString hidJuminzei) {
+        this.hidJuminzei = hidJuminzei;
+    }
+
+    /*
+     * gethidGekihenKanwa
+     * @return hidGekihenKanwa
+     */
+    @JsonProperty("hidGekihenKanwa")
+    public RString getHidGekihenKanwa() {
+        return hidGekihenKanwa;
+    }
+
+    /*
+     * sethidGekihenKanwa
+     * @param hidGekihenKanwa hidGekihenKanwa
+     */
+    @JsonProperty("hidGekihenKanwa")
+    public void setHidGekihenKanwa(RString hidGekihenKanwa) {
+        this.hidGekihenKanwa = hidGekihenKanwa;
+    }
+
+    /*
+     * gethidGokeiShotokuGaku
+     * @return hidGokeiShotokuGaku
+     */
+    @JsonProperty("hidGokeiShotokuGaku")
+    public RString getHidGokeiShotokuGaku() {
+        return hidGokeiShotokuGaku;
+    }
+
+    /*
+     * sethidGokeiShotokuGaku
+     * @param hidGokeiShotokuGaku hidGokeiShotokuGaku
+     */
+    @JsonProperty("hidGokeiShotokuGaku")
+    public void setHidGokeiShotokuGaku(RString hidGokeiShotokuGaku) {
+        this.hidGokeiShotokuGaku = hidGokeiShotokuGaku;
+    }
+
+    /*
+     * gethidNenkinShunyuGaku
+     * @return hidNenkinShunyuGaku
+     */
+    @JsonProperty("hidNenkinShunyuGaku")
+    public RString getHidNenkinShunyuGaku() {
+        return hidNenkinShunyuGaku;
+    }
+
+    /*
+     * sethidNenkinShunyuGaku
+     * @param hidNenkinShunyuGaku hidNenkinShunyuGaku
+     */
+    @JsonProperty("hidNenkinShunyuGaku")
+    public void setHidNenkinShunyuGaku(RString hidNenkinShunyuGaku) {
+        this.hidNenkinShunyuGaku = hidNenkinShunyuGaku;
+    }
+
+    /*
+     * gethidNenkinShotokuGaku
+     * @return hidNenkinShotokuGaku
+     */
+    @JsonProperty("hidNenkinShotokuGaku")
+    public RString getHidNenkinShotokuGaku() {
+        return hidNenkinShotokuGaku;
+    }
+
+    /*
+     * sethidNenkinShotokuGaku
+     * @param hidNenkinShotokuGaku hidNenkinShotokuGaku
+     */
+    @JsonProperty("hidNenkinShotokuGaku")
+    public void setHidNenkinShotokuGaku(RString hidNenkinShotokuGaku) {
+        this.hidNenkinShotokuGaku = hidNenkinShotokuGaku;
+    }
+
+    /*
+     * gethidKazeiShotokuGaku
+     * @return hidKazeiShotokuGaku
+     */
+    @JsonProperty("hidKazeiShotokuGaku")
+    public RString getHidKazeiShotokuGaku() {
+        return hidKazeiShotokuGaku;
+    }
+
+    /*
+     * sethidKazeiShotokuGaku
+     * @param hidKazeiShotokuGaku hidKazeiShotokuGaku
+     */
+    @JsonProperty("hidKazeiShotokuGaku")
+    public void setHidKazeiShotokuGaku(RString hidKazeiShotokuGaku) {
+        this.hidKazeiShotokuGaku = hidKazeiShotokuGaku;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -140,7 +294,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSetaiIchiranKijunYMD(TextBoxDate txtSetaiIchiranKijunYMD) {
+    public void  setTxtSetaiIchiranKijunYMD(TextBoxDate txtSetaiIchiranKijunYMD) {
         this.getSetaiShotokuInfo().setTxtSetaiIchiranKijunYMD(txtSetaiIchiranKijunYMD);
     }
 
@@ -150,7 +304,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSetaiIchiranKazeiNendo(TextBoxFlexibleYear txtSetaiIchiranKazeiNendo) {
+    public void  setTxtSetaiIchiranKazeiNendo(TextBoxFlexibleYear txtSetaiIchiranKazeiNendo) {
         this.getSetaiShotokuInfo().setTxtSetaiIchiranKazeiNendo(txtSetaiIchiranKazeiNendo);
     }
 
@@ -160,7 +314,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlSetaiIchiranKazeiNendo(DropDownList ddlSetaiIchiranKazeiNendo) {
+    public void  setDdlSetaiIchiranKazeiNendo(DropDownList ddlSetaiIchiranKazeiNendo) {
         this.getSetaiShotokuInfo().setDdlSetaiIchiranKazeiNendo(ddlSetaiIchiranKazeiNendo);
     }
 
@@ -170,7 +324,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSaiHyoji(Button btnSaiHyoji) {
+    public void  setBtnSaiHyoji(Button btnSaiHyoji) {
         this.getSetaiShotokuInfo().setBtnSaiHyoji(btnSaiHyoji);
     }
 
@@ -180,7 +334,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSetaiIchiranSetaiCode(TextBoxSetaiCode txtSetaiIchiranSetaiCode) {
+    public void  setTxtSetaiIchiranSetaiCode(TextBoxSetaiCode txtSetaiIchiranSetaiCode) {
         this.getSetaiShotokuInfo().setTxtSetaiIchiranSetaiCode(txtSetaiIchiranSetaiCode);
     }
 
@@ -190,7 +344,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkSetaiIchiranAll(CheckBoxList chkSetaiIchiranAll) {
+    public void  setChkSetaiIchiranAll(CheckBoxList chkSetaiIchiranAll) {
         this.getSetaiShotokuInfo().setChkSetaiIchiranAll(chkSetaiIchiranAll);
     }
 
@@ -200,7 +354,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblSetaiIchiranMsg(Label lblSetaiIchiranMsg) {
+    public void  setLblSetaiIchiranMsg(Label lblSetaiIchiranMsg) {
         this.getSetaiShotokuInfo().setLblSetaiIchiranMsg(lblSetaiIchiranMsg);
     }
 
@@ -210,7 +364,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgSetaiShotoku(DataGrid<dgSetaiShotoku_Row> dgSetaiShotoku) {
+    public void  setDgSetaiShotoku(DataGrid<dgSetaiShotoku_Row> dgSetaiShotoku) {
         this.getSetaiShotokuInfo().setDgSetaiShotoku(dgSetaiShotoku);
     }
 
@@ -220,7 +374,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblJuminZeiHikazeiKbn(Label lblJuminZeiHikazeiKbn) {
+    public void  setLblJuminZeiHikazeiKbn(Label lblJuminZeiHikazeiKbn) {
         this.getShotokuJohoToroku().setLblJuminZeiHikazeiKbn(lblJuminZeiHikazeiKbn);
     }
 
@@ -230,7 +384,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlJuminzeiGenmenMae(DropDownList ddlJuminzeiGenmenMae) {
+    public void  setDdlJuminzeiGenmenMae(DropDownList ddlJuminzeiGenmenMae) {
         this.getShotokuJohoToroku().setDdlJuminzeiGenmenMae(ddlJuminzeiGenmenMae);
     }
 
@@ -240,7 +394,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlJuminzeiGenmenAto(DropDownList ddlJuminzeiGenmenAto) {
+    public void  setDdlJuminzeiGenmenAto(DropDownList ddlJuminzeiGenmenAto) {
         this.getShotokuJohoToroku().setDdlJuminzeiGenmenAto(ddlJuminzeiGenmenAto);
     }
 
@@ -250,7 +404,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlJuminzei(DropDownList ddlJuminzei) {
+    public void  setDdlJuminzei(DropDownList ddlJuminzei) {
         this.getShotokuJohoToroku().setDdlJuminzei(ddlJuminzei);
     }
 
@@ -260,7 +414,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlGekihenKanwa(DropDownList ddlGekihenKanwa) {
+    public void  setDdlGekihenKanwa(DropDownList ddlGekihenKanwa) {
         this.getShotokuJohoToroku().setDdlGekihenKanwa(ddlGekihenKanwa);
     }
 
@@ -270,7 +424,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtGokeiShotokuGaku(TextBoxNum txtGokeiShotokuGaku) {
+    public void  setTxtGokeiShotokuGaku(TextBoxNum txtGokeiShotokuGaku) {
         this.getShotokuJohoToroku().setTxtGokeiShotokuGaku(txtGokeiShotokuGaku);
     }
 
@@ -280,7 +434,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNenkinShunyuGaku(TextBoxNum txtNenkinShunyuGaku) {
+    public void  setTxtNenkinShunyuGaku(TextBoxNum txtNenkinShunyuGaku) {
         this.getShotokuJohoToroku().setTxtNenkinShunyuGaku(txtNenkinShunyuGaku);
     }
 
@@ -290,7 +444,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNenkinShotokuGaku(TextBoxNum txtNenkinShotokuGaku) {
+    public void  setTxtNenkinShotokuGaku(TextBoxNum txtNenkinShotokuGaku) {
         this.getShotokuJohoToroku().setTxtNenkinShotokuGaku(txtNenkinShotokuGaku);
     }
 
@@ -300,7 +454,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKazeiShotokuGaku(TextBoxNum txtKazeiShotokuGaku) {
+    public void  setTxtKazeiShotokuGaku(TextBoxNum txtKazeiShotokuGaku) {
         this.getShotokuJohoToroku().setTxtKazeiShotokuGaku(txtKazeiShotokuGaku);
     }
 
@@ -310,7 +464,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKakutei(Button btnKakutei) {
+    public void  setBtnKakutei(Button btnKakutei) {
         this.getShotokuJohoToroku().setBtnKakutei(btnKakutei);
     }
 
@@ -320,7 +474,7 @@ public class ShotokuJohoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnTorikeshi(Button btnTorikeshi) {
+    public void  setBtnTorikeshi(Button btnTorikeshi) {
         this.getShotokuJohoToroku().setBtnTorikeshi(btnTorikeshi);
     }
 
