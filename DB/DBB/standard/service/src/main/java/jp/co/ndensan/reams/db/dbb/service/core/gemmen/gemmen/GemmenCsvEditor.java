@@ -66,9 +66,11 @@ public class GemmenCsvEditor {
         }
         HokenryoDankaiSettings hokenryoDankaiSettings = HokenryoDankaiSettings.createInstance();
         HokenryoDankaiList 保険料段階リスト = hokenryoDankaiSettings.get保険料段階ListIn(entity.getFukaNendo());
-        HokenryoDankai 保険料段階 = 保険料段階リスト.getBy段階区分(entity.getHokenryoDankai());
-        if (保険料段階 != null) {
-            csvEntity.set保険料段階(保険料段階.get表記());
+        if (entity.getHokenryoDankai() != null) {
+            HokenryoDankai 保険料段階 = 保険料段階リスト.getBy段階区分(entity.getHokenryoDankai());
+            if (保険料段階 != null) {
+                csvEntity.set保険料段階(保険料段階.get表記());
+            }
         }
         csvEntity.set処理前減免前介護保険料年額(numToRString(entity.getGemmenMaeHokenryo()));
         csvEntity.set処理後減免前介護保険料年額(numToRString(賦課の情報一時Data.getGemmenMaeHokenryo()));
