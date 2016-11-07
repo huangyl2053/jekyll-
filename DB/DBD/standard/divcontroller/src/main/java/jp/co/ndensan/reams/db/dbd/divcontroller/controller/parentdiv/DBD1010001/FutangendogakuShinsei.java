@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunint
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
 import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdWarningMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.DBD1010001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.DBD1010001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDiv;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -454,7 +456,19 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onChange_ddlRiyoshaFutanDankai(FutangendogakuShinseiDiv div) {
-        getHandler(div).onChange_ddlRiyoshaFutanDankai();
+        if (!ResponseHolder.isReRequest()) {
+            if (getHandler(div).check負担段階変更有無()) {
+                return ResponseData.of(div).addMessage(DbdWarningMessages.負担段階確認.getMessage()).respond();
+            } else {
+                return ResponseData.of(div).respond();
+            }
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).onChange_ddlRiyoshaFutanDankai();
+            return ResponseData.of(div).respond();
+        } else if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            getHandler(div).reset負担段階();
+        }
         return ResponseData.of(div).respond();
     }
 
