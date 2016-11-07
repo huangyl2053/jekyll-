@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokuchoHeijunkaKeisanPanel {
 
     private static final RString 帳票グループコード = new RString("DBB0130001");
-    private final RString 特別徴収平準化計算_特別徴収8月分 = new RString("DBB0130001_特別徴収平準化計算（特別徴収8月分）");
+    private final RString 特別徴収平準化計算_特別徴収8月分 = new RString("DBB200005_TokubetsuChoshuHeijunkaKeisanAugustKekkaIchiran");
 
     /**
      * onLoadです
