@@ -24,6 +24,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
 
+    private static final String KEY_SHUTSURYOKUJUN_ID = "shutsuryokujunId";
     private static final long serialVersionUID = 5255077799026629051L;
     @BatchParameter(key = "処理年月日", name = "処理年月日")
     private FlexibleDate 処理年月日;
@@ -59,8 +60,8 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
     private RString 償還分を対象としない;
     @BatchParameter(key = "被保険者番号", name = "被保険者番号")
     private RString 被保険者番号;
-    @BatchParameter(key = "出力順ID", name = "出力順ID")
-    private RString 出力順ID;
+    @BatchParameter(key = KEY_SHUTSURYOKUJUN_ID, name = "出力順ID")
+    private Long shutsuryokujunId;
     @BatchParameter(key = "文書番号", name = "文書番号")
     private RString 文書番号;
 
@@ -80,6 +81,6 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
         return new KyufuhiTsuchishoProcessParameter(new RString(処理年月日.toString()), サービス種類区分, new RString(サービス開始年月.toString()),
                 new RString(サービス終了年月.toString()), 福祉用具貸与ページ出力区分, 集約区分, 保険者構成, 証記載保険者番号, 要介護度, 死亡者分を対象としない,
                 ゼロ査定実績を対象としない, 再審査分を対象としない, 過誤分を対象としない, 施設分を対象としない, 特定入所者介護を対象としない,
-                償還分を対象としない, 出力順ID, 文書番号);
+                償還分を対象としない, shutsuryokujunId, 文書番号);
     }
 }
