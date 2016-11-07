@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0220014;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220014.DBC0220014StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220014.DBC0220014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220014.JukyushaIdoRenrakuhyoJohoShokaiPanelDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -61,19 +62,43 @@ public class JukyushaIdoRenrakuhyoJohoShokaiPanel {
         }
         div.getCcdJukyushaIdoRenrakuhyo().initialize(処理モード, ShikibetsuCode.EMPTY, 被保険者番号, 履歴番号, 論理削除フラグ, 異動日);
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC0220014StateName.受給者異動連絡票情報照会);
 
     }
 
     /**
-     * 検索画面に戻るを処理します。
+     * 「完了する」ボタンを処理します。
      *
      * @param div JukyushaIdoRenrakuhyoJohoShokaiPanelDiv
      * @return ResponseData
      */
-    public ResponseData<JukyushaIdoRenrakuhyoJohoShokaiPanelDiv> onClick_btnCancel(
+    public ResponseData<JukyushaIdoRenrakuhyoJohoShokaiPanelDiv> onClick_btnComplete(
             JukyushaIdoRenrakuhyoJohoShokaiPanelDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0220014TransitionEventName.対象者検索へ).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0220014TransitionEventName.完了).respond();
+
+    }
+
+    /**
+     * 「再検索する」ボタンを処理します。
+     *
+     * @param div JukyushaIdoRenrakuhyoJohoShokaiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaIdoRenrakuhyoJohoShokaiPanelDiv> onClick_btnResearch(
+            JukyushaIdoRenrakuhyoJohoShokaiPanelDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0220014TransitionEventName.再検索).respond();
+
+    }
+
+    /**
+     * 「検索結果一覧へ」ボタンを処理します。
+     *
+     * @param div JukyushaIdoRenrakuhyoJohoShokaiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaIdoRenrakuhyoJohoShokaiPanelDiv> onClick_btnSearchResult(
+            JukyushaIdoRenrakuhyoJohoShokaiPanelDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0220014TransitionEventName.検索結果一覧).respond();
 
     }
 }
