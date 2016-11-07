@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 宛名識別対象一時テーブル5を作成、データを作成します。
+ *
+ * @reamsid_L DBA-1210-030 zhengsongling
  */
 public class ShikakuShutokuToNenreiTotatsuProcess extends BatchProcessBase<JukyuNinteiShinseityuIgaiEntity> {
 

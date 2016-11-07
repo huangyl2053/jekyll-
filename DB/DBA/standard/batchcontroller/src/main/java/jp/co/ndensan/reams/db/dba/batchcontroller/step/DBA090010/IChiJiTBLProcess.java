@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 /**
  *
  * 処理結果リストCSVの作成。
+ *
+ * @reamsid_L DBA-1210-030 zhengsongling
  */
 public class IChiJiTBLProcess extends BatchProcessBase<IChiJiTBLEntity> {
 
@@ -58,14 +62,13 @@ public class IChiJiTBLProcess extends BatchProcessBase<IChiJiTBLEntity> {
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), FILENAME);
-//        eucCsvWriter = BatchWriters.csvWriter(AtenaSeelEUCEntity.class)
-//                .filePath(eucFilePath)
-//                .setDelimiter(コンマ)
-//                .setEnclosure(ダブル引用符)
-//                .setEncode(Encode.UTF_8withBOM)
-//                .setNewLine(NewLine.CRLF)
-//                .hasHeader(true)
-//                .build();
+        eucCsvWriter = new CsvWriter.InstanceBuilder(this.eucFilePath)
+                .setDelimiter(コンマ)
+                .setEnclosure(ダブル引用符)
+                .setEncode(Encode.UTF_8withBOM)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(true)
+                .build();
         処理結果リスト一時TBL = new BatchEntityCreatedTempTableWriter(TABLE_処理結果リスト一時TBL,
                 ShorikekkarisutoichijiTBLEntity.class);
     }
