@@ -470,22 +470,36 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     private List<ShunoNendoEntity> getNew帳票用収納状況情報List(List<ShunoNendoEntity> old帳票用収納状況情報List, FlexibleYear 日付関連_調定年度) {
         List<ShunoNendoEntity> new帳票用収納状況情報List = new ArrayList<>();
 
-        int i = 0;
+        ShunoNendoEntity 収納状況minus2 = null;
+        ShunoNendoEntity 収納状況minus1 = null;
+        ShunoNendoEntity 収納状況equal調定年度 = null;
+
         for (ShunoNendoEntity data : old帳票用収納状況情報List) {
-            if (i == 0 && !data.get賦課年度().equals(日付関連_調定年度.minusYear(2))) {
-                new帳票用収納状況情報List.add(new ShunoNendoEntity());
-            } else if (i == 1 && !data.get賦課年度().equals(日付関連_調定年度.minusYear(1))) {
-                new帳票用収納状況情報List.add(new ShunoNendoEntity());
-            } else if (i == 2 && !data.get賦課年度().equals(日付関連_調定年度)) {
-                new帳票用収納状況情報List.add(new ShunoNendoEntity());
-            } else {
-                new帳票用収納状況情報List.add(data);
+            if (data.get賦課年度().equals(日付関連_調定年度.minusYear(2))) {
+                収納状況minus2 = data;
             }
-            i++;
+            if (data.get賦課年度().equals(日付関連_調定年度.minusYear(1))) {
+                収納状況minus1 = data;
+            }
+            if (data.get賦課年度().equals(日付関連_調定年度)) {
+                収納状況equal調定年度 = data;
+            }
         }
 
-        while (new帳票用収納状況情報List.size() < 3) {
+        if (収納状況minus2 == null) {
             new帳票用収納状況情報List.add(new ShunoNendoEntity());
+        } else {
+            new帳票用収納状況情報List.add(収納状況minus2);
+        }
+        if (収納状況minus1 == null) {
+            new帳票用収納状況情報List.add(new ShunoNendoEntity());
+        } else {
+            new帳票用収納状況情報List.add(収納状況minus1);
+        }
+        if (収納状況equal調定年度 == null) {
+            new帳票用収納状況情報List.add(new ShunoNendoEntity());
+        } else {
+            new帳票用収納状況情報List.add(収納状況equal調定年度);
         }
 
         return new帳票用収納状況情報List;
