@@ -129,12 +129,14 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
     }
 
     private RString get出力順() {
-        ShutsuryokujunRelateEntity shutsuryokujunrelateentity = ReportUtil.get出力順情報(TankiNyushoKakudaiGaitosha.ShutsuryokujunEnum.class,
-                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701012.getReportId(),
-                processParameter.getShutsuryokujunId());
         RString 出力順 = RString.EMPTY;
-        if (shutsuryokujunrelateentity != null) {
-            出力順 = shutsuryokujunrelateentity.get出力順OrderBy();
+        if (processParameter.getShutsuryokujunId() != null) {
+            ShutsuryokujunRelateEntity shutsuryokujunrelateentity = ReportUtil.get出力順情報(TankiNyushoKakudaiGaitosha.ShutsuryokujunEnum.class,
+                    SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701012.getReportId(),
+                    processParameter.getShutsuryokujunId());
+            if (shutsuryokujunrelateentity != null) {
+                出力順 = shutsuryokujunrelateentity.get出力順OrderBy();
+            }
         }
         return 出力順;
     }
