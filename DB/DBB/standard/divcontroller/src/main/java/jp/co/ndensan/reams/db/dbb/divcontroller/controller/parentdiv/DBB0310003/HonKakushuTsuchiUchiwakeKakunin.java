@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0310003
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.TsuchishoUchiwakeJoken;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.DBB0310003TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.HonKakushuTsuchiUchiwakeKakuninDiv;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0310003.Hon
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteifuka.Honsanteifuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -34,6 +36,7 @@ public class HonKakushuTsuchiUchiwakeKakunin {
      * @return 打ち分け方法確認の画面。
      */
     public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onLoad(HonKakushuTsuchiUchiwakeKakuninDiv div) {
+        ViewStateHolder.put(ViewStateKeys.保存フラグ, false);
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
         List<TsuchishoUchiwakeJoken> 打分け方法List = 本算定賦課計算.getutiwakehouhoujyoho1();
         if (打分け方法List != null) {
@@ -124,6 +127,7 @@ public class HonKakushuTsuchiUchiwakeKakunin {
                 getHandler(div).show打分け方法情報(方法情報一覧.get(0));
             }
         }
+        ViewStateHolder.put(ViewStateKeys.保存フラグ, true);
         return createResponse(div);
     }
 
@@ -137,10 +141,11 @@ public class HonKakushuTsuchiUchiwakeKakunin {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
         HonKakushuTsuchiUchiwakeKakuninHandler handler = getHandler(div);
         RString 打ち分け条件view = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
+        boolean 保存フラグ = ViewStateHolder.get(ViewStateKeys.保存フラグ, Boolean.class);
 
         List<TsuchishoUchiwakeJoken> 打分け方法 = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件view);
         boolean 変更flag = handler.変更有無(打分け方法.get(0));
-        if (変更flag) {
+        if (変更flag && !保存フラグ) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(DbbQuestionMessages.変更途中の内容破棄確認.getMessage().getCode(),
                         DbbQuestionMessages.変更途中の内容破棄確認.getMessage().evaluate());
@@ -149,12 +154,9 @@ public class HonKakushuTsuchiUchiwakeKakunin {
             if (new RString(DbbQuestionMessages.変更途中の内容破棄確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                RString 打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
-                TsuchishoUchiwakeJoken 変更打分け方法 = handler.get確認画面の打分け方法(false, 打ち分け条件);
-                handler.切替時保存処理(変更打分け方法);
+                throw new ApplicationException(DbbInformationMessages.打分け方法保存指示.getMessage().evaluate());
             }
         }
-
         return ResponseData.of(div).forwardWithEventName(DBB0310003TransitionEventName.完了).respond();
     }
 
