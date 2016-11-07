@@ -41,6 +41,9 @@ public class DBC8020001Main {
     private static final RString メニューID_DBCMN63005 = new RString("DBCMN63005");
     private static final RString メニューID_DBCMNL3003 = new RString("DBCMNL3003");
     private static final RString メニューID_DBCMNN2004 = new RString("DBCMNN2004");
+    private static final RString TITLE_高額合算 = new RString("高額合算振込明細・振込データ作成");
+    private static final RString TITLE_事業高額 = new RString("総合事業振込明細・振込データ作成");
+    private static final RString TITLE_事業高額合算 = new RString("事業分振込明細・振込データ作成");
 
     /**
      * 画面初期化です。
@@ -49,11 +52,6 @@ public class DBC8020001Main {
      * @return ResponseData<DBC8020001MainDiv>
      */
     public ResponseData<DBC8020001MainDiv> onLoad(DBC8020001MainDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getHandler(div).initialize(pairs);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
         RString メニューID = ResponseHolder.getMenuID();
         if (メニューID_DBCMN63005.equals(メニューID)) {
             return ResponseData.of(div).setState(DBC8020001StateName.高額合算);
@@ -61,6 +59,36 @@ public class DBC8020001Main {
             return ResponseData.of(div).setState(DBC8020001StateName.事業高額);
         } else if (メニューID_DBCMNN2004.equals(メニューID)) {
             return ResponseData.of(div).setState(DBC8020001StateName.事業高額合算);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * メニューIDより画面タイトルを設定するのメソッドです。
+     *
+     * @param div　DBC8020001MainDiv
+     * @return　ResponseData<DBC8020001MainDiv>
+     */
+    public ResponseData<DBC8020001MainDiv> onStateTransition(DBC8020001MainDiv div) {
+        RString メニューID = ResponseHolder.getMenuID();
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getHandler(div).initialize(pairs);
+        if (pairs.iterator().hasNext()) {
+            if (メニューID_DBCMN63005.equals(メニューID)) {
+                return ResponseData.of(div).rootTitle(TITLE_高額合算).addValidationMessages(pairs).respond();
+            } else if (メニューID_DBCMNL3003.equals(メニューID)) {
+                return ResponseData.of(div).rootTitle(TITLE_事業高額).addValidationMessages(pairs).respond();
+            } else if (メニューID_DBCMNN2004.equals(メニューID)) {
+                return ResponseData.of(div).rootTitle(TITLE_事業高額合算).addValidationMessages(pairs).respond();
+            }
+        } else {
+            if (メニューID_DBCMN63005.equals(メニューID)) {
+                return ResponseData.of(div).rootTitle(TITLE_高額合算).respond();
+            } else if (メニューID_DBCMNL3003.equals(メニューID)) {
+                return ResponseData.of(div).rootTitle(TITLE_事業高額).respond();
+            } else if (メニューID_DBCMNN2004.equals(メニューID)) {
+                return ResponseData.of(div).rootTitle(TITLE_事業高額合算).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
