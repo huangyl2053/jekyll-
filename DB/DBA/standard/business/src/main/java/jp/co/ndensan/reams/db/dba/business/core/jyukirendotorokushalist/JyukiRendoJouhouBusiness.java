@@ -63,6 +63,85 @@ public class JyukiRendoJouhouBusiness {
      * パラメータを作成します。
      *
      * @param processParameter 住基連動登録者リストのバッチパラメータ
+     * @return JyukiRendoTorokushaListBatchProcessParameter
+     */
+    public JyukiRendoTorokushaListBatchProcessParameter setPsetParameter(JyukiRendoTorokushaListBatchProcessParameter processParameter) {
+        List<Code> 取得事由被保険者Codes = new ArrayList<>();
+        List<Code> 適用事由他特例者Codes = new ArrayList<>();
+        List<Code> 適用事由除外者Codes = new ArrayList<>();
+        List<Code> 喪失事由被保険者Codes = new ArrayList<>();
+        List<Code> 解除事由他特例者Codes = new ArrayList<>();
+        List<Code> 解除事由除外者Codes = new ArrayList<>();
+        List<Code> 変更事由被保険者Codes = new ArrayList<>();
+        List<Code> 住特適用Codes = new ArrayList<>();
+        List<Code> 住特解除Codes = new ArrayList<>();
+        List<UzT0007CodeEntity> 取得事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<UzT0007CodeEntity> 適用事由他特例者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格適用事由_他特例者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<UzT0007CodeEntity> 適用事由除外者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格適用事由_除外者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<UzT0007CodeEntity> 喪失事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<UzT0007CodeEntity> 解除事由他特例者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格解除事由_他特例者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<UzT0007CodeEntity> 解除事由除外者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格解除事由_除外者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<UzT0007CodeEntity> 変更事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格変更事由被保険者.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<UzT0007CodeEntity> 住特適用LIst = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格住特適用.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<UzT0007CodeEntity> 住特解除List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格住特解除.getコード(), new FlexibleDate(RDate.getNowDate().toDateString()));
+        for (UzT0007CodeEntity uzT0007CodeEntity : 取得事由被保険者List) {
+            取得事由被保険者Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 適用事由他特例者List) {
+            適用事由他特例者Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 適用事由除外者List) {
+            適用事由除外者Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 喪失事由被保険者List) {
+            喪失事由被保険者Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 解除事由他特例者List) {
+            解除事由他特例者Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 解除事由除外者List) {
+            解除事由除外者Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 変更事由被保険者List) {
+            変更事由被保険者Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 住特適用LIst) {
+            住特適用Codes.add(uzT0007CodeEntity.getコード());
+        }
+        for (UzT0007CodeEntity uzT0007CodeEntity : 住特解除List) {
+            住特解除Codes.add(uzT0007CodeEntity.getコード());
+        }
+        取得事由被保険者Codes.remove(年齢到達);
+        変更事由被保険者Codes.remove(一号被保険者到達);
+        processParameter.setShutokuJiyu_Hihokensha(取得事由被保険者Codes);
+        processParameter.setTekiyoJiyu_TaTokureisha(適用事由他特例者Codes);
+        processParameter.setTekiyoJiyu_Jogaisha(適用事由除外者Codes);
+        processParameter.setSoshitsuJiyu_Hihokensha(喪失事由被保険者Codes);
+        processParameter.setKaijoJiyu_TaTokureisha(解除事由他特例者Codes);
+        processParameter.setKaijoJiyu_Jogaisha(解除事由除外者Codes);
+        processParameter.setHenkoJiyu_Hihokensha(変更事由被保険者Codes);
+        processParameter.setJutokuTekiyo(住特適用Codes);
+        processParameter.setJutokuKaijo(住特解除Codes);
+        processParameter.setIdouJiyu_tennyu(転入);
+        processParameter.setIdouJiyu_tensyutu(転出);
+        processParameter.setIdouJiyu_sibou(死亡);
+        processParameter.setIdouJiyu_tenkyo(転居);
+        return processParameter;
+    }
+
+    /**
+     * パラメータを作成します。
+     *
+     * @param processParameter 住基連動登録者リストのバッチパラメータ
      * @param uaFt200Psm 宛名PSM
      * @return JyukiRendoTorokushaListBatchProcessParameter
      */

@@ -176,7 +176,7 @@ public class DBC1210011PanelHandler {
             Collections.sort(対象年度List, comparator);
             List<KeyValueDataSource> ddlTaishoNendodataSource = new ArrayList();
             for (FlexibleYear 対象年度 : 対象年度List) {
-                ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(), 対象年度.toDateString()));
+                ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(), 対象年度.wareki().toDateString()));
             }
             div.getDdlTaishoNendo().setDataSource(ddlTaishoNendodataSource);
             div.getDdlTaishoNendo().setSelectedIndex(整数_ZERO);
@@ -473,7 +473,10 @@ public class DBC1210011PanelHandler {
         parameter.set帳票ID(reportId);
         parameter.set支払予定日(div.getTxtShiharaiYoteiYMD().getValue() != null
                 ? new FlexibleDate(div.getTxtShiharaiYoteiYMD().getValue().toDateString()) : FlexibleDate.EMPTY);
-        parameter.set文書番号(div.getCcdBunshoNO().get文書番号() != null ? div.getCcdBunshoNO().get文書番号() : RString.EMPTY);
+        parameter.set文書番号(div.getCcdBunshoNO().get文書番号() != null ? div.getCcdBunshoNO().get文書番号()
+                : RString.HALF_SPACE.concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE)
+                .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE)
+                .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE));
         parameter.set発行日(div.getTxtHakkouYMD().getValue() != null
                 ? new FlexibleDate(div.getTxtHakkouYMD().getValue().toDateString()) : FlexibleDate.EMPTY);
         parameter.set被保険者番号(被保険者番号);

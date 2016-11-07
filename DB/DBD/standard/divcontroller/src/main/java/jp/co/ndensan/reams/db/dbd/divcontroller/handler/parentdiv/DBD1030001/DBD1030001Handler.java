@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.Shak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shakaifukushihojinkeigen.ShakaifukuRiyoshaFutanKeigenToJotai;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001Div;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.dgShinseiList_Row;
@@ -220,10 +222,10 @@ public class DBD1030001Handler {
             } else {
                 dataSource.setTxtKetteiYMD(決定年月日);
                 TextBoxFlexibleDate 適用開始年月日 = new TextBoxFlexibleDate();
-                適用開始年月日.setValue(FlexibleDate.EMPTY);
+                適用開始年月日.setValue(社会福祉法人等利用者負担軽減情報.get適用開始年月日());
                 dataSource.setTxtTekiyoYMD(適用開始年月日);
                 TextBoxFlexibleDate 適用終了年月日 = new TextBoxFlexibleDate();
-                適用終了年月日.setValue(FlexibleDate.EMPTY);
+                適用終了年月日.setValue(社会福祉法人等利用者負担軽減情報.get適用終了年月日());
                 dataSource.setTxtYukoKigenYMD(適用終了年月日);
                 dataSource.setShoninShinaiRiyu(社会福祉法人等利用者負担軽減情報.get非承認理由());
                 dataSource.setKeigenJiyu(RString.EMPTY);
@@ -233,6 +235,8 @@ public class DBD1030001Handler {
                 dataSource.setKakuninNo(RString.EMPTY);
             }
             dataSource.setDataId(DataPassingConverter.serialize(社会福祉法人等利用者負担軽減情報.identifier()));
+            dataSource.setHiddenShoKisaiHokenshaNo(社会福祉法人等利用者負担軽減情報.get証記載保険者番号().getColumnValue());
+            dataSource.setHiddenShinseiRirekiNo(new RString(社会福祉法人等利用者負担軽減情報.get履歴番号()));
             dataSourceList.add(dataSource);
         }
         return dataSourceList;
@@ -274,6 +278,8 @@ public class DBD1030001Handler {
         }
         dataSource.setKakuninNo(社会福祉法人等利用者負担軽減情報.get確認番号());
         dataSource.setShoninShinaiRiyu(RString.EMPTY);
+        dataSource.setHiddenShoKisaiHokenshaNo(社会福祉法人等利用者負担軽減情報.get証記載保険者番号().getColumnValue());
+        dataSource.setHiddenShinseiRirekiNo(new RString(社会福祉法人等利用者負担軽減情報.get履歴番号()));
     }
 
     private RString get決定区分(RString 決定区分) {
@@ -306,7 +312,7 @@ public class DBD1030001Handler {
     private void 状態５画面表示(ShikibetsuCode 識別コード) {
         div.getTxtShinseiRiyu().setDisabled(false);
         div.getTxtShinseiYMD().setDisabled(false);
-        div.getTxtShinseiYMD().setValue(FlexibleDate.EMPTY);
+        div.getTxtShinseiYMD().setValue(FlexibleDate.getNowDate());
         div.getTxtShinseiRiyu().setValue(RString.EMPTY);
         div.getRadKetteiKubun().setSelectedKey(KEY0);
         div.getTxtTekiyoYMD().setValue(FlexibleDate.EMPTY);
@@ -329,20 +335,21 @@ public class DBD1030001Handler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(再検索する, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(検索結果一覧へ, false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存する, true);
-        
+
         List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
-        FlexibleDate 適用日 ;
-        if (rows.isEmpty()) {
-            適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
-                    RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
-        } else {
-            適用日 = new FlexibleDate(rows.get(0).getTxtYukoKigenYMD().
-                    getValue().plusDay(1).toString());
+        FlexibleDate 適用日 = FlexibleDate.getNowDate();
+        if (rows != null && rows.size() > 0) {
+            for (dgShinseiList_Row row : rows) {
+                if (漢字承認する.equals(row.getKetteiKubun())) {
+                    適用日 = new FlexibleDate(row.getTxtYukoKigenYMD().
+                            getValue().plusDay(1).toString());
+                    break;
+                }
+            }
         }
         FlexibleDate 有効期限 = ShakaiFukushiHojinKeigenService.createIntance().estimate有効期限(適用日);
         div.getTxtTekiyoYMD().setValue(適用日);
         div.getTxtYukoKigenYMD().setValue(有効期限);
-        
     }
 
     private GemmenKubun get減免区分初期値(ShikibetsuCode 識別コード) {
@@ -354,7 +361,7 @@ public class DBD1030001Handler {
     }
 
     private void 状態２画面表示() {
-        div.getTxtShinseiYMD().setValue(FlexibleDate.EMPTY);
+        div.getTxtShinseiYMD().setValue(FlexibleDate.getNowDate());
         div.getTxtShinseiRiyu().setValue(RString.EMPTY);
         div.getRadKetteiKubun().setSelectedKey(KEY0);
         div.getTxtTekiyoYMD().setValue(FlexibleDate.EMPTY);
@@ -420,11 +427,28 @@ public class DBD1030001Handler {
     public void onClick_onSelectByModifyButton(ShikibetsuCode 識別コード, ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態) {
         一覧パネルをClose状態表示か(true);
         入力パネルをClose状態表示か(false);
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
         dgShinseiList_Row dataSouce = div.getDgShinseiList().getActiveRow();
         if (申請情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態３画面表示(dataSouce, 情報と状態, 識別コード);
         } else if (承認情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態６画面表示(dataSouce, 情報と状態, 識別コード);
+            if (div.getTxtTekiyoYMD().getValue().isEmpty()) {
+                FlexibleDate 適用日 = FlexibleDate.getNowDate();
+                if (rows != null && rows.size() > 1) {
+                    for (dgShinseiList_Row row : rows) {
+                        if (漢字承認する.equals(row.getKetteiKubun())) {
+                            適用日 = new FlexibleDate(row.getTxtYukoKigenYMD().
+                                    getValue().plusDay(1).toString());
+                            break;
+                        }
+                    }
+                }
+                div.getTxtTekiyoYMD().setValue(適用日);
+            }
+            if (div.getTxtYukoKigenYMD().getValue().isEmpty()) {
+                div.getTxtYukoKigenYMD().setValue(ShakaiFukushiHojinKeigenService.createIntance().estimate有効期限(div.getTxtTekiyoYMD().getValue()));
+            }
         }
     }
 
@@ -537,8 +561,8 @@ public class DBD1030001Handler {
             div.getTxtHiShoninRiyu().setDisabled(true);
         } else if (漢字承認しない.equals(dataSouce.getKetteiKubun())) {
             div.getRadKetteiKubun().setSelectedKey(KEY1);
-            div.getTxtTekiyoYMD().setDisabled(true);
-            div.getTxtYukoKigenYMD().setDisabled(true);
+            div.getTxtTekiyoYMD().setDisabled(false);
+            div.getTxtYukoKigenYMD().setDisabled(false);
             div.getDdlKeigenJiyu().setDisabled(true);
             div.getTxtKeigenRitsuBunshi().setDisabled(true);
             div.getTxtKeigenRitsuBunbo().setDisabled(true);
@@ -698,22 +722,27 @@ public class DBD1030001Handler {
             ShakaifukuRiyoshaFutanKeigenToJotai 編集情報, Integer 追加履歴番号,
             ShakaifukuRiyoshaFutanKeigenToJotai 最初情報, HihokenshaNo 被保険者番号) {
         ShoKisaiHokenshaNo 証記載保険者番号;
+        RString 履歴番号;
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> new情報と状態ArrayList;
+        RString 決定区分;
         if (null == 編集情報) {
-            RString 決定区分 = RString.EMPTY;
             証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+            履歴番号 = RString.EMPTY;
+            決定区分 = RString.EMPTY;
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報
                     = get社会福祉法人等利用者負担軽減申請の情報From画面(true, 0, 決定区分, 証記載保険者番号, 追加履歴番号, 被保険者番号);
             new情報と状態ArrayList = 追加社会福祉法人等利用者負担軽減申請の情報(画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList);
         } else {
-            RString 決定区分 = 編集情報.get社会福祉法人等利用者負担軽減情報().get決定区分();
             証記載保険者番号 = 編集情報.get社会福祉法人等利用者負担軽減情報().get証記載保険者番号();
+            履歴番号 = new RString(編集情報.get社会福祉法人等利用者負担軽減情報().get履歴番号());
+            決定区分 = 編集情報.get社会福祉法人等利用者負担軽減情報().get決定区分();
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報
                     = get社会福祉法人等利用者負担軽減申請の情報From画面(
                             false, 編集情報.get社会福祉法人等利用者負担軽減情報().get履歴番号(), 決定区分, 証記載保険者番号, 追加履歴番号, 被保険者番号);
             new情報と状態ArrayList = 修正社会福祉法人等利用者負担軽減申請の情報(
                     画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList, 編集情報, 最初情報);
         }
+
         情報エリアクリア();
         一覧パネルをClose状態表示か(false);
         入力パネルをClose状態表示か(true);
@@ -897,6 +926,7 @@ public class DBD1030001Handler {
             ShakaifukuRiyoshaFutanKeigenToJotai 編集情報, ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList) {
         ShakaifukuRiyoshaFutanKeigen 修正後情報 = 修正後社会福祉法人等利用者負担軽減申請情報.get社会福祉法人等利用者負担軽減情報();
         int 履歴番号 = 編集情報.get新履歴番号();
+        ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayListCopy = new ArrayList(情報と状態ArrayList);
 
         int 削除位置 = 0;
         for (int 位置 = 0; 位置 < 情報と状態ArrayList.size(); 位置++) {
@@ -932,6 +962,8 @@ public class DBD1030001Handler {
                     修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 1));
         } else if (!is適用開始年月日変更 && !is決定区分変更) {
             int length = 情報と状態ArrayList.size();
+            new情報と状態ArrayList.addAll(情報と状態ArrayList);
+
             if (削除位置 > length - 1) {
                 new情報と状態ArrayList.add(new ShakaifukuRiyoshaFutanKeigenToJotai(
                         修正後情報, 修正後社会福祉法人等利用者負担軽減申請情報.get状態(), 履歴番号));
@@ -997,6 +1029,7 @@ public class DBD1030001Handler {
                 is承認しない = true;
             }
         }
+        変更ある = set修正後社会福祉法人等利用者負担軽減申請者情報_適用日有効期限(builder, 画面社会福祉法人等利用者負担軽減申請情報, 情報);
         if (!is承認しない) {
             変更ある = set修正後社会福祉法人等利用者負担軽減申請情報(builder, 変更ある, 画面社会福祉法人等利用者負担軽減申請情報, 情報);
             if (set修正後社会福祉法人等利用者負担軽減申請情報By承認する(builder, 画面社会福祉法人等利用者負担軽減申請情報, 情報)) {
@@ -1035,7 +1068,7 @@ public class DBD1030001Handler {
         return get編集後情報と状態By編集後情報(編集後情報, 変更ある, 編集前状態);
     }
 
-    private boolean set修正後社会福祉法人等利用者負担軽減申請情報By承認する(ShakaifukuRiyoshaFutanKeigenBuilder builder,
+    private boolean set修正後社会福祉法人等利用者負担軽減申請者情報_適用日有効期限(ShakaifukuRiyoshaFutanKeigenBuilder builder,
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報, ShakaifukuRiyoshaFutanKeigen 情報) {
         boolean 変更ある = false;
         if (null == 情報.get適用終了年月日()) {
@@ -1058,6 +1091,12 @@ public class DBD1030001Handler {
             builder.set適用開始年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日());
             変更ある = true;
         }
+        return 変更ある;
+    }
+
+    private boolean set修正後社会福祉法人等利用者負担軽減申請情報By承認する(ShakaifukuRiyoshaFutanKeigenBuilder builder,
+            ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報, ShakaifukuRiyoshaFutanKeigen 情報) {
+        boolean 変更ある = false;
         if (情報.is生保扶助見直し特例有無() != 画面社会福祉法人等利用者負担軽減申請情報.is生保扶助見直し特例有無()) {
             builder.set生保扶助見直し特例有無(画面社会福祉法人等利用者負担軽減申請情報.is生保扶助見直し特例有無());
             変更ある = true;
@@ -1420,7 +1459,7 @@ public class DBD1030001Handler {
             div.getChkKyojuhiShokuhiGentei().setDisabled(true);
             div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(true);
             div.getTxtKakuninNo().setDisabled(true);
-            
+
             List<RString> selectedKeys = new ArrayList<>();
             div.getDdlKeigenJiyu().setSelectedIndex(0);
             div.getTxtKeigenRitsuBunshi().clearValue();
@@ -1430,11 +1469,10 @@ public class DBD1030001Handler {
             div.getChkKyojuhiShokuhiGentei().setSelectedItemsByKey(selectedKeys);
             div.getChkKyusochiUnitGataJunKoshitsu().setSelectedItemsByKey(selectedKeys);
             div.getTxtKakuninNo().clearValue();
-            
-            
+
         }
     }
-    
+
     /**
      * 社会福祉法人等利用者負担軽減申請画面を「特例措置対象者」を押下する。
      *
@@ -1442,22 +1480,20 @@ public class DBD1030001Handler {
     public void onCLick_chkTokureiTaisho() {
         List<RString> selectKeys = div.getChkTokureiTaisho().getSelectedKeys();
         if (selectKeys.isEmpty() || selectKeys.size() != 1) {
-            div.getChkKyotakuServiceGentei().setDisabled(true);
-            div.getChkKyojuhiShokuhiGentei().setDisabled(true);
-            div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(true);
-            List<RString> selectedKeys = new ArrayList<>();
-            div.getChkKyotakuServiceGentei().setSelectedItemsByKey(selectedKeys);
-            div.getChkKyojuhiShokuhiGentei().setSelectedItemsByKey(selectedKeys);
-            div.getChkKyusochiUnitGataJunKoshitsu().setSelectedItemsByKey(selectedKeys); 
-        } else {
             div.getChkKyotakuServiceGentei().setDisabled(false);
             div.getChkKyojuhiShokuhiGentei().setDisabled(false);
             div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(false);
-        } 
+        } else {
+            List<RString> selectedKeys = new ArrayList<>();
+            div.getChkKyotakuServiceGentei().setSelectedItemsByKey(selectedKeys);
+            div.getChkKyojuhiShokuhiGentei().setSelectedItemsByKey(selectedKeys);
+            div.getChkKyusochiUnitGataJunKoshitsu().setSelectedItemsByKey(selectedKeys);
+            div.getChkKyotakuServiceGentei().setDisabled(true);
+            div.getChkKyojuhiShokuhiGentei().setDisabled(true);
+            div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(true);
+        }
     }
-    
-    
-    
+
     /**
      * 社会福祉法人等利用者負担軽減申請画面を適用日入力する。
      *
@@ -1469,6 +1505,36 @@ public class DBD1030001Handler {
         }
         FlexibleDate 有効期限 = ShakaiFukushiHojinKeigenService.createIntance().estimate有効期限(適用日);
         div.getTxtYukoKigenYMD().setValue(有効期限);
+    }
+
+    /**
+     * 申請一覧エリアデータのComparatorです。（「申請年月日」の降順でソート）
+     */
+    public static class ShakaiFukushiHojinRiyoshaFutanKeigenRowComparator implements Comparator<dgShinseiList_Row> {
+
+        @Override
+        public int compare(dgShinseiList_Row row1, dgShinseiList_Row row2) {
+
+            int result;
+            if (row1.getTxtTekiyoYMD().getValue() == null || row1.getTxtTekiyoYMD().getValue().isEmpty()) {
+                result = -1;
+            } else if (row2.getTxtTekiyoYMD().getValue() == null || row2.getTxtTekiyoYMD().getValue().isEmpty()) {
+                result = 1;
+            } else {
+                result = !row1.getTxtTekiyoYMD().getValue().isBeforeOrEquals(row2.getTxtTekiyoYMD().getValue())
+                        ? -1 : (row1.getTxtTekiyoYMD().getValue().equals(row2.getTxtTekiyoYMD().getValue()) ? 0 : 1);
+            }
+
+            if (result == 0) {
+                if (row1.getKetteiKubun() == KetteiKubun.承認する.get名称() && row2.getKetteiKubun() == KetteiKubun.承認しない.get名称()) {
+                    result = 1;
+                } else if (row1.getKetteiKubun() == KetteiKubun.承認しない.get名称() && row2.getKetteiKubun() == KetteiKubun.承認する.get名称()) {
+                    result = -1;
+                }
+            }
+
+            return result;
+        }
     }
 
 }

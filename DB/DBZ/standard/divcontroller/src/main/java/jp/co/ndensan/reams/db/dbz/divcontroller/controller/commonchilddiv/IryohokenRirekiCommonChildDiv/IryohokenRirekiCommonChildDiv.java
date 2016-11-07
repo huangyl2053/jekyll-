@@ -56,6 +56,7 @@ public class IryohokenRirekiCommonChildDiv {
         if (!RString.isNullOrEmpty(医療保険情報_識別コード) && !RString.isNullOrEmpty(mode)) {
             createHandlerOf(requestDiv).initialize(mode, 医療保険情報_識別コード);
         }
+        requestDiv.setVisible(true);
         responseData.data = requestDiv;
         return responseData;
     }

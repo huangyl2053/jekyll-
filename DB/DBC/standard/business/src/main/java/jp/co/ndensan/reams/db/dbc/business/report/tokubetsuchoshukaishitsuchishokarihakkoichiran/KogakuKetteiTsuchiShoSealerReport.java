@@ -23,7 +23,7 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
     private final KogakuKetteiTsuchiShoEntity 帳票情報;
     private final RString 文書番号;
     private final List<RString> 通知書定型文list;
-    private final List<RString> インフォlist;
+    private final RString インフォ;
     private final NinshoshaSource 認証者ソースデータ;
     private final List<RString> titleList;
     private final int 通番;
@@ -34,7 +34,7 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
      * @param 帳票情報 KogakuKetteiTsuchiShoEntity
      * @param 文書番号 RString
      * @param 通知書定型文list List<RString>
-     * @param インフォlist List<RString>
+     * @param インフォ RString
      * @param 認証者ソースデータ NinshoshaSource
      * @param titleList List<RString>
      * @param 通番 int
@@ -43,7 +43,7 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
             KogakuKetteiTsuchiShoEntity 帳票情報,
             RString 文書番号,
             List<RString> 通知書定型文list,
-            List<RString> インフォlist,
+            RString インフォ,
             NinshoshaSource 認証者ソースデータ,
             List<RString> titleList,
             int 通番) {
@@ -51,7 +51,7 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
         this.帳票情報 = 帳票情報;
         this.文書番号 = 文書番号;
         this.通知書定型文list = 通知書定型文list;
-        this.インフォlist = インフォlist;
+        this.インフォ = インフォ;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.titleList = titleList;
         this.通番 = 通番;
@@ -63,7 +63,7 @@ public class KogakuKetteiTsuchiShoSealerReport extends Report<KogakuKetteiTsuchi
                 帳票情報,
                 文書番号,
                 通知書定型文list,
-                インフォlist,
+                インフォ,
                 認証者ソースデータ,
                 titleList,
                 通番);

@@ -43,15 +43,13 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
         } else {
             source.bunshoNo = item.get文書番号();
         }
-        if (item.get帳票情報() == null || KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
-            for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
+        for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
+            if (item.get帳票情報() == null || KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
                 if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル.name()).equals(entity.getKomokuName())) {
                     source.title = entity.getKomokuValue();
                     break;
                 }
-            }
-        } else {
-            for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
+            } else {
                 if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル_旧措置者用.name()).equals(entity.getKomokuName())) {
                     source.title = entity.getKomokuValue();
                     break;
@@ -71,7 +69,6 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
                     REPLACE_OLD, RStringUtil.convert半角to全角(new RString(item.get帳票情報().get適用終了年月日().wareki()
                                     .eraType(EraType.KANJI).getYear().toString())));
         }
-//        source.shikibetsuCode = item.getIKojin().get識別コード();
         return source;
     }
 

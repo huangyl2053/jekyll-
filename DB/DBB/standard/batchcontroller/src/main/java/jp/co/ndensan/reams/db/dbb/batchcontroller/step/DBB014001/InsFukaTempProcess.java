@@ -104,6 +104,8 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
         service = FuchoKariSanteiFukaBatch.createInstance();
         生保の情報 = new ArrayList<>();
         老齢の情報 = new ArrayList<>();
+        生活保護扶助種類EntityList = new ArrayList<>();
+        世帯員所得情報List = new ArrayList<>();
         仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
         特別徴収_特徴開始前普通徴収_6月
                 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, 調定年度開始日, SubGyomuCode.DBB介護賦課);

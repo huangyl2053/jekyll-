@@ -66,8 +66,8 @@ public class DBC8020001Main {
     /**
      * メニューIDより画面タイトルを設定するのメソッドです。
      *
-     * @param div　DBC8020001MainDiv
-     * @return　ResponseData<DBC8020001MainDiv>
+     * @param div DBC8020001MainDiv
+     * @return ResponseData<DBC8020001MainDiv>
      */
     public ResponseData<DBC8020001MainDiv> onStateTransition(DBC8020001MainDiv div) {
         RString メニューID = ResponseHolder.getMenuID();

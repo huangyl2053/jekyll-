@@ -104,7 +104,9 @@ public class KoseiTaishoKyuhuzissekiJohouSakuseiProcess extends BatchProcessBase
         tempEntity.set軽減率(entity.get軽減率());
         tempEntity.set軽減後自己負担額(entity.get軽減後自己負担額());
         tempEntity.set高額サービス費用額(entity.get高額サービス費用額());
-        if (tempEntity.get更正前自己負担額() != null && tempEntity.get更正後自己負担額() != null
+        if (給付実績情報作成区分_削除.equals(entity.get給付実績情報作成区分コード())) {
+            更正対象給付実績情報Writer.insert(tempEntity);
+        } else if (tempEntity.get更正前自己負担額() != null && tempEntity.get更正後自己負担額() != null
                 && tempEntity.get更正前自己負担額().compareTo(tempEntity.get更正後自己負担額()) != 0) {
             更正対象給付実績情報Writer.insert(tempEntity);
         }
