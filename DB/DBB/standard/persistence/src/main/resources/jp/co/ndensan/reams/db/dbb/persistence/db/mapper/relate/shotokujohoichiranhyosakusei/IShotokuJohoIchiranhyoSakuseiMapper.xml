@@ -110,7 +110,7 @@
                         master
                    )) AS B
         ON master."shikibetsuCode"=B."shikibetsuCode"
-        ${出力順} , master."shotokuNendo" ASC, master."shikibetsuCode" ASC
+        ${出力順} , master."shotokuNendo" ASC
     </select>
     
     <!--広域市町村の所得情報一覧を取得します。-->
@@ -162,6 +162,7 @@
         <if test="ラジオボタン == 2">
         GROUP BY X."shotokuNendo", X."shikibetsuCode"
         </if>
+        ORDER BY X."shotokuNendo", X."shikibetsuCode"
         ) AS Y
         ON Y."shotokuNendo"=F."shotokuNendo"
         AND Y."shikibetsuCode"= F."shikibetsuCode"
@@ -246,7 +247,7 @@
         rgdb."DbV1001HihokenshaDaicho" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
         AND(B."hihokennshaKubunCode"='1' OR B."hihokennshaKubunCode"='2')
-        ${出力順}, "shotokuNendo" ASC, "shikibetsuCode" ASC
+        ${出力順}, "shotokuNendo" ASC
     </select>
     
     <!--select所得情報一覧データ-->
@@ -283,9 +284,11 @@
     </select>
     
     <select resultOrdered="true" id="selectTempAll" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.PrtKaigoHokenShotokuJohoIchiranParameter"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "KaigoHokenShotokuTemp" TEMP
+        ${出力順}
     </select>
     
 </mapper>

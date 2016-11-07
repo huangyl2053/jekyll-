@@ -71,8 +71,8 @@ public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<Shoto
         entity.setHihokenshajusho(所得照会票データ.getHihokenshajusho());
         entity.setZenjusho(所得照会票データ.getZenjusho());
         entity.setGenjusho(所得照会票データ.getGenjusho());
-        entity.setAtenaKanaShimei(所得照会票データ.getAtenaKanaShimei());
-        entity.setAtenaShimei(所得照会票データ.getAtenaShimei());
+        entity.setKanaMeisho(所得照会票データ.getKanaMeisho());
+        entity.setMeisho(所得照会票データ.getMeisho());
         entity.setSeinengappiYMD(所得照会票データ.getSeinengappiYMD());
         entity.setIdoYMD(所得照会票データ.getIdoYMD());
         entity.setKouhoshakubun(所得照会票データ.getKouhoshakubun());

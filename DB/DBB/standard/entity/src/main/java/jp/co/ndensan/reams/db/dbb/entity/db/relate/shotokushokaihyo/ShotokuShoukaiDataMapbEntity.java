@@ -35,8 +35,8 @@ public class ShotokuShoukaiDataMapbEntity {
     private RString hihokenshajusho;
     private RString zenjusho;
     private RString genjusho;
-    private AtenaKanaMeisho atenaKanaShimei;
-    private AtenaMeisho atenaShimei;
+    private AtenaKanaMeisho kanaMeisho;
+    private AtenaMeisho meisho;
     private FlexibleDate seinengappiYMD;
     private FlexibleDate idoYMD;
     private RString kouhoshakubun;
