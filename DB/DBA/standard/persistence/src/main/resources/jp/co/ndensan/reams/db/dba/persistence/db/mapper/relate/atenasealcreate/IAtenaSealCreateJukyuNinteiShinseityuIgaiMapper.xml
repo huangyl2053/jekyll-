@@ -64,20 +64,11 @@
             "Atesaki"."shikibetsuCode" = PSM."shikibetsuCode"
         AND
           "Atesaki"."gyomuCode" = 'DBA'
-            
-        AND
-          "Atesaki"."juminShubetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminShubetsuCode"
-        AND
-           "Atesaki"."juminJotaiCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."juminJotaiCode"
      WHERE
-      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."juminShubetsuCode" IN
-      <foreach collection="住民種別" item="住民種別" open="(" separator="," close=")"> #{住民種別} </foreach>
-      AND
-      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."juminJotaiCode" IN
-      <foreach collection="住民状態" item="住民状態" open="(" separator="," close=")"> #{住民状態} </foreach>
+            '1'='1'
       <if test="has市町村指定">
       AND
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."genLasdecCode" = #{shichousonshitei}
+        "PSM"."shichouzonCode" = #{shichousonshitei}
       </if>
     </select>
     
