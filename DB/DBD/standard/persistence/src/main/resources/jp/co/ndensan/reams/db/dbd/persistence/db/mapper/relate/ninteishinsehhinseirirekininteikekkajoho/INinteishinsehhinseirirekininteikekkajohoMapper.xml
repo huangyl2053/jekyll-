@@ -28,7 +28,7 @@
     LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" as A2
     ON A1."zenkaiShinseishoKanriNo" =A2."shinseishoKanriNo"
     LEFT JOIN rgdb."DbV4001JukyushaDaicho" as B
-    ON A."shinseishoKanriNo"=B."shinseishoKanriNo"
+    ON A."hihokenshaNo"=B."hihokenshaNo"
     WHERE 
     (A."ninteiShinseiShinseijiKubunCode"='2' 
     OR A2."ninteiShinseiShinseijiKubunCode"='3')
