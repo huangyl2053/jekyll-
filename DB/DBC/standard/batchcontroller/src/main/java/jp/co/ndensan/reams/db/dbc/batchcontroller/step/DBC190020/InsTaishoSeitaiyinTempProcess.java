@@ -153,6 +153,8 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
             } else {
                 taiShoEntity.setAtenaDateDhubetsu_kijunDay(RString.EMPTY);
             }
+
+            taiShoEntity.setRennrakusaki(宛名.get連絡先１().getColumnValue());
         } else if (RSTRING_2.equals(parameter.get処理区分())) {
 
             taiShoEntity.setHennshuuZokugaraCode(宛名.get続柄コードリスト().toTsuzukigaraCode().value());
