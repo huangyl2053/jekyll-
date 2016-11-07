@@ -34,12 +34,12 @@ public class HeaderDiv extends Panel {
     private HosokuJohoDiv HosokuJoho;
     @JsonProperty("Dialogs")
     private DialogsDiv Dialogs;
-    @JsonProperty("ccdAtenaInfo")
-    private KaigoAtenaInfoDiv ccdAtenaInfo;
-    @JsonProperty("ccdKaigoShikakuKihon")
-    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("ccdShisetsuNyushoInfo")
     private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
+    @JsonProperty("ccdKaigoShikakuKihon")
+    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdAtenaInfo")
+    private KaigoAtenaInfoDiv ccdAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -102,12 +102,12 @@ public class HeaderDiv extends Panel {
     }
 
     /*
-     * getccdAtenaInfo
-     * @return ccdAtenaInfo
+     * getccdShisetsuNyushoInfo
+     * @return ccdShisetsuNyushoInfo
      */
-    @JsonProperty("ccdAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return ccdAtenaInfo;
+    @JsonProperty("ccdShisetsuNyushoInfo")
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return ccdShisetsuNyushoInfo;
     }
 
     /*
@@ -120,12 +120,12 @@ public class HeaderDiv extends Panel {
     }
 
     /*
-     * getccdShisetsuNyushoInfo
-     * @return ccdShisetsuNyushoInfo
+     * getccdAtenaInfo
+     * @return ccdAtenaInfo
      */
-    @JsonProperty("ccdShisetsuNyushoInfo")
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return ccdShisetsuNyushoInfo;
+    @JsonProperty("ccdAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return ccdAtenaInfo;
     }
 
     /*
@@ -142,23 +142,13 @@ public class HeaderDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnDispSetaiJoho() {
-        return this.getHosokuJoho().getBtnDispSetaiJoho();
+    public ButtonDialog getBtnShotokuJokyo() {
+        return this.getHosokuJoho().getBtnShotokuJokyo();
     }
 
     @JsonIgnore
-    public void  setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
-        this.getHosokuJoho().setBtnDispSetaiJoho(btnDispSetaiJoho);
-    }
-
-    @JsonIgnore
-    public Button getBtnCloseSetaiJoho() {
-        return this.getHosokuJoho().getBtnCloseSetaiJoho();
-    }
-
-    @JsonIgnore
-    public void  setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
-        this.getHosokuJoho().setBtnCloseSetaiJoho(btnCloseSetaiJoho);
+    public void  setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
+        this.getHosokuJoho().setBtnShotokuJokyo(btnShotokuJokyo);
     }
 
     @JsonIgnore

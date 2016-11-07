@@ -144,6 +144,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         } else if (Kaigogassan_DataKubun.保険者作成.getコード().equals(データ区分)) {
             div.getChushutsuJokenPanel().getDdlDetaKubun().setSelectedValue(保険者作成);
         }
+        setChange();
         RString データ種類 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_データ種類);
         if (RString.isNullOrEmpty(データ種類)) {
             div.getChushutsuJokenPanel().getRadDataShurui().setSelectedValue(すべて);

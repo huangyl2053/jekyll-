@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110080.KogakugassanGassanMiSofuReprotProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110080.KogakugassanGassanSofuReprotProcess;
@@ -26,14 +28,23 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysK
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassan.KogakugassanProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.batch.BatchTextFileConvert;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.batch.BatchTextFileConvertBatchParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -56,12 +67,21 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     private static final String DB更新_未送付 = "updateKogakuGassanMiSofu";
     private static final String 国保連インタフェース管理更新 = "kokuhorenkyoutsuDoInterfaceKanriKousinProcess";
     private static final String 処理結果リスト作成 = "kokuhorenkyoutsuDoShoriKekkaListSakuseiProcess";
+    private static final String 文字コード変換 = "batchTextFileConvert";
 
     private static final RString データがある = new RString("1");
+    private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
+    private static final RString 国保連送付外字_変換区分_1 = new RString("1");
+    private static final RString SJIS類似 = new RString("SjisRuiji");
+    private static final RString ERROR_前 = new RString("errorLogFile_");
+    private static final RString ERROR_後 = new RString(".csv");
 
     private KogakugassanProcessParameter processParameter;
     private int レコード件数合計 = 0;
     private List<SharedFileDescriptor> エントリ情報List = new ArrayList<>();
+    private RString 入力ファイルパス;
+    private RString 出力ファイルパス;
 
     @Override
     protected void initialize() {
@@ -71,6 +91,12 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
         RString 保険者情報_保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, date, SubGyomuCode.DBU介護統計報告);
         processParameter.set保険者情報_保険者番号(保険者情報_保険者番号);
         processParameter.set保険者情報_保険者名称(保険者情報_保険者名称);
+        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
+            processParameter.set文字コード(Encode.UTF_8);
+        } else {
+            processParameter.set文字コード(Encode.SJIS);
+        }
         processParameter.setShoriKunbun(getParameter().getShoriKunbun().trim());
     }
 
@@ -85,8 +111,7 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
             executeStep(送付ファイル作成);
             レコード件数合計 = getResult(
                     Integer.class, new RString(送付ファイル作成), KogakugassanSoufuFairuSakuseiProcess.PARAMETER_OUT_OUTPUTCOUNT);
-            エントリ情報List = (ArrayList<SharedFileDescriptor>) getResult(
-                    List.class, new RString(送付ファイル作成), KogakugassanSoufuFairuSakuseiProcess.PARAMETER_OUT_OUTPUTENTRY);
+            do文字コード変換();
             executeStep(帳票出力_送付一覧表);
             executeStep(帳票出力_未送付一覧表);
             executeStep(DB更新_送付済);
@@ -156,6 +181,28 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     @Step(送付ファイル作成)
     protected IBatchFlowCommand callSoufuFairuSakuseiProcess() {
         return loopBatch(KogakugassanSoufuFairuSakuseiProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 文字コード変換操作です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(文字コード変換)
+    protected IBatchFlowCommand callBatchTextFileConvertProcess() {
+        HashMap<RString, Object> parameter = new HashMap();
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_READ_FILE_PATH), 入力ファイルパス);
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_WRITE_FILE_PATH), 出力ファイルパス);
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_CONVERT_TABLE_NAME), SJIS類似);
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_ERROR_LOG_FILE_PATH),
+                出力ファイルパス.substring(0, 出力ファイルパス.lastIndexOf(File.separator) + INT_1)
+                .concat(ERROR_前.concat(YMDHMS.now().toString()).concat(ERROR_後)));
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_CONVERT_TYPE), BatchTextFileConvert.CONVERTTYPE_TO);
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_READ_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_LF);
+        parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_WRITE_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_CRLF);
+        return simpleBatch(BatchTextFileConvert.class)
+                .arguments(parameter)
+                .define();
     }
 
     /**
@@ -237,6 +284,38 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
             }
         }
         return param;
+    }
+
+    private void do文字コード変換() {
+        出力ファイルパス = getResult(
+                RString.class, new RString(送付ファイル作成), KogakugassanSoufuFairuSakuseiProcess.OUTPUT_PATH);
+        if (Encode.UTF_8.equals(processParameter.get文字コード()) && レコード件数合計 != INT_0) {
+            入力ファイルパス = getResult(
+                    RString.class, new RString(送付ファイル作成), KogakugassanSoufuFairuSakuseiProcess.INPUT_PATH);
+            File file = new File(出力ファイルパス.toString());
+            if ((file.exists() && file.delete()) || !file.exists()) {
+                executeStep(文字コード変換);
+            }
+            deleteTmpFile(入力ファイルパス);
+        }
+        if (レコード件数合計 != INT_0) {
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                    FilesystemName.fromString(出力ファイルパス.substring(出力ファイルパス.lastIndexOf(File.separator) + INT_1)));
+            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(出力ファイルパス), opts);
+            エントリ情報List.add(sfd);
+        }
+    }
+
+    private void deleteTmpFile(RString path) {
+        if (RString.isNullOrEmpty(path)) {
+            return;
+        }
+        File file = new File(path.toString());
+        if (file.exists()) {
+            file.getAbsoluteFile().deleteOnExit();
+        }
     }
 
 }

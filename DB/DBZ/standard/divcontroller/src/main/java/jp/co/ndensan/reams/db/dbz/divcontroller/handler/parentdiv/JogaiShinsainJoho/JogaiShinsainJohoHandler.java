@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 
 /**
  * 除外審査員情報の画面処理Handlerクラスです。
@@ -23,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public class JogaiShinsainJohoHandler {
 
-    private static final RString 追加 = new RString("追加");
-    private static final RString 選択 = new RString("選択");
     private static final RString 入力 = new RString("入力");
     private static final RString 照会 = new RString("照会");
     private final JogaiShinsainJohoDiv div;
@@ -50,25 +49,24 @@ public class JogaiShinsainJohoHandler {
     /**
      * 画面状態を設定します。
      */
-    public void set画面状態() {
-        if (RString.isNullOrEmpty(div.getHdnModel()) || 入力.equals(div.getHdnModel())) {
+    public void set画面初期状態() {
+        if (入力.equals(div.getHdnModel())) {
             div.getBtnShinkiTsuika().setDisabled(false);
-            div.getTxtShinsakaiIinCode().setDisabled(false);
-            div.getBtnShinsakaiIinGuide().setDisabled(false);
-            div.getBtnToroku().setDisabled(false);
-        } else if (照会.equals(div.getHdnModel())) {
+        } else {
             div.getBtnShinkiTsuika().setDisabled(true);
-            div.getTxtShinsakaiIinCode().setDisabled(true);
-            div.getBtnShinsakaiIinGuide().setDisabled(true);
-            div.getBtnToroku().setDisabled(true);
+            div.getDgShinsakaiIinIchiran().getClickedItem().setDeleteButtonState(DataGridButtonState.Disabled);
         }
+        
+        div.getTxtShinsakaiIinCode().setDisabled(true);
+        div.getBtnShinsakaiIinGuide().setDisabled(true);
+        div.getBtnToroku().setDisabled(true);
     }
 
     /**
      * 登録するボタンを押します。
      */
     public void onClick_btnToroku() {
-        if (追加.equals(div.getHdnModel())) {
+        if (!div.getTxtShinsakaiIinCode().isDisabled()) {
             List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
             List<dgShozokuKikanIchiran_Row> row所属機関 = div.getDgShozokuKikanIchiran().getDataSource();
             RString 所属機関 = RString.EMPTY;
@@ -78,7 +76,7 @@ public class JogaiShinsainJohoHandler {
             rowList.add(new dgShinsakaiIinIchiran_Row(div.getTxtShinsakaiIinCode().getValue(),
                     div.getTxtShinsakaiIinName().getValue(), 所属機関));
             div.getDgShinsakaiIinIchiran().setDataSource(rowList);
-        } else if (選択.equals(div.getHdnModel())) {
+        } else {
             List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
             List<dgShozokuKikanIchiran_Row> row所属機関 = div.getDgShozokuKikanIchiran().getDataSource();
             RString 所属機関 = RString.EMPTY;

@@ -16,7 +16,8 @@ public enum DBC0060011TransitionEventName implements IContainerEvents {
 
     居宅サービスの給付管理照会へ("居宅サービスの給付管理照会へ"),
     訪問通所サービスの給付管理照会へ("訪問通所サービスの給付管理照会へ"),
-    完了("完了");
+    完了("完了"),
+    対象者検索("対象者検索");
 
     private final RString name;
 

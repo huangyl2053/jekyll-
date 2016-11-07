@@ -186,7 +186,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_減免率_分子が分母より大のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_減免率_分子が分母より大です、false:社会福祉法人減免_減免率_分子が分母より大です。
+                 * @return
+                 * true:not社会福祉法人減免_減免率_分子が分母より大です、false:社会福祉法人減免_減免率_分子が分母より大です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -214,7 +215,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 受給共通_受給者_事業対象者登録なしのチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not受給共通_受給者_事業対象者登録なしです、false:受給共通_受給者_事業対象者登録なしです。
+                 * @return
+                 * true:not受給共通_受給者_事業対象者登録なしです、false:受給共通_受給者_事業対象者登録なしです。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -232,7 +234,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_減免率_分子は1桁整数のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_減免率_分子は1桁整数です、false:社会福祉法人減免_減免率_分子は1桁整数です。
+                 * @return
+                 * true:not社会福祉法人減免_減免率_分子は1桁整数です、false:社会福祉法人減免_減免率_分子は1桁整数です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -245,7 +248,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_減免率_分母は2桁整数のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_減免率_分母は2桁整数です、false:社会福祉法人減免_減免率_分母は2桁整数です。
+                 * @return
+                 * true:not社会福祉法人減免_減免率_分母は2桁整数です、false:社会福祉法人減免_減免率_分母は2桁整数です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -258,7 +262,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_減免率_分子は2桁整数のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_減免率_分子は2桁整数です、false:社会福祉法人減免_減免率_分子は2桁整数です。
+                 * @return
+                 * true:not社会福祉法人減免_減免率_分子は2桁整数です、false:社会福祉法人減免_減免率_分子は2桁整数です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -271,7 +276,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_減免率_分母は100のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:社会福祉法人減免_減免率_分母は100です、false:not社会福祉法人減免_減免率_分母は100です。
+                 * @return
+                 * true:社会福祉法人減免_減免率_分母は100です、false:not社会福祉法人減免_減免率_分母は100です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -284,7 +290,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_減免率_分子は1から99の範囲のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_減免率_分子は1から99の範囲です、false:社会福祉法人減免_減免率_分子は1から99の範囲です。
+                 * @return
+                 * true:not社会福祉法人減免_減免率_分子は1から99の範囲です、false:社会福祉法人減免_減免率_分子は1から99の範囲です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -330,6 +337,37 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                     return true;
                 }
             },
+    減免減額_適用期間重複のチェックon確定 {
+                /**
+                 * 承認情報確認するボタン押下時、減免減額_適用期間重複のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not減免減額_適用期間重複です、false:減免減額_適用期間重複です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+                    if (div.getRadKetteiKubun().getSelectedKey().equals(new RString("key1"))) {
+                        return true;
+                    }
+                    if (rows.size() > 1 && div.getDgShinseiList().getActiveRow() != null) {
+                        rows.remove(div.getDgShinseiList().getActiveRow().getId());
+                    } else {
+                        return true;
+                    }
+                    for (dgShinseiList_Row row : rows) {
+                        if (row.getTxtYukoKigenYMD().getValue() != null && row.getTxtTekiyoYMD().getValue() != null
+                        && !row.getTxtYukoKigenYMD().getValue().isEmpty() && !row.getTxtTekiyoYMD().getValue().isEmpty()
+                        && row.getKetteiKubun().equals(new RString("承認する"))) {
+                            if (div.getTxtTekiyoYMD().getValue().isBeforeOrEquals(row.getTxtYukoKigenYMD().getValue())
+                            && div.getTxtYukoKigenYMD().getValue().isAfterOrEquals(row.getTxtTekiyoYMD().getValue())) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                }
+            },
     減免減額_確認番号が既に存在のチェック {
                 /**
                  * 減免減額_確認番号が既に存在のチェックです。
@@ -356,7 +394,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_軽減率_特例措置期間のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_軽減率_特例措置期間です、false:社会福祉法人減免_軽減率_特例措置期間です。
+                 * @return
+                 * true:not社会福祉法人減免_軽減率_特例措置期間です、false:社会福祉法人減免_軽減率_特例措置期間です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -369,7 +408,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_軽減率_特例措置期間のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_軽減率_特例措置期間です、false:社会福祉法人減免_軽減率_特例措置期間です。
+                 * @return
+                 * true:not社会福祉法人減免_軽減率_特例措置期間です、false:社会福祉法人減免_軽減率_特例措置期間です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -382,7 +422,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_非生活保護者_軽減率100のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_非生活保護者_軽減率100です、false:社会福祉法人減免_非生活保護者_軽減率100です。
+                 * @return
+                 * true:not社会福祉法人減免_非生活保護者_軽減率100です、false:社会福祉法人減免_非生活保護者_軽減率100です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {

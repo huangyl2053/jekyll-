@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class ShibaraiKekkaParameter {
 
     private final HihokenshaNo 被保険者番号;
-    private final RString サービス提供年月の年度;
+    private final RString サービス提供年月;
     private final RString 福祉用具販売費;
 
     /**
@@ -30,10 +30,10 @@ public final class ShibaraiKekkaParameter {
      */
     private ShibaraiKekkaParameter(
             HihokenshaNo 被保険者番号,
-            RString サービス提供年月の年度,
+            RString サービス提供年月,
             RString 福祉用具販売費) {
         this.被保険者番号 = 被保険者番号;
-        this.サービス提供年月の年度 = サービス提供年月の年度;
+        this.サービス提供年月 = サービス提供年月;
         this.福祉用具販売費 = 福祉用具販売費;
     }
 
@@ -41,14 +41,14 @@ public final class ShibaraiKekkaParameter {
      * 今までの支払結果情報取得パラメータ作成
      *
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月の年度 サービス提供年月
+     * @param サービス提供年月 サービス提供年月
      * @param 福祉用具販売費 福祉用具販売費
      * @return ShibaraiKekkaParameter
      */
     public static ShibaraiKekkaParameter createParameter(
             HihokenshaNo 被保険者番号,
-            RString サービス提供年月の年度,
+            RString サービス提供年月,
             RString 福祉用具販売費) {
-        return new ShibaraiKekkaParameter(被保険者番号, サービス提供年月の年度, 福祉用具販売費);
+        return new ShibaraiKekkaParameter(被保険者番号, サービス提供年月, 福祉用具販売費);
     }
 }

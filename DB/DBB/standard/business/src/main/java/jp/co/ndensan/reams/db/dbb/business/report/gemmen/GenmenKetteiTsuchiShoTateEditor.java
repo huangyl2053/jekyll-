@@ -130,9 +130,6 @@ public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTa
         source.listKibetsu_7 = 更正前後期割額.get普徴期別金額更正前();
         source.listKibetsu_8 = 更正前後期割額.get普徴期別金額更正後();
         source.listZuiji_1 = 随時;
-
-        // TODO (QA655)世帯主名 将来に追加する
-        // TODO (QA655)様方 将来に追加する
         return source;
     }
 

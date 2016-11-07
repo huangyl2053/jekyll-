@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -214,8 +215,12 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         processParameter.set宛名検索条件(searchKey);
         processParameter.set年齢層抽出方法(年齢層抽出方法);
-        processParameter.set生年月日範囲開始(生年月日範囲開始);
-        processParameter.set生年月日範囲終了(生年月日範囲終了);
+        if (生年月日範囲開始 != null) {
+            processParameter.set生年月日範囲開始(new FlexibleDate(生年月日範囲開始.toDateString()));
+        }
+        if (生年月日範囲終了 != null) {
+            processParameter.set生年月日範囲終了(new FlexibleDate(生年月日範囲終了.toDateString()));
+        }
         processParameter.set保険者コード(processParameter.get宛名抽出条件().getShichoson_Code());
         return new BatchDbReader(READ_DATA_ID, processParameter.toMybatisParameter());
     }

@@ -183,23 +183,36 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
         RTime 今回_終了時分秒 = div.getTxtKonkaiShuryoTime().getValue();
         RDate 年次処理実施年月日 = div.getTxtNenjiShoriDate().getValue();
         RTime 年次処理実施時刻 = div.getTxtNenjiShoriTime().getValue();
-        RDateTime 今回開始時間 = RDateTime.convertFrom(今回_開始年月日, 今回_開始時分秒);
-        RDateTime 今回終了時間 = RDateTime.convertFrom(今回_終了年月日, 今回_終了時分秒);
         RDateTime 前回終了時間 = RDateTime.convertFrom(前回_終了年月日, 前回_終了時分秒);
-        if (前回終了時間.isBefore(今回開始時間)) {
-            throw new ApplicationException(DbcErrorMessages.負担割合判定_未抽出期間エラー.getMessage());
+        if (今回_開始年月日 != null && 今回_開始時分秒 != null) {
+            RDateTime 今回開始時間 = RDateTime.convertFrom(今回_開始年月日, 今回_開始時分秒);
+            if (前回終了時間.isBefore(今回開始時間)) {
+                throw new ApplicationException(DbcErrorMessages.負担割合判定_未抽出期間エラー.getMessage());
+            }
+            if (今回開始時間.isBefore(RDateTime.convertFrom(年次処理実施年月日, 年次処理実施時刻))) {
+                throw new ApplicationException(DbzErrorMessages.期間が不正_過去日付不可.getMessage()
+                        .replace(今回開始日時.toString(), 年次処理実施日時.toString()));
+            }
+            if (今回_終了年月日 != null && 今回_終了時分秒 != null) {
+                RDateTime 今回終了時間 = RDateTime.convertFrom(今回_終了年月日, 今回_終了時分秒);
+                開始終了時間Check(今回開始時間, 今回終了時間);
+            }
         }
+        if (今回_終了年月日 != null && 今回_終了時分秒 != null) {
+            RDateTime 今回終了時間 = RDateTime.convertFrom(今回_終了年月日, 今回_終了時分秒);
+            if (画面起動時_今回終了時間.isBefore(今回終了時間)) {
+                throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
+                        .replace(今回終了日時.toString(), 画面起動時の今回終了日時.toString()));
+            }
+        }
+
+    }
+
+    private void 開始終了時間Check(RDateTime 今回開始時間, RDateTime 今回終了時間) {
         if (今回開始時間.isAfter(今回終了時間)) {
             throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
         }
-        if (今回開始時間.isBefore(RDateTime.convertFrom(年次処理実施年月日, 年次処理実施時刻))) {
-            throw new ApplicationException(DbzErrorMessages.期間が不正_過去日付不可.getMessage()
-                    .replace(今回開始日時.toString(), 年次処理実施日時.toString()));
-        }
-        if (画面起動時_今回終了時間.isBefore(今回終了時間)) {
-            throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
-                    .replace(今回終了日時.toString(), 画面起動時の今回終了日時.toString()));
-        }
+
     }
 
     /**
@@ -215,14 +228,18 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
         parameter.setTaishoNendo(画面_年度);
         parameter.setKijunbi(new FlexibleDate(div.getTxtKonkaiShuryoDate().getValue().toDateString()));
         parameter.setShoriKubun(処理区分_異動);
-        parameter.setChushutsuKaishiNichiji(
-                RDateTime.convertFrom(
-                        div.getTxtKonkaiKaishiDate().getValue(),
-                        div.getTxtKonkaiKaishiTime().getValue()));
-        parameter.setChushutsuShuryonichiNichiji(
-                RDateTime.convertFrom(
-                        div.getTxtKonkaiShuryoDate().getValue(),
-                        div.getTxtKonkaiShuryoTime().getValue()));
+        if (div.getTxtKonkaiKaishiDate().getValue() != null && div.getTxtKonkaiKaishiTime().getValue() != null) {
+            parameter.setChushutsuKaishiNichiji(
+                    RDateTime.convertFrom(
+                            div.getTxtKonkaiKaishiDate().getValue(),
+                            div.getTxtKonkaiKaishiTime().getValue()));
+        }
+        if (div.getTxtKonkaiShuryoDate().getValue() != null && div.getTxtKonkaiShuryoTime().getValue() != null) {
+            parameter.setChushutsuShuryonichiNichiji(
+                    RDateTime.convertFrom(
+                            div.getTxtKonkaiShuryoDate().getValue(),
+                            div.getTxtKonkaiShuryoTime().getValue()));
+        }
         parameter.setTestMode(div.getChkTest().getSelectedKeys().contains(KEY0));
         parameter.setNendoShuryoNengappi(new FlexibleDate(画面_年度.plusYear(いち年).toString() + 月日.toString()));
         parameter.setShoriNichiji(RDateTime.now());

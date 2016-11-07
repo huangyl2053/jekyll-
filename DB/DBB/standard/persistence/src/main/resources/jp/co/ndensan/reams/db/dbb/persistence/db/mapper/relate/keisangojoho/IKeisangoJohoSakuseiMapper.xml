@@ -345,9 +345,9 @@
                   rgdb."DbT2018RealHakkoRireki" AS C 
                 WHERE
                   C."tsuchishoPrintTimeStamp" <![CDATA[>=]]> #{choteiNichiji} 
-                  AND C."tsuchishoNo" = A."tsuchishoNo" 
-                  AND C."choteiNendo" = A."choteiNendo" 
-                  AND C."fukaNendo" = A."fukaNendo" 
+                  AND C."tsuchishoNo" = "db2002Fuka"."tsuchishoNo" 
+                  AND C."choteiNendo" = "db2002Fuka"."choteiNendo" 
+                  AND C."fukaNendo" = "db2002Fuka"."fukaNendo" 
                   AND C."chohyoBunruiID" = 'DBB100045_HokenryoNonyuTsuchishoDaihyo'
               )
             ) 

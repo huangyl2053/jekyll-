@@ -117,6 +117,7 @@
         <result property="shiharaiShuryoTime" column="shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="serviceShuruiCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="宛先Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     <resultMap id="resultMap_決定通知一覧表chohyoData" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity" autoMapping="true">
         <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -157,6 +158,8 @@
         <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
         <result property="kanaMeisho" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="genLasdecCode" column="genLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <association property="宛名Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="宛先Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
 
     <sql id="selectKetteiTsuchiSho">
@@ -405,8 +408,15 @@
         AND
         DbT3036ShokanHanteiKekka."shiharaiKingaku"<![CDATA[<>]]> '0' ) OR
         DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{hushikyu} )
-        AND
-        DbT3036ShokanHanteiKekka."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        <if test="isRiaruHakko">
+            AND
+            DbT3036ShokanHanteiKekka."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        </if>
+        <if test="isInshoKubun3">
+            AND(
+            DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" = ''
+            OR DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" IS NULL)
+        </if>
         <if test="chusyutuUketsukeFlag">
             AND
             DbT3034ShokanShinsei."uketsukeYMD" <![CDATA[>=]]> #{dataFrom}
@@ -861,7 +871,16 @@
             "DbT3034ShokanShinsei"."uketsukeYMD" <![CDATA[<=]]> #{dataTo}
         </if>
         WHERE
-        "DbT3036ShokanHanteiKekka"."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        1=1
+        <if test="isRiaruHakko">
+            AND
+            "DbT3036ShokanHanteiKekka"."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+        </if>
+        <if test="isInshoKubun3">
+            AND(
+            "DbT3036ShokanHanteiKekka"."ketteiTsuchishoSakuseiYMD" = ''
+            OR "DbT3036ShokanHanteiKekka"."ketteiTsuchishoSakuseiYMD" IS NULL)
+        </if>
         <if test="chusyutuUketsukeFlag">
             AND
             "DbT3036ShokanHanteiKekka"."ketteiYMD" <![CDATA[>=]]> #{dataFrom}
@@ -873,26 +892,40 @@
             "DbT3036ShokanHanteiKekka"."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
         </if>
     </select>
-    <select resultOrdered="true" id="get最大年度内連番"
-            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+    <select resultOrdered="true" id="get最大枝番"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.SelectMaxEdabanParameter"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
             fetchSize="1">
         SELECT
-        MAX(CAST(DbT7022ShoriDateKanri."nendoNaiRenban" AS INT))
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
-        rgdb."DbT7022ShoriDateKanri" AS DbT7022ShoriDateKanri
+        rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
+        WHERE
+        "DbT7022ShoriDateKanri"."subGyomuCode"=#{subGyomuCode}
+        AND "DbT7022ShoriDateKanri"."shichosonCode"=#{shichosonCode}
+        AND "DbT7022ShoriDateKanri"."shoriName"=#{shoriName}
+        AND "DbT7022ShoriDateKanri"."nendo"=#{nendo}
+        ORDER BY
+        "DbT7022ShoriDateKanri"."shoriEdaban" DESC
+        ,"DbT7022ShoriDateKanri"."nendoNaiRenban" DESC
+        LIMIT 1
     </select>
     <select resultOrdered="true" id="get帳票データ"
             resultMap="resultMap_chohyoData"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter"
             fetchSize="500">
         SELECT
         <include refid="selectChouhyouData" />
         ,'' AS tuika
-        ,'' AS "choikiCode"
-        ,'' AS "gyoseikuCode"
-        ,'' AS "kanaMeisho"
-        ,'' AS "genLasdecCode"
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         FROM
         "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki"/>
+        AS
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki"/>
+        ON ShokanKetteiTsuchiShoMeisaiTemp."shikibetsuCode" =
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki"/>."shikibetsuCode"
         ORDER BY
         ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
@@ -900,21 +933,28 @@
     </select>
 
     <select resultOrdered="true" id="get決定通知一覧表帳票データ"
-            resultMap="resultMap_chohyoData"
+            resultMap="resultMap_決定通知一覧表chohyoData"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter"
             fetchSize="500">
         SELECT
         <include refid="selectChouhyouData" />
         ,'' AS tuika
-        ,"ShikibetsuTaisho"."choikiCode"
-        ,"ShikibetsuTaisho"."gyoseikuCode"
-        ,"ShikibetsuTaisho"."kanaMeisho"
-        ,"ShikibetsuTaisho"."genLasdecCode"
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
         FROM
         "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
         LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> AS "ShikibetsuTaisho"
-        ON ShokanKetteiTsuchiShoMeisaiTemp."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        AS
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>
+        ON ShokanKetteiTsuchiShoMeisaiTemp."shikibetsuCode" =
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho"/>."shikibetsuCode"
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki"/>
+        AS
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki"/>
+        ON ShokanKetteiTsuchiShoMeisaiTemp."shikibetsuCode" =
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki"/>."shikibetsuCode"
         ORDER BY
         <if test="has出力順">
             ${出力順},

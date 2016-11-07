@@ -2655,6 +2655,28 @@
             AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
             AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '本算定賦課'
      </select>
+     
+     <!--年額保険料を取得します。-->
+     <select resultOrdered='true' id="select年額保険料" parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"
+             resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity" fetchSize="500">
+         SELECT "DbT2013HokenryoDankai".*
+         FROM rgdb."DbT2013HokenryoDankai" AS "DbT2013HokenryoDankai"
+         WHERE "DbT2013HokenryoDankai"."fukaNendo"=#{賦課年度}
+         ORDER BY "DbT2013HokenryoDankai"."fukaNendo",
+                  "DbT2013HokenryoDankai"."rankuKubun",
+                  "DbT2013HokenryoDankai"."dankaiIndex"
+     </select>
+     
+     <!--処理状況を取得します。-->
+     <select resultOrdered="true" id="select処理状況"
+             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" fetchSize="500">
+         SELECT *
+         FROM rgdb."DbT7022ShoriDateKanri"
+         WHERE "subGyomuCode"='DBB'
+         AND"nendoNaiRenban"='0001'
+         AND "shoriName"='特徴依頼情報作成'
+         LIMIT(1)
+     </select>
     
 </mapper>
     

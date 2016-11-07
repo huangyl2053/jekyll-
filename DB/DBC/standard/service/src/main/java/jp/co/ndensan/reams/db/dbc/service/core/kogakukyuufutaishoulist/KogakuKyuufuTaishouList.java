@@ -91,7 +91,7 @@ public class KogakuKyuufuTaishouList {
         List<DbT3055KogakuKyufuTaishoshaGokeiEntity> 給付対象者合計list
                 = 高額給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
         if ((給付対象者明細list == null || 給付対象者明細list.isEmpty())
-            && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
+                && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
             return new ArrayList<>();
         } else {
             for (DbT3054KogakuKyufuTaishoshaMeisaiEntity entity : 給付対象者明細list) {
@@ -126,12 +126,12 @@ public class KogakuKyuufuTaishouList {
                 = 事業高額給付対象者明細Dac.selectAllByKey(被保険者番号, サービス提供年月);
         List<DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity> 給付対象者合計list
                 = 事業高額給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        JigyouKogakuKyuufuTaishouResult 高額給付対象一覧情報 = new JigyouKogakuKyuufuTaishouResult();
         if ((給付対象者明細list == null || 給付対象者明細list.isEmpty())
-            && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
+                && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
             return new ArrayList<>();
         } else {
             for (DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity : 給付対象者明細list) {
+                JigyouKogakuKyuufuTaishouResult 高額給付対象一覧情報 = new JigyouKogakuKyuufuTaishouResult();
                 高額給付対象一覧情報.set給付対象者明細entity(new JigyoKogakuKyufuTaishoshaMeisai(entity));
                 高額給付対象一覧情報.set明細合計区分(ONE_RS);
                 set事業高額の事業者名称と種類(サービス提供年月, 高額給付対象一覧情報, entity);
@@ -139,6 +139,7 @@ public class KogakuKyuufuTaishouList {
             }
 
             for (DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity entity : 給付対象者合計list) {
+                JigyouKogakuKyuufuTaishouResult 高額給付対象一覧情報 = new JigyouKogakuKyuufuTaishouResult();
                 高額給付対象一覧情報.set給付対象者合計entity(new JigyoKogakuKyufuTaishoshaGokei(entity));
                 高額給付対象一覧情報.set明細合計区分(TWO_RS);
                 result.add(高額給付対象一覧情報);

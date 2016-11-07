@@ -85,15 +85,24 @@ public class HanyoListParamDBC7130001Handler {
         parameter.set連番付加(is連番付加);
         parameter.set日付編集(is日付編集);
         RString 市町村コード = RString.EMPTY;
-        if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null) {
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名 = RString.EMPTY;
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
             if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
                 市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
             } else {
-                市町村コード = 全て市町村;
+                保険者コード = 全て市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
             }
         }
-        parameter.set保険者コード(市町村コード);
+        parameter.set保険者コード(保険者コード);
+        parameter.set保険者名(保険者名);
+        parameter.set市町村コード(市町村コード);
         parameter.set抽出区分(div.getChushutsuJokenPanel().getRadChushutsuKubun().getSelectedKey());
         if (div.getChushutsuJokenPanel().getTxtTekiyoKaishiNengetsu().getFromValue() != null) {
             parameter.set適用開始年月From(div.getChushutsuJokenPanel().getTxtTekiyoKaishiNengetsu().getFromValue().toDateString());
@@ -139,7 +148,7 @@ public class HanyoListParamDBC7130001Handler {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             } else {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
+                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("市町村コード"))));
             }
         }
         div.getChushutsuJokenPanel().getRadChushutsuKubun().setSelectedKey(

@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0010011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010010.DBU010010_JigyoHokokuGeppo_MainParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiValidationHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -147,7 +147,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnKakutei(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         RDate 報告年月 = div.getTxtHokokuYM().getValue();
-        RDate 日付 = new RDate("平成12年5月");
+        RDate 日付 = new RDate("平成12年4月");
         if (報告年月 == null) {
             return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目(new RString("報告年月"))).respond();
         }
@@ -228,8 +228,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         onChange_cblOutputTaisho1(div);
         onChange_cblOutputTaisho2(div);
         onChange_celOutputTaisho3(div);
-        onChange_cblOutputTaisho4(div);
-        onChange_cblOutputTaisho5(div);
+//        onChange_cblOutputTaisho4(div);
+//        onChange_cblOutputTaisho5(div);
         return ResponseData.of(div).respond();
     }
 
@@ -269,29 +269,29 @@ public class JigyoJokyoHokokuGeppoSakusei {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 一般状況１２～１４【償還分】集計年月選択ラジオボタン の処理です。
-     *
-     * @param div 事業状況報告（月報）作成Div
-     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
-     */
-    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho4(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).onChange一般状況12to14集計年月();
-        setすべて選択チェックボックス(div);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 保険給付決定状況【償還分】集計年月選択ラジオボタン の処理です。
-     *
-     * @param div 事業状況報告（月報）作成Div
-     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
-     */
-    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho5(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).onChange保険給付決定状況集計年月();
-        setすべて選択チェックボックス(div);
-        return ResponseData.of(div).respond();
-    }
+//    /**
+//     * 一般状況１２～１４【償還分】集計年月選択ラジオボタン の処理です。
+//     *
+//     * @param div 事業状況報告（月報）作成Div
+//     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+//     */
+//    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho4(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+//        getHandler(div).onChange一般状況12to14集計年月();
+//        setすべて選択チェックボックス(div);
+//        return ResponseData.of(div).respond();
+//    }
+//
+//    /**
+//     * 保険給付決定状況【償還分】集計年月選択ラジオボタン の処理です。
+//     *
+//     * @param div 事業状況報告（月報）作成Div
+//     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+//     */
+//    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho5(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+//        getHandler(div).onChange保険給付決定状況集計年月();
+//        setすべて選択チェックボックス(div);
+//        return ResponseData.of(div).respond();
+//    }
 
     /**
      * 「市町村を選択する」ダイアログボタン
@@ -332,6 +332,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter>
      */
     public ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter> onClick_Jikou(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        onClick_btnJikkoCheck(div);
         return ResponseData.of(getHandler(div).onClick_Jikou()).respond();
     }
 
@@ -341,7 +342,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @param div 事業報告月報作成Div
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
-    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnJikkoCheck(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+    private ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnJikkoCheck(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         RDate 報告年月 = div.getTxtHokokuYM().getValue();
         RString jkkouTani = div.getHdnJkkoutani();
 

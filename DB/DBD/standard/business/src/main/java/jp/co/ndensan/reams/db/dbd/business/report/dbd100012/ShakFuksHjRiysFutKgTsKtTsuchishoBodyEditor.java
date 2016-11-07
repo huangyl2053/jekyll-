@@ -338,6 +338,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
         source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
         source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
         source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
         source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
         source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
         source.koinShoryaku = ninshoshaSource.koinShoryaku;
@@ -352,7 +353,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
             sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
         }
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
-        source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
+        source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
         // source.jusho4 = sofubutsuAtesakiSource.j;
         if (sofubutsuAtesakiSource.jushoText == null) {
             RStringBuilder jusho1 = new RStringBuilder(sofubutsuAtesakiSource.jusho1);
@@ -368,6 +369,8 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
         // source.katagaki4 = RString.EMPTY;
         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
         // source.shimei3 = RString.EMPTY;
+        source.shimei1 = sofubutsuAtesakiSource.shimei1;
+        source.shimei2 = sofubutsuAtesakiSource.shimei2;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
         source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;

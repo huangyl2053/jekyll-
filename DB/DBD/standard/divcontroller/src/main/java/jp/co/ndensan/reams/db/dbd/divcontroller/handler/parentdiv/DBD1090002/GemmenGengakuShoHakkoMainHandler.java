@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 減免減額認定証・決定通知書個別発行のハンドラークラスです。
@@ -38,6 +39,8 @@ public class GemmenGengakuShoHakkoMainHandler {
     private static final RString 非該当 = new RString("非該当");
     private static final RString 対象者以外 = new RString("対象者以外");
     private static final RString 対象者 = new RString("対象者");
+    private static final int MAX_文書番号桁数 = 12;
+    private static final int HEADER_文書番号 = 1;
 
     private final GemmenGengakuShoHakkoMainDiv div;
     private final IGemmenGengakuShoHakkoMainMapperFinder finder;
@@ -341,7 +344,7 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.setHiddenRirekiNo(new RString(riyoshaFutangakuGengaku.get履歴番号()));
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuKetteiKubun().setValue(riyoshaFutangakuGengaku.get決定区分() == null
                 || riyoshaFutangakuGengaku.get決定区分().isEmpty()
-                        ? RString.EMPTY : KetteiKubun.toValue(riyoshaFutangakuGengaku.get決定区分()).get名称());
+                ? RString.EMPTY : KetteiKubun.toValue(riyoshaFutangakuGengaku.get決定区分()).get名称());
 
         if (riyoshaFutangakuGengaku.get給付率() != null) {
             div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuKyufuRitsu().
@@ -388,7 +391,7 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.setHiddenRirekiNo(new RString(futanGendogakuNintei.get履歴番号()));
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiKetteiKubun().setValue(futanGendogakuNintei.get決定区分() == null
                 || futanGendogakuNintei.get決定区分().isEmpty()
-                        ? RString.EMPTY : KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称());
+                ? RString.EMPTY : KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShinseibi().setValue(futanGendogakuNintei.get申請年月日());
         div.getFutanGendogakuNintei().getFutanGendogakuNinteiKetteibi().setValue(futanGendogakuNintei.get決定年月日());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiTekiyobi().setValue(futanGendogakuNintei.get適用開始年月日());
@@ -400,13 +403,13 @@ public class GemmenGengakuShoHakkoMainHandler {
         }
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShinseiRiyu().setValue(
                 futanGendogakuNintei.get申請理由区分() == null || futanGendogakuNintei.get申請理由区分().isEmpty()
-                        ? RString.EMPTY : ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
+                ? RString.EMPTY : ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiFutanDankai().setValue(
                 futanGendogakuNintei.get利用者負担段階() == null || futanGendogakuNintei.get利用者負担段階().isEmpty()
-                        ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get名称());
+                ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get名称());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiKyuSochi().setValue(
                 futanGendogakuNintei.get旧措置者区分() == null || futanGendogakuNintei.get旧措置者区分().isEmpty()
-                        ? RString.EMPTY : KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get略称());
+                ? RString.EMPTY : KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get略称());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiKyokaiso().setValue(futanGendogakuNintei.is境界層該当者区分() ? 該当 : 非該当);
         div.getFutanGendogakuNintei().getFutanGendogakuNinteiGekihenKanwa().setValue(futanGendogakuNintei.is激変緩和措置対象者区分() ? 対象者 : 対象者以外);
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShokuhi().setValue(futanGendogakuNintei.get食費負担限度額());
@@ -451,7 +454,7 @@ public class GemmenGengakuShoHakkoMainHandler {
                 setValue(homonKaigoRiyoshaFutangaku.get非承認理由());
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun().setValue(
                 homonKaigoRiyoshaFutangaku.get法別区分() == null || homonKaigoRiyoshaFutangaku.get法別区分().isEmpty()
-                        ? RString.EMPTY : HobetsuKubun.toValue(homonKaigoRiyoshaFutangaku.get法別区分()).get名称());
+                ? RString.EMPTY : HobetsuKubun.toValue(homonKaigoRiyoshaFutangaku.get法別区分()).get名称());
         if (homonKaigoRiyoshaFutangaku.get給付率() != null) {
             div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu().
                     setValue(new RString(homonKaigoRiyoshaFutangaku.get給付率().getColumnValue().toString()));
@@ -540,7 +543,7 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.setHiddenRirekiNo(new RString(tokubetsuchiikiKasanGemmen.get履歴番号()));
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenKetteiKubun().setValue(tokubetsuchiikiKasanGemmen.get決定区分() == null
                 || tokubetsuchiikiKasanGemmen.get決定区分().isEmpty()
-                        ? RString.EMPTY : KetteiKubun.toValue(tokubetsuchiikiKasanGemmen.get決定区分()).get名称());
+                ? RString.EMPTY : KetteiKubun.toValue(tokubetsuchiikiKasanGemmen.get決定区分()).get名称());
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenShinseibi().setValue(tokubetsuchiikiKasanGemmen.get申請年月日());
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenTekiyobi().setValue(tokubetsuchiikiKasanGemmen.get適用開始年月日());
         if (tokubetsuchiikiKasanGemmen.get非承認理由() != null) {
@@ -597,6 +600,19 @@ public class GemmenGengakuShoHakkoMainHandler {
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().
                     setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         }
+    }
+
+    public RString form文書番号(RString 文書番号) {
+        RStringBuilder 整形文書番号 = new RStringBuilder();
+        if (RString.isNullOrEmpty(文書番号)) {
+            整形文書番号.append(" ");
+        } else {
+            整形文書番号.append(文書番号);
+        }
+        for (int 桁数 = 整形文書番号.length(); 桁数 < MAX_文書番号桁数; 桁数++) {
+            整形文書番号.insert(HEADER_文書番号, " ");
+        }
+        return 整形文書番号.toRString();
     }
 
     /**

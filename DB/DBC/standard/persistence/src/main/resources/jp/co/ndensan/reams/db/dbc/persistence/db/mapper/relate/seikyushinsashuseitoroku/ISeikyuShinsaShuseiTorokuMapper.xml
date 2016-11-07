@@ -31,30 +31,35 @@
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3095JutakuKaishuRiyushoTesuryoMeisaiMapper.allColumns_DbT3095JutakuKaishuRiyushoTesuryoMeisai" />,
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3096JutakuKaishuRiyushoTesuryoShukeiMapper.allColumns_DbT3096JutakuKaishuRiyushoTesuryoShukei" />  
           FROM
-  rgdb."DbT3096JutakuKaishuRiyushoTesuryoShukei" AS "DbT3096JutakuKaishuRiyushoTesuryoShukei"
-  JOIN rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai"
-   AS "DbT3095JutakuKaishuRiyushoTesuryoMeisai" 
-    ON "DbT3096JutakuKaishuRiyushoTesuryoShukei"."riyushoSakuseiJigyoshaNo" = "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo" 
-    AND "DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo" = "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."shukeiNo" 
-    JOIN rgdb."DbT3094JutakuKaishuRiyushoTesuryoKettei" AS "DbT3094JutakuKaishuRiyushoTesuryoKettei"
-    ON "DbT3096JutakuKaishuRiyushoTesuryoShukei"."riyushoSakuseiJigyoshaNo" = "DbT3094JutakuKaishuRiyushoTesuryoKettei"."riyushoSakuseiJigyoshaNo" 
-    AND "DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo" = "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shukeiNo" 
-          WHERE
-            1 = 1 
-            AND "DbT3096JutakuKaishuRiyushoTesuryoShukei"."isDeleted" = FALSE                 
-            <if test="事業者番号フラグ">
-                AND "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo" = #{事業者番号}    
-            </if>
-            <if test="理由書作成年月フラグ">
-                AND "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo" = #{理由書作成年月}    
-            </if>
-            <if test="チェックオンフラグ">
-                AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" IS NULL 
-            </if>
-            <if test="チェックオフフラグ">
-                AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" IS NOT NULL 
-            </if>
-          ORDER BY
-            "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo" ASC
+             (SELECT * FROM rgdb."DbT3096JutakuKaishuRiyushoTesuryoShukei" AS 集計
+    WHERE 集計."isDeleted" =  FALSE ) AS "DbT3096JutakuKaishuRiyushoTesuryoShukei" 
+	 INNER JOIN
+	   (SELECT * FROM rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai" AS 明細
+    WHERE 明細."isDeleted" =  FALSE ) AS "DbT3095JutakuKaishuRiyushoTesuryoMeisai"
+	ON
+	"DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo" = "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."shukeiNo"
+	LEFT JOIN 
+	(SELECT * FROM rgdb."DbT3094JutakuKaishuRiyushoTesuryoKettei" AS 決定
+    WHERE 決定."isDeleted" =  FALSE ) AS "DbT3094JutakuKaishuRiyushoTesuryoKettei"
+	ON
+		"DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo" = "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shukeiNo"
+		WHERE 
+                 1=1
+                <if test="事業者番号フラグ">
+		AND "DbT3096JutakuKaishuRiyushoTesuryoShukei"."riyushoSakuseiJigyoshaNo" = #{事業者番号}
+                </if>
+                <if test="理由書作成年月フラグ">
+		AND substring("DbT3096JutakuKaishuRiyushoTesuryoShukei"."seikyuJohoSakuseiYMD" from 1 for 6) = #{請求情報作成年月}
+                </if>
+                <if test="メニューID_1004">
+		AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" IS NULL 
+                </if>
+                <if test="メニューID_1005">
+		AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" IS NULL 
+                </if>
+	ORDER BY
+	"DbT3096JutakuKaishuRiyushoTesuryoShukei"."seikyuJohoSakuseiYMD" DESC,
+	"DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo" ASC,
+	"DbT3095JutakuKaishuRiyushoTesuryoMeisai"."hihokenshaNo" ASC
     </select>
 </mapper>

@@ -298,7 +298,7 @@ public class HanyoListParamHandler {
         long 条件保存の出力順ID = restoreBatchParameterMap.getParameterValue(long.class, KEY_出力順ID);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 条件保存の帳票ID, 条件保存の出力順ID);
         RString 条件保存の出力項目ID = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力項目ID);
-        div.getCcdShutsuryokuKoumoku().load(条件保存の出力項目ID, SubGyomuCode.DBB介護賦課);
+        div.getCcdShutsuryokuKoumoku().load(条件保存の帳票ID.getColumnValue(), SubGyomuCode.DBB介護賦課, 条件保存の出力項目ID);
         RString 表示区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_住民税減免前後表示区分);
         if (表示区分.equals(表示しない)) {
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setDisabled(false);
@@ -374,21 +374,15 @@ public class HanyoListParamHandler {
         if (抽出期間To != null && !抽出期間To.isEmpty()) {
             div.getTxtChushutsuKikan().setToValue(抽出期間To.getDate());
         }
+        div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(new ArrayList<RString>());
         List<String> 課税区分減免前s = restoreBatchParameterMap.getParameterValue(List.class, KEY_課税区分減免前);
-        if (課税区分減免前s != null) {
-            if (!課税区分減免前s.isEmpty()) {
-                div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setSelectedItemsByKey(set課税区分減免(課税区分減免前s));
-            } else {
-                div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(new ArrayList<RString>());
-            }
+        if (課税区分減免前s != null && !課税区分減免前s.isEmpty()) {
+            div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setSelectedItemsByKey(set課税区分減免(課税区分減免前s));
         }
         List<String> 課税区分減免後s = restoreBatchParameterMap.getParameterValue(List.class, KEY_課税区分減免後);
-        if (課税区分減免後s != null) {
-            if (!課税区分減免後s.isEmpty()) {
-                div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(set課税区分減免(課税区分減免後s));
-            } else {
-                div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(new ArrayList<RString>());
-            }
+        if (課税区分減免後s != null && !課税区分減免後s.isEmpty()) {
+            div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(set課税区分減免(課税区分減免後s));
         }
     }
 

@@ -28,6 +28,8 @@ public class HanyoListKokuhorenJukyushaProcessParameter implements IBatchProcess
     private boolean is連番付加;
     private boolean is日付編集;
     private RString 保険者コード;
+    private RString 保険者名;
+    private RString 市町村コード;
     private RString 日付抽出区分;
     private RString 処理対象年月From;
     private RString 処理対象年月To;
@@ -52,6 +54,8 @@ public class HanyoListKokuhorenJukyushaProcessParameter implements IBatchProcess
      * @param is連番付加 is連番付加
      * @param is日付編集 is日付編集
      * @param 保険者コード 保険者コード
+     * @param 保険者名 保険者名
+     * @param 市町村コード 市町村コード
      * @param 日付抽出区分 日付抽出区分
      * @param 処理対象年月From 処理対象年月From
      * @param 処理対象年月To 処理対象年月To
@@ -73,6 +77,8 @@ public class HanyoListKokuhorenJukyushaProcessParameter implements IBatchProcess
             boolean is連番付加,
             boolean is日付編集,
             RString 保険者コード,
+            RString 保険者名,
+            RString 市町村コード,
             RString 日付抽出区分,
             RString 処理対象年月From,
             RString 処理対象年月To,
@@ -93,6 +99,8 @@ public class HanyoListKokuhorenJukyushaProcessParameter implements IBatchProcess
         this.is連番付加 = is連番付加;
         this.is日付編集 = is日付編集;
         this.保険者コード = 保険者コード;
+        this.保険者名 = 保険者名;
+        this.市町村コード = 市町村コード;
         this.日付抽出区分 = 日付抽出区分;
         this.処理対象年月From = 処理対象年月From;
         this.処理対象年月To = 処理対象年月To;

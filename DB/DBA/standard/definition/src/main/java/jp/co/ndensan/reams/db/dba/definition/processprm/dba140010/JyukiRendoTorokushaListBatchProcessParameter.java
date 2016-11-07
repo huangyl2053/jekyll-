@@ -47,6 +47,7 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private Code idouJiyu_tensyutu;
     private Code idouJiyu_sibou;
     private Code idouJiyu_tenkyo;
+    private RString PsmShikibetsuTaisho;
 
     /**
      * コンストラクタ。

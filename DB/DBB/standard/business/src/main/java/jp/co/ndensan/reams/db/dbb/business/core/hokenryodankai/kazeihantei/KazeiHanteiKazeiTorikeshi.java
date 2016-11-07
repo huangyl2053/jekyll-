@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.kazeihantei;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,15 +26,26 @@ public class KazeiHanteiKazeiTorikeshi implements IKazeiHantei {
 
     @Override
     public RString hokenryoDankaiShiyo(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        return hokenryoDankaiHanteiParameter.getSeigyoJoho().getKazeiTorikeshiDankai();
+        hokenryoDankaiShiyoShinai(hokenryoDankaiHanteiParameter);
+        for (KazeiKubunHonninKubun kazeiKubunHonninKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
+            if (HonninKubun.本人 == kazeiKubunHonninKubun.get本人区分()
+                    && KazeiKubun.課税取消 == kazeiKubunHonninKubun.get課税区分()) {
+                return hokenryoDankaiHanteiParameter.getSeigyoJoho().getMishinkokuDankai();
+            }
+        }
+        return null;
     }
 
     @Override
     public void hokenryoDankaiShiyoShinai(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getKazeiTorikeshiKazeiKubun() != null
-                && hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList().contains(KazeiKubun.課税取消)) {
-            List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
-            setaiinKazeiKubunList.add(hokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuKazeiKubun());
+        if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getMishinkokuKazeiKubun() != null) {
+            List<KazeiKubunHonninKubun> setaiinKazeiKubunList = new ArrayList<>();
+            for (KazeiKubunHonninKubun kazeiKubunHonninKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
+                if (KazeiKubun.課税取消 == kazeiKubunHonninKubun.get課税区分()) {
+                    kazeiKubunHonninKubun.set課税区分(hokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuKazeiKubun());
+                }
+                setaiinKazeiKubunList.add(kazeiKubunHonninKubun);
+            }
             hokenryoDankaiHanteiParameter.getFukaKonkyo().setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         }
     }

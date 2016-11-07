@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110070;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.DataRecordShubetsu;
@@ -37,24 +36,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
-import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -90,20 +75,24 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
     private static final int INT_64 = 64;
     private static final RString RSTRING_0 = new RString("0");
     private static final RString 囲み文字 = new RString("\"");
-    private static final RString 拡張子_TEMP = new RString("temp");
-    private static final RString 拡張子 = new RString("\r\n");
+    private static final RString COPY = new RString("copy");
     /**
      * 総出力件数カウンターです。
      */
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
     /**
-     * エントリ情報Listです。
+     * inputPathです。
      */
-    public static final RString PARAMETER_OUT_OUTPUTENTRY;
+    public static final RString PARAMETER_OUT_INPUTPATH;
+    /**
+     * outputPathです。
+     */
+    public static final RString PARAMETER_OUT_OUTPUTPATH;
 
     static {
         PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
-        PARAMETER_OUT_OUTPUTENTRY = new RString("outputEntry");
+        PARAMETER_OUT_INPUTPATH = new RString("inputPath");
+        PARAMETER_OUT_OUTPUTPATH = new RString("outputPath");
     }
 
     private int 総出力件数;
@@ -114,8 +103,9 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
     private RString 出力ファイル名;
     private RString 保険者番号;
     private OutputParameter<Integer> outputCount;
-    private OutputParameter<List> outputEntry;
-    private List<SharedFileDescriptor> entryList;
+    private OutputParameter<RString> inputPath;
+    private OutputParameter<RString> outputPath;
+    private RString 入力ファイルパス;
     private KogakugassanKeisankekkaRenrakuhyoOutProcessParameter processParameter;
     private SofuFileSakuseiProcessCore processCore;
     private KogakuGassanKeisanKekkaRenrakuJohoRelateEntity 高額合算支給額計算結果;
@@ -127,8 +117,8 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
     protected void initialize() {
         flag = 0;
         outputCount = new OutputParameter<>();
-        outputEntry = new OutputParameter<>();
-        entryList = new ArrayList<>();
+        inputPath = new OutputParameter<>();
+        outputPath = new OutputParameter<>();
         総出力件数 = INT_0;
         レコード番号 = INT_0;
 
@@ -136,7 +126,7 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         出力用レコード件数 = getレコード件数();
         出力ファイル名 = ファイル名_前.concat(保険者番号)
-                .concat(processParameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
+                .concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
     }
 
     @Override
@@ -161,10 +151,15 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
             flag = INT_1;
             RString spoolWorkPath = Path.getTmpDirectoryPath();
             eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-            eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+            if (Encode.UTF_8.equals(processParameter.get文字コード())) {
+                入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(出力ファイル名));
+            } else {
+                入力ファイルパス = eucFilePath;
+            }
+            eucCsvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス)
                     .setDelimiter(コンマ)
                     .setEnclosure(RString.EMPTY)
-                    .setEncode(Encode.UTF_8)
+                    .setEncode(processParameter.get文字コード())
                     .setNewLine(NewLine.CRLF)
                     .hasHeader(false)
                     .build();
@@ -202,15 +197,9 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         outputCount.setValue(総出力件数);
         if (null != eucCsvWriter) {
             eucCsvWriter.close();
-            do外字類似変換();
-            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
-                    FilesystemName.fromString(出力ファイル名.replace(拡張子_TEMP, RString.EMPTY)));
-            sfd = SharedFile.defineSharedFile(sfd, INT_1, SharedFile.GROUP_ALL, null, true, null);
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath.replace(拡張子_TEMP, RString.EMPTY)), opts);
-            entryList.add(sfd);
-            outputEntry.setValue(entryList);
         }
+        inputPath.setValue(入力ファイルパス);
+        outputPath.setValue(eucFilePath);
     }
 
     private void 処理結果リスト一時TBL出力() {
@@ -463,43 +452,6 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         }
 
         return new RString(計算結果レコード件数 * INT_2 + 明細レコード件数);
-    }
-
-    private void do外字類似変換() {
-        try (FileReader reader = new FileReader(eucFilePath, Encode.UTF_8);
-                ByteWriter writer = new ByteWriter(eucFilePath.replace(拡張子_TEMP, RString.EMPTY))) {
-            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
-                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
-                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
-                        .enabledConvertError(true)
-                        .build();
-                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
-                writer.write(converter.convert(record.concat(拡張子)));
-            }
-            writer.close();
-            reader.close();
-        }
-        deleteTmpFile();
-    }
-
-    private CharacterConvertTable getCharacterConvertTable() {
-        RString 国保連送付外字_変換区分
-                = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (RSTONE.equals(国保連送付外字_変換区分)) {
-            return CharacterConvertTable.SjisRuiji;
-        } else {
-            return CharacterConvertTable.Sjis;
-        }
-    }
-
-    private void deleteTmpFile() {
-        if (RString.isNullOrEmpty(eucFilePath)) {
-            return;
-        }
-        File file = new File(eucFilePath.toString());
-        if (file.exists()) {
-            file.getAbsoluteFile().deleteOnExit();
-        }
     }
 
     private RString trimDecimal(Decimal dec) {

@@ -65,7 +65,15 @@ public interface IJigyoHokokuGeppoHokenkyufuKogakuGassanMapper {
     List<JigyoJoukyouHoukokuDataRelateEntity> getJigyohokokuCompYoshiki272Report(JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter parameter);
 
     /**
-     * 事業状況報告統計情報の取得処理です。
+     * 年報の場合、事業状況報告統計情報の取得処理です。
+     *
+     * @param parameter 事業状況報告統計情報パラメータ
+     * @return 事業状況報告統計情報
+     */
+    List<JigyoJoukyouHoukokuDataRelateEntity> getNennpouDataToroku(JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter parameter);
+
+    /**
+     * 月報の場合、事業状況報告統計情報の取得処理です。
      *
      * @param parameter 事業状況報告統計情報パラメータ
      * @return 事業状況報告統計情報

@@ -28,7 +28,7 @@ public class DBD301020_SokyuHikazeiNenkinTaishoshaDotei extends BatchFlowBase<DB
     /**
      * 非課税年金対象者同定フロー
      */
-    private static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
+    private static final RString HIKAIFLOW = new RString("DBD301030_HikazeiNenkinTaishoshaDotei");
 
     private static final String 未同定データ作成 = "未同定データ作成";
     private static final String 非課税年金対象者同定 = "非課税年金対象者同定";

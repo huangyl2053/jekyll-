@@ -108,15 +108,21 @@ public final class HihokenshaJohoMybatisParameter implements IMyBatisParameter {
     /**
      * 提供対象者のMybatisParameterを生成します。
      *
+     * @param 新規異動区分 新規異動区分
      * @param 宛名 宛名
      * @param テーブル名 テーブル名
      * @return RiyoshaFutanwariaiMybatisParameter
      */
-    public static HihokenshaJohoMybatisParameter createParamter提供対象者(RString 宛名, RString テーブル名) {
+    public static HihokenshaJohoMybatisParameter createParamter提供対象者(RString 新規異動区分,
+            RString 宛名, RString テーブル名) {
+        boolean is異動 = false;
+        if (ShinkiIdoKubun.異動.getコード().equals(新規異動区分)) {
+            is異動 = true;
+        }
         return new HihokenshaJohoMybatisParameter(
                 false,
                 false,
-                false,
+                is異動,
                 RString.EMPTY,
                 RString.EMPTY,
                 RDateTime.MAX,

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD571001.JukyushaDaichoCyouhyoujouhouProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD571001.JukyushaDaichoCyouhyoujouhouTempProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD571001.JukyushaDaichoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001_JukyushaDaichoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -21,15 +22,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBD571001_JukyushaDaicho extends BatchFlowBase<DBD571001_JukyushaDaichoParameter> {
 
     private static final String 受給者台帳処理一時テーブル = "受給者台帳処理一時テーブル";
+    private static final String 受給者台帳処理帳票出力用一時テーブル = "受給者台帳処理帳票出力用一時テーブル";
     private static final String 受給者台帳処理帳票出力用情報 = "受給者台帳処理帳票出力用情報";
 
     @Override
     protected void defineFlow() {
         RString temptable;
+        RString temptable1;
         executeStep(受給者台帳処理一時テーブル);
         temptable = getResult(RString.class, new RString(受給者台帳処理一時テーブル), JukyushaDaichoProcess.OUT_TEMP_TABLE);
         if (temptable.equals(new RString("1"))) {
-            executeStep(受給者台帳処理帳票出力用情報);
+            executeStep(受給者台帳処理帳票出力用一時テーブル);
+            temptable1 = getResult(RString.class, new RString(受給者台帳処理帳票出力用一時テーブル), JukyushaDaichoCyouhyoujouhouTempProcess.OUT_TEMP_TABLE_1);
+            if (temptable1.equals(new RString("1"))) {
+                executeStep(受給者台帳処理帳票出力用情報);
+            }
         }
 
     }
@@ -42,6 +49,17 @@ public class DBD571001_JukyushaDaicho extends BatchFlowBase<DBD571001_JukyushaDa
     @Step(受給者台帳処理一時テーブル)
     protected IBatchFlowCommand callHanyoListShisetsuNyutaishoFlow() {
         return loopBatch(JukyushaDaichoProcess.class).
+                arguments(getParameter().toIdoChushutsuDaichoProcessParameter()).define();
+    }
+
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(受給者台帳処理帳票出力用一時テーブル)
+    protected IBatchFlowCommand callJukyushaDaichoChoHyouFlow() {
+        return loopBatch(JukyushaDaichoCyouhyoujouhouTempProcess.class).
                 arguments(getParameter().toIdoChushutsuDaichoProcessParameter()).define();
     }
 

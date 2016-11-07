@@ -83,7 +83,6 @@ public class DBD207012_ShiharaiHohoHenkoKanriListParameter extends BatchParamete
         this.償還決定登録者2の選択 = tempData.get償還決定登録者2の選択();
         this.改頁出力順ID = tempData.get改頁出力順ID();
         this.帳票ID = tempData.get帳票ID();
-        this.帳票分類ID = tempData.get帳票分類ID();
         this.帳票作成日時 = tempData.get帳票作成日時();
     }
 
@@ -121,7 +120,6 @@ public class DBD207012_ShiharaiHohoHenkoKanriListParameter extends BatchParamete
                 償還決定登録者1の選択,
                 償還決定登録者2の選択,
                 改頁出力順ID,
-                帳票分類ID,
                 帳票ID,
                 帳票作成日時);
     }
@@ -150,7 +148,6 @@ public class DBD207012_ShiharaiHohoHenkoKanriListParameter extends BatchParamete
                 償還決定登録者1の選択,
                 償還決定登録者2の選択,
                 改頁出力順ID,
-                帳票分類ID,
                 帳票ID,
                 帳票作成日時);
     }

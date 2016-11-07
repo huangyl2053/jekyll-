@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kyotakuservicekeikakusakusei.Kyo
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -307,8 +307,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         if (entity.get受給申請事由() != null) {
             reportList.set申請事由(JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称());
         }
-        if (entity.get要介護認定状態区分コード() != null) {
-            reportList.set要介護度(YokaigoJotaiKubun09.toValue(entity.get要介護認定状態区分コード().getColumnValue()).get名称());
+        if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
+            reportList.set要介護度(YokaigoJotaiKubun.toValue(entity.get要介護認定状態区分コード().getColumnValue()).get名称());
         }
         reportList.set認定有効開始日(entity.get認定有効期間開始日());
         reportList.set認定有効終了日(entity.get認定有効期間終了日());
@@ -325,6 +325,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             reportList.set備考1(定値_届出なし);
         } else if (entity.get適用終了年月日() != null
                 && !entity.get適用終了年月日().isEmpty()
+                && processParameter.getKijyunbi() != null
+                && !processParameter.getKijyunbi().isEmpty()
                 && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
             reportList.set備考1(定値_有効なし);
         }

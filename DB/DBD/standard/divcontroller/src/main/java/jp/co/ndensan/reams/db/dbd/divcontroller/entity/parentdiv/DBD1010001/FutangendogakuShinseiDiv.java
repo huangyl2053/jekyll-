@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgeng
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.IGemmenGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.IShisetSunyushoInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.ShisetSunyushoInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
@@ -39,8 +37,6 @@ public class FutangendogakuShinseiDiv extends Panel {
      */
     @JsonProperty("Header")
     private HeaderDiv Header;
-    @JsonProperty("SetaiJoho")
-    private SetaiJohoDiv SetaiJoho;
     @JsonProperty("ShinseiList")
     private ShinseiListDiv ShinseiList;
     @JsonProperty("ShinseiDetail")
@@ -61,6 +57,12 @@ public class FutangendogakuShinseiDiv extends Panel {
     private RString mode;
     @JsonProperty("shikibetsuCode")
     private RString shikibetsuCode;
+    @JsonProperty("hidden登録業務コード")
+    private RString hidden登録業務コード;
+    @JsonProperty("hidden登録グループコード")
+    private RString hidden登録グループコード;
+    @JsonProperty("hiddenサンプル文書")
+    private RString hiddenサンプル文書;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -84,24 +86,6 @@ public class FutangendogakuShinseiDiv extends Panel {
     @JsonProperty("Header")
     public void setHeader(HeaderDiv Header) {
         this.Header = Header;
-    }
-
-    /*
-     * getSetaiJoho
-     * @return SetaiJoho
-     */
-    @JsonProperty("SetaiJoho")
-    public SetaiJohoDiv getSetaiJoho() {
-        return SetaiJoho;
-    }
-
-    /*
-     * setSetaiJoho
-     * @param SetaiJoho SetaiJoho
-     */
-    @JsonProperty("SetaiJoho")
-    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
-        this.SetaiJoho = SetaiJoho;
     }
 
     /*
@@ -276,6 +260,60 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
+     * gethidden登録業務コード
+     * @return hidden登録業務コード
+     */
+    @JsonProperty("hidden登録業務コード")
+    public RString getHidden登録業務コード() {
+        return hidden登録業務コード;
+    }
+
+    /*
+     * sethidden登録業務コード
+     * @param hidden登録業務コード hidden登録業務コード
+     */
+    @JsonProperty("hidden登録業務コード")
+    public void setHidden登録業務コード(RString hidden登録業務コード) {
+        this.hidden登録業務コード = hidden登録業務コード;
+    }
+
+    /*
+     * gethidden登録グループコード
+     * @return hidden登録グループコード
+     */
+    @JsonProperty("hidden登録グループコード")
+    public RString getHidden登録グループコード() {
+        return hidden登録グループコード;
+    }
+
+    /*
+     * sethidden登録グループコード
+     * @param hidden登録グループコード hidden登録グループコード
+     */
+    @JsonProperty("hidden登録グループコード")
+    public void setHidden登録グループコード(RString hidden登録グループコード) {
+        this.hidden登録グループコード = hidden登録グループコード;
+    }
+
+    /*
+     * gethiddenサンプル文書
+     * @return hiddenサンプル文書
+     */
+    @JsonProperty("hiddenサンプル文書")
+    public RString getHiddenサンプル文書() {
+        return hiddenサンプル文書;
+    }
+
+    /*
+     * sethiddenサンプル文書
+     * @param hiddenサンプル文書 hiddenサンプル文書
+     */
+    @JsonProperty("hiddenサンプル文書")
+    public void setHiddenサンプル文書(RString hiddenサンプル文書) {
+        this.hiddenサンプル文書 = hiddenサンプル文書;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -309,23 +347,13 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnDispSetaiJoho() {
-        return this.getHeader().getHosokuJoho().getBtnDispSetaiJoho();
+    public ButtonDialog getBtnShotokuJokyo() {
+        return this.getHeader().getHosokuJoho().getBtnShotokuJokyo();
     }
 
     @JsonIgnore
-    public void  setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
-        this.getHeader().getHosokuJoho().setBtnDispSetaiJoho(btnDispSetaiJoho);
-    }
-
-    @JsonIgnore
-    public Button getBtnCloseSetaiJoho() {
-        return this.getHeader().getHosokuJoho().getBtnCloseSetaiJoho();
-    }
-
-    @JsonIgnore
-    public void  setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
-        this.getHeader().getHosokuJoho().setBtnCloseSetaiJoho(btnCloseSetaiJoho);
+    public void  setBtnShotokuJokyo(ButtonDialog btnShotokuJokyo) {
+        this.getHeader().getHosokuJoho().setBtnShotokuJokyo(btnShotokuJokyo);
     }
 
     @JsonIgnore
@@ -369,8 +397,8 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return this.getHeader().getCcdAtenaInfo();
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return this.getHeader().getCcdShisetsuNyushoInfo();
     }
 
     @JsonIgnore
@@ -379,13 +407,8 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return this.getHeader().getCcdShisetsuNyushoInfo();
-    }
-
-    @JsonIgnore
-    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
-        return this.getSetaiJoho().getCcdSetaiShotokuIchiran();
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return this.getHeader().getCcdAtenaInfo();
     }
 
     @JsonIgnore

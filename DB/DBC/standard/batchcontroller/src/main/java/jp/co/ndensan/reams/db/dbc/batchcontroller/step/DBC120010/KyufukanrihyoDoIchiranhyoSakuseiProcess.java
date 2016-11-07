@@ -388,7 +388,8 @@ public class KyufukanrihyoDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<H
         csvEntity.set限度額管理期間_開始(doパターン54(給付管理票.get限度額適用開始年月()));
         csvEntity.set限度額管理期間_終了(doパターン54(給付管理票.get限度額適用終了年月()));
         csvEntity.set区分支給限度基準額(doカンマ編集(給付管理票.get居宅_介護予防支給限度額()));
-        if (null != 給付管理票.getサービス提供年月() && 給付管理票.getサービス提供年月().isBefore(基準サービス提供年月)) {
+        if (null != 給付管理票.getサービス提供年月() && !給付管理票.getサービス提供年月().isEmpty()
+                && 給付管理票.getサービス提供年月().isBefore(基準サービス提供年月)) {
             csvEntity.set指定サービス単位(doカンマ編集(給付管理票.get指定サービス分小計()));
             csvEntity.set基準該当サービス単位(doカンマ編集(給付管理票.get基準該当サービス分小計()));
         }

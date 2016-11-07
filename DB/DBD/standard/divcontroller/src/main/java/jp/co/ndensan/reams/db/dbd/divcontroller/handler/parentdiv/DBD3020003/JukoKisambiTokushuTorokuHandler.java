@@ -54,6 +54,7 @@ public class JukoKisambiTokushuTorokuHandler {
 
     private static final char CHAR_0 = 0;
     private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
     private static final int INT_10 = 10;
 
     /**
@@ -178,7 +179,7 @@ public class JukoKisambiTokushuTorokuHandler {
                 row.setHdnFuchoTokucho(tainoKiSummary.get徴収方法().getコード());
                 row.setTsuchishoNo(tainoKiSummary.get通知書番号().getColumnValue());
                 row.setHdnTsuchishoNo(tainoKiSummary.get通知書番号().getColumnValue());
-                row.setKi(tainoKiSummary.get期().padZeroToLeft(INT_2).concat(期));
+                row.setKi(tainoKiSummary.get期().trimStart(CHAR_0).padZeroToLeft(INT_2).concat(期));
                 row.setChoteigaku(new RString(tainoKiSummary.get調定額().toString()));
                 row.getNokigen().setValue(new FlexibleDate(tainoKiSummary.get納期限().toDateString()));
                 row.setShunyugaku(new RString(tainoKiSummary.get収入額().toString()));
@@ -192,7 +193,7 @@ public class JukoKisambiTokushuTorokuHandler {
                             && new RString(jikoKisambiKanri.get賦課年度().getYearValue()).equals(row.getHdnFukaNendo())
                             && jikoKisambiKanri.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
                             && jikoKisambiKanri.get通知書番号().value().equals(row.getTsuchishoNo())
-                            && jikoKisambiKanri.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))) {
+                            && jikoKisambiKanri.get収納期_月().equals(row.getKi().substring(0, INT_2).padZeroToLeft(INT_3))) {
                         row.getTokushuJikoKisaibi().setValue(jikoKisambiKanri.get時効起算年月日());
                         row.getTokushuJikoKisaibiJiyu().setSelectedKey(jikoKisambiKanri.get時効起算日区分());
                         存在フラグ = true;
@@ -244,7 +245,7 @@ public class JukoKisambiTokushuTorokuHandler {
                         && new RString(時効起算日管理.get賦課年度().getYearValue()).equals(row.getHdnFukaNendo())
                         && 時効起算日管理.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
                         && 時効起算日管理.get通知書番号().value().equals(row.getTsuchishoNo())
-                        && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))
+                        && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).padZeroToLeft(INT_3))
                         && (!時効起算日管理.get時効起算年月日().equals(row.getTokushuJikoKisaibi().getValue())
                         || !時効起算日管理.get時効起算日区分().equals(row.getTokushuJikoKisaibiJiyu().getSelectedKey()))) {
                     return true;
@@ -272,7 +273,7 @@ public class JukoKisambiTokushuTorokuHandler {
                         && new RString(時効起算日管理.get賦課年度().getYearValue()).equals(row.getHdnFukaNendo())
                         && 時効起算日管理.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
                         && 時効起算日管理.get通知書番号().value().equals(row.getTsuchishoNo())
-                        && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))
+                        && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).padZeroToLeft(INT_3))
                         && (!時効起算日管理.get時効起算年月日().equals(row.getTokushuJikoKisaibi().getValue())
                         || !時効起算日管理.get時効起算日区分().equals(row.getTokushuJikoKisaibiJiyu().getSelectedKey()))) {
                     return true;
@@ -382,7 +383,7 @@ public class JukoKisambiTokushuTorokuHandler {
                         && 時効起算日管理.get賦課年度().equals(new RYear(row.getHdnFukaNendo()))
                         && 時効起算日管理.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
                         && 時効起算日管理.get通知書番号().getColumnValue().equals(row.getHdnTsuchishoNo())
-                        && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))) {
+                        && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).padZeroToLeft(INT_3))) {
 
                     時効起算日管理List.remove(i);
                     JikoKisambiKanriBuilder builder = 時効起算日管理.createBuilderForEdit();
@@ -467,7 +468,7 @@ public class JukoKisambiTokushuTorokuHandler {
             if (new RString(時効起算日管理.get賦課年度().getYearValue()).equals(row.getHdnFukaNendo())
                     && 時効起算日管理.get特徴_普徴区分().equals(row.getHdnFuchoTokucho())
                     && 時効起算日管理.get通知書番号().value().equals(row.getHdnTsuchishoNo())
-                    && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).trimStart(CHAR_0))) {
+                    && 時効起算日管理.get収納期_月().equals(row.getKi().substring(0, INT_2).padZeroToLeft(INT_3))) {
                 row.getTokushuJikoKisaibi().setValue(時効起算日管理.get時効起算年月日());
                 row.getTokushuJikoKisaibiJiyu().setSelectedKey(時効起算日管理.get時効起算日区分());
 
@@ -488,7 +489,7 @@ public class JukoKisambiTokushuTorokuHandler {
                     new RYear(row.getHdnFukaNendo()),
                     row.getHdnFuchoTokucho(),
                     new TsuchishoNo(row.getHdnTsuchishoNo()),
-                    row.getKi().substring(0, INT_2).trimStart(CHAR_0),
+                    row.getKi().substring(0, INT_2).padZeroToLeft(INT_3),
                     0);
 
             JikoKisambiKanriBuilder builder = newJikoKisambiKanri.createBuilderForEdit();

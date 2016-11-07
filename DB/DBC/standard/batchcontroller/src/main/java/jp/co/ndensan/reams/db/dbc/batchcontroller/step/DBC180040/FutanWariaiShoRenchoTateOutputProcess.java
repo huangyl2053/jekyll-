@@ -73,7 +73,7 @@ public class FutanWariaiShoRenchoTateOutputProcess extends BatchProcessBase<Riyo
     private static final RString 定数_負担割合証発行一括 = new RString("負担割合証発行（一括）");
     private static final RString 代行プリント送付票 = new RString("URU000A10_DaikoPrintCheck");
     private static final RString 定数_利用者負担割合証 = new RString("利用者負担割合証");
-    private static final RString 定数_交付年月日 = new RString("【交付年月日】　　");
+    private static final RString 定数_交付年月日 = new RString("【交付年月日】　");
 
     @Override
     protected void initialize() {

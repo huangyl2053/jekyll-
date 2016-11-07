@@ -160,8 +160,7 @@ public class PrtTaishoshaIchiranJigyoProcess extends BatchProcessBase<KogakuKaig
 
     private KogakuSogoJigyoServiceHiTaishoshaIchiranEntity createReportData(KogakuKaigoServicehiReportEntity entity) {
         KogakuSogoJigyoServiceHiTaishoshaIchiranEntity 対象者一覧表Entity = new KogakuSogoJigyoServiceHiTaishoshaIchiranEntity();
-        対象者一覧表Entity.set審査年月From(parameter.get処理年月());
-        対象者一覧表Entity.set審査年月To(parameter.get審査年月To());
+        対象者一覧表Entity.set審査年月(parameter.get処理年月());
         対象者一覧表Entity.set市町村コード(entity.get市町村コード());
         対象者一覧表Entity.set被保険者番号(entity.get被保険者番号());
         対象者一覧表Entity.set被保険者名(entity.get名称().value());

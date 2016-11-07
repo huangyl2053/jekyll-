@@ -21,8 +21,14 @@ import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.entity.db.basic.noki.nokikanri.UrT0729NokiKanriEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.noki.nokikanri.NokiManager;
+import jp.co.ndensan.reams.ur.urz.business.core.businessday.BusinessDayFactory;
+import jp.co.ndensan.reams.ur.urz.business.core.businessday.IBusinessDayDealable;
+import jp.co.ndensan.reams.ur.urz.business.core.holidaycategory.HolidayCategoryFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.businessday.BusinessDayConvention;
+import jp.co.ndensan.reams.ur.urz.definition.core.businessday.BusinessDayIncludesHoliday;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -89,28 +95,67 @@ public class ShinNendoKanriJohoSakuseiManager {
             }
         }
         NokiManager 納期管理 = new NokiManager();
-        List<Noki> list = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_特別徴収,
+        List<Noki> list = 納期管理.get納期(ShunoKamokuShubetsu.介護保険料_特別徴収,
                 new RYear(本年度.toString()), GennenKanen.現年度);
-        List<Noki> list現年度 = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+        List<Noki> list現年度 = 納期管理.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
                 new RYear(本年度.toString()), GennenKanen.現年度);
-        List<Noki> list過年度 = 納期管理.create翌年度納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+        List<Noki> list過年度 = 納期管理.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
                 new RYear(本年度.toString()), GennenKanen.過年度);
         for (Noki item : list) {
             UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setChoteiNendo(entity.getChoteiNendo().plusYear(1));
+            entity.setNokigenYMD(日付取得(entity.getNokigenYMD().plusYear(1)));
+            entity.setNokiKaishiYMD(日付取得(entity.getNokiKaishiYMD().plusYear(1)));
+            entity.setNokiShuryoYMD(日付取得(entity.getNokiShuryoYMD().plusYear(1)));
+            entity.setTsuchishoHakkoYMD(日付取得(entity.getTsuchishoHakkoYMD().plusYear(1)));
+            entity.setHoteiNokigenYMD(日付取得(entity.getHoteiNokigenYMD().plusYear(1)));
+            entity.setHoteiNokigenToYMD(日付取得(entity.getHoteiNokigenToYMD().plusYear(1)));
+            if (entity.getFurikaeNokiYMD() != null) {
+                entity.setFurikaeNokiYMD(日付取得(entity.getFurikaeNokiYMD().plusYear(1)));
+            }
             entity.setState(EntityDataState.Added);
             納期管理.save納期(new Noki(entity));
         }
         for (Noki item : list現年度) {
             UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setChoteiNendo(entity.getChoteiNendo().plusYear(1));
+            entity.setNokigenYMD(日付取得(entity.getNokigenYMD().plusYear(1)));
+            entity.setNokiKaishiYMD(日付取得(entity.getNokiKaishiYMD().plusYear(1)));
+            entity.setNokiShuryoYMD(日付取得(entity.getNokiShuryoYMD().plusYear(1)));
+            entity.setTsuchishoHakkoYMD(日付取得(entity.getTsuchishoHakkoYMD().plusYear(1)));
+            entity.setHoteiNokigenYMD(日付取得(entity.getHoteiNokigenYMD().plusYear(1)));
+            entity.setHoteiNokigenToYMD(日付取得(entity.getHoteiNokigenToYMD().plusYear(1)));
+            if (entity.getFurikaeNokiYMD() != null) {
+                entity.setFurikaeNokiYMD(日付取得(entity.getFurikaeNokiYMD().plusYear(1)));
+            }
             entity.setState(EntityDataState.Added);
             納期管理.save納期(new Noki(entity));
         }
         for (Noki item : list過年度) {
             UrT0729NokiKanriEntity entity = item.toEntity();
+            entity.setChoteiNendo(entity.getChoteiNendo().plusYear(1));
+            entity.setNokigenYMD(日付取得(entity.getNokigenYMD().plusYear(1)));
+            entity.setNokiKaishiYMD(日付取得(entity.getNokiKaishiYMD().plusYear(1)));
+            entity.setNokiShuryoYMD(日付取得(entity.getNokiShuryoYMD().plusYear(1)));
+            entity.setTsuchishoHakkoYMD(日付取得(entity.getTsuchishoHakkoYMD().plusYear(1)));
+            entity.setHoteiNokigenYMD(日付取得(entity.getHoteiNokigenYMD().plusYear(1)));
+            entity.setHoteiNokigenToYMD(日付取得(entity.getHoteiNokigenToYMD().plusYear(1)));
+            if (entity.getFurikaeNokiYMD() != null) {
+                entity.setFurikaeNokiYMD(日付取得(entity.getFurikaeNokiYMD().plusYear(1)));
+            }
             entity.setState(EntityDataState.Added);
             納期管理.save納期(new Noki(entity));
         }
-
     }
 
+    private RDate 日付取得(RDate 日付) {
+        IBusinessDayDealable businessDay = BusinessDayFactory.createInstance(HolidayCategoryFactory.createJpHoliday(),
+                BusinessDayIncludesHoliday.休日を含む, BusinessDayConvention.休みの直前);
+        if (businessDay.isOpen(日付)) {
+            return 日付;
+        } else {
+            日付 = 日付.plusDay(1);
+            return 日付取得(日付);
+        }
+    }
 }

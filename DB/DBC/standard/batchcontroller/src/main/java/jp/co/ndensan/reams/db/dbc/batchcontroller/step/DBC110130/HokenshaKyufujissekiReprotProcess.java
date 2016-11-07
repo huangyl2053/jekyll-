@@ -108,11 +108,10 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
     private HokenshaNo 保険者番号;
     private KyuufuJisekiKoshinnKekkaEntity 一覧表entity;
 
+    private CsvWriter<HokenshaKyufujissekiReprotCsvEntity> eucCsvWriter;
     @BatchWriter
     private BatchReportWriter<KyufuJisekiJohoSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<KyufuJisekiJohoSofuIchiranSource> reportSourceWriter;
-    @BatchWriter
-    private CsvWriter<HokenshaKyufujissekiReprotCsvEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
@@ -158,7 +157,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
     @Override
     protected void usualProcess(KyuufuJisekiKoshinnKekkaEntity entity) {
         if (!保険者番号.equals(entity.get給付実績一時Entity().getコントロールレコード保険者番号()) && !保険者番号.isEmpty()) {
-            HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvGoukiiEntity(保険者番号);
+            HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvGoukiiEntity();
             eucCsvWriter.writeLine(csvEntity);
             KyufuJisekiJohoSofuIchiranReport report = new KyufuJisekiJohoSofuIchiranReport(
                     一覧表entity, 出力順リスト, 改頁リスト, processParameter.getShoriYM(),
@@ -175,6 +174,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
             }
         }
         if (index == INT_1) {
+            保険者番号 = entity.get給付実績一時Entity().getコントロールレコード保険者番号();
             HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvMeisaiEntity(entity);
             RString 処理年月 = processParameter.getShoriYM().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -198,8 +198,9 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
     @Override
     protected void afterExecute() {
         if (index != INT_1) {
-            HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvGoukiiEntity(保険者番号);
+            HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvGoukiiEntity();
             eucCsvWriter.writeLine(csvEntity);
+            eucCsvWriter.close();
             KyufuJisekiJohoSofuIchiranReport report = new KyufuJisekiJohoSofuIchiranReport(
                     一覧表entity, 出力順リスト, 改頁リスト, processParameter.getShoriYM(),
                     processParameter.getNow().getRDateTime(), true, new Decimal(合計件数), index - INT_1);
@@ -210,8 +211,9 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
             } else {
                 eucManager.spool(eucFilePath);
             }
+        } else {
+            eucCsvWriter.close();
         }
-        eucCsvWriter.close();
     }
 
     private void アクセスログ対象追加(KyuufuJisekiKoshinnKekkaEntity entity) {
@@ -290,12 +292,12 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
         return csvEntity;
     }
 
-    private HokenshaKyufujissekiReprotCsvEntity getCsvGoukiiEntity(HokenshaNo 保険者番号) {
+    private HokenshaKyufujissekiReprotCsvEntity getCsvGoukiiEntity() {
         DbWT1111KyufuJissekiTempEntity 給付実績一時Entity = 一覧表entity.get給付実績一時Entity();
         HokenshaKyufujissekiReprotCsvEntity csvEntity = new HokenshaKyufujissekiReprotCsvEntity();
         csvEntity.set送付年月(RString.EMPTY);
         csvEntity.set作成日時(RString.EMPTY);
-        csvEntity.set保険者番号(保険者番号.getColumnValue());
+        csvEntity.set保険者番号(給付実績一時Entity.getコントロールレコード保険者番号().getColumnValue());
         csvEntity.set保険者名(給付実績一時Entity.getコントロールレコード保険者名() == null ? RString.EMPTY : 給付実績一時Entity.getコントロールレコード保険者名());
         csvEntity.setNo(RString.EMPTY);
         csvEntity.set入力識別番号(RString.EMPTY);

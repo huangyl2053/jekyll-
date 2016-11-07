@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 振込明細一覧表明細Entity
@@ -20,10 +19,5 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class MeisaiDataEntity {
 
     private FurikomiDetailTempTableEntity 振込明細一時TBL;
-    private int 様式連番;
-    private int 名寄せ件数;
-    private RString 印字様式名称;
-    private RString 印字様式番号;
-    private Decimal 様式別集計金額;
-    private RString 集計様式番号;
+    private List<PrintNoKingakuEntity> 印字様式番号別金額List;
 }

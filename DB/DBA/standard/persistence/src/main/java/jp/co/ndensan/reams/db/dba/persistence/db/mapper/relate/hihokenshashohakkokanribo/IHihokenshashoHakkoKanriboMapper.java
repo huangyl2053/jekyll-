@@ -18,9 +18,19 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.Aka
 public interface IHihokenshashoHakkoKanriboMapper {
 
     /**
+     * 証発行管理リスト情報の取得処理です
+     *
      * @param parameter 被保険者証発行管理簿_マッパー用のパラメータ
      * @return List<AkasiHakouKanriEntity> 証発行管理リストEntity
      */
     List<AkasiHakouKanriEntity> get証発行管理リスト情報(HihokenshashoHakkoKanriboMybatisParameter parameter);
+
+    /**
+     * 証発行管理リスト最新情報の取得処理です
+     *
+     * @param parameter 被保険者証発行管理簿_マッパー用のパラメータ
+     * @return List<AkasiHakouKanriEntity> 証発行管理リストEntity
+     */
+    List<AkasiHakouKanriEntity> get証発行管理リスト最新情報(HihokenshashoHakkoKanriboMybatisParameter parameter);
 
 }

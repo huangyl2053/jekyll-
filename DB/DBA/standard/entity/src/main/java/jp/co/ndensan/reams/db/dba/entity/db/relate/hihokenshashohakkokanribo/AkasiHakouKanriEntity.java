@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo;
 
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -13,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 証発行管理リストです。
+ * 証発行管理情報Entityです。
  *
  * @reamsid_L DBA-0600-020 zhangguopeng
  */
@@ -38,5 +39,6 @@ public class AkasiHakouKanriEntity {
     private Code kofuJiyuCode;
     private RString kofuJiyuRyakusho;
     private Code kaishuJiyuCode;
+    private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
 
 }

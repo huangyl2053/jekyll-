@@ -54,8 +54,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class TokuchoTaishoshaIchiranHandler {
 
-    private static final RString 同定帳票分類ID = new RString("DBB200031_TokubetsuChoshuDoteiIchiranDaihyo");
-    private static final RString 未同定帳票分類ID = new RString("DBB200032_TokubetsuChoshuMidoteiIchiranDaihyo");
+    private static final RString 同定帳票分類ID = new RString("DBB200031_TokubetsuChoshuDoteiIchiran");
+    private static final RString 未同定帳票分類ID = new RString("DBB200032_TokubetsuChoshuMidoteiIchiran");
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
@@ -619,6 +619,11 @@ public class TokuchoTaishoshaIchiranHandler {
      * @param 特別徴収開始月 RString
      */
     public void 対象者検索戻る値の処理(TaishoshaKey taishoshaKey, RString 特別徴収開始月) {
+        if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月
+                .startsWith(RString.FULL_SPACE) && !特別徴収開始月.startsWith(LEFT)) {
+            特別徴収開始月 = DateConverter.formatMonthFull(特別徴収開始月.
+                    split(RString.FULL_SPACE.toString()).get(NUM0).substring(NUM4, NUM6));
+        }
         HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
         HihokenshaDaicho hihokenshaDaicho
                 = manager.find被保険者台帳(taishoshaKey.get被保険者番号(), FlexibleDate.getNowDate());
@@ -648,6 +653,11 @@ public class TokuchoTaishoshaIchiranHandler {
         List<TokuchoDouteiKouhoshaShousaiJoho> result_詳細
                 = tokudoutei.getHihokenshaJoho(div.getTxtHihokenshaNo().getValue(), new FlexibleYear(処理年度), 特別徴収開始月);
         if (result_詳細 != null && !result_詳細.isEmpty()) {
+            if (!RString.isNullOrEmpty(result_詳細.get(NUM0).get登録済年金情報_本徴収基礎年金番号())) {
+                div.getTorokuZumiNenkinInfo().setDisplayNone(false);
+            } else {
+                div.getTorokuZumiNenkinInfo().setDisplayNone(true);
+            }
             set特別徴収同定候補者詳細情報(result_詳細.get(NUM0));
         }
     }

@@ -11,15 +11,17 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC815001.DBC815001_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakukaigotaishoumainpanel.KougakuKaigotaiShouMainPanelMapperParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8150001.DBC8150001StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8150001.KougakuKaigotaiShoushachuuShutsuMainPanelDiv;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.dbc5100011mainpanel.DBC5100011MainPanelFinder;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8150001.KougakuKaigotaiShoushachuuShutsuMainPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8150001.KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.dbc5100011mainpanel.DBC5100011MainPanelFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
@@ -28,7 +30,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -62,11 +66,29 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
         List<KokuhorenInterfaceKanri> 国保連インターフェース管理 = DBC5100011MainPanelFinder.createInstance()
                 .get処理番号(交換情報識別番号, 処理状態区分).records();
         if (国保連インターフェース管理 == null || 国保連インターフェース管理.isEmpty()) {
-            ValidationMessageControlPairs validPairs = getValidatisonHandler().国保連インターフェース管理テーブルチェック();
+            ValidationMessageControlPairs validPairs = getValidatisonHandler(div).国保連インターフェース管理テーブルチェック();
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, true);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 今回日時チェック。
+     *
+     * @param div div
+     * @return ResponseData<KougakuKaigotaiShoushachuuShutsuMainPanelDiv>
+     */
+    public ResponseData<KougakuKaigotaiShoushachuuShutsuMainPanelDiv> btn_BeforeDialog(KougakuKaigotaiShoushachuuShutsuMainPanelDiv div) {
+        boolean validPairs = getValidatisonHandler(div).今回日時チェック();
+        if (!ResponseHolder.isReRequest() && validPairs) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage()
+                    .replace("終了日時に処理日時以降の日付が設定されていますが、実行して")).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
+        return ResponseData.of(div).setState(DBC8150001StateName.NoChange);
     }
 
     /**
@@ -121,7 +143,7 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanel {
         return new KougakuKaigotaiShoushachuuShutsuMainPanelHandler(div);
     }
 
-    private KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler getValidatisonHandler() {
-        return new KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler();
+    private KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler getValidatisonHandler(KougakuKaigotaiShoushachuuShutsuMainPanelDiv div) {
+        return new KougakuKaigotaiShoushachuuShutsuMainPanelValidatisonHandler(div);
     }
 }

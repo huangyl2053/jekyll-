@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JutakuGaikyoChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,10 +25,6 @@ public class JutakuGaikyoChosaDiv extends Panel {
     private RadioButton radJutakuKaishu;
     @JsonProperty("dgRiyoServiceJyokyo")
     private DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo;
-    @JsonProperty("txtShichosonTokubetsuKyufu")
-    private TextBox txtShichosonTokubetsuKyufu;
-    @JsonProperty("txtKyufuIgaiJutakuService")
-    private TextBox txtKyufuIgaiJutakuService;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -70,42 +66,6 @@ public class JutakuGaikyoChosaDiv extends Panel {
     @JsonProperty("dgRiyoServiceJyokyo")
     public void setDgRiyoServiceJyokyo(DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo) {
         this.dgRiyoServiceJyokyo = dgRiyoServiceJyokyo;
-    }
-
-    /*
-     * gettxtShichosonTokubetsuKyufu
-     * @return txtShichosonTokubetsuKyufu
-     */
-    @JsonProperty("txtShichosonTokubetsuKyufu")
-    public TextBox getTxtShichosonTokubetsuKyufu() {
-        return txtShichosonTokubetsuKyufu;
-    }
-
-    /*
-     * settxtShichosonTokubetsuKyufu
-     * @param txtShichosonTokubetsuKyufu txtShichosonTokubetsuKyufu
-     */
-    @JsonProperty("txtShichosonTokubetsuKyufu")
-    public void setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.txtShichosonTokubetsuKyufu = txtShichosonTokubetsuKyufu;
-    }
-
-    /*
-     * gettxtKyufuIgaiJutakuService
-     * @return txtKyufuIgaiJutakuService
-     */
-    @JsonProperty("txtKyufuIgaiJutakuService")
-    public TextBox getTxtKyufuIgaiJutakuService() {
-        return txtKyufuIgaiJutakuService;
-    }
-
-    /*
-     * settxtKyufuIgaiJutakuService
-     * @param txtKyufuIgaiJutakuService txtKyufuIgaiJutakuService
-     */
-    @JsonProperty("txtKyufuIgaiJutakuService")
-    public void setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
-        this.txtKyufuIgaiJutakuService = txtKyufuIgaiJutakuService;
     }
 
     // </editor-fold>

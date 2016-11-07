@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -36,10 +37,10 @@ public class DankaibetsuShunoritsuTempEntity extends DbTableEntityBase<Dankaibet
     private Decimal choteigaku;
     private Decimal funougaku;
     private Decimal shunyugaku;
-    private int shunoDataKubun;
+    private RString shunoDataKubun;
     private FlexibleDate fukaYMD;
     private RString hokenryoDankai;
-    private RString kamokuCode;
+    private KamokuCode kamokuCode;
     private LasdecCode lasdecCode;
     private LasdecCode fukaLasdecCode;
     private RString kannnouKunbun;

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHanteiCore;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHanteiHohoHozon;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHanteiHohoHozonFactory;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiHyokiSettei;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.kazeihantei.KazeiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
@@ -49,9 +48,24 @@ public class HokenryoDankaiHantei {
             tsukibetsuHokenryoDankai = new TsukibetsuHokenryoDankai(kazeiHanteiResult);
         }
 
-        //所得段階表記設定
-        HokenryoDankaiHyokiSettei.set保険料段階表記(hokenryoDankaiHanteiParameter, tsukibetsuHokenryoDankai);
+        return tsukibetsuHokenryoDankai;
+    }
+
+    /**
+     * determine仮算定保険料段階クラスです。
+     *
+     * @param hokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter
+     * @return TsukibetsuHokenryoDankai
+     */
+    public TsukibetsuHokenryoDankai determine仮算定保険料段階(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
+
+        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho
+                = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryoDankaiHanteiParameter);
+
+        TsukibetsuHokenryoDankai tsukibetsuHokenryoDankai
+                = new HokenryoDankaiHanteiCore().hokenryoDankaiHantei(hokenryoDankaiHanteiParameter, hokenryoDankaiHanteiHoho);
 
         return tsukibetsuHokenryoDankai;
     }
+
 }

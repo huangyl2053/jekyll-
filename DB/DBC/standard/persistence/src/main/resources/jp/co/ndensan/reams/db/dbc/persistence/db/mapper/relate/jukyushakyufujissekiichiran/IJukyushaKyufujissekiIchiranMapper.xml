@@ -6,10 +6,10 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekiichiran.IJukyushaKyufujissekiIchiranMapper">
     <resultMap id="haishameigihenkouiraiResult" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranRelateEntity">
-        <result property="入力識別番号" column="inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="入力識別番号" column="DbT3017_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="証記載保険者番号" column="DbT3017_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="被保険者番号" column="DbT3017_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="サービス提供年月" column="DbT3017_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiHokenshaNo" column="DbT3017_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceTeikyoYM" column="DbT3017_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="事業所番号" column="DbT3017_jigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績区分コード" column="DbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="公費1_負担者番号" column="DbT3017_kohi1FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -43,20 +43,21 @@
         <result property="後_公費3_緊急時施設療養費請求額" column="DbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_公費3_特定診療費請求額" column="DbT3017_atoKohi3TokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_公費3_特定入所者介護サービス費等請求額" column="DbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="審査年月" column="DbT3017_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsaYM" column="DbT3017_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="識別コード" column="T4_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="市町村コード" column="T4_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonCode" column="T4_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者氏名" column="PSM_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="被保険者カナ" column="PSM_kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kanaMeisho" column="PSM_kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="住所" column="PSM_jusho_banchi_katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="町域コード" column="PSM_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="行政区コード" column="PSM_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="世帯コード" column="PSM_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="choikiCode" column="PSM_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gyoseikuCode" column="PSM_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="setaiCode" column="PSM_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="事業者名称" column="T2_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="meishoCode" column="DbT31183017_meisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />       
         <result property="入力識別番号" column="T1_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="証記載保険者番号" column="T1_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="被保険者番号" column="T1_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="サービス提供年月" column="T1_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hiHokenshaNo" column="T1_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceTeikyoYM" column="T1_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="給付実績区分コード" column="T1_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="公費1_負担者番号" column="T1_kohi1FutanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="公費2_負担者番号" column="T1_kohi2FutanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -69,16 +70,16 @@
         <result property="後_公費2_本人負担額" column="T1_kohi2Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_公費3_請求額" column="T1_kohi3Shikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_公費3_本人負担額" column="T1_kohi3Futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="審査年月" column="T1_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsaYM" column="T1_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="識別コード" column="T4_shikibetsuCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="市町村コード" column="T4_hihokenshaNo_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonCode" column="T4_hihokenshaNo_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者氏名" column="PSM_meisho_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="被保険者カナ" column="PSM_kanaMeisho_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kanaMeisho" column="PSM_kanaMeisho_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="住所" column="PSM_jusho_banchi_katagaki_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="町域コード" column="PSM_choikiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="行政区コード" column="PSM_gyoseikuCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="世帯コード" column="PSM_setaiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="様式" column="DbT3118_meisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="choikiCode" column="PSM_choikiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gyoseikuCode" column="PSM_gyoseikuCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="setaiCode" column="PSM_setaiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="meishoCode" column="DbT3118_meisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
      
     <select resultOrdered="true" id="get受給者給付実績" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranMybatisParameter" 
@@ -133,7 +134,7 @@ SELECT
 	DbT7060A."jigyoshaName" AS T2_jigyoshaName,																										
 	'',																	
 	'',
-        DbT3118."meisho2" AS DbT3118_meisho2															
+        DbT3118."meisho2" AS DbT31183017_meisho2															
 FROM																												
 	rgdb."DbT3017KyufujissekiKihon" AS DbT3017																											
 LEFT JOIN 
@@ -640,58 +641,59 @@ LEFT JOIN
     
     <select resultOrdered="true" id="getSelectAll" 
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranRelateEntity" fetchSize="500">
-    SELECT		
-    JKJITable.入力識別番号,
-    JKJITable.証記載保険者番号,
-    JKJITable.被保険者番号,
-    JKJITable.サービス提供年月,
-    JKJITable.事業所番号,
-    JKJITable.給付実績区分コード,
-    JKJITable.公費1_負担者番号,
-    JKJITable.公費1_受給者番号,
-    JKJITable.公費2_負担者番号,
-    JKJITable.公費2_受給者番号,
-    JKJITable.公費3_負担者番号,
-    JKJITable.公費3_受給者番号,
-    JKJITable.要介護状態区分コード,
-    JKJITable.後_保険_サービス単位数,
-    JKJITable.後_保険_請求額,
-    JKJITable.後_保険_利用者負担額,
-    JKJITable.後_緊急時施設療養費請求額,
-    JKJITable.後_保険_特定診療費請求額,
-    JKJITable.後_保険_特定入所者介護サービス費等請求額,
-    JKJITable.後_公費1_サービス単位数,
-    JKJITable.後_公費1_請求額,
-    JKJITable.後_公費1_本人負担額,
-    JKJITable.後_公費1_緊急時施設療養費請求額,
-    JKJITable.後_公費1_特定診療費請求額,
-    JKJITable.後_公費1_特定入所者介護サービス費等請求額,
-    JKJITable.後_公費2_サービス単位数,
-    JKJITable.後_公費2_請求額,
-    JKJITable.後_公費2_本人負担額,
-    JKJITable.後_公費2_緊急時施設療養費請求額,
-    JKJITable.後_公費2_特定診療費請求額,
-    JKJITable.後_公費2_特定入所者介護サービス費等請求額,
-    JKJITable.後_公費3_サービス単位数,
-    JKJITable.後_公費3_請求額,
-    JKJITable.後_公費3_本人負担額,
-    JKJITable.後_公費3_緊急時施設療養費請求額,
-    JKJITable.後_公費3_特定診療費請求額,
-    JKJITable.後_公費3_特定入所者介護サービス費等請求額,
-    JKJITable.審査年月,
-    JKJITable.識別コード,
-    JKJITable.市町村コード,
-    JKJITable.被保険者氏名,
-    JKJITable.被保険者カナ,
-    JKJITable.住所,
-    JKJITable.町域コード,
-    JKJITable.行政区コード,
-    JKJITable.世帯コード,
-    JKJITable.事業者名称,
-    JKJITable.要介護状態区分名称,
-    JKJITable.給付実績区分名称,
-    JKJITable.様式
-        FROM																			
-        "JukyusyaKyufuJiqsekiIchiranhyouTable"	AS JKJITable																	
+        SELECT		
+            JKJITable."入力識別番号" AS "inputShikibetsuNo",
+            JKJITable."証記載保険者番号",
+            JKJITable."被保険者番号" AS "hiHokenshaNo",
+            JKJITable."サービス提供年月" AS "serviceTeikyoYM",
+            JKJITable."事業所番号" AS "jigyoshoNo",
+            JKJITable."給付実績区分コード" AS "kyufuJissekiKubunCode",
+            JKJITable."公費1_負担者番号",
+            JKJITable."公費1_受給者番号",
+            JKJITable."公費2_負担者番号",
+            JKJITable."公費2_受給者番号",
+            JKJITable."公費3_負担者番号",
+            JKJITable."公費3_受給者番号",
+            JKJITable."要介護状態区分コード" AS "yoKaigoJotaiKubunCode",
+            JKJITable."後_保険_サービス単位数",
+            JKJITable."後_保険_請求額",
+            JKJITable."後_保険_利用者負担額",
+            JKJITable."後_緊急時施設療養費請求額",
+            JKJITable."後_保険_特定診療費請求額",
+            JKJITable."後_保険_特定入所者介護サービス費等請求額",
+            JKJITable."後_公費1_サービス単位数",
+            JKJITable."後_公費1_請求額",
+            JKJITable."後_公費1_本人負担額",
+            JKJITable."後_公費1_緊急時施設療養費請求額",
+            JKJITable."後_公費1_特定診療費請求額",
+            JKJITable."後_公費1_特定入所者介護サービス費等請求額",
+            JKJITable."後_公費2_サービス単位数",
+            JKJITable."後_公費2_請求額",
+            JKJITable."後_公費2_本人負担額",
+            JKJITable."後_公費2_緊急時施設療養費請求額",
+            JKJITable."後_公費2_特定診療費請求額",
+            JKJITable."後_公費2_特定入所者介護サービス費等請求額",
+            JKJITable."後_公費3_サービス単位数",
+            JKJITable."後_公費3_請求額",
+            JKJITable."後_公費3_本人負担額",
+            JKJITable."後_公費3_緊急時施設療養費請求額",
+            JKJITable."後_公費3_特定診療費請求額",
+            JKJITable."後_公費3_特定入所者介護サービス費等請求額",
+            JKJITable."審査年月" AS "shinsaYM",
+            JKJITable."識別コード",
+            JKJITable."市町村コード" AS "shichosonCode",
+            JKJITable."被保険者氏名",
+            JKJITable."被保険者カナ" AS "kanaMeisho",
+            JKJITable."住所",
+            JKJITable."町域コード" AS "choikiCode",
+            JKJITable."行政区コード" AS "gyoseikuCode",
+            JKJITable."世帯コード" AS "setaiCode",
+            JKJITable."事業者名称",
+            JKJITable."要介護状態区分名称",
+            JKJITable."給付実績区分名称",
+            JKJITable."様式" AS "meishoCode"
+         FROM																			
+            "JukyusyaKyufuJiqsekiIchiranhyouTable" AS JKJITable	
+        ${出力順}																
     </select>
 </mapper>

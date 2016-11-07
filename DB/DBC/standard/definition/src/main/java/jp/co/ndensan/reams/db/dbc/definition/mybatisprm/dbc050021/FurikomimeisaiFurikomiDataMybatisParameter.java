@@ -44,6 +44,7 @@ public class FurikomimeisaiFurikomiDataMybatisParameter implements IMyBatisParam
     private FlexibleYearMonth 開始受取年月;
     private FlexibleYearMonth 終了受取年月;
     private RString 出力順;
+    private RString 処理名;
 
     /**
      * コンストラクタ。
@@ -56,9 +57,11 @@ public class FurikomimeisaiFurikomiDataMybatisParameter implements IMyBatisParam
      * @param 終了年月日 FlexibleDate
      * @param 開始受取年月 FlexibleYearMonth
      * @param 終了受取年月 FlexibleYearMonth
+     * @param 処理名 RString
      */
     public FurikomimeisaiFurikomiDataMybatisParameter(RString 支払方法, RString 抽出対象, FlexibleDate 対象作成年月日,
-            boolean 再処理フラグ, FlexibleDate 開始年月日, FlexibleDate 終了年月日, FlexibleYearMonth 開始受取年月, FlexibleYearMonth 終了受取年月) {
+            boolean 再処理フラグ, FlexibleDate 開始年月日, FlexibleDate 終了年月日,
+            FlexibleYearMonth 開始受取年月, FlexibleYearMonth 終了受取年月, RString 処理名) {
         this.支払方法 = 支払方法;
         this.抽出対象 = 抽出対象;
         this.対象作成年月日 = 対象作成年月日;
@@ -67,6 +70,7 @@ public class FurikomimeisaiFurikomiDataMybatisParameter implements IMyBatisParam
         this.終了年月日 = 終了年月日;
         this.開始受取年月 = 開始受取年月;
         this.終了受取年月 = 終了受取年月;
+        this.処理名 = 処理名;
         this.支給不支給区分_1 = ShikyuFushikyuKubun.支給.getコード();
         this.支払方法区分_2 = ShiharaiHohoKubun.口座払.getコード();
         this.支払方法区分_1 = ShiharaiHohoKubun.窓口払.getコード();

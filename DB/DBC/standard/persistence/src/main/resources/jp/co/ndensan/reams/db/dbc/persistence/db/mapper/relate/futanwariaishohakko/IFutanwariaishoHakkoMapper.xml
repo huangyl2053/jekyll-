@@ -589,7 +589,7 @@
             rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
         WHERE 
             "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
-            AND  "DbT7022ShoriDateKanri"."shoriName" = '負担割合証発行（一括）'
+            AND  "DbT7022ShoriDateKanri"."shoriName" = '負担割合証一括発行'
             <if test="出力対象==0">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0000' </if>
             <if test="出力対象==1">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0001' </if>
             <if test="出力対象==2">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0002' </if>
@@ -646,14 +646,14 @@
          "DbT3113RiyoshaFutanWariai"."nendo" as "dbT3113RiyoshaFutanWariai_nendo",
          "DbT3113RiyoshaFutanWariai"."hihokenshaNo" as "dbT3113RiyoshaFutanWariai_hihokenshaNo",
          "DbT3113RiyoshaFutanWariai"."rirekiNo" as "dbT3113RiyoshaFutanWariai_rirekiNo",
-         "DbT3113RiyoshaFutanWariai"."insertDantaiCd" as "dbT3113RiyoshaFutanWariai_insertDantaiCd",
-         "DbT3113RiyoshaFutanWariai"."insertTimestamp" as "dbT3113RiyoshaFutanWariai_insertTimestamp",
-         "DbT3113RiyoshaFutanWariai"."insertReamsLoginId" as "dbT3113RiyoshaFutanWariai_insertReamsLoginId",
-         "DbT3113RiyoshaFutanWariai"."insertContextId" as "dbT3113RiyoshaFutanWariai_insertContextId",
-         "DbT3113RiyoshaFutanWariai"."isDeleted" as "dbT3113RiyoshaFutanWariai_isDeleted",
-         "DbT3113RiyoshaFutanWariai"."updateCount" as "dbT3113RiyoshaFutanWariai_updateCount",
-         "DbT3113RiyoshaFutanWariai"."lastUpdateTimestamp" as "dbT3113RiyoshaFutanWariai_lastUpdateTimestamp",
-         "DbT3113RiyoshaFutanWariai"."lastUpdateReamsLoginId" as "dbT3113RiyoshaFutanWariai_lastUpdateReamsLoginId",
+         NULL as "dbT3113RiyoshaFutanWariai_insertDantaiCd",
+         NULL as "dbT3113RiyoshaFutanWariai_insertTimestamp",
+         NULL as "dbT3113RiyoshaFutanWariai_insertReamsLoginId",
+         NULL as "dbT3113RiyoshaFutanWariai_insertContextId",
+         NULL as "dbT3113RiyoshaFutanWariai_isDeleted",
+         NULL as "dbT3113RiyoshaFutanWariai_updateCount",
+         NULL as "dbT3113RiyoshaFutanWariai_lastUpdateTimestamp",
+         NULL as "dbT3113RiyoshaFutanWariai_lastUpdateReamsLoginId",
          "DbT3113RiyoshaFutanWariai"."hakoFuyoFlag" as "dbT3113RiyoshaFutanWariai_hakoFuyoFlag",
          "DbT3113RiyoshaFutanWariai"."shokenFlag" as "dbT3113RiyoshaFutanWariai_shokenFlag",
          "DbT3113RiyoshaFutanWariai"."hanteiYMD" as "dbT3113RiyoshaFutanWariai_hanteiYMD",

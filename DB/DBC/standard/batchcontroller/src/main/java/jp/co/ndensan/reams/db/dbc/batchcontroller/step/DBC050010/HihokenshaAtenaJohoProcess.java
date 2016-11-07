@@ -102,7 +102,7 @@ public class HihokenshaAtenaJohoProcess extends BatchProcessBase<HihokenshaAtena
         }
         RString 編集住所 = 住所Editor.editJusho(管内管外区分, 住所, 番地, 方書, 行政区名, 市町村コード);
 
-        FurikomiDetailTempTableEntity tempTableEntity = new FurikomiDetailTempTableEntity();
+        FurikomiDetailTempTableEntity tempTableEntity = entity.get振込明細Entity();
         tempTableEntity.setShikibetsuCode(識別対象.get識別コード());
         tempTableEntity.setShimeiKana(識別対象.get名称().getKana());
         tempTableEntity.setShimei(識別対象.get名称().getName());

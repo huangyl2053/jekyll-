@@ -9,7 +9,7 @@
         <id column="dbT1001HihokenshaDaicho_idoYMD" />
         <id column="dbT1001HihokenshaDaicho_edaNo" />
         <association property="資格情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
-        <association property="収納情報" resultMap="ResultMap_ShunoJohoEntity"/>
+        <collection property="収納情報List" resultMap="ResultMap_ShunoJohoEntity"/>
     </resultMap>
     
     <resultMap id="ResultMap_ShunoJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShunoJohoEntity" autoMapping="true">
@@ -113,7 +113,7 @@
           AND 賦課Newest."dbT2002Fuka_choteiNendo"  = 時効起算日管理."dbT4023JikoKisambiKanri_choteiNendo"
           AND 賦課Newest."dbT2002Fuka_fukaNendo"    = 時効起算日管理."dbT4023JikoKisambiKanri_fukaNendo"
           AND 賦課Newest."dbT2002Fuka_tsuchishoNo"  = 時効起算日管理."dbT4023JikoKisambiKanri_tsuchishoNo"
-          AND 介護期別."dbT2003Kibetsu_ki"           = CAST(時効起算日管理."dbT4023JikoKisambiKanri_shuno_Ki_Tsuki" AS integer)
+          AND LPAD(介護期別."dbT2003Kibetsu_ki"::varchar,3,'0') = 時効起算日管理."dbT4023JikoKisambiKanri_shuno_Ki_Tsuki"
           AND 介護期別."dbT2003Kibetsu_choshuHouhou"  = 時効起算日管理."dbT4023JikoKisambiKanri_tokucho_FuchoKubun"
         ) AS 収納情報
         ON 資格情報."dbT1001HihokenshaDaicho_hihokenshaNo" = 収納情報."dbT2002Fuka_hihokenshaNo"

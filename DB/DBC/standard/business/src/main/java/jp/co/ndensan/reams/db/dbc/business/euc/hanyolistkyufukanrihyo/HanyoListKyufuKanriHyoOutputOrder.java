@@ -38,7 +38,7 @@ public enum HanyoListKyufuKanriHyoOutputOrder implements IReportItems {
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号(new RString("0103"), new RString(""), new RString("\"KyufuKanrihyo_shokisaiHokenshaNo\"")),
+    証記載保険者番号(new RString("0103"), new RString(""), new RString("\"kyufuKanrihyo_shokisaiHokenshaNo\"")),
     /**
      * 被保険者番号
      */

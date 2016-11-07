@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020001;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207011.DBD207011_ShiharaiHohoHenkoTainoshaHaakuListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020001.ShiharaiHohoHenkoHakuListMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020001.DBD2020001ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
@@ -44,7 +45,7 @@ public class ShiharaiHohoHenkoHakuListMain {
         div.getTxtTainoNengetsuNinteiYMD().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanNinteiYMD().getValue()));
         div.getTxtTainoNengetsuShokanShinseisha().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanShinseisha().getValue()));
         div.getTxtTainoNengetsuShokanKettei().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanKettei().getValue()));
-
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200006.getReportId());
         return ResponseData.of(div).respond();
     }
 
@@ -77,16 +78,44 @@ public class ShiharaiHohoHenkoHakuListMain {
         div.getChkShokanKetteiYMD().setDisabled(false);
 
         div.getTxtTainoKikanHihokenshaAll().setDisabled(true);
-        div.getTxtTainoKikanJukyushaAll().setDisabled(true);
-        div.getTxtTainoKikanNinteiShinseisha().setDisabled(true);
-        div.getTxtNinteiDateFrom().setDisabled(true);
-        div.getTxtNinteiYMDTo().setDisabled(true);
-        div.getTxtTainoKikanNinteiYMD().setDisabled(true);
-        div.getTxtTainoKikanShokanShinseisha().setDisabled(true);
-        div.getTxtShokanKetteiYMDFrom().setDisabled(true);
-        div.getTxtShokanKetteiYMDTo().setDisabled(true);
-        div.getTxtTainoKikanShokanKettei().setDisabled(true);
+        if (div.getChkJukyushaAll().getSelectedKeys() != null && !div.getChkJukyushaAll().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanJukyushaAll().setDisabled(false);
+        } else {
+            div.getTxtTainoKikanJukyushaAll().setDisabled(true);
+        }
 
+        if (div.getChkNinteiShinseisha().getSelectedKeys() != null && !div.getChkNinteiShinseisha().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanNinteiShinseisha().setDisabled(false);
+        } else {
+            div.getTxtTainoKikanNinteiShinseisha().setDisabled(true);
+        }
+
+        if (div.getChkNinteiYMD().getSelectedKeys() != null && !div.getChkNinteiYMD().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanNinteiYMD().setDisabled(false);
+            div.getTxtNinteiDateFrom().setDisabled(false);
+            div.getTxtNinteiYMDTo().setDisabled(false);
+        } else {
+
+            div.getTxtTainoKikanNinteiYMD().setDisabled(true);
+            div.getTxtNinteiDateFrom().setDisabled(true);
+            div.getTxtNinteiYMDTo().setDisabled(true);
+        }
+
+        if (div.getChkShokanShinseisha().getSelectedKeys() != null && !div.getChkShokanShinseisha().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanShokanShinseisha().setDisabled(false);
+        } else {
+            div.getTxtTainoKikanShokanShinseisha().setDisabled(true);
+        }
+
+        if (div.getChkShokanKetteiYMD().getSelectedKeys() != null && !div.getChkShokanKetteiYMD().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanShokanKettei().setDisabled(false);
+            div.getTxtShokanKetteiYMDFrom().setDisabled(false);
+            div.getTxtShokanKetteiYMDTo().setDisabled(false);
+        } else {
+            div.getTxtTainoKikanShokanKettei().setDisabled(true);
+            div.getTxtShokanKetteiYMDFrom().setDisabled(true);
+            div.getTxtShokanKetteiYMDTo().setDisabled(true);
+        }
         div.getRadHihokenshaAll().clearSelectedItem();
         return ResponseData.of(div).respond();
     }

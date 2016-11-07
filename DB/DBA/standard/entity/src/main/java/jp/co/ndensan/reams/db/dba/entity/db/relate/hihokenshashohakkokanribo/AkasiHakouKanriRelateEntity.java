@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 証発行管理リスト情報EntityListです。
+ * 証発行管理リスト情報RelateEntityです。
  *
  * @reamsid_L DBA-0600-020 zhangguopeng
  */
@@ -29,6 +29,7 @@ public class AkasiHakouKanriRelateEntity {
     private boolean koumukumeyifukaflg;
     private boolean renbanfukaflg;
     private boolean hizikehensyuuflg;
+//    private AkasiHakouKanriEntity akasiHakouKanriEntity;
     private List<AkasiHakouKanriEntity> akasiHakouKanriEntityList;
 
 }

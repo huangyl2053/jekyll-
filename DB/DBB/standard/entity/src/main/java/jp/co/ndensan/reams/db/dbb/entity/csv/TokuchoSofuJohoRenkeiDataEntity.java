@@ -45,9 +45,9 @@ public class TokuchoSofuJohoRenkeiDataEntity {
     private RString データ生年月日;
     @FldField(order = 27, length = 1)
     private RString データ性別;
-    @FldField(order = 28, length = 75)
+    @FldField(order = 28, length = 75, align = Align.Left, paddingChar = " ")
     private RString データ氏名カナ;
-    @FldField(order = 29, length = 3, align = Align.Left, paddingChar = " ")
+    @FldField(order = 29, length = 3)
     private RString データ氏名シフトコード1;
     @FldField(order = 30, length = 75, align = Align.Left, paddingChar = "　")
     private RString データ氏名漢字1;
@@ -55,9 +55,9 @@ public class TokuchoSofuJohoRenkeiDataEntity {
     private RString データ氏名シフトコード2;
     @FldField(order = 32, length = 7)
     private RString データ住所郵便番号;
-    @FldField(order = 33, length = 240)
+    @FldField(order = 33, length = 240, align = Align.Left, paddingChar = " ")
     private RString データ住所カナ;
-    @FldField(order = 34, length = 3, align = Align.Left, paddingChar = " ")
+    @FldField(order = 34, length = 3)
     private RString データ住所シフトコード3;
     @FldField(order = 35, length = 240, align = Align.Left, paddingChar = "　")
     private RString データ住所漢字2;
@@ -71,11 +71,11 @@ public class TokuchoSofuJohoRenkeiDataEntity {
     private RString データ後期移管コード;
     @FldField(order = 40, length = 8)
     private RString データ各種年月日;
-    @FldField(order = 41, length = 11, align = Align.Left, paddingChar = "0")
+    @FldField(order = 41, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額1;
-    @FldField(order = 42, length = 11, align = Align.Left, paddingChar = "0")
+    @FldField(order = 42, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額2;
-    @FldField(order = 43, length = 11, align = Align.Left, paddingChar = "0")
+    @FldField(order = 43, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額3;
     @FldField(order = 44, length = 58)
     private RString データ予備3;

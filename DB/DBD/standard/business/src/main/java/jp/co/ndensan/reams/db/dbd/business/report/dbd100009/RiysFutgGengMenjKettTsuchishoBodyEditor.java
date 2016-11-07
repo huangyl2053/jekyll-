@@ -367,7 +367,7 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
             sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
         }
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
-        source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
+        source.gyoseiku = sofubutsuAtesakiSource.gyoseiku;
         // source.jusho4 = sofubutsuAtesakiSource.j;
         if (sofubutsuAtesakiSource.jushoText == null) {
             RStringBuilder jusho1 = new RStringBuilder(sofubutsuAtesakiSource.jusho1);
@@ -383,6 +383,8 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         // source.katagaki4 = RString.EMPTY;
         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
         // source.shimei3 = RString.EMPTY;
+        source.shimei1 = sofubutsuAtesakiSource.shimei1;
+        source.shimei2 = sofubutsuAtesakiSource.shimei2;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
         source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;

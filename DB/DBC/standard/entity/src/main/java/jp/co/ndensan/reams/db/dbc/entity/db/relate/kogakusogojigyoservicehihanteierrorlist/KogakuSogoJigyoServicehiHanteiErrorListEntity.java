@@ -19,8 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuSogoJigyoServicehiHanteiErrorListEntity {
 
-    private FlexibleYearMonth 審査年月From;
-    private FlexibleYearMonth 審査年月To;
+    private FlexibleYearMonth 審査年月;
     private RString 被保険者番号;
     private RString 被保険者名;
     private ShikibetsuCode 識別コード;

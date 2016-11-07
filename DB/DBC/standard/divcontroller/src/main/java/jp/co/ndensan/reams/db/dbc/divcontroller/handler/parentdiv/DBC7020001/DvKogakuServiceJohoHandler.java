@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -95,6 +97,7 @@ public class DvKogakuServiceJohoHandler {
     private static final RString KEY_REBANFUKA = new RString("rebanFuka");
     private static final RString KEY_HIZUKEHESHU = new RString("hizukeHeshu");
     private static final RString KEY_SHUTSURYOKUJU = new RString("shutsuryokuju");
+    private static final RString KEY_KINYUKIKANSHITENCODE = new RString("kinyuKikanShitenCode");
 
     /**
      * コンストラクタです。
@@ -260,10 +263,10 @@ public class DvKogakuServiceJohoHandler {
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedKey());
         batchparam.setKiyuKikanCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .getKinyuKikanCode() == null ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
+                        .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
         batchparam.setKiyuKikanName(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .get金融機関() == null ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
-                .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
+                        .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
         batchparam.setReamsLoginId(ControlDataHolder.getUserId());
         batchParamterHandleParentAdd(batchparam);
         batchParamterHandleSubAdd(batchparam);
@@ -321,6 +324,12 @@ public class DvKogakuServiceJohoHandler {
             pairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.終了日が開始日以前),
                     div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKetteiJohoUketoriYM()));
+            return pairs;
+        }
+
+        if (div.getCcdKogakuShutsuryokujun().get出力順ID() == null) {
+            pairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.出力順序を指定)));
             return pairs;
         }
         return pairs;
@@ -406,7 +415,7 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setShutsuryokuju(div.getCcdKogakuShutsuryokujun().get出力順ID());
         batchparam.setShutsuryokuTomoku(div.getCcdKogakuShutsuryokuKomoku().get出力項目ID()
                 .isEmpty() ? RString.EMPTY : div
-                .getCcdKogakuShutsuryokuKomoku().get出力項目ID());
+                        .getCcdKogakuShutsuryokuKomoku().get出力項目ID());
         batchparam.setTomokumeFuka(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(項目名));
         batchparam.setRebanFuka(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(連番));
         batchparam.setHizukeHeshu(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ));
@@ -581,14 +590,10 @@ public class DvKogakuServiceJohoHandler {
         }
         RString 金融機関コード = restoreBatchParameterMap.getParameterValue(RString.class, KEY_KIYUKIKANCODE);
         RString 金融機関名称 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_KIYUKIKANNAME);
-        KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
+        KinyuKikanShitenCode 支店コード = restoreBatchParameterMap.getParameterValue(KinyuKikanShitenCode.class, KEY_KINYUKIKANSHITENCODE);
         if (!RString.isNullOrEmpty(金融機関コード) && !RString.isNullOrEmpty(金融機関名称)) {
-            KinyuKikan 金融機関 = kinyuKikanManager.getValidKinyuKikanOn(FlexibleDate.getNowDate(), 金融機関コード.substring(INDEX_0, INDEX_4));
-            if (金融機関 != null) {
-                div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().set金融機関(金融機関);
-            }
+            set金融機関(金融機関コード, 支店コード);
         }
-
         FlexibleDate 申請日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_SHISEHIFROM);
         if (申請日From != null && !申請日From.isEmpty()) {
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate().setFromValue(new RDate(申請日From.toString()));
@@ -661,6 +666,19 @@ public class DvKogakuServiceJohoHandler {
             div.getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701019.getReportId(), 出力順);
         }
         getKinyuKikanSeigyo();
+    }
+
+    private void set金融機関(RString 金融機関コード, KinyuKikanShitenCode 支店コード) {
+        if (支店コード != null && !支店コード.isEmpty()) {
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().search(new KinyuKikanCode(金融機関コード),
+                    支店コード, FlexibleDate.getNowDate());
+        } else {
+            KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
+            KinyuKikan 金融機関 = kinyuKikanManager.getValidKinyuKikanOn(FlexibleDate.getNowDate(), 金融機関コード.substring(INDEX_0, INDEX_4));
+            if (金融機関 != null) {
+                div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().set金融機関(金融機関);
+            }
+        }
     }
 
     private static class IdocheckMessages implements IValidationMessage {

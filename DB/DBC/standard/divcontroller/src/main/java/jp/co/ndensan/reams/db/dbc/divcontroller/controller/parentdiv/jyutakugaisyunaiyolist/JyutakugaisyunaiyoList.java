@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoKannaiEdit
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -28,8 +27,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -40,10 +41,11 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class JyutakugaisyunaiyoList {
 
-    private static final RString モード_追加 = new RString("登録");
-    private static final RString モード_修正 = new RString("更新");
+    private static final RString モード_追加 = new RString("追加");
+    private static final RString モード_修正 = new RString("修正");
     private static final RString モード_削除 = new RString("削除");
     private static final RString モード_選択 = new RString("選択");
+    private static final RString CONMA = new RString(",");
 
     /**
      * 追加ボタンを押下した際に実行します。
@@ -100,8 +102,7 @@ public class JyutakugaisyunaiyoList {
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_CopyButton(JyutakugaisyunaiyoListDiv requestDiv) {
         ShikibetsuCode shikibetsuCode = DataPassingConverter.deserialize(
                 requestDiv.getJushoData(), ShikibetsuCode.class);
-
-        requestDiv.getTxtJyusyo().setDomain(new AtenaJusho(get連結住所(shikibetsuCode)));
+        requestDiv.getTxtJyusyo().setValue(get連結住所(shikibetsuCode));
         requestDiv.getBtnClear().setDisabled(false);
         requestDiv.getBtnDetailConfirm().setDisabled(false);
         requestDiv.getBtnHonnijyusyoCopy().setDisabled(false);
@@ -162,7 +163,7 @@ public class JyutakugaisyunaiyoList {
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
             dgGaisyuListRow = new dgGaisyuList_Row();
-            dgGaisyuListRow.setTxtJyotai(モード_追加);
+            dgGaisyuListRow.setRowState(RowState.Added);
             dgGaisyuListRow.setTxtSeiriNo(RString.EMPTY);
             list.add(listRowSet(dgGaisyuListRow, requestDiv));
         } else {
@@ -183,15 +184,15 @@ public class JyutakugaisyunaiyoList {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
-            if (!モード_追加.equals(dgGaisyuListRow.getTxtJyotai())) {
-                dgGaisyuListRow.setTxtJyotai(モード_修正);
+            if (!RowState.Added.equals(dgGaisyuListRow.getRowState())) {
+                dgGaisyuListRow.setRowState(RowState.Modified);
             }
             listRowSet(dgGaisyuListRow, requestDiv);
         } else if (モード_削除.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-            if (モード_追加.equals(dgGaisyuListRow.getTxtJyotai())) {
+            if (RowState.Added.equals(dgGaisyuListRow.getRowState())) {
                 requestDiv.getDgGaisyuList().getDataSource().remove(dgGaisyuListRow);
             } else {
-                dgGaisyuListRow.setTxtJyotai(モード_削除);
+                dgGaisyuListRow.setRowState(RowState.Deleted);
             }
         }
         return null;
@@ -240,8 +241,7 @@ public class JyutakugaisyunaiyoList {
         requestDiv.getTxtKaisyunaiyo().setValue(dgGaisyuListRow.getTxtKaishuNaiyo());
         requestDiv.getTxtJigyosya().setValue(dgGaisyuListRow.getTxtJigyosha());
         if (dgGaisyuListRow.getTxtJutakuAddress() != null) {
-            AtenaJusho domain = new AtenaJusho(dgGaisyuListRow.getTxtJutakuAddress());
-            requestDiv.getTxtJyusyo().setDomain(domain);
+            requestDiv.getTxtJyusyo().setValue(dgGaisyuListRow.getTxtJutakuAddress());
         }
         if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtChakkoYoteibi())) {
             requestDiv.getTxtTyakkoyotebi().setValue(new RDate(dgGaisyuListRow.getTxtChakkoYoteibi().toString()));
@@ -250,7 +250,8 @@ public class JyutakugaisyunaiyoList {
             requestDiv.getTxtKanseyotebi().setValue(new RDate(dgGaisyuListRow.getTxtKanseiYoteibi().toString()));
         }
         if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKaishuKingaku())) {
-            requestDiv.getTxtKaisyukingaku().setValue(new Decimal(dgGaisyuListRow.getTxtKaishuKingaku().toString().trim()));
+            requestDiv.getTxtKaisyukingaku().setValue(new Decimal(
+                    dgGaisyuListRow.getTxtKaishuKingaku().toString().replaceAll(CONMA.toString(), RString.EMPTY.toString()).trim()));
         }
     }
 
@@ -260,7 +261,7 @@ public class JyutakugaisyunaiyoList {
         div.getTxtJigyosya().setValue(RString.EMPTY);
         div.getTxtJigyosya().setDisabled(true);
         div.getBtnHonnijyusyoCopy().setDisabled(true);
-        div.getTxtJyusyo().clearDomain();
+        div.getTxtJyusyo().clearValue();
         div.getTxtJyusyo().setDisabled(true);
         div.getTxtTyakkoyotebi().clearValue();
         div.getTxtTyakkoyotebi().setDisabled(true);
@@ -307,7 +308,7 @@ public class JyutakugaisyunaiyoList {
     private JyutakugaisyunaiyoListDiv clear内容(JyutakugaisyunaiyoListDiv div) {
         div.getTxtKaisyunaiyo().setValue(RString.EMPTY);
         div.getTxtJigyosya().setValue(RString.EMPTY);
-        div.getTxtJyusyo().clearDomain();
+        div.getTxtJyusyo().clearValue();
         div.getTxtTyakkoyotebi().clearValue();
         div.getTxtKanseyotebi().clearValue();
         div.getTxtKaisyukingaku().clearValue();
@@ -315,7 +316,7 @@ public class JyutakugaisyunaiyoList {
     }
 
     private dgGaisyuList_Row listRowSet(dgGaisyuList_Row dgGaisyuListRow, JyutakugaisyunaiyoListDiv requestDiv) {
-        dgGaisyuListRow.setTxtJutakuAddress(requestDiv.getTxtJyusyo().getDomain().getColumnValue());
+        dgGaisyuListRow.setTxtJutakuAddress(requestDiv.getTxtJyusyo().getValue());
         dgGaisyuListRow.setTxtKaishuNaiyo(new RString(requestDiv.getTxtKaisyunaiyo().getValue().toString()));
         if (requestDiv.getTxtTyakkoyotebi().getValue() == null) {
             dgGaisyuListRow.setTxtChakkoYoteibi(RString.EMPTY);
@@ -330,7 +331,7 @@ public class JyutakugaisyunaiyoList {
         if (requestDiv.getTxtKaisyukingaku().getValue() == null) {
             dgGaisyuListRow.setTxtKaishuKingaku(RString.EMPTY);
         } else {
-            dgGaisyuListRow.setTxtKaishuKingaku(new RString(requestDiv.getTxtKaisyukingaku().getValue().toString()));
+            dgGaisyuListRow.setTxtKaishuKingaku(DecimalFormatter.toコンマ区切りRString(requestDiv.getTxtKaisyukingaku().getValue(), 0));
         }
         dgGaisyuListRow.setTxtJigyosha(requestDiv.getTxtJigyosya().getValue());
         return dgGaisyuListRow;

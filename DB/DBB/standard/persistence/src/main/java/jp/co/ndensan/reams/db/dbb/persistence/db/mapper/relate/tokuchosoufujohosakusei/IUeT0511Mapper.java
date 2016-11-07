@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujoho
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 
 /**
  * ビジネス設計_DBBBZ84001_3_特徴制度間Ｉ／Ｆ（バッチ）のMapperクラスです。

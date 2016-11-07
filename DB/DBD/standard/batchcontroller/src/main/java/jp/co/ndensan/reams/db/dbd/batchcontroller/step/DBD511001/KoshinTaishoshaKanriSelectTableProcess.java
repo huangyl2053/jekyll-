@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
@@ -106,14 +106,16 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
     protected void process(KoshinTaishoshaKanriEntity entity) {
         isInsert = true;
         DbT4101NinteiShinseiJohoEntity dbT4101Entity = entity.getDbT4101NinteiShinseiJohoEntity();
-        DbT4102NinteiKekkaJohoEntity dbT4102Entity = entity.getDbT4102NinteiKekkaJohoEntity();
+//        DbT4102NinteiKekkaJohoEntity dbT4102Entity = entity.getDbT4102NinteiKekkaJohoEntity();
+        
+        DbT4001JukyushaDaichoEntity dbT4001Entity = entity.getDbT4001JukyushaDaichoEntity();
         RString 申請書管理番号 = new RString(getCountedItem(SubGyomuCode.DBD介護受給,
                 parameter.get市町村コード()).next());
         DbT4101NinteiShinseiJohoEntity insertDbT4101Entity = new DbT4101NinteiShinseiJohoEntity();
-        setDbT4101Entity(insertDbT4101Entity, dbT4102Entity, dbT4101Entity, 申請書管理番号);
+        setDbT4101Entity(insertDbT4101Entity, dbT4001Entity, dbT4101Entity, 申請書管理番号);
         dbT4101tableWriter.insert(insertDbT4101Entity);
         DbT4121ShinseiRirekiJohoEntity insertDbT4121Entity = new DbT4121ShinseiRirekiJohoEntity();
-        setDbT4121ShinseiRirekiJohoEntity(insertDbT4121Entity, dbT4102Entity, 申請書管理番号);
+        setDbT4121ShinseiRirekiJohoEntity(insertDbT4121Entity, dbT4001Entity, 申請書管理番号);
         dbT4121tableWriter.insert(insertDbT4121Entity);
         dbT4123tableWriter.insert(getDbT4123NinteiKeikakuJohoEntity(申請書管理番号));
         dbT5105tableWriter.insert(getDbT5105NinteiKanryoJohoEntity(申請書管理番号));
@@ -135,7 +137,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
                 new RString(市町村コード.toString() + rDate.getYear().getYearValue() + rDate.getMonthValue()));
     }
 
-    private void setDbT4101Entity(DbT4101NinteiShinseiJohoEntity entity, DbT4102NinteiKekkaJohoEntity ninteiEntity,
+    private void setDbT4101Entity(DbT4101NinteiShinseiJohoEntity entity, DbT4001JukyushaDaichoEntity ninteiEntity,
             DbT4101NinteiShinseiJohoEntity dbEntity, RString 申請書管理番号) {
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         entity.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード));
@@ -182,10 +184,10 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
         entity.setKoikinaiTenkyoKubun(広域内転居区分);
         entity.setNinteiShinseiYukoKubunCode(認定申請有効区分);
         entity.setShinseiServiceDeleteRiyu(RString.EMPTY);
-        entity.setZenYokaigoKubunCode(ninteiEntity.getNijiHanteiYokaigoJotaiKubunCode());
-        entity.setZenkaiNinteiYMD(ninteiEntity.getNijiHanteiYMD());
-        entity.setZenkaiYukoKikanStart(ninteiEntity.getNijiHanteiNinteiYukoKaishiYMD());
-        entity.setZenkaiYukoKikanEnd(ninteiEntity.getNijiHanteiNinteiYukoShuryoYMD());
+        entity.setZenYokaigoKubunCode(ninteiEntity.getYokaigoJotaiKubunCode());
+        entity.setZenkaiNinteiYMD(ninteiEntity.getNinteiYMD());
+        entity.setZenkaiYukoKikanStart(ninteiEntity.getNinteiYukoKikanKaishiYMD());
+        entity.setZenkaiYukoKikanEnd(ninteiEntity.getNinteiYukoKikanShuryoYMD());
         entity.setJohoteikyoSiryoOutputYMD(FlexibleDate.EMPTY);
         entity.setChosaKubun(Code.EMPTY);
         entity.setNinteiChosaItakusakiCode(ChosaItakusakiCode.EMPTY);
@@ -217,7 +219,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
     }
 
     private void setDbT4121ShinseiRirekiJohoEntity(DbT4121ShinseiRirekiJohoEntity entity,
-            DbT4102NinteiKekkaJohoEntity ninteiEntity, RString 申請書管理番号) {
+            DbT4001JukyushaDaichoEntity ninteiEntity, RString 申請書管理番号) {
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         entity.setZenkaiShinseishoKanriNo(ninteiEntity.getShinseishoKanriNo());
     }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC8120011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.jikofutangakukeisanikkatsu.JikoFutangakuKeisanIkkatsuPanelBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020080.DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120011.JikoFutangakuKeisanIkkatsuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8120011.JikoFutangakuKeisanIkkatsuPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8120011.JikoFutangakuKeisanIkkatsuPanelValidationHandler;
@@ -92,16 +92,16 @@ public class JikoFutangakuKeisanIkkatsuPanel {
      * @param div ShinNendoKanriJohoSakuseiDiv
      * @return ResponseData
      */
-    public ResponseData<JikoFutangakuKeisanIkkatsuPanelBatchParameter> onClick_JikoFutangakuKeisanIkkatsuPanel(JikoFutangakuKeisanIkkatsuPanelDiv div) {
+    public ResponseData<DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter> onClick_JikoFutangakuKeisanIkkatsuPanel(JikoFutangakuKeisanIkkatsuPanelDiv div) {
         LockingKey 排他キー = new LockingKey(ResponseHolder.getMenuID());
         RealInitialLocker.release(排他キー);
-        JikoFutangakuKeisanIkkatsuPanelBatchParameter param = setBatchParameter(div);
+        DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter param = setBatchParameter(div);
         return ResponseData.of(param).respond();
     }
 
-    private JikoFutangakuKeisanIkkatsuPanelBatchParameter setBatchParameter(JikoFutangakuKeisanIkkatsuPanelDiv div) {
+    private DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter setBatchParameter(JikoFutangakuKeisanIkkatsuPanelDiv div) {
         RString 被保険者番号指定RAD = new RString("hihokenshaNo");
-        JikoFutangakuKeisanIkkatsuPanelBatchParameter parameter = new JikoFutangakuKeisanIkkatsuPanelBatchParameter();
+        DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter parameter = new DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter();
         RString 出力対象区分;
         if (被保険者番号指定RAD.equals(div.getRadHihokenshaNo().getSelectedKey())) {
             出力対象区分 = 出力対象_2;
@@ -123,7 +123,7 @@ public class JikoFutangakuKeisanIkkatsuPanel {
             出力フラグ = false;
             parameter.setShutsuryokujunId(null);
         }
-        parameter.setShoriTime(RDate.getNowDate().toDateString());
+        parameter.setShoriTime(RDate.getNowDateTime());
         parameter.setRadSakuseiJoken(出力対象区分);
         parameter.setShuturyokuFlg(出力フラグ);
         Association 市町村コード_Temp = AssociationFinderFactory.createInstance().getAssociation();

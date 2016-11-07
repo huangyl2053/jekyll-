@@ -4,18 +4,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiH
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-0300-010 houtianpeng
  */
 public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -116,6 +118,8 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private RString hdnTxtSubGyomuCode;
     @JsonProperty("hdnTxtShikibetsuCode")
     private RString hdnTxtShikibetsuCode;
+    @JsonProperty("hdnGridSelectButtonDisplay")
+    private RString hdnGridSelectButtonDisplay;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -772,6 +776,24 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /*
+     * gethdnGridSelectButtonDisplay
+     * @return hdnGridSelectButtonDisplay
+     */
+    @JsonProperty("hdnGridSelectButtonDisplay")
+    public RString getHdnGridSelectButtonDisplay() {
+        return hdnGridSelectButtonDisplay;
+    }
+
+    /*
+     * sethdnGridSelectButtonDisplay
+     * @param hdnGridSelectButtonDisplay hdnGridSelectButtonDisplay
+     */
+    @JsonProperty("hdnGridSelectButtonDisplay")
+    public void setHdnGridSelectButtonDisplay(RString hdnGridSelectButtonDisplay) {
+        this.hdnGridSelectButtonDisplay = hdnGridSelectButtonDisplay;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -792,7 +814,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -807,11 +829,11 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
     }
 
-    public void setMode_DisplayMode( DisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    public void setMode_DisplayMode(DisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     public static enum PageMode implements ICommonChildDivMode {
@@ -832,7 +854,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
             PageMode[] enumArray = PageMode.values();
 
             for (PageMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -847,11 +869,11 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     public PageMode getMode_PageMode() {
-        return (PageMode) _CommonChildDivModeUtil.getMode( this.modes, PageMode.class );
+        return (PageMode) _CommonChildDivModeUtil.getMode(this.modes, PageMode.class);
     }
 
-    public void setMode_PageMode( PageMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, PageMode.class , value );
+    public void setMode_PageMode(PageMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, PageMode.class, value);
     }
 
     // </editor-fold>
@@ -947,6 +969,26 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /**
+     * 契約事業者名を取得します。
+     *
+     * @param 契約事業者名 AtenaMeisho
+     */
+    @Override
+    public void set契約事業者名(AtenaMeisho 契約事業者名) {
+        getHandler().set契約事業者名(契約事業者名);
+    }
+
+    /**
+     * 契約番号を取得します。
+     *
+     * @param 契約事業者 RString
+     */
+    @Override
+    public void set契約事業者(RString 契約事業者) {
+        getHandler().set契約事業者(契約事業者);
+    }
+
+    /**
      * 支払場所を取得します。
      *
      * @return RString
@@ -975,4 +1017,15 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     public ValidationMessageControlPairs validateCheck() {
         return getValidationHandler().validateCheck();
     }
+
+    /**
+     * クリアを行う。
+     */
+    @Override
+    public void clear() {
+        getHandler().clear口座払い();
+        getHandler().clear受領委任払い();
+        getHandler().clear必須項目();
+    }
+
 }

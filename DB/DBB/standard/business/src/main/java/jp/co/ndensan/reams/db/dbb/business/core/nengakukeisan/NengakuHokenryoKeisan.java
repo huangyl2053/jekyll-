@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei.HasuChoseiFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.hasuchosei.IHasuChosei;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
@@ -45,16 +44,16 @@ public class NengakuHokenryoKeisan {
         // ①-1 集計
         //List<NengakuHokenryoHoji> nengakuhokenryohoji = new ArrayList<>();
         //NengakuHokenryoHoji nengakuhokenryohoji = new NengaokuHokenryoHoji();
-        Map<RString, HokenryoDankai> hokenryoDankaiMap = nengakuHokenryoKeisanParameter.get年額賦課根拠().get月別保険料段階().createHokenryoDankaiMap();
+        Map<RString, RString> hokenryoDankaiMap = nengakuHokenryoKeisanParameter.get年額賦課根拠().get月別保険料段階().createHokenryoDankaiMap();
         Map<RString, RString> rankMap = nengakuHokenryoKeisanParameter.get年額賦課根拠().createRankMap();
-        Set<Map.Entry<RString, HokenryoDankai>> set = hokenryoDankaiMap.entrySet();
-        Iterator<Map.Entry<RString, HokenryoDankai>> it = set.iterator();
+        Set<Map.Entry<RString, RString>> set = hokenryoDankaiMap.entrySet();
+        Iterator<Map.Entry<RString, RString>> it = set.iterator();
 
-        if (it.hasNext()) {
-            Map.Entry<RString, HokenryoDankai> entry = it.next();
+        while (it.hasNext()) {
+            Map.Entry<RString, RString> entry = it.next();
             RString key = entry.getKey();
             if (kikannaiShikakuUmu(nengakuHokenryoKeisanParameter, key)) {
-                dankaiShukei(hokenryoDankaiMap.get(key).getSystemDankai(), rankMap.get(key));
+                dankaiShukei(hokenryoDankaiMap.get(key), rankMap.get(key));
             }
         }
 
@@ -95,7 +94,8 @@ public class NengakuHokenryoKeisan {
                 nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格取得日().getMonthValue(), 1);
         //shutokuYMD.add(Calendar.MONTH, 1);
 
-        if (nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日() != null) {
+        if (nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日() != null
+                && !nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().isEmpty()) {
             //soshitsuYMD.setTime(input.get年額賦課根拠().get資格喪失日());
             soshitsuYMD.set(nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().getYearValue(),
                     nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().getMonthValue(), 1);
@@ -103,11 +103,8 @@ public class NengakuHokenryoKeisan {
                     && taishoYMD.compareTo(soshitsuYMD) < 0) {
                 result = true;
             }
-        } else {
-            if (shutokuYMD.compareTo(taishoYMD) <= 0) {
-                result = true;
-            }
-
+        } else if (shutokuYMD.compareTo(taishoYMD) <= 0) {
+            result = true;
         }
         return result;
     }
@@ -124,11 +121,9 @@ public class NengakuHokenryoKeisan {
                         && rank == null) {
                     umuHantei = true;
                     break;
-                } else {
-                    if (nengakuHokenryoHojiList.get(idx).getRank().equals(rank)) {
-                        umuHantei = true;
-                        break;
-                    }
+                } else if (nengakuHokenryoHojiList.get(idx).getRank().equals(rank)) {
+                    umuHantei = true;
+                    break;
                 }
 
             }

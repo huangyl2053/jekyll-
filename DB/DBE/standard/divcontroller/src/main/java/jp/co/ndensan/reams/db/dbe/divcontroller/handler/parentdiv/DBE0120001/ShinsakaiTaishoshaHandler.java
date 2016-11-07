@@ -81,8 +81,12 @@ public class ShinsakaiTaishoshaHandler {
                         FlexibleDate.getNowDate()));
             }
             div.getTxtKaisaiDate().setValue(予定情報.getShinsakaiKaisaiYoteiYMD());
-            div.getTxtYoteiKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
-            div.getTxtYoteiShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiYoteiTime().insert(2, ":")));
+            if (!RString.isNullOrEmpty(予定情報.getShinsakaiKaishiTime())) {
+                div.getTxtYoteiKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
+            }
+            if (!RString.isNullOrEmpty(予定情報.getShinsakaiKaishiYoteiTime())) {
+                div.getTxtYoteiShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiYoteiTime().insert(2, ":")));
+            }
             if (予定情報.isGogitaiSeishinkaSonzaiFlag()) {
                 List<RString> key = new ArrayList<>();
                 key.add(new RString("key0"));
@@ -96,8 +100,12 @@ public class ShinsakaiTaishoshaHandler {
                         FlexibleDate.getNowDate()));
             }
             div.getTxtKaisaiDateKekka().setValue(予定情報.getShinsakaiKaisaiYMD());
-            div.getTxtKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
-            div.getTxtShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiShuryoYoteiTime().insert(2, ":")));
+            if (!RString.isNullOrEmpty(予定情報.getShinsakaiKaishiTime())) {
+                div.getTxtKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
+            }
+            if (!RString.isNullOrEmpty(予定情報.getShinsakaiShuryoYoteiTime())) {
+                div.getTxtShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiShuryoYoteiTime().insert(2, ":")));
+            }
             div.getTxtShoyoTime().setValue(new Decimal(予定情報.getShoyoJikanGokei()));
             div.getTxtJissiNinzu().setValue(new Decimal(予定情報.getShinsakaiJisshiNinzu()));
         }
@@ -113,37 +121,37 @@ public class ShinsakaiTaishoshaHandler {
             row.setShimei(shinsakaiTai.getHihokenshaName().getColumnValue());
             try {
                 row.setSeibetsu(Seibetsu.toValue(shinsakaiTai.getSeibetsu().getColumnValue()).get名称());
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | NullPointerException e) {
                 row.setSeibetsu(RString.EMPTY);
             }
             try {
                 row.setHihokenshaKubun(HihokenshaKubunCode.toValue(shinsakaiTai.getHihokenshaKubunCode()).get名称());
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | NullPointerException e) {
                 row.setHihokenshaKubun(RString.EMPTY);
             }
             try {
                 row.setSihinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(
                         shinsakaiTai.getNinteiShinseiShinseijiKubunCode().getColumnValue()).get名称());
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | NullPointerException e) {
                 row.setSihinseiKubunShinseiji(RString.EMPTY);
             }
             row.getShinseiDay().setValue(shinsakaiTai.getNinteiShinseiYMD());
             try {
                 row.setKonkaiIchijiHantei(IchijiHanteiKekkaCode09.toValue(shinsakaiTai.getIchijiHanteiKekkaCode().getColumnValue()).get名称());
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | NullPointerException e) {
                 row.setKonkaiIchijiHantei(RString.EMPTY);
             }
             try {
                 row.setKonkaiNijiHantei(YokaigoJotaiKubun09.toValue(
                         shinsakaiTai.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()).get名称());
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | NullPointerException e) {
                 row.setKonkaiNijiHantei(RString.EMPTY);
             }
             if (shinsakaiTai.getNinchishoNichijoSeikatsuJiritsudoCode() != null) {
                 try {
                     row.setChosahyoNetakirido(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
                             shinsakaiTai.getNinchishoNichijoSeikatsuJiritsudoCode().getColumnValue()).get名称());
-                } catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException | NullPointerException e) {
                     row.setChosahyoNetakirido(RString.EMPTY);
                 }
             }

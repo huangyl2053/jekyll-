@@ -60,7 +60,8 @@ public class DBC140020_JukyushaKyufujissekiIchiran extends BatchFlowBase<DBC1400
      */
     @Step(帳票作成条件抽出)
     protected IBatchFlowCommand tyouhyouSakuseiProcess() {
-        return loopBatch(TyouhyouSakuseiProcess.class).define();
+        return loopBatch(TyouhyouSakuseiProcess.class)
+                .arguments(getParameter().toJukyushaKyufujissekiIchiranProcessParameter()).define();
     }
 
 }

@@ -36,6 +36,10 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<JigyouHo
     @BatchWriter
     private BatchPermanentTableWriter<DbT7021JigyoHokokuTokeiDataEntity> dbT7021EntityWriter;
     private static final int INDEX_4 = 4;
+    private static final RString 給付集計区分_1 = new RString("1");
+    private static final RString 給付集計区分_2 = new RString("2");
+    private static final Code 表番号_1 = new Code("01");
+    private static final Code 表番号_3 = new Code("03");
 
     @Override
     protected void initialize() {
@@ -63,9 +67,13 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<JigyouHo
             dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年月().substring(0, INDEX_4)));
             dbT7021Entity.setShukeiTaishoM(processParameter.get集計年月().substring(INDEX_4));
         }
-        // TODO  内部QA：1757 Redmine：#102256(統計対象区分,市町村コード,表番号の取得方式が知らない、一時固定値を使用します)
         dbT7021Entity.setToukeiTaishoKubun(new RString("1"));
-        dbT7021Entity.setShichosonCode(new LasdecCode("123456"));
+        dbT7021Entity.setShichosonCode(new LasdecCode(processParameter.get市町村コード()));
+        if (給付集計区分_1.equals(processParameter.get給付集計区分())) {
+            dbT7021Entity.setHyoNo(表番号_1);
+        } else if (給付集計区分_2.equals(processParameter.get給付集計区分())) {
+            dbT7021Entity.setHyoNo(表番号_3);
+        }
         dbT7021Entity.setHyoNo(new Code("2"));
         dbT7021Entity.setShukeiNo(rstringToCode(entity.getShukeiNum()));
         dbT7021Entity.setShukeiTani(new Code("1"));

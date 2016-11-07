@@ -31,7 +31,7 @@ public class NenreiKeikyuBetsuRiyoJyokyoEditor implements INenreiKeikyuBetsuRiyo
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final int 非該当 = 3;
+    private static final int 非該当 = 4;
     private final NenreiKeikyuBetsuRiyoJyokyoEntity data;
 
     /**
@@ -110,8 +110,7 @@ public class NenreiKeikyuBetsuRiyoJyokyoEditor implements INenreiKeikyuBetsuRiyo
             return RString.EMPTY;
         }
         date = date.substring(非該当);
-        return new RDate(date.toString()).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return date;
     }
 
 }

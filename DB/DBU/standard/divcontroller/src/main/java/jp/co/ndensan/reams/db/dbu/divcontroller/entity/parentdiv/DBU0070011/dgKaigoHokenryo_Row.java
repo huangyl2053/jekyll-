@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0070011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jul 23 17:59:15 CST 2016 
+ * Tue Nov 01 14:44:08 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgKaigoHokenryo_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString dankaiKubun;
     private RString dankai;

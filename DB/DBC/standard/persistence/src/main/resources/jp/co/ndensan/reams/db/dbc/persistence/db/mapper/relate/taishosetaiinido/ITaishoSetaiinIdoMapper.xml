@@ -35,7 +35,6 @@
            FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS B
            WHERE B."setaiCode" = #{世帯コード}
              AND B."nendo" = #{処理年度}) AS A
-        WHERE A."row_number" = 1
 </select>
 
 <select resultOrdered="true" id="対象世帯員クラスTempに更新"  

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -105,4 +106,5 @@ public class KogakugassanShikyuKetteitsuchisho {
     private RString 文書7;
     private RString 通知書番号;
     private int 通番;
+    private ShikibetsuCode 識別コード;
 }

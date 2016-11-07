@@ -6,14 +6,16 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 対象者自動割付のバチパラメータクラスです。
  *
  * @reamsid_L DBE-1350-040 wangxiaodong
  */
-@lombok.Getter
-@lombok.Setter
+@Getter
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBE510001_ShinsakaiAutoWaritsukeParameter extends BatchParameterBase {
 
@@ -35,6 +37,7 @@ public class DBE510001_ShinsakaiAutoWaritsukeParameter extends BatchParameterBas
      * コンストラクタです。
      */
     public DBE510001_ShinsakaiAutoWaritsukeParameter() {
+
     }
 
     /**

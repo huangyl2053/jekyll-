@@ -24,6 +24,8 @@ public class KyufuJissekiKoshinReadCsvFileProcessParameter implements IBatchProc
     private RString 保存先フォルダ;
     private List<RString> エントリ情報List;
     private int 連番;
+    private int データ登録件数;
+    private int 明細登録件数;
     private boolean isLast;
 
 }

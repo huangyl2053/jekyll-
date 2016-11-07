@@ -161,7 +161,7 @@
         <include refid="shichosonCode" />
     </sql>
     <sql id="shichosonCode">
-        <if test ="構成市町村区分 == 1">
+        <if test ="構成市町村区分 == 1 or (構成市町村区分 == 0 and 旧市町村区分 == 0)">
             AND #{市町村コード} = "shichosonCode"
         </if>
         <if test ="旧市町村区分 == 1">
@@ -796,15 +796,14 @@
         WHERE
           SUBSTRING("serviceTeikyoYM", 5) IN ('08','09','10','11','12')
     </update>
-    <update id="update負担割合区分と負担割合エラーフラグ_一回目" >
-        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" AS temp
-        SET
-          "futanWariaiErrorFlag" = '0'
-          , "futanWariaiKubun" = ( 
+    <select id="getFutanWariaiKubun"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString" 
+            resultOrdered="true" fetchSize="500">
             SELECT
               dbT3114."futanWariaiKubun" 
             FROM
-              rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS dbT3114 
+              rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS dbT3114,
+              "tempDwbTKyufujissekiShukeiKonkyo1" AS temp 
             WHERE
               dbT3114."hihokenshaNo" = temp."hihokenshaNo" 
               AND dbT3114."nendo" = temp."futanWariaiNendo" 
@@ -825,7 +824,13 @@
                   , A."nendo" 
                 LIMIT 1
                 )
-          ) 
+              LIMIT 1
+    </select>
+    <update id="update負担割合区分と負担割合エラーフラグ_一回目" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" >
+        UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" AS temp
+        SET
+          "futanWariaiErrorFlag" = '0'
+          , "futanWariaiKubun" = #{futanWariaiKubun}
     </update>
     <update id="update負担割合区分と負担割合エラーフラグ_二回目" >
         UPDATE "tempDwbTKyufujissekiShukeiKonkyo1" 

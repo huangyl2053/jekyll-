@@ -31,4 +31,7 @@ public class KetteJohoEntity implements Cloneable, Serializable {
     private RString hushikyuRiyu;
     private Integer zougenten;
     private RString kounyuKaishuRireki;
+    private FlexibleDate ketteiTsuchishoSakuseiYMD;
+    private RString ketteiTsuchiNo;
+    private FlexibleDate furikomiMeisaishoSakuseiYMD;
 }

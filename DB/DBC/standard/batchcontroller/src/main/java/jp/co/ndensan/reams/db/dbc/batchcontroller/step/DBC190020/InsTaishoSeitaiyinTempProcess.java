@@ -113,7 +113,7 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
         taiShoEntity.setKazeiKubun(世帯員所得情報一時.getKazeiKubunGemmenGo());
         taiShoEntity.setKazeiShotokuGaku(世帯員所得情報一時.getKazeiShotokuGaku());
 
-        taiShoEntity.setNenkinShunyuGaku(世帯員所得情報一時.getNenkiniShotokuGaku());
+        taiShoEntity.setNenkinShunyuGaku(世帯員所得情報一時.getNenkiniShunyuGaku());
 
         if (getDecimal(世帯員所得情報一時.getNenkiniShotokuGaku()).compareTo(getDecimal(世帯員所得情報一時.getGokeiShotokuGaku())) <= 0) {
             taiShoEntity.setSonotanoGoukeiShotokuKingakuGoukei(
@@ -155,7 +155,7 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
             }
         } else if (RSTRING_2.equals(parameter.get処理区分())) {
 
-            taiShoEntity.setHennshuuZokugaraCode(宛名.get続柄());
+            taiShoEntity.setHennshuuZokugaraCode(宛名.get続柄コードリスト().toTsuzukigaraCode().value());
             AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), JuminJotai.住民, FlexibleDate.MAX, parameter.get世帯員把握基準日2());
             taiShoEntity.setAge(ageCalculator.get年齢());
             if (宛名.is住民() && 宛名.is日本人()) {

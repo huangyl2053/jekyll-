@@ -278,10 +278,10 @@
         <if test="is保険者コード">
             AND (
             (被保険者台帳管理."koikinaiJushochiTokureiFlag" <![CDATA[<>]]> '1'
-            AND 被保険者台帳管理."shichosonCode" = #{保険者コード})
+            AND 被保険者台帳管理."shichosonCode" = #{市町村コード})
             OR
             (被保険者台帳管理."koikinaiJushochiTokureiFlag" = '1'
-            AND 被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" = #{保険者コード})
+            AND 被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
             )
         </if>
         )AS 基準収入額適用情報

@@ -162,7 +162,7 @@
         DbT2007KibetsuChoshuYuyo.*
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.noDeleted_DbT2002Fuka" />) AS DbT2002Fuka
-        LEFT JOIN
+        INNER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo.IChoshuYuyoJohoRelateMapper.noDeleted_DbV2006ChoshuYuyo" />) AS DbT2006ChoshuYuyo
         ON
         DbT2002Fuka."dbT2002Fuka_choteiNendo" = DbT2006ChoshuYuyo."dbT2006ChoshuYuyo_choteiNendo" and

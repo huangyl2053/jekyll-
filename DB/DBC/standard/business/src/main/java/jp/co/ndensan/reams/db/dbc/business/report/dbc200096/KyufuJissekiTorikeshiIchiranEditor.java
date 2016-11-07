@@ -37,6 +37,7 @@ public class KyufuJissekiTorikeshiIchiranEditor
     private final int 連番;
     private static final RString SAKUSEI = new RString("作成");
     private static final RString INDEX_1 = new RString("1");
+    private static final RString INDEX_2 = new RString("2");
     private static final RString 前符号タイトル = new RString("※");
     private static final RString 年度タイトル = new RString("年度");
     private static final RString 被保険者番号タイトル = new RString("被保険者番号");
@@ -80,16 +81,19 @@ public class KyufuJissekiTorikeshiIchiranEditor
             source.cityCode = getColumnValue(association.get地方公共団体コード());
             source.cityName = association.get市町村名();
         }
-        if (出力順.equals(INDEX_1)) {
+        if (INDEX_1.equals(出力順)) {
             source.sort1 = 年度タイトル;
             source.sort2 = 被保険者番号タイトル;
-        } else {
+            source.sort3 = サービス提供年月タイトル;
+        } else if (INDEX_2.equals(出力順)) {
             source.sort1 = 被保険者番号タイトル;
             source.sort2 = 年度タイトル;
+            source.sort3 = サービス提供年月タイトル;
         }
 
-        source.sort3 = サービス提供年月タイトル;
-        source.listKyufuJisseki_1 = new RString(this.連番);
+        if (連番 != 0) {
+            source.listKyufuJisseki_1 = new RString(this.連番);
+        }
         edit更正対象給付実績情報(source);
 
     }

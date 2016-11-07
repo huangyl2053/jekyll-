@@ -72,6 +72,7 @@ public class ShichosonSentakuFinder {
         }
         return SearchResult.of(kenCodeList, 0, false);
     }
+
     /**
      * 合併市町村選択情報を取得する。
      *

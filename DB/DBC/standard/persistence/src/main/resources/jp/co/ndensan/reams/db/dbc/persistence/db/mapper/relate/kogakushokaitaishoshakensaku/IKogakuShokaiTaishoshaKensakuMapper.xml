@@ -37,7 +37,7 @@
         ON      "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"
             AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
             AND "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"
-        LEFT JOIN (SELECT 台帳A."shikibetsuCode",
+        INNER JOIN (SELECT 台帳A."shikibetsuCode",
                           台帳WK."最新被保険者番号",
                           台帳WK."サービス提供年月"
                    FROM rgdb."DbT1001HihokenshaDaicho" AS 台帳A
@@ -77,16 +77,16 @@
                 AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" <![CDATA[<=]]> #{提供年月To} 
         </if>
         <if test="申請年月From != null and !申請年月From.isEmpty()">
-                AND #{申請年月From} || '01' <![CDATA[<=]]> "DbT3056KogakuShikyuShinsei"."shinseiYMD" 
+                AND #{申請年月From} <![CDATA[<=]]> "DbT3056KogakuShikyuShinsei"."shinseiYMD" 
         </if>
         <if test="申請年月To != null and !申請年月To.isEmpty()">
-                AND "DbT3056KogakuShikyuShinsei"."shinseiYMD" <![CDATA[<=]]> #{申請年月To} || '01' 
+                AND "DbT3056KogakuShikyuShinsei"."shinseiYMD" <![CDATA[<=]]> #{申請年月To}
         </if>
         <if test="決定年月From != null and !決定年月From.isEmpty()">
-                AND #{決定年月From} || '01' <![CDATA[<=]]> "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" 
+                AND #{決定年月From} <![CDATA[<=]]> "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" 
         </if>
         <if test="決定年月To != null and !決定年月To.isEmpty()">
-                AND "DbaNo" ASC,T3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{決定年月To} || '01' 
+                AND "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{決定年月To}
         </if>
         ORDER BY
             "DbT3056KogakuShikyuShinsei"."hihokenshaNo" ASC,
@@ -139,7 +139,7 @@
         ON      "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."hihokenshaNo"
             AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
             AND "DbT3110JigyoKogakuShikyuShinsei"."rirekiNo" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."rirekiNo"
-        LEFT JOIN (SELECT 台帳A."shikibetsuCode",
+        INNER JOIN (SELECT 台帳A."shikibetsuCode",
                           台帳WK."最新被保険者番号",
                           台帳WK."サービス提供年月"
                    FROM rgdb."DbT1001HihokenshaDaicho" AS 台帳A
@@ -179,16 +179,16 @@
                 AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" <![CDATA[<=]]> #{提供年月To} 
         </if>
         <if test="申請年月From != null and !申請年月From.isEmpty()">
-                AND #{申請年月From} || '01' <![CDATA[<=]]> "DbT3110JigyoKogakuShikyuShinsei"."shinseiYMD" 
+                AND #{申請年月From} <![CDATA[<=]]> "DbT3110JigyoKogakuShikyuShinsei"."shinseiYMD" 
         </if>
         <if test="申請年月To != null and !申請年月To.isEmpty()">
-                AND "DbT3110JigyoKogakuShikyuShinsei"."shinseiYMD" <![CDATA[<=]]> #{申請年月To} || '01'
+                AND "DbT3110JigyoKogakuShikyuShinsei"."shinseiYMD" <![CDATA[<=]]> #{申請年月To}
         </if>
         <if test="決定年月From != null and !決定年月From.isEmpty()">
-                AND #{決定年月From} || '01' <![CDATA[<=]]> "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" 
+                AND #{決定年月From} <![CDATA[<=]]> "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" 
         </if>
         <if test="決定年月To != null and !決定年月To.isEmpty()">
-                AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{決定年月To} || '01' 
+                AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{決定年月To}
         </if>
         ORDER BY
             "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" ASC,

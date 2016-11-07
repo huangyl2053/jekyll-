@@ -155,7 +155,7 @@ public class JigoSakuseiMeisaiTouroku {
             合計計算情報.set保険対象利用者負担額(合計計算情報.get費用総額().subtract(合計計算情報.get保険給付額()));
         }
 
-        Decimal 全額利用者負担額 = (種類限度超過単位.add(区分限度超過単位)).multiply(単位数単価);
+        Decimal 全額利用者負担額 = (種類限度超過単位.add(区分限度超過単位)).multiply(nullToZero(単位数単価));
         合計計算情報.set全額利用者負担額(小数点以下を切り(全額利用者負担額));
 
         return 合計計算情報;

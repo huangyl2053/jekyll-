@@ -1,0 +1,152 @@
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011;
+/*
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * TokubetsuKyufuJigyoshaCode のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+public class TokubetsuKyufuJigyoshaCodeDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    /*
+     * [ private の作成 ]
+     * クライアント側から取得した情報を元にを検索を行い
+     * コントロール名とフィールド名を取得する
+     * private + コントロール名 + フィールド名 の文字列を作成
+     */
+    @JsonProperty("ddlKenCode")
+    private DropDownList ddlKenCode;
+    @JsonProperty("txtJigyoshaKubun")
+    private TextBoxCode txtJigyoshaKubun;
+    @JsonProperty("txtGunshiCode")
+    private TextBoxCode txtGunshiCode;
+    @JsonProperty("txtRenban")
+    private TextBoxCode txtRenban;
+    @JsonProperty("txtCheckDigit")
+    private TextBoxCode txtCheckDigit;
+    @JsonProperty("btnSetCheckDigit")
+    private Button btnSetCheckDigit;
+
+    /*
+     * [ GetterとSetterの作成 ]
+     * クライアント側から取得した情報を元に検索を行い
+     * コントロール名とフィールド名を取得する
+     * フィールド名のGetterとSetter を作成
+     */
+    /*
+     * getddlKenCode
+     * @return ddlKenCode
+     */
+    @JsonProperty("ddlKenCode")
+    public DropDownList getDdlKenCode() {
+        return ddlKenCode;
+    }
+
+    /*
+     * setddlKenCode
+     * @param ddlKenCode ddlKenCode
+     */
+    @JsonProperty("ddlKenCode")
+    public void setDdlKenCode(DropDownList ddlKenCode) {
+        this.ddlKenCode = ddlKenCode;
+    }
+
+    /*
+     * gettxtJigyoshaKubun
+     * @return txtJigyoshaKubun
+     */
+    @JsonProperty("txtJigyoshaKubun")
+    public TextBoxCode getTxtJigyoshaKubun() {
+        return txtJigyoshaKubun;
+    }
+
+    /*
+     * settxtJigyoshaKubun
+     * @param txtJigyoshaKubun txtJigyoshaKubun
+     */
+    @JsonProperty("txtJigyoshaKubun")
+    public void setTxtJigyoshaKubun(TextBoxCode txtJigyoshaKubun) {
+        this.txtJigyoshaKubun = txtJigyoshaKubun;
+    }
+
+    /*
+     * gettxtGunshiCode
+     * @return txtGunshiCode
+     */
+    @JsonProperty("txtGunshiCode")
+    public TextBoxCode getTxtGunshiCode() {
+        return txtGunshiCode;
+    }
+
+    /*
+     * settxtGunshiCode
+     * @param txtGunshiCode txtGunshiCode
+     */
+    @JsonProperty("txtGunshiCode")
+    public void setTxtGunshiCode(TextBoxCode txtGunshiCode) {
+        this.txtGunshiCode = txtGunshiCode;
+    }
+
+    /*
+     * gettxtRenban
+     * @return txtRenban
+     */
+    @JsonProperty("txtRenban")
+    public TextBoxCode getTxtRenban() {
+        return txtRenban;
+    }
+
+    /*
+     * settxtRenban
+     * @param txtRenban txtRenban
+     */
+    @JsonProperty("txtRenban")
+    public void setTxtRenban(TextBoxCode txtRenban) {
+        this.txtRenban = txtRenban;
+    }
+
+    /*
+     * gettxtCheckDigit
+     * @return txtCheckDigit
+     */
+    @JsonProperty("txtCheckDigit")
+    public TextBoxCode getTxtCheckDigit() {
+        return txtCheckDigit;
+    }
+
+    /*
+     * settxtCheckDigit
+     * @param txtCheckDigit txtCheckDigit
+     */
+    @JsonProperty("txtCheckDigit")
+    public void setTxtCheckDigit(TextBoxCode txtCheckDigit) {
+        this.txtCheckDigit = txtCheckDigit;
+    }
+
+    /*
+     * getbtnSetCheckDigit
+     * @return btnSetCheckDigit
+     */
+    @JsonProperty("btnSetCheckDigit")
+    public Button getBtnSetCheckDigit() {
+        return btnSetCheckDigit;
+    }
+
+    /*
+     * setbtnSetCheckDigit
+     * @param btnSetCheckDigit btnSetCheckDigit
+     */
+    @JsonProperty("btnSetCheckDigit")
+    public void setBtnSetCheckDigit(Button btnSetCheckDigit) {
+        this.btnSetCheckDigit = btnSetCheckDigit;
+    }
+
+    // </editor-fold>
+}

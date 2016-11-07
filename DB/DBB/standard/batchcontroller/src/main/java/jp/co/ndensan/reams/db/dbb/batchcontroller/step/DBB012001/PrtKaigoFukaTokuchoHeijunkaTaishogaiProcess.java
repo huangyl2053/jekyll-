@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.DBB200003_HeijunkaKeisanJuneKekkaIchiran;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TkChoshuHeijunkaKeisanJuneKekkaIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport;
+import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.HeijunkaTaishogaiRiyu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -85,24 +86,11 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
             + ".tokuchoheinjunka6gatsu.ITokuchoHeinjunka6GatsuBatchMapper.get対象外データ");
     private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final RString 対象外データテンプ_テーブル = new RString("対象外データ.");
-    private static final RString 識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 世帯コード = new RString("\"setaiCode\"");
-    private static final RString 賦課_識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 賦課_被保険者番号 = new RString("\"hihokenshaNo\"");
-    private static final RString 賦課_世帯コード = new RString("\"setaiCode\"");
-    private static final RString 編集コード_併徴者 = new RString("併徴者");
-    private static final RString 編集コード_仮徴収額修正者 = new RString("仮徴収額修正者");
-    private static final RString 編集コード_対象外_減額 = new RString("対象外_減額");
-    private static final RString 編集コード_対象外_増額 = new RString("象外_増額");
-    private static final RString 編集コード_特徴6月開始者 = new RString("特徴6月開始者");
     private static final RString CSVファイル = new RString(".csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -150,7 +138,6 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     @Override
     protected void beforeExecute() {
         count = new OutputParameter<>();
-        parameter.set出力順(出力順再設定(出力順));
         保険料段階取得 = new HokenryoDankaiManager();
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200003.getReportId());
@@ -181,7 +168,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         myBatisParameter.set調定年度(parameter.get調定年度());
         myBatisParameter.set賦課年度(parameter.get賦課年度());
         myBatisParameter.set調定前年度(parameter.get調定前年度());
-        myBatisParameter.set出力順(parameter.get出力順());
+        myBatisParameter.set出力順(出力順再設定(出力順));
         myBatisParameter.setShikibetsutaishoParam(parameter.getShikibetsutaishoParam());
         return new BatchDbReader(MAPPERPATH, myBatisParameter);
     }
@@ -444,7 +431,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         taishogaiEntity.set普徴期期別金額12(対象外データTemp.getFuKibetsuGaku12());
         taishogaiEntity.set普徴期期別金額13(対象外データTemp.getFuKibetsuGaku13());
         taishogaiEntity.set普徴期期別金額14(対象外データTemp.getFuKibetsuGaku14());
-        taishogaiEntity.set備考コード(備考名を転換(対象外データ.get備考コード()));
+        taishogaiEntity.set備考コード(HeijunkaTaishogaiRiyu.toValue((対象外データ.get備考コード())).get名称());
         taishogaiEntity.set仮徴収年金コード(対象外データ.get徴収方法Newest_仮徴収_年金コード());
         taishogaiEntity.set宛名の情報(対象外データ.get宛名());
         taishogaiEntity.set特別徴収業務者コード(対象外データ.get特別徴収義務者コード());
@@ -452,43 +439,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         return taishogaiEntity;
     }
 
-    private RString 備考名を転換(RString 編集コード) {
-        RString 備考名 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(編集コード)) {
-            switch (Integer.parseInt(編集コード.toString())) {
-                case NUM_1:
-                    備考名 = 編集コード_併徴者;
-                    break;
-                case NUM_2:
-                    備考名 = 編集コード_仮徴収額修正者;
-                    break;
-                case NUM_3:
-                    備考名 = 編集コード_仮徴収額修正者;
-                    break;
-                case NUM_4:
-                    備考名 = 編集コード_対象外_減額;
-                    break;
-                case NUM_5:
-                    備考名 = 編集コード_対象外_増額;
-                    break;
-                case NUM_6:
-                    備考名 = 編集コード_特徴6月開始者;
-                    break;
-                default:
-                    break;
-            }
-            return 備考名;
-        }
-        return RString.EMPTY;
-    }
-
     private RString 出力順再設定(RString 出力順) {
-        if (出力順.contains(世帯コード)) {
-            出力順 = 出力順.replace(世帯コード, 対象外データテンプ_テーブル.concat(賦課_世帯コード));
-        }
-        if (出力順.contains(識別コード)) {
-            出力順 = 出力順.replace(識別コード, 対象外データテンプ_テーブル.concat(賦課_識別コード));
-        }
         if (出力順.contains(被保険者番号)) {
             出力順 = 出力順.replace(被保険者番号, 対象外データテンプ_テーブル.concat(賦課_被保険者番号));
         }

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiBusiness;
+import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiJukyushaBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiUpdBusiness;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.rirekishusei.RirekiShuseiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.rirekishusei.RirekiShuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.rirekishusei.IRirekiShuseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -42,6 +44,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4301ShujiiIkenshoIraiJ
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4302ShujiiIkenshoJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.DbT4101NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -186,9 +190,12 @@ public class RirekiShuseiManager {
      *
      * @param updDataList 画面データ
      * @param retList 申請書管理番号リスト
+     * @param jukyushaBusList 受給者台帳
+     * @param rirekiJohoList 申請履歴情報
      */
     @Transaction
-    public void save受給履歴(List<RirekiShuseiUpdBusiness> updDataList, List<ShinseishoKanriNo> retList) {
+    public void save受給履歴(List<RirekiShuseiUpdBusiness> updDataList, List<ShinseishoKanriNo> retList,
+            List<RirekiShuseiJukyushaBusiness> jukyushaBusList, List<DbT4121ShinseiRirekiJoho> rirekiJohoList) {
         for (RirekiShuseiUpdBusiness data : updDataList) {
             if (KU_BUN_直.equals(data.getKubun()) || data.getKubun().isEmpty()) {
                 continue;
@@ -224,6 +231,23 @@ public class RirekiShuseiManager {
         }
         for (ShinseishoKanriNo 申請書管理番号 : retList) {
             save申請情報(set認定申請By前回受給者台帳(get認定申請情報(申請書管理番号)));
+        }
+        for (DbT4121ShinseiRirekiJoho rirekiJoho : rirekiJohoList) {
+            save申請履歴情報(rirekiJoho);
+        }
+        RString userId = ControlDataHolder.getUserId();
+        RDateTime updDate = RDateTime.now();
+        IRirekiShuseiMapper mapper = mapperProvider.create(IRirekiShuseiMapper.class);
+        for (RirekiShuseiJukyushaBusiness updBus : jukyushaBusList) {
+            JukyushaDaicho jukyushaDaicho = updBus.get受給者台帳();
+            int updCount = updBus.getUpdateCount();
+            if (!RString.isNullOrEmpty(updBus.getKubun()) && !KU_BUN_直.equals(updBus.getKubun())) {
+                updCount = updCount + 1;
+            }
+            mapper.upd履歴番号(RirekiShuseiMapperParameter.createUpdParam(jukyushaDaicho.get市町村コード(),
+                    jukyushaDaicho.get被保険者番号(), jukyushaDaicho.get履歴番号(),
+                    jukyushaDaicho.get枝番(), jukyushaDaicho.get受給申請事由(), updCount,
+                    updBus.getRirekiNo(), updDate, userId));
         }
     }
 
@@ -269,6 +293,9 @@ public class RirekiShuseiManager {
     }
 
     private boolean save要介護認定申請情報(DbT4101NinteiShinseiJoho 要介護認定申請情報) {
+        if (要介護認定申請情報 == null) {
+            return false;
+        }
         if (!要介護認定申請情報.hasChanged()) {
             return false;
         }
@@ -304,6 +331,9 @@ public class RirekiShuseiManager {
     }
 
     private boolean save申請履歴情報(DbT4121ShinseiRirekiJoho 申請履歴情報) {
+        if (申請履歴情報 == null) {
+            return false;
+        }
         if (!申請履歴情報.hasChanged()) {
             return false;
         }

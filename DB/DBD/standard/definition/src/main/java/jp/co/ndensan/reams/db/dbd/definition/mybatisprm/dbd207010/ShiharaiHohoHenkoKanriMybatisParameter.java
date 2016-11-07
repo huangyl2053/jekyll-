@@ -36,8 +36,8 @@ public class ShiharaiHohoHenkoKanriMybatisParameter implements IMyBatisParameter
     private FlexibleDate 基準日;
     private RDate 基準日RDate;
     private RString 出力順;
-    private int 業務コンフィグ_支払方法変更_支払一時差止期限;
-    private int 業務コンフィグ_支払方法変更_支払方法変更期限;
+    private int 支払方法変更_支払一時差止期限;
+    private int 支払方法変更_支払方法変更期限;
     private FlexibleDate 業務コンフィグ_日付関連_調定年度;
 
     private boolean is登録者選択_0;
@@ -215,11 +215,11 @@ public class ShiharaiHohoHenkoKanriMybatisParameter implements IMyBatisParameter
 
     private void set業務コンフィグ_支払方法変更_支払一時差止期限() {
         RString configValue = DbBusinessConfig.get(ConfigNameDBD.支払方法変更_支払一時差止期限, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
-        業務コンフィグ_支払方法変更_支払一時差止期限 = Integer.parseInt(configValue.toString());
+        支払方法変更_支払一時差止期限 = Integer.parseInt(configValue.toString());
     }
 
     private void set業務コンフィグ_支払方法変更_支払方法変更期限() {
         RString configValue = DbBusinessConfig.get(ConfigNameDBD.支払方法変更_支払方法変更期限, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
-        業務コンフィグ_支払方法変更_支払方法変更期限 = Integer.parseInt(configValue.toString());
+        支払方法変更_支払方法変更期限 = Integer.parseInt(configValue.toString());
     }
 }

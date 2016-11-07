@@ -83,17 +83,19 @@ public class BenmeiTorokuManager {
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
      * @param 審査請求届出日 FlexibleDate
+     * @param 弁明書作成日 FlexibleDate
      * @return BenmeiTorokuMeisaiJoho
      */
     @Transaction
     public BenmeiTorokuMeisaiJoho getBenmeiTorokuMeisaiJoho(
             ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
-            FlexibleDate 審査請求届出日
+            FlexibleDate 審査請求届出日,
+            FlexibleDate 弁明書作成日
     ) {
         IBenmeiTorokuMeisaiJohoMapper benmeiTorokuMapper = mapperProvider.create(IBenmeiTorokuMeisaiJohoMapper.class);
         BenmeiTorokuMeisaiJohoEntity benmeiTorokuMeisaiJohoEntity
-                = benmeiTorokuMapper.getBenmeiTorokuMeisaiJoho(BenmeiTorokuMeisaiJohoParameter.createParam_common(識別コード, 被保険者番号, 審査請求届出日));
+                = benmeiTorokuMapper.getBenmeiTorokuMeisaiJoho(BenmeiTorokuMeisaiJohoParameter.createParam_common(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日));
         if (benmeiTorokuMeisaiJohoEntity != null) {
             return new BenmeiTorokuMeisaiJoho(benmeiTorokuMeisaiJohoEntity);
         }

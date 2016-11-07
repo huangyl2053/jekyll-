@@ -92,22 +92,26 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
         source.kofuMM = setWareki(交付日).substring(INDEX_5, INDEX_7);
         source.kofuDD = setWareki(交付日).substring(INDEX_8, INDEX_10);
 
-        source.futanNo1 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_0, INDEX_1);
-        source.futanNo2 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_1, INDEX_2);
-        source.futanNo3 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_2, INDEX_3);
-        source.futanNo4 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_3, INDEX_4);
-        source.futanNo5 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_4, INDEX_5);
-        source.futanNo6 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_5, INDEX_6);
-        source.futanNo7 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_6, INDEX_7);
-        source.futanNo8 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_7, INDEX_8);
+        if (訪問介護利用者負担額減額.get公費負担者番号() != null && !訪問介護利用者負担額減額.get公費負担者番号().isEmpty()) {
+            source.futanNo1 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_0, INDEX_1);
+            source.futanNo2 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_1, INDEX_2);
+            source.futanNo3 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_2, INDEX_3);
+            source.futanNo4 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_3, INDEX_4);
+            source.futanNo5 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_4, INDEX_5);
+            source.futanNo6 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_5, INDEX_6);
+            source.futanNo7 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_6, INDEX_7);
+            source.futanNo8 = 訪問介護利用者負担額減額.get公費負担者番号().substring(INDEX_7, INDEX_8);
+        }
 
-        source.jukyuNo1 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_0, INDEX_1);
-        source.jukyuNo2 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_1, INDEX_2);
-        source.jukyuNo3 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_2, INDEX_3);
-        source.jukyuNo4 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_3, INDEX_4);
-        source.jukyuNo5 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_4, INDEX_5);
-        source.jukyuNo6 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_5, INDEX_6);
-        source.jukyuNo7 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_6, INDEX_7);
+        if (訪問介護利用者負担額減額.get公費受給者番号() != null && !訪問介護利用者負担額減額.get公費受給者番号().isEmpty()) {
+            source.jukyuNo1 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_0, INDEX_1);
+            source.jukyuNo2 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_1, INDEX_2);
+            source.jukyuNo3 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_2, INDEX_3);
+            source.jukyuNo4 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_3, INDEX_4);
+            source.jukyuNo5 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_4, INDEX_5);
+            source.jukyuNo6 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_5, INDEX_6);
+            source.jukyuNo7 = 訪問介護利用者負担額減額.get公費受給者番号().substring(INDEX_6, INDEX_7);
+        }
 
         EditedKojin 編集後個人 = getEditedKojin(iKojin, 帳票制御共通, 地方公共団体);
         source.jusho = 編集後個人.get編集後住所();

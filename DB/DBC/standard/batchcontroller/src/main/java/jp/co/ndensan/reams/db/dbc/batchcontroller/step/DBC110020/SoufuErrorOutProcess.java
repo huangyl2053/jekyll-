@@ -84,6 +84,7 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
 //    private static final RString CSV_ページ数 = new RString("ページ数");
     private static final RString CSV_作成年月日 = new RString("作成年月日");
     private static final RString CSV_処理年月 = new RString("処理年月");
+    private static final RString RST_SPACE = new RString(" ");
 
     private RString eucFilePath;
     private int 連番;
@@ -102,7 +103,7 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
         RDateTime sysDate = RDate.getNowDateTime();
         RString 年月日 = sysDate.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
         RTime 時刻 = sysDate.getTime();
-        作成年月日 = new RString(年月日.toString()
+        作成年月日 = new RString(年月日.toString() + RST_SPACE
                 + 時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         連番 = 0;
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
@@ -193,8 +194,17 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
         bodyList.add(市町村名称);
         bodyList.add(new RString(連番));
         bodyList.add(entity.get被保険者番号().getColumnValue());
-        bodyList.add(entity.get氏名カナ());
-        bodyList.add(entity.get氏名());
+        if (RString.isNullOrEmpty(entity.get氏名カナ())) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(entity.get氏名カナ());
+        }
+        if (RString.isNullOrEmpty(entity.get氏名カナ())) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(entity.get氏名());
+        }
+
         bodyList.add(dateChangeToRString(entity.get資格取得日()));
         if (entity.get要介護状態区分コード() != null) {
             bodyList.add(entity.get要介護状態区分コード().getColumnValue());

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKyojuhiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -135,8 +135,18 @@ public class tblKyojuhiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiKoshitsu() {
+        return this.celIchikoGaku.getIcoDaiichiKoshitsu();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiKoshitsu() {
         return this.celIchikoGaku.getTxtDaiichiKoshitsu();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaiichiJunKoshitsu() {
+        return this.celIchijunkoGaku.getIcoDaiichiJunKoshitsu();
     }
 
     @JsonIgnore
@@ -145,13 +155,28 @@ public class tblKyojuhiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiTokuyo() {
+        return this.celTokuyoGaku.getIcoDaiichiTokuyo();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiTokuyo() {
         return this.celTokuyoGaku.getTxtDaiichiTokuyo();
     }
 
     @JsonIgnore
+    public Icon getIcoDaiichiRokenRyoyogata() {
+        return this.celRokenryoyoGaku.getIcoDaiichiRokenRyoyogata();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaiichiRokenRyoyogata() {
         return this.celRokenryoyoGaku.getTxtDaiichiRokenRyoyogata();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaiichiTashoshitsu() {
+        return this.celTashoGaku.getIcoDaiichiTashoshitsu();
     }
 
     @JsonIgnore
@@ -165,8 +190,18 @@ public class tblKyojuhiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDainiKoshitsu() {
+        return this.celNikoGaku.getIcoDainiKoshitsu();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDainiKoshitsu() {
         return this.celNikoGaku.getTxtDainiKoshitsu();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDainiJunKoshitsu() {
+        return this.celNijunkoGaku.getIcoDainiJunKoshitsu();
     }
 
     @JsonIgnore
@@ -175,13 +210,28 @@ public class tblKyojuhiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDainiTokuyo() {
+        return this.celNiTokuyoGaku.getIcoDainiTokuyo();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDainiTokuyo() {
         return this.celNiTokuyoGaku.getTxtDainiTokuyo();
     }
 
     @JsonIgnore
+    public Icon getIcoDainiRokenRyoyogata() {
+        return this.celNiRokenryoyoGaku.getIcoDainiRokenRyoyogata();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDainiRokenRyoyogata() {
         return this.celNiRokenryoyoGaku.getTxtDainiRokenRyoyogata();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDainiTashoshitsu() {
+        return this.celNiTashoGaku.getIcoDainiTashoshitsu();
     }
 
     @JsonIgnore
@@ -195,8 +245,18 @@ public class tblKyojuhiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaisanKoshitsu() {
+        return this.celSankoGaku.getIcoDaisanKoshitsu();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaisanKoshitsu() {
         return this.celSankoGaku.getTxtDaisanKoshitsu();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanJunKoshitsu() {
+        return this.celSanjunkoGaku.getIcoDaisanJunKoshitsu();
     }
 
     @JsonIgnore
@@ -205,13 +265,28 @@ public class tblKyojuhiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoDaisanTokuyo() {
+        return this.celSanTokuyoGaku.getIcoDaisanTokuyo();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaisanTokuyo() {
         return this.celSanTokuyoGaku.getTxtDaisanTokuyo();
     }
 
     @JsonIgnore
+    public Icon getIcoDaisanRokenRyoyogata() {
+        return this.celSanRokenryoyoGaku.getIcoDaisanRokenRyoyogata();
+    }
+
+    @JsonIgnore
     public TextBox getTxtDaisanRokenRyoyogata() {
         return this.celSanRokenryoyoGaku.getTxtDaisanRokenRyoyogata();
+    }
+
+    @JsonIgnore
+    public Icon getIcoDaisanTashoshitsu() {
+        return this.celSanTashoGaku.getIcoDaisanTashoshitsu();
     }
 
     @JsonIgnore
@@ -225,8 +300,18 @@ public class tblKyojuhiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuKoshitsu() {
+        return this.celKijukoGaku.getIcoKijunHiyogakuKoshitsu();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuKoshitsu() {
         return this.celKijukoGaku.getTxtKijunHiyogakuKoshitsu();
+    }
+
+    @JsonIgnore
+    public Icon getIcoKijunHiyogakuJunKoshitsu() {
+        return this.celKijunHiyogakuJunKoshitsu.getIcoKijunHiyogakuJunKoshitsu();
     }
 
     @JsonIgnore
@@ -235,13 +320,28 @@ public class tblKyojuhiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuTokuyo() {
+        return this.celKijuTokuyoGaku.getIcoKijunHiyogakuTokuyo();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuTokuyo() {
         return this.celKijuTokuyoGaku.getTxtKijunHiyogakuTokuyo();
     }
 
     @JsonIgnore
+    public Icon getIcoKijunHiyogakuRokenRyoyogata() {
+        return this.celKijuRokenryoyoGaku.getIcoKijunHiyogakuRokenRyoyogata();
+    }
+
+    @JsonIgnore
     public TextBox getTxtKijunHiyogakuRokenRyoyogata() {
         return this.celKijuRokenryoyoGaku.getTxtKijunHiyogakuRokenRyoyogata();
+    }
+
+    @JsonIgnore
+    public Icon getIcoKijunHiyogakuTashoshitsu() {
+        return this.celKijuTashoGaku.getIcoKijunHiyogakuTashoshitsu();
     }
 
     @JsonIgnore
@@ -867,7 +967,7 @@ public class tblKyojuhiDiv extends TablePanel {
  * @author 自動生成
  */
 class celRiyoshafutanAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblRiyoshafutan")
     private Label lblRiyoshafutan;
 
@@ -897,7 +997,7 @@ class celRiyoshafutanAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celYunittokoshitsuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblYunittokoshitsu")
     private Label lblYunittokoshitsu;
 
@@ -927,7 +1027,7 @@ class celYunittokoshitsuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celYunitjunkoshitsuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblYunitjunkoshitsu")
     private Label lblYunitjunkoshitsu;
 
@@ -957,7 +1057,7 @@ class celYunitjunkoshitsuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celJuraikoshitsuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblJuraikoshitsu")
     private Label lblJuraikoshitsu;
 
@@ -987,7 +1087,7 @@ class celJuraikoshitsuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celTashoAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTasho")
     private Label lblTasho;
 
@@ -1017,7 +1117,7 @@ class celTashoAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class cellTokuyoAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTokuyo")
     private Label lblTokuyo;
 
@@ -1047,7 +1147,7 @@ class cellTokuyoAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celRokenryoyoAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblRokenryoyo")
     private Label lblRokenryoyo;
 
@@ -1077,7 +1177,7 @@ class celRokenryoyoAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celDaiichidankaiAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblDaiichidankai")
     private Label lblDaiichidankai;
 
@@ -1107,9 +1207,29 @@ class celDaiichidankaiAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celIchikoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiKoshitsu")
+    private Icon icoDaiichiKoshitsu;
     @JsonProperty("txtDaiichiKoshitsu")
     private TextBox txtDaiichiKoshitsu;
+
+    /*
+     * geticoDaiichiKoshitsu
+     * @return icoDaiichiKoshitsu
+     */
+    @JsonProperty("icoDaiichiKoshitsu")
+    public Icon getIcoDaiichiKoshitsu() {
+        return icoDaiichiKoshitsu;
+    }
+
+    /*
+     * seticoDaiichiKoshitsu
+     * @param icoDaiichiKoshitsu icoDaiichiKoshitsu
+     */
+    @JsonProperty("icoDaiichiKoshitsu")
+    public void setIcoDaiichiKoshitsu(Icon icoDaiichiKoshitsu) {
+        this.icoDaiichiKoshitsu = icoDaiichiKoshitsu;
+    }
 
     /*
      * gettxtDaiichiKoshitsu
@@ -1137,9 +1257,29 @@ class celIchikoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celIchijunkoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiJunKoshitsu")
+    private Icon icoDaiichiJunKoshitsu;
     @JsonProperty("txtDaiichiJunKoshitsu")
     private TextBox txtDaiichiJunKoshitsu;
+
+    /*
+     * geticoDaiichiJunKoshitsu
+     * @return icoDaiichiJunKoshitsu
+     */
+    @JsonProperty("icoDaiichiJunKoshitsu")
+    public Icon getIcoDaiichiJunKoshitsu() {
+        return icoDaiichiJunKoshitsu;
+    }
+
+    /*
+     * seticoDaiichiJunKoshitsu
+     * @param icoDaiichiJunKoshitsu icoDaiichiJunKoshitsu
+     */
+    @JsonProperty("icoDaiichiJunKoshitsu")
+    public void setIcoDaiichiJunKoshitsu(Icon icoDaiichiJunKoshitsu) {
+        this.icoDaiichiJunKoshitsu = icoDaiichiJunKoshitsu;
+    }
 
     /*
      * gettxtDaiichiJunKoshitsu
@@ -1167,9 +1307,29 @@ class celIchijunkoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celTokuyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiTokuyo")
+    private Icon icoDaiichiTokuyo;
     @JsonProperty("txtDaiichiTokuyo")
     private TextBox txtDaiichiTokuyo;
+
+    /*
+     * geticoDaiichiTokuyo
+     * @return icoDaiichiTokuyo
+     */
+    @JsonProperty("icoDaiichiTokuyo")
+    public Icon getIcoDaiichiTokuyo() {
+        return icoDaiichiTokuyo;
+    }
+
+    /*
+     * seticoDaiichiTokuyo
+     * @param icoDaiichiTokuyo icoDaiichiTokuyo
+     */
+    @JsonProperty("icoDaiichiTokuyo")
+    public void setIcoDaiichiTokuyo(Icon icoDaiichiTokuyo) {
+        this.icoDaiichiTokuyo = icoDaiichiTokuyo;
+    }
 
     /*
      * gettxtDaiichiTokuyo
@@ -1197,9 +1357,29 @@ class celTokuyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celRokenryoyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiRokenRyoyogata")
+    private Icon icoDaiichiRokenRyoyogata;
     @JsonProperty("txtDaiichiRokenRyoyogata")
     private TextBox txtDaiichiRokenRyoyogata;
+
+    /*
+     * geticoDaiichiRokenRyoyogata
+     * @return icoDaiichiRokenRyoyogata
+     */
+    @JsonProperty("icoDaiichiRokenRyoyogata")
+    public Icon getIcoDaiichiRokenRyoyogata() {
+        return icoDaiichiRokenRyoyogata;
+    }
+
+    /*
+     * seticoDaiichiRokenRyoyogata
+     * @param icoDaiichiRokenRyoyogata icoDaiichiRokenRyoyogata
+     */
+    @JsonProperty("icoDaiichiRokenRyoyogata")
+    public void setIcoDaiichiRokenRyoyogata(Icon icoDaiichiRokenRyoyogata) {
+        this.icoDaiichiRokenRyoyogata = icoDaiichiRokenRyoyogata;
+    }
 
     /*
      * gettxtDaiichiRokenRyoyogata
@@ -1227,9 +1407,29 @@ class celRokenryoyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celTashoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaiichiTashoshitsu")
+    private Icon icoDaiichiTashoshitsu;
     @JsonProperty("txtDaiichiTashoshitsu")
     private TextBox txtDaiichiTashoshitsu;
+
+    /*
+     * geticoDaiichiTashoshitsu
+     * @return icoDaiichiTashoshitsu
+     */
+    @JsonProperty("icoDaiichiTashoshitsu")
+    public Icon getIcoDaiichiTashoshitsu() {
+        return icoDaiichiTashoshitsu;
+    }
+
+    /*
+     * seticoDaiichiTashoshitsu
+     * @param icoDaiichiTashoshitsu icoDaiichiTashoshitsu
+     */
+    @JsonProperty("icoDaiichiTashoshitsu")
+    public void setIcoDaiichiTashoshitsu(Icon icoDaiichiTashoshitsu) {
+        this.icoDaiichiTashoshitsu = icoDaiichiTashoshitsu;
+    }
 
     /*
      * gettxtDaiichiTashoshitsu
@@ -1257,7 +1457,7 @@ class celTashoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celDainidankaiAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblDainidankai")
     private Label lblDainidankai;
 
@@ -1287,9 +1487,29 @@ class celDainidankaiAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celNikoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDainiKoshitsu")
+    private Icon icoDainiKoshitsu;
     @JsonProperty("txtDainiKoshitsu")
     private TextBox txtDainiKoshitsu;
+
+    /*
+     * geticoDainiKoshitsu
+     * @return icoDainiKoshitsu
+     */
+    @JsonProperty("icoDainiKoshitsu")
+    public Icon getIcoDainiKoshitsu() {
+        return icoDainiKoshitsu;
+    }
+
+    /*
+     * seticoDainiKoshitsu
+     * @param icoDainiKoshitsu icoDainiKoshitsu
+     */
+    @JsonProperty("icoDainiKoshitsu")
+    public void setIcoDainiKoshitsu(Icon icoDainiKoshitsu) {
+        this.icoDainiKoshitsu = icoDainiKoshitsu;
+    }
 
     /*
      * gettxtDainiKoshitsu
@@ -1317,9 +1537,29 @@ class celNikoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celNijunkoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDainiJunKoshitsu")
+    private Icon icoDainiJunKoshitsu;
     @JsonProperty("txtDainiJunKoshitsu")
     private TextBox txtDainiJunKoshitsu;
+
+    /*
+     * geticoDainiJunKoshitsu
+     * @return icoDainiJunKoshitsu
+     */
+    @JsonProperty("icoDainiJunKoshitsu")
+    public Icon getIcoDainiJunKoshitsu() {
+        return icoDainiJunKoshitsu;
+    }
+
+    /*
+     * seticoDainiJunKoshitsu
+     * @param icoDainiJunKoshitsu icoDainiJunKoshitsu
+     */
+    @JsonProperty("icoDainiJunKoshitsu")
+    public void setIcoDainiJunKoshitsu(Icon icoDainiJunKoshitsu) {
+        this.icoDainiJunKoshitsu = icoDainiJunKoshitsu;
+    }
 
     /*
      * gettxtDainiJunKoshitsu
@@ -1347,9 +1587,29 @@ class celNijunkoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celNiTokuyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDainiTokuyo")
+    private Icon icoDainiTokuyo;
     @JsonProperty("txtDainiTokuyo")
     private TextBox txtDainiTokuyo;
+
+    /*
+     * geticoDainiTokuyo
+     * @return icoDainiTokuyo
+     */
+    @JsonProperty("icoDainiTokuyo")
+    public Icon getIcoDainiTokuyo() {
+        return icoDainiTokuyo;
+    }
+
+    /*
+     * seticoDainiTokuyo
+     * @param icoDainiTokuyo icoDainiTokuyo
+     */
+    @JsonProperty("icoDainiTokuyo")
+    public void setIcoDainiTokuyo(Icon icoDainiTokuyo) {
+        this.icoDainiTokuyo = icoDainiTokuyo;
+    }
 
     /*
      * gettxtDainiTokuyo
@@ -1377,9 +1637,29 @@ class celNiTokuyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celNiRokenryoyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDainiRokenRyoyogata")
+    private Icon icoDainiRokenRyoyogata;
     @JsonProperty("txtDainiRokenRyoyogata")
     private TextBox txtDainiRokenRyoyogata;
+
+    /*
+     * geticoDainiRokenRyoyogata
+     * @return icoDainiRokenRyoyogata
+     */
+    @JsonProperty("icoDainiRokenRyoyogata")
+    public Icon getIcoDainiRokenRyoyogata() {
+        return icoDainiRokenRyoyogata;
+    }
+
+    /*
+     * seticoDainiRokenRyoyogata
+     * @param icoDainiRokenRyoyogata icoDainiRokenRyoyogata
+     */
+    @JsonProperty("icoDainiRokenRyoyogata")
+    public void setIcoDainiRokenRyoyogata(Icon icoDainiRokenRyoyogata) {
+        this.icoDainiRokenRyoyogata = icoDainiRokenRyoyogata;
+    }
 
     /*
      * gettxtDainiRokenRyoyogata
@@ -1407,9 +1687,29 @@ class celNiRokenryoyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celNiTashoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDainiTashoshitsu")
+    private Icon icoDainiTashoshitsu;
     @JsonProperty("txtDainiTashoshitsu")
     private TextBox txtDainiTashoshitsu;
+
+    /*
+     * geticoDainiTashoshitsu
+     * @return icoDainiTashoshitsu
+     */
+    @JsonProperty("icoDainiTashoshitsu")
+    public Icon getIcoDainiTashoshitsu() {
+        return icoDainiTashoshitsu;
+    }
+
+    /*
+     * seticoDainiTashoshitsu
+     * @param icoDainiTashoshitsu icoDainiTashoshitsu
+     */
+    @JsonProperty("icoDainiTashoshitsu")
+    public void setIcoDainiTashoshitsu(Icon icoDainiTashoshitsu) {
+        this.icoDainiTashoshitsu = icoDainiTashoshitsu;
+    }
 
     /*
      * gettxtDainiTashoshitsu
@@ -1437,7 +1737,7 @@ class celNiTashoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celDaisandankaiAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblDaisandankai")
     private Label lblDaisandankai;
 
@@ -1467,9 +1767,29 @@ class celDaisandankaiAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celSankoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanKoshitsu")
+    private Icon icoDaisanKoshitsu;
     @JsonProperty("txtDaisanKoshitsu")
     private TextBox txtDaisanKoshitsu;
+
+    /*
+     * geticoDaisanKoshitsu
+     * @return icoDaisanKoshitsu
+     */
+    @JsonProperty("icoDaisanKoshitsu")
+    public Icon getIcoDaisanKoshitsu() {
+        return icoDaisanKoshitsu;
+    }
+
+    /*
+     * seticoDaisanKoshitsu
+     * @param icoDaisanKoshitsu icoDaisanKoshitsu
+     */
+    @JsonProperty("icoDaisanKoshitsu")
+    public void setIcoDaisanKoshitsu(Icon icoDaisanKoshitsu) {
+        this.icoDaisanKoshitsu = icoDaisanKoshitsu;
+    }
 
     /*
      * gettxtDaisanKoshitsu
@@ -1497,9 +1817,29 @@ class celSankoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celSanjunkoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanJunKoshitsu")
+    private Icon icoDaisanJunKoshitsu;
     @JsonProperty("txtDaisanJunKoshitsu")
     private TextBox txtDaisanJunKoshitsu;
+
+    /*
+     * geticoDaisanJunKoshitsu
+     * @return icoDaisanJunKoshitsu
+     */
+    @JsonProperty("icoDaisanJunKoshitsu")
+    public Icon getIcoDaisanJunKoshitsu() {
+        return icoDaisanJunKoshitsu;
+    }
+
+    /*
+     * seticoDaisanJunKoshitsu
+     * @param icoDaisanJunKoshitsu icoDaisanJunKoshitsu
+     */
+    @JsonProperty("icoDaisanJunKoshitsu")
+    public void setIcoDaisanJunKoshitsu(Icon icoDaisanJunKoshitsu) {
+        this.icoDaisanJunKoshitsu = icoDaisanJunKoshitsu;
+    }
 
     /*
      * gettxtDaisanJunKoshitsu
@@ -1527,9 +1867,29 @@ class celSanjunkoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celSanTokuyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanTokuyo")
+    private Icon icoDaisanTokuyo;
     @JsonProperty("txtDaisanTokuyo")
     private TextBox txtDaisanTokuyo;
+
+    /*
+     * geticoDaisanTokuyo
+     * @return icoDaisanTokuyo
+     */
+    @JsonProperty("icoDaisanTokuyo")
+    public Icon getIcoDaisanTokuyo() {
+        return icoDaisanTokuyo;
+    }
+
+    /*
+     * seticoDaisanTokuyo
+     * @param icoDaisanTokuyo icoDaisanTokuyo
+     */
+    @JsonProperty("icoDaisanTokuyo")
+    public void setIcoDaisanTokuyo(Icon icoDaisanTokuyo) {
+        this.icoDaisanTokuyo = icoDaisanTokuyo;
+    }
 
     /*
      * gettxtDaisanTokuyo
@@ -1557,9 +1917,29 @@ class celSanTokuyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celSanRokenryoyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanRokenRyoyogata")
+    private Icon icoDaisanRokenRyoyogata;
     @JsonProperty("txtDaisanRokenRyoyogata")
     private TextBox txtDaisanRokenRyoyogata;
+
+    /*
+     * geticoDaisanRokenRyoyogata
+     * @return icoDaisanRokenRyoyogata
+     */
+    @JsonProperty("icoDaisanRokenRyoyogata")
+    public Icon getIcoDaisanRokenRyoyogata() {
+        return icoDaisanRokenRyoyogata;
+    }
+
+    /*
+     * seticoDaisanRokenRyoyogata
+     * @param icoDaisanRokenRyoyogata icoDaisanRokenRyoyogata
+     */
+    @JsonProperty("icoDaisanRokenRyoyogata")
+    public void setIcoDaisanRokenRyoyogata(Icon icoDaisanRokenRyoyogata) {
+        this.icoDaisanRokenRyoyogata = icoDaisanRokenRyoyogata;
+    }
 
     /*
      * gettxtDaisanRokenRyoyogata
@@ -1587,9 +1967,29 @@ class celSanRokenryoyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celSanTashoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoDaisanTashoshitsu")
+    private Icon icoDaisanTashoshitsu;
     @JsonProperty("txtDaisanTashoshitsu")
     private TextBox txtDaisanTashoshitsu;
+
+    /*
+     * geticoDaisanTashoshitsu
+     * @return icoDaisanTashoshitsu
+     */
+    @JsonProperty("icoDaisanTashoshitsu")
+    public Icon getIcoDaisanTashoshitsu() {
+        return icoDaisanTashoshitsu;
+    }
+
+    /*
+     * seticoDaisanTashoshitsu
+     * @param icoDaisanTashoshitsu icoDaisanTashoshitsu
+     */
+    @JsonProperty("icoDaisanTashoshitsu")
+    public void setIcoDaisanTashoshitsu(Icon icoDaisanTashoshitsu) {
+        this.icoDaisanTashoshitsu = icoDaisanTashoshitsu;
+    }
 
     /*
      * gettxtDaisanTashoshitsu
@@ -1617,7 +2017,7 @@ class celSanTashoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celKijunhiyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblKijunhiyoGaku")
     private Label lblKijunhiyoGaku;
 
@@ -1647,9 +2047,29 @@ class celKijunhiyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celKijukoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuKoshitsu")
+    private Icon icoKijunHiyogakuKoshitsu;
     @JsonProperty("txtKijunHiyogakuKoshitsu")
     private TextBox txtKijunHiyogakuKoshitsu;
+
+    /*
+     * geticoKijunHiyogakuKoshitsu
+     * @return icoKijunHiyogakuKoshitsu
+     */
+    @JsonProperty("icoKijunHiyogakuKoshitsu")
+    public Icon getIcoKijunHiyogakuKoshitsu() {
+        return icoKijunHiyogakuKoshitsu;
+    }
+
+    /*
+     * seticoKijunHiyogakuKoshitsu
+     * @param icoKijunHiyogakuKoshitsu icoKijunHiyogakuKoshitsu
+     */
+    @JsonProperty("icoKijunHiyogakuKoshitsu")
+    public void setIcoKijunHiyogakuKoshitsu(Icon icoKijunHiyogakuKoshitsu) {
+        this.icoKijunHiyogakuKoshitsu = icoKijunHiyogakuKoshitsu;
+    }
 
     /*
      * gettxtKijunHiyogakuKoshitsu
@@ -1677,9 +2097,29 @@ class celKijukoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celKijunHiyogakuJunKoshitsuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuJunKoshitsu")
+    private Icon icoKijunHiyogakuJunKoshitsu;
     @JsonProperty("txtKijunHiyogakuJunKoshitsu")
     private TextBox txtKijunHiyogakuJunKoshitsu;
+
+    /*
+     * geticoKijunHiyogakuJunKoshitsu
+     * @return icoKijunHiyogakuJunKoshitsu
+     */
+    @JsonProperty("icoKijunHiyogakuJunKoshitsu")
+    public Icon getIcoKijunHiyogakuJunKoshitsu() {
+        return icoKijunHiyogakuJunKoshitsu;
+    }
+
+    /*
+     * seticoKijunHiyogakuJunKoshitsu
+     * @param icoKijunHiyogakuJunKoshitsu icoKijunHiyogakuJunKoshitsu
+     */
+    @JsonProperty("icoKijunHiyogakuJunKoshitsu")
+    public void setIcoKijunHiyogakuJunKoshitsu(Icon icoKijunHiyogakuJunKoshitsu) {
+        this.icoKijunHiyogakuJunKoshitsu = icoKijunHiyogakuJunKoshitsu;
+    }
 
     /*
      * gettxtKijunHiyogakuJunKoshitsu
@@ -1707,9 +2147,29 @@ class celKijunHiyogakuJunKoshitsuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celKijuTokuyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuTokuyo")
+    private Icon icoKijunHiyogakuTokuyo;
     @JsonProperty("txtKijunHiyogakuTokuyo")
     private TextBox txtKijunHiyogakuTokuyo;
+
+    /*
+     * geticoKijunHiyogakuTokuyo
+     * @return icoKijunHiyogakuTokuyo
+     */
+    @JsonProperty("icoKijunHiyogakuTokuyo")
+    public Icon getIcoKijunHiyogakuTokuyo() {
+        return icoKijunHiyogakuTokuyo;
+    }
+
+    /*
+     * seticoKijunHiyogakuTokuyo
+     * @param icoKijunHiyogakuTokuyo icoKijunHiyogakuTokuyo
+     */
+    @JsonProperty("icoKijunHiyogakuTokuyo")
+    public void setIcoKijunHiyogakuTokuyo(Icon icoKijunHiyogakuTokuyo) {
+        this.icoKijunHiyogakuTokuyo = icoKijunHiyogakuTokuyo;
+    }
 
     /*
      * gettxtKijunHiyogakuTokuyo
@@ -1737,9 +2197,29 @@ class celKijuTokuyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celKijuRokenryoyoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuRokenRyoyogata")
+    private Icon icoKijunHiyogakuRokenRyoyogata;
     @JsonProperty("txtKijunHiyogakuRokenRyoyogata")
     private TextBox txtKijunHiyogakuRokenRyoyogata;
+
+    /*
+     * geticoKijunHiyogakuRokenRyoyogata
+     * @return icoKijunHiyogakuRokenRyoyogata
+     */
+    @JsonProperty("icoKijunHiyogakuRokenRyoyogata")
+    public Icon getIcoKijunHiyogakuRokenRyoyogata() {
+        return icoKijunHiyogakuRokenRyoyogata;
+    }
+
+    /*
+     * seticoKijunHiyogakuRokenRyoyogata
+     * @param icoKijunHiyogakuRokenRyoyogata icoKijunHiyogakuRokenRyoyogata
+     */
+    @JsonProperty("icoKijunHiyogakuRokenRyoyogata")
+    public void setIcoKijunHiyogakuRokenRyoyogata(Icon icoKijunHiyogakuRokenRyoyogata) {
+        this.icoKijunHiyogakuRokenRyoyogata = icoKijunHiyogakuRokenRyoyogata;
+    }
 
     /*
      * gettxtKijunHiyogakuRokenRyoyogata
@@ -1767,9 +2247,29 @@ class celKijuRokenryoyoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celKijuTashoGakuAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("icoKijunHiyogakuTashoshitsu")
+    private Icon icoKijunHiyogakuTashoshitsu;
     @JsonProperty("txtKijunHiyogakuTashoshitsu")
     private TextBox txtKijunHiyogakuTashoshitsu;
+
+    /*
+     * geticoKijunHiyogakuTashoshitsu
+     * @return icoKijunHiyogakuTashoshitsu
+     */
+    @JsonProperty("icoKijunHiyogakuTashoshitsu")
+    public Icon getIcoKijunHiyogakuTashoshitsu() {
+        return icoKijunHiyogakuTashoshitsu;
+    }
+
+    /*
+     * seticoKijunHiyogakuTashoshitsu
+     * @param icoKijunHiyogakuTashoshitsu icoKijunHiyogakuTashoshitsu
+     */
+    @JsonProperty("icoKijunHiyogakuTashoshitsu")
+    public void setIcoKijunHiyogakuTashoshitsu(Icon icoKijunHiyogakuTashoshitsu) {
+        this.icoKijunHiyogakuTashoshitsu = icoKijunHiyogakuTashoshitsu;
+    }
 
     /*
      * gettxtKijunHiyogakuTashoshitsu
@@ -1797,7 +2297,7 @@ class celKijuTashoGakuAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celDaiyondankaiAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblDaiyondankai")
     private Label lblDaiyondankai;
 
@@ -1827,7 +2327,7 @@ class celDaiyondankaiAttblKyojuhi extends TableCell {
  * @author 自動生成
  */
 class celFugengakunashiAttblKyojuhi extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFutanGengakuNashi")
     private Label lblFutanGengakuNashi;
 

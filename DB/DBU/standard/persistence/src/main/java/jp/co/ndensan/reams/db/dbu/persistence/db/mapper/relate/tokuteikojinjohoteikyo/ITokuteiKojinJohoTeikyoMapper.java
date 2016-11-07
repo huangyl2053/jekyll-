@@ -51,4 +51,13 @@ public interface ITokuteiKojinJohoTeikyoMapper {
      * @return 提供情報(候補)
      */
     List<JukyushaTeikyoKihonJohoNNTempEntity> getJukyushaTeikyoKihonJohoNNTempData(JukyushaKihonJohoMybatisParameter tempTableName);
+
+    /**
+     * 処理日付を取得します。
+     *
+     * @param paramater TokuteiKojinJohoTeikyoMybatisParamater
+     * @return 処理日付
+     */
+    List<DbT7022ShoriDateKanriEntity> getShoriDateKanriByShoriName(TokuteiKojinJohoTeikyoMybatisParamater paramater);
+
 }

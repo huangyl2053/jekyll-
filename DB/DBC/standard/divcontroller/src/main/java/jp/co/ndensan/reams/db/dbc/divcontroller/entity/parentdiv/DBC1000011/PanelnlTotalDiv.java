@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDate.IPaymentDateDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDate.PaymentDateDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYearMonth;
@@ -23,11 +23,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYearMonth;
 /**
  * PanelnlTotal のクラスファイル
  *
- * @reamsid_L DBC-1000-010 zhangzhiming
+ * @author 自動生成
  */
 public class PanelnlTotalDiv extends PanelBatchParameter {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -207,13 +207,8 @@ public class PanelnlTotalDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public TextBox getTxtBunshoNo() {
-        return this.getPnlShokanbaraiShikyuKeteiTuchisho().getTxtBunshoNo();
-    }
-
-    @JsonIgnore
-    public void setTxtBunshoNo(TextBox txtBunshoNo) {
-        this.getPnlShokanbaraiShikyuKeteiTuchisho().setTxtBunshoNo(txtBunshoNo);
+    public IBunshoBangoInputDiv getBunshoBangoInput() {
+        return this.getPnlShokanbaraiShikyuKeteiTuchisho().getBunshoBangoInput();
     }
 
     @JsonIgnore

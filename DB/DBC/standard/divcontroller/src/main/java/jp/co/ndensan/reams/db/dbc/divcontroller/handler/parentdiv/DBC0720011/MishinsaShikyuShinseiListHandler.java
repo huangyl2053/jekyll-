@@ -90,10 +90,17 @@ public final class MishinsaShikyuShinseiListHandler {
      */
     public static boolean is支給申請日有効(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         if (is支給申請日入力(div)) {
-            if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue() == null) {
-                return true;
-            } else if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue() == null) {
+            if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue() == null
+                    && div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue() == null) {
                 return false;
+            }
+            if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue() != null
+                    && div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue() == null) {
+                return true;
+            }
+            if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue() == null
+                    && div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue() != null) {
+                return true;
             } else {
                 return div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue()
                         .isBeforeOrEquals(div.getSearchConditionToMishinsaShikyuShinseiPanel()

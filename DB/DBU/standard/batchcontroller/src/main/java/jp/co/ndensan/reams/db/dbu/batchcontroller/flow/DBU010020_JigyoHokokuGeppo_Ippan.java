@@ -11,11 +11,13 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaich
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoBirthYMD0302Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoKekkaKakuninProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300001NikaiProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300001Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300002Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300003Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300004Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300005Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300008NikaiProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300008Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.RiyoshaFutangakuKanriJohoKekkaKakuninProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.RiyoshaFutangakuKanriJohoSyori0600Process;
@@ -71,7 +73,9 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
     private static final String 受給者台帳情報処理 = "YokaigoNinteishaJohoSyori";
     private static final String 事業報告統計データへ登録 = "JigyouHoukokuTokeiDataToroku";
     private static final String 介護事業状況報告月報一般状況_別紙 = "JigyoHokokuGeppo_IppanSyuturyoku_DBU300008";
+    private static final String 介護事業状況報告月報一般状況_別紙_二回 = "JigyoHokokuGeppo_IppanSyuturyoku_DBU300008_Nikai";
     private static final String 介護事業状況報告月報一般状況_様式1 = "JigyoHokokuGeppo_IppanSyuturyoku_DBU300001";
+    private static final String 介護事業状況報告月報一般状況_様式1_二回 = "JigyoHokokuGeppo_IppanSyuturyoku_DBU300001_Nikai";
     private static final String 介護事業状況報告月報一般状況_様式1_2 = "JigyoHokokuGeppo_IppanSyuturyoku_DBU300002";
     private static final String 介護事業状況報告月報一般状況_様式1_3 = "JigyoHokokuGeppo_IppanSyuturyoku_DBU300003";
     private static final String 介護事業状況報告月報一般状況_様式1_4 = "JigyoHokokuGeppo_IppanSyuturyoku_DBU300004";
@@ -91,73 +95,60 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
         parameter = getParameter();
         parameter.setCsvFilePath(manager.getEucOutputDirectry());
         if (PrintControlKubun.過去分の印刷.getコード().equals(parameter.getPrintControlKbn())) {
-            executeStep(介護事業状況報告月報一般状況_別紙);
-            executeStep(介護事業状況報告月報一般状況_様式1);
-            executeStep(介護事業状況報告月報一般状況_様式1_2);
-            executeStep(介護事業状況報告月報一般状況_様式1_3);
-            if (制度改正月.isBeforeOrEquals(parameter.getSyukeiYM())) {
-                executeStep(介護事業状況報告月報一般状況_様式1_4);
-            }
-            executeStep(介護事業状況報告月報一般状況_様式1_5);
+            exe介護事業状況報告月報一般状況_帳票出力();
         } else if (PrintControlKubun.集計のみ.getコード().equals(parameter.getPrintControlKbn())) {
             executeStep(CREATE事業報告世帯情報TEMPテーブル);
-            executeStep(世帯情報処理);
-            executeStep(被保台帳生年月日情報処理_0200);
-            executeStep(被保台帳生年月日情報処理_0301);
-            executeStep(被保台帳生年月日情報処理_0302);
-            executeStep(利用者負担減額管理情報処理_0600);
-            executeStep(利用者負担減額管理情報処理_0702);
-            executeStep(利用者負担減額管理情報処理_0900);
-            executeStep(利用者負担減額管理情報処理_1002);
-            if (制度改正月.isBeforeOrEquals(parameter.getSyukeiYM())) {
-                executeStep(特定入所者管理情報処理_0710);
-                executeStep(特定入所者管理情報処理_0720);
-                executeStep(特定入所者管理情報処理_1010);
-                executeStep(特定入所者管理情報処理_1020);
-                executeStep(特定入所者管理情報処理_1030);
-                executeStep(特定入所者管理情報処理_1040);
-            }
-            executeStep(受給者台帳情報処理);
+            exe介護事業状況報告月報一般状況_CSV出力();
             executeStep(事業報告統計データへ登録);
-            executeStep(世帯情報処理の確認リスト);
-            executeStep(被保台帳生年月日情報の確認リスト);
-            executeStep(利用者負担減額管理情報の確認リスト);
-            executeStep(特定入所者管理情報または標準負担額減免情報の確認リスト);
-            executeStep(受給者台帳情報の確認リスト);
+            exe介護事業状況報告月報一般状況_確認リスト();
         } else if (PrintControlKubun.集計後印刷.getコード().equals(parameter.getPrintControlKbn())) {
             executeStep(CREATE事業報告世帯情報TEMPテーブル);
-            executeStep(世帯情報処理);
-            executeStep(被保台帳生年月日情報処理_0200);
-            executeStep(被保台帳生年月日情報処理_0301);
-            executeStep(被保台帳生年月日情報処理_0302);
-            executeStep(利用者負担減額管理情報処理_0600);
-            executeStep(利用者負担減額管理情報処理_0702);
-            executeStep(利用者負担減額管理情報処理_0900);
-            executeStep(利用者負担減額管理情報処理_1002);
-            if (制度改正月.isBeforeOrEquals(parameter.getSyukeiYM())) {
-                executeStep(特定入所者管理情報処理_0710);
-                executeStep(特定入所者管理情報処理_0720);
-                executeStep(特定入所者管理情報処理_1010);
-                executeStep(特定入所者管理情報処理_1020);
-                executeStep(特定入所者管理情報処理_1030);
-                executeStep(特定入所者管理情報処理_1040);
-            }
-            executeStep(受給者台帳情報処理);
+            exe介護事業状況報告月報一般状況_CSV出力();
             executeStep(事業報告統計データへ登録);
-            executeStep(介護事業状況報告月報一般状況_別紙);
-            executeStep(介護事業状況報告月報一般状況_様式1);
-            executeStep(介護事業状況報告月報一般状況_様式1_2);
-            executeStep(介護事業状況報告月報一般状況_様式1_3);
-            if (制度改正月.isBeforeOrEquals(parameter.getSyukeiYM())) {
-                executeStep(介護事業状況報告月報一般状況_様式1_4);
-            }
-            executeStep(介護事業状況報告月報一般状況_様式1_5);
-            executeStep(世帯情報処理の確認リスト);
-            executeStep(被保台帳生年月日情報の確認リスト);
-            executeStep(利用者負担減額管理情報の確認リスト);
-            executeStep(特定入所者管理情報または標準負担額減免情報の確認リスト);
-            executeStep(受給者台帳情報の確認リスト);
+            exe介護事業状況報告月報一般状況_帳票出力();
+            exe介護事業状況報告月報一般状況_確認リスト();
         }
+    }
+
+    private void exe介護事業状況報告月報一般状況_帳票出力() {
+        executeStep(介護事業状況報告月報一般状況_別紙);
+        executeStep(介護事業状況報告月報一般状況_別紙_二回);
+        executeStep(介護事業状況報告月報一般状況_様式1);
+        executeStep(介護事業状況報告月報一般状況_様式1_二回);
+        executeStep(介護事業状況報告月報一般状況_様式1_2);
+        executeStep(介護事業状況報告月報一般状況_様式1_3);
+        if (制度改正月.isBeforeOrEquals(parameter.getSyukeiYM())) {
+            executeStep(介護事業状況報告月報一般状況_様式1_4);
+        }
+        executeStep(介護事業状況報告月報一般状況_様式1_5);
+    }
+
+    private void exe介護事業状況報告月報一般状況_CSV出力() {
+        executeStep(世帯情報処理);
+        executeStep(被保台帳生年月日情報処理_0200);
+        executeStep(被保台帳生年月日情報処理_0301);
+        executeStep(被保台帳生年月日情報処理_0302);
+        executeStep(利用者負担減額管理情報処理_0600);
+        executeStep(利用者負担減額管理情報処理_0702);
+        executeStep(利用者負担減額管理情報処理_0900);
+        executeStep(利用者負担減額管理情報処理_1002);
+        if (制度改正月.isBeforeOrEquals(parameter.getSyukeiYM())) {
+            executeStep(特定入所者管理情報処理_0710);
+            executeStep(特定入所者管理情報処理_0720);
+            executeStep(特定入所者管理情報処理_1010);
+            executeStep(特定入所者管理情報処理_1020);
+            executeStep(特定入所者管理情報処理_1030);
+            executeStep(特定入所者管理情報処理_1040);
+        }
+        executeStep(受給者台帳情報処理);
+    }
+
+    private void exe介護事業状況報告月報一般状況_確認リスト() {
+        executeStep(世帯情報処理の確認リスト);
+        executeStep(被保台帳生年月日情報の確認リスト);
+        executeStep(利用者負担減額管理情報の確認リスト);
+        executeStep(特定入所者管理情報または標準負担額減免情報の確認リスト);
+        executeStep(受給者台帳情報の確認リスト);
     }
 
     /**
@@ -359,6 +350,17 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
     }
 
     /**
+     * 介護事業状況報告月報・一般状況（別紙）帳票出力します。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(介護事業状況報告月報一般状況_別紙_二回)
+    protected IBatchFlowCommand exeJigyouHoukokuTokeiReportDBU300008Nikai() {
+        return loopBatch(JigyouHoukokuTokeiReportDBU300008NikaiProcess.class)
+                .arguments(parameter.toJigyoHokokuGeppoIppanReportProcessParameter()).define();
+    }
+
+    /**
      * 介護事業状況報告月報・一般状況（様式1）帳票出力します。
      *
      * @return IBatchFlowCommand
@@ -366,6 +368,17 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
     @Step(介護事業状況報告月報一般状況_様式1)
     protected IBatchFlowCommand exeJigyouHoukokuTokeiReportDBU300001() {
         return loopBatch(JigyouHoukokuTokeiReportDBU300001Process.class)
+                .arguments(parameter.toJigyoHokokuGeppoIppanReportProcessParameter()).define();
+    }
+
+    /**
+     * 介護事業状況報告月報・一般状況（様式1）帳票出力します。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(介護事業状況報告月報一般状況_様式1_二回)
+    protected IBatchFlowCommand exeJigyouHoukokuTokeiReportDBU300001Nikai() {
+        return loopBatch(JigyouHoukokuTokeiReportDBU300001NikaiProcess.class)
                 .arguments(parameter.toJigyoHokokuGeppoIppanReportProcessParameter()).define();
     }
 

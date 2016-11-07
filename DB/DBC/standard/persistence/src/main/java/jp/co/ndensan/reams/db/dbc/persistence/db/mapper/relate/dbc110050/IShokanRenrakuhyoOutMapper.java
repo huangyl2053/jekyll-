@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110050;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoSofuIchiranParam;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2111ShokanShinseiTempEntity;
@@ -184,7 +185,7 @@ public interface IShokanRenrakuhyoOutMapper {
      * @param parameter ShokanRenrakuhyoOutMybatisParameter
      * @return 件数
      */
-    int get送付ファイルのレコード件数(ShokanRenrakuhyoOutMybatisParameter parameter);
+    List<HokenshaNoShutokuEntity> get送付ファイルのレコード件数(ShokanRenrakuhyoOutMybatisParameter parameter);
 
     /**
      * 送付ファイルデータを取得する。

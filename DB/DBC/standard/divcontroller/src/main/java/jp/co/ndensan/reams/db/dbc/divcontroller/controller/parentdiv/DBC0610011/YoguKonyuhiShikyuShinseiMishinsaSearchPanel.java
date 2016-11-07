@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -40,6 +42,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     private final RString 保存 = new RString("btnSave");
     private final RString 審査 = new RString("審査");
+    private static final RString 参照 = new RString("参照");
     private final RString 保存MSG = new RString(" 福祉用具購入費支給申請審査結果を更新");
 
     /**
@@ -59,6 +62,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().setValue(ViewStateHolder.get(ViewStateKeys.決定日, RDate.class));
             return ResponseData.of(div).setState(DBC0610011StateName.審査);
         }
+        div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().setValue(RDate.getNowDate());
         return ResponseData.of(div).respond();
     }
 
@@ -87,6 +91,10 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnIkkatsuShinsa(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        ValidationMessageControlPairs validationMessages = new YoguKonyuhiShikyuShinseiMishinsaValidationHandler(div).validateデータ選択と決定日();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         getHandler(div).審査決定処理();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, false);
         return ResponseData.of(div).respond();
@@ -110,13 +118,13 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         RString 明細番号 = row.getTxtMeisaiNo();
         ShikibetsuCode 識別コード = new ShikibetsuCode(row.getShikibetsuCode());
         RDate 決定日 = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
-        ViewStateHolder.put(ViewStateKeys.状態, 審査);
+        ViewStateHolder.put(ViewStateKeys.状態, 参照);
         ViewStateHolder.put(ViewStateKeys.決定日, 決定日);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         PnlTotalParameter param = new PnlTotalParameter(被保険者番号,
                 サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        ViewStateHolder.put(ViewStateKeys.検索キー, param);
+        ViewStateHolder.put(ViewStateKeys.契約番号検索キー, param);
         return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.修正).respond();
     }
 
@@ -128,9 +136,11 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSave(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        ValidationMessageControlPairs validationMessages = new YoguKonyuhiShikyuShinseiMishinsaValidationHandler(div).validateデータ選択と決定日();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         RDate 決定日R = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
-        getHandler(div).決定日入力チェック(決定日R);
-        getHandler(div).選択チェック();
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());

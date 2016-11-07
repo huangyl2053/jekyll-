@@ -17,19 +17,15 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2112ShokanMeisa
 import jp.co.ndensan.reams.db.dbc.service.core.shokanrenrakuhyoout.ShokanRenrakuhyoOutManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -76,6 +72,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private static final RString STR_200604 = new RString("200604");
     private static final RString STR_200904 = new RString("200904");
     private static final RString RSTRING_0000 = new RString("0000");
+    private static final RString COPY = new RString("copy");
     private static final int INT_100 = 100;
     private static final int INT_10 = 10;
     private static final int INT_2 = 2;
@@ -88,25 +85,26 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private ShokanRenrakuhyoOutManager manager;
 
     private OutputParameter<Integer> outputCount;
-    private OutputParameter<List> outputEntry;
-    private List<SharedFileDescriptor> entryList;
+    private OutputParameter<RString> outputPath;
+    private OutputParameter<RString> inputPath;
 
     /**
      * 送付ファイルのレコード件数です
      */
     public static final RString PARAMETER_OUT_OUTCOUNT;
+    /**
+     * inputPathです
+     */
+    public static final RString INPUT_PATH;
+    /**
+     * outputPathです
+     */
+    public static final RString OUTPUT_PATH;
 
     static {
         PARAMETER_OUT_OUTCOUNT = new RString("outputCount");
-    }
-
-    /**
-     * 送付ファイルエントリ情報です
-     */
-    public static final RString PARANETER_OUT_OUTPUTENTITY;
-
-    static {
-        PARANETER_OUT_OUTPUTENTITY = new RString("outputEntry");
+        INPUT_PATH = new RString("inputPath");
+        OUTPUT_PATH = new RString("outputPath");
     }
 
     private DbWT2112ShokanMeisaiTempEntity beforeEntity;
@@ -139,6 +137,13 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private int 利用者負担額合計;
     private int サービス単位数合計;
     private int 請求金額;
+    private HihokenshaNo 被保険者番号;
+    private FlexibleYearMonth サービス提供年月;
+    private RString 整理番号;
+    private JigyoshaNo 事業者番号;
+    private RString 様式番号;
+    private RString 明細番号;
+    private RString 入力ファイルパス;
 
     @BatchWriter
     private CsvListWriter csvWriter;
@@ -149,8 +154,8 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         レコード番号 = INDEX_0;
         レコード順次番号 = INDEX_1;
         outputCount = new OutputParameter<>();
-        outputEntry = new OutputParameter<>();
-        entryList = new ArrayList<>();
+        inputPath = new OutputParameter<>();
+        outputPath = new OutputParameter<>();
         manager = ShokanRenrakuhyoOutManager.createInstance();
         レコード件数 = manager.getレコード件数(parameter.toSofuMeisaiParameter());
     }
@@ -161,10 +166,15 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         csvFileName = ファイル名_前.concat(parameter.get保険者番号().getColumnValue()).
                 concat(parameter.get処理年月().toDateString()).concat(ファイル名_後);
         csvFilePath = Path.combinePath(spoolWorkPath, csvFileName);
-        csvWriter = new CsvListWriter.InstanceBuilder(csvFilePath).
+        if (Encode.UTF_8.equals(parameter.get文字コード())) {
+            入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(csvFileName));
+        } else {
+            入力ファイルパス = csvFilePath;
+        }
+        csvWriter = new CsvListWriter.InstanceBuilder(入力ファイルパス).
                 setDelimiter(コンマ).
                 setEnclosure(RString.EMPTY).
-                setEncode(Encode.UTF_8withBOM).
+                setEncode(parameter.get文字コード()).
                 hasHeader(false).
                 setNewLine(NewLine.CRLF).
                 build();
@@ -190,37 +200,60 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             } else if (!beforeEntity.getHiHokenshaNo().equals(entity.getHiHokenshaNo())
                     || !beforeEntity.getServiceTeikyoYM().equals(entity.getServiceTeikyoYM())
                     || !beforeEntity.getSeiriNo().equals(entity.getSeiriNo())) {
-                addMeisaiEntityWriter(beforeEntity, lastFlag);
+                addEntityWriter(beforeEntity, lastFlag);
                 レコード番号 = レコード番号 + INDEX_1;
                 csvWriter.writeLine(getHeadEntity(entity));
                 総出力件数 = 総出力件数 + INDEX_1;
             } else {
-                addMeisaiEntityWriter(beforeEntity, lastFlag);
+                addEntityWriter(beforeEntity, lastFlag);
             }
+            beforeEntity = entity;
+            被保険者番号 = entity.getHiHokenshaNo();
+            サービス提供年月 = entity.getServiceTeikyoYM();
+            整理番号 = entity.getSeiriNo();
+            事業者番号 = entity.getJigyoshaNo();
+            様式番号 = entity.getYoshikiNo();
+            明細番号 = entity.getMeisaiNo();
         } else {
-            if (entity.getDataKubun().equals(beforeEntity.getDataKubun())) {
-                lastFlag = false;
+            if (beforeEntity != null && entity.getDataKubun() != null) {
+                lastFlag = !entity.getDataKubun().equals(beforeEntity.getDataKubun());
+                addEntityWriter(beforeEntity, lastFlag);
+                beforeEntity = entity;
             }
-            addMeisaiEntityWriter(beforeEntity, lastFlag);
         }
-        beforeEntity = entity;
     }
 
     @Override
     protected void afterExecute() {
         if (総出力件数 != INDEX_0) {
-            addMeisaiEntityWriter(beforeEntity, true);
+            addEntityWriter(beforeEntity, true);
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getEndEntity());
+        }
+        if (csvWriter != null) {
             csvWriter.close();
-            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
-            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(csvFilePath), opts);
-            entryList.add(sfd);
         }
         outputCount.setValue(総出力件数);
-        outputEntry.setValue(entryList);
+        inputPath.setValue(入力ファイルパス);
+        outputPath.setValue(csvFilePath);
+    }
+
+    private void addEntityWriter(DbWT2112ShokanMeisaiTempEntity entity, boolean lastFlag) {
+        if (is償還明細キー(beforeEntity)) {
+            addMeisaiEntityWriter(beforeEntity, lastFlag);
+        }
+    }
+
+    private boolean is償還明細キー(DbWT2112ShokanMeisaiTempEntity entity) {
+        if (被保険者番号 == null || サービス提供年月 == null || 整理番号 == null || 事業者番号 == null
+                || 様式番号 == null || 明細番号 == null) {
+            return false;
+        } else if (被保険者番号.equals(entity.getHiHokenshaNo()) && サービス提供年月.equals(entity.getServiceTeikyoYM())
+                && 整理番号.equals(entity.getSeiriNo()) && 事業者番号.equals(entity.getJigyoshaNo())
+                && 様式番号.equals(entity.getYoshikiNo()) && 明細番号.equals(entity.getMeisaiNo())) {
+            return true;
+        }
+        return false;
     }
 
     private void addMeisaiEntityWriter(DbWT2112ShokanMeisaiTempEntity entity, boolean lastFlag) {
@@ -295,7 +328,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RecordShubetsu.コントロールレコード.getコード());
         tempList.add(new RString(レコード番号));
         tempList.add(RSTRING_0);
-        tempList.add(new RString(レコード件数 + parameter.get件数()));
+        tempList.add(new RString(レコード件数));
         tempList.add(ConfigKeysKokuhorenSofu.償還連絡票情報.getコード());
         tempList.add(RSTRING_00);
         tempList.add(parameter.get保険者番号().getColumnValue());

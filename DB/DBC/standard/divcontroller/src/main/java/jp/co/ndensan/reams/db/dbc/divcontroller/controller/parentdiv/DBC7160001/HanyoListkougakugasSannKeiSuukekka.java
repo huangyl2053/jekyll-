@@ -49,7 +49,6 @@ public class HanyoListkougakugasSannKeiSuukekka {
      */
     public ResponseData<HanyoListkougakugasSannKeiSuukekkaDiv> onClick_btnBatchParameterRestore(HanyoListkougakugasSannKeiSuukekkaDiv div) {
         getHandler(div).条件を復元();
-        onChange(div);
         return ResponseData.of(div).respond();
     }
 

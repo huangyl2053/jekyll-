@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -67,7 +68,8 @@ public class KanendoFukaHandler {
     private final RString 過年度通知書作成実行ボタン = new RString("btnRegister");
     private final RString 過年度 = new RString("DBB0550001");
     private final RString 過年度異動通知書 = new RString("DBB0550003");
-    private final RString 個人住民税処理状況 = new RString("BbT1901KojinJuminzeiShoriJokyo");
+    private final RString 定値処理名 = new RString("【最新】個人住民税課税確定");
+    private final RString 定値状況 = new RString("－");
     private final RString 未 = new RString("未");
     private final RString 済 = new RString("済");
     private static final RString 月分 = new RString("月");
@@ -189,8 +191,16 @@ public class KanendoFukaHandler {
         dgShoriKakunin_Row row = new dgShoriKakunin_Row();
         boolean flag = false;
         if (本算定異動_過年度.equals(menuID)) {
-            row.getTxtShoriMei().setValue(個人住民税処理状況);
-            //TODO 処理日時 状況   QA808
+            row.getTxtShoriMei().setValue(定値処理名);
+            row.getTxtJokyo().setValue(定値状況);
+            RDateTime 処理日時 = HonsanteiIdoKanendo.createInstance().get処理日時();
+            if (処理日時 != null) {
+                RString 年月日 = 処理日時.getDate().wareki().toDateString();
+                RString 時刻 = 処理日時.getTime().
+                        toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+                RString 基準日時 = 年月日.concat(RString.HALF_SPACE).concat(時刻);
+                row.getTxtShoriNichiji().setValue(基準日時);
+            }
         } else if (過年度異動通知書作成.equals(menuID)) {
             RString 処理名 = ShoriName.過年度賦課.get名称();
             row.getTxtShoriMei().setValue(処理名);

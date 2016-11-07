@@ -309,7 +309,8 @@ public class SokujiFukaKoseiService {
             KoseiShoriResult result = fukaKeisan.do全履歴更正計算(koseiParam);
             List<KoseiZengoFuka> koseiZengoFukaList = new ArrayList<>();
             for (KoseiZengoFuka koseiZengoFuka : result.get更正前後賦課のリスト()) {
-                if (is変化有り(koseiZengoFuka.get更正前().get現年度(), koseiZengoFuka.get更正後().get現年度())) {
+                if (koseiZengoFuka.get更正前() == null || koseiZengoFuka.get更正前().get現年度() == null
+                        || is変化有り(koseiZengoFuka.get更正前().get現年度(), koseiZengoFuka.get更正後().get現年度())) {
                     koseiZengoFuka.setHasChanged(true);
                 } else {
                     koseiZengoFuka.setHasChanged(false);

@@ -12,17 +12,17 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraishikyuketteky
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraishikyukettekyufujssekihensyu.DealKyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3017KyufujissekiKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3026KyufujissekiFukushiYoguHanbaihiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3033KyufujissekiShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraishikyukettekyufujssekihensyu.ISyokanbaraiShikyuKetteKyufuJssekiHensyuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
@@ -138,7 +138,6 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         requireNonNull(businessList, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求福祉用具販売費"));
         requireNonNull(shokanShinseiEntity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給申請"));
         requireNonNull(shokanHanteiKekkaEntity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給判定結果"));
-        requireNonNull(shokanShukeiEntity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求集計"));
 
         RString 給付実績情報作成区分コード;
 
@@ -344,7 +343,10 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             if (モード_修正.equals(画面モード)) {
                 dbT3026entity.setMeisaiNo(new RString(String.valueOf(連番)));
             }
-            ServiceShuruiCode サービス種類コード = shokanShukeiEntity.getServiceShuruiCode();
+            ServiceShuruiCode サービス種類コード = null;
+            if (shokanShukeiEntity != null) {
+                サービス種類コード = shokanShukeiEntity.getServiceShuruiCode();
+            }
             if (サービス種類コード != null) {
                 dbT3026entity.setServiceCode(new ServiceCode(サービス種類コード.value().concat(new RString("0000"))));
             }
@@ -394,7 +396,11 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         dbT3033entity.setServiceTeikyoYM(shokanKihonEntity.getServiceTeikyoYM());
         dbT3033entity.setJigyoshoNo(nullTOEmpty(shokanKihonEntity.getJigyoshaNo()));
         dbT3033entity.setToshiNo(通し番号);
-        dbT3033entity.setServiceSyuruiCode(nullTOEmpty(shokanShukeiEntity.getServiceShuruiCode()));
+        if (shokanShukeiEntity == null) {
+            dbT3033entity.setServiceSyuruiCode(new ServiceShuruiCode(""));
+        } else {
+            dbT3033entity.setServiceSyuruiCode(nullTOEmpty(shokanShukeiEntity.getServiceShuruiCode()));
+        }
         FlexibleDate ketteiYMD = shokanHanteiKekkaEntity.getKetteiYMD();
         if (ketteiYMD != null) {
             dbT3033entity.setShinsaYM(ketteiYMD.getYearMonth());
@@ -413,6 +419,9 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
      */
     private KokanShikibetsuNo get交換情報識別番号(FlexibleYearMonth serviceTeikyoYM) {
         KokanShikibetsuNo 交換情報識別番号 = new KokanShikibetsuNo("1131");
+        if (serviceTeikyoYM == null || serviceTeikyoYM.isEmpty()) {
+            return 交換情報識別番号;
+        }
         if (serviceTeikyoYM.isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
             return 交換情報識別番号;
         }
@@ -455,7 +464,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
      */
     private JigyoshaNo nullTOEmpty(JigyoshaNo 項目) {
         if (項目 == null || 項目.isEmpty()) {
-            return new JigyoshaNo("");
+            return JigyoshaNo.EMPTY;
         }
         return 項目;
     }
@@ -468,7 +477,7 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
      */
     private FlexibleDate nullTOEmpty(FlexibleDate 項目) {
         if (項目 == null || 項目.isEmpty()) {
-            return new FlexibleDate("");
+            return FlexibleDate.EMPTY;
         }
         return 項目;
     }

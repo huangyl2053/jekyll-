@@ -155,10 +155,10 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         if (給付実績情報.get過誤申立情報() != null) {
             div.getTxtMeisaiMoshitateshaKubun().setValue(KagoMoshitate_MoshitateshaKubun.toValue(給付実績情報.get過誤申立情報().get申立者区分コード()).get名称());
             FlexibleYearMonth 送付年月 = 給付実績情報.get過誤申立情報().get国保連送付年月();
-            if (送付年月 != null) {
+            if (送付年月 != null && !送付年月.isEmpty()) {
                 div.getTxtMeisaiSendYM().setValue(new RDate(送付年月.toString()));
             }
-            if (給付実績情報.get過誤申立情報().get申立年月日() != null) {
+            if (給付実績情報.get過誤申立情報().get申立年月日() != null && !給付実績情報.get過誤申立情報().get申立年月日().isEmpty()) {
                 div.getTxtMeisaiMoshitateDate().setValue(new RDate(給付実績情報.get過誤申立情報().get申立年月日().toString()));
             }
             div.getDdlMeisaiKagoMoshitateRiyu().setSelectedKey(給付実績情報.get過誤申立情報().get申立事由コード().substring(2, 申立理由_ITN));
@@ -227,6 +227,8 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
                 .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString())).build();
         data = data.createBuilderForEdit().set申立事由コード(div.getTxtMeisaiKagoForm()
                 .getValue().substring(0, 2).concat(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())).build();
+        data = data.createBuilderForEdit().set同月審査有フラグ(div.getChkMeisaiForDogetsuShinsa().getSelectedKeys().contains(同月審査用_KEY)).build();
+        data = data.createBuilderForEdit().set国保連再送付有フラグ(div.getKokuhirenSaiSofu().getSelectedKeys().contains(国保連再送付_KEY)).build();
         return data;
     }
 

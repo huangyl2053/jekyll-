@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.dbd205010;
 
 import jp.co.ndensan.reams.db.dbd.business.core.dbd205010.NinteishaListSakuseiBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd205010.NinteishaListSakuseiNoRenbaBusiness;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.KakuninListCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.KakuninListNoRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.NinteishaListSakuseiEntity;
@@ -38,11 +39,12 @@ public class NinteishaListSakuseiManager {
      * @param has世帯員以外情報 has世帯員以外情報
      * @param has世帯員情報 has世帯員情報
      * @param 世帯員情報Index 世帯員情報Index
+     * @param 世帯表示 SetaiHyoji
      */
     public void 連番ありCSV情報設定(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番, boolean is日付スラッシュ編集,
-            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index) {
+            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index, SetaiHyoji 世帯表示) {
         NinteishaListSakuseiBusiness bus = new NinteishaListSakuseiBusiness();
-        bus.setEucCsvEntity(eucCsvEntity, t, 連番, is日付スラッシュ編集, has世帯員以外情報, has世帯員情報, 世帯員情報Index);
+        bus.setEucCsvEntity(eucCsvEntity, t, 連番, is日付スラッシュ編集, has世帯員以外情報, has世帯員情報, 世帯員情報Index, 世帯表示);
     }
 
     /**
@@ -54,10 +56,11 @@ public class NinteishaListSakuseiManager {
      * @param has世帯員以外情報 has世帯員以外情報
      * @param has世帯員情報 has世帯員情報
      * @param 世帯員情報Index 世帯員情報Index
+     * @param 世帯表示 SetaiHyoji
      */
     public void 連番なしCSV情報設定(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集,
-            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index) {
+            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index, SetaiHyoji 世帯表示) {
         NinteishaListSakuseiNoRenbaBusiness bus = new NinteishaListSakuseiNoRenbaBusiness();
-        bus.setEucCsvEntity(eucCsvEntity, t, is日付スラッシュ編集, has世帯員以外情報, has世帯員情報, 世帯員情報Index);
+        bus.setEucCsvEntity(eucCsvEntity, t, is日付スラッシュ編集, has世帯員以外情報, has世帯員情報, 世帯員情報Index, 世帯表示);
     }
 }

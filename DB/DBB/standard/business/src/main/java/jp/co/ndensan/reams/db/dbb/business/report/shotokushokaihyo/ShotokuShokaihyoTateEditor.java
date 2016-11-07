@@ -46,6 +46,7 @@ public class ShotokuShokaihyoTateEditor implements IShotokuShokaihyoTateEditor {
     private static final RString 様 = new RString("様");
     private static final RString 転入日 = new RString("転入日");
     private static final RString 転出届出日 = new RString("転出届出日");
+    private static final RString 年度 = new RString("年度");
     private static final RString ハイフンつき = new RString("-");
     private CustomerBarCode barcode;
     private CustomerBarCodeResult result;
@@ -107,7 +108,7 @@ public class ShotokuShokaihyoTateEditor implements IShotokuShokaihyoTateEditor {
         }
         if (所得照会票.get住民税課税年度() != null) {
             source.kazeiNendo = 所得照会票.get住民税課税年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
-                    .fillType(FillType.BLANK).toDateString();
+                    .fillType(FillType.BLANK).toDateString().concat(年度);
         }
         source.hihokenshaShimei = 所得照会票.get氏名();
         source.sofusakiTantoBushoKeisho = 様;

@@ -29,6 +29,8 @@ public class JuryoininKeiyakuShoninKakuninshoMybatisParameter implements IMyBati
     private RString 発行済;
     private RString 改頁出力順;
     private RString 処理年月日;
+    private static final RString TWO = new RString("2");
+    private final boolean is発行済;
 
     /**
      * コンストラクタです。
@@ -50,6 +52,7 @@ public class JuryoininKeiyakuShoninKakuninshoMybatisParameter implements IMyBati
         this.発行済 = 発行済;
         this.改頁出力順 = 改頁出力順;
         this.処理年月日 = 処理年月日.toDateString();
+        is発行済 = 発行済.equals(TWO);
     }
 
 }

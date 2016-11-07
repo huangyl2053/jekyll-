@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0600041
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.sogosyokaifukajyoho.FuKaJyoHoBusiness;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600041.DBU0600041TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600041.PanelFuKaDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600041.PanelFuKaHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.sogosyokaifukajyoho.SoGoSyoKaiFuKaJyoHoFinder;
@@ -90,6 +91,76 @@ public class PanelFuKa {
         RString 通知書番号 = div.getDdlTuutishoBango().getSelectedKey();
         getHandler(div).select通知書番号DDL(通知書番号, 賦課Newest, 基準日時,
                 前年の賦課Newest.get(0), business.get介護徴収方法());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 再検索するボタンを押下します。
+     *
+     * @param div PanelFuKaDiv
+     * @return ResponseData<PanelFuKaDiv>
+     */
+    public ResponseData<PanelFuKaDiv> onClick_KensakuModoru(PanelFuKaDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBU0600041TransitionEventName.対象者検索に戻る).respond();
+    }
+
+    /**
+     * 資格情報を表示するボタンを押下します。
+     *
+     * @param div PanelFuKaDiv
+     * @return ResponseData<PanelFuKaDiv>
+     */
+    public ResponseData<PanelFuKaDiv> onClick_btnShikakuInfo(PanelFuKaDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 受給情報を表示するボタンを押下します。
+     *
+     * @param div KaigoSikakuTokusouDiv
+     * @return ResponseData<KaigoSikakuTokusouDiv>
+     */
+    public ResponseData<PanelFuKaDiv> onClick_btnJukyuInfo(PanelFuKaDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 給付情報を表示するボタンを押下します。
+     *
+     * @param div PanelFuKaDiv
+     * @return ResponseData<PanelFuKaDiv>
+     */
+    public ResponseData<PanelFuKaDiv> onClick_btnKyufuInfo(PanelFuKaDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 賦課状況を表示するボタンを押下します。
+     *
+     * @param div PanelFuKaDiv
+     * @return ResponseData<PanelFuKaDiv>
+     */
+    public ResponseData<PanelFuKaDiv> onClick_btnFukaInfo(PanelFuKaDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 住民固有情報を表示するボタンを押下します。
+     *
+     * @param div PanelFuKaDiv
+     * @return ResponseData<PanelFuKaDiv>
+     */
+    public ResponseData<PanelFuKaDiv> onClick_btnJuminInfo(PanelFuKaDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 所得状況を表示するボタンを押下します。
+     *
+     * @param div PanelFuKaDiv
+     * @return ResponseData<PanelFuKaDiv>
+     */
+    public ResponseData<PanelFuKaDiv> onClick_btnShotokuInfo(PanelFuKaDiv div) {
         return ResponseData.of(div).respond();
     }
 

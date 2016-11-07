@@ -273,7 +273,7 @@ public final class JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter imple
     public static JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter delete事業状況報告取得Paramter(RString 集計年月) {
         return new JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter(
                 RString.EMPTY,
-                new RString(new FlexibleYearMonth(集計年月).getMonthValue()),
+                集計年月.substring(INDEX4),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,

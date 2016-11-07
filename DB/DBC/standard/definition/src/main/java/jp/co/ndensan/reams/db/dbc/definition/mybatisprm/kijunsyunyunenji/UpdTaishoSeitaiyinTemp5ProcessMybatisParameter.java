@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,5 +28,5 @@ public class UpdTaishoSeitaiyinTemp5ProcessMybatisParameter implements IMyBatisP
     private FlexibleYear 処理年度;
     private LasdecCode 市町村コード;
     private FlexibleDate システム日付;
-
+    private YMDHMS 基準日時;
 }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
@@ -22,11 +23,15 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyu
 import jp.co.ndensan.reams.db.dbc.service.core.shokanharaishikyufushikyuketeitsuchiichiranhyo.ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -42,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -58,7 +64,11 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
+    private static final int ZERO = 0;
+    private static final int TEN = 10;
+    private static final RString カンマ = new RString(",");
     List<ShokanKetteiTsuchiShoShiharai> 帳票データリスト = new ArrayList<>();
+    Map<RString, RString> 種類Map = new HashMap<RString, RString>();
     ShokanKetteiTsuchiShoSealerBatchParameter batchPram;
     List<RString> 並び順List;
     List<RString> 改頁List;
@@ -87,7 +97,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
 
     @Override
     protected IBatchReader createReader() {
-        RString 出力順 = get出力順(ReportIdDBC.DBC100002.getReportId(), batchPram.getSyutujunId());
+        RString 出力順 = get出力順(ReportIdDBC.DBC100002_2.getReportId(), batchPram.getSyutujunId());
         if (!RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.replace(ORDER_BY, RString.EMPTY);
         }
@@ -95,10 +105,16 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+
+        IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
+        AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
+        宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+        宛先builder.set基準日(batchPram.getHakkoYMD());
+        宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+
         ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter parameter
                 = ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter.toMybatisParameter(出力順,
-                        new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+                        key.getPSM検索キー(), 宛先builder.build());
         return new BatchDbReader(帳票取得SQL, parameter);
     }
 
@@ -111,7 +127,36 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
 
     @Override
     protected void usualProcess(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
-        帳票データリスト.add(new ShokanKetteiTsuchiShoShiharai(entity));
+        
+        ShokanKetteiTsuchiShoShiharai データ = new ShokanKetteiTsuchiShoShiharai(entity);
+        RString key = getJufukuKey(データ);
+        if (種類Map.containsKey(key)) {
+            種類Map.put(key, set種類(種類Map.get(key), データ.get種類()));
+        } else {
+            帳票データリスト.add(データ);
+            種類Map.put(key, データ.get種類());
+                    
+        }
+    }
+    
+    private RString set種類(RString kyufuShu, RString 種類) {
+        if (RString.isNullOrEmpty(kyufuShu)) {
+            return 種類;
+        }
+        RStringBuilder builder = new RStringBuilder(kyufuShu);
+        if (!RString.isNullOrEmpty(種類)) {
+            builder.append(カンマ);
+            builder.append(種類);
+        }
+        return builder.toRString();
+    }
+    
+    private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
+        RStringBuilder key = new RStringBuilder();
+        key.append(shiharai.get被保険者番号().value());
+        key.append(shiharai.get提供年月().wareki().toDateString());
+        key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
+        return key.toRString();
     }
 
     @Override
@@ -121,7 +166,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
         }
         ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo ichiranhyo = new ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo();
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList
-                = ichiranhyo.getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(帳票データリスト, batchPram, 並び順List, 改頁List);
+                = ichiranhyo.getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(帳票データリスト, batchPram, 並び順List, 改頁List, 種類Map);
         ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport report = ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
     }

@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.JigyoshaMeisyoAndShikibetsuNoKanrenEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -28,7 +32,7 @@ public class KyufuJissekiInGetJigyoshaNameProcess extends BatchProcessBase<Jigyo
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyufujissekiin.IKyufuJissekiInJohoMapper.select事業者名称関連リスト");
-    private static final RString エラー区分_名称取得エラー = new RString("05");
+    private static final RString 文字_事業者名称 = new RString("事業者名称");
     @BatchWriter
     private IBatchTableWriter 処理結果リスト一時tableWriter;
     @BatchWriter
@@ -59,13 +63,14 @@ public class KyufuJissekiInGetJigyoshaNameProcess extends BatchProcessBase<Jigyo
             給付実績.setState(EntityDataState.Modified);
             給付実績一時tableWriter.update(給付実績);
         } else {
-            DbWT0002KokuhorenTorikomiErrorEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorEntity();
-            処理結果.setErrorKubun(エラー区分_名称取得エラー);
-            処理結果.setKey3(給付実績.getServiceTeikyoYM().toDateString());
-            処理結果.setKey4(getColumnValue(給付実績.getJigyoshoNo()));
-            処理結果.setBiko(new RString("事業者名称"));
-            処理結果.setState(EntityDataState.Added);
-            処理結果リスト一時tableWriter.insert(処理結果);
+            DbWT0002KokuhorenTorikomiErrorTempEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorTempEntity();
+            処理結果.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.名称取得エラー.getコード());
+            処理結果.setキー3(給付実績.getServiceTeikyoYM().toDateString());
+            処理結果.setキー4(getColumnValue(給付実績.getJigyoshoNo()));
+            処理結果.set備考(文字_事業者名称);
+            処理結果.set被保険者番号(HihokenshaNo.EMPTY);
+            処理結果.set証記載保険者番号(ShoKisaiHokenshaNo.EMPTY);
+            処理結果リスト一時tableWriter.insert(処理結果.toEntity());
         }
     }
 

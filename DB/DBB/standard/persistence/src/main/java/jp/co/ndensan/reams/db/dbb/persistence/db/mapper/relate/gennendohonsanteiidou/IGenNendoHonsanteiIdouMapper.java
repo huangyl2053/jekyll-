@@ -10,6 +10,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.CalculateFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.HonsanteiIdoKekkaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.PrtMeisaiIchiranMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TokuchoIraikin4gatsuKaishiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TsuchishoNoCreateParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.ShukiEn
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.ShukiIdoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokuChoKaishiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokuKarisanteiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokuchoIraikin4gatsuKaishiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TsukibetsuRankuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -403,4 +405,13 @@ public interface IGenNendoHonsanteiIdouMapper {
      * @return List<HonsanteiIdoKekkaEntity>
      */
     List<HonsanteiIdoKekkaEntity> get本算定異動情報(HonsanteiIdoKekkaParameter param);
+
+    /**
+     * 特別徴収依頼金額明細情報を取得します。
+     *
+     * @param param PrtMeisaiIchiranMyBatisParameter
+     * @return List<TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity>
+     */
+    List<TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity> get特別徴収依頼金額明細情報(PrtMeisaiIchiranMyBatisParameter param);
+
 }

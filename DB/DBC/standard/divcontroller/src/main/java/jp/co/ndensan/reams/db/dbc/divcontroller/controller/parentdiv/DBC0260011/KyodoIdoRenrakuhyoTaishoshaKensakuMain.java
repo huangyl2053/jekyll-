@@ -42,7 +42,6 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
     private static final RString KEY_ZERO = new RString("key0");
     private static final int NUM_ZERO = 0;
     private static final RString イベント_対象者特定 = new RString("DBZ0200001_対象者特定");
-    private static final RString イベント_終了 = new RString("DBZ0200001_終了");
 
     /**
      * 画面初期化のメソッドです。
@@ -52,9 +51,20 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
      */
     public ResponseData<KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv> onLoad(
             KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 画面onActiveのメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv> onActive(
+            KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
-        getHandler(div).click条件をクリア();
-        if (イベント_対象者特定.equals(イベント名) || イベント_終了.equals(イベント名)) {
+        if (イベント_対象者特定.equals(イベント名) && ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
+            getHandler(div).click条件をクリア();
             TaishoshaIchiranParameter parameter = ViewStateHolder.get(ViewStateKeys.退避用データ, TaishoshaIchiranParameter.class);
             getHandler(div).set検索条件(parameter);
             TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);

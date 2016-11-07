@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -58,6 +59,10 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
+        ShafukugemmenEntity 社福減免 = entity.get社福減免();
+        if (isDateEmpty(社福減免.get適用開始日()) || isDateEmpty(社福減免.get適用終了日())) {
+            return;
+        }
         RString 社福減免Key = get社福減免Key(entity.get社福減免());
         if (社福減免KeyList.contains(社福減免Key)) {
             return;
@@ -118,5 +123,12 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
                 .concat(社福減免.get減免_減額種類()).concat(SPLIT)
                 .concat(社福減免.get軽減率());
         return 全項目;
+    }
+
+    private boolean isDateEmpty(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -43,7 +43,7 @@ public class DBC180040_FutanwariaishoHakko extends BatchFlowBase<DBC180040_Futan
     private static final RString 定数_1 = new RString("1");
     private static final RString 定数_2 = new RString("2");
     private static final RString 定数_3 = new RString("3");
-    private static final RString 定数_全件用紙タイプ = new RString("全件用紙タイプ");
+    private static final RString 定数_全件用紙タイプ = new RString("全件分用紙タイプ");
     private static final RString 定数_異動認定分用紙タイプ = new RString("異動、認定分用紙タイプ");
     private IFutanwariaishoHakkoMapper mapper;
     private RDateTime バッチ起動時処理日時;

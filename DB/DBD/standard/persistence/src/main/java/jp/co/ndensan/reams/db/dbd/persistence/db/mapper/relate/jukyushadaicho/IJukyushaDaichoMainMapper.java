@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoNewMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd560001.NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoNewEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.ShoriDateKanriEntity;
@@ -38,9 +39,17 @@ public interface IJukyushaDaichoMainMapper {
      * 新たな抽出対象リストを取得。
      *
      * @param mybatisParameter mybatisParameter
+     * @return NinteiKekkaJohoEntity
+     */
+    List<NinteiKekkaJohoEntity> get個人情報と要介護認定情報new(IdoChushutsuDaichoNewMybatisParameter mybatisParameter);
+
+    /**
+     * 新たな抽出対象リストを取得。
+     *
+     * @param mybatisParameter mybatisParameter
      * @return IdoChushutsuDaichoNewEntity
      */
-    List<IdoChushutsuDaichoNewEntity> get個人情報と要介護認定情報(IdoChushutsuDaichoNewMybatisParameter mybatisParameter);
+    List<IdoChushutsuDaichoNewEntity> get個人情報と要介護認定情報new1(IdoChushutsuDaichoNewMybatisParameter mybatisParameter);
 
     /**
      * 処理日付管理マスタ更新処理

@@ -62,6 +62,21 @@ public class DvShokanbaraiJohoValidationHandler {
     }
 
     /**
+     * 出力順未設定チェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate出力順未設定() {
+        IValidationMessages message = new DvShokanbaraiJohoValidator(div).validate出力順未設定();
+        return create出力順未設定Dictionary().check(message);
+    }
+
+    private ValidationDictionary create出力順未設定Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(DvShokanbaraiJohoValidationMessage.出力順未設定).build();
+    }
+
+    /**
      * サービス提供年月From、サービス提供年月Toの大小関係チェックです。
      *
      * @return {@link ValidationMessageControlPairs}

@@ -77,7 +77,7 @@ public class DBC1210011Panel {
         getHandler(div).initialize(被保険者番号, 識別コード, 支払予定日印字有無);
         List<JukyushaDaicho> 受給者台帳 = getHandler(div).get受給者台帳(被保険者番号);
         List<SogoJigyoTaishosha> 総合事業対象者 = getHandler(div).get総合事業対象者(被保険者番号);
-        if (受給者台帳.isEmpty() || 総合事業対象者.isEmpty()) {
+        if (受給者台帳.isEmpty() && 総合事業対象者.isEmpty()) {
             getHandler(div).状態2();
             ValidationMessageControlPairs validPairs = getValidationHandler().受給共通_受給者登録なしチェック();
             if (validPairs.iterator().hasNext()) {

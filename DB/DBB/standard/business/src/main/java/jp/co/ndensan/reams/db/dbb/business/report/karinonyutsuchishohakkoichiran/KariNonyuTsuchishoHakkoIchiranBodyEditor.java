@@ -201,7 +201,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     }
 
     private void 次期以降編集(KariNonyuTsuchishoHakkoIchiranSource source, List<UniversalPhase> 普徴期別金額リスト) {
-        if (出力期 == 1) {
+        if (普徴期別金額リスト.size() == 1 && 出力期 == 1) {
             source.listLower_6 = new RString(0);
         } else {
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {

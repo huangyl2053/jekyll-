@@ -94,7 +94,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString 定数_再発行対象リスト = new RString("再発行対象リスト");
-    private static final RString CSV出力有無_有り = new RString("有り");
+    private static final RString CSV出力有無_有り = new RString("あり");
     private static final RString CSVファイル名_一覧表 = new RString("所得照会票");
     private static final RString 所得照会票_EUCファイル名 = new RString("ShotokushokaihyoHakkoIchiran.csv");
     private static final ReportId 帳票分類ID = new ReportId("DBB100001_ShotokuShokaihyoDaihyo");
@@ -247,6 +247,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定数_出力対象).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(processParameter.get出力対象()));
+        出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         RString 有無し;
         if (processParameter.isテストプリント()) {
@@ -323,6 +324,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         result.set内線番号(差出人情報.get内線番号());
         result.set差出人_郵便番号(差出人情報.get郵便番号());
         result.set電話番号(差出人情報.get電話番号());
+        result.set住民種別コード(所得照会票データ.getJuminShubetsuCode());
         return result;
     }
 

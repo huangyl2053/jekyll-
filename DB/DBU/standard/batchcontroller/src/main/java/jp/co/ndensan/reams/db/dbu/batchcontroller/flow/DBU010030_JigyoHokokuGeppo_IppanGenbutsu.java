@@ -68,8 +68,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
         executeStep(CREATE事業報告統計元データ);
         if (PrintControlKubun.集計のみ.getコード().equals(getParameter().getプリントコントロール区分())
                 || PrintControlKubun.集計後印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
-            // TODO  内部QA：1638 Redmine：#99483(DbFt7004CheckResultKyufuJissekiのpsm取得方式が知らない,未対応)
-            //executeStep(事業報告統計元データ);
+            executeStep(事業報告統計元データ);
             executeStep(帳票出力_処理確認リスト);
             if (new RString("1").equals(getParameter().get給付集計区分())) {
                 executeStep(根拠CSV作成_DBU011200);

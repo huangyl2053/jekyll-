@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.csv;
 
+import jp.co.ndensan.reams.uz.uza.io.fld.Align;
 import jp.co.ndensan.reams.uz.uza.io.fld.FldField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -24,7 +25,7 @@ public class TokuchoSofuJohoRenkeiKanriEntity {
     private RString 管理市町村コード;
     @FldField(order = 2, length = 1)
     private RString 管理スペース;
-    @FldField(order = 3, length = 3)
+    @FldField(order = 3, length = 3, align = Align.Right, paddingChar = "0")
     private RString 管理媒体通番;
     @FldField(order = 4, length = 8)
     private RString 管理作成年月日;

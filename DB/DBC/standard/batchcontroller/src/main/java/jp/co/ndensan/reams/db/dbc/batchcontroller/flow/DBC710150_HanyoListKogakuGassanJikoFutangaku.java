@@ -8,9 +8,13 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710150.HanyoListKogakuGassanJikoFutangakuNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710150.HanyoListKogakuGassanJikoFutangakuProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150.DBC710150_HanyoListKogakuGassanJikoFutangakuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 
 /**
  * 汎用リスト出力(高額合算自己負担額情報)のバッチ処理フロー
@@ -29,11 +33,16 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangaku
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
+
+        HanyoListKogakuGassanJikoFutangakuProcessParameter processParam = getParameter().toProcessParam();
+        processParam.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        processParam.set帳票ID(new ReportId(ReportIdDBC.DBC701015.getReportId().getColumnValue()));
+        processParam.set出力順(getParameter().getShutsuryokuju());
         if (getParameter().isRebanFuka()) {
             return loopBatch(HanyoListKogakuGassanJikoFutangakuProcess.class)
-                    .arguments(getParameter().toProcessParam()).define();
+                    .arguments(processParam).define();
         }
         return loopBatch(HanyoListKogakuGassanJikoFutangakuNoProcess.class)
-                .arguments(getParameter().toProcessParam()).define();
+                .arguments(processParam).define();
     }
 }

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class DBD1030001Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,6 +38,12 @@ public class DBD1030001Div extends Panel {
     private RString hiddenShikibetsuCode;
     @JsonProperty("hiddenHihokenshaNo")
     private RString hiddenHihokenshaNo;
+    @JsonProperty("hidden登録業務コード")
+    private RString hidden登録業務コード;
+    @JsonProperty("hidden登録グループコード")
+    private RString hidden登録グループコード;
+    @JsonProperty("hiddenサンプル文書")
+    private RString hiddenサンプル文書;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -106,6 +112,60 @@ public class DBD1030001Div extends Panel {
     @JsonProperty("hiddenHihokenshaNo")
     public void setHiddenHihokenshaNo(RString hiddenHihokenshaNo) {
         this.hiddenHihokenshaNo = hiddenHihokenshaNo;
+    }
+
+    /*
+     * gethidden登録業務コード
+     * @return hidden登録業務コード
+     */
+    @JsonProperty("hidden登録業務コード")
+    public RString getHidden登録業務コード() {
+        return hidden登録業務コード;
+    }
+
+    /*
+     * sethidden登録業務コード
+     * @param hidden登録業務コード hidden登録業務コード
+     */
+    @JsonProperty("hidden登録業務コード")
+    public void setHidden登録業務コード(RString hidden登録業務コード) {
+        this.hidden登録業務コード = hidden登録業務コード;
+    }
+
+    /*
+     * gethidden登録グループコード
+     * @return hidden登録グループコード
+     */
+    @JsonProperty("hidden登録グループコード")
+    public RString getHidden登録グループコード() {
+        return hidden登録グループコード;
+    }
+
+    /*
+     * sethidden登録グループコード
+     * @param hidden登録グループコード hidden登録グループコード
+     */
+    @JsonProperty("hidden登録グループコード")
+    public void setHidden登録グループコード(RString hidden登録グループコード) {
+        this.hidden登録グループコード = hidden登録グループコード;
+    }
+
+    /*
+     * gethiddenサンプル文書
+     * @return hiddenサンプル文書
+     */
+    @JsonProperty("hiddenサンプル文書")
+    public RString getHiddenサンプル文書() {
+        return hiddenサンプル文書;
+    }
+
+    /*
+     * sethiddenサンプル文書
+     * @param hiddenサンプル文書 hiddenサンプル文書
+     */
+    @JsonProperty("hiddenサンプル文書")
+    public void setHiddenサンプル文書(RString hiddenサンプル文書) {
+        this.hiddenサンプル文書 = hiddenサンプル文書;
     }
 
     /*

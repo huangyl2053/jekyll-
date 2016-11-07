@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealEn
 import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealParameterEntity;
 import jp.co.ndensan.reams.db.dbb.business.report.dbz100001.AtenaSealReport;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb021051.DBB021051ProcessParameter;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.DBB021051TableJohoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.atenaseal.DBZ100001AtenaSealSource;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.IBatchReportWriterWithCheckList;
@@ -82,8 +82,8 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
         dataUtil = new DBB021051DataUtil();
         entityList = new ArrayList<>();
         システム日付 = DateConverter.getDate4(RDate.getNowDate());
-        出力順情報 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBB介護賦課,
-                ReportIdDBB.DBB100087.getReportId(), Long.parseLong(parameter.get出力順ID().toString()));
+        出力順情報 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBZ介護共通,
+                ReportIdDBZ.DBZ100001.getReportId(), Long.parseLong(parameter.get出力順ID().toString()));
         if (出力順情報 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(ERROR_出力順.toString()));
         }
@@ -118,7 +118,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
                 .batchReportWriterWithCheckList(DBZ100001AtenaSealSource.class)
                 .checkListInfo(info)
                 .checkListLineItemSet(pairs)
-                .reportId(ReportIdDBB.DBB100087.getReportId())
+                .reportId(ReportIdDBZ.DBZ100001.getReportId())
                 .build();
         this.reportSourceWriter = new ReportSourceWriter<>(this.checkWriter);
     }

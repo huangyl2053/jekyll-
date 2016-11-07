@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
@@ -29,14 +29,14 @@ public class JutakuKaishuRiyushoTesuryoMeisaiBuilderTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HokenshaNo 主キー名1;
     private static HihokenshaNo 主キー名2;
-    private static int 主キー名3;
+//    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         主キー名1 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_被保険者番号;
-        主キー名3 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号;
+//        主キー名3 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -76,8 +76,8 @@ public class JutakuKaishuRiyushoTesuryoMeisaiBuilderTest extends DbcTestBase {
 
         @Test
         public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
-            business = sut.set識別コード(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_識別コード).build();
-            assertThat(business.get識別コード(), is(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_識別コード));
+//            business = sut.set識別コード(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_識別コード).build();
+//            assertThat(business.get識別コード(), is(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_識別コード));
         }
 
         @Test
@@ -139,7 +139,6 @@ public class JutakuKaishuRiyushoTesuryoMeisaiBuilderTest extends DbcTestBase {
 //            business = sut.set介護住宅改修理由書作成者資格(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_介護住宅改修理由書作成者資格).build();
 //            assertThat(business.get介護住宅改修理由書作成者資格(), is(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_介護住宅改修理由書作成者資格));
 //        }
-
         @Test
         public void 戻り値の介護住宅改修理由書作成申請年月日は_設定した値と同じ介護住宅改修理由書作成申請年月日を返す() {
             business = sut.set介護住宅改修理由書作成申請年月日(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_介護住宅改修理由書作成申請年月日).build();

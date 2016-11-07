@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -32,6 +33,7 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select特定入所者");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
     private static final RString SPLIT = new RString(",");
+    private static final RString 区分_1 = new RString("1");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
     private List<RString> 特定入所者KeyList;
@@ -59,6 +61,15 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
 
     @Override
     protected void process(IdouTempEntity entity) {
+        TokuteiNyusyoshaInfoEntity 特定入所者 = entity.get特定入所者();
+        if (区分_1.equals(特定入所者.get決定区分())
+                && (isDateEmpty(特定入所者.get適用開始日()) || isDateEmpty(特定入所者.get適用終了日()))) {
+            return;
+        }
+        if (RString.isNullOrEmpty(特定入所者.get決定区分())
+                && (!isDateEmpty(特定入所者.get適用開始日()) || !isDateEmpty(特定入所者.get適用終了日()))) {
+            return;
+        }
         RString 特定入所者Key = get特定入所者Key(entity.get特定入所者());
         if (特定入所者KeyList.contains(特定入所者Key)) {
             return;
@@ -127,5 +138,12 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
                 .concat(特定入所者.get決定区分()).concat(SPLIT)
                 .concat(特定入所者.get申請日().toString()).concat(SPLIT);
         return 全項目;
+    }
+
+    private boolean isDateEmpty(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710021;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -86,6 +88,25 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         return create住宅改修内容Dictionary().check(messages);
     }
 
+    /**
+     * 受給認定が無効チェック入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div JutakuKaishuShinseiJyohoTorokuDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validate受給認定が無効チェック(ValidationMessageControlPairs pairs, JutakuKaishuShinseiJyohoTorokuDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(JutakuKaishuShinseiJyohoTorokuSpec.受給認定が無効チェック)
+                .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.受給認定が無効チェック).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                JutakuKaishuShinseiJyohoTorokuValidationMessages.受給認定が無効チェック,
+                div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD()).build().check(messages));
+        return pairs;
+
+    }
+
     private ValidationDictionary create住宅改修内容Dictionary() {
         ValidationDictionaryBuilder builder = new ValidationDictionaryBuilder()
                 .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力, div.getTxtTeikyoYM());
@@ -93,7 +114,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
             builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力,
                     div.getCommHeadPanel().getTxtKyufuritsu());
         }
-        if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
+        if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isEmpty()) {
             if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                 builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.メッセージ_1);
             } else if (メッセージ_2.equals(住宅改修内容チェックエラーメッセージ)) {
@@ -182,7 +203,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                         .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力)
                         .messages());
             }
-            if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
+            if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isEmpty()) {
                 if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                     messages.add(ValidateChain.validateStart(div)
                             .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.住宅改修内容一覧が妥当)
@@ -220,6 +241,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         提供着工年月が申請日の年月と一致しない(DbcErrorMessages.年月と不一致, "申請日", "提供（着工）年月"),
         メッセージ_1(DbcErrorMessages.住宅改修データなし),
         メッセージ_2(DbcErrorMessages.着工日不一致),
+        受給認定が無効チェック(DbzErrorMessages.実行不可, "受給認定有効期間外", "入力"),
         メッセージ_3(DbcErrorMessages.対象住宅住所不一致);
         private final Message message;
 

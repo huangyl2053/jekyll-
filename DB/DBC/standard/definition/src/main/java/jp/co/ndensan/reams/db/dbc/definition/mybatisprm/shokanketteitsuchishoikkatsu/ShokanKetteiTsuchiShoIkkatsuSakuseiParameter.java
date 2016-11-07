@@ -23,12 +23,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBatisParameter {
 
     private static final RString 印書_1 = new RString("1");
-    private static final RString 印書_2 = new RString("2");
     private static final RString 印書_3 = new RString("3");
     private static final RString 抽出モード_1 = new RString("1");
     private static final RString 抽出モード_2 = new RString("2");
     private static final RString 抽出モード_3 = new RString("3");
-    private static final RString 決定通知リアル発行区分_発行済 = new RString("1");
     private static final RString 決定通知リアル発行区分_未発行 = new RString("0");
     private static final RString 用紙タイプ_2 = new RString("2");
 
@@ -43,6 +41,8 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
     private RString hushikyu;
     private RString kozashiharai;
     private RString inshoKubun;
+    private boolean isInshoKubun3;
+    private boolean isRiaruHakko;
     private boolean hurikomiYoteiYMDFlag;
     private boolean hakkouYMDFlag;
     private boolean chusyutuUketsukeFlag;
@@ -52,9 +52,9 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
 
     private ShokanKetteiTsuchiShoIkkatsuSakuseiParameter(RString psmShikibetsuTaisho, RString psmAtesaki,
             FlexibleDate hurikomiYoteiYMD, FlexibleDate dataFrom, FlexibleDate dataTo, FlexibleDate hakkoYMD,
-            FlexibleYearMonth ketteishaUketsukeYM, RString shikyu, RString hushikyu, RString kozashiharai,
-            RString inshoKubun, boolean hurikomiYoteiYMDFlag, boolean hakkouYMDFlag, boolean chusyutuUketsukeFlag,
-            boolean chusyutuKetteiFlag, boolean chusyutuKetteiShaUketsukeFlag, boolean yoshiFlag) {
+            FlexibleYearMonth ketteishaUketsukeYM, RString shikyu, RString hushikyu, RString kozashiharai, RString inshoKubun,
+            boolean isInshoKubun3, boolean isRiaruHakko, boolean hurikomiYoteiYMDFlag, boolean hakkouYMDFlag,
+            boolean chusyutuUketsukeFlag, boolean chusyutuKetteiFlag, boolean chusyutuKetteiShaUketsukeFlag, boolean yoshiFlag) {
 
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
@@ -67,6 +67,8 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
         this.hushikyu = hushikyu;
         this.kozashiharai = kozashiharai;
         this.inshoKubun = inshoKubun;
+        this.isRiaruHakko = isRiaruHakko;
+        this.isInshoKubun3 = isInshoKubun3;
         this.hurikomiYoteiYMDFlag = hurikomiYoteiYMDFlag;
         this.hakkouYMDFlag = hakkouYMDFlag;
         this.chusyutuUketsukeFlag = chusyutuUketsukeFlag;
@@ -100,17 +102,21 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
         boolean chusyutuKetteiFlag = false;
         boolean chusyutuKetteiShaUketsukeFlag = false;
         boolean yoshiFlag = false;
+        boolean isRiaruHakko = false;
         RString inshoKubun = RString.EMPTY;
+        boolean isInshoKubun3 = false;
+        if (印書_1.equals(insho)) {
+            inshoKubun = 決定通知リアル発行区分_未発行;
+            isRiaruHakko = true;
+        }
+        if (印書_3.equals(insho)) {
+            isInshoKubun3 = true;
+        }
         if (hurikomiYoteiYMD != null) {
             hurikomiYoteiYMDFlag = true;
         }
         if (hakkouYMD != null) {
             hakkouYMDFlag = true;
-        }
-        if (印書_1.equals(insho) || 印書_2.equals(insho)) {
-            inshoKubun = 決定通知リアル発行区分_発行済;
-        } else if (印書_3.equals(insho)) {
-            inshoKubun = 決定通知リアル発行区分_未発行;
         }
         if (抽出モード_1.equals(chusyuMode)) {
             chusyutuUketsukeFlag = true;
@@ -125,7 +131,7 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
 
         return new ShokanKetteiTsuchiShoIkkatsuSakuseiParameter(psmShikibetsuTaisho, psmAtesaki, hurikomiYoteiYMD, dataFrom,
                 dataTo, hakkouYMD, ketteishaUketsukeYM, ShikyuFushikyuKubun.支給.getコード(), ShikyuFushikyuKubun.不支給.getコード(),
-                ShiharaiHohoKubun.口座払.getコード(), inshoKubun, hurikomiYoteiYMDFlag, hakkouYMDFlag, chusyutuUketsukeFlag,
-                chusyutuKetteiFlag, chusyutuKetteiShaUketsukeFlag, yoshiFlag);
+                ShiharaiHohoKubun.口座払.getコード(), inshoKubun, isInshoKubun3, isRiaruHakko, hurikomiYoteiYMDFlag, hakkouYMDFlag,
+                chusyutuUketsukeFlag, chusyutuKetteiFlag, chusyutuKetteiShaUketsukeFlag, yoshiFlag);
     }
 }

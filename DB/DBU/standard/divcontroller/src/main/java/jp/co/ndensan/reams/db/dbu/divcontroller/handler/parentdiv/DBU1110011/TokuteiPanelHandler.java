@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomei
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU1110011.TokuteiPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU1110011.grdTokuteiJoho_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 個人番号関連情報提供のHandlerクラスです。
@@ -49,10 +50,6 @@ public class TokuteiPanelHandler {
      * @return DBU080010_TokuteiKojinJohoTeikyoParameter
      */
     public DBU080010_TokuteiKojinJohoTeikyoParameter onClick_btnBatchParamSave() {
-        // TODO 凌護行 画面項目とバッチパラメータの対応は、
-//        設計書「バッチ設計_DBUMNC2001-1_特定個人情報提供」のバッチパラメータシート
-//        （画面起動時（ワークフローID = xxxxxx）を参照。
-//        QA1818_#103726
         List<RString> 特定個人情報 = new ArrayList<>();
         DBU080010_TokuteiKojinJohoTeikyoParameter parameter = new DBU080010_TokuteiKojinJohoTeikyoParameter();
         List<grdTokuteiJoho_Row> listRow = div.getGrdTokuteiJoho().getDataSource();
@@ -62,6 +59,7 @@ public class TokuteiPanelHandler {
             }
         }
         parameter.set特定個人情報(特定個人情報);
+        parameter.setワークフローID(ResponseHolder.getFlowId());
         return parameter;
     }
 

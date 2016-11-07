@@ -276,86 +276,86 @@ public class ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource implements IReport
     public RString tsuchibunMixtwo21;
     @ReportItem(name = "tsuchibunMixtwo22", length = 62, order = 131)
     public RString tsuchibunMixtwo22;
-    @ReportItem(name = "yubinNo", length = 8, order = 132)
-    public RString yubinNo;
-    @ReportItem(name = "gyoseiku1", length = 14, order = 133)
-    public RString gyoseiku1;
-    @ReportItem(name = "jusho4", length = 20, order = 134)
-    public RString jusho4;
-    @ReportItem(name = "jushoText", order = 135)
-    public RString jushoText;
-    @ReportItem(name = "jusho5", length = 20, order = 136)
-    public RString jusho5;
-    @ReportItem(name = "jusho6", length = 20, order = 137)
-    public RString jusho6;
-    @ReportItem(name = "katagakiText", order = 138)
-    public RString katagakiText;
-    @ReportItem(name = "katagaki3", length = 20, order = 139)
-    public RString katagaki3;
-    @ReportItem(name = "katagakiSmall2", length = 30, order = 140)
-    public RString katagakiSmall2;
-    @ReportItem(name = "katagaki4", length = 20, order = 141)
-    public RString katagaki4;
-    @ReportItem(name = "katagakiSmall1", length = 30, order = 142)
-    public RString katagakiSmall1;
-    @ReportItem(name = "shimei3", length = 20, order = 143)
-    public RString shimei3;
-    @ReportItem(name = "shimeiSmall2", length = 40, order = 144)
-    public RString shimeiSmall2;
-    @ReportItem(name = "shimeiText", order = 145)
-    public RString shimeiText;
-    @ReportItem(name = "meishoFuyo2", length = 3, order = 146)
-    public RString meishoFuyo2;
-    @ReportItem(name = "shimeiSmall1", length = 40, order = 147)
-    public RString shimeiSmall1;
-    @ReportItem(name = "dainoKubunMei", length = 8, order = 148)
-    public RString dainoKubunMei;
-    @ReportItem(name = "shimei4", length = 20, order = 149)
-    public RString shimei4;
-    @ReportItem(name = "meishoFuyo1", length = 3, order = 150)
-    public RString meishoFuyo1;
-    @ReportItem(name = "samabunShimeiText", order = 151)
-    public RString samabunShimeiText;
-    @ReportItem(name = "samaBun2", length = 3, order = 152)
-    public RString samaBun2;
-    @ReportItem(name = "samabunShimeiSmall2", length = 40, order = 153)
-    public RString samabunShimeiSmall2;
-    @ReportItem(name = "kakkoLeft2", length = 1, order = 154)
-    public RString kakkoLeft2;
-    @ReportItem(name = "samabunShimei2", length = 20, order = 155)
-    public RString samabunShimei2;
-    @ReportItem(name = "kakkoRight2", length = 1, order = 156)
-    public RString kakkoRight2;
-    @ReportItem(name = "kakkoLeft1", length = 1, order = 157)
-    public RString kakkoLeft1;
-    @ReportItem(name = "samabunShimei1", length = 20, order = 158)
-    public RString samabunShimei1;
-    @ReportItem(name = "samaBun1", length = 3, order = 159)
-    public RString samaBun1;
-    @ReportItem(name = "kakkoRight1", length = 1, order = 160)
-    public RString kakkoRight1;
-    @ReportItem(name = "samabunShimeiSmall1", length = 40, order = 161)
-    public RString samabunShimeiSmall1;
-    @ReportItem(name = "customerBarCode", order = 162)
-    public RString customerBarCode;
-    @ReportItem(name = "denshiKoin", order = 163)
-    public RString denshiKoin;
-    @ReportItem(name = "hakkoYMD", length = 12, order = 164)
+    @ReportItem(name = "hakkoYMD", length = 12, order = 132)
     public RString hakkoYMD;
-    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 165)
+    @ReportItem(name = "denshiKoin", order = 133)
+    public RString denshiKoin;
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 134)
     public RString ninshoshaYakushokuMei;
-    @ReportItem(name = "ninshoshaYakushokuMei1", order = 166)
+    @ReportItem(name = "ninshoshaYakushokuMei1", order = 135)
     public RString ninshoshaYakushokuMei1;
-    @ReportItem(name = "koinMojiretsu", length = 4, order = 167)
+    @ReportItem(name = "koinMojiretsu", length = 4, order = 136)
     public RString koinMojiretsu;
-    @ReportItem(name = "ninshoshaYakushokuMei2", order = 168)
+    @ReportItem(name = "ninshoshaYakushokuMei2", order = 137)
     public RString ninshoshaYakushokuMei2;
-    @ReportItem(name = "ninshoshaShimeiKakenai", order = 169)
+    @ReportItem(name = "ninshoshaShimeiKakenai", order = 138)
     public RString ninshoshaShimeiKakenai;
-    @ReportItem(name = "ninshoshaShimeiKakeru", order = 170)
+    @ReportItem(name = "ninshoshaShimeiKakeru", order = 139)
     public RString ninshoshaShimeiKakeru;
-    @ReportItem(name = "koinShoryaku", length = 15, order = 171)
+    @ReportItem(name = "koinShoryaku", length = 15, order = 140)
     public RString koinShoryaku;
+    @ReportItem(name = "yubinNo", length = 8, order = 141)
+    public RString yubinNo;
+    @ReportItem(name = "gyoseiku", length = 14, order = 142)
+    public RString gyoseiku;
+    @ReportItem(name = "jushoText", order = 143)
+    public RString jushoText;
+    @ReportItem(name = "jusho3", length = 20, order = 144)
+    public RString jusho3;
+    @ReportItem(name = "jusho1", length = 20, order = 145)
+    public RString jusho1;
+    @ReportItem(name = "jusho2", length = 20, order = 146)
+    public RString jusho2;
+    @ReportItem(name = "katagakiText", order = 147)
+    public RString katagakiText;
+    @ReportItem(name = "katagaki2", length = 18, order = 148)
+    public RString katagaki2;
+    @ReportItem(name = "katagakiSmall2", length = 26, order = 149)
+    public RString katagakiSmall2;
+    @ReportItem(name = "katagakiSmall1", length = 26, order = 150)
+    public RString katagakiSmall1;
+    @ReportItem(name = "katagaki1", length = 18, order = 151)
+    public RString katagaki1;
+    @ReportItem(name = "dainoKubunMei", length = 8, order = 152)
+    public RString dainoKubunMei;
+    @ReportItem(name = "shimei2", length = 18, order = 153)
+    public RString shimei2;
+    @ReportItem(name = "meishoFuyo2", length = 2, order = 154)
+    public RString meishoFuyo2;
+    @ReportItem(name = "shimeiText", order = 155)
+    public RString shimeiText;
+    @ReportItem(name = "shimeiSmall2", length = 26, order = 156)
+    public RString shimeiSmall2;
+    @ReportItem(name = "shimei1", length = 18, order = 157)
+    public RString shimei1;
+    @ReportItem(name = "meishoFuyo1", length = 2, order = 158)
+    public RString meishoFuyo1;
+    @ReportItem(name = "shimeiSmall1", length = 26, order = 159)
+    public RString shimeiSmall1;
+    @ReportItem(name = "samabunShimeiText", order = 160)
+    public RString samabunShimeiText;
+    @ReportItem(name = "samabunShimeiSmall2", length = 26, order = 161)
+    public RString samabunShimeiSmall2;
+    @ReportItem(name = "kakkoLeft2", length = 1, order = 162)
+    public RString kakkoLeft2;
+    @ReportItem(name = "samabunShimei2", length = 18, order = 163)
+    public RString samabunShimei2;
+    @ReportItem(name = "samaBun2", length = 2, order = 164)
+    public RString samaBun2;
+    @ReportItem(name = "kakkoRight2", length = 1, order = 165)
+    public RString kakkoRight2;
+    @ReportItem(name = "kakkoLeft1", length = 1, order = 166)
+    public RString kakkoLeft1;
+    @ReportItem(name = "kakkoRight1", length = 1, order = 167)
+    public RString kakkoRight1;
+    @ReportItem(name = "samabunShimeiSmall1", length = 26, order = 168)
+    public RString samabunShimeiSmall1;
+    @ReportItem(name = "samaBun1", length = 2, order = 169)
+    public RString samaBun1;
+    @ReportItem(name = "samabunShimei1", length = 18, order = 170)
+    public RString samabunShimei1;
+    @ReportItem(name = "customerBarCode", order = 171)
+    public RString customerBarCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

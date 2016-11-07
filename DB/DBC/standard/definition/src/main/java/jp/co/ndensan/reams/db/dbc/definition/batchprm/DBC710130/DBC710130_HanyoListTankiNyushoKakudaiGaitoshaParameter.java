@@ -29,12 +29,15 @@ public class DBC710130_HanyoListTankiNyushoKakudaiGaitoshaParameter extends Batc
     private static final String KEY_RENBANFUKA = "is連番付加";
     private static final String KEY_ISDATEEDIT = "is日付編集";
     private static final String KEY_HONKENSHACODE = "保険者コード";
+    private static final String KEY_HONKENSHAMEI = "保険者名";
+    private static final String KEY_SHICHOSONCODE = "市町村コード";
     private static final String KEY_TYUSYUTUKUBUN = "抽出区分";
     private static final String KEY_TEKIYOKAISHIYMFROM = "適用開始年月From";
     private static final String KEY_TEKIYOKAISHIYMTO = "適用開始年月To";
     private static final String KEY_TEKIYOSHURYOYMFROM = "適用終了年月From";
     private static final String KEY_TEKIYOSHURYOYMTO = "適用終了年月To";
     private static final String KEY_KIKANSU = "限度額管理期間数";
+    private static final long serialVersionUID = 1L;
 
     @BatchParameter(key = KEY_REPORTID, name = "帳票ID")
     private RString 帳票ID;
@@ -50,6 +53,10 @@ public class DBC710130_HanyoListTankiNyushoKakudaiGaitoshaParameter extends Batc
     private boolean is日付編集;
     @BatchParameter(key = KEY_HONKENSHACODE, name = "保険者コード")
     private RString 保険者コード;
+    @BatchParameter(key = KEY_HONKENSHAMEI, name = "保険者名")
+    private RString 保険者名;
+    @BatchParameter(key = KEY_SHICHOSONCODE, name = "市町村コード")
+    private RString 市町村コード;
     @BatchParameter(key = KEY_TYUSYUTUKUBUN, name = "抽出区分")
     private RString 抽出区分;
     @BatchParameter(key = KEY_TEKIYOKAISHIYMFROM, name = "適用開始年月From")
@@ -76,6 +83,8 @@ public class DBC710130_HanyoListTankiNyushoKakudaiGaitoshaParameter extends Batc
                 is連番付加,
                 is日付編集,
                 保険者コード,
+                保険者名,
+                市町村コード,
                 抽出区分,
                 適用開始年月From,
                 適用開始年月To,

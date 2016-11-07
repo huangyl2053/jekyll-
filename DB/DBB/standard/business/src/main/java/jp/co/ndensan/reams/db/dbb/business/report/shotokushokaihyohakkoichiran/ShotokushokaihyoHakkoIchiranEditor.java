@@ -33,6 +33,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final RString 現住所 = new RString("現住所");
     private static final RString 照会日 = new RString("照会日");
     private static final RString 転入日 = new RString("転入日");
+    private static final RString 転入届出日 = new RString("転入届出日");
     private static final RString 転出日 = new RString("転出日");
     private static final RString 候補者区分_転入者 = new RString("1");
     private static final RString 候補者区分_住特者 = new RString("2");
@@ -129,12 +130,17 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         set改ページ(source);
         source.jushoTitle1 = 前住所;
         source.jushoTitle2 = 現住所;
-        source.komokuNameTitle1 = 照会日;
-        source.komokuNameTitle2 = 転入日;
-        source.komokuNameTitle4 = 転出日;
+        RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
+        if (候補者区分 != null && !候補者区分.isEmpty() && 候補者区分_転入者.equals(候補者区分)) {
+            source.komokuNameTitle1 = 転入日;
+            source.komokuNameTitle2 = 転入届出日;
+        } else if (候補者区分 != null && !候補者区分.isEmpty() && 候補者区分_住特者.equals(候補者区分)) {
+            source.komokuNameTitle1 = 転出日;
+            source.komokuNameTitle2 = RString.EMPTY;
+        }
+        source.komokuNameTitle4 = 照会日;
         source.listUpper_1 = new RString(所得照会票発行一覧.getSetaiCode().toString());
         source.listUpper_2 = new RString(所得照会票発行一覧.getAtenaKanaShimei().toString());
-        RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
         if (候補者区分 != null && 候補者区分.equals(候補者区分_転入者)
                 && 所得照会票発行一覧.getZenjusho() != null) {
             source.listUpper_3 = 所得照会票発行一覧.getZenjusho();
@@ -144,6 +150,11 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         }
         set生年月日(source);
         editorSource(source);
+        source.choikiCode = 所得照会票発行一覧.getChoikiCode();
+        source.gyoseikuCode = 所得照会票発行一覧.getGyoseikuCode();
+        source.shichosonCode = 所得照会票発行一覧.getShichosonCode();
+        source.torokuIdoYMD = 所得照会票発行一覧.getTorokuTodokedeYMD();
+        source.zenjushoCode = 所得照会票発行一覧.getZenjushoCode();
         return source;
     }
 
@@ -151,13 +162,8 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         if (照会年月日 != null) {
             source.listUpper_5 = 照会年月日.wareki().toDateString();
         }
-        RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
-        if (候補者区分 != null && 候補者区分.equals(候補者区分_転入者)
-                && 所得照会票発行一覧.getIdoYMD() != null) {
-            source.listUpper_6 = 所得照会票発行一覧.getIdoYMD().wareki().toDateString();
-        } else if (候補者区分 != null
-                && 候補者区分.equals(候補者区分_住特者)) {
-            source.listUpper_6 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(所得照会票発行一覧.getTorokuTodokedeYMD())) {
+            source.listUpper_6 = new FlexibleDate(所得照会票発行一覧.getTorokuTodokedeYMD()).wareki().toDateString();
         }
         set種別(source);
         if (所得照会票発行一覧.getShikibetsuCode() != null) {
@@ -168,12 +174,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         }
         source.listLower_3 = 所得照会票発行一覧.getGenjusho();
         set性別コード(source);
-        if (候補者区分 != null && 候補者区分.equals(候補者区分_転入者)) {
-            source.listLower_5 = RString.EMPTY;
-        } else if (候補者区分 != null
-                && 候補者区分.equals(候補者区分_住特者)) {
-            source.listLower_5 = 所得照会票発行一覧.getIdoYMD().wareki().toDateString();
-        }
+        source.listLower_5 = RString.EMPTY;
         if (所得照会票発行一覧.getHihokenshaNo() != null) {
             source.listLower_6 = 所得照会票発行一覧.getHihokenshaNo().getColumnValue();
         }
