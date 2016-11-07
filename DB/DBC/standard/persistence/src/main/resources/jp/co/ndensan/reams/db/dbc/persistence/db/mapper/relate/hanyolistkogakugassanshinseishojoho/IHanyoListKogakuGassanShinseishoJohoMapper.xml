@@ -114,7 +114,7 @@
         受給者台帳."ninteiYukoKikanShuryoYMD" AS 受給者台帳_認定有効期間終了年月日, 
         受給者台帳."ninteiYMD" AS 受給者台帳_認定年月日,
         受給者台帳."kyuSochishaFlag" AS 受給者台帳_旧措置者フラグ,
-        <!--  TODO QA1790   受給者台帳."minashiCode" AS 受給者台帳_みなし要介護区分コード,-->
+        受給者台帳."minashiCode" AS 受給者台帳_みなし要介護区分コード,
         受給者台帳."chokkinIdoJiyuCode" AS 受給者台帳_直近異動事由コード
         FROM 
         rgdb."DbT3068KogakuGassanShinseisho" AS 高額合算申請書 
