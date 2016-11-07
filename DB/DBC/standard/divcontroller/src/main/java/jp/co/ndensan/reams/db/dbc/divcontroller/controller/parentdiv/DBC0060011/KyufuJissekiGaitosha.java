@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0060011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuJissekiGaitoshaCollect;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiDataModel;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
@@ -51,13 +50,17 @@ public class KyufuJissekiGaitosha {
     public ResponseData<KyufuJissekiGaitoshaDiv> onLoad(KyufuJissekiGaitoshaDiv div) {
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         getHandler(div).onLoad();
-        KyufuJissekiGaitoshaCollect 画面データ = ViewStateHolder.get(
-                ViewStateKeys.給付管理票照会画面データ, KyufuJissekiGaitoshaCollect.class);
-        if (画面データ != null) {
-            getHandler(div).復元画面データ(画面データ);
-            set被保険者情報(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), div);
-        }
-        ViewStateHolder.put(ViewStateKeys.給付管理票照会画面データ, null);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param div 給付管理票照会のDIVです。
+     * @return 給付管理票照会
+     */
+    public ResponseData<KyufuJissekiGaitoshaDiv> onActive(KyufuJissekiGaitoshaDiv div) {
+        set被保険者情報(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), div);
         return ResponseData.of(div).respond();
     }
 
@@ -144,8 +147,6 @@ public class KyufuJissekiGaitosha {
      */
     public ResponseData<KyufuJissekiGaitoshaDiv> onClick_btnSearchHihokensha(KyufuJissekiGaitoshaDiv div) {
         ViewStateHolder.put(ViewStateKeys.資格対象者, null);
-        KyufuJissekiGaitoshaCollect 画面データ = getHandler(div).get画面データ();
-        ViewStateHolder.put(ViewStateKeys.給付管理票照会画面データ, 画面データ);
         return ResponseData.of(div).forwardWithEventName(DBC0060011TransitionEventName.対象者検索).respond();
     }
 
