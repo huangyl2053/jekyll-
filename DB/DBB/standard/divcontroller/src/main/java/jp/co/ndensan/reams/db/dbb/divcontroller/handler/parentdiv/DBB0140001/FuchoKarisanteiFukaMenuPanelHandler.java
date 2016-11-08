@@ -102,7 +102,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private static final RString 全件出力 = new RString("全件出力");
     private static final RString 出力期のタイプ_前 = new RString("期（");
     private static final RString 出力期のタイプ_別々に = new RString("月）分");
-    private static final RString 出力期のタイプ_全件 = new RString("月）~");
+    private static final RString 出力期のタイプ_全件 = new RString("月）～");
     private static final RString 項目名 = new RString("当初出力_出力方法");
     private static final RString 期RSTRING = new RString("期");
     private static final RString 対象者_2 = new RString("2");

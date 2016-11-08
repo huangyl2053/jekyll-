@@ -33,6 +33,8 @@ public class HanyoListParamPanel {
     private static final RString 広域 = new RString("広域");
     private static final RString 再審査申立情報 = new RString("再審査申立情報");
     private static final RString 再審査結果情報 = new RString("再審査結果情報");
+    private static final RString 再審査申立 = new RString("汎用リスト 再審査申立情報");
+    private static final RString 再審査結果 = new RString("汎用リスト 再審査結果情報");
     private static final RString 事業者入力モード = new RString("事業者入力モード");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
 
@@ -50,9 +52,9 @@ public class HanyoListParamPanel {
         div.getCcdJigyoshaBango().initialize();
         getHandler(div).initialize(導入形態, モード);
         if (再審査申立情報.equals(モード)) {
-            return ResponseData.of(div).setState(DBC7110001StateName.再審査申立情報);
+            return ResponseData.of(ResponseData.of(div).setState(DBC7110001StateName.再審査申立情報).data).rootTitle(再審査申立).respond();
         } else if (再審査結果情報.equals(モード)) {
-            return ResponseData.of(div).setState(DBC7110001StateName.再審査結果情報);
+            return ResponseData.of(ResponseData.of(div).setState(DBC7110001StateName.再審査申立情報).data).rootTitle(再審査結果).respond();
         }
         return ResponseData.of(div).respond();
     }
