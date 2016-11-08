@@ -36,7 +36,6 @@ public class HonKakushuTsuchiUchiwakeKakunin {
      * @return 打ち分け方法確認の画面。
      */
     public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onLoad(HonKakushuTsuchiUchiwakeKakuninDiv div) {
-        ViewStateHolder.put(ViewStateKeys.保存フラグ, false);
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
         List<TsuchishoUchiwakeJoken> 打分け方法List = 本算定賦課計算.getutiwakehouhoujyoho1();
         if (打分け方法List != null) {
@@ -58,7 +57,6 @@ public class HonKakushuTsuchiUchiwakeKakunin {
      * @return 打ち分け方法確認の画面
      */
     public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onSelect(HonKakushuTsuchiUchiwakeKakuninDiv div) {
-        ViewStateHolder.put(ViewStateKeys.保存フラグ, false);
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
         HonKakushuTsuchiUchiwakeKakuninHandler handler = getHandler(div);
         RString 切替前の打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
@@ -128,7 +126,6 @@ public class HonKakushuTsuchiUchiwakeKakunin {
                 getHandler(div).show打分け方法情報(方法情報一覧.get(0));
             }
         }
-        ViewStateHolder.put(ViewStateKeys.保存フラグ, true);
         return createResponse(div);
     }
 
@@ -142,11 +139,10 @@ public class HonKakushuTsuchiUchiwakeKakunin {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
         HonKakushuTsuchiUchiwakeKakuninHandler handler = getHandler(div);
         RString 打ち分け条件view = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
-        boolean 保存フラグ = ViewStateHolder.get(ViewStateKeys.保存フラグ, Boolean.class);
 
         List<TsuchishoUchiwakeJoken> 打分け方法 = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件view);
         boolean 変更flag = handler.変更有無(打分け方法.get(0));
-        if (変更flag && !保存フラグ) {
+        if (変更flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(DbbQuestionMessages.変更途中の内容破棄確認.getMessage().getCode(),
                         DbbQuestionMessages.変更途中の内容破棄確認.getMessage().evaluate());
