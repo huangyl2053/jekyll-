@@ -41,8 +41,9 @@ public interface IKogakuGassanShikyuKetteiHoseiMapper {
      *
      * 高額合算給付実績論理削除
      *
+     * @param 高額合算給付実績 KogakuGassanShikyuGakuKeisanKekkaUpdateParameter
      */
-    void logicalDelete高額合算給付実績();
+    void logicalDelete高額合算給付実績(KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 高額合算給付実績);
 
     /**
      * 高額合算給付実績物理削除

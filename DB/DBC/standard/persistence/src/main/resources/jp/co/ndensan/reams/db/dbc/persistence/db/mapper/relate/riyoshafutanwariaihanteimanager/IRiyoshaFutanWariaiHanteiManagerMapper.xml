@@ -16,7 +16,7 @@
         A."shikibetsuCode" =#{識別コード}
         AND  A."gyomuCode" ='DB'
         AND  (A."jukyuKaishiYMD"<![CDATA[<=]]> #{対象終了日}
-        AND COALESCE(対象開始日<![CDATA[<=]]>NULLIF(A."jukyuHaishiYMD", '99999999')))
+        AND COALESCE(#{対象開始日}<![CDATA[<=]]>NULLIF(A."jukyuHaishiYMD", '99999999')))
         ORDER BY A."jukyuKaishiYMD"
     </select>
 
