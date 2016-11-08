@@ -53,7 +53,6 @@ public class KijunShunyuShinseiTouroku {
     private static final RString MESSAGE_合計 = new RString("所得情報の収入合計＞入力した収入合計になっています。");
     private static final RString MESSAGE_世帯再算出 = new RString("「世帯コード」、「処理年度」、「世帯員把握基準」"
             + "が変更していますが、登録して");
-    private static final RString MESSAGE_受給者または事業対象者 = new RString("世帯員に受給者または事業対象者がいませんが、登録して");
     private static final RString MESSAGE_算定基準額 = new RString("算定基準額が課税所得、総収入額の結果と異なりますが、登録して");
 
     /**
@@ -139,12 +138,23 @@ public class KijunShunyuShinseiTouroku {
     }
 
     /**
-     * 12/31状況ボタンのメソッドです。
+     * 所得状況ボタンのメソッドです。
      *
      * @param div 画面Div
      * @return ResponseData
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnBefore_ShotokuJokyo(KijunShunyuShinseiTourokuDiv div) {
+        getHandler(div).set所得状況隠し項目();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 12/31状況ボタンのメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnBefore_1231Jokyo(KijunShunyuShinseiTourokuDiv div) {
         getHandler(div).set1231状況隠し項目();
         return ResponseData.of(div).respond();
     }
@@ -357,17 +367,17 @@ public class KijunShunyuShinseiTouroku {
         }
 
         if (!チェック済み.equals(div.getHdnFlag2()) && !getHandler(div).is世帯再算出ボタン押下チェック()) {
+
             WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
                     DbzWarningMessages.確認.getMessage().replace(MESSAGE_世帯再算出.toString()).evaluate());
             div.setHdnFlag2(チェック済み);
             return ResponseData.of(div).addMessage(message).respond();
         }
 
-        if (!チェック済み.equals(div.getHdnFlag3()) && !getHandler(div).is受給者事業対象者のチェック()) {
-            WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
-                    DbzWarningMessages.確認.getMessage().replace(MESSAGE_受給者または事業対象者.toString()).evaluate());
+        validPairs = getValidationHandler(div).明細確定時チェックValidate();
+        if (!チェック済み.equals(div.getHdnFlag3()) && validPairs.iterator().hasNext()) {
             div.setHdnFlag3(チェック済み);
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
         if (!チェック済み.equals(div.getHdnFlag4()) && !getHandler(div).is算定基準額のチェック()) {

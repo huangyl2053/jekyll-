@@ -101,6 +101,7 @@ public class ShotokuJokyoHandler {
                 get世帯員所得情報(hdnShikibetuCode, hdnShoriNendo.getNendo(), 所得基準年月日);
         List<dgSteaiinShotoku_Row> rowList = set世帯員所得情報Grid(世帯員所得情報リスト, hdnKijunYMD);
         div.getDgSteaiinShotoku().setDataSource(rowList);
+
         MemoNyuryokuHandler.dataGridupdateImage(new GyomuCode(div.getHdnGyomuCode()), SubGyomuCode.DBC介護給付, div.getDgSteaiinShotoku(),
                 MemoShikibetsuTaisho.識別コード.get識別対象(), 文字列_識別対象コード, RString.EMPTY, RString.EMPTY,
                 メモボタン);
@@ -212,7 +213,7 @@ public class ShotokuJokyoHandler {
                 row.setNenkinShotoku(年金等所得);
                 課税所得 = DecimalFormatter.toコンマ区切りRString(nullToZero(item.get課税所得額()), 0);
                 row.setKazeiShotoku(課税所得);
-                row.setShikibetsuTaishoKubun(識別対象区分_個人);
+                row.setShikibetsuTaishoKubun(MemoShikibetsuTaisho.識別コード.get識別対象());
                 Decimal 計算結果 = Decimal.ZERO;
                 計算結果 = 計算結果.add(nullToZero(item.get合計所得金額())).
                         subtract(nullToZero(item.get年金収入額())).add(nullToZero(item.get課税所得額()));

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.Kiju
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -53,6 +54,7 @@ public class KijunShunyuShinseiTourokuValidationHandler {
     private static final RString MESSAGE_世帯員 = new RString("世帯員が0人の");
     private static final RString MESSAGE_世帯課税 = new RString("世帯課税が非課税の");
     private static final RString MESSAGE_宛先印字者 = new RString("世帯員１人に宛先印字者のチェックを付けて、宛先印字者を");
+    private static final RString MESSAGE_受給者または事業対象者 = new RString("世帯員に受給者または事業対象者がいませんが、登録して");
 
     /**
      * コンストラクタです。
@@ -91,6 +93,16 @@ public class KijunShunyuShinseiTourokuValidationHandler {
     public ValidationMessageControlPairs 明細GridチェックValidate() {
         IValidationMessages messages = new ControlValidator(div).明細GridValidate();
         return create明細GridDictionary().check(messages);
+    }
+
+    /**
+     * 明細確定時のバリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 明細確定時チェックValidate() {
+        IValidationMessages messages = new ControlValidator(div).明細確定時Validate();
+        return create警告バリデーションDictionary().check(messages);
     }
 
     /**
@@ -143,6 +155,12 @@ public class KijunShunyuShinseiTourokuValidationHandler {
                 .build();
     }
 
+    private ValidationDictionary create警告バリデーションDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(KijunShunyuShinseiTourokuValidationMessages.受給者または事業対象者チェックMessage)
+                .build();
+    }
+
     private static class ControlValidator {
 
         private final KijunShunyuShinseiTourokuDiv div;
@@ -161,6 +179,20 @@ public class KijunShunyuShinseiTourokuValidationHandler {
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(KijunShunyuShinseiTourokuSpec.控除再算出チェック)
                     .thenAdd(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage)
+                    .messages());
+            return messages;
+        }
+
+        /**
+         * 明細確定時チェックバリデーションチェックです。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages 明細確定時Validate() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(KijunShunyuShinseiTourokuSpec.受給者または事業対象者チェック)
+                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.受給者または事業対象者チェックMessage)
                     .messages());
             return messages;
         }
@@ -215,7 +247,8 @@ public class KijunShunyuShinseiTourokuValidationHandler {
         総収入額チェックMessage(UrErrorMessages.必須項目_追加メッセージあり, MESSAGE_総収入額.toString()),
         世帯員チェックMessage(UrErrorMessages.更新不可_汎用, MESSAGE_世帯員.toString()),
         世帯課税チェックMessage(UrErrorMessages.更新不可_汎用, MESSAGE_世帯課税.toString()),
-        宛先印字者チェックMessage(UrErrorMessages.未指定, MESSAGE_宛先印字者.toString());
+        宛先印字者チェックMessage(UrErrorMessages.未指定, MESSAGE_宛先印字者.toString()),
+        受給者または事業対象者チェックMessage(DbzWarningMessages.確認, MESSAGE_受給者または事業対象者.toString());
 
         private final Message message;
 
