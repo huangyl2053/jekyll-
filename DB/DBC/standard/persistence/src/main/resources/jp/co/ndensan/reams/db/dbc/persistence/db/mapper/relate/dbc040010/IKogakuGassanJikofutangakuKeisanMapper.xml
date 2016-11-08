@@ -353,8 +353,8 @@
     </select>
 
     <!--BatchStep_SetFutangaku-->
-    <select id="get自己負担額"  parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040010.SetFutangakuMyBatisParameter"
-            resultMap="ResultMap_DbT3170MatchingEntity" resultOrdered="true" fetchSize="500">
+    <select resultOrdered="true" id="get自己負担額"  parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040010.SetFutangakuMyBatisParameter"
+            resultMap="ResultMap_DbT3170MatchingEntity" fetchSize="500">
         SELECT
         <include refid="allColumns_JissekiFutangakuDataTempEntity" />
         ,"DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo" as "dbT3170_hihokenshaNo",
@@ -529,7 +529,7 @@
         <id column="temp_taishoNendo" />
         <id column="temp_hokenshaNo" />
         <id column="temp_shikyuShinseishoSeiriNo" />
-        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" />
+        <id column="dbT3171_taishoM" />
         <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
         <association property="高額合算自己負担額"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.ResultMap_DbT3170JigyoKogakuGassanJikoFutanGakuEntity" />
