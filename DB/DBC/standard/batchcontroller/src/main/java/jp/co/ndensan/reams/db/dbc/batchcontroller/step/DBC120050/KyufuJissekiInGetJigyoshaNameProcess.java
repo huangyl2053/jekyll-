@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_Tori
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.JigyoshaMeisyoAndShikibetsuNoKanrenEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuShoriKekkaListInsertManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
@@ -34,10 +34,7 @@ public class KyufuJissekiInGetJigyoshaNameProcess extends BatchProcessBase<Jigyo
             + "kyufujissekiin.IKyufuJissekiInJohoMapper.select事業者名称関連リスト");
     private static final RString 文字_事業者名称 = new RString("事業者名称");
     @BatchWriter
-    private IBatchTableWriter 処理結果リスト一時tableWriter;
-    @BatchWriter
     private IBatchTableWriter 給付実績一時tableWriter;
-    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private static final RString 給付実績一時_TABLE_NAME = new RString("DbWT1111KyufuJisseki");
 
     @Override
@@ -47,9 +44,6 @@ public class KyufuJissekiInGetJigyoshaNameProcess extends BatchProcessBase<Jigyo
 
     @Override
     protected void createWriter() {
-        処理結果リスト一時tableWriter
-                = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
-                        DbWT0002KokuhorenTorikomiErrorEntity.class);
         給付実績一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(給付実績一時_TABLE_NAME, DbWT1111KyufuJissekiEntity.class);
     }
@@ -70,7 +64,7 @@ public class KyufuJissekiInGetJigyoshaNameProcess extends BatchProcessBase<Jigyo
             処理結果.set備考(文字_事業者名称);
             処理結果.set被保険者番号(HihokenshaNo.EMPTY);
             処理結果.set証記載保険者番号(ShoKisaiHokenshaNo.EMPTY);
-            処理結果リスト一時tableWriter.insert(処理結果.toEntity());
+            KokuhorenKyoutsuuShoriKekkaListInsertManager.do一意排他登録(処理結果);
         }
     }
 
