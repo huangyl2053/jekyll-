@@ -180,18 +180,18 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     private enum 特定項目 implements ISpecificKey {
 
-        key1("shikibetsuCode", "識別コード1枚目"),
-        key2("shikibetsuCode1", "識別コード2枚目"),
-        key3("shikibetsuCode2", "識別コード3枚目"),
-        key4("shikibetsuCode3", "識別コード4枚目"),
-        key5("shikibetsuCode4", "識別コード5枚目"),
-        key6("shikibetsuCode5", "識別コード6枚目"),
-        key7("shikibetsuCode6", "識別コード7枚目"),
-        key8("shikibetsuCode7", "識別コード8枚目"),
-        key9("shikibetsuCode8", "識別コード9枚目"),
-        key10("shikibetsuCode9", "識別コード10枚目"),
-        key11("shikibetsuCode10", "識別コード11枚目"),
-        key12("shikibetsuCode11", "識別コード12枚目");
+        key1("chkShikibetsuCode", "識別コード1枚目"),
+        key2("chkShikibetsuCode1", "識別コード2枚目"),
+        key3("chkShikibetsuCode2", "識別コード3枚目"),
+        key4("chkShikibetsuCode3", "識別コード4枚目"),
+        key5("chkShikibetsuCode4", "識別コード5枚目"),
+        key6("chkShikibetsuCode5", "識別コード6枚目"),
+        key7("chkShikibetsuCode6", "識別コード7枚目"),
+        key8("chkShikibetsuCode7", "識別コード8枚目"),
+        key9("chkShikibetsuCode8", "識別コード9枚目"),
+        key10("chkShikibetsuCode9", "識別コード10枚目"),
+        key11("chkShikibetsuCode10", "識別コード11枚目"),
+        key12("chkShikibetsuCode11", "識別コード12枚目");
 
         private final RString itemName;
         private final RString printName;

@@ -871,6 +871,30 @@ public class DBZ100001AtenaSealSource implements IReportSource {
     public RString chkKatagaki10;
     @ReportItem(name = "chkKatagaki11", order = 412)
     public RString chkKatagaki11;
+    @ReportItem(name = "chkShikibetsuCode", order = 413)
+    public RString chkShikibetsuCode;
+    @ReportItem(name = "chkShikibetsuCode1", order = 414)
+    public RString chkShikibetsuCode1;
+    @ReportItem(name = "chkShikibetsuCode2", order = 415)
+    public RString chkShikibetsuCode2;
+    @ReportItem(name = "chkShikibetsuCode3", order = 416)
+    public RString chkShikibetsuCode3;
+    @ReportItem(name = "chkShikibetsuCode4", order = 417)
+    public RString chkShikibetsuCode4;
+    @ReportItem(name = "chkShikibetsuCode5", order = 418)
+    public RString chkShikibetsuCode5;
+    @ReportItem(name = "chkShikibetsuCode6", order = 419)
+    public RString chkShikibetsuCode6;
+    @ReportItem(name = "chkShikibetsuCode7", order = 420)
+    public RString chkShikibetsuCode7;
+    @ReportItem(name = "chkShikibetsuCode8", order = 421)
+    public RString chkShikibetsuCode8;
+    @ReportItem(name = "chkShikibetsuCode9", order = 422)
+    public RString chkShikibetsuCode9;
+    @ReportItem(name = "chkShikibetsuCode10", order = 423)
+    public RString chkShikibetsuCode10;
+    @ReportItem(name = "chkShikibetsuCode11", order = 424)
+    public RString chkShikibetsuCode11;
 
 // </editor-fold>
 }
