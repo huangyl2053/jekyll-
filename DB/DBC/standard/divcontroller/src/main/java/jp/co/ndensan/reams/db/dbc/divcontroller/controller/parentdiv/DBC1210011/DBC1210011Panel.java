@@ -75,6 +75,8 @@ public class DBC1210011Panel {
             throw new PessimisticLockingException();
         }
         getHandler(div).initialize(被保険者番号, 識別コード, 支払予定日印字有無);
+        RString 文書番号 = div.getCcdBunshoNO().get文書番号();
+        ViewStateHolder.put(ViewStateKeys.文書番号, 文書番号);
         List<JukyushaDaicho> 受給者台帳 = getHandler(div).get受給者台帳(被保険者番号);
         List<SogoJigyoTaishosha> 総合事業対象者 = getHandler(div).get総合事業対象者(被保険者番号);
         if (受給者台帳.isEmpty() && 総合事業対象者.isEmpty()) {
@@ -162,8 +164,9 @@ public class DBC1210011Panel {
 
     private ResponseData<DBC1210011PanelDiv> getCheckMessage(DBC1210011PanelDiv div, DBC1210011TransitionEventName eventName) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RString 文書番号 = ViewStateHolder.get(ViewStateKeys.文書番号, RString.class);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
+            if (!ResponseHolder.isReRequest() && getHandler(div).is画面変更あり(div, 文書番号)) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();

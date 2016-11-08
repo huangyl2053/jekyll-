@@ -516,4 +516,19 @@ public class DBC1210011PanelHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
     }
 
+    /**
+     * 画面変更有無check。
+     *
+     * @param div DBC1210011PanelDiv
+     * @param 前文書番号 前文書番号
+     * @return 画面変更有無
+     */
+    public boolean is画面変更あり(DBC1210011PanelDiv div, RString 前文書番号) {
+        return div.getDdlTaishoNendo().getSelectedIndex() != 0
+                || div.getDdlRearakuhyoSeiriNO().getSelectedIndex() != 0
+                || div.getDdlRirekiNO().getSelectedIndex() != 0
+                || !前文書番号.equals(div.getCcdBunshoNO().get文書番号())
+                || !RDate.getNowDate().equals(div.getTxtHakkouYMD().getValue())
+                || div.getTxtShiharaiYoteiYMD().getValue() != null;
+    }
 }
