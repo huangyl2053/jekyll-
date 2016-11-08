@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -298,6 +299,7 @@ public class HanyoListFukaDaichoParamHandler {
         if (受給者判定 != null && !受給者判定.isEmpty()) {
             div.getChushutsuJokenPanel().getDdlJukyushaHantei().setSelectedKey(受給者判定);
         }
+        宛名抽出条件復元(restoreBatchParameterMap);
         pamaRestorePart2(restoreBatchParameterMap);
     }
 
@@ -310,39 +312,6 @@ public class HanyoListFukaDaichoParamHandler {
         RString 出力項目ID = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力項目ID);
         if (出力項目ID != null && !出力項目ID.isEmpty()) {
             div.getCcdShutsuryokuKoumoku().load(出力項目帳票ID, SubGyomuCode.DBB介護賦課, 出力項目ID);
-        }
-        AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap.getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
-        if (宛名抽出条件 != null) {
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
-            if (宛名抽出条件.getChiku_Kubun() != null) {
-                div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().getコード());
-            }
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(toChikuCode(宛名抽出条件.getChiku1_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(toChikuCode(宛名抽出条件.getChiku1_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(toChikuCode(宛名抽出条件.getChiku2_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２開始(toChikuCode(宛名抽出条件.getChiku2_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３終了(toChikuCode(宛名抽出条件.getChiku3_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３開始(toChikuCode(宛名抽出条件.getChiku3_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
-            if (宛名抽出条件.getAgeSelectKijun() != null) {
-                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
-            }
-            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getFrom() != null) {
-                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
-            }
-            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getTo() != null) {
-                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
-            }
-            if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getFrom() != null) {
-                div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日開始(宛名抽出条件.getSeinengappiRange().getFrom());
-            }
-            if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getTo() != null) {
-                div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日終了(宛名抽出条件.getSeinengappiRange().getTo());
-            }
-            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区終了(toGyoseikuCode(宛名抽出条件.getGyoseiku_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区開始(toGyoseikuCode(宛名抽出条件.getGyoseiku_From()));
         }
         RString 徴収方法 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_徴収方法);
         if (徴収方法 != null && !徴収方法.isEmpty()) {
@@ -357,6 +326,47 @@ public class HanyoListFukaDaichoParamHandler {
             }
         }
         onChange_chkKijyunbiSiteiUmu();
+    }
+
+    private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {
+        AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap.getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
+        if (宛名抽出条件 != null) {
+            if (宛名抽出条件.getAgeSelectKijun() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectKijun();
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
+            if (宛名抽出条件.getChiku_Kubun() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().getコード());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(toChikuCode(宛名抽出条件.getChiku1_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(toChikuCode(宛名抽出条件.getChiku1_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(toChikuCode(宛名抽出条件.getChiku2_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２開始(toChikuCode(宛名抽出条件.getChiku2_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３終了(toChikuCode(宛名抽出条件.getChiku3_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３開始(toChikuCode(宛名抽出条件.getChiku3_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
+            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getFrom() != null
+                    && NenreiSoChushutsuHoho.年齢範囲.getコード().equals(div.getChushutsuPanel2().getCcdAtenaJoken().
+                            get年齢層抽出方法().getコード())) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
+            }
+            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getTo() != null
+                    && NenreiSoChushutsuHoho.年齢範囲.getコード().equals(div.getChushutsuPanel2().getCcdAtenaJoken().
+                            get年齢層抽出方法().getコード())) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
+            }
+            if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getFrom() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日開始(宛名抽出条件.getSeinengappiRange().getFrom());
+            }
+            if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getTo() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日終了(宛名抽出条件.getSeinengappiRange().getTo());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区終了(toGyoseikuCode(宛名抽出条件.getGyoseiku_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区開始(toGyoseikuCode(宛名抽出条件.getGyoseiku_From()));
+        }
     }
 
     private ChoikiCode toChoikiCode(RString value) {

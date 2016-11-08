@@ -724,13 +724,9 @@ public enum ReportIdDBC {
      */
     DBC100050(new ReportId("DBC100050_JikoFutangakushomeishoTo2008"), new RString("自己負担額証明書（介護）(平成２０年度まで用）")),
     /**
-     * 振込明細一覧表（合計）帳票ＩＤです。
-     */
-    DBC200101_合計(new ReportId("DBC200101_FurikomiMeisaiIchiranGokei"), new RString("振込明細一覧表（合計）")),
-    /**
      * 振込明細一覧表（明細）帳票ＩＤです。
      */
-    DBC200101_明細(new ReportId("DBC200101_FurikomiMeisaiIchiran"), new RString("振込明細一覧表（明細）")),
+    DBC200101(new ReportId("DBC200101_FurikomiMeisaiIchiran"), new RString("振込明細一覧表")),
     /**
      * 帳票設計_DBC200039_高額合算支給不支給決定通知書情報取込一覧表 ＩＤです。
      */

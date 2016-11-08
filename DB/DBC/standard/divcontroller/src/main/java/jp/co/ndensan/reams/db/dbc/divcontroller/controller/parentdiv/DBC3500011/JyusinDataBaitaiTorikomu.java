@@ -182,12 +182,10 @@ public class JyusinDataBaitaiTorikomu {
                     .concat(コントロールレコード.get(Integer.parseInt(二.toString()))).concat(コントロールレコード.get(六)).concat(CSV);
 
             List<UzT0885SharedFileEntryEntity> uzt0885EntityList = SharedFile.searchSharedFile(共有ファイル名);
-            for (UzT0885SharedFileEntryEntity entity : uzt0885EntityList) {
-                List<RString> コントロールレコード2 = csvReader.readLine();
-                RString データ種別2 = コントロールレコード2.get(四);
-                try {
-                    ConfigKeysKokuhorenTorikomi.toValue(データ種別2);
-                } catch (IllegalArgumentException e) {
+            try {
+                ConfigKeysKokuhorenTorikomi.toValue(データ種別);
+            } catch (IllegalArgumentException e) {
+                for (UzT0885SharedFileEntryEntity entity : uzt0885EntityList) {
                     ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(
                             new FilesystemName(entity.getSharedFileName()), entity.getSharedFileId());
                     SharedFile.deleteEntry(deleteEntity);

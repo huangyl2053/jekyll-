@@ -24,13 +24,12 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FukaCalculateEntity {
+public class FukaCalculateHachiEntity {
 
     private FlexibleYear choteiNendo;
     private FlexibleYear fukaNendo;
     private TsuchishoNo tsuchishoNo;
     private FlexibleDate kijunYMD;
-//    private TaishoshaTmpEntity 賦課の情報;
     private TokuchoHeijunkaHachiBatchTaishogaiTempEntity 賦課の情報;
     private DbT1001HihokenshaDaichoEntity 資格の情報;
     private KuBunnGaTsurakuTempEntity 月別ランク;

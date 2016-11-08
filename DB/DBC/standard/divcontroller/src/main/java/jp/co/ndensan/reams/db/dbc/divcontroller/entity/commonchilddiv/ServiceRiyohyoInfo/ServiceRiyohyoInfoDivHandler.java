@@ -104,6 +104,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final RString 固定値_3 = new RString("3");
+    private static final RString 定値_ハイフン = new RString("-");
     private static final Decimal DECIMAL_80 = new Decimal(80);
     private static final Decimal DECIMAL_90 = new Decimal(90);
     private static final Decimal DECIMAL_100 = new Decimal(100);
@@ -564,23 +565,23 @@ public class ServiceRiyohyoInfoDivHandler {
         dgServiceRiyohyoBeppyoList_Row row = new dgServiceRiyohyoBeppyoList_Row();
         row.setJigyosha(result.get事業者());
         row.setService(result.getサービス());
-        row.getTani().setValue(result.get単位());
-        row.getWaribikigoRitsu().setValue(result.get割引適用後率() == null ? null
-                : result.get割引適用後率().getColumnValue());
-        row.getWaribikigoTani().setValue(result.get割引適用後単位());
-        row.getKaisu().setValue(result.get回数());
-        if ((row.getTani().getValue() == null || Decimal.ZERO.equals(row.getTani().getValue()))
+        row.setTani(result.get単位());
+        row.setWaribikigoRitsu(result.get割引適用後率());
+        row.setWaribikigoTani(result.get割引適用後単位());
+        row.setKaisu(result.get回数());
+        row.getServiceTani().setValue(result.getサービス単位());
+        if ((RString.isNullOrEmpty(row.getTani())
+                || (!定値_ハイフン.equals(row.getTani()) && Decimal.ZERO.equals(new Decimal(row.getTani().toString()))))
                 && !Decimal.ZERO.equals(row.getServiceTani().getValue())) {
             row.setCellBgColor(SERVICETANI.toString(), DataGridCellBgColor.bgColorLightBlue);
         }
-        row.getServiceTani().setValue(result.getサービス単位());
         row.getShuruiGendoChokaTani().setValue(result.get種類限度超過単位());
         row.getShuruiGendonaiTani().setValue(result.get種類限度内単位());
         row.getKubunGendoChokaTani().setValue(result.get区分限度超過単位());
         row.getKubunGendonaiTani().setValue(result.get区分限度内単位());
-        row.getTanisuTanka().setValue(result.get単位数単価());
+        row.setTanisuTanka(result.get単位数単価());
         row.getHiyoSogaku().setValue(result.get費用総額());
-        row.getKyufuritsu().setValue(result.get給付率() == null ? null : result.get給付率().getColumnValue());
+        row.setKyufuritsu(result.get給付率());
         row.getHokenKyufugaku().setValue(result.get保険給付額());
         row.getRiyoshaFutangakuTeigaku().setValue(result.get定額利用者負担単価金額());
         row.getRiyoshaFutangakuHoken().setValue(result.get保険対象利用者負担額());
@@ -636,10 +637,14 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
 
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(row.getTani().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(row.getWaribikigoRitsu().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(row.getWaribikigoTani().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(row.getKaisu().getValue());
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(RString.isNullOrEmpty(row.getTani())
+                ? null : new Decimal(row.getTani().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(RString.isNullOrEmpty(row.getWaribikigoRitsu())
+                ? null : new Decimal(row.getWaribikigoRitsu().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(RString.isNullOrEmpty(row.getWaribikigoTani())
+                ? null : new Decimal(row.getWaribikigoTani().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(RString.isNullOrEmpty(row.getKaisu())
+                ? null : new Decimal(row.getKaisu().toString()));
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
@@ -652,10 +657,12 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().setValue(row.getShuruiGendoChokaTani().getValue());
         div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().setValue(row.getShuruiGendonaiTani().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().setValue(row.getTanisuTanka().getValue());
+        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().setValue(RString.isNullOrEmpty(row.getTanisuTanka())
+                ? null : new Decimal(row.getTanisuTanka().toString()));
         div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().setValue(row.getKubunGendoChokaTani().getValue());
         div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setValue(row.getKubunGendonaiTani().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(row.getKyufuritsu().getValue());
+        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(RString.isNullOrEmpty(row.getKyufuritsu())
+                ? null : new Decimal(row.getKyufuritsu().toString()));
         div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().setValue(row.getHiyoSogaku().getValue());
         div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setValue(row.getHokenKyufugaku().getValue());
         div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setValue(row.getRiyoshaFutangakuHoken().getValue());
@@ -972,16 +979,16 @@ public class ServiceRiyohyoInfoDivHandler {
         }
         row.setJigyosha(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
         row.setService(サービスTmp);
-        row.getTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getValue());
-        row.getWaribikigoRitsu().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue());
-        row.getWaribikigoTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().getValue());
-        row.getKaisu().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue() == null ? Decimal.ZERO
-                : div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue());
-        if ((row.getTani().getValue() == null || Decimal.ZERO.equals(row.getTani().getValue()))
+        row.setTani(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getValue().toString()));
+        row.setWaribikigoRitsu(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue().toString()));
+        row.setWaribikigoTani(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().getValue().toString()));
+        row.setKaisu(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue() == null ? null
+                : new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue().toString()));
+        row.getServiceTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue());
+        if ((RString.isNullOrEmpty(row.getTani()) || Decimal.ZERO.equals(new Decimal(row.getTani().toString())))
                 && !Decimal.ZERO.equals(row.getServiceTani().getValue())) {
             row.setCellBgColor(SERVICETANI.toString(), DataGridCellBgColor.bgColorLightBlue);
         }
-        row.getServiceTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue());
         row.setHdnJigyoshaCode(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo());
         row.setHdnServiceShuruiCode(サービス種類コードTmp);
         row.setHdnGendogakuTaishogaiFlag(div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().getValue());
@@ -1162,23 +1169,24 @@ public class ServiceRiyohyoInfoDivHandler {
         }
         row.setJigyosha(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
         row.setService(サービスTmp);
-        row.getTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getValue());
-        row.getWaribikigoRitsu().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue());
-        row.getWaribikigoTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().getValue());
-        row.getKaisu().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue() == null ? Decimal.ZERO
-                : div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue());
-        if ((row.getTani().getValue() == null || Decimal.ZERO.equals(row.getTani().getValue()))
+        row.setTani(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getValue().toString()));
+        row.setWaribikigoRitsu(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue().toString()));
+        row.setWaribikigoTani(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().getValue().toString()));
+        row.setKaisu(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue() == null ? null
+                : new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue().toString()));
+        row.getServiceTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue());
+        if ((RString.isNullOrEmpty(row.getTani()) || Decimal.ZERO.equals(new Decimal(row.getTani().toString())))
                 && !Decimal.ZERO.equals(row.getServiceTani().getValue())) {
             row.setCellBgColor(SERVICETANI.toString(), DataGridCellBgColor.bgColorLightBlue);
         }
-        row.getServiceTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue());
         row.getShuruiGendoChokaTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().getValue());
         row.getShuruiGendonaiTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().getValue());
-        row.getTanisuTanka().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getText() == null ? null
-                : new Decimal(div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getText().toString()));
+        row.setTanisuTanka(div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getValue() == null ? null
+                : new RString(div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getValue().toString()));
         row.getKubunGendoChokaTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().getValue());
         row.getKubunGendonaiTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().getValue());
-        row.getKyufuritsu().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue());
+        row.setKyufuritsu(div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue() == null ? null
+                : new RString(div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue().toString()));
         row.getHiyoSogaku().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().getValue());
         row.getHokenKyufugaku().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().getValue());
         row.getRiyoshaFutangakuHoken().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().getValue());
@@ -1199,20 +1207,18 @@ public class ServiceRiyohyoInfoDivHandler {
             KyufuJikoSakuseiResult result = new KyufuJikoSakuseiResult();
             result.set事業者(row.getJigyosha());
             result.setサービス(row.getService());
-            result.set単位(row.getTani().getValue());
-            result.set割引適用後率(row.getWaribikigoRitsu().getValue() == null ? null
-                    : new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()));
-            result.set割引適用後単位(row.getWaribikigoTani().getValue());
-            result.set回数(row.getKaisu().getValue());
+            result.set単位(row.getTani());
+            result.set割引適用後率(row.getWaribikigoRitsu());
+            result.set割引適用後単位(row.getWaribikigoTani());
+            result.set回数(row.getKaisu());
             result.setサービス単位(row.getServiceTani().getValue());
             result.set種類限度超過単位(row.getShuruiGendoChokaTani().getValue());
             result.set種類限度内単位(row.getShuruiGendonaiTani().getValue());
             result.set区分限度超過単位(row.getKubunGendoChokaTani().getValue());
             result.set区分限度内単位(row.getKubunGendonaiTani().getValue());
-            result.set単位数単価(row.getTanisuTanka().getValue());
+            result.set単位数単価(row.getTanisuTanka());
             result.set費用総額(row.getHiyoSogaku().getValue());
-            result.set給付率(row.getKyufuritsu().getValue() == null ? null
-                    : new HokenKyufuRitsu(row.getKyufuritsu().getValue()));
+            result.set給付率(row.getKyufuritsu());
             result.set保険給付額(row.getHokenKyufugaku().getValue());
             result.set定額利用者負担単価金額(row.getRiyoshaFutangakuTeigaku().getValue());
             result.set保険対象利用者負担額(row.getRiyoshaFutangakuHoken().getValue());
@@ -1274,7 +1280,8 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void init修正() {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
-        ViewStateHolder.put(ViewStateKeys.給付率, row.getKyufuritsu().getValue());
+        ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(RString.isNullOrEmpty(row.getKyufuritsu())
+                ? Decimal.ZERO : new Decimal(row.getKyufuritsu().toString())));
         div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
@@ -1287,10 +1294,14 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(true);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(row.getTani().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(row.getWaribikigoRitsu().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(row.getWaribikigoTani().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(row.getKaisu().getValue());
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(RString.isNullOrEmpty(row.getTani())
+                ? null : new Decimal(row.getTani().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(RString.isNullOrEmpty(row.getWaribikigoRitsu())
+                ? null : new Decimal(row.getWaribikigoRitsu().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(RString.isNullOrEmpty(row.getWaribikigoTani())
+                ? null : new Decimal(row.getWaribikigoTani().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(RString.isNullOrEmpty(row.getKaisu())
+                ? null : new Decimal(row.getKaisu().toString()));
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setValue(null);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
@@ -1302,10 +1313,12 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().setValue(row.getShuruiGendoChokaTani().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().setValue(row.getShuruiGendonaiTani().getValue());
-            div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().setValue(row.getTanisuTanka().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().setValue(RString.isNullOrEmpty(row.getTanisuTanka())
+                    ? null : new Decimal(row.getTanisuTanka().toString()));
             div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().setValue(row.getKubunGendoChokaTani().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setValue(row.getKubunGendonaiTani().getValue());
-            div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(row.getKyufuritsu().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(RString.isNullOrEmpty(row.getKyufuritsu())
+                    ? null : new Decimal(row.getKyufuritsu().toString()));
             div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().setValue(row.getHiyoSogaku().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setValue(row.getHokenKyufugaku().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setValue(row.getRiyoshaFutangakuHoken().getValue());
@@ -1332,10 +1345,14 @@ public class ServiceRiyohyoInfoDivHandler {
 
         div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(row.getTani().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(row.getWaribikigoRitsu().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(row.getWaribikigoTani().getValue());
-        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(row.getKaisu().getValue());
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(RString.isNullOrEmpty(row.getTani())
+                ? null : new Decimal(row.getTani().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(RString.isNullOrEmpty(row.getWaribikigoRitsu())
+                ? null : new Decimal(row.getWaribikigoRitsu().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(RString.isNullOrEmpty(row.getWaribikigoTani())
+                ? null : new Decimal(row.getWaribikigoTani().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(RString.isNullOrEmpty(row.getKaisu())
+                ? null : new Decimal(row.getKaisu().toString()));
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
         div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
@@ -1344,10 +1361,12 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().setValue(row.getShuruiGendoChokaTani().getValue());
         div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().setValue(row.getShuruiGendonaiTani().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().setValue(row.getTanisuTanka().getValue());
+        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().setValue(RString.isNullOrEmpty(row.getTanisuTanka())
+                ? null : new Decimal(row.getTanisuTanka().toString()));
         div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().setValue(row.getKubunGendoChokaTani().getValue());
         div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setValue(row.getKubunGendonaiTani().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(row.getKyufuritsu().getValue());
+        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(RString.isNullOrEmpty(row.getKyufuritsu())
+                ? null : new Decimal(row.getKyufuritsu().toString()));
         div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().setValue(row.getHiyoSogaku().getValue());
         div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setValue(row.getHokenKyufugaku().getValue());
         div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setValue(row.getRiyoshaFutangakuHoken().getValue());
@@ -1556,18 +1575,22 @@ public class ServiceRiyohyoInfoDivHandler {
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
                             .setサービス項目コード(RSTRING_ZERO.equals(row.getHdnServiceKomokuCode())
                                     ? ServiceKomokuCode.EMPTY : new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
-                            .set単位数(row.getTani().getValue())
-                            .set回数_日数(row.getKaisu().getValue())
-                            .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
-                            .set割引後適用単位数(row.getWaribikigoTani().getValue())
+                            .set単位数(RString.isNullOrEmpty(row.getTani()) ? Decimal.ZERO : new Decimal(row.getTani().toString()))
+                            .set回数_日数(RString.isNullOrEmpty(row.getKaisu()) ? Decimal.ZERO : new Decimal(row.getKaisu().toString()))
+                            .set割引後適用率(RString.isNullOrEmpty(row.getWaribikigoRitsu()) ? new HokenKyufuRitsu(Decimal.ZERO)
+                                    : new HokenKyufuRitsu(new Decimal(row.getWaribikigoRitsu().toString())))
+                            .set割引後適用単位数(RString.isNullOrEmpty(row.getWaribikigoTani())
+                                    ? Decimal.ZERO : new Decimal(row.getWaribikigoTani().toString()))
                             .set定額利用者負担単価金額(row.getRiyoshaFutangakuTeigaku().getValue())
                             .set合計明細フラグ(合計有り.equals(row.getHdnGokeiFlag()))
                             .set種類限度内単位数_日数(row.getShuruiGendonaiTani().getValue())
                             .set種類限度超過単位数_日数(row.getShuruiGendoChokaTani().getValue())
                             .set区分限度内単位数_日数(row.getKubunGendonaiTani().getValue())
                             .set区分限度超過単位数_日数(row.getKubunGendoChokaTani().getValue())
-                            .set単位数単価(row.getTanisuTanka().getValue())
-                            .set給付率(new HokenKyufuRitsu(row.getKyufuritsu().getValue()))
+                            .set単位数単価(RString.isNullOrEmpty(row.getTanisuTanka())
+                                    ? Decimal.ZERO : new Decimal(row.getTanisuTanka().toString()))
+                            .set給付率(RString.isNullOrEmpty(row.getKyufuritsu())
+                                    ? null : new HokenKyufuRitsu(new Decimal(row.getKyufuritsu().toString())))
                             .set給付計画単位数(row.getServiceTani().getValue());
                     jigoSakusei.save予防給付計画自己作成管理(builder.build());
                 } else if (RowState.Modified.equals(row.getRowState())) {
@@ -1578,18 +1601,22 @@ public class ServiceRiyohyoInfoDivHandler {
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
                             .setサービス項目コード(RSTRING_ZERO.equals(row.getHdnServiceKomokuCode())
                                     ? ServiceKomokuCode.EMPTY : new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
-                            .set単位数(row.getTani().getValue())
-                            .set回数_日数(row.getKaisu().getValue())
-                            .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
-                            .set割引後適用単位数(row.getWaribikigoTani().getValue())
+                            .set単位数(RString.isNullOrEmpty(row.getTani()) ? Decimal.ZERO : new Decimal(row.getTani().toString()))
+                            .set回数_日数(RString.isNullOrEmpty(row.getKaisu()) ? Decimal.ZERO : new Decimal(row.getKaisu().toString()))
+                            .set割引後適用率(RString.isNullOrEmpty(row.getWaribikigoRitsu()) ? new HokenKyufuRitsu(Decimal.ZERO)
+                                    : new HokenKyufuRitsu(new Decimal(row.getWaribikigoRitsu().toString())))
+                            .set割引後適用単位数(RString.isNullOrEmpty(row.getWaribikigoTani())
+                                    ? Decimal.ZERO : new Decimal(row.getWaribikigoTani().toString()))
                             .set定額利用者負担単価金額(row.getRiyoshaFutangakuTeigaku().getValue())
                             .set合計明細フラグ(合計有り.equals(row.getHdnGokeiFlag()))
                             .set種類限度内単位数_日数(row.getShuruiGendonaiTani().getValue())
                             .set種類限度超過単位数_日数(row.getShuruiGendoChokaTani().getValue())
                             .set区分限度内単位数_日数(row.getKubunGendonaiTani().getValue())
                             .set区分限度超過単位数_日数(row.getKubunGendoChokaTani().getValue())
-                            .set単位数単価(row.getTanisuTanka().getValue())
-                            .set給付率(new HokenKyufuRitsu(row.getKyufuritsu().getValue()))
+                            .set単位数単価(RString.isNullOrEmpty(row.getTanisuTanka())
+                                    ? Decimal.ZERO : new Decimal(row.getTanisuTanka().toString()))
+                            .set給付率(RString.isNullOrEmpty(row.getKyufuritsu())
+                                    ? null : new HokenKyufuRitsu(new Decimal(row.getKyufuritsu().toString())))
                             .set給付計画単位数(row.getServiceTani().getValue());
                     jigoSakusei.update予防給付計画自己作成管理(builder.build());
                 } else if (RowState.Deleted.equals(row.getRowState())) {
@@ -1607,17 +1634,21 @@ public class ServiceRiyohyoInfoDivHandler {
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
                             .setサービス項目コード(RSTRING_ZERO.equals(row.getHdnServiceKomokuCode())
                                     ? ServiceKomokuCode.EMPTY : new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
-                            .set単位数(row.getTani().getValue())
-                            .set回数_日数(row.getKaisu().getValue())
-                            .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
-                            .set割引後適用単位数(row.getWaribikigoTani().getValue())
+                            .set単位数(RString.isNullOrEmpty(row.getTani()) ? Decimal.ZERO : new Decimal(row.getTani().toString()))
+                            .set回数_日数(RString.isNullOrEmpty(row.getKaisu()) ? Decimal.ZERO : new Decimal(row.getKaisu().toString()))
+                            .set割引後適用率(RString.isNullOrEmpty(row.getWaribikigoRitsu()) ? null
+                                    : new HokenKyufuRitsu(new Decimal(row.getWaribikigoRitsu().toString())))
+                            .set割引後適用単位数((RString.isNullOrEmpty(row.getWaribikigoTani())
+                                    ? Decimal.ZERO : new Decimal(row.getWaribikigoTani().toString())))
                             .set合計明細フラグ(合計有り.equals(row.getHdnGokeiFlag()))
                             .set種類限度内単位数_日数(row.getShuruiGendonaiTani().getValue())
                             .set種類限度超過単位数_日数(row.getShuruiGendoChokaTani().getValue())
                             .set区分限度内単位数_日数(row.getKubunGendonaiTani().getValue())
                             .set区分限度超過単位数_日数(row.getKubunGendoChokaTani().getValue())
-                            .set単位数単価(row.getTanisuTanka().getValue())
-                            .set給付率(new HokenKyufuRitsu(row.getKyufuritsu().getValue()))
+                            .set単位数単価(RString.isNullOrEmpty(row.getTanisuTanka())
+                                    ? Decimal.ZERO : new Decimal(row.getTanisuTanka().toString()))
+                            .set給付率(RString.isNullOrEmpty(row.getKyufuritsu())
+                                    ? null : new HokenKyufuRitsu(new Decimal(row.getKyufuritsu().toString())))
                             .set給付計画単位数(row.getServiceTani().getValue());
                     jigoSakusei.save居宅給付計画自己作成管理(builder.build());
                 } else if (RowState.Modified.equals(row.getRowState())) {
@@ -1628,17 +1659,21 @@ public class ServiceRiyohyoInfoDivHandler {
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
                             .setサービス項目コード(RSTRING_ZERO.equals(row.getHdnServiceKomokuCode())
                                     ? ServiceKomokuCode.EMPTY : new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
-                            .set単位数(row.getTani().getValue())
-                            .set回数_日数(row.getKaisu().getValue())
-                            .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
-                            .set割引後適用単位数(row.getWaribikigoTani().getValue())
+                            .set単位数(RString.isNullOrEmpty(row.getTani()) ? Decimal.ZERO : new Decimal(row.getTani().toString()))
+                            .set回数_日数(RString.isNullOrEmpty(row.getKaisu()) ? Decimal.ZERO : new Decimal(row.getKaisu().toString()))
+                            .set割引後適用率(RString.isNullOrEmpty(row.getWaribikigoRitsu()) ? null
+                                    : new HokenKyufuRitsu(new Decimal(row.getWaribikigoRitsu().toString())))
+                            .set割引後適用単位数(RString.isNullOrEmpty(row.getWaribikigoTani())
+                                    ? Decimal.ZERO : new Decimal(row.getWaribikigoTani().toString()))
                             .set合計明細フラグ(合計有り.equals(row.getHdnGokeiFlag()))
                             .set種類限度内単位数_日数(row.getShuruiGendonaiTani().getValue())
                             .set種類限度超過単位数_日数(row.getShuruiGendoChokaTani().getValue())
                             .set区分限度内単位数_日数(row.getKubunGendonaiTani().getValue())
                             .set区分限度超過単位数_日数(row.getKubunGendoChokaTani().getValue())
-                            .set単位数単価(row.getTanisuTanka().getValue())
-                            .set給付率(new HokenKyufuRitsu(row.getKyufuritsu().getValue()))
+                            .set単位数単価(RString.isNullOrEmpty(row.getTanisuTanka())
+                                    ? Decimal.ZERO : new Decimal(row.getTanisuTanka().toString()))
+                            .set給付率(RString.isNullOrEmpty(row.getKyufuritsu())
+                                    ? null : new HokenKyufuRitsu(new Decimal(row.getKyufuritsu().toString())))
                             .set給付計画単位数(row.getServiceTani().getValue());
                     jigoSakusei.update予防給付計画自己作成管理(builder.build());
                 } else if (RowState.Deleted.equals(row.getRowState())) {

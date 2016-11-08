@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -25,17 +24,17 @@ public class KyufuJikoSakuseiResult implements Serializable {
 
     private RString 事業者;
     private RString サービス;
-    private Decimal 単位;
-    private HokenKyufuRitsu 割引適用後率;
-    private Decimal 割引適用後単位;
-    private Decimal 回数;
+    private RString 単位;
+    private RString 割引適用後率;
+    private RString 割引適用後単位;
+    private RString 回数;
     private Decimal サービス単位;
     private Decimal 種類限度超過単位;
     private Decimal 種類限度内単位;
-    private Decimal 単位数単価;
+    private RString 単位数単価;
     private Decimal 区分限度超過単位;
     private Decimal 区分限度内単位;
-    private HokenKyufuRitsu 給付率;
+    private RString 給付率;
     private Decimal 給付計画単位数;
     private Decimal 費用総額;
     private Decimal 保険給付額;

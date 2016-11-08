@@ -99,7 +99,7 @@ public class JikoFutangakushomeishoManager {
      * @param 支給申請区分 RString
      * @return DbT3068KogakuGassanShinseishoEntity
      */
-    public KogakuGassanShinseisho get対象者データ(HihokenshaNo 被保険者番号,
+    public List<KogakuGassanShinseisho> get対象者データ(HihokenshaNo 被保険者番号,
             RString 保険者番号,
             RString 申請状況区分,
             RString 支給申請区分) {
@@ -109,11 +109,14 @@ public class JikoFutangakushomeishoManager {
         parameter.set保険者番号(保険者番号);
         parameter.set申請状況区分(申請状況区分);
         parameter.set支給申請区分(支給申請区分);
-        DbT3068KogakuGassanShinseishoEntity 対象者データ = mapper.get対象者データ(parameter);
-        if (対象者データ != null) {
-            return new KogakuGassanShinseisho(対象者データ);
+        List<DbT3068KogakuGassanShinseishoEntity> 対象者データ = mapper.get対象者データ(parameter);
+        List<KogakuGassanShinseisho> 対象者データlist = new ArrayList<>();
+        if (0 < 対象者データ.size()) {
+            for (DbT3068KogakuGassanShinseishoEntity dbT3068KogakuGassanShinseishoEntity : 対象者データ) {
+                対象者データlist.add(new KogakuGassanShinseisho(dbT3068KogakuGassanShinseishoEntity));
+            }
         }
-        return null;
+        return 対象者データlist;
     }
 
     /**

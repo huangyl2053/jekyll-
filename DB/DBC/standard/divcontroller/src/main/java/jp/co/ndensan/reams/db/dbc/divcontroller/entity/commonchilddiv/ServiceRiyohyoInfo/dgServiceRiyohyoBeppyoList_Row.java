@@ -21,18 +21,18 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
     private RString jigyosha;
     private RString service;
     private RString meisaiGokeiKubun;
-    private TextBoxNum tani;
-    private TextBoxNum waribikigoRitsu;
-    private TextBoxNum waribikigoTani;
-    private TextBoxNum kaisu;
+    private RString tani;
+    private RString waribikigoRitsu;
+    private RString waribikigoTani;
+    private RString kaisu;
     private TextBoxNum serviceTani;
     private TextBoxNum shuruiGendoChokaTani;
     private TextBoxNum shuruiGendonaiTani;
     private TextBoxNum kubunGendoChokaTani;
     private TextBoxNum kubunGendonaiTani;
-    private TextBoxNum tanisuTanka;
+    private RString tanisuTanka;
     private TextBoxNum hiyoSogaku;
-    private TextBoxNum kyufuritsu;
+    private RString kyufuritsu;
     private TextBoxNum hokenKyufugaku;
     private TextBoxNum riyoshaFutangakuTeigaku;
     private TextBoxNum riyoshaFutangakuHoken;
@@ -51,18 +51,18 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.jigyosha = RString.EMPTY;
         this.service = RString.EMPTY;
         this.meisaiGokeiKubun = RString.EMPTY;
-        this.tani = new TextBoxNum();
-        this.waribikigoRitsu = new TextBoxNum();
-        this.waribikigoTani = new TextBoxNum();
-        this.kaisu = new TextBoxNum();
+        this.tani = RString.EMPTY;
+        this.waribikigoRitsu = RString.EMPTY;
+        this.waribikigoTani = RString.EMPTY;
+        this.kaisu = RString.EMPTY;
         this.serviceTani = new TextBoxNum();
         this.shuruiGendoChokaTani = new TextBoxNum();
         this.shuruiGendonaiTani = new TextBoxNum();
         this.kubunGendoChokaTani = new TextBoxNum();
         this.kubunGendonaiTani = new TextBoxNum();
-        this.tanisuTanka = new TextBoxNum();
+        this.tanisuTanka = RString.EMPTY;
         this.hiyoSogaku = new TextBoxNum();
-        this.kyufuritsu = new TextBoxNum();
+        this.kyufuritsu = RString.EMPTY;
         this.hokenKyufugaku = new TextBoxNum();
         this.riyoshaFutangakuTeigaku = new TextBoxNum();
         this.riyoshaFutangakuHoken = new TextBoxNum();
@@ -104,7 +104,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.setOriginalData("hdnRiyoshaFutanTeiritsuTeigakuKbn", hdnRiyoshaFutanTeiritsuTeigakuKbn);
     }
 
-    public dgServiceRiyohyoBeppyoList_Row(RString jigyosha, RString service, RString meisaiGokeiKubun, TextBoxNum tani, TextBoxNum waribikigoRitsu, TextBoxNum waribikigoTani, TextBoxNum kaisu, TextBoxNum serviceTani, TextBoxNum shuruiGendoChokaTani, TextBoxNum shuruiGendonaiTani, TextBoxNum kubunGendoChokaTani, TextBoxNum kubunGendonaiTani, TextBoxNum tanisuTanka, TextBoxNum hiyoSogaku, TextBoxNum kyufuritsu, TextBoxNum hokenKyufugaku, TextBoxNum riyoshaFutangakuTeigaku, TextBoxNum riyoshaFutangakuHoken, TextBoxNum riyoshaFutangakuZengaku, RString hdnJigyoshaCode, RString hdnServiceShuruiCode, RString hdnGendogakuTaishogaiFlag, RString hdnServiceKomokuCode, RString hdnMeisaiNo, RString hdnGokeiFlag, RString hdnGokeiGyoFlag, RString hdnRiyoshaFutanTeiritsuTeigakuKbn) {
+    public dgServiceRiyohyoBeppyoList_Row(RString jigyosha, RString service, RString meisaiGokeiKubun, RString tani, RString waribikigoRitsu, RString waribikigoTani, RString kaisu, TextBoxNum serviceTani, TextBoxNum shuruiGendoChokaTani, TextBoxNum shuruiGendonaiTani, TextBoxNum kubunGendoChokaTani, TextBoxNum kubunGendonaiTani, RString tanisuTanka, TextBoxNum hiyoSogaku, RString kyufuritsu, TextBoxNum hokenKyufugaku, TextBoxNum riyoshaFutangakuTeigaku, TextBoxNum riyoshaFutangakuHoken, TextBoxNum riyoshaFutangakuZengaku, RString hdnJigyoshaCode, RString hdnServiceShuruiCode, RString hdnGendogakuTaishogaiFlag, RString hdnServiceKomokuCode, RString hdnMeisaiNo, RString hdnGokeiFlag, RString hdnGokeiGyoFlag, RString hdnRiyoshaFutanTeiritsuTeigakuKbn) {
         super();
         this.setOriginalData("jigyosha", jigyosha);
         this.setOriginalData("service", service);
@@ -174,19 +174,19 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         return meisaiGokeiKubun;
     }
 
-    public TextBoxNum getTani() {
+    public RString getTani() {
         return tani;
     }
 
-    public TextBoxNum getWaribikigoRitsu() {
+    public RString getWaribikigoRitsu() {
         return waribikigoRitsu;
     }
 
-    public TextBoxNum getWaribikigoTani() {
+    public RString getWaribikigoTani() {
         return waribikigoTani;
     }
 
-    public TextBoxNum getKaisu() {
+    public RString getKaisu() {
         return kaisu;
     }
 
@@ -210,7 +210,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         return kubunGendonaiTani;
     }
 
-    public TextBoxNum getTanisuTanka() {
+    public RString getTanisuTanka() {
         return tanisuTanka;
     }
 
@@ -218,7 +218,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         return hiyoSogaku;
     }
 
-    public TextBoxNum getKyufuritsu() {
+    public RString getKyufuritsu() {
         return kyufuritsu;
     }
 
@@ -285,22 +285,22 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.meisaiGokeiKubun = meisaiGokeiKubun;
     }
 
-    public void setTani(TextBoxNum tani) {
+    public void setTani(RString tani) {
         this.setOriginalData("tani", tani);
         this.tani = tani;
     }
 
-    public void setWaribikigoRitsu(TextBoxNum waribikigoRitsu) {
+    public void setWaribikigoRitsu(RString waribikigoRitsu) {
         this.setOriginalData("waribikigoRitsu", waribikigoRitsu);
         this.waribikigoRitsu = waribikigoRitsu;
     }
 
-    public void setWaribikigoTani(TextBoxNum waribikigoTani) {
+    public void setWaribikigoTani(RString waribikigoTani) {
         this.setOriginalData("waribikigoTani", waribikigoTani);
         this.waribikigoTani = waribikigoTani;
     }
 
-    public void setKaisu(TextBoxNum kaisu) {
+    public void setKaisu(RString kaisu) {
         this.setOriginalData("kaisu", kaisu);
         this.kaisu = kaisu;
     }
@@ -330,7 +330,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.kubunGendonaiTani = kubunGendonaiTani;
     }
 
-    public void setTanisuTanka(TextBoxNum tanisuTanka) {
+    public void setTanisuTanka(RString tanisuTanka) {
         this.setOriginalData("tanisuTanka", tanisuTanka);
         this.tanisuTanka = tanisuTanka;
     }
@@ -340,7 +340,7 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.hiyoSogaku = hiyoSogaku;
     }
 
-    public void setKyufuritsu(TextBoxNum kyufuritsu) {
+    public void setKyufuritsu(RString kyufuritsu) {
         this.setOriginalData("kyufuritsu", kyufuritsu);
         this.kyufuritsu = kyufuritsu;
     }

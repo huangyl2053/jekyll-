@@ -57,18 +57,6 @@ public class KijunShunyugakuTekiyoShinseishoEditor implements IKijunShunyugakuTe
         source.shunyuGengo = 基準収入額適用申請書Entity.get収入元号();
         source.shunyuNen = 基準収入額適用申請書Entity.get収入年();
         source.tsuchibun1 = 基準収入額適用申請書Entity.get通知文１();
-        source.tsuchibun2 = 基準収入額適用申請書Entity.get通知文２();
-        source.tsuchibun3 = 基準収入額適用申請書Entity.get通知文３();
-        source.tsuchibun4 = 基準収入額適用申請書Entity.get通知文4();
-        source.tsuchibun5 = 基準収入額適用申請書Entity.get通知文5();
-        source.tsuchibun6 = 基準収入額適用申請書Entity.get通知文6();
-        source.tsuchibun7 = 基準収入額適用申請書Entity.get通知文7();
-        source.tsuchibun8 = 基準収入額適用申請書Entity.get通知文８();
-        source.tsuchibun9 = 基準収入額適用申請書Entity.get通知文９();
-        source.tsuchibun10 = 基準収入額適用申請書Entity.get通知文１０();
-        source.tsuchibun11 = 基準収入額適用申請書Entity.get通知文１１();
-        source.tsuchibun12 = 基準収入額適用申請書Entity.get通知文１２();
-        source.tsuchibun13 = 基準収入額適用申請書Entity.get通知文１３();
 
         if (基準収入額適用申請書Entity.get識別コード１() != null) {
             source.shikibetsuCode1 = 基準収入額適用申請書Entity.get識別コード１().value();

@@ -129,6 +129,7 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = concatCode(全項目, 受給者台帳.getYukoMukoKubun());
         全項目 = concatCode(全項目, 受給者台帳.getJukyuShinseiJiyu());
         全項目 = concatDate(全項目, 受給者台帳.getJukyuShinseiYMD());
+        全項目 = 全項目.concat(受給者台帳.getRirekiNo());
         return 全項目;
     }
 

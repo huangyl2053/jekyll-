@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jikofutangakushomeisho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.KogakuGassanJohoEntity;
@@ -46,5 +47,5 @@ public interface IJikoFutangakushomeishoMapper {
      * @param parameter JikoFutangakushomeishoParameter
      * @return DbT3068KogakuGassanShinseishoEntity
      */
-    DbT3068KogakuGassanShinseishoEntity get対象者データ(JikoFutangakushomeishoParameter parameter);
+    List<DbT3068KogakuGassanShinseishoEntity> get対象者データ(JikoFutangakushomeishoParameter parameter);
 }

@@ -135,7 +135,7 @@
         AND     '2014'<![CDATA[<=]]>"B"."taishoNendo"
         AND "B"."dataSakuseiKubun"='1'
         <if test="出力対象区分=='1' " >
-            AND "B".自己負担額証明書情報受取年月=#{抽出期間開始年月}
+            AND "B"."shomeisho_UketoriYM"=#{抽出期間開始年月}
         </if>
         <if test="出力対象区分=='2' " >
             AND "B"."taishoNendo" = #{年度}

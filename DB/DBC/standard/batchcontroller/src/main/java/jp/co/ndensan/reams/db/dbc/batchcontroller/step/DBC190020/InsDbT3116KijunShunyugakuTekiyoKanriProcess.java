@@ -30,6 +30,7 @@ public class InsDbT3116KijunShunyugakuTekiyoKanriProcess extends BatchProcessBas
 
     private InsTaishoSeitaiyinTempProcessParameter parameter;
     private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_01 = new RString("01");
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
@@ -72,7 +73,7 @@ public class InsDbT3116KijunShunyugakuTekiyoKanriProcess extends BatchProcessBas
             dbT3116Entity.setKetteiTsuchishoHakkoYMD(FlexibleDate.EMPTY);
             if (RSTRING_1.equals(entity.getAtenaInnjiKubun())) {
                 dbT3116Entity.setAtesakiInjiTaishoshaFlag(true);
-            } else {
+            } else if (RSTRING_2.equals(entity.getAtenaInnjiKubun())) {
                 dbT3116Entity.setAtesakiInjiTaishoshaFlag(false);
             }
             dbT3116Entity.setNenshoFuyokojoUnder16Ninzu(entity.getNennshouLess16Num());
