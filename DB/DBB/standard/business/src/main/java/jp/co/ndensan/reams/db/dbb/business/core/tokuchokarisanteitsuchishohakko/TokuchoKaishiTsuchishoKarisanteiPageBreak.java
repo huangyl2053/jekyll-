@@ -39,11 +39,24 @@ public class TokuchoKaishiTsuchishoKarisanteiPageBreak
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> nextSource) {
         boolean flg = false;
+        //TODO QA1859確認中
         if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flg = true;
+        } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.行政区コード.get項目ID())
+                && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
+            flg = true;
         } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.世帯コード.get項目ID())
                 && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.生年月日.get項目ID())
+                && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.性別.get項目ID())
+                && !currentSource.getSource().listUpper_6.equals(nextSource.getSource().listUpper_6)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.市町村コード.get項目ID())
+                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
             flg = true;
         }
         return flg;

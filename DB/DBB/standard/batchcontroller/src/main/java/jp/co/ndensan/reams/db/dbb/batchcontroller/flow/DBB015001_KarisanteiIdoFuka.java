@@ -290,7 +290,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
     @Step (賦課の情報登録フロー)
     protected IBatchFlowCommand callChoteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
-                new DBB004001_FukaJohoTorokuParameter(true)).define();
+                new DBB004001_FukaJohoTorokuParameter(false)).define();
     }
 
     /**
