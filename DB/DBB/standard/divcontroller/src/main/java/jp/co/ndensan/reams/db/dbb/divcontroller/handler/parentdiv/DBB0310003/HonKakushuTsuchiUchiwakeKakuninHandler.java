@@ -235,7 +235,7 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
 
     private dgTsuchishoSettei_Row set対象者(dgTsuchishoSettei_Row row, RString 対象者) {
         if (対象者 != null && !対象者.isEmpty()) {
-            row.getTxtTsuchisyoShitei().setSelectedKey(対象者);
+            row.getTxtGenkinKozaShitei().setSelectedKey(対象者);
         }
         return row;
     }

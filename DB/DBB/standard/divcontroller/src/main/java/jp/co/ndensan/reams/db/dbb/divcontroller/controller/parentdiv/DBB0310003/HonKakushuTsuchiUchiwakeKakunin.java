@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class HonKakushuTsuchiUchiwakeKakunin {
 
+    private static final RString 保存名称R = new RString("保存名称");
+
     /**
      * 打ち分け方法確認画面の初期化メソッド。
      *
@@ -75,7 +77,7 @@ public class HonKakushuTsuchiUchiwakeKakunin {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
                     && (打ち分け条件画面 == null || 打ち分け条件画面.isEmpty())) {
-                throw new ApplicationException(UrErrorMessages.必須項目.getMessage().evaluate());
+                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace(保存名称R.toString()).evaluate());
             } else if (new RString(DbbQuestionMessages.変更途中の内容破棄確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
@@ -83,12 +85,12 @@ public class HonKakushuTsuchiUchiwakeKakunin {
                 handler.切替時保存処理(変更打分け方法);
             }
         }
+        RString 打ち分け条件 = div.getHonKakushuTsuchiUchiwakeSentaku()
+                .getDgKakushuTsuchiUchiwakeSentaku().getClickedItem().getTxtJokenMeisho();
         List<TsuchishoUchiwakeJoken> 打分け方法List = 本算定賦課計算.getutiwakehouhoujyoho1();
         if (打分け方法List != null) {
             getHandler(div).show打分け方法(打分け方法List);
         }
-        RString 打ち分け条件 = div.getHonKakushuTsuchiUchiwakeSentaku()
-                .getDgKakushuTsuchiUchiwakeSentaku().getClickedItem().getTxtJokenMeisho();
         List<TsuchishoUchiwakeJoken> 方法情報一覧 = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件);
         if (方法情報一覧 == null) {
             return createResponse(div);
@@ -108,7 +110,7 @@ public class HonKakushuTsuchiUchiwakeKakunin {
     public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onClick_btnTsuchishoSetteiHozon(HonKakushuTsuchiUchiwakeKakuninDiv div) {
         RString 打ち分け条件画面 = div.getTxtTsuchishoSetteiHozonMeisho().getValue();
         if (打ち分け条件画面 == null || 打ち分け条件画面.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須項目.getMessage().evaluate());
+            throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace(保存名称R.toString()).evaluate());
         }
         HonKakushuTsuchiUchiwakeKakuninHandler handler = getHandler(div);
         int 変更区分 = handler.変更区分();
