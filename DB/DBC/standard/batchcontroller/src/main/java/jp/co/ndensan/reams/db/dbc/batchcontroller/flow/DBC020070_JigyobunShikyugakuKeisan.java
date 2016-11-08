@@ -23,7 +23,10 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.ShoriDateKanriM
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.ShoriKekkaKakuninRisutoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.UpdateMasterTableProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.UpdateShikyugakuUpdateTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020070.DBC020070_JigyobunShikyugakuKeisanParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -54,6 +57,8 @@ public class DBC020070_JigyobunShikyugakuKeisan extends BatchFlowBase<DBC020070_
     private static final String 処理結果確認リストを出力する = "処理結果確認リストを出力する";
     private static final String 更新用一時の情報をマスタにINSERTする = "更新用一時の情報をマスタにINSERTする";
     private static final String 処理結果を_処理日付管理マスタに設定する = "処理結果を_処理日付管理マスタに設定する";
+    private static final String 処理結果リスト作成 = "処理結果リスト作成";
+    private static final String 出力対象区分 = "1";
 
     @Override
     protected void defineFlow() {
@@ -80,8 +85,11 @@ public class DBC020070_JigyobunShikyugakuKeisan extends BatchFlowBase<DBC020070_
         executeStep(更新用データに口座情報);
         executeStep(事業分支給額計算結果の帳票_CSVを出力する);
         executeStep(処理結果確認リストを出力する);
+        executeStep(処理結果リスト作成);
         executeStep(更新用一時の情報をマスタにINSERTする);
-        executeStep(処理結果を_処理日付管理マスタに設定する);
+        if (出力対象区分.equals(getParameter().get出力対象区分().toString())) {
+            executeStep(処理結果を_処理日付管理マスタに設定する);
+        }
     }
 
     @Step(高額合算支給額計算結果)
@@ -162,6 +170,14 @@ public class DBC020070_JigyobunShikyugakuKeisan extends BatchFlowBase<DBC020070_
     @Step(処理結果確認リストを出力する)
     IBatchFlowCommand execute処理結果確認リストを出力する() {
         return loopBatch(ShoriKekkaKakuninRisutoProcess.class).arguments(getParameter().toProcessParameter()).define();
+    }
+
+    @Step(処理結果リスト作成)
+    IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
+        KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
+                = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
+        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
+        return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }
 
     @Step(更新用一時の情報をマスタにINSERTする)
