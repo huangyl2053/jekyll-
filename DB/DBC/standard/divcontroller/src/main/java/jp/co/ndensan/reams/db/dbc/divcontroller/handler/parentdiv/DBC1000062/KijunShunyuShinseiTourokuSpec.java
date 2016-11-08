@@ -205,7 +205,15 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
 
         public static boolean is世帯員が0人(KijunShunyuShinseiTourokuDiv div) {
             List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
-            return (rowList != null && !rowList.isEmpty());
+            if (rowList == null || rowList.isEmpty()) {
+                return false;
+            }
+            for (dgMeisai_Row row : rowList) {
+                if (!RowState.Deleted.equals(row.getRowState())) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static boolean is総収入額チェック(KijunShunyuShinseiTourokuDiv div) {
