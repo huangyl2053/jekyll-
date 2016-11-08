@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.GyomuConfigJohoClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanInput;
+import jp.co.ndensan.reams.dz.dzx.definition.core.kiwarikeisan.GenzaiTokuchoKiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -152,8 +153,7 @@ public class FukaKeisanFath {
         kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()));
         kiwariKeisanInput.set特徴停止可能期(get特徴停止可能期(param.get調定日時().getDate()));
 
-        Kitsuki 特徴更正月期と月の対応 = hantei.find特徴更正月(param.get調定日時().getDate());
-        kiwariKeisanInput.set現在特徴期区分(Integer.parseInt(特徴更正月期と月の対応.get月処理区分().get区分().toString()));
+        kiwariKeisanInput.set現在特徴期区分(GenzaiTokuchoKiKubun.本算異動.getコード());
 
         Kitsuki 過年度期と月の対応 = hantei.find過年度更正月(param.get調定日時().getDate());
         kiwariKeisanInput.set現在過年期(new RString(過年度期と月の対応.get期AsInt()));

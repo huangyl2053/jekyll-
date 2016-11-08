@@ -100,9 +100,11 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
                     selectJukyushaIdoTaishosha(異動日From, 異動日To, 被保険者番号, 削除データ);
             getエラー(異動対象者一覧情報);
             getHandler(div).initialize対象者一覧(メニューID, 異動日From, 異動日To, 被保険者番号, 異動対象者一覧情報);
-            return ResponseData.of(div).setState(DBC0220011StateName.対象者一覧);
+            return ResponseData.of(ResponseData.of(div).setState(
+                    DBC0220011StateName.対象者一覧).data).rootTitle(getHandler(div).getTitle(メニューID)).respond();
         }
-        return ResponseData.of(div).setState(DBC0220011StateName.対象者検索);
+        return ResponseData.of(ResponseData.of(div).setState(
+                DBC0220011StateName.対象者検索).data).rootTitle(getHandler(div).getTitle(メニューID)).respond();
     }
 
     private void getエラー(List<TaishoshaKensakuResult> 異動対象者一覧情報) {

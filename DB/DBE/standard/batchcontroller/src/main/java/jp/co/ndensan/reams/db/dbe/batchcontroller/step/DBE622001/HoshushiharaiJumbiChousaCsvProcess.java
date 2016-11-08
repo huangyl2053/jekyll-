@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaManager;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.authority.AuthorityKind;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -139,7 +140,7 @@ public class HoshushiharaiJumbiChousaCsvProcess extends BatchProcessBase<Hoshush
         builder.set業務固有キーリスト(業務固有キー);
         builder.set用途区分(new KozaYotoKubunCodeValue(new RString("1")));
         IKozaSearchKey searchKey = builder.build();
-        List<Koza> kozaList = KozaManager.createInstance().get口座(searchKey);
+        List<Koza> kozaList = KozaManager.createInstance(AuthorityKind.参照権限収納科目).get口座(searchKey);
         Koza koza = null;
         if (!kozaList.isEmpty()) {
             koza = kozaList.get(0);

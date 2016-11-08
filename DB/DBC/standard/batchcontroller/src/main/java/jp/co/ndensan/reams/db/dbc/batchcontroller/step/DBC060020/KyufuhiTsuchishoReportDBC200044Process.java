@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020;
 
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufuhitsuchisho.KyufuhiTsuchishoShutsuryokujun;
 import jp.co.ndensan.reams.db.dbc.business.report.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhitsuchisho.KyufuhiTsuchishoBatchMybitisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufuhitsuchisho.KyufuhiTsuchishoProcessParameter;
@@ -13,6 +16,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.Kyuf
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakoichiran.KyufuhiTuchiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufuhitsuchisho.KyufuhiTuchiHakkoIchiran;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
@@ -30,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -42,6 +48,8 @@ public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<Kyu
     private AtesakiPSMSearchKeyBuilder 宛先builder;
     private static final RString 介護給付費福祉用具貸与品目情報取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyufuhitsuchisho.IKyufuhiTsuchishoMapper.getSeikatsuHogoJukyusha");
+    private ShutsuryokujunRelateEntity 出力順Entity;
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_UNWRITTEN_FIELD")
     private KyufuhiTsuchishoProcessParameter processParameter;
     private boolean tempFlag = true;
     private RString 被保険者番号;
@@ -58,11 +66,18 @@ public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<Kyu
         被保険者番号 = RString.EMPTY;
         index = 0;
         連番 = 0;
+        出力順Entity = get出力順項目();
     }
 
     @Override
     protected IBatchReader createReader() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC200044.value()).create();
+        List<RString> pageBreakKeys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
+        if (pageBreakKeys != null && !pageBreakKeys.isEmpty()) {
+            batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC200044.value()).
+                    addBreak(new BreakerCatalog<KyufuhiTuchiHakkoIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        } else {
+            batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC200044.value()).create();
+        }
         reportSourceWriter = new ReportSourceWriter(batchWrite);
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
@@ -105,9 +120,26 @@ public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<Kyu
         if (tempFlag) {
             KyufuhiTuchiHakkoIchiran hakkoIchiran = new KyufuhiTuchiHakkoIchiran();
             KyufuhiTuchiHakkoIchiranEntity coverEntity = hakkoIchiran.帳票データ作成1(processParameter);
+            coverEntity.set出力順1(出力順Entity.get出力順1());
+            coverEntity.set出力順2(出力順Entity.get出力順2());
+            coverEntity.set出力順3(出力順Entity.get出力順3());
+            coverEntity.set出力順4(出力順Entity.get出力順4());
+            coverEntity.set出力順5(出力順Entity.get出力順5());
+            coverEntity.set改ページ条件1(出力順Entity.get改頁項目1());
+            coverEntity.set改ページ条件2(出力順Entity.get改頁項目2());
+            coverEntity.set改ページ条件3(出力順Entity.get改頁項目3());
+            coverEntity.set改ページ条件4(出力順Entity.get改頁項目4());
+            coverEntity.set改ページ条件5(出力順Entity.get改頁項目5());
             KyufuhiTuchiHakkoIchiranReport report = new KyufuhiTuchiHakkoIchiranReport(coverEntity);
             report.writeBy(reportSourceWriter);
         }
+    }
+
+    private ShutsuryokujunRelateEntity get出力順項目() {
+        return ReportUtil.get出力順情報(KyufuhiTsuchishoShutsuryokujun.ShutsuryokujunEnum.class,
+                SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC200044.getReportId(),
+                processParameter.getShutsuryokujunId());
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5250002;
 
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE491001.DBE491001_NichijiShinchokuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525002.DBE525002_HanteiKekkaHokenshaParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.NijihanteiKekkaOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.NijihanteiKekkaOutputHandler;
@@ -58,7 +59,7 @@ public class NijihanteiKekkaOutput {
      * @param nijiDiv NijihanteiKekkaOutputDiv
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
-    public ResponseData<DBE525002_HanteiKekkaHokenshaParameter> onClick_btnRenkeiDataOutput(NijihanteiKekkaOutputDiv nijiDiv) {
+    public ResponseData<DBE491001_NichijiShinchokuParameter> onClick_btnRenkeiDataOutput(NijihanteiKekkaOutputDiv nijiDiv) {
         return ResponseData.of(getHandler(nijiDiv).setCSVBatchParameter()).respond();
     }
 

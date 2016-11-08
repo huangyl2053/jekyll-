@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelBatchRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbipanel.HoshushiharaiJumbiPanelEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -46,64 +45,63 @@ public class HoshushiharaiJumbiPanelBusiness {
      * @param 口座情報 口座情報
      * @param flexibleDate 振込指定日
      * @param kubun 区分
-     * @return HoshushiharaiJumbiPanelEucCsvEntity
+     * @return CSVの出力データ
      */
     public RString setEucCsvEntity(HoshushiharaiJumbiPanelBatchRelateEntity entity, Koza 口座情報, FlexibleDate flexibleDate, RString kubun) {
-        HoshushiharaiJumbiPanelEucCsvEntity eucCsvEntity = new HoshushiharaiJumbiPanelEucCsvEntity();
-        eucCsvEntity.setデータ区分1(ONE);
-        eucCsvEntity.set種別コード(TWENTYONE);
-        eucCsvEntity.setコード区分(ZERO);
-        eucCsvEntity.set会社コード(DbBusinessConfig.get(ConfigNameDBE.会社コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        eucCsvEntity.set会社名(DbBusinessConfig.get(ConfigNameDBE.会社名, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        eucCsvEntity.set振込指定日(new RString(flexibleDate.toString().substring(FOUR)));
-        eucCsvEntity.set仕向銀行番号(DbBusinessConfig.get(ConfigNameDBE.仕向銀行番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        if (RString.isNullOrEmpty(DbBusinessConfig.get(ConfigNameDBE.仕向銀行名, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            eucCsvEntity.set仕向銀行名(RString.EMPTY.padRight(RString.HALF_SPACE, FIFTEEN));
-        } else {
-            eucCsvEntity.set仕向銀行名(DbBusinessConfig.get(ConfigNameDBE.仕向銀行名, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        }
-        eucCsvEntity.set仕向支店番号(DbBusinessConfig.get(ConfigNameDBE.仕向支店番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        if (RString.isNullOrEmpty(DbBusinessConfig.get(ConfigNameDBE.仕向支店名, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            eucCsvEntity.set仕向支店名(RString.EMPTY.padRight(RString.HALF_SPACE, FIFTEEN));
-        } else {
-            eucCsvEntity.set仕向支店名(DbBusinessConfig.get(ConfigNameDBE.仕向支店名, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        }
-        eucCsvEntity.set預金種別(DbBusinessConfig.get(ConfigNameDBE.預金種別, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        eucCsvEntity.set口座番号(DbBusinessConfig.get(ConfigNameDBE.口座番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        eucCsvEntity.setダミー1(RString.EMPTY.padRight(RString.HALF_SPACE, SEVENTEEN));
-        eucCsvEntity.setデータ区分2(TWO);
-        if (口座情報 != null) {
-            eucCsvEntity.set被仕向銀行番号(口座情報.get金融機関コード().value());
-            eucCsvEntity.set被仕向銀行名(口座情報.get金融機関().get金融機関名称());
-            eucCsvEntity.set被仕向支店番号(口座情報.get支店コード().value());
-            eucCsvEntity.set被仕向支店名(口座情報.get支店().get支店名称());
-        }
-        eucCsvEntity.set手形交換所番号(ZERO);
-        if (口座情報 != null) {
-            eucCsvEntity.set預金種別2(口座情報.get預金種別().get預金種別コード());
-            eucCsvEntity.set口座番号2(口座情報.get口座番号());
-            eucCsvEntity.set受取人名(口座情報.get口座名義人漢字().value());
-        }
-        if (kubun.equals(ONE)) {
-            eucCsvEntity.set振込金額(new RString(entity.getChosaItakuryo()));
-        }
-        if (kubun.equals(TWO)) {
-            eucCsvEntity.set振込金額(new RString(entity.getIkenshoSakuseiryo()));
-        }
-        eucCsvEntity.set新規コード(ZERO);
-        if (kubun.equals(ONE)) {
-            eucCsvEntity.set顧客コード1(entity.getNinteichosaItakusakiCode());
-            eucCsvEntity.set顧客コード2(entity.getNinteichosainCode());
-        }
-        if (kubun.equals(TWO)) {
-            eucCsvEntity.set顧客コード1(entity.getShujiiIryoKikanCode());
-            eucCsvEntity.set顧客コード2(entity.getShujiiCode());
-        }
-        eucCsvEntity.setEdi情報(RString.EMPTY.padRight(RString.HALF_SPACE, TWENTY));
-        eucCsvEntity.set振込指定区分(SEVEN);
-        eucCsvEntity.set識別表示(new RString(""));
-        eucCsvEntity.setダミー2(RString.EMPTY.padRight(RString.HALF_SPACE, 番号_7));
         RStringBuilder builder = new RStringBuilder();
+        builder.append(ONE);
+        builder.append(TWENTYONE);
+        builder.append(ZERO);
+        builder.append(DbBusinessConfig.get(ConfigNameDBE.会社コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        builder.append(DbBusinessConfig.get(ConfigNameDBE.会社名, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        builder.append(new RString(flexibleDate.toString().substring(FOUR)));
+        builder.append(DbBusinessConfig.get(ConfigNameDBE.仕向銀行番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        if (RString.isNullOrEmpty(DbBusinessConfig.get(ConfigNameDBE.仕向銀行名, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, FIFTEEN));
+        } else {
+            builder.append(DbBusinessConfig.get(ConfigNameDBE.仕向銀行名, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        }
+        builder.append(DbBusinessConfig.get(ConfigNameDBE.仕向支店番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        if (RString.isNullOrEmpty(DbBusinessConfig.get(ConfigNameDBE.仕向支店名, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, FIFTEEN));
+        } else {
+            builder.append(DbBusinessConfig.get(ConfigNameDBE.仕向支店名, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        }
+        builder.append(DbBusinessConfig.get(ConfigNameDBE.預金種別, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        builder.append(DbBusinessConfig.get(ConfigNameDBE.口座番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, SEVENTEEN));
+        builder.append(TWO);
+        if (口座情報 != null) {
+            builder.append(口座情報.get金融機関コード().value());
+            builder.append(口座情報.get金融機関().get金融機関名称());
+            builder.append(口座情報.get支店コード().value());
+            builder.append(口座情報.get支店().get支店名称());
+        }
+        builder.append(ZERO);
+        if (口座情報 != null) {
+            builder.append(口座情報.get預金種別().get預金種別コード());
+            builder.append(口座情報.get口座番号());
+            builder.append(口座情報.get口座名義人漢字().value());
+        }
+        if (kubun.equals(ONE)) {
+            builder.append(new RString(entity.getChosaItakuryo()));
+        }
+        if (kubun.equals(TWO)) {
+            builder.append(new RString(entity.getIkenshoSakuseiryo()));
+        }
+        builder.append(ZERO);
+        if (kubun.equals(ONE)) {
+            builder.append(entity.getNinteichosaItakusakiCode());
+            builder.append(entity.getNinteichosainCode());
+        }
+        if (kubun.equals(TWO)) {
+            builder.append(entity.getShujiiIryoKikanCode());
+            builder.append(entity.getShujiiCode());
+        }
+        builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, TWENTY));
+        builder.append(SEVEN);
+        builder.append(new RString(""));
+        builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, 番号_7));
         builder.append(ONE);
         builder.append(TWENTYONE);
         builder.append(ZERO);

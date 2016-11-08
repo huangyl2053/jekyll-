@@ -130,7 +130,6 @@ public class FurikomimeisaiDataSyoriResultProcess extends BatchProcessBase<Shori
                 separator(Separator.JAPANESE).
                 fillType(FillType.NONE).
                 width(Width.HALF).toDateString());
-        sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(作成R);

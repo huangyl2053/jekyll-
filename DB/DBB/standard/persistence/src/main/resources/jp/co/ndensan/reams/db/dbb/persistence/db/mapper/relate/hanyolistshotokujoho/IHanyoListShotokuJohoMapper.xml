@@ -8,7 +8,7 @@
         <include refid="selectHanyoListShotokuJohoEntity" />
     </select>
     <sql id="selectHanyoListShotokuJohoEntity">
-        select ROW_NUMBER() over()as row ,* from (
+        WITH master AS (
         SELECT
         DbV2502."shotokuNendo"                                              AS 所得年度,
 	DbV2502."shikibetsuCode"                                            AS 識別コード,
@@ -52,31 +52,11 @@
 	B."fukaNendo"                                                       AS 賦課年度,
 	B."hihokenshaNo"                                                    AS 被保険者番号,
 	B."hokenryoDankai"                                                  AS 保険料段階,
-	<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
-
         FROM
                 rgdb."DbV2502KaigoShotoku" AS DbV2502
                 LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS DbV1001
                 ON DbV1001."shikibetsuCode" = DbV2502."shikibetsuCode"
-                INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
-                ON "ShikibetsuTaisho"."shikibetsuCode"=DbV2502."shikibetsuCode"
-                <if test="年齢層抽出方法== 1">
-                    <if test="年齢範囲開始 !=null and 生年月日範囲終了 !=null">
-                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
-                    </if>
-                    <if test="年齢範囲終了 !=null and 生年月日範囲開始 !=null">
-                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[>=]]> #{生年月日範囲開始}
-                    </if>
-                </if>
-                <if test="年齢層抽出方法== 2">
-                    <if test="生年月日範囲開始1 !=null and 生年月日範囲開始 !=null">
-                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[>=]]> #{生年月日範囲開始}
-                    </if>
-                    <if test="生年月日範囲終了1 !=null and 生年月日範囲終了 !=null">
-                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
-                    </if>
-                </if>
                 INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
                 ON "Atesaki"."shikibetsuCode"=DbV2502."shikibetsuCode"
                 LEFT JOIN (
@@ -144,8 +124,38 @@
                 <if test="抽出期間To !=null and !抽出期間To.isEmpty()">
                 AND DbV2502."shoriTimeStamp" <![CDATA[<=]]> #{抽出期間To}
                 </if>
-                ${出力順}
-                ) as D
+        )
+        SELECT ROW_NUMBER() over()as row ,* FROM (
+        SELECT master.*,
+               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM master
+             INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+                        (
+                        SELECT 
+                            ARRAY_AGG(CAST (master."識別コード" AS TEXT))
+                        FROM
+                            master
+                        )
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> AS "ShikibetsuTaisho"
+             ON master."識別コード"="ShikibetsuTaisho"."shikibetsuCode"
+                <if test="年齢層抽出方法== 1">
+                    <if test="年齢範囲開始 !=null and 生年月日範囲終了 !=null">
+                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                    </if>
+                    <if test="年齢範囲終了 !=null and 生年月日範囲開始 !=null">
+                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[>=]]> #{生年月日範囲開始}
+                    </if>
+                </if>
+                <if test="年齢層抽出方法== 2">
+                    <if test="生年月日範囲開始1 !=null and 生年月日範囲開始 !=null">
+                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[>=]]> #{生年月日範囲開始}
+                    </if>
+                    <if test="生年月日範囲終了1 !=null and 生年月日範囲終了 !=null">
+                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                    </if>
+                </if>
+                ${出力順}       
+                ) as D 
     </sql>
     
     <resultMap id="resultMapHanyoListShotokuJohoEntity" autoMapping="true"

@@ -64,6 +64,7 @@ public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDet
     @PrimaryKey
     private int rirekiNo;
     @TempTableColumnOrder(6)
+    @PrimaryKey
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @TempTableColumnOrder(7)
     private RString ketteiTsuchiNo;

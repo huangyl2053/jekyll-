@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.dgKy
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.dgKyufuJissekiMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
@@ -1528,8 +1529,10 @@ public class KyufuJissekiShokaiHandler {
             RString サービス種類１, RString サービス種類２) {
         Decimal 項目データ = new Decimal(INT_ZERO);
         for (KyufuJissekiKihonKyotakuServiceBusiness 計画費データ : 計画費集計データ) {
-            RString 対象サービス種類 = 計画費データ.get給付実績基本居宅サービス計画費データ().getレコード種別コード();
-            if (対象サービス種類.equals(サービス種類１) || 対象サービス種類.equals(サービス種類２)) {
+            ServiceCode サービスコード = 計画費データ.get給付実績基本居宅サービス計画費データ().getサービスコード();
+            RString サービスコードの上2桁 = getサービスコードの上2桁(サービスコード);
+            if (!RString.isNullOrEmpty(サービスコードの上2桁)
+                    && (サービスコードの上2桁.equals(サービス種類１) || サービスコードの上2桁.equals(サービス種類２))) {
                 Decimal 点数合計 = 計画費データ.get給付実績基本居宅サービス計画費データ().get後_サービス単位数合計();
                 if (点数合計 == null) {
                     点数合計 = new Decimal(INT_ZERO);
@@ -1538,6 +1541,13 @@ public class KyufuJissekiShokaiHandler {
             }
         }
         return 項目データ;
+    }
+
+    private RString getサービスコードの上2桁(ServiceCode サービスコード) {
+        if (サービスコード != null && !サービスコード.isEmpty()) {
+            return サービスコード.value().substring(INT_ZERO, INT_NI);
+        }
+        return RString.EMPTY;
     }
 
     private Decimal get項目データ(List<KyufuJissekiKihonShukeiBusiness> 給付明細列一覧データ,

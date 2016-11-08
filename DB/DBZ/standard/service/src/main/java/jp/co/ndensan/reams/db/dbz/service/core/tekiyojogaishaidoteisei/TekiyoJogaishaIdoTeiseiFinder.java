@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.TekiyoJogaishaManager;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -70,13 +71,19 @@ public class TekiyoJogaishaIdoTeiseiFinder {
     public int save異動訂正(TekiyoJogaisha 現在の除外の情報, TekiyoJogaisha 修正後の除外の情報) {
         TekiyoJogaishaManager manager = TekiyoJogaishaManager.createInstance();
         int 更新件数;
+        FlexibleDate 検索用適用年月日 = 現在の除外の情報.get適用年月日();
+        ShikibetsuCode 識別コード = 現在の除外の情報.get識別コード();
+        DbT1002TekiyoJogaishaDac dbT1002Dac = InstanceProvider.create(DbT1002TekiyoJogaishaDac.class);
+        List<DbT1002TekiyoJogaishaEntity> dbT1002EntityList;
         if (is年月日が一致(現在の除外の情報.get異動日(), 修正後の除外の情報.get異動日())) {
             manager.save適用除外者(現在の除外の情報.createBuilderForEdit().set論理削除フラグ(true).build());
+            dbT1002EntityList = dbT1002Dac.selectBy識別コードAnd適用年月日(検索用適用年月日, 識別コード);
             int 枝番 = Integer.parseInt(現在の除外の情報.get枝番().toString()) + 1;
             manager.save適用除外者(get追加適用除外者(修正後の除外の情報
                     .createBuilderForEdit().set枝番(new RString(String.valueOf(枝番)).padLeft("0", 枝番_桁)).build()));
         } else {
             manager.save適用除外者(現在の除外の情報.createBuilderForEdit().set論理削除フラグ(true).build());
+            dbT1002EntityList = dbT1002Dac.selectBy識別コードAnd適用年月日(検索用適用年月日, 識別コード);
             manager.save適用除外者(get追加適用除外者(修正後の除外の情報));
         }
         更新件数 = 2;
@@ -85,10 +92,6 @@ public class TekiyoJogaishaIdoTeiseiFinder {
                 && is適用除外適用事由コードが一致(現在の除外の情報.get適用除外適用事由コード(), 修正後の除外の情報.get適用除外適用事由コード())) {
             return 更新件数;
         }
-        FlexibleDate 検索用適用年月日 = 現在の除外の情報.get適用年月日();
-        ShikibetsuCode 識別コード = 現在の除外の情報.get識別コード();
-        DbT1002TekiyoJogaishaDac dbT1002Dac = InstanceProvider.create(DbT1002TekiyoJogaishaDac.class);
-        List<DbT1002TekiyoJogaishaEntity> dbT1002EntityList = dbT1002Dac.selectBy識別コードAnd適用年月日(検索用適用年月日, 識別コード);
         if (null == dbT1002EntityList || dbT1002EntityList.isEmpty()) {
             return 更新件数;
         }
@@ -108,6 +111,7 @@ public class TekiyoJogaishaIdoTeiseiFinder {
                 dbT1002Entityクローン.setEdaNo(new RString(Integer.parseInt(dbT1002Entity.getEdaNo().toString()) + 1).padLeft("0", 枝番_桁));
             }
             dbT1002Entity.setLogicalDeletedFlag(true);
+            dbT1002Entity.setState(EntityDataState.Modified);
             TekiyoJogaisha 更新適用除外者 = new TekiyoJogaisha(dbT1002Entity);
             manager.save適用除外者(更新適用除外者);
             TekiyoJogaisha 更新適用除外者クローン = new TekiyoJogaisha(dbT1002Entityクローン);

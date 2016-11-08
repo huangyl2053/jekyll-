@@ -91,14 +91,16 @@ public class JikoFutangakushomeishoHandler {
         RString 支給申請書整理番号 = div.getJikoFutanShomeishoSakuseiPrint().getDdlShikyuShinseishoSeiriNo().getSelectedKey();
         KogakuGassanJikoFutanGaku 自己負担額entity = 高額合算申請書.get自己負担額証明書整理番号(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
         JigyoKogakuGassanJikoFutanGaku 事業高額合算自己負担額entity = 高額合算申請書.get自己負担額証明書整理番号_DBCMNN2001(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
-        if (メニューID_DBCMN63001.equals(メニューID)) {
-            div.getJikoFutanShomeishoSakuseiPrint().getTxtJikoFutangakuShomeishoSeiriNo().setValue(自己負担額entity.get自己負担額証明書整理番号());
-            div.getJikoFutanShomeishoSakuseiPrint().getTxtZenkaiHakkoDate().setValue(自己負担額entity.get自己負担額証明書作成年月日());
-            div.getJikoFutanShomeishoSakusei().setTitle(自己負担額証明書作成);
-        } else if (メニューID_DBCMNN2001.equals(メニューID)) {
-            div.getJikoFutanShomeishoSakuseiPrint().getTxtJikoFutangakuShomeishoSeiriNo().setValue(事業高額合算自己負担額entity.get自己負担額証明書整理番号());
-            div.getJikoFutanShomeishoSakusei().setTitle(事業分_自己負担額証明書作成);
-            div.getJikoFutanShomeishoSakuseiPrint().getTxtZenkaiHakkoDate().setValue(事業高額合算自己負担額entity.get自己負担額証明書作成年月日());
+        if (事業高額合算自己負担額entity != null) {
+            if (メニューID_DBCMN63001.equals(メニューID)) {
+                div.getJikoFutanShomeishoSakuseiPrint().getTxtJikoFutangakuShomeishoSeiriNo().setValue(自己負担額entity.get自己負担額証明書整理番号());
+                div.getJikoFutanShomeishoSakuseiPrint().getTxtZenkaiHakkoDate().setValue(自己負担額entity.get自己負担額証明書作成年月日());
+                div.getJikoFutanShomeishoSakusei().setTitle(自己負担額証明書作成);
+            } else if (メニューID_DBCMNN2001.equals(メニューID)) {
+                div.getJikoFutanShomeishoSakuseiPrint().getTxtJikoFutangakuShomeishoSeiriNo().setValue(事業高額合算自己負担額entity.get自己負担額証明書整理番号());
+                div.getJikoFutanShomeishoSakusei().setTitle(事業分_自己負担額証明書作成);
+                div.getJikoFutanShomeishoSakuseiPrint().getTxtZenkaiHakkoDate().setValue(事業高額合算自己負担額entity.get自己負担額証明書作成年月日());
+            }
         }
         div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().setValue(システム日付);
         div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().initialize(new ReportId(new RString("DBC100050_JikoFutangakushomeisho")));
@@ -129,14 +131,14 @@ public class JikoFutangakushomeishoHandler {
             dataList.add(dataSource);
         }
         div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setDataSource(dataList);
-        for (FlexibleYear entry : 年度毎キー.keySet()) {
-            if (entry.equals(FlexibleDate.getNowDate().getYear())) {
-                if ((月_8 <= システム月 && システム月 <= 月_12) && (日_1 <= システム日 && システム日 <= 日_31)) {
-                    div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(FlexibleDate.getNowDate().getYear().minusYear(年_2).toDateString());
-                } else if ((月_1 <= システム月 && システム月 <= 月_7) && (日_1 <= システム日 && システム日 <= 日_31)) {
-                    div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(FlexibleDate.getNowDate().getYear().minusYear(1).toDateString());
-                }
+        if (年度毎キー.keySet().contains(システム日付.getYear())) {
+            if ((月_8 <= システム月 && システム月 <= 月_12) && (日_1 <= システム日 && システム日 <= 日_31)) {
+                div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(FlexibleDate.getNowDate().getYear().minusYear(年_2).toDateString());
+            } else if ((月_1 <= システム月 && システム月 <= 月_7) && (日_1 <= システム日 && システム日 <= 日_31)) {
+                div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(FlexibleDate.getNowDate().getYear().minusYear(1).toDateString());
             }
+        } else {
+            div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(dataList.get(0).getKey());
         }
     }
 
@@ -184,10 +186,12 @@ public class JikoFutangakushomeishoHandler {
         RString 支給申請書整理番号 = div.getJikoFutanShomeishoSakuseiPrint().getDdlShikyuShinseishoSeiriNo().getSelectedKey();
         KogakuGassanJikoFutanGaku 自己負担額entity = 高額合算申請書.get自己負担額証明書整理番号(new HihokenshaNo(被保険者番号), 対象年度, 保険者番号, 支給申請書整理番号);
         JigyoKogakuGassanJikoFutanGaku 事業高額合算自己負担額entity = 高額合算申請書.get自己負担額証明書整理番号_DBCMNN2001(new HihokenshaNo(被保険者番号), 対象年度, 保険者番号, 支給申請書整理番号);
-        if (メニューID_DBCMN63001.equals(メニューID)) {
-            div.getJikoFutanShomeishoSakuseiPrint().getTxtJikoFutangakuShomeishoSeiriNo().setValue(自己負担額entity.get自己負担額証明書整理番号());
-        } else if (メニューID_DBCMNN2001.equals(メニューID)) {
-            div.getJikoFutanShomeishoSakuseiPrint().getTxtJikoFutangakuShomeishoSeiriNo().setValue(事業高額合算自己負担額entity.get自己負担額証明書整理番号());
+        if (事業高額合算自己負担額entity != null) {
+            if (メニューID_DBCMN63001.equals(メニューID)) {
+                div.getJikoFutanShomeishoSakuseiPrint().getTxtJikoFutangakuShomeishoSeiriNo().setValue(自己負担額entity.get自己負担額証明書整理番号());
+            } else if (メニューID_DBCMNN2001.equals(メニューID)) {
+                div.getJikoFutanShomeishoSakuseiPrint().getTxtJikoFutangakuShomeishoSeiriNo().setValue(事業高額合算自己負担額entity.get自己負担額証明書整理番号());
+            }
         }
     }
 

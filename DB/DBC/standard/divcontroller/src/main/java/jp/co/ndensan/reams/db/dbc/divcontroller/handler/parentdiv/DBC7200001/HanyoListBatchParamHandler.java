@@ -259,6 +259,7 @@ public class HanyoListBatchParamHandler {
             div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().setDisabled(false);
         } else {
             div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().setDisabled(true);
+            div.getChushutsuJokenPanel().getChushutsuKubun().getKijyunbi().getTxtKijyunnNengetsu().setValue(null);
         }
     }
 

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1320011;
 
-import jp.co.ndensan.reams.db.dbc.business.kyufutsuchisakuseiikatu.KyufuTsuchiSakuseiIkatuCollect;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060020.DBC060020_KyufuhiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011.DBC1320011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011.KyufuTsuchiSakuseiIkatuDiv;
@@ -45,13 +44,17 @@ public class KyufuTsuchiSakuseiIkatu {
      */
     public ResponseData<KyufuTsuchiSakuseiIkatuDiv> onLoad(KyufuTsuchiSakuseiIkatuDiv div) {
         getHandler(div).onLoad(ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務));
-        KyufuTsuchiSakuseiIkatuCollect 画面データ = ViewStateHolder.get(
-                ViewStateKeys.給付費通知書作成一括画面データ, KyufuTsuchiSakuseiIkatuCollect.class);
-        if (画面データ != null) {
-            getHandler(div).復元画面データ(画面データ);
-            set被保険者情報(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), div);
-        }
-        ViewStateHolder.put(ViewStateKeys.給付費通知書作成一括画面データ, null);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 給付費通知書作成(一括)初期化を処理します。
+     *
+     * @param div KyufuTsuchiSakuseiIkatuDiv
+     * @return ResponseData<KyufuTsuchiSakuseiIkatuDiv>
+     */
+    public ResponseData<KyufuTsuchiSakuseiIkatuDiv> onActive(KyufuTsuchiSakuseiIkatuDiv div) {
+        set被保険者情報(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), div);
         return ResponseData.of(div).respond();
     }
 
@@ -78,8 +81,6 @@ public class KyufuTsuchiSakuseiIkatu {
      */
     public ResponseData<KyufuTsuchiSakuseiIkatuDiv> onClick_btnHihokenshaSearch(KyufuTsuchiSakuseiIkatuDiv div) {
         ViewStateHolder.put(ViewStateKeys.資格対象者, null);
-        KyufuTsuchiSakuseiIkatuCollect 画面データ = getHandler(div).get画面データ();
-        ViewStateHolder.put(ViewStateKeys.給付費通知書作成一括画面データ, 画面データ);
         return ResponseData.of(div).forwardWithEventName(DBC1320011TransitionEventName.対象者検索).respond();
     }
 

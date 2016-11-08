@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -84,6 +84,22 @@ public class HihokenshaDaichoAliveManager {
         }
 
         return businessList;
+    }
+
+    /**
+     * 最新の被保険者台帳履歴返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return HihokenshaDaichoAlive
+     */
+    @Transaction
+    public HihokenshaDaichoAlive get最新の被保険者台帳履歴(HihokenshaNo 被保険者番号) {
+        DbV1001HihokenshaDaichoEntity entity = dac.get最新の被保険者台帳履歴(被保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaichoAlive(entity);
     }
 
     /**

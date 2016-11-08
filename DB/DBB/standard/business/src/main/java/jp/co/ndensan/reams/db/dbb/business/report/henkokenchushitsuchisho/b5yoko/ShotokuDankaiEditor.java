@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.b5yoko;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -28,18 +29,26 @@ public class ShotokuDankaiEditor implements IKaigoHokenryogakuHenkoKenChushiTsuc
 
     @Override
     public KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource edit(KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource reportSource) {
-        reportSource.listShotokuDankai_1 = item.getListShotokuDankai_1();
-        reportSource.listShotokuDankai_2 = item.getListShotokuDankai_2();
-        reportSource.listShotokuDankai_3 = item.getListShotokuDankai_3();
-        reportSource.listShotokuDankai_4 = item.getListShotokuDankai_4();
-        reportSource.listShotokuDankai_5 = item.getListShotokuDankai_5();
-        reportSource.listShotokuDankai_6 = item.getListShotokuDankai_6();
-        reportSource.listShotokuDankai_7 = item.getListShotokuDankai_7();
-        reportSource.listShotokuDankai_8 = item.getListShotokuDankai_8();
-        reportSource.listShotokuDankai_9 = item.getListShotokuDankai_9();
-        reportSource.listShotokuDankai_10 = item.getListShotokuDankai_10();
-        reportSource.listShotokuDankai_11 = item.getListShotokuDankai_11();
-        reportSource.listShotokuDankai_12 = item.getListShotokuDankai_12();
+        reportSource.listShotokuDankai_1 = get数字のみ(item.getListShotokuDankai_1());
+        reportSource.listShotokuDankai_2 = get数字のみ(item.getListShotokuDankai_2());
+        reportSource.listShotokuDankai_3 = get数字のみ(item.getListShotokuDankai_3());
+        reportSource.listShotokuDankai_4 = get数字のみ(item.getListShotokuDankai_4());
+        reportSource.listShotokuDankai_5 = get数字のみ(item.getListShotokuDankai_5());
+        reportSource.listShotokuDankai_6 = get数字のみ(item.getListShotokuDankai_6());
+        reportSource.listShotokuDankai_7 = get数字のみ(item.getListShotokuDankai_7());
+        reportSource.listShotokuDankai_8 = get数字のみ(item.getListShotokuDankai_8());
+        reportSource.listShotokuDankai_9 = get数字のみ(item.getListShotokuDankai_9());
+        reportSource.listShotokuDankai_10 = get数字のみ(item.getListShotokuDankai_10());
+        reportSource.listShotokuDankai_11 = get数字のみ(item.getListShotokuDankai_11());
+        reportSource.listShotokuDankai_12 = get数字のみ(item.getListShotokuDankai_12());
         return reportSource;
     }
+
+    private RString get数字のみ(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return RString.EMPTY;
+        }
+        return value.replace(new RString("第"), RString.EMPTY).replace(new RString("段階"), RString.EMPTY);
+    }
+
 }

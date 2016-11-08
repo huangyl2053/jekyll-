@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
 import jp.co.ndensan.reams.db.dbc.business.kogakugassan.KogakuGassanKey;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoData;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFromData;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011.DBC1170011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011.JikoFutangakuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1170011.JikoFutangakushomeishoHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1170011.JikoFutangakushomeishoValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.report.ijikofutangakushomeishoservice.IJikoFutangakushomeisho2009Service;
 import jp.co.ndensan.reams.db.dbc.service.report.ijikofutangakushomeishoservice.IJikoFutangakushomeishoService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -30,10 +30,10 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -57,9 +57,11 @@ public class JikoFutangakuShomeisho {
     public ResponseData<JikoFutangakuShomeishoDiv> onLoad(JikoFutangakuShomeishoDiv div) {
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         KogakuGassanShinseisho 対象者データ = getHandler(div).get対象者データ(getKey().get被保険者番号());
-        ValidationMessageControlPairs validPairs = getValidationHandler().対象者チェック(対象者データ);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        InformationMessage message = new InformationMessage(
+                DbcInformationMessages.自己負担額データなし.getMessage().getCode(),
+                DbcInformationMessages.自己負担額データなし.getMessage().evaluate());
+        if (対象者データ == null) {
+            return ResponseData.of(div).addMessage(message).respond();
         }
         getHandler(div).onLoad(メニューID, システム日付, getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), getKey().get識別コード());
         FlexibleYear 択された年度 = new FlexibleYear(div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().getSelectedKey());
@@ -107,8 +109,10 @@ public class JikoFutangakuShomeisho {
      */
     public ResponseData<JikoFutangakuShomeishoDiv> onClickBeforeCheck(JikoFutangakuShomeishoDiv div) {
         KogakuGassanShinseisho 再計算区分 = getHandler(div).get再計算区分();
-        if (再計算区分_1.equals(再計算区分.get再計算区分())) {
-            return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算申請書情報の再計算前.getMessage()).respond();
+        if (再計算区分 != null) {
+            if (再計算区分_1.equals(再計算区分.get再計算区分())) {
+                return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算申請書情報の再計算前.getMessage()).respond();
+            }
         }
         FlexibleDate 前回発行日 = div.getJikoFutanShomeishoSakuseiPrint().getTxtZenkaiHakkoDate().getValue();
         if (前回発行日.isEmpty()) {
@@ -169,10 +173,6 @@ public class JikoFutangakuShomeisho {
 
     private JikoFutangakushomeishoHandler getHandler(JikoFutangakuShomeishoDiv div) {
         return new JikoFutangakushomeishoHandler(div);
-    }
-
-    private JikoFutangakushomeishoValidationHandler getValidationHandler() {
-        return new JikoFutangakushomeishoValidationHandler();
     }
 
     private TaishoshaKey getKey() {

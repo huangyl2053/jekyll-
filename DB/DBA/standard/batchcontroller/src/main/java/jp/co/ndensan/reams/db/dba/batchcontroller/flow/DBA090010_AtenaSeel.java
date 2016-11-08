@@ -72,15 +72,13 @@ public class DBA090010_AtenaSeel extends BatchFlowBase<DBA090010_AtenaSeelParame
             executeStep(ICHIJITBL);
         } else if (抽出対象者_5.equals(getParameter().getChuushutsutaishousha())) {
             executeStep(NOT_NENREI_PROCESS);
-            //TODO 处理 4.3.2 宛名識別対象一時テーブル3の作成  QA1945
-//          executeStep(JUKYUNI_PROCESS);
+            executeStep(JUKYUNI_PROCESS);
             executeStep(SHIKAKUSHUTOKU_JUKY);
             executeStep(ICHIJITBL);
         } else {
             executeStep(NENREI_PROCESS);
             executeStep(NOT_NENREI_PROCESS);
-            //TODO 处理 4.3.2 宛名識別対象一時テーブル3の作成  QA1945
-//          executeStep(JUKYUNI_PROCESS);
+            executeStep(JUKYUNI_PROCESS);
             executeStep(SHIKAKU_NENREI_JUKYUNI_PROCESS);
             executeStep(SHIKAKUSHUTOKU_NENREITOTATSU);
             executeStep(SHIKAKUSHU_NENREITO_JUKY);

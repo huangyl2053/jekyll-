@@ -174,7 +174,7 @@
         FROM
             "DbWT0510FurikomiMeisai" AS "DbWT0510FurikomiMeisai"
         INNER JOIN
-            rgdb."DbV1001HihokenshaDaichoAlive" AS "DbT1001HihokenshaDaicho"
+            rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON
             "DbWT0510FurikomiMeisai"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
         INNER JOIN
@@ -246,7 +246,7 @@
         FROM
             "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
         WHERE
-           0 <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku" 
+           0 <![CDATA[<]]> 振込明細一時TBL."furikomiKingaku" 
            AND 振込明細一時TBL."kozaDataFlag" = TRUE
         )
         SELECT
@@ -268,12 +268,10 @@
                 振込明細一時TBL."kozaNayoseKey",
                 COUNT(*) AS 件数,
                 SUM(振込明細一時TBL."furikomiKingaku") AS 合計振込金額
-                <!--dataKubunは振込明細一時TBLになし-->
-                <!--,COUNT(DISTINCT(振込明細一時TBL."dataKubun")) AS データ区分件数-->
             FROM
                 "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
             WHERE
-                0 <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku"
+                0 <![CDATA[<]]> 振込明細一時TBL."furikomiKingaku"
                 AND 振込明細一時TBL."kozaDataFlag" = TRUE
             GROUP BY
                 振込明細一時TBL."kozaNayoseKey"
@@ -525,6 +523,7 @@
 
     <resultMap id="resultMap_FurikomimeisaiDataShikyugakuEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050021.FurikomimeisaiDataShikyugakuEntity">
+        <id column="renban" />
         <result property="名寄せ件数" column="名寄せ件数" />
         <association property="振込明細一時Entity" resultMap="resultMap_DbWT0510FurikomiMeisaiTempEntity"/>
     </resultMap>

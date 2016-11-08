@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200040;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200040.GassanShikyuFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
@@ -49,6 +48,9 @@ public class GassanShikyuFushikyuKetteishaIchiranPageBreak extends PageBreaker<G
             } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.対象年度.get項目ID())
                     && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
                 flag = true;
+            } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.get項目ID())
+                    && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
+                flag = true;
             } else {
                 setFlag(currentSource, nextSource);
             }
@@ -80,31 +82,4 @@ public class GassanShikyuFushikyuKetteishaIchiranPageBreak extends PageBreaker<G
         }
         return flag;
     }
-
-    /**
-     * 改頁判断のメソッドです。
-     *
-     * @param currentSource KijunShunyugakuTekiyoKetteiEntity
-     * @param nextSource KijunShunyugakuTekiyoKetteiEntity
-     * @return 改頁Flag
-     */
-    public boolean is改頁(KogakugassanShikyuKetteitsuchishoEntity currentSource,
-            KogakugassanShikyuKetteitsuchishoEntity nextSource) {
-        boolean flag = false;
-        if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.被保険者番号.get項目ID())
-                && !currentSource.getHihokenshaNo().equals(nextSource.getHihokenshaNo())) {
-            flag = true;
-        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請年月日.get項目ID())
-                && !currentSource.getShinseiYMD().equals(nextSource.getShinseiYMD())) {
-            flag = true;
-        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.対象年度.get項目ID())
-                && !currentSource.getTaishoNendo().equals(nextSource.getTaishoNendo())) {
-            flag = true;
-        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.get項目ID())
-                && !currentSource.getShikyuSeiriNo().equals(nextSource.getShikyuSeiriNo())) {
-            flag = true;
-        }
-        return flag;
-    }
-
 }

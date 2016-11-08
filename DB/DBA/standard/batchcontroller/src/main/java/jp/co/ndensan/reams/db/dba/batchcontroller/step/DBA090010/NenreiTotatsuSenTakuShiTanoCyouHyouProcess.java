@@ -236,15 +236,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo(listDBZ100001.get(0).get郵便番号());
         business.setGyoseiku(listDBZ100001.get(0).get行政区());
-        RString 住所 = listDBZ100001.get(0).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(0).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText(住所);
         if (processParamter.isIskatagaki()) {
@@ -272,6 +272,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight1(KAKKORIGHT);
         business.setCustomerBarCode(listDBZ100001.get(0).getバーコード住所());
         business.set識別コード1(listDBZ100001.get(0).get識別コード());
+        business.set住所(listDBZ100001.get(0).get住所());
         listBusiness.add(business);
     }
 
@@ -283,15 +284,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText(住所);
         if (processParamter.isIskatagaki()) {
@@ -319,6 +320,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight1(KAKKORIGHT);
         business.setCustomerBarCode(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード1(listDBZ100001.get(i).get識別コード());
+        business.set住所(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -333,15 +335,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo1(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku1(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText1(住所);
         if (processParamter.isIskatagaki()) {
@@ -369,6 +371,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight3(KAKKORIGHT);
         business.setCustomerBarCode1(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード2(listDBZ100001.get(i).get識別コード());
+        business.set住所1(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -383,15 +386,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo2(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku2(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText2(住所);
         if (processParamter.isIskatagaki()) {
@@ -416,6 +419,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight5(KAKKORIGHT);
         business.setCustomerBarCode2(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード3(listDBZ100001.get(i).get識別コード());
+        business.set住所2(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -430,15 +434,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo3(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku3(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText3(住所);
         if (processParamter.isIskatagaki()) {
@@ -466,6 +470,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight7(KAKKORIGHT);
         business.setCustomerBarCode3(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード4(listDBZ100001.get(i).get識別コード());
+        business.set住所3(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -480,15 +485,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo4(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku4(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText4(住所);
         if (processParamter.isIskatagaki()) {
@@ -516,6 +521,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight9(KAKKORIGHT);
         business.setCustomerBarCode4(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード5(listDBZ100001.get(i).get識別コード());
+        business.set住所4(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -530,15 +536,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo5(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku5(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText5(住所);
         if (processParamter.isIskatagaki()) {
@@ -566,6 +572,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight11(KAKKORIGHT);
         business.setCustomerBarCode5(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード6(listDBZ100001.get(i).get識別コード());
+        business.set住所5(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -580,15 +587,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo6(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku6(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText6(住所);
         if (processParamter.isIskatagaki()) {
@@ -616,6 +623,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight13(KAKKORIGHT);
         business.setCustomerBarCode6(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード7(listDBZ100001.get(i).get識別コード());
+        business.set住所6(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -630,15 +638,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo7(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku7(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText7(住所);
         if (processParamter.isIskatagaki()) {
@@ -666,6 +674,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight15(KAKKORIGHT);
         business.setCustomerBarCode7(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード8(listDBZ100001.get(i).get識別コード());
+        business.set住所7(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -680,15 +689,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo8(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku8(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText8(住所);
         if (processParamter.isIskatagaki()) {
@@ -716,6 +725,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight17(KAKKORIGHT);
         business.setCustomerBarCode8(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード9(listDBZ100001.get(i).get識別コード());
+        business.set住所8(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -730,15 +740,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo9(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku9(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText9(住所);
         if (processParamter.isIskatagaki()) {
@@ -766,6 +776,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight19(KAKKORIGHT);
         business.setCustomerBarCode9(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード10(listDBZ100001.get(i).get識別コード());
+        business.set住所9(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -780,15 +791,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo10(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku10(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText10(住所);
         if (processParamter.isIskatagaki()) {
@@ -816,6 +827,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight21(KAKKORIGHT);
         business.setCustomerBarCode10(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード11(listDBZ100001.get(i).get識別コード());
+        business.set住所10(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -830,15 +842,15 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo11(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku11(listDBZ100001.get(i).get行政区());
-        RString 住所 = listDBZ100001.get(i).get住所();
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
         if (processParamter.isIsshichosonmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get市町村名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
         }
         if (processParamter.isIstodofukenmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
         }
         if (processParamter.isIsgunmeisho()) {
-            住所.concat(koikiZenShichosonJoho.get郡名称());
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
         }
         business.setJushoText11(住所);
         if (processParamter.isIskatagaki()) {
@@ -866,6 +878,7 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         business.setKakkoRight23(KAKKORIGHT);
         business.setCustomerBarCode11(listDBZ100001.get(i).getバーコード住所());
         business.set識別コード12(listDBZ100001.get(i).get識別コード());
+        business.set住所11(listDBZ100001.get(i).get住所());
         listBusiness.add(business);
         帳票枚数 = 0;
         can終了 = true;
@@ -891,5 +904,12 @@ public class NenreiTotatsuSenTakuShiTanoCyouHyouProcess extends BatchProcessBase
         } else {
             return PersonalData.of(new ShikibetsuCode(entity.get識別コード()));
         }
+    }
+
+    private RString nullToEmpty(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return RString.EMPTY;
+        }
+        return value;
     }
 }

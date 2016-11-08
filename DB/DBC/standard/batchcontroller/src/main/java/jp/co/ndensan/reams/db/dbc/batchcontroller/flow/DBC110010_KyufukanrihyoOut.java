@@ -87,7 +87,7 @@ public class DBC110010_KyufukanrihyoOut extends BatchFlowBase<DBC110010_Kyufukan
         executeStep(送付対象データ取得_予防給付計画自己作成情報);
         int 登録件数 = getResult(Integer.class, new RString(送付対象データ取得_予防給付計画自己作成情報),
                 YoboKeikakuJikoSakuseiProcess.PARAMETER_OUT_OUTCOUNT);
-        if (登録件数 != 0) {
+        if (1 < 登録件数) {
             executeStep(支給限度額情報取得);
             executeStep(支給限度額情報取得2);
             executeStep(支給限度額情報取得3);

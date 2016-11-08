@@ -631,7 +631,7 @@ public class DBC040010DataUtil {
         loopSetDecimal(実績負担額Set, UCHISU_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
         loopSetRString(実績負担額Set, TEKIYO, 実績負担額Get, BIKO);
         実績負担額Set.setGokei_JikoFutanGaku(loopAddDecimal(実績負担額Get, JIKOFUTANGAKUWORK));
-        実績負担額Set.setGokei_70_74KogakuShikyuGaku(loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU));
+        実績負担額Set.setGokei_70_74JikoFutanGaku(loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU));
         実績負担額Set.setDataSakuseiKubun(TWO);
         実績負担額Set.setJikoFutanKeisanYMD2(nonullRStr(getRDate(処理日時)));
     }
@@ -651,7 +651,7 @@ public class DBC040010DataUtil {
         Decimal sum1 = loopAddDecimal(実績負担額Get, JIKOFUTANGAKUWORK);
         Decimal sum2 = loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU);
         実績負担額Set.setGokei_JikoFutanGaku(sum1);
-        実績負担額Set.setGokei_70_74KogakuShikyuGaku(sum2);
+        実績負担額Set.setGokei_70_74JikoFutanGaku(sum2);
         loopSetDecimal(実績負担額Set, SUMI_JIKOFUTANGAKU, 実績負担額Get, JIKOFUTANGAKUWORK);
         loopSetDecimal(実績負担額Set, SUMI_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
         loopSetRString(実績負担額Set, SUMI_TEKIYO, 実績負担額Get, BIKO);

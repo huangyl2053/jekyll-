@@ -8,7 +8,12 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -771,7 +776,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setHihokenshaNo(entity.get被保険者番号().value());
             item.setHokenshaName(entity.get保険者名称());
             item.setHokenshaNo(entity.get保険者番号().value());
-            item.setHoninBirthYMD(entity.get本人生年月日());
+            item.setHoninBirthYMD(editDate(entity.get本人生年月日()));
             item.setHoninJusho(entity.get本人住所());
             item.setHoninName(entity.get本人名称());
             item.setHoninNameKana(entity.get本人名称カナ());
@@ -809,11 +814,19 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListSetaiin_1(entity.get世帯員情報リスト().get(index).get世帯員識別コード());
             item.setListSetaiin_2(entity.get世帯員情報リスト().get(index).get世帯員氏名());
             item.setListSetaiin_3(entity.get世帯員情報リスト().get(index).get世帯員性別());
-            item.setListSetaiin_4(entity.get世帯員情報リスト().get(index).get世帯員生年月日());
+            item.setListSetaiin_4(editDate(entity.get世帯員情報リスト().get(index).get世帯員生年月日()));
             item.setListSetaiin_5(entity.get世帯員情報リスト().get(index).get世帯員続柄());
             item.setListSetaiin_6(entity.get世帯員情報リスト().get(index).get世帯員合計取得金額());
             item.setListSetaiin_7(entity.get世帯員情報リスト().get(index).get世帯員課税区分());
         }
+    }
+
+    private RString editDate(RString 生年月日) {
+        if (RString.isNullOrEmpty(生年月日)) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).
+                fillType(FillType.BLANK).toDateString();
     }
 
     /**
@@ -830,7 +843,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListSetaiin_8(entity.get世帯員情報リスト().get(index).get世帯員識別コード());
             item.setListSetaiin_9(entity.get世帯員情報リスト().get(index).get世帯員氏名());
             item.setListSetaiin_10(entity.get世帯員情報リスト().get(index).get世帯員性別());
-            item.setListSetaiin_11(entity.get世帯員情報リスト().get(index).get世帯員生年月日());
+            item.setListSetaiin_11(editDate(entity.get世帯員情報リスト().get(index).get世帯員生年月日()));
             item.setListSetaiin_12(entity.get世帯員情報リスト().get(index).get世帯員続柄());
             item.setListSetaiin_13(entity.get世帯員情報リスト().get(index).get世帯員合計取得金額());
             item.setListSetaiin_14(entity.get世帯員情報リスト().get(index).get世帯員課税区分());

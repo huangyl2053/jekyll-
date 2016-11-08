@@ -244,6 +244,15 @@ public class KogakuGassanKyufuJisseki
     }
 
     /**
+     * 論理削除を返します。
+     *
+     * @return データ区分
+     */
+    public boolean is論理削除() {
+        return entity.getIsDeleted();
+    }
+
+    /**
      * {@link DbT3075KogakuGassanKyufuJissekiEntity}のクローンを返します。
      *
      * @return {@link DbT3075KogakuGassanKyufuJissekiEntity}のクローン
@@ -279,6 +288,18 @@ public class KogakuGassanKyufuJisseki
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new KogakuGassanKyufuJisseki(deletedEntity, id);
+    }
+
+    /**
+     * add KogakuGassanKyufuJisseki
+     *
+     * @return KogakuGassanKyufuJisseki {@link ShokanMeisai}のクローン
+     */
+    public KogakuGassanKyufuJisseki added() {
+        DbT3075KogakuGassanKyufuJissekiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new KogakuGassanKyufuJisseki(addedEntity, id);
     }
 
     /**

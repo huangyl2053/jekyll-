@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.workflowcontroller.dbbwf35001;
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.BranchPrintTshuchisho;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class DBBWF35001 {
 
     /**
-     * バッチ起動画面で通知書発行が指示された場合、104を実行します。
+     * バッチ起動画面で通知書発行が指示された場合、105を実行します。
      *
      * @param flowVersion flowVersion
      * @return 判断結果
@@ -52,6 +53,7 @@ public class DBBWF35001 {
         param.set一括発行フラグ(flowPrm.get(new RString("一括発行フラグ"), Boolean.class));
         param.set帳票グループ(flowPrm.get(new RString("帳票グループ"), RString.class));
         param.set文書番号(flowPrm.get(new RString("文書番号"), RString.class));
+        UrControlDataFactory.createInstance().getLoginInfo().setUserId(flowPrm.get(new RString("reamsLoginId"), RString.class));
         return param;
     }
 

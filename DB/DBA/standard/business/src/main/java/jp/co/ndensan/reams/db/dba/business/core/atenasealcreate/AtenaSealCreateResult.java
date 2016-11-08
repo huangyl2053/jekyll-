@@ -51,6 +51,7 @@ public class AtenaSealCreateResult {
     private static final RString 現住所 = new RString("genjusho");
     private static final RString ERRORCODE = new RString("99");
     private static final RString WK管内管外区分 = new RString("1");
+    private static final RString エラー区分 = new RString("登録データなし");
 
     /**
      * 宛名識別対象一時テーブル1を作成 です。
@@ -431,8 +432,8 @@ public class AtenaSealCreateResult {
             一時テーブル3Entity.setSeibetsuCode(RString.EMPTY);
             setバーコード住所_一時テーブル3Entity(entity, 一時テーブル3Entity,
                     processParamter, koikiZenShichosonJoho);
-            一時テーブル3Entity.setChoikiCode(nullToEmpty(entity.get町域コード()));
-            一時テーブル3Entity.setSeinengappiYMD(nullToEmpty(entity.get生年月日()));
+            一時テーブル3Entity.setChoikiCode(nullToEmpty(RString.EMPTY));
+            一時テーブル3Entity.setSeinengappiYMD(nullToEmpty(RString.EMPTY));
             return 一時テーブル3Entity;
         }
     }
@@ -584,7 +585,7 @@ public class AtenaSealCreateResult {
         eucEntity.set被保険者番号(RString.EMPTY);
         eucEntity.set被保険者カナ氏名(RString.EMPTY);
         eucEntity.set被保険者氏名(RString.EMPTY);
-        eucEntity.setエラー内容(entity.getエラー区分());
+        eucEntity.setエラー内容(エラー区分);
         eucEntity.set備考(RString.EMPTY);
         return eucEntity;
     }
