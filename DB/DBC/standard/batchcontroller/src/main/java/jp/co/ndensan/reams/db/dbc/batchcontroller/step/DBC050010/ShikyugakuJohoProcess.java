@@ -229,7 +229,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         List<InjiYoushikiBangouBetuKingaku> 印字様式番号別金額List = bisness.sumKingakuBy印字様式番号(t.get様式番号別金額EntityList());
         MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
         List<PrintNoKingakuEntity> list = new ArrayList<>();
-        for (int i = 1; i <= 印字様式番号別金額List.size(); i++) {
+        for (int i = 0; i < 印字様式番号別金額List.size(); i++) {
             InjiYoushikiBangouBetuKingaku 印字様式番号別金額 = 印字様式番号別金額List.get(i);
             様式連番++;
 
