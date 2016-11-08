@@ -157,11 +157,18 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     public void onSelect居宅サービス一覧(KyotakuKeikakuTodokede 居宅給付計画届出) {
         div.setMode(計画照会モード);
         dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        if (選択行.equals(div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(ZERO))) {
-            div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近照会);
-        } else {
-            div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴照会);
+        for (dgKyotakuServiceIchiran_Row dataSouce : div.getRireki().getDgKyotakuServiceIchiran().getDataSource()) {
+            if (選択行.getTaishoYM().equals(dataSouce.getTaishoYM())) {
+                if (選択行.getRirekiNo().equals(dataSouce.getRirekiNo())) {
+                    div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近照会);
+                    break;
+                } else {
+                    div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴照会);
+                    break;
+                }
+            }
         }
+
         set認定申請中状況を活性制御(居宅給付計画届出.get被保険者番号());
         set届出内容エリア照会(居宅給付計画届出);
         if (is事業者作成の場合()) {
@@ -181,10 +188,16 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     public void onModify居宅サービス一覧(KyotakuKeikakuTodokede 居宅給付計画届出) {
         div.setMode(計画修正モード);
         dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        if (選択行.equals(div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(ZERO))) {
-            div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近訂正);
-        } else {
-            div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴訂正);
+        for (dgKyotakuServiceIchiran_Row dataSouce : div.getRireki().getDgKyotakuServiceIchiran().getDataSource()) {
+            if (選択行.getTaishoYM().equals(dataSouce.getTaishoYM())) {
+                if (選択行.getRirekiNo().equals(dataSouce.getRirekiNo())) {
+                    div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近訂正);
+                    break;
+                } else {
+                    div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴訂正);
+                    break;
+                }
+            }
         }
         set認定申請中状況を活性制御(居宅給付計画届出.get被保険者番号());
         set届出内容エリア照会(居宅給付計画届出);
@@ -215,10 +228,16 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     public void onDelete居宅サービス一覧(KyotakuKeikakuTodokede 居宅給付計画届出) {
         div.setMode(計画削除モード);
         dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        if (選択行.equals(div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(ZERO))) {
-            div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近削除);
-        } else {
-            div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴削除);
+        for (dgKyotakuServiceIchiran_Row dataSouce : div.getRireki().getDgKyotakuServiceIchiran().getDataSource()) {
+            if (選択行.getTaishoYM().equals(dataSouce.getTaishoYM())) {
+                if (選択行.getRirekiNo().equals(dataSouce.getRirekiNo())) {
+                    div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近削除);
+                    break;
+                } else {
+                    div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴削除);
+                    break;
+                }
+            }
         }
         set認定申請中状況を活性制御(居宅給付計画届出.get被保険者番号());
         set届出内容エリア照会(居宅給付計画届出);
@@ -424,11 +443,11 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      */
     public boolean is項目が変更(KyotakuKeikakuTodokede 居宅給付計画届出) {
         if (!DBC0110011StateName.追加状態.getName().equals(ResponseHolder.getState())) {
-            return true;
+            return false;
         }
         if (計画削除モード.equals(div.getMode())
                 || 計画照会モード.equals(div.getMode())) {
-            return true;
+            return false;
         }
         FlexibleDate 届出年月日now = div.getTxtTodokedeYM().getValue() == null ? null : new FlexibleDate(div.getTxtTodokedeYM().getValue().toDateString());
         boolean is居宅給付計画届出が変更
@@ -929,7 +948,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     public boolean is項目が変更(HihokenshaNo 被保険者番号) {
         if (計画削除モード.equals(div.getMode())
                 || 計画照会モード.equals(div.getMode())) {
-            return true;
+            return false;
         }
         boolean is変更 = div.getTxtKeikakuTekiyoStartYMD().getValue() != null
                 || div.getTxtKeikakuTekiyoEndYMD().getValue() != null
@@ -937,7 +956,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 || (div.getTxtTodokedeshaYubinNo().getValue() != null && !div.getTxtTodokedeshaYubinNo().getValue().isEmpty())
                 || (div.getTxtTodokedeshaJusho().getValue() != null && !div.getTxtTodokedeshaJusho().getValue().isEmpty());
         if (is変更) {
-            return true;
+            return is変更;
         }
         is変更 = is事業者作成が変更(被保険者番号);
         if (!is変更 && is自己作成の場合()) {
