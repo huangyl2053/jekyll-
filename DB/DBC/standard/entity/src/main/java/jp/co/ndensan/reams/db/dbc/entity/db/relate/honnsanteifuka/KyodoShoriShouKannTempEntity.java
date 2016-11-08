@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
- * 共同処理基本送付全件一時テーブルEntity項目定義クラスです。
+ * 共同処理償還送付全件一時テーブルEntity項目定義クラスです。
  *
- * @reamsid_L DBC-2770-060 zhangzhiming
+ * @reamsid_L DBC-2770-050 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

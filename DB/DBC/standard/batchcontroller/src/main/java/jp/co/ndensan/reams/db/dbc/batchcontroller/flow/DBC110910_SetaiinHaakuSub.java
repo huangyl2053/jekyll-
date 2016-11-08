@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110910.SetaiShotoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110910.SetaiinHaakuSubBProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110910.SetaiinHaakuSubCProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110910.SetaiinHaakuSubProcess;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC110910_SetaiinHaakuSub extends BatchFlowBase<DBC110910_SetaiinHaakuSubParameter> {
 
-    private static final String 一時ファイル作成 = "一時ファイル";
     private static final String 住所地特例該当 = "特例該当";
     private static final String 住所地特例該当以外 = "特例該当以外";
     private static final String 住所地特例以外の以外 = "特例以外の以外";
@@ -36,23 +34,12 @@ public class DBC110910_SetaiinHaakuSub extends BatchFlowBase<DBC110910_SetaiinHa
 
     @Override
     protected void defineFlow() {
-        executeStep(一時ファイル作成);
         executeStep(住所地特例該当);
         executeStep(住所地特例該当以外);
         executeStep(住所地特例以外の以外);
         executeStep(生保区分);
         executeStep(老齢福祉区分);
         executeStep(介護所得);
-    }
-
-    /**
-     * 一時ファイルを行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(一時ファイル作成)
-    protected IBatchFlowCommand 一時ファイル() {
-        return loopBatch(SetaiShotoProcess.class).define();
     }
 
     /**

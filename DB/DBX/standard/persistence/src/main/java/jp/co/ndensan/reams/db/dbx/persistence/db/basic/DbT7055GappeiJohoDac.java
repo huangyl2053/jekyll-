@@ -220,4 +220,18 @@ public class DbT7055GappeiJohoDac {
                 limit(1).
                 toObject(DbT7055GappeiJohoEntity.class);
     }
+
+    /**
+     * 合併情報を全件返します。
+     *
+     * @return DbT7055GappeiJohoEntityのlist
+     */
+    @Transaction
+    public List<DbT7055GappeiJohoEntity> selectGappeiYMD() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7055GappeiJoho.class).
+                toList(DbT7055GappeiJohoEntity.class);
+    }
 }
