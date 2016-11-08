@@ -12,10 +12,10 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030010.DBU030010_JigyoHokokuNenpo_MainParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0040011.JigyoJokyoHokokuNempoSakueiDiv;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -51,7 +51,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     private static final int INT_ROKU = 6;
     private static final int INT_JUNI = 12;
     private static final int INT_1988 = 1988;
-    private static final RString 市町村識別ID = new RString("00");
     private static final RString 選択する = new RString("1");
     private static final RString 選択無し = new RString("0");
     private static final RString 集計 = new RString("01");
@@ -100,16 +99,15 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         boolean is広域 = false;
         RDate システム日付 = RDate.getNowDate();
         RTime システム時刻 = RDate.getNowTime();
-        if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
-            is単一 = true;
-            div.setHiddenTanitsu(new RString("単一"));
-            if (合併情報区分_合併あり.equals(合併情報区分)) {
-                is合併あり = true;
-                div.setHiddenGappei(new RString("合併"));
-            }
+        if (合併情報区分_合併あり.equals(合併情報区分)) {
+            is合併あり = true;
+            div.setHiddenGappei(new RString("合併"));
         } else if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
             is広域 = true;
             div.setHiddenKouiki(new RString("広域"));
+        } else if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
+            is単一 = true;
+            div.setHiddenTanitsu(new RString("単一"));
         }
         set過去の集計結果表示非表示(is合併あり, is単一, is広域);
         div.getDdlHokokuNendo().setDataSource(get報告年度(システム日付));
@@ -149,7 +147,13 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getDdlHokokuNendo().setDisabled(false);
             div.getDdlShukeiFromYM().setDisabled(false);
             div.getDdlShukeiToYM().setDisabled(false);
-            if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
+            if (!RString.isNullOrEmpty(div.getHiddenTanitsu())) {
+                div.getDdlKakoHokokuNendo().setDisabled(true);
+                div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
+                div.getRadGappeiShichoson().setDisplayNone(true);
+                div.getRadKoikiRengo().setDisplayNone(true);
+                div.getBtnShichosonSelect().setDisplayNone(true);
+            } else if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
                 div.getDdlKakoHokokuNendo().setDisabled(true);
                 div.getRadGappeiShichoson().setDisabled(true);
                 div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
@@ -583,18 +587,18 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     /**
      * 実行するボタンを押下する場合、パラメータを設定する。
      *
-     * @param 市町村情報 市町村情報
+     * @param 市町村セキュリティ情報 市町村セキュリティ情報
      * @param 引き継ぎデータ 引き継ぎデータ
      * @param 市町村識別 市町村識別
      * @param 現市町村情報 現市町村情報
      * @param 合併市町村情報 合併市町村情報
      * @return DBU030010_JigyoHokokuNenpo_MainParameter
      */
-    public DBU030010_JigyoHokokuNenpo_MainParameter onClick_btnBatchParamSave(KoseiShichosonJoho 市町村情報,
+    public DBU030010_JigyoHokokuNenpo_MainParameter onClick_btnBatchParamSave(
+            ShichosonSecurityJoho 市町村セキュリティ情報,
             ShichosonSelectorModel 引き継ぎデータ, List<AuthorityItem> 市町村識別,
             List<KoikiZenShichosonJoho> 現市町村情報, List<GappeiCityJyoho> 合併市町村情報) {
         DBU030010_JigyoHokokuNenpo_MainParameter parameter = new DBU030010_JigyoHokokuNenpo_MainParameter();
-        List<RString> 構成市町村コードリスト = new ArrayList<>();
         List<RString> 旧市町村コードリスト = new ArrayList<>();
         RString 市町村コード = RString.EMPTY;
         parameter.set報告開始年月(RString.EMPTY);
@@ -619,19 +623,12 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         if (DonyuKeitaiCode.事務広域.getCode().equals(div.getHiddenDonyuKeitaiCode())) {
             parameter.set構成市町村区分(new RString("1"));
         }
-        if (!RString.isNullOrEmpty(div.getHiddenTanitsu()) && 市町村情報 != null
-                && 市町村情報.get市町村コード() != null
-                && !市町村情報.get市町村コード().isEmpty()) {
-            市町村コード = 市町村情報.get市町村コード().value();
+        if (市町村セキュリティ情報.get市町村情報() != null) {
+            市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
         }
         parameter.set市町村コード(市町村コード);
         if (!RString.isNullOrEmpty(div.getHiddenKouiki())) {
-            if (市町村識別ID.equals(市町村識別.get(0).getItemId())) {
-                parameter.set構成市町村コードリスト(get構成市町村コードリスト(現市町村情報));
-            } else {
-                構成市町村コードリスト.add(市町村コード);
-                parameter.set構成市町村コードリスト(構成市町村コードリスト);
-            }
+            parameter.set構成市町村コードリスト(get構成市町村コードリスト(現市町村情報));
         }
         if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
             parameter.set旧市町村コードリスト(get旧市町村コードリスト(合併市町村情報));
@@ -663,6 +660,12 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
             div.getRadKoikiRengo().setSelectedKey(new RString("koiki"));
             div.getBtnShichosonSelect().setDisabled(true);
+        } else if (!RString.isNullOrEmpty(div.getHiddenTanitsu())) {
+            div.getDdlKakoHokokuNendo().setDisabled(false);
+            div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
+            div.getRadGappeiShichoson().setDisplayNone(true);
+            div.getRadKoikiRengo().setDisplayNone(true);
+            div.getBtnShichosonSelect().setDisplayNone(true);
         }
     }
 
@@ -681,21 +684,22 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     }
 
     private void set過去の集計結果表示非表示(boolean is合併あり, boolean is単一, boolean is広域) {
-        if (is単一) {
+        if (is合併あり) {
+            div.getRadGappeiShichoson().setDisplayNone(false);
+            div.getBtnShichosonSelect().setDisplayNone(false);
+            div.getRadKoikiRengo().setDisplayNone(true);
+            div.getBtnShichosonSelect().setDisabled(true);
+            div.getRadGappeiShichoson().setDisabled(true);
+        } else if (is広域) {
+            div.getRadGappeiShichoson().setDisplayNone(true);
+            div.getBtnShichosonSelect().setDisplayNone(false);
+            div.getRadKoikiRengo().setDisplayNone(false);
+            div.getBtnShichosonSelect().setDisabled(true);
+            div.getRadKoikiRengo().setDisabled(true);
+        } else if (is単一) {
             div.getRadGappeiShichoson().setDisplayNone(true);
             div.getRadKoikiRengo().setDisplayNone(true);
             div.getBtnShichosonSelect().setDisplayNone(true);
-            if (is合併あり) {
-                div.getRadGappeiShichoson().setDisplayNone(false);
-                div.getBtnShichosonSelect().setDisplayNone(false);
-                div.getRadKoikiRengo().setDisplayNone(true);
-                div.getBtnShichosonSelect().setDisabled(true);
-                div.getRadGappeiShichoson().setDisabled(true);
-            }
-        } else if (is広域) {
-            div.getRadGappeiShichoson().setDisplayNone(true);
-            div.getBtnShichosonSelect().setDisabled(true);
-            div.getRadKoikiRengo().setDisabled(true);
         }
     }
 
