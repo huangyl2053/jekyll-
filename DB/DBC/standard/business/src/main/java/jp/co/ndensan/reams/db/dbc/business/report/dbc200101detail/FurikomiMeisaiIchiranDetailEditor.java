@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -106,6 +107,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     @Override
     public FurikomiMeisaiIchiranDetailReportSource edit(FurikomiMeisaiIchiranDetailReportSource source) {
         if (一覧表用データ != null) {
+            source.layout = Layouts.鑑;
             毎ページ数++;
             List<PrintNoKingakuEntity> list = 一覧表用データ.get印字様式番号別金額List();
 
@@ -143,6 +145,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
         }
         if (合計データリスト != null) {
+            source.layout = Layouts.必須;
             FurikomiMeisaiGokeiEditor furikomiMeisaiGokeiEditor = new FurikomiMeisaiGokeiEditor(合計データリスト, 出力順,
                     設定値, 作成日時);
             source = furikomiMeisaiGokeiEditor.edit(source);
