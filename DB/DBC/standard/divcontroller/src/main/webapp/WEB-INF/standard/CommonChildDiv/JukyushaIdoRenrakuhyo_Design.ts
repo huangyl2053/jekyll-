@@ -253,12 +253,12 @@ module DBC {
                 return new UZA.Panel(this.convFiledName("GemmenGengakuPanel"));
             }
 
-            public btnGemmenGengakuRireki(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnGemmenGengakuRireki"));
-            }
-
             public radGemmenShinseichuKubun(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radGemmenShinseichuKubun"));
+            }
+
+            public btnGemmenGengakuRireki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnGemmenGengakuRireki"));
             }
 
             public JukyushaIdoRenrakuhyoGemmenGengakuSub(): UZA.Panel {
