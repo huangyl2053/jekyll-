@@ -361,14 +361,16 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void afterExecute() {
-        KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(kyufuKanrihyoSokatsuhyoEntity);
-        report.writeBy(reportSourceWriter);
-        SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
-        entity.setレコード件数カウンター(1);
-        entity.set保険者番号(保険者番号1);
-        entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
-        送付ファイル用EntityList.add(entity);
+        if (0 < ヘッダー項目は1行目) {
+            KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(kyufuKanrihyoSokatsuhyoEntity);
+            report.writeBy(reportSourceWriter);
+            SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
+            entity.setレコード件数カウンター(1);
+            entity.set保険者番号(保険者番号1);
+            entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
+            送付ファイル用EntityList.add(entity);
 
+        }
         for (int i = 0; i < 送付ファイル用EntityList.size(); i++) {
             int 出力件数 = 0;
             int レコード番号カウンター = 0;
@@ -434,7 +436,6 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
             outputCount.setValue(総出力件数);
             outputEntry.setValue(送付ファイルエントリ情報);
         }
-
     }
 
     private KyufukanrihyoOutSofuFairuendcsvEntity getEndEntity(int レコード番号カウンター) {
