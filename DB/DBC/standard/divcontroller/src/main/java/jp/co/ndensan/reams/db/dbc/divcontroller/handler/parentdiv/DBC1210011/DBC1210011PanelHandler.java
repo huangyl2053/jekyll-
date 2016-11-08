@@ -40,10 +40,12 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -69,8 +71,11 @@ public class DBC1210011PanelHandler {
     private static final YubinNo 支給額計算結果連絡先郵便番号 = new YubinNo("9999999");
     private static final ReportId 帳票ID = new ReportId("DBC100053_GassanKetteiTsuchisho");
     private static final int 整数_ZERO = 0;
+    private static final int NUM_4 = 4;
+    private static final RString ZERO_4 = new RString("0000");
     private static final Code CODE_003 = new Code("003");
     private static final RString 発行する = new RString("btnReportPublish");
+    private static final RString 度STR = new RString("度");
 
     /**
      * コンストラクタです。
@@ -176,7 +181,8 @@ public class DBC1210011PanelHandler {
             Collections.sort(対象年度List, comparator);
             List<KeyValueDataSource> ddlTaishoNendodataSource = new ArrayList();
             for (FlexibleYear 対象年度 : 対象年度List) {
-                ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(), 対象年度.wareki().toDateString()));
+                ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(),
+                        対象年度.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(度STR)));
             }
             div.getDdlTaishoNendo().setDataSource(ddlTaishoNendodataSource);
             div.getDdlTaishoNendo().setSelectedIndex(整数_ZERO);
@@ -236,14 +242,23 @@ public class DBC1210011PanelHandler {
             Collections.sort(履歴番号List, comparator);
             List<KeyValueDataSource> 履歴番号KeyValue = new ArrayList<>();
             for (RString 履歴番号 : 履歴番号List) {
+                RString 履歴番号表示 = padZeroToLeft履歴番号(履歴番号);
                 if (!履歴番号KeyValue.contains(
-                        new KeyValueDataSource(履歴番号, 履歴番号))) {
-                    履歴番号KeyValue.add(new KeyValueDataSource(履歴番号, 履歴番号));
+                        new KeyValueDataSource(履歴番号, 履歴番号表示))) {
+                    履歴番号KeyValue.add(new KeyValueDataSource(履歴番号, 履歴番号表示));
                 }
             }
             div.getDdlRirekiNO().setDataSource(履歴番号KeyValue);
             div.getDdlRirekiNO().setSelectedIndex(整数_ZERO);
         }
+    }
+
+    private RString padZeroToLeft履歴番号(RString 履歴番号) {
+        if (履歴番号.length() >= NUM_4) {
+            return 履歴番号;
+        }
+        RString 編集後履歴番号 = ZERO_4.concat(履歴番号);
+        return 編集後履歴番号.substring(編集後履歴番号.length() - NUM_4);
     }
 
     /**
@@ -473,7 +488,7 @@ public class DBC1210011PanelHandler {
         parameter.set帳票ID(reportId);
         parameter.set支払予定日(div.getTxtShiharaiYoteiYMD().getValue() != null
                 ? new FlexibleDate(div.getTxtShiharaiYoteiYMD().getValue().toDateString()) : FlexibleDate.EMPTY);
-        parameter.set文書番号(div.getCcdBunshoNO().get文書番号() != null ? div.getCcdBunshoNO().get文書番号()
+        parameter.set文書番号(div.getCcdBunshoNO().get文書番号() != null && !div.getCcdBunshoNO().get文書番号().isEmpty() ? div.getCcdBunshoNO().get文書番号()
                 : RString.HALF_SPACE.concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE)
                 .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE)
                 .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE));
