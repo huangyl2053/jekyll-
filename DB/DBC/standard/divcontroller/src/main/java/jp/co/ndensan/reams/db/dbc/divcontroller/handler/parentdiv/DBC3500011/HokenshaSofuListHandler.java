@@ -232,15 +232,6 @@ public class HokenshaSofuListHandler {
     }
 
     /**
-     * 「アップロード」ボタンのメソッドです。
-     *
-     * @param file FileData
-     */
-    public void upLoadCsv(FileData file) {
-
-    }
-
-    /**
      * 処理年月取得のメソッドです。
      *
      * @param データ種別 RString
@@ -346,7 +337,12 @@ public class HokenshaSofuListHandler {
         return 保険者番号;
     }
 
-    private void deleteEntitys(FileData file) {
+    /**
+     * deleteEntitysのメソッドです。
+     *
+     * @param file FileData
+     */
+    public void deleteEntitys(FileData file) {
         List<UzT0885SharedFileEntryEntity> uzt0885EntityList = SharedFile.searchSharedFile(file.getFileName());
         for (UzT0885SharedFileEntryEntity entity : uzt0885EntityList) {
             ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(

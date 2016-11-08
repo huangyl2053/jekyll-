@@ -189,8 +189,9 @@ public class JyusinDataBaitaiTorikomu {
                     ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(
                             new FilesystemName(entity.getSharedFileName()), entity.getSharedFileId());
                     SharedFile.deleteEntry(deleteEntity);
-                    throw new ApplicationException(DbcErrorMessages.国保連アップロード対象ファイル不正.getMessage());
                 }
+                getHandler(div).deleteEntitys(file);
+                throw new ApplicationException(DbcErrorMessages.国保連アップロード対象ファイル不正.getMessage());
             }
             getHandler(div).コントロールレコード配列内容チェック(コントロールレコード, file, データレコード, データ種別);
             処理年月 = getHandler(div).処理年月取得(データ種別);
