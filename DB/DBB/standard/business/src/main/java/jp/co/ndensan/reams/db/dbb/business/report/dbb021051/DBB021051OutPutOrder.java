@@ -48,6 +48,14 @@ public enum DBB021051OutPutOrder implements IReportItems {
      */
     世帯コード(new RString("0008"), new RString(""), new RString("\"TempTable\".\"世帯コード\""), new RString("世帯コード")),
     /**
+     * 識別コードです。
+     */
+    識別コード(new RString("0009"), new RString(""), new RString("\"TempTable\".\"識別コード\""), new RString("識別コード")),
+    /**
+     * 氏名５０音カナです。
+     */
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"TempTable\".\"氏名カナ\""), new RString("氏名５０音カナ")),
+    /**
      * 生年月日です。
      */
     生年月日(new RString("0012"), new RString(""), new RString("\"TempTable\".\"生年月日\""), new RString("生年月日")),
@@ -55,18 +63,6 @@ public enum DBB021051OutPutOrder implements IReportItems {
      * 性別です。
      */
     性別(new RString("0013"), new RString(""), new RString("\"TempTable\".\"性別\""), new RString("性別")),
-    /**
-     * 住民コードです。
-     */
-    住民コード(new RString("0014"), new RString(""), new RString("\"TempTable\".\"識別コード\""), new RString("住民コード")),
-    /**
-     * 氏名５０音カナです。
-     */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"TempTable\".\"氏名カナ\""), new RString("氏名５０音カナ")),
-    /**
-     * 氏名５０音漢字です。
-     */
-    氏名５０音漢字(new RString("0011"), new RString(""), new RString("\"TempTable\".\"氏名\""), new RString("氏名５０音漢字")),
     /**
      * 市町村コードです。
      */
