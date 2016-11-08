@@ -248,10 +248,10 @@ public class InsFukaTemp3Process extends BatchProcessBase<FukaJohokeizokuRelateE
     private void set被保険者番号Map(Map<HihokenshaNo, Integer> 被保険者番号Map, FukaJohoTempEntity 賦課情報一時Entity) {
         if (被保険者番号Map.containsKey(賦課情報一時Entity.getHihokenshaNo())) {
             被保険者番号Map.remove(賦課情報一時Entity.getHihokenshaNo());
-            int 枝番号 = Integer.valueOf(賦課情報一時Entity.getHihokenshaNo().value().substring(整数_14, 整数_16).toString());
+            int 枝番号 = Integer.valueOf(賦課情報一時Entity.getTsuchishoNo().value().substring(整数_14, 整数_16).toString());
             被保険者番号Map.put(賦課情報一時Entity.getHihokenshaNo(), 枝番号);
         } else {
-            int 枝番号 = Integer.valueOf(賦課情報一時Entity.getHihokenshaNo().value().substring(整数_14, 整数_16).toString());
+            int 枝番号 = Integer.valueOf(賦課情報一時Entity.getTsuchishoNo().value().substring(整数_14, 整数_16).toString());
             被保険者番号Map.put(賦課情報一時Entity.getHihokenshaNo(), 枝番号);
         }
     }
