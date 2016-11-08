@@ -607,7 +607,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 申請一覧Entity.set行政区コード(宛先.get宛先行政区().getコード().getColumnValue());
                 申請一覧Entity.set世帯コード(宛名.get世帯コード().getColumnValue());
             }
-            申請一覧Entity.set市町村コード(doRString編集(exEntity.get対象世帯員().getShichosonCode()));
+            申請一覧Entity.set市町村コード(doRString編集(entity.get対象世帯員().getShichosonCode()));
 
         } else {
             申請一覧Entity.set氏名(MESSAGE_該当データなし);
