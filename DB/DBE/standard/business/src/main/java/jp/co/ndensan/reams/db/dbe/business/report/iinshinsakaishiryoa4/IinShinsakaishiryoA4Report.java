@@ -77,21 +77,6 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
         List<TokkiA4Entity> 短冊情報リスト = tokkiTextBusiness.get短冊情報リスト();
         List<RString> 短冊リスト = get短冊リスト(短冊情報リスト);
         List<RString> テキスト全面List = tokkiTextBusiness.getTokkiText();
-        if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
-            IIinShinsakaishiryoA4Editor editor1 = new IinShinsakaishiryoA4Group3Editor(
-                    tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, 0);
-            IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor1);
-            reportSourceWriter.writeLine(builder);
-        } else {
-            for (int i = 0; i < 短冊リスト.size(); i++) {
-                if (i < MAXCOUNT) {
-                    IIinShinsakaishiryoA4Editor editor1 = new IinShinsakaishiryoA4Group3Editor(
-                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, i);
-                    IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor1);
-                    reportSourceWriter.writeLine(builder);
-                }
-            }
-        }
         if (ReportIdDBE.DBE517905.getReportId().value().equals(reportId)) {
             if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
                 for (int i = 0; i < テキスト全面List.size(); i++) {
@@ -99,7 +84,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 }
             } else {
                 for (int i = 0; i < 短冊リスト.size(); i++) {
-                    テキスト全面Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List);
+                    短冊情報Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List);
                 }
             }
         }
@@ -116,7 +101,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 }
             } else {
                 for (int i = 0; i < 短冊リスト.size(); i++) {
-                    テキスト全面Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List);
+                    短冊情報Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List);
                 }
             }
         }
@@ -133,7 +118,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
 
     private List<RString> get短冊リスト(List<TokkiA4Entity> 短冊情報リスト) {
         List<RString> bodyList = new ArrayList<>();
-        if (!短冊情報リスト.isEmpty()) {
+        if (短冊情報リスト != null && !短冊情報リスト.isEmpty()) {
             for (TokkiA4Entity entity : 短冊情報リスト) {
                 bodyList.add(entity.get事項番号());
                 bodyList.add(entity.get項目名称());

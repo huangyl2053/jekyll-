@@ -302,17 +302,12 @@ public class KogakuGassanShikyuKetteiHosei {
             RString 処理モード) {
         if (画面DIV != null) {
             get更新高額合算支給不支給決定(画面DIV.get高額合算支給不支給決定Entity(), 処理モード);
+            get更新高額合算給付実績(処理モード, 画面DIV);
         }
         return true;
     }
 
-    /**
-     * 更新高額合算給付実績
-     *
-     * @param 処理モード 処理モード
-     * @param 画面DIV KoshinShoriResult
-     */
-    public void get更新高額合算給付実績(RString 処理モード, KoshinShoriResult 画面DIV) {
+    private void get更新高額合算給付実績(RString 処理モード, KoshinShoriResult 画面DIV) {
         if (画面DIV.getUpdate合算給付実績パラメータ() != null) {
             KogakuGassanKyufuJisseki 更新data = getshoriModeHantei_Two(画面DIV.getUpdate合算給付実績パラメータ().
                     get更新後被保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().

@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111JKyufuJissekiD8Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.KyufuJissekiInHenkyakuD8DataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekiin.IKyufuJissekiInMasterTorokuMapper;
+import jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuShoriKekkaListInsertManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -35,10 +36,7 @@ public class KyufuJissekiInHenkyakuD8KousinProcess extends BatchProcessBase<Kyuf
     private IKyufuJissekiInMasterTorokuMapper mapper;
     @BatchWriter
     private IBatchTableWriter 給付実績D8tableWriter;
-    @BatchWriter
-    private IBatchTableWriter 処理結果リスト一時tableWriter;
     private static final RString 給付実績D8一時_TABLE_NAME = new RString("DbWT111JKyufuJissekiD8");
-    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
 
     @Override
     protected void initialize() {
@@ -54,9 +52,6 @@ public class KyufuJissekiInHenkyakuD8KousinProcess extends BatchProcessBase<Kyuf
     protected void createWriter() {
         給付実績D8tableWriter
                 = new BatchEntityCreatedTempTableWriter(給付実績D8一時_TABLE_NAME, DbWT111JKyufuJissekiD8Entity.class);
-        処理結果リスト一時tableWriter
-                = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
-                        DbWT0002KokuhorenTorikomiErrorEntity.class);
     }
 
     @Override
@@ -76,20 +71,20 @@ public class KyufuJissekiInHenkyakuD8KousinProcess extends BatchProcessBase<Kyuf
     }
 
     private void do削除対象なし(DbWT111JKyufuJissekiD8Entity 給付実績D8, DbWT0001HihokenshaTempEntity 被保険者一時) {
-        DbWT0002KokuhorenTorikomiErrorEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorEntity();
-        処理結果.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.給付実績情報内容不一致.getコード());
-        処理結果.setShoHokanehshaNo(new ShoKisaiHokenshaNo(給付実績D8.getShokisaiHokenshaNo().getColumnValue()));
-        処理結果.setHihokenshaNo(被保険者一時.get登録被保険者番号());
-        処理結果.setKey1(給付実績D8.getKokanJohoShikibetsuNo().getColumnValue());
-        処理結果.setKey2(給付実績D8.getInputShikibetsuNo().getColumnValue());
+        DbWT0002KokuhorenTorikomiErrorTempEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorTempEntity();
+        処理結果.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.給付実績情報内容不一致.getコード());
+        処理結果.set証記載保険者番号(new ShoKisaiHokenshaNo(給付実績D8.getShokisaiHokenshaNo().getColumnValue()));
+        処理結果.set被保険者番号(被保険者一時.get登録被保険者番号());
+        処理結果.setキー1(給付実績D8.getKokanJohoShikibetsuNo().getColumnValue());
+        処理結果.setキー2(給付実績D8.getInputShikibetsuNo().getColumnValue());
         RString サービス提供年月 = 給付実績D8.getServiceTeikyoYM().wareki().firstYear(FirstYear.ICHI_NEN).toDateString();
-        処理結果.setKey3(サービス提供年月);
-        処理結果.setKey4(RString.EMPTY);
-        処理結果.setKey5(RString.EMPTY);
-        処理結果.setHihokenshaKanaShimei(被保険者一時.get宛名カナ名称());
-        処理結果.setHihokenshaShimei(被保険者一時.get宛名名称());
-        処理結果.setBiko(RString.EMPTY);
-        処理結果リスト一時tableWriter.insert(処理結果);
+        処理結果.setキー3(サービス提供年月);
+        処理結果.setキー4(RString.EMPTY);
+        処理結果.setキー5(RString.EMPTY);
+        処理結果.set被保険者カナ氏名(被保険者一時.get宛名カナ名称());
+        処理結果.set被保険者氏名(被保険者一時.get宛名名称());
+        処理結果.set備考(RString.EMPTY);
+        KokuhorenKyoutsuuShoriKekkaListInsertManager.do一意排他登録(処理結果);
     }
 
 }

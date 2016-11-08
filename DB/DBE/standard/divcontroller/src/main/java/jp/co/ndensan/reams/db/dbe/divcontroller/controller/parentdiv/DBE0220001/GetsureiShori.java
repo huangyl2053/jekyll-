@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0220001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001TransitionEventName;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -51,6 +53,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.workflow.flow.valueobject.FlowId;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowIdentificationKeyAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdKey;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValue;
 
 /**
  * 完了処理・センター送信のクラスです。
@@ -61,6 +69,9 @@ public class GetsureiShori {
 
     private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("CenterSoshinIchiran.csv");
+    private static final RString KEY = new RString("key");
+    private static final RString VALUE_UPDATE = new RString("Update");
+    private static final RString VALUE_BATCH = new RString("Batch");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
@@ -149,6 +160,8 @@ public class GetsureiShori {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RealInitialLocker.release(排他キー);
+            FlowParameters fp = FlowParameters.of(KEY, VALUE_BATCH);
+            FlowParameterAccessor.merge(fp);
             return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
         }
         return ResponseData.of(div).respond();
@@ -201,9 +214,20 @@ public class GetsureiShori {
             RealInitialLocker.release(排他キー);
             div.getCcdKanryoMessege().setMessage(new RString("完了処理・センター送信の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            FlowParameters fp = FlowParameters.of(KEY, VALUE_UPDATE);
+            FlowParameterAccessor.merge(fp);
+            setFlowIdentificationKeyAccessor(VALUE_UPDATE);
             return ResponseData.of(div).setState(DBE0220001StateName.完了);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void setFlowIdentificationKeyAccessor(RString value) {
+        List<IdentificationKeyValue> keyValuseList = new ArrayList<>();
+        IdentificationKeyValue keyValue = new IdentificationKeyValue(
+                IdKey.of(SubGyomuCode.DBE認定支援, new FlowId(ResponseHolder.getFlowId().toString()), KEY), value);
+        keyValuseList.add(keyValue);
+        FlowIdentificationKeyAccessor.set(keyValuseList);
     }
 
     private CenterSoshinIchiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {

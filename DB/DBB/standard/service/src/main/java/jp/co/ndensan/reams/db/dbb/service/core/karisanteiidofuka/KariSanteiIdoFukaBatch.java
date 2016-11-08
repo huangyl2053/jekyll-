@@ -999,7 +999,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         parameter.setFukaKonkyo(賦課根拠);
         parameter.setSeigyoJoho(月別保険料制御情報);
         HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
-        TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(parameter);
+        TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine仮算定保険料段階(parameter);
         RString 保険料段階 = RString.EMPTY;
         if (月別保険料段階 != null && 月別保険料段階.get保険料段階04月() != null) {
             保険料段階 = 月別保険料段階.get保険料段階04月();

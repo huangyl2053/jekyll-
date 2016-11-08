@@ -132,33 +132,6 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
                 }
             },
     /**
-     * 保険者番号桁数不正のチェック。
-     */
-    保険者番号桁数不正のチェック {
-                @Override
-                public boolean apply(ShikyugakuKeisanKekkaTorokuDiv div) {
-                    return SpecHelper.is保険者番号桁数不正のチェック(div);
-                }
-            },
-    /**
-     * 被保険者記号桁数不正のチェック。
-     */
-    被保険者記号桁数不正のチェック {
-                @Override
-                public boolean apply(ShikyugakuKeisanKekkaTorokuDiv div) {
-                    return SpecHelper.is被保険者記号桁数不正のチェック(div);
-                }
-            },
-    /**
-     * 被保険者(証)番号桁数不正のチェック。
-     */
-    被保険者証番号桁数不正のチェック {
-                @Override
-                public boolean apply(ShikyugakuKeisanKekkaTorokuDiv div) {
-                    return SpecHelper.is被保険者証番号桁数不正のチェック(div);
-                }
-            },
-    /**
      * 自己負担額証明書整理番号入力値が不正チェック。
      */
     自己負担額証明書整理番号入力値が不正チェック {
@@ -197,7 +170,6 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         private static final int INT_2 = 2;
         private static final int INT_3 = 3;
         private static final int INT_4 = 4;
-        private static final int INT_8 = 8;
         private static final int INT_12 = 12;
         private static final int INT_20 = 20;
         private static final RString RSTRING_3 = new RString("3");
@@ -300,21 +272,6 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         public static boolean is自己負担額証明書整理番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 自己負担額証明書整理番号 = div.getTxtJikoFutanSeiriNom().getValue();
             return !RString.isNullOrEmpty(自己負担額証明書整理番号) && 自己負担額証明書整理番号.length() == INT_20;
-        }
-
-        public static boolean is保険者番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
-            RString 保険者番号 = div.getTxtShoKisaiHokenshaNo().getValue();
-            return !RString.isNullOrEmpty(保険者番号) && 保険者番号.length() == INT_8;
-        }
-
-        public static boolean is被保険者記号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
-            RString 被保険者記号 = div.getTxtKokuhoHihokenshaShoKigo().getValue();
-            return !RString.isNullOrEmpty(被保険者記号) && 被保険者記号.length() == INT_20;
-        }
-
-        public static boolean is被保険者証番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
-            RString 被保険者証番号 = div.getTxtHiHokenshaShoNo().getValue();
-            return !RString.isNullOrEmpty(被保険者証番号) && 被保険者証番号.length() == INT_20;
         }
 
         public static boolean is自己負担額証明書整理番号入力値が不正チェック(ShikyugakuKeisanKekkaTorokuDiv div) {

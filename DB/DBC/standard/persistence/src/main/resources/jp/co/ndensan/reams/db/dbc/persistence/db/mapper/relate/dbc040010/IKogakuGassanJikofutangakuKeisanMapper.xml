@@ -111,19 +111,19 @@
         ,"V1001"."shikibetsuCode" AS "shikibetsuCode"
         FROM
         (SELECT
-        "dbt3070"."hihokenshaNo"
-        ,"dbt3070"."taishoNendo"
-        ,"dbt3070"."hokenshaNo"
-        ,"dbt3070"."shikyuShinseishoSeiriNo"
-        ,MAX("dbt3070"."rirekiNo")  AS "rirekiNo"
-        FROM rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "dbt3070"
-        WHERE "dbt3070"."isDeleted"= False
+        "dbt3170"."hihokenshaNo"
+        ,"dbt3170"."taishoNendo"
+        ,"dbt3170"."hokenshaNo"
+        ,"dbt3170"."shikyuShinseishoSeiriNo"
+        ,MAX("dbt3170"."rirekiNo")  AS "rirekiNo"
+        FROM rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "dbt3170"
+        WHERE "dbt3170"."isDeleted"= False
         GROUP BY
-        "dbt3070"."hihokenshaNo"
-        ,"dbt3070"."taishoNendo"
-        ,"dbt3070"."hokenshaNo"
-        ,"dbt3070"."shikyuShinseishoSeiriNo" ) AS "K"
-        INNER JOIN  rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "B"
+        "dbt3170"."hihokenshaNo"
+        ,"dbt3170"."taishoNendo"
+        ,"dbt3170"."hokenshaNo"
+        ,"dbt3170"."shikyuShinseishoSeiriNo" ) AS "K"
+        INNER JOIN  rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "B"
         ON  "K"."hihokenshaNo" = "B"."hihokenshaNo"
         AND  "K"."taishoNendo" = "B"."taishoNendo"
         AND  "K"."hokenshaNo" = "B"."hokenshaNo"

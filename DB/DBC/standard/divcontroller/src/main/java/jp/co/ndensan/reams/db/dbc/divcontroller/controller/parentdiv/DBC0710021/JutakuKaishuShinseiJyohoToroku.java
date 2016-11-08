@@ -90,6 +90,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString YES = new RString("1");
     private static final RString NO = new RString("0");
     private static final RString 申請を保存する = new RString("btnAddShikyuShinsei");
+    private final RString 排他キー = new RString("DBCHihokenshaNo");
 
     /**
      * 画面ロードメソッドです。
@@ -104,7 +105,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         if (!画面モード_照会.equals(画面モード)) {
-            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            LockingKey 排他キー = new LockingKey(this.排他キー.concat(被保険者番号.getColumnValue()));
             if (!RealInitialLocker.tryGetLock(排他キー)) {
                 throw new PessimisticLockingException();
             }
@@ -277,7 +278,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             param.set住宅改修内容一覧_検索結果(ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_検索結果, Models.class));
             getHandler(div).save(引き継ぎデータEntity, param);
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            LockingKey 排他キー = new LockingKey(this.排他キー.concat(被保険者番号.getColumnValue()));
             RealInitialLocker.release(排他キー);
         } else if ((削除の確認 || 保存の確認) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
@@ -444,7 +445,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         if (画面モード.equals(ResponseHolder.getState())) {
-            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            LockingKey 排他キー = new LockingKey(this.排他キー.concat(被保険者番号.getColumnValue()));
             RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
         }
@@ -456,7 +457,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            LockingKey 排他キー = new LockingKey(this.排他キー.concat(被保険者番号.getColumnValue()));
             RealInitialLocker.release(排他キー);
             if (画面モード_審査.equals(画面モード)) {
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
@@ -607,7 +608,7 @@ public class JutakuKaishuShinseiJyohoToroku {
 
                 handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
                 ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
-                LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+                LockingKey 排他キー = new LockingKey(this.排他キー.concat(被保険者番号.getColumnValue()));
                 RealInitialLocker.release(排他キー);
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                         .parameter(画面モード_登録);
@@ -615,14 +616,14 @@ public class JutakuKaishuShinseiJyohoToroku {
         } else if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード_修正, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
-            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            LockingKey 排他キー = new LockingKey(this.排他キー.concat(被保険者番号.getColumnValue()));
             RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .parameter(画面モード_登録);
         } else {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
-            LockingKey 排他キー = new LockingKey(被保険者番号.getColumnValue());
+            LockingKey 排他キー = new LockingKey(this.排他キー.concat(被保険者番号.getColumnValue()));
             RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .parameter(画面モード_照会);
