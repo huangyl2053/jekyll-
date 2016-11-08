@@ -138,10 +138,10 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
                 source.tsuchibun2 = 基準収入額適用決定通知書パラメータ.get通知文２();
             } else if (ChohyoMongonYoshiki.フォント大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
                 source.tsuchibunLarge = 基準収入額適用決定通知書パラメータ.get通知文３_大();
-            } else if (ChohyoMongonYoshiki.フォント混在_上大_下小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+            } else if (ChohyoMongonYoshiki.フォント混在_上小_下大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
                 source.tsuchibunMix1 = 基準収入額適用決定通知書パラメータ.get通知文4_上小();
                 source.tsuchibunMix2 = 基準収入額適用決定通知書パラメータ.get通知文5_下大();
-            } else if (ChohyoMongonYoshiki.フォント混在_上小_下大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+            } else if (ChohyoMongonYoshiki.フォント混在_上大_下小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
                 source.tsuchibunMixTwo1 = 基準収入額適用決定通知書パラメータ.get通知文6_上大();
                 source.tsuchibunMixTwo2 = 基準収入額適用決定通知書パラメータ.get通知文7_下小();
             }
