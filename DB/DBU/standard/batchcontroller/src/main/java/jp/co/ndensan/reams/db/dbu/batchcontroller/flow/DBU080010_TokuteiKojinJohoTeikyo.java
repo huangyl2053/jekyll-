@@ -91,8 +91,8 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
             boolean is未来基準日 = getResult(Boolean.class, バッチパラメータの取得,
                     TokuteiKojinJohoTeikyoSetParameterProcess.ISMIRAIDATE);
             if (!is未来基準日) {
-                executeStep(処理日付管理マスタの更新);
                 setバッチパラメータ();
+                executeStep(処理日付管理マスタの更新);
                 exeバッチ処理();
             }
         }
