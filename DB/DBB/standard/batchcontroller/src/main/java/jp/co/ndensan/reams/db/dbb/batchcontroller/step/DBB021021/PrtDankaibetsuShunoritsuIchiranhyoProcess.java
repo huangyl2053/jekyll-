@@ -553,6 +553,9 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (収納データ区分 < Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
+            収入額 = 収入額.add(entity.getShunyugaku());
+            収入件数++;
         } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当元.value().toString())) {
             充当額負 = 充当額負.add(entity.getShunyugaku().multiply(負数_1));
             充当額負件数++;
@@ -562,10 +565,6 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.還付.value().toString())) {
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
-        }
-        if (Decimal.ZERO.compareTo(entity.getShunyugaku()) < 0) {
-            収入額 = 収入額.add(entity.getShunyugaku());
-            収入件数++;
         }
         if (Decimal.ZERO.compareTo(entity.getFunougaku()) < 0) {
             不納欠損額 = 不納欠損額.add(entity.getFunougaku());
@@ -1228,6 +1227,9 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (収納データ区分 < Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
             小計_調定額 = 小計_調定額.add(entity.getChoteigaku());
             小計_調定件数++;
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
+            小計_収入額 = 小計_収入額.add(entity.getShunyugaku());
+            小計_収入件数++;
         } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当元.value().toString())) {
             小計_充当額負 = 小計_充当額負.add(entity.getShunyugaku().multiply(負数_1));
             小計_充当額負件数++;
@@ -1237,10 +1239,6 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.還付.value().toString())) {
             小計_還付額 = 小計_還付額.add(entity.getShunyugaku().multiply(負数_1));
             小計_還付件数++;
-        }
-        if (Decimal.ZERO.compareTo(entity.getShunyugaku()) < 0) {
-            小計_収入額 = 小計_収入額.add(entity.getShunyugaku());
-            小計_収入件数++;
         }
         if (Decimal.ZERO.compareTo(entity.getFunougaku()) < 0) {
             小計_不納欠損額 = 小計_不納欠損額.add(entity.getFunougaku());
@@ -1265,6 +1263,9 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (収納データ区分 < Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
+            収入額 = 収入額.add(entity.getShunyugaku());
+            収入件数++;
         } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当元.value().toString())) {
             充当額負 = 充当額負.add(entity.getShunyugaku().multiply(負数_1));
             充当額負件数++;
@@ -1274,10 +1275,6 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.還付.value().toString())) {
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
-        }
-        if (Decimal.ZERO.compareTo(entity.getShunyugaku()) < 0) {
-            収入額 = 収入額.add(entity.getShunyugaku());
-            収入件数++;
         }
         if (Decimal.ZERO.compareTo(entity.getFunougaku()) < 0) {
             不納欠損額 = 不納欠損額.add(entity.getFunougaku());
@@ -1342,6 +1339,9 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (収納データ区分 < Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
             調定額 = 調定額.add(entity.getChoteigaku());
             調定件数++;
+        } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.納付.value().toString())) {
+            収入額 = 収入額.add(entity.getShunyugaku());
+            収入件数++;
         } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.充当元.value().toString())) {
             充当額負 = 充当額負.add(entity.getShunyugaku().multiply(負数_1));
             充当額負件数++;
@@ -1351,10 +1351,6 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         } else if (収納データ区分 == Integer.parseInt(ShunoDataKubun.還付.value().toString())) {
             還付額 = 還付額.add(entity.getShunyugaku().multiply(負数_1));
             還付件数++;
-        }
-        if (Decimal.ZERO.compareTo(entity.getShunyugaku()) < 0) {
-            収入額 = 収入額.add(entity.getShunyugaku());
-            収入件数++;
         }
         if (Decimal.ZERO.compareTo(entity.getFunougaku()) < 0) {
             不納欠損額 = 不納欠損額.add(entity.getFunougaku());
