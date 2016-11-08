@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3171JigyoKogakuGassanJikoFutanGakuMeisai;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3171JigyoKogakuGassanJikoFutanGakuMeisai.hihokenshaNo;
@@ -76,6 +77,57 @@ public class DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiDac implements ISaveable
                                 eq(taishoM, 対象月))).
                 toObject(DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity.class);
 
+    }
+
+    /**
+     * 対象月除く合致する高額合算自己負担額明細を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @param 履歴番号 RirekiNo
+     * @return List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> selectMeisai(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号,
+            int 履歴番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3171JigyoKogakuGassanJikoFutanGakuMeisai.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoNendo, 対象年度),
+                                eq(hokenshaNo, 保険者番号),
+                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号),
+                                eq(rirekiNo, 履歴番号))).
+                toList(DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity.class);
+    }
+
+    /**
+     * 高額合算自己負担額明細を全件返します。
+     *
+     * @return List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity>
+     */
+    @Transaction
+    public List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> selectAll() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3171JigyoKogakuGassanJikoFutanGakuMeisai.class).
+                toList(DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity.class);
     }
 
     /**
