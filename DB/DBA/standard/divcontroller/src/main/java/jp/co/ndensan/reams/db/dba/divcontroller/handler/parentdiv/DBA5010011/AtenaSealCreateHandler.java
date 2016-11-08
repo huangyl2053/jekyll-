@@ -88,9 +88,9 @@ public class AtenaSealCreateHandler {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 形態コード = shichosonSecurityJoho.get導入形態コード().value();
         RString 市町村識別ID = shichosonSecurityJoho.get市町村情報().get市町村識別ID();
+        div.getCyushutsuJoken().getDdlZensisyouson().getDataSource().clear();
         if (DonyuKeitaiCode.事務広域.getCode().equals(形態コード)
                 || DonyuKeitaiCode.事務構成市町村.getCode().equals(形態コード)) {
-            div.getCyushutsuJoken().getDdlZensisyouson().getDataSource().clear();
             if (市町村識別ID_00.equals(市町村識別ID)) {
                 List<KeyValueDataSource> list市町村指定 = new ArrayList<>();
                 KeyValueDataSource dataSource = new KeyValueDataSource();
@@ -116,6 +116,12 @@ public class AtenaSealCreateHandler {
             }
         } else if (DonyuKeitaiCode.事務単一.getCode().equals(形態コード)) {
             div.getCyushutsuJoken().getDdlZensisyouson().setVisible(false);
+            List<KeyValueDataSource> list市町村指定 = new ArrayList<>();
+            KeyValueDataSource dataSource = new KeyValueDataSource();
+            dataSource.setKey(RString.EMPTY);
+            dataSource.setValue(RString.EMPTY);
+            list市町村指定.add(dataSource);
+            div.getCyushutsuJoken().getDdlZensisyouson().setDataSource(list市町村指定);
         }
     }
 

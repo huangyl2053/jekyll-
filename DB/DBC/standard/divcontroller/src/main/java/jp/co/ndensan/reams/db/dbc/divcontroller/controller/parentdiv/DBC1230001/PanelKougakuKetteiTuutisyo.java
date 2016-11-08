@@ -171,14 +171,18 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onClick_btnReSearch(PanelKougakuKetteiTuutisyoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        List<FlexibleYearMonth> サービス提供年月リスト = getHandler(div).getサービス提供年月リスト(キー.get被保険者番号());
+        boolean isデータの変更 = getHandler(div).isデータの変更(キー.get被保険者番号(), サービス提供年月リスト);
+        if (!ResponseHolder.isReRequest() && isデータの変更) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        if ((new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
+                || !isデータの変更) {
             LockingKey key = new LockingKey(排他キー);
             RealInitialLocker.release(key);
             return ResponseData.of(div).forwardWithEventName(DBC1230001TransitionEventName.再検索).respond();
@@ -193,14 +197,18 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onClick_btnResearchResult(PanelKougakuKetteiTuutisyoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        List<FlexibleYearMonth> サービス提供年月リスト = getHandler(div).getサービス提供年月リスト(キー.get被保険者番号());
+        boolean isデータの変更 = getHandler(div).isデータの変更(キー.get被保険者番号(), サービス提供年月リスト);
+        if (!ResponseHolder.isReRequest() && isデータの変更) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        if ((new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
+                || !isデータの変更) {
             LockingKey key = new LockingKey(排他キー);
             RealInitialLocker.release(key);
             return ResponseData.of(div).forwardWithEventName(DBC1230001TransitionEventName.対象者検索へ戻る).respond();

@@ -227,6 +227,7 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
                 総括票枚数_訪問_居宅取消 = Decimal.ZERO;
                 明細行数カウンター++;
                 editKyufuKanrihyoSokatsuhyoEntity(currentEntity, flag);
+                kyufuKanrihyoSokatsuhyoEntity = edit給付管理票総括票entity();
                 SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
                 レコード件数カウンター = 合計レコード_件数カウンター + 明細レコード_件数カウンター;
                 entity.setレコード件数カウンター(レコード件数カウンター);

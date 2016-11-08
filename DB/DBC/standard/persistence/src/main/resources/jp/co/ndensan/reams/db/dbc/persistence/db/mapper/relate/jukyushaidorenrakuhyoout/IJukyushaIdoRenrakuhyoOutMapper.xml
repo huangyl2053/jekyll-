@@ -99,8 +99,7 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT7124KokiKoreishaInfo"."shikibetsuCd" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
-         AND "DbT7124KokiKoreishaInfo"."rirekiNo" = 
-        (SELECT MAX (C. "rirekiNo") FROM rgdb. "DbT7124KokiKoreishaInfo" AS C WHERE "DbT7124KokiKoreishaInfo" . "shikibetsuCd" = C. "shikibetsuCd")
+         AND "DbT1001HihokenshaDaicho"."shikibetsuCode" IN (SELECT MAX (C. "shikibetsuCode") FROM rgdb. "DbT1001HihokenshaDaicho" AS C GROUP BY C. "shikibetsuCode")
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_後期高齢者" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -132,8 +131,7 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT7123KokuhoShikakuInfo"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
-          AND "DbT7123KokuhoShikakuInfo"."rirekiNo" = 
-        (SELECT MAX (C. "rirekiNo") FROM rgdb. "DbT7123KokuhoShikakuInfo" AS C WHERE "DbT7123KokuhoShikakuInfo" . "shikibetsuCode" = C. "shikibetsuCode")
+          AND "DbT1001HihokenshaDaicho"."shikibetsuCode" IN (SELECT MAX (C. "shikibetsuCode") FROM rgdb. "DbT1001HihokenshaDaicho" AS C GROUP BY C. "shikibetsuCode")
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_国保資格" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -165,6 +163,7 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
+         AND "DbT1001HihokenshaDaicho"."shikibetsuCode" IN (SELECT MAX (C. "shikibetsuCode") FROM rgdb. "DbT1001HihokenshaDaicho" AS C GROUP BY C. "shikibetsuCode")
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_生活保護受給者" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -249,6 +248,8 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" = '1'
+         AND "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi" <![CDATA[<>]]> 100
+         AND "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo" <![CDATA[<>]]> 100
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_社福減免" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -361,7 +362,10 @@
                 "TEMPINFO"."被保険者番号"
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
-        WHERE "DbT3114RiyoshaFutanWariaiMeisai"."futanWariaiKubun" = '20'
+        WHERE "DbT3114RiyoshaFutanWariaiMeisai" . "rirekiNo" IN 
+             (SELECT MAX(A . "rirekiNo") FROM rgdb. "DbT3114RiyoshaFutanWariaiMeisai" AS A 
+                  WHERE A."hihokenshaNo" = "IdouTemp"."被保険者番号" GROUP BY A . "nendo"
+             )
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_二割負担" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -424,7 +428,8 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         LEFT JOIN rgdb."DbT7063KaigoJigyoshaShiteiService" AS "DbT7063KaigoJigyoshaShiteiService"
-        ON "DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" = 居宅計画."計画事業者番号" AND 居宅計画."居宅サービス計画作成区分コード" <![CDATA[<>]]> '3'
+        ON "DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" = 居宅計画."計画事業者番号" 
+         AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" IN ('43','46','73','75','AF')
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_居宅計画" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -464,6 +469,7 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = '1' AND "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" IN ('11','12')
+         AND ("DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" <![CDATA[>=]]> '20150401' OR "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" = '')
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_住所地特例" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">

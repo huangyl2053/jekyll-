@@ -193,10 +193,11 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
             Decimal 年齢範囲開始 = processParameter.get宛名抽出条件().getNenreiRange().getFrom();
             Decimal 年齢範囲終了 = processParameter.get宛名抽出条件().getNenreiRange().getTo();
             RDate 年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
-            if (年齢範囲開始 != null && 年齢基準日 != null) {
+            年齢基準日 = 年齢基準日 == null ? RDate.getNowDate() : 年齢基準日;
+            if (年齢範囲開始 != null) {
                 生年月日範囲終了 = 年齢基準日.minusYear(年齢範囲開始.intValue()).plusDay(INDEX_ONE);
             }
-            if (年齢範囲終了 != null && 年齢基準日 != null) {
+            if (年齢範囲終了 != null) {
                 生年月日範囲開始 = 年齢基準日.minusYear(年齢範囲終了.intValue() + INDEX_ONE).plusDay(INDEX_TWO);
             }
             processParameter.set年齢範囲開始(年齢範囲開始);
@@ -248,7 +249,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
 
     private PersonalData toPersonalData(HanyoListShotokuJohoEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 定数_被保険者番号,
-                entity.getDbv1001被保険者番号() == null ? RString.EMPTY : entity.getDbv1001被保険者番号().value());
+                null == entity.getDbv1001被保険者番号() || entity.getDbv1001被保険者番号().isEmpty() ? RString.EMPTY : entity.getDbv1001被保険者番号().value());
         return PersonalData.of(entity.get宛名Entity().getShikibetsuCode(), expandedInfo);
     }
 

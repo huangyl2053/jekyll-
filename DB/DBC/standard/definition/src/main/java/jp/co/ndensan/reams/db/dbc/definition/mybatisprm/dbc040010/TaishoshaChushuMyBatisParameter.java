@@ -18,11 +18,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class TaishoshaChushuMyBatisParameter implements IMyBatisParameter {
+public class TaishoshaChushuMyBatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private RString 申請対象日開始;
     private RString 申請対象日終了;
-    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * DBC020080MyBatisParameterのコンストラクタです。
@@ -35,7 +34,7 @@ public class TaishoshaChushuMyBatisParameter implements IMyBatisParameter {
             RString 申請対象日開始,
             RString 申請対象日終了,
             IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
-        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(宛名検索条件);
+        super(宛名検索条件);
         this.申請対象日開始 = 申請対象日開始;
         this.申請対象日終了 = 申請対象日終了;
     }

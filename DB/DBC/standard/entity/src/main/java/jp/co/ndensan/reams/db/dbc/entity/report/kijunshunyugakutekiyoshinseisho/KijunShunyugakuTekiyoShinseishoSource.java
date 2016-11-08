@@ -64,32 +64,8 @@ public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
     public RString shunyuGengo;
     @ReportItem(name = "shunyuNen", length = 2, order = 22)
     public RString shunyuNen;
-    @ReportItem(name = "tsuchibun1", length = 42, order = 23)
+    @ReportItem(name = "tsuchibun1", order = 23)
     public RString tsuchibun1;
-    @ReportItem(name = "tsuchibun2", length = 42, order = 24)
-    public RString tsuchibun2;
-    @ReportItem(name = "tsuchibun3", length = 42, order = 25)
-    public RString tsuchibun3;
-    @ReportItem(name = "tsuchibun4", length = 42, order = 26)
-    public RString tsuchibun4;
-    @ReportItem(name = "tsuchibun5", length = 42, order = 27)
-    public RString tsuchibun5;
-    @ReportItem(name = "tsuchibun6", length = 42, order = 28)
-    public RString tsuchibun6;
-    @ReportItem(name = "tsuchibun7", length = 42, order = 29)
-    public RString tsuchibun7;
-    @ReportItem(name = "tsuchibun8", length = 42, order = 30)
-    public RString tsuchibun8;
-    @ReportItem(name = "tsuchibun9", length = 42, order = 31)
-    public RString tsuchibun9;
-    @ReportItem(name = "tsuchibun10", length = 42, order = 32)
-    public RString tsuchibun10;
-    @ReportItem(name = "tsuchibun11", length = 42, order = 33)
-    public RString tsuchibun11;
-    @ReportItem(name = "tsuchibun12", length = 42, order = 34)
-    public RString tsuchibun12;
-    @ReportItem(name = "tsuchibun13", length = 42, order = 35)
-    public RString tsuchibun13;
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode1", length = 15)
     public RString shikibetsuCode1;

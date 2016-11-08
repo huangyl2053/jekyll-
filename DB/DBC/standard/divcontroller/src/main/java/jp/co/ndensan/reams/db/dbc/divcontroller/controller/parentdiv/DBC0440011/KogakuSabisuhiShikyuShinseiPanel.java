@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -62,6 +63,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     private static final RString 総合事業高額サービス費支給申請登録 = new RString("総合事業高額サービス費支給申請書登録");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RString 申請を保存する = new RString("btnUpdate");
 
     /**
      * 申請情報検索_画面初期化です。
@@ -434,6 +436,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(true);
         div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, false);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         getHandler(div).initialize世帯所得一覧(識別コード);
         return ResponseData.of(div).respond();
@@ -448,6 +451,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnKogakuMeisaiHyoji(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, true);
         div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(false);
         return ResponseData.of(div).respond();
     }

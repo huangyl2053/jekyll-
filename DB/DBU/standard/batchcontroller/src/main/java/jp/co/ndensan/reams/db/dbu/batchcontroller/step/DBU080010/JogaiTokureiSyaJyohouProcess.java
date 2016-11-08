@@ -66,6 +66,7 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
                 processParameter.get個人番号付替対象者被保険者番号(),
                 processParameter.get版番号(),
                 新規異動区分,
+                RString.EMPTY,
                 RString.EMPTY);
     }
 

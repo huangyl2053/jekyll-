@@ -448,7 +448,7 @@ public class JikoFutangakuHoseiHandler {
             div.getTxtMadoguchiKaishiYoubi().setValue(
                     new RString(result.get支払期間開始年月日().getDayOfWeek().getShortTerm()));
         }
-        if (result.get支払期間開始時間() == null) {
+        if (result.get支払期間開始時間() == null && result.get支払期間開始時間().isEmpty()) {
             div.getTxtMadoguchiKaishiJikan().clearValue();
             div.getTxtMadoguchiKaishiFun().clearValue();
         } else {
@@ -465,7 +465,7 @@ public class JikoFutangakuHoseiHandler {
             div.getTxtMadoguchiShuryoYoubi().setValue(
                     new RString(result.get支払期間終了年月日().getDayOfWeek().getShortTerm()));
         }
-        if (result.get支払期間終了時間() == null) {
+        if (result.get支払期間終了時間() == null && result.get支払期間終了時間().isEmpty()) {
             div.getTxtMadoguchiShuryoJikan().clearValue();
             div.getTxtMadoguchiShuryoFun().clearValue();
         } else {

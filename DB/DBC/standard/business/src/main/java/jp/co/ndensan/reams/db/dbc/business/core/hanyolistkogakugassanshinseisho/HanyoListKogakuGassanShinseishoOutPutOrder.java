@@ -18,7 +18,7 @@ public enum HanyoListKogakuGassanShinseishoOutPutOrder implements IReportItems {
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString(""), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString(""), new RString("\"Atesaki_gyoseikuCode\"")),
     /**
      * 世帯コード
      */

@@ -60,33 +60,6 @@ public class KijunShunyugakuTekiyoOshiraseTsuchishoEditor implements IKijunShuny
     private void set通知文(KijunShunyugakuTekiyoOshiraseTsuchishoSource source) {
         source.tsuchibun1 = 基準収入額適用Entity.get通知文１();
         source.tsuchibun2 = 基準収入額適用Entity.get通知文２();
-        source.tsuchibun3 = 基準収入額適用Entity.get通知文３();
-        source.tsuchibun4 = 基準収入額適用Entity.get通知文4();
-        source.tsuchibun5 = 基準収入額適用Entity.get通知文5();
-        source.tsuchibun6 = 基準収入額適用Entity.get通知文6();
-        source.tsuchibun7 = 基準収入額適用Entity.get通知文7();
-        source.tsuchibun8 = 基準収入額適用Entity.get通知文８();
-        source.tsuchibun9 = 基準収入額適用Entity.get通知文９();
-        source.tsuchibun10 = 基準収入額適用Entity.get通知文１０();
-        source.tsuchibun11 = 基準収入額適用Entity.get通知文１１();
-        source.tsuchibun12 = 基準収入額適用Entity.get通知文１２();
-        source.tsuchibun13 = 基準収入額適用Entity.get通知文１３();
-        source.tsuchibun14 = 基準収入額適用Entity.get通知文１４();
-        source.tsuchibun15 = 基準収入額適用Entity.get通知文１５();
-        source.tsuchibun16 = 基準収入額適用Entity.get通知文１６();
-        source.tsuchibun17 = 基準収入額適用Entity.get通知文１７();
-        source.tsuchibun18 = 基準収入額適用Entity.get通知文１８();
-        source.tsuchibun19 = 基準収入額適用Entity.get通知文１９();
-        source.tsuchibun20 = 基準収入額適用Entity.get通知文２０();
-        source.tsuchibun21 = 基準収入額適用Entity.get通知文２１();
-        source.tsuchibun22 = 基準収入額適用Entity.get通知文２２();
-        source.tsuchibun23 = 基準収入額適用Entity.get通知文２３();
-        source.tsuchibun24 = 基準収入額適用Entity.get通知文２４();
-        source.tsuchibun25 = 基準収入額適用Entity.get通知文２５();
-        source.tsuchibun26 = 基準収入額適用Entity.get通知文２６();
-        source.tsuchibun27 = 基準収入額適用Entity.get通知文２７();
-        source.tsuchibun28 = 基準収入額適用Entity.get通知文２８();
-        source.tsuchibun29 = 基準収入額適用Entity.get通知文２９();
     }
 
     private void setCompNinshosha(KijunShunyugakuTekiyoOshiraseTsuchishoSource source) {

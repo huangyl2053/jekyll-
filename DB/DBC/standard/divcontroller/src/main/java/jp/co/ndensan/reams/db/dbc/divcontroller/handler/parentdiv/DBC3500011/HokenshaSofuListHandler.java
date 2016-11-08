@@ -272,7 +272,7 @@ public class HokenshaSofuListHandler {
      * @return RString
      */
     public RString コントロールレコード配列内容チェック(
-            List<RString> コントロールレコード, FileData file, List<RString> データレコード, RString データ種別) throws ApplicationException {
+            List<RString> コントロールレコード, FileData file, List<RString> データレコード, RString データ種別) {
         if (コントロールレコード.size() != 十二) {
             deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連データフォーマット不正.getMessage());
