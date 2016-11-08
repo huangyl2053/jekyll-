@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBZ-1300-060 lizhuoxuan
  */
 public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShikakuInfoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-25_08-20-47">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

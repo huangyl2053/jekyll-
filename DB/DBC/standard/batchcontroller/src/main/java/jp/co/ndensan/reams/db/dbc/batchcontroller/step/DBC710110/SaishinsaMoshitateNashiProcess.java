@@ -149,10 +149,15 @@ public class SaishinsaMoshitateNashiProcess extends BatchProcessBase<SaishinsaMo
     }
 
     private ShutsuryokujunRelateEntity get出力順項目() {
-        return ReportUtil.get出力順情報(SaishinsaMoshitate.ShutsuryokujunEnum.class,
-                SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC701011.getReportId(),
-                processParameter.getShutsuryokujunId());
+        ShutsuryokujunRelateEntity entity = new ShutsuryokujunRelateEntity();
+        entity.set出力順OrderBy(RString.EMPTY);
+        if (processParameter.getShutsuryokujunId() != null) {
+            entity = ReportUtil.get出力順情報(SaishinsaMoshitate.ShutsuryokujunEnum.class,
+                    SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC701011.getReportId(),
+                    processParameter.getShutsuryokujunId());
+        }
+        return entity;
     }
 
     private void outputJokenhyoFactory() {
