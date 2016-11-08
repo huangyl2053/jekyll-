@@ -40,10 +40,12 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -71,6 +73,7 @@ public class DBC1210011PanelHandler {
     private static final int 整数_ZERO = 0;
     private static final Code CODE_003 = new Code("003");
     private static final RString 発行する = new RString("btnReportPublish");
+    private static final RString 度Str = new RString("度");
 
     /**
      * コンストラクタです。
@@ -176,7 +179,8 @@ public class DBC1210011PanelHandler {
             Collections.sort(対象年度List, comparator);
             List<KeyValueDataSource> ddlTaishoNendodataSource = new ArrayList();
             for (FlexibleYear 対象年度 : 対象年度List) {
-                ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(), 対象年度.wareki().toDateString()));
+                ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(),
+                        対象年度.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(度Str)));
             }
             div.getDdlTaishoNendo().setDataSource(ddlTaishoNendodataSource);
             div.getDdlTaishoNendo().setSelectedIndex(整数_ZERO);
@@ -473,7 +477,7 @@ public class DBC1210011PanelHandler {
         parameter.set帳票ID(reportId);
         parameter.set支払予定日(div.getTxtShiharaiYoteiYMD().getValue() != null
                 ? new FlexibleDate(div.getTxtShiharaiYoteiYMD().getValue().toDateString()) : FlexibleDate.EMPTY);
-        parameter.set文書番号(div.getCcdBunshoNO().get文書番号() != null ? div.getCcdBunshoNO().get文書番号()
+        parameter.set文書番号(div.getCcdBunshoNO().get文書番号() != null && !div.getCcdBunshoNO().get文書番号().isEmpty() ? div.getCcdBunshoNO().get文書番号()
                 : RString.HALF_SPACE.concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE)
                 .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(RString.HALF_SPACE)
                 .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE));
