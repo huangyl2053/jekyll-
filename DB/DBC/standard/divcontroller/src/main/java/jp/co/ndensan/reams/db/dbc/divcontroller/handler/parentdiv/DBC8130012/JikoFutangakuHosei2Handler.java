@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8130012;
 
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.JigyoKogakuGassanJikofutangakuHosei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130012.JikoFutangakuHosei2Div;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuGassanJikoFutanGakuMeisaiManager;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.JigyoKogakuGassanJikoFutanGakuMeisaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -59,7 +59,7 @@ public class JikoFutangakuHosei2Handler {
         HokenshaNo 保険者番号 = 事業高額合算自己負担額補正保持Entity.get保険者番号();
         RString 支給申請書整理番号 = 事業高額合算自己負担額補正保持Entity.get支給申請書整理番号();
         int 履歴番号 = Integer.valueOf(事業高額合算自己負担額補正保持Entity.get履歴番号().toString());
-        KogakuGassanJikoFutanGakuMeisaiManager manager = new KogakuGassanJikoFutanGakuMeisaiManager();
+        JigyoKogakuGassanJikoFutanGakuMeisaiManager manager = new JigyoKogakuGassanJikoFutanGakuMeisaiManager();
         initialize_事業高額合算自己負担額明細_8月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
         initialize_事業高額合算自己負担額明細_9月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
         initialize_事業高額合算自己負担額明細_10月分(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, manager);
@@ -82,9 +82,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_7月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度,
-            HokenshaNo 保険者番号, RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_7月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_107, 履歴番号);
+            HokenshaNo 保険者番号, RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_7月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_107);
         if (事業高額合算自己負担額明細_7月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku7GatsuMae().setValue(事業高額合算自己負担額明細_7月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuMae().setValue(事業高額合算自己負担額明細_7月分.get70_74自己負担額_内数());
@@ -118,9 +118,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_6月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_6月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_106, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_6月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_106);
         if (事業高額合算自己負担額明細_6月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku6GatsuMae().setValue(事業高額合算自己負担額明細_6月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuMae().setValue(事業高額合算自己負担額明細_6月分.get70_74自己負担額_内数());
@@ -154,9 +154,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_5月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_5月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_105, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_5月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_105);
         if (事業高額合算自己負担額明細_5月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku5GatsuMae().setValue(事業高額合算自己負担額明細_5月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuMae().setValue(事業高額合算自己負担額明細_5月分.get70_74自己負担額_内数());
@@ -190,9 +190,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_4月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_4月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_104, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_4月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_104);
         if (事業高額合算自己負担額明細_4月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku4GatsuMae().setValue(事業高額合算自己負担額明細_4月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuMae().setValue(事業高額合算自己負担額明細_4月分.get70_74自己負担額_内数());
@@ -226,9 +226,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_3月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_3月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_103, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_3月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_103);
         if (事業高額合算自己負担額明細_3月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku3GatsuMae().setValue(事業高額合算自己負担額明細_3月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuMae().setValue(事業高額合算自己負担額明細_3月分.get70_74自己負担額_内数());
@@ -262,9 +262,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_2月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_2月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_102, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_2月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_102);
         if (事業高額合算自己負担額明細_2月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku2GatsuMae().setValue(事業高額合算自己負担額明細_2月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuMae().setValue(事業高額合算自己負担額明細_2月分.get70_74自己負担額_内数());
@@ -298,9 +298,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_1月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_1月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_101, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_1月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_101);
         if (事業高額合算自己負担額明細_1月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku1GatsuMae().setValue(事業高額合算自己負担額明細_1月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuMae().setValue(事業高額合算自己負担額明細_1月分.get70_74自己負担額_内数());
@@ -334,9 +334,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_12月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_12月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_012, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_12月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_012);
         if (事業高額合算自己負担額明細_12月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangaku12GatsuMae().setValue(事業高額合算自己負担額明細_12月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuMae()
@@ -371,9 +371,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_11月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_11月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_011, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_11月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_011);
         if (事業高額合算自己負担額明細_11月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangaku11GatsuMae().setValue(事業高額合算自己負担額明細_11月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuMae()
@@ -408,9 +408,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_10月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_10月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_010, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_10月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_010);
         if (事業高額合算自己負担額明細_10月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangaku10GatsuMae().setValue(事業高額合算自己負担額明細_10月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuMae()
@@ -445,9 +445,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_9月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_9月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_009, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_9月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_009);
         if (事業高額合算自己負担額明細_9月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangaku9GatsuMae().setValue(事業高額合算自己負担額明細_9月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuMae()
@@ -482,9 +482,9 @@ public class JikoFutangakuHosei2Handler {
     }
 
     private void initialize_事業高額合算自己負担額明細_8月分(HihokenshaNo 被保険者番号, FlexibleYear 対象年度, HokenshaNo 保険者番号,
-            RString 支給申請書整理番号, int 履歴番号, KogakuGassanJikoFutanGakuMeisaiManager manager) {
-        KogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_8月分 = manager
-                .get高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 対象月_008, 履歴番号);
+            RString 支給申請書整理番号, int 履歴番号, JigyoKogakuGassanJikoFutanGakuMeisaiManager manager) {
+        JigyoKogakuGassanJikoFutanGakuMeisai 事業高額合算自己負担額明細_8月分 = manager
+                .get事業高額合算自己負担額明細(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号, 対象月_008);
         if (事業高額合算自己負担額明細_8月分 != null) {
             div.getJikoFutangakuHosei2a().getTxtJikofutangaku8GatsuMae().setValue(事業高額合算自己負担額明細_8月分.get自己負担額());
             div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuMae()

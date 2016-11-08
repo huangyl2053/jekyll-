@@ -125,6 +125,8 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
         } else {
             全項目 = 全項目.concat(被保険者台帳.getJushochiTokureiFlag()).concat(SPLIT);
         }
+        全項目 = 全項目.concat(被保険者台帳.getIdoYMD().toString()).concat(SPLIT)
+                .concat(被保険者台帳.getEdaNo()).concat(SPLIT);
         全項目 = 全項目.concat(被保険者台帳.getShichosonCode().getColumnValue());
         return 全項目;
     }

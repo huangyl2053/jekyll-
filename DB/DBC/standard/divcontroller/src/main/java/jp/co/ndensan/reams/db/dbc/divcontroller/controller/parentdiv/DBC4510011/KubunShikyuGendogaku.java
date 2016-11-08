@@ -53,18 +53,19 @@ public class KubunShikyuGendogaku {
      * @return ResponseData
      */
     public ResponseData<KubunShikyuGendogakuDiv> onLoad(KubunShikyuGendogakuDiv div) {
+        KubunShikyuGendogakuHandler handler = getHandler(div);
         RString 前排他キー = DBCKAIGOSERVICETABLEDBT7130;
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
             throw new PessimisticLockingException();
         }
         div.getDgServiceShurui().init();
+        handler.initialDisable(false);
         List<KeyValueDataSource> list = new ArrayList<>();
         for (ServiceBunrui serviceBunrui : ServiceBunrui.values()) {
             list.add(new KeyValueDataSource(serviceBunrui.getコード(), serviceBunrui.get名称()));
         }
         div.getServiceShuruiShousai().getDdlServiceBunruiCode().setDataSource(list);
-        KubunShikyuGendogakuHandler handler = getHandler(div);
         handler.setServiceShuruiShousaiEnable(true);
         handler.clearValue();
         handler.setCommonButtonVisible(false);
@@ -269,7 +270,7 @@ public class KubunShikyuGendogaku {
         for (KaigoServiceShurui lastResult : list) {
             if (new ServiceShuruiCode(サービス種類コード).equals(lastResult.getサービス種類コード())
                     && (lastResult.get提供終了年月() == null || lastResult.get提供終了年月().isEmpty())) {
-                lastResult = result.createBuilderForEdit()
+                lastResult = lastResult.createBuilderForEdit()
                         .set提供終了年月(result.get提供開始年月().minusMonth(1)).build();
                 manager.save(lastResult, Boolean.FALSE);
             }
