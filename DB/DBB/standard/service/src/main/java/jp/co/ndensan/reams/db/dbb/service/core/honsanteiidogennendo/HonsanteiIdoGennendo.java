@@ -184,7 +184,7 @@ public class HonsanteiIdoGennendo {
         if (kanriEntity == null) {
             List<DbT7022ShoriDateKanriEntity> kanriEntityList = 処理日付管理Dac
                     .selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 処理_枝番, 調定年度, 処理_枝番);
-            if (kanriEntityList != null) {
+            if (kanriEntityList != null && !kanriEntityList.isEmpty()) {
                 return new ShoriDateKanri(kanriEntityList.get(0));
             }
         }
