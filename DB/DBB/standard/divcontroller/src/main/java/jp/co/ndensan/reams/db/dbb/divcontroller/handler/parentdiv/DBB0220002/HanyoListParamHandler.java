@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -313,6 +314,10 @@ public class HanyoListParamHandler {
         AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap
                 .getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
         if (宛名抽出条件 != null) {
+            if (宛名抽出条件.getAgeSelectKijun() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectKijun();
             div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
@@ -326,13 +331,14 @@ public class HanyoListParamHandler {
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区３終了(toChikuCode(宛名抽出条件.getChiku3_To()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区３開始(toChikuCode(宛名抽出条件.getChiku3_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
-            if (宛名抽出条件.getAgeSelectKijun() != null) {
-                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
-            }
-            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getFrom() != null) {
+            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getFrom() != null
+                    && NenreiSoChushutsuHoho.年齢範囲.getコード().equals(div.getChushutsuPanel2().getCcdAtenaJoken().
+                            get年齢層抽出方法().getコード())) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
             }
-            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getTo() != null) {
+            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getTo() != null
+                    && NenreiSoChushutsuHoho.年齢範囲.getコード().equals(div.getChushutsuPanel2().getCcdAtenaJoken().
+                            get年齢層抽出方法().getコード())) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
             }
             if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getFrom() != null) {
