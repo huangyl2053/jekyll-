@@ -46,6 +46,7 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "IJogaiTokureiSyaJyohouMapper.get提供対象者");
+    private static final RString 転義符 = new RString("\"");
     private JogaiTokureiSyaJyohouProcessParameter processParameter;
     private JogaiTokureiSyaJyohouMybatisParameter mybatisParameter;
     @BatchWriter
@@ -77,6 +78,7 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
                 RDateTime.MAX, RDateTime.MAX,
                 HihokenshaNo.EMPTY,
                 RString.EMPTY, processParameter.get新規異動区分(),
+                転義符.concat(processParameter.get提供基本情報中間テーブル名()).concat(転義符),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParameter);
     }
