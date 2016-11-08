@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -149,7 +150,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             世帯基準年月日 = new FlexibleDate(date.getYear().toDateString().concat(定値_通し番号));
             所得年度 = get所得年度(date);
         }
-        div.getShinseiTorokuPanel().getCcdSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, null);
+        div.getShinseiTorokuPanel().getCcdSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, YMDHMS.now());
     }
 
     private FlexibleYear get所得年度(RDate date) {

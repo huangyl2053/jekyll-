@@ -17,14 +17,17 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.Hi
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.KaigoGassan_HokenSeido;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.ShoriModeHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3075KogakuGassanKyufuJissekiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteihosei.IKogakuGassanShikyuKetteiHoseiMapper;
@@ -34,11 +37,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonShikibetsuIDniYoruShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
@@ -53,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -70,9 +76,12 @@ public class KogakuGassanShikyuKetteiHosei {
     private final DbT3105SogoJigyoTaishoshaDac 総合事業対象者dac;
     private final DbT3074KogakuGassanShikyuFushikyuKetteiDac 高額合算支給不支給決定dac;
     private final DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac 事業高額合算支給不支給決定dac;
+    private final DbT3075KogakuGassanKyufuJissekiDac 高額合算給付実績dac;
+    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
+    private static final KokanShikibetsuNo 定値交換情報識別番号 = new KokanShikibetsuNo("38Q1");
     private static final RString 処理不可 = new RString("処理不可");
     private static final RString 口座修正モード = new RString("口座修正モード");
     private static final RString 削除照会モード = new RString("削除照会モード");
@@ -109,6 +118,7 @@ public class KogakuGassanShikyuKetteiHosei {
         this.総合事業対象者dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
         this.高額合算支給不支給決定dac = InstanceProvider.create(DbT3074KogakuGassanShikyuFushikyuKetteiDac.class);
         this.事業高額合算支給不支給決定dac = InstanceProvider.create(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac.class);
+        this.高額合算給付実績dac = InstanceProvider.create(DbT3075KogakuGassanKyufuJissekiDac.class);
     }
 
     /**
@@ -303,10 +313,91 @@ public class KogakuGassanShikyuKetteiHosei {
      * @param 画面DIV KoshinShoriResult
      */
     public void get更新高額合算給付実績(RString 処理モード, KoshinShoriResult 画面DIV) {
-        IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(IKogakuGassanShikyuKetteiHoseiMapper.class);
-        if (THREE.equals(処理モード)) {
-            mapper.logicalDelete高額合算給付実績();
-            return;
+        if (画面DIV.getUpdate合算給付実績パラメータ() != null) {
+            KogakuGassanKyufuJisseki 更新data = getshoriModeHantei_Two(画面DIV.getUpdate合算給付実績パラメータ().
+                    get更新後被保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
+                    get更新後証記載保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
+                    get更新後支給申請書整理番号());
+            set更新条件(更新data, 画面DIV.getUpdate合算給付実績パラメータ());
+            IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(
+                    IKogakuGassanShikyuKetteiHoseiMapper.class);
+            if (THREE.equals(処理モード)) {
+                mapper.logicalDelete高額合算給付実績(画面DIV.getUpdate合算給付実績パラメータ());
+            } else if (ONE.equals(処理モード) || TWO.equals(処理モード)) {
+                update給付実績データ(更新data, 画面DIV, mapper);
+            }
+        }
+    }
+
+    private void update給付実績データ(KogakuGassanKyufuJisseki 更新data,
+            KoshinShoriResult 画面DIV,
+            IKogakuGassanShikyuKetteiHoseiMapper mapper) {
+        if (更新data == null && ONE.equals(画面DIV.get高額合算支給不支給決定Entity().get支給区分コード())) {
+            RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付,
+                    SaibanHanyokeyName.高額合算給付実績整理番号.get名称(), FlexibleDate.
+                    getNowDate().getNendo()).nextString();
+            KogakuGassanKyufuJisseki 新規data = new KogakuGassanKyufuJisseki(
+                    定値交換情報識別番号, 画面DIV.getUpdate合算給付実績パラメータ().
+                    get更新後被保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
+                    get更新後支給申請書整理番号(), 整理番号);
+            新規data = 新規data.createBuilderForEdit().set自己負担額証明書整理番号(画面DIV.
+                    getUpdate合算給付実績パラメータ().get更新後自己負担額証明書整理番号()).
+                    set保険制度コード(KaigoGassan_HokenSeido.国保.getCode()).
+                    set給付実績作成区分コード(ONE).
+                    set証記載保険者番号(画面DIV.getUpdate合算給付実績パラメータ().get更新後証記載保険者番号()).
+                    set申請年月日(画面DIV.getUpdate合算給付実績パラメータ().get更新後申請年月日()).
+                    set決定年月日(画面DIV.getUpdate合算給付実績パラメータ().get更新後決定年月日()).
+                    set自己負担総額(画面DIV.getUpdate合算給付実績パラメータ().get更新後自己負担総額()).
+                    set支給額(get支給額(画面DIV.getUpdate合算給付実績パラメータ())).
+                    setデータ区分(ZERO).
+                    build().added();
+            高額合算給付実績dac.save(新規data.toEntity());
+        } else if (更新data != null && (ONE.equals(更新data.get給付実績作成区分コード())
+                || TWO.equals(更新data.get給付実績作成区分コード()))
+                && 画面DIV.getUpdate合算給付実績パラメータ().isFlag()) {
+            if (ZERO.equals(画面DIV.get高額合算支給不支給決定Entity().get支給区分コード())) {
+                mapper.physicalDelete高額合算給付実績(画面DIV.getUpdate合算給付実績パラメータ());
+            } else {
+                mapper.update高額合算給付実績(画面DIV.getUpdate合算給付実績パラメータ());
+            }
+        }
+    }
+
+    private Decimal get支給額(KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 合算給付実績パラメータ) {
+        Decimal 支給額 = Decimal.ZERO;
+        if (合算給付実績パラメータ.get更新前支給額() != null) {
+            支給額 = 合算給付実績パラメータ.get更新前支給額();
+        }
+        List<DbT3075KogakuGassanKyufuJissekiEntity> 高額合算給付実績データ = 高額合算給付実績dac.
+                get高額合算給付実績データ(合算給付実績パラメータ.get更新後支給申請書整理番号());
+        for (DbT3075KogakuGassanKyufuJissekiEntity entity : 高額合算給付実績データ) {
+            支給額 = 支給額.add(entity.getShikyuGaku());
+        }
+        return 支給額;
+    }
+
+    private void set更新条件(
+            KogakuGassanKyufuJisseki 更新data,
+            KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 更新para) {
+        if (更新para != null) {
+            更新para.set更新前交換情報識別番号(更新data.get交換情報識別番号());
+            更新para.set更新前被保険者番号(更新data.get被保険者番号());
+            更新para.set更新前支給申請書整理番号(更新data.get支給申請書整理番号());
+            更新para.set更新前整理番号(更新data.get支給申請書整理番号());
+            更新para.set更新前自己負担額証明書整理番号(更新data.get自己負担額証明書整理番号());
+            更新para.set更新前保険制度コード(更新data.get保険制度コード());
+            更新para.set更新前給付実績作成区分コード(更新data.get給付実績作成区分コード());
+            更新para.set更新前証記載保険者番号(更新data.get証記載保険者番号());
+            更新para.set更新前国保_被保険者証記号(更新data.get国保_被保険者証記号());
+            更新para.set更新前申請年月日(更新data.get申請年月日());
+            更新para.set更新前決定年月日(更新data.get決定年月日());
+            更新para.set更新前自己負担総額(更新data.get自己負担総額());
+            更新para.set更新前支給額(更新data.get支給額());
+            更新para.set更新前処理年月(更新data.get処理年月());
+            更新para.set更新前受取年月(更新data.get受取年月());
+            更新para.set更新前送付年月(更新data.get送付年月());
+            更新para.set更新前データ区分(更新data.getデータ区分());
+            更新para.set更新前論理削除(更新data.is論理削除());
         }
     }
 

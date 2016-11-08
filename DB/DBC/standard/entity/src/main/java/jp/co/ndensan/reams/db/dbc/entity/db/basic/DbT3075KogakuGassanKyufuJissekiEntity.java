@@ -172,7 +172,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 自己負担額証明書整理番号
      */
-    @CheckForNull
     public RString getJikoFutanSeiriNo() {
         return jikoFutanSeiriNo;
     }
@@ -191,7 +190,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 保険制度コード
      */
-    @CheckForNull
     public RString getHokenSeidoCode() {
         return hokenSeidoCode;
     }
@@ -210,7 +208,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 給付実績作成区分コード
      */
-    @CheckForNull
     public RString getKyufuJissekiSakuseiKubunCode() {
         return kyufuJissekiSakuseiKubunCode;
     }
@@ -229,7 +226,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 証記載保険者番号
      */
-    @CheckForNull
     public HokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
@@ -248,7 +244,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 国保 被保険者証記号
      */
-    @CheckForNull
     public RString getKokuho_HihokenshaShoKigo() {
         return kokuho_HihokenshaShoKigo;
     }
@@ -267,7 +262,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 申請年月日
      */
-    @CheckForNull
     public FlexibleDate getShinseiYMD() {
         return shinseiYMD;
     }
@@ -286,7 +280,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 決定年月日
      */
-    @CheckForNull
     public FlexibleDate getKetteiYMD() {
         return ketteiYMD;
     }
@@ -305,7 +298,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 自己負担総額
      */
-    @CheckForNull
     public Decimal getJikoFutanSogaku() {
         return jikoFutanSogaku;
     }
@@ -324,7 +316,6 @@ public class DbT3075KogakuGassanKyufuJissekiEntity extends DbTableEntityBase<DbT
      *
      * @return 支給額
      */
-    @CheckForNull
     public Decimal getShikyuGaku() {
         return shikyuGaku;
     }
