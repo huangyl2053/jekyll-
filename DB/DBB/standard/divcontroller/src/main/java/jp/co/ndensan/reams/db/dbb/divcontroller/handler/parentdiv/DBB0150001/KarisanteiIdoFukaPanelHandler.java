@@ -330,7 +330,9 @@ public class KarisanteiIdoFukaPanelHandler {
         }
         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki()
                 .setDataSource(dataSource);
-        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
+        if (!dataSource.isEmpty()) {
+            div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
+        }
         set納入通知書の発行日();
     }
 
