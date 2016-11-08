@@ -187,8 +187,10 @@ public class HonsanteiIdoGennendo {
             if (kanriEntityList != null && !kanriEntityList.isEmpty()) {
                 return new ShoriDateKanri(kanriEntityList.get(0));
             }
+            return null;
+        } else {
+            return new ShoriDateKanri(kanriEntity);
         }
-        return new ShoriDateKanri(kanriEntity);
     }
 
     /**
