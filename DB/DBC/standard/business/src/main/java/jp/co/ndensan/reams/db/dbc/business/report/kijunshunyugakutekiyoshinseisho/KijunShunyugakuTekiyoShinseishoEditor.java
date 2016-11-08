@@ -53,6 +53,10 @@ public class KijunShunyugakuTekiyoShinseishoEditor implements IKijunShunyugakuTe
         source.seibetsu3 = 基準収入額適用申請書Entity.get被保険者性別３();
         source.jusho1 = 基準収入額適用申請書Entity.get住所１();
         source.jusho2 = 基準収入額適用申請書Entity.get住所２();
+        source.jusho = 基準収入額適用申請書Entity.get住所１();
+        if (null != 基準収入額適用申請書Entity.get住所２()) {
+            source.jusho = source.jusho.concat(基準収入額適用申請書Entity.get住所２());
+        }
         source.renrakusaki = 基準収入額適用申請書Entity.get連絡先();
         source.shunyuGengo = 基準収入額適用申請書Entity.get収入元号();
         source.shunyuNen = 基準収入額適用申請書Entity.get収入年();
