@@ -113,7 +113,7 @@ public class JikoFutangakushomeishoHandler {
      * @param 被保険者番号 HihokenshaNo
      * @return KogakuGassanShinseisho
      */
-    public KogakuGassanShinseisho get対象者データ(HihokenshaNo 被保険者番号) {
+    public List<KogakuGassanShinseisho> get対象者データ(HihokenshaNo 被保険者番号) {
         RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 申請状況区分 = KaigoGassan_ShinseiJokyoKbn.証明書交付申請書.getコード();
         RString 支給申請区分 = KaigoGassan_ShinseiKbn.取り下げ.getCode();

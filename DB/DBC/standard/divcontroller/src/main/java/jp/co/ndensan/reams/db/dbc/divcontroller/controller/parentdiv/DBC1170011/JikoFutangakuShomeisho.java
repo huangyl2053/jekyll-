@@ -56,11 +56,11 @@ public class JikoFutangakuShomeisho {
      */
     public ResponseData<JikoFutangakuShomeishoDiv> onLoad(JikoFutangakuShomeishoDiv div) {
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        KogakuGassanShinseisho 対象者データ = getHandler(div).get対象者データ(getKey().get被保険者番号());
+        List<KogakuGassanShinseisho> 対象者データ = getHandler(div).get対象者データ(getKey().get被保険者番号());
         InformationMessage message = new InformationMessage(
                 DbcInformationMessages.自己負担額データなし.getMessage().getCode(),
                 DbcInformationMessages.自己負担額データなし.getMessage().evaluate());
-        if (対象者データ == null) {
+        if (対象者データ.isEmpty()) {
             return ResponseData.of(div).addMessage(message).respond();
         }
         getHandler(div).onLoad(メニューID, システム日付, getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), getKey().get識別コード());
