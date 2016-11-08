@@ -689,6 +689,9 @@ public class DBC040010DataUtil {
     private boolean judgeAgeLessThan75(JissekiFutangakuDataTempEntity 実績負担額) {
         RString umareYMD = 実績負担額.getUmareYMD();
         RString hihokenshaShuryoYMD = 実績負担額.getHihokenshaShuryoYMD();
+        if (RString.isNullOrEmpty(umareYMD) || RString.isNullOrEmpty(hihokenshaShuryoYMD)) {
+            return false;
+        }
         IDateOfBirth dob = DateOfBirthFactory.createInstance(getFlexibleDate(umareYMD));
         AgeCalculator ageCalculator
                 = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.当日, getFlexibleDate(hihokenshaShuryoYMD));
