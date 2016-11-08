@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * 更正前後賦課の情報を取得Entityクラスです。
@@ -23,6 +25,10 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KakushuTsuchishoEntity implements Serializable {
 
+    private FlexibleYear choteiNendo;
+    private FlexibleYear fukaNendo;
+    private TsuchishoNo tsuchishoNo;
+    private int rirekiNo;
     private DbT2002FukaEntity 介護賦課;
     private List<KibetsuEntity> 介護期別RelateEntity;
     private DbT2001ChoshuHohoEntity 介護徴収方法;
