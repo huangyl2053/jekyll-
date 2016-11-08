@@ -157,7 +157,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     public void onSelect居宅サービス一覧(KyotakuKeikakuTodokede 居宅給付計画届出) {
         div.setMode(計画照会モード);
         dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        if (FLAG_直近履歴.equals(選択行.getYukoMuko())) {
+        if (選択行.equals(div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(ZERO))) {
             div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近照会);
         } else {
             div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴照会);
@@ -181,7 +181,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     public void onModify居宅サービス一覧(KyotakuKeikakuTodokede 居宅給付計画届出) {
         div.setMode(計画修正モード);
         dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        if (FLAG_直近履歴.equals(選択行.getYukoMuko())) {
+        if (選択行.equals(div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(ZERO))) {
             div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近訂正);
         } else {
             div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴訂正);
@@ -215,7 +215,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     public void onDelete居宅サービス一覧(KyotakuKeikakuTodokede 居宅給付計画届出) {
         div.setMode(計画削除モード);
         dgKyotakuServiceIchiran_Row 選択行 = div.getRireki().getDgKyotakuServiceIchiran().getClickedItem();
-        if (FLAG_直近履歴.equals(選択行.getYukoMuko())) {
+        if (選択行.equals(div.getRireki().getDgKyotakuServiceIchiran().getDataSource().get(ZERO))) {
             div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_直近削除);
         } else {
             div.getServiceAddAndServicePlanCreate().getTxtTorokuState().setValue(TEXT_履歴削除);
@@ -935,13 +935,9 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 || div.getTxtKeikakuTekiyoEndYMD().getValue() != null
                 || div.getTxtTodokedeYM().getValue() != null
                 || (div.getTxtTodokedeshaYubinNo().getValue() != null && !div.getTxtTodokedeshaYubinNo().getValue().isEmpty())
-                || (div.getTxtTodokedeshaJusho().getValue() != null && !div.getTxtTodokedeshaJusho().getValue().isEmpty())
-                || div.getTodokedesha().getTxtTodokedeshaShimei() != null
-                || div.getTodokedesha().getTxtTodokedeshaShimeiKana() != null
-                || div.getTodokedesha().getTxtTodokedeshaJusho() != null
-                || div.getTodokedesha().getTxtTodokedeshaTelNo() != null;
+                || (div.getTxtTodokedeshaJusho().getValue() != null && !div.getTxtTodokedeshaJusho().getValue().isEmpty());
         if (is変更) {
-            return false;
+            return true;
         }
         is変更 = is事業者作成が変更(被保険者番号);
         if (!is変更 && is自己作成の場合()) {
