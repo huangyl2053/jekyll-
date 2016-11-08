@@ -43,7 +43,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 委員用特記事項と一次判定結果票情報バッチクラスです。
@@ -76,8 +78,8 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         shoriJotaiKubunList.add(ShoriJotaiKubun.通常.getコード());
         shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
         myBatisParameter.setShoriJotaiKubunList(shoriJotaiKubunList);
-        データ件数 = mapper.getTokkiJikouItiziHanteiCount(myBatisParameter);
         共通情報 = mapper.getShinsakaiSiryoKyotsu(myBatisParameter);
+        データ件数 = mapper.getTokkiJikouItiziHanteiCount(myBatisParameter);
     }
 
     @Override
@@ -89,6 +91,21 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
     protected void createWriter() {
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517085.getReportId().value())
                 .addBreak(new BreakerCatalog<IinTokkiTextA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+                .addBreak(new BreakerCatalog<IinTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
+                    IinTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
+                    @Override
+                    public ReportLineRecord<IinTokkiTextA3ReportSource> occuredBreak(ReportLineRecord<IinTokkiTextA3ReportSource> currentRecord,
+                            ReportLineRecord<IinTokkiTextA3ReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                        int layout = currentRecord.getSource().layout.index();
+                        currentRecord.setFormGroupIndex(layout);
+                        if (nextRecord != null && nextRecord.getSource() != null) {
+                            layout = nextRecord.getSource().layout.index();
+                            nextRecord.setFormGroupIndex(layout);
+                        }
+                        return currentRecord;
+                    }
+                })
                 .create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
     }

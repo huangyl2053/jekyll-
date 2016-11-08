@@ -46,10 +46,13 @@ public class JimuTokkiTextA3Report extends Report<JimuTokkiTextA3ReportSource> {
             reportSourceWriter.writeLine(builder);
         }
         if (テキスト全面イメージ.equals(data.get特記パターン())) {
+            int totalPages = (int) Math.ceil((double) (テキスト全面List.size() - 1) / 2) + 1;
             for (int i = 0; i < テキスト全面List.size(); i++) {
-                IJimuTokkiTextA3Editor editor = new JimuTokkiTextPage2A3Editor(data, 短冊リスト, i, i + 1);
-                IJimuTokkiTextA3Builder builder = new JimuTokkiTextA3Builder(editor);
-                reportSourceWriter.writeLine(builder);
+                if ((i + 2) <= totalPages) {
+                    IJimuTokkiTextA3Editor editor = new JimuTokkiTextPage2A3Editor(data, 短冊リスト, i + 2, i + 2);
+                    IJimuTokkiTextA3Builder builder = new JimuTokkiTextA3Builder(editor);
+                    reportSourceWriter.writeLine(builder);
+                }
             }
         } else if (MAXCOUNT < 短冊リスト.size()) {
             int totalPages = (int) Math.ceil((double) 短冊情報リスト.size() / PAGETWO_MAXCOUNT);
@@ -66,7 +69,7 @@ public class JimuTokkiTextA3Report extends Report<JimuTokkiTextA3ReportSource> {
 
     private List<RString> get短冊リスト(List<TokkiJikou> 短冊情報リスト) {
         List<RString> bodyList = new ArrayList<>();
-        if (!短冊情報リスト.isEmpty()) {
+        if (短冊情報リスト != null && !短冊情報リスト.isEmpty()) {
             for (TokkiJikou entity : 短冊情報リスト) {
                 bodyList.add(entity.get事項番号());
                 bodyList.add(entity.get項目名称());

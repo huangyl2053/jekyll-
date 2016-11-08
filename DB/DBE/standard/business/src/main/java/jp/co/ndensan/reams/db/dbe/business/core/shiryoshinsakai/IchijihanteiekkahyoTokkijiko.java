@@ -47,7 +47,7 @@ public class IchijihanteiekkahyoTokkijiko {
     private final ShinsakaiSiryoKyotsuEntity kyotsuEntity;
     private final RString 特記パターン;
     private final int 最大文字数;
-    private int ページ表示行数;
+    private final int ページ最大表示行数;
 
     /**
      * 事務局一次判定結果票Entityの設定。
@@ -58,9 +58,10 @@ public class IchijihanteiekkahyoTokkijiko {
     public IchijihanteiekkahyoTokkijiko(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List, ShinsakaiSiryoKyotsuEntity kyotsuEntity) {
         特記パターン = DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+        this.ページ最大表示行数 = Integer.parseInt(DbBusinessConfig.get(
+                ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.特記情報List = 特記情報List;
         this.kyotsuEntity = kyotsuEntity;
-        ページ表示行数 = 0;
     }
 
     /**
@@ -146,7 +147,6 @@ public class IchijihanteiekkahyoTokkijiko {
                             getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
                 }
                 短冊情報リスト.add(短冊情報);
-                ページ表示行数 = ページ表示行数 + 1;
             }
         }
         return 短冊情報リスト;
@@ -211,14 +211,15 @@ public class IchijihanteiekkahyoTokkijiko {
                 テキストBuilder.append(特記情報List.get(i).getTokkiJiko());
                 テキストBuilder.append(System.lineSeparator());
                 表示行数 = 表示行数 + (int) Math.ceil((double) テキストBuilder.length() / 最大文字数);
-                if (表示行数 <= ページ表示行数) {
+                if (表示行数 <= ページ最大表示行数) {
                     テキスト全面.append(テキストBuilder);
-                } else {
+                }
+
+                if (ページ最大表示行数 <= 表示行数) {
                     テキスト全面List.add(テキスト全面.toRString());
                     テキスト全面 = new RStringBuilder();
                     表示行数 = 0;
-                }
-                if (i == 特記情報List.size() - 1) {
+                } else if (i == 特記情報List.size() - 1) {
                     テキスト全面List.add(テキスト全面.toRString());
                 }
             }

@@ -134,7 +134,7 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
 
     private List<RString> get短冊リスト(List<TokkiA4Entity> 短冊情報リスト) {
         List<RString> bodyList = new ArrayList<>();
-        if (!短冊情報リスト.isEmpty()) {
+        if (短冊情報リスト != null && !短冊情報リスト.isEmpty()) {
             for (TokkiA4Entity entity : 短冊情報リスト) {
                 bodyList.add(entity.get事項番号());
                 bodyList.add(entity.get項目名称());
