@@ -58,6 +58,7 @@ public class HonKakushuTsuchiUchiwakeKakunin {
      * @return 打ち分け方法確認の画面
      */
     public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onSelect(HonKakushuTsuchiUchiwakeKakuninDiv div) {
+        ViewStateHolder.put(ViewStateKeys.保存フラグ, false);
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
         HonKakushuTsuchiUchiwakeKakuninHandler handler = getHandler(div);
         RString 切替前の打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
