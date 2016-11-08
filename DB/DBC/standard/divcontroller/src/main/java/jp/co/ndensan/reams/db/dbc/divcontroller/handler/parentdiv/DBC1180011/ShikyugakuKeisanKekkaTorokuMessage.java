@@ -64,18 +64,6 @@ public enum ShikyugakuKeisanKekkaTorokuMessage implements IValidationMessage {
      */
     自己負担額証明書整理番号桁数が不正(UrErrorMessages.桁数が不正, "自己負担額証明書整理番号", "20"),
     /**
-     * 保険者番号桁数が不正
-     */
-    保険者番号桁数が不正(UrErrorMessages.桁数が不正, "保険者番号", "8"),
-    /**
-     * 被保険者記号桁数が不正
-     */
-    被保険者記号桁数が不正(UrErrorMessages.桁数が不正, "被保険者記号", "20"),
-    /**
-     * 被保険者(証)番号桁数が不正
-     */
-    被保険者証番号桁数が不正(UrErrorMessages.桁数が不正, "被保険者(証)番号", "20"),
-    /**
      * 自己負担額証明書整理番号が不正
      */
     自己負担額証明書整理番号が不正(UrErrorMessages.入力値が不正_追加メッセージあり,

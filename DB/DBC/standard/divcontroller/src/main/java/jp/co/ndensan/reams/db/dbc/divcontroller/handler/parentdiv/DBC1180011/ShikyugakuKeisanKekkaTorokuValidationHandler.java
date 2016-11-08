@@ -96,9 +96,6 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
     private ValidationDictionary create内訳を確定するDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号桁数が不正, div.getTxtJikoFutanSeiriNom())
-                .add(ShikyugakuKeisanKekkaTorokuMessage.保険者番号桁数が不正, div.getTxtShoKisaiHokenshaNo())
-                .add(ShikyugakuKeisanKekkaTorokuMessage.被保険者記号桁数が不正, div.getTxtKokuhoHihokenshaShoKigo())
-                .add(ShikyugakuKeisanKekkaTorokuMessage.被保険者証番号桁数が不正, div.getTxtHiHokenshaShoNo())
                 .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号が不正, div.getTxtJikoFutanSeiriNom())
                 .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号既に存在, div.getTxtJikoFutanSeiriNom())
                 .build();
