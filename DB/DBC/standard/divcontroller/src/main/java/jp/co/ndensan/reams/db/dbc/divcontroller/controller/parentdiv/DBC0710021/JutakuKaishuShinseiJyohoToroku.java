@@ -91,6 +91,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString NO = new RString("0");
     private static final RString 申請を保存する = new RString("btnAddShikyuShinsei");
     private final RString 排他キー = new RString("DBCHihokenshaNo");
+    private static final RString 遷移元 = new RString("DBC0710021");
 
     /**
      * 画面ロードメソッドです。
@@ -317,6 +318,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).addMessage(infoMessage).respond();
         }
         if (保存終了 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_遷移元, 遷移元);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
         }
         if (確認_汎用 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
