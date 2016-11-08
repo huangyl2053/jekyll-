@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHo
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -131,6 +132,8 @@ public class RiyoshaFutanWariaiHanteiManager {
                         get世帯員識別コードBy被保番号(被保険者番号, new FlexibleDate(判定基準日list.get(i)));
                 HihokenshaDaicho 被保険者台帳 = get被保険者台帳(
                         世帯員識別コード情報list, new FlexibleDate(判定基準日list.get(i)));
+                HanteiTaishoshaTempEntity 判定対象者Temp = new HanteiTaishoshaTempEntity();
+                set判定対象者Tempの被保険者情報部分(判定対象者Temp, 被保険者台帳);
                 HihokenshaDaicho 世帯員の被保険者台帳 = get世帯員の被保険者台帳(
                         世帯員識別コード情報list, new FlexibleDate(判定基準日list.get(i)));
                 if (被保険者台帳 == null && 基準日.equals(new FlexibleDate(判定基準日list.get(i)))) {
@@ -140,13 +143,11 @@ public class RiyoshaFutanWariaiHanteiManager {
                 List<SetaiinShikibetsuCd> 世帯員識別コード情報 = get世帯員被保険者該当チェック(
                         世帯員識別コード情報list, 世帯員の被保険者台帳, 被保険者台帳, 基準日,
                         new FlexibleDate(判定基準日list.get(i)));
-                HanteiTaishoshaTempEntity 判定対象者Temp = new HanteiTaishoshaTempEntity();
                 set判定対象者Tempの共通項目部分(被保険者番号, 判定対象者Temp, 被保険者台帳, 世帯員識別コード情報);
-                set判定対象者Tempの被保険者情報部分(判定対象者Temp, 被保険者台帳);
                 IRiyoshaFutanWariaiHanteiManagerMapper mapper = mapperProvider.create(
                         IRiyoshaFutanWariaiHanteiManagerMapper.class);
                 RiyoshaFutanWariaiHanteiParameter parameter = new RiyoshaFutanWariaiHanteiParameter(
-                        年度, 世帯員識別コード情報.get(0).get世帯員識別コード());
+                        年度, get識別code(世帯員識別コード情報));
                 List<DbV2512KaigoShotokuNewestEntity> 介護所得情報 = mapper.get介護所得情報(parameter);
                 set判定対象者Tempの介護所得情報部分(判定対象者Temp, 介護所得情報);
                 JukyushaDaichoManager jukyumanager = new JukyushaDaichoManager();
@@ -172,9 +173,8 @@ public class RiyoshaFutanWariaiHanteiManager {
                         sogoJigyoTaishoshalist, 基準日時点で受給者台帳);
                 RiyoshaFutanWariaiHanteiManagerParameter para
                         = new RiyoshaFutanWariaiHanteiManagerParameter(
-                                被保険者台帳.get識別コード(), get対象開始日(new FlexibleDate(
-                                                判定基準日list.get(i)), 対象開始日list),
-                                get対象終了日(new FlexibleDate(判定基準日list.get(i)), 対象終了日list));
+                                被保険者台帳.get識別コード(), new FlexibleDate(対象開始日list.get(0)),
+                                new FlexibleDate(対象終了日list.get(0)));
                 List<UrT0508SeikatsuHogoJukyushaEntity> 生活保護受給者情報 = mapper.get生活保護受給者entity(para);
                 SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp = new SeikatsuHogoGaitoJohoTempEntity();
                 if (生活保護受給者情報 != null && !生活保護受給者情報.isEmpty()
@@ -190,7 +190,7 @@ public class RiyoshaFutanWariaiHanteiManager {
                 int 世帯１号被保険者数 = get世帯１号被保険者数(世帯員識別コード情報list);
                 RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp = new RiyoshaFutanWariaiMeisaiTempEntity();
                 get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報,
-                        世帯員識別コード情報.get(0).get世帯コード(), 世帯１号被保険者数,
+                        get世帯code(世帯員識別コード情報), 世帯１号被保険者数,
                         生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
                 利用者負担割合明細Tempのマージデータ.add(利用者負担割合明細Temp);
                 RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠Temp
@@ -223,6 +223,22 @@ public class RiyoshaFutanWariaiHanteiManager {
             }
         }
         return 判定結果;
+    }
+
+    private ShikibetsuCode get識別code(List<SetaiinShikibetsuCd> 世帯員識別コード情報) {
+        ShikibetsuCode 識別code = ShikibetsuCode.EMPTY;
+        if (世帯員識別コード情報 != null && !世帯員識別コード情報.isEmpty() && 世帯員識別コード情報.get(0) != null) {
+            識別code = 世帯員識別コード情報.get(0).get世帯員識別コード();
+        }
+        return 識別code;
+    }
+
+    private SetaiCode get世帯code(List<SetaiinShikibetsuCd> 世帯員識別コード情報) {
+        SetaiCode 世帯code = SetaiCode.EMPTY;
+        if (世帯員識別コード情報 != null && !世帯員識別コード情報.isEmpty() && 世帯員識別コード情報.get(0) != null) {
+            世帯code = 世帯員識別コード情報.get(0).get世帯コード();
+        }
+        return 世帯code;
     }
 
     private int get利用者負担割合の最大履歴番号(HihokenshaNo 被保険者番号,
@@ -715,26 +731,6 @@ public class RiyoshaFutanWariaiHanteiManager {
             }
         }
         return result;
-    }
-
-    private FlexibleDate get対象開始日(FlexibleDate 判定基準日, List<RString> 対象開始日list) {
-        FlexibleDate 対象開始日 = FlexibleDate.EMPTY;
-        for (RString kaishibilist : 対象開始日list) {
-            if (判定基準日.getMonthValue() == new FlexibleDate(kaishibilist).getMonthValue()) {
-                対象開始日 = new FlexibleDate(kaishibilist);
-            }
-        }
-        return 対象開始日;
-    }
-
-    private FlexibleDate get対象終了日(FlexibleDate 判定基準日, List<RString> 対象終了日list) {
-        FlexibleDate 対象終了日 = FlexibleDate.EMPTY;
-        for (RString shuryobilist : 対象終了日list) {
-            if (判定基準日.getMonthValue() == new FlexibleDate(shuryobilist).getMonthValue()) {
-                対象終了日 = new FlexibleDate(shuryobilist);
-            }
-        }
-        return 対象終了日;
     }
 
     private HihokenshaDaicho get被保険者台帳(
