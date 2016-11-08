@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyu
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
@@ -156,19 +157,21 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
      * 賦課情報を取得するメソッドです。
      *
      * @param entityList List<HonsanteiTsuchishoTempEntity>
+     * @param 口座振替分出力様式 RString
      * @return List<HonsanteiTsuchishoTempResult> 賦課情報リスト
      * @throws java.lang.reflect.InvocationTargetException
      * 賦課の情報_更正前後が取得できない場合、Exception
      */
-    public List<HonsanteiTsuchishoTempResult> get賦課情報(List<HonsanteiTsuchishoTempEntity> entityList) throws InvocationTargetException {
+    public List<HonsanteiTsuchishoTempResult> get賦課情報(
+            List<HonsanteiTsuchishoTempEntity> entityList, RString 口座振替分出力様式) throws InvocationTargetException {
 
         List<HonsanteiTsuchishoTempResult> tmpResultList = new ArrayList<>();
         for (HonsanteiTsuchishoTempEntity entity : entityList) {
             HonsanteiTsuchishoTempResult result = new HonsanteiTsuchishoTempResult();
             result.set計算後情報_更正後(entity.get計算後情報_更正後());
             result.set計算後情報_更正前(entity.get計算後情報_更正前());
-            result.set賦課の情報_更正前(get賦課の情報_更正前後(entity, false));
-            result.set賦課の情報_更正後(get賦課の情報_更正前後(entity, true));
+            result.set賦課の情報_更正前(get賦課の情報_更正前後(entity, false, 口座振替分出力様式));
+            result.set賦課の情報_更正後(get賦課の情報_更正前後(entity, true, 口座振替分出力様式));
             result.set納組情報(entity.get納組());
             IAtesaki 宛先 = AtesakiFactory.createInstance(entity.get宛先());
             result.set宛先情報(宛先);
@@ -637,7 +640,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
         return 徴収方法情報;
     }
 
-    private FukaAtena get賦課の情報_更正前後(HonsanteiTsuchishoTempEntity entity, boolean 前後区分) throws InvocationTargetException {
+    private FukaAtena get賦課の情報_更正前後(HonsanteiTsuchishoTempEntity entity,
+            boolean 前後区分, RString 口座振替分出力様式) throws InvocationTargetException {
 
         FukaAtena fukaAtena = new FukaAtena();
         DbT2015KeisangoJohoEntity 計算後情報_更正前後;
@@ -672,7 +676,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                 .set減免額(計算後情報_更正前後.getGemmenGaku()).set確定介護保険料_年額(計算後情報_更正前後.getKakuteiHokenryo())
                 .set保険料段階_仮算定時(計算後情報_更正前後.getHokenryoDankaiKarisanntei())
                 .set徴収方法履歴番号(計算後情報_更正前後.getChoshuHohoRirekiNo())
-                .set異動基準日時(計算後情報_更正前後.getIdoKijunNichiji()).set口座区分(計算後情報_更正前後.getKozaKubun())
+                .set異動基準日時(計算後情報_更正前後.getIdoKijunNichiji())
+                .set口座区分(KozaKubun.口座振替.getコード().equals(口座振替分出力様式) ? KozaKubun.口座振替.getコード() : 計算後情報_更正前後.getKozaKubun())
                 .set境界層区分(計算後情報_更正前後.getKyokaisoKubun()).set職権区分(計算後情報_更正前後.getShokkenKubun())
                 .set賦課市町村コード(計算後情報_更正前後.getFukaShichosonCode()).set特徴歳出還付額(計算後情報_更正前後.getTkSaishutsuKampuGaku())
                 .set普徴歳出還付額(計算後情報_更正前後.getFuSaishutsuKampuGaku()).set月割開始年月1(計算後情報_更正前後.getTsukiwariStartYM1())
