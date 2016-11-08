@@ -18,13 +18,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class TaishoshaChushuJigyobunMyBatisParameter implements IMyBatisParameter {
+public class TaishoshaChushuJigyobunMyBatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private RString 抽出期間開始年月;
     private RString 年度;
     private RString 被保険者番号;
     private RString 出力対象区分;
-    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * DBC020080MyBatisParameterのコンストラクタです。
@@ -41,7 +40,7 @@ public class TaishoshaChushuJigyobunMyBatisParameter implements IMyBatisParamete
             RString 被保険者番号,
             RString 出力対象区分,
             IShikibetsuTaishoPSMSearchKey searchKey) {
-        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
+        super(searchKey);
         this.抽出期間開始年月 = 抽出期間開始年月;
         this.年度 = 年度;
         this.被保険者番号 = 被保険者番号;
