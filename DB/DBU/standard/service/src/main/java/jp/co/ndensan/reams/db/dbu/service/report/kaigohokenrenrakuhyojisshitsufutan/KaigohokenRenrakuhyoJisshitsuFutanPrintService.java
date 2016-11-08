@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.Hokenryo;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.KaigoHokenRenrakuhyoHold;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojushoeditor.KaigoJushoEditor;
-import jp.co.ndensan.reams.db.dbc.definition.core.riyoshafutandankai.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutan;
 import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanProperty;
 import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReport;
@@ -127,28 +126,34 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
                     DecimalFormatter.toRString(hold.get給付減額などの記載().get給付減額(), 0)));
         }
         if (hold.get居住費の負担限度額() != null) {
+            Decimal 負担限度額認定_ユニット型個室 = hold.get居住費の負担限度額().get負担限度額認定_ユニット型個室();
+            Decimal 負担限度額認定_ユニット型準個室 = hold.get居住費の負担限度額().get負担限度額認定_ユニット型準個室();
+            FlexibleDate 連絡票作成日 = hold.get連絡票作成日();
             renrakuhyo.set居住費の負担限度日額記載チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()));
-            renrakuhyo.set第1段階_個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり() && is第1段階(hold.get利用者負担段階())));
-            renrakuhyo.set第1段階_個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室１(hold.get連絡票作成日())));
-            renrakuhyo.set第2段階_個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり() && is第2段階(hold.get利用者負担段階())));
-            renrakuhyo.set第2段階_個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室２(hold.get連絡票作成日())));
-            renrakuhyo.set第3段階_個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり() && is第3段階(hold.get利用者負担段階())));
-            renrakuhyo.set第3段階_個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室３(hold.get連絡票作成日())));
+            renrakuhyo.set第1段階_個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり() && is第1段階(
+                    get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室１(連絡票作成日)), 負担限度額認定_ユニット型個室)));
+            renrakuhyo.set第1段階_個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室１(連絡票作成日)));
+            renrakuhyo.set第2段階_個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室２(連絡票作成日)), 負担限度額認定_ユニット型個室)));
+            renrakuhyo.set第2段階_個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室２(連絡票作成日)));
+            renrakuhyo.set第3段階_個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室３(連絡票作成日)), 負担限度額認定_ユニット型個室)));
+            renrakuhyo.set第3段階_個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室３(連絡票作成日)));
             renrakuhyo.set基準額_個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is課税層第3段階(hold.get利用者負担段階())));
-            renrakuhyo.set基準額_個室金額(get金額_5(gendoNichigakuGetter.getユニット型個室_基準費用額(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.getユニット型個室_基準費用額(連絡票作成日)), 負担限度額認定_ユニット型個室)));
+            renrakuhyo.set基準額_個室金額(get金額_5(gendoNichigakuGetter.getユニット型個室_基準費用額(連絡票作成日)));
             renrakuhyo.set第1段階_準個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第1段階(hold.get利用者負担段階())));
-            renrakuhyo.set第1段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室１(hold.get連絡票作成日())));
+                    && is第1段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室１(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
+            renrakuhyo.set第1段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室１(連絡票作成日)));
             renrakuhyo.set第2_1段階_準個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第2段階(hold.get利用者負担段階())));
-            renrakuhyo.set第2_1段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の１(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の１(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
+            renrakuhyo.set第2_1段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の１(連絡票作成日)));
             renrakuhyo.set第2_2段階_準個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第2段階(hold.get利用者負担段階())));
-            renrakuhyo.set第2_2段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の２(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の２(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
+            renrakuhyo.set第2_2段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の２(連絡票作成日)));
             renrakuhyo.set第3段階_準個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第3段階(hold.get利用者負担段階())));
-            renrakuhyo.set第3段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室３(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室３(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
+            renrakuhyo.set第3段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室３(連絡票作成日)));
         }
         renrakuhyo = getKaigohokenRenrakuhyo1(renrakuhyo, hold);
         renrakuhyo = getKaigohokenRenrakuhyo(renrakuhyo, hold);
@@ -159,42 +164,46 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
             KaigoHokenRenrakuhyoHold hold) {
         TokuteiNyushoshaFutanGendoNichigakuGetter gendoNichigakuGetter = new TokuteiNyushoshaFutanGendoNichigakuGetter();
         if (hold.get居住費の負担限度額() != null) {
+            FlexibleDate 連絡票作成日 = hold.get連絡票作成日();
+            Decimal 負担限度額認定_ユニット型準個室 = hold.get居住費の負担限度額().get負担限度額認定_ユニット型準個室();
+            Decimal 負担限度額認定_従来型個室_特養等 = hold.get居住費の負担限度額().get負担限度額認定_従来型個室_特養等();
+            Decimal 負担限度額認定_多床室 = hold.get居住費の負担限度額().get負担限度額認定_多床室();
             renrakuhyo.set基準額_準個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is課税層第3段階(hold.get利用者負担段階())));
-            renrakuhyo.set基準額_準個室金額(get金額_5(gendoNichigakuGetter.getユニット型準個室_基準費用額(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.getユニット型準個室_基準費用額(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
+            renrakuhyo.set基準額_準個室金額(get金額_5(gendoNichigakuGetter.getユニット型準個室_基準費用額(連絡票作成日)));
             renrakuhyo.set第1段階_従来型個室_特養チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第1段階(hold.get利用者負担段階())));
-            renrakuhyo.set第1段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養１(hold.get連絡票作成日())));
+                    && is第1段階(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養１(連絡票作成日)), 負担限度額認定_従来型個室_特養等)));
+            renrakuhyo.set第1段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養１(連絡票作成日)));
             renrakuhyo.set第2_1段階_従来型個室_特養チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第2段階(hold.get利用者負担段階())));
-            renrakuhyo.set第2_1段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の１(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の１(連絡票作成日)), 負担限度額認定_従来型個室_特養等)));
+            renrakuhyo.set第2_1段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の１(連絡票作成日)));
             renrakuhyo.set第2_2段階_従来型個室_特養チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第2段階(hold.get利用者負担段階())));
-            renrakuhyo.set第2_2段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の２(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の２(連絡票作成日)), 負担限度額認定_従来型個室_特養等)));
+            renrakuhyo.set第2_2段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の２(連絡票作成日)));
             renrakuhyo.set第2_3段階_従来型個室_特養チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第2段階(hold.get利用者負担段階())));
-            renrakuhyo.set第2_3段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の３(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の３(連絡票作成日)), 負担限度額認定_従来型個室_特養等)));
+            renrakuhyo.set第2_3段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養２の３(連絡票作成日)));
             renrakuhyo.set第3段階_従来型個室_特養チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第3段階(hold.get利用者負担段階())));
-            renrakuhyo.set第3段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養３(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養３(連絡票作成日)), 負担限度額認定_従来型個室_特養等)));
+            renrakuhyo.set第3段階_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get旧措軽減従個特養３(連絡票作成日)));
             renrakuhyo.set基準額_従来型個室_特養チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is課税層第3段階(hold.get利用者負担段階())));
-            renrakuhyo.set基準額_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get従個特養_基準費用額(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get従個特養_基準費用額(連絡票作成日)), 負担限度額認定_従来型個室_特養等)));
+            renrakuhyo.set基準額_従来型個室_特養金額(get金額_5(gendoNichigakuGetter.get従個特養_基準費用額(連絡票作成日)));
             renrakuhyo.set第1段階_多床室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第1段階(hold.get利用者負担段階())));
-            renrakuhyo.set第1段階_多床室金額(get金額_5(gendoNichigakuGetter.get旧措軽減多床室１(hold.get連絡票作成日())));
+                    && is第1段階(get金額_5(gendoNichigakuGetter.get旧措軽減多床室１(連絡票作成日)), 負担限度額認定_多床室)));
+            renrakuhyo.set第1段階_多床室金額(get金額_5(gendoNichigakuGetter.get旧措軽減多床室１(連絡票作成日)));
             renrakuhyo.set第2_1段階_多床室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第2段階(hold.get利用者負担段階())));
-            renrakuhyo.set第2_1段階_多床室金額(get金額_5(gendoNichigakuGetter.get旧措軽減多床室２の１(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減多床室２の１(連絡票作成日)), 負担限度額認定_多床室)));
+            renrakuhyo.set第2_1段階_多床室金額(get金額_5(gendoNichigakuGetter.get旧措軽減多床室２の１(連絡票作成日)));
             renrakuhyo.set第2_2段階_多床室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第2段階(hold.get利用者負担段階())));
-            renrakuhyo.set第2_2段階_多床室金額(get金額_5(gendoNichigakuGetter.get旧措軽減多床室２の２(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減多床室２の２(連絡票作成日)), 負担限度額認定_多床室)));
+            renrakuhyo.set第2_2段階_多床室金額(get金額_5(gendoNichigakuGetter.get旧措軽減多床室２の２(連絡票作成日)));
             renrakuhyo.set第3段階_多床室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第3段階(hold.get利用者負担段階())));
-            renrakuhyo.set第3段階_多床室金額(get金額_5(gendoNichigakuGetter.get旧措軽減多床室３(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減多床室３(連絡票作成日)), 負担限度額認定_多床室)));
+            renrakuhyo.set第3段階_多床室金額(get金額_5(gendoNichigakuGetter.get旧措軽減多床室３(連絡票作成日)));
             renrakuhyo.set基準額_多床室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is課税層第3段階(hold.get利用者負担段階())));
-            renrakuhyo.set基準額_多床室金額(get金額_5(gendoNichigakuGetter.get多床室_基準費用額(hold.get連絡票作成日())));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get多床室_基準費用額(連絡票作成日)), 負担限度額認定_多床室)));
+            renrakuhyo.set基準額_多床室金額(get金額_5(gendoNichigakuGetter.get多床室_基準費用額(連絡票作成日)));
         }
         if (hold.get食費の_特定_負担限度額() != null) {
             renrakuhyo.set食費負担限度額記載チェック(getチェック(hold.get食費の_特定_負担限度額().is食費の記載あり()));
@@ -553,27 +562,14 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
         return RString.EMPTY;
     }
 
-    private boolean is第1段階(Code 利用者負担段階) {
-        return RiyoshaFutanDankai.第1段階.getコード().equals(get利用者負担段階(利用者負担段階));
+    private boolean is第1段階(RString 画面金額, Decimal 負担限度額認定額) {
+        return 負担限度額認定額 != null
+                && Integer.parseInt(画面金額.toString()) >= 負担限度額認定額.intValue();
     }
 
-    private boolean is第2段階(Code 利用者負担段階) {
-        return RiyoshaFutanDankai.第2段階.getコード().equals(get利用者負担段階(利用者負担段階));
-    }
-
-    private boolean is第3段階(Code 利用者負担段階) {
-        return RiyoshaFutanDankai.第3段階.getコード().equals(get利用者負担段階(利用者負担段階));
-    }
-
-    private boolean is課税層第3段階(Code 利用者負担段階) {
-        return RiyoshaFutanDankai.課税層第3段階.getコード().equals(get利用者負担段階(利用者負担段階));
-    }
-
-    private RString get利用者負担段階(Code 利用者負担段階) {
-        if (利用者負担段階 == null || 利用者負担段階.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return 利用者負担段階.getColumnValue();
+    private boolean is第2段階(RString 画面金額, Decimal 負担限度額認定額) {
+        return 負担限度額認定額 != null
+                && Integer.parseInt(画面金額.toString()) == 負担限度額認定額.intValue();
     }
 
     private RString get未認定チェック(Code 要介護認定状態区分コード) {
