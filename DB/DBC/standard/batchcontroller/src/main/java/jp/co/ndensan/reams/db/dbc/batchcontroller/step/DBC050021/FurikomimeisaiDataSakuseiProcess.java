@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -140,12 +139,12 @@ public class FurikomimeisaiDataSakuseiProcess extends BatchProcessBase<FurikomiD
             tempTable1.setTaishoshaShikibetsuCode(furikomiDetailEntity.getKozaShikibetsuCode());
         }
         RString 口座摘要 = RString.EMPTY;
-        int 件数 = entity.get件数();
-        if (件数 == 1) {
+        int 件数_口座摘要 = entity.get件数();
+        if (件数_口座摘要 == 1) {
             口座摘要 = RString.EMPTY;
-        } else if (件数 >= 2) {
+        } else if (件数_口座摘要 >= 2) {
             口座摘要 = 名.concat(RString.HALF_SPACE).concat(RString.HALF_SPACE)
-                    .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(new RString(件数)).concat(件);
+                    .concat(RString.HALF_SPACE).concat(RString.HALF_SPACE).concat(new RString(件数_口座摘要)).concat(件);
         }
         tempTable1.setKozaTekiyo(口座摘要);
         tempTable1.setFurikomigaku(entity.get合計振込金額());
@@ -154,7 +153,7 @@ public class FurikomimeisaiDataSakuseiProcess extends BatchProcessBase<FurikomiD
         tempTable1.setTesuryoFutanKubun(RString.EMPTY);
         tempTable1.setTesuryo(Decimal.ZERO);
         tempTable1.setFurikomiSakuseiKubun(new Code(RSTRING_0));
-        tempTable1.setFurikomiSakuseiYMDHMS(YMDHMS.now());
+        tempTable1.setFurikomiSakuseiYMDHMS(parameter.getシステム日時());
 
         tempTable1.setBaitaiSakuseizumiFlag(false);
         tempTable1.setIraishoSakuseizumiFlag(false);

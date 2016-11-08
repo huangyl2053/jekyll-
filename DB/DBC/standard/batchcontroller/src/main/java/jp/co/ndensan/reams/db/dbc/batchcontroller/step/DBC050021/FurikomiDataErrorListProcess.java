@@ -126,18 +126,20 @@ public class FurikomiDataErrorListProcess extends BatchProcessBase<DbWT0510Furik
 
     @Override
     protected void afterExecute() {
-        csvListWriter.close();
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-            manager.spool(eucFilePath, accessLogUUID);
-        } else {
-            manager.spool(eucFilePath);
+        if (count != 0) {
+            csvListWriter.close();
+            if (!personalDataList.isEmpty()) {
+                AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+                manager.spool(eucFilePath, accessLogUUID);
+            } else {
+                manager.spool(eucFilePath);
+            }
         }
     }
 
     private PersonalData toPersonalData(DbWT0510FurikomiMeisaiTempEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(コード, 被保険者番号R, entity.getHihokenshaNo().getColumnValue());
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+        return PersonalData.of(entity.getShikibetsuCode(), expandedInfo);
     }
 
     private List<RString> getHeader() {
@@ -192,7 +194,6 @@ public class FurikomiDataErrorListProcess extends BatchProcessBase<DbWT0510Furik
                 separator(Separator.JAPANESE).
                 fillType(FillType.NONE).
                 width(Width.HALF).toDateString());
-        sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(作成R);
