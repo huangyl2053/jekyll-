@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 異動分利用者負担割合判定（過年度）のHandlerクラスです。
@@ -32,6 +33,7 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
     private final IdoufunRiyoushyafutanKanendoDiv div;
     private final RDateTime dateTime;
     private static final RString 時分秒 = new RString("00:00:00");
+    private static final RString BUTTON_NAME = new RString("btnJikkou");
     private static final int NUM_ONE = 1;
     private static final int NUM_SEVEN = 7;
 
@@ -61,8 +63,10 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
         FlexibleDate date = new FlexibleDate(dateTime.getDate().toDateString());
         FlexibleYear 処理年度 = NUM_SEVEN < date.getMonthValue() ? date.getYear() : date.getYear().minusYear(NUM_ONE);
         if (年次判定年度.isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_NAME, true);
             throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
         } else if (年次判定年度.isBefore(処理年度)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_NAME, true);
             throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
         } else {
             div.getTxtKonkaiKaishiDate().setDisabled(false);
