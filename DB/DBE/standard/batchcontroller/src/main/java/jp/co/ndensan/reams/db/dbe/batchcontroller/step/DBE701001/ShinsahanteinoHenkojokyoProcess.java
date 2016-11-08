@@ -250,11 +250,12 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(HIHOKENSYAKUBUN);
-        条件.append(HihokenshaKubun.toValue(paramter.getHihokenshaKubun()).get名称());
+        条件.append(paramter.isJigyoJyokyoHokoku() ? RString.EMPTY : HihokenshaKubun.toValue(
+                paramter.getHihokenshaKubun()).get名称());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(GOGITAINO);
-        条件.append(paramter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(paramter.getGogitaiNo()));
+        条件.append(paramter.isJigyoJyokyoHokoku() ? RString.EMPTY : new RString(paramter.getGogitaiNo()));
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOTSUKIKUBUN);
