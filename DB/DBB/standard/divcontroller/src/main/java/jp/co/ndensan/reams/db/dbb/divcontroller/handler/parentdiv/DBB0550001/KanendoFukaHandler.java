@@ -150,10 +150,10 @@ public class KanendoFukaHandler {
         int 前月末の日 = RDate.getNowDate().minusMonth(1).getLastDay();
         RString 前月まで = RDate.getNowDate().getYearMonth().minusMonth(1).wareki().
                 toDateString().concat(コンマ).concat(String.valueOf(前月末の日)).concat(RString.HALF_SPACE).concat(
-                        RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+                RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RString 当日を含む = RDate.getNowDate().wareki().
                 toDateString().concat(RString.HALF_SPACE).concat(
-                        RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+                RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         List<dgChushutsuKikan_Row> rowList = new ArrayList<>();
         dgChushutsuKikan_Row row = new dgChushutsuKikan_Row();
         if (shoriDate != null && shoriDate.get基準日時() != null) {
@@ -274,8 +274,8 @@ public class KanendoFukaHandler {
         for (Kitsuki 期月 : 期月リスト.toList()) {
             if (期月.get期().compareTo(最終法定納期.get期()) > 0
                     && 期月.get月().getコード().indexOf(new RString(Integer.valueOf(
-                                            div.getKanendoShoriNaiyo().getDdlShoritsuki().
-                                            getSelectedKey().toString()).toString())) != -1) {
+                            div.getKanendoShoriNaiyo().getDdlShoritsuki().
+                            getSelectedKey().toString()).toString())) != -1) {
                 return 期月;
             }
         }
@@ -494,9 +494,9 @@ public class KanendoFukaHandler {
         List<HonsanteiIdoParameter> 出力帳票一覧 = new ArrayList<>();
         Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
         for (Map.Entry<RString, RString> entry : set) {
-            if (決定変更通知書.equals(entry.getKey()) && div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+            if (決定変更通知書.equals(entry.getKey()) && (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                     getChkKetteiTsuchi().isAllSelected()
-                    || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().isAllSelected()) {
+                    || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().isAllSelected())) {
                 HonsanteiIdoParameter chohyoMeter = new HonsanteiIdoParameter();
                 chohyoMeter.set帳票分類ID(決定変更通知書_帳票分類ID);
                 chohyoMeter.set出力順ID(entry.getValue());

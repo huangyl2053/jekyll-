@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.db.relate.setaiyin;
+package jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -16,22 +16,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
- * [2_世帯員把握]テーブルEntityクラスです。
+ * 世帯員把握トリガ一時テーブルEntity項目定義クラスです。
  *
- * @reamsid_L DBC-2770-060 jinjue
+ * @reamsid_L DBC-2770-050 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
 @OnNextSchema("rgdb")
-public class SetaiinHaakuSubTempEntity extends DbTableEntityBase<SetaiinHaakuSubTempEntity> implements IDbAccessable {
+public class ShotaiinHaakuIttokiTempEntity extends DbTableEntityBase<ShotaiinHaakuIttokiTempEntity> implements IDbAccessable {
 
-    // TODO 　一時ファイルでバッチに未実装
     @PrimaryKey
-    private HihokenshaNo hihokenshaNo;
-    @PrimaryKey
-    private ShikibetsuCode shikibetsuCode;
-    private FlexibleDate jukyuYMD;
-    private FlexibleYear shotokuNendo;
-    private RString juushotitokureigaitou;
+    private HihokenshaNo 被保険者番号;
+    private ShikibetsuCode 識別コード;
+    private FlexibleDate 基準年月日;
+    private FlexibleYear 所得年度;
+    private RString 住所地特例該当;
 }
