@@ -55,7 +55,7 @@ public class KubunShikyuGendogakuHandler {
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
             }
             FlexibleYearMonth teikyoshuryoYM = result.toEntity().getTeikyoshuryoYM();
-            if (teikyoshuryoYM != null) {
+            if (teikyoshuryoYM != null && !teikyoshuryoYM.isEmpty()) {
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
                 row.setDefaultDataName3(teikyoshuryoYM.wareki()
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
@@ -196,6 +196,17 @@ public class KubunShikyuGendogakuHandler {
         if (DBC4510011StateName.初期状態.getName().equals(ResponseHolder.getState())) {
             setCommonButtonVisible(false);
         }
+    }
+
+    /**
+     * 初期化のメソッドです。
+     *
+     * @param flag boolean
+     */
+    public void initialDisable(boolean flag) {
+        div.getDgServiceShurui().setDisabled(flag);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, flag);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(入力前の状態に戻る, flag);
     }
 
 }

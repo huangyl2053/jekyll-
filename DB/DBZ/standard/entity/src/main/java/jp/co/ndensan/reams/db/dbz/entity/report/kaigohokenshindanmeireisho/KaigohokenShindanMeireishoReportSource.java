@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 介護保険診断命令書のReportSource
@@ -42,36 +46,36 @@ public class KaigohokenShindanMeireishoReportSource implements IReportSource {
     public RString meishoFuyo;
     @ReportItem(name = "customerBarCode", order = 15)
     public RString customerBarCode;
-    @ReportItem(name = "atenaRenban", length = 8, order = 16)
-    public RString atenaRenban;
+    @ReportItem(name = "pageCount", length = 8, order = 16)
+    public RString pageCount;
     @ReportItem(name = "sonota", length = 14, order = 17)
     public RString sonota;
     @ReportItem(name = "title", length = 50, order = 18)
     public RString title;
     @ReportItem(name = "tsuchibun1", order = 19)
     public RString tsuchibun1;
-    @ReportItem(name = "hihokenshaName2", order = 20)
-    public RString hihokenshaName2;
-    @ReportItem(name = "hihokenshaNo1", length = 1, order = 21)
+    @ReportItem(name = "hihokenshaNo1", length = 1, order = 20)
     public RString hihokenshaNo1;
-    @ReportItem(name = "hihokenshaNo2", length = 1, order = 22)
+    @ReportItem(name = "hihokenshaNo2", length = 1, order = 21)
     public RString hihokenshaNo2;
-    @ReportItem(name = "hihokenshaNo3", length = 1, order = 23)
+    @ReportItem(name = "hihokenshaNo3", length = 1, order = 22)
     public RString hihokenshaNo3;
-    @ReportItem(name = "hihokenshaNo4", length = 1, order = 24)
+    @ReportItem(name = "hihokenshaNo4", length = 1, order = 23)
     public RString hihokenshaNo4;
-    @ReportItem(name = "hihokenshaNo5", length = 1, order = 25)
+    @ReportItem(name = "hihokenshaNo5", length = 1, order = 24)
     public RString hihokenshaNo5;
-    @ReportItem(name = "hihokenshaNo6", length = 1, order = 26)
+    @ReportItem(name = "hihokenshaNo6", length = 1, order = 25)
     public RString hihokenshaNo6;
-    @ReportItem(name = "hihokenshaNo7", length = 1, order = 27)
+    @ReportItem(name = "hihokenshaNo7", length = 1, order = 26)
     public RString hihokenshaNo7;
-    @ReportItem(name = "hihokenshaNo8", length = 1, order = 28)
+    @ReportItem(name = "hihokenshaNo8", length = 1, order = 27)
     public RString hihokenshaNo8;
-    @ReportItem(name = "hihokenshaNo9", length = 1, order = 29)
+    @ReportItem(name = "hihokenshaNo9", length = 1, order = 28)
     public RString hihokenshaNo9;
-    @ReportItem(name = "hihokenshaNo10", length = 1, order = 30)
+    @ReportItem(name = "hihokenshaNo10", length = 1, order = 29)
     public RString hihokenshaNo10;
+    @ReportItem(name = "hihokenshaName2", order = 30)
+    public RString hihokenshaName2;
     @ReportItem(name = "iryokikanName", order = 31)
     public RString iryokikanName;
     @ReportItem(name = "tantoIshiName", order = 32)
@@ -92,4 +96,8 @@ public class KaigohokenShindanMeireishoReportSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hishokenshaNo;
 }
