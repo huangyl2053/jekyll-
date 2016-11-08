@@ -233,10 +233,8 @@ public class PnlKeteiJohoMsg {
                                         getTxtSagakuGoke().getValue().toString()))
                         .set増減理由等(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                 .getTxtZogenriyu().getValue())
-                        .set不支給理由等(new RString(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().
-                                        getValue().toString()))
-                        .set購入_改修履歴等(new RString(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
-                                        .getTxtFushikyuriyu2().getValue().toString()))
+                        .set不支給理由等(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().getValue()
+                                .concat(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue()))
                         .build();
                 ShokanHanteiKekka shokanhanteikekka = new ShokanHanteiKekka(被保険者番号, サービス年月, 整理番号)
                         .createBuilderForEdit()

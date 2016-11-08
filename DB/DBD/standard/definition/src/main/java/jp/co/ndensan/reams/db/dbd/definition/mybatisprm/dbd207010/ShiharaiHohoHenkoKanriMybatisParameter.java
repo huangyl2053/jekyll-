@@ -79,6 +79,9 @@ public class ShiharaiHohoHenkoKanriMybatisParameter implements IMyBatisParameter
     private boolean is1号償還決定登録者_保険料控除あり者のみの選択_1;
     private boolean is1号償還決定登録者_保険料控除あり者のみの選択_2;
 
+    private RDate 基準日min支払一時差止期限;
+    private RDate 基準日min支払方法変更期限;
+
     /**
      * コンストラクタです。
      *
@@ -113,6 +116,7 @@ public class ShiharaiHohoHenkoKanriMybatisParameter implements IMyBatisParameter
         set償還決定登録者１号_保険料控除あり者のみの選択について(償還決定登録者１号_保険料控除あり者のみの選択);
         set業務コンフィグ_支払方法変更_支払一時差止期限();
         set業務コンフィグ_支払方法変更_支払方法変更期限();
+        set基準日から計算した日期(基準日RDate, 支払方法変更_支払一時差止期限, 支払方法変更_支払方法変更期限);
     }
 
     private void set基準日について(FlexibleDate 基準日) {
@@ -221,5 +225,10 @@ public class ShiharaiHohoHenkoKanriMybatisParameter implements IMyBatisParameter
     private void set業務コンフィグ_支払方法変更_支払方法変更期限() {
         RString configValue = DbBusinessConfig.get(ConfigNameDBD.支払方法変更_支払方法変更期限, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         支払方法変更_支払方法変更期限 = Integer.parseInt(configValue.toString());
+    }
+
+    private void set基準日から計算した日期(RDate 基準日RDate, int 差止期限, int 変更期限) {
+        基準日min支払一時差止期限 = 基準日RDate.minusMonth(差止期限);
+        基準日min支払方法変更期限 = 基準日RDate.minusMonth(変更期限);
     }
 }

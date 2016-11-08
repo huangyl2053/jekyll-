@@ -151,4 +151,13 @@ public class JigyoHokokuGeppoIppanGenbutsuProcessParamter implements IBatchProce
                 過去集計分市町村コードList,
                 集計年月, 給付集計区分, 過去集計分旧市町村区分);
     }
+
+    /**
+     * 事業報告統計データを取得する処理mybatisのパラメータを生成します。
+     *
+     * @return JigyoHokokuGeppoIppanGenbutsuMybatisParamter
+     */
+    public JigyoHokokuGeppoIppanGenbutsuMybatisParamter to事業報告統計データMybitisParamter() {
+        return JigyoHokokuGeppoIppanGenbutsuMybatisParamter.createJigyoHokokuTokeiDataParam(報告年月, 集計年月, 市町村コード, 給付集計区分);
+    }
 }

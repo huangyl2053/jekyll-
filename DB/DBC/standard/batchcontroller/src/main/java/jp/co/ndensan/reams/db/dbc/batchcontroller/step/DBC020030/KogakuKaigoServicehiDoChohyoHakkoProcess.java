@@ -139,7 +139,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
     private List<RString> 並び順;
     private List<RString> 通知書定型文;
     private List<RString> タイトルlist;
-    private List<RString> インフォ;
+    private RString インフォ;
     private ChohyoSeigyoKyotsu 帳票制御共通情報;
     private Association 導入団体情報;
     private boolean dataFlag;
@@ -182,7 +182,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         設定値1 = service.get設定値(帳票分類ID, 取り消し線_項目名);
         設定値2 = service.get設定値(帳票分類ID, 帳票タイトル_項目名);
         設定値3 = service.get設定値(帳票分類ID, 調整用_項目名);
-        インフォ = getインフォ();
+        インフォ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票分類ID, KamokuCode.EMPTY, INT_5, INT_2, FlexibleDate.getNowDate());
         get出力順();
         導入団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
@@ -690,13 +690,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(data, 0);
-    }
-
-    private List<RString> getインフォ() {
-        List<RString> list = new ArrayList<>();
-        RString インフォ1 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票分類ID, KamokuCode.EMPTY, INT_1, INT_2, FlexibleDate.getNowDate());
-        list.add(インフォ1);
-        return list;
     }
 
     private RDate toRDate(FlexibleDate date) {

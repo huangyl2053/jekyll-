@@ -57,7 +57,7 @@ public class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity extends DbTableEntity
     private FlexibleDate riyushoSakuseiUketsukeYMD;
     private RString shukeiNo;
     private boolean TaishogaiFlag;
-    private boolean shukeiFlag;
+//    private boolean shukeiFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -504,11 +504,10 @@ public class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity extends DbTableEntity
      *
      * @return 集計フラグ
      */
-    @CheckForNull
-    public boolean getShukeiFlag() {
-        return shukeiFlag;
-    }
-
+//    @CheckForNull
+//    public boolean getShukeiFlag() {
+//        return shukeiFlag;
+//    }
     /**
      * 集計フラグのsetメソッドです。
      * <br/>
@@ -516,10 +515,9 @@ public class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity extends DbTableEntity
      *
      * @param shukeiFlag 集計フラグ
      */
-    public void setShukeiFlag(boolean shukeiFlag) {
-        this.shukeiFlag = shukeiFlag;
-    }
-
+//    public void setShukeiFlag(boolean shukeiFlag) {
+//        this.shukeiFlag = shukeiFlag;
+//    }
     /**
      * このエンティティの主キーが他の{@literal DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity}と等しいか判定します。
      *
@@ -566,7 +564,7 @@ public class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity extends DbTableEntity
         this.riyushoSakuseiUketsukeYMD = entity.riyushoSakuseiUketsukeYMD;
         this.shukeiNo = entity.shukeiNo;
         this.TaishogaiFlag = entity.TaishogaiFlag;
-        this.shukeiFlag = entity.shukeiFlag;
+//        this.shukeiFlag = entity.shukeiFlag;
     }
 
     /**
@@ -576,7 +574,7 @@ public class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity extends DbTableEntity
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, serviceCode, jutakuKaishuJigyoshaMeisho, jutakuKaishuChakkoYMD, jutakuKaishuJushoShozaisha, kaishuTaishoJutakuJusho, kaishuNaiyo_kasho_Kibo, riyushoSakuseiYMD, riyushoSakuseiJigyoshaNo, riyushoSakuseishaMei, riyushoSakuseishaMeiKana, riyushoSakuseiShinseiYMD, riyushoSakuseiUketsukeYMD, shukeiNo, TaishogaiFlag, shukeiFlag);
+        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, serviceCode, jutakuKaishuJigyoshaMeisho, jutakuKaishuChakkoYMD, jutakuKaishuJushoShozaisha, kaishuTaishoJutakuJusho, kaishuNaiyo_kasho_Kibo, riyushoSakuseiYMD, riyushoSakuseiJigyoshaNo, riyushoSakuseishaMei, riyushoSakuseishaMeiKana, riyushoSakuseiShinseiYMD, riyushoSakuseiUketsukeYMD, shukeiNo, TaishogaiFlag);
     }
 
 // </editor-fold>

@@ -131,8 +131,10 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
+    @BatchWriter
     private BatchReportWriter<FurikomiMeisaiIchiranDetailReportSource> batchReportWriter_明細一覧表;
     private ReportSourceWriter<FurikomiMeisaiIchiranDetailReportSource> reportSourceWriter_明細一覧表;
+    @BatchWriter
     private BatchReportWriter<FurikomiMeisaiIchiranGokeiReportSource> batchReportWriter_合計一覧表;
     private ReportSourceWriter<FurikomiMeisaiIchiranGokeiReportSource> reportSourceWriter_合計一覧表;
 
@@ -471,13 +473,31 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         if (code.equals(要介護1) || code.equals(要介護2) || code.equals(要介護3)
                 || code.equals(要介護4) || code.equals(要介護5) || code.equals(経過的要介護)) {
             entity.set要介護件数(entity.get要介護件数().add(NUM1));
-            entity.set要介護金額(entity.get要介護金額().add(金額));
+            if (entity.get要介護金額() != null && 金額 != null) {
+                entity.set要介護金額(entity.get要介護金額().add(金額));
+            } else if (entity.get要介護金額() != null) {
+                entity.set要介護金額(entity.get要介護金額());
+            } else if (金額 != null) {
+                entity.set要介護金額(金額);
+            }
         } else if (code.equals(要支援1) || code.equals(要支援2)) {
             entity.set要支援件数(entity.get要支援件数().add(NUM1));
-            entity.set要支援金額(entity.get要支援金額().add(金額));
+            if (entity.get要支援金額() != null && 金額 != null) {
+                entity.set要支援金額(entity.get要支援金額().add(金額));
+            } else if (entity.get要支援金額() != null) {
+                entity.set要支援金額(entity.get要支援金額());
+            } else if (金額 != null) {
+                entity.set要支援金額(金額);
+            }
         } else {
             entity.setその他件数(entity.getその他件数().add(NUM1));
-            entity.setその他金額(entity.getその他金額().add(金額));
+            if (entity.getその他金額() != null && 金額 != null) {
+                entity.setその他金額(entity.getその他金額().add(金額));
+            } else if (entity.getその他金額() != null) {
+                entity.setその他金額(entity.getその他金額());
+            } else if (金額 != null) {
+                entity.setその他金額(金額);
+            }
         }
     }
 

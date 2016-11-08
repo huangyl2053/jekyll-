@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbc.service.report.shokanketteitsuchishoshiharaiyo
 import jp.co.ndensan.reams.db.dbc.service.report.shokanketteitsuchishoshiharaiyoteibiyijinashi.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.sashitome.ShiharaiHohoHenkoSashitome;
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.ShokanHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
@@ -95,12 +94,6 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("'被保険者番号"),
                 被保険者番号.value());
         AccessLogger.log(AccessLogType.照会, PersonalData.of(shikibetsuCode, expandedInfo));
-        if (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty()) {
-            throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
-        }
-        if (償還払支給判定結果.isEmpty()) {
-            throw new ApplicationException(DbcErrorMessages.償還決定データなし.getMessage());
-        }
         List<FlexibleYearMonth> サービス提供年月List = getサービス提供年月(償還払支給判定結果List);
         div.getDdlServiceTeikyoYM().setDataSource(getサービス提供年月DataSource(サービス提供年月List));
         List<RString> 整理番号List = new ArrayList<>();

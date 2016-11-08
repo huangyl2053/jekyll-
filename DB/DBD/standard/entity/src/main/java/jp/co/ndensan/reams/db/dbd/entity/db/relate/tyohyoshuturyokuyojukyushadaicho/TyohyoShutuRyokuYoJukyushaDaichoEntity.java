@@ -17,7 +17,7 @@ import java.util.List;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TyohyoShutuRyokuYoJukyushaDaichoEntity {
 
-    private List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList;
+    private YokaigoNinteiJohoEntity 要介護認定情報EntityList;
     private List<FutanGendogakuNinteiJohoEntity> 負担限度額認定情報EntityList;
     private List<ShafuHojinKeigenJohoEntity> 社福法人軽減情報EntityList;
     private List<RiyoshaFutanGenmenJohoEntity> 利用者負担減免情報EntityList;

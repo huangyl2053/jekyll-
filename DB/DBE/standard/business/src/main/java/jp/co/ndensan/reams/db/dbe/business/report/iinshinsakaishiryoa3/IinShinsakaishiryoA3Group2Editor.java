@@ -237,18 +237,32 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.four_tokkiText = item.get特記事項_tokkiText();
+                source.four_tokkiText = get特記事項_tokkiText(0);
             } else if (短冊.equals(item.get特記パターン())) {
                 source = set特記事項テキスト連番_名称(source);
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.four_tokkiImg = item.get特記事項_tokkiImg();
+                source.four_tokkiImg = get特記事項_tokkiImg(0);
             } else if (短冊.equals(item.get特記パターン())) {
                 source = set特記事項イメージ連番_名称(source);
             }
         }
         return source;
+    }
+
+    private RString get特記事項_tokkiText(int index) {
+        if (index < item.get特記事項_tokkiText().size()) {
+            return item.get特記事項_tokkiText().get(index);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get特記事項_tokkiImg(int index) {
+        if (index < item.get特記事項_tokkiImg().size()) {
+            return item.get特記事項_tokkiImg().get(index);
+        }
+        return RString.EMPTY;
     }
 
     private IinShinsakaishiryoA3ReportSource set特記事項イメージ連番_名称(IinShinsakaishiryoA3ReportSource source) {

@@ -78,6 +78,26 @@ var DBC;
             Controls.prototype.lblGyomuCode = function () {
                 return new UZA.Label(this.convFiledName("lblGyomuCode"));
             };
+
+            Controls.prototype.lblKetteiTsuchiJoho = function () {
+                return new UZA.Label(this.convFiledName("lblKetteiTsuchiJoho"));
+            };
+
+            Controls.prototype.txtKetteiTsuchiSakuseiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKetteiTsuchiSakuseiYMD"));
+            };
+
+            Controls.prototype.txtKetteiTsuchiNo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKetteiTsuchiNo"));
+            };
+
+            Controls.prototype.lblFurikomiMeisaiJoho = function () {
+                return new UZA.Label(this.convFiledName("lblFurikomiMeisaiJoho"));
+            };
+
+            Controls.prototype.txtFurikomiMeisaiSakuseiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtFurikomiMeisaiSakuseiYMD"));
+            };
             return Controls;
         })();
         ShokanbaraiketteiJoho.Controls = Controls;

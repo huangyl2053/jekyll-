@@ -59,7 +59,7 @@ public class GappeiShichoson implements IKoseiShichosonMaster {
      */
     @Override
     public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return new ShoKisaiHokenshaNo(entity.getHokenshaNo().value());
+        return new ShoKisaiHokenshaNo(entity.getKyuHokenshaNo().value());
     }
 
     /**

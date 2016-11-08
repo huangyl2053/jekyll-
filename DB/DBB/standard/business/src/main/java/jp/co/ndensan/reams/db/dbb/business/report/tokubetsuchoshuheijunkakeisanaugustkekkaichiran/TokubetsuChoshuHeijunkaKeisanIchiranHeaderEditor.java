@@ -80,7 +80,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranHeaderEditor implements ITokube
         RString 出力順４ = RString.EMPTY;
         RString 出力順５ = RString.EMPTY;
 
-        List<ISetSortItem> list = outputOrder.get設定項目リスト();
+        List<ISetSortItem> list = null != outputOrder ? outputOrder.get設定項目リスト() : null;
         if (list == null) {
             list = new ArrayList<>();
         }

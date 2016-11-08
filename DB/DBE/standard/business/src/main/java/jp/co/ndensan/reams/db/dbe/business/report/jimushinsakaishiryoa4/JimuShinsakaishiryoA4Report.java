@@ -27,6 +27,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4ReportSource> {
 
+    private static final int LENGTH_20 = 20;
+    private static final int MAXCOUNT = 30;
+    private static final RString テキスト全面イメージ = new RString("1");
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
     private final IchijihanteikekkahyoA4Entity ichijihanteiEntity;
     private final TokkiText1A4Business tokkiTextBusiness;
@@ -34,8 +37,6 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
     private final JimuSonotashiryoBusiness sonotashiryoBusiness;
     private final List<JimuTuikaSiryoBusiness> tuikaSiryoBusinessList;
     private final RString reportId;
-    private static final int LENGTH_20 = 20;
-    private static final int MAXCOUNT = 30;
 
     /**
      * インスタンスを生成します。
@@ -76,21 +77,30 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
         }
         List<TokkiA4Entity> 短冊情報リスト = tokkiTextBusiness.get短冊情報リスト();
         List<RString> 短冊リスト = get短冊リスト(短冊情報リスト);
-        for (int i = 0; i < 短冊リスト.size(); i++) {
-            if (i < MAXCOUNT) {
-                IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group3Editor(tokkiTextBusiness, 短冊情報リスト, 短冊リスト, i);
-                IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor1);
-                reportSourceWriter.writeLine(builder);
+        List<RString> テキスト全面List = tokkiTextBusiness.getTokkiText();
+        if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
+            IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group3Editor(
+                    tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, 0);
+            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor1);
+            reportSourceWriter.writeLine(builder);
+        } else {
+            for (int i = 0; i < 短冊リスト.size(); i++) {
+                if (i < MAXCOUNT) {
+                    IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group3Editor(
+                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, i);
+                    IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor1);
+                    reportSourceWriter.writeLine(builder);
+                }
             }
         }
         if (ReportIdDBE.DBE517901.getReportId().value().equals(reportId)) {
-            for (int i = 0; i < 短冊リスト.size(); i++) {
-                if (MAXCOUNT <= i) {
-                    int page = (i + MAXCOUNT) / MAXCOUNT;
-                    IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group4Editor(
-                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, i, page - 1, reportId);
-                    IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
-                    reportSourceWriter.writeLine(builder2);
+            if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
+                for (int i = 0; i < テキスト全面List.size(); i++) {
+                    テキスト全面Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List);
+                }
+            } else {
+                for (int i = 0; i < 短冊リスト.size(); i++) {
+                    短冊情報Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List);
                 }
             }
         }
@@ -101,13 +111,13 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
         IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
         reportSourceWriter.writeLine(builder1);
         if (ReportIdDBE.DBE517904.getReportId().value().equals(reportId)) {
-            for (int i = 0; i < 短冊リスト.size(); i++) {
-                if (MAXCOUNT <= i) {
-                    int page = (i + MAXCOUNT) / MAXCOUNT;
-                    IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group4Editor(
-                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, i, page - 1, reportId);
-                    IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
-                    reportSourceWriter.writeLine(builder2);
+            if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
+                for (int i = 0; i < テキスト全面List.size(); i++) {
+                    テキスト全面Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List);
+                }
+            } else {
+                for (int i = 0; i < 短冊リスト.size(); i++) {
+                    短冊情報Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List);
                 }
             }
         }
@@ -131,5 +141,26 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
             }
         }
         return bodyList;
+    }
+
+    private void テキスト全面Editor(ReportSourceWriter<JimuShinsakaishiryoA4ReportSource> reportSourceWriter, int i,
+            List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, List<RString> テキスト全面List) {
+        if (0 < i) {
+            IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group4Editor(
+                    tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, i, i + 1, reportId);
+            IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
+            reportSourceWriter.writeLine(builder2);
+        }
+    }
+
+    private void 短冊情報Editor(ReportSourceWriter<JimuShinsakaishiryoA4ReportSource> reportSourceWriter, int i,
+            List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, List<RString> テキスト全面List) {
+        if (MAXCOUNT <= i) {
+            int page = (i + MAXCOUNT) / MAXCOUNT;
+            IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group4Editor(
+                    tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, i, page, reportId);
+            IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
+            reportSourceWriter.writeLine(builder2);
+        }
     }
 }

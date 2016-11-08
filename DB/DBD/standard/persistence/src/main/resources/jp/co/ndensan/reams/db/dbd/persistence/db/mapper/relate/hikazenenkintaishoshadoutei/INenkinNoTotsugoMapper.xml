@@ -16,7 +16,7 @@
         <result property="非課税_DT基礎年金番号" column="DT基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税_DT年金コード" column="DT年金コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税_DT予備2" column="DT予備2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="非課税_DT生年月日" column=" " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="非課税_DT生年月日" column="DT生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税_DT性別" column="DT性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税_DTカナ氏名" column="DTカナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税_DTシフトコード1" column="DTシフトコード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -179,7 +179,7 @@
         CASE
         WHEN A."dtseinenngappi" != B."atenaSeinenngappi" THEN '1'
         WHEN A."dtseibetsu" != B."atenaSeibetsu" THEN '2'
-        WHEN A."dtkanaShimei" != B."atenaKanaShimei" THEN '3'
+        WHEN translate(trim(A."dtkanaShimei"), 'ｧｨｩｪｫｯｬｭｮﾞﾟ', 'ｱｲｳｴｵﾂﾔﾕﾖ') != translate(trim( B."atenaKanaShimei"), 'ｧｨｩｪｫｯｬｭｮﾞﾟ', 'ｱｲｳｴｵﾂﾔﾕﾖ') THEN '3'
         ELSE''
         END 不一致項目
         FROM

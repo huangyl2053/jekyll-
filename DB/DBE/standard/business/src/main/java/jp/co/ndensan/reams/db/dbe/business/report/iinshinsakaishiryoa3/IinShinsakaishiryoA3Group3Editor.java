@@ -6,13 +6,19 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.jimutokkitext.JimuTokkiTextA3Entity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
@@ -59,7 +65,7 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private static final int PAGE2COUNT = 34;
     private static final int PAGE1連番名称COUNT = 30;
     private static final int PAGE2連番名称COUNT = 34;
-    private final JimuTokkiTextA3Entity item;
+    private final IchijihanteikekkahyoA3Entity item;
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
@@ -67,12 +73,12 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     /**
      * インスタンスを生成します。
      *
-     * @param item JimuTokkiTextA3Entity
+     * @param item IchijihanteikekkahyoA3Entity
      * @param 特記事項List List<RString>
      * @param index int
      * @param page int
      */
-    protected IinShinsakaishiryoA3Group3Editor(JimuTokkiTextA3Entity item, List<RString> 特記事項List, int index, int page) {
+    protected IinShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item, List<RString> 特記事項List, int index, int page) {
         this.item = item;
         this.特記事項List = 特記事項List;
         this.index = index;
@@ -85,25 +91,29 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     }
 
     private IinShinsakaishiryoA3ReportSource editSource(IinShinsakaishiryoA3ReportSource source) {
-        source.six_hokenshaNo = item.get保険者番号();
-        source.six_hihokenshaNo = item.get被保険者番号();
+        source.six_hokenshaNo = item.get特記事項保険者番号();
+        source.six_hihokenshaNo = item.get特記事項被保険者番号();
         source.six_hihokenshaName = item.get名前();
-        source.six_sakuseiGengo = item.get審査会資料作成年号();
-        source.six_sakuseiYY = item.get審査会資料作成年();
-        source.six_sakuseiMM = item.get審査会資料作成月();
-        source.six_sakuseiDD = item.get審査会資料作成日();
-        source.six_shinseiGengo = item.get今回認定申請年号();
-        source.six_shinseiYY = item.get今回認定申請年();
-        source.six_shinseiMM = item.get今回認定申請月();
-        source.six_shinseiDD = item.get今回認定申請日();
-        source.six_chosaGengo = item.get今回認定調査実施年号();
-        source.six_chosaYY = item.get今回認定調査実施年();
-        source.six_chosaMM = item.get今回認定調査実施月();
-        source.six_chosaDD = item.get今回認定調査実施日();
-        source.six_shinsaGengo = item.get今回認定審査年号();
-        source.six_shinsaYY = item.get今回認定審査年();
-        source.six_shinsaMM = item.get今回認定審査月();
-        source.six_shinsaDD = item.get今回認定審査日();
+        source.six_sakuseiGengo = get元号(item.get認定申請年月日());
+        source.six_sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
+                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
+        source.six_sakuseiMM = new RString(item.get認定申請年月日().getMonthValue());
+        source.six_sakuseiDD = new RString(item.get認定申請年月日().getDayValue());
+        FlexibleDate システム日付 = FlexibleDate.getNowDate();
+        source.six_chosaGengo = get元号(システム日付);
+        source.six_chosaYY = get年(システム日付).replace(get元号(システム日付), RString.EMPTY)
+                .replace(new RString("年"), RString.EMPTY);
+        source.six_chosaMM = new RString(システム日付.getMonthValue());
+        source.six_chosaDD = new RString(システム日付.getDayValue());
+        source.six_shinseiGengo = get元号(item.get認定調査実施年月日());
+        source.six_shinseiYY = get年(item.get認定調査実施年月日());
+        source.six_shinseiMM = new RString(item.get認定調査実施年月日().getMonthValue());
+        source.six_shinseiDD = new RString(item.get認定調査実施年月日().getDayValue());
+        source.six_shinsaGengo = get元号(item.get介護認定審査会開催年月日());
+        source.six_shinsaYY = get年(item.get介護認定審査会開催年月日()).replace(get元号(item.get介護認定審査会開催年月日()),
+                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
+        source.six_shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
+        source.six_shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.six_tokkiText1 = get特記事項_tokkiText((page - 1) * 2 - 1);
@@ -399,5 +409,22 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
             source.six_listChosa1_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1COUNT + index);
         }
         return source;
+    }
+
+    private RString get元号(FlexibleDate 年月日) {
+
+        return パターン12(年月日).getEra();
+    }
+
+    private RString get年(FlexibleDate 年月日) {
+
+        return パターン12(年月日).getYear();
+    }
+
+    private FillTypeFormatted パターン12(FlexibleDate 年月日) {
+
+        return 年月日.wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK);
     }
 }

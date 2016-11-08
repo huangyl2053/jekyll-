@@ -31,10 +31,12 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,6 +53,7 @@ public class KogakuShokaiTaishoshaKensaku {
     private static final RString 審査結果反映区分_反映済 = new RString("1");
     private static final RString メニューID_高額介護 = new RString("DBCMN11004");
     private static final RString メニューID_総合事業高額介護 = new RString("DBCMN11016");
+    private static final int INT_0 = 0;
 
     /**
      * コンストラクタです。
@@ -217,9 +220,9 @@ public class KogakuShokaiTaishoshaKensaku {
         IUaFt200FindShikibetsuTaishoFunctionMapper mapper = mapperProvider.create(IUaFt200FindShikibetsuTaishoFunctionMapper.class);
         List<UaFt200FindShikibetsuTaishoEntity> 宛名PSMlist = mapper.selectByParameterClass(param);
         if (宛名PSMlist == null || 宛名PSMlist.isEmpty()) {
-            return AtenaMeisho.EMPTY;
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         } else {
-            IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSMlist.get(0));
+            IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSMlist.get(INT_0));
             return 宛名情報.get名称().getName();
         }
     }

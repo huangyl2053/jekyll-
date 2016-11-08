@@ -260,7 +260,7 @@ public class DBC040010DataUtil {
         result.setTaishoKeisanKaishiYMD(nonullRStr(entity.getTaishoKeisanKaishiYMD()));
         result.setTaishoKeisanShuryoYMD(nonullRStr(entity.getTaishoKeisanShuryoYMD()));
         RString 被保険者期間開始 = nonullRStr(entity.getKanyuKaishiYMD());
-        RString 被保険者期間終了 = nonullRStr(entity.getKanyuKaishiYMD());
+        RString 被保険者期間終了 = nonullRStr(entity.getKanyuShuryoYMD());
         result.setHihokenshaKaishiYMD(被保険者期間開始);
         result.setHihokenshaShuryoYMD(被保険者期間終了);
         result.setShinseiYMD(nonullRStr(entity.getShinseiYMD()));
@@ -631,7 +631,7 @@ public class DBC040010DataUtil {
         loopSetDecimal(実績負担額Set, UCHISU_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
         loopSetRString(実績負担額Set, TEKIYO, 実績負担額Get, BIKO);
         実績負担額Set.setGokei_JikoFutanGaku(loopAddDecimal(実績負担額Get, JIKOFUTANGAKUWORK));
-        実績負担額Set.setGokei_70_74KogakuShikyuGaku(loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU));
+        実績負担額Set.setGokei_70_74JikoFutanGaku(loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU));
         実績負担額Set.setDataSakuseiKubun(TWO);
         実績負担額Set.setJikoFutanKeisanYMD2(nonullRStr(getRDate(処理日時)));
     }
@@ -651,7 +651,7 @@ public class DBC040010DataUtil {
         Decimal sum1 = loopAddDecimal(実績負担額Get, JIKOFUTANGAKUWORK);
         Decimal sum2 = loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU);
         実績負担額Set.setGokei_JikoFutanGaku(sum1);
-        実績負担額Set.setGokei_70_74KogakuShikyuGaku(sum2);
+        実績負担額Set.setGokei_70_74JikoFutanGaku(sum2);
         loopSetDecimal(実績負担額Set, SUMI_JIKOFUTANGAKU, 実績負担額Get, JIKOFUTANGAKUWORK);
         loopSetDecimal(実績負担額Set, SUMI_70_74JIKOFUTANGAKU, 実績負担額Get, UCHISUJIKOFUTANGAKU);
         loopSetRString(実績負担額Set, SUMI_TEKIYO, 実績負担額Get, BIKO);
@@ -692,7 +692,11 @@ public class DBC040010DataUtil {
         IDateOfBirth dob = DateOfBirthFactory.createInstance(getFlexibleDate(umareYMD));
         AgeCalculator ageCalculator
                 = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.当日, getFlexibleDate(hihokenshaShuryoYMD));
-        int age = Integer.parseInt(ageCalculator.get年齢().toString());
+        RString agestr = ageCalculator.get年齢();
+        if (RString.isNullOrEmpty(agestr)) {
+            return false;
+        }
+        int age = Integer.parseInt(agestr.toString());
         return age < NUM_75;
     }
 
@@ -907,6 +911,30 @@ public class DBC040010DataUtil {
     }
 
     /**
+     * set高額支給額加算額のメソッドです。
+     *
+     * @param updEntity JissekiFutangakuDataTempEntity
+     * @param wK_KogakuShikyugaku List<Decimal>
+     */
+    public void update高額支給額加算額(JissekiFutangakuDataTempEntity updEntity, List<Decimal> wK_KogakuShikyugaku) {
+        Decimal sum = Decimal.ZERO;
+        for (int index = 0; index < wK_KogakuShikyugaku.size(); index++) {
+            Decimal 高額支給額加算額 = nonullDecimal(wK_KogakuShikyugaku.get(index));
+            高額支給額加算額 = 高額支給額加算額.compareTo(Decimal.ZERO) < 0 ? Decimal.ZERO : 高額支給額加算額;
+            sum = sum.add(高額支給額加算額);
+            RString suffix = suffixList.get(index);
+            Method method;
+            try {
+                method = CLS.getMethod(SET.concat(SUMI_UNDER_70KOGAKUSHIKYUGAKU).concat(suffix).toString(), DECIMALCLS);
+                method.invoke(updEntity, 高額支給額加算額);
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        updEntity.setSumi_Gokei_Under70KogakuShikyuGaku(sum);
+    }
+
+    /**
      * isマイナス値の月が存在のメソッドです。
      *
      * @param wK_KogakuShikyugaku List<Decimal>
@@ -979,7 +1007,8 @@ public class DBC040010DataUtil {
         DbT3058KogakuShikyuShinsaKetteiEntity 支給審査決定Entity = entity.get支給審査決定Entity();
         DbT3055KogakuKyufuTaishoshaGokeiEntity 給付対象者合計Entity = entity.get給付対象者合計Entity();
         RString 審査支払区分コード = 支給判定結果Entity.getShinsaHohoKubun();
-        RString shikyuKubunCode = 支給審査決定Entity == null ? null : 支給審査決定Entity.getShikyuKubunCode();
+        RString 決定支給区分コード = 支給審査決定Entity == null ? null : 支給審査決定Entity.getShikyuKubunCode();
+        RString 判定支給区分コード = 支給判定結果Entity.getShikyuKubunCode();
         Decimal 高額支給額加算額 = Decimal.ZERO;
         boolean wKm_blnIchiranKBN1 = false;
         boolean wKm_blnIchiranKBN2 = false;
@@ -987,21 +1016,19 @@ public class DBC040010DataUtil {
             高額支給額加算額 = 給付対象者合計Entity.getKogakuShikyuGaku();
             wKm_blnIchiranKBN1 = true;
         } else if (審査依頼.equals(審査支払区分コード)) {
-            if (RString.isNullOrEmpty(shikyuKubunCode)
-                    && 支給.equals(shikyuKubunCode)) {
+            if (RString.isNullOrEmpty(決定支給区分コード) && 支給.equals(判定支給区分コード)) {
                 高額支給額加算額 = 支給判定結果Entity.getShikyuKingaku();
-            } else if (RString.isNullOrEmpty(shikyuKubunCode)
-                    && 不支給.equals(shikyuKubunCode)) {
+            } else if (RString.isNullOrEmpty(決定支給区分コード) && 不支給.equals(判定支給区分コード)) {
                 高額支給額加算額 = Decimal.ZERO;
-            } else if (支給.equals(shikyuKubunCode)) {
+            } else if (支給.equals(決定支給区分コード)) {
                 高額支給額加算額 = 支給審査決定Entity == null ? null : 支給審査決定Entity.getKogakuShikyuGaku();
-            } else if (不支給.equals(shikyuKubunCode)) {
+            } else if (不支給.equals(決定支給区分コード)) {
                 高額支給額加算額 = Decimal.ZERO;
             }
         } else if (審査済み.equals(審査支払区分コード)) {
-            if (支給.equals(shikyuKubunCode)) {
+            if (支給.equals(判定支給区分コード)) {
                 高額支給額加算額 = 支給判定結果Entity.getShikyuKingaku();
-            } else if (不支給.equals(shikyuKubunCode)) {
+            } else if (不支給.equals(判定支給区分コード)) {
                 高額支給額加算額 = Decimal.ZERO;
             }
         }

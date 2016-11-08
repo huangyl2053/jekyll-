@@ -273,6 +273,11 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
         checkIntCSVData(csvData, entity);
         checkFlagCSVData(csvData, entity);
         checkGogitaiWariateIinJohoData(csvData, entity);
+        
+        if (!flag) {
+            entity.setErrJoho(intToRStr(errorNo).concat(new RString("読込しました。")));
+            eucCsvWriter.writeLine(entity);
+        }
     }
 
     private void checkFlagCSVData(GogitaiJohoSakuseiCSVEntity csvData, GogitaiJohoSakuseiErrKekkaCSVEntity entity) {

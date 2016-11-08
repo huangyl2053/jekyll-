@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.shokanbaraiskkttcsrysmuke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishohihokenshabun.ShokanKetteiTsuchiShoHihokenshabunItem;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
@@ -20,19 +21,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -118,11 +111,12 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
      * @param businessList 償還払支給（不支給）決定通知書情報Entityリスト
      * @param batchPram バッチパラメータ
      * @param reportSourceWriter ReportSourceWriter
+     * @param 種類Map 種類Map
      * @return List<ShokanKetteiTsuchiShoHihokenshabunItem>
      */
     public List<ShokanKetteiTsuchiShoHihokenshabunItem> shokanBaraiShikyuKetteiTsuchishoRiyoshamuke(
             List<ShokanKetteiTsuchiShoShiharai> businessList,
-            ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter) {
+            ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter, Map<RString, RString> 種類Map) {
 
         List<ShokanKetteiTsuchiShoHihokenshabunItem> retList = new ArrayList<>();
 
@@ -132,36 +126,17 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
 
         RString 通知文１ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_1, ONE, batchPram.getHakkoYMD());
-        IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
-        AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
-        宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-        宛先builder.set基準日(batchPram.getHakkoYMD());
-        宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
-        IAtesaki 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
-        SofubutsuAtesakiSource atesakiSource
-                = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先s).build()).buildSource();
         RString key = RString.EMPTY;
         Decimal 支給金額 = Decimal.ZERO;
         RString 給付の種類 = RString.EMPTY;
         RString 増減理由等 = RString.EMPTY;
-        RString サービス種類コード = RString.EMPTY;
         ShokanKetteiTsuchiShoHihokenshabunItem item = new ShokanKetteiTsuchiShoHihokenshabunItem();
         for (ShokanKetteiTsuchiShoShiharai shoShiharai : businessList) {
-            if (key.equals(getKey(shoShiharai))) {
-                支給金額 = 支給金額.add(shoShiharai.get支給額());
-                if (サービス種類コード.equals(shoShiharai.getサービス種類コード())) {
-                    continue;
-                } else {
-                    給付の種類 = set種類(給付の種類, shoShiharai.get種類());
-                }
-            } else {
-                item = new ShokanKetteiTsuchiShoHihokenshabunItem();
-                key = getKey(shoShiharai);
-                支給金額 = shoShiharai.get支給額();
-                給付の種類 = shoShiharai.get種類();
-                増減理由等 = shoShiharai.get増減理由等();
-                サービス種類コード = shoShiharai.getサービス種類コード();
-            }
+            item = new ShokanKetteiTsuchiShoHihokenshabunItem();
+            key = getJufukuKey(shoShiharai);
+            支給金額 = shoShiharai.get支給額();
+            給付の種類 = 種類Map.get(key);
+            増減理由等 = shoShiharai.get増減理由等();
             if (給付の種類.length() <= 文字数_38) {
                 item.setKyufuShu1(給付の種類);
             } else if (給付の種類.length() <= 文字数_76) {
@@ -196,11 +171,11 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             item.setKetteiYMD(shoShiharai.get決定年月日() == null ? RString.EMPTY : shoShiharai.get決定年月日().wareki().toDateString());
             item.setHonninShiharaiGaku(shoShiharai.get本人支払額() == null ? RString.EMPTY : new RString(shoShiharai.get本人支払額().toString()));
             item.setTaishoYM(shoShiharai.get提供年月() == null ? RString.EMPTY : shoShiharai.get提供年月().wareki().toDateString());
-            if (!RString.isNullOrEmpty(shoShiharai.get支払方法区分コード())) {
-                item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支払方法区分コード()).get名称());
+            if (!RString.isNullOrEmpty(shoShiharai.get支給不支給決定区分())) {
+                item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支給不支給決定区分()).get名称());
             }
             item.setShikyuGaku(new RString(支給金額.toString()));
-            if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharai.get支払方法区分コード())) {
+            if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharai.get支給不支給決定区分())) {
                 item.setRiyuTitle(増減の理由タイトル_不支給);
             } else {
                 item.setRiyuTitle(増減の理由タイトル_支給);
@@ -212,22 +187,12 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             item = set通知文(item, batchPram);
             setJigyoshoJoho(item, shoShiharai);
             setNinshosha(item, ninshoshaSource);
+            SofubutsuAtesakiSource atesakiSource
+                    = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(shoShiharai.get宛先情報()).build()).buildSource();
             setSofubutsuAtesaki(item, atesakiSource);
             retList.add(item);
         }
         return retList;
-    }
-
-    private RString set種類(RString kyufuShu, RString 種類) {
-        if (RString.isNullOrEmpty(kyufuShu)) {
-            return 種類;
-        }
-        RStringBuilder builder = new RStringBuilder(kyufuShu);
-        if (!RString.isNullOrEmpty(種類)) {
-            builder.append(カンマ);
-            builder.append(種類);
-        }
-        return builder.toRString();
     }
 
     private void setTitle(ShokanKetteiTsuchiShoHihokenshabunItem item, ShokanKetteiTsuchiShoShiharai shoShiharai) {
@@ -237,7 +202,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         }
         if (取り消し線を編集する.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_取り消し線))) {
             item.setTitle2_1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり１));
-            if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharai.get支払方法区分コード())) {
+            if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharai.get支給不支給決定区分())) {
                 item.setTitle2_2_1(RString.EMPTY);
                 item.setTitle2_2_2(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり２));
                 item.setTitle2_3_1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル_抹消線あり３));
@@ -325,12 +290,12 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         return 設定値;
     }
 
-    private RString getKey(ShokanKetteiTsuchiShoShiharai shoShiharai) {
-        RStringBuilder rsb = new RStringBuilder();
-        rsb.append(shoShiharai.get被保険者番号().value());
-        rsb.append(shoShiharai.get提供年月() == null ? RString.EMPTY : shoShiharai.get提供年月().toDateString());
-        rsb.append(shoShiharai.get整理番号());
-        return rsb.toRString();
+    private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
+        RStringBuilder key = new RStringBuilder();
+        key.append(shiharai.get被保険者番号().value());
+        key.append(shiharai.get提供年月().wareki().toDateString());
+        key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
+        return key.toRString();
     }
 
     private ShokanKetteiTsuchiShoHihokenshabunItem set通知文(

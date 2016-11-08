@@ -21,9 +21,11 @@ import jp.co.ndensan.reams.db.dba.definition.processprm.dba090010.AtenaSealCreat
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateDBZ100001Entity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.DbTAtenaSealCreateTempTableEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.ShorikekkarisutoichijiTBLEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.entity.report.atenaseal.AtenaSealCreateReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
@@ -79,6 +81,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
     private Map<Decimal, AtenaSealCreateDBZ100001Entity> mapDBZ100001Entity;
     private Map<Decimal, PersonalData> mapPersonalDataList;
     private ShutsuryokujunRelateEntity 出力順Entity;
+    private KoikiZenShichosonJoho koikiZenShichosonJoho;
     private int 帳票枚数;
     private boolean can終了;
     private int 枚数;
@@ -92,6 +95,7 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
 
     @Override
     protected void initialize() {
+        koikiZenShichosonJoho = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records().get(0);
         枚数 = 0;
         mapDBZ100001Entity = new HashMap<>();
         mapPersonalDataList = new HashMap<>();
@@ -233,7 +237,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo(listDBZ100001.get(0).get郵便番号());
         business.setGyoseiku(listDBZ100001.get(0).get行政区());
-        business.setJushoText(listDBZ100001.get(0).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(0).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall1(listDBZ100001.get(0).get方書());
@@ -258,6 +272,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight2(KAKKORIGHT);
         business.setKakkoRight1(KAKKORIGHT);
         business.setCustomerBarCode(listDBZ100001.get(0).getバーコード住所());
+        business.set識別コード1(listDBZ100001.get(0).get識別コード());
+        business.set住所(listDBZ100001.get(0).get住所());
         listBusiness.add(business);
     }
 
@@ -269,7 +285,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku(listDBZ100001.get(i).get行政区());
-        business.setJushoText(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall1(listDBZ100001.get(i).get方書());
@@ -294,6 +320,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight2(KAKKORIGHT);
         business.setKakkoRight1(KAKKORIGHT);
         business.setCustomerBarCode(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード1(listDBZ100001.get(i).get識別コード());
+        business.set住所(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -308,7 +336,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo1(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku1(listDBZ100001.get(i).get行政区());
-        business.setJushoText1(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText1(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall3(listDBZ100001.get(i).get方書());
@@ -333,6 +371,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight4(KAKKORIGHT);
         business.setKakkoRight3(KAKKORIGHT);
         business.setCustomerBarCode1(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード2(listDBZ100001.get(i).get識別コード());
+        business.set住所1(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -347,7 +387,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo2(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku2(listDBZ100001.get(i).get行政区());
-        business.setJushoText2(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText2(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall5(listDBZ100001.get(i).get方書());
@@ -372,6 +422,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight6(KAKKORIGHT);
         business.setKakkoRight5(KAKKORIGHT);
         business.setCustomerBarCode2(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード3(listDBZ100001.get(i).get識別コード());
+        business.set住所2(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -386,7 +438,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo3(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku3(listDBZ100001.get(i).get行政区());
-        business.setJushoText3(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText3(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall7(listDBZ100001.get(i).get方書());
@@ -411,6 +473,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight8(KAKKORIGHT);
         business.setKakkoRight7(KAKKORIGHT);
         business.setCustomerBarCode3(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード4(listDBZ100001.get(i).get識別コード());
+        business.set住所3(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -425,7 +489,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo4(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku4(listDBZ100001.get(i).get行政区());
-        business.setJushoText4(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText4(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall9(listDBZ100001.get(i).get方書());
@@ -450,6 +524,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight10(KAKKORIGHT);
         business.setKakkoRight9(KAKKORIGHT);
         business.setCustomerBarCode4(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード5(listDBZ100001.get(i).get識別コード());
+        business.set住所4(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -464,7 +540,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo5(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku5(listDBZ100001.get(i).get行政区());
-        business.setJushoText5(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText5(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall11(listDBZ100001.get(i).get方書());
@@ -489,6 +575,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight12(KAKKORIGHT);
         business.setKakkoRight11(KAKKORIGHT);
         business.setCustomerBarCode5(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード6(listDBZ100001.get(i).get識別コード());
+        business.set住所5(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -503,7 +591,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo6(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku6(listDBZ100001.get(i).get行政区());
-        business.setJushoText6(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText6(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall13(listDBZ100001.get(i).get方書());
@@ -528,6 +626,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight14(KAKKORIGHT);
         business.setKakkoRight13(KAKKORIGHT);
         business.setCustomerBarCode6(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード7(listDBZ100001.get(i).get識別コード());
+        business.set住所6(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -542,7 +642,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo7(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku7(listDBZ100001.get(i).get行政区());
-        business.setJushoText7(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText7(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall15(listDBZ100001.get(i).get方書());
@@ -567,6 +677,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight16(KAKKORIGHT);
         business.setKakkoRight15(KAKKORIGHT);
         business.setCustomerBarCode7(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード8(listDBZ100001.get(i).get識別コード());
+        business.set住所7(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -581,7 +693,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo8(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku8(listDBZ100001.get(i).get行政区());
-        business.setJushoText8(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText8(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall17(listDBZ100001.get(i).get方書());
@@ -606,6 +728,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight18(KAKKORIGHT);
         business.setKakkoRight17(KAKKORIGHT);
         business.setCustomerBarCode8(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード9(listDBZ100001.get(i).get識別コード());
+        business.set住所8(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -620,7 +744,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo9(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku9(listDBZ100001.get(i).get行政区());
-        business.setJushoText9(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText9(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall19(listDBZ100001.get(i).get方書());
@@ -645,6 +779,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight20(KAKKORIGHT);
         business.setKakkoRight19(KAKKORIGHT);
         business.setCustomerBarCode9(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード10(listDBZ100001.get(i).get識別コード());
+        business.set住所9(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -659,7 +795,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(dateFormat(RDate.getNowDate().toDateString()));
         business.setYubinNo10(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku10(listDBZ100001.get(i).get行政区());
-        business.setJushoText10(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText10(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall21(listDBZ100001.get(i).get方書());
@@ -684,6 +830,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight22(KAKKORIGHT);
         business.setKakkoRight21(KAKKORIGHT);
         business.setCustomerBarCode10(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード11(listDBZ100001.get(i).get識別コード());
+        business.set住所10(listDBZ100001.get(i).get住所());
         if (can終了) {
             listBusiness.add(business);
             帳票枚数 = 0;
@@ -698,7 +846,17 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setPrintTimeStamp(new RString(RDate.getNowDate().toString()));
         business.setYubinNo11(listDBZ100001.get(i).get郵便番号());
         business.setGyoseiku11(listDBZ100001.get(i).get行政区());
-        business.setJushoText11(listDBZ100001.get(i).get住所());
+        RString 住所 = nullToEmpty(listDBZ100001.get(i).get住所());
+        if (processParamter.isIsshichosonmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get市町村名称());
+        }
+        if (processParamter.isIstodofukenmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get都道府県名称());
+        }
+        if (processParamter.isIsgunmeisho()) {
+            住所 = 住所.concat(koikiZenShichosonJoho.get郡名称());
+        }
+        business.setJushoText11(住所);
         if (processParamter.isIskatagaki()) {
             if (現住所.equals(processParamter.getSaiyuusenjyusho())) {
                 business.setKatagakiSmall23(listDBZ100001.get(i).get方書());
@@ -723,6 +881,8 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         business.setKakkoRight24(KAKKORIGHT);
         business.setKakkoRight23(KAKKORIGHT);
         business.setCustomerBarCode11(listDBZ100001.get(i).getバーコード住所());
+        business.set識別コード12(listDBZ100001.get(i).get識別コード());
+        business.set住所11(listDBZ100001.get(i).get住所());
         listBusiness.add(business);
         帳票枚数 = 0;
         can終了 = true;
@@ -750,4 +910,10 @@ public class ShikakuShutokuCyouHyouProcess extends BatchProcessBase<AtenaSealCre
         }
     }
 
+    private RString nullToEmpty(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return RString.EMPTY;
+        }
+        return value;
+    }
 }

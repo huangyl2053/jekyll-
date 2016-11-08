@@ -49,11 +49,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class DBC8020001MainHandler {
 
     private final DBC8020001MainDiv div;
-    private KinyuKikanCode 代表金融機関コード;
-    private RString 振込グループコード;
-    private static final RString TITLE_高額合算 = new RString("高額合算振込明細・振込データ作成");
-    private static final RString TITLE_事業高額 = new RString("総合事業振込明細・振込データ作成");
-    private static final RString TITLE_事業高額合算 = new RString("事業分振込明細・振込データ作成");
     private static final RString メニューID_DBCMN63005 = new RString("DBCMN63005");
     private static final RString メニューID_DBCMNL3003 = new RString("DBCMNL3003");
     private static final RString メニューID_DBCMNN2004 = new RString("DBCMNN2004");
@@ -65,9 +60,12 @@ public class DBC8020001MainHandler {
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
     private static final RString 年度内連番 = new RString("0001");
     private static final RString メッセージ = new RString("委託者情報の取得");
+    private static final RString 振込データを作成する = new RString("振込データを作成する");
+    private static final RString 振込指定日を修正する = new RString("振込指定日を修正する");
     private static final RString INDEX_1 = new RString("1");
     private static final RString INDEX_2 = new RString("2");
     private static final int INDEXSTART = 0;
+    private static final int INDEX_4 = 4;
     private static final int INDEXEND = 6;
 
     /**
@@ -124,17 +122,18 @@ public class DBC8020001MainHandler {
     private void init画面表示内容(RString メニューID, DBC8020001 dbc) {
         DBC8020001MainManager manager = new DBC8020001MainManager();
         DBC8020001 entity = manager.getFurikomiGroupItakushaRelateEntity(メニューID);
-        this.代表金融機関コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
+        KinyuKikanCode 代表金融機関コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
                 get(0).get振込委託者Entity().getKinyuKikanCode();
-        this.振込グループコード = entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode();
+        RString 振込グループコード = entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode();
         div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
                 get(0).get振込委託者Entity().getItakushaCode());
         div.getItakusha().getTxtItakushamei().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
                 get(0).get振込委託者Entity().getItakushamei());
         div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
                 get(0).get振込委託者Entity().getItakushaId().toString()));
-        div.getItakusha().getTxtFurikomiGroupCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().
-                get振込グループEntity().getFurikomiGroupCode());
+        if (null != 代表金融機関コード) {
+            div.getItakusha().getTxtFurikomiGroupCode().setValue(代表金融機関コード.value().concat(振込グループコード));
+        }
         div.getItakusha().getTxtFurikomiGroupMeisho().setValue(entity.getFurikomiGroupItakushaRelateEntity().
                 get振込グループEntity().getFurikomiGroupMeisho());
 
@@ -247,15 +246,12 @@ public class DBC8020001MainHandler {
         switch (メニューID.toString()) {
             case "DBCMN63005":
                 処理名 = ShoriName.給付振込データ作成_高額合算.get名称();
-                div.setTitle(TITLE_高額合算);
                 break;
             case "DBCMNL3003":
                 処理名 = ShoriName.給付振込データ作成_事業高額.get名称();
-                div.setTitle(TITLE_事業高額);
                 break;
             case "DBCMNN2004":
                 処理名 = ShoriName.給付振込データ作成_事業高額合算.get名称();
-                div.setTitle(TITLE_事業高額合算);
                 break;
             default:
                 break;
@@ -375,7 +371,7 @@ public class DBC8020001MainHandler {
      */
     public DBC050021_FurikomimeisaiFurikomiDataKogakuGassanParameter set高額合算BatchParameter() {
         DBC050021_FurikomimeisaiFurikomiDataKogakuGassanParameter parameter = new DBC050021_FurikomimeisaiFurikomiDataKogakuGassanParameter();
-        parameter.set代表金融機関コード(代表金融機関コード);
+        parameter.set代表金融機関コード(new KinyuKikanCode(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEXSTART, INDEX_4)));
         parameter.set再処理フラグ(div.getChkSaisakusei().isAllSelected());
         parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
@@ -383,8 +379,13 @@ public class DBC8020001MainHandler {
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
             parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
         }
-        if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
-            parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+        if (振込データを作成する.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedValue())) {
+            if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
+                parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+            }
+        } else if (振込指定日を修正する.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedValue())
+                && null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
+            parameter.set振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
         }
         if (null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
             parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
@@ -393,7 +394,7 @@ public class DBC8020001MainHandler {
             parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
         }
         parameter.set抽出対象(div.getRadChushutsuTaisho().getSelectedKey());
-        parameter.set振込グループコード(振込グループコード);
+        parameter.set振込グループコード(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEX_4, INDEXEND));
 
         parameter.set支払方法(div.getRadSiharaihohou().getSelectedKey());
         if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {
@@ -421,7 +422,7 @@ public class DBC8020001MainHandler {
      */
     public DBC050022_FurikomimeisaiFurikomiDataJigyoKogakuParameter set事業高額BatchParameter() {
         DBC050022_FurikomimeisaiFurikomiDataJigyoKogakuParameter parameter = new DBC050022_FurikomimeisaiFurikomiDataJigyoKogakuParameter();
-        parameter.set代表金融機関コード(代表金融機関コード);
+        parameter.set代表金融機関コード(new KinyuKikanCode(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEXSTART, INDEX_4)));
         parameter.set再処理フラグ(div.getChkSaisakusei().isAllSelected());
         parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
@@ -439,7 +440,7 @@ public class DBC8020001MainHandler {
             parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
         }
         parameter.set抽出対象(div.getRadChushutsuTaisho().getSelectedKey());
-        parameter.set振込グループコード(振込グループコード);
+        parameter.set振込グループコード(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEX_4, INDEXEND));
 
         parameter.set支払方法(div.getRadSiharaihohou().getSelectedKey());
         if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {
@@ -468,7 +469,7 @@ public class DBC8020001MainHandler {
     public DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassanParameter set事業高額合算BatchParameter() {
         DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassanParameter parameter
                 = new DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassanParameter();
-        parameter.set代表金融機関コード(代表金融機関コード);
+        parameter.set代表金融機関コード(new KinyuKikanCode(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEXSTART, INDEX_4)));
         parameter.set再処理フラグ(div.getChkSaisakusei().isAllSelected());
         parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
@@ -486,7 +487,7 @@ public class DBC8020001MainHandler {
             parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
         }
         parameter.set抽出対象(div.getRadChushutsuTaisho().getSelectedKey());
-        parameter.set振込グループコード(振込グループコード);
+        parameter.set振込グループコード(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEX_4, INDEXEND));
 
         parameter.set支払方法(div.getRadSiharaihohou().getSelectedKey());
         if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {

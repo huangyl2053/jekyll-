@@ -6,10 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0810026;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810026.GoukeiInfoDiv;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -25,6 +26,8 @@ public class GoukeiInfoHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
+    private static final FlexibleYearMonth 平成17年09月 = new FlexibleYearMonth("200509");
+    private static final RString 特定入所者介護サービス費保険請求分合計額 = new RString("特定入所者介護サービス費保険請求分合計額");
 
     /**
      * GoukeiInfoHandler
@@ -40,16 +43,33 @@ public class GoukeiInfoHandler {
      *
      * @param shokanKihon shokanShokujiHiyoList
      * @param shokanShokujiHiyoList shokanShokujiHiyoList
+     * @param サービス年月 サービス年月
+     * @param shokanTokuteiNyushoshaKaigoServiceHiyo shokanTokuteiNyushoshaKaigoServiceHiyo
      */
-    public void initialize(ShokanKihon shokanKihon, List<ShokanShokujiHiyo> shokanShokujiHiyoList) {
+    public void initialize(
+            ShokanKihon shokanKihon,
+            List<ShokanShokujiHiyo> shokanShokujiHiyoList,
+            FlexibleYearMonth サービス年月,
+            ShokanTokuteiNyushoshaKaigoServiceHiyo shokanTokuteiNyushoshaKaigoServiceHiyo) {
         div.getPanelGoukeiInfo().getTxtServiceTanyi().setValue(new Decimal(shokanKihon.getサービス単位数()));
         div.getPanelGoukeiInfo().getTxtHokenSeikyugaku().setValue(shokanKihon.get保険請求額());
         div.getPanelGoukeiInfo().getTxtRiyoshafutangaku().setValue(new Decimal(shokanKihon.get利用者負担額()));
         div.getPanelGoukeiInfo().getTxtKinkyujiShisetsuRyoyo().setValue(shokanKihon.get緊急時施設療養費請求額());
         div.getPanelGoukeiInfo().getTxtTokuteiShinryo().setValue(shokanKihon.get特定診療費請求額());
-        if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
-            div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(
-                    new Decimal(shokanShokujiHiyoList.get(0).get食事提供費請求額()));
+        if (サービス年月.isBeforeOrEquals(平成17年09月)) {
+            if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
+                div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(
+                        new Decimal(shokanShokujiHiyoList.get(0).get食事提供費請求額()));
+            } else {
+                div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(Decimal.ZERO);
+            }
+        } else {
+            div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setLabelLText(特定入所者介護サービス費保険請求分合計額);
+            if (shokanTokuteiNyushoshaKaigoServiceHiyo != null) {
+                div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(new Decimal(shokanTokuteiNyushoshaKaigoServiceHiyo.get保険分請求額合計()));
+            } else {
+                div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(Decimal.ZERO);
+            }
         }
     }
 

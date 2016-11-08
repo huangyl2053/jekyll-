@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class JigyouHoukokuTokeiRelateEntity {
 
     private RString shukeiNum;
-    private RString tateNo;
-    private RString yokoNo;
+    private Decimal tateNo;
+    private Decimal yokoNo;
     private Decimal result;
 }

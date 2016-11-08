@@ -72,6 +72,24 @@ public class KyufuhiTuchiHakkoIchiranReportSource implements IReportSource {
     public RString listCenter_16;
     @ReportItem(name = "listHihokenshaNo_1", length = 10, order = 30)
     public RString listHihokenshaNo_1;
+    @ReportItem(name = "shutsuryokujun_1", length = 10, order = 31)
+    public RString shutsuryokujun_1;
+    @ReportItem(name = "shutsuryokujun_2", length = 10, order = 32)
+    public RString shutsuryokujun_2;
+    @ReportItem(name = "shutsuryokujun_3", length = 10, order = 33)
+    public RString shutsuryokujun_3;
+    @ReportItem(name = "shutsuryokujun_4", length = 10, order = 34)
+    public RString shutsuryokujun_4;
+    @ReportItem(name = "shutsuryokujun_5", length = 10, order = 35)
+    public RString shutsuryokujun_5;
+    @ReportItem(name = "shutsuryokujun_6", length = 10, order = 36)
+    public RString shutsuryokujun_6;
+    @ReportItem(name = "shutsuryokujun_7", length = 10, order = 37)
+    public RString shutsuryokujun_7;
+    @ReportItem(name = "shutsuryokujun_8", length = 10, order = 38)
+    public RString shutsuryokujun_8;
+    @ReportItem(name = "shutsuryokujun_9", length = 10, order = 39)
+    public RString shutsuryokujun_9;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

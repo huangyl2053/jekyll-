@@ -246,21 +246,32 @@
     
     <select resultOrdered="true" id="get被保険者宛名情報"
             resultMap="resultMap_HihokenshaShikibetsuTaishoMeisaiEntity" fetchSize="500">
+        WITH master AS(
         SELECT
             "DbWT3470ServiceMeisai"."renban" AS "DbWT3470ToukeihyoMeisai_renban",
             "DbWT3470ServiceMeisai".*,
-            <include refid="allColumns_DbT1001HihokenshaDaicho" />,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            <include refid="allColumns_DbT1001HihokenshaDaicho" />
         FROM "DbWT3470ServiceMeisai"
         INNER JOIN
         rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON "DbWT3470ServiceMeisai"."hiHokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+	WHERE "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NOT NULL
+	)
+	SELECT 
+            master.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master
         INNER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
         '','','0','0','','','','','','','','','','0','','1','1','1','1','0','0', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"    
-        ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        WHERE "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" IS NOT NULL
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', (
+        SELECT
+        ARRAY_AGG(CAST ("dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+        FROM
+        master
+        ))AS "ShikibetsuTaisho"    
+        ON "dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     
     <select resultOrdered="true" id="get宛名情報抽出処理"

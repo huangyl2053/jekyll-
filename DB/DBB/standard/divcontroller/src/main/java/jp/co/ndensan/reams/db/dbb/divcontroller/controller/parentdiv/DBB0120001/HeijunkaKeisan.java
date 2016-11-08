@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.DBB0
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanValidationHandler;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -121,6 +122,7 @@ public class HeijunkaKeisan {
         fp.add(new RString("一括発行フラグ"), parameter.is一括発行フラグ());
         fp.add(new RString("帳票グループ"), parameter.get帳票グループ());
         fp.add(new RString("文書番号"), parameter.get文書番号());
+        fp.add(new RString("reamsLoginId"), UrControlDataFactory.createInstance().getLoginInfo().getUserId());
         FlowParameterAccessor.merge(fp);
     }
 

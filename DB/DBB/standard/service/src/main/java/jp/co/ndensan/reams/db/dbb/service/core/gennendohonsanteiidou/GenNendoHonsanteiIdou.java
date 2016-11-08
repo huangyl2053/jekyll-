@@ -120,6 +120,7 @@ import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.GyomuConfigJohoClas
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisan;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanInput;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanOutput;
+import jp.co.ndensan.reams.dz.dzx.definition.core.kiwarikeisan.GenzaiTokuchoKiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
@@ -1298,8 +1299,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         Kitsuki 特徴更正月 = 更正月判定.find特徴更正月(処理日付);
         Integer 特徴停止可能期 = get特徴停止可能期(特徴更正月);
         kiwariKeisanInput.set特徴停止可能期(特徴停止可能期);
-        ITsukiShorkiKubun 現在特徴期区分 = 特徴更正月.get月処理区分();
-        kiwariKeisanInput.set現在特徴期区分(Integer.parseInt(現在特徴期区分.get区分().toString()));
+        kiwariKeisanInput.set現在特徴期区分(GenzaiTokuchoKiKubun.本算異動.getコード());
         Kitsuki 過年度更正月 = 更正月判定.find過年度更正月(処理日付);
         RString 現在過年期 = new RString(過年度更正月.get期AsInt());
         kiwariKeisanInput.set現在過年期(現在過年期);

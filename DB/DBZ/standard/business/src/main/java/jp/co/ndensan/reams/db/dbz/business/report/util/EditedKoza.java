@@ -66,7 +66,7 @@ public class EditedKoza {
      * @return 口座種別略称
      */
     public RString get口座種別略称() {
-        return 口座 == null ? RString.EMPTY : 口座.get預金種別().get預金種別略称();
+        return 口座 == null || null == 口座.get預金種別() ? RString.EMPTY : 口座.get預金種別().get預金種別略称();
     }
 
     /**
@@ -304,12 +304,10 @@ public class EditedKoza {
     public RString get振込支店名() {
         if (null == 口座) {
             return RString.EMPTY;
+        } else if (口座.isゆうちょ銀行()) {
+            return RString.EMPTY;
         } else {
-            if (口座.isゆうちょ銀行()) {
-                return RString.EMPTY;
-            } else {
-                return 口座.get支店().get支店名称();
-            }
+            return 口座.get支店().get支店名称();
         }
     }
 
@@ -321,12 +319,10 @@ public class EditedKoza {
     public RString get振込支店カナ名() {
         if (null == 口座) {
             return RString.EMPTY;
+        } else if (口座.isゆうちょ銀行()) {
+            return RString.EMPTY;
         } else {
-            if (口座.isゆうちょ銀行()) {
-                return RString.EMPTY;
-            } else {
-                return 口座.get支店().get支店カナ名称();
-            }
+            return 口座.get支店().get支店カナ名称();
         }
     }
 }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0310003
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.TsuchishoUchiwakeJoken;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.DBB0310003TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.HonKakushuTsuchiUchiwakeKakuninDiv;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0310003.Hon
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteifuka.Honsanteifuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -149,12 +151,9 @@ public class HonKakushuTsuchiUchiwakeKakunin {
             if (new RString(DbbQuestionMessages.変更途中の内容破棄確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                RString 打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
-                TsuchishoUchiwakeJoken 変更打分け方法 = handler.get確認画面の打分け方法(false, 打ち分け条件);
-                handler.切替時保存処理(変更打分け方法);
+                throw new ApplicationException(DbbInformationMessages.打分け方法保存指示.getMessage().evaluate());
             }
         }
-
         return ResponseData.of(div).forwardWithEventName(DBB0310003TransitionEventName.完了).respond();
     }
 

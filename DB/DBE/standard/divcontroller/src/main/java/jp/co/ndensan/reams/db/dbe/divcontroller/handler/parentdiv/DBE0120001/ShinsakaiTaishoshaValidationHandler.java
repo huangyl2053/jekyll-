@@ -44,7 +44,7 @@ public class ShinsakaiTaishoshaValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         List<dgTaishoshaIchiran_Row> ichiranList = div.getDgTaishoshaIchiran().getDataSource();
         if (ichiranList.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.該当データなし)));
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.該当データなし), div.getDgTaishoshaIchiran()));
         }
         return validPairs;
     }

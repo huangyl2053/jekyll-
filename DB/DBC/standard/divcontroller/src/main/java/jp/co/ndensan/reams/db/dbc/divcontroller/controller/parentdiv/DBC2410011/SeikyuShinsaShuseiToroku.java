@@ -191,9 +191,12 @@ public class SeikyuShinsaShuseiToroku {
      * @return ResponseData<SeikyuShinsaShuseiTorokuDiv>
      */
     public ResponseData<SeikyuShinsaShuseiTorokuDiv> onClick_btnHozon(SeikyuShinsaShuseiTorokuDiv div) {
+        int index = div.getDgSeikyuMeisai().getClickedRowId();
+        if (index == -1) {
+            index = index + 1;
+        }
         SeikyuShinsaShuseiTorokuBusiness 住宅改修理由書事業者明細情報 = ViewStateHolder
-                .get(ViewStateKeys.住宅改修理由書事業者情報明細, SeikyuShinsaShuseiTorokuCollect.class).get事業者情報List().get(div.
-                        getDgSeikyuMeisai().getClickedRowId());
+                .get(ViewStateKeys.住宅改修理由書事業者情報明細, SeikyuShinsaShuseiTorokuCollect.class).get事業者情報List().get(index);
         JutakuKaishuRiyushoTesuryoMeisaiManager 出力明細MANAGER = new JutakuKaishuRiyushoTesuryoMeisaiManager();
         JutakuKaishuRiyushoTesuryoKetteiManager 出力決定MANAGER = new JutakuKaishuRiyushoTesuryoKetteiManager();
         JutakuKaishuRiyushoTesuryoShukeiManager 出力集計MANAGER = new JutakuKaishuRiyushoTesuryoShukeiManager();
@@ -240,7 +243,9 @@ public class SeikyuShinsaShuseiToroku {
 
     private void 出力決定削除(JutakuKaishuRiyushoTesuryoKetteiManager 出力決定MANAGER, SeikyuShinsaShuseiTorokuBusiness businessResult) {
         if (DBCMNE_1005.equals(ResponseHolder.getMenuID())) {
-            出力決定MANAGER.save住宅改修理由書作成手数料請求決定(businessResult.getDbT3094().deleted());
+            if (businessResult.getDbT3094() != null) {
+                出力決定MANAGER.save住宅改修理由書作成手数料請求決定(businessResult.getDbT3094().deleted());
+            }
         }
     }
 

@@ -85,6 +85,26 @@ module DBC {
                 return new UZA.Label(this.convFiledName("lblGyomuCode"));
             }
 
+            public lblKetteiTsuchiJoho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblKetteiTsuchiJoho"));
+            }
+
+            public txtKetteiTsuchiSakuseiYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKetteiTsuchiSakuseiYMD"));
+            }
+
+            public txtKetteiTsuchiNo(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtKetteiTsuchiNo"));
+            }
+
+            public lblFurikomiMeisaiJoho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblFurikomiMeisaiJoho"));
+            }
+
+            public txtFurikomiMeisaiSakuseiYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtFurikomiMeisaiSakuseiYMD"));
+            }
+
         }
 
      }

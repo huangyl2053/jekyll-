@@ -108,6 +108,12 @@ public class MainPanelHandler {
     private static final RString コード種別 = new RString("0046");
     private static final RString 特 = new RString("特");
     private static final RString 普 = new RString("普");
+    private RString 徴収方法翌4月;
+    private RString 徴収方法翌5月;
+    private RString 徴収方法翌6月;
+    private RString 徴収方法翌7月;
+    private RString 徴収方法翌8月;
+    private RString 徴収方法翌9月;
 
     /**
      * MainPanelHandler
@@ -603,6 +609,10 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         }
+        div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxtYoku4Gatsu(
+                get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
+        div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
+                翌の名_4.toString(), DataGridCellBgColor.bgColorLightRed);
     }
 
     private void edit現在の月の徴収方法はなしの場合() {
@@ -750,6 +760,7 @@ public class MainPanelHandler {
                 特別徴収停止事由コード = 停止事由コード;
             }
         }
+        set徴収方法翌年4月から(徴収方法データ);
         徴収方法_変更後 = 徴収方法_変更後.createBuilderForEdit().
                 set徴収方法4月(get徴収方法のコード(徴収方法データ.get徴収方法4月(),
                                 div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu())).
@@ -775,12 +786,12 @@ public class MainPanelHandler {
                                 div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu())).
                 set徴収方法3月(get徴収方法のコード(徴収方法データ.get徴収方法3月(),
                                 div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu())).
-                set徴収方法翌4月(徴収方法データ.get徴収方法翌4月()).
-                set徴収方法翌5月(徴収方法データ.get徴収方法翌5月()).
-                set徴収方法翌6月(徴収方法データ.get徴収方法翌6月()).
-                set徴収方法翌7月(徴収方法データ.get徴収方法翌7月()).
-                set徴収方法翌8月(徴収方法データ.get徴収方法翌8月()).
-                set徴収方法翌9月(徴収方法データ.get徴収方法翌9月()).
+                set徴収方法翌4月(徴収方法翌4月).
+                set徴収方法翌5月(徴収方法翌5月).
+                set徴収方法翌6月(徴収方法翌6月).
+                set徴収方法翌7月(徴収方法翌7月).
+                set徴収方法翌8月(徴収方法翌8月).
+                set徴収方法翌9月(徴収方法翌9月).
                 set仮徴収_基礎年金番号(徴収方法データ.get仮徴収_基礎年金番号()).
                 set仮徴収_年金コード(徴収方法データ.get仮徴収_年金コード()).
                 set仮徴収_捕捉月(徴収方法データ.get仮徴収_捕捉月()).
@@ -818,5 +829,59 @@ public class MainPanelHandler {
             名称 = 名称_3;
         }
         return 名称;
+    }
+
+    private void set徴収方法翌年4月から(jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法データ) {
+        boolean isNeedSet4月から普徴 = false;
+        if (月_10.equals(div.getChoshuInfo().getDdlFucho().getSelectedValue())
+                && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法データ.get徴収方法10月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法データ.get徴収方法10月()))) {
+            isNeedSet4月から普徴 = true;
+        }
+        if (月_11.equals(div.getChoshuInfo().getDdlFucho().getSelectedValue())
+                && ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法データ.get徴収方法11月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法データ.get徴収方法11月())) {
+            isNeedSet4月から普徴 = true;
+        }
+
+        if (月_12.equals(div.getChoshuInfo().getDdlFucho().getSelectedValue())
+                && ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法データ.get徴収方法12月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法データ.get徴収方法12月())) {
+            isNeedSet4月から普徴 = true;
+        }
+
+        if (月_1.equals(div.getChoshuInfo().getDdlFucho().getSelectedValue())
+                && ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法データ.get徴収方法1月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法データ.get徴収方法1月())) {
+            isNeedSet4月から普徴 = true;
+        }
+
+        if (月_2.equals(div.getChoshuInfo().getDdlFucho().getSelectedValue())
+                && ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法データ.get徴収方法2月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法データ.get徴収方法2月())) {
+            isNeedSet4月から普徴 = true;
+        }
+
+        if (月_3.equals(div.getChoshuInfo().getDdlFucho().getSelectedValue())
+                && ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法データ.get徴収方法3月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法データ.get徴収方法3月())) {
+            isNeedSet4月から普徴 = true;
+        }
+
+        if (isNeedSet4月から普徴) {
+            徴収方法翌4月 = コード_3;
+            徴収方法翌5月 = コード_3;
+            徴収方法翌6月 = コード_3;
+            徴収方法翌7月 = コード_3;
+            徴収方法翌8月 = コード_3;
+            徴収方法翌9月 = コード_3;
+        } else {
+            徴収方法翌4月 = 徴収方法データ.get徴収方法翌4月();
+            徴収方法翌5月 = 徴収方法データ.get徴収方法翌5月();
+            徴収方法翌6月 = 徴収方法データ.get徴収方法翌6月();
+            徴収方法翌7月 = 徴収方法データ.get徴収方法翌7月();
+            徴収方法翌8月 = 徴収方法データ.get徴収方法翌8月();
+            徴収方法翌9月 = 徴収方法データ.get徴収方法翌9月();
+        }
     }
 }

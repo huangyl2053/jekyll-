@@ -137,11 +137,12 @@ public class ShikakuFuseigoShuseiPanel {
             }
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ViewStateHolder.put(ViewStateKeys.台帳状態, null);
             return onLoad(div);
         }
         DaichoFuseigoJotai 台帳状態 = ViewStateHolder.get(ViewStateKeys.台帳状態, DaichoFuseigoJotai.class);
         ViewStateHolder.put(ViewStateKeys.台帳状態, null);
-        if (台帳状態 == DaichoFuseigoJotai.不整合あり) {
+        if (台帳状態 == DaichoFuseigoJotai.不整合あり || 台帳状態 == DaichoFuseigoJotai.未作成) {
             RString 台帳種別 = ViewStateHolder.get(ViewStateKeys.不整合修正中, ShikakuFuseigoBusiness.class).get台帳種別();
             IKojin 個人情報 = ViewStateHolder.get(ViewStateKeys.個人情報, IKojin.class);
             FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.不整合理由, FuseigoRiyu.class);

@@ -141,7 +141,7 @@ public class BatchPanelHandler {
         }
         parameter.setKasyuujiyuulist(回収事由コード);
         if (div.getCcdChohyoShutsuryokujun().get出力順ID() != null) {
-            parameter.setSyuturyokujunid(div.getCcdChohyoShutsuryokujun().get出力順ID());
+            parameter.setSyuturyokujunid(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
         }
         return parameter;
     }

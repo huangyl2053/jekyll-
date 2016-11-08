@@ -294,14 +294,16 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
 
     @Override
     protected void afterExecute() {
-        KyufuKanrihyoSofuIchiranReport report = new KyufuKanrihyoSofuIchiranReport(kyufuKanrihyoSofuIchiranEntity,
-                出力順Map,
-                改頁リスト);
-        report.writeBy(reportSourceWriter);
-        kyufuKanrihyoSofuIchirancsvWriter.writeLine(kyufuKanrihyoSofuIchirancsvEntity);
-        アクセスログ対象追加(kyufukanrihyoOutDoBillOutEntity);
-        kyufuKanrihyoSofuIchirancsvWriter.writeLine(集計項目csv明細作成());
-        kyufuKanrihyoSofuIchirancsvWriter.close();
+        if (0 < ヘッダー項目は1行目) {
+            KyufuKanrihyoSofuIchiranReport report = new KyufuKanrihyoSofuIchiranReport(kyufuKanrihyoSofuIchiranEntity,
+                    出力順Map,
+                    改頁リスト);
+            report.writeBy(reportSourceWriter);
+            kyufuKanrihyoSofuIchirancsvWriter.writeLine(kyufuKanrihyoSofuIchirancsvEntity);
+            アクセスログ対象追加(kyufukanrihyoOutDoBillOutEntity);
+            kyufuKanrihyoSofuIchirancsvWriter.writeLine(集計項目csv明細作成());
+            kyufuKanrihyoSofuIchirancsvWriter.close();
+        }
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);

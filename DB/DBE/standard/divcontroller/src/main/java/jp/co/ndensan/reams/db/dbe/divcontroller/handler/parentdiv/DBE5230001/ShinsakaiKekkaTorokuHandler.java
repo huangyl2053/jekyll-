@@ -427,7 +427,7 @@ public class ShinsakaiKekkaTorokuHandler {
         div.getKobetsuHyojiArea().getDdlNijiHantei();
         div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().clearValue();
         div.getKobetsuHyojiArea().getTxtNinteiKikanTo().clearValue();
-        div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedKey(RString.EMPTY);
+        div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedKey(new RString("key0"));
         div.getKobetsuHyojiArea().getTxtShinsakaiMemo().clearValue();
         div.getKobetsuHyojiArea().getTxtShinsakaiIken().clearValue();
         div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setSelectedKey(RString.EMPTY);

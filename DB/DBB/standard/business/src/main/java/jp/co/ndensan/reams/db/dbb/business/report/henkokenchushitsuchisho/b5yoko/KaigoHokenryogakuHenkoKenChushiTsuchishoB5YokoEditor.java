@@ -138,11 +138,11 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
 
         Decimal 増減額 = 編集後本算定通知書共通情報.get増減額();
-        if (0 < Decimal.ZERO.compareTo(増減額)) {
+        if (Decimal.ZERO.compareTo(増減額) < 0) {
             reportSource.koseiNaiyo = 更正内容;
             reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(増減額, 0);
             reportSource.koseiRiyu = new RString("円の増額です。");
-        } else if (Decimal.ZERO.compareTo(増減額) < 0) {
+        } else if (0 < Decimal.ZERO.compareTo(増減額)) {
             reportSource.koseiNaiyo = 更正内容;
             reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(増減額.multiply(-1), 0);
             reportSource.koseiRiyu = new RString("円の減額です。");

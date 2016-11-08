@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadai
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.HyojunFutanGengakuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.ItakuKeikakuTodokedejohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.KyufugakuGengakujohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.RiyoshaFutanGenmenJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.RoreiFukushiNenkinjohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.SeikatsuHogojohoEntity;
@@ -91,10 +92,9 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setSentoStep1(JukyushaDaichoReportSource source) {
         source.printTimeStamp = get印刷日時();
-        List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
-        if (要介護認定情報EntityList != null && !要介護認定情報EntityList.isEmpty()
-                && 要介護認定情報EntityList.get(0).get先頭Entity() != null) {
-            SentoEntity 先頭Entity = 要介護認定情報EntityList.get(0).get先頭Entity();
+        YokaigoNinteiJohoEntity 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
+        if (要介護認定情報EntityList != null && 要介護認定情報EntityList.get先頭Entity() != null) {
+            SentoEntity 先頭Entity = 要介護認定情報EntityList.get先頭Entity();
             get先頭1(source, 先頭Entity);
             get先頭2(source, 先頭Entity);
 
@@ -102,9 +102,10 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
     }
 
     private void setYokaigoNinteiLower(JukyushaDaichoReportSource source) {
-        List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
-        if (要介護認定情報EntityList != null && !要介護認定情報EntityList.isEmpty() && 要介護認定情報EntityList.size() - 1 >= index) {
-            YokaigoNinteiJohoEntity 要介護認定情報Entity = 要介護認定情報EntityList.get(index);
+        YokaigoNinteiJohoEntity 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
+        if (要介護認定情報EntityList.get要介護認定情報() != null && !要介護認定情報EntityList.get要介護認定情報().isEmpty()
+                && 要介護認定情報EntityList.get要介護認定情報().size() - 1 >= index) {
+            NinteiKekkaJohoEntity 要介護認定情報Entity = 要介護認定情報EntityList.get要介護認定情報().get(index);
             if (要介護認定情報Entity.get認定区分() != null) {
                 source.ninteiKbn = 要介護認定情報Entity.get認定区分();
             }
@@ -584,10 +585,10 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setSentoStep2(JukyushaDaichoReportSource source) {
         if (this.帳票出力用受給者台帳.get要介護認定情報EntityList() != null
-                && !this.帳票出力用受給者台帳.get要介護認定情報EntityList().isEmpty()) {
-            List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
-            if (要介護認定情報EntityList.size() - 1 >= index && 要介護認定情報EntityList.get(index).get先頭Entity() != null) {
-                SentoEntity 先頭Entity = 要介護認定情報EntityList.get(index).get先頭Entity();
+                && this.帳票出力用受給者台帳.get要介護認定情報EntityList().get先頭Entity() != null) {
+            YokaigoNinteiJohoEntity 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
+            if (要介護認定情報EntityList.get先頭Entity() != null) {
+                SentoEntity 先頭Entity = 要介護認定情報EntityList.get先頭Entity();
                 get先頭3(source, 先頭Entity);
 
             }
@@ -747,7 +748,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
     }
 
     private JukyushaDaichoReportSource get要介護認定情報1(JukyushaDaichoReportSource source,
-            YokaigoNinteiJohoEntity 要介護認定情報Entity) {
+            NinteiKekkaJohoEntity 要介護認定情報Entity) {
         if (要介護認定情報Entity.get調査依頼日() != null) {
             source.listNinteiUpper_6 = 要介護認定情報Entity.get調査依頼日().wareki().toDateString();
         }
@@ -802,7 +803,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
     }
 
     private JukyushaDaichoReportSource get要介護認定情報2(JukyushaDaichoReportSource source,
-            YokaigoNinteiJohoEntity 要介護認定情報Entity) {
+            NinteiKekkaJohoEntity 要介護認定情報Entity) {
         if (要介護認定情報Entity.get資格証明書発行日１() != null) {
             source.listNinteiCenter_11 = 要介護認定情報Entity.get資格証明書発行日１().wareki().toDateString();
         }

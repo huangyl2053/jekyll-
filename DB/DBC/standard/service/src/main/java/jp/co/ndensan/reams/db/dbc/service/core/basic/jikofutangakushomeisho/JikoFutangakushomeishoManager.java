@@ -110,7 +110,10 @@ public class JikoFutangakushomeishoManager {
         parameter.set申請状況区分(申請状況区分);
         parameter.set支給申請区分(支給申請区分);
         DbT3068KogakuGassanShinseishoEntity 対象者データ = mapper.get対象者データ(parameter);
-        return new KogakuGassanShinseisho(対象者データ);
+        if (対象者データ != null) {
+            return new KogakuGassanShinseisho(対象者データ);
+        }
+        return null;
     }
 
     /**
@@ -126,7 +129,10 @@ public class JikoFutangakushomeishoManager {
             RString 保険者番号,
             RString 支給申請書整理番号) {
         DbT3070KogakuGassanJikoFutanGakuEntity dbt3070 = 高額合算自己負担額Dac.selectJikoFutanGaku(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
-        return new KogakuGassanJikoFutanGaku(dbt3070);
+        if (dbt3070 != null) {
+            return new KogakuGassanJikoFutanGaku(dbt3070);
+        }
+        return null;
     }
 
     /**
@@ -143,7 +149,10 @@ public class JikoFutangakushomeishoManager {
             RString 支給申請書整理番号) {
 
         DbT3170JigyoKogakuGassanJikoFutanGakuEntity dbt3170 = 事業高額合算自己負担額Dac.selectByKey(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
-        return new JigyoKogakuGassanJikoFutanGaku(dbt3170);
+        if (dbt3170 != null) {
+            return new JigyoKogakuGassanJikoFutanGaku(dbt3170);
+        }
+        return null;
     }
 
     /**
@@ -160,7 +169,10 @@ public class JikoFutangakushomeishoManager {
             FlexibleYear 対象年度,
             RString 支給申請書整理番号) {
         DbT3068KogakuGassanShinseishoEntity 再計算区分データ = 高額合算申請書Dac.selectSaikeisannkubun(被保険者番号, 保険者番号, 対象年度, 支給申請書整理番号);
-        return new KogakuGassanShinseisho(再計算区分データ);
+        if (再計算区分データ != null) {
+            return new KogakuGassanShinseisho(再計算区分データ);
+        }
+        return null;
     }
 
     /**

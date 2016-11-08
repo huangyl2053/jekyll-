@@ -67,9 +67,20 @@
     <select id="select被保険者宛名情報" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakugassanshikyuketteitsuchisho.KougakuGassanShikyuKetteiTsuchishoParameter"
             resultMap="resultMap_HihokenshaShikibetsuTaisho" fetchSize="500">
+        WITH master as( 
         SELECT 
             "DbT1001HihokenshaDaicho"."shichosonCode" AS  "dbT1001HihokenshaDaicho_shichosonCode",
             "DbT1001HihokenshaDaicho"."shikibetsuCode" AS  "dbT1001HihokenshaDaicho_shikibetsuCode",
+            "DbT1001HihokenshaDaicho"."idoYMD" AS "dbT1001HihokenshaDaicho_idoYMD",
+            "DbT1001HihokenshaDaicho"."edaNo" AS "dbT1001HihokenshaDaicho_edaNo"
+        FROM
+            rgdb."DbV1001HihokenshaDaicho"  AS "DbT1001HihokenshaDaicho"
+        WHERE
+            "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = false
+            AND "DbT1001HihokenshaDaicho"."hihokenshaNo" = #{被保険者番号}
+        )
+        SELECT
+            master.*,
             "ShikibetsuTaisho"."kanaShimei"         AS   "ShikibetsuTaisho_kanaShimei",
             "ShikibetsuTaisho"."kanjiShimei"        AS   "ShikibetsuTaisho_kanjiShimei",
             "ShikibetsuTaisho"."seinengappiYMD"     AS   "ShikibetsuTaisho_seinengappiYMD",
@@ -80,16 +91,22 @@
             "ShikibetsuTaisho"."juminShubetsuCode"  AS   "ShikibetsuTaisho_juminShubetsuCode",
             "ShikibetsuTaisho"."jusho"              AS   "ShikibetsuTaisho_jusho"
         FROM
-            rgdb."DbV1001HihokenshaDaicho"  AS "DbT1001HihokenshaDaicho"
+            master
         LEFT JOIN    
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',        
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )      
+            ) AS "ShikibetsuTaisho"
         ON
-            "DbT1001HihokenshaDaicho"."shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode"
-        WHERE
-            "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = false
-            AND "DbT1001HihokenshaDaicho"."hihokenshaNo" = #{被保険者番号}
+            "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"    
         ORDER BY
-            "DbT1001HihokenshaDaicho"."idoYMD" DESC, "DbT1001HihokenshaDaicho"."edaNo" DESC 
+            "dbT1001HihokenshaDaicho_idoYMD" DESC, "dbT1001HihokenshaDaicho_edaNo" DESC 
         LIMIT 1
    </select>
    

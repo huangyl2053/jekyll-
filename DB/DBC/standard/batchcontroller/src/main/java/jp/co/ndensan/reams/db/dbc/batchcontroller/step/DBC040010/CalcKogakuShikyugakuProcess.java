@@ -129,6 +129,7 @@ public class CalcKogakuShikyugakuProcess extends BatchProcessBase<CalcKogakuShik
     }
 
     private void beforeUpdate() {
+        util.update高額支給額加算額(updEntity, wK_KogakuShikyugaku);
         if (wKm_blnIchiranKBN1 && !wKm_blnIchiranKBN2) {
             wKm_strIchiranhyoKBN = 定数_1;
         } else if (!wKm_blnIchiranKBN1 && wKm_blnIchiranKBN2) {

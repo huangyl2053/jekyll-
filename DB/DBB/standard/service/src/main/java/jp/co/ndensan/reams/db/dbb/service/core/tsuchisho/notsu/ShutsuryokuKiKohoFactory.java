@@ -29,7 +29,7 @@ public class ShutsuryokuKiKohoFactory {
     private static final int 設定なし = -999;
     private static final RString 文字列_期 = new RString("期（");
     private static final RString 文字列_月分 = new RString("月）分");
-    private static final RString 文字列_月全件 = new RString("月）~");
+    private static final RString 文字列_月全件 = new RString("月）～");
     private static final RString 文字列_前期 = new RString("前期");
     private static final RString 文字列_中期 = new RString("中期");
     private static final RString 文字列_後期 = new RString("後期");

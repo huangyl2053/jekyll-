@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsutorokushal
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,8 +37,11 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
     private Code henkoJiyu_Hihokensha;
     private List<Code> jutokuTekiyo;
     private List<Code> jutokuKaijo;
-    private RString orderBy;
-    private boolean orderByFlag;
+//    private RString orderBy;
+//    private boolean orderByFlag;
+    private RString shutsuryokuSort;
+    private Boolean userShutsuryokuSort;
+    private IShikibetsuTaishoPSMSearchKey key;
 
     /**
      * コンストラクタ。
@@ -76,7 +80,12 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
                 henkoJiyu_Hihokensha,
                 jutokuTekiyo,
                 jutokuKaijo,
-                orderBy,
-                orderByFlag);
+                shutsuryokuSort,
+                userShutsuryokuSort,
+                key
+        //                orderBy,
+        //                orderByFlag
+
+        );
     }
 }

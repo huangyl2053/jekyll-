@@ -261,8 +261,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
                 .concat(entity.get履歴番号key().toString());
         if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
             preBreakKey = nowBreakKey;
-            if (entity.get口座情報() != null && entity.get口座情報().getUaT0310KozaEntity() != null
-                    && entity.get口座情報().getUaT0310KozaEntity().getKozaId() != 0L) {
+            if (entity.get口座情報() != null && entity.get口座情報().getUaT0310KozaEntity() != null) {
                 lstKinyuKikanEntity.addAll(entity.get口座情報().getKinyuKikanEntity());
             }
             preEntity = entity;
@@ -285,8 +284,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
             lstKinyuKikanEntity.clear();
-            if (entity.get口座情報() != null && entity.get口座情報().getUaT0310KozaEntity() != null
-                    && entity.get口座情報().getUaT0310KozaEntity().getKozaId() != 0L) {
+            if (entity.get口座情報() != null && entity.get口座情報().getUaT0310KozaEntity() != null) {
                 lstKinyuKikanEntity.addAll(entity.get口座情報().getKinyuKikanEntity());
             }
         }

@@ -8,9 +8,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
             fetchSize="500">
         SELECT
-        <include refid="allColumns_DbT3068KogakuGassanShinseisho"/>
-        ,<include refid="allColumns_DbT3070KogakuGassanJikoFutanGaku"/>
-        ,<include refid="allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
+        *
         
         FROM
         
@@ -22,6 +20,7 @@
         JOIN 
         (SELECT 
         <include refid="allColumns_DbT3070KogakuGassanJikoFutanGaku"/>
+        ,MAX("DbT3070KogakuGassanJikoFutanGaku"."rirekiNo")
         FROM rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"  GROUP BY
        
         <include refid="group_DbT3070KogakuGassanJikoFutanGaku"/>) AS "DbT3070KogakuGassanJikoFutanGaku" 
@@ -32,6 +31,7 @@
         JOIN 
         (SELECT 
         <include refid="allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai"/>
+        ,MAX("DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo")
         FROM       
         rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071KogakuGassanJikoFutanGakuMeisai" 
         GROUP BY <include refid="group_DbT3071KogakuGassanJikoFutanGakuMeisai"/>) AS "DbT3071KogakuGassanJikoFutanGakuMeisai"
@@ -82,13 +82,14 @@
         FROM
         (SELECT 
         <include refid="allColumns_DbT3068KogakuGassanShinseisho"/>
-        ,MAX(dbT3068KogakuGassanShinseisho_rirekiNo)
+        ,MAX("DbT3068KogakuGassanShinseisho"."rirekiNo")
         FROM rgdb."DbT3068KogakuGassanShinseisho" AS "DbT3068KogakuGassanShinseisho"  GROUP BY
         <include refid="group_DbT3068KogakuGassanShinseisho"/>) AS "DbT3068KogakuGassanShinseisho"
         
         JOIN 
         (SELECT 
         <include refid="allColumns_DbT3170JigyoKogakuGassanJikoFutanGaku" />
+        ,MAX("DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo")
         FROM
         rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "DbT3170JigyoKogakuGassanJikoFutanGaku"  GROUP BY
         <include refid="group_DbT3170JigyoKogakuGassanJikoFutanGaku"/>) AS "DbT3170JigyoKogakuGassanJikoFutanGaku"
@@ -99,6 +100,7 @@
         AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_shikyuShinseishoSeiriNo" = "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
         JOIN 
         (SELECT <include refid="allColumns_DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" />
+        ,MAX("DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."rirekiNo")
         FROM       
         rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" GROUP BY 
         <include refid="group_DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"/>) AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
@@ -157,7 +159,7 @@
         partition by
         "hihokenshaNo" 
         order by
-        "idoYMD" DESC
+        "idoYMD" DESC ,"edaNo" DESC
         ) AS rank_number 
         FROM
         rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"

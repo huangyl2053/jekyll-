@@ -50,8 +50,8 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
     private static final RString 通帳記号 = new RString("通帳記号");
     private static final RString 口座番号 = new RString("口座番号");
     private static final RString 通帳番号 = new RString("通帳番号");
-    private static final RString 対象 = new RString("対象");
-    private static final RString 対象外 = new RString("対象外");
+    private static final RString 対象 = new RString("A");
+    private static final RString 対象外 = new RString("B");
     private static final RString 接続文字 = new RString("～");
     private static final RString 支払方法区分コードONE = new RString("1");
     private static final RString 支払方法区分コードTWO = new RString("2");

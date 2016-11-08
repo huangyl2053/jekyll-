@@ -15,6 +15,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IdoChushutsuDaichoNewEntity {
 
+    private SenTouEntity 先頭情報;
     private NinteiKekkaJohoEntity 要介護認定情報;
     private FutanGendogakuNinteiEntity 負担限度額認定情報List;
     private HihokenshaDaichoEntity 資格情報List;

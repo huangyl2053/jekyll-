@@ -21,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TokkiTextA4Report extends Report<TokkiTextA4ReportSource> {
 
-    private final TokkiText1A4Business data;
     private static final int MAXCOUNT = 30;
+    private static final RString テキスト全面イメージ = new RString("1");
+    private final TokkiText1A4Business data;
 
     /**
      * インスタンスを生成します。
@@ -37,16 +38,31 @@ public class TokkiTextA4Report extends Report<TokkiTextA4ReportSource> {
     public void writeBy(ReportSourceWriter<TokkiTextA4ReportSource> reportSourceWriter) {
         List<TokkiA4Entity> 短冊情報リスト = data.get短冊情報リスト();
         List<RString> 短冊リスト = get短冊リスト(短冊情報リスト);
-        for (int i = 0; i < 短冊リスト.size(); i++) {
-            if (i < MAXCOUNT) {
-                ITokkiTextA4Editor editor1 = new TokkiTextPage1A4Editor(data, 短冊情報リスト, 短冊リスト, i);
-                ITokkiTextA4Builder builder = new TokkiTextA4Builder(editor1);
-                reportSourceWriter.writeLine(builder);
-            } else {
-                int page = (i + MAXCOUNT) / MAXCOUNT;
-                ITokkiTextA4Editor editor2 = new TokkiTextPage2A4Editor(data, 短冊情報リスト, 短冊リスト, i, page - 1);
-                ITokkiTextA4Builder builder2 = new TokkiTextA4Builder(editor2);
-                reportSourceWriter.writeLine(builder2);
+        List<RString> テキスト全面List = data.getTokkiText();
+        if (テキスト全面イメージ.equals(data.get特記パターン())) {
+            for (int i = 0; i < テキスト全面List.size(); i++) {
+                if (i == 0) {
+                    ITokkiTextA4Editor editor1 = new TokkiTextPage1A4Editor(data, 短冊情報リスト, 短冊リスト, テキスト全面List, i);
+                    ITokkiTextA4Builder builder = new TokkiTextA4Builder(editor1);
+                    reportSourceWriter.writeLine(builder);
+                } else {
+                    ITokkiTextA4Editor editor2 = new TokkiTextPage2A4Editor(data, 短冊情報リスト, 短冊リスト, テキスト全面List, i, i + 1);
+                    ITokkiTextA4Builder builder2 = new TokkiTextA4Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
+            }
+        } else {
+            for (int i = 0; i < 短冊リスト.size(); i++) {
+                if (i < MAXCOUNT) {
+                    ITokkiTextA4Editor editor1 = new TokkiTextPage1A4Editor(data, 短冊情報リスト, 短冊リスト, テキスト全面List, i);
+                    ITokkiTextA4Builder builder = new TokkiTextA4Builder(editor1);
+                    reportSourceWriter.writeLine(builder);
+                } else {
+                    int page = (i + MAXCOUNT) / MAXCOUNT;
+                    ITokkiTextA4Editor editor2 = new TokkiTextPage2A4Editor(data, 短冊情報リスト, 短冊リスト, テキスト全面List, i, page);
+                    ITokkiTextA4Builder builder2 = new TokkiTextA4Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
             }
         }
     }

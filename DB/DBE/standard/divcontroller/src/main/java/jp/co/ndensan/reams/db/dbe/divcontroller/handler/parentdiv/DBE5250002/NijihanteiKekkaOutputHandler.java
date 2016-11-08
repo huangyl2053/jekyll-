@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE491001.DBE491001_NichijiShinchokuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525002.DBE525002_HanteiKekkaHokenshaParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.NijihanteiKekkaOutputDiv;
@@ -216,23 +217,20 @@ public class NijihanteiKekkaOutputHandler {
     /**
      * 判定結果情報出力(保険者)作成画面入力するデータより、バッチ用パラメータクラスを作成します。
      *
-     * @return DBE525002_HanteiKekkaHokenshaParameter
+     * @return DBE491001_NichijiShinchokuParameter
      */
-    public DBE525002_HanteiKekkaHokenshaParameter setCSVBatchParameter() {
+    public DBE491001_NichijiShinchokuParameter setCSVBatchParameter() {
         List<RString> shinseishoKanriNo = new ArrayList<>();
         for (dgTaishoshaIchiran_Row row : nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource()) {
             if (row.getSelected()) {
                 shinseishoKanriNo.add(row.getShinseishoKanriNo());
             }
         }
-        DBE525002_HanteiKekkaHokenshaParameter hanteibatchParameter
-                = new DBE525002_HanteiKekkaHokenshaParameter();
-        hanteibatchParameter.setShinseishoKanriNo(shinseishoKanriNo);
-        hanteibatchParameter.setNijiHanteiYMDFrom(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
-                : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()));
-        hanteibatchParameter.setNijiHanteiYMDTo(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
-                : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
-        return hanteibatchParameter;
+        DBE491001_NichijiShinchokuParameter shinchokuParameter
+                = new DBE491001_NichijiShinchokuParameter();
+        shinchokuParameter.setShinseishoKanriNoList(shinseishoKanriNo);
+        shinchokuParameter.setFayirukuben(new RString("1"));
+        return shinchokuParameter;
     }
 
     /**
@@ -244,7 +242,7 @@ public class NijihanteiKekkaOutputHandler {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号.value());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("申請書管理番号"), 申請書管理番号.value());
         return PersonalData.of(申請書管理番号, expandedInfo);
     }
 

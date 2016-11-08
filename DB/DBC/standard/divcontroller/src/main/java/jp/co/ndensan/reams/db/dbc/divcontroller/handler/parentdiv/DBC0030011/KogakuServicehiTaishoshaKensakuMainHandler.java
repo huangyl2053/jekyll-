@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaitaishoshakensaku.Kog
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.JidoShokanTaishoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.TaishoshaKensakuHoho;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.HihokenshaKensakuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainDiv;
@@ -22,11 +21,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.dgKo
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensaku;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbx.service.core.view.HihokenshaDaichoAliveManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
@@ -99,14 +99,10 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
     /**
      * 該当者検索画面から対象を選択して戻ってきた場合、被保番号と氏名
      *
-     * @param 資格対象者 TaishoshaKey
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別コード ShikibetsuCode
      */
-    public void load該当者検索(TaishoshaKey 資格対象者) {
-        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
-        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
-        }
-        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
+    public void set被保険者名(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
         List<JuminShubetsu> 住民種別List = new ArrayList();
@@ -124,7 +120,6 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         builder.set住民状態(住民状態List);
         builder.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
         builder.set識別コード(識別コード);
-        // TODO QA1765
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         AtenaMeisho 名称 = KogakuShokaiTaishoshaKensaku.createInstance().get氏名(searchKey);
         if (名称 != null && !名称.isEmpty()) {
@@ -132,7 +127,23 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         } else {
             div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
         }
-        div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoNo().setValue(被保険者番号.getColumnValue());
+    }
+
+    /**
+     * 「被保番号」onBlur事件です。
+     */
+    public void onBlur_txtHihoNo() {
+        RString 被保番号R = div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoNo().getValue();
+        if (被保番号R == null || 被保番号R.isEmpty()) {
+            return;
+        }
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(被保番号R);
+        HihokenshaDaichoAlive entity = new HihokenshaDaichoAliveManager().get最新の被保険者台帳履歴(被保険者番号);
+        if (entity != null && entity.get識別コード() != null && !entity.get識別コード().isEmpty()) {
+            set被保険者名(被保険者番号, entity.get識別コード());
+        } else {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+        }
     }
 
     /**

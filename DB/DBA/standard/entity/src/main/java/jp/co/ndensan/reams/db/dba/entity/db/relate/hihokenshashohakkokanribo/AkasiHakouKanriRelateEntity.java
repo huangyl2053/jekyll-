@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,6 +29,7 @@ public class AkasiHakouKanriRelateEntity {
     private boolean koumukumeyifukaflg;
     private boolean renbanfukaflg;
     private boolean hizikehensyuuflg;
-    private AkasiHakouKanriEntity akasiHakouKanriEntity;
+//    private AkasiHakouKanriEntity akasiHakouKanriEntity;
+    private List<AkasiHakouKanriEntity> akasiHakouKanriEntityList;
 
 }

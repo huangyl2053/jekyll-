@@ -161,7 +161,7 @@ public class NengakuHokenryoKeisan {
 
         RString rank;
         if (nengakuHokenryoHoji.getRank() == null || nengakuHokenryoHoji.getRank().isEmpty()) {
-            rank = new RString("1");
+            rank = new RString("01");
         } else {
             rank = nengakuHokenryoHoji.getRank();
         }

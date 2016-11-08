@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -98,11 +97,10 @@ public class JigyoKogakuReportProcess extends BatchProcessBase<FurikomimeisaiDat
     private boolean is頁計;
     private boolean is総合計;
 
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
-    @BatchWriter
     private BatchReportWriter<FurikomiMeisaiIchiranJigyoKogakuSource> batchReportWriter;
     private ReportSourceWriter<FurikomiMeisaiIchiranJigyoKogakuSource> reportSourceWriter;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
 
     @Override
     protected void initialize() {
@@ -149,12 +147,14 @@ public class JigyoKogakuReportProcess extends BatchProcessBase<FurikomimeisaiDat
     protected void createWriter() {
         shoriKekkaKakuninListTempTable
                 = new BatchEntityCreatedTempTableWriter(処理結果確認リスト一時TBL, ShoriKekkaKakuninListTempTableEntity.class);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
     protected void process(FurikomimeisaiDataShikyugakuEntity entity) {
+        if (index == INT_0) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        }
         if (振込明細一時 != null) {
             FurikomiMeisaiIchiranJigyoKogakuParameter target = getTarget(振込明細一時);
             FurikomiMeisaiIchiranJigyoKogakuReport report = new FurikomiMeisaiIchiranJigyoKogakuReport(target, is頁計, is総合計);
@@ -173,6 +173,7 @@ public class JigyoKogakuReportProcess extends BatchProcessBase<FurikomimeisaiDat
             FurikomiMeisaiIchiranJigyoKogakuParameter target = getTarget(振込明細一時);
             FurikomiMeisaiIchiranJigyoKogakuReport report = new FurikomiMeisaiIchiranJigyoKogakuReport(target, is頁計, is総合計);
             report.writeBy(reportSourceWriter);
+            batchReportWriter.close();
         }
         if (index == INT_0 && Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(processParameter.get処理区分())) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = get処理結果確認リスト一時();
@@ -199,7 +200,7 @@ public class JigyoKogakuReportProcess extends BatchProcessBase<FurikomimeisaiDat
     private FurikomiMeisaiIchiranJigyoKogakuParameter getTarget(FurikomimeisaiDataShikyugakuEntity entity) {
         FurikomiMeisaiIchiranJigyoKogakuParameter target = new FurikomiMeisaiIchiranJigyoKogakuParameter();
         target.set振込明細一時(entity.get振込明細一時Entity());
-        target.setシステム日付(YMDHMS.now());
+        target.setシステム日付(processParameter.getシステム日時());
         target.set連番(index);
         target.set帳票タイトル(項目名);
         RString 並び順１ = RString.EMPTY;

@@ -229,16 +229,15 @@
             AND 振込明細一時TBL."kozaDataFlag" = TRUE
         ORDER BY
         振込明細一時TBL."kinyuKikanCode" ASC,
-        振込明細一時TBL."kinyuKikanShitenCode" ASC,
+        振込明細一時TBL."kinyuKikanShitenCode" ASC
+        ${出力順},
         振込明細一時TBL."hihokenshaNo" ASC,
         振込明細一時TBL."serviceTeikyoYM" ASC,
         振込明細一時TBL."dataKubun" ASC,
         振込明細一時TBL."seiriNo" ASC,
         振込明細一時TBL."rirekiNo" ASC,
         様式番号別金額."yoshikiNo" ASC
-        ${出力順}
-    </sql>    
-    
+      </sql>    
     
     <select resultOrdered="true" id="select様式番号名称"
             resultMap="resultMap_yoshikiNoJoho" fetchSize="500">

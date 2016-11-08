@@ -18,16 +18,12 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 基準収入額適用申請書_異動分作成のハンドラクラスです。
@@ -183,28 +179,6 @@ public class ShinseishoTorokuHandler {
         parameter.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
         parameter.set市町村名(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
         return parameter;
-    }
-
-    /**
-     * 前排他のンメソッドです。
-     *
-     *
-     */
-    public void set前排他() {
-        LockingKey 前排他キー = new LockingKey(ResponseHolder.getMenuID());
-        if (!RealInitialLocker.tryGetLock(前排他キー)) {
-            throw new PessimisticLockingException();
-        }
-    }
-
-    /**
-     * 前排他のreleaseです。
-     *
-     *
-     */
-    public void release前排他() {
-        LockingKey 排他キー = new LockingKey(ResponseHolder.getMenuID());
-        RealInitialLocker.release(排他キー);
     }
 
     /**

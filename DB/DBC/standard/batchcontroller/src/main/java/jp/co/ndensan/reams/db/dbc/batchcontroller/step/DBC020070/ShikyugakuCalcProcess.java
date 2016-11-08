@@ -410,7 +410,6 @@ public class ShikyugakuCalcProcess extends BatchKeyBreakBase<ShikyugakuCalcTempE
                 事業高額合算.add(高額合算);
                 事業_支給額_対象者分のみ = addDecimal(事業_支給額_対象者分のみ, 高額合算.get支給額());
                 事業_支給額_70歳以上_対象者分のみ = addDecimal(事業_支給額_70歳以上_対象者分のみ, 高額合算.get支給額_70歳以上());
-                break;
             }
             事業_負担額_70歳以上 = addDecimal(事業_負担額_70歳以上, 高額合算.get負担額_70歳以上());
             事業_支給額_70歳以上 = addDecimal(事業_支給額_70歳以上, 高額合算.get支給額_70歳以上());
@@ -513,7 +512,7 @@ public class ShikyugakuCalcProcess extends BatchKeyBreakBase<ShikyugakuCalcTempE
             entity.setShikyugaku_taishoKeisanKaishiYMD(高額合算.get証明書().getZenFutangaku_taishoKeisanKaishiYMD());
             entity.setShikyugaku_taishoKeisanShuryoYMD(高額合算.get証明書().getZenFutangaku_taishoKeisanShuryoYMD());
             entity.setShikyugaku_setaiFutanSogaku(addDecimal(全明細_負担額_70歳以上_合計, 全明細_負担額_70歳未満_合計));
-            entity.setShikyugaku_setaiGassanGaku(全明細_支給額_合計);
+            entity.setShikyugaku_setaiGassanGaku(全明細_負担額_合計);
             entity.setShikyugaku_over70_SetaiGassanGaku(全明細_負担額_70歳以上_合計);
             entity.setShikyugaku_shotokuKubun(支給額計算一時_区分1.getShikyugaku_shotokuKubun());
             entity.setShikyugaku_over70_ShotokuKubun(支給額計算一時_区分1.getShikyugaku_over70_ShotokuKubun());

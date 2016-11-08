@@ -41,6 +41,12 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
     private final List<RString> 構成市町村コードList;
     private final RString 集計年月;
     private final RString 給付集計区分;
+    private final RString 報告年;
+    private final RString 報告月;
+    private final RString 集計対象年;
+    private final RString 集計対象月;
+    private final RString 統計対象区分;
+    private final RString 表番号;
     private static final int INDEX_4 = 4;
     private static final int INDEX_6 = 6;
     private static final RString 市町村区分_構成市町村 = new RString("1");
@@ -50,6 +56,8 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
     private static final RString 過去集計分旧市町村区分_2 = new RString("2");
     private static final RString 給付集計区分_1 = new RString("1");
     private static final RString 給付集計区分_2 = new RString("2");
+    private static final RString 表番号_1 = new RString("01");
+    private static final RString 表番号_3 = new RString("03");
 
     private JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString 集計番号,
             RString 一時テーブル名,
@@ -67,7 +75,13 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
             RString 構成市町村区分,
             List<RString> 構成市町村コードList,
             RString 集計年月,
-            RString 給付集計区分) {
+            RString 給付集計区分,
+            RString 報告年,
+            RString 報告月,
+            RString 集計対象年,
+            RString 集計対象月,
+            RString 統計対象区分,
+            RString 表番号) {
         this.集計番号 = 集計番号;
         this.一時テーブル名 = 一時テーブル名;
         this.プリントコントロール区分 = プリントコントロール区分;
@@ -85,6 +99,12 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         this.構成市町村コードList = 構成市町村コードList;
         this.集計年月 = 集計年月;
         this.給付集計区分 = 給付集計区分;
+        this.報告年 = 報告年;
+        this.報告月 = 報告月;
+        this.集計対象年 = 集計対象年;
+        this.集計対象月 = 集計対象月;
+        this.統計対象区分 = 統計対象区分;
+        this.表番号 = 表番号;
     }
 
     /**
@@ -108,7 +128,8 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, 市町村コードList,
                 null, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分);
+                RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**
@@ -122,7 +143,8 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(集計番号,
                 一時テーブル名, RString.EMPTY, RString.EMPTY, null,
                 null, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**
@@ -174,7 +196,8 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         YMDHMS 基準日時 = 処理日時;
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY, RString.EMPTY, RString.EMPTY, 市町村コード,
                 市町村コードリスト, null, null, new RString("DBU"), 処理名, 処理枝番, 年度,
-                基準年月日, 基準日時, RString.EMPTY, null, RString.EMPTY, RString.EMPTY);
+                基準年月日, 基準日時, RString.EMPTY, null, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**
@@ -225,7 +248,8 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         集計番号List.add(ShukeiNo.toValue(new RString("1400")).getコード());
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 市町村コードリスト, 集計番号List, 表番号List, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**
@@ -277,6 +301,38 @@ public final class JigyoHokokuGeppoIppanGenbutsuMybatisParamter implements IMyBa
         集計番号List.add(ShukeiNo.toValue(new RString("1393")).getコード());
         return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 市町村コードリスト, 集計番号List, 表番号List, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, YMDHMS.now(), RString.EMPTY, null, 集計年月, 給付集計区分, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+    }
+
+    /**
+     * 事業報告統計データmybatisのパラメータを生成します。
+     *
+     * @param 報告年月 報告年月
+     * @param 市町村コード 市町村コード
+     * @param 集計年月 集計年月
+     * @param 給付集計区分 給付集計区分
+     *
+     * @return JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter
+     */
+    public static JigyoHokokuGeppoIppanGenbutsuMybatisParamter createJigyoHokokuTokeiDataParam(
+            RString 報告年月,
+            RString 集計年月,
+            RString 市町村コード,
+            RString 給付集計区分) {
+        RString 報告年 = 報告年月.substring(0, INDEX_4);
+        RString 報告月 = 報告年月.substring(INDEX_4);
+        RString 集計対象年 = 集計年月.substring(0, INDEX_4);
+        RString 集計対象月 = 集計年月.substring(INDEX_4);
+        RString 表番号 = RString.EMPTY;
+        if (給付集計区分_1.equals(給付集計区分)) {
+            表番号 = 表番号_1;
+        } else if (給付集計区分_2.equals(給付集計区分)) {
+            表番号 = 表番号_3;
+        }
+        return new JigyoHokokuGeppoIppanGenbutsuMybatisParamter(RString.EMPTY, RString.EMPTY, RString.EMPTY, 市町村コード,
+                null, null, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, null, RString.EMPTY, null, RString.EMPTY, RString.EMPTY, 報告年,
+                報告月, 集計対象年, 集計対象月, new RString("1"), 表番号);
     }
 }

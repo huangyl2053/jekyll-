@@ -7,12 +7,17 @@ package jp.co.ndensan.reams.db.dbu.business.core.ippangenbutsu;
 
 import jp.co.ndensan.reams.db.dbu.definition.message.DbuInformationMessages;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuProcessParamter;
+import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyoHokokuIppanGenbutsuRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyouHoukokuTokeiRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.KyufuJissekiKonkyoEUCEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.KyufuJissekiKonkyoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.shorikekkakakuninlist.ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.uz.uza.batch.api.BatchInfo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +31,11 @@ import lombok.Setter;
 @Setter
 public class JigyoHokokuIppanGenbutsuBusiness {
 
+    private static final RString 給付集計区分_1 = new RString("1");
+    private static final RString 給付集計区分_2 = new RString("2");
+    private static final Code 表番号_1 = new Code("01");
+    private static final Code 表番号_3 = new Code("03");
+    private static final int INDEX_4 = 4;
     private JigyoHokokuGeppoIppanGenbutsuProcessParamter processParameter;
 
     /**
@@ -111,4 +121,37 @@ public class JigyoHokokuIppanGenbutsuBusiness {
         return eucEntity;
     }
 
+    /**
+     * DbT7021JigyoHokokuTokeiDataEntityの設定クラスです。
+     *
+     * @param entity entity
+     * @return DbT7021JigyoHokokuTokeiDataEntity
+     */
+    public DbT7021JigyoHokokuTokeiDataEntity set事業報告統計データEntity(JigyouHoukokuTokeiRelateEntity entity) {
+        DbT7021JigyoHokokuTokeiDataEntity dbT7021Entity = new DbT7021JigyoHokokuTokeiDataEntity();
+        dbT7021Entity.setHokokuYSeireki(new FlexibleYear(processParameter.get報告年月().substring(0, INDEX_4)));
+        dbT7021Entity.setHokokuM(processParameter.get報告年月().substring(INDEX_4));
+        dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年月().substring(0, INDEX_4)));
+        dbT7021Entity.setShukeiTaishoM(processParameter.get集計年月().substring(INDEX_4));
+        dbT7021Entity.setToukeiTaishoKubun(new RString("1"));
+        dbT7021Entity.setShichosonCode(new LasdecCode(processParameter.get市町村コード()));
+        if (給付集計区分_1.equals(processParameter.get給付集計区分())) {
+            dbT7021Entity.setHyoNo(表番号_1);
+        } else if (給付集計区分_2.equals(processParameter.get給付集計区分())) {
+            dbT7021Entity.setHyoNo(表番号_3);
+        }
+        dbT7021Entity.setShukeiNo(rstringToCode(entity.getShukeiNum()));
+        dbT7021Entity.setTateNo(entity.getTateNo());
+        dbT7021Entity.setYokoNo(entity.getYokoNo());
+        dbT7021Entity.setShukeiKekkaAtai(entity.getResult());
+        return dbT7021Entity;
+
+    }
+
+    private Code rstringToCode(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return Code.EMPTY;
+        }
+        return new Code(date);
+    }
 }
