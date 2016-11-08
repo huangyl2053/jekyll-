@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.Hons
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.dgChushutsuKikan_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.dgHonsanteiIdoShoriKakunin_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidogennendo.HonsanteiIdoGennendo;
+import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendo.HonsanteiIdoKanendo;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.tsuchisho.notsu.ShutsuryokuKiKohoFactory;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -120,6 +121,8 @@ public class HonsanteiIdoHandler {
     private static final RString 口座対象者プリント条件KEY = new RString("口座対象者プリント条件");
     private static final RString すべて選択 = new RString("（すべて選択）");
     private static final RString 定数_特別徴収捕捉対象者のみ = new RString("特別徴収捕捉対象者のみ");
+    private static final RString ハイフン = new RString("－");
+    private static final RString 処理名_個人住民税課税確定 = new RString("【最新】個人住民税課税確定");
 
     /**
      * コンストラクタです。
@@ -273,7 +276,18 @@ public class HonsanteiIdoHandler {
             } else if (算定月_2.equals(算定月)) {
                 flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定);
             }
-            // TODO QA#85917 処理名＝住民税更正分課税確定処理の場合  この部分についてはTODOとして。
+            row = new dgHonsanteiIdoShoriKakunin_Row();
+            row.setTxtShoriMei(処理名_個人住民税課税確定);
+            row.setTxtJokyo(ハイフン);
+            RDateTime 処理日時 = HonsanteiIdoKanendo.createInstance().get処理日時();
+            if (処理日時 != null) {
+                RString 年月日 = 処理日時.getDate().wareki().toDateString();
+                RString 時刻 = 処理日時.getTime().
+                        toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+                RString 基準日時 = 年月日.concat(RString.HALF_SPACE).concat(時刻);
+                row.setTxtShoriNichiji(基準日時);
+            }
+            rowList.add(row);
         } else {
             List<ShoriDateKanri> entityList = HonsanteiIdoGennendo.createInstance().getShoriDateKanriList(
                     new RString(Integer.valueOf(算定月.toString())),
@@ -450,7 +464,9 @@ public class HonsanteiIdoHandler {
                 dataSource.add(new KeyValueDataSource(entity.get期月().get期(), entity.get表示文字列()));
             }
             div.getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setDataSource(dataSource);
-            div.getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
+            if (!dataSource.isEmpty()) {
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
+            }
             KitsukiList 期月_リスト = new FuchoKiUtil().get期月リスト().filtered本算定期間();
             if (!RString.isNullOrEmpty(算定期)
                     && Integer.parseInt(算定期.toString()) <= 期月_リスト.get最終法定納期().get期AsInt()) {
