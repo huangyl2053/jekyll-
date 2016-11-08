@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.furikomimeisaifurikomidata.FurikomiMeisaiYoshikiBetsuKingakuShukei;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200101detail.FurikomiMeisaiIchiranDetailReport;
-import jp.co.ndensan.reams.db.dbc.business.report.dbc200101gokei.FurikomiMeisaiIchiranGokeiReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
@@ -28,7 +27,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.gokeidata.Goke
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.MeisaiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.PrintNoKingakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101detail.FurikomiMeisaiIchiranDetailReportSource;
-import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101gokei.FurikomiMeisaiIchiranGokeiReportSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShikyugakuJohoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.shikyugakujohomanager.ShikyugakuJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -134,9 +132,6 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
     @BatchWriter
     private BatchReportWriter<FurikomiMeisaiIchiranDetailReportSource> batchReportWriter_明細一覧表;
     private ReportSourceWriter<FurikomiMeisaiIchiranDetailReportSource> reportSourceWriter_明細一覧表;
-    @BatchWriter
-    private BatchReportWriter<FurikomiMeisaiIchiranGokeiReportSource> batchReportWriter_合計一覧表;
-    private ReportSourceWriter<FurikomiMeisaiIchiranGokeiReportSource> reportSourceWriter_合計一覧表;
 
     @Override
     protected void initialize() {
@@ -150,7 +145,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         if (parameter.get出力順ID() != 0) {
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
             long 帳票出力順ID = parameter.get出力順ID();
-            outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200101_明細.getReportId(), 帳票出力順ID);
+            outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200101.getReportId(), 帳票出力順ID);
             if (outputOrder != null) {
                 orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                         create(ShikyugakuJohoOrderKey.class, outputOrder).replace("order by", ","), NUM5);
@@ -186,11 +181,8 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         shoriKekkaKakuninListTempTable
                 = new BatchEntityCreatedTempTableWriter(処理結果確認リスト一時TBL, ShoriKekkaKakuninListTempTableEntity.class);
         batchReportWriter_明細一覧表 = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBC.DBC200101_明細.getReportId().value(), SubGyomuCode.DBC介護給付).create();
+                ReportIdDBC.DBC200101.getReportId().value(), SubGyomuCode.DBC介護給付).create();
         reportSourceWriter_明細一覧表 = new ReportSourceWriter<>(batchReportWriter_明細一覧表);
-        batchReportWriter_合計一覧表 = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBC.DBC200101_合計.getReportId().value(), SubGyomuCode.DBC介護給付).create();
-        reportSourceWriter_合計一覧表 = new ReportSourceWriter<>(batchReportWriter_合計一覧表);
     }
 
     @Override
@@ -218,7 +210,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
             printNoKingakuEntity.set名寄せ件数(t.get名寄せ件数());
             印字様式番号別金額List.add(printNoKingakuEntity);
             振込明細一覧表明細.set印字様式番号別金額List(印字様式番号別金額List);
-            FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
+            FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
                     RDateTime.now(), 設定値);
             report.writeBy(reportSourceWriter_明細一覧表);
             if (t.get振込明細一時Entity().getServiceTeikyoYM().isBefore(制度改正施行日)) {
@@ -247,7 +239,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
                 list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
                 振込明細一覧表明細.set印字様式番号別金額List(list);
-                FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
+                FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
                         RDateTime.now(), 設定値);
                 report.writeBy(reportSourceWriter_明細一覧表);
                 list.clear();
@@ -261,7 +253,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
                 振込明細一覧表明細.set印字様式番号別金額List(list);
                 振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
                 if (2 == count) {
-                    FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
+                    FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
                             RDateTime.now(), 設定値);
                     report.writeBy(reportSourceWriter_明細一覧表);
                     count = 0;
@@ -324,8 +316,9 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         振込明細一覧表合計.get(NUM13).set要支援件数(振込明細一覧表合計.get(NUM11).get要支援件数().add(振込明細一覧表合計.get(NUM12).get要支援件数()));
         振込明細一覧表合計.get(NUM13).set要支援金額(振込明細一覧表合計.get(NUM11).get要支援金額().add(振込明細一覧表合計.get(NUM12).get要支援金額()));
         for (GokeiDataEntity entity : 振込明細一覧表合計) {
-            FurikomiMeisaiIchiranGokeiReport report = new FurikomiMeisaiIchiranGokeiReport(entity, outputOrder, 設定値, RDateTime.now());
-            report.writeBy(reportSourceWriter_合計一覧表);
+            FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(null, entity, outputOrder, parameter.get支払方法(),
+                    RDateTime.now(), 設定値);
+            report.writeBy(reportSourceWriter_明細一覧表);
         }
     }
 

@@ -59,7 +59,7 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
     private static final RString 処理区分_振込指定日修正 = new RString("2");
     private static final RString 処理区分_明細一覧表作成 = new RString("3");
 
-    private static final ReportId REPORTID = ReportIdDBC.DBC200101_明細.getReportId();
+    private static final ReportId REPORTID = ReportIdDBC.DBC200101.getReportId();
     private static final RString 出力有無 = new RString("なし");
     private static final RString 処理対象 = new RString("【処理対象】");
     private static final RString 処理区分 = new RString("【処理区分】");
