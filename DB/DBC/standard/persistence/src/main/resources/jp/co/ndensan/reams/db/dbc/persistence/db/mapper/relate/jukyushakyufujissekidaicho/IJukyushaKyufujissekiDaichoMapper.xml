@@ -347,6 +347,9 @@
             , DbT1001_tmp2."PSM_gaikokujinKanaName" as "psm_tmp2_gaikokujinKanaName"
             , DbT1001_tmp2."PSM_kanaTsushoName" as "psm_tmp2_kanaTsushoName"
             , DbT1001_tmp2."PSM_jukiTorokuNo" as "psm_tmp2_jukiTorokuNo"
+            , DbT3017."jigyoshaName" AS "dbT7060_jigyoshaName"
+            , DbT3118."meisho" AS "dbT3118_meisho"
+            , DbT3118."ryakusho" AS "dbT3118_ryakusho"
           FROM
             rgdb."DbT3017KyufujissekiKihon" AS DbT3017
             INNER JOIN(
@@ -583,24 +586,19 @@
                                 , PSM."kanaTsushoName" as "PSM_kanaTsushoName"
                                 , PSM."jukiTorokuNo" as "PSM_jukiTorokuNo" 
                         FROM
-                                (
-                                    SELECT
-                                            *
-                                    FROM 
-                                            rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-                                    WHERE
-                                            #{被保険者番号_開始} <![CDATA[<=]]> DbT1001."hihokenshaNo"
-                                            AND DbT1001."hihokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
-                                    ORDER BY
-                                            DbT1001."idoYMD" DESC,
-                                            DbT1001."edaNo" DESC
-                                ) AS DbT1001_tmp1
+                                rgdb."DbV1001HihokenshaDaicho" AS DbT1001_tmp1
                         INNER JOIN 
                                 rgua.${psmShikibetsuTaisho} AS PSM
                         ON 
                                 PSM."shikibetsuCode" = DbT1001_tmp1."shikibetsuCode" 
                                           ) AS DbT1001_tmp2
               ON DbT3017."hiHokenshaNo" = DbT1001_tmp2."DbT1001_tmp1_hihokenshaNo"
+            LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS DbT7060
+            ON DbT7060."jigyoshaNo" = DbT3017."kyotakuKaigoShienJigyoshoNo"
+            LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
+            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
           WHERE
               '201204' <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
               <if test="対象年月flag">
@@ -1862,18 +1860,7 @@
                                 , PSM."kanaTsushoName" as "PSM_kanaTsushoName"
                                 , PSM."jukiTorokuNo" as "PSM_jukiTorokuNo" 
                         FROM
-                                (
-                                    SELECT
-                                            *
-                                    FROM 
-                                            rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-                                    WHERE
-                                            #{被保険者番号_開始} <![CDATA[<=]]> DbT1001."hihokenshaNo"
-                                            AND DbT1001."hihokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
-                                    ORDER BY
-                                            DbT1001."idoYMD" DESC,
-                                            DbT1001."edaNo" DESC
-                                ) AS DbT1001_tmp1
+                               rgdb."DbV1001HihokenshaDaicho" AS DbT1001_tmp1
                         INNER JOIN 
                                 rgua.${psmShikibetsuTaisho} AS PSM
                         ON 

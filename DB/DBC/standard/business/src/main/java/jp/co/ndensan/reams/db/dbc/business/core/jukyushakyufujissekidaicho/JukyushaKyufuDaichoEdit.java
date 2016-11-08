@@ -7,19 +7,25 @@ package jp.co.ndensan.reams.db.dbc.business.core.jukyushakyufujissekidaicho;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoReport;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KinkyuuziShisetuRyouyouEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KinkyuuziShisetuRyouyouRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KojinyoTyohyoDataKomoku;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.MeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.MeisaiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShuukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShuukeiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiServiceHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiServiceHiRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -28,6 +34,11 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  * @reamsid_L DBC-3080-030 dongyabin
  */
 public class JukyushaKyufuDaichoEdit {
+
+    private static final RString 入力識別番号_3411 = new RString("3411");
+    private static final RString 入力識別番号_3421 = new RString("3421");
+    private static final RString 入力識別番号_7131 = new RString("7131");
+    private static final RString 入力識別番号_2131 = new RString("2131");
 
     /**
      * List明細をセットです
@@ -257,5 +268,53 @@ public class JukyushaKyufuDaichoEdit {
             decimal = Decimal.ZERO;
         }
         return decimal;
+    }
+
+    /**
+     * 受給者給付台帳を出力します。
+     *
+     * @param entity entity
+     * @param jukyushaKyufuDaicho jukyushaKyufuDaicho
+     * @param reportSourceWriter reportSourceWriter
+     */
+    public void report受給者給付台帳(KihonRelateEntity entity,
+            JukyushaKyufuJissekidaichoData jukyushaKyufuDaicho,
+            ReportSourceWriter<JukyushaKyufuJissekidaichoReportSource> reportSourceWriter) {
+        if (入力識別番号_3411.equals(entity.getDbT3017_inputShikibetsuNo())
+                || 入力識別番号_3421.equals(entity.getDbT3017_inputShikibetsuNo())) {
+            report3411_3421(jukyushaKyufuDaicho, reportSourceWriter);
+        }
+        if (入力識別番号_7131.equals(entity.getDbT3017_inputShikibetsuNo())
+                || 入力識別番号_2131.equals(entity.getDbT3017_inputShikibetsuNo())) {
+            report7131_2131(jukyushaKyufuDaicho, reportSourceWriter);
+        }
+    }
+
+    private void report3411_3421(JukyushaKyufuJissekidaichoData jukyushaKyufuDaicho,
+            ReportSourceWriter<JukyushaKyufuJissekidaichoReportSource> reportSourceWriter) {
+        KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
+        // TODO ヘッダー1の設定不明です。QA提出待ち
+        個人用帳票データ.setヘッダー1(RString.EMPTY);
+        個人用帳票データ.setヘッダー2(new RString(" 受付年月日              負担者番号      負担額      支給額      審査年月"));
+        個人用帳票データ.setヘッダー3(new RString(" 決定年月日"));
+        // TODO ヘッダー1の設定不明です。QA提出待ち
+        個人用帳票データ.set明細1(RString.EMPTY);
+        個人用帳票データ.set明細3(RString.EMPTY);
+        個人用帳票データ.set明細4(RString.EMPTY);
+        個人用帳票データ.set明細6(RString.EMPTY);
+        jukyushaKyufuDaicho.setヘッダー1(個人用帳票データ.getヘッダー1());
+        jukyushaKyufuDaicho.setヘッダー2(個人用帳票データ.getヘッダー2());
+        jukyushaKyufuDaicho.setヘッダー3(個人用帳票データ.getヘッダー3());
+        jukyushaKyufuDaicho.set明細1(個人用帳票データ.get明細1());
+        jukyushaKyufuDaicho.set明細3(個人用帳票データ.get明細3());
+        jukyushaKyufuDaicho.set明細4(個人用帳票データ.get明細4());
+        jukyushaKyufuDaicho.set明細6(個人用帳票データ.get明細6());
+        JukyushaKyufuJissekidaichoReport report = new JukyushaKyufuJissekidaichoReport(jukyushaKyufuDaicho);
+        report.writeBy(reportSourceWriter);
+    }
+
+    private void report7131_2131(JukyushaKyufuJissekidaichoData jukyushaKyufuDaicho,
+            ReportSourceWriter<JukyushaKyufuJissekidaichoReportSource> reportSourceWriter) {
+
     }
 }
