@@ -764,7 +764,7 @@
         "月別ランクTemp"."shichosonCode3Gatsu" AS "KuBunnGaTsurakuTemp_shichosonCode3Gatsu"
     </sql>
     
-    <resultMap id="resultMap_FukaCalculateEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaCalculateEntity" autoMapping="true">
+    <resultMap id="resultMap_FukaCalculateEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaCalculateHachiEntity" autoMapping="true">
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo" />
         <id column="dbT1001HihokenshaDaicho_idoYMD" />
         <id column="dbT1001HihokenshaDaicho_edaNo" />
