@@ -43,6 +43,7 @@ public class KyufukanrihyoOutDoBillOutProcess extends BatchKeyBreakBase<Kyufukan
             new RString(KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource.ReportSourceFields.kyotakuServiceKubun.name())
     ));
     private KyufukanrihyoOutProcessParameter parameter;
+    private static final int 値6 = 6;
     @BatchWriter
     private BatchReportWriter<KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource> batchReportWriter;
     private ReportSourceWriter<KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource> reportSourceWriter;
@@ -79,7 +80,12 @@ public class KyufukanrihyoOutDoBillOutProcess extends BatchKeyBreakBase<Kyufukan
         HihokenshaTempEntity 被保険者一時Entity = currentEntity.get被保険者一時Entity();
         KyufuKanrihyoKyotakuYoboSogoJigyoServiceEntity 給付管理票Entity = new KyufuKanrihyoKyotakuYoboSogoJigyoServiceEntity();
         給付管理票Entity.set更新区分(自己作成管理一時Entity.getKoshinKubun());
-        給付管理票Entity.set保険者番号(自己作成管理一時Entity.getHokenshaNo());
+        if (自己作成管理一時Entity.getHokenshaNo().length() == 値6) {
+            給付管理票Entity.set保険者番号(自己作成管理一時Entity.getHokenshaNo());
+        } else if (値6 < 自己作成管理一時Entity.getHokenshaNo().length()) {
+            給付管理票Entity.set保険者番号(自己作成管理一時Entity.getHokenshaNo()
+                    .substring(自己作成管理一時Entity.getHokenshaNo().length() - 値6, 自己作成管理一時Entity.getHokenshaNo().length()));
+        }
         給付管理票Entity.set保険者名(自己作成管理一時Entity.getHokenshaName());
         給付管理票Entity.set被保険者番号(自己作成管理一時Entity.getHihokenshaNo().getColumnValue());
         給付管理票Entity.set宛名カナ名称(被保険者一時Entity.getKanaMeisho());
