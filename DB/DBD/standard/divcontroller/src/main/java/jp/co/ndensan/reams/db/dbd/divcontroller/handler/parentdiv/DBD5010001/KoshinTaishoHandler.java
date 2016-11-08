@@ -99,6 +99,7 @@ public class KoshinTaishoHandler {
     public void youKihoKoushiDb(KoshinTaishoDiv div) {
         for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
             KoshinTaishoFinder.createInstance().get要介護認定申請情報の取得(row.getShinseishoKanriNo());
+            KoshinTaishoFinder.createInstance().insert受給者台帳情報(row.getShinseishoKanriNo());
         }
     }
 

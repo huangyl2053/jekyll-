@@ -24,7 +24,7 @@
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_rirekiNo"
         AND DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_logicalDeletedFlag" = FALSE
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
         ON
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_shoKisaiHokenshaNo"
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo"
@@ -74,7 +74,7 @@
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_kanriKubun"
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_rirekiNo"
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
         ON
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_shoKisaiHokenshaNo"
         AND DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo"
@@ -203,7 +203,7 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.noDeleted_DbT4021ShiharaiHohoHenko" />) AS DbT4021ShiharaiHohoHenko
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
         ON
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo" and
         DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_kanriKubun" and
@@ -244,7 +244,7 @@
         <id property="支払方法変更Entity.kanriKubun" column="dbT4021ShiharaiHohoHenko_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="支払方法変更Entity.rirekiNo" column="dbT4021ShiharaiHohoHenko_rirekiNo" />
         <association property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
-        <collection property="支払方法変更滞納Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity"/>
+        <collection property="支払方法変更滞納Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity"/>
         <collection property="支払方法変更差止Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.ResultMap_DbT4024ShiharaiHohoHenkoSashitomeEntity"/>
         <collection property="支払方法変更減額Entity" resultMap="resultMap_IShiharaiHohoHenkoGengakuEntity"/>
     </resultMap>

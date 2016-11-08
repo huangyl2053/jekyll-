@@ -34,6 +34,7 @@ public class GemmenGengakuShinseiHandler {
     private final GemmenGengakuShinseiDiv div;
     private static final RString 本人識別コードのキー = new RString("本人識別コード");
     private static final RString 空白KEY = new RString("-1");
+    private static final RString 介護保険施設 = new RString("介護保険施設");
 
     /**
      * コンストラクタです。
@@ -102,11 +103,10 @@ public class GemmenGengakuShinseiHandler {
                 div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
             } else {
                 div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
-            }
-
-            //TODO
+            }            
+//          TODO:施設名称の取得方法がわからない。div.getCcdShisetsuJoho().get入所施設名称(JigyoshaNo.EMPTY)がメソッドとして用意されているが
+//            　 台帳種別やその他のコントロールに値が設定されないため、名称を取得できない。
             div.getCcdShisetsuJoho().setShisetsuMeisho(RString.EMPTY);
-
         }
         if (減免減額申請情報.get申請届出代行区分() != null) {
             div.getDdlShinseiDaikoKubun().setSelectedKey(減免減額申請情報.get申請届出代行区分().getCode());
@@ -169,7 +169,9 @@ public class GemmenGengakuShinseiHandler {
         div.getTxtShinseishaTelNo().clearDomain();
         div.getTxtShinseishaJusho().clearDomain();
         div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
+        div.getCcdShisetsuJoho().getTxtNyuryokuShisetsuKodo().setDisabled(true);
         div.getCcdShisetsuJoho().setShisetsuMeisho(RString.EMPTY);
+        div.getCcdShisetsuJoho().getRadKaigoHokenShisetsu().setSelectedValue(介護保険施設);
     }
 
     private List<KeyValueDataSource> getDdlShinseiDaikoKubun() {

@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbd.service.core.koshintaisho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd5010001.KoshinTaishoBussiness;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.KoshinTaishoCsvEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4201NinteichosaIraiJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -36,6 +38,7 @@ public class KoshinTaishoManager {
 
     private final DbT4201NinteichosaIraiJohoDac dac;
     private final DbT4101NinteiShinseiJohoDac johodac;
+    private final DbT4001JukyushaDaichoDac daichoDac;
 
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSVFILENAME = new RString("更新管理対象者一覧.csv");
@@ -52,6 +55,7 @@ public class KoshinTaishoManager {
     KoshinTaishoManager() {
         this.dac = InstanceProvider.create(DbT4201NinteichosaIraiJohoDac.class);
         this.johodac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
+        this.daichoDac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
     }
 
     /**
@@ -111,5 +115,15 @@ public class KoshinTaishoManager {
     public void updateDbt4101johon(DbT4101NinteiShinseiJohoEntity 認定申請情報) {
 
         johodac.update(認定申請情報);
+    }
+    
+    /**
+     * 受給者台帳を作成する。
+     *
+     * @param 受給者台帳情報 DbT4001JukyushaDaichoEntity
+     */
+    @Transaction
+    public void insertDbt4001johon(DbT4001JukyushaDaichoEntity 受給者台帳情報) {
+        daichoDac.save(受給者台帳情報);
     }
 }

@@ -102,6 +102,9 @@ public class KobetsuJikoRenkeiInfoSakusei {
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setReadOnly(false);
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setReadOnly(false);
         } else {
+            Map 処理日付Map = ViewStateHolder.get(ViewStateKeys.発行日時Map, HashMap.class);
+            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(new RDate(処理日付Map.get("TxtKonkaiChushutsuFromYMD").toString()));
+            div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(new RTime(new RString(処理日付Map.get("TxtKonkaiChushutsuFromTime").toString())));
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setReadOnly(true);
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setReadOnly(true);
         }

@@ -4,12 +4,12 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4022ShiharaiHohoHenkoTaino">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.allColumns_DbT4022ShiharaiHohoHenkoTaino" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.allColumns_DbT4022ShiharaiHohoHenkoTaino" />
      FROM
          rgdb."DbT4022ShiharaiHohoHenkoTaino"
      WHERE
@@ -53,7 +53,7 @@
 
 
     <!--テーブルDbT4022ShiharaiHohoHenkoTainoの項目をDbT4022ShiharaiHohoHenkoTainoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4022ShiharaiHohoHenkoTainoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4022ShiharaiHohoHenkoTainoEntity" autoMapping="true">
         <id property="shoKisaiHokenshaNo" column="dbT4022ShiharaiHohoHenkoTaino_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <id property="hihokenshaNo" column="dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="kanriKubun" column="dbT4022ShiharaiHohoHenkoTaino_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
