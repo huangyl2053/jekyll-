@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -738,5 +739,15 @@ public class Honsanteifuka {
         result.set処理日時(RDate.getNowDateTime());
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         return result;
+    }
+
+    /**
+     * 住民税所得（DbV2501JuminzeiShotoku）の確定日時
+     *
+     * @return Max確定日時
+     */
+    public RDateTime getMax確定日時() {
+        IHonsanteifukaMapper mapper = mapperProvider.create(IHonsanteifukaMapper.class);
+        return mapper.getMax確定日時();
     }
 }

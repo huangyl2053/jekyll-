@@ -42,4 +42,9 @@
             AND joken."fukaShoriKubun" = '0'
             AND joken."uchiwakeJoken" = #{uchiwakeJoken}
     </select>
+    
+    <select id="getMax確定日時"
+    resultType="jp.co.ndensan.reams.uz.uza.lang.RDateTime" fetchSize="500" resultOrdered="true">
+        SELECT max("DbV2501"."kakuteiTimeStamp") FROM rgdb."DbV2501JuminzeiShotoku" AS "DbV2501"
+    </select>
 </mapper>

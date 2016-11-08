@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteifuka;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
  * 通知書打ち分け条件の取得処理
@@ -30,4 +31,11 @@ public interface IHonsanteifukaMapper {
      * @return List<DbT2014TsuchishoUchiwakeJokenEntity>
      */
     List<DbT2014TsuchishoUchiwakeJokenEntity> get打分け方法情報一覧(Map<String, Object> parameter);
+
+    /**
+     * 住民税所得（DbV2501JuminzeiShotoku）の確定日時
+     *
+     * @return Max確定日時
+     */
+    RDateTime getMax確定日時();
 }
