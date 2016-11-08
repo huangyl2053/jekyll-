@@ -24,6 +24,7 @@
         <result property="nenkiniShotokuGaku" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kazeiShotokuGaku" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="torokuGyomu" column="torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
     </resultMap>
     
     <!--介護保険所得情報一覧データ取得-->
@@ -179,7 +180,8 @@
         N."shojoIdoYMD",
         N."seibetsuCode",
         N."juminShubetsuCode",
-        N."genLasdecCode"
+        N."genLasdecCode",
+        N."setaiCode"
         FROM master
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
@@ -209,7 +211,8 @@
         A."nenkiniShunyuGaku",
         A."nenkiniShotokuGaku",
         A."kazeiShotokuGaku",
-        A."torokuGyomu"
+        A."torokuGyomu",
+        A."setaiCode"
       FROM
         (
         SELECT
@@ -229,7 +232,8 @@
         leader."nenkiniShotokuGaku",
         leader."kazeiShotokuGaku",
         leader."torokuGyomu",
-        leader."shoriTimeStamp"
+        leader."shoriTimeStamp",
+        leader."setaiCode"
         FROM leader
         WHERE
         #{開始日時}<![CDATA[<=]]>leader."shoriTimeStamp"
