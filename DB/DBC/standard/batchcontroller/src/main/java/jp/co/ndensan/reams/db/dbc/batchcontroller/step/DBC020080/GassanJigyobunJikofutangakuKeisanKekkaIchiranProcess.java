@@ -138,13 +138,8 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranProcess extends BatchK
 
     @Override
     protected void createWriter() {
-        if (!processCore.is改頁()) {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).create();
-        } else {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).addBreak(
-                    new DBC200203GassanJigyobunJikofutangakuKeisanKekkaIchiranPageBreak(processCore.改頁項())).create();
-        }
-
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).addBreak(
+                new DBC200203GassanJigyobunJikofutangakuKeisanKekkaIchiranPageBreak(processCore.改頁項())).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 

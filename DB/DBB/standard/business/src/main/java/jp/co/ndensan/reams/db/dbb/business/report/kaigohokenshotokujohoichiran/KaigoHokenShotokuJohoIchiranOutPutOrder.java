@@ -26,7 +26,11 @@ public enum KaigoHokenShotokuJohoIchiranOutPutOrder implements IReportItems {
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"hihokenshaNo\""));
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"hihokenshaNo\"")),
+    /**
+     * 世帯コード
+     */
+    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"setaiCode\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

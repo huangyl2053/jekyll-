@@ -1347,7 +1347,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     public List<KaigohokenShindanMeireishoHeaderItem> create介護保険診断命令書_パラメータ() {
         List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
         List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
-        int 宛名連番 = 1;
         RString 受診場所 = div.getShindanMeirei().getTxtJushinBasho().getValue();
         for (dgShujiiIkensho_Row row : selectedItems) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
@@ -1357,15 +1356,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     .get介護保険診断命令書(parameter).records();
             if (!businessList.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
-                RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), FlexibleDate.getNowDate());
                 RString customerBarCode = RString.EMPTY;
                 if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
                     customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所());
                 }
-                RStringBuilder builder = new RStringBuilder();
-                builder.append("*");
-                builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
-                builder.append("#");
                 Map<Integer, RString> 通知文
                         = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
                 KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
@@ -1378,13 +1372,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
-                        文書番号,
                         business.get医療機関郵便番号(),
                         business.get医療機関住所(),
                         business.get被保険者氏名(),
                         get名称付与(),
                         customerBarCode,
-                        builder.toRString(),
                         business.get被保険者番号(),
                         通知文.get(1),
                         business.get被保険者氏名(),

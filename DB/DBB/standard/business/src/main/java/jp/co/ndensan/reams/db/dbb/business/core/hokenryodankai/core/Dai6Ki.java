@@ -143,26 +143,26 @@ public class Dai6Ki extends HokenryoDankaiHanteiHohoHozon {
         段階20.add(new DankaiHanteiHonninKazei());
         段階20.add(new DankaiHanteiKingaku(基準所得段階15.add(1), new Decimal(-1)));
 
-        getHanteiHoho().put(new RString("010"), 段階1);
-        getHanteiHoho().put(new RString("020"), 段階2);
-        getHanteiHoho().put(new RString("030"), 段階3);
-        getHanteiHoho().put(new RString("040"), 段階4);
-        getHanteiHoho().put(new RString("050"), 段階5);
-        getHanteiHoho().put(new RString("060"), 段階6);
-        getHanteiHoho().put(new RString("070"), 段階7);
-        getHanteiHoho().put(new RString("080"), 段階8);
-        getHanteiHoho().put(new RString("090"), 段階9);
-        getHanteiHoho().put(new RString("100"), 段階10);
-        getHanteiHoho().put(new RString("110"), 段階11);
-        getHanteiHoho().put(new RString("120"), 段階12);
-        getHanteiHoho().put(new RString("130"), 段階13);
-        getHanteiHoho().put(new RString("140"), 段階14);
-        getHanteiHoho().put(new RString("150"), 段階15);
-        getHanteiHoho().put(new RString("160"), 段階16);
-        getHanteiHoho().put(new RString("170"), 段階17);
-        getHanteiHoho().put(new RString("180"), 段階18);
-        getHanteiHoho().put(new RString("190"), 段階19);
-        getHanteiHoho().put(new RString("200"), 段階20);
+        getHanteiHoho().put(new RString("01"), 段階1);
+        getHanteiHoho().put(new RString("02"), 段階2);
+        getHanteiHoho().put(new RString("03"), 段階3);
+        getHanteiHoho().put(new RString("04"), 段階4);
+        getHanteiHoho().put(new RString("05"), 段階5);
+        getHanteiHoho().put(new RString("06"), 段階6);
+        getHanteiHoho().put(new RString("07"), 段階7);
+        getHanteiHoho().put(new RString("08"), 段階8);
+        getHanteiHoho().put(new RString("09"), 段階9);
+        getHanteiHoho().put(new RString("10"), 段階10);
+        getHanteiHoho().put(new RString("11"), 段階11);
+        getHanteiHoho().put(new RString("12"), 段階12);
+        getHanteiHoho().put(new RString("13"), 段階13);
+        getHanteiHoho().put(new RString("14"), 段階14);
+        getHanteiHoho().put(new RString("15"), 段階15);
+        getHanteiHoho().put(new RString("16"), 段階16);
+        getHanteiHoho().put(new RString("17"), 段階17);
+        getHanteiHoho().put(new RString("18"), 段階18);
+        getHanteiHoho().put(new RString("19"), 段階19);
+        getHanteiHoho().put(new RString("20"), 段階20);
 
     }
 

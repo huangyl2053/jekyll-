@@ -1,7 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.JissekiFutangakuDataTempEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040010.IKogakuGassanJikofutangakuKeisanMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
@@ -30,8 +28,8 @@ public class InitJissekiCheckProcess extends SimpleBatchProcessBase {
         isデータがあり = new OutputParameter<>();
         IKogakuGassanJikofutangakuKeisanMapper mapper
                 = getMapper(IKogakuGassanJikofutangakuKeisanMapper.class);
-        List<JissekiFutangakuDataTempEntity> resultList = mapper.get実績負担額データ();
-        isあり = resultList != null && !resultList.isEmpty();
+        Integer 件数 = mapper.get実績負担額データの件数();
+        isあり = 件数 != null && 件数 > 0;
     }
 
     @Override
@@ -42,5 +40,4 @@ public class InitJissekiCheckProcess extends SimpleBatchProcessBase {
             isデータがあり.setValue(Boolean.FALSE);
         }
     }
-
 }

@@ -242,13 +242,16 @@
         DbT0700."kazeiNendo",
         DbT0700."tsuchishoNo"
         FROM
-        rgdb."UrT0700ShunoKanri" DbT0700,
-        rgdb."UrT0705ChoteiKyotsu" DbT0705
+        (SELECT * FROM 
+            (SELECT "kamokuCode","choteiNendo", "tsuchishoNo", "kibetsu", "shunoId","kazeiNendo", row_number() over(partition by "kamokuCode","choteiNendo","tsuchishoNo","kibetsu" order by "shunoId" desc) row_number 
+            FROM rgdb."UrT0700ShunoKanri") DbT0700 
+            WHERE DbT0700.row_number = 1) DbT0700,
+        (SELECT * FROM 
+            (SELECT "choteiId", "shunoId", row_number() over(partition by "shunoId" order by "koseiKaisu" desc) row_number 
+            FROM rgdb."UrT0705ChoteiKyotsu") DbT0705 
+            WHERE DbT0705.row_number = 1) DbT0705
         WHERE
         DbT0700."shunoId" = DbT0705."shunoId"
-        AND  DbT0700."shunoId" IN (SELECT MAX("shunoId")
-        FROM rgdb."UrT0700ShunoKanri"
-        GROUP BY "kamokuCode","choteiNendo","tsuchishoNo","kibetsu")
         )choteiIdToroku
         ON
         choteiIdToroku."choteiNendo" = dbT2002."choteiNendo"

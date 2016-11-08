@@ -40,10 +40,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlowBase<DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter> {
 
     private static final String TAISHOSHACHUSHUJIGYOBUNPPROCESS = "TaishoshaChushuJigyobunProcess";
-
-    private RString importTableNamePermanent;
-    private RString exportTableNameTemporary;
-
     private static final String BACKUP_TO_TEMPORARYTABLE = "backup_To_TemporaryTable";
     private static final String INITJISSEKICHECKPROCESS = "InitJissekiCheckProcess";
     private static final String INSSHIHARAIHOHOHENKOTEMPBEFOREPROCESS = "InsShiharaihohoHenkoTempBeforeProcess";
@@ -62,8 +58,6 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
 
     @Override
     protected void defineFlow() {
-        importTableNamePermanent = BACKUPTABLE;
-        exportTableNameTemporary = TEMPTABLE;
         executeStep(BACKUP_TO_TEMPORARYTABLE);
         executeStep(TAISHOSHACHUSHUJIGYOBUNPPROCESS);
         executeStep(INITJISSEKICHECKPROCESS);
@@ -85,7 +79,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
 
     @Step(BACKUP_TO_TEMPORARYTABLE)
     IBatchFlowCommand backupToTemporaryTable() {
-        return backupToTemporaryTable(importTableNamePermanent, exportTableNameTemporary).define();
+        return backupToTemporaryTable(BACKUPTABLE, TEMPTABLE).define();
     }
 
     @Step(TAISHOSHACHUSHUJIGYOBUNPPROCESS)

@@ -61,6 +61,13 @@ public interface IKogakuGassanJikofutangakuKeisanMapper {
     List<JissekiFutangakuDataTempEntity> get実績負担額データ();
 
     /**
+     * get実績負担額データの件数のメソッドです。
+     *
+     * @return Integer
+     */
+    Integer get実績負担額データの件数();
+
+    /**
      * get処理日付管理のメソッドです。
      *
      * @param parameter DBC020080MyBatisParameter

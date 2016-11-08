@@ -28,16 +28,14 @@ public class KaigohokenShindanMeireishoHeaderItem {
     private RString ninshoshaShimeiKakeru;
     private RString koinMojiretsu;
     private RString koinShoryaku;
-    private RString bunshoNo;
     private RString yubinNo;
     private RString jushoText;
-    private RString hihokenshaName1;
+    private RString hihokenshaName;
+    private RString title;
     private RString meishoFuyo;
     private RString customerBarCode;
-    private RString atenaRenban;
     private RString sonota;
     private RString tsuchibun1;
-    private RString hihokenshaName2;
     private RString hihokenshaNo;
     private RString iryokikanName;
     private RString tantoIshiName;
@@ -63,18 +61,15 @@ public class KaigohokenShindanMeireishoHeaderItem {
      * @param ninshoshaYakushokuMei1 認証者役職名１
      * @param ninshoshaShimeiKakenai 首長名公印掛けない
      * @param ninshoshaShimeiKakeru 首長名公印掛ける
-     * @param koinMojiretsu 印
+     * @param koinMojiretsu 公印文字列
      * @param koinShoryaku 公印省略
-     * @param bunshoNo 文書番号
      * @param yubinNo 郵便番号
-     * @param jushoText 所在地
-     * @param hihokenshaName1 被保険者名1
-     * @param meishoFuyo 様
+     * @param jushoText 住所
+     * @param hihokenshaName 被保険者名
+     * @param meishoFuyo 名称付与
      * @param customerBarCode customerBarCode
-     * @param atenaRenban 連番
      * @param sonota その他
      * @param tsuchibun1 通知文1
-     * @param hihokenshaName2 被保険者名2
      * @param hihokenshaNo 被保険者番号
      * @param iryokikanName 名称
      * @param tantoIshiName 担当医師名
@@ -83,6 +78,7 @@ public class KaigohokenShindanMeireishoHeaderItem {
      * @param jushinKikan 診断を受ける日時
      * @param jushinArea 診断を受ける場所
      * @param tsuchibun2 通知文2
+     * @param title 帳票名
      */
     public KaigohokenShindanMeireishoHeaderItem(
             RString hakkoYMD,
@@ -94,16 +90,13 @@ public class KaigohokenShindanMeireishoHeaderItem {
             RString ninshoshaShimeiKakeru,
             RString koinMojiretsu,
             RString koinShoryaku,
-            RString bunshoNo,
             RString yubinNo,
             RString jushoText,
-            RString hihokenshaName1,
+            RString hihokenshaName,
             RString meishoFuyo,
             RString customerBarCode,
-            RString atenaRenban,
             RString sonota,
             RString tsuchibun1,
-            RString hihokenshaName2,
             RString hihokenshaNo,
             RString iryokikanName,
             RString tantoIshiName,
@@ -111,7 +104,8 @@ public class KaigohokenShindanMeireishoHeaderItem {
             RString telNo,
             RString jushinKikan,
             RString jushinArea,
-            RString tsuchibun2) {
+            RString tsuchibun2,
+            RString title) {
         this.hakkoYMD = hakkoYMD;
         this.denshiKoin = denshiKoin;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
@@ -121,16 +115,13 @@ public class KaigohokenShindanMeireishoHeaderItem {
         this.ninshoshaShimeiKakeru = ninshoshaShimeiKakeru;
         this.koinMojiretsu = koinMojiretsu;
         this.koinShoryaku = koinShoryaku;
-        this.bunshoNo = bunshoNo;
         this.yubinNo = yubinNo;
         this.jushoText = jushoText;
-        this.hihokenshaName1 = hihokenshaName1;
+        this.hihokenshaName = hihokenshaName;
         this.meishoFuyo = meishoFuyo;
         this.customerBarCode = customerBarCode;
-        this.atenaRenban = atenaRenban;
         this.sonota = sonota;
         this.tsuchibun1 = tsuchibun1;
-        this.hihokenshaName2 = hihokenshaName2;
         this.hihokenshaNo = hihokenshaNo;
         this.iryokikanName = iryokikanName;
         this.tantoIshiName = tantoIshiName;
@@ -139,5 +130,6 @@ public class KaigohokenShindanMeireishoHeaderItem {
         this.jushinKikan = jushinKikan;
         this.jushinArea = jushinArea;
         this.tsuchibun2 = tsuchibun2;
+        this.title = title;
     }
 }

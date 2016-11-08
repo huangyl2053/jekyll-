@@ -309,12 +309,12 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
         List<RString> 出力条件リスト = manager.get出力条件リスト(processParameter.get発行日(), processParameter.get出力対象(),
                 出力帳票一覧Entity.get出力順ID());
         if (!出力flag) {
-            manager.load代行プリント送付票(processParameter.get発行日(), 出力対象, 帳票制御共通, 地方公共団体,
+            manager.load代行プリント送付票(processParameter.get発行日(), processParameter.get出力対象(), 帳票制御共通, 地方公共団体,
                     出力帳票一覧Entity.get出力順ID(), Decimal.ZERO);
             manager.loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値_0,
                     CSV出力有無_なし, CSVファイル名, 帳票名);
         } else {
-            manager.load代行プリント送付票(processParameter.get発行日(), 出力対象, 帳票制御共通,
+            manager.load代行プリント送付票(processParameter.get発行日(), processParameter.get出力対象(), 帳票制御共通,
                     地方公共団体, 出力帳票一覧Entity.get出力順ID(), new Decimal(総ページ数));
             manager.loadバッチ出力条件リスト(出力条件リスト, 帳票ID, new RString(総ページ数),
                     CSV出力有無_あり, CSVファイル名_一覧表, 帳票名);
