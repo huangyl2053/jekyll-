@@ -502,6 +502,9 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
                 && (entity.get口座情報().getUrT0700ShunoKanriEntity() != null || !entity.get口座情報()
                 .getUrT0700ShunoKanriEntity().isEmpty())) {
             KozaRelateEntity releteEntity = entity.get口座情報();
+            if (null == releteEntity.getUaT0310KozaEntity() || releteEntity.getUaT0310KozaEntity().getKozaId() == 0L) {
+                return;
+            }
             IKoza 口座 = new Koza(releteEntity);
             if (口座.isゆうちょ銀行()) {
                 csvEntity.set銀行郵便区分(RST_2);
@@ -682,8 +685,8 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
     private RString convertDayOfWeek(FlexibleDate targetDate) {
         return targetDate != null
                 && targetDate.isValid()
-                        ? new RString(targetDate.getDayOfWeek().toString())
-                        : RString.EMPTY;
+                ? new RString(targetDate.getDayOfWeek().toString())
+                : RString.EMPTY;
     }
 
     private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity,
