@@ -35,6 +35,11 @@
             <artifactId>DbzPersistence</artifactId>
         </dependency>
         <!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.bb.bbx</groupId>
+            <artifactId>BbxEntity</artifactId>
+            <version>${jp.co.ndensan.reams.bbVersion}</version>
+        </dependency>
         <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
