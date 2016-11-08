@@ -247,12 +247,12 @@ var DBC;
                 return new UZA.Panel(this.convFiledName("GemmenGengakuPanel"));
             };
 
-            Controls.prototype.btnGemmenGengakuRireki = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnGemmenGengakuRireki"));
-            };
-
             Controls.prototype.radGemmenShinseichuKubun = function () {
                 return new UZA.RadioButton(this.convFiledName("radGemmenShinseichuKubun"));
+            };
+
+            Controls.prototype.btnGemmenGengakuRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnGemmenGengakuRireki"));
             };
 
             Controls.prototype.JukyushaIdoRenrakuhyoGemmenGengakuSub = function () {
