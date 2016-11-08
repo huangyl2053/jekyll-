@@ -78,9 +78,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
     private static final int NUM_1 = 1;
     private static final int NUM_10 = 10;
     private static final RString 計画削除モード = new RString("delete");
-    private static final RString 計画修正モード = new RString("modify");
     private static final RString KEY_0 = new RString("key0");
-    private static final RString 計画追加モード = new RString("add");
 
     /**
      * 画面の初期化メソッドです。
@@ -500,7 +498,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        boolean is項目が変更 = Boolean.FALSE;
+        boolean is項目が変更 = Boolean.TRUE;
         if (居宅給付計画届出 != null) {
             is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         }
@@ -526,7 +524,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        boolean is項目が変更 = Boolean.FALSE;
+        boolean is項目が変更 = Boolean.TRUE;
         if (居宅給付計画届出 != null) {
             is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         }
