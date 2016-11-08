@@ -6,12 +6,15 @@
 package jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho;
 
 import jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 介護保険診断命令書ヘッダEditorです。
@@ -20,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShindanMeireishoEditor {
 
-    private static final RString TITLE = new RString("介護保険診断命令書");
     private static final int 結束_位置3 = 3;
     private static final int 結束_位置4 = 4;
     private static final int 結束_位置5 = 5;
@@ -47,12 +49,8 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
 
     private KaigohokenShindanMeireishoReportSource editHeader(KaigohokenShindanMeireishoReportSource source) {
 
-        source.title = TITLE;
-        if (item.getHakkoYMD() == null || item.getHakkoYMD().isEmpty()) {
-            source.hakkoYMD = RString.EMPTY;
-        } else {
-            source.hakkoYMD = パターン12(new RDate(item.getHakkoYMD().toString()));
-        }
+        source.title = item.getTitle();
+        source.hakkoYMD = item.getHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
@@ -61,16 +59,14 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
         source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
         source.koinMojiretsu = item.getKoinMojiretsu();
         source.koinShoryaku = item.getKoinShoryaku();
-        source.bunshoNo = item.getBunshoNo();
         source.yubinNo = item.getYubinNo();
         source.jushoText = item.getJushoText();
-        source.hihokenshaName1 = item.getHihokenshaName1();
+        source.hihokenshaName1 = item.getHihokenshaName();
         source.meishoFuyo = item.getMeishoFuyo();
         source.customerBarCode = item.getCustomerBarCode();
-        source.atenaRenban = item.getAtenaRenban();
         source.sonota = item.getSonota();
         source.tsuchibun1 = item.getTsuchibun1();
-        source.hihokenshaName2 = item.getHihokenshaName2();
+        source.hihokenshaName2 = item.getHihokenshaName();
         RString hihokenshaNo = item.getHihokenshaNo();
         if (hihokenshaNo == null) {
             hihokenshaNo = RString.EMPTY;
@@ -95,10 +91,15 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
         if (item.getJushinKikan() == null || item.getJushinKikan().isEmpty()) {
             source.jushinKikan = RString.EMPTY;
         } else {
-            source.jushinKikan = item.getJushinKikan();
+            source.jushinKikan = パターン12(new RDate(item.getJushinKikan().toString()));
         }
         source.jushinArea = item.getJushinArea();
         source.tsuchibun2 = item.getTsuchibun2();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (!RString.isNullOrEmpty(item.getHihokenshaNo())) {
+            source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                    item.getHihokenshaNo());
+        }
         return source;
     }
 
