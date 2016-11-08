@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiIchiran;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoirairirekiichiran.IkenshoirairirekiIchiranProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoirairirekiichiran.IkenshoirairirekiIchiranReport;
@@ -23,13 +24,13 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.syujiyikensho.IkenshoSaku
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiKatamenMonoProperty;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiKatamenColorProperty;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiRyomenMonoProperty;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiRyomenColorProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiDBE231012Property;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiDBE231014Property;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiKatamenColorProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiKatamenMonoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiRyomenColorProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiRyomenMonoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
@@ -52,9 +53,11 @@ import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei.ShujiiIkens
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -64,7 +67,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医意見書作成依頼情報の帳票出力管理クラスです。
@@ -72,6 +74,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-0050-010 zuotao
  */
 public class ShujiiIkenshoSakuseiIraiReportOutputService {
+
+    private static final int 数字_1 = 1;
+    private static final int 数字_2 = 2;
 
     /**
      * コンストラクタです。
@@ -84,8 +89,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
      */
     public static ShujiiIkenshoSakuseiIraiReportOutputService createInstance() {
         return InstanceProvider.create(ShujiiIkenshoSakuseiIraiReportOutputService.class);
@@ -389,6 +393,8 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     private List<KaigohokenShindanMeireishoHeaderItem> set介護保険診断命令書(List<KaigohokenShindanMeireishoHeaderItem> itemList,
             NinshoshaSource ninshosha) {
         List<KaigohokenShindanMeireishoHeaderItem> resultList = new ArrayList<>();
+        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
+                ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_1);
         for (KaigohokenShindanMeireishoHeaderItem item : itemList) {
             item.setHakkoYMD(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
@@ -399,6 +405,8 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
             item.setKoinMojiretsu(ninshosha.koinMojiretsu);
             item.setKoinShoryaku(ninshosha.koinShoryaku);
+            item.setTsuchibun1(通知文.get(数字_1));
+            item.setTsuchibun2(通知文.get(数字_2));
             resultList.add(item);
         }
         return resultList;
