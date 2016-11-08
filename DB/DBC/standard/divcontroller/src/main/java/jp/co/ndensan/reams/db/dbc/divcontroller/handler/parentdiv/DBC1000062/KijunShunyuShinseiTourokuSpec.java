@@ -112,6 +112,15 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
                 }
             },
     /**
+     * 受給者または事業対象者チェックです。
+     */
+    受給者または事業対象者チェック {
+                @Override
+                public boolean apply(KijunShunyuShinseiTourokuDiv div) {
+                    return SpecHelper.is受給者または事業対象者チェック(div);
+                }
+            },
+    /**
      * 控除再算出ボタンの実行時チェックです。
      */
     控除再算出チェック {
@@ -229,6 +238,16 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
                 }
             }
             return (世帯主Count <= NUM_1);
+        }
+
+        public static boolean is受給者または事業対象者チェック(KijunShunyuShinseiTourokuDiv div) {
+            List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+            for (dgMeisai_Row row : rowList) {
+                if (row.getJyukyuJigyoTaisho() != null && !row.getJyukyuJigyoTaisho().isEmpty()) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

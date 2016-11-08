@@ -77,6 +77,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -312,6 +313,9 @@ public class KijunShunyuShinseiTourokuHandler {
             if (世帯基準日 != null) {
                 HihokenshaDaicho 被保険者台帳情報 = HihokenshaDaichoManager.createInstance().find被保険者台帳(
                         被保険者番号, 世帯基準日);
+                if (被保険者台帳情報 == null) {
+                    continue;
+                }
                 ShikibetsuCode 識別コード = 被保険者台帳情報.get識別コード();
                 基準収入額データ.set識別コード(識別コード);
                 IShikibetsuTaishoFinder 識別対象Finder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
@@ -366,6 +370,7 @@ public class KijunShunyuShinseiTourokuHandler {
             削除Row.setCancelButtonState(DataGridButtonState.Enabled);
             削除Row.setDeleteButtonState(DataGridButtonState.Disabled);
             削除Row.setModifyButtonState(DataGridButtonState.Disabled);
+            削除Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
         }
     }
 
@@ -458,7 +463,7 @@ public class KijunShunyuShinseiTourokuHandler {
         div.getMeisai().getTxtSetaiCode().setDisabled(flag);
         div.getMeisai().getTxtShoriNendo().setDisabled(flag);
         div.getMeisai().getTxtSetaiinHaakuKijunYMD().setDisabled(flag);
-        div.getMeisai().getTxtShinseiYMD().setDisabled(flag);
+        div.getMeisai().getTxtShinseiYMD().setDisabled(false);
         div.getMeisai().getTxtShinseishoSakuseiYMD().setDisabled(flag);
         div.getMeisai().getBtnSetaiSaiSanshutsu().setDisabled(flag);
     }
@@ -623,6 +628,16 @@ public class KijunShunyuShinseiTourokuHandler {
             div.getMeisai().getBtnShowZennendo().setDisabled(true);
             div.getMeisai().getBtnAddMeisai().setDisabled(true);
         }
+    }
+
+    /**
+     * 所得状況ボタン押した時、状況隠し項目再設定
+     */
+    public void set所得状況隠し項目() {
+        FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+        FlexibleDate 基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
+        div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(処理年度));
+        div.getMeisai().setHdnHenkomaeSetaiinHaakuKijunYMD(DataPassingConverter.serialize(基準日));
     }
 
     /**
@@ -868,6 +883,7 @@ public class KijunShunyuShinseiTourokuHandler {
             削除Row.setRowState(RowState.Deleted);
             削除Row.setCancelButtonState(DataGridButtonState.Enabled);
             削除Row.setDeleteButtonState(DataGridButtonState.Disabled);
+            削除Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
         }
     }
 
@@ -1058,7 +1074,9 @@ public class KijunShunyuShinseiTourokuHandler {
         row.setShinseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseiYMD().getValue()));
         row.setShinseishoSakuseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseishoSakuseiYMD().getValue()));
         row.setTekiyoKaishiYM(get適用開始(div.getMeisai().getTxtTekiyoStartYM().getValue()));
-        row.setSanteiKijunGaku(div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue().substring(NUM_0, NUM_6));
+        if (div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue().length() >= NUM_6) {
+            row.setSanteiKijunGaku(div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue().substring(NUM_0, NUM_6));
+        }
         row.setKetteiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtKetteiYMD().getValue()));
         row.setKetteiTsuchishoHakkoYMD(toWarekiHalf_Zero(div.getMeisai().getTxtKetteiTsuchishoHakkoYMD().getValue()));
         row.setSetaiKazei(div.getMeisai().getTxtSetaiKazei().getValue());
@@ -1070,7 +1088,7 @@ public class KijunShunyuShinseiTourokuHandler {
     }
 
     private RString get適用開始(FlexibleDate 適用開始) {
-        if (適用開始 == null) {
+        if (適用開始 == null || 適用開始.toString().isEmpty()) {
             return RString.EMPTY;
         }
         return toWarekiHalf_Zero(new FlexibleYearMonth(適用開始.toString().substring(NUM_0, NUM_6)));
