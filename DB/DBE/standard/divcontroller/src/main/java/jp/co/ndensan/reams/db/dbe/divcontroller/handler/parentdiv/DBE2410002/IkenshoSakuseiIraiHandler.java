@@ -548,7 +548,6 @@ public class IkenshoSakuseiIraiHandler {
         List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
 
         RString 受診場所 = div.getTxtJyushinbasho().getValue();
-        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), FlexibleDate.getNowDate());
         RString customerBarCode = RString.EMPTY;
         if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
             customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所());
@@ -565,13 +564,11 @@ public class IkenshoSakuseiIraiHandler {
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                文書番号,
                 business.get医療機関郵便番号(),
                 business.get医療機関住所(),
                 business.get被保険者氏名(),
                 get名称付与(ConfigNameDBE.介護保険診断命令書_宛先敬称),
                 customerBarCode,
-                初期連番,
                 business.get被保険者番号(),
                 通知文.get(1),
                 business.get被保険者氏名(),

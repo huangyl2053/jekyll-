@@ -507,7 +507,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         } else {
             entity = entity.createBuilderForEdit().set利用者負担額(Decimal.ZERO).build();
         }
-        entity = entity.createBuilderForEdit().set高額給付根拠(row.getData9()).build();
+        entity = entity.createBuilderForEdit().set高額給付根拠(row.getData9()).set対象者受取年月(
+                FlexibleDate.getNowDate().getYearMonth()).build();
         if (削除.equals(row.getData0())) {
             entity = entity.deleted();
         } else if (追加.equals(row.getData0())) {

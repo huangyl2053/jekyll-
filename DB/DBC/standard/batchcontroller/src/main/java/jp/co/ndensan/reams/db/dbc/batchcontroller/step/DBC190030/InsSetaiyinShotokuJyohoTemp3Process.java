@@ -32,6 +32,7 @@ public class InsSetaiyinShotokuJyohoTemp3Process extends BatchProcessBase<Taisho
 
     private InsTaishoSeitaiyinTempProcessParameter parameter;
     private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_01 = new RString("01");
     private static final int INT_0 = 0;
 
@@ -74,7 +75,7 @@ public class InsSetaiyinShotokuJyohoTemp3Process extends BatchProcessBase<Taisho
             dbT3116Entity.setKetteiTsuchishoHakkoYMD(FlexibleDate.EMPTY);
             if (RSTRING_1.equals(entity.getAtenaInnjiKubun())) {
                 dbT3116Entity.setAtesakiInjiTaishoshaFlag(true);
-            } else {
+            } else if (RSTRING_2.equals(entity.getAtenaInnjiKubun())) {
                 dbT3116Entity.setAtesakiInjiTaishoshaFlag(false);
             }
             dbT3116Entity.setNenshoFuyokojoUnder16Ninzu(entity.getNennshouLess16Num());
