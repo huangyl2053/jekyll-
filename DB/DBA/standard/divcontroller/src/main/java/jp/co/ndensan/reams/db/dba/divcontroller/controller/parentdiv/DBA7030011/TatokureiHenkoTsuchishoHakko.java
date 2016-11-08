@@ -215,7 +215,7 @@ public class TatokureiHenkoTsuchishoHakko {
         item.setTaishoshaName(business.get対象者名());
         item.setBirthYMD(business.get誕生日());
         item.setSeibetsu(business.get性別());
-        item.setBirthYMD(business.get変更年月日());
+        item.setHenkoYMD(business.get変更年月日());
         item.setHenkomaeShisetsuName(business.get変更前施設名称());
         item.setHenkomaeShisetsuTelNo(business.get変更前施設電話番号());
         item.setHenkomaeShisetsuFaxNo(business.get変更前施設FAX番号());
