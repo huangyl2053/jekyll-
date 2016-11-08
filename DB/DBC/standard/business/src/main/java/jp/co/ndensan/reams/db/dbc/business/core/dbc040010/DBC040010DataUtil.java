@@ -692,7 +692,11 @@ public class DBC040010DataUtil {
         IDateOfBirth dob = DateOfBirthFactory.createInstance(getFlexibleDate(umareYMD));
         AgeCalculator ageCalculator
                 = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.当日, getFlexibleDate(hihokenshaShuryoYMD));
-        int age = Integer.parseInt(ageCalculator.get年齢().toString());
+        RString agestr = ageCalculator.get年齢();
+        if (RString.isNullOrEmpty(agestr)) {
+            return false;
+        }
+        int age = Integer.parseInt(agestr.toString());
         return age < NUM_75;
     }
 
