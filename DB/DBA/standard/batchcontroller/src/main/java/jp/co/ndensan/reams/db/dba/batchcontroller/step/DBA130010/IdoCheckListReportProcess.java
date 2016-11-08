@@ -140,7 +140,19 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
         AtenaKanaMeisho 被保険者カナ氏名 = AtenaKanaMeisho.EMPTY;
 
         for (IdoInfoEntity entity : list) {
-
+            if (RString.isNullOrEmpty(entity.get区分_前_資格())) {
+                entity.set区分_前_資格(RString.EMPTY);
+            } else {
+                entity.set区分_前_資格(ShikakuKubun.toValue(entity.get区分_前_資格()).get略称());
+            }
+            if (RString.isNullOrEmpty(entity.get区分_後_資格())) {
+                entity.set区分_後_資格(RString.EMPTY);
+            } else {
+                entity.set区分_後_資格(ShikakuKubun.toValue(entity.get区分_後_資格()).get略称());
+            }
+            entity.set世帯コード(世帯コード);
+            entity.set被保険者カナ氏名(被保険者カナ氏名);
+            
             if (entity.get識別コード() != null && 識別コード.compareTo(entity.get識別コード()) == 0) {
                 entity.set世帯コード(世帯コード);
                 entity.set被保険者カナ氏名(被保険者カナ氏名);
@@ -176,7 +188,6 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
                     entity.set世帯コード(識別対象.get世帯コード());
                     entity.set被保険者カナ氏名(識別対象.get名称().getKana());
                     entity.set被保険者氏名(識別対象.get名称().getName());
-                    世帯コード = 識別対象.get世帯コード();
                     被保険者カナ氏名 = 識別対象.get名称().getKana();
                     被保険者氏名 = 識別対象.get名称().getName();
                 } else {
@@ -186,17 +197,6 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
                 }
 
                 識別コード = entity.get識別コード();
-
-                if (RString.isNullOrEmpty(entity.get区分_前_資格())) {
-                    entity.set区分_前_資格(RString.EMPTY);
-                } else {
-                    entity.set区分_前_資格(ShikakuKubun.toValue(entity.get区分_前_資格()).get略称());
-                }
-                if (RString.isNullOrEmpty(entity.get区分_後_資格())) {
-                    entity.set区分_後_資格(RString.EMPTY);
-                } else {
-                    entity.set区分_後_資格(ShikakuKubun.toValue(entity.get区分_後_資格()).get略称());
-                }
             }
         }
 
