@@ -112,7 +112,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
         CheckListLineItemSet pairs = CheckListLineItemSet.
                 of(ChohyoJohoShutokuProcess.特定項目.class,
                         ChohyoJohoShutokuProcess.チェック項目.class);
-        ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBB介護賦課,
+        ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBZ介護共通,
                 地方公共団体情報.get地方公共団体コード(), 地方公共団体情報.get市町村名());
         this.checkWriter = BatchWriters
                 .batchReportWriterWithCheckList(DBZ100001AtenaSealSource.class)
