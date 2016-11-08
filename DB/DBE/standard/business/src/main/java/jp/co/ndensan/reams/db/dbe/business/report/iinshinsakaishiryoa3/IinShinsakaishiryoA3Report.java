@@ -72,7 +72,6 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
         List<TokkiJikou> 短冊情報リスト = ichijihanteikekkahyoA3Entity.get特記事項_listChosa1();
         List<RString> 短冊リスト = get短冊リスト(短冊情報リスト);
         List<RString> テキスト全面List = ichijihanteikekkahyoA3Entity.get特記事項_tokkiText();
-        int totalPages = (int) Math.ceil((double) 短冊情報リスト.size() / PAGETWO_MAXCOUNT);
         for (int i = 0; i < MAXCOUNT; i++) {
             IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group2Editor(ichijihanteikekkahyoA3Entity, 短冊リスト, i);
             IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
@@ -84,12 +83,16 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
             reportSourceWriter.writeLine(builder1);
         }
         if (テキスト全面イメージ.equals(ichijihanteikekkahyoA3Entity.get特記パターン())) {
+            int totalPages = (int) Math.ceil((double) (テキスト全面List.size() - 1) / 2) + 1;
             for (int i = 0; i < テキスト全面List.size(); i++) {
-                IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(ichijihanteikekkahyoA3Entity, 短冊リスト, i, i + 1);
-                IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
-                reportSourceWriter.writeLine(builder);
+                if ((i + 2) <= totalPages) {
+                    IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(ichijihanteikekkahyoA3Entity, 短冊リスト, i + 2, i + 2);
+                    IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
+                    reportSourceWriter.writeLine(builder);
+                }
             }
         } else if (MAXCOUNT < 短冊リスト.size()) {
+            int totalPages = (int) Math.ceil((double) 短冊情報リスト.size() / PAGETWO_MAXCOUNT);
             for (int i = 0; i < 短冊リスト.size(); i++) {
                 int page = (i + PAGETWO_MAXCOUNT) / PAGETWO_MAXCOUNT + 1;
                 if (page <= totalPages) {
@@ -116,7 +119,7 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
 
     private List<RString> get短冊リスト(List<TokkiJikou> 短冊情報リスト) {
         List<RString> bodyList = new ArrayList<>();
-        if (!短冊情報リスト.isEmpty()) {
+        if (短冊情報リスト != null && !短冊情報リスト.isEmpty()) {
             for (TokkiJikou entity : 短冊情報リスト) {
                 bodyList.add(entity.get事項番号());
                 bodyList.add(entity.get項目名称());
