@@ -623,9 +623,9 @@ public class HonsanteiIdoHandler {
         RString 算定期 = 月の期.get期();
         if (!RString.isNullOrEmpty(算定期)
                 && Integer.parseInt(算定期.toString()) <= 期月_リスト.get最終法定納期().get期AsInt()) {
-            paramter.set随時フラグ(Boolean.TRUE);
-        } else {
             paramter.set随時フラグ(Boolean.FALSE);
+        } else {
+            paramter.set随時フラグ(Boolean.TRUE);
         }
         paramter.set算定期(算定期);
         return paramter;
