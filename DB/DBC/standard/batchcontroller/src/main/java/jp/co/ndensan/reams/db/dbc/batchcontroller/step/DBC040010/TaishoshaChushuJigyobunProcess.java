@@ -75,7 +75,7 @@ public class TaishoshaChushuJigyobunProcess extends BatchProcessBase<DBC040010Ta
         isデータがあり.setValue(Boolean.TRUE);
         JissekiFutangakuDataTempEntity result = util.toJissekiTempEntityTaishoChuShu(entity, parameter.get処理日時(), 市町村名);
         実績負担額データ.insert(result);
-        if (entity.getDaichoHihokenshaNo() == null) {
+        if (entity.getDaichoHihokenshaNo() != null) {
             return;
         }
         DBC040010ShoriKekkaTempEntity errorEntity
