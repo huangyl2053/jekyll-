@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.gokeidata.GokeiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.MeisaiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.PrintNoKingakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101detail.FurikomiMeisaiIchiranDetailReportSource;
@@ -69,6 +70,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private static final RString 高額 = new RString("高額");
 
     private final MeisaiDataEntity 一覧表用データ;
+    private final GokeiDataEntity 合計データリスト;
     private final IOutputOrder 出力順;
     private final Furikomi_ShihraiHohoShitei 支払方法;
     private final RDateTime 作成日時;
@@ -85,14 +87,16 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
      * インスタンスを生成します。
      *
      * @param 一覧表用データ MeisaiDataEntity
+     * @param 合計データリスト 合計データリスト
      * @param 出力順 IOutputOrder
      * @param 支払方法 Furikomi_ShihraiHohoShitei
      * @param 作成日時 RDateTime
      * @param 設定値 RString
      */
-    protected FurikomiMeisaiIchiranDetailEditor(MeisaiDataEntity 一覧表用データ, IOutputOrder 出力順,
+    protected FurikomiMeisaiIchiranDetailEditor(MeisaiDataEntity 一覧表用データ, GokeiDataEntity 合計データリスト, IOutputOrder 出力順,
             Furikomi_ShihraiHohoShitei 支払方法, RDateTime 作成日時, RString 設定値) {
         this.一覧表用データ = 一覧表用データ;
+        this.合計データリスト = 合計データリスト;
         this.出力順 = 出力順;
         this.支払方法 = 支払方法;
         this.作成日時 = 作成日時;
@@ -101,40 +105,48 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
     @Override
     public FurikomiMeisaiIchiranDetailReportSource edit(FurikomiMeisaiIchiranDetailReportSource source) {
-        毎ページ数++;
-        List<PrintNoKingakuEntity> list = 一覧表用データ.get印字様式番号別金額List();
+        if (一覧表用データ != null) {
+            毎ページ数++;
+            List<PrintNoKingakuEntity> list = 一覧表用データ.get印字様式番号別金額List();
 
-        int 様式連番 = list.get(0).get様式連番();
+            int 様式連番 = list.get(0).get様式連番();
 
-        if (毎ページ振込金額合算 == null) {
-            毎ページ振込金額合算 = Decimal.ZERO;
-        }
-        if (振込金額合算 == null) {
-            振込金額合算 = Decimal.ZERO;
-        }
-        if (様式連番_1 == 様式連番) {
-            総レコード数++;
-            if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
-                毎ページ振込金額合算 = 毎ページ振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
+            if (毎ページ振込金額合算 == null) {
+                毎ページ振込金額合算 = Decimal.ZERO;
+            }
+            if (振込金額合算 == null) {
+                振込金額合算 = Decimal.ZERO;
+            }
+            if (様式連番_1 == 様式連番) {
+                総レコード数++;
+                if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
+                    毎ページ振込金額合算 = 毎ページ振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
+                }
+
+                if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
+                    振込金額合算 = 振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
+                }
+
+            }
+            if (ページ件数 == 毎ページ数) {
+                毎ページ振込金額合算 = Decimal.ZERO;
+                毎ページ数 = 0;
             }
 
-            if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
-                振込金額合算 = 振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
+            editHeader(source);
+            if (様式連番_1 == 様式連番) {
+                edit明細1(source);
+            } else {
+                edit明細2(source);
             }
+            editフッター(source);
 
         }
-        if (ページ件数 == 毎ページ数) {
-            毎ページ振込金額合算 = Decimal.ZERO;
-            毎ページ数 = 0;
+        if (合計データリスト != null) {
+            FurikomiMeisaiGokeiEditor furikomiMeisaiGokeiEditor = new FurikomiMeisaiGokeiEditor(合計データリスト, 出力順,
+                    設定値, 作成日時);
+            source = furikomiMeisaiGokeiEditor.edit(source);
         }
-
-        editHeader(source);
-        if (様式連番_1 == 様式連番) {
-            edit明細1(source);
-        } else {
-            edit明細2(source);
-        }
-        editフッター(source);
 
         return source;
     }

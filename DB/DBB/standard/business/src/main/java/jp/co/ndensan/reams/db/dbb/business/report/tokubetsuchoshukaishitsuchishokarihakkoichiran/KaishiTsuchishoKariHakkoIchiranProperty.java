@@ -46,26 +46,6 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
             Breakers<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> breakers,
             BreakerCatalog<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> occuredBreak(
@@ -96,7 +76,7 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString("banchiCode"), new RString("\"atesaki_banchiCode1\",\"atesaki_banchiCode2\","
+        番地コード(new RString("0003"), new RString("番地コード"), new RString("\"atesaki_banchiCode1\",\"atesaki_banchiCode2\","
                 + "\"atesaki_banchiCode3\",\"atesaki_banchiCode4\"")),
         /**
          * 行政区コード
