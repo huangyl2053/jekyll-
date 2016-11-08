@@ -44,6 +44,7 @@ public class KogakuKyufuTaishoList {
             KogakuKyufuTaishoListDiv div) {
         getHandler(div).画面制御(false);
         getHandler(div).clear高額明細合計データ編集エリア();
+        getHandler(div).set明細合計区分制御();
         ViewStateHolder.put(ViewStateKeys.処理モード, 追加);
         return createResponse(div);
     }
@@ -61,6 +62,7 @@ public class KogakuKyufuTaishoList {
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
         getHandler(div).画面制御(false);
         getHandler(div).修正制御(サービス提供年月);
+        getHandler(div).set明細合計区分制御();
         ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
         return createResponse(div);
     }
@@ -78,6 +80,7 @@ public class KogakuKyufuTaishoList {
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
         getHandler(div).画面制御(true);
         getHandler(div).削除制御();
+        getHandler(div).set明細合計区分制御();
         ViewStateHolder.put(ViewStateKeys.処理モード, 削除);
         return createResponse(div);
     }
