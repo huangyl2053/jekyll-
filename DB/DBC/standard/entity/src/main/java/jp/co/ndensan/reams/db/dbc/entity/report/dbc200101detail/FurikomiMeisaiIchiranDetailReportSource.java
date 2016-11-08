@@ -108,6 +108,25 @@ public class FurikomiMeisaiIchiranDetailReportSource implements IReportSource {
     public RString gokeiNinzu;
     @ReportItem(name = "gokeiKingaku", length = 15, order = 48)
     public RString gokeiKingaku;
+
+    @ReportItem(name = "list_1", length = 8, order = 49)
+    public RString list_1;
+    @ReportItem(name = "list_2", length = 9, order = 50)
+    public RString list_2;
+    @ReportItem(name = "list_3", length = 15, order = 51)
+    public RString list_3;
+    @ReportItem(name = "list_4", length = 9, order = 52)
+    public RString list_4;
+    @ReportItem(name = "list_5", length = 15, order = 53)
+    public RString list_5;
+    @ReportItem(name = "list_6", length = 9, order = 54)
+    public RString list_6;
+    @ReportItem(name = "list_7", length = 15, order = 55)
+    public RString list_7;
+    @ReportItem(name = "list_8", length = 9, order = 56)
+    public RString list_8;
+    @ReportItem(name = "list_9", length = 15, order = 57)
+    public RString list_9;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
