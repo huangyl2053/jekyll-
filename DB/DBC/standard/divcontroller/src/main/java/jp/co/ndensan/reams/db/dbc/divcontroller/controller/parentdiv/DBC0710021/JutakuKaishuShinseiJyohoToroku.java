@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710021
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
@@ -42,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -212,6 +214,9 @@ public class JutakuKaishuShinseiJyohoToroku {
 
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
+        if (!領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
+            throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage().replace("領収日"));
+        }
         if (画面モード_修正.equals(画面モード)
                 && 領収日.getYearMonth().isBefore(画面提供着工年月.getYearMonth())) {
             if (isCheckFive(判断基準, 限度額, 削除の確認, 保存の確認, 確認_汎用)) {
@@ -550,6 +555,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
                 return ResponseData.of(div).respond();
             } else if (!ResponseHolder.isReRequest()) {
+                エラーCheck(画面モード);
                 FlexibleYearMonth 年月 = new FlexibleYearMonth(領収日.getYearMonth().toString());
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode(),
@@ -561,6 +567,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                     ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getCommHeadPanel().getTxtTeikyoYM().setValue(領収日);
+                return onClick_teikyoYMonBlur(div);
             } else if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
                     ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
@@ -577,6 +584,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void エラーCheck(RString 画面モード) {
+        if (画面モード_登録.equals(画面モード) || 画面モード_修正.equals(画面モード)) {
+            throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage().replace("領収日"));
+        }
     }
 
     /**
