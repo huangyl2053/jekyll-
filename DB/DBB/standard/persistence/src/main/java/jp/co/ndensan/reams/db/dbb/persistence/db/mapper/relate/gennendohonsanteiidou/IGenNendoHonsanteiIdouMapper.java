@@ -98,6 +98,14 @@ public interface IGenNendoHonsanteiIdouMapper {
     void insertTmpShukiIdo(ShukiIdoEntity entity);
 
     /**
+     * 宛名識別異動分を取得します。
+     *
+     * @param param IdoParameter
+     * @return List<ShukiEntity>
+     */
+    List<ShukiEntity> select宛名識別異動分(IdoParameter param);
+
+    /**
      * 住基（宛名）異動の取得に被保険者本人異動の判断
      *
      * @param param IdoParameter
