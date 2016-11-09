@@ -8,20 +8,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000023;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigokanryomessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * RiyoshaFutanWariaiKoushiConf のクラスファイル
- *
- * @reamsid_L DBC-5010-012 lijian
+ * RiyoshaFutanWariaiKoushiConf のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,6 +34,14 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     private PanelShutsuryokuNaiyoDiv PanelShutsuryokuNaiyo;
     @JsonProperty("ccdKaigoKanryoMessage")
     private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
+    @JsonProperty("lbl2wariKaishiYmdValue")
+    private RString lbl2wariKaishiYmdValue;
+    @JsonProperty("lbl2wariShuryoYmdValue")
+    private RString lbl2wariShuryoYmdValue;
+    @JsonProperty("lbl1wariKaishiYmdValue")
+    private RString lbl1wariKaishiYmdValue;
+    @JsonProperty("lbl1wariShuryoYmdValue")
+    private RString lbl1wariShuryoYmdValue;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -107,6 +113,78 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     /*
+     * getlbl2wariKaishiYmdValue
+     * @return lbl2wariKaishiYmdValue
+     */
+    @JsonProperty("lbl2wariKaishiYmdValue")
+    public RString getLbl2wariKaishiYmdValue() {
+        return lbl2wariKaishiYmdValue;
+    }
+
+    /*
+     * setlbl2wariKaishiYmdValue
+     * @param lbl2wariKaishiYmdValue lbl2wariKaishiYmdValue
+     */
+    @JsonProperty("lbl2wariKaishiYmdValue")
+    public void setLbl2wariKaishiYmdValue(RString lbl2wariKaishiYmdValue) {
+        this.lbl2wariKaishiYmdValue = lbl2wariKaishiYmdValue;
+    }
+
+    /*
+     * getlbl2wariShuryoYmdValue
+     * @return lbl2wariShuryoYmdValue
+     */
+    @JsonProperty("lbl2wariShuryoYmdValue")
+    public RString getLbl2wariShuryoYmdValue() {
+        return lbl2wariShuryoYmdValue;
+    }
+
+    /*
+     * setlbl2wariShuryoYmdValue
+     * @param lbl2wariShuryoYmdValue lbl2wariShuryoYmdValue
+     */
+    @JsonProperty("lbl2wariShuryoYmdValue")
+    public void setLbl2wariShuryoYmdValue(RString lbl2wariShuryoYmdValue) {
+        this.lbl2wariShuryoYmdValue = lbl2wariShuryoYmdValue;
+    }
+
+    /*
+     * getlbl1wariKaishiYmdValue
+     * @return lbl1wariKaishiYmdValue
+     */
+    @JsonProperty("lbl1wariKaishiYmdValue")
+    public RString getLbl1wariKaishiYmdValue() {
+        return lbl1wariKaishiYmdValue;
+    }
+
+    /*
+     * setlbl1wariKaishiYmdValue
+     * @param lbl1wariKaishiYmdValue lbl1wariKaishiYmdValue
+     */
+    @JsonProperty("lbl1wariKaishiYmdValue")
+    public void setLbl1wariKaishiYmdValue(RString lbl1wariKaishiYmdValue) {
+        this.lbl1wariKaishiYmdValue = lbl1wariKaishiYmdValue;
+    }
+
+    /*
+     * getlbl1wariShuryoYmdValue
+     * @return lbl1wariShuryoYmdValue
+     */
+    @JsonProperty("lbl1wariShuryoYmdValue")
+    public RString getLbl1wariShuryoYmdValue() {
+        return lbl1wariShuryoYmdValue;
+    }
+
+    /*
+     * setlbl1wariShuryoYmdValue
+     * @param lbl1wariShuryoYmdValue lbl1wariShuryoYmdValue
+     */
+    @JsonProperty("lbl1wariShuryoYmdValue")
+    public void setLbl1wariShuryoYmdValue(RString lbl1wariShuryoYmdValue) {
+        this.lbl1wariShuryoYmdValue = lbl1wariShuryoYmdValue;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -115,7 +193,7 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHakkobi(TextBoxDate txtHakkobi) {
+    public void  setTxtHakkobi(TextBoxDate txtHakkobi) {
         this.getPanelHakko().setTxtHakkobi(txtHakkobi);
     }
 
@@ -125,7 +203,7 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKofubi(TextBoxDate txtKofubi) {
+    public void  setTxtKofubi(TextBoxDate txtKofubi) {
         this.getPanelHakko().setTxtKofubi(txtKofubi);
     }
 
@@ -135,7 +213,7 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
+    public void  setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
         this.getPanelHakko().setDdlKofuJiyu(ddlKofuJiyu);
     }
 
@@ -145,7 +223,7 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTblShutsuryokuNaiyo(tblShutsuryokuNaiyoDiv tblShutsuryokuNaiyo) {
+    public void  setTblShutsuryokuNaiyo(tblShutsuryokuNaiyoDiv tblShutsuryokuNaiyo) {
         this.getPanelShutsuryokuNaiyo().setTblShutsuryokuNaiyo(tblShutsuryokuNaiyo);
     }
 
