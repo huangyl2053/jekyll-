@@ -63,7 +63,7 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
     public ResponseData<KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv> onActive(
             KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
-        if (イベント_対象者特定.equals(イベント名) && ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
+        if (イベント_対象者特定.equals(イベント名)) {
             getHandler(div).click条件をクリア();
             TaishoshaIchiranParameter parameter = ViewStateHolder.get(ViewStateKeys.退避用データ, TaishoshaIchiranParameter.class);
             getHandler(div).set検索条件(parameter);
