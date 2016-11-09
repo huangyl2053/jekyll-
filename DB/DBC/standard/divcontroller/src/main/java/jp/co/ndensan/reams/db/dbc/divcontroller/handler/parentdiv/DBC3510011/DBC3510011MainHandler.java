@@ -36,6 +36,7 @@ public class DBC3510011MainHandler {
 
     private static final int 国保連送付媒体ファイル名称_START = 3;
     private static final int 国保連送付媒体ファイル名称_END = 6;
+    private static final int 国保連送付媒体ファイル名称_7 = 7;
     private final DBC3510011MainDiv div;
 
     /**
@@ -66,10 +67,11 @@ public class DBC3510011MainHandler {
             RString 送付情報_RString = DataPassingConverter.serialize(送付情報);
             RString 送付情報名称 = コードマスタ.getコード名称();
             if (!RString.isNullOrEmpty(DbBusinessConfig.get(ConfigNameDBC.国保連高額合算運用_後期国保個別処理開始年月, RDate.getNowDate()))
-                    && new RString("37K").equals(送付情報名称)) {
-                if (new RString("1").equals(コード)) {
+                    && new RString("37K").equals(コード)) {
+                RString コード_7 = 送付情報.getファイル名の先頭6桁().substring(国保連送付媒体ファイル名称_END, 国保連送付媒体ファイル名称_7);
+                if (new RString("1").equals(コード_7)) {
                     送付情報名称.concat(new RString("（国保分）"));
-                } else if (new RString("2").equals(コード)) {
+                } else if (new RString("2").equals(コード_7)) {
                     送付情報名称.concat(new RString("（後期分）"));
                 }
             }
@@ -88,8 +90,9 @@ public class DBC3510011MainHandler {
         HokenshaJoHoList hokenshaJoHo = DataPassingConverter.deserialize(row.getHdnHokenshaJoHoList(), HokenshaJoHoList.class);
         div.getTxtSofuJohoMeisho().setValue(row.getSofuJohoMeisho());
         List<dgSofuDataIchiran_Row> 送付データList = new ArrayList<>();
-        for (RString 共有ファイル名 : hokenshaJoHo.get共有ファイル名()) {
-            送付データList.add(new dgSofuDataIchiran_Row(RString.EMPTY, 共有ファイル名));
+        for (int i = 0; i < hokenshaJoHo.get共有ファイル名().size(); i++) {
+            送付データList.add(new dgSofuDataIchiran_Row(RString.EMPTY, hokenshaJoHo.get共有ファイル名().get(i),
+                    hokenshaJoHo.get共有ファイルID().get(i)));
         }
         div.getDgSofuDataIchiran().setDataSource(送付データList);
     }
