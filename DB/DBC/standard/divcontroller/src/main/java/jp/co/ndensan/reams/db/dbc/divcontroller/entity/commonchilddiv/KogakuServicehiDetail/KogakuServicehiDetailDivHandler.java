@@ -93,7 +93,6 @@ public class KogakuServicehiDetailDivHandler {
             if (サービス年月 != null && !サービス年月.isEmpty()) {
                 div.getTxtTeikyoYM().setValue(new RDate(サービス年月.toString()));
             }
-            div.getTplShinseisha().getTxtShinseiYMD().setValue(new RDate(RDate.getNowDate().toString()));
             div.getTplShinseisha().getRdbShinseisyaKubun().setSelectedKey(KEY0);
             div.getRdbShikyuKubun().setSelectedKey(KEY0);
             div.getRdbShinsaHohoKubun().setSelectedKey(KEY0);
