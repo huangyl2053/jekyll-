@@ -235,6 +235,17 @@
                 <artifactId>DzxBusiness</artifactId>
                 <version>${jp.co.ndensan.reams.dzxVersion}</version>
             </dependency>
+            <!-- BBX -->
+	        <dependency>
+	            <groupId>jp.co.ndensan.reams.bb.bbx</groupId>
+	            <artifactId>BbxEntity</artifactId>
+	            <version>${jp.co.ndensan.reams.bbVersion}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>jp.co.ndensan.reams.bb.bbx</groupId>
+	            <artifactId>BbxDefinition</artifactId>
+	            <version>${jp.co.ndensan.reams.bbVersion}</version>
+	        </dependency>
             <!-- ツール -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
