@@ -1181,7 +1181,7 @@ public class FukaKeisan extends FukaKeisanFath {
         if (param.get年額保険料() != null) {
             builder.set減免前介護保険料_年額(param.get年額保険料())
                     .set確定介護保険料_年額(param.get年額保険料().subtract(param.get賦課の情報_設定前().get減免額() == null
-                                    ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
+                            ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
         } else {
             builder.set減免前介護保険料_年額(null).set確定介護保険料_年額(null);
         }
@@ -1199,18 +1199,20 @@ public class FukaKeisan extends FukaKeisanFath {
             return;
         }
         List<RString> dankaiList = new ArrayList<>();
-        dankaiList.add(月別保険料段階.get保険料段階04月());
-        dankaiList.add(月別保険料段階.get保険料段階05月());
-        dankaiList.add(月別保険料段階.get保険料段階06月());
-        dankaiList.add(月別保険料段階.get保険料段階07月());
-        dankaiList.add(月別保険料段階.get保険料段階08月());
-        dankaiList.add(月別保険料段階.get保険料段階09月());
-        dankaiList.add(月別保険料段階.get保険料段階10月());
-        dankaiList.add(月別保険料段階.get保険料段階11月());
-        dankaiList.add(月別保険料段階.get保険料段階12月());
-        dankaiList.add(月別保険料段階.get保険料段階01月());
-        dankaiList.add(月別保険料段階.get保険料段階02月());
-        dankaiList.add(月別保険料段階.get保険料段階03月());
+        HokenryoDankaiList hokenryoDankaiList = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課年度);
+        
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階04月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階05月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階06月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階07月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階08月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階09月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階10月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階11月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階12月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階01月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階02月()).get段階区分());
+        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階03月()).get段階区分());
 
         RString 保険料算定段階1 = RString.EMPTY;
         RString 保険料算定段階2 = RString.EMPTY;
@@ -1231,7 +1233,7 @@ public class FukaKeisan extends FukaKeisanFath {
             count = count + INT_1;
             if (!RString.isNullOrEmpty(dankaiList.get(i))) {
                 保険料算定段階1 = dankaiList.get(i);
-                HokenryoDankai 保険料段階1 = getHokenryoDankaiBy段階区分(保険料算定段階1);
+                HokenryoDankai 保険料段階1 = hokenryoDankaiList.getBy段階区分(保険料算定段階1);
                 builder.set保険料算定段階1(dankaiList.get(i))
                         .set算定年額保険料1(保険料段階1.get保険料率())
                         .set月割開始年月1(new FlexibleYearMonth(年月.get(i)));
@@ -1259,7 +1261,7 @@ public class FukaKeisan extends FukaKeisanFath {
             count = count + INT_1;
             if (!RString.isNullOrEmpty(dankaiList.get(i))) {
                 保険料算定段階2 = dankaiList.get(i);
-                HokenryoDankai 保険料段階2 = getHokenryoDankaiBy段階区分(保険料算定段階2);
+                HokenryoDankai 保険料段階2 = hokenryoDankaiList.getBy段階区分(保険料算定段階2);
                 builder.set保険料算定段階2(dankaiList.get(i))
                         .set算定年額保険料2(保険料段階2.get保険料率())
                         .set月割開始年月2(new FlexibleYearMonth(年月.get(i)));
@@ -1282,11 +1284,6 @@ public class FukaKeisan extends FukaKeisanFath {
             builder.set保険料段階(保険料算定段階1)
                     .set保険料算定段階2(null).set算定年額保険料2(null).set月割開始年月2(null).set月割終了年月2(null);
         }
-    }
-
-    private HokenryoDankai getHokenryoDankaiBy段階区分(RString 段階区分) {
-        HokenryoDankaiList hokenryoDankaiList = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-        return hokenryoDankaiList.getBy段階区分(段階区分);
     }
 
     /**

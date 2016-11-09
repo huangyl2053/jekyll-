@@ -45,7 +45,7 @@ public class HokenryoDankaiHantei {
 
         } else {
             // 所得調査中などで所得段階が暫定的に決まっているので、それを返す
-            tsukibetsuHokenryoDankai = new TsukibetsuHokenryoDankai(hokenryoDankaiHanteiParameter.getSeigyoJoho().getHokenryoDankaiList().getBy段階Index(kazeiHanteiResult).get段階区分());
+            tsukibetsuHokenryoDankai = new TsukibetsuHokenryoDankai(kazeiHanteiResult);
         }
 
         return tsukibetsuHokenryoDankai;
