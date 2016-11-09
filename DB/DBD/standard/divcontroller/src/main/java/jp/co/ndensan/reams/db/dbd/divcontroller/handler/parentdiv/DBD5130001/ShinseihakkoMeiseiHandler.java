@@ -244,13 +244,15 @@ public class ShinseihakkoMeiseiHandler {
         boolean 要介護 = false;
         boolean 要支援 = false;
         shinseiShoEntity.set有効期間開始年月日(getパターン9(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue()));
-        shinseiShoEntity.set有効開始年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().wareki().toDateString());
+        shinseiShoEntity.set有効開始年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getYear().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
         shinseiShoEntity.set有効開始月MM(new RString(String.valueOf(
                 div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getMonthValue())).padLeft(RString.HALF_SPACE, NO_2));
         shinseiShoEntity.set有効開始日DD(new RString(String.valueOf(
                 div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().getValue().getDayValue())).padLeft(RString.HALF_SPACE, NO_2));
         shinseiShoEntity.set有効期間終了年月日(getパターン9(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue()));
-        shinseiShoEntity.set有効終了年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().wareki().toDateString());
+        shinseiShoEntity.set有効終了年YYYY(div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getYear().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
         shinseiShoEntity.set有効終了月MM(new RString(String.valueOf(
                 div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue().getMonthValue())).padLeft(RString.HALF_SPACE, NO_2));
         shinseiShoEntity.set有効終了日DD(new RString(String.valueOf(
