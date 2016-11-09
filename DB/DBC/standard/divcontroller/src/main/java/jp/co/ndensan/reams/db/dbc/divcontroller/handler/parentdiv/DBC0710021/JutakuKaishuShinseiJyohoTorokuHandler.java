@@ -656,7 +656,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (事前申請情報.get支払期間開始年月日() != null && !事前申請情報.get支払期間開始年月日().isEmpty()) {
             支給申請情報.setStartYMD(new RDate(事前申請情報.get支払期間開始年月日().toString()));
         }
-        if (事前申請情報.get支払期間終了年月日() != null && 事前申請情報.get支払期間終了年月日().isEmpty()) {
+        if (事前申請情報.get支払期間終了年月日() != null && !事前申請情報.get支払期間終了年月日().isEmpty()) {
             支給申請情報.setEndYMD(new RDate(事前申請情報.get支払期間終了年月日().toString()));
         }
         if (!RString.isNullOrEmpty(事前申請情報.get支払窓口開始時間())) {
