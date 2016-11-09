@@ -63,7 +63,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
     private static final RString 確認内容 = new RString("資格喪失している、負担割合証を発行しませんでした。");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final EucEntityId SHORIKEKKA_EUC_ENTITY_ID = new EucEntityId(new RString("DBU900002"));
+    private static final EucEntityId SHORIKEKKA_EUC_ENTITY_ID = new EucEntityId(new RString("DBC900004"));
     private static final RString 交付証種類_003 = new RString("003");
     private static final RString 定数_1 = new RString("1");
     private static final RString 定数_2 = new RString("2");
