@@ -107,7 +107,7 @@ public class KaishuriyushoSeikyushoShinseishoDBC100045Process extends BatchProce
         if (entity.get電話番号() != null) {
             data.set請求者_電話番号(entity.get電話番号().value());
         }
-        data.set通知文(get通知文().get(1));
+        data.set通知文(get通知文().get(0));
         if (entity.get介護住宅改修理由書作成事業者番号() != null) {
             data.set指定事業者番号(entity.get介護住宅改修理由書作成事業者番号().value());
         }
