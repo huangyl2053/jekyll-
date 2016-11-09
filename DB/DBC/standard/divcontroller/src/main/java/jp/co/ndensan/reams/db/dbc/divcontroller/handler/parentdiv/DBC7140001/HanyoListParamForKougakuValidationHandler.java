@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7140001;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7140001.HanyoListParamForKougakuDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -46,9 +47,9 @@ public class HanyoListParamForKougakuValidationHandler {
         RString 支給申請書整理番号To = div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue();
         if (null != 支給申請書整理番号From && null != 支給申請書整理番号To
                 && RString.EMPTY != 支給申請書整理番号From && RString.EMPTY != 支給申請書整理番号To) {
-            int 支給申請書整理番号F = Integer.parseInt(支給申請書整理番号From.toString());
-            int 支給申請書整理番号T = Integer.parseInt(支給申請書整理番号To.toString());
-            if (支給申請書整理番号T < 支給申請書整理番号F) {
+            Decimal 支給申請書整理番号F = new Decimal(支給申請書整理番号From.toString());
+            Decimal 支給申請書整理番号T = new Decimal(支給申請書整理番号To.toString());
+            if (支給申請書整理番号T.compareTo(支給申請書整理番号F) < 0) {
                 pairs.add(new ValidationMessageControlPair(
                         new IdocheckMessages(UrErrorMessages.大小関係が不正, 交付申請書整理番号.toString())));
                 return pairs;
