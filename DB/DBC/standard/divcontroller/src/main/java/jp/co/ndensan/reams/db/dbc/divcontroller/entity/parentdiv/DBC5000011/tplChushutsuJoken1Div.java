@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tplChushutsuJoken1Div extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,10 +28,10 @@ public class tplChushutsuJoken1Div extends TabPanel {
     private TextBoxDateRange txtRangeYM;
     @JsonProperty("txtRangeHihokenshaNoFrom")
     private TextBoxCode txtRangeHihokenshaNoFrom;
-    @JsonProperty("txtRangeHihokenshaNoTo")
-    private TextBoxCode txtRangeHihokenshaNoTo;
     @JsonProperty("btnHihokenshaNoFromSearch")
     private Button btnHihokenshaNoFromSearch;
+    @JsonProperty("txtRangeHihokenshaNoTo")
+    private TextBoxCode txtRangeHihokenshaNoTo;
     @JsonProperty("btnHihokenshaNoToSearch")
     private Button btnHihokenshaNoToSearch;
     @JsonProperty("radKyufuJissekiKubun")
@@ -104,24 +104,6 @@ public class tplChushutsuJoken1Div extends TabPanel {
     }
 
     /*
-     * gettxtRangeHihokenshaNoTo
-     * @return txtRangeHihokenshaNoTo
-     */
-    @JsonProperty("txtRangeHihokenshaNoTo")
-    public TextBoxCode getTxtRangeHihokenshaNoTo() {
-        return txtRangeHihokenshaNoTo;
-    }
-
-    /*
-     * settxtRangeHihokenshaNoTo
-     * @param txtRangeHihokenshaNoTo txtRangeHihokenshaNoTo
-     */
-    @JsonProperty("txtRangeHihokenshaNoTo")
-    public void setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
-        this.txtRangeHihokenshaNoTo = txtRangeHihokenshaNoTo;
-    }
-
-    /*
      * getbtnHihokenshaNoFromSearch
      * @return btnHihokenshaNoFromSearch
      */
@@ -137,6 +119,24 @@ public class tplChushutsuJoken1Div extends TabPanel {
     @JsonProperty("btnHihokenshaNoFromSearch")
     public void setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
         this.btnHihokenshaNoFromSearch = btnHihokenshaNoFromSearch;
+    }
+
+    /*
+     * gettxtRangeHihokenshaNoTo
+     * @return txtRangeHihokenshaNoTo
+     */
+    @JsonProperty("txtRangeHihokenshaNoTo")
+    public TextBoxCode getTxtRangeHihokenshaNoTo() {
+        return txtRangeHihokenshaNoTo;
+    }
+
+    /*
+     * settxtRangeHihokenshaNoTo
+     * @param txtRangeHihokenshaNoTo txtRangeHihokenshaNoTo
+     */
+    @JsonProperty("txtRangeHihokenshaNoTo")
+    public void setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
+        this.txtRangeHihokenshaNoTo = txtRangeHihokenshaNoTo;
     }
 
     /*

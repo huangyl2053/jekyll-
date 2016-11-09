@@ -45,6 +45,8 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
     private List<RString> 市町村コードリスト;
     private boolean is旧保険者分;
     private boolean is構成市町村分;
+    private RString 保険者番号;
+    private RString 保険者名称;
 
     /**
      * コンストラクタです。
@@ -70,6 +72,8 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
      * @param 市町村コードリスト List<RString>
      * @param is旧保険者分 boolean
      * @param is構成市町村分 boolean
+     * @param 保険者番号 保険者番号
+     * @param 保険者名称 保険者名称
      */
     public JigyoHokokuRenkeiProcessParameter(
             RString spoolWorkPath,
@@ -92,8 +96,9 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
             boolean is出力_保険給付決定状況合算_決定年月,
             List<RString> 市町村コードリスト,
             boolean is旧保険者分,
-            boolean is構成市町村分
-    ) {
+            boolean is構成市町村分,
+            RString 保険者番号,
+            RString 保険者名称) {
         this.spoolWorkPath = spoolWorkPath;
         this.過去集計年月 = 過去集計年月;
         this.一般状況1_10集計年月 = 一般状況1_10集計年月;
@@ -115,6 +120,8 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
         this.市町村コードリスト = 市町村コードリスト;
         this.is旧保険者分 = is旧保険者分;
         this.is構成市町村分 = is構成市町村分;
+        this.保険者番号 = 保険者番号;
+        this.保険者名称 = 保険者名称;
     }
 
     /**
