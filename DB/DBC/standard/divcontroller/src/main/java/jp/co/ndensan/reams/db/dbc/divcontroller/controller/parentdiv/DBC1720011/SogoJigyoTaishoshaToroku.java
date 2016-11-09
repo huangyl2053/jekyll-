@@ -192,9 +192,10 @@ public class SogoJigyoTaishoshaToroku {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
             ArrayList<SogoJigyoTaishoshaToJotai> 一覧情報と状態
                     = ViewStateHolder.get(ViewStateKeys.申請一覧情報と状態, ArrayList.class);
-            getHandler(div).保存処理(一覧情報と状態, 被保険者番号);
+            getHandler(div).保存処理(一覧情報と状態, 被保険者番号, 識別コード);
             return ResponseData.of(div).setState(Kanryo);
         }
         return ResponseData.of(div).respond();
@@ -237,7 +238,7 @@ public class SogoJigyoTaishoshaToroku {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             Boolean isロック = ViewStateHolder.get(ViewStateKeys.isロック, Boolean.class);
-            if (isロック != null && !isロック) {
+            if (isロック != null && isロック) {
                 TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
                 getHandler(div).前排他解除(taishoshaKey.get被保険者番号());
             }
@@ -259,7 +260,7 @@ public class SogoJigyoTaishoshaToroku {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             Boolean isロック = ViewStateHolder.get(ViewStateKeys.isロック, Boolean.class);
-            if (isロック != null && !isロック) {
+            if (isロック != null && isロック) {
                 TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
                 getHandler(div).前排他解除(taishoshaKey.get被保険者番号());
             }
