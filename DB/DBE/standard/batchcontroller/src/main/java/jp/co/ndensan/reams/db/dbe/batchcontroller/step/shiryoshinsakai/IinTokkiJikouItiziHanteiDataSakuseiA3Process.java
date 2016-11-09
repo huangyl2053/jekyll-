@@ -57,7 +57,8 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
     private static final RString SELECT_NINTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getTokkiJikouItiziHantei");
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
-            new RString(IinTokkiTextA3ReportSource.ReportSourceFields.shinseiCount.name())));
+            new RString(IinTokkiTextA3ReportSource.ReportSourceFields.two_tokkiText1.name()),
+            new RString(IinTokkiTextA3ReportSource.ReportSourceFields.two_tokkiImg1.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IShiryoShinsakaiIinMapper mapper;
@@ -112,14 +113,6 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
 
     @Override
     protected void keyBreakProcess(ItiziHanteiEntity t) {
-        if (hasBrek(getBefore(), t)) {
-            IinTokkiTextA3Report report = new IinTokkiTextA3Report(item);
-            report.writeBy(reportSourceWriterA3);
-        }
-    }
-
-    private boolean hasBrek(ItiziHanteiEntity before, ItiziHanteiEntity current) {
-        return before.getShinsakaiOrder() != current.getShinsakaiOrder();
     }
 
     @Override
