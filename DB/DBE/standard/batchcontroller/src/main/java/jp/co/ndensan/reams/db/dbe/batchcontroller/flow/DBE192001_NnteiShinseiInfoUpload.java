@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -94,6 +95,11 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
         RDate 基準日 = RDate.getNowDate();
         path = Directory.createTmpDirectory();
         List<RString> 取込み対象ファイルリスト = getParameter().get取込み対象ファイルリスト();
+        List<RDateTime> 共有ファイルIList = getParameter().get共有ファイルIDList();
+        for (RDateTime 共有ファイルID : 共有ファイルIList) {
+            SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                    共有ファイルID), new FilesystemPath(path));
+        }
         if (取込み対象ファイルリスト != null && !取込み対象ファイルリスト.isEmpty()) {
             RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, 基準日, SubGyomuCode.DBE認定支援);
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, 基準日, SubGyomuCode.DBE認定支援);
@@ -164,8 +170,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請中間一時TBL_東芝版)
     protected IBatchFlowCommand insert要介護認定申請一時テーブル_東芝版() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -243,8 +247,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT主治医一時TBL_厚労省)
     protected IBatchFlowCommand insert主治医情報一時TBL_厚労省() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -301,8 +303,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT医療機関一時TBL_厚労省)
     protected IBatchFlowCommand insert主治医医療機関一時TBL_厚労省() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -359,8 +359,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT調査員一時TBL_厚労省)
     protected IBatchFlowCommand insert認定調査員一時TBL_厚労省() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -417,8 +415,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT委託先一時TBL_厚労)
     protected IBatchFlowCommand insert認定調査委託先一時TBL_厚労() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -474,8 +470,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請一時TBL_厚労省)
     protected IBatchFlowCommand insert認定申請一時中間テーブル_厚労省() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -532,8 +526,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT主治医一時TBL_電算)
     protected IBatchFlowCommand insert主治医情報一時TBL_電算() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -602,8 +594,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT医療機関一時TBL_電算)
     protected IBatchFlowCommand insert主治医医療機関一時TBL_電算() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -672,8 +662,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT調査員一時TBL_電算)
     protected IBatchFlowCommand insert認定調査員一時TBL_電算() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -742,8 +730,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT委託先一時TBL_電算)
     protected IBatchFlowCommand insert認定調査委託先一時TBL_電算() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
@@ -816,8 +802,6 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請中間一時TBL_電算)
     protected IBatchFlowCommand insert認定申請一時中間テーブル_電算標準版() {
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                getParameter().get共有ファイルID()), new FilesystemPath(path));
         return importCsv(認定申請ファイル, 認定申請中間一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
