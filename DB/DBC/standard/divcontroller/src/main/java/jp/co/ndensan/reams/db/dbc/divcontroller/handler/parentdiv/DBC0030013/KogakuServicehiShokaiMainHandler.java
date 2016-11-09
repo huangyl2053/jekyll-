@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaihanteikekka.ShikyuMe
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.JidoShokanTaishoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030013.HanteiKekkaLDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030013.HanteiKekkaRDiv;
@@ -27,7 +28,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -64,10 +64,7 @@ public class KogakuServicehiShokaiMainHandler {
      * @param 引き継ぎ情報 KogakuServiceData
      */
     public void load共有子Div(KogakuServiceData 引き継ぎ情報) {
-        // TODO 上の画面の識別コードの取得は問題があります。Redmine#89690
         ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
-//        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();
         div.getSetaiInfo().getCcdKaigoAtenaInfo().initialize(識別コード);
@@ -75,10 +72,7 @@ public class KogakuServicehiShokaiMainHandler {
         if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
             FlexibleDate 世帯基準年月日 = new FlexibleDate(サービス提供年月.toString().concat(世帯基準の日.toString()));
             FlexibleYear 所得年度 = サービス提供年月.getYear();
-            // TODO QA902 初期化時に、共有子Div内部で表示する世帯員のアクセスログ出力を行う
-            // TODO QA902 YMDHMS.now()?EMPTY?
-            // TODO QA899 「並べて表示する」ボタンの問題
-            div.getSetaiInfoPanel().getCcdSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, YMDHMS.now());
+            div.getSetaiInfoPanel().getCcdSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, null);
         }
     }
 
@@ -119,7 +113,6 @@ public class KogakuServicehiShokaiMainHandler {
 
         HanteiKekkaLDiv 並べて表示エリア_左側 = 並べて表示エリア.getSetaiinL().getHanteiKekkaL();
         並べて表示エリア_左側.getHanteiKekkaDetailL().getTxtHihoNoL().setValue(世帯員所得Selected.get(0).get被保険者番号().getColumnValue());
-        // TODO QA911 氏名はEMPTYです。
         並べて表示エリア_左側.getHanteiKekkaDetailL().getTxtHihoNameR().setValue(世帯員所得Selected.get(0).get氏名());
         if (高額判定結果_左側 != null) {
             並べて表示エリア.getTxtSetaiShuyakuNo().setValue(高額判定結果_左側.get世帯集約番号());
@@ -131,7 +124,6 @@ public class KogakuServicehiShokaiMainHandler {
             parameter.set被保険者番号(世帯員所得Selected.get(1).get被保険者番号());
             KogakuShokaiHanteiKekkaResult 高額判定結果_右側 = finder.get支給判定結果(parameter);
             並べて表示エリア_右側.getHanteiKekkaDetailR().getTxtHihoNoR().setValue(世帯員所得Selected.get(1).get被保険者番号().getColumnValue());
-            // TODO QA911 氏名はEMPTYです。
             並べて表示エリア_右側.getHanteiKekkaDetailR().getTxtHihoNameL().setValue(世帯員所得Selected.get(1).get氏名());
             if (高額判定結果_右側 != null) {
                 set並べて表示エリア_右側(高額判定結果_右側, 並べて表示エリア_右側);
@@ -277,13 +269,11 @@ public class KogakuServicehiShokaiMainHandler {
         if (世帯員所得Selected == null || 世帯員所得Selected.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象者を選択.getMessage().evaluate());
         }
-        // TODO QA902 給付実績より同月サービス情報を取得部分は未実装  SetaiinShotokuJohoFinder
-//        for (SetaiinShotoku 世帯員所得 : 世帯員所得Selected) {
-//            if (!世帯員所得.is同月サービス有無()) {
-//                世帯員所得.
-//                throw new ApplicationException(DbcErrorMessages.同月サービスなし世帯員.getMessage().evaluate());
-//            }
-//        }
+        for (SetaiinShotoku 世帯員所得 : 世帯員所得Selected) {
+            if (!世帯員所得.is同月サービス有無()) {
+                throw new ApplicationException(DbcErrorMessages.同月サービスなし世帯員.getMessage().evaluate());
+            }
+        }
     }
 
     private List<KeyValueDataSource> get審査方法() {
