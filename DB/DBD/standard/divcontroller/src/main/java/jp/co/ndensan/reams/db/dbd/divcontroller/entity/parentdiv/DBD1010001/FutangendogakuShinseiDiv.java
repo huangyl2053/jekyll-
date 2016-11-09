@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class FutangendogakuShinseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -57,6 +57,12 @@ public class FutangendogakuShinseiDiv extends Panel {
     private RString mode;
     @JsonProperty("shikibetsuCode")
     private RString shikibetsuCode;
+    @JsonProperty("hidden登録業務コード")
+    private RString hidden登録業務コード;
+    @JsonProperty("hidden登録グループコード")
+    private RString hidden登録グループコード;
+    @JsonProperty("hiddenサンプル文書")
+    private RString hiddenサンプル文書;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -254,6 +260,60 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
+     * gethidden登録業務コード
+     * @return hidden登録業務コード
+     */
+    @JsonProperty("hidden登録業務コード")
+    public RString getHidden登録業務コード() {
+        return hidden登録業務コード;
+    }
+
+    /*
+     * sethidden登録業務コード
+     * @param hidden登録業務コード hidden登録業務コード
+     */
+    @JsonProperty("hidden登録業務コード")
+    public void setHidden登録業務コード(RString hidden登録業務コード) {
+        this.hidden登録業務コード = hidden登録業務コード;
+    }
+
+    /*
+     * gethidden登録グループコード
+     * @return hidden登録グループコード
+     */
+    @JsonProperty("hidden登録グループコード")
+    public RString getHidden登録グループコード() {
+        return hidden登録グループコード;
+    }
+
+    /*
+     * sethidden登録グループコード
+     * @param hidden登録グループコード hidden登録グループコード
+     */
+    @JsonProperty("hidden登録グループコード")
+    public void setHidden登録グループコード(RString hidden登録グループコード) {
+        this.hidden登録グループコード = hidden登録グループコード;
+    }
+
+    /*
+     * gethiddenサンプル文書
+     * @return hiddenサンプル文書
+     */
+    @JsonProperty("hiddenサンプル文書")
+    public RString getHiddenサンプル文書() {
+        return hiddenサンプル文書;
+    }
+
+    /*
+     * sethiddenサンプル文書
+     * @param hiddenサンプル文書 hiddenサンプル文書
+     */
+    @JsonProperty("hiddenサンプル文書")
+    public void setHiddenサンプル文書(RString hiddenサンプル文書) {
+        this.hiddenサンプル文書 = hiddenサンプル文書;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -337,6 +397,11 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return this.getHeader().getCcdShisetsuNyushoInfo();
+    }
+
+    @JsonIgnore
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return this.getHeader().getCcdKaigoShikakuKihon();
     }
@@ -344,11 +409,6 @@ public class FutangendogakuShinseiDiv extends Panel {
     @JsonIgnore
     public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
         return this.getHeader().getCcdAtenaInfo();
-    }
-
-    @JsonIgnore
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return this.getHeader().getCcdShisetsuNyushoInfo();
     }
 
     @JsonIgnore

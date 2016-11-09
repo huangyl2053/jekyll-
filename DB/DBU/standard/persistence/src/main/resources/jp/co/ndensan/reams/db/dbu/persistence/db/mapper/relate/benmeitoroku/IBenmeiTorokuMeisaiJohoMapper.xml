@@ -19,6 +19,7 @@
         rgdb."DbT7002BemmeiNaiyo"."shikibetsuCode" = #{shikibetsuCode}
         AND rgdb."DbT7002BemmeiNaiyo"."genshobunHihokenshaNo" = #{genshobunHihokenshaNo}
         AND rgdb."DbT7002BemmeiNaiyo"."shinsaseikyuTodokedeYMD" = #{shinsaseikyuTodokedeYMD}
+        AND rgdb."DbT7002BemmeiNaiyo"."bemmeishoSakuseiYMD" = #{benmeishoSakuseibi}
     </select>
     
     <sql id="allColumns_BenmeiTorokuMeisaiJoho">

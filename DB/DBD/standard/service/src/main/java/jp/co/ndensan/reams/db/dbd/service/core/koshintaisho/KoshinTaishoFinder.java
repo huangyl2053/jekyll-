@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.koshintaisho.KoshinTaish
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.SelectSyuuShadeTaCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.SelectSyuuShadeTaEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshintaisho.IKoshinTaishoMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
@@ -31,11 +32,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -48,6 +51,8 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.CountedItem;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -343,5 +348,40 @@ public class KoshinTaishoFinder {
         entity.set認定調査障害高齢者の日常生活自立度コード(sqlEntity.get認定調査障害高齢者の日常生活自立度コード());
         entity.set調査項目連番(sqlEntity.get調査項目連番());
         entity.set内容(sqlEntity.get内容());
+    }
+    
+    /**
+     * 受給者台帳情報の追加する
+     *
+     * @param shinseishoKanriNo RString
+     */
+    public void insert受給者台帳情報(RString shinseishoKanriNo) {
+        IKoshinTaishoMapper mapper = mapperProvider.create(IKoshinTaishoMapper.class);
+        DbT4001JukyushaDaichoEntity 受給者台帳情報 = mapper.get受給者台帳情報(shinseishoKanriNo); 
+        if (受給者台帳情報 != null) {
+
+            DbT4001JukyushaDaichoEntity 新規受給者台帳情報 = new DbT4001JukyushaDaichoEntity();
+            新規受給者台帳情報.setShichosonCode(受給者台帳情報.getShichosonCode());
+            新規受給者台帳情報.setHihokenshaNo(受給者台帳情報.getHihokenshaNo());
+            新規受給者台帳情報.setRirekiNo(new RString(Integer.parseInt(受給者台帳情報.getRirekiNo().toString()) + 1));
+            新規受給者台帳情報.setEdaban(new RString("00"));
+            CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
+            新規受給者台帳情報.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
+            新規受給者台帳情報.setShinseiJokyoKubun(new RString("9"));
+            新規受給者台帳情報.setShishoCode(受給者台帳情報.getShishoCode());
+            新規受給者台帳情報.setChokkinFlag(false);
+            新規受給者台帳情報.setShikibetsuCode(受給者台帳情報.getShikibetsuCode());
+            新規受給者台帳情報.setJukyuShinseiJiyu(new Code("7"));
+            新規受給者台帳情報.setYukoMukoKubun(new Code("2"));
+            新規受給者台帳情報.setDataKubun(new Code("51"));
+            新規受給者台帳情報.setRemban(new RString("0001"));
+            新規受給者台帳情報.setYoshienshaNinteiShinseiFlag(false);
+            新規受給者台帳情報.setShikakuShutokuMaeShinseiFlag(false);
+            新規受給者台帳情報.setKyuSochishaFlag(false);
+            新規受給者台帳情報.setLogicalDeletedFlag(false);
+
+            KoshinTaishoManager manger = KoshinTaishoManager.createInstance();
+            manger.insertDbt4001johon(新規受給者台帳情報);
+        }
     }
 }

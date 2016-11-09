@@ -299,6 +299,7 @@ public class SinsaSeikyusyoMeisaiPanelHandler {
 
         if (fufukuMoshitate.get審査請求届出日() != null && !fufukuMoshitate.get審査請求届出日().isEmpty()) {
             div.getMeisaiPanel().getTxtdateTodokedebi().setValue(new RDate(fufukuMoshitate.get審査請求届出日().toString()));
+            div.getMeisaiPanel().getTxtdateTodokedebi().setDisabled(true);
         }
         div.getSinsaSeikyuninJohoPanel().getTxtYubinNo().setValue(fufukuMoshitate.get審査請求人郵便番号());
         div.getSinsaSeikyuninJohoPanel().getTxtJusho().setDomain(new AtenaJusho(fufukuMoshitate

@@ -15,12 +15,10 @@ import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataBuilder;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
 import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushiki2no8.DetalParameter;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.NenpoYoushiki2No8Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgChiikimitchakuyobosabisujukyu_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgHisetsugaigosabisujukyu_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgItakuyobosabisujukyusu_Row;
-import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -86,13 +84,11 @@ public class NenpoYoushiki2No8Handler {
     /**
      * 行番号を取得します。
      *
-     * @param jigyoHokokuNenpoSearch SearchJigyoHokokuNenpo
+     * @param 事業報告集計一覧データリスト 事業報告集計一覧データリスト
      * @return 行番list
      */
-    public List<Decimal> get行番(SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch) {
+    public List<Decimal> get行番(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト) {
         List<Decimal> 行番list = new ArrayList<>();
-        List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
-                getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
         Collections.sort(事業報告集計一覧データリスト, new DateComparator());
         for (JigyoHokokuTokeiData list : 事業報告集計一覧データリスト) {
             行番list.add(list.get縦番号());
@@ -212,9 +208,7 @@ public class NenpoYoushiki2No8Handler {
         List<DetalParameter> 件数Parameter = get件数データ();
         for (DetalParameter detal : 件数Parameter) {
             for (JigyoHokokuTokeiData viewdata : 件数タブデータ) {
-                if (detal.get縦番号().compareTo(viewdata.get縦番号()) == 0
-                        && detal.get横番号().compareTo(viewdata.get横番号()) == 0
-                        && detal.get集計結果値().compareTo(viewdata.get集計結果値()) != 0) {
+                if (isデータ不一致(detal, viewdata)) {
                     viewdata = viewdata.createBuilderForEdit().set集計結果値(detal.get集計結果値()).build();
                     list.add(viewdata);
                 }
@@ -224,9 +218,7 @@ public class NenpoYoushiki2No8Handler {
         for (DetalParameter detal : 費用額Parameter) {
             for (JigyoHokokuTokeiData viewdata : 費用額データ) {
                 JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
-                if (detal.get縦番号().compareTo(viewdata.get縦番号()) == 0
-                        && detal.get横番号().compareTo(viewdata.get横番号()) == 0
-                        && detal.get集計結果値().compareTo(viewdata.get集計結果値()) != 0) {
+                if (isデータ不一致(detal, viewdata)) {
                     builder.set集計結果値(detal.get集計結果値());
                     viewdata = builder.build();
                     list.add(viewdata);
@@ -237,9 +229,7 @@ public class NenpoYoushiki2No8Handler {
         for (DetalParameter detal : 給付額Parameter) {
             for (JigyoHokokuTokeiData viewdata : 給付額データ) {
                 JigyoHokokuTokeiDataBuilder builder = viewdata.createBuilderForEdit();
-                if (detal.get縦番号().compareTo(viewdata.get縦番号()) == 0
-                        && detal.get横番号().compareTo(viewdata.get横番号()) == 0
-                        && detal.get集計結果値().compareTo(viewdata.get集計結果値()) != 0) {
+                if (isデータ不一致(detal, viewdata)) {
                     builder.set集計結果値(detal.get集計結果値());
                     viewdata = builder.build();
                     list.add(viewdata);
@@ -247,5 +237,18 @@ public class NenpoYoushiki2No8Handler {
             }
         }
         return list;
+    }
+
+    private boolean isデータ不一致(DetalParameter detal, JigyoHokokuTokeiData viewdata) {
+        return detal.get縦番号().compareTo(safeValue(viewdata.get縦番号())) == 0
+                && detal.get横番号().compareTo(safeValue(viewdata.get横番号())) == 0
+                && detal.get集計結果値().compareTo(safeValue(viewdata.get集計結果値())) != 0;
+    }
+
+    private Decimal safeValue(Decimal dec) {
+        if (dec == null) {
+            return Decimal.ZERO;
+        }
+        return dec;
     }
 }

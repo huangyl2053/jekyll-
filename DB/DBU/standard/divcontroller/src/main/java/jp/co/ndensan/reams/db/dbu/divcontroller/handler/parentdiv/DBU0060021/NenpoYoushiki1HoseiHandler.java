@@ -104,14 +104,25 @@ public class NenpoYoushiki1HoseiHandler {
         List<TempJigyoHokokuNenpoDetalParameter> tempModifyData = getTempModifyData();
         for (TempJigyoHokokuNenpoDetalParameter paramData : tempModifyData) {
             for (JigyoHokokuTokeiData viewData : jigyoHokokuTokeiData) {
-                if (paramData.get縦番号().compareTo(viewData.get縦番号()) == 0
-                        && paramData.get横番号().compareTo(viewData.get横番号()) == 0
-                        && paramData.get集計結果値().compareTo(viewData.get集計結果値()) != 0) {
+                if (isデータ不一致(paramData, viewData)) {
                     modifyData.add(viewData.createBuilderForEdit().set集計結果値(paramData.get集計結果値()).build());
                 }
             }
         }
         return modifyData;
+    }
+
+    private boolean isデータ不一致(TempJigyoHokokuNenpoDetalParameter detal, JigyoHokokuTokeiData viewdata) {
+        return detal.get縦番号().compareTo(safeValue(viewdata.get縦番号())) == 0
+                && detal.get横番号().compareTo(safeValue(viewdata.get横番号())) == 0
+                && detal.get集計結果値().compareTo(safeValue(viewdata.get集計結果値())) != 0;
+    }
+
+    private Decimal safeValue(Decimal dec) {
+        if (dec == null) {
+            return Decimal.ZERO;
+        }
+        return dec;
     }
 
     private void set非活性() {

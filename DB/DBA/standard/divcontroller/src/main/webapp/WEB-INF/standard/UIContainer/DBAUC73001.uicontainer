@@ -37,7 +37,7 @@
      "layoutName": "DBA7030011",
      "layoutTitle": "他特例施設変更通知書発行",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

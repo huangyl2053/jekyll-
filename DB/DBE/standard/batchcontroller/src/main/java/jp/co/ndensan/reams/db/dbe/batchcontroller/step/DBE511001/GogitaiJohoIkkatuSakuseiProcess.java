@@ -57,7 +57,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
     private int errorNo;
     private boolean flag;
     private IGogitaiJohoSakuseiMapper mapper;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511001"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBZ000001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private FileSpoolManager fileSpoolManager;

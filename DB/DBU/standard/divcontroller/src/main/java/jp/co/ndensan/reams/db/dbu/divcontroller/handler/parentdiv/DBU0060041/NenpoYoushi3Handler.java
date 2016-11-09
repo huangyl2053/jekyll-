@@ -122,12 +122,11 @@ public class NenpoYoushi3Handler {
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ = ViewStateHolder.
                 get(ViewStateKeys.保険料収納状況データ, Models.class);
         List<NenpoYoushi3DetalParameter> 保険料収納状況画面データ = get保険料収納状況画面データ();
+
         for (NenpoYoushi3DetalParameter parameter : 保険料収納状況画面データ) {
             for (JigyoHokokuTokeiData data : 保険料収納状況データ) {
                 JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
-                if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
-                        && parameter.get横番号().compareTo(data.get横番号()) == 0
-                        && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
+                if (isデータ不一致(parameter, data)) {
                     builder.set集計結果値(parameter.get集計結果値());
                     data = builder.build();
                     list.add(data);
@@ -140,9 +139,7 @@ public class NenpoYoushi3Handler {
         for (NenpoYoushi3DetalParameter parameter : 保険給付支払状況画面データ) {
             for (JigyoHokokuTokeiData data : 保険給付支払状況データ) {
                 JigyoHokokuTokeiDataBuilder builder = data.createBuilderForEdit();
-                if (parameter.get縦番号().compareTo(data.get縦番号()) == 0
-                        && parameter.get横番号().compareTo(data.get横番号()) == 0
-                        && parameter.get集計結果値().compareTo(data.get集計結果値()) != 0) {
+                if (isデータ不一致(parameter, data)) {
                     builder.set集計結果値(parameter.get集計結果値());
                     data = builder.build();
                     list.add(data);
@@ -150,6 +147,19 @@ public class NenpoYoushi3Handler {
             }
         }
         return list;
+    }
+
+    private boolean isデータ不一致(NenpoYoushi3DetalParameter detal, JigyoHokokuTokeiData viewdata) {
+        return detal.get縦番号().compareTo(safeValue(viewdata.get縦番号())) == 0
+                && detal.get横番号().compareTo(safeValue(viewdata.get横番号())) == 0
+                && detal.get集計結果値().compareTo(safeValue(viewdata.get集計結果値())) != 0;
+    }
+
+    private Decimal safeValue(Decimal dec) {
+        if (dec == null) {
+            return Decimal.ZERO;
+        }
+        return dec;
     }
 
     private void set非活性() {

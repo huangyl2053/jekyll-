@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,8 +32,6 @@ public class KensakuJokenDiv extends Panel {
     private TextBoxNum txtMaxDisp;
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("btnSearch")
-    private Button btnSearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -111,24 +109,6 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
         this.btnClear = btnClear;
-    }
-
-    /*
-     * getbtnSearch
-     * @return btnSearch
-     */
-    @JsonProperty("btnSearch")
-    public Button getBtnSearch() {
-        return btnSearch;
-    }
-
-    /*
-     * setbtnSearch
-     * @param btnSearch btnSearch
-     */
-    @JsonProperty("btnSearch")
-    public void setBtnSearch(Button btnSearch) {
-        this.btnSearch = btnSearch;
     }
 
     /*
