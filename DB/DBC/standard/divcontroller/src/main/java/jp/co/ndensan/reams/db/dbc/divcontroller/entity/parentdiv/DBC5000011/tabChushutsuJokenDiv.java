@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  * @author 自動生成
  */
 public class tabChushutsuJokenDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -104,16 +104,6 @@ public class tabChushutsuJokenDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtRangeHihokenshaNoTo() {
-        return this.getTplChushutsuJoken1().getTxtRangeHihokenshaNoTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
-        this.getTplChushutsuJoken1().setTxtRangeHihokenshaNoTo(txtRangeHihokenshaNoTo);
-    }
-
-    @JsonIgnore
     public Button getBtnHihokenshaNoFromSearch() {
         return this.getTplChushutsuJoken1().getBtnHihokenshaNoFromSearch();
     }
@@ -121,6 +111,16 @@ public class tabChushutsuJokenDiv extends TabContainer {
     @JsonIgnore
     public void  setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
         this.getTplChushutsuJoken1().setBtnHihokenshaNoFromSearch(btnHihokenshaNoFromSearch);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtRangeHihokenshaNoTo() {
+        return this.getTplChushutsuJoken1().getTxtRangeHihokenshaNoTo();
+    }
+
+    @JsonIgnore
+    public void  setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
+        this.getTplChushutsuJoken1().setTxtRangeHihokenshaNoTo(txtRangeHihokenshaNoTo);
     }
 
     @JsonIgnore
