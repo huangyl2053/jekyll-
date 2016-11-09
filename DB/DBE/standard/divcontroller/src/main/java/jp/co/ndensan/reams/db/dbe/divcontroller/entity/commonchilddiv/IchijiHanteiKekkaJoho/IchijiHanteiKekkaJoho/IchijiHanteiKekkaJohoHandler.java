@@ -140,7 +140,8 @@ public class IchijiHanteiKekkaJohoHandler {
                 Code jotaiAnteiseiCode = ichijiHanteiKekkaJoho.get要介護認定状態の安定性コード();
                 RString jotaiAnteiseiCodeValue = jotaiAnteiseiCode == null ? RString.EMPTY : jotaiAnteiseiCode.value();
                 if (jotaiAnteiseiCode != null
-                        && jotaiAnteiseiCodeValue != null) {
+                        && jotaiAnteiseiCodeValue != null
+                        && !jotaiAnteiseiCode.isEmpty()) {
                     div.getTxtJyotaiAnteisei().setValue(
                             JotaiAnteiseiCode.toValue(jotaiAnteiseiCodeValue).get名称());
                 }

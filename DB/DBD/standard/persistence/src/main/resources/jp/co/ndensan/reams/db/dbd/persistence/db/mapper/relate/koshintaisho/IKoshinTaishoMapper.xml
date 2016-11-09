@@ -233,4 +233,14 @@
         WHERE 
         A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
+    
+    <select resultOrdered="true" id="get受給者台帳情報"
+            resultType = "jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity"
+            parameterType = "jp.co.ndensan.reams.uz.uza.lang.RString"
+            fetchSize="500">
+        SELECT A.*
+        FROM rgdb."DbV4001JukyushaDaicho" AS A 
+        WHERE 
+        A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
 </mapper>

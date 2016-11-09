@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.Shihara
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.更新完了;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.照会;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011TransitionEventName;
@@ -95,12 +96,14 @@ public class JutakuKaishuJizenShinseiToroku {
         識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoShikakuKihon().initialize(識別コード);
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
+                .getJutakuKaishuJizenShoninKetteiTsuchisho().getCcdBunshoBango().initialize(ReportIdDBC.DBC100001.getReportId());
 
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (state != null) {
-            FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.事前サービス提供年月, FlexibleYearMonth.class);
-            RString 整理番号 = ViewStateHolder.get(ViewStateKeys.事前申請整理番号, RString.class);
+            FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+            RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
             ViewStateHolder.put(ViewStateKeys.償還払支給住宅改修事前申請情報,
                     handler.登録以外初期化(被保険者番号, サービス提供年月, 整理番号));
         } else {

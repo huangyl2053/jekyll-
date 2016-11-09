@@ -28,9 +28,11 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -138,7 +140,8 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
         if (div.getTujishoHakkoMeisai().getTxtHihokenshashoTeishutuKigen().getValue() == null) {
             teishutsuKigenYMD = RString.EMPTY;
         } else {
-            teishutsuKigenYMD = div.getTujishoHakkoMeisai().getTxtHihokenshashoTeishutuKigen().getValue().toDateString();
+            teishutsuKigenYMD = div.getTujishoHakkoMeisai().getTxtHihokenshashoTeishutuKigen().getValue()
+                    .wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiTorikeshiTshuchishoPrintService printService = new YokaigoNinteiTorikeshiTshuchishoPrintService();

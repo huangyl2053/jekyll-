@@ -17,14 +17,14 @@
         <id property="支払方法変更滞納Entity.rirekiNo" column="dbT4022ShiharaiHohoHenkoTaino_rirekiNo" />
         <association property="収納状況TmpTblEntity" resultMap="ResultMap_収納状況TmpTblEntity"/>
         <association property="対象者TmpTblEntity" resultMap="ResultMap_対象者TmpTblEntity"/>
-        <association property="支払方法変更滞納Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity"/>
+        <association property="支払方法変更滞納Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity"/>
     </resultMap>
     
     <select id="get収納滞納状況把握情報"  resultMap="ResultMap_ShunoTainoJokyoHaakuEntity" resultOrdered="true" fetchSize="500">
         SELECT
         収納状況一時テーブル.*,
         対象者情報一時テーブル.*,
-        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.allColumns_DbT4022ShiharaiHohoHenkoTaino" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.allColumns_DbT4022ShiharaiHohoHenkoTaino" />
         FROM
         "ShunoJokyoTemp" AS 収納状況一時テーブル
         INNER JOIN 

@@ -43,8 +43,6 @@ public class NenpoYoushi3 {
 
     private static final Code 集計番号_0100 = new Code("0100");
     private static final Code 集計番号_0200 = new Code("0200");
-    private static final RString 保険料収納状況 = new RString("3.保険料収納状況");
-    private static final RString 保険給付支払状況 = new RString("4.保険給付支払状況");
     private static final RString フラグ_修正 = new RString("修正");
     private static final RString フラグ_削除 = new RString("削除");
     private FlexibleYear 報告年;
@@ -72,8 +70,8 @@ public class NenpoYoushi3 {
         保険者名称 = entity.get市町村名称();
         補正フラグ = entity.get補正フラグ();
         getHandler(div).initialize(補正フラグ, 報告年度, 集計年度, 保険者コード, 保険者名称);
-        boolean 収納状況FLG = this.get保険料収納状況データ(div);
-        boolean 給付支払状況FLG = this.get保険給付支払状況データ(div);
+        boolean 収納状況FLG = this.is保険料収納状況データ有り();
+        boolean 給付支払状況FLG = this.is保険給付支払状況データ有り();
         if (!収納状況FLG && !給付支払状況FLG) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
@@ -83,25 +81,18 @@ public class NenpoYoushi3 {
                 return ResponseData.of(div).forwardWithEventName(DBU0060041TransitionEventName.検索に戻る).respond();
             }
         }
+        set保険料収納状況データ(div);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * タブを切り替え時に設定です。
+     * 保険料給付支払状況データを取得します。
      *
      * @param div NenpoYoushi3Div
      * @return ResponseData<NenpoYoushi3Div>
      */
-    public ResponseData<NenpoYoushi3Div> onChange_tab(NenpoYoushi3Div div) {
-        RString title = div.getShokuhikyojunofutannintei().getTabShokuhikyojunofutannintei().getSelectedItem().getTitle();
-        if (title.equals(保険料収納状況)) {
-            get保険料収納状況データ(div);
-            return ResponseData.of(div).respond();
-        }
-        if (title.equals(保険給付支払状況)) {
-            get保険給付支払状況データ(div);
-            return ResponseData.of(div).respond();
-        }
+    public ResponseData<NenpoYoushi3Div> onFirstActive_Shiharai(NenpoYoushi3Div div) {
+        set保険給付支払状況データ(div);
         return ResponseData.of(div).respond();
     }
 
@@ -187,7 +178,7 @@ public class NenpoYoushi3 {
         return ResponseData.of(div).respond();
     }
 
-    private boolean get保険料収納状況データ(NenpoYoushi3Div div) {
+    private boolean is保険料収納状況データ有り() {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
                 = ViewStateHolder.get(ViewStateKeys.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         報告年 = new FlexibleYear(entity.get行報告年());
@@ -196,14 +187,24 @@ public class NenpoYoushi3 {
         様式種類コード = entity.get事業報告年報補正表示のコード();
         補正フラグ = entity.get補正フラグ();
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0100);
+
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
         ViewStateHolder.put(ViewStateKeys.保険料収納状況データ, Models.create(事業報告集計一覧データリスト));
-        getHandler(div).set保険料収納状況詳細データ(事業報告集計一覧データリスト);
         return !事業報告集計一覧データリスト.isEmpty();
     }
 
-    private boolean get保険給付支払状況データ(NenpoYoushi3Div div) {
+    private void set保険料収納状況データ(NenpoYoushi3Div div) {
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 事業報告集計一覧models;
+        事業報告集計一覧models = ViewStateHolder.get(ViewStateKeys.保険料収納状況データ, Models.class);
+        List<JigyoHokokuTokeiData> list = new ArrayList<>();
+        if (事業報告集計一覧models != null) {
+            list.addAll(事業報告集計一覧models.values());
+            getHandler(div).set保険料収納状況詳細データ(list);
+        }
+    }
+
+    private boolean is保険給付支払状況データ有り() {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
                 = ViewStateHolder.get(ViewStateKeys.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         報告年 = new FlexibleYear(entity.get行報告年());
@@ -211,11 +212,21 @@ public class NenpoYoushi3 {
         市町村コード = new LasdecCode(entity.get行市町村コード());
         様式種類コード = entity.get事業報告年報補正表示のコード();
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0200);
+
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
         ViewStateHolder.put(ViewStateKeys.保険給付支払状況データ, Models.create(事業報告集計一覧データリスト));
-        getHandler(div).set保険給付支払状況詳細データ(事業報告集計一覧データリスト);
         return !事業報告集計一覧データリスト.isEmpty();
+    }
+
+    private void set保険給付支払状況データ(NenpoYoushi3Div div) {
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 事業報告集計一覧models;
+        事業報告集計一覧models = ViewStateHolder.get(ViewStateKeys.保険給付支払状況データ, Models.class);
+        List<JigyoHokokuTokeiData> list = new ArrayList<>();
+        if (事業報告集計一覧models != null) {
+            list.addAll(事業報告集計一覧models.values());
+            getHandler(div).set保険給付支払状況詳細データ(list);
+        }
     }
 
     private NenpoYoushi3Handler getHandler(NenpoYoushi3Div div) {

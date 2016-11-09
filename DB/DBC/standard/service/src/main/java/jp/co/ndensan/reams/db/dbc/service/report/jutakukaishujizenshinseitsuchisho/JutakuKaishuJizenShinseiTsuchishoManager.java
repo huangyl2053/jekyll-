@@ -29,8 +29,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -97,12 +95,6 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
     public JutakukaishuJizenShinseiShoninKekkaTsuchishoItem createJizenShinseiTsuchishoSource(
             JutakuKaishuJizenShinseiParameter parameter) {
 
-        IBunshoNoFinder finder = BunshoNoFinderFactory.createInstance();
-        BunshoNo bunshoNo = finder.get文書番号管理(ReportIdDBC.DBC100001.getReportId(), parameter.get発行日());
-        RString 文書番号 = RString.EMPTY;
-        if (bunshoNo != null) {
-            文書番号 = get文書番号(bunshoNo);
-        }
         RString 通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100001.getReportId(),
                 KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate());
         RString 注意文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100001.getReportId(),
@@ -126,13 +118,13 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
         IJutakuKaishuJizenShinseiTsuchishoMapper mapper
                 = mapperProvider.create(IJutakuKaishuJizenShinseiTsuchishoMapper.class);
         KuJigyoshaEntity entity = mapper.get事業者情報(parameter);
-        return 通知書ソースデータ(文書番号, 通知文, 注意文, 送付物宛先, entity, parameter);
+        return 通知書ソースデータ(通知文, 注意文, 送付物宛先, entity, parameter);
     }
 
-    private JutakukaishuJizenShinseiShoninKekkaTsuchishoItem 通知書ソースデータ(RString 文書番号,
+    private JutakukaishuJizenShinseiShoninKekkaTsuchishoItem 通知書ソースデータ(
             RString 通知文, RString 注意文, SofubutsuAtesakiSource 送付物宛先,
             KuJigyoshaEntity entity, JutakuKaishuJizenShinseiParameter parameter) {
-        return new JutakukaishuJizenShinseiShoninKekkaTsuchishoItem(nullTOEmpty(文書番号),
+        return new JutakukaishuJizenShinseiShoninKekkaTsuchishoItem(nullTOEmpty(parameter.get文書番号()),
                 ReportIdDBC.DBC100001.getReportName(),
                 nullTOEmpty(通知文),
                 nullTOEmpty(parameter.get被保険者氏名()),

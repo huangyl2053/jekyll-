@@ -450,6 +450,7 @@ public class FutangendogakuNinteiShinseiHandler {
     public void onChange_ddlShinseiRiyu() {
         if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
             set負担段階();
+            set境界層();
             set旧措置();
             set居室種類();
             set負担限度額();
@@ -485,29 +486,46 @@ public class FutangendogakuNinteiShinseiHandler {
 
         set負担限度額();
     }
+    
+    /**
+     * 負担段階を再セットする
+     */
+    public void reset負担段階() {
+        set負担段階();
+    }
 
     /**
-     * 申請理由と境界層の状態により負担段階をセット
+     * 申請理由の状態により負担段階をセット
      */
     private void set負担段階() {
         init負担段階DDL();
         if (ShinseiRiyuKubun.世帯非課税.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
             div.getDdlRiyoshaFutanDankai().setSelectedKey(RiyoshaFutanDankai.第一段階.getコード());
-            div.getChkKyokaiso().setDisabled(false);
         } else if (ShinseiRiyuKubun.世帯非課税８０万以下.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
             div.getDdlRiyoshaFutanDankai().setSelectedKey(RiyoshaFutanDankai.第二段階.getコード());
-            div.getChkKyokaiso().setDisabled(false);
         } else if (ShinseiRiyuKubun.世帯非課税８０万超.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
             div.getDdlRiyoshaFutanDankai().setSelectedKey(RiyoshaFutanDankai.第三段階.getコード());
-            div.getChkKyokaiso().setDisabled(false);
         } else if (ShinseiRiyuKubun.特例減額措置.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
             div.getDdlRiyoshaFutanDankai().setSelectedKey(RiyoshaFutanDankai.課税層第三段階.getコード());
-            div.getChkKyokaiso().setSelectedItemsByKey(Collections.EMPTY_LIST);
         } else if (ShinseiRiyuKubun.生保.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
             div.getDdlRiyoshaFutanDankai().setSelectedKey(RiyoshaFutanDankai.第一段階.getコード());
-            div.getChkKyokaiso().setDisabled(false);
         } else if (ShinseiRiyuKubun.老齢.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
             div.getDdlRiyoshaFutanDankai().setSelectedKey(RiyoshaFutanDankai.第一段階.getコード());
+        }
+    }
+    
+    private void set境界層() {
+        if (ShinseiRiyuKubun.世帯非課税.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            div.getChkKyokaiso().setDisabled(false);
+        } else if (ShinseiRiyuKubun.世帯非課税８０万以下.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            div.getChkKyokaiso().setDisabled(false);
+        } else if (ShinseiRiyuKubun.世帯非課税８０万超.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            div.getChkKyokaiso().setDisabled(false);
+        } else if (ShinseiRiyuKubun.特例減額措置.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            div.getChkKyokaiso().setSelectedItemsByKey(Collections.EMPTY_LIST);
+        } else if (ShinseiRiyuKubun.生保.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            div.getChkKyokaiso().setDisabled(false);
+        } else if (ShinseiRiyuKubun.老齢.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
             div.getChkKyokaiso().setDisabled(false);
         }
     }
@@ -788,7 +806,7 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getTxtShinseiYMD().setValue(futanGendogakuNintei.get申請年月日());
         init申請理由DDL();
         div.getDdlShinseiRiyu().setSelectedKey(futanGendogakuNintei.get申請理由区分());
-
+        
         this.set遺族年金and障害年金(futanGendogakuNintei);
 
         div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState(資格対象者));
@@ -896,7 +914,16 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getDdlTashoshitsu().setSelectedValue(new RString(futanGendogakuNintei.get多床室().toString()).padZeroToLeft(INT_4));
         }
         div.getTxtHiShoninRiyu().setValue(futanGendogakuNintei.get非承認理由());
-
+        if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
+            set負担段階();
+            set境界層();
+            set旧措置();
+            set居室種類();
+            set負担限度額();
+        }
+        if (SELECT_KEY1.equals(div.getRadKetteiKubun().getSelectedKey())) {
+            承認しない時関連項目処理();
+        }
     }
 
     private ShoKisaiHokenshaNo get証記載保険者番号(FlexibleDate 申請日) {
@@ -1269,6 +1296,37 @@ public class FutangendogakuNinteiShinseiHandler {
      */
     public List<FutanGendogakuNintei> get申請一覧情報(HihokenshaNo 被保険者番号) {
         return FutangendogakuNinteiService.createInstance().load負担限度額認定申請All(被保険者番号);
+    }
+    
+    /**
+     * 自動でセットされた負担段階から変更されているかチェック
+     * 
+     * @return RString
+     */
+    public boolean check負担段階変更有無() {
+        RString 初期負担段階 = get初期負担段階();
+        if (!初期負担段階.equals(div.getDdlRiyoshaFutanDankai().getSelectedKey())) {
+            return true;
+        }
+        return false;
+    }
+    
+    private RString get初期負担段階() {
+        RString 負担段階コード = null;
+        if (ShinseiRiyuKubun.世帯非課税.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            負担段階コード = RiyoshaFutanDankai.第一段階.getコード();
+        } else if (ShinseiRiyuKubun.世帯非課税８０万以下.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            負担段階コード = RiyoshaFutanDankai.第二段階.getコード();
+        } else if (ShinseiRiyuKubun.世帯非課税８０万超.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            負担段階コード = RiyoshaFutanDankai.第三段階.getコード();
+        } else if (ShinseiRiyuKubun.特例減額措置.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            負担段階コード = RiyoshaFutanDankai.課税層第三段階.getコード();
+        } else if (ShinseiRiyuKubun.生保.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            負担段階コード = RiyoshaFutanDankai.第一段階.getコード();
+        } else if (ShinseiRiyuKubun.老齢.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
+            負担段階コード = RiyoshaFutanDankai.第一段階.getコード();
+        }
+        return 負担段階コード;
     }
 
     private void set申請情報エリア表示制御() {

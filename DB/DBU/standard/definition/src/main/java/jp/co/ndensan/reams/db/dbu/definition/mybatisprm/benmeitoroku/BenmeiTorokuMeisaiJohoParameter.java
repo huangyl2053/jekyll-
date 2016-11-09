@@ -24,6 +24,7 @@ public final class BenmeiTorokuMeisaiJohoParameter implements IMyBatisParameter 
     private final ShikibetsuCode shikibetsuCode;
     private final HihokenshaNo genshobunHihokenshaNo;
     private final FlexibleDate shinsaseikyuTodokedeYMD;
+    private final FlexibleDate benmeishoSakuseibi;
 
     /**
      * コンストラクタです。
@@ -31,15 +32,18 @@ public final class BenmeiTorokuMeisaiJohoParameter implements IMyBatisParameter 
      * @param shikibetsuCode 識別コード
      * @param genshobunHihokenshaNo 原書弁被保険者番号
      * @param shinsaseikyuTodokedeYMD 審査請求届出年月日
+     * @param benmeishoSakuseibi 弁明書作成日
      */
     private BenmeiTorokuMeisaiJohoParameter(
             ShikibetsuCode shikibetsuCode,
             HihokenshaNo genshobunHihokenshaNo,
-            FlexibleDate shinsaseikyuTodokedeYMD) {
+            FlexibleDate shinsaseikyuTodokedeYMD,
+            FlexibleDate benmeishoSakuseibi) {
 
         this.shikibetsuCode = shikibetsuCode;
         this.genshobunHihokenshaNo = genshobunHihokenshaNo;
         this.shinsaseikyuTodokedeYMD = shinsaseikyuTodokedeYMD;
+        this.benmeishoSakuseibi = benmeishoSakuseibi;
     }
 
     /**
@@ -48,12 +52,14 @@ public final class BenmeiTorokuMeisaiJohoParameter implements IMyBatisParameter 
      * @param shikibetsuCode 識別コード
      * @param genshobunHihokenshaNo 原書弁被保険者番号
      * @param shinsaseikyuTodokedeYMD 審査請求届出年月日
+     * @param benmeishoSakuseibi 弁明書作成日
      * @return 検索用のパラメータ
      */
     public static BenmeiTorokuMeisaiJohoParameter createParam_common(
             ShikibetsuCode shikibetsuCode,
             HihokenshaNo genshobunHihokenshaNo,
-            FlexibleDate shinsaseikyuTodokedeYMD) {
-        return new BenmeiTorokuMeisaiJohoParameter(shikibetsuCode, genshobunHihokenshaNo, shinsaseikyuTodokedeYMD);
+            FlexibleDate shinsaseikyuTodokedeYMD,
+            FlexibleDate benmeishoSakuseibi) {
+        return new BenmeiTorokuMeisaiJohoParameter(shikibetsuCode, genshobunHihokenshaNo, shinsaseikyuTodokedeYMD, benmeishoSakuseibi);
     }
 }

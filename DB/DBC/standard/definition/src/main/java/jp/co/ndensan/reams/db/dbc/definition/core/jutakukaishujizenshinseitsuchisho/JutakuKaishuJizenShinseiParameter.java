@@ -43,4 +43,5 @@ public class JutakuKaishuJizenShinseiParameter {
     private Decimal 保険給付額;
     private Decimal 利用者負担額;
     private RString 住宅改修住宅住所;
+    private RString 文書番号;
 }

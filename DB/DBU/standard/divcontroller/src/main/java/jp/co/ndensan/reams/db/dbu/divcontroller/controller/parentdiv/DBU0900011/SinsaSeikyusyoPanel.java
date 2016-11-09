@@ -104,7 +104,7 @@ public class SinsaSeikyusyoPanel {
         }
         return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 修正ボタン。<br/>
      *
@@ -138,7 +138,9 @@ public class SinsaSeikyusyoPanel {
         benmeiTorokuMeisaiJoho = benmeiTorokuManager.getBenmeiTorokuMeisaiJoho(key.get識別コード(),
                 key.get被保険者番号(),
                 new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue() == null
-                        ? RString.EMPTY : div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
+                        ? RString.EMPTY : div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()),
+                new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtBenmeishoSakuseiYMD().getValue()  == null 
+                        ? RString.EMPTY : div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtBenmeishoSakuseiYMD().getValue().toDateString()));
         if (benmeiTorokuMeisaiJoho == null) {
             throw new ApplicationException(UrErrorMessages.削除不可.getMessage().replace("弁明情報が登録されていない"));
         }
@@ -155,7 +157,7 @@ public class SinsaSeikyusyoPanel {
         }
         return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(削除);
     }
-
+    
     /**
      * 弁明書発行。<br/>
      *
