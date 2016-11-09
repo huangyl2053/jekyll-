@@ -112,13 +112,8 @@ import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisan;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanInput;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanOutput;
 import jp.co.ndensan.reams.dz.dzx.definition.core.kiwarikeisan.GenzaiTokuchoKiKubun;
-import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoChushutsuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
-import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt001FindIdoFunctionDac;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -152,7 +147,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private final MapperProvider mapperProvider;
     private final DbV2001ChoshuHohoAliveDac 徴収方法NewestDac;
     private final DbT2010FukaErrorListDac 賦課エラーDac;
-    private final UaFt001FindIdoFunctionDac 宛名識別異動分Dac;
     private final DbT2001ChoshuHohoDac 徴収方法Dac;
     private final DbT2015KeisangoJohoDac 計算後情報Dac = InstanceProvider.create(DbT2015KeisangoJohoDac.class);
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
@@ -197,7 +191,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.徴収方法NewestDac = InstanceProvider.create(DbV2001ChoshuHohoAliveDac.class);
         this.賦課エラーDac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
-        this.宛名識別異動分Dac = InstanceProvider.create(UaFt001FindIdoFunctionDac.class);
         this.徴収方法Dac = InstanceProvider.create(DbT2001ChoshuHohoDac.class);
     }
 
@@ -207,18 +200,15 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
      * @param mapperProvider mapperProvider
      * @param 徴収方法NewestDac 徴収方法NewestDac
      * @param 賦課エラーDac DbT2010FukaErrorListDac
-     * @param 宛名識別異動分Dac UaFt001FindIdoFunctionDac
      * @param 徴収方法Dac DbT2001ChoshuHohoDac
      */
     GenNendoHonsanteiIdou(MapperProvider mapperProvider,
             DbV2001ChoshuHohoAliveDac 徴収方法NewestDac,
             DbT2010FukaErrorListDac 賦課エラーDac,
-            UaFt001FindIdoFunctionDac 宛名識別異動分Dac,
             DbT2001ChoshuHohoDac 徴収方法Dac) {
         this.mapperProvider = mapperProvider;
         this.徴収方法NewestDac = 徴収方法NewestDac;
         this.賦課エラーDac = 賦課エラーDac;
-        this.宛名識別異動分Dac = 宛名識別異動分Dac;
         this.徴収方法Dac = 徴収方法Dac;
     }
 
@@ -293,13 +283,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         IdoParameter param = IdoParameter.createParam(調定年度, 賦課年度,
                 抽出開始日時, 抽出終了日時, 調定日時, kozaBuilder.build(), list);
 
-        ShikibetsuTaishoIdoSearchKey searchKey = new ShikibetsuTaishoIdoSearchKeyBuilder(
-                ShikibetsuTaishoIdoChushutsuKubun.異動年月日で抽出, 抽出開始日時, 抽出終了日時).build();
-        List<UaFt001FindIdoEntity> 宛名識別異動分取得PSM = 宛名識別異動分Dac.select(searchKey);
+        List<ShukiEntity> 宛名識別異動分取得PSM = mapper.select宛名識別異動分(param);
         mapper.createTmpShuki();
-        for (UaFt001FindIdoEntity uaFt001FindIdoEntity : 宛名識別異動分取得PSM) {
-            ShukiEntity entity = new ShukiEntity();
-            entity.setShikibetsuCode(uaFt001FindIdoEntity.getShikibetsuCode());
+        for (ShukiEntity entity : 宛名識別異動分取得PSM) {
             mapper.insertTmpShuki(entity);
         }
         List<ShukiIdoEntity> shukiIdoEntityList = mapper.get住基異動_被保険者本人異動(param);
