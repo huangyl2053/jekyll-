@@ -777,7 +777,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             HokenshaNo 証記載保険者番号, KogakuShikyuHanteiKekka entity) {
         if (entity == null) {
             int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
-                    get高額介護判定結果履歴番号(被保険者番号, サービス年月);
+                    get高額介護支給申請履歴番号(被保険者番号, サービス年月);
             entity = new KogakuShikyuHanteiKekka(被保険者番号,
                     サービス年月, 証記載保険者番号, 履歴番号).createBuilderForEdit().build();
         }
@@ -807,7 +807,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             JigyoKogakuShikyuHanteiKekka entity) {
         if (entity == null) {
             int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
-                    get事業高額介護判定結果履歴番号(被保険者番号, サービス年月);
+                    get事業高額介護支給申請履歴番号(被保険者番号, サービス年月);
             entity = new JigyoKogakuShikyuHanteiKekka(被保険者番号,
                     サービス年月, 証記載保険者番号, new Decimal(履歴番号)).createBuilderForEdit().build();
         }
