@@ -54,16 +54,11 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
     受給認定が無効チェック {
         @Override
         public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            boolean state = false;
-            if (new RString("1").equals(div.getCommHeadPanel().getIs旧措置者フラグ())) {
-                state = true;
-            }
             if (div.getCommHeadPanel().get要介護認定情報() == null) {
                 return false;
             } else {
                 List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
                 RString 要介護認定状態区分コード = div.getCommHeadPanel().get要介護認定情報();
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.非該当.getCode());
                 要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援_経過的要介護.getCode());
                 要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援1.getCode());
                 要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援2.getCode());
@@ -72,12 +67,15 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護3.getCode());
                 要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
                 要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
-                if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード)) {
-                    return false;
+                if (要介護認定状態区分コードリスト.contains(要介護認定状態区分コード)) {
+                    return true;
                 }
-                return YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード) && state;
+                if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード)
+                        && new RString("1").equals(div.getCommHeadPanel().getIs旧措置者フラグ())) {
+                    return true;
+                }
             }
-
+            return false;   
         }
     },
     /**

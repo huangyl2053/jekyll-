@@ -48,6 +48,7 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
     private final List<TokkiA4Entity> 短冊情報リスト;
     private final List<RString> 短冊リスト;
     private final List<RString> テキスト全面List;
+    private final List<RString> イメージ全面List;
     private final RString reportId;
 
     /**
@@ -58,11 +59,12 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
      * @param 短冊リスト List<RString>
      * @param 短冊情報リスト List<TokkiA4Entity>
      * @param テキスト全面List List<RString>
+     * @param イメージ全面List List<RString>
      * @param page page
      * @param reportId 帳票ＩＤ
      */
-    protected IinShinsakaishiryoA4Group4Editor(TokkiText1A4Business item,
-            List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, List<RString> テキスト全面List, int index, int page, RString reportId) {
+    protected IinShinsakaishiryoA4Group4Editor(TokkiText1A4Business item, List<TokkiA4Entity> 短冊情報リスト,
+            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List, int index, int page, RString reportId) {
         this.item = item;
         this.index = index;
         this.page = page;
@@ -70,6 +72,7 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
         this.短冊リスト = 短冊リスト;
         this.reportId = reportId;
         this.テキスト全面List = テキスト全面List;
+        this.イメージ全面List = イメージ全面List;
     }
 
     @Override
@@ -113,7 +116,7 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.three_tokkiImg = item.getTokkiImg(page);
+                source.three_tokkiImg = イメージ全面List.get(index);
             } else if (短冊.equals(item.get特記パターン())) {
                 editイメージ(source, 短冊リスト);
                 set特記事項イメージ(source);

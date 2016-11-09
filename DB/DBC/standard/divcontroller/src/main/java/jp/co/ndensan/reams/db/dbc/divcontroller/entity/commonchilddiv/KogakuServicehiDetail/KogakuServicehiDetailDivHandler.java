@@ -719,16 +719,20 @@ public class KogakuServicehiDetailDivHandler {
                     result.get高額介護サービス費支給申請Entity().get支払方法区分コード()));
         }
         para.setKeiyakuNo(result.get高額介護サービス費支給申請Entity().get受領委任契約番号());
-        if (result.get高額介護サービス費支給申請Entity().get支払期間開始年月日() != null) {
+        if (result.get高額介護サービス費支給申請Entity().get支払期間開始年月日() != null
+                && !result.get高額介護サービス費支給申請Entity().get支払期間開始年月日().isEmpty()) {
             para.setStartYMD(new RDate(result.get高額介護サービス費支給申請Entity().get支払期間開始年月日().toString()));
         }
-        if (result.get高額介護サービス費支給申請Entity().get支払期間終了年月日() != null) {
+        if (result.get高額介護サービス費支給申請Entity().get支払期間終了年月日() != null
+                && !result.get高額介護サービス費支給申請Entity().get支払期間終了年月日().isEmpty()) {
             para.setEndYMD(new RDate(result.get高額介護サービス費支給申請Entity().get支払期間終了年月日().toString()));
         }
-        if (result.get高額介護サービス費支給申請Entity().get支払窓口開始時間() != null) {
+        if (result.get高額介護サービス費支給申請Entity().get支払窓口開始時間() != null
+                && !result.get高額介護サービス費支給申請Entity().get支払窓口開始時間().isEmpty()) {
             para.setStartHHMM(new RTime(result.get高額介護サービス費支給申請Entity().get支払窓口開始時間()));
         }
-        if (result.get高額介護サービス費支給申請Entity().get支払窓口終了時間() != null) {
+        if (result.get高額介護サービス費支給申請Entity().get支払窓口終了時間() != null
+                && !result.get高額介護サービス費支給申請Entity().get支払窓口終了時間().isEmpty()) {
             para.setEndHHMM(new RTime(result.get高額介護サービス費支給申請Entity().get支払窓口終了時間()));
         }
         para.setKozaId(result.get高額介護サービス費支給申請Entity().get口座ID());
@@ -745,17 +749,21 @@ public class KogakuServicehiDetailDivHandler {
                     result.get事業高額介護サービス費支給申請Entity().get支払方法区分コード()));
         }
         para.setKeiyakuNo(result.get事業高額介護サービス費支給申請Entity().get受領委任契約番号());
-        if (result.get事業高額介護サービス費支給申請Entity().get支払期間開始年月日() != null) {
+        if (result.get事業高額介護サービス費支給申請Entity().get支払期間開始年月日() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get支払期間開始年月日().isEmpty()) {
             para.setStartYMD(new RDate(result.get事業高額介護サービス費支給申請Entity().
                     get支払期間開始年月日().toString()));
         }
-        if (result.get事業高額介護サービス費支給申請Entity().get支払期間終了年月日() != null) {
+        if (result.get事業高額介護サービス費支給申請Entity().get支払期間終了年月日() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get支払期間終了年月日().isEmpty()) {
             para.setEndYMD(new RDate(result.get事業高額介護サービス費支給申請Entity().get支払期間終了年月日().toString()));
         }
-        if (result.get事業高額介護サービス費支給申請Entity().get支払窓口開始時間() != null) {
+        if (result.get事業高額介護サービス費支給申請Entity().get支払窓口開始時間() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get支払窓口開始時間().isEmpty()) {
             para.setStartHHMM(new RTime(result.get事業高額介護サービス費支給申請Entity().get支払窓口開始時間()));
         }
-        if (result.get事業高額介護サービス費支給申請Entity().get支払窓口終了時間() != null) {
+        if (result.get事業高額介護サービス費支給申請Entity().get支払窓口終了時間() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get支払窓口終了時間().isEmpty()) {
             para.setEndHHMM(new RTime(result.get事業高額介護サービス費支給申請Entity().get支払窓口終了時間()));
         }
         para.setKozaId(result.get事業高額介護サービス費支給申請Entity().get口座ID());

@@ -743,59 +743,6 @@ public class JimuShinsakaishiryoA4ReportSource implements IReportSource {
     @ReportItem(name = "six_imgSonotashiryo", order = 620)
     public RString six_imgSonotashiryo;
 
-    //DBE517019
-    @ReportItem(name = "seven_shinsakaiNo", length = 4, order = 701)
-    public RString seven_shinsakaiNo;
-    @ReportItem(name = "seven_shinsakaiKaisaiYMD", length = 21, order = 702)
-    public RString seven_shinsakaiKaisaiYMD;
-    @ReportItem(name = "seven_ShinsainName1", length = 20, order = 703)
-    public RString seven_shinsainName1;
-    @ReportItem(name = "seven_ShinsainName2", length = 20, order = 704)
-    public RString seven_shinsainName2;
-    @ReportItem(name = "seven_gogitaiNo", length = 2, order = 705)
-    public RString seven_gogitaiNo;
-    @ReportItem(name = "seven_ShinsainName3", length = 20, order = 706)
-    public RString seven_shinsainName3;
-    @ReportItem(name = "seven_shinsakaiTsuikasha", length = 2, order = 707)
-    public RString seven_shinsakaiTsuikasha;
-    @ReportItem(name = "seven_ShinsainName4", length = 20, order = 708)
-    public RString seven_shinsainName4;
-    @ReportItem(name = "seven_ShinsainName5", length = 20, order = 709)
-    public RString seven_shinsainName5;
-    @ReportItem(name = "seven_ShinsainName6", length = 20, order = 710)
-    public RString seven_shinsainName6;
-    @ReportItem(name = "seven_ShinsainName7", length = 20, order = 711)
-    public RString seven_shinsainName7;
-    @ReportItem(name = "seven_ShinsainName8", length = 20, order = 712)
-    public RString seven_shinsainName8;
-    @ReportItem(name = "seven_tsuchibun", order = 713)
-    public RString seven_tsuchibun;
-    @ReportItem(name = "seven_listShinsei_1", length = 2, order = 714)
-    public RString seven_listShinsei_1;
-    @ReportItem(name = "seven_listShinsei_2", length = 6, order = 715)
-    public RString seven_listShinsei_2;
-    @ReportItem(name = "seven_listShinsei_3", length = 10, order = 716)
-    public RString seven_listShinsei_3;
-    @ReportItem(name = "seven_listShinsei_4", length = 30, order = 717)
-    public RString seven_listShinsei_4;
-    @ReportItem(name = "seven_listShinsei_5", length = 1, order = 718)
-    public RString seven_listShinsei_5;
-    @ReportItem(name = "seven_listShinsei_6", length = 3, order = 719)
-    public RString seven_listShinsei_6;
-    @ReportItem(name = "seven_listShinsei_7", length = 3, order = 720)
-    public RString seven_listShinsei_7;
-    @ReportItem(name = "seven_listShinsei_8", length = 4, order = 721)
-    public RString seven_listShinsei_8;
-    @ReportItem(name = "seven_listShinsei_9", length = 7, order = 722)
-    public RString seven_listShinsei_9;
-    @ReportItem(name = "seven_listShinsei_10", length = 1, order = 723)
-    public RString seven_listShinsei_10;
-    @ReportItem(name = "seven_listShinsei_11", length = 5, order = 724)
-    public RString seven_listShinsei_11;
-    @ReportItem(name = "seven_listShinsei_12", length = 3, order = 725)
-    public RString seven_listShinsei_12;
-    @ReportItem(name = "seven_listShinsei_13", length = 4, order = 726)
-    public RString seven_listShinsei_13;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -818,4 +765,13 @@ public class JimuShinsakaishiryoA4ReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation shinseishoKanriNo;
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        three_tokkiText,
+        three_tokkiImg,
+    }
 }

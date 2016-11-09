@@ -50,7 +50,8 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     private static final RString SELECT_SHINSAKAISIRYOKYOTSU = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get共通情報");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(TokkiTextA4ReportSource.ReportSourceFields.hokenshaNo.name())));
+            new RString(TokkiTextA4ReportSource.ReportSourceFields.two_tokkiText.name()),
+            new RString(TokkiTextA4ReportSource.ReportSourceFields.two_tokkiImg.name())));
     private static final int 最大表示行数 = 15;
     private IinShinsakaiIinJohoProcessParameter paramter;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
@@ -75,6 +76,8 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiTextA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<TokkiTextA4ReportSource>().new SimpleLayoutBreaker(
+
+
                     TokkiTextA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<TokkiTextA4ReportSource> occuredBreak(ReportLineRecord<TokkiTextA4ReportSource> currentRecord,

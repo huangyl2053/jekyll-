@@ -303,7 +303,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
             div.getJutakuKaishuShinseiResetInfo().setDisabled(true);
-            div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            if (RString.isNullOrEmpty(償還払支給申請情報.get審査結果())) {
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
+            } else {
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            }
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
             if (給付実績緋連動_受託あり.equals(償還)) {
@@ -316,7 +320,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
             div.getJutakuKaishuShinseiResetInfo().setDisabled(true);
-            div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            if (RString.isNullOrEmpty(償還払支給申請情報.get審査結果())) {
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
+            } else {
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            }
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().setDisabled(true);
@@ -629,6 +637,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
         div.getJutakuKaishuShinseiResetInfo().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+        div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getChkKokubo().setDisabled(false);
@@ -647,7 +656,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (事前申請情報.get支払期間開始年月日() != null && !事前申請情報.get支払期間開始年月日().isEmpty()) {
             支給申請情報.setStartYMD(new RDate(事前申請情報.get支払期間開始年月日().toString()));
         }
-        if (事前申請情報.get支払期間終了年月日() != null && 事前申請情報.get支払期間終了年月日().isEmpty()) {
+        if (事前申請情報.get支払期間終了年月日() != null && !事前申請情報.get支払期間終了年月日().isEmpty()) {
             支給申請情報.setEndYMD(new RDate(事前申請情報.get支払期間終了年月日().toString()));
         }
         if (!RString.isNullOrEmpty(事前申請情報.get支払窓口開始時間())) {

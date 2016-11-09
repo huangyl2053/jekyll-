@@ -1037,7 +1037,6 @@ public class DBC040010DataUtil {
         }
         高額支給額加算額 = nonullDecimal(高額支給額加算額);
         if (高額支給額加算額.compareTo(Decimal.ZERO) < 0) {
-            高額支給額加算額 = Decimal.ZERO;
             wKm_blnIchiranKBN2 = true;
         }
         KogakuShikyugakuJoho joho = new KogakuShikyugakuJoho();

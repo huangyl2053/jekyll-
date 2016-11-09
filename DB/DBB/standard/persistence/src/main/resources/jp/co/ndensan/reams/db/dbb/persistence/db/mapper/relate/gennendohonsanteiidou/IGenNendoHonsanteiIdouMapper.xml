@@ -295,6 +295,20 @@
         )
     </insert>
     
+    <resultMap id="resultMap_ShukiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.ShukiEntity" autoMapping="true">
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+    
+    <!-- 宛名識別異動分を取得します -->
+    <select resultOrdered="true" id="select宛名識別異動分" resultMap="resultMap_ShukiEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter" fetchSize="500">
+        SELECT
+        DISTINCT "宛名異動"."shikibetsuCode"
+        FROM
+            rgua."UaFt001FindIdo"('1',#{抽出開始日時},#{抽出終了日時},TRUE, '{}' ,'0', '{}' ,'0','','0','','0', '{}' , '{}'
+            ,'','','','','','','','','','','','','','','','')AS "宛名異動"
+    </select>
+    
     <resultMap id="resultMap_ShukiIdoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.ShukiIdoEntity" autoMapping="true">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>

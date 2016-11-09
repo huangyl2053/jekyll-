@@ -54,7 +54,7 @@ public class JyutakugaisyunaiyoListValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (サービス年月 == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, "提供（着工）年月")));
+                    UrErrorMessages.必須, "サービス年月")));
             return validPairs;
         }
         FlexibleDate 比較着工日 = new FlexibleDate(div.getTxtTyakkoyotebi().getValue().toDateString().toString());
