@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010080;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Business;
 import jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki251.JigyohokokuCompYoshiki251Report;
@@ -13,7 +15,6 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNoyoshiki2;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.JigyoHokokuShiryouRelateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Entity;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki251.JigyohokokuCompYoshiki251ReportSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -44,11 +46,16 @@ public class JigyoHokokuShiryouReportDBU300017Process extends BatchProcessBase<J
     private List<RString> 市町村コードList;
     private List<RString> 表番号List;
     private RString 引数Flag;
+    private JigyohokokuCompYoshiki201Business business;
+    private List<JigyoHokokuShiryouRelateEntity> list;
+    private List<RString> page_break_keys;
 
     @Override
     protected void initialize() {
         市町村コードList = new ArrayList<>();
         表番号List = new ArrayList<>();
+        list = new ArrayList<>();
+        business = new JigyohokokuCompYoshiki201Business();
         引数Flag = RString.EMPTY;
         if (RString.isNullOrEmpty(processParameter.get過去集計分旧市町村区分())) {
             市町村コードList.add(processParameter.get市町村コード());
@@ -63,6 +70,22 @@ public class JigyoHokokuShiryouReportDBU300017Process extends BatchProcessBase<J
             表番号List.add(new RString("16"));
             引数Flag = new RString("3");
         }
+        business.set年報月報区分(new RString("1"));
+        business.set処理日時(processParameter.get処理日時().getRDateTime());
+        if (new RString("1").equals(引数Flag)) {
+            business.set旧市町村区分(new RString("0"));
+            business.set保険者コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value());
+        } else if (new RString("2").equals(引数Flag)) {
+            business.set旧市町村区分(new RString("0"));
+        } else if (new RString("3").equals(引数Flag)) {
+            business.set旧市町村区分(new RString("1"));
+        }
+        business.set保険者名(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
+        business.set集計年月(processParameter.get集計年月());
+        business.set給付実績区分コード(new RString("2"));
+        page_break_keys = Collections.unmodifiableList(
+                Arrays.asList(new RString(ReportSourceFields.hokenshaNo.name()), new RString(ReportSourceFields.hyoTitle.name()),
+                        new RString(ReportSourceFields.hyoSubTitle.name())));
     }
 
     @Override
@@ -72,41 +95,39 @@ public class JigyoHokokuShiryouReportDBU300017Process extends BatchProcessBase<J
 
     @Override
     protected void createWriter() {
-        様式_05batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBU300017.getReportId().value()).create();
+        様式_05batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBU300017.getReportId().value())
+                .addBreak(new BreakerCatalog<JigyohokokuCompYoshiki251ReportSource>().simplePageBreaker(page_break_keys)).create();
         様式_05reportSourceWriter = new ReportSourceWriter(様式_05batchWrite);
     }
 
     @Override
     protected void process(JigyoHokokuShiryouRelateEntity entity) {
-        JigyohokokuCompYoshiki201Business business = new JigyohokokuCompYoshiki201Business();
-        business.set年報月報区分(new RString("1"));
-        business.set処理日時(processParameter.get処理日時().getRDateTime());
-        if (new RString("1").equals(引数Flag)) {
-            business.set旧市町村区分(new RString("0"));
-            business.set保険者コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value());
-        } else if (new RString("2").equals(引数Flag)) {
-            business.set旧市町村区分(new RString("0"));
-            business.set保険者コード(processParameter.get過去集計分市町村コードリスト().get(0));
-        } else if (new RString("3").equals(引数Flag)) {
-            business.set旧市町村区分(new RString("1"));
-            business.set保険者コード(processParameter.get過去集計分市町村コードリスト().get(0));
-        }
-        business.set保険者名(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
-        // TODO 内部QA：1874 Redmine# 「集計区分」は事業報告資料に存在しません。
-        List<JigyohokokuCompYoshiki201Entity> list = new ArrayList<>();
-        JigyohokokuCompYoshiki201Entity 帳票entity = new JigyohokokuCompYoshiki201Entity();
-        帳票entity.set集計番号(entity.getSyukeiNo());
-        帳票entity.set縦番号(entity.getHyoNo());
-        帳票entity.set横番号(entity.getYokoNo());
-        list.add(帳票entity);
+        list.add(entity);
+    }
+
+    @Override
+    protected void afterExecute() {
         business.set事業報告資料(list);
-        business.set集計年月(processParameter.get集計年月());
-        if (ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_件数.getコード().equals(entity.getSyukeiNo())
-                || ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_給付費.getコード().equals(entity.getSyukeiNo())
-                || ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_件数.getコード().equals(entity.getSyukeiNo())
-                || ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_給付費.getコード().equals(entity.getSyukeiNo())) {
-            JigyohokokuCompYoshiki251Report 様式_05report = new JigyohokokuCompYoshiki251Report(business);
-            様式_05report.writeBy(様式_05reportSourceWriter);
+        if (RString.isNullOrEmpty(processParameter.get過去集計分旧市町村区分())) {
+            print帳票(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value());
+        } else {
+            for (RString 市町村コード : processParameter.get過去集計分市町村コードリスト()) {
+                print帳票(市町村コード);
+            }
+        }
+    }
+
+    private void print帳票(RString 市町村コード) {
+        for (JigyoHokokuShiryouRelateEntity entity : list) {
+            if (市町村コード.equals(entity.getShichosonCode())
+                    && (ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_件数.getコード().equals(entity.getSyukeiNo())
+                    || ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_給付費.getコード().equals(entity.getSyukeiNo())
+                    || ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_件数.getコード().equals(entity.getSyukeiNo())
+                    || ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費2第２号被保険者分_給付費.getコード().equals(entity.getSyukeiNo()))) {
+                business.set保険者コード(市町村コード);
+                JigyohokokuCompYoshiki251Report 様式_05report = new JigyohokokuCompYoshiki251Report(business);
+                様式_05report.writeBy(様式_05reportSourceWriter);
+            }
         }
     }
 }
