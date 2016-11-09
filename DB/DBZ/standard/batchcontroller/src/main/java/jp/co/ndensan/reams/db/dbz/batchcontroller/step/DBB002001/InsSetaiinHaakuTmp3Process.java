@@ -55,7 +55,7 @@ public class InsSetaiinHaakuTmp3Process extends BatchProcessBase<SetaiHakuEntity
     protected void process(SetaiHakuEntity entity) {
         ISetai isetai = null;
         if (entity.getShikibetsuCode() != null && entity.getKijunYMD() != null) {
-            isetai = finder.findBy識別コード(GyomuCode.DB介護保険,
+            isetai = finder.findBy識別コード住民のみ(GyomuCode.DB介護保険,
                     entity.getShikibetsuCode(),
                     entity.getKijunYMD());
         }
