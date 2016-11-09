@@ -58,7 +58,7 @@ public class HokenshaSofuListPanelHandlerValidationHandler {
     private ValidationDictionary createDictionary() {
 
         return new ValidationDictionaryBuilder().
-                add(IdocheckMessages.必須入力項目_処理年月, div.getBtnHyojisuru()).
+                add(IdocheckMessages.必須入力項目_処理年月, div.getTxtShoriNengetsu()).
                 build();
     }
 
