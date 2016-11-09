@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.TokubetsuChoshuTsuk
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HenkoJiyu;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -82,12 +83,13 @@ public class FukaDaichoDataHenshuFath {
     }
 
     /**
-     * 普徴期情報を作成するメソッドです。
+     * 普徴期月情報を作成するメソッドです。
      *
      * @param 普徴期月リスト List<Kitsuki>
+     * @param 普徴月情報 FutsuChoshuTsuki
      * @return FuchoKiInfo 普徴期情報
      */
-    public FutsuChoshuKi create普徴期情報(List<Kitsuki> 普徴期月リスト) {
+    public FutsuChoshuKi create普徴期月情報(List<Kitsuki> 普徴期月リスト, FutsuChoshuTsuki 普徴月情報) {
 
         FutsuChoshuKi 普徴期情報 = new FutsuChoshuKi();
         普徴期情報.set普徴期１(RString.EMPTY);
@@ -104,65 +106,6 @@ public class FukaDaichoDataHenshuFath {
         普徴期情報.set普徴期１２(RString.EMPTY);
         普徴期情報.set普徴期１３(RString.EMPTY);
         普徴期情報.set普徴期１４(RString.EMPTY);
-        for (Kitsuki 普徴期月 : 普徴期月リスト) {
-            switch (普徴期月.get期AsInt()) {
-                case INT_1:
-                    普徴期情報.set普徴期１(期_1);
-                    break;
-                case INT_2:
-                    普徴期情報.set普徴期２(期_2);
-                    break;
-                case INT_3:
-                    普徴期情報.set普徴期３(期_3);
-                    break;
-                case INT_4:
-                    普徴期情報.set普徴期４(期_4);
-                    break;
-                case INT_5:
-                    普徴期情報.set普徴期５(期_5);
-                    break;
-                case INT_6:
-                    普徴期情報.set普徴期６(期_6);
-                    break;
-                case INT_7:
-                    普徴期情報.set普徴期７(期_7);
-                    break;
-                case INT_8:
-                    普徴期情報.set普徴期８(期_8);
-                    break;
-                case INT_9:
-                    普徴期情報.set普徴期９(期_9);
-                    break;
-                case INT_10:
-                    普徴期情報.set普徴期１０(期_10);
-                    break;
-                case INT_11:
-                    普徴期情報.set普徴期１１(期_11);
-                    break;
-                case INT_12:
-                    普徴期情報.set普徴期１２(期_12);
-                    break;
-                case INT_13:
-                    普徴期情報.set普徴期１３(期_13);
-                    break;
-                case INT_14:
-                    普徴期情報.set普徴期１４(期_14);
-                    break;
-                default:
-            }
-        }
-        return 普徴期情報;
-    }
-
-    /**
-     * 普徴期情報を作成するメソッドです。
-     *
-     * @param 普徴期月リスト List<Kitsuki>
-     * @return FutsuChoshuTsuki 普徴月情報
-     */
-    public FutsuChoshuTsuki create普徴月情報(List<Kitsuki> 普徴期月リスト) {
-
-        FutsuChoshuTsuki 普徴月情報 = new FutsuChoshuTsuki();
         普徴月情報.set普徴月１(RString.EMPTY);
         普徴月情報.set普徴月２(RString.EMPTY);
         普徴月情報.set普徴月３(RString.EMPTY);
@@ -177,62 +120,80 @@ public class FukaDaichoDataHenshuFath {
         普徴月情報.set普徴月１２(RString.EMPTY);
         普徴月情報.set普徴月１３(RString.EMPTY);
         普徴月情報.set普徴月１４(RString.EMPTY);
-        int index = 0;
         for (Kitsuki 普徴期月 : 普徴期月リスト) {
-            index = index + 1;
             RString 月 = format月(普徴期月.get月().getコード());
-            switch (index) {
+            switch (普徴期月.get期AsInt()) {
                 case INT_1:
+                    普徴期情報.set普徴期１(期_1);
                     普徴月情報.set普徴月１(月);
                     break;
                 case INT_2:
+                    普徴期情報.set普徴期２(期_2);
                     普徴月情報.set普徴月２(月);
                     break;
                 case INT_3:
+                    普徴期情報.set普徴期３(期_3);
                     普徴月情報.set普徴月３(月);
                     break;
                 case INT_4:
+                    普徴期情報.set普徴期４(期_4);
                     普徴月情報.set普徴月４(月);
                     break;
                 case INT_5:
+                    普徴期情報.set普徴期５(期_5);
                     普徴月情報.set普徴月５(月);
                     break;
                 case INT_6:
+                    普徴期情報.set普徴期６(期_6);
                     普徴月情報.set普徴月６(月);
                     break;
                 case INT_7:
+                    普徴期情報.set普徴期７(期_7);
                     普徴月情報.set普徴月７(月);
                     break;
                 case INT_8:
+                    普徴期情報.set普徴期８(期_8);
                     普徴月情報.set普徴月８(月);
                     break;
                 case INT_9:
+                    普徴期情報.set普徴期９(期_9);
                     普徴月情報.set普徴月９(月);
                     break;
                 case INT_10:
+                    普徴期情報.set普徴期１０(期_10);
                     普徴月情報.set普徴月１０(月);
                     break;
                 case INT_11:
+                    普徴期情報.set普徴期１１(期_11);
                     普徴月情報.set普徴月１１(月);
                     break;
                 case INT_12:
+                    普徴期情報.set普徴期１２(期_12);
                     普徴月情報.set普徴月１２(月);
                     break;
                 case INT_13:
+                    普徴期情報.set普徴期１３(期_13);
                     普徴月情報.set普徴月１３(月);
                     break;
                 case INT_14:
+                    普徴期情報.set普徴期１４(期_14);
                     普徴月情報.set普徴月１４(月);
                     break;
                 default:
             }
         }
-        return 普徴月情報;
+        return 普徴期情報;
     }
 
     private RString format月(RString コード) {
         if (Integer.parseInt(コード.toString()) < INT_10) {
             return コード.replace(FORMAT.toString(), RString.EMPTY.toString());
+        }
+        if (コード.equals(Tsuki.翌年度4月.getコード())) {
+            return Tsuki._4月.getコード().replace(FORMAT.toString(), RString.EMPTY.toString());
+        }
+        if (コード.equals(Tsuki.翌年度5月.getコード())) {
+            return Tsuki._5月.getコード().replace(FORMAT.toString(), RString.EMPTY.toString());
         }
         return コード;
     }
@@ -242,9 +203,10 @@ public class FukaDaichoDataHenshuFath {
      *
      * @param 年度区分 GennenKanen
      * @param 特徴期月リスト List<Kitsuki>
+     * @param 特徴月情報 TokubetsuChoshuTsuki
      * @return TokubetsuChoshuKi 特徴期情報
      */
-    public TokubetsuChoshuKi create特徴期情報(GennenKanen 年度区分, List<Kitsuki> 特徴期月リスト) {
+    public TokubetsuChoshuKi create特徴期月情報(GennenKanen 年度区分, List<Kitsuki> 特徴期月リスト, TokubetsuChoshuTsuki 特徴月情報) {
 
         TokubetsuChoshuKi 特徴期情報 = new TokubetsuChoshuKi();
         特徴期情報.set特徴期１(RString.EMPTY);
@@ -261,45 +223,6 @@ public class FukaDaichoDataHenshuFath {
         特徴期情報.set特徴期１２(RString.EMPTY);
         特徴期情報.set特徴期１３(RString.EMPTY);
         特徴期情報.set特徴期１４(RString.EMPTY);
-        if (GennenKanen.過年度.equals(年度区分)) {
-            return 特徴期情報;
-        }
-        for (Kitsuki 特徴期月 : 特徴期月リスト) {
-            switch (特徴期月.get期AsInt()) {
-                case INT_1:
-                    特徴期情報.set特徴期１(期_1);
-                    break;
-                case INT_2:
-                    特徴期情報.set特徴期２(期_2);
-                    break;
-                case INT_3:
-                    特徴期情報.set特徴期３(期_3);
-                    break;
-                case INT_4:
-                    特徴期情報.set特徴期４(期_4);
-                    break;
-                case INT_5:
-                    特徴期情報.set特徴期５(期_5);
-                    break;
-                case INT_6:
-                    特徴期情報.set特徴期６(期_6);
-                    break;
-                default:
-            }
-        }
-        return 特徴期情報;
-    }
-
-    /**
-     * 特徴月情報を作成するメソッドです。
-     *
-     * @param 年度区分 GennenKanen
-     * @param 特徴期月リスト List<Kitsuki>
-     * @return FutsuChoshuTsuki 特徴月情報
-     */
-    public TokubetsuChoshuTsuki create特徴月情報(GennenKanen 年度区分, List<Kitsuki> 特徴期月リスト) {
-
-        TokubetsuChoshuTsuki 特徴月情報 = new TokubetsuChoshuTsuki();
         特徴月情報.set特徴月１(RString.EMPTY);
         特徴月情報.set特徴月２(RString.EMPTY);
         特徴月情報.set特徴月３(RString.EMPTY);
@@ -315,35 +238,39 @@ public class FukaDaichoDataHenshuFath {
         特徴月情報.set特徴月１３(RString.EMPTY);
         特徴月情報.set特徴月１４(RString.EMPTY);
         if (GennenKanen.過年度.equals(年度区分)) {
-            return 特徴月情報;
+            return 特徴期情報;
         }
-        for (int index = 0; index < 特徴期月リスト.size();) {
-            RString 月 = format月(特徴期月リスト.get(index).get月().getコード());
-            index = index + 1;
-            switch (index) {
+        for (Kitsuki 特徴期月 : 特徴期月リスト) {
+            RString 月 = format月(特徴期月.get月().getコード());
+            switch (特徴期月.get期AsInt()) {
                 case INT_1:
+                    特徴期情報.set特徴期１(期_1);
                     特徴月情報.set特徴月１(月);
                     break;
-                case INT_3:
+                case INT_2:
+                    特徴期情報.set特徴期２(期_2);
                     特徴月情報.set特徴月２(月);
                     break;
-                case INT_5:
+                case INT_3:
+                    特徴期情報.set特徴期３(期_3);
                     特徴月情報.set特徴月３(月);
                     break;
-                case INT_7:
+                case INT_4:
+                    特徴期情報.set特徴期４(期_4);
                     特徴月情報.set特徴月４(月);
                     break;
-                case INT_9:
+                case INT_5:
+                    特徴期情報.set特徴期５(期_5);
                     特徴月情報.set特徴月５(月);
                     break;
-                case INT_11:
+                case INT_6:
+                    特徴期情報.set特徴期６(期_6);
                     特徴月情報.set特徴月６(月);
                     break;
                 default:
             }
-            index = index + 1;
         }
-        return 特徴月情報;
+        return 特徴期情報;
     }
 
     /**
@@ -449,7 +376,7 @@ public class FukaDaichoDataHenshuFath {
             return 世帯員情報リスト;
         }
         for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報リスト) {
-            if (期_2.equals(世帯員所得情報.get本人区分()) && !RString.isNullOrEmpty(世帯員所得情報.get課税区分_住民税減免前())) {
+            if (期_2.equals(世帯員所得情報.get本人区分())) {
                 SetaInJoho 世帯員情報 = new SetaInJoho();
                 世帯員情報.set世帯員識別コード(世帯員所得情報.get識別コード().getColumnValue());
                 世帯員情報.set世帯員氏名(世帯員所得情報.get氏名());

@@ -97,6 +97,17 @@ public class EditedKojin {
     }
 
     /**
+     * パターン4により、生年月日を返します。
+     *
+     * @return 生年月日 RString
+     */
+    public RString get生年月日_パターン4() {
+        return 個人.get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString();
+    }
+
+    /**
      * 生年月日For帳票を返します。
      *
      * @return 生年月日For帳票
