@@ -181,7 +181,7 @@ public class KijunShunyuShinseiTourokuHandler {
      *
      * @param div 制御のdiv
      */
-    public void set保存するボタンDisabled(KijunShunyuShinseiTourokuDiv div) {
+    public void set保存するボタンDisabled() {
         if (div.getDgIchiran().getDataSource().isEmpty() || !is入力()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
         } else {
@@ -1218,13 +1218,11 @@ public class KijunShunyuShinseiTourokuHandler {
             return ResponseData.of(div).forwardWithEventName(eventName).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            if (is入力()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
-        if (!is入力() || new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             前排他キーの解除(被保険者番号.getColumnValue());
