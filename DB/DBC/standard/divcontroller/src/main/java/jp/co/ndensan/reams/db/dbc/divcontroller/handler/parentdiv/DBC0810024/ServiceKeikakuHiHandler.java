@@ -84,7 +84,7 @@ public class ServiceKeikakuHiHandler {
      * @param entity200004 ShokanServicePlan200004Result
      */
     public void onLoad20004(
-            ShokanServicePlan200004Result entity200004) {        
+            ShokanServicePlan200004Result entity200004) {
         setサービス計画費パネル_詳細エリア200004(entity200004);
     }
 
@@ -211,7 +211,7 @@ public class ServiceKeikakuHiHandler {
         div.getPanelServiceKeikakuhiUp1().getTxtServiceTanyiSu().setValue(new Decimal(entity200904.getEntity().getサービス単位数()));
         div.getPanelServiceKeikakuhiUp1().getTxtTekiyoUp().setValue(entity200904.getEntity().get摘要());
         FlexibleYearMonth 審査年月 = entity200904.getEntity().get審査年月();
-        if (審査年月 != null) {
+        if (審査年月 != null && !審査年月.isEmpty()) {
             div.getPanelServiceKeikakuhiUp1().getTxtShinsaYM().setValue(new RDate(審査年月.toString()));
         }
         RString 支給区分コード = entity200904.getEntity().get支給区分コード();
