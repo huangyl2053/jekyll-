@@ -19,9 +19,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGa
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3170JigyoKogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.KogakuGassanJohoEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3068KogakuGassanShinseishoDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3070KogakuGassanJikoFutanGakuDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3170JigyoKogakuGassanJikoFutanGakuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jikofutangakushomeisho.IJikoFutangakushomeishoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -45,6 +42,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiS
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -59,9 +57,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class JikoFutangakushomeishoManager {
 
-    private final DbT3068KogakuGassanShinseishoDac 高額合算申請書Dac;
-    private DbT3070KogakuGassanJikoFutanGakuDac 高額合算自己負担額Dac;
-    private DbT3170JigyoKogakuGassanJikoFutanGakuDac 事業高額合算自己負担額Dac;
     private DbT7069KaigoToiawasesakiDac 介護問合せ先dac;
     private final MapperProvider mapperProvider;
     private static final RString メニューID_DBCMN63001 = new RString("DBCMN63001");
@@ -74,9 +69,6 @@ public class JikoFutangakushomeishoManager {
      * コンストラクタです。
      */
     public JikoFutangakushomeishoManager() {
-        this.高額合算申請書Dac = InstanceProvider.create(DbT3068KogakuGassanShinseishoDac.class);
-        this.高額合算自己負担額Dac = InstanceProvider.create(DbT3070KogakuGassanJikoFutanGakuDac.class);
-        this.事業高額合算自己負担額Dac = InstanceProvider.create(DbT3170JigyoKogakuGassanJikoFutanGakuDac.class);
         this.介護問合せ先dac = InstanceProvider.create(DbT7069KaigoToiawasesakiDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
@@ -131,7 +123,13 @@ public class JikoFutangakushomeishoManager {
             FlexibleYear 対象年度,
             RString 保険者番号,
             RString 支給申請書整理番号) {
-        DbT3070KogakuGassanJikoFutanGakuEntity dbt3070 = 高額合算自己負担額Dac.selectJikoFutanGaku(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
+        mapper = mapperProvider.create(IJikoFutangakushomeishoMapper.class);
+        JikoFutangakushomeishoParameter parameter = new JikoFutangakushomeishoParameter();
+        parameter.set保険者番号(保険者番号);
+        parameter.set対象年度(対象年度);
+        parameter.set被保険者番号(被保険者番号);
+        parameter.set支給申請書整理番号(支給申請書整理番号);
+        DbT3070KogakuGassanJikoFutanGakuEntity dbt3070 = mapper.get高額合算自己負担額(parameter);
         if (dbt3070 != null) {
             return new KogakuGassanJikoFutanGaku(dbt3070);
         }
@@ -150,8 +148,13 @@ public class JikoFutangakushomeishoManager {
             FlexibleYear 対象年度,
             RString 保険者番号,
             RString 支給申請書整理番号) {
-
-        DbT3170JigyoKogakuGassanJikoFutanGakuEntity dbt3170 = 事業高額合算自己負担額Dac.selectByKey(被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
+        mapper = mapperProvider.create(IJikoFutangakushomeishoMapper.class);
+        JikoFutangakushomeishoParameter parameter = new JikoFutangakushomeishoParameter();
+        parameter.set保険者番号(保険者番号);
+        parameter.set対象年度(対象年度);
+        parameter.set被保険者番号(被保険者番号);
+        parameter.set支給申請書整理番号(支給申請書整理番号);
+        DbT3170JigyoKogakuGassanJikoFutanGakuEntity dbt3170 = mapper.get事業高額合算自己負担額(parameter);
         if (dbt3170 != null) {
             return new JigyoKogakuGassanJikoFutanGaku(dbt3170);
         }
@@ -164,14 +167,18 @@ public class JikoFutangakushomeishoManager {
      * @param 被保険者番号 HihokenshaNo
      * @param 保険者番号 RString
      * @param 対象年度 FlexibleYear
-     * @param 支給申請書整理番号 RString
      * @return KogakuGassanShinseisho 再計算
      */
     public KogakuGassanShinseisho get再計算区分(HihokenshaNo 被保険者番号,
             RString 保険者番号,
-            FlexibleYear 対象年度,
-            RString 支給申請書整理番号) {
-        DbT3068KogakuGassanShinseishoEntity 再計算区分データ = 高額合算申請書Dac.selectSaikeisannkubun(被保険者番号, 保険者番号, 対象年度, 支給申請書整理番号);
+            FlexibleYear 対象年度
+    ) {
+        mapper = mapperProvider.create(IJikoFutangakushomeishoMapper.class);
+        JikoFutangakushomeishoParameter parameter = new JikoFutangakushomeishoParameter();
+        parameter.set保険者番号(保険者番号);
+        parameter.set対象年度(対象年度);
+        parameter.set被保険者番号(被保険者番号);
+        DbT3068KogakuGassanShinseishoEntity 再計算区分データ = mapper.get再計算区分(parameter);
         if (再計算区分データ != null) {
             return new KogakuGassanShinseisho(再計算区分データ);
         }
@@ -181,11 +188,11 @@ public class JikoFutangakushomeishoManager {
     /**
      * get問合せ先
      *
+     * @param 帳票分類ID ReportId
      * @return KaigoToiawasesaki
      */
-    public ToiawasesakiSource get問合せ先() {
-
-        DbT7069KaigoToiawasesakiEntity dbT7069 = 介護問合せ先dac.selectByKey(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100050.getReportId());
+    public ToiawasesakiSource get問合せ先(ReportId 帳票分類ID) {
+        DbT7069KaigoToiawasesakiEntity dbT7069 = 介護問合せ先dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID);
         KaigoToiawasesaki kaigoToiawasesaki = new KaigoToiawasesaki(dbT7069);
         ToiawasesakiSource source = new ToiawasesakiSource();
         if (kaigoToiawasesaki.get郵便番号() != null) {

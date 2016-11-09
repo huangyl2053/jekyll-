@@ -89,6 +89,7 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
      * エントリ情報Listです。
      */
     public static final RString PARAMETER_OUT_OUTPUTENTRY;
+    private SofuFileSakuseiEntity sofuFileSakuseiEntity;
 
     static {
         PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
@@ -196,6 +197,12 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
             editKyufuKanrihyoSokatsuhyoEntity(currentEntity, flag);
             kyufuKanrihyoSokatsuhyoEntity = edit給付管理票総括票entity();
             給付管理票送付用EntityList.add(currentEntity);
+            sofuFileSakuseiEntity = new SofuFileSakuseiEntity();
+            レコード件数カウンター = 合計レコード_件数カウンター + 明細レコード_件数カウンター;
+            sofuFileSakuseiEntity.setレコード件数カウンター(レコード件数カウンター);
+            sofuFileSakuseiEntity.set保険者番号(保険者番号1);
+            sofuFileSakuseiEntity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
+            送付ファイル用EntityList.add(sofuFileSakuseiEntity);
         } else {
 
             if (!(保険者番号.equals(自己作成管理一時Entity.getHokenshaNo()) && 利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
@@ -226,16 +233,18 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
                 総括票枚数_訪問_居宅修正 = Decimal.ZERO;
                 総括票枚数_訪問_居宅取消 = Decimal.ZERO;
                 明細行数カウンター++;
+                保険者番号1 = 自己作成管理一時Entity.getHokenshaNo();
+                給付管理票送付用EntityList = new ArrayList<>();
+                給付管理票送付用EntityList.add(currentEntity);
                 editKyufuKanrihyoSokatsuhyoEntity(currentEntity, flag);
                 kyufuKanrihyoSokatsuhyoEntity = edit給付管理票総括票entity();
-                SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
+                sofuFileSakuseiEntity = new SofuFileSakuseiEntity();
                 レコード件数カウンター = 合計レコード_件数カウンター + 明細レコード_件数カウンター;
-                entity.setレコード件数カウンター(レコード件数カウンター);
-                entity.set保険者番号(保険者番号1);
-                entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
-                送付ファイル用EntityList.add(entity);
+                sofuFileSakuseiEntity.setレコード件数カウンター(レコード件数カウンター);
+                sofuFileSakuseiEntity.set保険者番号(保険者番号1);
+                sofuFileSakuseiEntity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
+                送付ファイル用EntityList.add(sofuFileSakuseiEntity);
                 レコード件数カウンター = 0;
-                給付管理票送付用EntityList = new ArrayList<>();
                 保険者番号1 = 自己作成管理一時Entity.getHokenshaNo();
 
             } else {
@@ -365,12 +374,6 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
         if (0 < ヘッダー項目は1行目) {
             KyufuKanrihyoSokatsuhyoReport report = new KyufuKanrihyoSokatsuhyoReport(kyufuKanrihyoSokatsuhyoEntity);
             report.writeBy(reportSourceWriter);
-            SofuFileSakuseiEntity entity = new SofuFileSakuseiEntity();
-            entity.setレコード件数カウンター(1);
-            entity.set保険者番号(保険者番号1);
-            entity.set給付管理票送付用EntityList(給付管理票送付用EntityList);
-            送付ファイル用EntityList.add(entity);
-
         }
         for (int i = 0; i < 送付ファイル用EntityList.size(); i++) {
             int 出力件数 = 0;
@@ -400,8 +403,8 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
                 for (int j = 0; j < 給付管理票送付用.size(); j++) {
                     総出力件数++;
                     出力件数++;
-                    KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity = 給付管理票送付用.get(i).get自己作成管理一時Entity();
-                    HihokenshaTempEntity 被保険者一時Entity = 給付管理票送付用.get(i).get被保険者一時Entity();
+                    KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity = 給付管理票送付用.get(j).get自己作成管理一時Entity();
+                    HihokenshaTempEntity 被保険者一時Entity = 給付管理票送付用.get(j).get被保険者一時Entity();
                     KyufukanrihyoOutSofuFairulistcsvEntity listcsvEntity = getlistcsvEntity(給付管理票送付用_明細行数カウンター,
                             被保険者一時Entity, レコード番号カウンター, 自己作成管理一時Entity);
                     eucCsvWriter.writeLine(listcsvEntity);
