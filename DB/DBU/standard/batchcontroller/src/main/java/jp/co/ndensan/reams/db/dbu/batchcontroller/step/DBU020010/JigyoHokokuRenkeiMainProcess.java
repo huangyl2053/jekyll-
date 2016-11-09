@@ -49,11 +49,17 @@ public class JigyoHokokuRenkeiMainProcess extends BatchProcessBase<DbT7021JigyoH
      * 保険者番号の取得です。
      */
     public static final RString 保険者番号;
+    /**
+     * 保険者名称の取得です。
+     */
+    public static final RString 保険者名称;
 
     static {
         保険者番号 = new RString("hiHokenshaNo");
+        保険者名称 = new RString("hiHokenshaName");
     }
-    private OutputParameter<RString> hiHokenshaNo;
+    private OutputParameter<Map<RString, List<RString>>> hiHokenshaNo;
+    private OutputParameter<Map<RString, List<RString>>> hiHokenshaName;
 
     @Override
     protected void initialize() {
@@ -82,7 +88,9 @@ public class JigyoHokokuRenkeiMainProcess extends BatchProcessBase<DbT7021JigyoH
         保険者番号data.put(番号, 保険者番号List);
         保険者名称data.put(名称, 保険者名称List);
         hiHokenshaNo = new OutputParameter<>();
-        hiHokenshaNo.setValue(get保険者番号(保険者番号data.get(番号)));
+        hiHokenshaName = new OutputParameter<>();
+        hiHokenshaNo.setValue(保険者番号data);
+        hiHokenshaName.setValue(保険者名称data);
     }
 
     @Override
@@ -106,12 +114,5 @@ public class JigyoHokokuRenkeiMainProcess extends BatchProcessBase<DbT7021JigyoH
             return RString.EMPTY;
         }
         return date.value();
-    }
-
-    private RString get保険者番号(List<RString> date) {
-        if (!date.isEmpty()) {
-            return date.get(0);
-        }
-        return RString.EMPTY;
     }
 }

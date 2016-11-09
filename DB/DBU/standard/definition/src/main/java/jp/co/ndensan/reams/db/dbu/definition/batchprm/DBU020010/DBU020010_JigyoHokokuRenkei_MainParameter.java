@@ -44,6 +44,8 @@ public class DBU020010_JigyoHokokuRenkei_MainParameter extends BatchParameterBas
     private static final String 市町村コードリストキー = "市町村コードリスト";
     private static final String IS旧保険者分キー = "is旧保険者分";
     private static final String IS構成市町村分キー = "is構成市町村分";
+    private RString 保険者番号;
+    private RString 保険者名称;
 
     @BatchParameter(key = 過去集計年月キー, name = "過去集計年月")
     private RString 過去集計年月;
@@ -188,6 +190,8 @@ public class DBU020010_JigyoHokokuRenkei_MainParameter extends BatchParameterBas
                 is出力_保険給付決定状況合算_決定年月,
                 市町村コードリスト,
                 is旧保険者分,
-                is構成市町村分);
+                is構成市町村分,
+                保険者番号,
+                保険者名称);
     }
 }
