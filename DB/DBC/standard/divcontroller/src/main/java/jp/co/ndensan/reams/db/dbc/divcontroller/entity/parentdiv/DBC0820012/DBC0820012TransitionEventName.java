@@ -17,7 +17,8 @@ public enum DBC0820012TransitionEventName implements IContainerEvents {
     口座情報("口座情報"),
     サービス提供証明書("サービス提供証明書"),
     償還払決定情報("償還払決定情報"),
-    一覧に戻る("一覧に戻る");
+    一覧に戻る("一覧に戻る"),
+    処理完了("処理完了");
 
     private final RString name;
 
