@@ -145,11 +145,14 @@ public class DBC8010001Main {
                 ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class);
         boolean flag5 = (null == ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)
                 || !決定者受取年月開始年月未入力value.equals(ym));
-        if (flag5 && !div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
+        if (flag5 && !div.getTxtKetteishaUketoriYmRange().isDisabled()
+                && div.getTxtKetteishaUketoriYmRange().isVisible()
+                && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
             ViewStateHolder.put(ViewStateKeys.決定者受取年月開始年月未入力flag, 決定者受取年月開始年月未入力value);
             return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
         } else {
             if (!ResponseHolder.isReRequest() && !div.getTxtKetteishaUketoriYmRange().isDisabled()
+                    && div.getTxtKetteishaUketoriYmRange().isVisible()
                     && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
             } else if (null != ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)
