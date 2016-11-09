@@ -23,6 +23,7 @@ public class FutanWariaiShoOutputJokenhyo {
     private static final RString 発行区分 = new RString("【発行区分】　");
     private static final RString 出力対象 = new RString("【出力対象】");
     private static final RString 交付年月日 = new RString("【交付年月日】");
+    private static final RString 出力順STR = new RString("【出力順】");
     private static final RString 定数_ZERO = new RString("0");
     private static final RString 定数_ONE = new RString("1");
     private static final RString 定数_TWO = new RString("2");
@@ -84,7 +85,7 @@ public class FutanWariaiShoOutputJokenhyo {
         outputJokenhyo.add(builder.toRString());
         if (出力順 != null) {
             builder = new RStringBuilder();
-            builder.append(出力順.getFormated出力順項目());
+            builder.append(出力順STR.concat(RString.EMPTY).concat(出力順.getFormated出力順項目()));
             outputJokenhyo.add(builder.toRString());
         }
         return outputJokenhyo;
