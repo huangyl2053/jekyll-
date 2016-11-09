@@ -373,7 +373,15 @@ public class DBC8020001MainHandler {
         DBC050021_FurikomimeisaiFurikomiDataKogakuGassanParameter parameter = new DBC050021_FurikomimeisaiFurikomiDataKogakuGassanParameter();
         parameter.set代表金融機関コード(new KinyuKikanCode(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEXSTART, INDEX_4)));
         parameter.set再処理フラグ(div.getChkSaisakusei().isAllSelected());
-        parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        if (null != div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey()
+                && INDEX_1.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey())) {
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        } else if (null != div.getRadShoriSentakuFurikomiDataModify().getSelectedKey()
+                && INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey())) {
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        } else {
+            parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
+        }
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
         parameter.set委託者コード(div.getTxtItakushaCode().getValue());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
@@ -424,7 +432,15 @@ public class DBC8020001MainHandler {
         DBC050022_FurikomimeisaiFurikomiDataJigyoKogakuParameter parameter = new DBC050022_FurikomimeisaiFurikomiDataJigyoKogakuParameter();
         parameter.set代表金融機関コード(new KinyuKikanCode(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEXSTART, INDEX_4)));
         parameter.set再処理フラグ(div.getChkSaisakusei().isAllSelected());
-        parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        if (null != div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey()
+                && INDEX_1.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey())) {
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        } else if (null != div.getRadShoriSentakuFurikomiDataModify().getSelectedKey()
+                && INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey())) {
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        } else {
+            parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
+        }
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
         parameter.set委託者コード(div.getTxtItakushaCode().getValue());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
@@ -471,7 +487,15 @@ public class DBC8020001MainHandler {
                 = new DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassanParameter();
         parameter.set代表金融機関コード(new KinyuKikanCode(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEXSTART, INDEX_4)));
         parameter.set再処理フラグ(div.getChkSaisakusei().isAllSelected());
-        parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        if (null != div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey()
+                && INDEX_1.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey())) {
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        } else if (null != div.getRadShoriSentakuFurikomiDataModify().getSelectedKey()
+                && INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey())) {
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        } else {
+            parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
+        }
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
         parameter.set委託者コード(div.getTxtItakushaCode().getValue());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
