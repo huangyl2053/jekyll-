@@ -86,11 +86,11 @@ public class InsHakouRirekiAndKanriMstProcess extends BatchProcessBase<ShotokuSh
         }
         所得照会票発行履歴Entity.setRirekiNo(履歴番号);
         if (所得照会票データEntity.getZenkokuJushoCode() != null) {
-            if (INT_6 < 所得照会票データEntity.getZenkokuJushoCode().length()) {
-                所得照会票発行履歴Entity.setShokaisakiLasdecCode(new LasdecCode(所得照会票データEntity.getZenkokuJushoCode().substring(INT_0, INT_6)));
+            RString 全国住所コード = 所得照会票データEntity.getZenkokuJushoCode().trim();
+            if (INT_6 < 全国住所コード.length()) {
+                所得照会票発行履歴Entity.setShokaisakiLasdecCode(new LasdecCode(全国住所コード.substring(INT_0, INT_6)));
             } else {
-                所得照会票発行履歴Entity.setShokaisakiLasdecCode(new LasdecCode(所得照会票データEntity.getZenkokuJushoCode()));
-
+                所得照会票発行履歴Entity.setShokaisakiLasdecCode(new LasdecCode(全国住所コード));
             }
         }
         所得照会票発行履歴Entity.setSetaiCode(所得照会票データEntity.getSetaiCode());

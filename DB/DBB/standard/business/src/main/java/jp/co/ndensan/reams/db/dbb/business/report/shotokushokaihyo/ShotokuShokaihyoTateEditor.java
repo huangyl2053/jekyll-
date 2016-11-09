@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -92,19 +93,17 @@ public class ShotokuShokaihyoTateEditor implements IShotokuShokaihyoTateEditor {
         source.title1 = 文書タイトル;
         source.title2 = 文書タイトル;
         set住民税課税年度(source);
-        source.hihokenshaumareYMD = 生年月日のフォーマット(new RDate(所得照会票.get生年月日().toString()));
+        source.hihokenshaumareYMD = 生年月日のフォーマット(所得照会票.get生年月日());
         if (RSTRING_3.equals(所得照会票.get住民状態コード())) {
             if (所得照会票.get転出先住所().length() <= INT_50) {
                 source.hihokenshaJusho = 所得照会票.get転出先住所();
             } else {
                 source.hihokenshaJusho = 所得照会票.get転出先住所().substring(INT_0, INT_50);
             }
+        } else if (所得照会票.get転入前住所().length() <= INT_50) {
+            source.hihokenshaJusho = 所得照会票.get転入前住所();
         } else {
-            if (所得照会票.get転入前住所().length() <= INT_50) {
-                source.hihokenshaJusho = 所得照会票.get転入前住所();
-            } else {
-                source.hihokenshaJusho = 所得照会票.get転入前住所().substring(INT_0, INT_50);
-            }
+            source.hihokenshaJusho = 所得照会票.get転入前住所().substring(INT_0, INT_50);
         }
         if (所得照会票.get住民税課税年度() != null) {
             source.kazeiNendo = 所得照会票.get住民税課税年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
@@ -210,7 +209,7 @@ public class ShotokuShokaihyoTateEditor implements IShotokuShokaihyoTateEditor {
             source.shikibetsuCode4 = 所得照会票.get世帯員リスト().get(INT_3).get識別コード().value();
             source.shimeiKana4 = 所得照会票.get世帯員リスト().get(INT_3).getカナ氏名();
             source.shimei4 = 所得照会票.get世帯員リスト().get(INT_3).get氏名();
-            source.birthYMD4 = 生年月日のフォーマット(new RDate(所得照会票.get世帯員リスト().get(INT_3).get生年月日().toString()));
+            source.birthYMD4 = 生年月日のフォーマット(所得照会票.get世帯員リスト().get(INT_3).get生年月日());
         }
     }
 
@@ -231,7 +230,7 @@ public class ShotokuShokaihyoTateEditor implements IShotokuShokaihyoTateEditor {
             source.shikibetsuCode3 = 所得照会票.get世帯員リスト().get(INT_2).get識別コード().value();
             source.shimeiKana3 = 所得照会票.get世帯員リスト().get(INT_2).getカナ氏名();
             source.shimei3 = 所得照会票.get世帯員リスト().get(INT_2).get氏名();
-            source.birthYMD3 = 生年月日のフォーマット(new RDate(所得照会票.get世帯員リスト().get(INT_2).get生年月日().toString()));
+            source.birthYMD3 = 生年月日のフォーマット(所得照会票.get世帯員リスト().get(INT_2).get生年月日());
         }
     }
 
@@ -252,7 +251,7 @@ public class ShotokuShokaihyoTateEditor implements IShotokuShokaihyoTateEditor {
             source.shikibetsuCode2 = 所得照会票.get世帯員リスト().get(INT_1).get識別コード().value();
             source.shimeiKana2 = 所得照会票.get世帯員リスト().get(INT_1).getカナ氏名();
             source.shimei2 = 所得照会票.get世帯員リスト().get(INT_1).get氏名();
-            source.birthYMD2 = 生年月日のフォーマット(new RDate(所得照会票.get世帯員リスト().get(INT_1).get生年月日().toString()));
+            source.birthYMD2 = 生年月日のフォーマット(所得照会票.get世帯員リスト().get(INT_1).get生年月日());
         }
     }
 
@@ -273,32 +272,25 @@ public class ShotokuShokaihyoTateEditor implements IShotokuShokaihyoTateEditor {
             source.shikibetsuCode1 = 所得照会票.get世帯員リスト().get(INT_0).get識別コード().value();
             source.shimeiKana1 = 所得照会票.get世帯員リスト().get(INT_0).getカナ氏名();
             source.shimei1 = 所得照会票.get世帯員リスト().get(INT_0).get氏名();
-            source.birthYMD1 = 生年月日のフォーマット(new RDate(所得照会票.get世帯員リスト().get(INT_0).get生年月日().toString()));
+            source.birthYMD1 = 生年月日のフォーマット(所得照会票.get世帯員リスト().get(INT_0).get生年月日());
         }
     }
 
-    private RString 生年月日のフォーマット(RDate 生年月日) {
+    private RString 生年月日のフォーマット(FlexibleDate 生年月日) {
         RString 住民種別コード = 所得照会票.get住民種別コード();
         if ((RSTRING_1.equals(住民種別コード) || RSTRING_3.equals(住民種別コード)
                 || is日本人(所得照会票.get世帯員リスト())) && set生年月日(生年月日)) {
             return 生年月日.wareki().toDateString();
         }
         if ((RSTRING_2.equals(住民種別コード) || RSTRING_4.equals(住民種別コード)
-                || is外国人(所得照会票.get世帯員リスト())) && set生年月日TWO(生年月日)) {
+                || is外国人(所得照会票.get世帯員リスト())) && set生年月日(生年月日)) {
             return 生年月日.seireki().toDateString();
         }
         return RString.EMPTY;
     }
 
-    private boolean set生年月日TWO(RDate 生年月日) {
-        if (生年月日 != null) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean set生年月日(RDate 生年月日) {
-        if (生年月日 != null) {
+    private boolean set生年月日(FlexibleDate 生年月日) {
+        if (生年月日 != null || !生年月日.isEmpty()) {
             return true;
         }
         return false;
