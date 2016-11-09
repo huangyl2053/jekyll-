@@ -276,7 +276,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
 
         public static boolean is自己負担額証明書整理番号入力値が不正チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 自己負担額証明書整理番号 = div.getTxtJikoFutanSeiriNom().getValue();
-            if (RString.isNullOrEmpty(自己負担額証明書整理番号)) {
+            if (RString.isNullOrEmpty(自己負担額証明書整理番号) || 自己負担額証明書整理番号.length() < INT_12) {
                 return false;
             }
             RString 保険者番号 = 自己負担額証明書整理番号.substring(INT_4, INT_12);

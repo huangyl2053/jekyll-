@@ -121,7 +121,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private CreateTaishoSetaiyinProcessMybatisParameter para;
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
-    private static final RString チェック項目名 = new RString("住所");
+    private static final RString チェック項目名 = new RString("jusho");
     private static final RString 定数_住所 = new RString("住所");
     private static final RString ファイル名_前 = new RString("KijunShunyugakuTekiyoShinseishoHakkoIchiran_");
     private static final RString 記号_ = new RString("_");
@@ -337,23 +337,16 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                         .batchReportWriterWithCheckList(KijunShunyugakuTekiyoShinseishoSource.class)
                         .checkListInfo(info)
                         .checkListLineItemSet(pairs)
-                        .reportId(ReportIdDBC.DBC100064.getReportId().value())
+                        .reportId(ReportIdDBC.DBC100064.getReportId())
                         .build();
                 dBC100064SourceWriter1 = new ReportSourceWriter<>(dBC100064ReportWriter1);
 
-                dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
-                dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
-
-                確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063ReportWriter0.getImageFolderPath(),
-                        new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
-            } else {
-                dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
-                dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
-
-                確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063ReportWriter0.getImageFolderPath(),
-                        new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
-
             }
+            dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
+            dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
+
+            確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063ReportWriter0.getImageFolderPath(),
+                    new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
 
             dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
             dBC100064SourceWriter0 = new ReportSourceWriter<>(dBC100064ReportWriter0);
@@ -607,7 +600,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 申請一覧Entity.set行政区コード(宛先.get宛先行政区().getコード().getColumnValue());
                 申請一覧Entity.set世帯コード(宛名.get世帯コード().getColumnValue());
             }
-            申請一覧Entity.set市町村コード(doRString編集(exEntity.get対象世帯員().getShichosonCode()));
+            申請一覧Entity.set市町村コード(doRString編集(entity.get対象世帯員().getShichosonCode()));
 
         } else {
             申請一覧Entity.set氏名(MESSAGE_該当データなし);
@@ -695,7 +688,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private enum 特定項目 implements ISpecificKey {
 
-        key1(KijunShunyugakuTekiyoOshiraseTsuchishoSource.ITEM_HIHOKENSHANO1, 定数_被保険者番号.toString());
+        key1(KijunShunyugakuTekiyoShinseishoSource.ITEM_HIHOKENSHANO1, 定数_被保険者番号.toString());
 
         private final RString itemName;
 

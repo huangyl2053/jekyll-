@@ -78,7 +78,6 @@ public class GogakuGassanShikyugakuCalcResultProcess extends BatchProcessBase<Db
     private BatchReportWriter<GassanJigyobunKekkaIchiranSource> batchReportWriter;
     private ReportSourceWriter<GassanJigyobunKekkaIchiranSource> reportSourceWriter;
 
-    @BatchWriter
     private CsvWriter<GassanJigyobunShikyugakuKeisanKekkaIchiranEntity> csvWriter;
 
     @BatchWriter
@@ -105,15 +104,6 @@ public class GogakuGassanShikyugakuCalcResultProcess extends BatchProcessBase<Db
     @Override
     protected void createWriter() {
         tempDbWriter = new BatchEntityCreatedTempTableWriter(TABLE_NAME, ShikyugakuCalcTempEntity.class);
-
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
-        csvWriter = new CsvWriter.InstanceBuilder(Path.combinePath(manager.getEucOutputDirectry(), CSV_FILE_NAME)).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(true).
-                build();
     }
 
     @Override
@@ -179,6 +169,14 @@ public class GogakuGassanShikyugakuCalcResultProcess extends BatchProcessBase<Db
     protected void afterExecute() {
         dataFlag.setValue(hasData);
         if (!hasData) {
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
+            csvWriter = new CsvWriter.InstanceBuilder(Path.combinePath(manager.getEucOutputDirectry(), CSV_FILE_NAME)).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(true).
+                    build();
             GassanJigyobunShikyugakuKeisanKekkaIchiranEntity csvEntity = new GassanJigyobunShikyugakuKeisanKekkaIchiranEntity();
             csvEntity.set氏名(該当データ無し);
             csvWriter.writeLine(csvEntity);
@@ -196,8 +194,6 @@ public class GogakuGassanShikyugakuCalcResultProcess extends BatchProcessBase<Db
             GassanJigyobunKekkaIchiranReport report = new GassanJigyobunKekkaIchiranReport(param, 出力順, 自市町村コード);
             report.writeBy(reportSourceWriter);
             batchReportWriter.close();
-        } else {
-            csvWriter.close();
         }
     }
 }

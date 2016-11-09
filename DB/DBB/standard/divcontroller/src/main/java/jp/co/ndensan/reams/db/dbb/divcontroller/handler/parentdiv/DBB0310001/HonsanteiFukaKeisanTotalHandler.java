@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -88,6 +89,8 @@ public class HonsanteiFukaKeisanTotalHandler {
     private static final RString 実行する_通知書 = new RString("btnTsuchishoSakusei");
     private static final RString 状況_未 = new RString("未");
     private static final RString 状況_済 = new RString("済");
+    private static final RString 課税確定 = new RString("【最新】個人住民税課税確定");
+    private static final RString ハイフン = new RString("－");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private final HonsanteiFukaKeisanTotalDiv div;
 
@@ -147,6 +150,18 @@ public class HonsanteiFukaKeisanTotalHandler {
         } else {
             dgHonsanteiShoriKakuninList = set処理状態詳細(遷移元区分, shoriDateKanriList);
         }
+        dgHonsanteiShoriKakunin_Row row = new dgHonsanteiShoriKakunin_Row();
+        row.setTxtShoriMei(課税確定);
+        row.setTxtJokyo(ハイフン);
+        RDateTime 確定日時 = Honsanteifuka.createInstance().getMax確定日時();
+        if (確定日時 == null) {
+            row.setTxtShoriNichiji(RString.EMPTY);
+        } else {
+            row.setTxtShoriNichiji(確定日時.getDate().wareki().toDateString()
+                    .concat(RString.HALF_SPACE).concat(確定日時
+                            .getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+        }
+        dgHonsanteiShoriKakuninList.add(row);
         div.getShoriJokyo().getHonsanteiShoriKakunin().getDgHonsanteiShoriKakunin().setDataSource(dgHonsanteiShoriKakuninList);
     }
 

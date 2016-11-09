@@ -53,7 +53,6 @@ public class KijunShunyuShinseiTouroku {
     private static final RString MESSAGE_合計 = new RString("所得情報の収入合計＞入力した収入合計になっています。");
     private static final RString MESSAGE_世帯再算出 = new RString("「世帯コード」、「処理年度」、「世帯員把握基準」"
             + "が変更していますが、登録して");
-    private static final RString MESSAGE_受給者または事業対象者 = new RString("世帯員に受給者または事業対象者がいませんが、登録して");
     private static final RString MESSAGE_算定基準額 = new RString("算定基準額が課税所得、総収入額の結果と異なりますが、登録して");
 
     /**
@@ -77,6 +76,7 @@ public class KijunShunyuShinseiTouroku {
         Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = getHandler(div).initialize(
                 被保険者番号, 識別コード, 世帯コード);
         ViewStateHolder.put(ViewStateKeys.基準収入額適用管理情報, (Serializable) 基準収入Map);
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).setState(DBC1000062StateName.一覧);
     }
 
@@ -95,6 +95,7 @@ public class KijunShunyuShinseiTouroku {
         div.setHdnFlag2(チェックなし);
         div.setHdnFlag3(チェックなし);
         div.setHdnFlag4(チェックなし);
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).setState(DBC1000062StateName.明細追加);
     }
 
@@ -113,6 +114,7 @@ public class KijunShunyuShinseiTouroku {
         div.setHdnFlag2(チェックなし);
         div.setHdnFlag3(チェックなし);
         div.setHdnFlag4(チェックなし);
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).setState(DBC1000062StateName.明細修正);
     }
 
@@ -124,6 +126,7 @@ public class KijunShunyuShinseiTouroku {
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnDelete_Ichiran(KijunShunyuShinseiTourokuDiv div) {
         getHandler(div).set一覧削除();
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).respond();
     }
 
@@ -135,6 +138,18 @@ public class KijunShunyuShinseiTouroku {
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnCancel_Ichiran(KijunShunyuShinseiTourokuDiv div) {
         getHandler(div).set一覧取消();
+        getHandler(div).set保存するボタンDisabled(div);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 所得状況ボタンのメソッドです。
+     *
+     * @param div 画面Div
+     * @return ResponseData
+     */
+    public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnBefore_ShotokuJokyo(KijunShunyuShinseiTourokuDiv div) {
+        getHandler(div).set所得状況隠し項目();
         return ResponseData.of(div).respond();
     }
 
@@ -144,7 +159,7 @@ public class KijunShunyuShinseiTouroku {
      * @param div 画面Div
      * @return ResponseData
      */
-    public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnBefore_ShotokuJokyo(KijunShunyuShinseiTourokuDiv div) {
+    public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnBefore_1231Jokyo(KijunShunyuShinseiTourokuDiv div) {
         getHandler(div).set1231状況隠し項目();
         return ResponseData.of(div).respond();
     }
@@ -157,6 +172,10 @@ public class KijunShunyuShinseiTouroku {
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnCommonUpdate(KijunShunyuShinseiTourokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).変更チェックValidate();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
@@ -357,17 +376,17 @@ public class KijunShunyuShinseiTouroku {
         }
 
         if (!チェック済み.equals(div.getHdnFlag2()) && !getHandler(div).is世帯再算出ボタン押下チェック()) {
+
             WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
                     DbzWarningMessages.確認.getMessage().replace(MESSAGE_世帯再算出.toString()).evaluate());
             div.setHdnFlag2(チェック済み);
             return ResponseData.of(div).addMessage(message).respond();
         }
 
-        if (!チェック済み.equals(div.getHdnFlag3()) && !getHandler(div).is受給者事業対象者のチェック()) {
-            WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
-                    DbzWarningMessages.確認.getMessage().replace(MESSAGE_受給者または事業対象者.toString()).evaluate());
+        validPairs = getValidationHandler(div).明細確定時チェックValidate();
+        if (!チェック済み.equals(div.getHdnFlag3()) && validPairs.iterator().hasNext()) {
             div.setHdnFlag3(チェック済み);
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
         if (!チェック済み.equals(div.getHdnFlag4()) && !getHandler(div).is算定基準額のチェック()) {

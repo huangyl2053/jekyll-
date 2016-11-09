@@ -163,4 +163,18 @@ public interface IKijunsyunyunenjiMapper {
      * @param para UpdTaishoSeitaiyinTemp5ProcessMybatisParameter
      */
     void insert処理日付管理マスタ(UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para);
+
+    /**
+     * 対象世帯員クラスTempにinsert。
+     *
+     * @param para UpdTaishoSeitaiyinTemp5ProcessMybatisParameter
+     */
+    void insert処理日付管理マスタ_異動分(UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para);
+
+    /**
+     * 対象世帯員クラスTempに更新。
+     *
+     * @param para UpdTaishoSeitaiyinTemp5ProcessMybatisParameter
+     */
+    void update処理日付管理マスタ_異動分(UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para);
 }

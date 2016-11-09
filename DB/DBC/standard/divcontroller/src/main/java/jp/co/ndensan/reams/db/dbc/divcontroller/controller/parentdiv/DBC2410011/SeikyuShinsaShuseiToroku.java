@@ -147,7 +147,11 @@ public class SeikyuShinsaShuseiToroku {
                 .equals(ResponseHolder.getMessageCode()) && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             getHandler(div).get情報一覧();
             getHandler(div).クリアデータ();
-            div.getChkSerchKetteiZumi().setVisible(false);
+            if (DBCMNE_1004.equals(ResponseHolder.getMenuID())) {
+                div.getChkSerchKetteiZumi().setVisible(false);
+            } else {
+                div.getChkSerchKetteiZumi().setVisible(true);
+            }
             return 画面の戻る(div);
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())

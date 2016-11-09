@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -80,6 +82,7 @@ public class HanyoListParamHandler {
     private static final RString KEY_連番付加 = new RString("連番付加");
     private static final RString KEY_賦課年度 = new RString("賦課年度");
     private static final RString KEY_日付編集 = new RString("日付編集");
+    private static final Decimal DECIMAL_999 = new Decimal("999");
 
     /**
      * コンストラクタです。
@@ -331,14 +334,12 @@ public class HanyoListParamHandler {
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区３終了(toChikuCode(宛名抽出条件.getChiku3_To()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区３開始(toChikuCode(宛名抽出条件.getChiku3_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
-            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getFrom() != null
-                    && NenreiSoChushutsuHoho.年齢範囲.getコード().equals(div.getChushutsuPanel2().getCcdAtenaJoken().
-                            get年齢層抽出方法().getコード())) {
+            if (is年齢範囲復元(宛名抽出条件.getNenreiRange()) && NenreiSoChushutsuHoho.年齢範囲.getコード()
+                    .equals(div.getChushutsuPanel2().getCcdAtenaJoken().get年齢層抽出方法().getコード())) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
             }
-            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getTo() != null
-                    && NenreiSoChushutsuHoho.年齢範囲.getコード().equals(div.getChushutsuPanel2().getCcdAtenaJoken().
-                            get年齢層抽出方法().getコード())) {
+            if (is年齢範囲復元(宛名抽出条件.getNenreiRange()) && NenreiSoChushutsuHoho.年齢範囲.getコード().
+                    equals(div.getChushutsuPanel2().getCcdAtenaJoken().get年齢層抽出方法().getコード())) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
             }
             if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getFrom() != null) {
@@ -433,5 +434,9 @@ public class HanyoListParamHandler {
 
         }
         return 課税区分減免;
+    }
+
+    private boolean is年齢範囲復元(Range<Decimal> 年齢範囲) {
+        return !Decimal.ZERO.equals(年齢範囲.getFrom()) && DECIMAL_999.equals(年齢範囲.getTo());
     }
 }

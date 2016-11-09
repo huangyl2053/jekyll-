@@ -128,7 +128,7 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
             DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity 高額合算自己負担額明細) {
         RString nowKey = util.getKeyOf高額合算自己負担額(高額合算自己負担額);
         if (!processParameter.is事業分フラグ()) {
-            if (!nowKey.endsWith(beforKeyOf高額合算自己負担額)) {
+            if (!nowKey.equals(beforKeyOf高額合算自己負担額)) {
                 高額合算自己負担額Writer.update(util.getInsOrUpd高額合算自己負担額(実績負担額データ,
                         util.toDbT3070KogakuGassanJikoFutanGakuEntity(高額合算自己負担額), true));
                 beforKeyOf高額合算自己負担額 = nowKey;
@@ -142,7 +142,7 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
                 高額合算自己負担額明細Writer.update(updEntity);
             }
         } else {
-            if (!nowKey.endsWith(beforKeyOf高額合算自己負担額)) {
+            if (!nowKey.equals(beforKeyOf高額合算自己負担額)) {
                 高額合算自己負担額Writer.update(util.getInsOrUpd高額合算自己負担額事業分(実績負担額データ, 高額合算自己負担額, true));
                 beforKeyOf高額合算自己負担額 = nowKey;
             }

@@ -232,7 +232,9 @@ public class KogakuKyufuTaishoListHandler {
             set高額判定根拠(サービス提供年月, row.getData9());
         }
         div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().setValue(row.getData15());
-        div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().setSelectedKey(row.getData16());
+        if (row.getData16() != null && !row.getData16().isEmpty()) {
+            div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().setSelectedKey(row.getData16());
+        }
         div.getRowId().setValue(new Decimal(row.getId()));
     }
 

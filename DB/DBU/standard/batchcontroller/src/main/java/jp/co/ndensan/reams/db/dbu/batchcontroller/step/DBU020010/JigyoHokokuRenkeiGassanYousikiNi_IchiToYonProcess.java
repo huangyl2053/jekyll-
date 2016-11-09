@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
@@ -16,17 +14,12 @@ import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkeiFooterEucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkeiHead2EucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -38,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 様式別連携情報作成のバッチ処理・保険給付決定状況現物分に対応するのCSV出力のプロセスクラスです。
@@ -644,36 +636,12 @@ public class JigyoHokokuRenkeiGassanYousikiNi_IchiToYonProcess extends BatchProc
                     "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper."
                     + "get保険給付決定状況合算分決定年月情報の取得");
         }
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
-        mapper = mapperProvider.create(IJigyoHokokuRenkeiMapper.class);
-        保険者番号data = new HashMap<>();
-        保険者名称data = new HashMap<>();
-        List<RString> 保険者番号List = new ArrayList<>();
-        List<RString> 保険者名称List = new ArrayList<>();
-        if (processParameter.is旧保険者分()) {
-            List<DbT7056GappeiShichosonEntity> 合併市町村data = mapper.get合併市町村の取得(processParameter.toMybatisParamter());
-            for (DbT7056GappeiShichosonEntity dbT7056entity : 合併市町村data) {
-                保険者番号List.add(get旧保険者番号(dbT7056entity.getKyuHokenshaNo()));
-                保険者名称List.add(dbT7056entity.getKyuShichosonMeisho());
-            }
-        } else if (processParameter.is構成市町村分()) {
-            List<DbT7051KoseiShichosonMasterEntity> 構成市町村data = mapper.get構成市町村マスタの取得(processParameter.toMybatisParamter());
-            for (DbT7051KoseiShichosonMasterEntity dbT7051entity : 構成市町村data) {
-                保険者番号List.add(dbT7051entity.getShoKisaiHokenshaNo().value());
-                保険者名称List.add(dbT7051entity.getShichosonMeisho());
-            }
-        } else {
-            保険者番号List.add(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告));
-            保険者名称List.add(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBU介護統計報告));
-        }
-        保険者番号data.put(番号, 保険者番号List);
-        保険者名称data.put(名称, 保険者名称List);
         RString spoolWorkPath = processParameter.getSpoolWorkPath();
         RStringBuilder filePath = new RStringBuilder();
         filePath.append("DUJRENF08_");
         filePath.append(processParameter.get過去集計年月());
         filePath.append("_");
-        filePath.append(保険者番号data.get(番号).get(0));
+        filePath.append(processParameter.get保険者番号());
         filePath.append(".csv");
         eucFilePath = Path.combinePath(spoolWorkPath, filePath.toRString());
     }
@@ -718,34 +686,9 @@ public class JigyoHokokuRenkeiGassanYousikiNi_IchiToYonProcess extends BatchProc
 
     @Override
     protected void afterExecute() {
-        int i = 0;
-        RString 保険者番号bak = RString.EMPTY;
-        for (RString 保険者番号 : 保険者番号data.get(番号)) {
-            if (!保険者番号bak.equals(保険者番号) && i != 0) {
-                RStringBuilder fileName = new RStringBuilder();
-                fileName.append("DUJRENF08_");
-                fileName.append(processParameter.get過去集計年月());
-                fileName.append("_");
-                fileName.append(保険者番号);
-                fileName.append(".csv");
-                setFilePath(fileName);
-                保険者番号bak = 保険者番号;
-            }
-            get様式２_様式２の４のCSV出力(保険者番号, 保険者名称data.get(名称).get(i));
-            i++;
-            eucCsvWriter.close();
-        }
+        get様式２_様式２の４のCSV出力(processParameter.get保険者番号(), processParameter.get保険者名称());
+        eucCsvWriter.close();
     }
-
-    private void setFilePath(RStringBuilder filePath) {
-        eucFilePath = Path.combinePath(processParameter.getSpoolWorkPath(), filePath.toRString());
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                setEncode(Encode.SJIS).setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(false).
-                build();
-            }  
 
     private void get様式２_様式２の４のCSV出力(RString 保険者番号, RString 保険者名称) {
         eucCsvWriter.writeLine(setヘッダレコード(ア_件数, イ_単位数, 保険者番号, 保険者名称));

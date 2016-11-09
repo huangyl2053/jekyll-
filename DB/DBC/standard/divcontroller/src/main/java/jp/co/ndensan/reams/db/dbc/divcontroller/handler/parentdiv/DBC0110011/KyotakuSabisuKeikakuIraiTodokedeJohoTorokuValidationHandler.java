@@ -33,6 +33,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
     private final KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div;
     private static final RString メニューID_自己作成 = new RString("DBCMN21002");
     private static final RString 計画修正モード = new RString("modify");
+    private static final RString 計画削除モード = new RString("delete");
+    private static final RString 計画照会モード = new RString("rireki");
 
     /**
      * コンストラクタです。
@@ -64,6 +66,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
             KyotakuKeikakuTodokede 居宅給付計画届出, HihokenshaNo 被保険者番号) {
         boolean is編集なしで更新;
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler(div);
+        if (計画削除モード.equals(div.getMode())
+                || 計画照会モード.equals(div.getMode())) {
+            return;
+        }
         if (null != 居宅給付計画届出) {
             is編集なしで更新 = handler.is項目が変更(居宅給付計画届出);
         } else {

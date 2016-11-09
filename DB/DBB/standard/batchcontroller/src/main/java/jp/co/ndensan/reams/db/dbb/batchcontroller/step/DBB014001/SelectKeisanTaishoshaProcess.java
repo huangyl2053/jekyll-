@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -37,6 +38,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
             = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuchokarisanteifuka."
                     + "IFuchoKarisanteiFukaMapper.get特別徴収同定一覧情報");
     private static final RString TABLE_NAME = new RString("FuchoKarisanteiTemp");
+    private static final RString NEXT_TABLE_NAME = new RString("FukaZenNendoTemp");
     private static final RString BATCH_ID = new RString("DBBBT34001");
     private static final Code エラーコード_08 = new Code("08");
     private static final RString 定数_0000 = new RString("0000");
@@ -53,6 +55,8 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
 
     @BatchWriter
     BatchPermanentTableWriter tableWriter;
+    @BatchWriter
+    IBatchTableWriter nextTempTableWriter;
 
     @Override
     protected void initialize() {
@@ -69,6 +73,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
     protected void createWriter() {
         tempTableWriter = new BatchEntityCreatedTempTableWriter(TABLE_NAME, FuchoKarisanteiTempEntity.class);
         tableWriter = new BatchPermanentTableWriter(DbT2010FukaErrorListEntity.class);
+        nextTempTableWriter = new BatchEntityCreatedTempTableWriter(NEXT_TABLE_NAME, FukaJohoTempEntity.class);
     }
 
     @Override

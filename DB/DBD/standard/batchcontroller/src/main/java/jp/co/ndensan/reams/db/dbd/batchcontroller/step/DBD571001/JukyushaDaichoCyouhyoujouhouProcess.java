@@ -233,7 +233,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
 
     @Override
     protected void afterExecute() {
-        if (帳票出力用受給者台帳Entity.get要介護認定情報EntityList().get先頭Entity() != null) {
+        if (帳票出力用受給者台帳Entity.get要介護認定情報EntityList() != null
+                && 帳票出力用受給者台帳Entity.get要介護認定情報EntityList().get先頭Entity() != null) {
             JukyushaDaichoReport report = new JukyushaDaichoReport(帳票出力用受給者台帳Entity, processParamter.get出力オプション区分());
             report.writeBy(reportSourceWriter);
         }

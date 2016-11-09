@@ -26,6 +26,7 @@ public class ShinsakaiShukeihyoShinseiBetsuEditor {
     private static final int 認定意見書 = 2;
     private static final int 認定審査会 = 3;
     private static final int 認定二次判定 = 4;
+    private static final RString 転入数_ZERO = new RString("0");
     private final ShinsakaiShukeihyoShinseiBetsuEntity current;
     private final ShinsakaiShukeihyoShinsei shukeihyoShinseiBetsu;
 
@@ -263,11 +264,11 @@ public class ShinsakaiShukeihyoShinseiBetsuEditor {
     }
 
     private void set申請区分法令転入申請() {
-        shukeihyoShinseiBetsu.set法_転入_受付数(RString.EMPTY);
-        shukeihyoShinseiBetsu.set法_転入_調査数(RString.EMPTY);
-        shukeihyoShinseiBetsu.set法_転入_意見書数(RString.EMPTY);
-        shukeihyoShinseiBetsu.set法_転入_審査会数(RString.EMPTY);
-        shukeihyoShinseiBetsu.set法_転入_二次判定数(RString.EMPTY);
+        shukeihyoShinseiBetsu.set法_転入_受付数(転入数_ZERO);
+        shukeihyoShinseiBetsu.set法_転入_調査数(転入数_ZERO);
+        shukeihyoShinseiBetsu.set法_転入_意見書数(転入数_ZERO);
+        shukeihyoShinseiBetsu.set法_転入_審査会数(転入数_ZERO);
+        shukeihyoShinseiBetsu.set法_転入_二次判定数(転入数_ZERO);
     }
 
     private void set申請区分法令合計() {

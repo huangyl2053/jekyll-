@@ -498,14 +498,14 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        boolean is項目が変更 = Boolean.TRUE;
+        boolean is項目が変更 = Boolean.FALSE;
         if (居宅給付計画届出 != null) {
             is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         }
-        if (!is項目が変更 && !ResponseHolder.isReRequest()) {
+        if (is項目が変更 && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
-        if (is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             handler.get前排他を解除(被保険者番号.getColumnValue());
             return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.再検索).respond();
@@ -524,14 +524,14 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        boolean is項目が変更 = Boolean.TRUE;
+        boolean is項目が変更 = Boolean.FALSE;
         if (居宅給付計画届出 != null) {
             is項目が変更 = handler.is項目が変更(居宅給付計画届出);
         }
-        if (!is項目が変更 && !ResponseHolder.isReRequest()) {
+        if (is項目が変更 && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
-        if (is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             handler.get前排他を解除(被保険者番号.getColumnValue());
             return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.検索結果一覧).respond();
@@ -557,10 +557,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         } else {
             is項目が変更 = handler.is項目が変更(被保険者番号);
         }
-        if (!is項目が変更 && !ResponseHolder.isReRequest()) {
+        if (is項目が変更 && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
-        if (is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getTxtTodokedeYM().clearValue();
             div.getTxtTodokedeshaShimei().clearDomain();
             div.getTxtTodokedeshaShimeiKana().clearDomain();
@@ -603,6 +603,9 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
      */
     public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_kanryouSearchResult(
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        handler.get前排他を解除(被保険者番号.getColumnValue());
         return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.検索結果一覧).respond();
     }
 

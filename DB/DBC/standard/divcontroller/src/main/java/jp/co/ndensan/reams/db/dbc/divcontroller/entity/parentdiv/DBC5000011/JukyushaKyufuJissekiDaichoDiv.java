@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JukyushaKyufuJissekiDaichoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +30,8 @@ public class JukyushaKyufuJissekiDaichoDiv extends Panel {
     private tabChushutsuJokenDiv tabChushutsuJoken;
     @JsonProperty("ccdChohyoShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    @JsonProperty("jigyoshaMode")
+    private RString jigyoshaMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,6 +64,24 @@ public class JukyushaKyufuJissekiDaichoDiv extends Panel {
     @JsonProperty("ccdChohyoShutsuryokujun")
     public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
         return ccdChohyoShutsuryokujun;
+    }
+
+    /*
+     * getjigyoshaMode
+     * @return jigyoshaMode
+     */
+    @JsonProperty("jigyoshaMode")
+    public RString getJigyoshaMode() {
+        return jigyoshaMode;
+    }
+
+    /*
+     * setjigyoshaMode
+     * @param jigyoshaMode jigyoshaMode
+     */
+    @JsonProperty("jigyoshaMode")
+    public void setJigyoshaMode(RString jigyoshaMode) {
+        this.jigyoshaMode = jigyoshaMode;
     }
 
     /*
@@ -107,16 +128,6 @@ public class JukyushaKyufuJissekiDaichoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtRangeHihokenshaNoTo() {
-        return this.getTabChushutsuJoken().getTplChushutsuJoken1().getTxtRangeHihokenshaNoTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
-        this.getTabChushutsuJoken().getTplChushutsuJoken1().setTxtRangeHihokenshaNoTo(txtRangeHihokenshaNoTo);
-    }
-
-    @JsonIgnore
     public Button getBtnHihokenshaNoFromSearch() {
         return this.getTabChushutsuJoken().getTplChushutsuJoken1().getBtnHihokenshaNoFromSearch();
     }
@@ -124,6 +135,16 @@ public class JukyushaKyufuJissekiDaichoDiv extends Panel {
     @JsonIgnore
     public void  setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
         this.getTabChushutsuJoken().getTplChushutsuJoken1().setBtnHihokenshaNoFromSearch(btnHihokenshaNoFromSearch);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtRangeHihokenshaNoTo() {
+        return this.getTabChushutsuJoken().getTplChushutsuJoken1().getTxtRangeHihokenshaNoTo();
+    }
+
+    @JsonIgnore
+    public void  setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
+        this.getTabChushutsuJoken().getTplChushutsuJoken1().setTxtRangeHihokenshaNoTo(txtRangeHihokenshaNoTo);
     }
 
     @JsonIgnore

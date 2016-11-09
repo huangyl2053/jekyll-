@@ -69,15 +69,17 @@ public class MainPanel {
         Decimal 給付率 = parameter.get給付率();
         RString 証明書 = parameter.get証明書();
         RString 画面モード = parameter.get画面モード();
-        LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(被保険者番号.getColumnValue()));
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            throw new PessimisticLockingException();
-        }
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().initialize(識別コード);
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(被保険者番号);
 
         getHandler(div).set初期化(証明書, 整理番号, サービス年月, 給付率);
         RString 元画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (!照会.equals(元画面モード)) {
+            LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(被保険者番号.getColumnValue()));
+            if (!RealInitialLocker.tryGetLock(排他キー)) {
+                throw new PessimisticLockingException();
+            }
+        }
         if (修正.equals(画面モード)) {
             if (画面モード_登録.equals(元画面モード)) {
                 div.getBtnShinseiJyoho().setDisabled(true);
@@ -122,8 +124,7 @@ public class MainPanel {
                 ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
                 ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
                 ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
-                LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
-                RealInitialLocker.release(排他キー);
+                排他キーRelease(parameter.get被保険者番号().getColumnValue());
                 return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).parameter(画面モード_登録);
             }
         } else {
@@ -132,11 +133,18 @@ public class MainPanel {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
             ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
             ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
-            LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
-            RealInitialLocker.release(排他キー);
+            排他キーRelease(parameter.get被保険者番号().getColumnValue());
             return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void 排他キーRelease(RString 被保険者番号) {
+        RString 元画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (!照会.equals(元画面モード)) {
+            LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(被保険者番号));
+            RealInitialLocker.release(排他キー);
+        }
     }
 
     private MainPanelHandler getHandler(MainPanelDiv div) {
@@ -179,8 +187,7 @@ public class MainPanel {
                 ShokanharaKeteiJyohoParameter 検索情報キー = ViewStateHolder.get(ViewStateKeys.検索キー,
                         ShokanharaKeteiJyohoParameter.class);
                 getHandler(div).保存処理(検索情報キー);
-                LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(被保険者番号));
-                RealInitialLocker.release(排他キー);
+                排他キーRelease(被保険者番号);
                 div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrInformationMessages.保存終了,
                         被保険者番号, 氏名漢字, true);
                 return ResponseData.of(div).setState(DBC0710022StateName.KanryoMessage);
@@ -207,8 +214,7 @@ public class MainPanel {
     public ResponseData<MainPanelDiv> onClick_btnBack(MainPanelDiv div) {
         ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索キー,
                 ShokanharaKeteiJyohoParameter.class);
-        LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(parameter.get被保険者番号().getColumnValue()));
-        RealInitialLocker.release(排他キー);
+        排他キーRelease(parameter.get被保険者番号().getColumnValue());
         return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.戻る).respond();
     }
 }

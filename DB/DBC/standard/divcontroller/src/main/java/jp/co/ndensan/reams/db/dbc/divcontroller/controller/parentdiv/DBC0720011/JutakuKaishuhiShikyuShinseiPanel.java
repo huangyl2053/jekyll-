@@ -62,6 +62,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
     private static final RString 却下する = new RString("却下する");
     private static final RString 承認する = new RString("承認する");
     private static final int LENGTH = 6;
+    private static final RString 遷移元 = new RString("DBC0710021");
 
     /**
      * onLoadメソッド
@@ -354,7 +355,11 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             MishinsaShikyuShinseiListHandler handler = MishinsaShikyuShinseiListHandler.of(div.getMishinsaShikyuShinseiListPanel());
             handler.initializeDropDownList(resultList);
 
-            this.選択行のみチェックON(div);
+            RString 住宅改修内容一覧_遷移元 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_遷移元, RString.class);
+            if (住宅改修内容一覧_遷移元 != null && 住宅改修内容一覧_遷移元.equals(遷移元)) {
+                this.選択行のみチェックON(div);
+                ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_遷移元, null);
+            }
             if (resultList.isEmpty()) {
                 div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, true);

@@ -246,7 +246,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
 
     private RString dateForMat(RDate 年月日) {
         return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 
 }

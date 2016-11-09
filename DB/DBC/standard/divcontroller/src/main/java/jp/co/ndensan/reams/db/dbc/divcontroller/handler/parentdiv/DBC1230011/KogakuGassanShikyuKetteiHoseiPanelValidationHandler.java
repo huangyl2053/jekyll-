@@ -423,6 +423,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
         }
         if (支給.equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getRadShikyuKubunCode().getSelectedValue()) && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                getTxtShikyugaku().getValue() != null && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtShikyugaku().getValue().compareTo(Decimal.ONE) < 0) {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(

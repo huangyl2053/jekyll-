@@ -184,7 +184,7 @@ public class InsJigyoKogakuProcess extends BatchProcessBase<FurikomimeisaiFuriko
         RString 口座名寄せキー;
         if (TWO.equals(parameter.get支払方法())) {
             口座名寄せキー = 判定結果entity.getHihokenshaNo().getColumnValue().padZeroToLeft(INT_10)
-                    .concat(RSTRING_0000).concat(判定結果entity.getServiceTeikyoYM().toDateString().padZeroToLeft(INT_6))
+                    .concat(判定結果entity.getServiceTeikyoYM().toDateString().padZeroToLeft(INT_6))
                     .concat(RSTRING_21ZERO).concat(new RString(判定結果entity.getRirekiNo().intValue()).padZeroToLeft(INT_4));
         } else {
             口座名寄せキー = RString.EMPTY;

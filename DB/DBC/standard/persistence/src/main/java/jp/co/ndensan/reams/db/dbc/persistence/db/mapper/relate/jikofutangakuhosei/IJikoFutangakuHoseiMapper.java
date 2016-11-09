@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jikofutangakuhos
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3170JigyoKogakuGassanJikoFutanGakuEntity;
 
 /**
  * 受領委任契約事業者登録・追加・修正・照会
@@ -22,6 +23,14 @@ public interface IJikoFutangakuHoseiMapper {
      * @param parameter parameter
      * @return List<DbT3070KogakuGassanJikoFutanGakuEntity>
      */
-    List<DbT3070KogakuGassanJikoFutanGakuEntity> get履歴チェックオフ(Map<String, Object> parameter);
+    List<DbT3170JigyoKogakuGassanJikoFutanGakuEntity> get履歴チェックオフ(Map<String, Object> parameter);
+
+    /**
+     * 履歴を抽出する：チェックオフの場合。
+     *
+     * @param parameter parameter
+     * @return List<DbT3070KogakuGassanJikoFutanGakuEntity>
+     */
+    List<DbT3070KogakuGassanJikoFutanGakuEntity> get履歴オフ(Map<String, Object> parameter);
 
 }

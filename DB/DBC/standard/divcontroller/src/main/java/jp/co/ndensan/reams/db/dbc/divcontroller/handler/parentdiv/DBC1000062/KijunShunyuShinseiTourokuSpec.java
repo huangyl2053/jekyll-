@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000062;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.KijunShunyuShinseiTourokuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.dgIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.dgMeisai_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.kijunshunyugaku.KijunShunyuShinseiTourokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -112,12 +113,39 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
                 }
             },
     /**
-     * 控除再算出ボタンの実行時チェックです。
+     * 受給者または事業対象者チェックです。
      */
-    控除再算出チェック {
+    受給者または事業対象者チェック {
                 @Override
                 public boolean apply(KijunShunyuShinseiTourokuDiv div) {
-                    return SpecHelper.is控除再算出チェック(div);
+                    return SpecHelper.is受給者または事業対象者チェック(div);
+                }
+            },
+    /**
+     * 控除再算出ボタンの実行時チェック１です。
+     */
+    控除再算出チェック１ {
+                @Override
+                public boolean apply(KijunShunyuShinseiTourokuDiv div) {
+                    return SpecHelper.is控除再算出チェック１(div);
+                }
+            },
+    /**
+     * 控除再算出ボタンの実行時チェック２です。
+     */
+    控除再算出チェック２ {
+                @Override
+                public boolean apply(KijunShunyuShinseiTourokuDiv div) {
+                    return SpecHelper.is控除再算出チェック２(div);
+                }
+            },
+    /**
+     * 内容が変更されていないため、保存はできません。
+     */
+    内容変更なしで保存不可 {
+                @Override
+                public boolean apply(KijunShunyuShinseiTourokuDiv div) {
+                    return SpecHelper.is変更(div);
                 }
             };
 
@@ -196,7 +224,15 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
 
         public static boolean is世帯員が0人(KijunShunyuShinseiTourokuDiv div) {
             List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
-            return (rowList != null && !rowList.isEmpty());
+            if (rowList == null || rowList.isEmpty()) {
+                return false;
+            }
+            for (dgMeisai_Row row : rowList) {
+                if (!RowState.Deleted.equals(row.getRowState())) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static boolean is総収入額チェック(KijunShunyuShinseiTourokuDiv div) {
@@ -220,7 +256,7 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
             return !(count == NUM_0 || NUM_1 < count);
         }
 
-        public static boolean is控除再算出チェック(KijunShunyuShinseiTourokuDiv div) {
+        public static boolean is控除再算出チェック１(KijunShunyuShinseiTourokuDiv div) {
             List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
             int 世帯主Count = NUM_0;
             for (dgMeisai_Row row : rowList) {
@@ -229,6 +265,36 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
                 }
             }
             return (世帯主Count <= NUM_1);
+        }
+
+        public static boolean is控除再算出チェック２(KijunShunyuShinseiTourokuDiv div) {
+            List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+            int 世帯主Count = NUM_0;
+            for (dgMeisai_Row row : rowList) {
+                if (row.getZennenSetainushi()) {
+                    世帯主Count = 世帯主Count + NUM_1;
+                }
+            }
+            return (世帯主Count != NUM_0);
+        }
+
+        public static boolean is変更(KijunShunyuShinseiTourokuDiv div) {
+            for (dgIchiran_Row row : div.getDgIchiran().getDataSource()) {
+                if (!RowState.Unchanged.equals(row.getRowState())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static boolean is受給者または事業対象者チェック(KijunShunyuShinseiTourokuDiv div) {
+            List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+            for (dgMeisai_Row row : rowList) {
+                if (row.getJyukyuJigyoTaisho() != null && !row.getJyukyuJigyoTaisho().isEmpty()) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

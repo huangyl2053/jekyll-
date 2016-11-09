@@ -260,7 +260,6 @@ public class KogakuGassanShikyuShinseiToroku {
                 高額合算申請書Dac.save(entity);
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
-                    // TODO QA1821
                     DbT3069KogakuGassanShinseishoKanyurekiEntity kanyurekiEntity = 加入歴.toEntity();
                     EntityDataState 加入歴状態 = kanyurekiEntity.getState();
                     if (EntityDataState.Added.equals(加入歴状態) || EntityDataState.Modified.equals(加入歴状態)
@@ -309,7 +308,6 @@ public class KogakuGassanShikyuShinseiToroku {
             }
         } else if (RSTRING_2.equals(申請状態)) {
             for (KogakuGassanShinseishoRelate 高額合算申請書 : 処理対象のList) {
-                // TODO QA1821
                 DbT3068KogakuGassanShinseishoEntity entity = 高額合算申請書.toEntity();
                 if (!EntityDataState.Added.equals(entity.getState())) {
                     高額合算申請書Dac.save(高額合算申請書.deleted().toEntity());

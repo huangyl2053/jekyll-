@@ -36,7 +36,6 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020080."
             + "IJigyobunKogakuGassanJikofutangakuKeisanMapper.select処理日付管理");
     private static final RString 処理枝番_0000 = new RString("0000");
-    private static final RString 処理枝番_0001 = new RString("0001");
     private static final RString 年度内連番_0001 = new RString("0001");
     private static final int NUM_4 = 4;
     private DBC020080_JigyobunKogakuGassanJikofutangakuKeisanProcessParameter parameter;

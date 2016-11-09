@@ -56,7 +56,7 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonRelateEntit
     private static final ReportId ID = ReportIdDBC.DBC100055.getReportId();
     private static final RString MESSAGE = new RString("**　対象データは存在しません　**");
     private boolean flag = false;
-    private JukyushaKyufuJissekidaichoData jukyushaKyufuDaicho = new JukyushaKyufuJissekidaichoData();
+    private JukyushaKyufuJissekidaichoData jukyushaKyufuDaicho;
     private JukyushaKyufujissekiDaichoProcessParameter parameter;
     private IJukyushaKyufujissekiDaichoMapper mapper;
     private JukyushaKyufuDaichoEdit edit;
@@ -94,27 +94,16 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonRelateEntit
         明細 = mapper.get明細(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
         edit.setMeisaiList(明細);
         緊急時施設療養 = mapper.get緊急時施設療養(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         特定診療費 = mapper.get特定診療費(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         計画費 = mapper.get計画費(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         福祉用具 = mapper.get福祉用具(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         住宅改修 = mapper.get住宅改修(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         特定入所者介護サービス費用 = mapper.get特定入所者介護サービス費用(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         社会福祉法人軽減額 = mapper.get社会福祉法人軽減額(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         ケアマネジメント費 = mapper.getケアマネジメント費(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         所定疾患施設療養費 = mapper.get所定疾患施設療養費(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         明細住所地特例 = mapper.get明細住所地特例(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         集計 = mapper.get集計(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
-
         給付実績高額 = mapper.get給付実績高額(parameter.toJukyushaKyufujissekiDaichoMybatisParameter());
     }
 
@@ -133,12 +122,14 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonRelateEntit
     @Override
     protected void process(KihonRelateEntity entity) {
         flag = true;
-
+        jukyushaKyufuDaicho = new JukyushaKyufuJissekidaichoData();
+        edit.report受給者給付台帳(entity, jukyushaKyufuDaicho, reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
         if (!flag) {
+            jukyushaKyufuDaicho = new JukyushaKyufuJissekidaichoData();
             jukyushaKyufuDaicho.set被保険者氏名(MESSAGE);
             JukyushaKyufuJissekidaichoReport report = new JukyushaKyufuJissekidaichoReport(jukyushaKyufuDaicho);
             report.writeBy(reportSourceWriter);

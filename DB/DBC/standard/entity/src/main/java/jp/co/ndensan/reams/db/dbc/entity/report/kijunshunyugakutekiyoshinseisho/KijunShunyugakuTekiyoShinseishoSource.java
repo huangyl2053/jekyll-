@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    public static final String ITEM_HIHOKENSHANO1 = "hihokenshaNo1";
     @ReportItem(name = "shinsenSakiDaihyo", length = 37, order = 1)
     public RString shinsenSakiDaihyo;
     @ReportItem(name = "hihokenshaKanaName1", order = 2)
@@ -75,6 +76,8 @@ public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
     @ReportPerson(id = "C")
     @ReportItem(name = "shikibetsuCode3", length = 15)
     public RString shikibetsuCode3;
+    @ReportItem(name = "jusho", length = 36, order = 24)
+    public RString jusho;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

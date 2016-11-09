@@ -124,6 +124,9 @@ public class CalcKogakuShikyugakuProcess extends BatchProcessBase<CalcKogakuShik
 
     private void loopHandle(CalcKogakuShikyugakuRelateEntity entity) {
         KogakuShikyugakuJoho joho = util.cal高額支給額加算額(entity, wK_KogakuShikyugaku);
+        if (joho == null) {
+            return;
+        }
         wKm_blnIchiranKBN1 = wKm_blnIchiranKBN1 || joho.isWKm_blnIchiranKBN1();
         wKm_blnIchiranKBN2 = wKm_blnIchiranKBN2 || joho.isWKm_blnIchiranKBN2();
     }

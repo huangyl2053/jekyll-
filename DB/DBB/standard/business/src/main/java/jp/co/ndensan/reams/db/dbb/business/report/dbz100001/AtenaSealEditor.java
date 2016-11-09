@@ -58,12 +58,14 @@ public class AtenaSealEditor
     private static final int NUM_MINUS1 = -1;
     private static final int NUM_MINUS2 = -2;
     private static final int NUM_MINUS3 = -3;
+    private static final int NUM_MINUS4 = -4;
 
     private static final RString EMPTY = RString.EMPTY;
     private final Class cls = DBZ100001AtenaSealSource.class;
     private RString tmpChkJusho;
     private RString tmpChkShimei;
     private RString tmpChkKatagaki;
+    private RString chkShikibetsuCode;
     private ShikibetsuCode tmp0;
     private RString tmp1;
     private RString tmp2;
@@ -131,6 +133,8 @@ public class AtenaSealEditor
 
     private void editBody(DBZ100001AtenaSealSource source) {
         try {
+            this.method = this.cls.getMethod(getMethodName(NUM_MINUS4), RString.class);
+            this.method.invoke(source, this.chkShikibetsuCode);
             this.method = this.cls.getMethod(getMethodName(NUM_MINUS3), RString.class);
             this.method.invoke(source, this.tmpChkJusho);
             this.method = this.cls.getMethod(getMethodName(NUM_MINUS2), RString.class);
@@ -205,7 +209,8 @@ public class AtenaSealEditor
 
     private static enum MethodName {
 
-        未定義(AtenaSealEditor.EMPTY, Integer.valueOf(-4)),
+        未定義(AtenaSealEditor.EMPTY, Integer.valueOf(-5)),
+        chkShikibetsuCode(new RString("ChkShikibetsuCode"), Integer.valueOf(-4)),
         chkJusho(new RString("ChkJusho"), Integer.valueOf(-3)),
         chkKatagaki(new RString("ChkKatagaki"), Integer.valueOf(-2)),
         chkShimei(new RString("ChkShimei"), Integer.valueOf(-1)),
@@ -264,6 +269,7 @@ public class AtenaSealEditor
         this.tmpChkKatagaki = entity.getChk方書();
         this.tmpChkShimei = entity.getChk氏名();
         this.tmp0 = entity.get識別コード();
+        this.chkShikibetsuCode = tmp0 == null ? RString.EMPTY : tmp0.value();
         this.tmp1 = entity.get郵便番号();
         this.tmp2 = entity.get行政区();
         this.tmp3 = entity.get住所TXT();

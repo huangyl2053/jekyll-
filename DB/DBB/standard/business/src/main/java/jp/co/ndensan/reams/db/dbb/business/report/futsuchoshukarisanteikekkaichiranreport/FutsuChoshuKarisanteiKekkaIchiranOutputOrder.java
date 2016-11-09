@@ -38,7 +38,7 @@ public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
     /**
      * 生年月日
      */
@@ -50,7 +50,7 @@ public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_choshuHohoRirekiNo\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"ShikibetsuTaisho_genLasdecCode\"")),
     /**
      * 被保険者番号
      */
@@ -64,7 +64,7 @@ public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems
      */
     徴収方法(new RString("0209"), new RString("徴収方法"), new RString("\"SortTemp_choshuHoho\"")),
     /**
-     * 通知書番号
+     * 特徴開始月
      */
     特徴開始月(new RString("0213"), new RString("特徴開始月"), new RString("\"SortTemp_tkKaishiM\""));
 

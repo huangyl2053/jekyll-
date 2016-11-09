@@ -432,7 +432,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             row.setTxtHihoNo(被保険者番号.getColumnValue());
         }
-        AtenaMeisho 申請者氏名 = entity.get識別対象().get名称().getName();
+        AtenaMeisho 申請者氏名 = entity.get識別対象().get名称() == null ? AtenaMeisho.EMPTY : entity.get識別対象().get名称().getName();
         if (申請者氏名 != null && !申請者氏名.isEmpty()) {
             row.setTxtHihoName(申請者氏名.getColumnValue());
         }
@@ -463,6 +463,10 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         if (履歴番号 != null) {
             row.setTxtRirekiNo(new RString(履歴番号.toString()));
         }
+        return setRow(entity, row);
+    }
+
+    private dgKogakuServicehiRireki_Row setRow(KogakuShokaiTaishoshaKensakuResultEntity entity, dgKogakuServicehiRireki_Row row) {
         HokenshaNo 証記載保険者番号 = entity.get証記載保険者番号();
         if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
             row.setTxtHdnShoHokensha(証記載保険者番号.getColumnValue());
