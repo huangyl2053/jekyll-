@@ -181,7 +181,9 @@ public class KyufuTsuchiSakuseiIkatuHandler {
             }
         }
         parameter.set被保険者番号(div.getKyufuTsuchiSakusei().getTxtHihokenshaNo().getValue());
-        parameter.setShutsuryokujunId(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
+        if (div.getCcdChohyoShutsuryokujun().getSelected出力順() != null) {
+            parameter.setShutsuryokujunId(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
+        }
         parameter.set文書番号(div.getKyufuTsuchiSakuseiPrint().getCcdBunsyobango().get文書番号());
         return parameter;
     }

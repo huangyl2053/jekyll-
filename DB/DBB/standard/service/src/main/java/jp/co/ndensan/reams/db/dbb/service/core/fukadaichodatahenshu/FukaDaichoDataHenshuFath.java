@@ -449,12 +449,12 @@ public class FukaDaichoDataHenshuFath {
             return 世帯員情報リスト;
         }
         for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報リスト) {
-            if (期_2.equals(世帯員所得情報.get本人区分())) {
+            if (期_2.equals(世帯員所得情報.get本人区分()) && !RString.isNullOrEmpty(世帯員所得情報.get課税区分_住民税減免前())) {
                 SetaInJoho 世帯員情報 = new SetaInJoho();
                 世帯員情報.set世帯員識別コード(世帯員所得情報.get識別コード().getColumnValue());
                 世帯員情報.set世帯員氏名(世帯員所得情報.get氏名());
                 世帯員情報.set世帯員性別(世帯員所得情報.get性別());
-                世帯員情報.set世帯員生年月日(get生年月日(住民種別区分, 世帯員所得情報.get生年月日()));
+                世帯員情報.set世帯員生年月日(get生年月日(世帯員所得情報.get生年月日()));
                 世帯員情報.set世帯員続柄(世帯員所得情報.get続柄());
                 世帯員情報.set世帯員合計取得金額(format金額(世帯員所得情報.get合計所得金額()));
                 世帯員情報.set世帯員課税区分(世帯員所得情報.get課税区分_住民税減免前());
@@ -467,18 +467,12 @@ public class FukaDaichoDataHenshuFath {
     /**
      * 生年月日を返します。
      *
-     * @param 住民種別区分 boolean
      * @param 生年月日 FlexibleDate
      * @return RString 生年月日
      */
-    private RString get生年月日(boolean 住民種別区分, FlexibleDate 生年月日) {
-        if (住民種別区分) {
-            return 生年月日.wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-        } else {
-            return 生年月日.seireki().toDateString();
-        }
+    private RString get生年月日(FlexibleDate 生年月日) {
+        return 生年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).
+                fillType(FillType.BLANK).toDateString();
     }
 
     /**

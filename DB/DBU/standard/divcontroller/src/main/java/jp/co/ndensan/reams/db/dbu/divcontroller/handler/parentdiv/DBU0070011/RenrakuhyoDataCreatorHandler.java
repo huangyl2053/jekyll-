@@ -52,7 +52,6 @@ public class RenrakuhyoDataCreatorHandler {
     private static final int INT_ICHI = 1;
     private static final int INT_NI = 2;
     private static final int INT_ZERO = 0;
-    private static final RString 黄色 = new RString("DBUFontcolor_yellow");
     private final RenrakuhyoDataCreatorDiv div;
 
     /**
@@ -165,14 +164,22 @@ public class RenrakuhyoDataCreatorHandler {
             居住費の負担限度額.set居住費の記載あり(false);
             食費の_特定_負担限度額.set食費の記載あり(false);
             帳票の項目.set旧措置者区分(new Code(new RString("0")));
-            帳票の項目.set利用者負担段階(new Code(RiyoshaFutanDankai.第1段階.getコード()));
+            帳票の項目.set利用者負担段階(Code.EMPTY);
             食費の_特定_負担限度額.set対象者食費負担限度額(Decimal.ZERO);
+            居住費の負担限度額.set負担限度額認定_ユニット型個室(Decimal.ZERO);
+            居住費の負担限度額.set負担限度額認定_ユニット型準個室(Decimal.ZERO);
+            居住費の負担限度額.set負担限度額認定_従来型個室_特養等(Decimal.ZERO);
+            居住費の負担限度額.set負担限度額認定_多床室(Decimal.ZERO);
         } else {
             食費の_特定_負担限度額.set食費の記載あり(true);
             居住費の負担限度額.set居住費の記載あり(true);
             帳票の項目.set旧措置者区分(new Code(負担限度額.get旧措置者区分()));
             帳票の項目.set利用者負担段階(new Code(負担限度額.get利用者負担段階()));
             食費の_特定_負担限度額.set対象者食費負担限度額(負担限度額.get食費負担限度額());
+            居住費の負担限度額.set負担限度額認定_ユニット型個室(負担限度額.getユニット型個室());
+            居住費の負担限度額.set負担限度額認定_ユニット型準個室(負担限度額.getユニット型準個室());
+            居住費の負担限度額.set負担限度額認定_従来型個室_特養等(負担限度額.get従来型個室_特養等());
+            居住費の負担限度額.set負担限度額認定_多床室(負担限度額.get多床室());
         }
 
         if (RString.isNullOrEmpty(div.getKaigoHokenryoSelected())) {

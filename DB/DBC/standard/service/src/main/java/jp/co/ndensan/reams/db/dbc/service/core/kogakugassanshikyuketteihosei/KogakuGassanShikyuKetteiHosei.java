@@ -313,6 +313,9 @@ public class KogakuGassanShikyuKetteiHosei {
                     get更新後被保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
                     get更新後証記載保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
                     get更新後支給申請書整理番号());
+            if (!処理モード.equals(ONE) && 更新data == null) {
+                return;
+            }
             set更新条件(更新data, 画面DIV.getUpdate合算給付実績パラメータ());
             IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(
                     IKogakuGassanShikyuKetteiHoseiMapper.class);

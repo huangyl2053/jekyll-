@@ -53,6 +53,7 @@ public class KogakuServicehiTaishoshaKensakuMain {
      * @return 高額介護サービス費照会（対象者検索）画面
      */
     public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onLoad(KogakuServicehiTaishoshaKensakuMainDiv div) {
+        getHandler(div).click条件をクリアする();
         return ResponseData.of(div).setState(DBC0030011StateName.検索条件);
     }
 

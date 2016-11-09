@@ -77,6 +77,16 @@ public class KaigoKyufuhiKagoMositateTouroku {
     private static final RString 申立理由_49 = new RString("49");
     private static final RString 申立理由_59 = new RString("59");
     private static final RString 申立理由_69 = new RString("69");
+    private static final RString 申立理由_4A = new RString("4A");
+    private static final RString 申立理由_4B = new RString("4B");
+    private static final RString 申立理由_4C = new RString("4C");
+    private static final RString 申立理由_4D = new RString("4D");
+    private static final RString 申立理由_4E = new RString("4E");
+    private static final RString 申立理由_5A = new RString("5A");
+    private static final RString 申立理由_5B = new RString("5B");
+    private static final RString 申立理由_5C = new RString("5C");
+    private static final RString 申立理由_5D = new RString("5D");
+    private static final RString 申立理由_5E = new RString("5E");
 
     /**
      * 画面初期化します。
@@ -117,6 +127,21 @@ public class KaigoKyufuhiKagoMositateTouroku {
             return ResponseData.of(div).rootTitle(総合事業費過誤申立書_経過措置).respond();
         } else if (MENUID_DBCMN91003.equals(menuID)) {
             return ResponseData.of(div).rootTitle(総合事業費過誤申立書).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 画面onActiveのメソッドです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KaigoKyufuhiKagoMositateTouroku>
+     */
+    public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onActive(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (資格対象者 != null) {
+            div.getTxtHihoNo().setValue(資格対象者.get被保険者番号().value());
+            div.getTxtHihoName().setValue(get被保名称(資格対象者.get識別コード()));
         }
         return ResponseData.of(div).respond();
     }
@@ -293,7 +318,17 @@ public class KaigoKyufuhiKagoMositateTouroku {
                 && (申立理由_12.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
                 || 申立理由_49.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
                 || 申立理由_59.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
-                || 申立理由_69.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey()))) {
+                || 申立理由_69.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_4A.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_4B.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_4C.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_4D.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_4E.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_5A.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_5B.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_5C.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_5D.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_5E.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey()))) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.同月審査用の確認.getMessage().getCode(),
                     DbcQuestionMessages.同月審査用の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();

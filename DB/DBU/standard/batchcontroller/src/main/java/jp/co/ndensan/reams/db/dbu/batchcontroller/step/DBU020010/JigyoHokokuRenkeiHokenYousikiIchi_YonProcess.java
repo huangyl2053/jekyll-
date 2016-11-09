@@ -5,37 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokurenkei.JigyoHokokuRenkeiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei4EucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 様式別連携情報作成のバッチ処理・一般状況（１）～（１０）に対応するのCSV出力のプロセスクラスです。
@@ -63,42 +50,19 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
     private static final RString 番号_12 = new RString("12");
     private static final int 桁_4 = 4;
     private static final int 桁_3 = 3;
-    private static final RString 番号 = new RString("保険者番号");
-    private final RDate 基準日 = RDate.getNowDate();
     private RString eucFilePath;
     private JigyoHokokuRenkeiProcessParameter processParameter;
     private JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity = new JigyoHokokuRenkeiEntity();
-    private static MapperProvider mapperProvider;
-    private IJigyoHokokuRenkeiMapper mapper;
-    private Map<RString, List<RString>> 保険者番号data;
 
     @Override
     protected void initialize() {
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
-        mapper = mapperProvider.create(IJigyoHokokuRenkeiMapper.class);
-        保険者番号data = new HashMap<>();
-        List<RString> 保険者番号List = new ArrayList<>();
-        if (processParameter.is旧保険者分()) {
-            List<DbT7056GappeiShichosonEntity> 合併市町村data = mapper.get合併市町村の取得(processParameter.toMybatisParamter());
-            for (DbT7056GappeiShichosonEntity dbT7056entity : 合併市町村data) {
-                保険者番号List.add(get旧保険者番号(dbT7056entity.getKyuHokenshaNo()));
-            }
-        } else if (processParameter.is構成市町村分()) {
-            List<DbT7051KoseiShichosonMasterEntity> 構成市町村data = mapper.get構成市町村マスタの取得(processParameter.toMybatisParamter());
-            for (DbT7051KoseiShichosonMasterEntity dbT7051entity : 構成市町村data) {
-                保険者番号List.add(get証記載保険者番号(dbT7051entity.getShoKisaiHokenshaNo()));
-            }
-        } else {
-            保険者番号List.add(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告));
-        }
-        保険者番号data.put(番号, 保険者番号List);
         RString spoolWorkPath = processParameter.getSpoolWorkPath();
         RStringBuilder fileName = new RStringBuilder();
-                fileName.append("DUJRENF04_");
-                fileName.append(processParameter.get過去集計年月());
-                fileName.append("_");
-                fileName.append(保険者番号data.get(番号).get(0));
-                fileName.append(".csv");
+        fileName.append("DUJRENF04_");
+        fileName.append(processParameter.get過去集計年月());
+        fileName.append("_");
+        fileName.append(processParameter.get保険者番号());
+        fileName.append(".csv");
         eucFilePath = Path.combinePath(spoolWorkPath, fileName.toRString());
     }
 
@@ -128,23 +92,8 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
 
     @Override
     protected void afterExecute() {
-        int i = 0;
-        RString 保険者番号bak = RString.EMPTY;
-        for (RString 保険者番号 : 保険者番号data.get(番号)) {
-            if (!保険者番号bak.equals(保険者番号) && i != 0) {
-                RStringBuilder fileName = new RStringBuilder();
-                fileName.append("DUJRENF04_");
-                fileName.append(processParameter.get過去集計年月());
-                fileName.append("_");
-                fileName.append(保険者番号);
-                fileName.append(".csv");
-                setFilePath(fileName);
-                保険者番号bak = 保険者番号;
-            }
-            get様式１の４のCSV出力(保険者番号);
-            i++;
-            eucCsvWriter.close();
-        }
+        get様式１の４のCSV出力(processParameter.get保険者番号());
+        eucCsvWriter.close();
     }
 
     private void setFilePath(RStringBuilder filePath) {
@@ -156,7 +105,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true).
                 build();
-            }  
+    }
 
     private void get様式１の４のCSV出力(RString 保険者番号) {
         eucCsvWriter.writeLine(

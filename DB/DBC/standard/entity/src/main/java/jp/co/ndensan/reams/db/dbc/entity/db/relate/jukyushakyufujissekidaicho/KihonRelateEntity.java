@@ -354,5 +354,7 @@ public class KihonRelateEntity {
     private RString psm_tmp2_gaikokujinKanaName;
     private RString psm_tmp2_kanaTsushoName;
     private RString psm_tmp2_jukiTorokuNo;
-
+    private RString dbT7060_jigyoshaName;
+    private RString dbT3118_meisho;
+    private RString dbT3118_ryakusho;
 }

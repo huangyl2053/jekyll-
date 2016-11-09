@@ -78,7 +78,7 @@
             <if test="抽出対象 == 1">
                 AND ("DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" = '' OR "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" IS NULL)
             </if>
-            <if test="抽出対象 == 2 and and 対象作成年月日 != null and !対象作成年月日.isEmpty()">
+            <if test="抽出対象 == 2 and 対象作成年月日 != null and !対象作成年月日.isEmpty()">
                 AND "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" = #{対象作成年月日}
             </if>
             <if test="抽出対象 == 2 and (対象作成年月日 == null or 対象作成年月日.isEmpty())">
