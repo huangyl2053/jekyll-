@@ -106,7 +106,7 @@ public class HanyoListAtenaSelectHandler {
             div.getTxtSeinengappi().setDisabled(false);
             div.getTxtSeinengappi().clearFromValue();
             div.getTxtSeinengappi().clearToValue();
-            div.getTxtNenreiKijunbi().setDisabled(false);
+            div.getTxtNenreiKijunbi().setDisabled(true);
             div.getTxtNenreiKijunbi().clearValue();
         }
     }
