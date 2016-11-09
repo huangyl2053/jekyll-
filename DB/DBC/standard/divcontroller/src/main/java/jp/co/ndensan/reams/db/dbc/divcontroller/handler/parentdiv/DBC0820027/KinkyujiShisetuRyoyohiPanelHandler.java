@@ -976,15 +976,35 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      * @return ShoukanharaihishinseimeisaikensakuParameter
      */
     public ShoukanharaihishinseimeisaikensakuParameter setParameter() {
+        FlexibleYearMonth サービス年月 = FlexibleYearMonth.EMPTY;
+        RDate 申請日 = null;
+        JigyoshaNo 事業者番号 = JigyoshaNo.EMPTY;
+        RString 様式番号 = RString.EMPTY;
+        RString 明細番号 = RString.EMPTY;
+        if (div.getPanelHead().getTxtServiceTeikyoYM() != null) {
+            サービス年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().
+                    toDateString().substring(0, SIX));
+        }
+        if (div.getPanelHead().getTxtShinseiYMD() != null) {
+            申請日 = div.getPanelHead().getTxtShinseiYMD().getValue();
+        }
+        if (div.getPanelHead().getTxtJigyoshaBango() != null) {
+            事業者番号 = new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue());
+        }
+        if (div.getPanelHead().getTxtShomeisho() != null) {
+            様式番号 = div.getPanelHead().getTxtShomeisho().getValue();
+        }
+        if (div.getPanelHead().getTxtMeisaiBango().getValue() != null) {
+            明細番号 = div.getPanelHead().getTxtMeisaiBango().getValue();
+        }
         ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
                 null,
-                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().
-                        toDateString().substring(0, SIX)),
-                div.getPanelHead().getTxtShinseiYMD().getValue(),
+                サービス年月,
+                申請日,
                 null,
-                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
-                div.getPanelHead().getTxtShomeisho().getValue(),
-                div.getPanelHead().getTxtMeisaiBango().getValue());
+                事業者番号,
+                様式番号,
+                明細番号);
         return parameter;
     }
 

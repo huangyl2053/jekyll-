@@ -320,17 +320,24 @@ public final class ShafukuKeigenGakuPanelHandler {
      * initializeByCalculation
      */
     public void initializeByCalculation() {
-        Decimal kengengakuData = new Decimal(new Decimal(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                .getDdlKengenritsu().getSelectedValue().toString())
-                .multiply(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal()
-                        .getValue()).intValue());
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().setValue(kengengakuData);
-        Decimal keigengoRiyoshaFutangakuData = new Decimal(((div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                .getTxtRiyoshaFutangakuTotal().getValue())
-                .subtract(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().getValue()))
-                .intValue());
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku()
-                .setValue(keigengoRiyoshaFutangakuData);
+        if (div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().getSelectedValue() != null
+                && !div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().getSelectedValue().isEmpty()
+                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal() != null
+                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue() != null
+                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku() != null
+                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().getValue() != null) {
+            Decimal kengengakuData = new Decimal(new Decimal(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                    .getDdlKengenritsu().getSelectedValue().toString())
+                    .multiply(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal()
+                            .getValue()).intValue());
+            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().setValue(kengengakuData);
+            Decimal keigengoRiyoshaFutangakuData = new Decimal(((div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                    .getTxtRiyoshaFutangakuTotal().getValue())
+                    .subtract(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().getValue()))
+                    .intValue());
+            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku()
+                    .setValue(keigengoRiyoshaFutangakuData);
+        }
     }
 
     /**
@@ -532,7 +539,8 @@ public final class ShafukuKeigenGakuPanelHandler {
      * 登録Save
      *
      * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
-     * @param hojinKeigengakuEntityList List<ShokanShakaiFukushiHojinKeigengakuResult>
+     * @param hojinKeigengakuEntityList
+     * List<ShokanShakaiFukushiHojinKeigengakuResult>
      */
     public void 登録Save(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
             List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList) {
