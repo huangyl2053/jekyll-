@@ -303,7 +303,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
             div.getJutakuKaishuShinseiResetInfo().setDisabled(true);
-            div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            if (RString.isNullOrEmpty(償還払支給申請情報.get審査結果())) {
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
+            } else {
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            }
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
             if (給付実績緋連動_受託あり.equals(償還)) {
@@ -316,7 +320,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
             div.getJutakuKaishuShinseiResetInfo().setDisabled(true);
-            div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            if (RString.isNullOrEmpty(償還払支給申請情報.get審査結果())) {
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
+            } else {
+                div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            }
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().setDisabled(true);
@@ -629,6 +637,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
         div.getJutakuKaishuShinseiResetInfo().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+        div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getChkKokubo().setDisabled(false);

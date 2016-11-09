@@ -45,6 +45,7 @@ public class TokkiText1A4Business {
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
     private static final RString ハイフン = new RString("-");
+    private static final int 最大ページ = 6;
     private static final int 最大連番 = 10;
     private final List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List;
     private final ShinsakaiSiryoKyotsuEntity kyotsuEntity;
@@ -205,18 +206,21 @@ public class TokkiText1A4Business {
     /**
      * 全面特記事項イメージを取得します。
      *
-     * @param 現在ページ ページ
      * @return 全面特記事項イメージを取得します
      */
-    public RString getTokkiImg(int 現在ページ) {
-        RStringBuilder ファイル名 = new RStringBuilder();
-        ファイル名.append("C140");
-        ファイル名.append(現在ページ);
-        if (kyotsuEntity.isJimukyoku()) {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString());
-        } else {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString());
+    public List<RString> getTokkiImg() {
+        List<RString> filePathList = new ArrayList<>();
+        for (int i = 1; i <= 最大ページ; i++) {
+            RStringBuilder ファイル名 = new RStringBuilder();
+            ファイル名.append("C140");
+            ファイル名.append(i);
+            if (kyotsuEntity.isJimukyoku()) {
+                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString()));
+            } else {
+                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString()));
+            }
         }
+        return filePathList;
     }
 
     /**
@@ -277,17 +281,26 @@ public class TokkiText1A4Business {
                 表示行数 = 表示行数 + (int) Math.ceil((double) テキストBuilder.length() / 最大文字数);
                 if (表示行数 <= ページ最大表示行数) {
                     テキスト全面.append(テキストBuilder);
-                } else {
+                }
+                if (ページ最大表示行数 <= 表示行数) {
                     テキスト全面List.add(テキスト全面.toRString());
                     テキスト全面 = new RStringBuilder();
+                    テキスト全面.append(テキストBuilder);
                     表示行数 = 0;
-                }
-                if (i == 特記情報List.size() - 1) {
+                    setテキスト全面List(i, テキスト全面List, テキスト全面);
+                } else if (i == 特記情報List.size() - 1) {
+                    テキスト全面.append(テキストBuilder);
                     テキスト全面List.add(テキスト全面.toRString());
                 }
             }
         }
         return テキスト全面List;
+    }
+
+    private void setテキスト全面List(int i, List<RString> テキスト全面List, RStringBuilder テキスト全面) {
+        if (i == 特記情報List.size() - 1) {
+            テキスト全面List.add(テキスト全面.toRString());
+        }
     }
 
     private RString getFilePathByRemban(RString 特記事項番号, int 特記事項連番) {

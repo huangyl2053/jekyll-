@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItizi
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItiziHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiIinJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiIinJohoDataSakuseiA4Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiSiryouKumiawaseA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuTokkiJikouDataSakuseiA3Process;
@@ -54,48 +55,61 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
     private static final String 事務局_特記事項_一次判定結果_2枚目以降 = "jimuTokkiJikouItiziHantei_2";
     private static final String 事務局_概況特記 = "jimuTokkiIran";
     private static final String 事務局_概況特記その他 = "jimuGaikyotokkiSonota";
+    private static final String 審査会資料組み合わせ一覧A4版 = "審査会資料組み合わせ一覧A4版";
     private static final RString 選択 = new RString("1");
     private static final RString テキスト = new RString("1");
     private static final RString 作成条件_追加分 = new RString("追加分");
 
     @Override
     protected void defineFlow() {
-        if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())) {
-            executeStep(事務局_審査対象者一覧);
-        }
         if (選択.equals(getParameter().getChoyoJimu_hanteiFalg())) {
             executeStep(事務局_予備判定一覧);
-        }
-        if (選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())) {
-            executeStep(事務局_その他資料);
-        }
-        if (選択.equals(getParameter().getChoyoJimu_ikenshoFalg())) {
-            if (選択.equals(getParameter().getShuturyokuSutairu())) {
-                executeStep(事務局_主治医意見書_1枚目);
-                executeStep(事務局_主治医意見書_2枚目以降);
-            } else {
-                executeStep(事務局_主治医意見書_A3);
-            }
-        }
-        if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
-            executeStep(事務局_概況特記一覧表);
-        }
-        if (選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())) {
-            executeStep(事務局_一次判定結果);
         }
         if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiFalg())) {
             executeStep(事務局_概況特記);
             executeStep(事務局_概況特記その他);
         }
-        if (選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())) {
-            executeStep(事務局_特記事項);
-        }
         if (選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())) {
             executeStep(事務局_特記事項_一次判定結果);
             executeStep(事務局_特記事項_一次判定結果_2枚目以降);
         }
-        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-            executeStep(事務局_追加資料鑑);
+        if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
+            executeStep(事務局_概況特記一覧表);
+        }
+        if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
+                && 選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())
+                && 選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())
+                && 選択.equals(getParameter().getChoyoJimu_ikenshoFalg())
+                && 選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())) {
+            executeStep(審査会資料組み合わせ一覧A4版);
+        } else {
+            if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())) {
+                executeStep(事務局_審査対象者一覧);
+            }
+            if (選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())) {
+                executeStep(事務局_一次判定結果);
+            }
+            if (選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())) {
+                executeStep(事務局_特記事項);
+            }
+            if (選択.equals(getParameter().getChoyoJimu_ikenshoFalg())) {
+                主治医意見書Flow();
+            }
+            if (選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())) {
+                executeStep(事務局_その他資料);
+            }
+            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+                executeStep(事務局_追加資料鑑);
+            }
+        }
+    }
+
+    private void 主治医意見書Flow() {
+        if (選択.equals(getParameter().getShuturyokuSutairu())) {
+            executeStep(事務局_主治医意見書_1枚目);
+            executeStep(事務局_主治医意見書_2枚目以降);
+        } else {
+            executeStep(事務局_主治医意見書_A3);
         }
     }
 
@@ -272,6 +286,17 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
     protected IBatchFlowCommand createJimuTokkiJikouItiziHanteiNiData() {
         // TODO　凌護行 特記事項2枚目の出力方法が不正です。実装ない。
         return loopBatch(JimuTokkiJikouDataSakuseiA3Process.class)
+                .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
+    }
+
+    /**
+     * 事務局用審査会資料組み合わせ一覧A4版データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(審査会資料組み合わせ一覧A4版)
+    protected IBatchFlowCommand createJimuShinsakaiSiryouKumiawase() {
+        return simpleBatch(JimuShinsakaiSiryouKumiawaseA4Process.class)
                 .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
     }
 }
