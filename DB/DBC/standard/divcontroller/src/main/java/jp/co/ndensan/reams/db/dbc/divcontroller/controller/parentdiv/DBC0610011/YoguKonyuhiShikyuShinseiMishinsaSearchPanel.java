@@ -84,6 +84,20 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     }
 
     /**
+     * 「未審査分を検索する」ボタンを押下した際に実行します。
+     *
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onStateTransition(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        if (審査.equals(ResponseHolder.getState())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 支給申請内容を一括審査・決定するボタンを押下した際に実行します。
      *
      * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
