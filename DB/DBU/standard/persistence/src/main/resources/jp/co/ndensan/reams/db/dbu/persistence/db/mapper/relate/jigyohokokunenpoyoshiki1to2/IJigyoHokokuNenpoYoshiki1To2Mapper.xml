@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBU-5610-030 wangchao-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokunenpoyoshiki1to2.IJigyoHokokuNenpoYoshiki1To2Mapper">
+    <select id="get介護賦課被保険者者台帳"
+            resultMap="resultMap_getFukaHihokensha"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.Yoshiki1To2ComMybatisParameter"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+             D.*,
+             CASE 
+             WHEN D."所得段階" = '01' 
+             THEN 1 
+             WHEN D."所得段階" = '02' 
+             THEN 2 
+             WHEN D."所得段階" = '03' 
+             THEN 3 
+             WHEN D."所得段階" = '04' 
+             THEN 4 
+             WHEN D."所得段階" = '05' 
+             THEN 5 
+             WHEN D."所得段階" = '06' 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 1200000 
+             THEN 6 
+             WHEN D."所得段階" = '07' 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 1200000 
+             THEN 7 
+             WHEN D."所得段階" = '08' 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 1200000 
+             THEN 8 
+             WHEN D."所得段階" NOT IN ('06', '07', '08') 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 1200000 
+             THEN 9 
+             WHEN D."所得段階" = '07' 
+             AND 1200000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 1900000 
+             THEN 10 
+             WHEN D."所得段階" = '08' 
+             AND 1200000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 1900000 
+             THEN 11 
+             WHEN D."所得段階" = '09' 
+             AND 1200000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 1900000 
+             THEN 12 
+             WHEN D."所得段階" NOT IN ('07', '08', '09') 
+             AND 1200000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 1900000 
+             THEN 13 
+             WHEN D."所得段階" = '08' 
+             AND 1900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 2900000 
+             THEN 14 
+             WHEN D."所得段階" = '09' 
+             AND 1900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 2900000 
+             THEN 15 
+             WHEN D."所得段階" = '10' 
+             AND 1900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 2900000 
+             THEN 16 
+             WHEN D."所得段階" NOT IN ('08', '09', '10') 
+             AND 1900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             AND D."gokeiShotokuGaku" <![CDATA[<]]> 2900000000 
+             THEN 17 
+             WHEN D."所得段階" = '09' 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 18 
+             WHEN D."所得段階" = '10' 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 19 
+             WHEN D."所得段階" = '11' 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 20 
+             WHEN D."所得段階" = '12' 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 21 
+             WHEN D."所得段階" = '13' 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 22 
+             WHEN D."所得段階" = '14' 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 23 
+             WHEN D."所得段階" = '15' 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 24 
+             WHEN D."所得段階" = '16' 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 25 
+             WHEN D."所得段階" NOT IN ('09', '10', '11', '12', '13', '14', '15', '16') 
+             AND 2900000 <![CDATA[<=]]> D."gokeiShotokuGaku" 
+             THEN 26 
+             ELSE 27 
+             END AS "所得段階index"
+          FROM
+            (SELECT
+            A."hihokenshaNo" AS "被保険者番号"
+            , A."choteiNendo" AS "調定年度"
+            , A."tsuchishoNo" AS "通知書番号"
+            , A."kazeiKubun" AS "課税区分"
+            , A."setaikazeiKubun" AS "世帯課税区分"
+            , A."gokeiShotokuGaku" AS "合計所得金額"
+            , CASE 
+              WHEN A."hokenryoDankai2" IS NOT NULL 
+              THEN A."hokenryoDankai2" 
+              WHEN A."hokenryoDankai1" IS NOT NULL 
+              THEN A."hokenryoDankai1" 
+              ELSE '' 
+              END AS "所得段階"
+            , A."hokenryoDankai1" AS "保険料算定段階1"
+            , A."hokenryoDankai2" AS "保険料算定段階2"
+            , CASE 
+              WHEN B."koikinaiTokureiSochimotoShichosonCode" IS NOT NULL 
+              THEN B."koikinaiTokureiSochimotoShichosonCode" 
+              WHEN B."koikinaiTokureiSochimotoShichosonCode" IS NULL 
+              THEN B."shichosonCode" 
+              ELSE NULL 
+              END AS "市町村コード"
+            , B."kyuShichosonCode" AS "旧市町村コード" 
+            , A."gokeiShotokuGaku"
+          FROM
+            rgdb."DbT2002Fuka" A
+            , rgdb."DbT1001HihokenshaDaicho" B 
+          WHERE
+            A."fukaNendo" = #{集計年度} 
+            AND A."hihokenshaNo" = B."hihokenshaNo" 
+            AND (B."hihokenshaNo" || B."idoYMD" || B."edaNo") IN ( 
+              SELECT
+                C."hihokenshaNo" || C."idoYMD" || C."edaNo" 
+              FROM
+                rgdb."DbT1001HihokenshaDaicho" C 
+              WHERE
+                C."hihokenshaNo" = A."hihokenshaNo" 
+                AND SUBSTRING(C."idoYMD", 1, 6) <![CDATA[<=]]> #{基準日} 
+              ORDER BY
+                C."idoYMD" DESC
+                , C."edaNo" DESC 
+              LIMIT
+                1
+            )
+            AND B."shikakuShutokuTodokedeYMD" <![CDATA[<=]]> #{基準日} 
+            AND ( 
+              (B."shikakuSoshitsuTodokedeYMD" IS NULL) 
+              OR ( 
+                B."shikakuSoshitsuTodokedeYMD" IS NOT NULL 
+                AND #{基準日} <![CDATA[<]]> B."shikakuSoshitsuTodokedeYMD"
+              )
+            ) ) AS D
+    </select>
+    <resultMap id="resultMap_getFukaHihokensha" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokunenpoyoshiki1to2.TempIchijiTableEntity" autoMapping="true">
+    <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+    <result property="choteiNendo" column="調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+    <result property="tsuchishoNo" column="通知書番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler" />
+    <result property="kazeiKubun" column="課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="setaikazeiKubun" column="世帯課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="gokeiShotokuGaku" column="合計所得金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    <result property="shotokuDankai" column="所得段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="hokenryoDankai1" column="保険料算定段階1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="hokenryoDankai2" column="保険料算定段階2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shotokuDankaiIndex" column="所得段階index"/>
+    <result property="shichosonCode" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+    <result property="kyuShichosonCode" column="旧市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+    </resultMap>
+    
+    <select id="get一時テーブル"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokunenpoyoshiki1to2.TempIchijiTableEntity"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+             "hihokenshaNo"
+             "choteiNendo"
+             "tsuchishoNo"
+             "kazeiKubun"
+             "setaikazeiKubun"
+             "gokeiShotokuGaku"
+             "shotokuDankai"
+             "hokenryoDankai1"
+             "hokenryoDankai2"
+             "shotokuDankaiIndex"
+             "shichosonCode"
+             "kyuShichosonCode"
+          FROM
+           "tempIchijiTable"
+    </select>
+    <delete id="delete事業報告統計データ" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.Yoshiki1To2ComMybatisParameter" >
+        DELETE FROM rgdb."DbT7021JigyoHokokuTokeiData" 
+        WHERE "shukeiTaishoYSeireki" = #{集計年度} 
+        AND "shukeiTaishoM" = #{集計対象月} 
+        AND "hyoNo" = #{表番号}
+        <if test= "is前回処理結果">
+        AND "shukeiNo" = #{集計番号}
+        </if>
+        <if test= "is市町村特別給付">
+        AND "shukeiNo" IN <foreach collection="集計番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        </if>
+    </delete>
+    
+    <select id="get一時テーブルCount"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.TempIchijiTableMybatisParameter"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+             COUNT(*)
+          FROM
+           "tempIchijiTable"
+        WHERE
+           1=1
+        <if test= "is市町村コード">
+           AND "shichosonCode" = #{市町村コード}
+        </if>
+        <if test= "is旧市町村コード">
+           AND "kyuShichosonCode" = #{旧市町村コード}
+        </if>
+        <if test= "is所得段階">
+           AND "shotokuDankaiIndex" = #{所得段階index}
+        </if>
+    </select>
+    <insert id="insert事業報告統計データ"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.Yoshiki1To2ComMybatisParameter" >
+        INSERT 
+        INTO rgdb."DbT7021JigyoHokokuTokeiData"  (
+          "hokokuYSeireki"
+          ,"hokokuM"
+          ,"shukeiTaishoYSeireki"
+          ,"shukeiTaishoM"
+          ,"toukeiTaishoKubun"
+          ,"shichosonCode"
+          ,"hyoNo"
+          ,"shukeiNo"
+          ,"shukeiTani"
+          ,"tateNo"
+          ,"yokoNo"
+          ,"shukeiKekkaAtai"
+          ,"shukeiKomokuMeisho"
+          ,"tateKomokuCode"
+          ,"yokoKomokuCode"
+          )
+        VALUES ( 
+          #{報告年度}
+          , #{報告年月}
+          , #{集計年度}
+          , #{集計年月}
+          , '1'
+          , #{市町村コード}
+          , #{表番号}
+          , #{集計番号}
+          , '1'
+          , #{縦番号}
+          , #{横番号}
+          , #{集計結果値}
+          , #{集計項目名称}
+          , NULL
+          , NULL
+        ) 
+    </insert>
+    <select id="get第５段階の保険料率"
+            resultType="Decimal"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleYear"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+             "hokenryoRitsu"
+          FROM
+           rgdb."DbT2013HokenryoDankai"
+        WHERE
+           "fukaNendo" = #{集計年度}
+           AND "dankaiIndex" = '05'
+        ORDER BY "rankuKubun"
+        LIMIT 1
+    </select>
+    <select id="get給付実績被保険者者台帳"
+            resultMap="resultMap_getKyufujisseki"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+            B."serviceShuruiCode" AS サービス種類コード
+            , B."serviceKomokuCode" AS サービス項目コード
+            , D."serviceSeishikiName" AS サービス名
+            , B."serviceTanisu" AS サービス単位数
+            , C."hokenTanisuTani" AS 保険_単位数単価
+            , A."yoKaigoJotaiKubunCode" AS 要介護度
+            , A."hokenKyufuritsu" AS 保険給付率
+            , CASE 
+              WHEN E."koikinaiTokureiSochimotoShichosonCode" IS NOT NULL 
+              THEN E."koikinaiTokureiSochimotoShichosonCode" 
+              WHEN E."koikinaiTokureiSochimotoShichosonCode" IS NULL 
+              THEN E."shichosonCode" 
+              END AS 市町村コード
+            , E."kyuShichosonCode" AS 旧市町村コード
+            , CAST(B."serviceTanisu"*C."hokenTanisuTani" AS decimal(14,0)) AS 集計後費用額
+            , CAST(B."serviceTanisu"*C."hokenTanisuTani"* to_number(A."hokenKyufuritsu", '99G999D9S')*100 AS decimal(14,0)) AS 集計後給付額 
+        FROM
+            rgdb."DbT3017KyufujissekiKihon" A
+            , rgdb."DbT3018KyufujissekiMeisai" B
+            , rgdb."DbT3033KyufujissekiShukei" C
+            , rgdb."DbT3066ShichosonTokubetuKyufuService" D
+            , rgdb."DbT1001HihokenshaDaicho" E 
+        WHERE
+            A."hiHokenshaNo" = B."hiHokenshaNo" 
+            AND A."hiHokenshaNo" = C."hiHokenshaNo" 
+            AND A."inputShikibetsuNo" = B."inputShikibetsuNo" 
+            AND A."inputShikibetsuNo" = C."inputShikibetsuNo" 
+            AND A."shokisaiHokenshaNo" = B."shokisaiHokenshaNo" 
+            AND A."shokisaiHokenshaNo" = C."shokisaiHokenshaNo" 
+            AND A."serviceTeikyoYM" = B."serviceTeikyoYM" 
+            AND A."serviceTeikyoYM" = C."serviceTeikyoYM" 
+            AND A."jigyoshoNo" = B."jigyoshoNo" 
+            AND A."jigyoshoNo" = C."jigyoshoNo" 
+            AND A."toshiNo" = B."toshiNo" 
+            AND A."toshiNo" = C."toshiNo" 
+            AND B."serviceShuruiCode" = C."serviceSyuruiCode" 
+            AND C."inputShikibetsuNo" NOT LIKE '812%' 
+            AND A."inputShikibetsuNo" NOT LIKE '816%' 
+            AND A."inputShikibetsuNo" NOT LIKE '21B%' 
+            AND A."inputShikibetsuNo" NOT LIKE '71P%' 
+            AND C."serviceSyuruiCode" = '81' 
+            AND SUBSTRING(D."serviceCode", 1, 2) = B."serviceShuruiCode" 
+            AND SUBSTRING(D."serviceCode", 3, 4) = B."serviceKomokuCode" 
+            AND A."hiHokenshaNo" = E."hihokenshaNo" 
+            AND (E."hihokenshaNo" || E."idoYMD" || E."edaNo") = ( 
+              SELECT
+                F."hihokenshaNo" || F."idoYMD" || F."edaNo" 
+              FROM
+                rgdb."DbT1001HihokenshaDaicho" F 
+              WHERE
+                F."hihokenshaNo" = E."hihokenshaNo" 
+                AND SUBSTRING(F."shikakuShutokuYMD", 1, 6) <![CDATA[<=]]> A."serviceTeikyoYM" 
+              ORDER BY
+                F."idoYMD" DESC
+                , F."edaNo" DESC 
+              LIMIT
+                1
+            ) 
+            AND ((E."shikakuSoshitsuYMD" IS NULL) 
+             OR (
+                (E."shikakuSoshitsuYMD" IS NOT NULL 
+                  AND A."serviceTeikyoYM" <![CDATA[<=]]> SUBSTRING(E."shikakuSoshitsuYMD",1,6)
+              ))) 
+    </select>
+    <resultMap id="resultMap_getKyufujisseki" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokunenpoyoshiki1to2.TempIchijiTable2Entity" autoMapping="true">
+    <result property="serviceShuruiCode" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
+    <result property="serviceKomokuCode" column="サービス項目コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler" />
+    <result property="serviceSeishikiName" column="サービス名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="serviceTanisu" column="サービス単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    <result property="hokenTanisuTani" column="保険_単位数単価" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    <result property="yoKaigoJotaiKubunCode" column="要介護度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="hokenKyufuritsu" column="保険給付率" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler" />
+    <result property="shichosonCode" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+    <result property="kyuShichosonCode" column="旧市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+    <result property="shuukeiGoHiyouGaku" column="集計後費用額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    <result property="shuukeiGoKyuuhuGaku" column="集計後給付額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    </resultMap>
+    <select id="get一時テーブル2項目コード"
+            resultType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.TempIchijiTable2MybatisParameter"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+             DISTINCT "serviceKomokuCode"
+          FROM
+           "tempIchijiTable2"
+        WHERE
+           1=1
+        <if test= "is市町村コード">
+           AND "shichosonCode" = #{市町村コード}
+        </if>
+        <if test= "is旧市町村コード">
+           AND "kyuShichosonCode" = #{旧市町村コード}
+        </if>
+    </select>
+    
+    <select id="get一時テーブル2Count"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.TempIchijiTable2MybatisParameter"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+          <if test= "isCountAll">
+            COUNT(*)
+          </if>
+          <if test= "isSum費用額">
+            SUM("shuukeiGoHiyouGaku")
+          </if>
+          <if test= "isSum給付額">
+            SUM("shuukeiGoKyuuhuGaku")
+          </if> 
+          FROM
+           "tempIchijiTable2"
+        WHERE
+           1=1
+        <if test= "is項目コード">
+           AND "serviceKomokuCode" = #{サービス項目コード}
+        </if>
+        <if test= "is旧市町村コード">
+           AND "kyuShichosonCode" = #{旧市町村コード}
+        </if>
+        <if test= "is市町村コード">
+           AND "shichosonCode" = #{市町村コード}
+        </if>
+        <if test= "is要介護条件">
+           AND "yoKaigoJotaiKubunCode" = #{要介護Code}
+        </if>
+        <if test= "is要介護条件In">
+           AND "yoKaigoJotaiKubunCode" IN <foreach collection="要介護CodeList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        </if>
+    </select>
+    <select id="getサービス名"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.TempIchijiTable2MybatisParameter"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+          DISTINCT "serviceSeishikiName"
+          FROM
+           "tempIchijiTable2"
+        WHERE
+           1=1
+        <if test= "is項目コード">
+           AND "serviceKomokuCode" = #{サービス項目コード}
+        </if>
+        <if test= "is旧市町村コード">
+           AND "kyuShichosonCode" = #{旧市町村コード}
+        </if>
+        <if test= "is市町村コード">
+           AND "shichosonCode" = #{市町村コード}
+        </if>
+    </select>
+    <select id="get集計結果値"
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.JigyoHokokuTokeiMybatisParameter"
+            resultOrdered="true"
+            fetchSize="500">
+        SELECT
+          <if test= "isSum">
+             SUM("shukeiKekkaAtai")
+          </if>
+          <if test= "isNoSum">
+             "shukeiKekkaAtai"
+          </if>
+        WHERE
+           "shichosonCode" = #{市町村コード}
+           AND "hyoNo" = #{表番号}
+           AND "shukeiNo" = #{集計番号}
+           AND "tateKomokuCode" = #{縦項目コード}
+           AND "yokoKomokuCode" = #{横項目コード}
+        <if test= "is期間">
+           AND #{報告開始年月} <![CDATA[<=]]> "hokokuYSeireki" || "hokokuM"
+           AND "hokokuYSeireki" || "hokokuM" <![CDATA[<=]]> #{報告終了年月}
+        </if>
+        <if test= "isNo期間">
+           AND "hokokuYSeireki" = #{報告年}
+           AND "hokokuM" = #{報告月}
+        </if>
+    </select>
+    <insert id="updateShoriDateKanri"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.JigyoHokokuTokeiMybatisParameter" >
+        SELECT rgdb."DbFx7014ShoriDateKanriUpdate"(
+            #{サブ業務コード},
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            #{処理名},
+            #{処理枝番},
+            #{集計年度},
+            #{基準年月日},
+            #{基準日時}
+            );
+    </insert>
+    <select id="getReportData"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpoyoshiki1to2.Yoshiki1To2ReportDataMybatisParameter" 
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokunenpoyoshiki1to2.JigyoHokokuReportDataRelateEntity" resultOrdered="true" fetchSize="500">
+        SELECT * FROM rgdb."DbFt7019JigyouHoukokuTokeiTyouhyou"(
+            ARRAY<foreach  
+                    collection="市町村コードリスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            #{集計年月},
+            ARRAY<foreach  
+                    collection="集計番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>,
+            ARRAY<foreach  
+                    collection="表番号リスト"  
+                    item="code"  
+                    open="["  
+                    separator=","  
+                    close="]">  
+                    #{code} 
+                 </foreach>
+            );
+    </select>
+</mapper>
