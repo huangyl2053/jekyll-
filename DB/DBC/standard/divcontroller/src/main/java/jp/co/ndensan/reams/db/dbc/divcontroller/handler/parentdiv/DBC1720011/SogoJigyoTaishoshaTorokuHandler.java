@@ -349,10 +349,13 @@ public class SogoJigyoTaishoshaTorokuHandler {
      *
      * @param 情報と状態List 情報と状態List
      * @param 被保険者番号 被保険者番号
+     * @param 識別コード 識別コード
      */
-    public void 保存処理(List<SogoJigyoTaishoshaToJotai> 情報と状態List, HihokenshaNo 被保険者番号) {
+    public void 保存処理(List<SogoJigyoTaishoshaToJotai> 情報と状態List, HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         SogoJigyoTaishoshaManager manager = new SogoJigyoTaishoshaManager();
         manager.save総合事業対象者(情報と状態List);
+        PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保険者番号.getColumnValue()));
+        AccessLogger.log(AccessLogType.更新, personalData);
         前排他解除(被保険者番号);
         div.getCcdKaigoKanryoMessage()
                 .setMessage(完了メッセージ, 被保険者番号.getColumnValue(), div.getKaigoAtenaInfoChildDiv1().get氏名漢字(), true);
