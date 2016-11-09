@@ -122,8 +122,7 @@ public class DBC8020001MainHandler {
     private void init画面表示内容(RString メニューID, DBC8020001 dbc) {
         DBC8020001MainManager manager = new DBC8020001MainManager();
         DBC8020001 entity = manager.getFurikomiGroupItakushaRelateEntity(メニューID);
-        KinyuKikanCode 代表金融機関コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
-                get(0).get振込委託者Entity().getKinyuKikanCode();
+        KinyuKikanCode 代表金融機関コード = entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getDaihyoKinyuKikanCode();
         RString 振込グループコード = entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode();
         div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
                 get(0).get振込委託者Entity().getItakushaCode());
