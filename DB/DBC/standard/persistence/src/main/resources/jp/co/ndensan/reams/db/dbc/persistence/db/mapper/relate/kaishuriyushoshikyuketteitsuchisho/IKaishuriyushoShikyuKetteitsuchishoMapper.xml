@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 住宅改修理由書作成手数料支給（不支給）決定通知書作成のマッピング用XMLです。 -->
-<!-- @reamsid_L DBC-2850-030 chenxiangyu -->
+<!-- @reamsid_L DBC-2850-010 chenxiangyu -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaishuriyushoshikyuketteitsuchisho.IKaishuriyushoShikyuKetteitsuchishoMapper">
@@ -9,6 +9,8 @@
     <resultMap id="resultMap_selectKetteiTimestamp" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoRelateEntity" autoMapping="true">
         <result property="temp_前回決定日_開始日" column="Temp_前回決定日_開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_前回決定日_終了日" column="Temp_前回決定日_終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護住宅改修理由書作成事業者番号" column="介護住宅改修理由書作成事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="介護住宅改修事業者名称" column="介護住宅改修事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
     <select id="selectKetteiTimestamp" resultMap="resultMap_selectKetteiTimestamp" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoMybatisParameter" fetchSize="500" resultOrdered="true">
@@ -21,28 +23,40 @@
           処理日付."subGyomuCode" = #{サブ業務コード}
           AND 処理日付."shichosonCode" = #{市町村コード}
           AND 処理日付."shoriName" = #{処理名}
-          AND 処理日付."shoriEdaban" = ( 
-            SELECT
-              MAX(処理日付."shoriEdaban") 
-            FROM
-              rgdb."DbT7022ShoriDateKanri" AS 処理日付
-          ) 
-          AND 処理日付."nendo" = ( 
-            SELECT
-              MAX(処理日付."nendo") 
-            FROM
-              rgdb."DbT7022ShoriDateKanri" AS 処理日付
-          ) 
-          AND 処理日付."nendoNaiRenban" = ( 
-            SELECT
-              MAX(処理日付."nendoNaiRenban") 
-            FROM
-              rgdb."DbT7022ShoriDateKanri" AS 処理日付
-          ) 
+          AND 処理日付."shoriEdaban" = #{処理枝番}
+          AND 処理日付."nendo" = #{年度}
+          AND 処理日付."nendoNaiRenban" = #{年度内連番}
         ORDER BY
           処理日付."nendo" DESC
           , 処理日付."nendoNaiRenban" DESC 
         LIMIT
           1
+    </select>
+     <select id="selectDDL事業者" resultMap="resultMap_selectKetteiTimestamp" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoMybatisParameter" fetchSize="500" resultOrdered="true">
+            select
+             DbT3096."riyushoSakuseiJigyoshaNo" AS 介護住宅改修理由書作成事業者番号
+             , DbT3096."jutakuKaishuJigyoshaMeisho"  AS 介護住宅改修事業者名称
+           from
+             rgdb."DbT3096JutakuKaishuRiyushoTesuryoShukei" AS DbT3096
+           where
+             DbT3096."isDeleted" = false 
+             and DbT3096."shukeiNo" in ( 
+               select
+                 DbT3094."shukeiNo" 
+               from
+                 rgdb."DbT3094JutakuKaishuRiyushoTesuryoKettei" AS DbT3094
+               <where>
+                <if test="決定日開始フラグ"> 
+                 #{決定日開始} <![CDATA[<=]]> DbT3094."shikyu_FushikyuKetteiYMD" 
+                </if>
+                <if test="決定日フラグ">and</if>
+                <if test="決定日終了フラグ">   
+                  DbT3094."shikyu_FushikyuKetteiYMD" <![CDATA[<=]]> #{決定日終了}
+                </if>
+           </where>
+             ) 
+           ORDER BY
+             DbT3096."riyushoSakuseiJigyoshaNo" ASC
     </select>
 </mapper>

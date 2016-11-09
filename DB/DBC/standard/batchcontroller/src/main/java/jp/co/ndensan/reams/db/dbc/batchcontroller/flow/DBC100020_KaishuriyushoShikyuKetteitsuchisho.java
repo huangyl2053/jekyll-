@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC100020.DBUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC100020.KetteiTsuchishoIchiranhyoPrintProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC100020.KetteiTsuchishoPrintProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC100020.ShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC100020.DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -23,12 +24,14 @@ public class DBC100020_KaishuriyushoShikyuKetteitsuchisho extends BatchFlowBase<
     private static final String 決定通知書発行 = "KetteiTsuchishoPrint";
     private static final String 決定通知書一覧表発行 = "KetteiTsuchishoIchiranhyoPrint";
     private static final String DB更新 = "DBUpdate";
+    private static final String 処理日付管理 = "updateDBShoriDateKanri";
 
     @Override
     protected void defineFlow() {
         executeStep(決定通知書発行);
         executeStep(決定通知書一覧表発行);
         executeStep(DB更新);
+        executeStep(処理日付管理);
     }
 
     @Step(決定通知書発行)
@@ -46,6 +49,12 @@ public class DBC100020_KaishuriyushoShikyuKetteitsuchisho extends BatchFlowBase<
     @Step(DB更新)
     IBatchFlowCommand updateDB() {
         return loopBatch(DBUpdateProcess.class)
+                .arguments(getParameter().toKaishuriyushoShikyuKetteitsuchishoProcessParameter()).define();
+    }
+
+    @Step(処理日付管理)
+    IBatchFlowCommand updateDBShoriDateKanri() {
+        return loopBatch(ShoriDateKanriProcess.class)
                 .arguments(getParameter().toKaishuriyushoShikyuKetteitsuchishoProcessParameter()).define();
     }
 }

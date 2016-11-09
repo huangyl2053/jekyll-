@@ -17,8 +17,11 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 住宅改修理由書作成手数料支給（不支給）決定通知書作成のコントローラクラスです。
@@ -28,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShikyuKetteitsuchishoParameter {
 
     private static final RString 前排他キー = new RString("DBCKOGAKUGASSANJIKOFUTANGAKU");
+    private static final int ZERO = 0;
+    private static final int EIGHT = 8;
 
     /**
      * 画面初期化します。
@@ -38,9 +43,40 @@ public class ShikyuKetteitsuchishoParameter {
     public ResponseData<ShikyuKetteitsuchishoParameterDiv> onLoad(ShikyuKetteitsuchishoParameterDiv div) {
         RString temp市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         KaishuriyushoShikyuKetteitsuchishoMybatisParameter parameter = new KaishuriyushoShikyuKetteitsuchishoMybatisParameter();
+
         parameter.set市町村コード(temp市町村コード);
         KetteiTimestampBusiness business = KaishuriyushoShikyuKetteitsuchishoManager.createInstance().get前回の実行情報(parameter);
-        getHandler(div).onLoad(business);
+        if (business != null) {
+            RDate 決定日_開始日 = null;
+            if (!RString.isNullOrEmpty(business.getTemp_前回決定日_開始日())) {
+                RDate 前回決定日_開始日 = new RDate(business.getTemp_前回決定日_開始日().substring(ZERO, EIGHT).toString());
+                div.getTxtZnkaiKetteiYMD().setFromValue(前回決定日_開始日);
+                決定日_開始日 = 前回決定日_開始日.plusDay(1);
+            }
+            if (!RString.isNullOrEmpty(business.getTemp_前回決定日_終了日())) {
+                div.getTxtZnkaiKetteiYMD().setToValue(new RDate(business.getTemp_前回決定日_終了日().substring(ZERO, EIGHT).toString()));
+                div.getTxtKetteiYMD().setFromValue(決定日_開始日);
+            }
+        }
+        if (div.getTxtKetteiYMD().getFromValue() != null) {
+            parameter.set決定日開始フラグ(true);
+            parameter.set決定日開始(new FlexibleDate(div.getTxtKetteiYMD().getFromValue().toDateString()));
+        } else {
+            parameter.set決定日開始フラグ(false);
+        }
+        if (div.getTxtKetteiYMD().getToValue() != null) {
+            parameter.set決定日終了フラグ(true);
+            parameter.set決定日終了(new FlexibleDate(div.getTxtKetteiYMD().getToValue().toDateString()));
+        } else {
+            parameter.set決定日終了フラグ(false);
+        }
+        if (div.getTxtKetteiYMD().getFromValue() != null && div.getTxtKetteiYMD().getToValue() != null) {
+            parameter.set決定日フラグ(true);
+        } else {
+            parameter.set決定日フラグ(false);
+        }
+        SearchResult<KetteiTimestampBusiness> business2 = KaishuriyushoShikyuKetteitsuchishoManager.createInstance().getDDL事業者(parameter);
+        getHandler(div).onLoad(business, business2);
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
             throw new PessimisticLockingException();
@@ -78,11 +114,10 @@ public class ShikyuKetteitsuchishoParameter {
         if (pairs2.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs2).respond();
         }
-        // TODO 出力順の相関方針が確定しないので、実装ができません
-//        ValidationMessageControlPairs pairs3 = getValidationHandler(div).check出力順の必須設定();
-//        if (pairs3.iterator().hasNext()) {
-//            return ResponseData.of(div).addValidationMessages(pairs3).respond();
-//        }
+        ValidationMessageControlPairs pairs3 = getValidationHandler(div).check出力順の必須設定();
+        if (pairs3.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs3).respond();
+        }
         ValidationMessageControlPairs pairs4 = getValidationHandler(div).check前回作成期間重複();
         if (pairs4.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs4).respond();

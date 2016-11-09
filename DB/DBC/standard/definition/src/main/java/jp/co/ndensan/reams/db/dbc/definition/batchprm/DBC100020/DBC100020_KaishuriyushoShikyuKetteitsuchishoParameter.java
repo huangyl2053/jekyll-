@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc100020.KaishuriyushoS
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -60,6 +61,8 @@ public class DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter extends Batch
         parameter.set作成日(作成日);
         parameter.set指定事業者のみフラグ(指定事業者のみフラグ);
         parameter.set文書番号(文書情報);
+        parameter.set市町村コード(new LasdecCode(市町村コード));
+        parameter.set出力順id(出力順ID);
         return parameter;
     }
 }

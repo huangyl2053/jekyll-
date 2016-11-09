@@ -112,9 +112,9 @@ public class ShikyuKetteitsuchishoParameterValidationHandler {
         if (div.getTxtZnkaiKetteiYMD().getToValue() != null
                 && div.getTxtKetteiYMD().getFromValue().isBefore(div.getTxtZnkaiKetteiYMD().getToValue())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbzErrorMessages.期間が不正_未来日付不可,
-                    前回決定日終了.toString(),
-                    決定日開始.toString())));
+                    DbzErrorMessages.期間が不正_過去日付不可,
+                    決定日開始.toString(),
+                    前回決定日終了.toString())));
         }
         return validPairs;
     }

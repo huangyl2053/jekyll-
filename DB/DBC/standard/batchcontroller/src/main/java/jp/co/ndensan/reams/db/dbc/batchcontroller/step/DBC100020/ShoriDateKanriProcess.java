@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC100020;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc100020.KaishuriyushoShikyuKetteitsuchishoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
@@ -21,25 +22,29 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 住宅改修理由書作成手数料請求決定更新のProcessクラスです。
+ * 処理日付管理マスタのProcessクラスです。
  *
- * @reamsid_L DBC-2850-030 zuotao
+ * @reamsid_L DBC-2850-030 jinjue
  */
-public class DBUpdateProcess extends BatchProcessBase<DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity> {
+public class ShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kaishuriyushoshikyuketteitsuchishosakusei.IKaishuriyushoShikyuKetteitsuchishoSakuseiMapper.get住宅改修理由書作成手数料請求決定");
-    private KaishuriyushoShikyuKetteitsuchishoProcessParameter processParameter;
+            + "kaishuriyushoshikyuketteitsuchishosakusei.IKaishuriyushoShikyuKetteitsuchishoSakuseiMapper.select処理日付管理");
     @BatchWriter
-    private BatchPermanentTableWriter<DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity> dbT3094Writer;
+    private BatchPermanentTableWriter 処理日付管理マスタ;
+    private KaishuriyushoShikyuKetteitsuchishoProcessParameter processParameter;
+    private final RString 処理名 = ShoriName.住宅改修理由書作成手数料支給不支給決定通知書作成.get名称();
+    private final RString 処理枝番 = new RString("0000");
+    private final FlexibleYear 年度 = new FlexibleYear("0000");
+    private final RString 年度内連番 = new RString("0001");
 
     @Override
     protected IBatchReader createReader() {
-        dbT3094Writer = new BatchPermanentTableWriter<>(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity.class);
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
@@ -62,8 +67,27 @@ public class DBUpdateProcess extends BatchProcessBase<DbT3094JutakuKaishuRiyusho
     }
 
     @Override
-    protected void process(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity) {
-        entity.setKetteiTsuchiSakuseiYMD(FlexibleDate.getNowDate());
-        dbT3094Writer.update(entity);
+    protected void initialize() {
+        処理日付管理マスタ = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    @Override
+    protected void process(DbT7022ShoriDateKanriEntity entity) {
+        if (entity == null) {
+            DbT7022ShoriDateKanriEntity entity22 = new DbT7022ShoriDateKanriEntity();
+            entity22.setSubGyomuCode(SubGyomuCode.DBC介護給付);
+            entity22.setShichosonCode(processParameter.get市町村コード());
+            entity22.setShoriName(処理名);
+            entity22.setShoriEdaban(処理枝番);
+            entity22.setNendo(年度);
+            entity22.setNendoNaiRenban(年度内連番);
+            entity22.setTaishoKaishiYMD(processParameter.get決定開始日());
+            entity22.setTaishoShuryoYMD(processParameter.get決定終了日());
+            処理日付管理マスタ.insert(entity22);
+        } else {
+            entity.setTaishoKaishiYMD(processParameter.get決定開始日());
+            entity.setTaishoShuryoYMD(processParameter.get決定終了日());
+            処理日付管理マスタ.update(entity);
+        }
     }
 }
