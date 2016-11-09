@@ -846,7 +846,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.listNinteiLower_9 = 要介護認定情報Entity.get資格取得前申請();
         }
         if (要介護認定情報Entity.get延期通知書発行日() != null && 要介護認定情報Entity.get延期通知書発行回数() != null) {
-            source.listNinteiUpper_11 = 要介護認定情報Entity.get延期通知書発行日().wareki().toDateString().
+            source.listNinteiUpper_11 = 要介護認定情報Entity.get延期通知書発行日().wareki().toDateString().concat(RString.HALF_SPACE).
                     concat(要介護認定情報Entity.get延期通知書発行回数());
         }
 
@@ -874,18 +874,20 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.listNinteiUpper_15 = 要介護認定情報Entity.get指定医区分();
         }
         if (要介護認定情報Entity.get調査委託先コード() != null && 要介護認定情報Entity.get調査委託先名() != null) {
-            source.listNinteiCenter_12 = 要介護認定情報Entity.get調査委託先コード().
+            source.listNinteiCenter_12 = 要介護認定情報Entity.get調査委託先コード().concat(RString.HALF_SPACE).
                     concat(要介護認定情報Entity.get調査委託先名());
         }
         if (要介護認定情報Entity.get調査員コード() != null && 要介護認定情報Entity.get調査員名() != null) {
-            source.listNinteiCenter_13 = 要介護認定情報Entity.get調査員コード().concat(要介護認定情報Entity.get調査員名());
+            source.listNinteiCenter_13 = 要介護認定情報Entity.get調査員コード()
+                    .concat(RString.HALF_SPACE).concat(要介護認定情報Entity.get調査員名());
         }
         if (要介護認定情報Entity.get主治医医療機関コード() != null && 要介護認定情報Entity.get主治医医療機関名() != null) {
-            source.listNinteiLower_11 = 要介護認定情報Entity.get主治医医療機関コード().
-                    concat(要介護認定情報Entity.get主治医医療機関名());
+            source.listNinteiLower_11 = 要介護認定情報Entity.get主治医医療機関コード()
+                    .concat(RString.HALF_SPACE).concat(要介護認定情報Entity.get主治医医療機関名());
         }
         if (要介護認定情報Entity.get主治医コード() != null && 要介護認定情報Entity.get主治医名() != null) {
-            source.listNinteiLower_12 = 要介護認定情報Entity.get主治医コード().concat(要介護認定情報Entity.get主治医名());
+            source.listNinteiLower_12 = 要介護認定情報Entity.get主治医コード()
+                    .concat(RString.HALF_SPACE).concat(要介護認定情報Entity.get主治医名());
         }
         if (要介護認定情報Entity.get認定審査会意見() != null) {
             source.listNinteiCenter_14 = 要介護認定情報Entity.get認定審査会意見();
