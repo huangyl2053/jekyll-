@@ -187,8 +187,10 @@ public class IchijiHanteiKekkaJohoHandler {
 
             if (business != null) {
                 div.getTxtIchijiHanteibi().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
-                div.getTxtIchijiHanteiKekka().setValue(
-                        IchijiHanteiKekkaCode99.toValue(business.get一次判定結果()).get名称());
+                if (business.get一次判定結果() != null) {
+                    div.getTxtIchijiHanteiKekka().setValue(
+                            IchijiHanteiKekkaCode99.toValue(business.get一次判定結果()).get名称());
+                }
                 div.getTxtKijunJikan().setValue(new RString(String.valueOf(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10)));
                 // TODO
                 div.getTxtShokuji().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
