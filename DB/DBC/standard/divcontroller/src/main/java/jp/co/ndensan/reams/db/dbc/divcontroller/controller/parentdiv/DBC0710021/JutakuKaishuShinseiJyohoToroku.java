@@ -125,8 +125,8 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (事前Map != null) {
             RString 事前申請整理番号 = 事前Map.keySet().iterator().next();
             FlexibleYearMonth 事前サービス提供年月 = 事前Map.get(事前申請整理番号);
-            ViewStateHolder.put(ViewStateKeys.事前申請整理番号, 事前申請整理番号);
-            ViewStateHolder.put(ViewStateKeys.事前サービス提供年月, 事前サービス提供年月);
+            ViewStateHolder.put(ViewStateKeys.整理番号, 事前申請整理番号);
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 事前サービス提供年月);
         }
         ViewStateHolder.put(ViewStateKeys.申請情報, param);
         if (div.getTxtTeikyoYM().getValue() != null) {
