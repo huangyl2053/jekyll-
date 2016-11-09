@@ -244,7 +244,7 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
 
     private List<RString> addCode_kosei(List<RString> コードリスト) {
         List<RString> codelist = new ArrayList();
-        if (コードリスト.isEmpty()) {
+        if (コードリスト == null || コードリスト.isEmpty()) {
             return コードリスト;
         }
         for (RString code : コードリスト) {
@@ -259,7 +259,7 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
 
     private List<RString> addCode_kyu(List<RString> コードリスト) {
         List<RString> codelist = new ArrayList();
-        if (コードリスト.isEmpty()) {
+        if (コードリスト == null || コードリスト.isEmpty()) {
             return コードリスト;
         }
         for (RString code : コードリスト) {
