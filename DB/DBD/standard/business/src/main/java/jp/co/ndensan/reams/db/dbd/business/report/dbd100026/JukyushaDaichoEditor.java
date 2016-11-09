@@ -71,7 +71,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         setSentoStep1(source);
         setSentoStep2(source);
         setYokaigoNinteiLower(source);
-        if (index >= (page - 1) * NOCOUNT_5 && index < page * NOCOUNT_5) {
+        if (index >= (page - 1) * NOCOUNT_5 && index < (page * NOCOUNT_5 + 2 * (page - 1))) {
             setFutanGendogakuNintei(source);
             setShaFukuKeigen(source);
             setRiyoshaFutanGenmen(source);

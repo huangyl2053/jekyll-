@@ -71,6 +71,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     private static final RString TABLE_NAME = new RString("DbT2002FukaJohoTemp");
     private static final RString TEMP_TABLE_NAME = new RString("ShinkiShikakuTaishoTemp");
     private static final RString 区分_新規 = new RString("1");
+    private static final RString 区分_既存 = new RString("2");
     private static final RString 特徴開始前普通徴収_あり = new RString("1");
     private static final int NUM_1 = 1;
     private static final int NUM_4 = 4;
@@ -145,7 +146,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                 jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai 保険料段階 = 保険料段階List.getBy段階区分(保険料段階_仮算定時);
                 Decimal 計算用保険料 = 保険料段階.get保険料率();
                 FukaJohoTempEntity fukaJohoTempEntity = service.賦課通情報編集(parameter.get調定年度(), hihokenshaDaicho,
-                        getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, getBefore().get賦課情報一時(),
+                        getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_既存, getBefore().get賦課情報一時(),
                         getBefore().get介護賦課前年度(), 保険料段階_仮算定時, getBefore().get口座Entity(),
                         entity.get普徴仮算定抽出().getTsuchishoNo(), バッチ起動日時);
                 tableWriter.insert(fukaJohoTempEntity);
@@ -384,7 +385,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                 jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai 保険料段階 = 保険料段階List.getBy段階区分(保険料段階_仮算定時);
                 Decimal 計算用保険料 = 保険料段階.get保険料率();
                 FukaJohoTempEntity fukaJohoTempEntity = service.賦課通情報編集(parameter.get調定年度(), hihokenshaDaicho,
-                        getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, getBefore().get賦課情報一時(),
+                        getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_既存, getBefore().get賦課情報一時(),
                         getBefore().get介護賦課前年度(), 保険料段階_仮算定時, getBefore().get口座Entity(),
                         getBefore().get普徴仮算定抽出().getTsuchishoNo(), バッチ起動日時);
                 tableWriter.insert(fukaJohoTempEntity);

@@ -75,7 +75,7 @@ public final class SeikyuShinsaShuseiTorokuMapperParameter {
         if (checkFlag) {
             チェックオンフラグ = true;
         } else {
-            チェックオフフラグ = true;
+            チェックオフフラグ = false;
         }
         if (DBCMNE_1004.equals(ResponseHolder.getMenuID())) {
             メニューID_1004 = true;

@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -45,14 +45,14 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<CsvKenHok
     private FileSpoolManager manager;
     private RString eucFilename;
     @BatchWriter
-    private EucCsvWriter<KenHokokuShiryoSakuseiCSVEntity> eucCsvWriterKenHokokuShiryo;
+    private CsvWriter<KenHokokuShiryoSakuseiCSVEntity> eucCsvWriterKenHokokuShiryo;
 
     @Override
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilename = Path.combinePath(spoolWorkPath, paramter.getShutsuryokuFairu());
-        eucCsvWriterKenHokokuShiryo = new EucCsvWriter.InstanceBuilder(eucFilename, EUC_ENTITY_ID).
+        eucCsvWriterKenHokokuShiryo = new CsvWriter.InstanceBuilder(eucFilename).
                 setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)

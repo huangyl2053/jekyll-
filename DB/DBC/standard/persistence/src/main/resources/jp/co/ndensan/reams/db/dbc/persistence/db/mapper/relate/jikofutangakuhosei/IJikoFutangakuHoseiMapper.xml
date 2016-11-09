@@ -7,6 +7,32 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jikofutangakuhosei.IJikoFutangakuHoseiMapper">
 
     <select id="get履歴チェックオフ"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3170JigyoKogakuGassanJikoFutanGakuEntity"
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+        SELECT
+            B.*
+        FROM
+            (SELECT C."hihokenshaNo",C."taishoNendo",MAX(C."rirekiNo") AS "rirekiNo"
+             FROM rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS C
+             WHERE C."isDeleted" = FALSE
+             GROUP BY C."hihokenshaNo",C."taishoNendo",C."shikyuShinseishoSeiriNo") AS A
+        INNER JOIN
+            rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS B
+        ON  
+            A."hihokenshaNo" = #{被保険者番号}
+            AND A."hihokenshaNo" = B."hihokenshaNo"
+            AND A."taishoNendo" = B."taishoNendo"
+            AND A."rirekiNo" = B."rirekiNo"
+            AND B."isDeleted" = FALSE
+        ORDER BY
+            B."hihokenshaNo" DESC,
+            B."taishoNendo" DESC,
+            B."hokenshaNo" DESC,
+            B."shikyuShinseishoSeiriNo" DESC,
+            B."rirekiNo" DESC
+    </select>
+    
+    <select id="get履歴オフ"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT

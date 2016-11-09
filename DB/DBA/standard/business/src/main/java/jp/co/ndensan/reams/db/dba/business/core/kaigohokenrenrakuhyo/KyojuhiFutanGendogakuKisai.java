@@ -23,5 +23,8 @@ public class KyojuhiFutanGendogakuKisai {
     private Decimal 対象者従来型特養金額;
     private Decimal 対象者従来型老健療養型金額;
     private Decimal 対象者多床室金額;
-
+    private Decimal 負担限度額認定_ユニット型個室;
+    private Decimal 負担限度額認定_ユニット型準個室;
+    private Decimal 負担限度額認定_従来型個室_特養等;
+    private Decimal 負担限度額認定_多床室;
 }

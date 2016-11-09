@@ -5,13 +5,14 @@
 
     <select id="get帳票出力対象データ" resultMap="resultMap_SogojigyohiShinsaKetteiSeikyumeisaihyoEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter" fetchSize="500" resultOrdered="true">
-        SELECT "DbWT1611SinsaKetteiSeikyuMeisai".* , "DbWT1613SinsaKetteiSeikyuGokei".*
+        SELECT ROW_NUMBER () over() AS rowNumber,"DbWT1611SinsaKetteiSeikyuMeisai".* , "DbWT1613SinsaKetteiSeikyuGokei".*
         FROM "DbWT1611SinsaKetteiSeikyuMeisai","DbWT1613SinsaKetteiSeikyuGokei" 
         Where "DbWT1611SinsaKetteiSeikyuMeisai"."meisaiRirekiNo" = "DbWT1613SinsaKetteiSeikyuGokei"."gokeiRirekiNo"
         ${出力順}
     </select> 
     
     <resultMap id="resultMap_SogojigyohiShinsaKetteiSeikyumeisaihyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohishinsaketteiseikyumeisaihyo.SogojigyohiShinsaKetteiSeikyumeisaihyoEntity" autoMapping="true">
+        <id column="rowNumber"/>
         <id column="gokeiRirekiNo"/>
         <id column="meisaiRirekiNo"/>
         <association property="審査決定請求合計" resultMap="resultMap_DbWT1613SinsaKetteiSeikyuGokei"/>
