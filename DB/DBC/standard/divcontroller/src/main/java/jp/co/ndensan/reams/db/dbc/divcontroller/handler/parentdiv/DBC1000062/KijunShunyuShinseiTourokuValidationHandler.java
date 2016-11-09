@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.Kiju
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
@@ -38,7 +39,8 @@ public class KijunShunyuShinseiTourokuValidationHandler {
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_4 = 4;
-    private static final RString MESSAGE_控除再算出 = new RString("世帯員１人に世帯主チェックを付けて、世帯主を");
+    private static final RString MESSAGE_控除再算出１ = new RString("世帯員１人に世帯主チェックを付けて、世帯主を");
+    private static final RString MESSAGE_控除再算出２ = new RString("「前年12月31日時点の世帯主」チェックがないため、控除されませんが");
     private static final RString MESSAGE_いづれか = new RString("適用開始・算定基準額・決定年月日のいづれか");
     private static final RString MESSAGE_全て = new RString("適用開始・算定基準額・決定年月日の全て");
     private static final RString MESSAGE_XXXX = new RString("xxxx");
@@ -63,6 +65,16 @@ public class KijunShunyuShinseiTourokuValidationHandler {
      */
     public KijunShunyuShinseiTourokuValidationHandler(KijunShunyuShinseiTourokuDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 変更チェックバリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 変更チェックValidate() {
+        IValidationMessages messages = new ControlValidator(div).変更Validate();
+        return create変更Dictionary().check(messages);
     }
 
     /**
@@ -135,7 +147,14 @@ public class KijunShunyuShinseiTourokuValidationHandler {
 
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage)
+                .add(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage１)
+                .add(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage２)
+                .build();
+    }
+
+    private ValidationDictionary create変更Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(KijunShunyuShinseiTourokuValidationMessages.内容変更なしで保存不可Message)
                 .build();
     }
 
@@ -177,8 +196,24 @@ public class KijunShunyuShinseiTourokuValidationHandler {
         public IValidationMessages 控除再算出Validate() {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div)
-                    .ifNot(KijunShunyuShinseiTourokuSpec.控除再算出チェック)
-                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage)
+                    .ifNot(KijunShunyuShinseiTourokuSpec.控除再算出チェック１)
+                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage１)
+                    .ifNot(KijunShunyuShinseiTourokuSpec.控除再算出チェック２)
+                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage２)
+                    .messages());
+            return messages;
+        }
+
+        /**
+         * 変更チェックバリデーションチェックです。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages 変更Validate() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(KijunShunyuShinseiTourokuSpec.内容変更なしで保存不可)
+                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.内容変更なしで保存不可Message)
                     .messages());
             return messages;
         }
@@ -241,14 +276,16 @@ public class KijunShunyuShinseiTourokuValidationHandler {
 
     private static enum KijunShunyuShinseiTourokuValidationMessages implements IValidationMessage {
 
-        控除再算出チェックMessage(UrErrorMessages.未指定, MESSAGE_控除再算出.toString()),
+        控除再算出チェックMessage１(UrErrorMessages.未指定, MESSAGE_控除再算出１.toString()),
+        控除再算出チェックMessage２(DbzWarningMessages.確認, MESSAGE_控除再算出２.toString()),
         適用データチェックMessage(DbzErrorMessages.複数必須項目相関チェックエラー, MESSAGE_いづれか.toString(), MESSAGE_全て.toString()),
         適用開始に不整合チェックMessage(UrErrorMessages.入力値が不正_追加メッセージあり, MESSAGE_不整合適用開始.toString()),
         総収入額チェックMessage(UrErrorMessages.必須項目_追加メッセージあり, MESSAGE_総収入額.toString()),
         世帯員チェックMessage(UrErrorMessages.更新不可_汎用, MESSAGE_世帯員.toString()),
         世帯課税チェックMessage(UrErrorMessages.更新不可_汎用, MESSAGE_世帯課税.toString()),
         宛先印字者チェックMessage(UrErrorMessages.未指定, MESSAGE_宛先印字者.toString()),
-        受給者または事業対象者チェックMessage(DbzWarningMessages.確認, MESSAGE_受給者または事業対象者.toString());
+        受給者または事業対象者チェックMessage(DbzWarningMessages.確認, MESSAGE_受給者または事業対象者.toString()),
+        内容変更なしで保存不可Message(DbzInformationMessages.内容変更なしで保存不可);
 
         private final Message message;
 

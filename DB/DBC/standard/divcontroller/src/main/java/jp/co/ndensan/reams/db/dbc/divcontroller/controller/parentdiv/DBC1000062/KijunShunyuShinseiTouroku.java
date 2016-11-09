@@ -76,6 +76,7 @@ public class KijunShunyuShinseiTouroku {
         Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = getHandler(div).initialize(
                 被保険者番号, 識別コード, 世帯コード);
         ViewStateHolder.put(ViewStateKeys.基準収入額適用管理情報, (Serializable) 基準収入Map);
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).setState(DBC1000062StateName.一覧);
     }
 
@@ -94,6 +95,7 @@ public class KijunShunyuShinseiTouroku {
         div.setHdnFlag2(チェックなし);
         div.setHdnFlag3(チェックなし);
         div.setHdnFlag4(チェックなし);
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).setState(DBC1000062StateName.明細追加);
     }
 
@@ -112,6 +114,7 @@ public class KijunShunyuShinseiTouroku {
         div.setHdnFlag2(チェックなし);
         div.setHdnFlag3(チェックなし);
         div.setHdnFlag4(チェックなし);
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).setState(DBC1000062StateName.明細修正);
     }
 
@@ -123,6 +126,7 @@ public class KijunShunyuShinseiTouroku {
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnDelete_Ichiran(KijunShunyuShinseiTourokuDiv div) {
         getHandler(div).set一覧削除();
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).respond();
     }
 
@@ -134,6 +138,7 @@ public class KijunShunyuShinseiTouroku {
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnCancel_Ichiran(KijunShunyuShinseiTourokuDiv div) {
         getHandler(div).set一覧取消();
+        getHandler(div).set保存するボタンDisabled(div);
         return ResponseData.of(div).respond();
     }
 
@@ -167,6 +172,10 @@ public class KijunShunyuShinseiTouroku {
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnCommonUpdate(KijunShunyuShinseiTourokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).変更チェックValidate();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))

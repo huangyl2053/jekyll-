@@ -177,6 +177,19 @@ public class KijunShunyuShinseiTourokuHandler {
     }
 
     /**
+     * 保存するボタン制御
+     *
+     * @param div 制御のdiv
+     */
+    public void set保存するボタンDisabled(KijunShunyuShinseiTourokuDiv div) {
+        if (div.getDgIchiran().getDataSource().isEmpty() || !is入力()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, false);
+        }
+    }
+
+    /**
      * 画面初期化のメソッドです。
      *
      * @param 被保険者番号 HihokenshaNo
@@ -1201,22 +1214,23 @@ public class KijunShunyuShinseiTourokuHandler {
             KijunShunyuShinseiTourokuDiv div,
             DBC1000062TransitionEventName eventName,
             HihokenshaNo 被保険者番号) {
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
+        if (被保険者番号 == null && 被保険者番号.isEmpty()) {
+            return ResponseData.of(div).forwardWithEventName(eventName).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            if (is入力()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                前排他キーの解除(被保険者番号.getColumnValue());
-                return ResponseData.of(div).forwardWithEventName(eventName).respond();
-            } else {
-                return ResponseData.of(div).respond();
-            }
-        } else {
+        }
+        if (!is入力() || new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            前排他キーの解除(被保険者番号.getColumnValue());
             return ResponseData.of(div).forwardWithEventName(eventName).respond();
+        } else {
+            return ResponseData.of(div).respond();
         }
     }
 
@@ -1493,5 +1507,14 @@ public class KijunShunyuShinseiTourokuHandler {
             }
         }
         return true;
+    }
+
+    private boolean is入力() {
+        for (dgIchiran_Row row : div.getDgIchiran().getDataSource()) {
+            if (!RowState.Unchanged.equals(row.getRowState())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
