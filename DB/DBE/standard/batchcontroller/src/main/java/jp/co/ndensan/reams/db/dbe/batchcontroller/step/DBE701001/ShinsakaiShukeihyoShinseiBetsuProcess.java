@@ -204,7 +204,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(GOGITAINO);
-        条件.append(parameter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(parameter.getGogitaiNo()));
+        条件.append(parameter.isJigyoJyokyoHokoku() ? RString.EMPTY : new RString(parameter.getGogitaiNo()));
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOTSUKIKUBUN);
@@ -245,7 +245,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
     }
 
     private RString dateForMat(RDate 年月日) {
-        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 
