@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010.DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter;
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDiv;
@@ -133,13 +132,7 @@ public class HikazeiNenkinTaishoshaJoho {
             if (単一保険者.equals(getHandler(div).広域と市町村判断())) {
                 getValidationHandler(div).validateFor処理状態単一(pairs);
                 getValidationHandler(div).validateForアップロード済みファイル名(pairs);
-            }
-            if (!単一保険者.equals(getHandler(div).広域と市町村判断())) {
-                List<RString> 構成市町村コードリスト = ViewStateHolder.
-                        get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
-                if (構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty()) {
-                    return ResponseData.of(div).addMessage(DbdErrorMessages.処理なし.getMessage()).respond();
-                }
+            } else {
                 getValidationHandler(div).validateFor処理状態広域(pairs);
                 getValidationHandler(div).validateFor取込チェックボックス(pairs);
             }
