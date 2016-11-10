@@ -6,19 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufuhitsuchisho.KyufuhiTsuchishoShutsuryokujun;
-import jp.co.ndensan.reams.db.dbc.business.report.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhitsuchisho.KyufuhiTsuchishoBatchMybitisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufuhitsuchisho.KyufuhiTsuchishoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakoichiran.KyufuhiTuchiHakkoIchiranEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranReportSource;
-import jp.co.ndensan.reams.db.dbc.service.core.kyufuhitsuchisho.KyufuhiTuchiHakkoIchiran;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranCsvEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.kyufuhitsuchisho.KyufuhiTuchiHakkoIchiranCSV;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
@@ -29,70 +22,66 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * 介護給付費福祉用具貸与品目一時TBLを作成します。
+ * 給付費通知発行一覧表のCSVファイルを作成します。
  *
  * @reamsid_L DBC-2280-030 lizhuoxuan
  */
-public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<KyufuhiTuchiHakkoEntity> {
+public class KyufuhiTuchiHakkoIchiranProcess extends BatchProcessBase<KyufuhiTuchiHakkoEntity> {
 
-    private AtesakiPSMSearchKeyBuilder 宛先builder;
     private static final RString 介護給付費福祉用具貸与品目情報取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyufuhitsuchisho.IKyufuhiTsuchishoMapper.getSeikatsuHogoJukyusha");
-    private ShutsuryokujunRelateEntity 出力順Entity;
-    @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_UNWRITTEN_FIELD")
+    private AtesakiPSMSearchKeyBuilder 宛先builder;
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200044");
+    private static final RString コンマ = new RString(",");
+    private static final RString ダブル引用符 = new RString("\"");
+    private static final RString 出力ファイル名
+            = new RString("DBC200044_KyufuhiTuchiHakkoIchiran.csv");
     private KyufuhiTsuchishoProcessParameter processParameter;
-    private boolean tempFlag = true;
-    private RString 被保険者番号;
-    private int index;
-    private int 連番;
-    private static final int 数値_25 = 25;
-    private static final ReportId REPORT_DBC200044 = ReportIdDBC.DBC200044.getReportId();
+    private static final RString 保険者コード_拡張情報 = new RString("0003");
+    private static final RString 被保険者番号_拡張情報 = new RString("被保険者番号");
+    private FileSpoolManager manager;
+    private RString eucFilePath;
+    private List<PersonalData> personalDataList;
+    private boolean flag = true;
     @BatchWriter
-    private BatchReportWriter<KyufuhiTuchiHakkoIchiranReportSource> batchWrite;
-    private ReportSourceWriter<KyufuhiTuchiHakkoIchiranReportSource> reportSourceWriter;
-
-    @Override
-    protected void initialize() {
-        被保険者番号 = RString.EMPTY;
-        index = 0;
-        連番 = 0;
-        出力順Entity = get出力順項目();
-    }
+    private CsvWriter<KyufuhiTuchiHakkoIchiranCsvEntity> eucCsvWriter;
 
     @Override
     protected IBatchReader createReader() {
-        List<RString> pageBreakKeys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
-        if (pageBreakKeys != null && !pageBreakKeys.isEmpty()) {
-            batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC200044.value()).
-                    addBreak(new BreakerCatalog<KyufuhiTuchiHakkoIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
-        } else {
-            batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC200044.value()).create();
-        }
-        reportSourceWriter = new ReportSourceWriter(batchWrite);
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
         宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
         宛先builder.set基準日(new FlexibleDate(processParameter.get処理年月日()));
         宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(宛先builder.build());
-        processParameter.setOrderBy(出力順Entity.get出力順OrderBy());
         KyufuhiTsuchishoBatchMybitisParameter mybatisParam = processParameter.
                 toKyufuhiTsuchishoBatchMybitisParameter(new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()),
                         get宛名PSM検索きー());
@@ -100,45 +89,65 @@ public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<Kyu
     }
 
     @Override
-    protected void process(KyufuhiTuchiHakkoEntity entity) {
-        if (!被保険者番号.equals(entity.get被保険者番号())) {
-            連番++;
-        }
-        tempFlag = false;
-        KyufuhiTuchiHakkoIchiran hakkoIchiran = new KyufuhiTuchiHakkoIchiran();
-        KyufuhiTuchiHakkoIchiranEntity coverEntity = hakkoIchiran.帳票データ作成2(entity, processParameter, 出力順Entity);
-        coverEntity.set帳票連番(new RString(連番));
-        boolean isBreak = isBreak(entity);
-        if (!isBreak || index % 数値_25 == 0) {
-            coverEntity.set被保険者番号(entity.get被保険者番号());
-        } else if (!isBreak) {
-            coverEntity.set被保険者番号(RString.EMPTY);
-        }
-        index++;
-        被保険者番号 = entity.get被保険者番号();
-        KyufuhiTuchiHakkoIchiranReport report = new KyufuhiTuchiHakkoIchiranReport(coverEntity);
-        report.writeBy(reportSourceWriter);
+    protected void initialize() {
+        personalDataList = new ArrayList<>();
     }
 
-    private boolean isBreak(KyufuhiTuchiHakkoEntity entity) {
-        return 被保険者番号.equals(entity.get被保険者番号());
+    @Override
+    protected void createWriter() {
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+        eucCsvWriter = BatchWriters.csvWriter(KyufuhiTuchiHakkoIchiranCsvEntity.class)
+                .filePath(eucFilePath)
+                .setDelimiter(コンマ)
+                .setEnclosure(ダブル引用符)
+                .setEncode(Encode.UTF_8withBOM)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(true)
+                .build();
+    }
+
+    @Override
+    protected void process(KyufuhiTuchiHakkoEntity entity) {
+        if (flag) {
+            KyufuhiTuchiHakkoIchiranCsvEntity csvEntity = new KyufuhiTuchiHakkoIchiranCsvEntity();
+            csvEntity.set作成日時(RDate.getNowDate().toDateString());
+            eucCsvWriter.writeLine(csvEntity);
+        }
+        eucCsvWriter.writeLine(new KyufuhiTuchiHakkoIchiranCSV().csvファイル作成(entity));
+        if (!RString.isNullOrEmpty(entity.get被保険者番号())) {
+            personalDataList.add(toPersonalData(entity));
+        }
     }
 
     @Override
     protected void afterExecute() {
-        if (tempFlag) {
-            KyufuhiTuchiHakkoIchiran hakkoIchiran = new KyufuhiTuchiHakkoIchiran();
-            KyufuhiTuchiHakkoIchiranEntity coverEntity = hakkoIchiran.帳票データ作成1(processParameter, 出力順Entity);
-            KyufuhiTuchiHakkoIchiranReport report = new KyufuhiTuchiHakkoIchiranReport(coverEntity);
-            report.writeBy(reportSourceWriter);
+        if (!flag) {
+            eucCsvWriter.close();
+            manager.spool(eucFilePath);
+        } else {
+            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            eucCsvWriter.close();
+            manager.spool(eucFilePath, log);
         }
     }
 
-    private ShutsuryokujunRelateEntity get出力順項目() {
-        return ReportUtil.get出力順情報(KyufuhiTsuchishoShutsuryokujun.ShutsuryokujunEnum.class,
-                SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100041.getReportId(),
-                processParameter.getShutsuryokujunId());
+    private PersonalData toPersonalData(KyufuhiTuchiHakkoEntity entity) {
+        if (RString.isNullOrEmpty(entity.get被保険者番号())) {
+            if (entity.getAtesakiEntity() == null) {
+                return PersonalData.of(ShikibetsuCode.EMPTY);
+            } else {
+                return PersonalData.of(entity.getAtesakiEntity().getShikibetsuCode());
+            }
+        } else {
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code(保険者コード_拡張情報), 被保険者番号_拡張情報, entity.get被保険者番号());
+            if (entity.getAtesakiEntity() == null) {
+                return PersonalData.of(ShikibetsuCode.EMPTY);
+            } else {
+                return PersonalData.of(entity.getAtesakiEntity().getShikibetsuCode(), expandedInfo);
+            }
+        }
     }
 
     private IShikibetsuTaishoPSMSearchKey get宛名PSM検索きー() {

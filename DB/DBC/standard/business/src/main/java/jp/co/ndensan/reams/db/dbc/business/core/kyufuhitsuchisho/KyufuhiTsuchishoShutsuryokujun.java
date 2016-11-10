@@ -23,27 +23,27 @@ public class KyufuhiTsuchishoShutsuryokujun {
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString("shutsuryokujun_1"), new RString("\"Atesaki_yubinNo\"")),
+        郵便番号(new RString("0001"), new RString("shutsuryokujun_1"), new RString("\"yubinno\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("shutsuryokujun_2"), new RString("\"Atesaki_choikiCode\"")),
+        町域コード(new RString("0002"), new RString("shutsuryokujun_2"), new RString("\"choikicode\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("shutsuryokujun_3"), new RString("\"Atesaki_gyoseikuCode\"")),
+        行政区コード(new RString("0004"), new RString("shutsuryokujun_3"), new RString("\"gyoseikucode\"")),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString("shutsuryokujun_4"), new RString("\"setaiCode\"")),
+        世帯コード(new RString("0008"), new RString("shutsuryokujun_4"), new RString("\"setaicode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("shutsuryokujun_5"), new RString("\"kanaMeisho\"")),
+        氏名５０音カナ(new RString("0010"), new RString("shutsuryokujun_5"), new RString("\"kanameisho\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("shutsuryokujun_6"), new RString("\"shichosonCode\"")),
+        市町村コード(new RString("0016"), new RString("shutsuryokujun_6"), new RString("\"shichosoncode\"")),
         /**
          * 証記載保険者番号
          */
@@ -55,7 +55,7 @@ public class KyufuhiTsuchishoShutsuryokujun {
         /**
          * 資格状態区分
          */
-        資格状態区分(new RString("0131"), new RString("shutsuryokujun_9"), new RString("\"shikakuJotaiKubun\""));
+        資格状態区分(new RString("0131"), new RString("shutsuryokujun_9"), new RString("\"shikakujotaikubun\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
