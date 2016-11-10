@@ -149,7 +149,8 @@ public class IchijiHanteiKekkaJohoHandler {
                 Code suiteiKyufuKubunCode = ichijiHanteiKekkaJoho.toEntity().getSuiteiKyufuKubunCode();
                 RString suiteiKyufuKubunCodeValue = suiteiKyufuKubunCode == null ? RString.EMPTY : suiteiKyufuKubunCode.value();
                 if (suiteiKyufuKubunCode != null
-                        && suiteiKyufuKubunCodeValue != null) {
+                        && suiteiKyufuKubunCodeValue != null
+                        && !suiteiKyufuKubunCode.isEmpty()) {
                     div.getTxtKyufuKbn().setValue(
                             SuiteiKyufuKubunCode.toValue(suiteiKyufuKubunCodeValue).get名称());
                 }
