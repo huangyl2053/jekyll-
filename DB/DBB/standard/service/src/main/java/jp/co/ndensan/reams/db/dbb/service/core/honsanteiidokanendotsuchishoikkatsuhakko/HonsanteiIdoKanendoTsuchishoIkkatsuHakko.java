@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuch
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.FuchoSyoriTaisho;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KozaFurikaeOutputType;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendotsuchishoikkatsuhakko.IdoFukaJohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -1233,7 +1234,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_口座振替者).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(NotsuKozaShutsuryokuTaisho.toValue(口座振替分出力様式).get名称()));
+                .concat(KozaFurikaeOutputType.toValue(口座振替分出力様式).get名称()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         if (定値区分_0.equals(生活保護者先頭出力区分)) {
