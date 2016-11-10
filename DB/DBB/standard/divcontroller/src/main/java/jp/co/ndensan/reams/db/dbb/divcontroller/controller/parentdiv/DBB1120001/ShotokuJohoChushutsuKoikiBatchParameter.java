@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -94,16 +97,32 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      * @param div ShotokuJohoChushutsuKoikiBatchParameterDiv
      * @return ResponseData
      */
+    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onclick_checkRegister(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
-        RString path = new RString(SharedFile.getBasePath() + File.separator);
-        File file = new File(path.toString());
-        if (!file.exists()) {
-            throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
-                    .replace(DEC05F001またはDEE01F001.toString()).evaluate());
-        } else if (!file.getName().startsWith(DEC05F001.toString()) || !file.getName().startsWith(DEE01F001.toString())) {
-            throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
-                    .replace(DEC05F001またはDEE01F001.toString()).evaluate());
+        List<UzT0885SharedFileEntryEntity> 国保List = SharedFile.searchSharedFile(DEC05F001);
+        List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(DEE01F001);
+        for (UzT0885SharedFileEntryEntity entity : 国保List) {
+            国保情報List.add(entity);
+        }
+        for (UzT0885SharedFileEntryEntity entity : 国保情報List) {
+            ReadOnlySharedFileEntryDescriptor descriptor
+                    = ReadOnlySharedFileEntryDescriptor.fromEntity(entity);
+            RString path = SharedFile.getDirectAccessPath(descriptor);
+            FilesystemPath filesystemPath = SharedFile.copyToLocal(descriptor, FilesystemPath.fromString(path));
+            File file = new File(filesystemPath.toString());
+            int count = 1;
+            File[] files = file.listFiles();
+            for (File file1 : files) {
+                if (file1.getName().startsWith(DEE01F001.toString()) || file1.getName().startsWith(DEC05F001.toString())) {
+                    count++;
+                    continue;
+                }
+                if (count <= 1) {
+                    throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
+                            .replace(DEC05F001またはDEE01F001.toString()).evaluate());
+                }
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -112,8 +131,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      * 「実行する」を押下場合、DBB112002 バッチを起動します。
      *
      * @param div ShotokuJohoChushutsuKoikiBatchParameterDiv
-     * @return
-     * ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter>
+     * @return ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter>
      */
     public ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter> onclick_batchRegister_DBB112002(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
