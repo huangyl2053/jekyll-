@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.Futa
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HanteiTaishoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HihokenshaNoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.RiyoshaFutanWariaiTempUnionEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.TsukibetsuHanteiTaishoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.KonkaiRiyoshaFutanWariaiJohoTempEntity;
@@ -116,9 +117,9 @@ public interface IRiyoshaFutanwariaiMapper {
      * 処理詳細8負担割合判定マージ
      *
      * @param parameter DBC180020MyBatisParameter
-     * @return List<RiyoshaFutanWariaiMeisaiTempEntity>
+     * @return List<RiyoshaFutanWariaiTempUnionEntity>
      */
-    List<RiyoshaFutanWariaiMeisaiTempEntity> select負担割合判定マージ(DBC180020MyBatisParameter parameter);
+    List<RiyoshaFutanWariaiTempUnionEntity> select負担割合判定マージ(DBC180020MyBatisParameter parameter);
 
     /**
      * 月別負担割合作成新の作成<br/ >

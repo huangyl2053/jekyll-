@@ -60,7 +60,6 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
     private HihokenshaNo nowNo;
     private FlexibleYear nendo;
     private int rirekiNo;
-    private int edaNo;
     private RiyoshaFutanWariaiHanteiCsvEditor csvEditor;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -78,7 +77,6 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
     @Override
     protected void initialize() {
         existingFlag = false;
-        edaNo = 0;
         nendo = new FlexibleYear(parameter.getTaishoNendo().toDateString());
     }
 
@@ -108,23 +106,22 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
     @Override
     protected void usualProcess(FutanWariaiRelateEntity entity) {
         existingFlag = true;
-        if (getBefore() == null) {
-            return;
-        }
         List<TsukibetsuFutanWariaiTempEntity> 月別負担割合新リスト = entity.get月別負担割合新();
         List<TsukibetsuFutanWariaiTempEntity> 月別負担割合現リスト = entity.get月別負担割合現();
-        if (subProcess(月別負担割合新リスト, 月別負担割合現リスト)) {
+        if (csvOutputHandle(月別負担割合新リスト, 月別負担割合現リスト)) {
             return;
         }
-        RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細 = getBefore().get利用者負担割合明細();
-        beforeNo = 利用者負担割合明細.getHihokenshaNo();
         nowNo = entity.get利用者負担割合明細().getHihokenshaNo();
-        rirekiNo = 月別負担割合現リスト.get(0).getRirekiNo() + 1;
-        loopHandle(利用者負担割合明細, getBefore());
-
+        if (getBefore() == null) {
+            beforeNo = null;
+            loopHandle(entity);
+            return;
+        }
+        beforeNo = getBefore().get利用者負担割合明細().getHihokenshaNo();
+        loopHandle(entity);
     }
 
-    private boolean subProcess(List<TsukibetsuFutanWariaiTempEntity> 月別負担割合新リスト,
+    private boolean csvOutputHandle(List<TsukibetsuFutanWariaiTempEntity> 月別負担割合新リスト,
             List<TsukibetsuFutanWariaiTempEntity> 月別負担割合現リスト) {
         if (月別負担割合新リスト.isEmpty() || 月別負担割合現リスト.isEmpty()) {
             return true;
@@ -162,42 +159,54 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
         if (!existingFlag) {
             return;
         }
-        List<TsukibetsuFutanWariaiTempEntity> 月別負担割合新リスト = getBefore().get月別負担割合新();
-        List<TsukibetsuFutanWariaiTempEntity> 月別負担割合現リスト = getBefore().get月別負担割合現();
-        if (subProcess(月別負担割合新リスト, 月別負担割合現リスト)) {
-            return;
-        }
-        loopHandle(getBefore().get利用者負担割合明細(), getBefore());
+        eucCsvWriter.close();
+        manager.spool(eucFilePath);
     }
 
     @Override
     protected void keyBreakProcess(FutanWariaiRelateEntity t) {
     }
 
-    private void loopHandle(RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細, FutanWariaiRelateEntity entity) {
-        edaNo++;
-        if (beforeNo == null || nowNo == null) {
-            rirekiNo = getBefore().get月別負担割合現().get(0).getRirekiNo() + 1;
+    private int getMaxRirekiNo(List<TsukibetsuFutanWariaiTempEntity> 月別負担割合現リスト) {
+        return 月別負担割合現リスト == null || 月別負担割合現リスト.isEmpty() ? 1 : 月別負担割合現リスト.get(0).getRirekiNo() + 1;
+    }
+
+    private void loopHandle(FutanWariaiRelateEntity nowEntity) {
+        List<TsukibetsuFutanWariaiTempEntity> 月別負担割合現リスト = nowEntity.get月別負担割合現();
+        if (beforeNo == null || !nowNo.equals(beforeNo)) {
+            rirekiNo = getMaxRirekiNo(月別負担割合現リスト);
+            insert3113Entity(nowEntity.get利用者負担割合明細());
         }
+        insert3114Entity(nowEntity.get利用者負担割合明細());
+    }
+
+    private void insert3113Entity(RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp) {
+        RString koseiJiyu = 利用者負担割合明細Temp.getKoseiJiyu();
         DbT3113RiyoshaFutanWariaiEntity dbt3113Entity = new DbT3113RiyoshaFutanWariaiEntity();
-        DbT3114RiyoshaFutanWariaiMeisaiEntity dbt3114Entity = new DbT3114RiyoshaFutanWariaiMeisaiEntity();
         dbt3113Entity.setNendo(nendo);
-        dbt3113Entity.setHihokenshaNo(利用者負担割合明細.getHihokenshaNo());
+        dbt3113Entity.setHihokenshaNo(利用者負担割合明細Temp.getHihokenshaNo());
         dbt3113Entity.setRirekiNo(rirekiNo);
         dbt3113Entity.setHakoFuyoFlag(false);
         dbt3113Entity.setShokenFlag(false);
         dbt3113Entity.setHanteiYMD(FlexibleDate.getNowDate());
         dbt3113Entity.setHanteiKubun(parameter.getShoriKubun());
-        RString koseiJiyu = 利用者負担割合明細.getKoseiJiyu();
         dbt3113Entity.setKoseiJiyu(RString.isNullOrEmpty(koseiJiyu) ? null : new Code(koseiJiyu));
         dbt3113Entity.setHakoKubun(ZERO);
         dbt3113Entity.setHakoYMD(FlexibleDate.EMPTY);
         dbt3113Entity.setKofuYMD(FlexibleDate.EMPTY);
         dbt3113Entity.setLogicalDeletedFlag(false);
+        if (!parameter.isTestMode()) {
+            利用者負担割合Writer.insert(dbt3113Entity);
+        }
+    }
+
+    private void insert3114Entity(RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細) {
+        RString koseiJiyu = 利用者負担割合明細.getKoseiJiyu();
+        DbT3114RiyoshaFutanWariaiMeisaiEntity dbt3114Entity = new DbT3114RiyoshaFutanWariaiMeisaiEntity();
         dbt3114Entity.setNendo(nendo);
         dbt3114Entity.setHihokenshaNo(利用者負担割合明細.getHihokenshaNo());
         dbt3114Entity.setRirekiNo(rirekiNo);
-        dbt3114Entity.setEdaNo(edaNo);
+        dbt3114Entity.setEdaNo(利用者負担割合明細.getEdaNo());
         dbt3114Entity.setShikakuKubun(利用者負担割合明細.getShikakuKubun());
         dbt3114Entity.setFutanWariaiKubun(利用者負担割合明細.getFutanWariaiKubun());
         dbt3114Entity.setYukoKaishiYMD(利用者負担割合明細.getYukoKaishiYMD());
@@ -211,7 +220,6 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
         dbt3114Entity.setSetaiCd(利用者負担割合明細.getSetaiCd());
         dbt3114Entity.setLogicalDeletedFlag(false);
         if (!parameter.isTestMode()) {
-            利用者負担割合Writer.insert(dbt3113Entity);
             利用者負担割合明細Writer.insert(dbt3114Entity);
         }
         KonkaiRiyoshaFutanWariaiJohoTempEntity insertTemp = new KonkaiRiyoshaFutanWariaiJohoTempEntity();
@@ -229,11 +237,6 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
         insertTemp.setSonotaGokeiShotokuKingaku(nonullDecimal(dbt3114Entity.getSonotanoGoukeiShotokuKingakuGoukei()));
         insertTemp.setKoseiJiyu(RString.isNullOrEmpty(koseiJiyu) ? null : koseiJiyu);
         今回利用者負担割合情報Temp.insert(insertTemp);
-        if (beforeNo != null && !beforeNo.equals(nowNo)) {
-            rirekiNo = entity.get月別負担割合現().get(0).getRirekiNo() + 1;
-        } else if (beforeNo != null && beforeNo.equals(nowNo)) {
-            rirekiNo++;
-        }
     }
 
     private Decimal nonullDecimal(Decimal dec) {

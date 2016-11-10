@@ -95,7 +95,7 @@ public class FutanWariaiKonkyoLoginProcess extends BatchKeyBreakBase<DbT3115Saku
         dbt3115Entity.setRirekiNo(rirekiNo);
         dbt3115Entity.setEdaNo(edaNo);
         dbt3115Entity.setSetaiinHihokenshaNo(before.get世帯員被保険者番号());
-        dbt3115Entity.setSetaiinShotokuRirekiNo(before.get元履歴番号());
+        dbt3115Entity.setSetaiinShotokuRirekiNo(before.get世帯員所得履歴番号());
         if (dbt3115Entity.getSetaiinHihokenshaNo() == null || dbt3115Entity.getSetaiinShotokuRirekiNo() == null) {
             return;
         }
