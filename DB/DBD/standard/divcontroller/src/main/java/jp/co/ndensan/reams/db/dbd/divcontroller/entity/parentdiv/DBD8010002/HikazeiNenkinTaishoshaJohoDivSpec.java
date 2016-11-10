@@ -79,6 +79,15 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
                 }
             },
     /**
+     * 市町村コードチェック。
+     */
+    市町村コードチェック {
+                @Override
+                public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
+                    return true;
+                }
+            },
+    /**
      * 年次ファイル通知内容チェック。
      */
     年次ファイル通知内容チェック {
