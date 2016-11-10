@@ -81,7 +81,7 @@ public class HoshushiharaiJumbiValidationHandler {
 
         実績期間チェック(UrErrorMessages.終了日が開始日以前),
         振込指定日チェック(UrErrorMessages.期間が不正_追加メッセージあり１, "振込指定日", "実績期間終了日"),
-        出力帳票未指定チェック(UrErrorMessages.選択されていない, "出力帳票が");
+        出力帳票未指定チェック(UrErrorMessages.選択されていない, "出力帳票");
         private final Message message;
 
         private HoshushiharaiJumbiMessages(IMessageGettable message, String... replacements) {
