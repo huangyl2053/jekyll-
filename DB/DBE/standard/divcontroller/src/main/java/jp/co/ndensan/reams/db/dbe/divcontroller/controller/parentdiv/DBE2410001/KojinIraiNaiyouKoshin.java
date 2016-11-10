@@ -35,7 +35,7 @@ public class KojinIraiNaiyouKoshin {
         KojinIraiNaiyouBusiness 前回調査情報 = KojinIraiNaiyouKoshinFinder.createInstance().getZennkaiChousa(申請書管理番号);
         KojinIraiNaiyouBusiness 前回主治医情報 = KojinIraiNaiyouKoshinFinder.createInstance().getZennkaiSyuji(申請書管理番号);
         getHandler(div).onLoad(申請書管理番号, 今回調査情報, 今回主治医情報, 前回調査情報, 前回主治医情報);
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号.value());
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
         return ResponseData.of(div).respond();
     }
 
