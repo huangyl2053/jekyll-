@@ -129,14 +129,14 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     private void 編集後仮算定通知書共通情報設定(KariNonyuTsuchishoHakkoIchiranSource source,
             final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
         final EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後 = 編集後仮算定通知書共通情報.get更正後();
-        if (更正後.get保険料率() != null) {
+        if (!RString.isNullOrEmpty(更正後.get保険料率())) {
             source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(new Decimal(更正後.get保険料率().toString()), 0);
         }
         List<UniversalPhase> 普徴期別金額リスト = 更正後.get更正後普徴期別金額リスト();
         if (普徴期別金額リスト != null) {
             当期編集(普徴期別金額リスト, source);
         }
-        if (更正後.get生保開始日_西暦() != null) {
+        if (!RString.isNullOrEmpty(更正後.get生保開始日_西暦())) {
             source.listUpper_12 = new FlexibleDate(new RDate(更正後.get生保開始日_西暦().toString()).toDateString()).wareki().toDateString();
         }
         source.listUpper_13 = RString.EMPTY;
