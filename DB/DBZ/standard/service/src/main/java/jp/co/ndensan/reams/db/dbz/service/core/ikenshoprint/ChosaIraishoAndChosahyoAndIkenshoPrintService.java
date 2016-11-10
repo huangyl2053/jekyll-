@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiI
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoReport;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
@@ -27,6 +29,8 @@ import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.Kai
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijikofree.ChosahyoTokkijikoFreeProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijikofree.ChosahyoTokkijikoFreeReport;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
@@ -45,6 +49,7 @@ import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaisho.ChosaIraishoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
@@ -55,6 +60,7 @@ import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei.ShujiiIkens
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -245,19 +251,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 要介護認定調査票（特記事項）を出力します。
      *
      * @param 認定調査票_特記事項List 認定調査票_概況調査List
+     * @param id 帳票ID
      */
-    public void print認定調査票_特記事項(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
-//        List<ChosahyoTokkijikoReport> list = new ArrayList<>();
-//        if (!認定調査票_特記事項List.isEmpty()) {
-//            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
-//        }
-//        ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
-//        try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
-//            for (ChosahyoTokkijikoReport report : list) {
-//                ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-//                report.writeBy(reportSourceWriter);
-//            }
-//        }
+    public void print認定調査票_特記事項(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List, ReportId id) {
+        List<ChosahyoTokkijikoReport> list = new ArrayList<>();
+        if (!認定調査票_特記事項List.isEmpty()) {
+            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List, id));
+        }
+        ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty(id);
+        try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
+            for (ChosahyoTokkijikoReport report : list) {
+                ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
     }
 
     /**
@@ -419,14 +426,15 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 主治医意見書記入用紙を印刷します。
      *
      * @param items 主治医意見書記入用紙_帳票クラスパラメータクラス
+     * @param id 帳票ID
      */
-    public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> items) {
-//        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
-//        try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-//            ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-//            IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(items);
-//            report.writeBy(reportSourceWriter);
-//        }
+    public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> items, ReportId id) {
+        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty(id);
+        try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(items, id);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     /**

@@ -111,7 +111,7 @@ public class HokenryoDankaiHanteiCore {
      */
     protected static TsukibetsuHokenryoDankai 出力データ作成(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter, RString dankaiResult) {
 
-        return new TsukibetsuHokenryoDankai(hokenryoDankaiHanteiParameter.getSeigyoJoho().getHokenryoDankaiList().getBy段階Index(dankaiResult).get段階区分());
+        return new TsukibetsuHokenryoDankai(dankaiResult);
     }
 
     private void 特例対象判定判断(List<IHanteiHoho> hanteihohoList, TsukibetsuHokenryoDankai tsukibetsuHokenryoDankai) {

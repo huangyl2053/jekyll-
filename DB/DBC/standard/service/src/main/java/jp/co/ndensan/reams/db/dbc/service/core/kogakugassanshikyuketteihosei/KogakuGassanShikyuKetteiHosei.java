@@ -465,23 +465,23 @@ public class KogakuGassanShikyuKetteiHosei {
     public AuthorityItemResult get市町村セキュリティ情報(RString reamsLoginId, RString 保険者構成) {
         AuthorityItemResult result = new AuthorityItemResult();
         if (TWO.equals(保険者構成)) {
-            List<AuthorityItem> 市町村識別list = ShichosonSecurityJoho.getShichosonShikibetsuId(reamsLoginId);
-            SearchResult<ShichosonShikibetsuIDniYoruShichosonJoho> 市町村情報取得 = KoikiShichosonJohoFinder.
-                    createInstance().loginUserShichosonJoho(市町村識別list.get(0).getItemId());
-            if (市町村情報取得.records() != null && !市町村情報取得.records().isEmpty()) {
-                result.setWk保険者番号(市町村情報取得.records().get(0).get証記載保険者番号());
-            }
-            result.setWk構成市町村情報(市町村情報取得.records());
+            setResult(reamsLoginId, result);
         } else if (ONE.equals(保険者構成)) {
-            List<AuthorityItem> 市町村識別list = ShichosonSecurityJoho.getShichosonShikibetsuId(reamsLoginId);
-            SearchResult<ShichosonShikibetsuIDniYoruShichosonJoho> 市町村情報取得 = KoikiShichosonJohoFinder.
-                    createInstance().loginUserShichosonJoho(市町村識別list.get(0).getItemId());
-            if (市町村情報取得.records() != null && !市町村情報取得.records().isEmpty()) {
-                result.setWk保険者番号(市町村情報取得.records().get(0).get証記載保険者番号());
-            }
-            result.setWk構成市町村情報(市町村情報取得.records());
+            setResult(reamsLoginId, result);
         }
         return result;
+    }
+
+    private void setResult(RString reamsLoginId, AuthorityItemResult result) {
+        List<AuthorityItem> 市町村識別list = ShichosonSecurityJoho.getShichosonShikibetsuId(reamsLoginId);
+        if (市町村識別list != null && !市町村識別list.isEmpty()) {
+            SearchResult<ShichosonShikibetsuIDniYoruShichosonJoho> 市町村情報取得 = KoikiShichosonJohoFinder.
+                    createInstance().loginUserShichosonJoho(市町村識別list.get(0).getItemId());
+            if (市町村情報取得.records() != null && !市町村情報取得.records().isEmpty()) {
+                result.setWk保険者番号(市町村情報取得.records().get(0).get証記載保険者番号());
+                result.setWk構成市町村情報(市町村情報取得.records());
+            }
+        }
     }
 
     /**

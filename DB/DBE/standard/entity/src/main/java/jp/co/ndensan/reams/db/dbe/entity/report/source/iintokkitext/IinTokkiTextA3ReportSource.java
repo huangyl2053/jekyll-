@@ -588,7 +588,8 @@ public class IinTokkiTextA3ReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        shinseiCount,
+        two_tokkiText1,
+        two_tokkiImg1,
 
     }
 

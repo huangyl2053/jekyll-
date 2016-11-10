@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.a4tate;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.AfterEditInformation;
@@ -13,6 +16,10 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSante
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsuKomokuHenshu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.entity.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReportSource;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -28,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
         extends Report<KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReportSource> {
 
-    private static final RString SPACE = new RString(" ");
+    private static final int ROWNUM = 14;
     private final List<KaigoHokenryogakuHenkoKenChushiTsuchishoBusiness> items;
 
     /**
@@ -56,23 +63,37 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
             List<AfterEditInformation> 普徴納期情報リスト = 編集後本算定通知書共通情報.get普徴納期情報リスト();
             HonSanteiTsuchiShoKyotsuKomokuHenshu honSantei = new HonSanteiTsuchiShoKyotsuKomokuHenshu();
             List<RString> 特徴期リスト = honSantei.create特徴期リスト();
-            List<Tsuki> 特徴月リス = honSantei.create特徴月リスト(特徴期リスト);
+            特徴期リスト = sort期(特徴期リスト);
+            List<Tsuki> 特徴月リス = create特徴月リスト(特徴期リスト);
             List<RString> 普徴期リスト = honSantei.create普徴期リスト();
-            List<Tsuki> 普徴月リスト = honSantei.create普徴月リスト(普徴期リスト);
-            for (int i = 1; i <= 特徴期リスト.size(); i++) {
+            普徴期リスト = sort期(普徴期リスト);
+            List<Tsuki> 普徴月リスト = create普徴月リスト(普徴期リスト);
+            for (int i = 1; i <= ROWNUM; i++) {
                 KibetsuBusiness kibetsuBusiness = new KibetsuBusiness();
-                RString 普徴期 = 普徴期リスト.get(i - 1);
-                RString 普徴月 = 普徴月リスト.get(i - 1).getコード();
-                kibetsuBusiness.setListKibetsu_1(普徴期.padRight(SPACE, 2));
-                kibetsuBusiness.setListKibetsu_2(普徴月);
-                kibetsuBusiness.setListKibetsu_3(get納期限(普徴期, 普徴納期情報リスト));
-                set普徴期別金額(kibetsuBusiness, 普徴期, 更正前_普徴期別金額リスト, 更正後_普徴期別金額リスト);
-                RString 特徴期 = 特徴期リスト.get(i - 1);
-                RString 特徴月 = 特徴月リス.get(i - 1).getコード();
-                kibetsuBusiness.setListKibetsu_6(特徴期.padRight(SPACE, 2));
-                kibetsuBusiness.setListKibetsu_7(特徴月);
-                set特徴期別金額(kibetsuBusiness, 特徴期, 更正前_特徴期別金額リスト, 更正後_特徴期別金額リスト);
-                kibetsuBusiness.setListZuiji_1(get随時(特徴期, 普徴納期情報リスト));
+                boolean flag = true;
+                if (i <= 普徴期リスト.size()) {
+                    flag = false;
+                    RString 普徴期 = 普徴期リスト.get(i - 1);
+                    Tsuki 普徴月Enum = 普徴月リスト.get(i - 1);
+                    RString 普徴月 = get普徴月コード(普徴月Enum);
+
+                    kibetsuBusiness.setListKibetsu_1(format月と期(普徴期));
+                    kibetsuBusiness.setListKibetsu_2(format月と期(普徴月));
+                    kibetsuBusiness.setListKibetsu_3(get納期限(普徴期, 普徴納期情報リスト));
+                    set普徴期別金額(kibetsuBusiness, 普徴期, 更正前_普徴期別金額リスト, 更正後_普徴期別金額リスト);
+                    kibetsuBusiness.setListZuiji_1(get随時(普徴期, 普徴納期情報リスト));
+                }
+                if (i <= 特徴期リスト.size()) {
+                    flag = false;
+                    RString 特徴期 = 特徴期リスト.get(i - 1);
+                    RString 特徴月 = 特徴月リス.get(i - 1).getコード();
+                    kibetsuBusiness.setListKibetsu_6(format月と期(特徴期));
+                    kibetsuBusiness.setListKibetsu_7(format月と期(特徴月));
+                    set特徴期別金額(kibetsuBusiness, 特徴期, 更正前_特徴期別金額リスト, 更正後_特徴期別金額リスト);
+                }
+                if (flag) {
+                    break;
+                }
 
                 KibetsuEditor kibetsuEditor = new KibetsuEditor(kibetsuBusiness);
 
@@ -85,6 +106,66 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
                 reportSourceWriter.writeLine(builder);
             }
         }
+    }
+
+    private List<Tsuki> create普徴月リスト(List<RString> 普徴期リスト) {
+        List<Tsuki> tsukiList = new ArrayList<>();
+        KitsukiList kitsukiList = new FuchoKiUtil().get期月リスト();
+        for (RString 普徴期 : 普徴期リスト) {
+            List<Kitsuki> kitsukiのlist = kitsukiList.get期の月(Integer.parseInt(String.valueOf(普徴期)));
+            if (!kitsukiのlist.isEmpty()) {
+                tsukiList.add(kitsukiのlist.get(kitsukiのlist.size() - 1).get月());
+            }
+        }
+        return tsukiList;
+    }
+
+    private List<Tsuki> create特徴月リスト(List<RString> 特徴期リスト) {
+        List<Tsuki> tsukiList = new ArrayList<>();
+        KitsukiList kitsukiList = new TokuchoKiUtil().get期月リスト();
+        for (RString 特徴期 : 特徴期リスト) {
+            List<Kitsuki> kitsukiのlist = kitsukiList.get期の月(Integer.parseInt(String.valueOf(特徴期)));
+            if (!kitsukiのlist.isEmpty()) {
+                tsukiList.add(kitsukiのlist.get(kitsukiのlist.size() - 1).get月());
+            }
+        }
+        return tsukiList;
+    }
+
+    private RString format月と期(RString value) {
+        return new RString(Integer.valueOf(value.toString())).padLeft(RString.HALF_SPACE, 2);
+    }
+
+    private RString get普徴月コード(Tsuki 普徴月) {
+        if (Tsuki.翌年度4月 == 普徴月) {
+            return new RString("04");
+        }
+        if (Tsuki.翌年度5月 == 普徴月) {
+            return new RString("05");
+        }
+        return 普徴月.getコード();
+    }
+
+    private List<RString> sort期(List<RString> 期リスト) {
+        List<RString> list = new ArrayList<>();
+        for (RString 期 : 期リスト) {
+            if (Integer.parseInt(期.toString()) == 0 || list.contains(期)) {
+                continue;
+            }
+            list.add(期);
+        }
+        Collections.sort(list, new Comparator<RString>() {
+            @Override
+            public int compare(RString arg0, RString arg1) {
+                if (Integer.parseInt(arg0.toString()) < Integer.parseInt(arg1.toString())) {
+                    return -1;
+                } else if (Integer.parseInt(arg1.toString()) < Integer.parseInt(arg0.toString())) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
+        return list;
     }
 
     private RString get納期限(RString 期, List<AfterEditInformation> 普徴納期情報リスト) {

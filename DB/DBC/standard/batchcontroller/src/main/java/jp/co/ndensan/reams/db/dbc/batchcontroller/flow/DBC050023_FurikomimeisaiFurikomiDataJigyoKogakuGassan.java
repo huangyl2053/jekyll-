@@ -82,7 +82,7 @@ public class DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassan
         processParameter.setシステム日時(YMDHMS.now());
         processParameter.set処理名(ShoriName.給付振込データ作成_事業高額合算);
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        if (RString.isNullOrEmpty(getParameter().get出力順ID())) {
+        if (!RString.isNullOrEmpty(getParameter().get出力順ID())) {
             IOutputOrder 出力順情報 = finder.get出力順(
                     SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200003.getReportId(), Long.parseLong(getParameter().get出力順ID().toString()));
             if (出力順情報 == null) {

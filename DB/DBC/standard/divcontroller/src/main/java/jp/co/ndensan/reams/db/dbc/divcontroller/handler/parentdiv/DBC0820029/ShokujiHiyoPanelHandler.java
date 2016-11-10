@@ -359,14 +359,30 @@ public class ShokujiHiyoPanelHandler {
      */
     public ShoukanharaihishinseikensakuParameter putViewState(HihokenshaNo 被保険者番号,
             RString 整理番号) {
+        FlexibleYearMonth サービス年月 = FlexibleYearMonth.EMPTY;
+        JigyoshaNo 事業者番号 = JigyoshaNo.EMPTY;
+        RString 様式番号 = RString.EMPTY;
+        RString 明細番号 = RString.EMPTY;
+        if (div.getPanelHead().getTxtServiceTeikyoYM() != null) {
+            サービス年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().
+                    toDateString().substring(0, SIX));
+        }
+        if (div.getPanelHead().getTxtJigyoshaBango() != null) {
+            事業者番号 = new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue());
+        }
+        if (div.getPanelHead().getTxtShomeisho() != null) {
+            様式番号 = div.getPanelHead().getTxtShomeisho().getValue();
+        }
+        if (div.getPanelHead().getTxtMeisaiBango().getValue() != null) {
+            明細番号 = div.getPanelHead().getTxtMeisaiBango().getValue();
+        }
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
                 被保険者番号,
-                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString()
-                        .substring(0, SIX)),
+                サービス年月,
                 整理番号,
-                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
-                div.getPanelHead().getTxtShomeisho().getValue(),
-                div.getPanelHead().getTxtMeisaiBango().getValue(),
+                事業者番号,
+                様式番号,
+                明細番号,
                 null);
         return paramter;
     }

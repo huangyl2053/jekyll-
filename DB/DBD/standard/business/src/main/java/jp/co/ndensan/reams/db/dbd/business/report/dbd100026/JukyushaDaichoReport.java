@@ -189,7 +189,7 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
             int page = 1;
             int pageMax = 1;
             for (int index = 0; index < NOCOUNT_7; index++) {
-                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax);
+                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax, ONE);
                 IJukyushaDaichoBuilder builder = new JukyushaDaichoBuilder(bodyEditor);
                 writer.writeLine(builder);
             }
@@ -209,7 +209,7 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
 
         for (int page = 1; page <= pageMax; page++) {
             for (int index = NOCOUNT_7 * (page - 1); index < NOCOUNT_7 * page; index++) {
-                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax);
+                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax, ZERO);
                 IJukyushaDaichoBuilder builder = new JukyushaDaichoBuilder(bodyEditor);
                 writer.writeLine(builder);
             }

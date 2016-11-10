@@ -57,6 +57,7 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<JigyouHo
     @Override
     protected void process(JigyouHoukokuTokeiRelateEntity entity) {
         boolean flg = false;
+        boolean flag = false;
         for (DbT7021JigyoHokokuTokeiDataEntity dbT7021Entity : dbT7021EntityList) {
             flg = codeToRString(dbT7021Entity.getShukeiNo()).equals(entity.getShukeiNum())
                     && dbT7021Entity.getTateNo().equals(entity.getTateNo())
@@ -64,9 +65,10 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<JigyouHo
             if (flg) {
                 dbT7021Entity = business.set事業報告統計データEntity(entity);
                 dbT7021EntityWriter.update(dbT7021Entity);
+                flag = true;
             }
         }
-        if (!flg) {
+        if (!flg && !flag) {
             DbT7021JigyoHokokuTokeiDataEntity dbT7021Entity = business.set事業報告統計データEntity(entity);
             dbT7021Entity.setShukeiTani(new Code("1"));
             dbT7021Entity.setShukeiKomokuMeisho(RString.EMPTY);

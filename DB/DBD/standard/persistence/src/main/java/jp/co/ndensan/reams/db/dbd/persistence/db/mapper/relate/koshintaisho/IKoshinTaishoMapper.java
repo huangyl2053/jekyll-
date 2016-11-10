@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshintaisho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.koshintaisho.KoshinTaishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.SelectSyuuShadeTaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,4 +43,12 @@ public interface IKoshinTaishoMapper {
      * @return DbT4101NinteiShinseiJohoEntity
      */
     DbT4101NinteiShinseiJohoEntity get要介護認定申請情報の取得(RString shinseishoKanriNo);
+    
+    /**
+     * 受給者台帳情報の取得する
+     *
+     * @param shinseishoKanriNo RString
+     * @return DbT4001JukyushaDaichoEntity
+     */
+    DbT4001JukyushaDaichoEntity get受給者台帳情報(RString shinseishoKanriNo);
 }

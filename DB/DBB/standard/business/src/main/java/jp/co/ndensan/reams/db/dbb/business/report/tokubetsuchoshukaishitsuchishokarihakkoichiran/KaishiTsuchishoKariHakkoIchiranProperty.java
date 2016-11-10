@@ -129,6 +129,11 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
         年金コード(new RString("0206"), new RString("年金コード"), FORMAT
                 .concat(new RString("nenkinTokuchoKaifuJoho_nenkinCode")).concat(FORMAT)),
         /**
+         * 生活保護種別
+         */
+        生活保護種別(new RString("0116"), new RString("生活保護種別"), FORMAT
+                .concat(new RString("dbT2015KeisangoJoho_seihofujoShurui")).concat(FORMAT)),
+        /**
          * 納組コード
          */
         納組コード(new RString("0208"), new RString("納組コード"), FORMAT.concat(new RString("caT0714SeikyuHoho_nokumiCode")).concat(FORMAT)),

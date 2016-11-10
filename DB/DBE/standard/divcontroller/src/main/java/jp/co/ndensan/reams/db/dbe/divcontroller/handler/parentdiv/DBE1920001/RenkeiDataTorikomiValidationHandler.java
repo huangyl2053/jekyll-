@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.ChosainJohoDensanCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.ChosainJohoKouroushouCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteiShinseiJohoDensanCsvEntity;
@@ -437,27 +438,33 @@ public class RenkeiDataTorikomiValidationHandler {
     public ValidationMessageControlPairs checkFileName(ValidationMessageControlPairs validPairs,
             boolean is認定申請情報ファイル, boolean is認定調査委託先情報ファイル, boolean is認定調査員情報ファイル,
             boolean is主治医医療機関情報ファイル, boolean is主治医情報ファイル) {
-        for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems()) {
-            if (要介護認定申請連携データ取込みファイル名.equals(row.getFileName()) && !is認定申請情報ファイル) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定申請情報ファイル, div.getUploadArea().getUploadTool()));
+        List<dgTorikomiTaisho_Row> checkitems = div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems();
+        if (checkitems != null && !checkitems.isEmpty()) {
+            for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems()) {
+                if (要介護認定申請連携データ取込みファイル名.equals(row.getFileName()) && !is認定申請情報ファイル) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定申請情報ファイル, div.getUploadArea().getUploadTool()));
+                }
+                if (認定調査委託先データ取込みファイル名.equals(row.getFileName()) && !is認定調査委託先情報ファイル) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getUploadArea().getUploadTool()));
+                }
+                if (認定調査員データ取込みファイル名.equals(row.getFileName()) && !is認定調査員情報ファイル) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate認定調査員情報ファイル, div.getUploadArea().getUploadTool()));
+                }
+                if (主治医医療機関データ取込みファイル名.equals(row.getFileName()) && !is主治医医療機関情報ファイル) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getUploadArea().getUploadTool()));
+                }
+                if (主治医データ取込みファイル名.equals(row.getFileName()) && !is主治医情報ファイル) {
+                    validPairs.add(new ValidationMessageControlPair(
+                            FilecheckMessages.Validate主治医情報ファイル, div.getUploadArea().getUploadTool()));
+                }
             }
-            if (認定調査委託先データ取込みファイル名.equals(row.getFileName()) && !is認定調査委託先情報ファイル) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定調査委託先情報ファイル, div.getUploadArea().getUploadTool()));
-            }
-            if (認定調査員データ取込みファイル名.equals(row.getFileName()) && !is認定調査員情報ファイル) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定調査員情報ファイル, div.getUploadArea().getUploadTool()));
-            }
-            if (主治医医療機関データ取込みファイル名.equals(row.getFileName()) && !is主治医医療機関情報ファイル) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate主治医医療機関情報ファイル, div.getUploadArea().getUploadTool()));
-            }
-            if (主治医データ取込みファイル名.equals(row.getFileName()) && !is主治医情報ファイル) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate主治医情報ファイル, div.getUploadArea().getUploadTool()));
-            }
+        } else {
+            validPairs.add(new ValidationMessageControlPair(
+                    FilecheckMessages.Validate未選択, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
         }
         return validPairs;
     }

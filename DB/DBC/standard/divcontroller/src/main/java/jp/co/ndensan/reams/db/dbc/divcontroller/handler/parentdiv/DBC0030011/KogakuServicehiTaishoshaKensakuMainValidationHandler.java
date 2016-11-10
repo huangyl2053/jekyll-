@@ -46,6 +46,22 @@ public class KogakuServicehiTaishoshaKensakuMainValidationHandler {
     }
 
     /**
+     * 対象データなしチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate対象データなし() {
+        IValidationMessages message = new KogakuServicehiTaishoshaKensakuMainValidator(div).validate対象データなし();
+        return create対象データなしDictionary().check(message);
+    }
+
+    private ValidationDictionary create対象データなしDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(KogakuServicehiTaishoshaKensakuMainMessage.対象データなしチェック,
+                        div.getHihokenshaKensakuJoken().getTxtHihoName()).build();
+    }
+
+    /**
      * 年月を指定入力チェックです。
      *
      * @return {@link ValidationMessageControlPairs}

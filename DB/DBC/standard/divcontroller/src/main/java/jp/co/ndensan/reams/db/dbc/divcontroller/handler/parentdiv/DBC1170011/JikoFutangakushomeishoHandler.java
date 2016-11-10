@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiJokyoKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011.JikoFutangakuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.jikofutangakushomeisho.JikoFutangakushomeishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -220,11 +221,10 @@ public class JikoFutangakushomeishoHandler {
      * @return KogakuGassanShinseisho 再計算
      */
     public KogakuGassanShinseisho get再計算区分() {
-        RString 支給申請書整理番号 = div.getJikoFutanShomeishoSakuseiPrint().getDdlShikyuShinseishoSeiriNo().getSelectedKey();
         FlexibleYear 対象年度 = new FlexibleYear(div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().getSelectedKey());
         RString 被保険者番号 = div.getJikoFutanShomeishoSakusei().getCcdShikakuKihon().get被保険者番号();
         RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        return 高額合算申請書.get再計算区分(new HihokenshaNo(被保険者番号), 保険者番号, 対象年度, 支給申請書整理番号);
+        return 高額合算申請書.get再計算区分(new HihokenshaNo(被保険者番号), 保険者番号, 対象年度);
     }
 
     /**
@@ -249,7 +249,12 @@ public class JikoFutangakushomeishoHandler {
         RString 文書番号 = 高額合算申請書.get文書番号();
         RString タイトル = 高額合算申請書.getタイトル(メニューID);
         高額合算データ.set高額合算データ(kogakuGassanData);
-        高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先());
+        if (メニューID_DBCMN63001.equals(メニューID)) {
+            高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(ReportIdDBC.DBC100050.getReportId()));
+        } else if (メニューID_DBCMNN2001.equals(メニューID)) {
+            高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(ReportIdDBC.DBC100051.getReportId()));
+        }
+
         高額合算データ.set文書番号(文書番号);
         高額合算データ.setタイトル(タイトル);
         高額合算データ.set宛先情報(高額合算申請書.get宛先帳票部品());

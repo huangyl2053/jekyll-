@@ -271,6 +271,7 @@ public class TokkiTextA4ReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        hokenshaNo,
+        two_tokkiText,
+        two_tokkiImg,
     }
 }

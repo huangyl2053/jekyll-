@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -307,11 +308,7 @@ public class GenmenKetteiTsuchiShoPrintService {
             } else {
                 更正前後期割額.set特徴期(期月特徴.get期());
             }
-            if (期月特徴.get月AsInt() < INDEX_TEN) {
-                更正前後期割額.set特徴月(new RString(定数.toString() + 期月特徴.get月AsInt()));
-            } else {
-                更正前後期割額.set特徴月(new RString(String.valueOf(期月特徴.get月AsInt())));
-            }
+            更正前後期割額.set特徴月(get月(期月特徴));
             Decimal 特徴期別金額更正前 = set特徴期別金額更正前(期月特徴.get期(), 減免決定通知書情報);
             if (特徴期別金額更正前 != null) {
                 更正前後期割額.set特徴期別金額更正前(DecimalFormatter
@@ -338,11 +335,7 @@ public class GenmenKetteiTsuchiShoPrintService {
             } else {
                 更正前後期割額.set普徴期(期月普徴.get期());
             }
-            if (期月普徴.get月AsInt() < INDEX_TEN) {
-                更正前後期割額.set普徴月(new RString(定数.toString() + 期月普徴.get月AsInt()));
-            } else {
-                更正前後期割額.set普徴月(new RString(String.valueOf(期月普徴.get月AsInt())));
-            }
+            更正前後期割額.set普徴月(get月(期月普徴));
             Decimal 普徴期別金額更正前 = set普徴期別金額更正前(期月普徴.get期(), 減免決定通知書情報);
             if (普徴期別金額更正前 != null) {
                 更正前後期割額.set普徴期別金額更正前(DecimalFormatter
@@ -365,6 +358,16 @@ public class GenmenKetteiTsuchiShoPrintService {
             更正前後期割額.set普徴期別金額更正後(RString.EMPTY);
         }
         return 更正前後期割額;
+    }
+
+    private RString get月(Kitsuki 期月) {
+        if (期月.get月().equals(Tsuki.翌年度4月)) {
+            return Tsuki._4月.getコード();
+        }
+        if (期月.get月().equals(Tsuki.翌年度5月)) {
+            return Tsuki._5月.getコード();
+        }
+        return 期月.get月().getコード();
     }
 
     /**

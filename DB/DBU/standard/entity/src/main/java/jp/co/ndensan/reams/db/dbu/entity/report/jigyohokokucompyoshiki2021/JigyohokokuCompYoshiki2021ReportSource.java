@@ -58,4 +58,14 @@ public class JigyohokokuCompYoshiki2021ReportSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * 改ページ項目
+     */
+    public enum ReportSourceFields {
+
+        hokenjano,
+        title1,
+        title2
+    }
 }

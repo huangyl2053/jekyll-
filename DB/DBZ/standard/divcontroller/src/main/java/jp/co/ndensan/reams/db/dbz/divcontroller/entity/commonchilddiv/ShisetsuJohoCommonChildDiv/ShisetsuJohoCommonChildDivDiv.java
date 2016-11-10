@@ -81,6 +81,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return radKaigoHokenShisetsu
      */
     @JsonProperty("radKaigoHokenShisetsu")
+    @Override
     public RadioButton getRadKaigoHokenShisetsu() {
         return radKaigoHokenShisetsu;
     }
@@ -90,6 +91,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param radKaigoHokenShisetsu radKaigoHokenShisetsu
      */
     @JsonProperty("radKaigoHokenShisetsu")
+    @Override
     public void setRadKaigoHokenShisetsu(RadioButton radKaigoHokenShisetsu) {
         this.radKaigoHokenShisetsu = radKaigoHokenShisetsu;
     }
@@ -99,6 +101,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return radOtherTokureiShisetsu
      */
     @JsonProperty("radOtherTokureiShisetsu")
+    @Override
     public RadioButton getRadOtherTokureiShisetsu() {
         return radOtherTokureiShisetsu;
     }
@@ -108,6 +111,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param radOtherTokureiShisetsu radOtherTokureiShisetsu
      */
     @JsonProperty("radOtherTokureiShisetsu")
+    @Override
     public void setRadOtherTokureiShisetsu(RadioButton radOtherTokureiShisetsu) {
         this.radOtherTokureiShisetsu = radOtherTokureiShisetsu;
     }
@@ -117,6 +121,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return radTekiyoJyogaiShisetsu
      */
     @JsonProperty("radTekiyoJyogaiShisetsu")
+    @Override
     public RadioButton getRadTekiyoJyogaiShisetsu() {
         return radTekiyoJyogaiShisetsu;
     }
@@ -126,6 +131,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param radTekiyoJyogaiShisetsu radTekiyoJyogaiShisetsu
      */
     @JsonProperty("radTekiyoJyogaiShisetsu")
+    @Override
     public void setRadTekiyoJyogaiShisetsu(RadioButton radTekiyoJyogaiShisetsu) {
         this.radTekiyoJyogaiShisetsu = radTekiyoJyogaiShisetsu;
     }

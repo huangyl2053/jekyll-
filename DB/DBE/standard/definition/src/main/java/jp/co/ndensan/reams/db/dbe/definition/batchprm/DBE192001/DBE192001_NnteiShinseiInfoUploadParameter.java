@@ -40,7 +40,7 @@ public class DBE192001_NnteiShinseiInfoUploadParameter extends BatchParameterBas
     @BatchParameter(key = PATH, name = "格納パス")
     private RString 格納パス;
     @BatchParameter(key = FILEID, name = "共有ファイルID")
-    private RDateTime 共有ファイルID;
+    private List<RDateTime> 共有ファイルIDList;
 
     /**
      * mybatisのパラメータを生成します。

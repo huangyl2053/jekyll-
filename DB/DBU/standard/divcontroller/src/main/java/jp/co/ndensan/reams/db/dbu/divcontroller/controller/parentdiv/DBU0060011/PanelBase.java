@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0060011
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.JigyoHokokuNenpoResult;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
@@ -19,8 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -223,35 +222,44 @@ public class PanelBase {
 
     private ResponseData<PanelBaseDiv> 検索一覧データの設定(PanelBaseDiv baseDiv, List<JigyoHokokuNenpoResult> 事業報告一覧リスト) {
         List<dgHoseitaishoYoshiki_Row> 検索一覧データ = new ArrayList<>();
+        List<SearchData> 検索一覧設定済みデータ = new ArrayList<>();
+
         for (JigyoHokokuNenpoResult result : 事業報告一覧リスト) {
             dgHoseitaishoYoshiki_Row row = new dgHoseitaishoYoshiki_Row();
-            TextBox textBox = new TextBox();
-            textBox.setValue(result.get市町村コード().value());
-            row.setTxtShichosonCode(textBox);
-            TextBoxDate 報告年textBoxDate = new TextBoxDate();
+
+            LasdecCode 市町村コード = result.get市町村コード();
+            row.getTxtShichosonCode().setValue(市町村コード.getColumnValue());
+
             RDate 報告年rDate = new RDate(result.get報告年().getYearValue(), 1, 1);
-            報告年textBoxDate.setValue(報告年rDate);
-            row.setTxtHokokuY(報告年textBoxDate);
-            TextBoxDate 集計対象年TextBoxDate = new TextBoxDate();
+            row.getTxtHokokuY().setValue(報告年rDate);
+
             RDate 集計対象年RDate = new RDate(result.get集計対象年().getYearValue(), 1, 1);
-            集計対象年TextBoxDate.setValue(集計対象年RDate);
-            row.setTxtShukeiY(集計対象年TextBoxDate);
+            row.getTxtShukeiY().setValue(集計対象年RDate);
+
             RString 統計対象区分 = result.get統計対象区分();
             RString 表番号 = result.get表番号().value();
             RString 集計番号 = result.get集計番号().value();
-            RString 様式種類 = get様式種類(統計対象区分, 表番号, 集計番号);
-            row.setTxtToukeiTaishoKubun(様式種類);
-            検索一覧データ.add(row);
+            JigyohokokuNenpoHoseiHyoji 様式種類 = get様式種類(統計対象区分, 表番号, 集計番号);
+            if (様式種類 == null) {
+                continue;
+            }
+
+            row.setTxtToukeiTaishoKubun(様式種類.get名称());
+
+            SearchData searchData = new SearchData(市町村コード, 報告年rDate, 集計対象年RDate, 様式種類);
+            if (!検索一覧設定済みデータ.contains(searchData)) {
+                検索一覧設定済みデータ.add(searchData);
+                検索一覧データ.add(row);
+            }
         }
         baseDiv.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(検索一覧データ);
         return ResponseData.of(baseDiv).respond();
     }
 
-    private RString get様式種類(RString 統計対象区分, RString 表番号, RString 集計番号) {
+    private JigyohokokuNenpoHoseiHyoji get様式種類(RString 統計対象区分, RString 表番号, RString 集計番号) {
         int toketaishokubun = Integer.valueOf(統計対象区分.toString());
         int omoteBango = Integer.valueOf(表番号.toString());
         int shukekeBango = Integer.valueOf(集計番号.toString());
-        RString 様式種類 = RString.EMPTY;
         switch (toketaishokubun) {
             case 統計対象区分_1:
                 return get統計対象区分の1の様式種類(omoteBango, shukekeBango);
@@ -260,15 +268,15 @@ public class PanelBase {
             case 統計対象区分_3:
                 return get統計対象区分の3の様式種類(omoteBango, shukekeBango);
             default:
-                return 様式種類;
+                return null;
         }
     }
 
-    private RString get統計対象区分の1の様式種類(int omoteBango, int shukekeBango) {
-        RString 様式種類 = RString.EMPTY;
-        RString enum事業報告年報補正表示_001 = JigyohokokuNenpoHoseiHyoji.保険者_所得段階別第１号被保険者数.get名称();
-        RString enum事業報告年報補正表示_002 = JigyohokokuNenpoHoseiHyoji.保険者_現物分_市町村特別給付.get名称();
-        RString enum事業報告年報補正表示_003 = JigyohokokuNenpoHoseiHyoji.保険者_保険料収納状況_保険給付支払状況.get名称();
+    private JigyohokokuNenpoHoseiHyoji get統計対象区分の1の様式種類(int omoteBango, int shukekeBango) {
+        JigyohokokuNenpoHoseiHyoji 様式種類 = null;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_001 = JigyohokokuNenpoHoseiHyoji.保険者_所得段階別第１号被保険者数;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_002 = JigyohokokuNenpoHoseiHyoji.保険者_現物分_市町村特別給付;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_003 = JigyohokokuNenpoHoseiHyoji.保険者_保険料収納状況_保険給付支払状況;
         switch (omoteBango) {
             case 表番号_01:
                 switch (shukekeBango) {
@@ -302,11 +310,11 @@ public class PanelBase {
         }
     }
 
-    private RString get統計対象区分の2の様式種類(int omoteBango, int shukekeBango) {
-        RString 様式種類 = RString.EMPTY;
-        RString enum事業報告年報補正表示_101 = JigyohokokuNenpoHoseiHyoji.構成市町村_所得段階別第１号被保険者数.get名称();
-        RString enum事業報告年報補正表示_102 = JigyohokokuNenpoHoseiHyoji.構成市町村_現物分_市町村特別給付.get名称();
-        RString enum事業報告年報補正表示_103 = JigyohokokuNenpoHoseiHyoji.構成市町村_保険料収納状況_保険給付支払状況.get名称();
+    private JigyohokokuNenpoHoseiHyoji get統計対象区分の2の様式種類(int omoteBango, int shukekeBango) {
+        JigyohokokuNenpoHoseiHyoji 様式種類 = null;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_101 = JigyohokokuNenpoHoseiHyoji.構成市町村_所得段階別第１号被保険者数;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_102 = JigyohokokuNenpoHoseiHyoji.構成市町村_現物分_市町村特別給付;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_103 = JigyohokokuNenpoHoseiHyoji.構成市町村_保険料収納状況_保険給付支払状況;
         switch (omoteBango) {
             case 表番号_01:
                 switch (shukekeBango) {
@@ -340,11 +348,11 @@ public class PanelBase {
         }
     }
 
-    private RString get統計対象区分の3の様式種類(int omoteBango, int shukekeBango) {
-        RString 様式種類 = RString.EMPTY;
-        RString enum事業報告年報補正表示_201 = JigyohokokuNenpoHoseiHyoji.旧市町村_所得段階別第１号被保険者数.get名称();
-        RString enum事業報告年報補正表示_202 = JigyohokokuNenpoHoseiHyoji.旧市町村_現物分_市町村特別給付.get名称();
-        RString enum事業報告年報補正表示_203 = JigyohokokuNenpoHoseiHyoji.旧市町村_保険料収納状況_保険給付支払状況.get名称();
+    private JigyohokokuNenpoHoseiHyoji get統計対象区分の3の様式種類(int omoteBango, int shukekeBango) {
+        JigyohokokuNenpoHoseiHyoji 様式種類 = null;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_201 = JigyohokokuNenpoHoseiHyoji.旧市町村_所得段階別第１号被保険者数;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_202 = JigyohokokuNenpoHoseiHyoji.旧市町村_現物分_市町村特別給付;
+        JigyohokokuNenpoHoseiHyoji enum事業報告年報補正表示_203 = JigyohokokuNenpoHoseiHyoji.旧市町村_保険料収納状況_保険給付支払状況;
         switch (omoteBango) {
             case 表番号_11:
                 switch (shukekeBango) {
@@ -384,5 +392,51 @@ public class PanelBase {
 
     private JigyoHokokuNenpoHoseiHakoManager createInstanceOfFinder() {
         return JigyoHokokuNenpoHoseiHakoManager.createInstance();
+    }
+
+    private static class SearchData {
+
+        private final LasdecCode 市町村コード;
+        private final RDate 報告年rDate;
+        private final RDate 集計対象年rDate;
+        private final JigyohokokuNenpoHoseiHyoji 様式種類;
+
+        public SearchData(LasdecCode 市町村コード,
+                RDate 報告年rDate,
+                RDate 集計対象年rDate,
+                JigyohokokuNenpoHoseiHyoji 様式種類) {
+            this.市町村コード = 市町村コード;
+            this.報告年rDate = 報告年rDate;
+            this.集計対象年rDate = 集計対象年rDate;
+            this.様式種類 = 様式種類;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
+            if (!(obj instanceof SearchData)) {
+                return false;
+            }
+            SearchData sObj = (SearchData) obj;
+
+            boolean isEquals = true;
+            isEquals = isEquals && this.市町村コード.equals(sObj.市町村コード);
+            isEquals = isEquals && this.報告年rDate.equals(sObj.報告年rDate);
+            isEquals = isEquals && this.集計対象年rDate.equals(sObj.集計対象年rDate);
+            isEquals = isEquals && this.様式種類.equals(sObj.様式種類);
+            return isEquals;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 5;
+            hash = 89 * hash + Objects.hashCode(this.市町村コード);
+            hash = 89 * hash + Objects.hashCode(this.報告年rDate);
+            hash = 89 * hash + Objects.hashCode(this.集計対象年rDate);
+            hash = 89 * hash + Objects.hashCode(this.様式種類);
+            return hash;
+        }
     }
 }

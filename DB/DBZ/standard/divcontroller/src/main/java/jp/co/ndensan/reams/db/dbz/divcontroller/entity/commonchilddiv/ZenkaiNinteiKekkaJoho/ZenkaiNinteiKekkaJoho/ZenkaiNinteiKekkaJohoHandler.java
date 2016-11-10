@@ -118,7 +118,9 @@ public class ZenkaiNinteiKekkaJohoHandler {
             List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = getService().get要介護度_今回受給(shinseishoKanriNo).records();
             if (!zenkaiNinteiKekkaJohoList.isEmpty()) {
                 ZenkaiNinteiKekkaJohoRelate joho = zenkaiNinteiKekkaJohoList.get(0);
-                div.getTxtYokaigodo().setValue(set要介護度(joho.get厚労省IF識別コード(), new Code(joho.get二次判定要介護状態区分コード())));
+                if (!RString.isNullOrEmpty(joho.get二次判定要介護状態区分コード())) {
+                    div.getTxtYokaigodo().setValue(set要介護度(joho.get厚労省IF識別コード(), new Code(joho.get二次判定要介護状態区分コード())));
+                }
                 div.getTxtNinteiDay().setValue(set共通ポリシーパターン1(joho.get次判定年月日()));
                 div.getTxtYukoKikanFrom().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効開始年月日()));
                 div.getTxtYukoKikanTo().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効終了年月日()));
@@ -128,7 +130,9 @@ public class ZenkaiNinteiKekkaJohoHandler {
             List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = getService().get要介護度_今回認定(shinseishoKanriNo).records();
             if (!zenkaiNinteiKekkaJohoList.isEmpty()) {
                 ZenkaiNinteiKekkaJohoRelate joho = zenkaiNinteiKekkaJohoList.get(0);
-                div.getTxtYokaigodo().setValue(set要介護度(joho.get厚労省IF識別コード(), new Code(joho.get二次判定要介護状態区分コード())));
+                if (!RString.isNullOrEmpty(joho.get二次判定要介護状態区分コード())) {
+                    div.getTxtYokaigodo().setValue(set要介護度(joho.get厚労省IF識別コード(), new Code(joho.get二次判定要介護状態区分コード())));
+                }
                 div.getTxtNinteiDay().setValue(set共通ポリシーパターン1(joho.get次判定年月日()));
                 div.getTxtYukoKikanFrom().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効開始年月日()));
                 div.getTxtYukoKikanTo().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効終了年月日()));

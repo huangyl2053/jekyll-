@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc100020;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100020.KaishuriyushoShikyuKetteitsuchishoParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -27,6 +28,10 @@ public class KaishuriyushoShikyuKetteitsuchishoProcessParameter implements IBatc
     private JigyoshaNo 事業者コード;
     private FlexibleDate 作成日;
     private RString 文書番号;
+    private RString 出力順;
+    private Long 出力順id;
+    private RString psmShikibetsuTaisho;
+    private LasdecCode 市町村コード;
 
     /**
      * 住宅改修理由書作成手数料請求取得のパラメータを作成します
@@ -34,6 +39,7 @@ public class KaishuriyushoShikyuKetteitsuchishoProcessParameter implements IBatc
      * @return 住宅改修理由書作成手数料請求取得のパラメータ
      */
     public KaishuriyushoShikyuKetteitsuchishoParameter toMybatisPatameter() {
-        return new KaishuriyushoShikyuKetteitsuchishoParameter(決定開始日, 決定終了日, 指定事業者のみフラグ, 事業者コード);
+        return new KaishuriyushoShikyuKetteitsuchishoParameter(決定開始日, 決定終了日, 指定事業者のみフラグ,
+                事業者コード, 出力順, psmShikibetsuTaisho, 市町村コード);
     }
 }

@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.core.kaishuriyushoshikyuketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -45,5 +47,23 @@ public class KetteiTimestampBusiness {
      */
     public RString getTemp_前回決定日_終了日() {
         return entity.getTemp_前回決定日_終了日();
+    }
+
+    /**
+     * 介護住宅改修事業者名称を取得します。
+     *
+     * @return 介護住宅改修事業者名称
+     */
+    public AtenaMeisho get介護住宅改修事業者名称() {
+        return entity.get介護住宅改修事業者名称();
+    }
+
+    /**
+     * 介護住宅改修理由書作成事業者番号を取得します。
+     *
+     * @return 介護住宅改修理由書作成事業者番号
+     */
+    public JigyoshaNo get介護住宅改修理由書作成事業者番号() {
+        return entity.get介護住宅改修理由書作成事業者番号();
     }
 }

@@ -599,6 +599,7 @@ dbc/db/dbc/KagoMoshitateTanPanel/onLoad
 dbc/db/dbc/KagoMoshitatecCommonKiagoKanryoMegPanel/onClick_btnSave
 dbc/db/dbc/KagoMositateshoJoho/onClick_Execute
 dbc/db/dbc/KagoMositateshoJoho/onLoad
+dbc/db/dbc/KaigoKyufuhiKagoMositateTouroku/onActive
 dbc/db/dbc/KaigoKyufuhiKagoMositateTouroku/onBlur_BtnSearchHihokensha
 dbc/db/dbc/KaigoKyufuhiKagoMositateTouroku/onClick_BtnModuro
 dbc/db/dbc/KaigoKyufuhiKagoMositateTouroku/onClick_BtnSakujo
@@ -2074,6 +2075,7 @@ dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaSearchPanel/onClick_btnModifyShinsei
 dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaSearchPanel/onClick_btnSave
 dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaSearchPanel/onClick_btnSearchMishinsa
 dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaSearchPanel/onLoad
+dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaSearchPanel/onStateTransition
 dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onActive
 dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onBeforeOpenDialog_btnJigyosha
 dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onBeforeOpenDialog_btnShohinmei

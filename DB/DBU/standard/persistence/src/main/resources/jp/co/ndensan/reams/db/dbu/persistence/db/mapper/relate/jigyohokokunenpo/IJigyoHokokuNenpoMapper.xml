@@ -13,7 +13,7 @@
         <id property="shichosonCode" column="shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <id property="hyoNo" column="hyoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <id property="shukeiNo" column="shukeiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-   </resultMap>
+    </resultMap>
 
     <select resultOrdered="true" id="getJigyoHokokuNenpoList" resultMap="getJigyoHokokuNenpoListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.JigyoHokokuNenpoParameter" fetchSize="500">
@@ -86,6 +86,7 @@
                 AND jigyoHokokuTokeiData."shichosonCode" = #{shichosonCode}
             </when>
         </choose>
+        GROUP BY "hokokuYSeireki","hokokuM","shukeiTaishoYSeireki","shukeiTaishoM","toukeiTaishoKubun","shichosonCode","hyoNo", "shukeiNo"
         ORDER BY
         jigyoHokokuTokeiData."shichosonCode" ASC,
         jigyoHokokuTokeiData."hokokuYSeireki" DESC,

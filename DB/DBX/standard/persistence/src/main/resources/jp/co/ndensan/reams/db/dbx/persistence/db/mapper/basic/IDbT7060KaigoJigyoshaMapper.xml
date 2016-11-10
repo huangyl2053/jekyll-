@@ -113,7 +113,7 @@
         WHERE
         rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" = #{jigyoshaNo}
         AND rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMD}
-        AND rgdb."DbT7060KaigoJigyosha"."yukoShuryoYMD" <![CDATA[>]]> #{yukoKaishiYMD}
+        ORDER BY rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD" DESC
         )tbl
         WHERE tbl."rownum" = 1
     </select>

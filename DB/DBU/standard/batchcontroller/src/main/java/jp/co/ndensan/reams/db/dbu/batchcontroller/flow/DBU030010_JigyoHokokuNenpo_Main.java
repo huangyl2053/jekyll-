@@ -85,8 +85,8 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
      */
     @Step(事業状況報告資料年報作成様式１_２)
     protected IBatchFlowCommand callDBU030020_JigyoHokokuNenpo_Yoshiki1To2Flow() {
-        //TODO 事業状況報告資料（年報）作成　様式１・２時装なし。対応不可。
-        return otherBatchFlow(事業状況報告資料年報作成様式１_２バッチID, SubGyomuCode.DBU介護統計報告, getParameter()).define();
+        return otherBatchFlow(事業状況報告資料年報作成様式１_２バッチID, SubGyomuCode.DBU介護統計報告,
+                getParameter().toDBU030020Parameter()).define();
     }
 
     /**

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki201;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,29 +21,22 @@ import lombok.Setter;
 public class JigyohokokuCompResultEntity {
 
     private RString 集計番号;
-    private RString 給付実績区分コード;
-    private int 要支援１;
-    private int 要支援２;
-    private int 計１;
-    private int 非該当;
-    private int 経過的要介護;
-    private int 要介護１;
-    private int 要介護２;
-    private int 要介護３;
-    private int 要介護４;
-    private int 要介護５;
-    private int 計２;
-    private int 合計;
-    private int 要支援１＿１;
-    private int 要支援２＿１;
-    private int 計１＿１;
-    private int 非該当＿１;
-    private int 経過的要介護＿１;
-    private int 要介護１＿１;
-    private int 要介護２＿１;
-    private int 要介護３＿１;
-    private int 要介護４＿１;
-    private int 要介護５＿１;
-    private int 計２＿１;
-    private int 合計＿１;
+    private Decimal 要支援１;
+    private Decimal 要支援２;
+    private Decimal 非該当;
+    private Decimal 経過的要介護;
+    private Decimal 要介護１;
+    private Decimal 要介護２;
+    private Decimal 要介護３;
+    private Decimal 要介護４;
+    private Decimal 要介護５;
+    private Decimal 要支援１＿１;
+    private Decimal 要支援２＿１;
+    private Decimal 非該当＿１;
+    private Decimal 経過的要介護＿１;
+    private Decimal 要介護１＿１;
+    private Decimal 要介護２＿１;
+    private Decimal 要介護３＿１;
+    private Decimal 要介護４＿１;
+    private Decimal 要介護５＿１;
 }

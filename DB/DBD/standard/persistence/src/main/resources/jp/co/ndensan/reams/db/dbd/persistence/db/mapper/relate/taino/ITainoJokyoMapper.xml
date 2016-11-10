@@ -134,10 +134,10 @@
         D."shunyuYMD"
     </select>
 
-    <select id = "searchShiharaiHohoHenkoTaino" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.SearchShiharaiHohoHenkoTainoParameter" fetchSize="500" resultOrdered="true">
+    <select id = "searchShiharaiHohoHenkoTaino" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.SearchShiharaiHohoHenkoTainoParameter" fetchSize="500" resultOrdered="true">
         SELECT
         A.*
-        FROM(<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />)AS A
+        FROM(<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />)AS A
         INNER JOIN
         (
         SELECT

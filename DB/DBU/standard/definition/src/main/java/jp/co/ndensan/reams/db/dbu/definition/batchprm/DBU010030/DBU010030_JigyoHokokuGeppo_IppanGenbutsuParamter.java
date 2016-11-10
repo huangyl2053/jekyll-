@@ -38,7 +38,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter extends BatchParam
     private static final String KASHUKHKYUSHICHOUSONKBN = "kashukhkyushichousonkbn";
     private static final String CSVID = "csvId";
     private static final String BACTHID = "bacthId";
-    private static final String SHUKEINO = "shukeiNo";
+    private RString 集計番号;
     private static final String SYUTURYOKUCSVFILEPATH = "syuturyokuCSVFilePath";
     private static final String MANAGER = "manager";
 
@@ -72,8 +72,6 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter extends BatchParam
     private RString 作成CSVファイルID;
     @BatchParameter(key = BACTHID, name = "バッチID")
     private RString バッチID;
-    @BatchParameter(key = SHUKEINO, name = "集計番号")
-    private RString 集計番号;
     @BatchParameter(key = SYUTURYOKUCSVFILEPATH, name = "出力CSVファイルPath")
     private RString csvFilePath;
     @BatchParameter(key = MANAGER, name = "manager")

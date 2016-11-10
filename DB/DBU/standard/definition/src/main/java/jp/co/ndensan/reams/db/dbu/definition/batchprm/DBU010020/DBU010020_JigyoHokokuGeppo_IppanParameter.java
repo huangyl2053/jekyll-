@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.HihokenshaDaichoBirthYMDProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.JigyoHokokuGeppoIppanReportProcessParameter;
@@ -46,6 +47,10 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
     private static final String KAKOSHUKEIKYUSHICHOSONKBN = "kakoShukeiKyuShichosonKbn";
     private static final String SYUTURYOKUCSVFILEPATH = "syuturyokuCSVFilePath";
     private static final String BATCHID = "batchID";
+    
+    private static final RString 市町村分 = new RString ("1");
+    private static final RString 構成市町村分 = new RString ("2");
+    private static final RString 旧市町村分 = new RString ("3");
 
     @BatchParameter(key = PRINTCONTROLKBN, name = "プリントコントロール区分")
     private RString printControlKbn;
@@ -136,8 +141,8 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
      * @return JigyouHoukokuTokeiProcessParameter
      */
     public JigyouHoukokuTokeiProcessParameter toJigyouHoukokuTokeiProcessParameter() {
-        return new JigyouHoukokuTokeiProcessParameter(hokokuYM, syukeiYM, nendo, shichosonCode,
-                koseiShichosonList, koseiShichosonKbn, kyuShichosonList, kyuShichosonKbn, syoriYMDHMS, csvFilePath);
+        return new JigyouHoukokuTokeiProcessParameter(hokokuYM, syukeiYM, nendo, shichosonCode.concat(市町村分),
+                addCode_kosei(koseiShichosonList), koseiShichosonKbn, addCode_kyu(kyuShichosonList), kyuShichosonKbn, syoriYMDHMS, csvFilePath);
     }
 
     /**
@@ -147,7 +152,7 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
      */
     public JigyoHokokuGeppoIppanReportProcessParameter toJigyoHokokuGeppoIppanReportProcessParameter() {
         return new JigyoHokokuGeppoIppanReportProcessParameter(syukeiYM, kakoShukeiShichosonList,
-                shichosonCode, printControlKbn, syoriYMDHMS, kakoShukeiKyuShichosonKbn);
+                shichosonCode.concat(市町村分), printControlKbn, syoriYMDHMS, kakoShukeiKyuShichosonKbn);
     }
 
     /**
@@ -157,6 +162,36 @@ public class DBU010020_JigyoHokokuGeppo_IppanParameter extends BatchParameterBas
      */
     public JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter toJigyoHokokuGeppoShoriKekkaKakuninListProcessParameter() {
         return new JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter(batchID, kakoShukeiKyuShichosonKbn,
-                koseiShichosonKbn, kyuShichosonKbn, syukeiYM, koseiShichosonList, kyuShichosonList, syoriYMDHMS);
+                koseiShichosonKbn, kyuShichosonKbn, syukeiYM, addCode_kosei(koseiShichosonList), addCode_kyu(kyuShichosonList), syoriYMDHMS);
+    }
+
+    private List<RString> addCode_kosei(List<RString> コードリスト) {
+        List<RString> codelist = new ArrayList();
+        if (コードリスト.isEmpty()) {
+            return コードリスト;
+        }
+        for (RString code : コードリスト) {
+            if (!RString.isNullOrEmpty(code)) {
+                codelist.add(code.concat(構成市町村分));
+            } else {
+                codelist.add(code);
+            }
+        }
+        return codelist;
+    }
+
+    private List<RString> addCode_kyu(List<RString> コードリスト) {
+        List<RString> codelist = new ArrayList();
+        if (コードリスト.isEmpty()) {
+            return コードリスト;
+        }
+        for (RString code : コードリスト) {
+            if (!RString.isNullOrEmpty(code)) {
+                codelist.add(code.concat(旧市町村分));
+            } else {
+                codelist.add(code);
+            }
+        }
+        return codelist;
     }
 }

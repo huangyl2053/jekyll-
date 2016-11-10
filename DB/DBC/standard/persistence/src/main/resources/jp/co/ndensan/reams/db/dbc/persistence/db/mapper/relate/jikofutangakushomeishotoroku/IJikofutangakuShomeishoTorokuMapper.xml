@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 事業分自己負担額証明書登録（単）のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-4820-010 sunhaidi -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jikofutangakushomeishotoroku.IJikofutangakuShomeishoTorokuMapper">
+                    
+    <select id="get事業高額合算自己負担額証明書情報"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3180JigyoKogakuGassanJikoFutanGakuShomeishoMapper.ResultMap_DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter" fetchSize="500" resultOrdered="true">
+            SELECT 
+              DbT3180.*
+            FROM (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3180JigyoKogakuGassanJikoFutanGakuShomeishoMapper.noDeleted_DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho" />) AS DbT3180
+            WHERE 
+            DbT3180."dbT3180_hihokenshaNo" = #{被保険者番号}
+            AND DbT3180."dbT3180_taishoNendo" = #{対象年度}
+            <if test="use支給申請書整理番号">
+                AND DbT3180."dbT3180_shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
+            </if>
+           ORDER BY 
+            DbT3180."dbT3180_shokisaiHokenshaNo" ASC ,
+            DbT3180."dbT3180_shikyuShinseishoSeiriNo" ASC,
+            DbT3180."dbT3180_tennyumaeHokenshaNo" ASC,
+            DbT3180."dbT3180_rirekiNo" DESC
+    </select>
+    <select id="get事業高額合算自己負担額証明書履歴情報"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3180JigyoKogakuGassanJikoFutanGakuShomeishoMapper.ResultMap_DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter" fetchSize="500" resultOrdered="true">
+            SELECT 
+             DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho.*
+            FROM  (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3180JigyoKogakuGassanJikoFutanGakuShomeishoMapper.noDeleted_DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho" />) AS DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho
+            INNER JOIN ( SELECT 
+                            DbT3180."dbT3180_hihokenshaNo",
+                            DbT3180."dbT3180_taishoNendo",
+                            DbT3180."dbT3180_shokisaiHokenshaNo",
+                            DbT3180."dbT3180_tennyumaeHokenshaNo",
+                            DbT3180."dbT3180_shikyuShinseishoSeiriNo",
+                            MAX(DbT3180."dbT3180_rirekiNo")
+                        FROM (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3180JigyoKogakuGassanJikoFutanGakuShomeishoMapper.noDeleted_DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho" />) AS DbT3180
+                        WHERE 
+                        DbT3180."dbT3180_hihokenshaNo" = #{被保険者番号}
+                        AND DbT3180."dbT3180_taishoNendo" = #{対象年度}
+                        <if test="use支給申請書整理番号">
+                            AND DbT3180."dbT3180_shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
+                        </if>
+                        ORDER BY 
+                            DbT3180."dbT3180_shokisaiHokenshaNo" ASC ,
+                            DbT3180."dbT3180_shikyuShinseishoSeiriNo" ASC,
+                            DbT3180."dbT3180_tennyumaeHokenshaNo" ASC,
+                            DbT3180."dbT3180_rirekiNo" DESC
+                        GROUP BY
+                            DbT3180."dbT3180_hihokenshaNo",
+                            DbT3180."dbT3180_taishoNendo",
+                            DbT3180."dbT3180_shokisaiHokenshaNo",
+                            DbT3180."dbT3180_tennyumaeHokenshaNo",
+                            DbT3180."dbT3180_shikyuShinseishoSeiriNo") AS SUBTABLE
+                  ON DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_hihokenshaNo" = SUBTABLE."dbT3180_hihokenshaNo"
+                  AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_taishoNendo" = SUBTABLE."dbT3180_taishoNendo"
+                  AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shokisaiHokenshaNo" = SUBTABLE."dbT3180_shokisaiHokenshaNo"
+                  AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_tennyumaeHokenshaNo" = SUBTABLE."dbT3180_tennyumaeHokenshaNo"
+                  AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shikyuShinseishoSeiriNo" = SUBTABLE."dbT3180_shikyuShinseishoSeiriNo"
+    </select>
+    
+    <select id="get事業高額合算支給申請書情報"
+            resultMap="ResultMap_JikofutangakuShomeishoTorokuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter" fetchSize="500" resultOrdered="true">
+            SELECT 
+              DbT3180.*
+             ,DbT3181.*
+            FROM (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3180JigyoKogakuGassanJikoFutanGakuShomeishoMapper.noDeleted_DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho" />) AS DbT3180
+            INNER JOIN 
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiMapper.noDeleted_DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisai" />) AS DbT3181
+            ON
+              DbT3180."dbT3180_rirekiNo" = DbT3181."dbT3181_rirekiNo"
+            WHERE
+            DbT3180."dbT3180_hihokenshaNo" = #{被保険者番号}
+            AND DbT3180."dbT3180_taishoNendo" = #{対象年度}
+            AND DbT3180."dbT3180_shokisaiHokenshaNo" = #{証記載保険者番号}
+            AND DbT3180."dbT3180_shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
+            AND DbT3180."dbT3180_tennyumaeHokenshaNo" = #{転入前保険者番号}
+            AND DbT3180."dbT3180_rirekiNo" = ${履歴番号}
+    </select>
+     <select id="get事業高額合算自己負担額証明書Count"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter" fetchSize="500" resultOrdered="true">
+    
+         SELECT
+              COUNT(1)
+         FROM 
+             rgdb."DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho"
+         WHERE
+            "hihokenshaNo" = #{被保険者番号}
+         AND "taishoNendo" =  #{対象年度}
+         AND "shokisaiHokenshaNo"  = #{証記載保険者番号}
+         AND "shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
+         AND "tennyumaeHokenshaNo" = #{転入前保険者番号}
+     </select>
+       <select id="get事業高額合算自己負担額証明書最新履歴番号"
+            resultType="jp.co.ndensan.reams.uz.uza.math.Decimal"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter" fetchSize="500" resultOrdered="true">
+         SELECT
+              MAX("rirekiNo")
+         FROM 
+             rgdb."DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho"
+         WHERE
+            "hihokenshaNo" = #{被保険者番号}
+         AND "taishoNendo" =  #{対象年度}
+         AND "shokisaiHokenshaNo"  = #{証記載保険者番号}
+         AND "shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
+         AND "tennyumaeHokenshaNo" = #{転入前保険者番号}
+     </select>
+    
+    <resultMap id="ResultMap_JikofutangakuShomeishoTorokuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuEntity" autoMapping="true">
+        <id property="dbT3180Entity.hihokenshaNo" column="dbT3180_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dbT3180Entity.taishoNendo" column="dbT3180_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="dbT3180Entity.shokisaiHokenshaNo" column="dbT3180_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="dbT3180Entity.shikyuShinseishoSeiriNo" column="dbT3180_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbT3180Entity.tennyumaeHokenshaNo" column="dbT3180_tennyumaeHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="dbT3180Entity.rirekiNo" column="dbT3180_rirekiNo" />
+        <association property="dbT3180Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3180JigyoKogakuGassanJikoFutanGakuShomeishoMapper.ResultMap_DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity"/>
+        <collection property="dbT3181EntityList" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiMapper.ResultMap_DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiEntity"/>
+    </resultMap>
+</mapper>

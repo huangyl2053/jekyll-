@@ -378,7 +378,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         FukaJoho 更正前_賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
 
-        if (更正前_賦課情報.get算定年額保険料2() != null) {
+        if (更正前_賦課情報.get算定年額保険料2() != null && 更正前_賦課情報.get算定年額保険料2().intValue() != 0) {
             更正前.set保険料率(更正前_賦課情報.get算定年額保険料2());
         } else {
             更正前.set保険料率(更正前_賦課情報.get算定年額保険料1());
@@ -492,13 +492,41 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private void set徴収方法(List<CharacteristicsPhase> 特徴期別金額リスト, List<UniversalPhase> 普徴期別金額リスト,
             EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前) {
-        if (特徴期別金額リスト.isEmpty() && !普徴期別金額リスト.isEmpty()) {
-            更正前.set徴収方法(new RString("普通徴収"));
-        } else if (!特徴期別金額リスト.isEmpty() && 普徴期別金額リスト.isEmpty()) {
+        if (has特徴期別金額データ(特徴期別金額リスト) && !has普徴期別金額データ(普徴期別金額リスト)) {
             更正前.set徴収方法(new RString("特別徴収"));
-        } else if (!特徴期別金額リスト.isEmpty() && !普徴期別金額リスト.isEmpty()) {
+        } else if (!has特徴期別金額データ(特徴期別金額リスト) && has普徴期別金額データ(普徴期別金額リスト)) {
+            更正前.set徴収方法(new RString("普通徴収"));
+        } else if (has特徴期別金額データ(特徴期別金額リスト) && has普徴期別金額データ(普徴期別金額リスト)) {
             更正前.set徴収方法(new RString("特別徴収　普通徴収"));
         }
+    }
+
+    private boolean has特徴期別金額データ(List<CharacteristicsPhase> 特徴期別金額リスト) {
+
+        if (特徴期別金額リスト.isEmpty()) {
+            return false;
+        }
+        boolean flag = false;
+        for (CharacteristicsPhase 期別金額 : 特徴期別金額リスト) {
+            if (null != 期別金額.get金額()) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    private boolean has普徴期別金額データ(List<UniversalPhase> 普徴期別金額リスト) {
+
+        if (普徴期別金額リスト.isEmpty()) {
+            return false;
+        }
+        boolean flag = false;
+        for (UniversalPhase 期別金額 : 普徴期別金額リスト) {
+            if (null != 期別金額.get金額()) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection get更正後(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {

@@ -4,6 +4,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -13,8 +14,20 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperties {
 
-    public abstract void initialize();
+    public abstract void initialize();    
+    
+    public abstract RadioButton getRadKaigoHokenShisetsu();
+    
+    public abstract void setRadKaigoHokenShisetsu(RadioButton radKaigoHokenShisetsu);
 
+    public abstract RadioButton getRadOtherTokureiShisetsu();
+    
+    public abstract void setRadOtherTokureiShisetsu(RadioButton radOtherTokureiShisetsu);
+
+    public abstract RadioButton getRadTekiyoJyogaiShisetsu();
+    
+    public abstract void setRadTekiyoJyogaiShisetsu(RadioButton radTekiyoJyogaiShisetsu);
+    
     public abstract RString getNyuryokuShisetsuKodo();
 
     public abstract RString getNyuryokuShisetsuMeisho();
@@ -32,7 +45,7 @@ public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperti
     public abstract void setShisetsuMeisho(RString meisho);
 
     public abstract void get入所施設名称(JigyoshaNo 入所施設コード);
-
+    
     public abstract void clear();
 
     /**

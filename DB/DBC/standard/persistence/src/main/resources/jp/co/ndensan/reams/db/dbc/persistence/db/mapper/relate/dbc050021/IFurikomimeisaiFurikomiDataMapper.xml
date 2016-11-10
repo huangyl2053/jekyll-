@@ -326,7 +326,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity" 
             fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />
         FROM
             "DbWT0510FurikomiMeisai"
         INNER JOIN
@@ -385,7 +385,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity" 
             fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />
         FROM
             "DbWT0510FurikomiMeisai"
         INNER JOIN
@@ -482,7 +482,7 @@
             fetchSize="500" resultOrdered="true">
     SELECT
         "DbWT0510FurikomiMeisai".*
-    FROM "DbWT0510FurikomiMeisai" AS
+    FROM "DbWT0510FurikomiMeisai" AS "DbWT0510FurikomiMeisai"
     INNER JOIN rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
         ON "DbT4001JukyushaDaicho"."hihokenshaNo" = "DbWT0510FurikomiMeisai"."hihokenshaNo"
         AND substring("DbT4001JukyushaDaicho"."jukyuShinseiYMD" from 1 for 6) <![CDATA[<=]]> "DbWT0510FurikomiMeisai"."serviceTeikyoYM"

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
@@ -25,8 +27,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiKoshinNintei;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
@@ -85,6 +87,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private static final RString RST_低 = new RString("低");
     private static final RString RST_老 = new RString("老");
     private static final RString RST_2 = new RString("2");
+    private static final RString 銀行_2 = new RString("ゆうちょ銀行");
     private static final RString 全角_2 = new RString("２");
     private static final RString RST_緩１ = new RString("緩１");
     private static final RString RST_緩２ = new RString("緩２");
@@ -98,10 +101,12 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private static final RString RST_第４ = new RString("第４");
     private static final RString RST_第５ = new RString("第５");
     private static final RString RST_1 = new RString("1");
+    private static final RString 銀行_1 = new RString("銀行");
     private static final RString 償還方法_自 = new RString("自");
     private static final RString 償還方法_申 = new RString("申");
     private static final RString 国保連委託_無し = new RString("受託無し");
     private static final RString 国保連委託_有り = new RString("受託有り");
+    private static final RString ZERO = new RString("0");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -249,7 +254,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 : RString.EMPTY);
         csvEntity.set受給申請日(get日付項目(entity.get受給申請年月日(), parameter));
         if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, entity.get要介護認定状態区分コード().getColumnValue()).getName());
+            csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get要介護認定状態区分コード().getColumnValue()).get名称());
         }
         csvEntity.set受給認定開始日(get日付項目(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(get日付項目(entity.get認定有効期間終了日(), parameter));
@@ -505,10 +510,10 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
 
             IKoza 口座 = new Koza(releteEntity);
             if (口座.isゆうちょ銀行()) {
-                csvEntity.set銀行郵便区分(RST_2);
+                csvEntity.set銀行郵便区分(銀行_2);
                 csvEntity.set支店コード(口座.get店番());
             } else {
-                csvEntity.set銀行郵便区分(RST_1);
+                csvEntity.set銀行郵便区分(銀行_1);
                 KinyuKikanShitenCode 支店コード = 口座.get支店コード();
                 csvEntity.set支店コード(支店コード != null
                         ? 支店コード.getColumnValue()
@@ -650,12 +655,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set給付証記載保険者番号(証記載保険者番号 != null && !証記載保険者番号.isEmpty()
                     ? entity.get証記載保険者番号().getColumnValue()
                     : RString.EMPTY);
-            FlexibleDate 申請日 = entity.get申請年月日();
-            csvEntity.set申請日(申請日 != null
-                    ? new RString(申請日.toString())
-                    : RString.EMPTY);
+            csvEntity.set申請日(get日付項目(entity.get申請年月日(), parameter));
             csvEntity.set申請理由(entity.get申請理由());
-            csvEntity.set申請区分(entity.get申請者区分());
+            csvEntity.set申請区分(entity.get申請者区分() != null ? ShinseishaKubun.toValue(entity.get申請者区分()).get名称() : RString.EMPTY);
             AtenaMeisho 申請氏名 = entity.get申請者氏名();
             csvEntity.set申請氏名(申請氏名 != null
                     ? 申請氏名.getColumnValue()
@@ -683,20 +685,20 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private RString convertDayOfWeek(FlexibleDate targetDate) {
         return targetDate != null
                 && targetDate.isValid()
-                ? new RString(targetDate.getDayOfWeek().toString())
-                : RString.EMPTY;
+                        ? new RString(targetDate.getDayOfWeek().toString())
+                        : RString.EMPTY;
     }
 
     private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity,
             HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
         if (entity != null) {
-            csvEntity.set申請支払額(numToRString(entity.get合計_高額支給額()));
-            csvEntity.set判定費用額(numToRString(entity.getサービス費用合計額合計()));
-            csvEntity.set判定利用負担額(numToRString(entity.get利用者負担額合計()));
-            csvEntity.set判定算定基準額(numToRString(entity.get算定基準額()));
-            csvEntity.set判定支払済金額(numToRString(entity.get支払済金額合計()));
-            csvEntity.set判定高額支給額(numToRString(entity.get合計_高額支給額()));
+            csvEntity.set申請支払額(numToRString_0(entity.get合計_高額支給額()));
+            csvEntity.set判定費用額(numToRString_0(entity.getサービス費用合計額合計()));
+            csvEntity.set判定利用負担額(numToRString_0(entity.get利用者負担額合計()));
+            csvEntity.set判定算定基準額(numToRString_0(entity.get算定基準額()));
+            csvEntity.set判定支払済金額(numToRString_0(entity.get支払済金額合計()));
+            csvEntity.set判定高額支給額(numToRString_0(entity.get合計_高額支給額()));
             FlexibleYearMonth 判定受取年月 = entity.get対象者受取年月();
             csvEntity.set判定受取年月(get年月(判定受取年月, parameter));
             FlexibleYearMonth 高額対象判定年月 = entity.get対象者判定審査年月();
@@ -712,19 +714,19 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set決定日(get日付項目(決定日, parameter));
             Decimal 保決定利用負担額 = entity.get本人支払額();
             csvEntity.set保決定利用負担額(保決定利用負担額 != null
-                    ? numToRString(保決定利用負担額)
+                    ? numToRString_0(保決定利用負担額)
                     : RString.EMPTY);
             csvEntity.set保決定支給区分(
-                    entity.get決定_支給区分コード() != null
-                    && entity.get決定_支給区分コード().toString().equals("1")
+                    entity.get判定_支給区分コード() != null
+                    && entity.get判定_支給区分コード().toString().equals("1")
                     ? ShikyuKubun.支給.get名称()
                     : RString.EMPTY);
             Decimal 保決定高額支給額 = entity.get支給金額();
             csvEntity.set保決定高額支給額(保決定高額支給額 != null
-                    ? numToRString(保決定高額支給額)
+                    ? numToRString_0(保決定高額支給額)
                     : RString.EMPTY);
             csvEntity.set保決定不支給理由(entity.get不支給理由());
-            csvEntity.set審査方法(entity.get審査方法区分());
+            csvEntity.set審査方法(entity.get審査方法区分() != null ? ShinsaHohoKubun.toValue(entity.get審査方法区分()).get名称() : RString.EMPTY);
             FlexibleYearMonth 保決定送付年月 = entity.get判定結果送付年月();
             csvEntity.set保決定送付年月(get年月(保決定送付年月, parameter));
             FlexibleDate 通知書作成日 = entity.get決定通知書作成年月日();
@@ -742,14 +744,14 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set国決定年月(get年月(国決定年月, parameter));
             csvEntity.set国決定通知書ＮＯ(entity.get通知書番号());
             Decimal 国決定利用負担額 = entity.get利用者負担額();
-            csvEntity.set国決定利用負担額(numToRString(国決定利用負担額));
+            csvEntity.set国決定利用負担額(numToRString_0(国決定利用負担額));
             csvEntity.set国決定支給区分(
                     entity.get決定_支給区分コード() != null
                     && entity.get決定_支給区分コード().toString().equals("1")
                     ? ShikyuKubun.支給.get名称()
                     : RString.EMPTY);
             Decimal 国決定高額支給額 = entity.get決定_高額支給額();
-            csvEntity.set国決定高額支給額(numToRString(国決定高額支給額));
+            csvEntity.set国決定高額支給額(numToRString_0(国決定高額支給額));
             FlexibleYearMonth 国決定受取年月 = entity.get決定者受取年月();
             csvEntity.set国決定受取年月(get年月(国決定受取年月, parameter));
         }
@@ -811,6 +813,13 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         return new RString(項目.toString());
     }
 
+    private RString numToRString_0(Decimal 項目) {
+        if (項目 == null) {
+            return ZERO;
+        }
+        return new RString(項目.toString());
+    }
+
     private RString get高額給付根拠(RString 高額給付根拠) {
 
         RString 世帯の所得区分コード;
@@ -819,7 +828,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         if (高額給付根拠 == null || 高額給付根拠.trim().isEmpty()) {
             return RString.EMPTY;
         } else {
-            List<RString> list = 高額給付根拠.split("、");
+            List<RString> list = 高額給付根拠.split("，");
             if (list.size() >= INDEX_1 && (list.get(INDEX_0).equals(RST_月)
                     || list.get(INDEX_0).equals(RString.HALF_SPACE))) {
                 世帯の所得区分コード = list.size() >= INDEX_2

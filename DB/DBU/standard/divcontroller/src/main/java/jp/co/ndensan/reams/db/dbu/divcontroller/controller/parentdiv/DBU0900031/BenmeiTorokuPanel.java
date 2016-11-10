@@ -72,14 +72,14 @@ public class BenmeiTorokuPanel {
         FufukuMoshitate fufukuMoshitate = benmeiTorokuManager.getFufukuMoshitate(識別コード, 被保険者番号, 審査請求届出日);
         ViewStateHolder.put(ViewStateKeys.不服審査申立情報, fufukuMoshitate);
         if (初期_状態.equals(修正)) {
-            benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
+            benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
             if (弁明書作成日 != null && !弁明書作成日.isEmpty() && benmeiTorokuMeisaiJoho != null) {
                 get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
             }
             ViewStateHolder.put(ViewStateKeys.弁明登録情報, benmeiTorokuMeisaiJoho);
             getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態, 弁明書作成日);
         } else if (初期_状態.equals(削除)) {
-            benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
+            benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
             if (benmeiTorokuMeisaiJoho != null) {
                 get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
                 getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態, 弁明書作成日);
@@ -149,9 +149,10 @@ public class BenmeiTorokuPanel {
     private BenmeiTorokuMeisaiJoho get弁明登録明細情報の取得(
             ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
-            FlexibleDate 審査請求届出日) {
+            FlexibleDate 審査請求届出日,
+            FlexibleDate 弁明書作成日) {
         BenmeiTorokuMeisaiJoho benmeiTorokuMeisai
-                = benmeiTorokuManager.getBenmeiTorokuMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日);
+                = benmeiTorokuManager.getBenmeiTorokuMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
         return benmeiTorokuMeisai;
     }
 

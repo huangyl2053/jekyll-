@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyojohoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
@@ -35,14 +34,9 @@ import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaK
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJohoFactory;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingaku;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingakuFactory;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ErrorCode;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
@@ -52,7 +46,6 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.Id
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TsuchishoNoCreateParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -71,7 +64,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokuCho
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokuKarisanteiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TsukibetsuRankuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2015KeisangoJohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gennendohonsanteiidou.IGenNendoHonsanteiIdouMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
@@ -90,7 +82,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.ITsukiShorkiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -121,13 +112,8 @@ import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisan;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanInput;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanOutput;
 import jp.co.ndensan.reams.dz.dzx.definition.core.kiwarikeisan.GenzaiTokuchoKiKubun;
-import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoChushutsuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
-import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt001FindIdoFunctionDac;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -161,9 +147,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private final MapperProvider mapperProvider;
     private final DbV2001ChoshuHohoAliveDac 徴収方法NewestDac;
     private final DbT2010FukaErrorListDac 賦課エラーDac;
-    private final UaFt001FindIdoFunctionDac 宛名識別異動分Dac;
     private final DbT2001ChoshuHohoDac 徴収方法Dac;
-    private final DbT2013HokenryoDankaiDac 保険料段階Dac;
     private final DbT2015KeisangoJohoDac 計算後情報Dac = InstanceProvider.create(DbT2015KeisangoJohoDac.class);
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     private static final RString KEY_CHOTEINENDOYMD = new RString("choteiNendoYMD");
@@ -180,20 +164,12 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final int INT_10 = 10;
     private static final int INT_11 = 11;
     private static final int INT_12 = 12;
-    private static final int INT_13 = 13;
     private static final int INT_14 = 14;
-    private static final int INT_15 = 15;
     private static final int INT_16 = 16;
-    private static final int INT_17 = 17;
-    private static final int INT_18 = 18;
-    private static final int INT_19 = 19;
-    private static final int INT_20 = 20;
     private static final RString ゼロ_0000 = new RString("0000");
     private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
     private static final RString バッチID = new RString("DBBBT44001");
     private static final RString 合併情報区分_合併あり = new RString("1");
-    private static final RString 使用する = new RString("1");
-    private static final RString 使用しない = new RString("0");
     private static final Code 用途区分コード = new Code("0");
     private static final RString 年度内連番_0001 = new RString("0001");
     private static final RString 年度内連番_0005 = new RString("0005");
@@ -215,9 +191,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.徴収方法NewestDac = InstanceProvider.create(DbV2001ChoshuHohoAliveDac.class);
         this.賦課エラーDac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
-        this.宛名識別異動分Dac = InstanceProvider.create(UaFt001FindIdoFunctionDac.class);
         this.徴収方法Dac = InstanceProvider.create(DbT2001ChoshuHohoDac.class);
-        this.保険料段階Dac = InstanceProvider.create(DbT2013HokenryoDankaiDac.class);
     }
 
     /**
@@ -226,21 +200,16 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
      * @param mapperProvider mapperProvider
      * @param 徴収方法NewestDac 徴収方法NewestDac
      * @param 賦課エラーDac DbT2010FukaErrorListDac
-     * @param 宛名識別異動分Dac UaFt001FindIdoFunctionDac
      * @param 徴収方法Dac DbT2001ChoshuHohoDac
-     * @param 保険料段階Dac DbT2013HokenryoDankaiDac
      */
     GenNendoHonsanteiIdou(MapperProvider mapperProvider,
             DbV2001ChoshuHohoAliveDac 徴収方法NewestDac,
             DbT2010FukaErrorListDac 賦課エラーDac,
-            UaFt001FindIdoFunctionDac 宛名識別異動分Dac,
-            DbT2001ChoshuHohoDac 徴収方法Dac, DbT2013HokenryoDankaiDac 保険料段階Dac) {
+            DbT2001ChoshuHohoDac 徴収方法Dac) {
         this.mapperProvider = mapperProvider;
         this.徴収方法NewestDac = 徴収方法NewestDac;
         this.賦課エラーDac = 賦課エラーDac;
-        this.宛名識別異動分Dac = 宛名識別異動分Dac;
         this.徴収方法Dac = 徴収方法Dac;
-        this.保険料段階Dac = 保険料段階Dac;
     }
 
     /**
@@ -314,13 +283,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         IdoParameter param = IdoParameter.createParam(調定年度, 賦課年度,
                 抽出開始日時, 抽出終了日時, 調定日時, kozaBuilder.build(), list);
 
-        ShikibetsuTaishoIdoSearchKey searchKey = new ShikibetsuTaishoIdoSearchKeyBuilder(
-                ShikibetsuTaishoIdoChushutsuKubun.異動年月日で抽出, 抽出開始日時, 抽出終了日時).build();
-        List<UaFt001FindIdoEntity> 宛名識別異動分取得PSM = 宛名識別異動分Dac.select(searchKey);
+        List<ShukiEntity> 宛名識別異動分取得PSM = mapper.select宛名識別異動分(param);
         mapper.createTmpShuki();
-        for (UaFt001FindIdoEntity uaFt001FindIdoEntity : 宛名識別異動分取得PSM) {
-            ShukiEntity entity = new ShukiEntity();
-            entity.setShikibetsuCode(uaFt001FindIdoEntity.getShikibetsuCode());
+        for (ShukiEntity entity : 宛名識別異動分取得PSM) {
             mapper.insertTmpShuki(entity);
         }
         List<ShukiIdoEntity> shukiIdoEntityList = mapper.get住基異動_被保険者本人異動(param);
@@ -1760,179 +1725,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             }
         }
         return 出力用徴収方法の情報;
-    }
-
-    private SeigyoJoho get月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
-        RDate nowDate = RDate.getNowDate();
-        Decimal 基準年金収入額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入1,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準年金収入額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入2,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準年金収入額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入3,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額1,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額2,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額3,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額04 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額4,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額05 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額5,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額06 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額6,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額07 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額7,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額08 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額8,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額09 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額9,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額10 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額10,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額11 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額11,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額12 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額12,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額13 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額13,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額14 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額14,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額15 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額15,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        RString 課税層所得段階 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税層保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 未申告段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        boolean 未申告段階使用有無 = false;
-        if (使用する.equals(未申告段階使用)) {
-            未申告段階使用有無 = true;
-        } else if (使用しない.equals(未申告段階使用)) {
-            未申告段階使用有無 = false;
-        }
-        RString 未申告段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 未申告課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 所得調査中段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        boolean 所得調査中段階使用有無 = false;
-        if (使用する.equals(所得調査中段階使用)) {
-            所得調査中段階使用有無 = true;
-        } else if (使用しない.equals(所得調査中段階使用)) {
-            所得調査中段階使用有無 = false;
-        }
-        RString 所得調査中段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 所得調査中課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 課税取消段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        boolean 課税取消段階使用有無 = false;
-        if (使用する.equals(課税取消段階使用)) {
-            課税取消段階使用有無 = true;
-        } else if (使用しない.equals(課税取消段階使用)) {
-            課税取消段階使用有無 = false;
-        }
-        RString 課税取消段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
-
-        SeigyojohoFactory seigyojohoFactory = InstanceProvider.create(SeigyojohoFactory.class);
-        SeigyoJoho 月別保険料制御情報 = seigyojohoFactory.createSeigyojoho(
-                保険料段階リスト, 基準年金収入額01, 基準年金収入額02, 基準年金収入額03,
-                基準所得金額01, 基準所得金額02, 基準所得金額03, 基準所得金額04, 基準所得金額05, 基準所得金額06,
-                基準所得金額07, 基準所得金額08, 基準所得金額09, 基準所得金額10, 基準所得金額11, 基準所得金額12,
-                基準所得金額13, 基準所得金額14, 基準所得金額15,
-                課税層所得段階, 未申告段階使用有無, 未申告段階インデックス, KazeiKubun.toValue(未申告課税区分),
-                所得調査中段階使用有無, 所得調査中段階インデックス, KazeiKubun.toValue(所得調査中課税区分),
-                課税取消段階使用有無, 課税取消段階インデックス, KazeiKubun.toValue(課税取消課税区分));
-        return 月別保険料制御情報;
-    }
-
-    private NengakuSeigyoJoho get年額制御情報(FlexibleYear 賦課年度) {
-        RDate nowDate = RDate.getNowDate();
-        Decimal 端数単位 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整単位_通常,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        RString 端数調整方法 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整方法_通常,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        Decimal 端数単位_ランク用 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整単位_ランク変更のみ,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        RString 端数調整方法_ランク用 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整方法_通常,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 端数調整対象 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
-        setランク別制御情報(ランク別制御情報, 賦課年度);
-
-        NengakuSeigyoJohoFactory nengakuSeigyoJohoFactory = InstanceProvider.create(NengakuSeigyoJohoFactory.class);
-        NengakuSeigyoJoho 年額制御情報 = nengakuSeigyoJohoFactory.createNengakuSeigyoJoho(
-                端数単位,
-                HasuChoseiHoho.toValue(端数調整方法),
-                端数単位_ランク用,
-                HasuChoseiHoho.toValue(端数調整方法_ランク用),
-                HasuChoseiTaisho.toValue(端数調整対象),
-                ランク別制御情報);
-        return 年額制御情報;
-    }
-
-    private void setランク別制御情報(Map<RString, RankBetsuKijunKingaku> ランク別制御情報, FlexibleYear 賦課年度) {
-        List<DbT2013HokenryoDankaiEntity> 保険料段階List = 保険料段階Dac.get保険料ランク別制御情報(賦課年度);
-        if (保険料段階List.isEmpty()) {
-            return;
-        }
-        List<DbT2013HokenryoDankaiEntity> 段階List = new ArrayList<>();
-        DbT2013HokenryoDankaiEntity 段階 = 保険料段階List.get(0);
-        段階List.add(段階);
-        for (int i = INT_1; i < 保険料段階List.size(); i++) {
-            if (段階.getRankuKubun().equals(保険料段階List.get(i).getRankuKubun())) {
-                段階List.add(保険料段階List.get(i));
-            } else {
-                RankBetsuKijunKingaku gagu = createRankBetsuKijunKingaku(段階List);
-                ランク別制御情報.put(段階.getRankuKubun(), gagu);
-                段階List.clear();
-                段階List.add(保険料段階List.get(i));
-            }
-            段階 = 保険料段階List.get(i);
-        }
-        RankBetsuKijunKingaku gagu = createRankBetsuKijunKingaku(段階List);
-        ランク別制御情報.put(段階.getRankuKubun(), gagu);
-    }
-
-    private RankBetsuKijunKingaku createRankBetsuKijunKingaku(List<DbT2013HokenryoDankaiEntity> 段階List) {
-        RankBetsuKijunKingakuFactory factory = InstanceProvider.create(RankBetsuKijunKingakuFactory.class);
-        RankBetsuKijunKingaku 基準金額 = factory.createRankBetsuKijunKingaku(get基準金額(段階List, INT_1),
-                get基準金額(段階List, INT_2),
-                get基準金額(段階List, INT_3),
-                get基準金額(段階List, INT_4),
-                get基準金額(段階List, INT_5),
-                get基準金額(段階List, INT_6),
-                get基準金額(段階List, INT_7),
-                get基準金額(段階List, INT_8),
-                get基準金額(段階List, INT_9),
-                get基準金額(段階List, INT_10),
-                get基準金額(段階List, INT_11),
-                get基準金額(段階List, INT_12),
-                get基準金額(段階List, INT_13),
-                get基準金額(段階List, INT_14),
-                get基準金額(段階List, INT_15),
-                get基準金額(段階List, INT_16),
-                get基準金額(段階List, INT_17),
-                get基準金額(段階List, INT_18),
-                get基準金額(段階List, INT_19),
-                get基準金額(段階List, INT_20));
-        return 基準金額;
-    }
-
-    private Decimal get基準金額(List<DbT2013HokenryoDankaiEntity> 段階List, int index) {
-        if (段階List.isEmpty()) {
-            return Decimal.ZERO;
-        }
-        if (index <= 段階List.size()) {
-            return 段階List.get(index - INT_1).getHokenryoRitsu();
-        }
-        return Decimal.ZERO;
     }
 
     /**

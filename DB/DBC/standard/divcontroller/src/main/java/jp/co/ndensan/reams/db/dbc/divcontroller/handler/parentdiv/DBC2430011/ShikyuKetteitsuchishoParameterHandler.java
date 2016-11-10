@@ -5,14 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2430011;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kaishuriyushoshikyuketteitsuchisho.KetteiTimestampBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC100020.DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2430011.ShikyuKetteitsuchishoParameterDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 住宅改修理由書作成手数料支給（不支給）決定通知書作成の検証ハンドラクラスです。
@@ -22,8 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShikyuKetteitsuchishoParameterHandler {
 
     private final ShikyuKetteitsuchishoParameterDiv div;
-    private static final int ZERO = 0;
-    private static final int EIGHT = 8;
 
     /**
      * コンストラクタです。
@@ -38,24 +44,29 @@ public class ShikyuKetteitsuchishoParameterHandler {
      * 画面初期化します。
      *
      * @param business 住宅改修理由書作成手数料支給（不支給）決定通知書作成の前回実行情報
+     * @param business2 事業者の情報
      */
-    public void onLoad(KetteiTimestampBusiness business) {
-        if (business != null) {
-            RDate 決定日_開始日 = null;
-            if (!RString.isNullOrEmpty(business.getTemp_前回決定日_開始日())) {
-                RDate 前回決定日_開始日 = new RDate(business.getTemp_前回決定日_開始日().substring(ZERO, EIGHT).toString());
-                div.getTxtZnkaiKetteiYMD().setFromValue(前回決定日_開始日);
-                決定日_開始日 = 前回決定日_開始日.plusDay(1);
-            }
-            if (!RString.isNullOrEmpty(business.getTemp_前回決定日_終了日())) {
-                div.getTxtZnkaiKetteiYMD().setToValue(new RDate(business.getTemp_前回決定日_終了日().substring(ZERO, EIGHT).toString()));
-                div.getTxtKetteiYMD().setFromValue(決定日_開始日);
+    public void onLoad(KetteiTimestampBusiness business, SearchResult<KetteiTimestampBusiness> business2) {
+
+        Map<JigyoshaNo, AtenaMeisho> map = new HashMap<>();
+        for (KetteiTimestampBusiness businesslist : business2.records()) {
+            JigyoshaNo 事業者番号 = businesslist.get介護住宅改修理由書作成事業者番号();
+            AtenaMeisho 事業者名称 = businesslist.get介護住宅改修事業者名称();
+            if (!map.containsKey(事業者番号)) {
+                map.put(事業者番号, 事業者名称);
             }
         }
+        List<KeyValueDataSource> list = new ArrayList<>();
+        for (Map.Entry<JigyoshaNo, AtenaMeisho> entry : map.entrySet()) {
+            KeyValueDataSource datasource = new KeyValueDataSource();
+            datasource.setKey(entry.getKey().value());
+            datasource.setValue(entry.getValue().value());
+            list.add(datasource);
+        }
+        div.getDdlJigyosha().setDataSource(list);
         div.getTxtKetteiYMD().setToValue(RDate.getNowDate());
         div.getCcdBunshoBangoInput().initialize(ReportIdDBC.DBC100044.getReportId());
-        // TODO 出力順の相関方針が確定しないので、実装ができません
-//        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100044.getReportId());
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100044.getReportId());
     }
 
     /**
@@ -88,8 +99,7 @@ public class ShikyuKetteitsuchishoParameterHandler {
             parameter.set指定事業者のみフラグ(Boolean.FALSE);
         }
         parameter.set文書情報(div.getCcdBunshoBangoInput().get文書番号());
-        // TODO 出力順の相関方針が確定しないので、実装ができません
-//        parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
+        parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         parameter.set作成日(FlexibleDate.getNowDate());
         return parameter;
     }
