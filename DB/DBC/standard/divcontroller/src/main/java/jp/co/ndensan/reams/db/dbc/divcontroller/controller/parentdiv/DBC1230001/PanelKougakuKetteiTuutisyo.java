@@ -148,8 +148,10 @@ public class PanelKougakuKetteiTuutisyo {
                 ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && div.getTxtZennkaiHakkoubi().getValue() == null) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate(),
+                    ButtonSelectPattern.OKCancel);
             return ResponseData.of(div).addMessage(message).respond();
         }
 
