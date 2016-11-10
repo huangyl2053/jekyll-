@@ -42,7 +42,7 @@ public class JigyoJyokyoHokokuEditor {
     }
 
     /**
-     * 集後事業状況報告情報を取得します。
+     * 編集後事業状況報告情報を取得します。
      */
     public void get編集後事業状況報告情報() {
         jigyoJokyoHokoku.set事業対象年月(jigyoJyokyo.getNijiHanteiYM().toDateString());
@@ -57,10 +57,12 @@ public class JigyoJyokyoHokokuEditor {
         } else if (第2号被保険者.equals(jigyoJyokyo.getHihokenshaKubunCode())) {
             set第2号被保険者(jigyoJyokyo);
         }
-        set総数();
     }
 
-    private void set総数() {
+    /**
+     * 事業状況報告合計情報を取得します。
+     */
+    public void set総数() {
         jigyoJokyoHokoku.set総数_非該当(get総数非該当());
         jigyoJokyoHokoku.set総数_支援1(get総数支援1());
         jigyoJokyoHokoku.set総数_支援2(get総数支援2());
@@ -148,50 +150,58 @@ public class JigyoJyokyoHokokuEditor {
     }
 
     private RString get総数非該当() {
-        return new RString(getIntValue(jigyoJokyoHokoku.get総数_非該当())
-                + getIntValue(jigyoJokyoHokoku.get第1号被保険者_非該当())
+        return new RString(getIntValue(jigyoJokyoHokoku.get第1号被保険者_非該当())
+                + getIntValue(jigyoJokyoHokoku.get歳以上75歳未満_非該当())
+                + getIntValue(jigyoJokyoHokoku.get歳75以上_非該当())
                 + getIntValue(jigyoJokyoHokoku.get第2号被保険者_非該当()));
     }
 
     private RString get総数支援1() {
-        return new RString(getIntValue(jigyoJokyoHokoku.get総数_支援1())
-                + getIntValue(jigyoJokyoHokoku.get第1号被保険者_支援1())
+        return new RString(getIntValue(jigyoJokyoHokoku.get第1号被保険者_支援1())
+                + getIntValue(jigyoJokyoHokoku.get歳以上75歳未満_支援1())
+                + getIntValue(jigyoJokyoHokoku.get歳75以上_支援1())
                 + getIntValue(jigyoJokyoHokoku.get第2号被保険者_支援1()));
     }
 
     private RString get総数支援2() {
-        return new RString(getIntValue(jigyoJokyoHokoku.get総数_支援2())
-                + getIntValue(jigyoJokyoHokoku.get第1号被保険者_支援2())
+        return new RString(getIntValue(jigyoJokyoHokoku.get第1号被保険者_支援2())
+                + getIntValue(jigyoJokyoHokoku.get歳以上75歳未満_支援2())
+                + getIntValue(jigyoJokyoHokoku.get歳75以上_支援2())
                 + getIntValue(jigyoJokyoHokoku.get第2号被保険者_支援2()));
     }
 
     private RString get総数要介護1() {
-        return new RString(getIntValue(jigyoJokyoHokoku.get総数_要介護1())
-                + getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護1())
+        return new RString(getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護1())
+                + getIntValue(jigyoJokyoHokoku.get歳以上75歳未満_要介護1())
+                + getIntValue(jigyoJokyoHokoku.get歳75以上_要介護1())
                 + getIntValue(jigyoJokyoHokoku.get第2号被保険者_要介護1()));
     }
 
     private RString get総数要介護2() {
-        return new RString(getIntValue(jigyoJokyoHokoku.get総数_要介護2())
-                + getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護2())
+        return new RString(getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護2())
+                + getIntValue(jigyoJokyoHokoku.get歳以上75歳未満_要介護2())
+                + getIntValue(jigyoJokyoHokoku.get歳75以上_要介護2())
                 + getIntValue(jigyoJokyoHokoku.get第2号被保険者_要介護2()));
     }
 
     private RString get総数要介護3() {
-        return new RString(getIntValue(jigyoJokyoHokoku.get総数_要介護3())
-                + getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護3())
+        return new RString(getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護3())
+                + getIntValue(jigyoJokyoHokoku.get歳以上75歳未満_要介護3())
+                + getIntValue(jigyoJokyoHokoku.get歳75以上_要介護3())
                 + getIntValue(jigyoJokyoHokoku.get第2号被保険者_要介護3()));
     }
 
     private RString get総数要介護4() {
-        return new RString(getIntValue(jigyoJokyoHokoku.get総数_要介護4())
-                + getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護4())
+        return new RString(getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護4())
+                + getIntValue(jigyoJokyoHokoku.get歳以上75歳未満_要介護4())
+                + getIntValue(jigyoJokyoHokoku.get歳75以上_要介護4())
                 + getIntValue(jigyoJokyoHokoku.get第2号被保険者_要介護4()));
     }
 
     private RString get総数要介護5() {
-        return new RString(getIntValue(jigyoJokyoHokoku.get総数_要介護5())
-                + getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護5())
+        return new RString(getIntValue(jigyoJokyoHokoku.get第1号被保険者_要介護5())
+                + getIntValue(jigyoJokyoHokoku.get歳以上75歳未満_要介護5())
+                + getIntValue(jigyoJokyoHokoku.get歳75以上_要介護5())
                 + getIntValue(jigyoJokyoHokoku.get第2号被保険者_要介護5()));
     }
 

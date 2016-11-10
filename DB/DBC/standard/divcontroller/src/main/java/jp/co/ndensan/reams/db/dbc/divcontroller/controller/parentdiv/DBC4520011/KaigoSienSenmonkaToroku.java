@@ -20,11 +20,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -158,22 +161,32 @@ public class KaigoSienSenmonkaToroku {
      * @return 画面
      */
     public ResponseData<KaigoSienSenmonkaTorokuDiv> onClick_btnSave(KaigoSienSenmonkaTorokuDiv div) {
-        if (状態_追加.equals(div.getOperateState())) {
-            ValidationMessageControlPairs pairs = getValidationHandler(div).validate();
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (状態_追加.equals(div.getOperateState())) {
+                ValidationMessageControlPairs pairs = getValidationHandler(div).validate();
+                if (pairs.iterator().hasNext()) {
+                    return ResponseData.of(div).addValidationMessages(pairs).respond();
+                }
             }
+            RString 介護支援専門員番号 = div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninBango().getValue();
+            RString 介護支援専門員氏名 = div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninShimei().getValue();
+            boolean isSuccess = getHandler(div).介護支援専門員登録情報を保存する(介護支援専門員番号);
+            if (isSuccess) {
+                onClick_btnSearch(div);
+            }
+            RString 完了メッセージ = isSuccess ? new RString(UrInformationMessages.保存終了.getMessage().evaluate())
+                    : new RString(UrErrorMessages.異常終了.getMessage().evaluate());
+            getHandler(div).介護完了メッセージパネルを表示する(完了メッセージ, 介護支援専門員番号, 介護支援専門員氏名, true);
+            return ResponseData.of(div).setState(DBC4520011StateName.完了状態);
         }
-        RString 介護支援専門員番号 = div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninBango().getValue();
-        RString 介護支援専門員氏名 = div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninShimei().getValue();
-        boolean isSuccess = getHandler(div).介護支援専門員登録情報を保存する(介護支援専門員番号);
-        if (isSuccess) {
-            onClick_btnSearch(div);
-        }
-        RString 完了メッセージ = isSuccess ? new RString(UrInformationMessages.保存終了.getMessage().evaluate())
-                : new RString(UrErrorMessages.異常終了.getMessage().evaluate());
-        getHandler(div).介護完了メッセージパネルを表示する(完了メッセージ, 介護支援専門員番号, 介護支援専門員氏名, true);
-        return ResponseData.of(div).setState(DBC4520011StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     /**

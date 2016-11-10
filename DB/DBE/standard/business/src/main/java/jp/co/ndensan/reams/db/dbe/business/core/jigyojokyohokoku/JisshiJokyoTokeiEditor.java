@@ -197,18 +197,17 @@ public class JisshiJokyoTokeiEditor {
         jisshiJokyoTokei.set保険者名(entity.getShichosonMeisho());
     }
 
-    private void set合計() {
-        jisshiJokyoTokei.set合計_申請受付数(new RString(
-                toInt(jisshiJokyoTokei.get合計_申請受付数()) + toInt(jisshiJokyoTokei.get新規申請_申請受付数())
+    /**
+     * 合計情報を取得します。
+     */
+    public void set合計() {
+        jisshiJokyoTokei.set合計_申請受付数(new RString(toInt(jisshiJokyoTokei.get新規申請_申請受付数())
                 + toInt(jisshiJokyoTokei.get更新申請_申請受付数()) + toInt(jisshiJokyoTokei.get区分変更申請_申請受付数())));
-        jisshiJokyoTokei.set合計_調査実施数(new RString(
-                toInt(jisshiJokyoTokei.get合計_調査実施数()) + toInt(jisshiJokyoTokei.get新規申請_調査実施数())
+        jisshiJokyoTokei.set合計_調査実施数(new RString(toInt(jisshiJokyoTokei.get新規申請_調査実施数())
                 + toInt(jisshiJokyoTokei.get更新申請_調査実施数()) + toInt(jisshiJokyoTokei.get区分変更申請_調査実施数())));
-        jisshiJokyoTokei.set合計_審査会実施数(new RString(
-                toInt(jisshiJokyoTokei.get合計_審査会実施数()) + toInt(jisshiJokyoTokei.get新規申請_審査会実施数())
+        jisshiJokyoTokei.set合計_審査会実施数(new RString(toInt(jisshiJokyoTokei.get新規申請_審査会実施数())
                 + toInt(jisshiJokyoTokei.get更新申請_審査会実施数()) + toInt(jisshiJokyoTokei.get区分変更申請_審査会実施数())));
-        jisshiJokyoTokei.set合計_認定結果数(new RString(
-                toInt(jisshiJokyoTokei.get合計_認定結果数()) + toInt(jisshiJokyoTokei.get新規申請_認定結果数())
+        jisshiJokyoTokei.set合計_認定結果数(new RString(toInt(jisshiJokyoTokei.get新規申請_認定結果数())
                 + toInt(jisshiJokyoTokei.get更新申請_認定結果数()) + toInt(jisshiJokyoTokei.get区分変更申請_認定結果数())));
     }
 

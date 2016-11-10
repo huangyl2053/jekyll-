@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190010;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchiichiran.KijunShunyugakuTekiyoKetteiTsuchiIchiran;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchiichiran.KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchiichiran.KijunShunyugakuTekiyoKetteiTsuchiIchiranPageBreak;
@@ -50,8 +51,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibun;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -59,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -82,8 +82,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private List<RString> 改頁項目リスト;
     private List<RString> 出力順リスト;
     private List<RString> 改頁List;
-    private TsuchishoTeikeibunFinder finder;
-    List<TsuchishoTeikeibun> teikeibunList;
     private ITextHenkanRule rule;
     private List<KijunShunyugakuTekiyoKetteiEntity> 基準収入額適用管理List;
     private KijunShunyugakuTekiyoKanriManager 基準収入額適用管理manager;
@@ -127,8 +125,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         count = INT_0;
         改頁項目リスト = new ArrayList<>();
         出力順リスト = new ArrayList<>();
-        finder = new TsuchishoTeikeibunFinder();
-        teikeibunList = finder.get通知書定型文パターン(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
         rule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
         基準収入額適用管理List = new ArrayList<>();
         基準収入額適用管理manager = new KijunShunyugakuTekiyoKanriManager();
@@ -298,43 +294,35 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     }
 
     private void set通知文(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter) {
-        for (TsuchishoTeikeibun teikeibun : teikeibunList) {
-            set通知文１(teikeibun, 基準収入額適用決定通知書Parameter, rule);
-            set通知文２(teikeibun, 基準収入額適用決定通知書Parameter, rule);
-            set通知文３_大(teikeibun, 基準収入額適用決定通知書Parameter, rule);
-            if (teikeibun.getパターン番号() == INT_3 && teikeibun.get項目番号() == INT_2 && teikeibun.get文章() != null) {
-                基準収入額適用決定通知書Parameter.set通知文4_上小(rule.editText(teikeibun.get文章()));
-            }
-            if (teikeibun.getパターン番号() == INT_3 && teikeibun.get項目番号() == INT_3 && teikeibun.get文章() != null) {
-                基準収入額適用決定通知書Parameter.set通知文5_下大(rule.editText(teikeibun.get文章()));
-            }
-            if (teikeibun.getパターン番号() == INT_4 && teikeibun.get項目番号() == INT_2 && teikeibun.get文章() != null) {
-                基準収入額適用決定通知書Parameter.set通知文6_上大(rule.editText(teikeibun.get文章()));
-            }
-            if (teikeibun.getパターン番号() == INT_4 && teikeibun.get項目番号() == INT_3 && teikeibun.get文章() != null) {
-                基準収入額適用決定通知書Parameter.set通知文7_下小(rule.editText(teikeibun.get文章()));
-            }
-        }
-    }
+        Map<Integer, RString> 通知文_1;
+        Map<Integer, RString> 通知文_2;
+        Map<Integer, RString> 通知文_3;
+        Map<Integer, RString> 通知文_4;
+        通知文_1 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票ID_通知書, KamokuCode.EMPTY, INT_1);
+        通知文_2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票ID_通知書, KamokuCode.EMPTY, INT_2);
+        通知文_3 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票ID_通知書, KamokuCode.EMPTY, INT_3);
+        通知文_4 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票ID_通知書, KamokuCode.EMPTY, INT_4);
 
-    private void set通知文３_大(TsuchishoTeikeibun teikeibun, KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter,
-            ITextHenkanRule rule) {
-        if (teikeibun.getパターン番号() == INT_2 && teikeibun.get項目番号() == INT_2 && teikeibun.get文章() != null) {
-            基準収入額適用決定通知書Parameter.set通知文３_大(rule.editText(teikeibun.get文章()));
+        if (通知文_1 != null && !通知文_1.isEmpty()) {
+            基準収入額適用決定通知書Parameter.set通知文１(rule.editText(通知文_1.get(INT_1)));
         }
-    }
-
-    private void set通知文２(TsuchishoTeikeibun teikeibun, KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter,
-            ITextHenkanRule rule) {
-        if (teikeibun.getパターン番号() == INT_1 && teikeibun.get項目番号() == INT_2 && teikeibun.get文章() != null) {
-            基準収入額適用決定通知書Parameter.set通知文２(rule.editText(teikeibun.get文章()));
+        if (通知文_1 != null && !通知文_1.isEmpty()) {
+            基準収入額適用決定通知書Parameter.set通知文２(rule.editText(通知文_1.get(INT_2)));
         }
-    }
-
-    private void set通知文１(TsuchishoTeikeibun teikeibun, KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter,
-            ITextHenkanRule rule) {
-        if (teikeibun.getパターン番号() == INT_1 && teikeibun.get項目番号() == INT_1 && teikeibun.get文章() != null) {
-            基準収入額適用決定通知書Parameter.set通知文１(rule.editText(teikeibun.get文章()));
+        if (通知文_2 != null && !通知文_2.isEmpty()) {
+            基準収入額適用決定通知書Parameter.set通知文３_大(rule.editText(通知文_2.get(INT_2)));
+        }
+        if (通知文_3 != null && !通知文_3.isEmpty()) {
+            基準収入額適用決定通知書Parameter.set通知文4_上小(rule.editText(通知文_3.get(INT_2)));
+        }
+        if (通知文_3 != null && !通知文_3.isEmpty()) {
+            基準収入額適用決定通知書Parameter.set通知文5_下大(rule.editText(通知文_3.get(INT_3)));
+        }
+        if (通知文_4 != null && !通知文_4.isEmpty()) {
+            基準収入額適用決定通知書Parameter.set通知文6_上大(rule.editText(通知文_4.get(INT_2)));
+        }
+        if (通知文_4 != null && !通知文_4.isEmpty()) {
+            基準収入額適用決定通知書Parameter.set通知文7_下小(rule.editText(通知文_4.get(INT_3)));
         }
     }
 

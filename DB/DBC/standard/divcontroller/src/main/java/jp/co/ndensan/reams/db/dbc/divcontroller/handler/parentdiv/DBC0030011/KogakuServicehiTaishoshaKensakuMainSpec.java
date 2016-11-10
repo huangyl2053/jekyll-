@@ -52,6 +52,12 @@ public enum KogakuServicehiTaishoshaKensakuMainSpec implements IPredicate<Kogaku
                     return 決定年月From != null || 決定年月To != null;
                 }
             },
+    対象データなしチェック {
+                @Override
+                public boolean apply(KogakuServicehiTaishoshaKensakuMainDiv div) {
+                    return false;
+                }
+            },
     /**
      * 実行するボタンクリック5 住宅改修支給届出日From、住宅改修支給届出日Toの大小関係チェックです。
      */

@@ -107,6 +107,7 @@ public class JigyoJyokyoHokokuProcess extends BatchKeyBreakBase<JigyoJyokyoHokok
     @Override
     protected void afterExecute() {
         if (isデータあり) {
+            new JigyoJyokyoHokokuEditor(null, jigyoJokyoHokoku).set総数();
             JigyoJokyoHokokuReport report = new JigyoJokyoHokokuReport(jigyoJokyoHokoku);
             report.writeBy(reportSourceWriter);
         }

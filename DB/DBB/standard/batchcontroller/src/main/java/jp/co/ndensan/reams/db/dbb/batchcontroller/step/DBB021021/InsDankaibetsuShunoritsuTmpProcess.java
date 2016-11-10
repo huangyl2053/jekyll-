@@ -132,20 +132,22 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setFukaNendo(new FlexibleYear(収納管理Entity.getKazeiNendo().toDateString()));
         entity.setKibetsu(収納管理Entity.getKibetsu());
         entity.setTsuchishoNo(収納管理Entity.getTsuchishoNo());
+        RString 対象者区分 = RString.EMPTY;
         if (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is単一()
                 || (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is広域()
-                && 市町村分.equals(市町村コード.getColumnValue()))) {
+                && 市町村分.equals(parameter.get市町村情報()))) {
             if ((抽出条件_認定者のみ.equals(parameter.get抽出条件())
                     || 抽出条件_認定者を除く１号被保険者.equals(parameter.get抽出条件()))
                     && 収納データ.get受給者給付COUNT() != null
                     && 収納データ.get受給者給付COUNT().get受給者台帳COUNT() != INT_0) {
-                entity.setTaishouKubun(認定者);
+                対象者区分 = 認定者;
             } else if (抽出条件_受給者のみ.equals(parameter.get抽出条件())
                     && 収納データ.get受給者給付COUNT() != null
                     && 収納データ.get受給者給付COUNT().get給付実績基本COUNT() != INT_0) {
-                entity.setTaishouKubun(受給者);
+                対象者区分 = 受給者;
             }
         }
+        entity.setTaishouKubun(対象者区分);
         entity.setHihokenshaNo(収納データ.get介護賦課().getHihokenshaNo());
         entity.setChoteigaku(収納データ.get調定共通().getChoteigaku());
         entity.setFunougaku(収納データ.get不納欠損() == null ? Decimal.ZERO : 収納データ.get不納欠損().getFunoKessongaku());
@@ -158,7 +160,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         LasdecCode 賦課市町村コード = 収納データ.get介護賦課().getFukaShichosonCode();
         if (市町村コード != null
                 && DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is広域()
-                && !市町村分.equals(市町村コード.getColumnValue())
+                && !市町村分.equals(parameter.get市町村情報())
                 && 賦課市町村コード != null
                 && (賦課市町村コード.getColumnValue().equals(parameter.get市町村情報())
                 || 賦課市町村コード.getColumnValue().equals(parameter.get旧市町村情報()))) {

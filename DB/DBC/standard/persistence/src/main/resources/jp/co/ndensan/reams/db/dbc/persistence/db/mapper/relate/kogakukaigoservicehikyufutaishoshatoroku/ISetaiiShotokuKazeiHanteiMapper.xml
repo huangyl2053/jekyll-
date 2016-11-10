@@ -364,7 +364,7 @@
             AND  "TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD") 
         OR (生活保護受給者."jukyuKaishiYMD"<![CDATA[<=]]> "TmpSetaiHaakuNyuryoku"."kijunYMD" 
             AND 生活保護受給者."jukyuHaishiYMD" IS NULL))
-        LEFT JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
+        INNER JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
         ON 生活保護受給者."shikibetsuCode" = 生活保護停止期間."shikibetsuCode"
         AND 生活保護受給者."gyomuCode" = 生活保護停止期間."gyomuCode"
         AND "TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[<]]> 生活保護停止期間."jukyuTeishiKaishiYMD"

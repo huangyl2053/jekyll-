@@ -53,6 +53,7 @@ public class KogakuServicehiTaishoshaKensakuMain {
      * @return 高額介護サービス費照会（対象者検索）画面
      */
     public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onLoad(KogakuServicehiTaishoshaKensakuMainDiv div) {
+        getHandler(div).load検索条件エリア();
         getHandler(div).click条件をクリアする();
         return ResponseData.of(div).setState(DBC0030011StateName.検索条件);
     }
@@ -65,15 +66,25 @@ public class KogakuServicehiTaishoshaKensakuMain {
      */
     public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onActive(KogakuServicehiTaishoshaKensakuMainDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
-        if (イベント_対象者特定.equals(イベント名) && ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class)) {
+        if (イベント_対象者特定.equals(イベント名)) {
             set検索条件(div);
             TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            if (資格対象者 == null) {
+                return ResponseData.of(div).respond();
+            }
             HihokenshaNo 被保番号 = 資格対象者.get被保険者番号();
-            if (被保番号 != null && !被保番号.isEmpty()) {
-                div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoNo().setValue(被保番号.getColumnValue());
-                getHandler(div).set被保険者名(被保番号, 資格対象者.get識別コード());
-            } else {
+            if (被保番号 == null || 被保番号.isEmpty()) {
                 throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
+            }
+            div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoNo().setValue(被保番号.getColumnValue());
+            boolean 対象データなしflag = getHandler(div).set被保険者名(被保番号, 資格対象者.get識別コード());
+            ValidationMessageControlPairs pairs = null;
+            if (対象データなしflag) {
+                KogakuServicehiTaishoshaKensakuMainValidationHandler validationHandler = new KogakuServicehiTaishoshaKensakuMainValidationHandler(div);
+                pairs = validationHandler.validate対象データなし();
+            }
+            if (pairs != null && pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
         }
         return ResponseData.of(div).respond();
@@ -158,7 +169,15 @@ public class KogakuServicehiTaishoshaKensakuMain {
      * @return 高額介護サービス費照会（対象者検索）画面
      */
     public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onBlur_txtHihoNo(KogakuServicehiTaishoshaKensakuMainDiv div) {
-        getHandler(div).onBlur_txtHihoNo();
+        boolean 対象データなしflag = getHandler(div).onBlur_txtHihoNo();
+        ValidationMessageControlPairs pairs = null;
+        if (対象データなしflag) {
+            KogakuServicehiTaishoshaKensakuMainValidationHandler validationHandler = new KogakuServicehiTaishoshaKensakuMainValidationHandler(div);
+            pairs = validationHandler.validate対象データなし();
+        }
+        if (pairs != null && pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         return createResponse(div);
     }
 

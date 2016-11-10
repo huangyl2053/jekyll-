@@ -71,7 +71,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
             div.getChushutsuJoken().getTxtZenkaiUketoriDate().setValue(処理日付管理データ.get対象開始年月日());
             if (処理日付管理データ.get対象開始日時() != null && !処理日付管理データ.get対象開始日時().isEmpty()) {
                 div.getChushutsuJoken().getTxtZenkaiUketoriTime().setValue(
-                        new RTime(処理日付管理データ.get対象開始日時().toDateString()));
+                        処理日付管理データ.get対象開始日時().getRDateTime().getTime());
             }
         }
         KokuhorenInterfaceKanriManager kokuManager = new KokuhorenInterfaceKanriManager();

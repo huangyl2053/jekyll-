@@ -89,7 +89,7 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         if (帳票出力対象データ.getServiceTeikyoYMChohyo() != null) {
             source.listHakkoTaishosha_3 = 帳票出力対象データ.getServiceTeikyoYMChohyo().wareki().toDateString();
         }
-        if (帳票出力対象データ.getShinseishaShimeiChohyo() != null) {
+        if (帳票出力対象データ.getMeishoChohyo() != null) {
             source.listHakkoTaishosha_4 = 帳票出力対象データ.getMeishoChohyo().getColumnValue();
         }
         if (帳票出力対象データ.getYubinNoChohyo() != null) {
