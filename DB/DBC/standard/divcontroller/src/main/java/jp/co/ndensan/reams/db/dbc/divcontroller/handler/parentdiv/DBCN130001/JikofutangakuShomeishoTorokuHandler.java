@@ -570,7 +570,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         if (obj == null) {
             return Decimal.ZERO;
         } else {
-            return obj
+            return obj;
         }
     }
 
@@ -590,7 +590,7 @@ public class JikofutangakuShomeishoTorokuHandler {
                 .add(nullToZero(div.getTxtUchiFutangaku4().getValue()))
                 .add(nullToZero(div.getTxtUchiFutangaku5().getValue()))
                 .add(nullToZero(div.getTxtUchiFutangaku6().getValue()))
-                .add(dnullToZero(div.getTxtUchiFutangaku7().getValue()));
+                .add(nullToZero(div.getTxtUchiFutangaku7().getValue()));
 
         div.getTxtUchiFutangakuGokei().setValue(uchiFutangakuGokei);
     }
