@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBA-1410-012 wanghui -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.juminidorendotennyu.IJuminIdoRendoTennyuMapper">
+    
+    <resultMap id="ResultMap_データ抽出" type="jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendotennyu.JuminIdoRendoTennyuRelateEntity" autoMapping="true">
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="dbT1001HihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id column="dbT1001HihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="宛名識別対象Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="被保険者台帳管理Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+    </resultMap> 
+    <select resultOrdered="true" id="getデータ抽出" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminidorendotennyumanager.JuminIdoRendoTennyuManagerMybatisParameter"
+           resultMap="ResultMap_データ抽出" fetchSize="1000">
+        SELECT
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+              <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
+        FROM
+            rgua.${宛名識別対象PSM} AS  "ShikibetsuTaisho" 
+            INNER JOIN rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+            ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
+        WHERE 
+            "ShikibetsuTaisho"."shikibetsuCode" = #{転出識別コード}
+            AND "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = False
+            ORDER BY "DbT1001HihokenshaDaicho"."idoYMD" DESC,
+                     "DbT1001HihokenshaDaicho"."edaNo" DESC
+    </select>
+</mapper>
