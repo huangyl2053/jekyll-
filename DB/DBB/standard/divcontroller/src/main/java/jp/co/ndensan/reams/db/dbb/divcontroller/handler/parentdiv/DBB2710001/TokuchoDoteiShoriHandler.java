@@ -169,6 +169,20 @@ public final class TokuchoDoteiShoriHandler {
         List<dgTokuchoTaishoshaDoteiShoriKakuninTanitsu_Row> tanitsuList = new ArrayList<>();
         List<dgTokuchoTaishoshaDoteiShoriKakuninKoiki_Row> koikiList = new ArrayList<>();
 
+        if (処理状況一覧情報.isEmpty()) {
+            if (モード_単一保険者.equals(保険者モード)) {
+                dgTokuchoTaishoshaDoteiShoriKakuninTanitsu_Row row = new dgTokuchoTaishoshaDoteiShoriKakuninTanitsu_Row();
+                row.getTxtJokyo().setValue(対応状況_未対応);
+                tanitsuList.add(row);
+            } else {
+                dgTokuchoTaishoshaDoteiShoriKakuninKoiki_Row row = new dgTokuchoTaishoshaDoteiShoriKakuninKoiki_Row();
+                row.getTxtJokyo().setValue(対応状況_未対応);
+                koikiList.add(row);
+            }
+            div.getDgTokuchoTaishoshaDoteiShoriKakuninKoiki().setDataSource(koikiList);
+            div.getDgTokuchoTaishoshaDoteiShoriKakuninTanitsu().setDataSource(tanitsuList);
+        }
+
         for (ShoriJokyoJohoResult 処理状況情報 : 処理状況一覧情報) {
             RString 状況 = get状況(処理状況情報.get基準日時());
             RString 処理日時 = get処理日時(処理状況情報.get基準日時());
