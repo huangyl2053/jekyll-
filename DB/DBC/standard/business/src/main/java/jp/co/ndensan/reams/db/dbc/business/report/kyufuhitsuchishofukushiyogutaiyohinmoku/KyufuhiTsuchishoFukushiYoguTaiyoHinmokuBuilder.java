@@ -17,14 +17,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuBuilder implements IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuBuilder {
 
     private final IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor editor;
+    private final IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor editor1;
 
     /**
      * インスタンスを生成します。
      *
      * @param editor {@link IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor}
+     * @param editor1 {@link IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor}
      */
-    public KyufuhiTsuchishoFukushiYoguTaiyoHinmokuBuilder(IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor editor) {
+    public KyufuhiTsuchishoFukushiYoguTaiyoHinmokuBuilder(IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor editor,
+            IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor editor1) {
         this.editor = editor;
+        this.editor1 = editor1;
     }
 
     /**
@@ -34,6 +38,6 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuBuilder implements IKyufuhiT
      */
     @Override
     public KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource build() {
-        return ReportEditorJoiner.from(new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource()).join(editor).join(editor1).buildSource();
     }
 }

@@ -179,7 +179,6 @@ public class KijunShunyuShinseiTourokuHandler {
     /**
      * 保存するボタン制御
      *
-     * @param div 制御のdiv
      */
     public void set保存するボタンDisabled() {
         if (div.getDgIchiran().getDataSource().isEmpty() || !is入力()) {
@@ -396,6 +395,7 @@ public class KijunShunyuShinseiTourokuHandler {
         取消Row.setCancelButtonState(DataGridButtonState.Disabled);
         取消Row.setDeleteButtonState(DataGridButtonState.Enabled);
         取消Row.setModifyButtonState(DataGridButtonState.Enabled);
+        取消Row.setRowBgColor(DataGridCellBgColor.bgColorNormal);
     }
 
     /**
@@ -443,7 +443,9 @@ public class KijunShunyuShinseiTourokuHandler {
             div.getMeisai().getTxtShinseiYMD().setValue(toFlexibleDate(修正Row.getShinseiYMD()));
             div.getMeisai().getTxtShinseishoSakuseiYMD().setValue(toFlexibleDate(修正Row.getShinseishoSakuseiYMD()));
             div.getMeisai().getTxtSetaiKazei().setValue(修正Row.getSetaiKazei());
-            div.getMeisai().getTxtTekiyoStartYM().setValue(toFlexibleDate(修正Row.getTekiyoKaishiYM().substring(NUM_0, NUM_6)));
+            if (修正Row.getTekiyoKaishiYM() != null && !修正Row.getTekiyoKaishiYM().isEmpty()) {
+                div.getMeisai().getTxtTekiyoStartYM().setValue(toFlexibleDate(修正Row.getTekiyoKaishiYM().substring(NUM_0, NUM_6)));
+            }
             if (修正Row.getSanteiKijunGaku() != null && !修正Row.getSanteiKijunGaku().isEmpty()) {
                 div.getMeisai().getDdlSanteiKijunGaku().setSelectedValue(修正Row.getSanteiKijunGaku().concat(KEY_円));
             } else {
@@ -489,7 +491,6 @@ public class KijunShunyuShinseiTourokuHandler {
         div.getMeisai().getTxtShinseishoSakuseiYMD().clearValue();
         div.getMeisai().getTxtSetaiKazei().clearValue();
         div.getMeisai().getTxtTekiyoStartYM().clearValue();
-        div.getMeisai().getTxtTekiyoEndYM().clearValue();
         div.getMeisai().getTxtKetteiYMD().clearValue();
         div.getMeisai().getTxtKetteiTsuchishoHakkoYMD().clearValue();
         div.getMeisai().getTxtUnder16().clearValue();
@@ -544,6 +545,7 @@ public class KijunShunyuShinseiTourokuHandler {
     private void 修正状態定義() {
         div.getMeisai().getTxtKetteiTsuchishoHakkoYMD().setReadOnly(true);
         div.getMeisai().getBtnSetaiSaiSanshutsu().setDisabled(true);
+        div.getMeisai().getTxtShinseiYMD().setReadOnly(false);
         div.getMeisai().getTxtUnder16().setReadOnly(false);
         div.getMeisai().getTxtOver16().setReadOnly(false);
     }
@@ -908,6 +910,7 @@ public class KijunShunyuShinseiTourokuHandler {
         取消Row.setRowState(RowState.Modified);
         取消Row.setCancelButtonState(DataGridButtonState.Disabled);
         取消Row.setDeleteButtonState(DataGridButtonState.Enabled);
+        取消Row.setRowBgColor(DataGridCellBgColor.bgColorNormal);
     }
 
     /**

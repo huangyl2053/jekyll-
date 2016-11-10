@@ -612,7 +612,7 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
         List<Decimal> 普徴期別額List = new ArrayList();
         input.set八月特徴開始者(INDEX_0);
         if (null != 賦課情報) {
-            if (Decimal.ZERO.equals(賦課情報.getTkKibetsuGaku02()) && !Decimal.ZERO.equals(賦課情報.getTkKibetsuGaku02())) {
+            if (Decimal.ZERO.equals(賦課情報.getTkKibetsuGaku02()) && !Decimal.ZERO.equals(賦課情報.getTkKibetsuGaku03())) {
                 input.set八月特徴開始者(INDEX_1);
             }
             特徴期別額List.add(get期別額(賦課情報.getTkKibetsuGaku01()));

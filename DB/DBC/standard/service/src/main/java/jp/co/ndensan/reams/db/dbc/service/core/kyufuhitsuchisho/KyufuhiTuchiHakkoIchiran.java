@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.Kyuf
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakoichiran.KyufuhiTuchiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,25 +27,26 @@ public class KyufuhiTuchiHakkoIchiran {
      * コンストラクタです。
      *
      * @param processParameter KyufuhiTsuchishoProcessParameter
+     * @param 出力順Entity 出力順Entity
      * @return 介護保険給付費通知書のEntity
      */
-    public KyufuhiTuchiHakkoIchiranEntity 帳票データ作成1(KyufuhiTsuchishoProcessParameter processParameter) {
+    public KyufuhiTuchiHakkoIchiranEntity 帳票データ作成1(KyufuhiTsuchishoProcessParameter processParameter,
+            ShutsuryokujunRelateEntity 出力順Entity) {
         KyufuhiTuchiHakkoIchiranEntity coverEntity = new KyufuhiTuchiHakkoIchiranEntity();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         coverEntity.set発行日時(processParameter.get処理年月日());
         coverEntity.set保険者コード(association.getLasdecCode_().value());
         coverEntity.set保険者名(association.get市町村名());
-        // TODO 出力順は実装されていない.
-        coverEntity.set出力順1(RString.EMPTY);
-        coverEntity.set出力順2(RString.EMPTY);
-        coverEntity.set出力順3(RString.EMPTY);
-        coverEntity.set出力順4(RString.EMPTY);
-        coverEntity.set出力順5(RString.EMPTY);
-        coverEntity.set改ページ条件1(RString.EMPTY);
-        coverEntity.set改ページ条件2(RString.EMPTY);
-        coverEntity.set改ページ条件3(RString.EMPTY);
-        coverEntity.set改ページ条件4(RString.EMPTY);
-        coverEntity.set改ページ条件5(RString.EMPTY);
+        coverEntity.set出力順1(出力順Entity.get出力順1());
+        coverEntity.set出力順2(出力順Entity.get出力順2());
+        coverEntity.set出力順3(出力順Entity.get出力順3());
+        coverEntity.set出力順4(出力順Entity.get出力順4());
+        coverEntity.set出力順5(出力順Entity.get出力順5());
+        coverEntity.set改ページ条件1(出力順Entity.get改頁項目1());
+        coverEntity.set改ページ条件2(出力順Entity.get改頁項目2());
+        coverEntity.set改ページ条件3(出力順Entity.get改頁項目3());
+        coverEntity.set改ページ条件4(出力順Entity.get改頁項目4());
+        coverEntity.set改ページ条件5(出力順Entity.get改頁項目5());
         coverEntity.set被保険者氏名(new RString("該当データがありません"));
         return coverEntity;
     }
@@ -54,26 +56,27 @@ public class KyufuhiTuchiHakkoIchiran {
      *
      * @param hakkoEntity KyufuhiTuchiHakkoEntity
      * @param processParameter KyufuhiTsuchishoProcessParameter
+     * @param 出力順Entity 出力順Entity
      * @return 介護保険給付費通知書のEntity
      */
     public KyufuhiTuchiHakkoIchiranEntity 帳票データ作成2(KyufuhiTuchiHakkoEntity hakkoEntity,
-            KyufuhiTsuchishoProcessParameter processParameter) {
+            KyufuhiTsuchishoProcessParameter processParameter,
+            ShutsuryokujunRelateEntity 出力順Entity) {
         KyufuhiTuchiHakkoIchiranEntity coverEntity = new KyufuhiTuchiHakkoIchiranEntity();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         coverEntity.set保険者コード(association.getLasdecCode_().value());
         coverEntity.set発行日時(processParameter.get処理年月日());
         coverEntity.set保険者名(association.get市町村名());
-        // TODO 出力順は実装されていない.
-        coverEntity.set出力順1(RString.EMPTY);
-        coverEntity.set出力順2(RString.EMPTY);
-        coverEntity.set出力順3(RString.EMPTY);
-        coverEntity.set出力順4(RString.EMPTY);
-        coverEntity.set出力順5(RString.EMPTY);
-        coverEntity.set改ページ条件1(RString.EMPTY);
-        coverEntity.set改ページ条件2(RString.EMPTY);
-        coverEntity.set改ページ条件3(RString.EMPTY);
-        coverEntity.set改ページ条件4(RString.EMPTY);
-        coverEntity.set改ページ条件5(RString.EMPTY);
+        coverEntity.set出力順1(出力順Entity.get出力順1());
+        coverEntity.set出力順2(出力順Entity.get出力順2());
+        coverEntity.set出力順3(出力順Entity.get出力順3());
+        coverEntity.set出力順4(出力順Entity.get出力順4());
+        coverEntity.set出力順5(出力順Entity.get出力順5());
+        coverEntity.set改ページ条件1(出力順Entity.get改頁項目1());
+        coverEntity.set改ページ条件2(出力順Entity.get改頁項目2());
+        coverEntity.set改ページ条件3(出力順Entity.get改頁項目3());
+        coverEntity.set改ページ条件4(出力順Entity.get改頁項目4());
+        coverEntity.set改ページ条件5(出力順Entity.get改頁項目5());
         coverEntity.set被保険者氏名(hakkoEntity.get名称());
         coverEntity.set被保険者番号(hakkoEntity.get被保険者番号());
         coverEntity.set証記載保険者(hakkoEntity.get証記載保険者名());

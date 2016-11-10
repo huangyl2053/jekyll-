@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchish
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoReportDBC100043Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoReportDBC200044Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoTanitsuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTuchiHakkoIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
@@ -50,6 +51,7 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     private static final String 介護保険給付費通知書作成 = "dbc100041";
     private static final String 被保険者番号変換単一 = "hiHokenshaNoHenkan";
     private static final String 被保険者番号変換広域 = "hiHokenshaNoKouiki";
+    private static final String CSVファイル作成 = "kyufuhituchihakkoichirancsv";
     private static final String 介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ = "dbc100042";
     private static final String 介護保険給付費通知書_福祉用具貸与品目 = "dbc100043";
     private static final String 給付費通知発行一覧表 = "dbc200044";
@@ -114,6 +116,7 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
             executeStep(介護保険給付費通知書_福祉用具貸与品目);
         }
         executeStep(給付費通知発行一覧表);
+        executeStep(CSVファイル作成);
     }
 
     private void 保険者構成() {
@@ -236,6 +239,16 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     @Step(給付費通知発行一覧表)
     protected IBatchFlowCommand 発行一覧表Process() {
         return loopBatch(KyufuhiTsuchishoReportDBC200044Process.class).arguments(getParameter().toProcessParameter()).define();
+    }
+
+    /**
+     * 給付費通知発行一覧表のCSVファイル作成です。
+     *
+     * @return KyufuhiTuchiHakkoIchiranProcess
+     */
+    @Step(CSVファイル作成)
+    protected IBatchFlowCommand csv作成Process() {
+        return loopBatch(KyufuhiTuchiHakkoIchiranProcess.class).arguments(getParameter().toProcessParameter()).define();
     }
 
 }

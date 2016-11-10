@@ -171,7 +171,7 @@ public class ShoriDateKanriManager {
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
 
-        DbT7022ShoriDateKanriEntity entity = dac.select(
+        DbT7022ShoriDateKanriEntity entity = dac.select処理日付管理マスタ(
                 サブ業務コード,
                 市町村コード,
                 処理名,

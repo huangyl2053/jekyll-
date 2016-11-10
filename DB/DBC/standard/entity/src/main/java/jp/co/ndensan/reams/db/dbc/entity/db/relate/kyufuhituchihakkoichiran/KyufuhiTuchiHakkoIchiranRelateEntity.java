@@ -62,7 +62,7 @@ public class KyufuhiTuchiHakkoIchiranRelateEntity extends DbTableEntityBase<Kyuf
     @TempTableColumnOrder(18)
     private RString kibouKouriKakaku;
     @TempTableColumnOrder(19)
-    private RString zenkokuSeikyuKensu;
+    private Decimal zenkokuSeikyuKensu;
     @TempTableColumnOrder(20)
     private Decimal zenkokuSaiteiHiyouGaku;
     @TempTableColumnOrder(21)
@@ -72,7 +72,7 @@ public class KyufuhiTuchiHakkoIchiranRelateEntity extends DbTableEntityBase<Kyuf
     @TempTableColumnOrder(23)
     private Decimal zenkokuHeikinHiyouGaku;
     @TempTableColumnOrder(24)
-    private RString todoufukenSeikyuKensu;
+    private Decimal todoufukenSeikyuKensu;
     @TempTableColumnOrder(25)
     private Decimal todoufukenSaiteiHiyouGaku;
     @TempTableColumnOrder(26)
@@ -82,7 +82,7 @@ public class KyufuhiTuchiHakkoIchiranRelateEntity extends DbTableEntityBase<Kyuf
     @TempTableColumnOrder(28)
     private Decimal todoufukenHeikinHiyouGaku;
     @TempTableColumnOrder(29)
-    private RString hokenShaSeikyuKensu;
+    private Decimal hokenShaSeikyuKensu;
     @TempTableColumnOrder(30)
     private Decimal hokenShaSaiteiHiyouGaku;
     @TempTableColumnOrder(31)
