@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinHaakuNyuryokuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -31,9 +32,12 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2 extends BatchProcessB
     private static final RString 住所地特例該当_0 = new RString("0");
 
     private static final RString TABLE_世帯員把握 = new RString("TmpSetaiHaaku");
+    private static final RString TABLE_世帯員所得判定明細一時 = new RString("TempSetaiinShotokuHanteiMeisai");
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tableWriter;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter tempSetaiinShotokuHanteiMeisaiTableWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -43,6 +47,8 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2 extends BatchProcessB
     @Override
     protected void createWriter() {
         tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員把握, TempSetaiinHaakuNyuryokuEntity.class);
+        tempSetaiinShotokuHanteiMeisaiTableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細一時,
+                TempSetaiinShotokuHanteiEntity.class);
     }
 
     @Override
@@ -79,5 +85,6 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2 extends BatchProcessB
 
     @Override
     protected void afterExecute() {
+        tempSetaiinShotokuHanteiMeisaiTableWriter.getInsertCount();
     }
 }

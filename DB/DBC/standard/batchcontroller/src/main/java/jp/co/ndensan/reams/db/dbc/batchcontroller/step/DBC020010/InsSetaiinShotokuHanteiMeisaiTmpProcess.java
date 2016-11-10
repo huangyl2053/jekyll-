@@ -19,9 +19,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -37,7 +35,6 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Hi
 
     private static final RString MYBATISPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
             + ".kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.select被保生保老齢情報");
-    private static final RString TABLE_世帯員所得判定明細一時 = new RString("TempSetaiinShotokuHanteiMeisai");
 
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
@@ -52,11 +49,8 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Hi
     private List<HihokenSeikatsuRoreiRelateEntity> 被保生保老齢情報List;
     private RString breakKey;
 
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter tableWriter;
-
     @Override
-    protected void beforeExecute() {
+    protected void initialize() {
         mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
         RDate nowDate = RDate.getNowDate();
         被保生保老齢情報List = new ArrayList<>();
@@ -92,8 +86,6 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Hi
 
     @Override
     protected void createWriter() {
-        tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細一時,
-                TempSetaiinShotokuHanteiEntity.class);
     }
 
     @Override
@@ -104,20 +96,20 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Hi
             被保生保老齢情報List.add(entity);
             breakKey = nowBreakKey;
             return;
-        } else {
-            for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
-                TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
-                if (KazeiKubun.課税.getコード().equals(判定明細Entity.getHonninKazeiKubun())) {
-                    課税区分flag = true;
-                    break;
-                }
-            }
-            breakKey = nowBreakKey;
         }
+        for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
+            TempSetaiinShotokuHanteiEntity 判定明細Entity = 被保生保老齢情報.get判定明細Entity();
+            if (KazeiKubun.課税.getコード().equals(判定明細Entity.getHonninKazeiKubun())) {
+                課税区分flag = true;
+                break;
+            }
+        }
+        breakKey = nowBreakKey;
         for (HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報 : 被保生保老齢情報List) {
             update世帯員所得判定明細一時(被保生保老齢情報, 課税区分flag);
         }
         被保生保老齢情報List = new ArrayList<>();
+        被保生保老齢情報List.add(entity);
     }
 
     @Override
@@ -135,7 +127,6 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Hi
                 update世帯員所得判定明細一時(被保生保老齢情報, 課税区分flag);
             }
         }
-        tableWriter.getInsertCount();
     }
 
     private void update世帯員所得判定明細一時(HihokenSeikatsuRoreiRelateEntity 被保生保老齢情報, boolean 課税区分flag) {
