@@ -77,6 +77,7 @@ public class FukushiyoguShohinInputGuideHandler {
             div.getPanInput().getTxtShohinmei().setValue(dgfukushiyogushohinRow.getShohinmei());
             div.getPanInput().getTxtSeizoJigyoshamei().setValue(dgfukushiyogushohinRow.getSeizoJigyoshamei());
             div.getPanInput().getTxtHinmokuCode().setValue(dgfukushiyogushohinRow.getHinmokuCode());
+            div.getPanInput().setKanriKaishiDay(dgfukushiyogushohinRow.getKanriKaishiYMD().getValue().toDateString());
         } else {
             div.getPanInput().setShohinNo(RString.EMPTY);
             div.getPanInput().getTxtKanriKaishiDay().clearValue();
