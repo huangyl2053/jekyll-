@@ -4,24 +4,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYearMonth;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * 画面設計_DBCKD00005_高額申請一覧共有子Div
@@ -29,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBC-2020-010 quxiaodong
  */
 public class KogakuShinseiListDiv extends Panel implements IKogakuShinseiListDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -328,5 +324,15 @@ public class KogakuShinseiListDiv extends Panel implements IKogakuShinseiListDiv
     @Override
     public boolean is支給区分フラグ() {
         return KogakuShinseiListDivHandler.of(this).is支給区分フラグ();
+    }
+
+    /**
+     * 選択行
+     *
+     * @return dgShinseiJoho_Row
+     */
+    @Override
+    public dgShinseiJoho_Row getClickedRow() {
+        return KogakuShinseiListDivHandler.of(this).getClickedRow();
     }
 }
