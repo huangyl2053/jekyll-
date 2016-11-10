@@ -80,6 +80,9 @@ public class ShiharaiHenkoTsuchiHakko {
         } else {
             ArrayList<ShiharaiHohoHenko> shiharaiHohoHenkoEntityList = getHandler().get支払方法変更の情報(被保険者番号);
             ArrayList<ShiharaiHohoHenkoIndex> shiharaiHohoHenkoIndexList = crateshiharaiHohoHenkonoIndexList(shiharaiHohoHenkoEntityList);
+            if (shiharaiHohoHenkoIndexList.isEmpty()) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnReportPublish"), true);
+            }
             div.getDgShiharaiHohoHenkoRireki().setDataSource(creatDateSource(shiharaiHohoHenkoIndexList));
             div.getDgShiharaiHohoHenkoRireki().getGridSetting().setSelectedRowCount(shiharaiHohoHenkoIndexList.size());
             ViewStateHolder.put(ShiharaiHenkoTsuchiHakkoHandler.ShiharaiHenkoTsuchiHakkoEnum.リストキー, shiharaiHohoHenkoIndexList);
