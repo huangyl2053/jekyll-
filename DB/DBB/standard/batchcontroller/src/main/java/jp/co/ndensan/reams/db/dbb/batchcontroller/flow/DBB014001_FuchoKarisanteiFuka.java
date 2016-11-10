@@ -85,7 +85,7 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
                 flag2 = true;
             }
         }
-        if (flag1) {
+        if (!flag1) {
             return;
         }
         バッチ起動日時 = RDateTime.now();
