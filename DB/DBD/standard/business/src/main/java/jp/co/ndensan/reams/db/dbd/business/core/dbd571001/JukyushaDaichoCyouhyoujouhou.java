@@ -714,7 +714,8 @@ public class JukyushaDaichoCyouhyoujouhou {
         if (t.get先頭情報().getX2002_調定年度() != null && !t.get先頭情報().getX2002_調定年度().isEmpty()
                 && t.get先頭情報().getX2002_保険料段階() != null && !t.get先頭情報().getX2002_保険料段階().isEmpty()) {
             先頭Entity.set直近所得段階(new FlexibleYear(t.get先頭情報().getX2002_調定年度()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(new RString("第"))
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString()
+                    .concat(RString.HALF_SPACE).concat(new RString("第"))
                     .concat(t.get先頭情報().getX2002_保険料段階()).concat(new RString("段階")));
         }
         先頭Entity.set調査先住所(t.get先頭情報().getT4101_訪問調査先郵便番号());
