@@ -97,7 +97,7 @@ public class JikofutangakuShomeishoToroku {
         }
         div.setExecutionStatus(STATUS_新規);
         getHandler(div).set登録情報();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBCN130001StateName.証明書登録);
     }
 
     /**
