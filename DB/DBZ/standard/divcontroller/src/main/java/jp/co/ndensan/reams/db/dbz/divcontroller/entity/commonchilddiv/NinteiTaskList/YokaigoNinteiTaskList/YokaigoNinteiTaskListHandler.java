@@ -780,7 +780,7 @@ public class YokaigoNinteiTaskListHandler {
                 completeCount++;
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
-            row.setIchijiHanteiKekka(一次判定結果の名称を取得する(business.get厚労省IF識別コード(), business.get要介護認定一次判定結果コード()));
+            row.setIchijiHanteiKekka(business.get要介護認定一次判定結果コード().getKey());
             row.setIchijiHanteiWarningCode(business.get要介護認定一次判定警告コード() == null
                     ? RString.EMPTY : IchijiHanteiKeikoku.toValue(business.get要介護認定一次判定警告コード()).get名称());
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
