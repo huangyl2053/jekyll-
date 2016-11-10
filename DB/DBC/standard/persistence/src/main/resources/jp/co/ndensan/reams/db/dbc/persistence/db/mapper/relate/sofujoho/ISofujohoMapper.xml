@@ -88,12 +88,13 @@
         rgdb."DbV1001HihokenshaDaicho" AS dbv1001
         ON	T3059."hiHokenshaNo" = dbv1001."hihokenshaNo"
         WHERE
-        T3059."moshitateshoKubunCode"='1'
+        T3059."moshitateshoKubunCode"=#{申立書区分コード}
       <if test="送付年月フラグ">
-            AND T3059."kokuhorenSofuYM" = '201607'
+            AND T3059."kokuhorenSofuYM" = #{送付年月}
        </if>
         <if test="!送付年月フラグ">
            AND T3059."kokuhorenSofuYM" IS NULL
+            OR T3059."kokuhorenSofuYM" = ''
        </if>
        <if test="保険者番号フラグ">
            AND substr(T3059."shokisaiHokenshaNo",1,5) = #{証記載保険者番号}
