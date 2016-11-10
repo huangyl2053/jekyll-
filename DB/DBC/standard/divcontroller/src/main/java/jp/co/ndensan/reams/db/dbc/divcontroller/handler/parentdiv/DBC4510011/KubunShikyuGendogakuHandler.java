@@ -204,7 +204,7 @@ public class KubunShikyuGendogakuHandler {
      * @param flag boolean
      */
     public void initialDisable(boolean flag) {
-        div.getDgServiceShurui().setDisabled(flag);
+        div.getDgSerShurui().setDisabled(flag);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, flag);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(入力前の状態に戻る, flag);
     }
