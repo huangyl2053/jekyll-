@@ -205,7 +205,9 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
                 where(and(
                                 eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
                                 leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 日付),
-                                or(leq(日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD))))
+                                or(leq(日付, DbT7060KaigoJigyosha.yukoShuryoYMD),
+                                        isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD), eq(FlexibleDate.EMPTY,
+                                                DbT7060KaigoJigyosha.yukoShuryoYMD))))
                 .order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1)
                 .toObject(DbT7060KaigoJigyoshaEntity.class);
     }

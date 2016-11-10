@@ -429,6 +429,19 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
+     * 再検索画面に戻るです。
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnReSearch(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        getHandler(div).前排他キーの解除(被保険者番号);
+        return ResponseData.of(div).forwardWithEventName(DBC0440011TransitionEventName.再検索).respond();
+    }
+
+    /**
      * 「世帯情報を表示する」ボタン
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
