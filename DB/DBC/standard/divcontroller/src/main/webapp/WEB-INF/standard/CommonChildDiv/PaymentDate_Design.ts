@@ -61,6 +61,10 @@ module DBC {
                 return new UZA.TextBoxTime(this.convFiledName("txtShiharaiShuryoTime"));
             }
 
+            public radIkkatsuKoshinKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIkkatsuKoshinKubun"));
+            }
+
         }
 
      }
