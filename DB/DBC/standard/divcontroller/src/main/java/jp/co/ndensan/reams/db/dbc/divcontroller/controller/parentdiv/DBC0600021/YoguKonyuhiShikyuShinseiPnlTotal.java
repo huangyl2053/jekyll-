@@ -396,6 +396,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         getHandler(div).readOnly福祉用具購入費明細(false);
         ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード登録);
         getHandler(div).clear福祉用具購入費明細();
+        RDate date = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue();
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtBuyYMD()
+                .setValue(new RDate(date.getYearValue(), date.getMonthValue(), 1));
         return createResponse(div);
     }
 
