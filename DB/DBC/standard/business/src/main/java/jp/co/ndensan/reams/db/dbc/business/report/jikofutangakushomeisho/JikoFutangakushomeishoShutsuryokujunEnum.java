@@ -30,7 +30,7 @@ public enum JikoFutangakushomeishoShutsuryokujunEnum implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"kogakuGassanTemp_hihokenshaNo\"")),
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"Atesaki_kanaMeisho\"")),
     /**
      * 市町村コード
      */

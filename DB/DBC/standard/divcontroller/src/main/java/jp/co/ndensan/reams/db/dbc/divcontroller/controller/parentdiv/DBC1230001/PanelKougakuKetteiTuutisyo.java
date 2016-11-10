@@ -79,8 +79,10 @@ public class PanelKougakuKetteiTuutisyo {
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onChange_ddlServiceYearMonth(PanelKougakuKetteiTuutisyoDiv div) {
         TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        getHandler(div).管理番号と前回発行日の設定(キー.get被保険者番号(),
-                new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString()));
+        FlexibleYearMonth サービス提供年月 = div.getDdlServiceYearMonth().getSelectedValue().isEmpty()
+                ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString());
+        getHandler(div).管理番号と前回発行日の設定(キー.get被保険者番号(), サービス提供年月);
         return ResponseData.of(div).respond();
     }
 
@@ -92,9 +94,12 @@ public class PanelKougakuKetteiTuutisyo {
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onChange_ddlKanliBanngou(PanelKougakuKetteiTuutisyoDiv div) {
         TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        getHandler(div).前回発行日の設定(キー.get被保険者番号(),
-                new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString()),
-                new Decimal(div.getDdlKanliBanngou().getSelectedValue().toString()));
+        FlexibleYearMonth サービス提供年月 = div.getDdlServiceYearMonth().getSelectedValue().isEmpty()
+                ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString());
+        Decimal 管理番号 = div.getDdlKanliBanngou().getSelectedValue().isEmpty() ? Decimal.ZERO
+                : new Decimal(div.getDdlKanliBanngou().getSelectedValue().toString());
+        getHandler(div).前回発行日の設定(キー.get被保険者番号(), サービス提供年月, 管理番号);
         return ResponseData.of(div).respond();
     }
 

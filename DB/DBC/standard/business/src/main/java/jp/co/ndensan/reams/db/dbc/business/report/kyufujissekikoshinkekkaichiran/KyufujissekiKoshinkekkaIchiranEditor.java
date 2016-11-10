@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
@@ -155,6 +156,7 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             source.shimei50onKana = getNotNull(entity.get被保険者_氏名50音カナ());
             source.shichosonCode = getNotNull(entity.get被保険者_市町村コード());
         }
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_5);
         return source;
     }
 

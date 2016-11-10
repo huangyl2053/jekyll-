@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200040;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteiTsuchiIchiran;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200040.GassanShikyuFushikyuKetteishaIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -81,6 +83,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
         } else {
             edit明細(source);
         }
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listCerter_2);
         return source;
     }
 
@@ -115,7 +118,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
                     && null != entity.get支払期間終了年月日() && null != entity.get支払期間終了時間()) {
                 source.listLower_6 = toRS(entity.get支払期間開始年月日().toString()).concat(前括弧)
                         .concat(entity.get支払期間開始年月日().getDayOfWeek().getShortTerm()).concat(後括弧).concat(
-                        entity.get支払期間開始時間().toString()).concat(接続符).concat(entity.get支払期間終了年月日().toString()).concat(前括弧)
+                                entity.get支払期間開始時間().toString()).concat(接続符).concat(entity.get支払期間終了年月日().toString()).concat(前括弧)
                         .concat(entity.get支払期間終了年月日().getDayOfWeek().getShortTerm()).concat(後括弧)
                         .concat(entity.get支払期間終了時間().toString()
                         );

@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijiari;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -230,12 +231,14 @@ public class JigyoKogakuKetteiTsuchishoYijiAriSource implements IReportSource {
     public RString ninshoshaShimeiKakenai;
     @ReportItem(name = "koinShoryaku", length = 15, order = 108)
     public RString koinShoryaku;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 15, order = 115)
     public RString hihokenshaNo;
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
