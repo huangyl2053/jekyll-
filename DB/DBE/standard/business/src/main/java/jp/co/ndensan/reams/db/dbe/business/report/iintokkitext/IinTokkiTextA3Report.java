@@ -48,7 +48,7 @@ public class IinTokkiTextA3Report extends Report<IinTokkiTextA3ReportSource> {
             reportSourceWriter.writeLine(builder);
         }
         if (テキスト全面イメージ.equals(data.get特記パターン())) {
-            if (TokkijikoTextImageKubun.イメージ.getコード().equals(data.get特記事項テキスト_イメージ区分())) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(data.get特記事項テキスト_イメージ区分())) {
                 set全面テキスト(reportSourceWriter, 短冊リスト, テキスト全面List);
             } else {
                 set全面イメージ(reportSourceWriter, 短冊リスト, イメージ全面List);

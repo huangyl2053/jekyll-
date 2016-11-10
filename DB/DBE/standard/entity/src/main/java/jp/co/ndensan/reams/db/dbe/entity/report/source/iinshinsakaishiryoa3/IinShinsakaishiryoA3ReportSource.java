@@ -813,4 +813,13 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation shinseishoKanriNo;
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        six_tokkiText1,
+        six_tokkiImg1,
+    }
 }
