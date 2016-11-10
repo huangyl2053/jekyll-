@@ -163,7 +163,7 @@ public class PanelKougakuKetteiTuutisyo {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).cancelPublish().respond();
     }
 
     /**
