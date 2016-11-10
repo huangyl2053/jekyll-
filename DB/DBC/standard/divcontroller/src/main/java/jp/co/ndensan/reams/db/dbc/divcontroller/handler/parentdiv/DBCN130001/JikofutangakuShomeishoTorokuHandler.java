@@ -550,20 +550,28 @@ public class JikofutangakuShomeishoTorokuHandler {
      *
      */
     public void 自己負担額合計の計算() {
-        Decimal jikofutangakuGokei = div.getTxtJikofutangaku8().getValue()
-                .add(div.getTxtJikofutangaku9().getValue())
-                .add(div.getTxtJikofutangaku10().getValue())
-                .add(div.getTxtJikofutangaku11().getValue())
-                .add(div.getTxtJikofutangaku12().getValue())
-                .add(div.getTxtJikofutangaku1().getValue())
-                .add(div.getTxtJikofutangaku2().getValue())
-                .add(div.getTxtJikofutangaku3().getValue())
-                .add(div.getTxtJikofutangaku4().getValue())
-                .add(div.getTxtJikofutangaku5().getValue())
-                .add(div.getTxtJikofutangaku6().getValue())
-                .add(div.getTxtJikofutangaku7().getValue());
+        Decimal jikofutangakuGokei = nullToZero(div.getTxtJikofutangaku8().getValue())
+                .add(nullToZero(div.getTxtJikofutangaku9().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku10().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku11().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku12().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku1().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku2().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku3().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku4().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku5().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku6().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku7().getValue()));
 
         div.getTxtJikofutangakuGokei().setValue(jikofutangakuGokei);
+    }
+
+    private Decimal nullToZero(Decimal obj) {
+        if (obj == null) {
+            return Decimal.ZERO;
+        } else {
+            return obj
+        }
     }
 
     /**
@@ -571,18 +579,18 @@ public class JikofutangakuShomeishoTorokuHandler {
      *
      */
     public void うち70_74歳に係る負担額合計の計算() {
-        Decimal uchiFutangakuGokei = div.getTxtUchiFutangaku8().getValue()
-                .add(div.getTxtUchiFutangaku9().getValue())
-                .add(div.getTxtUchiFutangaku10().getValue())
-                .add(div.getTxtUchiFutangaku11().getValue())
-                .add(div.getTxtUchiFutangaku12().getValue())
-                .add(div.getTxtUchiFutangaku1().getValue())
-                .add(div.getTxtUchiFutangaku2().getValue())
-                .add(div.getTxtUchiFutangaku3().getValue())
-                .add(div.getTxtUchiFutangaku4().getValue())
-                .add(div.getTxtUchiFutangaku5().getValue())
-                .add(div.getTxtUchiFutangaku6().getValue())
-                .add(div.getTxtUchiFutangaku7().getValue());
+        Decimal uchiFutangakuGokei = nullToZero(div.getTxtUchiFutangaku8().getValue())
+                .add(nullToZero(div.getTxtUchiFutangaku9().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku10().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku11().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku12().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku1().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku2().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku3().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku4().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku5().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku6().getValue()))
+                .add(dnullToZero(div.getTxtUchiFutangaku7().getValue()));
 
         div.getTxtUchiFutangakuGokei().setValue(uchiFutangakuGokei);
     }
@@ -617,7 +625,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         JikofutangakuShomeishoTorokuParameter parameter = new JikofutangakuShomeishoTorokuParameter();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         parameter.set対象年度(new RDate(対象年度.toString()).getYear().toDateString());
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         parameter.set支給申請書整理番号(支給申請書整理番号);
@@ -754,7 +762,7 @@ public class JikofutangakuShomeishoTorokuHandler {
     public JigyoKogakuGassanJikoFutanGakuShomeisho get事業高額合算自己負担額証明書(HihokenshaNo 被保険者番号, Decimal 履歴番号) {
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -798,7 +806,7 @@ public class JikofutangakuShomeishoTorokuHandler {
             JigyoKogakuGassanJikoFutanGakuShomeisho 更新前データ) {
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -842,7 +850,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = new ArrayList<>();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -923,7 +931,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = new ArrayList<>();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -1006,7 +1014,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = new ArrayList<>();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai対象 : 更新前データ) {
             JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiBuilder meisaiBuilder = meisai対象.createBuilderForEdit();
             if (八月.equals(meisai対象.get対象月())) {

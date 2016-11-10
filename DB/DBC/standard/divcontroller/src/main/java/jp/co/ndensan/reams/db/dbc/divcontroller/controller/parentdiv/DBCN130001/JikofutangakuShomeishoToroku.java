@@ -64,8 +64,6 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onLoad(JikofutangakuShomeishoTorokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("0000000010"));
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000033"));
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString 前排他キー = 排他キー.concat(被保険者番号.value());
@@ -421,7 +419,7 @@ public class JikofutangakuShomeishoToroku {
     /**
      * 合計を求める。
      *
-     * @param div div
+     * @param div JikofutangakuShomeishoTorokuDiv
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku11(JikofutangakuShomeishoTorokuDiv div) {
@@ -643,12 +641,12 @@ public class JikofutangakuShomeishoToroku {
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         int count = manager.get事業高額合算自己負担額証明書Count(getHandler(div).getParameterFor登録(被保険者番号));
         if (count == 0) {
-            manager.save事業高額合算自己負担額証明書(getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, Decimal.ZERO));
-            manager.save事業高額合算自己負担額証明書明細(getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, Decimal.ZERO));
+            manager.save事業高額合算自己負担額証明書and明細(getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, Decimal.ZERO),
+                    getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, Decimal.ZERO));
         } else {
             Decimal 履歴番号 = manager.get事業高額合算自己負担額証明書最新履歴番号(getHandler(div).getParameterFor登録(被保険者番号));
-            manager.save事業高額合算自己負担額証明書(getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, 履歴番号));
-            manager.save事業高額合算自己負担額証明書明細(getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, 履歴番号));
+            manager.save事業高額合算自己負担額証明書and明細(getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, 履歴番号),
+                    getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, 履歴番号));
         }
     }
 
@@ -657,6 +655,7 @@ public class JikofutangakuShomeishoToroku {
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
         if (shomeisho.get転入前保険者番号().value().equals(div.getCcdTennyumaeHokensha().getHokenjaNo())) {
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
             manager.save事業高額合算自己負担額証明書(shomeisho.createBuilderForEdit().set自己負担額証明書整理番号(div.getTxtJikofutangakuShomeishoSeiriNo().getValue())
                     .set転入前保険者名(div.getCcdTennyumaeHokensha().getHokenjaName())
                     .set対象計算期間開始年月日(new FlexibleDate(div.getTxtTaishoKikan().getFromValue().toDateString()))
@@ -670,22 +669,19 @@ public class JikofutangakuShomeishoToroku {
                     .set支給額計算結果連絡先住所(div.getTxtRenrakusakiJusho().getValue())
                     .set支給額計算結果連絡先名称1(div.getTxtRenrakusakiMei1().getValue())
                     .set支給額計算結果連絡先名称2(div.getTxtRenrakusakiMei2().getValue())
-                    .set受付年月日(div.getTxtUketsukeDate().getValue()).build());
-            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
-            manager.delete事業高額合算自己負担額証明書明細(meisaiList);
-            manager.save事業高額合算自己負担額証明書明細(getHandler(div).get更新用事業高額合算自己負担額証明書明細(被保険者番号, meisaiList));
+                    .set受付年月日(div.getTxtUketsukeDate().getValue()).build(), meisaiList, getHandler(div).get更新用事業高額合算自己負担額証明書明細(被保険者番号, meisaiList));
+
         } else {
-            manager.save事業高額合算自己負担額証明書(getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, Decimal.ZERO));
-            manager.save事業高額合算自己負担額証明書明細(getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, Decimal.ZERO));
+            manager.save事業高額合算自己負担額証明書and明細(getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, Decimal.ZERO),
+                    getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, Decimal.ZERO));
         }
     }
 
     private void delete(JikofutangakuShomeishoTorokuBusiness business) {
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
-        manager.delete事業高額合算自己負担額証明書(shomeisho);
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
-        manager.delete事業高額合算自己負担額証明書明細(meisaiList);
+        manager.delete事業高額合算自己負担額証明書and明細(shomeisho, meisaiList);
     }
 
     private PersonalData toPersonalData(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
@@ -697,7 +693,7 @@ public class JikofutangakuShomeishoToroku {
     /**
      * Handlerを取得します。
      *
-     * @param div div
+     * @param div JikofutangakuShomeishoTorokuDiv
      * @return JikofutangakuShomeishoTorokuHandler
      */
     public JikofutangakuShomeishoTorokuHandler getHandler(JikofutangakuShomeishoTorokuDiv div) {
