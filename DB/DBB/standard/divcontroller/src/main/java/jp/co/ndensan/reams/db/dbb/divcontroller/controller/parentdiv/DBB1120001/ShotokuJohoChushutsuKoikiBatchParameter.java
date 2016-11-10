@@ -116,12 +116,11 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
             for (File file1 : files) {
                 if (file1.getName().startsWith(DEE01F001.toString()) || file1.getName().startsWith(DEC05F001.toString())) {
                     count++;
-                    continue;
                 }
-                if (count <= 1) {
-                    throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
-                            .replace(DEC05F001またはDEE01F001.toString()).evaluate());
-                }
+            }
+            if (count <= 1) {
+                throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
+                        .replace(DEC05F001またはDEE01F001.toString()).evaluate());
             }
         }
         return ResponseData.of(div).respond();
