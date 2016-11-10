@@ -37,6 +37,7 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
     private static final RString 記号 = new RString("*");
     private static final RString TEXT_過年度 = new RString("*過年度*");
     private static final RString TEXT_総過年度 = new RString("*総過年度*");
+    private static final RString 記号_TWO = new RString("**");
 
     /**
      * コンストラクタです
@@ -63,6 +64,8 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
         if (RString.isNullOrEmpty(パラメータ.get年度())
                 || パラメータ.get年度().startsWith(記号)) {
             source.list_2 = RString.EMPTY;
+        } else if (記号_TWO.equals(パラメータ.get保険料段階())) {
+            source.list_2 = 記号_TWO;
         } else {
             source.list_2 = new RString(パラメータ.get期());
         }
