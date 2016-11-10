@@ -771,6 +771,8 @@ public class JimuShinsakaishiryoA4ReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
+        two_tokkiText,
+        two_tokkiImg,
         three_tokkiText,
         three_tokkiImg,
     }
