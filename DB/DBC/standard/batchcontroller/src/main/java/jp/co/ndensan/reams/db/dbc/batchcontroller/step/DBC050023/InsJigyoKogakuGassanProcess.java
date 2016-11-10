@@ -44,12 +44,12 @@ public class InsJigyoKogakuGassanProcess extends BatchProcessBase<Furikomimeisai
             + "IFurikomimeisaiFurikomiDataMapper.get事業高額合算データ");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final int INT_6 = 6;
     private static final int INT_4 = 4;
     private static final int INT_10 = 10;
     private static final int INT_17 = 17;
     private static final RString TWO = new RString("2");
     private static final RString RSTRING_0000 = new RString("0000");
+    private static final RString RSTRING_000000 = new RString("000000");
     private static final RString 振込明細一時NAME = new RString("DbWT0510FurikomiMeisai");
 
     /**
@@ -158,7 +158,7 @@ public class InsJigyoKogakuGassanProcess extends BatchProcessBase<Furikomimeisai
         RString 口座名寄せキー;
         if (TWO.equals(parameter.get支払方法())) {
             口座名寄せキー = 決定entity.getHihokenshaNo().getColumnValue().padZeroToLeft(INT_10)
-                    .concat(RSTRING_0000).concat(決定entity.getTaishoNendo().toDateString().padZeroToLeft(INT_4))
+                    .concat(RSTRING_000000).concat(決定entity.getTaishoNendo().toDateString().padZeroToLeft(INT_4))
                     .concat(決定entity.getShikyuSeiriNo().padZeroToLeft(INT_17)).concat(RSTRING_0000);
         } else {
             口座名寄せキー = RString.EMPTY;

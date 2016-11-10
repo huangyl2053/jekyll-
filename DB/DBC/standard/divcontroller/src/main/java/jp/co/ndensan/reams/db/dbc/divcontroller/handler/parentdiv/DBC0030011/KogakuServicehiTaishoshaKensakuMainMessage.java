@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011;
 
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -21,6 +22,10 @@ public enum KogakuServicehiTaishoshaKensakuMainMessage implements IValidationMes
      * 被保番号、提供年月、申請年月、決定年月の最小限に一つが入力必要
      */
     被保険者を指定入力チェック(DbzErrorMessages.最低限の入力なし, "被保険者番号、提供年月、申請年月、決定年月"),
+    /**
+     * 対象データなし
+     */
+    対象データなしチェック(UrErrorMessages.対象データなし),
     /**
      * 提供年月、申請年月、決定年月の最小限に一つが入力必要
      */

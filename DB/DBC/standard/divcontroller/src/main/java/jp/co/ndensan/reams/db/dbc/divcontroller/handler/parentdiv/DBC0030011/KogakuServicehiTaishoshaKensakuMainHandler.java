@@ -101,8 +101,13 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 識別コード ShikibetsuCode
+     * @return 対象データなしflag boolean
      */
-    public void set被保険者名(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+    public boolean set被保険者名(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+        if (識別コード == null || 識別コード.isEmpty()) {
+            div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
+            return true;
+        }
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
         List<JuminShubetsu> 住民種別List = new ArrayList();
@@ -124,25 +129,31 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         AtenaMeisho 名称 = KogakuShokaiTaishoshaKensaku.createInstance().get氏名(searchKey);
         if (名称 != null && !名称.isEmpty()) {
             div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(名称.getColumnValue());
+            return false;
         } else {
             div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
+            return true;
         }
     }
 
     /**
      * 「被保番号」onBlur事件です。
+     *
+     * @return 対象データなしflag boolean
      */
-    public void onBlur_txtHihoNo() {
+    public boolean onBlur_txtHihoNo() {
         RString 被保番号R = div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoNo().getValue();
         if (被保番号R == null || 被保番号R.isEmpty()) {
-            return;
+            div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
+            return true;
         }
         HihokenshaNo 被保険者番号 = new HihokenshaNo(被保番号R);
         HihokenshaDaichoAlive entity = new HihokenshaDaichoAliveManager().get最新の被保険者台帳履歴(被保険者番号);
-        if (entity != null && entity.get識別コード() != null && !entity.get識別コード().isEmpty()) {
-            set被保険者名(被保険者番号, entity.get識別コード());
+        if (entity != null) {
+            return set被保険者名(被保険者番号, entity.get識別コード());
         } else {
-            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+            div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
+            return true;
         }
     }
 
