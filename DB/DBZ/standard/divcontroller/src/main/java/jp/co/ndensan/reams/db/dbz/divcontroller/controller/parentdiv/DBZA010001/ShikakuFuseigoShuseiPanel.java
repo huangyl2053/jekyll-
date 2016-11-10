@@ -271,6 +271,8 @@ public class ShikakuFuseigoShuseiPanel {
                 ? setEmpty資格の情報(shikakuFusei.get整合性チェック情報()) : 修正後の資格の情報;
         if (台帳種別.equals(DaichoType.被保険者.getコード())) {
             修正後の資格の情報 = getHandler(div).set資格の情報(不整合理由, 修正後の資格の情報);
+            修正後の資格の情報 = null == 修正後の資格の情報
+                    ? setEmpty資格の情報(shikakuFusei.get整合性チェック情報()) : 修正後の資格の情報;
             int 履歴番号 = manager.getMax履歴番号(修正後の資格の情報.get識別コード());
             ShikakuShutokuJogaisha 取得除外の情報 = getHandler(div).set取得除外の情報(不整合理由, 履歴番号, 修正後の資格の情報);
             validationMessages.add(getValidationHandler(div).beforeUpdCheck(台帳種別, shikakuFusei,

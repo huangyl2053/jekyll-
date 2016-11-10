@@ -8,6 +8,10 @@ module DBC {
 
         export class Events {
 
+            public static onClick_RadIkkatsuKoshinKubun(): string {
+                return "onClick_RadIkkatsuKoshinKubun";
+            }
+
         }
 
         export class Controls {
