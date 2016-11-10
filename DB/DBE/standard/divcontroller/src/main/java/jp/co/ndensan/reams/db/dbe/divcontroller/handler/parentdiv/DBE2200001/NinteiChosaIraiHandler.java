@@ -72,7 +72,10 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class NinteiChosaIraiHandler {
 
-    private static final RString 設定方法 = new RString("1");
+    private static final RString 設定方法1 = new RString("1");
+    private static final RString 提出期限_申請者別 = new RString("0");
+    private static final RString 提出期限_空欄 = new RString("1");
+    private static final RString 提出期限_共通日付 = new RString("2");
     private static final RString WARITSUKE_ZUMI = new RString("割付済み");
     private static final RString MIWARITSUKE = new RString("未割付");
     private static final RString 元号_明治 = new RString("明治");
@@ -716,7 +719,7 @@ public class NinteiChosaIraiHandler {
      */
     public void init印刷条件DIV() {
         RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        if (設定方法.equals(認定調査期限設定方法)) {
+        if (設定方法1.equals(認定調査期限設定方法)) {
             div.getRadkigen().setDisabled(false);
         } else {
             div.getRadkigen().setDisabled(true);
@@ -870,11 +873,28 @@ public class NinteiChosaIraiHandler {
             Map<Integer, RString> 通知文
                     = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
             RString homonChosasakiJusho = row.getHomonChosasakiJusho();
+            RString 認定調査提出期限 = RString.EMPTY;
+            RString 認定調査委期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            RString 認定調査作成期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+
+            if (設定方法1.equals(認定調査委期限設定方法)) {
+                if (div.getRadkigen().getSelectedKey().equals(提出期限_申請者別) && !RString.isNullOrEmpty(row.getChosaIraiDay())) {
+                    RDate 認定調査期限年月日 = new RDate(row.getChosaIraiDay().toString());
+                    認定調査提出期限 = 認定調査期限年月日.plusDay(Integer.parseInt(認定調査作成期限日数.toString())).wareki()
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                } else if (div.getRadkigen().getSelectedKey().equals(提出期限_空欄)) {
+                    認定調査提出期限 = RString.EMPTY;
+                } else if (div.getRadkigen().getSelectedKey().equals(提出期限_共通日付)) {
+                    認定調査提出期限 = div.getTxtkigenymd().getValue().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                }
+            }
+
             for (ChosainJoho 調査員情報 : 調査員情報リスト) {
                 YubinNo 郵便番号 = 調査員情報.get郵便番号();
                 AtenaJusho 住所 = 調査員情報.get住所();
                 ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
-                        div.getTxthokkoymd().getValue().toDateString(),
+                        div.getTxthokkoymd().getValue().wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString(),
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
@@ -919,7 +939,7 @@ public class NinteiChosaIraiHandler {
                         row.getHomonChosasakiName(),
                         row.getHomonChosasakiTelNo(),
                         row.getNinteiShinseiYMDKoShin(),
-                        row.getNinteichosaKigenYMD(),
+                        認定調査提出期限,
                         通知文.get(2)
                 );
                 chosaIraishoHeadItemList.add(item);
@@ -971,7 +991,7 @@ public class NinteiChosaIraiHandler {
             List<RString> 認定調査員コードリスト = get認定調査員コード(row.getNinteiChosainCode());
             List<RString> 認定調査委託先コードリスト = get認定調査委託先コード(row.getNinteiChosaItakusakiCode());
             RString 生年月日 = row.getSeinengappiYMD();
-            RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+            RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
             RString 前回認定年月日 = row.getZenkaiNinteiYMD();
             RString 前回要介護状態区分コード = row.getZenYokaigoKubunCode();
             RString 要支援 = RString.EMPTY;
