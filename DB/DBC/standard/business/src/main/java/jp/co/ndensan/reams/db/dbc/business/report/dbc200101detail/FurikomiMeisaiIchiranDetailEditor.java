@@ -77,6 +77,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private final RDateTime 作成日時;
     private final RString 設定値;
 
+    private static int データ数 = 0;
     private static int 毎ページ数 = 0;
     private static int 総レコード数 = 0;
     private static Decimal 毎ページ振込金額合算 = Decimal.ZERO;
@@ -137,6 +138,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     }
 
     private static void setページ数と金額(int 様式連番, Decimal 振込金額) {
+        データ数++;
         if (様式連番_1 == 様式連番) {
             毎ページ数++;
             総レコード数++;
@@ -144,7 +146,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             振込金額合算 = 振込金額合算.add(振込金額);
 
         }
-        if (ページ件数 == 毎ページ数) {
+        if (1 == データ数 % ページ件数 && 1 != データ数) {
             毎ページ振込金額合算 = Decimal.ZERO;
             毎ページ数 = 0;
         }
@@ -372,8 +374,10 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
         source.shokeiNinzu = new RString(毎ページ数);
         source.shokeiKingaku = DecimalFormatter.toコンマ区切りRString(毎ページ振込金額合算, 0);
-        source.gokeiNinzu = new RString(総レコード数);
-        source.gokeiKingaku = DecimalFormatter.toコンマ区切りRString(振込金額合算, 0);
+        if (0 != データ数 % ページ件数) {
+            source.gokeiNinzu = new RString(総レコード数);
+            source.gokeiKingaku = DecimalFormatter.toコンマ区切りRString(振込金額合算, 0);
+        }
     }
 
     private void get氏名漢字(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {
@@ -416,11 +420,11 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 source.listLower_7 = data.get印字様式名称().substring(0, LISTINDEX_4);
             }
         }
-        source.listLower_8 = 左カッコ;
         if (data.get様式別集計金額() != null) {
+            source.listLower_8 = 左カッコ;
             source.listLower_9 = DecimalFormatter.toコンマ区切りRString(data.get様式別集計金額(), 0);
+            source.listLower_10 = 右カッコ;
         }
-        source.listLower_10 = 右カッコ;
     }
 
     private void set様式連番_1のUpper支払方法_口座以外情報(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {

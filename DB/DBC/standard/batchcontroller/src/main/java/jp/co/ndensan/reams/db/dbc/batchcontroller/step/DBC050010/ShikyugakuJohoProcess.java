@@ -188,6 +188,9 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
                 ReportIdDBC.DBC200101.getReportId().value(), SubGyomuCode.DBC介護給付)
                 .addBreak(new BreakerCatalog<FurikomiMeisaiIchiranDetailReportSource>().new SimpleLayoutBreaker(
 
+
+
+
                     FurikomiMeisaiIchiranDetailReportSource.LAYOUT_BREAK_KEYS) {
             @Override
                     public ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> occuredBreak(
@@ -268,7 +271,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
             } else {
                 count++;
                 list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
-                if (印字様式番号別金額List.size() % 2 == 0 && i == 印字様式番号別金額List.size()) {
+                if (印字様式番号別金額List.size() % 2 == 0 && i == 印字様式番号別金額List.size() - 1) {
                     list.add(new PrintNoKingakuEntity());
                     count++;
                 }
