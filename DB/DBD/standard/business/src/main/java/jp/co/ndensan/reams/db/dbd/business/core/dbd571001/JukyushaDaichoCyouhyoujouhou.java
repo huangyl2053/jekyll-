@@ -66,7 +66,11 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -419,8 +423,8 @@ public class JukyushaDaichoCyouhyoujouhou {
      */
     public List<TokureiShisetuNyutaishojohoEntity> set特例施設入退所情報EntityList(IdoChushutsuDaichoNewEntity t,
             List<TokureiShisetuNyutaishojohoEntity> listEntity) {
-        if (t.get特例施設入退所List() != null && t.get特例施設入退所List().get特例施設入退所_識別コード() != null
-                && !t.get特例施設入退所List().get特例施設入退所_識別コード().isEmpty()) {
+        if (t.get特例施設入退所List() != null && t.get特例施設入退所List().get特例施設入退所_事業者番号() != null
+                && !t.get特例施設入退所List().get特例施設入退所_事業者番号().isEmpty()) {
             TokureiShisetuNyutaishojohoEntity 特例施設入退所情報 = new TokureiShisetuNyutaishojohoEntity();
             特例施設入退所情報.set特例施設入退所区分(RString.EMPTY);
             特例施設入退所情報.set入所日(t.get特例施設入退所List().get特例施設入退所_有効開始年月日());
@@ -707,8 +711,11 @@ public class JukyushaDaichoCyouhyoujouhou {
         先頭Entity.set直近実績(t.get先頭情報().getX3017_サービス提供年月());
         先頭Entity.set直近高額(t.get先頭情報().getX3056_サービス提供年月());
         先頭Entity.set直近償還(t.get先頭情報().getX3034_サービス提供年月());
-        if (t.get先頭情報().getX2002_調定年度() != null && t.get先頭情報().getX2002_保険料段階() != null) {
-            先頭Entity.set直近所得段階(t.get先頭情報().getX2002_調定年度().concat(t.get先頭情報().getX2002_保険料段階()));
+        if (t.get先頭情報().getX2002_調定年度() != null && !t.get先頭情報().getX2002_調定年度().isEmpty()
+                && t.get先頭情報().getX2002_保険料段階() != null && !t.get先頭情報().getX2002_保険料段階().isEmpty()) {
+            先頭Entity.set直近所得段階(new FlexibleYear(t.get先頭情報().getX2002_調定年度()).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(new RString("第"))
+                    .concat(t.get先頭情報().getX2002_保険料段階()).concat(new RString("段階")));
         }
         先頭Entity.set調査先住所(t.get先頭情報().getT4101_訪問調査先郵便番号());
         先頭Entity.set調査先名称(t.get先頭情報().getT4101_訪問調査先名称());
