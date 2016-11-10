@@ -141,7 +141,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
                 source.fukaNendo = 徴収猶予決定通知書情報.get徴収猶予の情報().get賦課年度().wareki()
                         .eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
             }
-            source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分()).getコード();
+            source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分()).get名称();
             TsuchishoNo 通知書番号 = 徴収猶予決定通知書情報.get徴収猶予の情報().get通知書番号();
             source.tsuchishoNo = 通知書番号 != null ? 通知書番号.value() : RString.EMPTY;
             SetaiCode 世帯コード = 徴収猶予決定通知書情報.get徴収猶予の情報().get世帯コード();
