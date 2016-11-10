@@ -124,7 +124,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             entity.getEntity().get償還払支給申請Entity().setShinseiYMD(new FlexibleDate(row.getTxtShikyuShinseiDate().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setHokenTaishoHiyogaku(row.getTxtHiyoTotal().getValue());
             entity.getEntity().get償還払支給申請Entity().setRiyoshaFutangaku(
-                    Integer.parseInt(row.getTxtRiyoshaFutanAmount().getValue().toString()));
+                    row.getTxtRiyoshaFutanAmount().getValue() == null ? 0 : Integer.valueOf(row.getTxtRiyoshaFutanAmount().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setShiharaiKingakuTotal(row.getTxtHokenKyufuAmount().getValue());
             entity.getEntity().get償還払支給申請Entity().setShinsaKekka(row.getTxtShinsaNo());
             entity.getEntity().set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
