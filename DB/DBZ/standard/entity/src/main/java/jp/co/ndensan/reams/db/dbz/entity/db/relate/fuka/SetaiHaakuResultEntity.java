@@ -44,7 +44,7 @@ public class SetaiHaakuResultEntity {
         世帯員所得情報.setKijunYMD(entity.get世帯把握基準日());
         世帯員所得情報.setJushochiTokureiFlag(entity.get住所地特例該当());
         世帯員所得情報.setSetaiCode(entity.get世帯コード());
-        世帯員所得情報.setHonninKubun(本人区分);
+        世帯員所得情報.setHonninKubun(entity.get本人区分());
         return 世帯員所得情報;
     }
 }

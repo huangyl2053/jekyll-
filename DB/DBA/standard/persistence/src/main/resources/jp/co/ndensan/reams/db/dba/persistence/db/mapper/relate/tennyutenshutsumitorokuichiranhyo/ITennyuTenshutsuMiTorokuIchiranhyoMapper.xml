@@ -10,6 +10,7 @@
         <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="履歴番号" column="履歴番号"/>
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村名" column="市町村名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="作成事由コード" column="作成事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="世帯コード" column="世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="住民種別コード" column="住民種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -46,6 +47,7 @@
             DbT1010."shikibetsuCode" AS 識別コード,
             DbT1010."rirekiNo" AS 履歴番号,
             DbT1010."shichosonCode" AS 市町村コード,
+            DBT7051."shichosonMeisho" AS 市町村名,
             DbT1010."sakuseiJiyuCode" AS 作成事由コード,
             DbT1010."setaiCode" AS 世帯コード,
             DbT1010."juminShubetsuCode" AS 住民種別コード,
@@ -78,6 +80,9 @@
             ON
             DbT1010."shikibetsuCode" = DBV1001."shikibetsuCode"
             AND DbT1010."shichosonCode" = DBV1001."shichosonCode"
+            LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DBT7051
+            ON
+            rpad(DbT1010."shichosonCode", 5) = rpad(DBT7051."shoKisaiHokenshaNo", 5)
             WHERE
             1 = 1
             <if test= "tennyusakuseijiyucode.size() > 0">
@@ -109,6 +114,7 @@
             DbT1011."shikibetsuCode" AS 識別コード,
             DbT1011."rirekiNo" AS 履歴番号,
             DbT1011."shichosonCode" AS 市町村コード,
+            DBT7051."shichosonMeisho" AS 市町村名,
             DbT1011."sakuseiJiyuCode" AS 作成事由コード,
             DbT1011."setaiCode" AS 世帯コード,
             DbT1011."juminShubetsuCode" AS 住民種別コード,
@@ -141,6 +147,9 @@
             ON
             DbT1011."shikibetsuCode" = DBV1001."shikibetsuCode"
             AND DbT1011."shichosonCode" = DBV1001."shichosonCode"
+            LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DBT7051
+            ON
+            rpad(DbT1011."shichosonCode", 5) = rpad(DBT7051."shoKisaiHokenshaNo", 5)
             WHERE
             1 = 1
             <if test= "tensyutsusakuseiJiyucode.size() > 0">
@@ -173,6 +182,7 @@
             DbT1011."shikibetsuCode" AS 識別コード,
             DbT1011."rirekiNo" AS 履歴番号,
             DbT1011."shichosonCode" AS 市町村コード,
+            DBT7051."shichosonMeisho" AS 市町村名,
             DbT1011."sakuseiJiyuCode" AS 作成事由コード,
             DbT1011."setaiCode" AS 世帯コード,
             DbT1011."juminShubetsuCode" AS 住民種別コード,
@@ -205,6 +215,9 @@
             ON
             DbT1011."shikibetsuCode" = DBV1001."shikibetsuCode"
             AND DbT1011."shichosonCode" = DBV1001."shichosonCode"
+            LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DBT7051
+            ON
+            rpad(DbT1011."shichosonCode", 5) = rpad(DBT7051."shoKisaiHokenshaNo", 5)
             WHERE
             1 = 1
             <if test= "tensyutsusakuseiJiyucode.size() > 0">
