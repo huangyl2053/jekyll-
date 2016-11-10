@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010.DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoDiv;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.Hik
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -132,7 +134,13 @@ public class HikazeiNenkinTaishoshaJoho {
             if (単一保険者.equals(getHandler(div).広域と市町村判断())) {
                 getValidationHandler(div).validateFor処理状態単一(pairs);
                 getValidationHandler(div).validateForアップロード済みファイル名(pairs);
-            } else {
+            }
+            if (!単一保険者.equals(getHandler(div).広域と市町村判断())) {
+                List<RString> 構成市町村コードリスト = ViewStateHolder.
+                        get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
+                if (構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty()) {
+                    throw new ApplicationException(DbdErrorMessages.処理なし.getMessage());
+                }
                 getValidationHandler(div).validateFor処理状態広域(pairs);
                 getValidationHandler(div).validateFor取込チェックボックス(pairs);
             }
