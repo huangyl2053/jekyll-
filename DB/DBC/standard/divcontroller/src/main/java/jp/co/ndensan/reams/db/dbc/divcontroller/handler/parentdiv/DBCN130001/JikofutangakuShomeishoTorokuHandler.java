@@ -94,6 +94,7 @@ public class JikofutangakuShomeishoTorokuHandler {
             key.setValue(year);
             keyList.add(key);
         }
+
         div.getDdlShinkiTaishoNendo().setDataSource(keyList);
 
         RDate 基準日 = RDate.getNowDate();
@@ -103,6 +104,12 @@ public class JikofutangakuShomeishoTorokuHandler {
 
         div.getDdlKoshinTaishoNendo().setDataSource(keyList);
         div.getTxtKoshinShikyuShinseishoSeiriNo().setValue(RString.EMPTY);
+
+        RString key = 基準日.getYear().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN)
+                .fillType(FillType.ZERO).toDateString().replace(年号_平.toString(), 平成.toString());
+        div.getDdlShinkiTaishoNendo().setSelectedKey(key);
+        div.getDdlKoshinTaishoNendo().setSelectedKey(key);
     }
 
     /**
@@ -666,14 +673,14 @@ public class JikofutangakuShomeishoTorokuHandler {
             row.setShikyuShinseishoSeiriNo(shomeisho.get支給申請書整理番号());
             RStringBuilder 転入前証記載保険者 = new RStringBuilder();
             転入前証記載保険者.append(shomeisho.get転入前保険者番号().value());
-            転入前証記載保険者.append(new RString(""));
+            転入前証記載保険者.append(new RString(" "));
             転入前証記載保険者.append(shomeisho.get転入前保険者名());
             row.setTennyumaeShokisaiHokensha(転入前証記載保険者.toRString());
             row.setRirekiNo(new RString(String.valueOf(shomeisho.get履歴番号())));
             RStringBuilder 被保険者期間 = new RStringBuilder();
-            被保険者期間.append(shomeisho.get対象計算期間開始年月日().toString());
+            被保険者期間.append(shomeisho.get被保険者期間開始年月日().toString());
             被保険者期間.append(new RString("～"));
-            被保険者期間.append(shomeisho.get対象計算期間終了年月日().toString());
+            被保険者期間.append(shomeisho.get被保険者期間終了年月日().toString());
             row.setHihokenshaKikan(被保険者期間.toRString());
             TextBoxFlexibleDate uketsukeDate = new TextBoxFlexibleDate();
             uketsukeDate.setValue(shomeisho.get受付年月日());

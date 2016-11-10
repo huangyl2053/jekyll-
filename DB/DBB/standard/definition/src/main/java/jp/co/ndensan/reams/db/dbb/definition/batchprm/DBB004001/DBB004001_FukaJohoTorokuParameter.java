@@ -1,8 +1,8 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001;
 
-import jp.co.ndensan.reams.db.dbb.definition.processprm.fukajohotoroku.FukaJohoHenshuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,24 +16,15 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBB004001_FukaJohoTorokuParameter extends BatchParameterBase {
 
-    @BatchParameter(key = "is当初処理", name = "is当初処理")
-    private boolean is当初処理;
+    private static final String DUMMY = "Dummy";
+
+    @BatchParameter(key = DUMMY, name = "Dummy")
+    private RString dummy;
 
     /**
      * コンストラクタです。
-     *
-     * @param is当初処理 boolean
      */
-    public DBB004001_FukaJohoTorokuParameter(boolean is当初処理) {
-        this.is当初処理 = is当初処理;
-    }
-
-    /**
-     * processのパラメータを生成します。
-     *
-     * @return processパラメータ
-     */
-    public FukaJohoHenshuProcessParameter toFukaJohoHenshuProcessParameter() {
-        return new FukaJohoHenshuProcessParameter(is当初処理);
+    public DBB004001_FukaJohoTorokuParameter() {
+        dummy = RString.EMPTY;
     }
 }
