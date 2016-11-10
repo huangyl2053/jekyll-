@@ -133,7 +133,7 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
 
         if (構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty()) {
             NoInputMessages 市町村コードcheckMessage = new NoInputMessages(DbdErrorMessages.処理なし);
-            messages.add(ValidateChain.validateStart(構成市町村コードリスト).messages());
+            messages.add(ValidateChain.validateStart(div).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(市町村コードcheckMessage,
                     div.getDgTanitsuTaishoShoriItchiran()).build().check(messages));
         }
