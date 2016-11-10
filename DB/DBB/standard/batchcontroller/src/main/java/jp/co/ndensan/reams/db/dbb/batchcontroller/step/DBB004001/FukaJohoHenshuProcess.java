@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsuKomokuHenshu;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.fukajohotoroku.FukaJohoHenshuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
@@ -24,7 +23,6 @@ import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0705ChoteiKyot
 import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoKanriEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.RyokinShubetsuCodeValue;
-import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -62,17 +60,14 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
     private static final int 特徴期_6 = 6;
     private List<DbT7022ShoriDateKanriEntity> 処理日付情報;
     private IFukaJohoTorokuMapper mapper;
-    private KitsukiList 月期対応取得_普徴;
+
     private List<RString> 全て期;
     private IShunoKamoku 科目_普通徴収;
     private IShunoKamoku 科目_特別徴収;
     private FukaNokiResearcher 賦課納期取得;
-    private int 最後の期_過年度;
     private long 収納ID = 1L;
     private long 調定ID = 1L;
 
-    @BatchParameter
-    private FukaJohoHenshuProcessParameter parameter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbT0700ShunoKanriTemp;
     @BatchWriter
@@ -82,8 +77,6 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
     protected void initialize() {
         mapper = getMapper(IFukaJohoTorokuMapper.class);
         処理日付情報 = mapper.getSyoriDate(処理名);
-        月期対応取得_普徴 = new FuchoKiUtil().get期月リスト();
-        最後の期_過年度 = new KanendoKiUtil().get期月リスト().getLast().get期AsInt();
         ShunoKamokuFinder manager = ShunoKamokuFinder.createInstance();
         科目_普通徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
         科目_特別徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
@@ -107,18 +100,20 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         if (賦課情報.getFukaNendo().equals(賦課情報.getChoteiNendo())) {
             YMDHMS 処理日時 = get処理日時(処理日付情報, 賦課情報.getFukaNendo());
             YMDHMS 調定日時 = 賦課情報.getChoteiNichiji();
-            if (処理日時 == null || (調定日時 != null && 調定日時.isBefore(処理日時))) {
-                save仮算定データ(賦課情報);
+            KitsukiList 月期対応取得_普徴 = new FuchoKiUtil(賦課情報.getFukaNendo()).get期月リスト();
+            if (処理日時 == null || 処理日時.isEmpty() || (調定日時 != null && 調定日時.isBefore(処理日時))) {
+                save仮算定データ(賦課情報, 月期対応取得_普徴);
             } else {
                 save特徴期別(賦課情報);
                 save普徴期別金額By最後の期(賦課情報, 月期対応取得_普徴.getLast().get期AsInt());
             }
         } else {
+            int 最後の期_過年度 = new KanendoKiUtil(賦課情報.getFukaNendo()).get期月リスト().getLast().get期AsInt();
             save普徴期別金額By最後の期(賦課情報, 最後の期_過年度);
         }
     }
 
-    private void save仮算定データ(DbT2002FukaJohoTempTableEntity 賦課情報) {
+    private void save仮算定データ(DbT2002FukaJohoTempTableEntity 賦課情報, KitsukiList 月期対応取得_普徴) {
         save特徴期別01まで特徴期別03(賦課情報);
         for (Kitsuki 期月 : 月期対応取得_普徴.filtered仮算定期間().toList()) {
             int 期別 = 期月.get期AsInt();
@@ -223,7 +218,7 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         entity.setRirekiNo(0L);
         entity.setShunoId(収納ID);
         entity.setKaikeiNendo(new RYear(賦課情報.getChoteiNendo().toString()));
-        if (parameter.is当初処理()) {
+        if (0 == 賦課情報.getRirekiNo()) {
             entity.setChoteiJiyuCode(当初処理);
         } else {
             entity.setChoteiJiyuCode(非当初処理);
