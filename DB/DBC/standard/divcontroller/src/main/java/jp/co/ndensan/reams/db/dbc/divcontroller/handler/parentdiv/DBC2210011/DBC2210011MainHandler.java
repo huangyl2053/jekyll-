@@ -62,7 +62,6 @@ public class DBC2210011MainHandler {
     private static final RString 有 = new RString("有");
     private static final RString 無 = new RString("無");
     private final RString 追加モード = new RString("追加");
-    private final RString 修正モード = new RString("修正");
 
     /**
      * コンストラクタです。
@@ -82,7 +81,7 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getDdlSearchKenCode().
                 setSelectedKey(association.get地方公共団体コード().value().substring(0, 2));
         div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchJigyoshaKubun().setValue(new RString("0"));
-        div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchGunshiCode().setValue(new RString("0"));
+        div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchGunshiCode().setValue(new RString("00"));
         div.getTokubetsuKyufuJigyoshaList().getBtnAddJigyosha().setDisabled(true);
     }
 
@@ -150,6 +149,9 @@ public class DBC2210011MainHandler {
         List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者情報 = service.select事業者情報(事業者番号, 番号サイズ, cD);
         if (!事業者情報.isEmpty()) {
             div.getTokubetsuKyufuJigyoshaList().getDgTokubetsuKyufuJigyoshaList().setDataSource(get事業者DataSource(事業者情報));
+        } else {
+            List<dgTokubetsuKyufuJigyoshaList_Row> dataSources = new ArrayList<>();
+            div.getTokubetsuKyufuJigyoshaList().getDgTokubetsuKyufuJigyoshaList().setDataSource(dataSources);
         }
         set検索する_ボタン押下後();
 
