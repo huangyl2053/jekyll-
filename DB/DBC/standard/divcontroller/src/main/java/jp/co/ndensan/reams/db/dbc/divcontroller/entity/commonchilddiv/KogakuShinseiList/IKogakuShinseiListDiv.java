@@ -40,4 +40,11 @@ public interface IKogakuShinseiListDiv extends ICommonChildDivBaseProperties {
      * @return boolean
      */
     public boolean is支給区分フラグ();
+
+    /**
+     * 選択行
+     *
+     * @return dgShinseiJoho_Row
+     */
+    public dgShinseiJoho_Row getClickedRow();
 }

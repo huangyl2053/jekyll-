@@ -297,4 +297,13 @@ public class KogakuShinseiListDivHandler {
         }
         return flag;
     }
+
+    /**
+     * 選択行
+     *
+     * @return dgShinseiJoho_Row
+     */
+    public dgShinseiJoho_Row getClickedRow() {
+        return div.getDgShinseiJoho().getClickedItem();
+    }
 }
