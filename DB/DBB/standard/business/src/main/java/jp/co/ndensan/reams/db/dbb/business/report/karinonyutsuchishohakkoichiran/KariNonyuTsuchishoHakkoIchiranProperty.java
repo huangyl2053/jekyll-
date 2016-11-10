@@ -55,37 +55,52 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
          * 郵便番号
          */
         郵便番号(new RString("0001"), new RString("郵便番号"),
-                ENCLOSURE.concat(new RString("shikibetsuTaisho_yubinNo").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("atesaki_yubinNo").concat(ENCLOSURE))),
         /**
          * 町域コード
          */
         町域コード(new RString("0002"), new RString("町域コード"),
-                ENCLOSURE.concat(new RString("shikibetsuTaisho_choikiCode").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("atesaki_choikiCode").concat(ENCLOSURE))),
         /**
-         * 番地コード
+         * 番地コード1
          */
-        番地コード(new RString("0003"), new RString("番地コード"),
-                ENCLOSURE.concat(new RString("shikibetsuTaisho_banchiCode1").concat(ENCLOSURE))),
+        番地コード1(new RString("0003"), new RString("番地コード1"),
+                ENCLOSURE.concat(new RString("atesaki_banchiCode1").concat(ENCLOSURE))),
+        /**
+         * 番地コード2
+         */
+        番地コード2(new RString("0003"), new RString("番地コード2"),
+                ENCLOSURE.concat(new RString("atesaki_banchiCode2").concat(ENCLOSURE))),
+        /**
+         * 番地コード3
+         */
+        番地コード3(new RString("0003"), new RString("番地コード3"),
+                ENCLOSURE.concat(new RString("atesaki_banchiCode3").concat(ENCLOSURE))),
+        /**
+         * 番地コード4
+         */
+        番地コード4(new RString("0003"), new RString("番地コード4"),
+                ENCLOSURE.concat(new RString("atesaki_banchiCode4").concat(ENCLOSURE))),
         /**
          * 行政区コード
          */
         行政区コード(new RString("0004"), new RString("行政区コード"),
-                ENCLOSURE.concat(new RString("shikibetsuTaisho_gyoseikuCode").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("atesaki_gyoseikuCode").concat(ENCLOSURE))),
         /**
          * 地区１
          */
         地区１(new RString("0005"), new RString("地区１"),
-                ENCLOSURE.concat(new RString("shikibetsuTaisho_chikuCode1").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("atesaki_chikuCode1").concat(ENCLOSURE))),
         /**
          * 地区２
          */
         地区２(new RString("0006"), new RString("地区２"),
-                ENCLOSURE.concat(new RString("shikibetsuTaisho_chikuCode2").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("atesaki_chikuCode2").concat(ENCLOSURE))),
         /**
          * 地区３
          */
         地区３(new RString("0007"), new RString("地区３"),
-                ENCLOSURE.concat(new RString("shikibetsuTaisho_chikuCode3").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("atesaki_chikuCode3").concat(ENCLOSURE))),
         /**
          * 世帯コード
          */
@@ -126,20 +141,22 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
          * 生活保護種別
          */
         生活保護種別(new RString("0116"), new RString("生活保護種別"),
-                ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("seikatsuHogoKubun").concat(ENCLOSURE))),
         /**
          * 現金口座区分
          */
         現金口座区分(new RString("0210"), new RString("現金口座区分"),
-                ENCLOSURE.concat(new RString("kozaKubun").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_kozaKubun").concat(ENCLOSURE))),
         /**
          * 8月特徴開始者
          */
+        //QA1922 確認中
         月8特徴開始者(new RString("0220"), new RString("月8特徴開始者"),
                 ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
         /**
          * 10月特徴開始者
          */
+        //QA1922 確認中
         月10特徴開始者(new RString("0219"), new RString("月10特徴開始者"),
                 ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
         /**
