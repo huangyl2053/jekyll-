@@ -154,7 +154,7 @@
                "yukoMukoKubun" = '1' AND
                "logicalDeletedFlag" = false 
             UNION
-            SELECT DISTINCT "hiHokenshaNo" , '1' AS "kubun"
+            SELECT DISTINCT "hihokenshaNo" , '1' AS "kubun"
             FROM rgdb."DbT3105SogoJigyoTaishosha" 
             WHERE "tekiyoKaishiYMD" <![CDATA[<=]]> #{交付年月日} AND 
                "tekiyoShuryoYMD" <![CDATA[>=]]> #{交付年月日} 
