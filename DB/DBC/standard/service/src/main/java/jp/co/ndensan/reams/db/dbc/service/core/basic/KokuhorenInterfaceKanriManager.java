@@ -9,10 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
+import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -70,25 +75,23 @@ public class KokuhorenInterfaceKanriManager {
     /**
      * 主キーに合致する国保連インターフェース管理を返します。
      *
-     * @param 処理状態区分 shoriJotaiKubun
-     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @param 適用基準日 RDate
      * @return KokuhorenInterfaceKanri
      */
     @Transaction
-    public KokuhorenInterfaceKanri get新国保連インターフェース管理(
-            RString 処理状態区分,
-            RString 交換情報識別番号) {
-        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
-        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(交換情報識別番号NEW.toString()));
+    public KokuhorenInterfaceKanri get新国保連インターフェース管理(RDate 適用基準日) {
 
-        DbT3104KokuhorenInterfaceKanriEntity entity = dac.select(
-                処理状態区分,
-                交換情報識別番号);
+        DbT3104KokuhorenInterfaceKanriEntity entity = dac.select処理年月Max(ShoriJotaiKubun.終了.getコード(),
+                getConfig値(ConfigNameDBC.国保連取込_高額合算自己負担額確認情報_交換情報識別番号, 適用基準日));
         if (entity == null) {
             return null;
         }
         entity.initializeMd5();
         return new KokuhorenInterfaceKanri(entity);
+    }
+
+    private RString getConfig値(Enum key, RDate 適用基準日) {
+        return DbBusinessConfig.get(key, 適用基準日, SubGyomuCode.DBC介護給付);
     }
 
     /**
