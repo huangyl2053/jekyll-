@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -87,7 +88,7 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        processParameter.set宛名検索条件(searchKey);
+        processParameter.set宛名検索条件(new UaFt200FindShikibetsuTaishoParam(searchKey));
         return new BatchDbReader(READ_DATA_ID, processParameter.toMybatisParameter());
     }
 
