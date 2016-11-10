@@ -766,16 +766,16 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.nigoBango = 先頭Entity.get記号番号();
         }
         if (先頭Entity.get直近管理票() != null) {
-            source.chokukinKanrihyo = new RString(先頭Entity.get直近管理票().toString());
+            source.chokukinKanrihyo = 先頭Entity.get直近管理票().wareki().toDateString();
         }
         if (先頭Entity.get直近実績() != null) {
-            source.chokukinJiseki = new RString(先頭Entity.get直近実績().toString());
+            source.chokukinJiseki = 先頭Entity.get直近実績().wareki().toDateString();
         }
         if (先頭Entity.get直近高額() != null) {
-            source.chokukinKogaku = new RString(先頭Entity.get直近高額().toString());
+            source.chokukinKogaku = 先頭Entity.get直近高額().wareki().toDateString();
         }
         if (先頭Entity.get直近償還() != null) {
-            source.chokukinShokan = new RString(先頭Entity.get直近償還().toString());
+            source.chokukinShokan = 先頭Entity.get直近償還().wareki().toDateString();
         }
         if (先頭Entity.get直近所得段階() != null) {
             source.chokukinShotokuDankai = 先頭Entity.get直近所得段階();

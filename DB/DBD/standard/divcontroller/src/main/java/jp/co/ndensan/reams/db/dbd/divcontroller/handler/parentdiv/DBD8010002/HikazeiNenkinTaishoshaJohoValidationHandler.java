@@ -131,12 +131,12 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
         List<RString> 構成市町村コードリスト = ViewStateHolder.
                 get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
 
-        NoInputMessages 市町村コードcheckMessage = new NoInputMessages(DbdErrorMessages.処理なし);
-
-        messages.add(ValidateChain.validateStart(構成市町村コードリスト).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.処理なしチェック)
-                .thenAdd(市町村コードcheckMessage).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(市町村コードcheckMessage,
-                div.getDgTanitsuTaishoShoriItchiran()).build().check(messages));
+        if (構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty()) {
+            NoInputMessages 市町村コードcheckMessage = new NoInputMessages(DbdErrorMessages.処理なし);
+            messages.add(ValidateChain.validateStart(div).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(市町村コードcheckMessage,
+                    div.getDgTanitsuTaishoShoriItchiran()).build().check(messages));
+        }
 
         RString syoriJyotai = div.getTxtShoriJotai().getValue();
         NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.処理状態不正, syoriJyotai.toString());
