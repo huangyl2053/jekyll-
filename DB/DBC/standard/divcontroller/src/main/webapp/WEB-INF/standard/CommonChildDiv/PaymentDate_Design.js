@@ -4,6 +4,9 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_RadIkkatsuKoshinKubun = function () {
+                return "onClick_RadIkkatsuKoshinKubun";
+            };
             return Events;
         })();
         PaymentDate.Events = Events;
