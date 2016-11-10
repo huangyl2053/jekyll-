@@ -37,12 +37,6 @@ public class DBC5140011MainHandler {
     private static final RString 地区1 = new RString("地区1");
     private static final RString 地区2 = new RString("地区2");
     private static final RString 地区3 = new RString("地区3");
-    private static final RString ゼロ1 = new RString("0");
-    private static final RString 一1 = new RString("1");
-    private static final RString 二1 = new RString("2");
-    private static final RString 三1 = new RString("3");
-    private static final RString 四1 = new RString("4");
-    private static final RString 五1 = new RString("5");
     private static final int 一 = 1;
     private static final int 二 = 2;
     private static final int 三 = 3;
@@ -176,22 +170,22 @@ public class DBC5140011MainHandler {
 
     private void set地区(DBC150050_ServicecodeTaniMeisaiIchiranParameter parameter) {
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(全て)) {
-            parameter.set地区指定(ゼロ1);
+            parameter.set地区指定(全て);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(町域)) {
-            parameter.set地区指定(一1);
+            parameter.set地区指定(町域);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(行政区)) {
-            parameter.set地区指定(二1);
+            parameter.set地区指定(行政区);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(地区1)) {
-            parameter.set地区指定(三1);
+            parameter.set地区指定(地区1);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(地区2)) {
-            parameter.set地区指定(四1);
+            parameter.set地区指定(地区2);
         }
         if (div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象().equals(地区3)) {
-            parameter.set地区指定(五1);
+            parameter.set地区指定(地区3);
         }
     }
 
@@ -201,11 +195,11 @@ public class DBC5140011MainHandler {
         }
         Collections.sort(list,
                 new Comparator<RString>() {
-                    @Override
-                    public int compare(RString arg0, RString arg1) {
-                        return arg0.compareTo(arg1);
-                    }
-                }
+            @Override
+            public int compare(RString arg0, RString arg1) {
+                return arg0.compareTo(arg1);
+            }
+        }
         );
         return list;
     }
