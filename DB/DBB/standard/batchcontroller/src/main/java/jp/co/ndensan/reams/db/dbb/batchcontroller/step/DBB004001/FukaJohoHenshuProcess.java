@@ -60,7 +60,6 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
     private static final int 特徴期_6 = 6;
     private List<DbT7022ShoriDateKanriEntity> 処理日付情報;
     private IFukaJohoTorokuMapper mapper;
-
     private List<RString> 全て期;
     private IShunoKamoku 科目_普通徴収;
     private IShunoKamoku 科目_特別徴収;
@@ -220,7 +219,7 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         entity.setKaikeiNendo(new RYear(賦課情報.getChoteiNendo().toString()));
         if (0 == 賦課情報.getRirekiNo()) {
             entity.setChoteiJiyuCode(当初処理);
-        } else {
+        } else if (0 < 賦課情報.getRirekiNo()) {
             entity.setChoteiJiyuCode(非当初処理);
         }
         YMDHMS 調定日時 = 賦課情報.getChoteiNichiji();
