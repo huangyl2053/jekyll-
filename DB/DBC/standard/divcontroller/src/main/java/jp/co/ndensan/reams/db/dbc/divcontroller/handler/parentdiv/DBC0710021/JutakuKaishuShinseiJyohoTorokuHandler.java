@@ -1056,7 +1056,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (証明書keyが存在) {
             div.getDdlSyomeisyo().setSelectedKey(証明書);
         }
-        div.getDdlSyomeisyo().setDisabled(true);
+        div.getDdlSyomeisyo().setDisabled(false);
     }
 
     private void set証明書DataSource(List<ShikibetsuNoKanri> 様式名称) {
