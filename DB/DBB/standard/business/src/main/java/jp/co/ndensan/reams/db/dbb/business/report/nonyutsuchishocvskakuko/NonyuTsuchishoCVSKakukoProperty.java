@@ -41,18 +41,6 @@ public class NonyuTsuchishoCVSKakukoProperty extends ReportPropertyBase<NonyuTsu
             BreakerCatalog<NonyuTsuchishoCVSKakukoSource> catalog) {
 
         return breakers.add(catalog.new SimpleLayoutBreaker(
-
-
-
-
-
-
-
-
-
-
-
-
             LAYOUT_BREAK_KEYS) {
             @Override
             public ReportLineRecord<NonyuTsuchishoCVSKakukoSource> occuredBreak(
