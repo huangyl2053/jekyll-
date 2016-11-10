@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -130,26 +131,26 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
     public DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter onClick_実行ボタン() {
         boolean テスト出力 = false;
         RString 年度 = get年度(div.getKogakuTaishoshaShoriPanel().getTxtShinsaYM().getValue());
-        RString 処理年月日 = get処理年月日(div.getKogakuTaishoshaShoriPanel().getTxtShinsaYM().getValue());
+        FlexibleYearMonth 処理年月日 = get処理年月日(div.getKogakuTaishoshaShoriPanel().getTxtShinsaYM().getValue());
         RString 処理日 = div.getTxtShoriYMDKonkai().getValue().toDateString();
         RString 処理時 = div.getTxtShoriHMKonkai().getText();
         RString 処理日時 = 処理日.concat(処理時);
         RString 抽出期間開始日 = div.getTxtChushutsuKikanKonkai().getFromDateValue().toDateString();
         RString 抽出期間開始時 = get抽出期間(div.getTxtChushutsuKikanKonkai().getFromTimeValue());
-        RString 抽出期間開始日時 = 抽出期間開始日.concat(抽出期間開始時);
-        RString 抽出期間終了日時 = 処理日時;
+        RDateTime 抽出期間開始日時 = get抽出期間日時(抽出期間開始日, 抽出期間開始時);
+        RDateTime 抽出期間終了日時 = get抽出期間日時(処理日, 処理時);
         RString 帳票ID = 帳票コード;
         Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
-        RString 開始年月１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());
-        RString 終了年月１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getToValue());
+        FlexibleYearMonth 開始年月１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());
+        FlexibleYearMonth 終了年月１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getToValue());
         RString 開始年月２;
         RString 終了年月２;
-        if (RString.isNullOrEmpty(終了年月１)) {
+        if (終了年月１ == null || 終了年月１.isEmpty()) {
             開始年月２ = RString.EMPTY;
         } else {
             開始年月２ = new RDate(終了年月１.toString()).minusYear(年前_5).toDateString();
         }
-        if (RString.isNullOrEmpty(開始年月１)) {
+        if (開始年月１ == null || 開始年月１.isEmpty()) {
             終了年月２ = RString.EMPTY;
         } else {
             終了年月２ = new RDate(開始年月１.toString()).minusMonth(1).toDateString();
@@ -172,11 +173,11 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
                 テスト出力);
     }
 
-    private RString get処理年月日(RDate value) {
+    private FlexibleYearMonth get処理年月日(RDate value) {
         if (value == null) {
-            return RString.EMPTY;
+            return FlexibleYearMonth.EMPTY;
         } else {
-            return value.getYearMonth().toDateString();
+            return new FlexibleYearMonth(value.getYearMonth().toDateString());
         }
     }
 
@@ -244,5 +245,9 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
         } else {
             return new RDate(value.toString());
         }
+    }
+
+    private RDateTime get抽出期間日時(RString 日, RString 時) {
+        return RDateTime.of(日, 時);
     }
 }
