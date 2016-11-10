@@ -163,32 +163,27 @@ public class ShinsakaiShukeihyoShinseiBetsuEditor {
 
     private void set申請区分申請時合計() {
         shukeihyoShinseiBetsu.set申_合計_受付数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_合計_受付数())
-                + toInt(shukeihyoShinseiBetsu.get申_新規申請_受付数())
+                toInt(shukeihyoShinseiBetsu.get申_新規申請_受付数())
                 + toInt(shukeihyoShinseiBetsu.get申_更新申請_受付数())
                 + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_受付数())
                 + toInt(shukeihyoShinseiBetsu.get申_転入_受付数())));
         shukeihyoShinseiBetsu.set申_合計_調査数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_合計_調査数())
-                + toInt(shukeihyoShinseiBetsu.get申_新規申請_調査数())
+                toInt(shukeihyoShinseiBetsu.get申_新規申請_調査数())
                 + toInt(shukeihyoShinseiBetsu.get申_更新申請_調査数())
                 + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_調査数())
                 + toInt(shukeihyoShinseiBetsu.get申_転入_調査数())));
         shukeihyoShinseiBetsu.set申_合計_意見書数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_合計_意見書数())
-                + toInt(shukeihyoShinseiBetsu.get申_新規申請_意見書数())
+                toInt(shukeihyoShinseiBetsu.get申_新規申請_意見書数())
                 + toInt(shukeihyoShinseiBetsu.get申_更新申請_意見書数())
                 + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_意見書数())
                 + toInt(shukeihyoShinseiBetsu.get申_転入_意見書数())));
         shukeihyoShinseiBetsu.set申_合計_審査会数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_合計_審査会数())
-                + toInt(shukeihyoShinseiBetsu.get申_新規申請_審査会数())
+                toInt(shukeihyoShinseiBetsu.get申_新規申請_審査会数())
                 + toInt(shukeihyoShinseiBetsu.get申_更新申請_審査会数())
                 + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_審査会数())
                 + toInt(shukeihyoShinseiBetsu.get申_転入_審査会数())));
         shukeihyoShinseiBetsu.set申_合計_二次判定数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_合計_二次判定数())
-                + toInt(shukeihyoShinseiBetsu.get申_新規申請_二次判定数())
+                toInt(shukeihyoShinseiBetsu.get申_新規申請_二次判定数())
                 + toInt(shukeihyoShinseiBetsu.get申_更新申請_二次判定数())
                 + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_二次判定数())
                 + toInt(shukeihyoShinseiBetsu.get申_転入_二次判定数())));
@@ -273,32 +268,27 @@ public class ShinsakaiShukeihyoShinseiBetsuEditor {
 
     private void set申請区分法令合計() {
         shukeihyoShinseiBetsu.set法_合計_受付数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_合計_受付数())
-                + toInt(shukeihyoShinseiBetsu.get法_新規申請_受付数())
+                toInt(shukeihyoShinseiBetsu.get法_新規申請_受付数())
                 + toInt(shukeihyoShinseiBetsu.get法_更新申請_受付数())
                 + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_受付数())
                 + toInt(shukeihyoShinseiBetsu.get法_転入_受付数())));
         shukeihyoShinseiBetsu.set法_合計_調査数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_合計_調査数())
-                + toInt(shukeihyoShinseiBetsu.get法_新規申請_調査数())
+                toInt(shukeihyoShinseiBetsu.get法_新規申請_調査数())
                 + toInt(shukeihyoShinseiBetsu.get法_更新申請_調査数())
                 + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_調査数())
                 + toInt(shukeihyoShinseiBetsu.get法_転入_調査数())));
         shukeihyoShinseiBetsu.set法_合計_意見書数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_合計_意見書数())
-                + toInt(shukeihyoShinseiBetsu.get法_新規申請_意見書数())
+                toInt(shukeihyoShinseiBetsu.get法_新規申請_意見書数())
                 + toInt(shukeihyoShinseiBetsu.get法_更新申請_意見書数())
                 + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_意見書数())
                 + toInt(shukeihyoShinseiBetsu.get法_転入_意見書数())));
         shukeihyoShinseiBetsu.set法_合計_審査会数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_合計_審査会数())
-                + toInt(shukeihyoShinseiBetsu.get法_新規申請_審査会数())
+                toInt(shukeihyoShinseiBetsu.get法_新規申請_審査会数())
                 + toInt(shukeihyoShinseiBetsu.get法_更新申請_審査会数())
                 + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_審査会数())
                 + toInt(shukeihyoShinseiBetsu.get法_転入_審査会数())));
         shukeihyoShinseiBetsu.set法_合計_二次判定数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_合計_二次判定数())
-                + toInt(shukeihyoShinseiBetsu.get法_新規申請_二次判定数())
+                toInt(shukeihyoShinseiBetsu.get法_新規申請_二次判定数())
                 + toInt(shukeihyoShinseiBetsu.get法_更新申請_二次判定数())
                 + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_二次判定数())
                 + toInt(shukeihyoShinseiBetsu.get法_転入_二次判定数())));

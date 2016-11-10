@@ -158,11 +158,12 @@ public class JotaikubunbetsuhanteiProcess extends BatchProcessBase<SinsakaiHante
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(HIHOKENSYAKUBUN);
-        条件.append(HihokenshaKubun.toValue(paramter.getHihokenshaKubun()).get名称());
+        条件.append(paramter.isJigyoJyokyoHokoku() ? RString.EMPTY : HihokenshaKubun.toValue(
+                paramter.getHihokenshaKubun()).get名称());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(GOGITAINO);
-        条件.append(paramter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(paramter.getGogitaiNo()));
+        条件.append(paramter.isJigyoJyokyoHokoku() ? RString.EMPTY : new RString(paramter.getGogitaiNo()));
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOTSUKIKUBUN);
@@ -200,17 +201,5 @@ public class JotaikubunbetsuhanteiProcess extends BatchProcessBase<SinsakaiHante
         条件.append(paramter.isHorei());
         出力条件.add(条件.toRString());
         return 出力条件;
-    }
-
-    private int get被保険者数(List<SinsakaiHanteiJyokyoEntity> 審査判定状況,
-            RString 要介護認定一次判定結果コード,
-            RString 二次判定要介護状態区分コード) {
-        for (SinsakaiHanteiJyokyoEntity sinsakaiHanteiJyokyoEntity : 審査判定状況) {
-            if (sinsakaiHanteiJyokyoEntity.getIchijiHanteiKekkaNinchishoKasanCode().value().equals(要介護認定一次判定結果コード)
-                    && sinsakaiHanteiJyokyoEntity.getNijiHanteiYokaigoJotaiKubunCode().value().equals(二次判定要介護状態区分コード)) {
-                return sinsakaiHanteiJyokyoEntity.getHihokenshaCount();
-            }
-        }
-        return 0;
     }
 }
