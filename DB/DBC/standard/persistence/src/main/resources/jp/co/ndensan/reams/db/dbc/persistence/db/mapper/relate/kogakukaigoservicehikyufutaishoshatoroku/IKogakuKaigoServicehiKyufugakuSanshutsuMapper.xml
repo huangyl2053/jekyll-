@@ -516,9 +516,10 @@
     </select>
 
     <resultMap id="result_KyufuJissekiChukanKogaku8Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiChukanKogaku8Entity" autoMapping="true">
-        <id column="tempKyufujissekiTyukann_hiHokenshaNo"/>
-        <id column="tempKyufujissekiTyukann_shotokuHantei_shotokuNendo"/>
-        <id column="tempKyufujissekiTyukann_serviceTeikyoYM"/>
+        <id column="tempKyufujissekiTyukann_shotokuHantei_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_shotokuHantei_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -534,9 +535,10 @@
     </resultMap>
 
     <resultMap id="result_KyufuJissekiChukanKogakuJigyo8Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiChukanKogakuJigyo8Entity" autoMapping="true">
-        <id column="tempKyufujissekiTyukannJigyo_hiHokenshaNo"/>
-        <id column="tempKyufujissekiTyukannJigyo_shotokuHantei_shotokuNendo"/>
-        <id column="tempKyufujissekiTyukannJigyo_serviceTeikyoYM"/>
+        <id column="tempKyufujissekiTyukannJigyo_shotokuHantei_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <id column="tempKyufujissekiTyukannJigyo_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tempKyufujissekiTyukannJigyo_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id column="tempKyufujissekiTyukannJigyo_shotokuHantei_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
