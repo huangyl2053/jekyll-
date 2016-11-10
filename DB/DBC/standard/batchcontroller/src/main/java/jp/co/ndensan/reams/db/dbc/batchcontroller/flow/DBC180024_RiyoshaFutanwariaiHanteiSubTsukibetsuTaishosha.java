@@ -118,7 +118,7 @@ public class DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishosha
 
     @Step(世帯員把握FLOW)
     IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBZ介護共通,
+        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBB介護賦課,
                 new DBB002001_SetaiinHaakuParameter(管理識別区分)).define();
     }
 
