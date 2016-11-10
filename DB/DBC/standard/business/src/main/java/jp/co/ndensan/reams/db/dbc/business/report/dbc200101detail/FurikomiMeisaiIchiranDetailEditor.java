@@ -284,11 +284,9 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
             if (振込明細一時Data.isShinseiDataFlag()) {
                 source.listLower_4 = 申請中;
-            } else {
-                if (振込明細一時Data.getYokaigoJotaiKubunCode() == null
-                        || 振込明細一時Data.getYokaigoJotaiKubunCode().isEmpty()) {
-                    source.listLower_4 = 未申請;
-                }
+            } else if (振込明細一時Data.getYokaigoJotaiKubunCode() == null
+                    || 振込明細一時Data.getYokaigoJotaiKubunCode().isEmpty()) {
+                source.listLower_4 = 未申請;
             }
             if (振込明細一時Data.getServiceTeikyoYM() != null && 振込明細一時Data.getYokaigoJotaiKubunCode() != null) {
                 source.listLower_5 = YokaigoJotaiKubunSupport.toValue(振込明細一時Data.getServiceTeikyoYM(),
@@ -405,10 +403,10 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
     private void get振込明細(FurikomiMeisaiIchiranDetailReportSource source) {
         if (一覧表用データ.get振込明細一時TBL() != null) {
-            FurikomiDetailTempTableEntity 振込明細一時TBL = 一覧表用データ.get振込明細一時TBL();
-            if (振込明細一時TBL.getFurikomiKingaku() != null) {
-                source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(振込明細一時TBL.getFurikomiKingaku(), 0);
-            }
+            PrintNoKingakuEntity 印字様式番号別金額 = 一覧表用データ.get印字様式番号別金額List().get(0);
+
+            source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(印字様式番号別金額.get様式別集計金額(), 0);
+
         }
     }
 
