@@ -487,8 +487,8 @@ public class ShikyugakuKeisanKekkaToroku {
      * @return ResponseData
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onChange_tab(ShikyugakuKeisanKekkaTorokuDiv div) {
-        RString 番号 = ViewStateHolder.get(ViewStateKeys.番号, RString.class);
-        if (RSTRING_2.equals(番号)) {
+        RString チェック回数 = ViewStateHolder.get(ViewStateKeys.チェック回数, RString.class);
+        if (RSTRING_2.equals(チェック回数)) {
             ViewStateHolder.put(ViewStateKeys.チェック回数, RSTRING_1);
             return ResponseData.of(div).respond();
         }
