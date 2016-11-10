@@ -316,7 +316,8 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         if (beforeEntity.getChoteiNendo().equals(entity.getChoteiNendo())
                 && beforeEntity.getFukaNendo().equals(entity.getFukaNendo())
                 && beforeEntity.getKibetsu() == entity.getKibetsu()
-                && beforeEntity.getHokenryoDankai().equals(entity.getHokenryoDankai())) {
+                && beforeEntity.getHokenryoDankai().equals(entity.getHokenryoDankai())
+                && beforeEntity.getKamokuCode().equals(entity.getKamokuCode())) {
             get小計集計(entity);
         } else {
             DankaibetsuShunoritsuIchiran 険料段階別収納率通知書集計Data
