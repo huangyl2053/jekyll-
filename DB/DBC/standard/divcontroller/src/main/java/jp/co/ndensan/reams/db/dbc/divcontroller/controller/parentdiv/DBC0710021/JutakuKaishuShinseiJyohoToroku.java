@@ -452,6 +452,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         if (画面モード.equals(ResponseHolder.getState())) {
             排他キーRelease(被保険者番号.getColumnValue());
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_遷移元, 遷移元);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
         }
         if (!ResponseHolder.isReRequest()) {
@@ -463,6 +464,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             排他キーRelease(被保険者番号.getColumnValue());
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_遷移元, 遷移元);
             if (画面モード_審査.equals(画面モード)) {
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
             } else if (画面モード_照会.equals(画面モード)) {
