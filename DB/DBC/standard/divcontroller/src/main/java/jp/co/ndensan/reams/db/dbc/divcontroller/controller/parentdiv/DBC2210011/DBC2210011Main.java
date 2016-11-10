@@ -94,7 +94,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onSelect_事業者一覧List(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onSelect_JyugyoShaList(DBC2210011MainDiv div) {
         div.setHiddenModelOne(照会モード);
         RString 事業者Code = div.getTokubetsuKyufuJigyoshaList().getDgTokubetsuKyufuJigyoshaList().getActiveRow().getTxtJigyoshaCode();
         TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
@@ -115,7 +115,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onChange_事業者一覧List(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onChange_JyugyoShaList(DBC2210011MainDiv div) {
         div.setHiddenModelOne(修正モード);
         RString 事業者Code = div.getTokubetsuKyufuJigyoshaList().getDgTokubetsuKyufuJigyoshaList().getActiveRow().getTxtJigyoshaCode();
         TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
@@ -136,7 +136,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onDelete_事業者一覧List(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onDelete_JyugyoShaList(DBC2210011MainDiv div) {
         div.setHiddenModelOne(削除モード);
         RString 事業者Code = div.getTokubetsuKyufuJigyoshaList().getDgTokubetsuKyufuJigyoshaList().getActiveRow().getTxtJigyoshaCode();
         TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
@@ -157,7 +157,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onClick_申請者情報コピー(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onClick_CopyShinseiJoho(DBC2210011MainDiv div) {
         getHandler(div).onClick_btnCopyFromShinseisha();
         return ResponseData.of(div).respond();
     }
@@ -168,7 +168,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onClick_申請者情報追加(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onClick_AddServiceJoho(DBC2210011MainDiv div) {
         div.setHiddenModel(サービス追加モード);
         getHandler(div).onAdd_byDetail();
         return ResponseData.of(div).respond();
@@ -180,7 +180,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onClick_申請者情報選択(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onClick_selectShinseiShaJoho(DBC2210011MainDiv div) {
         div.setHiddenModel(サービス照会モード);
         List<TokubetsuKyufuJigyoshaSearchBusiness> サービス事業者情報
                 = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者List, ArrayList.class);
@@ -194,7 +194,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onClick_申請者情報修正(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onClick_ModifyShinseiShaJoho(DBC2210011MainDiv div) {
         div.setHiddenModel(サービス修正モード);
         List<TokubetsuKyufuJigyoshaSearchBusiness> サービス事業者情報
                 = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者List, ArrayList.class);
@@ -208,7 +208,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onClick_申請者情報削除(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onClick_deleteShinseiShaJoho(DBC2210011MainDiv div) {
         if (追加モード.equals(div.getHiddenModelOne())) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
@@ -238,7 +238,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onClick_管理者情報コピー(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onClick_CopyKanriSha(DBC2210011MainDiv div) {
         getHandler(div).onClick_管理者情報コピー();
         return ResponseData.of(div).respond();
     }
@@ -249,7 +249,7 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onClick_事業者情報コピー(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onClick_CopyJyugyoSha(DBC2210011MainDiv div) {
         getHandler(div).onClick_btnCopyFromKanrisha();
         return ResponseData.of(div).respond();
     }
@@ -293,9 +293,10 @@ public class DBC2210011Main {
      * @param div 画面情報div
      * @return ResponseData<DBC2210011MainDiv>
      */
-    public ResponseData<DBC2210011MainDiv> onClick_back検索結果一覧(DBC2210011MainDiv div) {
+    public ResponseData<DBC2210011MainDiv> onClick_backKensakuList(DBC2210011MainDiv div) {
         if (照会モード.equals(div.getHiddenModelOne())) {
             ViewStateHolder.clear();
+            div.setHiddenModelOne(RString.EMPTY);
             getHandler(div).onClick_btnSearch();
             return ResponseData.of(div).setState(DBC2210011StateName.検索表示);
         } else {
@@ -306,7 +307,10 @@ public class DBC2210011Main {
                     && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
                 ViewStateHolder.clear();
                 getHandler(div).onClick_btnSearch();
+                div.setHiddenModelOne(RString.EMPTY);
+                div.setHiddenModel(RString.EMPTY);
                 return ResponseData.of(div).setState(DBC2210011StateName.検索表示);
+
             }
             return ResponseData.of(div).respond();
         }

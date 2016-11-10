@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.math.ICheckDigit;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -62,6 +61,8 @@ public class DBC2210011MainHandler {
     private static final RString ONE = new RString("1");
     private static final RString 有 = new RString("有");
     private static final RString 無 = new RString("無");
+    private final RString 追加モード = new RString("追加");
+    private final RString 修正モード = new RString("修正");
 
     /**
      * コンストラクタです。
@@ -93,12 +94,19 @@ public class DBC2210011MainHandler {
         RString 事業者区分 = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchJigyoshaKubun().getValue();
         RString 郡市コード = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchGunshiCode().getValue().padLeft("0", TWO);
         RString 連番 = RString.EMPTY;
-        if (div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue() != null) {
+        if (div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue() != null
+                && !div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue().isEmpty()) {
             連番 = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue().padLeft("0", FOUR);
         }
         ICheckDigit icheckgigit = CheckDigitFactory.getInstance(CheckDigitKind.Modulus10);
         div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchCheckDigit().
-                setValue(icheckgigit.appendModulus(県コード.concat(事業者区分).concat(郡市コード).concat(連番)).substring(NO_9));
+                setValue(icheckgigit.appendModulus(県コード.concat(事業者区分).concat(郡市コード).concat(連番))
+                        .substring(icheckgigit.appendModulus(県コード.concat(事業者区分).concat(郡市コード).concat(連番)).length() - 1));
+        if (追加モード.equals(div.getHiddenModelOne())) {
+            div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtCheckDigit().
+                    setValue(icheckgigit.appendModulus(県コード.concat(事業者区分).concat(郡市コード).concat(連番))
+                            .substring(icheckgigit.appendModulus(県コード.concat(事業者区分).concat(郡市コード).concat(連番)).length() - 1));
+        }
     }
 
     /**
@@ -200,8 +208,6 @@ public class DBC2210011MainHandler {
     public void onSelect_byListSelect(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
 
         set事業者情報(事業者サービス情報List, row);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSearchResultByShokai"), false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCompleteByShokai"), false);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
                 getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
@@ -219,8 +225,6 @@ public class DBC2210011MainHandler {
      */
     public void onSelect_byListModify(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
         set事業者情報(事業者サービス情報List, row);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSearchResult"), false);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(false);
         setServiceListReadOnly(false);
@@ -234,8 +238,6 @@ public class DBC2210011MainHandler {
      */
     public void onSelect_byListDelete(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
         set事業者情報(事業者サービス情報List, row);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSearchResult"), false);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(true);
         setServiceListReadOnly(true);
@@ -258,6 +260,9 @@ public class DBC2210011MainHandler {
      *
      */
     public void onAdd_byDetail() {
+        TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
+        List<ShichosonTokubetuKyufuService> 市町村特別給付サービス内容 = service.selectサービス内容();
+        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().setDataSource(get特別給付サービスDDL(市町村特別給付サービス内容));
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().setSelectedValue(RString.EMPTY);
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaJusho().clearValue();
 
@@ -283,8 +288,6 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getRadSeikatsuHogo()
                 .setSelectedKey(ONE);
         setServiceInfoReadOnly(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnKakutei"), false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBack"), false);
 
     }
 
@@ -299,7 +302,6 @@ public class DBC2210011MainHandler {
         List<ShichosonTokubetuKyufuService> 市町村特別給付サービス内容 = service.selectサービス内容();
         setサービス情報(事業者情報, 市町村特別給付サービス内容);
         setServiceInfoReadOnly(true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBackByShokai"), false);
 
     }
 
@@ -316,8 +318,6 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().setReadOnly(false);
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().setReadOnly(false);
 
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnKakutei"), false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBack"), false);
     }
 
     /**

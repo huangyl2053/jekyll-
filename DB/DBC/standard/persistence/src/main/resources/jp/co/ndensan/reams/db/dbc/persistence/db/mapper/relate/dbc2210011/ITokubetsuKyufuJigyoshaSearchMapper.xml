@@ -37,7 +37,7 @@
         サービス.*
         FROM
         (SELECT
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3065ShichosonTokubetsuKyufuJigyoshaMapper.allColumns_DbT3065ShichosonTokubetsuKyufuJigyosha"/>
+        *
         FROM rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"
         WHERE
         <if test="事業者番号Length == 5">
@@ -63,9 +63,9 @@
         AND mst."serviceYukoKikanKaishiYMD" <![CDATA[<]]> slv."serviceYukoKikanKaishiYMD")
         AND mst."logicalDeletedFlag" is FALSE
         ) AS サービス
-        ON 事業者."dbT3065ShichosonTokubetsuKyufuJigyosha_jigyoshaNo" = サービス."serviceCode"
-        ORDER BY 事業者."dbT3065ShichosonTokubetsuKyufuJigyosha_jigyoshaNo" ASC,
-        事業者."dbT3065ShichosonTokubetsuKyufuJigyosha_serviceCode" ASC
+        ON 事業者."jigyoshaNo" = サービス."serviceCode"
+        ORDER BY 事業者."jigyoshaNo" ASC,
+        事業者."serviceCode" ASC
     </select>
 </mapper>
 
