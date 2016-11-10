@@ -881,7 +881,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(給付実績中間高額一時の作成8)
     protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess8() {
-        return loopBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess8.class).define();
+        return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess8.class).define();
     }
 
     /**
@@ -891,7 +891,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(給付実績中間事業高額一時の作成8)
     protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess8() {
-        return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess8.class).define();
+        return loopBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess8.class).define();
     }
 
     /**
