@@ -134,7 +134,7 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setTsuchishoNo(収納管理Entity.getTsuchishoNo());
         if (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is単一()
                 || (DonyuKeitaiCode.toValue(parameter.get広域判定区分()).is広域()
-                && 市町村分.equals(市町村コード.getColumnValue()))) {
+                && 市町村分.equals(parameter.get市町村情報()))) {
             if ((抽出条件_認定者のみ.equals(parameter.get抽出条件())
                     || 抽出条件_認定者を除く１号被保険者.equals(parameter.get抽出条件()))
                     && 収納データ.get受給者給付COUNT() != null
