@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.core.KensakuYoShikibetsuCode;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -12,6 +14,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -44,6 +47,7 @@ public class FutanwariaishoHakkoMybatisParameter extends UaFt200FindShikibetsuTa
     private final boolean uaft250_setaiNushiRiyoFlag;
     private final boolean uaft250_daihyoshaRiyokuFlag;
     private final FlexibleDate uaft250_kijunYMD;
+    private final List<ShikibetsuCode> uaft250_shikibetsuCodeList;
     private final KensakuYoShikibetsuCode tmp_shikibetsuCode;
 
     private FlexibleYear 年度;
@@ -77,6 +81,7 @@ public class FutanwariaishoHakkoMybatisParameter extends UaFt200FindShikibetsuTa
         this.uaft250_setaiNushiRiyoFlag = false;
         this.uaft250_daihyoshaRiyokuFlag = false;
         this.uaft250_kijunYMD = null;
+        this.uaft250_shikibetsuCodeList = new ArrayList<>();
         this.tmp_shikibetsuCode = null;
     }
 
@@ -111,6 +116,7 @@ public class FutanwariaishoHakkoMybatisParameter extends UaFt200FindShikibetsuTa
         this.uaft250_setaiNushiRiyoFlag = atesakiKey.get世帯主利用区分().isSetainushiRiyo();
         this.uaft250_daihyoshaRiyokuFlag = atesakiKey.get法人代表者利用区分().isHojinDaihyoshaRiyo();
         this.uaft250_kijunYMD = atesakiKey.get基準日();
+        this.uaft250_shikibetsuCodeList = atesakiKey.get識別コードリスト();
         this.年度 = 年度;
         this.交付年月日 = 交付年月日;
         this.発行区分 = 発行区分;
