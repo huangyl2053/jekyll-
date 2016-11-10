@@ -152,6 +152,7 @@ public class KogakuServicehiDetailDivHandler {
      * clear画面内容
      */
     public void clear画面内容() {
+        div.getTplShinseisha().getTxtShinseiYMD().clearValue();
         div.getTxtKanriBango().clearValue();
         div.getTxtShimeiKanji().clearValue();
         div.getTxtShimeiKana().clearValue();
