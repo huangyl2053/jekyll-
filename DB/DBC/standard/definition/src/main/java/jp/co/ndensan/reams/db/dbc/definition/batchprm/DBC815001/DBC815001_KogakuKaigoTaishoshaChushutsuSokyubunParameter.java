@@ -71,6 +71,49 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
     /**
      * コンストラクタです。
      *
+     * @param 年度 年度
+     * @param 処理年月日 処理年月日
+     * @param 処理日時 処理日時
+     * @param 抽出期間開始日時 抽出期間開始日時
+     * @param 抽出期間終了日時 抽出期間終了日時
+     * @param 帳票ID 帳票ID
+     * @param 出力順ID 出力順ID
+     * @param 開始年月１ 開始年月１
+     * @param 終了年月１ 終了年月１
+     * @param 開始年月２ 開始年月２
+     * @param 終了年月２ 終了年月２
+     * @param テスト出力 テスト出力
+     */
+    public DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter(
+            RString 年度,
+            FlexibleYearMonth 処理年月日,
+            RString 処理日時,
+            RDateTime 抽出期間開始日時,
+            RDateTime 抽出期間終了日時,
+            RString 帳票ID,
+            Long 出力順ID,
+            FlexibleYearMonth 開始年月１,
+            FlexibleYearMonth 終了年月１,
+            RString 開始年月２,
+            RString 終了年月２,
+            boolean テスト出力) {
+        this.年度 = 年度;
+        this.処理年月日 = 処理年月日;
+        this.処理日時 = 処理日時;
+        this.抽出期間開始日時 = 抽出期間開始日時;
+        this.抽出期間終了日時 = 抽出期間終了日時;
+        this.帳票ID = 帳票ID;
+        this.出力順ID = 出力順ID;
+        this.開始年月１ = 開始年月１;
+        this.終了年月１ = 終了年月１;
+        this.開始年月２ = 開始年月２;
+        this.終了年月２ = 終了年月２;
+        this.テスト出力 = テスト出力;
+    }
+
+    /**
+     * コンストラクタです。
+     *
      * @return JKogakuKaigoTaishoshaProcessParameter
      */
     public KogakuKaigoTaishoProcessParameter toProcessParameter() {
