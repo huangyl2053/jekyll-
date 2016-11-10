@@ -127,8 +127,6 @@
                 FROM
                     master
              )
-        
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> 
         AS "ShikibetsuTaisho"
            ON master.識別コード = "ShikibetsuTaisho"."shikibetsuCode";
     </select>
