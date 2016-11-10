@@ -11,12 +11,12 @@
         "DbT2020ShotokuShokaihyoHakkoRireki"."shokaisakiLasdecCode",
         "DbT2020ShotokuShokaihyoHakkoRireki"."setaiCode",
         "DbT2020ShotokuShokaihyoHakkoRireki"."hakkoYMD",
-        "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        "DbV1001HihokenshaDaicho"."hihokenshaNo"
       FROM "rgdb"."DbT2008ShotokuKanri" JOIN "rgdb"."DbT2020ShotokuShokaihyoHakkoRireki" ON
          "DbT2008ShotokuKanri"."shikibetsuCode" = "DbT2020ShotokuShokaihyoHakkoRireki"."shikibetsuCode"
         AND "DbT2008ShotokuKanri"."shotokuNendo" = "DbT2020ShotokuShokaihyoHakkoRireki"."shoriNendo"
-        JOIN "rgdb"."DbT1001HihokenshaDaicho" ON
-        "DbT2008ShotokuKanri"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"       
+        JOIN "rgdb"."DbV1001HihokenshaDaicho" ON
+        "DbT2008ShotokuKanri"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"       
         WHERE 
         (
         "DbT2008ShotokuKanri"."kazeiKubun" = '4'
@@ -28,6 +28,16 @@
         AND "DbT2020ShotokuShokaihyoHakkoRireki"."sakuseiTimestamp" <![CDATA[>=]]> #{抽出期間FROM}
         AND "DbT2020ShotokuShokaihyoHakkoRireki"."sakuseiTimestamp" <![CDATA[<]]> #{抽出期間TO}
         AND "DbT2008ShotokuKanri"."isDeleted" = false
+        AND "DbT2008ShotokuKanri"."rirekiNo" = ( 
+                    SELECT MAX("rirekiNo") 
+                    FROM "rgdb"."DbT2008ShotokuKanri" X
+                    WHERE X."shotokuNendo" = "DbT2008ShotokuKanri"."shotokuNendo" 
+                    AND X."shikibetsuCode" = "DbT2008ShotokuKanri"."shikibetsuCode") 
+        AND "DbT2020ShotokuShokaihyoHakkoRireki"."rirekiNo" = ( 
+                    SELECT MAX("rirekiNo") 
+                    FROM "rgdb"."DbT2020ShotokuShokaihyoHakkoRireki" Y 
+                    WHERE Y."shoriNendo" = "DbT2020ShotokuShokaihyoHakkoRireki"."shoriNendo" 
+                    AND Y."shikibetsuCode" = "DbT2020ShotokuShokaihyoHakkoRireki"."shikibetsuCode")
         AND "DbT2020ShotokuShokaihyoHakkoRireki"."isDeleted" = false
         )
         SELECT
