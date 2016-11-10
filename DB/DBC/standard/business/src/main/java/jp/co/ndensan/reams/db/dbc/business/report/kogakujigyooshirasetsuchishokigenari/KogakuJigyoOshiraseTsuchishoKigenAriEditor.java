@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakujigyooshirasetsuchishok
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchishokigenari.KogakuJigyoOshiraseTsuchishoKigenAriSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyooshirasetsuchishokigenari.KogakuJigyoOshiraseTsuchishopaParameterEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -24,9 +26,11 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoOshiraseTsuchishoKigenAriEditor {
 
     private final KogakuJigyoOshiraseTsuchishopaParameterEntity entity;
-    private final RString 調整金額 = new RString("調整(予定)金額");
-    private final RString 支給金額 = new RString("支給(予定)金額");
+    private static final RString 調整金額 = new RString("調整(予定)金額");
+    private static final RString 支給金額 = new RString("支給(予定)金額");
     private static final int ゼロ = 0;
+    private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final Code CODE = new Code("0003");
 
     /**
      * コンストラクタです
@@ -65,6 +69,7 @@ public class KogakuJigyoOshiraseTsuchishoKigenAriEditor implements IKogakuJigyoO
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.hokensha_no = entity.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo().value();
             source.hihokenshaNo = entity.get申請情報帳票発行一時().getHihokenshaNoChohyo().value();
+            source.拡張情報 = new ExpandedInformation(CODE, 被保険者番号, source.hihokenshaNo);
             source.taishoYM = entity.get申請情報帳票発行一時().getServiceTeikyoYMChohyo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             if (entity.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo() != null) {
