@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -96,15 +97,6 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
                     RString 通知内容コード = line.substring(通知内容コード開始位置, 通知内容コード終了位置);
                     return 通知内容コード.equals(補足給付初回回付_年次);
 
-                }
-            },
-    /**
-     * 年次ファイル通知内容チェック。
-     */
-    処理なしチェック {
-                @Override
-                public boolean apply(List<RString> 構成市町村コードリスト) {
-                    return 構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty();
                 }
             },
     /**
