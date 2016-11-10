@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehitaishoshaichiransokyubun;
 
-import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -26,8 +24,16 @@ public class KogakuServicehiTaishoshaIchiranSokyubunEntity {
     private RDateTime システムの時間;
     private RString 市町村コード;
     private RString 市町村名;
-    private Map<RString, RString> 出力順Map;
-    private List<RString> 改頁リスト;
+    private RString 並び順1;
+    private RString 並び順2;
+    private RString 並び順3;
+    private RString 並び順4;
+    private RString 並び順5;
+    private RString 改頁1;
+    private RString 改頁2;
+    private RString 改頁3;
+    private RString 改頁4;
+    private RString 改頁5;
     private ShikibetsuCode 識別コード;
     private RString 連番;
     private RString 被保険者番号;
