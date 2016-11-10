@@ -116,6 +116,7 @@ public class JisshiJokyoTokeiProcess extends BatchKeyBreakBase<JisshiJokyoTokeiE
     @Override
     protected void afterExecute() {
         if (isデータあり) {
+            new JisshiJokyoTokeiEditor(parameter, null, jisshiJokyoTokei).set合計();
             JisshiJokyoTokeiReport report = new JisshiJokyoTokeiReport(jisshiJokyoTokei);
             report.writeBy(reportSourceWriter);
         }
@@ -206,11 +207,12 @@ public class JisshiJokyoTokeiProcess extends BatchKeyBreakBase<JisshiJokyoTokeiE
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(HIHOKENSYAKUBUN);
-        条件.append(HihokenshaKubun.toValue(parameter.getHihokenshaKubun()).get名称());
+        条件.append(parameter.isJigyoJyokyoHokoku() ? RString.EMPTY : HihokenshaKubun.toValue(
+                parameter.getHihokenshaKubun()).get名称());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(GOGITAINO);
-        条件.append(parameter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(parameter.getGogitaiNo()));
+        条件.append(parameter.isJigyoJyokyoHokoku() ? RString.EMPTY : new RString(parameter.getGogitaiNo()));
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOTSUKIKUBUN);

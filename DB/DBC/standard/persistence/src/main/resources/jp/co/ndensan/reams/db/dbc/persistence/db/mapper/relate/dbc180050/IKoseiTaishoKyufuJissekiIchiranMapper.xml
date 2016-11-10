@@ -106,6 +106,9 @@
         F1."給付率10" AS 給付率10,
         F1."給付率11" AS 給付率11,
         F1."給付率12" AS 給付率12,
+        "DbT4014RiyoshaFutangakuGengaku"."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo,
+        "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" AS hihokenshaNo,
+        "DbT4014RiyoshaFutangakuGengaku"."rirekiNo" AS rirekiNo,
         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
         FROM
         "futanWariaiTemp" F1
@@ -389,15 +392,18 @@
     </sql>
     
     <resultMap  id="支払方法変更_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdShiharaihohoHenkoTempResultEntity" autoMapping="true">
-        <id column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="dbT4021ShiharaiHohoHenko_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id column="dbT4021ShiharaiHohoHenko_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="dbT4021ShiharaiHohoHenko_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT4021ShiharaiHohoHenko_rirekiNo" />
         <association property="負担割合TempEntity" resultMap="負担割合Temp_resultMap"/>
         <association property="支払方法変更" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
     </resultMap>
     
     <resultMap  id="利用者負担減額情報の取得_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdRiyoshaFutangengakuTempResultEntity" autoMapping="true">
-        <id column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="rirekiNo" />
         <association property="負担割合TempEntity" resultMap="負担割合Temp_resultMap"/>
         <association property="利用者負担減額" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
     </resultMap>

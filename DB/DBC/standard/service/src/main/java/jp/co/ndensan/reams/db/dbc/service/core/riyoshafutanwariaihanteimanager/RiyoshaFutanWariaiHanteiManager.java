@@ -486,7 +486,9 @@ public class RiyoshaFutanWariaiHanteiManager {
             RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp) {
         利用者負担割合明細Temp.setHihokenshaNo(被保険者番号);
         利用者負担割合明細Temp.setEdaNo(Integer.parseInt(被保険者台帳.get枝番().toString()));
-        利用者負担割合明細Temp.setShikakuKubun(被保険者台帳.get被保険者区分コード());
+        if (!RString.isNullOrEmpty(被保険者台帳.get被保険者区分コード())) {
+            利用者負担割合明細Temp.setShikakuKubun(被保険者台帳.get被保険者区分コード().padZeroToLeft(1));
+        }
         利用者負担割合明細Temp.setFutanWariaiKubun(負担割合判定の結果.get負担割合区分());
         利用者負担割合明細Temp.setYukoKaishiYMD(FlexibleDate.EMPTY);
         利用者負担割合明細Temp.setYukoShuryoYMD(FlexibleDate.EMPTY);

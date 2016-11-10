@@ -246,7 +246,8 @@ public class KogakuServicehiDetailDivHandler {
      * @return RString
      */
     public RString get電話番号() {
-        return div.getTxtTelNo().getDomain().value();
+        return div.getTxtTelNo().getDomain() == null || div.getTxtTelNo().getDomain().isEmpty()
+                ? RString.EMPTY : div.getTxtTelNo().getDomain().value();
     }
 
     /**

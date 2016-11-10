@@ -115,7 +115,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
                     && null != entity.get支払期間終了年月日() && null != entity.get支払期間終了時間()) {
                 source.listLower_6 = toRS(entity.get支払期間開始年月日().toString()).concat(前括弧)
                         .concat(entity.get支払期間開始年月日().getDayOfWeek().getShortTerm()).concat(後括弧).concat(
-                                entity.get支払期間開始時間().toString()).concat(接続符).concat(entity.get支払期間終了年月日().toString()).concat(前括弧)
+                        entity.get支払期間開始時間().toString()).concat(接続符).concat(entity.get支払期間終了年月日().toString()).concat(前括弧)
                         .concat(entity.get支払期間終了年月日().getDayOfWeek().getShortTerm()).concat(後括弧)
                         .concat(entity.get支払期間終了時間().toString()
                         );
@@ -126,7 +126,9 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
                 source.listLower_6 = entity.get預金種別().get預金種別名称().concat(スペース).concat(entity.get口座番号()).
                         concat(getColumnValue(entity.get口座名義人カナ()));
             }
-            source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
+            if (entity.get金融機関名称() != null && entity.get支店名称() != null) {
+                source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
+            }
         }
         if (区分_1.equals(内部帳票文字切れ制御) && null != entity.get被保険者氏名()) {
             source.listUpper_1 = entity.get被保険者氏名().substringReturnAsPossible(0, INT_34);

@@ -381,7 +381,7 @@ public class KogakuGassanShikyuKetteiHosei {
             更新para.set更新前交換情報識別番号(更新data.get交換情報識別番号());
             更新para.set更新前被保険者番号(更新data.get被保険者番号());
             更新para.set更新前支給申請書整理番号(更新data.get支給申請書整理番号());
-            更新para.set更新前整理番号(更新data.get支給申請書整理番号());
+            更新para.set更新前整理番号(更新data.get整理番号());
             更新para.set更新前自己負担額証明書整理番号(更新data.get自己負担額証明書整理番号());
             更新para.set更新前保険制度コード(更新data.get保険制度コード());
             更新para.set更新前給付実績作成区分コード(更新data.get給付実績作成区分コード());
