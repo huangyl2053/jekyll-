@@ -192,25 +192,31 @@ public class IchijiHanteiKekkaJohoHandler {
                     div.getTxtIchijiHanteiKekka().setValue(
                             IchijiHanteiKekkaCode99.toValue(business.get一次判定結果()).get名称());
                 }
-                div.getTxtKijunJikan().setValue(new RString(String.valueOf(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10)));
-                // TODO
-                div.getTxtShokuji().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtHaisetsu().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtIdo().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtSeiketsuHoji().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtKansetsuCare().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtBpsdKanren().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtKinoKunren().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtIryoKanren().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtNinchishoKasan().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
-                div.getTxtDai1gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
-                div.getTxtDai2gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
-                div.getTxtDai3gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
-                div.getTxtDai4gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
-                div.getTxtDai5gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
+                if (business.get要介護認定等基準時間() != null) {
+                    div.getTxtKijunJikan().setValue(new RString(String.valueOf(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10)));
+                    // TODO
+                    div.getTxtShokuji().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                    div.getTxtHaisetsu().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                    div.getTxtIdo().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                    div.getTxtSeiketsuHoji().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                    div.getTxtKansetsuCare().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                    div.getTxtBpsdKanren().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                    div.getTxtKinoKunren().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                    div.getTxtIryoKanren().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                    div.getTxtNinchishoKasan().setValue(new Decimal(Integer.valueOf(business.get要介護認定等基準時間().toString()) / 10));
+                }
+                if (business.get中間評価項目得点() != null) {
+                    div.getTxtDai1gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
+                    div.getTxtDai2gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
+                    div.getTxtDai3gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
+                    div.getTxtDai4gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
+                    div.getTxtDai5gun().setValue(new Decimal(Integer.valueOf(business.get中間評価項目得点().toString()) / 10));
+                }
                 div.getTxtDai6gun().setValue(new Decimal(0));
                 div.getTxtDai7gun().setValue(new Decimal(0));
-                div.getTxtGaizensei().setValue(new Decimal(Integer.valueOf(business.get認知症自立度Ⅱ以上の蓋然性_評価の１０倍().toString()) / 10));
+                if (business.get認知症自立度Ⅱ以上の蓋然性_評価の１０倍() != null) {
+                    div.getTxtGaizensei().setValue(new Decimal(Integer.valueOf(business.get認知症自立度Ⅱ以上の蓋然性_評価の１０倍().toString()) / 10));
+                }
                 if (business.get状態の安定性() != null) {
                     div.getTxtJyotaiAnteisei().setValue(
                             JotaiAnteiseiCode.toValue(business.get状態の安定性()).get名称());
