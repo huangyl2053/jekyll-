@@ -55,31 +55,20 @@ public class ReportOutputJokenhyoProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         バッチ出力条件リストの出力(parameter.get調定年度(), parameter.get賦課年度(), 市町村コード, 市町村名,
-                parameter.get出力ページ数(), Long.parseLong(parameter.get出力順ID().toString()));
+                parameter.get出力ページ数(), parameter.get出力順ID());
     }
 
     private void バッチ出力条件リストの出力(FlexibleYear 調定年度, FlexibleYear 賦課年度,
-            LasdecCode 市町村コード, RString 市町村名, int ページ数, Long 出力順ID) {
+            LasdecCode 市町村コード, RString 市町村名, int ページ数, RString 出力順ID) {
         List<RString> 出力条件リスト = new ArrayList<>();
         出力条件リスト.add(定数_出力条件);
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_調定年度).concat(出力条件_右括弧).concat(
                 調定年度.wareki().toDateString()).concat(年度));
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_賦課年度).concat(出力条件_右括弧).concat(
                 賦課年度.wareki().toDateString()).concat(年度));
-        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
-                SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200005.getReportId(), 出力順ID);
-        RStringBuilder builder = new RStringBuilder(出力条件_左括弧.concat(定数_出力順).concat(出力条件_右括弧).concat(RString.FULL_SPACE));
-        if (outputOrder != null) {
-            List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
-            for (ISetSortItem iSetSortItem : iSetSortItemList) {
-                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
-                    builder.append(iSetSortItem.get項目名());
-                } else {
-                    builder.append(iSetSortItem.get項目名()).append(SIGN_GT);
-                }
-            }
+        if (null != 出力順ID) {
+            set出力順(出力順ID, 出力条件リスト);
         }
-        出力条件リスト.add(builder.toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 ReportIdDBB.DBB200005.getReportId().value(),
                 市町村コード.value(),
@@ -93,5 +82,22 @@ public class ReportOutputJokenhyoProcess extends SimpleBatchProcessBase {
         );
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private void set出力順(RString 出力順ID, List<RString> 出力条件リスト) {
+        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
+                SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200005.getReportId(), Long.parseLong(出力順ID.toString()));
+        RStringBuilder builder = new RStringBuilder(出力条件_左括弧.concat(定数_出力順).concat(出力条件_右括弧).concat(RString.FULL_SPACE));
+        if (outputOrder != null) {
+            List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
+            for (ISetSortItem iSetSortItem : iSetSortItemList) {
+                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
+                    builder.append(iSetSortItem.get項目名());
+                } else {
+                    builder.append(iSetSortItem.get項目名()).append(SIGN_GT);
+                }
+            }
+        }
+        出力条件リスト.add(builder.toRString());
     }
 }
