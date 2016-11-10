@@ -166,9 +166,8 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
     }
 
     private RString get期に対する月の設定(GennendoDate gennendoDate, FuchoKiUtil fuchoKiUtil) {
-        List<Kitsuki> itsukiList = new ArrayList<>();
         if (普通徴収.equals(gennendoDate.getChoshuHouhou())) {
-            itsukiList = fuchoKiUtil.get期月リスト().get期の月(gennendoDate.getKi());
+            return fuchoKiUtil.get期月リスト().get期の月(gennendoDate.getKi()).get(0).get月().getコード();
         }
         if (特別徴収.equals(gennendoDate.getChoshuHouhou())) {
             if (gennendoDate.getKi() == 1) {
@@ -190,7 +189,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
                 return Tsuki._2月.getコード();
             }
         }
-        return itsukiList.get(0).get月().getコード();
+        return RString.EMPTY;
     }
 
     private void 過年度のデータの取得() {
