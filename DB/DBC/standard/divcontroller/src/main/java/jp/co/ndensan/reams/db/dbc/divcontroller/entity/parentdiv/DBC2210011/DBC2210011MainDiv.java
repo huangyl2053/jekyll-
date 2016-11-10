@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -34,6 +35,12 @@ public class DBC2210011MainDiv extends Panel {
     private TokubetsuKyufuJigyoshaDetailServiceInfoDiv TokubetsuKyufuJigyoshaDetailServiceInfo;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("事業者情報件数 ")
+    private RString 事業者情報件数 ;
+    @JsonProperty("hiddenModel")
+    private RString hiddenModel;
+    @JsonProperty("hiddenModelOne")
+    private RString hiddenModelOne;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -120,6 +127,60 @@ public class DBC2210011MainDiv extends Panel {
     @JsonProperty("ccdKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
+    }
+
+    /*
+     * get事業者情報件数 
+     * @return 事業者情報件数 
+     */
+    @JsonProperty("事業者情報件数 ")
+    public RString get事業者情報件数 () {
+        return 事業者情報件数 ;
+    }
+
+    /*
+     * set事業者情報件数 
+     * @param 事業者情報件数  事業者情報件数 
+     */
+    @JsonProperty("事業者情報件数 ")
+    public void set事業者情報件数 (RString 事業者情報件数 ) {
+        this.事業者情報件数  = 事業者情報件数 ;
+    }
+
+    /*
+     * gethiddenModel
+     * @return hiddenModel
+     */
+    @JsonProperty("hiddenModel")
+    public RString getHiddenModel() {
+        return hiddenModel;
+    }
+
+    /*
+     * sethiddenModel
+     * @param hiddenModel hiddenModel
+     */
+    @JsonProperty("hiddenModel")
+    public void setHiddenModel(RString hiddenModel) {
+        this.hiddenModel = hiddenModel;
+    }
+
+    /*
+     * gethiddenModelOne
+     * @return hiddenModelOne
+     */
+    @JsonProperty("hiddenModelOne")
+    public RString getHiddenModelOne() {
+        return hiddenModelOne;
+    }
+
+    /*
+     * sethiddenModelOne
+     * @param hiddenModelOne hiddenModelOne
+     */
+    @JsonProperty("hiddenModelOne")
+    public void setHiddenModelOne(RString hiddenModelOne) {
+        this.hiddenModelOne = hiddenModelOne;
     }
 
     /*
