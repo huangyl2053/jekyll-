@@ -268,7 +268,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         IJusho 住所 = 宛名.get住所();
         if (!flag || isChangeShotaiCode(this.exEntity.get対象世帯員(), entity.get対象世帯員())) {
             int 文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().getBanchi().getColumnValue().length();
-            if (INT_80 < 文字列長) {
+            if (INT_80 < 文字列長 && RSTRING_1.equals(entity.get対象世帯員().getShuturyokuUmu())) {
                 文字切れflag = true;
                 対象世帯員.setInnjiGirisiamojiKubun(true);
             } else {
