@@ -60,7 +60,9 @@ public class ShikyuKetteitsuchishoParameterHandler {
         for (Map.Entry<JigyoshaNo, AtenaMeisho> entry : map.entrySet()) {
             KeyValueDataSource datasource = new KeyValueDataSource();
             datasource.setKey(entry.getKey().value());
-            datasource.setValue(entry.getValue().value());
+            if (entry.getValue() != null) {
+                datasource.setValue(entry.getValue().value());
+            }
             list.add(datasource);
         }
         div.getDdlJigyosha().setDataSource(list);
