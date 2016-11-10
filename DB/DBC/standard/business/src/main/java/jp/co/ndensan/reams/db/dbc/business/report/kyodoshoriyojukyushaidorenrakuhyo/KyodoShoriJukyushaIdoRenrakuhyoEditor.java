@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kyodoshorijukyushaidorenr
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -41,6 +43,8 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
     private static final RString 定数_99 = new RString("99");
     private static final RString FORMAT_MARU = new RString("○");
     private static final RString SPIT = new RString("-");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
@@ -224,6 +228,7 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
         } else {
             source.shikyuUmu2 = FORMAT_MARU;
         }
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.hihokenshaNo);
     }
 
     private FillTypeFormatted dateFormat(FlexibleDate date) {

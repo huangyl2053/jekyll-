@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030.DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.KokuhorenFuicchi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.SanteiKijun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShiharaiSaki;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinsaHoho;
@@ -139,7 +138,6 @@ public class DvKogakuServiceJohoHandler {
 
         if (state.equals(モード１)) {
             panel.getDdlKogakuShinsaHoho().setDataSource(get審査方法リスト());
-            panel.getRadKogakuKokuhorenFuicchi().setDataSource(get国保連不一致リスト());
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().setSelectedKey(すべて_0);
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().setSelectedKey(すべて_0);
         }
@@ -452,15 +450,6 @@ public class DvKogakuServiceJohoHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (SanteiKijun 算定基準 : SanteiKijun.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource(算定基準.getコード(), 算定基準.get名称());
-            dataSourceList.add(dataSource);
-        }
-        return dataSourceList;
-    }
-
-    private List<KeyValueDataSource> get国保連不一致リスト() {
-        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (KokuhorenFuicchi 国保連不一致 : KokuhorenFuicchi.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(国保連不一致.getコード(), 国保連不一致.get名称());
             dataSourceList.add(dataSource);
         }
         return dataSourceList;

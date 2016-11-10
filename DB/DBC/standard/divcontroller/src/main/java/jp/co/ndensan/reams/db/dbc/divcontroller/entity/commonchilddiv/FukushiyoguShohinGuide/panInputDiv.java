@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  *
  */
 public class panInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +35,8 @@ public class panInputDiv extends Panel {
     private RString State;
     @JsonProperty("ShohinNo")
     private RString ShohinNo;
+    @JsonProperty("KanriKaishiDay")
+    private RString KanriKaishiDay;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -166,6 +168,24 @@ public class panInputDiv extends Panel {
     @JsonProperty("ShohinNo")
     public void setShohinNo(RString ShohinNo) {
         this.ShohinNo = ShohinNo;
+    }
+
+    /*
+     * getKanriKaishiDay
+     * @return KanriKaishiDay
+     */
+    @JsonProperty("KanriKaishiDay")
+    public RString getKanriKaishiDay() {
+        return KanriKaishiDay;
+    }
+
+    /*
+     * setKanriKaishiDay
+     * @param KanriKaishiDay KanriKaishiDay
+     */
+    @JsonProperty("KanriKaishiDay")
+    public void setKanriKaishiDay(RString KanriKaishiDay) {
+        this.KanriKaishiDay = KanriKaishiDay;
     }
 
     // </editor-fold>

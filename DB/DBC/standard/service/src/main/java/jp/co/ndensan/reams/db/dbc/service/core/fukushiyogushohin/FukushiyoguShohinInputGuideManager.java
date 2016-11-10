@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3117FukushiyoguShohinEntity
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3117FukushiyoguShohinDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -48,8 +49,7 @@ public class FukushiyoguShohinInputGuideManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link FukushiyoguShohinInputGuideManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link FukushiyoguShohinInputGuideManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link FukushiyoguShohinInputGuideManager}のインスタンス
      */
     public static FukushiyoguShohinInputGuideManager createInstance() {
         return InstanceProvider.create(FukushiyoguShohinInputGuideManager.class);
@@ -84,5 +84,19 @@ public class FukushiyoguShohinInputGuideManager {
             return false;
         }
         return 1 == dbT3117dac.saveOrDelete(福祉用具商品名入力ガイド.toEntity());
+    }
+
+    /**
+     * 福祉用具商品名入力ガイド{@link FukushiyoguShohin}を保存します。
+     *
+     * @param deleteFukushiyoguShohin {@link FukushiyoguShohin}
+     * @param addFukushiyoguShohin {@link FukushiyoguShohin}
+     */
+    @Transaction
+    public void modifyBy管理開始年月日(FukushiyoguShohin deleteFukushiyoguShohin, FukushiyoguShohin addFukushiyoguShohin) {
+        saveOrDelete(deleteFukushiyoguShohin.deleted());
+        DbT3117FukushiyoguShohinEntity addEntity = addFukushiyoguShohin.toEntity();
+        addEntity.setState(EntityDataState.Added);
+        saveOrDelete(new FukushiyoguShohin(addEntity));
     }
 }

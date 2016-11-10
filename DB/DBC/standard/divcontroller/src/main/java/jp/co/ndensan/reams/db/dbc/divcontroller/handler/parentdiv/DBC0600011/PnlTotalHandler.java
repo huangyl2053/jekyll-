@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600011;
 
 import java.util.ArrayList;
 import java.util.List;
-import static jp.co.ndensan.reams.bb.bbx.business.util.KingakuUtil.nullToZero;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinseiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -87,6 +87,13 @@ public final class PnlTotalHandler {
             lists.add(row);
         }
         div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().setDataSource(lists);
+    }
+
+    private Decimal nullToZero(Decimal value) {
+        if (value == null) {
+            return Decimal.ZERO;
+        }
+        return value;
     }
 
     /**
