@@ -561,7 +561,7 @@ public class SetaiShotokuIchiranHandler {
         HihokenshaNo hihokenshaNo = new HihokenshaNo(row.getTxtKetsugo01().split(BR.toString()).get(1));
 
         return new SetaiinShotoku(
-                shikibetsuCode, hihokenshaNo, RString.EMPTY, RString.EMPTY,
+                shikibetsuCode, hihokenshaNo, row.getTxtShimei(), RString.EMPTY,
                 FlexibleDate.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, Decimal.ZERO, Decimal.ZERO,
