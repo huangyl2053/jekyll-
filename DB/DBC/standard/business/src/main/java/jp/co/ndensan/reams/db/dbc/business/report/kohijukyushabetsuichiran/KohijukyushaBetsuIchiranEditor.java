@@ -87,10 +87,10 @@ public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiran
             source.listUpper_4 = business.getサービス種類名();
         }
         if (!RString.isNullOrEmpty(business.getサービス項目名()) && business.getサービス項目名().length() > INDEX) {
-            source.listUpper_4 = business.getサービス項目名().substring(0, INDEX);
+            source.listUpper_5 = business.getサービス項目名().substring(0, INDEX);
             source.listLower_3 = business.getサービス項目名().substring(INDEX, business.getサービス項目名().length());
         } else {
-            source.listUpper_4 = business.getサービス項目名();
+            source.listUpper_5 = business.getサービス項目名();
         }
         source.listUpper_6 = new RString(business.get日数回数().toString());
         source.listUpper_7 = decimalFormatter(business.get公費対象単位数(), 0);
