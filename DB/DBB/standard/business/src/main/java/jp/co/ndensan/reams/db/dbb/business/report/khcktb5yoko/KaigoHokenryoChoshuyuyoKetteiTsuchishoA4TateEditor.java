@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.Kib
 import jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo.KibetsuChoshyuYuyoKikan;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -140,7 +141,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
                 source.fukaNendo = 徴収猶予決定通知書情報.get徴収猶予の情報().get賦課年度().wareki()
                         .eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
             }
-            source.ketteiKekka = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分();
+            source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分()).getコード();
             TsuchishoNo 通知書番号 = 徴収猶予決定通知書情報.get徴収猶予の情報().get通知書番号();
             source.tsuchishoNo = 通知書番号 != null ? 通知書番号.value() : RString.EMPTY;
             SetaiCode 世帯コード = 徴収猶予決定通知書情報.get徴収猶予の情報().get世帯コード();
