@@ -97,6 +97,7 @@ public class JikofutangakuShomeishoToroku {
         }
         div.setExecutionStatus(STATUS_新規);
         getHandler(div).set登録情報();
+        getHandler(div).set証明書登録To読取専用(false);
         return ResponseData.of(div).setState(DBCN130001StateName.証明書登録);
     }
 
@@ -144,7 +145,7 @@ public class JikofutangakuShomeishoToroku {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
         }
-        getHandler(div).set証明書登録To読取専用();
+        getHandler(div).set証明書登録To読取専用(true);
         div.setExecutionStatus(STATUS_照会);
         return ResponseData.of(div).respond();
     }
@@ -164,6 +165,7 @@ public class JikofutangakuShomeishoToroku {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
         }
+        getHandler(div).set証明書登録To読取専用(false);
         div.setExecutionStatus(STATUS_修正);
         return ResponseData.of(div).respond();
     }
@@ -183,7 +185,7 @@ public class JikofutangakuShomeishoToroku {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
         }
-        getHandler(div).set証明書登録To読取専用();
+        getHandler(div).set証明書登録To読取専用(true);
         div.setExecutionStatus(STATUS_削除);
         return ResponseData.of(div).respond();
     }
