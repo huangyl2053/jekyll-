@@ -188,39 +188,20 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
                 ReportIdDBC.DBC200101.getReportId().value(), SubGyomuCode.DBC介護給付)
                 .addBreak(new BreakerCatalog<FurikomiMeisaiIchiranDetailReportSource>().new SimpleLayoutBreaker(
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     FurikomiMeisaiIchiranDetailReportSource.LAYOUT_BREAK_KEYS) {
             @Override
                     public ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> occuredBreak(
                             ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> currentRecord,
                             ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> nextRecord,
                             ReportDynamicChart dynamicChart) {
-                                int layout = currentRecord.getSource().layout.index();
-                                currentRecord.setFormGroupIndex(layout);
-                                if (nextRecord != null && nextRecord.getSource() != null) {
-                                    layout = nextRecord.getSource().layout.index();
-                                    nextRecord.setFormGroupIndex(layout);
-                                }
-                                return currentRecord;
-                            }
+                        int layout = currentRecord.getSource().layout.index();
+                        currentRecord.setFormGroupIndex(layout);
+                        if (nextRecord != null && nextRecord.getSource() != null) {
+                            layout = nextRecord.getSource().layout.index();
+                            nextRecord.setFormGroupIndex(layout);
+                        }
+                        return currentRecord;
+                    }
                 }).create();
         reportSourceWriter_明細一覧表 = new ReportSourceWriter<>(batchReportWriter_明細一覧表);
     }
@@ -270,11 +251,11 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         List<InjiYoushikiBangouBetuKingaku> 印字様式番号別金額List = bisness.sumKingakuBy印字様式番号(t.get様式番号別金額EntityList());
         MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
         List<PrintNoKingakuEntity> list = new ArrayList<>();
+        int count = 0;
         for (int i = 0; i < 印字様式番号別金額List.size(); i++) {
             InjiYoushikiBangouBetuKingaku 印字様式番号別金額 = 印字様式番号別金額List.get(i);
             様式連番++;
 
-            int count = 0;
             if (1 == 様式連番) {
                 振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
 
@@ -286,17 +267,19 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
                 list.clear();
             } else {
                 count++;
+                list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
                 if (印字様式番号別金額List.size() % 2 == 0 && i == 印字様式番号別金額List.size()) {
                     list.add(new PrintNoKingakuEntity());
                     count++;
                 }
-                list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
+
                 振込明細一覧表明細.set印字様式番号別金額List(list);
                 振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
                 if (2 == count) {
                     FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
                             RDateTime.now(), 設定値);
                     report.writeBy(reportSourceWriter_明細一覧表);
+                    list.clear();
                     count = 0;
                 }
             }
