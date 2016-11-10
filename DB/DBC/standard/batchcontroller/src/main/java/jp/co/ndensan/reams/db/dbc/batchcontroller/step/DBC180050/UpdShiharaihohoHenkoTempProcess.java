@@ -66,19 +66,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
         年度 = FlexibleYear.EMPTY;
         被保険者番号 = HihokenshaNo.EMPTY;
         負担割合情報一時表 = new FutanWariaiTempEntity();
-        八月違い期間存在Flag = false;
-        八月違い期間存在Flag = false;
-        九月違い期間存在Flag = false;
-        十月違い期間存在Flag = false;
-        十一月違い期間存在Flag = false;
-        十二月違い期間存在Flag = false;
-        一月違い期間存在Flag = false;
-        二月違い期間存在Flag = false;
-        三月違い期間存在Flag = false;
-        四月違い期間存在Flag = false;
-        五月違い期間存在Flag = false;
-        六月違い期間存在Flag = false;
-        七月違い期間存在Flag = false;
+        set存在Flag();
     }
 
     @Override
@@ -103,6 +91,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
             } else {
                 負担割合情報一時表Writer.update(負担割合情報一時表);
                 負担割合情報一時表 = entity.get負担割合TempEntity();
+                set存在Flag();
                 get負担割合情報一時表(entity);
             }
             開始Flag = false;
@@ -290,6 +279,22 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
         return 対象年月 != null && tekiyoShuryoYMD != null && tekiyoKaishiYMD != null
                 && 対象年月.isBeforeOrEquals(tekiyoShuryoYMD.getYearMonth())
                 && tekiyoKaishiYMD.getYearMonth().isBeforeOrEquals(対象年月);
+    }
+
+    private void set存在Flag() {
+        八月違い期間存在Flag = false;
+        八月違い期間存在Flag = false;
+        九月違い期間存在Flag = false;
+        十月違い期間存在Flag = false;
+        十一月違い期間存在Flag = false;
+        十二月違い期間存在Flag = false;
+        一月違い期間存在Flag = false;
+        二月違い期間存在Flag = false;
+        三月違い期間存在Flag = false;
+        四月違い期間存在Flag = false;
+        五月違い期間存在Flag = false;
+        六月違い期間存在Flag = false;
+        七月違い期間存在Flag = false;
     }
 
 }
