@@ -314,10 +314,11 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
      * 変更区分=1の場合「設定を保存する」ボタン押下時の保存処理Handler
      *
      * @param 打ち分け条件画面 RString
+     * @param 打ち分け条件view RString
      */
-    public void 設定時保存処理_変更区分(RString 打ち分け条件画面) {
+    public void 設定時保存処理_変更区分(RString 打ち分け条件画面, RString 打ち分け条件view) {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true, 打ち分け条件画面);
+        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true, 打ち分け条件画面, 打ち分け条件view);
         本算定賦課計算.regutiwakehouhoujyoho2(変更打分け方法, new RString(String.valueOf(変更区分_1)));
     }
 
@@ -326,11 +327,12 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
      *
      * @param flag 新規１の場合flag==true else flag==false
      * @param 打ち分け条件 RString
+     * @param 打ち分け条件view RString
      * @return 確認画面の打分け方法
      */
-    public TsuchishoUchiwakeJoken get確認画面の打分け方法(boolean flag, RString 打ち分け条件) {
+    public TsuchishoUchiwakeJoken get確認画面の打分け方法(boolean flag, RString 打ち分け条件, RString 打ち分け条件view) {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        List<TsuchishoUchiwakeJoken> jokenList = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件);
+        List<TsuchishoUchiwakeJoken> jokenList = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件view);
         TsuchishoUchiwakeJoken joken = new TsuchishoUchiwakeJoken(打ち分け条件,
                 RDateTime.now(),
                 jokenList.get(0).get賦課処理区分());

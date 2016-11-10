@@ -55,6 +55,9 @@ public class FurikomimeisaiDataUpdateToSakusProcess extends BatchProcessBase<DbT
     private static final RString 年度内連番 = new RString("0001");
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
     private static final RString 振込明細一覧表R = new RString("振込明細一覧表");
+    private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
 
     private static final RString 出力有無 = new RString("なし");
     private static final RString 処理区分 = new RString("【処理区分】");
@@ -76,14 +79,14 @@ public class FurikomimeisaiDataUpdateToSakusProcess extends BatchProcessBase<DbT
 
     private FurikomimeisaiFurikomiDataProcessParameter parameter;
     private ReportId 帳票ID;
-    private boolean flag;
+    private int flag;
 
     @BatchWriter
     BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> dbWriter;
 
     @Override
     protected void initialize() {
-        flag = false;
+        flag = INT_0;
         if (高額合算KUNBUN.equals(parameter.getBatchKunbun())) {
             帳票ID = ReportIdDBC.DBC200003.getReportId();
         } else if (事業高額合算KUNBUN.equals(parameter.getBatchKunbun())) {
@@ -96,7 +99,7 @@ public class FurikomimeisaiDataUpdateToSakusProcess extends BatchProcessBase<DbT
     @Override
     protected IBatchReader createReader() {
         if (!Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(parameter.get処理区分())) {
-            flag = true;
+            flag = INT_1;
             return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toMybatisParameter());
         }
         return new BatchDbReader(MYBATIS_SELECT_ID_NASI);
@@ -109,6 +112,7 @@ public class FurikomimeisaiDataUpdateToSakusProcess extends BatchProcessBase<DbT
 
     @Override
     protected void process(DbT7022ShoriDateKanriEntity entity) {
+        flag = INT_2;
         entity.setTaishoKaishiYMD(parameter.get開始年月日());
         entity.setTaishoShuryoYMD(parameter.get終了年月日());
         entity.setTaishoKaishiTimestamp(new YMDHMS(RString.EMPTY));
@@ -118,7 +122,7 @@ public class FurikomimeisaiDataUpdateToSakusProcess extends BatchProcessBase<DbT
 
     @Override
     protected void afterExecute() {
-        if (flag) {
+        if (flag == INT_1) {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
             entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
             entity.setShichosonCode(市町村コード_000000);
