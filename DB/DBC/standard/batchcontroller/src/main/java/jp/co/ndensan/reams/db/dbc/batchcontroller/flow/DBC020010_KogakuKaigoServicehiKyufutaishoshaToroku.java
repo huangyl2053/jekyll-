@@ -10,13 +10,16 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.DelSaishoriKoga
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsHihokenshaDaichoTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsHihokenshaDaichoTmpProcess2;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsJigyoKogakuKaigoServiceHiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsJigyoKogakuKaigoServiceHiTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKijunShunyugakuTekiyoKanriTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKogakuKaigoServiceHiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKogakuKaigoServiceHiTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyokaisoGaitoshaTmpProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess2;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess5;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess8;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess2;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess3;
@@ -877,8 +880,38 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      * @return IBatchFlowCommand
      */
     @Step(給付実績中間高額一時の作成8)
+    protected IBatchFlowCommand callInsKyufuJissekiChukanJigyoKogakuTmpProcess8() {
+        return loopBatch(InsKyufuJissekiChukanJigyoKogakuTmpProcess8.class).define();
+    }
+
+    /**
+     * 給付実績中間事業高額一時の作成8のメソッドです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(給付実績中間事業高額一時の作成8)
     protected IBatchFlowCommand callInsKyufuJissekiChukanKogakuTmpProcess8() {
         return loopBatch(InsKyufuJissekiChukanKogakuTmpProcess8.class).define();
+    }
+
+    /**
+     * 高額介護サービス費一時の作成のメソッドです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(高額介護サービス費一時の作成)
+    protected IBatchFlowCommand callInsKogakuKaigoServiceHiTmpProcess() {
+        return loopBatch(InsKogakuKaigoServiceHiTmpProcess.class).define();
+    }
+
+    /**
+     * 事業高額介護サービス費一時の作成のメソッドです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(事業高額介護サービス費一時の作成)
+    protected IBatchFlowCommand callInsJigyoKogakuKaigoServiceHiTmpProcess() {
+        return loopBatch(InsJigyoKogakuKaigoServiceHiTmpProcess.class).define();
     }
 
     /**

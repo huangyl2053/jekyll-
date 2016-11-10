@@ -52,10 +52,10 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess2 extends BatchProcessBase<S
         FlexibleDate 基準年月日 = entity.get世帯員所得情報Entity().getKijunYMD();
         FlexibleDate 世帯員基準日 = null;
         TempSetaiinHaakuNyuryokuEntity 世帯員把握Entity = new TempSetaiinHaakuNyuryokuEntity();
-        if (資格取得年月日 != null && 基準年月日 != null && 資格取得年月日.getYearMonth().equals(基準年月日.getYearMonth())) {
+        if (!isNullOrEntity(資格取得年月日) && !isNullOrEntity(基準年月日) && 資格取得年月日.getYearMonth().equals(基準年月日.getYearMonth())) {
             世帯員基準日 = 資格取得年月日;
             世帯員把握Entity.setKijunYMD(世帯員基準日);
-        } else if (資格取得年月日 != null && 基準年月日 != null
+        } else if (!isNullOrEntity(資格取得年月日) && !isNullOrEntity(基準年月日)
                 && 資格取得年月日.getYearMonth().isBefore(基準年月日.getYearMonth())) {
             世帯員基準日 = new FlexibleDate(基準年月日.getYearMonth().toDateString().concat(DATE));
             世帯員把握Entity.setKijunYMD(世帯員基準日);
@@ -63,11 +63,12 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess2 extends BatchProcessBase<S
         世帯員把握Entity.setShotokuNendo(entity.get世帯員所得情報Entity().getShotokuNendo());
         FlexibleDate 適用年月日 = 被保険者情報.get適用年月日();
         FlexibleDate 解除年月日 = 被保険者情報.get解除年月日();
-        if ((適用年月日 != null && 世帯員基準日 != null && 解除年月日 != null
+        if ((!isNullOrEntity(適用年月日) && !isNullOrEntity(世帯員基準日) && !isNullOrEntity(解除年月日)
                 && 適用年月日.isBeforeOrEquals(世帯員基準日)
                 && 世帯員基準日.isBefore(解除年月日))
-                || (適用年月日 != null && 適用年月日.isBeforeOrEquals(世帯員基準日)
-                && (解除年月日 == null || 解除年月日.isEmpty()))) {
+                || (!isNullOrEntity(適用年月日) && !isNullOrEntity(世帯員基準日)
+                && 適用年月日.isBeforeOrEquals(世帯員基準日)
+                && (isNullOrEntity(解除年月日)))) {
             世帯員把握Entity.setJushochiTokureiFlag(住所地特例該当_1);
         } else {
             世帯員把握Entity.setJushochiTokureiFlag(住所地特例該当_0);
@@ -81,4 +82,7 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess2 extends BatchProcessBase<S
     protected void afterExecute() {
     }
 
+    private boolean isNullOrEntity(FlexibleDate date) {
+        return date == null || date.isEmpty();
+    }
 }

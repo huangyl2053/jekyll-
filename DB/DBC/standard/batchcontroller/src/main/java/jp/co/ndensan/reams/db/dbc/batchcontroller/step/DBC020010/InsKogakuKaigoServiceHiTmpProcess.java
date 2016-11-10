@@ -431,10 +431,16 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
     }
 
     private Decimal get高額支給額合計(TyukannKogakuRelateEntity 結果Entity, Decimal 高額支給額合計, boolean flag) {
-        if (!flag && Decimal.ZERO.compareTo(結果Entity.get高額合計全件Entity().getKogakuShikyuGaku()) == 1) {
+        if (結果Entity.get高額合計全件Entity() == null) {
+            return 高額支給額合計;
+        }
+        Decimal kogakuShikyuGaku = 結果Entity.get高額合計全件Entity().getKogakuShikyuGaku() == null
+                ? Decimal.ZERO : 結果Entity.get高額合計全件Entity().getKogakuShikyuGaku();
+        if (!flag && Decimal.ZERO.compareTo(kogakuShikyuGaku) == 1) {
             高額支給額合計 = 高額支給額合計.add(結果Entity.get高額判定結果全件Entity().getShikyuKingaku());
         } else {
-            高額支給額合計 = 高額支給額合計.add(結果Entity.get高額合計全件Entity().getKogakuShikyuGaku());
+            高額支給額合計 = 高額支給額合計.add(結果Entity.get高額合計全件Entity().getKogakuShikyuGaku() == null
+                    ? Decimal.ZERO : 結果Entity.get高額合計全件Entity().getKogakuShikyuGaku());
         }
         return 高額支給額合計;
     }

@@ -912,12 +912,14 @@ public class ChoshuYuyoJuminKihonHandler {
         param.set状況(div.getChoshuYuyoMain().getTxtShinseiJokyo().getValue());
         RString 決定区分 = 決定情報パネル.getRadKetteiKubun().getSelectedKey();
         param.set決定区分(定値_ゼロ.equals(決定区分));
-        param.set調定年度((徴収猶予の情報.get調定年度() != null && !徴収猶予の情報.get調定年度().isEmpty())
-                ? 徴収猶予の情報.get調定年度() : FlexibleYear.EMPTY);
-        param.set賦課年度((徴収猶予の情報.get賦課年度() != null && !徴収猶予の情報.get賦課年度().isEmpty())
-                ? 徴収猶予の情報.get賦課年度() : FlexibleYear.EMPTY);
-        param.set通知書番号((徴収猶予の情報.get通知書番号() != null && !徴収猶予の情報.get通知書番号().isEmpty())
-                ? 徴収猶予の情報.get通知書番号() : TsuchishoNo.EMPTY);
+        if (徴収猶予の情報 != null) {
+            param.set調定年度((徴収猶予の情報.get調定年度() != null && !徴収猶予の情報.get調定年度().isEmpty())
+                    ? 徴収猶予の情報.get調定年度() : FlexibleYear.EMPTY);
+            param.set賦課年度((徴収猶予の情報.get賦課年度() != null && !徴収猶予の情報.get賦課年度().isEmpty())
+                    ? 徴収猶予の情報.get賦課年度() : FlexibleYear.EMPTY);
+            param.set通知書番号((徴収猶予の情報.get通知書番号() != null && !徴収猶予の情報.get通知書番号().isEmpty())
+                    ? 徴収猶予の情報.get通知書番号() : TsuchishoNo.EMPTY);
+        }
         param.set申請日(申請情報パネル.getTxtShinseiYMD().getValue() != null
                 ? new FlexibleDate(申請情報パネル.getTxtShinseiYMD().getValue().toString()) : null);
         param.set決定日(決定情報パネル.getTxtKetteiYMD().getValue() != null

@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutai
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 
 /**
- * 給付実績中間高額一時8Insert用Entityです。
+ * 給付実績中間事業高額一時8Insert用Entityです。
  *
  * @reamsid_L DBC-2010-070 tianshuai
  */
@@ -24,4 +25,6 @@ public class KyufuJissekiChukanKogakuJigyo8Entity implements Serializable {
     private DbT3116KijunShunyugakuTekiyoKanriEntity 基準収入額適用管理一時;
     private TempSetaiinShotokuHanteiEntity 世帯員所得判定明細事業高額一時１;
     private TempSetaiinShotokuHanteiEntity 世帯員所得判定明細事業高額一時３;
+    private DbT3118ShikibetsuNoKanriEntity 識別番号管理;
+
 }
