@@ -173,7 +173,7 @@
         <result property="idoId"                                column="shikibetsuTaishoIdo_idoId" />
     </resultMap>
     
-    <select resultOrdered="true" id="get宛名データ抽出" parameterType="jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoSearchKey"
+    <select resultOrdered="true" id="get宛名データ抽出" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter"
             resultMap="ResultMap_UaFt001FindIdo" fetchSize="1000">
         SELECT
           <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.allColumns_ShikibetsuTaishoIdo"/>
@@ -754,5 +754,95 @@
              "Tempkeisantaisyo" as 一時 
         WHERE
            "shotsicode" is null or "shotsicode" = ''
+    </select>
+    <select resultOrdered="true" id="get過去分実績基本抽出1"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper.ResultMap_DbT2008ShotokuKanriEntity"
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
+        SELECT
+             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper.allColumns_DbT2008ShotokuKanri" />
+         FROM
+           rgdb."DbT2008ShotokuKanri"
+        WHERE
+           "DbT2008ShotokuKanri"."isDeleted" = false
+           AND #{抽出期間開始日時} <![CDATA[<=]]> "DbT2008ShotokuKanri"."shoriTimeStamp"
+           AND   "DbT2008ShotokuKanri"."shoriTimeStamp" <![CDATA[<=]]> #{抽出期間終了日時}
+        ORDER BY
+            "DbT2008ShotokuKanri"."shikibetsuCode" ASC, "DbT2008ShotokuKanri"."shotokuNendo" ASC
+    </select>
+    <select resultOrdered="true" id="get処理日付管理マスタ更新" 
+        resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        FROM
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE
+            "DbT7022ShoriDateKanri"."subGyomuCode" ='DBC'
+            AND "DbT7022ShoriDateKanri"."shichosonCode" = #{地方公共団体コード}
+            AND "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
+            AND "DbT7022ShoriDateKanri"."shoriEdaban" =  '0000'
+            AND "DbT7022ShoriDateKanri".nendo = '0000'
+            AND "DbT7022ShoriDateKanri"."nendoNaiRenban" = '0001'
+    </select>
+    <delete id="delete計算対象ファイル">
+         DELETE
+            FROM  "Tempkeisantaisyo"
+    </delete>
+     <resultMap id="ResultMap_対象者一覧表発行処理" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.TaishoushaitiranhyouhakkouShorientity" autoMapping="true">
+        <result property="被保険者番号"   column="被保険者番号"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード"   column="識別コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス提供年月"   column="サービス提供年月"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号"   column="証記載保険者番号"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担額"   column="利用者負担額"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯コード"   column="世帯コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード"   column="市町村コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="備考欄個人所得区分"   column="備考欄個人所得区分"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者名"   column="被保険者名"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護認定状態区分コード"   column="要介護認定状態区分コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧措置者フラグ"   column="旧措置者フラグ"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定有効期間開始年月日"   column="認定有効期間開始年月日"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定有効期間終了年月日"   column="認定有効期間終了年月日"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="カナ名称"   column="カナ名称"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号"   column="郵便番号"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="町域コード"   column="町域コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所番地方書"   column="住所番地方書"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区コード"   column="行政区コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区"   column="行政区"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="措置元市町村コード"   column="措置元市町村コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+
+    </resultMap> 
+    <select resultOrdered="true" id="get対象者一覧表発行処理"  resultMap="ResultMap_対象者一覧表発行処理"
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
+        SELECT
+            A."hiHokenshaNo" AS "被保険者番号",
+            A."shotokuHantei_shikibetsuCode" AS "識別コード",
+            A."serviceTeikyoYM" AS "サービス提供年月",
+            A."shokisaiHokenshaNo" AS "証記載保険者番号",
+            A."hokenRiyoshaFutangaku" AS "利用者負担額",
+            PSM."setaiCode" AS "世帯コード",
+            A."shotokuHantei_shichosonCode" AS "市町村コード",
+            A."beikoKojinshotokuKubun" AS "備考欄個人所得区分",
+            PSM."meisho" AS "被保険者名",
+            C."yokaigoJotaiKubunCode" AS "要介護認定状態区分コード",
+            C."kyuSochishaFlag" AS "旧措置者フラグ",
+            C."ninteiYukoKikanKaishiYMD" AS "認定有効期間開始年月日",
+            C."ninteiYukoKikanShuryoYMD" AS "認定有効期間終了年月日",
+            PSM."kanaMeisho" AS "カナ名称",
+            PSM."yubinNo" AS "郵便番号",
+            PSM."choikiCode" AS "町域コード",
+            PSM."jusho"||PSM."banchi"||PSM."katagaki" AS "住所番地方書",
+            PSM."gyoseikuCode" AS "行政区コード",
+            PSM."gyoseikuName" AS "行政区",
+            D."shichosonCode"||D."koikinaiTokureiSochimotoShichosonCode" AS "措置元市町村コード"
+        FROM
+           "TempKyufujissekiTyukann8"  AS A
+         INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
+           ON C."hihokenshaNo" = A."hiHokenshaNo"
+         INNER JOIN  rgdb."DbV1001HihokenshaDaicho" AS D
+           ON D."hihokenshaNo" =  A."hiHokenshaNo"
+         LEFT OUTER JOIN rgua.${宛名識別対象PSM} AS  PSM
+         ON PSM."shikibetsuCode" = A."shotokuHantei_shikibetsuCode"
+        WHERE
+           C."yukoMukoKubun" = '1'
+         AND C."chokkinFlag" =TRUE
     </select>
 </mapper>

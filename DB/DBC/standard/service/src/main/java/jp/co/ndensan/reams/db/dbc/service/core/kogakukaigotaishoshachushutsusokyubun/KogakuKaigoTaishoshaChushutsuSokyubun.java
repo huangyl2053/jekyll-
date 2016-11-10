@@ -11,18 +11,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.HihokenshaNoFukaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.KougakukaigoSabishiEucEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.ShiKaKuiDoDeTaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.TaishoushaitiranhyouhakkouShorientity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.UaFt001FindEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehitaishoshaichiransokyubun.KogakuServicehiTaishoshaIchiranSokyubunEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojins;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.setai.ISetai;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -32,6 +37,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -42,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KogakuKaigoTaishoshaChushutsuSokyubun {
 
-    private static final RString 処理枝番 = new RString("0000");
     private static final RString 登録処理枝番 = new RString("00");
     private static final FlexibleYear 登録年度 = new FlexibleYear("0000");
     private static final RString 登録年度内連番 = new RString("0001");
@@ -93,16 +102,10 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KogakuKaigoTaishoshaChushutsuSokyubun}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KogakuKaigoTaishoshaChushutsuSokyubun}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KogakuKaigoTaishoshaChushutsuSokyubun}のインスタンス
      */
     public static KogakuKaigoTaishoshaChushutsuSokyubun createInstance() {
         return InstanceProvider.create(KogakuKaigoTaishoshaChushutsuSokyubun.class);
-    }
-
-    public List<HihokenshaNoFukaEntity> getKakobunJissekiKihon() {
-        IKogakuKaigoTaishoshaChushutsuSokyubunMapper mapper = mapperProvider.create(IKogakuKaigoTaishoshaChushutsuSokyubunMapper.class);
-        return mapper.get世帯情報取得();
     }
 
     /**
@@ -154,10 +157,8 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
                 sokyubunEntity.set賦課年度(entity.getShotokuNendo());
                 sokyubunEntity.set年月(new FlexibleYearMonth(変数開始年月.toString()).plusMonth(i));
                 sokyubunEntity.set年月日(new FlexibleDate(sokyubunEntity.get年月() + 日_０１.toString()));
-                if (i == 0) {
-                    sokyubunEntity.set抽出_マスタ1(抽出_マスタ);
-                    sokyubunEntity.set抽出_識別コード1(entity.getShikibetsuCode().value());
-                }
+                sokyubunEntity.set抽出_マスタ1(抽出_マスタ);
+                sokyubunEntity.set抽出_識別コード1(entity.getShikibetsuCode().value());
                 基本抽出1List.add(sokyubunEntity);
             }
         }
@@ -250,11 +251,9 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
                 } else {
                     shiKaKuiDoDeTaEntity.set年月日(entity.get年月日());
                 }
-                if (i == 0) {
-                    shiKaKuiDoDeTaEntity.set抽出_マスタ1(entity.get抽出_マスタ());
-                    shiKaKuiDoDeTaEntity.set抽出_事由1(entity.get抽出_事由());
-                    shiKaKuiDoDeTaEntity.set抽出_識別コード1(entity.get抽出_識別コード());
-                }
+                shiKaKuiDoDeTaEntity.set抽出_マスタ1(entity.get抽出_マスタ());
+                shiKaKuiDoDeTaEntity.set抽出_事由1(entity.get抽出_事由());
+                shiKaKuiDoDeTaEntity.set抽出_識別コード1(entity.get抽出_識別コード());
                 計算対象者ファイル_資格異動.add(shiKaKuiDoDeTaEntity);
             }
         }
@@ -334,7 +333,7 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
                     || entity.get被保険者台帳_被保険者番号().isEmpty()) {
                 iterator.remove();
             } else {
-                if (H.equals(entity.get被保険者番号().value().substring(0, 1))) {
+                if (H.equals(entity.get被保険者台帳_被保険者番号().value().substring(0, 1))) {
                     iterator.remove();
                 } else {
                     entity.set被保険者番号(entity.get被保険者台帳_被保険者番号());
@@ -367,40 +366,38 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
      * @return 更新フラグ
      */
     @Transaction
-    public boolean koshinShoriDateKanri(RDateTime 抽出期間開始日時,
+    public DbT7022ShoriDateKanriEntity koshinShoriDateKanri(RDateTime 抽出期間開始日時,
             RDateTime 抽出期間終了日時, FlexibleDate 処理日時,
             DbT7022ShoriDateKanriEntity entity, LasdecCode 地方公共団体コード) {
-        boolean updateFlg = false;
+        DbT7022ShoriDateKanriEntity dbentity = new DbT7022ShoriDateKanriEntity();
         if (entity != null) {
             if (抽出期間開始日時 != null) {
-                entity.setTaishoKaishiYMD(new FlexibleDate(抽出期間開始日時.getDate().toDateString()));
+                dbentity.setTaishoKaishiYMD(new FlexibleDate(抽出期間開始日時.getDate().toDateString()));
             }
             if (抽出期間終了日時 != null) {
-                entity.setTaishoShuryoYMD(new FlexibleDate(抽出期間終了日時.getDate().toDateString()));
+                dbentity.setTaishoShuryoYMD(new FlexibleDate(抽出期間終了日時.getDate().toDateString()));
             }
             if (処理日時 != null) {
-                entity.setKijunYMD(処理日時);
+                dbentity.setKijunYMD(処理日時);
             }
-            updateFlg = true;
         } else {
-            DbT7022ShoriDateKanriEntity dateKanriEntity = new DbT7022ShoriDateKanriEntity();
-            dateKanriEntity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
-            dateKanriEntity.setShichosonCode(地方公共団体コード);
-            dateKanriEntity.setShoriName(ShoriName.高額介護対象者抽出_遡及分.get名称());
-            dateKanriEntity.setShoriEdaban(登録処理枝番);
-            dateKanriEntity.setNendo(登録年度);
-            dateKanriEntity.setNendoNaiRenban(登録年度内連番);
+            dbentity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
+            dbentity.setShichosonCode(地方公共団体コード);
+            dbentity.setShoriName(ShoriName.高額介護対象者抽出_遡及分.get名称());
+            dbentity.setShoriEdaban(登録処理枝番);
+            dbentity.setNendo(登録年度);
+            dbentity.setNendoNaiRenban(登録年度内連番);
             if (抽出期間開始日時 != null) {
-                dateKanriEntity.setTaishoKaishiYMD(new FlexibleDate(抽出期間開始日時.getDate().toDateString()));
+                dbentity.setTaishoKaishiYMD(new FlexibleDate(抽出期間開始日時.getDate().toDateString()));
             }
             if (抽出期間終了日時 != null) {
-                dateKanriEntity.setTaishoShuryoYMD(new FlexibleDate(抽出期間終了日時.getDate().toDateString()));
+                dbentity.setTaishoShuryoYMD(new FlexibleDate(抽出期間終了日時.getDate().toDateString()));
             }
             if (処理日時 != null) {
-                dateKanriEntity.setKijunYMD(処理日時);
+                dbentity.setKijunYMD(処理日時);
             }
         }
-        return updateFlg;
+        return dbentity;
     }
 
     /**
@@ -410,7 +407,8 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
      * @return List<ShiKaKuiDoDeTaEntity>
      */
     @Transaction
-    public List<ShiKaKuiDoDeTaEntity> getKyufuJisseki(List<ShiKaKuiDoDeTaEntity> kyufujisekikihonList) {
+    public List<ShiKaKuiDoDeTaEntity> getKyufuJisseki(List<ShiKaKuiDoDeTaEntity> kyufujisekikihonList
+    ) {
         RString 被保険者年月識別区分事業所 = RString.EMPTY;
         Iterator<ShiKaKuiDoDeTaEntity> iterator = kyufujisekikihonList.iterator();
         while (iterator.hasNext()) {
@@ -459,9 +457,9 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
             HihokenshaNoFukaEntity entity = iterator計算対象者.next();
             if (識別コード.equals(entity.get識別コード())
                     && 年月.equals(entity.get年月())
-                    && 抽出_マスタ1.equals(entity.get抽出_マスタ1())
-                    && 抽出_事由1.equals(entity.get抽出_事由1())
-                    && 抽出_識別コード1.equals(entity.get抽出_識別コード1())) {
+                    && nullToEmpty(抽出_マスタ1).equals(nullToEmpty(entity.get抽出_マスタ1()))
+                    && nullToEmpty(抽出_事由1).equals(nullToEmpty(entity.get抽出_事由1()))
+                    && nullToEmpty(抽出_識別コード1).equals(nullToEmpty(entity.get抽出_識別コード1()))) {
                 continue;
             }
             条件List.add(entity);
@@ -604,6 +602,116 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
             dB出力entityList.add(returnEntity);
         }
         return dB出力entityList;
+    }
+
+    /**
+     * 高額介護サービス費対象者一覧表。
+     *
+     * @param entity TaishoushaitiranhyouhakkouShorientity
+     * @param 出力順Entity ShutsuryokujunRelateEntity
+     * @return KogakuServicehiTaishoshaIchiranSokyubunEntity
+     */
+    @Transaction
+    public KogakuServicehiTaishoshaIchiranSokyubunEntity get高額介護サービス費対象者一覧表(TaishoushaitiranhyouhakkouShorientity entity,
+            ShutsuryokujunRelateEntity 出力順Entity) {
+        KogakuServicehiTaishoshaIchiranSokyubunEntity sokyuentity = new KogakuServicehiTaishoshaIchiranSokyubunEntity();
+        if (!RString.isNullOrEmpty(entity.getサービス提供年月())) {
+            sokyuentity.setサービス提供年月(new FlexibleYearMonth(entity.getサービス提供年月()));
+        }
+        sokyuentity.set世帯コード(entity.get世帯コード());
+        if (!RString.isNullOrEmpty(entity.get利用者負担額())) {
+            sokyuentity.set利用者負担額(new Decimal(entity.get利用者負担額().toString()));
+        }
+        if (!RString.isNullOrEmpty(entity.get支給予定金額())) {
+            sokyuentity.set支給_予定_金額(new Decimal(entity.get支給予定金額().toString()));
+        }
+        sokyuentity.set市町村コード(entity.get市町村コード());
+        sokyuentity.set市町村名(entity.get行政区());
+        sokyuentity.set備考(entity.get備考欄個人所得区分());
+        if (!RString.isNullOrEmpty(entity.get識別コード())) {
+            sokyuentity.set識別コード(new ShikibetsuCode(entity.get識別コード()));
+        }
+        sokyuentity.set被保険者番号(entity.get被保険者番号());
+        sokyuentity.set被保険者名(entity.get被保険者名());
+        sokyuentity.set連番(new RString("1"));
+        sokyuentity.set並び順1(出力順Entity.get改頁項目1());
+        sokyuentity.set並び順2(出力順Entity.get改頁項目2());
+        sokyuentity.set並び順3(出力順Entity.get改頁項目3());
+        sokyuentity.set並び順4(出力順Entity.get改頁項目4());
+        sokyuentity.set並び順5(出力順Entity.get改頁項目5());
+        sokyuentity.set改頁1(出力順Entity.get改頁項目1());
+        sokyuentity.set改頁2(出力順Entity.get改頁項目2());
+        sokyuentity.set改頁3(出力順Entity.get改頁項目3());
+        sokyuentity.set改頁4(出力順Entity.get改頁項目4());
+        sokyuentity.set改頁5(出力順Entity.get改頁項目5());
+        return sokyuentity;
+
+    }
+
+    /**
+     * 給付実績基本データ抽出。
+     *
+     * @param entity TaishoushaitiranhyouhakkouShorientity
+     * @param eucentity KougakukaigoSabishiEucEntity
+     * @param 連番 int
+     * @return i
+     */
+    public int get給付実績基本データ抽出(TaishoushaitiranhyouhakkouShorientity entity,
+            KougakukaigoSabishiEucEntity eucentity, int 連番) {
+        eucentity = new KougakukaigoSabishiEucEntity();
+        eucentity.setNo(new RString(Integer.toString(連番)));
+        eucentity.set被保険者番号(entity.get被保険者番号());
+        eucentity.set氏名カナ(entity.get被保険者名());
+        eucentity.set氏名(entity.getカナ名称());
+        eucentity.set年月(entity.getサービス提供年月());
+        eucentity.set証記載保険者番号(entity.get要介護認定状態区分コード());
+        eucentity.set要介護度(IchijiHanteiKekkaCode99.toValue(entity.get要介護認定状態区分コード()).get名称());
+        eucentity.set認定開始日(entity.get認定有効期間開始年月日());
+        eucentity.set認定終了日(entity.get認定有効期間終了年月日());
+        eucentity.set旧措置区分(entity.get旧措置者フラグ());
+        eucentity.set世帯番号(entity.get世帯コード());
+        //eucentity.set単独合算(new RString(""));
+        eucentity.set自己負担額(entity.get利用者負担額());
+        eucentity.set支給予定金額(entity.get支給予定金額());
+//        if (new RString("2").equals(entity.get備考欄個人所得区分())) {
+//            eucentity.set所得区分(new RString("非課税"));
+//            eucentity.set世帯所得区分(new RString("非課税"));
+//        } else {
+//            eucentity.set所得区分(new RString("課税"));
+//            eucentity.set世帯所得区分(new RString("課税"));
+//        }
+        eucentity.set郵便番号(entity.get郵便番号());
+        eucentity.set町域コード(entity.get町域コード());
+        eucentity.set住所番地方書(entity.get住所番地方書());
+        eucentity.set行政区コード(entity.get行政区コード());
+        eucentity.set行政区(entity.get行政区());
+        eucentity.set市町村コード(entity.get措置元市町村コード());
+        eucentity.set異動内容1(RString.EMPTY);
+        eucentity.set異動内容2(RString.EMPTY);
+        eucentity.set異動内容3(RString.EMPTY);
+        eucentity.set異動内容4(RString.EMPTY);
+        eucentity.set異動内容5(RString.EMPTY);
+        eucentity.set異動内容6(RString.EMPTY);
+        eucentity.set異動内容7(RString.EMPTY);
+        eucentity.set異動内容8(RString.EMPTY);
+        eucentity.set異動内容9(RString.EMPTY);
+        eucentity.set異動内容10(RString.EMPTY);
+        return 連番++;
+
+    }
+
+    /**
+     * アクセスログを出力するメッソドです。
+     *
+     * @param 識別コード 識別コード
+     */
+    public void getアクセスログ(RString 識別コード) {
+        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード));
+    }
+
+    private PersonalData toPersonalData(RString 識別コード) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("識別コード"), 識別コード);
+        return PersonalData.of(new ShikibetsuCode(識別コード), expandedInfo);
     }
 
     private void 処理区分2_一組のLoop(HihokenshaNoFukaEntity hozoNentity, List<HihokenshaNoFukaEntity> groupList,
@@ -749,5 +857,14 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
                 break;
             }
         }
+    }
+
+    private RString nullToEmpty(RString date) {
+
+        if (date == null || date.isEmpty()) {
+
+            return RString.EMPTY;
+        }
+        return date;
     }
 }
