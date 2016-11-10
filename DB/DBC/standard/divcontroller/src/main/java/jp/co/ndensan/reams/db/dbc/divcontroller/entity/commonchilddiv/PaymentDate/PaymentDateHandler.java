@@ -46,6 +46,8 @@ public class PaymentDateHandler {
     private static final RString 高額合算 = new RString("高額合算");
     private static final RString 償還払 = new RString("償還払");
     private static final RString STR_0000 = new RString("0000");
+    private static final RString 更新しないKEY = new RString("1");
+    private static final RString 支払場所 = new RString("支払場所");
 
     /**
      * コンストラクタです。
@@ -117,6 +119,8 @@ public class PaymentDateHandler {
         } else if (償還払.equals(名称) && !有.equals(償還決定通知書_支払予定日印字有無)) {
             div.getPayToKoza().setDisplayNone(true);
         }
+        div.getPayToMadoguchi().getRadIkkatsuKoshinKubun().setSelectedKey(更新しないKEY);
+        窓口払いエリア制御(true);
     }
 
     /**
@@ -143,7 +147,46 @@ public class PaymentDateHandler {
                     div.getPayToMadoguchi().getTxtShiharaiKaishiTime(),
                     div.getPayToMadoguchi().getTxtShiharaiShuryoTime()));
         }
+        if (!is更新しないを選択した()) {
+            if (!RString.isNullOrEmpty(div.getPayToMadoguchi().getTxtShiharaiBasho().getValue())) {
+                addPairs(pairs, 支払場所);
+            }
+            if (div.getPayToMadoguchi().getTxtShiharaiDateRange().getFromValue() != null) {
+                addPairs(pairs, 支払期間FROM);
+            }
+            if (div.getPayToMadoguchi().getTxtShiharaiDateRange().getToValue() != null) {
+                addPairs(pairs, 支払期間TO);
+            }
+            if (div.getPayToMadoguchi().getTxtShiharaiKaishiTime().getValue() != null) {
+                addPairs(pairs, 開始時間);
+            }
+            if (div.getPayToMadoguchi().getTxtShiharaiShuryoTime().getValue() != null) {
+                addPairs(pairs, 終了時間);
+            }
+        }
         return pairs;
+    }
+
+    /**
+     * 窓口払い一括更新区分制御
+     */
+    public void 窓口払い一括更新区分制御() {
+        窓口払いエリア制御(is更新しないを選択した());
+    }
+
+    private void addPairs(ValidationMessageControlPairs pairs, RString replacements) {
+        pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, replacements.toString())));
+    }
+
+    private boolean is更新しないを選択した() {
+        return 更新しないKEY.equals(div.getPayToMadoguchi().getRadIkkatsuKoshinKubun().getSelectedKey());
+    }
+
+    private void 窓口払いエリア制御(boolean 入力不可) {
+        div.getPayToMadoguchi().getTxtShiharaiBasho().setDisabled(入力不可);
+        div.getPayToMadoguchi().getTxtShiharaiDateRange().setDisabled(入力不可);
+        div.getPayToMadoguchi().getTxtShiharaiKaishiTime().setDisabled(入力不可);
+        div.getPayToMadoguchi().getTxtShiharaiShuryoTime().setDisabled(入力不可);
     }
 
     private static class IdocheckMessages implements IValidationMessage {
