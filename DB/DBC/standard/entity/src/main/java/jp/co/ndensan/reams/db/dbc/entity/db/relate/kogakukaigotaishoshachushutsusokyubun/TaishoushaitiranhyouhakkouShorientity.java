@@ -40,5 +40,11 @@ public class TaishoushaitiranhyouhakkouShorientity {
     private RString 行政区コード;
     private RString 行政区;
     private RString 措置元市町村コード;
+    private RString 異動事由コード;
+    private RString 資格取得事由コード;
+    private RString 資格喪失事由コード;
+    private RString 資格変更事由コード;
+    private RString 住所地特例適用事由コード;
+    private RString 住所地特例解除事由コード;
 
 }

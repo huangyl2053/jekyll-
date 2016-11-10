@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * DbT3115SakuseiEntityのエンティティです。
@@ -23,12 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 public class DbT3115SakuseiEntity
         extends DbTableEntityBase<DbT3115SakuseiEntity> implements IDbAccessable {
 
-    @PrimaryKey
-    private HihokenshaNo 被保険者番号;
-    @PrimaryKey
     private FlexibleYear 年度;
+    private HihokenshaNo 被保険者番号;
     private int 履歴番号;
-    @PrimaryKey
+    private int 枝番号;
     private HihokenshaNo 世帯員被保険者番号;
-    private Decimal 元履歴番号;
+    private Decimal 世帯員所得履歴番号;
 }

@@ -1830,14 +1830,13 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             boolean 区分 = false;
             List<UniversalPhase> 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get更正後普徴期別金額リスト();
             if (NUM_1 == 普徴期別金額リスト.size() && NUM_1 == 普徴期別金額リスト.get(0).get期()) {
-                bodyList.add(isNull(普徴期別金額リスト.get(0).get金額()) ? new RString(NUM_0)
-                        : DecimalFormatter.toコンマ区切りRString(普徴期別金額リスト.get(0).get金額(), 0));
+                bodyList.add(new RString(NUM_0));
                 return;
             }
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
-                if (出力期 == (普徴期別金額.get期() + NUM_1)) {
+                if ((出力期 + NUM_1) == 普徴期別金額.get期()) {
                     区分 = true;
-                    bodyList.add(isNull(普徴期別金額.get金額()) ? RString.EMPTY
+                    bodyList.add(isNull(普徴期別金額.get金額()) ? new RString(NUM_0)
                             : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
                     break;
                 }

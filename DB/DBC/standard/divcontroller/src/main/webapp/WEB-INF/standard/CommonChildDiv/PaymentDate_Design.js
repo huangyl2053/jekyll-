@@ -55,6 +55,10 @@ var DBC;
             Controls.prototype.txtShiharaiShuryoTime = function () {
                 return new UZA.TextBoxTime(this.convFiledName("txtShiharaiShuryoTime"));
             };
+
+            Controls.prototype.radIkkatsuKoshinKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("radIkkatsuKoshinKubun"));
+            };
             return Controls;
         })();
         PaymentDate.Controls = Controls;

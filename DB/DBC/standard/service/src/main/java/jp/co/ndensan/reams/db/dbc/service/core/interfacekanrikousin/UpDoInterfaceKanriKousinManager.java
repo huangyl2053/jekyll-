@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.interfacekanrikousin;
 
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7109KubunShikyuGendoGakuDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -26,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class UpDoInterfaceKanriKousinManager {
 
     private final DbT3104KokuhorenInterfaceKanriDac 国保連インターフェース管理Dac;
-
+    private final DbT7109KubunShikyuGendoGakuDac 居宅サービス区分支給限度額Dac;
     private static final RString 処理状態区分_終了 = new RString("3");
     private static final RString 交換情報識別番号 = new RString("531");
     private static final RString MESSAGE_処理対象年月 = new RString("処理対象年月");
@@ -43,6 +46,7 @@ public class UpDoInterfaceKanriKousinManager {
      */
     public UpDoInterfaceKanriKousinManager() {
         this.国保連インターフェース管理Dac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
+        this.居宅サービス区分支給限度額Dac = InstanceProvider.create(DbT7109KubunShikyuGendoGakuDac.class);
     }
 
     /**
@@ -53,6 +57,16 @@ public class UpDoInterfaceKanriKousinManager {
      */
     public static UpDoInterfaceKanriKousinManager createInstance() {
         return InstanceProvider.create(UpDoInterfaceKanriKousinManager.class);
+    }
+
+    /**
+     * 居宅サービス区分支給限度額取得
+     *
+     * @return List<DbT7109KubunShikyuGendoGakuEntity>
+     */
+    @Transaction
+    public List<DbT7109KubunShikyuGendoGakuEntity> get居宅サービス区分支給限度額() {
+        return this.居宅サービス区分支給限度額Dac.selectAll();
     }
 
     /**

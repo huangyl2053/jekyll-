@@ -62,9 +62,6 @@ public class TokuchoDoteiShori {
         Boolean can実行 = ViewStateHolder.get(ViewStateKeys.特徴対象者同定実行FLAG, Boolean.class);
         RString state = ViewStateHolder.get(ViewStateKeys.特徴対象者同定STATE, RString.class);
         getHandler(div).set実行ボタン(state, can実行);
-        if (!can実行) {
-            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validate()).respond();
-        }
         return ResponseData.of(div).respond();
     }
 

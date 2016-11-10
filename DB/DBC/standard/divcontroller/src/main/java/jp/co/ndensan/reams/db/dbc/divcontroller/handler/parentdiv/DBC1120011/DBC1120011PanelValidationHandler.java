@@ -71,7 +71,8 @@ public class DBC1120011PanelValidationHandler {
         申請対象開始日小さい申請対象終了日 {
                     @Override
                     public boolean apply(DBC1120011PanelDiv div) {
-                        if (!div.getTxtShinseiTaishoYMD().getFromValue().toString().isEmpty()) {
+                        if (div.getTxtShinseiTaishoYMD().getFromValue() != null
+                        && !(div.getTxtShinseiTaishoYMD().getFromValue().toString().isEmpty())) {
                             return div.getTxtShinseiTaishoYMD().getFromValue().
                             compareTo(div.getTxtShinseiTaishoYMD().getToValue()) < 0;
                         } else {

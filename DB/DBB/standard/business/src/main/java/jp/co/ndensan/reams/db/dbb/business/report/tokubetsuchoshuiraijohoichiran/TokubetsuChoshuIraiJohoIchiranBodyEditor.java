@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraijohoichira
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -21,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuIraiJohoIchiranBodyEditor implements ITokubetsuChoshuIraiJohoIchiranEditor {
 
     private final TokubetsuChoshuIraiJohoIchiranEntity 帳票出力対象データ;
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -47,6 +50,8 @@ public class TokubetsuChoshuIraiJohoIchiranBodyEditor implements ITokubetsuChosh
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get被保険者番号())) {
             source.listUpper_1 = 帳票出力対象データ.get被保険者番号();
+            source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                    source.listUpper_1);
         } else {
             source.listUpper_1 = RString.EMPTY;
         }

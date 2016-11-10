@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigotaishoshachushutsusokyubun.KogakuKaigoTaishoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.HihokenshaNoFukaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.KakobunJissekiKihonTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.ShiKaKuiDoDeTaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.UaFt001FindEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -136,5 +137,97 @@ public class KakobunJissekiKihonBusiness {
                         宛名識別対象, parameter.get介護保険(), parameter.get処理年月日(),
                         出力順, 団体コード, 処理名, keyBuilder.build());
         return param;
+    }
+
+    /**
+     *
+     * @param entity ShiKaKuiDoDeTaEntity
+     * @return temoTableEntity
+     */
+    public KakobunJissekiKihonTempTableEntity settabentity(ShiKaKuiDoDeTaEntity entity) {
+        KakobunJissekiKihonTempTableEntity temoTableEntity = new KakobunJissekiKihonTempTableEntity();
+        temoTableEntity.setShikibetsuCode(entity.get識別コード());
+        temoTableEntity.setHihokenshaNo(entity.get被保険者番号());
+        temoTableEntity.setShotsicode(entity.get世帯コード());
+        temoTableEntity.setNendo(entity.get賦課年度());
+        temoTableEntity.setNengetsu(entity.get年月());
+        temoTableEntity.setNengetsuymd(entity.get年月日());
+        temoTableEntity.setChusyutsumaster1(entity.get抽出_マスタ1());
+        temoTableEntity.setChusyutsumaster2(entity.get抽出_マスタ2());
+        temoTableEntity.setChusyutsumaster3(entity.get抽出_マスタ3());
+        temoTableEntity.setChusyutsumaster4(entity.get抽出_マスタ4());
+        temoTableEntity.setChusyutsumaster5(entity.get抽出_マスタ5());
+        temoTableEntity.setChusyutsumaster6(entity.get抽出_マスタ6());
+        temoTableEntity.setChusyutsumaster7(entity.get抽出_マスタ7());
+        temoTableEntity.setChusyutsumaster8(entity.get抽出_マスタ8());
+        temoTableEntity.setChusyutsumaster9(entity.get抽出_マスタ9());
+        temoTableEntity.setChusyutsumaster10(entity.get抽出_マスタ10());
+        temoTableEntity.setChusyutsujiyu1(entity.get抽出_事由1());
+        temoTableEntity.setChusyutsujiyu2(entity.get抽出_事由2());
+        temoTableEntity.setChusyutsujiyu3(entity.get抽出_事由3());
+        temoTableEntity.setChusyutsujiyu4(entity.get抽出_事由4());
+        temoTableEntity.setChusyutsujiyu5(entity.get抽出_事由5());
+        temoTableEntity.setChusyutsujiyu6(entity.get抽出_事由6());
+        temoTableEntity.setChusyutsujiyu7(entity.get抽出_事由7());
+        temoTableEntity.setChusyutsujiyu8(entity.get抽出_事由8());
+        temoTableEntity.setChusyutsujiyu9(entity.get抽出_事由9());
+        temoTableEntity.setChusyutsujiyu10(entity.get抽出_事由10());
+        temoTableEntity.setChusyutsushikibetsu1(entity.get抽出_識別コード1());
+        temoTableEntity.setChusyutsushikibetsu2(entity.get抽出_識別コード2());
+        temoTableEntity.setChusyutsushikibetsu3(entity.get抽出_識別コード3());
+        temoTableEntity.setChusyutsushikibetsu4(entity.get抽出_識別コード4());
+        temoTableEntity.setChusyutsushikibetsu5(entity.get抽出_識別コード5());
+        temoTableEntity.setChusyutsushikibetsu6(entity.get抽出_識別コード6());
+        temoTableEntity.setChusyutsushikibetsu7(entity.get抽出_識別コード7());
+        temoTableEntity.setChusyutsushikibetsu8(entity.get抽出_識別コード8());
+        temoTableEntity.setChusyutsushikibetsu9(entity.get抽出_識別コード9());
+        temoTableEntity.setChusyutsushikibetsu10(entity.get抽出_識別コード10());
+        return temoTableEntity;
+    }
+
+    /**
+     *
+     * @param entity HihokenshaNoFukaEntity
+     * @return temoTableEntity
+     */
+    public KakobunJissekiKihonTempTableEntity setprocess4(HihokenshaNoFukaEntity entity) {
+        KakobunJissekiKihonTempTableEntity temoTableEntity = new KakobunJissekiKihonTempTableEntity();
+        temoTableEntity.setShikibetsuCode(entity.get識別コード());
+        temoTableEntity.setHihokenshaNo(entity.get被保険者番号());
+        temoTableEntity.setShotsicode(entity.get世帯コード());
+        temoTableEntity.setNendo(entity.get賦課年度());
+        temoTableEntity.setNengetsu(entity.get年月());
+        temoTableEntity.setNengetsuymd(entity.get年月日());
+        temoTableEntity.setChusyutsumaster1(entity.get抽出_マスタ1());
+        temoTableEntity.setChusyutsumaster2(entity.get抽出_マスタ2());
+        temoTableEntity.setChusyutsumaster3(entity.get抽出_マスタ3());
+        temoTableEntity.setChusyutsumaster4(entity.get抽出_マスタ4());
+        temoTableEntity.setChusyutsumaster5(entity.get抽出_マスタ5());
+        temoTableEntity.setChusyutsumaster6(entity.get抽出_マスタ6());
+        temoTableEntity.setChusyutsumaster7(entity.get抽出_マスタ7());
+        temoTableEntity.setChusyutsumaster8(entity.get抽出_マスタ8());
+        temoTableEntity.setChusyutsumaster9(entity.get抽出_マスタ9());
+        temoTableEntity.setChusyutsumaster10(entity.get抽出_マスタ10());
+        temoTableEntity.setChusyutsujiyu1(entity.get抽出_事由1());
+        temoTableEntity.setChusyutsujiyu2(entity.get抽出_事由2());
+        temoTableEntity.setChusyutsujiyu3(entity.get抽出_事由3());
+        temoTableEntity.setChusyutsujiyu4(entity.get抽出_事由4());
+        temoTableEntity.setChusyutsujiyu5(entity.get抽出_事由5());
+        temoTableEntity.setChusyutsujiyu6(entity.get抽出_事由6());
+        temoTableEntity.setChusyutsujiyu7(entity.get抽出_事由7());
+        temoTableEntity.setChusyutsujiyu8(entity.get抽出_事由8());
+        temoTableEntity.setChusyutsujiyu9(entity.get抽出_事由9());
+        temoTableEntity.setChusyutsujiyu10(entity.get抽出_事由10());
+        temoTableEntity.setChusyutsushikibetsu1(entity.get抽出_識別コード1());
+        temoTableEntity.setChusyutsushikibetsu2(entity.get抽出_識別コード2());
+        temoTableEntity.setChusyutsushikibetsu3(entity.get抽出_識別コード3());
+        temoTableEntity.setChusyutsushikibetsu4(entity.get抽出_識別コード4());
+        temoTableEntity.setChusyutsushikibetsu5(entity.get抽出_識別コード5());
+        temoTableEntity.setChusyutsushikibetsu6(entity.get抽出_識別コード6());
+        temoTableEntity.setChusyutsushikibetsu7(entity.get抽出_識別コード7());
+        temoTableEntity.setChusyutsushikibetsu8(entity.get抽出_識別コード8());
+        temoTableEntity.setChusyutsushikibetsu9(entity.get抽出_識別コード9());
+        temoTableEntity.setChusyutsushikibetsu10(entity.get抽出_識別コード10());
+        return temoTableEntity;
     }
 }

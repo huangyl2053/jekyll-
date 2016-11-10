@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakusogojigyoservicehihanteierrorichiran.KogakuSogoJigyoServicehiHanteiErrorIchiranReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehi.KogakuServicehiKyufugakuCalc_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.KogakuServicehiHanteiErrorCSVEntity;
@@ -160,7 +161,9 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
         高額介護サービス費判定エラーEntity.set識別コード(entity.get識別コード());
         高額介護サービス費判定エラーEntity.setサービス提供年月(entity.getサービス提供年月());
         高額介護サービス費判定エラーEntity.set世帯コード(getColumnValue(entity.get世帯コード()));
-        高額介護サービス費判定エラーEntity.setエラーコード(entity.getエラーコード());
+        if (RString.isNullOrEmpty(entity.getエラーコード())) {
+            高額介護サービス費判定エラーEntity.setエラーコード(KogakuServicehiKyufugakuCalc_ErrorKubun.toValue(entity.getエラーコード()).get名称());
+        }
         高額介護サービス費判定エラーEntity.set世帯員識別コード(getColumnValue(entity.get世帯員識別コード()));
         return 高額介護サービス費判定エラーEntity;
     }
