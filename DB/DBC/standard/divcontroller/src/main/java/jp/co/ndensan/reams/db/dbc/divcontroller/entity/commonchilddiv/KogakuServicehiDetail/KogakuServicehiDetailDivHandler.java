@@ -247,8 +247,11 @@ public class KogakuServicehiDetailDivHandler {
      * @return RString
      */
     public RString get電話番号() {
-        return div.getTxtTelNo().getDomain() == null || div.getTxtTelNo().getDomain().isEmpty()
-                ? RString.EMPTY : div.getTxtTelNo().getDomain().value();
+        RString 電話番号 = RString.EMPTY;
+        if (div.getTxtTelNo() != null && div.getTxtTelNo().getDomain() != null && !div.getTxtTelNo().getDomain().isEmpty()) {
+            電話番号 = div.getTxtTelNo().getDomain().value();
+        }
+        return 電話番号;
     }
 
     /**

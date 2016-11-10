@@ -35,6 +35,8 @@ public class KogakuKyufuTaishoList {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString ONE_RS = new RString("1");
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
 
     /**
      * 「「追加する」ボタン
@@ -190,9 +192,10 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbRoreiFukushiNenkin(
             KogakuKyufuTaishoListDiv div) {
-        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(false);
-        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(true);
-        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
+        if (KEY0.equals(div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey())) {
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setSelectedKey(KEY1);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(KEY0);
+        }
         return createResponse(div);
     }
 
@@ -204,9 +207,10 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbRiyoshafutanDai2dankai(
             KogakuKyufuTaishoListDiv div) {
-        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(true);
-        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(false);
-        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
+        if (KEY0.equals(div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().getSelectedKey())) {
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(KEY1);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(KEY0);
+        }
         return createResponse(div);
     }
 
@@ -218,9 +222,10 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbGekihenkanwaKubun(
             KogakuKyufuTaishoListDiv div) {
-        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(true);
-        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(true);
-        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(false);
+        if (!KEY0.equals(div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey())) {
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(KEY1);
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setSelectedKey(KEY1);
+        }
         return createResponse(div);
     }
 
