@@ -57,6 +57,9 @@ public class KijunShunyuShinseiTourokuValidationHandler {
     private static final RString MESSAGE_世帯課税 = new RString("世帯課税が非課税の");
     private static final RString MESSAGE_宛先印字者 = new RString("世帯員１人に宛先印字者のチェックを付けて、宛先印字者を");
     private static final RString MESSAGE_受給者または事業対象者 = new RString("世帯員に受給者または事業対象者がいませんが、登録して");
+    private static final RString MESSAGE_世帯再算出 = new RString("「世帯コード」、「処理年度」、「世帯員把握基準」"
+            + "が変更していますが、登録して");
+    private static final RString MESSAGE_算定基準額 = new RString("算定基準額が課税所得、総収入額の結果と異なりますが、登録して");
 
     /**
      * コンストラクタです。
@@ -108,12 +111,32 @@ public class KijunShunyuShinseiTourokuValidationHandler {
     }
 
     /**
-     * 明細確定時のバリデーションチェックです。
+     * 受給者または事業対象者バリデーションチェックです。
      *
      * @return バリデーション突合結果
      */
-    public ValidationMessageControlPairs 明細確定時チェックValidate() {
-        IValidationMessages messages = new ControlValidator(div).明細確定時Validate();
+    public ValidationMessageControlPairs 受給者または事業対象者チェックValidate() {
+        IValidationMessages messages = new ControlValidator(div).受給者または事業対象者チェックValidate();
+        return create警告バリデーションDictionary().check(messages);
+    }
+
+    /**
+     * 算定基準額バリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 算定基準額チェックValidate() {
+        IValidationMessages messages = new ControlValidator(div).算定基準額チェックValidate();
+        return create警告バリデーションDictionary().check(messages);
+    }
+
+    /**
+     * 世帯再算出バリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 世帯再算出チェックValidate() {
+        IValidationMessages messages = new ControlValidator(div).世帯再算出チェックValidate();
         return create警告バリデーションDictionary().check(messages);
     }
 
@@ -219,15 +242,43 @@ public class KijunShunyuShinseiTourokuValidationHandler {
         }
 
         /**
-         * 明細確定時チェックバリデーションチェックです。
+         * 受給者または事業対象者バリデーションチェックです。
          *
          * @return バリデーション突合結果
          */
-        public IValidationMessages 明細確定時Validate() {
+        public IValidationMessages 受給者または事業対象者チェックValidate() {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(KijunShunyuShinseiTourokuSpec.受給者または事業対象者チェック)
                     .thenAdd(KijunShunyuShinseiTourokuValidationMessages.受給者または事業対象者チェックMessage)
+                    .messages());
+            return messages;
+        }
+
+        /**
+         * 算定基準額バリデーションチェックです。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages 算定基準額チェックValidate() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(KijunShunyuShinseiTourokuSpec.算定基準額チェック)
+                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.算定基準額チェックMessage)
+                    .messages());
+            return messages;
+        }
+
+        /**
+         * 世帯再算出バリデーションチェックです。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages 世帯再算出チェックValidate() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(KijunShunyuShinseiTourokuSpec.世帯再算出チェック)
+                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.世帯再算出チェックMessage)
                     .messages());
             return messages;
         }
@@ -285,6 +336,8 @@ public class KijunShunyuShinseiTourokuValidationHandler {
         世帯課税チェックMessage(UrErrorMessages.更新不可_汎用, MESSAGE_世帯課税.toString()),
         宛先印字者チェックMessage(UrErrorMessages.未指定, MESSAGE_宛先印字者.toString()),
         受給者または事業対象者チェックMessage(DbzWarningMessages.確認, MESSAGE_受給者または事業対象者.toString()),
+        算定基準額チェックMessage(DbzWarningMessages.確認, MESSAGE_算定基準額.toString()),
+        世帯再算出チェックMessage(DbzWarningMessages.確認, MESSAGE_世帯再算出.toString()),
         内容変更なしで保存不可Message(DbzInformationMessages.内容変更なしで保存不可);
 
         private final Message message;
