@@ -55,7 +55,7 @@ public class KogakuKyufuTaishoListHandler {
     private static final RString 老 = new RString("老");
     private static final RString 緩１ = new RString("緩１");
     private static final RString 緩2 = new RString("緩2");
-    private static final RString コンマ = new RString(",");
+    private static final RString コンマ = new RString("、");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -325,15 +325,17 @@ public class KogakuKyufuTaishoListHandler {
         row.setData2(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue());
         row.getData4().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue());
         row.getData5().setValue(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue());
-        if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null) {
-            row.getData6().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue());
+        if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(TWO_RS)) {
+            if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null) {
+                row.getData6().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue());
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue() != null) {
+                row.getData7().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
+            } else {
+                row.getData7().setValue(Decimal.ZERO);
+            }
+            row.getData8().setValue(div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().getValue());
         }
-        if (div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue() != null) {
-            row.getData7().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
-        } else {
-            row.getData7().setValue(Decimal.ZERO);
-        }
-        row.getData8().setValue(div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().getValue());
         if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
             row.setData10(ONE_RS);
             row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
@@ -389,7 +391,9 @@ public class KogakuKyufuTaishoListHandler {
                 builder.append(コンマ);
                 builder.append(老);
             }
-            row.setData9(builder.toRString());
+            if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
+                row.setData9(builder.toRString());
+            }
         } else {
             if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key0)) {
                 builder.append(低);
@@ -439,7 +443,9 @@ public class KogakuKyufuTaishoListHandler {
                 builder.append(コンマ);
                 builder.append(緩2);
             }
-            row.setData9(builder.toRString());
+            if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
+                row.setData9(builder.toRString());
+            }
         }
         if (追加.equals(処理モード)) {
             List<dgTaishoshaIchiran_Row> list = div.getDgTaishoshaIchiran().getDataSource();
