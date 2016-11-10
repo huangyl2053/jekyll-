@@ -184,9 +184,6 @@ public class ShokanbaraiketteiJohoHandler {
             }
             保険対象費用額 = set支払金額(syokanbaraiketteJoho, 残上限金額, row, gyomuKbn);
             残上限金額 = 残上限金額.subtract(保険対象費用額);
-            if (count == 償還払決定一覧情報.size()) {
-                row.getShiharaiKingaku().setValue(上限金額.multiply(syokanbaraiketteJoho.get給付率().divide(数字_100)).roundDownTo(0).subtract(支払金額合計));
-            }
             if (syokanbaraiketteJoho.getSagakuKingaku() != null) {
                 row.getSagakuKingaku().setValue(new Decimal(syokanbaraiketteJoho.getSagakuKingaku()));
             } else {
