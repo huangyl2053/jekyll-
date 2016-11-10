@@ -36,8 +36,7 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
      */
     @Step(HENSHU_PROCESS)
     protected IBatchFlowCommand henshuProcess() {
-        return loopBatch(FukaJohoHenshuProcess.class).arguments(getParameter()
-                .toFukaJohoHenshuProcessParameter()).define();
+        return loopBatch(FukaJohoHenshuProcess.class).define();
     }
 
     /**
@@ -61,7 +60,6 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
      */
     @Step(FUKAJOHOINSERTPROCESS)
     protected IBatchFlowCommand callFukaJohoInsertProcess() {
-        return loopBatch(FukaJohoInsertProcess.class).arguments(getParameter()
-                .toFukaJohoHenshuProcessParameter()).define();
+        return loopBatch(FukaJohoInsertProcess.class).define();
     }
 }
