@@ -54,7 +54,7 @@ public enum DBC701003BreakerFieldsEnum implements IReportItems {
     /**
      * サービス年月
      */
-    サービス年月(new RString("0301"), new RString(""), new RString("master.\"サービス提供年月\"")),
+    サービス年月(new RString("0301"), new RString(""), new RString("master.\"サービス提供年月key\"")),
     /**
      * 指定事業者番号
      */
