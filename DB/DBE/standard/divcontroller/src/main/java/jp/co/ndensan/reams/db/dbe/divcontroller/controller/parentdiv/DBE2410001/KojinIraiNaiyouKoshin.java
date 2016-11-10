@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2410001;
 
 import jp.co.ndensan.reams.db.dbe.business.core.kojinirainaiyoukoshin.KojinIraiNaiyouBusiness;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.DBE2410001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.KojinIraiNaiyouKoshinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410001.KojinIraiNaiyouKoshinHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.kojinirainaiyoukoshin.KojinIraiNaiyouKoshinFinder;
@@ -40,5 +41,15 @@ public class KojinIraiNaiyouKoshin {
 
     private KojinIraiNaiyouKoshinHandler getHandler(KojinIraiNaiyouKoshinDiv div) {
         return new KojinIraiNaiyouKoshinHandler(div);
+    }
+
+    /**
+     * 戻るボタンを押下の場合、要介護認定申請検索へ遷移します。
+     *
+     * @param div KojinIraiNaiyouKoshinDiv
+     * @return ResponseData<KojinIraiNaiyouKoshinDiv>
+     */
+    public ResponseData<KojinIraiNaiyouKoshinDiv> btn_Back(KojinIraiNaiyouKoshinDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBE2410001TransitionEventName.検索へ戻る).respond();
     }
 }
