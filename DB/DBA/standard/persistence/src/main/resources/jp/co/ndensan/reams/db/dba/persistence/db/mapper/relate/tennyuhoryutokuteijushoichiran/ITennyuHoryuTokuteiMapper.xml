@@ -61,7 +61,7 @@
 	      *
 	      , ROW_NUMBER() over ( 
 	        partition by
-	          (C."jigyoshaNo") 
+	          (C."jigyoshaNo", C."jigyoshaShubetsu") 
 	        order by
 	          C."jigyoshaNo" desc
 	          , C."yukoKaishiYMD" desc
@@ -70,7 +70,8 @@
 	      rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" as C
 	  ) as DbT1005Kai 
 	    ON DbT1005Kai."jigyoshaNo" = DbT7023Rendo."shisetsuCode" 
-		AND DbT1005Kai."jigyoshaShubetsu" = DbT7023Rendo."shisetsuShurui" 
+		AND  CASE DbT7023Rendo."shisetsuShurui" WHEN '12' THEN DbT1005Kai."jigyoshaShubetsu" = '01'
+                                                        WHEN '21' THEN DbT1005Kai."jigyoshaShubetsu" = '02' END
 		AND DbT1005Kai."isDeleted" <![CDATA[<>]]> TRUE
 	    AND rank_number3 = '1' 
         WHERE
@@ -155,10 +156,10 @@
     </select>
     <select resultOrdered="true" id="getKanriNo" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
-         dbt7023."kanriNo"
+         TO_NUMBER("kanriNo",'99999999999') as "kanriNo"
         FROM
          rgdb."DbT7023RendoHoryuTokuteiJusho" AS dbt7023
-         ORDER BY dbt7023."kanriNo" DESC
+         ORDER BY "kanriNo" DESC
 	 LIMIT(1)
     </select>
 </mapper>
