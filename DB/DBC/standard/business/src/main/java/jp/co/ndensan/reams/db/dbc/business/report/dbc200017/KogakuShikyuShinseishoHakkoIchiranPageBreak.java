@@ -68,7 +68,7 @@ public class KogakuShikyuShinseishoHakkoIchiranPageBreak extends PageBreaker<Kog
             flag = !currentRecord.getSource().listHakkoTaishosha_5.equals(nextRecord.getSource().listHakkoTaishosha_5);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.町域コード.get項目ID())) {
-            flag = !currentRecord.getSource().listHakkoTaishosha_6.equals(nextRecord.getSource().listHakkoTaishosha_6);
+            flag = !currentRecord.getSource().choikiCode.equals(nextRecord.getSource().choikiCode);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
             flag = !currentRecord.getSource().listHakkoTaishosha_7.equals(nextRecord.getSource().listHakkoTaishosha_7);
@@ -77,10 +77,10 @@ public class KogakuShikyuShinseishoHakkoIchiranPageBreak extends PageBreaker<Kog
             flag = !currentRecord.getSource().氏名カナ.equals(nextRecord.getSource().氏名カナ);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.市町村コード.get項目ID())) {
-            flag = !currentRecord.getSource().shichosonNo.equals(nextRecord.getSource().shichosonNo);
+            flag = !currentRecord.getSource().市町村コード.equals(nextRecord.getSource().市町村コード);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.証記載保険者番号.get項目ID())) {
-            flag = !currentRecord.getSource().shichosonNo.equals(nextRecord.getSource().shichosonNo);
+            flag = !currentRecord.getSource().証記載保険者番号.equals(nextRecord.getSource().証記載保険者番号);
         }
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.被保険者番号.get項目ID())) {
             flag = !currentRecord.getSource().listHakkoTaishosha_2.equals(nextRecord.getSource().listHakkoTaishosha_2);
@@ -88,8 +88,8 @@ public class KogakuShikyuShinseishoHakkoIchiranPageBreak extends PageBreaker<Kog
         if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.サービス年月.get項目ID())) {
             flag = !currentRecord.getSource().listHakkoTaishosha_3.equals(nextRecord.getSource().listHakkoTaishosha_3);
         }
-        if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.サービス分類.get項目ID())) {
-            flag = !currentRecord.getSource().サービス種類.equals(nextRecord.getSource().サービス種類);
+        if (!flag && this.keys.contains(KogakuShikyuShinseishoHakkoIchiranOrder.高額自動償還.get項目ID())) {
+            flag = currentRecord.getSource().自動償還対象フラグ != nextRecord.getSource().自動償還対象フラグ;
         }
         return flag;
     }

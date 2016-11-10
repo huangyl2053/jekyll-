@@ -245,7 +245,7 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
             帳票用データ.set金融機関コード(entity.getKinyukikanCode() == null ? RString.EMPTY : entity.getKinyukikanCode().value());
             帳票用データ.set金融機関支店コード(entity.getKinyuKikanShitenCode() == null ? RString.EMPTY : entity.getKinyuKikanShitenCode().value());
             帳票用データ.setGyoseiCode(entity.getGyoseiCode());
-            帳票用データ.setJushoCode(entity.getJushoCode());
+            帳票用データ.setChoikiCode(entity.getChoikiCode() == null ? RString.EMPTY : entity.getChoikiCode().getColumnValue());
             帳票用データ.setShichosonCode(entity.getShichosonCode() == null ? RString.EMPTY : entity.getShichosonCode().value());
             帳票用データ.setTaishoNendo(entity.getTaishoNendo().toDateString());
             帳票用データ.setYubinNo(entity.getYubinNo() == null ? RString.EMPTY : entity.getYubinNo().value());

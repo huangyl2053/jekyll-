@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020.KogakuServiceSh
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020.KogakuShinseiKanriForShinseiJyohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020.KogakuShinseiKanriForShinseiShokanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020.KogakuShinseikanriMasterUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020.PrtShirakamiHakkoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020.ShiboushaDataDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020.ShinseiJohoChohyoTempTableInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020020.ShinseishoHakoIchiranhyoOutputProcess;
@@ -85,6 +86,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
     private static final String JIGYO_TSUCHISHO_KIGENNAI = "jigyo_tsuchisho_kigennai";
     private static final String JIGYO_TSUCHISHO_KIGENARI = "jigyo_tsuchisho_kigenari";
     private static final String JIGYO_UPDATE = "jigyo_update";
+    private static final String 白紙発行 = "白紙発行";
     private static final RString 死亡者制御_0 = new RString("0");
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter processParameter;
@@ -125,6 +127,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
         } else {
             excute総合事業分();
         }
+        executeStep(白紙発行);
     }
 
     private void excute高額分() {
@@ -286,6 +289,11 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
     @Step(JIGYO_UPDATE)
     IBatchFlowCommand executeJigyoUpdate() {
         return loopBatch(JigyoKogakuShinseikanriMasterUpdateProcess.class).arguments(processParameter).define();
+    }
+
+    @Step(白紙発行)
+    IBatchFlowCommand execute白紙発行() {
+        return simpleBatch(PrtShirakamiHakkoProcess.class).arguments(getParameter().toProcessParameter()).define();
     }
 
     private void createParameter() {
