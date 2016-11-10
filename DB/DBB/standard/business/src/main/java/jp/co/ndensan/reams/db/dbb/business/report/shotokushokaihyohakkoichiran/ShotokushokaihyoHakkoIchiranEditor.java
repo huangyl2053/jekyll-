@@ -153,7 +153,8 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         source.choikiCode = 所得照会票発行一覧.getChoikiCode();
         source.gyoseikuCode = 所得照会票発行一覧.getGyoseikuCode();
         source.shichosonCode = 所得照会票発行一覧.getShichosonCode();
-        source.torokuIdoYMD = 所得照会票発行一覧.getTorokuTodokedeYMD();
+        source.idoYMD = 所得照会票発行一覧.getIdoYMD() == null ? RString.EMPTY
+                : new RString(所得照会票発行一覧.getIdoYMD().toString());
         source.zenjushoCode = 所得照会票発行一覧.getZenjushoCode();
         return source;
     }
