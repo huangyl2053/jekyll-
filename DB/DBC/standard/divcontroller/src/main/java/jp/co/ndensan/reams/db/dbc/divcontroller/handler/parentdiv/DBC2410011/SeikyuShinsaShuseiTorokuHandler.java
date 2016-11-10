@@ -475,7 +475,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
         if (div.getTxtShinseiYMD().getValue() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set申請年月日(new FlexibleDate(div.getTxtShinseiYMD().getValue().toString())).build();
         }
-        if (div.getTxtUketsukeYMD() != null) {
+        if (div.getTxtUketsukeYMD().getValue() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set受付年月日(new FlexibleDate(div.getTxtUketsukeYMD().getValue().toString())).build();
         }
         出力集計 = 出力集計.createBuilderForEdit().set識別コード(ShikibetsuCode.EMPTY).build();
@@ -488,7 +488,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
             出力集計 = 出力集計.createBuilderForEdit().set支店コード(new RString(div.getCcdKinyuKikanInput().get金融機関支店().
                     get支店コード().toString())).build();
         }
-        if (div.getTxtSeikyuSakuseiYMD() != null) {
+        if (div.getTxtSeikyuSakuseiYMD().getValue() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set請求情報作成日(new FlexibleDate(div.getTxtSeikyuSakuseiYMD().getValue().toString())).build();
         }
         出力集計 = 出力集計.createBuilderForEdit().set口座種別(div.getDdlKozaShubetsu().getSelectedKey()).build();
