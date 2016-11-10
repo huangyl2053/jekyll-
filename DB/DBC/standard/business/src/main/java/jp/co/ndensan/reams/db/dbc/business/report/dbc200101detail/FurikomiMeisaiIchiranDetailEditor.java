@@ -77,10 +77,10 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private final RDateTime 作成日時;
     private final RString 設定値;
 
-    private int 毎ページ数 = 0;
-    private int 総レコード数 = 0;
-    private Decimal 毎ページ振込金額合算;
-    private Decimal 振込金額合算;
+    private static int 毎ページ数 = 0;
+    private static int 総レコード数 = 0;
+    private static Decimal 毎ページ振込金額合算 = Decimal.ZERO;
+    private static Decimal 振込金額合算 = Decimal.ZERO;
     private static final int ページ件数 = 15;
     private static final int 様式連番_1 = 1;
 
@@ -108,33 +108,15 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     public FurikomiMeisaiIchiranDetailReportSource edit(FurikomiMeisaiIchiranDetailReportSource source) {
         if (一覧表用データ != null) {
             source.layout = Layouts.鑑;
-            毎ページ数++;
+
             List<PrintNoKingakuEntity> list = 一覧表用データ.get印字様式番号別金額List();
 
             int 様式連番 = list.get(0).get様式連番();
-
-            if (毎ページ振込金額合算 == null) {
-                毎ページ振込金額合算 = Decimal.ZERO;
+            Decimal 振込金額 = Decimal.ZERO;
+            if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
+                振込金額 = 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku();
             }
-            if (振込金額合算 == null) {
-                振込金額合算 = Decimal.ZERO;
-            }
-            if (様式連番_1 == 様式連番) {
-                総レコード数++;
-                if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
-                    毎ページ振込金額合算 = 毎ページ振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
-                }
-
-                if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
-                    振込金額合算 = 振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
-                }
-
-            }
-            if (ページ件数 == 毎ページ数) {
-                毎ページ振込金額合算 = Decimal.ZERO;
-                毎ページ数 = 0;
-            }
-
+            setページ数と金額(様式連番, 振込金額);
             editHeader(source);
             if (様式連番_1 == 様式連番) {
                 edit明細1(source);
@@ -152,6 +134,20 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         }
 
         return source;
+    }
+
+    private static void setページ数と金額(int 様式連番, Decimal 振込金額) {
+        if (様式連番_1 == 様式連番) {
+            毎ページ数++;
+            総レコード数++;
+            毎ページ振込金額合算 = 毎ページ振込金額合算.add(振込金額);
+            振込金額合算 = 振込金額合算.add(振込金額);
+
+        }
+        if (ページ件数 == 毎ページ数) {
+            毎ページ振込金額合算 = Decimal.ZERO;
+            毎ページ数 = 0;
+        }
     }
 
     private void editHeader(FurikomiMeisaiIchiranDetailReportSource source) {

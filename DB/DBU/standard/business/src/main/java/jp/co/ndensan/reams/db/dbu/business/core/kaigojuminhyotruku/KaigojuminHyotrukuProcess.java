@@ -53,6 +53,7 @@ public class KaigojuminHyotrukuProcess {
         juminShubetsu.add(JukiIdoJiyu.特例による転入);
         juminShubetsu.add(JukiIdoJiyu.附則第5条届出);
         juminShubetsu.add(JukiIdoJiyu.第30条の47届出);
+        juminShubetsu.add(JukiIdoJiyu.転出);
         juminShubetsu.add(JukiIdoJiyu.特例による転出);
         juminShubetsu.add(JukiIdoJiyu.死亡);
         juminShubetsu.add(JukiIdoJiyu.特殊修正);

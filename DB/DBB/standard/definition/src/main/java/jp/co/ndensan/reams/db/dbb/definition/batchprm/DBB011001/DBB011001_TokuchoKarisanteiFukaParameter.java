@@ -127,6 +127,6 @@ public class DBB011001_TokuchoKarisanteiFukaParameter extends BatchParameterBase
      * @return FukaJohoTorokuBatchParameter
      */
     public DBB004001_FukaJohoTorokuParameter toFukaJohoTorokuBatchParameter() {
-        return new DBB004001_FukaJohoTorokuParameter(true);
+        return new DBB004001_FukaJohoTorokuParameter();
     }
 }

@@ -43,11 +43,6 @@
                         <if test="use支給申請書整理番号">
                             AND DbT3180."dbT3180_shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
                         </if>
-                        ORDER BY 
-                            DbT3180."dbT3180_shokisaiHokenshaNo" ASC ,
-                            DbT3180."dbT3180_shikyuShinseishoSeiriNo" ASC,
-                            DbT3180."dbT3180_tennyumaeHokenshaNo" ASC,
-                            DbT3180."dbT3180_rirekiNo" DESC
                         GROUP BY
                             DbT3180."dbT3180_hihokenshaNo",
                             DbT3180."dbT3180_taishoNendo",
@@ -59,6 +54,11 @@
                   AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shokisaiHokenshaNo" = SUBTABLE."dbT3180_shokisaiHokenshaNo"
                   AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_tennyumaeHokenshaNo" = SUBTABLE."dbT3180_tennyumaeHokenshaNo"
                   AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shikyuShinseishoSeiriNo" = SUBTABLE."dbT3180_shikyuShinseishoSeiriNo"
+                  ORDER BY 
+                         DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shokisaiHokenshaNo" ASC ,
+                         DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shikyuShinseishoSeiriNo" ASC,
+                         DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_tennyumaeHokenshaNo" ASC,
+                         DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_rirekiNo" DESC
     </select>
     
     <select id="get事業高額合算支給申請書情報"
