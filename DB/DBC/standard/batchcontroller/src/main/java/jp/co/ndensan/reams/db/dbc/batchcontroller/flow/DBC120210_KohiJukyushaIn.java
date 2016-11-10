@@ -62,58 +62,56 @@ public class DBC120210_KohiJukyushaIn extends BatchFlowBase<DBC120210_KohiJukyus
 
     @Override
     protected void defineFlow() {
-        // try {
-        帳票ID = ReportIdDBC.DBC200008.getReportId();
-        交換情報識別番号 = DbBusinessConfig.get(
-                ConfigNameDBC.国保連取込_介護給付費公費受給者別一覧表情報_交換情報識別番号,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        executeStep(ファイル取得);
-        returnEntity
-                = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
-                        KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
-        csvParameter = new SogojigyohiKohiJukyushaReadCsvFileProcessParameter();
-        for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
-            String filePath = returnEntity.get保存先フォルダのパス() + File.separator
-                    + returnEntity.getFileNameList().get(i);
-            File path = new File(filePath);
-            ファイル絶対パース = new RString(path.getPath());
-            if (i == 0) {
-                csvParameter.set処理年月(null);
-                csvParameter.set連番(0);
-                csvParameter.set履歴番号(1);
-            } else {
-                csvParameter.set処理年月(flowEntity.getShoriYM());
-                csvParameter.set連番(flowEntity.get連番());
-                csvParameter.set履歴番号(flowEntity.get履歴番号());
+        try {
+            帳票ID = ReportIdDBC.DBC200008.getReportId();
+            交換情報識別番号 = DbBusinessConfig.get(
+                    ConfigNameDBC.国保連取込_介護給付費公費受給者別一覧表情報_交換情報識別番号,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            executeStep(ファイル取得);
+            returnEntity
+                    = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
+                            KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+            csvParameter = new SogojigyohiKohiJukyushaReadCsvFileProcessParameter();
+            for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
+                String filePath = returnEntity.get保存先フォルダのパス() + File.separator
+                        + returnEntity.getFileNameList().get(i);
+                File path = new File(filePath);
+                ファイル絶対パース = new RString(path.getPath());
+                if (i == 0) {
+                    csvParameter.set処理年月(null);
+                    csvParameter.set連番(0);
+                    csvParameter.set履歴番号(1);
+                } else {
+                    csvParameter.set処理年月(flowEntity.getShoriYM());
+                    csvParameter.set連番(flowEntity.get連番());
+                    csvParameter.set履歴番号(flowEntity.get履歴番号());
+                }
+                if (i == returnEntity.getFileNameList().size() - 1) {
+                    csvParameter.setさいごファイルフラグ(true);
+                } else {
+                    csvParameter.setさいごファイルフラグ(false);
+                }
+                csvParameter.setファイルパース(ファイル絶対パース);
+                csvParameter.set明細データ登録件数合算(明細データ登録件数合算);
+                executeStep(CSVファイル取込);
+                flowEntity = getResult(SogojigyohiKohiJukyushaFlowEntity.class, new RString(CSVファイル取込),
+                        SogojigyohiKohiJukyushaReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+                明細データ登録件数合算 = 明細データ登録件数合算 + flowEntity.get明細データ登録件数();
             }
-            if (i == returnEntity.getFileNameList().size() - 1) {
-                csvParameter.setさいごファイルフラグ(true);
+            if (明細データ登録件数合算 == 0) {
+                executeStep(国保連インタフェース管理更新);
+                executeStep(処理結果リスト作成);
             } else {
-                csvParameter.setさいごファイルフラグ(false);
+                executeStep(被保険者関連処理);
+                executeStep(国保連インタフェース管理更新);
+                executeStep(一覧表作成);
+                executeStep(処理結果リスト作成);
             }
-            csvParameter.setファイルパース(ファイル絶対パース);
-            csvParameter.set明細データ登録件数合算(明細データ登録件数合算);
-            executeStep(CSVファイル取込);
-            flowEntity = getResult(SogojigyohiKohiJukyushaFlowEntity.class, new RString(CSVファイル取込),
-                    SogojigyohiKohiJukyushaReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-            明細データ登録件数合算 = 明細データ登録件数合算 + flowEntity.get明細データ登録件数();
+        } finally {
+            if (null != returnEntity) {
+                executeStep(取込済ファイル削除);
+            }
         }
-        if (明細データ登録件数合算 == 0) {
-            executeStep(国保連インタフェース管理更新);
-            executeStep(処理結果リスト作成);
-        } else {
-            executeStep(被保険者関連処理);
-            executeStep(国保連インタフェース管理更新);
-            executeStep(一覧表作成);
-            executeStep(処理結果リスト作成);
-        }
-        //  } catch (Exception e) {
-        //  throw new BatchInterruptedException(UrErrorMessages.指定ファイルが存在しない.toString());
-        //  } finally {
-//        if (null != returnEntity) {
-//            executeStep(取込済ファイル削除);
-//            //       }
-//        }
     }
 
     /**

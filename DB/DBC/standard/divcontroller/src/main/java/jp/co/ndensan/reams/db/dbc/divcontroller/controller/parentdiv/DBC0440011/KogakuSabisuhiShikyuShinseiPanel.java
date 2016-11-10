@@ -93,10 +93,6 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             div.getCommonPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
         }
         getHandler(div).initialize申請情報検索(メニューID, 被保険者番号, 導入形態コード);
-        if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
-            return ResponseData.of(ResponseData.of(div).setState(
-                    DBC0440011StateName.申請情報検索).data).rootTitle(総合事業高額サービス費支給申請登録).respond();
-        }
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
     }
 
@@ -299,6 +295,10 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onStateTransition(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(true);
+        RString メニューID = ResponseHolder.getMenuID();
+        if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
+            return ResponseData.of(div).rootTitle(総合事業高額サービス費支給申請登録).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -423,6 +423,8 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnSerchResult(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        getHandler(div).前排他キーの解除(被保険者番号);
         return ResponseData.of(div).forwardWithEventName(DBC0440011TransitionEventName.検索に戻る).respond();
     }
 
@@ -436,7 +438,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(true);
         div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請を保存する, true);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         getHandler(div).initialize世帯所得一覧(識別コード);
         return ResponseData.of(div).respond();
@@ -451,7 +453,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnKogakuMeisaiHyoji(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請を保存する, false);
         div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(false);
         return ResponseData.of(div).respond();
     }

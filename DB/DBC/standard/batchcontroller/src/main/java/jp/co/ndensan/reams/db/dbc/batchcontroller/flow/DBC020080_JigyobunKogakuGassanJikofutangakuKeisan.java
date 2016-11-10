@@ -89,6 +89,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
         param.set出力対象区分(getParameter().getRadSakuseiJoken());
         param.set被保険者番号(getParameter().getHihokenshano());
         param.set年度(getParameter().getNendo());
+        param.set抽出期間開始年月(getParameter().getUketoriym().toDateString());
         return loopBatch(TaishoshaChushuJigyobunProcess.class).arguments(param).define();
     }
 

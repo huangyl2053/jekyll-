@@ -39,7 +39,7 @@
         "B"."shoriYM" DESC
     </select>
 
-    <select id="logicalDelete高額合算給付実績"
+    <update id="logicalDelete高額合算給付実績"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
         UPDATE
         rgdb."DbT3075KogakuGassanKyufuJisseki"
@@ -66,9 +66,9 @@
         AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
         AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
         AND "DbT3075KogakuGassanKyufuJisseki"."isDeleted" = #{更新前論理削除}
-    </select>
+    </update>
 
-    <select id="physicalDelete高額合算給付実績"
+    <delete id="physicalDelete高額合算給付実績"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
         DELETE
         FROM
@@ -92,9 +92,9 @@
         AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
         AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
         AND "DbT3075KogakuGassanKyufuJisseki"."isDeleted" = #{更新前論理削除}
-    </select>
+    </delete>
 
-    <select id="update高額合算給付実績"
+    <update id="update高額合算給付実績"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
         UPDATE
         rgdb."DbT3075KogakuGassanKyufuJisseki"
@@ -129,7 +129,7 @@
         AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
         AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
         AND "DbT3075KogakuGassanKyufuJisseki"."isDeleted" = #{更新前論理削除}
-    </select>
+    </update>
 
     <select resultOrdered="true" id="get高額合算支給額計算結果"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter"

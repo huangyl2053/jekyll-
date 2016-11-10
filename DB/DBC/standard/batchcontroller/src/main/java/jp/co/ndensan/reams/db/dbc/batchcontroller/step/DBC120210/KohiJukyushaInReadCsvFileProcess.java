@@ -242,7 +242,7 @@ public class KohiJukyushaInReadCsvFileProcess extends BatchProcessBase<RString> 
     }
 
     private RString set字符(RString str) {
-        if (str.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(str)) {
             return RString.EMPTY;
         } else {
             return str;

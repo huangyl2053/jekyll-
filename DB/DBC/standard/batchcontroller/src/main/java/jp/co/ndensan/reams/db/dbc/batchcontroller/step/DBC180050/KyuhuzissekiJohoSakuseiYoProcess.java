@@ -76,13 +76,14 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
 
     @Override
     protected void process(KyuhuzissekiJohoSakuseiYoResultEntity entity) {
-        if (開始Flag
-                || (被保険者番号.equals(entity.get被保険者番号())
+        if (開始Flag) {
+            set判断引数の値(entity);
+        }
+        if (被保険者番号.equals(entity.get被保険者番号())
                 && サービス提供年月.equals(entity.getサービス提供年月())
                 && 入力識別番号.equals(entity.get入力識別番号())
                 && 事業所番号.equals(entity.get事業所番号())
-                && 通し番号.equals(entity.get通し番号()))) {
-            set判断引数の値(entity);
+                && 通し番号.equals(entity.get通し番号())) {
             getResultList(entity);
             開始Flag = false;
         } else {

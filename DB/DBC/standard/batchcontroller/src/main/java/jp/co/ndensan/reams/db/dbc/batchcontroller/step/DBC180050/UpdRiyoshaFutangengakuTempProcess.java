@@ -33,7 +33,6 @@ public class UpdRiyoshaFutangengakuTempProcess extends BatchProcessBase<UpdRiyos
     private IBatchTableWriter<FutanWariaiTempEntity> 負担割合情報一時表Writer;
     private static final RString 開始月 = new RString("08");
     private static final RString TEMP_TABLE = new RString("futanWariaiTemp");
-    private static final RString 零壱 = new RString("01");
     private static final int 二 = 2;
     private static final int 三 = 3;
     private static final int 四 = 4;
@@ -93,7 +92,7 @@ public class UpdRiyoshaFutangengakuTempProcess extends BatchProcessBase<UpdRiyos
         }
         開始Flag = false;
         被保険者番号 = entity.get利用者負担減額().getHihokenshaNo();
-
+        年度 = entity.get負担割合TempEntity().get年度();
         if (entity.get利用者負担減額().getTekiyoKaishiYMD() != null
                 && entity.get利用者負担減額().getTekiyoShuryoYMD() != null) {
             FlexibleYearMonth 開始年月 = new FlexibleYearMonth(entity.get負担割合TempEntity().get年度().toDateString().concat(開始月));
