@@ -934,7 +934,7 @@ public class NinteiChosaIraiHandler {
                         editYubinNoToIchiran(row.getYubinNo()),
                         row.getJusho(),
                         row.getTelNo(),
-                        row.getHomonChosasakiYubinNo(),
+                        editYubinNoToIchiran(row.getHomonChosasakiYubinNo()),
                         homonChosasakiJusho,
                         row.getHomonChosasakiName(),
                         row.getHomonChosasakiTelNo(),
@@ -992,7 +992,8 @@ public class NinteiChosaIraiHandler {
             List<RString> 認定調査委託先コードリスト = get認定調査委託先コード(row.getNinteiChosaItakusakiCode());
             RString 生年月日 = row.getSeinengappiYMD();
             RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
-            RString 前回認定年月日 = row.getZenkaiNinteiYMD();
+            RString 前回認定年月日 = RString.isNullOrEmpty(row.getZenkaiNinteiYMD()) ? RString.EMPTY
+                    : new FlexibleDate(row.getZenkaiNinteiYMD()).seireki().separator(Separator.NONE).fillType(FillType.BLANK).toDateString();
             RString 前回要介護状態区分コード = row.getZenYokaigoKubunCode();
             RString 要支援 = RString.EMPTY;
             if (YOKAIGOJOTAIKUBUN12.equals(前回要介護状態区分コード)
@@ -1049,7 +1050,7 @@ public class NinteiChosaIraiHandler {
                     Seibetsu.男.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
                     Seibetsu.女.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
                     row.getJusho(),
-                    row.getYubinNo(),
+                    editYubinNoToIchiran(row.getYubinNo()),
                     row.getTelNo(),
                     年号.startsWith(元号_明治) ? 記号 : RString.EMPTY,
                     年号.startsWith(元号_大正) ? 記号 : RString.EMPTY,
@@ -1059,7 +1060,7 @@ public class NinteiChosaIraiHandler {
                     年号.substring(INDEX_8),
                     row.getAge(),
                     row.getRenrakusakiJusho(),
-                    row.getRenrakusakiYubinNo(),
+                    editYubinNoToIchiran(row.getRenrakusakiYubinNo()),
                     row.getRenrakusakiTelNo(),
                     row.getRenrakusakiKeitaiTelNo(),
                     row.getRenrakusakiShimei(),
