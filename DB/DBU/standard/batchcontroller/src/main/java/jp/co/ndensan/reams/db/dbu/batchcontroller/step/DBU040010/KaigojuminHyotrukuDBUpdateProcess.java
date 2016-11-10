@@ -105,9 +105,9 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     protected void afterExecute() {
         if (市町村コード == null) {
             tableWrite.insert(kaigojum.データ編集(processParameter, 処理日時, 処理日付情報));
+            宛名識別対象異動分取得PSM(抽出開始日時);
         } else {
             tableWrite.update(kaigojum.データ更新(processParameter, 処理日時, 処理日付情報));
         }
-        宛名識別対象異動分取得PSM(抽出開始日時);
     }
 }
