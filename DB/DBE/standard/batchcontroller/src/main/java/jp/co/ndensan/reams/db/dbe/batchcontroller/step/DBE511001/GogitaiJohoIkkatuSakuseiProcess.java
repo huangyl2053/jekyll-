@@ -275,7 +275,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
         checkGogitaiWariateIinJohoData(csvData, entity);
         
         if (!flag) {
-            entity.setErrJoho(intToRStr(errorNo).concat(new RString("読込しました。")));
+            entity.setErrJoho(intToRStr(errorNo).concat(new RString("行目読込しました。")));
             eucCsvWriter.writeLine(entity);
         }
     }
