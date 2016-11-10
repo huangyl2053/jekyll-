@@ -548,6 +548,8 @@ public class JutakuKaishuShinseiJyohoToroku {
             Code 要介護認定状態区分コード = 要介護認定情報.get要介護認定状態区分コード();
             div.getCommHeadPanel().set要介護認定情報(要介護認定状態区分コード.getColumnValue());
             set旧措置者フラグ(要介護認定情報, div);
+        } else {
+            div.getCommHeadPanel().set要介護認定情報(null);
         }
         getJutakuKaishuShinseiJyohoTorokuValidationHandler(
                 div, null, handler.住宅改修内容一覧チェック(), false).validate受給認定が無効チェック(pairs, div);
