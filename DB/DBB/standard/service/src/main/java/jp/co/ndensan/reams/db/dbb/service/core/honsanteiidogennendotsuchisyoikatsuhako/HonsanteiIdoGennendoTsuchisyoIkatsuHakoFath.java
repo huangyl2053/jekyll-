@@ -976,8 +976,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
             IAtesaki 宛先 = AtesakiFactory.createInstance(entity.get宛先());
             result.set宛先情報(宛先);
         }
-        if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
-            result.set口座情報(new Koza(entity.get口座()));
+        if (entity.get特定口座() != null && entity.get特定口座().getUaT0310KozaEntity().getKozaId() != 0) {
+            result.set口座情報(new Koza(entity.get特定口座()));
         }
 
         result.set徴収方法情報_更正前(get徴収方法情報_更正前後(entity, false));
@@ -1015,8 +1015,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
                 IAtesaki 宛先代納 = AtesakiFactory.createInstance(entity.get宛先代納());
                 result.set宛先代納(宛先代納);
             }
-            if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
-                result.set口座情報(new Koza(entity.get口座()));
+            if (entity.get特定口座() != null && entity.get特定口座().getUaT0310KozaEntity().getKozaId() != 0) {
+                result.set口座情報(new Koza(entity.get特定口座()));
             }
             result.set徴収方法情報_更正前(get徴収方法情報_更正前後(entity, false));
             result.set徴収方法情報_更正後(get徴収方法情報_更正前後(entity, true));
