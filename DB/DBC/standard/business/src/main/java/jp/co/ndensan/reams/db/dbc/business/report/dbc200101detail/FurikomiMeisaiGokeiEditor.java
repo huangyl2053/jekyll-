@@ -58,6 +58,12 @@ public class FurikomiMeisaiGokeiEditor {
         this.作成日時 = 作成日時;
     }
 
+    /**
+     * 明細作成ソースの項目値を設定します．
+     *
+     * @param source 明細作成ソース
+     * @return 明細作成ソース
+     */
     public FurikomiMeisaiIchiranDetailReportSource edit(FurikomiMeisaiIchiranDetailReportSource source) {
         editHeader(source);
         edit明細(source);

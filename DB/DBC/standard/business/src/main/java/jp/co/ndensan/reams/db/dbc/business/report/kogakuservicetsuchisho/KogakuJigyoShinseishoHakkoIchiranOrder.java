@@ -46,7 +46,15 @@ public enum KogakuJigyoShinseishoHakkoIchiranOrder implements IReportItems {
     /**
      * 子ども生年月日です。
      */
-    通知書番号(new RString("0202"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"tsuchishoNoChohyo\""));
+    通知書番号(new RString("0202"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"tsuchishoNoChohyo\"")),
+    /**
+     * 市町村コードです。
+     */
+    市町村コード(new RString("0016"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"shichosonCodeChohyo\"")),
+    /**
+     * サービス分類です。
+     */
+    サービス分類(new RString("0324"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"serviceShuruiCodeChohyo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

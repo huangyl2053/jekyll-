@@ -908,6 +908,16 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     }
 
     /**
+     * 前排他キーの解除のンメソッドです。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public void 前排他キーの解除(HihokenshaNo 被保険者番号) {
+        LockingKey 排他キー = new LockingKey(被保険者番号);
+        RealInitialLocker.release(排他キー);
+    }
+
+    /**
      * 申請情報登録内容変更状態
      *
      * @param parameter YoguKonyuhiShikyuShinseiPnlTotalParameter

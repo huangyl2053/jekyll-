@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.kogakuketteitsuchishosealer2;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -9,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 帳票設計_DBCMN43002_高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）Sourceするクラスです。
  *
- * @reamsid_L DBC-2000-070 lijian
+ * @reamsid_L DBC-2000-070 lijianKogakuKetteiTsuchiShoSealer2Source
  */
 public class KogakuKetteiTsuchiShoSealer2Source implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -112,7 +113,6 @@ public class KogakuKetteiTsuchiShoSealer2Source implements IReportSource {
     public RString kouzaShu;
     @ReportItem(name = "shokisaiHokenshaNo", length = 6, order = 49)
     public RString shokisaiHokenshaNo;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 50)
     public RString hihokenshaNo;
     @ReportItem(name = "serviceYM", length = 6, order = 51)
@@ -220,6 +220,8 @@ public class KogakuKetteiTsuchiShoSealer2Source implements IReportSource {
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

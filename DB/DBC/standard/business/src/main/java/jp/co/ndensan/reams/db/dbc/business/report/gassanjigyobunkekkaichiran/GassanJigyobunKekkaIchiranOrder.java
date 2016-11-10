@@ -16,17 +16,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum GassanJigyobunKekkaIchiranOrder implements IReportItems {
 
     /**
-     * 証記載保険者番号
-     */
-    証記載保険者番号(new RString("0103"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"shoKisaiHokenshaNo\"")),
-    /**
      * 郵便番号
      */
     郵便番号(new RString("0001"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"yubinNo\"")),
     /**
      * 町域コード
      */
-    町域コード(new RString("0002"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"jushoCode\"")),
+    町域コード(new RString("0002"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"choikiCode\"")),
     /**
      * 行政区コード
      */
@@ -40,13 +36,17 @@ public enum GassanJigyobunKekkaIchiranOrder implements IReportItems {
      */
     市町村コード(new RString("0016"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"shichosonCode\"")),
     /**
+     * 証記載保険者番号
+     */
+    証記載保険者番号(new RString("0103"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"shoKisaiHokenshaNo\"")),
+    /**
      * 被保険者番号
      */
     被保険者番号(new RString("0104"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"hihokenshaNo\"")),
     /**
      * 支払方法
      */
-    支払方法(new RString("0312"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"taishoNendo\"")),
+    支払方法(new RString("0312"), new RString(""), new RString("\"ShikyugakuUpdateTemp\".\"kettei_shiharaiHohoKubun\"")),
     /**
      * 対象年度
      */

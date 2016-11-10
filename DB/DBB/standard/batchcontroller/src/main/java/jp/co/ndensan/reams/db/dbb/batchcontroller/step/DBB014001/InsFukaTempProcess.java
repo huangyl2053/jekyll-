@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyojohoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014001.FuchoKarisanteiFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FukaKeisanEntity;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.fuchokarisanteifukabatch.FuchoKariSanteiFukaBatch;
 import jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka.CreatFukaEntity;
-import jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka.HonnSanteiFuka;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -72,6 +72,8 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     private static final RString TEMP_TABLE_NAME = new RString("ShinkiShikakuTaishoTemp");
     private static final RString 区分_新規 = new RString("1");
     private static final RString 区分_既存 = new RString("2");
+    private static final RString 使用する = new RString("1");
+    private static final RString 使用しない = new RString("0");
     private static final RString 特徴開始前普通徴収_あり = new RString("1");
     private static final int NUM_1 = 1;
     private static final int NUM_4 = 4;
@@ -89,7 +91,6 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     private RString 仮算定賦課方法;
     private RString 特別徴収_特徴開始前普通徴収_6月;
     private RString 普通徴収_仮算定新規資格適用段階;
-    private HonnSanteiFuka manager;
     private FuchoKariSanteiFukaBatch service;
     private RDate 調定年度開始日;
     private YMDHMS バッチ起動日時;
@@ -105,7 +106,6 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
         バッチ起動日時 = new YMDHMS(parameter.getバッチ起動日時());
         調定年度開始日 = new RDate(parameter.get調定年度().getYearValue(), NUM_4, NUM_1);
         賦課年度開始日 = new FlexibleDate(parameter.get賦課年度().getYearValue(), NUM_4, NUM_1);
-        manager = HonnSanteiFuka.createInstance();
         service = FuchoKariSanteiFukaBatch.createInstance();
         生保の情報 = new ArrayList<>();
         老齢の情報 = new ArrayList<>();
@@ -177,7 +177,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             }
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
                     get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
-            SeigyoJoho 月別保険料制御情報 = manager.editor月別保険料制御情報(保険料段階List);
+            SeigyoJoho 月別保険料制御情報 = editor月別保険料制御情報(保険料段階List);
             FukaKonkyoBatchParameter 賦課根拠param = new FukaKonkyoBatchParameter();
             賦課根拠param.set賦課基準日(entity.get普徴仮算定抽出().getFukaYMD());
             賦課根拠param.set生保の情報リスト(生保の情報);
@@ -190,12 +190,12 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             保険料段階パラメータ.setFukaNendo(entity.get普徴仮算定抽出().getFukaNendo());
             保険料段階パラメータ.setFukaKonkyo(賦課根拠);
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
-            TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine仮算定保険料段階(保険料段階パラメータ);
+            TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
             return 月別保険料段階.get保険料段階04月();
         } else if (entity.get介護賦課前年度() != null && entity.get介護賦課前年度().getTsuchishoNo() != null) {
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
                     get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
-            SeigyoJoho 月別保険料制御情報 = manager.editor月別保険料制御情報(保険料段階List);
+            SeigyoJoho 月別保険料制御情報 = editor月別保険料制御情報(保険料段階List);
             FukaKonkyo 賦課根拠 = new FukaKonkyo();
             賦課根拠.setFukakijunYMD(賦課年度開始日);
             if (entity.get介護賦課前年度().getSeihoKaishiYMD() != null
@@ -217,13 +217,123 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             保険料段階パラメータ.setFukaNendo(parameter.get賦課年度());
             保険料段階パラメータ.setFukaKonkyo(賦課根拠);
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
-            TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
+            TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine仮算定保険料段階(保険料段階パラメータ);
             return 月別保険料段階.get保険料段階04月();
         }
         ShinkiShikakuTaishoTempEntity shinkiShikakuTaishoTempEntity = new ShinkiShikakuTaishoTempEntity();
         shinkiShikakuTaishoTempEntity.setTsuchishoNo(entity.get普徴仮算定抽出().getTsuchishoNo());
         shinkiShikakuTaishoTempWriter.insert(shinkiShikakuTaishoTempEntity);
         return 普通徴収_仮算定新規資格適用段階;
+    }
+
+    private SeigyoJoho editor月別保険料制御情報(HokenryoDankaiList 保険料段階List) {
+        RDate nowDate = RDate.getNowDate();
+        Decimal 基準年金収入額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入1,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準年金収入額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入2,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準年金収入額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入3,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額1,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額2,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額3,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額04 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額4,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額05 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額5,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額06 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額6,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額07 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額7,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額08 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額8,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額09 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額9,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額10 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額10,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額11 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額11,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額12 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額12,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額13 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額13,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額14 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額14,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        Decimal 基準所得金額15 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額15,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        RString 課税層所得段階 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税層保険料段階インデックス,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        RString 未申告段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階使用,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        boolean 未申告段階使用有無 = false;
+        if (使用する.equals(未申告段階使用)) {
+            未申告段階使用有無 = true;
+        } else if (使用しない.equals(未申告段階使用)) {
+            未申告段階使用有無 = false;
+        }
+        RString 未申告段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階インデックス,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        RString 未申告課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        RString 所得調査中段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階使用,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        boolean 所得調査中段階使用有無 = false;
+        if (使用する.equals(所得調査中段階使用)) {
+            所得調査中段階使用有無 = true;
+        } else if (使用しない.equals(所得調査中段階使用)) {
+            所得調査中段階使用有無 = false;
+        }
+        RString 所得調査中段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階インデックス,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        RString 所得調査中課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中課税区分,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        RString 課税取消段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階使用,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        boolean 課税取消段階使用有無 = false;
+        if (使用する.equals(課税取消段階使用)) {
+            課税取消段階使用有無 = true;
+        } else if (使用しない.equals(課税取消段階使用)) {
+            課税取消段階使用有無 = false;
+        }
+        RString 課税取消段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階インデックス,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        RString 課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        SeigyojohoFactory seigyojohoFactory = InstanceProvider.create(SeigyojohoFactory.class);
+        SeigyoJoho 月別保険料制御情報 = seigyojohoFactory.createSeigyojoho(
+                保険料段階List,
+                基準年金収入額01,
+                基準年金収入額02,
+                基準年金収入額03,
+                基準所得金額01,
+                基準所得金額02,
+                基準所得金額03,
+                基準所得金額04,
+                基準所得金額05,
+                基準所得金額06,
+                基準所得金額07,
+                基準所得金額08,
+                基準所得金額09,
+                基準所得金額10,
+                基準所得金額11,
+                基準所得金額12,
+                基準所得金額13,
+                基準所得金額14,
+                基準所得金額15,
+                課税層所得段階,
+                未申告段階使用有無,
+                未申告段階インデックス,
+                KazeiKubun.toValue(未申告課税区分),
+                所得調査中段階使用有無,
+                所得調査中段階インデックス,
+                KazeiKubun.toValue(所得調査中課税区分),
+                課税取消段階使用有無,
+                課税取消段階インデックス,
+                KazeiKubun.toValue(課税取消課税区分));
+        return 月別保険料制御情報;
     }
 
     private Decimal get計算用保険料(FukaKeisanEntity entity, RString 段階区分) {

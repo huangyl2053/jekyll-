@@ -40,20 +40,32 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWariaiHanteiJohoEntity> {
 
     private static final int NUM12 = 12;
-    private static final RString TABLENAME = new RString("RiyoshaFutanWariaiKonkyoTemp");
+    private static final RString 根拠TABLENAME = new RString("RiyoshaFutanWariaiKonkyoTemp");
+    private static final RString 根拠TABLENAME08 = new RString("RiyoshaFutanWariaiKonkyo08Temp");
+    private static final RString 根拠TABLENAME09 = new RString("RiyoshaFutanWariaiKonkyo09Temp");
+    private static final RString 根拠TABLENAME10 = new RString("RiyoshaFutanWariaiKonkyo10Temp");
+    private static final RString 根拠TABLENAME11 = new RString("RiyoshaFutanWariaiKonkyo11Temp");
+    private static final RString 根拠TABLENAME12 = new RString("RiyoshaFutanWariaiKonkyo12Temp");
+    private static final RString 根拠TABLENAME01 = new RString("RiyoshaFutanWariaiKonkyo01Temp");
+    private static final RString 根拠TABLENAME02 = new RString("RiyoshaFutanWariaiKonkyo02Temp");
+    private static final RString 根拠TABLENAME03 = new RString("RiyoshaFutanWariaiKonkyo03Temp");
+    private static final RString 根拠TABLENAME04 = new RString("RiyoshaFutanWariaiKonkyo04Temp");
+    private static final RString 根拠TABLENAME05 = new RString("RiyoshaFutanWariaiKonkyo05Temp");
+    private static final RString 根拠TABLENAME06 = new RString("RiyoshaFutanWariaiKonkyo06Temp");
+    private static final RString 根拠TABLENAME07 = new RString("RiyoshaFutanWariaiKonkyo07Temp");
 
-    private static final RString TABLENAME08 = new RString("RiyoshaFutanWariaiMeisai08Temp");
-    private static final RString TABLENAME09 = new RString("RiyoshaFutanWariaiMeisai09Temp");
-    private static final RString TABLENAME10 = new RString("RiyoshaFutanWariaiMeisai10Temp");
-    private static final RString TABLENAME11 = new RString("RiyoshaFutanWariaiMeisai11Temp");
-    private static final RString TABLENAME12 = new RString("RiyoshaFutanWariaiMeisai12Temp");
-    private static final RString TABLENAME01 = new RString("RiyoshaFutanWariaiMeisai01Temp");
-    private static final RString TABLENAME02 = new RString("RiyoshaFutanWariaiMeisai02Temp");
-    private static final RString TABLENAME03 = new RString("RiyoshaFutanWariaiMeisai03Temp");
-    private static final RString TABLENAME04 = new RString("RiyoshaFutanWariaiMeisai04Temp");
-    private static final RString TABLENAME05 = new RString("RiyoshaFutanWariaiMeisai05Temp");
-    private static final RString TABLENAME06 = new RString("RiyoshaFutanWariaiMeisai06Temp");
-    private static final RString TABLENAME07 = new RString("RiyoshaFutanWariaiMeisai07Temp");
+    private static final RString 明細TABLENAME08 = new RString("RiyoshaFutanWariaiMeisai08Temp");
+    private static final RString 明細TABLENAME09 = new RString("RiyoshaFutanWariaiMeisai09Temp");
+    private static final RString 明細TABLENAME10 = new RString("RiyoshaFutanWariaiMeisai10Temp");
+    private static final RString 明細TABLENAME11 = new RString("RiyoshaFutanWariaiMeisai11Temp");
+    private static final RString 明細TABLENAME12 = new RString("RiyoshaFutanWariaiMeisai12Temp");
+    private static final RString 明細TABLENAME01 = new RString("RiyoshaFutanWariaiMeisai01Temp");
+    private static final RString 明細TABLENAME02 = new RString("RiyoshaFutanWariaiMeisai02Temp");
+    private static final RString 明細TABLENAME03 = new RString("RiyoshaFutanWariaiMeisai03Temp");
+    private static final RString 明細TABLENAME04 = new RString("RiyoshaFutanWariaiMeisai04Temp");
+    private static final RString 明細TABLENAME05 = new RString("RiyoshaFutanWariaiMeisai05Temp");
+    private static final RString 明細TABLENAME06 = new RString("RiyoshaFutanWariaiMeisai06Temp");
+    private static final RString 明細TABLENAME07 = new RString("RiyoshaFutanWariaiMeisai07Temp");
 
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select負担割合判定月次");
@@ -67,12 +79,14 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     private int レコード数;
     private RiyoshaFutanWariaiHanteiUtil util;
     private RiyoshaFutanWariaiHantei service;
-    private List<BatchEntityCreatedTempTableWriter> writers;
+    private List<BatchEntityCreatedTempTableWriter> 明細Writers;
+    private List<BatchEntityCreatedTempTableWriter> 根拠Writers;
 
     @Override
     protected void initialize() {
         util = new RiyoshaFutanWariaiHanteiUtil();
-        writers = new ArrayList<>();
+        明細Writers = new ArrayList<>();
+        根拠Writers = new ArrayList<>();
         対象月Index = parameter.getHanteiKijunbiIndex();
         service = RiyoshaFutanWariaiHantei.createInstance();
         nendo = new FlexibleYear(parameter.getTaishoNendo().toDateString());
@@ -105,35 +119,83 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     private BatchEntityCreatedTempTableWriter 利用者負担割合明細07Temp;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 利用者負担割合根拠Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠08Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠09Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠10Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠11Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠12Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠01Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠02Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠03Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠04Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠05Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠06Temp;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠07Temp;
 
     @Override
     protected void createWriter() {
-        利用者負担割合根拠Temp = new BatchEntityCreatedTempTableWriter(TABLENAME, RiyoshaFutanWariaiKonkyoTempEntity.class);
         taishoTsuki = parameter.getTaishoGetsu().get(対象月Index);
-        利用者負担割合明細08Temp = new BatchEntityCreatedTempTableWriter(TABLENAME08, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細09Temp = new BatchEntityCreatedTempTableWriter(TABLENAME09, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細10Temp = new BatchEntityCreatedTempTableWriter(TABLENAME10, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細11Temp = new BatchEntityCreatedTempTableWriter(TABLENAME11, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細12Temp = new BatchEntityCreatedTempTableWriter(TABLENAME12, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細01Temp = new BatchEntityCreatedTempTableWriter(TABLENAME01, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細02Temp = new BatchEntityCreatedTempTableWriter(TABLENAME02, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細03Temp = new BatchEntityCreatedTempTableWriter(TABLENAME03, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細04Temp = new BatchEntityCreatedTempTableWriter(TABLENAME04, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細05Temp = new BatchEntityCreatedTempTableWriter(TABLENAME05, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細06Temp = new BatchEntityCreatedTempTableWriter(TABLENAME06, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        利用者負担割合明細07Temp = new BatchEntityCreatedTempTableWriter(TABLENAME07, RiyoshaFutanWariaiMeisaiTempEntity.class);
-        writers.add(利用者負担割合明細08Temp);
-        writers.add(利用者負担割合明細09Temp);
-        writers.add(利用者負担割合明細10Temp);
-        writers.add(利用者負担割合明細11Temp);
-        writers.add(利用者負担割合明細12Temp);
-        writers.add(利用者負担割合明細01Temp);
-        writers.add(利用者負担割合明細02Temp);
-        writers.add(利用者負担割合明細03Temp);
-        writers.add(利用者負担割合明細04Temp);
-        writers.add(利用者負担割合明細05Temp);
-        writers.add(利用者負担割合明細06Temp);
-        writers.add(利用者負担割合明細07Temp);
+        利用者負担割合明細08Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME08, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細09Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME09, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細10Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME10, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細11Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME11, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細12Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME12, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細01Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME01, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細02Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME02, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細03Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME03, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細04Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME04, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細05Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME05, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細06Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME06, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        利用者負担割合明細07Temp = new BatchEntityCreatedTempTableWriter(明細TABLENAME07, RiyoshaFutanWariaiMeisaiTempEntity.class);
+        明細Writers.add(利用者負担割合明細08Temp);
+        明細Writers.add(利用者負担割合明細09Temp);
+        明細Writers.add(利用者負担割合明細10Temp);
+        明細Writers.add(利用者負担割合明細11Temp);
+        明細Writers.add(利用者負担割合明細12Temp);
+        明細Writers.add(利用者負担割合明細01Temp);
+        明細Writers.add(利用者負担割合明細02Temp);
+        明細Writers.add(利用者負担割合明細03Temp);
+        明細Writers.add(利用者負担割合明細04Temp);
+        明細Writers.add(利用者負担割合明細05Temp);
+        明細Writers.add(利用者負担割合明細06Temp);
+        明細Writers.add(利用者負担割合明細07Temp);
+        利用者負担割合根拠Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠08Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME08, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠09Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME09, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠10Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME10, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠11Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME11, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠12Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME12, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠01Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME01, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠02Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME02, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠03Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME03, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠04Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME04, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠05Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME05, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠06Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME06, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        利用者負担割合根拠07Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME07, RiyoshaFutanWariaiKonkyoTempEntity.class);
+        根拠Writers.add(利用者負担割合根拠08Temp);
+        根拠Writers.add(利用者負担割合根拠09Temp);
+        根拠Writers.add(利用者負担割合根拠10Temp);
+        根拠Writers.add(利用者負担割合根拠11Temp);
+        根拠Writers.add(利用者負担割合根拠12Temp);
+        根拠Writers.add(利用者負担割合根拠01Temp);
+        根拠Writers.add(利用者負担割合根拠02Temp);
+        根拠Writers.add(利用者負担割合根拠03Temp);
+        根拠Writers.add(利用者負担割合根拠04Temp);
+        根拠Writers.add(利用者負担割合根拠05Temp);
+        根拠Writers.add(利用者負担割合根拠06Temp);
+        根拠Writers.add(利用者負担割合根拠07Temp);
     }
 
     @Override
@@ -155,7 +217,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
             return;
         }
         insertHandle();
-        entities = new ArrayList<>();
+        entities.clear();
         entities.add(entity);
     }
 
@@ -164,7 +226,53 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
         HanteiTaishoshaTempEntity 判定対象者 = entities.get(0).get判定対象者();
         List<SeikatsuHogoGaitoJohoTempEntity> 生活保護該当情報リスト = entities.get(0).get生活保護該当情報();
         SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報 = 生活保護該当情報リスト.isEmpty() ? null : 生活保護該当情報リスト.get(0);
-        BatchEntityCreatedTempTableWriter writer = writers.get(対象月Index);
+        BatchEntityCreatedTempTableWriter 明細Writer = 明細Writers.get(対象月Index);
+        RiyoshaFutanWariaiMeisaiTempEntity insert明細Temp = getInsert明細Entity(判定対象者, 生活保護該当情報);
+        明細Writer.insert(insert明細Temp);
+        if (taishoTsuki.equals(util.getTsuki(parameter.getKijunbi()))) {
+            for (int i = 対象月Index + 1; i < NUM12; i++) {
+                insert明細Temp.setEdaNo(i + 1);
+                明細Writer = 明細Writers.get(i);
+                明細Writer.insert(insert明細Temp);
+            }
+        }
+        insert根拠Handle(判定対象者);
+    }
+
+    private void insert根拠Handle(HanteiTaishoshaTempEntity 判定対象者) {
+        RiyoshaFutanWariaiKonkyoTempEntity insert根拠Temp;
+        BatchEntityCreatedTempTableWriter 根拠Writer = 根拠Writers.get(対象月Index);
+        for (FutanWariaiHanteiJohoEntity entity : entities) {
+            List<SetainJohoRelateEntity> 世帯員情報RelateList = entity.get世帯員情報Entity();
+            SetainJohoRelateEntity 世帯員情報RelateEntitity = 世帯員情報RelateList.isEmpty() ? null : 世帯員情報RelateList.get(0);
+            SetainJohoTempEntity 世帯員情報 = 世帯員情報RelateEntitity == null ? null : 世帯員情報RelateEntitity.get世帯員情報();
+            DbV2512KaigoShotokuNewestEntity 所得管理
+                    = 世帯員情報RelateEntitity == null ? null : 世帯員情報RelateEntitity.get介護所得情報();
+            insert根拠Temp = new RiyoshaFutanWariaiKonkyoTempEntity();
+            insert根拠Temp.setNendo(nendo);
+            insert根拠Temp.setHihokenshaNo(判定対象者.getHihokenshaNo());
+            insert根拠Temp.setEdaNo(対象月Index + 1);
+            if (世帯員情報 != null) {
+                insert根拠Temp.setSetaiinHihokenshaNo(世帯員情報.getHihokenshaNo());
+            } else {
+                insert根拠Temp.setSetaiinHihokenshaNo(HihokenshaNo.EMPTY);
+            }
+            if (所得管理 != null) {
+                insert根拠Temp.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getRirekiNo()));
+            }
+            根拠Writer.insert(insert根拠Temp);
+            if (taishoTsuki.equals(util.getTsuki(parameter.getKijunbi()))) {
+                for (int index = 対象月Index + 1; index < NUM12; index++) {
+                    insert根拠Temp.setEdaNo(index + 1);
+                    根拠Writer = 根拠Writers.get(index);
+                    根拠Writer.insert(insert根拠Temp);
+                }
+            }
+        }
+    }
+
+    private RiyoshaFutanWariaiMeisaiTempEntity getInsert明細Entity(
+            HanteiTaishoshaTempEntity 判定対象者, SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報) {
         RiyoshaFutanWariaiMeisaiTempEntity insertTemp = new RiyoshaFutanWariaiMeisaiTempEntity();
         insertTemp.setNendo(nendo);
         insertTemp.setHihokenshaNo(判定対象者.getHihokenshaNo());
@@ -188,35 +296,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
         insertTemp.setHanteiKubun(hanteiResult.get判定区分());
         insertTemp.setNenkinShunyuGoukei(service.get公的年金収入額世帯員分合計(joho.get介護所得情報()));
         insertTemp.setSonotanoGoukeiShotokuKingakuGoukei(service.getその他の合計所得金額世帯員分合計(joho.get介護所得情報()));
-        writer.insert(insertTemp);
-        if (taishoTsuki.equals(util.getTsuki(parameter.getKijunbi()))) {
-            for (int i = 対象月Index + 1; i < NUM12; i++) {
-                insertTemp.setEdaNo(i + 1);
-                writer = writers.get(i);
-                writer.insert(insertTemp);
-            }
-            RiyoshaFutanWariaiKonkyoTempEntity insertKonkyoTemp;
-            for (int i = 0; i < レコード数; i++) {
-                List<SetainJohoRelateEntity> 世帯員情報Entities = entities.get(i).get世帯員情報Entity();
-                SetainJohoRelateEntity 世帯員情報Entitity = 世帯員情報Entities.isEmpty() ? null : 世帯員情報Entities.get(0);
-                SetainJohoTempEntity 世帯員情報 = 世帯員情報Entitity == null ? null : 世帯員情報Entitity.get世帯員情報();
-                DbV2512KaigoShotokuNewestEntity 所得管理 = 世帯員情報Entitity == null ? null : 世帯員情報Entitity.get介護所得情報();
-                insertKonkyoTemp = new RiyoshaFutanWariaiKonkyoTempEntity();
-                insertKonkyoTemp.setNendo(nendo);
-                insertKonkyoTemp.setHihokenshaNo(判定対象者.getHihokenshaNo());
-                insertKonkyoTemp.setRirekiNo(Decimal.ZERO);
-                insertKonkyoTemp.setEdaNo(i + 1);
-                if (世帯員情報 != null) {
-                    insertKonkyoTemp.setSetaiinHihokenshaNo(世帯員情報.getHihokenshaNo());
-                } else {
-                    insertKonkyoTemp.setSetaiinHihokenshaNo(HihokenshaNo.EMPTY);
-                }
-                if (所得管理 != null) {
-                    insertKonkyoTemp.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getMotoRirekiNo()));
-                }
-                利用者負担割合根拠Temp.insert(insertKonkyoTemp);
-            }
-        }
+        return insertTemp;
     }
 
     @Override

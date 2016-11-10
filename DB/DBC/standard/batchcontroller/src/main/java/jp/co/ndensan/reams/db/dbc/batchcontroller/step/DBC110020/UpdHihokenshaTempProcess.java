@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -127,7 +128,13 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
         }
         全項目 = 全項目.concat(被保険者台帳.getIdoYMD().toString()).concat(SPLIT)
                 .concat(被保険者台帳.getEdaNo()).concat(SPLIT);
-        全項目 = 全項目.concat(被保険者台帳.getShichosonCode().getColumnValue());
+        全項目 = 全項目.concat(被保険者台帳.getShichosonCode().getColumnValue()).concat(SPLIT);
+        LasdecCode 広住特措置元市町村コード = 被保険者台帳.getKoikinaiTokureiSochimotoShichosonCode();
+        if (広住特措置元市町村コード != null) {
+            全項目 = 全項目.concat(広住特措置元市町村コード.getColumnValue());
+        } else {
+            全項目 = 全項目.concat(RString.EMPTY);
+        }
         return 全項目;
     }
 

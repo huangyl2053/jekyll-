@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
@@ -43,9 +42,13 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -66,7 +69,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class ChoshuYuyoTorikesiTsuchiShoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
-    private static final RString RSTRING_0 = new RString("0");
+    private static final int 定数_15 = 15;
+    private static final int 定数_14 = 14;
     private static final RString RSTRING_1 = new RString("1");
     private static final RString 波線 = new RString("～");
     private static final RString 期_1 = new RString("01");
@@ -75,20 +79,20 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
     private static final RString 期_4 = new RString("04");
     private static final RString 期_5 = new RString("05");
     private static final RString 期_6 = new RString("06");
-    private static final RString 普徴期_4 = new RString("_4月");
-    private static final RString 普徴期_5 = new RString("_5月");
-    private static final RString 普徴期_6 = new RString("_6月");
-    private static final RString 普徴期_7 = new RString("_7月");
-    private static final RString 普徴期_8 = new RString("_8月");
-    private static final RString 普徴期_9 = new RString("_9月");
-    private static final RString 普徴期_10 = new RString("_10月");
-    private static final RString 普徴期_11 = new RString("_11月");
-    private static final RString 普徴期_12 = new RString("_12月");
-    private static final RString 普徴期_1 = new RString("_1月");
-    private static final RString 普徴期_2 = new RString("_2月");
-    private static final RString 普徴期_3 = new RString("_3月");
-    private static final RString 普徴期翌年度_4 = new RString("翌年度4月");
-    private static final RString 普徴期翌年度_5 = new RString("翌年度5月");
+    private static final RString 普徴期_4 = new RString("04");
+    private static final RString 普徴期_5 = new RString("05");
+    private static final RString 普徴期_6 = new RString("06");
+    private static final RString 普徴期_7 = new RString("07");
+    private static final RString 普徴期_8 = new RString("08");
+    private static final RString 普徴期_9 = new RString("09");
+    private static final RString 普徴期_10 = new RString("10");
+    private static final RString 普徴期_11 = new RString("11");
+    private static final RString 普徴期_12 = new RString("12");
+    private static final RString 普徴期_1 = new RString("01");
+    private static final RString 普徴期_2 = new RString("02");
+    private static final RString 普徴期_3 = new RString("03");
+    private static final RString 普徴期翌年度_4 = new RString("14");
+    private static final RString 普徴期翌年度_5 = new RString("15");
     private static final int INDEX_ONE = 1;
     private static final int INDEX_FOURTEEN = 14;
 
@@ -259,7 +263,7 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                     (行政区画 != null && 行政区画.getChiku2() != null) ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
                     (行政区画 != null && 行政区画.getChiku3() != null) ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
                     (徴収猶予取消通知書情報.get納組情報() != null && 徴収猶予取消通知書情報.get納組情報().getNokumi() != null)
-                    ? 徴収猶予取消通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
+                            ? 徴収猶予取消通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
         return 表示コード;
     }
@@ -282,8 +286,6 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
                 Decimal 特徴期別金額 = get期と特徴期別金額の対応(徴収猶予取消通知書情報, 特徴期月.get期());
                 if (特徴期別金額 != null) {
                     期別徴収猶予期間.set特徴期別金額(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
-                } else {
-                    期別徴収猶予期間.set特徴期別金額(RSTRING_0);
                 }
             } else {
                 期別徴収猶予期間.set特徴期(RString.EMPTY);
@@ -293,13 +295,11 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
 
             if (普徴期月.isPresent()) {
                 期別徴収猶予期間.set普徴期(普徴期月.get期().padZeroToLeft(2));
-                期別徴収猶予期間.set普徴月(普徴期月.get月().getコード());
-                Decimal 普徴期別金額 = get月と普徴期別金額の対応(徴収猶予取消通知書情報, 普徴期月.get月());
+                期別徴収猶予期間.set普徴月(editInt2桁文字列(普徴期月.get月AsInt()));
+                Decimal 普徴期別金額 = get月と普徴期別金額の対応(徴収猶予取消通知書情報, 普徴期月.get期());
                 if (普徴期別金額 != null) {
                     期別徴収猶予期間.set普徴期別金額(DecimalFormatter
                             .toコンマ区切りRString(普徴期別金額, 0));
-                } else {
-                    期別徴収猶予期間.set普徴期別金額(RSTRING_0);
                 }
                 期別徴収猶予期間.set徴収猶予期間(get徴収猶予期間(徴収猶予取消通知書情報, 普徴期月));
             } else {
@@ -312,6 +312,18 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
         }
         return 期別徴収猶予期間リスト;
 
+    }
+
+    private RString editInt2桁文字列(int 月) {
+        RString 月Str;
+        if (月 == 定数_14) {
+            月Str = new RString("4");
+        } else if (月 == 定数_15) {
+            月Str = new RString("5");
+        } else {
+            月Str = new RString(月);
+        }
+        return 月Str.padLeft(RString.HALF_SPACE, 2);
     }
 
     /**
@@ -339,34 +351,34 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
         List<RString> 期別納期リスト = new ArrayList<>();
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
-        List<Kitsuki> 期月リスト = new ArrayList<>();
         FukaNokiResearcher 賦課納期取得 = FukaNokiResearcher.createInstance();
         List<Noki> 賦課納期list = 賦課納期取得.get普徴納期ALL();
-        if (期月リスト_普徴 != null) {
-            期月リスト = 期月リスト_普徴.toList();
-        }
-        if (期月リスト.isEmpty() || 賦課納期list == null || 賦課納期list.isEmpty()) {
+        if (賦課納期list == null || 賦課納期list.isEmpty()) {
             return 期別納期リスト;
         }
-        for (Kitsuki 期月 : 期月リスト) {
+        for (int index = INDEX_ONE; index <= INDEX_FOURTEEN; index++) {
+            Kitsuki 普徴期月 = 期月リスト_普徴.get期の最初月(index);
+            if (!普徴期月.isPresent()) {
+                continue;
+            }
             boolean flag = false;
             for (Noki 賦課納期 : 賦課納期list) {
-                if (期月.get期AsInt() == 賦課納期.get期別()) {
+                if (普徴期月.get期AsInt() == 賦課納期.get期別()) {
                     flag = true;
                     RString 期別納期期間 = RString.EMPTY;
                     RDate 納期開始日 = 賦課納期.get納期開始日();
                     RDate 納期終了日 = 賦課納期.get納期終了日();
                     if (納期開始日 != null && 納期終了日 != null) {
-                        期別納期期間 = 納期開始日.wareki().toDateString().concat(波線)
-                                .concat(納期終了日.wareki().toDateString());
+                        期別納期期間 = editDate(納期開始日).concat(波線)
+                                .concat(editDate(納期終了日));
                         期別納期リスト.add(期別納期期間);
                     } else if (納期開始日 == null && 納期終了日 != null) {
                         期別納期期間 = RString.EMPTY.concat(波線)
-                                .concat(納期終了日.wareki().toDateString());
+                                .concat(editDate(納期終了日));
                         期別納期リスト.add(期別納期期間);
 
                     } else if (納期開始日 != null && 納期終了日 == null) {
-                        期別納期期間 = 納期開始日.wareki().toDateString().concat(波線);
+                        期別納期期間 = editDate(納期開始日).concat(波線);
                         期別納期リスト.add(期別納期期間);
                     } else {
                         期別納期リスト.add(RString.EMPTY);
@@ -405,38 +417,37 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
     }
 
     private Decimal get月と普徴期別金額の対応(
-            ChoshuYuyoTorikesiTsuchiShoJoho 徴収猶予取消通知書情報, Tsuki 月) {
+            ChoshuYuyoTorikesiTsuchiShoJoho 徴収猶予取消通知書情報, RString 期) {
         if (徴収猶予取消通知書情報.get徴収猶予の情報() == null) {
             return Decimal.ZERO;
         }
-        RString 普徴月 = new RString(月.toString());
-        if (普徴期_4.equals(普徴月)) {
+        if (普徴期_1.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額01();
-        } else if (普徴期_5.equals(普徴月)) {
+        } else if (普徴期_2.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額02();
-        } else if (普徴期_6.equals(普徴月)) {
+        } else if (普徴期_3.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額03();
-        } else if (普徴期_7.equals(普徴月)) {
+        } else if (普徴期_4.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額04();
-        } else if (普徴期_8.equals(普徴月)) {
+        } else if (普徴期_5.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額05();
-        } else if (普徴期_9.equals(普徴月)) {
+        } else if (普徴期_6.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額06();
-        } else if (普徴期_10.equals(普徴月)) {
+        } else if (普徴期_7.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額07();
-        } else if (普徴期_11.equals(普徴月)) {
+        } else if (普徴期_8.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額08();
-        } else if (普徴期_12.equals(普徴月)) {
+        } else if (普徴期_9.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額09();
-        } else if (普徴期_1.equals(普徴月)) {
+        } else if (普徴期_10.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額10();
-        } else if (普徴期_2.equals(普徴月)) {
+        } else if (普徴期_11.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額11();
-        } else if (普徴期_3.equals(普徴月)) {
+        } else if (普徴期_12.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額12();
-        } else if (普徴期翌年度_4.equals(普徴月)) {
+        } else if (普徴期翌年度_4.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額13();
-        } else if (普徴期翌年度_5.equals(普徴月)) {
+        } else if (普徴期翌年度_5.equals(期)) {
             return 徴収猶予取消通知書情報.get徴収猶予の情報().get普徴期別金額14();
         } else {
             return Decimal.ZERO;
@@ -456,28 +467,36 @@ public class ChoshuYuyoTorikesiTsuchiShoPrintService {
         }
         for (KibetsuChoshuYuyo 介護期別徴収猶予 : 介護期別徴収猶予List) {
             RString 徴収方法 = 介護期別徴収猶予.get徴収方法();
-            FlexibleDate 徴収猶予開始日 = FlexibleDate.EMPTY;
-            FlexibleDate 徴収猶予終了日 = FlexibleDate.EMPTY;
             if (ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法) && 普徴期月.get期AsInt() == 介護期別徴収猶予.get期()) {
-                徴収猶予開始日 = 介護期別徴収猶予.get徴収猶予開始日();
-                徴収猶予終了日 = 介護期別徴収猶予.get徴収猶予終了日();
+                FlexibleDate 徴収猶予開始日 = 介護期別徴収猶予.get徴収猶予開始日();
+                FlexibleDate 徴収猶予終了日 = 介護期別徴収猶予.get徴収猶予終了日();
                 if (徴収猶予開始日 != null && !徴収猶予開始日.isEmpty()
                         && 徴収猶予終了日 != null && !徴収猶予終了日.isEmpty()) {
-                    徴収猶予期間 = 徴収猶予開始日.wareki().toDateString().concat(波線)
-                            .concat(徴収猶予終了日.wareki().toDateString());
+                    徴収猶予期間 = editDate(徴収猶予開始日).concat(波線)
+                            .concat(editDate(徴収猶予終了日));
                 } else if ((徴収猶予開始日 == null || 徴収猶予開始日.isEmpty())
                         && 徴収猶予終了日 != null && !徴収猶予終了日.isEmpty()) {
                     徴収猶予期間 = RString.EMPTY.concat(波線)
-                            .concat(徴収猶予終了日.wareki().toDateString());
+                            .concat(editDate(徴収猶予終了日));
                 } else if (徴収猶予開始日 != null && !徴収猶予開始日.isEmpty()
                         && (徴収猶予終了日 == null || 徴収猶予終了日.isEmpty())) {
-                    徴収猶予期間 = 徴収猶予開始日.wareki().toDateString().concat(波線);
+                    徴収猶予期間 = editDate(徴収猶予開始日).concat(波線);
                 } else {
                     徴収猶予期間 = RString.EMPTY;
                 }
             }
         }
         return 徴収猶予期間;
+    }
+
+    private RString editDate(FlexibleDate date) {
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString editDate(RDate date) {
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     /**

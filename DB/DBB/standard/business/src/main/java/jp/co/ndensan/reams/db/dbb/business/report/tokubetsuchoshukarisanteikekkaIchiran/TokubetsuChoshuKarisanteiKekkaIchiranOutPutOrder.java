@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBB-0700-010 xuhao
  */
 public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportItems {
-    // TODO QA971
+    // TODO QA1879
     /**
      * 郵便番号
      */
@@ -30,11 +30,11 @@ public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportI
     /**
      * 世帯コード
      */
-    世帯コード("0008", "世帯コード", "\"setaiCode\""),
+    世帯コード("0008", "世帯コード", "\"atena_setaiCode\""),
     /**
      * 識別コード
      */
-    識別コード("0009", "識別コード", "\"shikibetsuCode\""),
+    識別コード("0009", "識別コード", "\"atena_shikibetsuCode\""),
     /**
      * 氏名５０音カナ
      */
@@ -58,7 +58,15 @@ public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportI
     /**
      * 被保険者番号
      */
-    被保険者番号("0104", "被保険者番号", "\"hihokenshaNo\"");
+    被保険者番号("0104", "被保険者番号", "\"hihokenshaNo\""),
+    /**
+     * 徴収方法
+     */
+    徴収方法("0209", "徴収方法", ""),
+    /**
+     * 特徴開始月
+     */
+    特徴開始月("0213", "特徴開始月", "");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufuhitsuchisho.KyufuhiTsuchishoShutsuryokujun;
@@ -21,9 +22,15 @@ import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -85,8 +92,10 @@ public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<Kyu
         宛先builder.set基準日(new FlexibleDate(processParameter.get処理年月日()));
         宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(宛先builder.build());
+        processParameter.setOrderBy(出力順Entity.get出力順OrderBy());
         KyufuhiTsuchishoBatchMybitisParameter mybatisParam = processParameter.
-                toKyufuhiTsuchishoBatchMybitisParameter(new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()));
+                toKyufuhiTsuchishoBatchMybitisParameter(new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()),
+                        get宛名PSM検索きー());
         return new BatchDbReader(介護給付費福祉用具貸与品目情報取得SQL, mybatisParam);
     }
 
@@ -97,7 +106,7 @@ public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<Kyu
         }
         tempFlag = false;
         KyufuhiTuchiHakkoIchiran hakkoIchiran = new KyufuhiTuchiHakkoIchiran();
-        KyufuhiTuchiHakkoIchiranEntity coverEntity = hakkoIchiran.帳票データ作成2(entity, processParameter);
+        KyufuhiTuchiHakkoIchiranEntity coverEntity = hakkoIchiran.帳票データ作成2(entity, processParameter, 出力順Entity);
         coverEntity.set帳票連番(new RString(連番));
         boolean isBreak = isBreak(entity);
         if (!isBreak || index % 数値_25 == 0) {
@@ -119,17 +128,7 @@ public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<Kyu
     protected void afterExecute() {
         if (tempFlag) {
             KyufuhiTuchiHakkoIchiran hakkoIchiran = new KyufuhiTuchiHakkoIchiran();
-            KyufuhiTuchiHakkoIchiranEntity coverEntity = hakkoIchiran.帳票データ作成1(processParameter);
-            coverEntity.set出力順1(出力順Entity.get出力順1());
-            coverEntity.set出力順2(出力順Entity.get出力順2());
-            coverEntity.set出力順3(出力順Entity.get出力順3());
-            coverEntity.set出力順4(出力順Entity.get出力順4());
-            coverEntity.set出力順5(出力順Entity.get出力順5());
-            coverEntity.set改ページ条件1(出力順Entity.get改頁項目1());
-            coverEntity.set改ページ条件2(出力順Entity.get改頁項目2());
-            coverEntity.set改ページ条件3(出力順Entity.get改頁項目3());
-            coverEntity.set改ページ条件4(出力順Entity.get改頁項目4());
-            coverEntity.set改ページ条件5(出力順Entity.get改頁項目5());
+            KyufuhiTuchiHakkoIchiranEntity coverEntity = hakkoIchiran.帳票データ作成1(processParameter, 出力順Entity);
             KyufuhiTuchiHakkoIchiranReport report = new KyufuhiTuchiHakkoIchiranReport(coverEntity);
             report.writeBy(reportSourceWriter);
         }
@@ -138,8 +137,27 @@ public class KyufuhiTsuchishoReportDBC200044Process extends BatchProcessBase<Kyu
     private ShutsuryokujunRelateEntity get出力順項目() {
         return ReportUtil.get出力順情報(KyufuhiTsuchishoShutsuryokujun.ShutsuryokujunEnum.class,
                 SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC200044.getReportId(),
+                ReportIdDBC.DBC100041.getReportId(),
                 processParameter.getShutsuryokujunId());
     }
 
+    private IShikibetsuTaishoPSMSearchKey get宛名PSM検索きー() {
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
+                KensakuYusenKubun.住登外優先);
+        List<JuminShubetsu> 住民種別 = new ArrayList<>();
+        住民種別.add(JuminShubetsu.日本人);
+        住民種別.add(JuminShubetsu.外国人);
+        住民種別.add(JuminShubetsu.住登外個人_日本人);
+        住民種別.add(JuminShubetsu.住登外個人_外国人);
+        List<JuminJotai> 住民状態 = new ArrayList<>();
+        住民状態.add(JuminJotai.住民);
+        住民状態.add(JuminJotai.住登外);
+        住民状態.add(JuminJotai.消除者);
+        住民状態.add(JuminJotai.転出者);
+        住民状態.add(JuminJotai.死亡者);
+        builder.set住民種別(住民種別);
+        builder.set住民状態(住民状態);
+        builder.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
+        return builder.build();
+    }
 }

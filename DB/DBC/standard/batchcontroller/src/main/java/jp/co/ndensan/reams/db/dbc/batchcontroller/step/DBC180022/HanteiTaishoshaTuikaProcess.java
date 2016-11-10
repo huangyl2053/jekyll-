@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HanteiTaishoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -58,16 +58,15 @@ public class HanteiTaishoshaTuikaProcess extends BatchProcessBase<HanteiTaishosh
 
     @Override
     protected void process(HanteiTaishoshaDaichoEntity entity) {
+        SetainJohoTempEntity 追加判定対象者 = entity.get追加判定対象者();
         DbT1001HihokenshaDaichoEntity 被保険者台帳 = entity.get被保険者台帳();
         List<DbV2512KaigoShotokuNewestEntity> kaigos = entity.get介護所得();
-        DbV2512KaigoShotokuNewestEntity 介護所得 = !kaigos.isEmpty() ? entity.get介護所得().get(0) : null;
+        DbV2512KaigoShotokuNewestEntity 介護所得 = !kaigos.isEmpty() ? kaigos.get(0) : null;
         UaFt200FindShikibetsuTaishoEntity 宛名 = entity.get宛名();
-        SetaiCode setaiCode = 宛名.getSetaiCode();
-        RString setaiCd = setaiCode == null ? RString.EMPTY : setaiCode.getColumnValue();
         HanteiTaishoshaTempEntity insertEntity = new HanteiTaishoshaTempEntity();
-        insertEntity.setHihokenshaNo(被保険者台帳.getHihokenshaNo());
+        insertEntity.setHihokenshaNo(追加判定対象者.getHihokenshaNo());
         insertEntity.setShikibetsuCode(被保険者台帳.getShikibetsuCode());
-        insertEntity.setSetaiCode(new SetaiCode(setaiCd));
+        insertEntity.setSetaiCode(宛名.getSetaiCode());
         insertEntity.setIdoShubetsu(世帯員);
         insertEntity.setAtenaIdobi(宛名.getIdoYMD());
         insertEntity.setAtenaIdoJiyu(宛名.getIdoJiyuCode());
@@ -78,7 +77,7 @@ public class HanteiTaishoshaTuikaProcess extends BatchProcessBase<HanteiTaishosh
         insertEntity.setHihokenshaKubunCode(被保険者台帳.getHihokennshaKubunCode());
         if (介護所得 != null) {
             insertEntity.setShotokuNendo(介護所得.getShotokuNendo());
-            insertEntity.setShotokuRirekiNo(RString.EMPTY);
+            insertEntity.setShotokuRirekiNo(new RString(介護所得.getMotoRirekiNo()));
             insertEntity.setKazeiKubun(介護所得.getKazeiKubun());
             insertEntity.setKazeiKubunGemmenGo(介護所得.getKazeiKubunGemmenGo());
             insertEntity.setGokeiShotokuGaku(介護所得.getGokeiShotokuGaku());

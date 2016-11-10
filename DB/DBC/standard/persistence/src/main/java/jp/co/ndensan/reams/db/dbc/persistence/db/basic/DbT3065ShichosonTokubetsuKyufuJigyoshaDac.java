@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyosha;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyosha.jigyoshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyosha.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyosha.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyosha.serviceCode;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -88,4 +90,23 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaDac implements ISaveable<DbT3
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * count市町村特別給付サービス事業者。
+     *
+     * @param 入力された事業者コード RString
+     * @return 件数
+     */
+    @Transaction
+    public int selectCount(RString 入力された事業者コード) {
+        requireNonNull(入力された事業者コード, UrSystemErrorMessages.値がnull.getReplacedMessage("入力された事業者コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3065ShichosonTokubetsuKyufuJigyosha.class).
+                where(and(
+                                eq(jigyoshaNo, 入力された事業者コード),
+                                eq(logicalDeletedFlag, false))).
+                getCount();
+    }
+
 }

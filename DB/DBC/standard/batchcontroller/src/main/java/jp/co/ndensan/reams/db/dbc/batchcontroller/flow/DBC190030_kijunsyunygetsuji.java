@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.DelSetaiyinShot
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.DelTaishoSeitaiyinTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.InsTaishoSeitaiyinTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdSetaiyinShotokuJyohoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdShoriDateKanriProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp2Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp3Process;

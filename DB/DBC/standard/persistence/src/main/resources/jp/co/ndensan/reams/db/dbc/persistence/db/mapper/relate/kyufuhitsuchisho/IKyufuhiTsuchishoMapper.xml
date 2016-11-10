@@ -22,6 +22,7 @@
         <result property="サービス費用合計額" column="サービス費用合計額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="資格喪失事由コード" column="資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="relateEntity" resultMap="resultMap_getHokenKousei"/>
         <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="getSeikatsuHogoJukyusha" resultMap="resultMap_getSeikatsuHogoJukyusha"
@@ -47,7 +48,8 @@
               ,被保険者台帳管理Newest."shikakuSoshitsuJiyuCode" AS 資格喪失事由コード
               ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
               <if test = "福祉用具貸与ページ出力区分フラグ" >
-              ,介護給付費福祉用具貸与品目一時TBL."jigyoshoNo" 
+              ,<include refid="selectKetteiTsuchiShoMeisai" />
+              <!--,介護給付費福祉用具貸与品目一時TBL."jigyoshoNo"--> 
               </if>
             FROM
               ( 
@@ -77,7 +79,7 @@
                   AND 給付実績基本データ."serviceTeikyoYM" <![CDATA[<=]]> #{サービス年月終了} 
                   AND 給付実績基本データ."yoKaigoJotaiKubunCode" IN <foreach collection="list要介護度" item="values" open="(" separator="," close=")"> #{values} </foreach>
                   <if test="全市町村フラグ">
-                  AND 給付実績基本データ."shokisaiHokenshaNo" = #{証記載保険者番号}
+                  AND substr(給付実績基本データ."shokisaiHokenshaNo", 3, 8) = #{証記載保険者番号}
                   </if>
               ) AS 給付実績基本抽出データ 
               LEFT JOIN rgdb."DbT3018KyufujissekiMeisai" AS 給付実績明細 
@@ -176,7 +178,7 @@
                 ) 
               <if test = "福祉用具貸与ページ出力区分フラグ" > 
               LEFT JOIN "KaigoKyufuHiFukushiYouguTemp" AS 介護給付費福祉用具貸与品目一時TBL 
-                ON 介護給付費福祉用具貸与品目一時TBL."shokisaiHokenshaNo" = 給付実績基本抽出データ."shokisaiHokenshaNo" 
+                ON 介護給付費福祉用具貸与品目一時TBL."shokisaiHokenshaNo" = substr(給付実績基本抽出データ."shokisaiHokenshaNo", 3, 8)
                    AND 介護給付費福祉用具貸与品目一時TBL."hiHokenshaNo" = 給付実績基本抽出データ."hiHokenshaNo" 
                    AND 介護給付費福祉用具貸与品目一時TBL."serviceTeikyoYM" = 給付実績基本抽出データ."serviceTeikyoYM" 
                 </if > 
@@ -274,7 +276,9 @@
                 <if test = "償還分を対象フラグ" > 
                 AND 給付実績基本抽出データ."kyufuJissekiKubunCode" <![CDATA[<>]]> '2' 
                 </if >
-            </where>)
+            </where>
+            )
+            , Temp AS ( 
                 SELECT E.* ,M.count
                     FROM 連番 AS E
                     LEFT JOIN (SELECT count(F.count) AS count
@@ -283,6 +287,28 @@
                     FROM 連番
                     GROUP BY "被保険者番号") AS F) AS M
                     ON 1=1
+            ) 
+            SELECT
+              Temp.*
+              , 宛名."yubinNo" AS yubinNo
+              , 宛名."choikiCode" AS choikiCode
+              , 宛名."gyoseikuCode" AS gyoseikuCode
+              , 宛名."setaiCode" AS setaiCode
+              , 宛名."kanaMeisho" AS kanaMeisho
+              , CASE WHEN 被保険者台帳管理Newest."koikinaiJushochiTokureiFlag"='1' THEN 被保険者台帳管理Newest."koikinaiTokureiSochimotoShichosonCode" 
+                ELSE 被保険者台帳管理Newest."shichosonCode" 
+                END AS shichosonCode
+              , CASE WHEN 被保険者台帳管理Newest."shikakuSoshitsuYMD" != '' THEN '1' 
+                ELSE '' 
+                END AS shikakuJotaiKubun
+            FROM
+              Temp 
+              LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳管理Newest 
+                ON 被保険者台帳管理Newest."hihokenshaNo" = Temp."被保険者番号" 
+              LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+              AS 宛名 
+                ON 被保険者台帳管理Newest."shikibetsuCode" = 宛名."shikibetsuCode"
+            ${orderBy}
     </select>
     <!--一時テーブルの介護給付費福祉用具貸与品目の取得-->
     <resultMap id="resultMap_getHokenKousei" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranRelateEntity" autoMapping="true">
@@ -293,7 +319,7 @@
         <result property="hokenShaNo" column="hokenShaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shokisaiHokenshaNo" column="shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
         <result property="jigyoshoNo" column="jigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="jigyoshoKanji" column="jigyoshoKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceShuruiCode" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -314,51 +340,51 @@
         <result property="todoufukenShikiHiyouGaku" column="todoufukenShikiHiyouGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="todoufukenSaikouHiyouGaku" column="todoufukenSaikouHiyouGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="todoufukenHeikinHiyouGaku" column="todoufukenHeikinHiyouGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="hokenShaSeikyuKensu" column="hokenShaSeikyuKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hokenShaSeikyuKensu" column="hokenShaSeikyuKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="hokenShaSaiteiHiyouGaku" column="hokenShaSaiteiHiyouGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="hokenShaShikiHiyouGaku" column="hokenShaShikiHiyouGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="hokenShaSaikouHiyouGaku" column="hokenShaSaikouHiyouGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="hokenShaHeikinHiyouGaku" column="hokenShaHeikinHiyouGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="zenkokuTanisuHani1" column="zenkokuTanisuHani1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani2" column="zenkokuTanisuHani2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani3" column="zenkokuTanisuHani3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani4" column="zenkokuTanisuHani4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani5" column="zenkokuTanisuHani5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani6" column="zenkokuTanisuHani6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani7" column="zenkokuTanisuHani7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani8" column="zenkokuTanisuHani8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani9" column="zenkokuTanisuHani9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani10" column="zenkokuTanisuHani10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani1Dosu" column="zenkokuTanisuHani1Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani2Dosu" column="zenkokuTanisuHani2Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani3Dosu" column="zenkokuTanisuHani3Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani4Dosu" column="zenkokuTanisuHani4Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani5Dosu" column="zenkokuTanisuHani5Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani6Dosu" column="zenkokuTanisuHani6Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani7Dosu" column="zenkokuTanisuHani7Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani8Dosu" column="zenkokuTanisuHani8Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani9Dosu" column="zenkokuTanisuHani9Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="zenkokuTanisuHani10Dosu" column="zenkokuTanisuHani10Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani1" column="todoufukenTanisuHani1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani2" column="todoufukenTanisuHani2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani3" column="todoufukenTanisuHani3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani4" column="todoufukenTanisuHani4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani5" column="todoufukenTanisuHani5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani6" column="todoufukenTanisuHani6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani7" column="todoufukenTanisuHani7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani8" column="todoufukenTanisuHani8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani9" column="todoufukenTanisuHani9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani10" column="todoufukenTanisuHani10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani1Dosu" column="todoufukenTanisuHani1Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani2Dosu" column="todoufukenTanisuHani2Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani3Dosu" column="todoufukenTanisuHani3Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani4Dosu" column="todoufukenTanisuHani4Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani5Dosu" column="todoufukenTanisuHani5Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani6Dosu" column="todoufukenTanisuHani6Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani7Dosu" column="todoufukenTanisuHani7Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani8Dosu" column="todoufukenTanisuHani8Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani9Dosu" column="todoufukenTanisuHani9Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="todoufukenTanisuHani10Dosu" column="todoufukenTanisuHani10Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="zenkokuTanisuHani1" column="zenkokuTanisuHani1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani2" column="zenkokuTanisuHani2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani3" column="zenkokuTanisuHani3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani4" column="zenkokuTanisuHani4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani5" column="zenkokuTanisuHani5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani6" column="zenkokuTanisuHani6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani7" column="zenkokuTanisuHani7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani8" column="zenkokuTanisuHani8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani9" column="zenkokuTanisuHani9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani10" column="zenkokuTanisuHani10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani1Dosu" column="zenkokuTanisuHani1Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani2Dosu" column="zenkokuTanisuHani2Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani3Dosu" column="zenkokuTanisuHani3Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani4Dosu" column="zenkokuTanisuHani4Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani5Dosu" column="zenkokuTanisuHani5Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani6Dosu" column="zenkokuTanisuHani6Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani7Dosu" column="zenkokuTanisuHani7Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani8Dosu" column="zenkokuTanisuHani8Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani9Dosu" column="zenkokuTanisuHani9Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="zenkokuTanisuHani10Dosu" column="zenkokuTanisuHani10Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani1" column="todoufukenTanisuHani1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani2" column="todoufukenTanisuHani2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani3" column="todoufukenTanisuHani3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani4" column="todoufukenTanisuHani4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani5" column="todoufukenTanisuHani5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani6" column="todoufukenTanisuHani6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani7" column="todoufukenTanisuHani7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani8" column="todoufukenTanisuHani8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani9" column="todoufukenTanisuHani9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani10" column="todoufukenTanisuHani10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani1Dosu" column="todoufukenTanisuHani1Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani2Dosu" column="todoufukenTanisuHani2Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani3Dosu" column="todoufukenTanisuHani3Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani4Dosu" column="todoufukenTanisuHani4Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani5Dosu" column="todoufukenTanisuHani5Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani6Dosu" column="todoufukenTanisuHani6Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani7Dosu" column="todoufukenTanisuHani7Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani8Dosu" column="todoufukenTanisuHani8Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani9Dosu" column="todoufukenTanisuHani9Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="todoufukenTanisuHani10Dosu" column="todoufukenTanisuHani10Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
     </resultMap>
     <sql id="selectKetteiTsuchiShoMeisai">
         介護給付費福祉用具貸与品目一時TBL."rekodoShubetsu"

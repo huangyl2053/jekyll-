@@ -135,7 +135,7 @@ public class ChoshuYuyoTorikesiTsuchiShoB5YokoEditor implements IChoshuYuyoTorik
             source.torikeshiYMD = (取消年月日 != null ? 取消年月日.wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString() : RString.EMPTY);
-            Code 徴収猶予取消種類コード = 徴収猶予取消通知書情報.get徴収猶予の情報().get徴収猶予種類コード();
+            Code 徴収猶予取消種類コード = 徴収猶予取消通知書情報.get徴収猶予の情報().get徴収猶予取消種類コード();
             RString 取消理由1 = RString.EMPTY;
             if (徴収猶予取消種類コード != null) {
                 取消理由1 = CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料徴収猶予取消種類.getコード(),
@@ -157,7 +157,7 @@ public class ChoshuYuyoTorikesiTsuchiShoB5YokoEditor implements IChoshuYuyoTorik
             source.listKibetsu_6 = 期別徴収猶予期間リスト.get(i).get普徴期別金額();
             source.listKibetsu_7 = 期別徴収猶予期間リスト.get(i).get徴収猶予期間();
             source.listZuiji_1 = 随時リスト.get(i);
-            if (期別納期リスト != null && !期別納期リスト.isEmpty()) {
+            if (期別納期リスト != null && !期別納期リスト.isEmpty() && !期別徴収猶予期間リスト.get(i).get徴収猶予期間().isEmpty()) {
                 source.listTorikeshiAtoNoki_1 = 期別納期リスト.get(i);
             }
         }

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyuf
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ServiceTypeModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -33,6 +34,7 @@ public class KogakuKyufuTaishoList {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString ONE_RS = new RString("1");
 
     /**
      * 「「追加する」ボタン
@@ -43,8 +45,10 @@ public class KogakuKyufuTaishoList {
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_btnTsuika(
             KogakuKyufuTaishoListDiv div) {
         getHandler(div).画面制御(false);
-        getHandler(div).clear高額明細合計データ編集エリア();
+        getHandler(div).set追加制御();
         getHandler(div).set明細合計区分制御();
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+        getHandler(div).set追加修正制御(サービス提供年月);
         ViewStateHolder.put(ViewStateKeys.処理モード, 追加);
         return createResponse(div);
     }
@@ -61,8 +65,14 @@ public class KogakuKyufuTaishoList {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         getHandler(div).set高額明細合計データ編集エリア(サービス提供年月);
         getHandler(div).画面制御(false);
-        getHandler(div).修正制御(サービス提供年月);
+        getHandler(div).set追加修正制御(サービス提供年月);
         getHandler(div).set明細合計区分制御();
+        if (ONE_RS.equals(div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey())) {
+            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getBtnJgyosha().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getBtnServiceSyurui().setDisabled(true);
+        }
         ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
         return createResponse(div);
     }
@@ -126,7 +136,9 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onBeforeOpenDialog_btnServiceSyurui(
             KogakuKyufuTaishoListDiv div) {
-        div.setHdnServiceType(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue());
+        ServiceTypeModel serviceTypemodel = new ServiceTypeModel();
+        serviceTypemodel.setサービス種類コード(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue());
+        div.setHdnServiceModel(DataPassingConverter.serialize(serviceTypemodel));
         return createResponse(div);
     }
 
@@ -138,8 +150,11 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onOkClose_btnServiceSyurui(
             KogakuKyufuTaishoListDiv div) {
-        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setValue(div.getHdnServiceType());
-        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setValue(div.getHdnServiceRyakusho());
+        ServiceTypeModel model = DataPassingConverter.deserialize(div.getHdnServiceModel(), ServiceTypeModel.class);
+        if (model != null) {
+            div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setValue(model.getサービス種類コード());
+//        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setValue(model.);
+        }
         return createResponse(div);
     }
 
@@ -249,6 +264,8 @@ public class KogakuKyufuTaishoList {
                 .equals(ResponseHolder.getMessageCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).modifyRow(row, モード, サービス提供年月);
+        } else {
+            return createResponse(div);
         }
         getHandler(div).clear高額明細合計データ編集エリア();
         return createResponse(div);

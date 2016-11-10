@@ -62,7 +62,7 @@ public class SeikyumeisaiKyufukanrihyoHenreiHoryuIchiranEditor implements ISeiky
         source.listUpper_2 = entity.get事業者番号();
         source.listUpper_3 = entity.get登録被保険者番号();
         source.listUpper_4 = entity.get種別();
-        if (RString.isNullOrEmpty(entity.getサービス提供年月())) {
+        if (!RString.isNullOrEmpty(entity.getサービス提供年月())) {
             source.listUpper_5 = new FlexibleDate(entity.getサービス提供年月())
                     .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).getYearMonth();
         }

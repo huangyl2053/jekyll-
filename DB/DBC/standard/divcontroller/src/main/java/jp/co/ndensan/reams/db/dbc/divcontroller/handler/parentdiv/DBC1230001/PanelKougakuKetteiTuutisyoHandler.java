@@ -64,6 +64,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
     private static final RString 支払予定日印字有無_有 = new RString("1");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
     private static final RString コード_ログコード = new RString("0003");
+    private static final int INT_4 = 4;
 
     private PanelKougakuKetteiTuutisyoHandler(PanelKougakuKetteiTuutisyoDiv div) {
         this.div = div;
@@ -158,7 +159,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
             }
         });
         for (Decimal 管理番号 : 重複排除管理番号リスト) {
-            管理番号ドロップダウンリスト.add(new KeyValueDataSource(new RString(管理番号.toString()), new RString(管理番号.toString())));
+            管理番号ドロップダウンリスト.add(new KeyValueDataSource(new RString(管理番号.toString()), new RString(管理番号.toString()).padZeroToLeft(INT_4)));
         }
         Decimal 管理番号 = 管理番号リスト.get(0);
         div.getDdlKanliBanngou().setDataSource(管理番号ドロップダウンリスト);
@@ -246,13 +247,13 @@ public final class PanelKougakuKetteiTuutisyoHandler {
         AccessLogger.log(AccessLogType.更新, toPersonalData(被保険者番号, 識別コード));
 
     }
-    
+
     /**
      * isデータの変更。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス提供年月リスト List<FlexibleYearMonth>
-     * 
+     *
      * @return isデータの変更
      */
     public boolean isデータの変更(HihokenshaNo 被保険者番号, List<FlexibleYearMonth> サービス提供年月リスト) {
@@ -260,11 +261,13 @@ public final class PanelKougakuKetteiTuutisyoHandler {
         IBunshoNoFinder finder = BunshoNoFinderFactory.createInstance();
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         BunshoNo bunshoNo = finder.get文書番号管理(帳票ID, システム日付);
-        
+        if (サービス提供年月リスト.isEmpty()) {
+            return false;
+        }
         FlexibleYearMonth サービス提供年月 = サービス提供年月リスト.get(0);
         List<Decimal> 管理番号リスト = manager.get管理番号リスト(被保険者番号, サービス提供年月);
         Decimal 管理番号 = 管理番号リスト.get(0);
-        
+
         return !定数_初回申請用.equals(div.getRadSyoukaiSinnsei().getSelectedKey())
                 || !サービス提供年月.toDateString().equals(div.getDdlServiceYearMonth().getSelectedKey())
                 || !管理番号.equals(new Decimal(div.getDdlKanliBanngou().getSelectedKey().toString()))
@@ -278,7 +281,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
                 被保険者番号.getColumnValue());
         return PersonalData.of(識別コード, expandedInfo);
     }
-    
+
     private RString getEdit文書番号(BunshoNo bunshoNo) {
         if (null == bunshoNo) {
             return RString.EMPTY;

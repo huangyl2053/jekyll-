@@ -5,11 +5,26 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.InitJissekiCheckProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.InsShiharaihohoHenkoTempBeforeProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.InsShiharaihohoHenkoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.UpdJIssekiFutangakuTempAfterProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.UpdJIssekiFutangakuTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.UpdshafukuKeigenTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040031.ClearJikofutangakuInfoHoseiTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040031.ClearJissekiFutangakuDataTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040031.JikofutangakuTempUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040031.JissekiFutangakuDataToTyukanDbData;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040031.TyukanDbDataToJissekiFutangakuData;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040031.DBC040031_KogakugassanJikofutangakuInfoHoseiSubParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040010.InsShiharaihohoHenkoTempBeforeProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040010.UpdJIssekiFutangakuTempAfterProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040010.UpdshafukuKeigenTempProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額合算自己負担額情報補正（一括）_サブ処理のフローです。
@@ -19,10 +34,33 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBase<DBC040031_KogakugassanJikofutangakuInfoHoseiSubParameter> {
 
     private static final String 高額支給額集計処理 = "sumJikofutangaku";
+    private static final String 中間DBデータ削除 = " clearJikofutangakuInfoHoseiTemp";
+    private static final String 実績基本データTO中間DBデータ = "jissekiFutangakuToTyukanDb";
+    private static final String 実績基本データ削除 = "clearJissekiFutangakuDataTemp";
+    private static final String 中間DBデータTO実績基本データ = "tyukanDbToJissekiFutangaku";
+    private static final String INITJISSEKICHECKPROCESS = "InitJissekiCheckProcess";
+    private static final String INSSHIHARAIHOHOHENKOTEMPBEFOREPROCESS = "InsShiharaihohoHenkoTempBeforeProcess";
+    private static final String INSSHIHARAIHOHOHENKOTEMPPROCESS = "InsShiharaihohoHenkoTempProcess";
+    private static final String UPDSHAFUKUKEIGENTEMPPROCESS = "UpdshafukuKeigenTempProcess";
+    private static final String UPDJISSEKIFUTANGAKUTEMPPROCESS = "UpdJIssekiFutangakuTempProcess";
+    private static final String UPDJISSEKIFUTANGAKUTEMPAFTERPROCESS = "UpdJIssekiFutangakuTempAfterProcess";
 
     @Override
     protected void defineFlow() {
-        // TODO 給付実績抽出（償還）処理
+        executeStep(実績基本データ削除);
+        executeStep(中間DBデータTO実績基本データ);
+        executeStep(INITJISSEKICHECKPROCESS);
+        boolean isデータがあり = getResult(Boolean.class, new RString(INITJISSEKICHECKPROCESS), InitJissekiCheckProcess.OUTPUTNAME);
+        if (!isデータがあり) {
+            return;
+        }
+        executeStep(INSSHIHARAIHOHOHENKOTEMPBEFOREPROCESS);
+        executeStep(INSSHIHARAIHOHOHENKOTEMPPROCESS);
+        executeStep(UPDSHAFUKUKEIGENTEMPPROCESS);
+        executeStep(UPDJISSEKIFUTANGAKUTEMPPROCESS);
+        executeStep(UPDJISSEKIFUTANGAKUTEMPAFTERPROCESS);
+        executeStep(中間DBデータ削除);
+        executeStep(実績基本データTO中間DBデータ);
         executeStep(高額支給額集計処理);
 
     }
@@ -30,6 +68,61 @@ public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBa
     @Step(高額支給額集計処理)
     IBatchFlowCommand sumJikofutangaku() {
         return loopBatch(JikofutangakuTempUpdateProcess.class).define();
+    }
+
+    @Step(中間DBデータ削除)
+    IBatchFlowCommand clearJikofutangakuInfoHoseiTemp() {
+        return loopBatch(ClearJikofutangakuInfoHoseiTempProcess.class).define();
+    }
+
+    @Step(実績基本データTO中間DBデータ)
+    IBatchFlowCommand jissekiFutangakuToTyukanDb() {
+        return loopBatch(JissekiFutangakuDataToTyukanDbData.class).define();
+    }
+
+    @Step(実績基本データ削除)
+    IBatchFlowCommand clearJissekiFutangakuDataTemp() {
+        return loopBatch(ClearJissekiFutangakuDataTempProcess.class).define();
+    }
+
+    @Step(中間DBデータTO実績基本データ)
+    IBatchFlowCommand tyukanDbToJissekiFutangaku() {
+        return loopBatch(TyukanDbDataToJissekiFutangakuData.class).define();
+    }
+
+    @Step(INITJISSEKICHECKPROCESS)
+    IBatchFlowCommand initJissekiCheckProcess() {
+        return simpleBatch(InitJissekiCheckProcess.class).define();
+    }
+
+    @Step(INSSHIHARAIHOHOHENKOTEMPBEFOREPROCESS)
+    IBatchFlowCommand insShiharaihohoHenkoTempBeforeProcess() {
+        InsShiharaihohoHenkoTempBeforeProcessParameter param
+                = new InsShiharaihohoHenkoTempBeforeProcessParameter(false);
+        return loopBatch(InsShiharaihohoHenkoTempBeforeProcess.class).arguments(param).define();
+    }
+
+    @Step(INSSHIHARAIHOHOHENKOTEMPPROCESS)
+    IBatchFlowCommand insShiharaihohoHenkoTempProcess() {
+        return loopBatch(InsShiharaihohoHenkoTempProcess.class).define();
+    }
+
+    @Step(UPDSHAFUKUKEIGENTEMPPROCESS)
+    IBatchFlowCommand updshafukuKeigenTempProcess() {
+        UpdshafukuKeigenTempProcessParameter param = new UpdshafukuKeigenTempProcessParameter(false);
+        return loopBatch(UpdshafukuKeigenTempProcess.class).arguments(param).define();
+    }
+
+    @Step(UPDJISSEKIFUTANGAKUTEMPPROCESS)
+    IBatchFlowCommand updJIssekiFutangakuTempProcess() {
+        return loopBatch(UpdJIssekiFutangakuTempProcess.class).define();
+    }
+
+    @Step(UPDJISSEKIFUTANGAKUTEMPAFTERPROCESS)
+    IBatchFlowCommand updJIssekiFutangakuTempAfterProcess() {
+        UpdJIssekiFutangakuTempAfterProcessParameter param = new UpdJIssekiFutangakuTempAfterProcessParameter(
+                getParameter().get処理区分(), RDateTime.now());
+        return loopBatch(UpdJIssekiFutangakuTempAfterProcess.class).arguments(param).define();
     }
 
 }

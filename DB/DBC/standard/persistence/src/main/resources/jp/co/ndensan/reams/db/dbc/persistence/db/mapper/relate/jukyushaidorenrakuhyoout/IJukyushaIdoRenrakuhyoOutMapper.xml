@@ -665,6 +665,12 @@
          ORDER BY "IdouTemp2". "被保険者番号" ASC
     </select>
     <resultMap id="resultMap_比較処理データ" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.DataCompareShoriEntity" autoMapping="false">
+        <id column="IdouTemp2_hiHokenshaNo"/>
+        <id column="IdouTemp2_idoYMD"/>
+        <id column="IdouTemp2_rirekiNo"/>
+        <id column="dbT3001JukyushaIdoRenrakuhyo_hiHokenshaNo"/>
+        <id column="dbT3001JukyushaIdoRenrakuhyo_idoYMD"/>
+        <id column="dbT3001JukyushaIdoRenrakuhyo_rirekiNo"/>
         <association property="受給者異動送付" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3001JukyushaIdoRenrakuhyoMapper.ResultMap_DbT3001JukyushaIdoRenrakuhyoEntity"/>
         <association property="異動一時2" resultMap="resultMap_異動一時2"/>
     </resultMap>

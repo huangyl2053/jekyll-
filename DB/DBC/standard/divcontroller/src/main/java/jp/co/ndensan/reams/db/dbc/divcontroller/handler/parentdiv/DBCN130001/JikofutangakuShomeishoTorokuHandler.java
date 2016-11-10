@@ -94,6 +94,7 @@ public class JikofutangakuShomeishoTorokuHandler {
             key.setValue(year);
             keyList.add(key);
         }
+
         div.getDdlShinkiTaishoNendo().setDataSource(keyList);
 
         RDate 基準日 = RDate.getNowDate();
@@ -103,6 +104,12 @@ public class JikofutangakuShomeishoTorokuHandler {
 
         div.getDdlKoshinTaishoNendo().setDataSource(keyList);
         div.getTxtKoshinShikyuShinseishoSeiriNo().setValue(RString.EMPTY);
+
+        RString key = 基準日.getYear().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN)
+                .fillType(FillType.ZERO).toDateString().replace(年号_平.toString(), 平成.toString());
+        div.getDdlShinkiTaishoNendo().setSelectedKey(key);
+        div.getDdlKoshinTaishoNendo().setSelectedKey(key);
     }
 
     /**
@@ -666,14 +673,14 @@ public class JikofutangakuShomeishoTorokuHandler {
             row.setShikyuShinseishoSeiriNo(shomeisho.get支給申請書整理番号());
             RStringBuilder 転入前証記載保険者 = new RStringBuilder();
             転入前証記載保険者.append(shomeisho.get転入前保険者番号().value());
-            転入前証記載保険者.append(new RString(""));
+            転入前証記載保険者.append(new RString(" "));
             転入前証記載保険者.append(shomeisho.get転入前保険者名());
             row.setTennyumaeShokisaiHokensha(転入前証記載保険者.toRString());
             row.setRirekiNo(new RString(String.valueOf(shomeisho.get履歴番号())));
             RStringBuilder 被保険者期間 = new RStringBuilder();
-            被保険者期間.append(shomeisho.get対象計算期間開始年月日().toString());
+            被保険者期間.append(shomeisho.get被保険者期間開始年月日().toString());
             被保険者期間.append(new RString("～"));
-            被保険者期間.append(shomeisho.get対象計算期間終了年月日().toString());
+            被保険者期間.append(shomeisho.get被保険者期間終了年月日().toString());
             row.setHihokenshaKikan(被保険者期間.toRString());
             TextBoxFlexibleDate uketsukeDate = new TextBoxFlexibleDate();
             uketsukeDate.setValue(shomeisho.get受付年月日());
@@ -687,54 +694,54 @@ public class JikofutangakuShomeishoTorokuHandler {
     /**
      * 証明書登録が読取専用に設定します。
      */
-    public void set証明書登録To読取専用() {
-        div.getTxtTorokuTaishoNendo().setReadOnly(true);
-        div.getTxtTorokuShokisaiHokenshaNo().setReadOnly(true);
-        div.getTxtTorokuShikyuShinseishoSeiriNo().setReadOnly(true);
-        div.getTxtTorokuRirekiNo().setReadOnly(true);
-        div.getTxtUketsukeDate().setReadOnly(true);
-        div.getTxtJikofutangakuShomeishoSeiriNo().setReadOnly(true);
-        div.getCcdTennyumaeHokensha().setReadOnly(true);
-        div.getTxtTaishoKikan().setReadOnly(true);
-        div.getTxtHihokenshaKikan().setReadOnly(true);
-        div.getTxtHakkoDate().setReadOnly(true);
-        div.getTxtYubinNo().setReadOnly(true);
-        div.getTxtRenrakusakiJusho().setReadOnly(true);
-        div.getTxtRenrakusakiMei1().setReadOnly(true);
-        div.getTxtRenrakusakiMei2().setReadOnly(true);
+    public void set証明書登録To読取専用(boolean 読取専用) {
+        div.getTxtTorokuTaishoNendo().setReadOnly(読取専用);
+        div.getTxtTorokuShokisaiHokenshaNo().setReadOnly(読取専用);
+        div.getTxtTorokuShikyuShinseishoSeiriNo().setReadOnly(読取専用);
+        div.getTxtTorokuRirekiNo().setReadOnly(読取専用);
+        div.getTxtUketsukeDate().setReadOnly(読取専用);
+        div.getTxtJikofutangakuShomeishoSeiriNo().setReadOnly(読取専用);
+        div.getCcdTennyumaeHokensha().setReadOnly(読取専用);
+        div.getTxtTaishoKikan().setReadOnly(読取専用);
+        div.getTxtHihokenshaKikan().setReadOnly(読取専用);
+        div.getTxtHakkoDate().setReadOnly(読取専用);
+        div.getTxtYubinNo().setReadOnly(読取専用);
+        div.getTxtRenrakusakiJusho().setReadOnly(読取専用);
+        div.getTxtRenrakusakiMei1().setReadOnly(読取専用);
+        div.getTxtRenrakusakiMei2().setReadOnly(読取専用);
 
-        div.getTxtJikofutangaku8().setReadOnly(true);
-        div.getTxtUchiFutangaku8().setReadOnly(true);
+        div.getTxtJikofutangaku8().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku8().setReadOnly(読取専用);
 
-        div.getTxtJikofutangaku9().setReadOnly(true);
-        div.getTxtUchiFutangaku9().setReadOnly(true);
+        div.getTxtJikofutangaku9().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku9().setReadOnly(読取専用);
 
-        div.getTxtJikofutangaku10().setReadOnly(true);
-        div.getTxtUchiFutangaku10().setReadOnly(true);
+        div.getTxtJikofutangaku10().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku10().setReadOnly(読取専用);
 
-        div.getTxtJikofutangaku11().setReadOnly(true);
-        div.getTxtUchiFutangaku11().setReadOnly(true);
+        div.getTxtJikofutangaku11().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku11().setReadOnly(読取専用);
 
-        div.getTxtJikofutangaku12().setReadOnly(true);
-        div.getTxtUchiFutangaku12().setReadOnly(true);
+        div.getTxtJikofutangaku12().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku12().setReadOnly(読取専用);
 
-        div.getTxtJikofutangaku1().setReadOnly(true);
-        div.getTxtUchiFutangaku1().setReadOnly(true);
-        div.getTxtJikofutangaku2().setReadOnly(true);
-        div.getTxtJikofutangaku2().setReadOnly(true);
-        div.getTxtJikofutangaku3().setReadOnly(true);
-        div.getTxtUchiFutangaku3().setReadOnly(true);
-        div.getTxtJikofutangaku4().setReadOnly(true);
-        div.getTxtUchiFutangaku4().setReadOnly(true);
-        div.getTxtJikofutangaku5().setReadOnly(true);
-        div.getTxtUchiFutangaku5().setReadOnly(true);
-        div.getTxtJikofutangaku6().setReadOnly(true);
-        div.getTxtUchiFutangaku6().setReadOnly(true);
-        div.getTxtJikofutangaku7().setReadOnly(true);
-        div.getTxtUchiFutangaku7().setReadOnly(true);
-        div.getTxtJikofutangakuGokei().setReadOnly(true);
-        div.getTxtUchiFutangakuGokei().setReadOnly(true);
-        div.getBtnGokei().setDisabled(true);
+        div.getTxtJikofutangaku1().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku1().setReadOnly(読取専用);
+        div.getTxtJikofutangaku2().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku2().setReadOnly(読取専用);
+        div.getTxtJikofutangaku3().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku3().setReadOnly(読取専用);
+        div.getTxtJikofutangaku4().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku4().setReadOnly(読取専用);
+        div.getTxtJikofutangaku5().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku5().setReadOnly(読取専用);
+        div.getTxtJikofutangaku6().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku6().setReadOnly(読取専用);
+        div.getTxtJikofutangaku7().setReadOnly(読取専用);
+        div.getTxtUchiFutangaku7().setReadOnly(読取専用);
+        div.getTxtJikofutangakuGokei().setReadOnly(読取専用);
+        div.getTxtUchiFutangakuGokei().setReadOnly(読取専用);
+        div.getBtnGokei().setDisabled(読取専用);
     }
 
     /**

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyuf
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyoshinseishohakkoichiransource.KogakuJigyoShinseishoHakkoIchiranSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -39,14 +41,18 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 申請書発行一覧表の発行処理です。
@@ -64,6 +70,9 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 一覧EUCエンティティID = new RString("DBC200091");
+    private static final RString 旧措置 = new RString("旧措置者");
+    private static final RString 対象 = new RString("対象");
+    private static final RString 対象外 = new RString("対象外");
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
 
@@ -136,24 +145,26 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
         report.writeBy(reportSourceWriter);
 
         csvWriter.writeLine(new JigyoShinseishoHakkoIchiranhyoCsvEntity(
-                RDate.getNowDate().toDateString(),
+                getパターン32(RDate.getNowDate()),
                 new RString(count),
                 entity.get申請情報().getHihokenshaNoChohyo().value(),
-                entity.get申請情報().getServiceTeikyoYMChohyo().toDateString(),
+                getパターン82(entity.get申請情報().getServiceTeikyoYMChohyo()),
                 get名称(entity.get申請情報().getMeishoChohyo()),
                 get郵便番号(entity.get申請情報().getYubinNoChohyo()),
                 get住所(entity.get申請情報().getJushoChohyo()),
                 get行政区コード(entity.get申請情報().getGyoseikuCodeChohyo()),
                 entity.get申請情報().getGyoseikuNameChohyo(),
-                new RString(String.valueOf(entity.get申請情報().isKyuSochishaFlagChohyo())),
-                get要介護状態区分(entity.get申請情報().getYokaigoJotaiKubunCodeChohyo()),
-                getYMD(entity.get申請情報().getNinteiYukoKikanKaishiYMDChohyo()),
-                getYMD(entity.get申請情報().getNinteiYukoKikanShuryoYMDChohyo()),
+                entity.get申請情報().isKyuSochishaFlagChohyo() ? 旧措置 : RString.EMPTY,
+                get要介護状態区分コード(entity.get申請情報().getYokaigoJotaiKubunCodeChohyo()),
+                get要介護状態区分(get要介護状態区分コード(entity.get申請情報().getYokaigoJotaiKubunCodeChohyo())),
+                getパターン32(entity.get申請情報().getNinteiYukoKikanKaishiYMDChohyo()),
+                getパターン32(entity.get申請情報().getNinteiYukoKikanShuryoYMDChohyo()),
                 get金額(entity.get申請情報().getHonninShiharaiGakuChohyo()),
                 get金額(entity.get申請情報().getShikyuKingakuChohyo()),
-                new RString(String.valueOf(entity.get申請情報().isHojinKeigenTaishoFlagChohyo())),
-                new RString(String.valueOf(entity.get申請情報().isJidoShokanTaishoFlagChohyo())),
-                entity.get申請情報().getShikakuSoshitsuJiyuCodeChohyo())
+                entity.get申請情報().isHojinKeigenTaishoFlagChohyo() ? 対象 : 対象外,
+                entity.get申請情報().isJidoShokanTaishoFlagChohyo() ? 対象 : 対象外,
+                entity.get申請情報().getShikakuSoshitsuJiyuCodeChohyo(),
+                get資格喪失事由(entity.get申請情報().getShikakuSoshitsuJiyuCodeChohyo()))
         );
 
         count = count + 1;
@@ -193,25 +204,47 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
         return gyoseikuCode.getColumnValue();
     }
 
-    private RString get要介護状態区分(Code yokaigoJotaiKubunCode) {
+    private RString get要介護状態区分コード(Code yokaigoJotaiKubunCode) {
         if (yokaigoJotaiKubunCode == null) {
             return RString.EMPTY;
         }
         return yokaigoJotaiKubunCode.getKey();
     }
 
-    private RString getYMD(FlexibleDate ymd) {
-        if (ymd == null) {
+    private RString get要介護状態区分(RString yokaigoJotaiKubunCode) {
+        if (RString.isNullOrEmpty(yokaigoJotaiKubunCode)) {
             return RString.EMPTY;
         }
-        return new RString(ymd.toString());
+        return YokaigoJotaiKubun.toValue(yokaigoJotaiKubunCode).get名称();
     }
 
-    private RString get金額(Decimal kinGaku) {
-        if (kinGaku == null) {
-            return RString.EMPTY;
+    private RString get金額(Decimal decimal) {
+        return decimal == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(decimal, 0);
+    }
+
+    private RString getパターン32(RDate date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
-        return new RString(kinGaku.toString());
+        return RString.EMPTY;
+    }
+
+    private RString getパターン32(FlexibleDate date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getパターン82(FlexibleYearMonth date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get資格喪失事由(RString code) {
+        return RString.isNullOrEmpty(code) ? RString.EMPTY : ShikakuSoshitsuJiyu.toValue(code).get名称();
     }
 
 }

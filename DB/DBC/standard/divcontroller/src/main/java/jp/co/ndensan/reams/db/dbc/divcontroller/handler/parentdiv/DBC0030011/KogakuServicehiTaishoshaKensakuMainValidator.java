@@ -43,6 +43,20 @@ public class KogakuServicehiTaishoshaKensakuMainValidator {
     }
 
     /**
+     * 対象データなしチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate対象データなし() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(KogakuServicehiTaishoshaKensakuMainSpec.対象データなしチェック)
+                .thenAdd(KogakuServicehiTaishoshaKensakuMainMessage.対象データなしチェック)
+                .messages());
+        return messages;
+    }
+
+    /**
      * 年月を指定入力チェックです。
      *
      * @return エラーメッセージ

@@ -109,8 +109,8 @@ public class FukaErrorReportView {
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
         RString batchID = RString.EMPTY;
         RDateTime 基準日時 = RDateTime.MIN;
-        RString menuId = getMenuId();
         TITLE = RString.EMPTY;
+        RString menuId = getMenuId();
         if (!RString.isNullOrEmpty(menuId)) {
             ShoriDateKanri shori = FukaErrorListService.createInstance().getFukaBatchID(menuId);
             if (shori != null) {

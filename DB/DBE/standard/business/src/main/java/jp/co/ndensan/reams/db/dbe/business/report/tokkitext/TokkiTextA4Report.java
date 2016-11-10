@@ -42,7 +42,7 @@ public class TokkiTextA4Report extends Report<TokkiTextA4ReportSource> {
         List<RString> テキスト全面List = data.getTokkiText();
         List<RString> イメージ全面List = data.getTokkiImg();
         if (テキスト全面イメージ.equals(data.get特記パターン())) {
-            if (TokkijikoTextImageKubun.イメージ.getコード().equals(data.get特記事項テキスト_イメージ区分())) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(data.get特記事項テキスト_イメージ区分())) {
                 set全面テキスト(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
             } else {
                 set全面イメージ(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);

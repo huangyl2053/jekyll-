@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.dbc200017;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -40,7 +41,6 @@ public class KogakuShikyuShinseishoHakkoIchiranSource implements IReportSource {
     public RString kaipage4;
     @ReportItem(name = "kaipage5", length = 20, order = 13)
     public RString kaipage5;
-    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "listHakkoTaishosha_1", length = 4, order = 14)
     public RString listHakkoTaishosha_1;
     @ReportItem(name = "listHakkoTaishosha_2", length = 10, order = 15)
@@ -80,17 +80,23 @@ public class KogakuShikyuShinseishoHakkoIchiranSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-    @ReportItem(name = "tsuchishoNo", length = 20, order = 31)
-    public RString tsuchishoNo;
-    @ReportItem(name = "サービス種類", length = 20, order = 32)
-    public RString サービス種類;
-    @ReportItem(name = "氏名カナ", length = 20, order = 33)
+    @ReportItem(name = "氏名カナ", length = 100, order = 33)
     public RString 氏名カナ;
+    @ReportItem(name = "choikiCode", length = 20, order = 34)
+    public RString choikiCode;
+    @ReportItem(name = "市町村コード", length = 20, order = 35)
+    public RString 市町村コード;
+    @ReportItem(name = "証記載保険者番号", length = 20, order = 35)
+    public RString 証記載保険者番号;
+    @ReportItem(name = "自動償還対象フラグ", length = 10, order = 35)
+    public boolean 自動償還対象フラグ;
 // </editor-fold>
 
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報;
 
     /**
      * KogakuShikyuShinseishoHakkoIchiranSourceのENUM

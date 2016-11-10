@@ -43,8 +43,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT7130KaigoServiceShuruiDac {
 
-    private static final RString 定値_エンティティ
-            = new RString("居宅サービス区分支給限度額エンティティ");
+    private static final RString 定値_エンティティ = new RString("居宅サービス区分支給限度額エンティティ");
+    private static final FlexibleYearMonth 定値_999999 = new FlexibleYearMonth(new RString("999999"));
 
     @InjectSession
     private SqlSession session;
@@ -229,7 +229,8 @@ public class DbT7130KaigoServiceShuruiDac {
                 table(DbT7130KaigoServiceShurui.class).
                 where(and(eq(serviceShuruiCd, サービス種類),
                                 leq(teikyoKaishiYM, 提供開始年月),
-                                or(leq(提供開始年月, teikyoshuryoYM), isNULL(teikyoshuryoYM)))).
+                                or(leq(提供開始年月, teikyoshuryoYM), isNULL(teikyoshuryoYM), eq(FlexibleYearMonth.EMPTY,
+                                                teikyoshuryoYM)))).
                 toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
 
@@ -275,7 +276,7 @@ public class DbT7130KaigoServiceShuruiDac {
                 selectSpecific(serviceShuruiCd, serviceShuruiMeisho).
                 table(DbT7130KaigoServiceShurui.class).
                 where(and(
-                                isNULL(teikyoshuryoYM),
+                                in(teikyoshuryoYM, FlexibleYearMonth.EMPTY, 定値_999999),
                                 in(serviceBunrruicode, list))).
                 order(by(DbT7130KaigoServiceShurui.serviceShuruiCd, Order.ASC)).
                 toList(DbT7130KaigoServiceShuruiEntity.class);

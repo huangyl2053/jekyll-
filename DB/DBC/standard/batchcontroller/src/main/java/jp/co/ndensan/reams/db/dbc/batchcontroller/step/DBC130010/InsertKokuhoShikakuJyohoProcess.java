@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.InsKokuhoShikakuJyohoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoInpotoyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7123KokuhoShikakuInfoEntity;
@@ -28,6 +29,9 @@ public class InsertKokuhoShikakuJyohoProcess extends BatchProcessBase<KokuhoShik
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get国保資格情報インポート用Entitｙリスト");
     @BatchWriter
     private IBatchTableWriter<DbT7123KokuhoShikakuInfoEntity> 国保資格情報Writer;
+    private InsKokuhoShikakuJyohoProcessParameter parameter;
+    private static final RString ＩＦ種類_電算２ = new RString("2");
+    private static final RString 履歴番号_0001 = new RString("0001");
 
     @Override
     protected void beforeExecute() {
@@ -55,7 +59,11 @@ public class InsertKokuhoShikakuJyohoProcess extends BatchProcessBase<KokuhoShik
     private DbT7123KokuhoShikakuInfoEntity get国保資格情報Entity(KokuhoShikakuJyohoInpotoyoEntity entity) {
         DbT7123KokuhoShikakuInfoEntity 国保資格情報Entity = new DbT7123KokuhoShikakuInfoEntity();
         国保資格情報Entity.setShikibetsuCode(new ShikibetsuCode(entity.get識別コード()));
-        国保資格情報Entity.setRirekiNo(entity.get履歴番号());
+        if (ＩＦ種類_電算２.equals(parameter.getIf種類())) {
+            国保資格情報Entity.setRirekiNo(履歴番号_0001);
+        } else {
+            国保資格情報Entity.setRirekiNo(entity.get履歴番号());
+        }
         国保資格情報Entity.setKokuhoNo(entity.get国保番号());
         国保資格情報Entity.setKokuhoHokenshaNo(entity.get国保保険者番号());
         国保資格情報Entity.setKokuhoHokenshoNo(entity.get国保保険証番号());

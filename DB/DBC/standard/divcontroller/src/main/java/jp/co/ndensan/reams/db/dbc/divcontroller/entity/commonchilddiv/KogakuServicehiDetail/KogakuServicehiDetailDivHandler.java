@@ -152,6 +152,7 @@ public class KogakuServicehiDetailDivHandler {
      * clear画面内容
      */
     public void clear画面内容() {
+        div.getTplShinseisha().getTxtShinseiYMD().clearValue();
         div.getTxtKanriBango().clearValue();
         div.getTxtShimeiKanji().clearValue();
         div.getTxtShimeiKana().clearValue();
@@ -246,7 +247,8 @@ public class KogakuServicehiDetailDivHandler {
      * @return RString
      */
     public RString get電話番号() {
-        return div.getTxtTelNo().getDomain().value();
+        return div.getTxtTelNo().getDomain() == null || div.getTxtTelNo().getDomain().isEmpty()
+                ? RString.EMPTY : div.getTxtTelNo().getDomain().value();
     }
 
     /**

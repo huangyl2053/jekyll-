@@ -52,8 +52,14 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
     @Override
     protected void initialize() {
         util = new DBC040010DataUtil();
-        RString configValue = DbBusinessConfig.get(
-                ConfigNameDBC.高額合算自己負担額計算_抽出対象自己負担基準額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RString configValue;
+        if (!processParameter.is事業分フラグ()) {
+            configValue = DbBusinessConfig.get(
+                    ConfigNameDBC.高額合算自己負担額計算_抽出対象自己負担基準額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        } else {
+            configValue = DbBusinessConfig.get(
+                    ConfigNameDBC.事業高額合算自己負担額計算_抽出対象自己負担基準額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        }
         抽出対象自己負担基準額 = RString.isNullOrEmpty(configValue) ? Decimal.ZERO : new Decimal(configValue.toString());
         beforKeyOf高額合算自己負担額 = RString.EMPTY;
     }

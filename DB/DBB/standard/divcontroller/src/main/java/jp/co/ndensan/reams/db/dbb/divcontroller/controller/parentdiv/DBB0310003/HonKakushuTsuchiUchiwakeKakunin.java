@@ -81,7 +81,7 @@ public class HonKakushuTsuchiUchiwakeKakunin {
             } else if (new RString(DbbQuestionMessages.変更途中の内容破棄確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                TsuchishoUchiwakeJoken 変更打分け方法 = handler.get確認画面の打分け方法(false, 切替前の打ち分け条件);
+                TsuchishoUchiwakeJoken 変更打分け方法 = handler.get確認画面の打分け方法(false, 切替前の打ち分け条件, 切替前の打ち分け条件);
                 handler.切替時保存処理(変更打分け方法);
             }
         }
@@ -123,11 +123,13 @@ public class HonKakushuTsuchiUchiwakeKakunin {
             if (new RString(DbbQuestionMessages.打分け方法名称の上書き確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                handler.設定時保存処理_変更区分(打ち分け条件画面);
+                RString 打ち分け条件view = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
+                handler.設定時保存処理_変更区分(打ち分け条件画面, 打ち分け条件view);
                 ViewStateHolder.put(ViewStateKeys.打分け方法情報キー, 打ち分け条件画面);
             }
         } else {
-            handler.設定時保存処理_変更区分(打ち分け条件画面);
+            RString 打ち分け条件view = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
+            handler.設定時保存処理_変更区分(打ち分け条件画面, 打ち分け条件view);
             ViewStateHolder.put(ViewStateKeys.打分け方法情報キー, 打ち分け条件画面);
         }
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();

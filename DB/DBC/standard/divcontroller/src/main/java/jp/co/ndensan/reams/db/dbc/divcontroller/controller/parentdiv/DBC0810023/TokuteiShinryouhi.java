@@ -77,7 +77,7 @@ public class TokuteiShinryouhi {
             List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList = ShokanbaraiJyokyoShokai.createInstance()
                     .getTokuteiShinryohiData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
             if (!(shokanTokuteiShinryohiList == null || shokanTokuteiShinryohiList.isEmpty())) {
-            getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
+                getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
             }
         }
         if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
@@ -90,14 +90,14 @@ public class TokuteiShinryouhi {
             List<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList = ShokanbaraiJyokyoShokai
                     .createInstance().getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号, null);
-            
-           if (!(shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty())) {
-            getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
-           }
+
+            if (!(shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty())) {
+                getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
+            }
         }
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
-        
+
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
 
         return createResponse(div);
@@ -131,6 +131,10 @@ public class TokuteiShinryouhi {
                 様式番号);
         div.getPanelThree().getPanelFour().setVisible(false);
         div.getPanelThree().getPanelFive().setVisible(true);
+        div.getPanelThree().getPanelFive().getLblComment1().setDisplayNone(false);
+        div.getPanelThree().getPanelFive().getLblComment2().setDisplayNone(false);
+        div.getPanelThree().getPanelFive().getLblComment1().setVisible(true);
+        div.getPanelThree().getPanelFive().getLblComment2().setVisible(true);
         return createResponse(div);
     }
 

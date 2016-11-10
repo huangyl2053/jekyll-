@@ -31,11 +31,6 @@ public class UpdSeihoTempProcess extends BatchProcessBase<IdouTempEntity> {
     BatchEntityCreatedTempTableWriter 異動一時tableWriter;
 
     @Override
-    protected void initialize() {
-        super.initialize();
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(READ_DATA_ID);
     }

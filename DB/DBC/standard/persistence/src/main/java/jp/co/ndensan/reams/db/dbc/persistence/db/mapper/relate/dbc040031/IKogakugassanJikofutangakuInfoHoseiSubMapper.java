@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040031;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.JissekiFutangakuDataTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040031.KogakugassanJikofutangakuInfoHoseiSubEntity;
 
 /**
@@ -21,5 +23,19 @@ public interface IKogakugassanJikofutangakuInfoHoseiSubMapper {
      * @return List<KogakugassanJikofutangakuInfoHoseiSubEntity>
      */
     List<KogakugassanJikofutangakuInfoHoseiSubEntity> get高額支給額集計データ();
+
+    /**
+     * 中間DBデータを取得する。
+     *
+     * @return List<KogakugassanJikofutangakuInfoHoseiTempEntity>
+     */
+    List<KogakugassanJikofutangakuInfoHoseiTempEntity> get中間DBデータ();
+
+    /**
+     * 実績基本データを取得する。
+     *
+     * @return List<JissekiFutangakuDataTempEntity>
+     */
+    List<JissekiFutangakuDataTempEntity> get実績基本データ();
 
 }

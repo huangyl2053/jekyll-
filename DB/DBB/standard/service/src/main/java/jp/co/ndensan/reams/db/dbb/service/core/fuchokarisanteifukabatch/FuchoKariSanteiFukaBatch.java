@@ -106,7 +106,9 @@ public class FuchoKariSanteiFukaBatch {
                     || (賦課年度開始日.isBefore(生保情報_受給廃止日) && !賦課年度終了日.isBefore(生保情報_受給廃止日))
                     || (!賦課年度開始日.isBefore(生保情報_受給開始日) && 賦課年度終了日.isBefore(生保情報_受給廃止日)))
                     && 最も新生保情報_受給開始日.isBefore(生保情報_受給開始日)) {
-                賦課情報.setSeihofujoShurui(seikatsuHogoJukyusha.get受給者番号());
+                RString 生活保護扶助種類 = seikatsuHogoJukyusha.getSeikatsuHogoFujoShuruiList().isEmpty() ? RString.EMPTY
+                        : seikatsuHogoJukyusha.getSeikatsuHogoFujoShuruiList().get(0).get扶助種類コード().getColumnValue().getColumnValue();
+                賦課情報.setSeihofujoShurui(生活保護扶助種類);
                 賦課情報.setSeihoKaishiYMD(seikatsuHogoJukyusha.get受給開始日());
                 賦課情報.setSeihoHaishiYMD(seikatsuHogoJukyusha.get受給廃止日());
                 最も新生保情報_受給開始日 = 生保情報_受給開始日;
@@ -198,7 +200,7 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setFuKibetsuGaku13(Decimal.ZERO);
         賦課情報.setFuKibetsuGaku14(Decimal.ZERO);
         賦課情報.setFukaYMD(FukaKeisan.createInstance().findOut賦課基準日(調定年度, 資格情報));
-        if (更正前賦課情報 != null && 計算用保険料 != null && !RString.isNullOrEmpty(区分)) {
+        if (更正前賦課情報 != null && 更正前賦課情報.getTsuchishoNo() != null && 計算用保険料 != null && !RString.isNullOrEmpty(区分)) {
             List<Decimal> 普徴期別金額リスト = 調定計算(更正前賦課情報, 計算用保険料, 区分, 前年度賦課情報);
             FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
             KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();

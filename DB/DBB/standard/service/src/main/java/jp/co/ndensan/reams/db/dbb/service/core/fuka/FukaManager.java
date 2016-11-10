@@ -71,7 +71,6 @@ public class FukaManager {
     private final IShunoKamoku 科目_普通徴収;
     private final IShunoKamoku 科目_特別徴収;
     private final FukaNokiResearcher 賦課納期取得;
-    private final KitsukiList 月期対応取得_普徴;
     private final ShunoManager shunoManager;
     private final IFukaJohoTorokuMapper mapper;
 
@@ -88,7 +87,6 @@ public class FukaManager {
         科目_特別徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
         賦課納期取得 = FukaNokiResearcher.createInstance();
         shunoManager = ShunoService.get収納Manager();
-        月期対応取得_普徴 = new FuchoKiUtil().get期月リスト();
     }
 
     /**
@@ -107,7 +105,6 @@ public class FukaManager {
         科目_特別徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
         賦課納期取得 = FukaNokiResearcher.createInstance();
         shunoManager = ShunoService.get収納Manager();
-        月期対応取得_普徴 = new FuchoKiUtil().get期月リスト();
     }
 
     /**
@@ -129,11 +126,12 @@ public class FukaManager {
         requireNonNull(介護賦課, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課"));
         FukaJohoTorokuMybatisParameter parameter = getMybatisParameter(介護賦課);
         if (介護賦課.get賦課年度().equals(介護賦課.get調定年度())) {
+            KitsukiList 月期対応取得_普徴 = new FuchoKiUtil(介護賦課.get賦課年度()).get期月リスト();
             List<DbT7022ShoriDateKanriEntity> 処理日付情報 = mapper.getSyoriDateForManager(parameter);
             YMDHMS 処理日時 = get処理日時(処理日付情報, 介護賦課.get賦課年度());
             YMDHMS 調定日時 = 介護賦課.get調定日時();
-            if (処理日時 == null || (調定日時 != null && 調定日時.isBefore(処理日時))) {
-                save仮算定データ(介護賦課, parameter);
+            if (処理日時 == null || 処理日時.isEmpty() || (調定日時 != null && 調定日時.isBefore(処理日時))) {
+                save仮算定データ(介護賦課, 月期対応取得_普徴, parameter);
             } else {
                 save特徴期別(介護賦課, parameter);
                 save普徴期別金額By最後の期(介護賦課, 月期対応取得_普徴.getLast().get期AsInt(), parameter);
@@ -146,7 +144,7 @@ public class FukaManager {
         介護賦課Dac.save(介護賦課Entity);
     }
 
-    private void save仮算定データ(FukaJoho 賦課情報, FukaJohoTorokuMybatisParameter parameter) {
+    private void save仮算定データ(FukaJoho 賦課情報, KitsukiList 月期対応取得_普徴, FukaJohoTorokuMybatisParameter parameter) {
         save特徴期別01まで特徴期別03(賦課情報, parameter);
         for (Kitsuki 期月 : 月期対応取得_普徴.filtered仮算定期間().toList()) {
             int 期別 = 期月.get期AsInt();

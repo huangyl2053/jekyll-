@@ -47,7 +47,7 @@ public class GassanJigyobunKekkaIchiranPageBreak extends PageBreaker<GassanJigyo
             return true;
         }
         if (this.keys.contains(GassanJigyobunKekkaIchiranOrder.町域コード.get項目ID())
-                && !currentRecord.getSource().jushoCode.equals(nextRecord.getSource().jushoCode)) {
+                && !currentRecord.getSource().choikiCode.equals(nextRecord.getSource().choikiCode)) {
             return true;
         }
         if (this.keys.contains(GassanJigyobunKekkaIchiranOrder.行政区コード.get項目ID())
@@ -55,7 +55,7 @@ public class GassanJigyobunKekkaIchiranPageBreak extends PageBreaker<GassanJigyo
             return true;
         }
         if (this.keys.contains(GassanJigyobunKekkaIchiranOrder.氏名５０音カナ.get項目ID())
-                && !currentRecord.getSource().List1_2.equals(nextRecord.getSource().List1_2)) {
+                && !currentRecord.getSource().atenaKanaShimei.equals(nextRecord.getSource().atenaKanaShimei)) {
             return true;
         }
         if (this.keys.contains(GassanJigyobunKekkaIchiranOrder.市町村コード.get項目ID())

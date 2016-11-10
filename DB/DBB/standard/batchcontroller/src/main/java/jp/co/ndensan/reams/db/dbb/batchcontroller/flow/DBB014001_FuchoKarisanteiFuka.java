@@ -62,7 +62,6 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
     private static final RString 普徴仮算定通知書一括発行BATCH_ID = new RString("DBB014003_FuchoKarisanteiTsuchishoHakko");
 
     private static final int NUM_1 = 1;
-    private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final RString 仮算定賦課方法_01 = new RString("01");
     private static final RString 仮算定賦課方法_02 = new RString("02");
@@ -77,13 +76,16 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
 
     @Override
     protected void defineFlow() {
-        int flag = NUM_1;
+        boolean flag1 = false;
+        boolean flag2 = false;
         for (HonsanteifukaBatchTyouhyou 出力帳票一覧 : getParameter().get出力帳票一覧()) {
             if (帳票ID.equals(出力帳票一覧.get帳票ID())) {
-                flag = flag + NUM_1;
+                flag1 = true;
+            } else {
+                flag2 = true;
             }
         }
-        if (flag == 1) {
+        if (!flag1) {
             return;
         }
         バッチ起動日時 = RDateTime.now();
@@ -107,7 +109,7 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
         executeStep(出力順設定);
         executeStep(普徴仮算定結果);
         executeStep(処理日付管理テーブル更新);
-        if (flag == NUM_3) {
+        if (flag2) {
             executeStep(普徴仮算定通知書一括発行);
         }
     }
@@ -189,7 +191,7 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
     @Step(賦課情報登録)
     protected IBatchFlowCommand callChoteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
-                new DBB004001_FukaJohoTorokuParameter(true)).define();
+                new DBB004001_FukaJohoTorokuParameter()).define();
     }
 
     /**

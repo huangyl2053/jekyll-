@@ -437,7 +437,7 @@ public class KogakuKyufuTaishoListHandler {
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key2)
                     && !div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().isDisabled()) {
                 builder.append(コンマ);
-                builder.append(緩１);
+                builder.append(緩2);
             }
             row.setData9(builder.toRString());
         }
@@ -448,11 +448,11 @@ public class KogakuKyufuTaishoListHandler {
     }
 
     /**
-     * 修正制御
+     * 追加修正制御
      *
      * @param サービス提供年月 FlexibleYearMonth
      */
-    public void 修正制御(FlexibleYearMonth サービス提供年月) {
+    public void set追加修正制御(FlexibleYearMonth サービス提供年月) {
         if (サービス提供年月 != null && サービス提供年月.isBeforeOrEquals(定値年月1)) {
             div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setDisabled(false);
@@ -549,6 +549,9 @@ public class KogakuKyufuTaishoListHandler {
         div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(flag);
         div.getMeisaiGokeiHenshuPanel().getBtnTorikeshi().setDisabled(flag);
         div.getMeisaiGokeiHenshuPanel().getBtnkakutei().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().setDisabled(flag);
     }
 
     public void 削除制御() {
@@ -642,6 +645,30 @@ public class KogakuKyufuTaishoListHandler {
         div.getMeisaiGokeiHenshuPanel().getRdbGassan().setSelectedKey(key0);
         div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(key0);
         div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setSelectedKey(key0);
+        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(key0);
+    }
+
+    /**
+     * 追加制御
+     */
+    public void set追加制御() {
+        div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().setSelectedKey(ONE_RS);
+        div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRdbGassan().setSelectedKey(key0);
+        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setSelectedKey(key1);
         div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(key0);
     }
 

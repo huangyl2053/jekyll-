@@ -51,9 +51,6 @@ public class KijunShunyuShinseiTouroku {
     private static final Decimal KEY_100億円 = new Decimal("10000000000");
     private static final Decimal KEY_99億円 = new Decimal("9999999999");
     private static final RString MESSAGE_合計 = new RString("所得情報の収入合計＞入力した収入合計になっています。");
-    private static final RString MESSAGE_世帯再算出 = new RString("「世帯コード」、「処理年度」、「世帯員把握基準」"
-            + "が変更していますが、登録して");
-    private static final RString MESSAGE_算定基準額 = new RString("算定基準額が課税所得、総収入額の結果と異なりますが、登録して");
 
     /**
      * 画面初期化のメソッドです。
@@ -373,25 +370,22 @@ public class KijunShunyuShinseiTouroku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
-        if (!チェック済み.equals(div.getHdnFlag2()) && !getHandler(div).is世帯再算出ボタン押下チェック()) {
-
-            WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
-                    DbzWarningMessages.確認.getMessage().replace(MESSAGE_世帯再算出.toString()).evaluate());
+        validPairs = getValidationHandler(div).世帯再算出チェックValidate();
+        if (!チェック済み.equals(div.getHdnFlag2()) && validPairs.iterator().hasNext()) {
             div.setHdnFlag2(チェック済み);
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
-        validPairs = getValidationHandler(div).明細確定時チェックValidate();
+        validPairs = getValidationHandler(div).受給者または事業対象者チェックValidate();
         if (!チェック済み.equals(div.getHdnFlag3()) && validPairs.iterator().hasNext()) {
             div.setHdnFlag3(チェック済み);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
-        if (!チェック済み.equals(div.getHdnFlag4()) && !getHandler(div).is算定基準額のチェック()) {
-            WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
-                    DbzWarningMessages.確認.getMessage().replace(MESSAGE_算定基準額.toString()).evaluate());
+        validPairs = getValidationHandler(div).算定基準額チェックValidate();
+        if (!チェック済み.equals(div.getHdnFlag4()) && validPairs.iterator().hasNext()) {
             div.setHdnFlag4(チェック済み);
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
         Decimal 総収入額 = div.getMeisai().getTxtTotalShunyu().getValue();

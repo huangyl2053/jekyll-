@@ -88,7 +88,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
             if (本算定Flag) {
                 source.listUpper_4 = 徴収方法.get本徴収_年金コード();
                 source.listLower_4 = 徴収方法.get本徴収_基礎年金番号();
-                source.listLower_6 = 徴収方法.get仮徴収_年金コード() != null
+                source.listLower_6 = 徴収方法.get本徴収_年金コード() != null
                         ? CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                                 UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(徴収方法.get本徴収_年金コード()))
                         : RString.EMPTY;
@@ -102,7 +102,11 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
             }
         }
         if (年金特徴回付情報 != null) {
-            source.listUpper_6 = getColumnValue(年金特徴回付情報.getDT特別徴収義務者コード());
+            source.listUpper_6 = 年金特徴回付情報.getDT特別徴収義務者コード() != null
+                    ? CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                            UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                            年金特徴回付情報.getDT特別徴収義務者コード())
+                    : RString.EMPTY;
         }
         if (本算定Flag) {
             source.listCenter_5 = 特徴開始月4;

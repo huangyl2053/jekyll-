@@ -46,7 +46,7 @@ public class GassanJigyobunKekkaIchiranEntity {
     private RString yubinNo;
     private RString taishoNendo;
     private RString gyoseiCode;
-    private RString jushoCode;
+    private RString choikiCode;
     private RString shichosonCode;
     private RString shoKisaiHokenshaNo;
 

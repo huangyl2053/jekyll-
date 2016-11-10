@@ -18,14 +18,12 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
-import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -33,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -56,8 +55,8 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
     private final EditedAtesaki 編集後宛先;
 
     private static final int 定数_ONE = 1;
-    private static final int 定数_ZERO = 0;
-    private static final int 定数_TEN = 10;
+    private static final int 定数_15 = 15;
+    private static final int 定数_14 = 14;
     private static final RString RSTR_0 = new RString("　");
     private static final RString 波線 = new RString("～");
     private static final RString FORMAT_1桁 = new RString("%02d");
@@ -67,20 +66,20 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
     private static final RString 期_4 = new RString("04");
     private static final RString 期_5 = new RString("05");
     private static final RString 期_6 = new RString("06");
-    private static final RString 普徴期_4 = new RString("_4月");
-    private static final RString 普徴期_5 = new RString("_5月");
-    private static final RString 普徴期_6 = new RString("_6月");
-    private static final RString 普徴期_7 = new RString("_7月");
-    private static final RString 普徴期_8 = new RString("_8月");
-    private static final RString 普徴期_9 = new RString("_9月");
-    private static final RString 普徴期_10 = new RString("_10月");
-    private static final RString 普徴期_11 = new RString("_11月");
-    private static final RString 普徴期_12 = new RString("_12月");
-    private static final RString 普徴期_1 = new RString("_1月");
-    private static final RString 普徴期_2 = new RString("_2月");
-    private static final RString 普徴期_3 = new RString("_3月");
-    private static final RString 普徴期翌年度_4 = new RString("翌年度4月");
-    private static final RString 普徴期翌年度_5 = new RString("翌年度5月");
+    private static final RString 普徴期_4 = new RString("04");
+    private static final RString 普徴期_5 = new RString("05");
+    private static final RString 普徴期_6 = new RString("06");
+    private static final RString 普徴期_7 = new RString("07");
+    private static final RString 普徴期_8 = new RString("08");
+    private static final RString 普徴期_9 = new RString("09");
+    private static final RString 普徴期_10 = new RString("10");
+    private static final RString 普徴期_11 = new RString("11");
+    private static final RString 普徴期_12 = new RString("12");
+    private static final RString 普徴期_1 = new RString("01");
+    private static final RString 普徴期_2 = new RString("02");
+    private static final RString 普徴期_3 = new RString("03");
+    private static final RString 普徴期翌年度_4 = new RString("14");
+    private static final RString 普徴期翌年度_5 = new RString("15");
 
     /**
      * コンストラクタです
@@ -268,7 +267,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
         if (普徴期月.isPresent()) {
             期別徴収猶予期間.set普徴期(edit2桁文字列(普徴期月.get期()));
             期別徴収猶予期間.set普徴月(editInt2桁文字列(普徴期月.get月AsInt()));
-            Decimal 月と普徴期別金額 = get月と普徴期別金額の対応(徴収猶予決定通知書情報, 普徴期月.get月());
+            Decimal 月と普徴期別金額 = get月と普徴期別金額の対応(徴収猶予決定通知書情報, 普徴期月.get期());
             if (月と普徴期別金額 != null) {
                 期別徴収猶予期間.set普徴期別金額(DecimalFormatter
                         .toコンマ区切りRString(月と普徴期別金額, 0));
@@ -304,11 +303,15 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
     }
 
     private RString editInt2桁文字列(int 月) {
-        RString 月AsInt = new RString(String.valueOf(月));
-        if (月 < 定数_TEN && 月 >= 定数_ZERO) {
-            月AsInt = new RString(RSTR_0 + String.valueOf(月));
+        RString 月Str;
+        if (月 == 定数_14) {
+            月Str = new RString("4");
+        } else if (月 == 定数_15) {
+            月Str = new RString("5");
+        } else {
+            月Str = new RString(月);
         }
-        return 月AsInt;
+        return 月Str.padLeft(RString.HALF_SPACE, 2);
     }
 
     private Decimal get期と特徴期別金額の対応(
@@ -334,38 +337,37 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
     }
 
     private Decimal get月と普徴期別金額の対応(
-            KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, Tsuki 月) {
+            KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, RString 期) {
         if (徴収猶予決定通知書情報.get徴収猶予の情報() == null) {
             return Decimal.ZERO;
         }
-        RString 普徴月 = new RString(月.toString());
-        if (普徴期_4.equals(普徴月)) {
+        if (普徴期_1.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額01();
-        } else if (普徴期_5.equals(普徴月)) {
+        } else if (普徴期_2.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額02();
-        } else if (普徴期_6.equals(普徴月)) {
+        } else if (普徴期_3.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額03();
-        } else if (普徴期_7.equals(普徴月)) {
+        } else if (普徴期_4.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額04();
-        } else if (普徴期_8.equals(普徴月)) {
+        } else if (普徴期_5.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額05();
-        } else if (普徴期_9.equals(普徴月)) {
+        } else if (普徴期_6.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額06();
-        } else if (普徴期_10.equals(普徴月)) {
+        } else if (普徴期_7.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額07();
-        } else if (普徴期_11.equals(普徴月)) {
+        } else if (普徴期_8.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額08();
-        } else if (普徴期_12.equals(普徴月)) {
+        } else if (普徴期_9.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額09();
-        } else if (普徴期_1.equals(普徴月)) {
+        } else if (普徴期_10.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額10();
-        } else if (普徴期_2.equals(普徴月)) {
+        } else if (普徴期_11.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額11();
-        } else if (普徴期_3.equals(普徴月)) {
+        } else if (普徴期_12.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額12();
-        } else if (普徴期翌年度_4.equals(普徴月)) {
+        } else if (普徴期翌年度_4.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額13();
-        } else if (普徴期翌年度_5.equals(普徴月)) {
+        } else if (普徴期翌年度_5.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額14();
         } else {
             return Decimal.ZERO;
@@ -384,11 +386,15 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
             RString 徴収方法 = 介護期別徴収猶予.get徴収方法();
             RString 期 = new RString(String.format(FORMAT_1桁.toString(), 介護期別徴収猶予.get期()));
             if (ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法) && 普徴期月.get期().equals(期)) {
-                徴収猶予期間 = new RString(DateEditor.to西暦(介護期別徴収猶予.get徴収猶予開始日()).toString()
-                        + 波線.toString() + DateEditor.to西暦(介護期別徴収猶予.get徴収猶予終了日()).toString());
+                徴収猶予期間 = editDate(介護期別徴収猶予.get徴収猶予開始日()).concat(波線).concat(editDate(介護期別徴収猶予.get徴収猶予終了日()));
             }
         }
         return 徴収猶予期間;
+    }
+
+    private RString editDate(FlexibleDate date) {
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private boolean isNotNull(Object object) {

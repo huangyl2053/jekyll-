@@ -501,28 +501,28 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
     void update事業高額介護国保連IFマスタ(UpdKogakuKokuhorenIFMstMybatisParameter parameter);
 
     /**
-     * insert高額介護サービス費支給申請メソッドです。
+     * select高額介護サービス費支給申請メソッドです。
      *
      * @return 高額介護サービス費支給申請 DbT3056KogakuShikyuShinseiEntity
      */
     List<DbT3056KogakuShikyuShinseiEntity> get高額介護サービス費支給申請();
 
     /**
-     * insert高額介護サービス費支給判定結果メソッドです。
+     * select高額介護サービス費支給判定結果メソッドです。
      *
      * @return 高額介護サービス費支給判定結果 DbT3057KogakuShikyuHanteiKekkaEntity
      */
     List<DbT3057KogakuShikyuHanteiKekkaEntity> get高額介護サービス費支給判定結果();
 
     /**
-     * insert高額介護サービス費支給審査決定メソッドです。
+     * select高額介護サービス費支給審査決定メソッドです。
      *
      * @return 高額介護サービス費支給審査決定 DbT3058KogakuShikyuShinsaKetteiEntity
      */
     List<DbT3058KogakuShikyuShinsaKetteiEntity> get高額介護サービス費支給審査決定();
 
     /**
-     * insert高額介護サービス費支給審査決定メソッドです。
+     * select高額介護サービス費支給審査決定メソッドです。
      *
      * @return 高額介護サービス費給付対象者合計 DbT3055KogakuKyufuTaishoshaGokeiEntity
      */
@@ -631,5 +631,10 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      */
     List<KyufuJissekiChukanKogaku8Entity> select給付実績中間事業高額一時の作成8();
 
+    /**
+     * insert世帯員所得判定明細一時メソッドです。
+     *
+     * @param entity TempSetaiinShotokuHanteiEntity
+     */
     void insert世帯員所得判定明細一時(TempSetaiinShotokuHanteiEntity entity);
 }

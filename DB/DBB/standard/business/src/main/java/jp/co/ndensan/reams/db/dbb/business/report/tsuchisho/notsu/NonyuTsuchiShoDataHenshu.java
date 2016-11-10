@@ -389,7 +389,7 @@ public class NonyuTsuchiShoDataHenshu {
                 コンビニ連帳印字位置 = RString.isNullOrEmpty(各印字位置.get(整数2)) ? 0 : Integer.parseInt(各印字位置.get(整数2).toString());
                 コンビニカット印字位置 = RString.isNullOrEmpty(各印字位置.get(整数3)) ? 0 : Integer.parseInt(各印字位置.get(整数3).toString());
             }
-            if (is処理中の期月の物である(請求情報リスト, 出力期.get期())) {
+            if (!is処理中の期月の物である(請求情報リスト, 出力期.get期())) {
                 continue;
             }
             NonyuTsuchiShoKiJoho 納入通知書期情報 = get納入通知書期情報(普徴納期情報リスト, 請求情報リスト, 期, 出力期, 銀振印字位置,

@@ -227,7 +227,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
     @Step(賦課の情報登録フロー)
     protected IBatchFlowCommand choteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
-                new DBB004001_FukaJohoTorokuParameter(true)).define();
+                new DBB004001_FukaJohoTorokuParameter()).define();
     }
 
     /**

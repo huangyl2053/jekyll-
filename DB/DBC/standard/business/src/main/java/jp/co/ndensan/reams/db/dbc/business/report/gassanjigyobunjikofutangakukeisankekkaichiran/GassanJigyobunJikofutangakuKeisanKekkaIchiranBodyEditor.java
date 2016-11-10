@@ -29,18 +29,17 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
 
     private final GassanJikofutangakuKeisanKekkaIchiranEntity 帳票出力対象データ;
 
-    private static final RString 宛名データ種別_1 = new RString("１x");
-    private static final RString 宛名データ種別_2 = new RString("２x");
     private static final RString 符号_1 = new RString("～");
     private static final RString 符号_2 = new RString("*");
     private static final RString 数字_1 = new RString("1");
     private static final RString 数字_2 = new RString("2");
     private static final RString 数字_3 = new RString("3");
     private static final RString 数字_4 = new RString("4");
-    private static final RString 一覧区分_1 = new RString("審査方法区分が未設定");
-    private static final RString 一覧区分_2 = new RString("補正後事業高額支給額がマイナス値");
-    private static final RString 一覧区分_3 = new RString("１かつ２");
-    private static final RString 一覧区分_4 = new RString("自己負担額＜事業高額支給額");
+    private static final RString 年度 = new RString("年度");
+    private static final RString 一覧区分_1 = new RString("１：審査方法区分が未設定");
+    private static final RString 一覧区分_2 = new RString("２：補正後事業高額支給額がマイナス値");
+    private static final RString 一覧区分_3 = new RString("３：査方法区分が未設定かつ補正後事業高額支給額がマイナス値");
+    private static final RString 一覧区分_4 = new RString("４：自己負担額＜事業高額支給額");
 
     /**
      * コンストラクタです
@@ -56,11 +55,9 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     public GassanJigyobunJikofutangakuKeisanKekkaIchiranSource edit(GassanJigyobunJikofutangakuKeisanKekkaIchiranSource source) {
         source.list_1 = getColumnValue(帳票出力対象データ.get被保険者番号());
         source.list_2 = 帳票出力対象データ.get被保険者氏名();
-        if (宛名データ種別_1.equals(帳票出力対象データ.get住民種別コード())) {
-
+        if (数字_1.equals(帳票出力対象データ.get住民種別コード())) {
             source.list_3 = 帳票出力対象データ.get生年月日().wareki().firstYear(FirstYear.ICHI_NEN).toDateString();
-        } else if (宛名データ種別_2.equals(帳票出力対象データ.get住民種別コード())) {
-
+        } else if (数字_2.equals(帳票出力対象データ.get住民種別コード())) {
             source.list_3 = 帳票出力対象データ.get生年月日().seireki().toDateString();
         }
         source.list_4 = this.get性別(帳票出力対象データ.get性別());
@@ -86,9 +83,10 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     private RString get性別(RString 性別) {
         if (Seibetsu.男.getコード().equals(性別)) {
             return Seibetsu.男.get名称();
-        } else {
+        } else if (Seibetsu.女.getコード().equals(性別)) {
             return Seibetsu.女.get名称();
         }
+        return RString.EMPTY;
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {
@@ -106,14 +104,17 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     }
 
     private RString get一覧表示区分(RString 一覧表示区分, RString 一覧表示区分2) {
+
         RString 区分 = RString.EMPTY;
-        if (数字_1.equals(一覧表示区分) && 数字_1.equals(一覧表示区分2)) {
+        if (符号_2.equals(一覧表示区分2)) {
+            区分 = 一覧区分_4;
+        } else if (数字_1.equals(一覧表示区分)) {
             区分 = 一覧区分_1;
-        } else if (数字_2.equals(一覧表示区分) && 数字_2.equals(一覧表示区分2)) {
+        } else if (数字_2.equals(一覧表示区分)) {
             区分 = 一覧区分_2;
-        } else if (数字_3.equals(一覧表示区分) && 数字_3.equals(一覧表示区分2)) {
+        } else if (数字_3.equals(一覧表示区分)) {
             区分 = 一覧区分_3;
-        } else if ((数字_4.equals(一覧表示区分) && 数字_4.equals(一覧表示区分2)) || 符号_2.equals(一覧表示区分2)) {
+        } else if (数字_4.equals(一覧表示区分)) {
             区分 = 一覧区分_4;
         }
         return 区分;
@@ -121,14 +122,15 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
 
     private RString get年月日(FlexibleDate 年月日) {
         if (null != 年月日) {
-            return new RString(年月日.toString());
+            return 年月日.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
     }
 
     private RString get年月(FlexibleYear 年) {
         if (null != 年) {
-            return 年.toDateString();
+            return 年.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString().concat(年度);
         }
         return RString.EMPTY;
     }
