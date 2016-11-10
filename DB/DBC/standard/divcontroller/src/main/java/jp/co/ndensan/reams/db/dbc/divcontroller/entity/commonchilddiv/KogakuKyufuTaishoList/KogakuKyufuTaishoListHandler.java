@@ -448,11 +448,11 @@ public class KogakuKyufuTaishoListHandler {
     }
 
     /**
-     * 修正制御
+     * 追加修正制御
      *
      * @param サービス提供年月 FlexibleYearMonth
      */
-    public void 修正制御(FlexibleYearMonth サービス提供年月) {
+    public void set追加修正制御(FlexibleYearMonth サービス提供年月) {
         if (サービス提供年月 != null && サービス提供年月.isBeforeOrEquals(定値年月1)) {
             div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setDisabled(false);
@@ -549,6 +549,9 @@ public class KogakuKyufuTaishoListHandler {
         div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(flag);
         div.getMeisaiGokeiHenshuPanel().getBtnTorikeshi().setDisabled(flag);
         div.getMeisaiGokeiHenshuPanel().getBtnkakutei().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().setDisabled(flag);
     }
 
     public void 削除制御() {
