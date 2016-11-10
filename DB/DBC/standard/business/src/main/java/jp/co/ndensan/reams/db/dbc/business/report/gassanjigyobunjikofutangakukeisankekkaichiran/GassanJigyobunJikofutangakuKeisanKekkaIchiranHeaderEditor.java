@@ -87,7 +87,7 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranHeaderEditor implement
     }
 
     private RString get改頁(RString 改頁Key) {
-        return 改頁Map.containsKey(改頁Key) ? 出力順Map.get(改頁Key) : RString.EMPTY;
+        return 改頁Map.containsKey(改頁Key) ? 改頁Map.get(改頁Key) : RString.EMPTY;
     }
 
 }
