@@ -312,6 +312,7 @@ dbe/db/dbe/Masking/onClick_BtnDataOutput
 dbe/db/dbe/Masking/onClick_BtnMasking
 dbe/db/dbe/Masking/onClick_btnOutputCsv
 dbe/db/dbe/Masking/onLoad
+dbe/db/dbe/NijihanteiKekkaOutput/onClick_BtnClear
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_Btnkennsaku
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnCheck
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnHanteikekkaOutput

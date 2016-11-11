@@ -9,7 +9,11 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525002.DBE525002_Hantei
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.NijihanteiKekkaOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.NijihanteiKekkaOutputHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.ValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -28,6 +32,23 @@ public class NijihanteiKekkaOutput {
     public ResponseData<NijihanteiKekkaOutputDiv> onLoad(NijihanteiKekkaOutputDiv nijiDiv) {
         nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize();
         createHandlerOf(nijiDiv).initialize();
+        return createResponseData(nijiDiv);
+    }
+    
+    /**
+     * クリアボタン。<br/>
+     *
+     * @param nijiDiv NijihanteiKekkaOutputDiv
+     * @return ResponseData<NijihanteiKekkaOutputDiv>
+     */
+    public ResponseData<NijihanteiKekkaOutputDiv> onClick_BtnClear(NijihanteiKekkaOutputDiv nijiDiv) {
+        nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize();
+        nijiDiv.getKensakuJoken().getTxtNijihanteDateRange().setFromValue(RDate.getNowDate());
+        nijiDiv.getKensakuJoken().getTxtNijihanteDateRange().setToValue(RDate.getNowDate());
+        nijiDiv.getKensakuJoken().getRadDataShutsuryokuUmu().setSelectedIndex(0);
+        
+        nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         return createResponseData(nijiDiv);
     }
 
