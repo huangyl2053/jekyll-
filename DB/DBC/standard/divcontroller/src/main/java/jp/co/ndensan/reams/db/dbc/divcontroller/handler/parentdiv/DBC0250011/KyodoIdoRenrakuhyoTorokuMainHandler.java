@@ -228,12 +228,14 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
     /**
      * 共同処理用受給者異動連絡票データ作成です。
      *
+     * @param 識別コード ShikibetsuCode
      * @return 異動連絡票データ
      */
-    public SourceDataCollection to帳票発行処理() {
+    public SourceDataCollection to帳票発行処理(ShikibetsuCode 識別コード) {
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = div.getKyodoIdoRenrakuhyoTorokuInfo().getNewデータ();
         KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity 異動連絡票データ = KyodoshoriyoJukyushaIdoRenrakuhyoToroku
                 .createInstance().editKyodoshoriyoJukyushaIdoRenrakuhyo(entity);
+        異動連絡票データ.set識別コード(識別コード);
         KyodoShoriJukyushaIdoRenrakuhyoPrintService printService = new KyodoShoriJukyushaIdoRenrakuhyoPrintService();
         return printService.printSingle(異動連絡票データ);
     }

@@ -99,6 +99,7 @@ public class KyodoShoriJukyushaIdoRenrakuhyoEditor implements IKyodoShoriJukyush
         }
         HihokenshaNo 世帯主被保険者番号 = targets.get世帯主被保険者番号();
         source.setainushiHihokenshaNo = 世帯主被保険者番号 != null ? 世帯主被保険者番号.value() : RString.EMPTY;
+        source.shikibetsuCode = targets.get識別コード();
 
     }
 
