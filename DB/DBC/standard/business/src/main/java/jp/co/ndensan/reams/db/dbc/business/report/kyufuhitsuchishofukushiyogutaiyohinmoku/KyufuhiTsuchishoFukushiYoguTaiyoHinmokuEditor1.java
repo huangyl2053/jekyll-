@@ -7,7 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishofukushiyoguta
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhitsuchishofukushiyogutaiyohinmoku.KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishofukushiyogutaiyohinmoku.KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 帳票設計_DBC100043_介護保険給付費通知書（福祉用具貸与品目）のEditorです。
@@ -37,8 +42,21 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor1 implements IKyufuhiT
     }
 
     private KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource editSource(KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource source) {
-        if (item.get費用額() != null) {
-            source.listRiyoFukushiyogu_5 = new RString(item.get費用額().toString());
+        if (item.get費用額() != null && i < item.get費用額().size() && item.get費用額().get(i) != null) {
+            source.listRiyoFukushiyogu_5 = new RString(item.get費用額().get(i).toString());
+        }
+        if (item.getサービス年月() != null && i < item.getサービス年月().size() && item.getサービス年月().get(i) != null) {
+            source.listRiyoFukushiyogu_1 = new FlexibleDate(item.getサービス年月().get(i)).wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        if (item.getサービス事業所() != null && i < item.getサービス事業所().size()) {
+            source.listRiyoFukushiyogu_2 = item.getサービス事業所().get(i);
+        }
+        if (item.getタイコード() != null && i < item.getタイコード().size()) {
+            source.listRiyoFukushiyogu_3 = item.getタイコード().get(i);
+        }
+        if (item.get福祉用具商品名() != null && i < item.get福祉用具商品名().size()) {
+            source.listRiyoFukushiyogu_4 = item.get福祉用具商品名().get(i);
         }
         source = editSource1(source);
         source = editSource2(source);
@@ -91,7 +109,7 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor1 implements IKyufuhiT
             source.listSankouShiryoKokyoDantaiBetsuIchiran2_3 = new RString(item.get保険者2().get(i).toString());
         }
         if (item.getあなたの位置2() != null && i < item.getあなたの位置2().size()) {
-            source.listSankouShiryoHiyoGakuIchiran1_4 = new RString(item.getあなたの位置2().get(i).toString());
+            source.listSankouShiryoHiyoGakuIchiran2_4 = new RString(item.getあなたの位置2().get(i).toString());
         }
         return source;
     }
@@ -116,7 +134,7 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor1 implements IKyufuhiT
             source.listSankouShiryoKokyoDantaiBetsuIchiran3_3 = new RString(item.get保険者3().get(i).toString());
         }
         if (item.getあなたの位置3() != null && i < item.getあなたの位置3().size()) {
-            source.listSankouShiryoHiyoGakuIchiran1_4 = new RString(item.getあなたの位置3().get(i).toString());
+            source.listSankouShiryoHiyoGakuIchiran3_4 = new RString(item.getあなたの位置3().get(i).toString());
         }
         return source;
     }
