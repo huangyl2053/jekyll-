@@ -122,10 +122,19 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 reportSourceWriter.writeLine(builder1);
             }
         }
-        //TODO 複数件の場合、実装なし。
-        IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group7Editor(sonotashiryoBusiness);
-        IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
-        reportSourceWriter.writeLine(builder2);
+        if (sonotashiryoBusiness != null) {
+            if (sonotashiryoBusiness.getその他資料() != null && 0 < sonotashiryoBusiness.getその他資料().size()) {
+                for (int i = 0; i < sonotashiryoBusiness.getその他資料().size(); i++) {
+                    IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, i);
+                    IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
+            } else {
+                IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, 0);
+                IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
+                reportSourceWriter.writeLine(builder2);
+            }
+        }
     }
 
     private List<RString> get短冊リスト(List<TokkiA4Entity> 短冊情報リスト) {
