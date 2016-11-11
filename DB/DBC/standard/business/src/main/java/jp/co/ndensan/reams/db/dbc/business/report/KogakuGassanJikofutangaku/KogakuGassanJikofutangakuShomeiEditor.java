@@ -121,6 +121,7 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
         source.gyoseikuCode = entity.get被保険者_行政区コード();
         source.shimei50onKana = entity.get被保険者_氏名50音カナ();
         source.shichosonCode = entity.get被保険者_市町村コード();
+        source.shikibetsuCode = entity.get被保険者_識別コード();
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list_3);
         return source;
     }
