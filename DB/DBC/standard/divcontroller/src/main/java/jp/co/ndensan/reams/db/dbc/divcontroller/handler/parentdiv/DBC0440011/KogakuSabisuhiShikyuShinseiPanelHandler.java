@@ -33,8 +33,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -902,8 +900,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
      * @return Boolean
      */
     public Boolean is前排他キーのセット(HihokenshaNo 被保険者番号) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
+        LockingKey 排他キー = new LockingKey(被保険者番号);
         return RealInitialLocker.tryGetLock(排他キー);
     }
 
