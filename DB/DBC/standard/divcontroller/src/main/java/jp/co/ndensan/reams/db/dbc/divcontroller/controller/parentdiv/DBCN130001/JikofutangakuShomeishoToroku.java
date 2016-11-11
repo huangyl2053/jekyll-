@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN130001.Jik
 import jp.co.ndensan.reams.db.dbc.service.core.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -64,8 +65,9 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onLoad(JikofutangakuShomeishoTorokuDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         RString 前排他キー = 排他キー.concat(被保険者番号.value());
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
