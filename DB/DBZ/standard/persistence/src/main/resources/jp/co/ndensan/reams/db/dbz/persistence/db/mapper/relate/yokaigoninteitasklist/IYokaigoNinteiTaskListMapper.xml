@@ -995,8 +995,6 @@
                 DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
             AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
-            AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
             AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND DbT5105."centerSoshinYMD" IS NULL
