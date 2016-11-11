@@ -111,8 +111,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         source.gyoseikuCode = 発行対象者.get行政区コード();
         source.setaiCode = 発行対象者.get世帯コード();
         source.shichosonCode = 発行対象者.get市町村コード();
-        source.拡張情報A1 = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), source.listIchiran_5);
-        source.拡張情報A2 = new ExpandedInformation(Code.EMPTY, new RString("被保険者氏名"), source.listIchiran_6);
+        source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listIchiran_5);
+        source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.listIchiran_6);
         return source;
     }
 
