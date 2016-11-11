@@ -196,8 +196,9 @@ public class RiyoshaFutanWariaiHanteiManager {
                 int 世帯１号被保険者数 = get世帯１号被保険者数(世帯員識別コード情報list);
                 RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp = new RiyoshaFutanWariaiMeisaiTempEntity();
                 get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報,
-                        get世帯code(世帯員識別コード情報), 世帯１号被保険者数,
+                        get世帯code(世帯員識別コード情報), 世帯１号被保険者数, 基準日,
                         生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
+                利用者負担割合明細Temp.setEdaNo(i + 1);
                 利用者負担割合明細Tempのマージデータ.add(利用者負担割合明細Temp);
                 RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠Temp
                         = new RiyoshaFutanWariaiKonkyoTempEntity();
@@ -516,11 +517,11 @@ public class RiyoshaFutanWariaiHanteiManager {
             List<DbV2512KaigoShotokuNewestEntity> 介護所得情報list,
             SetaiCode 世帯コード,
             int 世帯１号被保険者数,
+            FlexibleDate 基準日,
             SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp,
             HanteiTaishoshaTempEntity 判定対象者Temp,
             RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp) {
         利用者負担割合明細Temp.setHihokenshaNo(被保険者番号);
-        利用者負担割合明細Temp.setEdaNo(Integer.parseInt(被保険者台帳.get枝番().toString()));
         if (!RString.isNullOrEmpty(被保険者台帳.get被保険者区分コード())) {
             利用者負担割合明細Temp.setShikakuKubun(被保険者台帳.get被保険者区分コード().padZeroToLeft(1));
         }

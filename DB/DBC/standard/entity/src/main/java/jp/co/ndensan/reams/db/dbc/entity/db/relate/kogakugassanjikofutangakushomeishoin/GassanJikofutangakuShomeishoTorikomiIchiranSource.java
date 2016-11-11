@@ -88,9 +88,11 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
     public RString gyoseikuCode;
     @ReportItem(name = "shimei50onKana", length = 4, order = 34)
     public RString shimei50onKana;
-    @ReportPerson(id = "A")
     @ReportItem(name = "shichosonCode", length = 4, order = 35)
     public RString shichosonCode;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
     @ReportExpandedInfo(id = "A")
     public ExpandedInformation 拡張情報;
 // </editor-fold>

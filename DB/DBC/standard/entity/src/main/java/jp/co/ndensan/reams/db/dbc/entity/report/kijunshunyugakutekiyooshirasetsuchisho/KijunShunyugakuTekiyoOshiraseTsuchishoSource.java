@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyooshirasetsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -22,26 +23,20 @@ public class KijunShunyugakuTekiyoOshiraseTsuchishoSource implements IReportSour
     public RString tsuchibun1;
     @ReportItem(name = "hihoNameKana1", length = 40, order = 4)
     public RString hihoNameKana1;
-    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "hihokenshaNo1", length = 10, order = 5)
     public RString hihokenshaNo1;
-    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "hihokenshaName1", order = 6)
     public RString hihokenshaName1;
     @ReportItem(name = "hihoNameKana2", length = 40, order = 7)
     public RString hihoNameKana2;
-    @ReportExpandedInfo(id = "B")
     @ReportItem(name = "hihokenshaNo2", length = 10, order = 8)
     public RString hihokenshaNo2;
-    @ReportExpandedInfo(id = "B")
     @ReportItem(name = "hihokenshaName2", order = 9)
     public RString hihokenshaName2;
     @ReportItem(name = "hihoNameKana3", length = 40, order = 10)
     public RString hihoNameKana3;
-    @ReportExpandedInfo(id = "C")
     @ReportItem(name = "hihokenshaNo3", length = 10, order = 11)
     public RString hihokenshaNo3;
-    @ReportExpandedInfo(id = "C")
     @ReportItem(name = "hihokenshaName3", order = 12)
     public RString hihokenshaName3;
     @ReportItem(name = "sonotaHihokensha", length = 15, order = 13)
@@ -143,4 +138,16 @@ public class KijunShunyugakuTekiyoOshiraseTsuchishoSource implements IReportSour
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報A1;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報A2;
+    @ReportExpandedInfo(id = "B")
+    public ExpandedInformation 拡張情報B1;
+    @ReportExpandedInfo(id = "B")
+    public ExpandedInformation 拡張情報B2;
+    @ReportExpandedInfo(id = "C")
+    public ExpandedInformation 拡張情報C1;
+    @ReportExpandedInfo(id = "C")
+    public ExpandedInformation 拡張情報C2;
 }

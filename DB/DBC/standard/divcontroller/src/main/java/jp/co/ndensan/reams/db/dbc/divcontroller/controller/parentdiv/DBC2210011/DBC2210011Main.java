@@ -323,7 +323,9 @@ public class DBC2210011Main {
      * @return ResponseData<DBC2210011MainDiv>
      */
     public ResponseData<DBC2210011MainDiv> onClick_Confirm(DBC2210011MainDiv div) {
-        if (サービス追加モード.equals(div.getHiddenModel()) || サービス修正モード.equals(div.getHiddenModel())) {
+        List<TokubetsuKyufuJigyoshaSearchBusiness> サービス事業者情報
+                = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者List, ArrayList.class);
+        if (サービス追加モード.equals(div.getHiddenModel())) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             getValidationHandler().特別給付サービス重複チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
@@ -333,21 +335,16 @@ public class DBC2210011Main {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-            List<TokubetsuKyufuJigyoshaSearchBusiness> サービス事業者情報
-                    = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者List, ArrayList.class);
-            if (サービス追加モード.equals(div.getHiddenModel())) {
-                dgTokubetsuKyufuJigyoshaDetailServiceList_Row row = new dgTokubetsuKyufuJigyoshaDetailServiceList_Row();
-                div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList()
-                        .getDataSource().add(getHandler(div).onClick_入力を確定_追加(row));
-                サービス事業者情報.add(getHandler(div).onClick_入力を確定_追加情報());
-                ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(サービス事業者情報));
-            } else {
-                TokubetsuKyufuJigyoshaSearchBusiness 修正情報 = getHandler(div).get情報と状態BySelectDataSouce(サービス事業者情報);
-                TokubetsuKyufuJigyoshaSearchBusiness 修正後情報 = getHandler(div).onClick_入力を確定_修正情報(修正情報);
-                set修正後情報(サービス事業者情報, 修正後情報);
-                ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(サービス事業者情報));
-            }
-
+            dgTokubetsuKyufuJigyoshaDetailServiceList_Row row = new dgTokubetsuKyufuJigyoshaDetailServiceList_Row();
+            div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList()
+                    .getDataSource().add(getHandler(div).onClick_入力を確定_追加(row));
+            サービス事業者情報.add(getHandler(div).onClick_入力を確定_追加情報());
+            ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(サービス事業者情報));
+        } else if (サービス追加モード.equals(div.getHiddenModel())) {
+            TokubetsuKyufuJigyoshaSearchBusiness 修正情報 = getHandler(div).get情報と状態BySelectDataSouce(サービス事業者情報);
+            TokubetsuKyufuJigyoshaSearchBusiness 修正後情報 = getHandler(div).onClick_入力を確定_修正情報(修正情報);
+            set修正後情報(サービス事業者情報, 修正後情報);
+            ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(サービス事業者情報));
         }
         return ResponseData.of(div).respond();
     }
@@ -377,9 +374,9 @@ public class DBC2210011Main {
      */
     public ResponseData<DBC2210011MainDiv> onClick_Back(DBC2210011MainDiv div) {
         if (照会モード.equals(div.getHiddenModelOne())) {
-            return ResponseData.of(div).setState(DBC2210011StateName.サービス詳細照会);
+            return ResponseData.of(div).setState(DBC2210011StateName.事業者詳細照会);
         } else {
-            return ResponseData.of(div).setState(DBC2210011StateName.サービス詳細入力);
+            return ResponseData.of(div).setState(DBC2210011StateName.事業者詳細入力);
         }
     }
 

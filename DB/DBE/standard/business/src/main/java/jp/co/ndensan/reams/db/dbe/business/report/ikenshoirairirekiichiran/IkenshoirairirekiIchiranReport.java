@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class IkenshoirairirekiIchiranReport extends Report<IkenshoirairirekiIchiranReportSource> {
 
     private final List<IkenshoirairirekiIchiran> businessList;
+    private final IkenshoirairirekiIchiran business;
 
     /**
      * インスタンスを生成します。
@@ -28,21 +29,41 @@ public class IkenshoirairirekiIchiranReport extends Report<IkenshoirairirekiIchi
      */
     public static IkenshoirairirekiIchiranReport createFrom(List<IkenshoirairirekiIchiran> businessList) {
 
-        return new IkenshoirairirekiIchiranReport(businessList);
+        return new IkenshoirairirekiIchiranReport(businessList, null);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param business 主治医意見書作成依頼履歴一覧表
+     * @return 主治医意見書作成依頼履歴一覧表のReport
+     */
+    public static IkenshoirairirekiIchiranReport createFrom(IkenshoirairirekiIchiran business) {
+
+        return new IkenshoirairirekiIchiranReport(null, business);
     }
 
     /**
      * インスタンスを生成します。
      *
      * @param businessList 主治医意見書作成依頼履歴一覧表
+     * @param business 主治医意見書作成依頼履歴一覧表
      */
-    public IkenshoirairirekiIchiranReport(List<IkenshoirairirekiIchiran> businessList) {
+    public IkenshoirairirekiIchiranReport(List<IkenshoirairirekiIchiran> businessList,
+            IkenshoirairirekiIchiran business) {
         this.businessList = businessList;
+        this.business = business;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<IkenshoirairirekiIchiranReportSource> reportSourceWriter) {
-        for (IkenshoirairirekiIchiran business : businessList) {
+        if (business == null) {
+            for (IkenshoirairirekiIchiran business : businessList) {
+                IkenshoirairirekiIchiranEditor editor = new IkenshoirairirekiIchiranEditor(business);
+                IkenshoirairirekiIchiranBuilder builder = new IkenshoirairirekiIchiranBuilder(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else {
             IkenshoirairirekiIchiranEditor editor = new IkenshoirairirekiIchiranEditor(business);
             IkenshoirairirekiIchiranBuilder builder = new IkenshoirairirekiIchiranBuilder(editor);
             reportSourceWriter.writeLine(builder);

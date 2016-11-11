@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.gassanshikyugakukeisankekkasofu
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -65,7 +66,6 @@ public class GassanShikyugakuKeisankekkaSofuIchiranSource implements IReportSour
     public RString listUpper_10;
     @ReportItem(name = "listUpper_11", length = 2, order = 25)
     public RString listUpper_11;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 26)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 19, order = 27)
@@ -95,6 +95,8 @@ public class GassanShikyugakuKeisankekkaSofuIchiranSource implements IReportSour
     public LasdecCode shichosonCode;
     @ReportItem(name = "shoKisaiHokenshaNo", length = 20, order = 38)
     public RString shoKisaiHokenshaNo;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -8,13 +8,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
  * PostMainPanel のクラスファイル
@@ -23,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  */
 public class PostMainPanelDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,7 +40,7 @@ public class PostMainPanelDiv extends Panel {
     @JsonProperty("txtRenkekeishiki")
     private TextBox txtRenkekeishiki;
     @JsonProperty("btnTorikomi")
-    private ButtonDialog btnTorikomi;
+    private Button btnTorikomi;
     @JsonProperty("txtFileYMD")
     private TextBoxDate txtFileYMD;
     @JsonProperty("txtFileTime")
@@ -50,6 +51,8 @@ public class PostMainPanelDiv extends Panel {
     private meisaiPanelDiv meisaiPanel;
     @JsonProperty("hdnShichosonCD")
     private TextBox hdnShichosonCD;
+    @JsonProperty("FileUpload")
+    private FileUploadDiv FileUpload;
     @JsonProperty("hdnModl")
     private RString hdnModl;
     @JsonProperty("hdnModl1")
@@ -140,7 +143,7 @@ public class PostMainPanelDiv extends Panel {
      * @return btnTorikomi
      */
     @JsonProperty("btnTorikomi")
-    public ButtonDialog getBtnTorikomi() {
+    public Button getBtnTorikomi() {
         return btnTorikomi;
     }
 
@@ -149,7 +152,7 @@ public class PostMainPanelDiv extends Panel {
      * @param btnTorikomi btnTorikomi
      */
     @JsonProperty("btnTorikomi")
-    public void setBtnTorikomi(ButtonDialog btnTorikomi) {
+    public void setBtnTorikomi(Button btnTorikomi) {
         this.btnTorikomi = btnTorikomi;
     }
 
@@ -244,6 +247,24 @@ public class PostMainPanelDiv extends Panel {
     }
 
     /*
+     * getFileUpload
+     * @return FileUpload
+     */
+    @JsonProperty("FileUpload")
+    public FileUploadDiv getFileUpload() {
+        return FileUpload;
+    }
+
+    /*
+     * setFileUpload
+     * @param FileUpload FileUpload
+     */
+    @JsonProperty("FileUpload")
+    public void setFileUpload(FileUploadDiv FileUpload) {
+        this.FileUpload = FileUpload;
+    }
+
+    /*
      * gethdnModl
      * @return hdnModl
      */
@@ -308,6 +329,36 @@ public class PostMainPanelDiv extends Panel {
     @JsonIgnore
     public void setDgShichoson(DataGrid<dgShichoson_Row> dgShichoson) {
         this.getMeisaiPanel().setDgShichoson(dgShichoson);
+    }
+
+    @JsonIgnore
+    public UploadPanel getUplIdoJohoFile() {
+        return this.getFileUpload().getUplIdoJohoFile();
+    }
+
+    @JsonIgnore
+    public void setUplIdoJohoFile(UploadPanel uplIdoJohoFile) {
+        this.getFileUpload().setUplIdoJohoFile(uplIdoJohoFile);
+    }
+
+    @JsonIgnore
+    public Button getBtnUpload() {
+        return this.getFileUpload().getBtnUpload();
+    }
+
+    @JsonIgnore
+    public void setBtnUpload(Button btnUpload) {
+        this.getFileUpload().setBtnUpload(btnUpload);
+    }
+
+    @JsonIgnore
+    public Button getBtnCancel() {
+        return this.getFileUpload().getBtnCancel();
+    }
+
+    @JsonIgnore
+    public void setBtnCancel(Button btnCancel) {
+        this.getFileUpload().setBtnCancel(btnCancel);
     }
 
     // </editor-fold>

@@ -344,6 +344,15 @@ public class JimuTuikaSiryoBusiness {
         return 通知文;
     }
 
+    /**
+     * 識別コードは証記載保険者番号（左から5桁）+被保険者番号を設定してください。
+     *
+     * @return 識別コード
+     */
+    public RString get識別コード() {
+        return entity.getShoKisaiHokenshaNo().substring(0, SIZE_5).concat(entity.getHihokenshaNo());
+    }
+
     private RString get開催年月日() {
         RStringBuilder 審査会開催年月日 = new RStringBuilder();
         List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(SIZE_5).split(":");

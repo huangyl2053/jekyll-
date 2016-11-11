@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -42,6 +43,8 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
     private final Association 地方公共団体;
     private static final RString 特徴開始月4 = new RString("4月");
     private static final RString 特徴開始月8 = new RString("8月");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * インスタンスを生成します。
@@ -115,7 +118,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
         }
         source.listCenter_7 = RString.EMPTY;
         source.keisanHoho = RString.EMPTY;
-
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listLower_1);
         return source;
     }
 

@@ -65,6 +65,9 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor1 implements IKyufuhiT
         if (item.get保険者1() != null && i < item.get保険者1().size()) {
             source.listSankouShiryoKokyoDantaiBetsuIchiran1_3 = new RString(item.get保険者1().get(i).toString());
         }
+        if (item.getあなたの位置1() != null && i < item.getあなたの位置1().size()) {
+            source.listSankouShiryoHiyoGakuIchiran1_4 = new RString(item.getあなたの位置1().get(i).toString());
+        }
         return source;
     }
 
@@ -87,6 +90,9 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor1 implements IKyufuhiT
         if (item.get保険者2() != null && i < item.get保険者2().size()) {
             source.listSankouShiryoKokyoDantaiBetsuIchiran2_3 = new RString(item.get保険者2().get(i).toString());
         }
+        if (item.getあなたの位置2() != null && i < item.getあなたの位置2().size()) {
+            source.listSankouShiryoHiyoGakuIchiran1_4 = new RString(item.getあなたの位置2().get(i).toString());
+        }
         return source;
     }
 
@@ -108,6 +114,9 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor1 implements IKyufuhiT
         }
         if (item.get保険者3() != null && i < item.get保険者3().size()) {
             source.listSankouShiryoKokyoDantaiBetsuIchiran3_3 = new RString(item.get保険者3().get(i).toString());
+        }
+        if (item.getあなたの位置3() != null && i < item.getあなたの位置3().size()) {
+            source.listSankouShiryoHiyoGakuIchiran1_4 = new RString(item.getあなたの位置3().get(i).toString());
         }
         return source;
     }

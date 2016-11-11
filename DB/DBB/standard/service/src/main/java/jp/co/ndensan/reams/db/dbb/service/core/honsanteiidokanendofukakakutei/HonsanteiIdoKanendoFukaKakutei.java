@@ -108,7 +108,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
         List<KanendoIdoFukaKakutei> fukaKakuteiList = new ArrayList<>();
         IFukaKakuteiMapper mapper = mapperProvider.create(IFukaKakuteiMapper.class);
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
-        Kitsuki kitsuki = koseiTsukiHantei.find更正月(調定日時.getRDateTime().getDate());
+        Kitsuki kitsuki = koseiTsukiHantei.find過年度更正月(調定日時.getRDateTime().getDate());
         FukaKakuteiParameter parameter = new FukaKakuteiParameter(
                 FlexibleYear.EMPTY,
                 FlexibleYear.EMPTY,

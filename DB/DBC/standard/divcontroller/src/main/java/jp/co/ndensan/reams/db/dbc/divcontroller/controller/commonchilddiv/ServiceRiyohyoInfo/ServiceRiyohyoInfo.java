@@ -110,6 +110,7 @@ public class ServiceRiyohyoInfo {
         }
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         div.setAddType(RSTRING_ONE);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisabled(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
@@ -136,6 +137,7 @@ public class ServiceRiyohyoInfo {
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
         }
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisabled(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
@@ -359,6 +361,7 @@ public class ServiceRiyohyoInfo {
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         handler.setパネルにデータ反映();
         handler.init修正();
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 

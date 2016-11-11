@@ -28,12 +28,20 @@ module DBC {
                 return "onChange_rdbMisaiGkeiKbun";
             }
 
+            public static onBlur_txtJgyoshaCode(): string {
+                return "onBlur_txtJgyoshaCode";
+            }
+
             public static onOkClose_btnJgyosha(): string {
                 return "onOkClose_btnJgyosha";
             }
 
             public static onBeforeOpenDialog_btnJgyosha(): string {
                 return "onBeforeOpenDialog_btnJgyosha";
+            }
+
+            public static onBlur_txtServiceSyurui(): string {
+                return "onBlur_txtServiceSyurui";
             }
 
             public static onOkClose_btnServiceSyurui(): string {

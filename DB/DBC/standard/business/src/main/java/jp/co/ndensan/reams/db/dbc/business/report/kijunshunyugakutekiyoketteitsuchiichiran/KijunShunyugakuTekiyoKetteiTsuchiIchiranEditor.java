@@ -6,11 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchiichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchiichiran.KijunShunyugakuTekiyoKetteiTsuchiIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -85,7 +88,8 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
         source.choikiCode = 基準収入額決定通知一覧表パラメータ.get町域コード();
         source.gyoseikuCode = 基準収入額決定通知一覧表パラメータ.get行政区コード();
         source.shichosonCode = 基準収入額決定通知一覧表パラメータ.get市町村コード();
-
+        source.拡張情報1 = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), source.listHakkoTaishosha_4);
+        source.拡張情報2 = new ExpandedInformation(Code.EMPTY, new RString("被保険者氏名"), source.listHakkoTaishosha_5);
         return source;
     }
 

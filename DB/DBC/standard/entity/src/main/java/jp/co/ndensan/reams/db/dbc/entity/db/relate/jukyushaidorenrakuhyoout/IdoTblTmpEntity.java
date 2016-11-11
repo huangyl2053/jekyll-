@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,8 +28,11 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implements IDbAccessable {
 
+    @PrimaryKey
     private HihokenshaNo 被保険者番号;
+    @PrimaryKey
     private FlexibleDate 異動年月日;
+    @PrimaryKey
     private int 履歴番号;
     private RString 異動区分コード;
     private RString 受給者異動事由;
