@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyotokki.Gaik
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -79,7 +81,9 @@ public class GaikyochosaProcess extends BatchProcessBase<HomonChosaIraishoRelate
 
     @Override
     protected void afterExecute() {
-        new HomonChosaIraishoBusiness(processParamter).バッチ出力条件リストの出力(reportSourceWriter);
+        OutputJokenhyoFactory.createInstance(
+                new HomonChosaIraishoBusiness(processParamter).バッチ出力条件リストの出力(reportSourceWriter,
+                        AssociationFinderFactory.createInstance().getAssociation())).print();
     }
 
     private void update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {

@@ -30,9 +30,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEnti
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -639,9 +636,11 @@ public class HomonChosaIraishoBusiness {
      * バッチ出力条件リストの出力の編集。
      *
      * @param reportSourceWriter reportSourceWriter
+     * @param 導入団体クラス 導入団体クラス
+     * @return ReportOutputJokenhyoItem
      */
-    public void バッチ出力条件リストの出力(ReportSourceWriter<GaikyotokkiA4ReportSource> reportSourceWriter) {
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+    public ReportOutputJokenhyoItem バッチ出力条件リストの出力(
+            ReportSourceWriter<GaikyotokkiA4ReportSource> reportSourceWriter, Association 導入団体クラス) {
         RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
         RString 市町村名 = 導入団体クラス.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
@@ -734,7 +733,7 @@ public class HomonChosaIraishoBusiness {
         builder.append(ZENKONINTEICHOSAHYO);
         builder.append(processParamter.isZenkoNinteiChosahyo());
         出力条件.add(builder.toRString());
-        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+        return new ReportOutputJokenhyoItem(
                 帳票ID.value(),
                 導入団体コード,
                 市町村名,
@@ -744,7 +743,5 @@ public class HomonChosaIraishoBusiness {
                 csv出力有無,
                 csvファイル名,
                 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
-        printer.print();
     }
 }
