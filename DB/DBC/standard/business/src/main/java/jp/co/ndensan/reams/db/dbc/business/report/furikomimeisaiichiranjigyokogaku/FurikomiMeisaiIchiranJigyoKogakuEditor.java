@@ -202,25 +202,7 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
 
     private void edit1(DbWT0510FurikomiMeisaiTempEntity 振込明細, FurikomiMeisaiIchiranJigyoKogakuSource source)
             throws IllegalStateException, IllegalArgumentException {
-        if (振込明細.getYokaigoJotaiKubunCode() != null) {
-            if (!振込明細.getYokaigoJotaiKubunCode().isEmpty()) {
-                source.list1_6 = パターン4(振込明細.getNinteiYukoKikanKaishiYMD());
-
-                FlexibleYearMonth 終了年月 = 振込明細.getKeisanShuryoYMD() == null || 振込明細.getKeisanShuryoYMD().isEmpty()
-                        ? FlexibleYearMonth.EMPTY : 振込明細.getKeisanShuryoYMD().getYearMonth();
-                source.list2_4 = YokaigoJotaiKubunSupport.toValue(終了年月,
-                        振込明細.getYokaigoJotaiKubunCode().value()).getName();
-                source.list2_5 = パターン4(振込明細.getNinteiYukoKikanKaishiYMD());
-            } else if (振込明細.isSogoJigyoFlag() && 振込明細.getYokaigoJotaiKubunCode().isEmpty()) {
-                source.list1_6 = パターン4(振込明細.getSogoJigyoTekiyoKaishiYMD());
-                source.list2_4 = 事業対象;
-                source.list2_5 = パターン4(振込明細.getSogoJigyoTekiyoKaishiYMD());
-            } else if (!振込明細.isSogoJigyoFlag() && 振込明細.getYokaigoJotaiKubunCode().isEmpty()) {
-                source.list1_6 = RString.EMPTY;
-                source.list2_4 = RString.EMPTY;
-                source.list2_5 = RString.EMPTY;
-            }
-        }
+        editList24(振込明細, source);
         source.ｌist3_1 = new RString(target.get連番());
         if (振込明細.getFurikomiKingaku() != null) {
             source.list2_6 = DecimalFormatter.toコンマ区切りRString(振込明細.getFurikomiKingaku(), 0);
@@ -231,6 +213,32 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
         } else if (INT_2 <= target.get名寄せ件数()) {
             source.list5_1 = 有;
         }
+    }
+
+    private void editList24(DbWT0510FurikomiMeisaiTempEntity 振込明細, FurikomiMeisaiIchiranJigyoKogakuSource source) throws IllegalArgumentException, IllegalStateException {
+        if (null == 振込明細 || null == 振込明細.getYokaigoJotaiKubunCode()) {
+            return;
+        }
+        if (!振込明細.getYokaigoJotaiKubunCode().isEmpty()) {
+            source.list1_6 = パターン4(振込明細.getNinteiYukoKikanKaishiYMD());
+
+            FlexibleYearMonth 終了年月 = 振込明細.getKeisanShuryoYMD() == null || 振込明細.getKeisanShuryoYMD().isEmpty()
+                    ? FlexibleYearMonth.EMPTY : 振込明細.getKeisanShuryoYMD().getYearMonth();
+            if (!終了年月.isEmpty()) {
+                source.list2_4 = YokaigoJotaiKubunSupport.toValue(終了年月,
+                        振込明細.getYokaigoJotaiKubunCode().value()).getName();
+            }
+            source.list2_5 = パターン4(振込明細.getNinteiYukoKikanKaishiYMD());
+        } else if (振込明細.isSogoJigyoFlag() && 振込明細.getYokaigoJotaiKubunCode().isEmpty()) {
+            source.list1_6 = パターン4(振込明細.getSogoJigyoTekiyoKaishiYMD());
+            source.list2_4 = 事業対象;
+            source.list2_5 = パターン4(振込明細.getSogoJigyoTekiyoKaishiYMD());
+        } else if (!振込明細.isSogoJigyoFlag() && 振込明細.getYokaigoJotaiKubunCode().isEmpty()) {
+            source.list1_6 = RString.EMPTY;
+            source.list2_4 = RString.EMPTY;
+            source.list2_5 = RString.EMPTY;
+        }
+
     }
 
     private RString パターン12(YMDHMS 作成日時) {
