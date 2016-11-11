@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshi
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyoshikyushinseisho.KogakuJigyoShikyuShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyoshikyushinseisho.KogakuJigyoShikyuShinseishoSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 帳票設計_DBC100070_介護保険高額総合事業サービス費支給申請書Editor
@@ -38,6 +40,8 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
     private static final RString 定数_支店 = new RString("支店");
     private static final RString 定数_出張所 = new RString("出張所");
     private static final RString 定数_支所 = new RString("支所");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -112,6 +116,7 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
         source.shuccho = 定数_出張所;
         source.shisho = 定数_支所;
         source.remban = count;
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
         return source;
     }
 
