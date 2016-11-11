@@ -37,6 +37,9 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
     private static final RString 共同処理用受給者訂正連絡票登録_メニューID = new RString("DBCMN81004");
     private static final RString 共同処理用受給者異動連絡票作成_メニューID = new RString("DBCMN83002");
     private static final RString 共同処理用受給者異動連絡票情報照会_メニューID = new RString("DBCMN11008");
+    private static final RString 共同処理用受給者異動連絡票変更登録 = new RString("共同処理用受給者異動連絡票変更登録");
+    private static final RString 共同処理用受給者異動訂正連絡票発行 = new RString("共同処理用受給者異動・訂正連絡票発行");
+    private static final RString 共同処理用受給者異動連絡票情報照会 = new RString("共同処理用受給者異動連絡票情報照会");
     private static final RString モード_修正 = new RString("修正モード");
     private static final RString モード_選択 = new RString("選択モード");
     private static final RString KEY_ZERO = new RString("key0");
@@ -51,7 +54,14 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
      */
     public ResponseData<KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv> onLoad(
             KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv div) {
-        return ResponseData.of(div).respond();
+        RString メニューID = ResponseHolder.getMenuID();
+        if (共同処理用受給者訂正連絡票登録_メニューID.equals(メニューID)) {
+            return ResponseData.of(div).rootTitle(共同処理用受給者異動連絡票変更登録).respond();
+        } else if (共同処理用受給者異動連絡票作成_メニューID.equals(メニューID)) {
+            return ResponseData.of(div).rootTitle(共同処理用受給者異動訂正連絡票発行).respond();
+        } else {
+            return ResponseData.of(div).rootTitle(共同処理用受給者異動連絡票情報照会).respond();
+        }
     }
 
     /**
