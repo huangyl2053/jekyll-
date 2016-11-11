@@ -63,9 +63,7 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
     protected void initialize() {
         itemList = new ArrayList<>();
         kagamiMapper = getMapper(IKaigoNinteiShinsakaiScheduleKagamiMapper.class);
-        compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 1);
+
     }
 
     @Override
@@ -77,6 +75,13 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
     protected void createWriter() {
         batchWriter = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
+    }
+
+    @Override
+    protected void beforeExecute() {
+        compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
+                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 1);
     }
 
     @Override
