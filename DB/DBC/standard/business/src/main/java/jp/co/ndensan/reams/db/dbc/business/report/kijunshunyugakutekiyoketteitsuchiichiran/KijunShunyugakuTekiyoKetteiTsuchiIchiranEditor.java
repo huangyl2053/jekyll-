@@ -88,8 +88,8 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
         source.choikiCode = 基準収入額決定通知一覧表パラメータ.get町域コード();
         source.gyoseikuCode = 基準収入額決定通知一覧表パラメータ.get行政区コード();
         source.shichosonCode = 基準収入額決定通知一覧表パラメータ.get市町村コード();
-        source.拡張情報1 = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), source.listHakkoTaishosha_4);
-        source.拡張情報2 = new ExpandedInformation(Code.EMPTY, new RString("被保険者氏名"), source.listHakkoTaishosha_5);
+        source.拡張情報1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listHakkoTaishosha_4);
+        source.拡張情報2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.listHakkoTaishosha_5);
         return source;
     }
 

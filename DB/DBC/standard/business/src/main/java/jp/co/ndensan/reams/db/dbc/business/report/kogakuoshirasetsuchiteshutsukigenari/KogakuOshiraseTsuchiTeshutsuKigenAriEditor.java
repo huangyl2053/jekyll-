@@ -101,7 +101,7 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
             source.samabunShimeiSmall1 = target.get送付別宛先().samabunShimeiSmall1;
             source.customerBarCode = target.get送付別宛先().customerBarCode;
             source.識別コード = target.get申請情報帳票発行一時().getShikibetsuCodeChohyo();
-            source.拡張情報 = new ExpandedInformation(Code.EMPTY, RString.EMPTY, source.hihokenshaNo);
+            source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
         }
         return source;
     }

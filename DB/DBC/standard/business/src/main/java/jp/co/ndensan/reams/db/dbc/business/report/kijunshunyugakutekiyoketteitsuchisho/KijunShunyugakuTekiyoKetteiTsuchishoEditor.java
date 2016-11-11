@@ -131,12 +131,12 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.shikibetsuCode3 = 基準収入額適用決定通知書パラメータ.get識別コード３().value();
         }
         set帳票制御共通(source);
-        source.拡張情報A1 = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), source.hihokenshaNo1);
-        source.拡張情報A2 = new ExpandedInformation(Code.EMPTY, new RString("被保険者氏名"), source.hihokenshaName1);
-        source.拡張情報B1 = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), source.hihokenshaNo2);
-        source.拡張情報B2 = new ExpandedInformation(Code.EMPTY, new RString("被保険者氏名"), source.hihokenshaName2);
-        source.拡張情報C1 = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), source.hihokenshaNo3);
-        source.拡張情報C2 = new ExpandedInformation(Code.EMPTY, new RString("被保険者氏名"), source.hihokenshaName3);
+        source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo1);
+        source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.hihokenshaName1);
+        source.拡張情報B1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo2);
+        source.拡張情報B2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.hihokenshaName2);
+        source.拡張情報C1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo3);
+        source.拡張情報C2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.hihokenshaName3);
         return source;
     }
 

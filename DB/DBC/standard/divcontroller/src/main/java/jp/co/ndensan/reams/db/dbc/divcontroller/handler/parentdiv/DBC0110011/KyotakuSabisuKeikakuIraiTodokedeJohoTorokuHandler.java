@@ -704,7 +704,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 : 居宅給付計画事業者.get委託先事業者番号().getColumnValue());
         div.getTxtItakusakiJigyoshaName().setValue(result.get委託先事業者名() == null ? RString.EMPTY
                 : result.get委託先事業者名());
-        if (居宅給付計画事業者.get事業者変更年月日() != null) {
+        if (居宅給付計画事業者.get事業者変更年月日() != null && !居宅給付計画事業者.get事業者変更年月日().isEmpty()) {
             div.getTxtJigyoshaHenkoYMD().setValue(new RDate(居宅給付計画事業者.get事業者変更年月日().toString()));
         } else {
             div.getTxtJigyoshaHenkoYMD().clearValue();
