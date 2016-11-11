@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -402,13 +403,13 @@ public class IkenshoSakuseiIraiHandler {
         RString 医療機関郵便番号 = RString.EMPTY;
         RString 医療機関住所 = RString.EMPTY;
         if (意見書作成依頼書情報.get医療機関郵便番号() != null) {
-            医療機関郵便番号 = 意見書作成依頼書情報.get医療機関郵便番号().value();
+            医療機関郵便番号 = 意見書作成依頼書情報.get医療機関郵便番号().getEditedYubinNo();
         }
         if (意見書作成依頼書情報.get医療機関住所() != null) {
             医療機関住所 = 意見書作成依頼書情報.get医療機関住所().value();
         }
         item.setYubinNo(医療機関郵便番号);
-        item.setJusho(医療機関住所);
+        item.setJushoText(医療機関住所);
         item.setKikanNameText(意見書作成依頼書情報.get医療機関名称());
         item.setShimeiText(意見書作成依頼書情報.get主治医氏名());
         item.setMeishoFuyo(get名称付与(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称));
@@ -469,7 +470,7 @@ public class IkenshoSakuseiIraiHandler {
             item.setYubinNo1(getEditedYubinNo(意見書作成依頼書情報.get郵便番号().value()));
         }
         if (意見書作成依頼書情報.get住所() != null) {
-            item.setJushoText(意見書作成依頼書情報.get住所().value());
+            item.setJusho(意見書作成依頼書情報.get住所().value());
         }
         item.setShinseiYMD(fomartDate12(意見書作成依頼書情報.get認定申請年月日()));
         FlexibleDate 作成期限 = get主治医意見書作成期限年月日(意見書作成依頼書情報.get認定申請年月日(), div);
@@ -494,7 +495,7 @@ public class IkenshoSakuseiIraiHandler {
         RString 医療機関郵便番号 = RString.EMPTY;
         RString 医療機関住所 = RString.EMPTY;
         if (意見書作成依頼書情報.get医療機関郵便番号() != null) {
-            医療機関郵便番号 = 意見書作成依頼書情報.get医療機関郵便番号().value();
+            医療機関郵便番号 = 意見書作成依頼書情報.get医療機関郵便番号().getEditedYubinNo();
         }
         if (意見書作成依頼書情報.get医療機関住所() != null) {
             医療機関住所 = 意見書作成依頼書情報.get医療機関住所().value();
@@ -517,9 +518,9 @@ public class IkenshoSakuseiIraiHandler {
         if (意見書作成依頼書情報.get住所() != null) {
             item.setListIchiranhyo_6(意見書作成依頼書情報.get住所().value());
         }
-        item.setListIchiranhyo_7(fomartDate12(意見書作成依頼書情報.get生年月日()));
+        item.setListIchiranhyo_7(fomartDate9(意見書作成依頼書情報.get生年月日()));
         item.setListIchiranhyo_8(Seibetsu.toValue(意見書作成依頼書情報.get性別().value()).get名称());
-        item.setListIchiranhyo_9(fomartDate12(get主治医意見書作成期限年月日(意見書作成依頼書情報.get主治医意見書作成依頼年月日(), div)));
+        item.setListIchiranhyo_9(fomartDate9(get主治医意見書作成期限年月日(意見書作成依頼書情報.get主治医意見書作成依頼年月日(), div)));
         item.setTsuchibun1(ReportUtil.get通知文(
                 SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(), KamokuCode.EMPTY, 数字_1).get(数字_1));
         List<IkenshoSakuseiIraiIchiranhyoItem> 意見書作成依頼一覧表ItemList = new ArrayList<>();
@@ -556,7 +557,7 @@ public class IkenshoSakuseiIraiHandler {
                 RString.EMPTY,
                 RString.EMPTY,
                 文書番号,
-                business.get医療機関郵便番号(),
+                RString.isNullOrEmpty(business.get医療機関郵便番号()) ? RString.EMPTY : new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo(),
                 business.get医療機関住所(),
                 business.get被保険者氏名(),
                 get名称付与(ConfigNameDBE.介護保険診断命令書_宛先敬称),
@@ -642,7 +643,12 @@ public class IkenshoSakuseiIraiHandler {
         item.setHihokenshaNo10(保険者番号リスト.get(数字_9));
         item.setHihokenshaNameKana(business.get被保険者氏名カナ());
         item.setHihokenshaName(business.get被保険者氏名());
-        item.setBirthYMD(business.get生年月日());
+        RString 生年月日 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(business.get生年月日())) {
+            生年月日 = new FlexibleDate(business.get生年月日()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        item.setBirthYMD(生年月日);
         item.setSeibetsu(Seibetsu.toValue(business.get性別()).get名称());
         if (ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
             item.setShubetsuZaitaku(記号_CHECKED);
@@ -691,7 +697,7 @@ public class IkenshoSakuseiIraiHandler {
             RString 医療機関郵便番号 = RString.EMPTY;
             RString 医療機関住所 = RString.EMPTY;
             if (business.get医療機関郵便番号() != null) {
-                医療機関郵便番号 = business.get医療機関郵便番号().value();
+                医療機関郵便番号 = business.get医療機関郵便番号().getEditedYubinNo();
             }
             if (business.get医療機関住所() != null) {
                 医療機関住所 = business.get医療機関住所().value();
@@ -748,7 +754,7 @@ public class IkenshoSakuseiIraiHandler {
                 item.setJusho(business.get住所().value());
             }
             if (business.get郵便番号() != null) {
-                item.setYubinNo(business.get郵便番号().value());
+                item.setYubinNo(business.get郵便番号().getEditedYubinNo());
             }
             item.setTsuchibun1(通知文.get(数字_2));
             itemList.add(item);
@@ -766,12 +772,20 @@ public class IkenshoSakuseiIraiHandler {
         return yubinNo.insert(yubinNo.length() - 数字_4, "-");
     }
 
+    private RString fomartDate9(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI_RYAKU).
+                firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+    }
+
     private RString fomartDate12(FlexibleDate date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
         return date.wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString fomartDate12(RDate date) {
@@ -779,7 +793,7 @@ public class IkenshoSakuseiIraiHandler {
             return RString.EMPTY;
         }
         return date.wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString fomartDate6(FlexibleDate date) {
@@ -808,7 +822,7 @@ public class IkenshoSakuseiIraiHandler {
         RStringBuilder printTimeStampSb = new RStringBuilder();
         printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(String.format("%02d", printdate.getHour()));
         printTimeStampSb.append(new RString("時"));
