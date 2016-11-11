@@ -66,9 +66,9 @@ public class TsuuchishoHakkoHandler {
         div.getRadChushutsukikan().setDataSource(get通知書発行_抽出期間());
         div.getDdlInsho().setDataSource(get通知書発行_印書());
 
-        div.getRadChushutsukikan().setSelectedKey(ChushutsuKikan.申請年月日.getコード());
+        div.getRadChushutsukikan().setSelectedKey(ChushutsuKikan.決定年月日.getコード());
         div.getDdlInsho().setSelectedKey(Insho.発行済みも含める.getコード());
-
+        div.getTxtZenkaiTaishoYMD().setDisabled(true);
         div.getTxtSakuseiYMD().setValue(FlexibleDate.getNowDate());
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
 
@@ -79,7 +79,7 @@ public class TsuuchishoHakkoHandler {
      *
      */
     public void set文書番号() {
-        div.getCcdBunshoBangoInput().initialize(帳票ID, FlexibleDate.getNowDate());
+        div.getCcdBunshoBangoInput().initialize(帳票ID, div.getTxtSakuseiYMD().getValue());
     }
 
     /**
@@ -106,6 +106,8 @@ public class TsuuchishoHakkoHandler {
         if (ChushutsuKikan.申請年月日.getコード().equals(div.getRadChushutsukikan().getSelectedKey())) {
             div.getShinseiKetteiYMD().getTxtShinseiYMD().setDisabled(false);
             div.getShinseiKetteiYMD().getTxtKetteiYMD().setDisabled(true);
+            div.getShinseiKetteiYMD().getTxtKetteiYMD().clearFromValue();
+            div.getShinseiKetteiYMD().getTxtKetteiYMD().clearToValue();
             if (前回対象終了日時Temp != null) {
                 div.getShinseiKetteiYMD().getTxtShinseiYMD().setFromValue(前回対象終了日時Temp.plusDay(NUM_1));
             } else {
@@ -114,6 +116,8 @@ public class TsuuchishoHakkoHandler {
             div.getShinseiKetteiYMD().getTxtShinseiYMD().setToValue(システム日付);
         } else {
             div.getShinseiKetteiYMD().getTxtShinseiYMD().setDisabled(true);
+            div.getShinseiKetteiYMD().getTxtShinseiYMD().clearFromValue();
+            div.getShinseiKetteiYMD().getTxtShinseiYMD().clearToValue();
             div.getShinseiKetteiYMD().getTxtKetteiYMD().setDisabled(false);
             if (前回対象終了日時Temp != null) {
                 div.getShinseiKetteiYMD().getTxtKetteiYMD().setFromValue(前回対象終了日時Temp.plusDay(NUM_1));
@@ -225,14 +229,14 @@ public class TsuuchishoHakkoHandler {
         FlexibleDate 終了日;
         if (ChushutsuKikan.申請年月日.getコード().equals(div.getRadChushutsukikan().getSelectedKey())) {
             RDate 開始日Rdate = div.getShinseiKetteiYMD().getTxtShinseiYMD().getFromValue();
-            開始日 = 開始日Rdate == null ? FlexibleDate.MIN : new FlexibleDate(開始日Rdate.toString());
+            開始日 = (開始日Rdate == null || 開始日Rdate.toDateString().isEmpty()) ? FlexibleDate.MIN : new FlexibleDate(開始日Rdate.toString());
             RDate 終了日Rdate = div.getShinseiKetteiYMD().getTxtShinseiYMD().getToValue();
-            終了日 = 終了日Rdate == null ? FlexibleDate.MAX : new FlexibleDate(終了日Rdate.toString());
+            終了日 = (終了日Rdate == null || 終了日Rdate.toDateString().isEmpty()) ? FlexibleDate.MAX : new FlexibleDate(終了日Rdate.toString());
         } else {
             RDate 開始日Rdate = div.getShinseiKetteiYMD().getTxtKetteiYMD().getFromValue();
-            開始日 = 開始日Rdate == null ? FlexibleDate.MIN : new FlexibleDate(開始日Rdate.toString());
+            開始日 = (開始日Rdate == null || 開始日Rdate.toDateString().isEmpty()) ? FlexibleDate.MIN : new FlexibleDate(開始日Rdate.toString());
             RDate 終了日Rdate = div.getShinseiKetteiYMD().getTxtKetteiYMD().getToValue();
-            終了日 = 終了日Rdate == null ? FlexibleDate.MAX : new FlexibleDate(終了日Rdate.toString());
+            終了日 = (終了日Rdate == null || 終了日Rdate.toDateString().isEmpty()) ? FlexibleDate.MAX : new FlexibleDate(終了日Rdate.toString());
         }
         parameter.set開始日(開始日);
         parameter.set終了日(終了日);
