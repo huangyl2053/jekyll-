@@ -93,35 +93,36 @@ public class JikofutangakuShomeishoTorokuManager {
     /**
      * 事業高額合算自己負担額証明書and明細を保存します。
      *
-     * @param shomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
-     * @param meisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
+     * @param insShomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
+     * @param insMeisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
+     * @param updShomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
+     * @param updMeisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
      */
     @Transaction
-    public void save事業高額合算自己負担額証明書and明細(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho,
-            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList) {
-        dbT3180Dac.save(shomeisho.toEntity());
-        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : meisaiList) {
+    public void save事業高額合算自己負担額証明書and明細(JigyoKogakuGassanJikoFutanGakuShomeisho insShomeisho,
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> insMeisaiList,
+            JigyoKogakuGassanJikoFutanGakuShomeisho updShomeisho,
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> updMeisaiList) {
+        dbT3180Dac.save(insShomeisho.toEntity());
+        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : insMeisaiList) {
             dbT3181Dac.save(meisai.toEntity());
+        }
+        dbT3180Dac.save(updShomeisho.modifiedModel().toEntity());
+        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : updMeisaiList) {
+            dbT3181Dac.save(meisai.modifiedModel().toEntity());
         }
     }
 
     /**
-     * 事業高額合算自己負担額証明書を保存します。
+     * 事業高額合算自己負担額証明書and明細を保存します。
      *
-     * @param shomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
-     * @param delMeisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
+     * @param insShomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
      * @param insMeisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
      */
     @Transaction
-    public void save事業高額合算自己負担額証明書(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho,
-            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> delMeisaiList,
+    public void save事業高額合算自己負担額証明書and明細(JigyoKogakuGassanJikoFutanGakuShomeisho insShomeisho,
             List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> insMeisaiList) {
-        dbT3180Dac.save(shomeisho.toEntity());
-        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : delMeisaiList) {
-            DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiEntity entity = meisai.toEntity();
-            entity.setState(EntityDataState.Deleted);
-            dbT3181Dac.save(entity);
-        }
+        dbT3180Dac.save(insShomeisho.toEntity());
         for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : insMeisaiList) {
             dbT3181Dac.save(meisai.toEntity());
         }
@@ -130,11 +131,28 @@ public class JikofutangakuShomeishoTorokuManager {
     /**
      * 事業高額合算自己負担額証明書を保存します。
      *
-     * @param shomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
+     * @param delShomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
+     * @param insShomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
+     * @param delMeisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
+     * @param insMeisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
      */
     @Transaction
-    public void save事業高額合算自己負担額証明書(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho) {
-        dbT3180Dac.save(shomeisho.toEntity());
+    public void save事業高額合算自己負担額証明書(JigyoKogakuGassanJikoFutanGakuShomeisho delShomeisho,
+            JigyoKogakuGassanJikoFutanGakuShomeisho insShomeisho,
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> delMeisaiList,
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> insMeisaiList) {
+        DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity shomeishoEntity = delShomeisho.toEntity();
+        shomeishoEntity.setState(EntityDataState.Deleted);
+        dbT3180Dac.save(shomeishoEntity);
+        dbT3180Dac.save(insShomeisho.toEntity());
+        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : delMeisaiList) {
+            DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiEntity entity = meisai.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            dbT3181Dac.save(entity);
+        }
+        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : insMeisaiList) {
+            dbT3181Dac.save(meisai.toEntity());
+        }
     }
 
     /**
@@ -151,44 +169,6 @@ public class JikofutangakuShomeishoTorokuManager {
         dbT3180Dac.save(shomeishoEntity);
         for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : meisaiList) {
             dbT3181Dac.save(meisai.toEntity());
-        }
-    }
-
-    /**
-     * 事業高額合算自己負担額証明書を削除します。
-     *
-     * @param shomeisho JigyoKogakuGassanJikoFutanGakuShomeisho
-     */
-    @Transaction
-    public void delete事業高額合算自己負担額証明書(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho) {
-        DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity shomeishoEntity = shomeisho.toEntity();
-        shomeishoEntity.setState(EntityDataState.Deleted);
-        dbT3180Dac.save(shomeishoEntity);
-    }
-
-    /**
-     * 事業高額合算自己負担額証明書明細を保存します。
-     *
-     * @param meisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
-     */
-    @Transaction
-    public void save事業高額合算自己負担額証明書明細(List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList) {
-        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : meisaiList) {
-            dbT3181Dac.save(meisai.toEntity());
-        }
-    }
-
-    /**
-     * 事業高額合算自己負担額証明書明細を保存します。
-     *
-     * @param meisaiList List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai>
-     */
-    @Transaction
-    public void delete事業高額合算自己負担額証明書明細(List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList) {
-        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : meisaiList) {
-            DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiEntity entity = meisai.toEntity();
-            entity.setState(EntityDataState.Deleted);
-            dbT3181Dac.save(entity);
         }
     }
 

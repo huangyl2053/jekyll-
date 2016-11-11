@@ -186,7 +186,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
         }
 
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
-        RString 対象年度 = txtTorokuTaishoNendo.substring(0, 桁数_4);
+        RString 対象年度 = txtTorokuTaishoNendo.substring(0, 桁数_4 - 1);
         RStringBuilder 対象年度_FROM = new RStringBuilder();
         RStringBuilder 対象年度_TO = new RStringBuilder();
         対象年度_FROM.append(対象年度);
@@ -242,7 +242,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
                 .add(nullToZero(div.getTxtJikofutangaku6().getValue()))
                 .add(nullToZero(div.getTxtJikofutangaku7().getValue()));
 
-        if (jikofutangakuGokei.equals(nullToZero(div.getTxtJikofutangakuGokei().getValue()))) {
+        if (!jikofutangakuGokei.equals(nullToZero(div.getTxtJikofutangakuGokei().getValue()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new ValidationCheckMessages(DbcErrorMessages.合計ボタン未押下),
                     div.getTxtJikofutangakuGokei()));
@@ -260,7 +260,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
                 .add(nullToZero(div.getTxtUchiFutangaku6().getValue()))
                 .add(nullToZero(div.getTxtUchiFutangaku7().getValue()));
 
-        if (uchiFutangakuGokei.equals(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))) {
+        if (!uchiFutangakuGokei.equals(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new ValidationCheckMessages(DbcErrorMessages.合計ボタン未押下),
                     div.getTxtJikofutangakuGokei()));
