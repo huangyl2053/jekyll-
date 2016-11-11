@@ -28,6 +28,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
 
     private static final RString テキスト全面イメージ = new RString("1");
     private static final int INT_25 = 25;
+    private static final int PAGECOUN = 15;
     private static final int MAXCOUNT = 30;
     private static final int PAGETWO_MAXCOUNT = 34;
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
@@ -149,7 +150,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
 
     private void 短冊Editor(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter,
             List<RString> 短冊リスト, List<TokkiJikou> 短冊情報リスト) {
-        int totalPages = (int) Math.ceil((double) 短冊情報リスト.size() / PAGETWO_MAXCOUNT);
+        int totalPages = (int) Math.ceil((double) (短冊情報リスト.size() - PAGECOUN) / PAGETWO_MAXCOUNT) + 1;
         for (int i = 0; i < 短冊リスト.size(); i++) {
             int page = (i + PAGETWO_MAXCOUNT) / PAGETWO_MAXCOUNT + 1;
             if (page <= totalPages) {
