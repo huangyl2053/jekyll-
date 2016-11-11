@@ -212,7 +212,7 @@ public class DBC2210011MainHandler {
      * @param row dgTokubetsuKyufuJigyoshaList_Row
      */
     public void onSelect_byListSelect(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
-
+        div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getDdlSearchKenCode().setDataSource(get県コードDDLSource());
         set事業者情報(事業者サービス情報List, row);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
                 getGridSetting().setIsShowDeleteButtonColumn(false);
@@ -230,6 +230,7 @@ public class DBC2210011MainHandler {
      * @param row dgTokubetsuKyufuJigyoshaList_Row
      */
     public void onSelect_byListModify(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().setDataSource(get県コードDDLSource());
         set事業者情報(事業者サービス情報List, row);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(false);
@@ -243,6 +244,7 @@ public class DBC2210011MainHandler {
      * @param row dgTokubetsuKyufuJigyoshaList_Row
      */
     public void onSelect_byListDelete(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().setDataSource(get県コードDDLSource());
         set事業者情報(事業者サービス情報List, row);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(true);
