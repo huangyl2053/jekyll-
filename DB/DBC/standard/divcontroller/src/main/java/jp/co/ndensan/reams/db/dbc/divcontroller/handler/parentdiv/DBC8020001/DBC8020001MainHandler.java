@@ -377,7 +377,7 @@ public class DBC8020001MainHandler {
             parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
         } else if (null != div.getRadShoriSentakuFurikomiDataModify().getSelectedKey()
                 && INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey())) {
-            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey());
         } else {
             parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
         }
@@ -436,7 +436,7 @@ public class DBC8020001MainHandler {
             parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
         } else if (null != div.getRadShoriSentakuFurikomiDataModify().getSelectedKey()
                 && INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey())) {
-            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey());
         } else {
             parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
         }
@@ -491,7 +491,7 @@ public class DBC8020001MainHandler {
             parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
         } else if (null != div.getRadShoriSentakuFurikomiDataModify().getSelectedKey()
                 && INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey())) {
-            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+            parameter.set処理区分(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey());
         } else {
             parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
         }
