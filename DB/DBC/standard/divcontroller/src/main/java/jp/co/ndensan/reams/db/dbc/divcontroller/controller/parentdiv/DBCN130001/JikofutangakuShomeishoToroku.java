@@ -112,7 +112,8 @@ public class JikofutangakuShomeishoToroku {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuParameter parameter = getHandler(div).getParameterForbtnSearch(被保険者番号);
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         List<RString> keys = div.getChkIsRirekiHyoji().getSelectedKeys();
@@ -137,7 +138,8 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_shokai(JikofutangakuShomeishoTorokuDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuParameter parameter = getHandler(div).getParameterSelectRow(被保険者番号);
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         List<JikofutangakuShomeishoTorokuBusiness> list = manager.get事業高額合算支給申請書情報(parameter).records();
@@ -157,7 +159,8 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_shusei(JikofutangakuShomeishoTorokuDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuParameter parameter = getHandler(div).getParameterSelectRow(被保険者番号);
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         List<JikofutangakuShomeishoTorokuBusiness> list = manager.get事業高額合算支給申請書情報(parameter).records();
@@ -177,7 +180,8 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_sakujo(JikofutangakuShomeishoTorokuDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuParameter parameter = getHandler(div).getParameterSelectRow(被保険者番号);
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         List<JikofutangakuShomeishoTorokuBusiness> list = manager.get事業高額合算支給申請書情報(parameter).records();
@@ -205,7 +209,8 @@ public class JikofutangakuShomeishoToroku {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
                 RString 前排他キー = 排他キー.concat(被保険者番号.value());
                 LockingKey key = new LockingKey(前排他キー);
                 RealInitialLocker.release(key);
@@ -231,7 +236,8 @@ public class JikofutangakuShomeishoToroku {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
                 RString 前排他キー = 排他キー.concat(被保険者番号.value());
                 LockingKey key = new LockingKey(前排他キー);
                 RealInitialLocker.release(key);
@@ -534,7 +540,8 @@ public class JikofutangakuShomeishoToroku {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
                 RString 前排他キー = 排他キー.concat(被保険者番号.value());
                 LockingKey key = new LockingKey(前排他キー);
                 RealInitialLocker.release(key);
@@ -561,7 +568,8 @@ public class JikofutangakuShomeishoToroku {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
                 RString 前排他キー = 排他キー.concat(被保険者番号.value());
                 LockingKey key = new LockingKey(前排他キー);
                 RealInitialLocker.release(key);
@@ -588,7 +596,8 @@ public class JikofutangakuShomeishoToroku {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
                 RString 前排他キー = 排他キー.concat(被保険者番号.value());
                 LockingKey key = new LockingKey(前排他キー);
                 RealInitialLocker.release(key);
@@ -624,8 +633,9 @@ public class JikofutangakuShomeishoToroku {
             完了メッセージ.append(STATUS_削除);
         }
         完了メッセージ.append(new RString("が完了しました。"));
-
-        RStringBuilder messageTaisho1 = new RStringBuilder(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class).value());
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        RStringBuilder messageTaisho1 = new RStringBuilder(被保険者番号.value());
         messageTaisho1.append(new RString("："));
         messageTaisho1.append(div.getCcdAtenaInfo().get氏名漢字());
         RStringBuilder messageTaisho2 = new RStringBuilder();
@@ -639,7 +649,8 @@ public class JikofutangakuShomeishoToroku {
     }
 
     private void insert(JikofutangakuShomeishoTorokuDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         int count = manager.get事業高額合算自己負担額証明書Count(getHandler(div).getParameterFor登録(被保険者番号));
         if (count == 0) {
@@ -653,7 +664,8 @@ public class JikofutangakuShomeishoToroku {
     }
 
     private void update(JikofutangakuShomeishoTorokuDiv div, JikofutangakuShomeishoTorokuBusiness business) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
         if (shomeisho.get転入前保険者番号().value().equals(div.getCcdTennyumaeHokensha().getHokenjaNo())) {
