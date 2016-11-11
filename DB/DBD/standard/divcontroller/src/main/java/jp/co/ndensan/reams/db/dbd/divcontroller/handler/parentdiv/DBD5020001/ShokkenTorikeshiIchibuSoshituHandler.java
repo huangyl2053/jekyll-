@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJohoBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.YokaigoInterfaceIchoTorikomi;
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.YokaigoInterfaceShurui;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
@@ -75,6 +77,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -87,10 +91,10 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
     private final ShokkenTorikeshiIchibuSoshituDiv div;
     private final Association association;
+    private final HashMap<RString, RString> サービス種類Map;
+    private int index;
 
     private static final RString 連絡符号 = new RString(",");
-    private static int index = 0;
-    private static final int INT_4 = 4;
     private static final int 年の月数 = 12;
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
@@ -160,6 +164,12 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     public ShokkenTorikeshiIchibuSoshituHandler(ShokkenTorikeshiIchibuSoshituDiv div) {
         this.div = div;
         this.association = AssociationFinderFactory.createInstance().getAssociation();
+        this.サービス種類Map = new HashMap<>();
+        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBD介護受給,
+                DBDCodeShubetsu.指定サービス種類コード.getコード(), FlexibleDate.getNowDate());
+        for (UzT0007CodeEntity e : entityList) {
+            this.サービス種類Map.put(e.getコード().value(), e.getコード名称());
+        }
     }
 
     /**
@@ -249,7 +259,23 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         passModel.set申請書管理番号(new ShinseishoKanriNo(認定情報.get申請書管理番号受給()));
         passModel.set認定区分(new RString("1"));
         passModel.setみなし更新認定(new ArrayList<RString>());
-
+        if (is今回) {
+            passModel.set要介護度名称(div.getTxtYokaigodoKonkai().getValue());
+            passModel.set要介護度コード(get要介護度コード(認定情報.get厚労省IF識別コード(), div.getTxtYokaigodoKonkai().getValue()));
+            passModel.set有効開始年月日(div.getTxtYukoKaishibiKonkai().getValue());
+            passModel.set有効終了年月日(div.getTxtYukoShuryobiKonkai().getValue());
+            passModel.set認定年月日(div.getTxtNinteibiKonkai().getValue());
+            passModel.set審査会意見(div.getTxtShinsakaiIkenKonkai().getValue());
+            passModel.setサービス一覧リスト(getServiceCodeList(div.getTxtServiceShuruiKonkai().getValue()));
+        } else {
+            passModel.set要介護度名称(div.getTxtYokaigodoZenkai().getValue());
+            passModel.set要介護度コード(get要介護度コード(認定情報.get厚労省IF識別コード(), div.getTxtYokaigodoZenkai().getValue()));
+            passModel.set有効開始年月日(div.getTxtYukoKaishibiZenkai().getValue());
+            passModel.set有効終了年月日(div.getTxtYukoShuryobiZenkai().getValue());
+            passModel.set認定年月日(div.getTxtNinteibiZenkai().getValue());
+            passModel.set審査会意見(div.getTxtShinsakaiIkenZenkai().getValue());
+            passModel.setサービス一覧リスト(getServiceCodeList(div.getTxtServiceShuruiZenkai().getValue()));
+        }
         KekkaShosaiJohoModel model = new KekkaShosaiJohoModel();
         model.setIdoJiyuCode(convertCodeToRString(認定情報.getデータ区分()));
         model.setJukyuShikakuHakkoDay1(認定情報.get受給資格証明書発行年月日１());
@@ -285,13 +311,10 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         RString サービス種類Str = RString.EMPTY;
         List<KekkaShosaiJohoServiceShuri> サービス類リスト = model.getサービス類リスト();
         if (null != サービス類リスト && サービス類リスト.size() > 0) {
-            for (int i = 0; i < サービス類リスト.size(); i++) {
-                if (i == 0) {
-                    サービス種類Str = サービス類リスト.get(i).getServiceShuriCode();
-                } else {
-                    サービス種類Str = サービス種類Str.concat(連絡符号).concat(サービス類リスト.get(i).getServiceShuriCode());
-                }
+            for (KekkaShosaiJohoServiceShuri s : サービス類リスト) {
+                サービス種類Str = サービス種類Str.concat(連絡符号).concat(s.getServiceShuriName());
             }
+            サービス種類Str = サービス種類Str.substring(1);
         }
         div.getTxtServiceShuruiKonkai().setValue(サービス種類Str);
         div.getTxtShinsakaiIkenKonkai().setValue(認定内容.get審査会意見());
@@ -351,6 +374,9 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         if (今回情報.get事業者番号() != null) {
             RString 事業者番号 = 今回情報.get事業者番号().getColumnValue();
             iNinteiShinseiTodokedeshaDiv.getTxtJigyoshaCode().setValue(事業者番号);
+            if (iNinteiShinseiTodokedeshaDiv instanceof NinteiShinseiTodokedeshaDiv) {
+                ((NinteiShinseiTodokedeshaDiv) iNinteiShinseiTodokedeshaDiv).getTxtJigyoshaName().setValue(今回情報.get事業者名称());
+            }
         }
         List<RString> shinseiKankeishaCodeList = new ArrayList<>();
         for (ShinseishaKankeiCode code : ShinseishaKankeiCode.values()) {
@@ -427,7 +453,6 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             div.setHdnYokaigodoCodeZenkai(convertCodeToRString(前回情報.get要介護認定状態区分コード()));
             div.getTxtYokaigodoZenkai().setValue(get要介護度名(前回情報.get厚労省IF識別コード(), convertCodeToRString(前回情報.get要介護認定状態区分コード())));
             div.setHdnZenkaiRirekiNo(前回情報.get履歴番号());
-
             div.getTxtYukoKaishibiZenkai().setValue(前回情報.get認定有効期間開始年月日());
             div.getTxtYukoShuryobiZenkai().setValue(前回情報.get認定有効期間終了年月日());
             div.getTxtNinteibiZenkai().setValue(前回情報.get認定年月日());
@@ -441,7 +466,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
         if (null != 今回情報) {
             div.setHdnKonkaiRirekiNo(今回情報.get履歴番号());
-            if (DonyuKeitaiCode.認定広域.getCode().equals(convertCodeToRString(導入形態コード))) {
+//            if (DonyuKeitaiCode.認定広域.getCode().equals(convertCodeToRString(導入形態コード))
+              if (今回情報.has要介護認定インターフェース情報()) {
                 div.setHdnYokaigodoCodeKonkai(今回情報.getインターフェース二次判定結果());
                 div.getTxtYokaigodoKonkai().setValue(get要介護度名(今回情報.get厚労省IF識別コード(), 今回情報.getインターフェース二次判定結果()));
                 div.getTxtYukoKaishibiKonkai().setValue(今回情報.getインターフェース認定有効期間開始年月日());
@@ -449,7 +475,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
                 div.getTxtNinteibiKonkai().setValue(今回情報.getインターフェース認定年月日());
                 div.getTxtServiceShuruiKonkai().setValue(getサービス種類(今回情報));
                 div.getTxtShinsakaiIkenKonkai().setValue(今回情報.getインターフェース介護認定審査会意見());
-            } else if (DonyuKeitaiCode.認定単一.getCode().equals(convertCodeToRString(導入形態コード))) {
+//            } else if (DonyuKeitaiCode.認定単一.getCode().equals(convertCodeToRString(導入形態コード))
+              } else if (今回情報.has要介護認定結果情報()) {
                 div.setHdnYokaigodoCodeKonkai(convertCodeToRString(今回情報.get二次判定要介護状態区分コード()));
                 div.getTxtYokaigodoKonkai().setValue(
                         get要介護度名(今回情報.get厚労省IF識別コード(), convertCodeToRString(今回情報.get二次判定要介護状態区分コード())));
@@ -554,53 +581,68 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         }
         return RString.EMPTY;
     }
+    
+    private RString get要介護度コード(Code 厚労省IF識別コード, RString 要介護度名) {
+        RString 厚労省IF識別コードStr = convertCodeToRString(厚労省IF識別コード);
+        try {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コードStr)) {
+                return YokaigoJotaiKubun99.valueOf(要介護度名.toString()).getコード();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コードStr)) {
+                return YokaigoJotaiKubun02.valueOf(要介護度名.toString()).getコード();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コードStr)) {
+                return YokaigoJotaiKubun06.valueOf(要介護度名.toString()).getコード();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コードStr)
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コードStr)) {
+                return YokaigoJotaiKubun09.valueOf(要介護度名.toString()).getコード();
+            }
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
+        }
+        return RString.EMPTY;
+    }
 
     private RString getサービス種類(YokaigoNinteiJoho 介護認定情報) {
         RString result = RString.EMPTY;
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類01());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類02());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類03());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類04());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類05());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類06());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類07());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類08());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類09());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類10());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類11());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類12());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類13());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類14());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類15());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類16());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類17());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類18());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類19());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類20());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類21());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類22());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類23());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類24());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類25());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類26());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類27());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類28());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類29());
-        result = get連絡後文字列(result, 介護認定情報.get指定サービス種類30());
-
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類01()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類02()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類03()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類04()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類05()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類06()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類07()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類08()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類09()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類10()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類11()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類12()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類13()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類14()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類15()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類16()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類17()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類18()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類19()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類20()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類21()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類22()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類23()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類24()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類25()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類26()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類27()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類28()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類29()));
+        result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類30()));
+        result = result.substring(1);
         return result;
     }
 
-    private RString get連絡後文字列(RString 連絡前文字列, ServiceShuruiCode サービス種類) {
+    private RString get連絡後文字列(RString 連絡前文字列, RString サービス種類) {
         if (null == サービス種類 || サービス種類.isEmpty()) {
             return 連絡前文字列;
         }
 
-        if (null == 連絡前文字列 || 連絡前文字列.isEmpty()) {
-            return サービス種類.value();
-        }
-
-        return 連絡前文字列.concat(連絡符号).concat(サービス種類.value());
+        return 連絡前文字列.concat(連絡符号).concat(サービス種類);
     }
 
     private boolean is履歴番号更新要() {
@@ -638,38 +680,39 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             builder.set登録用受給者台帳審査会依頼年月日(認定情報.get審査会資料作成年月日());
         }
         builder.set登録用受給者台帳認定年月日(div.getTxtNinteibiKonkai().getValue());
-        index = 0;
-        builder.set登録用受給者台帳指定サービス種類01(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類02(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類03(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類04(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類05(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類06(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類07(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類08(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類09(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類10(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類11(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類12(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類13(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類14(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類15(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類16(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類17(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類18(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類19(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類20(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類21(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類22(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類23(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類24(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類25(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類26(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類27(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類28(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類29(get指定サービス種類(index));
-        builder.set登録用受給者台帳指定サービス種類30(get指定サービス種類(index));
-
+        if (model != null) {
+            index = 0;
+            builder.set登録用受給者台帳指定サービス種類01(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類02(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類03(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類04(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類05(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類06(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類07(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類08(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類09(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類10(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類11(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類12(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類13(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類14(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類15(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類16(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類17(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類18(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類19(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類20(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類21(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類22(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類23(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類24(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類25(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類26(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類27(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類28(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類29(get指定サービス種類(model.getサービス類リスト()));
+            builder.set登録用受給者台帳指定サービス種類30(get指定サービス種類(model.getサービス類リスト()));
+        }
         if (!div.getTitle().contains("却下")) {
             builder.set登録用受給者台帳要介護認定状態区分コード(new Code(div.getHdnYokaigodoCodeKonkai()));
             builder.set登録用受給者台帳認定有効期間開始年月日(div.getTxtYukoKaishibiKonkai().getValue());
@@ -745,11 +788,16 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         return builder.build();
     }
 
-    private ServiceShuruiCode get指定サービス種類(int サービス種類番号) {
-        index = index + 1;
+    private ServiceShuruiCode get指定サービス種類(List<KekkaShosaiJohoServiceShuri> serviceList) {
+        this.index++;
         List<RString> サービス種類 = div.getTxtServiceShuruiKonkai().getValue().split(",");
-        if (null != サービス種類 && サービス種類.size() > サービス種類番号 && !サービス種類.get(サービス種類番号).isEmpty()) {
-            return new ServiceShuruiCode(サービス種類.get(サービス種類番号));
+        if (null != サービス種類 && サービス種類.size() > this.index && !サービス種類.get(this.index).isEmpty()) {
+            for (KekkaShosaiJohoServiceShuri s : serviceList) {
+                if (s.getServiceShuriName().equals(サービス種類.get(this.index))) {
+                    return new ServiceShuruiCode(s.getServiceShuriCode());
+                }
+            }
+            return ServiceShuruiCode.EMPTY;
         }
         return null;
     }
@@ -821,5 +869,35 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             dataSourceList.add(keyValue);
         }
         return dataSourceList;
+    }
+    
+    private RString getServiceNameByServiceCode(ServiceShuruiCode code) {
+        if (code != null && !RString.isNullOrEmpty(code.value())
+        && this.サービス種類Map.containsKey(code.value())) {
+            return this.サービス種類Map.get(code.value());
+        }
+        return RString.EMPTY;
+    }
+    
+    private RString getServiceCodeByServiceName(RString name) {
+        if (name != null && !RString.isNullOrEmpty(name)) {
+            for (RString key : this.サービス種類Map.keySet()) {
+                if (this.サービス種類Map.get(key).toString().equals(name.toString())) {
+                    return key;
+                }
+            }
+        }
+        return RString.EMPTY;
+    }
+    
+    private List<RString> getServiceCodeList(RString names) {
+        List<RString> tempList = names.split(連絡符号.toString());
+        List<RString> resultList = new ArrayList<>();
+        for (RString name : tempList) {
+            if (!RString.isNullOrEmpty(getServiceCodeByServiceName(name))) {
+                resultList.add(getServiceCodeByServiceName(name));
+            }
+        }
+        return resultList;
     }
 }

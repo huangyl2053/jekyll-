@@ -28,17 +28,18 @@ public class YokaigodoGuide {
      * @return ResponseData<YokaigodoGuideDiv>
      */
     public ResponseData<YokaigodoGuideDiv> onLoad(YokaigodoGuideDiv godoDiv) {
-        if (RString.isNullOrEmpty(godoDiv.getKijunYMD())) {
+        YokaigodoGuideHandler handler = getHandler(godoDiv);
+        if (RString.isNullOrEmpty(godoDiv.getKijunYMD()) || !(new FlexibleDate(godoDiv.getKijunYMD()).isValid())) {
             godoDiv.setKijunYMD(new RString(FlexibleDate.getNowDate().toString()));
         }
-        FlexibleYearMonth kizyuniti = RString.isNullOrEmpty(godoDiv.getKijunYMD()) ? FlexibleYearMonth.EMPTY : new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
-        if (FlexibleYearMonth.EMPTY.equals(kizyuniti) || kizyuniti.isBefore(new FlexibleYearMonth("200003"))) {
-            ValidationMessageControlPairs validationMessages = createHandlerOf(godoDiv).check_btnKakuninn(godoDiv);
+        FlexibleYearMonth kijunbi = new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
+        if (FlexibleYearMonth.EMPTY.equals(kijunbi) || kijunbi.isBefore(new FlexibleYearMonth("200003"))) {
+            ValidationMessageControlPairs validationMessages = handler.check_btnKakuninn(godoDiv);
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(godoDiv).addValidationMessages(validationMessages).respond();
             }
         }
-        createHandlerOf(godoDiv).initialize();
+        handler.initialize();
         return ResponseData.of(godoDiv).respond();
     }
 
@@ -65,7 +66,7 @@ public class YokaigodoGuide {
         return ResponseData.of(godoDiv).respond();
     }
 
-    private YokaigodoGuideHandler createHandlerOf(YokaigodoGuideDiv godoDiv) {
+    private YokaigodoGuideHandler getHandler(YokaigodoGuideDiv godoDiv) {
         return new YokaigodoGuideHandler(godoDiv);
     }
 

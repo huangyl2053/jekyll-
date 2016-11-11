@@ -120,7 +120,7 @@ public class YokaigoNinteiJohoManager {
     }
 
     /**
-     * 前回認定情報の取得します。
+     * 今回情報を保存します。
      *
      * @param 今回情報 YokaigoNinteiJoho
      * @param 削除フラグ boolean
