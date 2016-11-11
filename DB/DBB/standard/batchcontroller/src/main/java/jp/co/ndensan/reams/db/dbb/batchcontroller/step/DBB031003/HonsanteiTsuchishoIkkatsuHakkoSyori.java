@@ -651,6 +651,8 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
         tempEntity.set出力順グループ指定(出力順グループ名);
         tempEntity.set生活保護区分(entity.get生活保護区分());
         tempEntity.set更正前情報有無区分(entity.get更正前情報有無区分());
+        tempEntity.set特徴8月開始者区分(entity.get特徴8月開始者区分());
+        tempEntity.set特徴10月開始者区分(entity.get特徴10月開始者区分());
         return tempEntity;
 
     }
@@ -727,6 +729,8 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
         tmpEntity.set更正前情報有無区分(定値区分_0);
         tmpEntity.set生活保護区分(定値区分_0);
         tmpEntity.set決定変更区分(定値区分_0);
+        tmpEntity.set特徴8月開始者区分(RString.EMPTY);
+        tmpEntity.set特徴10月開始者区分(RString.EMPTY);
 
         return tmpEntity;
     }
