@@ -135,6 +135,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     private List<HihokenshaNo> エラー異動No;
     private HihokenshaNo 被保険者番号;
     private List<DbT7109KubunShikyuGendoGakuEntity> 居宅サービス区分支給限度額List;
+    private ShichosonSecurityJoho 市町村;
+    private Map<LasdecCode, ShoKisaiHokenshaNo> 証記載保険者番号Map;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動一時2tableWriter;
 
@@ -143,7 +145,10 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         異動一時List = new ArrayList<>();
         エラー異動No = new ArrayList<>();
         異動一時Map = new HashMap<>();
+        証記載保険者番号Map = new HashMap<>();
         居宅サービス区分支給限度額List = UpDoInterfaceKanriKousinManager.createInstance().get居宅サービス区分支給限度額();
+        市町村 = ShichosonSecurityJohoFinder.createInstance().
+                getShichosonSecurityJoho(GyomuBunrui.介護事務);
         super.initialize();
     }
 
@@ -179,6 +184,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             return;
         }
         被保険者番号 = entity.get被保険者番号();
+        if (!被保険者番号.equals(new HihokenshaNo("1034567001"))) {
+            return;
+        }
         FlexibleYearMonth 処理年月 = new FlexibleYearMonth(processParameter.get処理年月().toDateString());
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = get受給者台帳();
         List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List = get総合事業対象者();
@@ -222,9 +230,14 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         if (!allData.isEmpty()) {
             再編集(allData, 宛名情報, 処理年月);
         }
+        int 番号 = 1;
         for (IdoTblTmpEntity idoTblTmpEntity : allData) {
+            idoTblTmpEntity.set履歴番号(番号);
+            ++番号;
             異動一時2tableWriter.insert(idoTblTmpEntity);
         }
+        異動一時List.clear();
+        異動一時Map.clear();
     }
 
     private void 受給者台帳処理(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
@@ -1483,18 +1496,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         ShoKisaiHokenshaNo 証記載保険者番号 = null;
         LasdecCode 広住特措置元市町村コード = 被保険者台帳.getKoikinaiTokureiSochimotoShichosonCode();
         if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
-            List<ShichosonCodeYoriShichoson> list = KoikiShichosonJohoFinder.createInstance().
-                    shichosonCodeYoriShichosonJoho(広住特措置元市町村コード).records();
-            if (list != null && !list.isEmpty()) {
-                証記載保険者番号 = list.get(ORDER_0).get証記載保険者番号();
-            }
-        }
-        if (証記載保険者番号 == null) {
-            List<ShichosonCodeYoriShichoson> list = KoikiShichosonJohoFinder.createInstance().
-                    shichosonCodeYoriShichosonJoho(被保険者台帳.getShichosonCode()).records();
-            if (list != null && !list.isEmpty()) {
-                証記載保険者番号 = list.get(ORDER_0).get証記載保険者番号();
-            }
+            証記載保険者番号 = get証記載保険者番号(広住特措置元市町村コード);
+        } else {
+            証記載保険者番号 = get証記載保険者番号(被保険者台帳.getShichosonCode());
         }
         insertEntity.set証記載保険者番号(証記載保険者番号);
         insertEntity.set資格取得年月日(被保険者台帳.getShikakuShutokuYMD());
@@ -1509,18 +1513,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         ShoKisaiHokenshaNo 証記載保険者番号 = null;
         LasdecCode 広住特措置元市町村コード = 被保険者台帳.getKoikinaiTokureiSochimotoShichosonCode();
         if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
-            List<ShichosonCodeYoriShichoson> list = KoikiShichosonJohoFinder.createInstance().
-                    shichosonCodeYoriShichosonJoho(広住特措置元市町村コード).records();
-            if (list != null && !list.isEmpty()) {
-                証記載保険者番号 = list.get(ORDER_0).get証記載保険者番号();
-            }
-        }
-        if (証記載保険者番号 == null) {
-            List<ShichosonCodeYoriShichoson> list = KoikiShichosonJohoFinder.createInstance().
-                    shichosonCodeYoriShichosonJoho(被保険者台帳.getShichosonCode()).records();
-            if (list != null && !list.isEmpty()) {
-                証記載保険者番号 = list.get(ORDER_0).get証記載保険者番号();
-            }
+            証記載保険者番号 = get証記載保険者番号(広住特措置元市町村コード);
+        } else {
+            証記載保険者番号 = get証記載保険者番号(被保険者台帳.getShichosonCode());
         }
         insertEntity.set証記載保険者番号(証記載保険者番号);
         insertEntity.set資格取得年月日(被保険者台帳.getShikakuShutokuYMD());
@@ -1536,18 +1531,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         ShoKisaiHokenshaNo 証記載保険者番号 = null;
         LasdecCode 広住特措置元市町村コード = 被保険者台帳.getKoikinaiTokureiSochimotoShichosonCode();
         if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
-            List<ShichosonCodeYoriShichoson> list = KoikiShichosonJohoFinder.createInstance().
-                    shichosonCodeYoriShichosonJoho(広住特措置元市町村コード).records();
-            if (list != null && !list.isEmpty()) {
-                証記載保険者番号 = list.get(ORDER_0).get証記載保険者番号();
-            }
-        }
-        if (証記載保険者番号 == null) {
-            List<ShichosonCodeYoriShichoson> list = KoikiShichosonJohoFinder.createInstance().
-                    shichosonCodeYoriShichosonJoho(被保険者台帳.getShichosonCode()).records();
-            if (list != null && !list.isEmpty()) {
-                証記載保険者番号 = list.get(ORDER_0).get証記載保険者番号();
-            }
+            証記載保険者番号 = get証記載保険者番号(広住特措置元市町村コード);
+        } else {
+            証記載保険者番号 = get証記載保険者番号(被保険者台帳.getShichosonCode());
         }
         insertEntity.set証記載保険者番号(証記載保険者番号);
         insertEntity.set資格取得年月日(被保険者台帳.getShikakuShutokuYMD());
@@ -1719,11 +1705,11 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private PSMInfoEntity get宛名() {
-        PSMInfoEntity entity = new PSMInfoEntity();
         RString 宛名Info = 異動一時List.get(ORDER_0).get宛名();
         if (RString.isNullOrEmpty(宛名Info)) {
-            return entity;
+            return null;
         }
+        PSMInfoEntity entity = new PSMInfoEntity();
         List<RString> 宛名InfoList = 宛名Info.split(SPLIT.toString());
         entity.setカナ名称(new AtenaKanaMeisho(宛名InfoList.get(ORDER_0)));
         entity.set名称(new AtenaMeisho(宛名InfoList.get(ORDER_1)));
@@ -2075,7 +2061,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
         if (!isDateEmpty(異動一時entity.get認定有効期間開始年月日())
                 && !RString.isNullOrEmpty(異動一時entity.get認定有効期間終了年月日())
+                && !星.equals(異動一時entity.get認定有効期間終了年月日())
                 && !RString.isNullOrEmpty(異動一時entity.get居宅サービス計画適用開始年月日())
+                && !星.equals(異動一時entity.get居宅サービス計画適用開始年月日())
                 && (isBeforeDate(new FlexibleDate(異動一時entity.get居宅サービス計画適用開始年月日()),
                         異動一時entity.get認定有効期間開始年月日())
                 || isBeforeDate(new FlexibleDate(異動一時entity.get認定有効期間終了年月日()),
@@ -2465,11 +2453,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             allData.add(cloneEntity);
         }
         再編集更新(allData);
-        int 履歴通番 = 1;
         for (int i = 0; i < allData.size(); i++) {
             IdoTblTmpEntity entity = allData.get(i);
-            entity.set履歴番号(履歴通番);
-            履歴通番++;
             if (!isDateEmpty(entity.get資格喪失年月日())) {
                 entity.set異動区分コード(STR_3);
                 entity.set受給者異動事由(STR_02);
@@ -2492,8 +2477,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 entity.set生年月日(宛名情報.get生年月日());
                 entity.set性別コード(宛名情報.get性別());
             }
-            ShichosonSecurityJoho 市町村 = ShichosonSecurityJohoFinder.createInstance().
-                    getShichosonSecurityJoho(GyomuBunrui.介護事務);
             if (市町村 != null && DonyuKeitaiCode.事務広域.equals(市町村.get導入形態コード())) {
                 entity.set広域連合_政令市_保険者番号(市町村.get市町村情報().get運用保険者番号());
             }
@@ -2730,5 +2713,19 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             }
         }
         return 0;
+    }
+
+    private ShoKisaiHokenshaNo get証記載保険者番号(LasdecCode 市町村コード) {
+        if (証記載保険者番号Map.containsKey(市町村コード)) {
+            return 証記載保険者番号Map.get(市町村コード);
+        }
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        List<ShichosonCodeYoriShichoson> list = KoikiShichosonJohoFinder.createInstance().
+                shichosonCodeYoriShichosonJoho(市町村コード).records();
+        if (list != null && !list.isEmpty()) {
+            証記載保険者番号 = list.get(ORDER_0).get証記載保険者番号();
+        }
+        証記載保険者番号Map.put(市町村コード, 証記載保険者番号);
+        return 証記載保険者番号;
     }
 }
