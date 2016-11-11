@@ -63,7 +63,7 @@ public class Shujiiikensho1A4Editor implements IShujiiikensho1A4Editor {
             source.hokenshaNo = business.get保険者番号();
             source.hihokenshaNo = business.get被保険者番号();
             source.hihokenshaName = business.get名前();
-            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
             if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
                 source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
             }
