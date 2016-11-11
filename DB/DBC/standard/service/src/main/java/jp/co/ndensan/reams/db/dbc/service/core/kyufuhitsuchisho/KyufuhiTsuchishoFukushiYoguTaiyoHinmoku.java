@@ -25,40 +25,53 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
     private static final int NUM_NINE = 9;
     private static final int NUM_ONE = 1;
     private static final int NUM_TWE = 2;
+    private static final int NUM_THREE = 3;
 
     /**
      * コンストラクタです。
      *
      * @param hakkoEntity KyufuhiTuchiHakkoEntity
      * @param processParameter KyufuhiTsuchishoProcessParameter
+     * @param coverEntity 帳票設計_DBC100043_介護保険給付費通知書（福祉用具貸与品目）のEntityクラス
      * @return 介護保険給付費通知書のEntity
      */
     public KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity 帳票データ作成(KyufuhiTuchiHakkoEntity hakkoEntity,
-            KyufuhiTsuchishoProcessParameter processParameter) {
-        KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity coverEntity = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity();
+            KyufuhiTsuchishoProcessParameter processParameter,
+            KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity coverEntity) {
         coverEntity.set被保険者氏名(hakkoEntity.get名称());
         coverEntity.set被保険者番号(hakkoEntity.get被保険者番号());
         coverEntity.setサービス集計開始年月(processParameter.getサービス年月開始());
         coverEntity.setサービス集計終了年月(processParameter.getサービス年月終了());
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
-            coverEntity.setサービス年月(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
+            coverEntity.getサービス年月().add(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
         }
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getJigyoshoKanji() != null) {
-            coverEntity.setサービス事業所(hakkoEntity.getRelateEntity().getJigyoshoKanji());
+            coverEntity.getサービス事業所().add(hakkoEntity.getRelateEntity().getJigyoshoKanji());
         }
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getFukushiYouguShouhin() != null) {
-            coverEntity.setタイコード(hakkoEntity.getRelateEntity().getFukushiYouguKaHinmokuCode());
+            coverEntity.getタイコード().add(hakkoEntity.getRelateEntity().getFukushiYouguKaHinmokuCode());
         }
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getFukushiYouguShouhin() != null) {
-            coverEntity.set福祉用具商品名(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
+            coverEntity.get福祉用具商品名().add(hakkoEntity.getRelateEntity().getFukushiYouguShouhin());
         }
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getHiyouGaku() != null) {
-            coverEntity.set費用額(hakkoEntity.getRelateEntity().getHiyouGaku());
+            coverEntity.get費用額().add(hakkoEntity.getRelateEntity().getHiyouGaku());
         }
         if (hakkoEntity.getRelateEntity() != null) {
-            coverEntity = 帳票データ作成1(hakkoEntity, coverEntity);
-            coverEntity = 帳票データ作成2(hakkoEntity, coverEntity);
-            coverEntity = 帳票データ作成3(hakkoEntity, coverEntity);
+            coverEntity.setSize();
+            switch (coverEntity.size()) {
+                case NUM_ONE:
+                    coverEntity = 帳票データ作成1(hakkoEntity, coverEntity);
+                    break;
+                case NUM_TWE:
+                    coverEntity = 帳票データ作成2(hakkoEntity, coverEntity);
+                    break;
+                case NUM_THREE:
+                    coverEntity = 帳票データ作成3(hakkoEntity, coverEntity);
+                    break;
+                default:
+                    break;
+            }
         }
         return coverEntity;
     }
@@ -121,7 +134,7 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         割合_1.add(hakkoEntity.getRelateEntity().getZenkokuTanisuHani9Dosu().divide(kensu).multiply(数値_100));
         割合_1.add(hakkoEntity.getRelateEntity().getZenkokuTanisuHani10Dosu().divide(kensu).multiply(数値_100));
         coverEntity.set割合_1(割合_1);
-        coverEntity.setあなたの位置1(getあなたの位置(coverEntity.get費用額円_1(), coverEntity.get費用額()));
+        coverEntity.setあなたの位置1(getあなたの位置(coverEntity.get費用額円_1(), coverEntity.get費用額().get(coverEntity.size() - NUM_ONE)));
         List<jp.co.ndensan.reams.uz.uza.math.Decimal> 全国1 = new ArrayList<>();
         全国1.add(hakkoEntity.getRelateEntity().getZenkokuSeikyuKensu());
         全国1.add(hakkoEntity.getRelateEntity().getZenkokuSaiteiHiyouGaku());
@@ -204,7 +217,7 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         割合_2.add(hakkoEntity.getRelateEntity().getZenkokuTanisuHani9Dosu().divide(kensu1).multiply(数値_100));
         割合_2.add(hakkoEntity.getRelateEntity().getZenkokuTanisuHani10Dosu().divide(kensu1).multiply(数値_100));
         coverEntity.set割合_2(割合_2);
-        coverEntity.setあなたの位置2(getあなたの位置(coverEntity.get費用額円_2(), coverEntity.get費用額()));
+        coverEntity.setあなたの位置2(getあなたの位置(coverEntity.get費用額円_2(), coverEntity.get費用額().get(coverEntity.size() - NUM_ONE)));
         List<jp.co.ndensan.reams.uz.uza.math.Decimal> 全国2 = new ArrayList<>();
         全国2.add(hakkoEntity.getRelateEntity().getZenkokuSeikyuKensu());
         全国2.add(hakkoEntity.getRelateEntity().getZenkokuSaiteiHiyouGaku());
@@ -287,7 +300,7 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         割合_3.add(hakkoEntity.getRelateEntity().getZenkokuTanisuHani9Dosu().divide(kensu2).multiply(数値_100));
         割合_3.add(hakkoEntity.getRelateEntity().getZenkokuTanisuHani10Dosu().divide(kensu2).multiply(数値_100));
         coverEntity.set割合_3(割合_3);
-        coverEntity.setあなたの位置3(getあなたの位置(coverEntity.get費用額円_3(), coverEntity.get費用額()));
+        coverEntity.setあなたの位置3(getあなたの位置(coverEntity.get費用額円_3(), coverEntity.get費用額().get(coverEntity.size() - NUM_ONE)));
         List<jp.co.ndensan.reams.uz.uza.math.Decimal> 全国3 = new ArrayList<>();
         全国3.add(hakkoEntity.getRelateEntity().getZenkokuSeikyuKensu());
         全国3.add(hakkoEntity.getRelateEntity().getZenkokuSaiteiHiyouGaku());
@@ -330,7 +343,6 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         }
         Decimal 範囲比較数;
         if (単位数範囲.stringAt(0).equals(new RString("<"))) {
-            // TODO test
             範囲比較数 = new Decimal(単位数範囲.substring(NUM_ONE, 単位数範囲.length()).toString());
             return 範囲比較数.compareTo(判定数) == 1;
 
