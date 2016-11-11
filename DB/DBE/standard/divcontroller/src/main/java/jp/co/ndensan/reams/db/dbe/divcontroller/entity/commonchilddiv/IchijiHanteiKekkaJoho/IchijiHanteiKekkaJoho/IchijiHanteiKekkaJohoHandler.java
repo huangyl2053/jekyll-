@@ -294,8 +294,12 @@ public class IchijiHanteiKekkaJohoHandler {
             IchijiHanteiKekkaJohoBuilder builder = ichijiHanteiKekkaJoho.createBuilderForEdit();
             builder.set仮一次判定区分(kariIchijiHanteiKubun);
             builder.set要介護認定一次判定年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
-            builder.set要介護認定一次判定結果コード(new Code(business.get一次判定結果()));
-            builder.set要介護認定一次判定結果コード_認知症加算(new Code(business.get認知症加算後の一次判定結果()));
+            if(business.get一次判定結果() != null){
+                builder.set要介護認定一次判定結果コード(new Code(business.get一次判定結果()));
+            }
+            if(business.get認知症加算後の一次判定結果() != null){
+                builder.set要介護認定一次判定結果コード_認知症加算(new Code(business.get認知症加算後の一次判定結果()));
+            }
             builder.set要介護認定等基準時間(Integer.valueOf(div.getTxtKijunJikan().getValue().toString()));
             builder.set要介護認定等基準時間_食事(Integer.valueOf(div.getTxtShokuji().getValue().toString()));
             builder.set要介護認定等基準時間_排泄(Integer.valueOf(div.getTxtHaisetsu().getValue().toString()));
@@ -314,9 +318,13 @@ public class IchijiHanteiKekkaJohoHandler {
             builder.set中間評価項目得点第6群(0);
             builder.set中間評価項目得点第7群(0);
             builder.set要介護認定一次判定警告コード(business.get一次判定警告コード());
-            builder.set要介護認定状態の安定性コード(new Code(business.get状態の安定性()));
+            if(business.get状態の安定性() != null){
+                builder.set要介護認定状態の安定性コード(new Code(business.get状態の安定性()));
+            }
             builder.set認知症自立度Ⅱ以上の蓋然性(new Decimal(div.getTxtGaizensei().getValue().toString()));
-            builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(business.get認知機能及び状態安定性から推定される給付区分()));
+            if(business.get認知機能及び状態安定性から推定される給付区分() != null){
+                builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(business.get認知機能及び状態安定性から推定される給付区分()));
+            }
             builder.set運動能力の低下していない認知症高齢者の指標コード(new Code("1"));
             builder.set日常生活自立度の組み合わせ_自立(0);
             builder.set日常生活自立度の組み合わせ_要支援(0);
