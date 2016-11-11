@@ -274,6 +274,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             } else {
                 div.getRadTodokedeKubun().setSelectedKey(KEY_0);
             }
+        } else {
+            div.getRadTodokedeKubun().setSelectedKey(KEY_0);
         }
         if (is事業者作成の場合()) {
             div.getRadKeikakuKubun().setVisible(false);
