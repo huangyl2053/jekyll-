@@ -59,6 +59,11 @@ public class JukyushaDaichoPanelHandler {
         div.getTxtChushutsuYMD().setDisabled(false);
         div.getTxtIryokikan().setDisabled(true);
         div.getTxtChosaItakusaki().setDisabled(true);
+        List<RString> listCSV = new ArrayList<>();
+        listCSV.add(項目名付加);
+        listCSV.add(連番付加);
+        listCSV.add(日付_編集);
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(listCSV);
     }
 
     /**
