@@ -65,7 +65,7 @@ public class SonotashiryoA4Editor implements ISonotashiryoA4Editor {
         source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
         source.imgSonotashiryo = business.getその他資料();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
 
         if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
