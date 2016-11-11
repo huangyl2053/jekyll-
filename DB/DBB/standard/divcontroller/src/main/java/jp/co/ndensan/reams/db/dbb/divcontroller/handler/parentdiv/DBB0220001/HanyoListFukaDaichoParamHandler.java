@@ -332,18 +332,21 @@ public class HanyoListFukaDaichoParamHandler {
     }
 
     private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {
+        div.getChushutsuPanel2().getCcdAtenaJoken().initialize();
         AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap.getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
         if (宛名抽出条件 != null) {
             if (宛名抽出条件.getAgeSelectKijun() != null) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
             }
             div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectKijun();
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
             if (宛名抽出条件.getChiku_Kubun() != null) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().getコード());
             }
+            div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectChiku();
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
+
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(toChikuCode(宛名抽出条件.getChiku1_To()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(toChikuCode(宛名抽出条件.getChiku1_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(toChikuCode(宛名抽出条件.getChiku2_To()));
@@ -403,6 +406,6 @@ public class HanyoListFukaDaichoParamHandler {
     }
 
     private boolean is年齢範囲復元(Range<Decimal> 年齢範囲) {
-        return !Decimal.ZERO.equals(年齢範囲.getFrom()) && DECIMAL_999.equals(年齢範囲.getTo());
+        return !(Decimal.ZERO.equals(年齢範囲.getFrom()) && DECIMAL_999.equals(年齢範囲.getTo()));
     }
 }
