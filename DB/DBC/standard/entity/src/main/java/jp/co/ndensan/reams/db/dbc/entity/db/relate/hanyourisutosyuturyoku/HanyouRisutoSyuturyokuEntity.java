@@ -35,7 +35,7 @@ public class HanyouRisutoSyuturyokuEntity {
 
     private int 区分;
     private HihokenshaNo 被保険者番号key;
-    private FlexibleDate サービス提供年月key;
+    private FlexibleYearMonth サービス提供年月key;
     private Decimal 履歴番号key;
     private RString 支払場所;
     private FlexibleDate 支払期間開始年月日;
