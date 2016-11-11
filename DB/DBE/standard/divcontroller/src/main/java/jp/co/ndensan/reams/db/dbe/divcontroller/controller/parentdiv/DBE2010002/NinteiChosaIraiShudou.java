@@ -262,7 +262,6 @@ public class NinteiChosaIraiShudou {
         try (ReportManager reportManager = new ReportManager()) {
             printData(div, reportManager);
             response.data = reportManager.publish();
-            updateData(div);
         }
 
         RealInitialLocker.release(get排他キー());
@@ -302,6 +301,7 @@ public class NinteiChosaIraiShudou {
     }
 
     private void printData(NinteiChosaIraiShudouDiv div, ReportManager reportManager) {
+        updateData(div);
         NinnteiChousairaiShudouPrintService printService = new NinnteiChousairaiShudouPrintService(reportManager);
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         NinnteiChousairaiShudouFinder finder = NinnteiChousairaiShudouFinder.createInstance();
