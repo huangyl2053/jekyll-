@@ -151,4 +151,5 @@ public class IchijihanteikekkahyoA3Entity {
     private FlexibleDate 介護認定審査会開催年月日;
     private RString 特記事項保険者番号;
     private RString 特記事項被保険者番号;
+    private RString 識別コード;
 }
