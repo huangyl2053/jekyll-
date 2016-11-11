@@ -287,6 +287,12 @@ public class FuchoKariSanteiFukaBatch {
                 金額リスト1 = 期別納付額_端数調整;
             }
         }
+        普徴期別金額リスト = set普徴期別金額リスト(普徴期別金額リスト, 期月リスト, 期, 金額リスト0, 金額リスト1);
+        return 普徴期別金額リスト;
+    }
+
+    private List<Decimal> set普徴期別金額リスト(List<Decimal> 普徴期別金額リスト, KitsukiList 期月リスト, int 期,
+            Decimal 金額リスト0, Decimal 金額リスト1) {
         List<Kitsuki> 期月 = 期月リスト.filtered仮算定期間().toList();
         if (期月.get(0).get月AsInt() == NUM_4) {
             普徴期別金額リスト.add(金額リスト0);
