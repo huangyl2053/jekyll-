@@ -225,8 +225,8 @@ public class IchijiHanteiHandler {
      */
     public void 対象者一覧更新の編集(dgIchijiHanteiTaishoshaIchiran_Row row, int index, IchijiHanteiKekkaJoho business) {
 
-        row.setColumnState(new RString("更新"));
         if (business != null) {
+            row.setColumnState(new RString("更新"));
             if (business.get要介護認定一次判定年月日() != null) {
                 row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
             }
