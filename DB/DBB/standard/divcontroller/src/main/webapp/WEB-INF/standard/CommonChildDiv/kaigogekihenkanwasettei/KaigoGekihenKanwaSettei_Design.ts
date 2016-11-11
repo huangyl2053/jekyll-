@@ -8,12 +8,12 @@ module DBB {
 
         export class Events {
 
-            public static onClickBtnClose(): string {
-                return "onClickBtnClose";
-            }
-
             public static onClickBtnKakutei(): string {
                 return "onClickBtnKakutei";
+            }
+
+            public static onClickBtnClose(): string {
+                return "onClickBtnClose";
             }
 
         }
@@ -45,12 +45,12 @@ module DBB {
                 return new UZA.DataGrid(this.convFiledName("dgGekihenKanwa"));
             }
 
-            public btnClose(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnClose"));
-            }
-
             public btnKakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
+            }
+
+            public btnClose(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClose"));
             }
 
         }

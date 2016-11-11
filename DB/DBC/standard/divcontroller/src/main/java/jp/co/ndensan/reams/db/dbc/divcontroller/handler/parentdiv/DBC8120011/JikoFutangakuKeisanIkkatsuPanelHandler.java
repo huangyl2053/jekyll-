@@ -39,6 +39,7 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
     private static final RString 処理枝番 = new RString("0000");
     private static final RString 被保険者番号指定RAD = new RString("hihokenshaNo");
     private static final RString 開始年度 = new RString("2014");
+    private static final RString 文字_年度 = new RString("年度");
     private static final RString 開始MONTHDAY = new RString("0101");
     private static final RString 終了MONTHDAY = new RString("0731");
     private static final RString NUM_4 = new RString("4");
@@ -133,11 +134,11 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
         List<KeyValueDataSource> datasourceList = new ArrayList();
         int 年度;
         for (int i = 0; i <= difference; i++) {
-            KeyValueDataSource data = new KeyValueDataSource();
             年度 = Integer.parseInt(開始年度.toString()) + i;
-            data.setKey(new RString(String.valueOf(年度)));
-            data.setValue(new FlexibleYear(String.valueOf(年度)).wareki().toDateString());
-            datasourceList.add(data);
+            RString key = new RString(年度);
+            FlexibleYear year = new FlexibleYear(key);
+            RString value = year.wareki().toDateString().concat(文字_年度);
+            datasourceList.add(new KeyValueDataSource(key, value));
         }
         return datasourceList;
     }

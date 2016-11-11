@@ -31,9 +31,19 @@ public class SonotashiryoA4Report extends Report<SonotashiryoA4ReportSource> {
     @Override
     public void writeBy(ReportSourceWriter<SonotashiryoA4ReportSource> reportSourceWriter) {
 
-        ISonotashiryoA4Editor editor = new SonotashiryoA4Editor(data);
-        ISonotashiryoA4Builder builder = new SonotashiryoA4Builder(editor);
-        reportSourceWriter.writeLine(builder);
+        if (data != null) {
+            if (data.getその他資料() != null && 0 < data.getその他資料().size()) {
+                for (int i = 0; i < data.getその他資料().size(); i++) {
+                    ISonotashiryoA4Editor editor = new SonotashiryoA4Editor(data, i);
+                    ISonotashiryoA4Builder builder = new SonotashiryoA4Builder(editor);
+                    reportSourceWriter.writeLine(builder);
+                }
+            } else {
+                ISonotashiryoA4Editor editor = new SonotashiryoA4Editor(data, 0);
+                ISonotashiryoA4Builder builder = new SonotashiryoA4Builder(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        }
 
     }
 }

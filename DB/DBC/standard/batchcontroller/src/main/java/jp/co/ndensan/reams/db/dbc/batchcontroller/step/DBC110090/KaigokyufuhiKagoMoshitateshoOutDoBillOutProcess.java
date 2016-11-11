@@ -108,7 +108,6 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final RString 漢字_件 = new RString("件");
     private static final Code コード = new Code("0003");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY \"DbWT1731KagoMoshitate\".\"shoKisaiHokenshaNo\" ASC ");
 
     private static final RString READ_DATA_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufuhikagomoshitateshoout."
@@ -168,17 +167,6 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
-        }
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
         }
         帳票データの取得Parameter.set出力順(出力順);
         int i = 0;

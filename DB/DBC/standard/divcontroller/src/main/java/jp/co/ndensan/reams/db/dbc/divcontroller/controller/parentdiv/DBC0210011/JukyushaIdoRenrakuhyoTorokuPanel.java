@@ -104,6 +104,15 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData<SearchHihokenshaDiv>
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnSave(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        if (DBC0210011StateName.完了メッセージ.getName().equals(ResponseHolder.getState())) {
+            RString 完了メッセージ対象情報1 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                    .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
+            RString 完了メッセージ対象情報2 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                    .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者氏名カナ();
+            div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                    完了メッセージ対象情報1, 完了メッセージ対象情報2, true);
+            return ResponseData.of(div).setState(DBC0210011StateName.完了メッセージ);
+        }
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
         RString 被保険者番号 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
                 getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();

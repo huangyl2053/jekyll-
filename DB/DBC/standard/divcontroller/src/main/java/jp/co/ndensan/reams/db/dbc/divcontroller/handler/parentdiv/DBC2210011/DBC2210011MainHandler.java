@@ -212,7 +212,7 @@ public class DBC2210011MainHandler {
      * @param row dgTokubetsuKyufuJigyoshaList_Row
      */
     public void onSelect_byListSelect(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
-
+        div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getDdlSearchKenCode().setDataSource(get県コードDDLSource());
         set事業者情報(事業者サービス情報List, row);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
                 getGridSetting().setIsShowDeleteButtonColumn(false);
@@ -230,6 +230,7 @@ public class DBC2210011MainHandler {
      * @param row dgTokubetsuKyufuJigyoshaList_Row
      */
     public void onSelect_byListModify(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().setDataSource(get県コードDDLSource());
         set事業者情報(事業者サービス情報List, row);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(false);
@@ -243,6 +244,7 @@ public class DBC2210011MainHandler {
      * @param row dgTokubetsuKyufuJigyoshaList_Row
      */
     public void onSelect_byListDelete(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().setDataSource(get県コードDDLSource());
         set事業者情報(事業者サービス情報List, row);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(true);
@@ -810,10 +812,10 @@ public class DBC2210011MainHandler {
 
     private List<dgTokubetsuKyufuJigyoshaList_Row> get事業者DataSource(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者情報List) {
         List<dgTokubetsuKyufuJigyoshaList_Row> dataSources = new ArrayList<>();
+        List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者情報 = new ArrayList<>();
         RString 事業者番号;
         for (TokubetsuKyufuJigyoshaSearchBusiness 事業者とサービス : 事業者情報List) {
             事業者番号 = 事業者とサービス.get市町村特別給付サービス事業者().get事業者().getJigyoshaNo().value();
-            List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者情報 = new ArrayList<>();
             if (事業者情報.isEmpty()) {
                 事業者情報.add(事業者とサービス);
             } else if (事業者番号.equals(事業者とサービス.get市町村特別給付サービス事業者().get事業者().getJigyoshaNo().value())) {
@@ -824,6 +826,7 @@ public class DBC2210011MainHandler {
                 事業者情報.add(事業者とサービス);
             }
         }
+        dataSources.add(set事業者情報該当一覧(事業者情報));
         setサービス事業者一覧DateGirdState(dataSources, true);
         return dataSources;
     }
@@ -831,7 +834,7 @@ public class DBC2210011MainHandler {
     private dgTokubetsuKyufuJigyoshaList_Row set事業者情報該当一覧(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者情報) {
         dgTokubetsuKyufuJigyoshaList_Row row = new dgTokubetsuKyufuJigyoshaList_Row();
         row.setTxtIdoKubun(事業者情報.get(0).get介護国保連ＩＦ異動区分());
-        row.getTxtIdoYMD().setValue(new RDate(事業者情報.get(0).get介護国保連ＩＦ異動年月日().wareki().toString()));
+        row.getTxtIdoYMD().setValue(new RDate(事業者情報.get(0).get介護国保連ＩＦ異動年月日().wareki().toDateString().toString()));
         row.setTxtJigyoshaCode(事業者情報.get(0).get市町村特別給付用事業者番号().value());
         row.setTxtShinseishaShimei(事業者情報.get(0).get申請者氏名_カナ());
         row.setTxtShinseishaJusho(事業者情報.get(0).get事業所代表者住所カナ());
@@ -841,7 +844,9 @@ public class DBC2210011MainHandler {
                 市町村特別給付用サービス名.concat(tkjsb.get市町村特別給付サービス事業者().getサービス().getServiceRyakushoName()).concat(new RString("、"));
             }
         }
-        市町村特別給付用サービス名.remove(市町村特別給付用サービス名.length() - 1);
+        if (!市町村特別給付用サービス名.isEmpty()) {
+            市町村特別給付用サービス名.remove(市町村特別給付用サービス名.length() - 1);
+        }
         row.setTxtServiceName(市町村特別給付用サービス名);
         row.setDataId(DataPassingConverter.serialize(事業者情報.get(0).identifier()));
         return row;
@@ -897,7 +902,7 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setSelectedKey(事業者情報.get介護国保連ＩＦ法人種別());
         div.getTokubetsuKyufuJigyoshaDetail().getRadIdoKubun().setSelectedKey(事業者情報.get介護国保連ＩＦ異動区分());
         div.getTokubetsuKyufuJigyoshaDetail().getTxtIdoYMD().setValue(new RDate(事業者情報.get介護国保連ＩＦ異動年月日().
-                wareki().toString()));
+                wareki().toDateString().toString()));
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaName().
                 setValue(事業者情報.get申請者氏名_漢字());
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaNameKana().
@@ -930,12 +935,12 @@ public class DBC2210011MainHandler {
             newRow.setHdnServiceCode(情報.get市町村特別給付用サービスコード().value());
             newRow.setTxtService(情報.get市町村特別給付サービス事業者().getサービス().getServiceRyakushoName());
             newRow.setTxtKanrisha(情報.get事業所管理者氏名());
-            newRow.getTxtJigyoKaishiYMD().setValue(new RDate(情報.getサービス事業所事業開始年月日().wareki().toString()));
-            newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業休止年月日().wareki().toString()));
-            newRow.getTxtJigyoHaishiYMD().setValue(new RDate(情報.getサービス事業所事業廃止年月日().wareki().toString()));
-            newRow.getTxtJigyoSaikaiYMD().setValue(new RDate(情報.getサービス事業所事業再開年月日().wareki().toString()));
-            newRow.getTxtTorokuKaishiYMD().setValue(new RDate(情報.get市町村特別給付登録開始年月日().wareki().toString()));
-            newRow.getTxtTorokuShuryoYMD().setValue(new RDate(情報.get市町村特別給付登録終了年月日().wareki().toString()));
+            newRow.getTxtJigyoKaishiYMD().setValue(new RDate(情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
+            newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
+            newRow.getTxtJigyoHaishiYMD().setValue(new RDate(情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
+            newRow.getTxtJigyoSaikaiYMD().setValue(new RDate(情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
+            newRow.getTxtTorokuKaishiYMD().setValue(new RDate(情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
+            newRow.getTxtTorokuShuryoYMD().setValue(new RDate(情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
             newRow.setTxtJuryoInin(TokubetsukyufuJuryoIninKubun.toValue(情報.get受領委任区分()).get名称());
             if (情報.is生活保護法による指定の有()) {
                 newRow.setTxtSeikatsuHogo(TokubetsukyufuSeikatsuHogoShiteiKubun.有.get名称());
@@ -981,17 +986,17 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaFaxNo()
                 .setValue(事業者情報.getサービス事業所FAX番号());
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKaishiYMD()
-                .setValue(new RDate(事業者情報.getサービス事業所事業開始年月日().wareki().toString()));
+                .setValue(new RDate(事業者情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoHaishiYMD()
-                .setValue(new RDate(事業者情報.getサービス事業所事業廃止年月日().wareki().toString()));
+                .setValue(new RDate(事業者情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKyushiYMD()
-                .setValue(new RDate(事業者情報.getサービス事業所事業休止年月日().wareki().toString()));
+                .setValue(new RDate(事業者情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoSaikaiYMD()
-                .setValue(new RDate(事業者情報.getサービス事業所事業再開年月日().wareki().toString()));
+                .setValue(new RDate(事業者情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtTorokuKaishiYMD()
-                .setValue(new RDate(事業者情報.get市町村特別給付登録開始年月日().wareki().toString()));
+                .setValue(new RDate(事業者情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtTorokuShuryoYMD()
-                .setValue(new RDate(事業者情報.get市町村特別給付登録終了年月日().wareki().toString()));
+                .setValue(new RDate(事業者情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getRadJuryoInin()
                 .setSelectedKey(事業者情報.get受領委任区分());
         if (事業者情報.is生活保護法による指定の有()) {

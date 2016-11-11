@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kogakuservicehitaishoshaichiran.
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuservicehitaishoshaichiran.KogakuServicehiTaishoshaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -99,6 +101,7 @@ public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTa
             source.listTaishosha_3 = 高額介護サービス費対象者一覧表.getサービス提供年月().toDateString();
         }
         付値(source);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listTaishosha_2);
         return source;
     }
 

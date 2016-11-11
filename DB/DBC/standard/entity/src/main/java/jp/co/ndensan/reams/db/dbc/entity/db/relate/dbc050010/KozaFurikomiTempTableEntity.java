@@ -123,5 +123,7 @@ public class KozaFurikomiTempTableEntity extends DbTableEntityBase<KozaFurikomiT
     private boolean iraishoSakuseizumiFlag;
     @TempTableColumnOrder(34)
     private boolean sakujoFlag;
+    @TempTableColumnOrder(35)
+    private RString gyomuKoyuKey;
 
 }

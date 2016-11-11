@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigennashi.KogakuOshiraseTsuchiTeshutsuKigenNashiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigennashi.KogakuOshiraseTsuchiTeshutsuKigenNashiSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -47,6 +49,7 @@ public class KogakuOshiraseTsuchiTeshutsuKigenNashiEditor implements IKogakuOshi
                 source.birthYMD = ReportKomokuEditorUtil.パターン12(target.get申請情報帳票発行一時().getSeinengappiYMDChohyo());
                 source.hokenshaNo = ReportKomokuEditorUtil.get証記載保険者番号(target.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo());
                 source.hihokenshaNo = ReportKomokuEditorUtil.get被保険者番号(target.get申請情報帳票発行一時().getHihokenshaNoChohyo());
+                source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
                 source.taishoYM = ReportKomokuEditorUtil.パターン62(target.get申請情報帳票発行一時().getServiceTeikyoYMChohyo());
                 source.識別コード = target.get申請情報帳票発行一時().getShikibetsuCodeChohyo();
                 金額設定(source);

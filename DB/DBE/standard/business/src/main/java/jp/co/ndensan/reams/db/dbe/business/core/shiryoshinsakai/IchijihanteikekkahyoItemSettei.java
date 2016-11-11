@@ -137,9 +137,10 @@ public class IchijihanteikekkahyoItemSettei {
         項目.set第４群リスト(get第４群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
         項目.set第５群リスト(get第５群リスト(厚労省IF識別コード, 調査票調査項目, 前回調査票調査項目, is前回結果));
         項目.set主治医意見書(get主治医意見書リスト(厚労省IF識別コード, 主治医意見書項目情報, 前主治医意見書項目情報, is前回結果));
+        項目.set識別コード(entity.getShoKisaiHokenshaNo().substring(INT_0, INT_5).concat(entity.getHihokenshaNo()));
         return 項目;
     }
-
+    
     private List<TiyosaKekka> get第１群リスト(Code 厚労省IF識別コード,
             List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目情報,
             List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目, boolean is前回結果) {

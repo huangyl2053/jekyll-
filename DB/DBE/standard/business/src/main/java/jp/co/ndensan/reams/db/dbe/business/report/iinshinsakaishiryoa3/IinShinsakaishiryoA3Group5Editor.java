@@ -26,15 +26,18 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Editor {
 
     private final JimuSonotashiryoBusiness business;
+    private final int index;
     private static final int INT_4 = 4;
 
     /**
      * コンストラクタです。
      *
      * @param business {@link JimuSonotashiryoBusiness}
+     * @param index index
      */
-    protected IinShinsakaishiryoA3Group5Editor(JimuSonotashiryoBusiness business) {
+    protected IinShinsakaishiryoA3Group5Editor(JimuSonotashiryoBusiness business, int index) {
         this.business = business;
+        this.index = index;
     }
 
     /**
@@ -65,8 +68,8 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
         source.seven_shinsaYY = get年(business.get介護認定審査会開催年月日());
         source.seven_shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.seven_shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
-        source.seven_imgSonotashiryo1 = business.get左のその他資料イメージ();
-        source.seven_imgSonotashiryo2 = business.get右のその他資料イメージ();
+        source.seven_imgSonotashiryo1 = business.get左のその他資料イメージ(index);
+        source.seven_imgSonotashiryo2 = business.get右のその他資料イメージ(index);
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),

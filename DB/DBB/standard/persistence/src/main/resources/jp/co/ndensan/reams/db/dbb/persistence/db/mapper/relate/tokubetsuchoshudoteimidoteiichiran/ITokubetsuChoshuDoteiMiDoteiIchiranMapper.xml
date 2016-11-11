@@ -20,7 +20,9 @@
             "UeT0511NenkinTokuchoKaifuJoho"."dtKanjiJusho" as "dtKanjiJusho",
             "UeT0511NenkinTokuchoKaifuJoho"."dtTokubetsuChoshuGimushaCode" as "dtTokubetsuChoshuGimushaCode",
             "UeT0511NenkinTokuchoKaifuJoho"."dtKanaShimei" as "dtKanaShimei",
-            "UeT0511NenkinTokuchoKaifuJoho"."dtYubinNo" as "dtYubinNo"            
+            "UeT0511NenkinTokuchoKaifuJoho"."dtYubinNo" as "dtYubinNo",
+        
+            "UeT0511NenkinTokuchoKaifuJoho"."koseiCityCode" as "koseiCityCode"
         FROM
                 rgdb."UeT0511NenkinTokuchoKaifuJoho" as "UeT0511NenkinTokuchoKaifuJoho"
             INNER JOIN 
@@ -65,8 +67,7 @@
             "shikibetsuCode"."choikiCode" as "choikiCode",
             "shikibetsuCode"."chikuCode1" as "chikuCode1",
             "shikibetsuCode"."chikuCode2" as "chikuCode2",
-            "shikibetsuCode"."chikuCode3" as "chikuCode3",
-            "shikibetsuCode"."genLasdecCode" as "genLasdecCode"
+            "shikibetsuCode"."chikuCode3" as "chikuCode3"
        FROM
             master
        INNER JOIN
@@ -105,7 +106,8 @@
             "DbT2019TokuchoMidoteiJoho"."fuichiRiyuCode" as "fuichiRiyuCode",
             "DbT2019TokuchoMidoteiJoho"."shikibetsuCode" as "shikibetsuCode",
         
-            "UeT0511NenkinTokuchoKaifuJoho"."hihokenshaNo" AS "hihokenshaNo"
+            "UeT0511NenkinTokuchoKaifuJoho"."hihokenshaNo" AS "hihokenshaNo",
+            "UeT0511NenkinTokuchoKaifuJoho"."koseiCityCode" as "koseiCityCode"
         FROM
                 rgdb."DbT2019TokuchoMidoteiJoho" as "DbT2019TokuchoMidoteiJoho"
             INNER JOIN
@@ -125,8 +127,7 @@
        )         
        SELECT 
             master.*,
-            "shikibetsuCode"."juminShubetsuCode" as "juminShubetsuCode",
-            "shikibetsuCode"."genLasdecCode" as "genLasdecCode"
+            "shikibetsuCode"."juminShubetsuCode" as "juminShubetsuCode"
        FROM
             master
        INNER JOIN
@@ -173,7 +174,7 @@
         <result property="chikuCode1" column="chikuCode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
         <result property="chikuCode2" column="chikuCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
         <result property="chikuCode3" column="chikuCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
-        <result property="genLasdecCode" column="genLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="genLasdecCode" column="koseiCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
     
@@ -194,7 +195,7 @@
         <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="genLasdecCode" column="genLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="genLasdecCode" column="koseiCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
     

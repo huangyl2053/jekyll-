@@ -80,7 +80,6 @@ public class ShokanShikyuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchPro
     private static final RString 帳票分類ID = new RString("DBC200021_ShokanbaraiShikyuKetteishaIchiran");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3036.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 作成 = new RString("作成");
@@ -98,17 +97,6 @@ public class ShokanShikyuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchPro
         }
         Map<String, Object> mybatisParameter = new HashMap<>();
         RString 出力順 = MyBatisOrderByClauseCreator.create(DBC200021ShutsuryokujunEnum.class, order);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
         mybatisParameter.put(キー_出力順.toString(), 出力順);
         ShokanShikyuKetteiJohoManager chohyoManager = ShokanShikyuKetteiJohoManager.createInstance();
         List<ShokanShikyuKetteiChohyoEntity> list = chohyoManager.get帳票出力対象データ(mybatisParameter);

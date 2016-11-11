@@ -294,6 +294,14 @@ public class KarisanteiIdoFukaPanelHandler {
 
     private void set帳票作成個別情報() {
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        KitsukiList 仮算定の期月リスト = 月期対応取得_普徴.get期月リスト().filtered仮算定期間();
+        if (仮算定の期月リスト == null) {
+            set納入通知書出力内容(true);
+            return;
+        } else {
+            set納入通知書出力内容(false);
+        }
         FlexibleYear 調定年度 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getTxtChoteiNendo().getDomain();
         ChohyoSeigyoHanyo 帳票制御汎用キー = idoFuka.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                 調定年度, 項目名);
@@ -334,6 +342,14 @@ public class KarisanteiIdoFukaPanelHandler {
             div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
         }
         set納入通知書の発行日();
+    }
+
+    private void set納入通知書出力内容(boolean is普徴仮算定期) {
+        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getTxtNotsuHakkoYMD().setDisabled(is普徴仮算定期);
+        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setDisabled(is普徴仮算定期);
+        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getChkNotsuTaishosha().setDisabled(is普徴仮算定期);
+        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getRadNotsuSeikatsuHogo().setDisabled(is普徴仮算定期);
+        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getRadNotsuYamawake().setDisabled(is普徴仮算定期);
     }
 
     private void get帳票ID(List<TyouhyouResult> 帳票IDList, KariSanteiIdoFuka idoFuka, FlexibleYear 調定年度) {
@@ -672,25 +688,27 @@ public class KarisanteiIdoFukaPanelHandler {
         }
         parameter.set文書番号(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                 .getCcdBunshoBango().get文書番号());
-        parameter.set納入_出力期(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
-                .getDdlNotsuShuturyokuki().getSelectedKey());
-        parameter.set納入_出力方式(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
-                .getTxtNotsuShutsuryokuKi().getValue());
-        RDate 納入_発行日 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getTxtNotsuHakkoYMD()
-                .getValue();
-        if (納入_発行日 != null) {
-            parameter.set納入_発行日(new RString(納入_発行日.toString()));
+        if (div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
+                .getDdlNotsuShuturyokuki().isDisabled()) {
+            parameter.set納入_出力期(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
+                    .getDdlNotsuShuturyokuki().getSelectedKey());
+            parameter.set納入_出力方式(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
+                    .getTxtNotsuShutsuryokuKi().getValue());
+            RDate 納入_発行日 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getTxtNotsuHakkoYMD()
+                    .getValue();
+            if (納入_発行日 != null) {
+                parameter.set納入_発行日(new RString(納入_発行日.toString()));
+            }
+            List<RString> 納入_対象者 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getChkNotsuTaishosha()
+                    .getSelectedValues();
+            if (納入_対象者 != null && !納入_対象者.isEmpty()) {
+                parameter.set納入_対象者(納入_対象者.get(NUM_0));
+            }
+            parameter.set納入_生活保護対象者(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
+                    .getRadNotsuSeikatsuHogo().getSelectedValue());
+            parameter.set納入_ページごとに山分け(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
+                    .getRadNotsuYamawake().getSelectedValue());
         }
-        List<RString> 納入_対象者 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getChkNotsuTaishosha()
-                .getSelectedValues();
-        if (納入_対象者 != null && !納入_対象者.isEmpty()) {
-            parameter.set納入_対象者(納入_対象者.get(NUM_0));
-        }
-        parameter.set納入_生活保護対象者(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
-                .getRadNotsuSeikatsuHogo().getSelectedValue());
-        parameter.set納入_ページごとに山分け(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
-                .getRadNotsuYamawake().getSelectedValue());
-
         FuchoKiUtil util = new FuchoKiUtil();
         KitsukiList 期月リスト = util.get期月リスト();
         RString 算定期 = new RString(期月リスト.get月の期(Tsuki.toValue(処理対象月)).get期AsInt());

@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigenari.KogakuOshiraseTsuchiTeshutsuKigenAriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigenari.KogakuOshiraseTsuchiTeshutsuKigenAriSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -98,8 +100,8 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
             source.kakkoRight1 = target.get送付別宛先().kakkoRight1;
             source.samabunShimeiSmall1 = target.get送付別宛先().samabunShimeiSmall1;
             source.customerBarCode = target.get送付別宛先().customerBarCode;
-
             source.識別コード = target.get申請情報帳票発行一時().getShikibetsuCodeChohyo();
+            source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
         }
         return source;
     }

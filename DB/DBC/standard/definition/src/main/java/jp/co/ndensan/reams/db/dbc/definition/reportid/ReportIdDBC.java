@@ -306,6 +306,11 @@ public enum ReportIdDBC {
     /**
      * 償還払支給（不支給）決定通知一覧表の帳票ＩＤです。
      */
+    DBC200024(
+            new ReportId("DBC200024_ShokanbaraiSashitomeTaishoshaIchiran"), new RString("償還払支給（不支給）決定通知一覧表")),
+    /**
+     * 償還払支給（不支給）決定通知一覧表の帳票ＩＤです。
+     */
     DBC200049(
             new ReportId("DBC200049_SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBun"), new RString("再審査決定通知書情報取込一覧表（公費負担者分）")),
     /**

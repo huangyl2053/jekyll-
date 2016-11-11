@@ -72,7 +72,6 @@ public class KyufuJissekiInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
     private static final RString 出力ファイル名
             = new RString("DBC200007_KyufujissekiTorikomiIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT1111.\"hokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private RString 出力順;
@@ -246,19 +245,7 @@ public class KyufuJissekiInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<
     }
 
     private RString get出力順() {
-        RString syuturyokuJun = MyBatisOrderByClauseCreator
+        return MyBatisOrderByClauseCreator
                 .create(KyufujissekiTorikomiIchiranProperty.DBC200007_KyufujissekiTorikomiIchiran.class, 並び順);
-        if (RString.isNullOrEmpty(syuturyokuJun)) {
-            syuturyokuJun = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = syuturyokuJun.split(コンマ.toString());
-            syuturyokuJun = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    syuturyokuJun = syuturyokuJun.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
-        return syuturyokuJun;
     }
 }

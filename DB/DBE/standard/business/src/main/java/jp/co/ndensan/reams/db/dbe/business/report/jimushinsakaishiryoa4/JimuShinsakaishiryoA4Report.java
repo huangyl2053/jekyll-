@@ -123,9 +123,17 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
             }
         }
         if (sonotashiryoBusiness != null) {
-            IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group7Editor(sonotashiryoBusiness);
-            IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
-            reportSourceWriter.writeLine(builder2);
+            if (sonotashiryoBusiness.getその他資料() != null && 0 < sonotashiryoBusiness.getその他資料().size()) {
+                for (int i = 0; i < sonotashiryoBusiness.getその他資料().size(); i++) {
+                    IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, i);
+                    IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
+            } else {
+                IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, 0);
+                IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
+                reportSourceWriter.writeLine(builder2);
+            }
         }
     }
 

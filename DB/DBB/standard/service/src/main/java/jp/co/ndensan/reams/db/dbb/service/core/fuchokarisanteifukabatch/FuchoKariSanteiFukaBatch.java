@@ -202,9 +202,11 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
         賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
         Decimal 普徴期別金額合計 = sum普徴期別金額(普徴期別金額リスト);
-        if (0 < 普徴期別金額合計.intValue() && 口座Entity != null) {
+        if (0 < 普徴期別金額合計.intValue() && 口座Entity != null && 口座Entity.getUaT0310KozaEntity() != null
+                && 口座Entity.getUaT0310KozaEntity().getKozaId() != 0L) {
             賦課情報.setKozaKubun(KozaKubun.口座振替.getコード());
-        } else if (0 < 普徴期別金額合計.intValue() && 口座Entity == null) {
+        } else if (0 < 普徴期別金額合計.intValue() && (口座Entity == null || 口座Entity.getUaT0310KozaEntity() == null
+                || 口座Entity.getUaT0310KozaEntity().getKozaId() == 0L)) {
             賦課情報.setKozaKubun(KozaKubun.現金納付.getコード());
         } else if (Decimal.ZERO.equals(普徴期別金額合計)) {
             賦課情報.setKozaKubun(KozaKubun.現金納付.getコード());
@@ -262,8 +264,10 @@ public class FuchoKariSanteiFukaBatch {
         } else {
             Decimal 期別特徴金額 = 計算用保険料.divide(NUM_6).divide(NUM_100).roundDownTo(0).multiply(NUM_100);
             Decimal 後半特徴金額 = 期別特徴金額.multiply(NUM_3);
-            Decimal 六月より前の普徴仮算定金額 = 計算用保険料.subtract(更正前賦課情報.getTkKibetsuGaku02().
-                    add(更正前賦課情報.getTkKibetsuGaku03()).subtract(後半特徴金額));
+            Decimal 特徴期別金額02 = 更正前賦課情報.getTkKibetsuGaku02() == null ? Decimal.ZERO : 更正前賦課情報.getTkKibetsuGaku02();
+            Decimal 特徴期別金額03 = 更正前賦課情報.getTkKibetsuGaku03() == null ? Decimal.ZERO : 更正前賦課情報.getTkKibetsuGaku03();
+            Decimal 六月より前の普徴仮算定金額 = 計算用保険料.subtract(特徴期別金額02.
+                    add(特徴期別金額03).subtract(後半特徴金額));
             List<Kitsuki> 期月 = 期月リスト.filtered仮算定期間().toList();
             Decimal 六月より前仮期数 = Decimal.ZERO;
             for (Kitsuki 仮算定期間 : 期月) {
@@ -283,6 +287,12 @@ public class FuchoKariSanteiFukaBatch {
                 金額リスト1 = 期別納付額_端数調整;
             }
         }
+        普徴期別金額リスト = set普徴期別金額リスト(普徴期別金額リスト, 期月リスト, 期, 金額リスト0, 金額リスト1);
+        return 普徴期別金額リスト;
+    }
+
+    private List<Decimal> set普徴期別金額リスト(List<Decimal> 普徴期別金額リスト, KitsukiList 期月リスト, int 期,
+            Decimal 金額リスト0, Decimal 金額リスト1) {
         List<Kitsuki> 期月 = 期月リスト.filtered仮算定期間().toList();
         if (期月.get(0).get月AsInt() == NUM_4) {
             普徴期別金額リスト.add(金額リスト0);

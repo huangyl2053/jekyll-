@@ -153,6 +153,7 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranProcess extends BatchK
     @Override
     protected void usualProcess(JissekiFutangakuDataTempEntity entity) {
         GassanJikofutangakuKeisanKekkaIchiranEntity reportDataEntity = util.toGassanJikofutangakuKeisanKekkaIchiranEntity(entity);
+        reportDataEntity.setShichosonCode(entity.getIchiranShichosonCode());
         GassanJigyobunJikofutangakuKeisanKekkaIchiranReport report
                 = new GassanJigyobunJikofutangakuKeisanKekkaIchiranReport(reportDataEntity, 出力順Map, 改頁Map, 作成日時,
                         市町村コード.code市町村RString(), 市町村名称);

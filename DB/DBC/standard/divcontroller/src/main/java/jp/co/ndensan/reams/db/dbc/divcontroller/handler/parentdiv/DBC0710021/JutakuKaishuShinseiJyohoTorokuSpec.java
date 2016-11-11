@@ -175,8 +175,8 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
         }
 
         public static boolean is申請取消事由が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return !RString.isNullOrEmpty(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu()
-                    .getSelectedKey());
+            RString 申請取消事由 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().getSelectedKey();
+            return !RString.isNullOrEmpty(申請取消事由) && !new RString("0").equals(申請取消事由);
         }
 
         public static boolean is給付率が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
