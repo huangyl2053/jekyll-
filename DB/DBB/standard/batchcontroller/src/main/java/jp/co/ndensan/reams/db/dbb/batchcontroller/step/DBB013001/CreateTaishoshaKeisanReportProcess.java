@@ -408,11 +408,6 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         } else {
             bodyList.add(RString.EMPTY);
         }
-        if (編集後住所 != null) {
-            bodyList.add(編集後住所);
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
         if (宛名の情報 != null) {
             AtenaJusho 住所 = 宛名の情報.getJusho();
             if (住所 != null) {
@@ -515,7 +510,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         if (!ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法4月())
                 && !ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法4月())
                 && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法6月())
-                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法4月()))) {
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法6月()))) {
 
             return 編集コード_6月特徴開始者;
         }
