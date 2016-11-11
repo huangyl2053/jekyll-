@@ -67,7 +67,7 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
         source.imgSonotashiryo1 = business.get左のその他資料イメージ();
         source.imgSonotashiryo2 = business.get右のその他資料イメージ();
 
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
 
         if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),

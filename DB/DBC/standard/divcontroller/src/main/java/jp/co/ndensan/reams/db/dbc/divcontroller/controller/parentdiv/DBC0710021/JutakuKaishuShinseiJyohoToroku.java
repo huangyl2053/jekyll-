@@ -508,10 +508,10 @@ public class JutakuKaishuShinseiJyohoToroku {
         if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
                 && 画面提供着工年月 != null
                 && (old提供着工年月 == null
-                || old提供着工年月.getYear().getYearValue() != 画面提供着工年月.getYear().getYearValue())) {
+                || !old提供着工年月.toDateString().equals(画面提供着工年月.getYearMonth().toDateString()))) {
             div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
                     SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
-                    new FlexibleYear(画面提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
+                    new FlexibleYear(画面提供着工年月.getNendo().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         }
 
         if (div.getTxtTeikyoYM().getValue() != null) {
