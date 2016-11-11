@@ -296,7 +296,7 @@ public class KarisanteiIdoFukaPanelHandler {
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 仮算定の期月リスト = 月期対応取得_普徴.get期月リスト().filtered仮算定期間();
-        if (仮算定の期月リスト == null) {
+        if (仮算定の期月リスト.toList() == null || 仮算定の期月リスト.toList().isEmpty()) {
             set納入通知書出力内容(true);
             return;
         } else {
