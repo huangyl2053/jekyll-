@@ -214,12 +214,12 @@
                 ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
                 AND  T5032."zaitakuShisetsuKubun" = T5302."zaitakuShisetsuKubun"
                 <if test="基準日フラグ">
-                 AND T5032."kaishiYM" <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
-                 AND T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM"
+                 AND T5032."kaishiYM" <![CDATA[<=]]> LEFT(T5602."ikenshoJuryoYMD", 6)
+                 AND LEFT(T5602."ikenshoJuryoYMD", 6) <![CDATA[<=]]> T5032."shuryoYM"
                 </if>
                 <if test="!基準日フラグ">
-                 AND T5032."kaishiYM" <![CDATA[<=]]> T5302."ikenshoReadYMD" 
-                 AND T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM"
+                 AND T5032."kaishiYM" <![CDATA[<=]]> LEFT(T5302."ikenshoReadYMD", 6) 
+                 AND LEFT(T5302."ikenshoReadYMD", 6) <![CDATA[<=]]> T5032."shuryoYM"
                 </if>
         WHERE  
                 T5602."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
@@ -266,12 +266,12 @@
                 ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
                 AND  T5032."zaitakuShisetsuKubun" = T5302."zaitakuShisetsuKubun"
                 <if test="基準日フラグ">
-                 AND T5032."kaishiYM" <![CDATA[<=]]> T5602."ikenshoJuryoYMD" 
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM" 
+                 AND T5032."kaishiYM" <![CDATA[<=]]> LEFT(T5602."ikenshoJuryoYMD", 6) 
+                 AND  LEFT(T5602."ikenshoJuryoYMD", 6) <![CDATA[<=]]> T5032."shuryoYM" 
                 </if>
                 <if test="!基準日フラグ">
-                 AND  T5032."kaishiYM" <![CDATA[<=]]> T5302."ikenshoReadYMD"
-                 AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM" 
+                 AND  T5032."kaishiYM" <![CDATA[<=]]> LEFT(T5302."ikenshoReadYMD", 6)
+                 AND  LEFT(T5302."ikenshoReadYMD", 6) <![CDATA[<=]]> T5032."shuryoYM" 
                 </if>
         WHERE  
                 T5602."ginkoFurikomiShutsuryokuFlag"  = #{銀行振込出力フラグ}
