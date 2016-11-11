@@ -131,8 +131,14 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
                         SubGyomuCode.DBB介護賦課);
             }
             if (年度 != null) {
-                RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance()
-                        .getShoriKubun(市町村識別ID.get(0).getItemId(), 遷移区分, new FlexibleYear(年度));
+                RString 処理区分;
+                if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
+                    処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance()
+                            .getShoriKubun(市町村識別ID.get(0).getItemId(), 遷移区分, new FlexibleYear(年度));
+                } else {
+                    処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance()
+                            .getShoriKubun(RString.EMPTY, 遷移区分, new FlexibleYear(年度));
+                }
                 処理区分Handler(メニューID, 処理区分);
             }
         }

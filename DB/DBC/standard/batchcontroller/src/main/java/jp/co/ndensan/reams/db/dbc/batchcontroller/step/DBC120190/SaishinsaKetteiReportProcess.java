@@ -64,7 +64,6 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
     private static final RString 出力ファイル名
             = new RString("DBC200048_SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBun.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int INDEX_1 = 1;
@@ -105,17 +104,6 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
                     .replace(実行不可MESSAGE.toString()).toString());
         }
         出力順 = MyBatisOrderByClauseCreator.create(SaishinsaKetteiHokenshaInOutPutOrder.class, 並び順);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(EUC_WRITER_DELIMITER.toString());
-            出力順 = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(EUC_WRITER_DELIMITER).concat(出力順BODY.get(i));
-                }
-            }
-        }
         breakList.add(SaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.get項目ID());
         int index = INDEX_1;
         for (ISetSortItem setSortItem : 並び順.get設定項目リスト()) {

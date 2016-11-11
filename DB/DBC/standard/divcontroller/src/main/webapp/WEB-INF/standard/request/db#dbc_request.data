@@ -976,6 +976,7 @@ dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/btnOnClick_shinsaYM
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/onBeforeOpenDialog
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/onCancelClose
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/onLoad
+dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/onOkClose
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/onclick_btBatch
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/txtHihokenshaNo_onBlur
 dbc/db/dbc/KogakuShinseiList/onClick_btnKensaku

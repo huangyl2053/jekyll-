@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.db.riyojokyoichiran;
+package jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 利用状況統計表（明細リスト）作成のEntityクラスです。
@@ -15,13 +19,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbWT1513RiyoJokyoTokeihyoEntity {
+@OnNextSchema("rgdb")
+public class DbWT1513RiyoJokyoTokeihyoEntity extends DbTableEntityBase<DbWT1513RiyoJokyoTokeihyoEntity> implements IDbAccessable {
 
     private RString shoriShichosonCode;
     private RString shoriShichosonName;
+    @PrimaryKey
     private RString dataKubun;
+    @PrimaryKey
     private RString hihokenshaNo;
+    @PrimaryKey
     private RString serviceTeikyoYM;
+    @PrimaryKey
     private RString shinsaYM;
     private RString shoKisaiHokenshaNo;
     private RString shikibetsuCode;
@@ -140,5 +149,4 @@ public class DbWT1513RiyoJokyoTokeihyoEntity {
     private RString shafukuKeigengaku;
     private RString shafukuKeigengoRiyoshaFutangaku;
     private RString meisaiOutFlag;
-
 }

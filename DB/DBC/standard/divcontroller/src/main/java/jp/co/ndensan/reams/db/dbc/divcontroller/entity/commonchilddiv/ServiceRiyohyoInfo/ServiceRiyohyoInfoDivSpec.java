@@ -23,8 +23,8 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
                     return div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().isDisplayNone()
-                    || (!RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
-                    && !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード2()));
+                    || (div.getCcdServiceCodeInput().getサービスコード1() != null
+                    && div.getCcdServiceCodeInput().getサービスコード2() != null);
                 }
             },
     /**

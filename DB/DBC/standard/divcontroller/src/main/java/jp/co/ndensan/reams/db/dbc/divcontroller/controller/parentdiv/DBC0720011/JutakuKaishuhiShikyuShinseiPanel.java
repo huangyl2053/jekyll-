@@ -362,6 +362,10 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             if (支給申請日終了 != null) {
                 支給申請日終了FlexibleDate = new FlexibleDate(支給申請日終了.toDateString());
             }
+
+            List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(ViewStateKeys.申請一覧,
+                    List.class);
+
             JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
             List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(支給申請日開始FlexibleDate, 支給申請日終了FlexibleDate);
             ViewStateHolder.put(ViewStateKeys.申請一覧, (Serializable) resultList);
@@ -370,7 +374,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
 
             RString 住宅改修内容一覧_遷移元 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_遷移元, RString.class);
             if (住宅改修内容一覧_遷移元 != null && 住宅改修内容一覧_遷移元.equals(遷移元)) {
-                this.選択行のみチェックON(div);
+                this.選択行のみチェックON(div, viewStateList);
                 ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_遷移元, null);
             }
             if (resultList.isEmpty()) {
@@ -498,7 +502,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         return parameterList;
     }
 
-    private void 選択行のみチェックON(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+    private void 選択行のみチェックON(JutakuKaishuhiShikyuShinseiPanelDiv div, List<MiShinsaSikyuShinsei> viewStateList) {
 
         List<JutakuKaishuhiShikyuShinseiHozon> 選択list
                 = ViewStateHolder.get(ViewStateKeys.住宅改修費支給申請一括審査_決定選択保存, List.class);
@@ -512,6 +516,24 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                             && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().toDateString()).equals(選択.getサービス提供年月())
                             && row.getTxtSeiriNo().getValue().equals(選択.get整理番号())) {
                         row.setSelected(Boolean.TRUE);
+                    }
+                }
+            }
+        }
+
+        for (dgMishinsaShikyuShinsei_Row row : lists) {
+            for (MiShinsaSikyuShinsei viewState : viewStateList) {
+                if (viewState.getEntity().get被保険者番号() != null
+                        && viewState.getEntity().getサービス提供年月() != null
+                        && viewState.getEntity().get整理番号() != null) {
+                    if (row.getTxtHihoNo().equals(viewState.getEntity().get被保険者番号().getColumnValue())
+                            && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().
+                                    toDateString()).equals(viewState.getEntity().getサービス提供年月())
+                            && row.getTxtSeiriNo().getValue().equals(viewState.getEntity().get整理番号())) {
+                        row.setTxtShinsaResult(RString.isNullOrEmpty(viewState.getEntity().get審査結果())
+                                ? RString.EMPTY : ShinsaNaiyoKubun.toValue(viewState.getEntity().get審査結果()).get名称());
+                        row.setTxtTenkyoReset(viewState.getEntity().is住宅住所変更());
+                        row.setTxt3DankaiReset(viewState.getEntity().is要介護状態３段階変更());
                     }
                 }
             }

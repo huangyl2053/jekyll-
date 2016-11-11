@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseis
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -109,6 +111,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         source.gyoseikuCode = 発行対象者.get行政区コード();
         source.setaiCode = 発行対象者.get世帯コード();
         source.shichosonCode = 発行対象者.get市町村コード();
+        source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listIchiran_5);
+        source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.listIchiran_6);
         return source;
     }
 

@@ -44,13 +44,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class JukyushaIdoRenrakuhyoTorokuPanel {
 
-    private static final RString 被保険者番号なし = new RString("被保険者番号なし");
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
     private static final RString ZERO = new RString("0");
+    private static final RString ONE = new RString("1");
     private static final RString 新規モード = new RString("新規モード");
     private static final RString 起動 = new RString("1");
     private static final RString 停止 = new RString("0");
     private static final RString ボタン名 = new RString("btnSave");
+    private static final RString TRUE = new RString("true");
+    private static final RString FALSE = new RString("false");
 
     private JukyushaIdoRenrakuhyoTorokuPanelHandler getHandler(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
         return new JukyushaIdoRenrakuhyoTorokuPanelHandler(div);
@@ -73,7 +75,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         }
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
-        if ((資格対象者 == null || 資格対象者.get被保険者番号() == null || 資格対象者.get被保険者番号().isEmpty())
+        if (資格対象者 == null || 資格対象者.get被保険者番号() == null || 資格対象者.get被保険者番号().isEmpty()
                 && !ResponseHolder.isReRequest()) {
             div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().setDisabled(true);
             div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo().setDisabled(true);
@@ -102,40 +104,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData<SearchHihokenshaDiv>
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onClick_btnSave(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
-        JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
-        JukyushaIdoRenrakuhyoTorokuPanelValidationHandler validationHander = getValidationHandler(div);
-        ValidationMessageControlPairs pair
-                = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
-        if (pair.iterator().hasNext() && !ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addValidationMessages(pair).respond();
-        }
-        ValidationMessageControlPairs pairs = validationHander.validate();
-        if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                    UrQuestionMessages.保存の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(div).respond();
-        }
-        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        RString 異動日 = new RString(div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
-                getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動年月日().toString());
-        RString 異動区分 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
-                getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動区分コード();
-        JukyushaIdoRenrakuhyoToroku jukyushaIdoRen = JukyushaIdoRenrakuhyoToroku.createInstance();
-        RString エラー有無 = jukyushaIdoRen.regJukyushaIdoJoho(資格対象者.get被保険者番号().getColumnValue(), new RDate(異動日.toString()), 異動区分);
-        List<RString> チェック状態 = handler.getチェックボックス状態();
-        if (ZERO.equals(エラー有無) && !チェック状態.isEmpty()) {
-            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(起動);
-        } else {
-            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(停止);
-        }
-        boolean flag1 = getState(エラー有無, 資格対象者.get被保険者番号().getColumnValue(), 異動日, div);
-        if (flag1) {
+        if (DBC0210011StateName.完了メッセージ.getName().equals(ResponseHolder.getState())) {
             RString 完了メッセージ対象情報1 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
                     .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
             RString 完了メッセージ対象情報2 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
@@ -143,6 +112,53 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
             div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                     完了メッセージ対象情報1, 完了メッセージ対象情報2, true);
             return ResponseData.of(div).setState(DBC0210011StateName.完了メッセージ);
+        }
+        JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
+        RString 被保険者番号 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
+                getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
+        RString 異動日 = new RString(div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
+                getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動年月日().toString());
+        RString 異動区分 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
+                getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動区分コード();
+        JukyushaIdoRenrakuhyoToroku jukyushaIdoRen = JukyushaIdoRenrakuhyoToroku.createInstance();
+        RString エラー有無 = jukyushaIdoRen.regJukyushaIdoJoho(被保険者番号, new RDate(異動日.toString()), 異動区分);
+        List<RString> チェック状態 = handler.getチェックボックス状態();
+        ValidationMessageControlPairs pair
+                = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().validateCheck();
+        if (pair.iterator().hasNext() && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addValidationMessages(pair).respond();
+        }
+        JukyushaIdoRenrakuhyoTorokuPanelValidationHandler validationHander = getValidationHandler(div);
+        ValidationMessageControlPairs pairs = validationHander.validate();
+        if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        if (ZERO.equals(エラー有無) && !チェック状態.isEmpty()) {
+            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(起動);
+        } else {
+            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().setValue(停止);
+        }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (停止.equals(div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().getValue())) {
+                dataSave(エラー有無, 被保険者番号, 異動日, div);
+            }
+            RString flag = div.getHdnFlg();
+            if (TRUE.equals(flag)) {
+                RString 完了メッセージ対象情報1 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                        .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
+                RString 完了メッセージ対象情報2 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                        .getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者氏名カナ();
+                div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                        完了メッセージ対象情報1, 完了メッセージ対象情報2, true);
+                return ResponseData.of(div).setState(DBC0210011StateName.完了メッセージ);
+            } else {
+                return ResponseData.of(div).respond();
+            }
         } else {
             return ResponseData.of(div).respond();
         }
@@ -159,7 +175,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         return result;
     }
 
-    private boolean getState(RString エラー有無, RString 被保険者番号, RString 異動日, JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+    private boolean getSaveState(RString エラー有無, RString 被保険者番号, RString 異動日, JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         JukyushaIdoRenrakuhyoManager manager = InstanceProvider.create(JukyushaIdoRenrakuhyoManager.class);
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
@@ -179,6 +195,15 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         return false;
     }
 
+    private void dataSave(RString エラー有無, RString 被保険者番号, RString 異動日, JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        boolean flag1 = getSaveState(エラー有無, 被保険者番号, 異動日, div);
+        if (flag1) {
+            div.setHdnFlg(TRUE);
+        } else {
+            div.setHdnFlg(FALSE);
+        }
+    }
+
     /**
      * 「処理実行の確認」.「はい」ボタンのメソッドです。
      *
@@ -187,6 +212,24 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
+        RString 被保険者番号 = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
+                getJukyushaIdoRenrakuhyo().get受給者異動送付().get被保険者番号().getColumnValue();
+        RString 異動日 = new RString(div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().
+                getJukyushaIdoRenrakuhyo().get受給者異動送付().get異動年月日().toString());
+        RString エラー有無 = null;
+        if (起動.equals(div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getHdnFlag().getValue())) {
+            エラー有無 = ZERO;
+        } else {
+            エラー有無 = ONE;
+        }
+        if (div.getHdnFlg() == null) {
+            boolean flag1 = getSaveState(エラー有無, 被保険者番号, 異動日, div);
+            if (flag1) {
+                div.setHdnFlg(TRUE);
+            } else {
+                div.setHdnFlg(FALSE);
+            }
+        }
         return ResponseData.of(getHandler(div).to帳票発行(
                 div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo())).respond();
     }

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinItiziH
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiIinJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiIinJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiSiryouKumiawaseA3Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiSiryouKumiawaseA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinSonotaJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTokkiJikouDataSakuseiA4Process;
@@ -45,6 +46,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     private static final String 委員_その他資料 = "iinSonotaJoho";
     private static final String 委員_特記事項_一次判定結果 = "iinTokkiJikouItiziHantei";
     private static final String 審査会資料組み合わせ一覧A3版 = "審査会資料組み合わせ一覧A3版";
+    private static final String 審査会資料組み合わせ一覧A4版 = "審査会資料組み合わせ一覧A4版";
     private static final RString 選択 = new RString("1");
     private static final RString 作成条件_追加分 = new RString("追加分");
 
@@ -68,7 +70,11 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
                 && 選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
                 && 選択.equals(getParameter().getChohyoIin_ikenshoFalg())
                 && 選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg()))) {
-            executeStep(審査会資料組み合わせ一覧A3版);
+            if (選択.equals(getParameter().getShuturyokuSutairu())) {
+                executeStep(審査会資料組み合わせ一覧A4版);
+            } else {
+                executeStep(審査会資料組み合わせ一覧A3版);
+            }
         } else {
             if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
                 executeStep(委員_特記事項_一次判定結果);
@@ -82,22 +88,21 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
             if (選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())) {
                 executeStep(委員_一次判定結果);
             }
-            if (選択.equals(getParameter().getChohyoIin_ikenshoFalg())) {
-                主治医意見書Flow();
-            }
             if (選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg())) {
                 executeStep(委員_その他資料);
             }
-
+            主治医意見書Flow();
         }
     }
 
     private void 主治医意見書Flow() {
-        if (選択.equals(getParameter().getShuturyokuSutairu())) {
-            executeStep(委員_主治医意見書_1枚目);
-            executeStep(委員_主治医意見書_2枚目以降);
-        } else {
-            executeStep(委員_主治医意見書_A3);
+        if (選択.equals(getParameter().getChohyoIin_ikenshoFalg())) {
+            if (選択.equals(getParameter().getShuturyokuSutairu())) {
+                executeStep(委員_主治医意見書_1枚目);
+                executeStep(委員_主治医意見書_2枚目以降);
+            } else {
+                executeStep(委員_主治医意見書_A3);
+            }
         }
     }
 
@@ -245,6 +250,17 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     @Step(審査会資料組み合わせ一覧A3版)
     protected IBatchFlowCommand createJimuShinsakaiSiryouKumiawaseA3() {
         return simpleBatch(IinShinsakaiSiryouKumiawaseA3Process.class)
+                .arguments(getParameter().toShinsakaiSiryouKumiawaseA3ProcessParameter()).define();
+    }
+
+    /**
+     * 委員用審査会資料組み合わせ一覧A4版データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(審査会資料組み合わせ一覧A4版)
+    protected IBatchFlowCommand createJimuShinsakaiSiryouKumiawaseA4() {
+        return simpleBatch(IinShinsakaiSiryouKumiawaseA4Process.class)
                 .arguments(getParameter().toShinsakaiSiryouKumiawaseA3ProcessParameter()).define();
     }
 

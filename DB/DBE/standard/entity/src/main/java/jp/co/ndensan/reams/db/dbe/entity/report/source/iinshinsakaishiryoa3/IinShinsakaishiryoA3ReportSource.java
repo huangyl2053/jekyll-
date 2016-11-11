@@ -737,60 +737,6 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     @ReportItem(name = "seven_imgSonotashiryo2", order = 621)
     public RString seven_imgSonotashiryo2;
 
-    //DBE517009_TsuikashiryokagamiA3
-    @ReportItem(name = "eight_shinsakaiNo", length = 4, order = 651)
-    public RString eight_shinsakaiNo;
-    @ReportItem(name = "eight_tsuchibun", order = 652)
-    public RString eight_tsuchibun;
-    @ReportItem(name = "eight_ShinsainName1", length = 20, order = 653)
-    public RString eight_ShinsainName1;
-    @ReportItem(name = "eight_ShinsainName2", length = 20, order = 654)
-    public RString eight_ShinsainName2;
-    @ReportItem(name = "eight_ShinsainName3", length = 20, order = 655)
-    public RString eight_ShinsainName3;
-    @ReportItem(name = "eight_ShinsainName4", length = 20, order = 656)
-    public RString eight_ShinsainName4;
-    @ReportItem(name = "eight_ShinsainName5", length = 20, order = 657)
-    public RString eight_ShinsainName5;
-    @ReportItem(name = "eight_ShinsainName6", length = 20, order = 658)
-    public RString eight_ShinsainName6;
-    @ReportItem(name = "eight_shinsakaiKaisaiYMD", length = 21, order = 659)
-    public RString eight_shinsakaiKaisaiYMD;
-    @ReportItem(name = "eight_ShinsainName7", length = 20, order = 660)
-    public RString eight_ShinsainName7;
-    @ReportItem(name = "eight_gogitaiNo", length = 2, order = 661)
-    public RString eight_gogitaiNo;
-    @ReportItem(name = "eight_ShinsainName8", length = 20, order = 662)
-    public RString eight_ShinsainName8;
-    @ReportItem(name = "eight_shinsakaiTsuikasha", length = 2, order = 663)
-    public RString eight_shinsakaiTsuikasha;
-    @ReportItem(name = "eight_listShinsei_1", length = 2, order = 664)
-    public RString eight_listShinsei_1;
-    @ReportItem(name = "eight_listShinsei_2", length = 6, order = 665)
-    public RString eight_listShinsei_2;
-    @ReportItem(name = "eight_listShinsei_3", length = 10, order = 666)
-    public RString eight_listShinsei_3;
-    @ReportItem(name = "eight_listShinsei_4", length = 30, order = 667)
-    public RString eight_listShinsei_4;
-    @ReportItem(name = "eight_listShinsei_5", length = 1, order = 668)
-    public RString eight_listShinsei_5;
-    @ReportItem(name = "eight_listShinsei_6", length = 3, order = 669)
-    public RString eight_listShinsei_6;
-    @ReportItem(name = "eight_listShinsei_7", length = 3, order = 670)
-    public RString eight_listShinsei_7;
-    @ReportItem(name = "eight_listShinsei_8", length = 4, order = 671)
-    public RString eight_listShinsei_8;
-    @ReportItem(name = "eight_listShinsei_9", length = 7, order = 672)
-    public RString eight_listShinsei_9;
-    @ReportItem(name = "eight_listShinsei_10", length = 3, order = 673)
-    public RString eight_listShinsei_10;
-    @ReportItem(name = "eight_listShinsei_11", length = 4, order = 674)
-    public RString eight_listShinsei_11;
-    @ReportItem(name = "eight_listZenkaiｙukokikan_1", length = 19, order = 675)
-    public RString eight_listZenkaiｙukokikan_1;
-    @ReportItem(name = "eight_listYukokikan_1", length = 19, order = 676)
-    public RString eight_listYukokikan_1;
-
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

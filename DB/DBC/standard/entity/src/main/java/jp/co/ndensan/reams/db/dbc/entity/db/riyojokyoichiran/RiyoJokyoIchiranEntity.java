@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.riyojokyoichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.DbWT1513RiyoJokyoTokeihyoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

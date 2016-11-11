@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -44,6 +45,8 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private static final int NUM_0 = 0;
     private static final int NUM_3 = 3;
     private final Association association;
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号_1 = new RString("被保険者番号");
 
     protected TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(
             TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表,
@@ -118,6 +121,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         if (被保険者番号 != null) {
             source.listLower_1 = 被保険者番号.value();
         }
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号_1, source.listLower_1);
         SetaiCode 世帯コード = item.get世帯コード();
         if (世帯コード != null) {
             source.listLower_2 = 世帯コード.value();
@@ -223,6 +227,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         if (被保険者番号 != null) {
             source.listLower_1 = 被保険者番号.value();
         }
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号_1, source.listLower_1);
         SetaiCode 世帯コード = item.get世帯コード();
         if (世帯コード != null) {
             source.listLower_2 = 世帯コード.value();

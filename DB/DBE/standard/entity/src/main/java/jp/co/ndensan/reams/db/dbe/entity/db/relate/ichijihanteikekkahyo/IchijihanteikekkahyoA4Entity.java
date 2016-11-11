@@ -136,5 +136,5 @@ public class IchijihanteikekkahyoA4Entity {
     private List<TiyosaKekka> 特別な医療リスト２;
     private List<TiyosaKekka> 主治医意見書;
     private RString 申請書管理番号;
-
+    private RString 識別コード;
 }

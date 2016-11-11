@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.CheckDigitFactory;
 import jp.co.ndensan.reams.uz.uza.math.CheckDigitKind;
 import jp.co.ndensan.reams.uz.uza.math.ICheckDigit;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
- * 市町村特別給付・サービス事業者のバリデーションハンドラークラスです
+ * 市町村特別給付・サービス事業者のバリデーションハンドラークラスです。
  *
  * @reamsid_L DBC-3430-010 liuwei2
  */
@@ -124,14 +125,14 @@ public class DBC2210011MainValidationHandler {
 
     private static enum NoInputMessages implements IValidationMessage {
 
-        特別給付サービス重複チェック(UrErrorMessages.既に存在.getMessage(), "そのサービス種類"),
-        登録終了日チェック(UrErrorMessages.大小関係が不正.getMessage(), "登録終了日"),
-        事業者コード重複チェック(DbzErrorMessages.重複あり.getMessage(), "事業者コード"),
-        サービス情報作成チェック(DbcErrorMessages.サービス情報作成必要.getMessage());
+        特別給付サービス重複チェック(UrErrorMessages.既に存在, "そのサービス種類"),
+        登録終了日チェック(UrErrorMessages.大小関係が不正, "登録終了日"),
+        事業者コード重複チェック(DbzErrorMessages.重複あり, "事業者コード"),
+        サービス情報作成チェック(DbcErrorMessages.サービス情報作成必要);
         private final Message message;
 
-        private NoInputMessages(Message message, String... replacements) {
-            this.message = message.replace(replacements);
+        private NoInputMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
         }
 
         @Override

@@ -274,6 +274,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             } else {
                 div.getRadTodokedeKubun().setSelectedKey(KEY_0);
             }
+        } else {
+            div.getRadTodokedeKubun().setSelectedKey(KEY_0);
         }
         if (is事業者作成の場合()) {
             div.getRadKeikakuKubun().setVisible(false);
@@ -451,8 +453,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         FlexibleDate 届出年月日now = div.getTxtTodokedeYM().getValue() == null ? null : new FlexibleDate(div.getTxtTodokedeYM().getValue().toDateString());
         boolean is居宅給付計画届出が変更
-                = !Objects.equals(居宅給付計画届出.get届出区分(), KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey()) ? 届出区分_新規 : 届出区分_変更)
-                || !Objects.equals(居宅給付計画届出.get届出年月日(), 届出年月日now)
+                = !Objects.equals(居宅給付計画届出.get届出年月日(), 届出年月日now)
                 || !Objects.equals(居宅給付計画届出.get届出者氏名(), div.getTxtTodokedeshaShimei().getDomain())
                 || !Objects.equals(居宅給付計画届出.get届出者氏名カナ(), div.getTxtTodokedeshaShimeiKana().getDomain())
                 || !Objects.equals(居宅給付計画届出.get届出者郵便番号(), div.getTxtTodokedeshaYubinNo().getValue())
@@ -704,7 +705,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 : 居宅給付計画事業者.get委託先事業者番号().getColumnValue());
         div.getTxtItakusakiJigyoshaName().setValue(result.get委託先事業者名() == null ? RString.EMPTY
                 : result.get委託先事業者名());
-        if (居宅給付計画事業者.get事業者変更年月日() != null) {
+        if (居宅給付計画事業者.get事業者変更年月日() != null && !居宅給付計画事業者.get事業者変更年月日().isEmpty()) {
             div.getTxtJigyoshaHenkoYMD().setValue(new RDate(居宅給付計画事業者.get事業者変更年月日().toString()));
         } else {
             div.getTxtJigyoshaHenkoYMD().clearValue();

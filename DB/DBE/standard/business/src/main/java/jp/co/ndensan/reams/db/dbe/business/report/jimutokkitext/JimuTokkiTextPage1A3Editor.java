@@ -173,7 +173,7 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         source.imgShisetsuName = item.get施設名イメージ();
         source.imgShisetsuAddress = item.get住所イメージ();
         source.imgShisetsuTel = item.get電話番号イメージ();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shikibetuCode = new ShikibetsuCode(item.get識別コード());
         if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }

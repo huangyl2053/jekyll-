@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchitesh
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -23,7 +24,6 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriSource implements IReportSource
     public RString tsuchibun1;
     @ReportItem(name = "hihokenshaNameKana", order = 4)
     public RString hihokenshaNameKana;
-    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hokenshaNo", length = 6, order = 5)
     public RString hokenshaNo;
     @ReportItem(name = "hihokenshaName", order = 6)
@@ -135,5 +135,8 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriSource implements IReportSource
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportPerson(id = "X")
     public ShikibetsuCode 識別コード;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
+
 // </editor-fold>
 }

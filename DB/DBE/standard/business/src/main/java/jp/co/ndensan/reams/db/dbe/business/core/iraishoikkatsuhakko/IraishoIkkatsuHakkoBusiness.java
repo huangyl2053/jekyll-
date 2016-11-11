@@ -8,15 +8,18 @@ package jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiIchiran;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirairirekiichiran.IkenshoirairirekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
@@ -32,6 +35,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -824,5 +830,38 @@ public class IraishoIkkatsuHakkoBusiness {
                 csv出力有無,
                 csvファイル名,
                 出力条件);
+    }
+
+    /**
+     * 帳票「DBE230004_主治医意見書作成依頼履歴一覧」Entityデータを作成するメッソドです。
+     *
+     * @return IkenshoirairirekiIchiran
+     */
+    public IkenshoirairirekiIchiran setDBE230004Item() {
+        IkenshoirairirekiIchiranEntity item = new IkenshoirairirekiIchiranEntity();
+        item.setChokkinKubun(entity.get直近区分());
+        if (!RString.isNullOrEmpty(entity.get被保険者番号())) {
+            item.setHihokenshaNo(new HihokenshaNo(entity.get被保険者番号()));
+        }
+        if (!RString.isNullOrEmpty(entity.get被保険者氏名カナ())) {
+            item.setHihokenshaKana(new AtenaKanaMeisho(entity.get被保険者氏名カナ()));
+        }
+        if (!RString.isNullOrEmpty(entity.get被保険者氏名())) {
+            item.setHihokenshaName(new AtenaKanaMeisho(entity.get被保険者氏名()));
+        }
+        if (!RString.isNullOrEmpty(entity.get住所())) {
+            item.setJusho(new AtenaJusho(entity.get住所()));
+        }
+        item.setIryoKikanMeisho(entity.get医療機関名称());
+        item.setShujiiName(entity.get主治医氏名());
+        item.setIkenshoSakuseiIraiYMD(entity.get主治医意見書作成依頼年月日());
+        if (!RString.isNullOrEmpty(entity.get認定申請区分申請時コード())) {
+            item.setNinteiShinseiShinseijiKubunCode(new Code(entity.get認定申請区分申請時コード()));
+        }
+        if (!RString.isNullOrEmpty(entity.get意見書作成回数区分())) {
+            item.setIkenshoSakuseiKaisuKubun(new Code(entity.get意見書作成回数区分()));
+        }
+        IkenshoirairirekiIchiran business = new IkenshoirairirekiIchiran(item);
+        return business;
     }
 }

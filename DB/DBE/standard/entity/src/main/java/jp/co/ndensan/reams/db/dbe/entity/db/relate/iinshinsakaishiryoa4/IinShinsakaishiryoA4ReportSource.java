@@ -720,4 +720,14 @@ public class IinShinsakaishiryoA4ReportSource implements IReportSource {
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation shinseishoKanriNo;
 
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        two_tokkiText,
+        two_tokkiImg,
+        three_tokkiText,
+        three_tokkiImg,
+    }
 }

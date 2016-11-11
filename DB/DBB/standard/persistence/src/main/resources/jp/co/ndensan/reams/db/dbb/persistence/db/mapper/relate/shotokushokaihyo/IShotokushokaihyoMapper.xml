@@ -497,7 +497,7 @@
         INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
         )
-        SELECT
+        SELECT DISTINCT
         master."shikibetsuCode",
         C."genLasdecCode",
         CASE
@@ -800,8 +800,8 @@
         B."tenyuzenjusho",
         B."tenyuzenbanchi",
         B."tenyuzenkatagaki",
-        B."kanaMeisho",
-        B."meisho",
+        B."atenaKanaShimei",
+        B."atenaShimei",
         B."seinengappiYMD",
         B."torokuIdoYMD",
         B."tenyuzenzenkokuJushoCode",
@@ -826,8 +826,8 @@
         CASE WHEN master."kouhoshakubun"='1' THEN C."jusho" || C."banchi" || C."katagaki"
         WHEN master."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
         END AS 現住所,
-        master."kanaMeisho",
-        master."meisho",
+        master."atenaKanaShimei",
+        master."atenaShimei",
         master."seinengappiYMD",
         CASE WHEN master."kouhoshakubun"='1' THEN master."torokuIdoYMD"
         WHEN master."kouhoshakubun"='2' THEN C."shojoIdoYMD"

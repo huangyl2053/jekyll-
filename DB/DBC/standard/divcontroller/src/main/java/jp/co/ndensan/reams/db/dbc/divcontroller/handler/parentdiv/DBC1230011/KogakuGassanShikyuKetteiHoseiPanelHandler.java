@@ -611,6 +611,9 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         } else if (修正.equals(モード)) {
             dgKogakuGassanShikyuFushikyuKettei_Row 選択行データ
                     = div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem();
+            if (選択行データ == null) {
+                return shmoResult;
+            }
             if (選択行データ.getTxtUketoriNengetsu().getValue() != null && !選択行データ.
                     getTxtUketoriNengetsu().getValue().isEmpty()) {
                 受取年月 = 選択行データ.getTxtUketoriNengetsu().getValue().getYearMonth();
@@ -623,6 +626,9 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         } else if (削除.equals(モード)) {
             dgKogakuGassanShikyuFushikyuKettei_Row 選択行データ
                     = div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem();
+            if (選択行データ == null) {
+                return shmoResult;
+            }
             if (選択行データ.getTxtUketoriNengetsu().getValue() != null && !選択行データ.
                     getTxtUketoriNengetsu().getValue().isEmpty()) {
                 受取年月 = 選択行データ.getTxtUketoriNengetsu().getValue().getYearMonth();
@@ -632,7 +638,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                     new FlexibleYear(選択行データ.getTxtTaishoNendo().getValue().getYear().toDateString()),
                     受取年月, 選択行データ.getTxtShikyuKubun(), THREE);
         }
-
         return shmoResult;
     }
 
