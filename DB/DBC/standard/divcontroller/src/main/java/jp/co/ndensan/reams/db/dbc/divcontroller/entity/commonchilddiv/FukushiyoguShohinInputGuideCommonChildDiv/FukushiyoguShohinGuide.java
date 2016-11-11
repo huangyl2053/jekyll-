@@ -185,8 +185,12 @@ public class FukushiyoguShohinGuide {
             fukushiManager.saveOrDelete(fukushiyoguShohin);
         } else if (修正.equals(fukuDiv.getPanInput().getState())) {
             FukushiyoguShohinIdentifier key = new FukushiyoguShohinIdentifier(fukuDiv.getPanInput().getShohinNo(),
-                    new FlexibleDate(fukuDiv.getTxtKanriKaishiDay().getValue().toString()));
+                    new FlexibleDate(fukuDiv.getPanInput().getKanriKaishiDay()));
             FukushiyoguShohin fukushiyoguShohin = models.get(key);
+            if (!fukuDiv.getTxtKanriKaishiDay().getValue().toDateString().equals(fukuDiv.getPanInput().getKanriKaishiDay())) {
+                modifyBy管理開始年月日(fukushiyoguShohin, fukushiManager, fukuDiv);
+                return;
+            }
             FukushiyoguShohinBuilder builder = fukushiyoguShohin.createBuilderForEdit();
             if (fukuDiv.getTxtKanriShuryoDay().getValue() != null && !fukuDiv.getTxtKanriShuryoDay().getValue().toString().isEmpty()) {
                 builder.set管理終了年月日(new FlexibleDate(fukuDiv.getTxtKanriShuryoDay().getValue().toString()));
@@ -204,6 +208,22 @@ public class FukushiyoguShohinGuide {
             fukushiManager.saveOrDelete(fukushiyoguShohin.deleted());
         }
 
+    }
+
+    private void modifyBy管理開始年月日(FukushiyoguShohin fukushiyoguShohin,
+            FukushiyoguShohinInputGuideManager fukushiManager, FukushiyoguShohinGuideDiv fukuDiv) {
+        FukushiyoguShohin addFukushiyoguShohin = new FukushiyoguShohin(fukuDiv.getPanInput().getShohinNo(),
+                new FlexibleDate(fukuDiv.getTxtKanriKaishiDay().getValue().toDateString()));
+        FukushiyoguShohinBuilder builder = addFukushiyoguShohin.createBuilderForEdit();
+        if (fukuDiv.getTxtKanriShuryoDay().getValue() != null) {
+            builder.set管理終了年月日(new FlexibleDate(fukuDiv.getTxtKanriShuryoDay().getValue().toString()));
+        }
+        builder.set商品名(nullToEmpty(fukuDiv.getTxtShohinmei().getValue()));
+        builder.set製造事業者名(nullToEmpty(fukuDiv.getTxtSeizoJigyoshamei().getValue()));
+        builder.set品目コード(nullToEmpty(fukuDiv.getTxtHinmokuCode().getValue()));
+        addFukushiyoguShohin = builder.build();
+        addFukushiyoguShohin.toEntity().setState(EntityDataState.Added);
+        fukushiManager.modifyBy管理開始年月日(fukushiyoguShohin.deleted(), addFukushiyoguShohin);
     }
 
     private RString nullToEmpty(RString obj) {

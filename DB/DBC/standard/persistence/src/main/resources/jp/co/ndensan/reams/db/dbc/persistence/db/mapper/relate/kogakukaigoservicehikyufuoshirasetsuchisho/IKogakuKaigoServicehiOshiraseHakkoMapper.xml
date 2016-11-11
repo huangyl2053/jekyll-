@@ -400,6 +400,7 @@
         "ShikibetsuTaisho"."seibetsuCode" AS "seibetsuCodeChohyo",
         "ShikibetsuTaisho"."renrakusaki1" AS "telNoChohyo",
         "ShikibetsuTaisho"."kojinNo" AS "kojinNoChohyo",
+        "ShikibetsuTaisho"."choikiCode" AS "choikiCodeChohyo",
         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.allColumns_DbT4021ShiharaiHohoHenko" />
         <if test="hasValidKamoku">
             ,"Koza"."uaT0310Koza_kinyuKikanCode" AS "kinyuKikanCodeChohyo",
@@ -1019,6 +1020,7 @@
         <result property="meishoChohyo" column="meishoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="shimeikanaChohyo" column="shimeikanaChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="jushoChohyo" column="jushoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="choikiCodeChohyo" column="choikiCodeChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler" />
         <result property="yubinNoChohyo" column="yubinNoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="gyoseikuCodeChohyo" column="gyoseikuCodeChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
         <result property="gyoseikuNameChohyo" column="gyoseikuNameChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -83,6 +84,7 @@ public class KyufuJissekiGaitosha {
         if (給付管理票一覧 != null) {
             getHandler(div).onClick_btnSearch(給付管理票一覧);
         } else {
+            getHandler(div).set空給付管理票一覧();
             div.setHidden件数(なし);
             ValidationMessageControlPairs pairs2 = getValidationHandler(div).validateFor検索チェック();
             if (pairs2.iterator().hasNext()) {
@@ -123,6 +125,8 @@ public class KyufuJissekiGaitosha {
                 短期入所サービスフラグ = true;
             }
         }
+        ShikibetsuCode 識別コード = new ShikibetsuCode(給付管理票.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.給付管理明細一覧, 給付管理明細一覧Model);
         ViewStateHolder.put(ViewStateKeys.給付管理票200604Entity, 給付管理票);
         ViewStateHolder.put(ViewStateKeys.訪問通所サービスフラグ, 訪問通所サービスフラグ);

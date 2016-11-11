@@ -104,10 +104,10 @@ public class DBC2000022PanelAll {
             ViewStateHolder.put(ViewStateKeys.利用者負担割合明細,
                     new FutanWariaiSokujiKouseiHolder(利用者負担割合明細list));
             getHandler(div).shinkiInitialize(判定結果, 資格対象者);
-            if (判定結果.is生活保護受給者判定()) {
+            if (!ResponseHolder.isReRequest() && 判定結果.is生活保護受給者判定()) {
                 return ResponseData.of(div).addMessage(DbcInformationMessages.生活保護受給者.getMessage()).respond();
             }
-            if (RSTTWO.equals(判定結果.get判定区分())) {
+            if (!ResponseHolder.isReRequest() && RSTTWO.equals(判定結果.get判定区分())) {
                 return ResponseData.of(div).addMessage(DbcInformationMessages.負担割合証発行不要.getMessage()).respond();
             }
             return ResponseData.of(div).setState(DBC2000022StateName.新規);

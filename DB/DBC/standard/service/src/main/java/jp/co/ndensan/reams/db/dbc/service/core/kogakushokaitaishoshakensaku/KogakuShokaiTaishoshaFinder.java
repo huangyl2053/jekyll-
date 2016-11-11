@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBC-3000-060 gongliang
  */
-public class KogakuShokaiTaishoshaKensaku {
+public class KogakuShokaiTaishoshaFinder {
 
     private final MapperProvider mapperProvider;
     private static final RString 審査結果反映区分_反映済 = new RString("1");
@@ -56,17 +56,17 @@ public class KogakuShokaiTaishoshaKensaku {
     /**
      * コンストラクタです。
      */
-    public KogakuShokaiTaishoshaKensaku() {
+    public KogakuShokaiTaishoshaFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
      * 初期化メソッド
      *
-     * @return KogakuShokaiTaishoshaKensaku
+     * @return KogakuShokaiTaishoshaFinder
      */
-    public static KogakuShokaiTaishoshaKensaku createInstance() {
-        return InstanceProvider.create(KogakuShokaiTaishoshaKensaku.class);
+    public static KogakuShokaiTaishoshaFinder createInstance() {
+        return InstanceProvider.create(KogakuShokaiTaishoshaFinder.class);
     }
 
     /**

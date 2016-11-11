@@ -211,6 +211,17 @@ public class KyotakuServiceRiyohyoMain {
     }
 
     /**
+     * 「完了」ボタンクリック時の事件です。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<KyotakuServiceRiyohyoMainDiv> onClick_btnComplete(
+            KyotakuServiceRiyohyoMainDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0120011TransitionEventName.完了).respond();
+    }
+
+    /**
      * 子DIVの「保存する」ボタンのイベントです。
      *
      * @param div JikoFutangakuHoseiDiv

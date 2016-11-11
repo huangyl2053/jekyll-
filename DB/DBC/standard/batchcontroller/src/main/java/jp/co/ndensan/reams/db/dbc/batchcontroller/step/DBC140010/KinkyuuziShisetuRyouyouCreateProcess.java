@@ -105,6 +105,7 @@ public class KinkyuuziShisetuRyouyouCreateProcess extends BatchProcessBase<Kinky
         緊急データ.set摘要１９(entity.getDbt3019().getTekiyo19());
         緊急データ.set摘要２０(entity.getDbt3019().getTekiyo20());
         緊急データ.set緊急時施設療養費合計点数(entity.getDbt3019().getKinkyuShisetsuRyoyoHiTotalTensu());
+        緊急データ.set略称(entity.getDbT3118_ryakush());
         return 緊急データ;
 
     }

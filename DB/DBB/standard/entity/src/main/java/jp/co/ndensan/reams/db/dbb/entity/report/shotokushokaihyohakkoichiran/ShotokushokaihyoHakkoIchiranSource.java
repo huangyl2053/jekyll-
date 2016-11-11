@@ -93,8 +93,8 @@ public class ShotokushokaihyoHakkoIchiranSource implements IReportSource {
     public RString gyoseikuCode;
     @ReportItem(name = "shichosonCode ", length = 10, order = 37)
     public RString shichosonCode;
-    @ReportItem(name = "torokuIdoYMD ", length = 10, order = 38)
-    public RString torokuIdoYMD;
+    @ReportItem(name = "idoYMD ", length = 10, order = 38)
+    public RString idoYMD;
     @ReportItem(name = "zenjushoCode ", length = 10, order = 39)
     public RString zenjushoCode;
 

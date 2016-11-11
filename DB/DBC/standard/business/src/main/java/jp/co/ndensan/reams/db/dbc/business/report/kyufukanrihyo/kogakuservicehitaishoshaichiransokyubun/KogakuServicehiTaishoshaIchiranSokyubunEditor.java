@@ -68,7 +68,7 @@ public class KogakuServicehiTaishoshaIchiranSokyubunEditor implements IKogakuSer
         source.listTaishosha_2 = entity.get被保険者番号();
         source.listTaishosha_3 = パターン54(entity.getサービス提供年月());
         source.listTaishosha_4 = entity.get被保険者名();
-        source.listTaishosha_5 = entity.get世帯コード(); // QA確認中
+        source.listTaishosha_5 = entity.get世帯コード();
         source.listTaishosha_6 = new RString("単");
         source.listTaishosha_7 = toRString(entity.get利用者負担額());
         source.listTaishosha_8 = new RString("※");

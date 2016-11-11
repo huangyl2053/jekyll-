@@ -214,9 +214,7 @@ public class SeikyuShinsaShuseiToroku {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
                 SeikyuShinsaShuseiTorokuBusiness businessResult = getHandler(div).修正更新(住宅改修理由書事業者明細情報);
-                出力決定MANAGER.save住宅改修理由書作成手数料請求決定(businessResult.getDbT3094());
-                出力明細MANAGER.save住宅改修理由書作成手数料請求明細(businessResult.getDbT3095());
-                出力集計MANAGER.save住宅改修理由書作成手数料請求集計(businessResult.getDbT3096());
+                保存の確認(出力明細MANAGER, 出力決定MANAGER, 出力集計MANAGER, businessResult);
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
@@ -243,6 +241,18 @@ public class SeikyuShinsaShuseiToroku {
         }
         div.getCcdKanryoMessage().setSuccessMessage(処理完了メッセージ, 事業者番号.concat(div.getTxtJigyoshaNo().getValue()), RString.EMPTY);
         return ResponseData.of(div).setState(DBC2410011StateName.処理完了);
+    }
+
+    private void 保存の確認(JutakuKaishuRiyushoTesuryoMeisaiManager 出力明細MANAGER,
+            JutakuKaishuRiyushoTesuryoKetteiManager 出力決定MANAGER,
+            JutakuKaishuRiyushoTesuryoShukeiManager 出力集計MANAGER,
+            SeikyuShinsaShuseiTorokuBusiness businessResult) {
+        if (businessResult.getDbT3094() != null) {
+            出力決定MANAGER.save住宅改修理由書作成手数料請求決定(businessResult.getDbT3094());
+        }
+        出力明細MANAGER.save住宅改修理由書作成手数料請求明細(businessResult.getDbT3095());
+        出力集計MANAGER.save住宅改修理由書作成手数料請求集計(businessResult.getDbT3096());
+
     }
 
     private void 出力決定削除(JutakuKaishuRiyushoTesuryoKetteiManager 出力決定MANAGER, SeikyuShinsaShuseiTorokuBusiness businessResult) {

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.Koga
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.NengetsuKensakuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.dgKogakuServicehiRireki_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
-import jp.co.ndensan.reams.db.dbc.service.core.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensaku;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -93,7 +93,8 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
                 TaishoshaKensakuHoho.年月指定.getコード(), TaishoshaKensakuHoho.年月指定.get名称()));
         div.getKogakuServicehiSearch().getRadHihokenshaShitei().setDataSource(dataSource_被保険者);
         div.getKogakuServicehiSearch().getRadNengetsuShitei().setDataSource(dataSource_年月);
-        div.getKogakuServicehiSearch().getRadNengetsuShitei().setDisabled(true);
+        div.getKogakuServicehiSearch().getRadHihokenshaShitei().setSelectedKey(TaishoshaKensakuHoho.被保険者指定.getコード());
+        div.getKogakuServicehiSearch().getRadNengetsuShitei().clearSelectedItem();
     }
 
     /**
@@ -126,7 +127,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         builder.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
         builder.set識別コード(識別コード);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        AtenaMeisho 名称 = KogakuShokaiTaishoshaKensaku.createInstance().get氏名(searchKey);
+        AtenaMeisho 名称 = KogakuShokaiTaishoshaFinder.createInstance().get氏名(searchKey);
         if (名称 != null && !名称.isEmpty()) {
             div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(名称.getColumnValue());
             return false;
@@ -212,12 +213,12 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
     /**
      * 検索処理、対象者一覧（パネル）初期化する。
      *
-     * @param searchCondition KogakuShokaiTaishoshaKensakuSearch
+     * @param searchCondition KogakuShokaiTaishoshaFinderSearch
      * @return 該当者一覧キー KogakuServiceData
      */
     public KogakuServiceData 検索(KogakuShokaiTaishoshaKensakuSearch searchCondition) {
         List<KogakuShokaiTaishoshaKensakuResultEntity> 該当者一覧情報
-                = KogakuShokaiTaishoshaKensaku.createInstance().selectTaishosha(searchCondition);
+                = KogakuShokaiTaishoshaFinder.createInstance().selectTaishosha(searchCondition);
         if (該当者一覧情報 == null || 該当者一覧情報.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage().evaluate());
         } else if (該当者一覧情報.size() == INDEX_イチ) {
@@ -248,7 +249,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
      * @param 申請年月To RDate
      * @param 決定年月From RDate
      * @param 決定年月To RDate
-     * @return searchパラメータ KogakuShokaiTaishoshaKensakuSearch
+     * @return searchパラメータ KogakuShokaiTaishoshaFinderSearch
      */
     public KogakuShokaiTaishoshaKensakuSearch getパラメータ(RString メニューID, RString 被保険者番号,
             RDate 提供年月From, RDate 提供年月To, RDate 申請年月From, RDate 申請年月To, RDate 決定年月From, RDate 決定年月To) {

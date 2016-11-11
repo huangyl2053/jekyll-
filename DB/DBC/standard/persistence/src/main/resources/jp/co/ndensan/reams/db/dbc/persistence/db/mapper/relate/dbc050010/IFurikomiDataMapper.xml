@@ -20,7 +20,11 @@
         WITH 振込対象 AS
         (SELECT
             振込明細一時TBL.*,
-            振込明細一時TBL."hihokenshaNo"||振込明細一時TBL."serviceTeikyoYM"||振込明細一時TBL."dataKubun"||振込明細一時TBL."seiriNo"||振込明細一時TBL."rirekiNo" AS "比較キー"
+            LPAD(振込明細一時TBL."hihokenshaNo"::varchar,10,'0')
+           || LPAD(振込明細一時TBL."serviceTeikyoYM"::varchar,6,'0')
+           || LPAD(振込明細一時TBL."dataKubun"::varchar,1,'0')
+           || LPAD(振込明細一時TBL."seiriNo"::varchar,10,'0')
+           || LPAD(振込明細一時TBL."rirekiNo"::varchar,4,'0') AS "比較キー"
         FROM
             "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
         WHERE

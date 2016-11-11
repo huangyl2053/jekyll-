@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.furikomimeisaiichiran.Furikomi
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiDataSakusei_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
-import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050021.FurikomimeisaiFurikomiDataMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050021.FurikomimeisaiFurikomiDataProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -170,11 +169,13 @@ public class FurikomimeisaiDataReportProcess extends BatchProcessBase<Furikomime
             report.writeBy(reportSourceWriter);
             batchReportWriter.close();
         }
-        if (index == INT_0 && Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(processParameter.get処理区分())) {
+        if (index == INT_0) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = get処理結果確認リスト一時();
             shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
+            pageCount.setValue(INT_0);
+        } else {
+            pageCount.setValue(reportSourceWriter.pageCount().value());
         }
-        pageCount.setValue(reportSourceWriter.pageCount().value());
     }
 
     private ShoriKekkaKakuninListTempTableEntity get処理結果確認リスト一時() {

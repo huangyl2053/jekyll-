@@ -956,58 +956,69 @@
     
      <select resultOrdered="true" id="select特徴仮算定結果情報" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaMyBatisParameter" 
              resultMap="resultMap_TokuchoKarisanteiKekkaIchiranEntity" fetchSize="500">
-        SELECT
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho"/>,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-        年金特徴回付情報_介護継承."dtTokubetsuChoshuGimushaCode",
-        "DbV2002Fuka"."kakuteiHokenryo",
-        (case when
-        "DbV2002Fuka"."hokenryoDankai2" is null
-        then
-        "DbV2002Fuka"."hokenryoDankai1"
-        else
-        "DbV2002Fuka"."hokenryoDankai2"
-        end) AS 前年度保険料段階
-        FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
-        LEFT JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報_介護継承
-        ON "DbT2015KeisangoJoho"."kariNenkinNo" = 年金特徴回付情報_介護継承."kisoNenkinNo"
-        AND "DbT2015KeisangoJoho"."kariNenkinCode" = 年金特徴回付情報_介護継承."nenkinCode"
-        AND "DbT2015KeisangoJoho"."kariHosokuM" = 年金特徴回付情報_介護継承."hosokuTsuki"
-        AND 年金特徴回付情報_介護継承."tsuchiNaiyoCode" IN ('00', '30')
-        AND 年金特徴回付情報_介護継承."shoriNendo" = #{調定年度BeforeYear}
+         WITH master as(
+            SELECT
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho"/>,
+            年金特徴回付情報_介護継承."dtTokubetsuChoshuGimushaCode",
+            "DbV2002Fuka"."kakuteiHokenryo",
+            (case when
+            "DbV2002Fuka"."hokenryoDankai2" is null
+            then
+            "DbV2002Fuka"."hokenryoDankai1"
+            else
+            "DbV2002Fuka"."hokenryoDankai2"
+            end) AS 前年度保険料段階
+            FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
+            LEFT JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報_介護継承
+            ON "DbT2015KeisangoJoho"."kariNenkinNo" = 年金特徴回付情報_介護継承."kisoNenkinNo"
+            AND "DbT2015KeisangoJoho"."kariNenkinCode" = 年金特徴回付情報_介護継承."nenkinCode"
+            AND "DbT2015KeisangoJoho"."kariHosokuM" = 年金特徴回付情報_介護継承."hosokuTsuki"
+            AND 年金特徴回付情報_介護継承."tsuchiNaiyoCode" IN ('00', '30')
+            AND 年金特徴回付情報_介護継承."shoriNendo" = #{調定年度BeforeYear}
+            LEFT JOIN rgdb."DbV2002Fuka" AS "DbV2002Fuka"
+            ON "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
+            AND "DbV2002Fuka"."hihokenshaNo" = "DbT2015KeisangoJoho"."hihokenshaNo"
+            LEFT JOIN ( SELECT 賦課情報MAX通知書."choteiNendo",
+                                賦課情報MAX通知書."hihokenshaNo",
+                                MAX(賦課情報MAX通知書."tsuchishoNo") AS 通知書番号
+                         FROM rgdb."DbV2002Fuka" AS 賦課情報MAX通知書,
+                              ( SELECT MAX("DbV2002"."choteiNendo") AS 調定年度,
+                                       "DbV2002"."hihokenshaNo"
+                                FROM rgdb."DbV2002Fuka" AS "DbV2002"
+                                WHERE "DbV2002"."fukaNendo" = #{賦課年度BeforeYear}
+                                GROUP BY "DbV2002"."hihokenshaNo"
+                               ) AS A
+                         WHERE 賦課情報MAX通知書."choteiNendo" = A."調定年度"
+                         AND 賦課情報MAX通知書."fukaNendo" = #{賦課年度BeforeYear}
+                         AND 賦課情報MAX通知書."hihokenshaNo" = A."hihokenshaNo"
+                         GROUP BY 賦課情報MAX通知書."choteiNendo",
+                                  賦課情報MAX通知書."hihokenshaNo"
+                        ) AS B
+            ON "DbV2002Fuka"."choteiNendo" = B."choteiNendo"
+            AND "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
+            AND "DbV2002Fuka"."tsuchishoNo" = B."通知書番号"
+            AND "DbV2002Fuka"."hihokenshaNo" = B."hihokenshaNo"
+            WHERE "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
+            AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
+            AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
+            AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '特徴仮算定賦課'
+            AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}
+         )
+        SELECT 
+            master.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM master
         LEFT JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-        ON "DbT2015KeisangoJoho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        LEFT JOIN rgdb."DbV2002Fuka" AS "DbV2002Fuka"
-        ON "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
-        AND "DbV2002Fuka"."hihokenshaNo" = "DbT2015KeisangoJoho"."hihokenshaNo"
-        LEFT JOIN ( SELECT 賦課情報MAX通知書."choteiNendo",
-                            賦課情報MAX通知書."hihokenshaNo",
-                            MAX(賦課情報MAX通知書."tsuchishoNo") AS 通知書番号
-                     FROM rgdb."DbV2002Fuka" AS 賦課情報MAX通知書,
-                          ( SELECT MAX("DbV2002"."choteiNendo") AS 調定年度,
-                                   "DbV2002"."hihokenshaNo"
-                            FROM rgdb."DbV2002Fuka" AS "DbV2002"
-                            WHERE "DbV2002"."fukaNendo" = #{賦課年度BeforeYear}
-                            GROUP BY "DbV2002"."hihokenshaNo"
-                           ) AS A
-                     WHERE 賦課情報MAX通知書."choteiNendo" = A."調定年度"
-                     AND 賦課情報MAX通知書."fukaNendo" = #{賦課年度BeforeYear}
-                     AND 賦課情報MAX通知書."hihokenshaNo" = A."hihokenshaNo"
-                     GROUP BY 賦課情報MAX通知書."choteiNendo",
-                              賦課情報MAX通知書."hihokenshaNo"
-                    ) AS B
-        ON "DbV2002Fuka"."choteiNendo" = B."choteiNendo"
-        AND "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
-        AND "DbV2002Fuka"."tsuchishoNo" = B."通知書番号"
-        AND "DbV2002Fuka"."hihokenshaNo" = B."hihokenshaNo"
-        WHERE "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
-        AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
-        AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
-        AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '特徴仮算定賦課'
-        AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}
+                rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+            (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                ) ) AS "ShikibetsuTaisho"
+            ON master."dbT2015KeisangoJoho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     <resultMap id="resultMap_TokuchoKarisanteiKekkaIchiranEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKarisanteiKekkaIchiranEntity">
@@ -1025,48 +1036,58 @@
     
     <select resultOrdered="true" id="select特徴仮算定計算後賦課情報_特徴停止" parameterType="java.util.Map" 
             resultMap="resultMap_TokuchoKarisanteiKekkaIchiranTeisiEntity" fetchSize="500">
-        
-        SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>
-        FROM rgdb."DbV2002Fuka" AS "DbV2002Fuka"
-        INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
-        ON "DbV2001ChoshuHoho"."fukaNendo" = #{調定年度BeforeYear}
-        AND "DbV2001ChoshuHoho"."choshuHoho2gatsu" IN ('1', '2')
-        AND "DbV2001ChoshuHoho"."hihokenshaNo" = "DbV2002Fuka"."hihokenshaNo"
+        WITH master as(
+            SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>
+            FROM rgdb."DbV2002Fuka" AS "DbV2002Fuka"
+            INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
+            ON "DbV2001ChoshuHoho"."fukaNendo" = #{調定年度BeforeYear}
+            AND "DbV2001ChoshuHoho"."choshuHoho2gatsu" IN ('1', '2')
+            AND "DbV2001ChoshuHoho"."hihokenshaNo" = "DbV2002Fuka"."hihokenshaNo"
+            INNER JOIN ( SELECT 賦課情報MAX通知書."choteiNendo",
+                                賦課情報MAX通知書."hihokenshaNo",
+                                MAX(賦課情報MAX通知書."tsuchishoNo") AS 通知書番号
+                         FROM rgdb."DbV2002Fuka" AS 賦課情報MAX通知書,
+                              ( SELECT MAX("DbV2002"."choteiNendo") AS 調定年度,
+                                       "DbV2002"."hihokenshaNo"
+                                FROM rgdb."DbV2002Fuka" AS "DbV2002"
+                                WHERE "DbV2002"."fukaNendo" = #{賦課年度BeforeYear}
+                                GROUP BY "DbV2002"."hihokenshaNo"
+                               ) AS A
+                         WHERE 賦課情報MAX通知書."choteiNendo" = A."調定年度"
+                         AND 賦課情報MAX通知書."fukaNendo" = #{賦課年度BeforeYear}
+                         AND 賦課情報MAX通知書."hihokenshaNo" = A."hihokenshaNo"
+                         GROUP BY 賦課情報MAX通知書."choteiNendo",
+                                  賦課情報MAX通知書."hihokenshaNo"
+                        ) AS B
+            ON "DbV2002Fuka"."choteiNendo" = B."choteiNendo"
+            AND "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
+            AND "DbV2002Fuka"."tsuchishoNo" = B."通知書番号"
+            AND "DbV2002Fuka"."hihokenshaNo" = B."hihokenshaNo"
+            WHERE "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
+            AND "DbV2002Fuka"."hihokenshaNo" NOT IN (SELECT "DbT2015KeisangoJoho"."hihokenshaNo"
+                                                     FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
+                                                     WHERE "DbT2015KeisangoJoho"."choteiNendo" = #{賦課年度}
+                                                     AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
+                                                     AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '特徴仮算定賦課'
+                                                     AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時})
+        )
+        SELECT 
+            master.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM master
         LEFT JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-        ON "DbV2002Fuka"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        INNER JOIN ( SELECT 賦課情報MAX通知書."choteiNendo",
-                            賦課情報MAX通知書."hihokenshaNo",
-                            MAX(賦課情報MAX通知書."tsuchishoNo") AS 通知書番号
-                     FROM rgdb."DbV2002Fuka" AS 賦課情報MAX通知書,
-                          ( SELECT MAX("DbV2002"."choteiNendo") AS 調定年度,
-                                   "DbV2002"."hihokenshaNo"
-                            FROM rgdb."DbV2002Fuka" AS "DbV2002"
-                            WHERE "DbV2002"."fukaNendo" = #{賦課年度BeforeYear}
-                            GROUP BY "DbV2002"."hihokenshaNo"
-                           ) AS A
-                     WHERE 賦課情報MAX通知書."choteiNendo" = A."調定年度"
-                     AND 賦課情報MAX通知書."fukaNendo" = #{賦課年度BeforeYear}
-                     AND 賦課情報MAX通知書."hihokenshaNo" = A."hihokenshaNo"
-                     GROUP BY 賦課情報MAX通知書."choteiNendo",
-                              賦課情報MAX通知書."hihokenshaNo"
-                    ) AS B
-        ON "DbV2002Fuka"."choteiNendo" = B."choteiNendo"
-        AND "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
-        AND "DbV2002Fuka"."tsuchishoNo" = B."通知書番号"
-        AND "DbV2002Fuka"."hihokenshaNo" = B."hihokenshaNo"
-        WHERE "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
-        AND "DbV2002Fuka"."hihokenshaNo" NOT IN (SELECT "DbT2015KeisangoJoho"."hihokenshaNo"
-                                                 FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
-                                                 WHERE "DbT2015KeisangoJoho"."choteiNendo" = #{賦課年度}
-                                                 AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
-                                                 AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '特徴仮算定賦課'
-                                                 AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時})
+                rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+            (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbV2002Fuka_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )) AS "ShikibetsuTaisho"
+            ON "master"."dbV2002Fuka_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     <resultMap id="resultMap_TokuchoKarisanteiKekkaIchiranTeisiEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKarisanteiKekkaIchiranTeisiEntity">

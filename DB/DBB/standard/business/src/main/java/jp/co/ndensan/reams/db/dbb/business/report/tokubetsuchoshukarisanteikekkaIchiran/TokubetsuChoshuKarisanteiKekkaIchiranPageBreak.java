@@ -38,7 +38,6 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranPageBreak extends PageBreaker<
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuKarisanteiKekkaIchiranSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKarisanteiKekkaIchiranSource> nextSource) {
         boolean flag;
-        // TODO QA971
         if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.郵便番号.getフォームフィールド名())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flag = true;

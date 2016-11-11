@@ -84,6 +84,7 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
     private static final RString 入力識別番号_7156 = new RString("7156");
     private static final RString サービス提供年月_200510 = new RString("200510");
     private static final RString 入所_院_前 = new RString("201104");
+    private static final RString 区分_基本 = new RString("1");
 
     private static final int 居住サービス計画事業者名_LENGTH = 20;
     @BatchWriter
@@ -253,6 +254,7 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         基本entity.set行政区コード(entity.getPsm_tmp2_gyoseikuCode());
         基本entity.set行政区(entity.getPsm_tmp2_gyoseikuName());
         基本entity.set住民コード(entity.getDbT1001_tmp2_shikibetsuCode());
+        基本entity.set区分(区分_基本);
         return 基本entity;
     }
 

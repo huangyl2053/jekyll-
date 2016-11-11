@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JukiIdoJiyu;
-import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.ZenkokuJushoFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -54,9 +52,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoResult {
         RString 市町村コード = entity.get市町村コード();
         csvEntity.setShichosonCode(市町村コード);
         bodyItem.set市町村コード(市町村コード);
-        RString 市町村名 = RString.isNullOrEmpty(市町村コード) ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
-                new LasdecCode(市町村コード)) == null ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
-                        new LasdecCode(市町村コード)).get市町村名();
+        RString 市町村名 = RString.isNullOrEmpty(entity.get市町村名()) ? RString.EMPTY : entity.get市町村名();
         csvEntity.setShichosonName(市町村名);
         bodyItem.set市町村名(市町村名);
         csvEntity.setKanaShimei(entity.get宛名カナ氏名());

@@ -57,7 +57,6 @@ public class JisshiJokyoTokeiEditor {
             set認定結果(entity);
         }
         set保険者(entity);
-        set合計();
     }
 
     private void set申請受付(JisshiJokyoTokeiEntity entity) {

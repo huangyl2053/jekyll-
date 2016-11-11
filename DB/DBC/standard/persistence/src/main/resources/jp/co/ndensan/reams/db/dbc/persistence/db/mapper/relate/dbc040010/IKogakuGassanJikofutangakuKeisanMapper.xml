@@ -222,7 +222,7 @@
         ,2 AS "dataShubetsu"
         FROM rgdb."DbT3033KyufujissekiShukei" AS "A"
         WHERE "isDeleted"=FALSE
-        AND "serviceSyuruiCode" NOT IN
+        AND "serviceSyuruiCode"  IN
         <choose>
             <when test="事業分フラグ">
                 <include refid="WKサービス種類コード集計対象事業分" />

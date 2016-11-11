@@ -64,4 +64,6 @@ public class HukushiYouguEntity extends DbTableEntityBase<HukushiYouguEntity> im
     private RString 福祉用具種目コード;
     @TempTableColumnOrder(15)
     private Decimal 購入金額;
+    @TempTableColumnOrder(15)
+    private RString 略称;
 }

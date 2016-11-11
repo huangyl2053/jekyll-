@@ -87,5 +87,7 @@ public class KeikakuHiEntity extends DbTableEntityBase<KeikakuHiEntity> implemen
     private int 過誤回数;
     @TempTableColumnOrder(25)
     private FlexibleYearMonth 審査年月;
+    @TempTableColumnOrder(26)
+    private RString 略称;
 
 }

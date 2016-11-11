@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
@@ -35,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-2020-030 quxiaodong
  */
 public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaishoListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -58,6 +57,8 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     private RString hdnServiceTypeName;
     @JsonProperty("hdnServiceRyakusho")
     private RString hdnServiceRyakusho;
+    @JsonProperty("hdnServiceModel")
+    private RString hdnServiceModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -210,46 +211,21 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     /*
-     * [共有子DIVモード]
+     * gethdnServiceModel
+     * @return hdnServiceModel
      */
-    @JsonProperty("modes")
-    private HashSet<Mode> modes;
-
-    public static enum DisplayMode implements ICommonChildDivMode {
-
-        shokai("shokai"),
-        toroku("toroku");
-
-        private final String name;
-
-        private DisplayMode(final String name) {
-            this.name = name;
-        }
-
-        public static DisplayMode getEnum(String str) {
-            DisplayMode[] enumArray = DisplayMode.values();
-
-            for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
+    @JsonProperty("hdnServiceModel")
+    public RString getHdnServiceModel() {
+        return hdnServiceModel;
     }
 
-    public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
-    }
-
-    public void setMode_DisplayMode( DisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    /*
+     * sethdnServiceModel
+     * @param hdnServiceModel hdnServiceModel
+     */
+    @JsonProperty("hdnServiceModel")
+    public void setHdnServiceModel(RString hdnServiceModel) {
+        this.hdnServiceModel = hdnServiceModel;
     }
 
     /*

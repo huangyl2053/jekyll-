@@ -164,9 +164,9 @@ public class IchijihanteiekkahyoTokkijiko {
             ファイル名.append("C140");
             ファイル名.append(1);
             if (kyotsuEntity.isJimukyoku()) {
-                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.toRString()));
+                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString()));
             } else {
-                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.toRString()));
+                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString()));
             }
         }
         return filePathList;

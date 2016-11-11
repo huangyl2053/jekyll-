@@ -99,6 +99,11 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+                <artifactId>UaxBatchController</artifactId>
+                <version>${jp.co.ndensan.reams.uaxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxDivController</artifactId>
                 <version>${jp.co.ndensan.reams.uaxVersion}</version>
                 <classifier>classes</classifier>

@@ -68,7 +68,7 @@ public class ShotokushokaihyoHakkoIchiranBreakKey extends PageBreaker<Shotokusho
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.異動年月日.get項目ID())
-                && !currentSource.getSource().torokuIdoYMD.equals(nextSource.getSource().torokuIdoYMD)) {
+                && !currentSource.getSource().idoYMD.equals(nextSource.getSource().idoYMD)) {
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.前住所コード.get項目ID())

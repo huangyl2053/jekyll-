@@ -97,4 +97,6 @@ public class MeisaiEntity extends DbTableEntityBase<MeisaiEntity> implements IDb
     private Integer 過誤回数;
     @TempTableColumnOrder(31)
     private FlexibleYearMonth 審査年月;
+    @TempTableColumnOrder(32)
+    private RString 区分;
 }

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.dbb314001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenMybatisParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -38,14 +38,14 @@ public class GemmenProcessParameter implements IBatchProcessParameter {
     private RString shinseiJiyu;
     private FlexibleDate ketteiYMD;
     private RString gemmenJiyu;
-    private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+    private UaFt200FindShikibetsuTaishoParam 宛名検索条件;
 
     /**
      * コンストラクタ
      *
-     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
+     * @param 宛名検索条件 UaFt200FindShikibetsuTaishoParam
      */
-    public GemmenProcessParameter(IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+    public GemmenProcessParameter(UaFt200FindShikibetsuTaishoParam 宛名検索条件) {
         this.宛名検索条件 = 宛名検索条件;
     }
 

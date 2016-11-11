@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
+import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.JutakuKaishuhiShikyuShinseiHozon;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.SaveIkkatuShinsaDate;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
@@ -266,6 +267,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         RDate 支給申請日終了 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue();
         List<MiShinsaSikyuShinsei> viewStateList = ViewStateHolder.get(ViewStateKeys.申請一覧,
                 List.class);
+        List<JutakuKaishuhiShikyuShinseiHozon> 選択list = new ArrayList<>();
         int i = 0;
         for (dgMishinsaShikyuShinsei_Row e : div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getDataSource()) {
             ShokanShinsei entity = viewStateList.get(i).getEntity().createBuilderForEdit().set住宅住所変更(e.getTxtTenkyoReset()).
@@ -277,6 +279,16 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             }
             viewStateList.get(i).setEntity(entity);
             i = i + 1;
+
+            if (e.getSelected()) {
+                JutakuKaishuhiShikyuShinseiHozon 選択 = new JutakuKaishuhiShikyuShinseiHozon(
+                        new HihokenshaNo(e.getTxtHihoNo()),
+                        new FlexibleYearMonth(
+                                e.getTxtTeikyoYM().getValue().getYearMonth().toDateString()),
+                        e.getTxtSeiriNo().getValue()
+                );
+                選択list.add(選択);
+            }
         }
         dgMishinsaShikyuShinsei_Row row = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo());
@@ -291,6 +303,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.表示モード, 審査);
+        ViewStateHolder.put(ViewStateKeys.住宅改修費支給申請一括審査_決定選択保存, (Serializable) 選択list);
         return ResponseData.of(div).forwardWithEventName(DBC0720011TransitionEventName.申請修正).respond();
     }
 
@@ -487,16 +500,19 @@ public class JutakuKaishuhiShikyuShinseiPanel {
 
     private void 選択行のみチェックON(JutakuKaishuhiShikyuShinseiPanelDiv div) {
 
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        List<JutakuKaishuhiShikyuShinseiHozon> 選択list
+                = ViewStateHolder.get(ViewStateKeys.住宅改修費支給申請一括審査_決定選択保存, List.class);
         List<dgMishinsaShikyuShinsei_Row> lists = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getDataSource();
-        if (被保険者番号 != null && サービス提供年月 != null && 整理番号 != null) {
-            for (dgMishinsaShikyuShinsei_Row row : lists) {
-                if (!(row.getTxtHihoNo().equals(被保険者番号.getColumnValue())
-                        && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().toDateString()).equals(サービス提供年月)
-                        && row.getTxtSeiriNo().getValue().equals(整理番号))) {
-                    row.setSelected(Boolean.FALSE);
+
+        for (dgMishinsaShikyuShinsei_Row row : lists) {
+            row.setSelected(Boolean.FALSE);
+            for (JutakuKaishuhiShikyuShinseiHozon 選択 : 選択list) {
+                if (選択.get被保険者番号() != null && 選択.getサービス提供年月() != null && 選択.get整理番号() != null) {
+                    if (row.getTxtHihoNo().equals(選択.get被保険者番号().getColumnValue())
+                            && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().toDateString()).equals(選択.getサービス提供年月())
+                            && row.getTxtSeiriNo().getValue().equals(選択.get整理番号())) {
+                        row.setSelected(Boolean.TRUE);
+                    }
                 }
             }
         }

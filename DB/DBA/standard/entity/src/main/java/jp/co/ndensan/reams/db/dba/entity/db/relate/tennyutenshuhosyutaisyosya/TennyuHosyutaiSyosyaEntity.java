@@ -22,6 +22,7 @@ public class TennyuHosyutaiSyosyaEntity {
     private RString 識別コード;
     private int 履歴番号;
     private RString 市町村コード;
+    private RString 市町村名;
     private RString 作成事由コード;
     private RString 世帯コード;
     private RString 住民種別コード;

@@ -8,12 +8,14 @@ package jp.co.ndensan.reams.db.dbc.business.report.ｇassankyufujissekitorikomii
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_KyufuJissekiSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassankyufujissekitorikomiichiran.GassanKyufujissekiTorikomiIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -71,6 +73,7 @@ public class GassanKyufujissekiTorikomiIchiranBodyEditor implements IGassanKyufu
         source.shimei50onKana = target.get被保険者一時().get氏名50音カナ();
         source.shikyuShinseishoSeiriNo = target.get高額合算給付実績一時().getShikyuShinseishoSeiriNo();
         source.shikibetsuCode = target.get被保険者一時().get識別コード();
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list_2);
         return source;
     }
 

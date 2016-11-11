@@ -1111,6 +1111,17 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
+     * get徴収猶予取消種類コードを返します。
+     *
+     * @return get徴収猶予取消種類コード
+     */
+    public Code get徴収猶予取消種類コード() {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消種類コード() : null;
+    }
+
+    /**
      * 徴収猶予取消事由を返します。
      *
      * @return 徴収猶予取消事由
@@ -1291,10 +1302,8 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
-     * 徴収猶予の情報配下の要素を削除対象とします。<br/>
-     * {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 徴収猶予の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link ChoshuYuyoJoho}を返します。
+     * 徴収猶予の情報配下の要素を削除対象とします。<br/> {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 徴収猶予の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ChoshuYuyoJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ChoshuYuyoJoho}
      * @throws IllegalStateException ChoshuYuyoJohoRelateEntityのデータ状態が変更の場合
@@ -1318,8 +1327,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
-     * 徴収猶予の情報のみを変更対象とします。<br/>
-     * {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 徴収猶予の情報のみを変更対象とします。<br/> {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChoshuYuyoJoho}
      */

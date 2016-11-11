@@ -580,11 +580,14 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
         csvEntity.set受給申請事由(isNull(entity.getDbV4001受給申請事由())
                 ? RString.EMPTY : JukyuShinseiJiyu.toValue(entity.getDbV4001受給申請事由().value()).get名称());
         csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日(), parameter));
-        if (entity.getDbV4001要介護認定状態区分コード() == null || entity.getDbV4001要介護認定状態区分コード().isEmpty()) {
+        KoroshoInterfaceShikibetsuCode kifsc = KoroshoInterfaceShikibetsuCode.toValueOrDefault(entity.getDbT4101厚労省IF識別コード(), null);
+        if (entity.getDbV4001要介護認定状態区分コード() == null
+                || entity.getDbV4001要介護認定状態区分コード().isEmpty()
+                || kifsc == null) {
             csvEntity.set受給要介護度(RString.EMPTY);
         } else {
             csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(
-                    KoroshoInterfaceShikibetsuCode.toValue(entity.getDbT4101厚労省IF識別コード()),
+                    kifsc,
                     entity.getDbV4001要介護認定状態区分コード().value()).getName()
             );
         }

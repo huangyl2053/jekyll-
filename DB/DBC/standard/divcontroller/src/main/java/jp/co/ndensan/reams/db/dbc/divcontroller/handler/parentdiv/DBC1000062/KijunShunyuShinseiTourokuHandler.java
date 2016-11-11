@@ -688,7 +688,13 @@ public class KijunShunyuShinseiTourokuHandler {
         int count = NUM_0;
         List<SetaiinJoho> 世帯員情報List = SetaiinFinder.createInstance().get世帯員情報By識別コード(識別コード, 世帯員把握基準日);
         List<HihokenshaDaicho> 被保険者台帳情報List = new ArrayList<>();
+        List<ShikibetsuCode> 識別コードList = new ArrayList<>();
         for (SetaiinJoho 世帯員情報 : 世帯員情報List) {
+            if (識別コードList.contains(世帯員情報.get識別対象().get識別コード())) {
+                continue;
+            } else {
+                識別コードList.add(世帯員情報.get識別対象().get識別コード());
+            }
             HihokenshaDaicho 最新被保険者台帳 = HihokenshaDaichoManager.createInstance().get最新被保険者台帳(new LasdecCode(
                     ControlDataHolder.getReamsDonyuDantaiCode().getColumnValue()), 世帯員情報.get識別対象().get識別コード());
             if (最新被保険者台帳 != null && KEY_1号.equals(最新被保険者台帳.get被保険者区分コード())) {

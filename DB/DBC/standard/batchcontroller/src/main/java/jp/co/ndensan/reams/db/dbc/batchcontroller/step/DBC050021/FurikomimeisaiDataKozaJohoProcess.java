@@ -82,9 +82,9 @@ public class FurikomimeisaiDataKozaJohoProcess extends BatchProcessBase<Furikomi
         if (高額合算KUNBUN.equals(batchKunbun)) {
             介護給付_XX = ShunoKamokuShubetsu.介護給付_高額合算;
         } else if (事業高額KUNBUN.equals(batchKunbun)) {
-            介護給付_XX = ShunoKamokuShubetsu.介護給付_事業高額;
+            介護給付_XX = ShunoKamokuShubetsu.介護給付_高額;
         } else if (事業高額合算KUNBUN.equals(batchKunbun)) {
-            介護給付_XX = ShunoKamokuShubetsu.介護給付_事業高額合算;
+            介護給付_XX = ShunoKamokuShubetsu.介護給付_高額合算;
         }
         IShunoKamoku 介護給付 = ShunoKamokuFinder.createInstance().get科目(介護給付_XX);
         GyomubetsuPrimaryKeyMybatisParameter mybatis = new GyomubetsuPrimaryKeyMybatisParameter();

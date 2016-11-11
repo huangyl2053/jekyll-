@@ -35,10 +35,11 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     private static final RString 数字_2 = new RString("2");
     private static final RString 数字_3 = new RString("3");
     private static final RString 数字_4 = new RString("4");
-    private static final RString 一覧区分_1 = new RString("審査方法区分が未設定");
-    private static final RString 一覧区分_2 = new RString("補正後事業高額支給額がマイナス値");
-    private static final RString 一覧区分_3 = new RString("査方法区分が未設定かつ補正後事業高額支給額がマイナス値");
-    private static final RString 一覧区分_4 = new RString("自己負担額＜事業高額支給額");
+    private static final RString 年度 = new RString("年度");
+    private static final RString 一覧区分_1 = new RString("１：審査方法区分が未設定");
+    private static final RString 一覧区分_2 = new RString("２：補正後事業高額支給額がマイナス値");
+    private static final RString 一覧区分_3 = new RString("３：査方法区分が未設定かつ補正後事業高額支給額がマイナス値");
+    private static final RString 一覧区分_4 = new RString("４：自己負担額＜事業高額支給額");
 
     /**
      * コンストラクタです
@@ -82,9 +83,10 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     private RString get性別(RString 性別) {
         if (Seibetsu.男.getコード().equals(性別)) {
             return Seibetsu.男.get名称();
-        } else {
+        } else if (Seibetsu.女.getコード().equals(性別)) {
             return Seibetsu.女.get名称();
         }
+        return RString.EMPTY;
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {
@@ -102,14 +104,17 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
     }
 
     private RString get一覧表示区分(RString 一覧表示区分, RString 一覧表示区分2) {
+
         RString 区分 = RString.EMPTY;
-        if (数字_1.equals(一覧表示区分) && 数字_1.equals(一覧表示区分2)) {
+        if (符号_2.equals(一覧表示区分2)) {
+            区分 = 一覧区分_4;
+        } else if (数字_1.equals(一覧表示区分)) {
             区分 = 一覧区分_1;
-        } else if (数字_2.equals(一覧表示区分) && 数字_2.equals(一覧表示区分2)) {
+        } else if (数字_2.equals(一覧表示区分)) {
             区分 = 一覧区分_2;
-        } else if (数字_3.equals(一覧表示区分) && 数字_3.equals(一覧表示区分2)) {
+        } else if (数字_3.equals(一覧表示区分)) {
             区分 = 一覧区分_3;
-        } else if ((数字_4.equals(一覧表示区分) && (数字_4.equals(一覧表示区分2)) || 符号_2.equals(一覧表示区分2))) {
+        } else if (数字_4.equals(一覧表示区分)) {
             区分 = 一覧区分_4;
         }
         return 区分;
@@ -125,7 +130,7 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
 
     private RString get年月(FlexibleYear 年) {
         if (null != 年) {
-            return 年.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
+            return 年.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString().concat(年度);
         }
         return RString.EMPTY;
     }

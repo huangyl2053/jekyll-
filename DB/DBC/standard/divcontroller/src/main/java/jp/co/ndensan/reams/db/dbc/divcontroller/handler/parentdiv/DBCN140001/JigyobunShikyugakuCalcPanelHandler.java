@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN140001.Jigy
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -193,7 +192,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         if (HIHOKENSHANOSHTEI.equals(div.getChushutsuJoken().getRadHihokenshaNoShitei().getSelectedKey())) {
             parameter.set年度(new FlexibleYear(div.getChushutsuJoken().getDdlNendo().getSelectedKey()));
             parameter.set出力対象区分(TWO);
-            parameter.set被保険者番号(new HihokenshaNo(div.getChushutsuJoken().getTxtHihokenshaNo().getValue()));
+            parameter.set被保険者番号(div.getChushutsuJoken().getTxtHihokenshaNo().getValue());
             parameter.set受取年月(null);
         } else if (TAISHOSHASEARCH.equals(div.getChushutsuJoken().getRadTaishoshaSearch().getSelectedKey())) {
             parameter.set年度(null);

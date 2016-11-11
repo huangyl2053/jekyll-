@@ -154,7 +154,7 @@ public class GassanJigyobunKekkaIchiranEditor implements
             }
 
             source.gyoseiCode = 帳票用データ.getGyoseiCode();
-            source.jushoCode = 帳票用データ.getJushoCode();
+            source.choikiCode = 帳票用データ.getChoikiCode();
             source.shichosonCode = 帳票用データ.getShichosonCode();
             source.yubinNo = 帳票用データ.getYubinNo();
             source.taishoNendo = 帳票用データ.getTaishoNendo();

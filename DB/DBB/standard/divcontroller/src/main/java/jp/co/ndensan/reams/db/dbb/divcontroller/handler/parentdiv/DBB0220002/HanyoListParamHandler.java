@@ -298,6 +298,8 @@ public class HanyoListParamHandler {
      */
     public void 条件を復元() {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        div.getChushutsuJokenPanel().getTxtChushutsuKikan().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtChushutsuKikan().clearToValue();
         ReportId 条件保存の帳票ID = restoreBatchParameterMap.getParameterValue(ReportId.class, KEY_帳票ID);
         long 条件保存の出力順ID = restoreBatchParameterMap.getParameterValue(long.class, KEY_出力順ID);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 条件保存の帳票ID, 条件保存の出力順ID);
@@ -314,6 +316,7 @@ public class HanyoListParamHandler {
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setDisabled(false);
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setLabelLText(定数課税区分減免後);
         }
+        div.getChushutsuPanel2().getCcdAtenaJoken().initialize();
         AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap
                 .getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
         if (宛名抽出条件 != null) {
@@ -321,12 +324,14 @@ public class HanyoListParamHandler {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
             }
             div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectKijun();
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
             if (宛名抽出条件.getChiku_Kubun() != null) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().getコード());
             }
+            div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectChiku();
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
+
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(toChikuCode(宛名抽出条件.getChiku1_To()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(toChikuCode(宛名抽出条件.getChiku1_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(toChikuCode(宛名抽出条件.getChiku2_To()));
@@ -437,6 +442,6 @@ public class HanyoListParamHandler {
     }
 
     private boolean is年齢範囲復元(Range<Decimal> 年齢範囲) {
-        return !Decimal.ZERO.equals(年齢範囲.getFrom()) && DECIMAL_999.equals(年齢範囲.getTo());
+        return !(Decimal.ZERO.equals(年齢範囲.getFrom()) && DECIMAL_999.equals(年齢範囲.getTo()));
     }
 }

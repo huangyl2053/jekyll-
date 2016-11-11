@@ -8,12 +8,12 @@
         <include refid="selectGemmenEntity" />
     </select>
     <sql id="selectGemmenEntity">
+        WITH master AS (
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />,
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu" />,
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2004GemmenMapper.allColumns_DbT2004Gemmen" />,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2004GemmenMapper.allColumns_DbT2004Gemmen" />
         FROM
             rgdb."DbV2002Fuka"  AS "DbT2002Fuka"
             JOIN rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu" 
@@ -27,12 +27,25 @@
             ON  "DbT2004Gemmen"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
             AND "DbT2004Gemmen"."fukaNendo"  = "DbT2002Fuka"."fukaNendo"
             AND "DbT2004Gemmen"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
-            AND "DbT2004Gemmen"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
-            LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('1','','true','DB','false','','','','','','','','','','','0','false',
-            '','','','','','','0','false','','','','','','','','','','0','','true','true','true','true','true','true','true',
-            'true','true','true','true','','','','','','','','0','false','','','false','false','false','','','','','','','',
-            '','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-            ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
+            AND "DbT2004Gemmen"."rirekiNo" = "DbT2002Fuka"."rirekiNo"   
+        WHERE
+            "DbT2002Fuka"."choteiNendo" = #{choteiNendo} AND 
+            "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
+        )
+        SELECT
+            master.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            master
+            LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+                     (
+                        SELECT 
+                            ARRAY_AGG(CAST (master."dbT2002Fuka_shikibetsuCode" AS TEXT))
+                        FROM
+                            master
+                        )
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> AS "ShikibetsuTaisho"            
+            ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2002Fuka_shikibetsuCode"
             <if test="list町域コード != null">
                 AND "ShikibetsuTaisho"."choikiCode" IN 
                 <foreach collection="list町域コード" index="index" item="code" open="(" separator="," close=")">
@@ -63,16 +76,13 @@
                     #{code}
                 </foreach>
             </if>
-        WHERE
-            "DbT2002Fuka"."choteiNendo" = #{choteiNendo} AND 
-            "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
-        ORDER BY
-            "DbT2002Fuka"."choteiNendo",
-            "DbT2002Fuka"."fukaNendo",
-            "DbT2002Fuka"."tsuchishoNo",
-            "DbT2002Fuka"."rirekiNo",
-            "DbT2003Kibetsu"."choshuHouhou",
-            "DbT2003Kibetsu"."ki"
+            ORDER BY
+            master."dbT2002Fuka_choteiNendo",
+            master."dbT2002Fuka_fukaNendo",
+            master."dbT2002Fuka_tsuchishoNo",
+            master."dbT2002Fuka_rirekiNo",
+            master."dbT2003Kibetsu_choshuHouhou",
+            master."dbT2003Kibetsu_ki" 
     </sql>
     
     <resultMap id="resultMapGemmenEntity" autoMapping="true" 

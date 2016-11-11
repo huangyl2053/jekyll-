@@ -389,7 +389,7 @@ public class NonyuTsuchiShoDataHenshu {
                 コンビニ連帳印字位置 = RString.isNullOrEmpty(各印字位置.get(整数2)) ? 0 : Integer.parseInt(各印字位置.get(整数2).toString());
                 コンビニカット印字位置 = RString.isNullOrEmpty(各印字位置.get(整数3)) ? 0 : Integer.parseInt(各印字位置.get(整数3).toString());
             }
-            if (is処理中の期月の物である(請求情報リスト, 出力期.get期())) {
+            if (!is処理中の期月の物である(請求情報リスト, 出力期.get期())) {
                 continue;
             }
             NonyuTsuchiShoKiJoho 納入通知書期情報 = get納入通知書期情報(普徴納期情報リスト, 請求情報リスト, 期, 出力期, 銀振印字位置,
@@ -432,8 +432,8 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.set納期終了日表記(納期.get納期終了日().wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         納入通知書期情報.set納期限(納期.get納期限());
-        納入通知書期情報.set納期限表記(納付額.compareTo(Decimal.ZERO) <= 0 ? new RString("***********") : 納期.get納期限().wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        納入通知書期情報.set納期限表記(納付額.compareTo(Decimal.ZERO) <= 0 ? new RString("***********") : 納期.get納期限() != null ? 納期.get納期限().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString() : new RString("***********"));
         納入通知書期情報.set納付額(納付額);
         納入通知書期情報.set納付額表記(new RString(String.valueOf(納付額)));
         納入通知書期情報.set調定額(金額);
@@ -877,7 +877,7 @@ public class NonyuTsuchiShoDataHenshu {
     private Decimal get金額(List<UniversalPhase> 更正後普徴期別金額リスト, int 期) {
         for (UniversalPhase 更正後普徴期別金額 : 更正後普徴期別金額リスト) {
             if (更正後普徴期別金額.get期() == 期) {
-                return 更正後普徴期別金額.get金額();
+                return 更正後普徴期別金額.get金額() == null ? Decimal.ZERO : 更正後普徴期別金額.get金額();
             }
         }
         return Decimal.ZERO;
@@ -886,7 +886,7 @@ public class NonyuTsuchiShoDataHenshu {
     private Decimal get収入額(List<SamantabhadraIncomeInformation> 普徴収入情報リスト, Kitsuki 出力期) {
         for (SamantabhadraIncomeInformation 普徴収入情報 : 普徴収入情報リスト) {
             if (出力期.equals(普徴収入情報.get期月())) {
-                return 普徴収入情報.get収入額();
+                return 普徴収入情報.get収入額() == null ? Decimal.ZERO : 普徴収入情報.get収入額();
             }
         }
         return Decimal.ZERO;

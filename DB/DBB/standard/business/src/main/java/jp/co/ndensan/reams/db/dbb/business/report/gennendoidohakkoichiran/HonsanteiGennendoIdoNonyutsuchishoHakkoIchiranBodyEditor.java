@@ -111,7 +111,7 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == Integer.valueOf(出力期.toString())) {
-                    source.listUpper_10 = new RString(entity.get金額().toString());
+                    source.listUpper_10 = new RString(entity.get金額() == null ? "0" : entity.get金額().toString());
                 }
             }
         }
@@ -138,7 +138,7 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements
                 && 共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 共通情報.get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == (Integer.valueOf(出力期.toString()) + 1)) {
-                    source.listLower_6 = new RString(entity.get金額().toString());
+                    source.listLower_6 = new RString(entity.get金額() == null ? "0" : entity.get金額().toString());
                 }
             }
         }

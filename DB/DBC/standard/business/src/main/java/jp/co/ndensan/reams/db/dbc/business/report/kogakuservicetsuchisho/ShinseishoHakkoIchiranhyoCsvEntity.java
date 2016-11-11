@@ -38,21 +38,25 @@ public class ShinseishoHakkoIchiranhyoCsvEntity {
     private final RString gyoseikuName;
     @CsvField(order = 10, name = "旧措置")
     private final RString kyusochi;
-    @CsvField(order = 11, name = "要介護状態区分")
+    @CsvField(order = 11, name = "要介護状態区分コード")
+    private final RString yokaigoJotaiKubunCode;
+    @CsvField(order = 12, name = "要介護状態区分")
     private final RString yokaigoJotaiKubun;
-    @CsvField(order = 12, name = "認定有効開始年月日")
+    @CsvField(order = 13, name = "認定有効開始年月日")
     private final RString ninteiYukoKikanKaishiYMD;
-    @CsvField(order = 13, name = "有効期間終了年月日")
+    @CsvField(order = 14, name = "有効期間終了年月日")
     private final RString ninteiYukoKikanShuryoYMD;
-    @CsvField(order = 14, name = "自己負担額")
+    @CsvField(order = 15, name = "自己負担額")
     private final RString jikoFutangaku;
-    @CsvField(order = 15, name = "支給（予定）金額")
+    @CsvField(order = 16, name = "支給（予定）金額")
     private final RString shikyuKingaku;
-    @CsvField(order = 16, name = "社福軽減")
+    @CsvField(order = 17, name = "社福軽減")
     private final RString shafukuKeigen;
-    @CsvField(order = 17, name = "自動償還")
+    @CsvField(order = 18, name = "自動償還")
     private final RString jidoShokan;
-    @CsvField(order = 18, name = "資格喪失")
+    @CsvField(order = 19, name = "資格喪失事由コード")
+    private final RString shikakuSoshitsuCode;
+    @CsvField(order = 20, name = "資格喪失事由")
     private final RString shikakuSoshitsu;
 
     /**
@@ -68,6 +72,7 @@ public class ShinseishoHakkoIchiranhyoCsvEntity {
      * @param gyoseikuCode 行政区コード
      * @param gyoseikuName 行政区
      * @param kyusochi 旧措置
+     * @param yokaigoJotaiKubunCode 要介護状態区分コード
      * @param yokaigoJotaiKubun 要介護状態区分
      * @param ninteiYukoKikanKaishiYMD 認定有効開始年月日
      * @param ninteiYukoKikanShuryoYMD 有効期間終了年月日
@@ -75,12 +80,14 @@ public class ShinseishoHakkoIchiranhyoCsvEntity {
      * @param shikyuKingaku 支給（予定）金額
      * @param shafukuKeigen 社福軽減
      * @param jidoShokan 自動償還
+     * @param shikakuSoshitsuCode 資格喪失コード
      * @param shikakuSoshitsu 資格喪失
      */
     public ShinseishoHakkoIchiranhyoCsvEntity(RString hakkoNichiji, RString renban, RString hihokenshaNo, RString serviceTeikyoYM,
             RString hihokenshaMei, RString yubinNo, RString jusho, RString gyoseikuCode, RString gyoseikuName, RString kyusochi,
-            RString yokaigoJotaiKubun, RString ninteiYukoKikanKaishiYMD, RString ninteiYukoKikanShuryoYMD, RString jikoFutangaku,
-            RString shikyuKingaku, RString shafukuKeigen, RString jidoShokan, RString shikakuSoshitsu) {
+            RString yokaigoJotaiKubunCode, RString yokaigoJotaiKubun, RString ninteiYukoKikanKaishiYMD, RString ninteiYukoKikanShuryoYMD,
+            RString jikoFutangaku, RString shikyuKingaku, RString shafukuKeigen, RString jidoShokan, RString shikakuSoshitsuCode,
+            RString shikakuSoshitsu) {
         this.hakkoNichiji = hakkoNichiji;
         this.renban = renban;
         this.hihokenshaNo = hihokenshaNo;
@@ -91,6 +98,7 @@ public class ShinseishoHakkoIchiranhyoCsvEntity {
         this.gyoseikuCode = gyoseikuCode;
         this.gyoseikuName = gyoseikuName;
         this.kyusochi = kyusochi;
+        this.yokaigoJotaiKubunCode = yokaigoJotaiKubunCode;
         this.yokaigoJotaiKubun = yokaigoJotaiKubun;
         this.ninteiYukoKikanKaishiYMD = ninteiYukoKikanKaishiYMD;
         this.ninteiYukoKikanShuryoYMD = ninteiYukoKikanShuryoYMD;
@@ -98,6 +106,7 @@ public class ShinseishoHakkoIchiranhyoCsvEntity {
         this.shikyuKingaku = shikyuKingaku;
         this.shafukuKeigen = shafukuKeigen;
         this.jidoShokan = jidoShokan;
+        this.shikakuSoshitsuCode = shikakuSoshitsuCode;
         this.shikakuSoshitsu = shikakuSoshitsu;
     }
 
