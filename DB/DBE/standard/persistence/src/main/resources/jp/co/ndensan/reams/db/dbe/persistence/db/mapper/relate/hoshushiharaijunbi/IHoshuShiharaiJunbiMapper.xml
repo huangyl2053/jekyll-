@@ -82,8 +82,8 @@
                 INNER JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
                 ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
                 AND T5031."homonShubetsu" = T5202."chosaJisshiBashoCode"
-                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7)
-                AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[<=]]> T5031."shuryoYM"
+                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 1 for 6)
+                AND substring(T5601."chosaItakuryoShiharaiYMD" from 1 for 6) <![CDATA[<=]]> T5031."shuryoYM"
         WHERE 
                 #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
                 AND T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
@@ -123,8 +123,8 @@
                 LEFT JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
                 ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
                 AND T5031."homonShubetsu" = T5202."chosaJisshiBashoCode"
-                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7)
-                AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[<=]]> T5031."shuryoYM"
+                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 1 for 6)
+                AND substring(T5601."chosaItakuryoShiharaiYMD" from 1 for 6) <![CDATA[<=]]> T5031."shuryoYM"
         WHERE
                 #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
                 AND T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
