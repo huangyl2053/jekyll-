@@ -207,7 +207,9 @@ public class KijunShunyugakuTekiyo {
         eucEntity.set課税所得(entity.get課税所得額());
         eucEntity.set課税所得控除後(entity.get課税所得額_除後());
         eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
-        eucEntity.set削除データ(RString.EMPTY);
+        if (entity.is論理削除フラグ()) {
+            eucEntity.set削除データ(new RString("削除データ"));
+        }
         return eucEntity;
     }
 
@@ -519,10 +521,12 @@ public class KijunShunyugakuTekiyo {
         eucEntity.set課税所得(entity.get課税所得額());
         eucEntity.set課税所得控除後(entity.get課税所得額_除後());
         eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
-        eucEntity.set削除データ(RString.EMPTY);
+        if (entity.is論理削除フラグ()) {
+            eucEntity.set削除データ(new RString("削除データ"));
+        }
         return eucEntity;
     }
-    
+
     private RString get市町村名(KoseiShichosonMaster koseiShichosonMaster) {
         if (koseiShichosonMaster != null) {
             return koseiShichosonMaster.get市町村名称();
