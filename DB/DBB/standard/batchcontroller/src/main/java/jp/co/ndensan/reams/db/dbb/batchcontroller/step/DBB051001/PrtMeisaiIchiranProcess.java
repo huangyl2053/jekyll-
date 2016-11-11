@@ -203,7 +203,7 @@ public class PrtMeisaiIchiranProcess extends BatchProcessBase<TokubetsuChoshuIra
         TokubetsuChoshuIraikingakuMeisaiIchiranReport report = new TokubetsuChoshuIraikingakuMeisaiIchiranReport(賦課の情報一時Entity,
                 宛名, 年金特徴回付情報, 徴収方法, 出力項目リスト,
                 改頁項目リスト, 賦課の情報一時Entity.getFukaNendo(), parameter.get調定日時(), 地方公共団体,
-                保険料段階, 帳票制御共通, false);
+                保険料段階, 帳票制御共通, true);
         report.writeBy(reportSourceWriter);
         eucCsvWriter.writeLine(set特別徴収依頼金額明細(賦課の情報一時Entity, 宛名PSM, 徴収方法, 年金特徴回付情報));
     }

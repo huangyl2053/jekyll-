@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給者給付実績台帳の一時テーブル取得のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-3080-030 dongyabin -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaTmpMapper">
+    
+    <select resultOrdered="true" id="get基本" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempKihon"
+        WHERE
+          "区分" = '1'
+    </select>
+    
+    <select resultOrdered="true" id="get明細" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.MeisaiEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempMeisai"
+    </select>
+    
+    <select resultOrdered="true" id="get集計" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShuukeiEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempShuukei"
+    </select>
+    
+    <select resultOrdered="true" id="get特定入所" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShoteiShikkanEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempShoteiShikkan"
+    </select>
+    
+    <select resultOrdered="true" id="get施設療養" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KinkyuuziShisetuRyouyouEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempKinkyuuziShisetuRyouyou"
+    </select>
+    
+    <select resultOrdered="true" id="get特別療養" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiShinryouHiEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempTokuteiShinryouHi"
+    </select>
+    
+    <select resultOrdered="true" id="get計画費" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KeikakuHiEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempKeikakuHi"
+    </select>
+    
+    <select resultOrdered="true" id="get福祉用具" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.HukushiYouguEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempHukushiYougu"
+    </select>
+    
+    <select resultOrdered="true" id="get住宅改修" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.JuutakuKaishuuEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempJuutakuKaishuu"
+    </select>
+    
+    <select resultOrdered="true" id="get社会福祉法人軽減額" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShakaiHukushiHouzinKeigenEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempShakaiHukushiHouzinKeigen"
+    </select>
+    
+    <select resultOrdered="true" id="getケアマネジメント費" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.CareManagementEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempCareManagement"
+    </select>
+    
+    <select resultOrdered="true" id="get所定疾患施設療養費" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShoteiShikkanEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempShoteiShikkan"
+    </select>
+    
+    <select resultOrdered="true" id="get給付実績高額" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonEntity" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          rgdb."tempKihon"
+        WHERE
+          "区分" = '2'
+    </select>
+    
+</mapper>

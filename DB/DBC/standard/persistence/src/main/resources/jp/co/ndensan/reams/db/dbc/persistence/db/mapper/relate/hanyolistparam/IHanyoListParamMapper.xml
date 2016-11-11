@@ -5,6 +5,7 @@
 
     <resultMap id="get基準収入額適用情報Result" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistparam.HanyoListParamRelateEntity">
         <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="論理削除フラグ" column="isDeleted" />
         <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="資格取得事由コード" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -51,7 +52,8 @@
 
     <sql id="基準収入額適用情報">
         基準収入額適用情報."shichosonCode" AS "shichosonCode",
-        CASE 基準収入額適用情報."koikinaiJushochiTokureiFlag" WHEN '1' THEN 基準収入額適用情報."koikinaiTokureiSochimotoShichosonCode" 
+        基準収入額適用情報."isDeleted" AS "isDeleted",
+        CASE 基準収入額適用情報."koikinaiJushochiTokureiFlag" WHEN '1' THEN 基準収入額適用情報."koikinaiTokureiSochimotoShichosonCode"
         ELSE 基準収入額適用情報."shichosonCode" END AS 証記載保険者番号,
         基準収入額適用情報."hihokenshaNo" AS "hihokenshaNo",
         基準収入額適用情報."shikakuShutokuJiyuCode" AS "shikakuShutokuJiyuCode",
@@ -99,6 +101,7 @@
         WITH  抽出対象  AS (
         SELECT
         履歴番号降順."setaiCode",
+        履歴番号降順."isDeleted",
         履歴番号降順."nendo",
         履歴番号降順."rirekiNo",
         履歴番号降順."shinseiYMD",
@@ -108,6 +111,7 @@
         FROM(
         SELECT
         "setaiCode",
+        "isDeleted",
         "shinseiYMD",
         "ketteiYMD",
         "nendo",

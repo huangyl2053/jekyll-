@@ -94,12 +94,11 @@ public class DBC3510011Main {
                 entity.getFileID());
         SharedFile.deleteEntry(deleteEntity);
         SharedFileDescriptor des = new ReadOnlySharedFileDescriptor(new FilesystemName(entity.getFileName()));
-        SharedFile.defineSharedFile(des, 世代管理する, SharedFile.GROUP_ALL, null, false, null);
+        des = SharedFile.defineSharedFile(des, 世代管理する, SharedFile.GROUP_ALL, null, false, null);
         RString filePath = Path.getRootPath(RString.EMPTY).concat("/home/D209007/shared/sharedFiles/DB/")
                 .concat(entity.getFileName()).concat("/").concat(schemaID.replace(":", "."));
         File file = new File(filePath.toString());
         RString fileName = new RString(file.listFiles()[0].getName());
-        des = SharedFile.defineSharedFile(des);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(des, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry,

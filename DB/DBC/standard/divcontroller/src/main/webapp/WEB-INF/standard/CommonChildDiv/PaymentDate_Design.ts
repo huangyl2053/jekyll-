@@ -8,6 +8,10 @@ module DBC {
 
         export class Events {
 
+            public static onClick_RadIkkatsuKoshinKubun(): string {
+                return "onClick_RadIkkatsuKoshinKubun";
+            }
+
         }
 
         export class Controls {
@@ -59,6 +63,10 @@ module DBC {
 
             public txtShiharaiShuryoTime(): UZA.TextBoxTime {
                 return new UZA.TextBoxTime(this.convFiledName("txtShiharaiShuryoTime"));
+            }
+
+            public radIkkatsuKoshinKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIkkatsuKoshinKubun"));
             }
 
         }

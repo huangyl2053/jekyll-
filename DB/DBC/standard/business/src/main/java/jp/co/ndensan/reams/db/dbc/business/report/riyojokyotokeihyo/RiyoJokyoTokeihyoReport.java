@@ -29,7 +29,7 @@ public class RiyoJokyoTokeihyoReport extends Report<RiyoJokyoTokeihyoReportSourc
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<RiyoJokyoTokeihyoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<RiyoJokyoTokeihyoReportSource> writer) {
         IRiyoJokyoTokeihyoEditor editor = new RiyoJokyoTokeihyoEditor(data);
         IRiyoJokyoTokeihyoBuilder builder = new RiyoJokyoTokeihyoBuilder(editor);
         writer.writeLine(builder);

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -55,6 +56,8 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
     private static final RString 件数3タイトル = new RString("居宅");
     private static final RString 合計件数タイトル = new RString("合計");
     private static final RString 漢字_件 = new RString("件");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -152,6 +155,7 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
         if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
             source.shikibetuCode = new ShikibetsuCode(被保険者.get識別コード());
         }
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listCenter_4);
     }
 
     private void edit集計(KyufuKanrihyoTorikomiKekkaIchiranSource source) {

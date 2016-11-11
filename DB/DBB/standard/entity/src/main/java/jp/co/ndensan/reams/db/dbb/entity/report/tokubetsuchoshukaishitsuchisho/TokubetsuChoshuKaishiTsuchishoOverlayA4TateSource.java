@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -38,7 +39,6 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource implements IRepor
     public RString hyojicodeCode2;
     @ReportItem(name = "hyojicodeCode3", length = 11, order = 7)
     public RString hyojicodeCode3;
-    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 8)
     public RString hihokenshaNo;
     @ReportItem(name = "tuchishoNo", order = 9)
@@ -200,6 +200,9 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource implements IRepor
     public RString naisenLabel;
     @ReportItem(name = "naisenNo", length = 20, order = 87)
     public RString naisenNo;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

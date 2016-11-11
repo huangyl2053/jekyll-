@@ -176,7 +176,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
                                 eq(jigyoshaNo, 事業者番号),
                                 leq(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, 有効日),
                                 or(leq(有効日, DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD),
-                                        isNULL(DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD)),
+                                        isNULL(DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD), eq(FlexibleDate.EMPTY,
+                                                DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD)),
                                 eq(serviceShuruiCode, サービス種類コード))).
                 order(by(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, Order.DESC)).limit(1).
                 toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);

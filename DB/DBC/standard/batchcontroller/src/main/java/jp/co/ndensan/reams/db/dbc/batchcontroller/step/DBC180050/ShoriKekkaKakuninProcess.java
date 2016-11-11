@@ -46,7 +46,7 @@ public class ShoriKekkaKakuninProcess extends BatchProcessBase<DbWT1801ShoriKekk
     private RString eucFilePath;
     private FileSpoolManager manager;
     private static final RString CSVファイル名 = new RString("DBU900002_ShoriKekkaKakuninList.csv");
-    private static final RString 作成 = new RString("△作成");
+    private static final RString 作成 = new RString("作成");
     private static final RString 処理名 = new RString("負担割合情報作成");
     private static final RString エラー内容_削除 = new RString("負担割合データが削除されています。");
     private static final RString エラー内容_取得 = new RString("負担割合データが取得できませんでした。");

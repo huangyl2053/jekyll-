@@ -222,7 +222,6 @@ public class PrtTaishoshaIchiranJigyoProcess extends BatchProcessBase<KogakuKaig
             csvEntity.setサービス提供年月(サービス提供年月.toDateString());
         }
         csvEntity.set被保険者名(getColumnValue(entity.get名称()));
-        //TODO
         csvEntity.set旧措置(entity.get旧措置者フラグ());
         csvEntity.set要介護度(YokaigoJotaiKubun.toValue(getColumnValue(entity.get要介護認定状態区分コード())).get名称());
         FlexibleDate 認定有効開始年月日 = entity.get認定有効期間開始年月日();

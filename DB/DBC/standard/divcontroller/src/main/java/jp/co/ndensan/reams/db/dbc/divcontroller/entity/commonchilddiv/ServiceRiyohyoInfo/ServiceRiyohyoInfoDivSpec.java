@@ -22,8 +22,9 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     サービスコード必須入力チェック {
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
-                    return !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
-                    && !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード2());
+                    return div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().isDisplayNone()
+                    || (!RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
+                    && !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード2()));
                 }
             },
     /**
@@ -32,7 +33,8 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     単位必須入力チェック {
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
-                    return !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getText());
+                    return div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().isDisplayNone()
+                    || !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getText());
                 }
             },
     /**
@@ -41,7 +43,8 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     回数必須入力チェック {
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
-                    return !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getText());
+                    return div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().isDisplayNone()
+                    || !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getText());
                 }
             },
     /**

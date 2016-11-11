@@ -42,7 +42,7 @@ public class DBC020070_JigyobunShikyugakuKeisanParameter extends BatchParameterB
     @BatchParameter(key = KEY_出力対象区分, name = "出力対象区分")
     private RString 出力対象区分;
     @BatchParameter(key = KEY_被保険者番号, name = "被保険者番号")
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     @BatchParameter(key = KEY_受取年月, name = "受取年月")
     private FlexibleYearMonth 受取年月;
     @BatchParameter(key = KEY_処理日, name = "処理日")
@@ -68,7 +68,11 @@ public class DBC020070_JigyobunShikyugakuKeisanParameter extends BatchParameterB
      * @return プロセスパラメータ
      */
     public JigyobunShikyugakuKeisanProcessParameter toProcessParameter() {
-        return new JigyobunShikyugakuKeisanProcessParameter(年度, 出力対象区分, 被保険者番号, 受取年月, 処理日, 処理時間, 決定年月日,
+        HihokenshaNo hihokenshaNo = null;
+        if (!RString.isNullOrEmpty(被保険者番号)) {
+            hihokenshaNo = new HihokenshaNo(被保険者番号);
+        }
+        return new JigyobunShikyugakuKeisanProcessParameter(年度, 出力対象区分, hihokenshaNo, 受取年月, 処理日, 処理時間, 決定年月日,
                 窓口払開始年月日, 窓口払開始時刻, 窓口払終了年月日, 窓口払終了時刻, 出力順ID);
     }
 

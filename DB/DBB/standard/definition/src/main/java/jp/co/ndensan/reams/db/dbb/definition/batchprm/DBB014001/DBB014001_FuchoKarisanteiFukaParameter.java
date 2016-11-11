@@ -39,8 +39,6 @@ public class DBB014001_FuchoKarisanteiFukaParameter extends BatchParameterBase {
     private static final String FLAG = "一括発行起動フラグ";
 
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
-    private static final int INT_0 = 0;
-    private static final int INT_1 = 1;
 
     @BatchParameter(key = "調定年度", name = "調定年度")
     private FlexibleYear 調定年度;
@@ -89,9 +87,7 @@ public class DBB014001_FuchoKarisanteiFukaParameter extends BatchParameterBase {
             santeiEntity.set帳票ID(entity.get帳票ID());
             santeiEntity.set帳票分類ID(entity.get帳票分類ID());
             if (納入通知書_帳票分類ID.equals(entity.get帳票分類ID())) {
-                出力帳票一覧List.set(INT_0, santeiEntity);
-            } else {
-                出力帳票一覧List.set(INT_1, santeiEntity);
+                出力帳票一覧List.add(santeiEntity);
             }
         }
         param.set出力帳票一覧List(出力帳票一覧List);

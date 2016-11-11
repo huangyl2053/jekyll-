@@ -50,7 +50,6 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
-    private static final int INT_5 = 5;
     private static final int INT_8 = 8;
     private static final int INT_11 = 11;
     private static final int 年度_2008 = 2008;
@@ -594,7 +593,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private void 連絡票整理番号項目をセット() {
         RString 連絡票整理番号 = div.getTxtShikyuShinseishoSeiriNoInput().getValue();
         div.getTxtTaishoNendo().setValue(new RDate(連絡票整理番号.substring(INT_0, INT_3).toString()));
-        div.getTxtShoKisaiHokenshaNoa().setValue(連絡票整理番号.substring(INT_5, INT_11));
+        div.getTxtShoKisaiHokenshaNoa().setValue(連絡票整理番号.substring(INT_3, INT_11));
         div.getTxtShikyuShinseishoSeiriNo().setValue(連絡票整理番号);
         if (div.getTxtTaishoNendo().getValue().getYearValue() == 年度_2008) {
             div.getTxtOver70Biko().setVisible(true);

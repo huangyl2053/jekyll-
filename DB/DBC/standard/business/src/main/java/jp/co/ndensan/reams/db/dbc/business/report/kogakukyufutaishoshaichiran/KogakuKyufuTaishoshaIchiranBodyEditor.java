@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -32,6 +34,8 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
     private final Boolean 集計Flag;
     private final Boolean 被保険者氏名Flag;
     private static final RString 漢字_計 = new RString("「計」");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -87,6 +91,7 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
         source.choikiCode = getNotNull(被保険者一時.get町域コード());
         source.gyoseikuCode = getNotNull(被保険者一時.get行政区コード());
         source.shimei50onKana = getNotNull(被保険者一時.get氏名50音カナ());
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listUpper_2);
         return source;
     }
 

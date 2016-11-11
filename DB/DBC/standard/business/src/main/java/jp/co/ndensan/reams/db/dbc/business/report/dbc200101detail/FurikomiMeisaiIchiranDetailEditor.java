@@ -77,10 +77,11 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private final RDateTime 作成日時;
     private final RString 設定値;
 
-    private int 毎ページ数 = 0;
-    private int 総レコード数 = 0;
-    private Decimal 毎ページ振込金額合算;
-    private Decimal 振込金額合算;
+    private static int データ数 = 0;
+    private static int 毎ページ数 = 0;
+    private static int 総レコード数 = 0;
+    private static Decimal 毎ページ振込金額合算 = Decimal.ZERO;
+    private static Decimal 振込金額合算 = Decimal.ZERO;
     private static final int ページ件数 = 15;
     private static final int 様式連番_1 = 1;
 
@@ -108,33 +109,15 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     public FurikomiMeisaiIchiranDetailReportSource edit(FurikomiMeisaiIchiranDetailReportSource source) {
         if (一覧表用データ != null) {
             source.layout = Layouts.鑑;
-            毎ページ数++;
+
             List<PrintNoKingakuEntity> list = 一覧表用データ.get印字様式番号別金額List();
 
             int 様式連番 = list.get(0).get様式連番();
-
-            if (毎ページ振込金額合算 == null) {
-                毎ページ振込金額合算 = Decimal.ZERO;
+            Decimal 振込金額 = Decimal.ZERO;
+            if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
+                振込金額 = 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku();
             }
-            if (振込金額合算 == null) {
-                振込金額合算 = Decimal.ZERO;
-            }
-            if (様式連番_1 == 様式連番) {
-                総レコード数++;
-                if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
-                    毎ページ振込金額合算 = 毎ページ振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
-                }
-
-                if (一覧表用データ.get振込明細一時TBL() != null && 一覧表用データ.get振込明細一時TBL().getFurikomiKingaku() != null) {
-                    振込金額合算 = 振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
-                }
-
-            }
-            if (ページ件数 == 毎ページ数) {
-                毎ページ振込金額合算 = Decimal.ZERO;
-                毎ページ数 = 0;
-            }
-
+            setページ数と金額(様式連番, 振込金額);
             editHeader(source);
             if (様式連番_1 == 様式連番) {
                 edit明細1(source);
@@ -152,6 +135,21 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         }
 
         return source;
+    }
+
+    private static void setページ数と金額(int 様式連番, Decimal 振込金額) {
+        データ数++;
+        if (様式連番_1 == 様式連番) {
+            毎ページ数++;
+            総レコード数++;
+            毎ページ振込金額合算 = 毎ページ振込金額合算.add(振込金額);
+            振込金額合算 = 振込金額合算.add(振込金額);
+
+        }
+        if (1 == データ数 % ページ件数 && 1 != データ数) {
+            毎ページ振込金額合算 = Decimal.ZERO;
+            毎ページ数 = 0;
+        }
     }
 
     private void editHeader(FurikomiMeisaiIchiranDetailReportSource source) {
@@ -376,8 +374,10 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
         source.shokeiNinzu = new RString(毎ページ数);
         source.shokeiKingaku = DecimalFormatter.toコンマ区切りRString(毎ページ振込金額合算, 0);
-        source.gokeiNinzu = new RString(総レコード数);
-        source.gokeiKingaku = DecimalFormatter.toコンマ区切りRString(振込金額合算, 0);
+        if (0 != データ数 % ページ件数) {
+            source.gokeiNinzu = new RString(総レコード数);
+            source.gokeiKingaku = DecimalFormatter.toコンマ区切りRString(振込金額合算, 0);
+        }
     }
 
     private void get氏名漢字(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {
@@ -420,11 +420,11 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 source.listLower_7 = data.get印字様式名称().substring(0, LISTINDEX_4);
             }
         }
-        source.listLower_8 = 左カッコ;
         if (data.get様式別集計金額() != null) {
+            source.listLower_8 = 左カッコ;
             source.listLower_9 = DecimalFormatter.toコンマ区切りRString(data.get様式別集計金額(), 0);
+            source.listLower_10 = 右カッコ;
         }
-        source.listLower_10 = 右カッコ;
     }
 
     private void set様式連番_1のUpper支払方法_口座以外情報(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {

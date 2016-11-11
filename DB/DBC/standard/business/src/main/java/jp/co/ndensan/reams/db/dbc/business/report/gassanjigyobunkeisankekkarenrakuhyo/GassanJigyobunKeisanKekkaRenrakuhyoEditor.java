@@ -116,7 +116,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
                 AccessLogger.log(AccessLogType.照会, personalData);
             }
         }
-
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
         return source;
     }
 

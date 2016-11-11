@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
@@ -133,6 +134,7 @@ public class ShinseiJohoChohyoTempEntity extends DbTableEntityBase<ShinseiJohoCh
     private AtenaMeisho meishoChohyo;
     private AtenaKanaMeisho shimeikanaChohyo;
     private AtenaJusho jushoChohyo;
+    private ChoikiCode choikiCodeChohyo;
     private YubinNo yubinNoChohyo;
     private GyoseikuCode gyoseikuCodeChohyo;
     private RString gyoseikuNameChohyo;

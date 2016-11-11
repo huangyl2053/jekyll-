@@ -24,12 +24,20 @@ var DBC;
                 return "onChange_rdbMisaiGkeiKbun";
             };
 
+            Events.onBlur_txtJgyoshaCode = function () {
+                return "onBlur_txtJgyoshaCode";
+            };
+
             Events.onOkClose_btnJgyosha = function () {
                 return "onOkClose_btnJgyosha";
             };
 
             Events.onBeforeOpenDialog_btnJgyosha = function () {
                 return "onBeforeOpenDialog_btnJgyosha";
+            };
+
+            Events.onBlur_txtServiceSyurui = function () {
+                return "onBlur_txtServiceSyurui";
             };
 
             Events.onOkClose_btnServiceSyurui = function () {

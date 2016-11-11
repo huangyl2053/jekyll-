@@ -40,15 +40,15 @@ public class GenNendoHonsanteiIdouProperty extends ReportPropertyBase<GenNendoHo
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("ShikibetsuTaisho_kanaMeisho")),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("ShikibetsuTaisho_kanaMeisho")).concat(FORMAT)),
         /**
          * 生年月日
          */
-        生年月日(new RString("0012"), new RString("生年月日"), new RString("ShikibetsuTaisho_seinengappiYMD")),
+        生年月日(new RString("0012"), new RString("生年月日"), FORMAT.concat(new RString("ShikibetsuTaisho_seinengappiYMD")).concat(FORMAT)),
         /**
          * 性別
          */
-        性別(new RString("0013"), new RString("性別"), new RString("ShikibetsuTaisho_seibetsuCode")),
+        性別(new RString("0013"), new RString("性別"), FORMAT.concat(new RString("ShikibetsuTaisho_seibetsuCode")).concat(FORMAT)),
         /**
          * 市町村コード
          */

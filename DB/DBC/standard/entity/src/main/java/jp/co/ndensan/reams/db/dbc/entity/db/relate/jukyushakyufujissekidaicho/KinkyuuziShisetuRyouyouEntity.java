@@ -150,5 +150,7 @@ public class KinkyuuziShisetuRyouyouEntity extends DbTableEntityBase<TokuteiServ
     private RString 摘要２０;
     @TempTableColumnOrder(57)
     private int 緊急時施設療養費合計点数;
+    @TempTableColumnOrder(58)
+    private RString 略称;
 
 }

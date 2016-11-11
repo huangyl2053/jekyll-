@@ -70,6 +70,7 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
             source.hokenshaNo = getColumnValue(帳票出力対象データ.getShoKisaiHokenshaNoChohyo());
             source.hihokenshaNo = getColumnValue(帳票出力対象データ.getHihokenshaNoChohyo());
             source.kojinNo = getColumnValue(帳票出力対象データ.getKojinNoChohyo());
+            source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
         }
         source.hakkoubi = doパターン12(システム日付);
         source.ninshoshaYakushokuMei = 認証者役職名;
@@ -84,8 +85,6 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
         source.shuccho = 文字_出張所;
         source.shisho = 文字_支所;
         source.remban = 連番;
-        source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
-
         return source;
     }
 

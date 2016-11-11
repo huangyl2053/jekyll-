@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyodoshoriyojukyushaidorenrakuh
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -51,5 +52,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoResultEntity {
     private boolean 支給申請書出力の有無;
     private RString 訂正区分;
     private FlexibleDate 訂正年月日;
+    private ShikibetsuCode 識別コード;
 
 }

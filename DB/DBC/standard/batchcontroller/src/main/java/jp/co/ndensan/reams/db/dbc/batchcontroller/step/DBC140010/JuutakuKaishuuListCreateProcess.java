@@ -60,6 +60,7 @@ public class JuutakuKaishuuListCreateProcess extends BatchProcessBase<JuutakuKai
         住宅改修データ.set審査年月(entity.getDbt3027().getShinsaYM());
         住宅改修データ.set住宅改修事業者名(entity.getDbt3027().getJutakuKaishuJigyoshaName());
         住宅改修データ.set住宅改修住宅住所(entity.getDbt3027().getJuutakukaishuJyutakuAdress());
+        住宅改修データ.set略称(entity.getDbT3118_ryakusho());
         return 住宅改修データ;
     }
 

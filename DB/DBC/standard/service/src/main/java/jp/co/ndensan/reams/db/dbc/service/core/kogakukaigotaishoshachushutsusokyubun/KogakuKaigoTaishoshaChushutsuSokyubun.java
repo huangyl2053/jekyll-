@@ -81,6 +81,7 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
     private static final RString H = new RString("H");
     private static final RString 抽出_マスタ_1 = new RString("51");
     private static final RString 日 = new RString("01");
+    private final RString 単 = new RString("単");
     private MapperProvider mapperProvider;
 
     /**
@@ -633,7 +634,7 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
         }
         sokyuentity.set被保険者番号(entity.get被保険者番号());
         sokyuentity.set被保険者名(entity.get被保険者名());
-        sokyuentity.set連番(new RString("1"));
+        sokyuentity.set連番(処理区分_1);
         sokyuentity.set並び順1(出力順Entity.get改頁項目1());
         sokyuentity.set並び順2(出力順Entity.get改頁項目2());
         sokyuentity.set並び順3(出力順Entity.get改頁項目3());
@@ -670,9 +671,10 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
         eucentity.set認定終了日(entity.get認定有効期間終了年月日());
         eucentity.set旧措置区分(entity.get旧措置者フラグ());
         eucentity.set世帯番号(entity.get世帯コード());
-        //eucentity.set単独合算(new RString(""));
+        eucentity.set単独合算(単);
         eucentity.set自己負担額(entity.get利用者負担額());
         eucentity.set支給予定金額(entity.get支給予定金額());
+        // TODO QA1975提出する
 //        if (new RString("2").equals(entity.get備考欄個人所得区分())) {
 //            eucentity.set所得区分(new RString("非課税"));
 //            eucentity.set世帯所得区分(new RString("非課税"));
@@ -686,16 +688,39 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
         eucentity.set行政区コード(entity.get行政区コード());
         eucentity.set行政区(entity.get行政区());
         eucentity.set市町村コード(entity.get措置元市町村コード());
-        eucentity.set異動内容1(RString.EMPTY);
-        eucentity.set異動内容2(RString.EMPTY);
-        eucentity.set異動内容3(RString.EMPTY);
-        eucentity.set異動内容4(RString.EMPTY);
-        eucentity.set異動内容5(RString.EMPTY);
-        eucentity.set異動内容6(RString.EMPTY);
-        eucentity.set異動内容7(RString.EMPTY);
-        eucentity.set異動内容8(RString.EMPTY);
-        eucentity.set異動内容9(RString.EMPTY);
-        eucentity.set異動内容10(RString.EMPTY);
+        RString 異動内容 = entity.get異動事由コード().concat(nullToEmpty(entity.get資格取得事由コード())).
+                concat(nullToEmpty(entity.get資格喪失事由コード())).concat(nullToEmpty(entity.get資格変更事由コード()))
+                .concat(nullToEmpty(entity.get住所地特例適用事由コード())).concat(nullToEmpty(entity.get住所地特例解除事由コード()));
+        if (連番 == ICHI) {
+            eucentity.set異動内容1(異動内容);
+        }
+        if (連番 == NI) {
+            eucentity.set異動内容2(異動内容);
+        }
+        if (連番 == SAN) {
+            eucentity.set異動内容3(異動内容);
+        }
+        if (連番 == YON) {
+            eucentity.set異動内容4(異動内容);
+        }
+        if (連番 == GO) {
+            eucentity.set異動内容5(異動内容);
+        }
+        if (連番 == ROKU) {
+            eucentity.set異動内容6(異動内容);
+        }
+        if (連番 == NANA) {
+            eucentity.set異動内容7(異動内容);
+        }
+        if (連番 == HACHI) {
+            eucentity.set異動内容8(異動内容);
+        }
+        if (連番 == KU) {
+            eucentity.set異動内容9(異動内容);
+        }
+        if (連番 == JYUU) {
+            eucentity.set異動内容10(異動内容);
+        }
         return 連番++;
 
     }

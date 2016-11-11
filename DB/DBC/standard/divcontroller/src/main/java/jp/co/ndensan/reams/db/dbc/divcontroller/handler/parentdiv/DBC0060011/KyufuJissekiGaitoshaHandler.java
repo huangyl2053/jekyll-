@@ -109,4 +109,12 @@ public class KyufuJissekiGaitoshaHandler {
             }
         }
     }
+
+    /**
+     * データが存在しないの場合、set空給付管理票一覧()
+     */
+    public void set空給付管理票一覧() {
+        List<dgHihokenshaSearchGaitosha_Row> rowList = new ArrayList<>();
+        div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().setDataSource(rowList);
+    }
 }

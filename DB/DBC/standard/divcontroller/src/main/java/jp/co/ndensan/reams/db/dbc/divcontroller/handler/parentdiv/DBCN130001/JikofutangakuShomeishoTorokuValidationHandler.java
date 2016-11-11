@@ -93,32 +93,32 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
         }
 
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonSecurityJoho == null) {
-            return validPairs;
-        }
-        DonyuKeitaiCode 導入形態コード = shichosonSecurityJoho.get導入形態コード();
-        RString 証記載保険者番号 = div.getTxtShinkiTuikaShokisaiHokenshaNo().getValue();
-        if (DonyuKeitaiCode.事務単一.equals(導入形態コード)) {
+        if (shichosonSecurityJoho != null) {
+            DonyuKeitaiCode 導入形態コード = shichosonSecurityJoho.get導入形態コード();
+            RString 証記載保険者番号 = div.getTxtShinkiTuikaShokisaiHokenshaNo().getValue();
+            if (DonyuKeitaiCode.事務単一.equals(導入形態コード)) {
 
-            if (!証記載保険者番号.equals(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value())) {
-                validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(
-                        UrErrorMessages.入力値が不正_追加メッセージあり, "妥当な証記載保険者番号ではありません。"),
-                        div.getTxtShinkiTuikaShokisaiHokenshaNo()));
-            }
-        } else if (DonyuKeitaiCode.事務広域.equals(導入形態コード) || DonyuKeitaiCode.事務構成市町村.equals(導入形態コード)) {
-            List<KoseiShichoson> list = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
-            boolean is存在 = false;
-            for (KoseiShichoson koseiShichoson : list) {
-                if (証記載保険者番号.equals(koseiShichoson.get証記載保険者番号().value())) {
-                    is存在 = true;
+                if (!証記載保険者番号.equals(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value())) {
+                    validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(
+                            UrErrorMessages.入力値が不正_追加メッセージあり, "妥当な証記載保険者番号ではありません。"),
+                            div.getTxtShinkiTuikaShokisaiHokenshaNo()));
+                }
+            } else if (DonyuKeitaiCode.事務広域.equals(導入形態コード) || DonyuKeitaiCode.事務構成市町村.equals(導入形態コード)) {
+                List<KoseiShichoson> list = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
+                boolean is存在 = false;
+                for (KoseiShichoson koseiShichoson : list) {
+                    if (証記載保険者番号.equals(koseiShichoson.get証記載保険者番号().value())) {
+                        is存在 = true;
+                    }
+                }
+                if (!is存在) {
+                    validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(
+                            UrErrorMessages.入力値が不正_追加メッセージあり, "妥当な証記載保険者番号ではありません。"),
+                            div.getTxtShinkiTuikaShokisaiHokenshaNo()));
                 }
             }
-            if (!is存在) {
-                validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(
-                        UrErrorMessages.入力値が不正_追加メッセージあり, "妥当な証記載保険者番号ではありません。"),
-                        div.getTxtShinkiTuikaShokisaiHokenshaNo()));
-            }
         }
+
         RString 支給申請書整理番号 = div.getTxtShinkiShikyuShinseishoSeiriNo().getValue();
         if (支給申請書整理番号.length() != 桁数_17) {
             validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(

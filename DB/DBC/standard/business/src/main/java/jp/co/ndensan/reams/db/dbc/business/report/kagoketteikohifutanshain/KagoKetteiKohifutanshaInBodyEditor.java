@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteikohifutanshain.KagoKetteiKohifutanshaChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain.KagoKetteiKohifutanshaInSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -25,6 +27,8 @@ public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutans
 
     private final KagoKetteiKohifutanshaChohyoEntity 帳票出力対象データ;
     private final boolean 集計Flag;
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -60,6 +64,7 @@ public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutans
         source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get単位数(), 0);
         source.listLower_1 = 帳票出力対象データ.get事業者名();
         source.listLower_2 = getColumnValue(帳票出力対象データ.get被保険者番号());
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listLower_2);
         source.listLower_3 = getColumnValue(帳票出力対象データ.get過誤申立事由コード());
         source.listLower_4 = 帳票出力対象データ.get過誤申立事由();
         source.listLower_5 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get公費負担額(), 0);

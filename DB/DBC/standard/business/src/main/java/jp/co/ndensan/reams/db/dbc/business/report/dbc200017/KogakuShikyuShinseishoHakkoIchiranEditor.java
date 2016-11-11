@@ -117,9 +117,12 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
         if (entity.getShikakuSoshitsuJiyuCodeChohyo() != null) {
             source.listHakkoTaishosha_17 = 丸;
         }
-        source.サービス種類 = entity.getServiceShuruiCodeChohyo() == null ? RString.EMPTY : entity.getServiceShuruiCodeChohyo().value();
         source.氏名カナ = entity.getShimeikanaChohyo() == null ? RString.EMPTY : entity.getShimeikanaChohyo().value();
         source.shikibetsuCode = getColumnValue(entity.getShikibetsuCodeChohyo());
+        source.choikiCode = getColumnValue(entity.getChoikiCodeChohyo());
+        source.市町村コード = getColumnValue(entity.getShichosonCodeChohyo());
+        source.証記載保険者番号 = getColumnValue(entity.getShoKisaiHokenshaNoChohyo());
+        source.自動償還対象フラグ = entity.isJidoShokanTaishoFlagChohyo();
     }
 
     private void editIOutputOrder(KogakuShikyuShinseishoHakkoIchiranSource source) {

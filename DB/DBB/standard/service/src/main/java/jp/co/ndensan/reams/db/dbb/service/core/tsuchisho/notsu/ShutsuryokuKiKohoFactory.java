@@ -78,10 +78,11 @@ public class ShutsuryokuKiKohoFactory {
      * @return リスト出力期候補
      */
     public List<ShutsuryokuKiKoho> create出力期候補(boolean is期毎タイプ, RString 算定期) {
-        KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト().filtered本算定期間();
+        KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
+        KitsukiList 本算定期月 = 期月リスト.filtered本算定期間();
         if (!RString.isNullOrEmpty(算定期)
-                && Integer.parseInt(算定期.toString()) <= 期月リスト.get最終法定納期().get期AsInt()) {
-            return get出力期候補リストBy法定納期(算定期, 期月リスト, is期毎タイプ);
+                && Integer.parseInt(算定期.toString()) <= 本算定期月.get最終法定納期().get期AsInt()) {
+            return get出力期候補リストBy法定納期(算定期, 本算定期月, is期毎タイプ);
         }
         return get出力期候補リストBy随時期(期月リスト, 算定期);
     }
@@ -112,15 +113,13 @@ public class ShutsuryokuKiKohoFactory {
 
     private List<ShutsuryokuKiKoho> get出力期候補リストBy随時期(KitsukiList 期月リスト, RString 算定期) {
         List<ShutsuryokuKiKoho> 出力期候補リスト = new ArrayList<>();
-        for (Kitsuki kitsuki : 期月リスト.toList()) {
-            if (kitsuki.get期AsInt() == Integer.parseInt(算定期.toString())) {
-                ShutsuryokuKiKoho 出力期候補 = new ShutsuryokuKiKoho();
-                出力期候補.set期月(kitsuki);
-                出力期候補.set表示文字列(new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
-                        .append(kitsuki.get月().getコード()).append(文字列_月分).toRString());
-                出力期候補.set出力期リスト(Arrays.asList(kitsuki));
-                出力期候補リスト.add(出力期候補);
-            }
+        for (Kitsuki kitsuki : 期月リスト.get期の月(Integer.parseInt(算定期.toString()))) {
+            ShutsuryokuKiKoho 出力期候補 = new ShutsuryokuKiKoho();
+            出力期候補.set期月(kitsuki);
+            出力期候補.set表示文字列(new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
+                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString());
+            出力期候補.set出力期リスト(Arrays.asList(kitsuki));
+            出力期候補リスト.add(出力期候補);
         }
         return 出力期候補リスト;
     }

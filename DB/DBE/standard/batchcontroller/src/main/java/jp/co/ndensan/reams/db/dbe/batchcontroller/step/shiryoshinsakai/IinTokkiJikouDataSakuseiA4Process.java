@@ -52,6 +52,8 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
     private static final RString SELECT_SHINSAKAISIRYOKYOTSU = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiSiryoKyotsu");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+            new RString(TokkiTextA4ReportSource.ReportSourceFields.tokkiText.name()),
+            new RString(TokkiTextA4ReportSource.ReportSourceFields.tokkiImg.name()),
             new RString(TokkiTextA4ReportSource.ReportSourceFields.two_tokkiText.name()),
             new RString(TokkiTextA4ReportSource.ReportSourceFields.two_tokkiImg.name())));
     private static final int 最大表示行数 = 15;

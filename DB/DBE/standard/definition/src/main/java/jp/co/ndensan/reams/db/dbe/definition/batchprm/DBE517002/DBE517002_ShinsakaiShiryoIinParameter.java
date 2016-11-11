@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShins
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuikaSiryoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuutishoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.ShinsakaiSiryouKumiawaseA3ProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -223,6 +224,25 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      */
     public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
         return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, bangoStart, bangoEnd, gogitaiNo);
+    }
+
+    /**
+     * 委員用介護認定審査対象者一覧表情報ProcessParameterに転換します。
+     *
+     * @return IinTokkiJikouItiziHanteiProcessParameter
+     */
+    public ShinsakaiSiryouKumiawaseA3ProcessParameter toShinsakaiSiryouKumiawaseA3ProcessParameter() {
+        return new ShinsakaiSiryouKumiawaseA3ProcessParameter(shinsakaiKaisaiNo,
+                shuturyokuJun,
+                sakuseiJoken,
+                bangoStart,
+                bangoEnd,
+                shuturyokuSutairu,
+                printHou,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaishiYoteiTime,
+                gogitaiName,
+                gogitaiNo);
     }
 
 }

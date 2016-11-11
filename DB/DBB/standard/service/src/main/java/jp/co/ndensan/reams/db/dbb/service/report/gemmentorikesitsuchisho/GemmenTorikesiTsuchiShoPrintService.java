@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
@@ -63,6 +64,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
     private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("-");
+    private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
     private static final int INDEX_THREE = 3;
@@ -75,8 +77,8 @@ public class GemmenTorikesiTsuchiShoPrintService {
     private static final int INDEX_TEN = 10;
     private static final int INDEX_ELEVEN = 11;
     private static final int INDEX_TWELVE = 12;
+    private static final int INDEX_THIRTEEN = 13;
     private static final int INDEX_FOURTEEN = 14;
-    private static final int INDEX_FIFTEEN = 15;
 
     /**
      * 介護保険料減免取消通知書A4縦タイプ(単一帳票出力用)
@@ -290,6 +292,13 @@ public class GemmenTorikesiTsuchiShoPrintService {
             KoseiZengoKiwariGaku 更正前後期割額 = 更正前後期割額を生成(減免取消通知書情報, 期月特徴, 期月普徴);
             更正前後期割額リスト.add(更正前後期割額);
         }
+        if (!has特別徴収(更正前後期割額リスト)) {
+            clear特別徴収(更正前後期割額リスト);
+        }
+        if (!has普通徴収(更正前後期割額リスト)) {
+            clear普通徴収(更正前後期割額リスト);
+        }
+
         return 更正前後期割額リスト;
     }
 
@@ -306,9 +315,12 @@ public class GemmenTorikesiTsuchiShoPrintService {
             Kitsuki 期月特徴, Kitsuki 期月普徴) {
         KoseiZengoKiwariGaku 更正前後期割額 = new KoseiZengoKiwariGaku();
         if (期月特徴.isPresent()) {
-            更正前後期割額.set特徴期(期月特徴.get期().padZeroToLeft(2));
-            更正前後期割額.set特徴月(期月特徴.get月().getコード());
-
+            if (期月特徴.get期().length() < 2) {
+                更正前後期割額.set特徴期(期月特徴.get期().insert(INDEX_ZERO, RSTRING_0.toString()));
+            } else {
+                更正前後期割額.set特徴期(期月特徴.get期());
+            }
+            更正前後期割額.set特徴月(get月(期月特徴));
             Decimal 特徴期別金額取消前 = set特徴期別金額取消前(期月特徴.get期(), 減免取消通知書情報);
             if (特徴期別金額取消前 != null) {
                 更正前後期割額.set特徴期別金額取消前(DecimalFormatter
@@ -324,8 +336,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 更正前後期割額.set特徴期別金額取消後(RSTRING_0);
             }
             if (特徴期別金額取消前 != null && 特徴期別金額取消後 != null) {
-                更正前後期割額.set特徴減免取消額(DecimalFormatter
-                        .toコンマ区切りRString(特徴期別金額取消後.subtract(特徴期別金額取消前), 0));
+                更正前後期割額.set特徴減免取消額(get減免取消額(特徴期別金額取消後, 特徴期別金額取消前));
             } else if (特徴期別金額取消後 != null && 特徴期別金額取消前 == null) {
                 更正前後期割額.set特徴減免取消額(DecimalFormatter
                         .toコンマ区切りRString(特徴期別金額取消後, 0));
@@ -342,17 +353,28 @@ public class GemmenTorikesiTsuchiShoPrintService {
             更正前後期割額.set特徴減免取消額(RString.EMPTY);
             更正前後期割額.set特徴期別金額取消後(RString.EMPTY);
         }
+        get期月普徴情報(更正前後期割額, 減免取消通知書情報, 期月普徴);
+        return 更正前後期割額;
+    }
+
+    private void get期月普徴情報(KoseiZengoKiwariGaku 更正前後期割額,
+            GemmenTorikesiTsuchiShoJoho 減免取消通知書情報,
+            Kitsuki 期月普徴) {
         if (期月普徴.isPresent()) {
-            更正前後期割額.set普徴期(期月普徴.get期().padZeroToLeft(2));
-            更正前後期割額.set普徴月(期月普徴.get月().getコード());
-            Decimal 普徴期別金額取消前 = set普徴期別金額取消前(期月普徴.get月AsInt(), 減免取消通知書情報);
+            if (期月普徴.get期().length() < 2) {
+                更正前後期割額.set普徴期(期月普徴.get期().insert(INDEX_ZERO, RSTRING_0.toString()));
+            } else {
+                更正前後期割額.set普徴期(期月普徴.get期());
+            }
+            更正前後期割額.set普徴月(get月(期月普徴));
+            Decimal 普徴期別金額取消前 = set普徴期別金額取消前(期月普徴.get期(), 減免取消通知書情報);
             if (普徴期別金額取消前 != null) {
                 更正前後期割額.set普徴期別金額取消前(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額取消前, 0));
             } else {
                 更正前後期割額.set普徴期別金額取消前(RSTRING_0);
             }
-            Decimal 普徴期別金額取消後 = set普徴期別金額取消後(期月普徴.get月AsInt(), 減免取消通知書情報);
+            Decimal 普徴期別金額取消後 = set普徴期別金額取消後(期月普徴.get期(), 減免取消通知書情報);
             if (普徴期別金額取消後 != null) {
                 更正前後期割額.set普徴期別金額取消後(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額取消後, 0));
@@ -360,8 +382,7 @@ public class GemmenTorikesiTsuchiShoPrintService {
                 更正前後期割額.set普徴期別金額取消後(RSTRING_0);
             }
             if (普徴期別金額取消後 != null && 普徴期別金額取消前 != null) {
-                更正前後期割額.set普徴減免取消額(DecimalFormatter
-                        .toコンマ区切りRString(普徴期別金額取消後.subtract(普徴期別金額取消前), 0));
+                更正前後期割額.set普徴減免取消額(get減免取消額(普徴期別金額取消後, 普徴期別金額取消前));
             } else if (普徴期別金額取消後 != null && 普徴期別金額取消前 == null) {
                 更正前後期割額.set普徴減免取消額(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額取消後, 0));
@@ -378,7 +399,66 @@ public class GemmenTorikesiTsuchiShoPrintService {
             更正前後期割額.set普徴減免取消額(RString.EMPTY);
             更正前後期割額.set普徴期別金額取消後(RString.EMPTY);
         }
-        return 更正前後期割額;
+    }
+
+    private RString get減免取消額(Decimal 普徴期別金額取消後, Decimal 普徴期別金額取消前) {
+        if (普徴期別金額取消後.equals(普徴期別金額取消前)) {
+            return RSTRING_0;
+        } else {
+            return DecimalFormatter.toコンマ区切りRString(普徴期別金額取消後.subtract(普徴期別金額取消前), 0);
+        }
+    }
+
+    private RString get月(Kitsuki 期月) {
+        if (期月.get月().equals(Tsuki.翌年度4月)) {
+            return Tsuki._4月.getコード();
+        }
+        if (期月.get月().equals(Tsuki.翌年度5月)) {
+            return Tsuki._5月.getコード();
+        }
+        return 期月.get月().getコード();
+    }
+
+    private boolean has特別徴収(List<KoseiZengoKiwariGaku> 更正前後期割額リスト) {
+        for (KoseiZengoKiwariGaku 更正前後期割額 : 更正前後期割額リスト) {
+            if (!isZeroOrEmpty(更正前後期割額.get特徴期別金額取消前())
+                    || !isZeroOrEmpty(更正前後期割額.get特徴期別金額取消後())
+                    || !isZeroOrEmpty(更正前後期割額.get特徴減免取消額())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean has普通徴収(List<KoseiZengoKiwariGaku> 更正前後期割額リスト) {
+        for (KoseiZengoKiwariGaku 更正前後期割額 : 更正前後期割額リスト) {
+            if (!isZeroOrEmpty(更正前後期割額.get普徴期別金額取消前())
+                    || !isZeroOrEmpty(更正前後期割額.get普徴期別金額取消後())
+                    || !isZeroOrEmpty(更正前後期割額.get普徴減免取消額())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void clear普通徴収(List<KoseiZengoKiwariGaku> 更正前後期割額リスト) {
+        for (KoseiZengoKiwariGaku 更正前後期割額 : 更正前後期割額リスト) {
+            更正前後期割額.set普徴期別金額取消前(RString.EMPTY);
+            更正前後期割額.set普徴減免取消額(RString.EMPTY);
+            更正前後期割額.set普徴期別金額取消後(RString.EMPTY);
+        }
+    }
+
+    private void clear特別徴収(List<KoseiZengoKiwariGaku> 更正前後期割額リスト) {
+        for (KoseiZengoKiwariGaku 更正前後期割額 : 更正前後期割額リスト) {
+            更正前後期割額.set特徴期別金額取消前(RString.EMPTY);
+            更正前後期割額.set特徴減免取消額(RString.EMPTY);
+            更正前後期割額.set特徴期別金額取消後(RString.EMPTY);
+        }
+    }
+
+    private boolean isZeroOrEmpty(RString 割額) {
+        return RString.isNullOrEmpty(割額) || RSTRING_0.equals(割額);
     }
 
     /**
@@ -444,42 +524,43 @@ public class GemmenTorikesiTsuchiShoPrintService {
     /**
      * set普徴期別金額更正前します。
      *
-     * @param index int
+     * @param 期 期
      * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
      * @return Decimal
      */
-    private Decimal set普徴期別金額取消前(int index, GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
+    private Decimal set普徴期別金額取消前(RString 期, GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
+        int index = Integer.parseInt(期.toString());
         if (減免取消通知書情報.get賦課の情報更正前() == null) {
             return Decimal.ZERO;
         }
         switch (index) {
-            case INDEX_FOUR:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額01();
-            case INDEX_FIVE:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額02();
-            case INDEX_SIX:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額03();
-            case INDEX_SEVEN:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額04();
-            case INDEX_EIGHT:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額05();
-            case INDEX_NINE:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額06();
-            case INDEX_TEN:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額07();
-            case INDEX_ELEVEN:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額08();
-            case INDEX_TWELVE:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額09();
             case INDEX_ONE:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額10();
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額01();
             case INDEX_TWO:
-                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額11();
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額02();
             case INDEX_THREE:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額03();
+            case INDEX_FOUR:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額04();
+            case INDEX_FIVE:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額05();
+            case INDEX_SIX:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額06();
+            case INDEX_SEVEN:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額07();
+            case INDEX_EIGHT:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額08();
+            case INDEX_NINE:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額09();
+            case INDEX_TEN:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額10();
+            case INDEX_ELEVEN:
+                return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額11();
+            case INDEX_TWELVE:
                 return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額12();
-            case INDEX_FOURTEEN:
+            case INDEX_THIRTEEN:
                 return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額13();
-            case INDEX_FIFTEEN:
+            case INDEX_FOURTEEN:
                 return 減免取消通知書情報.get賦課の情報更正前().get普徴期別金額14();
             default:
                 return null;
@@ -489,42 +570,43 @@ public class GemmenTorikesiTsuchiShoPrintService {
     /**
      * set普徴期別金額更正後します。
      *
-     * @param index int
+     * @param 期 期
      * @param 減免取消通知書情報 GemmenTorikesiTsuchiShoJoho
      * @return Decimal
      */
-    private Decimal set普徴期別金額取消後(int index, GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
+    private Decimal set普徴期別金額取消後(RString 期, GemmenTorikesiTsuchiShoJoho 減免取消通知書情報) {
+        int index = Integer.parseInt(期.toString());
         if (減免取消通知書情報.get減免の情報更正後() == null) {
             return Decimal.ZERO;
         }
         switch (index) {
-            case INDEX_FOUR:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額01();
-            case INDEX_FIVE:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額02();
-            case INDEX_SIX:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額03();
-            case INDEX_SEVEN:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額04();
-            case INDEX_EIGHT:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額05();
-            case INDEX_NINE:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額06();
-            case INDEX_TEN:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額07();
-            case INDEX_ELEVEN:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額08();
-            case INDEX_TWELVE:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額09();
             case INDEX_ONE:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額10();
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額01();
             case INDEX_TWO:
-                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額11();
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額02();
             case INDEX_THREE:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額03();
+            case INDEX_FOUR:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額04();
+            case INDEX_FIVE:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額05();
+            case INDEX_SIX:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額06();
+            case INDEX_SEVEN:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額07();
+            case INDEX_EIGHT:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額08();
+            case INDEX_NINE:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額09();
+            case INDEX_TEN:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額10();
+            case INDEX_ELEVEN:
+                return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額11();
+            case INDEX_TWELVE:
                 return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額12();
-            case INDEX_FOURTEEN:
+            case INDEX_THIRTEEN:
                 return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額13();
-            case INDEX_FIFTEEN:
+            case INDEX_FOURTEEN:
                 return 減免取消通知書情報.get減免の情報更正後().get普徴期別金額14();
             default:
                 return null;

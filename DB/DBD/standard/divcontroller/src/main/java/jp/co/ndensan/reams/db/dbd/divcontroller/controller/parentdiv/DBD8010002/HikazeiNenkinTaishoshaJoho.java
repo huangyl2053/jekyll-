@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.Hik
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -138,7 +139,7 @@ public class HikazeiNenkinTaishoshaJoho {
                 List<RString> 構成市町村コードリスト = ViewStateHolder.
                         get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
                 if (構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty()) {
-                    return ResponseData.of(div).addMessage(DbdErrorMessages.処理なし.getMessage()).respond();
+                    throw new ApplicationException(DbdErrorMessages.処理なし.getMessage());
                 }
                 getValidationHandler(div).validateFor処理状態広域(pairs);
                 getValidationHandler(div).validateFor取込チェックボックス(pairs);

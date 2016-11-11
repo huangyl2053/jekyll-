@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.kanyuYMD;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonCode;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
@@ -16,7 +17,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -36,6 +39,8 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
 
     @InjectSession
     private SqlSession session;
+
+    private static final RString 最新の構成市町村 = new RString("0");
 
     /**
      * 指定した検索条件に合致する広域構成市町村を取得します。
@@ -87,5 +92,21 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
                                 eq(shichosonCode, entity.getShichosonCode()),
                                 eq(shoKisaiHokenshaNo, entity.getShoKisaiHokenshaNo())))
                 .getCount();
+    }
+
+    /**
+     * 保険者情報を検索します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return 保険者情報
+     */
+    @Transaction
+    public DbT7051KoseiShichosonMasterEntity select保険者情報(LasdecCode 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(eq(shichosonCode, 市町村コード), eq(gappeiKyuShichosonKubun, 最新の構成市町村))).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 }

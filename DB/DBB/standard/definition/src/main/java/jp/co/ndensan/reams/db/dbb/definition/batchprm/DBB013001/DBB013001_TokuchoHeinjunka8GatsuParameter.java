@@ -63,6 +63,6 @@ public class DBB013001_TokuchoHeinjunka8GatsuParameter extends BatchParameterBas
      * @return FukaJohoTorokuBatchParameter
      */
     public DBB004001_FukaJohoTorokuParameter toFukaJohoTorokuBatchParameter() {
-        return new DBB004001_FukaJohoTorokuParameter(true);
+        return new DBB004001_FukaJohoTorokuParameter();
     }
 }

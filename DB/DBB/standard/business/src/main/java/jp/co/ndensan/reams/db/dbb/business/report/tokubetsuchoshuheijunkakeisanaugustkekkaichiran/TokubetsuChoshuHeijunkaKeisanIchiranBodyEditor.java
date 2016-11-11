@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -55,6 +56,8 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
     private static final RString 編集コード_変更なし = new RString("変更なし");
     private static final RString 編集コード_6月特徴開始者 = new RString("6月特徴開始者");
     private static final RString 編集コード_8月特徴開始者 = new RString("8月特徴開始者");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号_1 = new RString("被保険者番号");
     private final Association association;
 
     /**
@@ -161,6 +164,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (被保険者番号 != null) {
             source.listLower_1 = 被保険者番号.value();
         }
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号_1, source.listLower_1);
         SetaiCode 世帯コード = item.get世帯コード();
         if (世帯コード != null) {
             source.listLower_2 = 世帯コード.value();
@@ -272,6 +276,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (被保険者番号 != null) {
             source.listLower_1 = 被保険者番号.value();
         }
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号_1, source.listLower_1);
         SetaiCode 世帯コード = item.get世帯コード();
         if (世帯コード != null) {
             source.listLower_2 = 世帯コード.value();

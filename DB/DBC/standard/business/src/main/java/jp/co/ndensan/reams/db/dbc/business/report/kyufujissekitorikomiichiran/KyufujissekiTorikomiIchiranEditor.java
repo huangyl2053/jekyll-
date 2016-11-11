@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -59,6 +60,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
     private static final RString 件タイトル = new RString("件");
     private static final RString 合計件数タイトル = new RString("合計件数");
     private static final RString 事業者名不明タイトル = new RString(" 事業者名不明");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     private final List<RString> 改頁リスト;
     private final RString 並び順の１件目;
@@ -206,7 +209,11 @@ public class KyufujissekiTorikomiIchiranEditor implements
             source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(new Decimal(合計件数), 0).concat(件タイトル);
         }
 
-        source.shikibetsuCode = entity.get識別コード();
+        if (entity != null && entity.get識別コード() != null) {
+            source.shikibetsuCode = entity.get識別コード();
+        } else {
+            source.shikibetsuCode = RString.EMPTY;
+        }
         if (entity.get給付実績_保険者番号() != null) {
             source.hokenshaNo = entity.get給付実績_保険者番号().getColumnValue();
         }
@@ -216,6 +223,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.shimei50onKana = entity.get被保険者_氏名50音カナ();
         source.shichosonCode = entity.get被保険者_市町村コード();
         source.kyufuJissekiKubun = entity.get給付実績_給付実績区分();
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_5);
         return source;
 
     }

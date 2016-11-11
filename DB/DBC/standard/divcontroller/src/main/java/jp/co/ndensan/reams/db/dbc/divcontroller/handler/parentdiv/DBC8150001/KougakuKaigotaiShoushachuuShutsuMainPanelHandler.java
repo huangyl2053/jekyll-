@@ -138,7 +138,9 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
         RString 抽出期間開始日 = div.getTxtChushutsuKikanKonkai().getFromDateValue().toDateString();
         RString 抽出期間開始時 = get抽出期間(div.getTxtChushutsuKikanKonkai().getFromTimeValue());
         RDateTime 抽出期間開始日時 = get抽出期間日時(抽出期間開始日, 抽出期間開始時);
-        RDateTime 抽出期間終了日時 = get抽出期間日時(処理日, 処理時);
+        RString 抽出期間終了日 = div.getTxtChushutsuKikanKonkai().getToDateValue().toDateString();
+        RString 抽出期間終了時 = get抽出期間(div.getTxtChushutsuKikanKonkai().getToTimeValue());
+        RDateTime 抽出期間終了日時 = get抽出期間日時(抽出期間終了日, 抽出期間終了時);
         RString 帳票ID = 帳票コード;
         Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
         FlexibleYearMonth 開始年月１ = get処理年月日(div.getKeisanTaishoKikanPanel().getTxtKeisanTaishoKikanYM().getFromValue());

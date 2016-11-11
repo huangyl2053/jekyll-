@@ -59,4 +59,6 @@ public class JuutakuKaishuuEntity extends DbTableEntityBase<JuutakuKaishuuEntity
     private RString 住宅改修事業者名;
     @TempTableColumnOrder(12)
     private RString 住宅改修住宅住所;
+    @TempTableColumnOrder(13)
+    private RString 略称;
 }

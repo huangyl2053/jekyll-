@@ -508,7 +508,7 @@ public class JukyushaKyufuJissekiDaichoHandler {
                 batchParameter.set給付率区分(さん);
             }
         }
-        if (!div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().toString().isEmpty()) {
+        if (div.getTabChushutsuJoken().getTxtKyufuritsu().getValue() != null) {
             batchParameter.set給付率(new RString(div.getTxtKyufuritsu().getValue().toString()));
         }
         batchParameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
