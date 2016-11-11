@@ -63,6 +63,7 @@ public class HukushiYouguListCreateProcess extends BatchProcessBase<HukushiYougu
         福祉用具データ.set福祉用具販売事業者名(entity.getDbt3026().getFukushiyoguHanbaiJigyoshaName());
         福祉用具データ.set福祉用具種目コード(entity.getDbt3026().getFukushiyoguSyumokuCode());
         福祉用具データ.set購入金額(entity.getDbt3026().getHanbaiKingaku());
+        福祉用具データ.set略称(entity.getDbT3118_ryakusho());
         return 福祉用具データ;
     }
 }

@@ -86,6 +86,7 @@ public class TokuteiShinryouHiCreateProcess extends BatchProcessBase<TokuteiShin
         緊急療養データ.set後公費３回数(entity.getDbt3021().getAtoKohi3Kaisu());
         緊急療養データ.set後公費３サービス点数(entity.getDbt3021().getAtoKohi3ServiceTanisu());
         緊急療養データ.set後公費３合計点数(entity.getDbt3021().getAtoKohi3TotalTanisu());
+        緊急療養データ.set略称(entity.getDbT3118_ryakusho());
         return 緊急療養データ;
     }
 }

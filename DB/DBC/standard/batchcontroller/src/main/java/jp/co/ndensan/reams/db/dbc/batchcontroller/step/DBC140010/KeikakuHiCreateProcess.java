@@ -72,6 +72,7 @@ public class KeikakuHiCreateProcess extends BatchProcessBase<KeikakuHiRelateEnti
         計画費データ.set再審査回数(entity.getDbt3025().getSaishinsaKaisu());
         計画費データ.set過誤回数(entity.getDbt3025().getKagoKaisu());
         計画費データ.set審査年月(entity.getDbt3025().getShinsaYM());
+        計画費データ.set略称(entity.getDbT3118_ryakusho());
         return 計画費データ;
     }
 

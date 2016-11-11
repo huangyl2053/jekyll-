@@ -7,12 +7,10 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140010;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonRelateEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KyuuhuZissekiKougakuRelateEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -25,12 +23,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
- * 受給者給付実績台帳のList基本のセットクラスです。
+ * 受給者給付実績台帳の高額介護サービス費からList基本のセットクラスです。
  *
  * @reamsid_L DBC-3080-030 dongyabin
  *
  */
-public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> {
+public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<KyuuhuZissekiKougakuRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaKyufujissekiDaichoMapper."
@@ -70,10 +68,6 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
     private static final RString 入力識別番号_21A1 = new RString("21A1");
     private static final RString 入力識別番号_21A2 = new RString("21A2");
     private static final RString 入力識別番号_21A3 = new RString("21A3");
-    private static final RString 入力識別番号_715X = new RString("715X");
-    private static final RString 入力識別番号_215X = new RString("215X");
-    private static final RString 入力識別番号_719X = new RString("719X");
-    private static final RString 入力識別番号_219X = new RString("219X");
     private static final RString 入力識別番号_716X = new RString("716X");
     private static final RString 入力識別番号_216X = new RString("216X");
     private static final RString 入力識別番号_71AX = new RString("71AX");
@@ -103,45 +97,24 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
     }
 
     @Override
-    protected void process(KihonRelateEntity entity) {
+    protected void process(KyuuhuZissekiKougakuRelateEntity entity) {
         基本List.insert(set基本List(entity));
     }
 
-    private KihonEntity set基本List(KihonRelateEntity entity) {
+    private KihonEntity set基本List(KyuuhuZissekiKougakuRelateEntity entity) {
         KihonEntity 基本entity = new KihonEntity();
-        RString 入力識別番号 = entity.getDbT3017_inputShikibetsuNo();
-        RString サービス提供年月 = entity.getDbT3017_serviceTeikyoYM();
+        RString 入力識別番号 = entity.getDbt3028_inputShikibetsuNo();
+        RString サービス提供年月 = entity.getDbt3028_serviceTeikyoYM();
         基本entity.set入力識別番号(入力識別番号);
-        基本entity.set被保険者番号(entity.getDbT3017_hiHokenshaNo());
+        基本entity.set被保険者番号(entity.getDbt3028_hiHokenshaNo());
         基本entity.setサービス提供年月(サービス提供年月);
-        基本entity.set給付実績区分コード(KyufuJissekiKubun.toValue(entity.getDbT3017_kyufuJissekiKubunCode()).get名称());
-        基本entity.set事業所番号(entity.getDbT3017_jigyoshoNo());
-        基本entity.set通し番号(entity.getDbT3017_toshiNo());
-        基本entity.set生年月日(entity.getDbT3017_umareYMD());
-        基本entity.set性別コード(entity.getDbT3017_seibetsuCode());
-        基本entity.set要介護度(YokaigoJotaiKubun.toValue(entity.getDbT3017_yoKaigoJotaiKubunCode()).get名称());
-        基本entity.set認定有効期間(get期間(entity.getDbT3017_ninteiYukoKaishiYMD(), entity.getDbT3017_ninteiYukoShuryoYMD()));
-        基本entity.set証記載保険者番号(entity.getDbT3017_shokisaiHokenshaNo());
-        基本entity.set老人保険市町村番号(entity.getDbT3017_rojinHokenShichosonNo());
-        基本entity.set老人保険受給者番号(entity.getDbT3017_rojinhokenJukyushaNo());
-        基本entity.set旧措置入所者特例コード(entity.getDbT3017_kyuSochiNyushoshaTokureiCode());
-        基本entity.set警告区分コード(KeikokuKubun.toValue(entity.getDbT3017_keikaiKubunCode()).get名称());
-        基本entity.set審査年月(entity.getDbT3017_shinsaYM());
-        基本entity.set保険者番号後期(entity.getDbT3017_kokiHokenshaNo());
-        基本entity.set被保険者番号後期(entity.getDbT3017_kokiHiHokenshaNo());
-        基本entity.set保険者番号国保(entity.getDbT3017_kokuhoHokenshaNo());
-        基本entity.set被保険者証番号国保(entity.getDbT3017_kokuhoHiHokenshashoNo());
-        基本entity.set個人番号国保(entity.getDbT3017_kokuhoKojinNo());
-        基本entity.set整理番号(entity.getDbT3017_seiriNo());
-        基本entity.set居住サービス計画作成区分コード(entity.getDbT3017_kyotakuServiceSakuseiKubunCode());
-        基本entity.set居住サービス計画作成区分名１(get居住サービス計画作成区分名(entity.getDbT3017_kyotakuServiceSakuseiKubunCode()).get(0));
-        基本entity.set居住サービス計画作成区分名２(get居住サービス計画作成区分名(entity.getDbT3017_kyotakuServiceSakuseiKubunCode()).get(1));
-        基本entity.set居住サービス計画事業者番号(entity.getDbT3017_kyotakuKaigoShienJigyoshoNo());
-        基本entity.set居住サービス計画事業者名１(get居住サービス計画事業者名(entity.getDbT7060_jigyoshaName()).get(0));
-        基本entity.set居住サービス計画事業者名２(get居住サービス計画事業者名(entity.getDbT7060_jigyoshaName()).get(1));
-        基本entity.set入所院期間(get期間(entity.getDbT3017_nyushoYMD(), entity.getDbT3017_taishoYMD()));
-        基本entity.set入所院実日数(entity.getDbT3017_nyushoJitsunissu());
-        基本entity.set外泊日数(entity.getDbT3017_gaihakuNissu());
+        基本entity.set給付実績区分コード(KyufuJissekiKubun.toValue(entity.getDbt3028_kyufuJissekiKubunCode()).get名称());
+        基本entity.set通し番号(entity.getDbt3028_toshiNo());
+        基本entity.set生年月日(entity.getPsm_tmp2_seinengappiYMD());
+        基本entity.set性別コード(entity.getPsm_tmp2_seibetsuCode());
+        基本entity.set証記載保険者番号(entity.getDbt3028_shokisaiHokenshaNo());
+        基本entity.set審査年月(entity.getDbt3028_shinsaYM());
+        基本entity.set整理番号(entity.getDbt3028_seiriNo());
         基本entity.set出力様式(entity.getDbT3118_ryakusho());
         RString 名称 = entity.getDbT3118_meisho();
         if (名称.length() <= 居住サービス計画事業者名_LENGTH) {
@@ -150,32 +123,6 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         } else {
             基本entity.set出力様式１(名称.substring(0, 居住サービス計画事業者名_LENGTH));
             基本entity.set出力様式２(名称.substring(居住サービス計画事業者名_LENGTH));
-        }
-        基本entity.setサービス事業者番号(entity.getDbT3017_jigyoshoNo());
-        基本entity.setサービス事業者名(entity.getDbT7060_jigyoshaName());
-        基本entity.set退所院の状態(entity.getDbT3017_taishogoJotaiCode());
-        基本entity.setサービス期間(get期間(entity.getDbT3017_kaishiYMD(), entity.getDbT3017_chushiYMD()));
-        基本entity.set中止理由タイトル(get中止理由タイトル(入力識別番号, サービス提供年月));
-        基本entity.set中止理由コード(entity.getDbT3017_chushiRiyuNyushomaeJyokyoCode());
-        基本entity.set保険給付率(entity.getDbT3017_hokenKyufuritsu());
-        基本entity.set前サービス単位数(entity.getDbT3017_maeHokenServiceTanisu());
-        基本entity.set後サービス単位数(entity.getDbT3017_atoHokenServiceTanisu());
-        基本entity.set前保険請求額(entity.getDbT3017_maeHokenSeikyugaku());
-        基本entity.set後保険請求額(entity.getDbT3017_atoHokenSeikyugaku());
-        基本entity.set前利用者負担額(entity.getDbT3017_maeHokenRiyoshaFutangaku());
-        基本entity.set後利用者負担額(entity.getDbT3017_atoHokenRiyoshaFutangaku());
-        if (入力識別番号_715X.equals(入力識別番号)
-                || 入力識別番号_215X.equals(入力識別番号)
-                || 入力識別番号_719X.equals(入力識別番号)
-                || 入力識別番号_219X.equals(入力識別番号)) {
-            基本entity.set前緊急時施設療養費請求額(entity.getDbT3017_maeHokenKinkyuShisetsuRyoyoSeikyugaku());
-            基本entity.set後緊急時施設療養費請求額(entity.getDbT3017_atoHokenKinkyuShisetsuRyoyoSeikyugaku());
-            基本entity.set前公費１緊急時施設療養費請求額(entity.getDbT3017_maeKohi1KinkyuShisetsuRyoyoSeikyugaku());
-            基本entity.set後公費１緊急時施設療養費請求額(entity.getDbT3017_atoKohi1KinkyuShisetsuRyoyoSeikyugaku());
-            基本entity.set前公費２緊急時施設療養費請求額(entity.getDbT3017_maeKohi2KinkyuShisetsuRyoyoSeikyugaku());
-            基本entity.set後公費２緊急時施設療養費請求額(entity.getDbT3017_atoKohi2KinkyuShisetsuRyoyoSeikyugaku());
-            基本entity.set前公費３緊急時施設療養費請求額(entity.getDbT3017_maeKohi3KinkyuShisetsuRyoyoSeikyugaku());
-            基本entity.set後公費３緊急時施設療養費請求額(entity.getDbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku());
         }
         List<RString> 入力識別番号List = new ArrayList<>();
         入力識別番号List.add(入力識別番号_716X);
@@ -190,62 +137,8 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         入力識別番号List.add(入力識別番号_7194);
         基本entity.set基本ヘッダー１(get基本ヘッダー(入力識別番号, サービス提供年月, 入力識別番号List));
         基本entity.set基本ヘッダー２(new RString("請求額"));
-        if (入力識別番号List.contains(入力識別番号)) {
-            基本entity.set前特定診療費請求額(entity.getDbT3017_maeHokenTokuteiShinryohiSeikyugaku());
-            基本entity.set後特定診療費請求額(entity.getDbT3017_atoHokenTokuteiShinryohiSeikyugaku());
-        }
         基本entity.set基本ヘッダー3(new RString("特定入所者介"));
         基本entity.set基本ヘッダー４(new RString("護費等請求額"));
-        基本entity.set前特定入所者介護サービス等等請求額(entity.getDbT3017_maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku());
-        基本entity.set後特定入所者介護サービス等等請求額(entity.getDbT3017_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku());
-        基本entity.set公費１負担者番号(entity.getDbT3017_kohi1FutanshaNo());
-        基本entity.set公費１受給者番号(entity.getDbT3017_kohi1JukyushaNo());
-        基本entity.set公費１給付率(entity.getDbT3017_kohi1Kyufuritsu());
-        基本entity.set前公費１サービス単位数(entity.getDbT3017_maeHokenServiceTanisu());
-        基本entity.set後公費１サービス単位数(entity.getDbT3017_atoHokenServiceTanisu());
-        基本entity.set前公費１保険請求額(entity.getDbT3017_maeHokenSeikyugaku());
-        基本entity.set後公費１保険請求額(entity.getDbT3017_atoHokenSeikyugaku());
-        基本entity.set前公費１利用者負担額(entity.getDbT3017_maeKohi1RiyoshaFutangaku());
-        基本entity.set後公費１利用者負担額(entity.getDbT3017_atoKohi1RiyoshaFutangaku());
-        if (入力識別番号List.contains(入力識別番号)
-                && new FlexibleYearMonth(サービス提供年月_200510).isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
-            基本entity.set前公費１特定診療費請求額(entity.getDbT3017_maeKohi1TokuteiShinryohiSeikyugaku());
-            基本entity.set後公費１特定診療費請求額(entity.getDbT3017_atoKohi1TokuteiShinryohiSeikyugaku());
-        }
-        基本entity.set前公費１特定入所者介護サービス費等請求額(entity.getDbT3017_maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku());
-        基本entity.set後公費１特定入所者介護サービス費等請求額(entity.getDbT3017_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku());
-        基本entity.set公費２負担者番号(entity.getDbT3017_kohi2FutanshaNo());
-        基本entity.set公費２受給者番号(entity.getDbT3017_kohi2JukyushaNo());
-        基本entity.set公費２給付率(entity.getDbT3017_kohi2Kyufuritsu());
-        基本entity.set前公費２サービス単位数(entity.getDbT3017_maeHokenServiceTanisu());
-        基本entity.set後公費２サービス単位数(entity.getDbT3017_atoHokenServiceTanisu());
-        基本entity.set前公費２保険請求額(entity.getDbT3017_maeHokenSeikyugaku());
-        基本entity.set後公費２保険請求額(entity.getDbT3017_atoHokenSeikyugaku());
-        基本entity.set前公費２利用者負担額(entity.getDbT3017_maeKohi2RiyoshaFutangaku());
-        基本entity.set後公費２利用者負担額(entity.getDbT3017_atoKohi2RiyoshaFutangaku());
-        if (入力識別番号List.contains(入力識別番号)
-                && new FlexibleYearMonth(サービス提供年月_200510).isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
-            基本entity.set前公費２特定診療費請求額(entity.getDbT3017_maeKohi2TokuteiShinryohiSeikyugaku());
-            基本entity.set後公費２特定診療費請求額(entity.getDbT3017_atoKohi2TokuteiShinryohiSeikyugaku());
-        }
-        基本entity.set前公費２特定入所者介護サービス費等請求額(entity.getDbT3017_maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku());
-        基本entity.set後公費２特定入所者介護サービス費等請求額(entity.getDbT3017_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku());
-        基本entity.set公費２負担者番号(entity.getDbT3017_kohi3FutanshaNo());
-        基本entity.set公費２受給者番号(entity.getDbT3017_kohi3JukyushaNo());
-        基本entity.set公費２給付率(entity.getDbT3017_kohi3Kyufuritsu());
-        基本entity.set前公費２サービス単位数(entity.getDbT3017_maeHokenServiceTanisu());
-        基本entity.set後公費２サービス単位数(entity.getDbT3017_atoHokenServiceTanisu());
-        基本entity.set前公費２保険請求額(entity.getDbT3017_maeHokenSeikyugaku());
-        基本entity.set後公費２保険請求額(entity.getDbT3017_atoHokenSeikyugaku());
-        基本entity.set前公費２利用者負担額(entity.getDbT3017_maeKohi3RiyoshaFutangaku());
-        基本entity.set後公費２利用者負担額(entity.getDbT3017_atoKohi3RiyoshaFutangaku());
-        if (入力識別番号List.contains(入力識別番号)
-                && new FlexibleYearMonth(サービス提供年月_200510).isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
-            基本entity.set前公費２特定診療費請求額(entity.getDbT3017_maeKohi3TokuteiShinryohiSeikyugaku());
-            基本entity.set後公費２特定診療費請求額(entity.getDbT3017_atoKohi3TokuteiShinryohiSeikyugaku());
-        }
-        基本entity.set前公費２特定入所者介護サービス費等請求額(entity.getDbT3017_maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku());
-        基本entity.set後公費２特定入所者介護サービス費等請求額(entity.getDbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku());
         基本entity.set被保険者氏名カナ(entity.getPsm_tmp2_kanaMeisho());
         基本entity.set被保険者氏名(entity.getPsm_tmp2_meisho());
         基本entity.set世帯コード(entity.getPsm_tmp2_setaiCode());
@@ -253,8 +146,21 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         基本entity.set住所(entity.getPsm_tmp2_jusho());
         基本entity.set行政区コード(entity.getPsm_tmp2_gyoseikuCode());
         基本entity.set行政区(entity.getPsm_tmp2_gyoseikuName());
-        基本entity.set住民コード(entity.getDbT1001_tmp2_shikibetsuCode());
+        基本entity.set住民コード(entity.getDbt1001_tmp2_shikibetsuCode());
         基本entity.set区分(区分_基本);
+        基本entity.set高額受付年月日(entity.getDbt3028_uketsukeYMD());
+        基本entity.set高額決定年月日(entity.getDbt3028_ketteiYMD());
+        基本entity.set高額公費１負担番号(entity.getDbt3028_kohi1FutanNo());
+        基本entity.set高額公費２負担番号(entity.getDbt3028_kohi2FutanNo());
+        基本entity.set高額公費３負担番号(entity.getDbt3028_kohi3FutanNo());
+        基本entity.set高額利用者負担額(entity.getDbt3028_riyoshaFutangaku());
+        基本entity.set高額公費１負担額(entity.getDbt3028_kohi1Futangaku());
+        基本entity.set高額公費２負担額(entity.getDbt3028_kohi2Futangaku());
+        基本entity.set高額公費３負担額(entity.getDbt3028_kohi3Futangaku());
+        基本entity.set高額支給額(entity.getDbt3028_shikyugaku());
+        基本entity.set高額公費１支給額(entity.getDbt3028_kohi1Shikyugaku());
+        基本entity.set高額公費２支給額(entity.getDbt3028_kohi2Shikyugaku());
+        基本entity.set高額公費３支給額(entity.getDbt3028_kohi3Shikyugaku());
         return 基本entity;
     }
 
