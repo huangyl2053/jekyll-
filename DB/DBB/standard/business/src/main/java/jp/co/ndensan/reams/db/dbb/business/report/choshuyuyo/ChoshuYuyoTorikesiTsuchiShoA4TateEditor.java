@@ -149,11 +149,11 @@ public class ChoshuYuyoTorikesiTsuchiShoA4TateEditor implements IChoshuYuyoTorik
 
     private void set期別徴収猶予期間リスト(KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoA4TateSource source) {
         if (期別徴収猶予期間リスト != null && !期別徴収猶予期間リスト.isEmpty()) {
-            source.listKibetsu_1 = 期別徴収猶予期間リスト.get(i).get特徴期();
-            source.listKibetsu_2 = 期別徴収猶予期間リスト.get(i).get特徴月();
+            source.listKibetsu_1 = format月と期(期別徴収猶予期間リスト.get(i).get特徴期());
+            source.listKibetsu_2 = format月と期(期別徴収猶予期間リスト.get(i).get特徴月());
             source.listKibetsu_3 = 期別徴収猶予期間リスト.get(i).get特徴期別金額();
-            source.listKibetsu_4 = 期別徴収猶予期間リスト.get(i).get普徴期();
-            source.listKibetsu_5 = 期別徴収猶予期間リスト.get(i).get普徴月();
+            source.listKibetsu_4 = format月と期(期別徴収猶予期間リスト.get(i).get普徴期());
+            source.listKibetsu_5 = format月と期(期別徴収猶予期間リスト.get(i).get普徴月());
             source.listKibetsu_6 = 期別徴収猶予期間リスト.get(i).get普徴期別金額();
             source.listKibetsu_7 = 期別徴収猶予期間リスト.get(i).get徴収猶予期間();
             source.listZuiji_1 = 随時リスト.get(i);
@@ -161,6 +161,13 @@ public class ChoshuYuyoTorikesiTsuchiShoA4TateEditor implements IChoshuYuyoTorik
                 source.listTorikeshiAtoNoki_1 = 期別納期リスト.get(i);
             }
         }
+    }
+
+    private RString format月と期(RString value) {
+        if (value.isEmpty()) {
+            return value;
+        }
+        return new RString(Integer.valueOf(value.trim().toString())).padLeft(RString.HALF_SPACE, 2);
     }
 
     private void set編集後宛先(KaigoHokenHokenryoChoshuyoyoTorikeshiTsuchishoA4TateSource source) {

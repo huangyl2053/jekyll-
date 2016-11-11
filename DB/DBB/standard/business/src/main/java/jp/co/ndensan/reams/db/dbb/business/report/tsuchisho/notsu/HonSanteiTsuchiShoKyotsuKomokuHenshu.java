@@ -116,13 +116,14 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             int 普徴_納付済期 = 0;
             int 普徴_最大期 = 0;
             if (!普徴納期情報リスト.isEmpty()) {
-                普徴_最初期 = 普徴納期情報リスト.get(0).get納期().get期別();
-                普徴_最大期 = 普徴納期情報リスト.get(普徴納期情報リスト.size() - 1).get納期().get期別();
+                普徴_最初期 = 普徴納期情報リスト.get(普徴納期情報リスト.size() - 1).get納期().get期別();
+                普徴_最大期 = 普徴納期情報リスト.get(0).get納期().get期別();
             }
             for (NokiJoho nokiJoho : 普徴納期情報リスト) {
                 if (nokiJoho.get納期().get納期開始日().isBeforeOrEquals(本算定通知書情報.get発行日())
                         && 本算定通知書情報.get発行日().isBeforeOrEquals(nokiJoho.get納期().get納期終了日())) {
                     普徴_納付済期 = nokiJoho.get納期().get期別();
+                    break;
                 }
             }
             普徴納付済額_未到来期含まない = get普徴納付済額(本算定通知書情報.get収入情報(), 普徴_最初期, 普徴_納付済期);
@@ -132,13 +133,14 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             int 特徴_納付済期 = 0;
             int 特徴_最大期 = 0;
             if (!特徴納期情報リスト.isEmpty()) {
-                特徴_最初期 = 特徴納期情報リスト.get(0).get納期().get期別();
-                特徴_最大期 = 特徴納期情報リスト.get(特徴納期情報リスト.size() - 1).get納期().get期別();
+                特徴_最初期 = 特徴納期情報リスト.get(特徴納期情報リスト.size() - 1).get納期().get期別();
+                特徴_最大期 = 特徴納期情報リスト.get(0).get納期().get期別();
             }
             for (NokiJoho nokiJoho : 特徴納期情報リスト) {
                 if (nokiJoho.get納期().get納期開始日().isBeforeOrEquals(本算定通知書情報.get発行日())
                         && 本算定通知書情報.get発行日().isBeforeOrEquals(nokiJoho.get納期().get納期終了日())) {
                     特徴_納付済期 = nokiJoho.get納期().get期別();
+                    break;
                 }
             }
 
@@ -148,18 +150,13 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             納付済額_未到来期含まない = 普徴納付済額_未到来期含まない.add(特徴納付済額_未到来期含まない);
             未到来期の納付済額 = 納付済額_未到来期含む.subtract(納付済額_未到来期含まない);
             RString 普徴現在期 = new KoseiTsukiHantei().find更正月(本算定通知書情報.get発行日()).get期();
+            FukaJoho 賦課情報_更正後 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
+            RString 月 = new RString(本算定通知書情報.get発行日().getMonthValue());
+            RString 特徴現在期 = new TokuchoKiUtil().get期月リスト().get月の期(Tsuki.toValue(月.padZeroToLeft(2))).get期();
             if (本算定通知書情報.get賦課の情報_更正前() != null) {
-                FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
-                普徴既に納付すべき額 = get普徴納付済額(賦課情報, 1, Integer.parseInt(普徴現在期.toString()));
-                RString 普徴最終期 = new FuchoKiUtil().get期月リスト().get最終法定納期().get期();
-                Decimal 納付済額 = get普徴納付済額(賦課情報, 1, Integer.parseInt(普徴最終期.toString()));
-
-                普徴今後納付すべき額_調定元に = 納付済額.subtract(普徴既に納付すべき額);
-                普徴今後納付すべき額_収入元に = 納付済額.subtract(普徴納付済額_未到来期含む);
-                RString 月 = new RString(本算定通知書情報.get発行日().getMonthValue());
-                RString 特徴現在期 = new TokuchoKiUtil().get期月リスト().get月の期(Tsuki.toValue(月.padZeroToLeft(2))).get期();
-                特徴既に納付すべき額 = get特徴納付済額(賦課情報, 1, Integer.parseInt(特徴現在期.toString()));
-                特徴今後納付すべき額 = get特徴納付済額(賦課情報, 1, SIZE_6).subtract(特徴既に納付すべき額);
+                FukaJoho 賦課情報_更正前 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
+                普徴既に納付すべき額 = get普徴納付済額(賦課情報_更正前, 1, Integer.parseInt(普徴現在期.toString()) - 1);
+                特徴既に納付すべき額 = get特徴納付済額(賦課情報_更正前, 1, Integer.parseInt(特徴現在期.toString()) - 1);
             } else {
                 普徴既に納付すべき額 = Decimal.ZERO;
                 普徴今後納付すべき額_調定元に = Decimal.ZERO;
@@ -167,7 +164,11 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 特徴既に納付すべき額 = Decimal.ZERO;
                 特徴今後納付すべき額 = Decimal.ZERO;
             }
-
+            RString 普徴最終期 = new FuchoKiUtil().get期月リスト().get最終法定納期().get期();
+            Decimal 納付済額 = get普徴納付済額(賦課情報_更正後, 1, Integer.parseInt(普徴最終期.toString()));
+            普徴今後納付すべき額_調定元に = 納付済額.subtract(普徴既に納付すべき額);
+            普徴今後納付すべき額_収入元に = 納付済額.subtract(普徴納付済額_未到来期含む);
+            特徴今後納付すべき額 = get特徴納付済額(賦課情報_更正後, 1, SIZE_6).subtract(特徴既に納付すべき額);
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
             今後納付すべき額 = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額);
         } else {
@@ -825,7 +826,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add(nullToZero((Decimal) getMethod.invoke(fukaJoho)));
+                普徴納付済額 = 普徴納付済額.add(nullToZero((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -845,7 +846,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = fukaJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴納付済額.add(nullToZero((Decimal) getMethod.invoke(fukaJoho)));
+                特徴納付済額 = 特徴納付済額.add(nullToZero((Decimal) getMethod.invoke(fukaJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -873,7 +874,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = shunyuJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                普徴納付済額.add(nullToZero((Decimal) getMethod.invoke(shunyuJoho)));
+                普徴納付済額 = 普徴納付済額.add(nullToZero((Decimal) getMethod.invoke(shunyuJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -893,7 +894,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Class clazz = shunyuJoho.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(sb.toString());
-                特徴納付済額.add(nullToZero((Decimal) getMethod.invoke(shunyuJoho)));
+                特徴納付済額 = 特徴納付済額.add(nullToZero((Decimal) getMethod.invoke(shunyuJoho)));
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
             }
