@@ -73,7 +73,9 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
         executeStep(CALCKOGAKUSHIKYUGAKUPROCESS);
         executeStep(SETFUTANGAKUPROCESS);
         executeStep(SETFUTANGAKUAFTERPROCESS);
-        executeStep(GASSANJIGYOBUNJIKOFUTANGAKUKEISANKEKKAICHAIRAN);
+        if (getParameter().isShuturyokuFlg()) {
+            executeStep(GASSANJIGYOBUNJIKOFUTANGAKUKEISANKEKKAICHAIRAN);
+        }
         executeStep(UPDSHORIDATEKANRIPROCESS);
     }
 
@@ -136,7 +138,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
 
     @Step(SETFUTANGAKUPROCESS)
     IBatchFlowCommand setFutangakuProcess() {
-        SetFutangakuProcessParameter param = new SetFutangakuProcessParameter(true, RString.EMPTY);
+        SetFutangakuProcessParameter param = new SetFutangakuProcessParameter(true, getParameter().getRadSakuseiJoken());
         return loopBatch(SetFutangakuProcess.class).arguments(param).define();
     }
 
