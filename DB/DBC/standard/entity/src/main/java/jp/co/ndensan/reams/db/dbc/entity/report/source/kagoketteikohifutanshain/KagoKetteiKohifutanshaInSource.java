@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -52,7 +53,6 @@ public class KagoKetteiKohifutanshaInSource implements IReportSource {
     public RString listUpper_1;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 6, order = 16)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 10, order = 17)
@@ -119,12 +119,14 @@ public class KagoKetteiKohifutanshaInSource implements IReportSource {
     public RString shimei50onKana;
     @ReportItem(name = "shichosonCode", length = 10, order = 72)
     public RString shichosonCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-
     /**
      * TokubetsuChoshuKaishiSourceのenum
      */

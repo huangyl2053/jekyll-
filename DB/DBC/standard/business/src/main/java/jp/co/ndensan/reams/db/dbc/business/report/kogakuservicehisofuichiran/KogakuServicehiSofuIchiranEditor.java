@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.KogakuServicehiHanteiIchiranhyoTaisyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuservicehisofuichiran.KogakuServicehiSofuIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -45,6 +47,8 @@ public class KogakuServicehiSofuIchiranEditor implements
 
     private static final RString 日時作成 = new RString("作成");
     private static final RString 接続文字 = new RString(":");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     private final List<RString> 改頁リスト;
     private final List<RString> 並び順リスト;
@@ -99,7 +103,7 @@ public class KogakuServicehiSofuIchiranEditor implements
         if (entity.get高額介護_被保険者番号() != null) {
             source.listCenter_2 = entity.get高額介護_被保険者番号().value();
         }
-
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listCenter_2);
         source.listUpper_1 = entity.get被保険者_宛名カナ名称();
         source.listLower_1 = entity.get被保険者_宛名名称();
         source.listUpper_2 = entity.get被保険者_町域コード();
