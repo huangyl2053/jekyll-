@@ -6,8 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150010;
 
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc150010.CreateRiyojokyoIchiranHyoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc150010.RiyojokyoTokeihyoMeisaiListProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -82,5 +87,55 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiListParameter extends BatchParamet
      * コンストラクタです。
      */
     public DBC150010_RiyojokyoTokeihyoMeisaiListParameter() {
+    }
+
+    /**
+     * 利用状況統計表（明細リスト）作成のProcessParameterのクラスを作成します。
+     *
+     * @return 利用状況統計表（明細リスト）作成のProcessParameterのクラス
+     */
+    public RiyojokyoTokeihyoMeisaiListProcessParameter createProcessParemter() {
+        RiyojokyoTokeihyoMeisaiListProcessParameter parameter = new RiyojokyoTokeihyoMeisaiListProcessParameter();
+        if (!RString.isNullOrEmpty(事業者番号)) {
+            parameter.set事業者番号(new JigyoshaNo(事業者番号));
+        }
+        parameter.set地区指定(地区指定);
+        parameter.set対象年月(対象年月);
+        parameter.set導入形態コード(導入形態コード);
+        parameter.set居宅利用率指定(居宅利用率指定);
+        parameter.set市町村コード(市町村コード);
+        parameter.set旧市町村コード(旧市町村コード);
+        parameter.set終了居宅利用率(終了居宅利用率);
+        if (!RString.isNullOrEmpty(終了年月)) {
+            parameter.set終了年月(new FlexibleYearMonth(終了年月));
+        }
+        parameter.set終了訪問利用率(終了訪問居宅利用率);
+        parameter.set被保険者番号(new HihokenshaNo(被保険者番号));
+        parameter.set訪問利用率指定(訪問利用率指定);
+        parameter.set選択地区リスト(選択地区リスト);
+        parameter.set開始居宅利用率(開始居宅利用率);
+        if (!RString.isNullOrEmpty(開始年月)) {
+            parameter.set開始年月(new FlexibleYearMonth(開始年月));
+        }
+        parameter.set開始訪問利用率(開始訪問居宅利用率);
+        parameter.set利用実績区分(利用実績区分);
+        parameter.set旧市町村名称(旧市町村名称);
+        parameter.set明細合計出力区分(明細合計出力区分);
+        parameter.set出力順ID(new RString(出力順ID.toString()));
+        return parameter;
+    }
+
+    /**
+     * 利用状況一覧表作成のProcessParameterのクラスを作成します。
+     *
+     * @return 利用状況一覧表作成のProcessParameterのクラス
+     */
+    public CreateRiyojokyoIchiranHyoProcessParameter createCreateRiyojokyoIchiranHyoProcessParameter() {
+
+        return new CreateRiyojokyoIchiranHyoProcessParameter(対象年月, 開始年月, 終了年月, 被保険者番号,
+                事業者番号, 利用実績区分, 居宅利用率指定, 開始居宅利用率, 終了居宅利用率, 訪問利用率指定,
+                開始訪問居宅利用率, 終了訪問居宅利用率, 地区指定, 選択地区リスト, 市町村コード, 市町村名称,
+                旧市町村コード, 旧市町村名称, 導入形態コード, 統計表出力区分, 明細リスト出力区分,
+                明細CSV出力区分, 明細合計出力区分, 項目名付加, 連番付加, 日付スラッシュ編集, new RString(出力順ID.toString()));
     }
 }
