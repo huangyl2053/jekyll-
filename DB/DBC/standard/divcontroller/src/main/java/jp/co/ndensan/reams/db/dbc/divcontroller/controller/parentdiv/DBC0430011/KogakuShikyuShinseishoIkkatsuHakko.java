@@ -150,8 +150,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> txtHihokenshaNo_onBlur(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-//        RString menuID = ResponseHolder.getMenuID();
-        RString menuID = new RString("DBCMN43001");
+        RString menuID = ResponseHolder.getMenuID();
         if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo() != null) {
             RString 被保険者番号入力 = div.getTxtHihokenshaNo().getValue();
             div.getTxtHihokenshaNo().setValue(被保険者番号入力.padZeroToLeft(INT_10));
