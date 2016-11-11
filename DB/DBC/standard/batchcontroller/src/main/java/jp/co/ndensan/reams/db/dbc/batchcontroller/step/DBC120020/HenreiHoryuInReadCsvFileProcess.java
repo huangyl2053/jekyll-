@@ -79,7 +79,7 @@ public class HenreiHoryuInReadCsvFileProcess extends BatchProcessBase<List<RStri
     @Override
     protected void initialize() {
         連番 = parameter.get連番();
-        履歴番号 = parameter.get履歴番号() + 1;
+        履歴番号 = parameter.get履歴番号();
         returnEntity = new SogojigyohiKohiJukyushaFlowEntity();
         flowEntity = new OutputParameter<>();
     }
