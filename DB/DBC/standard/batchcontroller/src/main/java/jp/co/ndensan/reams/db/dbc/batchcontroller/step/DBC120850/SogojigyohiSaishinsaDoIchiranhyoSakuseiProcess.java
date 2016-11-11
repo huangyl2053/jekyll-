@@ -64,7 +64,6 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     private static final RString 出力ファイル名
             = new RString("DBC200080_SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int INT_1 = 1;
@@ -201,18 +200,6 @@ public class SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess extends
     }
 
     private RString get出力順() {
-        RString outOrder = MyBatisOrderByClauseCreator.create(SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder.class, 並び順);
-        if (RString.isNullOrEmpty(outOrder)) {
-            outOrder = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = outOrder.split(EUC_WRITER_DELIMITER.toString());
-            outOrder = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    outOrder = outOrder.concat(EUC_WRITER_DELIMITER).concat(出力順BODY.get(i));
-                }
-            }
-        }
-        return outOrder;
+        return MyBatisOrderByClauseCreator.create(SogojigyohiSaishinsaKetteiHokenshaInOutPutOrder.class, 並び順);
     }
 }
