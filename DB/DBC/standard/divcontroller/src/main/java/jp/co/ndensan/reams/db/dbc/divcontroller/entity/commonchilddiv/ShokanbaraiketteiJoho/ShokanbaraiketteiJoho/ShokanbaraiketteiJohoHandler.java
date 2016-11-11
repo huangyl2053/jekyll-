@@ -154,6 +154,8 @@ public class ShokanbaraiketteiJohoHandler {
             div.getTxtFushikyuriyu2().setDisabled(true);
             div.getRdoShikyukubun().setDisabled(true);
         }
+        div.getTxtShiharaikingakugoke().setDisabled(true);
+        div.getTxtZogentani().setDisabled(true);
     }
 
     private boolean isFlexibleDateNullOrEmpty(FlexibleDate date) {
