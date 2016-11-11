@@ -259,6 +259,18 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilder {
     }
 
     /**
+     * t請求情報作成日を設定します。
+     *
+     * @param 請求情報作成日 t請求情報作成日
+     * @return {@link JutakuKaishuRiyushoTesuryoShukeiBuilder}
+     */
+    public JutakuKaishuRiyushoTesuryoShukeiBuilder set請求情報作成日(FlexibleDate 請求情報作成日) {
+        requireNonNull(請求情報作成日, UrSystemErrorMessages.値がnull.getReplacedMessage("請求情報作成日"));
+        entity.setSeikyuJohoSakuseiYMD(請求情報作成日);
+        return this;
+    }
+
+    /**
      * 口座IDを設定します。
      *
      * @param 口座ID 口座ID

@@ -46,13 +46,6 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
             Breakers<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> breakers,
             BreakerCatalog<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-
-
-
-
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> occuredBreak(
@@ -75,43 +68,44 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString("郵便番号"), FORMAT.concat(new RString("atena_yubinNo")).concat(FORMAT)),
+        郵便番号(new RString("0001"), new RString("郵便番号"), FORMAT.concat(new RString("atesaki_yubinNo")).concat(FORMAT)),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("町域コード"), FORMAT.concat(new RString("atena_choikiCode")).concat(FORMAT)),
+        町域コード(new RString("0002"), new RString("町域コード"), FORMAT.concat(new RString("atesaki_choikiCode")).concat(FORMAT)),
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString("番地コード"), FORMAT.concat(new RString("atena_banchiCode")).concat(FORMAT)),
+        番地コード(new RString("0003"), new RString("番地コード"), new RString("\"atesaki_banchiCode1\",\"atesaki_banchiCode2\","
+                + "\"atesaki_banchiCode3\",\"atesaki_banchiCode4\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("行政区コード"), FORMAT.concat(new RString("atena_gyoseikuCode")).concat(FORMAT)),
+        行政区コード(new RString("0004"), new RString("行政区コード"), FORMAT.concat(new RString("atesaki_gyoseikuCode")).concat(FORMAT)),
         /**
          * 地区１
          */
-        地区１(new RString("0005"), new RString("地区１"), FORMAT.concat(new RString("atena_chikuCode1")).concat(FORMAT)),
+        地区１(new RString("0005"), new RString("地区１"), FORMAT.concat(new RString("atesaki_chikuCode1")).concat(FORMAT)),
         /**
          * 地区２
          */
-        地区２(new RString("0006"), new RString("地区２"), FORMAT.concat(new RString("atena_chikuCode2")).concat(FORMAT)),
+        地区２(new RString("0006"), new RString("地区２"), FORMAT.concat(new RString("atesaki_chikuCode2")).concat(FORMAT)),
         /**
          * 地区３
          */
-        地区３(new RString("0007"), new RString("地区３"), FORMAT.concat(new RString("atena_chikuCode3")).concat(FORMAT)),
+        地区３(new RString("0007"), new RString("地区３"), FORMAT.concat(new RString("atesaki_chikuCode3")).concat(FORMAT)),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString("世帯コード"), FORMAT.concat(new RString("dbT2015KeisangoJoho_setaiCode")).concat(FORMAT)),
+        世帯コード(new RString("0008"), new RString("世帯コード"), FORMAT.concat(new RString("atena_setaiCode")).concat(FORMAT)),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString("識別コード"), FORMAT.concat(new RString("dbT2015KeisangoJoho_shikibetsuCode")).concat(FORMAT)),
+        識別コード(new RString("0009"), new RString("識別コード"), FORMAT.concat(new RString("atena_shikibetsuCode")).concat(FORMAT)),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("atena_shimei50onKana")),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("atena_kanaMeisho")).concat(FORMAT)),
         /**
          * 生年月日
          */
@@ -123,7 +117,7 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("")),
+        市町村コード(new RString("0016"), new RString("市町村コード"), FORMAT.concat(new RString("dbT2015KeisangoJoho_fukaShichosonCode")).concat(FORMAT)),
         /**
          * 被保険者番号
          */
@@ -134,6 +128,11 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
          */
         年金コード(new RString("0206"), new RString("年金コード"), FORMAT
                 .concat(new RString("nenkinTokuchoKaifuJoho_nenkinCode")).concat(FORMAT)),
+        /**
+         * 生活保護種別
+         */
+        生活保護種別(new RString("0116"), new RString("生活保護種別"), FORMAT
+                .concat(new RString("dbT2015KeisangoJoho_seihofujoShurui")).concat(FORMAT)),
         /**
          * 納組コード
          */

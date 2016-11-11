@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.teikyohyobeppyo.I
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.jigosakuseimeisaitouroku.JigoSakuseiMeisaiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -119,17 +120,21 @@ public class TeikyohyoBeppyoManager {
         KyufuJikoSakuseiEntityResult entityResult = new KyufuJikoSakuseiEntityResult();
         entityResult.set事業者(result.get事業者());
         entityResult.setサービス(result.getサービス());
-        entityResult.set単位(result.get単位());
-        entityResult.set割引適用後率(result.get割引適用後率());
-        entityResult.set割引適用後単位(result.get割引適用後単位());
-        entityResult.set回数(result.get回数());
+        entityResult.set単位(RString.isNullOrEmpty(result.get単位()) ? Decimal.ZERO : new Decimal(result.get単位().toString()));
+        entityResult.set割引適用後率(RString.isNullOrEmpty(result.get割引適用後率()) ? new HokenKyufuRitsu(Decimal.ZERO)
+                : new HokenKyufuRitsu(new Decimal(result.get割引適用後率().toString())));
+        entityResult.set割引適用後単位(RString.isNullOrEmpty(result.get割引適用後単位()) ? Decimal.ZERO
+                : new Decimal(result.get割引適用後単位().toString()));
+        entityResult.set回数(RString.isNullOrEmpty(result.get回数()) ? Decimal.ZERO : new Decimal(result.get回数().toString()));
         entityResult.setサービス単位(result.getサービス単位());
         entityResult.set種類限度超過単位(result.get種類限度超過単位());
         entityResult.set種類限度内単位(result.get種類限度内単位());
-        entityResult.set単位数単価(result.get単位数単価());
+        entityResult.set単位数単価(RString.isNullOrEmpty(result.get単位数単価()) ? Decimal.ZERO
+                : new Decimal(result.get単位数単価().toString()));
         entityResult.set区分限度超過単位(result.get区分限度超過単位());
         entityResult.set区分限度内単位(result.get区分限度内単位());
-        entityResult.set給付率(result.get給付率());
+        entityResult.set給付率(RString.isNullOrEmpty(result.get給付率()) ? new HokenKyufuRitsu(Decimal.ZERO)
+                : new HokenKyufuRitsu(new Decimal(result.get給付率().toString())));
         entityResult.set給付計画単位数(result.get給付計画単位数());
         entityResult.set費用総額(result.get費用総額());
         entityResult.set保険給付額(result.get保険給付額());

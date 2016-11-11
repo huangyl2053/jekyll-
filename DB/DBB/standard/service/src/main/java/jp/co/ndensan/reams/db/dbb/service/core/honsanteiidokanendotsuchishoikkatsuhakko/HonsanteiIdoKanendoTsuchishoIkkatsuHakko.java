@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuch
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.FuchoSyoriTaisho;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KozaFurikaeOutputType;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendotsuchishoikkatsuhakko.IdoFukaJohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -146,8 +147,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     private static final RString CSVファイル名_決定一覧表 = new RString("介護保険料額決定通知書発行一覧表");
     private static final RString CSVファイル名_変更一覧表 = new RString("介護保険料額変更通知書発行一覧表");
     private static final EucEntityId 決定_EUC_ENTITY_ID = new EucEntityId("DBB200012");
-    private static final RString 決定_EUCファイル名 = new RString("KaigoHokenHokenryogakuKetteiTsuchishoDaihyo.csv");
-    private static final EucEntityId 変更_EUC_ENTITY_ID = new EucEntityId("DBB200028");
+    private static final RString 決定_EUCファイル名 = new RString("KaigoHokenryogakuKetteiTsuchiHakkoIchiranData.csv");
+    private static final EucEntityId 変更_EUC_ENTITY_ID = new EucEntityId("DBB200030");
     private static final RString 変更_EUCファイル名 = new RString("KaigoHokenryogakuHenkoTsuchiHakkoIchiranData.csv");
     private static final EucEntityId 納入_EUC_ENTITY_ID = new EucEntityId("DBB200010");
     private static final RString 納入_EUCファイル名 = new RString("NonyuTsuchishoHonsanteiHakkoIchiranData.csv");
@@ -182,7 +183,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return HonsanteiIdoKanendoTsuchishoIkkatsuHakko
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakko createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakko.class);
@@ -259,7 +260,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException
+     * 賦課情報が取得できない場合、Exception
      */
     public void pntKetteiTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 文書番号, RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ) throws InvocationTargetException {
@@ -285,7 +287,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値区分_0, CSV出力有無_なし, CSVファイル名, 帳票名);
             return;
         }
-        List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
+        List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList, null);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
@@ -375,7 +377,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException
+     * 賦課情報が取得できない場合、Exception
      */
     public void pntHenkoTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 変更通知書出力対象区分, RString 文書番号, RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ) throws InvocationTargetException {
@@ -395,7 +398,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値区分_0, CSV出力有無_なし, CSVファイル名, 帳票名);
             return;
         }
-        List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
+        List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList, null);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
@@ -544,7 +547,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException
+     * 賦課情報が取得できない場合、Exception
      */
     public void pntNonyuTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 出力期, RString 納入通知書対象者, RString 口座振替分出力様式, RString 生活保護者先頭出力区分,
@@ -592,7 +596,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         }
         int 山分け用スプール数 = get山分け用スプール数(帳票ID, 期月List, 出力期AsInt, ページごとに山分け);
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(納入通知書本算定_帳票分類ID);
-        List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
+        List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList, 口座振替分出力様式);
         NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory = InstanceProvider.create(NonyuTsuchiShoJohoFactory.class);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
@@ -1230,7 +1234,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_口座振替者).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(NotsuKozaShutsuryokuTaisho.toValue(口座振替分出力様式).get名称()));
+                .concat(KozaFurikaeOutputType.toValue(口座振替分出力様式).get名称()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         if (定値区分_0.equals(生活保護者先頭出力区分)) {

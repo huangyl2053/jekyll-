@@ -72,14 +72,14 @@ class Dai5Ki extends HokenryoDankaiHanteiHohoHozon {
         段階9.add(new DankaiHanteiHonninKazei());
         段階9.add(new DankaiHanteiKingaku(基準所得段階2.add(1), new Decimal(-1)));
 
-        getHanteiHoho().put(new RString("2"), 段階2);
-        getHanteiHoho().put(new RString("3"), 段階3);
-        getHanteiHoho().put(new RString("4"), 段階4);
-        getHanteiHoho().put(new RString("5"), 段階5);
-        getHanteiHoho().put(new RString("6"), 段階6);
-        getHanteiHoho().put(new RString("7"), 段階7);
-        getHanteiHoho().put(new RString("8"), 段階8);
-        getHanteiHoho().put(new RString("9"), 段階9);
+        getHanteiHoho().put(new RString("02"), 段階2);
+        getHanteiHoho().put(new RString("03"), 段階3);
+        getHanteiHoho().put(new RString("04"), 段階4);
+        getHanteiHoho().put(new RString("05"), 段階5);
+        getHanteiHoho().put(new RString("06"), 段階6);
+        getHanteiHoho().put(new RString("07"), 段階7);
+        getHanteiHoho().put(new RString("08"), 段階8);
+        getHanteiHoho().put(new RString("09"), 段階9);
 
     }
 

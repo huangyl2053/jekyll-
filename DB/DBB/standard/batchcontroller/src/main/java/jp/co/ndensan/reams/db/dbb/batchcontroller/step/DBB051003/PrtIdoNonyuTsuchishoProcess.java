@@ -139,10 +139,10 @@ public class PrtIdoNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuch
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
     private static final RString CSVファイル名_なし = new RString("なし");
-    private static final RString CSVファイル名_納入一覧表 = new RString("保険料納入通知書（本算定）発行一覧表");
+    private static final RString CSVファイル名_納入一覧表 = new RString("保険料納入通知書（本算定現年度異動）発行一覧表");
     private static final RString 定値_ゼロ = new RString("0");
-    private static final EucEntityId 納入_EUC_ENTITY_ID = new EucEntityId("DBB200010");
-    private static final RString 納入_EUCファイル名 = new RString("NonyuTsuchishoHonsanteiHakkoIchiranData.csv");
+    private static final EucEntityId 納入_EUC_ENTITY_ID = new EucEntityId("DBB200016");
+    private static final RString 納入_EUCファイル名 = new RString("HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranData.csv");
     private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
     private static final RString 帳票タイプ_期毎 = new RString("期毎タイプ");
     private static final RString 全件異動分区分_全件 = new RString("全件");

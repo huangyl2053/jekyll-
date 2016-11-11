@@ -30,7 +30,6 @@
         "effectiveDate",
         "configValue",
         "changeLog",
-        "insertTimestamp",
         "lasdecCode")
         VALUES 
         (
@@ -41,7 +40,6 @@
         #{effectiveDate},
         #{configValue},
         #{changeLog},
-        #{insertTimestamp},
         #{lasdecCode}
         )
     </insert> 

@@ -77,6 +77,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -176,6 +177,18 @@ public class KijunShunyuShinseiTourokuHandler {
     }
 
     /**
+     * 保存するボタン制御
+     *
+     */
+    public void set保存するボタンDisabled() {
+        if (div.getDgIchiran().getDataSource().isEmpty() || !is入力()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, false);
+        }
+    }
+
+    /**
      * 画面初期化のメソッドです。
      *
      * @param 被保険者番号 HihokenshaNo
@@ -192,10 +205,10 @@ public class KijunShunyuShinseiTourokuHandler {
         Map<RString, List<KijunShunyugakuTekiyoKanri>> 基準収入Map = new HashMap<>();
         if (被保険者台帳 == null) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace(
-                    MESSAGE_被保険者.toString(), MESSAGE_処理.toString()).evaluate());
+                    MESSAGE_被保険者.toString(), MESSAGE_処理.toString()));
         } else if (被保険者台帳.is論理削除フラグ()) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace(
-                    MESSAGE_被保険者.toString(), MESSAGE_処理.toString()).evaluate());
+                    MESSAGE_被保険者.toString(), MESSAGE_処理.toString()));
         } else {
             div.getIchiran().getCcdKaigoAtenaInfo().initialize(識別コード);
             List<KijunShunyugakuTekiyoKanri> 基準収入額適用管理情報List = KijunShunyuShinseiTourokuManager
@@ -312,6 +325,9 @@ public class KijunShunyuShinseiTourokuHandler {
             if (世帯基準日 != null) {
                 HihokenshaDaicho 被保険者台帳情報 = HihokenshaDaichoManager.createInstance().find被保険者台帳(
                         被保険者番号, 世帯基準日);
+                if (被保険者台帳情報 == null) {
+                    continue;
+                }
                 ShikibetsuCode 識別コード = 被保険者台帳情報.get識別コード();
                 基準収入額データ.set識別コード(識別コード);
                 IShikibetsuTaishoFinder 識別対象Finder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
@@ -366,6 +382,7 @@ public class KijunShunyuShinseiTourokuHandler {
             削除Row.setCancelButtonState(DataGridButtonState.Enabled);
             削除Row.setDeleteButtonState(DataGridButtonState.Disabled);
             削除Row.setModifyButtonState(DataGridButtonState.Disabled);
+            削除Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
         }
     }
 
@@ -378,6 +395,7 @@ public class KijunShunyuShinseiTourokuHandler {
         取消Row.setCancelButtonState(DataGridButtonState.Disabled);
         取消Row.setDeleteButtonState(DataGridButtonState.Enabled);
         取消Row.setModifyButtonState(DataGridButtonState.Enabled);
+        取消Row.setRowBgColor(DataGridCellBgColor.bgColorNormal);
     }
 
     /**
@@ -425,7 +443,9 @@ public class KijunShunyuShinseiTourokuHandler {
             div.getMeisai().getTxtShinseiYMD().setValue(toFlexibleDate(修正Row.getShinseiYMD()));
             div.getMeisai().getTxtShinseishoSakuseiYMD().setValue(toFlexibleDate(修正Row.getShinseishoSakuseiYMD()));
             div.getMeisai().getTxtSetaiKazei().setValue(修正Row.getSetaiKazei());
-            div.getMeisai().getTxtTekiyoStartYM().setValue(toFlexibleDate(修正Row.getTekiyoKaishiYM().substring(NUM_0, NUM_6)));
+            if (修正Row.getTekiyoKaishiYM() != null && !修正Row.getTekiyoKaishiYM().isEmpty()) {
+                div.getMeisai().getTxtTekiyoStartYM().setValue(toFlexibleDate(修正Row.getTekiyoKaishiYM().substring(NUM_0, NUM_6)));
+            }
             if (修正Row.getSanteiKijunGaku() != null && !修正Row.getSanteiKijunGaku().isEmpty()) {
                 div.getMeisai().getDdlSanteiKijunGaku().setSelectedValue(修正Row.getSanteiKijunGaku().concat(KEY_円));
             } else {
@@ -458,7 +478,7 @@ public class KijunShunyuShinseiTourokuHandler {
         div.getMeisai().getTxtSetaiCode().setDisabled(flag);
         div.getMeisai().getTxtShoriNendo().setDisabled(flag);
         div.getMeisai().getTxtSetaiinHaakuKijunYMD().setDisabled(flag);
-        div.getMeisai().getTxtShinseiYMD().setDisabled(flag);
+        div.getMeisai().getTxtShinseiYMD().setDisabled(false);
         div.getMeisai().getTxtShinseishoSakuseiYMD().setDisabled(flag);
         div.getMeisai().getBtnSetaiSaiSanshutsu().setDisabled(flag);
     }
@@ -471,7 +491,6 @@ public class KijunShunyuShinseiTourokuHandler {
         div.getMeisai().getTxtShinseishoSakuseiYMD().clearValue();
         div.getMeisai().getTxtSetaiKazei().clearValue();
         div.getMeisai().getTxtTekiyoStartYM().clearValue();
-        div.getMeisai().getTxtTekiyoEndYM().clearValue();
         div.getMeisai().getTxtKetteiYMD().clearValue();
         div.getMeisai().getTxtKetteiTsuchishoHakkoYMD().clearValue();
         div.getMeisai().getTxtUnder16().clearValue();
@@ -526,6 +545,7 @@ public class KijunShunyuShinseiTourokuHandler {
     private void 修正状態定義() {
         div.getMeisai().getTxtKetteiTsuchishoHakkoYMD().setReadOnly(true);
         div.getMeisai().getBtnSetaiSaiSanshutsu().setDisabled(true);
+        div.getMeisai().getTxtShinseiYMD().setReadOnly(false);
         div.getMeisai().getTxtUnder16().setReadOnly(false);
         div.getMeisai().getTxtOver16().setReadOnly(false);
     }
@@ -625,6 +645,26 @@ public class KijunShunyuShinseiTourokuHandler {
         }
     }
 
+    /**
+     * 所得状況ボタン押した時、状況隠し項目再設定
+     */
+    public void set所得状況隠し項目() {
+        FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+        FlexibleDate 基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
+        div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(処理年度));
+        div.getMeisai().setHdnHenkomaeSetaiinHaakuKijunYMD(DataPassingConverter.serialize(基準日));
+    }
+
+    /**
+     * 12/31状況ボタン押した時、状況隠し項目再設定
+     */
+    public void set1231状況隠し項目() {
+        FlexibleYear 処理年度 = new FlexibleYear(div.getMeisai().getTxtShoriNendo().getValue().toString().substring(NUM_0, NUM_4));
+        FlexibleDate 計算基準日 = new FlexibleDate(処理年度.minusYear(NUM_1).toDateString().concat(KEY_月日).toString());
+        div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(計算基準日));
+        div.getMeisai().setHdnHenkomaeSetaiinHaakuKijunYMD(DataPassingConverter.serialize(計算基準日));
+    }
+
     private void set隠し項目(ShikibetsuCode 識別コード) {
         RString 世帯コード = div.getMeisai().getTxtSetaiCode().getValue();
         FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
@@ -648,7 +688,13 @@ public class KijunShunyuShinseiTourokuHandler {
         int count = NUM_0;
         List<SetaiinJoho> 世帯員情報List = SetaiinFinder.createInstance().get世帯員情報By識別コード(識別コード, 世帯員把握基準日);
         List<HihokenshaDaicho> 被保険者台帳情報List = new ArrayList<>();
+        List<ShikibetsuCode> 識別コードList = new ArrayList<>();
         for (SetaiinJoho 世帯員情報 : 世帯員情報List) {
+            if (識別コードList.contains(世帯員情報.get識別対象().get識別コード())) {
+                continue;
+            } else {
+                識別コードList.add(世帯員情報.get識別対象().get識別コード());
+            }
             HihokenshaDaicho 最新被保険者台帳 = HihokenshaDaichoManager.createInstance().get最新被保険者台帳(new LasdecCode(
                     ControlDataHolder.getReamsDonyuDantaiCode().getColumnValue()), 世帯員情報.get識別対象().get識別コード());
             if (最新被保険者台帳 != null && KEY_1号.equals(最新被保険者台帳.get被保険者区分コード())) {
@@ -662,17 +708,17 @@ public class KijunShunyuShinseiTourokuHandler {
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             if (世帯員所得List == null || 世帯員所得List.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                        .replace(MESSAGE_登録されている住民.replace(MESSAGE_XXXX, システム日付).toString()).evaluate());
+                        .replace(MESSAGE_登録されている住民.replace(MESSAGE_XXXX, システム日付).toString()));
             } else if (is非課税(世帯員所得List)) {
                 throw new ApplicationException(DbzErrorMessages.実行不可.getMessage()
-                        .replace(MESSAGE_世帯課税区分.toString(), MESSAGE_登録.toString()).evaluate());
+                        .replace(MESSAGE_世帯課税区分.toString(), MESSAGE_登録.toString()));
             } else {
-                count = count + set基準収入額データ(世帯員所得List, 基準収入額データList, count, 世帯員把握基準日);
+                count = count + set基準収入額データ(世帯員所得List, 基準収入額データList, 世帯員把握基準日);
             }
         }
         if (NUM_0 == count) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage()
-                    .replace(MESSAGE_世帯員に第１号被保険者.toString(), MESSAGE_世帯員を表示.toString()).evaluate());
+                    .replace(MESSAGE_世帯員に第１号被保険者.toString(), MESSAGE_世帯員を表示.toString()));
         }
         if (!基準収入額データList.isEmpty()) {
             sort基準収入額データ(基準収入額データList);
@@ -682,11 +728,11 @@ public class KijunShunyuShinseiTourokuHandler {
 
     private int set基準収入額データ(List<SetaiinShotoku> 世帯員所得List,
             List<KijunShunyuShinseiDate> 基準収入額データList,
-            int count,
             FlexibleDate 世帯員把握基準日) {
         KijunShunyuShinseiDate 基準収入額データ;
         FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
         FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
+        int count = NUM_0;
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
             HihokenshaNo 被保険者番号 = 世帯員所得.get被保険者番号();
             基準収入額データ = new KijunShunyuShinseiDate();
@@ -706,7 +752,7 @@ public class KijunShunyuShinseiTourokuHandler {
             基準収入額データ.set年金_給与以外の収入(null);
             int 受給者台帳カウント = KijunShunyuShinseiTourokuManager.createInstance().get受給(被保険者番号,
                     世帯員把握基準日, true);
-            if (NUM_1 < 受給者台帳カウント) {
+            if (NUM_0 < 受給者台帳カウント) {
                 基準収入額データ.set受給(KEY_受給);
                 count = count + NUM_1;
             } else {
@@ -715,7 +761,7 @@ public class KijunShunyuShinseiTourokuHandler {
 
             int 事業対象者カウント = KijunShunyuShinseiTourokuManager.createInstance().get事業対象(
                     被保険者番号, 世帯員把握基準日);
-            if (NUM_1 < 事業対象者カウント) {
+            if (NUM_0 < 事業対象者カウント) {
                 基準収入額データ.set事業対象(KEY_事業対象);
                 count = count + NUM_1;
             } else {
@@ -858,6 +904,7 @@ public class KijunShunyuShinseiTourokuHandler {
             削除Row.setRowState(RowState.Deleted);
             削除Row.setCancelButtonState(DataGridButtonState.Enabled);
             削除Row.setDeleteButtonState(DataGridButtonState.Disabled);
+            削除Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
         }
     }
 
@@ -869,6 +916,7 @@ public class KijunShunyuShinseiTourokuHandler {
         取消Row.setRowState(RowState.Modified);
         取消Row.setCancelButtonState(DataGridButtonState.Disabled);
         取消Row.setDeleteButtonState(DataGridButtonState.Enabled);
+        取消Row.setRowBgColor(DataGridCellBgColor.bgColorNormal);
     }
 
     /**
@@ -937,7 +985,7 @@ public class KijunShunyuShinseiTourokuHandler {
         for (KijunShunyugakuDate 選択世帯員 : 選択世帯員List) {
             if (識別コードList.contains(選択世帯員.get識別コード())) {
                 throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage()
-                        .replace(MESSAGE_識別コード.replace(MESSAGE_XXXX, 選択世帯員.get識別コード()).toString()).evaluate());
+                        .replace(MESSAGE_識別コード.replace(MESSAGE_XXXX, 選択世帯員.get識別コード()).toString()));
             }
         }
         set世帯員(選択世帯員List, rowList);
@@ -1048,7 +1096,9 @@ public class KijunShunyuShinseiTourokuHandler {
         row.setShinseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseiYMD().getValue()));
         row.setShinseishoSakuseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseishoSakuseiYMD().getValue()));
         row.setTekiyoKaishiYM(get適用開始(div.getMeisai().getTxtTekiyoStartYM().getValue()));
-        row.setSanteiKijunGaku(div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue().substring(NUM_0, NUM_6));
+        if (div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue().length() >= NUM_6) {
+            row.setSanteiKijunGaku(div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue().substring(NUM_0, NUM_6));
+        }
         row.setKetteiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtKetteiYMD().getValue()));
         row.setKetteiTsuchishoHakkoYMD(toWarekiHalf_Zero(div.getMeisai().getTxtKetteiTsuchishoHakkoYMD().getValue()));
         row.setSetaiKazei(div.getMeisai().getTxtSetaiKazei().getValue());
@@ -1060,7 +1110,7 @@ public class KijunShunyuShinseiTourokuHandler {
     }
 
     private RString get適用開始(FlexibleDate 適用開始) {
-        if (適用開始 == null) {
+        if (適用開始 == null || 適用開始.toString().isEmpty()) {
             return RString.EMPTY;
         }
         return toWarekiHalf_Zero(new FlexibleYearMonth(適用開始.toString().substring(NUM_0, NUM_6)));
@@ -1173,22 +1223,21 @@ public class KijunShunyuShinseiTourokuHandler {
             KijunShunyuShinseiTourokuDiv div,
             DBC1000062TransitionEventName eventName,
             HihokenshaNo 被保険者番号) {
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                前排他キーの解除(被保険者番号.getColumnValue());
-                return ResponseData.of(div).forwardWithEventName(eventName).respond();
-            } else {
-                return ResponseData.of(div).respond();
-            }
-        } else {
+        if (被保険者番号 == null && 被保険者番号.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(eventName).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            前排他キーの解除(被保険者番号.getColumnValue());
+            return ResponseData.of(div).forwardWithEventName(eventName).respond();
+        } else {
+            return ResponseData.of(div).respond();
         }
     }
 
@@ -1465,5 +1514,14 @@ public class KijunShunyuShinseiTourokuHandler {
             }
         }
         return true;
+    }
+
+    private boolean is入力() {
+        for (dgIchiran_Row row : div.getDgIchiran().getDataSource()) {
+            if (!RowState.Unchanged.equals(row.getRowState())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

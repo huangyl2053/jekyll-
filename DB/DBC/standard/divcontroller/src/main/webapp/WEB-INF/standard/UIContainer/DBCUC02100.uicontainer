@@ -47,7 +47,7 @@
      "layoutName": "DBC0210011",
      "layoutTitle": "受給者異動連絡票新規登録",
      "eventName": "検索条件",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

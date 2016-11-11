@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC8130011
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGaku;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuHolder;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGaku;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuIdentifier;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
+import jp.co.ndensan.reams.db.dbc.business.core.kogaku.JigyoKogakuGassanJikofutangakuHodler;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.JigyoKogakuGassanJikofutangakuHosei;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
@@ -22,10 +22,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.Jiko
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.dgJohoIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8130011.JikoFutangakuHoseiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8130011.JikoFutangakuHoseiValidationHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuGassanJikoFutanGakuManager;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.JigyoKogakuGassanJikoFutanGakuManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.SogoJigyoTaishoshaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jikofutangakuhosei.JikoFutangakuHoseiFinder;
-import jp.co.ndensan.reams.db.dbc.service.core.jikofutangakuhosei.JikoFutangakuHoseiManager;
+import jp.co.ndensan.reams.db.dbc.service.core.jikofutangakuhosei.JikoFutangakuSaveManager;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -99,8 +99,8 @@ public class JikoFutangakuHosei {
         SogoJigyoTaishoshaManager 総合事業対象者manager = new SogoJigyoTaishoshaManager();
         List<SogoJigyoTaishosha> 総合事業対象者List
                 = 総合事業対象者manager.get総合事業対象者情報(被保険者番号);
-        KogakuGassanJikoFutanGakuManager 高額合算manager = new KogakuGassanJikoFutanGakuManager();
-        List<KogakuGassanJikoFutanGaku> 高額合算List = 高額合算manager.getBy被保険者番号(被保険者番号);
+        JigyoKogakuGassanJikoFutanGakuManager 高額合算manager = new JigyoKogakuGassanJikoFutanGakuManager();
+        List<JigyoKogakuGassanJikoFutanGaku> 高額合算List = 高額合算manager.getBy被保険者番号(被保険者番号);
 
         if (受給者台帳List.isEmpty() && 総合事業対象者List.isEmpty() && !ResponseHolder.isReRequest()) {
             throw new ApplicationException(
@@ -125,20 +125,21 @@ public class JikoFutangakuHosei {
     public ResponseData<JikoFutangakuHoseiDiv> onClick_chkRirekiHyouji(JikoFutangakuHoseiDiv div) {
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 対象者.get被保険者番号();
-        List<KogakuGassanJikoFutanGaku> resultList;
+        List<JigyoKogakuGassanJikoFutanGaku> resultList;
         List<RString> selectedKeys = div.getJikoFutangakuHoseiList()
                 .getChkRirekiHyouji().getSelectedKeys();
         if (Collections.EMPTY_LIST.equals(selectedKeys)) {
             ViewStateHolder.put(ViewStateKeys.一覧データ, CODE_ZERO);
             JikoFutangakuHoseiFinder finder = JikoFutangakuHoseiFinder.createInstance();
-            resultList = finder.selectJyutakukaisyuList(被保険者番号).records();
+            resultList = finder.selectList(被保険者番号).records();
         } else {
             ViewStateHolder.put(ViewStateKeys.一覧データ, CODE_ONE);
-            KogakuGassanJikoFutanGakuManager manager = new KogakuGassanJikoFutanGakuManager();
+            JigyoKogakuGassanJikoFutanGakuManager manager = new JigyoKogakuGassanJikoFutanGakuManager();
             resultList = manager.getBy被保険者番号(被保険者番号);
         }
-        ViewStateHolder.put(ViewStateKeys.高額合算自己負担額情報,
-                new KogakuGassanJikoFutanGakuHolder(resultList));
+        JigyoKogakuGassanJikofutangakuHodler hodler = new JigyoKogakuGassanJikofutangakuHodler();
+        hodler.set高額合算自己負担額List(resultList);
+        ViewStateHolder.put(ViewStateKeys.高額合算自己負担額情報, hodler);
         JikoFutangakuHoseiHandler handler = getHandler(div);
         if (resultList != null) {
             handler.onClick_chkRirekiHyouji(resultList, 被保険者番号, 対象者.get識別コード());
@@ -163,8 +164,8 @@ public class JikoFutangakuHosei {
         if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
             return ResponseData.of(div).respond();
         }
-        KogakuGassanJikoFutanGakuHolder 高額合算情報 = ViewStateHolder.get(
-                ViewStateKeys.高額合算自己負担額情報, KogakuGassanJikoFutanGakuHolder.class);
+        JigyoKogakuGassanJikofutangakuHodler 高額合算情報 = ViewStateHolder.get(
+                ViewStateKeys.高額合算自己負担額情報, JigyoKogakuGassanJikofutangakuHodler.class);
         dgJohoIchiran_Row row = div.getDgJohoIchiran().getClickedItem();
         int 履歴番号 = Integer.parseInt(row.getTxtRirekiNo().toString());
         FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
@@ -172,7 +173,7 @@ public class JikoFutangakuHosei {
         RString 支給申請書整理番号 = row.getTxtShikyuShinseishoSeiriNo();
         KogakuGassanJikoFutanGakuIdentifier identifier = new KogakuGassanJikoFutanGakuIdentifier(
                 対象者.get被保険者番号(), 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-        KogakuGassanJikoFutanGaku result = 高額合算情報.getKogakuGassanJikoFutanGaku(identifier);
+        JigyoKogakuGassanJikoFutanGaku result = 高額合算情報.get高額合算申請書(identifier);
         ViewStateHolder.put(ViewStateKeys.高額合算自己負担額, result);
         ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額補正保持Entity, null);
         div.getBtnJikofutangakuJohoNyuryoku().setIconNameEnum(IconName.NONE);
@@ -215,8 +216,8 @@ public class JikoFutangakuHosei {
     public ResponseData<JikoFutangakuHoseiDiv> onClick_btnJikofutangakuJohoNiModoru(
             JikoFutangakuHoseiDiv div) {
         JikoFutangakuHoseiHandler handler = getHandler(div);
-        KogakuGassanJikoFutanGaku result = ViewStateHolder.get(
-                ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
+        JigyoKogakuGassanJikoFutanGaku result = ViewStateHolder.get(
+                ViewStateKeys.高額合算自己負担額, JigyoKogakuGassanJikoFutanGaku.class);
         boolean 内容が編集フラグ = handler.onClick_btnJikofutangakuJohoNiModoru(result);
         if (内容が編集フラグ && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
@@ -250,8 +251,8 @@ public class JikoFutangakuHosei {
     public ResponseData<JikoFutangakuHoseiDiv> onClick_btnJikofutangakuJohoNyuryoku(
             JikoFutangakuHoseiDiv div) {
         JikoFutangakuHoseiHandler handler = getHandler(div);
-        KogakuGassanJikoFutanGaku result = ViewStateHolder.get(
-                ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
+        JigyoKogakuGassanJikoFutanGaku result = ViewStateHolder.get(
+                ViewStateKeys.高額合算自己負担額, JigyoKogakuGassanJikoFutanGaku.class);
         result = handler.編集処理対象から画面(result);
         ViewStateHolder.put(ViewStateKeys.高額合算自己負担額, result);
         JigyoKogakuGassanJikofutangakuHosei 自己負担額保持 = ViewStateHolder.get(
@@ -275,8 +276,8 @@ public class JikoFutangakuHosei {
      */
     public ResponseData<JikoFutangakuHoseiDiv> onClick_btnReSearch(JikoFutangakuHoseiDiv div) {
         JikoFutangakuHoseiHandler handler = getHandler(div);
-        KogakuGassanJikoFutanGaku result = ViewStateHolder.get(
-                ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
+        JigyoKogakuGassanJikoFutanGaku result = ViewStateHolder.get(
+                ViewStateKeys.高額合算自己負担額, JigyoKogakuGassanJikoFutanGaku.class);
         boolean 内容が編集フラグ = handler.onClick_btnJikofutangakuJohoNiModoru(result);
         if (内容が編集フラグ && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
@@ -304,8 +305,8 @@ public class JikoFutangakuHosei {
     public ResponseData<JikoFutangakuHoseiDiv> onClick_btnTaishoshaModoru(
             JikoFutangakuHoseiDiv div) {
         JikoFutangakuHoseiHandler handler = getHandler(div);
-        KogakuGassanJikoFutanGaku result = ViewStateHolder.get(
-                ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
+        JigyoKogakuGassanJikoFutanGaku result = ViewStateHolder.get(
+                ViewStateKeys.高額合算自己負担額, JigyoKogakuGassanJikoFutanGaku.class);
         boolean 内容が編集フラグ = handler.onClick_btnJikofutangakuJohoNiModoru(result);
         if (内容が編集フラグ && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
@@ -368,18 +369,18 @@ public class JikoFutangakuHosei {
             return ResponseData.of(div).respond();
         }
         JikoFutangakuHoseiHandler handler = getHandler(div);
-        KogakuGassanJikoFutanGaku 負担額 = ViewStateHolder.get(
-                ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
+        JigyoKogakuGassanJikoFutanGaku 負担額 = ViewStateHolder.get(
+                ViewStateKeys.高額合算自己負担額, JigyoKogakuGassanJikoFutanGaku.class);
         負担額 = handler.編集処理対象から画面(負担額);
         負担額 = 負担額.createBuilderForEdit()
                 .setリアル補正実施年月日(FlexibleDate.getNowDate())
                 .build();
-        List<KogakuGassanJikoFutanGakuMeisai> 負担額明細一覧 = null;
+        List<JigyoKogakuGassanJikoFutanGakuMeisai> 負担額明細一覧 = null;
         if (自己負担額保持 != null) {
             負担額 = handler.編集処理対象から保持Entity(負担額, 自己負担額保持);
             負担額明細一覧 = handler.setFutanGakuMeisai(自己負担額保持);
         }
-        JikoFutangakuHoseiManager manager = JikoFutangakuHoseiManager.createInstance();
+        JikoFutangakuSaveManager manager = JikoFutangakuSaveManager.createInstance();
         if (!new RString(UrInformationMessages.正常終了
                 .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             manager.保存(負担額, 負担額明細一覧);
@@ -420,7 +421,7 @@ public class JikoFutangakuHosei {
 
     private JigyoKogakuGassanJikofutangakuHosei set自己負担額保持回目１(
             JigyoKogakuGassanJikofutangakuHosei 自己負担額保持,
-            KogakuGassanJikoFutanGaku result) {
+            JigyoKogakuGassanJikoFutanGaku result) {
         自己負担額保持.set被保険者番号(result.get被保険者番号());
         自己負担額保持.set対象年度(result.get対象年度());
         自己負担額保持.set保険者番号(result.get保険者番号());

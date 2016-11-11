@@ -73,6 +73,16 @@ public class NenreitotatsuKakuninListItem {
     private final RString listLower_12;
     private final RString listLower_13;
     private final RString listLower_14;
+    private final RString yubinNo;
+    private final RString choikiCode;
+    private final RString banchiCode;
+    private final RString gyoseikuCode;
+    private final RString chiku1;
+    private final RString chiku2;
+    private final RString chiku3;
+    private final RString shimei50onKana;
+    private final RString seinengappiYMD;
+    private final RString gender;
 
     /**
      *
@@ -132,6 +142,16 @@ public class NenreitotatsuKakuninListItem {
      * @param listLower_12 異動情報データ4
      * @param listLower_13 異動情報データ5
      * @param listLower_14 異動情報データ6
+     * @param yubinNo 郵便番号
+     * @param choikiCode 町域コード
+     * @param banchiCode 番地コード
+     * @param gyoseikuCode 行政区コード
+     * @param chiku1 地区１
+     * @param chiku2 地区２
+     * @param chiku3 地区３
+     * @param shimei50onKana 氏名５０音カナ
+     * @param seinengappiYMD 生年月日
+     * @param gender 性別
      */
     public NenreitotatsuKakuninListItem(
             RString printTimeStamp,
@@ -189,7 +209,17 @@ public class NenreitotatsuKakuninListItem {
             RString listLower_11,
             RString listLower_12,
             RString listLower_13,
-            RString listLower_14
+            RString listLower_14,
+            RString yubinNo,
+            RString choikiCode,
+            RString banchiCode,
+            RString gyoseikuCode,
+            RString chiku1,
+            RString chiku2,
+            RString chiku3,
+            RString shimei50onKana,
+            RString seinengappiYMD,
+            RString gender
     ) {
         this.printTimeStamp = printTimeStamp;
         this.taishoJohotitle = taishoJohotitle;
@@ -247,6 +277,15 @@ public class NenreitotatsuKakuninListItem {
         this.listLower_12 = listLower_12;
         this.listLower_13 = listLower_13;
         this.listLower_14 = listLower_14;
-
+        this.yubinNo = yubinNo;
+        this.choikiCode = choikiCode;
+        this.banchiCode = banchiCode;
+        this.gyoseikuCode = gyoseikuCode;
+        this.chiku1 = chiku1;
+        this.chiku2 = chiku2;
+        this.chiku3 = chiku3;
+        this.shimei50onKana = shimei50onKana;
+        this.seinengappiYMD = seinengappiYMD;
+        this.gender = gender;
     }
 }

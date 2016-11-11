@@ -395,4 +395,28 @@ public class AtenaSealReportBusiness {
     private RString samabunShimei22;
     private RString customerBarCode11;
     private RString customerBarCode10;
+    private RString 識別コード1;
+    private RString 識別コード2;
+    private RString 識別コード3;
+    private RString 識別コード4;
+    private RString 識別コード5;
+    private RString 識別コード6;
+    private RString 識別コード7;
+    private RString 識別コード8;
+    private RString 識別コード9;
+    private RString 識別コード10;
+    private RString 識別コード11;
+    private RString 識別コード12;
+    private RString 住所;
+    private RString 住所1;
+    private RString 住所2;
+    private RString 住所3;
+    private RString 住所4;
+    private RString 住所5;
+    private RString 住所6;
+    private RString 住所7;
+    private RString 住所8;
+    private RString 住所9;
+    private RString 住所10;
+    private RString 住所11;
 }

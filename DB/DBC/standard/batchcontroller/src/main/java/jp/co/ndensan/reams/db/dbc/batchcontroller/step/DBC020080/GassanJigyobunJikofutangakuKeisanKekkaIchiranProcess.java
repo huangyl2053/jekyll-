@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanjigyobunjikofutangakuke
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -79,6 +80,7 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranProcess extends BatchK
         SubGyomuCode subGyomuCode = SubGyomuCode.DBC介護給付;
         util = new DBC040010DataUtil();
         市町村コード = parameter.get市町村コード();
+        市町村名称 = AssociationFinderFactory.createInstance().getAssociation(市町村コード).get市町村名();
         出力順Map = new HashMap<>();
         改頁Map = new HashMap<>();
         Long 帳票出力順ID = parameter.get帳票出力順ID();
@@ -138,13 +140,8 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranProcess extends BatchK
 
     @Override
     protected void createWriter() {
-        if (!processCore.is改頁()) {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).create();
-        } else {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).addBreak(
-                    new DBC200203GassanJigyobunJikofutangakuKeisanKekkaIchiranPageBreak(processCore.改頁項())).create();
-        }
-
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).addBreak(
+                new DBC200203GassanJigyobunJikofutangakuKeisanKekkaIchiranPageBreak(processCore.改頁項())).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 

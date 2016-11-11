@@ -30,6 +30,7 @@ public class NenkinTokuchoInsertEditor {
     private static final int INT_4 = 4;
     private static final int INT_6 = 6;
     private static final RString RSTRING_12 = new RString("12");
+    private static final RString RSTRING_05 = new RString("05");
 
     /**
      * DB出力データを編集します。
@@ -54,9 +55,10 @@ public class NenkinTokuchoInsertEditor {
         johoEntity.setRenban(parameter.getRenban());
         johoEntity.setShoriTimestamp(処理日時);
         johoEntity.setRenkeiShubetsu(連携種別);
-        if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode())
-                || TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode())) {
+        if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode())) {
             johoEntity.setHosokuTsuki(get捕捉月(処理対象年月));
+        } else if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode())) {
+            johoEntity.setHosokuTsuki(RSTRING_05);
         } else {
             johoEntity.setHosokuTsuki(RString.EMPTY);
         }

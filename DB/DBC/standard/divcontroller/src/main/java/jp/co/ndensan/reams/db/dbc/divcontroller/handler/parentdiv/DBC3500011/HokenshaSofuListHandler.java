@@ -232,15 +232,6 @@ public class HokenshaSofuListHandler {
     }
 
     /**
-     * 「アップロード」ボタンのメソッドです。
-     *
-     * @param file FileData
-     */
-    public void upLoadCsv(FileData file) {
-
-    }
-
-    /**
      * 処理年月取得のメソッドです。
      *
      * @param データ種別 RString
@@ -269,9 +260,10 @@ public class HokenshaSofuListHandler {
      * @param file FileData
      * @param データレコード List<RString>
      * @param データ種別 RString
+     * @return RString
      */
-    public void コントロールレコード配列内容チェック(
-            List<RString> コントロールレコード, FileData file, List<RString> データレコード, RString データ種別) throws ApplicationException {
+    public RString コントロールレコード配列内容チェック(
+            List<RString> コントロールレコード, FileData file, List<RString> データレコード, RString データ種別) {
         if (コントロールレコード.size() != 十二) {
             deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連データフォーマット不正.getMessage());
@@ -298,6 +290,7 @@ public class HokenshaSofuListHandler {
             deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連ボリューム連番不正.getMessage());
         }
+        return 保険者番号;
     }
 
     private RString 保険者番号取得(List<RString> データレコード, RString データ種別) {
@@ -344,7 +337,12 @@ public class HokenshaSofuListHandler {
         return 保険者番号;
     }
 
-    private void deleteEntitys(FileData file) {
+    /**
+     * deleteEntitysのメソッドです。
+     *
+     * @param file FileData
+     */
+    public void deleteEntitys(FileData file) {
         List<UzT0885SharedFileEntryEntity> uzt0885EntityList = SharedFile.searchSharedFile(file.getFileName());
         for (UzT0885SharedFileEntryEntity entity : uzt0885EntityList) {
             ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(
@@ -427,7 +425,7 @@ public class HokenshaSofuListHandler {
      */
     public RString 審査年月チェック(FileData file, RString データ種別, FlexibleYearMonth 審査年月の翌月,
             FlexibleYearMonth 審査年月, KokuhorenInterfaceKanri kanri) {
-        if (審査年月の翌月 != null && kanri != null && !(審査年月の翌月.isEmpty() && kanri.get処理状態区分().equals(取消3))) {
+        if (審査年月 != null && 審査年月の翌月 != null && kanri != null && !(審査年月の翌月.isEmpty() && kanri.get処理状態区分().equals(取消3))) {
             if (new RString(DbcQuestionMessages.国保連先月処理なし取込漏れ確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {

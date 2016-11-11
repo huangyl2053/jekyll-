@@ -93,7 +93,6 @@ public class KogakuServicehiDetailDivHandler {
             if (サービス年月 != null && !サービス年月.isEmpty()) {
                 div.getTxtTeikyoYM().setValue(new RDate(サービス年月.toString()));
             }
-            div.getTplShinseisha().getTxtShinseiYMD().setValue(new RDate(RDate.getNowDate().toString()));
             div.getTplShinseisha().getRdbShinseisyaKubun().setSelectedKey(KEY0);
             div.getRdbShikyuKubun().setSelectedKey(KEY0);
             div.getRdbShinsaHohoKubun().setSelectedKey(KEY0);
@@ -134,6 +133,7 @@ public class KogakuServicehiDetailDivHandler {
         if (0 == KougakuSabisuhiShousaiNaiyou.createInstance().getTenshutsuNyuuHantei(被保険者番号, サービス年月)) {
             div.getTplShinseisha().getTxtHokenJyaBango().setDisabled(true);
         }
+        div.getTxtSetaiSyuyakuBango().setValue(RString.EMPTY);
     }
 
     /**
@@ -152,6 +152,7 @@ public class KogakuServicehiDetailDivHandler {
      * clear画面内容
      */
     public void clear画面内容() {
+        div.getTplShinseisha().getTxtShinseiYMD().clearValue();
         div.getTxtKanriBango().clearValue();
         div.getTxtShimeiKanji().clearValue();
         div.getTxtShimeiKana().clearValue();
@@ -171,6 +172,15 @@ public class KogakuServicehiDetailDivHandler {
      */
     public void set画面tap() {
         div.getTabKogakuServicehiDetail().setSelectedItem(div.getTplShinseisha());
+    }
+
+    /**
+     * 提供年月を取得します。
+     *
+     * @return RDate
+     */
+    public RDate get提供年月() {
+        return div.getTxtTeikyoYM().getValue();
     }
 
     /**
@@ -237,7 +247,11 @@ public class KogakuServicehiDetailDivHandler {
      * @return RString
      */
     public RString get電話番号() {
-        return div.getTxtTelNo().getDomain().value();
+        RString 電話番号 = RString.EMPTY;
+        if (div.getTxtTelNo() != null && div.getTxtTelNo().getDomain() != null && !div.getTxtTelNo().getDomain().isEmpty()) {
+            電話番号 = div.getTxtTelNo().getDomain().value();
+        }
+        return 電話番号;
     }
 
     /**
@@ -710,16 +724,20 @@ public class KogakuServicehiDetailDivHandler {
                     result.get高額介護サービス費支給申請Entity().get支払方法区分コード()));
         }
         para.setKeiyakuNo(result.get高額介護サービス費支給申請Entity().get受領委任契約番号());
-        if (result.get高額介護サービス費支給申請Entity().get支払期間開始年月日() != null) {
+        if (result.get高額介護サービス費支給申請Entity().get支払期間開始年月日() != null
+                && !result.get高額介護サービス費支給申請Entity().get支払期間開始年月日().isEmpty()) {
             para.setStartYMD(new RDate(result.get高額介護サービス費支給申請Entity().get支払期間開始年月日().toString()));
         }
-        if (result.get高額介護サービス費支給申請Entity().get支払期間終了年月日() != null) {
+        if (result.get高額介護サービス費支給申請Entity().get支払期間終了年月日() != null
+                && !result.get高額介護サービス費支給申請Entity().get支払期間終了年月日().isEmpty()) {
             para.setEndYMD(new RDate(result.get高額介護サービス費支給申請Entity().get支払期間終了年月日().toString()));
         }
-        if (result.get高額介護サービス費支給申請Entity().get支払窓口開始時間() != null) {
+        if (result.get高額介護サービス費支給申請Entity().get支払窓口開始時間() != null
+                && !result.get高額介護サービス費支給申請Entity().get支払窓口開始時間().isEmpty()) {
             para.setStartHHMM(new RTime(result.get高額介護サービス費支給申請Entity().get支払窓口開始時間()));
         }
-        if (result.get高額介護サービス費支給申請Entity().get支払窓口終了時間() != null) {
+        if (result.get高額介護サービス費支給申請Entity().get支払窓口終了時間() != null
+                && !result.get高額介護サービス費支給申請Entity().get支払窓口終了時間().isEmpty()) {
             para.setEndHHMM(new RTime(result.get高額介護サービス費支給申請Entity().get支払窓口終了時間()));
         }
         para.setKozaId(result.get高額介護サービス費支給申請Entity().get口座ID());
@@ -736,17 +754,21 @@ public class KogakuServicehiDetailDivHandler {
                     result.get事業高額介護サービス費支給申請Entity().get支払方法区分コード()));
         }
         para.setKeiyakuNo(result.get事業高額介護サービス費支給申請Entity().get受領委任契約番号());
-        if (result.get事業高額介護サービス費支給申請Entity().get支払期間開始年月日() != null) {
+        if (result.get事業高額介護サービス費支給申請Entity().get支払期間開始年月日() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get支払期間開始年月日().isEmpty()) {
             para.setStartYMD(new RDate(result.get事業高額介護サービス費支給申請Entity().
                     get支払期間開始年月日().toString()));
         }
-        if (result.get事業高額介護サービス費支給申請Entity().get支払期間終了年月日() != null) {
+        if (result.get事業高額介護サービス費支給申請Entity().get支払期間終了年月日() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get支払期間終了年月日().isEmpty()) {
             para.setEndYMD(new RDate(result.get事業高額介護サービス費支給申請Entity().get支払期間終了年月日().toString()));
         }
-        if (result.get事業高額介護サービス費支給申請Entity().get支払窓口開始時間() != null) {
+        if (result.get事業高額介護サービス費支給申請Entity().get支払窓口開始時間() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get支払窓口開始時間().isEmpty()) {
             para.setStartHHMM(new RTime(result.get事業高額介護サービス費支給申請Entity().get支払窓口開始時間()));
         }
-        if (result.get事業高額介護サービス費支給申請Entity().get支払窓口終了時間() != null) {
+        if (result.get事業高額介護サービス費支給申請Entity().get支払窓口終了時間() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get支払窓口終了時間().isEmpty()) {
             para.setEndHHMM(new RTime(result.get事業高額介護サービス費支給申請Entity().get支払窓口終了時間()));
         }
         para.setKozaId(result.get事業高額介護サービス費支給申請Entity().get口座ID());

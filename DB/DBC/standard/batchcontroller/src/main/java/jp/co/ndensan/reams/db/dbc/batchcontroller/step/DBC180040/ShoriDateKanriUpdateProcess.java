@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -34,7 +35,6 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
     BatchPermanentTableWriter tableWriter;
     Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
 
-    private static final RString 処理名 = new RString("負担割合証一括発行");
     private static final RString 処理枝番_0000 = new RString("0000");
     private static final RString 処理枝番_0001 = new RString("0001");
     private static final RString 処理枝番_0002 = new RString("0002");
@@ -75,7 +75,7 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
         DbT7022ShoriDateKanriEntity item = new DbT7022ShoriDateKanriEntity();
         item.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         item.setShichosonCode(導入団体クラス.getLasdecCode_());
-        item.setShoriName(処理名);
+        item.setShoriName(ShoriName.負担割合証発行一括.get名称());
         if (定数_ZERO.equals(parameter.get出力対象())) {
             item.setShoriEdaban(処理枝番_0000);
             item.setKijunTimestamp(new YMDHMS(parameter.getバッチ起動時処理日時()));

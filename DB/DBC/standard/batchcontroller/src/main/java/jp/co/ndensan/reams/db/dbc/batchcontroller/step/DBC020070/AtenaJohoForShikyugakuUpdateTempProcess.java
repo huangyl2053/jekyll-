@@ -61,6 +61,7 @@ public class AtenaJohoForShikyugakuUpdateTempProcess extends BatchProcessBase<Sh
         更新用一時.setAtenaShimei(entity.get宛名().getMeisho());
         更新用一時.setSeinengappiYMD(entity.get宛名().getSeinengappiYMD());
         更新用一時.setShichosonCode(entity.get宛名().getGenLasdecCode());
+        更新用一時.setChoikiCode(entity.get宛名().getChoikiCode());
 
         更新用一時.setState(EntityDataState.Modified);
         tempDbWriter.update(更新用一時);

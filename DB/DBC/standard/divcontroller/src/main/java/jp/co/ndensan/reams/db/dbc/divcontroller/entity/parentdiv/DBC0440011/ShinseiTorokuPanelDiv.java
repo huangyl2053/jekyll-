@@ -5,9 +5,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011;
  * 不正な動作の原因になります。
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuServicehiDetail.IKogakuServicehiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuServicehiDetail.KogakuServicehiDetailDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -19,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class ShinseiTorokuPanelDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,8 +30,12 @@ public class ShinseiTorokuPanelDiv extends Panel {
      */
     @JsonProperty("btnSetaiJohoHyoji")
     private Button btnSetaiJohoHyoji;
+    @JsonProperty("btnKogakuMeisaiHyoji")
+    private Button btnKogakuMeisaiHyoji;
     @JsonProperty("lin2")
     private HorizontalLine lin2;
+    @JsonProperty("SetaiJoho")
+    private SetaiJohoDiv SetaiJoho;
     @JsonProperty("ccdKogakuServicehiDetail")
     private KogakuServicehiDetailDiv ccdKogakuServicehiDetail;
 
@@ -58,6 +64,24 @@ public class ShinseiTorokuPanelDiv extends Panel {
     }
 
     /*
+     * getbtnKogakuMeisaiHyoji
+     * @return btnKogakuMeisaiHyoji
+     */
+    @JsonProperty("btnKogakuMeisaiHyoji")
+    public Button getBtnKogakuMeisaiHyoji() {
+        return btnKogakuMeisaiHyoji;
+    }
+
+    /*
+     * setbtnKogakuMeisaiHyoji
+     * @param btnKogakuMeisaiHyoji btnKogakuMeisaiHyoji
+     */
+    @JsonProperty("btnKogakuMeisaiHyoji")
+    public void setBtnKogakuMeisaiHyoji(Button btnKogakuMeisaiHyoji) {
+        this.btnKogakuMeisaiHyoji = btnKogakuMeisaiHyoji;
+    }
+
+    /*
      * getlin2
      * @return lin2
      */
@@ -76,12 +100,38 @@ public class ShinseiTorokuPanelDiv extends Panel {
     }
 
     /*
+     * getSetaiJoho
+     * @return SetaiJoho
+     */
+    @JsonProperty("SetaiJoho")
+    public SetaiJohoDiv getSetaiJoho() {
+        return SetaiJoho;
+    }
+
+    /*
+     * setSetaiJoho
+     * @param SetaiJoho SetaiJoho
+     */
+    @JsonProperty("SetaiJoho")
+    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
+        this.SetaiJoho = SetaiJoho;
+    }
+
+    /*
      * getccdKogakuServicehiDetail
      * @return ccdKogakuServicehiDetail
      */
     @JsonProperty("ccdKogakuServicehiDetail")
     public IKogakuServicehiDetailDiv getCcdKogakuServicehiDetail() {
         return ccdKogakuServicehiDetail;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
+        return this.getSetaiJoho().getCcdSetaiShotokuIchiran();
     }
 
     // </editor-fold>

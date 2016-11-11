@@ -58,7 +58,13 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String IKENSHO_SAKUSEI_IRAI_HAKKOU = "ikenshoSakuseiIraiHakkou";
     private static final String NINTEICHOSAIRAILIST = "ninteiChosaIraiList";
     private static final String SHUJIIIKENSHOSAKUSEIIRAILIST = "shujiiIkenshoSakuseiIraiList";
+    private static final String 認定調査依頼履歴一覧 = "認定調査依頼履歴一覧";
+    private static final String 主治医意見書作成依頼履歴一覧 = "主治医意見書作成依頼履歴一覧";
 
+    @BatchParameter(key = 認定調査依頼履歴一覧, name = "認定調査依頼履歴一覧")
+    private boolean is認定調査依頼履歴一覧;
+    @BatchParameter(key = 主治医意見書作成依頼履歴一覧, name = "主治医意見書作成依頼履歴一覧")
+    private boolean is主治医意見書依頼履歴一覧;
     @BatchParameter(key = NINTEIO_CHOSA_IRAISHO, name = "認定調査依頼書印刷区分")
     private RString ninteioChosaIraisho;
     @BatchParameter(key = NINTEI_CHOSAHYO, name = "認定調査票印刷区分")

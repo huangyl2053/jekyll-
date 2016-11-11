@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -56,6 +57,7 @@ public class SokyuuFuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaisho
     private RString spoolWorkPath;
     private RString fileName;
     private RString reamsLoginID;
+    private boolean flag;
     private CsvWriter<SokyuuFuicchiCsvEntity> csvWriterJunitoJugo;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -84,6 +86,7 @@ public class SokyuuFuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaisho
     @Override
     protected void initialize() {
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+        flag = true;
     }
 
     @Override
@@ -118,6 +121,7 @@ public class SokyuuFuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaisho
 
     @Override
     protected void process(HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
+        flag = false;
         SokyuuFuicchiCsvEntity eucCsvEntity = new SokyuuFuicchiCsvEntity();
         eucCsvEntity(eucCsvEntity, t);
         csvWriterJunitoJugo.writeLine(eucCsvEntity);
@@ -128,6 +132,9 @@ public class SokyuuFuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaisho
     protected void afterExecute() {
         csvWriterJunitoJugo.close();
         manager.spool(fileName);
+        if (flag) {
+            File.deleteIfExists(spoolWorkPath);
+        }
     }
 
     private void eucCsvEntity(SokyuuFuicchiCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {

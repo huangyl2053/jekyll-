@@ -51,7 +51,7 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
      * @param 帳票情報 KogakuKetteiTsuchiShoSealer2Entity
      * @param 文書番号 RString
      * @param 通知書定型文list List<RString>
-     * @param インフォlist List<RString>
+     * @param インフォ RString
      * @param 帳票分類ID ReportId
      * @param 認証者 Ninshosha
      * @param 発行日 RDate
@@ -61,11 +61,11 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
     public SourceDataCollection printSingle(KogakuKetteiTsuchiShoEntity 帳票情報,
             RString 文書番号,
             List<RString> 通知書定型文list,
-            List<RString> インフォlist,
+            RString インフォ,
             ReportId 帳票分類ID, Ninshosha 認証者, RDate 発行日, int 通番) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票情報, 文書番号, 通知書定型文list, インフォlist, 帳票分類ID, 認証者, 発行日, 通番, reportManager);
+            print(帳票情報, 文書番号, 通知書定型文list, インフォ, 帳票分類ID, 認証者, 発行日, 通番, reportManager);
             collection = reportManager.publish();
         }
 
@@ -78,7 +78,7 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
      * @param 帳票情報 KogakuKetteiTsuchiShoEntity
      * @param 文書番号 RString
      * @param 通知書定型文list List<RString>
-     * @param インフォlist List<RString>
+     * @param インフォ RString
      * @param 帳票分類ID ReportId
      * @param 認証者 Ninshosha
      * @param 発行日 RDate
@@ -89,7 +89,7 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
             KogakuKetteiTsuchiShoEntity 帳票情報,
             RString 文書番号,
             List<RString> 通知書定型文list,
-            List<RString> インフォlist,
+            RString インフォ,
             ReportId 帳票分類ID,
             Ninshosha 認証者,
             RDate 発行日,
@@ -129,7 +129,7 @@ public class KogakuKetteiTsuchiShoSealerPrintService {
                     帳票情報,
                     文書番号,
                     通知書定型文list,
-                    インフォlist,
+                    インフォ,
                     認証者ソースデータ,
                     titleList,
                     通番).writeBy(reportSourceWriter);

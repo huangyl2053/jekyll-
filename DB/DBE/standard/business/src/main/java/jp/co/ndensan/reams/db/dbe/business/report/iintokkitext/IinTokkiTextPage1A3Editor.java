@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iintokkitext;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.jimutokkitext.JimuTokkiTextA3Entity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iintokkitext.IinTokkiTextA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
@@ -41,18 +41,18 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
     private static final int INT_12 = 12;
     private static final int INT_13 = 13;
     private static final int INT_14 = 14;
-    private final JimuTokkiTextA3Entity item;
+    private final IchijihanteikekkahyoA3Entity item;
     private final List<RString> 特記事項List;
     private final int index;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link JimuTokkiTextA3Entity}
+     * @param item {@link IchijihanteikekkahyoA3Entity}
      * @param 特記事項List List<RString>
      * @param index int
      */
-    protected IinTokkiTextPage1A3Editor(JimuTokkiTextA3Entity item, List<RString> 特記事項List, int index) {
+    protected IinTokkiTextPage1A3Editor(IchijihanteikekkahyoA3Entity item, List<RString> 特記事項List, int index) {
         this.item = item;
         this.特記事項List = 特記事項List;
         this.index = index;

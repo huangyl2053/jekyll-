@@ -23,7 +23,7 @@
      "layoutName": "DBC0610011",
      "layoutTitle": "福祉用具購入費支給申請一括審査・決定",
      "eventName": "修正",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0600021",

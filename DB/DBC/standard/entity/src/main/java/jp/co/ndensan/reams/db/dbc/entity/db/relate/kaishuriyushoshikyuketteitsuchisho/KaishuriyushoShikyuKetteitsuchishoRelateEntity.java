@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kaishuriyushoshikyuketteitsuchisho;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,4 +21,6 @@ public class KaishuriyushoShikyuKetteitsuchishoRelateEntity {
 
     private RString temp_前回決定日_開始日;
     private RString temp_前回決定日_終了日;
+    private AtenaMeisho 介護住宅改修事業者名称;
+    private JigyoshaNo 介護住宅改修理由書作成事業者番号;
 }

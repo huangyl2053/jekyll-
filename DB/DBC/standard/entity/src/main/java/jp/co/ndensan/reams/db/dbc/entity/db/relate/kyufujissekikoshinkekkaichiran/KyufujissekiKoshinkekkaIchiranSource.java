@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinkekkaichir
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -58,7 +59,6 @@ public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
     public RString listUpper_4;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_5", length = 10, order = 19)
     public RString listUpper_5;
     @ReportItem(name = "listUpper_6", length = 30, order = 20)
@@ -121,6 +121,9 @@ public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
     public RString shichosonCode;
     @ReportItem(name = "kyufuJissekiKubun", length = 10, order = 73)
     public RString kyufuJissekiKubun;
+
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

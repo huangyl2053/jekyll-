@@ -71,6 +71,7 @@ public class FutanGengakuNinteishaListHandler {
             div.getLblTaishoKikan().setDisplayNone(false);
             div.getTxtKazeiHanteiToKijunDate().setDisplayNone(false);
             div.getRadTaishoKikanShitei().setDisplayNone(false);
+            div.getRadTaishoKikanShitei().setSelectedKey(対象年度);
             div.getRadJukyushaKubun().setDisplayNone(true);
             div.getDdlRiyoshaFutanDankai().setDisplayNone(true);
             div.getTxtKijunYMD().setDisplayNone(true);

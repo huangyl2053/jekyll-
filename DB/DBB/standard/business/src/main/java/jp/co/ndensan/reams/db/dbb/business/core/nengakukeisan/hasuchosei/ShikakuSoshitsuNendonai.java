@@ -47,7 +47,8 @@ class ShikakuSoshitsuNendonai implements IHasuChoseiHantei {
                 nengakuHokenryoKeisanParameter.get賦課年度())) + 1) + "0331");
 
         boolean 資格喪失日が年度内に存在するか判定;
-        if (nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日() == null) {
+        if (nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日() == null
+                || nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().isEmpty()) {
             資格喪失日が年度内に存在するか判定 = false;
             return 資格喪失日が年度内に存在するか判定;
         }

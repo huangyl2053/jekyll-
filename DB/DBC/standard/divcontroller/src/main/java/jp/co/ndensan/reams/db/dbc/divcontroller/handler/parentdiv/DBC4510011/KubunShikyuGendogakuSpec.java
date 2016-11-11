@@ -25,10 +25,11 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
     重複の入力チェック {
                 @Override
                 public boolean apply(KubunShikyuGendogakuDiv div) {
-                    if (div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue() == null) {
+                    if (!div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().isDisabled()) {
+                        return SpecHelper.is重複の入力チェック(div);
+                    } else {
                         return true;
                     }
-                    return SpecHelper.is重複の入力チェック(div);
                 }
             },
     /**
@@ -78,21 +79,12 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
         public static boolean is重複の入力チェック(KubunShikyuGendogakuDiv div) {
             List<dgServiceShurui_Row> dataSource = div.getDgServiceShurui().getDataSource();
             RDate startDate = div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue();
-            RDate endDate = div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().getValue();
-            dgServiceShurui_Row selectRow = div.getDgServiceShurui().getClickedItem();
+            RString serviceCode = div.getServiceShuruiShousai().getTxtServiceCode().getValue();
             for (dgServiceShurui_Row item : dataSource) {
-                if (item.equals(selectRow)) {
-                    continue;
-                }
-                if ((!item.getDefaultDataName3().isEmpty()) && item.getDefaultDataName3() != null) {
-                    if (!(isYMCompare(new RDate(item.getDefaultDataName2().toString()),
-                            new RDate(item.getDefaultDataName3().toString()), startDate, endDate))) {
-                        return Boolean.FALSE;
-                    }
-                } else {
-                    if (!(isYMCompare(new RDate(item.getDefaultDataName2().toString()),
-                            null, startDate, endDate))) {
-                        return Boolean.FALSE;
+                if (item.getDefaultDataName1().equals(serviceCode) && (item.getDefaultDataName3() == null
+                        || item.getDefaultDataName3().isEmpty())) {
+                    if (startDate.isBeforeOrEquals(new RDate(item.getDefaultDataName2().toString()))) {
+                        return false;
                     }
                 }
             }
@@ -135,32 +127,5 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
             return !RString.isNullOrEmpty(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue());
         }
 
-        private static boolean isYMCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {
-            if (endTimeRow != null) {
-                if (endDate != null) {
-                    return isYMNotNullCompare(startTimeRow, endTimeRow, startDate, endDate);
-                } else {
-                    if (startTimeRow.isBeforeOrEquals(startDate) && startDate.isBeforeOrEquals(endTimeRow)) {
-                        return false;
-                    }
-                }
-            } else {
-                if (endDate != null) {
-                    if (startDate.isBeforeOrEquals(startTimeRow) && startTimeRow.isBeforeOrEquals(endDate)) {
-                        return false;
-                    }
-                } else {
-                    if (startTimeRow.equals(startDate)) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-        private static boolean isYMNotNullCompare(RDate startTimeRow, RDate endTimeRow, RDate startDate, RDate endDate) {
-            return (!(startTimeRow.isBeforeOrEquals(startDate) && startDate.isBeforeOrEquals(endTimeRow)))
-                    && (!(startTimeRow.isBeforeOrEquals(endDate) && endDate.isBeforeOrEquals(endTimeRow)));
-        }
     }
 }

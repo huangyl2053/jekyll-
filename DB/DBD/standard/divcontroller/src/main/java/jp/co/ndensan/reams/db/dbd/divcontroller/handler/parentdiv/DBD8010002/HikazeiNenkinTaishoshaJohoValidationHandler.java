@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.Hika
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.dgShoriSettei_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 非課税年金対象者情報取込画面のHandlerです。
@@ -124,6 +127,17 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
     public ValidationMessageControlPairs validateFor処理状態広域(ValidationMessageControlPairs pairs) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
+
+        List<RString> 構成市町村コードリスト = ViewStateHolder.
+                get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
+
+        if (構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty()) {
+            NoInputMessages 市町村コードcheckMessage = new NoInputMessages(DbdErrorMessages.処理なし);
+            messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.市町村コードチェック)
+                    .thenAdd(市町村コードcheckMessage).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(市町村コードcheckMessage,
+                    div.getDgTanitsuTaishoShoriItchiran()).build().check(messages));
+        }
 
         RString syoriJyotai = div.getTxtShoriJotai().getValue();
         NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.処理状態不正, syoriJyotai.toString());

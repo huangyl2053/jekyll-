@@ -71,6 +71,7 @@ public class DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassan
     private static final RString 登録区分_通常 = new RString("1");
     private static final RString 登録区分_差分 = new RString("2");
     private int 出力ページ数;
+    private int 口座振込一時_登録件数;
 
     @Override
     protected void initialize() {
@@ -81,7 +82,7 @@ public class DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassan
         processParameter.setシステム日時(YMDHMS.now());
         processParameter.set処理名(ShoriName.給付振込データ作成_事業高額合算);
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        if (RString.isNullOrEmpty(getParameter().get出力順ID())) {
+        if (!RString.isNullOrEmpty(getParameter().get出力順ID())) {
             IOutputOrder 出力順情報 = finder.get出力順(
                     SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200003.getReportId(), Long.parseLong(getParameter().get出力順ID().toString()));
             if (出力順情報 == null) {
@@ -103,6 +104,17 @@ public class DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassan
                 executeStep(振込データ作成);
                 splitBatch();
             }
+            if (Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(getParameter().get処理区分()) || 口座振込一時_登録件数 != INT_0) {
+                executeStep(振込明細一覧表作成_受給取得状況);
+                executeStep(振込明細一覧表作成);
+                出力ページ数 = getResult(
+                        Integer.class, new RString(振込明細一覧表作成), FurikomimeisaiDataReportProcess.PAGECOUNT);
+                processParameter.set出力ページ数(出力ページ数);
+            }
+            if (!(Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(getParameter().get処理区分()))
+                    || !(Furikomi_ShihraiHohoShitei.窓口.getコード().equals(getParameter().get支払方法()))) {
+                executeStep(振込エラーリスト作成);
+            }
         }
         executeStep(処理結果確認リスト作成);
         executeStep(処理日付管理マスタの更新と出力条件表作成);
@@ -114,24 +126,13 @@ public class DBC050023_FurikomimeisaiFurikomiDataJigyoKogakuGassan
                     ? null : new Decimal(getParameter().get委託者コード().toString());
             KozaFurikomiManager.createInstance().deleteBy委託者IDAnd振込年月日(委託者コード, getParameter().get誤振込指定年月日());
         }
-        int 件数 = getResult(
+        口座振込一時_登録件数 = getResult(
                 Integer.class, new RString(振込データ作成), FurikomimeisaiDataSakuseiProcess.PARAMETER_OUT_件数);
-        if (件数 != INT_0) {
+        if (口座振込一時_登録件数 != INT_0) {
             executeStep(口座振込データの登録処理);
         }
         executeStep(依頼済登録_事業高額合算);
         executeStep(依頼済取消_事業高額合算);
-        if (Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(getParameter().get処理区分()) || 件数 != INT_0) {
-            executeStep(振込明細一覧表作成_受給取得状況);
-            executeStep(振込明細一覧表作成);
-            出力ページ数 = getResult(
-                    Integer.class, new RString(振込明細一覧表作成), FurikomimeisaiDataReportProcess.PAGECOUNT);
-            processParameter.set出力ページ数(出力ページ数);
-        }
-        if (!(Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(getParameter().get処理区分()))
-                || !(Furikomi_ShihraiHohoShitei.窓口.getコード().equals(getParameter().get支払方法()))) {
-            executeStep(振込エラーリスト作成);
-        }
     }
 
     /**

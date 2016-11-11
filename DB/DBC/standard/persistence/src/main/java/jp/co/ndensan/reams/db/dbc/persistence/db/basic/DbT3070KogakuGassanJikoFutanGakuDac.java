@@ -9,10 +9,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGaku;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGaku.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGaku.hokenshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGaku.jikoFutanSeiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGaku.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGaku.shikyuShinseishoSeiriNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGaku.shomeiShoSakuseiYMD;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGaku.taishoNendo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -27,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -130,37 +127,6 @@ public class DbT3070KogakuGassanJikoFutanGakuDac implements ISaveable<DbT3070Kog
                                 eq(hokenshaNo, 保険者番号),
                                 eq(shikyuShinseishoSeiriNo, 支給申請書整理番号))).
                 order(by(DbT3070KogakuGassanJikoFutanGaku.rirekiNo, Order.DESC)).limit(1).
-                toObject(DbT3070KogakuGassanJikoFutanGakuEntity.class);
-    }
-
-    /**
-     * 高額合算自己負担額を取得します。
-     *
-     * @param 被保険者番号 HihokenshaNo
-     * @param 対象年度 FlexibleYear
-     * @param 保険者番号 RString
-     * @param 支給申請書整理番号 RString
-     * @return List<DbT3070KogakuGassanJikoFutanGakuEntity>
-     */
-    @Transaction
-    public DbT3070KogakuGassanJikoFutanGakuEntity selectJikoFutanGaku(
-            HihokenshaNo 被保険者番号,
-            FlexibleYear 対象年度,
-            RString 保険者番号,
-            RString 支給申請書整理番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
-        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.selectSpecific(jikoFutanSeiriNo, shomeiShoSakuseiYMD, max(rirekiNo)).
-                table(DbT3070KogakuGassanJikoFutanGaku.class).
-                where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(taishoNendo, 対象年度),
-                                eq(hokenshaNo, 保険者番号),
-                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号))).groupBy(jikoFutanSeiriNo, shomeiShoSakuseiYMD).
                 toObject(DbT3070KogakuGassanJikoFutanGakuEntity.class);
     }
 

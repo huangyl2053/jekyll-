@@ -75,7 +75,7 @@ public class JigoSakuseiMeisaiTouroku {
     private static final RString 限度対象外フラグ = new RString("0");
     private static final RString 定値_合計 = new RString("合計");
     private static final RString 定値_ホシ = new RString("*");
-    private static final RString 定値_ハイフン = new RString("ー");
+    private static final RString 定値_ハイフン = new RString("-");
     private static final RString 区分_居宅 = new RString("1");
     private static final RString 区分_総合事業 = new RString("2");
     private static final RString 定値_01 = new RString("01");
@@ -203,9 +203,14 @@ public class JigoSakuseiMeisaiTouroku {
         kyufuJikoSakuseiResult.set保険給付額(保険給付額);
         kyufuJikoSakuseiResult.set保険対象利用者負担額(保険対象利用者負担額);
         kyufuJikoSakuseiResult.set全額利用者負担額(全額利用者負担額);
-        // TODO QAのNo.975 (Redmine#92977)
         kyufuJikoSakuseiResult.set事業者(定値_合計);
         kyufuJikoSakuseiResult.setサービス(定値_ハイフン);
+        kyufuJikoSakuseiResult.set単位(定値_ハイフン);
+        kyufuJikoSakuseiResult.set割引適用後率(定値_ハイフン);
+        kyufuJikoSakuseiResult.set割引適用後単位(定値_ハイフン);
+        kyufuJikoSakuseiResult.set回数(定値_ハイフン);
+        kyufuJikoSakuseiResult.set単位数単価(定値_ハイフン);
+        kyufuJikoSakuseiResult.set給付率(定値_ハイフン);
         kyufuJikoSakuseiResult.set事業者コード(new JigyoshaNo(定値_ホシ));
         kyufuJikoSakuseiResult.setサービス種類コード(new ServiceShuruiCode(定値_ハイフン));
         kyufuJikoSakuseiResult.setサービス項目コード(new ServiceKomokuCode(定値_ハイフン));
@@ -287,17 +292,17 @@ public class JigoSakuseiMeisaiTouroku {
             KyufuJikoSakuseiResult result = new KyufuJikoSakuseiResult();
             result.set事業者(entity.get事業者());
             result.setサービス(entity.getサービス());
-            result.set単位(entity.get単位());
-            result.set割引適用後率(entity.get割引適用後率());
-            result.set割引適用後単位(entity.get割引適用後単位());
-            result.set回数(entity.get回数());
+            result.set単位(entity.get単位() == null ? null : new RString(entity.get単位().toString()));
+            result.set割引適用後率(entity.get割引適用後率() == null ? null : new RString(entity.get割引適用後率().getColumnValue().toString()));
+            result.set割引適用後単位(entity.get割引適用後単位() == null ? null : new RString(entity.get割引適用後単位().toString()));
+            result.set回数(new RString(entity.get回数().toString()));
             result.setサービス単位(entity.get給付計画単位数());
             result.set種類限度超過単位(entity.get種類限度超過単位());
             result.set種類限度内単位(entity.get種類限度内単位());
-            result.set単位数単価(entity.get単位数単価());
+            result.set単位数単価(entity.get単位数単価() == null ? null : new RString(entity.get単位数単価().toString()));
             result.set区分限度超過単位(entity.get区分限度超過単位());
             result.set区分限度内単位(entity.get区分限度内単位());
-            result.set給付率(entity.get給付率());
+            result.set給付率(entity.get給付率() == null ? null : new RString(entity.get給付率().getColumnValue().toString()));
             result.set事業者コード(entity.get事業者コード());
             result.setサービス種類コード(entity.getサービス種類コード());
             result.setサービス項目コード(entity.getサービス項目コード());

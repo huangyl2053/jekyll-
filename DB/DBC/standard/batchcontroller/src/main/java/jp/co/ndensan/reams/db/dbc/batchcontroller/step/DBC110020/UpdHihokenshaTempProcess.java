@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -74,13 +75,21 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
             異動一時tableWriter.update(update);
             return;
         }
-        if (entity.get異動一時().get連番() <= 連番.intValue()) {
+        Decimal 連番temp = 連番.add(Decimal.ONE);
+        if (連番temp.intValue() <= entity.get異動一時().get被保険者番号Max連番()) {
+            if (連番temp.intValue() != entity.get異動一時().get連番()) {
+                return;
+            }
+            連番Map.put(entity.get被保険者台帳().getHihokenshaNo(), 連番temp);
+            IdouTblEntity update = entity.get異動一時();
+            update.set被保険者台帳管理(被保険者台帳);
+            異動一時tableWriter.update(update);
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
             連番Map.put(entity.get被保険者台帳().getHihokenshaNo(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
-            insert.set被保険者番号(entity.get被保険者番号());
+            insert.set被保険者番号(entity.get被保険者台帳().getHihokenshaNo());
             insert.set連番(連番.add(Decimal.ONE).intValue());
             insert.set支払方法変更_支払方法(RString.EMPTY);
             insert.set支払方法変更_給付費減額(RString.EMPTY);
@@ -113,9 +122,18 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = concatDate(全項目, 被保険者台帳.getShikakuShutokuYMD());
         全項目 = concatDate(全項目, 被保険者台帳.getShikakuSoshitsuYMD());
         if (RString.isNullOrEmpty(被保険者台帳.getJushochiTokureiFlag())) {
-            全項目 = 全項目.concat(RString.EMPTY);
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         } else {
-            全項目 = 全項目.concat(被保険者台帳.getJushochiTokureiFlag());
+            全項目 = 全項目.concat(被保険者台帳.getJushochiTokureiFlag()).concat(SPLIT);
+        }
+        全項目 = 全項目.concat(被保険者台帳.getIdoYMD().toString()).concat(SPLIT)
+                .concat(被保険者台帳.getEdaNo()).concat(SPLIT);
+        全項目 = 全項目.concat(被保険者台帳.getShichosonCode().getColumnValue()).concat(SPLIT);
+        LasdecCode 広住特措置元市町村コード = 被保険者台帳.getKoikinaiTokureiSochimotoShichosonCode();
+        if (広住特措置元市町村コード != null) {
+            全項目 = 全項目.concat(広住特措置元市町村コード.getColumnValue());
+        } else {
+            全項目 = 全項目.concat(RString.EMPTY);
         }
         return 全項目;
     }

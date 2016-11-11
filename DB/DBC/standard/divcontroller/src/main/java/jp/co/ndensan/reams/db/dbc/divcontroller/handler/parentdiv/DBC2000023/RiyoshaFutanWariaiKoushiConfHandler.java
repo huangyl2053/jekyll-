@@ -104,10 +104,14 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
             div.getPanelHakko().getDdlKofuJiyu().setDisabled(true);
             div.getPanelShutsuryokuNaiyo().getLbl2wari().setText(RString.EMPTY);
             div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().setText(RString.EMPTY);
+            div.setLbl2wariKaishiYmdValue(RString.EMPTY);
             div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().setText(RString.EMPTY);
+            div.setLbl2wariShuryoYmdValue(RString.EMPTY);
             div.getPanelShutsuryokuNaiyo().getLbl1wari().setText(RString.EMPTY);
             div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().setText(RString.EMPTY);
+            div.setLbl1wariKaishiYmdValue(RString.EMPTY);
             div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().setText(RString.EMPTY);
+            div.setLbl1wariShuryoYmdValue(RString.EMPTY);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
         } else {
 
@@ -125,21 +129,41 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
 
                 RiyoshaFutanWariaiMeisai 利用者負担割合明細one = 利用者負担割合明細後list.get(利用者負担割合明細後list.size() - 2);
                 div.getPanelShutsuryokuNaiyo().getLbl2wari().setText(FutanwariaiKubun.toValue(利用者負担割合明細one.get負担割合区分()).get名称());
-                div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().setText(new RString(利用者負担割合明細one.get有効開始日().toString()));
-                div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().setText(new RString(利用者負担割合明細one.get有効終了日().toString()));
+                if (利用者負担割合明細one.get有効開始日() != null) {
+                    div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().setText(利用者負担割合明細one.get有効開始日().wareki().toDateString());
+                    div.setLbl2wariKaishiYmdValue(new RString(利用者負担割合明細one.get有効開始日().toString()));
+                }
+                if (利用者負担割合明細one.get有効終了日() != null) {
+                    div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().setText(利用者負担割合明細one.get有効終了日().wareki().toDateString());
+                    div.setLbl2wariShuryoYmdValue(new RString(利用者負担割合明細one.get有効終了日().toString()));
+                }
 
                 RiyoshaFutanWariaiMeisai 利用者負担割合明細two = 利用者負担割合明細後list.get(利用者負担割合明細後list.size() - 1);
                 div.getPanelShutsuryokuNaiyo().getLbl1wari().setText(FutanwariaiKubun.toValue(利用者負担割合明細two.get負担割合区分()).get名称());
-                div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().setText(new RString(利用者負担割合明細two.get有効開始日().toString()));
-                div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().setText(new RString(利用者負担割合明細two.get有効終了日().toString()));
+                if (利用者負担割合明細two.get有効開始日() != null) {
+                    div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().setText(利用者負担割合明細two.get有効開始日().wareki().toDateString());
+                    div.setLbl1wariKaishiYmdValue(new RString(利用者負担割合明細two.get有効開始日().toString()));
+                }
+                if (利用者負担割合明細two.get有効終了日() != null) {
+                    div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().setText(利用者負担割合明細two.get有効終了日().wareki().toDateString());
+                    div.setLbl1wariShuryoYmdValue(new RString(利用者負担割合明細two.get有効終了日().toString()));
+                }
             } else if (利用者負担割合明細後list.size() == INT_1) {
                 RiyoshaFutanWariaiMeisai 利用者負担割合明細 = 利用者負担割合明細後list.get(0);
                 div.getPanelShutsuryokuNaiyo().getLbl2wari().setText(FutanwariaiKubun.toValue(利用者負担割合明細.get負担割合区分()).get名称());
-                div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().setText(new RString(利用者負担割合明細.get有効開始日().toString()));
-                div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().setText(new RString(利用者負担割合明細.get有効終了日().toString()));
+                if (利用者負担割合明細.get有効開始日() != null) {
+                    div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().setText(利用者負担割合明細.get有効開始日().wareki().toDateString());
+                    div.setLbl2wariKaishiYmdValue(new RString(利用者負担割合明細.get有効開始日().toString()));
+                }
+                if (利用者負担割合明細.get有効終了日() != null) {
+                    div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().setText(利用者負担割合明細.get有効終了日().wareki().toDateString());
+                    div.setLbl2wariShuryoYmdValue(new RString(利用者負担割合明細.get有効終了日().toString()));
+                }
                 div.getPanelShutsuryokuNaiyo().getLbl1wari().setText(RString.EMPTY);
                 div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().setText(RString.EMPTY);
+                div.setLbl1wariKaishiYmdValue(RString.EMPTY);
                 div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().setText(RString.EMPTY);
+                div.setLbl1wariShuryoYmdValue(RString.EMPTY);
             }
         }
 
@@ -223,8 +247,8 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
             履歴番号 = 1;
         }
         ShoKofuKaishu shoKofuKaishu = new ShoKofuKaishu(資格対象者.get被保険者番号(), 交付証種類, 履歴番号);
-        RString 終了日2 = div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText();
-        RString 終了日1 = div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().getText();
+        RString 終了日2 = div.getLbl1wariShuryoYmdValue();
+        RString 終了日1 = div.getLbl2wariShuryoYmdValue();
 
         shoKofuKaishu = shoKofuKaishu.createBuilderForEdit().set被保険者番号(資格対象者.get被保険者番号())
                 .set交付証種類(交付証種類).set履歴番号(shoKofuKaishu.get履歴番号() + 1)
@@ -266,18 +290,18 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         FutanWariaiShoDivParameter parameter = new FutanWariaiShoDivParameter();
         parameter.set呼出し元画面区分(パラメータ);
-        parameter.set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().toString()));
+        parameter.set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().getValue().toString()));
         parameter.set住所(RString.EMPTY);
         parameter.setカナ氏名(RString.EMPTY);
         parameter.set氏名(RString.EMPTY);
         parameter.set生年月日(new FlexibleDate(RString.EMPTY));
         parameter.set性別(RString.EMPTY);
         parameter.set負担割合1(div.getPanelShutsuryokuNaiyo().getLbl2wari().getText());
-        parameter.set適用期間開始日1(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().getText()));
-        parameter.set適用期間終了日1(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().getText()));
+        parameter.set適用期間開始日1(new FlexibleDate(div.getLbl2wariKaishiYmdValue()));
+        parameter.set適用期間終了日1(new FlexibleDate(div.getLbl2wariShuryoYmdValue()));
         parameter.set負担割合2(div.getPanelShutsuryokuNaiyo().getLbl1wari().getText());
-        parameter.set適用期間開始日2(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().getText()));
-        parameter.set適用期間終了日2(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText()));
+        parameter.set適用期間開始日2(new FlexibleDate(div.getLbl1wariKaishiYmdValue()));
+        parameter.set適用期間終了日2(new FlexibleDate(div.getLbl1wariShuryoYmdValue()));
 
         return futanWariaisho.getSourceDataSinger(識別コード, 被保険者番号, parameter);
     }

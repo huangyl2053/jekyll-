@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTaishoSeitaiyinTemp5ProcessMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.TaishoSetaiinEntity;
@@ -29,7 +30,6 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
     private InsTaishoSeitaiyinTempProcessParameter parameter;
 
     private static final RString TABLE_NAME = new RString("TaishoSetaiin");
-    private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_3 = new RString("3");
@@ -82,7 +82,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
             this.firstEntity = entity;
             index++;
         } else {
-            if (RSTRING_0.equals(parameter.get抽出条件())) {
+            if (ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(parameter.get抽出条件())) {
                 this.entityList.add(exEntity);
                 this.設定flg(exEntity);
                 if (isChangeShotaiCode(exEntity, entity)) {
@@ -95,7 +95,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
                     this.世帯出力flg = false;
                     this.総収入額 = Decimal.ZERO;
                 }
-            } else if (RSTRING_1.equals(parameter.get抽出条件())) {
+            } else if (ShinseishoHakkoChushutsuJoken.被保険者番号.getコード().equals(parameter.get抽出条件())) {
                 this.entityList.add(exEntity);
                 if (RSTRING_1.equals(entity.getHihokennshaKubun())) {
                     this.世帯出力flg = true;
@@ -127,12 +127,12 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
 
         }
         if (null != this.exEntity) {
-            if (RSTRING_0.equals(parameter.get抽出条件())) {
+            if (ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(parameter.get抽出条件())) {
                 this.設定flg(exEntity);
                 this.get該当件数(exEntity.getShotaiCode());
                 this.所得年度世帯出力有無の判定();
 
-            } else if (RSTRING_1.equals(parameter.get抽出条件())) {
+            } else if (ShinseishoHakkoChushutsuJoken.被保険者番号.getコード().equals(parameter.get抽出条件())) {
                 this.get該当件数(exEntity.getShotaiCode());
                 this.被保険者番号世帯出力有無の判定();
 

@@ -13,42 +13,49 @@ public enum RiyojokyoTokeihyo_KaisuShukeiPattern {
     /**
      * コード:11 名称:短期入所実日数_内訳なし_合計加算あり 略称:定義なし
      */
-    短期入所実日数_内訳なし_合計加算あり("11", "短期入所実日数_内訳なし_合計加算あり"),
+    短期入所実日数_内訳なし_合計加算あり("11", "短期入所実日数_内訳なし_合計加算あり", true, false, true),
     /**
      * コード:12 名称:短期入所実日数_内訳あり_合計加算あり 略称:定義なし
      */
-    短期入所実日数_内訳あり_合計加算あり("12", "短期入所実日数_内訳あり_合計加算あり"),
+    短期入所実日数_内訳あり_合計加算あり("12", "短期入所実日数_内訳あり_合計加算あり", true, true, true),
     /**
      * コード:13 名称:短期入所実日数_内訳なし_合計加算なし 略称:定義なし
      */
-    短期入所実日数_内訳なし_合計加算なし("13", "短期入所実日数_内訳なし_合計加算なし"),
+    短期入所実日数_内訳なし_合計加算なし("13", "短期入所実日数_内訳なし_合計加算なし", true, false, false),
     /**
      * コード:14 名称:短期入所実日数_内訳あり_合計加算なし 略称:定義なし
      */
-    短期入所実日数_内訳あり_合計加算なし("14", "短期入所実日数_内訳あり_合計加算なし"),
+    短期入所実日数_内訳あり_合計加算なし("14", "短期入所実日数_内訳あり_合計加算なし", true, true, false),
     /**
      * コード:21 名称:日数回数_内訳なし_合計加算あり 略称:定義なし
      */
-    日数回数_内訳なし_合計加算あり("21", "日数回数_内訳なし_合計加算あり"),
+    日数回数_内訳なし_合計加算あり("21", "日数回数_内訳なし_合計加算あり", true, false, true),
     /**
      * コード:22 名称:日数回数_内訳なし_合計加算なし 略称:定義なし
      */
-    日数回数_内訳なし_合計加算なし("22", "日数回数_内訳なし_合計加算なし"),
+    日数回数_内訳なし_合計加算なし("22", "日数回数_内訳なし_合計加算なし", true, false, false),
     /**
      * コード:31 名称:居宅支援_内訳あり_合計加算なし 略称:定義なし
      */
-    居宅支援_内訳あり_合計加算なし("31", "居宅支援_内訳あり_合計加算なし"),
+    居宅支援_内訳あり_合計加算なし("31", "居宅支援_内訳あり_合計加算なし", true, true, false),
     /**
      * コード:"" 名称:加算対象外 略称:定義なし
      */
-    加算対象外("", "加算対象外");
+    加算対象外("", "加算対象外", false, false, false);
 
     private final RString code;
     private final RString fullName;
+    private final boolean 加算有無;
+    private final boolean 内訳有無;
+    private final boolean 合計加算有無;
 
-    private RiyojokyoTokeihyo_KaisuShukeiPattern(String code, String fullname) {
+    private RiyojokyoTokeihyo_KaisuShukeiPattern(String code, String fullname,
+            boolean 加算有無, boolean 内訳有無, boolean 合計加算有無) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.加算有無 = 加算有無;
+        this.内訳有無 = 内訳有無;
+        this.合計加算有無 = 合計加算有無;
     }
 
     /**
@@ -67,6 +74,33 @@ public enum RiyojokyoTokeihyo_KaisuShukeiPattern {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 利用状況統計表_回数集計パターンの加算有無を返します。
+     *
+     * @return 利用状況統計表_回数集計パターンの加算有無
+     */
+    public boolean is加算有無() {
+        return 加算有無;
+    }
+
+    /**
+     * 利用状況統計表_回数集計パターンの内訳有無を返します。
+     *
+     * @return 利用状況統計表_回数集計パターンの内訳有無
+     */
+    public boolean is内訳有無() {
+        return 内訳有無;
+    }
+
+    /**
+     * 利用状況統計表_回数集計パターンの合計加算有無を返します。
+     *
+     * @return 利用状況統計表_回数集計パターンの合計加算有無
+     */
+    public boolean is合計加算有無() {
+        return 合計加算有無;
     }
 
     /**

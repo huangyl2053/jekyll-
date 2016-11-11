@@ -46,6 +46,8 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess1 extends BatchProcess
     protected void initialize() {
         mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
         flowEntity = new OutputParameter<>();
+        KogakuFlowReturnEntity flowReturnEntity = mapper.select続柄コード参照年();
+        flowEntity.setValue(flowReturnEntity);
     }
 
     @Override
@@ -66,7 +68,5 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess1 extends BatchProcess
 
     @Override
     protected void afterExecute() {
-        KogakuFlowReturnEntity flowReturnEntity = mapper.select続柄コード参照年();
-        flowEntity.setValue(flowReturnEntity);
     }
 }

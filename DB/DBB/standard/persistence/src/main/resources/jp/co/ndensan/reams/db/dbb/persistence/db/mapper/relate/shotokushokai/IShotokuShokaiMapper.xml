@@ -5,31 +5,18 @@
     <!--対象者一覧データ取得-->
     <select resultOrdered="true" id="get対象者一覧データ" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokushokai.ShotokuShokaiTaishoshaIchiranParameter" 
             resultMap="resultMap_ShotokuShokaiTaishoshaEntity" fetchSize="500">
+      WITH master AS(
       SELECT 
         <include refid="allColumns_DbT2008ShotokuKanri"/> ,
         "DbT2020ShotokuShokaihyoHakkoRireki"."shokaisakiLasdecCode",
         "DbT2020ShotokuShokaihyoHakkoRireki"."setaiCode",
         "DbT2020ShotokuShokaihyoHakkoRireki"."hakkoYMD",
-        "DbT1001HihokenshaDaicho"."hihokenshaNo",
-        ATENA."kanjiShimei",
-        ATENA."kanaShimei",
-        ATENA."seinengappiYMD",
-        ATENA."seibetsuCode"
+        "DbV1001HihokenshaDaicho"."hihokenshaNo"
       FROM "rgdb"."DbT2008ShotokuKanri" JOIN "rgdb"."DbT2020ShotokuShokaihyoHakkoRireki" ON
          "DbT2008ShotokuKanri"."shikibetsuCode" = "DbT2020ShotokuShokaihyoHakkoRireki"."shikibetsuCode"
         AND "DbT2008ShotokuKanri"."shotokuNendo" = "DbT2020ShotokuShokaihyoHakkoRireki"."shoriNendo"
-        JOIN "rgdb"."DbT1001HihokenshaDaicho" ON
-        "DbT2008ShotokuKanri"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
-        JOIN "rgua"."UaFt200FindShikibetsuTaisho"('2',#{システム日付},TRUE,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','', 
-                (SELECT 
-               ARRAY_AGG(CAST(rgdb."DbT2008ShotokuKanri"."shikibetsuCode" AS TEXT))
-               FROM 
-               rgdb."DbT2008ShotokuKanri"
-               )
-        ) as ATENA
-        ON "DbT2008ShotokuKanri"."shikibetsuCode" = ATENA."shikibetsuCode"
+        JOIN "rgdb"."DbV1001HihokenshaDaicho" ON
+        "DbT2008ShotokuKanri"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"       
         WHERE 
         (
         "DbT2008ShotokuKanri"."kazeiKubun" = '4'
@@ -41,10 +28,39 @@
         AND "DbT2020ShotokuShokaihyoHakkoRireki"."sakuseiTimestamp" <![CDATA[>=]]> #{抽出期間FROM}
         AND "DbT2020ShotokuShokaihyoHakkoRireki"."sakuseiTimestamp" <![CDATA[<]]> #{抽出期間TO}
         AND "DbT2008ShotokuKanri"."isDeleted" = false
+        AND "DbT2008ShotokuKanri"."rirekiNo" = ( 
+                    SELECT MAX("rirekiNo") 
+                    FROM "rgdb"."DbT2008ShotokuKanri" X
+                    WHERE X."shotokuNendo" = "DbT2008ShotokuKanri"."shotokuNendo" 
+                    AND X."shikibetsuCode" = "DbT2008ShotokuKanri"."shikibetsuCode") 
+        AND "DbT2020ShotokuShokaihyoHakkoRireki"."rirekiNo" = ( 
+                    SELECT MAX("rirekiNo") 
+                    FROM "rgdb"."DbT2020ShotokuShokaihyoHakkoRireki" Y 
+                    WHERE Y."shoriNendo" = "DbT2020ShotokuShokaihyoHakkoRireki"."shoriNendo" 
+                    AND Y."shikibetsuCode" = "DbT2020ShotokuShokaihyoHakkoRireki"."shikibetsuCode")
         AND "DbT2020ShotokuShokaihyoHakkoRireki"."isDeleted" = false
-        ORDER BY "DbT2020ShotokuShokaihyoHakkoRireki"."hakkoYMD" DESC,
-                 "DbT2020ShotokuShokaihyoHakkoRireki"."setaiCode" ASC,
-                 "DbT2020ShotokuShokaihyoHakkoRireki"."shikibetsuCode" ASC
+        )
+        SELECT
+            master.*,
+            ATENA."kanjiShimei",
+            ATENA."kanaShimei",
+            ATENA."seinengappiYMD",
+            ATENA."seibetsuCode"
+        FROM
+            master
+        JOIN "rgua"."UaFt200FindShikibetsuTaisho"('2',#{システム日付},TRUE,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','', 
+                (SELECT 
+               ARRAY_AGG(CAST("dbT2008ShotokuKanri_shikibetsuCode" AS TEXT))
+               FROM 
+               master
+               )
+        ) as ATENA
+        ON master."dbT2008ShotokuKanri_shikibetsuCode" = ATENA."shikibetsuCode"
+        ORDER BY "hakkoYMD" DESC,
+                 "setaiCode" ASC,
+                 "shikibetsuCode" ASC
     </select>
     
     <!--HihokenshaAndDaichouAndAtenaEntityの項目にマッピングします。-->

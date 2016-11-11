@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200040;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteiTsuchiIchiran;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200040.GassanShikyuFushikyuKetteishaIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -81,6 +83,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
         } else {
             edit明細(source);
         }
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listCerter_2);
         return source;
     }
 
@@ -126,7 +129,9 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
                 source.listLower_6 = entity.get預金種別().get預金種別名称().concat(スペース).concat(entity.get口座番号()).
                         concat(getColumnValue(entity.get口座名義人カナ()));
             }
-            source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
+            if (entity.get金融機関名称() != null && entity.get支店名称() != null) {
+                source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
+            }
         }
         if (区分_1.equals(内部帳票文字切れ制御) && null != entity.get被保険者氏名()) {
             source.listUpper_1 = entity.get被保険者氏名().substringReturnAsPossible(0, INT_34);

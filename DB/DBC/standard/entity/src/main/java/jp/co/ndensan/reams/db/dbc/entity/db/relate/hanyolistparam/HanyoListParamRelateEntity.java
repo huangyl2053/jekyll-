@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class HanyoListParamRelateEntity {
 
     private RString 市町村コード;
+    private boolean 論理削除フラグ;
     private RString 被保険者番号;
     private RString 証記載保険者番号;
     private RString 資格取得事由コード;

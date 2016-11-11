@@ -7,18 +7,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * JikoFutangakuKeisanIkkatsuBatchParameter のクラスファイル 
- * 
- * @author 自動生成
+ * JikoFutangakuKeisanIkkatsuBatchParameter のクラスファイルです。
+ *
+ * @reamsid_L DBC-4790-010 chenyadong
  */
 public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -81,7 +86,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setTaishoshaKeisanPanel(TaishoshaKeisanPanelDiv TaishoshaKeisanPanel) {
+    public void setTaishoshaKeisanPanel(TaishoshaKeisanPanelDiv TaishoshaKeisanPanel) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().setTaishoshaKeisanPanel(TaishoshaKeisanPanel);
     }
 
@@ -91,7 +96,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setRadTaishoshaKeisan(RadioButton radTaishoshaKeisan) {
+    public void setRadTaishoshaKeisan(RadioButton radTaishoshaKeisan) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().getTaishoshaKeisanPanel().setRadTaishoshaKeisan(radTaishoshaKeisan);
     }
 
@@ -101,7 +106,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiUketoriYM(TextBoxDate txtZenkaiUketoriYM) {
+    public void setTxtZenkaiUketoriYM(TextBoxDate txtZenkaiUketoriYM) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().getTaishoshaKeisanPanel().setTxtZenkaiUketoriYM(txtZenkaiUketoriYM);
     }
 
@@ -111,7 +116,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiShoriYMD(TextBox txtZenkaiShoriYMD) {
+    public void setTxtZenkaiShoriYMD(TextBox txtZenkaiShoriYMD) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().getTaishoshaKeisanPanel().setTxtZenkaiShoriYMD(txtZenkaiShoriYMD);
     }
 
@@ -121,7 +126,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setTxtUketoriYM(TextBoxDate txtUketoriYM) {
+    public void setTxtUketoriYM(TextBoxDate txtUketoriYM) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().getTaishoshaKeisanPanel().setTxtUketoriYM(txtUketoriYM);
     }
 
@@ -131,7 +136,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setHihokenshaNoShiteiPanel(HihokenshaNoShiteiPanelDiv HihokenshaNoShiteiPanel) {
+    public void setHihokenshaNoShiteiPanel(HihokenshaNoShiteiPanelDiv HihokenshaNoShiteiPanel) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().setHihokenshaNoShiteiPanel(HihokenshaNoShiteiPanel);
     }
 
@@ -141,7 +146,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setRadHihokenshaNo(RadioButton radHihokenshaNo) {
+    public void setRadHihokenshaNo(RadioButton radHihokenshaNo) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().getHihokenshaNoShiteiPanel().setRadHihokenshaNo(radHihokenshaNo);
     }
 
@@ -151,18 +156,18 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().getHihokenshaNoShiteiPanel().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnHihokenshaSearch() {
-        return this.getJikoFutangakuKeisanChushutsuJokenPanel().getHihokenshaNoShiteiPanel().getBtnHihokenshaSearch();
+    public Button getBtnSearchHihokensha() {
+        return this.getJikoFutangakuKeisanChushutsuJokenPanel().getHihokenshaNoShiteiPanel().getBtnSearchHihokensha();
     }
 
     @JsonIgnore
-    public void  setBtnHihokenshaSearch(ButtonDialog btnHihokenshaSearch) {
-        this.getJikoFutangakuKeisanChushutsuJokenPanel().getHihokenshaNoShiteiPanel().setBtnHihokenshaSearch(btnHihokenshaSearch);
+    public void setBtnSearchHihokensha(Button btnSearchHihokensha) {
+        this.getJikoFutangakuKeisanChushutsuJokenPanel().getHihokenshaNoShiteiPanel().setBtnSearchHihokensha(btnSearchHihokensha);
     }
 
     @JsonIgnore
@@ -171,7 +176,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setDdlNendo(DropDownList ddlNendo) {
+    public void setDdlNendo(DropDownList ddlNendo) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().getHihokenshaNoShiteiPanel().setDdlNendo(ddlNendo);
     }
 
@@ -181,7 +186,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setLbl1(Label lbl1) {
+    public void setLbl1(Label lbl1) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().setLbl1(lbl1);
     }
 
@@ -191,7 +196,7 @@ public class JikoFutangakuKeisanIkkatsuBatchParameterDiv extends PanelBatchParam
     }
 
     @JsonIgnore
-    public void  setLbl2(Label lbl2) {
+    public void setLbl2(Label lbl2) {
         this.getJikoFutangakuKeisanChushutsuJokenPanel().setLbl2(lbl2);
     }
 

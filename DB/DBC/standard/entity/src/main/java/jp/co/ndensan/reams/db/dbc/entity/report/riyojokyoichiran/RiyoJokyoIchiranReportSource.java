@@ -132,4 +132,12 @@ public class RiyoJokyoIchiranReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hihokennshaNo;
+
+    /**
+     * 利用状況一覧表の改ページ条件Enumです。
+     */
+    public enum KeyBreakItem {
+
+        kyuShichoson;
+    }
 }

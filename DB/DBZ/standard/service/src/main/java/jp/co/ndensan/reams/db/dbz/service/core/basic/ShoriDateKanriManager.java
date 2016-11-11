@@ -171,7 +171,7 @@ public class ShoriDateKanriManager {
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
 
-        DbT7022ShoriDateKanriEntity entity = dac.select(
+        DbT7022ShoriDateKanriEntity entity = dac.select処理日付管理マスタ(
                 サブ業務コード,
                 市町村コード,
                 処理名,
@@ -581,22 +581,6 @@ public class ShoriDateKanriManager {
             entity.setState(EntityDataState.Modified);
             dac.save(entity);
         }
-    }
-
-    /**
-     * 処理日付管理マスタから、処理名より、前回対象年月日期間のデータを取得する。
-     *
-     * @param 処理名 RString
-     * @return ShoriDateKanri
-     */
-    @Transaction
-    public ShoriDateKanri get前回対象年月日期間(RString 処理名) {
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
-        DbT7022ShoriDateKanriEntity entity = dac.select前回対象年月日期間(処理名);
-        if (entity == null) {
-            return null;
-        }
-        return new ShoriDateKanri(entity);
     }
 
     /**

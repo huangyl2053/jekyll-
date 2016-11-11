@@ -164,7 +164,7 @@ public class JimuShinsakaishiryoA4Group2Editor implements IJimuShinsakaishiryoA4
         source.sabisuKaisu19 = item.getSabisuKaisu19();
         source.sabisuKaisu20 = item.getSabisuKaisu20();
         source.sabisuKaisu21 = item.getSabisuKaisu21();
-        if (index < item.get中間評価リスト().size()) {
+        if (item.get中間評価リスト() != null && index < item.get中間評価リスト().size()) {
             source.listChukanhyoka_1 = item.get中間評価リスト().get(index).get第1群();
             source.listChukanhyoka_2 = item.get中間評価リスト().get(index).get第2群();
             source.listChukanhyoka_3 = item.get中間評価リスト().get(index).get第3群();

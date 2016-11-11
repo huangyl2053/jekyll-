@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -62,11 +63,11 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private LasdecCode 保険者番号;
     private RString 保険者番名;
     private int 連番;
+    private int 取消一覧表連番;
     private int csv連番;
     private int 給付実績取消一覧CSV連番;
     private static final RString 給付実績情報作成区分_削除 = new RString("3");
     private boolean 開始flag;
-    private boolean 合計出力flag;
     private boolean データ存在flag;
     private KoseiTaishoJissekiIchiranEntity 給付実績一覧表合計Entity;
     private KoseiTaishoKyufuJissekiIchiranCsvEntity 合計CSVEntity;
@@ -115,11 +116,11 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         保険者番号 = 導入団体クラス.get地方公共団体コード();
         保険者番名 = 導入団体クラス.get市町村名();
-        連番 = 0;
+        連番 = 1;
+        取消一覧表連番 = 1;
         csv連番 = INT_1;
         給付実績取消一覧CSV連番 = INT_1;
         開始flag = true;
-        合計出力flag = false;
         データ存在flag = false;
         給付実績一覧表合計Entity = new KoseiTaishoJissekiIchiranEntity();
         合計CSVEntity = new KoseiTaishoKyufuJissekiIchiranCsvEntity();
@@ -174,21 +175,21 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     protected void usualProcess(KoseitaishoKyuhuzissekiJohoTempEntity entity) {
         データ存在flag = true;
         if (!給付実績情報作成区分_削除.equals(entity.get給付実績情報作成区分コード())) {
+            合計出力(entity);
             get合計Entity(entity);
             get合計CSVEntity(entity);
-            合計出力(entity);
-            連番++;
             KoseiTaishoJissekiIchiranReport report = new KoseiTaishoJissekiIchiranReport(get明細Entity(entity),
                     processParameter.get抽出期間開始日時(), processParameter.get抽出期間終了日時(), processParameter.get出力順(), 連番);
             report.writeBy(給付実績一覧表SourceWriter);
             給付実績一覧表csvWriter.writeLine(get明細CSVEntity(entity));
-        } else {
             連番++;
+        } else {
             KyufuJissekiTorikeshiIchiranReport report = new KyufuJissekiTorikeshiIchiranReport(entity, processParameter.get抽出期間開始日時(),
                     processParameter.get抽出期間終了日時(), processParameter.get出力順(),
-                    AssociationFinderFactory.createInstance().getAssociation(), 連番);
+                    AssociationFinderFactory.createInstance().getAssociation(), 取消一覧表連番);
             report.writeBy(給付実績取消一覧表SourceWriter);
             給付実績取消一覧表csvWriter.writeLine(get給付実績取消一覧表CSVEntity(entity));
+            取消一覧表連番++;
         }
         if (entity.get識別コード() != null) {
             PersonalData data = PersonalData.of(entity.get識別コード());
@@ -257,25 +258,23 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     }
 
     private void 合計出力(KoseitaishoKyuhuzissekiJohoTempEntity entity) {
-        if (!開始flag) {
+        if (INT_1 != 連番) {
             if ((!getBefore().get年度().equals(entity.get年度())
                     || !getBefore().get被保険者番号().equals(entity.get被保険者番号())
-                    || !getBefore().getサービス提供年月().equals(entity.getサービス提供年月())) && 合計出力flag) {
-                連番++;
+                    || !getBefore().getサービス提供年月().equals(entity.getサービス提供年月()))) {
                 KoseiTaishoJissekiIchiranReport 合計Report
                         = new KoseiTaishoJissekiIchiranReport(給付実績一覧表合計Entity,
                                 processParameter.get抽出期間開始日時(),
                                 processParameter.get抽出期間終了日時(),
-                                processParameter.get出力順(), 連番);
+                                processParameter.get出力順(), 0);
                 合計Report.writeBy(給付実績一覧表SourceWriter);
                 給付実績一覧表csvWriter.writeLine(合計CSVEntity);
                 合計CSVEntity = new KoseiTaishoKyufuJissekiIchiranCsvEntity();
                 給付実績一覧表合計Entity = new KoseiTaishoJissekiIchiranEntity();
-                合計出力flag = false;
                 開始flag = true;
+            } else {
+                開始flag = false;
             }
-        } else {
-            開始flag = false;
         }
     }
 
@@ -315,16 +314,15 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
             給付実績一覧表合計Entity.setサービス提供年月(entity.getサービス提供年月());
             給付実績一覧表合計Entity.set市町村名(保険者番名);
             給付実績一覧表合計Entity.set氏名(entity.get氏名());
-            if (entity.get入力識別番号() != null) {
-                給付実績一覧表合計Entity.set入力識別番号(entity.get入力識別番号().value());
-            }
-            給付実績一覧表合計Entity.set事業者番号(entity.get事業所番号());
-            給付実績一覧表合計Entity.set整理番号(entity.get整理番号());
-            給付実績一覧表合計Entity.setサービス種類(entity.getサービス種類());
             給付実績一覧表合計Entity.set高額サービス費用額(entity.get高額サービス費用額());
             給付実績一覧表合計Entity.set自己負担差額(entity.get自己負担額差額());
         } else {
-            合計出力flag = true;
+            if (null == 給付実績一覧表合計Entity.get高額サービス費用額()) {
+                給付実績一覧表合計Entity.set高額サービス費用額(Decimal.ZERO);
+            }
+            if (null == 給付実績一覧表合計Entity.get自己負担差額()) {
+                給付実績一覧表合計Entity.set自己負担差額(Decimal.ZERO);
+            }
             給付実績一覧表合計Entity.set高額サービス費用額(給付実績一覧表合計Entity.get高額サービス費用額().add(entity.get高額サービス費用額()));
             給付実績一覧表合計Entity.set自己負担差額(給付実績一覧表合計Entity.get自己負担差額().add(entity.get自己負担額差額()));
         }
@@ -373,16 +371,18 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
             合計CSVEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
             合計CSVEntity.set年度(entity.get年度());
             合計CSVEntity.setサービス提供年月(entity.getサービス提供年月().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-            if (entity.get入力識別番号() != null) {
-                合計CSVEntity.set入力識別番号(entity.get入力識別番号().value());
-            }
-
             if (entity.get高額サービス費用額() != null) {
                 合計CSVEntity.set高額(記号);
             }
             合計CSVEntity.set自己負担額差額(entity.get自己負担額差額());
             合計CSVEntity.set高額サービス費用額(entity.get高額サービス費用額());
         } else {
+            if (null == 合計CSVEntity.get自己負担額差額()) {
+                合計CSVEntity.set自己負担額差額(Decimal.ZERO);
+            }
+            if (null == 合計CSVEntity.get高額サービス費用額()) {
+                合計CSVEntity.set高額サービス費用額(Decimal.ZERO);
+            }
             合計CSVEntity.set自己負担額差額(合計CSVEntity.get自己負担額差額().add(entity.get自己負担額差額()));
             合計CSVEntity.set高額サービス費用額(合計CSVEntity.get高額サービス費用額().add(entity.get高額サービス費用額()));
         }
@@ -392,7 +392,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         KyufuJissekiTorikeshiIchiranCsvEntity csvEntity = new KyufuJissekiTorikeshiIchiranCsvEntity();
         csvEntity.set連番(new RString(給付実績取消一覧CSV連番++));
         csvEntity.set被保険者氏名(entity.get氏名());
-        csvEntity.set被保険者番号(entity.get被保険者番号());
+        csvEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
         csvEntity.set年度(entity.get年度());
         if (entity.getサービス提供年月() != null) {
             csvEntity.setサービス提供年月(entity.getサービス提供年月().seireki().

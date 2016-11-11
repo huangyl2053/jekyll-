@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -63,6 +64,7 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
     private RString spoolWorkPath;
     private RString fileName;
     private RString reamsLoginID;
+    private boolean flag;
     private CsvWriter<SokyuuGaitouIchirannCsvEntity> csvWriterJunitoJugo;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -86,6 +88,7 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
     protected void initialize() {
         personalDataList = new ArrayList<>();
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+        flag = true;
     }
 
     @Override
@@ -120,6 +123,7 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
 
     @Override
     protected void process(HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
+        flag = false;
         SokyuuGaitouIchirannCsvEntity eucCsvEntity = new SokyuuGaitouIchirannCsvEntity();
         eucCsvEntity(eucCsvEntity, t);
         csvWriterJunitoJugo.writeLine(eucCsvEntity);
@@ -135,6 +139,9 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
         csvWriterJunitoJugo.close();
         AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(fileName, id);
+        if (flag) {
+            File.deleteIfExists(spoolWorkPath);
+        }
     }
 
     private void eucCsvEntity(SokyuuGaitouIchirannCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
@@ -156,7 +163,7 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
         eucCsvEntity.set性別(set性別コード(t.getDtSeibetsu()));
         eucCsvEntity.setカナ氏名市町村データ(t.getAtenaKanaShimei());
         eucCsvEntity.setカナ氏名年金保険者データ(t.getDtKanaShimei());
-        eucCsvEntity.set漢字氏名(t.getAtenaKanaShimei());
+        eucCsvEntity.set漢字氏名(t.getDtKanjiShimei());
         eucCsvEntity.set郵便番号(setフォ(t.getDtYubinNo()));
         eucCsvEntity.set住所(t.getDtKanajusyo());
         eucCsvEntity.set訂正表示コード(t.getDtTeiseiHyouji());

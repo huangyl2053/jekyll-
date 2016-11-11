@@ -4,6 +4,9 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_RadIkkatsuKoshinKubun = function () {
+                return "onClick_RadIkkatsuKoshinKubun";
+            };
             return Events;
         })();
         PaymentDate.Events = Events;
@@ -54,6 +57,10 @@ var DBC;
 
             Controls.prototype.txtShiharaiShuryoTime = function () {
                 return new UZA.TextBoxTime(this.convFiledName("txtShiharaiShuryoTime"));
+            };
+
+            Controls.prototype.radIkkatsuKoshinKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("radIkkatsuKoshinKubun"));
             };
             return Controls;
         })();

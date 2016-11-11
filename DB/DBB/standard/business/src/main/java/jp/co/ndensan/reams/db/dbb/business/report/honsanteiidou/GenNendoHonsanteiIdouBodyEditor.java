@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -74,6 +75,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     private static final RString 特別徴収 = new RString("特別徴収");
     private static final RString 普通徴収 = new RString("普通徴収");
     private static final RString 併用徴収 = new RString("併用徴収");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * インスタンスを生成します。
@@ -162,6 +164,8 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     private void edit項目(GenNendoHonsanteiIdouSource source) {
         if (計算後情報_宛名_口座_更正後Entity.get被保険者番号() != null) {
             source.list1_1 = 計算後情報_宛名_口座_更正後Entity.get被保険者番号().value();
+            source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                    計算後情報_宛名_口座_更正後Entity.get被保険者番号().value());
         }
         if (計算後情報_宛名_口座_更正後Entity.get通知書番号() != null) {
             source.list1_2 = 計算後情報_宛名_口座_更正後Entity.get通知書番号().value();

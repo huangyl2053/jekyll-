@@ -18,9 +18,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TennyuHosyutaiSyosyaEntity {
 
+    private RString データ内容;
     private RString 識別コード;
     private int 履歴番号;
     private RString 市町村コード;
+    private RString 市町村名;
     private RString 作成事由コード;
     private RString 世帯コード;
     private RString 住民種別コード;
@@ -41,9 +43,9 @@ public class TennyuHosyutaiSyosyaEntity {
     private RString 住所;
     private RString 番地;
     private RString 方書;
-    private RString 前住所全国住所コード;
-    private RString 前住所住所;
-    private RString 前住所番地;
-    private RString 前住所方書;
+    private RString 予定前住所全国住所コード;
+    private RString 予定前住所住所;
+    private RString 予定前住所番地;
+    private RString 予定前住所方書;
     private RString 住所地特例フラグ;
 }

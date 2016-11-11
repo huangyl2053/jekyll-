@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd571001.JukyushaDaichoCyouhyoujouhou;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd571001.IdoChushutsuDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.SenTouEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.temptable.JukyushaDaichoCyouhyoujouhouTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho.IJukyushaDaichoMainMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-1760-020 panxiaobo
  */
-public class JukyushaDaichoCyouhyoujouhouTempProcess extends BatchProcessBase<NinteiKekkaJohoEntity> {
+public class JukyushaDaichoCyouhyoujouhouTempProcess extends BatchProcessBase<SenTouEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushadaicho."
@@ -109,7 +109,7 @@ public class JukyushaDaichoCyouhyoujouhouTempProcess extends BatchProcessBase<Ni
     }
 
     @Override
-    protected void process(NinteiKekkaJohoEntity t) {
+    protected void process(SenTouEntity t) {
         JukyushaDaichoCyouhyoujouhouTempTableEntity tempTableEntity = create検索条件一時テーブル情報(t);
         tmpTableWriter.insert(tempTableEntity);
         outtemptable = new RString("1");
@@ -120,7 +120,7 @@ public class JukyushaDaichoCyouhyoujouhouTempProcess extends BatchProcessBase<Ni
         outTempTable.setValue(outtemptable);
     }
 
-    private JukyushaDaichoCyouhyoujouhouTempTableEntity create検索条件一時テーブル情報(NinteiKekkaJohoEntity t) {
+    private JukyushaDaichoCyouhyoujouhouTempTableEntity create検索条件一時テーブル情報(SenTouEntity t) {
         JukyushaDaichoCyouhyoujouhouTempTableEntity resultEntity = new JukyushaDaichoCyouhyoujouhouTempTableEntity();
         JukyushaDaichoCyouhyoujouhou 帳票出力用受給者台帳 = new JukyushaDaichoCyouhyoujouhou();
         帳票出力用受給者台帳.create検索条件一時テーブル情報(t, resultEntity);

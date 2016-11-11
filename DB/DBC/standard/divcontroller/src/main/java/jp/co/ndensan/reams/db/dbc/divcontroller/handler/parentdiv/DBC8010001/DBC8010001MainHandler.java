@@ -393,7 +393,13 @@ public class DBC8010001MainHandler {
         DBC050010_FurikomimeisaiFurikomiDataParameter parameter = new DBC050010_FurikomimeisaiFurikomiDataParameter();
         parameter.set代表金融機関コード(new KinyuKikanCode(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(0, INDEX_4)));
         parameter.set再処理フラグ(div.getChkSaisakusei().isAllSelected());
-        parameter.set処理区分(Furikomi_ShoriKubun.toValue(div.getDdlShoriTaisho().getSelectedKey()));
+        if (!div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey().isEmpty()) {
+            parameter.set処理区分(Furikomi_ShoriKubun.toValue(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey()));
+        } else if (!div.getRadShoriSentakuFurikomiDataModify().getSelectedKey().isEmpty()) {
+            parameter.set処理区分(Furikomi_ShoriKubun.toValue(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey()));
+        } else if (!div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey().isEmpty()) {
+            parameter.set処理区分(Furikomi_ShoriKubun.toValue(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey()));
+        }
         parameter.set処理対象(Furikomi_ShoriTaisho.toValue(div.getDdlShoriTaisho().getSelectedKey()));
         parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         parameter.set委託者コード(div.getTxtItakushaCode().getValue());

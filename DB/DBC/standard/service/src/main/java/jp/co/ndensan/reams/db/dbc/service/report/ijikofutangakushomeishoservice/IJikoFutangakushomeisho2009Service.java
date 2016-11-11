@@ -54,7 +54,7 @@ public class IJikoFutangakushomeisho2009Service {
         JikoFutangakushomeishoFrom2009Property property = new JikoFutangakushomeishoFrom2009Property();
         try (ReportAssembler<JikoFutangakushomeishoFrom2009ReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<JikoFutangakushomeishoFrom2009ReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100050.getReportId(),
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100051.getReportId(),
                     FlexibleDate.getNowDate(), コード, KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             for (JikoFutangakushomeishoFromData items : joho) {
                 items.set認証者情報(ninshoshaSource);

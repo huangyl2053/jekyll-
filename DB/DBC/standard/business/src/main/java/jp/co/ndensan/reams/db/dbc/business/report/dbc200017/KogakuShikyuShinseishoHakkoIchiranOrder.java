@@ -22,7 +22,7 @@ public enum KogakuShikyuShinseishoHakkoIchiranOrder implements IReportItems {
     /**
      * 町域コードです。
      */
-    町域コード(new RString("0002"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"jushoChohyo\"")),
+    町域コード(new RString("0002"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"choikiCodeChohyo\"")),
     /**
      * 行政区コードです。
      */
@@ -50,7 +50,7 @@ public enum KogakuShikyuShinseishoHakkoIchiranOrder implements IReportItems {
     /**
      * サービス分類です。
      */
-    サービス分類(new RString("0324"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"serviceShuruiCodeChohyo\""));
+    高額自動償還(new RString("0321"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"jidoShokanTaishoFlagChohyo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

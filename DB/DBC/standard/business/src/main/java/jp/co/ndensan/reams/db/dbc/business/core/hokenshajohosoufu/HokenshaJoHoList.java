@@ -23,4 +23,5 @@ public class HokenshaJoHoList implements Serializable {
 
     private RString ファイル名の先頭6桁;
     private List<RString> 共有ファイル名;
+    private List<RString> 共有ファイルID;
 }

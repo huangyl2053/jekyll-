@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -45,6 +46,7 @@ public class KaigoHokenShotokuTempEntity implements IDbAccessable {
     private Decimal nenkiniShotokuGaku;
     private Decimal kazeiShotokuGaku;
     private RString torokuGyomu;
+    private SetaiCode setaiCode;
 
     /**
      * 介護保険所得を作成します。
@@ -84,6 +86,7 @@ public class KaigoHokenShotokuTempEntity implements IDbAccessable {
         entity.setNenkiniShotokuGaku(temp.getNenkiniShotokuGaku());
         entity.setKazeiShotokuGaku(temp.getKazeiShotokuGaku());
         entity.setTorokuGyomu(temp.getTorokuGyomu());
+        entity.setSetaiCode(temp.getSetaiCode());
         return entity;
     }
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3430-010 liuwei2 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc2210011.ITokubetsuKyufuJigyoshaSearchMapper">
+    <resultMap id="Result_TokubetsuKyufuJigyoshaSearchEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc2210011.TokubetsuKyufuJigyoshaSearchEntity" autoMapping="true">
+        <id property="事業者.jigyoshaNo" column="dbT3065ShichosonTokubetsuKyufuJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="事業者.serviceCode" column="dbT3065ShichosonTokubetsuKyufuJigyosha_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
+        <id property="事業者.rirekiNo" column="dbT3065ShichosonTokubetsuKyufuJigyosha_rirekiNo"/>
+        <id property="サービス.serviceYukoKikanKaishiYMD" column="serviceYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="サービス.serviceCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="サービス.rirekiNo" column="rirekiNo"/>
+
+        <association property="事業者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3065ShichosonTokubetsuKyufuJigyoshaMapper.ResultMap_DbT3065ShichosonTokubetsuKyufuJigyoshaEntity"/>
+        <association property="サービス" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3066ShichosonTokubetuKyufuServiceMapper.ResultMap_DbT3066ShichosonTokubetuKyufuServiceEntity"/>
+    </resultMap>
+    <select id="selectサービス内容"
+            resultOrdered="true"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3066ShichosonTokubetuKyufuServiceMapper.ResultMap_DbT3066ShichosonTokubetuKyufuServiceEntity"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3066ShichosonTokubetuKyufuServiceMapper.allColumns_DbT3066ShichosonTokubetuKyufuService"/>
+        FROM
+        rgdb."DbT3066ShichosonTokubetuKyufuService"
+        WHERE NOT EXISTS (SELECT 'X' FROM rgdb."DbT3066ShichosonTokubetuKyufuService" AS slv
+        WHERE "DbT3066ShichosonTokubetuKyufuService"."serviceCode" = slv."serviceCode"
+        AND "DbT3066ShichosonTokubetuKyufuService"."serviceYukoKikanKaishiYMD" <![CDATA[<]]>  slv."serviceYukoKikanKaishiYMD")
+        AND "DbT3066ShichosonTokubetuKyufuService"."logicalDeletedFlag" is FALSE
+        ORDER BY "DbT3066ShichosonTokubetuKyufuService"."serviceCode" ASC
+    </select>
+    <select id="select事業者情報"
+            resultOrdered="true"
+            resultMap="Result_TokubetsuKyufuJigyoshaSearchEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            fetchSize="500">
+        SELECT
+        事業者.*,
+        サービス.*
+        FROM
+        (SELECT
+        *
+        FROM rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"
+        WHERE
+        <if test="事業者番号Length == 5">
+            substring(rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."jigyoshaNo",1,5) = #{事業者番号}
+        </if>
+        <if test="事業者番号Length == 6">
+            rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."jigyoshaNo"  like #{事業者番号}||'%'
+            and  rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."jigyoshaNo" like '%'||#{cD}
+        </if>
+        <if test="事業者番号Length == 10">
+            rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."jigyoshaNo" = #{事業者番号}
+        </if>
+        <if test="事業者番号Length == 9">
+            rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."jigyoshaNo" like #{事業者番号}||'%'
+        </if>
+        AND rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."logicalDeletedFlag" IS FALSE
+        ) AS 事業者
+        LEFT JOIN
+        (SELECT mst.*
+        FROM rgdb."DbT3066ShichosonTokubetuKyufuService" AS mst
+        WHERE NOT EXISTS (SELECT 'X' FROM rgdb."DbT3066ShichosonTokubetuKyufuService" AS slv
+        WHERE mst."serviceCode" = slv."serviceCode"
+        AND mst."serviceYukoKikanKaishiYMD" <![CDATA[<]]> slv."serviceYukoKikanKaishiYMD")
+        AND mst."logicalDeletedFlag" is FALSE
+        ) AS サービス
+        ON 事業者."jigyoshaNo" = サービス."serviceCode"
+        ORDER BY 事業者."jigyoshaNo" ASC,
+        事業者."serviceCode" ASC
+    </select>
+</mapper>
+
+

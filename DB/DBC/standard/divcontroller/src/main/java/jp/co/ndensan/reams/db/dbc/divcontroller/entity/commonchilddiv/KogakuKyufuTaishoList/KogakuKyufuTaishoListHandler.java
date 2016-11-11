@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KogakuKyufuTaishoListHandler {
 
     private final KogakuKyufuTaishoListDiv div;
+    private static final RString ZERO_RS = new RString("0");
     private static final RString ONE_RS = new RString("1");
     private static final RString TWO_RS = new RString("2");
     private static final RString 高額サービス費支給申請書登録 = new RString("DBCMN42001");
@@ -40,7 +41,6 @@ public class KogakuKyufuTaishoListHandler {
     private static final FlexibleYearMonth 定値年月1 = new FlexibleYearMonth("200509");
     private static final FlexibleYearMonth 定値年月2 = new FlexibleYearMonth("200606");
     private static final FlexibleYearMonth 定値年月3 = new FlexibleYearMonth("200806");
-    private static final RString 平成17年11月 = new RString("200511");
     private static final RString key0 = new RString("key0");
     private static final RString key1 = new RString("key1");
     private static final RString key2 = new RString("key2");
@@ -55,7 +55,7 @@ public class KogakuKyufuTaishoListHandler {
     private static final RString 老 = new RString("老");
     private static final RString 緩１ = new RString("緩１");
     private static final RString 緩2 = new RString("緩2");
-    private static final RString コンマ = new RString(",");
+    private static final RString コンマ = new RString("、");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -108,6 +108,7 @@ public class KogakuKyufuTaishoListHandler {
         } else if (明細編集モード.equals(画面モード)) {
             set明細編集モード();
         }
+        set明細合計区分制御();
     }
 
     /**
@@ -128,8 +129,8 @@ public class KogakuKyufuTaishoListHandler {
                 row.setData9(koEntity.get給付対象者明細entity().get高額給付根拠());
                 row.setData10(ONE_RS);
                 row.setData11(koEntity.get給付対象者明細entity().getサービス種類コード().value());
-                row.getData12().setValue(koEntity.get給付対象者明細entity().get被保険者番号().value());
-                row.getData13().setValue(new RString(koEntity.get給付対象者明細entity().getサービス提供年月().toString()));
+                row.setData12(koEntity.get給付対象者明細entity().get被保険者番号().value());
+                row.setData13(new RString(koEntity.get給付対象者明細entity().getサービス提供年月().toString()));
                 row.getData14().setValue(new Decimal(koEntity.get給付対象者明細entity().get履歴番号()));
             } else if (TWO_RS.equals(koEntity.get明細合計区分())) {
                 row.setData3(合計);
@@ -139,9 +140,15 @@ public class KogakuKyufuTaishoListHandler {
                 row.getData7().setValue(koEntity.get給付対象者合計entity().get支払済金額合計());
                 row.getData8().setValue(koEntity.get給付対象者合計entity().get高額支給額());
                 row.setData10(TWO_RS);
-                row.getData12().setValue(koEntity.get給付対象者合計entity().get被保険者番号().value());
-                row.getData13().setValue(koEntity.get給付対象者合計entity().getサービス提供年月().toDateString());
+                row.setData12(koEntity.get給付対象者合計entity().get被保険者番号().value());
+                row.setData13(koEntity.get給付対象者合計entity().getサービス提供年月().toDateString());
                 row.getData14().setValue(koEntity.get給付対象者合計entity().get履歴番号());
+                row.setData15(koEntity.get給付対象者合計entity().get世帯集約番号());
+                if (koEntity.get給付対象者合計entity().is自動償還対象フラグ()) {
+                    row.setData16(ZERO_RS);
+                } else {
+                    row.setData16(ONE_RS);
+                }
             }
             rowList.add(row);
         }
@@ -166,8 +173,8 @@ public class KogakuKyufuTaishoListHandler {
                 row.setData9(koEntity.get給付対象者明細entity().get事業高額給付根拠());
                 row.setData10(ONE_RS);
                 row.setData11(koEntity.get給付対象者明細entity().getサービス種類コード().value());
-                row.getData12().setValue(koEntity.get給付対象者明細entity().get被保険者番号().value());
-                row.getData13().setValue(new RString(koEntity.get給付対象者明細entity().getサービス提供年月().toString()));
+                row.setData12(koEntity.get給付対象者明細entity().get被保険者番号().value());
+                row.setData13(new RString(koEntity.get給付対象者明細entity().getサービス提供年月().toString()));
                 row.getData14().setValue(new Decimal(koEntity.get給付対象者明細entity().get履歴番号()));
             } else if (TWO_RS.equals(koEntity.get明細合計区分())) {
                 row.setData3(合計);
@@ -177,9 +184,15 @@ public class KogakuKyufuTaishoListHandler {
                 row.getData7().setValue(koEntity.get給付対象者合計entity().get支払済金額合計());
                 row.getData8().setValue(koEntity.get給付対象者合計entity().get事業高額支給額());
                 row.setData10(TWO_RS);
-                row.getData12().setValue(koEntity.get給付対象者合計entity().get被保険者番号().value());
-                row.getData13().setValue(koEntity.get給付対象者合計entity().getサービス提供年月().toDateString());
+                row.setData12(koEntity.get給付対象者合計entity().get被保険者番号().value());
+                row.setData13(koEntity.get給付対象者合計entity().getサービス提供年月().toDateString());
                 row.getData14().setValue(koEntity.get給付対象者合計entity().get履歴番号());
+                row.setData15(koEntity.get給付対象者合計entity().get世帯集約番号());
+                if (koEntity.get給付対象者合計entity().is自動償還対象フラグ()) {
+                    row.setData16(ZERO_RS);
+                } else {
+                    row.setData16(ONE_RS);
+                }
             }
             rowList.add(row);
         }
@@ -214,8 +227,13 @@ public class KogakuKyufuTaishoListHandler {
         if (row.getData7().getValue() != null) {
             div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().setValue(row.getData7().getValue());
         }
+        div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().setValue(row.getData8().getValue());
         if (row.getData9() != null && !row.getData9().isEmpty()) {
             set高額判定根拠(サービス提供年月, row.getData9());
+        }
+        div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().setValue(row.getData15());
+        if (row.getData16() != null && !row.getData16().isEmpty()) {
+            div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().setSelectedKey(row.getData16());
         }
         div.getRowId().setValue(new Decimal(row.getId()));
     }
@@ -307,14 +325,17 @@ public class KogakuKyufuTaishoListHandler {
         row.setData2(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue());
         row.getData4().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue());
         row.getData5().setValue(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue());
-        if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null) {
-            row.getData6().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue());
+        if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(TWO_RS)) {
+            if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null) {
+                row.getData6().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue());
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue() != null) {
+                row.getData7().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
+            } else {
+                row.getData7().setValue(Decimal.ZERO);
+            }
+            row.getData8().setValue(div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().getValue());
         }
-        if (div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue() != null) {
-            row.getData7().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
-        }
-        row.getData8().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue().
-                add(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue()));
         if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
             row.setData10(ONE_RS);
             row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
@@ -326,96 +347,105 @@ public class KogakuKyufuTaishoListHandler {
                 && !div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().isEmpty()) {
             row.setData11(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue());
         }
+        row.setData15(div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().getValue());
+        row.setData16(div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().getSelectedKey());
         RStringBuilder builder = new RStringBuilder();
         if (サービス提供年月 != null && サービス提供年月.isBeforeOrEquals(定値年月1)) {
             if (div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().getSelectedKey().equals(key0)) {
                 builder.append(月);
-                builder.append(コンマ);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key0)) {
+                builder.append(コンマ);
                 builder.append(低);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key1)) {
+                builder.append(コンマ);
                 builder.append(市);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key2)) {
+                builder.append(コンマ);
                 builder.append(生);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key3)) {
-                builder.append(現);
                 builder.append(コンマ);
+                builder.append(現);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key0)) {
+                builder.append(コンマ);
                 builder.append(低);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key1)) {
+                builder.append(コンマ);
                 builder.append(市);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key2)) {
+                builder.append(コンマ);
                 builder.append(生);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key3)) {
-                builder.append(現);
                 builder.append(コンマ);
+                builder.append(現);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey().equals(key0)) {
+                builder.append(コンマ);
                 builder.append(単);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey().equals(key1)) {
-                builder.append(合);
                 builder.append(コンマ);
+                builder.append(合);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey().equals(key0)) {
-                builder.append(老);
                 builder.append(コンマ);
+                builder.append(老);
             }
-            row.setData9(builder.toRString());
+            if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
+                row.setData9(builder.toRString());
+            }
         } else {
             if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key0)) {
                 builder.append(低);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key1)) {
                 builder.append(市);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key2)) {
                 builder.append(生);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key3)) {
                 builder.append(現);
-                builder.append(コンマ);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key0)) {
+                builder.append(コンマ);
                 builder.append(低);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key1)) {
+                builder.append(コンマ);
                 builder.append(市);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key2)) {
+                builder.append(コンマ);
                 builder.append(生);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key3)) {
-                builder.append(現);
                 builder.append(コンマ);
+                builder.append(現);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey().equals(key0)) {
+                builder.append(コンマ);
                 builder.append(単);
-                builder.append(コンマ);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey().equals(key1)) {
+                builder.append(コンマ);
                 builder.append(合);
-                builder.append(コンマ);
             }
-            if (div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey().equals(key0)) {
-                builder.append(老);
+            if (div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey().equals(key0)
+                    && !div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().isDisabled()) {
                 builder.append(コンマ);
+                builder.append(老);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().getSelectedKey().equals(key0)
+                    && !div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().isDisabled()) {
+                builder.append(コンマ);
+                builder.append(TWO_RS);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key1)
                     && !div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().isDisabled()) {
+                builder.append(コンマ);
                 builder.append(緩１);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key2)
                     && !div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().isDisabled()) {
-                builder.append(緩１);
+                builder.append(コンマ);
+                builder.append(緩2);
             }
-            row.setData9(builder.toRString());
+            if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
+                row.setData9(builder.toRString());
+            }
         }
         if (追加.equals(処理モード)) {
             List<dgTaishoshaIchiran_Row> list = div.getDgTaishoshaIchiran().getDataSource();
@@ -424,11 +454,11 @@ public class KogakuKyufuTaishoListHandler {
     }
 
     /**
-     * 修正制御
+     * 追加修正制御
      *
      * @param サービス提供年月 FlexibleYearMonth
      */
-    public void 修正制御(FlexibleYearMonth サービス提供年月) {
+    public void set追加修正制御(FlexibleYearMonth サービス提供年月) {
         if (サービス提供年月 != null && サービス提供年月.isBeforeOrEquals(定値年月1)) {
             div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setDisabled(false);
             div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setDisabled(false);
@@ -467,6 +497,41 @@ public class KogakuKyufuTaishoListHandler {
     }
 
     /**
+     * 明細合計区分制御
+     *
+     *
+     */
+    public void set明細合計区分制御() {
+        if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
+            div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbGassan().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setVisible(true);
+        } else {
+            div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbGassan().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setVisible(false);
+        }
+    }
+
+    /**
      * 画面制御
      *
      * @param flag boolean
@@ -490,6 +555,9 @@ public class KogakuKyufuTaishoListHandler {
         div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(flag);
         div.getMeisaiGokeiHenshuPanel().getBtnTorikeshi().setDisabled(flag);
         div.getMeisaiGokeiHenshuPanel().getBtnkakutei().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().setDisabled(flag);
+        div.getMeisaiGokeiHenshuPanel().getRdbKogakuJidoSyokanTaisyo().setDisabled(flag);
     }
 
     public void 削除制御() {
@@ -575,12 +643,38 @@ public class KogakuKyufuTaishoListHandler {
         div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().clearValue();
         div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().clearValue();
         div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().clearValue();
         div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setSelectedKey(key1);
         div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setSelectedKey(key1);
         div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setSelectedKey(key1);
         div.getMeisaiGokeiHenshuPanel().getRdbGassan().setSelectedKey(key0);
         div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(key0);
         div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setSelectedKey(key0);
+        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(key0);
+    }
+
+    /**
+     * 追加制御
+     */
+    public void set追加制御() {
+        div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().setSelectedKey(ONE_RS);
+        div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getTxtSetaiSyuyakuBango().clearValue();
+        div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRdbGassan().setSelectedKey(key0);
+        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(key1);
+        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setSelectedKey(key1);
         div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(key0);
     }
 

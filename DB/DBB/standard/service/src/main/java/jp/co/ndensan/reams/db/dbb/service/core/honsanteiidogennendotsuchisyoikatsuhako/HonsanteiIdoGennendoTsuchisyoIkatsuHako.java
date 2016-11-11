@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.H
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.PrtTokuchoKaishiTsuchishoHonsanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuProperty.OutputOrderEnum;
+import jp.co.ndensan.reams.db.dbb.business.report.karisantei.IdoKarisanteigakuTsuchishoOutPutOrder;
 import jp.co.ndensan.reams.db.dbb.business.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranProperty.NonyuOutputOrderEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiProperty.BreakerFieldsEnum;
@@ -221,6 +222,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
         builder.set業務コード(GyomuCode.DB介護保険);
+        builder.set基準日(FlexibleDate.getNowDate());
         IKozaSearchKey kozaSearchKey = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
@@ -997,12 +999,11 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
             return RString.EMPTY;
         }
         RString 出力順 = RString.EMPTY;
+        //QA1854 確認中
         if (特別徴収開始通知書本算定_帳票分類ID.equals(帳票分類ID)) {
             出力順 = MyBatisOrderByClauseCreator.create(BreakerFieldsEnum.class, outputOrder);
         } else if (特別徴収開始通知書仮算定_帳票分類ID.equals(帳票分類ID)) {
-            出力順 = RString.EMPTY;
-            //TODO 仕様変更
-            //出力順 = MyBatisOrderByClauseCreator.create(OutputOrderEnum.class, outputOrder);
+            出力順 = MyBatisOrderByClauseCreator.create(IdoKarisanteigakuTsuchishoOutPutOrder.class, outputOrder);
         } else if (決定変更通知書_帳票分類ID.equals(帳票分類ID)) {
             出力順 = MyBatisOrderByClauseCreator.create(OutputOrderEnum.class, outputOrder);
         } else if (納入通知書_帳票分類ID.equals(帳票分類ID)) {
@@ -1291,7 +1292,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
     }
 
     private int get山分け用スプール数_銀振型(List<NokiJoho> 期月List, KitsukiList 本算定期間) {
-        int 山分け用スプール数 = 0;
+        int 山分け用スプール数 = 1;
         本算定期間.toList();
         for (NokiJoho 期月 : 期月List) {
             if (定値区分_0.equals(get印字位置(期月.get期月().get月AsInt()))) {
@@ -1311,10 +1312,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         int 銀振印字位置Para = 0;
         for (int i = 0; i < 期月List.size() - 1; i++) {
             int 銀振印字位置 = Integer.parseInt(get印字位置(期月List.get(i).get期月().get月AsInt()).toString());
-            if (i == 0 && Integer.parseInt(get印字位置(期月List.get(1).get期月().get月AsInt()).toString())
-                    <= Integer.parseInt(get印字位置(期月List.get(0).get期月().get月AsInt()).toString())) {
-                山分け用スプール数 = 山分け用スプール数 + 1;
-            } else if (銀振印字位置 <= 銀振印字位置Para) {
+            if (銀振印字位置 <= 銀振印字位置Para) {
                 山分け用スプール数 = 山分け用スプール数 + 1;
             }
             銀振印字位置Para = 銀振印字位置;

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -88,6 +89,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
             source.gokeiKensuTitle = 合計件数;
             source.gokeiKensu = doカンマ編集(new Decimal(件数)).concat(漢字_件);
         }
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_4);
         return source;
     }
 

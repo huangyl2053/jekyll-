@@ -711,6 +711,7 @@ public class HonnSanteiFuka {
                 .add(特徴期別金額List.get(INDEX_2)).add(特徴期別金額List.get(INDEX_3))
                 .add(特徴期別金額List.get(INDEX_4)).add(特徴期別金額List.get(INDEX_5));
         ChoshuHoho 徴収方法の情報_クローン = new ChoshuHoho(徴収方法情報_更正前.toEntity());
+        CalculateChoteiResult result = new CalculateChoteiResult();
         if (更正後特徴期別金額合計.compareTo(更正前特徴期別金額合計) < INDEX_0) {
             徴収方法の情報_クローン = 徴収方法の情報_クローン.createBuilderForEdit()
                     .set特別徴収停止事由コード(ChoteiJiyuCode.保険料額の減額変更.getコード())
@@ -718,9 +719,10 @@ public class HonnSanteiFuka {
             徴収方法の情報_クローン = ChoshuHohoKoshin.createInstance()
                     .getChoshuHohoKoshinData(徴収方法の情報_クローン, 調定日時, 賦課の情報_クローン.get資格取得日(),
                             賦課の情報_クローン.get資格喪失日());
+            result.set徴収方法情報(徴収方法の情報_クローン);
+        } else {
+            result.set徴収方法情報(null);
         }
-        CalculateChoteiResult result = new CalculateChoteiResult();
-        result.set徴収方法情報(徴収方法の情報_クローン);
         result.set賦課情報(賦課の情報_クローン);
         return result;
     }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030010;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010100.DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030020.DBU030020_JigyoHokokuNenpo_Yoshiki1To2Parameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030.DBU030030_JigyoHokokuNenpo_IppanParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030040.DBU030040_JigyoHokokuNenpo_IppanGenbutsuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030070.DBU030070_JigyoHokokuNenpo_HokenkyufuGenbutsuParameter;
@@ -90,6 +91,32 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
      * コンストラクタです。
      */
     public DBU030010_JigyoHokokuNenpo_MainParameter() {
+    }
+
+    /**
+     * 事業状況報告年報　様式１・２を生成します。
+     *
+     * @return 事業状況報告年報　様式１・２
+     */
+    public DBU030020_JigyoHokokuNenpo_Yoshiki1To2Parameter toDBU030020Parameter() {
+        DBU030020_JigyoHokokuNenpo_Yoshiki1To2Parameter parameter = new DBU030020_JigyoHokokuNenpo_Yoshiki1To2Parameter();
+        parameter.setプリントコントロール区分(プリントコントロール区分);
+        parameter.set報告年度(報告年度);
+        parameter.set報告開始年月(報告開始年月);
+        parameter.set報告終了年月(報告終了年月);
+        parameter.set集計年度(集計年度.get(1));
+        parameter.set集計開始年月(集計開始年月.get(1));
+        parameter.set集計終了年月(集計終了年月.get(1));
+        parameter.set作成日時(作成日時.get(1));
+        parameter.set処理日時(処理日時);
+        parameter.set市町村コード(市町村コード);
+        parameter.set合併市町村区分(旧市町村区分);
+        parameter.set広域構成市町村区分(構成市町村区分);
+        parameter.set構成市町村コードリスト(構成市町村コードリスト);
+        parameter.set旧市町村コードリスト(旧市町村コードリスト);
+        parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
+        parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
+        return parameter;
     }
 
     /**

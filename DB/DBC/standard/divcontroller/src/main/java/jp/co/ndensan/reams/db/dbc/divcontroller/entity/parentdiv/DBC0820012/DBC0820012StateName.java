@@ -16,7 +16,8 @@ public enum DBC0820012StateName implements IStateEnumerations {
 
     NoChange(""),
     登録修正モード("登録修正モード"),
-    削除モード("削除モード");
+    削除モード("削除モード"),
+    処理完了("処理完了");
 
     private final RString name;
 

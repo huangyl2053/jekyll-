@@ -131,8 +131,13 @@ public class RenkeiDataTorikomiHandler {
      */
     public void getFileData() {
         RString path = Directory.createTmpDirectory();
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                RDateTime.parse(div.getHiddenFileId().toString())), new FilesystemPath(path));
+        List<RString> filedIdList = div.getHiddenFileId().split(",");
+        for (RString filedId : filedIdList) {
+            if (!RString.isNullOrEmpty(filedId)) {
+                SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                        RDateTime.parse(filedId.toString())), new FilesystemPath(path));
+            }
+        }
         RString filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
         File file = new File(filePath.toString());
         if (file.exists() && !なし.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
@@ -144,15 +149,17 @@ public class RenkeiDataTorikomiHandler {
      * 対象ファイルを共有フォルダに保存します。
      *
      * @param path 格納パス
+     * @param buider buider
      * @return SharedFileEntryDescriptor
      */
-    public SharedFileEntryDescriptor upLoadFile(FilesystemPath path) {
+    public SharedFileEntryDescriptor upLoadFile(FilesystemPath path, RStringBuilder buider) {
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(共有ファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
         SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, path, opts);
         div.setPath(entity.getDirectAccessPath());
-        div.setHiddenFileId(new RString(entity.getSharedFileId().toString()));
+        buider.append(new RString(entity.getSharedFileId().toString())).append(",");
+        div.setHiddenFileId(buider.toRString());
         return entity;
     }
 
@@ -185,7 +192,14 @@ public class RenkeiDataTorikomiHandler {
         }
         batchParameter.set申請情報データリスト(parameterList);
         batchParameter.set格納パス(div.getPath());
-        batchParameter.set共有ファイルID(RDateTime.parse(div.getHiddenFileId().toString()));
+        List<RDateTime> 共有ファイルIDList = new ArrayList<>();
+        List<RString> filedIdList = div.getHiddenFileId().split(",");
+        for (RString filedId : filedIdList) {
+            if (!RString.isNullOrEmpty(filedId)) {
+                共有ファイルIDList.add(RDateTime.parse(filedId.toString()));
+            }
+        }
+        batchParameter.set共有ファイルIDList(共有ファイルIDList);
         return batchParameter;
     }
 

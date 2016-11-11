@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1010011.DBC1010011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1010011.DBC1010011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1010011.ShokanShikyuKetteiTsuchishoHakkouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1010011.ShokanShikyuKetteiTsuchishoHakkouHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouFinder;
@@ -44,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -85,6 +87,20 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         List<JukyushaDaicho> 受給者台帳List = finder.get受給者台帳(被保険者番号);
         List<SogoJigyoTaishosha> 総合事業対象者List = finder.get総合事業対象者(被保険者番号);
         List<ShokanHanteiKekka> 償還払支給判定結果 = finder.select償還払支給判定結果(被保険者番号);
+        if (!ResponseHolder.isReRequest() && (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty())) {
+            InformationMessage message = new InformationMessage(DbcInformationMessages.対象の償還決定データが存在しません.getMessage().getCode(),
+                    DbcInformationMessages.対象の償還決定データが存在しません.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        } else if (new RString(DbcInformationMessages.対象の償還決定データが存在しません.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).forwardWithEventName(DBC1010011TransitionEventName.完了).respond();
+        }
+        if (!ResponseHolder.isReRequest() && 償還払支給判定結果.isEmpty()) {
+            InformationMessage message = new InformationMessage(DbcInformationMessages.償還決定データなし.getMessage().getCode(),
+                    DbcInformationMessages.償還決定データなし.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        } else if (new RString(DbcInformationMessages.償還決定データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).forwardWithEventName(DBC1010011TransitionEventName.完了).respond();
+        }
         getHandler(div).onLoad(shikibetsuCode, 被保険者番号, 償還払支給判定結果List, 受給者台帳List, 総合事業対象者List, 償還払支給判定結果);
         return ResponseData.of(div).setState(DBC1010011StateName.支給決定通知書発行);
     }

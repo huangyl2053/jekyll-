@@ -95,7 +95,7 @@ public class YoboKeikakuJikoSakuseiProcess extends BatchProcessBase<YoboKeikakuJ
     @Override
     protected void afterExecute() {
         KyotakuKeikakuJikosakuseiKanriResult kyotakuKeikakuResult = new KyotakuKeikakuJikosakuseiKanriResult();
-        if (連番 == 0) {
+        if (連番 == 1) {
 
             登録件数 = 自己作成管理一時TBL.getInsertCount();
             if (登録件数 < 1) {

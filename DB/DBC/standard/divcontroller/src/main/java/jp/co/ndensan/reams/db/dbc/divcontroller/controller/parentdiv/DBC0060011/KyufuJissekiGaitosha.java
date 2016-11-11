@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0060011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuJissekiGaitoshaCollect;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiDataModel;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
@@ -26,6 +25,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,13 +51,17 @@ public class KyufuJissekiGaitosha {
     public ResponseData<KyufuJissekiGaitoshaDiv> onLoad(KyufuJissekiGaitoshaDiv div) {
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         getHandler(div).onLoad();
-        KyufuJissekiGaitoshaCollect 画面データ = ViewStateHolder.get(
-                ViewStateKeys.給付管理票照会画面データ, KyufuJissekiGaitoshaCollect.class);
-        if (画面データ != null) {
-            getHandler(div).復元画面データ(画面データ);
-            set被保険者情報(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), div);
-        }
-        ViewStateHolder.put(ViewStateKeys.給付管理票照会画面データ, null);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param div 給付管理票照会のDIVです。
+     * @return 給付管理票照会
+     */
+    public ResponseData<KyufuJissekiGaitoshaDiv> onActive(KyufuJissekiGaitoshaDiv div) {
+        set被保険者情報(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), div);
         return ResponseData.of(div).respond();
     }
 
@@ -80,6 +84,7 @@ public class KyufuJissekiGaitosha {
         if (給付管理票一覧 != null) {
             getHandler(div).onClick_btnSearch(給付管理票一覧);
         } else {
+            getHandler(div).set空給付管理票一覧();
             div.setHidden件数(なし);
             ValidationMessageControlPairs pairs2 = getValidationHandler(div).validateFor検索チェック();
             if (pairs2.iterator().hasNext()) {
@@ -120,6 +125,8 @@ public class KyufuJissekiGaitosha {
                 短期入所サービスフラグ = true;
             }
         }
+        ShikibetsuCode 識別コード = new ShikibetsuCode(給付管理票.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.給付管理明細一覧, 給付管理明細一覧Model);
         ViewStateHolder.put(ViewStateKeys.給付管理票200604Entity, 給付管理票);
         ViewStateHolder.put(ViewStateKeys.訪問通所サービスフラグ, 訪問通所サービスフラグ);
@@ -144,8 +151,6 @@ public class KyufuJissekiGaitosha {
      */
     public ResponseData<KyufuJissekiGaitoshaDiv> onClick_btnSearchHihokensha(KyufuJissekiGaitoshaDiv div) {
         ViewStateHolder.put(ViewStateKeys.資格対象者, null);
-        KyufuJissekiGaitoshaCollect 画面データ = getHandler(div).get画面データ();
-        ViewStateHolder.put(ViewStateKeys.給付管理票照会画面データ, 画面データ);
         return ResponseData.of(div).forwardWithEventName(DBC0060011TransitionEventName.対象者検索).respond();
     }
 

@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokuchoHeijunkaKeisanPanel {
 
     private static final RString 帳票グループコード = new RString("DBB0130001");
-    private final RString 特別徴収平準化計算_特別徴収8月分 = new RString("DBB0130001_特別徴収平準化計算（特別徴収8月分）");
+    private final RString 特別徴収平準化計算_特別徴収8月分 = new RString("DBB200005_TokubetsuChoshuHeijunkaKeisanAugustKekkaIchiran");
 
     /**
      * onLoadです
@@ -62,7 +62,6 @@ public class TokuchoHeijunkaKeisanPanel {
      */
     public ResponseData<DBB013001_TokuchoHeinjunka8GatsuParameter> onClick_btnBatchRegister(TokuchoHeijunkaKeisanPanelDiv div) {
 
-        DBB013001_TokuchoHeinjunka8GatsuParameter parameter = new DBB013001_TokuchoHeinjunka8GatsuParameter();
         KaigoFukaTokuchoHeijunka8 特徴平準化 = new KaigoFukaTokuchoHeijunka8();
         HeijunkaKeisanPageJoho pageData = new HeijunkaKeisanPageJoho();
         for (int i = 0, len = div.getTokuchoHeijunkaPanel().getCcdOutputChohyoIchiran().get出力帳票一覧().size(); i < len; i++) {
@@ -77,7 +76,7 @@ public class TokuchoHeijunkaKeisanPanel {
         RDate 年度 = new RDate(div.getHeijunkaAugustKeisan().getHeijunka8ShoriNaiyo().getTxtChoteiNendo().getValue().toString());
         pageData.set調定年度(new FlexibleYear(年度.getYear().toDateString()));
         pageData.set賦課年度(new FlexibleYear(年度.getYear().toDateString()));
-        特徴平準化.getBatchiPara(pageData);
+        DBB013001_TokuchoHeinjunka8GatsuParameter parameter = 特徴平準化.getBatchiPara(pageData);
         return ResponseData.of(parameter).respond();
     }
 

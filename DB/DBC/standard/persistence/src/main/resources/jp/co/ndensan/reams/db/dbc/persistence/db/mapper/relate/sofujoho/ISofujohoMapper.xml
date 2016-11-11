@@ -19,10 +19,59 @@
 
     <select id="select過誤申立送付情報照会" resultMap="resultMap_SofujohoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sofujoho.SofujohoMybatisParameter" fetchSize="500" resultOrdered="true">
-        WITH T AS (
+         WITH T AS (
+  WITH 介護事業者Newest AS ( 
+  select
+   "mst"."jigyoshaNo" ,
+        "mst"."yukoKaishiYMD" ,
+        "mst"."insertDantaiCd" ,
+        "mst"."insertTimestamp" ,
+        "mst"."insertReamsLoginId",
+        "mst"."insertContextId",
+        "mst"."isDeleted" ,
+        "mst"."updateCount" ,
+        "mst"."lastUpdateTimestamp" ,
+        "mst"."lastUpdateReamsLoginId" ,
+        "mst"."yukoShuryoYMD" ,
+        "mst"."idoYMD" ,
+        "mst"."idoJiyuCode" ,
+        "mst"."jigyoKaishiYMD" ,
+        "mst"."jigyoKyushiYMD",
+        "mst"."jigyoSaikaiYMD" ,
+        "mst"."jigyoHaishiYMD",
+        "mst"."jigyoshaName",
+        "mst"."jigyoshaNameKana",
+        "mst"."yubinNo",
+        "mst"."jigyoshaAddress",
+        "mst"."jigyoshaKanaAddress" ,
+        "mst"."telNo",
+        "mst"."faxNo",
+        "mst"."atesakiBusho",
+        "mst"."atesakininName" ,
+        "mst"."atesakininNamekana" ,
+        "mst"."shiteiKijungaitoJigyoshaKubun" ,
+        "mst"."shozaiShichoson" ,
+        "mst"."serviceJisshiChiiki",
+        "mst"."hojinShubetsu",
+        "mst"."bedSu",
+        "mst"."shozokuNinzu" ,
+        "mst"."riyoshaSu" ,
+        "mst"."biko" 
+  from
+    rgdb."DbT7060KaigoJigyosha" as mst 
+  where
+    not EXISTS (
+      select
+        'X' 
+      from
+        rgdb."DbT7060KaigoJigyosha" as slv 
+      where
+        mst."jigyoshaNo" = slv."jigyoshaNo" 
+        and mst."yukoKaishiYMD" <![CDATA[<]]> slv."yukoKaishiYMD")
+)
         SELECT
         T3059."jigyoshoNo",
-        T7060."jigyoshaName",
+        Tb7060."jigyoshaName",
         T3059."hiHokenshaNo",
         T3059."moshitateshaKubunCode",
         T3059."moshitateJiyuCode",
@@ -31,27 +80,24 @@
         T3059."shokisaiHokenshaNo",
         dbv1001."shikibetsuCode"
         FROM
-        rgdb."DbT3059KagoMoshitate" AS T3059
-        INNER JOIN
-        rgdb."DbT7060KaigoJigyosha" AS T7060
-        ON	T7060."jigyoshaNo"=T3059."jigyoshoNo"
-        LEFT OUTER JOIN
-        rgdb."DbT7060KaigoJigyosha" AS Tb7060
+        rgdb."DbT3059KagoMoshitate" AS T3059 
+        LEFT JOIN
+        介護事業者Newest AS Tb7060
         ON	T3059."jigyoshoNo"=Tb7060."jigyoshaNo"
-        AND	Tb7060."yukoKaishiYMD" = (SELECT MAX("yukoKaishiYMD") FROM rgdb."DbT7060KaigoJigyosha")
         LEFT JOIN
         rgdb."DbV1001HihokenshaDaicho" AS dbv1001
         ON	T3059."hiHokenshaNo" = dbv1001."hihokenshaNo"
         WHERE
         T3059."moshitateshoKubunCode"=#{申立書区分コード}
-        <if test="送付年月フラグ">
+      <if test="送付年月フラグ">
             AND T3059."kokuhorenSofuYM" = #{送付年月}
-        </if>
+       </if>
         <if test="!送付年月フラグ">
-            AND T3059."kokuhorenSofuYM" IS NULL
-        </if>
-        <if test="保険者番号フラグ">
-            AND substr(T3059."shokisaiHokenshaNo",1,5) = #{証記載保険者番号}
+           AND T3059."kokuhorenSofuYM" IS NULL
+            OR T3059."kokuhorenSofuYM" = ''
+       </if>
+       <if test="保険者番号フラグ">
+           AND substr(T3059."shokisaiHokenshaNo",1,5) = #{証記載保険者番号}
         </if>
         ORDER BY
         T3059."jigyoshoNo",

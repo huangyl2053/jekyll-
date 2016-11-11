@@ -4,17 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * HihokenshaNoShiteiPanel のクラスファイル 
- * 
- * @author 自動生成
+ * HihokenshaNoShiteiPanel のクラスファイルです。
+ *
+ * @reamsid_L DBC-4790-010 chenyadong
  */
 public class HihokenshaNoShiteiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,8 +30,8 @@ public class HihokenshaNoShiteiPanelDiv extends Panel {
     private RadioButton radHihokenshaNo;
     @JsonProperty("txtHihokenshaNo")
     private TextBox txtHihokenshaNo;
-    @JsonProperty("btnHihokenshaSearch")
-    private ButtonDialog btnHihokenshaSearch;
+    @JsonProperty("btnSearchHihokensha")
+    private Button btnSearchHihokensha;
     @JsonProperty("ddlNendo")
     private DropDownList ddlNendo;
 
@@ -73,21 +78,21 @@ public class HihokenshaNoShiteiPanelDiv extends Panel {
     }
 
     /*
-     * getbtnHihokenshaSearch
-     * @return btnHihokenshaSearch
+     * getbtnSearchHihokensha
+     * @return btnSearchHihokensha
      */
-    @JsonProperty("btnHihokenshaSearch")
-    public ButtonDialog getBtnHihokenshaSearch() {
-        return btnHihokenshaSearch;
+    @JsonProperty("btnSearchHihokensha")
+    public Button getBtnSearchHihokensha() {
+        return btnSearchHihokensha;
     }
 
     /*
-     * setbtnHihokenshaSearch
-     * @param btnHihokenshaSearch btnHihokenshaSearch
+     * setbtnSearchHihokensha
+     * @param btnSearchHihokensha btnSearchHihokensha
      */
-    @JsonProperty("btnHihokenshaSearch")
-    public void setBtnHihokenshaSearch(ButtonDialog btnHihokenshaSearch) {
-        this.btnHihokenshaSearch = btnHihokenshaSearch;
+    @JsonProperty("btnSearchHihokensha")
+    public void setBtnSearchHihokensha(Button btnSearchHihokensha) {
+        this.btnSearchHihokensha = btnSearchHihokensha;
     }
 
     /*

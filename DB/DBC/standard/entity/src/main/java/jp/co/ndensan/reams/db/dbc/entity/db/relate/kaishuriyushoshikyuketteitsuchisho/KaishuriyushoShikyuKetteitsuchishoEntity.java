@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -49,4 +51,6 @@ public class KaishuriyushoShikyuKetteitsuchishoEntity {
     private FlexibleDate riyushoSakuseiShinseiYMD;
     private RString shukeiNo;
     private boolean shukeiFlag;
+    private UaFt200FindShikibetsuTaishoEntity psmEntity;
+    private DbT7060KaigoJigyoshaEntity dbT7060Entity;
 }

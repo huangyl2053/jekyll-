@@ -118,7 +118,7 @@
         AND master."dbT2016NofugakuJohoTemp_fukaShichosonCode" = "ShikibetsuTaisho"."genLasdecCode"
         
         <if test="出力順 != null">
-        ${出力順}
+            ${出力順}
         </if>
     </select>
     
@@ -129,6 +129,7 @@
         "DbT2016NofugakuJohoTemp"."hihokenshaNo" as "dbT2016NofugakuJohoTemp_hihokenshaNo",
         "DbT2016NofugakuJohoTemp"."shikibetsuCode" as "dbT2016NofugakuJohoTemp_shikibetsuCode",
         "DbT2016NofugakuJohoTemp"."fukaShichosonCode" as "dbT2016NofugakuJohoTemp_fukaShichosonCode",
+        "DbT2016NofugakuJohoTemp"."choshuHouhou" as "dbT2016NofugakuJohoTemp_choshuHouhou",
         "DbT2016NofugakuJohoTemp"."tkSaishutsuKampuGaku" as "dbT2016NofugakuJohoTemp_tkSaishutsuKampuGaku",
         "DbT2016NofugakuJohoTemp"."fuSaishutsuKampuGaku" as "dbT2016NofugakuJohoTemp_fuSaishutsuKampuGaku",
         "DbT2016NofugakuJohoTemp"."tkChoteiGaku01" as "dbT2016NofugakuJohoTemp_tkChoteiGaku01",

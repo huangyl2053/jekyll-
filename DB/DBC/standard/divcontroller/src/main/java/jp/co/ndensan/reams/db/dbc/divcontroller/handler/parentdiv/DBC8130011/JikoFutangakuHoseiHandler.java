@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8130011;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGaku;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanJikoFutanGakuMeisai;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGaku;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.JigyoKogakuGassanJikofutangakuHosei;
 import jp.co.ndensan.reams.db.dbc.definition.core.jigyougassan.JigyouGassan_ShoumeishoyouDataKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.Jiko
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.dgJohoIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.tplJikofutanKanriJoho1Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8130011.tplJikofutanKanriJoho2Div;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuGassanJikoFutanGakuManager;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuGassanJikoFutanGakuMeisaiManager;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.JigyoKogakuGassanJikoFutanGakuManager;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.JigyoKogakuGassanJikoFutanGakuMeisaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
@@ -104,11 +104,11 @@ public class JikoFutangakuHoseiHandler {
     /**
      * 履歴を表示するのイベントです。
      *
-     * @param resultList List<KogakuGassanJikoFutanGaku>
+     * @param resultList List<JigyoKogakuGassanJikoFutanGaku>
      * @param 被保険者番号 HihokenshaNo
      * @param 識別コード ShikibetsuCode
      */
-    public void onClick_chkRirekiHyouji(List<KogakuGassanJikoFutanGaku> resultList,
+    public void onClick_chkRirekiHyouji(List<JigyoKogakuGassanJikoFutanGaku> resultList,
             HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         setRow(resultList, 被保険者番号, 識別コード);
     }
@@ -125,8 +125,8 @@ public class JikoFutangakuHoseiHandler {
         FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
         HokenshaNo 保険者番号 = new HokenshaNo(row.getTxtHokenshaNo());
         RString 支給申請書整理番号 = row.getTxtShikyuShinseishoSeiriNo();
-        KogakuGassanJikoFutanGakuManager manager = new KogakuGassanJikoFutanGakuManager();
-        KogakuGassanJikoFutanGaku 高額合算自己負担額 = manager.getMax履歴番号(
+        JigyoKogakuGassanJikoFutanGakuManager manager = new JigyoKogakuGassanJikoFutanGakuManager();
+        JigyoKogakuGassanJikoFutanGaku 高額合算自己負担額 = manager.getMax履歴番号(
                 被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
         return 履歴番号 - 高額合算自己負担額.get履歴番号() == 0
                 && JigyouGassan_ShoumeishoyouDataKubun.証明書用.get名称().equals(row.getTxtDataKBN());
@@ -135,9 +135,9 @@ public class JikoFutangakuHoseiHandler {
     /**
      * 履歴Dgdの選択ボタンの処理です。
      *
-     * @param result KogakuGassanJikoFutanGaku
+     * @param result JigyoKogakuGassanJikoFutanGaku
      */
-    public void onSelect_dgRireki(KogakuGassanJikoFutanGaku result) {
+    public void onSelect_dgRireki(JigyoKogakuGassanJikoFutanGaku result) {
         init事業自己負担額管理情報入力共通(result);
         init事業自己負担管理情報１タブ(result);
         init事業自己負担管理情報２タブ(result);
@@ -174,10 +174,10 @@ public class JikoFutangakuHoseiHandler {
     /**
      * 自己負担額一覧に戻るボタンクリック時の事件です。
      *
-     * @param result KogakuGassanJikoFutanGaku
+     * @param result JigyoKogakuGassanJikoFutanGaku
      * @return boolean
      */
-    public boolean onClick_btnJikofutangakuJohoNiModoru(KogakuGassanJikoFutanGaku result) {
+    public boolean onClick_btnJikofutangakuJohoNiModoru(JigyoKogakuGassanJikoFutanGaku result) {
         return result == null ? false : 編集処理対象から画面(result).hasChanged();
     }
 
@@ -185,12 +185,12 @@ public class JikoFutangakuHoseiHandler {
      * 負担額明細一覧を返します。
      *
      * @param 自己負担額保持 JigyoKogakuGassanJikofutangakuHosei
-     * @return List<KogakuGassanJikoFutanGakuMeisai>
+     * @return List<JigyoKogakuGassanJikoFutanGakuMeisai>
      */
-    public List<KogakuGassanJikoFutanGakuMeisai> setFutanGakuMeisai(
+    public List<JigyoKogakuGassanJikoFutanGakuMeisai> setFutanGakuMeisai(
             JigyoKogakuGassanJikofutangakuHosei 自己負担額保持) {
-        KogakuGassanJikoFutanGakuMeisaiManager maneger = new KogakuGassanJikoFutanGakuMeisaiManager();
-        List<KogakuGassanJikoFutanGakuMeisai> resultList = maneger.get対象月除く負担額明細(
+        JigyoKogakuGassanJikoFutanGakuMeisaiManager maneger = new JigyoKogakuGassanJikoFutanGakuMeisaiManager();
+        List<JigyoKogakuGassanJikoFutanGakuMeisai> resultList = maneger.get対象月除く負担額明細(
                 自己負担額保持.get被保険者番号(),
                 自己負担額保持.get対象年度(),
                 自己負担額保持.get保険者番号(),
@@ -199,11 +199,11 @@ public class JikoFutangakuHoseiHandler {
         return setResultList(resultList, 自己負担額保持);
     }
 
-    private void setRow(List<KogakuGassanJikoFutanGaku> resultList,
+    private void setRow(List<JigyoKogakuGassanJikoFutanGaku> resultList,
             HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         List<dgJohoIchiran_Row> rowList = new ArrayList();
         List<PersonalData> personalDataList = new ArrayList<>();
-        for (KogakuGassanJikoFutanGaku result : resultList) {
+        for (JigyoKogakuGassanJikoFutanGaku result : resultList) {
             dgJohoIchiran_Row row = new dgJohoIchiran_Row();
             row.setTxtTaishoNendo(result.get対象年度().toDateString());
             row.setTxtSanteiKubun(set算定区分(result.get異動区分()));
@@ -241,7 +241,7 @@ public class JikoFutangakuHoseiHandler {
         return RString.EMPTY;
     }
 
-    private void init事業自己負担額管理情報入力共通(KogakuGassanJikoFutanGaku result) {
+    private void init事業自己負担額管理情報入力共通(JigyoKogakuGassanJikoFutanGaku result) {
         JikoFutangakuHoseiDetailDiv detailDiv = div.getJikoFutangakuHoseiDetail();
         detailDiv.getTxtSanteiKBN().setValue(set算定区分(result.get異動区分()));
         detailDiv.getTxtTaishouNendo().setValue(new RDate(result.get対象年度().getYearValue()));
@@ -276,7 +276,7 @@ public class JikoFutangakuHoseiHandler {
         return null == date || date.isEmpty();
     }
 
-    private void init事業自己負担管理情報１タブ(KogakuGassanJikoFutanGaku result) {
+    private void init事業自己負担管理情報１タブ(JigyoKogakuGassanJikoFutanGaku result) {
         tplJikofutanKanriJoho1Div kanriJohoDiv1
                 = div.getJikoFutangakuHoseiDetail().getTplJikofutanKanriJoho1();
         kanriJohoDiv1.getTxtIdouKBN().setValue(result.get異動区分() == null ? RString.EMPTY
@@ -327,7 +327,7 @@ public class JikoFutangakuHoseiHandler {
         編集年月日(result, kanriJohoDiv1);
     }
 
-    private void 編集年月日(KogakuGassanJikoFutanGaku result,
+    private void 編集年月日(JigyoKogakuGassanJikoFutanGaku result,
             tplJikofutanKanriJoho1Div kanriJohoDiv1) throws IllegalArgumentException {
         if (isFlexibleDateNullOrEmpty(result.get申請年月日())) {
             kanriJohoDiv1.getTxtShinseiYMD().clearValue();
@@ -396,7 +396,7 @@ public class JikoFutangakuHoseiHandler {
         return dataSource;
     }
 
-    private void init事業自己負担管理情報２タブ(KogakuGassanJikoFutanGaku result) {
+    private void init事業自己負担管理情報２タブ(JigyoKogakuGassanJikoFutanGaku result) {
         tplJikofutanKanriJoho2Div kanriJohoDiv2
                 = div.getJikoFutangakuHoseiDetail().getTplJikofutanKanriJoho2();
         if (result.get宛先氏名() == null) {
@@ -438,7 +438,7 @@ public class JikoFutangakuHoseiHandler {
         return RString.EMPTY;
     }
 
-    private void set開始終了日(KogakuGassanJikoFutanGaku result) {
+    private void set開始終了日(JigyoKogakuGassanJikoFutanGaku result) {
         if (isFlexibleDateNullOrEmpty(result.get支払期間開始年月日())) {
             div.getTxtMadoguchiKaishiYMD().clearValue();
             div.getTxtMadoguchiKaishiYoubi().clearValue();
@@ -448,7 +448,7 @@ public class JikoFutangakuHoseiHandler {
             div.getTxtMadoguchiKaishiYoubi().setValue(
                     new RString(result.get支払期間開始年月日().getDayOfWeek().getShortTerm()));
         }
-        if (result.get支払期間開始時間() == null) {
+        if (result.get支払期間開始時間() == null || result.get支払期間開始時間().isEmpty()) {
             div.getTxtMadoguchiKaishiJikan().clearValue();
             div.getTxtMadoguchiKaishiFun().clearValue();
         } else {
@@ -465,7 +465,7 @@ public class JikoFutangakuHoseiHandler {
             div.getTxtMadoguchiShuryoYoubi().setValue(
                     new RString(result.get支払期間終了年月日().getDayOfWeek().getShortTerm()));
         }
-        if (result.get支払期間終了時間() == null) {
+        if (result.get支払期間終了時間() == null || result.get支払期間終了時間().isEmpty()) {
             div.getTxtMadoguchiShuryoJikan().clearValue();
             div.getTxtMadoguchiShuryoFun().clearValue();
         } else {
@@ -477,10 +477,10 @@ public class JikoFutangakuHoseiHandler {
     /**
      * 編集処理対象から画面のメソッドです。
      *
-     * @param result KogakuGassanJikoFutanGaku
-     * @return KogakuGassanJikoFutanGaku
+     * @param result JigyoKogakuGassanJikoFutanGaku
+     * @return JigyoKogakuGassanJikoFutanGaku
      */
-    public KogakuGassanJikoFutanGaku 編集処理対象から画面(KogakuGassanJikoFutanGaku result) {
+    public JigyoKogakuGassanJikoFutanGaku 編集処理対象から画面(JigyoKogakuGassanJikoFutanGaku result) {
         return result.createBuilderForEdit()
                 .set所得区分(div.getDdlShotokuKBN().getSelectedKey())
                 .set所得区分_70歳以上の者に係る(div.getDdl70SaiIjouShotokuKBN().getSelectedKey())
@@ -511,12 +511,12 @@ public class JikoFutangakuHoseiHandler {
     /**
      * 編集処理対象から画面のメソッドです。
      *
-     * @param result KogakuGassanJikoFutanGaku
+     * @param result JigyoKogakuGassanJikoFutanGaku
      * @param 自己負担額保持 JigyoKogakuGassanJikofutangakuHosei
-     * @return KogakuGassanJikoFutanGaku
+     * @return JigyoKogakuGassanJikoFutanGaku
      */
-    public KogakuGassanJikoFutanGaku 編集処理対象から保持Entity(
-            KogakuGassanJikoFutanGaku result, JigyoKogakuGassanJikofutangakuHosei 自己負担額保持) {
+    public JigyoKogakuGassanJikoFutanGaku 編集処理対象から保持Entity(
+            JigyoKogakuGassanJikoFutanGaku result, JigyoKogakuGassanJikofutangakuHosei 自己負担額保持) {
         return result.createBuilderForEdit()
                 .set補正済_合計_自己負担額(自己負担額保持.get変更後_合計_補正後_自己負担額())
                 .set補正済_合計_70_74自己負担額_内訳(
@@ -539,11 +539,11 @@ public class JikoFutangakuHoseiHandler {
         return RString.isNullOrEmpty(時間) ? null : 時間;
     }
 
-    private List<KogakuGassanJikoFutanGakuMeisai> setResultList(
-            List<KogakuGassanJikoFutanGakuMeisai> resultList,
+    private List<JigyoKogakuGassanJikoFutanGakuMeisai> setResultList(
+            List<JigyoKogakuGassanJikoFutanGakuMeisai> resultList,
             JigyoKogakuGassanJikofutangakuHosei 自己負担額保持) {
-        List<KogakuGassanJikoFutanGakuMeisai> businessList = new ArrayList();
-        for (KogakuGassanJikoFutanGakuMeisai item : resultList) {
+        List<JigyoKogakuGassanJikoFutanGakuMeisai> businessList = new ArrayList();
+        for (JigyoKogakuGassanJikoFutanGakuMeisai item : resultList) {
             switch (item.get対象月().toString()) {
                 case "008":
                     item = item.createBuilderForEdit()

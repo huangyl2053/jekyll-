@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuMybatisParamter;
+import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyoHokokuIppanGenbutsuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.KyufuJissekiKonkyoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
@@ -73,5 +74,13 @@ public interface IJigyoHokokuGeppoIppanGenbutsuMapper {
      * @return 事業状況報告統計帳票用情報
      */
     List<JigyoHokokuDataRelateEntity> getJigyouHoukokuTokeiTyouhyou(JigyoHokokuGeppoIppanGenbutsuMybatisParamter parameter);
+
+    /**
+     * 事業報告統計データの取得処理です。
+     *
+     * @param parameter 事業状況報告資料（年報）作成　一般状況（１～１１）パラメータ
+     * @return 事業報告統計データ
+     */
+    List<DbT7021JigyoHokokuTokeiDataEntity> getDbT7021JigyoHokokuTokeiDataEntity(JigyoHokokuGeppoIppanGenbutsuMybatisParamter parameter);
 
 }

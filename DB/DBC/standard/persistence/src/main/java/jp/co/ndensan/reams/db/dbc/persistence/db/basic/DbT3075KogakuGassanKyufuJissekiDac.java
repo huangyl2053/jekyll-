@@ -38,6 +38,7 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
     @InjectSession
     private SqlSession session;
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
+    private static final RString メッセージ_支給申請書整理番号 = new RString("支給申請書整理番号");
 
     /**
      * 主キーで高額合算給付実績を取得します。
@@ -137,6 +138,22 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
                 where(and(
                                 eq(isDeleted, false),
                                 eq(hihokenshaNo, 被保険者番号))).
+                toList(DbT3075KogakuGassanKyufuJissekiEntity.class);
+    }
+
+    /**
+     * 高額合算給付実績データを取得します。
+     *
+     * @param 支給申請書整理番号 RString
+     * @return List<DbT3075KogakuGassanKyufuJissekiEntity>
+     */
+    @Transaction
+    public List<DbT3075KogakuGassanKyufuJissekiEntity> get高額合算給付実績データ(RString 支給申請書整理番号) {
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_支給申請書整理番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3075KogakuGassanKyufuJisseki.class).
+                where(eq(shikyuShinseiSeiriNo, 支給申請書整理番号)).
                 toList(DbT3075KogakuGassanKyufuJissekiEntity.class);
     }
 }

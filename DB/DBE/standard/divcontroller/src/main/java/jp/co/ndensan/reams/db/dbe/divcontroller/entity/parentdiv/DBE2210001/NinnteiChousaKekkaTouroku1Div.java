@@ -356,6 +356,21 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
         return this.getNinteiChosaNyuryoku().getChosaJisshisha().getCcdChosaJisshishaJoho();
     }
 
+//    @JsonIgnore
+//    public ChosaJisshishaDiv getChosaJisshisha() {
+//        return this.getNinteiChosaNyuryoku().getChosaJisshisha();
+//    }
+
+//    @JsonIgnore
+//    public void  setChosaJisshisha(ChosaJisshishaDiv ChosaJisshisha) {
+//        this.getNinteiChosaNyuryoku().setChosaJisshisha(ChosaJisshisha);
+//    }
+//
+//    @JsonIgnore
+//    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
+//        return this.getNinteiChosaNyuryoku().getChosaJisshisha().getCcdChosaJisshishaJoho();
+//    }
+
     @JsonIgnore
     public tabChosaShuruiDiv getTabChosaShurui() {
         return this.getNinteiChosaNyuryoku().getTabChosaShurui();

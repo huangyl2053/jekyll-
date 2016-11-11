@@ -8,6 +8,9 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180023.DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180024.DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180025.DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -52,4 +55,77 @@ public class DBC180022_RiyoshaFutanwariaiHanteiSubParameter extends BatchParamet
     private Integer chushutuKaisu;
     private List<RString> 対象開始日;
     private List<RString> 対象終了日;
+
+    /**
+     * toDBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameterのメソッドです。
+     *
+     * @return DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
+     */
+    public DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter toDBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter() {
+        DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter parameter
+                = new DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter();
+        parameter.setTaishoNendo(this.getTaishoNendo());
+        parameter.setKijunbi(this.getKijunbi());
+        parameter.setShoriKubun(this.getShoriKubun());
+        parameter.setChushutsuKaishiNichiji(this.getChushutsuKaishiNichiji());
+        parameter.setChushutsuShuryonichiNichiji(this.getChushutsuShuryonichiNichiji());
+        parameter.setTestMode(this.isTestMode());
+        parameter.setNendoShuryoNengappi(this.getNendoShuryoNengappi());
+        parameter.setShoriNichiji(this.getShoriNichiji());
+        parameter.setHanteiKijunbi(this.getHanteiKijunbi());
+        parameter.setTaishoGetsu(this.getTaishoGetsu());
+        parameter.setChushutuKaisu(this.getChushutuKaisu());
+        parameter.set対象開始日(this.get対象開始日());
+        parameter.set対象終了日(this.get対象終了日());
+        return parameter;
+    }
+
+    /**
+     * toDBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameterのメソッドです。
+     *
+     * @return DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter
+     */
+    public DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter toDBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter() {
+        DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter parameter
+                = new DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter();
+        parameter.setTaishoNendo(this.getTaishoNendo());
+        parameter.setKijunbi(this.getKijunbi());
+        parameter.setShoriKubun(this.getShoriKubun());
+        parameter.setChushutsuKaishiNichiji(this.getChushutsuKaishiNichiji());
+        parameter.setChushutsuShuryonichiNichiji(this.getChushutsuShuryonichiNichiji());
+        parameter.setTestMode(this.isTestMode());
+        parameter.setNendoShuryoNengappi(this.getNendoShuryoNengappi());
+        parameter.setShoriNichiji(this.getShoriNichiji());
+        parameter.setHanteiKijunbi(this.getHanteiKijunbi());
+        parameter.setTaishoGetsu(this.getTaishoGetsu());
+        parameter.setChushutuKaisu(this.getChushutuKaisu());
+        parameter.set対象開始日(this.get対象開始日());
+        parameter.set対象終了日(this.get対象終了日());
+        return parameter;
+    }
+
+    /**
+     * toDBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameterのメソッドです。
+     *
+     * @return DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter
+     */
+    public DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter toDBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter() {
+        DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter parameter
+                = new DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter();
+        parameter.setTaishoNendo(this.getTaishoNendo());
+        parameter.setKijunbi(this.getKijunbi());
+        parameter.setShoriKubun(this.getShoriKubun());
+        parameter.setChushutsuKaishiNichiji(this.getChushutsuKaishiNichiji());
+        parameter.setChushutsuShuryonichiNichiji(this.getChushutsuShuryonichiNichiji());
+        parameter.setTestMode(this.isTestMode());
+        parameter.setNendoShuryoNengappi(this.getNendoShuryoNengappi());
+        parameter.setShoriNichiji(this.getShoriNichiji());
+        parameter.setHanteiKijunbi(this.getHanteiKijunbi());
+        parameter.setTaishoGetsu(this.getTaishoGetsu());
+        parameter.setChushutuKaisu(this.getChushutuKaisu());
+        parameter.set対象開始日(this.get対象開始日());
+        parameter.set対象終了日(this.get対象終了日());
+        return parameter;
+    }
+
 }

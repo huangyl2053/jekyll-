@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.furikomimeisaifurikomidata.FurikomiMeisaiYoshikiBetsuKingakuShukei;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200101detail.FurikomiMeisaiIchiranDetailReport;
-import jp.co.ndensan.reams.db.dbc.business.report.dbc200101gokei.FurikomiMeisaiIchiranGokeiReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
@@ -28,7 +27,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.gokeidata.Goke
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.MeisaiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.PrintNoKingakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101detail.FurikomiMeisaiIchiranDetailReportSource;
-import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101gokei.FurikomiMeisaiIchiranGokeiReportSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShikyugakuJohoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.shikyugakujohomanager.ShikyugakuJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -46,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -54,7 +53,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 振込明細一覧表作成_Processクラスです．
@@ -131,10 +133,9 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
+    @BatchWriter
     private BatchReportWriter<FurikomiMeisaiIchiranDetailReportSource> batchReportWriter_明細一覧表;
     private ReportSourceWriter<FurikomiMeisaiIchiranDetailReportSource> reportSourceWriter_明細一覧表;
-    private BatchReportWriter<FurikomiMeisaiIchiranGokeiReportSource> batchReportWriter_合計一覧表;
-    private ReportSourceWriter<FurikomiMeisaiIchiranGokeiReportSource> reportSourceWriter_合計一覧表;
 
     @Override
     protected void initialize() {
@@ -148,7 +149,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         if (parameter.get出力順ID() != 0) {
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
             long 帳票出力順ID = parameter.get出力順ID();
-            outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200101_明細.getReportId(), 帳票出力順ID);
+            outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200101.getReportId(), 帳票出力順ID);
             if (outputOrder != null) {
                 orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                         create(ShikyugakuJohoOrderKey.class, outputOrder).replace("order by", ","), NUM5);
@@ -184,11 +185,28 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         shoriKekkaKakuninListTempTable
                 = new BatchEntityCreatedTempTableWriter(処理結果確認リスト一時TBL, ShoriKekkaKakuninListTempTableEntity.class);
         batchReportWriter_明細一覧表 = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBC.DBC200101_明細.getReportId().value(), SubGyomuCode.DBC介護給付).create();
+                ReportIdDBC.DBC200101.getReportId().value(), SubGyomuCode.DBC介護給付)
+                .addBreak(new BreakerCatalog<FurikomiMeisaiIchiranDetailReportSource>().new SimpleLayoutBreaker(
+
+
+
+
+                    FurikomiMeisaiIchiranDetailReportSource.LAYOUT_BREAK_KEYS) {
+            @Override
+                    public ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> occuredBreak(
+                            ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> currentRecord,
+                            ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                        int layout = currentRecord.getSource().layout.index();
+                        currentRecord.setFormGroupIndex(layout);
+                        if (nextRecord != null && nextRecord.getSource() != null) {
+                            layout = nextRecord.getSource().layout.index();
+                            nextRecord.setFormGroupIndex(layout);
+                        }
+                        return currentRecord;
+                    }
+                }).create();
         reportSourceWriter_明細一覧表 = new ReportSourceWriter<>(batchReportWriter_明細一覧表);
-        batchReportWriter_合計一覧表 = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBC.DBC200101_合計.getReportId().value(), SubGyomuCode.DBC介護給付).create();
-        reportSourceWriter_合計一覧表 = new ReportSourceWriter<>(batchReportWriter_合計一覧表);
     }
 
     @Override
@@ -216,14 +234,15 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
             printNoKingakuEntity.set名寄せ件数(t.get名寄せ件数());
             印字様式番号別金額List.add(printNoKingakuEntity);
             振込明細一覧表明細.set印字様式番号別金額List(印字様式番号別金額List);
-            FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
+            FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
                     RDateTime.now(), 設定値);
             report.writeBy(reportSourceWriter_明細一覧表);
             if (t.get振込明細一時Entity().getServiceTeikyoYM().isBefore(制度改正施行日)) {
-                set認定状態区分before施行日高額(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(),
+
+                set認定状態区分before施行日高額(t.get振込明細一時Entity().getYokaigoJotaiKubunCode(),
                         振込明細一覧表合計.get(NUM12), t.get振込明細一時Entity().getFurikomiKingaku());
             } else {
-                set認定状態区分after施行日高額(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(),
+                set認定状態区分after施行日高額(t.get振込明細一時Entity().getYokaigoJotaiKubunCode(),
                         振込明細一覧表合計.get(NUM12), t.get振込明細一時Entity().getFurikomiKingaku());
             }
         }
@@ -235,33 +254,35 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         List<InjiYoushikiBangouBetuKingaku> 印字様式番号別金額List = bisness.sumKingakuBy印字様式番号(t.get様式番号別金額EntityList());
         MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
         List<PrintNoKingakuEntity> list = new ArrayList<>();
-        for (int i = 1; i <= 印字様式番号別金額List.size(); i++) {
+        int count = 0;
+        for (int i = 0; i < 印字様式番号別金額List.size(); i++) {
             InjiYoushikiBangouBetuKingaku 印字様式番号別金額 = 印字様式番号別金額List.get(i);
             様式連番++;
 
-            int count = 0;
             if (1 == 様式連番) {
                 振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
 
                 list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
                 振込明細一覧表明細.set印字様式番号別金額List(list);
-                FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
+                FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
                         RDateTime.now(), 設定値);
                 report.writeBy(reportSourceWriter_明細一覧表);
                 list.clear();
             } else {
                 count++;
-                if (印字様式番号別金額List.size() % 2 == 0 && i == 印字様式番号別金額List.size()) {
+                list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
+                if (印字様式番号別金額List.size() % 2 == 0 && i == 印字様式番号別金額List.size() - 1) {
                     list.add(new PrintNoKingakuEntity());
                     count++;
                 }
-                list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
+
                 振込明細一覧表明細.set印字様式番号別金額List(list);
                 振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
                 if (2 == count) {
-                    FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
+                    FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
                             RDateTime.now(), 設定値);
                     report.writeBy(reportSourceWriter_明細一覧表);
+                    list.clear();
                     count = 0;
                 }
             }
@@ -309,7 +330,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
         for (int i = 0; i < NUM11; i++) {
             振込明細一覧表合計.get(NUM11).setその他件数(振込明細一覧表合計.get(i).getその他件数().add(振込明細一覧表合計.get(NUM11).getその他件数()));
-            振込明細一覧表合計.get(NUM11).setその他金額(振込明細一覧表合計.get(i).getその他金額().add(振込明細一覧表合計.get(NUM11).getその他件数()));
+            振込明細一覧表合計.get(NUM11).setその他金額(振込明細一覧表合計.get(i).getその他金額().add(振込明細一覧表合計.get(NUM11).getその他金額()));
             振込明細一覧表合計.get(NUM11).set要介護件数(振込明細一覧表合計.get(i).get要介護件数().add(振込明細一覧表合計.get(NUM11).get要介護件数()));
             振込明細一覧表合計.get(NUM11).set要介護金額(振込明細一覧表合計.get(i).get要介護金額().add(振込明細一覧表合計.get(NUM11).get要介護金額()));
             振込明細一覧表合計.get(NUM11).set要支援件数(振込明細一覧表合計.get(i).get要支援件数().add(振込明細一覧表合計.get(NUM11).get要支援件数()));
@@ -322,8 +343,9 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         振込明細一覧表合計.get(NUM13).set要支援件数(振込明細一覧表合計.get(NUM11).get要支援件数().add(振込明細一覧表合計.get(NUM12).get要支援件数()));
         振込明細一覧表合計.get(NUM13).set要支援金額(振込明細一覧表合計.get(NUM11).get要支援金額().add(振込明細一覧表合計.get(NUM12).get要支援金額()));
         for (GokeiDataEntity entity : 振込明細一覧表合計) {
-            FurikomiMeisaiIchiranGokeiReport report = new FurikomiMeisaiIchiranGokeiReport(entity, outputOrder, 設定値, RDateTime.now());
-            report.writeBy(reportSourceWriter_合計一覧表);
+            FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(null, entity, outputOrder, parameter.get支払方法(),
+                    RDateTime.now(), 設定値);
+            report.writeBy(reportSourceWriter_明細一覧表);
         }
     }
 
@@ -420,9 +442,9 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         } else {
             entity.setその他件数(entity.getその他件数().add(NUM1));
             if (flag) {
-                entity.setその他金額(entity.get要支援金額().add(印字様式番号別金額.get支給金額計()));
+                entity.setその他金額(entity.getその他金額().add(印字様式番号別金額.get支給金額計()));
             } else {
-                entity.setその他金額(entity.get要支援金額().add(印字様式番号別金額.get差額金額計()));
+                entity.setその他金額(entity.getその他金額().add(印字様式番号別金額.get差額金額計()));
             }
         }
     }
@@ -446,19 +468,23 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         } else {
             entity.setその他件数(entity.getその他件数().add(NUM1));
             if (flag) {
-                entity.setその他金額(entity.get要支援金額().add(印字様式番号別金額.get支給金額計()));
+                entity.setその他金額(entity.getその他金額().add(印字様式番号別金額.get支給金額計()));
             } else {
-                entity.setその他金額(entity.get要支援金額().add(印字様式番号別金額.get差額金額計()));
+                entity.setその他金額(entity.getその他金額().add(印字様式番号別金額.get差額金額計()));
             }
         }
     }
 
-    private void set認定状態区分before施行日高額(RString code, GokeiDataEntity entity, Decimal 金額) {
-        if (code.equals(要介護1) || code.equals(要介護2) || code.equals(要介護3)
-                || code.equals(要介護4) || code.equals(要介護5)) {
+    private void set認定状態区分before施行日高額(Code code, GokeiDataEntity entity, Decimal 金額) {
+        RString 認定状態区分 = RString.EMPTY;
+        if (認定状態区分 != null && !認定状態区分.isEmpty()) {
+            認定状態区分 = code.value();
+        }
+        if (認定状態区分.equals(要介護1) || 認定状態区分.equals(要介護2) || 認定状態区分.equals(要介護3)
+                || 認定状態区分.equals(要介護4) || 認定状態区分.equals(要介護5)) {
             entity.set要介護件数(entity.get要介護件数().add(NUM1));
             entity.set要介護金額(entity.get要介護金額().add(金額));
-        } else if (code.equals(要支援)) {
+        } else if (認定状態区分.equals(要支援)) {
             entity.set要支援件数(entity.get要支援件数().add(NUM1));
             entity.set要支援金額(entity.get要支援金額().add(金額));
         } else {
@@ -467,17 +493,39 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
     }
 
-    private void set認定状態区分after施行日高額(RString code, GokeiDataEntity entity, Decimal 金額) {
-        if (code.equals(要介護1) || code.equals(要介護2) || code.equals(要介護3)
-                || code.equals(要介護4) || code.equals(要介護5) || code.equals(経過的要介護)) {
+    private void set認定状態区分after施行日高額(Code code, GokeiDataEntity entity, Decimal 金額) {
+        RString 認定状態区分 = RString.EMPTY;
+        if (認定状態区分 != null && !認定状態区分.isEmpty()) {
+            認定状態区分 = code.value();
+        }
+        if (認定状態区分.equals(要介護1) || 認定状態区分.equals(要介護2) || 認定状態区分.equals(要介護3)
+                || 認定状態区分.equals(要介護4) || 認定状態区分.equals(要介護5) || 認定状態区分.equals(経過的要介護)) {
             entity.set要介護件数(entity.get要介護件数().add(NUM1));
-            entity.set要介護金額(entity.get要介護金額().add(金額));
-        } else if (code.equals(要支援1) || code.equals(要支援2)) {
+            if (entity.get要介護金額() != null && 金額 != null) {
+                entity.set要介護金額(entity.get要介護金額().add(金額));
+            } else if (entity.get要介護金額() != null) {
+                entity.set要介護金額(entity.get要介護金額());
+            } else if (金額 != null) {
+                entity.set要介護金額(金額);
+            }
+        } else if (認定状態区分.equals(要支援1) || 認定状態区分.equals(要支援2)) {
             entity.set要支援件数(entity.get要支援件数().add(NUM1));
-            entity.set要支援金額(entity.get要支援金額().add(金額));
+            if (entity.get要支援金額() != null && 金額 != null) {
+                entity.set要支援金額(entity.get要支援金額().add(金額));
+            } else if (entity.get要支援金額() != null) {
+                entity.set要支援金額(entity.get要支援金額());
+            } else if (金額 != null) {
+                entity.set要支援金額(金額);
+            }
         } else {
             entity.setその他件数(entity.getその他件数().add(NUM1));
-            entity.setその他金額(entity.getその他金額().add(金額));
+            if (entity.getその他金額() != null && 金額 != null) {
+                entity.setその他金額(entity.getその他金額().add(金額));
+            } else if (entity.getその他金額() != null) {
+                entity.setその他金額(entity.getその他金額());
+            } else if (金額 != null) {
+                entity.setその他金額(金額);
+            }
         }
     }
 

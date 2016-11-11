@@ -24,6 +24,7 @@
         <result property="nenkiniShotokuGaku" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kazeiShotokuGaku" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="torokuGyomu" column="torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
     </resultMap>
     
     <!--介護保険所得情報一覧データ取得-->
@@ -62,18 +63,19 @@
         F."shoriTimeStamp",
         F."torokuGyomu"
         FROM rgdb."DbV2502KaigoShotoku" AS F
-        INNER JOIN 
-        (SELECT
-        "shotokuNendo",
-        "shikibetsuCode"
         <if test="ラジオボタン == 2">
-        ,max("rirekiNo") AS rirekiNo
+            INNER JOIN 
+            (SELECT
+            "shotokuNendo",
+            "shikibetsuCode"
+            ,max("rirekiNo") AS rirekiNo
+            FROM rgdb."DbV2502KaigoShotoku" AS X
+            GROUP BY X."shotokuNendo", X."shikibetsuCode"
+            ) AS Y
+            ON Y."shotokuNendo"=F."shotokuNendo"
+            AND Y."shikibetsuCode"= F."shikibetsuCode"
+            AND Y.rirekiNo= F."rirekiNo"
         </if>
-        FROM rgdb."DbV2502KaigoShotoku" AS X
-        GROUP BY X."shotokuNendo", X."shikibetsuCode"
-        ) AS Y
-        ON Y."shotokuNendo"=F."shotokuNendo"
-        AND Y."shikibetsuCode"= F."shikibetsuCode"
         WHERE
         F."shotokuNendo"=#{処理年度}
         AND #{開始日時}<![CDATA[<=]]>F."shoriTimeStamp"
@@ -98,7 +100,8 @@
         B."shojoJiyuCode",
         B."shojoIdoYMD",
         B."seibetsuCode",
-        B."juminShubetsuCode"
+        B."juminShubetsuCode",
+        B."setaiCode"
         FROM master
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
@@ -110,7 +113,7 @@
                         master
                    )) AS B
         ON master."shikibetsuCode"=B."shikibetsuCode"
-        ${出力順} , master."shotokuNendo" ASC, master."shikibetsuCode" ASC
+        ${出力順} , master."shotokuNendo" ASC
     </select>
     
     <!--広域市町村の所得情報一覧を取得します。-->
@@ -151,20 +154,20 @@
         F."shoriTimeStamp",
         F."torokuGyomu"
         FROM rgdb."DbV2502KaigoShotoku" F
+        <if test="チックボックス == 2">
         INNER JOIN 
         (SELECT
         "shotokuNendo"
-        <if test="チックボックス == 2">
         ,max("rirekiNo") AS rirekiNo
-        </if>
         ,"shikibetsuCode"
         FROM rgdb."DbV2502KaigoShotoku" AS X
-        <if test="ラジオボタン == 2">
         GROUP BY X."shotokuNendo", X."shikibetsuCode"
-        </if>
+        ORDER BY X."shotokuNendo", X."shikibetsuCode"
         ) AS Y
         ON Y."shotokuNendo"=F."shotokuNendo"
         AND Y."shikibetsuCode"= F."shikibetsuCode"
+        AND Y.rirekiNo=F."rirekiNo"
+        </if>
         WHERE
         F."shotokuNendo"=#{処理年度}
         )AS M)
@@ -177,7 +180,8 @@
         N."shojoIdoYMD",
         N."seibetsuCode",
         N."juminShubetsuCode",
-        N."genLasdecCode"
+        N."genLasdecCode",
+        N."setaiCode"
         FROM master
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
@@ -207,7 +211,8 @@
         A."nenkiniShunyuGaku",
         A."nenkiniShotokuGaku",
         A."kazeiShotokuGaku",
-        A."torokuGyomu"
+        A."torokuGyomu",
+        A."setaiCode"
       FROM
         (
         SELECT
@@ -227,7 +232,8 @@
         leader."nenkiniShotokuGaku",
         leader."kazeiShotokuGaku",
         leader."torokuGyomu",
-        leader."shoriTimeStamp"
+        leader."shoriTimeStamp",
+        leader."setaiCode"
         FROM leader
         WHERE
         #{開始日時}<![CDATA[<=]]>leader."shoriTimeStamp"
@@ -246,7 +252,7 @@
         rgdb."DbV1001HihokenshaDaicho" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
         AND(B."hihokennshaKubunCode"='1' OR B."hihokennshaKubunCode"='2')
-        ${出力順}, "shotokuNendo" ASC, "shikibetsuCode" ASC
+        ${出力順}, "shotokuNendo" ASC
     </select>
     
     <!--select所得情報一覧データ-->
@@ -283,9 +289,11 @@
     </select>
     
     <select resultOrdered="true" id="selectTempAll" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.PrtKaigoHokenShotokuJohoIchiranParameter"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "KaigoHokenShotokuTemp" TEMP
+        ${出力順}
     </select>
     
 </mapper>

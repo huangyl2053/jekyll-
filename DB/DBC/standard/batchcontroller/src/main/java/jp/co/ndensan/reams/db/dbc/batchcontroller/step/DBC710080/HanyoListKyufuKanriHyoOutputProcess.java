@@ -85,6 +85,8 @@ public class HanyoListKyufuKanriHyoOutputProcess extends BatchProcessBase<HanyoL
     private static final RString 定数_ORDERBY = new RString("order by");
     private static final RString コンマ = new RString(",");
     private static final RString 項目名_給付管理票明細行番号 = new RString("\"kyufuKanrihyo_kyufuKanrihyoMeisaiLineNo\"");
+    private static final RString 項目名_被保険者番号 = new RString("\"kyufuKanrihyo_hiHokenshaNo\"");
+    private static final RString 項目名_サービス年月 = new RString("\"kyufuKanrihyo_serviceTeikyoYM\"");
     private IOutputOrder 出力順;
     private HanyoListKyufuKanriHyoProcessParameter parameter;
     private Association 地方公共団体情報;
@@ -106,13 +108,13 @@ public class HanyoListKyufuKanriHyoOutputProcess extends BatchProcessBase<HanyoL
                     ReportIdDBC.DBC701008.getReportId(), parameter.get出力順());
             if (出力順 != null) {
                 parameter.set出力項目(MyBatisOrderByClauseCreator.create(HanyoListKyufuKanriHyoOutputOrder.class, 出力順).
-                        concat(コンマ).concat(HanyoListKyufuKanriHyoOutputOrder.被保険者番号.getMyBatis項目名()).
-                        concat(コンマ).concat(HanyoListKyufuKanriHyoOutputOrder.サービス年月.getMyBatis項目名()).
+                        concat(コンマ).concat(項目名_被保険者番号).
+                        concat(コンマ).concat(項目名_サービス年月).
                         concat(コンマ).concat(項目名_給付管理票明細行番号));
             }
         } else {
-            parameter.set出力項目(定数_ORDERBY.concat(HanyoListKyufuKanriHyoOutputOrder.被保険者番号.getMyBatis項目名()).
-                    concat(コンマ).concat(HanyoListKyufuKanriHyoOutputOrder.サービス年月.getMyBatis項目名()).
+            parameter.set出力項目(定数_ORDERBY.concat(項目名_被保険者番号).
+                    concat(コンマ).concat(項目名_サービス年月).
                     concat(コンマ).concat(項目名_給付管理票明細行番号));
         }
         構成市町村マスタ = new HashMap<>();

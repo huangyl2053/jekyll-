@@ -45,40 +45,27 @@ public class TokkiText1A4Business {
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
     private static final RString ハイフン = new RString("-");
-    private static final int 一ページ表示行数 = 15;
+    private static final int 最大ページ = 6;
     private static final int 最大連番 = 10;
     private final List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List;
     private final ShinsakaiSiryoKyotsuEntity kyotsuEntity;
     private final RString 特記パターン;
     private final int 最大文字数;
     private final int ページ最大表示行数;
-    private final boolean is2枚目以降;
-    private final int 現在ページ;
-    private boolean has改ページ;
-    private boolean isFirst;
-    private RString 全面テキスト内容;
     private int 表示行数;
 
     /**
      * コンストラクタです。
      *
-     * @param is2枚目以降 boolean
-     * @param 現在ページ int
      * @param entity ShinsakaiSiryoKyotsuEntity
      * @param 特記情報List List<DbT5205NinteichosahyoTokkijikoEntity>
      */
-    public TokkiText1A4Business(boolean is2枚目以降, int 現在ページ,
-            ShinsakaiSiryoKyotsuEntity entity, List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
+    public TokkiText1A4Business(ShinsakaiSiryoKyotsuEntity entity, List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
         this.特記パターン = DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         this.最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.ページ最大表示行数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
-        this.現在ページ = 現在ページ;
-        this.is2枚目以降 = is2枚目以降;
         this.特記情報List = 特記情報List;
         this.kyotsuEntity = entity;
-        has改ページ = false;
-        isFirst = true;
-        全面テキスト内容 = RString.EMPTY;
         表示行数 = 0;
     }
 
@@ -211,15 +198,6 @@ public class TokkiText1A4Business {
                             getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
                 }
                 短冊情報リスト.add(短冊情報);
-                表示行数 = 表示行数 + 1;
-                if (表示行数 % (一ページ表示行数 * 現在ページ) == 0) {
-                    has改ページ = true;
-                    短冊情報リスト = 短冊情報リスト.subList(一ページ表示行数 * (現在ページ - 1), 表示行数);
-                    return 短冊情報リスト;
-                }
-            }
-            if (!短冊情報リスト.isEmpty() && 一ページ表示行数 * (現在ページ - 1) <= 短冊情報リスト.size()) {
-                短冊情報リスト = 短冊情報リスト.subList(一ページ表示行数 * (現在ページ - 1), 短冊情報リスト.size());
             }
         }
         return 短冊情報リスト;
@@ -230,15 +208,19 @@ public class TokkiText1A4Business {
      *
      * @return 全面特記事項イメージを取得します
      */
-    public RString getTokkiImg() {
-        RStringBuilder ファイル名 = new RStringBuilder();
-        ファイル名.append("C140");
-        ファイル名.append(現在ページ);
-        if (kyotsuEntity.isJimukyoku()) {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString());
-        } else {
-            return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString());
+    public List<RString> getTokkiImg() {
+        List<RString> filePathList = new ArrayList<>();
+        for (int i = 1; i <= 最大ページ; i++) {
+            RStringBuilder ファイル名 = new RStringBuilder();
+            ファイル名.append("C140");
+            ファイル名.append(i);
+            if (kyotsuEntity.isJimukyoku()) {
+                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString()));
+            } else {
+                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString()));
+            }
         }
+        return filePathList;
     }
 
     /**
@@ -246,11 +228,12 @@ public class TokkiText1A4Business {
      *
      * @return 全面特記事項テキストを取得します
      */
-    public RString getTokkiText() {
+    public List<RString> getTokkiText() {
+        List<RString> テキスト全面List = new ArrayList<>();
         if (テキスト全面イメージ.equals(特記パターン)) {
-            return getTextByテキスト全面イメージ();
+            テキスト全面List.addAll(getTextByテキスト全面イメージ());
         }
-        return RString.EMPTY;
+        return テキスト全面List;
     }
 
     /**
@@ -285,65 +268,39 @@ public class TokkiText1A4Business {
         return 表示行数;
     }
 
-    /**
-     * ページ表示行数を取得します。
-     *
-     * @return ページ表示行数
-     */
-    public boolean hasBreak() {
-        return has改ページ;
+    private List<RString> getTextByテキスト全面イメージ() {
+        List<RString> テキスト全面List = new ArrayList<>();
+        RStringBuilder テキスト全面 = new RStringBuilder();
+        for (int i = 0; i < 特記情報List.size(); i++) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記情報List.get(i).getTokkijikoTextImageKubun())) {
+                RStringBuilder テキストBuilder = new RStringBuilder();
+                テキストBuilder.append(get特記事項テキスト(kyotsuEntity.getKoroshoIfShikibetsuCode(),
+                        特記情報List.get(i).getNinteichosaTokkijikoNo(), 特記情報List.get(i).getNinteichosaTokkijikoRemban()));
+                テキストBuilder.append(特記情報List.get(i).getTokkiJiko());
+                テキストBuilder.append(System.lineSeparator());
+                表示行数 = 表示行数 + (int) Math.ceil((double) テキストBuilder.length() / 最大文字数);
+                if (表示行数 <= ページ最大表示行数) {
+                    テキスト全面.append(テキストBuilder);
+                }
+                if (ページ最大表示行数 <= 表示行数) {
+                    テキスト全面List.add(テキスト全面.toRString());
+                    テキスト全面 = new RStringBuilder();
+                    テキスト全面.append(テキストBuilder);
+                    表示行数 = 0;
+                    setテキスト全面List(i, テキスト全面List, テキスト全面);
+                } else if (i == 特記情報List.size() - 1) {
+                    テキスト全面.append(テキストBuilder);
+                    テキスト全面List.add(テキスト全面.toRString());
+                }
+            }
+        }
+        return テキスト全面List;
     }
 
-    private RString getTextByテキスト全面イメージ() {
-        boolean isテキスト = false;
-        if (!isFirst) {
-            return 全面テキスト内容;
+    private void setテキスト全面List(int i, List<RString> テキスト全面List, RStringBuilder テキスト全面) {
+        if (i == 特記情報List.size() - 1) {
+            テキスト全面List.add(テキスト全面.toRString());
         }
-        RStringBuilder テキスト全面 = new RStringBuilder();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
-                isテキスト = true;
-                RStringBuilder テキストBuilder = new RStringBuilder();
-                テキストBuilder.append(get特記事項テキスト(
-                        kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                テキストBuilder.append(entity.getTokkiJiko());
-                if ((int) (テキストBuilder.length() / 最大文字数) == 2) {
-                    テキストBuilder.insert(最大文字数 * 2, System.lineSeparator());
-                    表示行数 = 表示行数 + 1;
-                }
-                if ((int) (テキストBuilder.length() / 最大文字数) == 1) {
-                    テキストBuilder.insert(最大文字数, System.lineSeparator());
-                    表示行数 = 表示行数 + 1;
-                }
-                if ((!is2枚目以降 && ページ最大表示行数 <= 表示行数)
-                        || (is2枚目以降 && ページ最大表示行数 * 現在ページ <= 表示行数)) {
-                    has改ページ = true;
-                    テキスト全面.append(テキストBuilder.toRString());
-                    全面テキスト内容 = テキスト全面.toRString();
-                    isFirst = false;
-                    return テキスト全面.toRString();
-                }
-                if (!テキストBuilder.toRString().endsWith(System.lineSeparator())) {
-                    テキストBuilder.append(System.lineSeparator());
-                    表示行数 = 表示行数 + 1;
-                }
-                if (is2枚目以降 && 表示行数 % (ページ最大表示行数 * (現在ページ - 1)) == 0) {
-                    テキスト全面 = new RStringBuilder();
-                }
-                テキスト全面.append(テキストBuilder.toRString());
-            }
-        }
-        if ((isテキスト && !is2枚目以降) || (isテキスト && (is2枚目以降 && ページ最大表示行数 * (現在ページ - 1) <= 表示行数))) {
-            全面テキスト内容 = テキスト全面.toRString();
-            isFirst = false;
-            if (テキスト全面.toRString().endsWith(System.lineSeparator())) {
-                return テキスト全面.toRString().substring(0, テキスト全面.length() - System.lineSeparator().length());
-            }
-            return テキスト全面.toRString();
-        }
-        全面テキスト内容 = RString.EMPTY;
-        表示行数 = 0;
-        return RString.EMPTY;
     }
 
     private RString getFilePathByRemban(RString 特記事項番号, int 特記事項連番) {

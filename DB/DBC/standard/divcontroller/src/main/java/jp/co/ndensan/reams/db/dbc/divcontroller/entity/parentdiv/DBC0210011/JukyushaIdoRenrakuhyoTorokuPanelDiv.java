@@ -4,18 +4,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0210011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * JukyushaIdoRenrakuhyoTorokuPanel のクラスファイル 
- * 
+ * JukyushaIdoRenrakuhyoTorokuPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class JukyushaIdoRenrakuhyoTorokuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,6 +31,8 @@ public class JukyushaIdoRenrakuhyoTorokuPanelDiv extends Panel {
     private JukyushaIdoRenrakuhyoShinkiTorokuPanelDiv JukyushaIdoRenrakuhyoShinkiTorokuPanel;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("hdnFlg")
+    private RString hdnFlg;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -78,6 +83,24 @@ public class JukyushaIdoRenrakuhyoTorokuPanelDiv extends Panel {
     @JsonProperty("ccdKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
+    }
+
+    /*
+     * gethdnFlg
+     * @return hdnFlg
+     */
+    @JsonProperty("hdnFlg")
+    public RString getHdnFlg() {
+        return hdnFlg;
+    }
+
+    /*
+     * sethdnFlg
+     * @param hdnFlg hdnFlg
+     */
+    @JsonProperty("hdnFlg")
+    public void setHdnFlg(RString hdnFlg) {
+        this.hdnFlg = hdnFlg;
     }
 
     // </editor-fold>

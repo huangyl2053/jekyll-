@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyooshirasetsuch
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -29,7 +30,6 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiSource implements IReportSour
     public RString hihokenshaName;
     @ReportItem(name = "seibetsu", length = 1, order = 7)
     public RString seibetsu;
-    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 8)
     public RString hihokenshaNo;
     @ReportItem(name = "birthYMD", length = 11, order = 9)
@@ -128,6 +128,8 @@ public class KogakuJigyoOshiraseTsuchishoKigenNashiSource implements IReportSour
     public RString customerBarCode;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetsuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

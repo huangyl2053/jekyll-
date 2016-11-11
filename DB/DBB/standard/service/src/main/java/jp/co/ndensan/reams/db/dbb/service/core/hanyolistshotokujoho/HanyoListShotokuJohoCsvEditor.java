@@ -382,8 +382,10 @@ public class HanyoListShotokuJohoCsvEditor {
                 ? RString.EMPTY : 喪失事由);
         csvEntity.set資格喪失日(dataToRString(entity.get資格喪失年月日(), parameter));
         csvEntity.set資格喪失届日(dataToRString(entity.get資格喪失届出年月日(), parameter));
-        HihokenshaKubunCode hihokenshaKubunCode = HihokenshaKubunCode.toValue(entity.get被保険者区分コード());
-        csvEntity.set資格区分(hihokenshaKubunCode.get名称());
+        if (!RString.isNullOrEmpty(entity.get被保険者区分コード())) {
+            HihokenshaKubunCode hihokenshaKubunCode = HihokenshaKubunCode.toValue(entity.get被保険者区分コード());
+            csvEntity.set資格区分(hihokenshaKubunCode.get名称());
+        }
         if (FLAG.equals(entity.get住所地特例フラグ())) {
             csvEntity.set住所地特例状態(特例状態住特);
         } else {
@@ -400,7 +402,7 @@ public class HanyoListShotokuJohoCsvEditor {
         } else {
             set保険者番号By市町村コード(csvEntity, entity, 構成市町村マスタlist);
         }
-        if (保険料段階リスト != null && entity.get保険料段階() != null
+        if (保険料段階リスト != null && !RString.isNullOrEmpty(entity.get保険料段階())
                 && 保険料段階リスト.getBy段階区分(entity.get保険料段階()) != null) {
             csvEntity.set保険料段階(保険料段階リスト.getBy段階区分(entity.get保険料段階()).get表記());
         }

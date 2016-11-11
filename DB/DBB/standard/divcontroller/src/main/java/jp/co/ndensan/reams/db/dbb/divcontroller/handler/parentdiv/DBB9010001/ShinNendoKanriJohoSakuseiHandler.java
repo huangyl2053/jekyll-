@@ -22,11 +22,12 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -41,6 +42,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
     private static final RString 年度内連番 = new RString("00");
     private static final RString 調定年度_KEY = new RString("effectiveDate");
     private static final RString MONTHDAY = new RString("0401");
+    private static final RString 実行ボタン名称 = new RString("btnBatchRegister");
 
     /**
      * コンストラクタです。
@@ -54,8 +56,9 @@ public class ShinNendoKanriJohoSakuseiHandler {
     /**
      * 画面初期化のメソッドです。
      *
+     * @return エラーメッセージ
      */
-    public void initialize() {
+    public Message initialize() {
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         ShoriDateKanri 処理日付管理;
@@ -64,10 +67,12 @@ public class ShinNendoKanriJohoSakuseiHandler {
 
         処理日付管理 = manager.get抽出調定日時(SubGyomuCode.DBB介護賦課, ShoriName.新年度管理情報作成.get名称(), 年度.plusYear(1));
         if (処理日付管理 != null) {
-            throw new ApplicationException(DbbErrorMessages.処理済み.getMessage());
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行ボタン名称, true);
+            return DbbErrorMessages.処理済み.getMessage().replace(RString.EMPTY.toString());
         }
         div.getShinNendoKanriJohoSakuseiBatchParameter().getTxtTonendo().setValue(年度.wareki().toDateString());
         div.getTxtShiNendo().setValue(年度.plusYear(1).wareki().toDateString());
+        return null;
     }
 
     /**
@@ -82,6 +87,7 @@ public class ShinNendoKanriJohoSakuseiHandler {
         ShoriDateKanri 処理日付管理 = 処理日付管理の追加();
         HashMap<String, Object> param = カスタムコンフィグの追加();
         imanager.追加(本年度, 処理日付管理, 新帳票制御汎用List, param);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行ボタン名称, true);
     }
 
     /**

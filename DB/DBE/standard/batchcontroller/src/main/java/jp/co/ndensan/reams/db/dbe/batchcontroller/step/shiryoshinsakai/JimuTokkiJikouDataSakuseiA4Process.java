@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
-import jp.co.ndensan.reams.db.dbe.business.report.tokkitexta4.TokkiText1A4Report;
+import jp.co.ndensan.reams.db.dbe.business.report.tokkitext.TokkiTextA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitexta4.TokkiText1A4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext.TokkiTextA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
@@ -36,7 +36,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 事務局特記事項の取得バッチクラスです。
@@ -48,7 +50,10 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     private static final RString SELECT_SHINSAKAISIRYOKYOTSU = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get共通情報");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(TokkiText1A4ReportSource.ReportSourceFields.hokenshaNo.name())));
+            new RString(TokkiTextA4ReportSource.ReportSourceFields.tokkiText.name()),
+            new RString(TokkiTextA4ReportSource.ReportSourceFields.tokkiImg.name()),
+            new RString(TokkiTextA4ReportSource.ReportSourceFields.two_tokkiText.name()),
+            new RString(TokkiTextA4ReportSource.ReportSourceFields.two_tokkiImg.name())));
     private static final int 最大表示行数 = 15;
     private IinShinsakaiIinJohoProcessParameter paramter;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
@@ -56,8 +61,8 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     private int ページ表示行数;
 
     @BatchWriter
-    private BatchReportWriter<TokkiText1A4ReportSource> batchWriteA4;
-    private ReportSourceWriter<TokkiText1A4ReportSource> reportSourceWriterA4;
+    private BatchReportWriter<TokkiTextA4ReportSource> batchWriteA4;
+    private ReportSourceWriter<TokkiTextA4ReportSource> reportSourceWriterA4;
 
     @Override
     protected void initialize() {
@@ -70,9 +75,23 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517141.getReportId().value())
-                .addBreak(new BreakerCatalog<TokkiText1A4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .create();
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value())
+                .addBreak(new BreakerCatalog<TokkiTextA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .addBreak(new BreakerCatalog<TokkiTextA4ReportSource>().new SimpleLayoutBreaker(
+                    TokkiTextA4ReportSource.LAYOUT_BREAK_KEYS) {
+                    @Override
+                    public ReportLineRecord<TokkiTextA4ReportSource> occuredBreak(ReportLineRecord<TokkiTextA4ReportSource> currentRecord,
+                            ReportLineRecord<TokkiTextA4ReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                        int layout = currentRecord.getSource().layout.index();
+                        currentRecord.setFormGroupIndex(layout);
+                        if (nextRecord != null && nextRecord.getSource() != null) {
+                            layout = nextRecord.getSource().layout.index();
+                            nextRecord.setFormGroupIndex(layout);
+                        }
+                        return currentRecord;
+                    }
+                }).create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
     }
 
@@ -87,8 +106,8 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity kyotsuEntity) {
         kyotsuEntity.setJimukyoku(true);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
-        TokkiText1A4Business business = new TokkiText1A4Business(false, 1, kyotsuEntity, 特記情報List);
-        TokkiText1A4Report report = new TokkiText1A4Report(business);
+        TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
+        TokkiTextA4Report report = new TokkiTextA4Report(business);
         report.writeBy(reportSourceWriterA4);
         ページ表示行数 = business.getページ表示行数();
     }
@@ -97,6 +116,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     protected void afterExecute() {
         出力条件表(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
         出力条件表(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
+        出力条件表(ReportIdDBE.DBE517134.getReportId().value(), new RString("特記事項（2枚目以降）"));
     }
 
     private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {

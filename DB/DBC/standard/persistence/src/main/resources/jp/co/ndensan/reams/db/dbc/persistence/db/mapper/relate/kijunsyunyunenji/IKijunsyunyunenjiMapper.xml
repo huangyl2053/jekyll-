@@ -636,4 +636,46 @@
         )
     </insert>
     
+    <update id="update処理日付管理マスタ_異動分" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTaishoSeitaiyinTemp5ProcessMybatisParameter">
+        UPDATE
+        rgdb."DbT7022ShoriDateKanri"
+        SET
+        "kijunTimestamp" = #{基準日時}
+        WHERE 
+               "subGyomuCode" = 'DBC'
+         AND
+               "shichosonCode" = #{市町村コード}
+         AND
+               "shoriName" = '基準収入額適用申請書異動'
+         AND
+               "shoriEdaban" ='0000'
+         AND
+               "nendoNaiRenban" ='0000'
+         AND
+               "nendo" = #{処理年度}
+    </update>
+     
+     <insert id="insert処理日付管理マスタ_異動分" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTaishoSeitaiyinTemp5ProcessMybatisParameter">
+        INSERT INTO
+         rgdb."DbT7022ShoriDateKanri"
+         ("subGyomuCode",
+          "shichosonCode",
+          "shoriName",
+          "shoriEdaban",
+          "nendoNaiRenban",
+          "nendo",
+          "kijunTimestamp"
+          )
+        VALUES
+        (
+        'DBC',
+        #{市町村コード},
+        '基準収入額適用申請書異動',
+        '0000',
+        '0000',
+        #{処理年度},
+        #{基準日時}
+        )
+    </insert>
+    
 </mapper>

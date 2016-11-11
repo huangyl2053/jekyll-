@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,13 +27,8 @@ public class TaishoshaChushuProcess extends BatchProcessBase<DBC040010TaishoData
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "dbc040010.IKogakuGassanJikofutangakuKeisanMapper.get対象者抽出データ");
     private static final RString TABLE_NAME = new RString("JissekiFutangakuDataTemp");
-    /**
-     * 出力パラメターデータがありの名称です。
-     */
-    public static final RString OUTPUTNAME;
     private TaishoshaChushuProcessParameter parameter;
     private DBC040010DataUtil util;
-    private OutputParameter<Boolean> isデータがあり;
     private RString 市町村名;
     private List<RString> keysOfShoriKekkaTemp;
     @BatchWriter
@@ -42,15 +36,9 @@ public class TaishoshaChushuProcess extends BatchProcessBase<DBC040010TaishoData
     @BatchWriter
     private IBatchTableWriter 処理結果リスト;
 
-    static {
-        OUTPUTNAME = new RString("isデータがあり");
-    }
-
     @Override
     protected void initialize() {
         keysOfShoriKekkaTemp = new ArrayList<>();
-        isデータがあり = new OutputParameter<>();
-        isデータがあり.setValue(Boolean.FALSE);
         util = new DBC040010DataUtil();
         parameter.set宛名検索条件(util.get宛名検索条件());
         市町村名 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
@@ -71,10 +59,9 @@ public class TaishoshaChushuProcess extends BatchProcessBase<DBC040010TaishoData
 
     @Override
     protected void process(DBC040010TaishoDataEntity entity) {
-        isデータがあり.setValue(Boolean.TRUE);
         JissekiFutangakuDataTempEntity result = util.toJissekiTempEntityTaishoChuShu(entity, parameter.get処理日時(), 市町村名);
-        実績負担額データ.insert(result);
         if (entity.getDaichoHihokenshaNo() != null) {
+            実績負担額データ.insert(result);
             return;
         }
         DBC040010ShoriKekkaTempEntity errorEntity

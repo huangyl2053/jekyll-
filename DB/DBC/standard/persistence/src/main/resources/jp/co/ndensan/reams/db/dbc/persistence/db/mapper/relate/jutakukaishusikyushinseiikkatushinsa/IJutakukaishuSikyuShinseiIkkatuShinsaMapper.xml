@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishusikyushinseiikkatushinsa.IJutakukaishuSikyuShinseiIkkatuShinsaMapper">
-     <resultMap id="resultMap_JutakukaishuSikyuShinseiIkkatuShinsa"
+    <resultMap id="resultMap_JutakukaishuSikyuShinseiIkkatuShinsa"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinseiEntity"
                autoMapping="true">
         <id column="dbT3034ShokanShinsei_hiHokenshaNo"/>
@@ -21,78 +21,84 @@
         <include refid="selectShokanShinseiEntity" />
     </select>
     <sql id="selectShokanShinseiEntity">
+        WITH master AS(
         SELECT
-            shinsei.*,
-            T2."識別コード",
-            T2."氏名"
+        shinsei.*
+        ,T2."識別コード"
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS shinsei
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS shinsei
         INNER JOIN
-            (SELECT
-                  kihon."hiHokenshaNo",
-                  kihon."serviceTeikyoYM",
-                  kihon."seiriNo"
-            FROM
-               rgdb."DbT3038ShokanKihon" kihon
-            INNER JOIN
-               rgdb."DbT3053ShokanShukei" shukei
-               ON
-                 shukei."hiHokenshaNo" = kihon."hiHokenshaNo"
-                 AND shukei."serviceTeikyoYM" = kihon."serviceTeikyoYM"
-                 AND shukei."seiriNo" = kihon."seiriNo"
-                 AND shukei."jigyoshaNo" = kihon."jigyoshaNo"
-                 AND shukei."yoshikiNo" = kihon."yoshikiNo"
-                 AND shukei."meisaiNo" = kihon."meisaiNo"
-                 AND SUBSTRING(shukei."yoshikiNo",1,3) = '21D'
-            GROUP BY
-                kihon."hiHokenshaNo",
-                kihon."serviceTeikyoYM",   
-                kihon."seiriNo"
-            ) AS T1
-            ON
-              T1."hiHokenshaNo" = shinsei."dbT3034ShokanShinsei_hiHokenshaNo"
-              AND T1."serviceTeikyoYM" = shinsei."dbT3034ShokanShinsei_serviceTeikyoYM"
-              AND T1."seiriNo" = shinsei."dbT3034ShokanShinsei_seiriNo"
+        (SELECT
+        kihon."hiHokenshaNo",
+        kihon."serviceTeikyoYM",
+        kihon."seiriNo"
+        FROM
+        rgdb."DbT3038ShokanKihon" kihon
         INNER JOIN
-            (SELECT
-                  daicho."hihokenshaNo" AS "hihokenshaNo",
-                  daicho."shikibetsuCode" AS "識別コード",
-                  宛名."meisho" AS "氏名"
-            FROM
-               rgdb."DbT1001HihokenshaDaicho" daicho
-            INNER JOIN
-               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-                AS 宛名
-               ON
-                 宛名."shikibetsuCode" = daicho."shikibetsuCode"
-            WHERE
-               daicho."logicalDeletedFlag"  <![CDATA[<>]]> TRUE
-            GROUP BY
-               daicho."hihokenshaNo",
-               daicho."shikibetsuCode",
-               宛名."meisho"
-            ) AS T2
-            ON
-              T2."hihokenshaNo" = shinsei."dbT3034ShokanShinsei_hiHokenshaNo"
+        rgdb."DbT3053ShokanShukei" shukei
+        ON
+        shukei."hiHokenshaNo" = kihon."hiHokenshaNo"
+        AND shukei."serviceTeikyoYM" = kihon."serviceTeikyoYM"
+        AND shukei."seiriNo" = kihon."seiriNo"
+        AND shukei."jigyoshaNo" = kihon."jigyoshaNo"
+        AND shukei."yoshikiNo" = kihon."yoshikiNo"
+        AND shukei."meisaiNo" = kihon."meisaiNo"
+        AND SUBSTRING(shukei."yoshikiNo",1,3) = '21D'
+        GROUP BY
+        kihon."hiHokenshaNo",
+        kihon."serviceTeikyoYM",
+        kihon."seiriNo"
+        ) AS T1
+        ON
+        T1."hiHokenshaNo" = shinsei."dbT3034ShokanShinsei_hiHokenshaNo"
+        AND T1."serviceTeikyoYM" = shinsei."dbT3034ShokanShinsei_serviceTeikyoYM"
+        AND T1."seiriNo" = shinsei."dbT3034ShokanShinsei_seiriNo"
+        INNER JOIN
+        (SELECT
+        daicho."hihokenshaNo" AS "hihokenshaNo",
+        daicho."shikibetsuCode" AS "識別コード"
+        FROM
+        rgdb."DbV1001HihokenshaDaicho" daicho
         WHERE
-            NOT EXISTS (
-                    SELECT 1
-                    FROM rgdb."DbT3036ShokanHanteiKekka" dbt3036
-                    WHERE
-                        shinsei."dbT3034ShokanShinsei_hiHokenshaNo" = dbt3036."hiHokenshaNo"
-                        AND shinsei."dbT3034ShokanShinsei_serviceTeikyoYM" = dbt3036."serviceTeikyoYM"
-                        AND shinsei."dbT3034ShokanShinsei_seiriNo" = dbt3036."seiriNo"
-                )
-            AND shinsei."dbT3034ShokanShinsei_shinsaHohoKubun" = '2'
-            <if test="支給申請開始日 != null">
-               AND shinsei."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[>=]]> #{支給申請開始日}    
-            </if>
-            <if test="支給申請終了日 != null">   
-               AND shinsei."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[<=]]> #{支給申請終了日}
-            </if>
+        daicho."logicalDeletedFlag"  <![CDATA[<>]]> TRUE
+        ) AS T2
+        ON
+        T2."hihokenshaNo" = shinsei."dbT3034ShokanShinsei_hiHokenshaNo"
+        WHERE
+        NOT EXISTS (
+        SELECT 1
+        FROM rgdb."DbT3036ShokanHanteiKekka" dbt3036
+        WHERE
+        shinsei."dbT3034ShokanShinsei_hiHokenshaNo" = dbt3036."hiHokenshaNo"
+        AND shinsei."dbT3034ShokanShinsei_serviceTeikyoYM" = dbt3036."serviceTeikyoYM"
+        AND shinsei."dbT3034ShokanShinsei_seiriNo" = dbt3036."seiriNo"
+        )
+        AND shinsei."dbT3034ShokanShinsei_shinsaHohoKubun" = '2'
+        <if test="支給申請開始日 != null">
+            AND shinsei."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[>=]]> #{支給申請開始日}
+        </if>
+        <if test="支給申請終了日 != null">
+            AND shinsei."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[<=]]> #{支給申請終了日}
+        </if>
         ORDER BY
-             shinsei."dbT3034ShokanShinsei_shinseiYMD" ASC,
-             shinsei."dbT3034ShokanShinsei_serviceTeikyoYM" ASC         
+        shinsei."dbT3034ShokanShinsei_shinseiYMD" ASC,
+        shinsei."dbT3034ShokanShinsei_serviceTeikyoYM" ASC
+        )
+        SELECT
+        master.*
+        ,宛名."meisho" AS "氏名"
+        FROM
+        master
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (select
+        ARRAY_AGG(CAST ("識別コード" AS TEXT))
+        from master
+        )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS 宛名
+        ON
+        宛名."shikibetsuCode" = master."識別コード"
     </sql>
-    
+
 </mapper>

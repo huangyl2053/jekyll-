@@ -21,7 +21,9 @@ import lombok.NonNull;
 public class SyujiyikenshosakuseyiraihakouReport extends Report<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> {
 
     private final List<SyujiyikenshosakuseyiraihakouBodyItem> bodyItemList;
+    private final SyujiyikenshosakuseyiraihakouBodyItem bodyItem;
     private final SyujiyikenshosakuseyiraihakouHeadItem headItem;
+    private final int count;
 
     /**
      * インスタンスを生成します。
@@ -36,39 +38,75 @@ public class SyujiyikenshosakuseyiraihakouReport extends Report<IkenshoSakuseiIr
 
         return new SyujiyikenshosakuseyiraihakouReport(
                 headItem,
-                itemList);
+                null,
+                itemList,
+                0);
     }
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 主治医意見書作成依頼発行一覧表ヘッダのITEM
+     * @param bodyItem 主治医意見書作成依頼発行一覧表ボディのITEM
+     * @param count count
+     * @return 主治医意見書作成依頼発行一覧表のReport
+     */
+    public static SyujiyikenshosakuseyiraihakouReport createFrom(
+            SyujiyikenshosakuseyiraihakouHeadItem headItem,
+            SyujiyikenshosakuseyiraihakouBodyItem bodyItem,
+            int count) {
+
+        return new SyujiyikenshosakuseyiraihakouReport(
+                headItem,
+                bodyItem,
+                null,
+                count);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param headItem 主治医意見書作成依頼発行一覧表ヘッダのITEM
+     * @param bodyItem 主治医意見書作成依頼発行一覧表のITEM
      * @param itemList 主治医意見書作成依頼発行一覧表のITEMリスト
+     * @param count count
      */
     protected SyujiyikenshosakuseyiraihakouReport(
             SyujiyikenshosakuseyiraihakouHeadItem headItem,
-            List<SyujiyikenshosakuseyiraihakouBodyItem> itemList) {
+            SyujiyikenshosakuseyiraihakouBodyItem bodyItem,
+            List<SyujiyikenshosakuseyiraihakouBodyItem> itemList,
+            int count) {
 
         this.headItem = headItem;
+        this.bodyItem = bodyItem;
         this.bodyItemList = itemList;
+        this.count = count;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> reportSourceWriter) {
-        int renban = 0;
-        RString breakKey = RString.EMPTY;
-        for (SyujiyikenshosakuseyiraihakouBodyItem bodyItem : bodyItemList) {
-            if (!breakKey.equals(setBreakKey(bodyItem))) {
-                renban = 1;
-            } else {
-                renban++;
+        if (bodyItemList != null) {
+            int renban = 0;
+            RString breakKey = RString.EMPTY;
+            for (SyujiyikenshosakuseyiraihakouBodyItem item : bodyItemList) {
+                if (!breakKey.equals(setBreakKey(bodyItem))) {
+                    renban = 1;
+                } else {
+                    renban++;
+                }
+                SyujiyikenshosakuseyiraihakouHeaderEditor headerEditor = new SyujiyikenshosakuseyiraihakouHeaderEditor(headItem);
+                SyujiyikenshosakuseyiraihakouBodyEditor bodyEditor
+                        = new SyujiyikenshosakuseyiraihakouBodyEditor(item, new RString(String.valueOf(renban)));
+                ISyujiyikenshosakuseyiraihakouBuilder builder = new SyujiyikenshosakuseyiraihakouBuilderImpl(headerEditor, bodyEditor);
+                reportSourceWriter.writeLine(builder);
+                breakKey = setBreakKey(item);
             }
+        } else {
             SyujiyikenshosakuseyiraihakouHeaderEditor headerEditor = new SyujiyikenshosakuseyiraihakouHeaderEditor(headItem);
             SyujiyikenshosakuseyiraihakouBodyEditor bodyEditor
-                    = new SyujiyikenshosakuseyiraihakouBodyEditor(bodyItem, new RString(String.valueOf(renban)));
+                    = new SyujiyikenshosakuseyiraihakouBodyEditor(bodyItem, new RString(String.valueOf(count)));
             ISyujiyikenshosakuseyiraihakouBuilder builder = new SyujiyikenshosakuseyiraihakouBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
-            breakKey = setBreakKey(bodyItem);
         }
     }
 

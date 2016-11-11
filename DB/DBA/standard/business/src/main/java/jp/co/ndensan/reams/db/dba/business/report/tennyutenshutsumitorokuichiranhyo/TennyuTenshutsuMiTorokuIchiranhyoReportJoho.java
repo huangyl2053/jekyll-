@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.tennyutenshutsumitorokuichiranhyo;
 
-import java.util.List;
-
 /**
  * 転入転出未登録一覧表作成_帳票クラスパラメータクラスです。
  *
@@ -17,19 +15,19 @@ import java.util.List;
 public class TennyuTenshutsuMiTorokuIchiranhyoReportJoho {
 
     private final TennyuTenshutsuMiTorokuIchiranhyoHeadItem headItem;
-    private final List<TennyuTenshutsuMiTorokuIchiranhyoBodyItem> bodyItemList;
+    private final TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem;
 
     /**
      * コンストラクタを作成します。
      *
      * @param headItem 転入転出未登録一覧表情報ヘッダ
-     * @param bodyItemList 転入転出未登録一覧表情報ボディリスト
+     * @param bodyItem 転入転出未登録一覧表情報ボディ
      */
     public TennyuTenshutsuMiTorokuIchiranhyoReportJoho(
             TennyuTenshutsuMiTorokuIchiranhyoHeadItem headItem,
-            List<TennyuTenshutsuMiTorokuIchiranhyoBodyItem> bodyItemList) {
+            TennyuTenshutsuMiTorokuIchiranhyoBodyItem bodyItem) {
 
         this.headItem = headItem;
-        this.bodyItemList = bodyItemList;
+        this.bodyItem = bodyItem;
     }
 }

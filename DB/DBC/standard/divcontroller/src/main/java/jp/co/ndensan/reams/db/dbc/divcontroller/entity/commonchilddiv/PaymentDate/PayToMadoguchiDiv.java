@@ -4,12 +4,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDa
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
  * PayToMadoguchi のクラスファイル
@@ -17,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  * @reamsid_L DBC-4470-010 wangkanglei
  */
 public class PayToMadoguchiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +29,8 @@ public class PayToMadoguchiDiv extends Panel {
     private TextBoxTime txtShiharaiKaishiTime;
     @JsonProperty("txtShiharaiShuryoTime")
     private TextBoxTime txtShiharaiShuryoTime;
+    @JsonProperty("radIkkatsuKoshinKubun")
+    private RadioButton radIkkatsuKoshinKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -110,6 +108,24 @@ public class PayToMadoguchiDiv extends Panel {
     @JsonProperty("txtShiharaiShuryoTime")
     public void setTxtShiharaiShuryoTime(TextBoxTime txtShiharaiShuryoTime) {
         this.txtShiharaiShuryoTime = txtShiharaiShuryoTime;
+    }
+
+    /*
+     * getradIkkatsuKoshinKubun
+     * @return radIkkatsuKoshinKubun
+     */
+    @JsonProperty("radIkkatsuKoshinKubun")
+    public RadioButton getRadIkkatsuKoshinKubun() {
+        return radIkkatsuKoshinKubun;
+    }
+
+    /*
+     * setradIkkatsuKoshinKubun
+     * @param radIkkatsuKoshinKubun radIkkatsuKoshinKubun
+     */
+    @JsonProperty("radIkkatsuKoshinKubun")
+    public void setRadIkkatsuKoshinKubun(RadioButton radIkkatsuKoshinKubun) {
+        this.radIkkatsuKoshinKubun = radIkkatsuKoshinKubun;
     }
 
     // </editor-fold>

@@ -114,6 +114,8 @@ public class ServiceRiyohyoInfo {
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setVisible(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setVisible(true);
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         handler.事業者サービスクリア();
         handler.明細情報クリア();
@@ -134,6 +136,11 @@ public class ServiceRiyohyoInfo {
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
         }
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setVisible(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setVisible(true);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         handler.事業者サービスクリア();
@@ -383,7 +390,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnCancelMeisaiInput(ServiceRiyohyoInfoDiv div) {
-        getHandler(div).明細情報クリア();
+        getHandler(div).入力を取り消す();
         return ResponseData.of(div).respond();
     }
 
@@ -394,7 +401,7 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnCancelGokeiInput(ServiceRiyohyoInfoDiv div) {
-        getHandler(div).合計情報クリア();
+        getHandler(div).入力を取り消す();
         return ResponseData.of(div).respond();
     }
 

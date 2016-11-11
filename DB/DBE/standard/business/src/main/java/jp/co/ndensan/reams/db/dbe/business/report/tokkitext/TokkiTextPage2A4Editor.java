@@ -49,6 +49,8 @@ public class TokkiTextPage2A4Editor implements ITokkiTextA4Editor {
     private static final int INT_14 = 14;
     private final List<TokkiA4Entity> 短冊情報リスト;
     private final List<RString> 短冊リスト;
+    private final List<RString> テキスト全面List;
+    private final List<RString> イメージ全面List;
 
     /**
      * インスタンスを生成します。
@@ -56,15 +58,20 @@ public class TokkiTextPage2A4Editor implements ITokkiTextA4Editor {
      * @param item TokkiText1A4Business
      * @param index Index
      * @param 短冊リスト List<RString>
+     * @param テキスト全面List List<RString>
      * @param 短冊情報リスト List<TokkiA4Entity>
+     * @param イメージ全面List List<RString>
      * @param page page
      */
-    protected TokkiTextPage2A4Editor(TokkiText1A4Business item, List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, int index, int page) {
+    protected TokkiTextPage2A4Editor(TokkiText1A4Business item, List<TokkiA4Entity> 短冊情報リスト,
+            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List, int index, int page) {
         this.item = item;
         this.index = index;
         this.page = page;
         this.短冊情報リスト = 短冊情報リスト;
         this.短冊リスト = 短冊リスト;
+        this.テキスト全面List = テキスト全面List;
+        this.イメージ全面List = イメージ全面List;
     }
 
     @Override
@@ -101,14 +108,14 @@ public class TokkiTextPage2A4Editor implements ITokkiTextA4Editor {
         source.two_shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.two_tokkiText = item.getTokkiText();
+                source.two_tokkiText = テキスト全面List.get(index);
             } else if (短冊.equals(item.get特記パターン())) {
                 editテキスト(source, 短冊リスト);
                 set特記事項テキスト(source);
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.two_tokkiImg = item.getTokkiImg();
+                source.two_tokkiImg = イメージ全面List.get(index);
             } else if (短冊.equals(item.get特記パターン())) {
                 editイメージ(source, 短冊リスト);
                 set特記事項イメージ(source);
@@ -161,8 +168,8 @@ public class TokkiTextPage2A4Editor implements ITokkiTextA4Editor {
     }
 
     private RString get特記事項テキスト_イメージ(int index) {
-        if ((PAGECOUNT * page + index) < 短冊情報リスト.size()) {
-            return 短冊情報リスト.get(PAGECOUNT * page + index).get特記事項テキスト_イメージ();
+        if ((PAGECOUNT * (page - 1) + index) < 短冊情報リスト.size()) {
+            return 短冊情報リスト.get(PAGECOUNT * (page - 1) + index).get特記事項テキスト_イメージ();
         }
         return RString.EMPTY;
     }

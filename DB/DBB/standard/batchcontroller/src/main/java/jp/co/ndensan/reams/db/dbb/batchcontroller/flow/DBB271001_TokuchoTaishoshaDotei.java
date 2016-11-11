@@ -41,20 +41,14 @@ public class DBB271001_TokuchoTaishoshaDotei extends BatchFlowBase<DBB271001_Tok
 
     @Override
     protected void defineFlow() {
-//        TokuchoDotei tokuchoDotei = new TokuchoDotei();
         if (処理区分_月次.equals(getParameter().get処理区分())) {
             executeStep(業務被保険者情報作成_月次);
         } else if (処理区分_年次.equals(getParameter().get処理区分())) {
             executeStep(業務被保険者情報作成_年次);
         }
         executeStep(バッチ特徴同定を呼び出し);
-        //TODO QA 1313ありますので、ここは実装できない。
-//        if (!tokuchoDotei.get同定情報().isEmpty()) {
         executeStep(同定情報を取得する);
-//        }
-//        if (!tokuchoDotei.get未同定情報().isEmpty()) {
         executeStep(未同定情報を取得する);
-//        }
     }
 
     /**

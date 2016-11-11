@@ -39,6 +39,15 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
         source.title = target.getタイトル();
         source.tsuchibun1 = target.get通知文1();
         source.tsuchibun2 = target.get通知文2();
+        if (target.get認証者() != null) {
+            source.hakkoYMD = target.get認証者().hakkoYMD;
+            source.denshiKoin = target.get認証者().denshiKoin;
+            source.koinMojiretsu = target.get認証者().koinMojiretsu;
+            source.koinShoryaku = target.get認証者().koinShoryaku;
+            source.ninshoshaShimeiKakenai = target.get認証者().ninshoshaShimeiKakenai;
+            source.ninshoshaShimeiKakeru = target.get認証者().ninshoshaShimeiKakeru;
+            source.ninshoshaYakushokuMei = target.get認証者().ninshoshaYakushokuMei;
+        }
         if (!target.is空白()) {
             source.hihokenshaNameKana = ReportKomokuEditorUtil.get氏名カナ(target.get申請情報帳票発行一時().getShimeikanaChohyo());
             source.hihokenshaName = ReportKomokuEditorUtil.get氏名(target.get申請情報帳票発行一時().getMeishoChohyo());
@@ -57,16 +66,6 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
             source.shikyuGaku = ReportKomokuEditorUtil.金額1(target.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo());
             source.kigenYMD = ReportKomokuEditorUtil.パターン12(target.get申請書提出期限());
             source.remban = target.get連番();
-
-            if (target.get認証者() != null) {
-                source.hakkoYMD = target.get認証者().hakkoYMD;
-                source.denshiKoin = target.get認証者().denshiKoin;
-                source.koinMojiretsu = target.get認証者().koinMojiretsu;
-                source.koinShoryaku = target.get認証者().koinShoryaku;
-                source.ninshoshaShimeiKakenai = target.get認証者().ninshoshaShimeiKakenai;
-                source.ninshoshaShimeiKakeru = target.get認証者().ninshoshaShimeiKakeru;
-                source.ninshoshaYakushokuMei = target.get認証者().ninshoshaYakushokuMei;
-            }
 
             source.yubinNo = target.get送付別宛先().yubinNo;
             source.gyoseiku2 = target.get送付別宛先().gyoseiku;

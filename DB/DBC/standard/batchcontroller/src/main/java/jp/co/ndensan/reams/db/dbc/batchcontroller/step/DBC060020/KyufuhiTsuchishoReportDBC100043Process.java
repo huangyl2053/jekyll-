@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishofukushiyogutaiyohinmoku.KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhitsuchisho.KyufuhiTsuchishoBatchMybitisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufuhitsuchisho.KyufuhiTsuchishoProcessParameter;
@@ -17,9 +19,15 @@ import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -81,7 +89,8 @@ public class KyufuhiTsuchishoReportDBC100043Process extends BatchProcessBase<Kyu
         宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(宛先builder.build());
         KyufuhiTsuchishoBatchMybitisParameter mybatisParam = processParameter.
-                toKyufuhiTsuchishoBatchMybitisParameter(new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()));
+                toKyufuhiTsuchishoBatchMybitisParameter(new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()),
+                        get宛名PSM検索きー());
         return new BatchDbReader(介護給付費福祉用具貸与品目情報取得SQL, mybatisParam);
     }
 
@@ -105,11 +114,33 @@ public class KyufuhiTsuchishoReportDBC100043Process extends BatchProcessBase<Kyu
         index++;
         被保険者番号 = entity.get被保険者番号();
         サービス年月 = entity.getサービス提供年月();
-        KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport report = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport(coverEntity);
-        report.writeBy(reportSourceWriter);
+        if (entity.getRelateEntity() != null) {
+            KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport report = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport(coverEntity);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     private boolean isBreak(KyufuhiTuchiHakkoEntity entity) {
         return 被保険者番号.equals(entity.get被保険者番号()) && サービス年月.equals(entity.getサービス提供年月());
+    }
+
+    private IShikibetsuTaishoPSMSearchKey get宛名PSM検索きー() {
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
+                KensakuYusenKubun.住登外優先);
+        List<JuminShubetsu> 住民種別 = new ArrayList<>();
+        住民種別.add(JuminShubetsu.日本人);
+        住民種別.add(JuminShubetsu.外国人);
+        住民種別.add(JuminShubetsu.住登外個人_日本人);
+        住民種別.add(JuminShubetsu.住登外個人_外国人);
+        List<JuminJotai> 住民状態 = new ArrayList<>();
+        住民状態.add(JuminJotai.住民);
+        住民状態.add(JuminJotai.住登外);
+        住民状態.add(JuminJotai.消除者);
+        住民状態.add(JuminJotai.転出者);
+        住民状態.add(JuminJotai.死亡者);
+        builder.set住民種別(住民種別);
+        builder.set住民状態(住民状態);
+        builder.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
+        return builder.build();
     }
 }

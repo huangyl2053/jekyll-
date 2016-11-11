@@ -18,10 +18,20 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0510011.Pos
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -41,6 +51,8 @@ public class PostMainPanel {
     private static final RString STRING_1 = new RString("1");
     private static final RString STRING_2 = new RString("2");
     private static final RDate DATE = RDate.getNowDate();
+    private static final RString BTNJIKOKOKUHO = new RString("btnJikoKokuho");
+    private static final RString BTNJIKOKOKIKOEI = new RString("btnJikoKokikorei");
 
     /**
      * 画面初期化のメソッドます。
@@ -65,13 +77,89 @@ public class PostMainPanel {
     }
 
     /**
-     * onOkClose_bth事件です。
+     * onClick_btnTorikomiのメソッドます。
      *
      * @param div PostMainPanelDiv
-     * @return ResponseData
+     * @return ResponseData PostMainPanelDiv
      */
-    public ResponseData<PostMainPanelDiv> onOkClose_bth(PostMainPanelDiv div) {
-        getHandler(div).onOkClosebth();
+    public ResponseData<PostMainPanelDiv> onClick_btnTorikomi(PostMainPanelDiv div) {
+        div.getFileUpload().setDisabled(false);
+        メニューID = ResponseHolder.getMenuID();
+        if (メニューID.equals(DBCMN82001)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, true);
+        }
+        if (メニューID.equals(DBCMN82002)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKIKOEI, true);
+        }
+
+        div.getBtnTorikomi().setDisabled(true);
+        List<dgShichoson_Row> rowList = div.getDgShichoson().getDataSource();
+        if (rowList != null && !rowList.isEmpty()) {
+            for (dgShichoson_Row row : rowList) {
+                row.getBtnTorikomiKoiki().setDisabled(true);
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onClick_btnCancelのメソッドます。
+     *
+     * @param div PostMainPanelDiv
+     * @return ResponseData PostMainPanelDiv
+     */
+    public ResponseData<PostMainPanelDiv> onClick_btnCancel(PostMainPanelDiv div) {
+        div.getFileUpload().setDisabled(true);
+        メニューID = ResponseHolder.getMenuID();
+        if (メニューID.equals(DBCMN82001)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);
+        }
+        if (メニューID.equals(DBCMN82002)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKIKOEI, false);
+        }
+        div.getBtnTorikomi().setDisabled(false);
+        List<dgShichoson_Row> rowList = div.getDgShichoson().getDataSource();
+        if (rowList != null && !rowList.isEmpty()) {
+            for (dgShichoson_Row row : rowList) {
+                row.getBtnTorikomiKoiki().setDisabled(false);
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * アップロードButtonaを押します。
+     *
+     * @param div PostMainPanelDiv
+     * @param files FileData[]
+     * @return ResponseData PostMainPanelDiv
+     */
+    @SuppressWarnings("checkstyle:illegaltoken")
+    public ResponseData<PostMainPanelDiv> onClick_btnUpload(PostMainPanelDiv div, FileData[] files) {
+        if (files != null && files.length != 0 && files[0] != null) {
+            FileData file = files[0];
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(file.getFileName()));
+            sfd = SharedFile.defineSharedFile(sfd);
+            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+            SharedFileEntryDescriptor aa = SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(file.getFilePath()), opts);
+            getCheck(div).validateCheck();
+            RDateTime ファイル日時 = aa.getSharedFileId();
+            getHandler(div).setTime(ファイル日時);
+        }
+        メニューID = ResponseHolder.getMenuID();
+        if (メニューID.equals(DBCMN82001)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);
+        }
+        if (メニューID.equals(DBCMN82002)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKIKOEI, false);
+        }
+        div.getBtnTorikomi().setDisabled(false);
+        List<dgShichoson_Row> rowList = div.getDgShichoson().getDataSource();
+        if (rowList != null && !rowList.isEmpty()) {
+            for (dgShichoson_Row row : rowList) {
+                row.getBtnTorikomiKoiki().setDisabled(false);
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -100,7 +188,7 @@ public class PostMainPanel {
      */
     public ResponseData<DBC130020_KokikoreishaShikakuIdoInParameter> onClick_btnLast(
             PostMainPanelDiv div) {
-        getCheck(div).validateCheck();
+        getCheck(div).validateCheckNew();
         DBC130020_KokikoreishaShikakuIdoInParameter param = setBatchParameter(div);
         return ResponseData.of(param).respond();
     }
@@ -139,7 +227,7 @@ public class PostMainPanel {
      */
     public ResponseData<DBC130010_KokuhoShikakuIdoInParameter> onClick_btnKoku(
             PostMainPanelDiv div) {
-        getCheck(div).validateCheck();
+        getCheck(div).validateCheckNew();
         DBC130010_KokuhoShikakuIdoInParameter param = setBatchParameters(div);
         return ResponseData.of(param).respond();
     }

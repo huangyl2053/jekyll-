@@ -235,7 +235,7 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
 
     private dgTsuchishoSettei_Row set対象者(dgTsuchishoSettei_Row row, RString 対象者) {
         if (対象者 != null && !対象者.isEmpty()) {
-            row.getTxtTsuchisyoShitei().setSelectedKey(対象者);
+            row.getTxtGenkinKozaShitei().setSelectedKey(対象者);
         }
         return row;
     }
@@ -313,28 +313,13 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
     /**
      * 変更区分=1の場合「設定を保存する」ボタン押下時の保存処理Handler
      *
-     * @param 打ち分け条件View RString
-     * @return 打ち分け条件 RString
+     * @param 打ち分け条件画面 RString
+     * @param 打ち分け条件view RString
      */
-    public RString 設定時保存処理_変更区分_1(RString 打ち分け条件View) {
+    public void 設定時保存処理_変更区分(RString 打ち分け条件画面, RString 打ち分け条件view) {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true, 打ち分け条件View);
-        RString 打ち分け条件 = div.getTxtTsuchishoSetteiHozonMeisho().getValue();
-        変更打分け方法 = 変更打分け方法.createBuilderForEdit().set打ち分け条件(打ち分け条件).build();
+        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true, 打ち分け条件画面, 打ち分け条件view);
         本算定賦課計算.regutiwakehouhoujyoho2(変更打分け方法, new RString(String.valueOf(変更区分_1)));
-        return 打ち分け条件;
-    }
-
-    /**
-     * 変更区分=0の場合「設定を保存する」ボタン押下時の保存処理Handler
-     *
-     * @param 打ち分け条件 RString
-     */
-    public void 設定時保存処理_変更区分_0(RString 打ち分け条件) {
-        Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true, 打ち分け条件);
-        変更打分け方法 = 変更打分け方法.createBuilderForEdit().set打ち分け条件(打ち分け条件).build();
-        本算定賦課計算.regutiwakehouhoujyoho2(変更打分け方法, new RString(String.valueOf(変更区分_0)));
     }
 
     /**
@@ -342,11 +327,12 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
      *
      * @param flag 新規１の場合flag==true else flag==false
      * @param 打ち分け条件 RString
+     * @param 打ち分け条件view RString
      * @return 確認画面の打分け方法
      */
-    public TsuchishoUchiwakeJoken get確認画面の打分け方法(boolean flag, RString 打ち分け条件) {
+    public TsuchishoUchiwakeJoken get確認画面の打分け方法(boolean flag, RString 打ち分け条件, RString 打ち分け条件view) {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        List<TsuchishoUchiwakeJoken> jokenList = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件);
+        List<TsuchishoUchiwakeJoken> jokenList = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件view);
         TsuchishoUchiwakeJoken joken = new TsuchishoUchiwakeJoken(打ち分け条件,
                 RDateTime.now(),
                 jokenList.get(0).get賦課処理区分());
@@ -418,9 +404,7 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
             return 変更区分_0;
         }
         for (TsuchishoUchiwakeJoken 方法情報一覧 : 打分け方法List) {
-            if (打ち分け条件 == null && 方法情報一覧.get打ち分け条件() == null) {
-                return 変更区分_1;
-            } else if (打ち分け条件 != null && 打ち分け条件.equals(方法情報一覧.get打ち分け条件())) {
+            if (打ち分け条件.equals(方法情報一覧.get打ち分け条件())) {
                 return 変更区分_1;
             }
         }

@@ -39,7 +39,7 @@ public class KariHenkoTsuchishoPageBreak extends PageBreaker<KariSanteigakuHenko
     public boolean isBreak(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
             ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
         boolean flag = false;
-        //QA971 保留中
+        //TODO QA1859確認中
         if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flag = true;

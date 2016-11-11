@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.jyuryoitakukeiyakukakuni
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 帳票設計_DBCMN31003_介護保険受領委任契約承認（不承認）確認書（事業者用）Source
  *
- * @author DBC-2130- liuxiaoyu
+ * @reamsid_L DBC-2130-060 liuxiaoyu
  */
 public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -110,7 +111,6 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource implements IRep
     public RString hihokenshaName;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 10, order = 45)
     public RString hihokenshaNo;
     @ReportItem(name = "uketsukeYMD", length = 11, order = 46)
@@ -145,6 +145,8 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource implements IRep
     public RString tsuchibun2;
     @ReportItem(name = "pagecnt", length = 5, order = 61)
     public RString pagecnt;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

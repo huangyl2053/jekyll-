@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC815001;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigotaishoshachushutsusokyubun.KogakuKaigoTaishoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,21 +40,21 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
     @BatchParameter(key = NENDO, name = "年度")
     private RString 年度;
     @BatchParameter(key = SHIRINENKABBI, name = "処理年月日")
-    private RString 処理年月日;
+    private FlexibleYearMonth 処理年月日;
     @BatchParameter(key = SHORINICHIJI, name = "処理日時")
     private RString 処理日時;
     @BatchParameter(key = CHUUSHUTSUKIKANKAISHINICHIJI, name = "抽出期間開始日時")
-    private RString 抽出期間開始日時;
+    private RDateTime 抽出期間開始日時;
     @BatchParameter(key = CHUUSHUTSUKIKANSHUURYOUNICHIJI, name = "抽出期間終了日時")
-    private RString 抽出期間終了日時;
+    private RDateTime 抽出期間終了日時;
     @BatchParameter(key = CYOYHYOUID, name = "帳票ID")
     private RString 帳票ID;
     @BatchParameter(key = SHUTSURYOJYUNID, name = "出力順ID")
     private Long 出力順ID;
     @BatchParameter(key = KAISHINENGAB1, name = "開始年月１")
-    private RString 開始年月１;
+    private FlexibleYearMonth 開始年月１;
     @BatchParameter(key = SHUURYOUNENGAB1, name = "終了年月１")
-    private RString 終了年月１;
+    private FlexibleYearMonth 終了年月１;
     @BatchParameter(key = KAISHINENGAB2, name = "開始年月２")
     private RString 開始年月２;
     @BatchParameter(key = SHUURYOUNENGAB2, name = "終了年月２")
@@ -83,14 +86,14 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
      */
     public DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter(
             RString 年度,
-            RString 処理年月日,
+            FlexibleYearMonth 処理年月日,
             RString 処理日時,
-            RString 抽出期間開始日時,
-            RString 抽出期間終了日時,
+            RDateTime 抽出期間開始日時,
+            RDateTime 抽出期間終了日時,
             RString 帳票ID,
             Long 出力順ID,
-            RString 開始年月１,
-            RString 終了年月１,
+            FlexibleYearMonth 開始年月１,
+            FlexibleYearMonth 終了年月１,
             RString 開始年月２,
             RString 終了年月２,
             boolean テスト出力) {
@@ -106,5 +109,23 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
         this.開始年月２ = 開始年月２;
         this.終了年月２ = 終了年月２;
         this.テスト出力 = テスト出力;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @return JKogakuKaigoTaishoshaProcessParameter
+     */
+    public KogakuKaigoTaishoProcessParameter toProcessParameter() {
+
+        return new KogakuKaigoTaishoProcessParameter(
+                処理年月日,
+                抽出期間開始日時,
+                抽出期間終了日時,
+                出力順ID,
+                開始年月１,
+                終了年月１,
+                テスト出力);
+
     }
 }

@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhitsuchisho;
 
 import java.util.List;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -17,7 +19,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter {
+public final class KyufuhiTsuchishoBatchMybitisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private final boolean サービス種類フラグ1;
     private final boolean サービス種類フラグ2;
@@ -48,38 +50,10 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
     private static final RString 数値_1 = new RString("1");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString 全市町村 = new RString("000000");
+    private final RString orderBy;
+    private final boolean orderByFlag;
 
-    /**
-     * コンストラクタです。
-     *
-     * @param サービス種類フラグ1 サービス種類フラグ1
-     * @param サービス種類フラグ2 サービス種類フラグ2
-     * @param サービス種類フラグ3 サービス種類フラグ3
-     * @param サービス種類 サービス種類
-     * @param 死亡者分を対象フラグ 死亡者分を対象フラグ
-     * @param 死亡者分を対象としない 死亡者分を対象としない
-     * @param ゼロ査定実績を対象フラグ ゼロ査定実績を対象フラグ
-     * @param ゼロ査定実績を対象としない ゼロ査定実績を対象としない
-     * @param 再審査分を対象フラグ 再審査分を対象フラグ
-     * @param 再審査分を対象としない 再審査分を対象としない
-     * @param 過誤分を対象フラグ 過誤分を対象フラグ
-     * @param 過誤分を対象としない 過誤分を対象としない
-     * @param 施設分を対象フラグ 施設分を対象フラグ
-     * @param 施設分を対象としない 施設分を対象としない
-     * @param 特定入所者介護を対象フラグ 特定入所者介護を対象フラグ
-     * @param 特定入所者介護を対象としない 特定入所者介護を対象としない
-     * @param 償還分を対象フラグ 償還分を対象フラグ
-     * @param 償還分を対象としない 償還分を対象としない
-     * @param 福祉用具貸与ページ出力区分フラグ 福祉用具貸与ページ出力区分フラグ
-     * @param 福祉用具貸与ページ出力区分 福祉用具貸与ページ出力区分
-     * @param psmAtesaki 宛先取得PSM
-     * @param サービス年月開始 サービス年月開始
-     * @param サービス年月終了 サービス年月終了
-     * @param 証記載保険者番号 証記載保険者番号
-     * @param 全市町村フラグ 全市町村フラグ
-     * @param list要介護度 要介護度
-     */
-    protected KyufuhiTsuchishoBatchMybitisParameter(
+    private KyufuhiTsuchishoBatchMybitisParameter(
             boolean サービス種類フラグ1,
             boolean サービス種類フラグ2,
             boolean サービス種類フラグ3,
@@ -105,7 +79,11 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
             RString サービス年月終了,
             RString 証記載保険者番号,
             boolean 全市町村フラグ,
-            List list要介護度) {
+            List list要介護度,
+            RString orderBy,
+            boolean orderByFlag,
+            IShikibetsuTaishoPSMSearchKey searchKey) {
+        super(searchKey);
         this.サービス種類フラグ1 = サービス種類フラグ1;
         this.サービス種類フラグ2 = サービス種類フラグ2;
         this.サービス種類フラグ3 = サービス種類フラグ3;
@@ -132,6 +110,8 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
         this.証記載保険者番号 = 証記載保険者番号;
         this.全市町村フラグ = 全市町村フラグ;
         this.list要介護度 = list要介護度;
+        this.orderBy = orderBy;
+        this.orderByFlag = orderByFlag;
     }
 
     /**
@@ -151,6 +131,9 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
      * @param サービス年月終了 サービス年月終了
      * @param 証記載保険者番号 証記載保険者番号
      * @param 要介護度 要介護度
+     * @param orderBy orderBy
+     * @param orderByFlag orderByFlag
+     * @param searchKey 宛名PSM検索きー
      * @return KyufuhiTsuchishoBatchMybitisParameter
      */
     public static KyufuhiTsuchishoBatchMybitisParameter creatParameter(
@@ -167,7 +150,10 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
             RString サービス年月開始,
             RString サービス年月終了,
             RString 証記載保険者番号,
-            RString 要介護度) {
+            RString 要介護度,
+            RString orderBy,
+            boolean orderByFlag,
+            IShikibetsuTaishoPSMSearchKey searchKey) {
         boolean サービス種類フラグ1 = false;
         boolean サービス種類フラグ2 = false;
         boolean サービス種類フラグ3 = false;
@@ -216,11 +202,13 @@ public class KyufuhiTsuchishoBatchMybitisParameter implements IMyBatisParameter 
         if (!全市町村.equals(証記載保険者番号)) {
             全市町村フラグ = true;
         }
-        return new KyufuhiTsuchishoBatchMybitisParameter(サービス種類フラグ1, サービス種類フラグ2, サービス種類フラグ3, サービス種類, 死亡者分を対象フラグ,
-                死亡者分を対象としない, ゼロ査定実績を対象フラグ, ゼロ査定実績を対象としない, 再審査分を対象フラグ, 再審査分を対象としない, 過誤分を対象フラグ,
-                過誤分を対象としない, 施設分を対象フラグ, 施設分を対象としない, 特定入所者介護を対象フラグ, 特定入所者介護を対象としない, 償還分を対象フラグ,
-                償還分を対象としない, 福祉用具貸与ページ出力区分フラグ, 福祉用具貸与ページ出力区分, psmAtesaki, サービス年月開始, サービス年月終了,
-                証記載保険者番号, 全市町村フラグ, 要介護度.split(EUC_WRITER_DELIMITER.toString()));
+        return new KyufuhiTsuchishoBatchMybitisParameter(サービス種類フラグ1, サービス種類フラグ2, サービス種類フラグ3,
+                サービス種類, 死亡者分を対象フラグ, 死亡者分を対象としない, ゼロ査定実績を対象フラグ, ゼロ査定実績を対象としない,
+                再審査分を対象フラグ, 再審査分を対象としない, 過誤分を対象フラグ, 過誤分を対象としない, 施設分を対象フラグ,
+                施設分を対象としない, 特定入所者介護を対象フラグ, 特定入所者介護を対象としない, 償還分を対象フラグ,
+                償還分を対象としない, 福祉用具貸与ページ出力区分フラグ, 福祉用具貸与ページ出力区分, psmAtesaki, サービス年月開始,
+                サービス年月終了, 証記載保険者番号, 全市町村フラグ, 要介護度.split(EUC_WRITER_DELIMITER.toString()), orderBy,
+                orderByFlag, searchKey);
     }
 
 }

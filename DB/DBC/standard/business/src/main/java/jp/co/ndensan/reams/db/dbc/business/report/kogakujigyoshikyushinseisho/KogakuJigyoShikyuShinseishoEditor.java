@@ -92,6 +92,7 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
             if (帳票出力対象データ.getKojinNoChohyo() != null) {
                 source.kojinNo = 帳票出力対象データ.getKojinNoChohyo().getColumnValue();
             }
+            source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
         }
 
         if (システム日付 != null) {
@@ -111,7 +112,6 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
         source.shuccho = 定数_出張所;
         source.shisho = 定数_支所;
         source.remban = count;
-        source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
         return source;
     }
 

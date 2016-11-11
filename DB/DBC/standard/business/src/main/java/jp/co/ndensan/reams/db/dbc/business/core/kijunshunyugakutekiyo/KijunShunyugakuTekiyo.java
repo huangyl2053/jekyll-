@@ -145,7 +145,7 @@ public class KijunShunyugakuTekiyo {
         }
         eucEntity.set市町村コード(entity.get市町村コード());
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-            eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
+            eucEntity.set市町村名(get市町村名(市町村名MasterMap.get(entity.get市町村コード())));
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
@@ -207,7 +207,9 @@ public class KijunShunyugakuTekiyo {
         eucEntity.set課税所得(entity.get課税所得額());
         eucEntity.set課税所得控除後(entity.get課税所得額_除後());
         eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
-        eucEntity.set削除データ(RString.EMPTY);
+        if (entity.is論理削除フラグ()) {
+            eucEntity.set削除データ(new RString("削除データ"));
+        }
         return eucEntity;
     }
 
@@ -457,7 +459,7 @@ public class KijunShunyugakuTekiyo {
         }
         eucEntity.set市町村コード(entity.get市町村コード());
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-            eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
+            eucEntity.set市町村名(get市町村名(市町村名MasterMap.get(entity.get市町村コード())));
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
@@ -519,8 +521,18 @@ public class KijunShunyugakuTekiyo {
         eucEntity.set課税所得(entity.get課税所得額());
         eucEntity.set課税所得控除後(entity.get課税所得額_除後());
         eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
-        eucEntity.set削除データ(RString.EMPTY);
+        if (entity.is論理削除フラグ()) {
+            eucEntity.set削除データ(new RString("削除データ"));
+        }
         return eucEntity;
+    }
+
+    private RString get市町村名(KoseiShichosonMaster koseiShichosonMaster) {
+        if (koseiShichosonMaster != null) {
+            return koseiShichosonMaster.get市町村名称();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private RString get受給申請事由(HanyoListParamRelateEntity entity) {

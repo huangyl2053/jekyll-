@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -59,6 +60,7 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
     private RString spoolWorkPath;
     private RString fileName;
     private RString reamsLoginID;
+    private boolean flag;
     private CsvWriter<SokyuuSeinenngappiCsvEntity> csvWriterJunitoJugo;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -79,6 +81,7 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
     protected void initialize() {
         personalDataList = new ArrayList<>();
         reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+        flag = true;
     }
 
     @Override
@@ -113,6 +116,7 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
 
     @Override
     protected void process(HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {
+        flag = false;
         SokyuuSeinenngappiCsvEntity eucCsvEntity = new SokyuuSeinenngappiCsvEntity();
         eucCsvEntity(eucCsvEntity, t);
         csvWriterJunitoJugo.writeLine(eucCsvEntity);
@@ -128,6 +132,9 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
         csvWriterJunitoJugo.close();
         AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(fileName, id);
+        if (false) {
+            File.deleteIfExists(spoolWorkPath);
+        }
     }
 
     private void eucCsvEntity(SokyuuSeinenngappiCsvEntity eucCsvEntity, HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity t) {

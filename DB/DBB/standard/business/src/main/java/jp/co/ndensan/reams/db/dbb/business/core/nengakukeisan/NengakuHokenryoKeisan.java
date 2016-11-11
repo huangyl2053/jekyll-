@@ -161,7 +161,7 @@ public class NengakuHokenryoKeisan {
 
         RString rank;
         if (nengakuHokenryoHoji.getRank() == null || nengakuHokenryoHoji.getRank().isEmpty()) {
-            rank = new RString("1");
+            rank = new RString("01");
         } else {
             rank = nengakuHokenryoHoji.getRank();
         }
@@ -178,31 +178,31 @@ public class NengakuHokenryoKeisan {
     private Decimal getResult1(Decimal result, NengaokuHokenryoHoji nengakuHokenryoHoji, RankBetsuKijunKingaku rankbetsuSeigyoJoho) {
 
         switch (String.valueOf(nengakuHokenryoHoji.getDankai())) {
-            case "1":
+            case "01":
                 result = rankbetsuSeigyoJoho.getランク基準金額1();
                 break;
-            case "2":
+            case "02":
                 result = rankbetsuSeigyoJoho.getランク基準金額2();
                 break;
-            case "3":
+            case "03":
                 result = rankbetsuSeigyoJoho.getランク基準金額3();
                 break;
-            case "4":
+            case "04":
                 result = rankbetsuSeigyoJoho.getランク基準金額4();
                 break;
-            case "5":
+            case "05":
                 result = rankbetsuSeigyoJoho.getランク基準金額5();
                 break;
-            case "6":
+            case "06":
                 result = rankbetsuSeigyoJoho.getランク基準金額6();
                 break;
-            case "7":
+            case "07":
                 result = rankbetsuSeigyoJoho.getランク基準金額7();
                 break;
-            case "8":
+            case "08":
                 result = rankbetsuSeigyoJoho.getランク基準金額8();
                 break;
-            case "9":
+            case "09":
                 result = rankbetsuSeigyoJoho.getランク基準金額9();
                 break;
             case "10":

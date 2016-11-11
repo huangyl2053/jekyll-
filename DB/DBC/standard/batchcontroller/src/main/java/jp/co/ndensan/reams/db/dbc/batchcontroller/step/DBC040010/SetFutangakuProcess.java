@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * ビジネス設計_DBCMN62006_自己負担額計算（一括）の<br/>
@@ -48,14 +47,19 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
     private SetFutangakuProcessParameter processParameter;
     private Decimal 抽出対象自己負担基準額;
     private DbT3170MatchingEntity beforeEntity;
-    private JissekiFutangakuDataTempEntity updEntity;
     private RString beforKeyOf高額合算自己負担額;
 
     @Override
     protected void initialize() {
         util = new DBC040010DataUtil();
-        RString configValue = DbBusinessConfig.get(
-                ConfigNameDBC.高額合算自己負担額計算_抽出対象自己負担基準額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RString configValue;
+        if (!processParameter.is事業分フラグ()) {
+            configValue = DbBusinessConfig.get(
+                    ConfigNameDBC.高額合算自己負担額計算_抽出対象自己負担基準額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        } else {
+            configValue = DbBusinessConfig.get(
+                    ConfigNameDBC.事業高額合算自己負担額計算_抽出対象自己負担基準額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        }
         抽出対象自己負担基準額 = RString.isNullOrEmpty(configValue) ? Decimal.ZERO : new Decimal(configValue.toString());
         beforKeyOf高額合算自己負担額 = RString.EMPTY;
     }
@@ -80,7 +84,6 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
     protected void process(DbT3170MatchingEntity entity) {
         JissekiFutangakuDataTempEntity 実績負担額 = entity.get実績負担額データ();
         if (beforeEntity == null) {
-            updEntity = 実績負担額;
             loopHandle(entity);
             beforeEntity = entity;
             return;
@@ -90,8 +93,6 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
             beforeEntity = entity;
             return;
         }
-        updEntity.setState(EntityDataState.Modified);
-        updEntity = 実績負担額;
         loopHandle(entity);
         beforeEntity = entity;
     }
@@ -133,7 +134,7 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
             DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity 高額合算自己負担額明細) {
         RString nowKey = util.getKeyOf高額合算自己負担額(高額合算自己負担額);
         if (!processParameter.is事業分フラグ()) {
-            if (!nowKey.endsWith(beforKeyOf高額合算自己負担額)) {
+            if (!nowKey.equals(beforKeyOf高額合算自己負担額)) {
                 高額合算自己負担額Writer.update(util.getInsOrUpd高額合算自己負担額(実績負担額データ,
                         util.toDbT3070KogakuGassanJikoFutanGakuEntity(高額合算自己負担額), true));
                 beforKeyOf高額合算自己負担額 = nowKey;
@@ -147,7 +148,7 @@ public class SetFutangakuProcess extends BatchProcessBase<DbT3170MatchingEntity>
                 高額合算自己負担額明細Writer.update(updEntity);
             }
         } else {
-            if (!nowKey.endsWith(beforKeyOf高額合算自己負担額)) {
+            if (!nowKey.equals(beforKeyOf高額合算自己負担額)) {
                 高額合算自己負担額Writer.update(util.getInsOrUpd高額合算自己負担額事業分(実績負担額データ, 高額合算自己負担額, true));
                 beforKeyOf高額合算自己負担額 = nowKey;
             }

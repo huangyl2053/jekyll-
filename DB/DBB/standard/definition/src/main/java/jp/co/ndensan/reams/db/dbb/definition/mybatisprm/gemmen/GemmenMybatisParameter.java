@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen;
 
 import java.util.List;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -22,8 +21,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GemmenMybatisParameter extends UaFt200FindShikibetsuTaishoParam
-        implements IMyBatisParameter {
+public class GemmenMybatisParameter implements IMyBatisParameter {
 
     private final FlexibleYear choteiNendo;
     private final FlexibleYear fukaNendo;
@@ -37,6 +35,7 @@ public class GemmenMybatisParameter extends UaFt200FindShikibetsuTaishoParam
     private final RString shinseiJiyu;
     private final FlexibleDate ketteiYMD;
     private final RString gemmenJiyu;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタ
@@ -53,13 +52,12 @@ public class GemmenMybatisParameter extends UaFt200FindShikibetsuTaishoParam
      * @param shinseiJiyu RString
      * @param ketteiYMD FlexibleDate
      * @param gemmenJiyu RString
-     * @param searchKey IShikibetsuTaishoPSMSearchKey
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      */
     public GemmenMybatisParameter(FlexibleYear choteiNendo, FlexibleYear fukaNendo, List<RString> list町域コード,
             List<RString> list行政区コード, List<RString> list地区1コード, List<RString> list地区2コード, List<RString> list地区3コード,
             FlexibleDate shinseiYMD, Code gemmenJiyuCode, RString shinseiJiyu, FlexibleDate ketteiYMD, RString gemmenJiyu,
-            IShikibetsuTaishoPSMSearchKey searchKey) {
-        super(searchKey);
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
         this.choteiNendo = choteiNendo;
         this.fukaNendo = fukaNendo;
         this.list町域コード = list町域コード;
@@ -72,6 +70,7 @@ public class GemmenMybatisParameter extends UaFt200FindShikibetsuTaishoParam
         this.shinseiJiyu = shinseiJiyu;
         this.ketteiYMD = ketteiYMD;
         this.gemmenJiyu = gemmenJiyu;
+        this.shikibetsutaishoParam = shikibetsutaishoParam;
     }
 
 }

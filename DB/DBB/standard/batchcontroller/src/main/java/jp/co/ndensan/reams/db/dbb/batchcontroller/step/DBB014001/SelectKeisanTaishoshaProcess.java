@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -38,6 +38,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
             = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuchokarisanteifuka."
                     + "IFuchoKarisanteiFukaMapper.get特別徴収同定一覧情報");
     private static final RString TABLE_NAME = new RString("FuchoKarisanteiTemp");
+    private static final RString NEXT_TABLE_NAME = new RString("FukaZenNendoTemp");
     private static final RString BATCH_ID = new RString("DBBBT34001");
     private static final Code エラーコード_08 = new Code("08");
     private static final RString 定数_0000 = new RString("0000");
@@ -54,6 +55,8 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
 
     @BatchWriter
     BatchPermanentTableWriter tableWriter;
+    @BatchWriter
+    IBatchTableWriter nextTempTableWriter;
 
     @Override
     protected void initialize() {
@@ -70,6 +73,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
     protected void createWriter() {
         tempTableWriter = new BatchEntityCreatedTempTableWriter(TABLE_NAME, FuchoKarisanteiTempEntity.class);
         tableWriter = new BatchPermanentTableWriter(DbT2010FukaErrorListEntity.class);
+        nextTempTableWriter = new BatchEntityCreatedTempTableWriter(NEXT_TABLE_NAME, FukaJohoTempEntity.class);
     }
 
     @Override
@@ -131,7 +135,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
             return 賦課年度開始日;
         }
         FlexibleDate temp = entity.get資格().getIchigoShikakuShutokuYMD();
-        if (!賦課年度開始日.isBefore(temp)) {
+        if (!賦課年度開始日.isBeforeOrEquals(temp)) {
             return 賦課年度開始日;
         } else {
             return temp;
@@ -142,7 +146,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
         DbT2010FukaErrorListEntity item = new DbT2010FukaErrorListEntity();
         item.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
         item.setInternalReportId(ReportIdDBB.DBB200006.getReportId().getColumnValue());
-        item.setInternalReportCreationDateTime(RDateTime.MAX);
+        item.setInternalReportCreationDateTime(parameter.getバッチ起動日時());
         item.setFukaNendo(parameter.get賦課年度());
         item.setTsuchishoNo(entity.get賦課().getTsuchishoNo());
         item.setBatchId(BATCH_ID);

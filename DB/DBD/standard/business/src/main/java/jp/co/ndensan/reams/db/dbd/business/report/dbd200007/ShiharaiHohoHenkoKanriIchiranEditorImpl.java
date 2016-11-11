@@ -684,17 +684,17 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
             source.listLower1_8 = 支払方法変更リストEntity_下.get資格区分().get名称();
         }
         if (住特フラグ_1.equals(支払方法変更リストEntity_下.get住特フラグ())) {
-            source.listUpper1_9 = ホシ;
+            source.listLower1_9 = ホシ;
         }
         if (支払方法変更リストEntity_下.is生保()) {
-            source.listUpper1_10 = ホシ;
+            source.listLower1_10 = ホシ;
         }
         return source;
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の認定情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         source.listLower1_11 = 支払方法変更リストEntity_下.get要介護度();
-        if (支払方法変更リストEntity_下.get認定有効期間() != null && 支払方法変更リストEntity_下.get認定有効期間().isEmpty()) {
+        if (支払方法変更リストEntity_下.get認定有効期間() != null && !支払方法変更リストEntity_下.get認定有効期間().isEmpty()) {
             source.listLower1_12 = toパターン4(new FlexibleDate(支払方法変更リストEntity_下.get認定有効期間().substring(INDEX_0, INDEX_8)))
                     .concat(チルダ).concat(
                     toパターン4(new FlexibleDate(支払方法変更リストEntity_下.get認定有効期間().substring(INDEX_9))));

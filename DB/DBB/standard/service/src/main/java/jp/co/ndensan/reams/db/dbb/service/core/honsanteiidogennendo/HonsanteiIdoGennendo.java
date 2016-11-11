@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.Shoriku;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.DBB051001_GennendoIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendo.HonsanteiIdoKanendoEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendo.IHonsanteiIdoKanendoMapper;
+import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
@@ -28,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -99,6 +103,7 @@ public class HonsanteiIdoGennendo {
     private final RString する = new RString("する");
     private final RString しない = new RString("しない");
     private final RString 空白文字 = new RString("");
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです
@@ -106,17 +111,22 @@ public class HonsanteiIdoGennendo {
     public HonsanteiIdoGennendo() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         this.帳票制御汎用Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
      * コンストラクタです。
      *
-     * @param 処理日付管理Dac 処理日付管理Dac
+     * @param 処理日付管理Dac DbT7022ShoriDateKanriDac
+     * @param 帳票制御汎用Dac DbT7067ChohyoSeigyoHanyoDac
+     * @param mapperProvider MapperProvider
      */
     HonsanteiIdoGennendo(DbT7022ShoriDateKanriDac 処理日付管理Dac,
-            DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac) {
+            DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac,
+            MapperProvider mapperProvider) {
         this.処理日付管理Dac = 処理日付管理Dac;
         this.帳票制御汎用Dac = 帳票制御汎用Dac;
+        this.mapperProvider = mapperProvider;
     }
 
     /**
@@ -184,11 +194,13 @@ public class HonsanteiIdoGennendo {
         if (kanriEntity == null) {
             List<DbT7022ShoriDateKanriEntity> kanriEntityList = 処理日付管理Dac
                     .selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 処理_枝番, 調定年度, 処理_枝番);
-            if (kanriEntityList != null) {
+            if (kanriEntityList != null && !kanriEntityList.isEmpty()) {
                 return new ShoriDateKanri(kanriEntityList.get(0));
             }
+            return null;
+        } else {
+            return new ShoriDateKanri(kanriEntity);
         }
-        return new ShoriDateKanri(kanriEntity);
     }
 
     /**
@@ -883,5 +895,19 @@ public class HonsanteiIdoGennendo {
         } else {
             return new ChohyoSeigyoHanyo(entity);
         }
+    }
+
+    /**
+     * 処理日時のメソッドます。
+     *
+     * @return RDateTime
+     */
+    public RDateTime get処理日時() {
+        IHonsanteiIdoKanendoMapper mapper = mapperProvider.create(IHonsanteiIdoKanendoMapper.class);
+        HonsanteiIdoKanendoEntity entity = mapper.select確定日時();
+        if (entity != null) {
+            return entity.get確定日時();
+        }
+        return null;
     }
 }

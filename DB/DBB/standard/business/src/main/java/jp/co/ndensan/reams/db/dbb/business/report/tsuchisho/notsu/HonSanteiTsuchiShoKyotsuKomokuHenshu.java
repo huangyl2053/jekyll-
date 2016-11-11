@@ -284,8 +284,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             町域コード = 宛名.get住所().get町域コード().value();
         }
         if (宛名.get行政区画() != null) {
-            if (宛名.get行政区画().getChugakkoku() != null) {
-                行政区コード = 宛名.get行政区画().getChugakkoku().getコード().value();
+            if (宛名.get行政区画().getGyoseiku() != null) {
+                行政区コード = 宛名.get行政区画().getGyoseiku().getコード().value();
             }
             if (宛名.get行政区画().getChiku1() != null) {
                 地区コード１ = 宛名.get行政区画().getChiku1().getコード().value();
@@ -312,7 +312,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         HyojiCodeResearcher hyojiCodeResearcher = new HyojiCodeResearcher();
         HyojiCodes 表示コード = hyojiCodeResearcher.create表示コード情報(本算定通知書情報.get帳票制御共通().toEntity(),
                 宛名.get住所().get町域コード().value(),
-                宛名.get行政区画().getChugakkoku().getコード().value(),
+                宛名.get行政区画().getGyoseiku().getコード().value(),
                 宛名.get行政区画().getChiku1().getコード().value(),
                 宛名.get行政区画().getChiku2().getコード().value(),
                 宛名.get行政区画().getChiku3().getコード().value(),
@@ -378,7 +378,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         FukaJoho 更正前_賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
 
-        if (更正前_賦課情報.get算定年額保険料2() != null) {
+        if (更正前_賦課情報.get算定年額保険料2() != null && 更正前_賦課情報.get算定年額保険料2().intValue() != 0) {
             更正前.set保険料率(更正前_賦課情報.get算定年額保険料2());
         } else {
             更正前.set保険料率(更正前_賦課情報.get算定年額保険料1());
@@ -492,13 +492,41 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private void set徴収方法(List<CharacteristicsPhase> 特徴期別金額リスト, List<UniversalPhase> 普徴期別金額リスト,
             EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前) {
-        if (特徴期別金額リスト.isEmpty() && !普徴期別金額リスト.isEmpty()) {
-            更正前.set徴収方法(new RString("普通徴収"));
-        } else if (!特徴期別金額リスト.isEmpty() && 普徴期別金額リスト.isEmpty()) {
+        if (has特徴期別金額データ(特徴期別金額リスト) && !has普徴期別金額データ(普徴期別金額リスト)) {
             更正前.set徴収方法(new RString("特別徴収"));
-        } else if (!特徴期別金額リスト.isEmpty() && !普徴期別金額リスト.isEmpty()) {
+        } else if (!has特徴期別金額データ(特徴期別金額リスト) && has普徴期別金額データ(普徴期別金額リスト)) {
+            更正前.set徴収方法(new RString("普通徴収"));
+        } else if (has特徴期別金額データ(特徴期別金額リスト) && has普徴期別金額データ(普徴期別金額リスト)) {
             更正前.set徴収方法(new RString("特別徴収　普通徴収"));
         }
+    }
+
+    private boolean has特徴期別金額データ(List<CharacteristicsPhase> 特徴期別金額リスト) {
+
+        if (特徴期別金額リスト.isEmpty()) {
+            return false;
+        }
+        boolean flag = false;
+        for (CharacteristicsPhase 期別金額 : 特徴期別金額リスト) {
+            if (null != 期別金額.get金額()) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    private boolean has普徴期別金額データ(List<UniversalPhase> 普徴期別金額リスト) {
+
+        if (普徴期別金額リスト.isEmpty()) {
+            return false;
+        }
+        boolean flag = false;
+        for (UniversalPhase 期別金額 : 普徴期別金額リスト) {
+            if (null != 期別金額.get金額()) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection get更正後(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
@@ -620,8 +648,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         FlexibleDate 期間_至 = null;
         if (月割開始年月1 != null && !月割開始年月1.isEmpty()) {
             期間_自 = getFlexibleDate自(月割開始年月1);
-            更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).
+            更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
             更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
                     fillType(FillType.BLANK).toDateString());
@@ -633,14 +661,14 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             期間_至 = getFlexibleDate至(月割終了年月2);
         }
         if (期間_至 != null) {
-            更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).
+            更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
             更正前.set期間_至_西暦(期間_至.seireki().separator(Separator.SLASH).
                     fillType(FillType.BLANK).toDateString());
         }
         if (期間_至 != null && !期間_自.isEmpty()) {
-            int 月数 = 期間_至.getBetweenMonths(期間_自);
+            int 月数 = 期間_至.plusDay(1).getBetweenMonths(期間_自);
             更正前.set月数(月数);
             更正前.set月数_ケ月(get月数_ケ月(月数));
         }
@@ -947,7 +975,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
      */
     public List<Tsuki> create特徴月リスト(List<RString> 特徴期リスト) {
         List<Tsuki> tsukiList = new ArrayList<>();
-        KitsukiList kitsukiList = new FuchoKiUtil().get期月リスト();
+        KitsukiList kitsukiList = new TokuchoKiUtil().get期月リスト();
         for (RString 特徴期 : 特徴期リスト) {
             List<Kitsuki> kitsukiのlist = kitsukiList.get期の月(Integer.parseInt(String.valueOf(特徴期)));
             if (!kitsukiのlist.isEmpty()) {
@@ -1009,11 +1037,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             if (月割開始年月1 <= 月 && 月 <= 月割終了年月1) {
                 dankaiKubun.set更正前所得段階(保険料算定段階1);
             }
-        } else {
-            if ((月割開始年月1 < 月 && 月 <= Month.DECEMBER.getValue())
-                    || (1 <= 月 && 月 <= 月割終了年月1)) {
-                dankaiKubun.set更正前所得段階(保険料算定段階1);
-            }
+        } else if ((月割開始年月1 < 月 && 月 <= Month.DECEMBER.getValue())
+                || (1 <= 月 && 月 <= 月割終了年月1)) {
+            dankaiKubun.set更正前所得段階(保険料算定段階1);
         }
     }
 
@@ -1027,11 +1053,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             if (月割開始年月1 <= 月 && 月 <= 月割終了年月1) {
                 dankaiKubun.set更正後所得段階(保険料算定段階1);
             }
-        } else {
-            if ((月割開始年月1 < 月 && 月 <= Month.DECEMBER.getValue())
-                    || (1 <= 月 && 月 <= 月割終了年月1)) {
-                dankaiKubun.set更正後所得段階(保険料算定段階1);
-            }
+        } else if ((月割開始年月1 < 月 && 月 <= Month.DECEMBER.getValue())
+                || (1 <= 月 && 月 <= 月割終了年月1)) {
+            dankaiKubun.set更正後所得段階(保険料算定段階1);
         }
     }
 

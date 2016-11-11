@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -75,6 +77,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     private static final RString 作成 = new RString("作成");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
@@ -193,6 +196,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             HonsanteiKekkaIcihiranReportSource source) {
         if (entity.get被保険者番号() != null) {
             source.listCenter_1 = entity.get被保険者番号().value();
+            source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号, entity.get被保険者番号().value());
         }
         if (entity.get資格取得日() != null) {
             source.listCenter_2 = entity.get資格取得日().wareki().toDateString();
@@ -583,22 +587,22 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         if (月割終了年月2 != null) {
             終了月2 = 月割終了年月2.getMonthValue();
         }
-        if (entity.get保険料算定段階1() != null && entity.get保険料算定段階2().length() >= NUM_2) {
+        if (entity.get保険料算定段階2() != null && entity.get保険料算定段階2().length() >= NUM_2) {
             RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);
-            if (!月割開始年月2.isEmpty() && !月割終了年月2.isEmpty() && !保険料算定段階2.isEmpty()) {
-                set月別取得段階(source, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
-            }
+            set月別取得段階(source, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
         }
     }
 
     private void set月別取得段階(HonsanteiKekkaIcihiranReportSource source, int 開始月, int 終了月,
             RString 保険料算定段階, RString 更正前後区分) {
-        for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) {
-            int currentMonth = (i - 1) % NUM_12 + 1;
-            if (更正前後区分_更正前.equals(更正前後区分)) {
-                set更正前_保険料算定段階(source, currentMonth, 保険料算定段階);
-            } else if (更正前後区分_更正後.equals(更正前後区分)) {
-                set更正後_保険料算定段階(source, currentMonth, 保険料算定段階);
+        if (!保険料算定段階.isEmpty()) {
+            for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) {
+                int currentMonth = (i - 1) % NUM_12 + 1;
+                if (更正前後区分_更正前.equals(更正前後区分)) {
+                    set更正前_保険料算定段階(source, currentMonth, 保険料算定段階);
+                } else if (更正前後区分_更正後.equals(更正前後区分)) {
+                    set更正後_保険料算定段階(source, currentMonth, 保険料算定段階);
+                }
             }
         }
     }

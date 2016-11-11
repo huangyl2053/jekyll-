@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.CaluculateFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaCalculateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaCalculateHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaCalculateTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBB-0860-030 yebangqiang
  */
-public class InsShikakuJyohoTaishoKeisanTempProcess extends BatchProcessBase<FukaCalculateEntity> {
+public class InsShikakuJyohoTaishoKeisanTempProcess extends BatchProcessBase<FukaCalculateHachiEntity> {
 
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "tokuchoheinjunka8gatsu.ITokuchoHeinjunka8GatsuBatchMapper.select賦課計算_賦課");
@@ -75,7 +75,7 @@ public class InsShikakuJyohoTaishoKeisanTempProcess extends BatchProcessBase<Fuk
     }
 
     @Override
-    protected void process(FukaCalculateEntity entity) {
+    protected void process(FukaCalculateHachiEntity entity) {
         if (通知書番号.equals(entity.getTsuchishoNo())
                 && 賦課年度.equals(entity.getFukaNendo())
                 && 調定年度.equals(entity.getChoteiNendo())) {
@@ -100,7 +100,7 @@ public class InsShikakuJyohoTaishoKeisanTempProcess extends BatchProcessBase<Fuk
         }
     }
 
-    private void setKey(FukaCalculateEntity entity) {
+    private void setKey(FukaCalculateHachiEntity entity) {
         賦課年度 = entity.getFukaNendo();
         調定年度 = entity.getChoteiNendo();
         通知書番号 = entity.getTsuchishoNo();

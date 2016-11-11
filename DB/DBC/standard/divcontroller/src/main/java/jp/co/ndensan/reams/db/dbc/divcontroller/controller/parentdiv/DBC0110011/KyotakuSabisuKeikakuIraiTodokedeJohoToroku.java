@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -76,6 +77,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             = new RString("「居宅サービス自己作成届出の登録が完了しました。」");
     private static final int NUM_1 = 1;
     private static final int NUM_10 = 10;
+    private static final RString 計画削除モード = new RString("delete");
+    private static final RString KEY_0 = new RString("key0");
 
     /**
      * 画面の初期化メソッドです。
@@ -112,6 +115,24 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         handler.initialize(被保険者番号, 識別コード, 居宅給付計画届出履歴一覧);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        return getResponseData(div);
+    }
+
+    /**
+     * 届出区分が選択されてものメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onChange_radTodokedeKubun(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        if (KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey())) {
+            div.getTxtJigyoshaHenkoJiyu().setReadOnly(true);
+            div.getTxtJigyoshaHenkoYMD().setReadOnly(true);
+        } else {
+            div.getTxtJigyoshaHenkoJiyu().setReadOnly(false);
+            div.getTxtJigyoshaHenkoYMD().setReadOnly(false);
+        }
         return getResponseData(div);
     }
 
@@ -392,57 +413,71 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         int 履歴番号 = get履歴番号の採番(被保険者番号);
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
+        ValidationMessageControlPairs valid = getValidationHandler(div).validate(居宅給付計画届出, 被保険者番号);
+        if (valid.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid).respond();
+        }
         if (居宅給付計画届出 == null) {
             居宅給付計画届出 = handler.create居宅給付計画届出(被保険者番号, 履歴番号);
         }
         居宅給付計画届出 = handler.set保存処理(居宅給付計画届出);
-        ValidationMessageControlPairs valid = getValidationHandler(div).validate(居宅給付計画届出);
-        if (valid.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid).respond();
+        if (計画削除モード.equals(div.getMode())) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+            }
+        } else {
+            boolean isReRequest = ResponseHolder.isReRequest();
+            if (isReRequest && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
+            }
+            boolean isSelectedResultYes = ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
+            boolean isBefore居宅サービス小規模多機能確認 = isBeforeMessage(
+                    DbcQuestionMessages.居宅サービス小規模多機能.getMessage(),
+                    isSelectedResultYes);
+            boolean isBefore計画作成区分確認 = isBeforeMessage(DbcQuestionMessages.計画作成区分.getMessage(),
+                    isSelectedResultYes);
+            boolean isBefore地域包括支援センター確認 = isBeforeMessage(
+                    DbcQuestionMessages.地域包括支援センター.getMessage(),
+                    isSelectedResultYes);
+            boolean isBefore居宅サービス受給者確認 = isBeforeMessage(DbcQuestionMessages.居宅サービス受給者.getMessage(),
+                    isSelectedResultYes);
+            ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> 質問チェックの結果 = null;
+            質問チェックの結果 = check小規模多機能(div, handler, isReRequest);
+            if (質問チェックの結果 != null) {
+                return 質問チェックの結果;
+            }
+            質問チェックの結果 = check介護度サービス種類(div, handler, isReRequest, isBefore居宅サービス小規模多機能確認,
+                    被保険者番号);
+            if (質問チェックの結果 != null) {
+                return 質問チェックの結果;
+            }
+            質問チェックの結果 = check地域包括支援センター(div, handler, isReRequest, isBefore居宅サービス小規模多機能確認,
+                    isBefore計画作成区分確認);
+            if (質問チェックの結果 != null) {
+                return 質問チェックの結果;
+            }
+            質問チェックの結果 = check計画適用開始日での認定状態(div, handler, isReRequest,
+                    isBefore居宅サービス小規模多機能確認,
+                    isBefore計画作成区分確認,
+                    isBefore地域包括支援センター確認,
+                    被保険者番号);
+            if (質問チェックの結果 != null) {
+                return 質問チェックの結果;
+            }
+            質問チェックの結果 = check受給申請中(div, handler, isReRequest, isBefore居宅サービス小規模多機能確認,
+                    isBefore計画作成区分確認, isBefore地域包括支援センター確認,
+                    isBefore居宅サービス受給者確認, 被保険者番号);
+            if (質問チェックの結果 != null) {
+                return 質問チェックの結果;
+            }
+            if (!ResponseHolder.getMessageCode().contains(UrQuestionMessages.保存の確認.getMessage().getCode())) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+            }
         }
-        boolean isReRequest = ResponseHolder.isReRequest();
-        if (isReRequest && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
-        }
-        boolean isSelectedResultYes = ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
-        boolean isBefore居宅サービス小規模多機能確認 = isBeforeMessage(
-                DbcQuestionMessages.居宅サービス小規模多機能.getMessage(),
-                isSelectedResultYes);
-        boolean isBefore計画作成区分確認 = isBeforeMessage(DbcQuestionMessages.計画作成区分.getMessage(),
-                isSelectedResultYes);
-        boolean isBefore地域包括支援センター確認 = isBeforeMessage(
-                DbcQuestionMessages.地域包括支援センター.getMessage(),
-                isSelectedResultYes);
-        boolean isBefore居宅サービス受給者確認 = isBeforeMessage(DbcQuestionMessages.居宅サービス受給者.getMessage(),
-                isSelectedResultYes);
-        ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> 質問チェックの結果 = null;
-        質問チェックの結果 = check小規模多機能(div, handler, isReRequest);
-        if (質問チェックの結果 != null) {
-            return 質問チェックの結果;
-        }
-        質問チェックの結果 = check介護度サービス種類(div, handler, isReRequest, isBefore居宅サービス小規模多機能確認,
-                被保険者番号);
-        if (質問チェックの結果 != null) {
-            return 質問チェックの結果;
-        }
-        質問チェックの結果 = check地域包括支援センター(div, handler, isReRequest, isBefore居宅サービス小規模多機能確認,
-                isBefore計画作成区分確認);
-        if (質問チェックの結果 != null) {
-            return 質問チェックの結果;
-        }
-        質問チェックの結果 = check計画適用開始日での認定状態(div, handler, isReRequest,
-                isBefore居宅サービス小規模多機能確認,
-                isBefore計画作成区分確認,
-                isBefore地域包括支援センター確認,
-                被保険者番号);
-        if (質問チェックの結果 != null) {
-            return 質問チェックの結果;
-        }
-        質問チェックの結果 = check受給申請中(div, handler, isReRequest, isBefore居宅サービス小規模多機能確認,
-                isBefore計画作成区分確認, isBefore地域包括支援センター確認,
-                isBefore居宅サービス受給者確認, 被保険者番号);
-        if (質問チェックの結果 != null) {
-            return 質問チェックの結果;
+        if ((new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                || new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+            return ResponseData.of(div).respond();
         }
         KyotakuKeikakuTodokedeManager manager = KyotakuKeikakuTodokedeManager.createInstance();
         manager.saveByForDeletePhysical(居宅給付計画届出);
@@ -515,7 +550,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
                 KyotakuKeikakuTodokede.class);
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
-        boolean is項目が変更 = Boolean.FALSE;
+        boolean is項目が変更;
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         if (居宅給付計画届出 != null) {
             is項目が変更 = handler.is項目が変更(居宅給付計画届出);
@@ -526,6 +561,13 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
         }
         if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTxtTodokedeYM().clearValue();
+            div.getTxtTodokedeshaShimei().clearDomain();
+            div.getTxtTodokedeshaShimeiKana().clearDomain();
+            div.getTxtTodokedeshaYubinNo().clearValue();
+            div.getTxtTodokedeshaJusho().clearValue();
+            div.getTxtTodokedeshaTelNo().clearDomain();
+            div.getDdlTodokedeshaKankeiKubun().getDataSource().clear();
             return ResponseData.of(div).setState(DBC0110011StateName.履歴一覧);
         }
         return ResponseData.of(div).respond();
@@ -551,6 +593,20 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
     public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnToShikakushaSho(
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.資格者証発行).respond();
+    }
+
+    /**
+     * 「検索結果一覧へ」ボタン押下時のメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_kanryouSearchResult(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        handler.get前排他を解除(被保険者番号.getColumnValue());
+        return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.検索結果一覧).respond();
     }
 
     /**

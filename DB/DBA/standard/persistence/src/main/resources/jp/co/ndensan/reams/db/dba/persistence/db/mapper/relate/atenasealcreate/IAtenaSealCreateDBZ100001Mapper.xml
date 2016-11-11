@@ -13,8 +13,21 @@
 <result property="方書" column="方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
 <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
 <result property="バーコード住所" column="バーコード住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="町域コード" column="町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="番地コード" column="番地コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="行政区コード" column="行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="地区1" column="地区1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="地区2" column="地区2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="地区3" column="地区3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="世帯ｺｰﾄﾞ" column="世帯ｺｰﾄﾞ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="氏名カナ" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
  </resultMap>
 <select resultOrdered="true" id="getEntityList" resultMap="resultMap_getEntityList"
+parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateShutsuMybatisParameter"
             fetchSize="500">
         SELECT
             "2009"."shichouzonCode" AS "市町村コード",
@@ -24,18 +37,32 @@
             "2009"."jusho" AS "住所",
             "2009"."katagaki" AS "方書",
             "2009"."meisho" AS "氏名",
-            "2009"."saiyuusenjyuushu" AS "バーコード住所"
+            "2009"."saiyuusenjyuushu" AS "バーコード住所",
+            "2009"."choikiCode" AS "町域コード",
+            "2009"."banchiCode" AS 番地コード,
+            "2009"."gyoseikuCode" AS 行政区コード,
+            "2009"."chikuCode1" AS 地区1,
+            "2009"."chikuCode2" AS 地区2,
+            "2009"."chikuCode3" AS 地区3,
+            "2009"."setaiCode" AS 世帯コード,
+            "2009"."shikibetsuCode" AS 識別コード,
+            "2009"."kanaMeisho" AS 氏名カナ,
+            "2009"."seinengappiYMD" AS 生年月日,
+            "2009"."seibetsuCode" AS 性別,
+            "2009"."hihokenshaNo" AS 被保険者番号
         FROM
             "DbWT2009AtenaShikibetuTaisyou1" AS "2009"
         LEFT JOIN
             rgdb."DbT7051KoseiShichosonMaster" AS "7051"
         ON
             "2009"."shichouzonCode" = "7051"."shichosonCode"
-        ORDER BY
-            "2009"."shichouzonCode"
+    <if test="has出力順">
+        ${出力順}
+    </if>
     </select>
     
 <select resultOrdered="true" id="getEntityListTwo" resultMap="resultMap_getEntityList"
+parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateShutsuMybatisParameter"
             fetchSize="500">
         SELECT
             "2009"."shichouzonCode" AS "市町村コード",
@@ -45,15 +72,28 @@
             "2009"."jusho" AS "住所",
             "2009"."katagaki" AS "方書",
             "2009"."meisho" AS "氏名",
-            "2009"."saiyuusenjyuushu" AS "バーコード住所"
+            "2009"."saiyuusenjyuushu" AS "バーコード住所",
+            "2009"."choikiCode" AS "町域コード",
+            "2009"."banchiCode" AS 番地コード,
+            "2009"."gyoseikuCode" AS 行政区コード,
+            "2009"."chikuCode1" AS 地区1,
+            "2009"."chikuCode2" AS 地区2,
+            "2009"."chikuCode3" AS 地区3,
+            "2009"."setaiCode" AS 世帯コード,
+            "2009"."shikibetsuCode" AS 識別コード,
+            "2009"."kanaMeisho" AS 氏名カナ,
+            "2009"."seinengappiYMD" AS 生年月日,
+            "2009"."seibetsuCode" AS 性別,
+            "2009"."hihokenshaNo" AS 被保険者番号
         FROM
             "DbWT2009AtenaShikibetuTaisyou2" AS "2009"
         LEFT JOIN
             rgdb."DbT7051KoseiShichosonMaster" AS "7051"
         ON
             "2009"."shichouzonCode" = "7051"."shichosonCode"
-        ORDER BY
-            "2009"."shichouzonCode"
+        <if test="has出力順">
+        ${出力順}
+        </if>
     </select>
     
 <select resultOrdered="true" id="getEntityListFour" resultMap="resultMap_getEntityList"
@@ -73,7 +113,184 @@
             rgdb."DbT7051KoseiShichosonMaster" AS "7051"
         ON
             "2009"."shichouzonCode" = "7051"."shichosonCode"
-        ORDER BY
-            "2009"."shichouzonCode"
+    <if test="has出力順">
+        ${出力順}
+    </if>
+    </select>
+    
+    <select resultOrdered="true" id="getChuuShutsuTaishouSha5List" resultMap="resultMap_getEntityList"
+parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateShutsuMybatisParameter"
+            fetchSize="500">
+        SELECT
+            "2009"."shichouzonCode" AS "市町村コード",
+            "7051"."shichosonMeisho" AS "市町村名称",
+            "2009"."yubinNo" AS "郵便番号",
+            "2009"."gyoseikuName" AS "行政区",
+            "2009"."jusho" AS "住所",
+            "2009"."katagaki" AS "方書",
+            "2009"."meisho" AS "氏名",
+            "2009"."saiyuusenjyuushu" AS "バーコード住所",
+            "2009"."choikiCode" AS "町域コード",
+            "2009"."banchiCode" AS 番地コード,
+            "2009"."gyoseikuCode" AS 行政区コード,
+            "2009"."chikuCode1" AS 地区1,
+            "2009"."chikuCode2" AS 地区2,
+            "2009"."chikuCode3" AS 地区3,
+            "2009"."setaiCode" AS 世帯コード,
+            "2009"."shikibetsuCode" AS 識別コード,
+            "2009"."kanaMeisho" AS 氏名カナ,
+            "2009"."seinengappiYMD" AS 生年月日,
+            "2009"."seibetsuCode" AS 性別,
+            "2009"."hihokenshaNo" AS 被保険者番号
+        FROM
+            "DbWT2009AtenaShikibetuTaisyou5" AS "2009"
+        LEFT JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS "7051"
+        ON
+            "2009"."shichouzonCode" = "7051"."shichosonCode"
+    <if test="has出力順">
+        ${出力順}
+    </if>
+    </select>
+    
+    <select resultOrdered="true" id="getChuuShutsuTaishouSha6List" resultMap="resultMap_getEntityList"
+parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atenasealcreate.AtenaSealCreateShutsuMybatisParameter"
+            fetchSize="500">
+        SELECT
+            "Atena4"."市町村コード" AS "市町村コード",
+            "Atena4"."市町村名称" AS "市町村名称",
+            "Atena4"."郵便番号" AS "郵便番号",
+            "Atena4"."行政区" AS "行政区",
+            "Atena4"."住所" AS "住所",
+            "Atena4"."方書" AS "方書",
+            "Atena4"."氏名" AS "氏名",
+            "Atena4"."バーコード住所" AS "バーコード住所",
+            "Atena4"."町域コード" AS "町域コード",
+            "Atena4"."番地コード" AS 番地コード,
+            "Atena4"."行政区コード" AS 行政区コード,
+            "Atena4"."地区1" AS 地区1,
+            "Atena4"."地区2" AS 地区2,
+            "Atena4"."地区3" AS 地区3,
+            "Atena4"."世帯コード" AS 世帯コード,
+            "Atena4"."識別コード" AS 識別コード,
+            "Atena4"."氏名カナ" AS 氏名カナ,
+            "Atena4"."生年月日" AS 生年月日,
+            "Atena4"."性別" AS 性別,
+            "Atena4"."被保険者番号" AS 被保険者番号
+        FROM
+      (SELECT 
+            "Taisyou4"."shichouzonCode" AS "市町村コード",
+            "7051"."shichosonMeisho" AS "市町村名称",
+            "Taisyou4"."yubinNo" AS "郵便番号",
+            "Taisyou4"."gyoseikuName" AS "行政区",
+            "Taisyou4"."jusho" AS "住所",
+            "Taisyou4"."katagaki" AS "方書",
+            "Taisyou4"."meisho" AS "氏名",
+            "Taisyou4"."saiyuusenjyuushu" AS "バーコード住所",
+            "Taisyou4"."choikiCode" AS "町域コード",
+            "Taisyou4"."banchiCode" AS 番地コード,
+            "Taisyou4"."gyoseikuCode" AS 行政区コード,
+            "Taisyou4"."chikuCode1" AS 地区1,
+            "Taisyou4"."chikuCode2" AS 地区2,
+            "Taisyou4"."chikuCode3" AS 地区3,
+            "Taisyou4"."setaiCode" AS 世帯コード,
+            "Taisyou4"."shikibetsuCode" AS 識別コード,
+            "Taisyou4"."kanaMeisho" AS 氏名カナ,
+            "Taisyou4"."seinengappiYMD" AS 生年月日,
+            "Taisyou4"."seibetsuCode" AS 性別,
+            "Taisyou4"."hihokenshaNo" AS 被保険者番号 
+        FROM
+         "DbWT2009AtenaShikibetuTaisyou4" AS "Taisyou4"
+      LEFT JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS "7051"
+        ON
+            "Taisyou4"."shichouzonCode" = "7051"."shichosonCode") AS "Atena4"
+    UNION
+        SELECT
+            "Atena5"."市町村コード" AS "市町村コード",
+            "Atena5"."市町村名称" AS "市町村名称",
+            "Atena5"."郵便番号" AS "郵便番号",
+            "Atena5"."行政区" AS "行政区",
+            "Atena5"."住所" AS "住所",
+            "Atena5"."方書" AS "方書",
+            "Atena5"."氏名" AS "氏名",
+            "Atena5"."バーコード住所" AS "バーコード住所",
+            "Atena5"."町域コード" AS "町域コード",
+            "Atena5"."番地コード" AS 番地コード,
+            "Atena5"."行政区コード" AS 行政区コード,
+            "Atena5"."地区1" AS 地区1,
+            "Atena5"."地区2" AS 地区2,
+            "Atena5"."地区3" AS 地区3,
+            "Atena5"."世帯コード" AS 世帯コード,
+            "Atena5"."識別コード" AS 識別コード,
+            "Atena5"."氏名カナ" AS 氏名カナ,
+            "Atena5"."生年月日" AS 生年月日,
+            "Atena5"."性別" AS 性別,
+            "Atena5"."被保険者番号" AS 被保険者番号
+        FROM
+       ( SELECT 
+            "Taisyou5"."shichouzonCode" AS "市町村コード",
+            "7051"."shichosonMeisho" AS "市町村名称",
+            "Taisyou5"."yubinNo" AS "郵便番号",
+            "Taisyou5"."gyoseikuName" AS "行政区",
+            "Taisyou5"."jusho" AS "住所",
+            "Taisyou5"."katagaki" AS "方書",
+            "Taisyou5"."meisho" AS "氏名",
+            "Taisyou5"."saiyuusenjyuushu" AS "バーコード住所",
+            "Taisyou5"."choikiCode" AS "町域コード",
+            "Taisyou5"."banchiCode" AS 番地コード,
+            "Taisyou5"."gyoseikuCode" AS 行政区コード,
+            "Taisyou5"."chikuCode1" AS 地区1,
+            "Taisyou5"."chikuCode2" AS 地区2,
+            "Taisyou5"."chikuCode3" AS 地区3,
+            "Taisyou5"."setaiCode" AS 世帯コード,
+            "Taisyou5"."shikibetsuCode" AS 識別コード,
+            "Taisyou5"."kanaMeisho" AS 氏名カナ,
+            "Taisyou5"."seinengappiYMD" AS 生年月日,
+            "Taisyou5"."seibetsuCode" AS 性別,
+            "Taisyou5"."hihokenshaNo" AS 被保険者番号
+        FROM
+         "DbWT2009AtenaShikibetuTaisyou5" AS "Taisyou5"
+      LEFT JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS "7051"
+        ON
+            "Taisyou5"."shichouzonCode" = "7051"."shichosonCode") AS "Atena5"
+    <if test="has出力順">
+        ${出力順}
+    </if>
+    </select>
+    
+    <select resultOrdered="true" id="getEntityListStree" resultMap="resultMap_getEntityList"
+            fetchSize="500">
+        SELECT
+            "2009"."shichouzonCode" AS "市町村コード",
+            "7051"."shichosonMeisho" AS "市町村名称",
+            "2009"."yubinNo" AS "郵便番号",
+            "2009"."gyoseikuName" AS "行政区",
+            "2009"."jusho" AS "住所",
+            "2009"."katagaki" AS "方書",
+            "2009"."meisho" AS "氏名",
+            "2009"."saiyuusenjyuushu" AS "バーコード住所",
+            "2009"."choikiCode" AS "町域コード",
+            "2009"."banchiCode" AS 番地コード,
+            "2009"."gyoseikuCode" AS 行政区コード,
+            "2009"."chikuCode1" AS 地区1,
+            "2009"."chikuCode2" AS 地区2,
+            "2009"."chikuCode3" AS 地区3,
+            "2009"."setaiCode" AS 世帯コード,
+            "2009"."shikibetsuCode" AS 識別コード,
+            "2009"."kanaMeisho" AS 氏名カナ,
+            "2009"."seinengappiYMD" AS 生年月日,
+            "2009"."seibetsuCode" AS 性別,
+            "2009"."hihokenshaNo" AS 被保険者番号
+        FROM
+            "DbWT2009AtenaShikibetuTaisyou3" AS "2009"
+        LEFT JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS "7051"
+        ON
+            "2009"."shichouzonCode" = "7051"."shichosonCode"
+        <if test="has出力順">
+        ${出力順}
+    </if>
     </select>
 </mapper>

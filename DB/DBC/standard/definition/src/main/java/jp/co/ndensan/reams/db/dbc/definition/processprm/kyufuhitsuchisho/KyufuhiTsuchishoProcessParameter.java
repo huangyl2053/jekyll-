@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.processprm.kyufuhitsuchisho;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhitsuchisho.KyufuhiTsuchishoBatchMybitisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -35,8 +36,10 @@ public class KyufuhiTsuchishoProcessParameter implements IBatchProcessParameter 
     private RString 施設分を対象としない;
     private RString 特定入所者介護を対象としない;
     private RString 償還分を対象としない;
-    private RString 出力順ID;
+    private Long shutsuryokujunId;
     private RString 文書番号;
+    private RString orderBy;
+    private boolean orderByFlag;
 
     /**
      * コンストラクタ
@@ -77,7 +80,7 @@ public class KyufuhiTsuchishoProcessParameter implements IBatchProcessParameter 
             RString 施設分を対象としない,
             RString 特定入所者介護を対象としない,
             RString 償還分を対象としない,
-            RString 出力順ID,
+            Long 出力順ID,
             RString 文書番号) {
         this.処理年月日 = 処理年月日;
         this.サービス種類区分 = サービス種類区分;
@@ -95,7 +98,7 @@ public class KyufuhiTsuchishoProcessParameter implements IBatchProcessParameter 
         this.施設分を対象としない = 施設分を対象としない;
         this.特定入所者介護を対象としない = 特定入所者介護を対象としない;
         this.償還分を対象としない = 償還分を対象としない;
-        this.出力順ID = 出力順ID;
+        this.shutsuryokujunId = 出力順ID;
         this.文書番号 = 文書番号;
     }
 
@@ -103,11 +106,14 @@ public class KyufuhiTsuchishoProcessParameter implements IBatchProcessParameter 
      * Mybatisパラメータを作成します。
      *
      * @param psmAtesaki 宛先取得PSM
+     * @param searchKey 宛名PSM検索きー
      * @return KyufuhiTsuchishoBatchMybitisParameter Mybatisパラメータ
      */
-    public KyufuhiTsuchishoBatchMybitisParameter toKyufuhiTsuchishoBatchMybitisParameter(RString psmAtesaki) {
+    public KyufuhiTsuchishoBatchMybitisParameter toKyufuhiTsuchishoBatchMybitisParameter(RString psmAtesaki,
+            IShikibetsuTaishoPSMSearchKey searchKey) {
         return KyufuhiTsuchishoBatchMybitisParameter.creatParameter(サービス種類区分, 死亡者分を対象としない, ゼロ査定実績を対象としない,
                 再審査分を対象としない, 過誤分を対象としない, 施設分を対象としない, 特定入所者介護を対象としない, 償還分を対象としない,
-                福祉用具貸与ページ出力区分, psmAtesaki, サービス年月開始, サービス年月終了, 証記載保険者番号, 要介護度);
+                福祉用具貸与ページ出力区分, psmAtesaki, サービス年月開始, サービス年月終了, 証記載保険者番号, 要介護度, orderBy,
+                orderByFlag, searchKey);
     }
 }

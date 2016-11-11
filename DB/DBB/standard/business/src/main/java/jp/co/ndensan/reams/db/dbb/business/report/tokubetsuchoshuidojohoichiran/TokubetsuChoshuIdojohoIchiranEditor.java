@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.tokubetsuchoshuidojohoich
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.KakushuKubun;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -47,6 +49,7 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
 
     private static final RString SAKUSEI = new RString("作成");
     private static final RString 年度 = new RString("度");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final int NUM_0 = 0;
 
     /**
@@ -91,8 +94,13 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
         if (null != 特徴異動追加情報) {
             source.tsuchiNaiyo = TsuchiNaiyoCodeType.toValue(特徴異動追加情報.getTsuchiNaiyoCode()).get通知内容名称();
             source.listUpper_1 = 特徴異動追加情報.getHihokenshaNo();
+            if (null != 特徴異動追加情報.getHihokenshaNo()) {
+                source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                        特徴異動追加情報.getHihokenshaNo());
+            }
             source.listUpper_2 = 特徴異動追加情報.getKisoNenkinNo();
             source.listUpper_3 = 特徴異動追加情報.getDtKanaShimei();
+            source.shichosonCode = 特徴異動追加情報.getKoseiCityCode();
             RString 生年月日 = 特徴異動追加情報.getDtBirthDay();
             if (null != 生年月日) {
                 source.listUpper_4 = new FlexibleDate(生年月日).wareki().toDateString();

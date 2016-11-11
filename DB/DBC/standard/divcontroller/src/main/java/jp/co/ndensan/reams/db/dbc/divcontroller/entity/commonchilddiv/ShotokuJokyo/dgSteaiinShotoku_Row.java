@@ -3,21 +3,25 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShotokuJo
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Aug 30 09:51:06 CST 2016
+ * Fri Nov 04 16:35:24 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ImageDialog;
 
+
 /**
- * dgSteaiinShotoku_Row のクラスファイル
- *
- * @reamsid_L DBC-4620-030 zhouchuanlin
+ * dgSteaiinShotoku_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgSteaiinShotoku_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString shikibetsuCode;
     private RString hihokenshaNo;

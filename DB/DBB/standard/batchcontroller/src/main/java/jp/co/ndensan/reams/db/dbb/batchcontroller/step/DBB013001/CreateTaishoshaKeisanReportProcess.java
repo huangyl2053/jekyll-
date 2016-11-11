@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.DBB200005_HeijunkaKeisanIchiran;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranReport;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb013001.TokuchoHeinjunka8GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb013001.TokuchoHeinjunka8GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -35,6 +36,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -63,12 +65,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -91,12 +96,15 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
     private static final RString 計算後情報_テーブル = new RString("対象者データ.");
     private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200005"));
-    private static final RString ファイル名_対象者一覧表 = new RString("介護保険特徴仮算定平準化対象者一覧表_");
+    private static final RString ファイル名_対象者一覧表 = new RString("TokubetsuChoshuHeijunkaKeisanAugustKekkaIchiran_対象者");
     private static final RString CSVファイル = new RString(".csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString タイトル_対象者一覧表 = new RString("介護保険　特徴仮算定平準化対象者一覧表");
     private static final RString 特徴平準化対象者一覧表 = new RString("特徴平準化対象者一覧表");
+    private static final RString 編集コード_6月特徴開始者 = new RString("6月特徴開始者");
+    private static final RString 編集コード_8月特徴開始者 = new RString("8月特徴開始者");
+    private static final RString 時分秒 = new RString("00:00:00");
     private TokuchoHeinjunka8GatsuProcessParameter parameter;
     private IOutputOrder outputOrder;
     private HokenryoDankaiManager 保険料段階取得;
@@ -121,7 +129,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
     protected void initialize() {
         pageBreakKeys = new ArrayList<>();
         PrtKaigoFukaTokuchoHeijunkaCore core = new PrtKaigoFukaTokuchoHeijunkaCore();
-        outputOrder = core.beforeExecuteCore(parameter.get出力順ID());
+        set出力順();
         導入団体クラス = core.getAssociation();
         出力順 = RString.EMPTY;
         if (outputOrder != null) {
@@ -132,6 +140,13 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
                     pageBreakKeys.add(item.get項目ID());
                 }
             }
+        }
+    }
+
+    private void set出力順() {
+        if (null != parameter.get出力順ID()) {
+            outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBB介護賦課,
+                    ReportIdDBB.DBB200005.getReportId(), Long.parseLong(parameter.get出力順ID().toString()));
         }
     }
 
@@ -166,7 +181,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath,
-                ファイル名_対象者一覧表.concat(parameter.get調定日時().toString()).concat(CSVファイル));
+                ファイル名_対象者一覧表.concat(CSVファイル));
         csvWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -378,13 +393,20 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
     private void 特徴平準化対象者CSV項目編集(List<RString> bodyList, YMDHMS 調定日時, FlexibleYear 賦課年度,
             TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, RString 編集後住所, Decimal 今年度保険料率,
             int 調整金額, RString 編集備考) {
-        bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
-        bodyList.add(new RString(調定日時.toString()));
+        RString 調定日時_出力 = 調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+        bodyList.add(調定日時_出力);
+        bodyList.add(調定日時_出力.concat(RString.HALF_SPACE).concat(getパターン141(調定日時)));
         bodyList.add(タイトル_対象者一覧表);
         bodyList.add(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString());
         bodyList.add(特徴平準化結果対象者.get通知書番号().value());
+        bodyList.add(特徴平準化結果対象者.get被保険者番号().value());
         if (特徴平準化結果対象者.get識別コード() != null) {
             bodyList.add(特徴平準化結果対象者.get識別コード().value());
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get世帯コード() != null) {
+            bodyList.add(特徴平準化結果対象者.get世帯コード().value());
         } else {
             bodyList.add(RString.EMPTY);
         }
@@ -418,31 +440,16 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         } else {
             bodyList.add(RString.EMPTY);
         }
-        final RString 特別徴収業務者コード = 特徴平準化結果対象者.get特別徴収業務者コード();
-        bodyList.add(特別徴収業務者コード);
-        if (特別徴収業務者コード != null) {
-            bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    new Code(特別徴収業務者コード), FlexibleDate.getNowDate()));
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
-        変更前特徴額設定(特徴平準化結果対象者, bodyList);
-        bodyList.add(特徴平準化結果対象者.get保険料段階仮算定時());
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(今年度保険料率, 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(new Decimal(調整金額), 0));
-        bodyList.add(編集備考);
-        bodyList.add(特徴平準化結果対象者.get被保険者番号().value());
-        if (特徴平準化結果対象者.get世帯コード() != null) {
-            bodyList.add(特徴平準化結果対象者.get世帯コード().value());
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
         if (宛名の情報 != null) {
             ChoikiCode 町域コード = 宛名の情報.getChoikiCode();
             if (町域コード != null) {
                 bodyList.add(町域コード.value());
             }
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (編集後住所 != null) {
+            bodyList.add(編集後住所);
         } else {
             bodyList.add(RString.EMPTY);
         }
@@ -454,6 +461,15 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         } else {
             bodyList.add(RString.EMPTY);
         }
+        final RString 特別徴収業務者コード = 特徴平準化結果対象者.get特別徴収業務者コード();
+        bodyList.add(特別徴収業務者コード);
+        if (特別徴収業務者コード != null) {
+            bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                    new Code(特別徴収業務者コード), FlexibleDate.getNowDate()));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
         RString 仮徴収年金コード = 特徴平準化結果対象者.get仮徴収年金コード();
         bodyList.add(仮徴収年金コード);
         if (仮徴収年金コード != null && (NUM_3 <= 仮徴収年金コード.length())) {
@@ -461,73 +477,66 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(仮徴収年金コード.substring(NUM_0, NUM_3)), FlexibleDate.getNowDate()));
         }
-        特徴期期別金額設定(特徴平準化結果対象者, bodyList);
+        bodyList.add(特徴平準化結果対象者.get保険料算定段階2() == null
+                ? 特徴平準化結果対象者.get保険料算定段階1() : 特徴平準化結果対象者.get保険料算定段階2());
+        bodyList.add(DecimalFormatter.toコンマ区切りRString(今年度保険料率, 0));
+        bodyList.add(DecimalFormatter.toコンマ区切りRString(new Decimal(調整金額), 0));
+        金額設定(特徴平準化結果対象者, bodyList);
+        bodyList.add(備考を編集(特徴平準化結果対象者));
     }
 
-    private void 変更前特徴額設定(TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, List<RString> bodyList) {
-        if (特徴平準化結果対象者.get変更前特徴額_１期() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_１期(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
-        if (特徴平準化結果対象者.get変更前特徴額_２期() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_２期(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
-        if (特徴平準化結果対象者.get変更前特徴額_３期() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_３期(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
-        if (特徴平準化結果対象者.get変更前特徴額_４期() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_４期(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
-        if (特徴平準化結果対象者.get変更前特徴額_５期() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_５期(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
-        if (特徴平準化結果対象者.get変更前特徴額_６期() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_６期(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
+    private void 金額設定(TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, List<RString> bodyList) {
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get変更前特徴額_１期()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get変更前特徴額_２期()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get変更前特徴額_３期()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get特徴期期別金額01()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get特徴期期別金額02()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get特徴期期別金額03()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get普徴期期別金額01()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get普徴期期別金額02()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get普徴期期別金額03()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get普徴期期別金額04()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get普徴期期別金額05()));
+        bodyList.add(get共通ポリシー金額1(特徴平準化結果対象者.get普徴期期別金額06()));
     }
 
-    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, List<RString> bodyList) {
-        if (特徴平準化結果対象者.get特徴期期別金額01() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額01(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
+    private RString get共通ポリシー金額1(Decimal 金額) {
+        if (金額 != null) {
+            return DecimalFormatter.toコンマ区切りRString(金額, 0);
         }
-        if (特徴平準化結果対象者.get特徴期期別金額02() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額02(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
+        return RString.EMPTY;
+    }
+
+    private RString getパターン141(YMDHMS 日時) {
+        if (日時 != null && !日時.isEmpty()) {
+            return strToTime(日時.toDateString()).toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
         }
-        if (特徴平準化結果対象者.get特徴期期別金額03() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額03(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
+        return 時分秒;
+    }
+
+    private RTime strToTime(RString 日時) {
+        if (日時 == null || 日時.isEmpty()) {
+
+            return RDateTime.MIN.getTime();
         }
-        if (特徴平準化結果対象者.get特徴期期別金額04() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額04(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
+        return new RTime(日時);
+    }
+
+    private RString 備考を編集(TokuchoHeijyunkaTaishoshaEntity item) {
+        if (!ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法4月())
+                && !ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法4月())
+                && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法6月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法4月()))) {
+
+            return 編集コード_6月特徴開始者;
         }
-        if (特徴平準化結果対象者.get特徴期期別金額05() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額05(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
+        if (!ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法6月())
+                && !ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法6月())
+                && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法8月()))
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法8月())) {
+            return 編集コード_8月特徴開始者;
         }
-        if (特徴平準化結果対象者.get特徴期期別金額06() != null) {
-            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額06(), 0));
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
+        return RString.EMPTY;
     }
 
     private void toBodyList(List<RString> bodyList) {

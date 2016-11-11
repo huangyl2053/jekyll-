@@ -55,7 +55,7 @@ public class KubunShikyuGendogakuHandler {
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
             }
             FlexibleYearMonth teikyoshuryoYM = result.toEntity().getTeikyoshuryoYM();
-            if (teikyoshuryoYM != null) {
+            if (teikyoshuryoYM != null && !teikyoshuryoYM.isEmpty()) {
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
                 row.setDefaultDataName3(teikyoshuryoYM.wareki()
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
@@ -164,10 +164,8 @@ public class KubunShikyuGendogakuHandler {
     public KaigoServiceShurui setResult追加(KaigoServiceShurui result) {
         return result.createBuilderForEdit()
                 .setサービス種類名称(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
-                .setサービス分類コード(Code.EMPTY)
+                .setサービス分類コード(new Code(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
                 .setサービス種類略称(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue())
-                .set提供終了年月(new FlexibleYearMonth(div.getServiceShuruiShousai()
-                                .getTxtTeikyoShuryoYM().getValue().getYearMonth().toDateString()))
                 .set居宅サービス区分(RString.EMPTY)
                 .set基準該当サービス区分(RString.EMPTY)
                 .set限度額区分(RString.EMPTY)
@@ -187,8 +185,6 @@ public class KubunShikyuGendogakuHandler {
                 .setサービス種類名称(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
                 .setサービス分類コード(new Code(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
                 .setサービス種類略称(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue())
-                .set提供終了年月(new FlexibleYearMonth(div.getServiceShuruiShousai()
-                                .getTxtTeikyoShuryoYM().getValue().getYearMonth().toDateString()))
                 .setIsDeleted(false)
                 .build();
     }
@@ -200,6 +196,17 @@ public class KubunShikyuGendogakuHandler {
         if (DBC4510011StateName.初期状態.getName().equals(ResponseHolder.getState())) {
             setCommonButtonVisible(false);
         }
+    }
+
+    /**
+     * 初期化のメソッドです。
+     *
+     * @param flag boolean
+     */
+    public void initialDisable(boolean flag) {
+        div.getDgSerShurui().setDisabled(flag);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, flag);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(入力前の状態に戻る, flag);
     }
 
 }

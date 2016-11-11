@@ -81,7 +81,7 @@ public class GassanJigyobunKekkaIchiranSource implements IReportSource {
     @ReportItem(name = "List1_15", length = 2, order = 30)
     public RString List1_15;
     @ReportPerson(id = "A")
-    @ReportItem(name = "shikibetsuCode", length = 15)
+    @ReportItem(name = "shikibetsuCode", length = 15, order = 31)
     public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
@@ -89,18 +89,20 @@ public class GassanJigyobunKekkaIchiranSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 
-    @ReportItem(name = "yubinNo", length = 16)
+    @ReportItem(name = "yubinNo", length = 10, order = 32)
     public RString yubinNo;
-    @ReportItem(name = "taishoNendo", length = 17)
+    @ReportItem(name = "taishoNendo", length = 4, order = 33)
     public RString taishoNendo;
-    @ReportItem(name = "gyoseiCode", length = 18)
+    @ReportItem(name = "gyoseiCode", length = 10, order = 34)
     public RString gyoseiCode;
-    @ReportItem(name = "jushoCode", length = 19)
-    public RString jushoCode;
-    @ReportItem(name = "shichosonCode", length = 20)
+    @ReportItem(name = "choikiCode", length = 20, order = 35)
+    public RString choikiCode;
+    @ReportItem(name = "shichosonCode", length = 20, order = 36)
     public RString shichosonCode;
-    @ReportItem(name = "shoKisaiHokenshaNo", length = 21)
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 50, order = 37)
     public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "atenaKanaShimei", length = 100, order = 38)
+    public RString atenaKanaShimei;
 
 // </editor-fold>
 }

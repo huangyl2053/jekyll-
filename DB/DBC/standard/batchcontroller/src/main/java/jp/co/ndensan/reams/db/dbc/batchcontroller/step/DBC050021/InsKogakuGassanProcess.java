@@ -42,7 +42,7 @@ public class InsKogakuGassanProcess extends BatchProcessBase<DbT3074KogakuGassan
             + "IFurikomimeisaiFurikomiDataMapper.get高額合算データ");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final int INT_6 = 6;
+    private static final int INT_4 = 4;
     private static final int INT_10 = 10;
     private static final int INT_17 = 17;
     private static final RString TWO = new RString("2");
@@ -156,7 +156,7 @@ public class InsKogakuGassanProcess extends BatchProcessBase<DbT3074KogakuGassan
         RString 口座名寄せキー;
         if (TWO.equals(parameter.get支払方法())) {
             口座名寄せキー = entity.getHihokenshaNo().getColumnValue().padZeroToLeft(INT_10)
-                    .concat(RSTRING_000000).concat(entity.getTaishoNendo().toDateString().padZeroToLeft(INT_6))
+                    .concat(RSTRING_000000).concat(entity.getTaishoNendo().toDateString().padZeroToLeft(INT_4))
                     .concat(entity.getShikyuSeiriNo().padZeroToLeft(INT_17)).concat(RSTRING_0000);
         } else {
             口座名寄せキー = RString.EMPTY;

@@ -10,25 +10,22 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoBodyItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseishoParamter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd800001.FutangendogakuNinteiShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogakuninteishinseisho.IFutanGendogakuNinteiShinseishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -99,19 +96,14 @@ public class FutanGendogakuNinteiShinseisho {
         FutangendogakuNinteiShinseishoProerty proerty = new FutangendogakuNinteiShinseishoProerty();
         try (ReportAssembler<FutangendogakuNinteiShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
             ReportSourceWriter<FutangendogakuNinteiShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
-                    GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
-            Association association = AssociationFinderFactory.createInstance().getAssociation();
-            INinshoshaSourceBuilder ninshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    nishosha, association, reportSourceWriter.getImageFolderPath(), RDate.getNowDate());
-            for (FutangendogakuNinteiShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
-                    ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+            for (FutangendogakuNinteiShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号), 識別コード)) {
                 report.writeBy(reportSourceWriter);
             }
         }
     }
 
-    private static List<FutangendogakuNinteiShinseishoReport> toReports(HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
+    private List<FutangendogakuNinteiShinseishoReport> toReports(HihokenshaKihonBusiness business, ShikibetsuCode 識別コード) {
+        RString 認証者 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate());
         List<FutangendogakuNinteiShinseishoReport> list = new ArrayList<>();
         RString 申請文 = get帳票文言(1);
         RString 注意文 = get帳票文言(2);
@@ -133,6 +125,17 @@ public class FutanGendogakuNinteiShinseisho {
         } else {
             郵便番号 = RString.EMPTY;
         }
+        RString 施設郵便番号 = RString.EMPTY;
+        RString 施設電話番号 = RString.EMPTY;
+        RString 施設住所 = RString.EMPTY;
+        RString 施設名称 = RString.EMPTY;
+        FutanGendogakuNinteiShinseishoEntity 施設情報 = get施設情報(識別コード);
+        if (施設情報 != null) {
+            施設郵便番号 = 施設情報.get事業者郵便番号();
+            施設電話番号 = 施設情報.get事業者電話番号();
+            施設住所 = 施設情報.get事業者住所();
+            施設名称 = 施設情報.get事業者名称();
+        }
         FutangendogakuNinteiShinseishoBodyItem item = new FutangendogakuNinteiShinseishoBodyItem(
                 申請文,
                 business.getフリガナ(),
@@ -144,22 +147,21 @@ public class FutanGendogakuNinteiShinseisho {
                 郵便番号,
                 business.get住所(),
                 注意文,
-                ninshoshaYakushokuMei,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY
-        );
+                認証者,
+                施設郵便番号,
+                施設電話番号,
+                施設住所,
+                施設名称);
         list.add(FutangendogakuNinteiShinseishoReport.createReport(item));
         return list;
     }
 
-    private static RString set生年月日_日本人(FlexibleDate 生年月日) {
+    private RString set生年月日_日本人(FlexibleDate 生年月日) {
         return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
-    private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+    private RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         RString 外国人表示制御_生年月日表示方法 = DbBusinessConfig
                 .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
@@ -170,7 +172,7 @@ public class FutanGendogakuNinteiShinseisho {
         return RString.EMPTY;
     }
 
-    private static RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+    private RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         if (生年月日不詳区分_FALG.equals(生年月日不詳区分)) {
             return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -178,7 +180,7 @@ public class FutanGendogakuNinteiShinseisho {
         return RString.EMPTY;
     }
 
-    private static RString set郵便番号(RString 郵便番号) {
+    private RString set郵便番号(RString 郵便番号) {
         RStringBuilder yubinNoSb = new RStringBuilder();
         if (INDEX_3 <= 郵便番号.length()) {
             yubinNoSb.append(郵便番号.substring(0, INDEX_3));
@@ -190,7 +192,7 @@ public class FutanGendogakuNinteiShinseisho {
         return yubinNoSb.toRString();
     }
 
-    private static RString get帳票文言(int 項目番号) {
+    private RString get帳票文言(int 項目番号) {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBD介護受給,
@@ -208,6 +210,25 @@ public class FutanGendogakuNinteiShinseisho {
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         TokuteifutanGendogakuShinseisho shinjoho = InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
         return shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
+    }
+
+    private FutanGendogakuNinteiShinseishoEntity get施設情報(ShikibetsuCode 識別コード) {
+        MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
+        IFutanGendogakuNinteiShinseishoMapper mapper = mapperProvider.create(IFutanGendogakuNinteiShinseishoMapper.class);
+        FutanGendogakuNinteiShinseishoEntity 施設入退所情報 = mapper.get施設入退所(FutanGendogakuNinteiShinseishoParamter
+                .createParamter(識別コード, RString.EMPTY));
+        if (施設入退所情報 != null) {
+            FutanGendogakuNinteiShinseishoParamter param = FutanGendogakuNinteiShinseishoParamter.
+                    createParamter(識別コード, 施設入退所情報.get入所施設コード());
+            if (ShisetsuType.介護保険施設.getコード().equals(施設入退所情報.get入所施設種類())) {
+                FutanGendogakuNinteiShinseishoEntity 介護事業者 = mapper.get介護事業者(param);
+                return 介護事業者;
+            } else if (ShisetsuType.住所地特例対象施設.getコード().equals(施設入退所情報.get入所施設種類())) {
+                FutanGendogakuNinteiShinseishoEntity 介護除外住所地特例対象施設 = mapper.get介護除外住所地特例対象施設(param);
+                return 介護除外住所地特例対象施設;
+            }
+        }
+        return null;
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

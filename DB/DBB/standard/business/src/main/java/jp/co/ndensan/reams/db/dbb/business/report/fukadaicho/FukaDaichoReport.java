@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -101,16 +102,16 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
                 setTokubetsuChoshuZogenKingaku(item4, entity);
 
                 set世帯員情報リストPart1(item2, entity, INDEX0);
-                set世帯員情報リストPart2(item2, entity, INDEX1);
-                set世帯員情報リストPart1(item3, entity, INDEX2);
-                set世帯員情報リストPart2(item3, entity, INDEX3);
-                set世帯員情報リストPart1(item4, entity, INDEX4);
-                set世帯員情報リストPart2(item4, entity, INDEX5);
-                set世帯員情報リストPart1(item, entity, INDEX6);
+                set世帯員情報リストPart2(item2, entity, INDEX4);
+                set世帯員情報リストPart1(item3, entity, INDEX1);
+                set世帯員情報リストPart2(item3, entity, INDEX5);
+                set世帯員情報リストPart1(item4, entity, INDEX2);
+                set世帯員情報リストPart2(item4, entity, INDEX6);
+                set世帯員情報リストPart1(item, entity, INDEX3);
                 set世帯員情報リストPart2(item, entity, INDEX7);
 
-                item.setPageNo(new RString(Integer.valueOf(pageNow).toString()));
-                item.setPageNoAll(new RString(pageAll.toString()));
+                item.setPageNo(new RString(pageNow));
+                item.setPageNoAll(new RString(pageAll));
                 item.setPrintTimeStamp(entity.get印刷日時());
                 item.setSetaiCode(entity.get世帯コード());
                 item.setTitle(entity.getタイトル());
@@ -338,6 +339,14 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
     private void setFutsuChoshuZogenKingaku(FukaDaichoItem item, EditedHonSanteiFukaDaichoJoho entity) {
         if (entity != null && entity.get普通徴収増減額() != null) {
             item.setListFutsuChoshu_1(entity.get普通徴収増減額().get普徴調定月());
+            item.setListFutsuChoshu_2(entity.get普通徴収増減額().get普徴調定月の期());
+            item.setListFutsuChoshu_3(entity.get普通徴収増減額().get普徴確定年額保険料());
+            item.setListFutsuChoshu_4(entity.get普通徴収増減額().get普徴納付済額());
+            item.setListFutsuChoshu_5(entity.get普通徴収増減額().get普徴今後納付すべき額());
+            item.setListFutsuChoshu_6(entity.get普通徴収増減額().get普徴金額１());
+            item.setListFutsuChoshu_7(entity.get普通徴収増減額().get普徴金額２());
+            item.setListFutsuChoshu_8(entity.get普通徴収増減額().get普徴金額３());
+            item.setListFutsuChoshu_9(entity.get普通徴収増減額().get普徴金額４());
             item.setListFutsuChoshu_10(entity.get普通徴収増減額().get普徴金額５());
             item.setListFutsuChoshu_11(entity.get普通徴収増減額().get普徴金額６());
             item.setListFutsuChoshu_12(entity.get普通徴収増減額().get普徴金額７());
@@ -348,15 +357,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListFutsuChoshu_17(entity.get普通徴収増減額().get普徴金額１２());
             item.setListFutsuChoshu_18(entity.get普通徴収増減額().get普徴金額１３());
             item.setListFutsuChoshu_19(entity.get普通徴収増減額().get普徴金額１４());
-            item.setListFutsuChoshu_2(entity.get普通徴収増減額().get普徴調定月の期());
             item.setListFutsuChoshu_20(entity.get普通徴収増減額().get調整額歳出還付());
-            item.setListFutsuChoshu_3(entity.get普通徴収増減額().get調整額歳出還付());
-            item.setListFutsuChoshu_4(entity.get普通徴収増減額().get調整額歳出還付());
-            item.setListFutsuChoshu_5(entity.get普通徴収増減額().get普徴確定年額保険料());
-            item.setListFutsuChoshu_6(entity.get普通徴収増減額().get普徴納付済額());
-            item.setListFutsuChoshu_7(entity.get普通徴収増減額().get普徴今後納付すべき額());
-            item.setListFutsuChoshu_8(entity.get普通徴収増減額().get普徴金額３());
-            item.setListFutsuChoshu_9(entity.get普通徴収増減額().get普徴金額４());
         }
     }
 
@@ -429,11 +430,6 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListFukaUchiwake1_7(entity.get本算定賦課内訳１更正後().get確定年額保険料());
             item.setListFukaUchiwake1_8(entity.get本算定賦課内訳１更正後().get賦課基準日());
             item.setListFukaUchiwake1_9(entity.get本算定賦課内訳１更正後().get調定年月日());
-            item.setListFukaUchiwake1_1(entity.get本算定賦課内訳１更正後().get本人合計所得金額());
-            item.setListFukaUchiwake1_2(entity.get本算定賦課内訳１更正後().get本人公的年金収入額());
-            item.setListFukaUchiwake1_5(entity.get本算定賦課内訳１更正後().get本人算出保険料額());
-            item.setListFukaUchiwake1_6(entity.get本算定賦課内訳１更正後().get本人減免額());
-            item.setListFukaUchiwake1_7(entity.get本算定賦課内訳１更正後().get確定年額保険料());
         }
     }
 
@@ -489,19 +485,19 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
      */
     private void setHonSanteifukaUchiwakeNiKoseiMaeShotokuDankai(FukaDaichoItem item,
             EditedHonSanteiFukaDaichoJoho entity) {
-        if (entity != null && entity.get本算定賦課内訳２更正後所得段階() != null) {
-            item.setListFukaUchiwake2_1(entity.get本算定賦課内訳２更正後所得段階().get四月分所得段階());
-            item.setListFukaUchiwake2_2(entity.get本算定賦課内訳２更正後所得段階().get五月分所得段階());
-            item.setListFukaUchiwake2_3(entity.get本算定賦課内訳２更正後所得段階().get六月分所得段階());
-            item.setListFukaUchiwake2_4(entity.get本算定賦課内訳２更正後所得段階().get七月分所得段階());
-            item.setListFukaUchiwake2_5(entity.get本算定賦課内訳２更正後所得段階().get八月分所得段階());
-            item.setListFukaUchiwake2_6(entity.get本算定賦課内訳２更正後所得段階().get九月分所得段階());
-            item.setListFukaUchiwake2_7(entity.get本算定賦課内訳２更正後所得段階().get十月分所得段階());
-            item.setListFukaUchiwake2_8(entity.get本算定賦課内訳２更正後所得段階().get十一月分所得段階());
-            item.setListFukaUchiwake2_9(entity.get本算定賦課内訳２更正後所得段階().get十二月分所得段階());
-            item.setListFukaUchiwake2_10(entity.get本算定賦課内訳２更正後所得段階().get一月分所得段階());
-            item.setListFukaUchiwake2_11(entity.get本算定賦課内訳２更正後所得段階().get二月分所得段階());
-            item.setListFukaUchiwake2_12(entity.get本算定賦課内訳２更正後所得段階().get三月分所得段階());
+        if (entity != null && entity.get本算定賦課内訳２更正前所得段階() != null) {
+            item.setListFukaUchiwake2_1(entity.get本算定賦課内訳２更正前所得段階().get四月分所得段階());
+            item.setListFukaUchiwake2_2(entity.get本算定賦課内訳２更正前所得段階().get五月分所得段階());
+            item.setListFukaUchiwake2_3(entity.get本算定賦課内訳２更正前所得段階().get六月分所得段階());
+            item.setListFukaUchiwake2_4(entity.get本算定賦課内訳２更正前所得段階().get七月分所得段階());
+            item.setListFukaUchiwake2_5(entity.get本算定賦課内訳２更正前所得段階().get八月分所得段階());
+            item.setListFukaUchiwake2_6(entity.get本算定賦課内訳２更正前所得段階().get九月分所得段階());
+            item.setListFukaUchiwake2_7(entity.get本算定賦課内訳２更正前所得段階().get十月分所得段階());
+            item.setListFukaUchiwake2_8(entity.get本算定賦課内訳２更正前所得段階().get十一月分所得段階());
+            item.setListFukaUchiwake2_9(entity.get本算定賦課内訳２更正前所得段階().get十二月分所得段階());
+            item.setListFukaUchiwake2_10(entity.get本算定賦課内訳２更正前所得段階().get一月分所得段階());
+            item.setListFukaUchiwake2_11(entity.get本算定賦課内訳２更正前所得段階().get二月分所得段階());
+            item.setListFukaUchiwake2_12(entity.get本算定賦課内訳２更正前所得段階().get三月分所得段階());
         }
     }
 
@@ -700,6 +696,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
         if (entity != null && entity.get普徴月() != null) {
             item.setListFuchoTsuki_1(entity.get普徴月().get普徴月１());
             item.setListFuchoTsuki_2(entity.get普徴月().get普徴月２());
+            item.setListFuchoTsuki_3(entity.get普徴月().get普徴月３());
             item.setListFuchoTsuki_4(entity.get普徴月().get普徴月４());
             item.setListFuchoTsuki_5(entity.get普徴月().get普徴月５());
             item.setListFuchoTsuki_6(entity.get普徴月().get普徴月６());
@@ -812,7 +809,8 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListSetaiin_4(entity.get世帯員情報リスト().get(index).get世帯員生年月日());
             item.setListSetaiin_5(entity.get世帯員情報リスト().get(index).get世帯員続柄());
             item.setListSetaiin_6(entity.get世帯員情報リスト().get(index).get世帯員合計取得金額());
-            item.setListSetaiin_7(entity.get世帯員情報リスト().get(index).get世帯員課税区分());
+            item.setListSetaiin_7(RString.isNullOrEmpty(entity.get世帯員情報リスト().get(index).get世帯員課税区分())
+                    ? RString.EMPTY : KazeiKubun.toValue(entity.get世帯員情報リスト().get(index).get世帯員課税区分()).get名称());
         }
     }
 
@@ -833,7 +831,8 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListSetaiin_11(entity.get世帯員情報リスト().get(index).get世帯員生年月日());
             item.setListSetaiin_12(entity.get世帯員情報リスト().get(index).get世帯員続柄());
             item.setListSetaiin_13(entity.get世帯員情報リスト().get(index).get世帯員合計取得金額());
-            item.setListSetaiin_14(entity.get世帯員情報リスト().get(index).get世帯員課税区分());
+            item.setListSetaiin_14(RString.isNullOrEmpty(entity.get世帯員情報リスト().get(index).get世帯員課税区分())
+                    ? RString.EMPTY : KazeiKubun.toValue(entity.get世帯員情報リスト().get(index).get世帯員課税区分()).get名称());
         }
     }
 

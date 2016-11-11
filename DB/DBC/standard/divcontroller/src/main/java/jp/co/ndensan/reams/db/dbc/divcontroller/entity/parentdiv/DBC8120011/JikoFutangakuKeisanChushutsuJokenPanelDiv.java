@@ -4,18 +4,25 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * JikoFutangakuKeisanChushutsuJokenPanel のクラスファイル 
- * 
- * @author 自動生成
+ * JikoFutangakuKeisanChushutsuJokenPanel のクラスファイルです。
+ *
+ * @reamsid_L DBC-4790-010 chenyadong
  */
 public class JikoFutangakuKeisanChushutsuJokenPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -118,7 +125,7 @@ public class JikoFutangakuKeisanChushutsuJokenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadTaishoshaKeisan(RadioButton radTaishoshaKeisan) {
+    public void setRadTaishoshaKeisan(RadioButton radTaishoshaKeisan) {
         this.getTaishoshaKeisanPanel().setRadTaishoshaKeisan(radTaishoshaKeisan);
     }
 
@@ -128,7 +135,7 @@ public class JikoFutangakuKeisanChushutsuJokenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiUketoriYM(TextBoxDate txtZenkaiUketoriYM) {
+    public void setTxtZenkaiUketoriYM(TextBoxDate txtZenkaiUketoriYM) {
         this.getTaishoshaKeisanPanel().setTxtZenkaiUketoriYM(txtZenkaiUketoriYM);
     }
 
@@ -138,7 +145,7 @@ public class JikoFutangakuKeisanChushutsuJokenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiShoriYMD(TextBox txtZenkaiShoriYMD) {
+    public void setTxtZenkaiShoriYMD(TextBox txtZenkaiShoriYMD) {
         this.getTaishoshaKeisanPanel().setTxtZenkaiShoriYMD(txtZenkaiShoriYMD);
     }
 
@@ -148,7 +155,7 @@ public class JikoFutangakuKeisanChushutsuJokenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUketoriYM(TextBoxDate txtUketoriYM) {
+    public void setTxtUketoriYM(TextBoxDate txtUketoriYM) {
         this.getTaishoshaKeisanPanel().setTxtUketoriYM(txtUketoriYM);
     }
 
@@ -158,7 +165,7 @@ public class JikoFutangakuKeisanChushutsuJokenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadHihokenshaNo(RadioButton radHihokenshaNo) {
+    public void setRadHihokenshaNo(RadioButton radHihokenshaNo) {
         this.getHihokenshaNoShiteiPanel().setRadHihokenshaNo(radHihokenshaNo);
     }
 
@@ -168,18 +175,18 @@ public class JikoFutangakuKeisanChushutsuJokenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
         this.getHihokenshaNoShiteiPanel().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnHihokenshaSearch() {
-        return this.getHihokenshaNoShiteiPanel().getBtnHihokenshaSearch();
+    public Button getBtnSearchHihokensha() {
+        return this.getHihokenshaNoShiteiPanel().getBtnSearchHihokensha();
     }
 
     @JsonIgnore
-    public void  setBtnHihokenshaSearch(ButtonDialog btnHihokenshaSearch) {
-        this.getHihokenshaNoShiteiPanel().setBtnHihokenshaSearch(btnHihokenshaSearch);
+    public void setBtnSearchHihokensha(Button btnSearchHihokensha) {
+        this.getHihokenshaNoShiteiPanel().setBtnSearchHihokensha(btnSearchHihokensha);
     }
 
     @JsonIgnore
@@ -188,7 +195,7 @@ public class JikoFutangakuKeisanChushutsuJokenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlNendo(DropDownList ddlNendo) {
+    public void setDdlNendo(DropDownList ddlNendo) {
         this.getHihokenshaNoShiteiPanel().setDdlNendo(ddlNendo);
     }
 

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -39,6 +40,8 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
     private static final RString 支払方法区分コード_窓口 = new RString("1");
     private static final RString 支払方法区分_窓口 = new RString("窓口");
     private static final RString 支払方法区分_口座 = new RString("口座");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -85,6 +88,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
         if (null != 被保険者.get登録被保険者番号()) {
             source.listLower_1 = 被保険者.get登録被保険者番号().getColumnValue();
         }
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listLower_1);
         if (null != 被保険者.get宛名名称()) {
             source.listLower_2 = 被保険者.get宛名名称().substringReturnAsPossible(0, 文字22);
         }

@@ -1117,27 +1117,38 @@
         <include refid="selectTokuchoHeinjunkaKakuteiItirannEntity" />
     </select>
     <sql id="selectTokuchoHeinjunkaKakuteiItirannEntity" >
-        SELECT TEMP.*,
-               <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
-               <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
-               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
-        FROM "TEMP_TABLE_FukaTemp" AS TEMP
-        INNER JOIN 
+        WITH master as(
+            SELECT TEMP.*,
+                   <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
+                   <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+            FROM "TEMP_TABLE_FukaTemp" AS TEMP
+            INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
+            ON  "DbV2001ChoshuHoho"."fukaNendo" = TEMP."fukaNendo"
+            AND "DbV2001ChoshuHoho"."hihokenshaNo" = TEMP."hihokenshaNoAfter"
+            INNER JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
+            ON "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" =#{調定年度}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" IN ('00', '30')
+            AND "DbV2001ChoshuHoho"."kariNenkinNo" = "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo"
+            AND "DbV2001ChoshuHoho"."kariNenkinCode" = "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
+            AND "DbV2001ChoshuHoho"."kariHosokuM" = "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki"
+        )
+        SELECT
+            master.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            FROM master
+            INNER JOIN 
             rgua."UaFt200FindShikibetsuTaisho"('',#{調定日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+            (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCodeAfter" AS TEXT))
+                    FROM
+                        master
+                ) ) AS "ShikibetsuTaisho"
         ON
-            "ShikibetsuTaisho"."shikibetsuCode" = TEMP."shikibetsuCodeAfter"
-        INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
-        ON  "DbV2001ChoshuHoho"."fukaNendo" = TEMP."fukaNendo"
-        AND "DbV2001ChoshuHoho"."hihokenshaNo" = TEMP."hihokenshaNoAfter"
-        INNER JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
-        ON "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-        AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" =#{調定年度}
-        AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" IN ('00', '30')
-        AND "DbV2001ChoshuHoho"."kariNenkinNo" = "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo"
-        AND "DbV2001ChoshuHoho"."kariNenkinCode" = "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
-        AND "DbV2001ChoshuHoho"."kariHosokuM" = "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki"
+            "ShikibetsuTaisho"."shikibetsuCode" = master."shikibetsuCodeAfter"
     </sql>
     
 </mapper>

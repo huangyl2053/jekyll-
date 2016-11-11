@@ -29,9 +29,9 @@ public class DBC180022_RiyoshaFutanwariaiHanteiSub extends BatchFlowBase<DBC1800
     private static final int NUM12 = 12;
     private static final RString 年次 = new RString("1");
     private static final RString 異動 = new RString("2");
-    private static final RString BATCHID_WORK2 = new RString("SetainHakunyuryokuFlow");
-    private static final RString BATCHID_WORK4 = new RString("SetainJohoTempTuikaFlow");
-    private static final RString BATCHID_WORK7 = new RString("FutanWariaiHanteiGetuziShoriFlow");
+    private static final RString BATCHID_WORK2 = new RString("DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuika");
+    private static final RString BATCHID_WORK4 = new RString("DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishosha");
+    private static final RString BATCHID_WORK7 = new RString("DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShori");
     private static final String FLOW_WORK2 = "work2";
     private static final String FLOW_WORK3 = "work3";
     private static final String FLOW_WORK4 = "work4";
@@ -82,7 +82,7 @@ public class DBC180022_RiyoshaFutanwariaiHanteiSub extends BatchFlowBase<DBC1800
     @Step(FLOW_WORK2)
     IBatchFlowCommand work2() {
         return otherBatchFlow(BATCHID_WORK2, SubGyomuCode.DBC介護給付,
-                getParameter()).define();
+                getParameter().toDBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter()).define();
     }
 
     @Step(FLOW_WORK3)
@@ -93,7 +93,7 @@ public class DBC180022_RiyoshaFutanwariaiHanteiSub extends BatchFlowBase<DBC1800
     @Step(FLOW_WORK4)
     IBatchFlowCommand work4() {
         return otherBatchFlow(BATCHID_WORK4, SubGyomuCode.DBC介護給付,
-                getParameter()).define();
+                getParameter().toDBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter()).define();
     }
 
     @Step(FLOW_WORK5)
@@ -114,6 +114,6 @@ public class DBC180022_RiyoshaFutanwariaiHanteiSub extends BatchFlowBase<DBC1800
     @Step(FLOW_WORK7)
     IBatchFlowCommand work7() {
         return otherBatchFlow(BATCHID_WORK7, SubGyomuCode.DBC介護給付,
-                getParameter()).define();
+                getParameter().toDBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter()).define();
     }
 }

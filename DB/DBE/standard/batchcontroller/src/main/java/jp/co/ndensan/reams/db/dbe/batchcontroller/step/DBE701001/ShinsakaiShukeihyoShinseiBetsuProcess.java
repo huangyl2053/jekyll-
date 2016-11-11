@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.jigyojokyohokoku.ShinsakaiShukeihyoShinseiBetsuEditor;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyoshinsei.ShinsakaiShukeihyoShinsei;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyoshinsei.ShinsakaishukeihyoShinseiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -11,8 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyoshinsei.ShinsakaiShukeihyoShinseiReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -68,14 +67,6 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
     private static final RString から = new RString("～");
     private static final RString 開始期間 = new RString("最初から");
     private static final RString 終了期間 = new RString("最終まで");
-    private static final int 申請区分申請時 = 1;
-    private static final int 申請区分法令 = 2;
-    private static final int 申請区分申請時法令 = 3;
-    private static final int 認定受付 = 0;
-    private static final int 認定調査 = 1;
-    private static final int 認定意見書 = 2;
-    private static final int 認定審査会 = 3;
-    private static final int 認定二次判定 = 4;
     private ShinsakaiShukeihyoShinseiBetsuProcessParameter parameter;
     private ShinsakaiShukeihyoShinsei shukeihyoShinseiBetsu;
     private boolean isデータあり;
@@ -109,8 +100,6 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
             shukeihyoShinseiBetsu.setタイトル(帳票タイトル);
             shukeihyoShinseiBetsu.set抽出期間(get抽出期間());
             shukeihyoShinseiBetsu.set発行日時(RDateTime.now());
-            set申請区分申請時合計();
-            set申請区分法令合計();
             ShinsakaishukeihyoShinseiReport report = new ShinsakaishukeihyoShinseiReport(shukeihyoShinseiBetsu);
             report.writeBy(reportSourceWriter);
             shukeihyoShinseiBetsu = new ShinsakaiShukeihyoShinsei();
@@ -120,25 +109,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
     @Override
     protected void usualProcess(ShinsakaiShukeihyoShinseiBetsuEntity current) {
         isデータあり = true;
-        if (申請区分申請時 == current.getNiTeiShinseiKubun()) {
-            set申請区分申請時新規申請(current);
-            set申請区分申請時更新申請(current);
-            set申請区分申請時区分変更申請(current);
-            set申請区分申請時転入申請(current);
-        }
-        if (申請区分法令 == current.getNiTeiShinseiKubun()) {
-            set申請区分法令新規申請(current);
-            set申請区分法令更新申請(current);
-            set申請区分法令区分変更申請(current);
-            set申請区分法令転入申請();
-        }
-        if (申請区分申請時法令 == current.getNiTeiShinseiKubun()) {
-            set法令新規申請申請時(current);
-            set法令更新申請申請時(current);
-            set法令区分変更申請申請時(current);
-            set法令区変却下申請時(current);
-        }
-        shukeihyoShinseiBetsu.set市町村名称(current.getShichosonMeisho());
+        new ShinsakaiShukeihyoShinseiBetsuEditor(current, shukeihyoShinseiBetsu).set介護認定審査会集計表申請区分別();
     }
 
     @Override
@@ -146,9 +117,7 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
         if (isデータあり) {
             shukeihyoShinseiBetsu.setタイトル(帳票タイトル);
             shukeihyoShinseiBetsu.set抽出期間(get抽出期間());
-            shukeihyoShinseiBetsu.set発行日時(RDateTime.now());
-            set申請区分申請時合計();
-            set申請区分法令合計();
+            shukeihyoShinseiBetsu.set発行日時(RDate.getNowDateTime());
             ShinsakaishukeihyoShinseiReport report = new ShinsakaishukeihyoShinseiReport(shukeihyoShinseiBetsu);
             report.writeBy(reportSourceWriter);
         }
@@ -182,303 +151,6 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
             }
         }
         return builder.toRString();
-    }
-
-    private void set申請区分申請時新規申請(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定受付 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_新規申請_受付数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定調査 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_新規申請_調査数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定意見書 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_新規申請_意見書数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定審査会 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_新規申請_審査会数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定二次判定 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_新規申請_二次判定数(new RString(current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set申請区分申請時更新申請(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定受付 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_更新申請_受付数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定調査 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_更新申請_調査数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定意見書 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_更新申請_意見書数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定審査会 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_更新申請_審査会数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定二次判定 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_更新申請_二次判定数(new RString(current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set申請区分申請時区分変更申請(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定受付 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_区分変更申請_受付数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定調査 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_区分変更申請_調査数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定意見書 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_区分変更申請_意見書数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定審査会 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_区分変更申請_審査会数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定二次判定 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_区分変更申請_二次判定数(new RString(current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set申請区分申請時転入申請(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定受付 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_転入_受付数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定調査 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_転入_調査数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定意見書 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_転入_意見書数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定審査会 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_転入_審査会数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
-                && 認定二次判定 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set申_転入_二次判定数(new RString(current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set申請区分申請時合計() {
-        shukeihyoShinseiBetsu.set申_合計_受付数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_新規申請_受付数())
-                + toInt(shukeihyoShinseiBetsu.get申_更新申請_受付数())
-                + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_受付数())
-                + toInt(shukeihyoShinseiBetsu.get申_転入_受付数())));
-        shukeihyoShinseiBetsu.set申_合計_調査数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_新規申請_調査数())
-                + toInt(shukeihyoShinseiBetsu.get申_更新申請_調査数())
-                + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_調査数())
-                + toInt(shukeihyoShinseiBetsu.get申_転入_調査数())));
-        shukeihyoShinseiBetsu.set申_合計_意見書数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_新規申請_意見書数())
-                + toInt(shukeihyoShinseiBetsu.get申_更新申請_意見書数())
-                + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_意見書数())
-                + toInt(shukeihyoShinseiBetsu.get申_転入_意見書数())));
-        shukeihyoShinseiBetsu.set申_合計_審査会数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_新規申請_審査会数())
-                + toInt(shukeihyoShinseiBetsu.get申_更新申請_審査会数())
-                + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_審査会数())
-                + toInt(shukeihyoShinseiBetsu.get申_転入_審査会数())));
-        shukeihyoShinseiBetsu.set申_合計_二次判定数(new RString(
-                toInt(shukeihyoShinseiBetsu.get申_新規申請_二次判定数())
-                + toInt(shukeihyoShinseiBetsu.get申_更新申請_二次判定数())
-                + toInt(shukeihyoShinseiBetsu.get申_区分変更申請_二次判定数())
-                + toInt(shukeihyoShinseiBetsu.get申_転入_二次判定数())));
-    }
-
-    private void set申請区分法令新規申請(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiHoreiCode.新規申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定受付 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_新規申請_受付数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.新規申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定調査 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_新規申請_調査数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.新規申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定意見書 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_新規申請_意見書数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.新規申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定審査会 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_新規申請_審査会数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.新規申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定二次判定 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_新規申請_二次判定数(new RString(current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set申請区分法令更新申請(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiHoreiCode.更新申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定受付 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_更新申請_受付数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.更新申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定調査 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_更新申請_調査数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.更新申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定意見書 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_更新申請_意見書数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.更新申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定審査会 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_更新申請_審査会数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.更新申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定二次判定 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_更新申請_二次判定数(new RString(current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set申請区分法令区分変更申請(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定受付 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_区分変更申請_受付数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定調査 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_区分変更申請_調査数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定意見書 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_区分変更申請_意見書数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定審査会 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_区分変更申請_審査会数(new RString(current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && 認定二次判定 == current.getNiTeiJokyo()) {
-            shukeihyoShinseiBetsu.set法_区分変更申請_二次判定数(new RString(current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set申請区分法令転入申請() {
-        shukeihyoShinseiBetsu.set法_転入_受付数(RString.EMPTY);
-        shukeihyoShinseiBetsu.set法_転入_調査数(RString.EMPTY);
-        shukeihyoShinseiBetsu.set法_転入_意見書数(RString.EMPTY);
-        shukeihyoShinseiBetsu.set法_転入_審査会数(RString.EMPTY);
-        shukeihyoShinseiBetsu.set法_転入_二次判定数(RString.EMPTY);
-    }
-
-    private void set申請区分法令合計() {
-        shukeihyoShinseiBetsu.set法_合計_受付数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_新規申請_受付数())
-                + toInt(shukeihyoShinseiBetsu.get法_更新申請_受付数())
-                + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_受付数())
-                + toInt(shukeihyoShinseiBetsu.get法_転入_受付数())));
-        shukeihyoShinseiBetsu.set法_合計_調査数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_新規申請_調査数())
-                + toInt(shukeihyoShinseiBetsu.get法_更新申請_調査数())
-                + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_調査数())
-                + toInt(shukeihyoShinseiBetsu.get法_転入_調査数())));
-        shukeihyoShinseiBetsu.set法_合計_意見書数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_新規申請_意見書数())
-                + toInt(shukeihyoShinseiBetsu.get法_更新申請_意見書数())
-                + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_意見書数())
-                + toInt(shukeihyoShinseiBetsu.get法_転入_意見書数())));
-        shukeihyoShinseiBetsu.set法_合計_審査会数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_新規申請_審査会数())
-                + toInt(shukeihyoShinseiBetsu.get法_更新申請_審査会数())
-                + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_審査会数())
-                + toInt(shukeihyoShinseiBetsu.get法_転入_審査会数())));
-        shukeihyoShinseiBetsu.set法_合計_二次判定数(new RString(
-                toInt(shukeihyoShinseiBetsu.get法_新規申請_二次判定数())
-                + toInt(shukeihyoShinseiBetsu.get法_更新申請_二次判定数())
-                + toInt(shukeihyoShinseiBetsu.get法_区分変更申請_二次判定数())
-                + toInt(shukeihyoShinseiBetsu.get法_転入_二次判定数())));
-    }
-
-    private void set法令新規申請申請時(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiHoreiCode.新規申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_新規申請_申_新規申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_新規申請_申_新規申請()) + current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.新規申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_新規申請_申_更新申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_新規申請_申_更新申請()) + current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.新規申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_新規申請_申_区分変更申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_新規申請_申_区分変更申請()) + current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set法令更新申請申請時(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiHoreiCode.更新申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_更新申請_申_新規申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_更新申請_申_新規申請()) + current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.更新申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_更新申請_申_更新申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_更新申請_申_更新申請()) + current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.更新申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_更新申請_申_区分変更申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_更新申請_申_区分変更申請()) + current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set法令区分変更申請申請時(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_区分変更申請_申_新規申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_区分変更申請_申_新規申請()) + current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_区分変更申請_申_更新申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_区分変更申請_申_更新申請()) + current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_区分変更申請_申_区分変更申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_区分変更申請_申_区分変更申請()) + current.getCountHihokenshaNo()));
-        }
-    }
-
-    private void set法令区変却下申請時(ShinsakaiShukeihyoShinseiBetsuEntity current) {
-        if (NinteiShinseiHoreiCode.職権.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_区変却下_申_新規申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_区変却下_申_新規申請()) + current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.職権.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_区変却下_申_更新申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_区変却下_申_更新申請()) + current.getCountHihokenshaNo()));
-        }
-        if (NinteiShinseiHoreiCode.職権.getコード().equals(current.getNinteiShinseiHoreiKubunCode().value())
-                && NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())) {
-            shukeihyoShinseiBetsu.set法_区変却下_申_区分変更申請(new RString(
-                    toInt(shukeihyoShinseiBetsu.get法_区変却下_申_区分変更申請()) + current.getCountHihokenshaNo()));
-        }
     }
 
     private void outputJokenhyo() {
@@ -528,11 +200,12 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(HIHOKENSYAKUBUN);
-        条件.append(HihokenshaKubun.toValue(parameter.getHihokenshaKubun()).get名称());
+        条件.append(parameter.isJigyoJyokyoHokoku() ? RString.EMPTY : HihokenshaKubun.toValue(
+                parameter.getHihokenshaKubun()).get名称());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(GOGITAINO);
-        条件.append(parameter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(parameter.getGogitaiNo()));
+        条件.append(parameter.isJigyoJyokyoHokoku() ? RString.EMPTY : new RString(parameter.getGogitaiNo()));
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOTSUKIKUBUN);
@@ -573,12 +246,8 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchKeyBreakBase<Shi
     }
 
     private RString dateForMat(RDate 年月日) {
-        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
-    }
-
-    private int toInt(RString 保険者数) {
-        return RString.isNullOrEmpty(保険者数) ? 0 : Integer.parseInt(保険者数.toString());
+        return 年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 
 }

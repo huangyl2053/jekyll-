@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -117,8 +118,9 @@ public class RenkeiDataTorikomi {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        RStringBuilder buider = new RStringBuilder();
         for (FileData file : files) {
-            getHandler(div).upLoadFile(new FilesystemPath(file.getFilePath()));
+            getHandler(div).upLoadFile(new FilesystemPath(file.getFilePath()), buider);
         }
         div.getRenkeiDataTorikomiBatchParameter().getBtnDataTorikomi().setDisabled(false);
         return ResponseData.of(div).respond();

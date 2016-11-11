@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -75,6 +76,7 @@ public class GenmenKetteiTsuchiShoPrintService {
     private static final int INDEX_TEN = 10;
     private static final int INDEX_ELEVEN = 11;
     private static final int INDEX_TWELVE = 12;
+    private static final int INDEX_THIRTEEN = 13;
     private static final int INDEX_FOURTEEN = 14;
     private static final int INDEX_FIFTEEN = 15;
 
@@ -183,7 +185,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                     行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
                     減免決定通知書情報.get納組情報() != null
-                    ? 減免決定通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
+                            ? 減免決定通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
         EditedAtesaki 編集後宛先 = null;
         if (減免決定通知書情報.get宛先() != null && 減免決定通知書情報.get地方公共団体() != null
@@ -225,7 +227,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                     行政区画 != null ? 行政区画.getChiku2().getコード().value() : RString.EMPTY,
                     行政区画 != null ? 行政区画.getChiku3().getコード().value() : RString.EMPTY,
                     減免決定通知書情報.get納組情報() != null
-                    ? 減免決定通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
+                            ? 減免決定通知書情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
         }
         EditedAtesaki 編集後宛先 = null;
         if (減免決定通知書情報.get宛先() != null && 減免決定通知書情報.get地方公共団体() != null
@@ -306,11 +308,7 @@ public class GenmenKetteiTsuchiShoPrintService {
             } else {
                 更正前後期割額.set特徴期(期月特徴.get期());
             }
-            if (期月特徴.get月AsInt() < INDEX_TEN) {
-                更正前後期割額.set特徴月(new RString(定数.toString() + 期月特徴.get月AsInt()));
-            } else {
-                更正前後期割額.set特徴月(new RString(String.valueOf(期月特徴.get月AsInt())));
-            }
+            更正前後期割額.set特徴月(get月(期月特徴));
             Decimal 特徴期別金額更正前 = set特徴期別金額更正前(期月特徴.get期(), 減免決定通知書情報);
             if (特徴期別金額更正前 != null) {
                 更正前後期割額.set特徴期別金額更正前(DecimalFormatter
@@ -337,19 +335,15 @@ public class GenmenKetteiTsuchiShoPrintService {
             } else {
                 更正前後期割額.set普徴期(期月普徴.get期());
             }
-            if (期月普徴.get月AsInt() < INDEX_TEN) {
-                更正前後期割額.set普徴月(new RString(定数.toString() + 期月普徴.get月AsInt()));
-            } else {
-                更正前後期割額.set普徴月(new RString(String.valueOf(期月普徴.get月AsInt())));
-            }
-            Decimal 普徴期別金額更正前 = set普徴期別金額更正前(期月普徴.get月AsInt(), 減免決定通知書情報);
+            更正前後期割額.set普徴月(get月(期月普徴));
+            Decimal 普徴期別金額更正前 = set普徴期別金額更正前(期月普徴.get期(), 減免決定通知書情報);
             if (普徴期別金額更正前 != null) {
                 更正前後期割額.set普徴期別金額更正前(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額更正前, 0));
             } else {
                 更正前後期割額.set普徴期別金額更正前(RString.EMPTY);
             }
-            Decimal 普徴期別金額更正後 = set普徴期別金額更正後(期月普徴.get月AsInt(), 減免決定通知書情報);
+            Decimal 普徴期別金額更正後 = set普徴期別金額更正後(期月普徴.get期(), 減免決定通知書情報);
             if (普徴期別金額更正後 != null) {
                 更正前後期割額.set普徴期別金額更正後(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額更正後, 0));
@@ -364,6 +358,16 @@ public class GenmenKetteiTsuchiShoPrintService {
             更正前後期割額.set普徴期別金額更正後(RString.EMPTY);
         }
         return 更正前後期割額;
+    }
+
+    private RString get月(Kitsuki 期月) {
+        if (期月.get月().equals(Tsuki.翌年度4月)) {
+            return Tsuki._4月.getコード();
+        }
+        if (期月.get月().equals(Tsuki.翌年度5月)) {
+            return Tsuki._5月.getコード();
+        }
+        return 期月.get月().getコード();
     }
 
     /**
@@ -433,38 +437,39 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @return Decimal
      */
-    private Decimal set普徴期別金額更正前(int index, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
+    private Decimal set普徴期別金額更正前(RString 期, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
+        int index = Integer.parseInt(期.toString());
         if (減免決定通知書情報.get賦課の情報更正前() == null) {
             return Decimal.ZERO;
         }
         switch (index) {
-            case INDEX_FOUR:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額01();
-            case INDEX_FIVE:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額02();
-            case INDEX_SIX:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額03();
-            case INDEX_SEVEN:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額04();
-            case INDEX_EIGHT:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額05();
-            case INDEX_NINE:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額06();
-            case INDEX_TEN:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額07();
-            case INDEX_ELEVEN:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額08();
-            case INDEX_TWELVE:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額09();
             case INDEX_ONE:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額10();
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額01();
             case INDEX_TWO:
-                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額11();
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額02();
             case INDEX_THREE:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額03();
+            case INDEX_FOUR:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額04();
+            case INDEX_FIVE:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額05();
+            case INDEX_SIX:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額06();
+            case INDEX_SEVEN:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額07();
+            case INDEX_EIGHT:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額08();
+            case INDEX_NINE:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額09();
+            case INDEX_TEN:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額10();
+            case INDEX_ELEVEN:
+                return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額11();
+            case INDEX_TWELVE:
                 return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額12();
-            case INDEX_FOURTEEN:
+            case INDEX_THIRTEEN:
                 return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額13();
-            case INDEX_FIFTEEN:
+            case INDEX_FOURTEEN:
                 return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額14();
             default:
                 return null;
@@ -474,42 +479,43 @@ public class GenmenKetteiTsuchiShoPrintService {
     /**
      * set普徴期別金額更正後します。
      *
-     * @param index int
+     * @param 期 int
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @return Decimal
      */
-    private Decimal set普徴期別金額更正後(int index, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
+    private Decimal set普徴期別金額更正後(RString 期, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
+        int index = Integer.parseInt(期.toString());
         if (減免決定通知書情報.get減免の情報更正後() == null) {
             return Decimal.ZERO;
         }
         switch (index) {
-            case INDEX_FOUR:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額01();
-            case INDEX_FIVE:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額02();
-            case INDEX_SIX:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額03();
-            case INDEX_SEVEN:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額04();
-            case INDEX_EIGHT:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額05();
-            case INDEX_NINE:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額06();
-            case INDEX_TEN:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額07();
-            case INDEX_ELEVEN:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額08();
-            case INDEX_TWELVE:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額09();
             case INDEX_ONE:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額10();
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額01();
             case INDEX_TWO:
-                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額11();
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額02();
             case INDEX_THREE:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額03();
+            case INDEX_FOUR:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額04();
+            case INDEX_FIVE:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額05();
+            case INDEX_SIX:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額06();
+            case INDEX_SEVEN:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額07();
+            case INDEX_EIGHT:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額08();
+            case INDEX_NINE:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額09();
+            case INDEX_TEN:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額10();
+            case INDEX_ELEVEN:
+                return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額11();
+            case INDEX_TWELVE:
                 return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額12();
-            case INDEX_FOURTEEN:
+            case INDEX_THIRTEEN:
                 return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額13();
-            case INDEX_FIFTEEN:
+            case INDEX_FOURTEEN:
                 return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額14();
             default:
                 return null;

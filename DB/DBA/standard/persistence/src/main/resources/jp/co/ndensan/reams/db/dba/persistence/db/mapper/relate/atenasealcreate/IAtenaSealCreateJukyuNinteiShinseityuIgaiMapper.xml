@@ -49,7 +49,6 @@
         ON
             T4001."shikibetsuCode" = PSM."shikibetsuCode"
         <if test="isDBA業務コード">
-        <if test="is受給認定申請中を除く">
         AND
             (T4001."rirekiNo" = '0000'
         OR
@@ -59,16 +58,18 @@
         OR
             T4001."yukoMukoKubun" != '1')
         </if>
-        </if>
         LEFT JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
         ON
             "Atesaki"."shikibetsuCode" = PSM."shikibetsuCode"
         AND
-            "Atesaki"."juminShubetsuCode" IN
-      <foreach collection="shubetsu_1" item="shubetsu1" open="(" separator="," close=")"> #{shubetsu1} </foreach>
-        AND
-            "Atesaki"."juminJotaiCode" IN
-      <foreach collection="shubetsu_2" item="shubetsu2" open="(" separator="," close=")"> #{shubetsu2} </foreach>
+          "Atesaki"."gyomuCode" = 'DBA'
+     WHERE
+            '1'='1'
+      <if test="has市町村指定">
+      AND
+        "PSM"."shichouzonCode" = #{shichousonshitei}
+      </if>
     </select>
+    
 </mapper>

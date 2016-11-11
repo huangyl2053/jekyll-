@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -46,6 +47,7 @@ public class PanelKougakuKetteiTuutisyo {
 
     private static final RString 支払予定日 = new RString("支払予定日");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
+    private static final RString 発行ボタン = new RString("btnHakkou");
 
     /**
      * 画面ロードメソッドです。
@@ -62,6 +64,7 @@ public class PanelKougakuKetteiTuutisyo {
         if (サービス提供年月リスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行ボタン, false);
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         LasdecCode 市町村コード = null;
         if (shichosonSecurityJoho != null && shichosonSecurityJoho.get市町村情報() != null) {
@@ -79,8 +82,10 @@ public class PanelKougakuKetteiTuutisyo {
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onChange_ddlServiceYearMonth(PanelKougakuKetteiTuutisyoDiv div) {
         TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        getHandler(div).管理番号と前回発行日の設定(キー.get被保険者番号(),
-                new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString()));
+        FlexibleYearMonth サービス提供年月 = div.getDdlServiceYearMonth().getSelectedValue().isEmpty()
+                ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString());
+        getHandler(div).管理番号と前回発行日の設定(キー.get被保険者番号(), サービス提供年月);
         return ResponseData.of(div).respond();
     }
 
@@ -92,9 +97,12 @@ public class PanelKougakuKetteiTuutisyo {
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onChange_ddlKanliBanngou(PanelKougakuKetteiTuutisyoDiv div) {
         TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        getHandler(div).前回発行日の設定(キー.get被保険者番号(),
-                new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString()),
-                new Decimal(div.getDdlKanliBanngou().getSelectedValue().toString()));
+        FlexibleYearMonth サービス提供年月 = div.getDdlServiceYearMonth().getSelectedValue().isEmpty()
+                ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(new RDate(div.getDdlServiceYearMonth().getSelectedValue().toString()).getYearMonth().toString());
+        Decimal 管理番号 = div.getDdlKanliBanngou().getSelectedValue().isEmpty() ? Decimal.ZERO
+                : new Decimal(div.getDdlKanliBanngou().getSelectedValue().toString());
+        getHandler(div).前回発行日の設定(キー.get被保険者番号(), サービス提供年月, 管理番号);
         return ResponseData.of(div).respond();
     }
 
@@ -119,6 +127,10 @@ public class PanelKougakuKetteiTuutisyo {
                         DbcWarningMessages.発行済み負担額証明書.getMessage().evaluate(),
                         ButtonSelectPattern.OKCancel);
                 return ResponseData.of(div).addMessage(message).respond();
+            } else if (div.getTxtZennkaiHakkoubi().getValue() == null) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
         }
         if (new RString(UrWarningMessages.未入力.getMessage().getCode()).equals(
@@ -131,7 +143,24 @@ public class PanelKougakuKetteiTuutisyo {
                     ButtonSelectPattern.OKCancel);
             return ResponseData.of(div).addMessage(message).respond();
         }
+
+        if (new RString(UrWarningMessages.未入力.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && div.getTxtZennkaiHakkoubi().getValue() == null) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate(),
+                    ButtonSelectPattern.OKCancel);
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+
         if (new RString(DbcWarningMessages.発行済み負担額証明書.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).respond();
@@ -171,14 +200,18 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onClick_btnReSearch(PanelKougakuKetteiTuutisyoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        List<FlexibleYearMonth> サービス提供年月リスト = getHandler(div).getサービス提供年月リスト(キー.get被保険者番号());
+        boolean isデータの変更 = getHandler(div).isデータの変更(キー.get被保険者番号(), サービス提供年月リスト);
+        if (!ResponseHolder.isReRequest() && isデータの変更) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        if ((new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
+                || !isデータの変更) {
             LockingKey key = new LockingKey(排他キー);
             RealInitialLocker.release(key);
             return ResponseData.of(div).forwardWithEventName(DBC1230001TransitionEventName.再検索).respond();
@@ -193,14 +226,18 @@ public class PanelKougakuKetteiTuutisyo {
      * @return 画面初期化
      */
     public ResponseData<PanelKougakuKetteiTuutisyoDiv> onClick_btnResearchResult(PanelKougakuKetteiTuutisyoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        List<FlexibleYearMonth> サービス提供年月リスト = getHandler(div).getサービス提供年月リスト(キー.get被保険者番号());
+        boolean isデータの変更 = getHandler(div).isデータの変更(キー.get被保険者番号(), サービス提供年月リスト);
+        if (!ResponseHolder.isReRequest() && isデータの変更) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        if ((new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
+                || !isデータの変更) {
             LockingKey key = new LockingKey(排他キー);
             RealInitialLocker.release(key);
             return ResponseData.of(div).forwardWithEventName(DBC1230001TransitionEventName.対象者検索へ戻る).respond();

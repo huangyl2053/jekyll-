@@ -39,7 +39,7 @@
         "B"."shoriYM" DESC
     </select>
 
-    <select id="logicalDelete高額合算給付実績"
+    <update id="logicalDelete高額合算給付実績"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
         UPDATE
         rgdb."DbT3075KogakuGassanKyufuJisseki"
@@ -48,47 +48,88 @@
         "updateCount" = "updateCount" + 1,
         "lastUpdateTimestamp" = now()
         WHERE
-        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{交換情報識別番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{被保険者番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{支給申請書整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{証記載保険者番号}
-    </select>
+        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{更新前交換情報識別番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{更新前被保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{更新前支給申請書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{更新前整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSeiriNo" = #{更新前自己負担額証明書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hokenSeidoCode" = #{更新前保険制度コード}
+        AND "DbT3075KogakuGassanKyufuJisseki"."kyufuJissekiSakuseiKubunCode" = #{更新前給付実績作成区分コード}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{更新前証記載保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."kokuho_HihokenshaShoKigo" = #{更新前国保_被保険者証記号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shinseiYMD" = #{更新前申請年月日}
+        AND "DbT3075KogakuGassanKyufuJisseki"."ketteiYMD" = #{更新前決定年月日}
+        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSogaku" = #{更新前自己負担総額}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuGaku" = #{更新前支給額}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shoriYM" = #{更新前処理年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."uketoriYM" = #{更新前受取年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
+        AND "DbT3075KogakuGassanKyufuJisseki"."isDeleted" = #{更新前論理削除}
+    </update>
 
-    <select id="physicalDelete高額合算給付実績"
+    <delete id="physicalDelete高額合算給付実績"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
         DELETE
         FROM
         rgdb."DbT3075KogakuGassanKyufuJisseki"
         WHERE
-        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{交換情報識別番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{被保険者番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{支給申請書整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{証記載保険者番号}
-    </select>
+        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{更新前交換情報識別番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{更新前被保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{更新前支給申請書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{更新前整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSeiriNo" = #{更新前自己負担額証明書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hokenSeidoCode" = #{更新前保険制度コード}
+        AND "DbT3075KogakuGassanKyufuJisseki"."kyufuJissekiSakuseiKubunCode" = #{更新前給付実績作成区分コード}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{更新前証記載保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."kokuho_HihokenshaShoKigo" = #{更新前国保_被保険者証記号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shinseiYMD" = #{更新前申請年月日}
+        AND "DbT3075KogakuGassanKyufuJisseki"."ketteiYMD" = #{更新前決定年月日}
+        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSogaku" = #{更新前自己負担総額}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuGaku" = #{更新前支給額}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shoriYM" = #{更新前処理年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."uketoriYM" = #{更新前受取年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
+        AND "DbT3075KogakuGassanKyufuJisseki"."isDeleted" = #{更新前論理削除}
+    </delete>
 
-    <select id="update高額合算給付実績"
+    <update id="update高額合算給付実績"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
         UPDATE
         rgdb."DbT3075KogakuGassanKyufuJisseki"
         SET
-        "jikoFutanSeiriNo" = #{自己負担額証明書整理番号},
         "kyufuJissekiSakuseiKubunCode" ='2',
-        "shoKisaiHokenshaNo" = #{証記載保険者番号},
-        "shinseiYMD" = #{申請年月日},
-        "ketteiYMD" = #{決定年月日},
-        "jikoFutanSogaku" = #{自己負担総額},
-        "shikyuGaku" = #{支給額},
-        "dataKubun" = #{データ区分},
+        <if test="flag">
+            "jikoFutanSeiriNo" = #{更新後自己負担額証明書整理番号},
+            "shinseiYMD" = #{更新後申請年月日},
+            "ketteiYMD" = #{更新後決定年月日},
+            "jikoFutanSogaku" = #{更新後自己負担総額},
+            "shikyuGaku" = #{更新後支給額},
+        </if>
+        "shoKisaiHokenshaNo" = #{更新後証記載保険者番号},
         "updateCount" = "updateCount" + 1,
         "lastUpdateTimestamp" = now()
         WHERE
-        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{交換情報識別番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{被保険者番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{支給申請書整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{整理番号}
-    </select>
+        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{更新前交換情報識別番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{更新前被保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{更新前支給申請書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{更新前整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSeiriNo" = #{更新前自己負担額証明書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hokenSeidoCode" = #{更新前保険制度コード}
+        AND "DbT3075KogakuGassanKyufuJisseki"."kyufuJissekiSakuseiKubunCode" = #{更新前給付実績作成区分コード}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{更新前証記載保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."kokuho_HihokenshaShoKigo" = #{更新前国保_被保険者証記号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shinseiYMD" = #{更新前申請年月日}
+        AND "DbT3075KogakuGassanKyufuJisseki"."ketteiYMD" = #{更新前決定年月日}
+        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSogaku" = #{更新前自己負担総額}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuGaku" = #{更新前支給額}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shoriYM" = #{更新前処理年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."uketoriYM" = #{更新前受取年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
+        AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
+        AND "DbT3075KogakuGassanKyufuJisseki"."isDeleted" = #{更新前論理削除}
+    </update>
 
     <select resultOrdered="true" id="get高額合算支給額計算結果"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter"

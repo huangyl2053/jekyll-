@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.SeigoseiCheck;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResult;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResultOfTatokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResultOfTekiyoJogai;
@@ -29,8 +30,10 @@ import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuSeigoseiChe
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -55,6 +58,7 @@ public class ShikakuFuseigoShuseiPanel {
 
     private static final RString STRING_被保険者番号 = new RString("被保険者番号");
     private static final RString CODE_0003 = new RString("0003");
+    private static final RString 枝番_0001 = new RString("0001");
 
     /**
      * コンストラクタです。
@@ -137,11 +141,12 @@ public class ShikakuFuseigoShuseiPanel {
             }
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ViewStateHolder.put(ViewStateKeys.台帳状態, null);
             return onLoad(div);
         }
         DaichoFuseigoJotai 台帳状態 = ViewStateHolder.get(ViewStateKeys.台帳状態, DaichoFuseigoJotai.class);
         ViewStateHolder.put(ViewStateKeys.台帳状態, null);
-        if (台帳状態 == DaichoFuseigoJotai.不整合あり) {
+        if (台帳状態 == DaichoFuseigoJotai.不整合あり || 台帳状態 == DaichoFuseigoJotai.未作成) {
             RString 台帳種別 = ViewStateHolder.get(ViewStateKeys.不整合修正中, ShikakuFuseigoBusiness.class).get台帳種別();
             IKojin 個人情報 = ViewStateHolder.get(ViewStateKeys.個人情報, IKojin.class);
             FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.不整合理由, FuseigoRiyu.class);
@@ -262,8 +267,12 @@ public class ShikakuFuseigoShuseiPanel {
         }
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.不整合理由, FuseigoRiyu.class);
+        修正後の資格の情報 = null == 修正後の資格の情報
+                ? setEmpty資格の情報(shikakuFusei.get整合性チェック情報()) : 修正後の資格の情報;
         if (台帳種別.equals(DaichoType.被保険者.getコード())) {
             修正後の資格の情報 = getHandler(div).set資格の情報(不整合理由, 修正後の資格の情報);
+            修正後の資格の情報 = null == 修正後の資格の情報
+                    ? setEmpty資格の情報(shikakuFusei.get整合性チェック情報()) : 修正後の資格の情報;
             int 履歴番号 = manager.getMax履歴番号(修正後の資格の情報.get識別コード());
             ShikakuShutokuJogaisha 取得除外の情報 = getHandler(div).set取得除外の情報(不整合理由, 履歴番号, 修正後の資格の情報);
             validationMessages.add(getValidationHandler(div).beforeUpdCheck(台帳種別, shikakuFusei,
@@ -397,4 +406,31 @@ public class ShikakuFuseigoShuseiPanel {
     private void set完了非活性(boolean jyotai) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnComplete"), jyotai);
     }
+
+    private HihokenshaDaicho setEmpty資格の情報(SeigoseiCheck 整合性チェック情報) {
+        HihokenshaDaicho 資格の情報 = new HihokenshaDaicho(整合性チェック情報.get被保険者番号(), FlexibleDate.getNowDate(), 枝番_0001);
+        return 資格の情報.createBuilderForEdit()
+                .set市町村コード(整合性チェック情報.get市町村コード())
+                .set識別コード(整合性チェック情報.get識別コード())
+                .set被保険者区分コード(整合性チェック情報.get被保険者区分コード())
+                .set資格変更事由コード(整合性チェック情報.get資格変更事由コード())
+                .set資格変更年月日(整合性チェック情報.get資格変更年月日())
+                .set資格変更届出年月日(整合性チェック情報.get資格変更届出年月日())
+                .set資格喪失事由コード(RString.EMPTY)
+                .set資格喪失年月日(FlexibleDate.EMPTY)
+                .set資格喪失届出年月日(FlexibleDate.EMPTY)
+                .set住所地特例適用事由コード(RString.EMPTY)
+                .set適用年月日(FlexibleDate.EMPTY)
+                .set適用届出年月日(FlexibleDate.EMPTY)
+                .set住所地特例解除事由コード(RString.EMPTY)
+                .set解除年月日(FlexibleDate.EMPTY)
+                .set解除届出年月日(FlexibleDate.EMPTY)
+                .set住所地特例フラグ(RString.EMPTY)
+                .set広域内住所地特例フラグ(RString.EMPTY)
+                .set広住特措置元市町村コード(LasdecCode.EMPTY)
+                .set旧市町村コード(LasdecCode.EMPTY)
+                .set論理削除フラグ(false)
+                .build();
+    }
+
 }

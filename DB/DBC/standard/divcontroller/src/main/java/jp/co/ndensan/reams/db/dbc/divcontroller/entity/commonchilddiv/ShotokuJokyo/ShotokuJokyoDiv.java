@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBC-4620-030 zhouchuanlin
  */
 public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,10 +38,10 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
     private Label lblSetaiinShotoku;
     @JsonProperty("dgSteaiinShotoku")
     private DataGrid<dgSteaiinShotoku_Row> dgSteaiinShotoku;
-    @JsonProperty("btnClose")
-    private Button btnClose;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
+    @JsonProperty("btnClose")
+    private Button btnClose;
     @JsonProperty("hdnMode")
     private RString hdnMode;
     @JsonProperty("hdnShikibetuCode")
@@ -152,24 +152,6 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
     }
 
     /*
-     * getbtnClose
-     * @return btnClose
-     */
-    @JsonProperty("btnClose")
-    public Button getBtnClose() {
-        return btnClose;
-    }
-
-    /*
-     * setbtnClose
-     * @param btnClose btnClose
-     */
-    @JsonProperty("btnClose")
-    public void setBtnClose(Button btnClose) {
-        this.btnClose = btnClose;
-    }
-
-    /*
      * getbtnKakutei
      * @return btnKakutei
      */
@@ -185,6 +167,24 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
     @JsonProperty("btnKakutei")
     public void setBtnKakutei(Button btnKakutei) {
         this.btnKakutei = btnKakutei;
+    }
+
+    /*
+     * getbtnClose
+     * @return btnClose
+     */
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    /*
+     * setbtnClose
+     * @param btnClose btnClose
+     */
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose = btnClose;
     }
 
     /*

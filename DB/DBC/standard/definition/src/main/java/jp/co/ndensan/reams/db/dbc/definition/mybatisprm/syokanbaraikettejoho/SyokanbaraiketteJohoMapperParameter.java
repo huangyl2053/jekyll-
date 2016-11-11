@@ -73,12 +73,13 @@ public class SyokanbaraiketteJohoMapperParameter {
         boolean is償還払請求食事費用 = false;
 
         if (サービス計画費.equals(tableKbn)) {
-            if (new FlexibleYearMonth("200904").isBefore(serviceTeikyoYM)) {
+            if (new FlexibleYearMonth("200904").compareTo(serviceTeikyoYM) <= 0) {
                 is計画200904 = true;
             } else if (serviceTeikyoYM.isBefore(new FlexibleYearMonth("200904"))
-                    && new FlexibleYearMonth("200604").isBefore(serviceTeikyoYM)) {
+                    && new FlexibleYearMonth("200604").compareTo(serviceTeikyoYM) <= 0) {
                 is計画200604 = true;
-            } else if (serviceTeikyoYM.isBefore(new FlexibleYearMonth("200604"))) {
+            } else if (serviceTeikyoYM.isBefore(new FlexibleYearMonth("200604"))
+                    && new FlexibleYearMonth("200004").compareTo(serviceTeikyoYM) <= 0) {
                 is計画200004 = true;
             }
         } else if (特定入所者.equals(tableKbn)) {

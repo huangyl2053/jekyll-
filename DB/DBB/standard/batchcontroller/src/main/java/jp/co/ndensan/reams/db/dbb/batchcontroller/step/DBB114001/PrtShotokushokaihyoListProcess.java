@@ -158,10 +158,16 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
 
     @Override
     protected void createWriter() {
-        PageBreaker<ShotokushokaihyoHakkoIchiranSource> breakPage
-                = new ShotokushokaihyoHakkoIchiranBreakKey(pageBreakKeys);
-        reportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
+
+        if (pageBreakKeys == null || pageBreakKeys.isEmpty()) {
+            reportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
+        } else {
+            PageBreaker<ShotokushokaihyoHakkoIchiranSource> breakPage
+                    = new ShotokushokaihyoHakkoIchiranBreakKey(pageBreakKeys);
+            reportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
+        }
         sourceWriter = new ReportSourceWriter<>(reportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
@@ -265,14 +271,14 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     private void publish所得情報一覧表(ShotokuShoukaiDataTempEntity tempEntity) {
         ShotokuShoukaiDataCSVEntity entity = new ShotokuShoukaiDataCSVEntity();
         entity.set世帯コード(tempEntity.getSetaiCode());
-        entity.setカナ氏名(tempEntity.getAtenaKanaShimei());
+        entity.setカナ氏名(tempEntity.getKanaMeisho());
         entity.set前住所(tempEntity.getZenjusho());
         entity.set生年月日(tempEntity.getSeinengappiYMD());
         entity.set照会日(processParameter.get照会年月日());
         entity.set転入日(tempEntity.getIdoYMD());
         entity.set種別(editor種別(tempEntity));
         entity.set識別コード(tempEntity.getShikibetsuCode());
-        entity.set氏名(tempEntity.getAtenaShimei());
+        entity.set氏名(tempEntity.getMeisho());
         entity.set現住所(tempEntity.getGenjusho());
         RString 性別 = set性別コード(tempEntity);
         entity.set性別(性別);

@@ -61,7 +61,7 @@
         受給者台帳."ninteiYukoKikanShuryoYMD" AS 受給者台帳_認定有効期間終了年月日, 
         受給者台帳."ninteiYMD" AS 受給者台帳_認定年月日,
         受給者台帳."kyuSochishaFlag" AS 受給者台帳_旧措置者フラグ,
-<!--TODO QA1790  受給者台帳."minashiCode" AS 受給者台帳_みなし要介護区分コード,-->
+        受給者台帳."minashiCode" AS 受給者台帳_みなし要介護区分コード,
         受給者台帳."chokkinIdoJiyuCode" AS 受給者台帳_直近異動事由コード, 
         高額合算自己負担額明細004."jikoFutanGaku" AS 高額合算自己負担額明細004_自己負担額,
         高額合算自己負担額明細004."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細004_70_74内数,

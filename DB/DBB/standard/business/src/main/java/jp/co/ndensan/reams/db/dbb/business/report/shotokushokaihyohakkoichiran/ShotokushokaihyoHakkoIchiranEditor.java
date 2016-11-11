@@ -140,7 +140,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         }
         source.komokuNameTitle4 = 照会日;
         source.listUpper_1 = new RString(所得照会票発行一覧.getSetaiCode().toString());
-        source.listUpper_2 = new RString(所得照会票発行一覧.getAtenaKanaShimei().toString());
+        source.listUpper_2 = new RString(所得照会票発行一覧.getKanaMeisho().toString());
         if (候補者区分 != null && 候補者区分.equals(候補者区分_転入者)
                 && 所得照会票発行一覧.getZenjusho() != null) {
             source.listUpper_3 = 所得照会票発行一覧.getZenjusho();
@@ -153,7 +153,8 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         source.choikiCode = 所得照会票発行一覧.getChoikiCode();
         source.gyoseikuCode = 所得照会票発行一覧.getGyoseikuCode();
         source.shichosonCode = 所得照会票発行一覧.getShichosonCode();
-        source.torokuIdoYMD = 所得照会票発行一覧.getTorokuTodokedeYMD();
+        source.idoYMD = 所得照会票発行一覧.getIdoYMD() == null ? RString.EMPTY
+                : new RString(所得照会票発行一覧.getIdoYMD().toString());
         source.zenjushoCode = 所得照会票発行一覧.getZenjushoCode();
         return source;
     }
@@ -169,8 +170,8 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         if (所得照会票発行一覧.getShikibetsuCode() != null) {
             source.listLower_1 = 所得照会票発行一覧.getShikibetsuCode().getColumnValue();
         }
-        if (所得照会票発行一覧.getAtenaShimei() != null) {
-            source.listLower_2 = 所得照会票発行一覧.getAtenaShimei().getColumnValue();
+        if (所得照会票発行一覧.getMeisho() != null) {
+            source.listLower_2 = 所得照会票発行一覧.getMeisho().getColumnValue();
         }
         source.listLower_3 = 所得照会票発行一覧.getGenjusho();
         set性別コード(source);

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -93,6 +94,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
         source.listUpper_13 = 送付一覧表データ.getDbWT1001Entity().getGyoseikuCode();
         source.listUpper_14 = 送付一覧表データ.getDbWT1001Entity().getShimei50onKana();
         source.listUpper_15 = getColumnValue(送付一覧表データ.getDbWT1001Entity().getShichosonCode());
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_5);
         return source;
     }
 

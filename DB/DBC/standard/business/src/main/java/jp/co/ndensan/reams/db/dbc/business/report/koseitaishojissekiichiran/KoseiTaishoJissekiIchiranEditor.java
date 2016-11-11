@@ -109,7 +109,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
         source.listKyufuJisseki_9 = entity.getサービス種類();
 
         source.listKyufuJisseki_10 = doカンマ編集(entity.getサービス費用額());
-        if (!doカンマ編集(entity.get軽減率()).isEmpty()) {
+        if (連番 != 0 && !doカンマ編集(entity.get軽減率()).isEmpty()) {
             source.listKyufuJisseki_11 = 前符号タイトル.concat(doカンマ編集(entity.get軽減率()));
         }
         source.listKyufuJisseki_13 = doカンマ編集(entity.get更正前給付率());
@@ -119,7 +119,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
         source.listKyufuJisseki_17 = doカンマ編集(entity.get更正後請求額());
         source.listKyufuJisseki_18 = doカンマ編集(entity.get更正後自己負担額());
         source.listKyufuJisseki_19 = doカンマ編集(entity.get自己負担差額());
-        if (!doカンマ編集(entity.get高額サービス費用額()).isEmpty()) {
+        if (連番 == 0 && !doカンマ編集(entity.get高額サービス費用額()).isEmpty()) {
             source.listKyufuJisseki_12 = 前符号タイトル.concat(doカンマ編集(entity.get高額サービス費用額()));
         }
         source.listKyufuJisseki_19 = doカンマ編集(entity.get自己負担差額());

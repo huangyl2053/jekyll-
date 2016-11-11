@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -159,6 +160,7 @@ public class ShikyugakuUpdateTempEntity extends DbTableEntityBase<ShikyugakuUpda
     private AtenaMeisho atenaShimei;
     private FlexibleDate seinengappiYMD;
     private LasdecCode shichosonCode;
+    private ChoikiCode choikiCode;
     private RString saiShikyuKubun;
     private RString madoguchiKubun;
     private KinyuKikanCode kinyukikanCode;

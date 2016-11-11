@@ -43,6 +43,7 @@
             AND  "C"."hiHokenshaNo" = #{被保険者番号}
         </if>
         ORDER BY
-        "C"."idoYMD" DESC
+        "C"."idoYMD" DESC,
+        "C"."hiHokenshaNo" ASC,
     </select>
 </mapper>

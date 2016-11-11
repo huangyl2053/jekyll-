@@ -40,10 +40,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlowBase<DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter> {
 
     private static final String TAISHOSHACHUSHUJIGYOBUNPPROCESS = "TaishoshaChushuJigyobunProcess";
-
-    private RString importTableNamePermanent;
-    private RString exportTableNameTemporary;
-
     private static final String BACKUP_TO_TEMPORARYTABLE = "backup_To_TemporaryTable";
     private static final String INITJISSEKICHECKPROCESS = "InitJissekiCheckProcess";
     private static final String INSSHIHARAIHOHOHENKOTEMPBEFOREPROCESS = "InsShiharaihohoHenkoTempBeforeProcess";
@@ -62,8 +58,6 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
 
     @Override
     protected void defineFlow() {
-        importTableNamePermanent = BACKUPTABLE;
-        exportTableNameTemporary = TEMPTABLE;
         executeStep(BACKUP_TO_TEMPORARYTABLE);
         executeStep(TAISHOSHACHUSHUJIGYOBUNPPROCESS);
         executeStep(INITJISSEKICHECKPROCESS);
@@ -79,13 +73,15 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
         executeStep(CALCKOGAKUSHIKYUGAKUPROCESS);
         executeStep(SETFUTANGAKUPROCESS);
         executeStep(SETFUTANGAKUAFTERPROCESS);
-        executeStep(GASSANJIGYOBUNJIKOFUTANGAKUKEISANKEKKAICHAIRAN);
+        if (getParameter().isShuturyokuFlg()) {
+            executeStep(GASSANJIGYOBUNJIKOFUTANGAKUKEISANKEKKAICHAIRAN);
+        }
         executeStep(UPDSHORIDATEKANRIPROCESS);
     }
 
     @Step(BACKUP_TO_TEMPORARYTABLE)
     IBatchFlowCommand backupToTemporaryTable() {
-        return backupToTemporaryTable(importTableNamePermanent, exportTableNameTemporary).define();
+        return backupToTemporaryTable(BACKUPTABLE, TEMPTABLE).define();
     }
 
     @Step(TAISHOSHACHUSHUJIGYOBUNPPROCESS)
@@ -95,6 +91,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
         param.set出力対象区分(getParameter().getRadSakuseiJoken());
         param.set被保険者番号(getParameter().getHihokenshano());
         param.set年度(getParameter().getNendo());
+        param.set抽出期間開始年月(getParameter().getUketoriym().toDateString());
         return loopBatch(TaishoshaChushuJigyobunProcess.class).arguments(param).define();
     }
 
@@ -141,7 +138,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
 
     @Step(SETFUTANGAKUPROCESS)
     IBatchFlowCommand setFutangakuProcess() {
-        SetFutangakuProcessParameter param = new SetFutangakuProcessParameter(true, RString.EMPTY);
+        SetFutangakuProcessParameter param = new SetFutangakuProcessParameter(true, getParameter().getRadSakuseiJoken());
         return loopBatch(SetFutangakuProcess.class).arguments(param).define();
     }
 

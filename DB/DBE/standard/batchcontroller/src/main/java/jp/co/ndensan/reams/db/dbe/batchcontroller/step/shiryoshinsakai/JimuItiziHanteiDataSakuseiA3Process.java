@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoItemSetteiA3;
-import jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa3.IchijihanteikekkahyoA3Report;
+import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.JimuTokkiTextA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.Ichijiha
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA3ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.jimutokkitext.JimuTokkiTextA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
@@ -43,7 +44,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 委員用一次判定結果票の取得バッチクラスです。
@@ -55,7 +58,8 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     private static final RString SELECT_JIMUNINTEITIZIHANTEI = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get事務局一次判定");
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
-            new RString(IchijihanteikekkahyoA3ReportSource.ReportSourceFields.shinseiCount.name())));
+            new RString(JimuTokkiTextA3ReportSource.ReportSourceFields.two_tokkiText1.name()),
+            new RString(JimuTokkiTextA3ReportSource.ReportSourceFields.two_tokkiImg1.name())));
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IchijihanteikekkahyoA3Entity item;
     private IJimuShiryoShinsakaiIinMapper mapper;
@@ -63,8 +67,8 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     private List<ShinsakaiSiryoKyotsuEntity> 共通情報;
     private int データ件数 = 0;
     @BatchWriter
-    private BatchReportWriter<IchijihanteikekkahyoA3ReportSource> batchWriteA3;
-    private ReportSourceWriter<IchijihanteikekkahyoA3ReportSource> reportSourceWriterA3;
+    private BatchReportWriter<JimuTokkiTextA3ReportSource> batchWriteA3;
+    private ReportSourceWriter<JimuTokkiTextA3ReportSource> reportSourceWriterA3;
 
     @Override
     protected void initialize() {
@@ -119,7 +123,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                 get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()), 特記情報);
 
-        IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
+        JimuTokkiTextA3Report report = new JimuTokkiTextA3Report(item);
         report.writeBy(reportSourceWriterA3);
     }
 
@@ -127,20 +131,30 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     protected void createWriter() {
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517081.getReportId().value())
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+                .addBreak(new BreakerCatalog<JimuTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
+
+
+
+                    JimuTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
+                    @Override
+                    public ReportLineRecord<JimuTokkiTextA3ReportSource> occuredBreak(ReportLineRecord<JimuTokkiTextA3ReportSource> currentRecord,
+                            ReportLineRecord<JimuTokkiTextA3ReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                        int layout = currentRecord.getSource().layout.index();
+                        currentRecord.setFormGroupIndex(layout);
+                        if (nextRecord != null && nextRecord.getSource() != null) {
+                            layout = nextRecord.getSource().layout.index();
+                            nextRecord.setFormGroupIndex(layout);
+                        }
+                        return currentRecord;
+                    }
+                })
                 .create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
     }
 
     @Override
     protected void keyBreakProcess(ItiziHanteiEntity t) {
-        if (hasBrek(getBefore(), t)) {
-            IchijihanteikekkahyoA3Report report = new IchijihanteikekkahyoA3Report(item);
-            report.writeBy(reportSourceWriterA3);
-        }
-    }
-
-    private boolean hasBrek(ItiziHanteiEntity before, ItiziHanteiEntity current) {
-        return before.getShinsakaiOrder() != current.getShinsakaiOrder();
     }
 
     @Override

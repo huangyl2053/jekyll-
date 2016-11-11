@@ -3,19 +3,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 24 17:01:04 CST 2016
+ * Fri Nov 04 16:41:00 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgShinseiList_Row のクラスファイル
- *
- * @reamsid_L DBC-0960-010 hezhenzhen
+ * dgShinseiList_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinseiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString hiHokenshaNo;
     private RString serviceTeikyoYM;

@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 概要： 共同処理用受給者異動連絡票作成取得のマッピング用XMLです。 -->
+ <!-- @reamsid_L DBC-2770-050 zhangzhiming -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper">  
+    <select id="select共同処理基本送付"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.allColumns_DbT3002KyodoShoriyoJukyushaIdoKihonSofu" />
+        FROM
+          rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
+    </select>
+
+    <select id="select共同処理償還送付"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu" />
+        FROM
+          rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu"
+    </select>
+    
+    <select id="select共同処理高額送付"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.ResultMap_DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.allColumns_DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" />
+        FROM
+          rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
+    </select>
+    
+    <select id="select共同処理基本送付一時"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.allColumns_DbT3002KyodoShoriyoJukyushaIdoKihonSofu" />
+        FROM
+          rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
+        WHERE "logicalDeletedFlag" <![CDATA[<>]]> TRUE
+            <if test="処理区分フラグ">
+               AND "sofuYM" = #{処理対象年月}
+            </if>
+    </select>
+
+    <select id="select共同処理償還送付一時"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu" />
+        FROM
+          rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu"
+        WHERE "logicalDeletedFlag" <![CDATA[<>]]> TRUE
+            <if test="処理区分フラグ">
+               AND "sofuYM" = #{処理対象年月}
+            </if>
+    </select>
+
+    <select id="select共同処理高額送付一時"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.ResultMap_DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.allColumns_DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" />
+        FROM
+          rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
+        WHERE "logicalDeletedFlag" <![CDATA[<>]]> TRUE
+            <if test="処理区分フラグ">
+               AND "sofuYM" = #{処理対象年月}
+            </if>
+    </select>
+    
+<!--    <select id="select受給者台帳情報" resultMap="resultMap_JukyushaDaichoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+          rgdb."DbT4001JukyushaDaicho"
+        LEFT JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+            ON "DbT4001JukyushaDaicho"."shikibetsuCode" =  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+            AND SUBSTRING("DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<]]> #{処理対象年月}
+            AND "DbT4001JukyushaDaicho"."yukoMukoKubun" = '1'
+        ORDER BY "DbT4001JukyushaDaicho"."hihokenshaNo","DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD"
+    </select>
+    
+    <select id="select被保険者台帳情報"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
+        FROM
+          rgdb."DbT1001HihokenshaDaicho"
+        WHERE SUBSTRING("DbT1001HihokenshaDaicho"."idoYMD",1,6) <![CDATA[<]]> #{処理対象年月}
+        ORDER BY "DbT1001HihokenshaDaicho"."hihokenshaNo","DbT1001HihokenshaDaicho"."idoYMD"
+    </select>
+    
+    <select id="select世帯員所得情報" resultMap="resultMap_RelateEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        J."hihokenshaNo",
+        J."shikibetsuCode",
+        J."jukyuYMD",
+        J."shotokuNendo",
+        J."juushotitokureigaitou",
+        J."shotaishikibetsuCode",
+        J."shotaihaakujukyuYMD",
+        J."honninnkubun",
+        J."kazeikubungennmenzen",
+        J."kazeikubungennmengo",
+        J."gekihenkanwasoti",
+        J."goukeishotokukingaku",
+        J."nenkinnshuunyuugaku",
+        J."nenkinnshotokugaku",
+        J."kazeishotokugaku",
+        J."tourokugyoumu",
+        J."shotaiinhihokenshaNo",
+        J."honninkazeikubnn",
+        J."shotaikazeikubun",
+        J."shoubokubun",
+        J."roureifukusikubun",
+        J."shotokukubunCode",
+        J."shotaishotokukubunCode",
+        J."shotaiCode",
+        J."seinenngappiYMD",
+        J."zokugaraCode",
+        J."setaiCode",
+        J."seinengappiYMD",
+        J."kazokuNo"
+        FROM
+        "SetaiYinShiyoTokuJyoHoTemp" AS J
+    </select>
+    
+    <resultMap id="resultMap_IdouChuukannEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouDetaToriGaTempEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+    
+    <select id="select異動データ取得" resultMap="resultMap_IdouChuukannEntity" 
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            A."被保険者番号",
+            A."異動年月日"
+        FROM
+          "IdouChuukannKihonSofuIttokiTemp" AS A
+        INNER JOIN "IdouTemp2" AS B
+            ON A."被保険者番号" = B."被保険者番号"
+        WHERE B."異動区分コード" = '01'
+            AND A."異動年月日" <![CDATA[<=]]> B."異動年月日"
+            AND B."エラーフラグ" = '1'
+    </select>
+    
+    <select id="select異動データ取得トリガ" parameterType="java.util.List" 
+            resultMap="resultMap_送付エラー一時"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="allColumns_送付エラー一時" />
+        FROM
+          "SoufuError"
+        WHERE <foreach collection="list" item="item" index="index" separator="or" >  
+            ("SoufuError"."異動年月日" = #{item.異動年月日} AND "SoufuError"."被保険者番号" = #{item.被保険者番号})
+            </foreach> 
+    </select>
+    
+    <select id="select送付エラーデータ" resultMap="resultMap_送付エラー一時"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="allColumns_送付エラー一時" />
+        FROM
+          "SofuEraDetaTemp" AS "SoufuError"
+    </select>
+      <update id="update異動中間基本送付一時" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
+            fetchSize="500">
+        UPDATE
+          "IdouChuukannKihonSofuIttokiTemp"
+        SET "IdouChuukannKihonSofuIttokiTemp"."論理削除フラグ" = FALSE
+        WHERE "IdouChuukannKihonSofuIttokiTemp"."被保険者番号" = #{被保険者番号}
+        AND "IdouChuukannKihonSofuIttokiTemp"."異動年月日" = #{異動年月日}
+    </update>
+    <select id="select共同処理用受給者異動基本送付" resultMap="resultMap_KyodoShoriKihonSofuTempEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        共同処理用受給者異動基本送付."異動年月日",
+        共同処理用受給者異動基本送付."異動区分コード",
+        共同処理用受給者異動基本送付."受給者異動事由",
+        共同処理用受給者異動基本送付."証記載保険者番号",
+        共同処理用受給者異動基本送付."被保険者番号",
+        共同処理用受給者異動基本送付."履歴番号",
+        共同処理用受給者異動基本送付."被保険者氏名",
+        共同処理用受給者異動基本送付."郵便番号",
+        共同処理用受給者異動基本送付."住所カナ",
+        共同処理用受給者異動基本送付."住所",
+        共同処理用受給者異動基本送付."電話番号",
+        共同処理用受給者異動基本送付."帳票出力順序コード",
+        共同処理用受給者異動基本送付."訂正連絡票フラグ",
+        共同処理用受給者異動基本送付."送付年月",
+        共同処理用受給者異動基本送付."訂正区分コード",
+        共同処理用受給者異動基本送付."訂正年月日",
+        共同処理用受給者異動基本送付."論理削除フラグ"
+        FROM "KyodoShoriKihonSofuIttokiTemp" AS 共同処理用受給者異動基本送付
+        ORDER BY 共同処理用受給者異動基本送付."異動年月日" DESC
+    </select>
+    
+    <select id="select異動中間基本送付" resultMap="resultMap_CompareDataTempAEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        異動中間基本送付."異動年月日",
+        異動中間基本送付."異動区分コード",
+        異動中間基本送付."受給者異動事由",
+        異動中間基本送付."証記載保険者番号",
+        異動中間基本送付."被保険者番号",
+        異動中間基本送付."履歴番号",
+        異動中間基本送付."被保険者氏名",
+        異動中間基本送付."郵便番号",
+        異動中間基本送付."住所カナ",
+        異動中間基本送付."住所",
+        異動中間基本送付."電話番号",
+        異動中間基本送付."帳票出力順序コード",
+        異動中間基本送付."訂正連絡票フラグ",
+        異動中間基本送付."送付年月",
+        異動中間基本送付."訂正区分コード",
+        異動中間基本送付."訂正年月日",
+        異動中間基本送付."市町村コード",
+        異動中間基本送付."資格取得年月日",
+        異動中間基本送付."資格喪失年月日",
+        異動中間基本送付."認定有効期間開始年月日",
+        異動中間基本送付."認定有効期間終了年月日",
+        異動中間基本送付."論理削除フラグ"
+        FROM "IdouChuukannKihonSofuIttokiTemp" AS 異動中間基本送付
+        ORDER BY 異動中間基本送付."異動年月日" DESC
+    </select>
+    
+    <resultMap id="resultMap_KyodoShoriShouKannTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriShouKannTempEntity" autoMapping="true">
+        <result property="受給者異動事由" column="受給者異動事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="異動区分コード" column="異動区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" />
+        <result property="保険給付支払一時差止開始年月日" column="保険給付支払一時差止開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="保険給付支払一時差止終了年月日" column="保険給付支払一時差止終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="保険給付支払一時差止区分コード" column="保険給付支払一時差止区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険給付支払一時差止金額" column="保険給付支払一時差止金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="訂正連絡票フラグ" column="訂正連絡票フラグ" />
+        <result property="論理削除フラグ" column="論理削除フラグ" />
+        <result property="送付年月" column="送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="訂正区分コード" column="訂正区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正年月日" column="訂正年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <select id="select共同処理用受給者異動償還送付" resultMap="resultMap_KyodoShoriShouKannTempEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        共同処理用受給者異動償還送付."異動年月日",
+        共同処理用受給者異動償還送付."異動区分コード",
+        共同処理用受給者異動償還送付."受給者異動事由",
+        共同処理用受給者異動償還送付."証記載保険者番号",
+        共同処理用受給者異動償還送付."被保険者番号",
+        共同処理用受給者異動償還送付."履歴番号",
+        共同処理用受給者異動償還送付."保険給付支払一時差止開始年月日",
+        共同処理用受給者異動償還送付."保険給付支払一時差止終了年月日",
+        共同処理用受給者異動償還送付."保険給付支払一時差止区分コード",
+        共同処理用受給者異動償還送付."保険給付支払一時差止金額",
+        共同処理用受給者異動償還送付."訂正連絡票フラグ",
+        共同処理用受給者異動償還送付."送付年月",
+        共同処理用受給者異動償還送付."訂正区分コード",
+        共同処理用受給者異動償還送付."訂正年月日",
+        共同処理用受給者異動償還送付."論理削除フラグ"
+        FROM "KyodoShoriShouKannIttokiTemp" AS 共同処理用受給者異動償還送付
+        ORDER BY 共同処理用受給者異動償還送付."異動年月日" DESC
+    </select>
+    
+    <resultMap id="resultMap_CompareDataTempBEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannShouKannTempEntity" autoMapping="true">
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動区分コード" column="異動区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者異動事由" column="受給者異動事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" />
+        <result property="保険給付支払一時差止開始年月日" column="保険給付支払一時差止開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="保険給付支払一時差止終了年月日" column="保険給付支払一時差止終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="保険給付支払一時差止区分コード" column="保険給付支払一時差止区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険給付支払一時差止金額" column="保険給付支払一時差止金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="訂正連絡票フラグ" column="訂正連絡票フラグ" />
+        <result property="送付年月" column="送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="訂正区分コード" column="訂正区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正年月日" column="訂正年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="論理削除フラグ" column="論理削除フラグ" />
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="資格取得年月日" column="資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="差止決定年月日" column="差止決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="差止解除年月日" column="差止解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <select id="select異動中間償還送付" resultMap="resultMap_CompareDataTempBEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        異動中間償還送付一時."異動年月日",
+        異動中間償還送付一時."異動区分コード",
+        異動中間償還送付一時."受給者異動事由",
+        異動中間償還送付一時."証記載保険者番号",
+        異動中間償還送付一時."被保険者番号",
+        異動中間償還送付一時."被保険者氏名",
+        異動中間償還送付一時."履歴番号",
+        異動中間償還送付一時."保険給付支払一時差止開始年月日",
+        異動中間償還送付一時."保険給付支払一時差止終了年月日",
+        異動中間償還送付一時."保険給付支払一時差止区分コード",
+        異動中間償還送付一時."保険給付支払一時差止金額",
+        異動中間償還送付一時."訂正連絡票フラグ",
+        異動中間償還送付一時."送付年月",
+        異動中間償還送付一時."訂正区分コード",
+        異動中間償還送付一時."訂正年月日",
+        異動中間償還送付一時."論理削除フラグ",
+        異動中間償還送付一時."市町村コード",
+        異動中間償還送付一時."資格取得年月日",
+        異動中間償還送付一時."資格喪失年月日",
+        異動中間償還送付一時."差止決定年月日",
+        異動中間償還送付一時."差止解除年月日"
+        FROM "IdouChuukannShouKannIttokiTemp" AS 異動中間償還送付一時
+        ORDER BY 異動中間償還送付一時."異動年月日" DESC
+    </select>
+    
+    <resultMap id="resultMap_CompareDataTempCEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannKooGakuTempEntity" autoMapping="true">
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動区分コード" column="異動区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者異動事由" column="受給者異動事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" />
+        <result property="世帯集約番号" column="世帯集約番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="世帯所得区分コード" column="世帯所得区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="所得区分コード" column="所得区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="老齢福祉年金受給有フラグ" column="老齢福祉年金受給有フラグ" />
+        <result property="利用者負担第２段階有フラグ" column="利用者負担第２段階有フラグ" />
+        <result property="支給申請書出力有フラグ" column="支給申請書出力有フラグ" />
+        <result property="訂正連絡票フラグ" column="訂正連絡票フラグ" />
+        <result property="送付年月" column="送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="訂正区分コード" column="訂正区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正年月日" column="訂正年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="論理削除フラグ" column="論理削除フラグ" />
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="資格取得年月日" column="資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="激変緩和境界層区分" column="激変緩和境界層区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="基準年月日" column="基準年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="世帯把握用所得年度" column="世帯把握用所得年度"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+    </resultMap>
+    
+    <select id="select共同処理用受給者異動高額送付" resultMap="resultMap_KyodoShoriKooGakuTempEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        共同処理用受給者異動高額送付."異動年月日",
+        共同処理用受給者異動高額送付."異動区分コード",
+        共同処理用受給者異動高額送付."受給者異動事由",
+        共同処理用受給者異動高額送付."証記載保険者番号",
+        共同処理用受給者異動高額送付."被保険者番号",
+        共同処理用受給者異動高額送付."履歴番号",
+        共同処理用受給者異動高額送付."世帯集約番号",
+        共同処理用受給者異動高額送付."世帯所得区分コード",
+        共同処理用受給者異動高額送付."所得区分コード",
+        共同処理用受給者異動高額送付."老齢福祉年金受給有フラグ",
+        共同処理用受給者異動高額送付."利用者負担第２段階有フラグ",
+        共同処理用受給者異動高額送付."支給申請書出力有フラグ",
+        共同処理用受給者異動高額送付."訂正連絡票フラグ",
+        共同処理用受給者異動高額送付."送付年月",
+        共同処理用受給者異動高額送付."訂正区分コード",
+        共同処理用受給者異動高額送付."訂正年月日",
+        共同処理用受給者異動高額送付."論理削除フラグ"
+        FROM "KyodoShoriKooGakuIttokiTemp" AS 共同処理用受給者異動高額送付
+        ORDER BY 共同処理用受給者異動高額送付."異動年月日" DESC
+    </select>
+    
+    <resultMap id="resultMap_KyodoShoriKooGakuTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriKooGakuTempEntity" autoMapping="true">
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動区分コード" column="異動区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者異動事由" column="受給者異動事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" />
+        <result property="世帯集約番号" column="世帯集約番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="世帯所得区分コード" column="世帯所得区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="所得区分コード" column="所得区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="老齢福祉年金受給有フラグ" column="老齢福祉年金受給有フラグ" />
+        <result property="利用者負担第２段階有フラグ" column="利用者負担第２段階有フラグ" />
+        <result property="支給申請書出力有フラグ" column="支給申請書出力有フラグ" />
+        <result property="訂正連絡票フラグ" column="訂正連絡票フラグ" />
+        <result property="送付年月" column="送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="訂正区分コード" column="訂正区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正年月日" column="訂正年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="論理削除フラグ" column="論理削除フラグ" />
+    </resultMap>
+    
+    <select id="select異動中間高額送付" resultMap="resultMap_CompareDataTempCEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        異動中間高額送付."異動年月日",
+        異動中間高額送付."異動区分コード",
+        異動中間高額送付."受給者異動事由",
+        異動中間高額送付."証記載保険者番号",
+        異動中間高額送付."被保険者番号",
+        異動中間高額送付."被保険者氏名",
+        異動中間高額送付."履歴番号",
+        異動中間高額送付."世帯集約番号",
+        異動中間高額送付."世帯所得区分コード",
+        異動中間高額送付."所得区分コード",
+        異動中間高額送付."老齢福祉年金受給有フラグ",
+        異動中間高額送付."利用者負担第２段階有フラグ",
+        異動中間高額送付."支給申請書出力有フラグ",
+        異動中間高額送付."訂正連絡票フラグ",
+        異動中間高額送付."送付年月",
+        異動中間高額送付."訂正区分コード",
+        異動中間高額送付."訂正年月日",
+        異動中間高額送付."論理削除フラグ",
+        異動中間高額送付."市町村コード",
+        異動中間高額送付."資格取得年月日",
+        異動中間高額送付."資格喪失年月日",
+        異動中間高額送付."認定有効期間開始年月日",
+        異動中間高額送付."認定有効期間終了年月日",
+        異動中間高額送付."激変緩和境界層区分",
+        異動中間高額送付."基準年月日",
+        異動中間高額送付."世帯把握用所得年度"
+        FROM "IdouChuukannKooGakuIttokiTemp" AS 異動中間高額送付
+        ORDER BY 異動中間高額送付."異動年月日" DESC
+    </select>
+    
+    <resultMap id="resultMap_AEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouSofuListTempEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="区分" column="区分" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="要介護度" column="要介護度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="開始認定日" column="開始認定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="終了認定日" column="終了認定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="変更項目" column="変更項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="select送付対象リスト" resultMap="resultMap_AEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        CompareDataTempA."被保険者番号",
+        CompareDataTempA."氏名",
+        CompareDataTempA."区分",
+        CompareDataTempA."異動年月日",
+        CompareDataTempA."要介護度",
+        CompareDataTempA."開始認定日",
+        CompareDataTempA."終了認定日",
+        CompareDataTempA."変更項目"
+        FROM "IdouSofuListTemp" AS CompareDataTempA
+    </select>
+    
+    <resultMap id="resultMap_CompareDataTempAEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannKihonSofuTempEntity" autoMapping="true">
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="異動区分コード" column="異動区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者異動事由" column="受給者異動事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" />
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="住所カナ" column="住所カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="帳票出力順序コード" column="帳票出力順序コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正連絡票フラグ" column="訂正連絡票フラグ" />
+        <result property="送付年月" column="送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="訂正区分コード" column="訂正区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正年月日" column="訂正年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="資格取得年月日" column="資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="論理削除フラグ" column="論理削除フラグ" />
+    </resultMap>
+    
+    <resultMap id="resultMap_KyodoShoriKihonSofuTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriKihonSofuTempEntity" autoMapping="true">
+        <result property="受給者異動事由" column="受給者異動事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="異動区分コード" column="異動区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" />
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="住所カナ" column="住所カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="帳票出力順序コード" column="帳票出力順序コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正連絡票フラグ" column="訂正連絡票フラグ" />
+        <result property="論理削除フラグ" column="論理削除フラグ" />
+        <result property="送付年月" column="送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="訂正区分コード" column="訂正区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訂正年月日" column="訂正年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_RelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.setaiyin.SetaiYinEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="jukyuYMD" column="jukyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="juushotitokureigaitou" column="juushotitokureigaitou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaishikibetsuCode" column="shotaishikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaihaakujukyuYMD" column="shotaihaakujukyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="honninnkubun" column="honninnkubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeikubungennmenzen" column="kazeikubungennmenzen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeikubungennmengo" column="kazeikubungennmengo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gekihenkanwasoti" column="gekihenkanwasoti" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaiCode" column="shotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinenngappiYMD" column="seinenngappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="zokugaraCode" column="zokugaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="goukeishotokukingaku" column="goukeishotokukingaku" />
+        <result property="nenkinnshuunyuugaku" column="nenkinnshuunyuugaku" />
+        <result property="nenkinnshotokugaku" column="nenkinnshotokugaku" />
+        <result property="kazeishotokugaku" column="kazeishotokugaku"/>
+        <result property="tourokugyoumu" column="tourokugyoumu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaiinhihokenshaNo" column="shotaiinhihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninkazeikubnn" column="honninkazeikubnn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaikazeikubun" column="shotaikazeikubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoubokubun" column="shoubokubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="roureifukusikubun" column="roureifukusikubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotokukubunCode" column="shotokukubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaishotokukubunCode" column="shotaishotokukubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kazokuNo" column="kazokuNo" />
+    </resultMap>
+    
+    <resultMap id="resultMap_JukyushaDaichoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.JukyushaDaichoRelateEntity" autoMapping="true">
+        <association property="宛名Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+    </resultMap>
+    
+    <sql id="allColumns_送付エラー一時">
+        "SoufuError"."被保険者番号" as "被保険者番号",
+        "SoufuError"."氏名カナ" as "氏名カナ",
+        "SoufuError"."氏名" as "氏名",
+        "SoufuError"."資格取得日" as "資格取得日",
+        "SoufuError"."資格喪失日" as "資格喪失日",
+        "SoufuError"."要介護状態区分コード" as "要介護状態区分コード",
+        "SoufuError"."要介護認定申請日" as "要介護認定申請日",
+        "SoufuError"."認定開始日" as "認定開始日",
+        "SoufuError"."認定終了日" as "認定終了日",
+        "SoufuError"."居宅事業者番号" as "居宅事業者番号",
+        "SoufuError"."居宅適用開始日" as "居宅適用開始日",
+        "SoufuError"."特定申請日" as "特定申請日",
+        "SoufuError"."特定適用開始日" as "特定適用開始日",
+        "SoufuError"."特定適用終了日" as "特定適用終了日",
+        "SoufuError"."利用者負担申請日" as "利用者負担申請日",
+        "SoufuError"."利用者負担適用開始日" as "利用者負担適用開始日",
+        "SoufuError"."利用者負担適用終了日" as "利用者負担適用終了日",
+        "SoufuError"."社会福祉適用開始日" as "社会福祉適用開始日",
+        "SoufuError"."社会福祉適用終了日" as "社会福祉適用終了日",
+        "SoufuError"."標準負担適用開始日" as "標準負担適用開始日",
+        "SoufuError"."標準負担適用終了日" as "標準負担適用終了日",
+        "SoufuError"."償還払化開始日" as "償還払化開始日",
+        "SoufuError"."給付率引下げ開始日" as "給付率引下げ開始日",
+        "SoufuError"."エラーコード" as "エラーコード",
+        "SoufuError"."エラー内容" as "エラー内容"
+    </sql>
+    
+    <resultMap id="resultMap_送付エラー一時" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.SofuEraRelateEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="氏名カナ" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得日" column="資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失日" column="資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="要介護状態区分コード" column="要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="要介護認定申請日" column="要介護認定申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定開始日" column="認定開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定終了日" column="認定終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="居宅事業者番号" column="居宅事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="居宅適用開始日" column="居宅適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特定申請日" column="特定申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特定適用開始日" column="特定適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特定適用終了日" column="特定適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担申請日" column="利用者負担申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担適用開始日" column="利用者負担適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="利用者負担適用終了日" column="利用者負担適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="社会福祉適用開始日" column="社会福祉適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="社会福祉適用終了日" column="社会福祉適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="標準負担適用開始日" column="標準負担適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="標準負担適用終了日" column="標準負担適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="償還払化開始日" column="償還払化開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="給付率引下げ開始日" column="給付率引下げ開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="エラーコード" column="エラーコード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="エラー内容" column="エラー内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>-->
+    
+    <select id="select国保連インターフェース管理"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper.ResultMap_DbT3104KokuhorenInterfaceKanriEntity"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper.allColumns_DbT3104KokuhorenInterfaceKanri" />
+        FROM
+          rgdb."DbT3104KokuhorenInterfaceKanri"
+    </select>
+</mapper>

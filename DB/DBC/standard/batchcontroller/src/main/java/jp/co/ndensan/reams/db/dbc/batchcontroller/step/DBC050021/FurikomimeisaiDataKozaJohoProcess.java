@@ -67,16 +67,6 @@ public class FurikomimeisaiDataKozaJohoProcess extends BatchProcessBase<Furikomi
     private static final int INT7 = 7;
     private static final int INT10 = 10;
     private static final int INT17 = 17;
-    private RString 口座名寄せキー;
-    private RString 金融機関コード;
-    private RString 支店コード;
-    private RString 預金種別コード;
-    private RString 口座番号;
-    private RString 被保険者番号;
-    private RString サービス提供年月;
-    private RString 対象年度;
-    private RString 支給申請書整理番号;
-    private RString 履歴番号;
 
     private KozaJohoMybatisParameter mybatisParameter;
     private FurikomimeisaiFurikomiDataProcessParameter processParameter;
@@ -92,9 +82,9 @@ public class FurikomimeisaiDataKozaJohoProcess extends BatchProcessBase<Furikomi
         if (高額合算KUNBUN.equals(batchKunbun)) {
             介護給付_XX = ShunoKamokuShubetsu.介護給付_高額合算;
         } else if (事業高額KUNBUN.equals(batchKunbun)) {
-            介護給付_XX = ShunoKamokuShubetsu.介護給付_事業高額;
+            介護給付_XX = ShunoKamokuShubetsu.介護給付_高額;
         } else if (事業高額合算KUNBUN.equals(batchKunbun)) {
-            介護給付_XX = ShunoKamokuShubetsu.介護給付_事業高額合算;
+            介護給付_XX = ShunoKamokuShubetsu.介護給付_高額合算;
         }
         IShunoKamoku 介護給付 = ShunoKamokuFinder.createInstance().get科目(介護給付_XX);
         GyomubetsuPrimaryKeyMybatisParameter mybatis = new GyomubetsuPrimaryKeyMybatisParameter();
@@ -169,39 +159,39 @@ public class FurikomimeisaiDataKozaJohoProcess extends BatchProcessBase<Furikomi
     }
 
     private RString set口座名寄せキー(IKoza 口座, EditedKoza editorKoza, DbWT0510FurikomiMeisaiTempEntity tempTable) {
-        金融機関コード = (口座.get金融機関コード() == null || 口座.get金融機関コード().isEmpty()) ? ゼロ4
+        RString 金融機関コード = (口座.get金融機関コード() == null || 口座.get金融機関コード().isEmpty()) ? ゼロ4
                 : 口座.get金融機関コード().value().padZeroToLeft(INT4);
-        口座番号 = (口座.get口座番号() == null || 口座.get口座番号().isEmpty()) ? ゼロ7 : 口座.get口座番号().padZeroToLeft(INT7);
+        RString 口座番号 = (口座.get口座番号() == null || 口座.get口座番号().isEmpty()) ? ゼロ7 : 口座.get口座番号().padZeroToLeft(INT7);
+        RString 預金種別コード;
         if (口座.get預金種別() != null) {
             預金種別コード = (口座.get預金種別().get預金種別コード() == null || 口座.get預金種別().get預金種別コード().isEmpty())
                     ? ゼロ1 : 口座.get預金種別().get預金種別コード().padZeroToLeft(INT1);
         } else {
             預金種別コード = ゼロ1;
         }
-        支店コード = (editorKoza.get振込支店コード() == null || editorKoza.get振込支店コード().isEmpty()) ? ゼロ3
+        RString 支店コード = (editorKoza.get振込支店コード() == null || editorKoza.get振込支店コード().isEmpty()) ? ゼロ3
                 : editorKoza.get振込支店コード().padZeroToLeft(INT3);
-        set名寄せ(tempTable, 金融機関コード, 支店コード, 預金種別コード, 口座番号);
-        return 口座名寄せキー;
+        return set名寄せ(tempTable, 金融機関コード, 支店コード, 預金種別コード, 口座番号);
     }
 
-    private void set名寄せ(DbWT0510FurikomiMeisaiTempEntity tempTable, RString 金融機関コード, RString 支店コード,
+    private RString set名寄せ(DbWT0510FurikomiMeisaiTempEntity tempTable, RString 金融機関コード, RString 支店コード,
             RString 預金種別コード, RString 口座番号) {
-        被保険者番号 = (tempTable.getHihokenshaNo() == null || tempTable.getHihokenshaNo().isEmpty()) ? ゼロ10
+        RString 被保険者番号 = (tempTable.getHihokenshaNo() == null || tempTable.getHihokenshaNo().isEmpty()) ? ゼロ10
                 : tempTable.getHihokenshaNo().value().padZeroToLeft(INT10);
-        サービス提供年月 = (tempTable.getServiceTeikyoYM() == null || tempTable.getServiceTeikyoYM().isEmpty())
+        RString サービス提供年月 = (tempTable.getServiceTeikyoYM() == null || tempTable.getServiceTeikyoYM().isEmpty())
                 ? ゼロ6 : tempTable.getServiceTeikyoYM().toDateString().padZeroToLeft(INT6);
-        対象年度 = tempTable.getTaishoNendo() == null || tempTable.getTaishoNendo().isEmpty()
+        RString 対象年度 = tempTable.getTaishoNendo() == null || tempTable.getTaishoNendo().isEmpty()
                 ? ゼロ4 : tempTable.getTaishoNendo().toDateString().padZeroToLeft(INT4);
-        支給申請書整理番号 = tempTable.getShikyuShinseishoSeiriNo() == null || tempTable.getShikyuShinseishoSeiriNo().isEmpty()
+        RString 支給申請書整理番号 = tempTable.getShikyuShinseishoSeiriNo() == null || tempTable.getShikyuShinseishoSeiriNo().isEmpty()
                 ? ゼロ17 : tempTable.getShikyuShinseishoSeiriNo().padZeroToLeft(INT17);
-        履歴番号 = new RString(tempTable.getRirekiNo()).padZeroToLeft(INT4);
+        RString 履歴番号 = new RString(tempTable.getRirekiNo()).padZeroToLeft(INT4);
         RString sakiEncodeKeitai = DbBusinessConfig.get(ConfigNameDBC.名寄せ, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (KozaNayoseHoho.被保険者毎に同一口座で名寄せする.getコード().equals(sakiEncodeKeitai)) {
-            口座名寄せキー = 金融機関コード.concat(支店コード).concat(預金種別コード).concat(口座番号).concat(被保険者番号);
+            return 金融機関コード.concat(支店コード).concat(預金種別コード).concat(口座番号).concat(被保険者番号);
         } else if (KozaNayoseHoho.同一口座で名寄せする.getコード().equals(sakiEncodeKeitai)) {
-            口座名寄せキー = 金融機関コード.concat(支店コード).concat(預金種別コード).concat(口座番号);
+            return 金融機関コード.concat(支店コード).concat(預金種別コード).concat(口座番号);
         } else {
-            口座名寄せキー = 被保険者番号.concat(サービス提供年月).concat(対象年度).concat(支給申請書整理番号).concat(履歴番号);
+            return 被保険者番号.concat(サービス提供年月).concat(対象年度).concat(支給申請書整理番号).concat(履歴番号);
         }
     }
 

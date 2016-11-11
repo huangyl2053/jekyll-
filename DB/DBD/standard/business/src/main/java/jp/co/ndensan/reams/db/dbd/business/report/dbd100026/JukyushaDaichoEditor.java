@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadai
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.HyojunFutanGengakuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.ItakuKeikakuTodokedejohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.KyufugakuGengakujohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.RiyoshaFutanGenmenJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.RoreiFukushiNenkinjohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.SeikatsuHogojohoEntity;
@@ -43,11 +44,15 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
     private static final int NOCOUNT_5 = 5;
     private static final RString 作成 = new RString("作成");
     private static final RString スラッシュ = new RString("/");
+    private static final RString ZERO = new RString("0");
+    private static final RString ONE = new RString("1");
+    private static final RString 超えた = new RString("＊");
 
     private final TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳;
     private final int index;
     private final int page;
     private final int pageMax;
+    private final RString 出力オプション;
 
     /**
      * インスタンスを生成します。
@@ -56,12 +61,15 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
      * @param index int
      * @param page int
      * @param pageMax int
+     * @param 出力オプション RString
      */
-    public JukyushaDaichoEditor(TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳, int index, int page, int pageMax) {
+    public JukyushaDaichoEditor(TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳, int index,
+            int page, int pageMax, RString 出力オプション) {
         this.帳票出力用受給者台帳 = 帳票出力用受給者台帳;
         this.index = index;
         this.page = page;
         this.pageMax = pageMax;
+        this.出力オプション = 出力オプション;
 
     }
 
@@ -70,7 +78,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         setSentoStep1(source);
         setSentoStep2(source);
         setYokaigoNinteiLower(source);
-        if (index >= (page - 1) * NOCOUNT_5 && index < page * NOCOUNT_5) {
+        if (index >= (page - 1) * NOCOUNT_5 && index < (page * NOCOUNT_5 + 2 * (page - 1))) {
             setFutanGendogakuNintei(source);
             setShaFukuKeigen(source);
             setRiyoshaFutanGenmen(source);
@@ -85,16 +93,19 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             setShikaku(source);
             setRoreiFukushiNenkin(source);
             setSeikatsuHogo(source);
+        } else if (出力オプション.equals(ONE)) {
+            set区分1(source);
+            set区分2(source);
+            set区分3(source);
         }
         return source;
     }
 
     private void setSentoStep1(JukyushaDaichoReportSource source) {
         source.printTimeStamp = get印刷日時();
-        List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
-        if (要介護認定情報EntityList != null && !要介護認定情報EntityList.isEmpty()
-                && 要介護認定情報EntityList.get(0).get先頭Entity() != null) {
-            SentoEntity 先頭Entity = 要介護認定情報EntityList.get(0).get先頭Entity();
+        YokaigoNinteiJohoEntity 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
+        if (要介護認定情報EntityList != null && 要介護認定情報EntityList.get先頭Entity() != null) {
+            SentoEntity 先頭Entity = 要介護認定情報EntityList.get先頭Entity();
             get先頭1(source, 先頭Entity);
             get先頭2(source, 先頭Entity);
 
@@ -102,11 +113,14 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
     }
 
     private void setYokaigoNinteiLower(JukyushaDaichoReportSource source) {
-        List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
-        if (要介護認定情報EntityList != null && !要介護認定情報EntityList.isEmpty() && 要介護認定情報EntityList.size() - 1 >= index) {
-            YokaigoNinteiJohoEntity 要介護認定情報Entity = 要介護認定情報EntityList.get(index);
-            if (要介護認定情報Entity.get認定区分() != null) {
-                source.ninteiKbn = 要介護認定情報Entity.get認定区分();
+        YokaigoNinteiJohoEntity 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
+        if (要介護認定情報EntityList.get要介護認定情報() != null && !要介護認定情報EntityList.get要介護認定情報().isEmpty()
+                && 要介護認定情報EntityList.get要介護認定情報().size() - 1 >= index) {
+            NinteiKekkaJohoEntity 要介護認定情報Entity = 要介護認定情報EntityList.get要介護認定情報().get(index);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 要介護認定情報EntityList.get要介護認定情報().size() <= 7)) {
+                source.ninteiKbn = RString.EMPTY;
+            } else {
+                source.ninteiKbn = 超えた;
             }
             source.listNinteiCenter_1 = new RString(String.valueOf(index + 1)).padZeroToLeft(2);
             if (要介護認定情報Entity.get認定申請日() != null) {
@@ -156,12 +170,15 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setFutanGendogakuNintei(JukyushaDaichoReportSource source) {
         List<FutanGendogakuNinteiJohoEntity> 負担限度額認定情報EntityList = this.帳票出力用受給者台帳.get負担限度額認定情報EntityList();
+        int indexnew = index - 2 * (page - 1);
         if (負担限度額認定情報EntityList != null
                 && !負担限度額認定情報EntityList.isEmpty()
-                && 負担限度額認定情報EntityList.size() - 1 >= index) {
-            FutanGendogakuNinteiJohoEntity 負担限度額認定情報Entity = 負担限度額認定情報EntityList.get(index - 2 * (page - 1));
-            if (負担限度額認定情報Entity.get負担限度額認定区分() != null) {
-                source.futanGendogakuNinteiKbn = 負担限度額認定情報Entity.get負担限度額認定区分();
+                && 負担限度額認定情報EntityList.size() - 1 >= indexnew) {
+            FutanGendogakuNinteiJohoEntity 負担限度額認定情報Entity = 負担限度額認定情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 負担限度額認定情報EntityList.size() <= 5)) {
+                source.futanGendogakuNinteiKbn = RString.EMPTY;
+            } else {
+                source.futanGendogakuNinteiKbn = 超えた;
             }
             source.listFutanGendogakuNintei_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (負担限度額認定情報Entity.get申請年月日() != null) {
@@ -197,10 +214,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setShaFukuKeigen(JukyushaDaichoReportSource source) {
         List<ShafuHojinKeigenJohoEntity> 社福法人軽減情報EntityList = this.帳票出力用受給者台帳.get社福法人軽減情報EntityList();
-        if (社福法人軽減情報EntityList != null && !社福法人軽減情報EntityList.isEmpty() && 社福法人軽減情報EntityList.size() - 1 >= index) {
-            ShafuHojinKeigenJohoEntity 社福法人軽減情報Entity = 社福法人軽減情報EntityList.get(index - 2 * (page - 1));
-            if (社福法人軽減情報Entity.get社福軽減区分() != null) {
-                source.shaFukuKeigenKbn = 社福法人軽減情報Entity.get社福軽減区分();
+        int indexnew = index - 2 * (page - 1);
+        if (社福法人軽減情報EntityList != null && !社福法人軽減情報EntityList.isEmpty() && 社福法人軽減情報EntityList.size() - 1 >= indexnew) {
+            ShafuHojinKeigenJohoEntity 社福法人軽減情報Entity = 社福法人軽減情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 社福法人軽減情報EntityList.size() <= 5)) {
+                source.shaFukuKeigenKbn = RString.EMPTY;
+            } else {
+                source.shaFukuKeigenKbn = 超えた;
             }
             source.listShaFukuKeigen_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (社福法人軽減情報Entity.get減免申請日() != null) {
@@ -235,10 +255,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setRiyoshaFutanGenmen(JukyushaDaichoReportSource source) {
         List<RiyoshaFutanGenmenJohoEntity> 利用者負担減免情報EntityList = this.帳票出力用受給者台帳.get利用者負担減免情報EntityList();
-        if (利用者負担減免情報EntityList != null && !利用者負担減免情報EntityList.isEmpty() && 利用者負担減免情報EntityList.size() - 1 >= index) {
-            RiyoshaFutanGenmenJohoEntity 利用者負担減免情報Entity = 利用者負担減免情報EntityList.get(index - 2 * (page - 1));
-            if (利用者負担減免情報Entity.get利用者負担減免区分() != null) {
-                source.riyoshaFutanGenmenKbn = 利用者負担減免情報Entity.get利用者負担減免区分();
+        int indexnew = index - 2 * (page - 1);
+        if (利用者負担減免情報EntityList != null && !利用者負担減免情報EntityList.isEmpty() && 利用者負担減免情報EntityList.size() - 1 >= indexnew) {
+            RiyoshaFutanGenmenJohoEntity 利用者負担減免情報Entity = 利用者負担減免情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 利用者負担減免情報EntityList.size() <= 5)) {
+                source.riyoshaFutanGenmenKbn = RString.EMPTY;
+            } else {
+                source.riyoshaFutanGenmenKbn = 超えた;
             }
             source.listRiyoshaFutanGenmen_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (利用者負担減免情報Entity.get減免申請日() != null) {
@@ -261,10 +284,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setHoumonKaigoRiyoshaFutanGengaku(JukyushaDaichoReportSource source) {
         List<HomonKaigoGenmenJohoEntity> 訪問介護等減額情報EntityList = this.帳票出力用受給者台帳.get訪問介護等減額情報EntityList();
-        if (訪問介護等減額情報EntityList != null && !訪問介護等減額情報EntityList.isEmpty() && 訪問介護等減額情報EntityList.size() - 1 >= index) {
-            HomonKaigoGenmenJohoEntity 訪問介護等減額情報Entity = 訪問介護等減額情報EntityList.get(index - 2 * (page - 1));
-            if (訪問介護等減額情報Entity.get訪問介護利用者負担減額区分() != null) {
-                source.honmonKaigoRiyoshaFutanGengakuKbn = 訪問介護等減額情報Entity.get訪問介護利用者負担減額区分();
+        int indexnew = index - 2 * (page - 1);
+        if (訪問介護等減額情報EntityList != null && !訪問介護等減額情報EntityList.isEmpty() && 訪問介護等減額情報EntityList.size() - 1 >= indexnew) {
+            HomonKaigoGenmenJohoEntity 訪問介護等減額情報Entity = 訪問介護等減額情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 訪問介護等減額情報EntityList.size() <= 5)) {
+                source.honmonKaigoRiyoshaFutanGengakuKbn = RString.EMPTY;
+            } else {
+                source.honmonKaigoRiyoshaFutanGengakuKbn = 超えた;
             }
             source.listHonmonKaigoRiyoshaFutanGengaku_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (訪問介護等減額情報Entity.get減免申請日() != null) {
@@ -293,10 +319,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setHyojunFutanGengaku(JukyushaDaichoReportSource source) {
         List<HyojunFutanGengakuJohoEntity> 標準負担減額情報EntityList = this.帳票出力用受給者台帳.get標準負担減額情報EntityList();
-        if (標準負担減額情報EntityList != null && !標準負担減額情報EntityList.isEmpty() && 標準負担減額情報EntityList.size() - 1 >= index) {
-            HyojunFutanGengakuJohoEntity 標準負担減額情報Entity = 標準負担減額情報EntityList.get(index - 2 * (page - 1));
-            if (標準負担減額情報Entity.get標準負担減額区分() != null) {
-                source.hyojunFutanGengakuKbn = 標準負担減額情報Entity.get標準負担減額区分();
+        int indexnew = index - 2 * (page - 1);
+        if (標準負担減額情報EntityList != null && !標準負担減額情報EntityList.isEmpty() && 標準負担減額情報EntityList.size() - 1 >= indexnew) {
+            HyojunFutanGengakuJohoEntity 標準負担減額情報Entity = 標準負担減額情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 標準負担減額情報EntityList.size() <= 5)) {
+                source.hyojunFutanGengakuKbn = RString.EMPTY;
+            } else {
+                source.hyojunFutanGengakuKbn = 超えた;
             }
             source.listHyojunFutanGengaku_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (標準負担減額情報Entity.get減免申請日() != null) {
@@ -319,10 +348,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setTokubetsuChiikiKasanGenmen(JukyushaDaichoReportSource source) {
         List<TokubetsuChiikiKasanGenmenJohoEntity> 特別地域加算減免情報EntityList = this.帳票出力用受給者台帳.get特別地域加算減免情報EntityList();
-        if (特別地域加算減免情報EntityList != null && !特別地域加算減免情報EntityList.isEmpty() && 特別地域加算減免情報EntityList.size() - 1 >= index) {
-            TokubetsuChiikiKasanGenmenJohoEntity 特別地域加算減免情報Entity = 特別地域加算減免情報EntityList.get(index - 2 * (page - 1));
-            if (特別地域加算減免情報Entity.get特別地域加算減免区分() != null) {
-                source.tokubetsuChiikiKasanGenmenKbn = 特別地域加算減免情報Entity.get特別地域加算減免区分();
+        int indexnew = index - 2 * (page - 1);
+        if (特別地域加算減免情報EntityList != null && !特別地域加算減免情報EntityList.isEmpty() && 特別地域加算減免情報EntityList.size() - 1 >= indexnew) {
+            TokubetsuChiikiKasanGenmenJohoEntity 特別地域加算減免情報Entity = 特別地域加算減免情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 特別地域加算減免情報EntityList.size() <= 5)) {
+                source.tokubetsuChiikiKasanGenmenKbn = RString.EMPTY;
+            } else {
+                source.tokubetsuChiikiKasanGenmenKbn = 超えた;
             }
             source.listTokubetsuChiikiKasanGenmen_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (特別地域加算減免情報Entity.get申請年月日() != null) {
@@ -348,10 +380,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setShisetsuNyutaisho(JukyushaDaichoReportSource source) {
         List<ShisetsuNyutaishojohoEntity> 施設入退所情報EntityList = this.帳票出力用受給者台帳.get施設入退所情報EntityList();
-        if (施設入退所情報EntityList != null && !施設入退所情報EntityList.isEmpty() && 施設入退所情報EntityList.size() - 1 >= index) {
-            ShisetsuNyutaishojohoEntity 施設入退所情報Entity = 施設入退所情報EntityList.get(index - 2 * (page - 1));
-            if (施設入退所情報Entity.get施設入退所区分() != null) {
-                source.shisetsuNyutaishoKbn = 施設入退所情報Entity.get施設入退所区分();
+        int indexnew = index - 2 * (page - 1);
+        if (施設入退所情報EntityList != null && !施設入退所情報EntityList.isEmpty() && 施設入退所情報EntityList.size() - 1 >= indexnew) {
+            ShisetsuNyutaishojohoEntity 施設入退所情報Entity = 施設入退所情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 施設入退所情報EntityList.size() <= 5)) {
+                source.shisetsuNyutaishoKbn = RString.EMPTY;
+            } else {
+                source.shisetsuNyutaishoKbn = 超えた;
             }
             source.listShisetsuNyutaisho_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (施設入退所情報Entity.get施設入所日() != null) {
@@ -374,10 +409,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setKyotakuKeikaku(JukyushaDaichoReportSource source) {
         List<ItakuKeikakuTodokedejohoEntity> 居宅計画届出情報EntityList = this.帳票出力用受給者台帳.get居宅計画届出情報EntityList();
-        if (居宅計画届出情報EntityList != null && !居宅計画届出情報EntityList.isEmpty() && 居宅計画届出情報EntityList.size() - 1 >= index) {
-            ItakuKeikakuTodokedejohoEntity 居宅計画届出情報Entity = 居宅計画届出情報EntityList.get(index - 2 * (page - 1));
-            if (居宅計画届出情報Entity.get居宅計画区分() != null) {
-                source.kyotakuKeikakuKbn = 居宅計画届出情報Entity.get居宅計画区分();
+        int indexnew = index - 2 * (page - 1);
+        if (居宅計画届出情報EntityList != null && !居宅計画届出情報EntityList.isEmpty() && 居宅計画届出情報EntityList.size() - 1 >= indexnew) {
+            ItakuKeikakuTodokedejohoEntity 居宅計画届出情報Entity = 居宅計画届出情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 居宅計画届出情報EntityList.size() <= 5)) {
+                source.kyotakuKeikakuKbn = RString.EMPTY;
+            } else {
+                source.kyotakuKeikakuKbn = 超えた;
             }
             source.listKyotakuKeikaku_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (居宅計画届出情報Entity.get対象年月() != null) {
@@ -415,10 +453,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setTokureiShisetsuNyutaisho(JukyushaDaichoReportSource source) {
         List<TokureiShisetuNyutaishojohoEntity> 特例施設入退所情報EntityList = this.帳票出力用受給者台帳.get特例施設入退所情報EntityList();
-        if (特例施設入退所情報EntityList != null && !特例施設入退所情報EntityList.isEmpty() && 特例施設入退所情報EntityList.size() - 1 >= index) {
-            TokureiShisetuNyutaishojohoEntity 特例施設入退所情報Entity = 特例施設入退所情報EntityList.get(index - 2 * (page - 1));
-            if (特例施設入退所情報Entity.get特例施設入退所区分() != null) {
-                source.tokureiShisetsuNyutaishoKbn = 特例施設入退所情報Entity.get特例施設入退所区分();
+        int indexnew = index - 2 * (page - 1);
+        if (特例施設入退所情報EntityList != null && !特例施設入退所情報EntityList.isEmpty() && 特例施設入退所情報EntityList.size() - 1 >= indexnew) {
+            TokureiShisetuNyutaishojohoEntity 特例施設入退所情報Entity = 特例施設入退所情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 特例施設入退所情報EntityList.size() <= 5)) {
+                source.tokureiShisetsuNyutaishoKbn = RString.EMPTY;
+            } else {
+                source.tokureiShisetsuNyutaishoKbn = 超えた;
             }
             source.listTokureiShisetsuNyutaisho_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (特例施設入退所情報Entity.get入所日() != null) {
@@ -441,10 +482,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setShiharaiHohoHenko(JukyushaDaichoReportSource source) {
         List<ShiharaHohoHenkojohoEntity> 支払方法変更情報EntityList = this.帳票出力用受給者台帳.get支払方法変更情報EntityList();
-        if (支払方法変更情報EntityList != null && !支払方法変更情報EntityList.isEmpty() && 支払方法変更情報EntityList.size() - 1 >= index) {
-            ShiharaHohoHenkojohoEntity 支払方法変更情報Entity = 支払方法変更情報EntityList.get(index - 2 * (page - 1));
-            if (支払方法変更情報Entity.get支払方法変更区分() != null) {
-                source.shiharaiHohoHenkoKbn = 支払方法変更情報Entity.get支払方法変更区分();
+        int indexnew = index - 2 * (page - 1);
+        if (支払方法変更情報EntityList != null && !支払方法変更情報EntityList.isEmpty() && 支払方法変更情報EntityList.size() - 1 >= indexnew) {
+            ShiharaHohoHenkojohoEntity 支払方法変更情報Entity = 支払方法変更情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 支払方法変更情報EntityList.size() <= 5)) {
+                source.shiharaiHohoHenkoKbn = RString.EMPTY;
+            } else {
+                source.shiharaiHohoHenkoKbn = 超えた;
             }
             source.listShiharaiHohoHenko_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (支払方法変更情報Entity.get給付制限() != null) {
@@ -476,10 +520,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setKyufugakuGengaku(JukyushaDaichoReportSource source) {
         List<KyufugakuGengakujohoEntity> 給付額減額情報EntityList = this.帳票出力用受給者台帳.get給付額減額情報EntityList();
-        if (給付額減額情報EntityList != null && !給付額減額情報EntityList.isEmpty() && 給付額減額情報EntityList.size() - 1 >= index) {
-            KyufugakuGengakujohoEntity 給付額減額情報Entity = 給付額減額情報EntityList.get(index - 2 * (page - 1));
-            if (給付額減額情報Entity.get給付額減額区分() != null) {
-                source.kyufugakuGengakuKbn = 給付額減額情報Entity.get給付額減額区分();
+        int indexnew = index - 2 * (page - 1);
+        if (給付額減額情報EntityList != null && !給付額減額情報EntityList.isEmpty() && 給付額減額情報EntityList.size() - 1 >= indexnew) {
+            KyufugakuGengakujohoEntity 給付額減額情報Entity = 給付額減額情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 給付額減額情報EntityList.size() <= 5)) {
+                source.kyufugakuGengakuKbn = RString.EMPTY;
+            } else {
+                source.kyufugakuGengakuKbn = 超えた;
             }
             source.listKyufugakuGengaku_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (給付額減額情報Entity.get給付制限() != null) {
@@ -508,10 +555,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setShikaku(JukyushaDaichoReportSource source) {
         List<ShikakujohoEntity> 資格情報EntityList = this.帳票出力用受給者台帳.get資格情報EntityList();
-        if (資格情報EntityList != null && !資格情報EntityList.isEmpty() && 資格情報EntityList.size() - 1 >= index) {
-            ShikakujohoEntity 資格情報Entity = 資格情報EntityList.get(index - 2 * (page - 1));
-            if (資格情報Entity.get資格区分() != null) {
-                source.shikakuKbn = 資格情報Entity.get資格区分();
+        int indexnew = index - 2 * (page - 1);
+        if (資格情報EntityList != null && !資格情報EntityList.isEmpty() && 資格情報EntityList.size() - 1 >= indexnew) {
+            ShikakujohoEntity 資格情報Entity = 資格情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 資格情報EntityList.size() <= 5)) {
+                source.shikakuKbn = RString.EMPTY;
+            } else {
+                source.shikakuKbn = 超えた;
             }
             source.listShikaku_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (資格情報Entity.get資格取得日() != null) {
@@ -547,10 +597,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setRoreiFukushiNenkin(JukyushaDaichoReportSource source) {
         List<RoreiFukushiNenkinjohoEntity> 老齢福祉年金情報EntityList = this.帳票出力用受給者台帳.get老齢福祉年金情報EntityList();
-        if (老齢福祉年金情報EntityList != null && !老齢福祉年金情報EntityList.isEmpty() && 老齢福祉年金情報EntityList.size() - 1 >= index) {
-            RoreiFukushiNenkinjohoEntity 老齢福祉年金情報Entity = 老齢福祉年金情報EntityList.get(index - 2 * (page - 1));
-            if (老齢福祉年金情報Entity.get老齢福祉年金区分() != null) {
-                source.roreiFukushiNenkinKbn = 老齢福祉年金情報Entity.get老齢福祉年金区分();
+        int indexnew = index - 2 * (page - 1);
+        if (老齢福祉年金情報EntityList != null && !老齢福祉年金情報EntityList.isEmpty() && 老齢福祉年金情報EntityList.size() - 1 >= indexnew) {
+            RoreiFukushiNenkinjohoEntity 老齢福祉年金情報Entity = 老齢福祉年金情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 老齢福祉年金情報EntityList.size() <= 5)) {
+                source.roreiFukushiNenkinKbn = RString.EMPTY;
+            } else {
+                source.roreiFukushiNenkinKbn = 超えた;
             }
             source.listRoreiFukushiNenkin_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (老齢福祉年金情報Entity.get老福開始日() != null) {
@@ -564,10 +617,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setSeikatsuHogo(JukyushaDaichoReportSource source) {
         List<SeikatsuHogojohoEntity> 生活保護情報EntityList = this.帳票出力用受給者台帳.get生活保護情報EntityList();
-        if (生活保護情報EntityList != null && !生活保護情報EntityList.isEmpty() && 生活保護情報EntityList.size() - 1 >= index) {
-            SeikatsuHogojohoEntity 生活保護情報Entity = 生活保護情報EntityList.get(index - 2 * (page - 1));
-            if (生活保護情報Entity.get生活保護区分() != null) {
-                source.seikatsuHogoKbn = 生活保護情報Entity.get生活保護区分();
+        int indexnew = index - 2 * (page - 1);
+        if (生活保護情報EntityList != null && !生活保護情報EntityList.isEmpty() && 生活保護情報EntityList.size() - 1 >= indexnew) {
+            SeikatsuHogojohoEntity 生活保護情報Entity = 生活保護情報EntityList.get(indexnew);
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 生活保護情報EntityList.size() <= 5)) {
+                source.seikatsuHogoKbn = RString.EMPTY;
+            } else {
+                source.seikatsuHogoKbn = 超えた;
             }
             source.listSeikatsuHogo_1 = new RString(String.valueOf(index - 2 * (page - 1) + 1)).padZeroToLeft(2);
             if (生活保護情報Entity.get生保開始日() != null) {
@@ -584,10 +640,10 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setSentoStep2(JukyushaDaichoReportSource source) {
         if (this.帳票出力用受給者台帳.get要介護認定情報EntityList() != null
-                && !this.帳票出力用受給者台帳.get要介護認定情報EntityList().isEmpty()) {
-            List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
-            if (要介護認定情報EntityList.size() - 1 >= index && 要介護認定情報EntityList.get(index).get先頭Entity() != null) {
-                SentoEntity 先頭Entity = 要介護認定情報EntityList.get(index).get先頭Entity();
+                && this.帳票出力用受給者台帳.get要介護認定情報EntityList().get先頭Entity() != null) {
+            YokaigoNinteiJohoEntity 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
+            if (要介護認定情報EntityList.get先頭Entity() != null) {
+                SentoEntity 先頭Entity = 要介護認定情報EntityList.get先頭Entity();
                 get先頭3(source, 先頭Entity);
 
             }
@@ -714,16 +770,16 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.nigoBango = 先頭Entity.get記号番号();
         }
         if (先頭Entity.get直近管理票() != null) {
-            source.chokukinKanrihyo = new RString(先頭Entity.get直近管理票().toString());
+            source.chokukinKanrihyo = 先頭Entity.get直近管理票().wareki().toDateString();
         }
         if (先頭Entity.get直近実績() != null) {
-            source.chokukinJiseki = new RString(先頭Entity.get直近実績().toString());
+            source.chokukinJiseki = 先頭Entity.get直近実績().wareki().toDateString();
         }
         if (先頭Entity.get直近高額() != null) {
-            source.chokukinKogaku = new RString(先頭Entity.get直近高額().toString());
+            source.chokukinKogaku = 先頭Entity.get直近高額().wareki().toDateString();
         }
         if (先頭Entity.get直近償還() != null) {
-            source.chokukinShokan = new RString(先頭Entity.get直近償還().toString());
+            source.chokukinShokan = 先頭Entity.get直近償還().wareki().toDateString();
         }
         if (先頭Entity.get直近所得段階() != null) {
             source.chokukinShotokuDankai = 先頭Entity.get直近所得段階();
@@ -747,7 +803,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
     }
 
     private JukyushaDaichoReportSource get要介護認定情報1(JukyushaDaichoReportSource source,
-            YokaigoNinteiJohoEntity 要介護認定情報Entity) {
+            NinteiKekkaJohoEntity 要介護認定情報Entity) {
         if (要介護認定情報Entity.get調査依頼日() != null) {
             source.listNinteiUpper_6 = 要介護認定情報Entity.get調査依頼日().wareki().toDateString();
         }
@@ -794,7 +850,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.listNinteiLower_9 = 要介護認定情報Entity.get資格取得前申請();
         }
         if (要介護認定情報Entity.get延期通知書発行日() != null && 要介護認定情報Entity.get延期通知書発行回数() != null) {
-            source.listNinteiUpper_11 = 要介護認定情報Entity.get延期通知書発行日().wareki().toDateString().
+            source.listNinteiUpper_11 = 要介護認定情報Entity.get延期通知書発行日().wareki().toDateString().concat(RString.HALF_SPACE).
                     concat(要介護認定情報Entity.get延期通知書発行回数());
         }
 
@@ -802,7 +858,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
     }
 
     private JukyushaDaichoReportSource get要介護認定情報2(JukyushaDaichoReportSource source,
-            YokaigoNinteiJohoEntity 要介護認定情報Entity) {
+            NinteiKekkaJohoEntity 要介護認定情報Entity) {
         if (要介護認定情報Entity.get資格証明書発行日１() != null) {
             source.listNinteiCenter_11 = 要介護認定情報Entity.get資格証明書発行日１().wareki().toDateString();
         }
@@ -822,18 +878,20 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.listNinteiUpper_15 = 要介護認定情報Entity.get指定医区分();
         }
         if (要介護認定情報Entity.get調査委託先コード() != null && 要介護認定情報Entity.get調査委託先名() != null) {
-            source.listNinteiCenter_12 = 要介護認定情報Entity.get調査委託先コード().
+            source.listNinteiCenter_12 = 要介護認定情報Entity.get調査委託先コード().concat(RString.HALF_SPACE).
                     concat(要介護認定情報Entity.get調査委託先名());
         }
         if (要介護認定情報Entity.get調査員コード() != null && 要介護認定情報Entity.get調査員名() != null) {
-            source.listNinteiCenter_13 = 要介護認定情報Entity.get調査員コード().concat(要介護認定情報Entity.get調査員名());
+            source.listNinteiCenter_13 = 要介護認定情報Entity.get調査員コード()
+                    .concat(RString.HALF_SPACE).concat(要介護認定情報Entity.get調査員名());
         }
         if (要介護認定情報Entity.get主治医医療機関コード() != null && 要介護認定情報Entity.get主治医医療機関名() != null) {
-            source.listNinteiLower_11 = 要介護認定情報Entity.get主治医医療機関コード().
-                    concat(要介護認定情報Entity.get主治医医療機関名());
+            source.listNinteiLower_11 = 要介護認定情報Entity.get主治医医療機関コード()
+                    .concat(RString.HALF_SPACE).concat(要介護認定情報Entity.get主治医医療機関名());
         }
         if (要介護認定情報Entity.get主治医コード() != null && 要介護認定情報Entity.get主治医名() != null) {
-            source.listNinteiLower_12 = 要介護認定情報Entity.get主治医コード().concat(要介護認定情報Entity.get主治医名());
+            source.listNinteiLower_12 = 要介護認定情報Entity.get主治医コード()
+                    .concat(RString.HALF_SPACE).concat(要介護認定情報Entity.get主治医名());
         }
         if (要介護認定情報Entity.get認定審査会意見() != null) {
             source.listNinteiCenter_14 = 要介護認定情報Entity.get認定審査会意見();
@@ -893,5 +951,56 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.listShikaku_16 = 資格情報Entity.get解除事由().get名称();
         }
         return source;
+    }
+
+    private void set区分1(JukyushaDaichoReportSource source) {
+        if (this.帳票出力用受給者台帳.get負担限度額認定情報EntityList().size() > 5) {
+            source.futanGendogakuNinteiKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get社福法人軽減情報EntityList().size() > 5) {
+            source.shaFukuKeigenKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get利用者負担減免情報EntityList().size() > 5) {
+            source.riyoshaFutanGenmenKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get訪問介護等減額情報EntityList().size() > 5) {
+            source.honmonKaigoRiyoshaFutanGengakuKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get標準負担減額情報EntityList().size() > 5) {
+            source.hyojunFutanGengakuKbn = 超えた;
+        }
+    }
+
+    private void set区分2(JukyushaDaichoReportSource source) {
+        if (this.帳票出力用受給者台帳.get特別地域加算減免情報EntityList().size() > 5) {
+            source.tokubetsuChiikiKasanGenmenKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get施設入退所情報EntityList().size() > 5) {
+            source.shisetsuNyutaishoKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get居宅計画届出情報EntityList().size() > 5) {
+            source.kyotakuKeikakuKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get特例施設入退所情報EntityList().size() > 5) {
+            source.tokureiShisetsuNyutaishoKbn = 超えた;
+        }
+    }
+
+    private void set区分3(JukyushaDaichoReportSource source) {
+        if (this.帳票出力用受給者台帳.get支払方法変更情報EntityList().size() > 5) {
+            source.shiharaiHohoHenkoKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get給付額減額情報EntityList().size() > 5) {
+            source.kyufugakuGengakuKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get資格情報EntityList().size() > 5) {
+            source.shikakuKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get老齢福祉年金情報EntityList().size() > 5) {
+            source.roreiFukushiNenkinKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get生活保護情報EntityList().size() > 5) {
+            source.seikatsuHogoKbn = 超えた;
+        }
     }
 }

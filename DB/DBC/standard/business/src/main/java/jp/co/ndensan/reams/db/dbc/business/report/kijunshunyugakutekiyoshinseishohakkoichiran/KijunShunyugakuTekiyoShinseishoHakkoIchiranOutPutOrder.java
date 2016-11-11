@@ -19,19 +19,19 @@ public enum KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder implements IR
     /**
      * 郵便番号
      */
-    郵便番号("0001", "郵便番号", "\"ShikibetsuTaisho\".\"yubinNo\""),
+    郵便番号("0001", "郵便番号", "\"Atesaki_yubinNo\""),
     /**
      * 町域コード
      */
-    町域コード("0002", "町域コード", "\"ShikibetsuTaisho\".\"choikiCode\""),
+    町域コード("0002", "町域コード", "\"Atesaki_choikiCode\""),
     /**
      * 行政区コード
      */
-    行政区コード("0004", "行政区コード", "\"ShikibetsuTaisho\".\"gyoseikuCode\""),
+    行政区コード("0004", "行政区コード", "\"Atesaki_gyoseikuCode\""),
     /**
      * 世帯コード
      */
-    世帯コード("0008", "世帯コード", "T2.\"shotaiCode\""),
+    世帯コード("0008", "世帯コード", "\"ShikibetsuTaisho\".\"setaiCode\""),
     /**
      * 市町村コード
      */

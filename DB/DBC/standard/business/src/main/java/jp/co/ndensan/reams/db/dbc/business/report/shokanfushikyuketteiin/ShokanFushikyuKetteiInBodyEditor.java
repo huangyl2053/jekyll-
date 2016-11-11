@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.Shokan
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin.ShokanbaraiFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -34,6 +36,8 @@ public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiIn
     private static final RString コロン = new RString("：");
     private static final RString アスタリスク = new RString("*");
     private static final RString 更新DB有無_有 = new RString("1");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -94,7 +98,12 @@ public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiIn
         } else {
             source.listDBKoshinUmu_1 = RString.EMPTY;
         }
-        source.shikibetuCode = 帳票出力対象データ.get識別コード();
+        if (帳票出力対象データ != null && 帳票出力対象データ.get識別コード() != null) {
+            source.shikibetuCode = 帳票出力対象データ.get識別コード();
+        } else {
+            source.shikibetuCode = ShikibetsuCode.EMPTY;
+        }
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_2);
         return source;
     }
 

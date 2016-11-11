@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.business.core.atenasealcreate.AtenaSealCreateR
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba090010.AtenaSealCreateProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.AtenaSealCreateRelate4001Entity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.atenasealcreate.DbTAtenaSealCreateTempTableEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
@@ -27,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 宛名シール作成、抽出対象者が受給認定申請中を除くの場合、データを作成します。
+ * 宛名識別対象一時テーブル3の作成、データを作成します。
  *
  * @reamsid_L DBA-1210-030 zhengsongling
  */
@@ -37,9 +39,18 @@ public class JukyuNinteiShinseityuIgaiProcess extends BatchProcessBase<AtenaSeal
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.atenasealcreate."
             + "IAtenaSealCreateJukyuNinteiShinseityuIgaiMapper.getJukyuNinteiShinseityuIgai");
     private static final RString TABLE_宛名識別対象一時テーブル3 = new RString("DbWT2009AtenaShikibetuTaisyou3");
+    private static final RString TABLE_宛名識別対象一時テーブル2 = new RString("DbWT2009AtenaShikibetuTaisyou2");
     private AtenaSealCreateProcessParameter processParamter;
+    private KoikiZenShichosonJoho koikiZenShichosonJoho;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル2;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 宛名識別対象一時テーブル3;
+
+    @Override
+    protected void initialize() {
+        koikiZenShichosonJoho = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records().get(0);
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -57,12 +68,14 @@ public class JukyuNinteiShinseityuIgaiProcess extends BatchProcessBase<AtenaSeal
 
     @Override
     protected void createWriter() {
+        宛名識別対象一時テーブル2 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル2,
+                DbTAtenaSealCreateTempTableEntity.class);
         宛名識別対象一時テーブル3 = new BatchEntityCreatedTempTableWriter(TABLE_宛名識別対象一時テーブル3,
                 DbTAtenaSealCreateTempTableEntity.class);
     }
 
     @Override
     protected void process(AtenaSealCreateRelate4001Entity entity) {
-        宛名識別対象一時テーブル3.insert(new AtenaSealCreateResult().set宛名識別対象一時テーブル3(entity, processParamter));
+        宛名識別対象一時テーブル3.insert(new AtenaSealCreateResult().set宛名識別対象一時テーブル3(entity, processParamter, koikiZenShichosonJoho));
     }
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC5000011;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC140010.DBC140010_JukyushaKyufujissekiDaichoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC140020.DBC140020_JukyushaKyufujissekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5000011.DBC5000011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5000011.DBC5000011TransitionEventName;
@@ -13,6 +14,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5000011.Juky
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5000011.JukyushaKyufuJissekiDaichoHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.servicechushutsukbn.ServiceChushutsuKbn;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -20,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 受給者給付実績一覧表発行 のDivControllerクラスです。
@@ -156,16 +161,24 @@ public class JukyushaKyufuJissekiDaicho {
      * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnJigyoshaNoFrom_onBeforeOpen(JukyushaKyufuJissekiDaichoDiv div) {
+        JigyoshaMode mode = new JigyoshaMode();
+        mode.setサービス種類抽出区分(ServiceChushutsuKbn.保険給付.getコード());
+        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
+        div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(div).respond();
     }
 
     /**
      * 「事業者番号開始検索」のメソッドます。
      *
-     * @param div JukyushaKyufuJissekiDaichoDiv
+     * @param div JukyushaKyufuJissekiDaichoDivgg
      * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnJigyoshaNoFrom_onOkClose(JukyushaKyufuJissekiDaichoDiv div) {
+        JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
+        if (!RString.isNullOrEmpty(mode.getJigyoshaNo().value()) && mode.getJigyoshaNo().value() != null) {
+            div.getTxtJigyoshaNoFrom().setValue(mode.getJigyoshaNo().value());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -176,6 +189,10 @@ public class JukyushaKyufuJissekiDaicho {
      * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnJigyoshaNoTo_onBeforeOpen(JukyushaKyufuJissekiDaichoDiv div) {
+        JigyoshaMode mode = new JigyoshaMode();
+        mode.setサービス種類抽出区分(ServiceChushutsuKbn.保険給付.getコード());
+        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
+        div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(div).respond();
     }
 
@@ -186,6 +203,10 @@ public class JukyushaKyufuJissekiDaicho {
      * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnJigyoshaNoTo_onOkClose(JukyushaKyufuJissekiDaichoDiv div) {
+        JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
+        if (!RString.isNullOrEmpty(mode.getJigyoshaNo().value()) && mode.getJigyoshaNo().value() != null) {
+            div.getTxtJigyoshaNoTo().setValue(mode.getJigyoshaNo().value());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -196,6 +217,10 @@ public class JukyushaKyufuJissekiDaicho {
      * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnKeikakuSakuseiJigyoshoNo_onBeforeOpen(JukyushaKyufuJissekiDaichoDiv div) {
+        JigyoshaMode mode = new JigyoshaMode();
+        mode.setサービス種類抽出区分(ServiceChushutsuKbn.保険給付.getコード());
+        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
+        div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(div).respond();
     }
 
@@ -206,17 +231,31 @@ public class JukyushaKyufuJissekiDaicho {
      * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnKeikakuSakuseiJigyoshoNo_onOkClose(JukyushaKyufuJissekiDaichoDiv div) {
+        JigyoshaMode mode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
+        if (!RString.isNullOrEmpty(mode.getJigyoshaNo().value()) && mode.getJigyoshaNo().value() != null) {
+            div.getTxtKeikakuSakuseiJigyoshoNo().setValue(mode.getJigyoshaNo().value());
+        }
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「実行する」（台帳用）「実行する」（一覧表用）のメソッドます。
+     * 「実行する」（一覧表用）のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
      * @return ResponseData<DBC140020_JukyushaKyufujissekiIchiranParameter>
      */
     public ResponseData<DBC140020_JukyushaKyufujissekiIchiranParameter> onClick_btnParameter(JukyushaKyufuJissekiDaichoDiv div) {
         return ResponseData.of(getHandler(div).setバッチパラメータの設定()).respond();
+    }
+
+    /**
+     * 「実行する」（台帳用）のメソッドます。
+     *
+     * @param div JukyushaKyufuJissekiDaichoDiv
+     * @return ResponseData<DBC140010_JukyushaKyufujissekiDaichoParameter>
+     */
+    public ResponseData<DBC140010_JukyushaKyufujissekiDaichoParameter> onClick_btnParameterDBC140010(JukyushaKyufuJissekiDaichoDiv div) {
+        return ResponseData.of(getHandler(div).setバッチパラメータの設定1()).respond();
     }
 
     /**

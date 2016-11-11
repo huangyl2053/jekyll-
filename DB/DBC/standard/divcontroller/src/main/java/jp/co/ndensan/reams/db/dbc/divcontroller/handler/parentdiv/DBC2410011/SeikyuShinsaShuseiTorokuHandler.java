@@ -82,7 +82,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     public void onLoad(RString menuID) {
         if (DBCMNE_1004.equals(menuID)) {
             div.setTitle(TITLE_1004);
-            div.getChkSerchKetteiZumi().setVisible(true);
+            div.getChkSerchKetteiZumi().setVisible(false);
         }
         if (DBCMNE_1005.equals(menuID)) {
             div.setTitle(TITLE_1005);
@@ -207,7 +207,12 @@ public class SeikyuShinsaShuseiTorokuHandler {
             }
         }
         if (修正.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
+            div.getJutakuTesuryoSeikyuKetteiPanel().setDisabled(false);
             div.getJutakuTesuryoSeikyuShosaiPanel().setDisabled(false);
+            div.getTxtRiyushoSakuseiTanka().setDisabled(false);
+        }
+        if (削除.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
+            div.getTxtRiyushoSakuseiTanka().setDisabled(true);
         }
         int index = div.getDgSeikyu().getClickedRowId();
         List<SeikyuShinsaShuseiTorokuBusiness> 住宅改修理由書事業者情報リスト = ViewStateHolder
@@ -231,7 +236,44 @@ public class SeikyuShinsaShuseiTorokuHandler {
             div.getDgSeikyuMeisai().setDataSource(rowList);
         }
         set請求情報詳細(住宅改修理由書事業者情報);
+        明細照会情報();
         審査画面一覧(住宅改修理由書事業者情報);
+    }
+
+    private void 明細照会情報() {
+        SeikyuShinsaShuseiTorokuBusiness 事業者情報明細 = ViewStateHolder.
+                get(ViewStateKeys.住宅改修理由書事業者情報明細, SeikyuShinsaShuseiTorokuCollect.class).get事業者情報List().get(0);
+        div.getSeikyuMeisaiShosaiPanel().getTxtHihokenshaNo().setValue(事業者情報明細.getDbT3095().get被保険者番号().value());
+        div.getSeikyuMeisaiShosaiPanel().getTxtHihokenshaName().setValue(事業者情報明細.getDbT3095().get介護住宅改修住宅所有者().value());
+        if (事業者情報明細.getDbT3095().get介護住宅改修理由書作成年月日() != null) {
+            div.getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().getTxtRiyushoSakuseiYMD().setValue(new RDate(事業者情報明細
+                    .getDbT3095().get介護住宅改修理由書作成年月日().toString()));
+        }
+        div.getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().getTxtRiyushoSakuseishaMeiKana().
+                setValue(事業者情報明細.getDbT3095().get介護住宅改修理由書作成者名カナ());
+        if (事業者情報明細.getDbT3095().get介護住宅改修理由書作成者名() != null) {
+            div.getSeikyuMeisaiShosaiPanel().getJutakuKaishuRiyushoPanel().getTxtRiyushoSakuseishaMei().setValue(事業者情報明細
+                    .getDbT3095().get介護住宅改修理由書作成者名().value());
+        }
+        if (事業者情報明細.getDbT3095().get介護住宅改修理由書作成申請年月日() != null) {
+            div.getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtKaishuShikyuShinseiYMD().setValue(new RDate(事業者情報明細
+                    .getDbT3095().get介護住宅改修理由書作成申請年月日().toString()));
+        }
+        if (事業者情報明細.getDbT3095().get介護住宅改修着工年月日() != null) {
+            div.getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtJutakuKaishuChakkoYMD().setValue(new RDate(事業者情報明細
+                    .getDbT3095().get介護住宅改修着工年月日().toString()));
+        }
+        if (事業者情報明細.getDbT3095().get介護住宅改修事業者名称() != null) {
+            div.getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtJutakuKaishuJigyoshaMeisho().
+                    setValue(事業者情報明細.getDbT3095().get介護住宅改修事業者名称().value());
+        }
+        div.getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtKaishuTaishoJutakuJusho().
+                setValue(事業者情報明細.getDbT3095().get改修対象住宅住所());
+        div.getSeikyuMeisaiShosaiPanel().getJutakuKaishuPanel().getTxtKaishuNaiyokashoKibo().
+                setValue(事業者情報明細.getDbT3095().get改修内容_箇所及び規模());
+        div.getTxtRiyushoSakuseiTanka().setValue(事業者情報明細.getDbT3096().get介護住宅改修理由書作成単価());
+        div.getTxtRiyushoSakuseiKensu().setValue(事業者情報明細.getDbT3096().get介護住宅改修理由書作成件数());
+        div.getTxtRiyushoSakuseiSeikyuKingaku().setValue(事業者情報明細.getDbT3096().get介護住宅改修理由書作成請求金額());
     }
 
     /**
@@ -240,6 +282,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
      */
     private void 審査画面一覧(SeikyuShinsaShuseiTorokuBusiness 住宅改修理由書事業者情報) {
         if (DBCMNE_1005.equals(ResponseHolder.getMenuID()) && 住宅改修理由書事業者情報.getDbT3094() != null) {
+
             if (住宅改修理由書事業者情報.getDbT3094().get支給_不支給決定年月日() != null) {
                 div.getJutakuTesuryoSeikyuKetteiPanel().getTxtKetteiYMD().setValue(new RDate(住宅改修理由書事業者情報.getDbT3094().
                         get支給_不支給決定年月日().toString()));
@@ -247,10 +290,10 @@ public class SeikyuShinsaShuseiTorokuHandler {
             div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().setSelectedKey(住宅改修理由書事業者情報.getDbT3094().
                     get支給_不支給区分());
             if (KEY_0.equals(住宅改修理由書事業者情報.getDbT3094().get支給_不支給区分())) {
-                div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().setDisabled(true);
+                div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().setSelectedKey(KEY_0);
             }
             if (KEY_1.equals(住宅改修理由書事業者情報.getDbT3094().get支給_不支給区分())) {
-                div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().setDisabled(false);
+                div.getJutakuTesuryoSeikyuKetteiPanel().getRadShikyuFushikyuKubun().setSelectedKey(KEY_1);
             }
             if (住宅改修理由書事業者情報.getDbT3094().get住宅改修理由書作成手数料支払予定日() != null) {
                 div.getJutakuTesuryoSeikyuKetteiPanel().getTxtTesuryoShiharaiYoteiYMD().setValue(new RDate(
@@ -267,7 +310,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
         if (住宅改修理由書事業者情報.getDbT3096().get申請年月日() != null && !住宅改修理由書事業者情報.getDbT3096().get申請年月日().isEmpty()) {
             div.getTxtShinseiYMD().setValue(new RDate(住宅改修理由書事業者情報.getDbT3096().get申請年月日().toString()));
         }
-        if (住宅改修理由書事業者情報.getDbT3096().get請求情報作成日() != null && !住宅改修理由書事業者情報.getDbT3096().get申請年月日().isEmpty()) {
+        if (住宅改修理由書事業者情報.getDbT3096().get請求情報作成日() != null) {
             div.getTxtSeikyuSakuseiYMD().setValue(new RDate(住宅改修理由書事業者情報.getDbT3096().get請求情報作成日().toString()));
         }
         if (住宅改修理由書事業者情報.getDbT3096().get識別コード() != null) {
@@ -291,7 +334,9 @@ public class SeikyuShinsaShuseiTorokuHandler {
                     set金融機関支店(kinyuKikanShiten).build(), kinyuKikanShiten.get支店コード(), kijunYMD);
             div.getJutakuTesuryoSeikyuShosaiPanel().getCcdKinyuKikanInput().search(kinyuKikan.get金融機関コード(), new KinyuKikanShitenCode(支店コード), kijunYMD);
         }
-        div.getJutakuTesuryoSeikyuShosaiPanel().getDdlKozaShubetsu().setSelectedKey(住宅改修理由書事業者情報.getDbT3096().get口座種別());
+        if (住宅改修理由書事業者情報.getDbT3096().get口座種別() != null) {
+            div.getJutakuTesuryoSeikyuShosaiPanel().getDdlKozaShubetsu().setSelectedKey(住宅改修理由書事業者情報.getDbT3096().get口座種別());
+        }
         div.getJutakuTesuryoSeikyuShosaiPanel().getTxtKozaNo().setValue(住宅改修理由書事業者情報.getDbT3096().get口座番号());
         div.getJutakuTesuryoSeikyuShosaiPanel().getTxtKozaNameKana().setValue(住宅改修理由書事業者情報.getDbT3096().get口座名義人());
         div.getJutakuTesuryoSeikyuShosaiPanel().getTxtKozaName().setValue(住宅改修理由書事業者情報.getDbT3096().get口座名義人カナ());
@@ -390,24 +435,28 @@ public class SeikyuShinsaShuseiTorokuHandler {
         JutakuKaishuRiyushoTesuryoShukei 出力集計 = 住宅改修理由書事業者明細情報.getDbT3096();
         if (div.getDgSeikyuMeisai().getActiveRow() != null) {
             出力明細 = 出力明細.createBuilderForEdit().set対象外フラグ(div.getDgSeikyuMeisai().getActiveRow().getChkTaishogaiFlag().isValue()).build();
-            出力集計 = 集計更新(出力集計);
         }
+        出力集計 = 集計更新(出力集計);
         出力明細 = 出力明細.modifiedModel();
         出力集計 = 出力集計.modifiedModel();
         if (DBCMNE_1005.equals(ResponseHolder.getMenuID()) && 出力決定 != null) {
             出力決定 = 決定更新(出力決定);
             出力決定 = 出力決定.modifiedModel();
         } else if (DBCMNE_1005.equals(ResponseHolder.getMenuID()) && 出力決定 == null) {
+            int index = div.getDgSeikyuMeisai().getClickedRowId();
+            if (index == -1) {
+                index = index + 1;
+            }
             SeikyuShinsaShuseiTorokuBusiness 事業者情報明細 = ViewStateHolder.get(ViewStateKeys.住宅改修理由書事業者情報明細,
-                    SeikyuShinsaShuseiTorokuCollect.class).get事業者情報List().get(div.getDgSeikyuMeisai().getClickedRowId());
+                    SeikyuShinsaShuseiTorokuCollect.class).get事業者情報List().get(index);
             ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
             JigyoshaNo 事業者番号 = JigyoshaNo.EMPTY;
             RString 集計関連付け番号 = RString.EMPTY;
-            if (事業者情報明細.getDbT3096().get証記載保険者番号().isEmpty() && 事業者情報明細.getDbT3096().get証記載保険者番号() != null) {
-                証記載保険者番号 = new ShoKisaiHokenshaNo(事業者情報明細.getDbT3096().get証記載保険者番号().toString());
+            if (!事業者情報明細.getDbT3096().get証記載保険者番号().isEmpty() && 事業者情報明細.getDbT3096().get証記載保険者番号() != null) {
+                証記載保険者番号 = new ShoKisaiHokenshaNo(事業者情報明細.getDbT3096().get証記載保険者番号().value().toString());
             }
             if (!事業者情報明細.getDbT3096().get介護住宅改修理由書作成事業者番号().isEmpty() && 事業者情報明細.getDbT3096().get介護住宅改修理由書作成事業者番号() != null) {
-                事業者番号 = new JigyoshaNo(事業者情報明細.getDbT3096().get介護住宅改修理由書作成事業者番号().toString());
+                事業者番号 = new JigyoshaNo(事業者情報明細.getDbT3096().get介護住宅改修理由書作成事業者番号().value().toString());
             }
             if (!事業者情報明細.getDbT3096().get集計関連付け番号().isEmpty()) {
                 集計関連付け番号 = 事業者情報明細.getDbT3096().get集計関連付け番号();
@@ -426,7 +475,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
         if (div.getTxtShinseiYMD().getValue() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set申請年月日(new FlexibleDate(div.getTxtShinseiYMD().getValue().toString())).build();
         }
-        if (div.getTxtUketsukeYMD() != null) {
+        if (div.getTxtUketsukeYMD().getValue() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set受付年月日(new FlexibleDate(div.getTxtUketsukeYMD().getValue().toString())).build();
         }
         出力集計 = 出力集計.createBuilderForEdit().set識別コード(ShikibetsuCode.EMPTY).build();
@@ -438,6 +487,9 @@ public class SeikyuShinsaShuseiTorokuHandler {
         if (div.getCcdKinyuKikanInput().get金融機関支店().get支店コード() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set支店コード(new RString(div.getCcdKinyuKikanInput().get金融機関支店().
                     get支店コード().toString())).build();
+        }
+        if (div.getTxtSeikyuSakuseiYMD().getValue() != null) {
+            出力集計 = 出力集計.createBuilderForEdit().set請求情報作成日(new FlexibleDate(div.getTxtSeikyuSakuseiYMD().getValue().toString())).build();
         }
         出力集計 = 出力集計.createBuilderForEdit().set口座種別(div.getDdlKozaShubetsu().getSelectedKey()).build();
         if (div.getTxtKozaNo().getValue() != null) {
@@ -472,7 +524,6 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     private JutakuKaishuRiyushoTesuryoKettei 決定追加(JutakuKaishuRiyushoTesuryoKettei 出力決定, SeikyuShinsaShuseiTorokuBusiness 事業者情報明細) {
-        // TODO  シート「DB出力(決定)」の16行目、仕様書の項目「決定年月日」は削除です、しかし、「決定年月日」はＤＢに存在する。    QA#1946
         出力決定.createBuilderForEdit().set証記載保険者番号(new ShoKisaiHokenshaNo(事業者情報明細.getDbT3096().get証記載保険者番号().value().toString())).build();
         if (div.getTxtJigyoshaNo().getValue() != null) {
             出力決定 = 出力決定.createBuilderForEdit().set介護住宅改修理由書作成事業者番号(new JigyoshaNo(div.getTxtJigyoshaNo().getValue().
@@ -504,9 +555,13 @@ public class SeikyuShinsaShuseiTorokuHandler {
      * @return SeikyuShinsaShuseiTorokuBusiness
      */
     public SeikyuShinsaShuseiTorokuBusiness 削除更新(SeikyuShinsaShuseiTorokuBusiness business) {
+        int index = div.getDgSeikyuMeisai().getClickedRowId();
+        if (index == -1) {
+            index = index + 1;
+        }
         SeikyuShinsaShuseiTorokuBusiness 住宅改修理由書事業者明細情報 = ViewStateHolder.get(ViewStateKeys.住宅改修理由書事業者情報明細,
                 SeikyuShinsaShuseiTorokuCollect.class
-        ).get事業者情報List().get(div.getDgSeikyuMeisai().getClickedRowId());
+        ).get事業者情報List().get(index);
         JutakuKaishuRiyushoTesuryoKettei 出力決定 = 住宅改修理由書事業者明細情報.getDbT3094();
         JutakuKaishuRiyushoTesuryoMeisai 出力明細 = 住宅改修理由書事業者明細情報.getDbT3095();
         JutakuKaishuRiyushoTesuryoShukei 出力集計 = 住宅改修理由書事業者明細情報.getDbT3096();

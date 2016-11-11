@@ -91,8 +91,8 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
             boolean is未来基準日 = getResult(Boolean.class, バッチパラメータの取得,
                     TokuteiKojinJohoTeikyoSetParameterProcess.ISMIRAIDATE);
             if (!is未来基準日) {
-                executeStep(処理日付管理マスタの更新);
                 setバッチパラメータ();
+                executeStep(処理日付管理マスタの更新);
                 exeバッチ処理();
             }
         }
@@ -290,6 +290,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         SougouJigyouJyohouProcessParameter processParameter = parameter.toSougouJigyouJyohouProcessParameter();
         processParameter.set版番号(版番号);
         processParameter.set特定個人情報名コード(特定個人情報名コード);
+        processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
         return loopBatch(KyuufuJyohouProcess.class).arguments(processParameter).define();
     }
 
@@ -303,6 +304,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         SougouJigyouJyohouProcessParameter processParameter = parameter.toSougouJigyouJyohouProcessParameter();
         processParameter.set版番号(版番号);
         processParameter.set特定個人情報名コード(特定個人情報名コード);
+        processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
         return loopBatch(KyuufuJyohouUpdateProcess.class).arguments(processParameter).define();
     }
 

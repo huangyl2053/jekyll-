@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka8batch.TokuchoHeijunkaHachiBatchTaishogaiTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaCalculateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaCalculateHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaCalculateTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.KuBunnGaTsurakuTempEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
@@ -110,7 +110,7 @@ public class CreatCalculateEntity {
      * @param 賦課計算entity FukaCalculateEntity
      */
     public void creat賦課Entity(FukaCalculateTempEntity entity,
-            FukaCalculateEntity 賦課計算entity) {
+            FukaCalculateHachiEntity 賦課計算entity) {
         set介護賦課Entity(entity, 賦課計算entity);
     }
 
@@ -121,12 +121,12 @@ public class CreatCalculateEntity {
      * @param 賦課計算entity FukaCalculateEntity
      */
     public void creat期別金額Entity(FukaCalculateTempEntity entity,
-            FukaCalculateEntity 賦課計算entity) {
+            FukaCalculateHachiEntity 賦課計算entity) {
         set期別金額(entity, 賦課計算entity);
         金額設定(entity, 賦課計算entity);
     }
 
-    private void 金額設定(FukaCalculateTempEntity tempEntity, FukaCalculateEntity fukaTmpEntity) {
+    private void 金額設定(FukaCalculateTempEntity tempEntity, FukaCalculateHachiEntity fukaTmpEntity) {
         TokuchoHeijunkaHachiBatchTaishogaiTempEntity 賦課の情報 = fukaTmpEntity.get賦課の情報();
         if (徴収方法_特別.equals(賦課の情報.getChoshuHouhou())) {
             特別徴収金額設定(tempEntity, 賦課の情報.getKi());
@@ -210,7 +210,7 @@ public class CreatCalculateEntity {
     }
 
     private void set介護賦課Entity(FukaCalculateTempEntity entity,
-            FukaCalculateEntity 賦課計算entity) {
+            FukaCalculateHachiEntity 賦課計算entity) {
         TokuchoHeijunkaHachiBatchTaishogaiTempEntity 対象者データEntity = 賦課計算entity.get賦課の情報();
         if (対象者データEntity != null) {
             entity.setDbT2002_choteiNendo(対象者データEntity.getChoteiNendo());
@@ -266,7 +266,7 @@ public class CreatCalculateEntity {
         }
     }
 
-    private void set期別金額(FukaCalculateTempEntity 中間Entity, FukaCalculateEntity entity) {
+    private void set期別金額(FukaCalculateTempEntity 中間Entity, FukaCalculateHachiEntity entity) {
         TokuchoHeijunkaHachiBatchTaishogaiTempEntity 対象者データEntity = entity.get賦課の情報();
         if (対象者データEntity != null) {
             中間Entity.setTkKibetsuGaku01(対象者データEntity.getTokubetsuChoteigaku01());
@@ -299,7 +299,7 @@ public class CreatCalculateEntity {
      * @param 賦課計算entity FukaCalculateEntity
      */
     public void creat賦課計算Entity(FukaCalculateTempEntity entity,
-            FukaCalculateEntity 賦課計算entity) {
+            FukaCalculateHachiEntity 賦課計算entity) {
         entity.setChoteiNendo(賦課計算entity.getChoteiNendo());
         entity.setFukaNendo(賦課計算entity.getFukaNendo());
         entity.setTsuchishoNo(賦課計算entity.getTsuchishoNo());
@@ -1291,7 +1291,7 @@ public class CreatCalculateEntity {
         }
     }
 
-    private void set口座(FukaCalculateEntity 賦課計算entity, FukaCalculateTempEntity entity) {
+    private void set口座(FukaCalculateHachiEntity 賦課計算entity, FukaCalculateTempEntity entity) {
         if (賦課計算entity.get特定口座() != null && 賦課計算entity.get特定口座().getUaT0310KozaEntity() != null) {
             UaT0310KozaEntity uaT0310Entity = 賦課計算entity.get特定口座().getUaT0310KozaEntity();
             entity.setUaT0310Koza_kozaId(uaT0310Entity.getKozaId());
@@ -1342,7 +1342,7 @@ public class CreatCalculateEntity {
         }
     }
 
-    private void set徴収方法Newest(FukaCalculateEntity 賦課計算entity, FukaCalculateTempEntity entity) {
+    private void set徴収方法Newest(FukaCalculateHachiEntity 賦課計算entity, FukaCalculateTempEntity entity) {
         DbT2001ChoshuHohoEntity 徴収方法Entity = 賦課計算entity.get徴収方法の情報();
         if (徴収方法Entity != null) {
             entity.setDbT2001_fukaNendo(徴収方法Entity.getFukaNendo());
@@ -1382,7 +1382,7 @@ public class CreatCalculateEntity {
         }
     }
 
-    private void set月別Temp(FukaCalculateEntity 賦課計算entity, FukaCalculateTempEntity entity) {
+    private void set月別Temp(FukaCalculateHachiEntity 賦課計算entity, FukaCalculateTempEntity entity) {
         KuBunnGaTsurakuTempEntity 月別Entity = 賦課計算entity.get月別ランク();
         if (月別Entity != null) {
             entity.setKuBunn_hihokenshaNo(月別Entity.getHihokenshaNo());
@@ -1413,7 +1413,7 @@ public class CreatCalculateEntity {
         }
     }
 
-    private void set資格情報Temp(FukaCalculateEntity 賦課計算entity, FukaCalculateTempEntity entity) {
+    private void set資格情報Temp(FukaCalculateHachiEntity 賦課計算entity, FukaCalculateTempEntity entity) {
         DbT1001HihokenshaDaichoEntity 資格Entity = 賦課計算entity.get資格の情報();
         if (資格Entity != null) {
             entity.setHonSanJon_hihokenshaNo(資格Entity.getHihokenshaNo());

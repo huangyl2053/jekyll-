@@ -712,6 +712,32 @@ public class ShokanbaraiJyokyoShokai {
     }
 
     /**
+     * 償還払請求特定入所者介護サービス費用データ取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @return List<ShokanTokuteiNyushoshaKaigoServiceHiyo> List
+     */
+    public ShokanTokuteiNyushoshaKaigoServiceHiyo getTokuteyiNyushosyaKaigoserviceHiyoWithMaxRenban(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> entityList = dbT3050Dac.selectByKeyOrder(
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        if (entityList == null || entityList.isEmpty()) {
+            return null;
+        }
+        return new ShokanTokuteiNyushoshaKaigoServiceHiyo(entityList.get(0));
+    }
+
+    /**
      * 償還払請求緊急時施設療養データ取得
      *
      * @param 被保険者番号 HihokenshaNo

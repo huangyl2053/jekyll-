@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -99,7 +100,18 @@ public class KaigoHihokenshaInfoPanelManger {
         rentaiGimushaDac.save(entity.deleted().toEntity());
         DbT2009RentaiGimushaEntity 計算結果Entity = entity.toEntity();
         計算結果Entity.setRirekiNo(new Decimal(計算結果Entity.getRirekiNo().intValue() + 1));
+        計算結果Entity.setState(EntityDataState.Added);
         rentaiGimushaDac.save(計算結果Entity);
 
+    }
+
+    /**
+     * 主キーに合致する居宅サービス区分支給限度額を削除する。
+     *
+     * @param entity DbT2009RentaiGimushaEntity
+     */
+    public void データを物理削除する(DbT2009RentaiGimushaEntity entity) {
+        entity.initializeMd5();
+        rentaiGimushaDac.delete(entity);
     }
 }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.report.honsanteikekkaicihiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -92,7 +93,6 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
     public RString listUpper_9;
     @ReportItem(name = "listUpper_10", length = 38, order = 36)
     public RString listUpper_10;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listCenter_1", length = 10, order = 37)
     public RString listCenter_1;
     @ReportItem(name = "listCenter_2", length = 9, order = 38)
@@ -173,6 +173,8 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
     public RString listLower_18;
     @ReportItem(name = "listLower_19", length = 18, order = 76)
     public RString listLower_19;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation expandedInformation;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

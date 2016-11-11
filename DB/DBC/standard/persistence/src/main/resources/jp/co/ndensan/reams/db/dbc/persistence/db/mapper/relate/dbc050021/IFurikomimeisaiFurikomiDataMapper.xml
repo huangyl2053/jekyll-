@@ -78,7 +78,7 @@
             <if test="抽出対象 == 1">
                 AND ("DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" = '' OR "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" IS NULL)
             </if>
-            <if test="抽出対象 == 2 and and 対象作成年月日 != null and !対象作成年月日.isEmpty()">
+            <if test="抽出対象 == 2 and 対象作成年月日 != null and !対象作成年月日.isEmpty()">
                 AND "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" = #{対象作成年月日}
             </if>
             <if test="抽出対象 == 2 and (対象作成年月日 == null or 対象作成年月日.isEmpty())">
@@ -174,7 +174,7 @@
         FROM
             "DbWT0510FurikomiMeisai" AS "DbWT0510FurikomiMeisai"
         INNER JOIN
-            rgdb."DbV1001HihokenshaDaichoAlive" AS "DbT1001HihokenshaDaicho"
+            rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON
             "DbWT0510FurikomiMeisai"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
         INNER JOIN
@@ -246,7 +246,7 @@
         FROM
             "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
         WHERE
-           0 <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku" 
+           0 <![CDATA[<]]> 振込明細一時TBL."furikomiKingaku" 
            AND 振込明細一時TBL."kozaDataFlag" = TRUE
         )
         SELECT
@@ -268,12 +268,10 @@
                 振込明細一時TBL."kozaNayoseKey",
                 COUNT(*) AS 件数,
                 SUM(振込明細一時TBL."furikomiKingaku") AS 合計振込金額
-                <!--dataKubunは振込明細一時TBLになし-->
-                <!--,COUNT(DISTINCT(振込明細一時TBL."dataKubun")) AS データ区分件数-->
             FROM
                 "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
             WHERE
-                0 <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku"
+                0 <![CDATA[<]]> 振込明細一時TBL."furikomiKingaku"
                 AND 振込明細一時TBL."kozaDataFlag" = TRUE
             GROUP BY
                 振込明細一時TBL."kozaNayoseKey"
@@ -328,7 +326,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity" 
             fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />
         FROM
             "DbWT0510FurikomiMeisai"
         INNER JOIN
@@ -387,7 +385,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.ResultMap_DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity" 
             fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />,
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3174JigyoKogakuGassanShikyuFushikyuKetteiMapper.allColumns_DbT3174JigyoKogakuGassanShikyuFushikyuKettei" />
         FROM
             "DbWT0510FurikomiMeisai"
         INNER JOIN
@@ -484,7 +482,7 @@
             fetchSize="500" resultOrdered="true">
     SELECT
         "DbWT0510FurikomiMeisai".*
-    FROM "DbWT0510FurikomiMeisai" AS
+    FROM "DbWT0510FurikomiMeisai" AS "DbWT0510FurikomiMeisai"
     INNER JOIN rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
         ON "DbT4001JukyushaDaicho"."hihokenshaNo" = "DbWT0510FurikomiMeisai"."hihokenshaNo"
         AND substring("DbT4001JukyushaDaicho"."jukyuShinseiYMD" from 1 for 6) <![CDATA[<=]]> "DbWT0510FurikomiMeisai"."serviceTeikyoYM"
@@ -525,6 +523,7 @@
 
     <resultMap id="resultMap_FurikomimeisaiDataShikyugakuEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050021.FurikomimeisaiDataShikyugakuEntity">
+        <id column="renban" />
         <result property="名寄せ件数" column="名寄せ件数" />
         <association property="振込明細一時Entity" resultMap="resultMap_DbWT0510FurikomiMeisaiTempEntity"/>
     </resultMap>

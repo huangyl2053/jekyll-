@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KyuhuzissekiJohoSakuseiYoResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KyuhuzissekiJohoSakuseiYoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -36,18 +37,20 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
     private KyuhuzissekiJohoSakuseiYoTempEntity tempTable;
     private List<KyuhuzissekiJohoSakuseiYoResultEntity> emptyResultList;
     private List<KyuhuzissekiJohoSakuseiYoResultEntity> bigestResultList;
-    private static final RString 給付実績情報作成区分_新規 = new RString("1");
     private boolean 開始Flag;
     private boolean emptyFlag;
+    private boolean 審査年月Flag;
     private FlexibleYearMonth 審査年月;
     private HihokenshaNo 被保険者番号;
     private FlexibleYearMonth サービス提供年月;
     private NyuryokuShikibetsuNo 入力識別番号;
     private JigyoshaNo 事業所番号;
     private RString 通し番号;
+    private static final int INT_1 = 1;
 
     @Override
     protected void initialize() {
+        審査年月Flag = true;
         開始Flag = true;
         emptyFlag = false;
         審査年月 = FlexibleYearMonth.EMPTY;
@@ -73,12 +76,14 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
 
     @Override
     protected void process(KyuhuzissekiJohoSakuseiYoResultEntity entity) {
-        if (開始Flag
-                || (被保険者番号.equals(entity.get被保険者番号())
+        if (開始Flag) {
+            set判断引数の値(entity);
+        }
+        if (被保険者番号.equals(entity.get被保険者番号())
                 && サービス提供年月.equals(entity.getサービス提供年月())
                 && 入力識別番号.equals(entity.get入力識別番号())
                 && 事業所番号.equals(entity.get事業所番号())
-                && 通し番号.equals(entity.get通し番号()))) {
+                && 通し番号.equals(entity.get通し番号())) {
             getResultList(entity);
             開始Flag = false;
         } else {
@@ -102,9 +107,11 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
             for (KyuhuzissekiJohoSakuseiYoResultEntity emptyResultEntity : emptyResultList) {
                 getTempTable(emptyResultEntity);
             }
+        } else if (bigestResultList.size() == INT_1) {
+            getTempTable(bigestResultList.get(0));
         } else {
             for (KyuhuzissekiJohoSakuseiYoResultEntity bigestResultEntity : bigestResultList) {
-                if (給付実績情報作成区分_新規.equals(bigestResultEntity.get給付実績情報作成区分コード())) {
+                if (KyufuSakuseiKubun.新規.getコード().equals(bigestResultEntity.get給付実績情報作成区分コード())) {
                     getTempTable(bigestResultEntity);
                 }
             }
@@ -134,9 +141,10 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
             emptyFlag = true;
         } else {
             if (!emptyFlag) {
-                if (開始Flag || 審査年月.equals(entity.get審査年月())) {
+                if (審査年月Flag || 審査年月.equals(entity.get審査年月())) {
                     審査年月 = entity.get審査年月();
                     bigestResultList.add(entity);
+                    審査年月Flag = false;
                 }
 
                 if (審査年月.isBefore(entity.get審査年月())) {
@@ -154,5 +162,7 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
         入力識別番号 = entity.get入力識別番号();
         事業所番号 = entity.get事業所番号();
         通し番号 = entity.get通し番号();
+        審査年月Flag = true;
     }
+
 }

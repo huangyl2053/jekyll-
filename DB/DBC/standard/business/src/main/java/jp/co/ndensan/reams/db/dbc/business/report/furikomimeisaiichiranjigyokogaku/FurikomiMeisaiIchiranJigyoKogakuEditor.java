@@ -82,7 +82,7 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
                 AccessLogger.log(AccessLogType.照会, personalData);
             }
         }
-
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), 文_被保険者番号, source.list1_1);
         return source;
     }
 

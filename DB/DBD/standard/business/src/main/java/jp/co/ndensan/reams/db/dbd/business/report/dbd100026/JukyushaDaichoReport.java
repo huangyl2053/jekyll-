@@ -64,11 +64,11 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
             int page14 = 0;
             int page15 = 0;
 
-            int size1 = this.帳票出力用受給者台帳.get要介護認定情報EntityList().size();
+            int size1 = this.帳票出力用受給者台帳.get要介護認定情報EntityList().get要介護認定情報().size();
             if (size1 % NOCOUNT_7 == 0) {
-                page1 = this.帳票出力用受給者台帳.get要介護認定情報EntityList().size() / NOCOUNT_7;
+                page1 = this.帳票出力用受給者台帳.get要介護認定情報EntityList().get要介護認定情報().size() / NOCOUNT_7;
             } else {
-                page1 = this.帳票出力用受給者台帳.get要介護認定情報EntityList().size() / NOCOUNT_7 + 1;
+                page1 = this.帳票出力用受給者台帳.get要介護認定情報EntityList().get要介護認定情報().size() / NOCOUNT_7 + 1;
             }
 
             int size2 = this.帳票出力用受給者台帳.get負担限度額認定情報EntityList().size();
@@ -189,7 +189,7 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
             int page = 1;
             int pageMax = 1;
             for (int index = 0; index < NOCOUNT_7; index++) {
-                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax);
+                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax, ONE);
                 IJukyushaDaichoBuilder builder = new JukyushaDaichoBuilder(bodyEditor);
                 writer.writeLine(builder);
             }
@@ -209,7 +209,7 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
 
         for (int page = 1; page <= pageMax; page++) {
             for (int index = NOCOUNT_7 * (page - 1); index < NOCOUNT_7 * page; index++) {
-                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax);
+                IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax, ZERO);
                 IJukyushaDaichoBuilder builder = new JukyushaDaichoBuilder(bodyEditor);
                 writer.writeLine(builder);
             }

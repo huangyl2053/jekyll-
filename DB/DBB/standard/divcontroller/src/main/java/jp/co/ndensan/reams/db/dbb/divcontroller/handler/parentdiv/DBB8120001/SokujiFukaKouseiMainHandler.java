@@ -1067,7 +1067,7 @@ public class SokujiFukaKouseiMainHandler {
         }
 
         RString 月の期_翌年度5月 = 期月リスト.get月の期(Tsuki.翌年度5月).get期();
-        期 = Integer.valueOf(月の期_翌年度4月.toString());
+        期 = Integer.valueOf(月の期_翌年度5月.toString());
         if (期 != NUM_0) {
             tablePanel.getLblFuchoKiYoku05().setText(getFormat期(月の期_翌年度5月));
             tablePanel.getLblFuchoKoseiMaeValueYoku05().setText(更正前現年度賦課 == null ? RString.EMPTY

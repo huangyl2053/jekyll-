@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.gemmen;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
+import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.gemmen.KaigoHokenryoGenmenKetteiTsuchishoYokoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -87,7 +88,7 @@ public class GenmenKetteiTsuchiShoYokoEditor implements IGenmenKetteiTsuchiShoYo
             if (賦課年度 != null) {
                 source.fukaNendo = 賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
             }
-            source.ketteiKekka = 減免決定通知書情報.get減免の情報更正後().get減免状態区分();
+            source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(減免決定通知書情報.get減免の情報更正後().get減免状態区分()).get名称();
         }
         if (表示コード != null) {
             source.hyojicodeName1 = 表示コード.get表示コード名１();
@@ -136,7 +137,7 @@ public class GenmenKetteiTsuchiShoYokoEditor implements IGenmenKetteiTsuchiShoYo
     }
 
     private void set減免の情報(KaigoHokenryoGenmenKetteiTsuchishoYokoSource source, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
-        if (isNotNull(減免決定通知書情報.get減免の情報更正後()) && isNotNull(減免決定通知書情報.get賦課の情報更正前())) {
+        if (isNotNull(減免決定通知書情報.get減免の情報更正後())) {
             TsuchishoNo 通知書番号 = 減免決定通知書情報.get減免の情報更正後().get通知書番号();
             source.tsuchishoNo = 通知書番号 != null ? 通知書番号.value() : RString.EMPTY;
             SetaiCode 世帯コード = 減免決定通知書情報.get減免の情報更正後().get世帯コード();
@@ -150,12 +151,6 @@ public class GenmenKetteiTsuchiShoYokoEditor implements IGenmenKetteiTsuchiShoYo
                 source.genmenKetteiYMD = 減免決定日.wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            source.genmenGakuMae = DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                    .get賦課の情報更正前().get減免額(), 0);
-            source.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                    .get賦課の情報更正前().get減免前介護保険料_年額(), 0);
-            source.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                    .get賦課の情報更正前().get確定介護保険料_年額(), 0);
             source.genmenGakuAto = DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
                     .get減免の情報更正後().get減免額(), 0);
             source.hokenSanshutsuAto = DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
@@ -168,6 +163,14 @@ public class GenmenKetteiTsuchiShoYokoEditor implements IGenmenKetteiTsuchiShoYo
                         減免種類コード, FlexibleDate.getNowDate());
             }
             source.genmenRiyu2 = 減免決定通知書情報.get減免の情報更正後().get減免事由();
+        }
+        if (isNotNull(減免決定通知書情報.get賦課の情報更正前())) {
+            source.genmenGakuMae = DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get賦課の情報更正前().get減免額(), 0);
+            source.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get賦課の情報更正前().get減免前介護保険料_年額(), 0);
+            source.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get賦課の情報更正前().get確定介護保険料_年額(), 0);
         }
     }
 

@@ -102,7 +102,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private static final RString 全件出力 = new RString("全件出力");
     private static final RString 出力期のタイプ_前 = new RString("期（");
     private static final RString 出力期のタイプ_別々に = new RString("月）分");
-    private static final RString 出力期のタイプ_全件 = new RString("月）~");
+    private static final RString 出力期のタイプ_全件 = new RString("月）～");
     private static final RString 項目名 = new RString("当初出力_出力方法");
     private static final RString 期RSTRING = new RString("期");
     private static final RString 対象者_2 = new RString("2");
@@ -111,7 +111,6 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private static final RString 月日 = new RString("0401");
     private static final RString 帳票グループコード_普徴仮算定賦課メニュー = new RString("0140001");
     private static final RString 帳票グループコード_普徴仮算定通知書一括発行メニュー = new RString("0140003");
-    private static final RString 普通徴収仮算定結果一覧表_帳票分類ID = new RString("DBB200006_FutsuChoshuKarisanteiKekkaIchiran");
     private static final RString 保険料納入通知書_仮算定_帳票分類ID = new RString("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
 
     /**
@@ -305,24 +304,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
             }
         }
         condition.set出力帳票一覧List(list);
-        condition.set出力方法(帳票作成個別情報Panel.getTxtNotsuShutsuryokukiType2().getValue());
-        RString 出力期 = 帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().getSelectedValue();
-        condition.set出力期(出力期.substring(ゼロ_定値, 出力期.indexOf(期RSTRING)));
-        if (出力期.endsWith(出力期のタイプ_別々に)) {
-            condition.set出力期表示方法(定値_イチ);
-        } else if (出力期.endsWith(出力期のタイプ_全件)) {
-            condition.set出力期表示方法(定値_二);
-        }
-        if (帳票作成個別情報Panel.getChkNotsuTaishosha2().isAllSelected()) {
-            condition.set対象者(対象者_2);
-        } else {
-            condition.set対象者(帳票作成個別情報Panel.getChkNotsuTaishosha2().getSelectedKeys().get(ゼロ_定値));
-        }
-        condition.set生活保護者をまとめて先頭に出力フラグ(帳票作成個別情報Panel.getRadNotsuSeikatsuHogo2().getSelectedKey());
-        RDate 発行日 = 帳票作成個別情報Panel.getTxtHakkoYMD().getValue();
-        if (発行日 != null) {
-            condition.set発行日(new FlexibleDate(発行日.toString()));
-        }
+        editCondition(condition, 帳票作成個別情報Panel);
         FuchoKarisanteiShoriNaiyoDiv panel = div.getMainPanelBatchParameter()
                 .getFuchoKarisanteiFukaKakunin().getShoriJokyo().getFuchoKarisanteiShoriNaiyo();
         RYear 調定年度 = panel.getTxtChoteiNendo().getDomain();
@@ -336,14 +318,54 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         return FuchoKariSanteiFuka.createInstance().createFuchoKariSanteiParameter(condition);
     }
 
+    private void editCondition(FuchoKariSanteiFukaEntity condition, FuchoTsuchiKobetsuJohoDiv 帳票作成個別情報Panel) {
+        condition.set出力方法(帳票作成個別情報Panel.getTxtNotsuShutsuryokukiType2().getValue());
+        RString 出力期 = 帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().getSelectedValue();
+        if (出力期 != null && !出力期.isEmpty()) {
+            condition.set出力期(出力期.substring(ゼロ_定値, 出力期.indexOf(期RSTRING)));
+            if (出力期.endsWith(出力期のタイプ_別々に)) {
+                condition.set出力期表示方法(定値_イチ);
+            } else if (出力期.endsWith(出力期のタイプ_全件)) {
+                condition.set出力期表示方法(定値_二);
+            }
+        } else {
+            condition.set出力期(RString.EMPTY);
+            condition.set出力期表示方法(RString.EMPTY);
+        }
+        if (帳票作成個別情報Panel.getChkNotsuTaishosha2().isAllSelected()) {
+            condition.set対象者(対象者_2);
+        } else if (帳票作成個別情報Panel.getChkNotsuTaishosha2().getSelectedKeys() == null
+                || 帳票作成個別情報Panel.getChkNotsuTaishosha2().getSelectedKeys().isEmpty()) {
+            condition.set対象者(RString.EMPTY);
+        } else {
+            condition.set対象者(帳票作成個別情報Panel.getChkNotsuTaishosha2().getSelectedKeys().get(ゼロ_定値));
+        }
+        condition.set生活保護者をまとめて先頭に出力フラグ(帳票作成個別情報Panel.getRadNotsuSeikatsuHogo2().getSelectedKey());
+        RDate 発行日 = 帳票作成個別情報Panel.getTxtHakkoYMD().getValue();
+        if (発行日 != null) {
+            condition.set発行日(new FlexibleDate(発行日.toString()));
+        }
+    }
+
     /**
      * 普徴仮算定賦課バッチパラメータを作成する。
      *
      * @return バッチパラメータ DBB014001_FuchoKarisanteiFukaParameter
      */
     public DBB014001_FuchoKarisanteiFukaParameter getバッチパラメータ1() {
+        DBB014003_FuchoKarisanteiTsuchishoHakkoParameter parameter = getバッチパラメータ();
         DBB014001_FuchoKarisanteiFukaParameter param = new DBB014001_FuchoKarisanteiFukaParameter();
-        FuchoKariSanteiFuka fuchoKariSanteiFuka = new FuchoKariSanteiFuka();
+        param.set賦課年度(parameter.get賦課年度());
+        param.set調定年度(parameter.get調定年度());
+        param.set発行日(parameter.get発行日());
+        param.set生活保護対象者をまとめて先頭に出力(parameter.get生活保護対象者をまとめて先頭に出力());
+        param.set対象者(parameter.get対象者());
+        param.set出力期の表示方法(parameter.get出力期の表示方法());
+        param.set出力期(parameter.get出力期());
+        param.set出力方法(parameter.get出力方法());
+        param.set一括発行起動フラグ(false);
+        param.setページごとに山分け(parameter.getページごとに山分け());
+
         Map<RString, RString> 出力帳票一覧 = div.getMainPanelBatchParameter()
                 .getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
         List<BatchFuchoKariSanteiResult> list = new ArrayList<>();
@@ -359,15 +381,11 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         FuchoKarisanteiShoriNaiyoDiv panel = div.getMainPanelBatchParameter()
                 .getFuchoKarisanteiFukaKakunin().getShoriJokyo().getFuchoKarisanteiShoriNaiyo();
         RYear 調定年度 = panel.getTxtChoteiNendo().getDomain();
-        param.set調定年度(new FlexibleYear(調定年度.toString()));
-        RYear 賦課年度 = panel.getTxtFukaNendo().getDomain();
-        if (賦課年度 != null) {
-            param.set賦課年度(new FlexibleYear(賦課年度.toString()));
-        }
         FuchoTsuchiKobetsuJohoDiv 帳票作成個別情報Panel = div
                 .getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho();
         RString 出力期R = 帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().getSelectedValue();
         RString 出力期 = 出力期R.substring(ゼロ_定値, 出力期R.indexOf(期RSTRING));
+        FuchoKariSanteiFuka fuchoKariSanteiFuka = new FuchoKariSanteiFuka();
         List<BatchFuchoKariSanteiEntity> batchList = fuchoKariSanteiFuka.getChohyoIchiran(list, new FlexibleYear(調定年度.toString()), 出力期);
         List<HonsanteifukaBatchTyouhyou> honsanteiList = new ArrayList<>();
         HonsanteifukaBatchTyouhyou honsanteifuka;
@@ -406,13 +424,12 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
                         .getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().getSelectedValue();
                 RString 算定期 = 出力期.substring(ゼロ_定値, イチ_定値);
                 RString 納付書の型の設定値 = get納付書の型の設定値(算定期, 調定年月日);
+                has普徴 = true;
                 if (納入通知書の型_なし.equals(納付書の型の設定値)) {
                     has型なし = true;
                 } else if (納入通知書の型_銀振型5期タイプ.equals(納付書の型の設定値)) {
                     has型5期 = true;
                 }
-            } else if (普通徴収仮算定結果一覧表_帳票分類ID.equals(帳票分類Id)) {
-                has普徴 = true;
             }
         }
         if (has普徴) {

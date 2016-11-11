@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -35,7 +36,8 @@ public class JukyushaIdoRenrakuhyoCsvManager {
 
     private static final RString カンマ = new RString(",");
     private static final RString ダブルクォート = new RString("\"");
-    private static final RString 出力ファイル名 = new RString("jkido0.csv");
+    private static final RString 定数ファイル名 = new RString("10_531");
+    private static final RString 出力CSV = new RString(".csv");
     private static final RString 定数_ZERO = new RString("0");
     private static final RString 定数_ONE = new RString("1");
     private static final RString 定数_TWO = new RString("2");
@@ -59,8 +61,16 @@ public class JukyushaIdoRenrakuhyoCsvManager {
      * csvの出力
      *
      * @param entityList List<JukyushaIdoRenrakuhyoCsvEntity>
+     * @param 処理対象年月 RYearMonth
      */
-    public void csvの出力(List<JukyushaIdoRenrakuhyoCsvEntity> entityList) {
+    public void csvの出力(List<JukyushaIdoRenrakuhyoCsvEntity> entityList, RYearMonth 処理対象年月) {
+        RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 出力ファイル名1 = 定数ファイル名.concat(保険者番号);
+        if (処理対象年月 != null) {
+            出力ファイル名1 = 出力ファイル名1.concat(処理対象年月.toDateString());
+        }
+        RString 出力ファイル名 = 出力ファイル名1.concat(出力CSV);
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         filePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         csvWriter = new CsvWriter.InstanceBuilder(filePath)
@@ -159,11 +169,15 @@ public class JukyushaIdoRenrakuhyoCsvManager {
             csvDataEntity.set給付率引下げ終了年月日(set西暦(entity.get給付率引下げ適用終了年月日()));
             csvDataEntity.set利用者負担減免_旧措置入所者_減免申請中区分コード(entity.get減免申請中区分());
             csvDataEntity.set利用者負担減免_旧措置入所者_利用者負担区分コード(entity.get利用者負担区分());
-            csvDataEntity.set利用者負担減免_旧措置入所者_給付率(new RString(entity.get利用給付率().toString()));
+            if (entity.get利用給付率() != null) {
+                csvDataEntity.set利用者負担減免_旧措置入所者_給付率(new RString(entity.get利用給付率().toString()));
+            }
             csvDataEntity.set利用者負担減免_旧措置入所者_適用開始年月日(set西暦(entity.get利用適用開始年月日()));
             csvDataEntity.set利用者負担減免_旧措置入所者_適用終了年月日(set西暦(entity.get利用適用終了年月日()));
             csvDataEntity.set標準負担_特定標準負担_標準負担区分コード(entity.get標準負担区分());
-            csvDataEntity.set標準負担_特定標準負担_標準負担額(new RString(entity.get標準負担額().toString()));
+            if (entity.get標準負担額() != null) {
+                csvDataEntity.set標準負担_特定標準負担_標準負担額(new RString(entity.get標準負担額().toString()));
+            }
             csvDataEntity.set標準負担_特定標準負担_負担額適用開始年月日(set西暦(entity.get標準適用開始年月日()));
             csvDataEntity.set標準負担_特定標準負担_負担額適用終了年月日(set西暦(entity.get標準適用終了年月日()));
             csvDataEntity.set特定入所者介護サービス_特定入所者認定申請中区分コード(entity.get認定申請中区分());

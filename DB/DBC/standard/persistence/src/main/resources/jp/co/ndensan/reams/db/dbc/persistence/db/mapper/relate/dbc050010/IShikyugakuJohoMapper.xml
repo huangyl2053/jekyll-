@@ -229,16 +229,15 @@
             AND 振込明細一時TBL."kozaDataFlag" = TRUE
         ORDER BY
         振込明細一時TBL."kinyuKikanCode" ASC,
-        振込明細一時TBL."kinyuKikanShitenCode" ASC,
+        振込明細一時TBL."kinyuKikanShitenCode" ASC
+        ${出力順},
         振込明細一時TBL."hihokenshaNo" ASC,
         振込明細一時TBL."serviceTeikyoYM" ASC,
         振込明細一時TBL."dataKubun" ASC,
         振込明細一時TBL."seiriNo" ASC,
         振込明細一時TBL."rirekiNo" ASC,
         様式番号別金額."yoshikiNo" ASC
-        ${出力順}
-    </sql>    
-    
+      </sql>    
     
     <select resultOrdered="true" id="select様式番号名称"
             resultMap="resultMap_yoshikiNoJoho" fetchSize="500">
@@ -265,18 +264,20 @@
     
     <resultMap id="resultMap_ShikyugakuJohoEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.ShikyugakuJohoEntity">
+        <id column="hihokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
         <result property="名寄せ件数" column="名寄せ件数" />
         <association property="振込明細一時Entity" resultMap="resultMap_FurikomiDetailTempTableEntity"/>
         <collection property="様式番号別金額EntityList" resultMap="resultMap_YoushikiBangouBetuKingakuEntity"/>
     </resultMap> 
     
     <resultMap id="resultMap_FurikomiDetailTempTableEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity">
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity">   
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
         <result property="dataKubun" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="rirekiNo" column="rirekiNo" />
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="ketteiTsuchiNo" column="ketteiTsuchiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="furikomiKingaku" column="furikomiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

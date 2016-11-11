@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.furikomimeisaiichiran.Furikomi
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiDataSakusei_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
-import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050021.FurikomimeisaiFurikomiDataMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050021.FurikomimeisaiFurikomiDataProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -93,11 +92,10 @@ public class FurikomimeisaiDataReportProcess extends BatchProcessBase<Furikomime
     private boolean is総合計;
     private ReportId 帳票ID;
 
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
-    @BatchWriter
     private BatchReportWriter<FurikomiMeisaiIchiranSource> batchReportWriter;
     private ReportSourceWriter<FurikomiMeisaiIchiranSource> reportSourceWriter;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
 
     @Override
     protected void initialize() {
@@ -145,12 +143,14 @@ public class FurikomimeisaiDataReportProcess extends BatchProcessBase<Furikomime
     protected void createWriter() {
         shoriKekkaKakuninListTempTable
                 = new BatchEntityCreatedTempTableWriter(処理結果確認リスト一時TBL, ShoriKekkaKakuninListTempTableEntity.class);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
     protected void process(FurikomimeisaiDataShikyugakuEntity entity) {
+        if (index == INT_0) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        }
         if (振込明細一時 != null) {
             FurikomiMeisaiIchiranReport report = new FurikomiMeisaiIchiranReport(getFurikaeGoMeisaiEntity(振込明細一時), 出力順情報, index);
             report.writeBy(reportSourceWriter);
@@ -167,12 +167,15 @@ public class FurikomimeisaiDataReportProcess extends BatchProcessBase<Furikomime
         if (振込明細一時 != null) {
             FurikomiMeisaiIchiranReport report = new FurikomiMeisaiIchiranReport(getFurikaeGoMeisaiEntity(振込明細一時), 出力順情報, index);
             report.writeBy(reportSourceWriter);
+            batchReportWriter.close();
         }
-        if (index == INT_0 && Furikomi_ShoriKubun.明細一覧表作成.getコード().equals(processParameter.get処理区分())) {
+        if (index == INT_0) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = get処理結果確認リスト一時();
             shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
+            pageCount.setValue(INT_0);
+        } else {
+            pageCount.setValue(reportSourceWriter.pageCount().value());
         }
-        pageCount.setValue(reportSourceWriter.pageCount().value());
     }
 
     private ShoriKekkaKakuninListTempTableEntity get処理結果確認リスト一時() {

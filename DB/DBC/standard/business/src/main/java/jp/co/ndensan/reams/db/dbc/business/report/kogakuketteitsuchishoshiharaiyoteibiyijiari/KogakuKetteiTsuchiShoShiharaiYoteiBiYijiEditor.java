@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharai
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -135,10 +137,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         setタイトル(source);
         if (通知書定型文List.size() > INDEX_ONE) {
             source.tsuchibun1 = 通知書定型文List.get(INDEX_ONE);
-            source.tsuchibun2 = 通知書定型文List.get(INDEX_ONE);
         } else {
             source.tsuchibun1 = RString.EMPTY;
-            source.tsuchibun2 = RString.EMPTY;
         }
         source.hihokenshaName = 帳票情報.get被保険者氏名();
         source.uketsukeYMD = 年月日編集(帳票情報.get受付年月日());
@@ -159,16 +159,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             source.riyuTitle = 不支給の理由;
         }
         source.riyu = 帳票情報.get不支給理由();
-        if (ShiharaiHohoKubun.窓口払.getコード().equals(帳票情報.get支払方法区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
-            source.torikeshi1 = RString.EMPTY;
-        } else {
-            source.torikeshi1 = 半角アスタリスク2;
-        }
-        if (ShiharaiHohoKubun.口座払.getコード().equals(帳票情報.get支払方法区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
-            source.torikeshi2 = RString.EMPTY;
-        } else {
-            source.torikeshi2 = 半角アスタリスク2;
-        }
 
         set取り消し持ちもの(source);
         set種別And種別タイトル(source);
@@ -201,11 +191,23 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         set通知文上段Small_2(source);
         set通知文下段Large_2(source);
         set雛形部品CompNinshosha(source);
-
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
         return source;
     }
 
     private void set取り消し持ちもの(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+
+        if (ShiharaiHohoKubun.窓口払.getコード().equals(帳票情報.get支払方法区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
+            source.torikeshi1 = RString.EMPTY;
+        } else {
+            source.torikeshi1 = 半角アスタリスク2;
+        }
+        if (ShiharaiHohoKubun.口座払.getコード().equals(帳票情報.get支払方法区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
+            source.torikeshi2 = RString.EMPTY;
+        } else {
+            source.torikeshi2 = 半角アスタリスク2;
+        }
+
         if (!(支給.equals(帳票情報.get支給_不支給決定区分()) && 窓口払い区分.equals(帳票情報.get支払方法区分())
                 && 帳票情報.get支給金額() != null && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0)) {
             source.torikeshiMochimono1 = 半角アスタリスク;
@@ -259,8 +261,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             }
         }
         if ((支給.equals(帳票情報.get支給_不支給決定区分())
-                && 帳票情報.get支給額() != null
-                && 帳票情報.get支給額().compareTo(Decimal.ZERO) < 0)
+                && 帳票情報.get支給金額() != null
+                && 帳票情報.get支給金額().compareTo(Decimal.ZERO) < 0)
                 || 不支給.equals(帳票情報.get支給_不支給決定区分())) {
             source.shumokuTitle = 口座種別;
             source.bangoTitle = 口座番号;
@@ -293,101 +295,27 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     }
 
     private void set通知文２(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
-        source.tsuchibun3 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun4 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun5 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun6 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun7 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun8 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun9 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun10 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun11 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun12 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun13 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun14 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun15 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun16 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun17 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun18 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun19 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun20 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun21 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun22 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun23 = get通知書定型文(INDEX_TWO);
-        source.tsuchibun24 = get通知書定型文(INDEX_TWO);
+        source.tsuchibun2 = get通知書定型文(INDEX_TWO);
     }
 
     private void set通知文Large(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
-        source.tsuchibunLarge3 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge4 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge5 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge6 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge7 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge8 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge9 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge10 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge11 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge12 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge13 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge14 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge15 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge16 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge17 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge18 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
-        source.tsuchibunLarge19 = get通知書定型文2(INDEX_TWO, SIZE_TWO);
+        source.tsuchibunLarge = get通知書定型文2(INDEX_TWO, SIZE_TWO);
     }
 
     private void set通知文上段Small(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
-        source.tsuchibunMix3 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix4 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix5 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix6 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix7 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix8 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix9 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix10 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix11 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix12 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix13 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix14 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
-        source.tsuchibunMix15 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
+        source.tsuchibunMix1 = get通知書定型文2(INDEX_TWO, SIZE_THREE);
     }
 
     private void set通知文下段Large(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
-        source.tsuchibunMix16 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
-        source.tsuchibunMix17 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
-        source.tsuchibunMix18 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
-        source.tsuchibunMix19 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
-        source.tsuchibunMix20 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
-        source.tsuchibunMix21 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
-        source.tsuchibunMix22 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
+        source.tsuchibunMix2 = get通知書定型文2(INDEX_THREE, SIZE_THREE);
     }
 
     private void set通知文上段Small_2(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
-        source.tsuchibunMixtwo3 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
-        source.tsuchibunMixtwo4 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
-        source.tsuchibunMixtwo5 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
-        source.tsuchibunMixtwo6 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
-        source.tsuchibunMixtwo7 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
-        source.tsuchibunMixtwo8 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
-        source.tsuchibunMixtwo9 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
-
+        source.tsuchibunMixTwo1 = get通知書定型文2(INDEX_TWO, SIZE_FOUR);
     }
 
     private void set通知文下段Large_2(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
-        source.tsuchibunMixtwo10 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo11 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo12 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo13 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo14 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo15 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo16 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo17 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo18 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo19 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo20 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo21 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
-        source.tsuchibunMixtwo22 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
+        source.tsuchibunMixTwo2 = get通知書定型文2(INDEX_THREE, SIZE_FOUR);
     }
 
     private RString get通知書定型文(int index) {

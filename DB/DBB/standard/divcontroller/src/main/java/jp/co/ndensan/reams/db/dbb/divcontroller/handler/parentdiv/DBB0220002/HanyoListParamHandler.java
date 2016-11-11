@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -25,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -79,6 +82,7 @@ public class HanyoListParamHandler {
     private static final RString KEY_連番付加 = new RString("連番付加");
     private static final RString KEY_賦課年度 = new RString("賦課年度");
     private static final RString KEY_日付編集 = new RString("日付編集");
+    private static final Decimal DECIMAL_999 = new Decimal("999");
 
     /**
      * コンストラクタです。
@@ -294,6 +298,8 @@ public class HanyoListParamHandler {
      */
     public void 条件を復元() {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        div.getChushutsuJokenPanel().getTxtChushutsuKikan().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtChushutsuKikan().clearToValue();
         ReportId 条件保存の帳票ID = restoreBatchParameterMap.getParameterValue(ReportId.class, KEY_帳票ID);
         long 条件保存の出力順ID = restoreBatchParameterMap.getParameterValue(long.class, KEY_出力順ID);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 条件保存の帳票ID, 条件保存の出力順ID);
@@ -310,15 +316,22 @@ public class HanyoListParamHandler {
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setDisabled(false);
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setLabelLText(定数課税区分減免後);
         }
+        div.getChushutsuPanel2().getCcdAtenaJoken().initialize();
         AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap
                 .getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
         if (宛名抽出条件 != null) {
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
+            if (宛名抽出条件.getAgeSelectKijun() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectKijun();
             if (宛名抽出条件.getChiku_Kubun() != null) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().getコード());
             }
+            div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectChiku();
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
+
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(toChikuCode(宛名抽出条件.getChiku1_To()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(toChikuCode(宛名抽出条件.getChiku1_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(toChikuCode(宛名抽出条件.getChiku2_To()));
@@ -326,13 +339,12 @@ public class HanyoListParamHandler {
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区３終了(toChikuCode(宛名抽出条件.getChiku3_To()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区３開始(toChikuCode(宛名抽出条件.getChiku3_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
-            if (宛名抽出条件.getAgeSelectKijun() != null) {
-                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
-            }
-            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getFrom() != null) {
+            if (is年齢範囲復元(宛名抽出条件.getNenreiRange()) && NenreiSoChushutsuHoho.年齢範囲.getコード()
+                    .equals(div.getChushutsuPanel2().getCcdAtenaJoken().get年齢層抽出方法().getコード())) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
             }
-            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getTo() != null) {
+            if (is年齢範囲復元(宛名抽出条件.getNenreiRange()) && NenreiSoChushutsuHoho.年齢範囲.getコード().
+                    equals(div.getChushutsuPanel2().getCcdAtenaJoken().get年齢層抽出方法().getコード())) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
             }
             if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getFrom() != null) {
@@ -427,5 +439,9 @@ public class HanyoListParamHandler {
 
         }
         return 課税区分減免;
+    }
+
+    private boolean is年齢範囲復元(Range<Decimal> 年齢範囲) {
+        return !(Decimal.ZERO.equals(年齢範囲.getFrom()) && DECIMAL_999.equals(年齢範囲.getTo()));
     }
 }

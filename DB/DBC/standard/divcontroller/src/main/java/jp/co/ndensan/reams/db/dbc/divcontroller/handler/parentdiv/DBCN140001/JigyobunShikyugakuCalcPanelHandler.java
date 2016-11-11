@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN140001.Jigy
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -71,7 +70,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
             div.getChushutsuJoken().getTxtZenkaiUketoriDate().setValue(処理日付管理データ.get対象開始年月日());
             if (処理日付管理データ.get対象開始日時() != null && !処理日付管理データ.get対象開始日時().isEmpty()) {
                 div.getChushutsuJoken().getTxtZenkaiUketoriTime().setValue(
-                        new RTime(処理日付管理データ.get対象開始日時().toDateString()));
+                        処理日付管理データ.get対象開始日時().getRDateTime().getTime());
             }
         }
         KokuhorenInterfaceKanriManager kokuManager = new KokuhorenInterfaceKanriManager();
@@ -102,7 +101,8 @@ public class JigyobunShikyugakuCalcPanelHandler {
 
     private List<KeyValueDataSource> createDropDownList(FlexibleYear 処理年度, FlexibleYear 処理開始年度) {
         List<KeyValueDataSource> list = new ArrayList<>();
-        while (処理開始年度.isBeforeOrEquals(処理年度)) {
+        while ((処理年度 != null && !処理年度.isEmpty()) && (処理開始年度 != null && !処理開始年度.isEmpty()
+                && 処理開始年度.isBeforeOrEquals(処理年度))) {
             KeyValueDataSource kv = new KeyValueDataSource(処理年度.toDateString(), 処理年度.wareki().toDateString());
             list.add(kv);
             処理年度 = 処理年度.minusYear(1);
@@ -192,7 +192,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         if (HIHOKENSHANOSHTEI.equals(div.getChushutsuJoken().getRadHihokenshaNoShitei().getSelectedKey())) {
             parameter.set年度(new FlexibleYear(div.getChushutsuJoken().getDdlNendo().getSelectedKey()));
             parameter.set出力対象区分(TWO);
-            parameter.set被保険者番号(new HihokenshaNo(div.getChushutsuJoken().getTxtHihokenshaNo().getValue()));
+            parameter.set被保険者番号(div.getChushutsuJoken().getTxtHihokenshaNo().getValue());
             parameter.set受取年月(null);
         } else if (TAISHOSHASEARCH.equals(div.getChushutsuJoken().getRadTaishoshaSearch().getSelectedKey())) {
             parameter.set年度(null);
@@ -204,6 +204,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         parameter.set処理時間(RTime.now());
         parameter.set決定年月日(div.getKoshinNaiyo().getTxtKetteiDate().getValue());
         parameter.set窓口払開始年月日(div.getKoshinNaiyo().getTxtKaishiDate().getValue());
+        parameter.set窓口払開始時刻(div.getKoshinNaiyo().getTxtKaishiTime().getValue());
         parameter.set窓口払終了年月日(div.getKoshinNaiyo().getTxtShuryoDate().getValue());
         parameter.set窓口払終了時刻(div.getKoshinNaiyo().getTxtShuryoTime().getValue());
         parameter.set出力順ID(div.getCcdShutsuryokujun().get出力順ID());

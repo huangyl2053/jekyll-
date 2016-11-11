@@ -84,6 +84,20 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     }
 
     /**
+     * 「未審査分を検索する」ボタンを押下した際に実行します。
+     *
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onStateTransition(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        if (審査.equals(ResponseHolder.getState())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 支給申請内容を一括審査・決定するボタンを押下した際に実行します。
      *
      * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
@@ -111,7 +125,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
                 .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getActiveRow();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo().getValue());
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString());
+        FlexibleYearMonth サービス提供年月 = row.getTxtTenkyoYM().getValue() == null
+                ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString());
         RString 整理番号 = row.getTxtSeiriNo().getValue();
         JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo());
         RString 様式番号 = row.getTxtYoshikiNo();
@@ -149,7 +165,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            FlexibleDate 決定日 = new FlexibleDate(決定日R.toString());
+            FlexibleDate 決定日 = 決定日R == null
+                    ? FlexibleDate.EMPTY
+                    : new FlexibleDate(決定日R.toString());
             div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setVisible(false);
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);

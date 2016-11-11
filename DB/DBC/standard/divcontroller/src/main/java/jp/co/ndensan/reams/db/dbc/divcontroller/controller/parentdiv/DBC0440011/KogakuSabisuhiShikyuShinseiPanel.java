@@ -33,11 +33,13 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -62,6 +64,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     private static final RString 総合事業高額サービス費支給申請登録 = new RString("総合事業高額サービス費支給申請書登録");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RString 申請を保存する = new RString("btnUpdate");
 
     /**
      * 申請情報検索_画面初期化です。
@@ -91,10 +94,6 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             div.getCommonPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
         }
         getHandler(div).initialize申請情報検索(メニューID, 被保険者番号, 導入形態コード);
-        if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
-            return ResponseData.of(ResponseData.of(div).setState(
-                    DBC0440011StateName.申請情報検索).data).rootTitle(総合事業高額サービス費支給申請登録).respond();
-        }
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
     }
 
@@ -133,8 +132,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_modify(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        HokenshaNo 証記載保険者番号 = new HokenshaNo(ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class));
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getCcdKogakuShinseiList().getClickedRow().getData12());
+        FlexibleYearMonth サービス年月 = new FlexibleDate(
+                new RDate(div.getCcdKogakuShinseiList().getClickedRow().getData1().toString()).toString()).getYearMonth();
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
         boolean 審査決定フラグ = div.getCcdKogakuShinseiList().is審査決定フラグ();
@@ -187,8 +187,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_delete(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        HokenshaNo 証記載保険者番号 = new HokenshaNo(ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class));
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getCcdKogakuShinseiList().getClickedRow().getData12());
+        FlexibleYearMonth サービス年月 = new FlexibleDate(
+                new RDate(div.getCcdKogakuShinseiList().getClickedRow().getData1().toString()).toString()).getYearMonth();
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
@@ -286,6 +287,22 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         } else {
             return notChanges(div);
         }
+    }
+
+    /**
+     * onStateTransition ボタンです。
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onStateTransition(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(true);
+        RString メニューID = ResponseHolder.getMenuID();
+        if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
+            return ResponseData.of(div).rootTitle(総合事業高額サービス費支給申請登録).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> save対象者情報(
@@ -409,7 +426,52 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnSerchResult(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        getHandler(div).前排他キーの解除(被保険者番号);
         return ResponseData.of(div).forwardWithEventName(DBC0440011TransitionEventName.検索に戻る).respond();
+    }
+
+    /**
+     * 再検索画面に戻るです。
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnReSearch(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        getHandler(div).前排他キーの解除(被保険者番号);
+        return ResponseData.of(div).forwardWithEventName(DBC0440011TransitionEventName.再検索).respond();
+    }
+
+    /**
+     * 「世帯情報を表示する」ボタン
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnSetaiJohoHyoji(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(true);
+        div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請を保存する, true);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        getHandler(div).initialize世帯所得一覧(識別コード);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「高額明細を表示する」ボタン
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnKogakuMeisaiHyoji(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        div.getShinseiTorokuPanel().getSetaiJoho().setDisplayNone(true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請を保存する, false);
+        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(false);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -420,38 +482,26 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnFree(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
-        boolean flag = false;
-        KogakuServicehiDetailParameter para = ViewStateHolder.get(
-                ViewStateKeys.詳細データ, KogakuServicehiDetailParameter.class);
         if (削除モード.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             getHandler(div).clear申請情報();
             div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().release削除制御();
             div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
-        } else {
-            flag = getHandler(div).is申請情報登録内容変更状態(para);
         }
-        if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).clear申請情報();
-                release送付済制御(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class), div);
-                div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
-                return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
-            } else {
-                return ResponseData.of(div).respond();
-            }
-        } else {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).clear申請情報();
             release送付済制御(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class), div);
             div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+        } else {
+            return ResponseData.of(div).respond();
         }
     }
 
@@ -469,31 +519,23 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnTorikeshi(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
-        boolean flag = false;
         if (削除モード.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             getHandler(div).clear対象者情報();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
-        } else {
-            flag = getHandler(div).is対象者情報登録内容変更状態();
         }
-        if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).clear対象者情報();
-                return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
-            } else {
-                getHandler(div).clear対象者情報();
-                return ResponseData.of(div).respond();
-            }
-        } else {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).clear対象者情報();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+        } else {
+            getHandler(div).clear対象者情報();
+            return ResponseData.of(div).respond();
         }
     }
 

@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.dbc100053;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -223,7 +224,6 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiSource implements IRep
     public RString tsuchiNo;
     @ReportItem(name = "tsuban", length = 6, order = 104)
     public RString tsuban;
-    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 6, order = 105)
     public RString hihokenshaNo;
 // </editor-fold>
@@ -234,6 +234,8 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiSource implements IRep
 // </editor-fold>
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 
     /**
      * GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSourceのENUM

@@ -381,7 +381,6 @@
         AND substring(T2."tekiyoKaishiYMD",1,6) <![CDATA[<=]]> T1."serviceTeikyoYM"
         AND T2."tekiyoShuryoYMD" IS NULL 
         OR T2."tekiyoShuryoYMD" = '')
-        )
     </update>
 
     <update id="世帯員把握入力一時の更新1">
@@ -517,9 +516,10 @@
     </select>
 
     <resultMap id="result_KyufuJissekiChukanKogaku8Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiChukanKogaku8Entity" autoMapping="true">
-        <id column="tempKyufujissekiTyukann_hiHokenshaNo"/>
-        <id column="tempKyufujissekiTyukann_shotokuHantei_shotokuNendo"/>
-        <id column="tempKyufujissekiTyukann_serviceTeikyoYM"/>
+        <id column="tempKyufujissekiTyukann_shotokuHantei_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_shotokuHantei_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -535,9 +535,10 @@
     </resultMap>
 
     <resultMap id="result_KyufuJissekiChukanKogakuJigyo8Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiChukanKogakuJigyo8Entity" autoMapping="true">
-        <id column="tempKyufujissekiTyukannJigyo_hiHokenshaNo"/>
-        <id column="tempKyufujissekiTyukannJigyo_shotokuHantei_shotokuNendo"/>
-        <id column="tempKyufujissekiTyukannJigyo_serviceTeikyoYM"/>
+        <id column="tempKyufujissekiTyukannJigyo_shotokuHantei_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <id column="tempKyufujissekiTyukannJigyo_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tempKyufujissekiTyukannJigyo_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id column="tempKyufujissekiTyukannJigyo_shotokuHantei_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT3116KijunShunyugakuTekiyoKanri_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -877,6 +878,10 @@
 
     <resultMap id="高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
+        <id column="tempSetaiinShotokuHantei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <association property="世帯員所得判定明細高額一時Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
@@ -910,6 +915,10 @@
 
     <resultMap id="事業高額介護サービス世帯員所得判定明細高額一時２と宛名情報ResultMap" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess3Entity" autoMapping="true">
+        <id column="tempSetaiinShotokuHantei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id column="tempSetaiinShotokuHantei_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <association property="世帯員所得判定明細高額一時Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempSetaiinShotokuHanteiEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
@@ -2571,7 +2580,40 @@
         SELECT   <include refid="allColumns_TmpSetaiShotoku"/>
         FROM "TmpSetaiShotoku" AS "TmpSetaiShotoku"
     </select>
-
+    
+     <insert id="insert世帯員所得判定明細一時" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity">
+        INSERT INTO "TempSetaiinShotokuHanteiMeisai"
+        VALUES 
+        (
+        #{hihokenshaNo},
+        #{shikibetsuCode},
+        #{kijunYMD},
+        #{shotokuNendo},
+        #{jushochiTokureiFlag},
+        #{setaiCode},
+        #{honninKubun},
+        #{kazeiKubun},
+        #{kazeiKubunGemmenGo},
+        #{gekihenKanwaKubun},
+        #{gokeiShotokuGaku},
+        #{nenkiniShunyuGaku},
+        #{nenkiniShotokuGaku},
+        #{kazeiShotokuGaku},
+        #{torokuGyomu},
+        #{shichosonCode},
+        #{shoboKubun},
+        #{roreiFukushi},
+        #{setaiinHihokenshaNo},
+        #{setaiinHihokenshakubun},
+        #{honninKazeiKubun},
+        #{setaiKazeiKubun},
+        #{tsuzukigaraCodeNen},
+        #{atena_tsuzukigaraCode},
+        #{atena_juminShubetsuCode},
+        #{atena_seinengappiYMD}
+         )
+    </insert>
+    
     <resultMap id="ResultMap_被保生保老齢情報" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.HihokenSeikatsuRoreiRelateEntity" autoMapping="true">
         <id  column="tmpSetaiinShotokuHanteiMeisai_hihokenshaNo"/>
         <id  column="tmpSetaiinShotokuHanteiMeisai_kijunYMD"/>
@@ -2580,7 +2622,7 @@
         <association property="判定明細Entity" resultMap="ResultMap_SetaiinShotokuHanteiMeisai"/>
         <association property="被保険者情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="老齢情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"/>
-        <collection property="生保情報List" resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity"/>
+        <association property="生保情報Entity" resultMap="resultMap_UrT0508SeikatsuHogoJukyushaEntity"/>
     </resultMap>
 
     <select resultOrdered="true" id="select被保生保老齢情報"

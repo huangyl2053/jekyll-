@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.divcontroller.controller.commonchilddiv.memo.MemoNyuryoku.MemoNyuryokuHandler;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -100,7 +101,8 @@ public class ShotokuJokyoHandler {
                 get世帯員所得情報(hdnShikibetuCode, hdnShoriNendo.getNendo(), 所得基準年月日);
         List<dgSteaiinShotoku_Row> rowList = set世帯員所得情報Grid(世帯員所得情報リスト, hdnKijunYMD);
         div.getDgSteaiinShotoku().setDataSource(rowList);
-        MemoNyuryokuHandler.dataGridupdateImage(new GyomuCode(div.getHdnGyomuCode()), null, div.getDgSteaiinShotoku(),
+
+        MemoNyuryokuHandler.dataGridupdateImage(new GyomuCode(div.getHdnGyomuCode()), SubGyomuCode.DBC介護給付, div.getDgSteaiinShotoku(),
                 MemoShikibetsuTaisho.識別コード.get識別対象(), 文字列_識別対象コード, RString.EMPTY, RString.EMPTY,
                 メモボタン);
     }
@@ -153,8 +155,10 @@ public class ShotokuJokyoHandler {
             if (!RString.isNullOrEmpty(row.getKazeiShotoku())) {
                 item.set課税所得(new Decimal(row.getKazeiShotoku().replace(コンマ, RString.EMPTY).toString()));
             }
-            更正日 = new RDate(row.getKoseiYMD().toString());
-            item.set更正日(new FlexibleDate(更正日.toDateString()));
+            if (!RString.isNullOrEmpty(row.getKoseiYMD())) {
+                更正日 = new RDate(row.getKoseiYMD().toString());
+                item.set更正日(new FlexibleDate(更正日.toDateString()));
+            }
             list.add(item);
         }
         return list;
@@ -209,7 +213,7 @@ public class ShotokuJokyoHandler {
                 row.setNenkinShotoku(年金等所得);
                 課税所得 = DecimalFormatter.toコンマ区切りRString(nullToZero(item.get課税所得額()), 0);
                 row.setKazeiShotoku(課税所得);
-                row.setShikibetsuTaishoKubun(識別対象区分_個人);
+                row.setShikibetsuTaishoKubun(MemoShikibetsuTaisho.識別コード.get識別対象());
                 Decimal 計算結果 = Decimal.ZERO;
                 計算結果 = 計算結果.add(nullToZero(item.get合計所得金額())).
                         subtract(nullToZero(item.get年金収入額())).add(nullToZero(item.get課税所得額()));

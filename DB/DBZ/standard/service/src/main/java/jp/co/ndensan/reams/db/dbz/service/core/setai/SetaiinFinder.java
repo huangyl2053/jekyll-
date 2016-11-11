@@ -186,7 +186,7 @@ public class SetaiinFinder {
         List<SetaiinShikibetsuCd> 世帯員識別コードリスト = new ArrayList();
         if (被保険者台帳情報 == null || !RSTR_ONE.equals(被保険者台帳情報.get住所地特例フラグ())) {
             ISetaiFinder 世帯Finder = ShikibetsuTaishoService.getSetaiFinder();
-            ISetai 世帯 = 世帯Finder.findBy識別コード(GyomuCode.DB介護保険, 識別コード, 基準年月日);
+            ISetai 世帯 = 世帯Finder.findBy識別コード住民のみ(GyomuCode.DB介護保険, 識別コード, 基準年月日);
             if (世帯 == null) {
                 return new ArrayList();
             } else {

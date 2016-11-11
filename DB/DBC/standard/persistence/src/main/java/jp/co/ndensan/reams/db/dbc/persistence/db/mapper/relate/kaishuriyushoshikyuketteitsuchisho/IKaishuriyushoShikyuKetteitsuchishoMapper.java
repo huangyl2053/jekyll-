@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaishuriyushoshikyuketteitsuchisho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoRelateEntity;
 
@@ -22,4 +23,12 @@ public interface IKaishuriyushoShikyuKetteitsuchishoMapper {
      * @return Temp_前回決定日
      */
     KaishuriyushoShikyuKetteitsuchishoRelateEntity selectKetteiTimestamp(KaishuriyushoShikyuKetteitsuchishoMybatisParameter parameter);
+
+    /**
+     * ドロップダウンリスト項目セットです。
+     *
+     * @param parameter 決定通知書作成のMyBatis用パラメータ
+     * @return 事業者
+     */
+    List<KaishuriyushoShikyuKetteitsuchishoRelateEntity> selectDDL事業者(KaishuriyushoShikyuKetteitsuchishoMybatisParameter parameter);
 }

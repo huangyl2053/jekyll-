@@ -93,9 +93,8 @@ public class KokuhorenTorikomiList {
         if (交換情報識別番号.length() == NUM_4) {
             交換情報識別番号 = 交換情報識別番号.substring(NUM_0, NUM_3);
         }
-        RString paramete = getHandler(div).getParamter(交換情報識別番号);
         return ResponseData.of(div).forwardWithEventName(DBC0410011TransitionEventName.バッチ起動)
-                .parameter(paramete);
+                .parameter(交換情報識別番号);
     }
 
     /**

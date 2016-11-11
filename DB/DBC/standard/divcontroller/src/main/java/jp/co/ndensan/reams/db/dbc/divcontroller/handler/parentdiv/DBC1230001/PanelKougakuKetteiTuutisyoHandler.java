@@ -22,6 +22,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
+import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -35,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -60,6 +64,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
     private static final RString 支払予定日印字有無_有 = new RString("1");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
     private static final RString コード_ログコード = new RString("0003");
+    private static final int INT_4 = 4;
 
     private PanelKougakuKetteiTuutisyoHandler(PanelKougakuKetteiTuutisyoDiv div) {
         this.div = div;
@@ -154,7 +159,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
             }
         });
         for (Decimal 管理番号 : 重複排除管理番号リスト) {
-            管理番号ドロップダウンリスト.add(new KeyValueDataSource(new RString(管理番号.toString()), new RString(管理番号.toString())));
+            管理番号ドロップダウンリスト.add(new KeyValueDataSource(new RString(管理番号.toString()), new RString(管理番号.toString()).padZeroToLeft(INT_4)));
         }
         Decimal 管理番号 = 管理番号リスト.get(0);
         div.getDdlKanliBanngou().setDataSource(管理番号ドロップダウンリスト);
@@ -243,9 +248,48 @@ public final class PanelKougakuKetteiTuutisyoHandler {
 
     }
 
+    /**
+     * isデータの変更。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月リスト List<FlexibleYearMonth>
+     *
+     * @return isデータの変更
+     */
+    public boolean isデータの変更(HihokenshaNo 被保険者番号, List<FlexibleYearMonth> サービス提供年月リスト) {
+        JigyoKogakuShikyuHanteiKekkaManager manager = InstanceProvider.create(JigyoKogakuShikyuHanteiKekkaManager.class);
+        IBunshoNoFinder finder = BunshoNoFinderFactory.createInstance();
+        FlexibleDate システム日付 = FlexibleDate.getNowDate();
+        BunshoNo bunshoNo = finder.get文書番号管理(帳票ID, システム日付);
+        if (サービス提供年月リスト.isEmpty()) {
+            return false;
+        }
+        FlexibleYearMonth サービス提供年月 = サービス提供年月リスト.get(0);
+        List<Decimal> 管理番号リスト = manager.get管理番号リスト(被保険者番号, サービス提供年月);
+        Decimal 管理番号 = 管理番号リスト.get(0);
+
+        return !定数_初回申請用.equals(div.getRadSyoukaiSinnsei().getSelectedKey())
+                || !サービス提供年月.toDateString().equals(div.getDdlServiceYearMonth().getSelectedKey())
+                || !管理番号.equals(new Decimal(div.getDdlKanliBanngou().getSelectedKey().toString()))
+                || !getEdit文書番号(bunshoNo).equals(div.getKougakuKetteiTuutisyoBunsho().get文書番号())
+                || !new RDate(システム日付.toString()).equals(div.getTxtHakkoubi().getValue())
+                || div.getTxtSiharaiYoteibi().getValue() != null;
+    }
+
     private PersonalData toPersonalData(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
                 被保険者番号.getColumnValue());
         return PersonalData.of(識別コード, expandedInfo);
+    }
+
+    private RString getEdit文書番号(BunshoNo bunshoNo) {
+        if (null == bunshoNo) {
+            return RString.EMPTY;
+        }
+        return new RStringBuilder(bunshoNo.getEdit文書番号記号())
+                .append(bunshoNo.getEditヘッダー文字())
+                .append(bunshoNo.get文書番号固定文字())
+                .append(bunshoNo.getEditフッター文字())
+                .toRString();
     }
 }

@@ -35,6 +35,5 @@ public class ShotokujohoIchiranhyoSakuseiProcessParameter implements IBatchProce
     private ShichosonJouhouResult 市町村情報;
     private Long 出力順ID;
     private RString 出力順;
-    private RString 改頁;
 
 }

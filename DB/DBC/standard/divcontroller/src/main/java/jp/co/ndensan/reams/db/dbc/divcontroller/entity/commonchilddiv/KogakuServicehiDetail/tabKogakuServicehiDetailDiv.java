@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuSer
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.IKogakuKyufuTaishoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -21,7 +19,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @reamsid_L DBC-4380-010 quxiaodong
  */
 public class tabKogakuServicehiDetailDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -124,7 +123,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
+    public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
         this.getTplShinseisha().setTxtShinseiYMD(txtShinseiYMD);
     }
 
@@ -134,7 +133,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRdbShinseisyaKubun(RadioButton rdbShinseisyaKubun) {
+    public void setRdbShinseisyaKubun(RadioButton rdbShinseisyaKubun) {
         this.getTplShinseisha().setRdbShinseisyaKubun(rdbShinseisyaKubun);
     }
 
@@ -144,7 +143,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtHokenJyaBango(TextBoxCode txtHokenJyaBango) {
+    public void setTxtHokenJyaBango(TextBoxCode txtHokenJyaBango) {
         this.getTplShinseisha().setTxtHokenJyaBango(txtHokenJyaBango);
     }
 
@@ -154,7 +153,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setChkKokuhorenSaiso(CheckBoxList chkKokuhorenSaiso) {
+    public void setChkKokuhorenSaiso(CheckBoxList chkKokuhorenSaiso) {
         this.getTplShinseisha().setChkKokuhorenSaiso(chkKokuhorenSaiso);
     }
 
@@ -164,7 +163,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShimeiKanji(TextBox txtShimeiKanji) {
+    public void setTxtShimeiKanji(TextBox txtShimeiKanji) {
         this.getTplShinseisha().setTxtShimeiKanji(txtShimeiKanji);
     }
 
@@ -174,7 +173,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShimeiKana(TextBoxKana txtShimeiKana) {
+    public void setTxtShimeiKana(TextBoxKana txtShimeiKana) {
         this.getTplShinseisha().setTxtShimeiKana(txtShimeiKana);
     }
 
@@ -184,7 +183,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
+    public void setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.getTplShinseisha().setTxtTelNo(txtTelNo);
     }
 
@@ -194,7 +193,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
+    public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
         this.getTplShinseisha().setTxtShinseiRiyu(txtShinseiRiyu);
     }
 
@@ -204,7 +203,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShiharaiTotalAmount(TextBoxNum txtShiharaiTotalAmount) {
+    public void setTxtShiharaiTotalAmount(TextBoxNum txtShiharaiTotalAmount) {
         this.getTplShinseisha().setTxtShiharaiTotalAmount(txtShiharaiTotalAmount);
     }
 
@@ -214,7 +213,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKotei(TextBoxMultiLine txtKotei) {
+    public void setTxtKotei(TextBoxMultiLine txtKotei) {
         this.getTplShinseisha().setTxtKotei(txtKotei);
     }
 
@@ -234,7 +233,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtUketsukeYMD(TextBoxDate txtUketsukeYMD) {
+    public void setTxtUketsukeYMD(TextBoxDate txtUketsukeYMD) {
         this.getTplJudgementResult().setTxtUketsukeYMD(txtUketsukeYMD);
     }
 
@@ -244,7 +243,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtHonninShiharaiGaku(TextBoxNum txtHonninShiharaiGaku) {
+    public void setTxtHonninShiharaiGaku(TextBoxNum txtHonninShiharaiGaku) {
         this.getTplJudgementResult().setTxtHonninShiharaiGaku(txtHonninShiharaiGaku);
     }
 
@@ -254,7 +253,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiYMD(TextBoxDate txtKetteiYMD) {
+    public void setTxtKetteiYMD(TextBoxDate txtKetteiYMD) {
         this.getTplJudgementResult().setTxtKetteiYMD(txtKetteiYMD);
     }
 
@@ -264,7 +263,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRdbShikyuKubun(RadioButton rdbShikyuKubun) {
+    public void setRdbShikyuKubun(RadioButton rdbShikyuKubun) {
         this.getTplJudgementResult().setRdbShikyuKubun(rdbShikyuKubun);
     }
 
@@ -274,7 +273,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRdbShinsaHohoKubun(RadioButton rdbShinsaHohoKubun) {
+    public void setRdbShinsaHohoKubun(RadioButton rdbShinsaHohoKubun) {
         this.getTplJudgementResult().setRdbShinsaHohoKubun(rdbShinsaHohoKubun);
     }
 
@@ -284,7 +283,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiSyuyakuBango(TextBox txtSetaiSyuyakuBango) {
+    public void setTxtSetaiSyuyakuBango(TextBox txtSetaiSyuyakuBango) {
         this.getTplJudgementResult().setTxtSetaiSyuyakuBango(txtSetaiSyuyakuBango);
     }
 
@@ -294,7 +293,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShikyuKingaku(TextBoxNum txtShikyuKingaku) {
+    public void setTxtShikyuKingaku(TextBoxNum txtShikyuKingaku) {
         this.getTplJudgementResult().setTxtShikyuKingaku(txtShikyuKingaku);
     }
 
@@ -304,7 +303,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setRdbKogakuJidoSyokanTaisyo(RadioButton rdbKogakuJidoSyokanTaisyo) {
+    public void setRdbKogakuJidoSyokanTaisyo(RadioButton rdbKogakuJidoSyokanTaisyo) {
         this.getTplJudgementResult().setRdbKogakuJidoSyokanTaisyo(rdbKogakuJidoSyokanTaisyo);
     }
 
@@ -314,7 +313,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShikyusinaiRiyu(TextBoxMultiLine txtShikyusinaiRiyu) {
+    public void setTxtShikyusinaiRiyu(TextBoxMultiLine txtShikyusinaiRiyu) {
         this.getTplJudgementResult().setTxtShikyusinaiRiyu(txtShikyusinaiRiyu);
     }
 
@@ -324,7 +323,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setKokuhorenKetteiJohoPanel1(KokuhorenKetteiJohoPanel1Div KokuhorenKetteiJohoPanel1) {
+    public void setKokuhorenKetteiJohoPanel1(KokuhorenKetteiJohoPanel1Div KokuhorenKetteiJohoPanel1) {
         this.getTplKetteiJoho().setKokuhorenKetteiJohoPanel1(KokuhorenKetteiJohoPanel1);
     }
 
@@ -334,7 +333,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtTsuchiBango(TextBoxCode txtTsuchiBango) {
+    public void setTxtTsuchiBango(TextBoxCode txtTsuchiBango) {
         this.getTplKetteiJoho().getKokuhorenKetteiJohoPanel1().setTxtTsuchiBango(txtTsuchiBango);
     }
 
@@ -344,7 +343,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShikyuKubun(TextBox txtShikyuKubun) {
+    public void setTxtShikyuKubun(TextBox txtShikyuKubun) {
         this.getTplKetteiJoho().getKokuhorenKetteiJohoPanel1().setTxtShikyuKubun(txtShikyuKubun);
     }
 
@@ -354,7 +353,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiYM(TextBoxDate txtKetteiYM) {
+    public void setTxtKetteiYM(TextBoxDate txtKetteiYM) {
         this.getTplKetteiJoho().getKokuhorenKetteiJohoPanel1().setTxtKetteiYM(txtKetteiYM);
     }
 
@@ -364,7 +363,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShiharaiKingakuGokei(TextBoxNum txtShiharaiKingakuGokei) {
+    public void setTxtShiharaiKingakuGokei(TextBoxNum txtShiharaiKingakuGokei) {
         this.getTplKetteiJoho().getKokuhorenKetteiJohoPanel1().setTxtShiharaiKingakuGokei(txtShiharaiKingakuGokei);
     }
 
@@ -374,7 +373,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKogakuShikyuGaku(TextBoxNum txtKogakuShikyuGaku) {
+    public void setTxtKogakuShikyuGaku(TextBoxNum txtKogakuShikyuGaku) {
         this.getTplKetteiJoho().getKokuhorenKetteiJohoPanel1().setTxtKogakuShikyuGaku(txtKogakuShikyuGaku);
     }
 
@@ -384,7 +383,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setSakuseiPanel(SakuseiPanelDiv SakuseiPanel) {
+    public void setSakuseiPanel(SakuseiPanelDiv SakuseiPanel) {
         this.getTplKetteiJoho().setSakuseiPanel(SakuseiPanel);
     }
 
@@ -394,7 +393,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setKokuhorenKetteiJohoPanel2(KokuhorenKetteiJohoPanel2Div KokuhorenKetteiJohoPanel2) {
+    public void setKokuhorenKetteiJohoPanel2(KokuhorenKetteiJohoPanel2Div KokuhorenKetteiJohoPanel2) {
         this.getTplKetteiJoho().getSakuseiPanel().setKokuhorenKetteiJohoPanel2(KokuhorenKetteiJohoPanel2);
     }
 
@@ -404,7 +403,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtSakuseiYMD1(TextBoxDate txtSakuseiYMD1) {
+    public void setTxtSakuseiYMD1(TextBoxDate txtSakuseiYMD1) {
         this.getTplKetteiJoho().getSakuseiPanel().getKokuhorenKetteiJohoPanel2().setTxtSakuseiYMD1(txtSakuseiYMD1);
     }
 
@@ -414,7 +413,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setFurikomiMeisaiJohoPanel(FurikomiMeisaiJohoPanelDiv FurikomiMeisaiJohoPanel) {
+    public void setFurikomiMeisaiJohoPanel(FurikomiMeisaiJohoPanelDiv FurikomiMeisaiJohoPanel) {
         this.getTplKetteiJoho().getSakuseiPanel().setFurikomiMeisaiJohoPanel(FurikomiMeisaiJohoPanel);
     }
 
@@ -424,7 +423,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtSakuseiYMD2(TextBoxDate txtSakuseiYMD2) {
+    public void setTxtSakuseiYMD2(TextBoxDate txtSakuseiYMD2) {
         this.getTplKetteiJoho().getSakuseiPanel().getFurikomiMeisaiJohoPanel().setTxtSakuseiYMD2(txtSakuseiYMD2);
     }
 
@@ -434,7 +433,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setKokuhorenSoufuJohoPanel(KokuhorenSoufuJohoPanelDiv KokuhorenSoufuJohoPanel) {
+    public void setKokuhorenSoufuJohoPanel(KokuhorenSoufuJohoPanelDiv KokuhorenSoufuJohoPanel) {
         this.getTplKetteiJoho().setKokuhorenSoufuJohoPanel(KokuhorenSoufuJohoPanel);
     }
 
@@ -444,7 +443,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtTaisyoUketoriYM(TextBoxDate txtTaisyoUketoriYM) {
+    public void setTxtTaisyoUketoriYM(TextBoxDate txtTaisyoUketoriYM) {
         this.getTplKetteiJoho().getKokuhorenSoufuJohoPanel().setTxtTaisyoUketoriYM(txtTaisyoUketoriYM);
     }
 
@@ -454,7 +453,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKekkaSoufuYM(TextBoxDate txtKekkaSoufuYM) {
+    public void setTxtKekkaSoufuYM(TextBoxDate txtKekkaSoufuYM) {
         this.getTplKetteiJoho().getKokuhorenSoufuJohoPanel().setTxtKekkaSoufuYM(txtKekkaSoufuYM);
     }
 
@@ -464,7 +463,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiSyaUketoriYM(TextBoxDate txtKetteiSyaUketoriYM) {
+    public void setTxtKetteiSyaUketoriYM(TextBoxDate txtKetteiSyaUketoriYM) {
         this.getTplKetteiJoho().getKokuhorenSoufuJohoPanel().setTxtKetteiSyaUketoriYM(txtKetteiSyaUketoriYM);
     }
 

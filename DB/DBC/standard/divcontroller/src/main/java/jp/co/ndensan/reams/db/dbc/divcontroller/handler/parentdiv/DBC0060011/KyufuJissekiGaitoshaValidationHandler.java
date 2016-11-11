@@ -71,7 +71,7 @@ public class KyufuJissekiGaitoshaValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (なし.equals(div.getHidden件数())) {
             validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.該当データなし)));
+                    new IdocheckMessages(UrErrorMessages.対象データなし)));
         }
         return validPairs;
     }

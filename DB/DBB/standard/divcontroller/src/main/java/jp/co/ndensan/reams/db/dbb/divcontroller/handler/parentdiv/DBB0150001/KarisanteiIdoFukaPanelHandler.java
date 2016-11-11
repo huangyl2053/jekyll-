@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.ChohyoMeter;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015001.DBB015001_KarisanteiIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.ZanteiKeisanIdoHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.FuchoKarisanteiIdoShinkiShikakuFuka;
@@ -212,7 +212,7 @@ public class KarisanteiIdoFukaPanelHandler {
                 row = new dgHokenryoDankai_Row();
                 row.setHokenryoDankai(保険料段階.get表記());
                 if (保険料段階.get保険料率() != null) {
-                    row.setHokenryoRitsu(new RString(保険料段階.get保険料率().toString()));
+                    row.getHokenryoRitsu().setValue(保険料段階.get保険料率());
                 }
                 rowList.add(row);
             }
@@ -330,7 +330,9 @@ public class KarisanteiIdoFukaPanelHandler {
         }
         div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki()
                 .setDataSource(dataSource);
-        div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
+        if (!dataSource.isEmpty()) {
+            div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
+        }
         set納入通知書の発行日();
     }
 
@@ -620,7 +622,7 @@ public class KarisanteiIdoFukaPanelHandler {
      *
      * @return バッチパラメータ
      */
-    public DBB015003_KarisanteiIdoTsuchishoHakkoParameter getバッチパラメータ() {
+    public DBB015001_KarisanteiIdoFukaParameter getバッチパラメータ() {
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
         KariSanteiIdoParameter parameter = new KariSanteiIdoParameter();
         FlexibleYear 調定年度 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getTxtChoteiNendo().getDomain();

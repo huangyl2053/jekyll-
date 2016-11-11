@@ -69,6 +69,7 @@ public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter implements IMyBat
     private final boolean uaft250_setaiNushiRiyoFlag;
     private final boolean uaft250_daihyoshaRiyokuFlag;
     private final FlexibleDate uaft250_kijunYMD;
+    private final List<ShikibetsuCode> uaft250_shikibetsuCodeList;
 
     private final IKozaSearchKey 口座検索条件;
     private final Long koza_kozaId;
@@ -161,6 +162,7 @@ public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter implements IMyBat
         this.uaft250_setaiNushiRiyoFlag = atesakiKey.get世帯主利用区分().isSetainushiRiyo();
         this.uaft250_daihyoshaRiyokuFlag = atesakiKey.get法人代表者利用区分().isHojinDaihyoshaRiyo();
         this.uaft250_kijunYMD = atesakiKey.get基準日();
+        this.uaft250_shikibetsuCodeList = atesakiKey.get識別コードリスト();
 
         this.口座検索条件 = kozaKey;
         this.koza_kozaId = kozaKey.get口座ID();

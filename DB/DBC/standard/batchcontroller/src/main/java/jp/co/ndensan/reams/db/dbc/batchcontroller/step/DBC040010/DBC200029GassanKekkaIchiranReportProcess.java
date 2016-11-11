@@ -102,12 +102,8 @@ public class DBC200029GassanKekkaIchiranReportProcess extends BatchKeyBreakBase<
 
     @Override
     protected void createWriter() {
-        if (processCore == null || !processCore.is改頁()) {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).create();
-        } else {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).addBreak(
-                    new DBC200029GassanKekkaIchiranPageBreak(processCore.改頁項())).create();
-        }
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId.getColumnValue()).addBreak(
+                new DBC200029GassanKekkaIchiranPageBreak(processCore.改頁項())).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 

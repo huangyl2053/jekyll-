@@ -260,13 +260,13 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.tokkiText = item.get特記事項_tokkiText();
+                source.tokkiText = item.get特記事項_tokkiText().get(0);
             } else if (短冊.equals(item.get特記パターン())) {
                 source = set特記事項テキスト連番_名称(source);
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.tokkiImg = item.get特記事項_tokkiImg();
+                source.tokkiImg = item.get特記事項_tokkiImg().get(0);
             } else if (短冊.equals(item.get特記パターン())) {
                 source = set特記事項イメージ連番_名称(source);
             }

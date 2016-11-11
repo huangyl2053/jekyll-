@@ -39,21 +39,21 @@
     <select id="select住所地特例該当" resultMap="resultMap_RelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
         SELECT
-        A."hihokenshaNo",
-        A."shikibetsuCode",
-        A."jukyuYMD",
-        A."shotokuNendo",
-        A."juushotitokureigaitou",
+        A."被保険者番号" AS "hihokenshaNo",
+        A."識別コード" AS "shikibetsuCode",
+        A."基準年月日" AS "jukyuYMD",
+        A."所得年度" AS "shotokuNendo",
+        A."住所地特例該当" AS "juushotitokureigaitou",
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."setaiCode" AS "setaiCode",
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" AS "seinengappiYMD",
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kazokuNo" AS "kazokuNo"
         FROM "SetaiYinHaAKuToRiGaTemp" AS A
         INNER JOIN
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
-        AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON	<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"=A."shikibetsuCode"
-        AND	<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shoriYMD"=A."jukyuYMD"
-        WHERE		A."juushotitokureigaitou"=#{住所地特例該当}
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"=A."識別コード"
+        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shoriYMD"=A."基準年月日"
+        WHERE A."住所地特例該当" = #{住所地特例該当}
 
     </select>
     <select id="select住所地特例該当以外" resultMap="resultMap_RelateEntity"
@@ -63,8 +63,8 @@
         B."setaiInshikibetsuCode" AS "shotaishikibetsuCode",
         B."setaiHaakuKijunYMD" AS "shotaihaakujukyuYMD",
         B."honninKubun" AS "honninnkubun",
-        C."shotokuNendo",
-        C."juushotitokureigaitou",
+        C."所得年度" AS "shotokuNendo",
+        C."住所地特例該当" AS "juushotitokureigaitou",
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."setaiCode" AS "setaiCode",
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" AS "seinengappiYMD",
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kazokuNo" AS "kazokuNo"
@@ -73,25 +73,25 @@
         INNER JOIN
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
         AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"=C."shikibetsuCode"
-        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shoriYMD"=C."jukyuYMD"
-        WHERE C."juushotitokureigaitou" <![CDATA[<>]]> #{住所地特例該当}
-        AND C."hihokenshaNo" = B."hihokenshaNo"
-        AND C."jukyuYMD" = B."setaiHaakuKijunYMD"
+        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"=C."識別コード"
+        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shoriYMD"=C."基準年月日"
+        WHERE C."住所地特例該当" <![CDATA[<>]]> #{住所地特例該当}
+        AND C."被保険者番号" = B."hihokenshaNo"
+        AND C."基準年月日" = B."setaiHaakuKijunYMD"
         AND B."kanriShikibetsuKubun"=#{管理識別区分}
 
     </select>
     <select id="select住所地特例以外の以外" resultMap="resultMap_RelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
         SELECT
-        A."hihokenshaNo",
-        A."shikibetsuCode",
-        A."jukyuYMD",
-        A."shotokuNendo",
-        A."juushotitokureigaitou"
-        FROM		"SetaiYinHaAKuToRiGaTemp" AS  A,
+        A."被保険者番号" AS "hihokenshaNo",
+        A."識別コード" AS "shikibetsuCode",
+        A."基準年月日" AS "jukyuYMD",
+        A."所得年度" AS "shotokuNendo",
+        A."住所地特例該当" AS "juushotitokureigaitou"
+        FROM "SetaiYinHaAKuToRiGaTemp" AS A,
         "SetaiYinShiyoTokuJyoHoTemp" AS B
-        WHERE		A."hihokenshaNo"<![CDATA[<>]]>  B."hihokenshaNo"
+        WHERE A."被保険者番号" <![CDATA[<>]]> B."hihokenshaNo"
     </select>
     <select id="select生保区分" resultMap="resultMap_RelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">

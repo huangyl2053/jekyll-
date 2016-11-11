@@ -13,20 +13,20 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaitaishoshakensaku.Kog
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.JidoShokanTaishoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.TaishoshaKensakuHoho;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.HihokenshaKensakuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.NengetsuKensakuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.dgKogakuServicehiRireki_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
-import jp.co.ndensan.reams.db.dbc.service.core.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensaku;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbx.service.core.view.HihokenshaDaichoAliveManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
@@ -93,20 +93,22 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
                 TaishoshaKensakuHoho.年月指定.getコード(), TaishoshaKensakuHoho.年月指定.get名称()));
         div.getKogakuServicehiSearch().getRadHihokenshaShitei().setDataSource(dataSource_被保険者);
         div.getKogakuServicehiSearch().getRadNengetsuShitei().setDataSource(dataSource_年月);
-        div.getKogakuServicehiSearch().getRadNengetsuShitei().setDisabled(true);
+        div.getKogakuServicehiSearch().getRadHihokenshaShitei().setSelectedKey(TaishoshaKensakuHoho.被保険者指定.getコード());
+        div.getKogakuServicehiSearch().getRadNengetsuShitei().clearSelectedItem();
     }
 
     /**
      * 該当者検索画面から対象を選択して戻ってきた場合、被保番号と氏名
      *
-     * @param 資格対象者 TaishoshaKey
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別コード ShikibetsuCode
+     * @return 対象データなしflag boolean
      */
-    public void load該当者検索(TaishoshaKey 資格対象者) {
-        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
-        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
+    public boolean set被保険者名(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+        if (識別コード == null || 識別コード.isEmpty()) {
+            div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
+            return true;
         }
-        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
         List<JuminShubetsu> 住民種別List = new ArrayList();
@@ -124,15 +126,36 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         builder.set住民状態(住民状態List);
         builder.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
         builder.set識別コード(識別コード);
-        // TODO QA1765
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        AtenaMeisho 名称 = KogakuShokaiTaishoshaKensaku.createInstance().get氏名(searchKey);
+        AtenaMeisho 名称 = KogakuShokaiTaishoshaFinder.createInstance().get氏名(searchKey);
         if (名称 != null && !名称.isEmpty()) {
             div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(名称.getColumnValue());
+            return false;
         } else {
             div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
+            return true;
         }
-        div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoNo().setValue(被保険者番号.getColumnValue());
+    }
+
+    /**
+     * 「被保番号」onBlur事件です。
+     *
+     * @return 対象データなしflag boolean
+     */
+    public boolean onBlur_txtHihoNo() {
+        RString 被保番号R = div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoNo().getValue();
+        if (被保番号R == null || 被保番号R.isEmpty()) {
+            div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
+            return true;
+        }
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(被保番号R);
+        HihokenshaDaichoAlive entity = new HihokenshaDaichoAliveManager().get最新の被保険者台帳履歴(被保険者番号);
+        if (entity != null) {
+            return set被保険者名(被保険者番号, entity.get識別コード());
+        } else {
+            div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoName().setValue(RString.EMPTY);
+            return true;
+        }
     }
 
     /**
@@ -190,12 +213,12 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
     /**
      * 検索処理、対象者一覧（パネル）初期化する。
      *
-     * @param searchCondition KogakuShokaiTaishoshaKensakuSearch
+     * @param searchCondition KogakuShokaiTaishoshaFinderSearch
      * @return 該当者一覧キー KogakuServiceData
      */
     public KogakuServiceData 検索(KogakuShokaiTaishoshaKensakuSearch searchCondition) {
         List<KogakuShokaiTaishoshaKensakuResultEntity> 該当者一覧情報
-                = KogakuShokaiTaishoshaKensaku.createInstance().selectTaishosha(searchCondition);
+                = KogakuShokaiTaishoshaFinder.createInstance().selectTaishosha(searchCondition);
         if (該当者一覧情報 == null || 該当者一覧情報.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage().evaluate());
         } else if (該当者一覧情報.size() == INDEX_イチ) {
@@ -226,7 +249,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
      * @param 申請年月To RDate
      * @param 決定年月From RDate
      * @param 決定年月To RDate
-     * @return searchパラメータ KogakuShokaiTaishoshaKensakuSearch
+     * @return searchパラメータ KogakuShokaiTaishoshaFinderSearch
      */
     public KogakuShokaiTaishoshaKensakuSearch getパラメータ(RString メニューID, RString 被保険者番号,
             RDate 提供年月From, RDate 提供年月To, RDate 申請年月From, RDate 申請年月To, RDate 決定年月From, RDate 決定年月To) {
@@ -421,7 +444,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             row.setTxtHihoNo(被保険者番号.getColumnValue());
         }
-        AtenaMeisho 申請者氏名 = entity.get識別対象().get名称().getName();
+        AtenaMeisho 申請者氏名 = entity.get識別対象().get名称() == null ? AtenaMeisho.EMPTY : entity.get識別対象().get名称().getName();
         if (申請者氏名 != null && !申請者氏名.isEmpty()) {
             row.setTxtHihoName(申請者氏名.getColumnValue());
         }
@@ -452,6 +475,10 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         if (履歴番号 != null) {
             row.setTxtRirekiNo(new RString(履歴番号.toString()));
         }
+        return setRow(entity, row);
+    }
+
+    private dgKogakuServicehiRireki_Row setRow(KogakuShokaiTaishoshaKensakuResultEntity entity, dgKogakuServicehiRireki_Row row) {
         HokenshaNo 証記載保険者番号 = entity.get証記載保険者番号();
         if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
             row.setTxtHdnShoHokensha(証記載保険者番号.getColumnValue());

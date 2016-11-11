@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKany
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyurekiIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoDataResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoHoji;
-import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoKanyurekiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoRelate;
-import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.DBC1100011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.DBC1100011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.KogakuGassanShikyuShinseiTorokuAllPanelDiv;
@@ -79,6 +77,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
     private static final RString 整理番号TMP = new RString("000000");
+    private static final RString DBCMN61001 = new RString("DBCMN61001");
+    private static final RString DBCMN61005 = new RString("DBCMN61005");
+    private static final RString DBCMN61009 = new RString("DBCMN61009");
 
     /**
      * 画面の初期化メソッドです。
@@ -153,6 +154,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         if (DBC1100011StateName.変更取下げ.getName().equals(ResponseHolder.getState())
                 && !div.getBtnAddShinsei().isVisible()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する, true);
+        }
+        KogakuGassanShinseishoHoji 高額合算申請書保持
+                = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
+        if (DBC1100011StateName.申請登録加入履歴一覧.getName().equals(ResponseHolder.getState())
+                && RSTRING_TWO.equals(高額合算申請書保持.get申請状況())) {
+            div.getTabShinseiTorokuPanel2().setVisible(false);
+            div.getTabShinseiTorokuPanel3().setVisible(false);
+            div.getTabShinseiTorokuPanel4().setVisible(false);
+        } else {
+            div.getTabShinseiTorokuPanel2().setVisible(true);
+            div.getTabShinseiTorokuPanel3().setVisible(true);
+            div.getTabShinseiTorokuPanel4().setVisible(true);
         }
         return ResponseData.of(div).rootTitle(タイトル).respond();
     }
@@ -231,22 +244,44 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         }
         RString 前排他キー = 排他情報.concat(被保険者番号.getColumnValue());
         排他制御(前排他キー);
-        handler.申請登録状態初期設定();
-        handler.onChange_ddlShinseiTaisyoNendo();
-        handler.onChange_ddlShokisaiHokenshaNo();
-        div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
-        div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
-        div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
-        div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
-        handler.画面内共有子DIV初期化処理新規場合(対象者);
-        handler.新規初期値取得設定();
-        onChange_chkKofuShinseiUmu(div);
-        FlexibleYear 対象年度 = new FlexibleYear(div.getDdlShinseiTaishoNendo().getSelectedKey());
-        HokenshaNo 保険者番号 = new HokenshaNo(div.getTxtTeishutsuHokenshaNo().getValue());
-        RString 整理番号Tmp = 整理番号TMP;
-        Decimal 履歴番号 = Decimal.ONE;
-        KogakuGassanShinseishoRelate 高額合算申請書Relate = new KogakuGassanShinseishoRelate(
-                被保険者番号, 対象年度, 保険者番号, 整理番号Tmp, 履歴番号);
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString メニューID = controlData.getMenuID();
+        KogakuGassanShinseishoRelate 高額合算申請書Relate;
+        KogakuGassanShinseishoHoji 高額合算申請書保持
+                = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
+        handler.onClick_btnShinseiJohoModoru();
+        if (DBCMN61001.equals(メニューID) || DBCMN61005.equals(メニューID) || DBCMN61009.equals(メニューID)) {
+            handler.申請登録状態初期設定();
+            handler.onChange_ddlShinseiTaisyoNendo();
+            handler.onChange_ddlShokisaiHokenshaNo();
+            div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
+            div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
+            div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
+            handler.画面内共有子DIV初期化処理新規場合(対象者);
+            handler.新規初期値取得設定();
+            onChange_chkKofuShinseiUmu(div);
+            FlexibleYear 対象年度 = new FlexibleYear(div.getDdlShinseiTaishoNendo().getSelectedKey());
+            HokenshaNo 保険者番号 = new HokenshaNo(div.getTxtTeishutsuHokenshaNo().getValue());
+            RString 整理番号Tmp = 整理番号TMP;
+            Decimal 履歴番号 = Decimal.ONE;
+            高額合算申請書Relate = new KogakuGassanShinseishoRelate(
+                    被保険者番号, 対象年度, 保険者番号, 整理番号Tmp, 履歴番号);
+        } else if (高額合算申請書保持.is訂正フラグ()) {
+            FlexibleYear 対象年度 = 高額合算申請書保持.get対象年度();
+            HokenshaNo 保険者番号 = 高額合算申請書保持.get保険者番号();
+            RString 整理番号 = 高額合算申請書保持.get整理番号();
+            Decimal 履歴番号 = 高額合算申請書保持.get履歴番号();
+            高額合算申請書Relate = new KogakuGassanShinseishoRelate(
+                    被保険者番号, 対象年度, 保険者番号, 整理番号, 履歴番号);
+        } else {
+            FlexibleYear 対象年度 = 高額合算申請書保持.get対象年度();
+            HokenshaNo 保険者番号 = 高額合算申請書保持.get保険者番号();
+            RString 整理番号 = 高額合算申請書保持.get整理番号();
+            Decimal 履歴番号 = 高額合算申請書保持.get履歴番号().add(Decimal.ONE);
+            高額合算申請書Relate = new KogakuGassanShinseishoRelate(
+                    被保険者番号, 対象年度, 保険者番号, 整理番号, 履歴番号);
+        }
         ViewStateHolder.put(ViewStateKeys.高額合算申請書, 高額合算申請書Relate);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 追加);
         return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
@@ -273,7 +308,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
         KogakuGassanShinseishoRelate 高額合算申請書 = 高額合算申請書保持.get高額合算申請書(identifier);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書, 高額合算申請書);
-        handler.onClick_dgShinseiJohoModify(高額合算申請書);
+        handler.onClick_dgShinseiJohoModify(高額合算申請書, 高額合算申請書保持.get申請状況());
         ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 修正);
         return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
     }
@@ -327,7 +362,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoHoji 高額合算申請書保持
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
         KogakuGassanShinseishoRelate 高額合算申請書 = 高額合算申請書保持.get高額合算申請書(identifier);
-        handler.onClick_dgShinseiJohoSelect(高額合算申請書);
+        handler.onClick_dgShinseiJohoSelect(高額合算申請書, 高額合算申請書保持.get申請状況());
         ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 照会);
         return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
     }
@@ -460,7 +495,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
                 排他解除(排他情報.concat(被保険者番号));
             } else if (修正.equals(高額合算申請書状態)) {
                 RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.高額合算申請書,
-                        KogakuGassanShinseishoResult.class).get高額合算申請書().get被保険者番号().getColumnValue();
+                        KogakuGassanShinseishoRelate.class).get被保険者番号().getColumnValue();
                 排他解除(排他情報.concat(被保険者番号));
             }
             handler.onClick_btnShinseiJohoModoru();
@@ -613,6 +648,17 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「完了する」ボタンのイベントです。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_btnComplete(
+            KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC1100011TransitionEventName.完了).respond();
+    }
+
     private KogakuGassanShinseishoDataResult 画面項目編集(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         KogakuGassanShinseishoDataResult 画面項目 = new KogakuGassanShinseishoDataResult();
         画面項目.set対象年度(new FlexibleYear(div.getDdlShinseiTaishoNendo().getSelectedKey()));
@@ -647,13 +693,11 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
 
     private boolean 変更有無判定(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-        KogakuGassanShinseishoResult 高額合算申請書 = ViewStateHolder.get(ViewStateKeys.高額合算申請書, KogakuGassanShinseishoResult.class);
-        KogakuGassanShinseishoKanyurekiResult 加入歴 = ViewStateHolder.get(ViewStateKeys.加入歴, KogakuGassanShinseishoKanyurekiResult.class);
+        KogakuGassanShinseishoRelate 高額合算申請書 = ViewStateHolder.get(ViewStateKeys.高額合算申請書, KogakuGassanShinseishoRelate.class);
         RString 高額合算申請書状態 = ViewStateHolder.get(ViewStateKeys.高額合算申請書状態, RString.class);
         RString 加入歴状態 = ViewStateHolder.get(ViewStateKeys.加入歴状態, RString.class);
         boolean 登録場合判定フラグ = 追加.equals(高額合算申請書状態) || 追加.equals(加入歴状態);
-        return 登録場合判定フラグ || (修正.equals(高額合算申請書状態) && handler.高額合算申請書変更判定(高額合算申請書.get高額合算申請書()).hasChanged())
-                || (修正.equals(加入歴状態) && handler.加入歴編集(加入歴.get高額合算申請書加入歴()).hasChanged());
+        return 登録場合判定フラグ || (修正.equals(高額合算申請書状態) && handler.高額合算申請書変更判定(高額合算申請書).hasChanged());
     }
 
     private void 前排他の設定(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) throws PessimisticLockingException {

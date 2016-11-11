@@ -498,9 +498,9 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 return;
             }
             KogakuGassanShikyuGakuKeisanKekkaUpdateParameter parameter = new KogakuGassanShikyuGakuKeisanKekkaUpdateParameter();
-            parameter.set被保険者番号(被保険者番号);
-            parameter.set証記載保険者番号(保険者番号);
-            parameter.set支給申請書整理番号(支給申請書整理番号);
+            parameter.set更新後被保険者番号(被保険者番号);
+            parameter.set更新後証記載保険者番号(保険者番号);
+            parameter.set更新後支給申請書整理番号(支給申請書整理番号);
             get高額合算給付実績(parameter, para);
             for (KogakuGassanShikyuKetteiHoseiResult 決定情報 : 決定情報list) {
                 RStringBuilder builder = new RStringBuilder();
@@ -549,16 +549,16 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     private void get高額合算給付実績(
             KogakuGassanShikyuGakuKeisanKekkaUpdateParameter parameter,
             KogakuGassanShikyuKetteiHoseiDetailParameter para) {
-        parameter.set自己負担額証明書整理番号(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+        parameter.set更新後自己負担額証明書整理番号(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtJikoFutanSeiriNo().getValue());
-        parameter.set給付実績作成区分コード(TWO);
-        parameter.set申請年月日(new FlexibleDate(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+        parameter.set更新後給付実績作成区分コード(TWO);
+        parameter.set更新後申請年月日(new FlexibleDate(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtShinseiYMD().getValue().toDateString()));
-        parameter.set決定年月日(new FlexibleDate(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+        parameter.set更新後決定年月日(new FlexibleDate(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtKetteiYMD().getValue().toDateString()));
-        parameter.set自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+        parameter.set更新後自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtJikoFutanSogaku().getValue());
-        parameter.set支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue());
+        parameter.set更新後支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue());
         parameter.setFlag(is支給区分_支給金額フラグ(para));
 
     }

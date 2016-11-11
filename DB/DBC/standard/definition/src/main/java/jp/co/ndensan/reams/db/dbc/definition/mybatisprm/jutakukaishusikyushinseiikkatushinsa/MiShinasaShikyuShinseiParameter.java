@@ -21,6 +21,7 @@ public class MiShinasaShikyuShinseiParameter extends UaFt200FindShikibetsuTaisho
 
     private final FlexibleDate 支給申請開始日;
     private final FlexibleDate 支給申請終了日;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -35,6 +36,7 @@ public class MiShinasaShikyuShinseiParameter extends UaFt200FindShikibetsuTaisho
         super(searchKey);
         this.支給申請開始日 = 支給申請開始日;
         this.支給申請終了日 = 支給申請終了日;
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 
     /**

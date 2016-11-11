@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka8.HeijunkaKeisanPageJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigofukatokuchoheijunka8.ShoriDateKanriEntityResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.kaigofukatokuchoheijunka8.KaigoFukaTokuchoHeijunka8FlowParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB013001.DBB013001_TokuchoHeinjunka8GatsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHeijunkaKeisanHoho8Gatsu;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendo.HonsanteiIdoKanendoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendo.IHonsanteiIdoKanendoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
@@ -57,12 +58,28 @@ public class KaigoFukaTokuchoHeijunka8 {
      * @param pageData 画面情報
      * @return batchParameterクラス
      */
-    public KaigoFukaTokuchoHeijunka8FlowParameter getBatchiPara(HeijunkaKeisanPageJoho pageData) {
-        KaigoFukaTokuchoHeijunka8FlowParameter batchParameter = new KaigoFukaTokuchoHeijunka8FlowParameter();
+    public DBB013001_TokuchoHeinjunka8GatsuParameter getBatchiPara(HeijunkaKeisanPageJoho pageData) {
+        DBB013001_TokuchoHeinjunka8GatsuParameter batchParameter = new DBB013001_TokuchoHeinjunka8GatsuParameter();
         batchParameter.set調定年度(pageData.get調定年度());
         batchParameter.set賦課年度(pageData.get賦課年度());
-        batchParameter.set増額平準化方法(pageData.get増額平準化方法());
-        batchParameter.set減額平準化方法(pageData.get減額平準化方法());
+        if (TokuchoHeijunkaKeisanHoho8Gatsu.平準化しない.get略称().equals(pageData.get増額平準化方法())) {
+            batchParameter.set増額平準化方法(TokuchoHeijunkaKeisanHoho8Gatsu.平準化しない.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho8Gatsu.前半と後半を１_１にする.get略称().equals(pageData.get増額平準化方法())) {
+            batchParameter.set増額平準化方法(TokuchoHeijunkaKeisanHoho8Gatsu.前半と後半を１_１にする.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho8Gatsu.年額より特徴３期分を含まない仮徴収額を引いた額を４期で割る.get略称().equals(
+                pageData.get増額平準化方法())) {
+            batchParameter.set増額平準化方法(
+                    TokuchoHeijunkaKeisanHoho8Gatsu.年額より特徴３期分を含まない仮徴収額を引いた額を４期で割る.getコード());
+        }
+        if (TokuchoHeijunkaKeisanHoho8Gatsu.平準化しない.get略称().equals(pageData.get減額平準化方法())) {
+            batchParameter.set減額平準化方法(TokuchoHeijunkaKeisanHoho8Gatsu.平準化しない.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho8Gatsu.前半と後半を１_１にする.get略称().equals(pageData.get減額平準化方法())) {
+            batchParameter.set減額平準化方法(TokuchoHeijunkaKeisanHoho8Gatsu.前半と後半を１_１にする.getコード());
+        } else if (TokuchoHeijunkaKeisanHoho8Gatsu.年額より特徴３期分を含まない仮徴収額を引いた額を４期で割る.get略称().equals(
+                pageData.get減額平準化方法())) {
+            batchParameter.set減額平準化方法(
+                    TokuchoHeijunkaKeisanHoho8Gatsu.年額より特徴３期分を含まない仮徴収額を引いた額を４期で割る.getコード());
+        }
         batchParameter.set出力順ID(pageData.get出力順ID());
         return batchParameter;
     }

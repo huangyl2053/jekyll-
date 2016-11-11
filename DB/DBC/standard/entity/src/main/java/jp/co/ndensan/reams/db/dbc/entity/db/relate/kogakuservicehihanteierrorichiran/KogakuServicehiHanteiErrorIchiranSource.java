@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteierrorichiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -49,7 +50,6 @@ public class KogakuServicehiHanteiErrorIchiranSource implements IReportSource {
     public RString kaipage5;
     @ReportItem(name = "listHanteiError_1", length = 4, order = 15)
     public RString listHanteiError_1;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listHanteiError_2", length = 10, order = 16)
     public RString listHanteiError_2;
     @ReportItem(name = "listHanteiError_3", length = 6, order = 17)
@@ -65,6 +65,8 @@ public class KogakuServicehiHanteiErrorIchiranSource implements IReportSource {
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 60, order = 22)
     public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

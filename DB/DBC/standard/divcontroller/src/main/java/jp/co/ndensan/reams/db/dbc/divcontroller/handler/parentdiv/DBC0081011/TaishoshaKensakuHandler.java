@@ -171,9 +171,9 @@ public class TaishoshaKensakuHandler {
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(保険者負担額).setVisible(true);
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(公費負担額).setVisible(false);
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(公費保険者番号).setVisible(false);
-            div.getLblSeikyuFutangaku().setText(new RString("請求保険者負担額"));
-            div.getLblKeteiFutangaku().setText(new RString("決定保険者負担額"));
-            div.getLblTyouseiFutangaku().setText(new RString("調整保険者負担額"));
+            div.getLblSeikyuFutangaku().setText(new RString("請求保険者<br>負担額"));
+            div.getLblKeteiFutangaku().setText(new RString("決定保険者<br>負担額"));
+            div.getLblTyouseiFutangaku().setText(new RString("調整保険者<br>負担額"));
         }
         if (保険者区分_3.equals(保険者区分) || 保険者区分_4.equals(保険者区分)) {
             div.getLblKetteihokenshaKaigokyuhuhi().setText(new RString("介護予防・日常生活支援総合事業費"));
@@ -253,9 +253,9 @@ public class TaishoshaKensakuHandler {
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(保険者負担額).setVisible(true);
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(公費負担額).setVisible(false);
             div.getDgKetteiHokenshaDetail().getGridSetting().getColumn(公費保険者番号).setVisible(false);
-            div.getLblSeikyuFutangaku().setText(new RString("請求保険者負担額"));
-            div.getLblKeteiFutangaku().setText(new RString("決定保険者負担額"));
-            div.getLblTyouseiFutangaku().setText(new RString("調整保険者負担額"));
+            div.getLblSeikyuFutangaku().setText(new RString("請求保険者<br>負担額"));
+            div.getLblKeteiFutangaku().setText(new RString("決定保険者<br>負担額"));
+            div.getLblTyouseiFutangaku().setText(new RString("調整保険者<br>負担額"));
         }
         if (保険者区分_3.equals(保険者区分) || 保険者区分_4.equals(保険者区分)) {
             div.getLblKetteihokenshaKaigokyuhuhi().setText(new RString("介護予防・日常生活支援総合事業費"));

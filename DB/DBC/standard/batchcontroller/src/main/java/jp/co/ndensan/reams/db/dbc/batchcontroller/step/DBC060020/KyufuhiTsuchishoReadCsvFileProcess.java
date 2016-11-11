@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -61,7 +62,7 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.get保存先パース());
+        return new BatchSimpleReader(parameter.get保存先パース(), Encode.SJIS);
     }
 
     @Override
@@ -125,31 +126,31 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
         登録Entity.setFukushiYouguShouhin(chiranCsvEntity.get福祉用具商品名());
         登録Entity.setHiyouGaku(getDecimal(chiranCsvEntity.get費用額()));
         登録Entity.setKibouKouriKakaku(chiranCsvEntity.get希望小売価格());
-        登録Entity.setZenkokuSeikyuKensu(chiranCsvEntity.get全国請求件数());
+        登録Entity.setZenkokuSeikyuKensu(getDecimal(chiranCsvEntity.get全国請求件数()));
         登録Entity.setZenkokuSaiteiHiyouGaku(getDecimal(chiranCsvEntity.get全国最低費用額()));
         登録Entity.setZenkokuShikiHiyouGaku(getDecimal(chiranCsvEntity.get全国最頻費用額()));
         登録Entity.setZenkokuSaikouHiyouGaku(getDecimal(chiranCsvEntity.get全国最高費用額()));
         登録Entity.setZenkokuHeikinHiyouGaku(getDecimal(chiranCsvEntity.get全国平均費用額()));
-        登録Entity.setTodoufukenSeikyuKensu(chiranCsvEntity.get都道府県請求件数());
+        登録Entity.setTodoufukenSeikyuKensu(getDecimal(chiranCsvEntity.get都道府県請求件数()));
         登録Entity.setTodoufukenSaiteiHiyouGaku(getDecimal(chiranCsvEntity.get都道府県最低費用額()));
         登録Entity.setTodoufukenShikiHiyouGaku(getDecimal(chiranCsvEntity.get都道府県最頻費用額()));
         登録Entity.setTodoufukenSaikouHiyouGaku(getDecimal(chiranCsvEntity.get都道府県最高費用額()));
         登録Entity.setTodoufukenHeikinHiyouGaku(getDecimal(chiranCsvEntity.get都道府県平均費用額()));
-        登録Entity.setHokenShaSeikyuKensu(chiranCsvEntity.get保険者請求件数());
+        登録Entity.setHokenShaSeikyuKensu(getDecimal(chiranCsvEntity.get保険者請求件数()));
         登録Entity.setHokenShaSaiteiHiyouGaku(getDecimal(chiranCsvEntity.get保険者最低費用額()));
         登録Entity.setHokenShaShikiHiyouGaku(getDecimal(chiranCsvEntity.get保険者最頻費用額()));
         登録Entity.setHokenShaSaikouHiyouGaku(getDecimal(chiranCsvEntity.get保険者最高費用額()));
         登録Entity.setHokenShaHeikinHiyouGaku(getDecimal(chiranCsvEntity.get保険者平均費用額()));
-        登録Entity.setZenkokuTanisuHani1(getDecimal(chiranCsvEntity.get全国単位数範囲１()));
-        登録Entity.setZenkokuTanisuHani2(getDecimal(chiranCsvEntity.get全国単位数範囲２()));
-        登録Entity.setZenkokuTanisuHani3(getDecimal(chiranCsvEntity.get全国単位数範囲３()));
-        登録Entity.setZenkokuTanisuHani4(getDecimal(chiranCsvEntity.get全国単位数範囲４()));
-        登録Entity.setZenkokuTanisuHani5(getDecimal(chiranCsvEntity.get全国単位数範囲５()));
-        登録Entity.setZenkokuTanisuHani6(getDecimal(chiranCsvEntity.get全国単位数範囲６()));
-        登録Entity.setZenkokuTanisuHani7(getDecimal(chiranCsvEntity.get全国単位数範囲７()));
-        登録Entity.setZenkokuTanisuHani8(getDecimal(chiranCsvEntity.get全国単位数範囲８()));
-        登録Entity.setZenkokuTanisuHani9(getDecimal(chiranCsvEntity.get全国単位数範囲９()));
-        登録Entity.setZenkokuTanisuHani10(getDecimal(chiranCsvEntity.get全国単位数範囲１０()));
+        登録Entity.setZenkokuTanisuHani1(chiranCsvEntity.get全国単位数範囲１());
+        登録Entity.setZenkokuTanisuHani2(chiranCsvEntity.get全国単位数範囲２());
+        登録Entity.setZenkokuTanisuHani3(chiranCsvEntity.get全国単位数範囲３());
+        登録Entity.setZenkokuTanisuHani4(chiranCsvEntity.get全国単位数範囲４());
+        登録Entity.setZenkokuTanisuHani5(chiranCsvEntity.get全国単位数範囲５());
+        登録Entity.setZenkokuTanisuHani6(chiranCsvEntity.get全国単位数範囲６());
+        登録Entity.setZenkokuTanisuHani7(chiranCsvEntity.get全国単位数範囲７());
+        登録Entity.setZenkokuTanisuHani8(chiranCsvEntity.get全国単位数範囲８());
+        登録Entity.setZenkokuTanisuHani9(chiranCsvEntity.get全国単位数範囲９());
+        登録Entity.setZenkokuTanisuHani10(chiranCsvEntity.get全国単位数範囲１０());
         登録Entity.setZenkokuTanisuHani1Dosu(getDecimal(chiranCsvEntity.get全国単位数範囲１の度数()));
         登録Entity.setZenkokuTanisuHani2Dosu(getDecimal(chiranCsvEntity.get全国単位数範囲２の度数()));
         登録Entity.setZenkokuTanisuHani3Dosu(getDecimal(chiranCsvEntity.get全国単位数範囲３の度数()));
@@ -160,16 +161,16 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
         登録Entity.setZenkokuTanisuHani8Dosu(getDecimal(chiranCsvEntity.get全国単位数範囲８の度数()));
         登録Entity.setZenkokuTanisuHani9Dosu(getDecimal(chiranCsvEntity.get全国単位数範囲９の度数()));
         登録Entity.setZenkokuTanisuHani10Dosu(getDecimal(chiranCsvEntity.get全国単位数範囲１０の度数()));
-        登録Entity.setTodoufukenTanisuHani1(getDecimal(chiranCsvEntity.get都道府県単位数範囲１()));
-        登録Entity.setTodoufukenTanisuHani2(getDecimal(chiranCsvEntity.get都道府県単位数範囲２()));
-        登録Entity.setTodoufukenTanisuHani3(getDecimal(chiranCsvEntity.get都道府県単位数範囲３()));
-        登録Entity.setTodoufukenTanisuHani4(getDecimal(chiranCsvEntity.get都道府県単位数範囲４()));
-        登録Entity.setTodoufukenTanisuHani5(getDecimal(chiranCsvEntity.get都道府県単位数範囲５()));
-        登録Entity.setTodoufukenTanisuHani6(getDecimal(chiranCsvEntity.get都道府県単位数範囲６()));
-        登録Entity.setTodoufukenTanisuHani7(getDecimal(chiranCsvEntity.get都道府県単位数範囲７()));
-        登録Entity.setTodoufukenTanisuHani8(getDecimal(chiranCsvEntity.get都道府県単位数範囲８()));
-        登録Entity.setTodoufukenTanisuHani9(getDecimal(chiranCsvEntity.get都道府県単位数範囲９()));
-        登録Entity.setTodoufukenTanisuHani10(getDecimal(chiranCsvEntity.get都道府県単位数範囲１０()));
+        登録Entity.setTodoufukenTanisuHani1(chiranCsvEntity.get都道府県単位数範囲１());
+        登録Entity.setTodoufukenTanisuHani2(chiranCsvEntity.get都道府県単位数範囲２());
+        登録Entity.setTodoufukenTanisuHani3(chiranCsvEntity.get都道府県単位数範囲３());
+        登録Entity.setTodoufukenTanisuHani4(chiranCsvEntity.get都道府県単位数範囲４());
+        登録Entity.setTodoufukenTanisuHani5(chiranCsvEntity.get都道府県単位数範囲５());
+        登録Entity.setTodoufukenTanisuHani6(chiranCsvEntity.get都道府県単位数範囲６());
+        登録Entity.setTodoufukenTanisuHani7(chiranCsvEntity.get都道府県単位数範囲７());
+        登録Entity.setTodoufukenTanisuHani8(chiranCsvEntity.get都道府県単位数範囲８());
+        登録Entity.setTodoufukenTanisuHani9(chiranCsvEntity.get都道府県単位数範囲９());
+        登録Entity.setTodoufukenTanisuHani10(chiranCsvEntity.get都道府県単位数範囲１０());
         登録Entity.setTodoufukenTanisuHani1Dosu(getDecimal(chiranCsvEntity.get都道府県単位数範囲１の度数()));
         登録Entity.setTodoufukenTanisuHani2Dosu(getDecimal(chiranCsvEntity.get都道府県単位数範囲２の度数()));
         登録Entity.setTodoufukenTanisuHani3Dosu(getDecimal(chiranCsvEntity.get都道府県単位数範囲３の度数()));

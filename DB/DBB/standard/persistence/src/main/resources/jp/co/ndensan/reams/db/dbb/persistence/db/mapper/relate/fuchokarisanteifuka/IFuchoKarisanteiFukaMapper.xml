@@ -60,7 +60,8 @@
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>  
         <id column="dbT1001HihokenshaDaicho_idoYMD"/>    
         <id column="dbT1001HihokenshaDaicho_edaNo"/>    
-        <id column="dbT2002Fuka_hihokenshaNo"/> 
+        <id column="dbT2002Fuka_hihokenshaNo"/>
+        <id column="dbT2002Fuka_tsuchishoNo"/>  
         <association property="資格"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity" />
         <association property="賦課"  resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity" />
     </resultMap>
@@ -98,8 +99,11 @@
              AND "DbT2002Fuka"."choteiNendo" = #{調定前年度}
             </if>
          ORDER BY
-            "DbT2002Fuka"."hihokenshaNo" ,
-            "DbT2002Fuka"."tsuchishoNo"  DESC          
+            "DbT2002Fuka"."hihokenshaNo"
+            <if test="普通徴収_仮算定賦課方法!=null and 普通徴収_仮算定賦課方法.toString() != '01'">
+             , "DbT2002Fuka"."choteiNendo" DESC
+            </if>    
+             ,"DbT2002Fuka"."tsuchishoNo"  DESC 
     </select>
 
 
@@ -122,7 +126,7 @@
             <include refid="jp.co.ndensan.reams.ur.urc.persistence.db.mapper.basic.shuno.chotei.IUrT0705ChoteiKyotsuMapper.allColumn_UrT0705ChoteiKyotsu" /> 
         FROM
             rgdb."DbV2002Fuka" AS "DbT2002Fuka"
-        LEFT JOIN
+        INNER JOIN
             (
             rgdb."DbT2003Kibetsu"  AS "DbT2003Kibetsu" 
         INNER JOIN

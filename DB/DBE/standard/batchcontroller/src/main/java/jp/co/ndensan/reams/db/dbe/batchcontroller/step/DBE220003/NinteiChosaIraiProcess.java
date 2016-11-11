@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE220003;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoHeadItem;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.NinteiChosaIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaIraiProcessParamter;
@@ -36,8 +35,9 @@ public class NinteiChosaIraiProcess extends BatchKeyBreakBase<NinteiChosaIraiRel
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.INinteiChosaIraiMapper."
             + "get認定調査依頼発行一覧");
     private static final RString 帳票ID = ReportIdDBE.DBE220003.getReportId().value();
-    private List<ChosaIraiHakkoIchiranhyoBodyItem> bodyItemList;
     private NinteiChosaIraiProcessParamter processParamter;
+    private NinteiChosaIraiBusiness business;
+    private int count;
     private static final List<RString> PAGE_BREAK_KEYS = new ArrayList<>();
 
     static {
@@ -51,7 +51,8 @@ public class NinteiChosaIraiProcess extends BatchKeyBreakBase<NinteiChosaIraiRel
 
     @Override
     protected void initialize() {
-        bodyItemList = new ArrayList<>();
+        count = 1;
+        business = new NinteiChosaIraiBusiness();
     }
 
     @Override
@@ -69,9 +70,10 @@ public class NinteiChosaIraiProcess extends BatchKeyBreakBase<NinteiChosaIraiRel
     @Override
     protected void keyBreakProcess(NinteiChosaIraiRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
-            ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.createFrom(setHeadItem(), bodyItemList);
+            count = 1;
+            ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.
+                    createFrom(business.setHeadItem(processParamter), business.setBodyItem(current), count++);
             report.writeBy(reportSourceWriter);
-            bodyItemList = new ArrayList<>();
         }
     }
 
@@ -84,38 +86,14 @@ public class NinteiChosaIraiProcess extends BatchKeyBreakBase<NinteiChosaIraiRel
 
     @Override
     protected void usualProcess(NinteiChosaIraiRelateEntity entity) {
-        bodyItemList.add(setBodyItem(entity));
+        ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.
+                createFrom(business.setHeadItem(processParamter), business.setBodyItem(entity), count++);
+        report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
-        if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.createFrom(setHeadItem(), bodyItemList);
-            report.writeBy(reportSourceWriter);
-        }
+
     }
 
-    private ChosaIraiHakkoIchiranhyoHeadItem setHeadItem() {
-        ChosaIraiHakkoIchiranhyoHeadItem headItem = new ChosaIraiHakkoIchiranhyoHeadItem();
-        headItem.set認定調査依頼書FLG(processParamter.getNinteiChosaIraisyo());
-        headItem.set依頼日From(processParamter.getIraiFromYMD());
-        headItem.set依頼日To(processParamter.getIraiToYMD());
-        return headItem;
-    }
-
-    private ChosaIraiHakkoIchiranhyoBodyItem setBodyItem(NinteiChosaIraiRelateEntity entity) {
-        ChosaIraiHakkoIchiranhyoBodyItem bodyItem = new ChosaIraiHakkoIchiranhyoBodyItem();
-        bodyItem.set依頼書作成日(entity.getIraishoShutsuryokuYMD());
-        bodyItem.set依頼書提出期限(entity.getNinteichosaKigenYMD());
-        bodyItem.set市町村コード(entity.getShichosonCode());
-        bodyItem.set市町村名称(entity.getShichosonMeisho());
-        bodyItem.set被保険者番号(entity.getHihokenshaNo());
-        bodyItem.set被保険者氏名(entity.getHihokenshaName());
-        bodyItem.set依頼日(entity.getNinteichosaIraiYMD());
-        bodyItem.set委託先名(entity.getJigyoshaMeisho());
-        bodyItem.set代表者名(entity.getDaihyoshaName());
-        bodyItem.set連絡先(entity.getTelNo());
-        bodyItem.set調査員名(entity.getChosainShimei());
-        return bodyItem;
-    }
 }

@@ -20,6 +20,14 @@ var DBC;
                 return "onMulti_dgKyufuJissekiMeisaiList";
             };
 
+            Events.onChange_rdbMisaiGkeiKbun = function () {
+                return "onChange_rdbMisaiGkeiKbun";
+            };
+
+            Events.onBlur_txtJgyoshaCode = function () {
+                return "onBlur_txtJgyoshaCode";
+            };
+
             Events.onOkClose_btnJgyosha = function () {
                 return "onOkClose_btnJgyosha";
             };
@@ -28,12 +36,28 @@ var DBC;
                 return "onBeforeOpenDialog_btnJgyosha";
             };
 
+            Events.onBlur_txtServiceSyurui = function () {
+                return "onBlur_txtServiceSyurui";
+            };
+
             Events.onOkClose_btnServiceSyurui = function () {
                 return "onOkClose_btnServiceSyurui";
             };
 
             Events.onBeforeOpenDialog_btnServiceSyurui = function () {
                 return "onBeforeOpenDialog_btnServiceSyurui";
+            };
+
+            Events.onChange_rdbRoreiFukushiNenkin = function () {
+                return "onChange_rdbRoreiFukushiNenkin";
+            };
+
+            Events.onChange_rdbRiyoshafutanDai2dankai = function () {
+                return "onChange_rdbRiyoshafutanDai2dankai";
+            };
+
+            Events.onChange_rdbGekihenkanwaKubun = function () {
+                return "onChange_rdbGekihenkanwaKubun";
             };
 
             Events.onClick_btnTorikeshi = function () {
@@ -115,10 +139,6 @@ var DBC;
                 return new UZA.TextBoxNum(this.convFiledName("txtRiyoshafutanGokei"));
             };
 
-            Controls.prototype.GokeiPanel = function () {
-                return new UZA.Panel(this.convFiledName("GokeiPanel"));
-            };
-
             Controls.prototype.txtSanteiKijunGaku = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtSanteiKijunGaku"));
             };
@@ -132,7 +152,7 @@ var DBC;
             };
 
             Controls.prototype.txtSetaiSyuyakuBango = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtSetaiSyuyakuBango"));
+                return new UZA.TextBox(this.convFiledName("txtSetaiSyuyakuBango"));
             };
 
             Controls.prototype.rdbKogakuJidoSyokanTaisyo = function () {
@@ -141,10 +161,6 @@ var DBC;
 
             Controls.prototype.lin1 = function () {
                 return new UZA.HorizontalLine(this.convFiledName("lin1"));
-            };
-
-            Controls.prototype.KogakuKyufuKonkyoPanel = function () {
-                return new UZA.Panel(this.convFiledName("KogakuKyufuKonkyoPanel"));
             };
 
             Controls.prototype.rdbTsukiOkure = function () {

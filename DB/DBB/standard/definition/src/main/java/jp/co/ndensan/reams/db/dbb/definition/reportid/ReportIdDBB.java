@@ -397,7 +397,7 @@ public enum ReportIdDBB {
     /**
      * 特別徴収平準化仮算定額変更通知書発行一覧表の帳票ID
      */
-    DBB200004(new ReportId("DBB200004_TokuChoHeijunkaTsuchishoHakkoIchiran"), new RString("特別徴収平準化仮算定額変更通知書発行一覧表")),
+    DBB200004(new ReportId("DBB200004_TokuChoHeijunkaKarigakuHenkoTsuchishoHakkoIchiran"), new RString("特別徴収平準化仮算定額変更通知書発行一覧表")),
     /**
      * 普徴仮算定結果一覧表の帳票ID
      */

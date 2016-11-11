@@ -39,7 +39,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
@@ -188,7 +187,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         編集後仮算定賦課台帳情報.set保険者名称(賦課台帳情報.get地方公共団体().get市町村名());
         編集後仮算定賦課台帳情報.set保険者番号(賦課台帳情報.get地方公共団体().get地方公共団体コード().getColumnValue());
         if (本人個人 != null) {
-            編集後仮算定賦課台帳情報.set本人生年月日(本人個人.get生年月日());
+            編集後仮算定賦課台帳情報.set本人生年月日(本人個人.get生年月日_パターン4());
             編集後仮算定賦課台帳情報.set本人住所(本人個人.get編集後住所());
             編集後仮算定賦課台帳情報.set本人名称(本人個人.get名称().getName().getColumnValue());
             編集後仮算定賦課台帳情報.set本人名称カナ(本人個人.get名称().getKana().getColumnValue());
@@ -274,7 +273,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         編集後本算定賦課台帳情報.set保険者名称(賦課台帳情報.get地方公共団体().get市町村名());
         編集後本算定賦課台帳情報.set保険者番号(賦課台帳情報.get地方公共団体().get地方公共団体コード());
         if (本人個人 != null) {
-            編集後本算定賦課台帳情報.set本人生年月日(本人個人.get生年月日());
+            編集後本算定賦課台帳情報.set本人生年月日(本人個人.get生年月日_パターン4());
             編集後本算定賦課台帳情報.set本人住所(本人個人.get編集後住所());
             編集後本算定賦課台帳情報.set本人名称(本人個人.get名称().getName().getColumnValue());
             編集後本算定賦課台帳情報.set本人名称カナ(本人個人.get名称().getKana().getColumnValue());
@@ -340,12 +339,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             普徴期月リスト = 期月リスト_過年度.toList();
             特徴期月リスト = new ArrayList<>();
         }
-        FutsuChoshuKi 普徴期情報 = create普徴期情報(普徴期月リスト);
-        FutsuChoshuTsuki 普徴月情報 = create普徴月情報(普徴期月リスト);
+        FutsuChoshuTsuki 普徴月情報 = new FutsuChoshuTsuki();
+        FutsuChoshuKi 普徴期情報 = create普徴期月情報(普徴期月リスト, 普徴月情報);
         FutsuChoshuZuiji 随時情報 = create随時情報(年度区分, 普徴期月リスト);
         List<SetaInJoho> 世帯員情報リスト = create世帯員情報リスト(賦課台帳情報.get世帯員所得情報(), 賦課の情報_更正後.get宛名().is日本人());
-        TokubetsuChoshuKi 特徴期情報 = create特徴期情報(年度区分, 特徴期月リスト);
-        TokubetsuChoshuTsuki 特徴月情報 = create特徴月情報(年度区分, 特徴期月リスト);
+        TokubetsuChoshuTsuki 特徴月情報 = new TokubetsuChoshuTsuki();
+        TokubetsuChoshuKi 特徴期情報 = create特徴期月情報(年度区分, 特徴期月リスト, 特徴月情報);
         RString 受給情報 = create受給情報(賦課台帳情報.get受給者台帳情報(), 賦課台帳情報.get支払方法変更リスト());
 
         if (表示コード情報 != null) {
@@ -433,14 +432,14 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             本算定賦課内訳.set本人公的年金収入額(本算定賦課内訳_更正後.get本人公的年金収入額());
             本算定賦課内訳.set本人算出保険料額(本算定賦課内訳_更正後.get本人算出保険料額());
             本算定賦課内訳.set本人減免額(本算定賦課内訳_更正後.get本人減免額());
-            本算定賦課内訳.set年額保険料(本算定賦課内訳_更正後.get確定年額保険料());
+            本算定賦課内訳.set確定年額保険料(本算定賦課内訳_更正後.get確定年額保険料());
         } else {
             本算定賦課内訳.set本人合計所得金額(get増減額(本算定賦課内訳_更正後.get本人合計所得金額(), 本算定賦課内訳_更正前.get本人合計所得金額()));
             本算定賦課内訳.set本人公的年金収入額(get増減額(本算定賦課内訳_更正後.get本人公的年金収入額(),
                     本算定賦課内訳_更正前.get本人公的年金収入額()));
             本算定賦課内訳.set本人算出保険料額(get増減額(本算定賦課内訳_更正後.get本人算出保険料額(), 本算定賦課内訳_更正前.get本人算出保険料額()));
             本算定賦課内訳.set本人減免額(get増減額(本算定賦課内訳_更正後.get本人減免額(), 本算定賦課内訳_更正前.get本人減免額()));
-            本算定賦課内訳.set年額保険料(get増減額(本算定賦課内訳_更正後.get確定年額保険料(), 本算定賦課内訳_更正前.get確定年額保険料()));
+            本算定賦課内訳.set確定年額保険料(get増減額(本算定賦課内訳_更正後.get確定年額保険料(), 本算定賦課内訳_更正前.get確定年額保険料()));
         }
         本算定賦課内訳.set本人課税区分(RString.EMPTY);
         本算定賦課内訳.set世帯課税区分(RString.EMPTY);
@@ -549,12 +548,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         if (賦課の情報.get賦課情報().get月割開始年月2() != null && !賦課の情報.get賦課情報().get月割開始年月2().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月2()
                 .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度()
-                                .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
+                        .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
             return 賦課の情報.get賦課情報().get保険料算定段階2();
         } else if (賦課の情報.get賦課情報().get月割開始年月1() != null && !賦課の情報.get賦課情報().get月割開始年月1().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月1()
                 .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度()
-                                .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
+                        .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
             return 賦課の情報.get賦課情報().get保険料算定段階1();
         }
         return RString.EMPTY;
@@ -579,12 +578,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         if (賦課の情報.get賦課情報().get月割開始年月2() != null && !賦課の情報.get賦課情報().get月割開始年月2().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月2()
                 .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度()
-                                .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
+                        .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
             return format金額_パターン(賦課の情報.get賦課情報().get算定年額保険料2());
         } else if (賦課の情報.get賦課情報().get月割開始年月1() != null && !賦課の情報.get賦課情報().get月割開始年月1().isEmpty()
                 && 賦課の情報.get賦課情報().get月割開始年月1()
                 .isBeforeOrEquals(new FlexibleYearMonth(賦課の情報.get賦課情報().get賦課年度()
-                                .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
+                        .plusYear(INT_1).toDateString().concat(月.padZeroToLeft(2))))) {
             return format金額_パターン(賦課の情報.get賦課情報().get算定年額保険料1());
         }
         return RString.EMPTY;
@@ -615,12 +614,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         KitsukiList 期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
         List<Kitsuki> 特徴期月リスト = 期月リスト_特徴.toList();
 
-        FutsuChoshuKi 普徴期情報 = create普徴期情報(普徴期月リスト);
-        FutsuChoshuTsuki 普徴月情報 = create普徴月情報(普徴期月リスト);
+        FutsuChoshuTsuki 普徴月情報 = new FutsuChoshuTsuki();
+        FutsuChoshuKi 普徴期情報 = create普徴期月情報(普徴期月リスト, 普徴月情報);
         FutsuChoshuZuiji 随時情報 = create随時情報(GennenKanen.現年度, 普徴期月リスト);
         List<SetaInJoho> 世帯員情報リスト = create世帯員情報リスト(賦課台帳情報.get世帯員所得情報(), 賦課の情報_更正後.get宛名().is日本人());
-        TokubetsuChoshuKi 特徴期情報 = create特徴期情報(GennenKanen.現年度, 特徴期月リスト);
-        TokubetsuChoshuTsuki 特徴月情報 = create特徴月情報(GennenKanen.現年度, 特徴期月リスト);
+        TokubetsuChoshuTsuki 特徴月情報 = new TokubetsuChoshuTsuki();
+        TokubetsuChoshuKi 特徴期情報 = create特徴期月情報(GennenKanen.現年度, 特徴期月リスト, 特徴月情報);
         Kitsuki 最終法定納期 = 期月リスト_普徴.get最終法定納期();
         Decimal 前年度普通徴収最終期保険料 = get前年度普通徴収最終期保険料(賦課台帳情報.get前年度情報(), 最終法定納期);
         RString 受給情報 = create受給情報(賦課台帳情報.get受給者台帳情報(), 賦課台帳情報.get支払方法変更リスト());
@@ -686,20 +685,20 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         }
         return hyojiCodeResearcher.create表示コード情報(帳票制御共通情報,
                 賦課の情報_更正後.get宛名() != null && 賦課の情報_更正後.get宛名().toEntity() != null
-                ? get町域コード(賦課の情報_更正後.get宛名().toEntity().getChoikiCode()) : RString.EMPTY,
+                        ? get町域コード(賦課の情報_更正後.get宛名().toEntity().getChoikiCode()) : RString.EMPTY,
                 賦課の情報_更正後.get宛名() != null && 賦課の情報_更正後.get宛名().toEntity() != null
-                ? get行政区コード(賦課の情報_更正後.get宛名().toEntity().getGyoseikuCode()) : RString.EMPTY,
+                        ? get行政区コード(賦課の情報_更正後.get宛名().toEntity().getGyoseikuCode()) : RString.EMPTY,
                 賦課の情報_更正後.get宛名() != null && 賦課の情報_更正後.get宛名().get行政区画() != null
                 && 賦課の情報_更正後.get宛名().get行政区画().getChiku1() != null
-                ? 賦課の情報_更正後.get宛名().get行政区画().getChiku1().getコード().getColumnValue() : RString.EMPTY,
+                        ? 賦課の情報_更正後.get宛名().get行政区画().getChiku1().getコード().getColumnValue() : RString.EMPTY,
                 賦課の情報_更正後.get宛名() != null && 賦課の情報_更正後.get宛名().get行政区画() != null
                 && 賦課の情報_更正後.get宛名().get行政区画().getChiku2() != null
-                ? 賦課の情報_更正後.get宛名().get行政区画().getChiku2().getコード().getColumnValue() : RString.EMPTY,
+                        ? 賦課の情報_更正後.get宛名().get行政区画().getChiku2().getコード().getColumnValue() : RString.EMPTY,
                 賦課の情報_更正後.get宛名() != null && 賦課の情報_更正後.get宛名().get行政区画() != null
                 && 賦課の情報_更正後.get宛名().get行政区画().getChiku3() != null
-                ? 賦課の情報_更正後.get宛名().get行政区画().getChiku3().getコード().getColumnValue() : RString.EMPTY,
+                        ? 賦課の情報_更正後.get宛名().get行政区画().getChiku3().getコード().getColumnValue() : RString.EMPTY,
                 賦課台帳情報.get納組情報() != null && 賦課台帳情報.get納組情報().getNokumi() != null
-                ? 賦課台帳情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
+                        ? 賦課台帳情報.get納組情報().getNokumi().getNokumiCode() : RString.EMPTY);
     }
 
     private void set仮算定変更事由(EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報, List<RString> 変更事由リスト) {
@@ -811,7 +810,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         }
         本人 = get本人_更正前後(賦課の情報, 被保険者台帳情報, 本人個人);
         if (本人個人 != null) {
-            本人.set本人生年月日(本人個人.get生年月日_パターン());
+            本人.set本人生年月日(本人個人.get生年月日For帳票());
         }
         本人.set本人合計取得金額(format金額(賦課の情報.get賦課情報().get合計所得金額()));
         本人.set本人課税区分(!RString.isNullOrEmpty(賦課の情報.get賦課情報().get課税区分())
@@ -932,8 +931,10 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         FukaJoho 賦課情報 = 賦課の情報.get賦課情報();
         TokubetsuChoshu 特別徴収 = get特別徴収(前後区分, 賦課の情報, 収入情報, 期月リスト_特徴, 編集後本算定賦課台帳情報.get特徴期());
         Decimal 特別期別合計 = get特徴仮算定保険料(賦課情報, INT_1, INT_6);
-        特別徴収.set特徴確定年額保険料(DecimalFormatter.toコンマ区切りRString(特別期別合計, 0));
-        特別徴収.set調整額歳出還付(format金額_パターン(賦課情報.get特徴歳出還付額()));
+        RString 特徴確定年額保険料 = DecimalFormatter.toコンマ区切りRString(特別期別合計, 0);
+        特別徴収.set特徴確定年額保険料(定数_ゼロ.equals(特徴確定年額保険料) ? RString.EMPTY : 特徴確定年額保険料);
+        特別徴収.set調整額歳出還付(定数_ゼロ.equals(format金額_パターン(賦課情報.get特徴歳出還付額()))
+                ? RString.EMPTY : format金額_パターン(賦課情報.get特徴歳出還付額()));
         if (前後区分) {
             編集後本算定賦課台帳情報.set特別徴収更正後(特別徴収);
         } else {
@@ -943,23 +944,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
 
     private TokubetsuChoshu get特別徴収(boolean 前後区分, FukaAtena 賦課の情報, ShunyuJoho 収入情報,
             KitsukiList 期月リスト_特徴, TokubetsuChoshuKi 特徴期) {
-
         FukaJoho 賦課情報 = 賦課の情報.get賦課情報();
         TokubetsuChoshu 特別徴収 = new TokubetsuChoshu();
-        特別徴収.set特徴調定月(new RString(賦課情報.get調定日時().getMonthValue()).concat(FORMAT_月));
-        特別徴収.set特徴調定月の期(FORMAT_LEFT.concat(期月リスト_特徴.get月の期(Tsuki.toValue(new RString(賦課情報.get調定日時().getMonthValue())
-                .padZeroToLeft(INT_2))).get期()).concat(FORMAT_RIGHT));
-        Decimal 特別期別合計 = get特徴仮算定保険料(賦課情報, INT_1, INT_6);
-        特別徴収.set特徴仮算定保険料(DecimalFormatter.toコンマ区切りRString(特別期別合計, 0));
-        if (前後区分) {
-            Decimal 特別収入合計 = get特徴収入済額(収入情報, INT_1, INT_6);
-            特別徴収.set特徴納付済額(DecimalFormatter.toコンマ区切りRString(特別収入合計, 0));
-            特別徴収.set特徴今後納付すべき額(DecimalFormatter
-                    .toコンマ区切りRString(new Decimal(特別期別合計.intValue() - 特別収入合計.intValue()), 0));
-        } else {
-            特別徴収.set特徴納付済額(RString.EMPTY);
-            特別徴収.set特徴今後納付すべき額(RString.EMPTY);
-        }
         特別徴収.set特徴金額１(RString.EMPTY);
         特別徴収.set特徴金額２(RString.EMPTY);
         特別徴収.set特徴金額３(RString.EMPTY);
@@ -974,23 +960,46 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         特別徴収.set特徴金額１２(RString.EMPTY);
         特別徴収.set特徴金額１３(RString.EMPTY);
         特別徴収.set特徴金額１４(RString.EMPTY);
-        if (!RString.isNullOrEmpty(特徴期.get特徴期１())) {
+        boolean is金額がある = false;
+        if (!RString.isNullOrEmpty(特徴期.get特徴期１()) && null != 賦課情報.get特徴期別金額01()) {
+            is金額がある = true;
             特別徴収.set特徴金額１(format金額(賦課情報.get特徴期別金額01()));
         }
-        if (!RString.isNullOrEmpty(特徴期.get特徴期２())) {
+        if (!RString.isNullOrEmpty(特徴期.get特徴期２()) && null != 賦課情報.get特徴期別金額02()) {
+            is金額がある = true;
             特別徴収.set特徴金額２(format金額(賦課情報.get特徴期別金額02()));
         }
-        if (!RString.isNullOrEmpty(特徴期.get特徴期３())) {
+        if (!RString.isNullOrEmpty(特徴期.get特徴期３()) && null != 賦課情報.get特徴期別金額03()) {
+            is金額がある = true;
             特別徴収.set特徴金額３(format金額(賦課情報.get特徴期別金額03()));
         }
-        if (!RString.isNullOrEmpty(特徴期.get特徴期４())) {
+        if (!RString.isNullOrEmpty(特徴期.get特徴期４()) && null != 賦課情報.get特徴期別金額04()) {
+            is金額がある = true;
             特別徴収.set特徴金額４(format金額(賦課情報.get特徴期別金額04()));
         }
-        if (!RString.isNullOrEmpty(特徴期.get特徴期５())) {
+        if (!RString.isNullOrEmpty(特徴期.get特徴期５()) && null != 賦課情報.get特徴期別金額05()) {
+            is金額がある = true;
             特別徴収.set特徴金額５(format金額(賦課情報.get特徴期別金額05()));
         }
-        if (!RString.isNullOrEmpty(特徴期.get特徴期６())) {
+        if (!RString.isNullOrEmpty(特徴期.get特徴期６()) && null != 賦課情報.get特徴期別金額06()) {
+            is金額がある = true;
             特別徴収.set特徴金額６(format金額(賦課情報.get特徴期別金額06()));
+        }
+        if (is金額がある) {
+            特別徴収.set特徴調定月(new RString(賦課情報.get調定日時().getMonthValue()).concat(FORMAT_月));
+            特別徴収.set特徴調定月の期(FORMAT_LEFT.concat(get月の期(期月リスト_特徴, 賦課情報.get調定日時().getMonthValue())).concat(FORMAT_RIGHT));
+            Decimal 特別期別合計 = get特徴仮算定保険料(賦課情報, INT_1, INT_6);
+            特別徴収.set特徴仮算定保険料(DecimalFormatter.toコンマ区切りRString(特別期別合計, 0));
+            if (前後区分) {
+                Decimal 特別収入合計 = get特徴収入済額(収入情報, INT_1, INT_6);
+                特別徴収.set特徴納付済額(定数_ゼロ.equals(DecimalFormatter.toコンマ区切りRString(特別収入合計, 0))
+                        ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(特別収入合計, 0));
+                特別徴収.set特徴今後納付すべき額(DecimalFormatter
+                        .toコンマ区切りRString(new Decimal(特別期別合計.intValue() - 特別収入合計.intValue()), 0));
+            } else {
+                特別徴収.set特徴納付済額(RString.EMPTY);
+                特別徴収.set特徴今後納付すべき額(RString.EMPTY);
+            }
         }
         return 特別徴収;
     }
@@ -1022,8 +1031,9 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         FukaJoho 賦課情報 = 賦課の情報.get賦課情報();
         FutsuChoshu 普通徴収 = get普通徴収(前後区分, 賦課の情報, 収入情報, 期月リスト_普徴, 編集後本算定賦課台帳情報.get普徴期());
         Decimal 普徴期別合計 = get普徴納付済額(賦課情報, INT_1, INT_14);
-        普通徴収.set普徴確定年額保険料(DecimalFormatter.toコンマ区切りRString(普徴期別合計, 0));
-        普通徴収.set調整額歳出還付(format金額(賦課情報.get普徴歳出還付額()));
+        RString 普徴確定年額保険料 = DecimalFormatter.toコンマ区切りRString(普徴期別合計, 0);
+        普通徴収.set普徴確定年額保険料(定数_ゼロ.equals(普徴確定年額保険料) ? RString.EMPTY : 普徴確定年額保険料);
+        普通徴収.set調整額歳出還付(定数_ゼロ.equals(format金額(賦課情報.get普徴歳出還付額())) ? RString.EMPTY : format金額(賦課情報.get普徴歳出還付額()));
         if (前後区分) {
             編集後本算定賦課台帳情報.set普通徴収更正後(普通徴収);
         } else {
@@ -1036,20 +1046,6 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
 
         FukaJoho 賦課情報 = 賦課の情報.get賦課情報();
         FutsuChoshu 普通徴収 = new FutsuChoshu();
-        普通徴収.set普徴調定月(new RString(賦課情報.get調定日時().getMonthValue()).concat(FORMAT_月));
-        普通徴収.set普徴調定月の期(FORMAT_LEFT.concat(期月リスト_普徴.get月の期(Tsuki.toValue(new RString(賦課情報.get調定日時().getMonthValue())
-                .padZeroToLeft(INT_2))).get期()).concat(FORMAT_RIGHT));
-        Decimal 普徴期別合計 = get普徴納付済額(賦課情報, INT_1, INT_14);
-        普通徴収.set普徴確定年額保険料(DecimalFormatter.toコンマ区切りRString(普徴期別合計, 0));
-        if (前後区分) {
-            Decimal 普徴収入合計 = get普徴収入済額(収入情報, INT_1, INT_14);
-            普通徴収.set普徴納付済額(DecimalFormatter.toコンマ区切りRString(普徴収入合計, 0));
-            普通徴収.set普徴今後納付すべき額(DecimalFormatter
-                    .toコンマ区切りRString(new Decimal(普徴期別合計.intValue() - 普徴収入合計.intValue()), 0));
-        } else {
-            普通徴収.set普徴納付済額(RString.EMPTY);
-            普通徴収.set普徴今後納付すべき額(RString.EMPTY);
-        }
         普通徴収.set普徴金額１(RString.EMPTY);
         普通徴収.set普徴金額２(RString.EMPTY);
         普通徴収.set普徴金額３(RString.EMPTY);
@@ -1064,49 +1060,92 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         普通徴収.set普徴金額１２(RString.EMPTY);
         普通徴収.set普徴金額１３(RString.EMPTY);
         普通徴収.set普徴金額１４(RString.EMPTY);
-        if (!RString.isNullOrEmpty(普徴期.get普徴期１())) {
+        boolean is金額がある = false;
+        if (!RString.isNullOrEmpty(普徴期.get普徴期１()) && null != 賦課情報.get普徴期別金額01()) {
+            is金額がある = true;
             普通徴収.set普徴金額１(format金額(賦課情報.get普徴期別金額01()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期２())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期２()) && null != 賦課情報.get普徴期別金額02()) {
+            is金額がある = true;
             普通徴収.set普徴金額２(format金額(賦課情報.get普徴期別金額02()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期３())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期３()) && null != 賦課情報.get普徴期別金額03()) {
+            is金額がある = true;
             普通徴収.set普徴金額３(format金額(賦課情報.get普徴期別金額03()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期４())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期４()) && null != 賦課情報.get普徴期別金額04()) {
+            is金額がある = true;
             普通徴収.set普徴金額４(format金額(賦課情報.get普徴期別金額04()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期５())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期５()) && null != 賦課情報.get普徴期別金額05()) {
+            is金額がある = true;
             普通徴収.set普徴金額５(format金額(賦課情報.get普徴期別金額05()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期６())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期６()) && null != 賦課情報.get普徴期別金額06()) {
+            is金額がある = true;
             普通徴収.set普徴金額６(format金額(賦課情報.get普徴期別金額06()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期７())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期７()) && null != 賦課情報.get普徴期別金額07()) {
+            is金額がある = true;
             普通徴収.set普徴金額７(format金額(賦課情報.get普徴期別金額07()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期８())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期８()) && null != 賦課情報.get普徴期別金額08()) {
+            is金額がある = true;
             普通徴収.set普徴金額８(format金額(賦課情報.get普徴期別金額08()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期９())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期９()) && null != 賦課情報.get普徴期別金額09()) {
+            is金額がある = true;
             普通徴収.set普徴金額９(format金額(賦課情報.get普徴期別金額09()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期１０())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期１０()) && null != 賦課情報.get普徴期別金額10()) {
+            is金額がある = true;
             普通徴収.set普徴金額１０(format金額(賦課情報.get普徴期別金額10()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期１１())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期１１()) && null != 賦課情報.get普徴期別金額11()) {
+            is金額がある = true;
             普通徴収.set普徴金額１１(format金額(賦課情報.get普徴期別金額11()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期１２())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期１２()) && null != 賦課情報.get普徴期別金額12()) {
+            is金額がある = true;
             普通徴収.set普徴金額１２(format金額(賦課情報.get普徴期別金額12()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期１３())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期１３()) && null != 賦課情報.get普徴期別金額13()) {
+            is金額がある = true;
             普通徴収.set普徴金額１３(format金額(賦課情報.get普徴期別金額13()));
         }
-        if (!RString.isNullOrEmpty(普徴期.get普徴期１４())) {
+        if (!RString.isNullOrEmpty(普徴期.get普徴期１４()) && null != 賦課情報.get普徴期別金額14()) {
+            is金額がある = true;
             普通徴収.set普徴金額１４(format金額(賦課情報.get普徴期別金額14()));
         }
+        if (is金額がある) {
+            普通徴収.set普徴調定月(new RString(賦課情報.get調定日時().getMonthValue()).concat(FORMAT_月));
+            普通徴収.set普徴調定月の期(FORMAT_LEFT.concat(get月の期(期月リスト_普徴, 賦課情報.get調定日時().getMonthValue())).concat(FORMAT_RIGHT));
+            Decimal 普徴期別合計 = get普徴納付済額(賦課情報, INT_1, INT_14);
+            RString 普徴確定年額保険料 = DecimalFormatter.toコンマ区切りRString(普徴期別合計, 0);
+            普通徴収.set普徴確定年額保険料(定数_ゼロ.equals(普徴確定年額保険料) ? RString.EMPTY : 普徴確定年額保険料);
+            if (前後区分) {
+                Decimal 普徴収入合計 = get普徴収入済額(収入情報, INT_1, INT_14);
+                普通徴収.set普徴納付済額(定数_ゼロ.equals(DecimalFormatter.toコンマ区切りRString(普徴収入合計, 0))
+                        ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(普徴収入合計, 0));
+                普通徴収.set普徴今後納付すべき額(DecimalFormatter
+                        .toコンマ区切りRString(new Decimal(普徴期別合計.intValue() - 普徴収入合計.intValue()), 0));
+            } else {
+                普通徴収.set普徴納付済額(RString.EMPTY);
+                普通徴収.set普徴今後納付すべき額(RString.EMPTY);
+            }
+        }
         return 普通徴収;
+    }
+
+    private RString get月の期(KitsukiList 期月リスト, int month) {
+        for (Kitsuki 期月 : 期月リスト.toList()) {
+            if (month == Integer.valueOf(期月.get月().getコード().toString())
+                    && !RString.isNullOrEmpty(期月.get期())
+                    && 0 != Integer.valueOf(期月.get期().toString())) {
+                return 期月.get期();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private void set特別徴収_増減額(EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報) {
@@ -1156,23 +1195,27 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         特別徴収増減額.set特徴納付済額(RString.EMPTY);
         特別徴収増減額.set特徴今後納付すべき額(RString.EMPTY);
         if (特別徴収更正前 == null) {
-            特別徴収増減額.set特徴確定年額保険料(特別徴収更正後.get特徴確定年額保険料());
+            特別徴収増減額.set特徴確定年額保険料(定数_ゼロ.equals(特別徴収更正後.get特徴確定年額保険料())
+                    ? RString.EMPTY : 特別徴収更正後.get特徴確定年額保険料());
             特別徴収増減額.set特徴金額１(特別徴収更正後.get特徴金額１());
             特別徴収増減額.set特徴金額２(特別徴収更正後.get特徴金額２());
             特別徴収増減額.set特徴金額３(特別徴収更正後.get特徴金額３());
             特別徴収増減額.set特徴金額４(特別徴収更正後.get特徴金額４());
             特別徴収増減額.set特徴金額５(特別徴収更正後.get特徴金額５());
             特別徴収増減額.set特徴金額６(特別徴収更正後.get特徴金額６());
-            特別徴収増減額.set調整額歳出還付(特別徴収更正後.get調整額歳出還付());
+            特別徴収増減額.set調整額歳出還付(定数_ゼロ.equals(特別徴収更正後.get調整額歳出還付())
+                    ? RString.EMPTY : 特別徴収更正後.get調整額歳出還付());
         } else {
-            特別徴収増減額.set特徴確定年額保険料(get増減額(特別徴収更正後.get特徴確定年額保険料(), 特別徴収更正前.get特徴確定年額保険料()));
+            RString 特徴確定年額保険料 = get増減額(特別徴収更正後.get特徴確定年額保険料(), 特別徴収更正前.get特徴確定年額保険料());
+            特別徴収増減額.set特徴確定年額保険料(定数_ゼロ.equals(特徴確定年額保険料) ? RString.EMPTY : 特徴確定年額保険料);
             特別徴収増減額.set特徴金額１(get増減額(特別徴収更正後.get特徴金額１(), 特別徴収更正前.get特徴金額１()));
             特別徴収増減額.set特徴金額２(get増減額(特別徴収更正後.get特徴金額２(), 特別徴収更正前.get特徴金額２()));
             特別徴収増減額.set特徴金額３(get増減額(特別徴収更正後.get特徴金額３(), 特別徴収更正前.get特徴金額３()));
             特別徴収増減額.set特徴金額４(get増減額(特別徴収更正後.get特徴金額４(), 特別徴収更正前.get特徴金額４()));
             特別徴収増減額.set特徴金額５(get増減額(特別徴収更正後.get特徴金額５(), 特別徴収更正前.get特徴金額５()));
             特別徴収増減額.set特徴金額６(get増減額(特別徴収更正後.get特徴金額６(), 特別徴収更正前.get特徴金額６()));
-            特別徴収増減額.set調整額歳出還付(get増減額(特別徴収更正後.get調整額歳出還付(), 特別徴収更正前.get調整額歳出還付()));
+            RString 調整額歳出還付 = get増減額(特別徴収更正後.get調整額歳出還付(), 特別徴収更正前.get調整額歳出還付());
+            特別徴収増減額.set調整額歳出還付(定数_ゼロ.equals(調整額歳出還付) ? RString.EMPTY : 調整額歳出還付);
         }
         特別徴収増減額.set特徴金額７(RString.EMPTY);
         特別徴収増減額.set特徴金額８(RString.EMPTY);
@@ -1240,7 +1283,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         普通徴収.set普徴納付済額(RString.EMPTY);
         普通徴収.set普徴今後納付すべき額(RString.EMPTY);
         if (普通徴収更正前 == null) {
-            普通徴収.set普徴確定年額保険料(普通徴収更正後.get普徴確定年額保険料());
+            普通徴収.set普徴確定年額保険料(定数_ゼロ.equals(普通徴収更正後.get普徴確定年額保険料())
+                    ? RString.EMPTY : 普通徴収更正後.get普徴確定年額保険料());
             普通徴収.set普徴金額１(普通徴収更正後.get普徴金額１());
             普通徴収.set普徴金額２(普通徴収更正後.get普徴金額２());
             普通徴収.set普徴金額３(普通徴収更正後.get普徴金額３());
@@ -1255,9 +1299,10 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             普通徴収.set普徴金額１２(普通徴収更正後.get普徴金額１２());
             普通徴収.set普徴金額１３(普通徴収更正後.get普徴金額１３());
             普通徴収.set普徴金額１４(普通徴収更正後.get普徴金額１４());
-            普通徴収.set調整額歳出還付(普通徴収更正後.get調整額歳出還付());
+            普通徴収.set調整額歳出還付(定数_ゼロ.equals(普通徴収更正後.get調整額歳出還付()) ? RString.EMPTY : 普通徴収更正後.get調整額歳出還付());
         } else {
-            普通徴収.set普徴確定年額保険料(get増減額(普通徴収更正後.get普徴確定年額保険料(), 普通徴収更正前.get普徴確定年額保険料()));
+            RString 普徴確定年額保険料 = get増減額(普通徴収更正後.get普徴確定年額保険料(), 普通徴収更正前.get普徴確定年額保険料());
+            普通徴収.set普徴確定年額保険料(定数_ゼロ.equals(普徴確定年額保険料) ? RString.EMPTY : 普徴確定年額保険料);
             普通徴収.set普徴金額１(get増減額(普通徴収更正後.get普徴金額１(), 普通徴収更正前.get普徴金額１()));
             普通徴収.set普徴金額２(get増減額(普通徴収更正後.get普徴金額２(), 普通徴収更正前.get普徴金額２()));
             普通徴収.set普徴金額３(get増減額(普通徴収更正後.get普徴金額３(), 普通徴収更正前.get普徴金額３()));
@@ -1272,7 +1317,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             普通徴収.set普徴金額１２(get増減額(普通徴収更正後.get普徴金額１２(), 普通徴収更正前.get普徴金額１２()));
             普通徴収.set普徴金額１３(get増減額(普通徴収更正後.get普徴金額１３(), 普通徴収更正前.get普徴金額１３()));
             普通徴収.set普徴金額１４(get増減額(普通徴収更正後.get普徴金額１４(), 普通徴収更正前.get普徴金額１４()));
-            普通徴収.set調整額歳出還付(get増減額(普通徴収更正後.get調整額歳出還付(), 普通徴収更正前.get調整額歳出還付()));
+            RString 調整額歳出還付 = get増減額(普通徴収更正後.get調整額歳出還付(), 普通徴収更正前.get調整額歳出還付());
+            普通徴収.set調整額歳出還付(定数_ゼロ.equals(調整額歳出還付) ? RString.EMPTY : 調整額歳出還付);
         }
         編集後本算定賦課台帳情報.set普通徴収増減額(普通徴収);
     }

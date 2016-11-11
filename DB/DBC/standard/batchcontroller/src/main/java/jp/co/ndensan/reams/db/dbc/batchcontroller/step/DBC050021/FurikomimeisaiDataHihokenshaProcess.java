@@ -19,6 +19,11 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.Gyoseiku;
+import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -27,9 +32,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
@@ -73,11 +83,50 @@ public class FurikomimeisaiDataHihokenshaProcess extends BatchProcessBase<Hihoke
         DbT1001HihokenshaDaichoEntity 被保険者台帳 = entity.get被保険者台帳();
         IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
         ChohyoJushoEditor 住所Editor = new ChohyoJushoEditor(SubGyomuCode.DBC介護給付, 帳票分類ID, GyomuBunrui.介護事務);
-        RString 管内管外区分 = 識別対象.get住所().get管内管外().toRString();
-        RString 住所 = 識別対象.get住所().get住所();
-        RString 番地 = 識別対象.get住所().get番地().getBanchi().getColumnValue();
-        RString 方書 = 識別対象.get住所().get方書().getColumnValue();
-        RString 行政区名 = 識別対象.get行政区画().getGyoseiku().get名称();
+        IJusho 住所_識別対象 = 識別対象.get住所();
+        RString 管内管外区分;
+        RString 住所;
+        RString 番地;
+        RString 方書;
+        if (住所_識別対象 != null) {
+            管内管外区分 = 住所_識別対象.get管内管外() == null ? RString.EMPTY : 住所_識別対象.get管内管外().toRString();
+            住所 = 住所_識別対象.get住所();
+            Banchi 番地_識別対象 = 住所_識別対象.get番地();
+            振込明細一時Entity.setChoikiCode(住所_識別対象.get町域コード());
+            振込明細一時Entity.setYubinNo(住所_識別対象.get郵便番号());
+            if (番地_識別対象 != null) {
+                番地 = 番地_識別対象.getBanchi() == null
+                        || 番地_識別対象.getBanchi().isEmpty() ? RString.EMPTY : 番地_識別対象.getBanchi().getColumnValue();
+            } else {
+                番地 = RString.EMPTY;
+            }
+            方書 = 住所_識別対象.get方書() == null || 住所_識別対象.get方書().isEmpty() ? RString.EMPTY : 住所_識別対象.get方書().getColumnValue();
+        } else {
+            管内管外区分 = RString.EMPTY;
+            住所 = RString.EMPTY;
+            番地 = RString.EMPTY;
+            方書 = RString.EMPTY;
+            振込明細一時Entity.setChoikiCode(ChoikiCode.EMPTY);
+            振込明細一時Entity.setYubinNo(YubinNo.EMPTY);
+        }
+        IGyoseiKukaku 行政区画 = 識別対象.get行政区画();
+        RString 行政区名;
+        if (行政区画 != null) {
+            Gyoseiku gyoseiku = 行政区画.getGyoseiku();
+            if (gyoseiku != null) {
+                行政区名 = gyoseiku.get名称();
+                振込明細一時Entity.setGyoseikuCode(gyoseiku.getコード());
+                振込明細一時Entity.setGyoseikuMei(gyoseiku.get名称());
+            } else {
+                行政区名 = RString.EMPTY;
+                振込明細一時Entity.setGyoseikuCode(GyoseikuCode.EMPTY);
+                振込明細一時Entity.setGyoseikuMei(RString.EMPTY);
+            }
+        } else {
+            行政区名 = RString.EMPTY;
+            振込明細一時Entity.setGyoseikuCode(GyoseikuCode.EMPTY);
+            振込明細一時Entity.setGyoseikuMei(RString.EMPTY);
+        }
         LasdecCode 市町村コード;
         if (RSTRING_1.equals(被保険者台帳.getKoikinaiJushochiTokureiFlag())) {
             市町村コード = 被保険者台帳.getKoikinaiTokureiSochimotoShichosonCode();
@@ -85,15 +134,18 @@ public class FurikomimeisaiDataHihokenshaProcess extends BatchProcessBase<Hihoke
             市町村コード = 被保険者台帳.getShichosonCode();
         }
         RString 編集住所 = 住所Editor.editJusho(管内管外区分, 住所, 番地, 方書, 行政区名, 市町村コード);
-
+        IName 名称_識別対象 = 識別対象.get名称();
+        if (名称_識別対象 == null) {
+            振込明細一時Entity.setShimeiKana(AtenaKanaMeisho.EMPTY);
+            振込明細一時Entity.setShimei(AtenaMeisho.EMPTY);
+            振込明細一時Entity.setShimei50onKana(RString.EMPTY);
+        } else {
+            振込明細一時Entity.setShimeiKana(名称_識別対象.getKana());
+            振込明細一時Entity.setShimei(名称_識別対象.getName());
+            振込明細一時Entity.setShimei50onKana(RStringUtil.convertTo清音化(名称_識別対象.getKana() == null
+                    || 名称_識別対象.getKana().isEmpty() ? RString.EMPTY : 名称_識別対象.getKana().getColumnValue()));
+        }
         振込明細一時Entity.setShikibetsuCode(識別対象.get識別コード());
-        振込明細一時Entity.setShimeiKana(識別対象.get名称().getKana());
-        振込明細一時Entity.setShimei(識別対象.get名称().getName());
-        振込明細一時Entity.setShimei50onKana(RStringUtil.convertTo清音化(識別対象.get名称().getKana().getColumnValue()));
-        振込明細一時Entity.setChoikiCode(識別対象.get住所().get町域コード());
-        振込明細一時Entity.setGyoseikuCode(識別対象.get行政区画().getGyoseiku().getコード());
-        振込明細一時Entity.setGyoseikuMei(識別対象.get行政区画().getGyoseiku().get名称());
-        振込明細一時Entity.setYubinNo(識別対象.get住所().get郵便番号());
         振込明細一時Entity.setJusho(new AtenaJusho(編集住所));
         振込明細一時Entity.setShichosonCode(市町村コード);
         振込明細一時tableWriter.update(振込明細一時Entity);

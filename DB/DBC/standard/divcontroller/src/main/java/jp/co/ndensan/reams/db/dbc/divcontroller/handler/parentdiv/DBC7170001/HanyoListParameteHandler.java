@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7170001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710170.DBC710170_HanyoListKogakuGassanShikyugakuKetteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ShikyuFushikyuKubun;
@@ -65,6 +66,7 @@ public class HanyoListParameteHandler {
     private static final RString KEY_保険者コード = new RString("保険者コード");
     private static final RString KEY_出力順 = new RString("出力順");
     private static final RString KEY_出力項目 = new RString("出力項目");
+    private static final int VALUE = 1988;
 
     /**
      * コンストラクタ。
@@ -247,7 +249,14 @@ public class HanyoListParameteHandler {
             parameter.set金融機関名称(panel.getCcdKinyuKikan().get金融機関名());
         }
 
-        parameter.set対象年度(panel.getDdlTaishoNendo().getSelectedKey());
+        if (panel.getDdlTaishoNendo().getSelectedValue() != null) {
+            RString 年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
+            RString 対象年度
+                    = new RString(Integer.parseInt(Pattern.compile(new RString("[^0-9]").toString()).matcher(年度).replaceAll("").trim()) + VALUE);
+            parameter.set対象年度(対象年度);
+        } else {
+            parameter.set対象年度(RString.EMPTY);
+        }
 
         if (panel.getTxtKetteiJohoUketoriNengetsu().getFromValue() != null) {
             parameter.set決定情報受取年月From(new FlexibleYearMonth(panel.getTxtKetteiJohoUketoriNengetsu()

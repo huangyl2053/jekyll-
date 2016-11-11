@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.KariSanteiIdoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.TyouhyouResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015001.DBB015001_KarisanteiIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2014TsuchishoUchiwakeJokenDac;
@@ -46,6 +46,7 @@ public class KariSanteiIdoFuka {
     private static final RString 仮算定額変更通知書_帳票分類ＩＤ = new RString("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final RString 保険料納入通知書_本算定_帳票分類ＩＤ = new RString("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
     private static final RString 仮算定異動一括結果一覧表_帳票分類ＩＤ = new RString("DBB200013_KarisanteiIdoKekkaIchiran");
+    private static final RString 別徴収依頼金額明細一覧表_帳票分類ＩＤ = new RString("DBB200023_TokubetsuChoshuIraikingakuMeisaiIchiran");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 項目名_追加候補者用通知書タイプ = new RString("追加候補者用通知書タイプ");
     private static final RString 項目名_追加候補者用連帳区分 = new RString("追加候補者用連帳区分");
@@ -227,13 +228,18 @@ public class KariSanteiIdoFuka {
         } else if (保険料納入通知書_本算定_帳票分類ＩＤ.equals(帳票分類ID.value())) {
             TyouhyouEntity 納入通知書entity = get納入通知書_帳票ID(調定年度, 算定期, 帳票分類ID, 出力順ID);
             if (保険料納入通知書_本算定_帳票分類ＩＤ.equals(帳票分類ID.value())
-                && 納入通知書entity == null) {
+                    && 納入通知書entity == null) {
                 throw new ApplicationException(UrErrorMessages.存在しない
                         .getMessage().replace(納入通知書.toString()).evaluate());
             } else if (納入通知書entity != null) {
                 return new TyouhyouResult(納入通知書entity);
             }
         } else if (仮算定異動一括結果一覧表_帳票分類ＩＤ.equals(帳票分類ID.value())) {
+            TyouhyouEntity 一覧表 = new TyouhyouEntity();
+            一覧表.set帳票分類ID(帳票分類ID);
+            一覧表.set出力順ID(出力順ID);
+            return new TyouhyouResult(一覧表);
+        } else if (別徴収依頼金額明細一覧表_帳票分類ＩＤ.equals(帳票分類ID.value())) {
             TyouhyouEntity 一覧表 = new TyouhyouEntity();
             一覧表.set帳票分類ID(帳票分類ID);
             一覧表.set出力順ID(出力順ID);
@@ -524,10 +530,10 @@ public class KariSanteiIdoFuka {
      * バッチ用パラメータ作成します。
      *
      * @param parameter parameter
-     * @return KarisanteiIdoFukaParameter
+     * @return DBB015001_KarisanteiIdoFukaParameter
      */
-    public DBB015003_KarisanteiIdoTsuchishoHakkoParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
-        DBB015003_KarisanteiIdoTsuchishoHakkoParameter result = new DBB015003_KarisanteiIdoTsuchishoHakkoParameter();
+    public DBB015001_KarisanteiIdoFukaParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
+        DBB015001_KarisanteiIdoFukaParameter result = new DBB015001_KarisanteiIdoFukaParameter();
         result.set調定年度(parameter.get調定年度());
         result.set賦課年度(parameter.get賦課年度());
         result.set処理対象月(parameter.get処理対象());
