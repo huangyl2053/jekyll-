@@ -168,12 +168,12 @@ public class FukaKeisanFath {
         RString 特徴定例納期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数, 適用基準日, SubGyomuCode.DBB介護賦課);
         業務コンフィグ情報.set特徴定例納期数(Integer.parseInt(特徴定例納期数.toString()));
         List<FlexibleDate> 年金支払日List = new ArrayList<>();
-        RString 年金支払日_4月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_4月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_6月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_6月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_8月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_8月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_10月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_10月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_12月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_12月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_2月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_2月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_4月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_4月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_6月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_6月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_8月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_8月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_10月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_10月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_12月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_12月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_2月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_2月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigValue();
         年金支払日List.add(new FlexibleDate(年金支払日_4月));
         年金支払日List.add(new FlexibleDate(年金支払日_6月));
         年金支払日List.add(new FlexibleDate(年金支払日_8月));
@@ -427,20 +427,18 @@ public class FukaKeisanFath {
         } else if (param.get資格の情報() != null
                 && param.get資格の情報().get資格喪失年月日() != null && !param.get資格の情報().get資格喪失年月日().isEmpty()) {
             set資格喪失した場合(kiwariKeisanInput, param);
-        } else {
-            if (!特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法11月())
-                    && !特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法11月())
-                    && (特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法12月())
-                    || 特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法12月()))) {
-                kiwariKeisanInput.set特徴開始停止区分(INT_1);
-                kiwariKeisanInput.set特徴開始停止期(INT_5);
-            } else if (!特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法1月())
-                    && !特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法1月())
-                    && (特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法2月())
-                    || 特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法2月()))) {
-                kiwariKeisanInput.set特徴開始停止区分(INT_1);
-                kiwariKeisanInput.set特徴開始停止期(INT_6);
-            }
+        } else if (!特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法11月())
+                && !特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法11月())
+                && (特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法12月())
+                || 特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法12月()))) {
+            kiwariKeisanInput.set特徴開始停止区分(INT_1);
+            kiwariKeisanInput.set特徴開始停止期(INT_5);
+        } else if (!特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法1月())
+                && !特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法1月())
+                && (特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法2月())
+                || 特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法2月()))) {
+            kiwariKeisanInput.set特徴開始停止区分(INT_1);
+            kiwariKeisanInput.set特徴開始停止期(INT_6);
         }
     }
 
@@ -511,12 +509,10 @@ public class FukaKeisanFath {
             } else {
                 kiwariKeisanInput.set特徴開始停止期(特徴喪失日の特徴期 + INT_1);
             }
+        } else if (特徴喪失日の特徴期 == INT_6) {
+            kiwariKeisanInput.set特徴開始停止期(0);
         } else {
-            if (特徴喪失日の特徴期 == INT_6) {
-                kiwariKeisanInput.set特徴開始停止期(0);
-            } else {
-                kiwariKeisanInput.set特徴開始停止期(特徴喪失日の特徴期 + INT_1);
-            }
+            kiwariKeisanInput.set特徴開始停止期(特徴喪失日の特徴期 + INT_1);
         }
     }
 
