@@ -76,14 +76,12 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHihokenshaNo(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        RString menuID = ResponseHolder.getMenuID();
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setDisabled(true);
         div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(false);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(false);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
         div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(false);
-        getHandler(div).setサービス年月DDL(menuID);
         return ResponseData.of(div).respond();
     }
 
@@ -104,6 +102,38 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     }
 
     /**
+     * 被保険者番号入力ガイドonOkCloseのメソッドです。
+     *
+     * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onOkClose(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
+        if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo() != null) {
+            getHandler(div).setサービス年月DDL(menuID);
+            return isError(div);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 被保険者番号入力ガイドonOkCloseのメソッドです。
+     *
+     * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> isError(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        if (div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey().equals(new RString("default"))
+                || div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue().isEmpty()) {
+            ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 被保険者番号入力ガイドのメソッドです
      *
      * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
@@ -120,8 +150,14 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> txtHihokenshaNo_onBlur(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        RString 被保険者番号入力 = div.getTxtHihokenshaNo().getValue();
-        div.getTxtHihokenshaNo().setValue(被保険者番号入力.padZeroToLeft(INT_10));
+//        RString menuID = ResponseHolder.getMenuID();
+        RString menuID = new RString("DBCMN43001");
+        if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo() != null) {
+            RString 被保険者番号入力 = div.getTxtHihokenshaNo().getValue();
+            div.getTxtHihokenshaNo().setValue(被保険者番号入力.padZeroToLeft(INT_10));
+            getHandler(div).setサービス年月DDL(menuID);
+            return isError(div);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -132,14 +168,6 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onBeforeOpenDialog(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-
-        if (!div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().isEmpty()
-                && div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue().isEmpty()) {
-            ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
-        }
 
         if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty() && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcWarningMessages.申請書提出期限未入力.getMessage()).respond();
