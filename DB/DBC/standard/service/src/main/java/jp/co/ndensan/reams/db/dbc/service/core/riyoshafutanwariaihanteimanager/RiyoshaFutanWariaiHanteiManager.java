@@ -84,29 +84,6 @@ public class RiyoshaFutanWariaiHanteiManager {
     private static final int NUM_THREE = 3;
     private static final int NUM_EIGHT = 8;
     private static final int NUM_TWELVE = 12;
-    private static final int 枝番号_1 = 1;
-    private static final int 枝番号_2 = 2;
-    private static final int 枝番号_3 = 3;
-    private static final int 枝番号_4 = 4;
-    private static final int 枝番号_5 = 5;
-    private static final int 枝番号_6 = 6;
-    private static final int 枝番号_7 = 7;
-    private static final int 枝番号_8 = 8;
-    private static final int 枝番号_9 = 9;
-    private static final int 枝番号_10 = 10;
-    private static final int 枝番号_11 = 11;
-    private static final int 枝番号_12 = 12;
-    private static final int 月_1 = 1;
-    private static final int 月_2 = 2;
-    private static final int 月_3 = 3;
-    private static final int 月_4 = 4;
-    private static final int 月_5 = 5;
-    private static final int 月_6 = 6;
-    private static final int 月_8 = 8;
-    private static final int 月_9 = 9;
-    private static final int 月_10 = 10;
-    private static final int 月_11 = 11;
-    private static final int 月_12 = 12;
 
     /**
      * 初期化メソッドです。
@@ -221,6 +198,7 @@ public class RiyoshaFutanWariaiHanteiManager {
                 get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報,
                         get世帯code(世帯員識別コード情報), 世帯１号被保険者数, 基準日,
                         生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
+                利用者負担割合明細Temp.setEdaNo(i + 1);
                 利用者負担割合明細Tempのマージデータ.add(利用者負担割合明細Temp);
                 RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠Temp
                         = new RiyoshaFutanWariaiKonkyoTempEntity();
@@ -544,8 +522,6 @@ public class RiyoshaFutanWariaiHanteiManager {
             HanteiTaishoshaTempEntity 判定対象者Temp,
             RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp) {
         利用者負担割合明細Temp.setHihokenshaNo(被保険者番号);
-        int 枝番号 = get枝番号(基準日.getMonthValue());
-        利用者負担割合明細Temp.setEdaNo(枝番号);
         if (!RString.isNullOrEmpty(被保険者台帳.get被保険者区分コード())) {
             利用者負担割合明細Temp.setShikakuKubun(被保険者台帳.get被保険者区分コード().padZeroToLeft(1));
         }
@@ -575,35 +551,6 @@ public class RiyoshaFutanWariaiHanteiManager {
         利用者負担割合明細Temp.setNinteiYukoKaishiDate(判定対象者Temp.getNinteiYukoKaishiDate());
         if (生活保護該当情報Temp.getJukyuKaishiYMD() != null && !生活保護該当情報Temp.getJukyuKaishiYMD().isEmpty()) {
             利用者負担割合明細Temp.setJukyuKaishiYMD(new FlexibleDate(生活保護該当情報Temp.getJukyuKaishiYMD()));
-        }
-    }
-
-    private int get枝番号(int 月) {
-        switch (月) {
-            case 月_8:
-                return 枝番号_1;
-            case 月_9:
-                return 枝番号_2;
-            case 月_10:
-                return 枝番号_3;
-            case 月_11:
-                return 枝番号_4;
-            case 月_12:
-                return 枝番号_5;
-            case 月_1:
-                return 枝番号_6;
-            case 月_2:
-                return 枝番号_7;
-            case 月_3:
-                return 枝番号_8;
-            case 月_4:
-                return 枝番号_9;
-            case 月_5:
-                return 枝番号_10;
-            case 月_6:
-                return 枝番号_11;
-            default:
-                return 枝番号_12;
         }
     }
 
