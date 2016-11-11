@@ -259,7 +259,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                             .messages());
                 }
             }
-            if (!画面モード_取消.equals(画面モード) && !画面モード_取消.equals(画面モード)) {
+            if (!画面モード_取消.equals(画面モード) && !画面モード_削除.equals(画面モード)) {
                 messages.add(ValidateChain.validateStart(div)
                         .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.領収日変更)
                         .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.サービス年月と不一致)
