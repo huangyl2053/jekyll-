@@ -1051,6 +1051,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 || is比較変更日(parameter.get窓口払い_開始日(),
                         div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                         getCcdShiharaiHohoJyoho().getStartYMD())
+                || is比較変更日(parameter.get窓口払い_終了日(),
+                        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
+                        getCcdShiharaiHohoJyoho().getEndYMD())
                 || is比較変更時間(parameter.get窓口払い_開始時間(),
                         div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                         getCcdShiharaiHohoJyoho().getStartHHMM())

@@ -52,11 +52,8 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor implements IKyufuhiTs
         source.listRiyoFukushiyogu_3 = item.getタイコード();
         source.listRiyoFukushiyogu_4 = item.get福祉用具商品名();
         source.sankouShiryoTitle1 = item.get参考資料タイトル1();
-        source.listSankouShiryoHiyoGakuIchiran1_4 = item.getあなたの位置1();
         source.sankouShiryoTitle2 = item.get参考資料タイトル2();
-        source.listSankouShiryoHiyoGakuIchiran2_4 = item.getあなたの位置2();
         source.sankouShiryoTitle3 = item.get参考資料タイトル3();
-        source.listSankouShiryoHiyoGakuIchiran3_4 = item.getあなたの位置3();
         source.tsuchibun3 = item.get通知文3();
         source.pageBunshi = new RString(item.getページ分子());
         source.pageBunbo = new RString(item.getページ分母());

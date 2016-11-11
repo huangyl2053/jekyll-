@@ -56,6 +56,7 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
     public RString list_1;
     @ReportItem(name = "list_2", length = 3, order = 18)
     public RString list_2;
+    @ReportPerson(id = "A")
     @ReportItem(name = "list_3", length = 10, order = 19)
     public RString list_3;
     @ReportItem(name = "list_4", length = 18, order = 20)
@@ -88,7 +89,6 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
     public RString gyoseikuCode;
     @ReportItem(name = "shimei50onKana", length = 4, order = 34)
     public RString shimei50onKana;
-    @ReportPerson(id = "A")
     @ReportItem(name = "shichosonCode", length = 4, order = 35)
     public RString shichosonCode;
     @ReportExpandedInfo(id = "A")
