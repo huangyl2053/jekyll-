@@ -565,15 +565,13 @@ public class IkenshoSakuseiIraiHandler {
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                //                文書番号,
                 RString.isNullOrEmpty(business.get医療機関郵便番号()) ? RString.EMPTY : new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo(),
                 business.get医療機関住所(),
                 business.get被保険者氏名(),
                 get名称付与(ConfigNameDBE.介護保険診断命令書_宛先敬称),
                 customerBarCode,
-                business.get被保険者番号(),
+                RString.EMPTY,
                 通知文.get(1),
-                business.get被保険者氏名(),
                 business.get被保険者番号(),
                 business.get医療機関名称(),
                 business.get主治医氏名(),
@@ -581,7 +579,8 @@ public class IkenshoSakuseiIraiHandler {
                 business.get医療機関電話番号(),
                 get受診日時または期間(),
                 受診場所,
-                通知文.get(2));
+                通知文.get(2),
+                getConfigValue(ConfigNameDBE.介護保険診断命令書));
         itemList.add(item);
         return itemList;
     }

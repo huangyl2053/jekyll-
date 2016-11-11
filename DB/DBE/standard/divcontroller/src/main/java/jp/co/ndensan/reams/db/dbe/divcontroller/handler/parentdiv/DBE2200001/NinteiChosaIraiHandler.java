@@ -885,8 +885,12 @@ public class NinteiChosaIraiHandler {
                 } else if (div.getRadkigen().getSelectedKey().equals(提出期限_空欄)) {
                     認定調査提出期限 = RString.EMPTY;
                 } else if (div.getRadkigen().getSelectedKey().equals(提出期限_共通日付)) {
-                    認定調査提出期限 = div.getTxtkigenymd().getValue().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    認定調査提出期限 = div.getTxtkigenymd().getValue().plusDay(Integer.parseInt(認定調査作成期限日数.toString()))
+                            .wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 }
+            } else {
+                認定調査提出期限 = !RString.isNullOrEmpty(row.getNinteiShinseiYMDKoShin())
+                        ? new RString(new FlexibleDate(row.getNinteiShinseiYMDKoShin()).plusDay(Integer.parseInt(認定調査作成期限日数.toString())).toString()) : RString.EMPTY;
             }
 
             for (ChosainJoho 調査員情報 : 調査員情報リスト) {
