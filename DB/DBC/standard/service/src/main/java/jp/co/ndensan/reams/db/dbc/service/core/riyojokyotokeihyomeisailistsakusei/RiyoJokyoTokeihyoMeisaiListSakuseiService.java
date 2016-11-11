@@ -572,9 +572,9 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         利用状況統計表一時.setSaishinsaKaisu(integertoRString(集計費.getSaishinsaKaisu()));
         利用状況統計表一時.setKagoKaisu(integertoRString(集計費.getKagoKaisu()));
         利用状況統計表一時.setHomonShikyuGendogaku(初期金額または日数_0);
-        create給付実績データ集計_分(利用状況統計表一時, 入力識別番号上3桁, 集計サービス種類コード, 給付実績明細ワーク, entity,
-                処理結果確認リスト一時TBL, 入所院実日数対象List, 支給限度額一本化年月対象List, 入力識別番号上4桁,
-                集計費, 給付実績特定入所者介護サービス費用ワーク, 給付実績社会福祉法人軽減額ワーク);
+        create給付実績データ集計_分(利用状況統計表一時, 入力識別番号上3桁, 集計サービス種類コード, 給付実績明細ワーク,
+                entity, 処理結果確認リスト一時TBL, 入所院実日数対象List, 支給限度額一本化年月対象List, 入力識別番号上4桁, 集計費,
+                給付実績特定入所者介護サービス費用ワーク, 給付実績社会福祉法人軽減額ワーク);
         return 利用状況統計表一時;
     }
 
