@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ChosahyoSaiCh
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
@@ -24,12 +25,26 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  *
@@ -39,6 +54,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class HomonChosaIraishoBusiness {
 
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
+    private static final int INT5 = 5;
+    private static final int INT6 = 6;
+    private static final int INT7 = 7;
+    private static final int INT8 = 8;
+    private static final int INT9 = 9;
+    private static final ReportId 帳票ID = ReportIdDBZ.DBE221051.getReportId();
     private static final RString 文字列1 = new RString("1");
     private static final RString TITLE = new RString("調査票差異チェック票");
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
@@ -534,5 +557,194 @@ public class HomonChosaIraishoBusiness {
             軽重FLG = SHITASANKAKU;
         }
         return 軽重FLG;
+    }
+
+    /**
+     * 帳票の編集。
+     *
+     * @param entity HomonChosaIraishoRelateEntity
+     * @return GaikyotokkiA4Business
+     */
+    public GaikyotokkiA4Business setReportEntity(HomonChosaIraishoRelateEntity entity) {
+        List<RString> 保険者番号リスト = get被保険者番号(entity.get証記載保険者番号());
+        List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
+        GaikyotokkiA4Business reportEntity = new GaikyotokkiA4Business();
+        reportEntity.setHokenshaNo1(保険者番号リスト.get(0));
+        reportEntity.setHokenshaNo2(保険者番号リスト.get(1));
+        reportEntity.setHokenshaNo3(保険者番号リスト.get(2));
+        reportEntity.setHokenshaNo4(保険者番号リスト.get(INT3));
+        reportEntity.setHokenshaNo5(保険者番号リスト.get(INT4));
+        reportEntity.setHokenshaNo6(保険者番号リスト.get(INT5));
+        RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        reportEntity.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
+        reportEntity.setShinseiYY2(ninteiShinseiDay.substring(2, INT3));
+        reportEntity.setShinseiMM1(ninteiShinseiDay.substring(INT4, INT5));
+        reportEntity.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
+        reportEntity.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
+        reportEntity.setShinseiDD2(ninteiShinseiDay.substring(INT8));
+        reportEntity.setHihokenshaNo1(被保険者番号リスト.get(0));
+        reportEntity.setHihokenshaNo2(被保険者番号リスト.get(1));
+        reportEntity.setHihokenshaNo3(被保険者番号リスト.get(2));
+        reportEntity.setHihokenshaNo4(被保険者番号リスト.get(INT3));
+        reportEntity.setHihokenshaNo5(被保険者番号リスト.get(INT4));
+        reportEntity.setHihokenshaNo6(被保険者番号リスト.get(INT5));
+        reportEntity.setHihokenshaNo7(被保険者番号リスト.get(INT6));
+        reportEntity.setHihokenshaNo8(被保険者番号リスト.get(INT7));
+        reportEntity.setHihokenshaNo9(被保険者番号リスト.get(INT8));
+        reportEntity.setHihokenshaNo10(被保険者番号リスト.get(INT9));
+        reportEntity.setShinseishaName(entity.get被保険者氏名());
+        return reportEntity;
+    }
+
+    private List<RString> get被保険者番号(RString 被保険者番号) {
+        List<RString> 被保険者番号リスト = new ArrayList<>();
+        for (int i = 0; i <= INT9; i++) {
+            被保険者番号リスト.add(RString.EMPTY);
+        }
+        if (0 < 被保険者番号.length()) {
+            被保険者番号リスト.set(0, 被保険者番号.substring(0, 1));
+        }
+        if (1 < 被保険者番号.length()) {
+            被保険者番号リスト.set(1, 被保険者番号.substring(1, 2));
+        }
+        if (2 < 被保険者番号.length()) {
+            被保険者番号リスト.set(2, 被保険者番号.substring(2, INT3));
+        }
+        if (INT3 < 被保険者番号.length()) {
+            被保険者番号リスト.set(INT3, 被保険者番号.substring(INT3, INT4));
+        }
+        if (INT4 < 被保険者番号.length()) {
+            被保険者番号リスト.set(INT4, 被保険者番号.substring(INT4, INT5));
+        }
+        if (INT5 < 被保険者番号.length()) {
+            被保険者番号リスト.set(INT5, 被保険者番号.substring(INT5, INT6));
+        }
+        if (INT6 < 被保険者番号.length()) {
+            被保険者番号リスト.set(INT6, 被保険者番号.substring(INT6, INT7));
+        }
+        if (INT7 < 被保険者番号.length()) {
+            被保険者番号リスト.set(INT7, 被保険者番号.substring(INT7, INT8));
+        }
+        if (INT8 < 被保険者番号.length()) {
+            被保険者番号リスト.set(INT8, 被保険者番号.substring(INT8, INT9));
+        }
+        if (INT9 < 被保険者番号.length()) {
+            被保険者番号リスト.set(INT9, 被保険者番号.substring(INT9));
+        }
+        return 被保険者番号リスト;
+    }
+
+    /**
+     * バッチ出力条件リストの出力の編集。
+     *
+     * @param reportSourceWriter reportSourceWriter
+     */
+    public void バッチ出力条件リストの出力(ReportSourceWriter<GaikyotokkiA4ReportSource> reportSourceWriter) {
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
+        RString 市町村名 = 導入団体クラス.get市町村名();
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
+        RString csv出力有無 = new RString("無し");
+        RString csvファイル名 = new RString("－");
+        List<RString> 出力条件 = new ArrayList<>();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(IRAIFROMYMD);
+        builder.append(processParamter.getIraiFromYMD());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(IRAITOYMD);
+        builder.append(processParamter.getIraiToYMD());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEIOCHOSAIRAISHO);
+        builder.append(processParamter.getNinteioChosaIraisho());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAHYO);
+        builder.append(processParamter.getNinteiChosahyo());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAIRAILIST);
+        出力条件.add(builder.toRString());
+        List<GridParameter> ninteiChosaIraiList = processParamter.getNinteiChosaIraiList();
+        for (GridParameter gridParameter : ninteiChosaIraiList) {
+            builder = new RStringBuilder();
+            builder.append(NINTEICHOSAITAKUSAKICODE);
+            builder.append(gridParameter.getNinteichosaItakusakiCode());
+            出力条件.add(builder.toRString());
+            builder = new RStringBuilder();
+            builder.append(NINTEICHOSAINCODE);
+            builder.append(gridParameter.getNinteiChosainCode());
+            出力条件.add(builder.toRString());
+            builder = new RStringBuilder();
+            builder.append(SHOKISAIHOKENSHANO);
+            builder.append(gridParameter.getShoKisaiHokenshaNo());
+            出力条件.add(builder.toRString());
+        }
+        builder = new RStringBuilder();
+        builder.append(HAKKOBI);
+        builder.append(processParamter.getHakkobi());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(TEISHUTSUKIGEN);
+        builder.append(processParamter.getTeishutsuKigen());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(KYOTSUHIZUKE);
+        builder.append(processParamter.getKyotsuHizuke());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAIRAICHOHYO);
+        builder.append(processParamter.isNinteiChosaIraiChohyo());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAIRAISYO);
+        builder.append(processParamter.isNinteiChosaIraisyo());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAHYOKIHON);
+        builder.append(processParamter.isNinteiChosahyoKihon());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAHYOTOKKI);
+        builder.append(processParamter.isNinteiChosahyoTokki());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAHYOGAIKYOU);
+        builder.append(processParamter.isNinteiChosahyoGaikyou());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAHYOOCRKIHON);
+        builder.append(processParamter.isNinteiChosahyoOCRKihon());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAHYOOCRTOKKI);
+        builder.append(processParamter.isNinteiChosahyoOCRTokki());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSAHYOOCRGAIKYOU);
+        builder.append(processParamter.isNinteiChosahyoOCRGaikyou());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(NINTEICHOSACHECKHYO);
+        builder.append(processParamter.isNinteiChosaCheckHyo());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(ZENKONINTEICHOSAHYO);
+        builder.append(processParamter.isZenkoNinteiChosahyo());
+        出力条件.add(builder.toRString());
+        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                帳票ID.value(),
+                導入団体コード,
+                市町村名,
+                new RString(String.valueOf(JobContextHolder.getJobId())),
+                ReportIdDBZ.DBE220001.getReportName(),
+                出力ページ数,
+                csv出力有無,
+                csvファイル名,
+                出力条件);
+        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
+        printer.print();
     }
 }
