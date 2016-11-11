@@ -1866,10 +1866,10 @@ public class ServiceRiyohyoInfoDivHandler {
 
     private Decimal サービス単位計算() {
         Decimal サービス単位合計 = Decimal.ZERO;
-        RString 事業者 = div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho();
-        RString サービス種類コード = div.getCcdServiceTypeInput().getサービス種類コード();
+        RString 事業者 = div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo();
+        RString サービス種類コード = div.getCcdServiceCodeInput().getサービスコード1();
         for (dgServiceRiyohyoBeppyoList_Row row : div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource()) {
-            if (row.getJigyosha() != null && row.getJigyosha().equals(事業者)
+            if (row.getHdnJigyoshaCode() != null && row.getHdnJigyoshaCode().equals(事業者)
                     && row.getHdnServiceShuruiCode() != null && row.getHdnServiceShuruiCode().equals(サービス種類コード)) {
                 サービス単位合計 = サービス単位合計.add(RString.isNullOrEmpty(row.getServiceTani().getText()) ? Decimal.ZERO
                         : row.getServiceTani().getValue());
