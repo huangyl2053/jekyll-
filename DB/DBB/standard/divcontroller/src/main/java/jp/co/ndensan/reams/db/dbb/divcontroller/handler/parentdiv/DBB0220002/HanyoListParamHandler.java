@@ -298,6 +298,8 @@ public class HanyoListParamHandler {
      */
     public void 条件を復元() {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        div.getChushutsuJokenPanel().getTxtChushutsuKikan().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtChushutsuKikan().clearToValue();
         ReportId 条件保存の帳票ID = restoreBatchParameterMap.getParameterValue(ReportId.class, KEY_帳票ID);
         long 条件保存の出力順ID = restoreBatchParameterMap.getParameterValue(long.class, KEY_出力順ID);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 条件保存の帳票ID, 条件保存の出力順ID);

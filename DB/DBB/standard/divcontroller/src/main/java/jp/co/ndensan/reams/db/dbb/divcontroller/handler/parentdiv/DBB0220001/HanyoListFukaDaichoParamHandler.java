@@ -64,6 +64,7 @@ public class HanyoListFukaDaichoParamHandler {
     private static final RString KEY_項目名付加 = new RString("項目名付加");
     private static final RString KEY_連番付加 = new RString("連番付加");
     private static final RString KEY_日付スラッシュ付加 = new RString("日付編集");
+    private static final RString KEY_最新状態で抽出 = new RString("最新状態で抽出");
     private static final Decimal DECIMAL_999 = new Decimal("999");
 
     /**
@@ -287,7 +288,7 @@ public class HanyoListFukaDaichoParamHandler {
         div.getNendoKijumbiSitei().getTxtKijyunbi().clearValue();
         RDate 基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, KEY_基準日);
         if (基準日 != null) {
-            div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().setSelectedItemsByKey(new ArrayList<RString>());
+
             div.getNendoKijumbiSitei().getTxtKijyunbi().setValue(基準日);
         }
         RString 基準日区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_基準日区分);
@@ -327,6 +328,13 @@ public class HanyoListFukaDaichoParamHandler {
             } else {
                 div.getChushutsuJokenPanel().getChkHokenryoDankai().setSelectedItemsByKey(new ArrayList<RString>());
             }
+        }
+        div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().setSelectedItemsByKey(new ArrayList<RString>());
+        boolean 最新状態で抽出 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_最新状態で抽出);
+        if (最新状態で抽出) {
+            List<RString> keyList = new ArrayList<>();
+            keyList.add(定数KEY0);
+            div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().setSelectedItemsByKey(keyList);
         }
         onChange_chkKijyunbiSiteiUmu();
     }
