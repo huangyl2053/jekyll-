@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoO
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -70,6 +71,10 @@ public class ShokkenTorikeshiIchibuSoshitu {
 
         ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = handler.onLoad(申請書管理番号);
         ViewStateHolder.put(要介護認定処理画面キー.画面更新用情報, 画面更新用情報);
+        
+        // TODO 今回認定値、前回認定値、連絡先ボタン押した際、onBeforeする前に画面が開いてしまうとエラー
+        //      基盤の問題で、1.14以降は修正されている模様　しばらく安定していたら消して良い(現在11/11)
+//        setHdn(div, 画面更新用情報, 申請書管理番号);
 
         ValidationMessageControlPairs pairs = getValidationHandler(div).validate履歴番号();
         if (pairs.iterator().hasNext()) {
@@ -78,12 +83,6 @@ public class ShokkenTorikeshiIchibuSoshitu {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         
-        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
-        if (今回情報 != null) {
-            div.setHdnKonkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(今回情報, true)));
-        }
-        
-
         PersonalData personalData = PersonalData.of(new ShikibetsuCode(RString.EMPTY), new ExpandedInformation(new Code("0001"),
                 new RString("申請書管理番号"), 申請書管理番号));
         AccessLogger.log(AccessLogType.照会, personalData);
@@ -104,7 +103,6 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnRenrakusaki(ShokkenTorikeshiIchibuSoshituDiv div) {
-
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         NinteiShinseiBusinessCollection renrakusakiJoho = new NinteiShinseiBusinessCollection();
         renrakusakiJoho.setDbdBusiness(YokaigoNinteiJohoManager.createInstance().get連絡先情報(申請書管理番号));
@@ -131,9 +129,10 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnNyuinShisetsuNyujo(ShokkenTorikeshiIchibuSoshituDiv div) {
-        // TODO. 仕様書に記述しない。
-//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
+        ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = ViewStateHolder.get(要介護認定処理画面キー.画面更新用情報, ShokkenTorikeshiIchibuSoshituGamenJoho.class);
+        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
+        div.setHdnShikibetsuCode(今回情報.get識別コード受給() == null ? RString.EMPTY : 今回情報.get識別コード受給().getColumnValue());
+        div.setHdnDisplayModeKey(new RString(ShisetsuNyutaishoRirekiKanriDiv.DisplayMode.照会.toString()));
         return ResponseData.of(div).respond();
     }
 
@@ -154,9 +153,8 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnShichosonRenrakuJiko(ShokkenTorikeshiIchibuSoshituDiv div) {
-
         NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
-        model.set表示モード(NinteiShinseiCodeModel.HyojiMode.InputMode);
+        model.set表示モード(NinteiShinseiCodeModel.HyojiMode.ShokaiMode);
         model.set連絡事項(div.getHdnRenrakuJiko());
         ViewStateHolder.put(ViewStateKeys.モード, model);
         return ResponseData.of(div).respond();
@@ -328,4 +326,22 @@ public class ShokkenTorikeshiIchibuSoshitu {
         LockingKey 排他キー = new LockingKey(申請書管理番号);
         RealInitialLocker.release(排他キー);
     }
+    
+//    private void setHdn(ShokkenTorikeshiIchibuSoshituDiv div, ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報, RString 申請書管理番号) {
+//        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
+//        if (今回情報 != null) {
+//            div.setHdnKonkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(今回情報, true)));
+//            div.setHdnShikibetsuCode(今回情報.get識別コード受給() == null ? RString.EMPTY : 今回情報.get識別コード受給().getColumnValue());
+//        }
+//        YokaigoNinteiJoho 前回情報 = 画面更新用情報.get前回情報();
+//        if (前回情報 != null) {
+//            div.setHdnZenkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(前回情報, false)));
+//        }
+//        NinteiShinseiBusinessCollection renrakusakiJoho = new NinteiShinseiBusinessCollection();
+//        renrakusakiJoho.setDbdBusiness(YokaigoNinteiJohoManager.createInstance().get連絡先情報(申請書管理番号));
+//        div.setHdnRenrakusakiJoho(DataPassingConverter.serialize(renrakusakiJoho));
+//        div.setHdnRenrakusakiReadOnly(new RString("1"));
+//        div.setHdnZenkaiRenrakusakiJoho(DataPassingConverter.serialize(new NinteiShinseiBusinessCollection()));
+//        div.setHdnDisplayModeKey(new RString("照会"));
+//    }
 }
