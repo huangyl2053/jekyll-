@@ -7,7 +7,7 @@
         <id property="事業者.serviceCode" column="dbT3065ShichosonTokubetsuKyufuJigyosha_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
         <id property="事業者.rirekiNo" column="dbT3065ShichosonTokubetsuKyufuJigyosha_rirekiNo"/>
         <id property="サービス.serviceYukoKikanKaishiYMD" column="serviceYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <id property="サービス.serviceCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
+        <id property="サービス.serviceCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="サービス.rirekiNo" column="rirekiNo"/>
 
         <association property="事業者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3065ShichosonTokubetsuKyufuJigyoshaMapper.ResultMap_DbT3065ShichosonTokubetsuKyufuJigyoshaEntity"/>

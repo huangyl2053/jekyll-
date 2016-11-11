@@ -104,7 +104,10 @@ public class KaigoFukaChoshuYuyo {
         RString 状況 = 画面情報param.get状況();
         boolean 決定区分 = 画面情報param.is決定区分();
         boolean 登録flag = false;
-        int 履歴番号 = 徴収猶予の情報.get履歴番号();
+        int 履歴番号 = 0;
+        if (徴収猶予の情報 != null) {
+            履歴番号 = 徴収猶予の情報.get履歴番号();
+        }
         if ((画面状況_申請中.equals(状況) && 決定区分)
                 || (画面状況_決定済.equals(状況))) {
             設定登録用賦課情報(徴収猶予の情報, 画面情報param);
@@ -128,11 +131,13 @@ public class KaigoFukaChoshuYuyo {
         介護期別徴収猶予Entity.setFukaNendo(賦課年度);
         介護期別徴収猶予Entity.setTsuchishoNo(通知書番号);
         介護期別徴収猶予Entity.setRirekiNo(履歴番号);
-        介護期別徴収猶予Entity.setChoshuHoho(ChoshuHohoKibetsu.普通徴収.getコード());
-        List<ChoshuYuyo> list = 徴収猶予の情報.getChoshuYuyoList();
         ChoshuYuyo del介護賦課徴収猶予 = null;
-        if (!登録flag && list != null && !list.isEmpty()) {
-            del介護賦課徴収猶予 = 徴収猶予の情報.getChoshuYuyoList().get(0);
+        介護期別徴収猶予Entity.setChoshuHoho(ChoshuHohoKibetsu.普通徴収.getコード());
+        if (徴収猶予の情報 != null) {
+            List<ChoshuYuyo> list = 徴収猶予の情報.getChoshuYuyoList();
+            if (!登録flag && list != null && !list.isEmpty()) {
+                del介護賦課徴収猶予 = 徴収猶予の情報.getChoshuYuyoList().get(0);
+            }
         }
         for (KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予データ : 介護期別徴収猶予データList) {
             int 期 = 介護期別徴収猶予データ.get期();
@@ -168,12 +173,14 @@ public class KaigoFukaChoshuYuyo {
         FlexibleYear 調定年度 = 画面情報param.get調定年度();
         FlexibleYear 賦課年度 = 画面情報param.get賦課年度();
         TsuchishoNo 通知書番号 = 画面情報param.get通知書番号();
-        List<ChoshuYuyo> list = 徴収猶予の情報.getChoshuYuyoList();
-        if (!登録flag && list != null && !list.isEmpty()) {
-            DbT2006ChoshuYuyoEntity del介護賦課徴収猶予 = list.get(0).toEntity();
-            if (del介護賦課徴収猶予 != null) {
-                del介護賦課徴収猶予.setState(EntityDataState.Deleted);
-                介護賦課徴収猶予Dac.delete(del介護賦課徴収猶予);
+        if (徴収猶予の情報 != null) {
+            List<ChoshuYuyo> list = 徴収猶予の情報.getChoshuYuyoList();
+            if (!登録flag && list != null && !list.isEmpty()) {
+                DbT2006ChoshuYuyoEntity del介護賦課徴収猶予 = list.get(0).toEntity();
+                if (del介護賦課徴収猶予 != null) {
+                    del介護賦課徴収猶予.setState(EntityDataState.Deleted);
+                    介護賦課徴収猶予Dac.delete(del介護賦課徴収猶予);
+                }
             }
         }
         DbT2006ChoshuYuyoEntity 介護賦課徴収猶予Entity = new DbT2006ChoshuYuyoEntity();

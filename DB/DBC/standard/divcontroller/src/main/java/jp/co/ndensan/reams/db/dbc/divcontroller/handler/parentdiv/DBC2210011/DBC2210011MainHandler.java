@@ -167,11 +167,13 @@ public class DBC2210011MainHandler {
         RString 事業者区分 = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchJigyoshaKubun().getValue();
         RString 郡市コード = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchGunshiCode().getValue();
         RString 連番 = RString.EMPTY;
-        if (div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue() != null) {
+        if (div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue() != null
+                && !div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue().isEmpty()) {
             連番 = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue().padLeft("0", FOUR);
         }
         RString cD = RString.EMPTY;
-        if (div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchCheckDigit().getText() != null) {
+        if (div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchCheckDigit().getText() != null
+                && !div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchCheckDigit().getText().isEmpty()) {
             cD = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchCheckDigit().getText();
         }
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().setDataSource(get県コードDDLSource());
@@ -196,6 +198,8 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaName().setValue(RString.EMPTY);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaNameKana().setValue(RString.EMPTY);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaYubinNo().setValue(YubinNo.EMPTY);
+        List<dgTokubetsuKyufuJigyoshaDetailServiceList_Row> dataSources = new ArrayList<>();
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().setDataSource(dataSources);
 
         set事業者詳細入力_事業者情報を追加する_ボタン押下後();
 
