@@ -61,7 +61,7 @@ public class TsuikashiryokagamiA4Editor implements ITsuikashiryokagamiA4Editor {
         source.listShinsei_11 = business.get基準時間();
         source.listShinsei_12 = RString.EMPTY;
         source.listShinsei_13 = RString.EMPTY;
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
         if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     business.get申請書管理番号());

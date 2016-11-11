@@ -63,7 +63,7 @@
         AND mst."serviceYukoKikanKaishiYMD" <![CDATA[<]]> slv."serviceYukoKikanKaishiYMD")
         AND mst."logicalDeletedFlag" is FALSE
         ) AS サービス
-        ON 事業者."jigyoshaNo" = サービス."serviceCode"
+        ON 事業者."serviceCode" = サービス."serviceCode"
         ORDER BY 事業者."jigyoshaNo" ASC,
         事業者."serviceCode" ASC
     </select>

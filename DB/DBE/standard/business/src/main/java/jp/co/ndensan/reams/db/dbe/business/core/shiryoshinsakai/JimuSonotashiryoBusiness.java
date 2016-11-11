@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JimuSonotashiryoBusiness {
 
+    private static final int INDEX_5 = 5;
     private final RString ファイル名_G0001 = new RString("G0001.png");
     private final ShinsakaiSiryoKyotsuEntity entity;
     private final List<RString> ファイル名List;
@@ -70,6 +71,15 @@ public class JimuSonotashiryoBusiness {
      */
     public RString get被保険者番号() {
         return entity.getHihokenshaNo();
+    }
+
+    /**
+     * 識別コードは証記載保険者番号（左から5桁）+被保険者番号を設定してください。
+     *
+     * @return 識別コード
+     */
+    public RString get識別コード() {
+        return entity.getShoKisaiHokenshaNo().substring(0, INDEX_5).concat(entity.getHihokenshaNo());
     }
 
     /**

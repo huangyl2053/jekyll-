@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -140,7 +141,7 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
         if (被保険者一時.getShichosonCode() != null) {
             source.shichosonCode = 被保険者一時.getShichosonCode().value();
         }
-
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_5);
         return source;
     }
 

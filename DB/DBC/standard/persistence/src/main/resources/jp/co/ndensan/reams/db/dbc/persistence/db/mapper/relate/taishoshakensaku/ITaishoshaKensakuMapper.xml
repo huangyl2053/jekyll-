@@ -44,6 +44,6 @@
         </if>
         ORDER BY
         "C"."idoYMD" DESC,
-        "C"."hiHokenshaNo" ASC,
+        "C"."hiHokenshaNo" ASC
     </select>
 </mapper>
