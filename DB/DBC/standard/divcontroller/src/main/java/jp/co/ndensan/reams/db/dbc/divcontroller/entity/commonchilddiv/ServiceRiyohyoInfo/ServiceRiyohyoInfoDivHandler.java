@@ -143,6 +143,7 @@ public class ServiceRiyohyoInfoDivHandler {
             "区分限度単位指定エラー：【種類限度内点数＝区分超過＋区分限度内】になっていません。");
     private static final RString 種類区分限度単位指定エラー = new RString(
             "種類限度単位・区分限度単位指定エラー：【サービス単位＝種類超過＋区分超過＋区分限度内】になっていません。");
+    private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
 
     /**
      * コンストラクタです。
@@ -469,6 +470,8 @@ public class ServiceRiyohyoInfoDivHandler {
                         短期入所情報.get予防短期入所情報().get更新区分(), 短期入所情報.get予防短期入所情報().get暫定区分());
             }
 
+        } else {
+            div.getDdlKoshinKbn().setSelectedKey(KyufukanrihyoSakuseiKubun.新規.getコード());
         }
         if (居宅.equals(居宅総合事業区分)) {
             int count = jigoSakusei.load利用年月チェック(被保険者番号, 利用年月);
@@ -1271,7 +1274,7 @@ public class ServiceRiyohyoInfoDivHandler {
                 給付率 = 給付率_100.subtract(二割);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.給付率, 給付率);
+        ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(給付率));
         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(給付率);
 
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
@@ -1285,7 +1288,9 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(false);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(サービス単位計算());
+        if (!div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource().isEmpty()) {
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(サービス単位計算());
+        }
     }
 
     /**
