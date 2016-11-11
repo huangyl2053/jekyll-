@@ -32,7 +32,7 @@
             ) AS "DbT3070KogakuGassanJikoFutanGaku"
         ON  "DbT3068KogakuGassanShinseisho"."hihokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo"
             AND "DbT3068KogakuGassanShinseisho"."taishoNendo" = "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo"   
-            AND "DbT3068KogakuGassanShinseisho"."hokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo"   
+            AND SUBSTR("DbT3068KogakuGassanShinseisho"."hokenshaNo",3,8)  = "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo"   
             AND "DbT3068KogakuGassanShinseisho"."shikyuShinseishoSeiriNo" = "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
         WHERE 
             "DbT3068KogakuGassanShinseisho"."shinseiJokyoKubun" = '2'
