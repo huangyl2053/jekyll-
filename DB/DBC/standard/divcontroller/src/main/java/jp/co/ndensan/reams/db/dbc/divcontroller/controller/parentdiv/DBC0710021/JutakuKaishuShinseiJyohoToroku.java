@@ -176,10 +176,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, 画面モード, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
-        if (valid2.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid2).respond();
+        if (!画面モード_取消.equals(画面モード) && !画面モード_削除.equals(画面モード)) {
+            ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                    div, 画面モード, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
+            if (valid2.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(valid2).respond();
+            }
         }
 
         boolean 内容変更 = new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
