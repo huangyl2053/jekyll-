@@ -307,7 +307,7 @@ public class KogakuKyufuTaishoList {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (!削除.equals(モード)) {
-            validPairs = getCheckHandler(div).確定チェック();
+            validPairs = getCheckHandler(div).確定チェック(モード);
         }
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
