@@ -3,11 +3,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sun Oct 09 10:56:16 CST 2016
+ * Tue Nov 08 20:35:11 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
@@ -16,11 +16,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
  * @reamsid_L DBC-3020-010 chenyadong
  */
 public class dgShichoson_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString bango;
     private RString shichosonMei;
-    private ButtonDialog baitai;
+    private Button btnTorikomiKoiki;
     private RString fileNitiji;
     private RString fileKakunoShoriNitiji;
     private RString koikiTorikomiNitiji;
@@ -30,32 +30,32 @@ public class dgShichoson_Row extends DataRow {
         super();
         this.bango = RString.EMPTY;
         this.shichosonMei = RString.EMPTY;
-        this.baitai = new ButtonDialog();
+        this.btnTorikomiKoiki = new Button();
         this.fileNitiji = RString.EMPTY;
         this.fileKakunoShoriNitiji = RString.EMPTY;
         this.koikiTorikomiNitiji = RString.EMPTY;
         this.shichosonShikibetuID = RString.EMPTY;
         this.setOriginalData("bango", bango);
         this.setOriginalData("shichosonMei", shichosonMei);
-        this.setOriginalData("baitai", baitai);
+        this.setOriginalData("btnTorikomiKoiki", btnTorikomiKoiki);
         this.setOriginalData("fileNitiji", fileNitiji);
         this.setOriginalData("fileKakunoShoriNitiji", fileKakunoShoriNitiji);
         this.setOriginalData("koikiTorikomiNitiji", koikiTorikomiNitiji);
         this.setOriginalData("shichosonShikibetuID", shichosonShikibetuID);
     }
 
-    public dgShichoson_Row(RString bango, RString shichosonMei, ButtonDialog baitai, RString fileNitiji, RString fileKakunoShoriNitiji, RString koikiTorikomiNitiji, RString shichosonShikibetuID) {
+    public dgShichoson_Row(RString bango, RString shichosonMei, Button btnTorikomiKoiki, RString fileNitiji, RString fileKakunoShoriNitiji, RString koikiTorikomiNitiji, RString shichosonShikibetuID) {
         super();
         this.setOriginalData("bango", bango);
         this.setOriginalData("shichosonMei", shichosonMei);
-        this.setOriginalData("baitai", baitai);
+        this.setOriginalData("btnTorikomiKoiki", btnTorikomiKoiki);
         this.setOriginalData("fileNitiji", fileNitiji);
         this.setOriginalData("fileKakunoShoriNitiji", fileKakunoShoriNitiji);
         this.setOriginalData("koikiTorikomiNitiji", koikiTorikomiNitiji);
         this.setOriginalData("shichosonShikibetuID", shichosonShikibetuID);
         this.bango = bango;
         this.shichosonMei = shichosonMei;
-        this.baitai = baitai;
+        this.btnTorikomiKoiki = btnTorikomiKoiki;
         this.fileNitiji = fileNitiji;
         this.fileKakunoShoriNitiji = fileKakunoShoriNitiji;
         this.koikiTorikomiNitiji = koikiTorikomiNitiji;
@@ -70,8 +70,8 @@ public class dgShichoson_Row extends DataRow {
         return shichosonMei;
     }
 
-    public ButtonDialog getBaitai() {
-        return baitai;
+    public Button getBtnTorikomiKoiki() {
+        return btnTorikomiKoiki;
     }
 
     public RString getFileNitiji() {
@@ -100,9 +100,9 @@ public class dgShichoson_Row extends DataRow {
         this.shichosonMei = shichosonMei;
     }
 
-    public void setBaitai(ButtonDialog baitai) {
-        this.setOriginalData("baitai", baitai);
-        this.baitai = baitai;
+    public void setBtnTorikomiKoiki(Button btnTorikomiKoiki) {
+        this.setOriginalData("btnTorikomiKoiki", btnTorikomiKoiki);
+        this.btnTorikomiKoiki = btnTorikomiKoiki;
     }
 
     public void setFileNitiji(RString fileNitiji) {

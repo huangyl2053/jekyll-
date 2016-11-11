@@ -74,11 +74,60 @@ public class PostMainPanelCheck {
      *
      */
     public void validateCheck() {
+        国保情報Check();
+        Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード();
+        if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+            RString 後期ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(),
+                    SubGyomuCode.DBC介護給付);
+            if (導入形態コード.toString().equals(NUM_120.toString())) {
+                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期情報);
+                単一messeges(後期情報List);
+                if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null);
+            }
+            if (導入形態コード.toString().equals(NUM_111.toString())
+                    || 導入形態コード.toString().equals(NUM_112.toString())) {
+                dgShichoson_Row row = div.getDgShichoson().getClickedItem();
+                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(
+                        後期情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
+                単一messeges(後期情報List);
+                if種類(後期ＩＦ種類, 導入形態コード, 後期情報, row);
+
+            }
+        }
+    }
+
+    /**
+     * validateCheckNewチェック
+     *
+     */
+    public void validateCheckNew() {
+        国保情報Check();
+        Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード();
+        if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+            RString 後期ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(),
+                    SubGyomuCode.DBC介護給付);
+            if (導入形態コード.toString().equals(NUM_120.toString())) {
+                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期情報);
+                単一messeges(後期情報List);
+                if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null);
+            }
+            if (導入形態コード.toString().equals(NUM_111.toString())
+                    || 導入形態コード.toString().equals(NUM_112.toString())) {
+                for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
+                    List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(
+                            後期情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
+                    単一messeges(後期情報List);
+                    if種類(後期ＩＦ種類, 導入形態コード, 後期情報, row);
+
+                }
+            }
+        }
+    }
+
+    private void 国保情報Check() {
         Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード();
         List<UzT0885SharedFileEntryEntity> 国保情報List;
         RString 国保ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類, RDate.getNowDate(),
-                SubGyomuCode.DBC介護給付);
-        RString 後期ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
         if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
             if (導入形態コード.toString().equals(NUM_120.toString())) {
@@ -94,24 +143,6 @@ public class PostMainPanelCheck {
                             国保情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
                     単一messeges(国保情報List);
                     if種類(国保ＩＦ種類, 導入形態コード, 国保情報, row);
-                }
-            }
-        }
-
-        if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
-            if (導入形態コード.toString().equals(NUM_120.toString())) {
-                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期情報);
-                単一messeges(後期情報List);
-                if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null);
-            }
-            if (導入形態コード.toString().equals(NUM_111.toString())
-                    || 導入形態コード.toString().equals(NUM_112.toString())) {
-                for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
-                    List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(
-                            後期情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
-                    単一messeges(後期情報List);
-                    if種類(後期ＩＦ種類, 導入形態コード, 後期情報, row);
-
                 }
             }
         }
@@ -178,7 +209,7 @@ public class PostMainPanelCheck {
             InputStreamReader read = new InputStreamReader(stream, "SJIS");
             BufferedReader bufferedReader = new BufferedReader(read);
             RString hasread = new RString(bufferedReader.readLine());
-            if (hasread.isNullOrEmpty()) {
+            if (hasread.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
                         .replace(対象のファイル.toString()).evaluate());
             } else {
