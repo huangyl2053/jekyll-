@@ -413,8 +413,10 @@ public class ShinsakaiKekkaToroku {
          */
         if (div.getDdlNijiHantei().getSelectedKey().equals(要介護1)) {
             div.getDdlJotaiZo().setRequired(true);
+            div.getDdlJotaiZo().setDisabled(false);
         } else {
             div.getDdlJotaiZo().setRequired(false);
+            div.getDdlJotaiZo().setDisabled(true);
         }
         RString shinseiKubunShinseiji = div.getTxtShinseiKubunShinseiji().getText();
         RString zenkaiNijiHantei = new RString("");
