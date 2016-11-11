@@ -565,7 +565,7 @@ public class IkenshoSakuseiIraiHandler {
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                文書番号,
+                //                文書番号,
                 RString.isNullOrEmpty(business.get医療機関郵便番号()) ? RString.EMPTY : new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo(),
                 business.get医療機関住所(),
                 business.get被保険者氏名(),
