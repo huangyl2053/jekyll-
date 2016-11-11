@@ -131,8 +131,11 @@ public class ShokanShinseiList {
                             serviceYMFrom,
                             serviceYMTo);
         }
-        if (shokandhinseiichiran == null || shokandhinseiichiran.records().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        if (!ResponseHolder.isReRequest() && (shokandhinseiichiran == null || shokandhinseiichiran.records().isEmpty())) {
+            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.該当データなし.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(requestDiv).initialize(mode, shokandhinseiichiran);
         }
         getHandler(requestDiv).initialize(mode, shokandhinseiichiran);
 

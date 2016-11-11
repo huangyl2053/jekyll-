@@ -165,6 +165,11 @@ public class PanelKougakuKetteiTuutisyo {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).respond();
         }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).cancelPublish().respond();
+        }
         return ResponseData.of(div).respond();
     }
 
