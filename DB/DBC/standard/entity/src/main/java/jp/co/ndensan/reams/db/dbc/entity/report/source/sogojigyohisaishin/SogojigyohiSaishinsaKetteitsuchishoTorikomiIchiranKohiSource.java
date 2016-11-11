@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishin;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -52,9 +53,8 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource implem
     public RString kaipage4;
     @ReportItem(name = "kaipage5", length = 20, order = 16)
     public RString kaipage5;
-    @ReportPerson(id = "X")
+    @ReportPerson(id = "A")
     public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 17)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 20, order = 18)
@@ -117,6 +117,8 @@ public class SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource implem
     public RString sogojigyohiChoseiTanisu;
     @ReportItem(name = "sogojigyohiChoseiFutangaku", length = 17, order = 47)
     public RString sogojigyohiChoseiFutangaku;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
