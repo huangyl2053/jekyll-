@@ -50,7 +50,7 @@ public enum FutsuChoshuKarisanteiKekkaIchiranOutputOrder implements IReportItems
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"ShikibetsuTaisho_genLasdecCode\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_fukaShichosonCode\"")),
     /**
      * 被保険者番号
      */
