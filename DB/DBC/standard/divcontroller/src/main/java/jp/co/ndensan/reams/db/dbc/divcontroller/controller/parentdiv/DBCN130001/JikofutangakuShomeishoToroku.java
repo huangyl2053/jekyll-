@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBCN130001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeisho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeishoMeisai;
@@ -13,13 +14,13 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishoto
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.DBCN130001StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.DBCN130001TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.JikofutangakuShomeishoTorokuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.dgShomeishoRireki_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN130001.JikofutangakuShomeishoTorokuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN130001.JikofutangakuShomeishoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -27,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -119,13 +119,14 @@ public class JikofutangakuShomeishoToroku {
         List<RString> keys = div.getChkIsRirekiHyoji().getSelectedKeys();
         List<JigyoKogakuGassanJikoFutanGakuShomeisho> 証明書情報List;
         if (keys.isEmpty()) {
-            証明書情報List = manager.get事業高額合算自己負担額証明書情報(parameter).records();
-        } else {
             証明書情報List = manager.get事業高額合算自己負担額証明書履歴情報(parameter).records();
+        } else {
+            証明書情報List = manager.get事業高額合算自己負担額証明書情報(parameter).records();
         }
 
         if (証明書情報List.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            div.getDgShomeishoRireki().setDataSource(new ArrayList<dgShomeishoRireki_Row>());
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).検索対象データなし()).respond();
         }
         getHandler(div).set証明書履歴GRD(証明書情報List);
         return ResponseData.of(div).respond();
