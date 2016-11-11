@@ -497,7 +497,7 @@
         INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
         )
-        SELECT
+        SELECT DISTINCT
         master."shikibetsuCode",
         C."genLasdecCode",
         CASE
