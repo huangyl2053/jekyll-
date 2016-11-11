@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBC-3080-030 dongyabin -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<!--<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaTmpMapper">-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaTmpMapper">
     
     <select resultOrdered="true" id="get基本" 
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonEntity" fetchSize="500">
