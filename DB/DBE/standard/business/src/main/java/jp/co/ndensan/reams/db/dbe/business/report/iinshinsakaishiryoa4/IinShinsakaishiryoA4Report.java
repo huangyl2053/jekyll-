@@ -150,7 +150,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
 
     private void テキスト全面Editor(ReportSourceWriter<IinShinsakaishiryoA4ReportSource> reportSourceWriter,
             List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List) {
-        if (TokkijikoTextImageKubun.イメージ.getコード().equals(tokkiTextBusiness.get特記事項テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(tokkiTextBusiness.get特記事項テキスト_イメージ区分())) {
             for (int i = 0; i < テキスト全面List.size(); i++) {
                 if (0 < i) {
                     IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group4Editor(

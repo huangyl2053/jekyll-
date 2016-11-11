@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.Ichijiha
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -20,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 特記事項2枚目以降A3版Editorです。
@@ -135,11 +132,6 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
                 source = set特記事項イメージ連番_名称(source);
                 source = set特記事項イメージ(source);
             }
-        }
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
-            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    item.get申請書管理番号());
         }
         if (ReportIdDBE.DBE517915.getReportId().value().equals(reportId)) {
             source.layout = Layouts.四頁目;
