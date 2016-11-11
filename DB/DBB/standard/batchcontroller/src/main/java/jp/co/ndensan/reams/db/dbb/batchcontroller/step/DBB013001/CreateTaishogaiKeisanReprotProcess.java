@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.PrtKaigoFukaTokuchoHeijunkaCore;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.DBB200005_HeijunkaKeisanIchiran;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranReport;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -202,8 +200,7 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
                 entity.get対象外データTemp(), entity);
         RString 算定年額保険料 = taishogaiEntity.get保険料算定段階2() == null ? taishogaiEntity.get保険料算定段階1()
                 : taishogaiEntity.get保険料算定段階2();
-        Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(parameter.get賦課年度(), 算定年額保険料);
-        Decimal 今年度保険料率 = 今年度保険料率取得(保険料段階);
+        Decimal 今年度保険料率 = null == 算定年額保険料 ? Decimal.ZERO : new Decimal(算定年額保険料.toString());
         int 調整金額 = 調整金額取得(今年度保険料率, parameter.get賦課年度());
         TokuchoHeijunkaRokuBatchTaishogaiIchiran taishogai = new TokuchoHeijunkaRokuBatchTaishogaiIchiran(
                 taishogaiEntity, 今年度保険料率, new Decimal(調整金額));
@@ -317,7 +314,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
         bodyList.add(RString.EMPTY);
         bodyList.add(RString.EMPTY);
         bodyList.add(RString.EMPTY);
-        bodyList.add(特徴平準化結果対象外.get保険料段階仮算定時());
         金額設定(特徴平準化結果対象外, bodyList);
         bodyList.add(備考名を転換(編集備考));
     }
@@ -374,14 +370,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
             期別端数int = Integer.parseInt(期別端数.toString());
         }
         return 調整金額.divide(期別端数int).intValue() * 期別端数int;
-    }
-
-    private Decimal 今年度保険料率取得(Optional<HokenryoDankai> 保険料段階) {
-        Decimal 今年度保険料率 = Decimal.ZERO;
-        if (保険料段階.isPresent()) {
-            今年度保険料率 = 保険料段階.get().get保険料率();
-        }
-        return 今年度保険料率;
     }
 
     private RString 備考名を転換(RString 編集コード) {
