@@ -47,6 +47,10 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("InsatsuTaishoShitei"));
             };
 
+            Controls.prototype.ccdHokenshaList = function () {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
+            };
+
             Controls.prototype.NinteiChosa = function () {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
             };
