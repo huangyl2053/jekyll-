@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufujisekijohosofuichiran;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyuufujisekikoshinnkekka.KyuufuJisekiKoshinnKekkaEntity;
@@ -141,7 +142,8 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
         if (被保険者一時.getShichosonCode() != null) {
             source.shichosonCode = 被保険者一時.getShichosonCode().value();
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_5);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                ReportKomokuEditorUtil.get非空文字列(source.listUpper_5));
         return source;
     }
 

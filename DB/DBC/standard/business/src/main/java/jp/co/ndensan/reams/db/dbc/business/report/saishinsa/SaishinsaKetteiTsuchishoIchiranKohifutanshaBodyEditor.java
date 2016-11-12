@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.saishinsa;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishinsaKetteiTsuchishoChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.saishinsa.SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
@@ -84,7 +85,7 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaBodyEditor
         if (null != 帳票出力対象データ.get被保険者番号()) {
             source.listLower_1 = 帳票出力対象データ.get被保険者番号().getColumnValue();
             source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
-                    source.listLower_1);
+                    ReportKomokuEditorUtil.get非空文字列(source.listLower_1));
         }
         source.listLower_2 = 帳票出力対象データ.get公費受給者名();
         if (null != 帳票出力対象データ.get申立事由コード()) {

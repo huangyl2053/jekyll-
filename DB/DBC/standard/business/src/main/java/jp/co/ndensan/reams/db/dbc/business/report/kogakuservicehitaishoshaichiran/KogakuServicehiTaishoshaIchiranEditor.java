@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kogakuservicehitaishoshaichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyusochisha.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuservicehitaishoshaichiran.KogakuServicehiTaishoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuservicehitaishoshaichiran.KogakuServicehiTaishoshaIchiranSource;
@@ -105,7 +106,8 @@ public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTa
             source.listTaishosha_3 = 高額介護サービス費対象者一覧表.getサービス提供年月().toDateString();
         }
         付値(source);
-        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listTaishosha_2);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listTaishosha_2));
         return source;
     }
 

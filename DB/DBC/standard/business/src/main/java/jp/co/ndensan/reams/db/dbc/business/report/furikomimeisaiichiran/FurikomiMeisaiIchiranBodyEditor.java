@@ -119,7 +119,7 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
             source.ninzu_gokei = doカンマ編集(振込明細一覧Entity.get総合計人数());
             source.shikyu_gokei = doカンマ編集(振込明細一覧Entity.get総合計金額());
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list1_1);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.list1_1));
         return source;
     }
 
@@ -192,6 +192,13 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }
