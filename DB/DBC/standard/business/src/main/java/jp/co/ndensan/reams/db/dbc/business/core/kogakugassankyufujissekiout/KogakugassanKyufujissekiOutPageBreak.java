@@ -38,6 +38,7 @@ public class KogakugassanKyufujissekiOutPageBreak extends PageBreaker<GassanKyuf
     public boolean isBreak(ReportLineRecord<GassanKyufujissekiSofuIchiranSource> currentSource,
             ReportLineRecord<GassanKyufujissekiSofuIchiranSource> nextSource) {
         boolean flag = false;
+        isHihokenBreak(currentSource, nextSource);
         if (this.breakKeysList.contains(KogakugassanKyufujissekiOutputOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().list_7.equals(nextSource.getSource().list_7)) {
             flag = true;
@@ -52,6 +53,28 @@ public class KogakugassanKyufujissekiOutPageBreak extends PageBreaker<GassanKyuf
             flag = true;
         } else if (this.breakKeysList.contains(KogakugassanKyufujissekiOutputOrder.決定年月日.get項目ID())
                 && !currentSource.getSource().list_9.equals(nextSource.getSource().list_9)) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    private boolean isHihokenBreak(ReportLineRecord<GassanKyufujissekiSofuIchiranSource> currentSource,
+            ReportLineRecord<GassanKyufujissekiSofuIchiranSource> nextSource) {
+        boolean flag = false;
+        if (this.breakKeysList.contains(KogakugassanKyufujissekiOutputOrder.郵便番号.get項目ID())
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KogakugassanKyufujissekiOutputOrder.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KogakugassanKyufujissekiOutputOrder.行政区コード.get項目ID())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KogakugassanKyufujissekiOutputOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KogakugassanKyufujissekiOutputOrder.市町村コード.get項目ID())
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             flag = true;
         }
         return flag;
