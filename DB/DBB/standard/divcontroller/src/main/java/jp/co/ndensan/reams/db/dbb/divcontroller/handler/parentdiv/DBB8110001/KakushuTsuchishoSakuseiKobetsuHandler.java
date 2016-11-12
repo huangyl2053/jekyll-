@@ -229,7 +229,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             List<KeyValueDataSource> 更正前Data = new ArrayList<>();
             RString 年月日;
             RString 時刻;
+            List<RString> keyList = new ArrayList<>();
             for (YMDHMS 更正後日時 : 調定日時List) {
+                if (keyList.contains(new RString(更正後日時.toString()))) {
+                    continue;
+                }
+                keyList.add(new RString(更正後日時.toString()));
                 年月日 = 更正後日時.getRDateTime().getDate().wareki().toDateString();
                 時刻 = 更正後日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm);
                 更正後Data.add(new KeyValueDataSource(new RString(更正後日時.toString()), 年月日.concat(スペース).concat(時刻)));
@@ -241,7 +246,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             List<YMDHMS> 更正前調定日時List = new ArrayList<>();
             更正前調定日時List.addAll(調定日時List);
             更正前調定日時List.remove(調定日時List.get(0));
+            keyList = new ArrayList<>();
             for (YMDHMS 更正前日時 : 更正前調定日時List) {
+                if (keyList.contains(new RString(更正前日時.toString()))) {
+                    continue;
+                }
+                keyList.add(new RString(更正前日時.toString()));
                 年月日 = 更正前日時.getRDateTime().getDate().wareki().toDateString();
                 時刻 = 更正前日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm);
                 更正前Data.add(new KeyValueDataSource(new RString(更正前日時.toString()), 年月日.concat(スペース).concat(時刻)));

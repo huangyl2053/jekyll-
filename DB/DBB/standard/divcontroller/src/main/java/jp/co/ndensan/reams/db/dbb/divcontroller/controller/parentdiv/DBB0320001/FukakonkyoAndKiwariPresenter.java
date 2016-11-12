@@ -196,7 +196,7 @@ public class FukakonkyoAndKiwariPresenter {
         div.getLblHokenryoritsu1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
         div.getLblHokenryoSansyutsu1().setText(calc保険料算出額(model.get算定年額保険料1(), 月数1));
 
-        if (model.get月割開始年月2().isValid()) {
+        if (null != model.get月割開始年月2() && model.get月割開始年月2().isValid()) {
             RString 月数2 = getBetweenMonths(model.get月割開始年月2(), model.get月割終了年月2());
             HokenryoDankai 保険料段階2 = 保険料段階取得.get保険料段階ListIn(model.get賦課年度())
                     .getBy段階区分(model.get保険料算定段階2());
@@ -287,7 +287,7 @@ public class FukakonkyoAndKiwariPresenter {
     }
 
     private static RString get保険料算定段階(Fuka model) {
-        if (model.get保険料算定段階2().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(model.get保険料算定段階2())) {
             return model.get保険料算定段階1();
         } else {
             return model.get保険料算定段階2();

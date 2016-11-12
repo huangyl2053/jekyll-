@@ -4,22 +4,24 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.kogakuservicehidetail.IKogakuServicehiDetailDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.kogakuservicehidetail.KogakuServicehiDetailDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuServicehiDetail.IKogakuServicehiDetailDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuServicehiDetail.KogakuServicehiDetailDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinseiTorokuPanel のクラスファイル 
- * 
- * @author 自動生成
+ * ShinseiTorokuPanel のクラスファイル
+ *
+ * @reamsid_L DBC-2020-040 quxiaodong
  */
 public class ShinseiTorokuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
