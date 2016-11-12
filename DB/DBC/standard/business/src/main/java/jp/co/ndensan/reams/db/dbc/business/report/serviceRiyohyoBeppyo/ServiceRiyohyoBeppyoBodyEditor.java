@@ -134,7 +134,7 @@ public class ServiceRiyohyoBeppyoBodyEditor implements IServiceRiyohyoBeppyoBody
                     method.invoke(source, 事業者名.substring(事業者名上段長さ));
                 }
                 method = CLS.getMethod(JIGYOSHOCD1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, サービス提供票別表.get事業者コード().getColumnValue());
+                method.invoke(source, サービス提供票別表.get事業者コード());
                 RString サービス = サービス提供票別表.getサービス();
                 if (RString.isNullOrEmpty(サービス) || サービス.length() <= サービス上段長さ) {
                     method = CLS.getMethod(SNAME11.concat(new RString(i)).toString(), RString.class);
@@ -149,17 +149,17 @@ public class ServiceRiyohyoBeppyoBodyEditor implements IServiceRiyohyoBeppyoBody
                     method.invoke(source, サービス.substring(サービス上段長さ));
                 }
                 method = CLS.getMethod(SCODE1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, サービス提供票別表.getサービス種類コード().getColumnValue().
-                        concat(サービス提供票別表.getサービス項目コード().getColumnValue()));
+                method.invoke(source, サービス提供票別表.getサービス種類コード().
+                        concat(サービス提供票別表.getサービス項目コード()));
                 method = CLS.getMethod(TEN1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get単位()));
+                method.invoke(source, get金額のカンマ編集(new Decimal(サービス提供票別表.get単位().toString())));
                 method = CLS.getMethod(WARIRITSU1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get割引適用後率() == null
-                        ? Decimal.ZERO : サービス提供票別表.get割引適用後率().getColumnValue()));
+                        ? Decimal.ZERO : new Decimal(サービス提供票別表.get割引適用後率().toString())));
                 method = CLS.getMethod(WARITEN1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get割引適用後単位()));
+                method.invoke(source, get金額のカンマ編集(new Decimal(サービス提供票別表.get割引適用後単位().toString())));
                 method = CLS.getMethod(KAI1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, get金額のカンマ編集(サービス提供票別表.get回数()));
+                method.invoke(source, get金額のカンマ編集(new Decimal(サービス提供票別表.get回数().toString())));
                 method = CLS.getMethod(STENSU1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.getサービス単位()));
                 method = CLS.getMethod(SOVER1.concat(new RString(i)).toString(), RString.class);
@@ -171,12 +171,12 @@ public class ServiceRiyohyoBeppyoBodyEditor implements IServiceRiyohyoBeppyoBody
                 method = CLS.getMethod(KIN1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get区分限度内単位()));
                 method = CLS.getMethod(TANKA1.concat(new RString(i)).toString(), RString.class);
-                method.invoke(source, get金額のカンマ編集小数点後２桁(サービス提供票別表.get単位数単価()));
+                method.invoke(source, get金額のカンマ編集小数点後２桁(new Decimal(サービス提供票別表.get単位数単価().toString())));
                 method = CLS.getMethod(HIYOU1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get費用総額()));
                 method = CLS.getMethod(RITU1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get給付率() == null
-                        ? Decimal.ZERO : サービス提供票別表.get給付率().getColumnValue()));
+                        ? Decimal.ZERO : new Decimal(サービス提供票別表.get給付率().toString())));
                 method = CLS.getMethod(KYUFU1.concat(new RString(i)).toString(), RString.class);
                 method.invoke(source, get金額のカンマ編集(サービス提供票別表.get保険給付額()));
                 method = CLS.getMethod(HOKEN1.concat(new RString(i)).toString(), RString.class);
@@ -193,7 +193,7 @@ public class ServiceRiyohyoBeppyoBodyEditor implements IServiceRiyohyoBeppyoBody
         if (this.合計情報 == null || !isサービス提供票最後ページ出力) {
             return;
         }
-        source.gokeiTen = get金額のカンマ編集(this.合計情報.get単位());
+        source.gokeiTen = this.合計情報.get単位();
         source.gokeiStensu = get金額のカンマ編集(this.合計情報.getサービス単位());
         source.gokeiSover = get金額のカンマ編集(this.合計情報.get種類限度超過単位());
         source.gokeiSin = get金額のカンマ編集(this.合計情報.get種類限度内単位());

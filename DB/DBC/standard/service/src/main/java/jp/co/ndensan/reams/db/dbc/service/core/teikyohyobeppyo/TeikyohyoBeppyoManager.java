@@ -23,7 +23,8 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.teikyohyobeppyo.I
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.jigosakuseimeisaitouroku.JigoSakuseiMeisaiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -44,6 +45,7 @@ public class TeikyohyoBeppyoManager {
     private static final RString 対象年月R = new RString("対象年月");
     private static final RString 履歴番号R = new RString("履歴番号");
     private static final RString 引数_自己作成0件 = new RString("自己作成0件");
+    private static final RString 金額用_ZERO = new RString("0");
 
     private final MapperProvider mapperProvider;
 
@@ -120,29 +122,29 @@ public class TeikyohyoBeppyoManager {
         KyufuJikoSakuseiEntityResult entityResult = new KyufuJikoSakuseiEntityResult();
         entityResult.set事業者(result.get事業者());
         entityResult.setサービス(result.getサービス());
-        entityResult.set単位(RString.isNullOrEmpty(result.get単位()) ? Decimal.ZERO : new Decimal(result.get単位().toString()));
-        entityResult.set割引適用後率(RString.isNullOrEmpty(result.get割引適用後率()) ? new HokenKyufuRitsu(Decimal.ZERO)
-                : new HokenKyufuRitsu(new Decimal(result.get割引適用後率().toString())));
-        entityResult.set割引適用後単位(RString.isNullOrEmpty(result.get割引適用後単位()) ? Decimal.ZERO
-                : new Decimal(result.get割引適用後単位().toString()));
-        entityResult.set回数(RString.isNullOrEmpty(result.get回数()) ? Decimal.ZERO : new Decimal(result.get回数().toString()));
+        entityResult.set単位(RString.isNullOrEmpty(result.get単位()) ? 金額用_ZERO : result.get単位());
+        entityResult.set割引適用後率(RString.isNullOrEmpty(result.get割引適用後率()) ? 金額用_ZERO
+                : result.get割引適用後率());
+        entityResult.set割引適用後単位(RString.isNullOrEmpty(result.get割引適用後単位()) ? 金額用_ZERO
+                : result.get割引適用後単位());
+        entityResult.set回数(RString.isNullOrEmpty(result.get回数()) ? 金額用_ZERO : result.get回数());
         entityResult.setサービス単位(result.getサービス単位());
         entityResult.set種類限度超過単位(result.get種類限度超過単位());
         entityResult.set種類限度内単位(result.get種類限度内単位());
-        entityResult.set単位数単価(RString.isNullOrEmpty(result.get単位数単価()) ? Decimal.ZERO
-                : new Decimal(result.get単位数単価().toString()));
+        entityResult.set単位数単価(RString.isNullOrEmpty(result.get単位数単価()) ? 金額用_ZERO
+                : result.get単位数単価());
         entityResult.set区分限度超過単位(result.get区分限度超過単位());
         entityResult.set区分限度内単位(result.get区分限度内単位());
-        entityResult.set給付率(RString.isNullOrEmpty(result.get給付率()) ? new HokenKyufuRitsu(Decimal.ZERO)
-                : new HokenKyufuRitsu(new Decimal(result.get給付率().toString())));
+        entityResult.set給付率(RString.isNullOrEmpty(result.get給付率()) ? 金額用_ZERO
+                : result.get給付率());
         entityResult.set給付計画単位数(result.get給付計画単位数());
         entityResult.set費用総額(result.get費用総額());
         entityResult.set保険給付額(result.get保険給付額());
         entityResult.set保険対象利用者負担額(result.get保険対象利用者負担額());
         entityResult.set全額利用者負担額(result.get全額利用者負担額());
-        entityResult.set事業者コード(result.get事業者コード());
-        entityResult.setサービス種類コード(result.getサービス種類コード());
-        entityResult.setサービス項目コード(result.getサービス項目コード());
+        entityResult.set事業者コード(result.get事業者コード() == null ? RString.EMPTY : result.get事業者コード().value());
+        entityResult.setサービス種類コード(result.getサービス種類コード() == null ? RString.EMPTY : result.getサービス種類コード().value());
+        entityResult.setサービス項目コード(result.getサービス項目コード() == null ? RString.EMPTY : result.getサービス項目コード().value());
         entityResult.setステータス(result.getステータス());
         entityResult.set合計フラグ(result.is合計フラグ());
         entityResult.set限度額対象外フラグ(result.get限度額対象外フラグ());
@@ -187,8 +189,8 @@ public class TeikyohyoBeppyoManager {
         for (KyufuJikoSakuseiEntityResult result : 帳票データ) {
             ServiceTypeDetails detail = new ServiceTypeDetails();
             detail.setサービス単位(result.getサービス単位());
-            detail.setサービス種類コード(result.getサービス種類コード());
-            detail.setサービス項目コード(result.getサービス項目コード());
+            detail.setサービス種類コード(new ServiceShuruiCode(result.getサービス種類コード()));
+            detail.setサービス項目コード(new ServiceKomokuCode(result.getサービス項目コード()));
             detail.set限度額対象外フラグ(result.get限度額対象外フラグ());
             details.add(detail);
         }
