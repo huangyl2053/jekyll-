@@ -901,7 +901,9 @@ public class HanyoListParamHandler {
         restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
-    private void restore汎用リスト_事業対象者BatchParameter(BatchParameterMap batchParameterMap) {
+    private void restore汎用リスト_事業対象者BatchParameter(BatchParameterMap batchParameterMap) { 
+        div.getRadChushutsuJokenB1().clearSelectedItem();
+        div.getRadChushutsuJokenB2().clearSelectedItem();
         restore事業対象者データ抽出(batchParameterMap, 事業対象者データ抽出パラメータ名称);
         restore共通(batchParameterMap);
         restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
