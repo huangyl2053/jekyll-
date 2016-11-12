@@ -945,6 +945,8 @@ dbc/db/dbc/KogakuKyufuTaishoList/onClick_delete
 dbc/db/dbc/KogakuKyufuTaishoList/onClick_modify
 dbc/db/dbc/KogakuKyufuTaishoList/onOkClose_btnJgyosha
 dbc/db/dbc/KogakuKyufuTaishoList/onOkClose_btnServiceSyurui
+dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnComplete
+dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnContinue
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnFree
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnKogakuMeisaiHyoji
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnReSearch

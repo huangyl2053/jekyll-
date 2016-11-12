@@ -103,7 +103,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     public void initialize申請情報検索(RString メニューID, HihokenshaNo 被保険者番号, RString 導入形態コード) {
         div.getCcdKogakuShinseiList().initialize(メニューID, 被保険者番号, 導入形態コード);
     }
-
+    
     /**
      * 高額詳細内容画面初期化です。
      *
