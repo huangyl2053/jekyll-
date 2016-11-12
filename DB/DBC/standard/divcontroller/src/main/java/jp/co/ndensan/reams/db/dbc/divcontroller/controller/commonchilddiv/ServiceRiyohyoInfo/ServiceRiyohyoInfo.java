@@ -41,7 +41,6 @@ public class ServiceRiyohyoInfo {
 
     private static final Decimal DECIMAL_90 = new Decimal(90);
     private static final Decimal DECIMAL_80 = new Decimal(80);
-    private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
 
     private ServiceRiyohyoInfoDivHandler getHandler(ServiceRiyohyoInfoDiv div) {
         return new ServiceRiyohyoInfoDivHandler(div);
@@ -70,9 +69,6 @@ public class ServiceRiyohyoInfo {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth 対象年月 = ViewStateHolder.get(ViewStateKeys.対象年月, FlexibleYearMonth.class);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
-        if (div.getTxtRiyoYM().getValue() == null) {
-            throw new ApplicationException(前月の明細情報エラー.toString());
-        }
         FlexibleYearMonth 利用年月 = new FlexibleYearMonth(div.getTxtRiyoYM().getValue().getYearMonth().toDateString());
         getHandler(div).setサービス利用票(被保険者番号, 対象年月, 履歴番号, 利用年月.minusMonth(1));
         return ResponseData.of(div).respond();
