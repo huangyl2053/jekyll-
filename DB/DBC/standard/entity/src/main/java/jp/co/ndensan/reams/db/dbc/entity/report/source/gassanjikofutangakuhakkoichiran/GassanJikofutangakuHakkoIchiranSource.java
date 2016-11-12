@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.gassanjikofutangakuhakkoichiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -47,7 +48,6 @@ public class GassanJikofutangakuHakkoIchiranSource implements IReportSource {
     public RString kaipage5;
     @ReportItem(name = "list_1", length = 6, order = 14)
     public RString list_1;
-    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "list_2", length = 10, order = 15)
     public RString list_2;
     @ReportItem(name = "list_3", length = 20, order = 16)
@@ -71,6 +71,8 @@ public class GassanJikofutangakuHakkoIchiranSource implements IReportSource {
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation expandedInformation;
 
     @ReportItem(name = "郵便番号")
     public RString 郵便番号;
