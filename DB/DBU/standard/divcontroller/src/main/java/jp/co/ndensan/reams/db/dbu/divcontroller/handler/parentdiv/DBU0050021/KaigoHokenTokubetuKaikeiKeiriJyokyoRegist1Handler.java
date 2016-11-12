@@ -159,6 +159,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             }
             List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
             set年度();
+            if (!insuranceInf.get報告年().isEmpty()) {
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().setValue(new FlexibleDate(insuranceInf.get報告年().getYearValue(), 1, 1));
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM().setValue(new FlexibleDate(insuranceInf.get集計対象年().getYearValue(), 1, 1));
+            }
+            
             div.getCcdKanryoMessage().setDisplayNone(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().setReadOnly(false);
             div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM().setReadOnly(true);
@@ -167,6 +172,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDataSource(dataSource);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(false);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setSelectedIndex(0);
+            if (!insuranceInf.get市町村名称().isNullOrEmpty()) {
+                div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setSelectedValue(insuranceInf.get市町村名称());
+            }
             div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisabled(false);
             if (DBU0050021StateName.add.getName().equals(ResponseHolder.getState())) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);

@@ -248,6 +248,10 @@ public class FutangendogakuNinteiShinseiHandler {
             承認しない時関連項目処理();
         }
     }
+    
+    public void onBlur_txtTekiyoYMD() {
+        set負担限度額();
+    }
 
     private void 承認しない時関連項目処理() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
@@ -628,21 +632,21 @@ public class FutangendogakuNinteiShinseiHandler {
                 div.getDdlShokuhi().setDataSource(createDataSourceList(list));
                 div.getDdlShokuhi().setIsBlankLine(true);
             } else {
-                init食費DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
+                init食費DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
             }
-            initユニット型個室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
-            initユニット型準個室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
-            init従来型個室_特養等DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
-            init従来型個室_老健療養等DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
-            init多床室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
+            initユニット型個室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+            initユニット型準個室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+            init従来型個室_特養等DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+            init従来型個室_老健療養等DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+            init多床室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
         } else {
             if (!div.getDdlKyoshitsuShubetsu().getSelectedKey().equals(SELECT_EMPTYKEY)) {
-                initAll食費DDL(div.getDdlKyusochisha().getSelectedKey());
-                initAllユニット型個室DDL(div.getDdlKyusochisha().getSelectedKey());
-                initAllユニット型準個室DDL(div.getDdlKyusochisha().getSelectedKey());
-                initAll従来型個室_特養等DDL(div.getDdlKyusochisha().getSelectedKey());
-                initAll従来型個室_老健療養等DDL(div.getDdlKyusochisha().getSelectedKey());
-                initAll多床室DDL(div.getDdlKyusochisha().getSelectedKey());
+                initAll食費DDL(div.getDdlKyusochisha().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+                initAllユニット型個室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+                initAllユニット型準個室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+                initAll従来型個室_特養等DDL(div.getDdlKyusochisha().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+                initAll従来型個室_老健療養等DDL(div.getDdlKyusochisha().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
+                initAll多床室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getTxtTekiyoYMD().getValue());
             }
         }
         if (div.getDdlShokuhi().getDataSource() != null
@@ -887,45 +891,38 @@ public class FutangendogakuNinteiShinseiHandler {
         }
         div.getChkKyokaiso().setSelectedItemsByKey(dataSource);
         div.getChkGekihenKanwa().setDisabled(!is平成18年or平成19年(futanGendogakuNintei.get申請年月日()));
-        init食費DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
-        if (futanGendogakuNintei.get食費負担限度額() != null) {
-            div.getDdlShokuhi().setSelectedValue(new RString(futanGendogakuNintei.get食費負担限度額().toString()).padZeroToLeft(INT_4));
-        }
-        initユニット型個室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
-        if (futanGendogakuNintei.getユニット型個室() != null) {
-            div.getDdlUnitGataKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型個室().toString()).padZeroToLeft(INT_4));
-        }
-        initユニット型準個室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
-        if (futanGendogakuNintei.getユニット型準個室() != null) {
-            div.getDdlUnitGataJunKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型準個室().toString()).padZeroToLeft(INT_4));
-        }
-        init従来型個室_特養等DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
-        if (futanGendogakuNintei.get従来型個室_特養等() != null) {
-            div.getDdlJuraiGataKoshitsuTokuyo().setSelectedValue(
-                    new RString(futanGendogakuNintei.get従来型個室_特養等().toString()).padZeroToLeft(INT_4));
-        }
-        init従来型個室_老健療養等DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
-        if (futanGendogakuNintei.get従来型個室_老健_療養等() != null) {
-            div.getDdlJuraiGataKoshitsuRoken().setSelectedValue(
-                    new RString(futanGendogakuNintei.get従来型個室_老健_療養等().toString()).padZeroToLeft(INT_4));
-        }
-        init多床室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
-        if (futanGendogakuNintei.get多床室() != null) {
-            div.getDdlTashoshitsu().setSelectedValue(new RString(futanGendogakuNintei.get多床室().toString()).padZeroToLeft(INT_4));
-        }
-        div.getTxtHiShoninRiyu().setValue(futanGendogakuNintei.get非承認理由());
-        if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
+        if (!申請メニューID.equals(ResponseHolder.getMenuID()) && div.getDdlRiyoshaFutanDankai().getSelectedKey().equals(SELECT_EMPTYKEY)) {
             set負担段階();
             set境界層();
             set旧措置();
             set居室種類();
             set負担限度額();
+        } else if (!申請メニューID.equals(ResponseHolder.getMenuID()) && !div.getDdlRiyoshaFutanDankai().getSelectedKey().equals(SELECT_EMPTYKEY)) {
+            set負担限度額();
         }
-        if (SELECT_KEY1.equals(div.getRadKetteiKubun().getSelectedKey())) {
-            承認しない時関連項目処理();
+        if (futanGendogakuNintei.get食費負担限度額() != null) {
+            div.getDdlShokuhi().setSelectedValue(new RString(futanGendogakuNintei.get食費負担限度額().toString()).padZeroToLeft(INT_4));
         }
+        if (futanGendogakuNintei.getユニット型個室() != null) {
+            div.getDdlUnitGataKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型個室().toString()).padZeroToLeft(INT_4));
+        }
+        if (futanGendogakuNintei.getユニット型準個室() != null) {
+            div.getDdlUnitGataJunKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型準個室().toString()).padZeroToLeft(INT_4));
+        }
+        if (futanGendogakuNintei.get従来型個室_特養等() != null) {
+            div.getDdlJuraiGataKoshitsuTokuyo().setSelectedValue(
+                    new RString(futanGendogakuNintei.get従来型個室_特養等().toString()).padZeroToLeft(INT_4));
+        }
+        if (futanGendogakuNintei.get従来型個室_老健_療養等() != null) {
+            div.getDdlJuraiGataKoshitsuRoken().setSelectedValue(
+                    new RString(futanGendogakuNintei.get従来型個室_老健_療養等().toString()).padZeroToLeft(INT_4));
+        }
+        if (futanGendogakuNintei.get多床室() != null) {
+            div.getDdlTashoshitsu().setSelectedValue(new RString(futanGendogakuNintei.get多床室().toString()).padZeroToLeft(INT_4));
+        }
+        div.getTxtHiShoninRiyu().setValue(futanGendogakuNintei.get非承認理由());
     }
-
+    
     private ShoKisaiHokenshaNo get証記載保険者番号(FlexibleDate 申請日) {
 
         HokenshaListLoader loader = HokenshaListLoader.createInstance();
@@ -1039,82 +1036,118 @@ public class FutangendogakuNinteiShinseiHandler {
                 || 申請年月日.getYear().equals(new FlexibleDate("平成190101").getYear());
     }
 
-    private void init多床室DDL(RString 旧措置者区分, RString 利用者負担段階) {
+    private void init多床室DDL(RString 旧措置者区分, RString 利用者負担段階, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
         List<RString> list = FutangendogakuNinteiService.createInstance().load多床室負担限度額候補(
-                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+                旧措置者区分, 適用日, 利用者負担段階);
         div.getDdlTashoshitsu().setDataSource(createDataSourceList(list));
         div.getDdlTashoshitsu().setIsBlankLine(true);
     }
 
-    private void initAll多床室DDL(RString 旧措置者区分) {
-        List<RString> list = FutangendogakuNinteiService.createInstance().load多床室負担限度額候補境界層チェックオン(旧措置者区分, FlexibleDate.getNowDate());
+    private void initAll多床室DDL(RString 旧措置者区分, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
+        List<RString> list = FutangendogakuNinteiService.createInstance().load多床室負担限度額候補境界層チェックオン(旧措置者区分, 適用日);
         div.getDdlTashoshitsu().setDataSource(createDataSourceList(list));
         div.getDdlTashoshitsu().setIsBlankLine(true);
     }
 
-    private void init従来型個室_老健療養等DDL(RString 旧措置者区分, RString 利用者負担段階) {
+    private void init従来型個室_老健療養等DDL(RString 旧措置者区分, RString 利用者負担段階, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
         List<RString> list = FutangendogakuNinteiService.createInstance().load従来型個室老健等負担限度額候補(
-                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+                旧措置者区分, 適用日, 利用者負担段階);
         div.getDdlJuraiGataKoshitsuRoken().setDataSource(createDataSourceList(list));
         div.getDdlJuraiGataKoshitsuRoken().setIsBlankLine(true);
     }
 
-    private void initAll従来型個室_老健療養等DDL(RString 旧措置者区分) {
-        List<RString> list = FutangendogakuNinteiService.createInstance().load従来型個室老健等負担限度額候補境界層チェックオン(旧措置者区分, FlexibleDate.getNowDate());
+    private void initAll従来型個室_老健療養等DDL(RString 旧措置者区分, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
+        List<RString> list = FutangendogakuNinteiService.createInstance().load従来型個室老健等負担限度額候補境界層チェックオン(旧措置者区分, 適用日);
         div.getDdlJuraiGataKoshitsuRoken().setDataSource(createDataSourceList(list));
         div.getDdlJuraiGataKoshitsuRoken().setIsBlankLine(true);
     }
 
-    private void init従来型個室_特養等DDL(RString 旧措置者区分, RString 利用者負担段階) {
+    private void init従来型個室_特養等DDL(RString 旧措置者区分, RString 利用者負担段階, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
         List<RString> list = FutangendogakuNinteiService.createInstance().load従来型個室特養等負担限度額候補(
-                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+                旧措置者区分, 適用日, 利用者負担段階);
         div.getDdlJuraiGataKoshitsuTokuyo().setDataSource(createDataSourceList(list));
         div.getDdlJuraiGataKoshitsuTokuyo().setIsBlankLine(true);
     }
 
-    private void initAll従来型個室_特養等DDL(RString 旧措置者区分) {
-        List<RString> list = FutangendogakuNinteiService.createInstance().load従来型個室特養等負担限度額候補境界層チェックオン(旧措置者区分, FlexibleDate.getNowDate());
+    private void initAll従来型個室_特養等DDL(RString 旧措置者区分, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
+        List<RString> list = FutangendogakuNinteiService.createInstance().load従来型個室特養等負担限度額候補境界層チェックオン(旧措置者区分, 適用日);
         div.getDdlJuraiGataKoshitsuTokuyo().setDataSource(createDataSourceList(list));
         div.getDdlJuraiGataKoshitsuTokuyo().setIsBlankLine(true);
     }
 
-    private void initユニット型準個室DDL(RString 旧措置者区分, RString 利用者負担段階) {
+    private void initユニット型準個室DDL(RString 旧措置者区分, RString 利用者負担段階, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
         List<RString> list = FutangendogakuNinteiService.createInstance().loadユニット型準個室負担限度額候補(
-                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+                旧措置者区分, 適用日, 利用者負担段階);
         div.getDdlUnitGataJunKoshitsu().setDataSource(createDataSourceList(list));
         div.getDdlUnitGataJunKoshitsu().setIsBlankLine(true);
     }
 
-    private void initAllユニット型準個室DDL(RString 旧措置者区分) {
-        List<RString> list = FutangendogakuNinteiService.createInstance().loadユニット型準個室負担限度額候補境界層チェックオン(旧措置者区分, FlexibleDate.getNowDate());
+    private void initAllユニット型準個室DDL(RString 旧措置者区分, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
+        List<RString> list = FutangendogakuNinteiService.createInstance().loadユニット型準個室負担限度額候補境界層チェックオン(旧措置者区分, 適用日);
         div.getDdlUnitGataJunKoshitsu().setDataSource(createDataSourceList(list));
         div.getDdlUnitGataJunKoshitsu().setIsBlankLine(true);
     }
 
-    private void initユニット型個室DDL(RString 旧措置者区分, RString 利用者負担段階) {
+    private void initユニット型個室DDL(RString 旧措置者区分, RString 利用者負担段階, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
         List<RString> list = FutangendogakuNinteiService.createInstance().loadユニット型個室負担限度額候補(
-                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+                旧措置者区分, 適用日, 利用者負担段階);
         div.getDdlUnitGataKoshitsu().setDataSource(createDataSourceList(list));
         div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
     }
 
-    private void initAllユニット型個室DDL(RString 旧措置者区分) {
-        List<RString> list = FutangendogakuNinteiService.createInstance().loadユニット型個室負担限度額候補境界層チェックオン(旧措置者区分, FlexibleDate.getNowDate());
+    private void initAllユニット型個室DDL(RString 旧措置者区分, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
+        List<RString> list = FutangendogakuNinteiService.createInstance().loadユニット型個室負担限度額候補境界層チェックオン(旧措置者区分, 適用日);
         div.getDdlUnitGataKoshitsu().setDataSource(createDataSourceList(list));
         div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
     }
 
-    private void init食費DDL(RString 旧措置者区分, RString 利用者負担段階) {
+    private void init食費DDL(RString 旧措置者区分, RString 利用者負担段階, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
         List<RString> list = FutangendogakuNinteiService.createInstance().load食費負担限度額候補(
-                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+                旧措置者区分, 適用日, 利用者負担段階);
         div.getDdlShokuhi().setDataSource(createDataSourceList(list));
-        div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
+        div.getDdlShokuhi().setIsBlankLine(true);
     }
 
-    private void initAll食費DDL(RString 旧措置者区分) {
-        List<RString> list = FutangendogakuNinteiService.createInstance().load食費負担限度額候補境界層チェックオン(旧措置者区分, FlexibleDate.getNowDate());
+    private void initAll食費DDL(RString 旧措置者区分, FlexibleDate 適用日) {
+        if (適用日 == null || 適用日.isEmpty()) {
+            適用日 = FlexibleDate.getNowDate();
+        }
+        List<RString> list = FutangendogakuNinteiService.createInstance().load食費負担限度額候補境界層チェックオン(旧措置者区分, 適用日);
         div.getDdlShokuhi().setDataSource(createDataSourceList(list));
-        div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
+        div.getDdlShokuhi().setIsBlankLine(true);
     }
 
     private List<KeyValueDataSource> createDataSourceList(List<RString> list) {
@@ -1332,30 +1365,42 @@ public class FutangendogakuNinteiShinseiHandler {
     private void set申請情報エリア表示制御() {
         onChange_radHaigushaUmu();
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
-            div.getRadKetteiKubun().setDisabled(true);
-            div.getTxtKetteiYMD().setDisabled(true);
-            div.getTxtTekiyoYMD().setDisabled(true);
-            div.getTxtYukoKigenYMD().setDisabled(true);
-            div.getDdlKyusochisha().setDisabled(true);
-            div.getDdlRiyoshaFutanDankai().setDisabled(true);
-            div.getDdlKyoshitsuShubetsu().setDisabled(true);
-            div.getChkKyokaiso().setDisabled(true);
-            div.getChkGekihenKanwa().setDisabled(true);
-            div.getDdlShokuhi().setDisabled(true);
-            div.getDdlUnitGataKoshitsu().setDisabled(true);
-            div.getDdlUnitGataJunKoshitsu().setDisabled(true);
-            div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(true);
-            div.getDdlJuraiGataKoshitsuRoken().setDisabled(true);
-            div.getDdlTashoshitsu().setDisabled(true);
-            div.getBtnHiShoninRiyu().setDisabled(true);
-            div.getTxtHiShoninRiyu().setDisabled(true);
-            div.getBtnShinseiKakutei().setDisplayNone(false);
-            div.getBtnShoninKakutei().setDisplayNone(true);
+            set申請情報エリア表示制御申請画面用();
         } else {
-            div.getRadKetteiKubun().setDisabled(false);
-            div.getTxtKetteiYMD().setDisabled(false);
-            div.getBtnShinseiKakutei().setDisplayNone(true);
-            div.getBtnShoninKakutei().setDisplayNone(false);
+            set申請情報エリア表示制御承認画面用();
+        }
+    }
+    
+    private void set申請情報エリア表示制御申請画面用() {
+        div.getRadKetteiKubun().setDisabled(true);
+        div.getTxtKetteiYMD().setDisabled(true);
+        div.getTxtTekiyoYMD().setDisabled(true);
+        div.getTxtYukoKigenYMD().setDisabled(true);
+        div.getDdlKyusochisha().setDisabled(true);
+        div.getDdlRiyoshaFutanDankai().setDisabled(true);
+        div.getDdlKyoshitsuShubetsu().setDisabled(true);
+        div.getChkKyokaiso().setDisabled(true);
+        div.getChkGekihenKanwa().setDisabled(true);
+        div.getDdlShokuhi().setDisabled(true);
+        div.getDdlUnitGataKoshitsu().setDisabled(true);
+        div.getDdlUnitGataJunKoshitsu().setDisabled(true);
+        div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(true);
+        div.getDdlJuraiGataKoshitsuRoken().setDisabled(true);
+        div.getDdlTashoshitsu().setDisabled(true);
+        div.getBtnHiShoninRiyu().setDisabled(true);
+        div.getTxtHiShoninRiyu().setDisabled(true);
+        div.getBtnShinseiKakutei().setDisplayNone(false);
+        div.getBtnShoninKakutei().setDisplayNone(true);
+    }
+
+    private void set申請情報エリア表示制御承認画面用() {
+        div.getRadKetteiKubun().setDisabled(false);
+        if (SELECT_KEY1.equals(div.getRadKetteiKubun().getSelectedKey())) {
+            承認しない時関連項目処理();
+        } else {
+            set負担限度額食費DDL使用可不可設定(div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0),
+                    div.getDdlKyusochisha().getSelectedKey(),
+                    div.getDdlKyoshitsuShubetsu().getSelectedKey());
             set負担限度額居室DDL使用可不可設定(div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0),
                     div.getDdlKyusochisha().getSelectedKey(),
                     div.getDdlKyoshitsuShubetsu().getSelectedKey());
@@ -1372,6 +1417,9 @@ public class FutangendogakuNinteiShinseiHandler {
                 }
             }
         }
+        div.getTxtKetteiYMD().setDisabled(false);
+        div.getBtnShinseiKakutei().setDisplayNone(true);
+        div.getBtnShoninKakutei().setDisplayNone(false);
     }
 
     private ArrayList<FutanGendogakuNinteiViewState> putEdited申請情報ToViewState(boolean is申請一覧表示,

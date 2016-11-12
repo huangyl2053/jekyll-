@@ -59,14 +59,8 @@ public class KekkaShosaiJoho {
             div.getCcdNinteiInput().set状態(モード_入力);
             div.getCcdShinseiSonotaJohoInput().setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.ShokaiMode);
             div.setMode_ShoriType(KekkaShosaiJohoDiv.ShoriType.InputMode);
-            NinteiInputDataPassModel passModel = new NinteiInputDataPassModel();
-            passModel.setSubGyomuCode(model.getDataPassModel().getSubGyomuCode());
-            passModel.set厚労省IFコード(model.getDataPassModel().get厚労省IFコード());
-            passModel.set申請書管理番号(model.getDataPassModel().get申請書管理番号());
-            passModel.set認定区分(new RString("1"));
-            passModel.setみなし更新認定(new ArrayList<RString>());
-            div.getCcdNinteiInput().initialize(passModel);
-            div.getCcdShinseiSonotaJohoInput().initialize();
+            model.getDataPassModel().set認定区分(new RString("1"));
+            model.getDataPassModel().setみなし更新認定(new ArrayList<RString>());
         }
         div.getCcdNinteiInput().initialize(model.getDataPassModel());
         div.getCcdShinseiSonotaJohoInput().initialize();
@@ -99,6 +93,7 @@ public class KekkaShosaiJoho {
         RString mode = model.getMode();
         if (モード_喪失.equals(mode) || モード_入力.equals(mode)) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            pairs.add(createValidationHandler(div).check認定年月日());
             pairs.add(createValidationHandler(div).check有効開始日());
             pairs.add(createValidationHandler(div).check有効終了日());
             pairs.add(div.getCcdNinteiInput().開始終了日前後順check());

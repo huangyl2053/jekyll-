@@ -130,15 +130,18 @@ public class ShiharaiHohoHenkoKanri {
      * @return レスポンスデータ
      */
     public ResponseData<ShiharaiHohoHenkoKanriDiv> onClick_btnDelete(ShiharaiHohoHenkoKanriDiv div) {
-        ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
-        ShiharaiHohoHenko deleteData = getHandler(div).
-                get支払方法変更情報FromViewState(ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リスト, ArrayList.class));
-        dataList.remove(getHandler(div).get支払方法変更情報FromViewState(dataList, deleteData));
-        deleteData = setDeleteState(deleteData);
-        dataList.add(deleteData);
-        ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
-        getHandler(div).支払変更管理一覧に削除();
-
+        if (!div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow().getHdnKanriKubun().isEmpty()) {
+            getHandler(div).支払変更管理一覧に削除();
+        } else {
+            ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);
+            ShiharaiHohoHenko deleteData = getHandler(div).
+                    get支払方法変更情報FromViewState(ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.初期の支払方法変更の情報リスト, ArrayList.class));
+            dataList.remove(getHandler(div).get支払方法変更情報FromViewState(dataList, deleteData));
+            deleteData = setDeleteState(deleteData);
+            dataList.add(deleteData);
+            ViewStateHolder.put(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, dataList);
+            getHandler(div).支払変更管理一覧に削除();
+        }
         return ResponseData.of(div).respond();
     }
 

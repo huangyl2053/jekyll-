@@ -197,11 +197,28 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
                 || UPDATE.equals(insuranceInfEntity.get処理フラグ())) {
             onload処理フラグが一覧修正Or一覧削除(insuranceInfEntity);
         } else if (ADD.equals(insuranceInfEntity.get処理フラグ())) {
-            onload処理フラグが一覧追加();
+             if (insuranceInfEntity.get報告年().isEmpty()) {
+                div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setVisible(false);
+                div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setDisplayNone(true);
+                div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setVisible(false);
+                div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setDisplayNone(true);
+                div.getYoshikiYonnosanMeisai().getBtnKakutei().setVisible(false);
+                div.getYoshikiYonnosanMeisai().setDisabled(true);
+                List<KeyValueDataSource> list = new ArrayList<>();
+                div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDataSource(list);
+                div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
+                div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(false);
+                div.setShoriMode(内部処理モード_追加);
+                div.setGamenMode(画面表示_追加);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+            } else {
+                onload処理フラグが一覧追加(insuranceInfEntity);
+                onClick_btnConfirm(insuranceInfEntity);
+            }
         }
     }
 
-    private void onload処理フラグが一覧追加() {
+    private void onload処理フラグが一覧追加(InsuranceInformation insuranceInfEntity) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         List<Shichoson> 市町村Lst = 介護保険特別会計経理状況登録Manager.getShichosonCodeNameList();
@@ -209,28 +226,18 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
         }
         List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
-        RDate date = RDate.getNowDate();
-        FlexibleDate 報告年度;
-        FlexibleDate 集計年度;
-        if (date.getMonthValue() < INT6) {
-            報告年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
-            集計年度 = new FlexibleDate(date.getYear().getYearValue() - 2, date.getMonthValue(), date.getDayValue());
-        } else {
-            報告年度 = new FlexibleDate(date.getYear().getYearValue(), date.getMonthValue(), date.getDayValue());
-            集計年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
-        }
-        div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setValue(new RDate(報告年度.getYearValue()));
-        div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setValue(new RDate(集計年度.getYearValue()));
+        div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setValue(new RDate(insuranceInfEntity.get報告年().getYearValue(), 1, 1));
+        div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setValue(new RDate(insuranceInfEntity.get集計対象年().getYearValue(), 1, 1));
         div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDataSource(dataSource);
-        div.getYoshikiYonnosanMeisai().getDdlShicyoson().setSelectedIndex(1);
+        div.getYoshikiYonnosanMeisai().getDdlShicyoson().setSelectedValue(insuranceInfEntity.get市町村名称());
         div.setShoriMode(内部処理モード_追加);
         div.setGamenMode(画面表示_追加);
-        div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setReadOnly(false);
+        div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setReadOnly(true);
         div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setReadOnly(true);
         div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setDisplayNone(true);
         div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setDisplayNone(true);
-        div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisabled(false);
-        div.getYoshikiYonnosanMeisai().getBtnKakutei().setDisabled(false);
+        div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisabled(true);
+        div.getYoshikiYonnosanMeisai().getBtnKakutei().setVisible(false);
         if (DBU0050041StateName.追加状態.getName().equals(ResponseHolder.getState())) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
         }

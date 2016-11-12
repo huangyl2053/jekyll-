@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class KekkaShosaiJohoDiv extends Panel implements IKekkaShosaiJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

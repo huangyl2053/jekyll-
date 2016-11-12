@@ -445,6 +445,7 @@ public class FutangendogakuShinsei {
     public ResponseData<FutangendogakuShinseiDiv> onBlur_txtTekiyoYMD(FutangendogakuShinseiDiv div) {
         if (div.getTxtTekiyoYMD().getValue().isValid()) {
             div.getTxtYukoKigenYMD().setValue(FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue()));
+            getHandler(div).onBlur_txtTekiyoYMD();
         }
         return ResponseData.of(div).respond();
     }

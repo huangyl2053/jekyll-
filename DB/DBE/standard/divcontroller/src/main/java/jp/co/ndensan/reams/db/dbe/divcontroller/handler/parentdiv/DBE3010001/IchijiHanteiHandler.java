@@ -225,44 +225,46 @@ public class IchijiHanteiHandler {
      */
     public void 対象者一覧更新の編集(dgIchijiHanteiTaishoshaIchiran_Row row, int index, IchijiHanteiKekkaJoho business) {
 
-        row.setColumnState(new RString("更新"));
-        if (business.get要介護認定一次判定年月日() != null) {
-            row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
-        }
-        if (business.get要介護認定一次判定結果コード() != null) {
-            row.setIchijiHanteiKekka(IchijiHanteiKekkaCode09.toValue(business.
-                    get要介護認定一次判定結果コード().value()).get名称());
-        }
-        if (business.get要介護認定一次判定結果コード_認知症加算() != null) {
-            row.setIchijiHanteiKekkaNinchishoKasanCode(IchijiHanteiKekkaCode09.
-                    toValue(business.get要介護認定一次判定結果コード_認知症加算().value()).get名称());
-        }
-        if (business.get要介護認定一次判定警告コード() != null) {
-            row.setKeikokuCode(business.get要介護認定一次判定警告コード());
-        }
-        row.setKijunJikan(new RString(String.valueOf(business.get要介護認定等基準時間())));
-        row.setKijunJikanShokuji(new RString(String.valueOf(business.get要介護認定等基準時間_食事())));
-        row.setKijunJikanHaisetsu(new RString(String.valueOf(business.get要介護認定等基準時間_排泄())));
-        row.setKijunJikanIdo(new RString(String.valueOf(business.get要介護認定等基準時間_移動())));
-        row.setKijunJikanSeiketsuHoji(new RString(String.valueOf(business.get要介護認定等基準時間_清潔保持())));
-        row.setKijunJikanKansetsuCare(new RString(String.valueOf(business.get要介護認定等基準時間_間接ケア())));
-        row.setKijunJikanBPSDKanren(new RString(String.valueOf(business.get要介護認定等基準時間_BPSD関連())));
-        row.setKijunJikanKinoKunren(new RString(String.valueOf(business.get要介護認定等基準時間_機能訓練())));
-        row.setKijunJikanIryoKanren(new RString(String.valueOf(business.get要介護認定等基準時間_医療関連())));
-        row.setKijunJikanNinchishoKasan(new RString(String.valueOf(business.get要介護認定等基準時間_認知症加算())));
-        row.setChukanHyokaKomoku1gun(new RString(String.valueOf(business.get中間評価項目得点第1群())));
-        row.setChukanHyokaKomoku2gun(new RString(String.valueOf(business.get中間評価項目得点第2群())));
-        row.setChukanHyokaKomoku3gun(new RString(String.valueOf(business.get中間評価項目得点第3群())));
-        row.setChukanHyokaKomoku4gun(new RString(String.valueOf(business.get中間評価項目得点第4群())));
-        row.setChukanHyokaKomoku5gun(new RString(String.valueOf(business.get中間評価項目得点第5群())));
-        if (business.get要介護認定状態の安定性コード() != null && !business.get要介護認定状態の安定性コード().isEmpty()) {
-            row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
-        }
-        if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
-            row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性())));
-        }
-        if (business.get認知機能及び状態安定性から推定される給付区分コード() != null) {
-            row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get認知機能及び状態安定性から推定される給付区分コード().value()).get名称());
+        if (business != null) {
+            row.setColumnState(new RString("更新"));
+            if (business.get要介護認定一次判定年月日() != null) {
+                row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
+            }
+            if (business.get要介護認定一次判定結果コード() != null) {
+                row.setIchijiHanteiKekka(IchijiHanteiKekkaCode09.toValue(business.
+                        get要介護認定一次判定結果コード().value()).get名称());
+            }
+            if (business.get要介護認定一次判定結果コード_認知症加算() != null) {
+                row.setIchijiHanteiKekkaNinchishoKasanCode(IchijiHanteiKekkaCode09.
+                        toValue(business.get要介護認定一次判定結果コード_認知症加算().value()).get名称());
+            }
+            if (business.get要介護認定一次判定警告コード() != null) {
+                row.setKeikokuCode(business.get要介護認定一次判定警告コード());
+            }
+            row.setKijunJikan(new RString(String.valueOf(business.get要介護認定等基準時間())));
+            row.setKijunJikanShokuji(new RString(String.valueOf(business.get要介護認定等基準時間_食事())));
+            row.setKijunJikanHaisetsu(new RString(String.valueOf(business.get要介護認定等基準時間_排泄())));
+            row.setKijunJikanIdo(new RString(String.valueOf(business.get要介護認定等基準時間_移動())));
+            row.setKijunJikanSeiketsuHoji(new RString(String.valueOf(business.get要介護認定等基準時間_清潔保持())));
+            row.setKijunJikanKansetsuCare(new RString(String.valueOf(business.get要介護認定等基準時間_間接ケア())));
+            row.setKijunJikanBPSDKanren(new RString(String.valueOf(business.get要介護認定等基準時間_BPSD関連())));
+            row.setKijunJikanKinoKunren(new RString(String.valueOf(business.get要介護認定等基準時間_機能訓練())));
+            row.setKijunJikanIryoKanren(new RString(String.valueOf(business.get要介護認定等基準時間_医療関連())));
+            row.setKijunJikanNinchishoKasan(new RString(String.valueOf(business.get要介護認定等基準時間_認知症加算())));
+            row.setChukanHyokaKomoku1gun(new RString(String.valueOf(business.get中間評価項目得点第1群())));
+            row.setChukanHyokaKomoku2gun(new RString(String.valueOf(business.get中間評価項目得点第2群())));
+            row.setChukanHyokaKomoku3gun(new RString(String.valueOf(business.get中間評価項目得点第3群())));
+            row.setChukanHyokaKomoku4gun(new RString(String.valueOf(business.get中間評価項目得点第4群())));
+            row.setChukanHyokaKomoku5gun(new RString(String.valueOf(business.get中間評価項目得点第5群())));
+            if (business.get要介護認定状態の安定性コード() != null && !business.get要介護認定状態の安定性コード().isEmpty()) {
+                row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
+            }
+            if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
+                row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性())));
+            }
+            if (business.get認知機能及び状態安定性から推定される給付区分コード() != null) {
+                row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get認知機能及び状態安定性から推定される給付区分コード().value()).get名称());
+            }
         }
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getDataSource().set(index, row);
     }

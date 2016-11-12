@@ -79,7 +79,7 @@ public final class TainoKiSummaryBuilder {
             }
         }
         Decimal 滞納額 = ObjectUtil.defaultIfNull(relateEntity.get調定額(), Decimal.ZERO).subtract(収入額合計);
-        MinoKannoKubun 未納完納区分 = get未納完納区分(relateEntity, 基準日, 滞納額);
+        MinoKannoKubun 未納完納区分 = get未納完納区分(relateEntity, 基準日, 滞納額, 時効起算日);
         return new TainoKiSummary(
                 relateEntity.get賦課年度(),
                 relateEntity.get調定年度(),
@@ -100,11 +100,12 @@ public final class TainoKiSummaryBuilder {
                 Decimal.ZERO);
     }
 
-    private static MinoKannoKubun get未納完納区分(TainoJohoRelateEntity relateEntity, FlexibleDate 基準日, Decimal 滞納額) {
+    private static MinoKannoKubun get未納完納区分(TainoJohoRelateEntity relateEntity, FlexibleDate 基準日, Decimal 滞納額, FlexibleDate 時効起算日 ) {
+        FlexibleDate test = new FlexibleDate(relateEntity.get納期限().toString());
         if (基準日.isBefore(new FlexibleDate(relateEntity.get納期限().toString()))) {
             return MinoKannoKubun.未来納期;
         }
-        if ((relateEntity.get時効起算年月日() == null || relateEntity.get時効起算年月日().isEmpty()) || Decimal.ZERO.equals(relateEntity.get調定額())) {
+        if (時効起算日.isEmpty() || Decimal.ZERO.equals(relateEntity.get調定額())) {
             return MinoKannoKubun._0円;
         }
         if (Decimal.ZERO.equals(滞納額)) {

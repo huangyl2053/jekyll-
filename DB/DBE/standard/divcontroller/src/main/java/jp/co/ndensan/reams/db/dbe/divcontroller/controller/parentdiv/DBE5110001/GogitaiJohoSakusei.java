@@ -405,8 +405,8 @@ public class GogitaiJohoSakusei {
         validationMessages.add(getValidationHandler(div).kaisaiBashoCodeCheck());
         validationMessages.add(getValidationHandler(div).kaishiToShuryoYMDCheck());
         validationMessages.add(getValidationHandler(div).kaishiYoteiToShuryoYoteiTimeCheck());
-        validationMessages.add(getValidationHandler(div).shinsainListRequiredCheck());
-        validationMessages.add(getValidationHandler(div).shinsainPersonNumCheck());
+//        validationMessages.add(getValidationHandler(div).shinsainListRequiredCheck());
+//        validationMessages.add(getValidationHandler(div).shinsainPersonNumCheck());
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }

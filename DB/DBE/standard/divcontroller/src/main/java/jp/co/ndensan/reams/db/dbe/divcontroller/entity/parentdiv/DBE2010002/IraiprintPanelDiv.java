@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IraiprintPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,30 +30,10 @@ public class IraiprintPanelDiv extends Panel {
     private RadioButton radKigen;
     @JsonProperty("txtKigenymd")
     private TextBoxDate txtKigenymd;
-    @JsonProperty("SP")
-    private Space SP;
-    @JsonProperty("chkGaikyoChosa")
-    private CheckBoxList chkGaikyoChosa;
-    @JsonProperty("chkKihonChosa")
-    private CheckBoxList chkKihonChosa;
-    @JsonProperty("chkTokukiJiko")
-    private CheckBoxList chkTokukiJiko;
-    @JsonProperty("chkGaikyoTokuki")
-    private CheckBoxList chkGaikyoTokuki;
-    @JsonProperty("chkGaikyoChosaOCR")
-    private CheckBoxList chkGaikyoChosaOCR;
-    @JsonProperty("chkKihonChosaOCR")
-    private CheckBoxList chkKihonChosaOCR;
-    @JsonProperty("chkTokukiJikoOCR")
-    private CheckBoxList chkTokukiJikoOCR;
-    @JsonProperty("chkGaikyoTokukiOCR")
-    private CheckBoxList chkGaikyoTokukiOCR;
-    @JsonProperty("chkSaiCheck")
-    private CheckBoxList chkSaiCheck;
-    @JsonProperty("chkFuriYoshi")
-    private CheckBoxList chkFuriYoshi;
-    @JsonProperty("chkRirekiIchiran")
-    private CheckBoxList chkRirekiIchiran;
+    @JsonProperty("NiteiChosaSelect")
+    private NiteiChosaSelectDiv NiteiChosaSelect;
+    @JsonProperty("TokkiJokoSelect")
+    private TokkiJokoSelectDiv TokkiJokoSelect;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -133,219 +114,92 @@ public class IraiprintPanelDiv extends Panel {
     }
 
     /*
-     * getSP
-     * @return SP
+     * getNiteiChosaSelect
+     * @return NiteiChosaSelect
      */
-    @JsonProperty("SP")
-    public Space getSP() {
-        return SP;
+    @JsonProperty("NiteiChosaSelect")
+    public NiteiChosaSelectDiv getNiteiChosaSelect() {
+        return NiteiChosaSelect;
     }
 
     /*
-     * setSP
-     * @param SP SP
+     * setNiteiChosaSelect
+     * @param NiteiChosaSelect NiteiChosaSelect
      */
-    @JsonProperty("SP")
-    public void setSP(Space SP) {
-        this.SP = SP;
+    @JsonProperty("NiteiChosaSelect")
+    public void setNiteiChosaSelect(NiteiChosaSelectDiv NiteiChosaSelect) {
+        this.NiteiChosaSelect = NiteiChosaSelect;
     }
 
     /*
-     * getchkGaikyoChosa
-     * @return chkGaikyoChosa
+     * getTokkiJokoSelect
+     * @return TokkiJokoSelect
      */
-    @JsonProperty("chkGaikyoChosa")
-    public CheckBoxList getChkGaikyoChosa() {
-        return chkGaikyoChosa;
+    @JsonProperty("TokkiJokoSelect")
+    public TokkiJokoSelectDiv getTokkiJokoSelect() {
+        return TokkiJokoSelect;
     }
 
     /*
-     * setchkGaikyoChosa
-     * @param chkGaikyoChosa chkGaikyoChosa
+     * setTokkiJokoSelect
+     * @param TokkiJokoSelect TokkiJokoSelect
      */
-    @JsonProperty("chkGaikyoChosa")
-    public void setChkGaikyoChosa(CheckBoxList chkGaikyoChosa) {
-        this.chkGaikyoChosa = chkGaikyoChosa;
+    @JsonProperty("TokkiJokoSelect")
+    public void setTokkiJokoSelect(TokkiJokoSelectDiv TokkiJokoSelect) {
+        this.TokkiJokoSelect = TokkiJokoSelect;
     }
 
     /*
-     * getchkKihonChosa
-     * @return chkKihonChosa
+     * [ ショートカットの作成 ]
      */
-    @JsonProperty("chkKihonChosa")
-    public CheckBoxList getChkKihonChosa() {
-        return chkKihonChosa;
+    @JsonIgnore
+    public CheckBoxList getChkNinteichosaDesign() {
+        return this.getNiteiChosaSelect().getChkNinteichosaDesign();
     }
 
-    /*
-     * setchkKihonChosa
-     * @param chkKihonChosa chkKihonChosa
-     */
-    @JsonProperty("chkKihonChosa")
-    public void setChkKihonChosa(CheckBoxList chkKihonChosa) {
-        this.chkKihonChosa = chkKihonChosa;
+    @JsonIgnore
+    public void  setChkNinteichosaDesign(CheckBoxList chkNinteichosaDesign) {
+        this.getNiteiChosaSelect().setChkNinteichosaDesign(chkNinteichosaDesign);
     }
 
-    /*
-     * getchkTokukiJiko
-     * @return chkTokukiJiko
-     */
-    @JsonProperty("chkTokukiJiko")
-    public CheckBoxList getChkTokukiJiko() {
-        return chkTokukiJiko;
+    @JsonIgnore
+    public CheckBoxList getChkNinteichosaOcr() {
+        return this.getNiteiChosaSelect().getChkNinteichosaOcr();
     }
 
-    /*
-     * setchkTokukiJiko
-     * @param chkTokukiJiko chkTokukiJiko
-     */
-    @JsonProperty("chkTokukiJiko")
-    public void setChkTokukiJiko(CheckBoxList chkTokukiJiko) {
-        this.chkTokukiJiko = chkTokukiJiko;
+    @JsonIgnore
+    public void  setChkNinteichosaOcr(CheckBoxList chkNinteichosaOcr) {
+        this.getNiteiChosaSelect().setChkNinteichosaOcr(chkNinteichosaOcr);
     }
 
-    /*
-     * getchkGaikyoTokuki
-     * @return chkGaikyoTokuki
-     */
-    @JsonProperty("chkGaikyoTokuki")
-    public CheckBoxList getChkGaikyoTokuki() {
-        return chkGaikyoTokuki;
-    }
-
-    /*
-     * setchkGaikyoTokuki
-     * @param chkGaikyoTokuki chkGaikyoTokuki
-     */
-    @JsonProperty("chkGaikyoTokuki")
-    public void setChkGaikyoTokuki(CheckBoxList chkGaikyoTokuki) {
-        this.chkGaikyoTokuki = chkGaikyoTokuki;
-    }
-
-    /*
-     * getchkGaikyoChosaOCR
-     * @return chkGaikyoChosaOCR
-     */
-    @JsonProperty("chkGaikyoChosaOCR")
-    public CheckBoxList getChkGaikyoChosaOCR() {
-        return chkGaikyoChosaOCR;
-    }
-
-    /*
-     * setchkGaikyoChosaOCR
-     * @param chkGaikyoChosaOCR chkGaikyoChosaOCR
-     */
-    @JsonProperty("chkGaikyoChosaOCR")
-    public void setChkGaikyoChosaOCR(CheckBoxList chkGaikyoChosaOCR) {
-        this.chkGaikyoChosaOCR = chkGaikyoChosaOCR;
-    }
-
-    /*
-     * getchkKihonChosaOCR
-     * @return chkKihonChosaOCR
-     */
-    @JsonProperty("chkKihonChosaOCR")
-    public CheckBoxList getChkKihonChosaOCR() {
-        return chkKihonChosaOCR;
-    }
-
-    /*
-     * setchkKihonChosaOCR
-     * @param chkKihonChosaOCR chkKihonChosaOCR
-     */
-    @JsonProperty("chkKihonChosaOCR")
-    public void setChkKihonChosaOCR(CheckBoxList chkKihonChosaOCR) {
-        this.chkKihonChosaOCR = chkKihonChosaOCR;
-    }
-
-    /*
-     * getchkTokukiJikoOCR
-     * @return chkTokukiJikoOCR
-     */
-    @JsonProperty("chkTokukiJikoOCR")
-    public CheckBoxList getChkTokukiJikoOCR() {
-        return chkTokukiJikoOCR;
-    }
-
-    /*
-     * setchkTokukiJikoOCR
-     * @param chkTokukiJikoOCR chkTokukiJikoOCR
-     */
-    @JsonProperty("chkTokukiJikoOCR")
-    public void setChkTokukiJikoOCR(CheckBoxList chkTokukiJikoOCR) {
-        this.chkTokukiJikoOCR = chkTokukiJikoOCR;
-    }
-
-    /*
-     * getchkGaikyoTokukiOCR
-     * @return chkGaikyoTokukiOCR
-     */
-    @JsonProperty("chkGaikyoTokukiOCR")
-    public CheckBoxList getChkGaikyoTokukiOCR() {
-        return chkGaikyoTokukiOCR;
-    }
-
-    /*
-     * setchkGaikyoTokukiOCR
-     * @param chkGaikyoTokukiOCR chkGaikyoTokukiOCR
-     */
-    @JsonProperty("chkGaikyoTokukiOCR")
-    public void setChkGaikyoTokukiOCR(CheckBoxList chkGaikyoTokukiOCR) {
-        this.chkGaikyoTokukiOCR = chkGaikyoTokukiOCR;
-    }
-
-    /*
-     * getchkSaiCheck
-     * @return chkSaiCheck
-     */
-    @JsonProperty("chkSaiCheck")
+    @JsonIgnore
     public CheckBoxList getChkSaiCheck() {
-        return chkSaiCheck;
+        return this.getNiteiChosaSelect().getChkSaiCheck();
     }
 
-    /*
-     * setchkSaiCheck
-     * @param chkSaiCheck chkSaiCheck
-     */
-    @JsonProperty("chkSaiCheck")
-    public void setChkSaiCheck(CheckBoxList chkSaiCheck) {
-        this.chkSaiCheck = chkSaiCheck;
+    @JsonIgnore
+    public void  setChkSaiCheck(CheckBoxList chkSaiCheck) {
+        this.getNiteiChosaSelect().setChkSaiCheck(chkSaiCheck);
     }
 
-    /*
-     * getchkFuriYoshi
-     * @return chkFuriYoshi
-     */
-    @JsonProperty("chkFuriYoshi")
-    public CheckBoxList getChkFuriYoshi() {
-        return chkFuriYoshi;
+    @JsonIgnore
+    public CheckBoxList getChkTokkiJko() {
+        return this.getTokkiJokoSelect().getChkTokkiJko();
     }
 
-    /*
-     * setchkFuriYoshi
-     * @param chkFuriYoshi chkFuriYoshi
-     */
-    @JsonProperty("chkFuriYoshi")
-    public void setChkFuriYoshi(CheckBoxList chkFuriYoshi) {
-        this.chkFuriYoshi = chkFuriYoshi;
+    @JsonIgnore
+    public void  setChkTokkiJko(CheckBoxList chkTokkiJko) {
+        this.getTokkiJokoSelect().setChkTokkiJko(chkTokkiJko);
     }
 
-    /*
-     * getchkRirekiIchiran
-     * @return chkRirekiIchiran
-     */
-    @JsonProperty("chkRirekiIchiran")
-    public CheckBoxList getChkRirekiIchiran() {
-        return chkRirekiIchiran;
+    @JsonIgnore
+    public CheckBoxList getChkTenyuryoku() {
+        return this.getTokkiJokoSelect().getChkTenyuryoku();
     }
 
-    /*
-     * setchkRirekiIchiran
-     * @param chkRirekiIchiran chkRirekiIchiran
-     */
-    @JsonProperty("chkRirekiIchiran")
-    public void setChkRirekiIchiran(CheckBoxList chkRirekiIchiran) {
-        this.chkRirekiIchiran = chkRirekiIchiran;
+    @JsonIgnore
+    public void  setChkTenyuryoku(CheckBoxList chkTenyuryoku) {
+        this.getTokkiJokoSelect().setChkTenyuryoku(chkTenyuryoku);
     }
 
     // </editor-fold>

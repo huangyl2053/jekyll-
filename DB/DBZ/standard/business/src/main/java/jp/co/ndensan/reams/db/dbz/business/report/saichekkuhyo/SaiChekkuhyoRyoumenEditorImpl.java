@@ -79,7 +79,7 @@ public class SaiChekkuhyoRyoumenEditorImpl implements ISaiChekkuhyoRyoumenEditor
         RStringBuilder printTimeStamp = new RStringBuilder();
         printTimeStamp.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         printTimeStamp.append(RString.FULL_SPACE);
         printTimeStamp.append(String.format("%02d", printdate.getHour()));
         printTimeStamp.append(DATE_時);
