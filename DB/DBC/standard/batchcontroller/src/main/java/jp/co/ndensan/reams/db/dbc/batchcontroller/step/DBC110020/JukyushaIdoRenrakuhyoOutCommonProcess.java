@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7123KokuhoShikakuInfoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7124KokiKoreishaInfoEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -350,6 +352,43 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             生活保護受給者List.add(生活保護受給者);
         }
         return 生活保護受給者List;
+    }
+
+    /**
+     * 後期高齢者取得
+     *
+     * @param 異動一時List List<IdouTblEntity>
+     * @return DbT7124KokiKoreishaInfoEntity
+     */
+    public static DbT7124KokiKoreishaInfoEntity get後期高齢者(List<IdouTblEntity> 異動一時List) {
+        DbT7124KokiKoreishaInfoEntity 後期高齢者 = new DbT7124KokiKoreishaInfoEntity();
+        RString 後期高齢者情報 = 異動一時List.get(ORDER_0).get後期高齢者情報();
+        if (!RString.isNullOrEmpty(後期高齢者情報)) {
+            List<RString> 後期高齢者Info = 後期高齢者情報.split(SPLIT.toString());
+            後期高齢者.setShikakuSoshitsuYMD(後期高齢者Info.get(ORDER_0));
+            後期高齢者.setKokikoreiHihokenshaNo(後期高齢者Info.get(ORDER_1));
+            後期高齢者.setKokiHokenshaNoCity(後期高齢者Info.get(ORDER_2));
+        }
+        return 後期高齢者;
+    }
+
+    /**
+     * 国保資格取得
+     *
+     * @param 異動一時List List<IdouTblEntity>
+     * @return DbT7123KokuhoShikakuInfoEntity
+     */
+    public static DbT7123KokuhoShikakuInfoEntity get国保資格(List<IdouTblEntity> 異動一時List) {
+        DbT7123KokuhoShikakuInfoEntity 国保資格 = new DbT7123KokuhoShikakuInfoEntity();
+        RString 国保資格情報 = 異動一時List.get(ORDER_0).get国保資格情報();
+        if (!RString.isNullOrEmpty(国保資格情報)) {
+            List<RString> 国保資格Info = 国保資格情報.split(SPLIT.toString());
+            国保資格.setKokuhoHokenshaNo(国保資格Info.get(ORDER_0));
+            国保資格.setKokuhoHokenshoNo(国保資格Info.get(ORDER_1));
+            国保資格.setKokuhoKojinNo(国保資格Info.get(ORDER_2));
+            国保資格.setShikakuSoshitsuYMD(国保資格Info.get(ORDER_3));
+        }
+        return 国保資格;
     }
 
     private static DbT4001JukyushaDaichoEntity get受給者台帳Entity(RString 受給者台帳) {
