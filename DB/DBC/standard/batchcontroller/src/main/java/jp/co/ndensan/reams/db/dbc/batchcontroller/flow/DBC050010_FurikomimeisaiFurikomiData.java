@@ -454,7 +454,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
                     Integer.class, new RString(振込データ登録_口座振込一時処理),
                     FurikomiDataTourokuProcess.PARAMETER_OUT_COUNT);
             if (0 != レコード件数) {
-//                executeStep(口座振込データの登録処理);
+                executeStep(口座振込データの登録処理);
             }
 
             if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
