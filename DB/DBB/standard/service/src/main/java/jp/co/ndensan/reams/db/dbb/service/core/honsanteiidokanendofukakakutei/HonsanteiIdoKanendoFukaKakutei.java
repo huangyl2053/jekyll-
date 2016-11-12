@@ -127,7 +127,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
         }
         for (KanendoIdoFukaKakutei idofukaKakutei : fukaKakuteiList) {
             List<DbT2002FukaEntity> dbtFukaList = fukaDac.select更正前のデータ(idofukaKakutei.getFukaKakuteiEntity().
-                    get通知書番号());
+                    get通知書番号(), idofukaKakutei.getFukaKakuteiEntity().get賦課年度());
             if (dbtFukaList != null && !dbtFukaList.isEmpty()) {
                 set更正前項目(dbtFukaList, idofukaKakutei);
             }

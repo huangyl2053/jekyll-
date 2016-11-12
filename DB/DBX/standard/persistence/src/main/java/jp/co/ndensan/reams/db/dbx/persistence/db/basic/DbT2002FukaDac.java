@@ -269,15 +269,16 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
      * 介護賦課を返します。
      *
      * @param 通知書番号 通知書番号
+     * @param 賦課年度 賦課年度
      * @return DbT2002FukaEntityの{@code list}
      */
     @Transaction
-    public List<DbT2002FukaEntity> select更正前のデータ(TsuchishoNo 通知書番号) {
+    public List<DbT2002FukaEntity> select更正前のデータ(TsuchishoNo 通知書番号, FlexibleYear 賦課年度) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT2002Fuka.class).
-                where(eq(tsuchishoNo, 通知書番号)).
-                order(by(DbT2002Fuka.choteiNendo, Order.DESC), by(DbT2002Fuka.rirekiNo, Order.DESC)).
+                where(and(eq(tsuchishoNo, 通知書番号), eq(fukaNendo, 賦課年度.toDateString())))
+                .order(by(DbT2002Fuka.choteiNendo, Order.DESC), by(DbT2002Fuka.rirekiNo, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
     }
 
