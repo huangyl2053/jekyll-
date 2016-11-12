@@ -104,6 +104,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             }
         }
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
+        div.getCcdShutsuryokuKoumoku().setDisplayNone(true);
         List<RString> keyList = new ArrayList<>();
         keyList.add(項目名付加);
         keyList.add(日付);
