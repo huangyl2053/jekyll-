@@ -1080,10 +1080,6 @@
          WHERE
             A."hihokennshaKubunCode" = '1'
         AND A."logicalDeletedFlag" = FALSE
-        AND (A."shikakuSoshitsuYMD" IS NULL OR A."shikakuSoshitsuYMD" = ''
-            OR A."shikakuSoshitsuYMD" <![CDATA[>]]> #{賦課年度} || '0401')
-        AND A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 賦課の情報として取得 -->
