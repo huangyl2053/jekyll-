@@ -105,6 +105,8 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranEditor
             source.listHanteiError_2 = entity.get被保険者番号();
             if (entity.get識別コード() != null) {
                 source.shikibetsuCode = entity.get識別コード().getColumnValue();
+            } else {
+                source.shikibetsuCode = RString.EMPTY;
             }
             if (entity.getサービス提供年月() != null) {
                 source.listHanteiError_3 = new RString(entity.getサービス提供年月().toString());
