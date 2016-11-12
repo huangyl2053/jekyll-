@@ -175,7 +175,7 @@ public class JukyushaIdoRenrakuhyoHandler {
                 && 受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
             div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
         }
-        if (!照会モード.equals(処理モード) && INT_1 != 履歴番号) {
+        if (!照会モード.equals(処理モード) && INT_1 != 履歴番号 && !RString.isNullOrEmpty(受給者異動情報.get訂正区分コード())) {
             div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(受給者異動情報.get訂正区分コード());
         }
         set要介護認定エリア(受給者異動情報);

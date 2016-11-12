@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kogakusogojigyoservicehihanteierrorichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakusogojigyoservicehihanteierrorichiran.KogakuSogoJigyoServicehiHanteiErrorIchiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakusogojigyoservicehihanteierrorlist.KogakuSogoJigyoServicehiHanteiErrorListEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -104,6 +105,8 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranEditor
             source.listHanteiError_2 = entity.get被保険者番号();
             if (entity.get識別コード() != null) {
                 source.shikibetsuCode = entity.get識別コード().getColumnValue();
+            } else {
+                source.shikibetsuCode = RString.EMPTY;
             }
             if (entity.getサービス提供年月() != null) {
                 source.listHanteiError_3 = new RString(entity.getサービス提供年月().toString());
@@ -113,7 +116,8 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranEditor
             source.listHanteiError_6 = entity.get世帯コード();
             source.listHanteiError_7 = entity.get世帯員識別コード();
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listHanteiError_2);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                ReportKomokuEditorUtil.get非空文字列(source.listHanteiError_2));
         return source;
     }
 

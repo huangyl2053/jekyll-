@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kyufukanrihyosofuichiran;
 
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyosofuichiran.KyufuKanrihyoSofuIchiranEntity;
@@ -118,7 +119,8 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
         source.shuseiGokeiKensu = toRString(entity.get合計件数_修正());
         source.torikeshiGokeiKensu = toRString(entity.get合計件数_取消());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hihokennshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.get被保険者番号());
+        source.hihokennshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                ReportKomokuEditorUtil.get非空文字列(entity.get被保険者番号()));
         return source;
     }
 

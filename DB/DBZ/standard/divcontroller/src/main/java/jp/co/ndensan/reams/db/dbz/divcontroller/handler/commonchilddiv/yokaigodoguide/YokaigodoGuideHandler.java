@@ -41,9 +41,9 @@ public class YokaigodoGuideHandler {
      */
     public void initialize() {
         List<dgYokaigodoGuide_Row> dgYokaigodoGuideList = new ArrayList<>();
-        FlexibleYearMonth kizyuniti = new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
-        if (new FlexibleYearMonth("200004").isBefore(kizyuniti)
-                && kizyuniti.isBefore(new FlexibleYearMonth("200203"))) {
+        FlexibleYearMonth kijunbi = new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
+        if (new FlexibleYearMonth("200004").isBefore(kijunbi)
+                && kijunbi.isBefore(new FlexibleYearMonth("200203"))) {
             for (YokaigoJotaiKubun99 yokaigoJotaiKubun99 : YokaigoJotaiKubun99.values()) {
                 dgYokaigodoGuide_Row dgJigyoshaItiran = new dgYokaigodoGuide_Row();
                 dgJigyoshaItiran.setCode(yokaigoJotaiKubun99.getコード());
@@ -51,8 +51,8 @@ public class YokaigodoGuideHandler {
                 dgYokaigodoGuideList.add(dgJigyoshaItiran);
             }
         }
-        if (new FlexibleYearMonth("200204").isBefore(kizyuniti)
-                && kizyuniti.isBefore(new FlexibleYearMonth("200603"))) {
+        if (new FlexibleYearMonth("200204").isBefore(kijunbi)
+                && kijunbi.isBefore(new FlexibleYearMonth("200603"))) {
             for (YokaigoJotaiKubun02 yokaigoJotaiKubun02 : YokaigoJotaiKubun02.values()) {
                 dgYokaigodoGuide_Row dgJigyoshaItiran = new dgYokaigodoGuide_Row();
                 dgJigyoshaItiran.setCode(yokaigoJotaiKubun02.getコード());
@@ -60,8 +60,8 @@ public class YokaigodoGuideHandler {
                 dgYokaigodoGuideList.add(dgJigyoshaItiran);
             }
         }
-        if (new FlexibleYearMonth("200604").isBefore(kizyuniti)
-                && kizyuniti.isBefore(new FlexibleYearMonth("200903"))) {
+        if (new FlexibleYearMonth("200604").isBefore(kijunbi)
+                && kijunbi.isBefore(new FlexibleYearMonth("200903"))) {
             for (YokaigoJotaiKubun06 yokaigoJotaiKubun06 : YokaigoJotaiKubun06.values()) {
                 dgYokaigodoGuide_Row dgJigyoshaItiran = new dgYokaigodoGuide_Row();
                 dgJigyoshaItiran.setCode(yokaigoJotaiKubun06.getコード());
@@ -69,7 +69,7 @@ public class YokaigodoGuideHandler {
                 dgYokaigodoGuideList.add(dgJigyoshaItiran);
             }
         }
-        if (new FlexibleYearMonth("200904").isBefore(kizyuniti)) {
+        if (new FlexibleYearMonth("200904").isBefore(kijunbi)) {
             for (YokaigoJotaiKubun09 yokaigoJotaiKubun09 : YokaigoJotaiKubun09.values()) {
                 dgYokaigodoGuide_Row dgJigyoshaItiran = new dgYokaigodoGuide_Row();
                 dgJigyoshaItiran.setCode(yokaigoJotaiKubun09.getコード());

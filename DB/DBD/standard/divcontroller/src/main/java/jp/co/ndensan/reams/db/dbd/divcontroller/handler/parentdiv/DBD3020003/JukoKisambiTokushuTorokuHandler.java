@@ -173,17 +173,17 @@ public class JukoKisambiTokushuTorokuHandler {
         for (TainoKiSummary tainoKiSummary : 滞納判定結果List) {
             if (tainoKiSummary.get調定年度().toDateString().equals(調定年度)) {
                 dgJikoKisambi_Row row = new dgJikoKisambi_Row();
-                row.setFukaNendo(tainoKiSummary.get賦課年度().wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
+                row.setFukaNendo(tainoKiSummary.get賦課年度().wareki().firstYear(FirstYear.ICHI_NEN).toDateString().concat(this.年度));
                 row.setHdnFukaNendo(tainoKiSummary.get賦課年度().toDateString());
-                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(tainoKiSummary.get徴収方法().getコード()).get名称());
+                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(tainoKiSummary.get徴収方法().getコード()).get略称());
                 row.setHdnFuchoTokucho(tainoKiSummary.get徴収方法().getコード());
                 row.setTsuchishoNo(tainoKiSummary.get通知書番号().getColumnValue());
                 row.setHdnTsuchishoNo(tainoKiSummary.get通知書番号().getColumnValue());
                 row.setKi(tainoKiSummary.get期().trimStart(CHAR_0).padZeroToLeft(INT_2).concat(期));
-                row.setChoteigaku(new RString(tainoKiSummary.get調定額().toString()));
+                row.setChoteigaku(new RString(tainoKiSummary.get調定額().toString("###,###,###,###")));
                 row.getNokigen().setValue(new FlexibleDate(tainoKiSummary.get納期限().toDateString()));
-                row.setShunyugaku(new RString(tainoKiSummary.get収入額().toString()));
-                row.setMinogaku(new RString(tainoKiSummary.get滞納額().toString()));
+                row.setShunyugaku(new RString(tainoKiSummary.get収入額().toString("###,###,###,###")));
+                row.setMinogaku(new RString(tainoKiSummary.get滞納額().toString("###,###,###,###")));
                 row.getJikoKisaibi().setValue(tainoKiSummary.get時効起算日());
                 row.setJikoKisaibiJiyu(JikoKisanbiKubun.toValue(tainoKiSummary.get時効起算日区分().getコード()).get名称());
                 row.getTokushuJikoKisaibiJiyu().setDataSource(get時効起算日区分List());
@@ -315,8 +315,8 @@ public class JukoKisambiTokushuTorokuHandler {
         for (dgJikoKisambi_Row row : 時効起算日登録List) {
             if (div.getChkZengyoHyoji().isAllSelected()) {
 
-                row.setFukaNendo(new FlexibleYear(row.getHdnFukaNendo()).wareki().firstYear(FirstYear.ICHI_NEN).toDateString());
-                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(row.getHdnFuchoTokucho()).get名称());
+                row.setFukaNendo(new FlexibleYear(row.getHdnFukaNendo()).wareki().firstYear(FirstYear.ICHI_NEN).toDateString().concat(this.年度));
+                row.setFuchoTokucho(TokuchoFuchoKubun.toValue(row.getHdnFuchoTokucho()).get略称());
                 row.setTsuchishoNo(row.getHdnTsuchishoNo());
 
                 new時効起算日登録List.add(row);

@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -65,6 +66,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString 申請を保存する = new RString("btnUpdate");
+    private static final RString 支給指定時は支給金額を入力してください = new RString("支給指定時は支給金額を入力してください。");
 
     /**
      * 申請情報検索_画面初期化です。
@@ -255,6 +257,10 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         boolean 審査決定フラグ = ViewStateHolder.get(ViewStateKeys.審査決定フラグ, Boolean.class);
+        if (ONE.equals(div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支給区分())
+                && Decimal.ZERO.equals(div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支給金額())) {
+            throw new ApplicationException(支給指定時は支給金額を入力してください.toString());
+        }
         ValidationMessageControlPairs validPairs = getCheckHandler(div).get入力チェック(画面モード, 審査決定フラグ);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();

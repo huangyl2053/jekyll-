@@ -150,15 +150,19 @@ public class HanyoListSeikatsuhogoJukyushaResult {
             eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
             eucCsvEntity.set保険者名(association.getShichosonName_());
             eucCsvEntity.set空白(RString.EMPTY);
-            eucCsvEntity.set市町村コード(entity.get市町村コード());
-            eucCsvEntity.set被保険者番号(entity.get被保険者番号());
+            eucCsvEntity.set市町村コード(entity.get市町村コード() == null ? RString.EMPTY : entity.get市町村コード());
+            eucCsvEntity.set被保険者番号(entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号());
             eucCsvEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get資格取得事由()));
             eucCsvEntity.set資格取得日(set年月日(processParamter, entity.get資格取得日()));
             eucCsvEntity.set資格取得届出日(set年月日(processParamter, entity.get資格取得届出日()));
             eucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), entity.get喪失事由()));
             eucCsvEntity.set資格喪失日(set年月日(processParamter, entity.get資格喪失日()));
             eucCsvEntity.set資格喪失届日(set年月日(processParamter, entity.get資格喪失届日()));
-            eucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
+            if (entity.get資格区分() == null || entity.get資格区分().isNullOrEmpty()) {
+                eucCsvEntity.set資格区分(RString.EMPTY);
+            } else {
+                eucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
+            }
             if (フラグ.equals(entity.get住所地特例状態())) {
                 eucCsvEntity.set住所地特例状態(住所地特例);
             } else {

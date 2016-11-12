@@ -1424,12 +1424,8 @@
         WHERE
         A."hihokennshaKubunCode" = '1'
         AND A."isDeleted" = FALSE
-        AND (A."shikakuSoshitsuYMD" IS NULL OR A."shikakuSoshitsuYMD" = ''
-        OR #{ 賦課年度 } || '0401' <![CDATA[<]]> A."shikakuSoshitsuYMD")
-        AND #{ 抽出開始日時 } <![CDATA[<=]]> A."lastUpdateTimestamp"
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{ 抽出終了日時 }
         )AS 資格
-        FULL OUTER  JOIN
+        LEFT OUTER  JOIN
         (  SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>
         FROM

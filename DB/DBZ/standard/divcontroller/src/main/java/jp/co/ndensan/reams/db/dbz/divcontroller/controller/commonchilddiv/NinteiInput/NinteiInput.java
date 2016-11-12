@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Ninte
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -56,13 +57,17 @@ public class NinteiInput {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<NinteiInputDiv> onClick_btnYokaigodoGuide(NinteiInputDiv div) {
-        div.getTxtYokaigodoCode().setValue(div.getHdnKoroshoIfShikibetsuCode());
-        if (div.getTxtNinteiYMD().getValue() == null) {
-            div.setHdnNinteiYmd(RString.EMPTY);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).認定年月日check();
+        if (validPairs.iterator().hasNext()) {
+            div.setHdnNinteiYmd(new RString(FlexibleDate.getNowDate().toString()));
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        
+        if (RString.isNullOrEmpty(new RString(div.getTxtNinteiYMD().getValue().toString()))) {
+            div.setHdnNinteiYmd(new RString(FlexibleDate.getNowDate().toString()));
         } else {
             div.setHdnNinteiYmd(new RString(div.getTxtNinteiYMD().getValue().toString()));
         }
-
         return ResponseData.of(div).respond();
     }
 

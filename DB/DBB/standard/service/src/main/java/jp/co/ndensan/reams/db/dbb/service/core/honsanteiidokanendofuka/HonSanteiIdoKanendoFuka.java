@@ -469,7 +469,6 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             賦課の情報 = 賦課情報Map.get(daichoList.get(0).get被保険者番号());
         }
         process一時表(daichoList, 賦課の情報, param);
-        process賦課エラー情報(資格の情報年度, 賦課の情報年度, param);
     }
 
     private void process一時表(List<HihokenshaDaicho> 資格の情報, List<FukaJoho> 賦課の情報, KanendoFukaParameter param) {
@@ -508,21 +507,6 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             return create通知書番号(被保険者番号.getColumnValue(), 枝番);
         }
         return 賦課の情報.get(枝番 - 1).get通知書番号();
-    }
-
-    private void process賦課エラー情報(List<HihokenshaDaicho> 資格の情報, List<FukaJoho> 賦課の情報, KanendoFukaParameter param) {
-        for (FukaJoho fukaEntity : 賦課の情報) {
-            boolean flg = true;
-            for (HihokenshaDaicho daichoEntity : 資格の情報) {
-                if (fukaEntity.get被保険者番号().equals(daichoEntity.get被保険者番号())) {
-                    flg = false;
-                    break;
-                }
-            }
-            if (flg) {
-                賦課エラー登録処理(fukaEntity, fukaEntity.get賦課年度(), new Code(ErrorCode.被保険者台帳データなし.getコード()));
-            }
-        }
     }
 
     private void set資格の情報Entity(HihokenshaDaicho 資格の情報, HonsanteiShotokuTmpEntity entity,

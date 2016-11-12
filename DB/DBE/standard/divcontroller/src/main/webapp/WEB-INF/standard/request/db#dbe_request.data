@@ -183,6 +183,7 @@ dbe/db/dbe/IchijiHanteiKekkaInfo/onLoad
 dbe/db/dbe/IchijiHanteiKekkaJoho/onClick_btnBack
 dbe/db/dbe/IchijiHanteiKekkaJoho/onClick_btnKakutei
 dbe/db/dbe/IchijiHanteiKekkaJoho/onLoad
+dbe/db/dbe/IchijiHanteizumiDataShutsuryoku/btn_btnModoru
 dbe/db/dbe/IchijiHanteizumiDataShutsuryoku/btn_check
 dbe/db/dbe/IchijiHanteizumiDataShutsuryoku/onChange_Shinseibi
 dbe/db/dbe/IchijiHanteizumiDataShutsuryoku/onClick_btnIchijiHanteiKekkahyoShutsuryoku
@@ -206,6 +207,7 @@ dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnHakkouCheck
 dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnHakkouKanryo
 dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnUpdate
 dbe/db/dbe/IkenshoSakuseiIrai/onLoad
+dbe/db/dbe/IkenshoSakuseiJissekiShokai/onClick_BatchButton
 dbe/db/dbe/IkenshoSakuseiJissekiShokai/onClick_BtnKensaku
 dbe/db/dbe/IkenshoSakuseiJissekiShokai/onClick_BtnKensakuClear
 dbe/db/dbe/IkenshoSakuseiJissekiShokai/onClick_BtnPulish
@@ -259,6 +261,7 @@ dbe/db/dbe/IraishoIkkatsuHakko/onLoad
 dbe/db/dbe/ItakusakiChosainIchiran/onclick_Check
 dbe/db/dbe/ItakusakiChosainIchiran/onclick_Publis
 dbe/db/dbe/ItakusakiChosainIchiran/onload
+dbe/db/dbe/JizenShinsakaiShiryoPublication/onChange_Ddl
 dbe/db/dbe/JizenShinsakaiShiryoPublication/onClick_btnCriteria
 dbe/db/dbe/JizenShinsakaiShiryoPublication/onClick_btnParameter
 dbe/db/dbe/JizenShinsakaiShiryoPublication/onClick_chkPrintChohyoIin
@@ -290,6 +293,7 @@ dbe/db/dbe/KoikinaiTenkyoRirekiHenkan/onClick_Kensaku
 dbe/db/dbe/KoikinaiTenkyoRirekiHenkan/onClick_Sentaku
 dbe/db/dbe/KoikinaiTenkyoRirekiHenkan/onClick_Touroku
 dbe/db/dbe/KoikinaiTenkyoRirekiHenkan/onLoad
+dbe/db/dbe/KojinIraiNaiyouKoshin/btn_Back
 dbe/db/dbe/KojinIraiNaiyouKoshin/onLoad
 dbe/db/dbe/KojinJokyoShokai/onClick_btnBackIryokikanToComplet
 dbe/db/dbe/KojinJokyoShokai/onClick_btnBackIryokikanToComplete
@@ -308,6 +312,7 @@ dbe/db/dbe/Masking/onClick_BtnDataOutput
 dbe/db/dbe/Masking/onClick_BtnMasking
 dbe/db/dbe/Masking/onClick_btnOutputCsv
 dbe/db/dbe/Masking/onLoad
+dbe/db/dbe/NijihanteiKekkaOutput/onClick_BtnClear
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_Btnkennsaku
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnCheck
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnHanteikekkaOutput
@@ -317,6 +322,7 @@ dbe/db/dbe/NinnteiChousaKekkaTouroku1/onActive
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnIchiHanteiJisshi
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnKihonChosa
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnTeikeibun
+dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_chkShisetsuRiyoUmu
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_ddlChosaJisshiBasho
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_radGenzaiService
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_tabChosaBasho
@@ -372,6 +378,7 @@ dbe/db/dbe/NinteiChosaIraiShudou/onClick_btnPrint
 dbe/db/dbe/NinteiChosaIraiShudou/onClick_btnPrint_after
 dbe/db/dbe/NinteiChosaIraiShudou/onClick_btnPrint_check
 dbe/db/dbe/NinteiChosaIraiShudou/onLoad
+dbe/db/dbe/NinteiChosaJissekiShokai/onClick_BatchButton
 dbe/db/dbe/NinteiChosaJissekiShokai/onClick_BtnPulish
 dbe/db/dbe/NinteiChosaJissekiShokai/onClick_BtnShutsutyoku
 dbe/db/dbe/NinteiChosaJissekiShokai/onClick_btnBackToKensaku
@@ -919,6 +926,7 @@ dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnOutputCsv
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnShujiiIrai
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onLoad
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onOkClose_btnIraishoToOutput
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onBlur_txtjyushinymd
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onChange_ddlHokensha
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_Chkprint
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnClear
@@ -1053,7 +1061,6 @@ dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/radHizukeHaniChange
 dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/radKensakuHohoChange
 dbe/db/dbe/YokaigoninteiProgress/onClick_btnToSearch
 dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnChosahyoGaikyo
-dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnChosahyoTokuki
 dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnIkensho
 dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnImageDelete
 dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnImageOutput

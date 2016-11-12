@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohishikakushogohyokeikasochi;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikakushogohyoin.ShikakuShogohyoInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyohishikakushogohyokeikasochi.SogojigyohiShikakuShogohyoKeikaSochiSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -80,7 +81,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
             source.shikibetsuCode = target.get被保険者一時().get識別コード();
             source.listUpper_2 = target.get被保険者一時().get登録被保険者番号().getColumnValue();
             source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
-                    source.listUpper_2);
+                    ReportKomokuEditorUtil.get非空文字列(source.listUpper_2));
             source.listLower_1 = target.get被保険者一時().get宛名名称();
             if (導入形態コード.is広域()) {
                 source.listUpper_3 = target.get被保険者一時().get証記載保険者番号().getColumnValue();

@@ -103,7 +103,7 @@ public class KogakuServicehiSofuIchiranEditor implements
         if (entity.get高額介護_被保険者番号() != null) {
             source.listCenter_2 = entity.get高額介護_被保険者番号().value();
         }
-        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listCenter_2);
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, get非空文字列(source.listCenter_2));
         source.listUpper_1 = entity.get被保険者_宛名カナ名称();
         source.listLower_1 = entity.get被保険者_宛名名称();
         source.listUpper_2 = entity.get被保険者_町域コード();
@@ -214,5 +214,12 @@ public class KogakuServicehiSofuIchiranEditor implements
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

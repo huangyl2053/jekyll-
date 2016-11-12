@@ -85,8 +85,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         source.listIchiran_2 = 発行対象者.get世帯番号();
         source.listIchiran_3 = 発行対象者.get世帯課税();
         source.listIchiran_4 = doカンマ編集(発行対象者.get総合計());
-        source.listIchiran_5 = 発行対象者.get被保番号();
-        source.listIchiran_6 = 発行対象者.get氏名();
+        source.listIchiran_5 = get非空文字列(発行対象者.get被保番号());
+        source.listIchiran_6 = get非空文字列(発行対象者.get氏名());
         source.listIchiran_7 = 発行対象者.get年齢();
         source.listIchiran_9 = doカンマ編集(発行対象者.get課税所得());
         source.listIchiran_10 = doカンマ編集(発行対象者.get課税所得_控除後());
@@ -161,5 +161,12 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(日時作成);
         return sakuseiYMD.toRString();
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

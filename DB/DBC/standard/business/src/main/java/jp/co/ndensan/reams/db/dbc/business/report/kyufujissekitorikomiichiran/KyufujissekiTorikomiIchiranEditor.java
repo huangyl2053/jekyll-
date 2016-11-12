@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kyufujissekitorikomiichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekitorikomiichiran.KyufujissekiTorikomiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufujissekitorikomiichiran.KyufujissekiTorikomiIchiranSource;
@@ -223,7 +224,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.shimei50onKana = entity.get被保険者_氏名50音カナ();
         source.shichosonCode = entity.get被保険者_市町村コード();
         source.kyufuJissekiKubun = entity.get給付実績_給付実績区分();
-        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_5);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listUpper_5));
         return source;
 
     }
