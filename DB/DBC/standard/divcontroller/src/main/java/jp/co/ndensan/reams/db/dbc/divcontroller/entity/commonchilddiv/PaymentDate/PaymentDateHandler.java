@@ -148,19 +148,19 @@ public class PaymentDateHandler {
                     div.getPayToMadoguchi().getTxtShiharaiShuryoTime()));
         }
         if (!is更新しないを選択した()) {
-            if (!RString.isNullOrEmpty(div.getPayToMadoguchi().getTxtShiharaiBasho().getValue())) {
+            if (RString.isNullOrEmpty(div.getPayToMadoguchi().getTxtShiharaiBasho().getValue())) {
                 addPairs(pairs, 支払場所);
             }
-            if (div.getPayToMadoguchi().getTxtShiharaiDateRange().getFromValue() != null) {
+            if (div.getPayToMadoguchi().getTxtShiharaiDateRange().getFromValue() == null) {
                 addPairs(pairs, 支払期間FROM);
             }
-            if (div.getPayToMadoguchi().getTxtShiharaiDateRange().getToValue() != null) {
+            if (div.getPayToMadoguchi().getTxtShiharaiDateRange().getToValue() == null) {
                 addPairs(pairs, 支払期間TO);
             }
-            if (div.getPayToMadoguchi().getTxtShiharaiKaishiTime().getValue() != null) {
+            if (div.getPayToMadoguchi().getTxtShiharaiKaishiTime().getValue() == null) {
                 addPairs(pairs, 開始時間);
             }
-            if (div.getPayToMadoguchi().getTxtShiharaiShuryoTime().getValue() != null) {
+            if (div.getPayToMadoguchi().getTxtShiharaiShuryoTime().getValue() == null) {
                 addPairs(pairs, 終了時間);
             }
         }

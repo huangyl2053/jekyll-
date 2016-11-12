@@ -422,7 +422,7 @@ public class ShokanKetteiTsuchiShoShiharai {
     public ShikibetsuCode get識別コード() {
         return entity.getShikibetsuCode();
     }
-    
+
     /**
      * 支払場所を取得します。
      *
@@ -431,7 +431,7 @@ public class ShokanKetteiTsuchiShoShiharai {
     public RString get支払場所() {
         return entity.getShiharaiBasho();
     }
-    
+
     /**
      * 支店コードを取得します。
      *
@@ -440,7 +440,7 @@ public class ShokanKetteiTsuchiShoShiharai {
     public RString get支店コード() {
         return entity.getKinyuKikanShitenCode();
     }
-    
+
     /**
      * 口座名義人を取得します。
      *
@@ -449,14 +449,41 @@ public class ShokanKetteiTsuchiShoShiharai {
     public RString get口座名義人() {
         return entity.getKozaMeiginin();
     }
-    
+
     /**
      * 被保険者区分コードを取得します。
      *
      * @return 被保険者区分コード
      */
     public RString get被保険者区分コード() {
-        
+
         return entity.getHihokennshaKubunCode();
+    }
+
+    /**
+     * 差止被保険者番号を取得します。
+     *
+     * @return 差止被保険者番号
+     */
+    public RString get差止被保険者番号() {
+        return entity.getSashitomeHiHokenshaNo();
+    }
+
+    /**
+     * 差止被保険者番号を取得します。
+     *
+     * @return 差止控除番号
+     */
+    public RString get差止控除番号() {
+        return entity.getSashitomeKojoNo();
+    }
+
+    /**
+     * 差額金額合計を取得します。
+     *
+     * @return 差額金額合計
+     */
+    public Decimal get差額金額合計() {
+        return entity.getSagakuKingakuGokei();
     }
 }

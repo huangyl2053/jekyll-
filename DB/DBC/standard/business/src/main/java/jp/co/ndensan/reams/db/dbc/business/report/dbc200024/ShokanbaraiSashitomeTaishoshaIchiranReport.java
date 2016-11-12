@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.dbc200024;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200024.ShokanbaraiSashitomeTaishoshaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -17,27 +18,35 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShokanbaraiSashitomeTaishoshaIchiranReport extends Report<ShokanbaraiSashitomeTaishoshaIchiranSource> {
 
-    private final ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem paramter;
+    private final List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList;
 
     /**
-     * インスタンスを生成します
+     * インスタンスを生成します。
      *
-     * @param paramter 帳票用のentity
+     * @param itemList 償還払支給（不支給）決定通知一覧表覧表のITEMリスト
      */
-    public ShokanbaraiSashitomeTaishoshaIchiranReport(
-            ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem paramter) {
-        this.paramter = paramter;
+    protected ShokanbaraiSashitomeTaishoshaIchiranReport(
+            List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList) {
+        this.itemList = itemList;
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param itemList 償還払支給（不支給）決定通知一覧表覧表のITEMリスト
+     * @return 償還払支給（不支給）決定通知一覧表覧表のReport
+     */
+    public static ShokanbaraiSashitomeTaishoshaIchiranReport createFrom(
+            List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList) {
+        return new ShokanbaraiSashitomeTaishoshaIchiranReport(itemList);
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<ShokanbaraiSashitomeTaishoshaIchiranSource> writer) {
-        writeLine(writer, paramter);
-    }
-
-    private void writeLine(ReportSourceWriter<ShokanbaraiSashitomeTaishoshaIchiranSource> writer,
-            ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem paramter) {
-        IShokanbaraiSashitomeTaishoshaIchiranEditor editor = new ShokanbaraiSashitomeTaishoshaIchiranEditor(paramter);
-        IShokanbaraiSashitomeTaishoshaIchiranBuilder builder = new ShokanbaraiSashitomeTaishoshaIchiranBuilder(editor);
-        writer.writeLine(builder);
+    public void writeBy(ReportSourceWriter<ShokanbaraiSashitomeTaishoshaIchiranSource> writer) {
+        for (ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem item : itemList) {
+            IShokanbaraiSashitomeTaishoshaIchiranEditor editor = new ShokanbaraiSashitomeTaishoshaIchiranEditor(item);
+            IShokanbaraiSashitomeTaishoshaIchiranBuilder builder = new ShokanbaraiSashitomeTaishoshaIchiranBuilder(editor);
+            writer.writeLine(builder);
+        }
     }
 }

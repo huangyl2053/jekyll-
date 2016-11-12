@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanketteitsuc
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.SelectMaxEdabanParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoTempTableEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
@@ -73,4 +75,12 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
      * @return DbT7022ShoriDateKanriの項目定義クラス
      */
     DbT7022ShoriDateKanriEntity get最大枝番(SelectMaxEdabanParameter parameter);
+
+    /**
+     * get償還払支給差止対象者一覧用帳票データ
+     *
+     * @param paramter 検索用パラメータ
+     * @return 償還払支給差止対象者一覧用帳票データ
+     */
+    List<ShokanKetteiTsuchiShoShiharaiRelateEntity> get償還払支給差止対象者一覧用帳票データ(ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter paramter);
 }

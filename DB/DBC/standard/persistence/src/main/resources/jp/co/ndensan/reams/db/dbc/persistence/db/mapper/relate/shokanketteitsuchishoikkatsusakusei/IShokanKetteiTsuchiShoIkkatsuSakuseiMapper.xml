@@ -1098,4 +1098,51 @@
           AS "ShikibetsuTaisho"
           ON  master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
+        <select resultOrdered="true" id="get償還払支給差止対象者一覧用帳票データ"
+            resultMap="resultMap_決定通知一覧表chohyoData"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter"
+            fetchSize="500">
+        with master as (
+            SELECT
+            <include refid="selectChouhyouData" />
+            ,'' AS tuika
+            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+            FROM
+            "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
+            LEFT JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki"/>
+            AS
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki"/>
+            ON ShokanKetteiTsuchiShoMeisaiTemp."shikibetsuCode" =
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki"/>."shikibetsuCode"
+            WHERE 
+              (ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" IS NOT NULL 
+                 AND ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" <![CDATA[<>]]> ''
+                 AND ShokanKetteiTsuchiShoMeisaiTemp."shikyuHushikyuKetteiKubun" = '1')
+                <if test="資格区分 != null"> 
+                AND ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" <![CDATA[<>]]> #{資格区分}    
+                </if>
+
+            ORDER BY
+            <if test="has出力順">
+                #{出力順},
+            </if>
+            ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+            ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+            ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+        )
+        SELECT
+          master.*,
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+          FROM master
+          LEFT OUTER JOIN
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+          (
+           SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+           FROM master
+          )
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+          AS "ShikibetsuTaisho"
+          ON  master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+    </select>
 </mapper>

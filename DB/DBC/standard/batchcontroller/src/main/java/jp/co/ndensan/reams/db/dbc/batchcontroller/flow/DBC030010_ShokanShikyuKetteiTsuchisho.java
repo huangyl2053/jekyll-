@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsu
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoSealerOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoTempInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShokanShinseiDBUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanbaraiSashitomeTaishoshaIchiranOutputProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanKetteiTsuchiShokanShinsei.ShokanKetteiTsuchiShokanShinseiProcessParameter;
@@ -51,6 +52,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     private static final String DBC100005 = "shoHihokenshabunOutputProcess";
     private static final String DBC100006 = "shokanKetteiTsuchiShoSealer2OutputProcess";
     private static final String DBC200023 = "ketteiTsuchiIchiranOutputProcess";
+    private static final String DBC200024 = "ShokanbaraiSashitomeTaishoshaIchiranOutputProcess";
 
     private static final RString FLAG_TRUE = new RString("1");
     private static final RString FLAG_FALSE = new RString("0");
@@ -63,13 +65,12 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     private static final RString 支払予定日印字有無_印字する = new RString("1");
     private static final RString 更新する = new RString("2");
     private static Long jobId = Long.MIN_VALUE;
-    
-    
+
     @Override
     protected void prepareConfigData() {
         jobId = super.getJobId();
     }
-    
+
     @Override
     protected void defineFlow() {
 
@@ -117,6 +118,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
             executeStep(DBC100005);
         }
         executeStep(DBC200023);
+        //executeStep(DBC200024);
     }
 
     @Step(TEMP_INSERT)
@@ -147,7 +149,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
                 .arguments(ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter.createProcessParam(getParameter()))
                 .define();
     }
-    
+
     @Step(DB_UPDATE2)
     IBatchFlowCommand shokanKetteiTsuchiShokanShinseiDBUpdateProcess() {
         return loopBatch(ShokanKetteiTsuchiShokanShinseiDBUpdateProcess.class)
@@ -193,6 +195,13 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     @Step(DBC200023)
     IBatchFlowCommand ketteiTsuchiIchiranOutputProcess() {
         return loopBatch(KetteiTsuchiIchiranOutputProcess.class)
+                .arguments(ShokanKetteiTsuchiShoSealerBatchParameter.createProcessParam(getParameter(), jobId))
+                .define();
+    }
+
+    @Step(DBC200024)
+    IBatchFlowCommand ShokanbaraiSashitomeTaishoshaIchiranOutputProcess() {
+        return loopBatch(ShokanbaraiSashitomeTaishoshaIchiranOutputProcess.class)
                 .arguments(ShokanKetteiTsuchiShoSealerBatchParameter.createProcessParam(getParameter(), jobId))
                 .define();
     }

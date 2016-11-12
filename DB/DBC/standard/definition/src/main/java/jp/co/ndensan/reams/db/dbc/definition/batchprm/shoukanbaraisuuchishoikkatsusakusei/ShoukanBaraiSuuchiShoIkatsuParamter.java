@@ -41,4 +41,5 @@ public class ShoukanBaraiSuuchiShoIkatsuParamter {
     private RTime 開始時間;
     private RTime 終了時間;
     private RString 出力順ID;
+    private RString 窓口払い一括更新区分;
 }
