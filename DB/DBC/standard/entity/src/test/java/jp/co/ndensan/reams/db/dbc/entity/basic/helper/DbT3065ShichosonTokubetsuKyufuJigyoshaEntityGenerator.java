@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 市町村特別給付サービス事業者エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -77,8 +76,6 @@ public final class DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator {
         entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setIdoKubun(DEFAULT_介護国保連ＩＦ異動区分);
         entity.setIdoYMD(DEFAULT_介護国保連ＩＦ異動年月日);
-        entity.setTeiseiKubun(DEFAULT_介護国保連ＩＦ訂正区分);
-        entity.setTeiseiYMD(DEFAULT_介護国保連ＩＦ訂正年月日);
         entity.setHojinShubetsu(DEFAULT_介護国保連ＩＦ法人種別);
         entity.setShinseishaNameKanji(DEFAULT_申請者氏名_漢字);
         entity.setShinseishaNameKana(DEFAULT_申請者氏名_カナ);

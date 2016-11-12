@@ -59,8 +59,7 @@ public class ShichosonTokubetsuKyufuJigyosha extends
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}より{@link ShichosonTokubetsuKyufuJigyosha}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}
+     * @param entity DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}
      */
     public ShichosonTokubetsuKyufuJigyosha(DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付サービス事業者"));
@@ -128,24 +127,6 @@ public class ShichosonTokubetsuKyufuJigyosha extends
      */
     public FlexibleDate get介護国保連ＩＦ異動年月日() {
         return entity.getIdoYMD();
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正区分を返します。
-     *
-     * @return 介護国保連ＩＦ訂正区分
-     */
-    public RString get介護国保連ＩＦ訂正区分() {
-        return entity.getTeiseiKubun();
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正年月日を返します。
-     *
-     * @return 介護国保連ＩＦ訂正年月日
-     */
-    public FlexibleDate get介護国保連ＩＦ訂正年月日() {
-        return entity.getTeiseiYMD();
     }
 
     /**
@@ -494,8 +475,7 @@ public class ShichosonTokubetsuKyufuJigyosha extends
     /**
      * 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}を返します。
      *
-     * @return
-     * 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}
+     * @return 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}
      */
     @Override
     public ShichosonTokubetsuKyufuJigyoshaIdentifier identifier() {

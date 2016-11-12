@@ -37,4 +37,12 @@ public interface ITokubetsuKyufuJigyoshaSearchMapper {
      */
     List<DbT3066ShichosonTokubetuKyufuServiceEntity> selectサービス内容();
 
+    /**
+     * 事業者情報件数を検索します。
+     *
+     * @param 入力された事業者コード RString
+     * @return int
+     */
+    int selectCount(@Param("入力された事業者コード") RString 入力された事業者コード);
+
 }

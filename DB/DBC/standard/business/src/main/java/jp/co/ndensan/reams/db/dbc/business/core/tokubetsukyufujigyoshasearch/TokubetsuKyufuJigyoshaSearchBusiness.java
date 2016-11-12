@@ -139,24 +139,6 @@ public class TokubetsuKyufuJigyoshaSearchBusiness extends
     }
 
     /**
-     * 介護国保連ＩＦ訂正区分を返します。
-     *
-     * @return 介護国保連ＩＦ訂正区分
-     */
-    public RString get介護国保連ＩＦ訂正区分() {
-        return entity.get事業者().getTeiseiKubun();
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正年月日を返します。
-     *
-     * @return 介護国保連ＩＦ訂正年月日
-     */
-    public FlexibleDate get介護国保連ＩＦ訂正年月日() {
-        return entity.get事業者().getTeiseiYMD();
-    }
-
-    /**
      * 介護国保連ＩＦ法人種別を返します。
      *
      * @return 介護国保連ＩＦ法人種別
