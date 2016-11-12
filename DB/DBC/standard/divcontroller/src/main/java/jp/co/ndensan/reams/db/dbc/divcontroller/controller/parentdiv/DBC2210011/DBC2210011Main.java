@@ -311,10 +311,7 @@ public class DBC2210011Main {
                 getHandler(div).onClick_btnSearch();
                 div.setHiddenModelOne(RString.EMPTY);
                 div.setHiddenModel(RString.EMPTY);
-                if (修正モード.equals(div.getHiddenModelOne()) || 削除モード.equals(div.getHiddenModelOne())) {
-                    RString 事業者Code = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者の情報, RString.class);
-                    getHandler(div).前排他の解除(事業者Code);
-                }
+                修正削除の前排他の解除(div);
                 return ResponseData.of(div).setState(DBC2210011StateName.検索表示);
 
             }
@@ -408,5 +405,12 @@ public class DBC2210011Main {
 
     private DBC2210011MainValidationHandler getValidationHandler() {
         return new DBC2210011MainValidationHandler();
+    }
+
+    private void 修正削除の前排他の解除(DBC2210011MainDiv div) {
+        if (修正モード.equals(div.getHiddenModelOne()) || 削除モード.equals(div.getHiddenModelOne())) {
+            RString 事業者Code = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者の情報, RString.class);
+            getHandler(div).前排他の解除(事業者Code);
+        }
     }
 }
