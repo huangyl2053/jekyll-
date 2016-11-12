@@ -4,20 +4,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000023;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 
 /**
- * tblShutsuryokuNaiyo のクラスファイル
- *
- * @reamsid_L DBC-5010-012 lijian
+ * tblShutsuryokuNaiyo のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class tblShutsuryokuNaiyoDiv extends TablePanel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
@@ -338,14 +336,12 @@ public class tblShutsuryokuNaiyoDiv extends TablePanel {
 
     // </editor-fold>
 }
-
 /**
- * cel11 のクラスファイル
- *
+ * cel11 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel11AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblFutanWariai")
     private Label lblFutanWariai;
@@ -370,14 +366,12 @@ class cel11AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel12 のクラスファイル
- *
+ * cel12 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel12AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblTekiyoKikan")
     private Label lblTekiyoKikan;
@@ -402,14 +396,12 @@ class cel12AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel21 のクラスファイル
- *
+ * cel21 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel21AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl2wari")
     private Label lbl2wari;
@@ -434,14 +426,12 @@ class cel21AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel22 のクラスファイル
- *
+ * cel22 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel22AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl2wariKaishibi")
     private Label lbl2wariKaishibi;
@@ -466,14 +456,12 @@ class cel22AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel23 のクラスファイル
- *
+ * cel23 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel23AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl2wariKaishiYmd")
     private Label lbl2wariKaishiYmd;
@@ -498,14 +486,12 @@ class cel23AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel32 のクラスファイル
- *
+ * cel32 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel32AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl2wariShuryobi")
     private Label lbl2wariShuryobi;
@@ -530,14 +516,12 @@ class cel32AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel33 のクラスファイル
- *
+ * cel33 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel33AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl2wariShuryoYmd")
     private Label lbl2wariShuryoYmd;
@@ -562,14 +546,12 @@ class cel33AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel41 のクラスファイル
- *
+ * cel41 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel41AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl1wari")
     private Label lbl1wari;
@@ -594,14 +576,12 @@ class cel41AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel42 のクラスファイル
- *
+ * cel42 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel42AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl1wariKaishibi")
     private Label lbl1wariKaishibi;
@@ -626,14 +606,12 @@ class cel42AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel43 のクラスファイル
- *
+ * cel43 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel43AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl1wariKaishiYmd")
     private Label lbl1wariKaishiYmd;
@@ -658,14 +636,12 @@ class cel43AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel52 のクラスファイル
- *
+ * cel52 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel52AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl1wariShuryobi")
     private Label lbl1wariShuryobi;
@@ -690,14 +666,12 @@ class cel52AttblShutsuryokuNaiyo extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cel53 のクラスファイル
- *
+ * cel53 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cel53AttblShutsuryokuNaiyo extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lbl1wariShuryoYmd")
     private Label lbl1wariShuryoYmd;

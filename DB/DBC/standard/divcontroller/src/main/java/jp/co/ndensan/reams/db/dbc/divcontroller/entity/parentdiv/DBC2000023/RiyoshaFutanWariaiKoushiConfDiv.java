@@ -10,18 +10,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * RiyoshaFutanWariaiKoushiConf のクラスファイル
- *
- * @reamsid_L DBC-5010-012 lijian
+ * RiyoshaFutanWariaiKoushiConf のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
@@ -29,10 +26,10 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("lblNote")
     private Label lblNote;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("PanelHakko")
     private PanelHakkoDiv PanelHakko;
     @JsonProperty("PanelShutsuryokuNaiyo")
@@ -53,15 +50,6 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoKanryoMessage
-     * @return ccdKaigoKanryoMessage
-     */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
-        return ccdKaigoKanryoMessage;
-    }
-
-    /*
      * getlblNote
      * @return lblNote
      */
@@ -77,6 +65,15 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     @JsonProperty("lblNote")
     public void setLblNote(Label lblNote) {
         this.lblNote = lblNote;
+    }
+
+    /*
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
+     */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
     }
 
     /*
@@ -196,7 +193,7 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHakkobi(TextBoxDate txtHakkobi) {
+    public void  setTxtHakkobi(TextBoxDate txtHakkobi) {
         this.getPanelHakko().setTxtHakkobi(txtHakkobi);
     }
 
@@ -206,7 +203,7 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKofubi(TextBoxDate txtKofubi) {
+    public void  setTxtKofubi(TextBoxDate txtKofubi) {
         this.getPanelHakko().setTxtKofubi(txtKofubi);
     }
 
@@ -216,7 +213,7 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
+    public void  setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
         this.getPanelHakko().setDdlKofuJiyu(ddlKofuJiyu);
     }
 
@@ -226,7 +223,7 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTblShutsuryokuNaiyo(tblShutsuryokuNaiyoDiv tblShutsuryokuNaiyo) {
+    public void  setTblShutsuryokuNaiyo(tblShutsuryokuNaiyoDiv tblShutsuryokuNaiyo) {
         this.getPanelShutsuryokuNaiyo().setTblShutsuryokuNaiyo(tblShutsuryokuNaiyo);
     }
 
