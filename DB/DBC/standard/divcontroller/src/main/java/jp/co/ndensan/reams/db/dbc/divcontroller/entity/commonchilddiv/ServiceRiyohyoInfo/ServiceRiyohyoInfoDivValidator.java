@@ -118,6 +118,20 @@ public class ServiceRiyohyoInfoDivValidator {
     }
 
     /**
+     * サービス種類必須のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validateサービス種類必須() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.サービス種類必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目)
+                .messages());
+        return messages;
+    }
+
+    /**
      * サービス単位必須以外のチェックです。
      *
      * @return エラーメッセージ

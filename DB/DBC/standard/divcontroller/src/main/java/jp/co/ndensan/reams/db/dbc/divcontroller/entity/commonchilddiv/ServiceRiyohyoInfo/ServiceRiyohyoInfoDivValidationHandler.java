@@ -110,6 +110,21 @@ public class ServiceRiyohyoInfoDivValidationHandler {
     }
 
     /**
+     * サービス種類必須のチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validateサービス種類必須() {
+        IValidationMessages message = new ServiceRiyohyoInfoDivValidator(div).validateサービス単位必須();
+        return createvalidateサービス単位必須Dictionary().check(message);
+    }
+
+    private ValidationDictionary createvalidateサービス種類必須Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目).build();
+    }
+
+    /**
      * サービス単位必須のチェックです。
      *
      * @return {@link ValidationMessageControlPairs}
@@ -122,7 +137,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
     private ValidationDictionary createvalidateサービス単位必須Dictionary() {
         return new ValidationDictionaryBuilder()
                 .add(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目,
-                        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu()).build();
+                        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani()).build();
     }
 
     /**
