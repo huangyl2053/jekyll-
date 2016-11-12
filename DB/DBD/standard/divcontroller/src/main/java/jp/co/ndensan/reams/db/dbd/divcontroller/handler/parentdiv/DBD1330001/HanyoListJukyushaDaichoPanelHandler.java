@@ -83,6 +83,11 @@ public class HanyoListJukyushaDaichoPanelHandler {
         listCSV.add(CSVSettings.日付スラッシュ編集.getコード());
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(listCSV);
         div.getCcdAtenaJoken().initialize();
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getRadSelectKijun().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getTxtNenrei().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getTxtNenreiKijunbi().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getTxtSeinengappi().setDisabled(false);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD701008.getReportId());
         div.getCcdShutsuryokuKoumoku().load(ReportIdDBD.DBD701008.getReportId().value(), SubGyomuCode.DBD介護受給);
     }
@@ -100,19 +105,23 @@ public class HanyoListJukyushaDaichoPanelHandler {
             List<RString> empty = new ArrayList<>();
             div.getChkSaisinJoho().setSelectedItemsByKey(empty);
             div.getChkSaisinJoho().setDisabled(true);
+            div.getDdlSiteiNen().setDisabled(false);
             set年指定_年度(調定年度);
         } else if (抽出条件_コード2.equals(抽出条件)
                 && 年指定_コード1.equals(年指定)) {
             List<RString> empty = new ArrayList<>();
             div.getChkSaisinJoho().setSelectedItemsByKey(empty);
             div.getChkSaisinJoho().setDisabled(true);
+            div.getDdlSiteiNen().setDisabled(true);
             set全件_年度(調定年度);
         } else if (抽出条件_コード1.equals(抽出条件)
                 && 年指定_コード2.equals(年指定)) {
             div.getChkSaisinJoho().setDisabled(false);
+            div.getDdlSiteiNen().setDisabled(false);
             set年指定_年(調定年度);
         } else {
             div.getChkSaisinJoho().setDisabled(false);
+            div.getDdlSiteiNen().setDisabled(true);
             set全件_年(調定年度);
         }
     }
