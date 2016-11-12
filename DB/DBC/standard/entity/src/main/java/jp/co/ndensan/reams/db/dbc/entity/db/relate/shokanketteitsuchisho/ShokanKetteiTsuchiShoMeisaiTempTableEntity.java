@@ -78,7 +78,7 @@ public class ShokanKetteiTsuchiShoMeisaiTempTableEntity
     private RString sashitomeKojoNo;
     @PrimaryKey
     private RString yoshikiNo;
-    private RString yoshikiMeisho;
+    private RString yokinShubetsuMeisho;
     @PrimaryKey
     private RString serviceCode;
     private RString serviceShuruiName;

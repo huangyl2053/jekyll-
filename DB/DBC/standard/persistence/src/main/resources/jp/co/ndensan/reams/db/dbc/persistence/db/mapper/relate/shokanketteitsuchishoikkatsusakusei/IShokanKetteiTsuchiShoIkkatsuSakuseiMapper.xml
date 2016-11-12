@@ -27,7 +27,7 @@
         <result property="kinyuKikanMeisi" column="uaT0302KinyuKikan_name" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanShitenMeisi" column="uaT0303KinyuKikanShiten_name" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yokinShubetsu" column="uaT0310Koza_yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yokinShubetsuMeisi" column="uaT0301YokinShubetsuPattern_yokinShubetsuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokinShubetsuMeisho" column="uaT0301YokinShubetsuPattern_yokinShubetsuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaNo" column="uaT0310Koza_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeiginin" column="uaT0310Koza_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="kozaMeigininKanji" column="uaT0310Koza_kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -71,7 +71,7 @@
         <result property="yokinShubetsu" column="yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanMeisi" column="kinyuKikanMeisi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanShitenName" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yokinName" column="yokinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokinShubetsuMeisho" column="yokinShubetsuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaNo" column="kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeiginin" column="kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -89,8 +89,6 @@
         <result property="kinyuKikanCodeName" column="kinyuKikanCodeName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
         <result property="kinyuKikanShitenName" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yokinName" column="yokinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yoshikiMeisho" column="yoshikiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceShuruiName" column="serviceShuruiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kaishuKingaku" column="kaishuKingaku"/>
         <result property="zougenRiyu" column="zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -120,8 +118,8 @@
         <result property="zougenRiyu" column="zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
         <result property="kinyuKikanName" column="kinyuKikanCodeName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shideMeisho" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yokinShubetsuMeisho" column="yokinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kinyuKikanShitenMeisi" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokinShubetsuMeisho" column="yokinShubetsuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaBango" column="kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -154,8 +152,8 @@
         <result property="zougenRiyu" column="zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
         <result property="kinyuKikanName" column="kinyuKikanMeisi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shideMeisho" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yokinShubetsuMeisho" column="yokinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shideMeisho" column="kinyuKikanShitenMeisi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokinShubetsuMeisho" column="yokinShubetsuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaBango" column="kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -205,7 +203,7 @@
         ,ShokanKetteiTsuchiShoTemp."kinyuKikanShitenCode"
         ,ShokanKetteiTsuchiShoTemp."kinyuKikanShitenMeisi"
         ,ShokanKetteiTsuchiShoTemp."yokinShubetsu"
-        ,ShokanKetteiTsuchiShoTemp."yokinShubetsuMeisi"
+        ,ShokanKetteiTsuchiShoTemp."yokinShubetsuMeisho"
         ,ShokanKetteiTsuchiShoTemp."kozaNo"
         ,ShokanKetteiTsuchiShoTemp."kozaMeiginin"
         ,ShokanKetteiTsuchiShoTemp."kozaMeigininKanji"
@@ -242,6 +240,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."shiharaiKingakuUchiwakeRiyoshabun"
         ,ShokanKetteiTsuchiShoMeisaiTemp."sagakuKingakuGokei"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCode"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanMeisi"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenCode"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsu"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kozaNo"
@@ -262,6 +261,8 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceCode"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kaishuKingaku"
         ,ShokanKetteiTsuchiShoMeisaiTemp."zougenRiyu"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenMeisi"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsuMeisho"
     </sql>
 
     <sql id="selectChouhyouData">
@@ -304,6 +305,9 @@
         ,SUBSTRING(ShokanKetteiTsuchiShoMeisaiTemp."serviceCode",1, 2) AS "serviceCode"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kaishuKingaku"
         ,ShokanKetteiTsuchiShoMeisaiTemp."zougenRiyu"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanMeisi"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenMeisi"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsuMeisho"
     </sql>
 
     <!--一時テーブルの決定通知書情報の取得-->

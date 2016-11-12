@@ -62,7 +62,7 @@ public class ShokanKetteiTsuchiShoTempTableEntity extends DbTableEntityBase<Shok
     private KinyuKikanShitenCode kinyuKikanShitenCode;
     private RString kinyuKikanShitenMeisi;
     private RString yokinShubetsu;
-    private RString yokinShubetsuMeisi;
+    private RString yokinShubetsuMeisho;
     private RString kozaNo;
     private AtenaKanaMeisho kozaMeiginin;
     private AtenaMeisho kozaMeigininKanji;
