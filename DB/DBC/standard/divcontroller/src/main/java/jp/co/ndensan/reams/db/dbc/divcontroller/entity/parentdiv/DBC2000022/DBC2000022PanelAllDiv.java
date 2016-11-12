@@ -31,13 +31,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class DBC2000022PanelAllDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("lin1")
     private HorizontalLine lin1;
     @JsonProperty("PanelHyoji")
@@ -52,8 +54,6 @@ public class DBC2000022PanelAllDiv extends Panel {
     private PanelHosokuItemDiv PanelHosokuItem;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
-    @JsonProperty("ccdKaigoAtenaInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("EditMode")
     private RString EditMode;
     @JsonProperty("hdnShikibetsuCode")
@@ -67,6 +67,15 @@ public class DBC2000022PanelAllDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
+    }
+
     /*
      * getlin1
      * @return lin1
@@ -182,15 +191,6 @@ public class DBC2000022PanelAllDiv extends Panel {
     @JsonProperty("ccdKaigoShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return ccdKaigoShikakuKihon;
-    }
-
-    /*
-     * getccdKaigoAtenaInfo
-     * @return ccdKaigoAtenaInfo
-     */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return ccdKaigoAtenaInfo;
     }
 
     /*
@@ -451,16 +451,6 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKakutei() {
-        return this.getPanelEdit().getPanelEditItem().getBtnKakutei();
-    }
-
-    @JsonIgnore
-    public void setBtnKakutei(Button btnKakutei) {
-        this.getPanelEdit().getPanelEditItem().setBtnKakutei(btnKakutei);
-    }
-
-    @JsonIgnore
     public Button getBtnCancel() {
         return this.getPanelEdit().getPanelEditItem().getBtnCancel();
     }
@@ -468,6 +458,16 @@ public class DBC2000022PanelAllDiv extends Panel {
     @JsonIgnore
     public void setBtnCancel(Button btnCancel) {
         this.getPanelEdit().getPanelEditItem().setBtnCancel(btnCancel);
+    }
+
+    @JsonIgnore
+    public Button getBtnKakutei() {
+        return this.getPanelEdit().getPanelEditItem().getBtnKakutei();
+    }
+
+    @JsonIgnore
+    public void setBtnKakutei(Button btnKakutei) {
+        this.getPanelEdit().getPanelEditItem().setBtnKakutei(btnKakutei);
     }
 
     @JsonIgnore
@@ -491,16 +491,6 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlHakkoKubun() {
-        return this.getPanelHosokuItem().getDdlHakkoKubun();
-    }
-
-    @JsonIgnore
-    public void setDdlHakkoKubun(DropDownList ddlHakkoKubun) {
-        this.getPanelHosokuItem().setDdlHakkoKubun(ddlHakkoKubun);
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtKijunbi() {
         return this.getPanelHosokuItem().getTxtKijunbi();
     }
@@ -508,6 +498,16 @@ public class DBC2000022PanelAllDiv extends Panel {
     @JsonIgnore
     public void setTxtKijunbi(TextBoxDate txtKijunbi) {
         this.getPanelHosokuItem().setTxtKijunbi(txtKijunbi);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlHakkoKubun() {
+        return this.getPanelHosokuItem().getDdlHakkoKubun();
+    }
+
+    @JsonIgnore
+    public void setDdlHakkoKubun(DropDownList ddlHakkoKubun) {
+        this.getPanelHosokuItem().setDdlHakkoKubun(ddlHakkoKubun);
     }
 
     @JsonIgnore

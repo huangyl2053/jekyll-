@@ -16,11 +16,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * PanelHyoji のクラスファイル
  *
- * @reamsid_L DBC-5010-011 zhaowei
+ * @reamsid_L DBC-5010-011 zhaowei@author 自動生成
  */
 public class PanelHyojiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
