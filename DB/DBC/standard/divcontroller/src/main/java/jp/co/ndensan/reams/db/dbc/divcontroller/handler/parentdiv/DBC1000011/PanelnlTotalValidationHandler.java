@@ -72,6 +72,7 @@ public class PanelnlTotalValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "抽出条件決定日From", "抽出条件決定日To")));
         }
+        validationMessages.add(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().getCheckMessage());
         return validationMessages;
     }
 

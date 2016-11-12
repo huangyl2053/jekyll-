@@ -4,12 +4,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDa
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-4470-010 wangkanglei
  */
 public class PaymentDateDiv extends Panel implements IPaymentDateDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
@@ -120,5 +122,10 @@ public class PaymentDateDiv extends Panel implements IPaymentDateDiv {
     @Override
     public ValidationMessageControlPairs getCheckMessage() {
         return PaymentDateHandler.of(this).getCheckMessage();
+    }
+
+    @Override
+    public RString get窓口払い一括更新区分() {
+        return this.getPayToMadoguchi().getRadIkkatsuKoshinKubun().getSelectedKey();
     }
 }

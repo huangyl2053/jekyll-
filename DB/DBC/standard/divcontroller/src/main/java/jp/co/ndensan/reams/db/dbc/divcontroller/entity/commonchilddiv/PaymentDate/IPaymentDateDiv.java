@@ -63,6 +63,13 @@ public interface IPaymentDateDiv extends ICommonChildDivBaseProperties {
     public RTime get終了時間();
 
     /**
+     * get窓口払い一括更新区分
+     *
+     * @return RString
+     */
+    public RString get窓口払い一括更新区分();
+
+    /**
      * getCheckMessage
      *
      * @return ValidationMessageControlPairs

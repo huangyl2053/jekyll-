@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -954,7 +955,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
                                 eq(shichosonCode, 市町村コード),
                                 eq(shoriName, 処理名),
-                                eq(nendo, RDate.getNowDate().getNendo())))
+                                eq(nendo, new RYear(年度_0000))))
                 .order(new OrderBy(shoriEdaban, Order.DESC, NullsOrder.LAST),
                         new OrderBy(nendoNaiRenban, Order.DESC, NullsOrder.LAST)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
