@@ -13,19 +13,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * 
  */
 public class SonotaShojoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkSonotaShojo")
-    private CheckBoxList chkSonotaShojo;
+    @JsonProperty("radSonotaShojo")
+    private RadioButton radSonotaShojo;
     @JsonProperty("txtShojomei")
     private TextBox txtShojomei;
-    @JsonProperty("chkSenmonJushin")
-    private CheckBoxList chkSenmonJushin;
+    @JsonProperty("radSenmonJushin")
+    private RadioButton radSenmonJushin;
     @JsonProperty("txtShosaiTokkiJiko")
     private TextBox txtShosaiTokkiJiko;
 
@@ -36,21 +36,21 @@ public class SonotaShojoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkSonotaShojo
-     * @return chkSonotaShojo
+     * getradSonotaShojo
+     * @return radSonotaShojo
      */
-    @JsonProperty("chkSonotaShojo")
-    public CheckBoxList getChkSonotaShojo() {
-        return chkSonotaShojo;
+    @JsonProperty("radSonotaShojo")
+    public RadioButton getRadSonotaShojo() {
+        return radSonotaShojo;
     }
 
     /*
-     * setchkSonotaShojo
-     * @param chkSonotaShojo chkSonotaShojo
+     * setradSonotaShojo
+     * @param radSonotaShojo radSonotaShojo
      */
-    @JsonProperty("chkSonotaShojo")
-    public void setChkSonotaShojo(CheckBoxList chkSonotaShojo) {
-        this.chkSonotaShojo = chkSonotaShojo;
+    @JsonProperty("radSonotaShojo")
+    public void setRadSonotaShojo(RadioButton radSonotaShojo) {
+        this.radSonotaShojo = radSonotaShojo;
     }
 
     /*
@@ -72,21 +72,21 @@ public class SonotaShojoDiv extends Panel {
     }
 
     /*
-     * getchkSenmonJushin
-     * @return chkSenmonJushin
+     * getradSenmonJushin
+     * @return radSenmonJushin
      */
-    @JsonProperty("chkSenmonJushin")
-    public CheckBoxList getChkSenmonJushin() {
-        return chkSenmonJushin;
+    @JsonProperty("radSenmonJushin")
+    public RadioButton getRadSenmonJushin() {
+        return radSenmonJushin;
     }
 
     /*
-     * setchkSenmonJushin
-     * @param chkSenmonJushin chkSenmonJushin
+     * setradSenmonJushin
+     * @param radSenmonJushin radSenmonJushin
      */
-    @JsonProperty("chkSenmonJushin")
-    public void setChkSenmonJushin(CheckBoxList chkSenmonJushin) {
-        this.chkSenmonJushin = chkSenmonJushin;
+    @JsonProperty("radSenmonJushin")
+    public void setRadSenmonJushin(RadioButton radSenmonJushin) {
+        this.radSenmonJushin = radSenmonJushin;
     }
 
     /*

@@ -41,13 +41,13 @@ public class ShinshinIken {
     }
 
     /**
-     * 認知症周辺症状チェックボックスのChange処理です。
+     * 認知症周辺症状ラジオボタンのChange処理です。
      *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
-    public ResponseData<ShinshinIkenDiv> changeChkNinchishoShuhenShojoUmu(ShinshinIkenDiv div) {
-        getHandler(div).changeChkNinchishoShuhenShojoUmu();
+    public ResponseData<ShinshinIkenDiv> changeRadNinchishoShuhenShojoUmu(ShinshinIkenDiv div) {
+        getHandler(div).changeRadNinchishoShuhenShojoUmu();
         return ResponseData.of(div).respond();
     }
 
@@ -63,24 +63,24 @@ public class ShinshinIken {
     }
 
     /**
-     * その他の精神神経症状チェックボックスのChange処理です。
+     * その他の精神神経症状ラジオボタンのChange処理です。
      *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
-    public ResponseData<ShinshinIkenDiv> changeChkSonotaShojo(ShinshinIkenDiv div) {
-        getHandler(div).changeChkSonotaShojo();
+    public ResponseData<ShinshinIkenDiv> changeRadSonotaShojo(ShinshinIkenDiv div) {
+        getHandler(div).changeRadSonotaShojo();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 専門医受診の有無チェックボックスのChange処理です。
+     * 専門医受診の有無ラジオボタンのChange処理です。
      *
      * @param div 画面情報
      * @return ResponseData<ShinshinIkenDiv>
      */
-    public ResponseData<ShinshinIkenDiv> changeChkSenmonJushin(ShinshinIkenDiv div) {
-        getHandler(div).changeChkSenmonJushin();
+    public ResponseData<ShinshinIkenDiv> changeRadSenmonJushin(ShinshinIkenDiv div) {
+        getHandler(div).changeRadSenmonJushin();
         return ResponseData.of(div).respond();
     }
 

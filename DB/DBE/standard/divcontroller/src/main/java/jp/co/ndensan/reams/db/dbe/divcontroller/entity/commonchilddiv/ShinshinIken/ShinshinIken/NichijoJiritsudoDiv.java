@@ -13,17 +13,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * 
  */
 public class NichijoJiritsudoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkShogaiKoreishaNichijoSeikatsuJiritsudo")
-    private CheckBoxList chkShogaiKoreishaNichijoSeikatsuJiritsudo;
-    @JsonProperty("chkNinchishoKoreishaJiritsu")
-    private CheckBoxList chkNinchishoKoreishaJiritsu;
+    @JsonProperty("radShogaiKoreishaNichijoSeikatsuJiritsudo")
+    private RadioButton radShogaiKoreishaNichijoSeikatsuJiritsudo;
+    @JsonProperty("radNinchishoKoreishaJiritsu")
+    private RadioButton radNinchishoKoreishaJiritsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,39 +32,39 @@ public class NichijoJiritsudoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkShogaiKoreishaNichijoSeikatsuJiritsudo
-     * @return chkShogaiKoreishaNichijoSeikatsuJiritsudo
+     * getradShogaiKoreishaNichijoSeikatsuJiritsudo
+     * @return radShogaiKoreishaNichijoSeikatsuJiritsudo
      */
-    @JsonProperty("chkShogaiKoreishaNichijoSeikatsuJiritsudo")
-    public CheckBoxList getChkShogaiKoreishaNichijoSeikatsuJiritsudo() {
-        return chkShogaiKoreishaNichijoSeikatsuJiritsudo;
+    @JsonProperty("radShogaiKoreishaNichijoSeikatsuJiritsudo")
+    public RadioButton getRadShogaiKoreishaNichijoSeikatsuJiritsudo() {
+        return radShogaiKoreishaNichijoSeikatsuJiritsudo;
     }
 
     /*
-     * setchkShogaiKoreishaNichijoSeikatsuJiritsudo
-     * @param chkShogaiKoreishaNichijoSeikatsuJiritsudo chkShogaiKoreishaNichijoSeikatsuJiritsudo
+     * setradShogaiKoreishaNichijoSeikatsuJiritsudo
+     * @param radShogaiKoreishaNichijoSeikatsuJiritsudo radShogaiKoreishaNichijoSeikatsuJiritsudo
      */
-    @JsonProperty("chkShogaiKoreishaNichijoSeikatsuJiritsudo")
-    public void setChkShogaiKoreishaNichijoSeikatsuJiritsudo(CheckBoxList chkShogaiKoreishaNichijoSeikatsuJiritsudo) {
-        this.chkShogaiKoreishaNichijoSeikatsuJiritsudo = chkShogaiKoreishaNichijoSeikatsuJiritsudo;
+    @JsonProperty("radShogaiKoreishaNichijoSeikatsuJiritsudo")
+    public void setRadShogaiKoreishaNichijoSeikatsuJiritsudo(RadioButton radShogaiKoreishaNichijoSeikatsuJiritsudo) {
+        this.radShogaiKoreishaNichijoSeikatsuJiritsudo = radShogaiKoreishaNichijoSeikatsuJiritsudo;
     }
 
     /*
-     * getchkNinchishoKoreishaJiritsu
-     * @return chkNinchishoKoreishaJiritsu
+     * getradNinchishoKoreishaJiritsu
+     * @return radNinchishoKoreishaJiritsu
      */
-    @JsonProperty("chkNinchishoKoreishaJiritsu")
-    public CheckBoxList getChkNinchishoKoreishaJiritsu() {
-        return chkNinchishoKoreishaJiritsu;
+    @JsonProperty("radNinchishoKoreishaJiritsu")
+    public RadioButton getRadNinchishoKoreishaJiritsu() {
+        return radNinchishoKoreishaJiritsu;
     }
 
     /*
-     * setchkNinchishoKoreishaJiritsu
-     * @param chkNinchishoKoreishaJiritsu chkNinchishoKoreishaJiritsu
+     * setradNinchishoKoreishaJiritsu
+     * @param radNinchishoKoreishaJiritsu radNinchishoKoreishaJiritsu
      */
-    @JsonProperty("chkNinchishoKoreishaJiritsu")
-    public void setChkNinchishoKoreishaJiritsu(CheckBoxList chkNinchishoKoreishaJiritsu) {
-        this.chkNinchishoKoreishaJiritsu = chkNinchishoKoreishaJiritsu;
+    @JsonProperty("radNinchishoKoreishaJiritsu")
+    public void setRadNinchishoKoreishaJiritsu(RadioButton radNinchishoKoreishaJiritsu) {
+        this.radNinchishoKoreishaJiritsu = radNinchishoKoreishaJiritsu;
     }
 
     // </editor-fold>

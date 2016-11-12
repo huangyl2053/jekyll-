@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * 
  */
 public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -198,23 +198,23 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public CheckBoxList getChkShogaiKoreishaNichijoSeikatsuJiritsudo() {
-        return this.getNichijoJiritsudo().getChkShogaiKoreishaNichijoSeikatsuJiritsudo();
+    public RadioButton getRadShogaiKoreishaNichijoSeikatsuJiritsudo() {
+        return this.getNichijoJiritsudo().getRadShogaiKoreishaNichijoSeikatsuJiritsudo();
     }
 
     @JsonIgnore
-    public void  setChkShogaiKoreishaNichijoSeikatsuJiritsudo(CheckBoxList chkShogaiKoreishaNichijoSeikatsuJiritsudo) {
-        this.getNichijoJiritsudo().setChkShogaiKoreishaNichijoSeikatsuJiritsudo(chkShogaiKoreishaNichijoSeikatsuJiritsudo);
+    public void  setRadShogaiKoreishaNichijoSeikatsuJiritsudo(RadioButton radShogaiKoreishaNichijoSeikatsuJiritsudo) {
+        this.getNichijoJiritsudo().setRadShogaiKoreishaNichijoSeikatsuJiritsudo(radShogaiKoreishaNichijoSeikatsuJiritsudo);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkNinchishoKoreishaJiritsu() {
-        return this.getNichijoJiritsudo().getChkNinchishoKoreishaJiritsu();
+    public RadioButton getRadNinchishoKoreishaJiritsu() {
+        return this.getNichijoJiritsudo().getRadNinchishoKoreishaJiritsu();
     }
 
     @JsonIgnore
-    public void  setChkNinchishoKoreishaJiritsu(CheckBoxList chkNinchishoKoreishaJiritsu) {
-        this.getNichijoJiritsudo().setChkNinchishoKoreishaJiritsu(chkNinchishoKoreishaJiritsu);
+    public void  setRadNinchishoKoreishaJiritsu(RadioButton radNinchishoKoreishaJiritsu) {
+        this.getNichijoJiritsudo().setRadNinchishoKoreishaJiritsu(radNinchishoKoreishaJiritsu);
     }
 
     @JsonIgnore
@@ -248,13 +248,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkNinchishoShuhenShojoUmu() {
-        return this.getNinchishoShuhenShojo().getChkNinchishoShuhenShojoUmu();
+    public RadioButton getRadNinchishoShuhenShojoUmu() {
+        return this.getNinchishoShuhenShojo().getRadNinchishoShuhenShojoUmu();
     }
 
     @JsonIgnore
-    public void  setChkNinchishoShuhenShojoUmu(CheckBoxList chkNinchishoShuhenShojoUmu) {
-        this.getNinchishoShuhenShojo().setChkNinchishoShuhenShojoUmu(chkNinchishoShuhenShojoUmu);
+    public void  setRadNinchishoShuhenShojoUmu(RadioButton radNinchishoShuhenShojoUmu) {
+        this.getNinchishoShuhenShojo().setRadNinchishoShuhenShojoUmu(radNinchishoShuhenShojoUmu);
     }
 
     @JsonIgnore
@@ -288,13 +288,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkSonotaShojo() {
-        return this.getSonotaShojo().getChkSonotaShojo();
+    public RadioButton getRadSonotaShojo() {
+        return this.getSonotaShojo().getRadSonotaShojo();
     }
 
     @JsonIgnore
-    public void  setChkSonotaShojo(CheckBoxList chkSonotaShojo) {
-        this.getSonotaShojo().setChkSonotaShojo(chkSonotaShojo);
+    public void  setRadSonotaShojo(RadioButton radSonotaShojo) {
+        this.getSonotaShojo().setRadSonotaShojo(radSonotaShojo);
     }
 
     @JsonIgnore
@@ -308,13 +308,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkSenmonJushin() {
-        return this.getSonotaShojo().getChkSenmonJushin();
+    public RadioButton getRadSenmonJushin() {
+        return this.getSonotaShojo().getRadSenmonJushin();
     }
 
     @JsonIgnore
-    public void  setChkSenmonJushin(CheckBoxList chkSenmonJushin) {
-        this.getSonotaShojo().setChkSenmonJushin(chkSenmonJushin);
+    public void  setRadSenmonJushin(RadioButton radSenmonJushin) {
+        this.getSonotaShojo().setRadSenmonJushin(radSenmonJushin);
     }
 
     @JsonIgnore
@@ -328,13 +328,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkKikiude() {
-        return this.getKaradaJotai().getChkKikiude();
+    public RadioButton getRadKikiude() {
+        return this.getKaradaJotai().getRadKikiude();
     }
 
     @JsonIgnore
-    public void  setChkKikiude(CheckBoxList chkKikiude) {
-        this.getKaradaJotai().setChkKikiude(chkKikiude);
+    public void  setRadKikiude(RadioButton radKikiude) {
+        this.getKaradaJotai().setRadKikiude(radKikiude);
     }
 
     @JsonIgnore
@@ -348,6 +348,16 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
+    public RadioButton getRadKakoTaijuHenka() {
+        return this.getKaradaJotai().getRadKakoTaijuHenka();
+    }
+
+    @JsonIgnore
+    public void  setRadKakoTaijuHenka(RadioButton radKakoTaijuHenka) {
+        this.getKaradaJotai().setRadKakoTaijuHenka(radKakoTaijuHenka);
+    }
+
+    @JsonIgnore
     public TextBox getTxtTaiju() {
         return this.getKaradaJotai().getTxtTaiju();
     }
@@ -355,16 +365,6 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     @JsonIgnore
     public void  setTxtTaiju(TextBox txtTaiju) {
         this.getKaradaJotai().setTxtTaiju(txtTaiju);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkKakoTaijuHenka() {
-        return this.getKaradaJotai().getChkKakoTaijuHenka();
-    }
-
-    @JsonIgnore
-    public void  setChkKakoTaijuHenka(CheckBoxList chkKakoTaijuHenka) {
-        this.getKaradaJotai().setChkKakoTaijuHenka(chkKakoTaijuHenka);
     }
 
     @JsonIgnore
@@ -418,13 +418,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkMigiJoshiMahiTeido() {
-        return this.getKaradaJotai().getChkMigiJoshiMahiTeido();
+    public RadioButton getRadMigiJoshiMahiTeido() {
+        return this.getKaradaJotai().getRadMigiJoshiMahiTeido();
     }
 
     @JsonIgnore
-    public void  setChkMigiJoshiMahiTeido(CheckBoxList chkMigiJoshiMahiTeido) {
-        this.getKaradaJotai().setChkMigiJoshiMahiTeido(chkMigiJoshiMahiTeido);
+    public void  setRadMigiJoshiMahiTeido(RadioButton radMigiJoshiMahiTeido) {
+        this.getKaradaJotai().setRadMigiJoshiMahiTeido(radMigiJoshiMahiTeido);
     }
 
     @JsonIgnore
@@ -438,13 +438,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkHidariJoshiMahiTeido() {
-        return this.getKaradaJotai().getChkHidariJoshiMahiTeido();
+    public RadioButton getRadHidariJoshiMahiTeido() {
+        return this.getKaradaJotai().getRadHidariJoshiMahiTeido();
     }
 
     @JsonIgnore
-    public void  setChkHidariJoshiMahiTeido(CheckBoxList chkHidariJoshiMahiTeido) {
-        this.getKaradaJotai().setChkHidariJoshiMahiTeido(chkHidariJoshiMahiTeido);
+    public void  setRadHidariJoshiMahiTeido(RadioButton radHidariJoshiMahiTeido) {
+        this.getKaradaJotai().setRadHidariJoshiMahiTeido(radHidariJoshiMahiTeido);
     }
 
     @JsonIgnore
@@ -458,13 +458,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkMigiKashiMahiTeido() {
-        return this.getKaradaJotai().getChkMigiKashiMahiTeido();
+    public RadioButton getRadMigiKashiMahiTeido() {
+        return this.getKaradaJotai().getRadMigiKashiMahiTeido();
     }
 
     @JsonIgnore
-    public void  setChkMigiKashiMahiTeido(CheckBoxList chkMigiKashiMahiTeido) {
-        this.getKaradaJotai().setChkMigiKashiMahiTeido(chkMigiKashiMahiTeido);
+    public void  setRadMigiKashiMahiTeido(RadioButton radMigiKashiMahiTeido) {
+        this.getKaradaJotai().setRadMigiKashiMahiTeido(radMigiKashiMahiTeido);
     }
 
     @JsonIgnore
@@ -478,13 +478,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkHidariKashiMahiTeido() {
-        return this.getKaradaJotai().getChkHidariKashiMahiTeido();
+    public RadioButton getRadHidariKashiMahiTeido() {
+        return this.getKaradaJotai().getRadHidariKashiMahiTeido();
     }
 
     @JsonIgnore
-    public void  setChkHidariKashiMahiTeido(CheckBoxList chkHidariKashiMahiTeido) {
-        this.getKaradaJotai().setChkHidariKashiMahiTeido(chkHidariKashiMahiTeido);
+    public void  setRadHidariKashiMahiTeido(RadioButton radHidariKashiMahiTeido) {
+        this.getKaradaJotai().setRadHidariKashiMahiTeido(radHidariKashiMahiTeido);
     }
 
     @JsonIgnore
@@ -518,13 +518,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getSonotaMahiTeido() {
-        return this.getKaradaJotai().getSonotaMahiTeido();
+    public RadioButton getRadSonotaMahiTeido() {
+        return this.getKaradaJotai().getRadSonotaMahiTeido();
     }
 
     @JsonIgnore
-    public void  setSonotaMahiTeido(CheckBoxList SonotaMahiTeido) {
-        this.getKaradaJotai().setSonotaMahiTeido(SonotaMahiTeido);
+    public void  setRadSonotaMahiTeido(RadioButton radSonotaMahiTeido) {
+        this.getKaradaJotai().setRadSonotaMahiTeido(radSonotaMahiTeido);
     }
 
     @JsonIgnore
@@ -558,13 +558,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkKinryokuTeikaTeido() {
-        return this.getKaradaJotai().getChkKinryokuTeikaTeido();
+    public RadioButton getRadKinryokuTeikaTeido() {
+        return this.getKaradaJotai().getRadKinryokuTeikaTeido();
     }
 
     @JsonIgnore
-    public void  setChkKinryokuTeikaTeido(CheckBoxList chkKinryokuTeikaTeido) {
-        this.getKaradaJotai().setChkKinryokuTeikaTeido(chkKinryokuTeikaTeido);
+    public void  setRadKinryokuTeikaTeido(RadioButton radKinryokuTeikaTeido) {
+        this.getKaradaJotai().setRadKinryokuTeikaTeido(radKinryokuTeikaTeido);
     }
 
     @JsonIgnore
@@ -598,13 +598,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkKansetsuKoshukuTeido() {
-        return this.getKaradaJotai().getChkKansetsuKoshukuTeido();
+    public RadioButton getRadKansetsuKoshukuTeido() {
+        return this.getKaradaJotai().getRadKansetsuKoshukuTeido();
     }
 
     @JsonIgnore
-    public void  setChkKansetsuKoshukuTeido(CheckBoxList chkKansetsuKoshukuTeido) {
-        this.getKaradaJotai().setChkKansetsuKoshukuTeido(chkKansetsuKoshukuTeido);
+    public void  setRadKansetsuKoshukuTeido(RadioButton radKansetsuKoshukuTeido) {
+        this.getKaradaJotai().setRadKansetsuKoshukuTeido(radKansetsuKoshukuTeido);
     }
 
     @JsonIgnore
@@ -638,13 +638,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkKansetsuItamiTeido() {
-        return this.getKaradaJotai().getChkKansetsuItamiTeido();
+    public RadioButton getRadKansetsuItamiTeido() {
+        return this.getKaradaJotai().getRadKansetsuItamiTeido();
     }
 
     @JsonIgnore
-    public void  setChkKansetsuItamiTeido(CheckBoxList chkKansetsuItamiTeido) {
-        this.getKaradaJotai().setChkKansetsuItamiTeido(chkKansetsuItamiTeido);
+    public void  setRadKansetsuItamiTeido(RadioButton radKansetsuItamiTeido) {
+        this.getKaradaJotai().setRadKansetsuItamiTeido(radKansetsuItamiTeido);
     }
 
     @JsonIgnore
@@ -728,13 +728,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkJokusoTeido() {
-        return this.getKaradaJotai().getChkJokusoTeido();
+    public RadioButton getRadJokusoTeido() {
+        return this.getKaradaJotai().getRadJokusoTeido();
     }
 
     @JsonIgnore
-    public void  setChkJokusoTeido(CheckBoxList chkJokusoTeido) {
-        this.getKaradaJotai().setChkJokusoTeido(chkJokusoTeido);
+    public void  setRadJokusoTeido(RadioButton radJokusoTeido) {
+        this.getKaradaJotai().setRadJokusoTeido(radJokusoTeido);
     }
 
     @JsonIgnore
@@ -768,13 +768,13 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkSonotaHifuShikkanTeido() {
-        return this.getKaradaJotai().getChkSonotaHifuShikkanTeido();
+    public RadioButton getRadSonotaHifuShikkanTeido() {
+        return this.getKaradaJotai().getRadSonotaHifuShikkanTeido();
     }
 
     @JsonIgnore
-    public void  setChkSonotaHifuShikkanTeido(CheckBoxList chkSonotaHifuShikkanTeido) {
-        this.getKaradaJotai().setChkSonotaHifuShikkanTeido(chkSonotaHifuShikkanTeido);
+    public void  setRadSonotaHifuShikkanTeido(RadioButton radSonotaHifuShikkanTeido) {
+        this.getKaradaJotai().setRadSonotaHifuShikkanTeido(radSonotaHifuShikkanTeido);
     }
 
     // </editor-fold>
