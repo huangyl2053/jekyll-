@@ -73,6 +73,17 @@ public class GassanKyufujissekiSofuIchiranSource implements IReportSource {
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+
+    @ReportItem(name = "yubinNo")
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode")
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode")
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana")
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode")
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

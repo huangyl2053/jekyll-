@@ -88,6 +88,7 @@ public class KogakuKyufuTaishoList {
             div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setDisabled(true);
             div.getMeisaiGokeiHenshuPanel().getBtnServiceSyurui().setDisabled(true);
         }
+        div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().setDisabled(true);
         ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
         return createResponse(div);
     }
@@ -179,6 +180,8 @@ public class KogakuKyufuTaishoList {
                     && !jigyosha.records().get(0).get事業者名称().isEmpty()) {
                 div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().setValue(
                         jigyosha.records().get(0).get事業者名称().value());
+            } else {
+                div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().clearValue();
             }
         } else {
             div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().clearValue();
@@ -203,6 +206,8 @@ public class KogakuKyufuTaishoList {
             if (kalist.records() != null && !kalist.records().isEmpty()) {
                 div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setValue(
                         kalist.records().get(0).getサービス種類略称());
+            } else {
+                div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().clearValue();
             }
         } else {
             div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().clearValue();

@@ -29,6 +29,8 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
 
     private static final RString SAKUSEI = new RString("作成");
     private static final RString 単独合算 = new RString("単");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
     private final KogakuSogoJigyoServiceHiTaishoshaIchiranEntity 高額総合事業サービス費対象者一覧表;
     private final YMDHMS システム日時;
     private final Association association;
@@ -95,12 +97,14 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
         }
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get識別コード() != null) {
             source.shikibetsuCode = 高額総合事業サービス費対象者一覧表.get識別コード().getColumnValue();
+        } else {
+            source.shikibetsuCode = RString.EMPTY;
         }
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.getサービス提供年月() != null) {
             source.listTaishoshaIchiran_3 = 高額総合事業サービス費対象者一覧表.getサービス提供年月().toDateString();
         }
         付値(source);
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listTaishoshaIchiran_2);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listTaishoshaIchiran_2);
         return source;
     }
 

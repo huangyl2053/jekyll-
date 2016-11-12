@@ -214,6 +214,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         set費用額合計など入力不可();
         set申請者区分DataSource();
         set国保連再送付表示非表示(償還);
+        if (!画面モード_取消.equals(画面モード)) {
+            div.getTabShinseiJyoho().getDdlShinseiTorikesuJiyu().setRequired(false);
+        }
         if (画面モード_登録.equals(画面モード)) {
             登録モード画面初期化(識別コード, 住宅改修費事前申請, 被保険者番号, サービス提供年月, 住宅改修費支給申請, 画面モード, param, 導入形態);
         } else if (画面モード_事前申請.equals(画面モード)) {
@@ -880,15 +883,14 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         List<UzT0007CodeEntity> costlist = CodeMaster.getCode(
                 SubGyomuCode.DBC介護給付, DBCCodeShubetsu.住宅改修費申請取消事由コード.getコード(), FlexibleDate.getNowDate());
         List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
-        torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
+        torikesuJiyu.add(new KeyValueDataSource());
         for (UzT0007CodeEntity list : costlist) {
             KeyValueDataSource dataSource = new KeyValueDataSource(list.getコード().value(), list.getコード略称());
             torikesuJiyu.add(dataSource);
         }
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(
                 torikesuJiyu);
-        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
-                申請取消事由_空);
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedIndex(0);
         if (!RString.isNullOrEmpty(申請取消事由コード)) {
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
                     申請取消事由コード);

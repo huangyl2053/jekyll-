@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -38,7 +38,7 @@ public class IdouTempEntity {
     private UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者;
     private TokuteiNyusyoshaInfoEntity 特定入所者;
     private ShafukugemmenEntity 社福減免;
-    private DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担;
+    private DbT4014RiyoshaFutangakuGengakuEntity 利用者負担;
     private HyojunFutanEntity 標準負担;
     private DbT3114RiyoshaFutanWariaiMeisaiEntity 二割負担;
     private KyotakuEntity 居宅計画;

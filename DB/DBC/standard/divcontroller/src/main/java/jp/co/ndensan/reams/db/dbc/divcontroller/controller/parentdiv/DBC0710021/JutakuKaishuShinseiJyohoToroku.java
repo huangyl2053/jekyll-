@@ -657,6 +657,9 @@ public class JutakuKaishuShinseiJyohoToroku {
         } else {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
+            if (!画面モード_照会.equals(画面モード)) {
+                排他キーRelease(被保険者番号.getColumnValue());
+            }
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .parameter(画面モード_照会);
         }

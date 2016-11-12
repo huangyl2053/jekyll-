@@ -67,6 +67,14 @@
         ORDER BY 事業者."jigyoshaNo" ASC,
         事業者."serviceCode" ASC
     </select>
+    <select resultOrdered="true" resultType="int" id="selectCount" fetchSize="500">
+        SELECT
+        COUNT("DbT3065ShichosonTokubetsuKyufuJigyosha"."jigyoshaNo") AS　件数
+        FROM rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"
+        WHERE
+        rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."jigyoshaNo" = #{入力された事業者コード}
+        AND rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."logicalDeletedFlag" IS FALSE
+    </select>
 </mapper>
 
 

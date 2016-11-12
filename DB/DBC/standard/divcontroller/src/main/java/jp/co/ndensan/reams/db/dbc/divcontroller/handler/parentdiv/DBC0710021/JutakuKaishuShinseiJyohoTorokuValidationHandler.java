@@ -162,8 +162,6 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD())
                 .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.証明書が未入力,
                         div.getCommHeadPanel().getDdlSyomeisyo())
-                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請取消事由が未入力,
-                        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu())
                 .build();
     }
 
@@ -213,12 +211,6 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                         .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請日が未入力)
                         .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.証明書が入力)
                         .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.証明書が未入力)
-                        .messages());
-            }
-            if (画面モード_取消.equals(画面モード)) {
-                messages.add(ValidateChain.validateStart(div)
-                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.申請取消事由が入力)
-                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請取消事由が未入力)
                         .messages());
             }
             return messages;
@@ -307,7 +299,6 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         給付率が未入力(UrErrorMessages.必須, "給付率"),
         住宅所有者が未入力(UrErrorMessages.必須, "住宅所有者"),
         申請日が未入力(UrErrorMessages.必須, "申請日"),
-        申請取消事由が未入力(UrErrorMessages.必須, "申請取消事由"),
         領収日が未入力(UrErrorMessages.必須, "領収日"),
         証明書が未入力(UrErrorMessages.必須, "証明書"),
         提供着工年月が申請日の年月と一致しない(DbcErrorMessages.年月と不一致, "申請日", "サービス年月"),

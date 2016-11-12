@@ -85,6 +85,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final int COUNT_8 = 8;
     private static final int COUNT_9 = 9;
     private static final int COUNT_10 = 10;
+    private static final int COUNT_25 = 25;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString 星 = new RString("*");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -314,6 +315,9 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         }
         if (エラーあり.equals(異動一時2entity.getエラーフラグ())) {
             return;
+        }
+        if (異動一時2entity.get被保険者氏名カナ().length() > COUNT_25) {
+            異動一時2entity.set被保険者氏名カナ(異動一時2entity.get被保険者氏名カナ().substring(COUNT_0, COUNT_25));
         }
         JukyushaIdoRenrakuhyoCsvEntity csventity = getJukyushaIdoRenrakuhyoCsvEntity(異動一時2entity, 新規Flag);
         entityList.add(csventity);

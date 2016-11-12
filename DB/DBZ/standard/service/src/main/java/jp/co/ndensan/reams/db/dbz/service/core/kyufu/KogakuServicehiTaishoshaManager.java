@@ -86,7 +86,7 @@ public class KogakuServicehiTaishoshaManager {
 
         if (!高額給付根拠.isNullOrEmpty() && 受託あり.equals(config高額)) {
 
-            if (対象者受取年月.compareTo(new FlexibleYearMonth(平成17年10月)) <= 0) {
+            if (new FlexibleYearMonth(平成17年10月).compareTo(対象者受取年月) > 0) {
                 switch (高額給付根拠.substring(0, 高額賦課根拠_参照桁数).toString()) {
                     case "合":
                         同月サービス有無 = true;
@@ -98,7 +98,7 @@ public class KogakuServicehiTaishoshaManager {
                         同月サービス有無 = false;
                         break;
                 }
-            } else if (対象者受取年月.compareTo(new FlexibleYearMonth(平成17年10月)) > 0) {
+            } else if (new FlexibleYearMonth(平成17年10月).compareTo(対象者受取年月) <= 0) {
                 switch (高額給付根拠.substring(0, 2).toString()) {
                     case "合":
                         同月サービス有無 = true;
@@ -113,7 +113,7 @@ public class KogakuServicehiTaishoshaManager {
             }
 
         } else if (受託なし.equals(config高額)) {
-            if (対象者受取年月.compareTo(new FlexibleYearMonth(平成17年10月)) <= 0) {
+            if (new FlexibleYearMonth(平成17年10月).compareTo(対象者受取年月) > 0) {
                 switch (高額給付根拠.substring(0, 高額賦課根拠_参照桁数).toString()) {
                     case "合":
                         同月サービス有無 = true;
@@ -125,7 +125,7 @@ public class KogakuServicehiTaishoshaManager {
                         同月サービス有無 = false;
                         break;
                 }
-            } else if (対象者受取年月.compareTo(new FlexibleYearMonth(平成17年10月)) > 0) {
+            } else if (new FlexibleYearMonth(平成17年10月).compareTo(対象者受取年月) <= 0) {
                 switch (高額給付根拠.substring(0, 2).toString()) {
                     case "合":
                         同月サービス有無 = true;

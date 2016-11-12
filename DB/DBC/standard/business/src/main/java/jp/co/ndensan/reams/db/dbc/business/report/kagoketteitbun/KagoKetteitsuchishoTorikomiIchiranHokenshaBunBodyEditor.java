@@ -64,7 +64,9 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunBodyEditor
         source.listUpper_2 = doパターン54(帳票出力対象.get取扱年月());
         source.listUpper_3 = getColumnValue(帳票出力対象.get事業者番号());
         source.listUpper_4 = getColumnValue(帳票出力対象.get被保険者番号());
-        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listUpper_4);
+        if (!RString.isNullOrEmpty(source.listUpper_4)) {
+            source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listUpper_4);
+        }
         source.listUpper_5 = 帳票出力対象.get被保険者氏名();
         source.listUpper_6 = doパターン54(帳票出力対象.getサービ提供年月());
         source.listUpper_7 = getColumnValue(帳票出力対象.getサービス種類コード());

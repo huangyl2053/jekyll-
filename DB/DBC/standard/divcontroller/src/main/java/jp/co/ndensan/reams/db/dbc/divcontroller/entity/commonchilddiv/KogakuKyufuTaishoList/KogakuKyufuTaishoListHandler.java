@@ -388,8 +388,8 @@ public class KogakuKyufuTaishoListHandler {
                 builder.append(コンマ);
                 builder.append(合);
             }
+            builder.append(コンマ);
             if (div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey().equals(key0)) {
-                builder.append(コンマ);
                 builder.append(老);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
@@ -425,25 +425,23 @@ public class KogakuKyufuTaishoListHandler {
                 builder.append(コンマ);
                 builder.append(合);
             }
+            builder.append(コンマ);
             if (div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey().equals(key0)
                     && !div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().isDisabled()) {
-                builder.append(コンマ);
                 builder.append(老);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().getSelectedKey().equals(key0)
                     && !div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().isDisabled()) {
-                builder.append(コンマ);
                 builder.append(全角_TWO);
             }
             if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key1)
                     && !div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().isDisabled()) {
-                builder.append(コンマ);
                 builder.append(緩１);
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key2)
                     && !div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().isDisabled()) {
-                builder.append(コンマ);
                 builder.append(緩２);
             }
+            builder.append(コンマ);
             if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
                 row.setData9(builder.toRString());
             }
@@ -660,6 +658,7 @@ public class KogakuKyufuTaishoListHandler {
      */
     public void set追加制御() {
         div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().setSelectedKey(ONE_RS);
+        div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().setDisabled(false);
         div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().clearValue();
         div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().clearValue();
         div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().clearValue();

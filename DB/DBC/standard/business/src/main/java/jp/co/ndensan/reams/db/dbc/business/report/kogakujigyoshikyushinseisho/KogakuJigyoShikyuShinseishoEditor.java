@@ -97,13 +97,12 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
                 source.kojinNo = 帳票出力対象データ.getKojinNoChohyo().getColumnValue();
             }
             source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
+            source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
         }
-
         if (システム日付 != null) {
             source.hakkoubi = システム日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-
         source.ninshoshaYakushokuMei = 認証者役職名;
         source.chuiTitle = 定数_注意;
         source.chuibun = 注意文;
@@ -116,7 +115,6 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
         source.shuccho = 定数_出張所;
         source.shisho = 定数_支所;
         source.remban = count;
-        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
         return source;
     }
 

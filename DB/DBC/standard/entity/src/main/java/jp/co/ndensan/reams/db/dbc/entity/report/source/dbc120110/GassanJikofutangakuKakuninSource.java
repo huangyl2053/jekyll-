@@ -73,6 +73,16 @@ public class GassanJikofutangakuKakuninSource implements IReportSource {
     public RString list_12;
     @ReportItem(name = "list_13", length = 13, order = 29)
     public RString list_13;
+    @ReportItem(name = "yubinNo", length = 4, order = 30)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 4, order = 31)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 4, order = 32)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 4, order = 33)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 4, order = 34)
+    public RString shichosonCode;
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
@@ -116,6 +126,11 @@ public class GassanJikofutangakuKakuninSource implements IReportSource {
         list_10,
         list_11,
         list_12,
-        list_13
+        list_13,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
     }
 }

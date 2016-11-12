@@ -124,8 +124,12 @@ public class UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProces
         tempEntity.setNendo(年度_固定);
         tempEntity.setNendoNaiRenban(new RString(年度内連番 + 1).padZeroToLeft(2));
         if (抽出モード_受付日.equals(parameter.get抽出モード()) || 抽出モード_決定日.equals(parameter.get抽出モード())) {
-            tempEntity.setTaishoKaishiYMD(new FlexibleDate(parameter.get抽出条件日付From().toDateString()));
-            tempEntity.setTaishoShuryoYMD(new FlexibleDate(parameter.get抽出条件日付To().toDateString()));
+            if (parameter.get抽出条件日付From() != null) {
+                tempEntity.setTaishoKaishiYMD(new FlexibleDate(parameter.get抽出条件日付From().toDateString()));
+            }
+            if (parameter.get抽出条件日付To() != null) {
+                tempEntity.setTaishoShuryoYMD(new FlexibleDate(parameter.get抽出条件日付To().toDateString()));
+            }
         } else if (抽出モード_決定者受付年月.equals(parameter.get抽出モード())) {
             RString 月初日 = parameter.get決定者受付年月().toDateString().concat(FIRST_DAY);
             RString 月末日 = parameter.get決定者受付年月().toDateString()

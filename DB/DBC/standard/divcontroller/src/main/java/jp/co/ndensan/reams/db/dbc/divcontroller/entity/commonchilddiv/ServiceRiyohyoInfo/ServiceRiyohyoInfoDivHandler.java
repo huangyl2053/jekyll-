@@ -541,8 +541,7 @@ public class ServiceRiyohyoInfoDivHandler {
         List<KyufuJikoSakuseiResult> サービス利用票情報 = jigoSakusei.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号, 利用年月);
         List<dgServiceRiyohyoBeppyoList_Row> rowList = new ArrayList<>();
         if (サービス利用票情報 == null || サービス利用票情報.isEmpty()) {
-            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
-            return;
+            throw new ApplicationException(前月の明細情報エラー.toString());
         }
         int i = 0;
         for (KyufuJikoSakuseiResult result : サービス利用票情報) {
