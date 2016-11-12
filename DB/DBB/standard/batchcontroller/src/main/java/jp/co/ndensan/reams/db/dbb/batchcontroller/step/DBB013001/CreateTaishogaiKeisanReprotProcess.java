@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TokuchoHeijunkaRokuBatchTaishogaiHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranSource;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -112,7 +111,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     private static final RString 時分秒 = new RString("00:00:00");
     private TokuchoHeinjunka8GatsuProcessParameter parameter;
     private IOutputOrder outputOrder;
-    private HokenryoDankaiManager 保険料段階取得;
     private Association 導入団体クラス;
     private CsvListWriter csvWriter;
     private RString eucFilePath;
@@ -158,7 +156,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     @Override
     protected void beforeExecute() {
         count = new OutputParameter<>();
-        保険料段階取得 = new HokenryoDankaiManager();
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200005.getReportId());
     }
@@ -198,9 +195,9 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     protected void usualProcess(TokuchoHeijunkaRokuBatchTaishogaiHachiEntity entity) {
         TokuchoHeijyunkaTaishogaiEntity taishogaiEntity = get特徴平準化計算対象外entity(
                 entity.get対象外データTemp(), entity);
-        RString 算定年額保険料 = taishogaiEntity.get保険料算定段階2() == null ? taishogaiEntity.get保険料算定段階1()
-                : taishogaiEntity.get保険料算定段階2();
-        Decimal 今年度保険料率 = null == 算定年額保険料 ? Decimal.ZERO : new Decimal(算定年額保険料.toString());
+        Decimal 算定年額保険料 = taishogaiEntity.get算定年額保険料2() == null ? taishogaiEntity.get算定年額保険料1()
+                : taishogaiEntity.get算定年額保険料2();
+        Decimal 今年度保険料率 = null == 算定年額保険料 ? Decimal.ZERO : 算定年額保険料;
         int 調整金額 = 調整金額取得(今年度保険料率, parameter.get賦課年度());
         TokuchoHeijunkaRokuBatchTaishogaiIchiran taishogai = new TokuchoHeijunkaRokuBatchTaishogaiIchiran(
                 taishogaiEntity, 今年度保険料率, new Decimal(調整金額));
