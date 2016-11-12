@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -76,6 +77,43 @@ public class DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoDac implements ISavea
                                 eq(shikyuShinseishoSeiriNo, 支給申請書整理番号),
                                 eq(tennyumaeHokenshaNo, 転入前保険者番号),
                                 eq(rirekiNo, 履歴番号))).
+                toObject(DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity.class);
+    }
+
+    /**
+     * 主キーで事業高額合算自己負担額証明書を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 対象年度 対象年度
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 支給申請書整理番号 支給申請書整理番号
+     * @param 転入前保険者番号 転入前保険者番号
+     * @return DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity select最新履歴番号(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 証記載保険者番号,
+            RString 支給申請書整理番号,
+            HokenshaNo 転入前保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(転入前保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("転入前保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoNendo, 対象年度),
+                                eq(shokisaiHokenshaNo, 証記載保険者番号),
+                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号),
+                                eq(tennyumaeHokenshaNo, 転入前保険者番号)
+                        )).
                 toObject(DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity.class);
     }
 
