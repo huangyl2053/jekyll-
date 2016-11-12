@@ -142,7 +142,7 @@ public class ReportOutputJokenhyoProcessCore {
         出力順 = TITLE_出力順.concat(RString.FULL_SPACE);
         List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
         for (ISetSortItem item : 設定項目リスト) {
-            出力順 = 出力順.concat(item.getDB項目名()).concat(より);
+            出力順 = 出力順.concat(item.get項目名()).concat(より);
         }
         出力条件.add(出力順.substring(1, 出力順.length() - 1));
 

@@ -548,13 +548,13 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
     }
     
     private RString setFlexibleDateYMD(FlexibleDate 年月日) {
-        if (null == 年月日) {
+        if (null == 年月日 || 年月日.isEmpty()) {
             return RString.EMPTY;
         }
         RString str年月日 = 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
                                 Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 曜日 = new RString(年月日.getDayOfWeek().getInFullParentheses());
-        return str年月日.concat(new RString("（")).concat(曜日).concat(new RString("）"));
+        return str年月日.concat(曜日);
     }
     
     private RString setDateYMD(RDate 年月日) {
@@ -564,6 +564,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         RString str年月日 = 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
                                 Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 曜日 = new RString(年月日.getDayOfWeek().getInFullParentheses());
-        return str年月日.concat(new RString("（")).concat(曜日).concat(new RString("）"));
+        return str年月日.concat(曜日);
     }
 }
