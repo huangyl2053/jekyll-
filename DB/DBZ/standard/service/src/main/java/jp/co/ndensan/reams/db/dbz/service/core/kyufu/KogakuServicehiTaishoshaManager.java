@@ -82,10 +82,13 @@ public class KogakuServicehiTaishoshaManager {
         if (dbt3055Entity == null) {
             return false;
         }
-
+        FlexibleYearMonth 対象者受取年月 = dbt3055Entity.getTashoshaUketoriYM() == null || dbt3055Entity.getTashoshaUketoriYM().isEmpty()
+                ? new FlexibleYearMonth("000000")
+                : dbt3055Entity.getTashoshaUketoriYM();
+        
         RString 受託区分_高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        return has同月サービス(受託区分_高額, dbt3055Entity.getTashoshaUketoriYM(), 高額給付根拠);
+        return has同月サービス(受託区分_高額, 対象者受取年月, 高額給付根拠);
     }
 
     static boolean has同月サービス(RString 受託区分_高額, FlexibleYearMonth 対象者受取年月, RString 高額給付根拠) {
