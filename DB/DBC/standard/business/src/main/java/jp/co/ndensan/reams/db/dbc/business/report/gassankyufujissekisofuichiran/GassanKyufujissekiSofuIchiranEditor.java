@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.kogakugassan.KogakugassanKyufu
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_KyufuJissekiSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.KogakuGassanKyufuJissekiSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassankyufujissekisofuichiran.GassanKyufujissekiSofuIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -35,6 +37,7 @@ public class GassanKyufujissekiSofuIchiranEditor implements
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final RString 日時作成 = new RString("作成");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private final KogakugassanKyufujissekiDoSofuReportEntity entity;
 
     /**
@@ -76,6 +79,8 @@ public class GassanKyufujissekiSofuIchiranEditor implements
         if (帳票用データ != null) {
             if (帳票用データ.get給付実績_被保険者番号() != null) {
                 source.list_2 = 帳票用データ.get給付実績_被保険者番号().value();
+                source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                        source.list_2);
             }
 
             source.list_3 = 帳票用データ.get宛名名称();
