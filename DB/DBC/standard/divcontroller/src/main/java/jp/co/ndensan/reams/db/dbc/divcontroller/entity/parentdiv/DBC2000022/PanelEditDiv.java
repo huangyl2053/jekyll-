@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class PanelEditDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -239,16 +239,6 @@ public class PanelEditDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnKakutei() {
-        return this.getPanelEditItem().getBtnKakutei();
-    }
-
-    @JsonIgnore
-    public void setBtnKakutei(Button btnKakutei) {
-        this.getPanelEditItem().setBtnKakutei(btnKakutei);
-    }
-
-    @JsonIgnore
     public Button getBtnCancel() {
         return this.getPanelEditItem().getBtnCancel();
     }
@@ -256,6 +246,16 @@ public class PanelEditDiv extends Panel {
     @JsonIgnore
     public void setBtnCancel(Button btnCancel) {
         this.getPanelEditItem().setBtnCancel(btnCancel);
+    }
+
+    @JsonIgnore
+    public Button getBtnKakutei() {
+        return this.getPanelEditItem().getBtnKakutei();
+    }
+
+    @JsonIgnore
+    public void setBtnKakutei(Button btnKakutei) {
+        this.getPanelEditItem().setBtnKakutei(btnKakutei);
     }
 
     // </editor-fold>
