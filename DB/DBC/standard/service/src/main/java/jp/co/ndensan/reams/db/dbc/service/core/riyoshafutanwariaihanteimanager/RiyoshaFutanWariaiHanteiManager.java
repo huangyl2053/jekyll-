@@ -202,6 +202,7 @@ public class RiyoshaFutanWariaiHanteiManager {
                 RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠Temp
                         = new RiyoshaFutanWariaiKonkyoTempEntity();
                 get利用者負担割合根拠Temp(年度, 被保険者番号, 被保険者台帳, 利用者負担割合根拠Temp, 介護所得情報);
+                利用者負担割合根拠Temp.setEdaNo(i + 1);
                 利用者負担割合根拠Tempのマージデータ.add(利用者負担割合根拠Temp);
             }
             set利用者負担割合明細Tempのソート(利用者負担割合明細Tempのマージデータ);
@@ -508,7 +509,6 @@ public class RiyoshaFutanWariaiHanteiManager {
             List<DbV2512KaigoShotokuNewestEntity> 介護所得情報) {
         利用者負担割合根拠Temp.setNendo(年度);
         利用者負担割合根拠Temp.setHihokenshaNo(被保険者番号);
-        利用者負担割合根拠Temp.setEdaNo(Integer.parseInt(被保険者台帳.get枝番().toString()));
         利用者負担割合根拠Temp.setSetaiinHihokenshaNo(被保険者台帳.get被保険者番号());
         if (介護所得情報 != null && !介護所得情報.isEmpty()) {
             利用者負担割合根拠Temp.setSetaiinShotokuRirekiNo(new Decimal(Integer.parseInt(
