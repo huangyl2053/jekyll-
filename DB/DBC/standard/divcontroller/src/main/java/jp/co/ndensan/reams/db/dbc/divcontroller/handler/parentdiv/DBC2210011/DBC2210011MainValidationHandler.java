@@ -97,10 +97,10 @@ public class DBC2210011MainValidationHandler {
             div.set事業者情報件数(情報存在);
         }
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(DBC2210011MainDivSpec.特別給付サービス重複チェック)
-                .thenAdd(NoInputMessages.特別給付サービス重複チェック).messages());
+        messages.add(ValidateChain.validateStart(div).ifNot(DBC2210011MainDivSpec.事業者コード重複チェック)
+                .thenAdd(NoInputMessages.事業者コード重複チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.特別給付サービス重複チェック)
+                NoInputMessages.事業者コード重複チェック)
                 .build().check(messages));
         return pairs;
     }
