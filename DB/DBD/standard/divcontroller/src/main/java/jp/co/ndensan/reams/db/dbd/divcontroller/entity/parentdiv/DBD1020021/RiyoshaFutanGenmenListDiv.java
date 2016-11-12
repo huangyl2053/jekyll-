@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class RiyoshaFutanGenmenListDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -75,22 +75,22 @@ public class RiyoshaFutanGenmenListDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKijunYMD() {
+    public TextBoxDate getTxtKijunYMD() {
         return this.getBatchParameter().getTxtKijunYMD();
     }
 
     @JsonIgnore
-    public void  setTxtKijunYMD(TextBoxFlexibleDate txtKijunYMD) {
+    public void  setTxtKijunYMD(TextBoxDate txtKijunYMD) {
         this.getBatchParameter().setTxtKijunYMD(txtKijunYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShotokuNendo() {
+    public TextBoxDate getTxtShotokuNendo() {
         return this.getBatchParameter().getTxtShotokuNendo();
     }
 
     @JsonIgnore
-    public void  setTxtShotokuNendo(TextBoxFlexibleDate txtShotokuNendo) {
+    public void  setTxtShotokuNendo(TextBoxDate txtShotokuNendo) {
         this.getBatchParameter().setTxtShotokuNendo(txtShotokuNendo);
     }
 
