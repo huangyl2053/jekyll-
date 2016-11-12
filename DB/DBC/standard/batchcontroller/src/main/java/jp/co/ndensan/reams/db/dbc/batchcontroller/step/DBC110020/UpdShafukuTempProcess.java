@@ -121,8 +121,9 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     private RString 社福減免全項目(ShafukugemmenEntity 社福減免) {
         RString 全項目 = RString.EMPTY;
-        全項目 = 全項目.concat(社福減免.get適用開始日().toString()).concat(SPLIT)
-                .concat(社福減免.get適用終了日().toString()).concat(SPLIT)
+        全項目 = cancatYMD(社福減免.get適用開始日(), 全項目);
+        全項目 = cancatYMD(社福減免.get適用終了日(), 全項目);
+        全項目 = 全項目
                 .concat(社福減免.get減免_減額種類()).concat(SPLIT)
                 .concat(社福減免.get軽減率());
         return 全項目;
@@ -133,5 +134,12 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
             return true;
         }
         return false;
+    }
+
+    private RString cancatYMD(FlexibleDate date, RString 全項目) {
+        if (date != null) {
+            return 全項目.concat(new RString(date.toString())).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
     }
 }

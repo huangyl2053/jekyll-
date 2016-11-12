@@ -134,16 +134,17 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
                 .concat(new RString(利用者負担.getRirekiNo())).concat(SPLIT)
                 .concat(利用者負担.getInsertDantaiCd()).concat(SPLIT)
                 .concat(利用者負担.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT);
-        全項目 = 全項目.concat(利用者負担.getKetteiKubun()).concat(SPLIT)
-                .concat(利用者負担.getHiShoninRiyu()).concat(SPLIT)
-                .concat(利用者負担.getShogaishaTechoUmu() ? RST_TRUE : RST_FALSE).concat(SPLIT)
-                .concat(利用者負担.getShogaishaTechoTokyu()).concat(SPLIT)
-                .concat(利用者負担.getShogaishaTechoNo()).concat(SPLIT);
+        全項目 = cancatRString(利用者負担.getKetteiKubun(), 全項目);
+        全項目 = cancatRString(利用者負担.getHiShoninRiyu(), 全項目);
+        全項目 = 全項目
+                .concat(利用者負担.getShogaishaTechoUmu() ? RST_TRUE : RST_FALSE).concat(SPLIT);
+        全項目 = cancatRString(利用者負担.getShogaishaTechoTokyu(), 全項目);
+        全項目 = cancatRString(利用者負担.getShogaishaTechoNo(), 全項目);
         全項目 = cancatYMD(利用者負担.getShogaishaTechoKofuYMD(), 全項目);
-        全項目 = 全項目.concat(利用者負担.getShinseiJiyu()).concat(SPLIT);
+        全項目 = cancatRString(利用者負担.getShinseiJiyu(), 全項目);
         全項目 = cancatHokenKyufuRitsu(利用者負担.getKyufuritsu(), 全項目);
-        全項目 = 全項目.concat(利用者負担.getKohiFutanshaNo()).concat(SPLIT)
-                .concat(利用者負担.getKohiJukyushaNo()).concat(SPLIT);
+        全項目 = cancatRString(利用者負担.getKohiFutanshaNo(), 全項目);
+        全項目 = cancatRString(利用者負担.getShinseiJiyu(), 全項目);
         return 全項目;
     }
 
@@ -166,5 +167,12 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
             return true;
         }
         return false;
+    }
+
+    private RString cancatRString(RString 項目, RString 全項目) {
+        if (!RString.isNullOrEmpty(項目)) {
+            return 全項目.concat(項目.toString()).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
     }
 }
