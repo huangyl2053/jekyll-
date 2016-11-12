@@ -126,7 +126,7 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
             editThree(source);
             editFour(source);
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list_1);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.list_1));
         return source;
     }
 
@@ -177,6 +177,13 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         source.choikiCode = 高額合算自己負担額計算結果一覧表.getChoikiCode();
         source.gyoseikuCode = 高額合算自己負担額計算結果一覧表.getGyoseikuCode();
         source.hokenshaNo = 高額合算自己負担額計算結果一覧表.getHokenshaNo();
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }

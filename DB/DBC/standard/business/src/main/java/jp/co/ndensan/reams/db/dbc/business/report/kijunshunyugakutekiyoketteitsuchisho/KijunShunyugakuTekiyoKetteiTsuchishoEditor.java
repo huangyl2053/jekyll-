@@ -131,12 +131,12 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.shikibetsuCode3 = 基準収入額適用決定通知書パラメータ.get識別コード３().value();
         }
         set帳票制御共通(source);
-        source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo1);
-        source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.hihokenshaName1);
-        source.拡張情報B1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo2);
-        source.拡張情報B2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.hihokenshaName2);
-        source.拡張情報C1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo3);
-        source.拡張情報C2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.hihokenshaName3);
+        source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo1));
+        source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName1));
+        source.拡張情報B1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo2));
+        source.拡張情報B2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName2));
+        source.拡張情報C1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo3));
+        source.拡張情報C2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName3));
         return source;
     }
 
@@ -182,5 +182,12 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.shinseiYMD = 基準収入額適用決定通知書パラメータ.get申請年月日().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         }
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

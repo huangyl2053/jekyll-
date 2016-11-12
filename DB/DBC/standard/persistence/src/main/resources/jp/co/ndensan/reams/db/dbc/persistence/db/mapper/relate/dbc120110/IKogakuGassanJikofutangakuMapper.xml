@@ -375,6 +375,11 @@
         <result property="自己負担額合計_うち70_74歳" column="dbWT37H1_gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="高額介護サービス費" column="dbWT37H1_gokei_Under70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="被保険者_郵便番号" column="dbWT0001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_町域コード" column="dbWT0001_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_行政区コード" column="dbWT0001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_氏名50音カナ" column="dbWT0001_shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者_市町村コード" column="dbWT0001_oldShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <sql id="allColumns_kogakuGassanJikofutangakuKakun">
@@ -394,7 +399,12 @@
         DbWT37H1."gokei_JikoFutanGaku" AS dbWT37H1_gokei_JikoFutanGaku,
         DbWT37H1."gokei_70_74JikoFutanGaku" AS dbWT37H1_gokei_70_74JikoFutanGaku,
         DbWT37H1."gokei_Under70KogakuShikyuGaku" AS dbWT37H1_gokei_Under70KogakuShikyuGaku,
-        DbWT0001."shikibetsuCode" As dbWT0001_shikibetsuCode
+        DbWT0001."shikibetsuCode" As dbWT0001_shikibetsuCode,
+        DbWT0001."yubinNo" As dbWT0001_yubinNo,
+        DbWT0001."choikiCode" As dbWT0001_choikiCode,
+        DbWT0001."gyoseikuCode" As dbWT0001_gyoseikuCode,
+        DbWT0001."shimei50onKana" As dbWT0001_shimei50onKana,
+        DbWT0001."oldShichosonCode" As dbWT0001_oldShichosonCode
     </sql>
     
     <sql id="allColumns_DbT3070">

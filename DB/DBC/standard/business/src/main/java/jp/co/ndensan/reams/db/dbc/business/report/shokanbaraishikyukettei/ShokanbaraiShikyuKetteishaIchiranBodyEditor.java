@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyukettei;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036ShokanHanteiKekkaTempEntity;
@@ -112,7 +113,8 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
         if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
             source.shikibetuCode = new ShikibetsuCode(被保険者.get識別コード());
         }
-        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_2);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listUpper_2));
         return source;
     }
 

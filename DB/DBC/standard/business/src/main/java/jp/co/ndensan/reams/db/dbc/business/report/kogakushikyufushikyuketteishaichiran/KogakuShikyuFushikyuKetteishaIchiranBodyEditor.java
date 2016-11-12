@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3511KogakuShikyuShinsaKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
@@ -88,7 +89,10 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
         if (null != 被保険者.get登録被保険者番号()) {
             source.listLower_1 = 被保険者.get登録被保険者番号().getColumnValue();
         }
-        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listLower_1);
+        if (!RString.isNullOrEmpty(source.listLower_1)) {
+            source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号,
+                    ReportKomokuEditorUtil.get非空文字列(source.listLower_1));
+        }
         if (null != 被保険者.get宛名名称()) {
             source.listLower_2 = 被保険者.get宛名名称().substringReturnAsPossible(0, 文字22);
         }

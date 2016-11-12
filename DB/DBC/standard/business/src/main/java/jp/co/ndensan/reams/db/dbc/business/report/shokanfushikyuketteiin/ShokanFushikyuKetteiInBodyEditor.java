@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin.ShokanbaraiFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
@@ -103,7 +104,8 @@ public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiIn
         } else {
             source.shikibetuCode = ShikibetsuCode.EMPTY;
         }
-        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_2);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listUpper_2));
         return source;
     }
 

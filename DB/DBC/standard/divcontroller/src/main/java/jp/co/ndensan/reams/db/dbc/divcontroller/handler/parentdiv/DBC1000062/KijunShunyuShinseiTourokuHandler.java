@@ -804,6 +804,9 @@ public class KijunShunyuShinseiTourokuHandler {
     private boolean is非課税(List<SetaiinShotoku> 世帯員所得List) {
         RString 非課税 = KazeiKubun.非課税.getコード();
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
+            if (世帯員所得.get課税区分_住民税減免後().isNullOrEmpty()) {
+                continue;
+            }
             if (!非課税.equals(世帯員所得.get課税区分_住民税減免後())) {
                 return false;
             }

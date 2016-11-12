@@ -185,6 +185,26 @@
         <result property="fukaShichosonCode" column="dbT2002Fuka_fukaShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="tkSaishutsuKampuGaku" column="dbT2002Fuka_tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuSaishutsuKampuGaku" column="dbT2002Fuka_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku01" column="fuchoChoteigaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku02" column="fuchoChoteigaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku03" column="fuchoChoteigaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku04" column="fuchoChoteigaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku05" column="fuchoChoteigaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku06" column="fuchoChoteigaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku07" column="fuchoChoteigaku07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku08" column="fuchoChoteigaku08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku09" column="fuchoChoteigaku09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku10" column="fuchoChoteigaku10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku11" column="fuchoChoteigaku11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku12" column="fuchoChoteigaku12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku13" column="fuchoChoteigaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuKibetsuGaku14" column="fuchoChoteigaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku01" column="tokubetsuChoteigaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku02" column="tokubetsuChoteigaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku03" column="tokubetsuChoteigaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku04" column="tokubetsuChoteigaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku05" column="tokubetsuChoteigaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tkKibetsuGaku06" column="tokubetsuChoteigaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
     <resultMap id="resultMap_HenjunkaMaeInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity" autoMapping="true">
@@ -540,6 +560,7 @@
         rgdb."DbT7022ShoriDateKanri"
         SET
         "lastUpdateTimestamp" = #{システーム日時},
+        "kijunTimestamp" = #{調定日時},
         "updateCount" = "updateCount" + 1
         WHERE 1=1
         AND "subGyomuCode" = 'DBB'

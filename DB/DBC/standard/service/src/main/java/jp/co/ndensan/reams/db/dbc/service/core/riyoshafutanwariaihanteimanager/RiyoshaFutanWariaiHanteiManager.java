@@ -79,7 +79,7 @@ public class RiyoshaFutanWariaiHanteiManager {
     private static final RString FIVE = new RString("5");
     private static final int INDEX_ZERO = 0;
     private static final int LIST_SIZE_ONE = 1;
-    private static final int NUM_ONE = 2;
+    private static final int 履歴番号_ONE = 1;
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
     private static final int NUM_EIGHT = 8;
@@ -196,9 +196,8 @@ public class RiyoshaFutanWariaiHanteiManager {
                 int 世帯１号被保険者数 = get世帯１号被保険者数(世帯員識別コード情報list);
                 RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp = new RiyoshaFutanWariaiMeisaiTempEntity();
                 get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報,
-                        get世帯code(世帯員識別コード情報), 世帯１号被保険者数, 基準日,
+                        get世帯code(世帯員識別コード情報), 世帯１号被保険者数,
                         生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
-                利用者負担割合明細Temp.setEdaNo(i + 1);
                 利用者負担割合明細Tempのマージデータ.add(利用者負担割合明細Temp);
                 RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠Temp
                         = new RiyoshaFutanWariaiKonkyoTempEntity();
@@ -401,6 +400,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             HihokenshaNo 被保険者番号,
             List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報) {
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細list = new ArrayList<>();
+        int 枝番号 = 1;
         for (RiyoshaFutanWariaiMeisaiTempEntity entity : 利用者負担割合明細情報) {
             DbT3114RiyoshaFutanWariaiMeisaiEntity 利用者負担割合明細entity = new DbT3114RiyoshaFutanWariaiMeisaiEntity();
             利用者負担割合明細entity.setNendo(年度);
@@ -409,8 +409,10 @@ public class RiyoshaFutanWariaiHanteiManager {
                     select履歴番号BY年度と被保険者番号(年度, 被保険者番号);
             if (list != null && !list.isEmpty()) {
                 利用者負担割合明細entity.setRirekiNo(list.get(0).getRirekiNo());
-                利用者負担割合明細entity.setEdaNo(list.get(0).getEdaNo());
+            } else {
+                利用者負担割合明細entity.setRirekiNo(履歴番号_ONE);
             }
+            利用者負担割合明細entity.setEdaNo(枝番号);
             利用者負担割合明細entity.setShikakuKubun(entity.getShikakuKubun());
             利用者負担割合明細entity.setFutanWariaiKubun(entity.getFutanWariaiKubun());
             利用者負担割合明細entity.setYukoKaishiYMD(entity.getYukoKaishiYMD());
@@ -424,6 +426,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             利用者負担割合明細entity.setSetaiCd(entity.getSetaiCd());
             利用者負担割合明細entity.setLogicalDeletedFlag(false);
             利用者負担割合明細list.add(利用者負担割合明細entity);
+            枝番号++;
         }
         return 利用者負担割合明細list;
     }
@@ -433,6 +436,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             HihokenshaNo 被保険者番号,
             List<RiyoshaFutanWariaiKonkyoTempEntity> 利用者負担割合根拠情報) {
         List<DbT3115RiyoshaFutanWariaiKonkyoEntity> 利用者負担割合根拠list = new ArrayList<>();
+        int 枝番号 = 1;
         for (RiyoshaFutanWariaiKonkyoTempEntity entity : 利用者負担割合根拠情報) {
             DbT3115RiyoshaFutanWariaiKonkyoEntity 利用者負担割合根拠entity = new DbT3115RiyoshaFutanWariaiKonkyoEntity();
             利用者負担割合根拠entity.setNendo(年度);
@@ -440,11 +444,14 @@ public class RiyoshaFutanWariaiHanteiManager {
             DbT3115RiyoshaFutanWariaiKonkyoEntity result = 利用者負担割合根拠Dac.select履歴番号(年度, 被保険者番号);
             if (result != null) {
                 利用者負担割合根拠entity.setRirekiNo(result.getRirekiNo());
-                利用者負担割合根拠entity.setEdaNo(result.getEdaNo());
+            } else {
+                利用者負担割合根拠entity.setRirekiNo(履歴番号_ONE);
             }
+            利用者負担割合根拠entity.setEdaNo(枝番号);
             利用者負担割合根拠entity.setSetaiinHihokenshaNo(entity.getSetaiinHihokenshaNo());
             利用者負担割合根拠entity.setSetaiinShotokuRirekiNo(entity.getSetaiinShotokuRirekiNo());
             利用者負担割合根拠list.add(利用者負担割合根拠entity);
+            枝番号++;
         }
         return 利用者負担割合根拠list;
     }
@@ -460,7 +467,7 @@ public class RiyoshaFutanWariaiHanteiManager {
         if (entity != null) {
             利用者負担割合entity.setRirekiNo(entity.getRirekiNo());
         } else {
-            利用者負担割合entity.setRirekiNo(NUM_ONE);
+            利用者負担割合entity.setRirekiNo(履歴番号_ONE);
         }
         利用者負担割合entity.setHakoFuyoFlag(false);
         利用者負担割合entity.setShokenFlag(false);
@@ -517,11 +524,11 @@ public class RiyoshaFutanWariaiHanteiManager {
             List<DbV2512KaigoShotokuNewestEntity> 介護所得情報list,
             SetaiCode 世帯コード,
             int 世帯１号被保険者数,
-            FlexibleDate 基準日,
             SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp,
             HanteiTaishoshaTempEntity 判定対象者Temp,
             RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp) {
         利用者負担割合明細Temp.setHihokenshaNo(被保険者番号);
+        利用者負担割合明細Temp.setEdaNo(Integer.parseInt(被保険者台帳.get枝番().toString()));
         if (!RString.isNullOrEmpty(被保険者台帳.get被保険者区分コード())) {
             利用者負担割合明細Temp.setShikakuKubun(被保険者台帳.get被保険者区分コード().padZeroToLeft(1));
         }

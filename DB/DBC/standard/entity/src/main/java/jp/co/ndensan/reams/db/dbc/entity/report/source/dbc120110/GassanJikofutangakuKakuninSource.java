@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.dbc120110;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -24,7 +25,6 @@ public class GassanJikofutangakuKakuninSource implements IReportSource {
     public RString hokenshaName;
     @ReportItem(name = "shoKisaiHokenshaName", length = 20, order = 5)
     public RString shoKisaiHokenshaName;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "shoKisaiHokenshaNo", length = 8, order = 6)
     public RString shoKisaiHokenshaNo;
     @ReportItem(name = "shutsuryokujun1", length = 20, order = 7)
@@ -73,9 +73,21 @@ public class GassanJikofutangakuKakuninSource implements IReportSource {
     public RString list_12;
     @ReportItem(name = "list_13", length = 13, order = 29)
     public RString list_13;
+    @ReportItem(name = "yubinNo", length = 4, order = 30)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 4, order = 31)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 4, order = 32)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 4, order = 33)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 4, order = 34)
+    public RString shichosonCode;
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation expandedInformation;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -116,6 +128,11 @@ public class GassanJikofutangakuKakuninSource implements IReportSource {
         list_10,
         list_11,
         list_12,
-        list_13
+        list_13,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
     }
 }

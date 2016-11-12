@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanjigyobunkekkaichiran.Ga
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanjigyobunkekkaichiran.GassanJigyobunKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -100,6 +102,8 @@ public class GassanJigyobunKekkaIchiranEditor implements
         } else {
             if (帳票用データ.get支給額_被保険者番号() != null) {
                 source.List1_1 = 帳票用データ.get支給額_被保険者番号().value();
+                source.expandedInformation = new ExpandedInformation(Code.EMPTY, RString.EMPTY,
+                        source.List1_1);
             }
 
             if (帳票用データ.get件数() > INDEX_0) {

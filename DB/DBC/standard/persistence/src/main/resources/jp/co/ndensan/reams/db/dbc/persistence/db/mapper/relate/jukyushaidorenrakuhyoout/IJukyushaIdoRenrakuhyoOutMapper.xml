@@ -220,6 +220,10 @@
     </resultMap>
     <select id="select社福減免" resultMap="resultMap_社福減免" 
             fetchSize="500" resultOrdered="true">
+        SELECT A.*,
+         <include refid="allColumns_IdouTemp" />,
+         "TEMPCOUNT1"."HIHOCOUNT" AS "idouTemp_被保険者番号Max連番"
+        FROM (
         SELECT 
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shoKisaiHokenshaNo" AS "証記載保険者番号",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" AS "被保険者番号",
@@ -227,16 +231,16 @@
          '04' AS "減免_減額種類",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" AS "適用開始日",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD" AS "適用終了日",
+         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" AS "ketteiKubun",
          (CASE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo"
          WHEN 0 THEN '0'
          ELSE trim(to_char("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi",'999'))||
          '/'||trim(to_char("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo", '999')) END)
-         AS "軽減率",
-         <include refid="allColumns_IdouTemp" />,
-         "TEMPCOUNT1"."HIHOCOUNT" AS "idouTemp_被保険者番号Max連番"
+         AS "軽減率"
         FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+        ) A  
         INNER JOIN  "IdouTemp"
-        ON "IdouTemp"."被保険者番号" = "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo"
+        ON "IdouTemp"."被保険者番号" = A."被保険者番号"
         INNER JOIN (
             SELECT
                 "被保険者番号",
@@ -247,11 +251,8 @@
                 "TEMPINFO"."被保険者番号"
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" = '1'
-         AND (CASE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo"
-         WHEN 0 THEN '0'
-         ELSE trim(to_char("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi",'999'))||
-         '/'||trim(to_char("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo", '999')) END) <![CDATA[<>]]> '100'
+        WHERE A."ketteiKubun" = '1' AND
+         A."軽減率" <![CDATA[<>]]> '100'
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_社福減免" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -266,12 +267,12 @@
     <select id="select利用者負担" resultMap="resultMap_利用者負担" 
             fetchSize="500" resultOrdered="true">
         SELECT 
-         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.allColumns_DbT4016HomonKaigoRiyoshaFutangakuGengaku"/>,
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku"/>,
          <include refid="allColumns_IdouTemp" />,
          "TEMPCOUNT1"."HIHOCOUNT" AS "idouTemp_被保険者番号Max連番"
-        FROM rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku" AS "DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+        FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS "DbT4014RiyoshaFutangakuGengaku"
         INNER JOIN  "IdouTemp"
-        ON "IdouTemp"."被保険者番号" = "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."hihokenshaNo"
+        ON "IdouTemp"."被保険者番号" = "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo"
         INNER JOIN (
             SELECT
                 "被保険者番号",
@@ -282,16 +283,16 @@
                 "TEMPINFO"."被保険者番号"
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiKubun" <![CDATA[<>]]> '2'
+        WHERE "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" <![CDATA[<>]]> '2'
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_利用者負担" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
         <id column="idouTemp_被保険者番号"/>
         <id column="idouTemp_連番"/>
-        <id column="dbT4016HomonKaigoRiyoshaFutangakuGengaku_shoKisaiHokenshaNo"/>
-        <id column="dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo"/>
-        <id column="dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo"/>
-        <association property="利用者負担" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.ResultMap_DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity"/>
+        <id column="dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo"/>
+        <id column="dbT4014RiyoshaFutangakuGengaku_hihokenshaNo"/>
+        <id column="dbT4014RiyoshaFutangakuGengaku_rirekiNo"/>
+        <association property="利用者負担" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
     </resultMap>
     <select id="select標準負担" resultMap="resultMap_標準負担" 
@@ -366,7 +367,7 @@
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT3114RiyoshaFutanWariaiMeisai" . "rirekiNo" IN 
              (SELECT MAX(A . "rirekiNo") FROM rgdb. "DbT3114RiyoshaFutanWariaiMeisai" AS A 
-                  WHERE A."hihokenshaNo" = "IdouTemp"."被保険者番号" GROUP BY A . "nendo"
+                  WHERE A."hihokenshaNo" = "IdouTemp"."被保険者番号"  AND  A."isDeleted" = FALSE GROUP BY A . "nendo"
              )
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
@@ -415,7 +416,7 @@
             A2."rirekiNo" AS "履歴番号",
             A2."todokedeYMD" AS "届出年月日"
         FROM rgdb."DbT3005KyotakuKeikakuTodokede" A2
-            INNER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" C1
+            INNER JOIN rgdb."DbT3007KyotakuKeikakuJikoSakusei" C1
             ON A2."hihokenshaNo" = C1."hihokenshaNo" AND A2."rirekiNo" = C1."rirekiNo") AS 居宅計画
         INNER JOIN  "IdouTemp"
         ON "IdouTemp"."被保険者番号" = 居宅計画."被保険者番号"

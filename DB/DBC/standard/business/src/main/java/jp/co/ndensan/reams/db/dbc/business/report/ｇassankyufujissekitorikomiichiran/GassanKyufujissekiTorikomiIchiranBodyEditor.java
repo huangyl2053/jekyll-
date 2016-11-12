@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.ｇassankyufujissekitorikomiichiran;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_KyufuJissekiSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassankyufujissekitorikomiichiran.GassanKyufujissekiTorikomiIchiranSource;
@@ -73,7 +74,8 @@ public class GassanKyufujissekiTorikomiIchiranBodyEditor implements IGassanKyufu
         source.shimei50onKana = target.get被保険者一時().get氏名50音カナ();
         source.shikyuShinseishoSeiriNo = target.get高額合算給付実績一時().getShikyuShinseishoSeiriNo();
         source.shikibetsuCode = target.get被保険者一時().get識別コード();
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list_2);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                ReportKomokuEditorUtil.get非空文字列(source.list_2));
         return source;
     }
 

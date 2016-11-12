@@ -451,9 +451,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 || 計画照会モード.equals(div.getMode())) {
             return false;
         }
-        FlexibleDate 届出年月日now = div.getTxtTodokedeYM().getValue() == null ? null : new FlexibleDate(div.getTxtTodokedeYM().getValue().toDateString());
+        FlexibleDate 届出年月日now = div.getTxtTodokedeYM().getValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTxtTodokedeYM().getValue().toDateString());
         boolean is居宅給付計画届出が変更
-                = !Objects.equals(居宅給付計画届出.get届出年月日(), 届出年月日now)
+                = !Objects.equals(居宅給付計画届出.get届出年月日() == null ? FlexibleDate.EMPTY : 居宅給付計画届出.get届出年月日(), 届出年月日now)
                 || !Objects.equals(居宅給付計画届出.get届出者氏名(), div.getTxtTodokedeshaShimei().getDomain())
                 || !Objects.equals(居宅給付計画届出.get届出者氏名カナ(), div.getTxtTodokedeshaShimeiKana().getDomain())
                 || !Objects.equals(居宅給付計画届出.get届出者郵便番号(), div.getTxtTodokedeshaYubinNo().getValue())
@@ -469,45 +470,48 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         return is居宅給付計画届出が変更;
     }
 
-    private boolean is自己作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) throws IllegalArgumentException {
+    private boolean is自己作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) {
         KyotakuKeikakuJikoSakuseiIdentifier identifier = new KyotakuKeikakuJikoSakuseiIdentifier(
                 居宅給付計画届出.get被保険者番号(), 居宅給付計画届出.get対象年月(), 居宅給付計画届出.get履歴番号());
         KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = 居宅給付計画届出.getKyotakuKeikakuJikoSakusei(identifier);
         RString 居宅_総合事業区分now = KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey()) ? 居宅 : 総合事業;
-        FlexibleDate 適用開始年月日now = div.getTxtKeikakuTekiyoStartYMD().getValue() == null ? null
+        FlexibleDate 適用開始年月日now = div.getTxtKeikakuTekiyoStartYMD().getValue() == null ? FlexibleDate.EMPTY
                 : new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString());
-        FlexibleDate 適用終了年月日now = div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? null
+        FlexibleDate 適用終了年月日now = div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? FlexibleDate.EMPTY
                 : new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString());
         boolean is居宅給付計画自己作成が変更
                 = !居宅_総合事業区分now.equals(居宅給付計画自己作成.get居宅_総合事業区分())
                 || !Objects.equals(適用開始年月日now, 居宅給付計画自己作成.get適用開始年月日())
-                || !Objects.equals(適用終了年月日now, 居宅給付計画自己作成.get適用終了年月日())
+                || !Objects.equals(適用終了年月日now, 居宅給付計画自己作成.get適用終了年月日() == null
+                        ? FlexibleDate.EMPTY : 居宅給付計画自己作成.get適用終了年月日())
                 || !Objects.equals(div.getRadKeikakuSakuseiKubun().getSelectedKey(), 居宅給付計画自己作成.get作成区分コード());
         return is居宅給付計画届出が変更 || is居宅給付計画自己作成が変更;
     }
 
-    private boolean is事業者作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) throws IllegalArgumentException {
+    private boolean is事業者作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) {
         KyotakuKeikakuJigyoshaSakuseiIdentifier identifier = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
                 居宅給付計画届出.get被保険者番号(), 居宅給付計画届出.get対象年月(), 居宅給付計画届出.get履歴番号());
         KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成
                 = 居宅給付計画届出.getKyotakuKeikakuJigyoshaSakusei(identifier);
         RString 作成区分コードold = 居宅給付計画事業者作成.get作成区分コード() == null ? RString.EMPTY : 居宅給付計画事業者作成.get作成区分コード();
-        FlexibleDate 適用開始年月日now = div.getTxtKeikakuTekiyoStartYMD().getValue() == null ? null
+        FlexibleDate 適用開始年月日now = div.getTxtKeikakuTekiyoStartYMD().getValue() == null ? FlexibleDate.EMPTY
                 : new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString());
-        FlexibleDate 適用終了年月日now = div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? null
+        FlexibleDate 適用終了年月日now = div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? FlexibleDate.EMPTY
                 : new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString());
         RString 計画事業者番号old = 居宅給付計画事業者作成.get計画事業者番号() == null ? RString.EMPTY : 居宅給付計画事業者作成.get計画事業者番号().value();
         RString 委託先事業者番号old = 居宅給付計画事業者作成.get委託先事業者番号() == null ? RString.EMPTY : 居宅給付計画事業者作成.get委託先事業者番号().value();
-        FlexibleDate 事業者変更年月日now = div.getTxtJigyoshaHenkoYMD().getValue() == null ? null : new FlexibleDate(div.getTxtJigyoshaHenkoYMD().getValue().toDateString());
+        FlexibleDate 事業者変更年月日now = div.getTxtJigyoshaHenkoYMD().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtJigyoshaHenkoYMD().getValue().toDateString());
         RString 事業者変更事由old = 居宅給付計画事業者作成.get事業者変更事由() == null ? RString.EMPTY : 居宅給付計画事業者作成.get事業者変更事由();
         RString サービス種類コードold = 居宅給付計画事業者作成.getサービス種類コード() == null ? RString.EMPTY : 居宅給付計画事業者作成.getサービス種類コード().value();
         boolean is居宅給付計画事業者作成が変更
                 = !Objects.equals(居宅給付計画事業者作成.get適用開始年月日(), 適用開始年月日now)
-                || !Objects.equals(居宅給付計画事業者作成.get適用終了年月日(), 適用終了年月日now)
+                || !Objects.equals(居宅給付計画事業者作成.get適用終了年月日() == null ? FlexibleDate.EMPTY
+                        : 居宅給付計画事業者作成.get適用終了年月日(), 適用終了年月日now)
                 || !作成区分コードold.equals(div.getRadKeikakuSakuseiKubun().getSelectedKey())
                 || !計画事業者番号old.equals(div.getTxtJigyoshaNo().getValue())
                 || !委託先事業者番号old.equals(div.getTxtItakusakiJigyoshaNo().getValue())
-                || !Objects.equals(居宅給付計画事業者作成.get事業者変更年月日(), 事業者変更年月日now)
+                || !Objects.equals(居宅給付計画事業者作成.get事業者変更年月日() == null ? FlexibleDate.EMPTY
+                        : 居宅給付計画事業者作成.get事業者変更年月日(), 事業者変更年月日now)
                 || !事業者変更事由old.equals(div.getTxtJigyoshaHenkoJiyu().getValue())
                 || !サービス種類コードold.equals(div.getRadServiceShurui().getSelectedKey());
         return is居宅給付計画届出が変更 || is居宅給付計画事業者作成が変更;

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharai
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity;
@@ -195,7 +196,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         set通知文上段Small_2(source);
         set通知文下段Large_2(source);
         set雛形部品CompNinshosha(source);
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                ReportKomokuEditorUtil.get非空文字列(source.hihokenshaNo));
         return source;
     }
 
@@ -340,7 +342,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
             }
         }
         if (ShiharaiHohoKubun.口座払 != null && 帳票情報.get支払方法区分() != null) {
-            if (ShiharaiHohoKubun.口座払.getコード().equals(帳票情報.get支払方法区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
+            if (帳票情報.get支給金額() != null
+                    && ShiharaiHohoKubun.口座払.getコード().equals(帳票情報.get支払方法区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
                 source.torikeshi2 = RString.EMPTY;
             } else {
                 source.torikeshi2 = 半角アスタリスク2;

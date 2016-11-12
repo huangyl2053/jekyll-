@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteitsuchisho;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohisaishinsaketteitsuchisho.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishin.SogojigyohiSaishinsaKetteitsuchishoTorikomiIchiranKohiSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -71,7 +72,8 @@ public class SogojigyohiSaishinsaKetteitsuchishoBodyEditor
                 edit明細(source);
             }
         }
-        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listLower_1);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listLower_1));
         return source;
     }
 

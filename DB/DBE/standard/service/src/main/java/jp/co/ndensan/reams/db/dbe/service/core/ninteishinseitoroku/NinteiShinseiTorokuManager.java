@@ -172,6 +172,23 @@ public class NinteiShinseiTorokuManager {
     }
 
     /**
+     * 申請書管理番号、審査会委員コードにより、除外審査会委員情報を削除
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 審査会委員コード 審査会委員コード
+     */
+    public void del除外審査会委員情報(ShinseishoKanriNo 申請書管理番号, RString 審査会委員コード) {
+        List<DbT5590ShinsakaiIinJogaiJohoEntity> entityList
+                = dbt5590Dac.selectJohoBy申請書管理番号And委員コード(申請書管理番号, 審査会委員コード);
+        if (entityList == null) {
+            return;
+        }
+        for (DbT5590ShinsakaiIinJogaiJohoEntity entity : entityList) {
+            dbt5590Dac.deletePhysical(entity);
+        }
+    }
+
+    /**
      * 申請書管理番号により、除外審査会委員情報の取得
      *
      * @param 申請書管理番号 申請書管理番号

@@ -137,7 +137,9 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
         tempTable1.setBaitaiSakuseizumiFlag(false);
         tempTable1.setIraishoSakuseizumiFlag(false);
         tempTable1.setSakujoFlag(false);
-
+        if (furikomiDetailEntity != null) {
+            tempTable1.setGyomuKoyuKey(furikomiDetailEntity.getKozaNayoseKey());
+        }
         return tempTable1;
 
     }
