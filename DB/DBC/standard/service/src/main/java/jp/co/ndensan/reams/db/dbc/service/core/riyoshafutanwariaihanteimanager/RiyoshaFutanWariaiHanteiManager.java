@@ -400,6 +400,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             HihokenshaNo 被保険者番号,
             List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報) {
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細list = new ArrayList<>();
+        int 枝番号 = 1;
         for (RiyoshaFutanWariaiMeisaiTempEntity entity : 利用者負担割合明細情報) {
             DbT3114RiyoshaFutanWariaiMeisaiEntity 利用者負担割合明細entity = new DbT3114RiyoshaFutanWariaiMeisaiEntity();
             利用者負担割合明細entity.setNendo(年度);
@@ -408,8 +409,8 @@ public class RiyoshaFutanWariaiHanteiManager {
                     select履歴番号BY年度と被保険者番号(年度, 被保険者番号);
             if (list != null && !list.isEmpty()) {
                 利用者負担割合明細entity.setRirekiNo(list.get(0).getRirekiNo());
-                利用者負担割合明細entity.setEdaNo(list.get(0).getEdaNo());
             }
+            利用者負担割合明細entity.setEdaNo(枝番号);
             利用者負担割合明細entity.setShikakuKubun(entity.getShikakuKubun());
             利用者負担割合明細entity.setFutanWariaiKubun(entity.getFutanWariaiKubun());
             利用者負担割合明細entity.setYukoKaishiYMD(entity.getYukoKaishiYMD());
@@ -423,6 +424,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             利用者負担割合明細entity.setSetaiCd(entity.getSetaiCd());
             利用者負担割合明細entity.setLogicalDeletedFlag(false);
             利用者負担割合明細list.add(利用者負担割合明細entity);
+            枝番号++;
         }
         return 利用者負担割合明細list;
     }
@@ -432,6 +434,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             HihokenshaNo 被保険者番号,
             List<RiyoshaFutanWariaiKonkyoTempEntity> 利用者負担割合根拠情報) {
         List<DbT3115RiyoshaFutanWariaiKonkyoEntity> 利用者負担割合根拠list = new ArrayList<>();
+        int 枝番号 = 1;
         for (RiyoshaFutanWariaiKonkyoTempEntity entity : 利用者負担割合根拠情報) {
             DbT3115RiyoshaFutanWariaiKonkyoEntity 利用者負担割合根拠entity = new DbT3115RiyoshaFutanWariaiKonkyoEntity();
             利用者負担割合根拠entity.setNendo(年度);
@@ -439,11 +442,12 @@ public class RiyoshaFutanWariaiHanteiManager {
             DbT3115RiyoshaFutanWariaiKonkyoEntity result = 利用者負担割合根拠Dac.select履歴番号(年度, 被保険者番号);
             if (result != null) {
                 利用者負担割合根拠entity.setRirekiNo(result.getRirekiNo());
-                利用者負担割合根拠entity.setEdaNo(result.getEdaNo());
             }
+            利用者負担割合根拠entity.setEdaNo(枝番号);
             利用者負担割合根拠entity.setSetaiinHihokenshaNo(entity.getSetaiinHihokenshaNo());
             利用者負担割合根拠entity.setSetaiinShotokuRirekiNo(entity.getSetaiinShotokuRirekiNo());
             利用者負担割合根拠list.add(利用者負担割合根拠entity);
+            枝番号++;
         }
         return 利用者負担割合根拠list;
     }

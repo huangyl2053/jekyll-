@@ -34,114 +34,114 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
      * 提供着工年月入力必須チェック
      */
     提供着工年月が入力 {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is提供着工年月が入力(div);
-        }
-    },
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is提供着工年月が入力(div);
+                }
+            },
     /**
      * 領収日入力必須チェック
      */
     領収日が入力 {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is領収日が入力(div);
-        }
-    },
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is領収日が入力(div);
+                }
+            },
     /**
      * 受給認定が無効チェック
      */
     受給認定が無効チェック {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            if (div.getCommHeadPanel().get要介護認定情報() == null) {
-                return false;
-            } else {
-                List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
-                RString 要介護認定状態区分コード = div.getCommHeadPanel().get要介護認定情報();
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援_経過的要介護.getCode());
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援1.getCode());
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援2.getCode());
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護1.getCode());
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護2.getCode());
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護3.getCode());
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
-                要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
-                if (要介護認定状態区分コードリスト.contains(要介護認定状態区分コード)) {
-                    return true;
-                }
-                if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード)
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    if (div.getCommHeadPanel().get要介護認定情報() == null) {
+                        return false;
+                    } else {
+                        List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
+                        RString 要介護認定状態区分コード = div.getCommHeadPanel().get要介護認定情報();
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援_経過的要介護.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援1.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援2.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護1.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護2.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護3.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
+                        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
+                        if (要介護認定状態区分コードリスト.contains(要介護認定状態区分コード)) {
+                            return true;
+                        }
+                        if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード)
                         && new RString("1").equals(div.getCommHeadPanel().getIs旧措置者フラグ())) {
-                    return true;
+                            return true;
+                        }
+                    }
+                    return false;
                 }
-            }
-            return false;   
-        }
-    },
+            },
     /**
      * 申請日入力必須チェック
      */
     申請日が入力 {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is申請日が入力(div);
-        }
-    },
-    /**
-     * 申請取消事由入力必須チェック
-     */
-    申請取消事由が入力 {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is申請取消事由が入力(div);
-        }
-    },
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is申請日が入力(div);
+                }
+            },
     /**
      * 住宅所有者入力必須チェック
      */
     住宅所有者が入力 {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is住宅所有者が入力(div);
-        }
-    },
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is住宅所有者が入力(div);
+                }
+            },
     /**
      * 証明書入力必須チェック
      */
     証明書が入力 {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is証明書が入力(div);
-        }
-    },
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is証明書が入力(div);
+                }
+            },
     /**
      * 住宅改修内容一覧が妥当チェック
      */
     住宅改修内容一覧が妥当 {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is住宅改修内容一覧妥当(div);
-        }
-    },
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is住宅改修内容一覧妥当(div);
+                }
+            },
     /**
      * 給付率入力必須チェック
      */
     給付率が入力 {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is給付率が入力(div);
-        }
-    },
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is給付率が入力(div);
+                }
+            },
+    /**
+     * 領収日変更チェック
+     */
+    領収日変更 {
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is領収日変更(div);
+                }
+            },
     /**
      * 住宅所有者入力必須チェック
      */
     提供着工年月が申請日の年月と一致しない {
-        @Override
-        public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return SpecHelper.is提供着工年月が申請日の年月と一致しない(div);
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is提供着工年月が申請日の年月と一致しない(div);
 
-        }
-    };
+                }
+            };
 
     private static class SpecHelper {
 
@@ -165,13 +165,14 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
             return !div.getCommHeadPanel().getDdlSyomeisyo().getSelectedKey().isEmpty();
         }
 
-        public static boolean is申請取消事由が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return !RString.isNullOrEmpty(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu()
-                    .getSelectedKey());
-        }
-
         public static boolean is給付率が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
             return div.getCommHeadPanel().getTxtKyufuritsu().getValue() != null;
+        }
+
+        public static boolean is領収日変更(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
+            RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
+            return 領収日 == null || 領収日.getYearMonth().equals(画面提供着工年月.getYearMonth());
         }
 
         public static boolean is住宅改修内容一覧妥当(JutakuKaishuShinseiJyohoTorokuDiv div) {

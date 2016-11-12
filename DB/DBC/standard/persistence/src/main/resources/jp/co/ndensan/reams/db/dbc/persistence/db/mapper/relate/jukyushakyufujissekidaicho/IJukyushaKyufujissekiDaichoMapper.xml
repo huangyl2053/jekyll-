@@ -1021,6 +1021,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_KinkyuuziShisetuRyouyouRelateEntity" fetchSize="500">
         SELECT
+                DbT3118."ryakusho" AS "dbT3118_ryakusho", 
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3019KyufujissekiKinkyuShisetsuRyoyoMapper.allColumns_DbT3019KyufujissekiKinkyuShisetsuRyoyo" />
         FROM
@@ -1031,6 +1032,10 @@
                 AND	"DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                 AND	"DbT3019KyufujissekiKinkyuShisetsuRyoyo"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                 AND	"DbT3019KyufujissekiKinkyuShisetsuRyoyo"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+                LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+                 ON "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" = DbT3118."shikibetsuNo"
+                 AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
+                 AND "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
 	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
 	<include refid="subsql"/>
@@ -1052,6 +1057,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_TokuteiShinryouHiRelateEntity" fetchSize="500">
         SELECT 
+                DbT3118."ryakusho" AS "dbT3118_ryakusho", 
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoMapper.allColumns_DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo" />
         FROM		
@@ -1062,6 +1068,10 @@
                         AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                         AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+                        LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+                            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+                            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
 	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
 	<include refid="subsql"/>
@@ -1082,16 +1092,21 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_KeikakuHiRelateEntity" fetchSize="500">
         SELECT 
+                DbT3118."ryakusho" AS "dbT3118_ryakusho", 
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3025KyufujissekiKyotakuServiceMapper.allColumns_DbT3025KyufujissekiKyotakuService" />
         FROM		
                 rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN rgdb."DbT3025KyufujissekiKyotakuService" AS "DbT3025KyufujissekiKyotakuService"
+                INNER JOIN rgdb."DbT3025KyufujissekiKyotakuService" AS "DbT3025KyufujissekiKyotakuService"
                         ON	"DbT3025KyufujissekiKyotakuService"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
                         AND	"DbT3025KyufujissekiKyotakuService"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
                         AND	"DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                         AND	"DbT3025KyufujissekiKyotakuService"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3025KyufujissekiKyotakuService"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+                LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+                        ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
+                        AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+                        AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1112,8 +1127,9 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_HukushiYouguRelateEntity" fetchSize="500">
         SELECT 
-               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
-                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi" />
+              DbT3118."ryakusho" AS "dbT3118_ryakusho",   
+              <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+              <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi" />
         FROM		
                 rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
         INNER JOIN rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi"
@@ -1122,6 +1138,10 @@
                         AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                         AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+                      ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
+                      AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+                      AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1142,6 +1162,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_JuutakuKaishuuRelateEntity" fetchSize="500">
         SELECT 
+                DbT3118."ryakusho" AS "dbT3118_ryakusho", 
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3027KyufujissekiJutakuKaishuhiMapper.allColumns_DbT3027KyufujissekiJutakuKaishuhi" />
         FROM		
@@ -1152,6 +1173,10 @@
                         AND	"DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                         AND	"DbT3027KyufujissekiJutakuKaishuhi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3027KyufujissekiJutakuKaishuhi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+                LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+                            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+                            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1208,6 +1233,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_ShakaiHukushiHouzinKeigenRelateEntity" fetchSize="500">
         SELECT 
+                DbT3118."ryakusho" AS "dbT3118_ryakusho", 
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
         FROM		
@@ -1218,6 +1244,10 @@
                         AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                         AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+                LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+                            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+                            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1238,6 +1268,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_CareManagementRelateEntity" fetchSize="500">
         SELECT 
+                DbT3118."ryakusho" AS "dbT3118_ryakusho", 
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3031KyufuJissekiCareManagementHiMapper.allColumns_DbT3031KyufuJissekiCareManagementHi" />
         FROM		
@@ -1248,6 +1279,10 @@
                         AND	"DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                         AND	"DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3031KyufuJissekiCareManagementHi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+                LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+                            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+                            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1297,6 +1332,8 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_MeisaiJuushoRelateEntity" fetchSize="500">
         SELECT 
+                DbT7131."serviceName" AS "serviceName",
+                DbT7131."tanisuShikibetsuCode" AS "tanisuShikibetsuCode",
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3106KyufujissekiMeisaiJushochiTokureiMapper.allColumns_DbT3106KyufujissekiMeisaiJushochiTokurei" />
         FROM		
@@ -1624,6 +1661,8 @@
             , DbT1001_tmp2."PSM_gaikokujinKanaName" as "psm_tmp2_gaikokujinKanaName"
             , DbT1001_tmp2."PSM_kanaTsushoName" as "psm_tmp2_kanaTsushoName"
             , DbT1001_tmp2."PSM_jukiTorokuNo" as "psm_tmp2_jukiTorokuNo"
+            , DbT3118."meisho" AS "dbT3118_meisho"
+            , DbT3118."ryakusho" AS "dbT3118_ryakusho"
         FROM
                 rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS DbT3028
                 INNER JOIN(
@@ -1867,6 +1906,10 @@
                                 PSM."shikibetsuCode" = DbT1001_tmp1."shikibetsuCode" 
                                           ) AS DbT1001_tmp2
         ON DbT3028."hiHokenshaNo"=DbT1001_tmp2."DbT1001_tmp1_hihokenshaNo"
+        LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+            ON DbT3118."shikibetsuNo" = DbT3028."inputShikibetsuNo" 
+            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3028."serviceTeikyoYM"
+            AND DbT3028."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
              '201204' <![CDATA[<=]]> DbT3028."serviceTeikyoYM"
 	<if test="対象年月flag">

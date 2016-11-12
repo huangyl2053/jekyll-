@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class IinTokkiTextA3Report extends Report<IinTokkiTextA3ReportSource> {
 
     private static final RString テキスト全面イメージ = new RString("1");
+    private static final int PAGECOUN = 15;
     private static final int MAXCOUNT = 30;
     private static final int PAGETWO_MAXCOUNT = 34;
     private final IchijihanteikekkahyoA3Entity data;
@@ -54,7 +55,7 @@ public class IinTokkiTextA3Report extends Report<IinTokkiTextA3ReportSource> {
                 set全面イメージ(reportSourceWriter, 短冊リスト, イメージ全面List);
             }
         } else if (MAXCOUNT < 短冊リスト.size()) {
-            int totalPages = (int) Math.ceil((double) 短冊情報リスト.size() / PAGETWO_MAXCOUNT);
+            int totalPages = (int) Math.ceil((double) (短冊情報リスト.size() - PAGECOUN) / PAGETWO_MAXCOUNT) + 1;
             for (int i = 0; i < 短冊リスト.size(); i++) {
                 int page = (i + PAGETWO_MAXCOUNT) / PAGETWO_MAXCOUNT + 1;
                 if (page <= totalPages) {

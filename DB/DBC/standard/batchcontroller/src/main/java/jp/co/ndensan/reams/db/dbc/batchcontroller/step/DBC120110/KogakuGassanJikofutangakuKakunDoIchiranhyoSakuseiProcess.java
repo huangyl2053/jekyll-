@@ -74,7 +74,6 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class KogakuGassanJikofutangakuKakunDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<KogakuGassanJikofutangakuKakunEntity> {
 
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT37H1.\"shoKisaiHokenshaNo\" ASC");
     private static final RString コンマ = new RString(",");
     private static final RString SAKUSEI = new RString("作成");
     private final Code code = new Code("0003");
@@ -128,17 +127,6 @@ public class KogakuGassanJikofutangakuKakunDoIchiranhyoSakuseiProcess extends Ba
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         pageBreakKeys.add(固定改頁項目ID);
         RString orderByStr = MyBatisOrderByClauseCreator.create(GassanJikofutangakuKakunOutPutOrder.class, 出力順情報);
-        if (RString.isNullOrEmpty(orderByStr)) {
-            orderByStr = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = orderByStr.split(コンマ.toString());
-            orderByStr = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    orderByStr = orderByStr.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
         int i = 0;
         this.改頁リスト = new ArrayList();
         for (ISetSortItem item : 出力順情報.get設定項目リスト()) {

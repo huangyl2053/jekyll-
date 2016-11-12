@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshi
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseishoyucho.KogakuShikyuShinseishoYuchoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseishoyucho.KogakuShikyuShinseishoYuchoSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -16,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
@@ -32,6 +35,8 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
     private final RString 連番;
     private final RString 注意文;
     private static final RString 文字_注意 = new RString("注意");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
     private static final int 定値_0 = 0;
     private static final int 定値_1 = 1;
     private static final int 定値_2 = 2;
@@ -94,8 +99,12 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
             }
         }
         source.remban = 連番;
-        source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
-
+        if (帳票出力対象データ != null && 帳票出力対象データ.getShikibetsuCodeChohyo() != null) {
+            source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
+        } else {
+            source.識別コード = ShikibetsuCode.EMPTY;
+        }
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.hihokenshaNo);
         return source;
     }
 

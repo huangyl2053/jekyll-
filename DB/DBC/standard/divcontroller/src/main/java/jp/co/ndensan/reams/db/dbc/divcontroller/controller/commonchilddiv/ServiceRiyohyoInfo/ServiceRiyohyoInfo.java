@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiy
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDivHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDivValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -102,20 +103,22 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoMeisaiNew(ServiceRiyohyoInfoDiv div) {
-        boolean 選択有无 = ViewStateHolder.get(ViewStateKeys.選択有无, Boolean.class);
-        if (選択有无) {
-            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
-            div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
-            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
-        }
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
+
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         div.setAddType(RSTRING_ONE);
-        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setVisible(true);
-        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setVisible(true);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getBtnKakutei().setDisabled(false);
+
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setDisabled(true);
+
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         handler.事業者サービスクリア();
         handler.明細情報クリア();
@@ -130,22 +133,27 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiNew(ServiceRiyohyoInfoDiv div) {
         div.setAddType(RSTRING_TWO);
-        boolean 選択有无 = ViewStateHolder.get(ViewStateKeys.選択有无, Boolean.class);
-        if (選択有无) {
-            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
-            div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
-            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
-        }
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
+
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setVisible(true);
-        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setVisible(true);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getBtnKakutei().setDisabled(false);
+
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setDisabled(true);
+
+        div.getServiceRiyohyoBeppyoGokei().getBtnCalcGokei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoGokei().getBtnCancelGokeiInput().setDisabled(false);
+        div.getServiceRiyohyoBeppyoGokei().getBtnBeppyoGokeiKakutei().setDisabled(true);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         handler.事業者サービスクリア();
         handler.合計情報クリア();
-        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
 
         return ResponseData.of(div).respond();
     }
@@ -291,8 +299,8 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiKakutei(ServiceRiyohyoInfoDiv div) {
-        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class) == null
-                ? Decimal.ZERO : ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
+        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, HokenKyufuRitsu.class) == null
+                ? Decimal.ZERO : ViewStateHolder.get(ViewStateKeys.給付率, HokenKyufuRitsu.class).getColumnValue();
         Decimal 給付率div = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue() == null
                 ? Decimal.ZERO : div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue();
         if (給付率.compareTo(給付率div) != 0) {
@@ -359,6 +367,7 @@ public class ServiceRiyohyoInfo {
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         handler.setパネルにデータ反映();
         handler.init修正();
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 

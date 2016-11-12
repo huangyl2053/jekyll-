@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.kyufujissekitorikomiichiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -55,7 +56,6 @@ public class KyufujissekiTorikomiIchiranSource implements IReportSource {
     public RString listUpper_3;
     @ReportItem(name = "listUpper_4", length = 2, order = 18)
     public RString listUpper_4;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_5", length = 10, order = 19)
     public RString listUpper_5;
     @ReportItem(name = "listUpper_6", length = 30, order = 20)
@@ -123,6 +123,8 @@ public class KyufujissekiTorikomiIchiranSource implements IReportSource {
     public RString shichosonCode;
     @ReportItem(name = "kyufuJissekiKubun", length = 10, order = 73)
     public RString kyufuJissekiKubun;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

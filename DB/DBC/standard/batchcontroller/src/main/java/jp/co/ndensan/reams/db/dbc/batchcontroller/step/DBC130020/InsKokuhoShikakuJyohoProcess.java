@@ -26,6 +26,7 @@ public class InsKokuhoShikakuJyohoProcess extends BatchProcessBase<TorikomiKokiK
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper.get取込後期高齢者情報インポート用Entityリスト");
+    private static final RString 履歴番号 = new RString("0001");
     @BatchWriter
     private IBatchTableWriter<DbT7124KokiKoreishaInfoEntity> 現在後期高齢者情報Writer;
 
@@ -55,7 +56,11 @@ public class InsKokuhoShikakuJyohoProcess extends BatchProcessBase<TorikomiKokiK
     private DbT7124KokiKoreishaInfoEntity get現在後期高齢者情報Entity(TorikomiKokiKoreshaJyohoImportEntity entity) {
         DbT7124KokiKoreishaInfoEntity 現在後期高齢者情報Entity = new DbT7124KokiKoreishaInfoEntity();
         現在後期高齢者情報Entity.setShikibetsuCd(new ShikibetsuCode(entity.get識別コード()));
-        現在後期高齢者情報Entity.setRirekiNo(entity.get履歴番号());
+        if (entity.get履歴番号() != null) {
+            現在後期高齢者情報Entity.setRirekiNo(entity.get履歴番号());
+        } else {
+            現在後期高齢者情報Entity.setRirekiNo(履歴番号);
+        }
         現在後期高齢者情報Entity.setKokiHokenshaNoCity(entity.get後期高齢保険者番号_市町村());
         現在後期高齢者情報Entity.setKokiHokenshaNoKoiki(entity.get後期高齢保険者番号_広域());
         現在後期高齢者情報Entity.setKokikoreiHihokenshaNo(entity.get後期高齢被保険者番号());

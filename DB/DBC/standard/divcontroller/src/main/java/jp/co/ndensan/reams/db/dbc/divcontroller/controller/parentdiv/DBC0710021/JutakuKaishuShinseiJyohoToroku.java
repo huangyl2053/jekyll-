@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710021
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
@@ -43,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -178,10 +176,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, 画面モード, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
-        if (valid2.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid2).respond();
+        if (!画面モード_取消.equals(画面モード) && !画面モード_削除.equals(画面モード)) {
+            ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                    div, 画面モード, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
+            if (valid2.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(valid2).respond();
+            }
         }
 
         boolean 内容変更 = new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
@@ -214,9 +214,6 @@ public class JutakuKaishuShinseiJyohoToroku {
 
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
-        if (!領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
-            throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage().replace("領収日"));
-        }
         if (画面モード_修正.equals(画面モード)
                 && 領収日.getYearMonth().isBefore(画面提供着工年月.getYearMonth())) {
             if (isCheckFive(判断基準, 限度額, 削除の確認, 保存の確認, 確認_汎用)) {
@@ -513,10 +510,10 @@ public class JutakuKaishuShinseiJyohoToroku {
         if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
                 && 画面提供着工年月 != null
                 && (old提供着工年月 == null
-                || old提供着工年月.getYear().getYearValue() != 画面提供着工年月.getYear().getYearValue())) {
+                || !old提供着工年月.toDateString().equals(画面提供着工年月.getYearMonth().toDateString()))) {
             div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
                     SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
-                    new FlexibleYear(画面提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
+                    new FlexibleYear(画面提供着工年月.getNendo().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         }
 
         if (div.getTxtTeikyoYM().getValue() != null) {
@@ -542,45 +539,69 @@ public class JutakuKaishuShinseiJyohoToroku {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-        if (領収日 != null) {
-            FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(領収日.getYearMonth().toString());
-            JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
-            YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(
-                    被保険者番号, サービス提供年月);
-            if (要介護認定情報 != null) {
-                Code 要介護認定状態区分コード = 要介護認定情報.get要介護認定状態区分コード();
-                div.getCommHeadPanel().set要介護認定情報(要介護認定状態区分コード.getColumnValue());
-                set旧措置者フラグ(要介護認定情報, div);
+        if (領収日 == null) {
+            return ResponseData.of(div).respond();
+        }
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(領収日.getYearMonth().toString());
+        JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
+        YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(
+                被保険者番号, サービス提供年月);
+        if (要介護認定情報 != null) {
+            Code 要介護認定状態区分コード = 要介護認定情報.get要介護認定状態区分コード();
+            div.getCommHeadPanel().set要介護認定情報(要介護認定状態区分コード.getColumnValue());
+            set旧措置者フラグ(要介護認定情報, div);
+        } else {
+            div.getCommHeadPanel().set要介護認定情報(null);
+        }
+        getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                div, null, handler.住宅改修内容一覧チェック(), false).validate受給認定が無効チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
+            return ResponseData.of(div).respond();
+        } else if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs valid3 = 領収日変更チェック(画面モード, div);
+            if (valid3 != null && valid3.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(valid3).respond();
             }
-            getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                    div, null, handler.住宅改修内容一覧チェック(), false).validate受給認定が無効チェック(pairs, div);
-            if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
-                return ResponseData.of(div).respond();
-            } else if (!ResponseHolder.isReRequest()) {
-                エラーCheck(画面モード);
-                FlexibleYearMonth 年月 = new FlexibleYearMonth(領収日.getYearMonth().toString());
-                QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode(),
-                        DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().replace(
-                                年月.wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString()).evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getCommHeadPanel().getTxtTeikyoYM().setValue(領収日);
-                return onClick_teikyoYMonBlur(div);
-            } else if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
-                    ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
-            HokenKyufuRitsu 給付率 = 住宅改修費事前申請.getKyufuritsu(被保険者番号,
-                    new FlexibleYearMonth(領収日.getYearMonth().toString()));
-            div.getTxtKyufuritsu().setValue(給付率.value());
-            JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
+            FlexibleYearMonth 年月 = new FlexibleYearMonth(領収日.getYearMonth().toString());
+            QuestionMessage message = new QuestionMessage(
+                    DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode(),
+                    DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().replace(
+                            年月.wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString()).evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getCommHeadPanel().getTxtTeikyoYM().setValue(領収日);
+            return onClick_teikyoYMonBlur(div);
+        } else if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        HokenKyufuRitsu 給付率 = 住宅改修費事前申請.getKyufuritsu(被保険者番号,
+                new FlexibleYearMonth(領収日.getYearMonth().toString()));
+        div.getTxtKyufuritsu().setValue(給付率.value());
+        JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
+        handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
+        return ResponseData.of(div).respond();
+    }
 
+    /**
+     * 申請日変更チェックするメソッドです。
+     *
+     * @param div 住宅改修費支給申請_申請情報登録DIV
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_TxtShinseiYMD_OnChange(
+            JutakuKaishuShinseiJyohoTorokuDiv div) {
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード) || 画面モード_修正.equals(画面モード) || 画面モード_審査.equals(画面モード)) {
+            ValidationMessageControlPairs pairs = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                    div, 画面モード, null, false).validate申請日変更チェック();
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
@@ -588,10 +609,11 @@ public class JutakuKaishuShinseiJyohoToroku {
         return ResponseData.of(div).respond();
     }
 
-    private void エラーCheck(RString 画面モード) {
-        if (画面モード_登録.equals(画面モード) || 画面モード_修正.equals(画面モード)) {
-            throw new ApplicationException(DbcErrorMessages.サービス年月と不一致.getMessage().replace("領収日"));
+    private ValidationMessageControlPairs 領収日変更チェック(RString 画面モード, JutakuKaishuShinseiJyohoTorokuDiv div) {
+        if (画面モード_登録.equals(画面モード) || 画面モード_修正.equals(画面モード) || 画面モード_審査.equals(画面モード)) {
+            return getJutakuKaishuShinseiJyohoTorokuValidationHandler(div, 画面モード, null, false).validate領収日変更チェック();
         }
+        return null;
     }
 
     /**
@@ -635,6 +657,9 @@ public class JutakuKaishuShinseiJyohoToroku {
         } else {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
+            if (!画面モード_照会.equals(画面モード)) {
+                排他キーRelease(被保険者番号.getColumnValue());
+            }
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .parameter(画面モード_照会);
         }

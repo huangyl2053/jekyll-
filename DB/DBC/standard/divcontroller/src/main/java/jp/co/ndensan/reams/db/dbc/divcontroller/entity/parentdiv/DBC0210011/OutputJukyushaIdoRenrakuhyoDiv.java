@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,10 +30,10 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     private CheckBoxList chkJukyushaIdoRearakuhyoHakkou;
     @JsonProperty("chkJukyushaIdoRenrakuhyo")
     private CheckBoxList chkJukyushaIdoRenrakuhyo;
-    @JsonProperty("OutputJukyushaIdoRenrakuhyoSetting")
-    private PrintContentsSettingDiv OutputJukyushaIdoRenrakuhyoSetting;
     @JsonProperty("btnHakkou")
     private ButtonReportPublish btnHakkou;
+    @JsonProperty("OutputJukyushaIdoRenrakuhyoSetting")
+    private PrintContentsSettingDiv OutputJukyushaIdoRenrakuhyoSetting;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -78,15 +78,6 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     }
 
     /*
-     * getOutputJukyushaIdoRenrakuhyoSetting
-     * @return OutputJukyushaIdoRenrakuhyoSetting
-     */
-    @JsonProperty("OutputJukyushaIdoRenrakuhyoSetting")
-    public IPrintContentsSettingDiv getOutputJukyushaIdoRenrakuhyoSetting() {
-        return OutputJukyushaIdoRenrakuhyoSetting;
-    }
-
-    /*
      * getbtnHakkou
      * @return btnHakkou
      */
@@ -102,6 +93,15 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     @JsonProperty("btnHakkou")
     public void setBtnHakkou(ButtonReportPublish btnHakkou) {
         this.btnHakkou = btnHakkou;
+    }
+
+    /*
+     * getOutputJukyushaIdoRenrakuhyoSetting
+     * @return OutputJukyushaIdoRenrakuhyoSetting
+     */
+    @JsonProperty("OutputJukyushaIdoRenrakuhyoSetting")
+    public IPrintContentsSettingDiv getOutputJukyushaIdoRenrakuhyoSetting() {
+        return OutputJukyushaIdoRenrakuhyoSetting;
     }
 
     // </editor-fold>

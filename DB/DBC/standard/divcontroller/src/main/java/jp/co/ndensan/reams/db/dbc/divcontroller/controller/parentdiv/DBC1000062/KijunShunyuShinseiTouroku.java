@@ -45,8 +45,6 @@ public class KijunShunyuShinseiTouroku {
 
     private static final RString KEY_追加 = new RString("追加");
     private static final RString KEY_修正 = new RString("修正");
-    private static final RString チェックなし = new RString("0");
-    private static final RString チェック済み = new RString("1");
     private static final int NUM_0 = 0;
     private static final Decimal KEY_100億円 = new Decimal("10000000000");
     private static final Decimal KEY_99億円 = new Decimal("9999999999");
@@ -88,10 +86,6 @@ public class KijunShunyuShinseiTouroku {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ViewStateHolder.put(ViewStateKeys.画面状態, KEY_追加);
         getHandler(div).set明細パネル(KEY_追加, 世帯コード, 識別コード);
-        div.setHdnFlag1(チェックなし);
-        div.setHdnFlag2(チェックなし);
-        div.setHdnFlag3(チェックなし);
-        div.setHdnFlag4(チェックなし);
         return ResponseData.of(div).setState(DBC1000062StateName.明細追加);
     }
 
@@ -106,10 +100,6 @@ public class KijunShunyuShinseiTouroku {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ViewStateHolder.put(ViewStateKeys.画面状態, KEY_修正);
         getHandler(div).set明細パネル(KEY_修正, 世帯コード, 識別コード);
-        div.setHdnFlag1(チェックなし);
-        div.setHdnFlag2(チェックなし);
-        div.setHdnFlag3(チェックなし);
-        div.setHdnFlag4(チェックなし);
         return ResponseData.of(div).setState(DBC1000062StateName.明細修正);
     }
 
@@ -338,53 +328,38 @@ public class KijunShunyuShinseiTouroku {
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnMeisaiKautei(KijunShunyuShinseiTourokuDiv div) {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            div.setHdnFlag1(チェックなし);
-            div.setHdnFlag2(チェックなし);
-            div.setHdnFlag3(チェックなし);
-            div.setHdnFlag4(チェックなし);
             return ResponseData.of(div).respond();
         }
+
         ValidationMessageControlPairs validPairs = getValidationHandler(div).明細パネルチェックValidate();
         validPairs.add(getValidationHandler(div).明細確定時のチェック処理());
         if (validPairs.iterator().hasNext()) {
-            div.setHdnFlag1(チェックなし);
-            div.setHdnFlag2(チェックなし);
-            div.setHdnFlag3(チェックなし);
-            div.setHdnFlag4(チェックなし);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
-        if (!チェック済み.equals(div.getHdnFlag1()) && getHandler(div).is収入額チェック()) {
+        if (!ResponseHolder.isReRequest() && getHandler(div).is収入額チェック()) {
             WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
                     DbzWarningMessages.確認.getMessage().replace(MESSAGE_合計.toString()).evaluate());
-            div.setHdnFlag1(チェック済み);
             return ResponseData.of(div).addMessage(message).respond();
         }
 
         validPairs = getValidationHandler(div).明細GridチェックValidate();
         if (validPairs.iterator().hasNext()) {
-            div.setHdnFlag1(チェックなし);
-            div.setHdnFlag2(チェックなし);
-            div.setHdnFlag3(チェックなし);
-            div.setHdnFlag4(チェックなし);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
         validPairs = getValidationHandler(div).世帯再算出チェックValidate();
-        if (!チェック済み.equals(div.getHdnFlag2()) && validPairs.iterator().hasNext()) {
-            div.setHdnFlag2(チェック済み);
+        if (!ResponseHolder.isReRequest() && validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
         validPairs = getValidationHandler(div).受給者または事業対象者チェックValidate();
-        if (!チェック済み.equals(div.getHdnFlag3()) && validPairs.iterator().hasNext()) {
-            div.setHdnFlag3(チェック済み);
+        if (!ResponseHolder.isReRequest() && validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
         validPairs = getValidationHandler(div).算定基準額チェックValidate();
-        if (!チェック済み.equals(div.getHdnFlag4()) && validPairs.iterator().hasNext()) {
-            div.setHdnFlag4(チェック済み);
+        if (!ResponseHolder.isReRequest() && validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 

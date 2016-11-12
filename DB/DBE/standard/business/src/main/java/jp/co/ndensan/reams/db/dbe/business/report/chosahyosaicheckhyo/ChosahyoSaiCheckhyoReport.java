@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public final class ChosahyoSaiCheckhyoReport extends Report<ChosahyoSaiCheckhyoReportSource> {
 
     private final List<ChosahyoSaiCheckhyoItem> itemList;
+    private final ChosahyoSaiCheckhyoItem item;
 
     /**
      * インスタンスを生成します。
@@ -28,11 +29,23 @@ public final class ChosahyoSaiCheckhyoReport extends Report<ChosahyoSaiCheckhyoR
     public static ChosahyoSaiCheckhyoReport createFrom(
             List<ChosahyoSaiCheckhyoItem> itemList) {
 
-        return new ChosahyoSaiCheckhyoReport(itemList);
+        return new ChosahyoSaiCheckhyoReport(itemList, null);
     }
 
-    private ChosahyoSaiCheckhyoReport(List<ChosahyoSaiCheckhyoItem> itemList) {
+    /**
+     * インスタンスを生成します。
+     *
+     * @param item 前回認定調査結果との比較表のITEM
+     * @return 前回認定調査結果との比較表のReport
+     */
+    public static ChosahyoSaiCheckhyoReport createFrom(
+            ChosahyoSaiCheckhyoItem item) {
+        return new ChosahyoSaiCheckhyoReport(null, item);
+    }
+
+    private ChosahyoSaiCheckhyoReport(List<ChosahyoSaiCheckhyoItem> itemList, ChosahyoSaiCheckhyoItem item) {
         this.itemList = itemList;
+        this.item = item;
     }
 
     /**
@@ -40,7 +53,13 @@ public final class ChosahyoSaiCheckhyoReport extends Report<ChosahyoSaiCheckhyoR
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoSaiCheckhyoReportSource> reportSourceWriter) {
-        for (ChosahyoSaiCheckhyoItem item : itemList) {
+        if (itemList != null) {
+            for (ChosahyoSaiCheckhyoItem chosahyoSaiCheckhyoItem : itemList) {
+                IChosahyoSaiCheckhyoEditor editor = new ChosahyoSaiCheckhyoEditor(chosahyoSaiCheckhyoItem);
+                IChosahyoSaiCheckhyoBuilder builder = new ChosahyoSaiCheckhyoBuilderImpl(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else {
             IChosahyoSaiCheckhyoEditor editor = new ChosahyoSaiCheckhyoEditor(item);
             IChosahyoSaiCheckhyoBuilder builder = new ChosahyoSaiCheckhyoBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);

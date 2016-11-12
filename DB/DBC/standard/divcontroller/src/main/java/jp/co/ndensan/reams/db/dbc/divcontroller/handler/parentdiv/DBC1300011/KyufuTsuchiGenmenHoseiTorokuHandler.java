@@ -175,6 +175,11 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         div.getTextBoxFudangoukei().clearValue();
         div.getTextBoxNumHiyouGoukei().clearValue();
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setVisible(false);
+        div.getButtonSearch().setDisabled(false);
+        div.getButtonTuika().setDisabled(false);
+        div.getButtonHyouji().setDisabled(false);
+        div.getTextBoxNumKensuu().setDisabled(false);
+        div.getTextBoxDateService().setDisabled(false);
     }
 
     /**

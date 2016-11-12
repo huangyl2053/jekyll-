@@ -369,7 +369,7 @@ public class FukaDaichoDataHenshuFath {
      * @param 住民種別区分 boolean
      * @return List<SetaInJoho> 世帯員情報リスト
      */
-    public List<SetaInJoho> create世帯員情報リスト(List<SetaiinShotoku> 世帯員所得情報リスト, boolean 住民種別区分) {
+    public List<SetaInJoho> create世帯員情報リスト(List<SetaiinShotoku> 世帯員所得情報リスト) {
 
         List<SetaInJoho> 世帯員情報リスト = new ArrayList<>();
         if (世帯員所得情報リスト == null || 世帯員所得情報リスト.isEmpty()) {

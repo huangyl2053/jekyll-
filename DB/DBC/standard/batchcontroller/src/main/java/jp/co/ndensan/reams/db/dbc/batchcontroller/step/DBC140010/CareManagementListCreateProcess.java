@@ -75,6 +75,7 @@ public class CareManagementListCreateProcess extends BatchProcessBase<CareManage
         ケアマネジメント費データ.set再審査回数(entity.getDbt3031().getSaishinsaKaisu());
         ケアマネジメント費データ.set過誤回数(entity.getDbt3031().getKagoKaisu());
         ケアマネジメント費データ.set審査年月(entity.getDbt3031().getShinsaYM());
+        ケアマネジメント費データ.set略称(entity.getDbT3118_ryakusho());
         return ケアマネジメント費データ;
     }
 

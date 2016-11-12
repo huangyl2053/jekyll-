@@ -31,7 +31,7 @@ public enum TokubetsuChoshuMidoteiIchiranOutputOrder implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"genLasdecCode\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"koseiCityCode\"")),
     /**
      * 年金コード
      */

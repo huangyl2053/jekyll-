@@ -19,10 +19,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE220010_IraishoIkkatu extends BatchFlowBase<DBE220010_IraishoIkkatuParameter> {
 
-    private static final String CALL_HOMONCHOSAIRAISHOFLOW = "homonChosaIraishoFlow";
-    private static final String CALL_NINTEICHOSAIRAIFLOW = "ninteiChosaIraiFlow";
-    private static final String CALL_SHUJIIIKENSHOSAKUSEIFLOW = "shujiiIkenshoSakuseiFlow";
-    private static final String CALL_TEISHUTSUIRAISHOHAKKOFLOW = "teishutsuIraishoHakkoFlow";
+    private static final String CALL_HOMONCHOSAIRAISHOFLOW = "DBE240001_NinteichosaIraisho";
+    private static final String CALL_NINTEICHOSAIRAIFLOW = "DBE220003_NinteichosaIraiHakko";
+    private static final String CALL_SHUJIIIKENSHOSAKUSEIFLOW = "DBE230003_IkenshoIraiHakko";
+    private static final String CALL_TEISHUTSUIRAISHOHAKKOFLOW = "DBE240002_IkenshoIraisho";
     private static final RString HOMONCHOSAIRAISHO_FLOWID = new RString("DBE240001_NinteichosaIraisho");
     private static final RString NINTEICHOSAIRAI_FLOWID = new RString("DBE220003_NinteichosaIraiHakko");
     private static final RString SHUJIIIKENSHOSAKUSEI_FLOWID = new RString("DBE230003_IkenshoIraiHakko");

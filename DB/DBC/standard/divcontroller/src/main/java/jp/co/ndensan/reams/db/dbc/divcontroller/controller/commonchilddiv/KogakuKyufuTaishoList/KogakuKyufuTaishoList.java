@@ -9,19 +9,32 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyuf
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ServiceTypeModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -35,6 +48,8 @@ public class KogakuKyufuTaishoList {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString ONE_RS = new RString("1");
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
 
     /**
      * 「「追加する」ボタン
@@ -73,6 +88,7 @@ public class KogakuKyufuTaishoList {
             div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setDisabled(true);
             div.getMeisaiGokeiHenshuPanel().getBtnServiceSyurui().setDisabled(true);
         }
+        div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().setDisabled(true);
         ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
         return createResponse(div);
     }
@@ -143,6 +159,63 @@ public class KogakuKyufuTaishoList {
     }
 
     /**
+     * 「事業者」ボタンを押した後のメソッドです。
+     *
+     * @param div KogakuKyufuTaishoListDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuKyufuTaishoListDiv> onBlur_txtJgyoshaCode(
+            KogakuKyufuTaishoListDiv div) {
+        if (div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue() != null
+                && !div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue().isEmpty()) {
+            SearchResult<ServiceJigyoshaInputGuide> jigyosha = JigyoshaInputGuideFinder.
+                    createInstance().getServiceJigyoshaInputGuide(
+                            JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
+                                            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue()),
+                                    FlexibleDate.EMPTY, FlexibleDate.EMPTY, new AtenaMeisho(RString.EMPTY),
+                                    new YubinNo(RString.EMPTY), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                                    RString.EMPTY, FlexibleDate.getNowDate(), RString.EMPTY, 0));
+            if (jigyosha.records() != null && !jigyosha.records().isEmpty()
+                    && jigyosha.records().get(0).get事業者名称() != null
+                    && !jigyosha.records().get(0).get事業者名称().isEmpty()) {
+                div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().setValue(
+                        jigyosha.records().get(0).get事業者名称().value());
+            } else {
+                div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().clearValue();
+            }
+        } else {
+            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().clearValue();
+        }
+        return createResponse(div);
+    }
+
+    /**
+     * 「サービス種類」ボタンを押した後のメソッドです。
+     *
+     * @param div KogakuKyufuTaishoListDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuKyufuTaishoListDiv> onBlur_txtServiceSyurui(
+            KogakuKyufuTaishoListDiv div) {
+        if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() != null
+                && !div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().isEmpty()) {
+            SearchResult<KaigoServiceShurui> kalist = KaigoServiceShuruiManager.createInstance().
+                    getServiceTypeList(KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
+                                    new ServiceShuruiCode(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue()),
+                                    new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString())));
+            if (kalist.records() != null && !kalist.records().isEmpty()) {
+                div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setValue(
+                        kalist.records().get(0).getサービス種類略称());
+            } else {
+                div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().clearValue();
+            }
+        } else {
+            div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().clearValue();
+        }
+        return createResponse(div);
+    }
+
+    /**
      * 「サービス種類入力補助ボタン」ダイアログのOKボタンを押した後のメソッドです。
      *
      * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
@@ -190,9 +263,10 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbRoreiFukushiNenkin(
             KogakuKyufuTaishoListDiv div) {
-        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(false);
-        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(true);
-        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
+        if (KEY0.equals(div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey())) {
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setSelectedKey(KEY1);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(KEY0);
+        }
         return createResponse(div);
     }
 
@@ -204,9 +278,10 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbRiyoshafutanDai2dankai(
             KogakuKyufuTaishoListDiv div) {
-        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(true);
-        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(false);
-        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
+        if (KEY0.equals(div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().getSelectedKey())) {
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(KEY1);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setSelectedKey(KEY0);
+        }
         return createResponse(div);
     }
 
@@ -218,9 +293,10 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onChange_rdbGekihenkanwaKubun(
             KogakuKyufuTaishoListDiv div) {
-        div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(true);
-        div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(true);
-        div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(false);
+        if (!KEY0.equals(div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey())) {
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setSelectedKey(KEY1);
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setSelectedKey(KEY1);
+        }
         return createResponse(div);
     }
 
@@ -236,7 +312,7 @@ public class KogakuKyufuTaishoList {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (!削除.equals(モード)) {
-            validPairs = getCheckHandler(div).確定チェック();
+            validPairs = getCheckHandler(div).確定チェック(モード);
         }
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();

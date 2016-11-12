@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaKetteiResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.saishinsaketteihokenshain.SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -51,6 +53,8 @@ public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokensha
     private static final RString 調整負担額タイトル = new RString("保険者負担額");
     private static final RString 介護給付費タイトル = new RString("介護給付費");
     private static final RString 高額介護サービス費タイトル = new RString("高額介護サービス費");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     private static final RString SAKUSEI = new RString("作成");
     private static final int INT_0 = 0;
@@ -136,6 +140,7 @@ public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokensha
         source.listLower_7 = doカンマ編集(帳票出力対象データ.get決定単位数());
         source.listLower_8 = doカンマ編集(帳票出力対象データ.get保険者負担額());
         source.shikibetsuCode = new RString(帳票出力対象データ.get識別コード().toString());
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listLower_1);
         if (集計Flag) {
             source.seikyuTitle = 申立タイトル;
             source.seikyuKensuTitle = 申立件数タイトル;

@@ -156,6 +156,9 @@ public class JikofutangakuShomeishoTorokuHandler {
      */
     public boolean is修正_証明書登録画面変更(JikofutangakuShomeishoTorokuBusiness business) {
         boolean is変更 = false;
+        if (STATUS_新規.equals(div.getExecutionStatus())) {
+            return is変更;
+        }
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
         RString 対象年度 = shomeisho.get対象年度()
                 .wareki().eraType(EraType.KANJI)
@@ -410,7 +413,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         if (!保険者番号.equals(div.getTxtShinkiTuikaShokisaiHokenshaNo().getValue())) {
             is変更 = true;
         }
-        RString 登録_支給申請書整理番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
+        RString 登録_支給申請書整理番号 = div.getTxtKoshinShikyuShinseishoSeiriNo().getValue();
         if (!登録_支給申請書整理番号.equals(div.getTxtShinkiShikyuShinseishoSeiriNo().getValue())) {
             is変更 = true;
         }
@@ -550,20 +553,28 @@ public class JikofutangakuShomeishoTorokuHandler {
      *
      */
     public void 自己負担額合計の計算() {
-        Decimal jikofutangakuGokei = div.getTxtJikofutangaku8().getValue()
-                .add(div.getTxtJikofutangaku9().getValue())
-                .add(div.getTxtJikofutangaku10().getValue())
-                .add(div.getTxtJikofutangaku11().getValue())
-                .add(div.getTxtJikofutangaku12().getValue())
-                .add(div.getTxtJikofutangaku1().getValue())
-                .add(div.getTxtJikofutangaku2().getValue())
-                .add(div.getTxtJikofutangaku3().getValue())
-                .add(div.getTxtJikofutangaku4().getValue())
-                .add(div.getTxtJikofutangaku5().getValue())
-                .add(div.getTxtJikofutangaku6().getValue())
-                .add(div.getTxtJikofutangaku7().getValue());
+        Decimal jikofutangakuGokei = nullToZero(div.getTxtJikofutangaku8().getValue())
+                .add(nullToZero(div.getTxtJikofutangaku9().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku10().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku11().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku12().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku1().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku2().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku3().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku4().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku5().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku6().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku7().getValue()));
 
         div.getTxtJikofutangakuGokei().setValue(jikofutangakuGokei);
+    }
+
+    private Decimal nullToZero(Decimal obj) {
+        if (obj == null) {
+            return Decimal.ZERO;
+        } else {
+            return obj;
+        }
     }
 
     /**
@@ -571,18 +582,18 @@ public class JikofutangakuShomeishoTorokuHandler {
      *
      */
     public void うち70_74歳に係る負担額合計の計算() {
-        Decimal uchiFutangakuGokei = div.getTxtUchiFutangaku8().getValue()
-                .add(div.getTxtUchiFutangaku9().getValue())
-                .add(div.getTxtUchiFutangaku10().getValue())
-                .add(div.getTxtUchiFutangaku11().getValue())
-                .add(div.getTxtUchiFutangaku12().getValue())
-                .add(div.getTxtUchiFutangaku1().getValue())
-                .add(div.getTxtUchiFutangaku2().getValue())
-                .add(div.getTxtUchiFutangaku3().getValue())
-                .add(div.getTxtUchiFutangaku4().getValue())
-                .add(div.getTxtUchiFutangaku5().getValue())
-                .add(div.getTxtUchiFutangaku6().getValue())
-                .add(div.getTxtUchiFutangaku7().getValue());
+        Decimal uchiFutangakuGokei = nullToZero(div.getTxtUchiFutangaku8().getValue())
+                .add(nullToZero(div.getTxtUchiFutangaku9().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku10().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku11().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku12().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku1().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku2().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku3().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku4().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku5().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku6().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku7().getValue()));
 
         div.getTxtUchiFutangakuGokei().setValue(uchiFutangakuGokei);
     }
@@ -617,7 +628,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         JikofutangakuShomeishoTorokuParameter parameter = new JikofutangakuShomeishoTorokuParameter();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         parameter.set対象年度(new RDate(対象年度.toString()).getYear().toDateString());
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         parameter.set支給申請書整理番号(支給申請書整理番号);
@@ -754,7 +765,7 @@ public class JikofutangakuShomeishoTorokuHandler {
     public JigyoKogakuGassanJikoFutanGakuShomeisho get事業高額合算自己負担額証明書(HihokenshaNo 被保険者番号, Decimal 履歴番号) {
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -798,7 +809,7 @@ public class JikofutangakuShomeishoTorokuHandler {
             JigyoKogakuGassanJikoFutanGakuShomeisho 更新前データ) {
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -832,6 +843,31 @@ public class JikofutangakuShomeishoTorokuHandler {
     }
 
     /**
+     * 事業高額合算自己負担額証明書を作成します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 更新前データ JigyoKogakuGassanJikoFutanGakuShomeisho
+     * @return JigyoKogakuGassanJikoFutanGakuShomeisho
+     */
+    public JigyoKogakuGassanJikoFutanGakuShomeisho get更新用事業高額合算自己負担額証明書1(HihokenshaNo 被保険者番号,
+            JigyoKogakuGassanJikoFutanGakuShomeisho 更新前データ) {
+        return 更新前データ.createBuilderForEdit().set自己負担額証明書整理番号(div.getTxtJikofutangakuShomeishoSeiriNo().getValue())
+                .set転入前保険者名(div.getCcdTennyumaeHokensha().getHokenjaName())
+                .set対象計算期間開始年月日(new FlexibleDate(div.getTxtTaishoKikan().getFromValue().toDateString()))
+                .set対象計算期間終了年月日(new FlexibleDate(div.getTxtTaishoKikan().getToValue().toDateString()))
+                .set被保険者期間開始年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getFromValue().toDateString()))
+                .set被保険者期間終了年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getToValue().toDateString()))
+                .set発行年月日(div.getTxtHakkoDate().getValue())
+                .set合計合計_自己負担額(div.getTxtJikofutangakuGokei().getValue())
+                .set合計_70_74自己負担額_内訳(div.getTxtUchiFutangakuGokei().getValue())
+                .set支給額計算結果連絡先郵便番号(div.getTxtYubinNo().getValue())
+                .set支給額計算結果連絡先住所(div.getTxtRenrakusakiJusho().getValue())
+                .set支給額計算結果連絡先名称1(div.getTxtRenrakusakiMei1().getValue())
+                .set支給額計算結果連絡先名称2(div.getTxtRenrakusakiMei2().getValue())
+                .set受付年月日(div.getTxtUketsukeDate().getValue()).build();
+    }
+
+    /**
      * 事業高額合算自己負担額証明書明細を作成します。
      *
      * @param 被保険者番号 HihokenshaNo
@@ -842,7 +878,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = new ArrayList<>();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -857,52 +893,52 @@ public class JikofutangakuShomeishoTorokuHandler {
             JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiBuilder meisaiBuilder = meisai.createBuilderForEdit();
             meisaiBuilder = meisaiBuilder.set70未満高額支給額(Decimal.ZERO).set70_74高額支給額(Decimal.ZERO).set摘要(RString.EMPTY);
             if (八月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku8().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku8().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku8().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku8().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (九月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku9().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku9().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku9().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku9().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku10().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku10().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku10().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku10().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十一月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku11().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku11().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku11().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku11().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十二月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku12().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku12().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku12().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku12().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (一月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku1().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku1().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku1().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku1().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (二月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku2().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku2().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku2().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku2().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (三月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku3().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku3().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku3().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku3().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (四月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku4().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku4().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku4().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku4().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (五月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku5().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku5().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku5().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku5().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (六月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku6().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku6().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku6().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku6().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (七月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku7().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku7().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku7().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku7().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             }
 
@@ -923,7 +959,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = new ArrayList<>();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
+        対象年度.append(new RString("年8月1日"));
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -940,52 +976,52 @@ public class JikofutangakuShomeishoTorokuHandler {
                     .set70_74高額支給額(meisai対象.get70_74高額支給額())
                     .set摘要(meisai対象.get摘要());
             if (八月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku8().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku8().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku8().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku8().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (九月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku9().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku9().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku9().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku9().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku10().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku10().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku10().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku10().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十一月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku11().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku11().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku11().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku11().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十二月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku12().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku12().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku12().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku12().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (一月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku1().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku1().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku1().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku1().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (二月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku2().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku2().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku2().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku2().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (三月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku3().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku3().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku3().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku3().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (四月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku4().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku4().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku4().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku4().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (五月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku5().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku5().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku5().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku5().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (六月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku6().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku6().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku6().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku6().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (七月.equals(meisai.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku7().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku7().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku7().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku7().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             }
 
@@ -1004,58 +1040,55 @@ public class JikofutangakuShomeishoTorokuHandler {
     public List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> get更新用事業高額合算自己負担額証明書明細1(HihokenshaNo 被保険者番号,
             List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 更新前データ) {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = new ArrayList<>();
-        RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
-        RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("8月1日"));
         for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai対象 : 更新前データ) {
             JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiBuilder meisaiBuilder = meisai対象.createBuilderForEdit();
             if (八月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku8().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku8().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku8().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku8().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (九月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku9().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku9().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku9().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku9().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku10().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku10().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku10().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku10().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十一月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku11().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku11().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku11().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku11().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (十二月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku12().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku12().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku12().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku12().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (一月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku1().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku1().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku1().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku1().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (二月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku2().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku2().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku2().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku2().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (三月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku3().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku3().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku3().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku3().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (四月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku4().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku4().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku4().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku4().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (五月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku5().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku5().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku5().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku5().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (六月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku6().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku6().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku6().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku6().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             } else if (七月.equals(meisai対象.get対象月())) {
-                Decimal txtJikofutangaku = div.getTxtJikofutangaku7().getValue();
-                Decimal txtUchiFutangaku = div.getTxtUchiFutangaku7().getValue();
+                Decimal txtJikofutangaku = nullToZero(div.getTxtJikofutangaku7().getValue());
+                Decimal txtUchiFutangaku = nullToZero(div.getTxtUchiFutangaku7().getValue());
                 meisaiBuilder = meisaiBuilder.set自己負担額(txtJikofutangaku).set70_74自己負担額_内数(txtUchiFutangaku);
             }
 

@@ -1,21 +1,21 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 市町村特別給付サービス事業者テーブルのエンティティクラスです。
@@ -42,8 +42,6 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
     private int rirekiNo;
     private RString idoKubun;
     private FlexibleDate idoYMD;
-    private RString teiseiKubun;
-    private FlexibleDate teiseiYMD;
     private RString hojinShubetsu;
     private RString shinseishaNameKanji;
     private RString shinseishaNameKana;
@@ -216,52 +214,6 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      */
     public void setIdoYMD(@Nonnull FlexibleDate idoYMD) {
         this.idoYMD = idoYMD;
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正区分のgetメソッドです。
-     * <br/>
-     * <br/>訂正の場合、必須
-     *
-     * @return 介護国保連ＩＦ訂正区分
-     */
-    @CheckForNull
-    public RString getTeiseiKubun() {
-        return teiseiKubun;
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正区分のsetメソッドです。
-     * <br/>
-     * <br/>訂正の場合、必須
-     *
-     * @param teiseiKubun 介護国保連ＩＦ訂正区分
-     */
-    public void setTeiseiKubun(RString teiseiKubun) {
-        this.teiseiKubun = teiseiKubun;
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正年月日のgetメソッドです。
-     * <br/>
-     * <br/>訂正の場合、必須
-     *
-     * @return 介護国保連ＩＦ訂正年月日
-     */
-    @CheckForNull
-    public FlexibleDate getTeiseiYMD() {
-        return teiseiYMD;
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正年月日のsetメソッドです。
-     * <br/>
-     * <br/>訂正の場合、必須
-     *
-     * @param teiseiYMD 介護国保連ＩＦ訂正年月日
-     */
-    public void setTeiseiYMD(FlexibleDate teiseiYMD) {
-        this.teiseiYMD = teiseiYMD;
     }
 
     /**
@@ -1009,8 +961,6 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
         this.rirekiNo = entity.rirekiNo;
         this.idoKubun = entity.idoKubun;
         this.idoYMD = entity.idoYMD;
-        this.teiseiKubun = entity.teiseiKubun;
-        this.teiseiYMD = entity.teiseiYMD;
         this.hojinShubetsu = entity.hojinShubetsu;
         this.shinseishaNameKanji = entity.shinseishaNameKanji;
         this.shinseishaNameKana = entity.shinseishaNameKana;
@@ -1058,7 +1008,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(jigyoshaNo, serviceCode, rirekiNo, idoKubun, idoYMD, teiseiKubun, teiseiYMD, hojinShubetsu, shinseishaNameKanji, shinseishaNameKana, shinseishaYubinNo, shinseishaAddressKanji, shinseishaAddressKana, shinseishaTelNo, shinseishaFaxNo, jigyoshoDaihyoshaYakushoku, jigyoshoDaihyoshaNameKanji, jigyoshoDaihyoshaNameKana, jigyoshoDaihyoshaYubinNo, jigyoshoDaihyoshaAddressKanji, jigyoshoDaihyoshaAddressKana, jigyoshoKanrishaNameKanji, jigyoshoKanrishaNameKana, jigyoshoKanrishaYubinNo, jigyoshoKanrishaAddressKanji, jigyoshoKanrishaAddressKana, serviceJigyoshoNameKanji, serviceJigyoshoNameKana, serviceJigyoshoYubinNo, serviceJigyoshoAddressKanji, serviceJigyoshoAddressKana, serviceJigyoshoTelNo, serviceJigyoshoFaxNo, serviceJigyoshoJigyoKaisiYMD, serviceJigyoshoJigyoKyushiYMD, serviceJigyoshoJigyoHaishiYMD, serviceJigyoshoJigyoSaikaiYMD, shokisaiHokenshaNo, juryoIninKubu, torokuKaishiYMD, torokuShuryoYMD, seikatsuhogoShiteiFlag, shichosonCode, chiikiKubun, logicalDeletedFlag);
+        return super.toMd5(jigyoshaNo, serviceCode, rirekiNo, idoKubun, idoYMD, hojinShubetsu, shinseishaNameKanji, shinseishaNameKana, shinseishaYubinNo, shinseishaAddressKanji, shinseishaAddressKana, shinseishaTelNo, shinseishaFaxNo, jigyoshoDaihyoshaYakushoku, jigyoshoDaihyoshaNameKanji, jigyoshoDaihyoshaNameKana, jigyoshoDaihyoshaYubinNo, jigyoshoDaihyoshaAddressKanji, jigyoshoDaihyoshaAddressKana, jigyoshoKanrishaNameKanji, jigyoshoKanrishaNameKana, jigyoshoKanrishaYubinNo, jigyoshoKanrishaAddressKanji, jigyoshoKanrishaAddressKana, serviceJigyoshoNameKanji, serviceJigyoshoNameKana, serviceJigyoshoYubinNo, serviceJigyoshoAddressKanji, serviceJigyoshoAddressKana, serviceJigyoshoTelNo, serviceJigyoshoFaxNo, serviceJigyoshoJigyoKaisiYMD, serviceJigyoshoJigyoKyushiYMD, serviceJigyoshoJigyoHaishiYMD, serviceJigyoshoJigyoSaikaiYMD, shokisaiHokenshaNo, juryoIninKubu, torokuKaishiYMD, torokuShuryoYMD, seikatsuhogoShiteiFlag, shichosonCode, chiikiKubun, logicalDeletedFlag);
     }
 
 // </editor-fold>

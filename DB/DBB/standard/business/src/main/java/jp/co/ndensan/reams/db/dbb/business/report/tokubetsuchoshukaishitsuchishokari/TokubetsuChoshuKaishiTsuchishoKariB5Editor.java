@@ -158,11 +158,15 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
                 .get前年度情報().get前年度特徴期別金額04() != null) {
             source.hokenryoGakuZen10Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get前年度情報().get前年度特徴期別金額04(), 0);
+        } else {
+            source.hokenryoGakuZen10Gatsu = new RString("0");
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                 .get更正後().get更正後特徴期別金額01() != null) {
             source.hokenryoGaku4Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get更正後().get更正後特徴期別金額01(), 0);
+        } else {
+            source.hokenryoGaku4Gatsu2 = new RString("0");
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度() != null) {
             source.tsuchibunNendo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
@@ -172,21 +176,29 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
                 .get前年度情報().get前年度特徴期別金額05() != null) {
             source.hokenryoGakuZen12Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get前年度情報().get前年度特徴期別金額05(), 0);
+        } else {
+            source.hokenryoGakuZen12Gatsu = new RString("0");
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                 .get更正後().get更正後特徴期別金額02() != null) {
             source.hokenryoGaku6Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get更正後().get更正後特徴期別金額02(), 0);
+        } else {
+            source.hokenryoGaku6Gatsu2 = new RString("0");
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                 .get前年度情報().get前年度最終期特徴期別介護保険料() != null) {
             source.hokenryoGakuZen2Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get前年度情報().get前年度最終期特徴期別介護保険料(), 0);
+        } else {
+            source.hokenryoGakuZen2Gatsu = new RString("0");
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                 .get更正後().get更正後特徴期別金額03() != null) {
             source.hokenryoGaku8Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get更正後().get更正後特徴期別金額03(), 0);
+        } else {
+            source.hokenryoGaku8Gatsu2 = new RString("0");
         }
     }
 

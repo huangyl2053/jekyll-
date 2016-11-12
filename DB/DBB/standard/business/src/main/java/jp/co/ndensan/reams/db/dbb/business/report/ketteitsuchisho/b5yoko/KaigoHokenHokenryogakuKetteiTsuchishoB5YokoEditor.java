@@ -102,7 +102,7 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         reportSource.kozaMeigi = 口座情報.get口座名義人優先();
         reportSource.kozaNo = 口座情報.get口座番号Or通帳記号番号();
         reportSource.kozaShurui = 口座情報.get口座種別略称();
-        reportSource.nofuzumiGaku = decimalToRString(編集後本算定通知書共通情報.get納付済額_未到来期含む());
+        reportSource.nofuzumiGaku = decimalToRString(編集後本算定通知書共通情報.get既に納付すべき額());
         reportSource.seibetsu = 編集後本算定通知書共通情報.get編集後個人().get性別();
         reportSource.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
@@ -165,7 +165,7 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
 
     private RString decimalToRString(Decimal number) {
         if (number != null) {
-            return new RString(number.toString());
+            return DecimalFormatter.toコンマ区切りRString(number, 0);
         }
         return RString.EMPTY;
     }

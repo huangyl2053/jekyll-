@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -37,6 +38,8 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
     private static final RString コロン = new RString("：");
     private static final RString アスタリスク = new RString("*");
     private static final RString 更新DB有無_有 = new RString("1");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -109,6 +112,7 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
         if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
             source.shikibetuCode = new ShikibetsuCode(被保険者.get識別コード());
         }
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_2);
         return source;
     }
 

@@ -177,8 +177,10 @@ public class JigyoKogakuReportProcess extends BatchProcessBase<FurikomimeisaiDat
         if (index == INT_0) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = get処理結果確認リスト一時();
             shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
+            pageCount.setValue(INT_0);
+        } else {
+            pageCount.setValue(reportSourceWriter.pageCount().value());
         }
-        pageCount.setValue(reportSourceWriter.pageCount().value());
     }
 
     private ShoriKekkaKakuninListTempTableEntity get処理結果確認リスト一時() {

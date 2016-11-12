@@ -143,6 +143,7 @@ public class ServiceRiyohyoInfoDivHandler {
             "区分限度単位指定エラー：【種類限度内点数＝区分超過＋区分限度内】になっていません。");
     private static final RString 種類区分限度単位指定エラー = new RString(
             "種類限度単位・区分限度単位指定エラー：【サービス単位＝種類超過＋区分超過＋区分限度内】になっていません。");
+    private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
 
     /**
      * コンストラクタです。
@@ -469,6 +470,8 @@ public class ServiceRiyohyoInfoDivHandler {
                         短期入所情報.get予防短期入所情報().get更新区分(), 短期入所情報.get予防短期入所情報().get暫定区分());
             }
 
+        } else {
+            div.getDdlKoshinKbn().setSelectedKey(KyufukanrihyoSakuseiKubun.新規.getコード());
         }
         if (居宅.equals(居宅総合事業区分)) {
             int count = jigoSakusei.load利用年月チェック(被保険者番号, 利用年月);
@@ -538,8 +541,7 @@ public class ServiceRiyohyoInfoDivHandler {
         List<KyufuJikoSakuseiResult> サービス利用票情報 = jigoSakusei.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号, 利用年月);
         List<dgServiceRiyohyoBeppyoList_Row> rowList = new ArrayList<>();
         if (サービス利用票情報 == null || サービス利用票情報.isEmpty()) {
-            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
-            return;
+            throw new ApplicationException(前月の明細情報エラー.toString());
         }
         int i = 0;
         for (KyufuJikoSakuseiResult result : サービス利用票情報) {
@@ -1271,7 +1273,7 @@ public class ServiceRiyohyoInfoDivHandler {
                 給付率 = 給付率_100.subtract(二割);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.給付率, 給付率);
+        ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(給付率));
         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(給付率);
 
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
@@ -1285,7 +1287,9 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(false);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(サービス単位計算());
+        if (!div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource().isEmpty()) {
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(サービス単位計算());
+        }
     }
 
     /**
@@ -1866,10 +1870,10 @@ public class ServiceRiyohyoInfoDivHandler {
 
     private Decimal サービス単位計算() {
         Decimal サービス単位合計 = Decimal.ZERO;
-        RString 事業者 = div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho();
-        RString サービス種類コード = div.getCcdServiceTypeInput().getサービス種類コード();
+        RString 事業者 = div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo();
+        RString サービス種類コード = div.getCcdServiceCodeInput().getサービスコード1();
         for (dgServiceRiyohyoBeppyoList_Row row : div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource()) {
-            if (row.getJigyosha() != null && row.getJigyosha().equals(事業者)
+            if (row.getHdnJigyoshaCode() != null && row.getHdnJigyoshaCode().equals(事業者)
                     && row.getHdnServiceShuruiCode() != null && row.getHdnServiceShuruiCode().equals(サービス種類コード)) {
                 サービス単位合計 = サービス単位合計.add(RString.isNullOrEmpty(row.getServiceTani().getText()) ? Decimal.ZERO
                         : row.getServiceTani().getValue());

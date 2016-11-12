@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business.report.kagoketteitbun;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120160.KagoKetteiHokenshaChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitbun.KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -32,6 +34,8 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunBodyEditor
     private static final RString 介護給付費タイトル = new RString("介護給付費");
     private static final RString 高額介護サービス費タイトル = new RString("高額介護サービス費");
     private static final RString 特定入所者介護費等タイトル = new RString("特定入所者介護費等");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -60,6 +64,9 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunBodyEditor
         source.listUpper_2 = doパターン54(帳票出力対象.get取扱年月());
         source.listUpper_3 = getColumnValue(帳票出力対象.get事業者番号());
         source.listUpper_4 = getColumnValue(帳票出力対象.get被保険者番号());
+        if (!RString.isNullOrEmpty(source.listUpper_4)) {
+            source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listUpper_4);
+        }
         source.listUpper_5 = 帳票出力対象.get被保険者氏名();
         source.listUpper_6 = doパターン54(帳票出力対象.getサービ提供年月());
         source.listUpper_7 = getColumnValue(帳票出力対象.getサービス種類コード());

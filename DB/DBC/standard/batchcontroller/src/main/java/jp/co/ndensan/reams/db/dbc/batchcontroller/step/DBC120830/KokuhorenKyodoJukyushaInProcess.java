@@ -87,7 +87,6 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
     private List<ShikibetsuCode> 識別コードList;
     private static final RString 出力ファイル名
             = new RString("DBC200057_KyodoJukyushaIchiran.csv");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY dbWT5C30.\"hokenshaNo\" ASC ");
     private static final RString デフォルト出力順_1 = new RString(" dbWT0001.\"hihokenshaNo\" ASC ");
     private static final RString デフォルト出力順_2 = new RString(" dbWT5C30.\"idoYMD\" ASC ");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
@@ -124,17 +123,6 @@ public class KokuhorenKyodoJukyushaInProcess extends BatchKeyBreakBase<KyodoJuky
         }
         RString 出力順 = MyBatisOrderByClauseCreator
                 .create(KyodoJukyushaKoshinkekkaIchiranOutPutOrder.class, 並び順);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
         出力順 = 出力順.concat(コンマ).concat(デフォルト出力順_1);
         出力順 = 出力順.concat(コンマ).concat(デフォルト出力順_2);
         帳票データの取得Parameter.set出力順(出力順);

@@ -27,8 +27,9 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanelHandler {
     private static final RString 修正モード = new RString("修正");
     private static final RString 受給者異動連絡票情報照会 = new RString("DBCMN11007");
     private static final RString 選択モード = new RString("選択");
-    private static final RString 受給者異動連絡票作成タイトル = new RString("受給者異動連絡票再作成");
+    private static final RString 受給者異動連絡票作成タイトル = new RString("受給者異動・訂正連絡票発行");
     private static final RString 受給者異動連絡票変更登録タイトル = new RString("受給者異動連絡票変更登録");
+    private static final RString 受給者異動連絡票情報照会タイトル = new RString("受給者異動連絡票情報照会");
 
     /**
      * 初期化です。
@@ -53,8 +54,6 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanelHandler {
         RString 表示モード = RString.EMPTY;
         if (受給者異動連絡票変更登録.equals(メニューID)) {
             表示モード = 修正モード;
-            div.setTitle(表示モード);
-
         } else if (受給者異動_訂正連絡票発行.equals(メニューID) || 受給者異動連絡票情報照会.equals(メニューID)) {
             表示モード = 選択モード;
         }
@@ -100,8 +99,10 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanelHandler {
     public RString getTitle(RString menuID) {
         if (受給者異動_訂正連絡票発行.equals(menuID)) {
             return 受給者異動連絡票作成タイトル;
-        } else {
+        } else if (受給者異動連絡票変更登録.equals(menuID)) {
             return 受給者異動連絡票変更登録タイトル;
+        } else {
+            return 受給者異動連絡票情報照会タイトル;
         }
     }
 }

@@ -107,7 +107,8 @@ public class KyodoIdoRenrakuhyoTorokuMain {
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(KyodoIdoRenrakuhyoTorokuMainDiv div) {
-        return ResponseData.of(getHandler(div).to帳票発行処理()).respond();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        return ResponseData.of(getHandler(div).to帳票発行処理(識別コード)).respond();
     }
 
     /**

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,5 +47,5 @@ public class TokubetsuChoshuDoteiIchiranEntity {
     private ChikuCode chikuCode1;
     private ChikuCode chikuCode2;
     private ChikuCode chikuCode3;
-    private LasdecCode genLasdecCode;
+    private RString genLasdecCode;
 }

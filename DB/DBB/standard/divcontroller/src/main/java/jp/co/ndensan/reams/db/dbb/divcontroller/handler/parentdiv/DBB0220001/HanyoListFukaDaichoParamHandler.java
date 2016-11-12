@@ -64,6 +64,7 @@ public class HanyoListFukaDaichoParamHandler {
     private static final RString KEY_項目名付加 = new RString("項目名付加");
     private static final RString KEY_連番付加 = new RString("連番付加");
     private static final RString KEY_日付スラッシュ付加 = new RString("日付編集");
+    private static final RString KEY_最新状態で抽出 = new RString("最新状態で抽出");
     private static final Decimal DECIMAL_999 = new Decimal("999");
 
     /**
@@ -287,7 +288,7 @@ public class HanyoListFukaDaichoParamHandler {
         div.getNendoKijumbiSitei().getTxtKijyunbi().clearValue();
         RDate 基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, KEY_基準日);
         if (基準日 != null) {
-            div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().setSelectedItemsByKey(new ArrayList<RString>());
+
             div.getNendoKijumbiSitei().getTxtKijyunbi().setValue(基準日);
         }
         RString 基準日区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_基準日区分);
@@ -328,22 +329,32 @@ public class HanyoListFukaDaichoParamHandler {
                 div.getChushutsuJokenPanel().getChkHokenryoDankai().setSelectedItemsByKey(new ArrayList<RString>());
             }
         }
+        div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().setSelectedItemsByKey(new ArrayList<RString>());
+        boolean 最新状態で抽出 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_最新状態で抽出);
+        if (最新状態で抽出) {
+            List<RString> keyList = new ArrayList<>();
+            keyList.add(定数KEY0);
+            div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().setSelectedItemsByKey(keyList);
+        }
         onChange_chkKijyunbiSiteiUmu();
     }
 
     private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {
+        div.getChushutsuPanel2().getCcdAtenaJoken().initialize();
         AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap.getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
         if (宛名抽出条件 != null) {
             if (宛名抽出条件.getAgeSelectKijun() != null) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
             }
             div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectKijun();
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
             if (宛名抽出条件.getChiku_Kubun() != null) {
                 div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().getコード());
             }
+            div.getChushutsuPanel2().getCcdAtenaJoken().onChange_SelectChiku();
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
+
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(toChikuCode(宛名抽出条件.getChiku1_To()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(toChikuCode(宛名抽出条件.getChiku1_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(toChikuCode(宛名抽出条件.getChiku2_To()));
@@ -403,6 +414,6 @@ public class HanyoListFukaDaichoParamHandler {
     }
 
     private boolean is年齢範囲復元(Range<Decimal> 年齢範囲) {
-        return !Decimal.ZERO.equals(年齢範囲.getFrom()) && DECIMAL_999.equals(年齢範囲.getTo());
+        return !(Decimal.ZERO.equals(年齢範囲.getFrom()) && DECIMAL_999.equals(年齢範囲.getTo()));
     }
 }

@@ -87,6 +87,7 @@ public class KogakuServicehiDetailDivHandler {
      */
     public void 画面初期化(RString 画面モード, RString メニューID, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号, ShikibetsuCode 識別コード) {
+        div.getCcdShiharaiHohoJyoho().clear();
         set状態(画面モード);
         KougakuSabisuhiShousaiNaiyouResult result = new KougakuSabisuhiShousaiNaiyouResult();
         if (追加モード.equals(画面モード)) {
@@ -247,8 +248,11 @@ public class KogakuServicehiDetailDivHandler {
      * @return RString
      */
     public RString get電話番号() {
-        return div.getTxtTelNo().getDomain() == null || div.getTxtTelNo().getDomain().isEmpty()
-                ? RString.EMPTY : div.getTxtTelNo().getDomain().value();
+        RString 電話番号 = RString.EMPTY;
+        if (div.getTxtTelNo() != null && div.getTxtTelNo().getDomain() != null && !div.getTxtTelNo().getDomain().isEmpty()) {
+            電話番号 = div.getTxtTelNo().getDomain().value();
+        }
+        return 電話番号;
     }
 
     /**

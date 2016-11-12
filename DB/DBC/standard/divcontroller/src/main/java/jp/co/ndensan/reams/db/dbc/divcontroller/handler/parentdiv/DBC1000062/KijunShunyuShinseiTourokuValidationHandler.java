@@ -117,7 +117,7 @@ public class KijunShunyuShinseiTourokuValidationHandler {
      */
     public ValidationMessageControlPairs 受給者または事業対象者チェックValidate() {
         IValidationMessages messages = new ControlValidator(div).受給者または事業対象者チェックValidate();
-        return create警告バリデーションDictionary().check(messages);
+        return create受給者または事業対象者バリデーションDictionary().check(messages);
     }
 
     /**
@@ -127,7 +127,7 @@ public class KijunShunyuShinseiTourokuValidationHandler {
      */
     public ValidationMessageControlPairs 算定基準額チェックValidate() {
         IValidationMessages messages = new ControlValidator(div).算定基準額チェックValidate();
-        return create警告バリデーションDictionary().check(messages);
+        return create算定基準額バリデーションDictionary().check(messages);
     }
 
     /**
@@ -137,7 +137,7 @@ public class KijunShunyuShinseiTourokuValidationHandler {
      */
     public ValidationMessageControlPairs 世帯再算出チェックValidate() {
         IValidationMessages messages = new ControlValidator(div).世帯再算出チェックValidate();
-        return create警告バリデーションDictionary().check(messages);
+        return create世帯再算出バリデーションDictionary().check(messages);
     }
 
     /**
@@ -197,9 +197,21 @@ public class KijunShunyuShinseiTourokuValidationHandler {
                 .build();
     }
 
-    private ValidationDictionary create警告バリデーションDictionary() {
+    private ValidationDictionary create受給者または事業対象者バリデーションDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(KijunShunyuShinseiTourokuValidationMessages.受給者または事業対象者チェックMessage)
+                .build();
+    }
+
+    private ValidationDictionary create算定基準額バリデーションDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(KijunShunyuShinseiTourokuValidationMessages.算定基準額チェックMessage)
+                .build();
+    }
+
+    private ValidationDictionary create世帯再算出バリデーションDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(KijunShunyuShinseiTourokuValidationMessages.世帯再算出チェックMessage)
                 .build();
     }
 

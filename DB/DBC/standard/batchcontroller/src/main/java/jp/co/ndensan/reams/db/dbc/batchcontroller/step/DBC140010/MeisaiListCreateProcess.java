@@ -29,6 +29,7 @@ public class MeisaiListCreateProcess extends BatchProcessBase<MeisaiRelateEntity
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaKyufujissekiDaichoMapper."
             + "get明細");
+    private static final RString 明細_区分 = new RString("1");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 明細List;
     private JukyushaKyufujissekiDaichoProcessParameter parameter;
@@ -78,6 +79,7 @@ public class MeisaiListCreateProcess extends BatchProcessBase<MeisaiRelateEntity
         明細データ.set再審査回数(entity.getDbt3018().getSaishinsaKaisu());
         明細データ.set過誤回数(entity.getDbt3018().getKagoKaisu());
         明細データ.set審査年月(entity.getDbt3018().getShinsaYM());
+        明細データ.set区分(明細_区分);
         return 明細データ;
     }
 

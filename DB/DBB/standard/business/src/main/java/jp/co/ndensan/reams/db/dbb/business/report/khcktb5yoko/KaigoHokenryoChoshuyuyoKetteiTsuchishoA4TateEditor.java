@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.Kib
 import jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo.KibetsuChoshyuYuyoKikan;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -140,7 +141,8 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
                 source.fukaNendo = 徴収猶予決定通知書情報.get徴収猶予の情報().get賦課年度().wareki()
                         .eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
             }
-            source.ketteiKekka = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分();
+            source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分()).get名称()
+                    .replace(new RString("決定_"), RString.EMPTY);
             TsuchishoNo 通知書番号 = 徴収猶予決定通知書情報.get徴収猶予の情報().get通知書番号();
             source.tsuchishoNo = 通知書番号 != null ? 通知書番号.value() : RString.EMPTY;
             SetaiCode 世帯コード = 徴収猶予決定通知書情報.get徴収猶予の情報().get世帯コード();
@@ -163,11 +165,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
         }
 
         if (isNotNull(期別徴収猶予期間)) {
-            source.listKibetsu_1 = 期別徴収猶予期間.get特徴期();
-            source.listKibetsu_2 = 期別徴収猶予期間.get特徴月();
+            source.listKibetsu_1 = format月と期(期別徴収猶予期間.get特徴期());
+            source.listKibetsu_2 = format月と期(期別徴収猶予期間.get特徴月());
             source.listKibetsu_3 = 期別徴収猶予期間.get特徴期別金額();
-            source.listKibetsu_4 = 期別徴収猶予期間.get普徴期();
-            source.listKibetsu_5 = 期別徴収猶予期間.get普徴月();
+            source.listKibetsu_4 = format月と期(期別徴収猶予期間.get普徴期());
+            source.listKibetsu_5 = format月と期(期別徴収猶予期間.get普徴月());
             source.listKibetsu_6 = 期別徴収猶予期間.get普徴期別金額();
             source.listKibetsu_7 = 期別徴収猶予期間.get徴収猶予期間();
         }
@@ -241,6 +243,13 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
 //        source.samaKata = sofuSource.samaKata;
         }
         return source;
+    }
+
+    private RString format月と期(RString value) {
+        if (value.isEmpty()) {
+            return value;
+        }
+        return new RString(Integer.valueOf(value.trim().toString())).padLeft(RString.HALF_SPACE, 2);
     }
 
     private KibetsuChoshyuYuyoKikan get期別徴収猶予期間リストを生成する(

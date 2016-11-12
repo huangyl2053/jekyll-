@@ -126,7 +126,6 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
     private static final RString 出力ファイル名
             = new RString("DBC200006_KokuhorenJukyushaDaichoIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString("order by DbWT5331.\"hokenshaNo\"");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 百分率 = new RString("%");
@@ -150,17 +149,6 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
         }
         並び順 = order;
         RString 出力順 = MyBatisOrderByClauseCreator.create(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.class, order);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
 
         帳票データの取得Parameter.set出力順(出力順);
         int i = 0;

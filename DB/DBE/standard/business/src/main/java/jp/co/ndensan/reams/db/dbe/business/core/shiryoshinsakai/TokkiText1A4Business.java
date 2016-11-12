@@ -45,6 +45,7 @@ public class TokkiText1A4Business {
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
     private static final RString ハイフン = new RString("-");
+    private static final int SIZE_5 = 5;
     private static final int 最大ページ = 6;
     private static final int 最大連番 = 10;
     private final List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List;
@@ -266,6 +267,15 @@ public class TokkiText1A4Business {
      */
     public int getページ表示行数() {
         return 表示行数;
+    }
+
+    /**
+     * 識別コードは証記載保険者番号（左から5桁）+被保険者番号を設定してください。
+     *
+     * @return 識別コード
+     */
+    public RString get識別コード() {
+        return kyotsuEntity.getShoKisaiHokenshaNo().substring(0, SIZE_5).concat(kyotsuEntity.getHihokenshaNo());
     }
 
     private List<RString> getTextByテキスト全面イメージ() {

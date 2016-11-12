@@ -340,7 +340,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
             }
         }
         if (ShiharaiHohoKubun.口座払 != null && 帳票情報.get支払方法区分() != null) {
-            if (ShiharaiHohoKubun.口座払.getコード().equals(帳票情報.get支払方法区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
+            if (帳票情報.get支給金額() != null
+                    && ShiharaiHohoKubun.口座払.getコード().equals(帳票情報.get支払方法区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
                 source.torikeshi2 = RString.EMPTY;
             } else {
                 source.torikeshi2 = 半角アスタリスク2;

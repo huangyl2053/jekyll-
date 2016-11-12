@@ -106,6 +106,11 @@ public class GassanKyufujissekiSofuIchiranEditor implements
             if (帳票用データ.get識別コード() != null) {
                 source.shikibetsuCode = 帳票用データ.get識別コード().value();
             }
+            source.yubinNo = 帳票用データ.get郵便番号() == null ? RString.EMPTY : 帳票用データ.get郵便番号();
+            source.choikiCode = 帳票用データ.get町域コード() == null ? RString.EMPTY : 帳票用データ.get町域コード();
+            source.gyoseikuCode = 帳票用データ.get行政区コード() == null ? RString.EMPTY : 帳票用データ.get行政区コード();
+            source.shimei50onKana = 帳票用データ.get氏名50音カナ() == null ? RString.EMPTY : 帳票用データ.get氏名50音カナ();
+            source.shichosonCode = 帳票用データ.get市町村コード() == null ? RString.EMPTY : 帳票用データ.get市町村コード().value();
         }
 
         return source;

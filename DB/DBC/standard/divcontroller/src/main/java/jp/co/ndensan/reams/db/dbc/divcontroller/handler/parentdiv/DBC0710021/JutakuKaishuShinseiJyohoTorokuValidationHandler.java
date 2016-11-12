@@ -33,6 +33,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     private final RString 住宅改修内容チェックエラーメッセージ;
     private final boolean is給付率;
     private static final RString 画面モード_取消 = new RString("取消モード");
+    private static final RString 画面モード_削除 = new RString("削除モード");
     private static final RString メッセージ_1 = new RString("住宅改修データがありません。");
     private static final RString メッセージ_2 = new RString("着工日が同一年月を設定してください。");
     private static final RString メッセージ_3 = new RString("対象住宅住所が同じ住所を設定してください。");
@@ -107,6 +108,28 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
 
     }
 
+    /**
+     * 領収日変更のバリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs validate領収日変更チェック() {
+        IValidationMessages messages = new ControlValidator(div, 画面モード, 住宅改修内容チェックエラーメッセージ, is給付率)
+                .validate領収日変更チェック();
+        return create領収日変更チェックDictionary().check(messages);
+    }
+
+    /**
+     * 申請日変更のバリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs validate申請日変更チェック() {
+        IValidationMessages messages = new ControlValidator(div, 画面モード, 住宅改修内容チェックエラーメッセージ, is給付率)
+                .validate申請日変更チェック();
+        return create申請日変更チェックDictionary().check(messages);
+    }
+
     private ValidationDictionary create住宅改修内容Dictionary() {
         ValidationDictionaryBuilder builder = new ValidationDictionaryBuilder()
                 .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力, div.getTxtTeikyoYM());
@@ -123,6 +146,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                 builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.メッセージ_3);
             }
         }
+        builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.サービス年月と不一致);
         builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が申請日の年月と一致しない);
         return builder.build();
     }
@@ -138,8 +162,18 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD())
                 .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.証明書が未入力,
                         div.getCommHeadPanel().getDdlSyomeisyo())
-                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請取消事由が未入力,
-                        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu())
+                .build();
+    }
+
+    private ValidationDictionary create領収日変更チェックDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.サービス年月と不一致)
+                .build();
+    }
+
+    private ValidationDictionary create申請日変更チェックDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が申請日の年月と一致しない)
                 .build();
     }
 
@@ -159,28 +193,24 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         }
 
         /**
-         * 保存ボタンクリック時のバリデーションチェック。
+         * 保存ボタンクリック時のバリデーションチェック
          *
          * @return バリデーション突合結果
          */
         public IValidationMessages validate() {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            messages.add(ValidateChain.validateStart(div)
-                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.提供着工年月が入力)
-                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力)
-                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.住宅所有者が入力)
-                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.住宅所有者が未入力)
-                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.領収日が入力)
-                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.領収日が未入力)
-                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.申請日が入力)
-                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請日が未入力)
-                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.証明書が入力)
-                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.証明書が未入力)
-                    .messages());
-            if (画面モード_取消.equals(画面モード)) {
+            if (!画面モード_取消.equals(画面モード) && !画面モード_削除.equals(画面モード)) {
                 messages.add(ValidateChain.validateStart(div)
-                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.申請取消事由が入力)
-                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請取消事由が未入力)
+                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.提供着工年月が入力)
+                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力)
+                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.住宅所有者が入力)
+                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.住宅所有者が未入力)
+                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.領収日が入力)
+                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.領収日が未入力)
+                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.申請日が入力)
+                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請日が未入力)
+                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.証明書が入力)
+                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.証明書が未入力)
                         .messages());
             }
             return messages;
@@ -221,6 +251,40 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                             .messages());
                 }
             }
+            if (!画面モード_取消.equals(画面モード) && !画面モード_削除.equals(画面モード)) {
+                messages.add(ValidateChain.validateStart(div)
+                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.領収日変更)
+                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.サービス年月と不一致)
+                        .messages());
+                messages.add(ValidateChain.validateStart(div)
+                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.提供着工年月が申請日の年月と一致しない)
+                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が申請日の年月と一致しない)
+                        .messages());
+            }
+            return messages;
+        }
+
+        /**
+         * 領収日変更のバリデーションチェック
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages validate領収日変更チェック() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.領収日変更)
+                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.サービス年月と不一致)
+                    .messages());
+            return messages;
+        }
+
+        /**
+         * 申請日変更のバリデーションチェック
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages validate申請日変更チェック() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.提供着工年月が申請日の年月と一致しない)
                     .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が申請日の年月と一致しない)
@@ -231,14 +295,14 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
 
     private static enum JutakuKaishuShinseiJyohoTorokuValidationMessages implements IValidationMessage {
 
-        提供着工年月が未入力(UrErrorMessages.必須, "提供（着工）年月"),
+        提供着工年月が未入力(UrErrorMessages.必須, "サービス年月"),
         給付率が未入力(UrErrorMessages.必須, "給付率"),
         住宅所有者が未入力(UrErrorMessages.必須, "住宅所有者"),
         申請日が未入力(UrErrorMessages.必須, "申請日"),
-        申請取消事由が未入力(UrErrorMessages.必須, "申請取消事由"),
         領収日が未入力(UrErrorMessages.必須, "領収日"),
         証明書が未入力(UrErrorMessages.必須, "証明書"),
-        提供着工年月が申請日の年月と一致しない(DbcErrorMessages.年月と不一致, "申請日", "提供（着工）年月"),
+        提供着工年月が申請日の年月と一致しない(DbcErrorMessages.年月と不一致, "申請日", "サービス年月"),
+        サービス年月と不一致(DbcErrorMessages.サービス年月と不一致, "領収日"),
         メッセージ_1(DbcErrorMessages.住宅改修データなし),
         メッセージ_2(DbcErrorMessages.着工日不一致),
         受給認定が無効チェック(DbzErrorMessages.実行不可, "受給認定有効期間外", "入力"),

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
+import java.io.File;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB112001.CheckShotokuJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB112001.InsKaigoShotokuKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB112001.SelectShotokuJohoProcess;
@@ -16,6 +18,12 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 所得情報抽出・連携_当初広域のバッチFlowです。
@@ -30,6 +38,9 @@ public class DBB112002_ToushoShotokuJohoChushutsuRenkeiKoiki extends BatchFlowBa
     private static final String 帳票とEUCファイル出力 = "callSpoolShotokuJohoIchiranProcess";
     private static final String 処理日付管理マスタの更新 = "callUpdShoriHidukeKanriProcess";
 
+    private static final RString DEC05F001 = new RString("DEC05F001");
+    private static final RString DEE01F001 = new RString("DEE01F001");
+
     private ShutokuJohoShuchutsuRenkeiProcessParameter processParameter;
 
     @Override
@@ -39,7 +50,28 @@ public class DBB112002_ToushoShotokuJohoChushutsuRenkeiKoiki extends BatchFlowBa
     }
 
     @Override
+    @SuppressWarnings("checkstyle:illegaltoken")
     protected void defineFlow() {
+        List<UzT0885SharedFileEntryEntity> 国保List = SharedFile.searchSharedFile(DEC05F001);
+        List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(DEE01F001);
+        for (UzT0885SharedFileEntryEntity entity : 国保List) {
+            国保情報List.add(entity);
+        }
+        for (UzT0885SharedFileEntryEntity entity : 国保情報List) {
+            ReadOnlySharedFileEntryDescriptor descriptor
+                    = ReadOnlySharedFileEntryDescriptor.fromEntity(entity);
+            RString path = SharedFile.getDirectAccessPath(descriptor);
+            FilesystemPath filesystemPath = SharedFile.copyToLocal(descriptor, FilesystemPath.fromString(path));
+            File file = new File(filesystemPath.toString());
+            File[] files = file.listFiles();
+            for (File file1 : files) {
+                if (file1.getName().startsWith(DEE01F001.toString()) || file1.getName().startsWith(DEC05F001.toString())) {
+                    RString csvReaderPath = Path.combinePath(filesystemPath.toRString(), new RString(file1.getName()));
+                    processParameter.setCsvファイルPath(csvReaderPath);
+                    executeStep(CSVファイル読み込み);
+                }
+            }
+        }
         executeStep(CSVファイル読み込み);
         executeStep(所得情報をチェックとEUCファイル出力);
         executeStep(介護所得TEMPテーブルに登録);

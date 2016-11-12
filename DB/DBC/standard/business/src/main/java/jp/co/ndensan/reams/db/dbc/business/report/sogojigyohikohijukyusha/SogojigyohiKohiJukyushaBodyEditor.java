@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikohijukyusha.SogojigyohiKohiJukyushaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikohijukyusha.SogojigyohiKohiJukyushaSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -27,6 +29,8 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
     private final SogojigyohiKohiJukyushaEntity 帳票出力対象データ;
     private final boolean 集計Flag;
     private static final int EIGHT = 8;
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -68,6 +72,7 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
         source.listLower_4 = 帳票出力対象データ.get宛名名称();
         source.listUpper_11 = getColumnValue(帳票出力対象データ.get証記載保険者番号());
         source.shikibetsuCode = getColumnValue(帳票出力対象データ.get識別コード());
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_10);
     }
 
     private void edit集計(SogojigyohiKohiJukyushaSource source) {

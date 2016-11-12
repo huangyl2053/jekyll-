@@ -77,7 +77,7 @@ public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3
             source.one_listShinsei1_11 = RString.EMPTY;
             source.one_listZenkaiｙukokikan1_1 = shinsakaishiryoList.get(index).get前回期間_下();
             source.one_listYukokikan1_1 = RString.EMPTY;
-            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            source.shikibetuCode = new ShikibetsuCode(shinsakaishiryoList.get(index).get識別コード());
             if (shinsakaishiryoList.get(index).is事務局() && shinsakaishiryoList.get(index).get申請書管理番号() != null
                     && !shinsakaishiryoList.get(index).get申請書管理番号().isEmpty()) {
                 source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),

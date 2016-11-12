@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受給者給付実績台帳の緊急時施設療養RelateEntityクラスです。
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3019KyufujissekiKinkyuShise
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KinkyuuziShisetuRyouyouRelateEntity {
 
+    private RString dbT3118_ryakush;
     private DbT3017KyufujissekiKihonEntity dbt3017;
     private DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity dbt3019;
 }

@@ -70,7 +70,7 @@ public class JimuShinsakaishiryoA4Group1Editor implements IJimuShinsakaishiryoA4
         source.one_listShinsei_12 = RString.EMPTY;
         source.one_listShinsei_13 = RString.EMPTY;
         if (business.is事務局()) {
-            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
             if (business.get申請書管理番号() != null && !business.get申請書管理番号().isEmpty()) {
                 source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
             }

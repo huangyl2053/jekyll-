@@ -191,7 +191,10 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
                 datasource.add(new KeyValueDataSource(サービス提供年月.toDateString(), サービス提供年月.wareki().toDateString()));
             }
         }
-        div.getShinseishoHakkoParameters().getDdlServiceYM().setDataSource(datasource);
+        if (!datasource.isEmpty()) {
+            div.getShinseishoHakkoParameters().getDdlServiceYM().setDataSource(datasource);
+            div.getShinseishoHakkoParameters().getDdlServiceYM().setSelectedIndex(BEGININDEX);
+        }
     }
 
     /**

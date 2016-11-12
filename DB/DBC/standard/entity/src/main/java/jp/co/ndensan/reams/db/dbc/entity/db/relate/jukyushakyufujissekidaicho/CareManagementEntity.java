@@ -89,5 +89,6 @@ public class CareManagementEntity extends DbTableEntityBase<CareManagementEntity
     private int 過誤回数;
     @TempTableColumnOrder(27)
     private FlexibleYearMonth 審査年月;
-
+    @TempTableColumnOrder(28)
+    private RString 略称;
 }

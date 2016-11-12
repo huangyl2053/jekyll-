@@ -139,4 +139,16 @@ public interface IHonsanteiTsuchishoIkkatsuHakkoMapper {
      */
     List<HonsanteiTsuchishoTempEntity> select納入通知書(PrtNonyuTsuchishoParameter parameter);
 
+    /**
+     * 特徴8月開始者区分を更新するメソッドです。
+     *
+     */
+    void update特徴8月開始者区分();
+
+    /**
+     * 特徴10月開始者区分を更新するメソッドです。
+     *
+     */
+    void update特徴10月開始者区分();
+
 }

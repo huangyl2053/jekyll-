@@ -40,9 +40,9 @@ public class KogakuKyufuTaishoListValidationHandler {
     private static final RString 事業者番号 = new RString("事業者番号");
     private static final RString サービス種類 = new RString("サービス種類");
     private static final RString ONE_RS = new RString("1");
+    private static final RString 明細合計区分_事業者番号_サービス種類 = new RString("明細合計区分、事業者番号、サービス種類コードと同じデータ");
     private static final RString サービス費用合計と利用者負担合計 = new RString("サービス費用合計と利用者負担合計");
-    private static final RString 明細合計区分 = new RString("明細合計区分");
-    private static final RString サービス種類コード = new RString("サービス種類コード");
+    private static final RString 追加 = new RString("追加");
 
     /**
      * コンストラクタです。
@@ -66,9 +66,10 @@ public class KogakuKyufuTaishoListValidationHandler {
     /**
      * 確定チェック
      *
-     * @return validPairs
+     * @param 処理モード RString
+     * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 確定チェック() {
+    public ValidationMessageControlPairs 確定チェック(RString 処理モード) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (ONE_RS.equals(div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey())) {
             if (div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue() == null
@@ -111,7 +112,9 @@ public class KogakuKyufuTaishoListValidationHandler {
         List<dgTaishoshaIchiran_Row> rowData = div.getDgTaishoshaIchiran().getDataSource();
         List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
         rowList.addAll(rowData);
-        rowList.remove(div.getDgTaishoshaIchiran().getClickedItem());
+        if (!追加.equals(処理モード)) {
+            rowList.remove(div.getDgTaishoshaIchiran().getClickedItem());
+        }
         boolean flag1 = false;
         boolean flag2 = false;
         boolean flag3 = false;
@@ -128,13 +131,7 @@ public class KogakuKyufuTaishoListValidationHandler {
             if (flag1 && flag2 && flag3) {
                 validPairs.add(new ValidationMessageControlPair(
                         new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
-                                UrErrorMessages.既に登録済, サービス種類コード.toString())));
-                validPairs.add(new ValidationMessageControlPair(
-                        new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
-                                UrErrorMessages.既に登録済, 事業者番号.toString())));
-                validPairs.add(new ValidationMessageControlPair(
-                        new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
-                                UrErrorMessages.既に登録済, 明細合計区分.toString())));
+                                UrErrorMessages.既に登録済, 明細合計区分_事業者番号_サービス種類.toString())));
                 break;
             }
         }

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ca.cax.business.search.TotalShunyuSearchKeyBuilder;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSaishutsuKubun;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSokuhoKubun;
 import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
+import jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukadaichodatahenshu.FukaDaichoInfo;
@@ -57,6 +58,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2018RealHakkoRirekiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoFindEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
@@ -137,7 +139,6 @@ import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
-import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
@@ -231,7 +232,6 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
     private final DbT2018RealHakkoRirekiDac リアル発行履歴Dac;
     private RString psmShikibetsuTaisho;
-    private RString psmTotalShunyu;
 
     /**
      * コンストラクタです。
@@ -1628,16 +1628,22 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         RString 科目コード = rStringBuilder.toRString();
         RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
         psmShikibetsuTaisho = buildShikibetsuTaishoSearchKey(賦課の情報_更正後);
-        psmTotalShunyu = buildTotalShunyuSearchKey(賦課の情報_更正後);
+        MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
+        ICaFt702FindTotalShunyuFunctionMapper findTotalShunyuMapper = mapperProvider.create(ICaFt702FindTotalShunyuFunctionMapper.class);
         KakushuTsuchishoEntityParameter 更正後
                 = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正後.get調定年度(),
                         賦課の情報_更正後.get賦課年度(), 賦課の情報_更正後.get通知書番号(),
                         賦課の情報_更正後.get履歴番号(), 賦課の情報_更正後.get調定日時(),
                         psmShikibetsuTaisho, 処理日, kozaSearchKey, list, 科目コード,
-                        賦課の情報_更正後.get識別コード(), psmTotalShunyu,
+                        賦課の情報_更正後.get識別コード(), RString.EMPTY,
                         賦課の情報_更正後.get調定日時().getDate().toDateString());
         KakushuTsuchishoEntity 更正後entity = mapper.get更正前後賦課の情報(更正後);
+        更正後entity.set収入情報取得PSM(get収入情報(更正後entity, findTotalShunyuMapper));
         KakushuTsuchishoEntity 更正前entity = get賦課の情報更正前(賦課の情報_更正前, 処理日, kozaSearchKey, list, 科目コード);
+        if (null != 更正前entity) {
+            List<TotalShunyuRelateEntity> 収入情報_更正前 = get収入情報(更正前entity, findTotalShunyuMapper);
+            更正前entity.set収入情報取得PSM(収入情報_更正前);
+        }
         FukaAtena 賦課の情報更正後 = get賦課の情報_宛名(更正後entity);
         FukaAtena 賦課の情報更正前 = get賦課の情報_宛名(更正前entity);
 
@@ -1705,19 +1711,30 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         return new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
     }
 
-    private RString buildTotalShunyuSearchKey(FukaJoho 賦課の情報_更正後) {
+    private List<TotalShunyuRelateEntity> get収入情報(KakushuTsuchishoEntity entity, ICaFt702FindTotalShunyuFunctionMapper findTotalShunyuMapper) {
+        List<TotalShunyuRelateEntity> 収入情報 = new ArrayList<>();
+        for (KibetsuEntity 介護期別RelateEntity : entity.get介護期別RelateEntity()) {
+            long 収納ID = 介護期別RelateEntity.get調定共通Entity().get(0).getShunoId();
+            HashMap parameter = buildTotalShunyuSearchKey(収納ID);
+            List<TotalShunyuRelateEntity> entities = findTotalShunyuMapper.selectPsmTotalShunyu(parameter);
+            収入情報.addAll(entities);
+        }
+        return 収入情報;
+    }
+
+    private HashMap buildTotalShunyuSearchKey(long 収納ID) {
         TotalShunyuSearchKeyBuilder caFt702SearchKey = new TotalShunyuSearchKeyBuilder(SearchSokuhoKubun.全て, SearchSaishutsuKubun.全て);
-        caFt702SearchKey.set通知書番号From(new TsuchishoNo(new Decimal(賦課の情報_更正後.get通知書番号().toString())));
-        caFt702SearchKey.set通知書番号To(new TsuchishoNo(new Decimal(賦課の情報_更正後.get通知書番号().toString())));
-        caFt702SearchKey.set調定年度From(new RYear(賦課の情報_更正後.get調定年度().toString()));
-        caFt702SearchKey.set調定年度To(new RYear(賦課の情報_更正後.get調定年度().toString()));
-        caFt702SearchKey.set課税年度From(new RYear(賦課の情報_更正後.get賦課年度().toString()));
-        caFt702SearchKey.set課税年度To(new RYear(賦課の情報_更正後.get賦課年度().toString()));
-        caFt702SearchKey.set識別コードFrom(new ShikibetsuCode(賦課の情報_更正後.get識別コード().value()));
-        caFt702SearchKey.set識別コードTo(new ShikibetsuCode(賦課の情報_更正後.get識別コード().value()));
-        caFt702SearchKey.set科目リスト(get検索用科目リスト());
+        caFt702SearchKey.set収納ID(収納ID);
+//        caFt702SearchKey.set通知書番号To(new TsuchishoNo(new Decimal(賦課の情報_更正後.get通知書番号().toString())));
+//        caFt702SearchKey.set調定年度From(new RYear(賦課の情報_更正後.get調定年度().toString()));
+//        caFt702SearchKey.set調定年度To(new RYear(賦課の情報_更正後.get調定年度().toString()));
+//        caFt702SearchKey.set課税年度From(new RYear(賦課の情報_更正後.get賦課年度().toString()));
+//        caFt702SearchKey.set課税年度To(new RYear(賦課の情報_更正後.get賦課年度().toString()));
+//        caFt702SearchKey.set識別コードFrom(new ShikibetsuCode(賦課の情報_更正後.get識別コード().value()));
+//        caFt702SearchKey.set識別コードTo(new ShikibetsuCode(賦課の情報_更正後.get識別コード().value()));
+//        caFt702SearchKey.set科目リスト(get検索用科目リスト());
         CaFt702FindTotalShunyuFunction psmEntity = new CaFt702FindTotalShunyuFunction(caFt702SearchKey);
-        return new RString(psmEntity.toString());
+        return psmEntity.getParameterMap();
     }
 
     private List<NokiJoho> set普徴納期情報List(FukaJoho 賦課の情報_更正後, GennenKanen 年度区分) {
@@ -1781,7 +1798,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                         賦課の情報_更正前.get賦課年度(), 賦課の情報_更正前.get通知書番号(),
                         賦課の情報_更正前.get履歴番号(), 賦課の情報_更正前.get調定日時(),
                         psmShikibetsuTaisho, 処理日, kozaSearchKey, list, 科目コード,
-                        賦課の情報_更正前.get識別コード(), psmTotalShunyu,
+                        賦課の情報_更正前.get識別コード(), RString.EMPTY,
                         賦課の情報_更正前.get調定日時().getDate().toDateString());
         return mapper.get更正前後賦課の情報(更正前);
     }

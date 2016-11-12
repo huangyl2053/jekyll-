@@ -104,30 +104,6 @@ public class TokubetsuKyufuJigyoshaSearchBuilder {
     }
 
     /**
-     * 介護国保連ＩＦ訂正区分を設定します。
-     *
-     * @param 介護国保連ＩＦ訂正区分 介護国保連ＩＦ訂正区分
-     * @return {@link TokubetsuKyufuJigyoshaSearchBuilder}
-     */
-    public TokubetsuKyufuJigyoshaSearchBuilder set介護国保連ＩＦ訂正区分(RString 介護国保連ＩＦ訂正区分) {
-        requireNonNull(介護国保連ＩＦ訂正区分, UrSystemErrorMessages.値がnull.getReplacedMessage("介護国保連ＩＦ訂正区分"));
-        entity.get事業者().setTeiseiKubun(介護国保連ＩＦ訂正区分);
-        return this;
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正年月日を設定します。
-     *
-     * @param 介護国保連ＩＦ訂正年月日 介護国保連ＩＦ訂正年月日
-     * @return {@link TokubetsuKyufuJigyoshaSearchBuilder}
-     */
-    public TokubetsuKyufuJigyoshaSearchBuilder set介護国保連ＩＦ訂正年月日(FlexibleDate 介護国保連ＩＦ訂正年月日) {
-        requireNonNull(介護国保連ＩＦ訂正年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護国保連ＩＦ訂正年月日"));
-        entity.get事業者().setTeiseiYMD(介護国保連ＩＦ訂正年月日);
-        return this;
-    }
-
-    /**
      * 介護国保連ＩＦ法人種別を設定します。
      *
      * @param 介護国保連ＩＦ法人種別 介護国保連ＩＦ法人種別

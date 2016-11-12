@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -143,16 +142,6 @@ public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
         @Test
         public void get介護国保連ＩＦ異動年月日は_entityが持つ介護国保連ＩＦ異動年月日を返す() {
             assertThat(sut.get介護国保連ＩＦ異動年月日(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getIdoYMD()));
-        }
-
-        @Test
-        public void get介護国保連ＩＦ訂正区分は_entityが持つ介護国保連ＩＦ訂正区分を返す() {
-            assertThat(sut.get介護国保連ＩＦ訂正区分(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getTeiseiKubun()));
-        }
-
-        @Test
-        public void get介護国保連ＩＦ訂正年月日は_entityが持つ介護国保連ＩＦ訂正年月日を返す() {
-            assertThat(sut.get介護国保連ＩＦ訂正年月日(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getTeiseiYMD()));
         }
 
         @Test

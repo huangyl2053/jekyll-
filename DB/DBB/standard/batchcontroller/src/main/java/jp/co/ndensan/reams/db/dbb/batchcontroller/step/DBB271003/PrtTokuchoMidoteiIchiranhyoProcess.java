@@ -226,7 +226,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 entity.getFuichiRiyuCode()
         );
         target.setHihokenshaNo(entity.getHihokenshaNo());
-        target.setShichosonCode(entity.getGenLasdecCode().code市町村RString());
+        target.setShichosonCode(entity.getGenLasdecCode());
         TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(
                 導入団体クラス, 出力順項目リスト, 改ページ項目リスト, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);

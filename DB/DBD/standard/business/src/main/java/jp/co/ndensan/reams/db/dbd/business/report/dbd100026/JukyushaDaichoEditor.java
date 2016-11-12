@@ -93,6 +93,10 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             setShikaku(source);
             setRoreiFukushiNenkin(source);
             setSeikatsuHogo(source);
+        } else if (出力オプション.equals(ONE)) {
+            set区分1(source);
+            set区分2(source);
+            set区分3(source);
         }
         return source;
     }
@@ -113,7 +117,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         if (要介護認定情報EntityList.get要介護認定情報() != null && !要介護認定情報EntityList.get要介護認定情報().isEmpty()
                 && 要介護認定情報EntityList.get要介護認定情報().size() - 1 >= index) {
             NinteiKekkaJohoEntity 要介護認定情報Entity = 要介護認定情報EntityList.get要介護認定情報().get(index);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 要介護認定情報EntityList.get要介護認定情報().size() < 7)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 要介護認定情報EntityList.get要介護認定情報().size() <= 7)) {
                 source.ninteiKbn = RString.EMPTY;
             } else {
                 source.ninteiKbn = 超えた;
@@ -171,7 +175,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
                 && !負担限度額認定情報EntityList.isEmpty()
                 && 負担限度額認定情報EntityList.size() - 1 >= indexnew) {
             FutanGendogakuNinteiJohoEntity 負担限度額認定情報Entity = 負担限度額認定情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 負担限度額認定情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 負担限度額認定情報EntityList.size() <= 5)) {
                 source.futanGendogakuNinteiKbn = RString.EMPTY;
             } else {
                 source.futanGendogakuNinteiKbn = 超えた;
@@ -213,7 +217,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (社福法人軽減情報EntityList != null && !社福法人軽減情報EntityList.isEmpty() && 社福法人軽減情報EntityList.size() - 1 >= indexnew) {
             ShafuHojinKeigenJohoEntity 社福法人軽減情報Entity = 社福法人軽減情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 社福法人軽減情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 社福法人軽減情報EntityList.size() <= 5)) {
                 source.shaFukuKeigenKbn = RString.EMPTY;
             } else {
                 source.shaFukuKeigenKbn = 超えた;
@@ -254,7 +258,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (利用者負担減免情報EntityList != null && !利用者負担減免情報EntityList.isEmpty() && 利用者負担減免情報EntityList.size() - 1 >= indexnew) {
             RiyoshaFutanGenmenJohoEntity 利用者負担減免情報Entity = 利用者負担減免情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 利用者負担減免情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 利用者負担減免情報EntityList.size() <= 5)) {
                 source.riyoshaFutanGenmenKbn = RString.EMPTY;
             } else {
                 source.riyoshaFutanGenmenKbn = 超えた;
@@ -283,7 +287,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (訪問介護等減額情報EntityList != null && !訪問介護等減額情報EntityList.isEmpty() && 訪問介護等減額情報EntityList.size() - 1 >= indexnew) {
             HomonKaigoGenmenJohoEntity 訪問介護等減額情報Entity = 訪問介護等減額情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 訪問介護等減額情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 訪問介護等減額情報EntityList.size() <= 5)) {
                 source.honmonKaigoRiyoshaFutanGengakuKbn = RString.EMPTY;
             } else {
                 source.honmonKaigoRiyoshaFutanGengakuKbn = 超えた;
@@ -318,7 +322,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (標準負担減額情報EntityList != null && !標準負担減額情報EntityList.isEmpty() && 標準負担減額情報EntityList.size() - 1 >= indexnew) {
             HyojunFutanGengakuJohoEntity 標準負担減額情報Entity = 標準負担減額情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 標準負担減額情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 標準負担減額情報EntityList.size() <= 5)) {
                 source.hyojunFutanGengakuKbn = RString.EMPTY;
             } else {
                 source.hyojunFutanGengakuKbn = 超えた;
@@ -347,7 +351,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (特別地域加算減免情報EntityList != null && !特別地域加算減免情報EntityList.isEmpty() && 特別地域加算減免情報EntityList.size() - 1 >= indexnew) {
             TokubetsuChiikiKasanGenmenJohoEntity 特別地域加算減免情報Entity = 特別地域加算減免情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 特別地域加算減免情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 特別地域加算減免情報EntityList.size() <= 5)) {
                 source.tokubetsuChiikiKasanGenmenKbn = RString.EMPTY;
             } else {
                 source.tokubetsuChiikiKasanGenmenKbn = 超えた;
@@ -379,7 +383,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (施設入退所情報EntityList != null && !施設入退所情報EntityList.isEmpty() && 施設入退所情報EntityList.size() - 1 >= indexnew) {
             ShisetsuNyutaishojohoEntity 施設入退所情報Entity = 施設入退所情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 施設入退所情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 施設入退所情報EntityList.size() <= 5)) {
                 source.shisetsuNyutaishoKbn = RString.EMPTY;
             } else {
                 source.shisetsuNyutaishoKbn = 超えた;
@@ -408,7 +412,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (居宅計画届出情報EntityList != null && !居宅計画届出情報EntityList.isEmpty() && 居宅計画届出情報EntityList.size() - 1 >= indexnew) {
             ItakuKeikakuTodokedejohoEntity 居宅計画届出情報Entity = 居宅計画届出情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 居宅計画届出情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 居宅計画届出情報EntityList.size() <= 5)) {
                 source.kyotakuKeikakuKbn = RString.EMPTY;
             } else {
                 source.kyotakuKeikakuKbn = 超えた;
@@ -452,7 +456,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (特例施設入退所情報EntityList != null && !特例施設入退所情報EntityList.isEmpty() && 特例施設入退所情報EntityList.size() - 1 >= indexnew) {
             TokureiShisetuNyutaishojohoEntity 特例施設入退所情報Entity = 特例施設入退所情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 特例施設入退所情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 特例施設入退所情報EntityList.size() <= 5)) {
                 source.tokureiShisetsuNyutaishoKbn = RString.EMPTY;
             } else {
                 source.tokureiShisetsuNyutaishoKbn = 超えた;
@@ -481,7 +485,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (支払方法変更情報EntityList != null && !支払方法変更情報EntityList.isEmpty() && 支払方法変更情報EntityList.size() - 1 >= indexnew) {
             ShiharaHohoHenkojohoEntity 支払方法変更情報Entity = 支払方法変更情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 支払方法変更情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 支払方法変更情報EntityList.size() <= 5)) {
                 source.shiharaiHohoHenkoKbn = RString.EMPTY;
             } else {
                 source.shiharaiHohoHenkoKbn = 超えた;
@@ -519,7 +523,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (給付額減額情報EntityList != null && !給付額減額情報EntityList.isEmpty() && 給付額減額情報EntityList.size() - 1 >= indexnew) {
             KyufugakuGengakujohoEntity 給付額減額情報Entity = 給付額減額情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 給付額減額情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 給付額減額情報EntityList.size() <= 5)) {
                 source.kyufugakuGengakuKbn = RString.EMPTY;
             } else {
                 source.kyufugakuGengakuKbn = 超えた;
@@ -554,7 +558,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (資格情報EntityList != null && !資格情報EntityList.isEmpty() && 資格情報EntityList.size() - 1 >= indexnew) {
             ShikakujohoEntity 資格情報Entity = 資格情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 資格情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 資格情報EntityList.size() <= 5)) {
                 source.shikakuKbn = RString.EMPTY;
             } else {
                 source.shikakuKbn = 超えた;
@@ -596,7 +600,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (老齢福祉年金情報EntityList != null && !老齢福祉年金情報EntityList.isEmpty() && 老齢福祉年金情報EntityList.size() - 1 >= indexnew) {
             RoreiFukushiNenkinjohoEntity 老齢福祉年金情報Entity = 老齢福祉年金情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 老齢福祉年金情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 老齢福祉年金情報EntityList.size() <= 5)) {
                 source.roreiFukushiNenkinKbn = RString.EMPTY;
             } else {
                 source.roreiFukushiNenkinKbn = 超えた;
@@ -616,7 +620,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         int indexnew = index - 2 * (page - 1);
         if (生活保護情報EntityList != null && !生活保護情報EntityList.isEmpty() && 生活保護情報EntityList.size() - 1 >= indexnew) {
             SeikatsuHogojohoEntity 生活保護情報Entity = 生活保護情報EntityList.get(indexnew);
-            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 生活保護情報EntityList.size() < 5)) {
+            if (出力オプション.equals(ZERO) || (出力オプション.equals(ONE) && 生活保護情報EntityList.size() <= 5)) {
                 source.seikatsuHogoKbn = RString.EMPTY;
             } else {
                 source.seikatsuHogoKbn = 超えた;
@@ -947,5 +951,56 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.listShikaku_16 = 資格情報Entity.get解除事由().get名称();
         }
         return source;
+    }
+
+    private void set区分1(JukyushaDaichoReportSource source) {
+        if (this.帳票出力用受給者台帳.get負担限度額認定情報EntityList().size() > 5) {
+            source.futanGendogakuNinteiKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get社福法人軽減情報EntityList().size() > 5) {
+            source.shaFukuKeigenKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get利用者負担減免情報EntityList().size() > 5) {
+            source.riyoshaFutanGenmenKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get訪問介護等減額情報EntityList().size() > 5) {
+            source.honmonKaigoRiyoshaFutanGengakuKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get標準負担減額情報EntityList().size() > 5) {
+            source.hyojunFutanGengakuKbn = 超えた;
+        }
+    }
+
+    private void set区分2(JukyushaDaichoReportSource source) {
+        if (this.帳票出力用受給者台帳.get特別地域加算減免情報EntityList().size() > 5) {
+            source.tokubetsuChiikiKasanGenmenKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get施設入退所情報EntityList().size() > 5) {
+            source.shisetsuNyutaishoKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get居宅計画届出情報EntityList().size() > 5) {
+            source.kyotakuKeikakuKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get特例施設入退所情報EntityList().size() > 5) {
+            source.tokureiShisetsuNyutaishoKbn = 超えた;
+        }
+    }
+
+    private void set区分3(JukyushaDaichoReportSource source) {
+        if (this.帳票出力用受給者台帳.get支払方法変更情報EntityList().size() > 5) {
+            source.shiharaiHohoHenkoKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get給付額減額情報EntityList().size() > 5) {
+            source.kyufugakuGengakuKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get資格情報EntityList().size() > 5) {
+            source.shikakuKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get老齢福祉年金情報EntityList().size() > 5) {
+            source.roreiFukushiNenkinKbn = 超えた;
+        }
+        if (this.帳票出力用受給者台帳.get生活保護情報EntityList().size() > 5) {
+            source.seikatsuHogoKbn = 超えた;
+        }
     }
 }
