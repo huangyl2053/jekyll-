@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.Toku
 import jp.co.ndensan.reams.db.dbc.service.core.interfacekanrikousin.UpDoInterfaceKanriKousinManager;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -202,7 +202,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         給付額減額処理(給付額減額List, 処理年月);
         List<HyojunFutanEntity> 標準負担List = get標準負担();
         標準負担処理(標準負担List, 処理年月);
-        List<DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity> 利用者負担List = get利用者負担();
+        List<DbT4014RiyoshaFutangakuGengakuEntity> 利用者負担List = get利用者負担();
         利用者負担処理(利用者負担List, 処理年月);
         List<TokuteiNyusyoshaInfoEntity> 特定入所者List = get特定入所者();
         特定入所者処理(特定入所者List, 処理年月);
@@ -281,7 +281,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         異動一時2By標準負担パターン1Check(標準負担List, 処理年月);
     }
 
-    private void 利用者負担処理(List<DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity> 利用者負担List, FlexibleYearMonth 処理年月) {
+    private void 利用者負担処理(List<DbT4014RiyoshaFutangakuGengakuEntity> 利用者負担List, FlexibleYearMonth 処理年月) {
         異動一時2By利用者負担パターン1Check(利用者負担List, 処理年月);
         異動一時2By利用者負担パターン2Check(利用者負担List, 処理年月);
     }
@@ -1091,9 +1091,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         insertEntity.setエラーフラグ(エラーなし);
     }
 
-    private void 異動一時2By利用者負担パターン1Check(List<DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity> 利用者負担List,
+    private void 異動一時2By利用者負担パターン1Check(List<DbT4014RiyoshaFutangakuGengakuEntity> 利用者負担List,
             FlexibleYearMonth 処理年月) {
-        for (DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担 : 利用者負担List) {
+        for (DbT4014RiyoshaFutangakuGengakuEntity 利用者負担 : 利用者負担List) {
             if (!isBeforeYearMonth(利用者負担.getTekiyoKaishiYMD(), 処理年月) && 履歴番号 != 利用者負担.getRirekiNo()) {
                 continue;
             }
@@ -1111,9 +1111,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
     }
 
-    private void 異動一時2By利用者負担パターン2Check(List<DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity> 利用者負担List,
+    private void 異動一時2By利用者負担パターン2Check(List<DbT4014RiyoshaFutangakuGengakuEntity> 利用者負担List,
             FlexibleYearMonth 処理年月) {
-        for (DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担 : 利用者負担List) {
+        for (DbT4014RiyoshaFutangakuGengakuEntity 利用者負担 : 利用者負担List) {
             if (!(isBeforeYearMonth(利用者負担.getShinseiYMD(), 処理年月) && 履歴番号 == 利用者負担.getRirekiNo())) {
                 continue;
             }
@@ -1132,14 +1132,14 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private void set異動一時2By利用者負担パターン1(IdoTblTmpEntity insertEntity,
-            DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担, FlexibleDate 異動年月日) {
+            DbT4014RiyoshaFutangakuGengakuEntity 利用者負担, FlexibleDate 異動年月日) {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
         if (!STR_2.equals(insertEntity.get減免申請中区分コード())) {
             insertEntity.set減免申請中区分コード(STR_3);
         }
         insertEntity.set利用者負担区分コード(STR_1);
-        HokenKyufuRitsu 給付率 = 利用者負担.getKyufuritsu();
+        HokenKyufuRitsu 給付率 = 利用者負担.getKyuhuritsu();
         if (給付率 != null) {
             insertEntity.set給付率(new Decimal(給付率.toString()));
         }
@@ -1155,7 +1155,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private void set異動一時2By利用者負担パターン2(IdoTblTmpEntity insertEntity,
-            DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担, FlexibleDate 異動年月日) {
+            DbT4014RiyoshaFutangakuGengakuEntity 利用者負担, FlexibleDate 異動年月日) {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
         insertEntity.set減免申請中区分コード(STR_2);
@@ -1638,10 +1638,10 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         return 標準負担List;
     }
 
-    private List<DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity> get利用者負担() {
-        List<DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity> 利用者負担List = new ArrayList<>();
+    private List<DbT4014RiyoshaFutangakuGengakuEntity> get利用者負担() {
+        List<DbT4014RiyoshaFutangakuGengakuEntity> 利用者負担List = new ArrayList<>();
         for (IdouTblEntity 異動一時 : 異動一時List) {
-            DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担 = get利用者負担entity(異動一時.get利用者負担額減額());
+            DbT4014RiyoshaFutangakuGengakuEntity 利用者負担 = get利用者負担entity(異動一時.get利用者負担額減額());
             if (利用者負担 == null) {
                 continue;
             }
@@ -1845,11 +1845,11 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         return entity;
     }
 
-    private DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity get利用者負担entity(RString 利用者負担) {
+    private DbT4014RiyoshaFutangakuGengakuEntity get利用者負担entity(RString 利用者負担) {
         if (RString.isNullOrEmpty(利用者負担)) {
             return null;
         }
-        DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity entity = new DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity();
+        DbT4014RiyoshaFutangakuGengakuEntity entity = new DbT4014RiyoshaFutangakuGengakuEntity();
         List<RString> 利用者負担Info = 利用者負担.split(SPLIT.toString());
         entity.setTekiyoKaishiYMD(new FlexibleDate(利用者負担Info.get(ORDER_0)));
         entity.setTekiyoShuryoYMD(new FlexibleDate(利用者負担Info.get(ORDER_1)));

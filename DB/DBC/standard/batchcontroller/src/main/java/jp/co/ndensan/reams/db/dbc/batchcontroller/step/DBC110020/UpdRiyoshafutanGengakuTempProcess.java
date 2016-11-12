@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTblEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -64,7 +64,7 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
 
     @Override
     protected void process(IdouTempEntity entity) {
-        DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担entity = entity.get利用者負担();
+        DbT4014RiyoshaFutangakuGengakuEntity 利用者負担entity = entity.get利用者負担();
         if (区分_1.equals(利用者負担entity.getKetteiKubun())
                 && (isDateEmpty(利用者負担entity.getTekiyoKaishiYMD()) || isDateEmpty(利用者負担entity.getTekiyoShuryoYMD()))) {
             return;
@@ -123,7 +123,7 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
         }
     }
 
-    private RString 利用者負担全項目(DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担) {
+    private RString 利用者負担全項目(DbT4014RiyoshaFutangakuGengakuEntity 利用者負担) {
         RString 全項目 = RString.EMPTY;
         全項目 = cancatYMD(利用者負担.getTekiyoKaishiYMD(), 全項目);
         全項目 = cancatYMD(利用者負担.getTekiyoShuryoYMD(), 全項目);
@@ -137,13 +137,7 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
         全項目 = cancatRString(利用者負担.getKetteiKubun(), 全項目);
         全項目 = cancatRString(利用者負担.getHiShoninRiyu(), 全項目);
         全項目 = 全項目
-                .concat(利用者負担.getShogaishaTechoUmu() ? RST_TRUE : RST_FALSE).concat(SPLIT);
-        全項目 = cancatRString(利用者負担.getShogaishaTechoTokyu(), 全項目);
-        全項目 = cancatRString(利用者負担.getShogaishaTechoNo(), 全項目);
-        全項目 = cancatYMD(利用者負担.getShogaishaTechoKofuYMD(), 全項目);
-        全項目 = cancatRString(利用者負担.getShinseiJiyu(), 全項目);
-        全項目 = cancatHokenKyufuRitsu(利用者負担.getKyufuritsu(), 全項目);
-        全項目 = cancatRString(利用者負担.getKohiFutanshaNo(), 全項目);
+                .concat(利用者負担.getKyuSochishaUmu() ? RST_TRUE : RST_FALSE).concat(SPLIT);
         全項目 = cancatRString(利用者負担.getShinseiJiyu(), 全項目);
         return 全項目;
     }
