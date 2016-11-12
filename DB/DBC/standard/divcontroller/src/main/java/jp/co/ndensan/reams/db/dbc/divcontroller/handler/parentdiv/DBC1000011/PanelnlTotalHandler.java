@@ -225,7 +225,6 @@ public class PanelnlTotalHandler {
      */
     public DBC030010_ShokanShikyuKetteiTsuchishoParameter onClick_btnJikouBatch() {
         ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei shokanbarai = new ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei();
-        paramter.set窓口払い一括更新区分(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get窓口払い一括更新区分());
         ShoukanBaraiSuuchiShoIkatsuParamter paramter = new ShoukanBaraiSuuchiShoIkatsuParamter();
         if (キー.equals(div.getRadUketsukebi().getSelectedKey())) {
             paramter.set抽出モード(抽出条件_1);
@@ -286,6 +285,7 @@ public class PanelnlTotalHandler {
         } else {
             paramter.set出力順ID(RString.EMPTY);
         }
+        paramter.set窓口払い一括更新区分(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get窓口払い一括更新区分());
         return shokanbarai.getShokanbaraiShikyuFushikyuKetteiTsuchishoBatchParameter(paramter);
     }
 
