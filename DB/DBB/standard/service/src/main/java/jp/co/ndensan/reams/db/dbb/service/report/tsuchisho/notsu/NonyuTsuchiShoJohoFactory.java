@@ -328,28 +328,30 @@ public class NonyuTsuchiShoJohoFactory {
                     continue;
                 }
                 収納ID = get収納IDBy期(期, 賦課情報);
-                
+
             } else {
                 収納ID = Long.MIN_VALUE;
             }
-           
-            ShunoKanri shunoKanri = new ShunoKanri(収納ID, 収納科目.getコード(), 収納科目.get枝番コード(), 
-                    new RyokinShubetsuCodeValue(Code.EMPTY), JigyoKubun.未使用.getJigyoKubunCd(), new RYear(調定年度.toDateString()), 
+
+            ShunoKanri shunoKanri = new ShunoKanri(収納ID, 収納科目.getコード(), 収納科目.get枝番コード(),
+                    new RyokinShubetsuCodeValue(Code.EMPTY), JigyoKubun.未使用.getJigyoKubunCd(), new RYear(調定年度.toDateString()),
                     new RYear(賦課年度.toDateString()), new jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo(
-                    new Decimal(通知書番号.getColumnValue().toString())), 期, true, 0);
-            
+                            new Decimal(通知書番号.getColumnValue().toString())), 期, true, 0);
+
             Decimal 普徴期別金額 = get金額By期(普徴期別金額リスト, 期);
-            SeikyuItemMeisai 請求明細 = new SeikyuItemMeisai(
-                    shunoKanri, 普徴期別金額, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
-            List<SeikyuItemMeisai> 請求明細リスト = new ArrayList<>();
-            請求明細リスト.add(請求明細);
-            SeikyuItem 編集元情報 = SeikyuItemFactory.createInsance期別(地方公共団体コード, SeikyushoType.納付書, 納期情報.get納期().get通知書発行日().getYear(), 
-                    納期情報.get納期().get通知書発行日(), 識別コード, 納期情報.get納期().get納期限(), null, 
-                    ToriatsukaiKigenCheckKubun.発行日を取扱期限とする, 請求明細リスト, RDate.getNowDate());
-            SeikyuManager seikyuManager = new SeikyuManager();
-            if (納付書タイプ != null && 編集元情報 != null) {
-                List<SeikyuForPrinting> 請求情報リスト1 = seikyuManager.get印字用請求情報(SubGyomuCode.DBB介護賦課, 納付書タイプ, 編集元情報);
-                請求情報リスト.addAll(請求情報リスト1);
+            if (普徴期別金額.compareTo(new Decimal(0)) > 0) {
+                SeikyuItemMeisai 請求明細 = new SeikyuItemMeisai(
+                        shunoKanri, 普徴期別金額, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
+                List<SeikyuItemMeisai> 請求明細リスト = new ArrayList<>();
+                請求明細リスト.add(請求明細);
+                SeikyuItem 編集元情報 = SeikyuItemFactory.createInsance期別(地方公共団体コード, SeikyushoType.納付書, 納期情報.get納期().get通知書発行日().getYear(),
+                        納期情報.get納期().get通知書発行日(), 識別コード, 納期情報.get納期().get納期限(), null,
+                        ToriatsukaiKigenCheckKubun.発行日を取扱期限とする, 請求明細リスト, RDate.getNowDate());
+                SeikyuManager seikyuManager = new SeikyuManager();
+                if (納付書タイプ != null && 編集元情報 != null) {
+                    List<SeikyuForPrinting> 請求情報リスト1 = seikyuManager.get印字用請求情報(SubGyomuCode.DBB介護賦課, 納付書タイプ, 編集元情報);
+                    請求情報リスト.addAll(請求情報リスト1);
+                }
             }
         }
         return 請求情報リスト;
