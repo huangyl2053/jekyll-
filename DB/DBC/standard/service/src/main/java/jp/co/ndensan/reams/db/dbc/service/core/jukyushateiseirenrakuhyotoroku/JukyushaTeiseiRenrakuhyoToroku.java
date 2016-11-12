@@ -71,6 +71,7 @@ public class JukyushaTeiseiRenrakuhyoToroku {
     private static final RString 基本情報準拠区分_1 = new RString("1");
     private static final RString 介護資格取得事由 = new RString("0007");
     private static final RString 介護資格喪失事由 = new RString("0010");
+    private static final RString 自己作成 = new RString("自己作成");
 
     /**
      * コンストラクタです。
@@ -266,6 +267,8 @@ public class JukyushaTeiseiRenrakuhyoToroku {
             介護事業者指定サービスentity = dbt7063Dac.select事業者名称(支援事業者番号.value(), サービス種類コード_43, 基準日);
         } else if (JukyushaIF_KeikakuSakuseiKubunCode.介護予防支援事業所_地域包括支援センター作成.getコード().equals(計画作成区分)) {
             介護事業者指定サービスentity = dbt7063Dac.select事業者名称(支援事業者番号.value(), サービス種類コード_46, 基準日);
+        } else if (JukyushaIF_KeikakuSakuseiKubunCode.自己作成.getコード().equals(計画作成区分)) {
+            return new AtenaMeisho(自己作成);
         }
         if (介護事業者指定サービスentity == null) {
             return null;
