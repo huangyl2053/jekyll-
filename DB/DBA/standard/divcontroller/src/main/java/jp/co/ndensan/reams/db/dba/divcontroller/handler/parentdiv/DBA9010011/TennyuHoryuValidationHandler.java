@@ -52,10 +52,10 @@ public class TennyuHoryuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new TennyuHoryuValidationHandler.RRVMessages(
                     UrErrorMessages.必須項目_追加メッセージあり, "市町村コード")));
         }
-        if (RString.isNullOrEmpty(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地().getColumnValue())) {
-            validationMessages.add(new ValidationMessageControlPair(new TennyuHoryuValidationHandler.RRVMessages(
-                    UrErrorMessages.必須項目_追加メッセージあり, "番地")));
-        }
+//        if (RString.isNullOrEmpty(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地().getColumnValue())) {
+//            validationMessages.add(new ValidationMessageControlPair(new TennyuHoryuValidationHandler.RRVMessages(
+//                    UrErrorMessages.必須項目_追加メッセージあり, "番地")));
+//        }
 
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();

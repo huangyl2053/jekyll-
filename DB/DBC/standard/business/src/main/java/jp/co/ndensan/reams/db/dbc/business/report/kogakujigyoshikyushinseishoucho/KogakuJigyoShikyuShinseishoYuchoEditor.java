@@ -123,7 +123,14 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
         }
         source.remban = count;
         source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo));
         return source;
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

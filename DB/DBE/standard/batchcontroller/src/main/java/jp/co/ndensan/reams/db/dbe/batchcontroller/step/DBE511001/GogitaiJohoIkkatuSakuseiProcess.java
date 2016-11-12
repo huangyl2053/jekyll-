@@ -57,7 +57,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
     private int errorNo;
     private boolean flag;
     private IGogitaiJohoSakuseiMapper mapper;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBZ000001"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511002"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private FileSpoolManager fileSpoolManager;
@@ -275,7 +275,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
         checkGogitaiWariateIinJohoData(csvData, entity);
         
         if (!flag) {
-            entity.setErrJoho(intToRStr(errorNo).concat(new RString("読込しました。")));
+            entity.setErrJoho(intToRStr(errorNo).concat(new RString("行目読込しました。")));
             eucCsvWriter.writeLine(entity);
         }
     }

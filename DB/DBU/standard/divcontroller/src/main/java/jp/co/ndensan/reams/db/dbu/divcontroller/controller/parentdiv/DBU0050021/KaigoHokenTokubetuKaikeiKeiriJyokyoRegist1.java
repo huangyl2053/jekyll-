@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.Kaig
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1DivSpec;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformationEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -49,6 +51,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     private static final RString 内部処理モード_追加 = new RString("追加");
     private static final RString BUTTON_追加 = new RString("btnAddUpdate");
     private static final RString ADD = new RString("add");
+    private static final int INT4 = 4;
 
     /**
      * 介護保険特別会計経理状況登録_様式４を画面初期化処理しました。
@@ -101,12 +104,17 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         if (responseDate != null) {
             return responseDate;
         } else if (内部処理モード_修正追加.equals(div.getGamenMode()) || RString.isNullOrEmpty(div.getGamenMode())) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            報告年度必須チェック(div, pairs);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             return ResponseData.of(div).forwardWithEventName(様式４の２).parameter(内部処理モード_修正);
         } else {
             return ResponseData.of(div).forwardWithEventName(様式４の２).parameter(div.getGamenMode());
         }
     }
-
+    
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div>
             getResponseData_btnYoshikiyonnoni(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
@@ -141,6 +149,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         KaigoHokenShoriDateKanri 処理日付管理マスタ = getHandler(div).get処理日付管理マスタ();
         ViewStateHolder.put(ViewStateKeys.様式４の３, 処理日付管理マスタ);
         if (内部処理モード_修正追加.equals(div.getGamenMode()) || RString.isNullOrEmpty(div.getGamenMode())) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            報告年度必須チェック(div, pairs);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).parameter(内部処理モード_修正);
         } else {
             return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).parameter(div.getGamenMode());
@@ -308,6 +321,15 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 報告年度必須, div.getTxtsaishutsugoukei()).build().check(messages));
     }
+    
+    private void 報告年度必須チェック(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div, ValidationMessageControlPairs pairs) {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            DBU0050021ErrorMessages 報告年度必須 = new DBU0050021ErrorMessages(UrErrorMessages.必須, "報告年度");
+            messages.add(ValidateChain.validateStart(div).ifNot(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1DivSpec.報告年度必須チェック)
+                    .thenAdd(報告年度必須).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    報告年度必須, div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM()).build().check(messages));
+    }
 
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> getResponseData_btnSave_修正(
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div, QuestionMessage message) {
@@ -357,7 +379,16 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        getHandler(div).onClick_btnConfirm(get引き継ぎデータ(div));
+        InsuranceInformation insuranceInf = get引き継ぎデータ(div);
+        getHandler(div).onClick_btnConfirm(insuranceInf);
+        if (ADD.equals(insuranceInf.get処理フラグ())) {
+            InsuranceInformationEntity entity = insuranceInf.getInsuranceInformationEntity();
+            entity.set報告年(new FlexibleYear(div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().substring(0, INT4)));
+            entity.set集計対象年(new FlexibleYear(div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM().getText().substring(0, INT4)));
+            entity.set市町村名称(div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().getSelectedValue());
+            entity.set市町村コード(new LasdecCode(div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().getSelectedKey().split("_").get(0)));
+            ViewStateHolder.put(ViewStateKeys.様式４, insuranceInf);
+        }
         return ResponseData.of(div).respond();
     }
 

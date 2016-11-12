@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri;
 
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteiimagekanri.IYokaigoninteiimagekanriMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,7 +41,8 @@ public class YokaigoninteiimagekanriFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoninteiimagekanriFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link YokaigoninteiimagekanriFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link YokaigoninteiimagekanriFinder}のインスタンス
      */
     public static YokaigoninteiimagekanriFinder createInstance() {
         return InstanceProvider.create(YokaigoninteiimagekanriFinder.class);
@@ -55,6 +57,10 @@ public class YokaigoninteiimagekanriFinder {
     @Transaction
     public ImagekanriJoho getImageJoho(RString shinseishoKanriNo) {
         IYokaigoninteiimagekanriMapper mapper = mapperProvider.create(IYokaigoninteiimagekanriMapper.class);
-        return new ImagekanriJoho(mapper.getImageJoho(shinseishoKanriNo));
+        ImagekanriJohoEntity entity = mapper.getImageJoho(shinseishoKanriNo);
+        if (entity == null) {
+            entity = new ImagekanriJohoEntity();
+        }
+        return new ImagekanriJoho(entity);
     }
 }

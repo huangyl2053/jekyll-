@@ -66,52 +66,28 @@ public class ChosahyoTokkijikoReportSource implements IReportSource {
     public RString hihokenshaNo2;
     @ReportItem(name = "hihokenshaName", length = 20, order = 23)
     public RString hihokenshaName;
-    @ReportItem(name = "oCR_shinseiYY1", length = 2, order = 31)
-    public RString oCR_shinseiYY1;
-    @ReportItem(name = "oCR_shinseiYY2", length = 2, order = 32)
-    public RString oCR_shinseiYY2;
-    @ReportItem(name = "oCR_shinseiMM1", length = 2, order = 33)
-    public RString oCR_shinseiMM1;
-    @ReportItem(name = "oCR_shinseiMM2", length = 2, order = 34)
-    public RString oCR_shinseiMM2;
-    @ReportItem(name = "oCR_shinseiDD1", length = 2, order = 35)
-    public RString oCR_shinseiDD1;
-    @ReportItem(name = "oCR_shinseiDD2", length = 2, order = 36)
-    public RString oCR_shinseiDD2;
-    @ReportItem(name = "oCR_hokenshaNo1", length = 2, order = 37)
-    public RString oCR_hokenshaNo1;
-    @ReportItem(name = "oCR_hokenshaNo2", length = 2, order = 38)
-    public RString oCR_hokenshaNo2;
-    @ReportItem(name = "oCR_hokenshaNo3", length = 2, order = 39)
-    public RString oCR_hokenshaNo3;
-    @ReportItem(name = "oCR_hokenshaNo4", length = 2, order = 40)
-    public RString oCR_hokenshaNo4;
-    @ReportItem(name = "oCR_hokenshaNo5", length = 2, order = 41)
-    public RString oCR_hokenshaNo5;
-    @ReportItem(name = "oCR_hokenshaNo6", length = 2, order = 42)
-    public RString oCR_hokenshaNo6;
-    @ReportItem(name = "oCR_shinseishaName", length = 20, order = 43)
-    public RString oCR_shinseishaName;
-    @ReportItem(name = "oCR_hishokenshaNo7", length = 2, order = 44)
-    public RString oCR_hishokenshaNo7;
-    @ReportItem(name = "oCR_hishokenshaNo8", length = 2, order = 45)
-    public RString oCR_hishokenshaNo8;
-    @ReportItem(name = "oCR_hishokenshaNo9", length = 2, order = 46)
-    public RString oCR_hishokenshaNo9;
-    @ReportItem(name = "oCR_hishokenshaNo10", length = 2, order = 47)
-    public RString oCR_hishokenshaNo10;
-    @ReportItem(name = "oCR_hishokenshaNo1", length = 2, order = 48)
-    public RString oCR_hishokenshaNo1;
-    @ReportItem(name = "oCR_hishokenshaNo2", length = 2, order = 49)
-    public RString oCR_hishokenshaNo2;
-    @ReportItem(name = "oCR_hishokenshaNo3", length = 2, order = 50)
-    public RString oCR_hishokenshaNo3;
-    @ReportItem(name = "oCR_hishokenshaNo4", length = 2, order = 51)
-    public RString oCR_hishokenshaNo4;
-    @ReportItem(name = "oCR_hishokenshaNo5", length = 2, order = 52)
-    public RString oCR_hishokenshaNo5;
-    @ReportItem(name = "oCR_hishokenshaNo6", length = 2, order = 53)
-    public RString oCR_hishokenshaNo6;
+    @ReportItem(name = "shinseishaName", length = 20, order = 43)
+    public RString shinseishaName;
+    @ReportItem(name = "hishokenshaNo7", length = 2, order = 44)
+    public RString hishokenshaNo7;
+    @ReportItem(name = "hishokenshaNo8", length = 2, order = 45)
+    public RString hishokenshaNo8;
+    @ReportItem(name = "hishokenshaNo9", length = 2, order = 46)
+    public RString hishokenshaNo9;
+    @ReportItem(name = "hishokenshaNo10", length = 2, order = 47)
+    public RString hishokenshaNo10;
+    @ReportItem(name = "hishokenshaNo1", length = 2, order = 48)
+    public RString hishokenshaNo1;
+    @ReportItem(name = "hishokenshaNo2", length = 2, order = 49)
+    public RString hishokenshaNo2;
+    @ReportItem(name = "hishokenshaNo3", length = 2, order = 50)
+    public RString hishokenshaNo3;
+    @ReportItem(name = "hishokenshaNo4", length = 2, order = 51)
+    public RString hishokenshaNo4;
+    @ReportItem(name = "hishokenshaNo5", length = 2, order = 52)
+    public RString hishokenshaNo5;
+    @ReportItem(name = "hishokenshaNo6", length = 2, order = 53)
+    public RString hishokenshaNo6;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

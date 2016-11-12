@@ -61,9 +61,15 @@ public class Yokaigoninteiimagekanri {
         ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
         div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
-        div.setHdnShinseishoKanriNo(イメージ管理情報.get申請書管理番号().value());
-        div.setHdnNinteichosaRirekiNo(new RString(イメージ管理情報.get認定調査依頼履歴番号()));
-        div.setHdnGaikyoChosaTextImageKubun(イメージ管理情報.get概況調査テキストイメージ区分());
+        if (イメージ管理情報.get申請書管理番号() != null && !イメージ管理情報.get申請書管理番号().isEmpty()) {
+            div.setHdnShinseishoKanriNo(イメージ管理情報.get申請書管理番号().value());
+        }
+        if (イメージ管理情報.get認定調査依頼履歴番号() != 0) {
+            div.setHdnNinteichosaRirekiNo(new RString(イメージ管理情報.get認定調査依頼履歴番号()));
+        }
+        if (イメージ管理情報.get概況調査テキストイメージ区分() != null && !イメージ管理情報.get概況調査テキストイメージ区分().isEmpty()) {
+            div.setHdnGaikyoChosaTextImageKubun(イメージ管理情報.get概況調査テキストイメージ区分());
+        }
         init_SetDisabled(div);
         init_SetValue(div, イメージ管理情報);
         if (イメージ管理情報.getイメージ共有ファイルID() != null && hasその他資料イメージ(イメージ管理情報.getイメージ共有ファイルID())) {
@@ -155,10 +161,10 @@ public class Yokaigoninteiimagekanri {
         if (イメージ管理情報.get認定調査実施年月日() != null) {
             div.getTxtJishiYMD().setValue(new RDate(イメージ管理情報.get認定調査実施年月日().toString()));
         }
-        if (イメージ管理情報.get主治医意見書読取年月日() != null) {
+        if (イメージ管理情報.get主治医意見書読取年月日() != null && !イメージ管理情報.get主治医意見書読取年月日().isEmpty()) {
             div.getTxtReadYMD().setValue(new RDate(イメージ管理情報.get主治医意見書読取年月日().toString()));
         }
-        if (イメージ管理情報.get主治医意見書記入年月日() != null) {
+        if (イメージ管理情報.get主治医意見書記入年月日() != null && !イメージ管理情報.get主治医意見書記入年月日().isEmpty()) {
             div.getTxtKinyuYMD().setValue(new RDate(イメージ管理情報.get主治医意見書記入年月日().toString()));
         }
     }

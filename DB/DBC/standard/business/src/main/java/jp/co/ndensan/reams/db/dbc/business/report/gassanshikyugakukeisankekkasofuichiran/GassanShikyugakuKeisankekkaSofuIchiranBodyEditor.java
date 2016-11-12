@@ -95,7 +95,7 @@ public class GassanShikyugakuKeisankekkaSofuIchiranBodyEditor implements IGassan
         source.shimei50onKana = tempEntity.getShimei50onKana();
         source.shichosonCode = tempEntity.getShichosonCode();
         source.shoKisaiHokenshaNo = 高額合算Entity.getShoKisaiHokenshaNo().getColumnValue();
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listLower_1);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.listLower_1));
         return source;
     }
 
@@ -116,6 +116,13 @@ public class GassanShikyugakuKeisankekkaSofuIchiranBodyEditor implements IGassan
 
     private RString get期間(RString s1, RString s2) {
         return new RString(new StringBuilder(s1).append(接続文字).append(s2).toString());
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }

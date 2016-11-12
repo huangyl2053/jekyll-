@@ -145,9 +145,12 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcess extends BatchProcessBase
 
     @Override
     protected IBatchReader createReader() {
-        RString 出力順 = ReportUtil.get出力順情報(HanyoListRoreiFukushiNenkinJukyushaResult.ShutsuryokujunEnum.class,
-                SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701004.getReportId(),
-                processParamter.getShutsuryokujunId()).get出力順OrderBy();
+        RString 出力順 = RString.EMPTY;
+        if (processParamter.getShutsuryokujunId() != null){
+            出力順 = ReportUtil.get出力順情報(HanyoListRoreiFukushiNenkinJukyushaResult.ShutsuryokujunEnum.class,
+                    SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701004.getReportId(),
+                    processParamter.getShutsuryokujunId()).get出力順OrderBy();
+        }
         if (!RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.replace(ORDERBYCLAUSE, EUC_WRITER_DELIMITER);
         }
@@ -214,7 +217,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcess extends BatchProcessBase
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 new RString("HanyoList_RoreiFukushiNenkinJukyusha.csv"),
                 EUC_ENTITY_ID.toRString(),
-                new RString(String.valueOf(eucCsvWriter.getCount())),
+                new RString(String.valueOf(eucCsvWriter.getCount() - 1)),
                 new HanyoListRoreiFukushiNenkinJukyushaResult().get出力条件(processParamter, kaigoDonyuKeitai));
         OutputJokenhyoFactory.createInstance(item).print();
     }

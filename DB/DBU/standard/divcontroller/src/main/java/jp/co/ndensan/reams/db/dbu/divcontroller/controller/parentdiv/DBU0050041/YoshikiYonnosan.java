@@ -240,7 +240,7 @@ public class YoshikiYonnosan {
             ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
     }
 
     private ResponseData<YoshikiYonnosanDiv> getResponseData_btnModUpdate(

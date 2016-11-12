@@ -782,7 +782,7 @@ public class YokaigoNinteiTaskListHandler {
             }
             row.setIchijiHanteiKekka(一次判定結果の名称を取得する(business.get厚労省IF識別コード(), business.get要介護認定一次判定結果コード()));
             row.setIchijiHanteiWarningCode(business.get要介護認定一次判定警告コード() == null
-                    ? RString.EMPTY : IchijiHanteiKeikoku.toValue(business.get要介護認定一次判定警告コード()).get名称());
+                    ? RString.EMPTY : business.get要介護認定一次判定警告コード());
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             一次判定モードの日付設定(row, business);
             rowList.add(row);

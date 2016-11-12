@@ -260,8 +260,14 @@ public class NinteiShinseishaFinder {
     public ResponseData<NinteiShinseishaFinderDiv> onOkClose_btnShujiiIryokikanGuide(NinteiShinseishaFinderDiv div) {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
-        div.getTxtShujiiIryokikanName().setValue(dataPassModel.get主治医医療機関名称());
-        div.setHdnShujiiIryokikanCode(dataPassModel.get主治医医療機関コード());
+        if (!dataPassModel.get市町村コード().equals(div.getHdnShujiiShichosonCode()) || 
+                !div.getHdnShujiiIryokikanCode().equals(dataPassModel.get主治医医療機関コード())) {
+            div.getTxtShujiiIryokikanName().setValue(dataPassModel.get主治医医療機関名称());
+            div.setHdnShujiiIryokikanCode(dataPassModel.get主治医医療機関コード());
+            div.setHdnShujiiShichosonCode(dataPassModel.get市町村コード());
+            div.getTxtShujiiName().setValue(RString.EMPTY);
+            div.setHdnShujiiCode(RString.EMPTY);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -274,7 +280,12 @@ public class NinteiShinseishaFinder {
     public ResponseData<NinteiShinseishaFinderDiv> onClick_btnShujiiGuide(NinteiShinseishaFinderDiv div) {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
         dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
-        dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
+        dataPassModel.set主治医医療機関コード(div.getHdnShujiiIryokikanCode());
+        if (RString.isNullOrEmpty(div.getHdnShujiiShichosonCode())) {
+            dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
+        } else {
+            dataPassModel.set市町村コード(div.getHdnShujiiShichosonCode());
+        }
         dataPassModel.set対象モード(new RString(TaishoMode.ShujiiMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         return ResponseData.of(div).respond();
@@ -293,6 +304,7 @@ public class NinteiShinseishaFinder {
         div.setHdnShujiiIryokikanCode(dataPassModel.get主治医医療機関コード());
         div.getTxtShujiiName().setValue(dataPassModel.get主治医氏名());
         div.setHdnShujiiCode(dataPassModel.get主治医コード());
+        div.setHdnShujiiShichosonCode(dataPassModel.get市町村コード());
         return ResponseData.of(div).respond();
     }
 
@@ -320,8 +332,14 @@ public class NinteiShinseishaFinder {
     public ResponseData<NinteiShinseishaFinderDiv> onOkClose_btnNinteiChosaItakusakiGuide(NinteiShinseishaFinderDiv div) {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        div.getTxtNinteiChosaItakusakiName().setValue(dataPassModel.get委託先名());
-        div.setHdnChosaItakusakiCode(dataPassModel.get委託先コード());
+        if (!dataPassModel.get市町村コード().equals(div.getHdnChosaShichosonCode()) || 
+                !div.getHdnChosaItakusakiCode().equals(dataPassModel.get委託先コード())) {
+            div.getTxtNinteiChosaItakusakiName().setValue(dataPassModel.get委託先名());
+            div.setHdnChosaItakusakiCode(dataPassModel.get委託先コード());
+            div.setHdnChosaShichosonCode(dataPassModel.get市町村コード());
+            div.getTxtNinteiChosainName().setValue(RString.EMPTY);
+            div.setHdnChosainCode(RString.EMPTY);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -334,7 +352,12 @@ public class NinteiShinseishaFinder {
     public ResponseData<NinteiShinseishaFinderDiv> onClick_btnNinteiChosainGuide(NinteiShinseishaFinderDiv div) {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = new KijuntsukiShichosonjohoiDataPassModel();
         dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
-        dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
+        dataPassModel.set委託先コード(div.getHdnChosaItakusakiCode());
+        if (RString.isNullOrEmpty(div.getHdnChosaShichosonCode())) {
+            dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
+        } else {
+            dataPassModel.set市町村コード(div.getHdnChosaShichosonCode());
+        }
         dataPassModel.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Chosain.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         return ResponseData.of(div).respond();
@@ -353,6 +376,7 @@ public class NinteiShinseishaFinder {
         div.setHdnChosaItakusakiCode(dataPassModel.get委託先コード());
         div.getTxtNinteiChosainName().setValue(dataPassModel.get調査員名());
         div.setHdnChosainCode(dataPassModel.get調査員コード());
+        div.setHdnChosaShichosonCode(dataPassModel.get市町村コード());
         return ResponseData.of(div).respond();
     }
 

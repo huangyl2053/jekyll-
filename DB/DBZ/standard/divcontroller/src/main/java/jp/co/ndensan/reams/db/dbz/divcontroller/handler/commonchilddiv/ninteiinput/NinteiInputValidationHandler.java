@@ -43,7 +43,13 @@ public class NinteiInputValidationHandler {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
         if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効開始日, div.getTxtYukoKaishiYMD()));
+            return validationMessage;
         }
+        
+        if (!div.getTxtYukoKaishiYMD().getValue().isValid()) {
+            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効開始日, div.getTxtYukoKaishiYMD()));
+        }
+        
         return validationMessage;
     }
 
@@ -56,6 +62,11 @@ public class NinteiInputValidationHandler {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
         if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効開始日, div.getTxtYukoKaishiYMD()));
+            return validationMessage;
+        }
+           
+        if (!div.getTxtYukoKaishiYMD().getValue().isValid()) {
+            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効開始日, div.getTxtYukoKaishiYMD()));
             return validationMessage;
         }
 
@@ -78,6 +89,26 @@ public class NinteiInputValidationHandler {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効終了日, div.getTxtYukoShuryoYMD()));
             return validationMessage;
         }
+        
+        if (!div.getTxtYukoShuryoYMD().getValue().isValid()) {
+            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効終了日, div.getTxtYukoShuryoYMD()));
+            return validationMessage;
+        }
+        
+        return validationMessage;
+    }
+    
+    /**
+     * 認定年月日checkを行う。
+     *
+     * @return ValidationMessageControlPairs(バリデーション結果)
+     */
+    public ValidationMessageControlPairs 認定年月日check() {
+        ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();    
+        if (!div.getTxtYukoShuryoYMD().getValue().isEmpty() && !div.getTxtNinteiYMD().getValue().isValid()) {
+            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な認定年月日, div.getTxtNinteiYMD()));
+        }
+        
         return validationMessage;
     }
 
@@ -101,7 +132,10 @@ public class NinteiInputValidationHandler {
         validation有効開始日(UrErrorMessages.未入力, "有効開始日"),
         validation有効終了日(UrErrorMessages.未入力, "有効終了日"),
         validation開始日と終了日の前後順(UrErrorMessages.終了日が開始日以前),
-        validation開始日と法施行の前後順(UrWarningMessages.日付の前後関係逆転以降, "法施行日", "有効開始日");
+        validation開始日と法施行の前後順(UrWarningMessages.日付の前後関係逆転以降, "法施行日", "有効開始日"),
+        validation不正な有効開始日(UrErrorMessages.不正, "有効開始日"),
+        validation不正な有効終了日(UrErrorMessages.不正, "有効終了日"),
+        validation不正な認定年月日(UrErrorMessages.不正, "認定年月日");
         private final Message message;
 
         private NinteiInputCheckMessages(IMessageGettable message, String... replacements) {

@@ -82,8 +82,8 @@
                 INNER JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
                 ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
                 AND T5031."homonShubetsu" = T5202."chosaJisshiBashoCode"
-                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7)
-                AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[<=]]> T5031."shuryoYM"
+                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 1 for 6)
+                AND substring(T5601."chosaItakuryoShiharaiYMD" from 1 for 6) <![CDATA[<=]]> T5031."shuryoYM"
         WHERE 
                 #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
                 AND T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
@@ -123,8 +123,8 @@
                 LEFT JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
                 ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
                 AND T5031."homonShubetsu" = T5202."chosaJisshiBashoCode"
-                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7)
-                AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[<=]]> T5031."shuryoYM"
+                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 1 for 6)
+                AND substring(T5601."chosaItakuryoShiharaiYMD" from 1 for 6) <![CDATA[<=]]> T5031."shuryoYM"
         WHERE
                 #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
                 AND T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
@@ -214,12 +214,12 @@
                 ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
                 AND  T5032."zaitakuShisetsuKubun" = T5302."zaitakuShisetsuKubun"
                 <if test="基準日フラグ">
-                 AND T5032."kaishiYM" <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
-                 AND T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM"
+                 AND T5032."kaishiYM" <![CDATA[<=]]> LEFT(T5602."ikenshoJuryoYMD", 6)
+                 AND LEFT(T5602."ikenshoJuryoYMD", 6) <![CDATA[<=]]> T5032."shuryoYM"
                 </if>
                 <if test="!基準日フラグ">
-                 AND T5032."kaishiYM" <![CDATA[<=]]> T5302."ikenshoReadYMD" 
-                 AND T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM"
+                 AND T5032."kaishiYM" <![CDATA[<=]]> LEFT(T5302."ikenshoReadYMD", 6) 
+                 AND LEFT(T5302."ikenshoReadYMD", 6) <![CDATA[<=]]> T5032."shuryoYM"
                 </if>
         WHERE  
                 T5602."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
@@ -266,12 +266,12 @@
                 ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
                 AND  T5032."zaitakuShisetsuKubun" = T5302."zaitakuShisetsuKubun"
                 <if test="基準日フラグ">
-                 AND T5032."kaishiYM" <![CDATA[<=]]> T5602."ikenshoJuryoYMD" 
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM" 
+                 AND T5032."kaishiYM" <![CDATA[<=]]> LEFT(T5602."ikenshoJuryoYMD", 6) 
+                 AND  LEFT(T5602."ikenshoJuryoYMD", 6) <![CDATA[<=]]> T5032."shuryoYM" 
                 </if>
                 <if test="!基準日フラグ">
-                 AND  T5032."kaishiYM" <![CDATA[<=]]> T5302."ikenshoReadYMD"
-                 AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM" 
+                 AND  T5032."kaishiYM" <![CDATA[<=]]> LEFT(T5302."ikenshoReadYMD", 6)
+                 AND  LEFT(T5302."ikenshoReadYMD", 6) <![CDATA[<=]]> T5032."shuryoYM" 
                 </if>
         WHERE  
                 T5602."ginkoFurikomiShutsuryokuFlag"  = #{銀行振込出力フラグ}

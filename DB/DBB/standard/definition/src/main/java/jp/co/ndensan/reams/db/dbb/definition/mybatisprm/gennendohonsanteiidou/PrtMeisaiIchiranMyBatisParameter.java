@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou;
 
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -21,7 +20,6 @@ public class PrtMeisaiIchiranMyBatisParameter implements IMyBatisParameter {
     private final RString 通知内容コード;
     private final boolean is6月捕捉が04;
     private final RString 出力順;
-    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -29,13 +27,11 @@ public class PrtMeisaiIchiranMyBatisParameter implements IMyBatisParameter {
      * @param 通知内容コード RString
      * @param is6月捕捉が04 boolean
      * @param 出力順 RString
-     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      */
     public PrtMeisaiIchiranMyBatisParameter(RString 通知内容コード, boolean is6月捕捉が04,
-            RString 出力順, UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
+            RString 出力順) {
         this.通知内容コード = 通知内容コード;
         this.is6月捕捉が04 = is6月捕捉が04;
         this.出力順 = 出力順;
-        this.shikibetsutaishoParam = shikibetsutaishoParam;
     }
 }

@@ -157,7 +157,22 @@ public class YoshikiYonnoni {
                 div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
                 div.setShoriMode(内部処理モード_削除);
             }
-        } else if (ADD.equals(insuranceInf.get処理フラグ())) {
+        } else if (ADD.equals(insuranceInf.get処理フラグ())) { 
+            if (insuranceInf.get報告年().isEmpty()) {
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setVisible(false);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisplayNone(true);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setVisible(false);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisplayNone(true);
+                div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
+                div.getYoshikiYonnoniMeisai().setDisabled(true);
+                List<KeyValueDataSource> list = new ArrayList<>();
+                div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDataSource(list);
+                div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
+                div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
+                div.setShoriMode(内部処理モード_追加);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+                return ResponseData.of(div).respond();
+            }
             div.getYoshikiYonnoniMeisai().getTplTokukaikeijokyo().setDisabled(true);
             List<Shichoson> shichosonList = manager.getShichosonCodeNameList();
             if (shichosonList.isEmpty()) {
@@ -171,33 +186,24 @@ public class YoshikiYonnoni {
                     市町村list.add(keyValueDataSource);
                 }
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDataSource(市町村list);
-                div.getYoshikiYonnoniMeisai().getDdlShicyoson().setSelectedIndex(0);
+                div.getYoshikiYonnoniMeisai().getDdlShicyoson().setSelectedValue(insuranceInf.get市町村名称());
             }
-            RDate date = RDate.getNowDate();
-            if (date.getMonthValue() < MONTH_6) {
-                int 報告年度 = date.getYearValue() - 1;
-                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
-                int 集計年度 = date.getYearValue() - 2;
-                div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
-            } else {
-                int 報告年度 = date.getYearValue();
-                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
-                int 集計年度 = date.getYearValue() - 1;
-                div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
-            }
+            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(insuranceInf.get報告年().getYearValue(), 1, 1));
+            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(insuranceInf.get集計対象年().getYearValue(), 1, 1));
+            div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
             div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
             div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
             div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
-            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setReadOnly(false);
+            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setReadOnly(true);
             div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setReadOnly(true);
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisplayNone(true);
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisplayNone(true);
-            div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(false);
-            div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(false);
+            div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(true);
             if (DBU0050021StateName.add.getName().equals(ResponseHolder.getState())) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
             }
             div.setShoriMode(内部処理モード_追加);
+            onClick_btnKakutei(div);
         }
         return ResponseData.of(div).respond();
     }

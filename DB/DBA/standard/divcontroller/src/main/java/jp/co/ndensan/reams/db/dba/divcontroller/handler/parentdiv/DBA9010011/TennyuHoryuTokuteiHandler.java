@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJusho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJushoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJushoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -106,6 +107,9 @@ public class TennyuHoryuTokuteiHandler {
                 dgJigyoshaItiran.setTxtBanchiCode3(tennyuhoryu.get番地コード3().value());
                 dgJigyoshaItiran.setTxtBanchi(tennyuhoryu.get番地().value());
                 dgJigyoshaItiran.setTxtShisetsuShurui(tennyuhoryu.get施設種類());
+                if (tennyuhoryu.get施設種類() != null && !tennyuhoryu.get施設種類().isNullOrEmpty()) {
+                    dgJigyoshaItiran.setTxtShisetsuName(ShisetsuType.toValue(tennyuhoryu.get施設種類()).get名称());
+                }
                 RStringBuilder builder = new RStringBuilder();
                 builder.append(tennyuhoryu.get施設コード());
                 builder.append(RString.HALF_SPACE);
@@ -229,6 +233,9 @@ public class TennyuHoryuTokuteiHandler {
             row.setTxtBanchiCode3(div.getCcdBunchiInput().get番地コード3().getColumnValue());
             row.setTxtBanchi(div.getCcdBunchiInput().get番地().getColumnValue());
             row.setTxtShisetsuShurui(div.getCcdSisetuInputGuide().get施設種類());
+            if (div.getCcdSisetuInputGuide().get施設種類() != null && !div.getCcdSisetuInputGuide().get施設種類().isNullOrEmpty()) {
+                row.setTxtShisetsuName(ShisetsuType.toValue(div.getCcdSisetuInputGuide().get施設種類()).get名称());
+            }
             RStringBuilder builder = new RStringBuilder();
             builder.append(div.getCcdSisetuInputGuide().getNyuryokuShisetsuKodo());
             builder.append(RString.HALF_SPACE);
@@ -247,6 +254,9 @@ public class TennyuHoryuTokuteiHandler {
             row.setTxtBanchiCode3(div.getCcdBunchiInput().get番地コード3().getColumnValue());
             row.setTxtBanchi(div.getCcdBunchiInput().get番地().getColumnValue());
             row.setTxtShisetsuShurui(div.getCcdSisetuInputGuide().get施設種類());
+            if (div.getCcdSisetuInputGuide().get施設種類() != null && !div.getCcdSisetuInputGuide().get施設種類().isNullOrEmpty()) {
+                row.setTxtShisetsuName(ShisetsuType.toValue(div.getCcdSisetuInputGuide().get施設種類()).get名称());
+            }
             RStringBuilder builder = new RStringBuilder();
             builder.append(div.getCcdSisetuInputGuide().getNyuryokuShisetsuKodo());
             builder.append(RString.HALF_SPACE);
@@ -355,7 +365,10 @@ public class TennyuHoryuTokuteiHandler {
                 manager.insertOrUpdateOrDel(rendoHoryu);
             }
             if (RowState.Deleted.equals(list.getRowState())) {
-                RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(list.getTxtKanriNo(), new LasdecCode(list.getTxtShichosonCode()));
+                RendoHoryuTokuteiJushoIdentifier key = new RendoHoryuTokuteiJushoIdentifier(list.getTxtKanriNo(),
+                        new LasdecCode(list.getTxtShichosonCode()));
+                 
+                RendoHoryuTokuteiJusho rendoHoryu = models.get(key);
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 rendoHoryu = builder.build().deleted();
                 manager.insertOrUpdateOrDel(rendoHoryu);
