@@ -109,6 +109,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     private static final RString 小規模介護 = new RString("小規模介護");
     private static final RString 小規模予防 = new RString("小規模予防");
     private static final RString ケアマネジメント = new RString("ケアマネジメント");
+    private static final RString 新規申請 = new RString("新規申請");
+    private static final RString 再申請 = new RString("再申請");
+    private static final RString 変更申請 = new RString("変更申請");
+    private static final RString サービス変更 = new RString("サービス変更");
 
     /**
      * コンストラクタです。
@@ -288,6 +292,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         if (is自己作成の場合()) {
             div.getRadKeikakuKubun().setVisible(true);
             div.getRadKeikakuKubun().setSelectedKey(KEY_0);
+            div.getRadKeikakuKubun().setDisabled(true);
             div.getRadKeikakuSakuseiKubun().setDataSource(get自己作成DataSource());
             div.getRadKeikakuSakuseiKubun().setSelectedIndex(0);
             div.getServiceAddAndServicePlanCreate().getJigyoshaJoho().setDisplayNone(true);
@@ -568,7 +573,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                     居宅給付計画届出.get被保険者番号(), 居宅給付計画届出.get対象年月(), 居宅給付計画届出.get履歴番号());
             KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = 居宅給付計画届出.getKyotakuKeikakuJikoSakusei(identifier);
             KyotakuKeikakuJikoSakuseiBuilder builder = 居宅給付計画自己作成.createBuilderForEdit().
-                    set居宅_総合事業区分(KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey()) ? 居宅 : 総合事業).
+                    set居宅_総合事業区分(KEY_0.equals(div.getRadKeikakuKubun().getSelectedKey()) ? 居宅 : 総合事業).
                     set適用開始年月日(new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString())).
                     set適用終了年月日(div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? null
                             : new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString())).
@@ -651,8 +656,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             div.getRadKeikakuKubun().setDisplayNone(false);
             if (居宅.equals(居宅給付計画自己作成.get居宅_総合事業区分())) {
                 div.getRadKeikakuKubun().setSelectedKey(KEY_0);
+                div.getRadKeikakuKubun().setDisabled(true);
             } else if (総合事業.equals(居宅給付計画自己作成.get居宅_総合事業区分())) {
                 div.getRadKeikakuKubun().setSelectedKey(KEY_1);
+                div.getRadKeikakuKubun().setDisabled(true);
             }
             div.getTxtKeikakuTekiyoStartYMD().setValue(new RDate(居宅給付計画自己作成.get適用開始年月日().toString()));
             if (null != 居宅給付計画自己作成.get適用終了年月日() && !居宅給付計画自己作成.get適用終了年月日().isEmpty()) {
@@ -735,18 +742,22 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiHenkoShinsei().setReadOnly(true);
         div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiServiceHenko().setReadOnly(true);
         if (JukyuShinseiJiyu.初回申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())) {
-            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiShinki().setReadOnly(false);
+            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiShinki().setValue(新規申請);
+            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiShinki().setDisabled(true);
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(
                 jukyushaDaicho.get受給申請事由().getColumnValue())
                 || JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(
                         jukyushaDaicho.get受給申請事由().getColumnValue())) {
-            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiSaishinsei().setReadOnly(false);
+            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiSaishinsei().setValue(再申請);
+            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiSaishinsei().setDisabled(true);
         } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(
                 jukyushaDaicho.get受給申請事由().getColumnValue())) {
-            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiHenkoShinsei().setReadOnly(false);
+            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiHenkoShinsei().setValue(変更申請);
+            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiHenkoShinsei().setDisabled(true);
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(
                 jukyushaDaicho.get受給申請事由().getColumnValue())) {
-            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiServiceHenko().setReadOnly(false);
+            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiServiceHenko().setValue(サービス変更);
+            div.getServiceAddAndServicePlanCreate().getTxtNinteiShinseiServiceHenko().setDisabled(true);
         }
     }
 
