@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Shotok
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.DbWT3861KogakuGassanShikyugakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.TempDbWT0001HihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanshikyugakukakuninichiran.GassanShikyugakuKakuninIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -41,6 +43,7 @@ public class GassanShikyugakuKakuninIchiranEditor implements
     private static final int NUM_4 = 4;
     private static final RString 日時作成 = new RString("作成");
     private static final RString 接続文字 = new RString("～");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private final KogakuGassanShikyugakuKeisanKekkaIn entity;
 
     /**
@@ -77,6 +80,8 @@ public class GassanShikyugakuKakuninIchiranEditor implements
 
         TempDbWT0001HihokenshaEntity 被保険者entity = entity.get帳票用データ().get被保険者entity();
         source.listUpper_3 = 被保険者entity.getHihokenshaNo().value();
+        source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                source.listUpper_3);
         source.listLower_1 = 被保険者entity.getMeisho();
         source.listUpper_4 = 計算結果entity.getShikyuShinseishoSeiriNo();
         source.listLower_2 = 計算結果entity.getJikoFutanSeiriNo();
