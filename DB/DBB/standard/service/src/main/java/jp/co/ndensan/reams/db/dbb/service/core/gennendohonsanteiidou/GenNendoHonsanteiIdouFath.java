@@ -364,15 +364,15 @@ public class GenNendoHonsanteiIdouFath {
             input.set業務コンフィグ情報(業務コンフィグ情報);
             TokuchoKarisanteiKiwariOutput output = 特徴仮算定期割クラス.getTokuchoKarisanteiKibetsuGaku(input);
             List<Decimal> 特徴期別金額 = new ArrayList<>();
-            if (output != null && INT_3 <= output.get特徴期別額().size()) {
+            if (output != null && output.get特徴期別額() != null && INT_3 <= output.get特徴期別額().size()) {
                 特徴期別金額.add(output.get特徴期別額().get(0));
                 特徴期別金額.add(output.get特徴期別額().get(INT_1));
                 特徴期別金額.add(output.get特徴期別額().get(INT_2));
-            } else if (output != null && INT_2 == output.get特徴期別額().size()) {
+            } else if (output != null && output.get特徴期別額() != null && INT_2 == output.get特徴期別額().size()) {
                 特徴期別金額.add(output.get特徴期別額().get(0));
                 特徴期別金額.add(output.get特徴期別額().get(INT_1));
                 特徴期別金額.add(Decimal.ZERO);
-            } else if (output != null && INT_1 == output.get特徴期別額().size()) {
+            } else if (output != null && output.get特徴期別額() != null && INT_1 == output.get特徴期別額().size()) {
                 特徴期別金額.add(output.get特徴期別額().get(0));
                 特徴期別金額.add(Decimal.ZERO);
                 特徴期別金額.add(Decimal.ZERO);
