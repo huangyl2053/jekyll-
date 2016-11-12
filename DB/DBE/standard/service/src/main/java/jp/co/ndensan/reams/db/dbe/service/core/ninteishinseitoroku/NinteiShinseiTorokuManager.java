@@ -376,6 +376,8 @@ public class NinteiShinseiTorokuManager {
      */
     public boolean has要介護認定申請情報(RString 証記載保険者番号, RString 被保険者番号,
             FlexibleDate 認定申請年月日, Code 認定申請区分_申請時_コード) {
-        return null != dbt5101Dac.get要介護認定申請情報ForCheck(証記載保険者番号, 被保険者番号, 認定申請年月日, 認定申請区分_申請時_コード);
+        List<DbT5101NinteiShinseiJohoEntity> retList = dbt5101Dac.get要介護認定申請情報ForCheck(
+                証記載保険者番号, 被保険者番号, 認定申請年月日, 認定申請区分_申請時_コード);
+        return null != retList && !retList.isEmpty();
     }
 }
