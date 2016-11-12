@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD3020003;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JikoKisambiKanri;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoKiSummary;
@@ -75,9 +76,9 @@ public class JukoKisambiTokushuToroku {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
 
-        if (new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType()) {
+        if ((new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode()) && MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType())
+                ||               
+            (new RString(UrInformationMessages.該当データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode()) && MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType())) {
 
             return ResponseData.of(div).forwardWithEventName(DBD3020003TransitionEventName.検索に戻る).respond();
         }
@@ -155,6 +156,7 @@ public class JukoKisambiTokushuToroku {
      */
     public ResponseData<JukoKisambiTokushuTorokuDiv> onClick_selectBySelectButton(JukoKisambiTokushuTorokuDiv div) {
 
+        div.getChkZengyoHyoji().setSelectedItemsByKey(new ArrayList<>(Arrays.asList(new RString("isZengyoHyoji"))));
         div.getDgShunoJokyo().setDisabled(true);
         div.getJikoKisambi().setIsOpen(true);
         div.getJikoKisambi().setDisabled(false);

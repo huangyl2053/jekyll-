@@ -191,7 +191,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         set通知文上段Small_2(source);
         set通知文下段Large_2(source);
         set雛形部品CompNinshosha(source);
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo));
         return source;
     }
 
@@ -368,5 +368,12 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
 
     private String get日本語名略称(RDate 日付) {
         return 日付.getDayOfWeek().getInFullParentheses();
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

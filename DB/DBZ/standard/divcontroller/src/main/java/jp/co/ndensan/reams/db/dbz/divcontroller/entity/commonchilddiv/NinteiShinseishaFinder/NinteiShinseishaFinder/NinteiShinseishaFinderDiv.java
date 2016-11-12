@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseishaFinderDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -92,6 +92,10 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     private RString hdnZenkaiChosaItakusakiCode;
     @JsonProperty("hdnZenkaiShujiiIryokikanCode")
     private RString hdnZenkaiShujiiIryokikanCode;
+    @JsonProperty("hdnChosaShichosonCode")
+    private RString hdnChosaShichosonCode;
+    @JsonProperty("hdnShujiiShichosonCode")
+    private RString hdnShujiiShichosonCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -502,6 +506,42 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     @JsonProperty("hdnZenkaiShujiiIryokikanCode")
     public void setHdnZenkaiShujiiIryokikanCode(RString hdnZenkaiShujiiIryokikanCode) {
         this.hdnZenkaiShujiiIryokikanCode = hdnZenkaiShujiiIryokikanCode;
+    }
+
+    /*
+     * gethdnChosaShichosonCode
+     * @return hdnChosaShichosonCode
+     */
+    @JsonProperty("hdnChosaShichosonCode")
+    public RString getHdnChosaShichosonCode() {
+        return hdnChosaShichosonCode;
+    }
+
+    /*
+     * sethdnChosaShichosonCode
+     * @param hdnChosaShichosonCode hdnChosaShichosonCode
+     */
+    @JsonProperty("hdnChosaShichosonCode")
+    public void setHdnChosaShichosonCode(RString hdnChosaShichosonCode) {
+        this.hdnChosaShichosonCode = hdnChosaShichosonCode;
+    }
+
+    /*
+     * gethdnShujiiShichosonCode
+     * @return hdnShujiiShichosonCode
+     */
+    @JsonProperty("hdnShujiiShichosonCode")
+    public RString getHdnShujiiShichosonCode() {
+        return hdnShujiiShichosonCode;
+    }
+
+    /*
+     * sethdnShujiiShichosonCode
+     * @param hdnShujiiShichosonCode hdnShujiiShichosonCode
+     */
+    @JsonProperty("hdnShujiiShichosonCode")
+    public void setHdnShujiiShichosonCode(RString hdnShujiiShichosonCode) {
+        this.hdnShujiiShichosonCode = hdnShujiiShichosonCode;
     }
 
     /*

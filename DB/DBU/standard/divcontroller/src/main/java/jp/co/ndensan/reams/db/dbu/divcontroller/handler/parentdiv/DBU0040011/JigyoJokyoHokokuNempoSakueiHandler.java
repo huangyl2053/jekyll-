@@ -1339,23 +1339,13 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             出力区分リスト.add(選択無し);
         }
         parameter.set集計年度(集計年度);
-        parameter.set集計開始年月(get集計年月日(集計開始年月));
-        parameter.set集計終了年月(get集計年月日(集計終了年月));
+        parameter.set集計開始年月(集計開始年月);
+        parameter.set集計終了年月(集計終了年月);
         parameter.set作成日時(作成日時);
         parameter.set出力区分リスト(出力区分リスト);
         return parameter;
     }
 
-    private List<RString> get集計年月日(List<RString> 集計年月) {
-        List<RString> 集計年月日 = new ArrayList<>();
-        for (RString 年月 : 集計年月) {
-            if (!RString.isNullOrEmpty(年月)) {
-                年月.concat(new RString("01"));
-            }
-            集計年月日.add(年月);
-        }
-        return 集計年月日;
-    }
 
     private RString get集計年度(FlexibleDate 日期) {
         if (日期 != null && !日期.isEmpty()) {

@@ -56,7 +56,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final RString DEC05F001またはDEE01F001 = new RString("DEC05F001またはDEE01F001");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
     private static final RString COMMON_BUTTON_FIELD_NAME_当初 = new RString("btnBatchRegisterDousyo");
-    private static final RString SRC = new RString("\\home\\D209007\\sharedFiles\\DEE01F001");
+    private static final RString SRC = new RString("/home/D209007/sharedFiles/DEE01F001");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -141,7 +141,8 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      * 「実行する」を押下場合、DBB112002 バッチを起動します。
      *
      * @param div ShotokuJohoChushutsuKoikiBatchParameterDiv
-     * @return ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter>
+     * @return
+     * ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter>
      */
     public ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter> onclick_batchRegister_DBB112002(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {

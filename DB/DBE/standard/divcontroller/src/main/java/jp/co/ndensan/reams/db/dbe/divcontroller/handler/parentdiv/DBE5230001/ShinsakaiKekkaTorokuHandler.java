@@ -303,8 +303,10 @@ public class ShinsakaiKekkaTorokuHandler {
          */
         if (div.getDdlNijiHantei().getSelectedKey().equals(new RString("21"))) {
             div.getDdlJotaiZo().setRequired(true);
+            div.getDdlJotaiZo().setDisabled(false);
         } else {
             div.getDdlJotaiZo().setRequired(false);
+            div.getDdlJotaiZo().setDisabled(true);
         }
         div.getBtnNinteiChosaJokyoShokai().setDisabled(false);
         div.getBtnToroku().setDisabled(false);

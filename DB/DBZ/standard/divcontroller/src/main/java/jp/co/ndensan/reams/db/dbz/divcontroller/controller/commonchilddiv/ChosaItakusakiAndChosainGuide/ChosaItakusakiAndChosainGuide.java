@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItaku
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.iknijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,6 +52,20 @@ public class ChosaItakusakiAndChosainGuide {
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onLoad(ChosaItakusakiAndChosainGuideDiv div) {
         div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).intialize();
+
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        if (dataPassModel != null) {
+            if (!RString.isNullOrEmpty(dataPassModel.get委託先コード())) {
+                if (new RString(TaishoMode.Chosain.toString()).equals(dataPassModel.get対象モード())) {
+                    div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
+                    div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード());
+                }
+            }
+            List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
+            getHandler(div).setDataGrid(list);
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -106,33 +121,33 @@ public class ChosaItakusakiAndChosainGuide {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
 
-        if (!div.getTxtChosaItakusakiCodeFrom().getValue().isNullOrEmpty()
-                && !div.getTxtChosaItakuaskiCodeTo().getValue().isNullOrEmpty()) {
-            if (Long.valueOf(div.getTxtChosaItakusakiCodeFrom().getValue().toString())
-                    > Long.valueOf(div.getTxtChosaItakuaskiCodeTo().getValue().toString())) {
-                調査委託先コードFrom = div.getTxtChosaItakuaskiCodeTo().getValue();
-                調査委託先コードTo = div.getTxtChosaItakusakiCodeFrom().getValue();
+        if (!RString.isNullOrEmpty(div.getTxtChosaItakusakiCodeFrom().getText())
+                && !RString.isNullOrEmpty(div.getTxtChosaItakuaskiCodeTo().getText())) {
+            if (Long.valueOf(div.getTxtChosaItakusakiCodeFrom().getText().toString())
+                    > Long.valueOf(div.getTxtChosaItakuaskiCodeTo().getText().toString())) {
+                調査委託先コードFrom = div.getTxtChosaItakuaskiCodeTo().getText();
+                調査委託先コードTo = div.getTxtChosaItakusakiCodeFrom().getText();
             } else {
-                調査委託先コードFrom = div.getTxtChosaItakusakiCodeFrom().getValue();
-                調査委託先コードTo = div.getTxtChosaItakuaskiCodeTo().getValue();
+                調査委託先コードFrom = div.getTxtChosaItakusakiCodeFrom().getText();
+                調査委託先コードTo = div.getTxtChosaItakuaskiCodeTo().getText();
             }
         } else {
-            調査委託先コードFrom = div.getTxtChosaItakusakiCodeFrom().getValue();
-            調査委託先コードTo = div.getTxtChosaItakuaskiCodeTo().getValue();
+            調査委託先コードFrom = div.getTxtChosaItakusakiCodeFrom().getText();
+            調査委託先コードTo = div.getTxtChosaItakuaskiCodeTo().getText();
         }
-        if (!div.getTxtChosainCodeFrom().getValue().isNullOrEmpty()
-                && !div.getTxtChosainCodeTo().getValue().isNullOrEmpty()) {
-            if (Long.valueOf(div.getTxtChosainCodeFrom().getValue().toString())
-                    > Long.valueOf(div.getTxtChosainCodeTo().getValue().toString())) {
-                調査員コードFrom = div.getTxtChosainCodeTo().getValue();
-                調査員コードTo = div.getTxtChosainCodeFrom().getValue();
+        if (!RString.isNullOrEmpty(div.getTxtChosainCodeFrom().getText())
+                && !RString.isNullOrEmpty(div.getTxtChosainCodeTo().getText())) {
+            if (Long.valueOf(div.getTxtChosainCodeFrom().getText().toString())
+                    > Long.valueOf(div.getTxtChosainCodeTo().getText().toString())) {
+                調査員コードFrom = div.getTxtChosainCodeTo().getText();
+                調査員コードTo = div.getTxtChosainCodeFrom().getText();
             } else {
-                調査員コードFrom = div.getTxtChosainCodeFrom().getValue();
-                調査員コードTo = div.getTxtChosainCodeTo().getValue();
+                調査員コードFrom = div.getTxtChosainCodeFrom().getText();
+                調査員コードTo = div.getTxtChosainCodeTo().getText();
             }
         } else {
-            調査員コードFrom = div.getTxtChosainCodeFrom().getValue();
-            調査員コードTo = div.getTxtChosainCodeTo().getValue();
+            調査員コードFrom = div.getTxtChosainCodeFrom().getText();
+            調査員コードTo = div.getTxtChosainCodeTo().getText();
         }
         市町村コード = dataPassModel.get市町村コード();
         if (RString.isNullOrEmpty(市町村コード)) {

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -72,7 +73,8 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
         source.listLower_3 = 帳票出力対象データ.get過誤申立事由();
         source.listLower_4 = decimalFormatter(帳票出力対象データ.get保険者負担額(), 0);
         source.shikibetuCode = 帳票出力対象データ.get識別コード();
-        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_4);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listUpper_4));
     }
 
     private void edit集計(SogojigyohiKagoKetteiInSource source) {

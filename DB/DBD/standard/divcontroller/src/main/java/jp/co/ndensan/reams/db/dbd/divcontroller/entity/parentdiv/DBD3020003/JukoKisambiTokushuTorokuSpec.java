@@ -53,8 +53,9 @@ public enum JukoKisambiTokushuTorokuSpec implements IPredicate<JukoKisambiTokush
         public boolean apply(JukoKisambiTokushuTorokuDiv div) {
 
             List<dgJikoKisambi_Row> 時効起算日登録List = div.getDgJikoKisambi().getDataSource();
+            boolean test = true;
             for (dgJikoKisambi_Row row : 時効起算日登録List) {
-                return (row.getTokushuJikoKisaibi().getValue() != null
+                test &= (row.getTokushuJikoKisaibi().getValue() != null
                         && !row.getTokushuJikoKisaibi().getValue().isEmpty()
                         && row.getTokushuJikoKisaibi().isValid()
                         && !RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedValue()))
@@ -64,7 +65,7 @@ public enum JukoKisambiTokushuTorokuSpec implements IPredicate<JukoKisambiTokush
                         && RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedValue()));
 
             }
-            return true;
+            return test;
         }
     },
 }

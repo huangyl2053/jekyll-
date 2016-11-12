@@ -1204,7 +1204,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         //TODO施設入所の有無 入所施設コード QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
-        builder.set処理状態区分(new Code("1"));
+        builder.set処理状態区分(new Code("0"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
         builder.set再調査依頼回数(0);
@@ -1391,7 +1391,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         //TODO施設入所の有無 入所施設コード 市町村連絡事項 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
-        builder.set処理状態区分(new Code("1"));
+        builder.set処理状態区分(new Code("0"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
         builder.set再調査依頼回数(0);
@@ -1515,7 +1515,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         //TODO施設入所の有無 入所施設コード  QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
-        builder.set処理状態区分(new Code("1"));
+        builder.set処理状態区分(new Code("0"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
         builder.set再調査依頼回数(0);

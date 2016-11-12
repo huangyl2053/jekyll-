@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -79,7 +80,8 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
     public TokubetsuChoshuHeijunkaKeisanIchiranSource edit(TokubetsuChoshuHeijunkaKeisanIchiranSource source) {
         source.hokenshacd = association.get地方公共団体コード().value();
         source.hokenshamei = association.get市町村名();
-        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId());
+        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager()
+                .get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200005.getReportId());
         if (特徴平準化結果対象者一覧表 != null) {
             対象者項目編集(特徴平準化結果対象者一覧表, source, 帳票制御共通, association);
         }
@@ -184,13 +186,13 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
     private void set変更前特徴額(TokubetsuChoshuHeijunkaKeisanIchiranSource source, TokuchoHeijyunkaTaishoshaEntity item) {
 
         if (item.get変更前特徴額_１期() != null) {
-            source.listUpper_6 = new RString(item.get変更前特徴額_１期().toString());
+            source.listUpper_6 = doカンマ編集(item.get変更前特徴額_１期());
         }
         if (item.get変更前特徴額_２期() != null) {
-            source.listUpper_7 = new RString(item.get変更前特徴額_２期().toString());
+            source.listUpper_7 = doカンマ編集(item.get変更前特徴額_２期());
         }
         if (item.get変更前特徴額_３期() != null) {
-            source.listUpper_8 = new RString(item.get変更前特徴額_３期().toString());
+            source.listUpper_8 = doカンマ編集(item.get変更前特徴額_３期());
         }
     }
 

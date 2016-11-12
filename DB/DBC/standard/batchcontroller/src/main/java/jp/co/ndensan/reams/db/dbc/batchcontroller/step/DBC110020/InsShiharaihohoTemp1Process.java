@@ -1697,13 +1697,16 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         Collections.sort(特定入所者List, new Comparator<TokuteiNyusyoshaInfoEntity>() {
             @Override
             public int compare(TokuteiNyusyoshaInfoEntity o1, TokuteiNyusyoshaInfoEntity o2) {
-                if (o2.get履歴番号() < o1.get履歴番号()) {
+                if (o1.get適用開始日() == null || o1.get適用開始日().isEmpty()) {
                     return -1;
                 }
-                if (o1.get履歴番号() < o2.get履歴番号()) {
+                if (o2.get適用開始日() == null || o2.get適用開始日().isEmpty()) {
                     return 1;
                 }
-                return 0;
+                if (o1.get適用開始日().isBefore(o2.get適用開始日())) {
+                    return -1;
+                }
+                return 1;
             }
         });
     }

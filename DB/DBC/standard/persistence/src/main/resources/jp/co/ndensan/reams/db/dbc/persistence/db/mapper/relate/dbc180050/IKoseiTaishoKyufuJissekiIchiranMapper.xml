@@ -28,12 +28,6 @@
         D2."insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時} AND
         '201508' <![CDATA[<=]]> D2."serviceTeikyoYM" AND
         SUBSTRING(D2."inputShikibetsuNo" FROM 1 FOR 3) NOT IN ('21B','812','817')
-        AND NOT EXISTS (
-            SELECT 1
-            FROM "torigaDataTemp" AS T1
-            WHERE T1."被保険者番号" = 被保険者番号 AND
-            T1."年月" = D2."serviceTeikyoYM"
-        )
     </select>
     
     <select resultOrdered="true" id="getトリガデータTemp" 
@@ -42,6 +36,19 @@
         *
         FROM
         "torigaDataTemp"
+    </select>
+    
+    <select resultOrdered="true" id="has同じTemp" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.TorigaDataTempEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180050.SelRiyoushaHutanwariaitorigaDataMybatisParameter"
+            fetchSize="500">
+        SELECT
+        *
+        FROM
+        "torigaDataTemp"
+        WHERE "torigaDataTemp"."被保険者番号" = #{被保険者番号} AND
+            "torigaDataTemp"."年月" = #{年月}
+        LIMIT 1
     </select>
     
     <select resultOrdered="true" id="get利用者負担割合明細Newest" resultMap="利用者負担割合明細最新_resultMap" fetchSize="500">

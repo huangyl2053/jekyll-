@@ -28,7 +28,7 @@
         <result property="nijiHanteiYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiJohoTeikyoYMD" column="dbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shichosonMeisho" column="dbT5051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonMeisho" column="dbT7051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiIken" column="dbT5102NinteiKekkaJoho_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
@@ -45,20 +45,20 @@
         rgdb."DbT5912ShujiiJoho"."shujiiCode" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiCode,
         rgdb."DbT5912ShujiiJoho"."shujiiName" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiName,
         COUNT(0) AS youKaiGoNinTeiKekTesuChiRelateEntity_taiSyouCount,
-        rgdb."DbT5051KoseiShichosonMaster"."shichosonCode" AS shichosonCode
+        rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT5101NinteiShinseiJoho"
         INNER JOIN  rgdb."DbT5102NinteiKekkaJoho"
         ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-        INNER JOIN  rgdb."DbT5051KoseiShichosonMaster"
-        ON  rgdb."DbT5051KoseiShichosonMaster"."shoKisaiHokenshaNo" = rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
+        INNER JOIN  rgdb."DbT7051KoseiShichosonMaster"
+        ON  rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
         INNER JOIN  rgdb."DbT5911ShujiiIryoKikanJoho"
         ON  rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
-        AND rgdb."DbT5911ShujiiIryoKikanJoho"."shichosonCode" = rgdb."DbT5051KoseiShichosonMaster"."shichosonCode"
+        AND rgdb."DbT5911ShujiiIryoKikanJoho"."shichosonCode" = rgdb."DbT7051KoseiShichosonMaster"."shichosonCode"
         INNER JOIN  rgdb."DbT5912ShujiiJoho"
         ON  rgdb."DbT5912ShujiiJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
         AND rgdb."DbT5912ShujiiJoho"."shujiiCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiCode"
-        AND rgdb."DbT5912ShujiiJoho"."shichosonCode" = rgdb."DbT5051KoseiShichosonMaster"."shichosonCode"
+        AND rgdb."DbT5912ShujiiJoho"."shichosonCode" = rgdb."DbT7051KoseiShichosonMaster"."shichosonCode"
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" =
@@ -100,7 +100,7 @@
         rgdb."DbT5911ShujiiIryoKikanJoho"."jusho",
         rgdb."DbT5912ShujiiJoho"."shujiiCode",
         rgdb."DbT5912ShujiiJoho"."shujiiName",
-        rgdb."DbT5051KoseiShichosonMaster"."shichosonCode"
+        rgdb."DbT7051KoseiShichosonMaster"."shichosonCode"
         ORDER BY
         rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode",
         rgdb."DbT5912ShujiiJoho"."shujiiCode"

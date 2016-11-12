@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufukanrihyo.kogakuservicehitaishoshaichiransokyubun;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehitaishoshaichiransokyubun.KogakuServicehiTaishoshaIchiranSokyubunEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuservicehitaishoshaichiransokyubun.KogakuServicehiTaishoshaIchiranSokyubunReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -76,7 +77,8 @@ public class KogakuServicehiTaishoshaIchiranSokyubunEditor implements IKogakuSer
         source.listTaishosha_10 = entity.get備考();
         source.listTaishosha_11 = entity.getマスタの状況();
         source.shikibetuCode = entity.get識別コード();
-        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.get被保険者番号());
+        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                ReportKomokuEditorUtil.get非空文字列(entity.get被保険者番号()));
         return source;
     }
 

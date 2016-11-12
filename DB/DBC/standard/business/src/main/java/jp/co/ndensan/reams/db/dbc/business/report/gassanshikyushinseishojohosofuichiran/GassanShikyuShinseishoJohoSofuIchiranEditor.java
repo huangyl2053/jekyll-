@@ -125,7 +125,7 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
         } else {
             source.list_16 = RString.EMPTY;
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list_9);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.list_9));
         return source;
     }
 
@@ -153,5 +153,12 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
                 source.list_8 = KaigoGassan_ShinseiKeitai.toValue(高額合算申請書一時Entity.getShikyuShinseiKeitai()).get名称();
             }
         }
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

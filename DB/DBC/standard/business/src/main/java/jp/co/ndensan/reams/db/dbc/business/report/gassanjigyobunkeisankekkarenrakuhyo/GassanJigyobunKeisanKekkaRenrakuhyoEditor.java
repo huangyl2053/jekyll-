@@ -112,11 +112,11 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
             if (dataEntity.getDbt3172Entity().getHihokenshaNo() != null) {
                 HihokenshaNo 被保険者番号 = dataEntity.getDbt3172Entity().getHihokenshaNo();
                 PersonalData personalData = PersonalData.of(宛名データ.get識別コード(),
-                        new ExpandedInformation(new Code("003"), 文_被保険者番号, 被保険者番号.getColumnValue()));
+                        new ExpandedInformation(new Code("0003"), 文_被保険者番号, 被保険者番号.getColumnValue()));
                 AccessLogger.log(AccessLogType.照会, personalData);
             }
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo));
         return source;
     }
 
@@ -346,6 +346,13 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
             source.tuchiYMD = 通知年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
         }
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }

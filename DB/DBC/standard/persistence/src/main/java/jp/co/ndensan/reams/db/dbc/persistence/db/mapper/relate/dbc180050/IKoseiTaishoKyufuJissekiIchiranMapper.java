@@ -54,6 +54,14 @@ public interface IKoseiTaishoKyufuJissekiIchiranMapper {
     List<TorigaDataTempEntity> getトリガデータTemp();
 
     /**
+     * 同じTempデータ取得。
+     *
+     * @param parameter SelRiyoushaHutanwariaitorigaDataMybatisParameter
+     * @return TorigaDataTempEntity
+     */
+    TorigaDataTempEntity has同じTemp(SelRiyoushaHutanwariaitorigaDataMybatisParameter parameter);
+
+    /**
      * 利用者負担割合明細Newest取得。
      *
      * @return List<InsFutanwariaiJohoTempResultEntity>

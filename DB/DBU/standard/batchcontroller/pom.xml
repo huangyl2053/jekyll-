@@ -46,10 +46,18 @@
             <artifactId>UrzBatchController</artifactId>
         </dependency>
         <!-- テスト -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
         <!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
+            <version>${jp.co.ndensan.reams.dbzVersion}</version>
+                <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -70,6 +78,13 @@
             <groupId>jp.co.ndensan.reams.db.dba</groupId>
             <artifactId>DbaEntity</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbu</groupId>
+            <artifactId>DbuBatchController</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
             <type>jar</type>
         </dependency>
     </dependencies>

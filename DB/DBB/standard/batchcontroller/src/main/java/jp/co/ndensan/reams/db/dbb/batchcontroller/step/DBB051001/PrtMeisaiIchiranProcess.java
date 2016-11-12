@@ -28,10 +28,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
@@ -41,8 +37,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.jusho.KannaiKangaiKubunType;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -50,13 +44,12 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -84,7 +77,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBB-0930-010 xuzhao
  */
-public class PrtMeisaiIchiranProcess extends BatchProcessBase<TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity> {
+public class PrtMeisaiIchiranProcess extends BatchKeyBreakBase<TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity> {
 
     private static final RString SELECT_DATA_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper"
             + ".relate.gennendohonsanteiidou.IGenNendoHonsanteiIdouMapper.get特別徴収依頼金額明細情報");
@@ -138,32 +131,23 @@ public class PrtMeisaiIchiranProcess extends BatchProcessBase<TokubetsuChoshuIra
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
-                KensakuYusenKubun.住登外優先);
-        List<JuminShubetsu> 住民種別List = new ArrayList();
-        List<JuminJotai> 住民状態List = new ArrayList();
-        住民種別List.add(JuminShubetsu.日本人);
-        住民種別List.add(JuminShubetsu.外国人);
-        住民状態List.add(JuminJotai.住民);
-        住民状態List.add(JuminJotai.住登外);
-        住民状態List.add(JuminJotai.消除者);
-        住民状態List.add(JuminJotai.転出者);
-        住民状態List.add(JuminJotai.死亡者);
-        builder.set住民種別(住民種別List);
-        builder.set住民状態(住民状態List);
-        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         RString 通知内容コード = TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード();
         RString 特別徴収_特徴開始月_6月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         boolean is6月捕捉が04 = 特別徴収_特徴開始月_6月捕捉.equals(RSTRING_04);
         PrtMeisaiIchiranMyBatisParameter myBatisParameter = new PrtMeisaiIchiranMyBatisParameter(通知内容コード,
-                is6月捕捉が04, 出力順, new UaFt200FindShikibetsuTaishoParam(searchKey));
+                is6月捕捉が04, 出力順);
         return new BatchDbReader(SELECT_DATA_ID, myBatisParameter);
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
+        if (改頁項目リスト.isEmpty()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value())
+                    .addBreak(new PrtMeisaiIchiranProcessPageBreak(改頁項目リスト)).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -179,7 +163,11 @@ public class PrtMeisaiIchiranProcess extends BatchProcessBase<TokubetsuChoshuIra
     }
 
     @Override
-    protected void process(TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity entity) {
+    protected void keyBreakProcess(TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity t) {
+    }
+
+    @Override
+    protected void usualProcess(TokubetsuChoshuIraikingakuMeisaiIchiranDataEntity entity) {
         DbT2002FukaJohoTempTableEntity 賦課の情報一時Entity = entity.get賦課の情報一時テーブル();
         UaFt200FindShikibetsuTaishoEntity 宛名PSM = entity.get宛名PSMの戻り値();
         ChoshuHoho 徴収方法 = null;

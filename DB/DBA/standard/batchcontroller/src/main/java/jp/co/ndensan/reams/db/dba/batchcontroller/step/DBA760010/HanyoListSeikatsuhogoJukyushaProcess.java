@@ -209,7 +209,7 @@ public class HanyoListSeikatsuhogoJukyushaProcess extends BatchProcessBase<Seika
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 new RString("HanyoList_SeikatsuHogoJukyusha.csv"),
                 EUC_ENTITY_ID.toRString(),
-                new RString(String.valueOf(eucCsvWriter.getCount())),
+                new RString(String.valueOf(eucCsvWriter.getCount() - 1)),
                 new HanyoListSeikatsuhogoJukyushaResult().get出力条件(processParamter, kaigoDonyuKeitai));
         OutputJokenhyoFactory.createInstance(item).print();
     }
