@@ -51,17 +51,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -88,11 +83,12 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
     private ReportSourceWriter<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> reportSourceWriter;
     IOutputOrder outputOrder;
     private ChohyoSeigyoKyotsu 帳票制御共通情報;
-    private List<PersonalData> personalDataList;
+    private ReportOutputJokenhyoProcessCore outputCore;
 
     @Override
     protected IBatchReader createReader() {
-        personalDataList = new ArrayList<>();
+        outputCore = new ReportOutputJokenhyoProcessCore();
+        
         RString 出力順 = get出力順(ReportIdDBC.DBC100002_2.getReportId(), batchPram.getSyutujunId());
         if (!RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.replace(ORDER_BY, RString.EMPTY);
@@ -160,7 +156,6 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
         } else {
             帳票データリスト.add(データ);
             種類Map.put(key, 種類);
-            personalDataList.add(toPersonalData(entity));
         }
     }
 
@@ -213,29 +208,21 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
                 = ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
         
-        AccessLogger.log(AccessLogType.照会, personalDataList);
         eucFileOutputJohoFactory();
     }
     private void eucFileOutputJohoFactory() {
-        List<RString> 出力条件List = new ArrayList<>();
+        List<RString> 出力条件List = outputCore.get出力条件(batchPram.getBatParmeter(), outputOrder);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                ReportIdDBC.DBC100002.getReportId().value(),
+                ReportIdDBC.DBC100002_2.getReportId().value(),
                 Association.getLasdecCode().value(),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 new RString(batchPram.getJobId()),
-                new RString(""),
+                ReportIdDBC.DBC100002_2.getReportName(),
                 new RString(reportSourceWriter.pageCount().value()),
                 new RString("なし"),
                 RString.EMPTY,
                 出力条件List);
         OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
-    }
-    
-    
-    private PersonalData toPersonalData(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), 
-                new RString("被保険者番号"), new RString(entity.getHiHokenshaNo().toString()));
-        return PersonalData.of(entity.getShikibetsuCode(), expandedInfo);
     }
 
     private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem
@@ -345,6 +332,6 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
                 item.getSamaBun1(),
                 item.getKakkoRight1(),
                 item.getSamabunShimeiSmall1(),
-                item.getCustomerBarCode());
+                null);
     }
 }

@@ -22,8 +22,10 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshih
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyuketteitsuchishosealertype.ShokanBaraiShikyuKetteiTsuchishoSealerType1;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyuketteitsuchishosealertype.TensoData;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -35,11 +37,15 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -77,9 +83,13 @@ public class ShokanKetteiTsuchiShoSealerOutputProcess extends BatchProcessBase<S
     private static final RString 帳票制御汎用キー_償還払い支給不支給決定通知書 = new RString("２号発行有無");
     private static final RString 発行有無_発行しない = new RString("0");
     IOutputOrder outputOrder;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
+    private ReportOutputJokenhyoProcessCore outputCore;
 
     @Override
     protected IBatchReader createReader() {
+        outputCore = new ReportOutputJokenhyoProcessCore();
+        帳票制御共通情報 = get帳票制御共通情報();
         RString 出力順 = get出力順(ReportIdDBC.DBC100002_2.getReportId(), batchPram.getSyutujunId());
         if (!RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.replace(ORDER_BY, RString.EMPTY);
@@ -111,7 +121,11 @@ public class ShokanKetteiTsuchiShoSealerOutputProcess extends BatchProcessBase<S
 
         return new BatchDbReader(帳票取得SQL, parameter);
     }
-
+    private ChohyoSeigyoKyotsu get帳票制御共通情報() {
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        return chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付,
+                new ReportId(ReportIdDBC.DBC100002_2.getReportId().value()));
+    }
      private RString get出力順(ReportId 帳票分類ID, RString 出力順ID) {
 
         if (RString.isNullOrEmpty(出力順ID)) {
@@ -135,18 +149,32 @@ public class ShokanKetteiTsuchiShoSealerOutputProcess extends BatchProcessBase<S
     protected void process(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
         ShokanKetteiTsuchiShoShiharai データ = new ShokanKetteiTsuchiShoShiharai(entity);
         RString key = getJufukuKey(データ);
+        RString 種類 = データ.get種類() == null ? RString.EMPTY : データ.get種類();
         if (種類Map.containsKey(key)) {
             RString bef種類 = 種類Map.get(key) == null ? RString.EMPTY : 種類Map.get(key);
-            if (bef種類.indexOf(データ.get種類()) == 0) {
+            if (bef種類.indexOf(種類) == 0) {
                 種類Map.put(key, set種類(bef種類, データ.get種類()));
             }
         } else {
             帳票データリスト.add(データ);
-            種類Map.put(key, データ.get種類());
-                    
+            種類Map.put(key, 種類);
         }
     }
-
+    private void eucFileOutputJohoFactory() {
+        List<RString> 出力条件List = outputCore.get出力条件(batchPram.getBatParmeter(), outputOrder);
+        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                ReportIdDBC.DBC100004.getReportId().value(),
+                Association.getLasdecCode().value(),
+                AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
+                new RString(batchPram.getJobId()),
+                ReportIdDBC.DBC100004.getReportName(),
+                new RString(reportSourceWriter.pageCount().value()),
+                new RString("なし"),
+                RString.EMPTY,
+                出力条件List);
+        OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
+    }
+    
     private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
         RStringBuilder key = new RStringBuilder();
         key.append(shiharai.get被保険者番号().value());
@@ -172,7 +200,7 @@ public class ShokanKetteiTsuchiShoSealerOutputProcess extends BatchProcessBase<S
         }
         ShokanBaraiShikyuKetteiTsuchishoSealerType1 ichiranhyo = new ShokanBaraiShikyuKetteiTsuchishoSealerType1();
         TensoData data
-                = ichiranhyo.createChoHyoData(帳票データリスト, batchPram, reportSourceWriter, 種類Map);
+                = ichiranhyo.createChoHyoData(帳票データリスト, batchPram, reportSourceWriter, 種類Map, 帳票制御共通情報);
         IDaikoPrint daikoPrint = data.get代行プリント送付票();
         daikoPrint.print();
         List<ShokanKetteiTsuchiShoSealerItem> itemList = new ArrayList<>();
@@ -182,6 +210,7 @@ public class ShokanKetteiTsuchiShoSealerOutputProcess extends BatchProcessBase<S
         }
         ShokanKetteiTsuchiShoSealerReport report = ShokanKetteiTsuchiShoSealerReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
+        eucFileOutputJohoFactory();
     }
 
     private ShokanKetteiTsuchiShoSealerItem

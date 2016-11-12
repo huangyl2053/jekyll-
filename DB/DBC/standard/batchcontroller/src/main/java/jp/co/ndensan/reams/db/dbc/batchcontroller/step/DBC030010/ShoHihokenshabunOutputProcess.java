@@ -35,10 +35,14 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -77,9 +81,11 @@ public class ShoHihokenshabunOutputProcess extends BatchProcessBase<ShokanKettei
     private static final RString 発行有無_発行しない = new RString("0");
     IOutputOrder outputOrder;
     private ChohyoSeigyoKyotsu 帳票制御共通情報;
+    private ReportOutputJokenhyoProcessCore outputCore;
 
     @Override
     protected IBatchReader createReader() {
+        outputCore = new ReportOutputJokenhyoProcessCore();
         RString 出力順 = get出力順(ReportIdDBC.DBC100002_2.getReportId(), batchPram.getSyutujunId());
         if (!RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.replace(ORDER_BY, RString.EMPTY);
@@ -114,7 +120,7 @@ public class ShoHihokenshabunOutputProcess extends BatchProcessBase<ShokanKettei
     private ChohyoSeigyoKyotsu get帳票制御共通情報() {
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         return chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付,
-                new ReportId(ReportIdDBC.DBC200023.getReportId().value()));
+                new ReportId(ReportIdDBC.DBC100002_2.getReportId().value()));
     }
 
      private RString get出力順(ReportId 帳票分類ID, RString 出力順ID) {
@@ -179,8 +185,23 @@ public class ShoHihokenshabunOutputProcess extends BatchProcessBase<ShokanKettei
         }
         ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke sbsktr = ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke.createInstance();
         List<ShokanKetteiTsuchiShoHihokenshabunItem> itemList
-                = sbsktr.shokanBaraiShikyuKetteiTsuchishoRiyoshamuke(帳票データリスト, batchPram, reportSourceWriter, 種類Map);
+                = sbsktr.shokanBaraiShikyuKetteiTsuchishoRiyoshamuke(帳票データリスト, batchPram, reportSourceWriter, 種類Map, 帳票制御共通情報);
         ShokanKetteiTsuchiShoHihokenshabunReport report = ShokanKetteiTsuchiShoHihokenshabunReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
+        eucFileOutputJohoFactory();
+    }
+    private void eucFileOutputJohoFactory() {
+        List<RString> 出力条件List = outputCore.get出力条件(batchPram.getBatParmeter(), outputOrder);
+        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                ReportIdDBC.DBC100005.getReportId().value(),
+                Association.getLasdecCode().value(),
+                AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
+                new RString(batchPram.getJobId()),
+                ReportIdDBC.DBC100005.getReportName(),
+                new RString(reportSourceWriter.pageCount().value()),
+                new RString("なし"),
+                RString.EMPTY,
+                出力条件List);
+        OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
     }
 }

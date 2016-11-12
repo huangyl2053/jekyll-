@@ -50,12 +50,17 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -95,6 +100,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
     private static final RString 発行有無_発行しない = new RString("0");
     IOutputOrder outputOrder;
     private ChohyoSeigyoKyotsu 帳票制御共通情報;
+    private List<PersonalData> personalDataList;
 
     @BatchWriter
     private BatchReportWriter<ShokanbaraiShikyuFushikyuReportSource> batchWrite;
@@ -104,6 +110,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
     protected void initialize() {
         並び順List = new ArrayList();
         改頁List = new ArrayList();
+        personalDataList = new ArrayList<>();
     }
 
     @Override
@@ -144,7 +151,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
     private ChohyoSeigyoKyotsu get帳票制御共通情報() {
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         return chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付,
-                new ReportId(ReportIdDBC.DBC200023.getReportId().value()));
+                new ReportId(ReportIdDBC.DBC100002_2.getReportId().value()));
     }
     @Override
     protected void createWriter() {
@@ -167,7 +174,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
         } else {
             帳票データリスト.add(データ);
             種類Map.put(key, 種類);
-                    
+            personalDataList.add(toPersonalData(entity));         
         }
     }
     
@@ -201,8 +208,14 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
                 = ichiranhyo.getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(帳票データリスト, batchPram, 並び順List, 改頁List, 種類Map, 帳票制御共通情報);
         ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport report = ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
+        AccessLogger.log(AccessLogType.照会, personalDataList);
     }
 
+    private PersonalData toPersonalData(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), 
+                new RString("被保険者番号"), new RString(entity.getHiHokenshaNo().toString()));
+        return PersonalData.of(entity.getShikibetsuCode(), expandedInfo);
+    }
     private RString get出力順(ReportId 帳票分類ID, RString 出力順ID) {
 
         if (RString.isNullOrEmpty(出力順ID)) {

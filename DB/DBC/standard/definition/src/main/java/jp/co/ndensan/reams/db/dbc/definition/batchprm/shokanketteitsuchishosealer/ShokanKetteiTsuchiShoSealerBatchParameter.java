@@ -41,6 +41,7 @@ public final class ShokanKetteiTsuchiShoSealerBatchParameter implements IBatchPr
     private RTime 終了時間;
     private RString 窓口払い一括更新区分;
     private Long jobId;
+    private DBC030010_ShokanShikyuKetteiTsuchishoParameter batParmeter;
 
     private ShokanKetteiTsuchiShoSealerBatchParameter(FlexibleDate hakkoYMD, FlexibleDate hurikomiYMD, RString chusyutuMode,
             RString syutujunId, RDate dataFrom, RDate dataTo, FlexibleYearMonth ketteishaUketukeYM,
@@ -62,12 +63,14 @@ public final class ShokanKetteiTsuchiShoSealerBatchParameter implements IBatchPr
         this.開始時間 = batchParamter.get開始時間();
         this.終了時間 = batchParamter.get終了時間();
         this.jobId = jobId;
+        this.batParmeter = batchParamter;
     }
 
     /**
      * 償還払い支給（不支給）決定通知書一括作成のProcess用パラメータを作成します。
      *
      * @param batchParamter バッチパラメータ
+     * @param jobId jobId
      * @return Process用パラメータ
      */
     public static ShokanKetteiTsuchiShoSealerBatchParameter

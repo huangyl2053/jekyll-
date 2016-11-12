@@ -95,7 +95,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
         if (FLAG_TRUE.endsWith(getParameter().getテスト出力フラグ())) {
             executeStep(DB_UPDATE);
         }
-        if (更新する.endsWith(getParameter().get窓口払い一括更新区分())){
+        if (更新する.endsWith(getParameter().get窓口払い一括更新区分())) {
             executeStep(DB_UPDATE2);
         }
         if (用紙タイプ_A4.equals(用紙タイプ)) {
@@ -116,6 +116,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
         if (FLAG_TRUE.equals(getParameter().get利用者向け決定通知書フラグ())) {
             executeStep(DBC100005);
         }
+        executeStep(DBC200023);
     }
 
     @Step(TEMP_INSERT)

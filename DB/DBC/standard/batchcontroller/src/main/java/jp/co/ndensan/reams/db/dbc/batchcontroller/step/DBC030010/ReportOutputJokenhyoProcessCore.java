@@ -71,7 +71,7 @@ public class ReportOutputJokenhyoProcessCore {
      * 
      * @param parameter
      * @param order
-     * @return 
+     * @return 出力条件
      */
     public List<RString> get出力条件(DBC030010_ShokanShikyuKetteiTsuchishoParameter parameter, IOutputOrder order) {
         List<RString> 出力条件 = new ArrayList<>();
@@ -98,7 +98,7 @@ public class ReportOutputJokenhyoProcessCore {
         }
 
         出力条件.add(TITLE_発行日.concat(RString.FULL_SPACE).concat(toパターン6(parameter.get発行日())));
-        出力条件.add(TITLE_文書番号.concat(RString.FULL_SPACE).concat(parameter.get文書番号()));
+        出力条件.add(TITLE_文書番号.concat(RString.FULL_SPACE).concat(doStrToStr(parameter.get文書番号())));
         if (FLAG_TRUE.equals(parameter.getテスト出力フラグ())) {
             出力条件.add(TITLE_テスト出力.concat(RString.FULL_SPACE).concat(する));
         } else {
@@ -125,7 +125,7 @@ public class ReportOutputJokenhyoProcessCore {
             出力条件.add(TITLE_窓口払い一括更新.concat(RString.FULL_SPACE).concat(しない));
         }
 
-        出力条件.add(TITLE_支払場所.concat(RString.FULL_SPACE).concat(parameter.get支払場所()));
+        出力条件.add(TITLE_支払場所.concat(RString.FULL_SPACE).concat(doStrToStr(parameter.get支払場所())));
 
         出力条件.add(TITLE_支払期間.concat(RString.FULL_SPACE)
                 .concat(toパターン6(parameter.get支払期間From())).concat(RString.FULL_SPACE).concat(波線).concat(RString.FULL_SPACE)
@@ -175,5 +175,12 @@ public class ReportOutputJokenhyoProcessCore {
             支払窓口終了期間Builder.append(new RString("分"));
         }
         return 支払窓口終了期間Builder.toRString();
+    }
+    
+    private RString doStrToStr(Object object) {
+        if (object == null) {
+            return RString.EMPTY;
+        }
+        return new RString(object.toString());
     }
 }
