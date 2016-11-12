@@ -451,9 +451,10 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 || 計画照会モード.equals(div.getMode())) {
             return false;
         }
-        FlexibleDate 届出年月日now = div.getTxtTodokedeYM().getValue() == null ? null : new FlexibleDate(div.getTxtTodokedeYM().getValue().toDateString());
+        FlexibleDate 届出年月日now = div.getTxtTodokedeYM().getValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTxtTodokedeYM().getValue().toDateString());
         boolean is居宅給付計画届出が変更
-                = !Objects.equals(居宅給付計画届出.get届出年月日(), 届出年月日now)
+                = !Objects.equals(居宅給付計画届出.get届出年月日() == null ? FlexibleDate.EMPTY : 居宅給付計画届出.get届出年月日(), 届出年月日now)
                 || !Objects.equals(居宅給付計画届出.get届出者氏名(), div.getTxtTodokedeshaShimei().getDomain())
                 || !Objects.equals(居宅給付計画届出.get届出者氏名カナ(), div.getTxtTodokedeshaShimeiKana().getDomain())
                 || !Objects.equals(居宅給付計画届出.get届出者郵便番号(), div.getTxtTodokedeshaYubinNo().getValue())
