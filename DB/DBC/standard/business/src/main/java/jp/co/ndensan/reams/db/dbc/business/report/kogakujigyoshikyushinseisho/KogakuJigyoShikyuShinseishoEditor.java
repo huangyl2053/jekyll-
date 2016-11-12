@@ -116,7 +116,9 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
         source.shuccho = 定数_出張所;
         source.shisho = 定数_支所;
         source.remban = count;
-        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
+        if (!RString.isNullOrEmpty(source.hihokenshaNo)) {
+            source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
+        }
         return source;
     }
 
