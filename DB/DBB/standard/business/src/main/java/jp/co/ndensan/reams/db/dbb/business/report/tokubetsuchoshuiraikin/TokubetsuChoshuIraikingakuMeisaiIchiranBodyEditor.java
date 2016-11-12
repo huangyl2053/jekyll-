@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -69,6 +71,12 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
         if (賦課の情報一時Entity != null) {
             source.listUpper_1 = getColumnValue(賦課の情報一時Entity.getTsuchishoNo());
             source.listUpper_2 = getColumnValue(賦課の情報一時Entity.getShikibetsuCode());
+            LasdecCode 市町村コード = 賦課の情報一時Entity.getFukaShichosonCode();
+            if (市町村コード != null) {
+                source.shichosonCode = 市町村コード.value();
+            } else {
+                source.shichosonCode = RString.EMPTY;
+            }
             if (保険料段階 != null) {
                 source.listCenter_1 = 保険料段階.get表記();
                 source.listCenter_2 = doカンマ編集(保険料段階.get保険料率());
@@ -85,6 +93,12 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
             source.listLower_3 = getColumnValue(宛名.get住所().get町域コード());
             if (宛名.get名称() != null) {
                 source.listLower_5 = getColumnValue(宛名.get名称().getName());
+            }
+            if (宛名.toEntity() != null) {
+                ChoikiCode 町域コード = 宛名.toEntity().getChoikiCode();
+                source.choikiCode = 町域コード != null ? 町域コード.value() : RString.EMPTY;
+            } else {
+                source.choikiCode = RString.EMPTY;
             }
         }
         if (徴収方法 != null) {
