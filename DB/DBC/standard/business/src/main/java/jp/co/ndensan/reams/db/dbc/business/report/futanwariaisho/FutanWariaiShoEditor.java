@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 帳票設計_DBC100065_負担割合証Editor
@@ -37,12 +40,15 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
     private final HokenshaNo 保険者コード取得;
     private final List<IKojin> 個人List;
     private final SofubutsuAtesakiSource 送付物宛先ソースデータ;
+    private final ShikibetsuCode 識別コード;
     private static final RString 照会画面 = new RString("1");
     private static final RString 更新結果確認画面 = new RString("2");
     private static final RString 定数_交付年月日 = new RString("交付年月日　");
     private static final RString 定数_開始年月日 = new RString("開始年月日　");
     private static final RString 定数_終了年月日 = new RString("終了年月日　");
     private static final RString 定数_ONE = new RString("1");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
@@ -61,10 +67,11 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
      * @param 保険者コード取得 HokenshaNo
      * @param 個人List List<IKojin>
      * @param 送付物宛先ソースデータ SofubutsuAtesakiSource
+     * @param 識別コード ShikibetsuCode
      */
     public FutanWariaiShoEditor(FutanWariaiShoDivParameter entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
             EditedKojin 編集後個人, HokenshaNo 保険者コード取得,
-            List<IKojin> 個人List, SofubutsuAtesakiSource 送付物宛先ソースデータ) {
+            List<IKojin> 個人List, SofubutsuAtesakiSource 送付物宛先ソースデータ, ShikibetsuCode 識別コード) {
         this.entity = entity;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.被保険者番号 = 被保険者番号;
@@ -72,6 +79,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
         this.保険者コード取得 = 保険者コード取得;
         this.個人List = 個人List;
         this.送付物宛先ソースデータ = 送付物宛先ソースデータ;
+        this.識別コード = 識別コード;
     }
 
     @Override
@@ -118,6 +126,12 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
         if (送付物宛先ソースデータ != null) {
             source.compSofubutsuAtesakiSource = 送付物宛先ソースデータ;
         }
+        if (識別コード != null) {
+            source.shikibetsuCode = 識別コード;
+        } else {
+            source.shikibetsuCode = ShikibetsuCode.EMPTY;
+        }
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.hihokenshaNo);
         return source;
     }
 
@@ -143,9 +157,6 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
                         fillType(FillType.BLANK).toDateString();
             } else {
                 source.umareYmd = entity.get生年月日().seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            }
-            if (個人.get識別コード() != null) {
-                source.shikibetsuCode = 個人.get識別コード();
             }
         }
     }

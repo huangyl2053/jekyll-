@@ -121,7 +121,6 @@ public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
     public RString shichosonCode;
     @ReportItem(name = "kyufuJissekiKubun", length = 10, order = 73)
     public RString kyufuJissekiKubun;
-
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation 拡張情報;
 
