@@ -35,7 +35,7 @@
                             DbT3180."dbT3180_shokisaiHokenshaNo",
                             DbT3180."dbT3180_tennyumaeHokenshaNo",
                             DbT3180."dbT3180_shikyuShinseishoSeiriNo",
-                            MAX(DbT3180."dbT3180_rirekiNo")
+                            MAX(DbT3180."dbT3180_rirekiNo") AS dbT3180_rirekiNo
                         FROM (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3180JigyoKogakuGassanJikoFutanGakuShomeishoMapper.noDeleted_DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho" />) AS DbT3180
                         WHERE 
                         DbT3180."dbT3180_hihokenshaNo" = #{被保険者番号}
@@ -54,6 +54,7 @@
                   AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shokisaiHokenshaNo" = SUBTABLE."dbT3180_shokisaiHokenshaNo"
                   AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_tennyumaeHokenshaNo" = SUBTABLE."dbT3180_tennyumaeHokenshaNo"
                   AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shikyuShinseishoSeiriNo" = SUBTABLE."dbT3180_shikyuShinseishoSeiriNo"
+                  AND DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_rirekiNo" = SUBTABLE.dbT3180_rirekiNo
                   ORDER BY 
                          DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shokisaiHokenshaNo" ASC ,
                          DbT3180JigyoKogakuGassanJikoFutanGakuShomeisho."dbT3180_shikyuShinseishoSeiriNo" ASC,
