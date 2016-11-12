@@ -461,6 +461,8 @@ public class KogakuServicehiDetailDivHandler {
                     setValue(result.get高額介護サービス費支給対象者合計Entity().get利用者負担額合計());
             if (result.get高額介護サービス費支給対象者合計Entity().is自動償還対象フラグ()) {
                 div.getTplShinseisha().getTxtKotei().setValue(高額自動償還の対象者です);
+            } else {
+                div.getTplShinseisha().getTxtKotei().setValue(RString.EMPTY);
             }
         }
     }
@@ -527,7 +529,7 @@ public class KogakuServicehiDetailDivHandler {
             }
             if (ONE.equals(result.get高額介護サービス費支給判定結果Entity().get支給区分コード())) {
                 div.getRdbShikyuKubun().setSelectedKey(KEY0);
-                div.getTxtShikyusinaiRiyu().setDisabled(true);
+                div.getTxtShikyusinaiRiyu().setDisabled(false);
             } else if (ZERO.equals(result.get高額介護サービス費支給判定結果Entity().get支給区分コード())) {
                 div.getRdbShikyuKubun().setSelectedKey(KEY1);
                 div.getTxtShikyuKingaku().setDisabled(true);

@@ -13,15 +13,14 @@ import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyukette
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.chohyojushoeditor.ChohyoJushoEditor;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.association.IAssociation;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -56,11 +55,13 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
      * @param 出力順 出力順
      * @param 改ページ 改ページ
      * @param 種類Map 種類Map
+     * @param 帳票制御共通情報 帳票制御共通情報
      * @return List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
      */
     public List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
             getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(List<ShokanKetteiTsuchiShoShiharai> businessList,
-                    ShokanKetteiTsuchiShoSealerBatchParameter batchPram, List<RString> 出力順, List<RString> 改ページ, Map<RString, RString> 種類Map) {
+                    ShokanKetteiTsuchiShoSealerBatchParameter batchPram, List<RString> 出力順, List<RString> 改ページ, Map<RString, RString> 種類Map,
+                    ChohyoSeigyoKyotsu 帳票制御共通情報) {
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> tsuchiIchiranItemsList = new ArrayList<>();
         if (businessList == null || businessList.isEmpty()) {
             ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem();
@@ -109,7 +110,7 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             ichiranItem.setHihokenshaNo(shoShiharaiList.get被保険者番号().value());
             ichiranItem.setHihokenshaName(shoShiharaiList.get被保険者氏名());
 
-            RString 編集住所 = get編集住所(shoShiharaiList.get宛名情報(), association.get地方公共団体コード());
+            RString 編集住所 = get編集住所(shoShiharaiList, 帳票制御共通情報);
             ichiranItem.setJusho(編集住所);
 
             ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
@@ -135,6 +136,15 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             ichiranItem.setShurui(種類Map.get(getJufukuKey(shoShiharaiList)));
             if (!RString.isNullOrEmpty(shoShiharaiList.get支給不支給決定区分())) {
                 ichiranItem.setKeteiKubun(new RString(ShikyuFushikyuKubun.toValue(shoShiharaiList.get支給不支給決定区分()).get名称().toString()));
+            }
+            if (ShiharaiHohoKubun.窓口払.getコード().equals(shoShiharaiList.get支払方法区分コード())
+                    && (null == shoShiharaiList.get金融機関コード() || shoShiharaiList.get金融機関コード().isEmpty())) {
+                ichiranItem.setKeteiKubun(new RString("金融機関未登録"));
+            }
+            if (!RString.isNullOrEmpty(shoShiharaiList.get支給不支給決定区分())
+                    && ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())
+                    && ShikakuKubun._２号.getコード().equals(shoShiharaiList.get被保険者区分コード())) {
+                ichiranItem.setKeteiKubun(new RString("支給　　　２号"));
             }
             if (!RString.isNullOrEmpty(shoShiharaiList.get支払方法区分コード())) {
                 ichiranItem.setShiharaiHoho(new RString(ShiharaiHohoKubun.toValue(shoShiharaiList.get支払方法区分コード()).get名称().toString()));
@@ -162,14 +172,10 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         return tsuchiIchiranItemsList;
     }
 
-    private RString get編集住所(IShikibetsuTaisho 宛名識別対象, LasdecCode 市町村コード) {
-        ChohyoJushoEditor 住所Editor = new ChohyoJushoEditor(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200023.getReportId().value(), GyomuBunrui.介護事務);
-        RString 管内管外区分 = 宛名識別対象.get住所().get管内管外().toRString();
-        RString 住所 = 宛名識別対象.get住所().get住所();
-        RString 番地 = 宛名識別対象.get住所().get番地().getBanchi().getColumnValue();
-        RString 方書 = 宛名識別対象.get住所().get方書().getColumnValue();
-        RString 行政区名 = 宛名識別対象.get行政区画().getGyoseiku().get名称();
-        return 住所Editor.editJusho(管内管外区分, 住所, 番地, 方書, 行政区名, 市町村コード);
+    private RString get編集住所(ShokanKetteiTsuchiShoShiharai shiharai, ChohyoSeigyoKyotsu 帳票制御共通情報) {
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(shiharai.get市町村コード(), FlexibleDate.getNowDate());
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(shiharai.get宛先情報(), 地方公共団体, 帳票制御共通情報);
+        return 編集後宛先.get編集後住所();
     }
 
     private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {

@@ -30,10 +30,11 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
     private RString chusyuMode;
     private RString insho;
     private RDate ketteiYMD;
+    private RString 決定日一括更新区分;
 
     private ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter(FlexibleDate hurikomiYoteiYMD,
             FlexibleDate dataFrom, FlexibleDate dataTo, FlexibleDate hakkoYMD, FlexibleYearMonth ketteishaUketsukeYM,
-            RString chusyuMode, RString insho, RDate ketteiYMD) {
+            RString chusyuMode, RString insho, RDate ketteiYMD, RString 決定日一括更新区分) {
 
         this.hurikomiYoteiYMD = hurikomiYoteiYMD;
         this.dataFrom = dataFrom;
@@ -43,6 +44,7 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
         this.chusyuMode = chusyuMode;
         this.insho = insho;
         this.ketteiYMD = ketteiYMD;
+        this.決定日一括更新区分 = 決定日一括更新区分;
     }
 
     /**
@@ -76,6 +78,7 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
                 dataFrom, dataTo,
                 batchParamter.get発行日() == null ? null : new FlexibleDate(batchParamter.get発行日().toDateString()),
                 batchParamter.get決定者受付年月() == null ? null : new FlexibleYearMonth(batchParamter.get決定者受付年月().toDateString()),
-                batchParamter.get抽出モード(), batchParamter.get印書(), batchParamter.get決定日());
+                batchParamter.get抽出モード(), batchParamter.get印書(), batchParamter.get決定日(), batchParamter.get決定日一括更新区分()
+        );
     }
 }
