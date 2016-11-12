@@ -51,7 +51,8 @@ public class JukyushaIdoRenrakuhyoToroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JukyushaIdoRenrakuhyoToroku}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link JukyushaIdoRenrakuhyoToroku}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link JukyushaIdoRenrakuhyoToroku}のインスタンス
      */
     public static JukyushaIdoRenrakuhyoToroku createInstance() {
         return InstanceProvider.create(JukyushaIdoRenrakuhyoToroku.class);
@@ -75,7 +76,16 @@ public class JukyushaIdoRenrakuhyoToroku {
             if (entity != null) {
                 RString idoKubunCode = entity.getIdoKubunCode();
                 return checkNgorOk(異動区分, idoKubunCode);
+            } else {
+                return checkOkorNg(異動区分);
             }
+        }
+    }
+
+    private RString checkOkorNg(RString 異動区分) {
+        if (ONE.equals(異動区分)) {
+            return ZERO;
+        } else {
             throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace(異動区分不正.toString()));
         }
     }

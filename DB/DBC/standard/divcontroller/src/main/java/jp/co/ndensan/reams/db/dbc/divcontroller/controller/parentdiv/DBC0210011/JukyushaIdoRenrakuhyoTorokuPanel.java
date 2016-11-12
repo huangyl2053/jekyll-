@@ -289,6 +289,10 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            if (DBC0210011StateName.完了メッセージ.getName().equals(ResponseHolder.getState())) {
+                前排他キーの解除(被保険者番号.getColumnValue());
+                return ResponseData.of(div).forwardWithEventName(eventName).respond();
+            }
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
