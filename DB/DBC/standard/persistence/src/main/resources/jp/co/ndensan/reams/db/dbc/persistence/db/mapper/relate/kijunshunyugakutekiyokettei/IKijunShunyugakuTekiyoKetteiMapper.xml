@@ -68,7 +68,7 @@
             AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[>=]]> #{開始日}
             AND "DbT3116KijunShunyugakuTekiyoKanri"."shinseiYMD" <![CDATA[<=]]> #{終了日}
         </if>
-        <if test="抽出期間 = 0002">
+        <if test="抽出期間 == 0002">
             AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[>=]]> #{開始日}
             AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[<=]]> #{終了日}
         </if>

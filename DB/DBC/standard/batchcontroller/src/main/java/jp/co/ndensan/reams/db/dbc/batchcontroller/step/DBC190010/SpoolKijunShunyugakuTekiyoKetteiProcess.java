@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -86,6 +87,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private List<KijunShunyugakuTekiyoKetteiEntity> 基準収入額適用管理List;
     private KijunShunyugakuTekiyoKanriManager 基準収入額適用管理manager;
     private int 一覧表_通番;
+    private boolean is検索結果データあり;
     private SetaiCode 一覧表_世帯コード;
     private FlexibleYear 一覧表_年度;
     private static final ReportId 帳票ID_通知書 = new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho");
@@ -121,6 +123,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void initialize() {
+        is検索結果データあり = false;
         一覧表_通番 = INT_0;
         count = INT_0;
         改頁項目リスト = new ArrayList<>();
@@ -225,13 +228,15 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
                     = new KijunShunyugakuTekiyoKetteiTsuchiIchiranReport(基準収入額決定通知一覧表パラメータ);
             一覧表report.writeBy(reportSourceWriter_一覧表);
         }
-        KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter = get基準収入額適用決定通知書パラメータ();
-        KijunShunyugakuTekiyoKetteiTsuchishoReport 通知書report
-                = new KijunShunyugakuTekiyoKetteiTsuchishoReport(基準収入額適用決定通知書Parameter, 帳票制御共通);
-        if (基準収入額適用決定通知書Parameter.isFlag()) {
-            通知書report.writeBy(reportSourceWriter_通知書_文字切れ);
-        } else {
-            通知書report.writeBy(reportSourceWriter_通知書);
+        if (!基準収入額適用管理List.isEmpty()) {
+            KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter = get基準収入額適用決定通知書パラメータ();
+            KijunShunyugakuTekiyoKetteiTsuchishoReport 通知書report
+                    = new KijunShunyugakuTekiyoKetteiTsuchishoReport(基準収入額適用決定通知書Parameter, 帳票制御共通);
+            if (基準収入額適用決定通知書Parameter.isFlag()) {
+                通知書report.writeBy(reportSourceWriter_通知書_文字切れ);
+            } else {
+                通知書report.writeBy(reportSourceWriter_通知書);
+            }
         }
         ShoriDateKanriManager 処理日付管理マスタmanager = new ShoriDateKanriManager();
         処理日付管理マスタmanager.update対象開始日時AND対象終了日時(SubGyomuCode.DBC介護給付, parameter.get市町村コード(), タイトル,
@@ -452,6 +457,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         KijunShunyugakuTekiyoKetteiTsuchiIchiran 基準収入額決定通知一覧表パラメータ = new KijunShunyugakuTekiyoKetteiTsuchiIchiran();
         基準収入額決定通知一覧表パラメータ.set市町村番号(parameter.get市町村コード());
         基準収入額決定通知一覧表パラメータ.set市町村名(parameter.get市町村名());
+        基準収入額決定通知一覧表パラメータ.set氏名(new AtenaMeisho("該当データがありません"));
         for (int i = 出力順リスト.size() - 1; 0 <= i; i--) {
             if (出力順リスト.get(i) == null || 出力順リスト.get(i).isEmpty()) {
                 出力順リスト.remove(i);

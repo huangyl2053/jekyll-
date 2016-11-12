@@ -7,13 +7,15 @@ package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteits
 
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchiichiran.KijunShunyugakuTekiyoKetteiTsuchiIchiranSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -37,7 +39,12 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
 
     @Override
     public KijunShunyugakuTekiyoKetteiTsuchiIchiranSource edit(KijunShunyugakuTekiyoKetteiTsuchiIchiranSource source) {
-        source.printTimeStamp = YMDHMS.now().toDateString();
+        RDateTime dateTime = RDate.getNowDateTime();
+        source.printTimeStamp = dateTime.getDate()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
+                .concat("　")
+                .concat(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
+                .concat("　作成");
         if (基準収入額決定通知一覧表パラメータ.get市町村番号() != null) {
             source.shichosonNo = 基準収入額決定通知一覧表パラメータ.get市町村番号().value();
         }
