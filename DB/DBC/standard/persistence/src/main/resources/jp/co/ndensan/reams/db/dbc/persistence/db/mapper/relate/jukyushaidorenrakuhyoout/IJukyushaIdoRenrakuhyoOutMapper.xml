@@ -220,6 +220,10 @@
     </resultMap>
     <select id="select社福減免" resultMap="resultMap_社福減免" 
             fetchSize="500" resultOrdered="true">
+        SELECT A.*,
+         <include refid="allColumns_IdouTemp" />,
+         "TEMPCOUNT1"."HIHOCOUNT" AS "idouTemp_被保険者番号Max連番"
+        FROM (
         SELECT 
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shoKisaiHokenshaNo" AS "証記載保険者番号",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo" AS "被保険者番号",
@@ -227,16 +231,16 @@
          '04' AS "減免_減額種類",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" AS "適用開始日",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD" AS "適用終了日",
+         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" AS "ketteiKubun",
          (CASE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo"
          WHEN 0 THEN '0'
          ELSE trim(to_char("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi",'999'))||
          '/'||trim(to_char("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo", '999')) END)
-         AS "軽減率",
-         <include refid="allColumns_IdouTemp" />,
-         "TEMPCOUNT1"."HIHOCOUNT" AS "idouTemp_被保険者番号Max連番"
+         AS "軽減率"
         FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+        ) A  
         INNER JOIN  "IdouTemp"
-        ON "IdouTemp"."被保険者番号" = "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hihokenshaNo"
+        ON "IdouTemp"."被保険者番号" = A."被保険者番号"
         INNER JOIN (
             SELECT
                 "被保険者番号",
@@ -247,11 +251,8 @@
                 "TEMPINFO"."被保険者番号"
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiKubun" = '1'
-         AND (CASE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo"
-         WHEN 0 THEN '0'
-         ELSE trim(to_char("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi",'999'))||
-         '/'||trim(to_char("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo", '999')) END) <![CDATA[<>]]> '100'
+        WHERE A."ketteiKubun" = '1' AND
+         A."軽減率" <![CDATA[<>]]> '100'
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_社福減免" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
