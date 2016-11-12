@@ -46,6 +46,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
     private static final RString KEY3 = new RString("key3");
+    private static final RString 原因疾患 = new RString("原因疾患");
     private final ShujiiIkenshoSakuseiIraiDiv div;
 
     /**
@@ -63,6 +64,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
     public void load() {
         div.getCcdNinteishinseishaFinder().initialize();
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getCcdGeninShikkan().clear();
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getCcdGeninShikkan().setCodeLabelMeisho(原因疾患);
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnChosainCode(RString.EMPTY);
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnChosaItakusakiCode(RString.EMPTY);
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnShujiiCode(RString.EMPTY);
