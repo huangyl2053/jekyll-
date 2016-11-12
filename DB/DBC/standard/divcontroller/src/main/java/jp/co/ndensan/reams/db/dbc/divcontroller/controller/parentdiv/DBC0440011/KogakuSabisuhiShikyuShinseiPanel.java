@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -314,6 +315,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     private ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> save対象者情報(
             KogakuSabisuhiShikyuShinseiPanelDiv div, RString 画面モード) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RString 氏名 = div.getCommonPanel().getCcdKaigoAtenaInfo().get氏名漢字();
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
         if (!削除モード.equals(画面モード)) {
@@ -327,7 +329,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 save対象者情報データ(div, 被保険者番号, サービス年月, メニューID);
                 getHandler(div).clear対象者情報();
-                return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                        被保険者番号.getColumnValue(), 氏名, true);
+                return ResponseData.of(div).setState(DBC0440011StateName.完了);
             } else {
                 return ResponseData.of(div).respond();
             }
@@ -342,7 +346,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 save対象者情報データ(div, 被保険者番号, サービス年月, メニューID);
                 getHandler(div).clear対象者情報();
-                return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                        被保険者番号.getColumnValue(), 氏名, true);
+                return ResponseData.of(div).setState(DBC0440011StateName.完了);
             } else {
                 return ResponseData.of(div).respond();
             }
@@ -368,6 +374,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     private ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> save申請情報登録(
             KogakuSabisuhiShikyuShinseiPanelDiv div, RString 画面モード) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RString 氏名 = div.getCommonPanel().getCcdKaigoAtenaInfo().get氏名漢字();
         HokenshaNo 証記載保険者番号 = new HokenshaNo(ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class));
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
@@ -386,7 +393,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
                 save申請情報データ(div, 被保険者番号, サービス年月, 証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
                 getHandler(div).clear申請情報();
                 div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
-                return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                        被保険者番号.getColumnValue(), 氏名, true);
+                return ResponseData.of(div).setState(DBC0440011StateName.完了);
             } else {
                 return ResponseData.of(div).respond();
             }
@@ -403,7 +412,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
                 getHandler(div).clear申請情報();
                 div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
                 div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().release削除制御();
-                return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                        被保険者番号.getColumnValue(), 氏名, true);
+                return ResponseData.of(div).setState(DBC0440011StateName.完了);
             } else {
                 return ResponseData.of(div).respond();
             }
@@ -509,6 +520,28 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         } else {
             return ResponseData.of(div).respond();
         }
+    }
+
+    /**
+     * 「完了」ボタン押下時のメソッドです。
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv>
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnComplete(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0440011TransitionEventName.完了).respond();
+    }
+
+    /**
+     * 「処理を継続する」ボタンクリック時の事件です。
+     *
+     * @param div KogakuSabisuhiShikyuShinseiPanelDiv
+     * @return ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv>
+     */
+    public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnContinue(
+            KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        return onLoad(div);
     }
 
     private void release送付済制御(RString 画面モード, KogakuSabisuhiShikyuShinseiPanelDiv div) {

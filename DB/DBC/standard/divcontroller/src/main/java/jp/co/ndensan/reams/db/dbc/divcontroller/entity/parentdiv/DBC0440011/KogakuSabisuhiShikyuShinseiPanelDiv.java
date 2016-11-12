@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KogakuSabisuhiShikyuShinseiPanel のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBC-2020-040 quxiaodong
  */
 public class KogakuSabisuhiShikyuShinseiPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
