@@ -373,22 +373,19 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             return true;
         }
         if (未提出者のみ.equals(processParameter.getTodokeidejyoukyou())
-                && entity.get適用開始年月日() != null
-                && !entity.get適用開始年月日().isEmpty()
-                && processParameter.getKijyunbi() != null
-                && !processParameter.getKijyunbi().isEmpty()
-                && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi())
-                && ((entity.get適用終了年月日() == null
-                || entity.get適用終了年月日().isEmpty())
-                || processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日()))) {
+                && (entity.get居宅給付計画届出_被保険者番号() == null
+                || ((entity.get適用終了年月日() != null
+                && !entity.get適用終了年月日().isEmpty())
+                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())))) {
             return true;
         }
         return 提出者のみ.equals(processParameter.getTodokeidejyoukyou())
-                && entity.get適用終了年月日() != null
-                && !entity.get適用終了年月日().isEmpty()
-                && processParameter.getKijyunbi() != null
-                && !processParameter.getKijyunbi().isEmpty()
-                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi());
+                && (entity.get適用開始年月日() != null
+                && !entity.get適用開始年月日().isEmpty()
+                && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi()))
+                && (entity.get適用終了年月日() == null
+                || entity.get適用終了年月日().isEmpty()
+                || processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日()));
     }
 
 }

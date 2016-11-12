@@ -49,5 +49,6 @@ public class KeikakuTodokedeJokyoIchiranEntity extends DbTableEntityBase<Keikaku
     private TelNo 電話番号;
     private FlexibleDate 変更年月日;
     private RString 事業者名称;
+    private HihokenshaNo 居宅給付計画届出_被保険者番号;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
 }
