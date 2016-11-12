@@ -5,9 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBatisParameter {
+public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter extends KozaSearchParameter implements IMyBatisParameter {
 
     private static final RString 印書_1 = new RString("1");
     private static final RString 印書_3 = new RString("3");
@@ -49,13 +55,16 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
     private boolean chusyutuKetteiFlag;
     private boolean chusyutuKetteiShaUketsukeFlag;
     private boolean yoshiFlag;
+    private IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho1;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     private ShokanKetteiTsuchiShoIkkatsuSakuseiParameter(RString psmShikibetsuTaisho, RString psmAtesaki,
             FlexibleDate hurikomiYoteiYMD, FlexibleDate dataFrom, FlexibleDate dataTo, FlexibleDate hakkoYMD,
             FlexibleYearMonth ketteishaUketsukeYM, RString shikyu, RString hushikyu, RString kozashiharai, RString inshoKubun,
             boolean isInshoKubun3, boolean isRiaruHakko, boolean hurikomiYoteiYMDFlag, boolean hakkouYMDFlag,
-            boolean chusyutuUketsukeFlag, boolean chusyutuKetteiFlag, boolean chusyutuKetteiShaUketsukeFlag, boolean yoshiFlag) {
-
+            boolean chusyutuUketsukeFlag, boolean chusyutuKetteiFlag, boolean chusyutuKetteiShaUketsukeFlag, boolean yoshiFlag,
+            IKozaSearchKey key, List<KamokuCode> list, IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho1) {
+        super(key, list);
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
         this.hurikomiYoteiYMD = hurikomiYoteiYMD;
@@ -75,6 +84,8 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
         this.chusyutuKetteiFlag = chusyutuKetteiFlag;
         this.chusyutuKetteiShaUketsukeFlag = chusyutuKetteiShaUketsukeFlag;
         this.yoshiFlag = yoshiFlag;
+        this.psmShikibetsuTaisho1 = psmShikibetsuTaisho1;
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(psmShikibetsuTaisho1);
     }
 
     /**
@@ -90,11 +101,15 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
      * @param hakkouYMD 発行年月日
      * @param ketteishaUketsukeYM 決定者受付年月
      * @param yoshiType 用紙タイプ
+     * @param key IKozaSearchKey
+     * @param list List<KamokuCode>
+     * @param psmShikibetsuTaisho1 IShikibetsuTaishoPSMSearchKey
      * @return 償還払い支給（不支給）決定通知書一括作成のMyBatisパラメータ
      */
     public static ShokanKetteiTsuchiShoIkkatsuSakuseiParameter createParam(RString psmShikibetsuTaisho,
             RString psmAtesaki, FlexibleDate hurikomiYoteiYMD, RString chusyuMode, RString insho, FlexibleDate dataFrom,
-            FlexibleDate dataTo, FlexibleDate hakkouYMD, FlexibleYearMonth ketteishaUketsukeYM, RString yoshiType) {
+            FlexibleDate dataTo, FlexibleDate hakkouYMD, FlexibleYearMonth ketteishaUketsukeYM, RString yoshiType,
+            IKozaSearchKey key, List<KamokuCode> list, IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho1) {
 
         boolean hurikomiYoteiYMDFlag = false;
         boolean hakkouYMDFlag = false;
@@ -132,6 +147,6 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiParameter implements IMyBa
         return new ShokanKetteiTsuchiShoIkkatsuSakuseiParameter(psmShikibetsuTaisho, psmAtesaki, hurikomiYoteiYMD, dataFrom,
                 dataTo, hakkouYMD, ketteishaUketsukeYM, ShikyuFushikyuKubun.支給.getコード(), ShikyuFushikyuKubun.不支給.getコード(),
                 ShiharaiHohoKubun.口座払.getコード(), inshoKubun, isInshoKubun3, isRiaruHakko, hurikomiYoteiYMDFlag, hakkouYMDFlag,
-                chusyutuUketsukeFlag, chusyutuKetteiFlag, chusyutuKetteiShaUketsukeFlag, yoshiFlag);
+                chusyutuUketsukeFlag, chusyutuKetteiFlag, chusyutuKetteiShaUketsukeFlag, yoshiFlag, key, list, psmShikibetsuTaisho1);
     }
 }

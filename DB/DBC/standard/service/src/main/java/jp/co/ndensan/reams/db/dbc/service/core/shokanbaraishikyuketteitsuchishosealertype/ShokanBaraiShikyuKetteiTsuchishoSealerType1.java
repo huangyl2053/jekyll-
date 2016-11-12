@@ -372,7 +372,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         RString 種別タイトル = RString.EMPTY;
         if (ShiharaiHohoKubun.窓口払.getコード().equals(business.get支払方法区分コード())) {
             種別タイトル = 種別タイトル_口座種別;
-        } else if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())) {
+        } else if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())
+                && null != business.get金融機関コード()) {
             if (金融機関コード_郵便局.equals(business.get金融機関コード().value())) {
                 種別タイトル = 種別タイトル_店番;
             } else {
