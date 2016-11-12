@@ -179,7 +179,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     @Override
     protected IBatchReader createReader() {
         ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
-        IShunoKamoku 介護給付_高額 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_事業高額);
+        IShunoKamoku 介護給付_高額 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_高額);
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
                 .setサブ業務コード(SubGyomuCode.DBC介護給付)
