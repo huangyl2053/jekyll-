@@ -82,6 +82,6 @@ public class DBC050021_FurikomimeisaiFurikomiDataKogakuGassanParameter extends B
     public FurikomimeisaiFurikomiDataProcessParameter toProcessParameter() {
         return new FurikomimeisaiFurikomiDataProcessParameter(
                 支払方法, 抽出対象, 対象作成年月日, 再処理フラグ, 開始年月日, 終了年月日, 開始受取年月, 終了受取年月,
-                振込指定年月日, 処理区分, 誤振込指定年月日, 正振込指定年月日);
+                振込指定年月日, 処理区分, 誤振込指定年月日, 正振込指定年月日, 委託者コード);
     }
 }
