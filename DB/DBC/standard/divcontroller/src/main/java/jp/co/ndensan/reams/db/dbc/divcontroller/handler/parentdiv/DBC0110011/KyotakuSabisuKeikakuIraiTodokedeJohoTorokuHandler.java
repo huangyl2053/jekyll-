@@ -469,7 +469,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         return is居宅給付計画届出が変更;
     }
 
-    private boolean is自己作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) throws IllegalArgumentException {
+    private boolean is自己作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) {
         KyotakuKeikakuJikoSakuseiIdentifier identifier = new KyotakuKeikakuJikoSakuseiIdentifier(
                 居宅給付計画届出.get被保険者番号(), 居宅給付計画届出.get対象年月(), 居宅給付計画届出.get履歴番号());
         KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = 居宅給付計画届出.getKyotakuKeikakuJikoSakusei(identifier);
@@ -486,7 +486,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         return is居宅給付計画届出が変更 || is居宅給付計画自己作成が変更;
     }
 
-    private boolean is事業者作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) throws IllegalArgumentException {
+    private boolean is事業者作成が変更(KyotakuKeikakuTodokede 居宅給付計画届出, boolean is居宅給付計画届出が変更) {
         KyotakuKeikakuJigyoshaSakuseiIdentifier identifier = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
                 居宅給付計画届出.get被保険者番号(), 居宅給付計画届出.get対象年月(), 居宅給付計画届出.get履歴番号());
         KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成
@@ -502,8 +502,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         RString 事業者変更事由old = 居宅給付計画事業者作成.get事業者変更事由() == null ? RString.EMPTY : 居宅給付計画事業者作成.get事業者変更事由();
         RString サービス種類コードold = 居宅給付計画事業者作成.getサービス種類コード() == null ? RString.EMPTY : 居宅給付計画事業者作成.getサービス種類コード().value();
         boolean is居宅給付計画事業者作成が変更
-                = !Objects.equals(居宅給付計画事業者作成.get適用開始年月日() == null ? FlexibleDate.EMPTY
-                        : 居宅給付計画事業者作成.get適用開始年月日(), 適用開始年月日now)
+                = !Objects.equals(居宅給付計画事業者作成.get適用開始年月日(), 適用開始年月日now)
                 || !Objects.equals(居宅給付計画事業者作成.get適用終了年月日() == null ? FlexibleDate.EMPTY
                         : 居宅給付計画事業者作成.get適用終了年月日(), 適用終了年月日now)
                 || !作成区分コードold.equals(div.getRadKeikakuSakuseiKubun().getSelectedKey())
