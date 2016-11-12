@@ -74,7 +74,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 受給者異動の抽出 = "insJukyushaIdoRenrakuhyoTemp";
     private static final String データ比較処理 = "dataCompareShori";
     private static final String 国保連インタフェース管理更新 = "upDoInterfaceKanriKousin";
-    private static final RString 交換情報識別番号 = new RString("3");
+    private static final RString 交換情報識別番号 = new RString("531");
     private JukyushaIdoRenrakuhyoOutFlowEntity returnEntity;
 
     @Override
