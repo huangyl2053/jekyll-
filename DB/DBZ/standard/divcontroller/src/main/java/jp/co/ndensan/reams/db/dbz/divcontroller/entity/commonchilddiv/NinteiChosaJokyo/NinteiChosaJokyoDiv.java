@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * NinteiChosaJokyo のクラスファイル 
- * 
+ * NinteiChosaJokyo のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -363,8 +363,8 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
 
     public static enum DisplayType implements ICommonChildDivMode {
 
-        shokai("shokai"),
-        input("input");
+        input("input"),
+        shokai("shokai");
 
         private final String name;
 

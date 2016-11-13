@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.JukyuShokaiShinse
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.JukyuShokaiShinseiNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.ServiceJukyuJokyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteichosajokyo.NinteiChosaJokyoDataPassEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.apache.ibatis.annotations.Param;
 
@@ -64,4 +66,13 @@ public interface IJukyushaShokaiMapper {
      */
     ServiceJukyuJokyoEntity findサービス受給状況(@Param("被保険者番号") HihokenshaNo 被保険者番号);
 
+    /**
+     * 履歴情報を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 認定日 FlexibleDate
+     * @return List<NinteiChosaJokyoDataPassEntity>
+     */
+    public List<NinteiChosaJokyoDataPassEntity> get履歴情報(@Param("被保険者番号") HihokenshaNo 被保険者番号,
+            @Param("認定日") FlexibleDate 認定日);
 }

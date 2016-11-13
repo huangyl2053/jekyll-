@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class DvShinseiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,8 @@ public class DvShinseiJohoDiv extends Panel {
     private CheckBoxList chkShiteii;
     @JsonProperty("txtShujiIryokikanMeisho")
     private TextBox txtShujiIryokikanMeisho;
+    @JsonProperty("btnChosaJokyo")
+    private ButtonDialog btnChosaJokyo;
     @JsonProperty("chkShinsei")
     private CheckBoxList chkShinsei;
     @JsonProperty("txtShinseisha")
@@ -160,6 +162,24 @@ public class DvShinseiJohoDiv extends Panel {
     @JsonProperty("txtShujiIryokikanMeisho")
     public void setTxtShujiIryokikanMeisho(TextBox txtShujiIryokikanMeisho) {
         this.txtShujiIryokikanMeisho = txtShujiIryokikanMeisho;
+    }
+
+    /*
+     * getbtnChosaJokyo
+     * @return btnChosaJokyo
+     */
+    @JsonProperty("btnChosaJokyo")
+    public ButtonDialog getBtnChosaJokyo() {
+        return btnChosaJokyo;
+    }
+
+    /*
+     * setbtnChosaJokyo
+     * @param btnChosaJokyo btnChosaJokyo
+     */
+    @JsonProperty("btnChosaJokyo")
+    public void setBtnChosaJokyo(ButtonDialog btnChosaJokyo) {
+        this.btnChosaJokyo = btnChosaJokyo;
     }
 
     /*
