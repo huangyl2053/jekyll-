@@ -118,7 +118,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
             executeStep(DBC100005);
         }
         executeStep(DBC200023);
-        //executeStep(DBC200024);
+        executeStep(DBC200024);
     }
 
     @Step(TEMP_INSERT)
@@ -200,7 +200,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     }
 
     @Step(DBC200024)
-    IBatchFlowCommand ShokanbaraiSashitomeTaishoshaIchiranOutputProcess() {
+    IBatchFlowCommand shokanbaraiSashitomeTaishoshaIchiranOutputProcess() {
         return loopBatch(ShokanbaraiSashitomeTaishoshaIchiranOutputProcess.class)
                 .arguments(ShokanKetteiTsuchiShoSealerBatchParameter.createProcessParam(getParameter(), jobId))
                 .define();
