@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyojohoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
@@ -138,7 +140,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                 Decimal 計算用保険料 = get計算用保険料(getBefore(), 段階区分);
                 FukaJohoTempEntity fukaJohoTempEntity = service.賦課通情報編集(parameter.get調定年度(), hihokenshaDaicho,
                         getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, null, getBefore().get介護賦課前年度(),
-                        段階区分, getBefore().get口座Entity(), entity.get普徴仮算定抽出().getTsuchishoNo(), バッチ起動日時);
+                        段階区分, getBefore().get口座Entity(), getBefore().get普徴仮算定抽出().getTsuchishoNo(), バッチ起動日時);
                 tableWriter.insert(fukaJohoTempEntity);
             } else if (特徴開始前普通徴収_あり.equals(特別徴収_特徴開始前普通徴収_6月)) {
                 RString 保険料段階_仮算定時 = getBefore().get賦課情報一時().getHokenryoDankaiKarisanntei();
@@ -148,7 +150,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                 FukaJohoTempEntity fukaJohoTempEntity = service.賦課通情報編集(parameter.get調定年度(), hihokenshaDaicho,
                         getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_既存, getBefore().get賦課情報一時(),
                         getBefore().get介護賦課前年度(), 保険料段階_仮算定時, getBefore().get口座Entity(),
-                        entity.get普徴仮算定抽出().getTsuchishoNo(), バッチ起動日時);
+                        getBefore().get普徴仮算定抽出().getTsuchishoNo(), バッチ起動日時);
                 tableWriter.insert(fukaJohoTempEntity);
             }
         }
@@ -163,7 +165,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
 
     private boolean isBreak(FukaKeisanEntity current, FukaKeisanEntity before) {
         return !current.get普徴仮算定抽出().getChoteiNendo().equals(before.get普徴仮算定抽出().getChoteiNendo())
-                || !current.get普徴仮算定抽出().getFukaYMD().equals(before.get普徴仮算定抽出().getFukaYMD())
+                || !current.get普徴仮算定抽出().getFukaNendo().equals(before.get普徴仮算定抽出().getFukaNendo())
                 || !current.get普徴仮算定抽出().getTsuchishoNo().equals(before.get普徴仮算定抽出().getTsuchishoNo());
     }
 
@@ -202,16 +204,30 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                     && (entity.get介護賦課前年度().getSeihoHaishiYMD() == null
                     || 賦課年度開始日.isBeforeOrEquals(entity.get介護賦課前年度().getSeihoHaishiYMD()))) {
                 賦課根拠.setSeihoStartYMD(賦課年度開始日);
+            } else {
+                賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
             }
+            賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
             if (entity.get介護賦課前年度().getRonenKaishiYMD() != null
                     && (entity.get介護賦課前年度().getRonenHaishiYMD() == null
                     || 賦課年度開始日.isBeforeOrEquals(entity.get介護賦課前年度().getRonenHaishiYMD()))) {
                 賦課根拠.setRoreiNenkinStartYMD(賦課年度開始日);
+            } else {
+                賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
             }
+            賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
             賦課根拠.setZennendoSetaiKazeiKubun(SetaiKazeiKubun.toValue(entity.get介護賦課前年度().getSetaikazeiKubun()));
             賦課根拠.setZennendoKazeiKubun(KazeiKubun.toValue(entity.get介護賦課前年度().getKazeiKubun()));
             賦課根拠.setGokeiShotoku(entity.get介護賦課前年度().getGokeiShotokuGaku());
             賦課根拠.setKotekiNenkinShunyu(entity.get介護賦課前年度().getNenkinShunyuGaku());
+            List<KazeiKubunHonninKubun> setaiinKazeiKubunList = new ArrayList<>();
+            for (SetaiShotokuEntity setaiShotokuEntity : 世帯員所得情報List) {
+                KazeiKubunHonninKubun kazeiKubunHonninKubun = new KazeiKubunHonninKubun();
+                kazeiKubunHonninKubun.set本人区分(HonninKubun.toValue(setaiShotokuEntity.getHonninKubun()));
+                kazeiKubunHonninKubun.set課税区分(KazeiKubun.toValue(setaiShotokuEntity.getKazeiKubun()));
+                setaiinKazeiKubunList.add(kazeiKubunHonninKubun);
+            }
+            賦課根拠.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
             HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
             HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
             保険料段階パラメータ.setFukaNendo(parameter.get賦課年度());
