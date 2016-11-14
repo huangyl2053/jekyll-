@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU060010;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReport;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlistchohyodatasakusei.KyokaisoKanriMasterListBusiness;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlistchohyodatasakusei.KyokaisoKanriMasterListChohyoDataSakusei;
@@ -85,7 +84,9 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void createWriter() {
-        pageBreakKeys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
+        if (出力順Entity != null) {
+            pageBreakKeys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
+        }
         if (pageBreakKeys != null && !pageBreakKeys.isEmpty()) {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBA200005.getReportId().value())
                     .addBreak(new BreakerCatalog<KyokaisoKanriMasterListReportSource>().simplePageBreaker(pageBreakKeys)).create();
@@ -107,7 +108,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
         KyokaisoKanriMasterListReport report = new KyokaisoKanriMasterListReport(sakuseiEntity);
         report.writeBy(reportSourceWriter);
         出力 = true;
-        new NinteiChosaDataOutputResult().getアクセスログ(entity.getSeibetsuCode());
+        getアクセスログ(entity.getSeibetsuCode());
 
     }
 
@@ -116,13 +117,13 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
      *
      * @param 識別コード ShikibetsuCode
      */
-    public void getアクセスログ(ShikibetsuCode 識別コード) {
+    public void getアクセスログ(RString 識別コード) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード));
     }
 
-    private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), RString.EMPTY);
-        return PersonalData.of(識別コード, expandedInfo);
+    private PersonalData toPersonalData(RString 識別コード) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("識別コード"), 識別コード);
+        return PersonalData.of(new ShikibetsuCode(識別コード), expandedInfo);
     }
 
     private void paramte() {
@@ -160,8 +161,11 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
     }
 
     private ShutsuryokujunRelateEntity get出力順項目() {
-        return ReportUtil.get出力順情報(KyokaisoKanriMasterListBusiness.ShutsuryokujunEnum.class, SubGyomuCode.DBU介護統計報告,
-                ReportIdDBU.DBA200005.getReportId(),
-                Long.valueOf(parameter.getOrder_ID().toString()));
+        if (parameter.getOrder_ID() != null) {
+            return ReportUtil.get出力順情報(KyokaisoKanriMasterListBusiness.ShutsuryokujunEnum.class, SubGyomuCode.DBU介護統計報告,
+                    ReportIdDBU.DBA200005.getReportId(),
+                    Long.valueOf(parameter.getOrder_ID().toString()));
+        }
+        return new ShutsuryokujunRelateEntity();
     }
 }

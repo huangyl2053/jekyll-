@@ -85,5 +85,6 @@
         rgdb."DbT7035RendoPattern"."shubetsu" = 'B1' AND
         rgdb."DbT7035RendoPattern"."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate} AND
         #{systemdate}<![CDATA[<=]]> rgdb."DbT7035RendoPattern"."yukoShuryoYMD"
+        limit(1)
     </select>
 </mapper>
