@@ -3,19 +3,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shichoson
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Nov 03 16:56:33 CST 2016
+ * Mon Nov 14 19:03:38 JST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgShichoson_Row のクラスファイル
- *
+ * dgShichoson_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgShichoson_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     private RString txtShichosonCode;
     private RString txtShichosonName;
