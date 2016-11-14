@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -217,7 +216,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
         JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div = div.getJukyushaIdoRenrakuhyo().get受給者異動送付();
         div.getCcdKanryoMessage().setMessage(
-                UrInformationMessages.保存終了,
+                new RString("受給者異動連絡票の登録が完了しました。"),
                 受給者訂正連絡票登録画面Div.get被保険者番号().value(),
                 受給者訂正連絡票登録画面Div.get被保険者氏名カナ(), true);
         return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
@@ -303,7 +302,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                     return ResponseData.of(div).respond();
                 } else {
                     div.getCcdKanryoMessage().setMessage(
-                            UrInformationMessages.保存終了,
+                            new RString("受給者異動連絡票の登録が完了しました。"),
                             受給者訂正連絡票登録画面Div.get被保険者番号().value(),
                             受給者訂正連絡票登録画面Div.get被保険者氏名カナ(), true);
                     return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
@@ -356,7 +355,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
      */
     public ResponseData<JukyushaTeiseiRenrakuhyoTorokuPanelDiv> onClick_btnContinue(
             JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
-        return onLoad(div);
+        return ResponseData.of(div).respond();
     }
 
     private JukyushaTeiseiRenrakuhyoTorokuPanelHandler getHandler(JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
