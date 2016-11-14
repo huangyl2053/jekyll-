@@ -18,19 +18,16 @@ public class ShokanShinseiJoho {
     private RString 整理番号;
     private DbT3034ShokanShinseiEntity entity;
     private int 更新件数;
-    private RString 状態;
 
     /**
      * コンストラクタです。
      *
      * @param entity 償還払支給申請情報
      * @param 整理番号 整理番号
-     * @param 状態 状態
      */
-    public ShokanShinseiJoho(DbT3034ShokanShinseiEntity entity, RString 整理番号, RString 状態) {
+    public ShokanShinseiJoho(DbT3034ShokanShinseiEntity entity, RString 整理番号) {
         this.entity = entity;
         this.整理番号 = 整理番号;
-        this.状態 = 状態;
     }
 
     /**
@@ -38,12 +35,10 @@ public class ShokanShinseiJoho {
      *
      * @param entity 償還払支給申請情報
      * @param 更新件数 更新件数
-     * @param 状態 状態
      */
-    public ShokanShinseiJoho(DbT3034ShokanShinseiEntity entity, int 更新件数, RString 状態) {
+    public ShokanShinseiJoho(DbT3034ShokanShinseiEntity entity, int 更新件数) {
         this.entity = entity;
         this.更新件数 = 更新件数;
-        this.状態 = 状態;
     }
 
     /**
@@ -71,9 +66,5 @@ public class ShokanShinseiJoho {
      */
     public int get更新件数() {
         return 更新件数;
-    }
-
-    public RString get状態() {
-        return 状態;
     }
 }
