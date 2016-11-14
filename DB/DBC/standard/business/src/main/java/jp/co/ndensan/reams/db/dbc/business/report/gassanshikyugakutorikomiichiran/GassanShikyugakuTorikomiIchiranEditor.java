@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.DbWT3861KogakuGassanShikyugakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanshikyugakutorikomiichiran.GassanShikyugakuTorikomiIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -42,7 +44,7 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
     private static final RString 接続文字 = new RString("～");
     private static final RString 連絡票データ件数 = new RString("連絡票データ件数");
     private static final RString 明細件数 = new RString("明細件数");
-
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private final KogakuGassanShikyugakuKeisanKekkaIn entity;
 
     /**
@@ -82,6 +84,8 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
         source.listUpper_1 = new RString(entity.get連番());
         source.listUpper_2 = 計算結果entity.getTaishoNendo().wareki().firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
         source.listUpper_3 = entity.get帳票用データ().get被保険者entity().getHihokenshaNo().value();
+        source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                source.listUpper_3);
         source.listLower_1 = entity.get帳票用データ().get被保険者entity().getMeisho();
         source.listUpper_4 = 計算結果entity.getShikyuShinseishoSeiriNo();
 

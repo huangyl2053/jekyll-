@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu.ShikyuFushikyuChohyoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -45,6 +47,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
     private static final RString 接続文字 = new RString("～");
     private static final RString 左カッコ = new RString("（");
     private static final RString 右カッコ = new RString("）");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private final ShikyuFushikyuChohyoParameter entity;
 
     /**
@@ -88,6 +91,8 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
 
             if (被保険者.get登録被保険者番号() != null) {
                 source.listUpper_1 = 被保険者.get登録被保険者番号().value();
+                source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                        source.listUpper_1);
             }
 
             source.listUpper_2 = 被保険者.get宛名名称();
