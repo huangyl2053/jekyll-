@@ -65,8 +65,8 @@ public class JimuShinsakaishiryoA3Group5Editor implements IJimuShinsakaishiryoA3
         source.four_shinsaYY = get年(business.get介護認定審査会開催年月日());
         source.four_shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.four_shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
-        source.four_imgSonotashiryo1 = business.get左のその他資料イメージ(index);
-        source.four_imgSonotashiryo2 = business.get右のその他資料イメージ(index);
+        source.four_imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
+        source.four_imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
         source.layout = Layouts.五頁目;
         return source;
     }
