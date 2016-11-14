@@ -65,6 +65,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.ShakaiFukushiHojinRiyoshaF
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
@@ -273,17 +274,31 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     }
 
     /**
-     * 支給申請更新
+     * 支給申請更新1
      *
      * @param shinsei shinsei
      * @return 更新件数
      */
-    public ShokanShinseiJoho updDbT3034ShokanShinsei(ShokanShinsei shinsei) {
+    public ShokanShinseiJoho updDbT3034ShokanShinsei1(ShokanShinsei shinsei) {
 
         DbT3034ShokanShinseiEntity entity = shinsei.toEntity();
         entity.setState(EntityDataState.Modified);
         int 更新件数 = 償還払支給申請Dac.save(entity);
         return new ShokanShinseiJoho(entity, 更新件数);
+    }
+
+    /**
+     * 支給申請更新
+     *
+     * @param shinsei shinsei
+     * @return 更新件数
+     */
+    public int updDbT3034ShokanShinsei(ShokanShinsei shinsei) {
+
+        DbT3034ShokanShinseiEntity entity = shinsei.toEntity();
+        entity.setState(EntityDataState.Modified);
+        return 償還払支給申請Dac.save(entity);
+
     }
 
     /**
