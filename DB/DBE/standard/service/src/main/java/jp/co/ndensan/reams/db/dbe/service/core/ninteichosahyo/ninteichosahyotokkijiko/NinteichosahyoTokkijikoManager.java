@@ -110,6 +110,7 @@ public class NinteichosahyoTokkijikoManager {
         if (entiy == null) {
             return null;
         } else {
+            entiy.initializeMd5();
             return new NinteichosahyoTokkijiko(entiy);
         }
     }
