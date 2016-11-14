@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KeikakuHiRelateEntity {
 
+    private RString サービス名称;
     private RString dbT3118_ryakusho;
     private DbT3017KyufujissekiKihonEntity dbt3017;
     private DbT3025KyufujissekiKyotakuServiceEntity dbt3025;

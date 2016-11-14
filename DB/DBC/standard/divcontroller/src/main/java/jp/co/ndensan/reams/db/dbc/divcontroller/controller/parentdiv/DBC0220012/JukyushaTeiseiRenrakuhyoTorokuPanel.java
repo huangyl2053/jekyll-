@@ -100,7 +100,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
-                        引き継ぎ情報.get被保番号().getColumnValue()));
+                引き継ぎ情報.get被保番号().getColumnValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -295,7 +295,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             AccessLogger.log(AccessLogType.更新,
                     getHandler(div).toPersonalData(識別コード,
-                            引き継ぎ情報.get被保番号().getColumnValue()));
+                    引き継ぎ情報.get被保番号().getColumnValue()));
             if (登録件数 == 1) {
                 getHandler(div).is前排他キーのセット(引き継ぎ情報.get被保番号());
                 List<RString> チェック状態 = getHandler(div).getチェックボックス状態();
@@ -346,6 +346,17 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                     受給者訂正連絡票登録画面Div, null, 初期化データ, 照会モード);
         }
         return 登録件数;
+    }
+
+    /**
+     * 「登録処理を続ける」ボタンクリック時の事件です。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaTeiseiRenrakuhyoTorokuPanelDiv> onClick_btnContinue(
+            JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
+        return onLoad(div);
     }
 
     private JukyushaTeiseiRenrakuhyoTorokuPanelHandler getHandler(JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {

@@ -88,7 +88,6 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (特徴平準化結果対象外一覧表 != null) {
             対象外項目編集(特徴平準化結果対象外一覧表, source, 帳票制御共通, association);
         }
-        source.shikibetsuCode = RString.EMPTY;
         return source;
     }
 
@@ -104,6 +103,8 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         }
         if (item.get識別コード() != null) {
             source.listUpper_2 = item.get識別コード().value();
+        } else {
+            source.listUpper_2 = RString.EMPTY;
         }
 
         UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
@@ -224,6 +225,8 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         }
         if (item.get識別コード() != null) {
             source.listUpper_2 = item.get識別コード().value();
+        } else {
+            source.listUpper_2 = RString.EMPTY;
         }
         UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
 

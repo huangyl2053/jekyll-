@@ -285,6 +285,7 @@ public class PanelnlTotalHandler {
         } else {
             paramter.set出力順ID(RString.EMPTY);
         }
+        paramter.set窓口払い一括更新区分(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get窓口払い一括更新区分());
         return shokanbarai.getShokanbaraiShikyuFushikyuKetteiTsuchishoBatchParameter(paramter);
     }
 

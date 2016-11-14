@@ -218,7 +218,7 @@ public class DBC2210011Main {
             if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.削除の確認.getMessage().getCode()))
                     && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
                 div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList()
-                        .getSelectedItems().remove(div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList()
+                        .getDataSource().remove(div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList()
                                 .getDgTokubetsuKyufuJigyoshaDetailServiceList().getClickedRowId());
             }
         } else if (修正モード.equals(div.getHiddenModelOne())) {
@@ -270,10 +270,7 @@ public class DBC2210011Main {
         if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            getValidationHandler().事業者コード重複チェック(pairs, div);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
+            set事業者コード重複チェック(div, pairs);
             getValidationHandler().サービス情報作成チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -300,6 +297,8 @@ public class DBC2210011Main {
             ViewStateHolder.clear();
             div.setHiddenModelOne(RString.EMPTY);
             getHandler(div).onClick_btnSearch();
+            div.setHiddenModelOne(RString.EMPTY);
+            div.setHiddenModel(RString.EMPTY);
             return ResponseData.of(div).setState(DBC2210011StateName.検索表示);
         } else {
             if (!ResponseHolder.isReRequest()) {
@@ -307,11 +306,12 @@ public class DBC2210011Main {
             }
             if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()))
                     && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+                修正削除の前排他の解除(div);
                 ViewStateHolder.clear();
                 getHandler(div).onClick_btnSearch();
                 div.setHiddenModelOne(RString.EMPTY);
                 div.setHiddenModel(RString.EMPTY);
-                修正削除の前排他の解除(div);
+
                 return ResponseData.of(div).setState(DBC2210011StateName.検索表示);
 
             }
@@ -338,18 +338,14 @@ public class DBC2210011Main {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-            dgTokubetsuKyufuJigyoshaDetailServiceList_Row row = new dgTokubetsuKyufuJigyoshaDetailServiceList_Row();
-            div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList()
-                    .getDataSource().add(getHandler(div).onClick_入力を確定_追加(row));
-            if (サービス事業者情報 == null) {
-                サービス事業者情報 = new ArrayList<>();
-                サービス事業者情報.add(getHandler(div).onClick_入力を確定_追加情報());
-            } else {
-                サービス事業者情報.add(getHandler(div).onClick_入力を確定_追加情報());
-            }
             サービス事業者情報.add(getHandler(div).onClick_入力を確定_追加情報());
             ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(サービス事業者情報));
-        } else if (サービス追加モード.equals(div.getHiddenModel())) {
+
+            dgTokubetsuKyufuJigyoshaDetailServiceList_Row row = new dgTokubetsuKyufuJigyoshaDetailServiceList_Row();
+            div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList()
+                    .getDataSource().add(getHandler(div).onClick_入力を確定_追加(row, getHandler(div).onClick_入力を確定_追加情報()));
+
+        } else if (サービス修正モード.equals(div.getHiddenModel())) {
             TokubetsuKyufuJigyoshaSearchBusiness 修正情報 = getHandler(div).get情報と状態BySelectDataSouce(サービス事業者情報);
             TokubetsuKyufuJigyoshaSearchBusiness 修正後情報 = getHandler(div).onClick_入力を確定_修正情報(修正情報);
             set修正後情報(サービス事業者情報, 修正後情報);
@@ -412,5 +408,15 @@ public class DBC2210011Main {
             RString 事業者Code = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者の情報, RString.class);
             getHandler(div).前排他の解除(事業者Code);
         }
+    }
+
+    private ResponseData<DBC2210011MainDiv> set事業者コード重複チェック(DBC2210011MainDiv div, ValidationMessageControlPairs pairs) {
+        if (追加モード.equals(div.getHiddenModelOne())) {
+            getValidationHandler().事業者コード重複チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
+        return null;
     }
 }

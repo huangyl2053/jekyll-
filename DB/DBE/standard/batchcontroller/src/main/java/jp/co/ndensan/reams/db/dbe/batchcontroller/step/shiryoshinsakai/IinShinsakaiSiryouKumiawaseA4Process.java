@@ -143,6 +143,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                                 return currentRecord;
                             }
                 }).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         List<ShinseishoKanriNo> 申請書管理番号List = new ArrayList<>();
         for (ItiziHanteiEntity entity : itiziHanteiList) {
             if (!申請書管理番号List.contains(entity.getShinseishoKanriNo())) {

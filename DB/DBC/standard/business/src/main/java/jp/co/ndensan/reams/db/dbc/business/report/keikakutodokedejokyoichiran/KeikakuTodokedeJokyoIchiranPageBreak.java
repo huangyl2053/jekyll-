@@ -64,20 +64,56 @@ public class KeikakuTodokedeJokyoIchiranPageBreak extends PageBreaker<KyotakuSer
     public boolean isBreak(ReportLineRecord<KyotakuServiceKeikakuSakuseiSource> currentRecord,
             ReportLineRecord<KyotakuServiceKeikakuSakuseiSource> nextRecord) {
         boolean flag = false;
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.郵便番号.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().yubinNo).equals(nextRecord.getSource().yubinNo);
+        }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.町域コード.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().choikiCode).equals(nextRecord.getSource().choikiCode);
+        }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード1.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().banchiCode1).equals(nextRecord.getSource().banchiCode1);
+        }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード2.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().banchiCode2).equals(nextRecord.getSource().banchiCode2);
+        }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード3.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().banchiCode3).equals(nextRecord.getSource().banchiCode3);
+        }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード4.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().banchiCode4).equals(nextRecord.getSource().banchiCode4);
+        }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.行政区コード.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().listList1_4).equals(nextRecord.getSource().listList1_4);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.識別コード.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().listList2_1).equals(nextRecord.getSource().listList2_1);
         }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.氏名５０音カナ.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().kanaMeisho).equals(nextRecord.getSource().kanaMeisho);
+        }
+
+        return isBreak2(currentRecord, nextRecord, flag);
+    }
+
+    private boolean isBreak2(ReportLineRecord<KyotakuServiceKeikakuSakuseiSource> currentRecord,
+            ReportLineRecord<KyotakuServiceKeikakuSakuseiSource> nextRecord, boolean flag) {
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.生年月日.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().listList3_1).equals(nextRecord.getSource().listList3_1);
+        }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.性別.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().seibetsuCode).equals(nextRecord.getSource().seibetsuCode);
+        }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.市町村コード.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().shichosonCode).equals(nextRecord.getSource().shichosonCode);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.被保険者番号.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().listList1_1).equals(nextRecord.getSource().listList1_1);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.計画届出日.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().listList1_9).equals(nextRecord.getSource().listList1_9);
+        }
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.指定事業者番号.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().listList2_8).equals(nextRecord.getSource().listList2_8);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.受給申請日.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().listList1_6).equals(nextRecord.getSource().listList1_6);

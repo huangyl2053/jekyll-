@@ -126,7 +126,6 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
-
                     IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
@@ -142,6 +141,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                                 return currentRecord;
                             }
                 }).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         List<ShinseishoKanriNo> 申請書管理番号List = new ArrayList<>();
         for (ItiziHanteiEntity entity : itiziHanteiEntityList) {
             if (!申請書管理番号List.contains(entity.getShinseishoKanriNo())) {

@@ -16,11 +16,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 受給者給付実績台帳の高額介護サービス費からList基本のセットクラスです。
@@ -162,98 +159,6 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
         基本entity.set高額公費２支給額(entity.getDbt3028_kohi2Shikyugaku());
         基本entity.set高額公費３支給額(entity.getDbt3028_kohi3Shikyugaku());
         return 基本entity;
-    }
-
-    private RString get期間(RString 開始, RString 終了) {
-        RStringBuilder 認定有効期間sb = new RStringBuilder();
-        if (!RString.isNullOrEmpty(開始)) {
-            RString 開始_F = new RDate(開始.toString()).wareki().fillType(FillType.NONE).toDateString();
-            認定有効期間sb.append(開始_F);
-            認定有効期間sb.append(チルダ);
-        }
-        if (!RString.isNullOrEmpty(終了)) {
-            RString 終了_F = new RDate(終了.toString()).wareki().fillType(FillType.NONE).toDateString();
-            認定有効期間sb.append(終了_F);
-        }
-        return 認定有効期間sb.toRString();
-    }
-
-    private List<RString> get居住サービス計画作成区分名(RString 居住サービス計画作成区分) {
-        List<RString> 居住サービス計画作成区分名 = new ArrayList<>();
-        if (居住サービス計画作成区分コード_1.equals(居住サービス計画作成区分)) {
-            居住サービス計画作成区分名.add(new RString("居宅介護支"));
-            居住サービス計画作成区分名.add(new RString("援事業所"));
-        } else if (居住サービス計画作成区分コード_2.equals(居住サービス計画作成区分)) {
-            居住サービス計画作成区分名.add(new RString("基準該当事"));
-            居住サービス計画作成区分名.add(new RString("業所"));
-        } else if (居住サービス計画作成区分コード_3.equals(居住サービス計画作成区分)) {
-            居住サービス計画作成区分名.add(new RString("自己作成"));
-            居住サービス計画作成区分名.add(RString.EMPTY);
-        } else if (居住サービス計画作成区分コード_4.equals(居住サービス計画作成区分)) {
-            居住サービス計画作成区分名.add(new RString("介護予防支"));
-            居住サービス計画作成区分名.add(new RString("援事業所"));
-        } else {
-            居住サービス計画作成区分名.add(RString.EMPTY);
-            居住サービス計画作成区分名.add(RString.EMPTY);
-        }
-        return 居住サービス計画作成区分名;
-    }
-
-    private List<RString> get居住サービス計画事業者名(RString 事業者名称) {
-        List<RString> 住サービス計画事業者名 = new ArrayList<>();
-        if (RString.isNullOrEmpty(事業者名称)) {
-            住サービス計画事業者名.add(RString.EMPTY);
-            住サービス計画事業者名.add(RString.EMPTY);
-        } else {
-            if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH) {
-                住サービス計画事業者名.add(事業者名称);
-                住サービス計画事業者名.add(RString.EMPTY);
-            } else {
-                住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
-                住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH));
-            }
-        }
-        return 住サービス計画事業者名;
-    }
-
-    private RString get中止理由タイトル(RString 入力識別番号, RString サービス提供年月) {
-        List<RString> 入力識別番号List = new ArrayList<>();
-        入力識別番号List.add(入力識別番号_7171);
-        入力識別番号List.add(入力識別番号_7172);
-        入力識別番号List.add(入力識別番号_7173);
-        入力識別番号List.add(入力識別番号_7174);
-        入力識別番号List.add(入力識別番号_2171);
-        入力識別番号List.add(入力識別番号_2172);
-        入力識別番号List.add(入力識別番号_2173);
-        入力識別番号List.add(入力識別番号_2174);
-        入力識別番号List.add(入力識別番号_7181);
-        入力識別番号List.add(入力識別番号_7182);
-        入力識別番号List.add(入力識別番号_7183);
-        入力識別番号List.add(入力識別番号_2181);
-        入力識別番号List.add(入力識別番号_2182);
-        入力識別番号List.add(入力識別番号_2183);
-        入力識別番号List.add(入力識別番号_7191);
-        入力識別番号List.add(入力識別番号_7192);
-        入力識別番号List.add(入力識別番号_7193);
-        入力識別番号List.add(入力識別番号_7194);
-        入力識別番号List.add(入力識別番号_7195);
-        入力識別番号List.add(入力識別番号_2191);
-        入力識別番号List.add(入力識別番号_2192);
-        入力識別番号List.add(入力識別番号_2193);
-        入力識別番号List.add(入力識別番号_2194);
-        入力識別番号List.add(入力識別番号_2195);
-        入力識別番号List.add(入力識別番号_71A1);
-        入力識別番号List.add(入力識別番号_71A2);
-        入力識別番号List.add(入力識別番号_71A3);
-        入力識別番号List.add(入力識別番号_21A1);
-        入力識別番号List.add(入力識別番号_21A2);
-        入力識別番号List.add(入力識別番号_21A3);
-        if (入力識別番号List.contains(入力識別番号)
-                && new FlexibleYearMonth(入所_院_前).isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
-            return new RString("入所（院）前の状況");
-        } else {
-            return new RString("中止理由");
-        }
     }
 
     private RString get基本ヘッダー(RString 入力識別番号, RString サービス提供年月, List<RString> 入力識別番号List) {

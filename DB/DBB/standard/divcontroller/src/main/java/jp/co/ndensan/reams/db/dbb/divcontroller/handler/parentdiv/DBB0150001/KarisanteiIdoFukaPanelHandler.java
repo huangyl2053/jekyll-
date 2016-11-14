@@ -688,7 +688,7 @@ public class KarisanteiIdoFukaPanelHandler {
         }
         parameter.set文書番号(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                 .getCcdBunshoBango().get文書番号());
-        if (div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
+        if (!div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                 .getDdlNotsuShuturyokuki().isDisabled()) {
             parameter.set納入_出力期(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                     .getDdlNotsuShuturyokuki().getSelectedKey());

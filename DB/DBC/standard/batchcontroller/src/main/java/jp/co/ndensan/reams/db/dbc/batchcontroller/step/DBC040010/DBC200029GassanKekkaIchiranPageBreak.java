@@ -90,7 +90,7 @@ public class DBC200029GassanKekkaIchiranPageBreak extends PageBreaker<GassanJiko
             flag = !currentRecord.getSource().list_2.equals(nextRecord.getSource().list_2);
         }
         if (!flag && this.keys.contains(DBC200029GassanKekkaIchiranOutputOrder.市町村コード.get項目ID())) {
-            flag = !currentRecord.getSource().shichosonCd.equals(nextRecord.getSource().shichosonCd);
+            flag = !currentRecord.getSource().shichosonCode.equals(nextRecord.getSource().shichosonCode);
         }
         if (!flag && this.keys.contains(DBC200029GassanKekkaIchiranOutputOrder.証記載保険者番号.get項目ID())) {
             flag = !currentRecord.getSource().hokenshaNo.equals(nextRecord.getSource().hokenshaNo);

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.Ko
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
@@ -47,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
@@ -645,12 +645,27 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
      * エラーメッセージ取得
      *
      * @param メッセージ RString
+     * @return Message
      */
-    public void getエラーメッセージ(RString メッセージ) {
+    public Message getエラーメッセージ(RString メッセージ) {
+        Message message = Message.NO_MESSAGE;
         if (メッセージ != null && !メッセージ.isEmpty() && ResponseHolder.getState().
                 equals(DBC1230011StateName.支給決定情報補正.getName())) {
-            getErrorMessage(メッセージ);
+            if (支給決定情報補正判定MSG1.equals(メッセージ)) {
+                message = DbcInformationMessages.償還決定データなし.getMessage();
+            } else if (支給決定情報補正判定MSG2.equals(メッセージ)) {
+                message = DbcInformationMessages.支給決定情報補正判定Msg2.getMessage();
+            } else if (支給決定情報補正判定MSG3.equals(メッセージ)) {
+                message = DbcInformationMessages.支給決定情報補正判定Msg3.getMessage();
+            } else if (支給決定情報補正判定MSG4.equals(メッセージ)) {
+                message = DbcInformationMessages.支給決定情報補正判定Msg4.getMessage();
+            } else if (支給決定情報補正判定MSG5.equals(メッセージ)) {
+                message = DbcInformationMessages.支給決定情報補正判定Msg5.getMessage();
+            } else if (支給決定情報補正判定MSG6.equals(メッセージ)) {
+                message = DbcInformationMessages.支給決定情報補正判定Msg6.getMessage();
+            }
         }
+        return message;
     }
 
     /**
@@ -1084,28 +1099,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 照会);
-        }
-    }
-
-    private void getErrorMessage(RString メッセージ) {
-        if (支給決定情報補正判定MSG1.equals(メッセージ)) {
-            throw new ApplicationException(
-                    DbcErrorMessages.支給決定情報補正判定Msg1.getMessage());
-        } else if (支給決定情報補正判定MSG2.equals(メッセージ)) {
-            throw new ApplicationException(
-                    DbcErrorMessages.支給決定情報補正判定Msg2.getMessage());
-        } else if (支給決定情報補正判定MSG3.equals(メッセージ)) {
-            throw new ApplicationException(
-                    DbcErrorMessages.支給決定情報補正判定Msg3.getMessage());
-        } else if (支給決定情報補正判定MSG4.equals(メッセージ)) {
-            throw new ApplicationException(
-                    DbcErrorMessages.支給決定情報補正判定Msg4.getMessage());
-        } else if (支給決定情報補正判定MSG5.equals(メッセージ)) {
-            throw new ApplicationException(
-                    DbcErrorMessages.支給決定情報補正判定Msg5.getMessage());
-        } else if (支給決定情報補正判定MSG6.equals(メッセージ)) {
-            throw new ApplicationException(
-                    DbcErrorMessages.支給決定情報補正判定Msg6.getMessage());
         }
     }
 

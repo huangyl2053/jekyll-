@@ -236,6 +236,10 @@ public class DBC2210011MainHandler {
         set事業者情報(事業者サービス情報List, row);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(false);
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
+                getGridSetting().setIsShowDeleteButtonColumn(true);
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
+                getGridSetting().setIsShowModifyButtonColumn(true);
         setServiceListReadOnly(false);
     }
 
@@ -445,12 +449,14 @@ public class DBC2210011MainHandler {
      * 「入力を確定する」（サービス追加モード）ボタンを押下します。
      *
      * @param row dgTokubetsuKyufuJigyoshaDetailServiceList_Row
+     * @param 情報 TokubetsuKyufuJigyoshaSearchBusiness
      * @return dgTokubetsuKyufuJigyoshaDetailServiceList_Row
      */
-    public dgTokubetsuKyufuJigyoshaDetailServiceList_Row onClick_入力を確定_追加(dgTokubetsuKyufuJigyoshaDetailServiceList_Row row) {
+    public dgTokubetsuKyufuJigyoshaDetailServiceList_Row onClick_入力を確定_追加(dgTokubetsuKyufuJigyoshaDetailServiceList_Row row,
+            TokubetsuKyufuJigyoshaSearchBusiness 情報) {
         row.setRowState(RowState.Added);
         row.setHdnServiceCode(div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().getSelectedKey());
-        row.setTxtService(div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().getSelectedValue().substring(NO_3));
+        row.setTxtService(div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().getSelectedValue());
         row.setTxtKanrisha(div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaName().getValue());
         row.setTxtJigyoKaishiYMD(div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKaishiYMD());
         if (div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKyushiYMD() != null) {
@@ -489,6 +495,7 @@ public class DBC2210011MainHandler {
         } else {
             row.setTxtSeikatsuHogo(無);
         }
+        row.setTxtServiceId(DataPassingConverter.serialize(情報.identifier()));
         return row;
     }
 
@@ -573,7 +580,7 @@ public class DBC2210011MainHandler {
         RString cd = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtCheckDigit().getValue();
         JigyoshaNo 市町村特別給付用事業者番号 = new JigyoshaNo(県コード.concat(事業者区分).concat(郡市コード).concat(連番).concat(cd));
         ServiceCode 市町村特別給付用サービスコード = new ServiceCode(div.getTokubetsuKyufuJigyoshaDetailServiceInfo()
-                .getDdlService().getSelectedValue().substring(NO_0, NO_7));
+                .getDdlService().getSelectedValue().substring(NO_0, NO_6));
         int 履歴番号 = NO_0;
         TokubetsuKyufuJigyoshaSearchBusiness 追加情報 = new TokubetsuKyufuJigyoshaSearchBusiness(市町村特別給付用事業者番号, 市町村特別給付用サービスコード, 履歴番号);
         追加情報.get市町村特別給付サービス事業者().get事業者().setState(EntityDataState.Added);
@@ -852,12 +859,24 @@ public class DBC2210011MainHandler {
             newRow.setHdnServiceCode(情報.get市町村特別給付用サービスコード().value());
             newRow.setTxtService(情報.get市町村特別給付サービス事業者().getサービス().getServiceRyakushoName());
             newRow.setTxtKanrisha(情報.get事業所管理者氏名());
-            newRow.getTxtJigyoKaishiYMD().setValue(new RDate(情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
-            newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
-            newRow.getTxtJigyoHaishiYMD().setValue(new RDate(情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
-            newRow.getTxtJigyoSaikaiYMD().setValue(new RDate(情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
-            newRow.getTxtTorokuKaishiYMD().setValue(new RDate(情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
-            newRow.getTxtTorokuShuryoYMD().setValue(new RDate(情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
+            if (情報.getサービス事業所事業開始年月日() != null) {
+                newRow.getTxtJigyoKaishiYMD().setValue(new RDate(情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
+            }
+            if (情報.getサービス事業所事業休止年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
+            }
+            if (情報.getサービス事業所事業廃止年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
+            }
+            if (情報.getサービス事業所事業再開年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
+            }
+            if (情報.get市町村特別給付登録開始年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
+            }
+            if (情報.get市町村特別給付登録終了年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
+            }
             newRow.setTxtJuryoInin(TokubetsukyufuJuryoIninKubun.toValue(情報.get受領委任区分()).get名称());
             if (情報.is生活保護法による指定の有()) {
                 newRow.setTxtSeikatsuHogo(TokubetsukyufuSeikatsuHogoShiteiKubun.有.get名称());
@@ -878,42 +897,46 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().setDataSource(get特別給付サービスDDL(市町村特別給付サービス内容));
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().
                 setSelectedKey(事業者情報.get市町村特別給付用サービスコード().value());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaJusho()
-                .setValue(事業者情報.get事業所管理者住所());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaJushoKana()
-                .setValue(事業者情報.get事業所管理者住所カナ());
+        if (事業者情報.get事業所管理者住所() != null && !事業者情報.get事業所管理者住所().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaJusho()
+                    .setValue(事業者情報.get事業所管理者住所());
+        }
+        if (事業者情報.get事業所管理者住所カナ() != null && !事業者情報.get事業所管理者住所カナ().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaJushoKana()
+                    .setValue(事業者情報.get事業所管理者住所カナ());
+        }
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaName()
                 .setValue(事業者情報.get事業所管理者氏名());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaNameKana()
-                .setValue(事業者情報.get事業所管理者氏名カナ());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaYubinNo()
-                .setValue(事業者情報.get事業所管理者郵便番号());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaName()
-                .setValue(事業者情報.getサービス事業所名());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaNameKana()
-                .setValue(事業者情報.getサービス事業所名カナ());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaYubinNo()
-                .setValue(事業者情報.getサービス事業所郵便番号());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaJusho()
-                .setValue(事業者情報.getサービス事業所住所());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaJushoKana()
-                .setValue(事業者情報.getサービス事業所住所カナ());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaTelNo()
-                .setValue(事業者情報.getサービス事業所電話番号());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaFaxNo()
-                .setValue(事業者情報.getサービス事業所FAX番号());
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKaishiYMD()
-                .setValue(new RDate(事業者情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoHaishiYMD()
-                .setValue(new RDate(事業者情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKyushiYMD()
-                .setValue(new RDate(事業者情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoSaikaiYMD()
-                .setValue(new RDate(事業者情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtTorokuKaishiYMD()
-                .setValue(new RDate(事業者情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
-        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtTorokuShuryoYMD()
-                .setValue(new RDate(事業者情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
+        if (事業者情報.get事業所管理者氏名カナ() != null && !事業者情報.get事業所管理者氏名カナ().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaNameKana()
+                    .setValue(事業者情報.get事業所管理者氏名カナ());
+        }
+        setサービス情報Detail(事業者情報);
+        if (事業者情報.getサービス事業所事業開始年月日() != null) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKaishiYMD()
+                    .setValue(new RDate(事業者情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
+        }
+        if (事業者情報.getサービス事業所事業廃止年月日() != null) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoHaishiYMD()
+                    .setValue(new RDate(事業者情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
+        }
+        if (事業者情報.getサービス事業所事業休止年月日() != null) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKyushiYMD()
+                    .setValue(new RDate(事業者情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
+        }
+        if (事業者情報.getサービス事業所事業再開年月日() != null) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoSaikaiYMD()
+                    .setValue(new RDate(事業者情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
+        }
+        if (事業者情報.get市町村特別給付登録開始年月日() != null) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtTorokuKaishiYMD()
+                    .setValue(new RDate(事業者情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
+        }
+        if (事業者情報.get市町村特別給付登録終了年月日() != null) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtTorokuShuryoYMD()
+                    .setValue(new RDate(事業者情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
+        }
+
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getRadJuryoInin()
                 .setSelectedKey(事業者情報.get受領委任区分());
         if (事業者情報.is生活保護法による指定の有()) {
@@ -1017,6 +1040,40 @@ public class DBC2210011MainHandler {
         for (dgTokubetsuKyufuJigyoshaDetailServiceList_Row dataSource : dataSources) {
             事業者削除情報 = get情報FromDataSouce(dataSource, 事業者サービス情報List);
             事業者削除情報.get市町村特別給付サービス事業者().get事業者().setState(EntityDataState.Deleted);
+        }
+    }
+
+    private void setサービス情報Detail(TokubetsuKyufuJigyoshaSearchBusiness 事業者情報) {
+
+        if (事業者情報.get事業所管理者郵便番号() != null && !事業者情報.get事業所管理者郵便番号().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaYubinNo()
+                    .setValue(事業者情報.get事業所管理者郵便番号());
+        }
+        div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaName()
+                .setValue(事業者情報.getサービス事業所名());
+        if (事業者情報.getサービス事業所名カナ() != null && !事業者情報.getサービス事業所名カナ().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaNameKana()
+                    .setValue(事業者情報.getサービス事業所名カナ());
+        }
+        if (事業者情報.getサービス事業所郵便番号() != null && !事業者情報.getサービス事業所郵便番号().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaYubinNo()
+                    .setValue(事業者情報.getサービス事業所郵便番号());
+        }
+        if (事業者情報.getサービス事業所住所() != null && !事業者情報.getサービス事業所住所().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaJusho()
+                    .setValue(事業者情報.getサービス事業所住所());
+        }
+        if (事業者情報.getサービス事業所住所カナ() != null && !事業者情報.getサービス事業所住所カナ().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaJushoKana()
+                    .setValue(事業者情報.getサービス事業所住所カナ());
+        }
+        if (事業者情報.getサービス事業所電話番号() != null && !事業者情報.getサービス事業所電話番号().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaTelNo()
+                    .setValue(事業者情報.getサービス事業所電話番号());
+        }
+        if (事業者情報.getサービス事業所FAX番号() != null && !事業者情報.getサービス事業所FAX番号().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoshaFaxNo()
+                    .setValue(事業者情報.getサービス事業所FAX番号());
         }
     }
 }

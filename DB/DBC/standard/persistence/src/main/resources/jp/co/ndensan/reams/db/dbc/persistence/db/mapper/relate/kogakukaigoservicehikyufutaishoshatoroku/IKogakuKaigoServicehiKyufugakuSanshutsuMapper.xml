@@ -2700,7 +2700,7 @@
                 C."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
                 C."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日
             FROM 
-                "TempKyufujissekiTyukann5" AS A
+                "TempKyufujissekiTyukann9" AS A
             INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
             ON A."hiHokenshaNo" = C."hihokenshaNo"
             WHERE 
@@ -2876,9 +2876,11 @@
      </select>
 
     <resultMap id="ResultMap_高額介護データ一時" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannKogakuRelateEntity" autoMapping="true">
-        <id  column="tempKyufujissekiTyukann_hiHokenshaNo"/>
-        <id  column="tempKyufujissekiTyukann_serviceTeikyoYM"/>
-        <id  column="dbT3057KogakuShikyuHanteiKekka_rirekiNo"/>
+        <id column="tempKyufujissekiTyukann_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="tempKyufujissekiTyukann_serviceSyuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id column="dbT3057KogakuShikyuHanteiKekka_rirekiNo"/>
         <association property="給付実績中間高額Entity" resultMap="ResultMap_給付実績中間高額"/>
         <association property="高額判定結果全件Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
         <association property="高額合計全件Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
@@ -2909,9 +2911,11 @@
         ON "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo" = "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"
         AND "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM" = "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
         AND "DbT3057KogakuShikyuHanteiKekka"."rirekiNo" = "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"
-        ORDER BY "TempKyufujissekiTyukann"."hiHokenshaNo",
-                 "TempKyufujissekiTyukann"."serviceTeikyoYM",
-                 "TempKyufujissekiTyukann"."dataKubun"
+        ORDER BY "TempKyufujissekiTyukann"."hiHokenshaNo" ASC,
+                 "TempKyufujissekiTyukann"."serviceTeikyoYM" ASC,
+                 "TempKyufujissekiTyukann"."dataKubun" ASC,
+                 "TempKyufujissekiTyukann"."serviceSyuruiCode" ASC,
+                 "DbT3057KogakuShikyuHanteiKekka"."rirekiNo" ASC
     </select> 
 
     <resultMap id="ResultMap_事業高額介護データ一時" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannJigyoKogakuRelateEntity" autoMapping="true">

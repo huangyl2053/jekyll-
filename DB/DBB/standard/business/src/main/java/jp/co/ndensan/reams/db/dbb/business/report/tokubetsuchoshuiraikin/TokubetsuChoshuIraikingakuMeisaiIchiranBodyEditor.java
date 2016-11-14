@@ -131,7 +131,6 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
             source.listCenter_5 = 特徴開始月8;
         }
         source.listCenter_7 = RString.EMPTY;
-        source.keisanHoho = RString.EMPTY;
         source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listLower_1);
         return source;
     }

@@ -65,4 +65,16 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private ShikibetsuCode shikibetsuCode;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
     private UaFt250FindAtesakiEntity 宛先Entity;
+    private RString shiharaiBasho;
+    private RString kinyuKikanShitenCode;
+    private RString kozaMeiginin;
+    private Decimal sagakuKingakuGokei;
+    private RString kinyuKikanMeisi;
+    private RString kinyuKikanShitenMeisi;
+    private RString yokinShubetsuMeisi;
+    private FlexibleDate kaishiYMD;
+    private RString hihokennshaKubunCode;
+    private RString shichosonCode;
+    private RString sashitomeHiHokenshaNo;
+    private RString sashitomeKojoNo;
 }

@@ -295,11 +295,6 @@ public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
         }
 
         @Test
-        public void get介護保険証記載保険者番号は_entityが持つ介護保険証記載保険者番号を返す() {
-            assertThat(sut.get介護保険証記載保険者番号(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getShokisaiHokenshaNo()));
-        }
-
-        @Test
         public void get受領委任区分は_entityが持つ受領委任区分を返す() {
             assertThat(sut.get受領委任区分(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getJuryoIninKubu()));
         }
@@ -317,16 +312,6 @@ public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
         @Test
         public void get生活保護法による指定の有は_entityが持つ生活保護法による指定の有を返す() {
             assertThat(sut.is生活保護法による指定の有(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getSeikatsuhogoShiteiFlag()));
-        }
-
-        @Test
-        public void get市町村コードは_entityが持つ市町村コードを返す() {
-            assertThat(sut.get市町村コード(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getShichosonCode()));
-        }
-
-        @Test
-        public void get地域区分は_entityが持つ地域区分を返す() {
-            assertThat(sut.get地域区分(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getChiikiKubun()));
         }
     }
 

@@ -175,7 +175,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("介護認定審査会開催のお知らせ"),
+                new RString("審査会開催通知書"),
                 new RString("1"),
                 RString.EMPTY,
                 RString.EMPTY,

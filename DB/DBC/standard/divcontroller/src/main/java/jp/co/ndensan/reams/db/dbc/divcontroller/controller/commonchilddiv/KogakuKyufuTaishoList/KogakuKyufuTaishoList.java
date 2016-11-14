@@ -50,6 +50,7 @@ public class KogakuKyufuTaishoList {
     private static final RString ONE_RS = new RString("1");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
+    private static final int INT_10 = 10;
 
     /**
      * 「「追加する」ボタン
@@ -121,6 +122,9 @@ public class KogakuKyufuTaishoList {
             KogakuKyufuTaishoListDiv div) {
         JigyoshaMode jigyoshaMode = new JigyoshaMode();
         jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
+        jigyoshaMode.setJigyoshaNo(div.getTxtJgyoshaCode().getValue() == null || INT_10 != div.getTxtJgyoshaCode().getValue().length()
+                ? jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo.EMPTY
+                : new jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo(div.getTxtJgyoshaCode().getValue()));
         div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return createResponse(div);
     }
@@ -223,11 +227,10 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onOkClose_btnServiceSyurui(
             KogakuKyufuTaishoListDiv div) {
-        ServiceTypeModel model = DataPassingConverter.deserialize(div.getHdnServiceModel(), ServiceTypeModel.class);
-        if (model != null) {
-            div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setValue(model.getサービス種類コード());
-//        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setValue(model.);
-        }
+        RString 種類コード = div.getHdnServiceType();
+        RString 種類 = div.getHdnServiceRyakusho();
+        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setValue(種類コード);
+        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setValue(種類);
         return createResponse(div);
     }
 

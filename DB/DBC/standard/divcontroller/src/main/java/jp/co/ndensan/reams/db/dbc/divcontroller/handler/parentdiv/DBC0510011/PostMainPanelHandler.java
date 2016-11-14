@@ -41,22 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class PostMainPanelHandler {
 
     private final PostMainPanelDiv div;
-    private static final RString 国保情報 = new RString("21_DBU_KOKUHO_処理枝番.txt");
-    private static final RString 後期情報 = new RString("22_DBU_KOUKI_処理枝番.txt");
-    private static final RString 単一国保情報 = new RString("21_DBU_KOKUHO_0000.txt");
-    private static final RString 広域後期情報 = new RString("22_DBU_KOUKI_0000.txt");
-    private static final RString 定値_処理枝番 = new RString("処理枝番");
-    private static final RString 対象のファイル = new RString("対象のファイル");
     private static final RString NUM_00 = new RString("00");
-    private static final int NUM_5 = 5;
-    private static final int NUM_38 = 38;
-    private static final int NUM_43 = 43;
-    private static final int NUM_322 = 322;
-    private static final int NUM_327 = 327;
-    private static final int NUM_90 = 90;
-    private static final int NUM_341 = 341;
-    private static final int NUM_62 = 62;
-    private static final int NUM_492 = 492;
     private static final RString NUM_111 = new RString("111");
     private static final RString NUM_112 = new RString("112");
     private static final RString NUM_120 = new RString("120");
@@ -64,9 +49,7 @@ public class PostMainPanelHandler {
     private static final RString DBCMN82002 = new RString("DBCMN82002");
     private static final RString NUM_1 = new RString("1");
     private static final int NUM_8 = 8;
-    private static final int NUM_9 = 9;
     private static final int NUM_14 = 14;
-    private static final int NUM_15 = 15;
     private static final int NUM_3 = 3;
     private static final int NUM_2 = 2;
     private static final int NUM_4 = 4;

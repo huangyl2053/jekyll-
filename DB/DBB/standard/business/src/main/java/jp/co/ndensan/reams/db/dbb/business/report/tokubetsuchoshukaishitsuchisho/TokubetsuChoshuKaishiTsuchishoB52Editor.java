@@ -10,11 +10,15 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.Characteristic
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52Source;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -27,14 +31,15 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
 
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 宛名連番;
+    private final Association 地方公共団体;
     private final NinshoshaSource sourceBuilder;
 
-    private static final RString 特徴期別金額1期 = new RString("1期");
-    private static final RString 特徴期別金額2期 = new RString("2期");
-    private static final RString 特徴期別金額3期 = new RString("3期");
-    private static final RString 特徴期別金額4期 = new RString("4期");
-    private static final RString 特徴期別金額5期 = new RString("5期");
-    private static final RString 特徴期別金額6期 = new RString("6期");
+    private static final RString 特徴期別金額1期 = new RString("1");
+    private static final RString 特徴期別金額2期 = new RString("2");
+    private static final RString 特徴期別金額3期 = new RString("3");
+    private static final RString 特徴期別金額4期 = new RString("4");
+    private static final RString 特徴期別金額5期 = new RString("5");
+    private static final RString 特徴期別金額6期 = new RString("6");
     private static final RString TOKEN = new RString("～");
 
     /**
@@ -42,14 +47,17 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
      *
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param 宛名連番 RString
+     * @param 地方公共団体 地方公共団体
      * @param sourceBuilder 雛形部品CompNinshosha
      */
     public TokubetsuChoshuKaishiTsuchishoB52Editor(
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RString 宛名連番,
+            Association 地方公共団体,
             NinshoshaSource sourceBuilder) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.宛名連番 = 宛名連番;
+        this.地方公共団体 = 地方公共団体;
         this.sourceBuilder = sourceBuilder;
     }
 
@@ -135,7 +143,7 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
             if (編集後本算定通知書共通情報.get更正後().get期間_自() != null && 編集後本算定通知書共通情報.get更正後().get期間_至() != null) {
                 RString 期間_自 = 編集後本算定通知書共通情報.get更正後().get期間_自();
                 RString 期間_至 = 編集後本算定通知書共通情報.get更正後().get期間_至();
-                source.kikan = 期間_自.concat(TOKEN).concat(期間_至);
+                source.kikan = editDate(期間_自).concat(TOKEN).concat(editDate(期間_至));
             }
             source.tsukiSu1 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
             source.shotokuDankai = 編集後本算定通知書共通情報.get更正後().get保険料段階();
@@ -165,15 +173,25 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
         source.hokenryoGaku2Gatsu = set特徴期別金額(特徴期別金額6期);
         if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get確定保険料_年額() != null) {
             source.hokenryoNenGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
+        } else {
+            source.hokenryoNenGaku = new RString("0");
         }
         source.kariHokenryoGaku = set仮保険料額();
         source.hokenryoGokei = set保険料合計();
         if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get普通徴収額合計() != null) {
             source.fuchoNoufugaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get普通徴収額合計(), 0);
+        } else {
+            source.fuchoNoufugaku = new RString("0");
         }
-        if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get名称() != null) {
-            source.hokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
-        }
+//        if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get名称() != null) {
+//            source.hokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
+//        }
+        source.hokenshaName = 地方公共団体.get市町村名();
+    }
+
+    private RString editDate(RString value) {
+        return new RDate(value.toString()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).width(Width.HALF).toDateString();
     }
 
     /**
@@ -189,11 +207,11 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
         List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (特徴期別金額1期.equals(特徴期別金額.get期())) {
-                金額1期 = 特徴期別金額.get金額();
+                金額1期 = null == 特徴期別金額.get金額() ? Decimal.ZERO : 特徴期別金額.get金額();
             } else if (特徴期別金額2期.equals(特徴期別金額.get期())) {
-                金額2期 = 特徴期別金額.get金額();
+                金額2期 = null == 特徴期別金額.get金額() ? Decimal.ZERO : 特徴期別金額.get金額();
             } else if (特徴期別金額3期.equals(特徴期別金額.get期())) {
-                金額3期 = 特徴期別金額.get金額();
+                金額3期 = null == 特徴期別金額.get金額() ? Decimal.ZERO : 特徴期別金額.get金額();
             }
         }
         return DecimalFormatter.toコンマ区切りRString(金額1期.add(金額2期).add(金額3期), 0);
@@ -212,11 +230,11 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
         List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (特徴期別金額4期.equals(特徴期別金額.get期())) {
-                金額4期 = 特徴期別金額.get金額();
+                金額4期 = null == 特徴期別金額.get金額() ? Decimal.ZERO : 特徴期別金額.get金額();
             } else if (特徴期別金額5期.equals(特徴期別金額.get期())) {
-                金額5期 = 特徴期別金額.get金額();
+                金額5期 = null == 特徴期別金額.get金額() ? Decimal.ZERO : 特徴期別金額.get金額();
             } else if (特徴期別金額6期.equals(特徴期別金額.get期())) {
-                金額6期 = 特徴期別金額.get金額();
+                金額6期 = null == 特徴期別金額.get金額() ? Decimal.ZERO : 特徴期別金額.get金額();
             }
         }
         return DecimalFormatter.toコンマ区切りRString(金額4期.add(金額5期).add(金額6期), 0);
@@ -236,7 +254,7 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
         List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (期.equals(特徴期別金額.get期())) {
-                金額 = 特徴期別金額.get金額();
+                金額 = null == 特徴期別金額.get金額() ? Decimal.ZERO : 特徴期別金額.get金額();
                 break;
             }
         }

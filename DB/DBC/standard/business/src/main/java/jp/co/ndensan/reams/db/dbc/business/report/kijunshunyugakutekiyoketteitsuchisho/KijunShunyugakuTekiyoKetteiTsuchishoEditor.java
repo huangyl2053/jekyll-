@@ -27,6 +27,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
 
     private final KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ;
     private static final int INT_0 = 0;
+    private static final int INT_40 = 40;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     /**
@@ -56,7 +57,11 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.hihokenshaNameKana1 = 基準収入額適用決定通知書パラメータ.get被保険者名カナ１().value();
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名１() != null) {
-            source.hihokenshaName1 = 基準収入額適用決定通知書パラメータ.get被保険者氏名１().value();
+            RString 被保険者氏名１ = 基準収入額適用決定通知書パラメータ.get被保険者氏名１().value();
+            if (被保険者氏名１.length() > INT_40) {
+                被保険者氏名１ = 被保険者氏名１.substring(INT_0, INT_40);
+            }
+            source.hihokenshaName1 = 被保険者氏名１;
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者番号２() != null) {
             source.hihokenshaNo2 = 基準収入額適用決定通知書パラメータ.get被保険者番号２().value();
@@ -65,7 +70,11 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.hihokenshaNameKana2 = 基準収入額適用決定通知書パラメータ.get被保険者名カナ２().value();
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名２() != null) {
-            source.hihokenshaName2 = 基準収入額適用決定通知書パラメータ.get被保険者氏名２().value();
+            RString 被保険者氏名２ = 基準収入額適用決定通知書パラメータ.get被保険者氏名２().value();
+            if (被保険者氏名２.length() > INT_40) {
+                被保険者氏名２ = 被保険者氏名２.substring(INT_0, INT_40);
+            }
+            source.hihokenshaName2 = 被保険者氏名２;
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者番号３() != null) {
             source.hihokenshaNo3 = 基準収入額適用決定通知書パラメータ.get被保険者番号３().value();
@@ -74,7 +83,11 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.hihokenshaNameKana3 = 基準収入額適用決定通知書パラメータ.get被保険者名カナ３().value();
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名３() != null) {
-            source.hihokenshaName3 = 基準収入額適用決定通知書パラメータ.get被保険者氏名３().value();
+            RString 被保険者氏名３ = 基準収入額適用決定通知書パラメータ.get被保険者氏名３().value();
+            if (被保険者氏名３.length() > INT_40) {
+                被保険者氏名３ = 被保険者氏名３.substring(INT_0, INT_40);
+            }
+            source.hihokenshaName2 = 被保険者氏名３;
         }
         source.sonotaHihokensha = 基準収入額適用決定通知書パラメータ.getその他被保険者();
         if (基準収入額適用決定通知書パラメータ.getCompNinshoshaソース() != null) {

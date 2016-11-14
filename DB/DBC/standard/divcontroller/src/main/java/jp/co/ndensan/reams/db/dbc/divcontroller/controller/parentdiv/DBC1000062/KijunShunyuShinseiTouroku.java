@@ -49,6 +49,8 @@ public class KijunShunyuShinseiTouroku {
     private static final Decimal KEY_100億円 = new Decimal("10000000000");
     private static final Decimal KEY_99億円 = new Decimal("9999999999");
     private static final RString MESSAGE_合計 = new RString("所得情報の収入合計＞入力した収入合計になっています。");
+    private static final RString チェックなし = new RString("0");
+    private static final RString チェック済み = new RString("1");
 
     /**
      * 画面初期化のメソッドです。
@@ -327,6 +329,12 @@ public class KijunShunyuShinseiTouroku {
      * @return ResponseData
      */
     public ResponseData<KijunShunyuShinseiTourokuDiv> onClick_btnMeisaiKautei(KijunShunyuShinseiTourokuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            div.setHdnFlag1(チェックなし);
+            div.setHdnFlag2(チェックなし);
+            div.setHdnFlag3(チェックなし);
+            div.setHdnFlag4(チェックなし);
+        }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
@@ -337,9 +345,10 @@ public class KijunShunyuShinseiTouroku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
-        if (!ResponseHolder.isReRequest() && getHandler(div).is収入額チェック()) {
+        if (!チェック済み.equals(div.getHdnFlag1()) && getHandler(div).is収入額チェック()) {
             WarningMessage message = new WarningMessage(DbzWarningMessages.確認.getMessage().getCode(),
                     DbzWarningMessages.確認.getMessage().replace(MESSAGE_合計.toString()).evaluate());
+            div.setHdnFlag1(チェック済み);
             return ResponseData.of(div).addMessage(message).respond();
         }
 
@@ -349,17 +358,20 @@ public class KijunShunyuShinseiTouroku {
         }
 
         validPairs = getValidationHandler(div).世帯再算出チェックValidate();
-        if (!ResponseHolder.isReRequest() && validPairs.iterator().hasNext()) {
+        if (!チェック済み.equals(div.getHdnFlag2()) && validPairs.iterator().hasNext()) {
+            div.setHdnFlag2(チェック済み);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
         validPairs = getValidationHandler(div).受給者または事業対象者チェックValidate();
-        if (!ResponseHolder.isReRequest() && validPairs.iterator().hasNext()) {
+        if (!チェック済み.equals(div.getHdnFlag3()) && validPairs.iterator().hasNext()) {
+            div.setHdnFlag3(チェック済み);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
         validPairs = getValidationHandler(div).算定基準額チェックValidate();
-        if (!ResponseHolder.isReRequest() && validPairs.iterator().hasNext()) {
+        if (!チェック済み.equals(div.getHdnFlag4()) && validPairs.iterator().hasNext()) {
+            div.setHdnFlag4(チェック済み);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 

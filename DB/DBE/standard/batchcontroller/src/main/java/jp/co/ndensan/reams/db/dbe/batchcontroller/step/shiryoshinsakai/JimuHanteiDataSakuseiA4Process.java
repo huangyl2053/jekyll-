@@ -105,7 +105,7 @@ public class JimuHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJoho
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("認定審査会対象者一覧（事務局用）"),
+                new RString("予備判定記入表（事務局用）"),
                 総ページ数,
                 RString.EMPTY,
                 RString.EMPTY,

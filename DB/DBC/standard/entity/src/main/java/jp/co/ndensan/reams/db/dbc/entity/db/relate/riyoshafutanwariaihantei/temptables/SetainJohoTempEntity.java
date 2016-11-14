@@ -39,4 +39,15 @@ public class SetainJohoTempEntity implements IDbAccessable {
     private FlexibleYear shotokuNendo;
     private boolean jutokuGaitoFlag;
     private RString setaiShotokuHonninKubun;
+
+    /**
+     * SetainJohoTempEntityのコンストラクタです。
+     */
+    public SetainJohoTempEntity() {
+        hihokenshaNo = HihokenshaNo.EMPTY;
+        shikibetsuCode = ShikibetsuCode.EMPTY;
+        taishoNendo = FlexibleYear.EMPTY;
+        taishoTsuki = RString.EMPTY;
+        setaiCode = SetaiCode.EMPTY;
+    }
 }

@@ -646,8 +646,8 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             csvEntity.set支払終了曜日(convertDayOfWeek(支払終了日));
             csvEntity.set支払開始時間(entity.get支払窓口開始時間());
             csvEntity.set支払終了時間(entity.get支払窓口終了時間());
-            csvEntity.setサービス提供年月(get年月(entity.getサービス提供年月(), parameter));
-            Decimal 履歴番号 = entity.get履歴番号();
+            csvEntity.setサービス提供年月(get年月(entity.getサービス提供年月key(), parameter));
+            Decimal 履歴番号 = entity.get履歴番号key();
             csvEntity.set管理番号(履歴番号 != null
                     ? new RString(履歴番号.toString())
                     : RString.EMPTY);
@@ -835,7 +835,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             List<RString> list = 高額給付根拠.split("，");
 
             if (list.size() >= INDEX_1 && (list.get(INDEX_0).equals(RST_月)
-                    || list.get(INDEX_0).equals(RString.HALF_SPACE))) {
+                    || list.get(INDEX_0).trim().equals(RString.EMPTY))) {
                 世帯の所得区分コード = list.size() >= INDEX_2
                         ? list.get(INDEX_1)
                         : RString.EMPTY;

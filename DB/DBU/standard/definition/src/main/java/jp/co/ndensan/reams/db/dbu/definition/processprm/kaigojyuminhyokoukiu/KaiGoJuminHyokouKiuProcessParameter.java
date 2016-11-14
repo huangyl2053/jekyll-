@@ -9,6 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +26,10 @@ import lombok.Setter;
 public class KaiGoJuminHyokouKiuProcessParameter implements IBatchProcessParameter {
 
     private List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList;
+    private RString 連携ファイル名;
+    private RDateTime dateFrom;
+    private RDateTime dateTo;
+    private RString shichosonCode;
 
     /**
      * コンストラクタ
@@ -41,6 +47,6 @@ public class KaiGoJuminHyokouKiuProcessParameter implements IBatchProcessParamet
      * @return KaigoJuminhyoMapperParameter
      */
     public KaiGoJuminHyokouKiuMapperParameter toKaiGoJuminHyokouKiuMapperParameter() {
-        return KaiGoJuminHyokouKiuMapperParameter.createParam(kobetsuKoikiunyoParameterList);
+        return KaiGoJuminHyokouKiuMapperParameter.createParam(shichosonCode, dateFrom, dateTo);
     }
 }

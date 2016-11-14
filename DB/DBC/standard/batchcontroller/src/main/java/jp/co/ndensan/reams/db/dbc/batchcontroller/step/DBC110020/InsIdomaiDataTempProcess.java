@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7123KokuhoShikakuInfoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7124KokiKoreishaInfoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -181,6 +183,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         List<UrT0508SeikatsuHogoJukyushaEntity> 生活保護受給者List = JukyushaIdoRenrakuhyoOutCommonProcess.get生活保護受給者(異動一時List);
         生活保護受給者まとめる(生活保護受給者List);
         生活保護受給者(生活保護受給者List, 処理年月);
+        DbT7124KokiKoreishaInfoEntity 後期高齢者 = JukyushaIdoRenrakuhyoOutCommonProcess.get後期高齢者(異動一時List);
+        DbT7123KokuhoShikakuInfoEntity 国保資格 = JukyushaIdoRenrakuhyoOutCommonProcess.get国保資格(異動一時List);
         List<IdoTblTmpEntity> allData = new ArrayList<>();
         for (IdoTblTmpEntity 異動一時 : 異動一時Map.values()) {
             allData.add(異動一時);
@@ -191,7 +195,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             不要データ削除(異動一時entity, i, allData);
         }
         if (!allData.isEmpty()) {
-            再編集(allData, 宛名情報, 処理年月);
+            再編集(allData, 宛名情報, 処理年月, 後期高齢者, 国保資格);
         }
         int 番号 = 1;
         for (IdoTblTmpEntity idoTblTmpEntity : allData) {
@@ -679,14 +683,18 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                     && isBeforeOreqDate(総合事業対象者.getTekiyoShuryoYMD(), 受給者台帳.getNinteiYukoKikanShuryoYMD()))) {
                 continue;
             }
+            FlexibleDate 適用終了年月日 = 総合事業対象者.getTekiyoShuryoYMD();
+            if (isDateEmpty(適用終了年月日)) {
+                continue;
+            }
             if ((isBeforeOreqDate(受給者台帳.getNinteiYukoKikanKaishiYMD(), 総合事業対象者.getTekiyoKaishiYMD())
                     && isBeforeOreqDate(総合事業対象者.getTekiyoKaishiYMD(), 受給者台帳.getNinteiYukoKikanShuryoYMD()))
                     || (isBeforeOreqDate(総合事業対象者.getTekiyoKaishiYMD(), 受給者台帳.getNinteiYukoKikanKaishiYMD())
-                    && isBeforeOreqDate(受給者台帳.getNinteiYukoKikanShuryoYMD(), 総合事業対象者.getTekiyoShuryoYMD()))) {
+                    && isBeforeOreqDate(受給者台帳.getNinteiYukoKikanShuryoYMD(), 適用終了年月日))) {
                 if (is月末(総合事業対象者.getTekiyoShuryoYMD())) {
-                    異動年月日 = get月初(総合事業対象者.getTekiyoShuryoYMD().plusMonth(ORDER_1));
+                    異動年月日 = get月初(適用終了年月日.plusMonth(ORDER_1));
                 } else {
-                    異動年月日 = get月初(総合事業対象者.getTekiyoShuryoYMD()).plusDay(ORDER_1);
+                    異動年月日 = get月初(適用終了年月日).plusDay(ORDER_1);
                 }
                 return 異動年月日;
             }
@@ -958,7 +966,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                     異動年月日 = get翌日異動日(異動年月日);
                 }
             }
-            set異動一時2By利用者負担パターン2(insertEntity, 利用者負担, 異動年月日);
+            set異動一時2By利用者負担パターン2(insertEntity, 異動年月日);
             異動一時Map.put(異動年月日, insertEntity);
         }
     }
@@ -987,7 +995,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private void set異動一時2By利用者負担パターン2(IdoTblTmpEntity insertEntity,
-            DbT4014RiyoshaFutangakuGengakuEntity 利用者負担, FlexibleDate 異動年月日) {
+            FlexibleDate 異動年月日) {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
         insertEntity.set減免申請中区分コード(STR_2);
@@ -1731,7 +1739,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         });
     }
 
-    private void 再編集(List<IdoTblTmpEntity> allData, PSMInfoEntity 宛名情報, FlexibleYearMonth 処理年月) {
+    private void 再編集(List<IdoTblTmpEntity> allData, PSMInfoEntity 宛名情報, FlexibleYearMonth 処理年月,
+            DbT7124KokiKoreishaInfoEntity 後期高齢者, DbT7123KokuhoShikakuInfoEntity 国保資格) {
         IdoTblTmpEntity 最古の異動日の異動 = allData.get(ORDER_0);
         if (STR_3.equals(最古の異動日の異動.get異動区分コード())
                 && is年月同じ(最古の異動日の異動.get認定有効期間開始年月日(), 最古の異動日の異動.get資格喪失年月日())) {
@@ -1774,20 +1783,26 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (RString.isNullOrEmpty(entity.get要介護状態区分コード())) {
                 entity.set要介護状態区分コード(STR_01);
             }
-            if (!RString.isNullOrEmpty(entity.get償還払化開始年月日())
-                    && !RString.isNullOrEmpty(entity.get償還払化終了年月日())
-                    && (isBeforeDate(new FlexibleDate(entity.get償還払化開始年月日()), entity.get異動年月日())
-                    || isBeforeDate(new FlexibleDate(entity.get償還払化開始年月日()), entity.get資格取得年月日()))) {
-                entity.set償還払化開始年月日(星);
-                entity.set償還払化終了年月日(星);
-            }
             if (!entity.is公費負担上限額減額有フラグ()) {
                 entity.set公費負担上限額減額有フラグ(true);
             }
             JukyushaIdoRenrakuhyoOutCommonProcess.再編集一部(entity);
             entity.set小多機能居宅介護利用開始月利用有フラグ(true);
-//            entity.set後期高齢者医療保険者番号(entity.get);
-//            entity.set後期高齢者医療被保険者番号(entity.get被保険者番号().getColumnValue());
+            RString 後期高齢者資格喪失日 = 後期高齢者.getShikakuSoshitsuYMD();
+            FlexibleYearMonth 異動年月 = entity.get異動年月日().getYearMonth();
+            if (RString.isNullOrEmpty(後期高齢者資格喪失日)
+                    || !new FlexibleDate(後期高齢者資格喪失日).getYearMonth().isBefore(異動年月)) {
+                entity.set後期高齢者医療保険者番号(後期高齢者.getKokiHokenshaNoCity());
+                entity.set後期高齢者医療被保険者番号(後期高齢者.getKokikoreiHihokenshaNo());
+            }
+            RString 国保資格資格喪失日 = 国保資格.getShikakuSoshitsuYMD();
+            if (RString.isNullOrEmpty(国保資格資格喪失日)
+                    || !new FlexibleDate(国保資格資格喪失日).getYearMonth().isBefore(異動年月)) {
+                entity.set国民健康保険保険者番号(国保資格.getKokuhoHokenshaNo());
+                entity.set国民健康保険被保険者証番号(国保資格.getKokuhoHokenshoNo());
+                entity.set国民健康保険個人番号(国保資格.getKokuhoKojinNo());
+            }
+
             entity.set国民健康保険被保険者証番号(entity.get被保険者番号().getColumnValue());
             entity.set送付年月(処理年月);
         }

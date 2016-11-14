@@ -25,6 +25,8 @@ public class KogakuOshiraseTsuchiTeshutsuKigenNashiEditor implements IKogakuOshi
     private final KogakuOshiraseTsuchiTeshutsuKigenNashiEntity target;
     private static final RString 調整予定金額 = new RString("調整（予定）金額");
     private static final RString 支給予定金額 = new RString("支給（予定）金額");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
@@ -49,7 +51,7 @@ public class KogakuOshiraseTsuchiTeshutsuKigenNashiEditor implements IKogakuOshi
                 source.birthYMD = ReportKomokuEditorUtil.パターン12(target.get申請情報帳票発行一時().getSeinengappiYMDChohyo());
                 source.hokenshaNo = ReportKomokuEditorUtil.get証記載保険者番号(target.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo());
                 source.hihokenshaNo = ReportKomokuEditorUtil.get被保険者番号(target.get申請情報帳票発行一時().getHihokenshaNoChohyo());
-                source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.hihokenshaNo);
+                source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
                 source.taishoYM = ReportKomokuEditorUtil.パターン62(target.get申請情報帳票発行一時().getServiceTeikyoYMChohyo());
                 source.識別コード = target.get申請情報帳票発行一時().getShikibetsuCodeChohyo();
                 金額設定(source);

@@ -53,19 +53,19 @@ public class UpdKoukiTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     private RString 後期高齢者全項目(DbT7124KokiKoreishaInfoEntity 後期高齢者) {
         RString 全項目 = RString.EMPTY;
+        全項目 = cancatRString(後期高齢者.getShikakuSoshitsuYMD(), 全項目);
+        全項目 = cancatRString(後期高齢者.getKokikoreiHihokenshaNo(), 全項目);
+        全項目 = cancatRString(後期高齢者.getKokiHokenshaNoCity(), 全項目);
         全項目 = 全項目
                 .concat(後期高齢者.getInsertDantaiCd()).concat(SPLIT)
                 .concat(後期高齢者.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT)
                 .concat(後期高齢者.getTorokuKubun()).concat(SPLIT)
                 .concat(後期高齢者.getShikibetsuCd().getColumnValue()).concat(SPLIT)
                 .concat(後期高齢者.getRirekiNo()).concat(SPLIT);
-        全項目 = cancatRString(後期高齢者.getKokiHokenshaNoCity(), 全項目);
         全項目 = cancatRString(後期高齢者.getKokiHokenshaNoKoiki(), 全項目);
-        全項目 = cancatRString(後期高齢者.getKokikoreiHihokenshaNo(), 全項目);
         全項目 = cancatRString(後期高齢者.getShikakuShutokuJiyuCode(), 全項目);
         全項目 = cancatRString(後期高齢者.getShikakuShutokuYMD(), 全項目);
         全項目 = cancatRString(後期高齢者.getShikakuSoshitsuJiyuCode(), 全項目);
-        全項目 = cancatRString(後期高齢者.getShikakuSoshitsuYMD(), 全項目);
         全項目 = cancatRString(後期高齢者.getHokenshaKaishiYMD(), 全項目);
         全項目 = cancatRString(後期高齢者.getHokenshaShuryoYMD(), 全項目);
         全項目 = cancatRString(後期高齢者.getKojinKubunCode(), 全項目);

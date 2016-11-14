@@ -88,6 +88,8 @@ public class GassanJikofutangakuKeisanKekkaIchiranSource implements IReportSourc
     public RString gyoseikuCode;
     @ReportItem(name = "hokenshaNo")
     public RString hokenshaNo;
+    @ReportItem(name = "shichosonCode")
+    public RString shichosonCode;
 // </editor-fold>
 
     /**

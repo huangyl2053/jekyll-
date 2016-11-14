@@ -457,10 +457,10 @@ public class RenrakuhyoDataCreatorHandler {
         if (負担限度額認定_ユニット型準個室 == get金額(toDecimal(特定入所者負担限度.get旧措軽減従個特養３(基準日)))) {
             div.getIcoDaisanTokuyoGaitosha().setVisible(true);
         }
-        if (負担限度額認定_従来型個室_特養 == get金額(toDecimal(特定入所者負担限度.get多床室_基準費用額(基準日)))) {
+        if (負担限度額認定_多床室 == get金額(toDecimal(特定入所者負担限度.get多床室_基準費用額(基準日)))) {
             div.getIcoKijunHiyogakuTashoshitsuGaitosha().setVisible(true);
         }
-        if (負担限度額認定_多床室 == get金額(toDecimal(特定入所者負担限度.get従個特養_基準費用額(基準日)))) {
+        if (負担限度額認定_従来型個室_特養 == get金額(toDecimal(特定入所者負担限度.get従個特養_基準費用額(基準日)))) {
             div.getIcoKijunHiyogakuTokuyoGaitosha().setVisible(true);
         }
     }

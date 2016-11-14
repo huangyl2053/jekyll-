@@ -932,6 +932,8 @@ dbc/db/dbc/KogakuKaigoServiceMain/onClick_btnTokuteiShinryo
 dbc/db/dbc/KogakuKaigoServiceMain/onLoad
 dbc/db/dbc/KogakuKyufuTaishoList/onBeforeOpenDialog_btnJgyosha
 dbc/db/dbc/KogakuKyufuTaishoList/onBeforeOpenDialog_btnServiceSyurui
+dbc/db/dbc/KogakuKyufuTaishoList/onBlur_txtJgyoshaCode
+dbc/db/dbc/KogakuKyufuTaishoList/onBlur_txtServiceSyurui
 dbc/db/dbc/KogakuKyufuTaishoList/onChange_rdbGekihenkanwaKubun
 dbc/db/dbc/KogakuKyufuTaishoList/onChange_rdbMisaiGkeiKbun
 dbc/db/dbc/KogakuKyufuTaishoList/onChange_rdbRiyoshafutanDai2dankai
@@ -943,6 +945,8 @@ dbc/db/dbc/KogakuKyufuTaishoList/onClick_delete
 dbc/db/dbc/KogakuKyufuTaishoList/onClick_modify
 dbc/db/dbc/KogakuKyufuTaishoList/onOkClose_btnJgyosha
 dbc/db/dbc/KogakuKyufuTaishoList/onOkClose_btnServiceSyurui
+dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnComplete
+dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnContinue
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnFree
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnKogakuMeisaiHyoji
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_btnReSearch
@@ -957,6 +961,7 @@ dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_delete
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onClick_modify
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onLoad
 dbc/db/dbc/KogakuSabisuhiShikyuShinseiPanel/onStateTransition
+dbc/db/dbc/KogakuServicehiDetail/onChange_rdbShikyuKubun
 dbc/db/dbc/KogakuServicehiInfoPanel/onLoad
 dbc/db/dbc/KogakuServicehiShokaiMain/onClick_Hikaku
 dbc/db/dbc/KogakuServicehiShokaiMain/onLoad
@@ -973,6 +978,7 @@ dbc/db/dbc/KogakuShikyuKetteiTsuchiSakusei/onLoad
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/btnOnClick_radHakushiInsatsu
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/btnOnClick_radHihokenshaNo
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/btnOnClick_shinsaYM
+dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/isError
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/onBeforeOpenDialog
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/onCancelClose
 dbc/db/dbc/KogakuShikyuShinseishoIkkatsuHakko/onLoad
@@ -1417,6 +1423,7 @@ dbc/db/dbc/PanelnlTotal/onClick_btnJikou
 dbc/db/dbc/PanelnlTotal/onClick_ketteibi
 dbc/db/dbc/PanelnlTotal/onClick_uketsukebi
 dbc/db/dbc/PanelnlTotal/onLoad
+dbc/db/dbc/PaymentDate/onClick_RadIkkatsuKoshinKubun
 dbc/db/dbc/PnlKeteiJohoMsg/onClick_btnFree
 dbc/db/dbc/PnlKeteiJohoMsg/onClick_btnReturn
 dbc/db/dbc/PnlKeteiJohoMsg/onClick_btnUpdate
@@ -1461,10 +1468,12 @@ dbc/db/dbc/PnlTotalSearch/onClick_btnSearchAgain
 dbc/db/dbc/PnlTotalSearch/onClick_btnSelect
 dbc/db/dbc/PnlTotalSearch/onLoad
 dbc/db/dbc/PostMainPanel/onBeforeOpenCheck
+dbc/db/dbc/PostMainPanel/onClick_btnCancel
 dbc/db/dbc/PostMainPanel/onClick_btnKoku
 dbc/db/dbc/PostMainPanel/onClick_btnLast
+dbc/db/dbc/PostMainPanel/onClick_btnTorikomi
+dbc/db/dbc/PostMainPanel/onClick_btnUpload
 dbc/db/dbc/PostMainPanel/onLoad
-dbc/db/dbc/PostMainPanel/onOkClose_bth
 dbc/db/dbc/PtnTotal/onClick_btnBack
 dbc/db/dbc/PtnTotal/onClick_btnClear
 dbc/db/dbc/PtnTotal/onClick_btnSearch

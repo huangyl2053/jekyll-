@@ -785,8 +785,8 @@ public class JikofutangakuShomeishoTorokuHandler {
                 .set被保険者期間開始年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getFromValue().toDateString()))
                 .set被保険者期間終了年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getToValue().toDateString()))
                 .set発行年月日(div.getTxtHakkoDate().getValue())
-                .set合計合計_自己負担額(div.getTxtJikofutangakuGokei().getValue())
-                .set合計_70_74自己負担額_内訳(div.getTxtUchiFutangakuGokei().getValue())
+                .set合計合計_自己負担額(nullToZero(div.getTxtJikofutangakuGokei().getValue()))
+                .set合計_70_74自己負担額_内訳(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))
                 .set合計_70未満高額支給額(Decimal.ZERO)
                 .set合計_70_74高額支給額(Decimal.ZERO)
                 .set支給額計算結果連絡先郵便番号(div.getTxtYubinNo().getValue())
@@ -829,8 +829,8 @@ public class JikofutangakuShomeishoTorokuHandler {
                 .set被保険者期間開始年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getFromValue().toDateString()))
                 .set被保険者期間終了年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getToValue().toDateString()))
                 .set発行年月日(div.getTxtHakkoDate().getValue())
-                .set合計合計_自己負担額(div.getTxtJikofutangakuGokei().getValue())
-                .set合計_70_74自己負担額_内訳(div.getTxtUchiFutangakuGokei().getValue())
+                .set合計合計_自己負担額(nullToZero(div.getTxtJikofutangakuGokei().getValue()))
+                .set合計_70_74自己負担額_内訳(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))
                 .set合計_70未満高額支給額(更新前データ.get合計_70未満高額支給額())
                 .set合計_70_74高額支給額(更新前データ.get合計_70_74高額支給額())
                 .set支給額計算結果連絡先郵便番号(div.getTxtYubinNo().getValue())
@@ -858,8 +858,8 @@ public class JikofutangakuShomeishoTorokuHandler {
                 .set被保険者期間開始年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getFromValue().toDateString()))
                 .set被保険者期間終了年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getToValue().toDateString()))
                 .set発行年月日(div.getTxtHakkoDate().getValue())
-                .set合計合計_自己負担額(div.getTxtJikofutangakuGokei().getValue())
-                .set合計_70_74自己負担額_内訳(div.getTxtUchiFutangakuGokei().getValue())
+                .set合計合計_自己負担額(nullToZero(div.getTxtJikofutangakuGokei().getValue()))
+                .set合計_70_74自己負担額_内訳(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))
                 .set支給額計算結果連絡先郵便番号(div.getTxtYubinNo().getValue())
                 .set支給額計算結果連絡先住所(div.getTxtRenrakusakiJusho().getValue())
                 .set支給額計算結果連絡先名称1(div.getTxtRenrakusakiMei1().getValue())
@@ -1204,7 +1204,13 @@ public class JikofutangakuShomeishoTorokuHandler {
      *
      */
     public void set登録情報() {
-        div.getTxtTorokuTaishoNendo().setValue(div.getDdlShinkiTaishoNendo().getSelectedValue());
+        RStringBuilder 対象年度SB = new RStringBuilder(div.getDdlShinkiTaishoNendo().getSelectedValue());
+        対象年度SB.append(new RString("年8月1日"));
+        RString 対象年度 = new RDate(対象年度SB.toString())
+                .wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN)
+                .fillType(FillType.BLANK).toDateString();
+        div.getTxtTorokuTaishoNendo().setValue(対象年度.substring(0, 桁数_4));
         div.getTxtTorokuShokisaiHokenshaNo().setValue(div.getTxtShinkiTuikaShokisaiHokenshaNo().getValue());
         div.getTxtTorokuShikyuShinseishoSeiriNo().setValue(div.getTxtShinkiShikyuShinseishoSeiriNo().getValue());
         div.getTxtTorokuRirekiNo().clearValue();
@@ -1239,7 +1245,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         div.getTxtJikofutangaku1().clearValue();
         div.getTxtUchiFutangaku1().clearValue();
         div.getTxtJikofutangaku2().clearValue();
-        div.getTxtJikofutangaku2().clearValue();
+        div.getTxtUchiFutangaku2().clearValue();
         div.getTxtJikofutangaku3().clearValue();
         div.getTxtUchiFutangaku3().clearValue();
         div.getTxtJikofutangaku4().clearValue();

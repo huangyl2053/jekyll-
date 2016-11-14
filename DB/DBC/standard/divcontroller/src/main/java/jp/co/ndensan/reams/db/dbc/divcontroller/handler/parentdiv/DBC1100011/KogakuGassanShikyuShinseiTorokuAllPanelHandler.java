@@ -78,18 +78,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString DBCMN61011 = new RString("DBCMN61011");
     private static final RString DBCMN61012 = new RString("DBCMN61012");
 
-    private static final RString タイトル1 = new RString("高額合算　支給申請書登録・新規");
-    private static final RString タイトル2 = new RString("高額合算　支給申請書登録・変更");
-    private static final RString タイトル3 = new RString("高額合算　支給申請書登録・取下げ");
-    private static final RString タイトル4 = new RString("高額合算　支給申請書・訂正");
-    private static final RString タイトル5 = new RString("高額合算　支給申請書（写）・新規");
-    private static final RString タイトル6 = new RString("高額合算　支給申請書（写）・変更");
-    private static final RString タイトル7 = new RString("高額合算　支給申請書（写）・取下げ");
-    private static final RString タイトル8 = new RString("高額合算　支給申請書（写）・訂正");
-    private static final RString タイトル9 = new RString("高額合算　自己負担額証明書交付申請書登録・新規");
-    private static final RString タイトル10 = new RString("高額合算　自己負担額証明書交付申請書登録・変更");
-    private static final RString タイトル11 = new RString("高額合算　自己負担額証明書交付申請書登録・取下げ");
-    private static final RString タイトル12 = new RString("高額合算　自己負担額証明書交付申請書登録・訂正");
+    private static final RString タイトル1 = new RString("高額合算支給申請書登録・新規申請");
+    private static final RString タイトル2 = new RString("高額合算支給申請書登録・変更申請");
+    private static final RString タイトル3 = new RString("高額合算支給申請書登録・取下げ申請");
+    private static final RString タイトル4 = new RString("高額合算支給申請書訂正");
+    private static final RString タイトル5 = new RString("高額合算支給申請書（写）・新規申請");
+    private static final RString タイトル6 = new RString("高額合算支給申請書（写）・変更申請");
+    private static final RString タイトル7 = new RString("高額合算支給申請書（写）・取下げ申請");
+    private static final RString タイトル8 = new RString("高額合算支給申請書（写）訂正");
+    private static final RString タイトル9 = new RString("高額合算自己負担額証明書交付申請書登録・新規申請");
+    private static final RString タイトル10 = new RString("高額合算自己負担額証明書交付申請書登録・変更申請");
+    private static final RString タイトル11 = new RString("高額合算自己負担額証明書交付申請書登録・取下げ申請");
+    private static final RString タイトル12 = new RString("高額合算自己負担額証明書交付申請書登録・訂正");
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;

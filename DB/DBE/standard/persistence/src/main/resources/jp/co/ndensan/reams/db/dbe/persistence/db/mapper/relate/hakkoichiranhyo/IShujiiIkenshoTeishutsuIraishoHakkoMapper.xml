@@ -40,6 +40,7 @@
         <result property="主治医意見書別途診療費" column="ikenshoBettoShinryohi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医意見書報酬支払年月日" column="hoshuShiharaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="最大依頼履歴番号" column="ikenshoIraiRirekiNo"/> 
+        <result property="直近区分" column="直近区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <select resultOrdered="true" id="get主治医意見書提出依頼書発行" resultMap="resultMap_ShujiiIkenshoTeishutsuIraishoHakko"

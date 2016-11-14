@@ -186,7 +186,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
         }
 
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
-        RString 対象年度 = txtTorokuTaishoNendo.substring(0, 桁数_4 - 1);
+        RString 対象年度 = txtTorokuTaishoNendo.substring(0, 桁数_4);
         RStringBuilder 対象年度_FROM = new RStringBuilder();
         RStringBuilder 対象年度_TO = new RStringBuilder();
         対象年度_FROM.append(対象年度);

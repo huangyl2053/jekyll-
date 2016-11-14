@@ -3,9 +3,9 @@
 <!-- @reamsid_L DBC-3430-010 liuwei2 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc2210011.ITokubetsuKyufuJigyoshaSearchMapper">
     <resultMap id="Result_TokubetsuKyufuJigyoshaSearchEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc2210011.TokubetsuKyufuJigyoshaSearchEntity" autoMapping="true">
-        <id property="事業者.jigyoshaNo" column="dbT3065ShichosonTokubetsuKyufuJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <id property="事業者.serviceCode" column="dbT3065ShichosonTokubetsuKyufuJigyosha_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
-        <id property="事業者.rirekiNo" column="dbT3065ShichosonTokubetsuKyufuJigyosha_rirekiNo"/>
+        <id property="事業者.jigyoshaNo" column="dbT3065_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="事業者.serviceCode" column="dbT3065_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
+        <id property="事業者.rirekiNo" column="dbT3065_rirekiNo"/>
         <id property="サービス.serviceYukoKikanKaishiYMD" column="serviceYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="サービス.serviceCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="サービス.rirekiNo" column="rirekiNo"/>
@@ -37,7 +37,7 @@
         サービス.*
         FROM
         (SELECT
-        *
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3065ShichosonTokubetsuKyufuJigyoshaMapper.allColumns_DbT3065ShichosonTokubetsuKyufuJigyosha" />
         FROM rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"
         WHERE
         <if test="事業者番号Length == 5">
@@ -56,16 +56,17 @@
         AND rgdb."DbT3065ShichosonTokubetsuKyufuJigyosha"."logicalDeletedFlag" IS FALSE
         ) AS 事業者
         LEFT JOIN
-        (SELECT mst.*
-        FROM rgdb."DbT3066ShichosonTokubetuKyufuService" AS mst
+        (SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3066ShichosonTokubetuKyufuServiceMapper.allColumns_DbT3066ShichosonTokubetuKyufuService"/>
+        FROM rgdb."DbT3066ShichosonTokubetuKyufuService"
         WHERE NOT EXISTS (SELECT 'X' FROM rgdb."DbT3066ShichosonTokubetuKyufuService" AS slv
-        WHERE mst."serviceCode" = slv."serviceCode"
-        AND mst."serviceYukoKikanKaishiYMD" <![CDATA[<]]> slv."serviceYukoKikanKaishiYMD")
-        AND mst."logicalDeletedFlag" is FALSE
+        WHERE rgdb."DbT3066ShichosonTokubetuKyufuService"."serviceCode" = slv."serviceCode"
+        AND rgdb."DbT3066ShichosonTokubetuKyufuService"."serviceYukoKikanKaishiYMD" <![CDATA[<]]> slv."serviceYukoKikanKaishiYMD")
+        AND rgdb."DbT3066ShichosonTokubetuKyufuService"."logicalDeletedFlag" is FALSE
         ) AS サービス
-        ON 事業者."serviceCode" = サービス."serviceCode"
-        ORDER BY 事業者."jigyoshaNo" ASC,
-        事業者."serviceCode" ASC
+        ON 事業者."dbT3065_serviceCode" = サービス."dbT3066ShichosonTokubetuKyufuService_serviceCode"
+        ORDER BY 事業者."dbT3065_jigyoshaNo" ASC,
+        事業者."dbT3065_serviceCode" ASC
     </select>
     <select resultOrdered="true" resultType="int" id="selectCount" fetchSize="500">
         SELECT
