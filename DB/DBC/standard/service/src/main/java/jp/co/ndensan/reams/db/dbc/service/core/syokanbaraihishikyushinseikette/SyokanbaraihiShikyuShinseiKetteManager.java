@@ -209,6 +209,30 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     }
 
     /**
+     * 償還払データ登録更新。
+     *
+     * @param DB情報 DB情報
+     * @param 修正前支給区分 修正前支給区分
+     * @param 決定日 決定日
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 画面モード 画面モード
+     * @param 識別コード 識別コード
+     */
+    public void insupdShokan(
+            RString DB情報,
+            RString 修正前支給区分,
+            FlexibleDate 決定日,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            RString 画面モード,
+            ShikibetsuCode 識別コード) {
+
+    }
+
+    /**
      * 証明書件数取得する。
      *
      * @param 被保険者番号 被保険者番号
