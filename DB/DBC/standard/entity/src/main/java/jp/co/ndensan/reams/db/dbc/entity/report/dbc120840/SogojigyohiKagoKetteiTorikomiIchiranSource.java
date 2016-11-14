@@ -55,6 +55,7 @@ public class SogojigyohiKagoKetteiTorikomiIchiranSource implements IReportSource
     @ReportItem(name = "listUpper_3", length = 10, order = 19)
     public RString listUpper_3;
     @ReportPerson(id = "X")
+    @ReportItem(name = "shikibetsuCode", length = 15)
     public ShikibetsuCode shikibetuCode;
     @ReportItem(name = "listUpper_4", length = 10, order = 20)
     public RString listUpper_4;
