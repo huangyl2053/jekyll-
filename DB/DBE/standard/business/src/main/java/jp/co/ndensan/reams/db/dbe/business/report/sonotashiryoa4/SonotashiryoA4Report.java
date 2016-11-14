@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.sonotashiryoa4;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa4.SonotashiryoA4ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -32,8 +34,9 @@ public class SonotashiryoA4Report extends Report<SonotashiryoA4ReportSource> {
     public void writeBy(ReportSourceWriter<SonotashiryoA4ReportSource> reportSourceWriter) {
 
         if (data != null) {
-            if (data.getその他資料() != null && 0 < data.getその他資料().size()) {
-                for (int i = 0; i < data.getその他資料().size(); i++) {
+            List<RString> ファイルPathList = data.getその他資料();
+            if (ファイルPathList != null && 0 < ファイルPathList.size()) {
+                for (int i = 0; i < ファイルPathList.size(); i++) {
                     ISonotashiryoA4Editor editor = new SonotashiryoA4Editor(data, i);
                     ISonotashiryoA4Builder builder = new SonotashiryoA4Builder(editor);
                     reportSourceWriter.writeLine(builder);
