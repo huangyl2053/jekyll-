@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,11 +26,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -139,6 +141,10 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString 文言_保険者開始日保険者終了日 = new RString("項目設定エラー：保険者開始日＞保険者終了日");
     private static final RString エラー区分_1 = new RString("1");
     private static final RString エラー区分_0 = new RString("0");
+    private static final RString DB = new RString("DB");
+    private static final RString コロン = new RString(":");
+    private static final RString 中黒 = new RString(".");
+    private static final RString ハイフン = new RString("-");
     private static final RString エラーコード_51 = new RString("51");
     private static final RString 履歴番号_0001 = new RString("0001");
     private static final RString 日付_99999999 = new RString("99999999");
@@ -172,14 +178,27 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             ファイル名称 = processParameter.get表題().concat(アンダーバー).
                     concat(処理枝番_広域時).concat(processParameter.get市町村識別ID()).concat(ファイル名称の拡張子);
         }
-        new RString(SharedFile.getBasePath().concat(File.separator)).concat(ファイル名称);
-        RString tmpPath = Path.getTmpDirectoryPath();
-        FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
-        filePath = new RString(filesystemPath.getCanonicalPath()).concat(ファイル名称);
+        List<UzT0885SharedFileEntryEntity> list = SharedFile.searchSharedFile(ファイル名称);
+        Collections.sort(list, new Comparator<UzT0885SharedFileEntryEntity>() {
+            @Override
+            public int compare(UzT0885SharedFileEntryEntity o1, UzT0885SharedFileEntryEntity o2) {
+                RDateTime 一覧表示順1 = o1.getSharedFileId();
+                RDateTime 一覧表示順2 = o2.getSharedFileId();
+                int flag = 0;
+                if (一覧表示順1 != null && 一覧表示順2 != null) {
+                    flag = 一覧表示順2.compareTo(一覧表示順1);
+                }
+                return flag;
+            }
+        });
+        filePath = new RString(SharedFile.getBasePath()).concat(DB).concat(File.separator).concat(ファイル名称).concat(File.separator)
+                .concat(new RString(list.get(0).getSharedFileId().toString()).replace(コロン.toString(), 中黒.toString())
+                        .replace(ハイフン.toString(), 中黒.toString())).concat(File.separator).concat(ファイル名称);
         市町村コードリスト = getMapper(IKokikoreishaShikakuIdoInMapper.class).get構成市町村マスタ();
     }
 
     @Override
+
     protected IBatchReader createReader() {
         return new BatchSimpleReader(filePath, Encode.SJIS);
     }
