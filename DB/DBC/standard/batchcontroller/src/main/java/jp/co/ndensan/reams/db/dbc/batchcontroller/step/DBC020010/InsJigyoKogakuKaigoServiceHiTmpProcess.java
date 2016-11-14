@@ -52,6 +52,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
     private static final RString 区分コード_2 = new RString("2");
     private static final RString 区分コード_3 = new RString("3");
     private static final RString 区分コード_4 = new RString("4");
+    private static final RString 差額区分コード = new RString("※");
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 申請全件一時Writer;
@@ -68,6 +69,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
     private KyufuJissekiKihonKogakuProcessParameter parameter;
     private RString keyBreak;
     private RString 国保連共同処理受託区分_高額;
+    private RString beforeマッチキー;
     private List<TyukannJigyoKogakuRelateEntity> 結果全件List;
 
     @Override
@@ -108,53 +110,25 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         RString サービス種類コード = getColumnValue(entity.get給付実績中間事業高額Entity().getServiceSyuruiCode());
         RString nowKeyBreak = 被保険者番号.concat(DELIMITER).concat(サービス提供年月).concat(DELIMITER)
                 .concat(データ区分).concat(DELIMITER).concat(サービス種類コード);
-        if (keyBreak == null || nowKeyBreak.equals(keyBreak)) {
-            結果全件List.add(entity);
+        RString マッチキー = 被保険者番号.concat(DELIMITER).concat(サービス提供年月);
+        if (keyBreak == null) {
             keyBreak = nowKeyBreak;
+        }
+        if (beforeマッチキー == null) {
+            beforeマッチキー = マッチキー;
+        }
+        if (nowKeyBreak.equals(keyBreak)) {
             return;
         }
-        boolean マッチFlag = false;
-        boolean 受取年月Flag = false;
-        boolean 作成区分Flag_1 = false;
-        boolean 作成区分Flag_0 = false;
-        boolean 決定年月日Flag = false;
-        boolean flag = false;
-        Decimal 高額支給額合計 = Decimal.ZERO;
-        for (TyukannJigyoKogakuRelateEntity 結果Entity : 結果全件List) {
-            マッチFlag = getマッチFlag(マッチFlag, 結果Entity);
-            受取年月Flag = get受取年月Flag(受取年月Flag, 結果Entity);
-            作成区分Flag_1 = get作成区分Flag_1(作成区分Flag_1, 結果Entity);
-            作成区分Flag_0 = get作成区分Flag_0(作成区分Flag_0, 結果Entity);
-            決定年月日Flag = get決定年月日Flag(決定年月日Flag, 結果Entity);
-            flag = getFlag(flag, 結果Entity);
-            高額支給額合計 = get高額支給額合計(結果Entity, 高額支給額合計, flag);
+        if (beforeマッチキー.equals(マッチキー)) {
+            結果全件List.add(entity);
+            return;
         }
-        TyukannJigyoKogakuRelateEntity 結果Entity = 結果全件List.get(0);
-        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額Entity = 結果全件List.get(0).get給付実績中間事業高額Entity();
-        if (!マッチFlag) {
-            insert高額全件一時(給付実績中間事業高額Entity);
-        } else if (受取年月Flag) {
-            if (区分コード_3.equals(給付実績中間事業高額Entity.getKyufuSakuseiKubunCode())) {
-                給付実績中間事業高額Entity.setSikyugaku(Decimal.ZERO);
-                給付実績中間事業高額Entity.setKoogakuKetteiKubun(区分コード_2);
-
-            } else {
-                給付実績中間事業高額Entity.setSikyugaku(給付実績中間事業高額Entity.getSikyugaku());
-                給付実績中間事業高額Entity.setKoogakuKetteiKubun(区分コード_2);
-            }
-            中間高額一時Writer.insert(給付実績中間事業高額Entity);
-        } else {
-            if (区分コード_3.equals(給付実績中間事業高額Entity.getKyufuSakuseiKubunCode())) {
-                給付実績中間事業高額Entity.setKoogakuKetteiKubun(区分コード_4);
-                給付実績中間事業高額Entity.setSikyugaku(Decimal.ZERO);
-                中間高額一時Writer.insert(給付実績中間事業高額Entity);
-            } else {
-                update高額全件一時_作成区分コードが3以外(高額支給額合計, 給付実績中間事業高額Entity, 結果Entity, 作成区分Flag_0);
-            }
-        }
-
+        do事業高額更新処理();
         結果全件List.clear();
         keyBreak = nowKeyBreak;
+        beforeマッチキー = マッチキー;
+        結果全件List.add(entity);
     }
 
     @Override
@@ -162,33 +136,43 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         if (結果全件List == null || 結果全件List.isEmpty()) {
             return;
         }
-        boolean マッチFlag = false;
-        boolean 受取年月Flag = false;
-        boolean 作成区分Flag_1 = false;
-        boolean 作成区分Flag_0 = false;
-        boolean 決定年月日Flag = false;
-        boolean flag = false;
+        do事業高額更新処理();
+    }
+
+    private void do事業高額更新処理() {
+        boolean isマッチ = false;
+        boolean is出力をしない = false;
+        boolean is対象者受取年月が設定1件以上 = false;
+        boolean is作成区分0存在 = false;
+        boolean is支給区分コード2存在 = false;
         Decimal 高額支給額合計 = Decimal.ZERO;
+        Decimal 差額区分_高額支給額合計 = Decimal.ZERO;
         for (TyukannJigyoKogakuRelateEntity 結果Entity : 結果全件List) {
-            マッチFlag = getマッチFlag(マッチFlag, 結果Entity);
-            受取年月Flag = get受取年月Flag(受取年月Flag, 結果Entity);
-            作成区分Flag_1 = get作成区分Flag_1(作成区分Flag_1, 結果Entity);
-            作成区分Flag_0 = get作成区分Flag_0(作成区分Flag_0, 結果Entity);
-            決定年月日Flag = get決定年月日Flag(決定年月日Flag, 結果Entity);
-            flag = getFlag(flag, 結果Entity);
-            高額支給額合計 = get高額支給額合計(結果Entity, 高額支給額合計, flag);
+            isマッチ = getマッチFlag(isマッチ, 結果Entity);
+            is出力をしない = get給付実績中間事業高額一時出力Flag(is出力をしない, 結果Entity);
+            is対象者受取年月が設定1件以上 = get受取年月Flag(is対象者受取年月が設定1件以上, 結果Entity);
+            is作成区分0存在 = get作成区分Flag_0(is作成区分0存在, 結果Entity);
+            is支給区分コード2存在 = get支給区分コード2存在(is支給区分コード2存在, 結果Entity);
+            高額支給額合計 = get高額支給額合計(結果Entity, 高額支給額合計);
+            差額区分_高額支給額合計 = get差額区分_高額支給額合計(結果Entity, 高額支給額合計);
         }
         TyukannJigyoKogakuRelateEntity 結果Entity = 結果全件List.get(0);
-        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額Entity = 結果全件List.get(0).get給付実績中間事業高額Entity();
-        if (!マッチFlag) {
-            insert高額全件一時(給付実績中間事業高額Entity);
-        } else if (受取年月Flag) {
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額Entity = 結果Entity.get給付実績中間事業高額Entity();
+        if (!Decimal.ZERO.equals(差額区分_高額支給額合計)
+                || is支給区分コード2存在) {
+            給付実績中間事業高額Entity.setSagakuKubun(差額区分コード);
+        } else {
+            給付実績中間事業高額Entity.setSagakuKubun(RString.EMPTY);
+        }
+        if (!isマッチ) {
+            if (!is出力をしない) {
+                insert高額全件一時(給付実績中間事業高額Entity);
+            }
+        } else if (is対象者受取年月が設定1件以上) {
             if (区分コード_3.equals(給付実績中間事業高額Entity.getKyufuSakuseiKubunCode())) {
                 給付実績中間事業高額Entity.setSikyugaku(Decimal.ZERO);
                 給付実績中間事業高額Entity.setKoogakuKetteiKubun(区分コード_2);
-
             } else {
-                給付実績中間事業高額Entity.setSikyugaku(給付実績中間事業高額Entity.getSikyugaku());
                 給付実績中間事業高額Entity.setKoogakuKetteiKubun(区分コード_2);
             }
             中間高額一時Writer.insert(給付実績中間事業高額Entity);
@@ -198,7 +182,10 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
                 給付実績中間事業高額Entity.setSikyugaku(Decimal.ZERO);
                 中間高額一時Writer.insert(給付実績中間事業高額Entity);
             } else {
-                update高額全件一時_作成区分コードが3以外(高額支給額合計, 給付実績中間事業高額Entity, 結果Entity, 作成区分Flag_0);
+                update高額全件一時_作成区分コードが3以外(高額支給額合計,
+                        給付実績中間事業高額Entity,
+                        結果Entity,
+                        is作成区分0存在);
             }
         }
     }
@@ -353,9 +340,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         合計全件一時Entity.setServiceHiyoGokeiGakuGokei(給付実績中間事業高額Entity.getHokenRiyoshaFutangaku());
         合計全件一時Entity.setRiyoshaFutanGakuGokei(給付実績中間事業高額Entity.getHokenRiyoshaFutangaku());
         合計全件一時Entity.setSanteiKijunGaku(給付実績中間事業高額Entity.getSanteiKijungaku());
-        //TODO 支払済金額合計
         合計全件一時Entity.setShiharaiSumiKingakuGokei(高額支給額合計);
-        //TODO 高額支給額
         合計全件一時Entity.setKogakuShikyuGaku(高額支給額合計);
         合計全件一時Entity.setTaishoshaHanteiShinsaYM(parameter.get処理年月日().getYearMonth());
         合計全件一時Entity.setSetaiShuyakuNo(getColumnValue(給付実績中間事業高額Entity.getShotokuHantei_setaiinShikibetsuCode()));
@@ -376,9 +361,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         合計全件一時Entity.setServiceHiyoGokeiGakuGokei(給付実績中間事業高額Entity.getHokenRiyoshaFutangaku());
         合計全件一時Entity.setRiyoshaFutanGakuGokei(給付実績中間事業高額Entity.getHokenRiyoshaFutangaku());
         合計全件一時Entity.setSanteiKijunGaku(給付実績中間事業高額Entity.getSanteiKijungaku());
-        //TODO 支払済金額合計
         合計全件一時Entity.setShiharaiSumiKingakuGokei(高額支給額合計);
-        //TODO 事業高額支給額
         合計全件一時Entity.setJigyoKogakuShikyuGaku(高額支給額合計);
         合計全件一時Entity.setTashoshaUketoriYM(FlexibleYearMonth.EMPTY);
         合計全件一時Entity.setTaishoshaHanteiShinsaYM(parameter.get処理年月日().getYearMonth());
@@ -407,6 +390,22 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         return 明細全件更新一時Entity;
     }
 
+    private boolean get給付実績中間事業高額一時出力Flag(boolean is出力をしない, TyukannJigyoKogakuRelateEntity 結果Entity) {
+        if (区分コード_3.equals(結果Entity.get給付実績中間事業高額Entity().getKyufuSakuseiKubunCode())
+                || Decimal.ZERO.compareTo(結果Entity.get給付実績中間事業高額Entity().getSikyugaku()) == 0) {
+            is出力をしない = true;
+        }
+        return is出力をしない;
+    }
+
+    private boolean get支給区分コード2存在(boolean is支給区分コード2存在, TyukannJigyoKogakuRelateEntity 結果Entity) {
+        if (結果Entity.get事業審査決定全件Entity() != null
+                && 区分コード_2.equals(結果Entity.get事業審査決定全件Entity().getShikyuKubunCode())) {
+            is支給区分コード2存在 = true;
+        }
+        return is支給区分コード2存在;
+    }
+
     private RString getColumnValue(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
@@ -429,14 +428,6 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         return 受取年月Flag;
     }
 
-    private boolean get作成区分Flag_1(boolean 作成区分Flag_1, TyukannJigyoKogakuRelateEntity 結果Entity) {
-        if (結果Entity.get事業高額判定結果全件Entity() != null
-                && 区分コード_1.equals(結果Entity.get給付実績中間事業高額Entity().getDokujiSakuseiKubun())) {
-            作成区分Flag_1 = true;
-        }
-        return 作成区分Flag_1;
-    }
-
     private boolean get作成区分Flag_0(boolean 作成区分Flag_0, TyukannJigyoKogakuRelateEntity 結果Entity) {
         if (結果Entity.get事業高額判定結果全件Entity() != null
                 && 区分コード_0.equals(結果Entity.get給付実績中間事業高額Entity().getDokujiSakuseiKubun())) {
@@ -445,35 +436,32 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         return 作成区分Flag_0;
     }
 
-    private boolean get決定年月日Flag(boolean 決定年月日Flag, TyukannJigyoKogakuRelateEntity 結果Entity) {
-        if (結果Entity.get事業高額判定結果全件Entity() != null
-                && 区分コード_0.equals(結果Entity.get給付実績中間事業高額Entity().getDokujiSakuseiKubun())
-                && 結果Entity.get事業高額判定結果全件Entity().getKetteiYMD() != null) {
-            決定年月日Flag = true;
-        }
-        return 決定年月日Flag;
-    }
-
-    private boolean getFlag(boolean flag, TyukannJigyoKogakuRelateEntity 結果Entity) {
-        if (結果Entity.get事業高額判定結果全件Entity() != null
-                && 結果Entity.get事業高額判定結果全件Entity().getKetteiYMD() != null) {
-            flag = true;
-        }
-        return flag;
-    }
-
-    private Decimal get高額支給額合計(TyukannJigyoKogakuRelateEntity 結果Entity, Decimal 高額支給額合計, boolean flag) {
-        if (結果Entity.get事業高額合計全件Entity() == null) {
+    private Decimal get高額支給額合計(TyukannJigyoKogakuRelateEntity 結果Entity, Decimal 高額支給額合計) {
+        if (結果Entity.get事業高額合計全件Entity() == null || 結果Entity.get事業高額判定結果全件Entity() == null) {
             return 高額支給額合計;
         }
         Decimal kogakuShikyuGaku = 結果Entity.get事業高額合計全件Entity().getJigyoKogakuShikyuGaku() == null
                 ? Decimal.ZERO : 結果Entity.get事業高額合計全件Entity().getJigyoKogakuShikyuGaku();
-        if (!flag && Decimal.ZERO.compareTo(kogakuShikyuGaku) == 1) {
+        if ((結果Entity.get事業高額判定結果全件Entity().getKetteiYMD() == null
+                || 結果Entity.get事業高額判定結果全件Entity().getKetteiYMD().isEmpty())
+                && Decimal.ZERO.compareTo(kogakuShikyuGaku) == 1) {
             高額支給額合計 = 高額支給額合計.add(結果Entity.get事業高額判定結果全件Entity().getShiharaiKingaku());
         } else {
             高額支給額合計 = 高額支給額合計.add(結果Entity.get事業高額合計全件Entity().getJigyoKogakuShikyuGaku() == null
                     ? Decimal.ZERO : 結果Entity.get事業高額合計全件Entity().getJigyoKogakuShikyuGaku());
         }
+        return 高額支給額合計;
+    }
+
+    private Decimal get差額区分_高額支給額合計(TyukannJigyoKogakuRelateEntity 結果Entity, Decimal 高額支給額合計) {
+        if (結果Entity.get事業高額合計全件Entity() == null || 結果Entity.get事業高額判定結果全件Entity() == null) {
+            return 高額支給額合計;
+        }
+        Decimal kogakuShikyuGaku = 結果Entity.get事業高額合計全件Entity().getJigyoKogakuShikyuGaku() == null
+                ? Decimal.ZERO : 結果Entity.get事業高額合計全件Entity().getJigyoKogakuShikyuGaku();
+        高額支給額合計 = 高額支給額合計.add(kogakuShikyuGaku).
+                add(結果Entity.get事業高額合計全件Entity().getJigyoKogakuShikyuGaku() == null
+                        ? Decimal.ZERO : 結果Entity.get事業高額合計全件Entity().getJigyoKogakuShikyuGaku());
         return 高額支給額合計;
     }
 
