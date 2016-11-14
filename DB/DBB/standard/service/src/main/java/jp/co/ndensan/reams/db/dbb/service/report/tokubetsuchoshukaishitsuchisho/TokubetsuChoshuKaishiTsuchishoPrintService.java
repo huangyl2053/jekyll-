@@ -326,7 +326,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
                     KenmeiFuyoKubunType.付与なし).buildSource();
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoB52Source> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new TokubetsuChoshuKaishiTsuchishoB52Report(編集後本算定通知書共通情報, 宛名連番, sourceBuilder).
+            new TokubetsuChoshuKaishiTsuchishoB52Report(編集後本算定通知書共通情報, 宛名連番, 本算定通知書情報.get地方公共団体(), sourceBuilder).
                     writeBy(reportSourceWriter);
         }
     }

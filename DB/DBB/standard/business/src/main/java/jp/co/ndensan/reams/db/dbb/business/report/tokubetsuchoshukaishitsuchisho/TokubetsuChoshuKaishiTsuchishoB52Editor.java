@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.Characteristic
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52Source;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -30,6 +31,7 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
 
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 宛名連番;
+    private final Association 地方公共団体;
     private final NinshoshaSource sourceBuilder;
 
     private static final RString 特徴期別金額1期 = new RString("1");
@@ -45,14 +47,17 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
      *
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param 宛名連番 RString
+     * @param 地方公共団体 地方公共団体
      * @param sourceBuilder 雛形部品CompNinshosha
      */
     public TokubetsuChoshuKaishiTsuchishoB52Editor(
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RString 宛名連番,
+            Association 地方公共団体,
             NinshoshaSource sourceBuilder) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.宛名連番 = 宛名連番;
+        this.地方公共団体 = 地方公共団体;
         this.sourceBuilder = sourceBuilder;
     }
 
@@ -178,9 +183,10 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
         } else {
             source.fuchoNoufugaku = new RString("0");
         }
-        if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get名称() != null) {
-            source.hokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
-        }
+//        if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get名称() != null) {
+//            source.hokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
+//        }
+        source.hokenshaName = 地方公共団体.get市町村名();
     }
 
     private RString editDate(RString value) {
