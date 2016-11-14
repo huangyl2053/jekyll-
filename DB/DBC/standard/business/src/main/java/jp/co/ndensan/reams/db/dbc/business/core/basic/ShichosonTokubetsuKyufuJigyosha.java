@@ -8,13 +8,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -400,15 +398,6 @@ public class ShichosonTokubetsuKyufuJigyosha extends
     }
 
     /**
-     * 介護保険証記載保険者番号を返します。
-     *
-     * @return 介護保険証記載保険者番号
-     */
-    public HokenshaNo get介護保険証記載保険者番号() {
-        return entity.getShokisaiHokenshaNo();
-    }
-
-    /**
      * 受領委任区分を返します。
      *
      * @return 受領委任区分
@@ -442,24 +431,6 @@ public class ShichosonTokubetsuKyufuJigyosha extends
      */
     public boolean is生活保護法による指定の有() {
         return entity.getSeikatsuhogoShiteiFlag();
-    }
-
-    /**
-     * 市町村コードを返します。
-     *
-     * @return 市町村コード
-     */
-    public LasdecCode get市町村コード() {
-        return entity.getShichosonCode();
-    }
-
-    /**
-     * 地域区分を返します。
-     *
-     * @return 地域区分
-     */
-    public RString get地域区分() {
-        return entity.getChiikiKubun();
     }
 
     /**

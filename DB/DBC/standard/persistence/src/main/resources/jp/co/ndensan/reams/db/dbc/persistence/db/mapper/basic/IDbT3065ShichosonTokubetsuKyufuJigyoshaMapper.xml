@@ -60,13 +60,10 @@
         "DbT3065ShichosonTokubetsuKyufuJigyosha"."serviceJigyoshoJigyoKyushiYMD" as "dbT3065ShichosonTokubetsuKyufuJigyosha_serviceJigyoshoJigyoKyushiYMD",
         "DbT3065ShichosonTokubetsuKyufuJigyosha"."serviceJigyoshoJigyoHaishiYMD" as "dbT3065ShichosonTokubetsuKyufuJigyosha_serviceJigyoshoJigyoHaishiYMD",
         "DbT3065ShichosonTokubetsuKyufuJigyosha"."serviceJigyoshoJigyoSaikaiYMD" as "dbT3065ShichosonTokubetsuKyufuJigyosha_serviceJigyoshoJigyoSaikaiYMD",
-        "DbT3065ShichosonTokubetsuKyufuJigyosha"."shokisaiHokenshaNo" as "dbT3065ShichosonTokubetsuKyufuJigyosha_shokisaiHokenshaNo",
         "DbT3065ShichosonTokubetsuKyufuJigyosha"."juryoIninKubu" as "dbT3065ShichosonTokubetsuKyufuJigyosha_juryoIninKubu",
         "DbT3065ShichosonTokubetsuKyufuJigyosha"."torokuKaishiYMD" as "dbT3065ShichosonTokubetsuKyufuJigyosha_torokuKaishiYMD",
         "DbT3065ShichosonTokubetsuKyufuJigyosha"."torokuShuryoYMD" as "dbT3065ShichosonTokubetsuKyufuJigyosha_torokuShuryoYMD",
         "DbT3065ShichosonTokubetsuKyufuJigyosha"."seikatsuhogoShiteiFlag" as "dbT3065ShichosonTokubetsuKyufuJigyosha_seikatsuhogoShiteiFlag",
-        "DbT3065ShichosonTokubetsuKyufuJigyosha"."shichosonCode" as "dbT3065ShichosonTokubetsuKyufuJigyosha_shichosonCode",
-        "DbT3065ShichosonTokubetsuKyufuJigyosha"."chiikiKubun" as "dbT3065ShichosonTokubetsuKyufuJigyosha_chiikiKubun",
         "DbT3065ShichosonTokubetsuKyufuJigyosha"."logicalDeletedFlag" as "dbT3065ShichosonTokubetsuKyufuJigyosha_logicalDeletedFlag"
     </sql>
 
@@ -116,13 +113,10 @@
         <result property="serviceJigyoshoJigyoKyushiYMD" column="dbT3065ShichosonTokubetsuKyufuJigyosha_serviceJigyoshoJigyoKyushiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="serviceJigyoshoJigyoHaishiYMD" column="dbT3065ShichosonTokubetsuKyufuJigyosha_serviceJigyoshoJigyoHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="serviceJigyoshoJigyoSaikaiYMD" column="dbT3065ShichosonTokubetsuKyufuJigyosha_serviceJigyoshoJigyoSaikaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shokisaiHokenshaNo" column="dbT3065ShichosonTokubetsuKyufuJigyosha_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="juryoIninKubu" column="dbT3065ShichosonTokubetsuKyufuJigyosha_juryoIninKubu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="torokuKaishiYMD" column="dbT3065ShichosonTokubetsuKyufuJigyosha_torokuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="torokuShuryoYMD" column="dbT3065ShichosonTokubetsuKyufuJigyosha_torokuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="seikatsuhogoShiteiFlag" column="dbT3065ShichosonTokubetsuKyufuJigyosha_seikatsuhogoShiteiFlag" />
-        <result property="shichosonCode" column="dbT3065ShichosonTokubetsuKyufuJigyosha_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="chiikiKubun" column="dbT3065ShichosonTokubetsuKyufuJigyosha_chiikiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT3065ShichosonTokubetsuKyufuJigyosha_logicalDeletedFlag" />
     </resultMap>
 

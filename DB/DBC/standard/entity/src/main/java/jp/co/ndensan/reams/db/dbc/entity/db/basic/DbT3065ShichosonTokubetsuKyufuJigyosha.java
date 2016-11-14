@@ -181,10 +181,6 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
      */
     serviceJigyoshoJigyoSaikaiYMD(2147483647, 0),
     /**
-     * 介護保険証記載保険者番号
-     */
-    shokisaiHokenshaNo(2147483647, 0),
-    /**
      * 受領委任区分
      */
     juryoIninKubu(1, 0),
@@ -200,14 +196,6 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
      * 生活保護法による指定の有
      */
     seikatsuhogoShiteiFlag(1, 0),
-    /**
-     * 市町村コード
-     */
-    shichosonCode(2147483647, 0),
-    /**
-     * 地域区分
-     */
-    chiikiKubun(1, 0),
     /**
      * 論理削除フラグ
      */
