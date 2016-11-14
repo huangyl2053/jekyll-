@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.core.basic;
+package jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -13,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-1030-200 x_lilh
  */
-public class ShokanShinseiJoho {
+public class ShokanShinseiJoho implements Serializable {
 
     private RString 整理番号;
     private DbT3034ShokanShinseiEntity entity;
