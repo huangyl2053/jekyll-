@@ -89,7 +89,8 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
      */
     public static ShujiiIkenshoSakuseiIraiReportOutputService createInstance() {
         return InstanceProvider.create(ShujiiIkenshoSakuseiIraiReportOutputService.class);
@@ -428,7 +429,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             NinshoshaSource ninshosha) {
         List<ShujiiIkenshoSakuseiIraishoItem> resultList = new ArrayList<>();
         for (ShujiiIkenshoSakuseiIraishoItem item : itemList) {
-            item.setHakkoYMD1(ninshosha.hakkoYMD);
+            item.setHakkoYMD1(item.getHakkoYMD1());
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);

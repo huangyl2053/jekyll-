@@ -73,8 +73,8 @@ public class IkenshoirairirekiIchiranEditor implements IIkenshoirairirekiIchiran
         source.listIryokikanName_1 = business.get医療機関名称();
         source.listIshiName_1 = business.get主治医氏名();
         if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()) {
-            source.listIkenshoiraiYMD_1 = business.get主治医意見書作成依頼年月日().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listIkenshoiraiYMD_1 = business.get主治医意見書作成依頼年月日().wareki().eraType(EraType.KANJI_RYAKU).
+                    firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         source.listShinseiKubun_1 = business.get認定申請区分();
         source.listKeizokukubun_1 = business.get継続区分();
