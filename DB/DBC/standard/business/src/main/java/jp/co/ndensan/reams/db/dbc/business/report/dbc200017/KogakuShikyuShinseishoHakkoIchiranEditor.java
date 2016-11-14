@@ -71,7 +71,7 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
     public KogakuShikyuShinseishoHakkoIchiranSource edit(
             KogakuShikyuShinseishoHakkoIchiranSource source) {
         editSource(source);
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listHakkoTaishosha_2);
+        source.拡張情報 = new ExpandedInformation(Code.EMPTY, RString.EMPTY, source.listHakkoTaishosha_2);
         return source;
     }
 
