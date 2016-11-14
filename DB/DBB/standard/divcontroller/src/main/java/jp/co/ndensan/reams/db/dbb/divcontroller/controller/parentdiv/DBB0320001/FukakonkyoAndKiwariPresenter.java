@@ -150,13 +150,20 @@ public class FukakonkyoAndKiwariPresenter {
     }
 
     private static void set賦課根拠(tblFukakonkyoMeisaiDiv div, Fuka model) {
-        div.getLblFukakijunYMD().setText(model.get賦課期日().wareki().toDateString());
-        div.getLblShikakuShutokuYMD().setText(model.get資格取得日().wareki().toDateString());
-        div.getLblShikakuSoshitsuYMD().setText(model.get資格喪失日().wareki().toDateString());
-        div.getLblSeihoKaishiYMD().setText(model.get生保開始日().wareki().toDateString());
-        div.getLblSeihoShuryoYMD().setText(model.get生保廃止日().wareki().toDateString());
-        div.getLblRonenKaishiYMD().setText(model.get老年開始日().wareki().toDateString());
-        div.getLblRonenShuryoYMD().setText(model.get老年廃止日().wareki().toDateString());
+        div.getLblFukakijunYMD().setText((null == model.get賦課期日() || model.get賦課期日().isEmpty())
+                ? RString.EMPTY : model.get賦課期日().wareki().toDateString());
+        div.getLblShikakuShutokuYMD().setText((null == model.get資格取得日() || model.get資格取得日().isEmpty())
+                ? RString.EMPTY : model.get資格取得日().wareki().toDateString());
+        div.getLblShikakuSoshitsuYMD().setText((null == model.get資格喪失日() || model.get資格喪失日().isEmpty())
+                ? RString.EMPTY : model.get資格喪失日().wareki().toDateString());
+        div.getLblSeihoKaishiYMD().setText((null == model.get生保開始日() || model.get生保開始日().isEmpty())
+                ? RString.EMPTY : model.get生保開始日().wareki().toDateString());
+        div.getLblSeihoShuryoYMD().setText((null == model.get生保廃止日() || model.get生保廃止日().isEmpty())
+                ? RString.EMPTY : model.get生保廃止日().wareki().toDateString());
+        div.getLblRonenKaishiYMD().setText((null == model.get老年開始日() || model.get老年開始日().isEmpty())
+                ? RString.EMPTY : model.get老年開始日().wareki().toDateString());
+        div.getLblRonenShuryoYMD().setText((null == model.get老年廃止日() || model.get老年廃止日().isEmpty())
+                ? RString.EMPTY : model.get老年廃止日().wareki().toDateString());
     }
 
     private void set賦課根拠Of本算定(tblFukakonkyoMeisaiDiv div, Fuka model) {
