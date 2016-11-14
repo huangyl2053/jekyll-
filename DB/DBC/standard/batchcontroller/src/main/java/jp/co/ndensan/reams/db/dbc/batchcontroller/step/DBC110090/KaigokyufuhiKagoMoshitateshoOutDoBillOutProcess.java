@@ -162,12 +162,12 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
         改頁項目名リスト = new ArrayList<>();
         出力順Map = new HashMap<>();
         並び順 = this.get並び順(parameter.get帳票ID(), parameter.get出力順ID());
-        RString 出力順 = MyBatisOrderByClauseCreator
-                .create(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.class, 並び順);
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }
+        RString 出力順 = MyBatisOrderByClauseCreator
+                .create(KaigokyufuhiKagoMoshitateshoOutOutPutOrder.class, 並び順);
         帳票データの取得Parameter.set出力順(出力順);
         int i = 0;
         for (ISetSortItem item : 並び順.get設定項目リスト()) {
