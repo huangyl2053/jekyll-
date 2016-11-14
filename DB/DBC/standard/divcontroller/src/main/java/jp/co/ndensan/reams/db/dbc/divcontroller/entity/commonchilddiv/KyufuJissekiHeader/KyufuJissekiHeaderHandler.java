@@ -196,7 +196,7 @@ public class KyufuJissekiHeaderHandler {
         if (給付実績ヘッダ情報1.get生年月日() != null && !給付実績ヘッダ情報1.get生年月日().isEmpty()) {
             div.getTxtSeinengappi().setValue(new RDate(給付実績ヘッダ情報1.get生年月日().toString()));
         }
-        div.getTxtHokensha().setValue(給付実績ヘッダ情報1.get名称());
+        //div.getTxtHokensha().setValue(給付実績ヘッダ情報1.get名称());
     }
 
     private void set給付実績ヘッダ情報2(KyufuJissekiHedajyoho2 給付実績ヘッダ情報2) {
