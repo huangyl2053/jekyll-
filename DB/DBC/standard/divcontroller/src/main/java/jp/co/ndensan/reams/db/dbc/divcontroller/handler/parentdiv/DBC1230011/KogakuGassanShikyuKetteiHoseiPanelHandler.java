@@ -645,6 +645,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
      * エラーメッセージ取得
      *
      * @param メッセージ RString
+     * @return Message
      */
     public Message getエラーメッセージ(RString メッセージ) {
         Message message = Message.NO_MESSAGE;
