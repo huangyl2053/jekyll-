@@ -252,7 +252,7 @@ public class KijunShunyuShinseiTourokuHandler {
             List<KijunShunyuShinseiDate> 基準収入額データList) {
         row.setSetaiCode(管理情報.get世帯コード().getColumnValue());
         row.setShoriNendo(getWarekiYear(管理情報.get年度()));
-        row.setRirekiNo(new RString(管理情報.get履歴番号()));
+        row.setRirekiNo(new RString(管理情報.get履歴番号()).padLeft("0", NUM_4));
         row.setSetaikijunYMD(toWarekiHalf_Zero(管理情報.get申請書作成の世帯基準日()));
         row.setShinseiYMD(toWarekiHalf_Zero(管理情報.get申請日()));
         row.setShinseishoSakuseiYMD(toWarekiHalf_Zero(管理情報.get申請書作成日()));
@@ -943,6 +943,9 @@ public class KijunShunyuShinseiTourokuHandler {
         Decimal 給与;
         Decimal 以外の収入;
         for (dgMeisai_Row row : rowList) {
+            if (RowState.Deleted.equals(row.getRowState())) {
+                continue;
+            }
             公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
             給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
             以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
