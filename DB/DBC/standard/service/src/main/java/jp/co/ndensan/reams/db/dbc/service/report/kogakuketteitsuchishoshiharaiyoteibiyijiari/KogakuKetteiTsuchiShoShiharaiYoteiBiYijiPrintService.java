@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,6 +47,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      * @param titleList List<RString>
      * @param 金融機関コード RString
+     * @param compSofubutsuAtesakiソース SofubutsuAtesakiSource
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -56,10 +58,11 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
             List<RString> 通知書定型文List,
             ChohyoSeigyoKyotsu 帳票制御共通情報,
             List<RString> titleList,
-            RString 金融機関コード) {
+            RString 金融機関コード,
+            SofubutsuAtesakiSource compSofubutsuAtesakiソース) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(帳票情報, 連番, 発行日, 認証者, 通知書定型文List, 帳票制御共通情報, titleList, 金融機関コード, reportManager
+            print(帳票情報, 連番, 発行日, 認証者, 通知書定型文List, 帳票制御共通情報, titleList, 金融機関コード, reportManager, compSofubutsuAtesakiソース
             );
             collection = reportManager.publish();
         }
@@ -78,6 +81,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
      * @param titleList List<RString>
      * @param 金融機関コード RString
      * @param reportManage ReportManager
+     * @param compSofubutsuAtesakiソース SofubutsuAtesakiSource
      */
     public void print(
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報,
@@ -88,7 +92,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
             ChohyoSeigyoKyotsu 帳票制御共通情報,
             List<RString> titleList,
             RString 金融機関コード,
-            ReportManager reportManage) {
+            ReportManager reportManage,
+            SofubutsuAtesakiSource compSofubutsuAtesakiソース) {
         KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty property = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiProperty();
         try (ReportAssembler<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> assembler = createAssembler(property, reportManage)) {
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
@@ -107,7 +112,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiPrintService {
                     通知書定型文List,
                     認証者ソースデータ,
                     帳票制御共通情報,
-                    金融機関コード).writeBy(reportSourceWriter);
+                    金融機関コード,
+                    compSofubutsuAtesakiソース).writeBy(reportSourceWriter);
         }
     }
 
