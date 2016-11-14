@@ -30,7 +30,7 @@ public class JimuSonotashiryoBusiness {
     private static final boolean 無し = false;
     private final ShinsakaiSiryoKyotsuEntity entity;
     private final List<RString> ファイル名List;
-    private int index;
+    private final int 存在ファイルindex;
 
     /**
      * コンストラクタです。
@@ -45,7 +45,7 @@ public class JimuSonotashiryoBusiness {
         } else {
             this.ファイル名List = getその他資料原本イメージファイル名();
         }
-        index = 0;
+        this.存在ファイルindex = 存在ファイルindex;
     }
 
     /**
@@ -169,6 +169,7 @@ public class JimuSonotashiryoBusiness {
         }
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         boolean is存在;
+        int index = 0;
         for (int i = 0; i < ファイル名List.size(); i++) {
             RString ファイル名 = ファイル名List.get(i);
             ReadOnlySharedFileEntryDescriptor descriptor
@@ -196,7 +197,7 @@ public class JimuSonotashiryoBusiness {
      * @return その他資料
      */
     public int get存在ファイルIndex() {
-        return index;
+        return 存在ファイルindex;
     }
 
     private List<RString> getその他資料マスキング後イメージファイル名() {
