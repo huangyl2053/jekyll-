@@ -1049,6 +1049,13 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 && !STR_1.equals(entity.get異動区分コード())) {
             entity.set居宅サービス計画適用終了年月日(星);
         }
+        if (!RString.isNullOrEmpty(entity.get償還払化開始年月日())
+                && !RString.isNullOrEmpty(entity.get償還払化終了年月日())
+                && (isBeforeDate(new FlexibleDate(entity.get償還払化開始年月日()), entity.get異動年月日())
+                || isBeforeDate(new FlexibleDate(entity.get償還払化開始年月日()), entity.get資格取得年月日()))) {
+            entity.set償還払化開始年月日(星);
+            entity.set償還払化終了年月日(星);
+        }
         if (!RString.isNullOrEmpty(entity.get給付率引下げ開始年月日())
                 && (isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get異動年月日())
                 || isBeforeDate(new FlexibleDate(entity.get給付率引下げ開始年月日()), entity.get資格取得年月日()))) {

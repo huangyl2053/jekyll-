@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.Idou
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -145,13 +144,6 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
     private RString cancatYMD(FlexibleDate date, RString 全項目) {
         if (date != null) {
             return 全項目.concat(new RString(date.toString())).concat(SPLIT);
-        }
-        return 全項目.concat(RString.EMPTY).concat(SPLIT);
-    }
-
-    private RString cancatHokenKyufuRitsu(HokenKyufuRitsu 項目, RString 全項目) {
-        if (項目 != null && 項目.getColumnValue() != null) {
-            return 全項目.concat(項目.getColumnValue().toString()).concat(SPLIT);
         }
         return 全項目.concat(RString.EMPTY).concat(SPLIT);
     }
