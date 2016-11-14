@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyu
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufu.KogakuKyufu_OshiraseTsuchi_ChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoMybatisParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -30,7 +29,7 @@ public class KogakuKaigoServicehiOshiraseHakkoProcessParameter implements IBatch
 
     private FlexibleYearMonth shoriYm;
     private FlexibleDate sakuseibi;
-    private HihokenshaNo hihokenshaNo;
+    private RString hihokenshaNo;
     private boolean isShinseishoHakko;
     private boolean isOshiraseTsuchishoHakko;
     private boolean isHakkoIchiranhyoHakko;
@@ -78,7 +77,7 @@ public class KogakuKaigoServicehiOshiraseHakkoProcessParameter implements IBatch
      * @param ininjoTeishutsusaki 申請書委任状提出先
      * @param shinseishoTelNoHyoji 申請書電話番号表示
      */
-    public KogakuKaigoServicehiOshiraseHakkoProcessParameter(FlexibleYearMonth shoriYm, FlexibleDate sakuseibi, HihokenshaNo hihokenshaNo,
+    public KogakuKaigoServicehiOshiraseHakkoProcessParameter(FlexibleYearMonth shoriYm, FlexibleDate sakuseibi, RString hihokenshaNo,
             boolean isShinseishoHakko, boolean isOshiraseTsuchishoHakko, boolean isHakkoIchiranhyoHakko, boolean isKinyuKikanHyoji,
             FlexibleDate shiseibi, FlexibleDate uketsukebi, FlexibleDate keteibi, FlexibleDate shinseishoTeishutsuKigen,
             KogakuKyufu_OshiraseTsuchi_ChushutsuJoken chushutsuJoken, RString menuId, boolean isJutakuAri, Long shutsuryokujunId,

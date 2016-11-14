@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020020;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufu.KogakuKyufu_OshiraseTsuchi_ChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -69,11 +68,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter exten
      * @return プロセスパラメータ
      */
     public KogakuKaigoServicehiOshiraseHakkoProcessParameter toProcessParameter() {
-        HihokenshaNo tmp = HihokenshaNo.EMPTY;
-        if (!RString.isNullOrEmpty(hihokenshaNo)) {
-            tmp = new HihokenshaNo(hihokenshaNo);
-        }
-        return new KogakuKaigoServicehiOshiraseHakkoProcessParameter(shoriYm, sakuseibi, tmp, isShinseishoHakko,
+        return new KogakuKaigoServicehiOshiraseHakkoProcessParameter(shoriYm, sakuseibi, hihokenshaNo, isShinseishoHakko,
                 isOshiraseTsuchishoHakko, isHakkoIchiranhyoHakko, isKinyuKikanHyoji, shiseibi, uketsukebi, keteibi, shinseishoTeishutsuKigen,
                 chushutsuJoken, menuId, isJutakuAri, shutsuryokujunId, bunshoMojiretsu, ininjoTeishutsusaki, shinseishoTelNoHyoji);
     }
