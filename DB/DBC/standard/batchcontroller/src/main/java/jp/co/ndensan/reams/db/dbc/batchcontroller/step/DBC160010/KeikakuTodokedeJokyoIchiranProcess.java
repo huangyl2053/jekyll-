@@ -313,6 +313,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         reportList.set認定有効開始日(entity.get認定有効期間開始日());
         reportList.set認定有効終了日(entity.get認定有効期間終了日());
         reportList.set認定日(entity.get認定年月日());
+        reportList.set市町村コード(entity.get市町村コード());
         reportList.set計画届出日(entity.get計画届出日());
         reportList.set計画適用開始日(entity.get適用開始年月日());
         reportList.set計画適用終了日(entity.get適用終了年月日());

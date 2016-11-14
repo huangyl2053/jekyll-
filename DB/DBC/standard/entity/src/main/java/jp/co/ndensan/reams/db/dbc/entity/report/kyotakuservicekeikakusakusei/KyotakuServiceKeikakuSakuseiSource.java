@@ -102,6 +102,27 @@ public class KyotakuServiceKeikakuSakuseiSource implements IReportSource {
     public RString listList3_5;
     @ReportItem(name = "listList3_6", length = 5, order = 45)
     public RString listList3_6;
+
+    @ReportItem(name = "yubinNo", length = 50, order = 46)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 50, order = 47)
+    public RString choikiCode;
+    @ReportItem(name = "banchiCode1", length = 50, order = 48)
+    public RString banchiCode1;
+    @ReportItem(name = "banchiCode2", length = 50, order = 49)
+    public RString banchiCode2;
+    @ReportItem(name = "banchiCode3", length = 50, order = 50)
+    public RString banchiCode3;
+    @ReportItem(name = "banchiCode4", length = 50, order = 51)
+    public RString banchiCode4;
+    @ReportItem(name = "kanaMeisho", length = 50, order = 52)
+    public RString kanaMeisho;
+    @ReportItem(name = "seibetsuCode", length = 50, order = 53)
+    public RString seibetsuCode;
+    @ReportItem(name = "shichosonCode", length = 50, order = 54)
+    public RString shichosonCode;
+    @ReportItem(name = "keikakuJigyoshaNo", length = 50, order = 55)
+    public RString keikakuJigyoshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
