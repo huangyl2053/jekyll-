@@ -149,19 +149,25 @@ public class PaymentDateHandler {
         }
         if (!is更新しないを選択した()) {
             if (RString.isNullOrEmpty(div.getPayToMadoguchi().getTxtShiharaiBasho().getValue())) {
-                addPairs(pairs, 支払場所);
+                pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, 支払場所.toString()),
+                        div.getPayToMadoguchi().getTxtShiharaiBasho()));
             }
             if (div.getPayToMadoguchi().getTxtShiharaiDateRange().getFromValue() == null) {
-                addPairs(pairs, 支払期間FROM);
+                pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, 支払期間FROM.toString()),
+                        div.getPayToMadoguchi().getTxtShiharaiDateRange()));
             }
             if (div.getPayToMadoguchi().getTxtShiharaiDateRange().getToValue() == null) {
-                addPairs(pairs, 支払期間TO);
+                pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, 支払期間TO.toString()),
+                        div.getPayToMadoguchi().getTxtShiharaiDateRange()));
+
             }
             if (div.getPayToMadoguchi().getTxtShiharaiKaishiTime().getValue() == null) {
-                addPairs(pairs, 開始時間);
+                pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, 開始時間.toString()),
+                        div.getPayToMadoguchi().getTxtShiharaiKaishiTime()));
             }
             if (div.getPayToMadoguchi().getTxtShiharaiShuryoTime().getValue() == null) {
-                addPairs(pairs, 終了時間);
+                pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, 終了時間.toString()),
+                        div.getPayToMadoguchi().getTxtShiharaiShuryoTime()));
             }
         }
         return pairs;
@@ -172,10 +178,6 @@ public class PaymentDateHandler {
      */
     public void 窓口払い一括更新区分制御() {
         窓口払いエリア制御(is更新しないを選択した());
-    }
-
-    private void addPairs(ValidationMessageControlPairs pairs, RString replacements) {
-        pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, replacements.toString())));
     }
 
     private boolean is更新しないを選択した() {

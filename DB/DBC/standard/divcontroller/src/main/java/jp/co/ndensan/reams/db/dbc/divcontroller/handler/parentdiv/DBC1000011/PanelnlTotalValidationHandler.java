@@ -44,33 +44,33 @@ public class PanelnlTotalValidationHandler {
         if (キー.equals(div.getRadUketsukebi().getSelectedKey()) && (div.getTxtUketsukebi().getFromValue() == null
                 && div.getTxtUketsukebi().getToValue() == null)) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "受付日")));
+                    UrErrorMessages.必須, "受付日"), div.getTxtUketsukebi()));
         }
         if (キー.equals(div.getRadKetteibi().getSelectedKey()) && (div.getTxtKeteibiJoken().getFromValue() == null
                 && div.getTxtKeteibiJoken().getToValue() == null)) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "抽出条件決定日")));
+                    UrErrorMessages.必須, "抽出条件決定日"), div.getTxtKeteibiJoken()));
         }
         if (キー.equals(div.getRadKetteishaUketsukeYM().getSelectedKey()) && div.getTxtKeteishaUketsukeYM().getDomain() == null) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "決定者受付年月")));
+                    UrErrorMessages.必須, "決定者受付年月"), div.getTxtKeteishaUketsukeYM()));
         }
         if (更新する.equals(div.getPnlShokanbaraiShikyuKeteiTuchisho().getRadKeteibiIkatsuKoushinnKubun().getSelectedKey())
                 && div.getPnlShokanbaraiShikyuKeteiTuchisho().getTxtKeteibiTuchisho().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "決定通知書決定日")));
+                    UrErrorMessages.必須, "決定通知書決定日"), div.getPnlShokanbaraiShikyuKeteiTuchisho().getTxtKeteibiTuchisho()));
         }
         if (div.getTxtUketsukebi().getFromValue() != null && div.getTxtUketsukebi().getToValue() != null
                 && div.getTxtUketsukebi().getToValue()
                 .isBefore(div.getTxtUketsukebi().getFromValue())) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "受付日From", "受付日To")));
+                    UrErrorMessages.必須, "受付日From", "受付日To"), div.getTxtUketsukebi()));
         }
         if (div.getTxtKeteibiJoken().getFromValue() != null && div.getTxtKeteibiJoken().getToValue() != null
                 && div.getTxtKeteibiJoken().getToValue()
                 .isBefore(div.getTxtKeteibiJoken().getFromValue())) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "抽出条件決定日From", "抽出条件決定日To")));
+                    UrErrorMessages.必須, "抽出条件決定日From", "抽出条件決定日To"), div.getTxtKeteibiJoken()));
         }
         validationMessages.add(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().getCheckMessage());
         return validationMessages;
