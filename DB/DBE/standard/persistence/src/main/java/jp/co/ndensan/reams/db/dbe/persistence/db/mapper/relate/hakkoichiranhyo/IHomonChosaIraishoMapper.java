@@ -32,4 +32,11 @@ public interface IHomonChosaIraishoMapper {
      * @return DbT5201NinteichosaIraiJohoEntity
      */
     DbT5201NinteichosaIraiJohoEntity get認定調査依頼情報(HomonChosaIraishoRelateEntity entity);
+
+    /**
+     * 認定調査依頼履歴一覧を取得します。
+     *
+     * @return List<HomonChosaIraishoRelateEntity>
+     */
+    List<HomonChosaIraishoRelateEntity> get認定調査依頼履歴一覧();
 }

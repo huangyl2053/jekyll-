@@ -182,7 +182,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
                 iraiToYMD,
                 hakkobi,
                 teishutsuKigen,
-                kyotsuHizuke);
+                kyotsuHizuke,
+                is認定調査依頼履歴一覧);
     }
 
     /**
