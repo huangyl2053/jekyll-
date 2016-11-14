@@ -89,5 +89,7 @@ public class KeikakuHiEntity extends DbTableEntityBase<KeikakuHiEntity> implemen
     private FlexibleYearMonth 審査年月;
     @TempTableColumnOrder(26)
     private RString 略称;
+    @TempTableColumnOrder(27)
+    private RString サービス名称;
 
 }
