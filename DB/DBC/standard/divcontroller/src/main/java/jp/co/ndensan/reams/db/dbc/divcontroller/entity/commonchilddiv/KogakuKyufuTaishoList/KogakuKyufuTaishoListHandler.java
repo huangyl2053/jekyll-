@@ -323,8 +323,6 @@ public class KogakuKyufuTaishoListHandler {
 
     private void get高額明細合計データ編集エリア(dgTaishoshaIchiran_Row row, RString 処理モード,
             FlexibleYearMonth サービス提供年月) {
-        row.setData1(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue());
-        row.setData2(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue());
         row.getData4().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue());
         row.getData5().setValue(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue());
         if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(TWO_RS)) {
@@ -339,11 +337,15 @@ public class KogakuKyufuTaishoListHandler {
             row.getData8().setValue(div.getMeisaiGokeiHenshuPanel().getTxtKogakuShikyuGaku().getValue());
         }
         if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
-            row.setData10(ONE_RS);
+            row.setData1(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue());
+            row.setData2(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue());
             row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
+            row.setData10(ONE_RS);
         } else {
-            row.setData10(TWO_RS);
+            row.setData1(RString.EMPTY);
+            row.setData2(RString.EMPTY);
             row.setData3(合計);
+            row.setData10(TWO_RS);
         }
         if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() != null
                 && !div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().isEmpty()) {
@@ -424,6 +426,12 @@ public class KogakuKyufuTaishoListHandler {
             div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setVisible(true);
             div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setVisible(true);
             div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setVisible(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().setDisplayNone(false);
+            div.getMeisaiGokeiHenshuPanel().getBtnJgyosha().setDisplayNone(false);
+            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().setDisplayNone(false);
+            div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setDisplayNone(false);
+            div.getMeisaiGokeiHenshuPanel().getBtnServiceSyurui().setDisplayNone(false);
+            div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setDisplayNone(false);
         } else {
             div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().setVisible(true);
             div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().setVisible(true);
@@ -437,6 +445,12 @@ public class KogakuKyufuTaishoListHandler {
             div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setVisible(false);
             div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setVisible(false);
             div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setVisible(false);
+            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().setDisplayNone(true);
+            div.getMeisaiGokeiHenshuPanel().getBtnJgyosha().setDisplayNone(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().setDisplayNone(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setDisplayNone(true);
+            div.getMeisaiGokeiHenshuPanel().getBtnServiceSyurui().setDisplayNone(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setDisplayNone(true);
         }
     }
 
@@ -631,7 +645,7 @@ public class KogakuKyufuTaishoListHandler {
             builder.append(コンマ);
             builder.append(老);
             is老齢また第２段階区分また激変設定 = true;
-        } 
+        }
 
         if (!div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().isDisabled()
                 && div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().getSelectedKey().equals(key0)) {
@@ -642,11 +656,11 @@ public class KogakuKyufuTaishoListHandler {
 
         if (!div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().isDisabled()) {
             if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key1)) {
-            builder.append(緩１);
-            is老齢また第２段階区分また激変設定 = true;
+                builder.append(緩１);
+                is老齢また第２段階区分また激変設定 = true;
             } else if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key2)) {
-            builder.append(緩２);
-            is老齢また第２段階区分また激変設定 = true;
+                builder.append(緩２);
+                is老齢また第２段階区分また激変設定 = true;
             }
         }
 
