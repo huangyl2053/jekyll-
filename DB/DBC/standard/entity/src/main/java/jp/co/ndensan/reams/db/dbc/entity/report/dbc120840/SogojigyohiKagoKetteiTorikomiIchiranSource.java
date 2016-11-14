@@ -90,7 +90,7 @@ public class SogojigyohiKagoKetteiTorikomiIchiranSource implements IReportSource
     public RString sogojigyohiTanisu;
     @ReportItem(name = "sogojigyohiFutangaku", length = 17, order = 36)
     public RString sogojigyohiFutangaku;
-    @ReportExpandedInfo(id = "A")
+    @ReportExpandedInfo(id = "X")
     public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
