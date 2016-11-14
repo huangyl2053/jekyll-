@@ -179,16 +179,16 @@
     <select resultOrdered="true" id="get主治医意見書作成依頼履歴一覧" resultMap="resultMap_ShujiiIkenshoTeishutsuIraishoHakko"
             fetchSize="500">
         SELECT
-          A.直近区分
-          , A.被保険者番号
-          , A.被保険者氏名カナ
-          , A.被保険者氏名
-          , A.住所
-          , A.医療機関名称
-          , A.主治医氏名
-          , A.主治医意見書作成依頼年月日
-          , A.認定申請区分申請時コード
-          , A.意見書作成回数区分 
+          A.直近区分 AS 直近区分
+          , A.被保険者番号 AS hihokenshaNo
+          , A.被保険者氏名カナ AS hihokenshaKana
+          , A.被保険者氏名 AS hihokenshaName
+          , A.住所 AS jusho
+          , A.医療機関名称 AS iryoKikanMeisho
+          , A.主治医氏名 AS shujiiName
+          , A.主治医意見書作成依頼年月日 AS ikenshoSakuseiIraiYMD
+          , A.認定申請区分申請時コード AS ninteiShinseiShinseijiKubunCode
+          , A.意見書作成回数区分 AS ikenshoSakuseiKaisuKubun
         FROM
           ( 
             (SELECT
@@ -233,8 +233,9 @@
                 AND T5912."jokyoFlag" = True 
             WHERE
             <!-- TODO 内部QA:1982 Redmine#  パラメータはなんだわかりません。-->
-              T5101."hihokenshaNo" IN ('') 
-              AND T5101."logicalDeletedFlag" = FALSE 
+<!--              T5101."hihokenshaNo" IN ('') 
+              AND T5101."logicalDeletedFlag" = FALSE -->
+              T5101."logicalDeletedFlag" = FALSE 
             ORDER BY
               T5101."ninteiShinseiYMD" DESC 
             LIMIT

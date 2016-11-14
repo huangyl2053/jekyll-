@@ -418,15 +418,15 @@
     <select resultOrdered="true" id="get認定調査依頼履歴一覧" resultMap="resultMap_getHomonChosaIraisho"
          fetchSize="500">
         SELECT
-          A.直近区分
-          , A.被保険者番号
-          , A.被保険者氏名カナ
-          , A.被保険者氏名
-          , A.住所
-          , A.事業者名称
-          , A.調査員氏名
-          , A.認定調査依頼年月日
-          , A.認定申請区分申請時コード 
+          A.直近区分 AS 直近区分
+          , A.被保険者番号 AS hihokenshaNo
+          , A.被保険者氏名カナ AS hihokenshaKana
+          , A.被保険者氏名 AS hihokenshaName
+          , A.住所 AS jusho
+          , A.事業者名称 AS jigyoshaMeisho
+          , A.調査員氏名 AS chosainShimei
+          , A.認定調査依頼年月日 AS ninteichosaIraiYMD
+          , A.認定申請区分申請時コード AS ninteiShinseiShinseijiKubunCode
         FROM
           ( 
             ( 
@@ -468,8 +468,9 @@
                   AND T5913."jokyoFlag" = True 
               WHERE
               <!-- TODO 内部QA:1982 Redmine#  パラメータはなんだわかりません。-->
-                T5101."hihokenshaNo" IN ('') 
-                AND T5101."logicalDeletedFlag" = FALSE 
+                <!--T5101."hihokenshaNo" IN ('') 
+                AND T5101."logicalDeletedFlag" = FALSE -->
+                 T5101."logicalDeletedFlag" = FALSE 
               ORDER BY
                 T5101."ninteiShinseiYMD" DESC 
               LIMIT
@@ -491,7 +492,7 @@
                 INNER JOIN ( 
                   SELECT
                     T5121."zenkaiShinseishoKanriNo"
-                    , "hihokenshaNo" 
+                    , T5101_2."hihokenshaNo" 
                   FROM
                     rgdb."DbT5121ShinseiRirekiJoho" T5121 
                     INNER JOIN rgdb."DbT5101NinteiShinseiJoho" T5101_2 
