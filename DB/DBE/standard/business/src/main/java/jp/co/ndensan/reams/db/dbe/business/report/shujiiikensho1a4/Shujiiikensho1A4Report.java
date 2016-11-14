@@ -46,8 +46,11 @@ public class Shujiiikensho1A4Report extends Report<Shujiiikensho1A4ReportSource>
      */
     @Override
     public void writeBy(ReportSourceWriter<Shujiiikensho1A4ReportSource> reportSourceWriter) {
-        IShujiiikensho1A4Editor editor = new Shujiiikensho1A4Editor(business);
-        IShujiiikensho1A4Builder builder = new Shujiiikensho1A4Builder(editor);
-        reportSourceWriter.writeLine(builder);
+        IShujiiikensho1A4Editor editor1 = new Shujiiikensho1A4Editor(business);
+        IShujiiikensho1A4Builder builder1 = new Shujiiikensho1A4Builder(editor1);
+        reportSourceWriter.writeLine(builder1);
+        IShujiiikensho1A4Editor editor2 = new Shujiiikensho2A4Editor(business);
+        IShujiiikensho1A4Builder builder2 = new Shujiiikensho2A4Builder(editor2);
+        reportSourceWriter.writeLine(builder2);
     }
 }
