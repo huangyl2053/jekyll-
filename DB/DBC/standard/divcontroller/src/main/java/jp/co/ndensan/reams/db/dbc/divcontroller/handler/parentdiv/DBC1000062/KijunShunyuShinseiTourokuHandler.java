@@ -148,7 +148,7 @@ public class KijunShunyuShinseiTourokuHandler {
     private static final RString コンマ = new RString(",");
     private static final RString メモ = new RString("memo");
     private static final RString 識別対象コード = new RString("shikibetsuCode");
-    private static final RString 歳以上_65 = new RString("65");
+    private static final int 歳以上_65 = 65;
     private static final Decimal 円_145万 = new Decimal("1450000");
     private static final Decimal 円_383万 = new Decimal("3830000");
     private static final Decimal 円_520万 = new Decimal("5200000");
@@ -1159,7 +1159,7 @@ public class KijunShunyuShinseiTourokuHandler {
         FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
         row.setSetaiCode(div.getMeisai().getTxtSetaiCode().getValue());
         row.setShoriNendo(getWarekiYear(年度));
-        row.setRirekiNo(div.getHdnRirekiNo());
+        row.setRirekiNo(div.getHdnRirekiNo().padLeft("0", NUM_4));
         row.setSetaikijunYMD(toWarekiHalf_Zero(div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue()));
         row.setShinseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseiYMD().getValue()));
         row.setShinseishoSakuseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseishoSakuseiYMD().getValue()));
@@ -1554,15 +1554,15 @@ public class KijunShunyuShinseiTourokuHandler {
         Decimal 給与;
         Decimal 以外の収入;
         Decimal 課税所得;
-        RString 年齢;
+        int 年齢;
         for (dgMeisai_Row row : rowList) {
-            年齢 = row.getAge();
+            年齢 = get年齢(row.getAge());
             課税所得 = row.getKazeiShotokuKojogo().getValue() == null ? Decimal.ZERO : row.getKazeiShotokuKojogo().getValue();
             公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
             給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
             以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
             一人で総収入金額 = 公的年金.add(給与).add(以外の収入);
-            if (歳以上_65.compareTo(年齢) < NUM_1) {
+            if (歳以上_65 <= 年齢) {
                 if (円_145万.compareTo(課税所得) < NUM_1
                         && (円_383万.compareTo(一人で総収入金額) == NUM_1 || 円_520万.compareTo(二人以上で総収入金額) == NUM_1)
                         && !SanteiKijungaku.算定基準額_44_400円.get略称().equals(算定基準額)) {
@@ -1591,5 +1591,40 @@ public class KijunShunyuShinseiTourokuHandler {
             }
         }
         return false;
+    }
+
+    /**
+     * 総収入額チェックのメソッドです。
+     *
+     * @return 総収入額チェック結果
+     */
+    public boolean is総収入額チェック() {
+        Decimal 総収入額 = div.getMeisai().getTxtTotalShunyu().getValue();
+        return 総収入額.equals(get明細行総収入金額());
+    }
+
+    private Decimal get明細行総収入金額() {
+        List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+        Decimal 明細行総収入金額 = Decimal.ZERO;
+        Decimal 公的年金;
+        Decimal 給与;
+        Decimal 以外の収入;
+        for (dgMeisai_Row row : rowList) {
+            if (get年齢(row.getAge()) < 歳以上_65 || RowState.Deleted.equals(row.getRowState())) {
+                continue;
+            }
+            公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
+            給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
+            以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
+            明細行総収入金額 = 明細行総収入金額.add(公的年金).add(給与).add(以外の収入);
+        }
+        return 明細行総収入金額;
+    }
+
+    private int get年齢(RString 年齢) {
+        if (年齢.isNullOrEmpty()) {
+            return 0;
+        }
+        return Integer.parseInt(年齢.toString());
     }
 }
