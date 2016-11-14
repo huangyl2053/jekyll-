@@ -207,19 +207,19 @@ public class GassanJigyobunKekkaIchiranEditor implements
         }
 
         if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-            改頁１ = list.get(0).get項目名();
+            改頁１ = list.get(0).get項目ID();
         }
         if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-            改頁２ = list.get(INDEX_1).get項目名();
+            改頁２ = list.get(INDEX_1).get項目ID();
         }
         if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-            改頁３ = list.get(INDEX_2).get項目名();
+            改頁３ = list.get(INDEX_2).get項目ID();
         }
         if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-            改頁４ = list.get(INDEX_3).get項目名();
+            改頁４ = list.get(INDEX_3).get項目ID();
         }
         if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-            改頁５ = list.get(INDEX_4).get項目名();
+            改頁５ = list.get(INDEX_4).get項目ID();
         }
 
         if (list.size() > INDEX_0) {
