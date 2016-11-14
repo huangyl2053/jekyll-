@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011.Kog
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -82,6 +84,13 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
         div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(false);
+        if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().isEmpty()) {
+            div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().clear();
+        } else {
+            RString menuID = ResponseHolder.getMenuID();
+            getHandler(div).setサービス年月DDL(menuID);
+            return isError(div);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -174,7 +183,8 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
 
         if (!div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty() && !ResponseHolder.isReRequest()) {
             FlexibleDate 決定日 = div.getShinseishoHakkoParameters().getTxtKetteiDate().getValue();
-            return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage().replace(決定日.toString())).respond();
+            RString 決定日format = 決定日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).toDateString();
+            return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage().replace(決定日format.toString())).respond();
         }
 
         if (new RString(DbcWarningMessages.申請書提出期限未入力.getMessage().getCode()).equals(
