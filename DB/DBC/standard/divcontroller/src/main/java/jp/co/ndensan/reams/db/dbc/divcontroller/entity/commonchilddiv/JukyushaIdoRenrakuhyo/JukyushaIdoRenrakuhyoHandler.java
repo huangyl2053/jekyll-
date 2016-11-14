@@ -122,6 +122,8 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtUmareYMD().setValue(受給者異動情報.get生年月日());
             if (受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
                 div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
+            } else {
+                div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(RDate.getNowDate());
             }
             if (受給者異動情報.get送付年月() != null) {
                 div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().setValue(new FlexibleDate(受給者異動情報.get送付年月().toDateString()));
@@ -180,12 +182,19 @@ public class JukyushaIdoRenrakuhyoHandler {
         if (受給者異動情報.get送付年月() != null) {
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().setValue(new FlexibleDate(受給者異動情報.get送付年月().toDateString()));
         }
-        if (!(照会モード.equals(処理モード) && INT_1 == 履歴番号)
-                && 受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
-            div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
+        if (!(照会モード.equals(処理モード) && INT_1 == 履歴番号)) {
+            if (null == 受給者異動情報.get訂正年月日() || 受給者異動情報.get訂正年月日().isEmpty()) {
+                div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(RDate.getNowDate());
+            } else {
+                div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
+            }
         }
-        if (!照会モード.equals(処理モード) && INT_1 != 履歴番号 && !RString.isNullOrEmpty(受給者異動情報.get訂正区分コード())) {
-            div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(受給者異動情報.get訂正区分コード());
+        if (!照会モード.equals(処理モード) && INT_1 != 履歴番号) {
+            if (RString.isNullOrEmpty(受給者異動情報.get訂正区分コード())) {
+                div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedIndex(0);
+            } else {
+                div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(受給者異動情報.get訂正区分コード());
+            }
         }
         set要介護認定エリア(受給者異動情報);
         set支給限度基準額エリア(受給者異動情報);

@@ -670,7 +670,7 @@ public class KijunShunyuShinseiTourokuHandler {
     public void set1231状況隠し項目() {
         FlexibleYear 処理年度 = new FlexibleYear(div.getMeisai().getTxtShoriNendo().getValue().toString().substring(NUM_0, NUM_4));
         FlexibleDate 計算基準日 = new FlexibleDate(処理年度.minusYear(NUM_1).toDateString().concat(KEY_月日).toString());
-        div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(処理年度));
+        div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(div.getMeisai().getTxtShoriNendo().getValue()));
         div.getMeisai().setHdnHenkomaeSetaiinHaakuKijunYMD(DataPassingConverter.serialize(計算基準日));
     }
 
