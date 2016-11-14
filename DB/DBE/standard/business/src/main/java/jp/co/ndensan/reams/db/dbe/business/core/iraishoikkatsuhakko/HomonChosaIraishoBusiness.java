@@ -79,7 +79,7 @@ public class HomonChosaIraishoBusiness {
     private static final RString NINTEICHOSAHYOOCRKIHON = new RString("【認定調査票OCR(基本調査)出力区分】");
     private static final RString NINTEICHOSAHYOOCRTOKKI = new RString("【認定調査票OCR(特記事項)出力区分】");
     private static final RString NINTEICHOSAHYOOCRGAIKYOU = new RString("【認定調査票OCR(概況調査)出力区分】");
-    private static final RString NINTEICHOSAIRAIRIREKIICHIRAN = new RString("認定調査依頼履歴一覧出力区分");
+    private static final RString NINTEICHOSAIRAIRIREKIICHIRAN = new RString("【認定調査依頼履歴一覧出力区分】");
     private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査差異チェック表出力区分】");
     private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼一覧表出力区分】");
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
