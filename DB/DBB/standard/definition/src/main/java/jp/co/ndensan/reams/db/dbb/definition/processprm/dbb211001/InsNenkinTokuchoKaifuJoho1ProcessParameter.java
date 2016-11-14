@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001;
 
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectTokuChoIraiDataMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,5 +44,14 @@ public class InsNenkinTokuchoKaifuJoho1ProcessParameter implements IBatchProcess
             this.処理対象月 = 処理対象月;
         }
         this.システム日時 = システム日時;
+    }
+
+    /**
+     * SelectTokuChoIraiDataMyBatisParameterの取得です。
+     *
+     * @return SelectTokuChoIraiDataMyBatisParameter
+     */
+    public SelectTokuChoIraiDataMyBatisParameter toSelectTokuChoIraiDataMyBatisParameter() {
+        return new SelectTokuChoIraiDataMyBatisParameter(賦課年度);
     }
 }

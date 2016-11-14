@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,17 +21,13 @@ import lombok.Setter;
 public class SelectTokuChoIraiDataMyBatisParameter implements IMyBatisParameter {
 
     private RYear 賦課年度;
-    private RString 通知内容コード;
 
     /**
      * コンストラクタです。
      *
-     * @param 賦課年度 RYear
-     * @param 通知内容コード RString
+     * @param 賦課年度 賦課年度
      */
-    public SelectTokuChoIraiDataMyBatisParameter(RYear 賦課年度, RString 通知内容コード) {
+    public SelectTokuChoIraiDataMyBatisParameter(RYear 賦課年度) {
         this.賦課年度 = 賦課年度;
-        this.通知内容コード = 通知内容コード;
     }
-
 }

@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectTokuChoIraiDataMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,15 +29,5 @@ public class InsTokuchoIraiTempProcessParameter implements IBatchProcessParamete
      */
     public InsTokuchoIraiTempProcessParameter(RYear 賦課年度) {
         this.賦課年度 = 賦課年度;
-    }
-
-    /**
-     * SelectTokuChoIraiDataMyBatisParameterの取得です。
-     *
-     * @param 通知内容コード RString
-     * @return SelectTokuChoIraiDataMyBatisParameter
-     */
-    public SelectTokuChoIraiDataMyBatisParameter toSelectTokuChoIraiDataMyBatisParameter(RString 通知内容コード) {
-        return new SelectTokuChoIraiDataMyBatisParameter(賦課年度, 通知内容コード);
     }
 }
