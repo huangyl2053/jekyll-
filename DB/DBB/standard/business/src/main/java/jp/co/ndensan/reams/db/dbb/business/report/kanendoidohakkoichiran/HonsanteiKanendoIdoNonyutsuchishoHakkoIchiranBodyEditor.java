@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -83,8 +84,10 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
                     + 共通情報.get編集後宛先().get宛先名称().getName().toString());
         }
         if (共通情報.get更正後() != null
-                && 共通情報.get更正後().get生保開始日() != null) {
-            source.listUpper_13 = 共通情報.get更正後().get生保開始日();
+                && 共通情報.get更正後().get生保開始日() != null
+                && RDate.canConvert(共通情報.get更正後().get生保開始日())) {
+            RDate 生保開始日 = new RDate(共通情報.get更正後().get生保開始日().toString());
+            source.listUpper_13 = 生保開始日.wareki().toDateString();
         }
 
         RString 生活保護扶助名称 = null;

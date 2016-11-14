@@ -139,4 +139,6 @@ public class KaigoJuminhyoEntity {
     private boolean dbT4001LogicalDeletedFlag;
     private RDateTime dbT4001InsertTimestamp;
     private RDateTime dbT4001LastUpdateTimestamp;
+    private RString 広域運用_shichosonCode;
+    private RString 広域運用_shikibetsuCode;
 }

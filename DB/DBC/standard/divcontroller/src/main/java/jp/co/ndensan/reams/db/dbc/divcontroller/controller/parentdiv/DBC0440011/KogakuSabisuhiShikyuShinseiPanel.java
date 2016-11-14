@@ -123,6 +123,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         boolean 支給区分フラグ = div.getCcdKogakuShinseiList().is支給区分フラグ();
         ViewStateHolder.put(ViewStateKeys.審査決定フラグ, 審査決定フラグ);
         ViewStateHolder.put(ViewStateKeys.支給区分フラグ, 支給区分フラグ);
+        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(false);
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報登録);
     }
 
@@ -178,6 +179,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         KougakuSabisuhiShousaiNaiyouResult result
                 = div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get画面初期化データ();
         ViewStateHolder.put(ViewStateKeys.一覧データ, result);
+        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(false);
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報登録);
     }
 
@@ -208,6 +210,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         KougakuSabisuhiShousaiNaiyouResult result
                 = div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get画面初期化データ();
         ViewStateHolder.put(ViewStateKeys.一覧データ, result);
+        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().setDisplayNone(false);
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報登録);
     }
 

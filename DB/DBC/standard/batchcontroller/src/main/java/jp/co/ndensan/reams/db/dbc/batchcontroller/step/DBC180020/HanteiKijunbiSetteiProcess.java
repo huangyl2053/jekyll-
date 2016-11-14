@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.Riyosha
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,6 +31,9 @@ public class HanteiKijunbiSetteiProcess extends BatchProcessBase<HanteiTaishosha
     private RiyoshaFutanWariaiHanteiUtil util;
     private HanteiKijunYMDInstance 判定基準日;
     private RString hanteiKijunYMD;
+    private static final RString TABLENAME = new RString("HanteiTaishoshaTemp");
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 判定対象者Temp;
 
     @Override
     protected void initialize() {
@@ -36,6 +41,11 @@ public class HanteiKijunbiSetteiProcess extends BatchProcessBase<HanteiTaishosha
         util = new RiyoshaFutanWariaiHanteiUtil();
         判定基準日 = HanteiKijunYMDInstance.getInstance();
         hanteiKijunYMD = 現在の判定基準日;
+    }
+
+    @Override
+    protected void createWriter() {
+        判定対象者Temp = new BatchEntityCreatedTempTableWriter(TABLENAME, HanteiTaishoshaTempEntity.class);
     }
 
     @Override

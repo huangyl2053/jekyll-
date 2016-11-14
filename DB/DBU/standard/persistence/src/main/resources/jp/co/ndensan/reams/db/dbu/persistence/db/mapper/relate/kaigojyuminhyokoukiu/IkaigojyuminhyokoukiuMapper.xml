@@ -6,6 +6,8 @@
     <select resultOrdered="true" id="getKaigoJuminhyoEntity" resultMap="resultMap_KaigoJuminhyoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter" fetchSize="500">
         SELECT
+        広域運用."広域運用_shichosonCode" as "広域運用_shichosonCode",
+        広域運用."広域運用_shikibetsuCode" as "広域運用_shikibetsuCode",
         dbT1001HihokenshaDaicho.*,
         dbT4001JukyushaDaicho.*
         FROM
@@ -13,7 +15,14 @@
         FULL JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.noDeleted_DbT4001JukyushaDaicho" />) AS dbT4001JukyushaDaicho
         ON
-        dbT1001HihokenshaDaicho."dbT1001HihokenshaDaicho_hihokenshaNo" = dbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" 
+        dbT1001HihokenshaDaicho."dbT1001HihokenshaDaicho_hihokenshaNo" = dbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo"
+        LEFT JOIN ( select
+          DISTINCT A."shichosonCode" AS "広域運用_shichosonCode",
+                    A."shikibetsuCode" AS "広域運用_shikibetsuCode"
+        FROM  rgdb."DbT1001HihokenshaDaicho" AS A
+        ) AS 広域運用  
+        ON  広域運用."広域運用_shichosonCode" = dbT1001HihokenshaDaicho."dbT1001HihokenshaDaicho_shichosonCode"
+        AND 広域運用."広域運用_shikibetsuCode" = dbT1001HihokenshaDaicho."dbT1001HihokenshaDaicho_shikibetsuCode"
         WHERE
         dbT1001HihokenshaDaicho."dbT1001HihokenshaDaicho_hihokenshaNo" IN 
         (SELECT
@@ -23,45 +32,31 @@
         DISTINCT rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" AS "dbT1001_hihokenshaNo"
         FROM
         rgdb."DbT1001HihokenshaDaicho"
-        WHERE
-        <foreach  
-            collection="kobetsuKoikiunyoParameterList"
-            item="item"
-            open="("  
-            separator="OR"  
-            close=")">  
-            <if test="item.dateFrom != null and item.dateFrom != ''">
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{item.dateFrom} AND
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
+        <where>
+            <if test="checkKaishiFlag">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{dateFrom} AND
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{dateTo}
             </if>
-            <if test="item.dateTo == null and item.dateTo == ''">
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
+            <if test="checkShuryoFlag">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{dateTo}
             </if>
-            1=1
-        </foreach>
+        </where>
         ) AS dbT1001
         FULL JOIN
         (SELECT 
         DISTINCT rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "dbT4001_hihokenshaNo"
         FROM
         rgdb."DbT4001JukyushaDaicho"
-                WHERE
-        <foreach  
-            collection="kobetsuKoikiunyoParameterList"
-            item="item"
-            open="("  
-            separator="OR"  
-            close=")">  
-            <if test="item.dateFrom != null and item.dateFrom != ''">
-                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{item.dateFrom} AND
-                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
+         <where>
+            rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
+            <if test="checkKaishiFlag">
+                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{dateFrom}
+                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{dateTo}
             </if>
-            <if test="item.dateFrom == null and item.dateFrom == ''">
-                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
+            <if test="checkShuryoFlag">
+                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{dateTo}
             </if>
-            1=1
-        </foreach>
-          AND rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
+        </where>
         ) AS dbT4001
         ON
         dbT1001."dbT1001_hihokenshaNo" = dbT4001."dbT4001_hihokenshaNo")
@@ -74,22 +69,15 @@
         DISTINCT rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" AS "dbT1001Hihokensha_hihokenshaNo"
         FROM
         rgdb."DbT1001HihokenshaDaicho"
-       WHERE
-       <foreach  
-            collection="kobetsuKoikiunyoParameterList"
-            item="item"
-            open="("  
-            separator="OR"  
-            close=")">  
-            <if test="item.dateFrom != null and item.dateFrom != ''">
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{item.dateFrom} AND
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
+       <where>
+            <if test="checkKaishiFlag">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{dateFrom} AND
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{dateTo}
             </if>
-            <if test="item.dateFrom == null and item.dateFrom == ''">
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
+            <if test="checkShuryoFlag">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{dateTo}
             </if>
-            1=1
-        </foreach>
+        </where>
         ) AS dbT1001Hihokensha
         FULL JOIN
         (SELECT 
@@ -98,22 +86,13 @@
         rgdb."DbT4001JukyushaDaicho"
         where
         rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" <![CDATA[<>]]> '0'
-        AND
-        <foreach  
-            collection="kobetsuKoikiunyoParameterList"
-            item="item"
-            open="("  
-            separator="OR"  
-            close=")">  
-            <if test="item.dateFrom != null and item.dateFrom != ''">
-                   rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{item.dateFrom} 
-              AND  rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
-            </if>
-            <if test="item.dateFrom == null and item.dateFrom == ''">
-                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
-            </if>
-            1=1
-        </foreach>
+        <if test="checkKaishiFlag">
+            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{dateFrom}
+            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{dateTo}
+        </if>
+        <if test="checkShuryoFlag">
+            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{dateTo}
+        </if>
         ) AS dbT4001Jukyusha
         ON
         dbT1001Hihokensha."dbT1001Hihokensha_hihokenshaNo" = dbT4001Jukyusha."dbT4001Jukyusha_hihokenshaNo")
@@ -121,29 +100,22 @@
     
     <resultMap id="resultMap_KaigoJuminhyoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity" autoMapping="true">
         <id property="dbT1001HihokenshaDaichoEntity.hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="広域運用_shichosonCode" column="広域運用_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="広域運用_shikibetsuCode" column="広域運用_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="dbT1001HihokenshaDaichoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="dbT4001JukyushaDaichoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get処理日付管理マスタ登録処理"  
        resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
-     parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter" fetchSize="500">
+       parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter" fetchSize="500">
         SELECT
-           *
+          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE
         rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBU' AND
         rgdb."DbT7022ShoriDateKanri"."shoriName" = '介護住民票個別事項連携情報作成【広域運用】' AND
-        <foreach  
-            collection="kobetsuKoikiunyoParameterList"
-            item="item"
-            open="("  
-            separator="OR"  
-            close=")">
-            <if test ="item.shichosonCode!=null and item.shichosonCode!='' " >
-               rgdb."DbT7022ShoriDateKanri"."shichosonCode" = #{item.shichosonCode} 
-            </if>    
-        </foreach>
+        rgdb."DbT7022ShoriDateKanri"."shichosonCode" = #{shichosonCode} 
         ORDER BY rgdb."DbT7022ShoriDateKanri"."taishoShuryoTimestamp" DESC
     </select>
 </mapper>

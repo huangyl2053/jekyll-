@@ -64,18 +64,24 @@ public class TkChoshuHeijunkaKeisanJuneKekkaIchiranPageBreak extends PageBreaker
     public boolean isBreak(ReportLineRecord<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> currentRecord,
             ReportLineRecord<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> nextRecord) {
         boolean flag = false;
-        if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.行政区コード.get項目ID())) {
-            flag = !currentRecord.getSource().listUpper_3.equals(nextRecord.getSource().listUpper_3);
-        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.世帯コード.get項目ID())) {
-            flag = !currentRecord.getSource().listLower_2.equals(nextRecord.getSource().listLower_2);
-        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.識別コード.get項目ID())) {
-            flag = !currentRecord.getSource().listUpper_2.equals(nextRecord.getSource().listUpper_2);
-        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.被保険者番号.get項目ID())) {
-            flag = !currentRecord.getSource().listLower_1.equals(nextRecord.getSource().listLower_1);
-        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.町域コード.get項目ID())) {
-            flag = !currentRecord.getSource().listLower_3.equals(nextRecord.getSource().listLower_3);
-        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.市町村コード.get項目ID())) {
-            flag = !currentRecord.getSource().hokenshaNo.equals(nextRecord.getSource().hokenshaNo);
+        if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.行政区コード.get項目ID())
+                && !currentRecord.getSource().listUpper_3.equals(nextRecord.getSource().listUpper_3)) {
+            flag = true;
+        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.世帯コード.get項目ID())
+                && !currentRecord.getSource().listLower_2.equals(nextRecord.getSource().listLower_2)) {
+            flag = true;
+        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.識別コード.get項目ID())
+                && !currentRecord.getSource().listUpper_2.equals(nextRecord.getSource().listUpper_2)) {
+            flag = true;
+        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.被保険者番号.get項目ID())
+                && !currentRecord.getSource().listLower_1.equals(nextRecord.getSource().listLower_1)) {
+            flag = true;
+        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.町域コード.get項目ID())
+                && !currentRecord.getSource().listLower_3.equals(nextRecord.getSource().listLower_3)) {
+            flag = true;
+        } else if (!flag && this.keys.contains(DBB200003_HeijunkaKeisanJuneKekkaIchiran.市町村コード.get項目ID())
+                && !currentRecord.getSource().hokenshaNo.equals(nextRecord.getSource().hokenshaNo)) {
+            flag = true;
         }
         return flag;
     }

@@ -155,6 +155,18 @@ public class JukyushaTeiseiRenrakuhyoToroku {
     }
 
     /**
+     * 検索した被保番号が　受給者異動送付に検索
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return boolean
+     */
+    public boolean selectBooleanHihokenshaNo(HihokenshaNo 被保険者番号) {
+        List<DbT3001JukyushaIdoRenrakuhyoEntity> 受給者訂正Entity
+                = dbt3001Dac.selectHihokenshaNo(被保険者番号 == null ? null : 被保険者番号);
+        return 受給者訂正Entity == null || 受給者訂正Entity.isEmpty();
+    }
+
+    /**
      * 証記載保険者番号と広域保険者番号取得のメソッドです。
      *
      * @param 被保険者番号 HihokenshaNo

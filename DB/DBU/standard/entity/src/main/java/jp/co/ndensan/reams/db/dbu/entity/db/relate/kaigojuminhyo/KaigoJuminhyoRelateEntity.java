@@ -8,16 +8,20 @@ package jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 構成介護住民票個別事項連携情報RelateEntityクラスです。
- * 
- * @reamsid_L DBU-0350-020  lijia
- * 
+ *
+ * @reamsid_L DBU-0350-020 lijia
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 public class KaigoJuminhyoRelateEntity implements Cloneable, Serializable {
+
+    private RString 広域運用_shichosonCode;
+    private RString 広域運用_shikibetsuCode;
 
     /**
      * @param dbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity

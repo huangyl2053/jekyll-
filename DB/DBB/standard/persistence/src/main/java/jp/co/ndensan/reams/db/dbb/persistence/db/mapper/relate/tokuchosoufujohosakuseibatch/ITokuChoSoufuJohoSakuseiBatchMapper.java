@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.ShikakuSoshitsuDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.TokuChoIraiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.TokuChoIraiKensu;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.TokuChoIraiTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.TokuChoYidoIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.TokuChoYidoKensu;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.TokuchoIraiDataEntity;
@@ -43,19 +42,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoE
 public interface ITokuChoSoufuJohoSakuseiBatchMapper {
 
     /**
-     * 特徴依頼のデータ抽出する。
-     *
-     * @param parameter SelectTokuChoIraiDataMyBatisParameter
-     * @return List<TokuChoIraiTempEntity>
-     */
-    List<TokuChoIraiTempEntity> 特徴依頼のデータ抽出(SelectTokuChoIraiDataMyBatisParameter parameter);
-
-    /**
      * 特徴依頼のデータを取得です。
      *
+     * @param parameter SelectTokuChoIraiDataMyBatisParameter
      * @return List<TokuchoIraiDataEntity>
      */
-    List<TokuchoIraiDataEntity> 特徴依頼のデータを取得();
+    List<TokuchoIraiDataEntity> 特徴依頼のデータを取得(SelectTokuChoIraiDataMyBatisParameter parameter);
 
     /**
      * 特徴依頼追加一時表による徴収方法情報を取得です。

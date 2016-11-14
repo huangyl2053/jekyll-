@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -150,8 +151,10 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
                     .concat(new RString(編集後本算定通知書共通情報.get編集後宛先().get宛先名称().getName().toString()));
         }
         if (編集後本算定通知書共通情報.get更正後() != null
-                && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null) {
-            source.listUpper_13 = 編集後本算定通知書共通情報.get更正後().get生保開始日();
+                && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null
+                && RDate.canConvert(編集後本算定通知書共通情報.get更正後().get生保開始日())) {
+            RDate 生保開始日 = new RDate(編集後本算定通知書共通情報.get更正後().get生保開始日().toString());
+            source.listUpper_13 = 生保開始日.wareki().toDateString();
         }
 
         RString 生活保護扶助名称 = RString.EMPTY;
