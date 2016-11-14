@@ -29,7 +29,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
         IKoseiTaishoJissekiIchiranEditor {
 
     private static final RString INDEX_1 = new RString("1");
-    private static final RString INDEX_2 = new RString("1");
+    private static final RString INDEX_2 = new RString("2");
     private static final RString 前符号タイトル = new RString("※");
     private static final RString 年度タイトル = new RString("年度");
     private static final RString 被保険者番号タイトル = new RString("被保険者番号");
