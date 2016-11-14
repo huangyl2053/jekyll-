@@ -10,6 +10,10 @@ module DBC {
 
         export class Events {
 
+            public static onChange_rdbShikyuKubun(): string {
+                return "onChange_rdbShikyuKubun";
+            }
+
         }
 
         export class Controls {
