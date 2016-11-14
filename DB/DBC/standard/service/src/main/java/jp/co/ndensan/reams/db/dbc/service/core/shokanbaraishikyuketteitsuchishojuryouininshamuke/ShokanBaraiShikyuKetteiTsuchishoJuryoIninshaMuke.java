@@ -126,7 +126,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         RString kyufuShu = RString.EMPTY;
         for (ShokanKetteiTsuchiShoShiharai shiharai : shiharaiList) {
             item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
-            kyufuShu = 種類Map.get(getJufukuKey(shiharai));
+            kyufuShu = 種類Map.get(getJufukuKey(shiharai)) == null ? RString.EMPTY : 種類Map.get(getJufukuKey(shiharai));
             
             item.setBunshoNo(batchPram.get文書番号());
             if (kyufuShu.length() <= 文字数_38) {
