@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -67,24 +66,26 @@ public class FutangendogakuShinsei {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = null;
         HihokenshaNo 被保険者番号 = null;
-        boolean データなし = true;
+        boolean データあり = true;
         if (taishoshaKey != null) {
             div.setShikibetsuCode(taishoshaKey.get識別コード().getColumnValue());
             識別コード = taishoshaKey.get識別コード();
             被保険者番号 = taishoshaKey.get被保険者番号();
         }
+
         if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
             div.getBtnDispGemmenJoho().setDisabled(true);
             div.getBtnAddShinsei().setDisabled(true);
             div.getBtnDispShisetsuJoho().setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(共通エリア_保存する, true);
-            データなし = false;
+            データあり = false;
         } else {
             if (承認メニューID.equals(ResponseHolder.getMenuID())) {
-                データなし = FutangendogakuNinteiService.createInstance().canBe利用者(被保険者番号, FlexibleDate.getNowDate());
+                データあり = FutangendogakuNinteiService.createInstance().canBe利用者(被保険者番号, FlexibleDate.getNowDate());
             }
         }
-        if (!ResponseHolder.isReRequest() && !データなし) {
+
+        if (!ResponseHolder.isReRequest() && !データあり) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
 
@@ -107,6 +108,9 @@ public class FutangendogakuShinsei {
                     row.setSelectable(Boolean.FALSE);
                 }
             }
+        }
+        if (rows.isEmpty()) {
+            div.getShinseiList().getBtnAddShinsei().setDisabled(false);
         }
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).respond();

@@ -248,7 +248,7 @@ public class FutangendogakuNinteiShinseiHandler {
             承認しない時関連項目処理();
         }
     }
-    
+
     public void onBlur_txtTekiyoYMD() {
         set負担限度額();
     }
@@ -490,7 +490,7 @@ public class FutangendogakuNinteiShinseiHandler {
 
         set負担限度額();
     }
-    
+
     /**
      * 負担段階を再セットする
      */
@@ -517,7 +517,7 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getDdlRiyoshaFutanDankai().setSelectedKey(RiyoshaFutanDankai.第一段階.getコード());
         }
     }
-    
+
     private void set境界層() {
         if (ShinseiRiyuKubun.世帯非課税.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
             div.getChkKyokaiso().setDisabled(false);
@@ -810,7 +810,7 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getTxtShinseiYMD().setValue(futanGendogakuNintei.get申請年月日());
         init申請理由DDL();
         div.getDdlShinseiRiyu().setSelectedKey(futanGendogakuNintei.get申請理由区分());
-        
+
         this.set遺族年金and障害年金(futanGendogakuNintei);
 
         div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState(資格対象者));
@@ -922,7 +922,7 @@ public class FutangendogakuNinteiShinseiHandler {
         }
         div.getTxtHiShoninRiyu().setValue(futanGendogakuNintei.get非承認理由());
     }
-    
+
     private ShoKisaiHokenshaNo get証記載保険者番号(FlexibleDate 申請日) {
 
         HokenshaListLoader loader = HokenshaListLoader.createInstance();
@@ -1330,10 +1330,10 @@ public class FutangendogakuNinteiShinseiHandler {
     public List<FutanGendogakuNintei> get申請一覧情報(HihokenshaNo 被保険者番号) {
         return FutangendogakuNinteiService.createInstance().load負担限度額認定申請All(被保険者番号);
     }
-    
+
     /**
      * 自動でセットされた負担段階から変更されているかチェック
-     * 
+     *
      * @return RString
      */
     public boolean check負担段階変更有無() {
@@ -1343,7 +1343,7 @@ public class FutangendogakuNinteiShinseiHandler {
         }
         return false;
     }
-    
+
     private RString get初期負担段階() {
         RString 負担段階コード = null;
         if (ShinseiRiyuKubun.世帯非課税.getコード().equals(div.getDdlShinseiRiyu().getSelectedKey())) {
@@ -1370,7 +1370,7 @@ public class FutangendogakuNinteiShinseiHandler {
             set申請情報エリア表示制御承認画面用();
         }
     }
-    
+
     private void set申請情報エリア表示制御申請画面用() {
         div.getRadKetteiKubun().setDisabled(true);
         div.getTxtKetteiYMD().setDisabled(true);
@@ -1621,6 +1621,8 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set非承認理由(formFgn.get非承認理由() == null ? RString.EMPTY : formFgn.get非承認理由());
         builder.set遺族年金受給フラグ(formFgn.is遺族年金受給フラグ());
         builder.set障害年金受給フラグ(formFgn.is障害年金受給フラグ());
+        builder.set境界層該当者区分(formFgn.is境界層該当者区分());
+        builder.set激変緩和措置対象者区分(formFgn.is激変緩和措置対象者区分());
 
         if (!formFgn.getGemmenGengakuShinseiList().isEmpty()) {
             GemmenGengakuShinseiIdentifier identifier = new GemmenGengakuShinseiIdentifier(
