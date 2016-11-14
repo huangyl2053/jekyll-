@@ -69,6 +69,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
     private static final int ORDER_13 = 13;
     private static final int ORDER_14 = 14;
     private static final int ORDER_15 = 15;
+    private static final int ORDER_16 = 16;
     private static final Code コート_1 = new Code("1");
     private static final Code コート_0 = new Code("0");
     private static final FlexibleDate チェック_DATE = new FlexibleDate("20150801");
@@ -465,13 +466,17 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             if (!(受給申請事由 != null && 区分_4.equals(受給申請事由.getColumnValue()) && 区分_0.equals(申請状況区分))) {
                 continue;
             }
+            Code 効無効区分 = 受給者台帳.getYukoMukoKubun();
+            if (効無効区分 == null || !区分_1.equals(効無効区分.getColumnValue())) {
+                continue;
+            }
             if (isBeforeDate(受給者台帳.getNinteiYukoKikanKaishiYMD(), 受給者台帳.getJukyuShinseiYMD())
                     && isBeforeDate(受給者台帳.getJukyuShinseiYMD(), 受給者台帳.getNinteiYukoKikanShuryoYMD())) {
                 continue;
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 受給者台帳.getJukyuShinseiYMD())
-                        && isBeforeDate(受給者台帳.getJukyuShinseiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(受給者台帳.getJukyuShinseiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規3(受給者台帳, 被保険者台帳, 宛名情報);
@@ -486,6 +491,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         }
         boolean hasError = true;
         for (KyotakuEntity 居宅計画 : 居宅計画List) {
+            if (居宅計画.get計画事業者番号() == null || RString.isNullOrEmpty(居宅計画.get計画事業者番号().getColumnValue().trim())) {
+                continue;
+            }
             if (!コード_3.equals(居宅計画.get居宅サービス計画作成区分コード())
                     && !RString.isNullOrEmpty(居宅計画.getサービス種類コード())) {
                 hasError = false;
@@ -495,6 +503,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         }
         if (hasError) {
             for (KyotakuEntity 居宅計画 : 居宅計画List) {
+                if (居宅計画.get計画事業者番号() == null || RString.isNullOrEmpty(居宅計画.get計画事業者番号().getColumnValue().trim())) {
+                    continue;
+                }
                 送付エラー新規4(最新受給者台帳, 最新被保険者台帳, 居宅計画, 宛名情報);
             }
         }
@@ -530,7 +541,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
             for (KyotakuEntity 居宅計画entity : 居宅計画List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 居宅計画entity.get適用開始日())
-                        && isBeforeDate(居宅計画entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(居宅計画entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規6(最新受給者台帳, 被保険者台帳, 居宅計画List.get(ORDER_0), 宛名情報);
@@ -610,7 +621,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 標準負担entity.get適用開始日())
-                        && isBeforeDate(標準負担entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(標準負担entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規9(最新受給者台帳, 被保険者台帳, 標準負担entity, 宛名情報);
@@ -636,7 +647,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 申請日)
-                        && isBeforeDate(申請日, 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(申請日, 被保険者台帳.getShikakuSoshitsuYMD())) {
                     hasError = false;
                     break;
                 }
@@ -704,7 +715,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 利用者負担entity.getTekiyoKaishiYMD())
-                        && isBeforeDate(利用者負担entity.getTekiyoKaishiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(利用者負担entity.getTekiyoKaishiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規11(最新受給者台帳, 被保険者台帳, 利用者負担entity, 宛名情報);
@@ -730,7 +741,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             boolean hasError = true;
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 申請日)
-                        && isBeforeDate(申請日, 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(申請日, 被保険者台帳.getShikakuSoshitsuYMD())) {
                     hasError = false;
                     break;
                 }
@@ -796,7 +807,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 支払方法変更entity.getTekiyoKaishiYMD())
-                        && isBeforeDate(支払方法変更entity.getTekiyoKaishiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(支払方法変更entity.getTekiyoKaishiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規13(最新受給者台帳, 被保険者台帳, 宛名情報);
@@ -816,7 +827,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 支払方法変更entity.getTekiyoKaishiYMD())
-                        && isBeforeDate(支払方法変更entity.getTekiyoKaishiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(支払方法変更entity.getTekiyoKaishiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規14(最新受給者台帳, 被保険者台帳, 宛名情報);
@@ -838,7 +849,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 特定入所者entity.get適用開始日())
-                        && isBeforeDate(特定入所者entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(特定入所者entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規15(最新受給者台帳, 被保険者台帳, 特定入所者entity, 宛名情報);
@@ -861,7 +872,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             FlexibleDate 申請日 = 特定入所者entity.get申請日();
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 申請日)
-                        && isBeforeDate(申請日, 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(申請日, 被保険者台帳.getShikakuSoshitsuYMD())) {
                     hasError = false;
                     break;
                 }
@@ -935,7 +946,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 社福減免entity.get適用開始日())
-                        && isBeforeDate(社福減免entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(社福減免entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規17(受給者台帳List.get(ORDER_0), 被保険者台帳List.get(ORDER_0), 社福減免List.get(ORDER_0), 宛名情報);
@@ -955,7 +966,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             }
             for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
                 if (isBeforeDate(被保険者台帳.getShikakuShutokuYMD(), 総合事業対象者entity.getTekiyoKaishiYMD())
-                        && isBeforeDate(総合事業対象者entity.getTekiyoKaishiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
+                        && isBeforeDate喪失年月日(総合事業対象者entity.getTekiyoKaishiYMD(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
                 送付エラー新規18(最新受給者台帳, 被保険者台帳, 宛名情報);
@@ -1150,7 +1161,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         RYearMonth 処理年月 = processParameter.get処理年月();
         FlexibleDate 処理年月日 = new FlexibleDate(処理年月.toDateString().concat(RST_01));
         for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
-            if (isBeforeDate(処理年月日, 被保険者台帳.getShikakuSoshitsuYMD())) {
+            if (isBeforeDate喪失年月日(処理年月日, 被保険者台帳.getShikakuSoshitsuYMD())) {
                 資格状況 = true;
                 break;
             }
@@ -1240,6 +1251,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.setJukyuShinseiJiyu(new Code(受給者台帳Info.get(ORDER_13)));
         entity.setJukyuShinseiYMD(new FlexibleDate(受給者台帳Info.get(ORDER_14)));
         entity.setRirekiNo(受給者台帳Info.get(ORDER_15));
+        entity.setShinseiJokyoKubun(受給者台帳Info.get(ORDER_16));
         return entity;
     }
 
@@ -1292,6 +1304,8 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         List<RString> 利用者負担Info = 利用者負担.split(SPLIT.toString());
         entity.setTekiyoKaishiYMD(new FlexibleDate(利用者負担Info.get(ORDER_0)));
         entity.setTekiyoShuryoYMD(new FlexibleDate(利用者負担Info.get(ORDER_1)));
+        entity.setShinseiYMD(new FlexibleDate(利用者負担Info.get(ORDER_2)));
+        entity.setKetteiYMD(new FlexibleDate(利用者負担Info.get(ORDER_3)));
         return entity;
     }
 
@@ -1659,6 +1673,16 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
 
     private boolean isBeforeDate(FlexibleDate date1, FlexibleDate date2) {
         if (isDateEmpty(date1) || isDateEmpty(date2)) {
+            return false;
+        }
+        return date1.isBefore(date2);
+    }
+
+    private boolean isBeforeDate喪失年月日(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date2)) {
+            return true;
+        }
+        if (isDateEmpty(date1)) {
             return false;
         }
         return date1.isBefore(date2);

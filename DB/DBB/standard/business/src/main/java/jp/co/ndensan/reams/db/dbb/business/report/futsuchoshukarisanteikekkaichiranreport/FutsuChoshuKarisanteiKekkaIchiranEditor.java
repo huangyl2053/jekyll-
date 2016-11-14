@@ -262,8 +262,11 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
         }
         source.listLower_6 = new RString(賦課納期数);
         if (普徴仮算定計算後賦課 != null) {
-            Decimal 合計値 = 普徴仮算定計算後賦課.get特徴期別金額01().add(普徴仮算定計算後賦課.get特徴期別金額02()).
-                    add(普徴仮算定計算後賦課.get特徴期別金額03());
+            Decimal 特徴期別金額01 = 普徴仮算定計算後賦課.get特徴期別金額01() == null ? Decimal.ZERO : 普徴仮算定計算後賦課.get特徴期別金額01();
+            Decimal 特徴期別金額02 = 普徴仮算定計算後賦課.get特徴期別金額02() == null ? Decimal.ZERO : 普徴仮算定計算後賦課.get特徴期別金額02();
+            Decimal 特徴期別金額03 = 普徴仮算定計算後賦課.get特徴期別金額03() == null ? Decimal.ZERO : 普徴仮算定計算後賦課.get特徴期別金額03();
+            Decimal 合計値 = 特徴期別金額01.add(特徴期別金額02).
+                    add(特徴期別金額03);
             if (合計値.intValue() == NUM0) {
                 source.listLower_7 = 徴収方法_普通徴収;
             } else if (合計値.intValue() > NUM1) {
@@ -318,11 +321,11 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
             if (i < 納期数 - 1) {
                 Decimal 月処理区分1 = new Decimal(月処理区分list.get(i).toString());
                 Decimal 月処理区分2 = new Decimal(月処理区分list.get(i + 1).toString());
-                Decimal 普徴期別金額1 = 普徴期別金額list.get(i);
-                Decimal 普徴期別金額2 = 普徴期別金額list.get(i + 1);
-                if (月処理区分1.compareTo(月処理区分_5) <= 0
-                        && 月処理区分2.compareTo(月処理区分_5) <= 0
-                        && 普徴期別金額1.add(普徴期別金額2).compareTo(Decimal.ZERO) > 0) {
+                Decimal 普徴期別金額1 = 普徴期別金額list.get(i) == null ? Decimal.ZERO : 普徴期別金額list.get(i);
+                Decimal 普徴期別金額2 = 普徴期別金額list.get(i + 1) == null ? Decimal.ZERO : 普徴期別金額list.get(i + 1);
+                if (月処理区分_5.compareTo(月処理区分1) >= 0
+                        && 月処理区分_5.compareTo(月処理区分2) >= 0
+                        && Decimal.ZERO.compareTo(普徴期別金額1.add(普徴期別金額2)) < 0) {
                     賦課納期数++;
                 }
             } else {
