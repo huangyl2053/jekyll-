@@ -847,7 +847,7 @@ public class IkenshoSakuseiIraiHandler {
     }
 
     private void set意見書作成料(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business, ShujiiIkenshoSakuseiRyoSeikyushoItem item) {
-        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
             RString shinkiZaitakuKingaku = item.getShinkiZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiZaitakuKingaku.substring(数字_0, 数字_1));
@@ -859,7 +859,7 @@ public class IkenshoSakuseiIraiHandler {
             item.setSeikyugakuIkenshoSakuseiRyo3(shinkiZaitakuKingaku.substring(数字_2, 数字_3));
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiZaitakuKingaku.substring(数字_3, 数字_4));
         }
-        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
             RString shinkiShisetsuKingaku = item.getShinkiShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiShisetsuKingaku.substring(数字_0, 数字_1));
@@ -872,7 +872,7 @@ public class IkenshoSakuseiIraiHandler {
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiShisetsuKingaku.substring(数字_3, 数字_4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
             RString keizokuZaitakuKingaku = item.getKeizokuZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuZaitakuKingaku.substring(数字_0, 数字_1));
@@ -885,7 +885,7 @@ public class IkenshoSakuseiIraiHandler {
             item.setSeikyugakuIkenshoSakuseiRyo4(keizokuZaitakuKingaku.substring(数字_3, 数字_4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
             RString keizokuShisetsuKingaku = item.getKeizokuShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuShisetsuKingaku.substring(数字_0, 数字_1));
