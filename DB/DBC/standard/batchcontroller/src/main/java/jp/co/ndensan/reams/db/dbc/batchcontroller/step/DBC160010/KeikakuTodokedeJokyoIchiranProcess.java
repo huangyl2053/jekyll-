@@ -115,8 +115,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-    private static final RString 一覧EUCエンティティID = new RString("DBU900002");
-    private static final RString CSVFILENAME = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString 一覧EUCエンティティID = new RString("DBC900004");
+    private static final RString CSVFILENAME = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
