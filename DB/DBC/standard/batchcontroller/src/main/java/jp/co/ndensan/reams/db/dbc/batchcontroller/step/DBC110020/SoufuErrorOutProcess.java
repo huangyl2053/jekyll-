@@ -234,11 +234,7 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
         bodyList.add(dateChangeToRString(entity.get標準負担適用終了日()));
         bodyList.add(dateChangeToRString(entity.get給付率引下げ開始日()));
         bodyList.add(作成年月日);
-        if (entity.get処理年月() != null) {
-            bodyList.add(entity.get処理年月().toDateString());
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
+        bodyList.add(entity.get処理年月());
         return bodyList;
     }
 
@@ -295,7 +291,7 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
         entity.set引下開始日(soufuErrorTblEntity.get給付率引下げ開始日());
         entity.set作成年月日(soufuErrorTblEntity.get作成年月日());
         if (soufuErrorTblEntity.get処理年月() != null) {
-            entity.set処理年月(new FlexibleYearMonth(soufuErrorTblEntity.get処理年月().toDateString()));
+            entity.set処理年月(new FlexibleYearMonth(soufuErrorTblEntity.get処理年月()));
         }
         return entity;
     }

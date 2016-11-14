@@ -1608,7 +1608,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             entity.set要介護状態区分コード(受給者台帳.getYokaigoJotaiKubunCode());
             entity.set要介護認定申請日(受給者台帳.getJukyuShinseiYMD());
             entity.set認定開始日(受給者台帳.getNinteiYukoKikanKaishiYMD());
-            entity.set認定終了日(受給者台帳.getNinteiYukoKikanKaishiYMD());
+            entity.set認定終了日(受給者台帳.getNinteiYukoKikanShuryoYMD());
         }
         if (最新居宅計画 != null) {
             entity.set居宅事業者番号(最新居宅計画.get計画事業者番号());
@@ -1652,7 +1652,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.set償還払化開始日(FlexibleDate.EMPTY);
         entity.set給付率引下げ開始日(FlexibleDate.EMPTY);
         entity.set作成年月日(FlexibleDate.getNowDate());
-        entity.set処理年月(processParameter.get処理年月());
+        entity.set処理年月(processParameter.get処理年月().toDateString());
         hasCheckErr = true;
         return entity;
     }
