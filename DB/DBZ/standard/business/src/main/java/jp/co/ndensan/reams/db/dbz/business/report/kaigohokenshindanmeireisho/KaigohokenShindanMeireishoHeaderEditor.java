@@ -91,7 +91,7 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
         if (item.getJushinKikan() == null || item.getJushinKikan().isEmpty()) {
             source.jushinKikan = RString.EMPTY;
         } else {
-            source.jushinKikan = パターン12(new RDate(item.getJushinKikan().toString()));
+            source.jushinKikan = new RString(item.getJushinKikan().toString());
         }
         source.jushinArea = item.getJushinArea();
         source.tsuchibun2 = item.getTsuchibun2();
