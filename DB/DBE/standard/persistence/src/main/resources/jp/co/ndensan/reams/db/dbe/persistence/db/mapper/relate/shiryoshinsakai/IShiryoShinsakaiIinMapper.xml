@@ -382,6 +382,8 @@
         , dbt5116."suiteiKyufuKubunCode"
         , dbt5202."serviceKubunCode"
         , dbt5101Zenkai."shinseishoKanriNo" AS zShinseishoKanriNo
+        , dbt5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
+        , dbt5101."hihokenshaNo" AS hihokenshaNo
         FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
@@ -519,6 +521,8 @@
         <result property="suiteiKyufuKubunCode" column="suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="serviceKubunCode" column="serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="zShinseishoKanriNo" column="zShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <select id="getYoboService"
@@ -1035,6 +1039,8 @@
         , dbt5202."serviceKubunCode"
         , dbt5101Zenkai."shinseishoKanriNo" AS zShinseishoKanriNo
         , dbt5502."shinsakaiOrder"
+        , dbt5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
+        , dbt5101."hihokenshaNo" AS hihokenshaNo
         FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
@@ -1258,6 +1264,8 @@
         <result property="shujiiIryokikanCode" column="shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiOrder" column="shinsakaiOrder" />
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
 </mapper>
