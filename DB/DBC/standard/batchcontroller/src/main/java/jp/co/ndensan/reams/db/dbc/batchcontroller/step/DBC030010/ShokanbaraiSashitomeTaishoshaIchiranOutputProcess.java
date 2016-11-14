@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -39,7 +40,13 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKub
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
+import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
+import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -53,8 +60,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -141,9 +150,25 @@ public class ShokanbaraiSashitomeTaishoshaIchiranOutputProcess extends BatchKeyB
         宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         ShikibetsuTaishoPSMSearchKeyBuilder key2 = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key2.build();
+        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+        IShunoKamoku 介護給付_償還 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_償還);
+        KamokuCode 科目コード;
+        if (介護給付_償還 != null) {
+            科目コード = 介護給付_償還.getコード();
+        } else {
+            科目コード = KamokuCode.EMPTY;
+        }
+        IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
+                .set業務コード(GyomuCode.DB介護保険)
+                .setサブ業務コード(SubGyomuCode.DBC介護給付)
+                .set科目コード(科目コード)
+                .set基準日(FlexibleDate.getNowDate()).build();
+        List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
+                get参照権限科目コード(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
+        
         ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter parameter
                 = ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter.toMybatisParameter(出力順, 資格区分, psmShikibetsuTaisho,
-                        key.getPSM検索キー(), 宛先builder.build());
+                        key.getPSM検索キー(), 宛先builder.build(), searchKey, kamokuList);
         return new BatchDbReader(帳票取得SQL, parameter);
     }
 

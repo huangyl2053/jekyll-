@@ -22,6 +22,10 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.service.core.maskedkoza.MaskedKozaCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.daikoprint.DaikoPrintItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -328,28 +332,32 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 ketteiTsuchiShoSealer.setShiharaiStartHMS(setDataTimeFomart2(batchPram.get開始時間()));
                 ketteiTsuchiShoSealer.setShiharaiEndHMS(setDataTimeFomart2(batchPram.get終了時間()));
             }
-            if (!RString.isNullOrEmpty(business.get支払窓口開始時間()) && !RString.isNullOrEmpty(business.get支払窓口終了期間())) {
+            if (!RString.isNullOrEmpty(ketteiTsuchiShoSealer.getShiharaiStartHMS()) && !RString.isNullOrEmpty(ketteiTsuchiShoSealer.getShiharaiEndHMS())) {
                 ketteiTsuchiShoSealer.setKaraFugo(KARA);
             }
         }
         
         if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())
-                && ShikyuFushikyuKubun.支給.getコード().equals(business.get支給不支給決定区分())) {
-            ketteiTsuchiShoSealer.setBankName(business.get金融機関名称());
-            ketteiTsuchiShoSealer.setKouzaShu(business.get支店コード());
-            if (!ゆうちょ銀行.equals(business.get金融機関コード())) {
-                ketteiTsuchiShoSealer.setBranchBankName(business.get支店名称());
-                ketteiTsuchiShoSealer.setKouzaShu(business.get預金種別名称());
+                && ShikyuFushikyuKubun.支給.getコード().equals(business.get支給不支給決定区分())
+                && business.get口座() != null 
+                && business.get口座().getUaT0310KozaEntity().getKozaId() != 0L) {
+            IKoza 口座情報 = do口座マスク編集(business.get口座());
+            
+            ketteiTsuchiShoSealer.setBankName(口座情報.get金融機関().get金融機関名称());
+            ketteiTsuchiShoSealer.setKouzaShu(口座情報.get店番());
+            if (!ゆうちょ銀行.equals(口座情報.get金融機関コード())) {
+                ketteiTsuchiShoSealer.setBranchBankName(口座情報.get支店().get支店名称());
+                ketteiTsuchiShoSealer.setKouzaShu(口座情報.get預金種別名称());
             } else if (印字する.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_ゆうちょ銀行店名表示))) {
-                ketteiTsuchiShoSealer.setBranchBankName(business.get支店名称());
+                ketteiTsuchiShoSealer.setBranchBankName(口座情報.get支店().get支店名称());
             }
             
-            ketteiTsuchiShoSealer.setKouzaNo(business.get口座番号());
+            ketteiTsuchiShoSealer.setKouzaNo(口座情報.get口座番号());
             
             if (カナ氏名.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_口座名義人カナ優先区分))) {
-                ketteiTsuchiShoSealer.setKouzaMeigi(business.get口座名義人());
+                ketteiTsuchiShoSealer.setKouzaMeigi(口座情報.get口座名義人().value());
             } else {
-                ketteiTsuchiShoSealer.setKouzaMeigi(business.get口座名義人漢字());
+                ketteiTsuchiShoSealer.setKouzaMeigi(口座情報.get口座名義人漢字().value());
             }
             ketteiTsuchiShoSealer.setShiharaiYoteiYMD(batchPram.getHurikomiYMD() == null
                 ? RString.EMPTY : batchPram.getHurikomiYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
@@ -384,8 +392,13 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         return setKetteiTsuchiShoSealer(ketteiTsuchiShoSealer, ninshoshaSource, business, atesaki);
     }
 
+    private IKoza do口座マスク編集(TokuteiKozaRelateEntity koza) {
+        MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
+        return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
+    }
+    
     private RString get種別タイトル(ShokanKetteiTsuchiShoShiharai business) {
-        if (!ShikyuFushikyuKubun.不支給.getコード().equals(business.get支給不支給決定区分())) {
+        if (ShikyuFushikyuKubun.不支給.getコード().equals(business.get支給不支給決定区分())) {
             return 種別タイトル_口座種別;
         }
         RString 種別タイトル = RString.EMPTY;
