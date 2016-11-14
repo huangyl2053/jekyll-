@@ -253,12 +253,12 @@
                 "koza".*
             FROM "KetteiTsuchishoInfoTempEntity"
             LEFT JOIN
-                rgua."UaFt250FindAtesaki"('DB','DBC','','false','','','true','true','false','false','') AS "Atesaki"
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki"/> AS "Atesaki"
             ON "Atesaki"."shikibetsuCode" = "KetteiTsuchishoInfoTempEntity"."shikibetsuCode"
             LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
             ON "KetteiTsuchishoInfoTempEntity"."kozaID" = "koza"."uaT0310Koza_kozaId"
             WHERE 1 = 1
-            <if test="支払方法抽出区分 == 1">
+            <if test="支払方法抽出区分 != null and 支払方法抽出区分 == 1">
                 AND "KetteiTsuchishoInfoTempEntity"."shiharaiHohoKubunCode" = '2'
                 AND "KetteiTsuchishoInfoTempEntity"."ketteiShikyuKubunCode" = '1'
             </if>
@@ -273,12 +273,7 @@
                 "ShikibetsuTaisho" . "kanaMeisho" AS "kanaMeisho"
             FROM master
             INNER JOIN 
-                 rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',FALSE,'','','','','','','','','','','',true,
-                       '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                       true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',(
-                    SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
-                    FROM master
-                )) AS "ShikibetsuTaisho"
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
             ON "ShikibetsuTaisho"."shikibetsuCode" = "master"."shikibetsuCode"
         ) AS sub
         ${出力順}

@@ -49,6 +49,10 @@ public class ServicehiShikyuKetteiTsuchisho {
     public KetteiTsuchishoInfoTempEntity to高額介護サービスの決定通知書情報(KetteiTsuchishoInfoTempResultEntity entity) {
         KetteiTsuchishoInfoTempEntity tempEntity = to決定通知書情報(entity);
         if (審査方法区分_審査済み.equals(entity.get審査方法区分())) {
+            tempEntity.setKetteiShikyuKubunCode(entity.get判定支給区分コード());
+            tempEntity.setKogakuShikyuGaku(entity.get支給金額());
+            tempEntity.setRiyoshaFutanGaku(entity.get本人支払額());
+        } else {
             tempEntity.setKetteiShikyuKubunCode(entity.get支給区分コード());
             tempEntity.setKogakuShikyuGaku(entity.get高額支給額());
             tempEntity.setRiyoshaFutanGaku(entity.get利用者負担額());

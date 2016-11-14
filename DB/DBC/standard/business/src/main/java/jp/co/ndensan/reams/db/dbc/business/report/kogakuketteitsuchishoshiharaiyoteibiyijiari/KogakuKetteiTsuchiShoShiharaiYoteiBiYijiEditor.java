@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharai
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -72,6 +73,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     private static final RString SIZE_FOUR = new RString("4");
     private static final RString コード_9900 = new RString("9900");
     private final RString 金融機関コード;
+    private final SofubutsuAtesakiSource compSofubutsuAtesakiソース;
     private static final RString 支給金額 = new RString("支給金額");
     private static final RString 決定額 = new RString("決定額");
 
@@ -85,6 +87,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
      * @param 認証者ソースデータ NinshoshaSource
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      * @param 金融機関コード RString
+     * @param compSofubutsuAtesakiソース SofubutsuAtesakiSource
      */
     public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor(
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity 帳票情報,
@@ -93,7 +96,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             List<RString> 通知書定型文List,
             NinshoshaSource 認証者ソースデータ,
             ChohyoSeigyoKyotsu 帳票制御共通情報,
-            RString 金融機関コード) {
+            RString 金融機関コード,
+            SofubutsuAtesakiSource compSofubutsuAtesakiソース) {
         this.帳票情報 = 帳票情報;
         this.連番 = 連番;
         this.titleList = titleList;
@@ -101,10 +105,12 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         this.認証者ソースデータ = 認証者ソースデータ;
         this.帳票制御共通情報 = 帳票制御共通情報;
         this.金融機関コード = 金融機関コード;
+        this.compSofubutsuAtesakiソース = compSofubutsuAtesakiソース;
     }
 
     @Override
     public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource edit(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+        set宛先情報(source, compSofubutsuAtesakiソース);
         if (帳票情報.get識別コード() != null) {
             source.shikibetsuCode = 帳票情報.get識別コード().value();
         }
@@ -133,7 +139,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         } else {
             source.testPrint = RString.EMPTY;
         }
-        source.renban = new RString(連番);
+        source.renban = RString.EMPTY;
         setタイトル(source);
         if (通知書定型文List.size() > INDEX_ONE) {
             source.tsuchibun1 = 通知書定型文List.get(INDEX_ONE);
@@ -179,12 +185,13 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         }
 
         if (支給.equals(帳票情報.get支給_不支給決定区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())
-                && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
+                && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0 && 帳票情報.get支払予定日() != null) {
             source.shiharaiYoteiYMD = 年月日編集(帳票情報.get支払予定日());
         }
         source.tsuchino = 帳票情報.get決定通知書番号();
         source.tsuban = new RString(連番);
         set通知文２(source);
+        set通知文Small(source);
         set通知文Large(source);
         set通知文上段Small(source);
         set通知文下段Large(source);
@@ -298,6 +305,10 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.tsuchibun2 = get通知書定型文(INDEX_TWO);
     }
 
+    private void set通知文Small(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
+        source.toiawasesaki = get通知書定型文(INDEX_TWO);
+    }
+
     private void set通知文Large(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source) {
         source.tsuchibunLarge = get通知書定型文2(INDEX_TWO, SIZE_TWO);
     }
@@ -375,5 +386,37 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             return RString.EMPTY;
         }
         return 文字列;
+    }
+
+    private void set宛先情報(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source, SofubutsuAtesakiSource compSofubutsuAtesakiソース) {
+        source.customerBarCode = compSofubutsuAtesakiソース.customerBarCode;
+        source.dainoKubunMei = compSofubutsuAtesakiソース.dainoKubunMei;
+        source.gyoseiku2 = compSofubutsuAtesakiソース.gyoseiku;
+        source.jusho4 = compSofubutsuAtesakiソース.jusho1;
+        source.jusho5 = compSofubutsuAtesakiソース.jusho2;
+        source.jusho6 = compSofubutsuAtesakiソース.jusho3;
+        source.jushoText = compSofubutsuAtesakiソース.jushoText;
+        source.kakkoLeft1 = compSofubutsuAtesakiソース.kakkoLeft1;
+        source.kakkoLeft2 = compSofubutsuAtesakiソース.kakkoLeft2;
+        source.kakkoRight1 = compSofubutsuAtesakiソース.kakkoRight1;
+        source.kakkoRight2 = compSofubutsuAtesakiソース.kakkoRight2;
+        source.katagaki3 = compSofubutsuAtesakiソース.katagaki1;
+        source.katagaki4 = compSofubutsuAtesakiソース.katagaki2;
+        source.katagakiSmall1 = compSofubutsuAtesakiソース.katagakiSmall1;
+        source.katagakiSmall2 = compSofubutsuAtesakiソース.katagakiSmall2;
+        source.katagakiText = compSofubutsuAtesakiソース.katagakiText;
+        source.meishoFuyo1 = compSofubutsuAtesakiソース.meishoFuyo1;
+        source.meishoFuyo2 = compSofubutsuAtesakiソース.meishoFuyo2;
+        source.samaBun1 = compSofubutsuAtesakiソース.samaBun1;
+        source.samaBun2 = compSofubutsuAtesakiソース.samaBun2;
+        source.samabunShimei1 = compSofubutsuAtesakiソース.samabunShimei1;
+        source.samabunShimei2 = compSofubutsuAtesakiソース.samabunShimei2;
+        source.samabunShimeiText = compSofubutsuAtesakiソース.samabunShimeiText;
+        source.shimei5 = compSofubutsuAtesakiソース.shimei1;
+        source.shimei6 = compSofubutsuAtesakiソース.shimei2;
+        source.shimeiSmall1 = compSofubutsuAtesakiソース.shimeiSmall1;
+        source.shimeiSmall2 = compSofubutsuAtesakiソース.shimeiSmall2;
+        source.shimeiText = compSofubutsuAtesakiソース.shimeiText;
+        source.yubinNo = compSofubutsuAtesakiソース.yubinNo;
     }
 }
