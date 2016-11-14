@@ -218,7 +218,7 @@ public class DBC2210011Main {
             if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.削除の確認.getMessage().getCode()))
                     && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
                 div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList()
-                        .getSelectedItems().remove(div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList()
+                        .getDataSource().remove(div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList()
                                 .getDgTokubetsuKyufuJigyoshaDetailServiceList().getClickedRowId());
             }
         } else if (修正モード.equals(div.getHiddenModelOne())) {
@@ -307,11 +307,12 @@ public class DBC2210011Main {
             }
             if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()))
                     && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+                修正削除の前排他の解除(div);
                 ViewStateHolder.clear();
                 getHandler(div).onClick_btnSearch();
                 div.setHiddenModelOne(RString.EMPTY);
                 div.setHiddenModel(RString.EMPTY);
-                修正削除の前排他の解除(div);
+
                 return ResponseData.of(div).setState(DBC2210011StateName.検索表示);
 
             }

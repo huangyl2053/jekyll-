@@ -80,7 +80,7 @@ public class PostMainPanelCheck {
             RString 後期ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(),
                     SubGyomuCode.DBC介護給付);
             if (導入形態コード.toString().equals(NUM_120.toString())) {
-                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期情報);
+                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(広域後期情報);
                 単一messeges(後期情報List);
                 if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null);
             }
@@ -107,7 +107,7 @@ public class PostMainPanelCheck {
             RString 後期ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(),
                     SubGyomuCode.DBC介護給付);
             if (導入形態コード.toString().equals(NUM_120.toString())) {
-                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期情報);
+                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(広域後期情報);
                 単一messeges(後期情報List);
                 if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null);
             }

@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001.Yoga
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4920001.YogaigoNinteiKekkaRenkeiDataTorikomiHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4920001.YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -69,13 +71,13 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
             getHandler(div).before_onClick(files);
             YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler validationHandler = new YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler(div);
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
-                validationHandler.日次進捗情報ファイルチェック(pairs);
-            } else {
-                validationHandler.認定結果情報ファイルチェック(pairs);
-            }
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            if (!div.getHdNum().getValue().equals(new RString("0")) && !div.getUploadTool().getRemainUnUploadedFiles().get(0).
+                    equalsIgnoreCase(div.getDataGridFile().getDataSource().get(0).getFileName())) {
+                if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
+                    throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("日次進捗情報ファイル"));
+                } else {
+                    throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("認定結果情報ファイル"));
+                }
             }
             RString csvPath = getHandler(div).onClick_appurodo(files);
             ViewStateHolder.put(ViewStateKeys.利用モード, csvPath);
@@ -96,6 +98,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
      * @return ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv>
      */
     public ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv> after_onClick(YogaigoNinteiKekkaRenkeiDataTorikomiDiv div) {
+
         return ResponseData.of(div).setState(DBD4920001StateName.一覧表示);
     }
 

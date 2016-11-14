@@ -530,6 +530,8 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnComplete(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        getHandler(div).前排他キーの解除(被保険者番号);
         return ResponseData.of(div).forwardWithEventName(DBC0440011TransitionEventName.完了).respond();
     }
 
@@ -541,7 +543,13 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnContinue(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
-        return onLoad(div);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
+        getHandler(div).initialize申請情報検索(メニューID, 被保険者番号, 導入形態コード);
+        return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+
     }
 
     private void release送付済制御(RString 画面モード, KogakuSabisuhiShikyuShinseiPanelDiv div) {

@@ -201,8 +201,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();
             高額支給判定結果entity = 高額支給判定結果entity.modified();
-            if (result != null && result.get高額介護サービス費支給審査決定Entity() != null) {
-                修正前支給区分 = result.get高額介護サービス費支給審査決定Entity().get支給区分コード();
+            if (result != null && result.get高額介護サービス費支給判定結果Entity() != null) {
+                修正前支給区分 = result.get高額介護サービス費支給判定結果Entity().get支給区分コード();
             }
         } else if (削除モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.deleted();
@@ -216,7 +216,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity.set高額介護サービス費支給判定結果Entity(高額支給判定結果entity);
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().is更新処理(entity, メニューID);
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().dealKyufujisseki(
-                result, 修正前支給区分, 画面モード, 被保険者番号,
+                修正前支給区分, 高額支給判定結果entity.get支給区分コード(), 画面モード, 被保険者番号,
                 サービス年月, 証記載保険者番号, 履歴番号, 給付実績編集用entity);
     }
 
@@ -251,8 +251,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();
             高額支給判定結果entity = 高額支給判定結果entity.modified();
-            if (result != null && result.get高額介護サービス費支給審査決定Entity() != null) {
-                修正前支給区分 = result.get高額介護サービス費支給審査決定Entity().get支給区分コード();
+            if (result != null && result.get事業高額介護サービス費支給判定結果Entity() != null) {
+                修正前支給区分 = result.get事業高額介護サービス費支給判定結果Entity().get支給区分コード();
             }
         } else if (削除モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.deleted();
@@ -266,7 +266,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity.set事業高額介護サービス費支給判定結果Entity(高額支給判定結果entity);
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().is更新処理(entity, メニューID);
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().dealKyufujisseki(
-                result, 修正前支給区分, 画面モード, 被保険者番号,
+                修正前支給区分, 高額支給判定結果entity.get支給区分コード(), 画面モード, 被保険者番号,
                 サービス年月, 証記載保険者番号, 履歴番号, 給付実績編集用entity);
     }
 

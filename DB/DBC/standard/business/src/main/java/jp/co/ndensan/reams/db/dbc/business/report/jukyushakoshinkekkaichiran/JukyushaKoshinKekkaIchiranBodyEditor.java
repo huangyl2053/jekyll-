@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichira
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -55,6 +57,7 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
     private final RString 帳票DBC200006 = new RString("DBC200006_KokuhorenJukyushaDaichoIchiran");
     private final RString 帳票DBC200055 = new RString("DBC200055_JukyushaKoshinkekkaIchiran");
     private final RString 帳票DBC200058 = new RString("DBC200058_JukyushaTotsugokekkaIchiran");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -80,6 +83,8 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
             source.listList1_1 = 受給者情報.get突合結果区分().concat(コロン).concat(突合結果名称);
         }
         source.listList1_4 = 被保険者情報.get登録被保険者番号().getColumnValue();
+        source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                source.listList1_4);
         source.listList1_5 = 被保険者情報.get宛名カナ名称();
         source.listList1_6 = 被保険者情報.get行政区コード();
         source.listList1_7 = 被保険者情報.get行政区名();

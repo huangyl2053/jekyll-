@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbc.business.report.jyuryoitakukeiyakukakuninsho;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufujuryoininkeiyakutoroku.KaigoKyufuJuryoininKeiyakuTorokuRiyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jyuryoitakukeiyakukakuninsho.JyuryoItakuKeiyakuKakuninShoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 帳票設計_DBCMN31003_介護保険受領委任契約承認（不承認）確認書（利用者向け）Editor
@@ -17,6 +20,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 public class JyuryoItakuKeiyakuKakuninShoEditor
         implements IJyuryoItakuKeiyakuKakuninShoEditor {
 
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private final KaigoKyufuJuryoininKeiyakuTorokuRiyoshaEntity entity;
     private final NinshoshaSource 認証者情報;
 
@@ -86,6 +90,8 @@ public class JyuryoItakuKeiyakuKakuninShoEditor
         source.tsuchibun1 = entity.get文書1();
         source.hihokenshaName = entity.get被保険者氏名();
         source.hihokenshaNo = entity.get被保険者番号().value();
+        source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                source.hihokenshaNo);
         source.shikibetuCode = entity.get識別コード();
         source.uketsukeYMD = entity.get受付日();
         source.shoninKbn = entity.get承認区分();

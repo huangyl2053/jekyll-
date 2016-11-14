@@ -179,6 +179,7 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         source.choikiCode = 高額合算自己負担額計算結果一覧表.getChoikiCode();
         source.gyoseikuCode = 高額合算自己負担額計算結果一覧表.getGyoseikuCode();
         source.hokenshaNo = 高額合算自己負担額計算結果一覧表.getHokenshaNo();
+        source.shichosonCode = 高額合算自己負担額計算結果一覧表.getShichosonCode();
     }
 
     private RString get非空文字列(RString 文字列) {

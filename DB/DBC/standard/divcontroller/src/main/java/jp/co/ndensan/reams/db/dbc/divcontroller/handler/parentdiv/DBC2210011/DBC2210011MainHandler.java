@@ -852,12 +852,24 @@ public class DBC2210011MainHandler {
             newRow.setHdnServiceCode(情報.get市町村特別給付用サービスコード().value());
             newRow.setTxtService(情報.get市町村特別給付サービス事業者().getサービス().getServiceRyakushoName());
             newRow.setTxtKanrisha(情報.get事業所管理者氏名());
-            newRow.getTxtJigyoKaishiYMD().setValue(new RDate(情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
-            newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
-            newRow.getTxtJigyoHaishiYMD().setValue(new RDate(情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
-            newRow.getTxtJigyoSaikaiYMD().setValue(new RDate(情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
-            newRow.getTxtTorokuKaishiYMD().setValue(new RDate(情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
-            newRow.getTxtTorokuShuryoYMD().setValue(new RDate(情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
+            if (情報.getサービス事業所事業開始年月日() != null) {
+                newRow.getTxtJigyoKaishiYMD().setValue(new RDate(情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
+            }
+            if (情報.getサービス事業所事業休止年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
+            }
+            if (情報.getサービス事業所事業廃止年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
+            }
+            if (情報.getサービス事業所事業再開年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
+            }
+            if (情報.get市町村特別給付登録開始年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
+            }
+            if (情報.get市町村特別給付登録終了年月日() != null) {
+                newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
+            }
             newRow.setTxtJuryoInin(TokubetsukyufuJuryoIninKubun.toValue(情報.get受領委任区分()).get名称());
             if (情報.is生活保護法による指定の有()) {
                 newRow.setTxtSeikatsuHogo(TokubetsukyufuSeikatsuHogoShiteiKubun.有.get名称());

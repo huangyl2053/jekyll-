@@ -47,6 +47,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranSource implements IReportSource
     public RString kaipageMei5;
     @ReportItem(name = "listUpper_1", length = 20, order = 16)
     public RString listUpper_1;
+    @ReportPerson(id = "A")
     @ReportItem(name = "listUpper_2", length = 15, order = 17)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 9, order = 18)
@@ -101,9 +102,6 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranSource implements IReportSource
     public RString listLower_11;
     @ReportItem(name = "listLower_12", length = 7, order = 43)
     public RString listLower_12;
-    @ReportPerson(id = "A")
-    @ReportItem(name = "shikibetsuCode", length = 15)
-    public RString shikibetsuCode;
     @ReportExpandedInfo(id = "A")
     public ExpandedInformation 拡張情報;
 
