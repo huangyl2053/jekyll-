@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -227,10 +228,14 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
                 前回介護度 = YokaigoJotaiKubun09.toValue(前回の情報.get二次判定要介護状態区分コード()).get名称();
             }
         }
+        RString 前回認定申請区分 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(前回の情報.get認定申請区分_申請時_コード())) {
+            前回認定申請区分 = NinteiShinseiShinseijiKubunCode.toValue(前回の情報.get認定申請区分_申請時_コード()).get名称();
+        }
         return new KoshinShinseishaHaakuListCSVEntity(new RString(連番), 更新未申請者把握情報.get被保険者番号(),
                 更新未申請者把握情報.get被保険者氏名(), 更新未申請者把握情報.get被保険者氏名カナ(), 更新未申請者把握情報.get郵便番号(),
                 更新未申請者把握情報.get住所(), 生年月日RString, new RString(更新未申請者把握情報.get年齢()), 前回介護度,
-                前回申請日, 前回の情報.get認定申請区分_申請時_コード(), 前回認定日, 前回認定有効開始日, 前回認定有効終了日,
+                前回申請日, 前回認定申請区分, 前回認定日, 前回認定有効開始日, 前回認定有効終了日,
                 前回の情報.get二次判定認定有効期間(), 前回の情報.get認定調査委託先コード(), 前回の情報.get認定調査委託先情報_事業者名称(),
                 前回の情報.get入所施設コード(), 前回の情報.get介護事業者_事業者名称());
     }
