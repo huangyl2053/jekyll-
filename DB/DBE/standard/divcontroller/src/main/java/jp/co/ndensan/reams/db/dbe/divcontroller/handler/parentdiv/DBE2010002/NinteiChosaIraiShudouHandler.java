@@ -325,7 +325,8 @@ public class NinteiChosaIraiShudouHandler {
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
-                RString.EMPTY,
+                div.getTxtHokkoymd().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString(),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,

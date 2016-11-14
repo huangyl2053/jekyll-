@@ -98,7 +98,7 @@ public class NinnteiChousairaiShudouPrintService {
             List<ChosaIraishoHeadItem> 要介護認定調査依頼書 = new ArrayList<>();
             for (ChosaIraishoHeadItem item : 要介護認定調査依頼書List) {
                 item = new ChosaIraishoHeadItem(
-                        ninshoshaSource.hakkoYMD,
+                        item.getHakkoYMD1(),
                         ninshoshaSource.denshiKoin,
                         ninshoshaSource.ninshoshaYakushokuMei,
                         ninshoshaSource.ninshoshaYakushokuMei2,
