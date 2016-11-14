@@ -86,6 +86,8 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
         }
         if (!RString.isNullOrEmpty(被保険者一時.get識別コード())) {
             source.shikibetuCode = new ShikibetsuCode(被保険者一時.get識別コード());
+        } else {
+            source.shikibetuCode = ShikibetsuCode.EMPTY;
         }
         source.yubinNo = getNotNull(被保険者一時.get郵便番号());
         source.choikiCode = getNotNull(被保険者一時.get町域コード());

@@ -103,7 +103,8 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         }
         if (item.get識別コード() != null) {
             source.listUpper_2 = item.get識別コード().value();
-            source.shikibetsuCode = item.get識別コード().value();
+        } else {
+            source.listUpper_2 = RString.EMPTY;
         }
 
         UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
@@ -224,7 +225,8 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         }
         if (item.get識別コード() != null) {
             source.listUpper_2 = item.get識別コード().value();
-            source.shikibetsuCode = item.get識別コード().value();
+        } else {
+            source.listUpper_2 = RString.EMPTY;
         }
         UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
 
