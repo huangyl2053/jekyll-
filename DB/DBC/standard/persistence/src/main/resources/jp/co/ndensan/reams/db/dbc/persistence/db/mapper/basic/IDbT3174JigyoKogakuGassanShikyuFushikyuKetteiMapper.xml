@@ -50,7 +50,7 @@
          "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."heichoNaiyo" as "dbT3174JigyoKogakuGassanShikyuFushikyuKettei_heichoNaiyo",
          "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."shiharaiKaishiTime" as "dbT3174JigyoKogakuGassanShikyuFushikyuKettei_shiharaiKaishiTime",
          "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."shiharaiShuryoTime" as "dbT3174JigyoKogakuGassanShikyuFushikyuKettei_shiharaiShuryoTime",
-         "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD" as "dbT3174JigyoKogakuGassanShikyuFushikyuKettei_ketteiTsuchiSakuseiYMD",
+         "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."ketteiTsuchiSakuseiYMD" as "dbT3174_ketteiTsuchiSakuseiYMD",
          "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."furikomiTsuchiSakuseiYMD" as "dbT3174JigyoKogakuGassanShikyuFushikyuKettei_furikomiTsuchiSakuseiYMD",
          "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."uketoriYM" as "dbT3174JigyoKogakuGassanShikyuFushikyuKettei_uketoriYM",
          "DbT3174JigyoKogakuGassanShikyuFushikyuKettei"."kozaid" as "dbT3174JigyoKogakuGassanShikyuFushikyuKettei_kozaid",
@@ -93,7 +93,7 @@
         <result property="heichoNaiyo" column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_heichoNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiKaishiTime" column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_shiharaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiShuryoTime" column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ketteiTsuchiSakuseiYMD" column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_ketteiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiTsuchiSakuseiYMD" column="dbT3174_ketteiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="furikomiTsuchiSakuseiYMD" column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_furikomiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="uketoriYM" column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_uketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="kozaid" column="dbT3174JigyoKogakuGassanShikyuFushikyuKettei_kozaid" />
