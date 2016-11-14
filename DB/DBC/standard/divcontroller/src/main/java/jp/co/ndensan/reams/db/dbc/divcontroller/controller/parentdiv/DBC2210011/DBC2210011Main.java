@@ -338,6 +338,9 @@ public class DBC2210011Main {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
+            if (サービス事業者情報 == null) {
+                サービス事業者情報 = new ArrayList<>();
+            }
             サービス事業者情報.add(getHandler(div).onClick_入力を確定_追加情報());
             ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(サービス事業者情報));
 
