@@ -47,7 +47,7 @@ public class ShoriDateKanriFinder {
      * @return ShoriDateKanri 検索項目がなしの場合、nullを戻ります。
      */
     public ShoriDateKanri get前回の実行情報(LasdecCode 市町村コード) {
-        DbT7022ShoriDateKanriEntity entity = dac.select(
+        DbT7022ShoriDateKanriEntity entity = dac.select前回の実行情報(
                 SubGyomuCode.DBC介護給付,
                 市町村コード,
                 処理名_自己負担証明書作成_一括,
