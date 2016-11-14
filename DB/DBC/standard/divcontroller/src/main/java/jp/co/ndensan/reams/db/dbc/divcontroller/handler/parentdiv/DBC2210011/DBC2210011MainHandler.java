@@ -236,6 +236,10 @@ public class DBC2210011MainHandler {
         set事業者情報(事業者サービス情報List, row);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(false);
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
+                getGridSetting().setIsShowDeleteButtonColumn(true);
+        div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
+                getGridSetting().setIsShowModifyButtonColumn(true);
         setServiceListReadOnly(false);
     }
 
@@ -445,9 +449,11 @@ public class DBC2210011MainHandler {
      * 「入力を確定する」（サービス追加モード）ボタンを押下します。
      *
      * @param row dgTokubetsuKyufuJigyoshaDetailServiceList_Row
+     * @param 情報 TokubetsuKyufuJigyoshaSearchBusiness
      * @return dgTokubetsuKyufuJigyoshaDetailServiceList_Row
      */
-    public dgTokubetsuKyufuJigyoshaDetailServiceList_Row onClick_入力を確定_追加(dgTokubetsuKyufuJigyoshaDetailServiceList_Row row, TokubetsuKyufuJigyoshaSearchBusiness 情報) {
+    public dgTokubetsuKyufuJigyoshaDetailServiceList_Row onClick_入力を確定_追加(dgTokubetsuKyufuJigyoshaDetailServiceList_Row row,
+            TokubetsuKyufuJigyoshaSearchBusiness 情報) {
         row.setRowState(RowState.Added);
         row.setHdnServiceCode(div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().getSelectedKey());
         row.setTxtService(div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getDdlService().getSelectedValue());
@@ -574,7 +580,7 @@ public class DBC2210011MainHandler {
         RString cd = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtCheckDigit().getValue();
         JigyoshaNo 市町村特別給付用事業者番号 = new JigyoshaNo(県コード.concat(事業者区分).concat(郡市コード).concat(連番).concat(cd));
         ServiceCode 市町村特別給付用サービスコード = new ServiceCode(div.getTokubetsuKyufuJigyoshaDetailServiceInfo()
-                .getDdlService().getSelectedValue().substring(NO_0, NO_7));
+                .getDdlService().getSelectedValue().substring(NO_0, NO_6));
         int 履歴番号 = NO_0;
         TokubetsuKyufuJigyoshaSearchBusiness 追加情報 = new TokubetsuKyufuJigyoshaSearchBusiness(市町村特別給付用事業者番号, 市町村特別給付用サービスコード, 履歴番号);
         追加情報.get市町村特別給付サービス事業者().get事業者().setState(EntityDataState.Added);

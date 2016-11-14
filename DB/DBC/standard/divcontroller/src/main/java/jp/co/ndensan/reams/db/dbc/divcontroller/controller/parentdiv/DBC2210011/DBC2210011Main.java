@@ -270,10 +270,7 @@ public class DBC2210011Main {
         if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            getValidationHandler().事業者コード重複チェック(pairs, div);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
+            set事業者コード重複チェック(div, pairs);
             getValidationHandler().サービス情報作成チェック(pairs, div);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -300,6 +297,8 @@ public class DBC2210011Main {
             ViewStateHolder.clear();
             div.setHiddenModelOne(RString.EMPTY);
             getHandler(div).onClick_btnSearch();
+            div.setHiddenModelOne(RString.EMPTY);
+            div.setHiddenModel(RString.EMPTY);
             return ResponseData.of(div).setState(DBC2210011StateName.検索表示);
         } else {
             if (!ResponseHolder.isReRequest()) {
@@ -409,5 +408,15 @@ public class DBC2210011Main {
             RString 事業者Code = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者の情報, RString.class);
             getHandler(div).前排他の解除(事業者Code);
         }
+    }
+
+    private ResponseData<DBC2210011MainDiv> set事業者コード重複チェック(DBC2210011MainDiv div, ValidationMessageControlPairs pairs) {
+        if (追加モード.equals(div.getHiddenModelOne())) {
+            getValidationHandler().事業者コード重複チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
+        return null;
     }
 }
