@@ -3,21 +3,25 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Apr 14 10:26:49 CST 2016
+ * Mon Nov 14 17:02:36 CST 2016 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
+
 /**
- * dgKanendoFukaIchiran_Row のクラスファイル
- *
- * @reamsid_L DBB-0680-010 wangkanglei
+ * dgKanendoFukaIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgKanendoFukaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
     private TextBox txtKetsugoKomoku1;
     private TextBox txtTuchishoNo;
@@ -40,7 +44,9 @@ public class dgKanendoFukaIchiran_Row extends DataRow {
     private TextBox txtShotokuDankaiMae;
     private TextBox txtShotokuDankaiAto;
     private TextBoxNum txtKanendoGaku;
+    private TextBox txtKanendoGakuAto;
     private TextBoxDate txtKanendoNokiGen;
+    private TextBox txtKanendoNokiGenAto;
 
     public dgKanendoFukaIchiran_Row() {
         super();
@@ -65,7 +71,9 @@ public class dgKanendoFukaIchiran_Row extends DataRow {
         this.txtShotokuDankaiMae = new TextBox();
         this.txtShotokuDankaiAto = new TextBox();
         this.txtKanendoGaku = new TextBoxNum();
+        this.txtKanendoGakuAto = new TextBox();
         this.txtKanendoNokiGen = new TextBoxDate();
+        this.txtKanendoNokiGenAto = new TextBox();
         this.setOriginalData("txtKetsugoKomoku1", txtKetsugoKomoku1);
         this.setOriginalData("txtTuchishoNo", txtTuchishoNo);
         this.setOriginalData("txtHihokenshaNo", txtHihokenshaNo);
@@ -87,10 +95,12 @@ public class dgKanendoFukaIchiran_Row extends DataRow {
         this.setOriginalData("txtShotokuDankaiMae", txtShotokuDankaiMae);
         this.setOriginalData("txtShotokuDankaiAto", txtShotokuDankaiAto);
         this.setOriginalData("txtKanendoGaku", txtKanendoGaku);
+        this.setOriginalData("txtKanendoGakuAto", txtKanendoGakuAto);
         this.setOriginalData("txtKanendoNokiGen", txtKanendoNokiGen);
+        this.setOriginalData("txtKanendoNokiGenAto", txtKanendoNokiGenAto);
     }
 
-    public dgKanendoFukaIchiran_Row(TextBox txtKetsugoKomoku1, TextBox txtTuchishoNo, TextBox txtHihokenshaNo, TextBox txtShikibetsuCode, TextBox txtChoteiNendo, TextBoxDate txtChoteiNendoMae, TextBoxDate txtChoteiNendoAto, TextBoxDate txtFukaNendo, TextBox txtKakuteiHokenryo, TextBoxNum txtKakuteiHokenryoMae, TextBoxNum txtKakuteiHokenryoAto, TextBox txtNengakuHokenryo, TextBoxNum txtNengakuHokenryoMae, TextBoxNum txtNengakuHokenryoAto, TextBox txtGenmenGaku, TextBoxNum txtGenmenGakuMae, TextBoxNum txtGenmenGakuAto, TextBox txtShotokuDankai, TextBox txtShotokuDankaiMae, TextBox txtShotokuDankaiAto, TextBoxNum txtKanendoGaku, TextBoxDate txtKanendoNokiGen) {
+    public dgKanendoFukaIchiran_Row(TextBox txtKetsugoKomoku1, TextBox txtTuchishoNo, TextBox txtHihokenshaNo, TextBox txtShikibetsuCode, TextBox txtChoteiNendo, TextBoxDate txtChoteiNendoMae, TextBoxDate txtChoteiNendoAto, TextBoxDate txtFukaNendo, TextBox txtKakuteiHokenryo, TextBoxNum txtKakuteiHokenryoMae, TextBoxNum txtKakuteiHokenryoAto, TextBox txtNengakuHokenryo, TextBoxNum txtNengakuHokenryoMae, TextBoxNum txtNengakuHokenryoAto, TextBox txtGenmenGaku, TextBoxNum txtGenmenGakuMae, TextBoxNum txtGenmenGakuAto, TextBox txtShotokuDankai, TextBox txtShotokuDankaiMae, TextBox txtShotokuDankaiAto, TextBoxNum txtKanendoGaku, TextBox txtKanendoGakuAto, TextBoxDate txtKanendoNokiGen, TextBox txtKanendoNokiGenAto) {
         super();
         this.setOriginalData("txtKetsugoKomoku1", txtKetsugoKomoku1);
         this.setOriginalData("txtTuchishoNo", txtTuchishoNo);
@@ -113,7 +123,9 @@ public class dgKanendoFukaIchiran_Row extends DataRow {
         this.setOriginalData("txtShotokuDankaiMae", txtShotokuDankaiMae);
         this.setOriginalData("txtShotokuDankaiAto", txtShotokuDankaiAto);
         this.setOriginalData("txtKanendoGaku", txtKanendoGaku);
+        this.setOriginalData("txtKanendoGakuAto", txtKanendoGakuAto);
         this.setOriginalData("txtKanendoNokiGen", txtKanendoNokiGen);
+        this.setOriginalData("txtKanendoNokiGenAto", txtKanendoNokiGenAto);
         this.txtKetsugoKomoku1 = txtKetsugoKomoku1;
         this.txtTuchishoNo = txtTuchishoNo;
         this.txtHihokenshaNo = txtHihokenshaNo;
@@ -135,7 +147,9 @@ public class dgKanendoFukaIchiran_Row extends DataRow {
         this.txtShotokuDankaiMae = txtShotokuDankaiMae;
         this.txtShotokuDankaiAto = txtShotokuDankaiAto;
         this.txtKanendoGaku = txtKanendoGaku;
+        this.txtKanendoGakuAto = txtKanendoGakuAto;
         this.txtKanendoNokiGen = txtKanendoNokiGen;
+        this.txtKanendoNokiGenAto = txtKanendoNokiGenAto;
     }
 
     public TextBox getTxtKetsugoKomoku1() {
@@ -222,8 +236,16 @@ public class dgKanendoFukaIchiran_Row extends DataRow {
         return txtKanendoGaku;
     }
 
+    public TextBox getTxtKanendoGakuAto() {
+        return txtKanendoGakuAto;
+    }
+
     public TextBoxDate getTxtKanendoNokiGen() {
         return txtKanendoNokiGen;
+    }
+
+    public TextBox getTxtKanendoNokiGenAto() {
+        return txtKanendoNokiGenAto;
     }
 
     public void setTxtKetsugoKomoku1(TextBox txtKetsugoKomoku1) {
@@ -331,9 +353,19 @@ public class dgKanendoFukaIchiran_Row extends DataRow {
         this.txtKanendoGaku = txtKanendoGaku;
     }
 
+    public void setTxtKanendoGakuAto(TextBox txtKanendoGakuAto) {
+        this.setOriginalData("txtKanendoGakuAto", txtKanendoGakuAto);
+        this.txtKanendoGakuAto = txtKanendoGakuAto;
+    }
+
     public void setTxtKanendoNokiGen(TextBoxDate txtKanendoNokiGen) {
         this.setOriginalData("txtKanendoNokiGen", txtKanendoNokiGen);
         this.txtKanendoNokiGen = txtKanendoNokiGen;
+    }
+
+    public void setTxtKanendoNokiGenAto(TextBox txtKanendoNokiGenAto) {
+        this.setOriginalData("txtKanendoNokiGenAto", txtKanendoNokiGenAto);
+        this.txtKanendoNokiGenAto = txtKanendoNokiGenAto;
     }
 
     // </editor-fold>
