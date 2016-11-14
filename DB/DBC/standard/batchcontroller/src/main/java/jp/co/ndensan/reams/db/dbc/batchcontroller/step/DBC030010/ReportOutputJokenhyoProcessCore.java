@@ -144,7 +144,7 @@ public class ReportOutputJokenhyoProcessCore {
         for (ISetSortItem item : 設定項目リスト) {
             出力順 = 出力順.concat(item.get項目名()).concat(より);
         }
-        出力条件.add(出力順.substring(1, 出力順.length() - 1));
+        出力条件.add(出力順.substring(0, 出力順.length() - 1));
 
         return 出力条件;
     }
