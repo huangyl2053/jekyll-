@@ -91,6 +91,7 @@
         <result property="serviceShuruiName" column="serviceShuruiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kaishuKingaku" column="kaishuKingaku"/>
         <result property="zougenRiyu" column="zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoshikiMeisho" column="yoshikiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <resultMap id="resultMap_chohyoData" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity" autoMapping="true">
@@ -308,6 +309,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenMeisi"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsuMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
         
     </sql>
 
