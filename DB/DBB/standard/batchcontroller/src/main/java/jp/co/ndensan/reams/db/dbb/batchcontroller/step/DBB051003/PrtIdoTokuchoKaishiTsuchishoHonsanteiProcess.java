@@ -278,7 +278,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
                     is公印に掛ける,
                     is公印を省略,
                     KenmeiFuyoKubunType.付与なし).buildSource();
-            new TokubetsuChoshuKaishiTsuchishoB52Report(編集後本算定通知書共通情報, result.get宛名連番(), sourceBuilder).
+            new TokubetsuChoshuKaishiTsuchishoB52Report(編集後本算定通知書共通情報, result.get宛名連番(), 地方公共団体, sourceBuilder).
                     writeBy(dbb100032ReportSourceWriter5);
             reportWriter5.close();
             return dbb100032ReportSourceWriter5.pageCount().value();
