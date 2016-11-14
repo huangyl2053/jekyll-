@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.report.shinsakaiiinwaritsuke;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiReport;
@@ -30,17 +28,12 @@ public class ShinsaschedulekagamiPrintService {
     /**
      * 主治医意見書作成料請求書を印刷します。
      *
-     * @param items 主治医意見書作成料請求書_帳票クラスパラメータクラス
+     * @param item 主治医意見書作成料請求書_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(List<ShinsaschedulekagamiItem> items) {
+    public SourceDataCollection print(ShinsaschedulekagamiItem item) {
         ShinsaschedulekagamiProperty property = new ShinsaschedulekagamiProperty();
-        return new Printer<ShinsaschedulekagamiReportSource>().spool(property, toReports(items));
+        return new Printer<ShinsaschedulekagamiReportSource>().spool(property, new ShinsaschedulekagamiReport(item));
     }
 
-    private static List<ShinsaschedulekagamiReport> toReports(List<ShinsaschedulekagamiItem> items) {
-        List<ShinsaschedulekagamiReport> list = new ArrayList<>();
-        list.add(ShinsaschedulekagamiReport.createFrom(items));
-        return list;
-    }
 }

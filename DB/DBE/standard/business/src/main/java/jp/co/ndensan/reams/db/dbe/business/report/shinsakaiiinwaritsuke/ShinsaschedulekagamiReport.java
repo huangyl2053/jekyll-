@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaiiinwaritsuke.ShinsaschedulekagamiReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,25 +16,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShinsaschedulekagamiReport extends Report<ShinsaschedulekagamiReportSource> {
 
-    private final List<ShinsaschedulekagamiItem> itemList;
+    private final ShinsaschedulekagamiItem item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 介護認定審査会スケジュール表かがみのItem
-     * @return 介護認定審査会スケジュール表かがみのReport
+     * @param item 介護認定審査会スケジュール表かがみのItem
      */
-    public static ShinsaschedulekagamiReport createFrom(List<ShinsaschedulekagamiItem> itemList) {
-        return new ShinsaschedulekagamiReport(itemList);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param itemList 介護認定審査会スケジュール表かがみのItem
-     */
-    protected ShinsaschedulekagamiReport(List<ShinsaschedulekagamiItem> itemList) {
-        this.itemList = itemList;
+    public ShinsaschedulekagamiReport(ShinsaschedulekagamiItem item) {
+        this.item = item;
     }
 
     /**
@@ -45,10 +34,8 @@ public class ShinsaschedulekagamiReport extends Report<ShinsaschedulekagamiRepor
      */
     @Override
     public void writeBy(ReportSourceWriter<ShinsaschedulekagamiReportSource> reportSourceWriter) {
-        for (ShinsaschedulekagamiItem item : itemList) {
-            IShinsaschedulekagamiEditor editor = new ShinsaschedulekagamiEditorImpl(item);
-            IShinsaschedulekagamiBuilder builder = new ShinsaschedulekagamiBuilderImpl(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IShinsaschedulekagamiEditor editor = new ShinsaschedulekagamiEditorImpl(item);
+        IShinsaschedulekagamiBuilder builder = new ShinsaschedulekagamiBuilderImpl(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }
