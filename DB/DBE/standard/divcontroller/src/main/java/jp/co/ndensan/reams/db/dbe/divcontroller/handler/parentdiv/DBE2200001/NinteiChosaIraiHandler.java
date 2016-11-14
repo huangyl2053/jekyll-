@@ -827,6 +827,20 @@ public class NinteiChosaIraiHandler {
     }
 
     /**
+     * 提出期限のonChange処理です。
+     */
+    public void onChange_radKigen() {
+        RString key = div.getRadkigen().getSelectedKey();
+        if (new RString("2").equals(key)) {
+            div.getTxtkigenymd().setReadOnly(false);
+            div.getTxtkigenymd().setValue(RDate.getNowDate());
+        } else {
+            div.getTxtkigenymd().clearValue();
+            div.getTxtkigenymd().setReadOnly(true);
+        }
+    }
+
+    /**
      * 認定調査依頼書印刷用パラメータを作成します。
      *
      * @return 認定調査依頼書印刷用パラメータ
