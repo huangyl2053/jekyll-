@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  *
- * @author liuyl
+ * 市町村特別給付・サービス事業者のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBC-3430-010 liuwei2
  */
 public enum DBC2210011MainDivSpec implements IPredicate<DBC2210011MainDiv> {
 
