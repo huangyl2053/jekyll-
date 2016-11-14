@@ -675,6 +675,9 @@ public class ServiceNoKanribangouRendou {
     }
 
     private RString toDecimal(Decimal decimal) {
+        if (null == decimal) {
+            return 定値_0;
+        }
         return DecimalFormatter.toコンマ区切りRString(decimal, 0);
     }
 
