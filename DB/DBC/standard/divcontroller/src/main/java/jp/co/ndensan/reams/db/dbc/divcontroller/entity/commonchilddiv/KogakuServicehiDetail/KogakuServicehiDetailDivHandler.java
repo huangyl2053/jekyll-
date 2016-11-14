@@ -250,10 +250,10 @@ public class KogakuServicehiDetailDivHandler {
      */
     public RString get電話番号() {
         RString 電話番号 = RString.EMPTY;
-        if (div.getTxtTelNo() != null && div.getTxtTelNo().getDomain() != null && !div.getTxtTelNo().getDomain().isEmpty()) {
+        if (div.getTxtTelNo() != null && div.getTxtTelNo().getDomain() != null) {
             電話番号 = div.getTxtTelNo().getDomain().value();
         }
-        return 電話番号;
+        return 電話番号 == null ? RString.EMPTY : 電話番号;
     }
 
     /**
