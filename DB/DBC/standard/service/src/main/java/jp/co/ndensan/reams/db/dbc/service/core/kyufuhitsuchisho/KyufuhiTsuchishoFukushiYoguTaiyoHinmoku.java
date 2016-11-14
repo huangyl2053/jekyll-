@@ -64,6 +64,11 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
     private void 帳票データ作成1(KyufuhiTuchiHakkoEntity hakkoEntity) {
         KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity coverEntity = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity();
         //TODO 「費用額(円)、件数(件)、割合(%)、あなたの位置、全国、都道府県、保険者」の設定値問題、実装方式は検討中。
+
+        RStringBuilder builder費用額1 = new RStringBuilder();
+        builder費用額1.append(hakkoEntity.getRelateEntity().getZenkokuTanisuHani1());
+        coverEntity.set費用額円_1(builder費用額1.toRString());
+
         RStringBuilder builderイトル2 = new RStringBuilder();
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
             builderイトル2.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
