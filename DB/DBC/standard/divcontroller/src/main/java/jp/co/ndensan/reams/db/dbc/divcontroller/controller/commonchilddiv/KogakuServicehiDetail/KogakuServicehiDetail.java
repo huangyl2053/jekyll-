@@ -28,7 +28,7 @@ public class KogakuServicehiDetail {
     public ResponseData<KogakuServicehiDetailDiv> onChange_rdbShikyuKubun(
             KogakuServicehiDetailDiv div) {
         if (KEY0.equals(div.getRdbShikyuKubun().getSelectedKey())) {
-            div.getTxtShikyusinaiRiyu().setDisabled(false);
+            div.getTxtShikyuKingaku().setDisabled(false);
         } else if (KEY1.equals(div.getRdbShikyuKubun().getSelectedKey())) {
             div.getTxtShikyuKingaku().setDisabled(true);
         }

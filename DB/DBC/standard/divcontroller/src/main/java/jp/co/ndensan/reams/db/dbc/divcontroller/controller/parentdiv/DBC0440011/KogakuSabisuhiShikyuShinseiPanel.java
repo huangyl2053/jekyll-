@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0440011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.JigyouKogakuKyuufuTaishouResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.KogakuKyuufuTaishouListEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.KougakuSabisuhiShousaiNaiyouResult;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011.Koga
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0440011.KogakuSabisuhiShikyuShinseiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0440011.KogakuSabisuhiShikyuShinseiPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0440011.KogakuServicehiDetailParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.SogoJigyoTaishoshaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuushinnseitouroku.KougakuSabisuhiShikyuuShinnseiTouroku;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -92,9 +94,16 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             throw new ApplicationException(
                     DbzErrorMessages.理由付き登録不可.getMessage().replace(被保険者番号なし.toString()));
         }
-        List<JukyushaDaicho> 受給者台帳=get受給者台帳(被保険者番号);
-        if (受給者台帳.isEmpty()) {
-            throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
+        List<JukyushaDaicho> 受給者台帳 = get受給者台帳(被保険者番号);
+        List<SogoJigyoTaishosha> 総合事業対象者 = get総合事業対象者(被保険者番号);
+        if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
+            if (受給者台帳.isEmpty() && 総合事業対象者.isEmpty()) {
+                throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
+            }
+        } else if (高額サービス費支給申請書登録.equals(メニューID)) {
+            if (受給者台帳.isEmpty()) {
+                throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
+            }
         }
         if (!getHandler(div).is前排他キーのセット(被保険者番号)) {
             throw new PessimisticLockingException();
@@ -369,6 +378,11 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     private List<JukyushaDaicho> get受給者台帳(HihokenshaNo 被保険者番号) {
         JukyushaDaichoManager manager = new JukyushaDaichoManager();
         return manager.get受給者台帳情報(被保険者番号);
+    }
+
+    public List<SogoJigyoTaishosha> get総合事業対象者(HihokenshaNo 被保険者番号) {
+        SogoJigyoTaishoshaManager manager = new SogoJigyoTaishoshaManager();
+        return manager.get総合事業対象者(被保険者番号);
     }
 
     private void save対象者情報データ(KogakuSabisuhiShikyuShinseiPanelDiv div,
