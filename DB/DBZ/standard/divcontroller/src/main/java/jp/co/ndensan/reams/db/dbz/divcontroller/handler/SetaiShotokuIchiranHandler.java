@@ -58,6 +58,8 @@ import jp.co.ndensan.reams.uz.uza.util.Comparators;
  */
 public class SetaiShotokuIchiranHandler {
 
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
@@ -559,9 +561,16 @@ public class SetaiShotokuIchiranHandler {
     private SetaiinShotoku createSetaiinShotoku(dgSetaiShotoku_Row row) {
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getTxtKetsugo01().split(BR.toString()).get(0));
         HihokenshaNo hihokenshaNo = new HihokenshaNo(row.getTxtKetsugo01().split(BR.toString()).get(1));
-
+        RString 氏名 = RString.EMPTY;
+        RString カナ氏名 = RString.EMPTY;
+        RString shimei = row.getTxtShimei();
+        List<RString> shimeiList = shimei.split(BR.toString());
+        if (shimeiList.size() == 2) {
+            氏名 = shimeiList.get(INDEX_0);
+            カナ氏名 = shimeiList.get(INDEX_1);
+        }
         return new SetaiinShotoku(
-                shikibetsuCode, hihokenshaNo, row.getTxtShimei(), RString.EMPTY,
+                shikibetsuCode, hihokenshaNo, 氏名, カナ氏名,
                 FlexibleDate.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, Decimal.ZERO, Decimal.ZERO,
