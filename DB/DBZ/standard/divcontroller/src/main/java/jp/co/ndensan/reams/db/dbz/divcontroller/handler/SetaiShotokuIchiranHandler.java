@@ -561,13 +561,14 @@ public class SetaiShotokuIchiranHandler {
     private SetaiinShotoku createSetaiinShotoku(dgSetaiShotoku_Row row) {
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getTxtKetsugo01().split(BR.toString()).get(0));
         HihokenshaNo hihokenshaNo = new HihokenshaNo(row.getTxtKetsugo01().split(BR.toString()).get(1));
-        RString 氏名 = RString.EMPTY;
         RString カナ氏名 = RString.EMPTY;
+        RString 氏名 = RString.EMPTY;
         RString shimei = row.getTxtShimei();
         List<RString> shimeiList = shimei.split(BR.toString());
         if (shimeiList.size() == 2) {
-            氏名 = shimeiList.get(INDEX_0);
-            カナ氏名 = shimeiList.get(INDEX_1);
+            カナ氏名 = shimeiList.get(INDEX_0);
+            氏名 = shimeiList.get(INDEX_1);
+
         }
         return new SetaiinShotoku(
                 shikibetsuCode, hihokenshaNo, 氏名, カナ氏名,
