@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakuservicehitaishoshaichir
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
-import jp.co.ndensan.reams.db.dbc.definition.core.kyusochisha.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuservicehitaishoshaichiran.KogakuServicehiTaishoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuservicehitaishoshaichiran.KogakuServicehiTaishoshaIchiranSource;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -150,7 +150,7 @@ public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTa
         }
         if (高額介護サービス費対象者一覧表 != null) {
             RString 旧措置者フラグ = 高額介護サービス費対象者一覧表.get旧措置者フラグ();
-            KyuSochishaKubun kyuSochishaKubun = KyuSochishaKubun.toValue(旧措置者フラグ);
+            KyusochishaKubun kyuSochishaKubun = KyusochishaKubun.toValue(旧措置者フラグ);
             RString 旧措置者名称 = kyuSochishaKubun.get名称();
             source.listTaishosha_5 = 旧措置者名称;
         }
