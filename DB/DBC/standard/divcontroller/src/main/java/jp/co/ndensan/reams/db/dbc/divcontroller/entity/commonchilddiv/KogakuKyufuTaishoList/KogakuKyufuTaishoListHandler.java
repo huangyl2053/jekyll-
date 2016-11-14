@@ -627,8 +627,8 @@ public class KogakuKyufuTaishoListHandler {
             builder.append(合);
         }
         boolean is老齢また第２段階区分また激変設定 = false;
-        builder.append(コンマ);
         if (div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey().equals(key0)) {
+            builder.append(コンマ);
             builder.append(老);
             is老齢また第２段階区分また激変設定 = true;
         } 
@@ -651,6 +651,7 @@ public class KogakuKyufuTaishoListHandler {
         }
 
         if (!is老齢また第２段階区分また激変設定) {
+            builder.append(コンマ);
             builder.append(全角空白);
         }
         builder.append(コンマ);
