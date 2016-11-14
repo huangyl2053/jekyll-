@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA3Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA4NihirameProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinItiziHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinShinsakaiIinJohoDataSakuseiA3Process;
@@ -38,7 +37,6 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     private static final String 委員_特記事項 = "iinTokkiJikou";
     private static final String 委員_一次判定結果 = "iinItiziHantei";
     private static final String 委員_主治医意見書_1枚目 = "iinIkensho_1";
-    private static final String 委員_主治医意見書_2枚目以降 = "iinIkensho_2";
     private static final String 委員_主治医意見書_A3 = "iinIkensho";
     private static final String 委員_予備判定一覧 = "iinHantei";
     private static final String 委員_審査対象者一覧 = "iinShinsakaiIinJoho";
@@ -99,7 +97,6 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
         if (選択.equals(getParameter().getChohyoIin_ikenshoFalg())) {
             if (選択.equals(getParameter().getShuturyokuSutairu())) {
                 executeStep(委員_主治医意見書_1枚目);
-                executeStep(委員_主治医意見書_2枚目以降);
             } else {
                 executeStep(委員_主治医意見書_A3);
             }
@@ -158,17 +155,6 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     @Step(委員_主治医意見書_1枚目)
     protected IBatchFlowCommand createIinIkenshoData_A4_1() {
         return loopBatch(IinIkenshoDataSakuseiA4Process.class)
-                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
-    }
-
-    /**
-     * 委員用主治医意見書情報データの作成を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(委員_主治医意見書_2枚目以降)
-    protected IBatchFlowCommand createIinIkenshoData_A4_2() {
-        return loopBatch(IinIkenshoDataSakuseiA4NihirameProcess.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
 
