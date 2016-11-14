@@ -139,6 +139,9 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
     }
 
     private void do高額更新処理() {
+        if (結果全件List == null || 結果全件List.isEmpty()) {
+            return;
+        }
         boolean isマッチ = false;
         boolean is出力をしない = false;
         boolean is対象者受取年月が設定1件以上 = false;
