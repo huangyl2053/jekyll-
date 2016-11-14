@@ -474,10 +474,15 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onStateTransition(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         getHandler(div).set保存ボタン();
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        ShoriModeHanteiResult 処理モー = getHandler(div).get処理モード(被保険者番号, 画面モード);
-        getHandler(div).getエラーメッセージ(処理モー.getWkメッセージ());
+        if (!ResponseHolder.isReRequest()) {
+            RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            ShoriModeHanteiResult 処理モー = getHandler(div).get処理モード(被保険者番号, 画面モード);
+            return ResponseData.of(div).addMessage(getHandler(div).getエラーメッセージ(処理モー.getWkメッセージ())).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
