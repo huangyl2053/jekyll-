@@ -136,14 +136,6 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString RSTRING_67 = new RString("67");
     private static final RString SERVICETANI = new RString("serviceTani");
 
-    private static final RString 種類限度単位指定エラー = new RString(
-            "種類限度単位指定エラー：【サービス単位＝種類超過＋種類限度内】になっていません。");
-    private static final RString 区分限度単位指定エラー = new RString(
-            "区分限度単位指定エラー：【種類限度内点数＝区分超過＋区分限度内】になっていません。");
-    private static final RString 種類区分限度単位指定エラー = new RString(
-            "種類限度単位・区分限度単位指定エラー：【サービス単位＝種類超過＋区分超過＋区分限度内】になっていません。");
-    private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
-
     /**
      * コンストラクタです。
      *
@@ -542,9 +534,6 @@ public class ServiceRiyohyoInfoDivHandler {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         List<KyufuJikoSakuseiResult> サービス利用票情報 = jigoSakusei.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号, 利用年月);
         List<dgServiceRiyohyoBeppyoList_Row> rowList = new ArrayList<>();
-        if (サービス利用票情報 == null || サービス利用票情報.isEmpty()) {
-            throw new ApplicationException(前月の明細情報エラー.toString());
-        }
         int i = 0;
         for (KyufuJikoSakuseiResult result : サービス利用票情報) {
             dgServiceRiyohyoBeppyoList_Row row = setRow(result);
@@ -642,7 +631,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス種類コード(row.getHdnServiceShuruiCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス項目コード(row.getHdnServiceKomokuCode());
-            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().initialize(row.getHdnServiceShuruiCode());
+//            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().initialize(row.getHdnServiceShuruiCode());
         }
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
 
