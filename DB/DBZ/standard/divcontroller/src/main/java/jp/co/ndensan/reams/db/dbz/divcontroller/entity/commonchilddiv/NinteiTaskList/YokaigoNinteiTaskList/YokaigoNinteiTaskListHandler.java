@@ -1219,28 +1219,28 @@ public class YokaigoNinteiTaskListHandler {
     private RString 一次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 一次判定結果コード) {
 
         if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
-            return IchijiHanteiKekkaCode99.toValue(一次判定結果コード == null ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
+            return IchijiHanteiKekkaCode99.toValue(((一次判定結果コード == null) || 一次判定結果コード.isEmpty()) ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2002.equals(厚労省IF識別コード)) {
-            return IchijiHanteiKekkaCode02.toValue(一次判定結果コード == null ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
+            return IchijiHanteiKekkaCode02.toValue(((一次判定結果コード == null) || 一次判定結果コード.isEmpty()) ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
-            return IchijiHanteiKekkaCode06.toValue(一次判定結果コード == null ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
+            return IchijiHanteiKekkaCode06.toValue(((一次判定結果コード == null) || 一次判定結果コード.isEmpty()) ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
                 || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
-            return IchijiHanteiKekkaCode09.toValue(一次判定結果コード == null ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
+            return IchijiHanteiKekkaCode09.toValue(((一次判定結果コード == null) || 一次判定結果コード.isEmpty()) ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString 二次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 二次判定結果コード) {
         if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun99.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
+            return YokaigoJotaiKubun99.toValue(((二次判定結果コード == null) || 二次判定結果コード.isEmpty()) ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2002.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun02.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
+            return YokaigoJotaiKubun02.toValue(((二次判定結果コード == null) || 二次判定結果コード.isEmpty()) ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun06.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
+            return YokaigoJotaiKubun06.toValue(((二次判定結果コード == null) || 二次判定結果コード.isEmpty()) ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
                 || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun09.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
+            return YokaigoJotaiKubun09.toValue(((二次判定結果コード == null) || 二次判定結果コード.isEmpty()) ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         }
         return RString.EMPTY;
     }
