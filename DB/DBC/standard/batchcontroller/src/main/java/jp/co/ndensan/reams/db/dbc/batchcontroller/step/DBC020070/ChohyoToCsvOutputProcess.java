@@ -272,7 +272,7 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
             七十歳以上負担額_高額合算小計 = 七十歳以上負担額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_over70_Futangaku()));
             三一にかかる支給額_高額合算小計 = 三一にかかる支給額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_over70_Shikyugaku()));
             七十歳未満負担額_高額合算小計 = 七十歳未満負担額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Futangaku()));
-            五に係る支給額_高額合算小計 = 五に係る支給額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Futangaku()));
+            五に係る支給額_高額合算小計 = 五に係る支給額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Shikyugaku()));
             五四一三_高額合算小計 = 五四一三_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_futangaku()));
             八三七_高額合算小計 = 八三七_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_shikyugaku()));
         }
