@@ -40,20 +40,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC040010_KogakuGassanJikofutangakuKeisan
         extends BatchFlowBase<DBC040010_KogakuGassanJikofutangakuKeisanParameter> {
 
-    private static final String TAISHOSHACHUSHUPROCESS = "TaishoshaChushuProcess";
-    private static final String INITJISSEKICHECKPROCESS = "InitJissekiCheckProcess";
+    private static final String CHUSHUPROCESS = "TaishoshaChushuProcess";
+    private static final String JISSEKICHECKINITPROCESS = "InitJissekiCheckProcess";
     private static final String INSSHIHARAIHOHOHENKOPROCESS1 = "InsShiharaihohoHenkoTempBeforeProcess";
     private static final String INSSHIHARAIHOHOHENKOPROCESS2 = "InsShiharaihohoHenkoTempProcess";
-    private static final String UPDSHAFUKUKEIGENTEMPPROCESS = "UpdshafukuKeigenTempProcess";
-    private static final String UPDJISSEKIFUTANGAKUPROCESS = "UpdJIssekiFutangakuTempProcess";
-    private static final String UPDJISSEKIFUTANGAKUAFTERPROCESS = "UpdJIssekiFutangakuTempAfterProcess";
-    private static final String CALCKOGAKUSHIKYUGAKUPROCESS = "CalcKogakuShikyugakuProcess";
-    private static final String SETFUTANGAKUPROCESS = "SetFutangakuProcess";
-    private static final String SETFUTANGAKUAFTERPROCESS = "SetFutangakuAfterProcess";
+    private static final String UPDSHAFUKUKEIGENPROCESS = "UpdshafukuKeigenTempProcess";
+    private static final String UPDJISSEKIFUTANGAKUPROCESS1 = "UpdJIssekiFutangakuTempProcess";
+    private static final String UPDJISSEKIFUTANGAKUPROCESS2 = "UpdJIssekiFutangakuTempAfterProcess";
+    private static final String CKOGAKUSHIKYUGAKUCALPROCESS = "CalcKogakuShikyugakuProcess";
+    private static final String FUTANGAKUSETPROCESS = "SetFutangakuProcess";
+    private static final String FUTANGAKUAFTERSETPROCESS = "SetFutangakuAfterProcess";
     private static final String GASSANKEKKAICHIRANPROCESS = "DBC200029GassanKekkaIchiranReportProcess";
     private static final String SHORICSVPROCESS = "DBC040010ShoriCsvProcess";
     private static final String SHORIDATEKANRIUPDPROCESS = "DBC040010ShoriDateKanriUpdProcess";
-
     private static final String BACKUP_TO_TEMPORARYTABLE = "backup_To_TemporaryTable";
     private RString importTableNamePermanent;
     private RString exportTableNameTemporary;
@@ -77,20 +76,20 @@ public class DBC040010_KogakuGassanJikofutangakuKeisan
         importTableNamePermanent = BACKUPTABLE2;
         exportTableNameTemporary = TEMPTABLE2;
         executeStep(BACKUP_TO_TEMPORARYTABLE);
-        executeStep(TAISHOSHACHUSHUPROCESS);
-        executeStep(INITJISSEKICHECKPROCESS);
-        boolean isデータがあり = getResult(Boolean.class, new RString(INITJISSEKICHECKPROCESS), InitJissekiCheckProcess.OUTPUTNAME);
+        executeStep(CHUSHUPROCESS);
+        executeStep(JISSEKICHECKINITPROCESS);
+        boolean isデータがあり = getResult(Boolean.class, new RString(JISSEKICHECKINITPROCESS), InitJissekiCheckProcess.OUTPUTNAME);
         if (!isデータがあり) {
             return;
         }
         executeStep(INSSHIHARAIHOHOHENKOPROCESS1);
         executeStep(INSSHIHARAIHOHOHENKOPROCESS2);
-        executeStep(UPDSHAFUKUKEIGENTEMPPROCESS);
-        executeStep(UPDJISSEKIFUTANGAKUPROCESS);
-        executeStep(UPDJISSEKIFUTANGAKUAFTERPROCESS);
-        executeStep(CALCKOGAKUSHIKYUGAKUPROCESS);
-        executeStep(SETFUTANGAKUPROCESS);
-        executeStep(SETFUTANGAKUAFTERPROCESS);
+        executeStep(UPDSHAFUKUKEIGENPROCESS);
+        executeStep(UPDJISSEKIFUTANGAKUPROCESS1);
+        executeStep(UPDJISSEKIFUTANGAKUPROCESS2);
+        executeStep(CKOGAKUSHIKYUGAKUCALPROCESS);
+        executeStep(FUTANGAKUSETPROCESS);
+        executeStep(FUTANGAKUAFTERSETPROCESS);
         if (getParameter().isShuturyokuFlg()) {
             executeStep(GASSANKEKKAICHIRANPROCESS);
         }
@@ -103,14 +102,14 @@ public class DBC040010_KogakuGassanJikofutangakuKeisan
         return backupToTemporaryTable(importTableNamePermanent, exportTableNameTemporary).define();
     }
 
-    @Step(TAISHOSHACHUSHUPROCESS)
+    @Step(CHUSHUPROCESS)
     IBatchFlowCommand taishoshaChushuProcess() {
         TaishoshaChushuProcessParameter param = new TaishoshaChushuProcessParameter(getParameter().getShoriTimestamp(),
                 getParameter().getTaishoKaishiDay(), getParameter().getTaishoShuryoDay());
         return loopBatch(TaishoshaChushuProcess.class).arguments(param).define();
     }
 
-    @Step(INITJISSEKICHECKPROCESS)
+    @Step(JISSEKICHECKINITPROCESS)
     IBatchFlowCommand initJissekiCheckProcess() {
         return simpleBatch(InitJissekiCheckProcess.class).define();
     }
@@ -127,37 +126,37 @@ public class DBC040010_KogakuGassanJikofutangakuKeisan
         return loopBatch(InsShiharaihohoHenkoTempProcess.class).define();
     }
 
-    @Step(UPDSHAFUKUKEIGENTEMPPROCESS)
+    @Step(UPDSHAFUKUKEIGENPROCESS)
     IBatchFlowCommand updshafukuKeigenTempProcess() {
         UpdshafukuKeigenTempProcessParameter param = new UpdshafukuKeigenTempProcessParameter(false);
         return loopBatch(UpdshafukuKeigenTempProcess.class).arguments(param).define();
     }
 
-    @Step(UPDJISSEKIFUTANGAKUPROCESS)
+    @Step(UPDJISSEKIFUTANGAKUPROCESS1)
     IBatchFlowCommand updJIssekiFutangakuTempProcess() {
         return loopBatch(UpdJIssekiFutangakuTempProcess.class).define();
     }
 
-    @Step(UPDJISSEKIFUTANGAKUAFTERPROCESS)
+    @Step(UPDJISSEKIFUTANGAKUPROCESS2)
     IBatchFlowCommand updJIssekiFutangakuTempAfterProcess() {
         UpdJIssekiFutangakuTempAfterProcessParameter param = new UpdJIssekiFutangakuTempAfterProcessParameter(
                 処理区分_呼び出し元自己負担額計算, getParameter().getShoriTimestamp());
         return loopBatch(UpdJIssekiFutangakuTempAfterProcess.class).arguments(param).define();
     }
 
-    @Step(CALCKOGAKUSHIKYUGAKUPROCESS)
+    @Step(CKOGAKUSHIKYUGAKUCALPROCESS)
     IBatchFlowCommand calcKogakuShikyugakuProcess() {
         CalcKogakuShikyugakuProcessParameter param = new CalcKogakuShikyugakuProcessParameter(getParameter().getShoriTimestamp());
         return loopBatch(CalcKogakuShikyugakuProcess.class).arguments(param).define();
     }
 
-    @Step(SETFUTANGAKUPROCESS)
+    @Step(FUTANGAKUSETPROCESS)
     IBatchFlowCommand setFutangakuProcess() {
         SetFutangakuProcessParameter param = new SetFutangakuProcessParameter(false, RString.EMPTY);
         return loopBatch(SetFutangakuProcess.class).arguments(param).define();
     }
 
-    @Step(SETFUTANGAKUAFTERPROCESS)
+    @Step(FUTANGAKUAFTERSETPROCESS)
     IBatchFlowCommand setFutangakuAfterProcess() {
         SetFutangakuAfterProcessParameter param = new SetFutangakuAfterProcessParameter(getParameter().getShoriTimestamp());
         return loopBatch(SetFutangakuAfterProcess.class).arguments(param).define();
