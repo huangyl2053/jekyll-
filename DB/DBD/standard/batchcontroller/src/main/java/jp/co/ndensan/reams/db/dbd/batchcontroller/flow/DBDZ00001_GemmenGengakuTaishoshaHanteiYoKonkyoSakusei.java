@@ -42,7 +42,7 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
      *
      * @return IBatchFlowCommand
      */
-    @Step (世帯員把握入力)
+    @Step(世帯員把握入力)
     protected IBatchFlowCommand setaiinHaakuInputSakusei() {
         if (getParameter().get所得年度() == null || getParameter().get所得年度().isEmpty()) {
             return loopBatch(SetaiinHaakuInputSakusei.class)
@@ -61,9 +61,9 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
      *
      * @return IBatchFlowCommand
      */
-    @Step (世帯員把握)
+    @Step(世帯員把握)
     protected IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(SETSHOTOKUKAZEIHANTEIFLOW, SubGyomuCode.DBZ介護共通, getSetaiShotokuKazeiHanteiBatchParameter()).define();
+        return otherBatchFlow(SETSHOTOKUKAZEIHANTEIFLOW, SubGyomuCode.DBB介護賦課, getSetaiShotokuKazeiHanteiBatchParameter()).define();
     }
 
     /**
@@ -71,7 +71,7 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
      *
      * @return IBatchFlowCommand
      */
-    @Step (減免減額対象者判定用根拠作成)
+    @Step(減免減額対象者判定用根拠作成)
     protected IBatchFlowCommand gemmmenGengakuTaishoshaHanteiYoKonkyoSakusei() {
         if (getParameter().get所得年度() == null || getParameter().get所得年度().isEmpty()) {
             return loopBatch(GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei.class)
