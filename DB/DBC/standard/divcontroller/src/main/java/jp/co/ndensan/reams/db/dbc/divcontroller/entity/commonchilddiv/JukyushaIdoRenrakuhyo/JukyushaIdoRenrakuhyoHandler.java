@@ -618,8 +618,12 @@ public class JukyushaIdoRenrakuhyoHandler {
         RString 事業区分Key = div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().getSelectedKey();
         if (JukyushaIF_NijiyoboJigyoKubunCode.該当.getコード().equals(事業区分Key)) {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setDisabled(false);
+            div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setFromDisabled(false);
+            div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setToDisabled(false);
         } else {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setDisabled(true);
+            div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setFromDisabled(true);
+            div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setToDisabled(true);
         }
     }
 
