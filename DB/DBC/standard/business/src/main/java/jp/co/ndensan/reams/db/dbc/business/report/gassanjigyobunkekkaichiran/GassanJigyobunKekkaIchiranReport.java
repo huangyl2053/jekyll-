@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkekkaichiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.jigyobunshikyugakurenrakuhyo.JigyobunShikyugakuRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanjigyobunkekkaichiran.GassanJigyobunKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -23,6 +24,7 @@ public class GassanJigyobunKekkaIchiranReport
     private final JigyobunShikyugakuRenrakuhyo entity;
     private final IOutputOrder 出力順情報;
     private final RString 自市町村コード;
+    private final List<RString> breakItemIds;
 
     /**
      * コンストラクタです
@@ -30,17 +32,20 @@ public class GassanJigyobunKekkaIchiranReport
      * @param entity KogakuGassanDataEntity
      * @param 出力順情報 IOutputOrder
      * @param 自市町村コード RString
+     * @param breakItemIds List<RString>
      */
-    public GassanJigyobunKekkaIchiranReport(JigyobunShikyugakuRenrakuhyo entity, IOutputOrder 出力順情報, RString 自市町村コード) {
+    public GassanJigyobunKekkaIchiranReport(JigyobunShikyugakuRenrakuhyo entity, IOutputOrder 出力順情報, RString 自市町村コード,
+            List<RString> breakItemIds) {
         this.entity = entity;
         this.出力順情報 = 出力順情報;
         this.自市町村コード = 自市町村コード;
+        this.breakItemIds = breakItemIds;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<GassanJigyobunKekkaIchiranSource> writer) {
 
-        IGassanJigyobunKekkaIchiranEditor editor = new GassanJigyobunKekkaIchiranEditor(entity, 出力順情報, 自市町村コード);
+        IGassanJigyobunKekkaIchiranEditor editor = new GassanJigyobunKekkaIchiranEditor(entity, 出力順情報, 自市町村コード, breakItemIds);
 
         IGassanJigyobunKekkaIchiranBuilder builder = new GassanJigyobunKekkaIchiranBuilder(editor);
 

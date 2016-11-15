@@ -196,6 +196,7 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200204.getReportId().value()).
                 addBreak(new GassanJigyobunKekkaIchiranPageBreak(breakItemIds)).create();
+
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
@@ -257,7 +258,7 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
             帳票用データ.setYubinNo(entity.getYubinNo() == null ? RString.EMPTY : entity.getYubinNo().value());
             帳票用データ.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo().getColumnValue());
             param.set帳票用データ(帳票用データ);
-            GassanJigyobunKekkaIchiranReport report = new GassanJigyobunKekkaIchiranReport(param, 出力順, 自市町村コード);
+            GassanJigyobunKekkaIchiranReport report = new GassanJigyobunKekkaIchiranReport(param, 出力順, 自市町村コード, breakItemIds);
             report.writeBy(reportSourceWriter);
         }
         キー項目List.add(entity);

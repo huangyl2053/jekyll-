@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimusha;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2009RentaiGimushaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2009RentaiGimushaDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2009RentaiGimushaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -68,6 +69,21 @@ public class KaigoHihokenshaInfoPanelManger {
      */
     public Decimal get最新履歴番号(HihokenshaNo 被保険者番号) {
         DbT2009RentaiGimushaEntity entity = rentaiGimushaDac.selectBy連帯納付義務者_履歴番号(被保険者番号);
+        if (entity != null) {
+            return entity.getRirekiNo();
+        }
+        return null;
+    }
+
+    /**
+     * 連帯納付義務者登録を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return 履歴番号
+     */
+    public Decimal getNoIsDeleted最新履歴番号(HihokenshaNo 被保険者番号) {
+        IDbT2009RentaiGimushaMapper mapper = mapperProvider.create(IDbT2009RentaiGimushaMapper.class);
+        DbT2009RentaiGimushaEntity entity = mapper.selectBy連帯納付義務者_履歴番号(被保険者番号);
         if (entity != null) {
             return entity.getRirekiNo();
         }

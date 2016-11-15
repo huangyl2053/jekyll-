@@ -196,7 +196,6 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 二割負担List = get二割負担();
         List<JushochitokureiInfoEntity> 住所地特例List = get住所地特例();
         PSMInfoEntity 宛名情報 = get宛名();
-        異動一時List.clear();
         if (被保険者台帳List.isEmpty() && !受給者台帳List.isEmpty()) {
             for (DbT4001JukyushaDaichoEntity 受給者台帳 : 受給者台帳List) {
                 送付エラー新規1(受給者台帳, 宛名情報);
@@ -230,6 +229,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 異動一時tableWriter.update(異動一時);
             }
         }
+        異動一時List.clear();
     }
 
     private List<DbT4001JukyushaDaichoEntity> get受給者台帳() {

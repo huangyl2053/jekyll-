@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 対象世帯員クラスTempに更新3のバッチ処理フロークラスです
@@ -45,10 +46,17 @@ public class UpdTaishoSeitaiyinTemp3Process extends BatchProcessBase<UpdTaishoSe
         TaishoSetaiinEntity 対象世帯員 = entity.get対象世帯員();
         DbT4001Entity 受給者台帳 = entity.get受給者台帳();
         対象世帯員.setJukyuKubun(RSTRING_1);
-        対象世帯員.setNijiHanteiYokaigoJotaiKubunCode(受給者台帳.get要介護認定状態区分コード().getColumnValue());
+        対象世帯員.setNijiHanteiYokaigoJotaiKubunCode(getColumnValue(受給者台帳.get要介護認定状態区分コード()));
         対象世帯員.setNinteiYukoKikanKaishiYMD(受給者台帳.get認定有効期間開始年月日());
         対象世帯員.setNinteiYukoKikanShuryoYMD(受給者台帳.get認定有効期間終了年月日());
         this.taiShoTableWriter.update(対象世帯員);
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
 }

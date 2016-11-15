@@ -94,7 +94,7 @@ FROM
     ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
     LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" "DbT5116IchijiHanteiKekkaJoho"
     ON "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202
+    INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202
     ON DbT5202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
     AND DbT5202."ninteichosaRirekiNo" = (SELECT 
                                                    MAX(DbT5202N."ninteichosaRirekiNo")
@@ -103,7 +103,7 @@ FROM
                                                       DbT5202N."shinseishoKanriNo" = DbT5202."shinseishoKanriNo")
     AND DbT5202."gaikyoChosaTextImageKubun" = #{イメージ区分}  
     AND DbT5101."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
-    LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
+    INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
     ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
     AND DbT5302."ikenshoIraiRirekiNo" = (SELECT 
                                                    MAX(DbT5302S."ikenshoIraiRirekiNo")

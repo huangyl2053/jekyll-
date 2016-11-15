@@ -512,7 +512,9 @@ public class DBC2210011MainHandler {
         TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
         for (dgTokubetsuKyufuJigyoshaDetailServiceList_Row row : rowList) {
             TokubetsuKyufuJigyoshaSearchBusiness 更新情報 = get情報FromDataSouce(row, サービス事業者情報);
-            service.save事業者情報(更新情報);
+            if (更新情報.toEntity().get事業者().getState() != null) {
+                service.save事業者情報(更新情報);
+            }
         }
     }
 

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1080001;
 
+import java.util.Collections;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102010.DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080001.DBD1080001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080001.ShinseishoHakkoTaishoshaHaakuParameterMainDiv;
@@ -55,6 +56,7 @@ public class ShinseishoHakkoTaishoshaHaakuParameterMain {
      */
     public ResponseData<ShinseishoHakkoTaishoshaHaakuParameterMainDiv> select_RadShinkiKoshiKubun(ShinseishoHakkoTaishoshaHaakuParameterMainDiv div) {
         if (div.getParameters().getRadShinkiKoshiKubun().getSelectedKey().contains(new RString("key1"))) {
+            div.getParameters().getChkContainsKazeiHihokensha().setSelectedItems(Collections.EMPTY_LIST);
             div.getParameters().getChkContainsKazeiHihokensha().setDisabled(true);
         } else {
             div.getParameters().getChkContainsKazeiHihokensha().setDisabled(false);

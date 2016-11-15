@@ -52,11 +52,11 @@
             AND A."koshinTsuchiHakkoYMD" IS NOT NULL AND A."koshinTsuchiHakkoYMD" != ''
             AND A."koshinTsuchiHakkoKanryoYMD" IS NOT NULL AND A."koshinTsuchiHakkoKanryoYMD" != ''
         <if test="is印刷範囲指定が対象月まで">
-            AND  A."zenkaiYukoKikanEnd" <![CDATA[<=]]> #{認定有効期間_終了月}
+            AND  LEFT(A."zenkaiYukoKikanEnd", 6) <![CDATA[<=]]> #{認定有効期間_終了月}
         </if>
         <if test="is印刷範囲指定が範囲指定">
-            AND  A."zenkaiYukoKikanEnd" <![CDATA[<=]]> #{認定有効期間_終了月_To}
-            AND  #{認定有効期間_終了月_From} <![CDATA[<=]]> A."zenkaiYukoKikanEnd"
+            AND  LEFT(A."zenkaiYukoKikanEnd", 6) <![CDATA[<=]]> #{認定有効期間_終了月_To}
+            AND  #{認定有効期間_終了月_From} <![CDATA[<=]]> LEFT(A."zenkaiYukoKikanEnd", 6)
         </if>
         ORDER BY
             A."hihokenshaKana" ASC,A."ninteiShinseiYMD" ASC

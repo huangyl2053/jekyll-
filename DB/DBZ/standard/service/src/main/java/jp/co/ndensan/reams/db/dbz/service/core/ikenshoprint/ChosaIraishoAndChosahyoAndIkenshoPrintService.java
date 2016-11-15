@@ -450,7 +450,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             for (KaigohokenShindanMeireishoHeaderItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setHakkoYMD(ninshoshaSource.hakkoYMD);
+                item.setHakkoYMD(item.getHakkoYMD());
                 item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
                 item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
                 item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);

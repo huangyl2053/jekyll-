@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.PrtTokuchoKaishiTsuchishoHonsanteiResult;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.TokuchoKaishiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52RenchoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52Report;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB5RenchoReport;
@@ -119,10 +120,11 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
             return;
         }
 
-        List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
+        List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報List = new ArrayList<>();
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
         int 総ページ数 = 0;
         for (HonsanteiTsuchishoTempResult tmpResult : result.get特徴開始通知書ResultList()) {
+            TokuchoKaishiTsuchishoInfo tokuchoKaishiTsuchishoInfo = new TokuchoKaishiTsuchishoInfo();
             HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
             本算定通知書情報.set発行日(result.get発行日());
             本算定通知書情報.set帳票分類ID(特別徴収開始通知書本算定_帳票分類ID);
@@ -142,9 +144,16 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
             本算定通知書情報.set帳票制御共通(result.get帳票制御共通());
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
             総ページ数 = 総ページ数 + publish特徴開始通知書(出力帳票一覧, 編集後本算定通知書共通情報, result, 本算定通知書情報);
-            編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
+            tokuchoKaishiTsuchishoInfo.set本算定通知書情報(本算定通知書情報);
+            tokuchoKaishiTsuchishoInfo.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+
+            //TODO 仕様変更未対応
+            tokuchoKaishiTsuchishoInfo.set生活保護区分(RString.EMPTY);
+            tokuchoKaishiTsuchishoInfo.set特徴10月開始者区分(RString.EMPTY);
+
+            編集本算定通知書共通情報List.add(tokuchoKaishiTsuchishoInfo);
         }
-        manager.publish特徴開始通知書本算定(result, 編集後本算定通知書共通情報List, 総ページ数);
+        manager.publish特徴開始通知書本算定(result, 編集本算定通知書共通情報List, 総ページ数);
 
     }
 

@@ -295,6 +295,98 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     }
 
     /**
+     * 証明書（ViewState）件数取得する。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param チェック区分 RString
+     * @param 償還払請求基本データList List<DbT3038ShokanKihonEntity>
+     * @param 償還払請求サービス計画200904データList List<DbT3047ShokanServicePlan200904Entity>
+     * @param 償還払請求サービス計画200604データList List<DbT3046ShokanServicePlan200604Entity>
+     * @param 償還払請求サービス計画200004データList List<DbT3045ShokanServicePlan200004Entity>
+     * @return 取得件数
+     */
+    public int getShomeishoKensu(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString チェック区分,
+            List<DbT3038ShokanKihonEntity> 償還払請求基本データList,
+            List<DbT3047ShokanServicePlan200904Entity> 償還払請求サービス計画200904データList,
+            List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList,
+            List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList
+    ) {
+        int 取得件数 = 0;
+        if (チェック区分_2.equals(チェック区分)) {
+            return 取得件数;
+        }
+        for (DbT3038ShokanKihonEntity 償還払請求基本データ : 償還払請求基本データList) {
+            if (被保険者番号.equals(償還払請求基本データ.getHiHokenshaNo())
+                    && サービス提供年月.equals(償還払請求基本データ.getServiceTeikyoYM())
+                    && 整理番号.equals(償還払請求基本データ.getSeiriNo())
+                    && 事業者番号.equals(償還払請求基本データ.getJigyoshaNo())
+                    && 様式番号.equals(償還払請求基本データ.getYoshikiNo())) {
+                取得件数++;
+            }
+        }
+        if (取得件数 > 0) {
+            return 取得件数;
+        }
+        if (new FlexibleYearMonth(サービス年月.toString()).isBeforeOrEquals(サービス提供年月)) {
+            for (DbT3047ShokanServicePlan200904Entity 償還払請求サービス計画200904データ : 償還払請求サービス計画200904データList) {
+                if (被保険者番号.equals(償還払請求サービス計画200904データ.getHiHokenshaNo())
+                        && サービス提供年月.equals(償還払請求サービス計画200904データ.getServiceTeikyoYM())
+                        && 整理番号.equals(償還払請求サービス計画200904データ.getSeiriNo())
+                        && 事業者番号.equals(償還払請求サービス計画200904データ.getJigyoshaNo())
+                        && 様式番号.equals(償還払請求サービス計画200904データ.getYoshikiNo())) {
+                    取得件数++;
+                }
+            }
+            return 取得件数;
+        }
+        return getKeikakuData(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号,
+                償還払請求サービス計画200604データList,
+                償還払請求サービス計画200004データList,
+                取得件数);
+    }
+
+    private int getKeikakuData(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList,
+            List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList,
+            int 取得件数) {
+        if (new FlexibleYearMonth(サービス年月1.toString()).isBeforeOrEquals(サービス提供年月)) {
+            for (DbT3046ShokanServicePlan200604Entity 償還払請求サービス計画200604データ : 償還払請求サービス計画200604データList) {
+                if (被保険者番号.equals(償還払請求サービス計画200604データ.getHiHokenshaNo())
+                        && サービス提供年月.equals(償還払請求サービス計画200604データ.getServiceTeikyoYM())
+                        && 整理番号.equals(償還払請求サービス計画200604データ.getSeiriNo())
+                        && 事業者番号.equals(償還払請求サービス計画200604データ.getJigyoshaNo())
+                        && 様式番号.equals(償還払請求サービス計画200604データ.getYoshikiNo())) {
+                    取得件数++;
+                }
+            }
+            return 取得件数;
+        }
+        for (DbT3045ShokanServicePlan200004Entity 償還払請求サービス計画200004データ : 償還払請求サービス計画200004データList) {
+            if (被保険者番号.equals(償還払請求サービス計画200004データ.getHiHokenshaNo())
+                    && サービス提供年月.equals(償還払請求サービス計画200004データ.getServiceTeikyoYM())
+                    && 整理番号.equals(償還払請求サービス計画200004データ.getSeiriNo())
+                    && 事業者番号.equals(償還払請求サービス計画200004データ.getJigyoshaNo())
+                    && 様式番号.equals(償還払請求サービス計画200004データ.getYoshikiNo())) {
+                取得件数++;
+            }
+        }
+        return 取得件数;
+    }
+
+    /**
      * 識別番号管理情報取得する。
      *
      * @param サービス提供年月 サービス提供年月

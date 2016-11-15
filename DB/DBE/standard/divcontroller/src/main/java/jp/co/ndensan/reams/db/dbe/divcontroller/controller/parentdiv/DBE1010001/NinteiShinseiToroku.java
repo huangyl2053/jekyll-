@@ -623,9 +623,11 @@ public class NinteiShinseiToroku {
             div.setHdnRenrakusakiJoho(DataPassingConverter.serialize(konkaiJoho));
         } else {
             ShinseishoKanriNo 前回申請管理番号 = manager.get前回申請管理番号(申請書管理番号);
-            NinteiShinseiBusinessCollection zenkaiJoho = new NinteiShinseiBusinessCollection();
-            zenkaiJoho.setDbdBusiness(manager.get介護連絡先情報(前回申請管理番号).records());
-            div.setHdnZenkaiRenrakusakiJoho(DataPassingConverter.serialize(zenkaiJoho));
+            if (前回申請管理番号 != null) {
+                NinteiShinseiBusinessCollection zenkaiJoho = new NinteiShinseiBusinessCollection();
+                zenkaiJoho.setDbdBusiness(manager.get介護連絡先情報(前回申請管理番号).records());
+                div.setHdnZenkaiRenrakusakiJoho(DataPassingConverter.serialize(zenkaiJoho));
+            }
             NinteiShinseiBusinessCollection konkaiJoho = new NinteiShinseiBusinessCollection();
             if (!manager.get介護連絡先情報(申請書管理番号).records().isEmpty()) {
                 div.getBtnRenrakusaki().setIconNameEnum(IconName.Check);

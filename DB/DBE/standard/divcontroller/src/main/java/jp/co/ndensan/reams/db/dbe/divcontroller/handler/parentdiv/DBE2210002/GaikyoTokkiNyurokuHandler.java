@@ -58,19 +58,7 @@ public class GaikyoTokkiNyurokuHandler {
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
         RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分);
-        if (gaikyoTokki != null) {
-            div.getTxtJutakuKaishu().setValue(gaikyoTokki.get住宅改修());
-            div.getTxtChosaTaishoShuso().setValue(gaikyoTokki.get概況特記事項_主訴());
-            div.getTxtChosaTishoKazokuJokyo().setValue(gaikyoTokki.get概況特記事項_家族状況());
-            div.getTxtChosaTaishoKyojuKankyo().setValue(gaikyoTokki.get概況特記事項_居住環境_());
-            div.getTxtNichijoShiyoKikiUmu().setValue(gaikyoTokki.get概況特記事項_機器_器械());
-        } else {
-            div.getTxtJutakuKaishu().setValue(RString.EMPTY);
-            div.getTxtChosaTaishoShuso().setValue(RString.EMPTY);
-            div.getTxtChosaTishoKazokuJokyo().setValue(RString.EMPTY);
-            div.getTxtChosaTaishoKyojuKankyo().setValue(RString.EMPTY);
-            div.getTxtNichijoShiyoKikiUmu().setValue(RString.EMPTY);
-        }
+        set初期項目(gaikyoTokki);
         return gaikyoTokki;
     }
 
@@ -115,14 +103,23 @@ public class GaikyoTokkiNyurokuHandler {
      * @param gaikyoTokki 初期の概況特記
      */
     public void resetData(GaikyoTokki gaikyoTokki) {
+        set初期項目(gaikyoTokki);
+    }
+    
+    private void set初期項目(GaikyoTokki gaikyoTokki) {
         if (gaikyoTokki != null) {
             div.getTxtJutakuKaishu().setValue(gaikyoTokki.get住宅改修());
             div.getTxtChosaTaishoShuso().setValue(gaikyoTokki.get概況特記事項_主訴());
             div.getTxtChosaTishoKazokuJokyo().setValue(gaikyoTokki.get概況特記事項_家族状況());
             div.getTxtChosaTaishoKyojuKankyo().setValue(gaikyoTokki.get概況特記事項_居住環境_());
             div.getTxtNichijoShiyoKikiUmu().setValue(gaikyoTokki.get概況特記事項_機器_器械());
-        }
-
+        } else {
+            div.getTxtJutakuKaishu().setValue(RString.EMPTY);
+            div.getTxtChosaTaishoShuso().setValue(RString.EMPTY);
+            div.getTxtChosaTishoKazokuJokyo().setValue(RString.EMPTY);
+            div.getTxtChosaTaishoKyojuKankyo().setValue(RString.EMPTY);
+            div.getTxtNichijoShiyoKikiUmu().setValue(RString.EMPTY);
+        }        
     }
 
 }

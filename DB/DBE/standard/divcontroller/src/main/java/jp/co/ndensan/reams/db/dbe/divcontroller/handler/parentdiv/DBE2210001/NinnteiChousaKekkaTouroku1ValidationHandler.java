@@ -41,6 +41,24 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
                 div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate()).build().check(messages));
         return pairs;
     }
+    
+    /**
+     * 調査実施日の妥当性入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor調査実施日の妥当性入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.調査実施日の妥当性チェック)
+                .thenAdd(NoInputMessages.調査実施日の妥当性入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.調査実施日の妥当性入力,
+                div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate()).build().check(messages));
+        return pairs;
+    }
 
     /**
      * 実施場所の必須入力チェックを行います。
@@ -225,6 +243,7 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
     private static enum NoInputMessages implements IValidationMessage {
 
         調査実施日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "調査実施日"),
+        調査実施日の妥当性入力(UrErrorMessages.前後関係逆転, "認定申請日", "調査実施日"),
         実施場所の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "実施場所"),
         実施場所名称の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "実施場所名称"),
         所属機関の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "所属機関"),

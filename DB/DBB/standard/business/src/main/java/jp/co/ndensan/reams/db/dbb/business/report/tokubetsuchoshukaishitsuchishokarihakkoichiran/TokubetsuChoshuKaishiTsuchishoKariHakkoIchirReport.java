@@ -72,7 +72,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
      * @param 連番 int
-     * @param entity TsuchishoDataTempEntity
      */
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,

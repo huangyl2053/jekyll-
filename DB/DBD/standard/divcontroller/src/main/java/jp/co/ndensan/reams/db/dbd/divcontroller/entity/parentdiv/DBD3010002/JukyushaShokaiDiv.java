@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JukyushaShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -47,6 +47,14 @@ public class JukyushaShokaiDiv extends Panel {
     private RString hiddenGyomuCode;
     @JsonProperty("hiddenモード")
     private RString hiddenモード;
+    @JsonProperty("hidden今回履歴情報")
+    private RString hidden今回履歴情報;
+    @JsonProperty("hidden前回履歴情報")
+    private RString hidden前回履歴情報;
+    @JsonProperty("hidden表示判定キー")
+    private RString hidden表示判定キー;
+    @JsonProperty("hiddenSubGyomuCd")
+    private RString hiddenSubGyomuCd;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -217,6 +225,78 @@ public class JukyushaShokaiDiv extends Panel {
     }
 
     /*
+     * gethidden今回履歴情報
+     * @return hidden今回履歴情報
+     */
+    @JsonProperty("hidden今回履歴情報")
+    public RString getHidden今回履歴情報() {
+        return hidden今回履歴情報;
+    }
+
+    /*
+     * sethidden今回履歴情報
+     * @param hidden今回履歴情報 hidden今回履歴情報
+     */
+    @JsonProperty("hidden今回履歴情報")
+    public void setHidden今回履歴情報(RString hidden今回履歴情報) {
+        this.hidden今回履歴情報 = hidden今回履歴情報;
+    }
+
+    /*
+     * gethidden前回履歴情報
+     * @return hidden前回履歴情報
+     */
+    @JsonProperty("hidden前回履歴情報")
+    public RString getHidden前回履歴情報() {
+        return hidden前回履歴情報;
+    }
+
+    /*
+     * sethidden前回履歴情報
+     * @param hidden前回履歴情報 hidden前回履歴情報
+     */
+    @JsonProperty("hidden前回履歴情報")
+    public void setHidden前回履歴情報(RString hidden前回履歴情報) {
+        this.hidden前回履歴情報 = hidden前回履歴情報;
+    }
+
+    /*
+     * gethidden表示判定キー
+     * @return hidden表示判定キー
+     */
+    @JsonProperty("hidden表示判定キー")
+    public RString getHidden表示判定キー() {
+        return hidden表示判定キー;
+    }
+
+    /*
+     * sethidden表示判定キー
+     * @param hidden表示判定キー hidden表示判定キー
+     */
+    @JsonProperty("hidden表示判定キー")
+    public void setHidden表示判定キー(RString hidden表示判定キー) {
+        this.hidden表示判定キー = hidden表示判定キー;
+    }
+
+    /*
+     * gethiddenSubGyomuCd
+     * @return hiddenSubGyomuCd
+     */
+    @JsonProperty("hiddenSubGyomuCd")
+    public RString getHiddenSubGyomuCd() {
+        return hiddenSubGyomuCd;
+    }
+
+    /*
+     * sethiddenSubGyomuCd
+     * @param hiddenSubGyomuCd hiddenSubGyomuCd
+     */
+    @JsonProperty("hiddenSubGyomuCd")
+    public void setHiddenSubGyomuCd(RString hiddenSubGyomuCd) {
+        this.hiddenSubGyomuCd = hiddenSubGyomuCd;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -307,6 +387,16 @@ public class JukyushaShokaiDiv extends Panel {
     @JsonIgnore
     public void  setTxtShujiIryokikanMeisho(TextBox txtShujiIryokikanMeisho) {
         this.getNinteiDetail().getDvShinseiJoho().setTxtShujiIryokikanMeisho(txtShujiIryokikanMeisho);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnChosaJokyo() {
+        return this.getNinteiDetail().getDvShinseiJoho().getBtnChosaJokyo();
+    }
+
+    @JsonIgnore
+    public void  setBtnChosaJokyo(ButtonDialog btnChosaJokyo) {
+        this.getNinteiDetail().getDvShinseiJoho().setBtnChosaJokyo(btnChosaJokyo);
     }
 
     @JsonIgnore

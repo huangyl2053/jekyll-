@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.Jushochitok
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.TaishoshaSearchValidationHelper;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.検索条件;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.該当者一覧;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.検索条件sub;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.該当者一覧;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.TaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.dgGaitoshaList_Row;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001TransitionEventName.対象者特定;
@@ -95,7 +95,7 @@ public class TaishoshaSearch {
 
         div.getSearchCondition().setIsOpen(true);
         div.getGaitoshaList().setIsOpen(false);
-        
+
         ViewStateHolder.put(ViewStateKeys.モード, ResponseHolder.getState());
 
         return ResponseDatas.newResponseData(div);
@@ -155,9 +155,9 @@ public class TaishoshaSearch {
         // 検索条件未指定チェック
         IHihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
+                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
+                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
+                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
 
         boolean 宛名条件修正Flag = 検索条件Div.getCcdAtenaFinder().hasChanged();
 
@@ -287,9 +287,9 @@ public class TaishoshaSearch {
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(Collections.EMPTY_LIST);
         div.getGaitoshaList().getDgGaitoshaList().getGridSetting().setLimitRowCount(最大取得件数);
         div.getGaitoshaList().getDgGaitoshaList().getGridSetting().setSelectedRowCount(最大取得件数);
-        
+
         // 画面状態遷移
-       RString fromState = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        RString fromState = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
         if (検索条件.getName().equals(fromState)) {
             return ResponseData.of(div).setState(検索条件);
         } else if (検索条件sub.getName().equals(fromState)) {
@@ -297,9 +297,9 @@ public class TaishoshaSearch {
         } else {
             return ResponseData.of(div).setState(検索条件);
         }
-        
+
     }
-    
+
     /**
      * 「戻る」ボタンクリック時に呼び出される処理です。
      *
@@ -307,8 +307,10 @@ public class TaishoshaSearch {
      * @return ResponseData<TaishoshaSearchDiv>
      */
     public ResponseData<TaishoshaSearchDiv> onClick_Back(TaishoshaSearchDiv div) {
-         ViewStateHolder.clear();
-         return ResponseData.of(div).forwardWithEventName(対象者特定).respond(); 
+        ViewStateHolder.put(ViewStateKeys.モード, null);
+        ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, null);
+        ViewStateHolder.put(ViewStateKeys.資格対象者, null);
+        return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
 
     private SearchResult<TaishoshaRelateBusiness> get対象者(IHihokenshaFinderDiv div) {
@@ -439,7 +441,7 @@ public class TaishoshaSearch {
         } else if (資格検索.getJukyushaDaichoHihokenshaNo() != null && !資格検索.getJukyushaDaichoHihokenshaNo().isEmpty()) {
             被保険者区分 = HihoKubun.受給;
         } else if ((資格検索.getHihokenshaNo() != null && !資格検索.getHihokenshaNo().isEmpty())
-                   && (資格検索.getShikakuSoshitsuYMD() == null || 資格検索.getShikakuSoshitsuYMD().isEmpty())) {
+                && (資格検索.getShikakuSoshitsuYMD() == null || 資格検索.getShikakuSoshitsuYMD().isEmpty())) {
             被保険者区分 = HihoKubun.資格;
         }
         return 被保険者区分;
@@ -483,37 +485,37 @@ public class TaishoshaSearch {
 
     private RString to名称(IName name) {
         return name == null ? RString.EMPTY
-               : name.getName() == null ? RString.EMPTY
-                 : name.getName().value();
+                : name.getName() == null ? RString.EMPTY
+                : name.getName().value();
     }
 
     private RString to名称カナ(IName name) {
         return name == null ? RString.EMPTY
-               : name.getKana() == null ? RString.EMPTY
-                 : name.getKana().value();
+                : name.getKana() == null ? RString.EMPTY
+                : name.getKana().value();
     }
 
     private RString to生年月日(IDateOfBirth 生年月日) {
         return 生年月日 == null ? RString.EMPTY
-               : new RString(生年月日.toFlexibleDate().wareki().separator(Separator.PERIOD).toDateString().toString());
+                : new RString(生年月日.toFlexibleDate().wareki().separator(Separator.PERIOD).toDateString().toString());
     }
 
     private RString to郵便番号(IJusho jusho) {
         return jusho == null ? RString.EMPTY
-               : jusho.get郵便番号() == null ? RString.EMPTY
-                 : jusho.get郵便番号().getEditedYubinNo();
+                : jusho.get郵便番号() == null ? RString.EMPTY
+                : jusho.get郵便番号().getEditedYubinNo();
     }
 
     private RString to住所(IJusho jusho) {
         return jusho == null ? RString.EMPTY
-               : jusho.get住所() == null ? RString.EMPTY
-                 : jusho.get住所();
+                : jusho.get住所() == null ? RString.EMPTY
+                : jusho.get住所();
     }
 
     private RString to番地(IJusho jusho) {
         return jusho == null ? RString.EMPTY
-               : jusho.get番地() == null ? RString.EMPTY
-                 : jusho.get番地().getBanchi() == null ? RString.EMPTY
-                   : jusho.get番地().getBanchi().value();
+                : jusho.get番地() == null ? RString.EMPTY
+                : jusho.get番地().getBanchi() == null ? RString.EMPTY
+                : jusho.get番地().getBanchi().value();
     }
 }

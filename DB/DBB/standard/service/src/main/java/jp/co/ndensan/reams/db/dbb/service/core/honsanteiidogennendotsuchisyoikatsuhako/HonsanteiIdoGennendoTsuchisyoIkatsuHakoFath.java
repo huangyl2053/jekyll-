@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.TokuchoKaishiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.CharacteristicsPhase;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
@@ -195,10 +196,10 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
      *
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 RDateTime
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集本算定通知書共通情報List List<TokuchoKaishiTsuchishoInfo>
      */
     public void publish特別徴収開始通知書発行一覧表(FlexibleYear 調定年度, RDateTime 帳票作成日時,
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List) {
+            List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報List) {
 
         List<RString> headerList = new ArrayList<>();
         headerList.add(タイトル_作成年月日);
@@ -234,7 +235,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
                 .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true).setHeader(headerList)
                 .build()) {
-            for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+            for (TokuchoKaishiTsuchishoInfo 編集本算定通知書共通情報 : 編集本算定通知書共通情報List) {
+                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 編集本算定通知書共通情報.get編集後本算定通知書共通情報();
                 List<RString> bodyList = new ArrayList<>();
                 bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
                 bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));

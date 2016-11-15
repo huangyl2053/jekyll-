@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820014
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.DBC0820014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
@@ -38,6 +40,7 @@ public class ServiceTeikyoShomeishoPanel {
     private static final RString 処理モード_修正 = new RString("修正");
     private static final RString 処理モード_登録 = new RString("登録");
     private static final RString 処理モード_削除 = new RString("削除");
+    private static final RString 変更あり = new RString("1");
 
     /**
      * 画面初期化onLoad
@@ -80,6 +83,10 @@ public class ServiceTeikyoShomeishoPanel {
         handler.loadボタンエリア(償還払支給申請.is国保連再送付フラグ());
         handler.load申請共通エリア(画面モード, サービス年月, 整理番号);
         handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報);
+        ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
+        if (null == 証明書入力済フラグ) {
+            setShomeishoNyuryokuFlag();
+        }
         return createResponse(div);
     }
 
@@ -90,6 +97,7 @@ public class ServiceTeikyoShomeishoPanel {
      * @return 償還払支給申請_支給申請画面
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShinseiInfo(ServiceTeikyoShomeishoPanelDiv div) {
+        入力有無フラグ設定();
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (登録モード.equals(画面モード)) {
             画面モード = 処理モード_修正;
@@ -112,6 +120,7 @@ public class ServiceTeikyoShomeishoPanel {
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.申請既存チェック(整理番号, サービス年月, 被保険者番号);
+        入力有無フラグ設定();
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         putViewState(画面モード, div);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.口座情報).respond();
@@ -131,6 +140,7 @@ public class ServiceTeikyoShomeishoPanel {
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.申請既存チェック(整理番号, サービス年月, 被保険者番号);
+        入力有無フラグ設定();
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         putViewState(画面モード, div);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払決定情報).respond();
@@ -240,6 +250,39 @@ public class ServiceTeikyoShomeishoPanel {
                 被保険者番号, サービス年月, 申請日, 整理番号, 事業者番号, 様式番号, 明細番号);
         ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
         ViewStateHolder.put(ViewStateKeys.明細検索キー, parameter);
+    }
+
+    private void setShomeishoNyuryokuFlag() {
+        ShomeishoNyuryokuFlag 証明書入力済フラグ = new ShomeishoNyuryokuFlag();
+        証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set基本情報_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set特定入所者費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set特定診療費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set社福軽減額_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set給付費明細_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set給付費明細住特_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set緊急時所定疾患_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set緊急時施設療養費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set食事費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, 証明書入力済フラグ);
+    }
+
+    private void 入力有無フラグ設定() {
+        ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
+        if (ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get基本情報_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get特定入所者費用_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get特定診療費_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get社福軽減額_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get給付費明細_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get給付費明細住特_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get緊急時所定疾患_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get緊急時施設療養費_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get請求額集計_証明書入力済フラグ().getCode())
+                || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get食事費用_証明書入力済フラグ().getCode())) {
+            ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_サービス提供証明書, 変更あり);
+        }
     }
 
     private ServiceTeikyoShomeishoPanelHandler getHandler(ServiceTeikyoShomeishoPanelDiv div) {
