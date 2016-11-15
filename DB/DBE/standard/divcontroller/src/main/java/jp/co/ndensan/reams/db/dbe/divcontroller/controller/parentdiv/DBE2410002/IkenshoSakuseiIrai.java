@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.Ike
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshosakuseiirai.IkenshoSakuseiIraiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiReportOutputService;
+import jp.co.ndensan.reams.db.dbe.service.report.ikenshokinyuyoshi.IkenshokinyuyoshiPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.Kai
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
@@ -296,6 +298,7 @@ public class IkenshoSakuseiIrai {
         ChosaIraishoAndChosahyoAndIkenshoPrintFinder 意見書Finder = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance();
         ShujiiIkenshoSakuseiIraiReportOutputService 意見書PrintService = ShujiiIkenshoSakuseiIraiReportOutputService.createInstance();
         IkenshoirairirekiichiranShudou 意見書作成依頼書情報 = 依頼書manager.get主治医意見書作成依頼(申請書管理番号.value());
+        IkenshokinyuyoshiPrintService ikenshoPrintService = new IkenshokinyuyoshiPrintService(reportManager);
         if (div.getChkIrai().getSelectedKeys().contains(SELECTED_KEY0)) {
             List<ShujiiIkenshoSakuseiIraishoItem> 意見書作成依頼書List = createHandler(div).create意見書作成依頼書(意見書作成依頼書情報);
             意見書PrintService.print主治医意見書作成依頼情報(意見書作成依頼書List, reportManager);
@@ -311,16 +314,21 @@ public class IkenshoSakuseiIrai {
             意見書PrintService.print主治医意見書作成依頼発行一覧表(主治医意見書作成依頼発行一覧表List, reportManager);
         }
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY0)) {
-            RString 用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString reportId = getReportId(用紙タイプ);
-            if (CONFIGVALUE3.equals(用紙タイプ)) {
-                意見書PrintService.print主治医意見書記入用紙(get主治医意見書記入用紙(div, printService), reportManager, reportId);
-            } else if (CONFIGVALUE2.equals(用紙タイプ)) {
-                意見書PrintService.print主治医意見書記入用紙OCR(get主治医意見書記入用紙(div, printService), reportManager, reportId);
+            RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            if (CONFIGVALUE1.equals(印刷タイプ)) {
+                ikenshoPrintService.print(get主治医意見書記入用紙(div, printService), ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
+
+            } else if (CONFIGVALUE2.equals(印刷タイプ)) {
+                ikenshoPrintService.print(get主治医意見書記入用紙(div, printService), ReportIdDBZ.DBE231001_Ryomen_Mono.getReportId());
             }
         }
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY1)) {
-            意見書PrintService.print主治医意見書記入用紙D(get主治医意見書記入用紙(div, printService), reportManager, getOCRReportId());
+            RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            if (CONFIGVALUE1.equals(印刷タイプ)) {
+                ikenshoPrintService.print(get主治医意見書記入用紙(div, printService), ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
+            } else if (CONFIGVALUE2.equals(印刷タイプ)) {
+                ikenshoPrintService.print(get主治医意見書記入用紙(div, printService), ReportIdDBZ.DBE231011_Ryomen_Color.getReportId());
+            }
         }
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                 = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号.value());
