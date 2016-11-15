@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
@@ -101,7 +102,7 @@ public class DBC2210011Main {
         TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
         List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List = service.select事業者情報(事業者Code, NO_10, RString.EMPTY);
         if (事業者サービス情報List.isEmpty()) {
-            throw new IllegalStateException(UrErrorMessages.該当データなし.toString());
+            throw new ApplicationException(UrErrorMessages.該当データなし.toString());
         } else {
             ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(事業者サービス情報List));
             getHandler(div).onSelect_byListSelect(事業者サービス情報List, div.getTokubetsuKyufuJigyoshaList().getDgTokubetsuKyufuJigyoshaList().getActiveRow());
@@ -280,9 +281,8 @@ public class DBC2210011Main {
                     = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者List, ArrayList.class);
             set情報削除Model(div, サービス事業者情報);
             getHandler(div).onClick_Save(サービス事業者情報);
-
             getHandler(div).前排他の解除(サービス事業者情報.get(0).get市町村特別給付用事業者番号().value());
-            RString messageMain = new RString("\"市町村特別給付サービス事業者の登録が完了しました。");
+            RString messageMain = new RString("市町村特別給付サービス事業者の登録が完了しました。");
             RString 事業者コード = new RString("事業者コード:");
             RString messageTaisho1 = 事業者コード.concat(サービス事業者情報.get(NO_0).get市町村特別給付用事業者番号().getColumnValue());
             div.getCcdKanryoMessage().setSuccessMessage(messageMain, messageTaisho1, RString.EMPTY);
