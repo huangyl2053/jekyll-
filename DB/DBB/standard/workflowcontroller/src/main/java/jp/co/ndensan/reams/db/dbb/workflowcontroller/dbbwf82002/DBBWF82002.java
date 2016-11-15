@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.workflowcontroller.dbbwf82002;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB213001.DBB213001_TokuchoSofuJohoRenkeiParameter;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
-import jp.co.ndensan.reams.uz.uza.lang.RString
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ設計特徴送付情報連携のフローするクラスです。
