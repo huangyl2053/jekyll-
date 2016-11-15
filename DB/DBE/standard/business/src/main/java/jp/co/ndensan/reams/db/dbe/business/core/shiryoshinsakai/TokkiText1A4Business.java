@@ -213,7 +213,7 @@ public class TokkiText1A4Business {
         List<RString> filePathList = new ArrayList<>();
         for (int i = 1; i <= 最大ページ; i++) {
             RStringBuilder ファイル名 = new RStringBuilder();
-            ファイル名.append("C140");
+            ファイル名.append("C410");
             ファイル名.append(i);
             if (kyotsuEntity.isJimukyoku()) {
                 filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString()));
@@ -292,23 +292,26 @@ public class TokkiText1A4Business {
                 if (表示行数 <= ページ最大表示行数) {
                     テキスト全面.append(テキストBuilder);
                 }
-                if (ページ最大表示行数 <= 表示行数) {
+                if (i == 特記情報List.size() - 1) {
+                    setテキスト全面List(テキスト全面List, テキスト全面, テキストBuilder);
+                } else if (ページ最大表示行数 <= 表示行数) {
                     テキスト全面List.add(テキスト全面.toRString());
                     テキスト全面 = new RStringBuilder();
                     テキスト全面.append(テキストBuilder);
                     表示行数 = 0;
-                    setテキスト全面List(i, テキスト全面List, テキスト全面);
-                } else if (i == 特記情報List.size() - 1) {
-                    テキスト全面.append(テキストBuilder);
-                    テキスト全面List.add(テキスト全面.toRString());
                 }
             }
         }
         return テキスト全面List;
     }
 
-    private void setテキスト全面List(int i, List<RString> テキスト全面List, RStringBuilder テキスト全面) {
-        if (i == 特記情報List.size() - 1) {
+    private void setテキスト全面List(List<RString> テキスト全面List, RStringBuilder テキスト全面, RStringBuilder テキストBuilder) {
+        if (ページ最大表示行数 < 表示行数) {
+            テキスト全面List.add(テキスト全面.toRString());
+            テキスト全面 = new RStringBuilder();
+            テキスト全面.append(テキストBuilder);
+            テキスト全面List.add(テキスト全面.toRString());
+        } else {
             テキスト全面List.add(テキスト全面.toRString());
         }
     }
