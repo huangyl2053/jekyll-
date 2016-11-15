@@ -413,6 +413,10 @@ public class JimuShinsakaishiryoBusiness {
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
                 一次判定結果 = YokaigoJotaiKubun09.toValue(一次判定結果コード.getColumnValue()).get名称();
             }
+            if (一次判定結果コード_認知症加算 != null && !一次判定結果コード_認知症加算.isEmpty()
+                    && 一次判定結果コード.equals(一次判定結果コード_認知症加算)) {
+                return 一次判定結果;
+            }
         }
         RString 一次判定結果_認知症加算 = get一次判定結果_認知症加算(厚労省IF識別コード, 一次判定結果コード_認知症加算);
         if (!RString.isNullOrEmpty(一次判定結果) && !RString.isNullOrEmpty(一次判定結果_認知症加算)) {
