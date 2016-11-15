@@ -39,12 +39,14 @@ public class TokubetsuChoshuKaishiPageBreak extends PageBreaker<TokubetsuChoshuK
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuKaishiSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiSource> nextSource) {
         boolean flag = false;
-        //QA1854 確認中
         if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.町域コード.get項目ID())
                 && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.番地コード.get項目ID())
+                && !currentSource.getSource().banchiCode.equals(nextSource.getSource().banchiCode)) {
             flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.行政区コード.get項目ID())
                 && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {

@@ -199,8 +199,9 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
 
     private void set改頁(TokubetsuChoshuKaishiSource source) {
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {
+            source.banchiCode = 編集後本算定通知書共通情報.get編集後宛先().get編集番地コード();
             source.choikiCode = 編集後本算定通知書共通情報.get編集後宛先().get町域コード();
-            source.choikiCode = 編集後本算定通知書共通情報.get編集後宛先().get行政区コード().getColumnValue();
+            source.gyoseikuCode = 編集後本算定通知書共通情報.get編集後宛先().get行政区コード().getColumnValue();
             source.chikuCode1 = 編集後本算定通知書共通情報.get編集後宛先().get地区１();
             source.chikuCode2 = 編集後本算定通知書共通情報.get編集後宛先().get地区２();
             source.chikuCode3 = 編集後本算定通知書共通情報.get編集後宛先().get地区３();
