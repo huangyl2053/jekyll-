@@ -148,6 +148,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     private static final FlexibleYearMonth 提供購入年月_200509 = new FlexibleYearMonth("200509");
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
     private static final RString モード_修正 = new RString("修正");
+    private static final RString チェック区分_2 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -241,27 +242,56 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
+     * @param チェック区分 チェック区分
      * @return 取得件数
      */
     public int getShikibetsuNoKanri(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号) {
-        int 件数 = 償還払請求基本Dac.selectデータ件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号);
-        if (件数 > 0) {
-            return 件数;
-        }
-        if (new FlexibleYearMonth(サービス年月.toString()).isBeforeOrEquals(サービス提供年月)) {
-            return 償還払請求サービス計画200904Dac.selectデータ件数(被保険者番号,
+            RString 様式番号,
+            RString チェック区分) {
+        int 件数;
+        int 件数2;
+        if (チェック区分_2.equals(チェック区分)) {
+            件数2 = 償還払請求基本Dac.selectデータ件数2(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号);
+            if (件数2 > 0) {
+                return 件数2;
+            }
+            if (new FlexibleYearMonth(サービス年月.toString()).isBeforeOrEquals(サービス提供年月)) {
+                return 償還払請求サービス計画200904Dac.selectデータ件数2(被保険者番号,
+                        サービス提供年月, 整理番号, 事業者番号, 様式番号);
+            }
+            if (new FlexibleYearMonth(サービス年月1.toString()).isBeforeOrEquals(サービス提供年月)) {
+                return 償還払請求サービス計画200604Dac.selectデータ件数2(被保険者番号,
+                        サービス提供年月, 整理番号, 事業者番号, 様式番号);
+            }
+            return 償還払請求サービス計画200004Dac.selectデータ件数2(被保険者番号,
                     サービス提供年月, 整理番号, 事業者番号, 様式番号);
+        } else {
+            件数 = 償還払請求基本Dac.selectデータ件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号);
+            件数2 = 償還払請求基本Dac.selectデータ件数2(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号);
+            if (件数 + 件数2 > 0) {
+                return 件数 + 件数2;
+            }
+            if (new FlexibleYearMonth(サービス年月.toString()).isBeforeOrEquals(サービス提供年月)) {
+                return 償還払請求サービス計画200904Dac.selectデータ件数(被保険者番号,
+                        サービス提供年月, 整理番号, 事業者番号, 様式番号)
+                        + 償還払請求サービス計画200904Dac.selectデータ件数2(被保険者番号,
+                                サービス提供年月, 整理番号, 事業者番号, 様式番号);
+            }
+            if (new FlexibleYearMonth(サービス年月1.toString()).isBeforeOrEquals(サービス提供年月)) {
+                return 償還払請求サービス計画200604Dac.selectデータ件数(被保険者番号,
+                        サービス提供年月, 整理番号, 事業者番号, 様式番号)
+                        + 償還払請求サービス計画200604Dac.selectデータ件数2(被保険者番号,
+                                サービス提供年月, 整理番号, 事業者番号, 様式番号);
+            }
+            return 償還払請求サービス計画200004Dac.selectデータ件数(被保険者番号,
+                    サービス提供年月, 整理番号, 事業者番号, 様式番号)
+                    + 償還払請求サービス計画200004Dac.selectデータ件数2(被保険者番号,
+                            サービス提供年月, 整理番号, 事業者番号, 様式番号);
         }
-        if (new FlexibleYearMonth(サービス年月1.toString()).isBeforeOrEquals(サービス提供年月)) {
-            return 償還払請求サービス計画200604Dac.selectデータ件数(被保険者番号,
-                    サービス提供年月, 整理番号, 事業者番号, 様式番号);
-        }
-        return 償還払請求サービス計画200004Dac.selectデータ件数(被保険者番号,
-                サービス提供年月, 整理番号, 事業者番号, 様式番号);
+
     }
 
     /**

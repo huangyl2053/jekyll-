@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -123,9 +124,9 @@ public class DbT3046ShokanServicePlan200604Dac implements ISaveable<DbT3046Shoka
         return accessor.select().
                 table(DbT3046ShokanServicePlan200604.class).
                 where(and(
-                                eq(hiHokenshaNo, parameter.getHiHokenshaNo()),
-                                eq(serviceTeikyoYM, parameter.getServiceTeikyoYM()),
-                                eq(seiriNo, parameter.getSeiriNo())))
+                        eq(hiHokenshaNo, parameter.getHiHokenshaNo()),
+                        eq(serviceTeikyoYM, parameter.getServiceTeikyoYM()),
+                        eq(seiriNo, parameter.getSeiriNo())))
                 .order(by(DbT3046ShokanServicePlan200604.jigyoshaNo, Order.DESC),
                         by(DbT3046ShokanServicePlan200604.yoshikiNo, Order.DESC)).limit(1).
                 toObject(DbT3046ShokanServicePlan200604Entity.class);
@@ -159,11 +160,46 @@ public class DbT3046ShokanServicePlan200604Dac implements ISaveable<DbT3046Shoka
         return accessor.select().
                 table(DbT3046ShokanServicePlan200604.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(yoshikiNo, 様式番号))).getCount();
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(seiriNo, 整理番号),
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(yoshikiNo, 様式番号))).getCount();
+    }
+
+    /**
+     * 取得された件数2を返却する
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @return 件数
+     * @throws NullPointerException Exception
+     */
+    public int selectデータ件数2(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3046ShokanServicePlan200604.class).
+                where(and(
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        not(eq(seiriNo, 整理番号)),
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(yoshikiNo, 様式番号))).getCount();
     }
 
     /**
@@ -197,12 +233,12 @@ public class DbT3046ShokanServicePlan200604Dac implements ISaveable<DbT3046Shoka
         return accessor.select().
                 table(DbT3046ShokanServicePlan200604.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(yoshikiNo, 様式番号),
-                                eq(meisaiNo, 明細番号))).getCount();
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(seiriNo, 整理番号),
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(yoshikiNo, 様式番号),
+                        eq(meisaiNo, 明細番号))).getCount();
     }
 
     /**
@@ -293,13 +329,13 @@ public class DbT3046ShokanServicePlan200604Dac implements ISaveable<DbT3046Shoka
         return accessor.select().
                 table(DbT3046ShokanServicePlan200604.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(yoshikiNo, 様式番号),
-                                eq(meisaiNo, 明細番号),
-                                eq(renban, 連番))).
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(seiriNo, 整理番号),
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(yoshikiNo, 様式番号),
+                        eq(meisaiNo, 明細番号),
+                        eq(renban, 連番))).
                 toObject(DbT3046ShokanServicePlan200604Entity.class);
     }
 
@@ -331,11 +367,11 @@ public class DbT3046ShokanServicePlan200604Dac implements ISaveable<DbT3046Shoka
         return accessor.select().
                 table(DbT3046ShokanServicePlan200604.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(serviceCode, サービスコード))).
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(seiriNo, 整理番号),
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(serviceCode, サービスコード))).
                 toList(DbT3046ShokanServicePlan200604Entity.class);
     }
 
@@ -362,10 +398,10 @@ public class DbT3046ShokanServicePlan200604Dac implements ISaveable<DbT3046Shoka
         return accessor.select().
                 table(DbT3046ShokanServicePlan200604.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号)
-                        )).
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(seiriNo, 整理番号)
+                )).
                 toList(DbT3046ShokanServicePlan200604Entity.class);
     }
 }
