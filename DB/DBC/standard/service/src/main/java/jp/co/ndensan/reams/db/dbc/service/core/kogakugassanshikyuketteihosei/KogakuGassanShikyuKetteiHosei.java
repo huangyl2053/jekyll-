@@ -62,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ビジネス設計_DBCMN62004_DBCMNN1005_支給決定情報補正（単）(事業分兼)
@@ -297,6 +298,7 @@ public class KogakuGassanShikyuKetteiHosei {
      * @param 処理モード RString
      * @return boolean
      */
+    @Transaction
     public boolean isKoshinShori(
             KoshinShoriResult 画面DIV,
             RString 処理モード) {
@@ -406,6 +408,7 @@ public class KogakuGassanShikyuKetteiHosei {
      * @param 処理モード RString
      * @return boolean
      */
+    @Transaction
     public boolean isKoshinShoriJigyo(
             JigyoKogakuGassanShikyuFushikyuKettei 画面DIV,
             RString 処理モード) {
