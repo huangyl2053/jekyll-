@@ -560,7 +560,8 @@ public class IkenshoSakuseiIraiHandler {
         Map<Integer, RString> 通知文
                 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
         KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
-                RString.EMPTY,
+                div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString(),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -706,6 +707,8 @@ public class IkenshoSakuseiIraiHandler {
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE236001.getReportId(), KamokuCode.EMPTY, 数字_1);
         for (ShujiiIkenshoTeishutsuIraishoBusiness business : 主治医意見書作成依頼発行一覧表情報) {
             ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
+            item.setHakkoYMD1(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
             item.setBunshoNo(文書番号);
             RString 医療機関郵便番号 = RString.EMPTY;
             RString 医療機関住所 = RString.EMPTY;
