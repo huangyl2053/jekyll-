@@ -57,12 +57,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 普徴仮算定結果のクラスです。
@@ -341,7 +343,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         FutyoKarisanteiKekkaIcihiranDataCSVEntity csvEntity = new FutyoKarisanteiKekkaIcihiranDataCSVEntity();
 
         csvEntity.set作成年月日(dateFormat32(parameter.getバッチ起動日時().getDate()));
-        csvEntity.set作成時刻(dateFormat32(parameter.getバッチ起動日時().getDate()));
+        csvEntity.set作成時刻(共通ポリシーパターン141(parameter.getバッチ起動日時().getTime()));
         csvEntity.set賦課年度(dateFormat308(parameter.get賦課年度()));
 
         csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
@@ -421,7 +423,14 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額06();
         } else if (普徴仮算定計算後賦課Entity.get普徴収入額07() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額07().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額07();
-        } else if (普徴仮算定計算後賦課Entity.get普徴収入額08() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額08().compareTo(Decimal.ZERO)) {
+        } else {
+            前年度情報の最終普徴額 = get前年度情報の最終普徴額Part2(普徴仮算定計算後賦課Entity, 前年度情報の最終普徴額);
+        }
+        return new RString(前年度情報の最終普徴額.toString());
+    }
+
+    private Decimal get前年度情報の最終普徴額Part2(FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課Entity, Decimal 前年度情報の最終普徴額) {
+        if (普徴仮算定計算後賦課Entity.get普徴収入額08() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額08().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額08();
         } else if (普徴仮算定計算後賦課Entity.get普徴収入額09() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額09().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額09();
@@ -436,7 +445,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         } else if (普徴仮算定計算後賦課Entity.get普徴収入額14() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額14().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額14();
         }
-        return new RString(前年度情報の最終普徴額.toString());
+        return 前年度情報の最終普徴額;
     }
 
     private RString dateFormat32(RDate date) {
@@ -450,4 +459,9 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     private RString dateFormat308(FlexibleYear year) {
         return year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
     }
+
+    private RString 共通ポリシーパターン141(RTime time) {
+        return time.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
+    }
+
 }

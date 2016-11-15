@@ -150,10 +150,10 @@ public class KanendoFukaHandler {
         int 前月末の日 = RDate.getNowDate().minusMonth(1).getLastDay();
         RString 前月まで = RDate.getNowDate().getYearMonth().minusMonth(1).wareki().
                 toDateString().concat(コンマ).concat(String.valueOf(前月末の日)).concat(RString.HALF_SPACE).concat(
-                RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+                        RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RString 当日を含む = RDate.getNowDate().wareki().
                 toDateString().concat(RString.HALF_SPACE).concat(
-                RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+                        RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         List<dgChushutsuKikan_Row> rowList = new ArrayList<>();
         dgChushutsuKikan_Row row = new dgChushutsuKikan_Row();
         if (shoriDate != null && shoriDate.get基準日時() != null) {
@@ -274,8 +274,8 @@ public class KanendoFukaHandler {
         for (Kitsuki 期月 : 期月リスト.toList()) {
             if (期月.get期().compareTo(最終法定納期.get期()) > 0
                     && 期月.get月().getコード().indexOf(new RString(Integer.valueOf(
-                            div.getKanendoShoriNaiyo().getDdlShoritsuki().
-                            getSelectedKey().toString()).toString())) != -1) {
+                                            div.getKanendoShoriNaiyo().getDdlShoritsuki().
+                                            getSelectedKey().toString()).toString())) != -1) {
                 return 期月;
             }
         }
@@ -473,8 +473,8 @@ public class KanendoFukaHandler {
                 納入通知書Flag = true;
             }
         }
-        if (過年度異動通知書作成.equals(ResponseHolder.getMenuID())
-                || (納入通知書Flag && 本算定異動_過年度.equals(ResponseHolder.getMenuID()))) {
+
+        if (納入通知書Flag && 本算定異動_過年度.equals(ResponseHolder.getMenuID())) {
             parameter.set一括発行起動フラグ(true);
         } else {
             parameter.set一括発行起動フラグ(false);
