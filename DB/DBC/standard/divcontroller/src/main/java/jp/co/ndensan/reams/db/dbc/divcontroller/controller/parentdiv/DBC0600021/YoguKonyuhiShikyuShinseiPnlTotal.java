@@ -103,6 +103,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString 品目コード = new RString("品目コード");
     private static final RString 福祉用具購入費明細情報が0件 = new RString("福祉用具購入費明細情報が0件");
     private static final RString 事業者選択 = new RString("DBC0300011_事業者選択");
+    private static final RString 事業者選択_戻る = new RString("DBC0300011_戻る");
 
     /**
      * onLoad事件
@@ -134,8 +135,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
             ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                     getServiceShuruiCode(被保険者番号, new FlexibleYearMonth(div.
-                            getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().
-                            getValue().getYearMonth().toString()));
+                                    getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().
+                                    getValue().getYearMonth().toString()));
             RString 証明書コード = RString.EMPTY;
             if (NUM41.equals(サービス種類.value())) {
                 証明書コード = 証明書コード1;
@@ -157,7 +158,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             ViewStateHolder.put(ViewStateKeys.様式番号, 証明書コード);
             SokanbaraiShiharaiKekkaResult maeResult = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                     getShokanShiharaiKekkaAll(被保険者番号, ViewStateHolder.get(
-                            ViewStateKeys.サービス提供年月, FlexibleYearMonth.class));
+                                    ViewStateKeys.サービス提供年月, FlexibleYearMonth.class));
             if (maeResult != null) {
                 getHandler(div).登録前回支払結果情報(maeResult);
             }
@@ -233,7 +234,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().setSelectedKey(BLANK);
         ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getServiceShuruiCode(被保険者番号, new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                        getTxtTeikyoYM().getValue().getYearMonth().toString()));
+                                getTxtTeikyoYM().getValue().getYearMonth().toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtServiceCode().setValue(サービス種類.value());
         YoguKonyuhiShikyuShinseiPnlTotalParameter 画面データ = getHandler(div).set画面データ();
         ViewStateHolder.put(ViewStateKeys.明細データ, 画面データ);
@@ -947,11 +948,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onActive(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
         if (事業者選択.equals(イベント名)) {
+            ViewStateHolder.put(ViewStateKeys.状態, div.getMode());
             JuryoininKeiyakuJigyosha tmp = ViewStateHolder.get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
             if (tmp != null) {
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().set契約事業者(tmp.get契約事業者番号());
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().set契約事業者名(tmp.get契約事業者名称());
             }
+        }
+        if (事業者選択_戻る.equals(イベント名)) {
+            ViewStateHolder.put(ViewStateKeys.状態, div.getMode());
         }
         return ResponseData.of(div).respond();
     }
@@ -963,6 +968,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      * @return ResponseData
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnKeiyakuNo(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        div.setMode(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
         ViewStateHolder.put(ViewStateKeys.状態, 参照);
         return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.契約事業者検索).respond();
     }
