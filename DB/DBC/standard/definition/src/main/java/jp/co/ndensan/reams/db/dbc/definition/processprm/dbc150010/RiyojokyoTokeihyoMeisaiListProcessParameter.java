@@ -143,6 +143,6 @@ public class RiyojokyoTokeihyoMeisaiListProcessParameter implements IBatchProces
         return new CreateRiyojokyoMybatisParameter(居宅利用率指定, 開始居宅利用率, 終了居宅利用率, 訪問利用率指定, 終了訪問利用率,
                 開始訪問利用率, 市町村コード, 旧市町村コード, 地区指定, 地区リスト, !居宅利用率_指定.equals(居宅利用率指定),
                 居宅利用率_指定.equals(居宅利用率指定), has市町村コード, has旧市町村コード,
-                地区指定_町域.equals(訪問利用率指定), has行政区, has地区1, has地区2, has地区3, is集計, is明細, false, false);
+                地区指定_町域.equals(訪問利用率指定), has行政区, has地区1, has地区2, has地区3, is集計, is明細, false, false, 利用実績区分);
     }
 }

@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntit
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.DbWT1510KyufuJissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.DbWT1512JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.DbWT1513RiyoJokyoTokeihyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.DbWT1514ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.KyuhuJissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -34,6 +35,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-3500-030 zuotao
  */
 public interface IRiyoJokyoTokeihyoMeisaiListSakuseiMapper {
+
+    /**
+     * 処理結果確認リストを取得します。
+     *
+     * @param param 給付実績基本情報検索用パラメータ
+     * @return 処理結果確認リスト
+     */
+    List<DbWT1514ShoriKekkaKakuninListEntity> select処理結果確認リスト(KyufuJissekiKihonMybatisParameter param);
 
     /**
      * 給付実績基本情報を取得します。
@@ -77,7 +86,7 @@ public interface IRiyoJokyoTokeihyoMeisaiListSakuseiMapper {
      *
      * @return 給付実績基本一時情報
      */
-    List<DbWT1510KyufuJissekiKihonEntity> selectALL();
+    List<DbWT1510KyufuJissekiKihonEntity> selectAll();
 
     /**
      * 給付実績明細データを全件取得します。

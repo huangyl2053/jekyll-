@@ -13,29 +13,28 @@ public enum Tokeihyo_ErrorKubun {
     /**
      * コード:01 名称:マスタ構成不正 略称:定義なし
      */
-    マスタ構成不正("01", "マスタ構成不正"),
-
+    マスタ構成不正("01", "マスタ構成不正", "給付実績のマスタ構成が不正です。"),
     /**
      * コード:02 名称:サービスコードデータなし 略称:定義なし
      */
-    サービスコードデータなし("02", "サービスコードデータなし"),
-
+    サービスコードデータなし("02", "サービスコードデータなし", "該当のサービスコードがサービスコードマスタに存在しません。"),
     /**
      * コード:03 名称:被保険者宛名情報取得 略称:定義なし
      */
-    被保険者宛名情報取得("03", "被保険者宛名情報取得"),
-
+    被保険者宛名情報取得("03", "被保険者宛名情報取得", "該当データがありません。"),
     /**
      * コード:04 名称:事業者名称取得 略称:定義なし
      */
-    事業者名称取得("04", "事業者名称取得");
+    事業者名称取得("04", "事業者名称取得", "該当データがありません。");
 
     private final RString code;
     private final RString fullName;
+    private final RString errorMessage;
 
-    private Tokeihyo_ErrorKubun(String code, String fullname) {
+    private Tokeihyo_ErrorKubun(String code, String fullname, String errorMessage) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.errorMessage = new RString(errorMessage);
     }
 
     /**
@@ -54,6 +53,15 @@ public enum Tokeihyo_ErrorKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 統計表_エラー区分の名称を返します。
+     *
+     * @return 統計表_エラー区分の名称
+     */
+    public RString geterrorMessage() {
+        return errorMessage;
     }
 
     /**
