@@ -687,24 +687,7 @@
         ON "FukaCalculateTemp"."honSanJon_shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
         AND "DbT7006RoreiFukushiNenkinJukyusha"."jukyuKaishiYMD" <![CDATA[<]]> (#{調定年度} || '0401')
         LEFT JOIN
-          (SELECT B.*
-           FROM 
-              (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS B
-                INNER JOIN
-                    (SELECT C."hihokenshaNo",
-                            C."linkNo",
-                            MAX(C."rirekiNo") as "rirekiNo"
-                     FROM 
-                            rgdb."DbT1006KyokaisoGaitosha" AS C
-                    GROUP BY
-                        C."hihokenshaNo",
-                        C."linkNo"
-                    ) AS A
-                ON
-                  A."hihokenshaNo" = B."dbT1006KyokaisoGaitosha_hihokenshaNo"
-                  AND A."linkNo" = B."dbT1006KyokaisoGaitosha_linkNo"
-                  AND A."rirekiNo" = B."dbT1006KyokaisoGaitosha_rirekiNo"
-                ) AS DbT1006KyokaisoGaitosha
+              (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS DbT1006KyokaisoGaitosha
             LEFT JOIN
             (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
             ON
