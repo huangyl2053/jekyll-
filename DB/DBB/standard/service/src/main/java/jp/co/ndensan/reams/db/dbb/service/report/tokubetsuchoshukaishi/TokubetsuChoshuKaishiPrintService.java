@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbb.service.report.TokubetsuChoshuKaishi;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.TokuchoKaishiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -46,17 +46,17 @@ public class TokubetsuChoshuKaishiPrintService {
     /**
      * 特別徴収開始通知書（本算定）発行一覧表(単一帳票出力用)
      *
-     * @param 編集後本算定通知書共通情報 List< EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集本算定通知書共通情報 List< TokuchoKaishiTsuchishoInfo>
      * @param 賦課年度 FlexibleYear
      * @param 出力順ID RString
      * @param 帳票作成日時 RDateTime
      * @return SourceDataCollection
      */
-    public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度,
+    public SourceDataCollection printSingle(List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報, FlexibleYear 賦課年度,
             RString 出力順ID, RDateTime 帳票作成日時) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(編集後本算定通知書共通情報, 賦課年度, 出力順ID, 帳票作成日時, reportManager);
+            print(編集本算定通知書共通情報, 賦課年度, 出力順ID, 帳票作成日時, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -65,13 +65,13 @@ public class TokubetsuChoshuKaishiPrintService {
     /**
      * 特別徴収開始通知書（本算定）発行一覧表の printメソッド(複数帳票出力用)
      *
-     * @param 編集後本算定通知書共通情報 List< EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集本算定通知書共通情報 List< TokuchoKaishiTsuchishoInfo>
      * @param 賦課年度 FlexibleYear
      * @param 出力順ID RString
      * @param 帳票作成日時 RDateTime
      * @param reportManager ReportManager
      */
-    public void print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度, RString 出力順ID,
+    public void print(List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報, FlexibleYear 賦課年度, RString 出力順ID,
             RDateTime 帳票作成日時, ReportManager reportManager) {
         IOutputOrder 並び順 = null;
         if (!RString.isNullOrEmpty(出力順ID)) {
@@ -88,7 +88,7 @@ public class TokubetsuChoshuKaishiPrintService {
             RString 市町村名 = association.get市町村名();
 
             if (並び順 == null || 並び順.get設定項目リスト() == null || 並び順.get設定項目リスト().isEmpty()) {
-                executeReport(編集後本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, new ArrayList(),
+                executeReport(編集本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, new ArrayList(),
                         new ArrayList(), reportSourceWriter);
                 return;
             }
@@ -104,18 +104,20 @@ public class TokubetsuChoshuKaishiPrintService {
                     break;
                 }
             }
-            executeReport(編集後本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, 出力項目リスト,
+            executeReport(編集本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, 出力項目リスト,
                     改頁項目リスト, reportSourceWriter);
         }
     }
 
-    private void executeReport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    private void executeReport(List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報,
             FlexibleYear 賦課年度, RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名,
             List<RString> 出力項目リスト, List<RString> 改頁項目リスト, ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
         int i = NUM1;
-        for (EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu : 編集後本算定通知書共通情報) {
-            TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(
-                    editedhonsanteitsuchishokyotsu, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, 出力項目リスト, 改頁項目リスト, i);
+        for (TokuchoKaishiTsuchishoInfo tokuchoKaishiTsuchishoInfo : 編集本算定通知書共通情報) {
+            TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(tokuchoKaishiTsuchishoInfo.get生活保護区分(),
+                    tokuchoKaishiTsuchishoInfo.get特徴10月開始者区分(), tokuchoKaishiTsuchishoInfo.get本算定通知書情報(),
+                    tokuchoKaishiTsuchishoInfo.get編集後本算定通知書共通情報(), 賦課年度, 帳票作成日時, 市町村コード,
+                    市町村名, 出力項目リスト, 改頁項目リスト, i);
             report.writeBy(reportSourceWriter);
             i = i + NUM1;
         }
