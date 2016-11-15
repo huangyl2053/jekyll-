@@ -325,10 +325,6 @@ public enum ReportIdDBD {
      */
     DBD900007(new ReportId("DBD900007_HikazeiNenkinSokyuFuicchiCheckList"), new RString("非課税年金対象者情報遡及不一致チェックリスト")),
     /**
-     * 汎用リスト出力(社会福祉法人軽減)の帳票ＩＤです。
-     */
-    DBD701006(new ReportId("DBD701006_HanyoListShakaiFukushiHojinKeigen"), new RString("汎用リスト　社会福祉法人軽減")),
-    /**
      * 汎用リスト出力(特別地域加算減免)の帳票ＩＤです。
      */
     DBD701007(new ReportId("DBD701007_HanyoListTokubetsuChiikiKasanGemmen"), new RString("汎用リスト　特別地域加算減免")),

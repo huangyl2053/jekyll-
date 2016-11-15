@@ -52,22 +52,20 @@ public class HanyoListManager {
      * @return 項目内容new
      */
     public RString 項目内容new編集(int i, RString 項目内容new, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku) {
-        if (hanyoListShutsuryokuKomoku != null) {
-            if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分() != null) {
-                if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("02"))) {
-                    項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki()
-                            .firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, NO_3);
-                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("03"))) {
-                    項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki().
-                            firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, NO_6);
-                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("04"))) {
-                    項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki()
-                             .toDateString().substring(0, NO_6);
-                }
+        if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分() != null) {
+            if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("02"))) {
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki()
+                        .firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, NO_3);
+            } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("03"))) {
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki().
+                        firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, NO_6);
+            } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("04"))) {
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki()
+                        .toDateString().substring(0, NO_6);
             }
-            if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get金額編集().equals(KingakuEditingNecessity.必要.getコード())) {
-                項目内容new = DecimalFormatter.toコンマ区切りRString(new Decimal(項目内容new.toString()), 0);
-            }
+        }
+        if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get金額編集().equals(KingakuEditingNecessity.必要.getコード())) {
+            項目内容new = DecimalFormatter.toコンマ区切りRString(new Decimal(項目内容new.toString()), 0);
         }
         return 項目内容new;
     }

@@ -17,12 +17,13 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  * @reamsid_L DBD-3900-030 mawy
  */
 public class DBD710060_HanyoListShakaiFukushiHojinKeigen extends BatchFlowBase<DBD710060_HanyoListShakaiFukushiHojinKeigenParameter> {
-    private static final String CSV_PROCESS = "csvProcess";
-    
+
     @Override
     protected void defineFlow() {
         executeStep(CSV_PROCESS);
     }
+
+    private static final String CSV_PROCESS = "csvProcess";
 
     /**
      * batchProcessです。

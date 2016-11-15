@@ -133,11 +133,9 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         出力文字の開始位置 = 0;
         出力桁数 = 0;
         csvContent = new ArrayList<>();
-        // TODO : 出力項目の設定ができるようになったら下を採用
-        hanyoListShutsuryokuKomoku = null;
-//        hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
-//                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
-//                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
+        hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
+                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
+                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
         set帳表CSV出力();
     }
 
@@ -197,67 +195,40 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
         boolean flag = false;
-        // TODO : 出力項目を指定できるようになったら下を採用
-        int index = 0;
-        for (ShakaiFukushiHojinKeigenCsvEnumEntity e : ShakaiFukushiHojinKeigenCsvEnumEntity.values()) {
-            RString 項目内容new = RString.EMPTY;
-            RString get項目名称 = e.get名称().substring(3);
-            Class clazz = eucCsvEntity.getClass();
-            Method getMethod;
-            try {
-                getMethod = clazz.getDeclaredMethod(e.get名称().toString());
-                項目内容new = get項目内容(getMethod, 項目内容new, eucCsvEntity, index);
-            } catch (NoSuchMethodException | SecurityException ex) {
-                Logger.getLogger(HanyoListShakaiFukushiHojinKeigenProcess.class.getName()).log(Level.SEVERE, null, ex);
+        if (hanyoListShutsuryokuKomoku != null) {
+            for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
+                RString 項目内容new = RString.EMPTY;
+                RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+                if (get項目名称 != null && !get項目名称.isEmpty()) {
+                    Class clazz = eucCsvEntity.getClass();
+                    Method getMethod;
+                    try {
+                        getMethod = clazz.getDeclaredMethod(ShakaiFukushiHojinKeigenCsvEnumEntity
+                                .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
+                                                        .get(i).get項目位置()))).get名称().toString());
+                        項目内容new = get項目内容(getMethod, 項目内容new, eucCsvEntity, i);
+                    } catch (NoSuchMethodException | SecurityException ex) {
+                        Logger.getLogger(HanyoListShakaiFukushiHojinKeigenProcess.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    flag = flag判定(flag, 項目内容new);
+                    帳票出力とCSV出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
+                }
             }
-            flag = flag ? flag : flag判定(flag, 項目内容new);
-            帳票出力とCSV出力編集(index, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
-            index++;
+            帳票出力とCSV出力(entity, flag);
         }
-        帳票出力とCSV出力(entity, flag);
-//        if (hanyoListShutsuryokuKomoku != null) {
-//            for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
-//                RString 項目内容new = RString.EMPTY;
-//                RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
-//                if (get項目名称 != null && !get項目名称.isEmpty()) {
-//                    Class clazz = eucCsvEntity.getClass();
-//                    Method getMethod;
-//                    try {
-//                        getMethod = clazz.getDeclaredMethod(ShakaiFukushiHojinKeigenCsvEnumEntity
-//                                .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
-//                                                        .get(i).get項目位置()))).get名称().toString());
-//                        項目内容new = get項目内容(getMethod, 項目内容new, eucCsvEntity, i);
-//                    } catch (NoSuchMethodException | SecurityException ex) {
-//                        Logger.getLogger(HanyoListShakaiFukushiHojinKeigenProcess.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                    flag = flag判定(flag, 項目内容new);
-//                    帳票出力とCSV出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
-//                }
-//            }
-//            帳票出力とCSV出力(entity, flag);
-//        }
     }
 
     @Override
     protected void afterExecute() {
         if (eucCsvWriter.getCount() == 0) {
             eucCsvWriter.writeLine(HanyoListShakaiFukushiHojinKeigenManager.createInstance().setBlank());
-            // TODO : 出力項目が設定できるようになったら下を採用
-            int index = 0;
-            for (ShakaiFukushiHojinKeigenCsvEnumEntity e : ShakaiFukushiHojinKeigenCsvEnumEntity.values()) {
-                RString 項目内容new = RString.EMPTY;
-                RString get項目名称 = e.get名称();
-                帳票出力とCSV出力編集new(index, hanyoListShutsuryokuKomoku, get項目名称);
-                index++;
+            if (hanyoListShutsuryokuKomoku != null) {
+                for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
+                    RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+                    帳票出力とCSV出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
+                }
+                帳票出力とCSV出力();
             }
-            帳票出力とCSV出力();
-//            if (hanyoListShutsuryokuKomoku != null) {
-//                for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
-//                    RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
-//                    帳票出力とCSV出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
-//                }
-//                帳票出力とCSV出力();
-//            }
         }
         eucCsvWriter.close();
         eucCsvWriter1.close();
