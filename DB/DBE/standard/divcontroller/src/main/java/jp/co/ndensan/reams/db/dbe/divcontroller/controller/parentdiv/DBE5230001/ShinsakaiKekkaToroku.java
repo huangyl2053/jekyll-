@@ -606,7 +606,7 @@ public class ShinsakaiKekkaToroku {
                 div.setHdnShinseishoKanriNo(div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().get(0).getShinseishoKanriNo());
 
             } else {
-                div.setHdnShinseishoKanriNo(div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().get(0).getShinseishoKanriNo());
+                div.setHdnShinseishoKanriNo(div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getShinseishoKanriNo());
             }
         }
 
