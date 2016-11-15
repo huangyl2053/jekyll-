@@ -1207,6 +1207,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set処理状態区分(new Code("0"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
+        builder.set認定申請情報登録年月日(FlexibleDate.getNowDate());
         builder.set再調査依頼回数(0);
         builder.set再作成依頼回数(0);
         builder.set論理削除フラグ(false);
@@ -1394,6 +1395,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set処理状態区分(new Code("0"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
+        builder.set認定申請情報登録年月日(FlexibleDate.getNowDate());
         builder.set再調査依頼回数(0);
         builder.set再作成依頼回数(0);
         builder.set論理削除フラグ(false);
@@ -1518,6 +1520,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set処理状態区分(new Code("0"));
         builder.set延期通知発行回数(0);
         builder.set介護認定審査会優先振分区分コード(new Code("0"));
+        builder.set認定申請情報登録年月日(FlexibleDate.getNowDate());
         builder.set再調査依頼回数(0);
         builder.set再作成依頼回数(0);
         builder.set論理削除フラグ(false);
@@ -1645,6 +1648,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         //TODO施設入所の有無 入所施設コード  QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
+        builder.set認定申請情報登録年月日(FlexibleDate.getNowDate());
         builder.set論理削除フラグ(false);
 
         DbT4101NinteiShinseiJoho newNinteiShinseiJoho = builder.build();
