@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
@@ -36,8 +38,12 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.juminidorendotennyu.JuminIdoRendoTennyuParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1011TenshutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1011TenshutsuHoryuTaishoshaDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UeT0511NenkinTokuchoKaifuJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
@@ -79,6 +85,9 @@ public class JuminIdoRendoTennyuManager {
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT1011TenshutsuHoryuTaishoshaDac dbT1011Dac;
+    private final DbT4001JukyushaDaichoDac dbt4001Dac;
+    private final DbT2002FukaDac dbt2002Dac;
+    private final UeT0511NenkinTokuchoKaifuJohoDac uet0511Dac;
     private final RString 枝番 = new RString("0001");
     private final RString 転出 = new RString("51");
     private final RString 年齢区分_２号 = new RString("２号");
@@ -98,6 +107,9 @@ public class JuminIdoRendoTennyuManager {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         this.dbT1011Dac = InstanceProvider.create(DbT1011TenshutsuHoryuTaishoshaDac.class);
+        this.dbt4001Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        this.dbt2002Dac = InstanceProvider.create(DbT2002FukaDac.class);
+        this.uet0511Dac = InstanceProvider.create(UeT0511NenkinTokuchoKaifuJohoDac.class);
     }
 
     /**
@@ -109,17 +121,22 @@ public class JuminIdoRendoTennyuManager {
     JuminIdoRendoTennyuManager(
             MapperProvider mapperProvider,
             DbT1001HihokenshaDaichoDac dbT1001Dac,
-            DbT1011TenshutsuHoryuTaishoshaDac dbT1011Dac) {
+            DbT1011TenshutsuHoryuTaishoshaDac dbT1011Dac,
+            DbT4001JukyushaDaichoDac dbt4001Dac,
+            DbT2002FukaDac dbt2002Dac,
+            UeT0511NenkinTokuchoKaifuJohoDac uet0511Dac) {
         this.mapperProvider = mapperProvider;
         this.dbT1001Dac = dbT1001Dac;
         this.dbT1011Dac = dbT1011Dac;
+        this.dbt4001Dac = dbt4001Dac;
+        this.dbt2002Dac = dbt2002Dac;
+        this.uet0511Dac = uet0511Dac;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link JuminIdoRendoTennyuManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JuminIdoRendoTennyuManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JuminIdoRendoTennyuManager}のインスタンス
      */
     public static JuminIdoRendoTennyuManager createInstance() {
         return InstanceProvider.create(JuminIdoRendoTennyuManager.class);
@@ -1204,13 +1221,13 @@ public class JuminIdoRendoTennyuManager {
                     && nullToMin(到達日クラス.get号年齢到達日_1()).isBeforeOrEquals(FlexibleDate.getNowDate())) {
 
                 get広域内転入_転入前年齢到達(処理対象者, 識別対象被保険者台帳データ, tennyuEntity, 到達日クラス);
-                // TODO QA1972
+                execute広域内転入_後処理(処理対象者, 識別対象被保険者台帳データ);
             }
             if (nullToMin(処理対象者.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(到達日クラス.get号年齢到達日_1()))
                     && nullToMin(到達日クラス.get号年齢到達日_1()).isBeforeOrEquals(FlexibleDate.getNowDate())) {
 
                 get広域内転入_転入後年齢到達(処理対象者, 識別対象被保険者台帳データ, tennyuEntity, 到達日クラス);
-                // TODO QA1972
+                execute広域内転入_後処理(処理対象者, 識別対象被保険者台帳データ);
             }
         }
         boolean 措置元再転入判定 = get措置元再転入判定(daichoEntity.getKoikinaiJushochiTokureiFlag(),
@@ -1224,7 +1241,7 @@ public class JuminIdoRendoTennyuManager {
                     = get措置元再転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
             tennyuEntity.get被保険者台帳list().add(措置元再転入);
         }
-        // TODO QA1972
+        execute広域内転入_後処理(処理対象者, 識別対象被保険者台帳データ);
     }
 
     private LasdecCode get旧市町村コード取得(UaFt200FindShikibetsuTaishoEntity 処理対象者,
@@ -1429,6 +1446,48 @@ public class JuminIdoRendoTennyuManager {
         年齢到達Entity.setKyuShichosonCode(get旧市町村コード取得(処理対象者, 識別対象被保険者台帳データ, 到達日クラス, 措置元再転入判定));
         年齢到達Entity.setLogicalDeletedFlag(false);
         return 年齢到達Entity;
+    }
+
+    /**
+     * 広域内転入（後処理）
+     *
+     * @param 処理対象者 処理対象者
+     * @param 識別対象被保険者台帳データ 識別対象被保険者台帳データ
+     */
+    private void execute広域内転入_後処理(UaFt200FindShikibetsuTaishoEntity 処理対象者,
+            JuminIdoRendoTennyuRelateEntity 識別対象被保険者台帳データ) {
+        List<DbT1001HihokenshaDaichoEntity> dbT1001HihokenshaDaichoEntity = dbT1001Dac.selectAll();
+        for (DbT1001HihokenshaDaichoEntity entity : dbT1001HihokenshaDaichoEntity) {
+            if (識別対象被保険者台帳データ.get被保険者台帳管理Entity().getShikibetsuCode().equals(entity.getShikibetsuCode())) {
+                entity.setState(EntityDataState.Deleted);
+                entity.setShikibetsuCode(識別対象被保険者台帳データ.get被保険者台帳管理Entity().getShikibetsuCode());
+                dbT1001Dac.save(entity);
+            }
+        }
+        List<DbT4001JukyushaDaichoEntity> dbT4001JukyushaDaichoEntity = dbt4001Dac.selectAll();
+        for (DbT4001JukyushaDaichoEntity entity : dbT4001JukyushaDaichoEntity) {
+            if (識別対象被保険者台帳データ.get被保険者台帳管理Entity().getShikibetsuCode().equals(entity.getShikibetsuCode())) {
+                entity.setState(EntityDataState.Modified);
+                entity.setShikibetsuCode(処理対象者.getShikibetsuCode());
+                dbt4001Dac.save(entity);
+            }
+        }
+        List<DbT2002FukaEntity> dbT2002FukaEntity = dbt2002Dac.selectAll();
+        for (DbT2002FukaEntity entity : dbT2002FukaEntity) {
+            if (識別対象被保険者台帳データ.get被保険者台帳管理Entity().getShikibetsuCode().equals(entity.getShikibetsuCode())) {
+                entity.setState(EntityDataState.Modified);
+                entity.setShikibetsuCode(処理対象者.getShikibetsuCode());
+                dbt2002Dac.save(entity);
+            }
+        }
+        List<UeT0511NenkinTokuchoKaifuJohoEntity> ueT0511NenkinTokuchoKaifuJohoEntity = uet0511Dac.selectAll();
+        for (UeT0511NenkinTokuchoKaifuJohoEntity entity : ueT0511NenkinTokuchoKaifuJohoEntity) {
+            if (識別対象被保険者台帳データ.get被保険者台帳管理Entity().getShikibetsuCode().equals(entity.getShikibetsuCode())) {
+                entity.setState(EntityDataState.Modified);
+                entity.setShikibetsuCode(処理対象者.getShikibetsuCode());
+                uet0511Dac.save(entity);
+            }
+        }
     }
 
     private boolean get措置元再転入判定(RString 広域内住所地特例フラグ, LasdecCode 広住措置元市町村コード, LasdecCode 転入先市町村コード) {
