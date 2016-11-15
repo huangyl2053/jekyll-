@@ -25,7 +25,7 @@ public enum IchijiSashitome1GoDivSpec implements IPredicate<IchijiSashitome1GoDi
                 @Override
                 public boolean apply(IchijiSashitome1GoDiv div) {
                     return div.getTxtSashitomeTorokuYMD().getValue() != null
-                    && !div.getTxtSashitomeTorokuYMD().getValue().isEmpty();
+                    && !div.getTxtSashitomeTorokuYMD().toString().isEmpty();
                 }
             },
     差止納付期限入力チェック {
@@ -38,7 +38,7 @@ public enum IchijiSashitome1GoDivSpec implements IPredicate<IchijiSashitome1GoDi
                 @Override
                 public boolean apply(IchijiSashitome1GoDiv div) {
                     return div.getTxtSashitomeNofuKigenYMD().getValue() != null
-                    && !div.getTxtSashitomeNofuKigenYMD().getValue().isEmpty();
+                    && !div.getTxtSashitomeNofuKigenYMD().toString().isEmpty();
                 }
             },
     差止解除日入力チェック {
@@ -51,7 +51,7 @@ public enum IchijiSashitome1GoDivSpec implements IPredicate<IchijiSashitome1GoDi
                 @Override
                 public boolean apply(IchijiSashitome1GoDiv div) {
                     return div.getTxtSashitomeKaijoYMD().getValue() != null
-                    && !div.getTxtSashitomeKaijoYMD().getValue().isEmpty();
+                    && !div.getTxtSashitomeKaijoYMD().toString().isEmpty();
                 }
             },
     控除決定日入力チェック {
@@ -64,7 +64,7 @@ public enum IchijiSashitome1GoDivSpec implements IPredicate<IchijiSashitome1GoDi
                 @Override
                 public boolean apply(IchijiSashitome1GoDiv div) {
                     return div.getTxtKojoKetteiYMD().getValue() != null
-                    && !div.getTxtKojoKetteiYMD().getValue().isEmpty();
+                    && !div.getTxtKojoKetteiYMD().toString().isEmpty();
                 }
             },
     保険証提出期限入力チェック {
@@ -77,7 +77,7 @@ public enum IchijiSashitome1GoDivSpec implements IPredicate<IchijiSashitome1GoDi
                 @Override
                 public boolean apply(IchijiSashitome1GoDiv div) {
                     return div.getTxtHokenshoTeishutsuKigenYMD().getValue() != null
-                    && !div.getTxtHokenshoTeishutsuKigenYMD().getValue().isEmpty();
+                    && !div.getTxtHokenshoTeishutsuKigenYMD().toString().isEmpty();
                 }
             },
     控除番号未選択 {

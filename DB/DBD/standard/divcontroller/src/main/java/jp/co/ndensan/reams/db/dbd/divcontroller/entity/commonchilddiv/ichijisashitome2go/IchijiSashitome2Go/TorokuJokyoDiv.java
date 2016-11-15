@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TorokuJokyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,9 +24,9 @@ public class TorokuJokyoDiv extends Panel {
     @JsonProperty("txtTorokuJokyo")
     private TextBox txtTorokuJokyo;
     @JsonProperty("txtTekiyoKaishi")
-    private TextBoxFlexibleDate txtTekiyoKaishi;
+    private TextBoxDate txtTekiyoKaishi;
     @JsonProperty("txtTekiyoShuryo")
-    private TextBoxFlexibleDate txtTekiyoShuryo;
+    private TextBoxDate txtTekiyoShuryo;
     @JsonProperty("ddlShuryoJokyo")
     private DropDownList ddlShuryoJokyo;
 
@@ -59,7 +59,7 @@ public class TorokuJokyoDiv extends Panel {
      * @return txtTekiyoKaishi
      */
     @JsonProperty("txtTekiyoKaishi")
-    public TextBoxFlexibleDate getTxtTekiyoKaishi() {
+    public TextBoxDate getTxtTekiyoKaishi() {
         return txtTekiyoKaishi;
     }
 
@@ -68,7 +68,7 @@ public class TorokuJokyoDiv extends Panel {
      * @param txtTekiyoKaishi txtTekiyoKaishi
      */
     @JsonProperty("txtTekiyoKaishi")
-    public void setTxtTekiyoKaishi(TextBoxFlexibleDate txtTekiyoKaishi) {
+    public void setTxtTekiyoKaishi(TextBoxDate txtTekiyoKaishi) {
         this.txtTekiyoKaishi = txtTekiyoKaishi;
     }
 
@@ -77,7 +77,7 @@ public class TorokuJokyoDiv extends Panel {
      * @return txtTekiyoShuryo
      */
     @JsonProperty("txtTekiyoShuryo")
-    public TextBoxFlexibleDate getTxtTekiyoShuryo() {
+    public TextBoxDate getTxtTekiyoShuryo() {
         return txtTekiyoShuryo;
     }
 
@@ -86,7 +86,7 @@ public class TorokuJokyoDiv extends Panel {
      * @param txtTekiyoShuryo txtTekiyoShuryo
      */
     @JsonProperty("txtTekiyoShuryo")
-    public void setTxtTekiyoShuryo(TextBoxFlexibleDate txtTekiyoShuryo) {
+    public void setTxtTekiyoShuryo(TextBoxDate txtTekiyoShuryo) {
         this.txtTekiyoShuryo = txtTekiyoShuryo;
     }
 

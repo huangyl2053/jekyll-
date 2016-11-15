@@ -132,11 +132,11 @@ var DBD;
             };
 
             Controls.prototype.txtKonkaiKikanKaishiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKonkaiKikanKaishiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtKonkaiKikanKaishiYMD"));
             };
 
             Controls.prototype.txtKonkaiKikanShuryoYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKonkaiKikanShuryoYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtKonkaiKikanShuryoYMD"));
             };
 
             Controls.prototype.btnKakutei = function () {
