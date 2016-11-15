@@ -670,7 +670,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             row.setTxtRirekiNo(new RString(item.get履歴番号().intValue()));
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                     名称_被保険者番号, item.get被保険者番号().getColumnValue());
-            PersonalData personalData = PersonalData.of(被保険者情報.get識別コード(), expandedInfo);
+            PersonalData personalData = PersonalData.of(被保険者情報 == null
+                    ? ShikibetsuCode.EMPTY : 被保険者情報.get識別コード(), expandedInfo);
             personalDataList.add(personalData);
             rowList.add(row);
         }
