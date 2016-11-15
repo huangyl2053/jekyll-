@@ -313,4 +313,16 @@ public class EditedAtesaki {
     public RString get地区３() {
         return 宛先.get地区３().getコード().getColumnValue();
     }
+
+    /**
+     * 番地コードを返します。
+     *
+     * @return 番地コード
+     */
+    public RString get編集番地コード() {
+        return 宛先.get宛先住所().get番地().getBanchiCode1().getColumnValue()
+                .concat(宛先.get宛先住所().get番地().getBanchiCode2().getColumnValue())
+                .concat(宛先.get宛先住所().get番地().getBanchiCode3().getColumnValue())
+                .concat(宛先.get宛先住所().get番地().getBanchiCode4().getColumnValue());
+    }
 }
