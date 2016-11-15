@@ -373,8 +373,8 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         YubinNo yubinNo = 普徴仮算定計算後賦課Entity.get宛名の情報().getYubinNo();
         csvEntity.set郵便番号(yubinNo == null ? RString.EMPTY : yubinNo.getYubinNo());
         AtenaJusho jusho = 普徴仮算定計算後賦課Entity.get宛名の情報().getJusho();
-        csvEntity.set住所(jusho == null ? RString.EMPTY : jusho.getColumnValue());
-        csvEntity.set町域管内管外住所(kojin.get住所().get住所());
+        csvEntity.set住所(編集後個人.get編集後住所());
+        csvEntity.set町域管内管外住所(jusho == null ? RString.EMPTY : jusho.getColumnValue());
         AtenaBanchi banchi = 普徴仮算定計算後賦課Entity.get宛名の情報().getBanchi();
         csvEntity.set番地(banchi == null ? RString.EMPTY : banchi.getColumnValue());
         GyoseikuCode gyoseikuCode = 普徴仮算定計算後賦課Entity.get宛名の情報().getGyoseikuCode();
