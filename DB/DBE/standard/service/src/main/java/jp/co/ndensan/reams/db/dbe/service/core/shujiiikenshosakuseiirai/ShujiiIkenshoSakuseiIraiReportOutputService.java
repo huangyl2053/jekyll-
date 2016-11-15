@@ -359,7 +359,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     private List<ShujiiIkenshoTeishutsuIraishoItem> setNishosha(List<ShujiiIkenshoTeishutsuIraishoItem> itemList, NinshoshaSource ninshosha) {
         List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
         for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
-            item.setHakkoYMD1(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
@@ -377,7 +376,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             NinshoshaSource ninshosha) {
         List<IkenshoSakuseiIraiIchiranhyoItem> resultList = new ArrayList<>();
         for (IkenshoSakuseiIraiIchiranhyoItem item : itemList) {
-            item.setHakkoYMD(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
@@ -397,7 +395,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
                 ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_1);
         for (KaigohokenShindanMeireishoHeaderItem item : itemList) {
-            item.setHakkoYMD(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);

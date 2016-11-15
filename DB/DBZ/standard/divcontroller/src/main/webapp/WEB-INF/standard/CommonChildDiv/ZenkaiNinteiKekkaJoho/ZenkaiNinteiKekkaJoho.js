@@ -31,10 +31,17 @@ var DBZ;
                 }
                 ShokaiButtonType.prototype.ShokaiButtonMode = function () {
                     this.controls.btnZenkaiShosai().displayNone = false;
+                    this.controls.btnZenkaiShosai().disabled = false;
                 };
 
                 ShokaiButtonType.prototype.ShokaiButtonNoneMode = function () {
                     this.controls.btnZenkaiShosai().displayNone = true;
+                    this.controls.btnZenkaiShosai().disabled = false;
+                };
+
+                ShokaiButtonType.prototype.ShokaiButtonDisabledMode = function () {
+                    this.controls.btnZenkaiShosai().displayNone = false;
+                    this.controls.btnZenkaiShosai().disabled = true;
                 };
                 return ShokaiButtonType;
             })();
