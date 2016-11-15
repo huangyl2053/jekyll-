@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
@@ -13,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,9 +31,16 @@ public class SetainJohoSakuseiProcess extends BatchProcessBase<SetainJohoTempEnt
     private static final RString TABLENAME = new RString("SetainJohoTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select世帯員情報");
+    private static final RString LINE = new RString("|");
+    private List<RString> keyList;
     private DBC180020ProcessParameter parameter;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 世帯員情報Temp;
+
+    @Override
+    protected void initialize() {
+        keyList = new ArrayList<>();
+    }
 
     @Override
     protected void createWriter() {
@@ -47,6 +58,19 @@ public class SetainJohoSakuseiProcess extends BatchProcessBase<SetainJohoTempEnt
         if (ONE.equals(entity.getSetaiShotokuHonninKubun())) {
             entity.setHoninShikibetsuCode(entity.getShikibetsuCode());
         }
-        世帯員情報Temp.insert(entity);
+        RString key = getKey(entity);
+        if (!keyList.contains(key)) {
+            世帯員情報Temp.insert(entity);
+            keyList.add(key);
+        }
+    }
+
+    private RString getKey(SetainJohoTempEntity entity) {
+        RString tsuki = entity.getTaishoTsuki();
+        SetaiCode setaiCode = entity.getSetaiCode();
+        ShikibetsuCode honinShikibetsuCode = entity.getHoninShikibetsuCode();
+        return (RString.isNullOrEmpty(tsuki) ? RString.EMPTY : tsuki).concat(LINE)
+                .concat(setaiCode == null ? RString.EMPTY : setaiCode.value()).concat(LINE)
+                .concat(honinShikibetsuCode == null ? RString.EMPTY : honinShikibetsuCode.value());
     }
 }

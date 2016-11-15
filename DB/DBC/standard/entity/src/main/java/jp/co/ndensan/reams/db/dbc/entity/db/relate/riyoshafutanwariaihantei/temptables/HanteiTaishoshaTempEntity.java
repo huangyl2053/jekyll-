@@ -71,6 +71,7 @@ public class HanteiTaishoshaTempEntity
      */
     public HanteiTaishoshaTempEntity() {
         this.taishoTsuki = RString.EMPTY;
+        this.taishoNendo = FlexibleYear.EMPTY;
     }
 
 }
