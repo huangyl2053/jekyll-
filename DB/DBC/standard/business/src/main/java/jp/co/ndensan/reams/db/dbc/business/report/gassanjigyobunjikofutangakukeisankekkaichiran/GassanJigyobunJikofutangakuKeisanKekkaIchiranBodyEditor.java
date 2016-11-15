@@ -62,8 +62,7 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
         }
         source.list_4 = this.get性別(帳票出力対象データ.get性別());
         source.list_5 = 帳票出力対象データ.get申請書整理番号();
-        source.list_6 = 帳票出力対象データ.get申請年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.list_6 = get年月日(帳票出力対象データ.get申請年月日());
         source.list_7 = get年月(帳票出力対象データ.get申請対象年度());
         if ((帳票出力対象データ.get介護加入期間開始().isEmpty() && 帳票出力対象データ.get介護加入期間開始().isEmpty())
                 || 帳票出力対象データ.get介護加入期間終了().isEmpty()) {
@@ -122,8 +121,8 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
 
     private RString get年月日(FlexibleDate 年月日) {
         if (null != 年月日) {
-            return 年月日.wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            return 年月日.wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
     }
