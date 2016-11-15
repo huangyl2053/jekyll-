@@ -460,14 +460,40 @@ public class DBC2210011MainHandler {
      * @param サービス事業者情報 List<TokubetsuKyufuJigyoshaSearchBusiness>
      */
     public void onClick_Save(List<TokubetsuKyufuJigyoshaSearchBusiness> サービス事業者情報) {
-//        if (get共通エリア変化があるflag(サービス事業者情報)) {
-//            for (TokubetsuKyufuJigyoshaSearchBusiness 情報 : サービス事業者情報) {
-//                情報.createBuilderForEdit().set介護国保連ＩＦ法人種別(div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().getSelectedKey());
-//                情報.createBuilderForEdit().set介護国保連ＩＦ異動区分(div.getTokubetsuKyufuJigyoshaDetail().getRadIdoKubun().getSelectedKey());
-//                情報.createBuilderForEdit().set介護国保連ＩＦ異動年月日(new FlexibleDate(div.getTokubetsuKyufuJigyoshaDetail().getTxtIdoYMD().getValue().toDateString()));
-//                情報.createBuilderForEdit().set申請者氏名_漢字(ゼロ);
-//            }
-//        }
+        if (!get共通エリア変化があるflag(サービス事業者情報)) {
+            for (TokubetsuKyufuJigyoshaSearchBusiness 情報 : サービス事業者情報) {
+                情報.createBuilderForEdit().set介護国保連ＩＦ法人種別(div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().getSelectedKey());
+                情報.createBuilderForEdit().set介護国保連ＩＦ異動区分(div.getTokubetsuKyufuJigyoshaDetail().getRadIdoKubun().getSelectedKey());
+                情報.createBuilderForEdit().set介護国保連ＩＦ異動年月日(new FlexibleDate(div.getTokubetsuKyufuJigyoshaDetail().getTxtIdoYMD().getValue().toDateString()));
+                情報.createBuilderForEdit().set申請者氏名_漢字(div.getTokubetsuKyufuJigyoshaDetail().
+                        getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaName().getValue());
+                情報.createBuilderForEdit().set申請者氏名_カナ(div.getTokubetsuKyufuJigyoshaDetail().
+                        getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaNameKana().getValue());
+                情報.createBuilderForEdit().set申請者住所_カナ(div.getTokubetsuKyufuJigyoshaDetail().
+                        getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaJushoKana().getValue());
+                情報.createBuilderForEdit().set申請者住所(div.getTokubetsuKyufuJigyoshaDetail().
+                        getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaJusho().getValue());
+                情報.createBuilderForEdit().set申請者郵便番号(div.getTokubetsuKyufuJigyoshaDetail().
+                        getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaYubinNo().getValue());
+                情報.createBuilderForEdit().set申請者電話番号(div.getTokubetsuKyufuJigyoshaDetail().
+                        getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaTelNo().getValue());
+                情報.createBuilderForEdit().set申請者FAX番号(div.getTokubetsuKyufuJigyoshaDetail().
+                        getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaFaxNo().getValue());
+                情報.createBuilderForEdit().set事業所代表者住所カナ(div.getTokubetsuKyufuJigyoshaDetail()
+                        .getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaJushoKana().getValue());
+                情報.createBuilderForEdit().set事業所代表者住所(div.getTokubetsuKyufuJigyoshaDetail()
+                        .getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaJusho().getValue());
+                情報.createBuilderForEdit().set事業所代表者氏名(div.getTokubetsuKyufuJigyoshaDetail()
+                        .getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaName().getValue());
+                情報.createBuilderForEdit().set事業所代表者氏名カナ(div.getTokubetsuKyufuJigyoshaDetail()
+                        .getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaNameKana().getValue());
+                情報.createBuilderForEdit().set事業所代表者郵便番号(div.getTokubetsuKyufuJigyoshaDetail()
+                        .getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaYubinNo().getValue());
+                情報.createBuilderForEdit().set事業所代表者役職(div.getTokubetsuKyufuJigyoshaDetail()
+                        .getTokubetsuKyufuJigyoshaDetailDaihyosha().getTxtDaihyoshaYakushoku().getValue());
+                情報.get市町村特別給付サービス事業者().get事業者().setState(EntityDataState.Modified);
+            }
+        }
         List<dgTokubetsuKyufuJigyoshaDetailServiceList_Row> rowList = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList()
                 .getDgTokubetsuKyufuJigyoshaDetailServiceList().getDataSource();
         RString 県コード = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().getSelectedKey();
@@ -1229,11 +1255,11 @@ public class DBC2210011MainHandler {
 
     private boolean 変更が判断する(TokubetsuKyufuJigyoshaSearchBusiness 情報) {
         if (!情報.createBuilderForEdit().build().get申請者氏名_漢字().
-                equals(div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaName())) {
+                equals(div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaName().getValue())) {
             return false;
         }
         if (!情報.createBuilderForEdit().build().get申請者氏名_カナ().
-                equals(div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaNameKana())) {
+                equals(div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailShinseisha().getTxtShinseishaNameKana().getValue())) {
             return false;
         }
         if (!情報.createBuilderForEdit().build().get申請者住所_カナ().
@@ -1285,9 +1311,6 @@ public class DBC2210011MainHandler {
             return false;
         }
         FlexibleDate 異動年月日 = new FlexibleDate(div.getTokubetsuKyufuJigyoshaDetail().getTxtIdoYMD().getValue().toDateString());
-        if (!異動年月日.equals(情報.createBuilderForEdit().build().get介護国保連ＩＦ異動年月日())) {
-            return false;
-        }
-        return true;
+        return 異動年月日.equals(情報.createBuilderForEdit().build().get介護国保連ＩＦ異動年月日());
     }
 }
