@@ -123,7 +123,7 @@ public class DBC2210011Main {
         TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
         List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List = service.select事業者情報(事業者Code, NO_10, RString.EMPTY);
         if (事業者サービス情報List.isEmpty()) {
-            throw new IllegalStateException(UrErrorMessages.該当データなし.toString());
+            throw new ApplicationException(UrErrorMessages.該当データなし.toString());
         } else {
             getHandler(div).前排他の設定(事業者Code);
             ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(事業者サービス情報List));
@@ -145,7 +145,7 @@ public class DBC2210011Main {
         TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
         List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List = service.select事業者情報(事業者Code, NO_10, RString.EMPTY);
         if (事業者サービス情報List.isEmpty()) {
-            throw new IllegalStateException(UrErrorMessages.該当データなし.toString());
+            throw new ApplicationException(UrErrorMessages.該当データなし.toString());
         } else {
             getHandler(div).前排他の設定(事業者Code);
             ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(事業者サービス情報List));
