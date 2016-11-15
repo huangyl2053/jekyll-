@@ -177,8 +177,12 @@ public class DBC8020001MainHandler {
         div.getRadSiharaihohou().setDataSource(list6);
 
         if (null != dbc) {
-            div.getTxtZenkaiTaishoYmdRange().setFromValue(new RDate(dbc.getEntity().getTaishoKaishiYMD().toString()));
-            div.getTxtZenkaiTaishoYmdRange().setToValue(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()));
+            if (null != dbc.getEntity().getTaishoKaishiYMD()) {
+                div.getTxtZenkaiTaishoYmdRange().setFromValue(new RDate(dbc.getEntity().getTaishoKaishiYMD().toString()));
+            }
+            if (null != dbc.getEntity().getTaishoShuryoYMD()) {
+                div.getTxtZenkaiTaishoYmdRange().setToValue(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()));
+            }
         }
 
         List<KeyValueDataSource> list7 = new ArrayList<>();
@@ -382,7 +386,7 @@ public class DBC8020001MainHandler {
             parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
         }
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
-        parameter.set委託者コード(div.getTxtItakushaCode().getValue());
+        parameter.set委託者コード(div.getItakusha().getItakushaId());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
             parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
         }
@@ -390,7 +394,7 @@ public class DBC8020001MainHandler {
             if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
                 parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
             }
-        } else if (振込指定日を修正する.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedValue())
+        } else if (振込指定日を修正する.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedValue())
                 && null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
             parameter.set振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
         }
@@ -441,12 +445,17 @@ public class DBC8020001MainHandler {
             parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
         }
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
-        parameter.set委託者コード(div.getTxtItakushaCode().getValue());
+        parameter.set委託者コード(div.getItakusha().getItakushaId());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
             parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
         }
-        if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
-            parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+        if (振込データを作成する.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedValue())) {
+            if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
+                parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+            }
+        } else if (振込指定日を修正する.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedValue())
+                && null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
+            parameter.set振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
         }
         if (null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
             parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
@@ -496,12 +505,17 @@ public class DBC8020001MainHandler {
             parameter.set処理区分(div.getRadShoriSentakuIchiranhyoSakusei().getSelectedKey());
         }
         parameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
-        parameter.set委託者コード(div.getTxtItakushaCode().getValue());
+        parameter.set委託者コード(div.getItakusha().getItakushaId());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
             parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
         }
-        if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
-            parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+        if (振込データを作成する.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedValue())) {
+            if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
+                parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+            }
+        } else if (振込指定日を修正する.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedValue())
+                && null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
+            parameter.set振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
         }
         if (null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
             parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());

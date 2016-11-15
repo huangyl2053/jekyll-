@@ -489,27 +489,15 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         if (居宅計画List.isEmpty()) {
             return;
         }
-        boolean hasError = true;
         for (KyotakuEntity 居宅計画 : 居宅計画List) {
             if (居宅計画.get計画事業者番号() == null || RString.isNullOrEmpty(居宅計画.get計画事業者番号().getColumnValue().trim())) {
                 continue;
             }
             if (!コード_3.equals(居宅計画.get居宅サービス計画作成区分コード())
-                    && !RString.isNullOrEmpty(居宅計画.getサービス種類コード())) {
-                hasError = false;
-                break;
-
-            }
-        }
-        if (hasError) {
-            for (KyotakuEntity 居宅計画 : 居宅計画List) {
-                if (居宅計画.get計画事業者番号() == null || RString.isNullOrEmpty(居宅計画.get計画事業者番号().getColumnValue().trim())) {
-                    continue;
-                }
+                    && RString.isNullOrEmpty(居宅計画.getサービス種類コード())) {
                 送付エラー新規4(最新受給者台帳, 最新被保険者台帳, 居宅計画, 宛名情報);
             }
         }
-
     }
 
     private void 居宅サービス計画事業者Check(List<KyotakuEntity> 居宅計画List, PSMInfoEntity 宛名情報) {
@@ -521,7 +509,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 continue;
             }
             if (RString.isNullOrEmpty(居宅計画.getサービス種類コード())) {
-                break;
+                continue;
             }
             if (isDateEmpty(居宅計画.get有効終了日())) {
                 continue;
@@ -555,6 +543,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         for (KyotakuEntity 居宅計画entity : 居宅計画List) {
+            if (!isDateEmpty(居宅計画entity.get適用終了日())) {
+                continue;
+            }
             if (!コード_1.equals(居宅計画entity.get居宅サービス計画作成区分コード())
                     && !コード_2.equals(居宅計画entity.get居宅サービス計画作成区分コード())) {
                 continue;
@@ -583,6 +574,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         for (KyotakuEntity 居宅計画entity : 居宅計画List) {
+            if (!isDateEmpty(居宅計画entity.get適用終了日())) {
+                continue;
+            }
             if (!コード_4.equals(居宅計画entity.get居宅サービス計画作成区分コード())) {
                 continue;
             }
