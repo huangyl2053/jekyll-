@@ -184,8 +184,6 @@ public class IkenshoSakuseiIraiHandler {
         } else {
             div.getMeireishoPanel().setDisplayNone(true);
         }
-        div.getTxtHakobi().setValue(RDate.getNowDate());
-        div.getTxtKigenymd().setValue(RDate.getNowDate());
         if (SELECTED_KEY2.equals(div.getRadKigen().getSelectedKey())) {
             div.getTxtKigenymd().setDisabled(false);
         } else {
@@ -409,6 +407,8 @@ public class IkenshoSakuseiIraiHandler {
     public List<ShujiiIkenshoSakuseiIraishoItem> create意見書作成依頼書(IkenshoirairirekiichiranShudou 意見書作成依頼書情報) {
 
         ShujiiIkenshoSakuseiIraishoItem item = new ShujiiIkenshoSakuseiIraishoItem();
+        item.setHakkoYMD1(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(), FlexibleDate.getNowDate()));
         RString 医療機関郵便番号 = RString.EMPTY;
         RString 医療機関住所 = RString.EMPTY;
@@ -502,6 +502,8 @@ public class IkenshoSakuseiIraiHandler {
     public List<IkenshoSakuseiIraiIchiranhyoItem> create意見書作成依頼一覧表(IkenshoirairirekiichiranShudou 意見書作成依頼書情報) {
 
         IkenshoSakuseiIraiIchiranhyoItem item = new IkenshoSakuseiIraiIchiranhyoItem();
+        item.setHakkoYMD(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         RString 医療機関郵便番号 = RString.EMPTY;
         RString 医療機関住所 = RString.EMPTY;
         if (意見書作成依頼書情報.get医療機関郵便番号() != null) {
@@ -556,7 +558,8 @@ public class IkenshoSakuseiIraiHandler {
         Map<Integer, RString> 通知文
                 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
         KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
-                RString.EMPTY,
+                div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString(),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -679,7 +682,9 @@ public class IkenshoSakuseiIraiHandler {
         }
         item.setSeikyuIryokikanName(business.get医療機関名称());
         item.setSeikyuIryokikanDaihyoName(business.get代表者名());
-        item.setSeikyuIryokikanYubinNo(business.get医療機関郵便番号());
+        if (!RString.isNullOrEmpty(business.get医療機関郵便番号())) {
+            item.setSeikyuIryokikanYubinNo(getEditedYubinNo(business.get医療機関郵便番号()));
+        }
         item.setSeikyuIryokikanJusho(business.get医療機関住所());
         item.setSeikyuIryokikanTel(business.get医療機関電話番号());
         set意見書作成料(business, item);
@@ -700,6 +705,8 @@ public class IkenshoSakuseiIraiHandler {
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE236001.getReportId(), KamokuCode.EMPTY, 数字_1);
         for (ShujiiIkenshoTeishutsuIraishoBusiness business : 主治医意見書作成依頼発行一覧表情報) {
             ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
+            item.setHakkoYMD1(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
             item.setBunshoNo(文書番号);
             RString 医療機関郵便番号 = RString.EMPTY;
             RString 医療機関住所 = RString.EMPTY;
@@ -841,7 +848,7 @@ public class IkenshoSakuseiIraiHandler {
     }
 
     private void set意見書作成料(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business, ShujiiIkenshoSakuseiRyoSeikyushoItem item) {
-        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
             RString shinkiZaitakuKingaku = item.getShinkiZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiZaitakuKingaku.substring(数字_0, 数字_1));
@@ -853,7 +860,7 @@ public class IkenshoSakuseiIraiHandler {
             item.setSeikyugakuIkenshoSakuseiRyo3(shinkiZaitakuKingaku.substring(数字_2, 数字_3));
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiZaitakuKingaku.substring(数字_3, 数字_4));
         }
-        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
             RString shinkiShisetsuKingaku = item.getShinkiShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiShisetsuKingaku.substring(数字_0, 数字_1));
@@ -866,7 +873,7 @@ public class IkenshoSakuseiIraiHandler {
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiShisetsuKingaku.substring(数字_3, 数字_4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
             RString keizokuZaitakuKingaku = item.getKeizokuZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuZaitakuKingaku.substring(数字_0, 数字_1));
@@ -879,7 +886,7 @@ public class IkenshoSakuseiIraiHandler {
             item.setSeikyugakuIkenshoSakuseiRyo4(keizokuZaitakuKingaku.substring(数字_3, 数字_4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
             RString keizokuShisetsuKingaku = item.getKeizokuShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuShisetsuKingaku.substring(数字_0, 数字_1));

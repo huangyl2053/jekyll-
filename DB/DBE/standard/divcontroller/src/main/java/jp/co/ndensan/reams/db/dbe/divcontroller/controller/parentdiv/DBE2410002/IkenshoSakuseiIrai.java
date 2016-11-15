@@ -112,6 +112,10 @@ public class IkenshoSakuseiIrai {
             throw new PessimisticLockingException();
         }
         createHandler(div).initialize(主治医意見書作成依頼);
+        if (!ResponseHolder.isReRequest()) {
+            div.getTxtHakobi().setValue(RDate.getNowDate());
+            div.getTxtKigenymd().setValue(RDate.getNowDate());
+        }
         return ResponseData.of(div).respond();
     }
 

@@ -4,20 +4,20 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.changeChkNinchishoShuhenShojoUmu = function () {
-                return "changeChkNinchishoShuhenShojoUmu";
+            Events.changeRadNinchishoShuhenShojoUmu = function () {
+                return "changeRadNinchishoShuhenShojoUmu";
             };
 
             Events.changeChkNinchishoShuhenShojoSonota = function () {
                 return "changeChkNinchishoShuhenShojoSonota";
             };
 
-            Events.changeChkSonotaShojo = function () {
-                return "changeChkSonotaShojo";
+            Events.changeRadSonotaShojo = function () {
+                return "changeRadSonotaShojo";
             };
 
-            Events.changeChkSenmonJushin = function () {
-                return "changeChkSenmonJushin";
+            Events.changeRadSenmonJushin = function () {
+                return "changeRadSenmonJushin";
             };
 
             Events.changeChkShishiKesson = function () {
@@ -107,12 +107,12 @@ var DBE;
                 return new UZA.Panel(this.convFiledName("NichijoJiritsudo"));
             };
 
-            Controls.prototype.chkShogaiKoreishaNichijoSeikatsuJiritsudo = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkShogaiKoreishaNichijoSeikatsuJiritsudo"));
+            Controls.prototype.radShogaiKoreishaNichijoSeikatsuJiritsudo = function () {
+                return new UZA.RadioButton(this.convFiledName("radShogaiKoreishaNichijoSeikatsuJiritsudo"));
             };
 
-            Controls.prototype.chkNinchishoKoreishaJiritsu = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkNinchishoKoreishaJiritsu"));
+            Controls.prototype.radNinchishoKoreishaJiritsu = function () {
+                return new UZA.RadioButton(this.convFiledName("radNinchishoKoreishaJiritsu"));
             };
 
             Controls.prototype.NinchishoChukakuShojo = function () {
@@ -135,8 +135,8 @@ var DBE;
                 return new UZA.Panel(this.convFiledName("NinchishoShuhenShojo"));
             };
 
-            Controls.prototype.chkNinchishoShuhenShojoUmu = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkNinchishoShuhenShojoUmu"));
+            Controls.prototype.radNinchishoShuhenShojoUmu = function () {
+                return new UZA.RadioButton(this.convFiledName("radNinchishoShuhenShojoUmu"));
             };
 
             Controls.prototype.chkNinchishoShuhenShojo = function () {
@@ -155,16 +155,16 @@ var DBE;
                 return new UZA.Panel(this.convFiledName("SonotaShojo"));
             };
 
-            Controls.prototype.chkSonotaShojo = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkSonotaShojo"));
+            Controls.prototype.radSonotaShojo = function () {
+                return new UZA.RadioButton(this.convFiledName("radSonotaShojo"));
             };
 
             Controls.prototype.txtShojomei = function () {
                 return new UZA.TextBox(this.convFiledName("txtShojomei"));
             };
 
-            Controls.prototype.chkSenmonJushin = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkSenmonJushin"));
+            Controls.prototype.radSenmonJushin = function () {
+                return new UZA.RadioButton(this.convFiledName("radSenmonJushin"));
             };
 
             Controls.prototype.txtShosaiTokkiJiko = function () {
@@ -175,20 +175,20 @@ var DBE;
                 return new UZA.Panel(this.convFiledName("KaradaJotai"));
             };
 
-            Controls.prototype.chkKikiude = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKikiude"));
+            Controls.prototype.radKikiude = function () {
+                return new UZA.RadioButton(this.convFiledName("radKikiude"));
             };
 
             Controls.prototype.txtShincho = function () {
                 return new UZA.TextBox(this.convFiledName("txtShincho"));
             };
 
-            Controls.prototype.txtTaiju = function () {
-                return new UZA.TextBox(this.convFiledName("txtTaiju"));
+            Controls.prototype.radKakoTaijuHenka = function () {
+                return new UZA.RadioButton(this.convFiledName("radKakoTaijuHenka"));
             };
 
-            Controls.prototype.chkKakoTaijuHenka = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKakoTaijuHenka"));
+            Controls.prototype.txtTaiju = function () {
+                return new UZA.TextBox(this.convFiledName("txtTaiju"));
             };
 
             Controls.prototype.chkShishiKesson = function () {
@@ -211,32 +211,32 @@ var DBE;
                 return new UZA.CheckBoxList(this.convFiledName("chkMigiJoshiMahi"));
             };
 
-            Controls.prototype.chkMigiJoshiMahiTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkMigiJoshiMahiTeido"));
+            Controls.prototype.radMigiJoshiMahiTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radMigiJoshiMahiTeido"));
             };
 
             Controls.prototype.chkHidariJoshiMahi = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkHidariJoshiMahi"));
             };
 
-            Controls.prototype.chkHidariJoshiMahiTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkHidariJoshiMahiTeido"));
+            Controls.prototype.radHidariJoshiMahiTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radHidariJoshiMahiTeido"));
             };
 
             Controls.prototype.chkMigiKashiMahi = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkMigiKashiMahi"));
             };
 
-            Controls.prototype.chkMigiKashiMahiTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkMigiKashiMahiTeido"));
+            Controls.prototype.radMigiKashiMahiTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radMigiKashiMahiTeido"));
             };
 
             Controls.prototype.chkHidariKashiMahi = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkHidariKashiMahi"));
             };
 
-            Controls.prototype.chkHidariKashiMahiTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkHidariKashiMahiTeido"));
+            Controls.prototype.radHidariKashiMahiTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radHidariKashiMahiTeido"));
             };
 
             Controls.prototype.Sp1 = function () {
@@ -251,8 +251,8 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtSonotaMahiBui"));
             };
 
-            Controls.prototype.SonotaMahiTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("SonotaMahiTeido"));
+            Controls.prototype.radSonotaMahiTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radSonotaMahiTeido"));
             };
 
             Controls.prototype.linHorizon2 = function () {
@@ -267,8 +267,8 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtKinryokuTeikaBui"));
             };
 
-            Controls.prototype.chkKinryokuTeikaTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKinryokuTeikaTeido"));
+            Controls.prototype.radKinryokuTeikaTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radKinryokuTeikaTeido"));
             };
 
             Controls.prototype.linHorizon3 = function () {
@@ -283,8 +283,8 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtKansetsuKoshukuBui"));
             };
 
-            Controls.prototype.chkKansetsuKoshukuTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKansetsuKoshukuTeido"));
+            Controls.prototype.radKansetsuKoshukuTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radKansetsuKoshukuTeido"));
             };
 
             Controls.prototype.linHorizon4 = function () {
@@ -299,8 +299,8 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtKansetsuItamiBui"));
             };
 
-            Controls.prototype.chkKansetsuItamiTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKansetsuItamiTeido"));
+            Controls.prototype.radKansetsuItamiTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radKansetsuItamiTeido"));
             };
 
             Controls.prototype.linHorizon5 = function () {
@@ -335,8 +335,8 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtJokusoBui"));
             };
 
-            Controls.prototype.chkJokusoTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkJokusoTeido"));
+            Controls.prototype.radJokusoTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radJokusoTeido"));
             };
 
             Controls.prototype.linHorizon7 = function () {
@@ -351,8 +351,8 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtSonotaHifuShikkanBui"));
             };
 
-            Controls.prototype.chkSonotaHifuShikkanTeido = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkSonotaHifuShikkanTeido"));
+            Controls.prototype.radSonotaHifuShikkanTeido = function () {
+                return new UZA.RadioButton(this.convFiledName("radSonotaHifuShikkanTeido"));
             };
 
             Controls.prototype.btnKakutei = function () {

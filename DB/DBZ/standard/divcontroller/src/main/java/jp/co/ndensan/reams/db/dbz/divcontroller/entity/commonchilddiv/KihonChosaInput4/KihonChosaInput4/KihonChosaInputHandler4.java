@@ -270,7 +270,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数56) {
-            div.getBtnMatomeNai().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(話がまとまらないKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数56) {
@@ -300,7 +299,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数55) {
-            div.getBtnKateKodo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(自分勝手に行動するKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数55) {
@@ -330,7 +328,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数54) {
-            div.getBtnHitoriWarai().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(独り言_独り笑いKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数54) {
@@ -359,7 +356,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数53) {
-            div.getBtnMonoWasure().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(ひどい物忘れKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数53) {
@@ -388,7 +384,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数52) {
-            div.getBtnKowasu().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(物や衣類を壊すKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数52) {
@@ -417,7 +412,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数51) {
-            div.getBtnShushu().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(収集癖Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数51) {
@@ -446,7 +440,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数50) {
-            div.getBtnOutLonly().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(一人で出たがるKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数50) {
@@ -475,7 +468,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数49) {
-            div.getBtnOchituki().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(落ち着きなしKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数49) {
@@ -504,7 +496,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数48) {
-            div.getBtnTeikou().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(介護に抵抗Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数48) {
@@ -533,7 +524,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数47) {
-            div.getBtnBigVoice().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(大声をだすKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数47) {
@@ -562,7 +552,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数46) {
-            div.getBtnOnajiHanashi().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(同じ話をするKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数46) {
@@ -591,7 +580,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数45) {
-            div.getBtnChuyaku().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(昼夜逆転Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数45) {
@@ -620,7 +608,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数44) {
-            div.getBtnKanjyo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(感情が不安定Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数44) {
@@ -649,7 +636,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数43) {
-            div.getBtnTukuriHanashi().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(作話Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数43) {
@@ -678,7 +664,6 @@ public class KihonChosaInputHandler4 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数42) {
-            div.getBtnHiryaku().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(被虐的Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数42) {

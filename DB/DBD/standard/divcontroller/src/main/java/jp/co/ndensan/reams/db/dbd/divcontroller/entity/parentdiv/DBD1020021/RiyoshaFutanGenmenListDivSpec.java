@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020021;
 
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 利用者負担額減免認定者リスト画面の入力チェックです
@@ -24,8 +25,8 @@ public enum RiyoshaFutanGenmenListDivSpec implements IPredicate<RiyoshaFutanGenm
                  */
                 @Override
                 public boolean apply(RiyoshaFutanGenmenListDiv div) {
-                    FlexibleDate txtKijunYMD = div.getTxtKijunYMD().getValue();
-                    return txtKijunYMD != null && !txtKijunYMD.isEmpty();
+                    RDate txtKijunYMD = div.getTxtKijunYMD().getValue();
+                    return txtKijunYMD != null && !txtKijunYMD.toDateString().isEmpty();
                 }
             },
     所得年度の未入力チェック {
@@ -37,7 +38,7 @@ public enum RiyoshaFutanGenmenListDivSpec implements IPredicate<RiyoshaFutanGenm
                  */
                 @Override
                 public boolean apply(RiyoshaFutanGenmenListDiv div) {
-                    return div.getTxtShotokuNendo().getValue() != null && !div.getTxtShotokuNendo().getValue().isEmpty();
+                    return div.getTxtShotokuNendo().getValue() != null && !div.getTxtShotokuNendo().getValue().toDateString().isEmpty();
                 }
             },
     旧措置者区分の未入力チェック {

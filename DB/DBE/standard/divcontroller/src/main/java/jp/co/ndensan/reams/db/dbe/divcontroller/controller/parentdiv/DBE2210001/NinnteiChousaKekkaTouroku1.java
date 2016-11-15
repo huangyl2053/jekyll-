@@ -11,6 +11,9 @@ import java.util.Map;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousakekkatouroku1.TempData;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.ichijihanteikekkacode.IchijiHanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001TransitionEventName;
@@ -49,7 +52,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoChosaItemManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
@@ -83,6 +88,7 @@ import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -102,6 +108,13 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString 施設 = new RString("施設");
     private static final RString カンマ = new RString(",");
     private static final RString 前回値使用 = new RString("1");
+    private static final RString KEY1 = new RString("第1群");
+    private static final RString KEY2 = new RString("第2群");
+    private static final RString KEY3 = new RString("第3群");
+    private static final RString KEY4 = new RString("第4群");
+    private static final RString KEY5 = new RString("第5群");
+    private static final RString KEY6 = new RString("特別な医療群");
+    private static final RString KEY7 = new RString("自立度群");
     private static final int 住宅改修_連番 = 1;
     private static final int 市町村特別給付_連番 = 1;
     private static final int 介護保険給付外の在宅サービス_連番 = 2;
@@ -233,62 +246,69 @@ public class NinnteiChousaKekkaTouroku1 {
         boolean is再調査の場合 = ViewStateHolder.get(ViewStateKeys.再調査の場合, Boolean.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
 
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            div.getRadGenzaiservis().setSelectedKey(元の選択);
-            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 元の選択);
-            return ResponseData.of(div).respond();
-        } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            変更前の設定値 = get変更前の現在のサービス区分(現在の選択);
-            Map<Integer, Decimal> map = get現在のサービス設定値(div, 元の選択);
-            getHandler(div).利用サービスの切り替え(現在の選択, is再調査の場合, temp_厚労省IF識別コード, 変更前の設定値, map);
-            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 現在の選択);
-            return ResponseData.of(div).respond();
-        }
-
-        boolean 入力あり = Boolean.FALSE;
-        if (予防給付サービス_選択.equals(元の選択)) {
-            List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
-            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
-                if (row.getServiceJokyo().getValue() != null) {
-                    現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
-                    入力あり = Boolean.TRUE;
-                } else {
-                    現在の設定値 = 現在の設定値.concat(カンマ);
-                }
+//        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//            div.getRadGenzaiservis().setSelectedKey(元の選択);
+//            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 元の選択);
+//            return ResponseData.of(div).respond();
+//        } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//
+//            変更前の設定値 = get変更前の現在のサービス区分(現在の選択);
+//            Map<Integer, Decimal> map = get現在のサービス設定値(div, 元の選択);
+//            getHandler(div).利用サービスの切り替え(現在の選択, is再調査の場合, temp_厚労省IF識別コード, 変更前の設定値, map);
+//            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 現在の選択);
+//            return ResponseData.of(div).respond();
+//        }
+//        boolean 入力あり = Boolean.FALSE;
+        List<dgRiyoServiceJyokyo_Row> 給付サービス利用状況リスト = div.getDgRiyoServiceJyokyo().getDataSource();
+        for (dgRiyoServiceJyokyo_Row 給付サービス利用状況 : 給付サービス利用状況リスト) {
+            if (給付サービス利用状況.getServiceJokyo().getValue() != null) {
+                現在の設定値 = 現在の設定値.concat(給付サービス利用状況.getServiceJokyo().getValue().toString()).concat(カンマ);
+            } else {
+                現在の設定値 = 現在の設定値.concat(カンマ);
             }
-            変更前の設定値 = ViewStateHolder.get(ViewStateKeys.初期の予防給付サービス, RString.class);
-        } else if (介護給付サービス_選択.equals(元の選択)) {
-            List<dgRiyoServiceJyokyo_Row> secondHalf = div.getDgRiyoServiceJyokyo().getDataSource();
-            for (dgRiyoServiceJyokyo_Row row : secondHalf) {
-                if (row.getServiceJokyo().getValue() != null) {
-                    現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
-                    入力あり = Boolean.TRUE;
-                } else {
-                    現在の設定値 = 現在の設定値.concat(カンマ);
-                }
-            }
-            変更前の設定値 = ViewStateHolder.get(ViewStateKeys.初期の介護給付サービス, RString.class);
         }
-        if (変更前の設定値 == null && 入力あり == Boolean.FALSE) {
-            変更あり = Boolean.FALSE;
-        } else if (変更前の設定値 == null && 入力あり == Boolean.TRUE) {
-            変更あり = Boolean.TRUE;
-        } else {
-            変更あり = !現在の設定値.equalsIgnoreCase(変更前の設定値);
-        }
-
-        if (変更あり && !ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        } else if (!変更あり) {
-            変更前の設定値 = get初期のサービス設定値(現在の選択);
-            Map<Integer, Decimal> map = get現在のサービス設定値(div, 元の選択);
-            getHandler(div).利用サービスの切り替え(現在の選択, is再調査の場合, temp_厚労省IF識別コード, 変更前の設定値, map);
-        }
+//        if (予防給付サービス_選択.equals(元の選択)) {
+//            List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
+//            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
+//                if (row.getServiceJokyo().getValue() != null) {
+//                    現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
+//                    入力あり = Boolean.TRUE;
+//                } else {
+//                    現在の設定値 = 現在の設定値.concat(カンマ);
+//                }
+//            }
+//            変更前の設定値 = ViewStateHolder.get(ViewStateKeys.初期の予防給付サービス, RString.class);
+//        } else if (介護給付サービス_選択.equals(元の選択)) {
+//            List<dgRiyoServiceJyokyo_Row> secondHalf = div.getDgRiyoServiceJyokyo().getDataSource();
+//            for (dgRiyoServiceJyokyo_Row row : secondHalf) {
+//                if (row.getServiceJokyo().getValue() != null) {
+//                    現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
+//                    入力あり = Boolean.TRUE;
+//                } else {
+//                    現在の設定値 = 現在の設定値.concat(カンマ);
+//                }
+//            }
+//            変更前の設定値 = ViewStateHolder.get(ViewStateKeys.初期の介護給付サービス, RString.class);
+////        }
+//        if (変更前の設定値 == null && 入力あり == Boolean.FALSE) {
+//            変更あり = Boolean.FALSE;
+//        } else if (変更前の設定値 == null && 入力あり == Boolean.TRUE) {
+//            変更あり = Boolean.TRUE;
+//        } else {
+//            変更あり = !現在の設定値.equalsIgnoreCase(変更前の設定値);
+//        }
+//
+//        if (変更あり && !ResponseHolder.isReRequest()) {
+//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+//                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+//            return ResponseData.of(div).addMessage(message).respond();
+//        } else if (!変更あり) {
+        変更前の設定値 = get初期のサービス設定値(現在の選択);
+        Map<Integer, Decimal> map = get現在のサービス設定値(div, 元の選択);
+        getHandler(div).利用サービスの切り替え(現在の選択, is再調査の場合, temp_厚労省IF識別コード, 変更前の設定値, map);
+//        }
 
         ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 現在の選択);
         return ResponseData.of(div).respond();
@@ -342,57 +362,105 @@ public class NinnteiChousaKekkaTouroku1 {
 
         RString 現在の状況コード = gaikyoChosa.getTemp_現在の状況コード();
         RString サービス区分コード = gaikyoChosa.getTemp_現在のサービス区分コード();
+
+        if (ServiceKubunCode.予防給付サービス.getコード().equals(サービス区分コード)) {
+            div.getRadGenzaiservis().setSelectedKey(予防給付サービス_選択);
+            ViewStateHolder.put(ViewStateKeys.初期のサービス区分, 予防給付サービス_選択);
+            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 予防給付サービス_選択);
+            RString 予防給付状況 = getHandler(div).予防給付サービス_利用状況_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
+            ViewStateHolder.put(ViewStateKeys.初期の予防給付サービス, 予防給付状況);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
+        } else if (ServiceKubunCode.介護給付サービス.getコード().equals(サービス区分コード)) {
+            div.getRadGenzaiservis().setSelectedKey(介護給付サービス_選択);
+            ViewStateHolder.put(ViewStateKeys.初期のサービス区分, 介護給付サービス_選択);
+            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 介護給付サービス_選択);
+            RString 介護給付状況 = getHandler(div).介護給付サービス_利用状況_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
+            ViewStateHolder.put(ViewStateKeys.初期の介護給付サービス, 介護給付状況);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
+        } else {
+            div.getRadGenzaiservis().setSelectedKey(なし_選択);
+            ViewStateHolder.put(ViewStateKeys.初期のサービス区分, なし_選択);
+            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, なし_選択);
+            getHandler(div).利用サービスGrid非表示();
+        }
+
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setValue(gaikyoChosa.getTemp_利用施設名());
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo()
+                .setValue(new YubinNo(gaikyoChosa.getTemp_利用施設郵便番号()));
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho()
+                .setDomain(new AtenaJusho(gaikyoChosa.getTemp_利用施設住所()));
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().setDomain(new TelNo(gaikyoChosa.getTemp_利用施設電話番号()));
+
+        RString 施設連絡先 = gaikyoChosa.getTemp_利用施設名().concat(カンマ).concat(gaikyoChosa.getTemp_利用施設郵便番号()).concat(カンマ)
+                .concat(gaikyoChosa.getTemp_利用施設住所()).concat(カンマ).concat(gaikyoChosa.getTemp_利用施設電話番号());
+        ViewStateHolder.put(ViewStateKeys.初期の施設連絡先, 施設連絡先);
+
+        RString 施設利用 = getHandler(div).施設_施設利用フラグ_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
+        ViewStateHolder.put(ViewStateKeys.初期の施設利用, 施設利用);
+
         if (施設.equals(現在の状況コード)) {
-
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setValue(gaikyoChosa.getTemp_利用施設名());
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo()
-                    .setValue(new YubinNo(gaikyoChosa.getTemp_利用施設郵便番号()));
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho()
-                    .setDomain(new AtenaJusho(gaikyoChosa.getTemp_利用施設住所()));
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().setDomain(new TelNo(gaikyoChosa.getTemp_利用施設電話番号()));
-
-            RString 施設連絡先 = gaikyoChosa.getTemp_利用施設名().concat(カンマ).concat(gaikyoChosa.getTemp_利用施設郵便番号()).concat(カンマ)
-                    .concat(gaikyoChosa.getTemp_利用施設住所()).concat(カンマ).concat(gaikyoChosa.getTemp_利用施設電話番号());
-            ViewStateHolder.put(ViewStateKeys.初期の施設連絡先, 施設連絡先);
-
             div.getTabChosaBasho().setSelectedItem(new tplShisetsuDiv());
             div.getRadGenzaiservis().setDisabled(Boolean.TRUE);
             ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 施設);
             ViewStateHolder.put(ViewStateKeys.初期の概況調査場所, 施設);
-            div.getRadGenzaiservis().setSelectedKey(なし_選択);
-            ViewStateHolder.put(ViewStateKeys.初期のサービス区分, なし_選択);
-            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, なし_選択);
-            RString 施設利用 = getHandler(div).施設_施設利用フラグ_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
-            getHandler(div).利用サービスGrid非表示();
-
-            ViewStateHolder.put(ViewStateKeys.初期の施設利用, 施設利用);
 
         } else if (在宅.equals(現在の状況コード)) {
             div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
             ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 在宅);
             ViewStateHolder.put(ViewStateKeys.初期の概況調査場所, 在宅);
 
-            if (ServiceKubunCode.予防給付サービス.getコード().equals(サービス区分コード)) {
-                div.getRadGenzaiservis().setSelectedKey(予防給付サービス_選択);
-                ViewStateHolder.put(ViewStateKeys.初期のサービス区分, 予防給付サービス_選択);
-                ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 予防給付サービス_選択);
-                RString 予防給付状況 = getHandler(div).予防給付サービス_利用状況_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
-                ViewStateHolder.put(ViewStateKeys.初期の予防給付サービス, 予防給付状況);
-                div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
-            } else if (ServiceKubunCode.介護給付サービス.getコード().equals(サービス区分コード)) {
-                div.getRadGenzaiservis().setSelectedKey(介護給付サービス_選択);
-                ViewStateHolder.put(ViewStateKeys.初期のサービス区分, 介護給付サービス_選択);
-                ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 介護給付サービス_選択);
-                RString 介護給付状況 = getHandler(div).介護給付サービス_利用状況_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
-                ViewStateHolder.put(ViewStateKeys.初期の介護給付サービス, 介護給付状況);
-                div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
-            } else {
-                div.getRadGenzaiservis().setSelectedKey(なし_選択);
-                ViewStateHolder.put(ViewStateKeys.初期のサービス区分, なし_選択);
-                ViewStateHolder.put(ViewStateKeys.現在のサービス区分, なし_選択);
-                getHandler(div).利用サービスGrid非表示();
-            }
         }
+//        if (施設.equals(現在の状況コード)) {
+//
+//            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setValue(gaikyoChosa.getTemp_利用施設名());
+//            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo()
+//                    .setValue(new YubinNo(gaikyoChosa.getTemp_利用施設郵便番号()));
+//            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho()
+//                    .setDomain(new AtenaJusho(gaikyoChosa.getTemp_利用施設住所()));
+//            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().setDomain(new TelNo(gaikyoChosa.getTemp_利用施設電話番号()));
+//
+//            RString 施設連絡先 = gaikyoChosa.getTemp_利用施設名().concat(カンマ).concat(gaikyoChosa.getTemp_利用施設郵便番号()).concat(カンマ)
+//                    .concat(gaikyoChosa.getTemp_利用施設住所()).concat(カンマ).concat(gaikyoChosa.getTemp_利用施設電話番号());
+//            ViewStateHolder.put(ViewStateKeys.初期の施設連絡先, 施設連絡先);
+//
+//            div.getTabChosaBasho().setSelectedItem(new tplShisetsuDiv());
+//            div.getRadGenzaiservis().setDisabled(Boolean.TRUE);
+//            ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 施設);
+//            ViewStateHolder.put(ViewStateKeys.初期の概況調査場所, 施設);
+//            div.getRadGenzaiservis().setSelectedKey(なし_選択);
+//            ViewStateHolder.put(ViewStateKeys.初期のサービス区分, なし_選択);
+//            ViewStateHolder.put(ViewStateKeys.現在のサービス区分, なし_選択);
+//            RString 施設利用 = getHandler(div).施設_施設利用フラグ_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
+//            getHandler(div).利用サービスGrid非表示();
+//
+//            ViewStateHolder.put(ViewStateKeys.初期の施設利用, 施設利用);
+//
+//        } else if (在宅.equals(現在の状況コード)) {
+//            div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
+//            ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 在宅);
+//            ViewStateHolder.put(ViewStateKeys.初期の概況調査場所, 在宅);
+//
+//            if (ServiceKubunCode.予防給付サービス.getコード().equals(サービス区分コード)) {
+//                div.getRadGenzaiservis().setSelectedKey(予防給付サービス_選択);
+//                ViewStateHolder.put(ViewStateKeys.初期のサービス区分, 予防給付サービス_選択);
+//                ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 予防給付サービス_選択);
+//                RString 予防給付状況 = getHandler(div).予防給付サービス_利用状況_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
+//                ViewStateHolder.put(ViewStateKeys.初期の予防給付サービス, 予防給付状況);
+//                div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
+//            } else if (ServiceKubunCode.介護給付サービス.getコード().equals(サービス区分コード)) {
+//                div.getRadGenzaiservis().setSelectedKey(介護給付サービス_選択);
+//                ViewStateHolder.put(ViewStateKeys.初期のサービス区分, 介護給付サービス_選択);
+//                ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 介護給付サービス_選択);
+//                RString 介護給付状況 = getHandler(div).介護給付サービス_利用状況_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
+//                ViewStateHolder.put(ViewStateKeys.初期の介護給付サービス, 介護給付状況);
+//                div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
+//            } else {
+//                div.getRadGenzaiservis().setSelectedKey(なし_選択);
+//                ViewStateHolder.put(ViewStateKeys.初期のサービス区分, なし_選択);
+//                ViewStateHolder.put(ViewStateKeys.現在のサービス区分, なし_選択);
+//                getHandler(div).利用サービスGrid非表示();
+//            }
+//        }
     }
 
     /**
@@ -403,17 +471,17 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     private ResponseData<NinnteiChousaKekkaTouroku1Div> 在宅クリック(NinnteiChousaKekkaTouroku1Div div) {
 
-        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
-        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅外.get名称().equals(実施場所)) {
-            WarningMessage message = new WarningMessage(DbeWarningMessages.自宅外で在宅.getMessage().getCode(),
-                    DbeWarningMessages.自宅外で在宅.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(DbeWarningMessages.自宅外で在宅.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            div.getTabChosaBasho().setSelectedItem(new tplShisetsuDiv());
-            return ResponseData.of(div).respond();
-        }
+//        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
+//        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅外.get名称().equals(実施場所)) {
+//            WarningMessage message = new WarningMessage(DbeWarningMessages.自宅外で在宅.getMessage().getCode(),
+//                    DbeWarningMessages.自宅外で在宅.getMessage().evaluate());
+//            return ResponseData.of(div).addMessage(message).respond();
+//        }
+//        if (new RString(DbeWarningMessages.自宅外で在宅.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//            div.getTabChosaBasho().setSelectedItem(new tplShisetsuDiv());
+//            return ResponseData.of(div).respond();
+//        }
         ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 在宅);
         div.getRadGenzaiservis().setDisabled(Boolean.FALSE);
         return ResponseData.of(div).respond();
@@ -427,18 +495,17 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     private ResponseData<NinnteiChousaKekkaTouroku1Div> 施設クリック(NinnteiChousaKekkaTouroku1Div div) {
 
-        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
-        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅内.get名称().equals(実施場所)) {
-            WarningMessage message = new WarningMessage(DbeWarningMessages.自宅内で施設.getMessage().getCode(),
-                    DbeWarningMessages.自宅内で施設.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(DbeWarningMessages.自宅内で施設.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
-            return ResponseData.of(div).respond();
-        }
-
+//        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
+//        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅内.get名称().equals(実施場所)) {
+//            WarningMessage message = new WarningMessage(DbeWarningMessages.自宅内で施設.getMessage().getCode(),
+//                    DbeWarningMessages.自宅内で施設.getMessage().evaluate());
+//            return ResponseData.of(div).addMessage(message).respond();
+//        }
+//        if (new RString(DbeWarningMessages.自宅内で施設.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//            div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
+//            return ResponseData.of(div).respond();
+//        }
         RString temp_厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
         ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 施設);
         getHandler(div).施設の表示(temp_厚労省IF識別コード);
@@ -454,33 +521,33 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onChange_ddlChosaJisshiBasho(NinnteiChousaKekkaTouroku1Div div) {
         RString 現在の実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey();
-        RString 元の実施場所 = ViewStateHolder.get(ViewStateKeys.調査実施場所コード, RString.class);
-        RString 概況調査場所 = ViewStateHolder.get(ViewStateKeys.現在の概況調査場所, RString.class);
-
-        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅内.getコード().equals(現在の実施場所) && 施設.equals(概況調査場所)) {
-            WarningMessage message = new WarningMessage(DbeWarningMessages.施設で自宅内.getMessage().getCode(),
-                    DbeWarningMessages.施設で自宅内.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        } else if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅外.getコード().equals(現在の実施場所) && 在宅.equals(概況調査場所)) {
-            WarningMessage message = new WarningMessage(DbeWarningMessages.在宅で自宅外.getMessage().getCode(),
-                    DbeWarningMessages.在宅で自宅外.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-
-        if (new RString(DbeWarningMessages.自宅内で施設.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
-
-        } else if (new RString(DbeWarningMessages.在宅で自宅外.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
-                || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setSelectedKey(元の実施場所);
-            ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 元の実施場所);
-            return ResponseData.of(div).respond();
-        }
+//        RString 元の実施場所 = ViewStateHolder.get(ViewStateKeys.調査実施場所コード, RString.class);
+//        RString 概況調査場所 = ViewStateHolder.get(ViewStateKeys.現在の概況調査場所, RString.class);
+//
+//        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅内.getコード().equals(現在の実施場所) && 施設.equals(概況調査場所)) {
+//            WarningMessage message = new WarningMessage(DbeWarningMessages.施設で自宅内.getMessage().getCode(),
+//                    DbeWarningMessages.施設で自宅内.getMessage().evaluate());
+//            return ResponseData.of(div).addMessage(message).respond();
+//        } else if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅外.getコード().equals(現在の実施場所) && 在宅.equals(概況調査場所)) {
+//            WarningMessage message = new WarningMessage(DbeWarningMessages.在宅で自宅外.getMessage().getCode(),
+//                    DbeWarningMessages.在宅で自宅外.getMessage().evaluate());
+//            return ResponseData.of(div).addMessage(message).respond();
+//        }
+//
+//        if (new RString(DbeWarningMessages.自宅内で施設.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+//                || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//            ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
+//
+//        } else if (new RString(DbeWarningMessages.在宅で自宅外.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
+//                || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//            div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setSelectedKey(元の実施場所);
+//            ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 元の実施場所);
+//            return ResponseData.of(div).respond();
+//        }
         ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
 
         if (!ChosaJisshiBashoCode.自宅内.getコード().equals(現在の実施場所)) {
@@ -500,7 +567,7 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnIchiHanteiJisshi(NinnteiChousaKekkaTouroku1Div div) {
-        // TODO 「DBZ.IchijiHanteiKekkaJoho」  #75188 この機能はTodoとしてください。また、テストも未実施で良いです。
+        ViewStateHolder.put(ViewStateKeys.モード, ModeType.ADD_MODE);
         return ResponseData.of(div).respond();
     }
 
@@ -511,7 +578,8 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onOkClose_btnIchiHanteiJisshi(NinnteiChousaKekkaTouroku1Div div) {
-        // TODO #75188 この機能はTodoとしてください。また、テストも未実施で良いです。
+        IchijiHanteiKekkaJoho result = ViewStateHolder.get(ViewStateKeys.一次判定結果情報, IchijiHanteiKekkaJoho.class);
+        div.getTxtIchijiHanteiKekka().setValue(IchijiHanteiKekkaCode99.toValue(result.get要介護認定一次判定結果コード().getColumnValue()).get名称());
         return ResponseData.of(div).respond();
     }
 
@@ -523,7 +591,7 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnTeikeibun(NinnteiChousaKekkaTouroku1Div div) {
         div.setHidden登録業務コード(GyomuCode.DB介護保険.getColumnValue());
-        div.setHidden登録グループコード(登録グループコード);
+        div.setHidden登録グループコード(SampleBunshoGroupCodes.調査票概況調査特記事項.getコード());
         return ResponseData.of(div).respond();
     }
 
@@ -695,23 +763,31 @@ public class NinnteiChousaKekkaTouroku1 {
         ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
 
         if (!ResponseHolder.isReRequest()) {
-            if (!(第1群List.isEmpty() && 第2群List.isEmpty() && 第3群List.isEmpty() && 第4群List.isEmpty()
-                    && 第5群List.isEmpty() && 特別な医療List.isEmpty() && 自立度List.isEmpty())) {
-                WarningMessage message = new WarningMessage(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode(),
-                        DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().replace("規定値を設定します。").evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
 
-        if (new RString(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode())
+        if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(第1群List));
-            ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(第2群List));
-            ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(第3群List));
-            ViewStateHolder.put(ViewStateKeys.第四群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(第4群List));
-            ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(第5群List));
-            ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(特別な医療List));
-            ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(自立度List));
+
+            Map<RString, ArrayList<KihonChosaInput>> map = new HashMap<>();
+            map.put(KEY1, 第1群List);
+            map.put(KEY2, 第2群List);
+            map.put(KEY3, 第3群List);
+            map.put(KEY4, 第4群List);
+            map.put(KEY5, 第5群List);
+            map.put(KEY6, 特別な医療List);
+            map.put(KEY7, 自立度List);
+            map = getHandler(div).規定値設定の前処理(map);
+
+            ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY1)));
+            ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY2)));
+            ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY3)));
+            ViewStateHolder.put(ViewStateKeys.第四群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY4)));
+            ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY5)));
+            ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY6)));
+            ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY7)));
             return ResponseData.of(div).respond();
         } else {
             return ResponseData.of(div).respond();
@@ -728,6 +804,7 @@ public class NinnteiChousaKekkaTouroku1 {
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor調査実施日の必須入力(pairs, div);
+        getValidationHandler().validateFor調査実施日の妥当性入力(pairs, div);
         getValidationHandler().validateFor実施場所の必須入力(pairs, div);
         getValidationHandler().validateFor所属機関の必須入力(pairs, div);
         getValidationHandler().validateFor記入者の必須入力(pairs, div);
@@ -762,6 +839,7 @@ public class NinnteiChousaKekkaTouroku1 {
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor調査実施日の必須入力(pairs, div);
+        getValidationHandler().validateFor調査実施日の妥当性入力(pairs, div);
         getValidationHandler().validateFor実施場所の必須入力(pairs, div);
         getValidationHandler().validateFor所属機関の必須入力(pairs, div);
         getValidationHandler().validateFor記入者の必須入力(pairs, div);
@@ -823,10 +901,11 @@ public class NinnteiChousaKekkaTouroku1 {
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor調査実施日の必須入力(pairs, div);
+        getValidationHandler().validateFor調査実施日の妥当性入力(pairs, div);
         getValidationHandler().validateFor実施場所の必須入力(pairs, div);
-        if (!ChosaJisshiBashoCode.自宅内.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
-            getValidationHandler().validateFor実施場所名称の必須入力(pairs, div);
-        }
+//        if (!ChosaJisshiBashoCode.自宅内.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
+//            getValidationHandler().validateFor実施場所名称の必須入力(pairs, div);
+//        }
         getValidationHandler().validateFor所属機関の必須入力(pairs, div);
         getValidationHandler().validateFor記入者の必須入力(pairs, div);
         getValidationHandler().validateFor第1群の必須入力(pairs, div);
@@ -839,15 +918,14 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
-        RString 概況調査場所 = ViewStateHolder.get(ViewStateKeys.現在の概況調査場所, RString.class);
-
-        if (ChosaJisshiBashoCode.自宅内.get名称().equals(実施場所) && 施設.equals(概況調査場所)) {
-            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("調査実施場所が自宅内ですが調査場所が施設"));
-        } else if (ChosaJisshiBashoCode.自宅外.get名称().equals(実施場所) && 在宅.equals(概況調査場所)) {
-            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("調査実施場所が自宅外ですが調査場所が在宅"));
-        }
-
+//        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
+//        RString 概況調査場所 = ViewStateHolder.get(ViewStateKeys.現在の概況調査場所, RString.class);
+//
+//        if (ChosaJisshiBashoCode.自宅内.get名称().equals(実施場所) && 施設.equals(概況調査場所)) {
+//            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("調査実施場所が自宅内ですが調査場所が施設"));
+//        } else if (ChosaJisshiBashoCode.自宅外.get名称().equals(実施場所) && 在宅.equals(概況調査場所)) {
+//            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("調査実施場所が自宅外ですが調査場所が在宅"));
+//        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -1052,33 +1130,29 @@ public class NinnteiChousaKekkaTouroku1 {
                 && 認定調査1回.equals(temp_認定調査回数)
                 || ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
 
-            現在の状況_在宅or施設の保存(div);
-            認定調査依頼情報の更新();
+//            現在の状況_在宅or施設の保存(div);
+            認定調査依頼情報の更新(div);
             概況調査の更新(div);
             サービス状況フラグの更新(div);
             記入項目の更新(div);
             調査項目の更新();
 
-            if (予防給付サービス_選択.toString().equalsIgnoreCase(現在のサービス区分.toString())) {
-                介護給付サービス状況のクリア(div);
-                予防給付サービス状況の更新(div);
-            } else if (介護給付サービス_選択.toString().equalsIgnoreCase(現在のサービス区分.toString())) {
-                予防給付サービス状況のクリア(div);
-                介護給付サービス状況の更新(div);
-            } else if (なし_選択.toString().equalsIgnoreCase(現在のサービス区分.toString())) {
-                予防給付サービス状況のクリア(div);
-                介護給付サービス状況のクリア(div);
-            }
-
-            if (施設.equals(現在の概況調査場所)) {
-                施設利用の更新(div);
-            } else if (!施設.equals(現在の概況調査場所)) {
-                施設利用falseの設定(div);
-            }
+//            if (予防給付サービス_選択.toString().equalsIgnoreCase(現在のサービス区分.toString())) {
+//                介護給付サービス状況のクリア(div);
+//                予防給付サービス状況の更新(div);
+//            } else if (介護給付サービス_選択.toString().equalsIgnoreCase(現在のサービス区分.toString())) {
+//                予防給付サービス状況のクリア(div);
+//                介護給付サービス状況の更新(div);
+//            } else if (なし_選択.toString().equalsIgnoreCase(現在のサービス区分.toString())) {
+//                予防給付サービス状況のクリア(div);
+//                介護給付サービス状況のクリア(div);
+//            }
+            給付サービス状況の更新(div);
+            施設利用の更新(div);
         }
     }
 
-    private void 認定調査依頼情報の更新() {
+    private void 認定調査依頼情報の更新(NinnteiChousaKekkaTouroku1Div div) {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
@@ -1086,10 +1160,28 @@ public class NinnteiChousaKekkaTouroku1 {
         NinteichosaIraiJoho dbt5201 = dbt5201Manager.get認定調査依頼情報(temp_申請書管理番号, temp_認定調査履歴番号);
         if (dbt5201 == null) {
             dbt5201 = new NinteichosaIraiJoho(temp_申請書管理番号, temp_認定調査履歴番号);
+            dbt5201.toEntity().setState(EntityDataState.Added);
+        } else {
+            dbt5201.toEntity().setState(getDbT5201EntityDataState(div, dbt5201));
         }
         NinteichosaIraiJohoBuilder dbt5201Bulid = dbt5201.createBuilderForEdit();
-        dbt5201Bulid.set認定調査回数(1);
+        if (ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            dbt5201Bulid.set認定調査回数(dbt5201.get認定調査回数() + 1);
+        } else {
+            dbt5201Bulid.set認定調査回数(1);
+        }
         dbt5201Manager.save認定調査依頼情報(dbt5201Bulid.build());
+    }
+
+    private EntityDataState getDbT5201EntityDataState(NinnteiChousaKekkaTouroku1Div div, NinteichosaIraiJoho dbt5201) {
+        if (ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            return EntityDataState.Modified;
+        }
+        if (dbt5201.get認定調査回数() == 1) {
+            return EntityDataState.Unchanged;
+        } else {
+            return EntityDataState.Modified;
+        }
     }
 
     private void 概況調査の更新(NinnteiChousaKekkaTouroku1Div div) {
@@ -1103,11 +1195,19 @@ public class NinnteiChousaKekkaTouroku1 {
         NinteichosahyoGaikyoChosa dbt5202 = dbt5202Manager.get認定調査票_概況調査_子(temp_申請書管理番号, temp_認定調査履歴番号, 概況調査テキストイメージ区分);
         if (dbt5202 == null) {
             dbt5202 = new NinteichosahyoGaikyoChosa(temp_申請書管理番号, temp_認定調査履歴番号, 概況調査テキストイメージ区分);
+            dbt5202.toEntity().setState(EntityDataState.Added);
+        } else {
+            dbt5202.toEntity().setState(EntityDataState.Modified);
         }
         NinteichosahyoGaikyoChosaBuilder dbt5202builder = dbt5202.createBuilderForEdit();
 
-        RString 認定調査区分コード = ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())
-                ? ChosaKubun.新規調査.getコード() : ChosaKubun.再調査.getコード();
+        RString 認定調査区分コード;
+        if (ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            認定調査区分コード = ChosaKubun.新規調査.getコード();
+        } else {
+            認定調査区分コード = ChosaKubun.再調査.getコード();
+        }
+
         RString サービス区分コード = div.getRadGenzaiservis().getSelectedKey();
         if (予防給付サービス_選択.equals(サービス区分コード)) {
             サービス区分コード = ServiceKubunCode.予防給付サービス.getコード();
@@ -1119,7 +1219,11 @@ public class NinnteiChousaKekkaTouroku1 {
 
         dbt5202builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
         dbt5202builder.set認定調査依頼区分コード(new Code(temp_認定調査依頼区分コード));
-        dbt5202builder.set認定調査回数(1);
+        if (ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            dbt5202builder.set認定調査回数(dbt5202.get認定調査回数() + 1);
+        } else {
+            dbt5202builder.set認定調査回数(1);
+        }
         dbt5202builder.set認定調査実施年月日(new FlexibleDate(div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getValue().toDateString()));
         dbt5202builder.set認定調査受領年月日(FlexibleDate.getNowDate());
         dbt5202builder.set認定調査区分コード(new Code(認定調査区分コード));
@@ -1147,48 +1251,80 @@ public class NinnteiChousaKekkaTouroku1 {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
+        RString 住宅改修 = div.getRadJutakuKaishu().getSelectedKey();
 
         NinteichosahyoServiceJokyoFlagManager dbt5208Manager = new NinteichosahyoServiceJokyoFlagManager();
         NinteichosahyoServiceJokyoFlag dbt5208 = dbt5208Manager.
                 get認定調査票_概況調査_サービスの状況フラグ(temp_申請書管理番号, temp_認定調査履歴番号, 住宅改修_連番);
         if (dbt5208 == null) {
             dbt5208 = new NinteichosahyoServiceJokyoFlag(temp_申請書管理番号, temp_認定調査履歴番号, 住宅改修_連番);
+            dbt5208.toEntity().setState(EntityDataState.Added);
+        } else {
+            dbt5208.toEntity().setState(getDbT5208EntityDataState(dbt5208, 住宅改修));
         }
         NinteichosahyoServiceJokyoFlagBuilder dbt5208Builder = dbt5208.createBuilderForEdit();
         dbt5208Builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
-        RString 住宅改修 = div.getRadJutakuKaishu().getSelectedKey();
-        if (住宅改修_有.equals(住宅改修)) {
+        if (is住宅改修あり(住宅改修)) {
             dbt5208Builder.setサービスの状況フラグ(Boolean.TRUE);
-        } else if (住宅改修_無.equals(住宅改修)) {
+        } else {
             dbt5208Builder.setサービスの状況フラグ(Boolean.FALSE);
         }
         dbt5208Manager.save認定調査票_概況調査_サービスの状況フラグ(dbt5208Builder.build());
     }
 
+    private boolean is住宅改修あり(RString 住宅改修) {
+        if (住宅改修_有.equals(住宅改修)) {
+            return Boolean.TRUE;
+        } else {
+            return Boolean.FALSE;
+        }
+    }
+
+    private EntityDataState getDbT5208EntityDataState(NinteichosahyoServiceJokyoFlag dbt5208, RString 住宅改修) {
+        if (dbt5208.isサービスの状況フラグ() == is住宅改修あり(住宅改修)) {
+            return EntityDataState.Unchanged;
+        } else {
+            return EntityDataState.Modified;
+        }
+    }
+
     private void 記入項目の更新(NinnteiChousaKekkaTouroku1Div div) {
+        saveサービス状況記入項目(div, 市町村特別給付_連番);
+        saveサービス状況記入項目(div, 介護保険給付外の在宅サービス_連番);
+    }
+
+    private void saveサービス状況記入項目(NinnteiChousaKekkaTouroku1Div div, int 記入項目種類連番) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
 
         NinteichosahyoKinyuItemManager dbt5209Manager = new NinteichosahyoKinyuItemManager();
-        NinteichosahyoKinyuItem dbt5209 = dbt5209Manager.get認定調査票_概況調査_記入項目(temp_申請書管理番号, temp_認定調査履歴番号, 市町村特別給付_連番);
+        NinteichosahyoKinyuItem dbt5209 = dbt5209Manager.get認定調査票_概況調査_記入項目(temp_申請書管理番号, temp_認定調査履歴番号, 記入項目種類連番);
+        RString サービス状況;
+        if (市町村特別給付_連番 == 記入項目種類連番) {
+            サービス状況 = div.getTxtShichosonTokubetsuKyufu().getValue();
+        } else {
+            サービス状況 = div.getTxtKyufuIgaiJutakuService().getValue();
+        }
         if (dbt5209 == null) {
-            dbt5209 = new NinteichosahyoKinyuItem(temp_申請書管理番号, temp_認定調査履歴番号, 市町村特別給付_連番);
+            dbt5209 = new NinteichosahyoKinyuItem(temp_申請書管理番号, temp_認定調査履歴番号, 記入項目種類連番);
+            dbt5209.toEntity().setState(EntityDataState.Added);
+        } else {
+            dbt5209.toEntity().setState(getDbT5209EntityDataState(dbt5209, サービス状況));
         }
         NinteichosahyoKinyuItemBuilder dbt5209Builder = dbt5209.createBuilderForEdit();
-        dbt5209Builder.setサービスの状況記入(div.getTxtShichosonTokubetsuKyufu().getValue());
+        dbt5209Builder.setサービスの状況記入(サービス状況);
         dbt5209Builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
         dbt5209Manager.save認定調査票_概況調査_記入項目(dbt5209Builder.build());
+    }
 
-        dbt5209 = dbt5209Manager.get認定調査票_概況調査_記入項目(temp_申請書管理番号, temp_認定調査履歴番号, 介護保険給付外の在宅サービス_連番);
-        if (dbt5209 == null) {
-            dbt5209 = new NinteichosahyoKinyuItem(temp_申請書管理番号, temp_認定調査履歴番号, 介護保険給付外の在宅サービス_連番);
+    private EntityDataState getDbT5209EntityDataState(NinteichosahyoKinyuItem dbt5209, RString サービス状況) {
+        if (dbt5209.getサービスの状況記入().equals(サービス状況)) {
+            return EntityDataState.Unchanged;
+        } else {
+            return EntityDataState.Modified;
         }
-        dbt5209Builder = dbt5209.createBuilderForEdit();
-        dbt5209Builder.setサービスの状況記入(div.getTxtKyufuIgaiJutakuService().getValue());
-        dbt5209Builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
-        dbt5209Manager.save認定調査票_概況調査_記入項目(dbt5209Builder.build());
     }
 
     private void 施設利用の更新(NinnteiChousaKekkaTouroku1Div div) {
@@ -1208,11 +1344,22 @@ public class NinnteiChousaKekkaTouroku1 {
             NinteichosahyoShisetsuRiyo dbt5210 = dbt5210Manager.get認定調査票_概況調査_施設利用(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
             if (dbt5210 == null) {
                 dbt5210 = new NinteichosahyoShisetsuRiyo(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+                dbt5210.toEntity().setState(EntityDataState.Added);
+            } else {
+                dbt5210.toEntity().setState(getDbT5210EntityDataState(dbt5210, row));
             }
             NinteichosahyoShisetsuRiyoBuilder dbt5210Builder = dbt5210.createBuilderForEdit();
             dbt5210Builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
             dbt5210Builder.set施設利用フラグ(row.getShisetsuRiyoUmu());
             dbt5210Manager.save認定調査票_概況調査_施設利用(dbt5210Builder.build());
+        }
+    }
+
+    private EntityDataState getDbT5210EntityDataState(NinteichosahyoShisetsuRiyo dbt5210, dgRiyoShisetsu_Row row) {
+        if (dbt5210.is施設利用フラグ() == row.getShisetsuRiyoUmu()) {
+            return EntityDataState.Unchanged;
+        } else {
+            return EntityDataState.Modified;
         }
     }
 
@@ -1251,13 +1398,14 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         NinteichosahyoShisetsuRiyoBuilder dbt5210Builder = dbt5210.createBuilderForEdit();
         dbt5210Builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
-
-        RString title = div.getTabChosaBasho().getSelectedItem().getTitle();
-        if (在宅.equals(title)) {
-            dbt5210Builder.set施設利用フラグ(Boolean.TRUE);
-        } else if (施設.equals(title)) {
-            dbt5210Builder.set施設利用フラグ(Boolean.FALSE);
-        }
+//
+//        RString title = div.getTabChosaBasho().getSelectedItem().getTitle();
+//        if (在宅.equals(title)) {
+//            dbt5210Builder.set施設利用フラグ(Boolean.TRUE);
+//        } else if (施設.equals(title)) {
+//            dbt5210Builder.set施設利用フラグ(Boolean.FALSE);
+//        }
+        dbt5210Builder.set施設利用フラグ(Boolean.TRUE);
         dbt5210Manager.save認定調査票_概況調査_施設利用(dbt5210Builder.build());
     }
 
@@ -1280,6 +1428,34 @@ public class NinnteiChousaKekkaTouroku1 {
         }
     }
 
+    private void 調査項目の保存(int 連番, RString 調査項目) {
+
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+
+        NinteichosahyoChosaItemManager manager = new NinteichosahyoChosaItemManager();
+        NinteichosahyoChosaItem dbt5211 = manager.get認定調査票_基本調査_調査項目(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+
+        if (dbt5211 == null) {
+            dbt5211 = new NinteichosahyoChosaItem(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+            dbt5211.toEntity().setState(EntityDataState.Added);
+        } else {
+            dbt5211.toEntity().setState(getDbT5211EntityDataState(dbt5211, 調査項目));
+        }
+        NinteichosahyoChosaItemBuilder builder = dbt5211.createBuilderForEdit();
+        builder.set厚労省IF識別コード(new Code(ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class)));
+        builder.set調査項目(調査項目);
+        manager.save認定調査票_基本調査_調査項目(builder.build());
+    }
+
+    private EntityDataState getDbT5211EntityDataState(NinteichosahyoChosaItem dbt5211, RString 調査項目) {
+        if (dbt5211.get調査項目().equals(調査項目)) {
+            return EntityDataState.Unchanged;
+        } else {
+            return EntityDataState.Modified;
+        }
+    }
+
     private void 基本調査第7群更新(ArrayList<KihonChosaInput> 基本調査群List) {
         if (基本調査群List == null || 基本調査群List.isEmpty()) {
             return;
@@ -1297,6 +1473,10 @@ public class NinnteiChousaKekkaTouroku1 {
         NinteichosahyoKihonChosa dbt5203 = manager.get認定調査票_基本調査(temp_申請書管理番号, temp_認定調査履歴番号);
         if (dbt5203 == null) {
             dbt5203 = new NinteichosahyoKihonChosa(temp_申請書管理番号, temp_認定調査履歴番号);
+            dbt5203.toEntity().setState(EntityDataState.Added);
+        } else {
+            dbt5203.toEntity().setState(getDbT5203EntityDataState(
+                    dbt5203, 障害高齢者の日常生活自立度コード, 認知症高齢者の日常生活自立度コード));
         }
         NinteichosahyoKihonChosaBuilder builder = dbt5203.createBuilderForEdit();
         builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
@@ -1305,21 +1485,55 @@ public class NinnteiChousaKekkaTouroku1 {
         manager.save認定調査票_基本調査(builder.build());
     }
 
-    private void 調査項目の保存(int 連番, RString 調査項目) {
+    private EntityDataState getDbT5203EntityDataState(NinteichosahyoKihonChosa dbt5203,
+            Code 障害高齢者の日常生活自立度コード, Code 認知症高齢者の日常生活自立度コード) {
+        if (dbt5203.get認定調査_障害高齢者の日常生活自立度コード().equals(障害高齢者の日常生活自立度コード)
+                && dbt5203.get認定調査_認知症高齢者の日常生活自立度コード().equals(認知症高齢者の日常生活自立度コード)) {
+            return EntityDataState.Unchanged;
+        } else {
+            return EntityDataState.Modified;
+        }
+    }
+
+    private void 給付サービス状況の更新(NinnteiChousaKekkaTouroku1Div div) {
 
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+        RString temp_厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
 
-        NinteichosahyoChosaItemManager manager = new NinteichosahyoChosaItemManager();
-        NinteichosahyoChosaItem dbt5211 = manager.get認定調査票_基本調査_調査項目(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
-
-        if (dbt5211 == null) {
-            dbt5211 = new NinteichosahyoChosaItem(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+        NinteichosahyoServiceJokyoManager dbt5207Manager = new NinteichosahyoServiceJokyoManager();
+        List<dgRiyoServiceJyokyo_Row> 給付サービス利用状況レコードリスト = div.getDgRiyoServiceJyokyo().getDataSource();
+        if (給付サービス利用状況レコードリスト == null) {
+            return;
         }
-        NinteichosahyoChosaItemBuilder builder = dbt5211.createBuilderForEdit();
-        builder.set厚労省IF識別コード(new Code(ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class)));
-        builder.set調査項目(調査項目);
-        manager.save認定調査票_基本調査_調査項目(builder.build());
+        Decimal 利用状況;
+        int 連番 = 1;
+        for (dgRiyoServiceJyokyo_Row 給付サービス利用状況レコード : 給付サービス利用状況レコードリスト) {
+            利用状況 = 給付サービス利用状況レコード.getServiceJokyo().getValue();
+            if (利用状況 == null || 利用状況.toString().isEmpty()) {
+                利用状況 = new Decimal(0);
+            }
+            NinteichosahyoServiceJokyo dbt5207 = dbt5207Manager.get認定調査票_概況調査_サービスの状況(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+            if (dbt5207 == null) {
+                dbt5207 = new NinteichosahyoServiceJokyo(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+                dbt5207.toEntity().setState(EntityDataState.Added);
+            } else {
+                dbt5207.toEntity().setState(getDbT5207EntityDataState(dbt5207, 利用状況.intValue()));
+            }
+            連番 += 1;
+            NinteichosahyoServiceJokyoBuilder dbt5207Builder = dbt5207.createBuilderForEdit();
+            dbt5207Builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
+            dbt5207Builder.setサービスの状況(利用状況.intValue());
+            dbt5207Manager.save認定調査票_概況調査_サービスの状況(dbt5207Builder.build());
+        }
+    }
+
+    private EntityDataState getDbT5207EntityDataState(NinteichosahyoServiceJokyo dbt5207, int サービス利用状況) {
+        if (dbt5207.getサービスの状況() == サービス利用状況) {
+            return EntityDataState.Unchanged;
+        } else {
+            return EntityDataState.Modified;
+        }
     }
 
     private void 予防給付サービス状況の更新(NinnteiChousaKekkaTouroku1Div div) {

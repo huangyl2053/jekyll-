@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020021.Riyo
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -69,8 +70,8 @@ public class RiyoshaFutangakuGemmenNinteishaList {
             batchparameter.set帳票ID(ReportIdDBD.DBD200002.getReportId().value());
         }
 
-        FlexibleDate kijunymd = div.getTxtKijunYMD().getValue();
-        batchparameter.set基準日(kijunymd);
+        RDate kijunymd = div.getTxtKijunYMD().getValue();
+        batchparameter.set基準日(new FlexibleDate(kijunymd.toDateString()));
 
         FlexibleYear shotokunendo = new FlexibleYear(div.getTxtShotokuNendo().getValue().toString().substring(NO_0, NO_4));
         batchparameter.set所得年度(shotokunendo);

@@ -14,21 +14,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaradaJotaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkKikiude")
-    private CheckBoxList chkKikiude;
+    @JsonProperty("radKikiude")
+    private RadioButton radKikiude;
     @JsonProperty("txtShincho")
     private TextBox txtShincho;
+    @JsonProperty("radKakoTaijuHenka")
+    private RadioButton radKakoTaijuHenka;
     @JsonProperty("txtTaiju")
     private TextBox txtTaiju;
-    @JsonProperty("chkKakoTaijuHenka")
-    private CheckBoxList chkKakoTaijuHenka;
     @JsonProperty("chkShishiKesson")
     private CheckBoxList chkShishiKesson;
     @JsonProperty("txtShishiKessonBui")
@@ -39,52 +39,52 @@ public class KaradaJotaiDiv extends Panel {
     private CheckBoxList chkMahi;
     @JsonProperty("chkMigiJoshiMahi")
     private CheckBoxList chkMigiJoshiMahi;
-    @JsonProperty("chkMigiJoshiMahiTeido")
-    private CheckBoxList chkMigiJoshiMahiTeido;
+    @JsonProperty("radMigiJoshiMahiTeido")
+    private RadioButton radMigiJoshiMahiTeido;
     @JsonProperty("chkHidariJoshiMahi")
     private CheckBoxList chkHidariJoshiMahi;
-    @JsonProperty("chkHidariJoshiMahiTeido")
-    private CheckBoxList chkHidariJoshiMahiTeido;
+    @JsonProperty("radHidariJoshiMahiTeido")
+    private RadioButton radHidariJoshiMahiTeido;
     @JsonProperty("chkMigiKashiMahi")
     private CheckBoxList chkMigiKashiMahi;
-    @JsonProperty("chkMigiKashiMahiTeido")
-    private CheckBoxList chkMigiKashiMahiTeido;
+    @JsonProperty("radMigiKashiMahiTeido")
+    private RadioButton radMigiKashiMahiTeido;
     @JsonProperty("chkHidariKashiMahi")
     private CheckBoxList chkHidariKashiMahi;
-    @JsonProperty("chkHidariKashiMahiTeido")
-    private CheckBoxList chkHidariKashiMahiTeido;
+    @JsonProperty("radHidariKashiMahiTeido")
+    private RadioButton radHidariKashiMahiTeido;
     @JsonProperty("Sp1")
     private Space Sp1;
     @JsonProperty("chkSonotaMahi")
     private CheckBoxList chkSonotaMahi;
     @JsonProperty("txtSonotaMahiBui")
     private TextBox txtSonotaMahiBui;
-    @JsonProperty("SonotaMahiTeido")
-    private CheckBoxList SonotaMahiTeido;
+    @JsonProperty("radSonotaMahiTeido")
+    private RadioButton radSonotaMahiTeido;
     @JsonProperty("linHorizon2")
     private HorizontalLine linHorizon2;
     @JsonProperty("chkKinryokuTeika")
     private CheckBoxList chkKinryokuTeika;
     @JsonProperty("txtKinryokuTeikaBui")
     private TextBox txtKinryokuTeikaBui;
-    @JsonProperty("chkKinryokuTeikaTeido")
-    private CheckBoxList chkKinryokuTeikaTeido;
+    @JsonProperty("radKinryokuTeikaTeido")
+    private RadioButton radKinryokuTeikaTeido;
     @JsonProperty("linHorizon3")
     private HorizontalLine linHorizon3;
     @JsonProperty("chkKansetsuKoshuku")
     private CheckBoxList chkKansetsuKoshuku;
     @JsonProperty("txtKansetsuKoshukuBui")
     private TextBox txtKansetsuKoshukuBui;
-    @JsonProperty("chkKansetsuKoshukuTeido")
-    private CheckBoxList chkKansetsuKoshukuTeido;
+    @JsonProperty("radKansetsuKoshukuTeido")
+    private RadioButton radKansetsuKoshukuTeido;
     @JsonProperty("linHorizon4")
     private HorizontalLine linHorizon4;
     @JsonProperty("chkKansetsuItami")
     private CheckBoxList chkKansetsuItami;
     @JsonProperty("txtKansetsuItamiBui")
     private TextBox txtKansetsuItamiBui;
-    @JsonProperty("chkKansetsuItamiTeido")
-    private CheckBoxList chkKansetsuItamiTeido;
+    @JsonProperty("radKansetsuItamiTeido")
+    private RadioButton radKansetsuItamiTeido;
     @JsonProperty("linHorizon5")
     private HorizontalLine linHorizon5;
     @JsonProperty("chkShicchoFuzuii")
@@ -101,16 +101,16 @@ public class KaradaJotaiDiv extends Panel {
     private CheckBoxList chkJokuso;
     @JsonProperty("txtJokusoBui")
     private TextBox txtJokusoBui;
-    @JsonProperty("chkJokusoTeido")
-    private CheckBoxList chkJokusoTeido;
+    @JsonProperty("radJokusoTeido")
+    private RadioButton radJokusoTeido;
     @JsonProperty("linHorizon7")
     private HorizontalLine linHorizon7;
     @JsonProperty("chkSonotaHifuShikkan")
     private CheckBoxList chkSonotaHifuShikkan;
     @JsonProperty("txtSonotaHifuShikkanBui")
     private TextBox txtSonotaHifuShikkanBui;
-    @JsonProperty("chkSonotaHifuShikkanTeido")
-    private CheckBoxList chkSonotaHifuShikkanTeido;
+    @JsonProperty("radSonotaHifuShikkanTeido")
+    private RadioButton radSonotaHifuShikkanTeido;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -119,21 +119,21 @@ public class KaradaJotaiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkKikiude
-     * @return chkKikiude
+     * getradKikiude
+     * @return radKikiude
      */
-    @JsonProperty("chkKikiude")
-    public CheckBoxList getChkKikiude() {
-        return chkKikiude;
+    @JsonProperty("radKikiude")
+    public RadioButton getRadKikiude() {
+        return radKikiude;
     }
 
     /*
-     * setchkKikiude
-     * @param chkKikiude chkKikiude
+     * setradKikiude
+     * @param radKikiude radKikiude
      */
-    @JsonProperty("chkKikiude")
-    public void setChkKikiude(CheckBoxList chkKikiude) {
-        this.chkKikiude = chkKikiude;
+    @JsonProperty("radKikiude")
+    public void setRadKikiude(RadioButton radKikiude) {
+        this.radKikiude = radKikiude;
     }
 
     /*
@@ -155,6 +155,24 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
+     * getradKakoTaijuHenka
+     * @return radKakoTaijuHenka
+     */
+    @JsonProperty("radKakoTaijuHenka")
+    public RadioButton getRadKakoTaijuHenka() {
+        return radKakoTaijuHenka;
+    }
+
+    /*
+     * setradKakoTaijuHenka
+     * @param radKakoTaijuHenka radKakoTaijuHenka
+     */
+    @JsonProperty("radKakoTaijuHenka")
+    public void setRadKakoTaijuHenka(RadioButton radKakoTaijuHenka) {
+        this.radKakoTaijuHenka = radKakoTaijuHenka;
+    }
+
+    /*
      * gettxtTaiju
      * @return txtTaiju
      */
@@ -170,24 +188,6 @@ public class KaradaJotaiDiv extends Panel {
     @JsonProperty("txtTaiju")
     public void setTxtTaiju(TextBox txtTaiju) {
         this.txtTaiju = txtTaiju;
-    }
-
-    /*
-     * getchkKakoTaijuHenka
-     * @return chkKakoTaijuHenka
-     */
-    @JsonProperty("chkKakoTaijuHenka")
-    public CheckBoxList getChkKakoTaijuHenka() {
-        return chkKakoTaijuHenka;
-    }
-
-    /*
-     * setchkKakoTaijuHenka
-     * @param chkKakoTaijuHenka chkKakoTaijuHenka
-     */
-    @JsonProperty("chkKakoTaijuHenka")
-    public void setChkKakoTaijuHenka(CheckBoxList chkKakoTaijuHenka) {
-        this.chkKakoTaijuHenka = chkKakoTaijuHenka;
     }
 
     /*
@@ -281,21 +281,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkMigiJoshiMahiTeido
-     * @return chkMigiJoshiMahiTeido
+     * getradMigiJoshiMahiTeido
+     * @return radMigiJoshiMahiTeido
      */
-    @JsonProperty("chkMigiJoshiMahiTeido")
-    public CheckBoxList getChkMigiJoshiMahiTeido() {
-        return chkMigiJoshiMahiTeido;
+    @JsonProperty("radMigiJoshiMahiTeido")
+    public RadioButton getRadMigiJoshiMahiTeido() {
+        return radMigiJoshiMahiTeido;
     }
 
     /*
-     * setchkMigiJoshiMahiTeido
-     * @param chkMigiJoshiMahiTeido chkMigiJoshiMahiTeido
+     * setradMigiJoshiMahiTeido
+     * @param radMigiJoshiMahiTeido radMigiJoshiMahiTeido
      */
-    @JsonProperty("chkMigiJoshiMahiTeido")
-    public void setChkMigiJoshiMahiTeido(CheckBoxList chkMigiJoshiMahiTeido) {
-        this.chkMigiJoshiMahiTeido = chkMigiJoshiMahiTeido;
+    @JsonProperty("radMigiJoshiMahiTeido")
+    public void setRadMigiJoshiMahiTeido(RadioButton radMigiJoshiMahiTeido) {
+        this.radMigiJoshiMahiTeido = radMigiJoshiMahiTeido;
     }
 
     /*
@@ -317,21 +317,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkHidariJoshiMahiTeido
-     * @return chkHidariJoshiMahiTeido
+     * getradHidariJoshiMahiTeido
+     * @return radHidariJoshiMahiTeido
      */
-    @JsonProperty("chkHidariJoshiMahiTeido")
-    public CheckBoxList getChkHidariJoshiMahiTeido() {
-        return chkHidariJoshiMahiTeido;
+    @JsonProperty("radHidariJoshiMahiTeido")
+    public RadioButton getRadHidariJoshiMahiTeido() {
+        return radHidariJoshiMahiTeido;
     }
 
     /*
-     * setchkHidariJoshiMahiTeido
-     * @param chkHidariJoshiMahiTeido chkHidariJoshiMahiTeido
+     * setradHidariJoshiMahiTeido
+     * @param radHidariJoshiMahiTeido radHidariJoshiMahiTeido
      */
-    @JsonProperty("chkHidariJoshiMahiTeido")
-    public void setChkHidariJoshiMahiTeido(CheckBoxList chkHidariJoshiMahiTeido) {
-        this.chkHidariJoshiMahiTeido = chkHidariJoshiMahiTeido;
+    @JsonProperty("radHidariJoshiMahiTeido")
+    public void setRadHidariJoshiMahiTeido(RadioButton radHidariJoshiMahiTeido) {
+        this.radHidariJoshiMahiTeido = radHidariJoshiMahiTeido;
     }
 
     /*
@@ -353,21 +353,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkMigiKashiMahiTeido
-     * @return chkMigiKashiMahiTeido
+     * getradMigiKashiMahiTeido
+     * @return radMigiKashiMahiTeido
      */
-    @JsonProperty("chkMigiKashiMahiTeido")
-    public CheckBoxList getChkMigiKashiMahiTeido() {
-        return chkMigiKashiMahiTeido;
+    @JsonProperty("radMigiKashiMahiTeido")
+    public RadioButton getRadMigiKashiMahiTeido() {
+        return radMigiKashiMahiTeido;
     }
 
     /*
-     * setchkMigiKashiMahiTeido
-     * @param chkMigiKashiMahiTeido chkMigiKashiMahiTeido
+     * setradMigiKashiMahiTeido
+     * @param radMigiKashiMahiTeido radMigiKashiMahiTeido
      */
-    @JsonProperty("chkMigiKashiMahiTeido")
-    public void setChkMigiKashiMahiTeido(CheckBoxList chkMigiKashiMahiTeido) {
-        this.chkMigiKashiMahiTeido = chkMigiKashiMahiTeido;
+    @JsonProperty("radMigiKashiMahiTeido")
+    public void setRadMigiKashiMahiTeido(RadioButton radMigiKashiMahiTeido) {
+        this.radMigiKashiMahiTeido = radMigiKashiMahiTeido;
     }
 
     /*
@@ -389,21 +389,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkHidariKashiMahiTeido
-     * @return chkHidariKashiMahiTeido
+     * getradHidariKashiMahiTeido
+     * @return radHidariKashiMahiTeido
      */
-    @JsonProperty("chkHidariKashiMahiTeido")
-    public CheckBoxList getChkHidariKashiMahiTeido() {
-        return chkHidariKashiMahiTeido;
+    @JsonProperty("radHidariKashiMahiTeido")
+    public RadioButton getRadHidariKashiMahiTeido() {
+        return radHidariKashiMahiTeido;
     }
 
     /*
-     * setchkHidariKashiMahiTeido
-     * @param chkHidariKashiMahiTeido chkHidariKashiMahiTeido
+     * setradHidariKashiMahiTeido
+     * @param radHidariKashiMahiTeido radHidariKashiMahiTeido
      */
-    @JsonProperty("chkHidariKashiMahiTeido")
-    public void setChkHidariKashiMahiTeido(CheckBoxList chkHidariKashiMahiTeido) {
-        this.chkHidariKashiMahiTeido = chkHidariKashiMahiTeido;
+    @JsonProperty("radHidariKashiMahiTeido")
+    public void setRadHidariKashiMahiTeido(RadioButton radHidariKashiMahiTeido) {
+        this.radHidariKashiMahiTeido = radHidariKashiMahiTeido;
     }
 
     /*
@@ -461,21 +461,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getSonotaMahiTeido
-     * @return SonotaMahiTeido
+     * getradSonotaMahiTeido
+     * @return radSonotaMahiTeido
      */
-    @JsonProperty("SonotaMahiTeido")
-    public CheckBoxList getSonotaMahiTeido() {
-        return SonotaMahiTeido;
+    @JsonProperty("radSonotaMahiTeido")
+    public RadioButton getRadSonotaMahiTeido() {
+        return radSonotaMahiTeido;
     }
 
     /*
-     * setSonotaMahiTeido
-     * @param SonotaMahiTeido SonotaMahiTeido
+     * setradSonotaMahiTeido
+     * @param radSonotaMahiTeido radSonotaMahiTeido
      */
-    @JsonProperty("SonotaMahiTeido")
-    public void setSonotaMahiTeido(CheckBoxList SonotaMahiTeido) {
-        this.SonotaMahiTeido = SonotaMahiTeido;
+    @JsonProperty("radSonotaMahiTeido")
+    public void setRadSonotaMahiTeido(RadioButton radSonotaMahiTeido) {
+        this.radSonotaMahiTeido = radSonotaMahiTeido;
     }
 
     /*
@@ -533,21 +533,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkKinryokuTeikaTeido
-     * @return chkKinryokuTeikaTeido
+     * getradKinryokuTeikaTeido
+     * @return radKinryokuTeikaTeido
      */
-    @JsonProperty("chkKinryokuTeikaTeido")
-    public CheckBoxList getChkKinryokuTeikaTeido() {
-        return chkKinryokuTeikaTeido;
+    @JsonProperty("radKinryokuTeikaTeido")
+    public RadioButton getRadKinryokuTeikaTeido() {
+        return radKinryokuTeikaTeido;
     }
 
     /*
-     * setchkKinryokuTeikaTeido
-     * @param chkKinryokuTeikaTeido chkKinryokuTeikaTeido
+     * setradKinryokuTeikaTeido
+     * @param radKinryokuTeikaTeido radKinryokuTeikaTeido
      */
-    @JsonProperty("chkKinryokuTeikaTeido")
-    public void setChkKinryokuTeikaTeido(CheckBoxList chkKinryokuTeikaTeido) {
-        this.chkKinryokuTeikaTeido = chkKinryokuTeikaTeido;
+    @JsonProperty("radKinryokuTeikaTeido")
+    public void setRadKinryokuTeikaTeido(RadioButton radKinryokuTeikaTeido) {
+        this.radKinryokuTeikaTeido = radKinryokuTeikaTeido;
     }
 
     /*
@@ -605,21 +605,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkKansetsuKoshukuTeido
-     * @return chkKansetsuKoshukuTeido
+     * getradKansetsuKoshukuTeido
+     * @return radKansetsuKoshukuTeido
      */
-    @JsonProperty("chkKansetsuKoshukuTeido")
-    public CheckBoxList getChkKansetsuKoshukuTeido() {
-        return chkKansetsuKoshukuTeido;
+    @JsonProperty("radKansetsuKoshukuTeido")
+    public RadioButton getRadKansetsuKoshukuTeido() {
+        return radKansetsuKoshukuTeido;
     }
 
     /*
-     * setchkKansetsuKoshukuTeido
-     * @param chkKansetsuKoshukuTeido chkKansetsuKoshukuTeido
+     * setradKansetsuKoshukuTeido
+     * @param radKansetsuKoshukuTeido radKansetsuKoshukuTeido
      */
-    @JsonProperty("chkKansetsuKoshukuTeido")
-    public void setChkKansetsuKoshukuTeido(CheckBoxList chkKansetsuKoshukuTeido) {
-        this.chkKansetsuKoshukuTeido = chkKansetsuKoshukuTeido;
+    @JsonProperty("radKansetsuKoshukuTeido")
+    public void setRadKansetsuKoshukuTeido(RadioButton radKansetsuKoshukuTeido) {
+        this.radKansetsuKoshukuTeido = radKansetsuKoshukuTeido;
     }
 
     /*
@@ -677,21 +677,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkKansetsuItamiTeido
-     * @return chkKansetsuItamiTeido
+     * getradKansetsuItamiTeido
+     * @return radKansetsuItamiTeido
      */
-    @JsonProperty("chkKansetsuItamiTeido")
-    public CheckBoxList getChkKansetsuItamiTeido() {
-        return chkKansetsuItamiTeido;
+    @JsonProperty("radKansetsuItamiTeido")
+    public RadioButton getRadKansetsuItamiTeido() {
+        return radKansetsuItamiTeido;
     }
 
     /*
-     * setchkKansetsuItamiTeido
-     * @param chkKansetsuItamiTeido chkKansetsuItamiTeido
+     * setradKansetsuItamiTeido
+     * @param radKansetsuItamiTeido radKansetsuItamiTeido
      */
-    @JsonProperty("chkKansetsuItamiTeido")
-    public void setChkKansetsuItamiTeido(CheckBoxList chkKansetsuItamiTeido) {
-        this.chkKansetsuItamiTeido = chkKansetsuItamiTeido;
+    @JsonProperty("radKansetsuItamiTeido")
+    public void setRadKansetsuItamiTeido(RadioButton radKansetsuItamiTeido) {
+        this.radKansetsuItamiTeido = radKansetsuItamiTeido;
     }
 
     /*
@@ -839,21 +839,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkJokusoTeido
-     * @return chkJokusoTeido
+     * getradJokusoTeido
+     * @return radJokusoTeido
      */
-    @JsonProperty("chkJokusoTeido")
-    public CheckBoxList getChkJokusoTeido() {
-        return chkJokusoTeido;
+    @JsonProperty("radJokusoTeido")
+    public RadioButton getRadJokusoTeido() {
+        return radJokusoTeido;
     }
 
     /*
-     * setchkJokusoTeido
-     * @param chkJokusoTeido chkJokusoTeido
+     * setradJokusoTeido
+     * @param radJokusoTeido radJokusoTeido
      */
-    @JsonProperty("chkJokusoTeido")
-    public void setChkJokusoTeido(CheckBoxList chkJokusoTeido) {
-        this.chkJokusoTeido = chkJokusoTeido;
+    @JsonProperty("radJokusoTeido")
+    public void setRadJokusoTeido(RadioButton radJokusoTeido) {
+        this.radJokusoTeido = radJokusoTeido;
     }
 
     /*
@@ -911,21 +911,21 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getchkSonotaHifuShikkanTeido
-     * @return chkSonotaHifuShikkanTeido
+     * getradSonotaHifuShikkanTeido
+     * @return radSonotaHifuShikkanTeido
      */
-    @JsonProperty("chkSonotaHifuShikkanTeido")
-    public CheckBoxList getChkSonotaHifuShikkanTeido() {
-        return chkSonotaHifuShikkanTeido;
+    @JsonProperty("radSonotaHifuShikkanTeido")
+    public RadioButton getRadSonotaHifuShikkanTeido() {
+        return radSonotaHifuShikkanTeido;
     }
 
     /*
-     * setchkSonotaHifuShikkanTeido
-     * @param chkSonotaHifuShikkanTeido chkSonotaHifuShikkanTeido
+     * setradSonotaHifuShikkanTeido
+     * @param radSonotaHifuShikkanTeido radSonotaHifuShikkanTeido
      */
-    @JsonProperty("chkSonotaHifuShikkanTeido")
-    public void setChkSonotaHifuShikkanTeido(CheckBoxList chkSonotaHifuShikkanTeido) {
-        this.chkSonotaHifuShikkanTeido = chkSonotaHifuShikkanTeido;
+    @JsonProperty("radSonotaHifuShikkanTeido")
+    public void setRadSonotaHifuShikkanTeido(RadioButton radSonotaHifuShikkanTeido) {
+        this.radSonotaHifuShikkanTeido = radSonotaHifuShikkanTeido;
     }
 
     // </editor-fold>

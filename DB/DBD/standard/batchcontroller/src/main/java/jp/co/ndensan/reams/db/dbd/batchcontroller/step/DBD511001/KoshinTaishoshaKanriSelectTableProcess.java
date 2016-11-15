@@ -293,7 +293,7 @@ public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<Kos
         if (条件指定.equals(parameter.get前回以降の未処理分())) {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
             entity.setSubGyomuCode(SubGyomuCode.DBD介護受給);
-            entity.setShichosonCode(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_());
+            entity.setShichosonCode(parameter.get市町村コード());
             entity.setShoriName(ShoriName.更新申請者管理.get名称());
             entity.setShoriEdaban(処理枝番);
             entity.setNendo(get年度(parameter.get年度()));

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class BatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,9 +28,9 @@ public class BatchParameterDiv extends PanelBatchParameter {
     @JsonProperty("linNendo")
     private HorizontalLine linNendo;
     @JsonProperty("txtKijunYMD")
-    private TextBoxFlexibleDate txtKijunYMD;
+    private TextBoxDate txtKijunYMD;
     @JsonProperty("txtShotokuNendo")
-    private TextBoxFlexibleDate txtShotokuNendo;
+    private TextBoxDate txtShotokuNendo;
     @JsonProperty("linShosaiJoken")
     private HorizontalLine linShosaiJoken;
     @JsonProperty("radKyusochishaKubun")
@@ -95,7 +95,7 @@ public class BatchParameterDiv extends PanelBatchParameter {
      * @return txtKijunYMD
      */
     @JsonProperty("txtKijunYMD")
-    public TextBoxFlexibleDate getTxtKijunYMD() {
+    public TextBoxDate getTxtKijunYMD() {
         return txtKijunYMD;
     }
 
@@ -104,7 +104,7 @@ public class BatchParameterDiv extends PanelBatchParameter {
      * @param txtKijunYMD txtKijunYMD
      */
     @JsonProperty("txtKijunYMD")
-    public void setTxtKijunYMD(TextBoxFlexibleDate txtKijunYMD) {
+    public void setTxtKijunYMD(TextBoxDate txtKijunYMD) {
         this.txtKijunYMD = txtKijunYMD;
     }
 
@@ -113,7 +113,7 @@ public class BatchParameterDiv extends PanelBatchParameter {
      * @return txtShotokuNendo
      */
     @JsonProperty("txtShotokuNendo")
-    public TextBoxFlexibleDate getTxtShotokuNendo() {
+    public TextBoxDate getTxtShotokuNendo() {
         return txtShotokuNendo;
     }
 
@@ -122,7 +122,7 @@ public class BatchParameterDiv extends PanelBatchParameter {
      * @param txtShotokuNendo txtShotokuNendo
      */
     @JsonProperty("txtShotokuNendo")
-    public void setTxtShotokuNendo(TextBoxFlexibleDate txtShotokuNendo) {
+    public void setTxtShotokuNendo(TextBoxDate txtShotokuNendo) {
         this.txtShotokuNendo = txtShotokuNendo;
     }
 
