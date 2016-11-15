@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
-@SuppressWarnings ("PMD.UnusedPrivateField")
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuKaigoServicehiReportEntity {
 
     private HihokenshaNo 被保険者番号;
@@ -42,7 +42,7 @@ public class KogakuKaigoServicehiReportEntity {
     private RString 備考欄個人所得区分;
     private AtenaMeisho 名称;
     private Code 要介護認定状態区分コード;
-    private RString 旧措置者フラグ;
+    private boolean 旧措置者フラグ;
     private FlexibleDate 認定有効期間開始年月日;
     private FlexibleDate 認定有効期間終了年月日;
     private HokenshaNo 証記載保険者番号;

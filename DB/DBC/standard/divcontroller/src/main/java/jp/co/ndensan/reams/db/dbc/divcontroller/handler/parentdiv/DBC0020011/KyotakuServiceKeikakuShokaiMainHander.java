@@ -139,7 +139,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTodokedesha().getTxtTodokedeshaShimeiKana().setDomain(居宅給付計画届出.get届出者氏名カナ());
         }
-        if (居宅給付計画届出.get届出者関係区分().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出者関係区分())) {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().clearValue();
         } else {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(
@@ -168,7 +168,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         for (TaishoshaIchiranResult result : 対象情報一覧) {
             dgRiyoNentstsuIchiran_Row row = new dgRiyoNentstsuIchiran_Row();
             row.getRiyoYM().setValue(new RDate(result.get利用年月().toString()));
-            if (!result.get更新区分().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(result.get更新区分())) {
                 row.setKoshinKubun(KyufukanrihyoSakuseiKubun.toValue(result.get更新区分()).get名称());
             }
             row.getKoshinYMD().setValue(DateConverter.flexibleDateToRDate(result.get更新年月日()));

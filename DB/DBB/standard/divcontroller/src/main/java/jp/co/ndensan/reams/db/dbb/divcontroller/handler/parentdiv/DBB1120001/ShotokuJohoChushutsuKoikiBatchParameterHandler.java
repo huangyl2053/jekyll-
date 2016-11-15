@@ -172,8 +172,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、DBB112002 バッチパラメータ作成をします。
      *
-     * @return DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter
-     * 所得情報抽出・連携_バッチパラメータクラスです
+     * @return DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
     public DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter getBatchParamter_DBB112002() {
         ShotokuJohoChushutsuGamenParameter param = new ShotokuJohoChushutsuGamenParameter();
@@ -195,8 +194,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、DBB112004 バッチパラメータ作成をします。
      *
-     * @return DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter
-     * 所得情報抽出・連携_バッチパラメータクラスです
+     * @return DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
     public DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter getBatchParamter_DBB112004() {
         ShotokuJohoChushutsuGamenParameter param = new ShotokuJohoChushutsuGamenParameter();
@@ -204,7 +202,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunKoiki().get出力順ID()));
         List<SichousonEntity> list = new ArrayList<>();
         SichousonEntity entity = new SichousonEntity();
-        for (int i = 0; i < div.getDgShichosonIchiran().getClickedRowId(); i++) {
+        for (int i = 0; i <= div.getDgShichosonIchiran().getClickedRowId(); i++) {
             entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
             entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
             entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());

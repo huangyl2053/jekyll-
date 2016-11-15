@@ -198,7 +198,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         改頁項目リスト = new ArrayList<>();
         改頁項目名リスト = new ArrayList<>();
         出力順リスト = new ArrayList<>();
-        並び順 = get並び順(ReportIdDBC.DBC100064.getReportId(), parameter.get出力順ID());
+        並び順 = get並び順(ReportIdDBC.DBC100075.getReportId(), parameter.get出力順ID());
 
         RString 出力順 = MyBatisOrderByClauseCreator
                 .create(KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder.class, 並び順);
@@ -241,7 +241,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                     = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200088.getReportId().value()).addBreak(breaker).create();
             dBC200088SourceWriter = new ReportSourceWriter<>(dBC200088ReportWriter);
 
-            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                     UzUDE0831EucAccesslogFileType.Csv);
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(),
                     出力ファイル名);
@@ -446,12 +446,9 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter1);
             }
-        } else {
-            if (this.parameter.get申請書出力フラグ()) {
-                KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
-                dbc64Report.writeBy(dBC100064SourceWriter0);
-            }
-
+        } else if (this.parameter.get申請書出力フラグ()) {
+            KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
+            dbc64Report.writeBy(dBC100064SourceWriter0);
         }
 
     }

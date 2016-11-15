@@ -105,6 +105,7 @@ public class PrtMeisaiIchiranProcess extends BatchKeyBreakBase<TokubetsuChoshuIr
     private Association 地方公共団体;
     private List<RString> 出力項目リスト;
     private List<RString> 改頁項目リスト;
+    private List<RString> breakKeys;
 
     @BatchWriter
     private BatchReportWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> batchReportWriter;
@@ -118,6 +119,7 @@ public class PrtMeisaiIchiranProcess extends BatchKeyBreakBase<TokubetsuChoshuIr
 
         出力項目リスト = new ArrayList();
         改頁項目リスト = new ArrayList();
+        breakKeys = new ArrayList();
         manager = KariSanteiIdoFukaBatch.createInstance();
         if (parameter.get出力帳票一覧() != null
                 && !RString.isNullOrEmpty(parameter.get出力帳票一覧().get出力順ID())) {
@@ -146,7 +148,7 @@ public class PrtMeisaiIchiranProcess extends BatchKeyBreakBase<TokubetsuChoshuIr
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
         } else {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value())
-                    .addBreak(new PrtMeisaiIchiranProcessPageBreak(改頁項目リスト)).create();
+                    .addBreak(new PrtMeisaiIchiranProcessPageBreak(breakKeys)).create();
         }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
@@ -330,6 +332,7 @@ public class PrtMeisaiIchiranProcess extends BatchKeyBreakBase<TokubetsuChoshuIr
                 出力項目リスト.add(setSortItem.get項目名());
                 if (setSortItem.is改頁項目()) {
                     改頁項目リスト.add(setSortItem.get項目名());
+                    breakKeys.add(setSortItem.get項目ID());
                 }
             }
             i = i + INT_1;

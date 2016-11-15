@@ -67,7 +67,7 @@ public class SokujiFukaKouseiMainValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         項目に対する制約チェックValidate(validPairs);
         特徴対象者でないため期別金額設定不可チェックValidate(validPairs, 更正前後徴収方法);
-        特徴金額チェックValidate(validPairs);
+        特徴金額チェックValidate(validPairs, 更正前後徴収方法);
         return validPairs;
     }
 
@@ -215,7 +215,7 @@ public class SokujiFukaKouseiMainValidationHandler {
         }
     }
 
-    private void 特徴金額チェックValidate(ValidationMessageControlPairs validPairs) {
+    private void 特徴金額チェックValidate(ValidationMessageControlPairs validPairs, KoseiZengoChoshuHoho 更正前後徴収方法) {
         if (is特殊処理()) {
             return;
         }
@@ -226,31 +226,33 @@ public class SokujiFukaKouseiMainValidationHandler {
                 : tablePanel.getTxtTokuchoKoseiGo12().getValue();
         Decimal 納付額_６期 = tablePanel.getTxtTokuchoKoseiGo02().getValue() == null ? Decimal.ZERO
                 : tablePanel.getTxtTokuchoKoseiGo02().getValue();
-        if (納付額_４期.subtract(納付額_５期).abs().compareTo(円_３００) > 0) {
-            validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
-                    DbbErrorMessages.特徴期別額不正_300円以上の差)));
-        }
         if (納付額_５期.compareTo(納付額_４期) > 0) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
                     DbbErrorMessages.特徴期別額不正_大小関係)));
         }
-        if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue10())
-                && !ZERO.equals(div.getTokuchoNofugakuValue10())
-                && 納付額_４期.compareTo(Decimal.ZERO) == 0) {
-            validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
-                    DbbErrorMessages.特徴期別額不正_特徴0円, FOUR.toString())));
-        }
-        if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue12())
-                && !ZERO.equals(div.getTokuchoNofugakuValue12())
-                && 納付額_５期.compareTo(Decimal.ZERO) == 0) {
-            validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
-                    DbbErrorMessages.特徴期別額不正_特徴0円, FIVE.toString())));
-        }
-        if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue02())
-                && !ZERO.equals(div.getTokuchoNofugakuValue02())
-                && 納付額_６期.compareTo(Decimal.ZERO) == 0) {
-            validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
-                    DbbErrorMessages.特徴期別額不正_特徴0円, SIX.toString())));
+        if (null != 更正前後徴収方法.get更正後() && !RString.isNullOrEmpty(更正前後徴収方法.get更正後().get特別徴収停止事由コード())) {
+            if (納付額_４期.subtract(納付額_５期).abs().compareTo(円_３００) > 0) {
+                validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
+                        DbbErrorMessages.特徴期別額不正_300円以上の差)));
+            }
+            if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue10())
+                    && !ZERO.equals(div.getTokuchoNofugakuValue10())
+                    && 納付額_４期.compareTo(Decimal.ZERO) == 0) {
+                validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
+                        DbbErrorMessages.特徴期別額不正_特徴0円, FOUR.toString())));
+            }
+            if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue12())
+                    && !ZERO.equals(div.getTokuchoNofugakuValue12())
+                    && 納付額_５期.compareTo(Decimal.ZERO) == 0) {
+                validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
+                        DbbErrorMessages.特徴期別額不正_特徴0円, FIVE.toString())));
+            }
+            if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue02())
+                    && !ZERO.equals(div.getTokuchoNofugakuValue02())
+                    && 納付額_６期.compareTo(Decimal.ZERO) == 0) {
+                validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
+                        DbbErrorMessages.特徴期別額不正_特徴0円, SIX.toString())));
+            }
         }
     }
 

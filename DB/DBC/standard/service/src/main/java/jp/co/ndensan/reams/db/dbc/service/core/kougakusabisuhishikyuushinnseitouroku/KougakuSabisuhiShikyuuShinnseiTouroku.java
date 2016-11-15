@@ -281,6 +281,8 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
             給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
                     set交換情報識別番号(定値_交換情報識別番号8).build();
         }
+        給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().set公費１負担番号(RString.EMPTY)
+                .set公費２負担番号(RString.EMPTY).set公費３負担番号(RString.EMPTY).build();
         if (EntityDataState.Added.equals(給付実績編集用entity.toEntity().getState())) {
             給付実績高額介護サービス費Dac.save(給付実績編集用entity.toEntity());
         }

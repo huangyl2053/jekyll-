@@ -98,9 +98,10 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
             }
         }
         if (sonotashiryoBusiness != null) {
-            if (sonotashiryoBusiness.getその他資料() != null && 0 < sonotashiryoBusiness.getその他資料().size()) {
-                for (int i = 0; i < sonotashiryoBusiness.getその他資料().size(); i++) {
-                    IJimuShinsakaishiryoA3Editor editor2 = new JimuShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, i);
+            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
+            if (ファイルPathList != null && 0 < ファイルPathList.size()) {
+                for (int i = 0; i < (int) Math.ceil((double) ファイルPathList.size() / 2); i++) {
+                    IJimuShinsakaishiryoA3Editor editor2 = new JimuShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, i + 1);
                     IJimuShinsakaishiryoA3Builder builder2 = new JimuShinsakaishiryoA3Builder(editor2);
                     reportSourceWriter.writeLine(builder2);
                 }

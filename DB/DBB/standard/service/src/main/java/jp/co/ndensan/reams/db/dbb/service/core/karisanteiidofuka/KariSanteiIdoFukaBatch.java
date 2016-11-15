@@ -976,14 +976,22 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         FlexibleDate 開始日 = new FlexibleDate(調定年度.toDateString().concat(RSTRING_0401).toString());
         if (生保開始日 == null || 生保開始日.isEmpty()) {
             賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
-        } else if (生保廃止日 == null || 生保廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
-            賦課根拠.setSeihoStartYMD(開始日);
+        } else {
+            if (生保廃止日 == null || 生保廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
+                賦課根拠.setSeihoStartYMD(開始日);
+            } else {
+                賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
+            }
         }
         賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
         if (老年開始日 == null || 老年開始日.isEmpty()) {
             賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
-        } else if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
-            賦課根拠.setRoreiNenkinStartYMD(開始日);
+        } else {
+            if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(老年廃止日)) {
+                賦課根拠.setRoreiNenkinStartYMD(開始日);
+            } else {
+                賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
+            }
         }
         賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
         if (!RString.isNullOrEmpty(課税区分)) {

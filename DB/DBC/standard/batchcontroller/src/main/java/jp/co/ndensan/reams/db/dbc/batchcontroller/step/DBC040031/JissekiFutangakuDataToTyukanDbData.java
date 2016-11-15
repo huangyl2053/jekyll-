@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 中間DBデータTO実績基本データプロセスです。
+ * 実績基本データTO中間DBデータプロセスです。
  *
  * @reamsid_L DBC-2320-050 yuanzhenxia
  */

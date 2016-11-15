@@ -87,4 +87,5 @@ public class ShokanKetteiTsuchiShoMeisaiTempTableEntity
     private RString kinyuKikanMeisi;
     private RString kinyuKikanShitenMeisi;
     private RString yoshikiMeisho;
+    private int kozaId;
 }

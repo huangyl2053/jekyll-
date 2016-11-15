@@ -39,7 +39,7 @@
             SELECT 
             * 
             FROM 
-            rgdb."DbT1001HihokenshaDaicho" AS B
+            rgdb."DbV1001HihokenshaDaicho" AS B
             WHERE
                 B."shikakuSoshitsuYMD" = ''
             OR  #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD"

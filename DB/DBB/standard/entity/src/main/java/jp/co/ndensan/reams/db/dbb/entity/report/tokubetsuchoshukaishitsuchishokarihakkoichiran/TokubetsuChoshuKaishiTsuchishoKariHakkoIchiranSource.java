@@ -85,16 +85,49 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IRe
     public RString listLower_10;
     @ReportItem(name = "listLower_11", length = 7, order = 34)
     public RString listLower_11;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-
     /**
      * TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSourceのenum
      */
+    @ReportItem(name = "atesaki_choikiCode", length = 100, order = 35)
+    public RString atesaki_choikiCode;
+    @ReportItem(name = "atesaki_banchiCode1", length = 100, order = 36)
+    public RString atesaki_banchiCode1;
+    @ReportItem(name = "atesaki_banchiCode2", length = 100, order = 37)
+    public RString atesaki_banchiCode2;
+    @ReportItem(name = "atesaki_banchiCode3", length = 100, order = 38)
+    public RString atesaki_banchiCode3;
+    @ReportItem(name = "atesaki_banchiCode4", length = 100, order = 39)
+    public RString atesaki_banchiCode4;
+    @ReportItem(name = "atesaki_gyoseikuCode", length = 100, order = 40)
+    public RString atesaki_gyoseikuCode;
+    @ReportItem(name = "atesaki_chikuCode1", length = 100, order = 41)
+    public RString atesaki_chikuCode1;
+    @ReportItem(name = "atesaki_chikuCode2", length = 100, order = 42)
+    public RString atesaki_chikuCode2;
+    @ReportItem(name = "atesaki_chikuCode3", length = 100, order = 43)
+    public RString atesaki_chikuCode3;
+    @ReportItem(name = "atena_shikibetsuCode", length = 100, order = 44)
+    public RString atena_shikibetsuCode;
+    @ReportItem(name = "atena_kanaMeisho", length = 100, order = 45)
+    public RString atena_kanaMeisho;
+    @ReportItem(name = "dbT2015KeisangoJoho_fukaShichosonCode", length = 100, order = 46)
+    public RString dbT2015KeisangoJoho_fukaShichosonCode;
+    @ReportItem(name = "nenkinTokuchoKaifuJoho_nenkinCode", length = 100, order = 47)
+    public RString nenkinTokuchoKaifuJoho_nenkinCode;
+    @ReportItem(name = "dbT2015KeisangoJoho_seihofujoShurui", length = 100, order = 48)
+    public RString dbT2015KeisangoJoho_seihofujoShurui;
+    @ReportItem(name = "caT0714SeikyuHoho_nokumiCode", length = 100, order = 49)
+    public RString caT0714SeikyuHoho_nokumiCode;
+    @ReportItem(name = "dbT2015KeisangoJoho_choteiJiyu1", length = 100, order = 50)
+    public RString dbT2015KeisangoJoho_choteiJiyu1;
+
     public enum ReportSourceFields {
 
         printTimeStamp,
@@ -130,6 +163,22 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IRe
         listLower_8,
         listLower_9,
         listLower_10,
-        listLower_11
+        listLower_11,
+        atesaki_choikiCode,
+        atesaki_banchiCode1,
+        atesaki_banchiCode2,
+        atesaki_banchiCode3,
+        atesaki_banchiCode4,
+        atesaki_gyoseikuCode,
+        atesaki_chikuCode1,
+        atesaki_chikuCode2,
+        atesaki_chikuCode3,
+        atena_shikibetsuCode,
+        atena_kanaMeisho,
+        dbT2015KeisangoJoho_fukaShichosonCode,
+        nenkinTokuchoKaifuJoho_nenkinCode,
+        dbT2015KeisangoJoho_seihofujoShurui,
+        caT0714SeikyuHoho_nokumiCode,
+        dbT2015KeisangoJoho_choteiJiyu1
     }
 }

@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.FukushiyoguShohin;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogushohin.FukushiyoguShohinInputGuideManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -133,6 +135,8 @@ public class FukushiyoguShohinInputGuideHandler {
                 dgFukushiyoguShohin.setHinmokuCode(nullToEmpty(jigyoshaInput.get品目コード()));
                 dgFukushiyoguShohinList.add(dgFukushiyoguShohin);
             }
+        } else {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
         return dgFukushiyoguShohinList;
     }

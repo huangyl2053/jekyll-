@@ -603,10 +603,10 @@ public class ShinsakaiKekkaToroku {
     public ResponseData<ShinsakaiKekkaTorokuDiv> onBefore_btnNinteiChosaJokyoShokai(ShinsakaiKekkaTorokuDiv div) {
         if (!div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()) {
             if (div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().size() == 1) {
-                ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().get(0).getKoroshoIfShikibetsuCode());
+                div.setHdnShinseishoKanriNo(div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().get(0).getShinseishoKanriNo());
 
             } else {
-                ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getKoroshoIfShikibetsuCode());
+                div.setHdnShinseishoKanriNo(div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().get(0).getShinseishoKanriNo());
             }
         }
 

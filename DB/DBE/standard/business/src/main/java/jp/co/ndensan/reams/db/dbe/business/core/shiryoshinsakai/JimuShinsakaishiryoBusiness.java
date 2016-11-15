@@ -382,17 +382,17 @@ public class JimuShinsakaishiryoBusiness {
     private RString get要介護状態区分(Code 厚労省IF識別コード, Code 状態区分コード) {
         if (状態区分コード != null && !状態区分コード.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
-                return YokaigoJotaiKubun99.toValue(状態区分コード.value()).get名称();
+                return YokaigoJotaiKubun99.toValue(状態区分コード.value()).get略称();
             }
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
-                return YokaigoJotaiKubun02.toValue(状態区分コード.value()).get名称();
+                return YokaigoJotaiKubun02.toValue(状態区分コード.value()).get略称();
             }
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
-                return YokaigoJotaiKubun06.toValue(状態区分コード.value()).get名称();
+                return YokaigoJotaiKubun06.toValue(状態区分コード.value()).get略称();
             }
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-                return YokaigoJotaiKubun09.toValue(状態区分コード.value()).get名称();
+                return YokaigoJotaiKubun09.toValue(状態区分コード.value()).get略称();
             }
         }
         return RString.EMPTY;
@@ -404,14 +404,18 @@ public class JimuShinsakaishiryoBusiness {
         if (一次判定結果コード != null && !一次判定結果コード.isEmpty()
                 && 厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
-                一次判定結果 = YokaigoJotaiKubun99.toValue(一次判定結果コード.getColumnValue()).get名称();
+                一次判定結果 = YokaigoJotaiKubun99.toValue(一次判定結果コード.getColumnValue()).get略称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
-                一次判定結果 = YokaigoJotaiKubun02.toValue(一次判定結果コード.getColumnValue()).get名称();
+                一次判定結果 = YokaigoJotaiKubun02.toValue(一次判定結果コード.getColumnValue()).get略称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
-                一次判定結果 = YokaigoJotaiKubun06.toValue(一次判定結果コード.getColumnValue()).get名称();
+                一次判定結果 = YokaigoJotaiKubun06.toValue(一次判定結果コード.getColumnValue()).get略称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-                一次判定結果 = YokaigoJotaiKubun09.toValue(一次判定結果コード.getColumnValue()).get名称();
+                一次判定結果 = YokaigoJotaiKubun09.toValue(一次判定結果コード.getColumnValue()).get略称();
+            }
+            if (一次判定結果コード_認知症加算 != null && !一次判定結果コード_認知症加算.isEmpty()
+                    && 一次判定結果コード.equals(一次判定結果コード_認知症加算)) {
+                return 一次判定結果;
             }
         }
         RString 一次判定結果_認知症加算 = get一次判定結果_認知症加算(厚労省IF識別コード, 一次判定結果コード_認知症加算);
@@ -432,14 +436,14 @@ public class JimuShinsakaishiryoBusiness {
         if (一次判定結果コード_認知症加算 != null && !一次判定結果コード_認知症加算.isEmpty()
                 && 厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
-                一次判定結果_認知症加算 = YokaigoJotaiKubun99.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
+                一次判定結果_認知症加算 = YokaigoJotaiKubun99.toValue(一次判定結果コード_認知症加算.getColumnValue()).get略称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
-                一次判定結果_認知症加算 = YokaigoJotaiKubun02.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
+                一次判定結果_認知症加算 = YokaigoJotaiKubun02.toValue(一次判定結果コード_認知症加算.getColumnValue()).get略称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
-                一次判定結果_認知症加算 = YokaigoJotaiKubun06.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
+                一次判定結果_認知症加算 = YokaigoJotaiKubun06.toValue(一次判定結果コード_認知症加算.getColumnValue()).get略称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-                一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
+                一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get略称();
             }
         }
         return 一次判定結果_認知症加算;

@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsa
 import jp.co.ndensan.reams.db.dbc.service.core.riyojokyotokeihyomeisailistsakusei.RiyoJokyoTokeihyoMeisaiListSakuseiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.service.core.chohyojushoeditor.ChohyoJushoEditor;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -47,9 +47,9 @@ public class DbWT1513HokenshaAtenaUpdateProcess extends BatchProcessBase<Hihoken
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoPSMSearchKeyBuilder key
-                = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+
         List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
         juminShubetsuList.add(JuminShubetsu.日本人);
         juminShubetsuList.add(JuminShubetsu.外国人);
@@ -63,9 +63,10 @@ public class DbWT1513HokenshaAtenaUpdateProcess extends BatchProcessBase<Hihoken
         juminJotaiList.add(JuminJotai.転出者);
         juminJotaiList.add(JuminJotai.死亡者);
         key.set住民状態(juminJotaiList);
-        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         AtenaJohoMybatisParameter parameter = new AtenaJohoMybatisParameter();
-        parameter.setShikibetsuTaishoPSMSearchKey(shikibetsuTaishoPSMSearchKey);
+        parameter.setPsmShikibetsuTaisho(psmShikibetsuTaisho);
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter);
     }
 

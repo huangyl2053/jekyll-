@@ -67,8 +67,10 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
         source.shinsaYY = get年(business.get介護認定審査会開催年月日());
         source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
-        source.imgSonotashiryo1 = business.get左のその他資料イメージ(index);
-        source.imgSonotashiryo2 = business.get右のその他資料イメージ(index);
+        if (index != 0) {
+            source.imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
+            source.imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
+        }
 
         source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
 

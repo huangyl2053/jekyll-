@@ -131,7 +131,7 @@ public class KarisanteiIdoFukaPanelHandler {
      *
      * @return flag boolean
      */
-    public boolean initialize() {
+    public boolean initialize(List<TyouhyouResult> 帳票IDList) {
 
         RDate date = RDate.getNowDate();
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
@@ -155,7 +155,7 @@ public class KarisanteiIdoFukaPanelHandler {
         set帳票グループ(date);
         set抽出条件(調定年度);
         boolean flag = set処理状態(調定年度);
-        set帳票作成個別情報();
+        set帳票作成個別情報(帳票IDList);
         return flag;
     }
 
@@ -292,7 +292,7 @@ public class KarisanteiIdoFukaPanelHandler {
         }
     }
 
-    private void set帳票作成個別情報() {
+    private void set帳票作成個別情報(List<TyouhyouResult> 帳票IDList) {
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 仮算定の期月リスト = 月期対応取得_普徴.get期月リスト().filtered仮算定期間();
@@ -315,7 +315,6 @@ public class KarisanteiIdoFukaPanelHandler {
             }
         }
         ShutsuryokuKiKohoFactory kohoFactory = new ShutsuryokuKiKohoFactory(調定年度);
-        List<TyouhyouResult> 帳票IDList = new ArrayList<>();
         List<ShutsuryokuKiKoho> 出力期;
         get帳票ID(帳票IDList, idoFuka, 調定年度);
         if (!帳票IDList.isEmpty()) {
@@ -638,7 +637,7 @@ public class KarisanteiIdoFukaPanelHandler {
      *
      * @return バッチパラメータ
      */
-    public DBB015001_KarisanteiIdoFukaParameter getバッチパラメータ() {
+    public DBB015001_KarisanteiIdoFukaParameter getバッチパラメータ(List<TyouhyouResult> 帳票IDList) {
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
         KariSanteiIdoParameter parameter = new KariSanteiIdoParameter();
         FlexibleYear 調定年度 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getTxtChoteiNendo().getDomain();
@@ -666,7 +665,11 @@ public class KarisanteiIdoFukaPanelHandler {
         Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
         parameter.setバッチ起動フラグ(false);
         for (Map.Entry<RString, RString> entry : set) {
-            出力帳票一覧.add(new TyouhyouEntity(new ReportId(entry.getKey()), null, entry.getValue()));
+            for (TyouhyouResult 帳票Entity : 帳票IDList) {
+                if (帳票Entity.getEntity() != null && 帳票Entity.getEntity().get帳票分類ID().getColumnValue().equals(entry.getKey())) {
+                    出力帳票一覧.add(new TyouhyouEntity(new ReportId(entry.getKey()), 帳票Entity.getEntity().get帳票ID(), entry.getValue()));
+                }
+            }
             if (特徴開始通知書_仮算定.value().equals(entry.getKey())
                     || 仮算定額変更通知書.value().equals(entry.getKey())
                     || 納入通知書.value().equals(entry.getKey())

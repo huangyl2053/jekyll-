@@ -139,9 +139,13 @@ public class InsSetaiinShotokuHanteiMeisaiTmpProcess extends BatchProcessBase<Hi
         }
         if (!flag) {
             判定明細Entity.setShoboKubun(区分_1);
+        } else {
+            判定明細Entity.setShoboKubun(RString.EMPTY);
         }
         if (老齢情報Entity != null && 老齢情報Entity.getShikibetsuCode() != null) {
             判定明細Entity.setRoreiFukushi(区分_1);
+        } else {
+            判定明細Entity.setShoboKubun(RString.EMPTY);
         }
         if (被保生保老齢情報.get被保険者情報Entity() != null) {
             HihokenshaDaicho 被保険者情報 = new HihokenshaDaicho(被保生保老齢情報.get被保険者情報Entity());

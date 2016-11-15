@@ -25,7 +25,7 @@ public class CreateRiyojokyoMybatisParameter implements IMyBatisParameter {
     private RString 居宅利用率指定;
     private RString 開始居宅利用率;
     private RString 終了居宅利用率;
-
+    private RString 利用実績区分;
     private RString 訪問利用率指定;
     private RString 終了訪問利用率;
     private RString 開始訪問利用率;
@@ -47,13 +47,13 @@ public class CreateRiyojokyoMybatisParameter implements IMyBatisParameter {
     private boolean is明細;
     private boolean is事業者名;
     private boolean is給付事業者名;
-    private final RString 集計 = RiyojokyoTokeihyo_DataKubun.合計.getコード();
-    private final RString 明細 = RiyojokyoTokeihyo_DataKubun.明細.getコード();
+    private final RString shukei = RiyojokyoTokeihyo_DataKubun.合計.getコード();
+    private final RString meisai = RiyojokyoTokeihyo_DataKubun.明細.getコード();
     private final RString isTrue = new RString("1");
     private final RString isFalse = new RString("0");
     // TODO
 //    private final RString 準拠しない = KihonJohoJunkyoKubun.準拠しない.getコード();
-    private final RString 準拠しない = new RString("0");
+    private final RString junkyoShinai = new RString("0");
 
     /**
      * コンストラクタです。
@@ -81,12 +81,13 @@ public class CreateRiyojokyoMybatisParameter implements IMyBatisParameter {
      * @param is明細 明細合計出力区分＝2：明細
      * @param is事業者名 事業者名取得
      * @param is給付事業者名 給付事業者名取得
+     * @param 利用実績区分 利用実績区分
      */
     public CreateRiyojokyoMybatisParameter(RString 居宅利用率指定, RString 開始居宅利用率, RString 終了居宅利用率,
             RString 訪問利用率指定, RString 終了訪問利用率, RString 開始訪問利用率, RString 市町村コード, RString 旧市町村コード,
             RString 地区指定, List<RString> 選択地区リスト, boolean has訪問利用率, boolean has居宅利用率, boolean has市町村コード,
             boolean has旧市町村コード, boolean has町域, boolean has行政区, boolean has地区1, boolean has地区2,
-            boolean has地区3, boolean is集計, boolean is明細, boolean is事業者名, boolean is給付事業者名) {
+            boolean has地区3, boolean is集計, boolean is明細, boolean is事業者名, boolean is給付事業者名, RString 利用実績区分) {
         this.居宅利用率指定 = 居宅利用率指定;
         this.開始居宅利用率 = 開始居宅利用率;
         this.終了居宅利用率 = 終了居宅利用率;
@@ -110,6 +111,7 @@ public class CreateRiyojokyoMybatisParameter implements IMyBatisParameter {
         this.is明細 = is明細;
         this.is事業者名 = is事業者名;
         this.is給付事業者名 = is給付事業者名;
+        this.利用実績区分 = 利用実績区分;
     }
 
     /**

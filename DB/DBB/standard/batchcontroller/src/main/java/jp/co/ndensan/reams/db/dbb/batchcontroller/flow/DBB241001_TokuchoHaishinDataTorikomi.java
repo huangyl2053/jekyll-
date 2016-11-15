@@ -37,7 +37,6 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
     private static final String 一覧表の出力および年金特徴回付情報の登録及び件数表の出力 = "nenkinTokuchoCsvOutputProcess";
     private static final String バッチ特徴分配集約を呼び出し = "doNenkinTokuchoKaikeiHikitsugi";
     private static final RString BATCH_ID = new RString("UEXT00030_NenkinTokuchoKaikeiHikitsugi");
-    private int index = 0;
     private RString filePath;
     private RString fileName;
     private FlexibleYearMonth 対象年月 = FlexibleYearMonth.EMPTY;
@@ -47,7 +46,6 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
         getParameter().setShoriYMDHM(RDateTime.now());
         if (!getParameter().getSharedFileEntryDescriptorList().isEmpty() && getParameter().getSharedFileEntryDescriptorList().size() > 0) {
             for (int i = 0; i < getParameter().getSharedFileEntryDescriptorList().size(); i++) {
-                index = i;
                 getFilePath(getParameter().getSharedFileEntryDescriptorList().get(i));
                 executeStep(取り込みファイルデータを一時テーブルに登録);
                 executeStep(一覧表の出力および年金特徴回付情報の登録及び件数表の出力);
@@ -115,16 +113,12 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
     }
 
     private TokuchoHaishinDataTorikomiProcessParameter getProcessParameter() {
-        RDateTime fileID = SharedFileEntryDescriptor.fromString((getParameter().getSharedFileEntryDescriptorList().get(this.index))
-                .toString()).getSharedFileId();
-        return getParameter().toProcessParameter(fileName, fileID, filePath);
+        return getParameter().toProcessParameter(fileName);
     }
 
     private UEXT00010NenkinTokuchoJohoTorikomiProcessParameter
             toUEXT00010NenkinTokuchoJohoTorikomiProcessParameter() {
-        RDateTime fileID = SharedFileEntryDescriptor.fromString((getParameter().getSharedFileEntryDescriptorList().get(this.index))
-                .toString()).getSharedFileId();
-        return new UEXT00010NenkinTokuchoJohoTorikomiProcessParameter(fileName, fileID, null, null, null, null, null,
+        return new UEXT00010NenkinTokuchoJohoTorikomiProcessParameter(null, null, null, null, null, null, null,
                 filePath);
     }
 }

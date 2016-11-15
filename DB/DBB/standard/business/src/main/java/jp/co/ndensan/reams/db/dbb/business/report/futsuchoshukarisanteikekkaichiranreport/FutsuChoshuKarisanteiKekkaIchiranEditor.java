@@ -330,7 +330,7 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
                 }
             } else {
                 Decimal 月処理区分 = new Decimal(月処理区分list.get(i).toString());
-                Decimal 普徴期別金額 = 普徴期別金額list.get(i);
+                Decimal 普徴期別金額 = 普徴期別金額list.get(i) == null ? Decimal.ZERO : 普徴期別金額list.get(i);
                 if (月処理区分.compareTo(月処理区分_5) <= 0
                         && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
                     賦課納期数++;

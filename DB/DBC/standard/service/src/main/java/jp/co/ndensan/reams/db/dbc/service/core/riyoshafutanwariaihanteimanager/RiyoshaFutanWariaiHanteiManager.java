@@ -486,7 +486,7 @@ public class RiyoshaFutanWariaiHanteiManager {
         Collections.sort(利用者負担割合明細Tempのマージデータ, new Comparator<RiyoshaFutanWariaiMeisaiTempEntity>() {
             @Override
             public int compare(RiyoshaFutanWariaiMeisaiTempEntity o1, RiyoshaFutanWariaiMeisaiTempEntity o2) {
-                return new RString(o2.getEdaNo()).compareTo(new RString(o1.getEdaNo()));
+                return new RString(o1.getEdaNo()).compareTo(new RString(o2.getEdaNo()));
             }
         });
     }
@@ -496,7 +496,7 @@ public class RiyoshaFutanWariaiHanteiManager {
         Collections.sort(利用者負担割合根拠Tempのマージデータ, new Comparator<RiyoshaFutanWariaiKonkyoTempEntity>() {
             @Override
             public int compare(RiyoshaFutanWariaiKonkyoTempEntity o1, RiyoshaFutanWariaiKonkyoTempEntity o2) {
-                return new RString(o2.getEdaNo()).compareTo(new RString(o1.getEdaNo()));
+                return new RString(o1.getEdaNo()).compareTo(new RString(o2.getEdaNo()));
             }
         });
     }
@@ -658,9 +658,9 @@ public class RiyoshaFutanWariaiHanteiManager {
         Collections.sort(result, new Comparator<JukyushaDaicho>() {
             @Override
             public int compare(JukyushaDaicho o1, JukyushaDaicho o2) {
-                int flag = o2.get履歴番号().compareTo(o1.get履歴番号());
+                int flag = o1.get履歴番号().compareTo(o2.get履歴番号());
                 if (0 == flag) {
-                    flag = o2.get枝番().compareTo(o1.get枝番());
+                    flag = o1.get枝番().compareTo(o2.get枝番());
                 }
                 return flag;
             }
@@ -680,7 +680,7 @@ public class RiyoshaFutanWariaiHanteiManager {
         Collections.sort(result, new Comparator<SogoJigyoTaishosha>() {
             @Override
             public int compare(SogoJigyoTaishosha o1, SogoJigyoTaishosha o2) {
-                return new RString(o2.get履歴番号()).compareTo(new RString(o1.get履歴番号()));
+                return new RString(o1.get履歴番号()).compareTo(new RString(o2.get履歴番号()));
             }
         });
         return result;

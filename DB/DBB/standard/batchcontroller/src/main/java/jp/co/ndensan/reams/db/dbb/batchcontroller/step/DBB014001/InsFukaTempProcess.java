@@ -158,6 +158,8 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
 
     @Override
     protected void usualProcess(FukaKeisanEntity entity) {
+        set生活保護受給者Entity(entity);
+        set生活保護扶助種類EntityList(entity);
         set老齢の情報EntityList(entity);
         set生保の情報List(entity);
         set世帯員所得情報(entity);
@@ -425,12 +427,8 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                 生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
                 生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
                 set生保の情報(生活保護受給者RelateEntity);
-                set生活保護受給者Entity(entity);
                 生活保護扶助種類EntityList.clear();
-                set生活保護扶助種類EntityList(entity);
                 set識別コード(entity);
-            } else {
-                set生活保護扶助種類EntityList(entity);
             }
         }
     }

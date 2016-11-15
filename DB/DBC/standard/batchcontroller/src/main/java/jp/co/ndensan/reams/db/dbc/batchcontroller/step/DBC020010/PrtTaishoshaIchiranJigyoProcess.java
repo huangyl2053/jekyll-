@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.KogakuServicehiTaishoshaIchiranCSVE
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiReportEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakusogojigyoservicehitaishoshaichiran.KogakuSogoJigyoServiceHiTaishoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakusogojigyoservicehitaishoshaichiran.KogakuSogoJigyoServiceHiTaishoshaIchiranSource;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -222,7 +223,8 @@ public class PrtTaishoshaIchiranJigyoProcess extends BatchProcessBase<KogakuKaig
             csvEntity.setサービス提供年月(サービス提供年月.toDateString());
         }
         csvEntity.set被保険者名(getColumnValue(entity.get名称()));
-        csvEntity.set旧措置(entity.get旧措置者フラグ());
+        csvEntity.set旧措置(entity.is旧措置者フラグ() ? KyusochishaKubun.旧措置者.get名称()
+                : KyusochishaKubun.旧措置者以外.get名称());
         csvEntity.set要介護度(YokaigoJotaiKubun.toValue(getColumnValue(entity.get要介護認定状態区分コード())).get名称());
         FlexibleDate 認定有効開始年月日 = entity.get認定有効期間開始年月日();
         if (認定有効開始年月日 != null) {

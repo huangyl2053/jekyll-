@@ -42,9 +42,9 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
         RDateTime dateTime = RDate.getNowDateTime();
         source.printTimeStamp = dateTime.getDate()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
-                .concat("　")
+                .concat(" ")
                 .concat(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
-                .concat("　作成");
+                .concat(" 作成");
         if (基準収入額決定通知一覧表パラメータ.get市町村番号() != null) {
             source.shichosonNo = 基準収入額決定通知一覧表パラメータ.get市町村番号().value();
         }
