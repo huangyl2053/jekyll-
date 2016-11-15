@@ -82,6 +82,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString NUM1 = new RString("1");
     private static final RString NUM41 = new RString("41");
     private static final RString NUM44 = new RString("44");
+    private static final RString ANTE_MERIDIEM = new RString("AM");
+    private static final RString POST_MERIDIEM = new RString("PM");
+    private static final int NUM_0 = 0;
+    private static final int NUM_2 = 2;
+    private static final int NUM_4 = 4;
     private static final RString 証明書コード1 = new RString("21C1");
     private static final RString 証明書コード2 = new RString("21C2");
     private static final RString 保存確認 = new RString("保存確認");
@@ -129,8 +134,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
             ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                     getServiceShuruiCode(被保険者番号, new FlexibleYearMonth(div.
-                                    getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().
-                                    getValue().getYearMonth().toString()));
+                            getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().
+                            getValue().getYearMonth().toString()));
             RString 証明書コード = RString.EMPTY;
             if (NUM41.equals(サービス種類.value())) {
                 証明書コード = 証明書コード1;
@@ -152,7 +157,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             ViewStateHolder.put(ViewStateKeys.様式番号, 証明書コード);
             SokanbaraiShiharaiKekkaResult maeResult = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                     getShokanShiharaiKekkaAll(被保険者番号, ViewStateHolder.get(
-                                    ViewStateKeys.サービス提供年月, FlexibleYearMonth.class));
+                            ViewStateKeys.サービス提供年月, FlexibleYearMonth.class));
             if (maeResult != null) {
                 getHandler(div).登録前回支払結果情報(maeResult);
             }
@@ -228,7 +233,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().setSelectedKey(BLANK);
         ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getServiceShuruiCode(被保険者番号, new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                                getTxtTeikyoYM().getValue().getYearMonth().toString()));
+                        getTxtTeikyoYM().getValue().getYearMonth().toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtServiceCode().setValue(サービス種類.value());
         YoguKonyuhiShikyuShinseiPnlTotalParameter 画面データ = getHandler(div).set画面データ();
         ViewStateHolder.put(ViewStateKeys.明細データ, 画面データ);
@@ -286,10 +291,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             para.setEndYMD(new RDate(shshResult.get支払期間終了年月日().toString()));
         }
         if (shshResult.get支払窓口開始時間() != null && !shshResult.get支払窓口開始時間().isEmpty()) {
-            para.setStartHHMM(new RTime(shshResult.get支払窓口開始時間()));
+            para.setStartHHMM(setRTime(shshResult.get支払窓口開始時間()));
         }
         if (shshResult.get支払窓口終了時間() != null && !shshResult.get支払窓口終了時間().isEmpty()) {
-            para.setEndHHMM(new RTime(shshResult.get支払窓口終了時間()));
+            para.setEndHHMM(setRTime(shshResult.get支払窓口終了時間()));
         }
         para.setKozaId(shshResult.get口座ID());
         para.setShiharaiBasho(shshResult.get支払場所());
@@ -302,6 +307,20 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
                     para, 修正);
         }
+    }
+
+    private RTime setRTime(RString timeString) {
+        RStringBuilder tempBuilder = new RStringBuilder(timeString);
+        if (!RString.isNullOrEmpty(timeString) && timeString.length() != NUM_4) {
+            if (ANTE_MERIDIEM.equals(timeString.substring(NUM_0, NUM_2)) || POST_MERIDIEM.equals(timeString.substring(NUM_0, NUM_2))) {
+                tempBuilder.insert(NUM_2, BLANK);
+            } else {
+                while (tempBuilder.length() < NUM_4) {
+                    tempBuilder.append(BLANK);
+                }
+            }
+        }
+        return new RTime(tempBuilder.toRString());
     }
 
     /**
