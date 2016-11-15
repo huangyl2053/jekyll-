@@ -24,7 +24,7 @@ public class TokuteiShinryouHiCreateProcess extends BatchProcessBase<TokuteiShin
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaKyufujissekiDaichoMapper."
-            + "get所定疾患施設療養費");
+            + "get特定診療費");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 緊急療養List;
     private JukyushaKyufujissekiDaichoProcessParameter parameter;
