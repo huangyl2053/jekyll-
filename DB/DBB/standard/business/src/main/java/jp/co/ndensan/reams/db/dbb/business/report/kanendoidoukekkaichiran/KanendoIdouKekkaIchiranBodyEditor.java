@@ -323,7 +323,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
 
         FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
         FlexibleYearMonth 月割終了年月1 = entity.get月割終了年月1();
-        if (null != 月割開始年月1 && null != 月割終了年月1) {
+        if (null != 月割開始年月1 && !月割開始年月1.isEmpty() && null != 月割終了年月1 && !月割終了年月1.isEmpty()) {
             int 開始月1 = 月割開始年月1.getMonthValue();
             int 終了月1 = 月割終了年月1.getMonthValue();
             RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2).trimStart(CHAR_0);
@@ -332,7 +332,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
 
         FlexibleYearMonth 月割開始年月2 = entity.get月割開始年月2();
         FlexibleYearMonth 月割終了年月2 = entity.get月割終了年月2();
-        if (null != 月割開始年月2 && null != 月割終了年月2) {
+        if (null != 月割開始年月2 && !月割開始年月2.isEmpty() && null != 月割終了年月2 && !月割終了年月2.isEmpty()) {
             int 開始月2 = 月割開始年月2.getMonthValue();
             int 終了月2 = 月割終了年月2.getMonthValue();
             RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);
@@ -340,7 +340,6 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
                 set月別取得段階(item, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
             }
         }
-
     }
 
     private void set月別取得段階(KanendoIdouKekkaIchiranSource item, int 開始月, int 終了月,
