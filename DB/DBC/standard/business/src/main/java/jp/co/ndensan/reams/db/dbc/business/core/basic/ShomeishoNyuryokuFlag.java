@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShomeishoNyuryokuFlag {
+public class ShomeishoNyuryokuFlag implements Serializable {
 
     private RString サービス計画費_証明書入力済フラグ;
     private RString 基本情報_証明書入力済フラグ;
