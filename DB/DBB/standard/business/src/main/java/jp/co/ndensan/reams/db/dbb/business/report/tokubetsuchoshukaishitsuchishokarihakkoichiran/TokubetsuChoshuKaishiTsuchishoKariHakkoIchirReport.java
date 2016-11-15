@@ -62,6 +62,34 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
         this.entity = entity;
     }
 
+    /**
+     * コンストラクタです
+     *
+     * @param 編集後仮算定通知書共通情報entity EditedKariSanteiTsuchiShoKyotsu
+     * @param 調定年度 FlexibleYear
+     * @param 帳票作成日時 YMDHMS
+     * @param association Association
+     * @param 出力項目リスト List<RString>
+     * @param 改頁項目リスト List<RString>
+     * @param 連番 int
+     * @param entity TsuchishoDataTempEntity
+     */
+    public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
+            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
+            FlexibleYear 調定年度, YMDHMS 帳票作成日時, Association association,
+            List<RString> 出力項目リスト,
+            List<RString> 改頁項目リスト,
+            int 連番) {
+        this.編集後仮算定通知書共通情報entity = 編集後仮算定通知書共通情報entity;
+        this.調定年度 = 調定年度;
+        this.帳票作成日時 = 帳票作成日時;
+        this.association = association;
+        this.出力項目リスト = 出力項目リスト;
+        this.改頁項目リスト = 改頁項目リスト;
+        this.連番 = 連番;
+        this.entity = null;
+    }
+
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> writer) {
         ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor editor

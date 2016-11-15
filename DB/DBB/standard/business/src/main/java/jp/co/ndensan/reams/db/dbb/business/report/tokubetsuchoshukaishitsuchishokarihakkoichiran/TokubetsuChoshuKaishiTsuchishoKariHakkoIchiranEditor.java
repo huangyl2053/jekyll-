@@ -88,20 +88,22 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
     @Override
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource edit(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
         initializeSource(source);
-        if (entity.get宛先() != null) {
-            set宛先改頁(source, entity.get宛先());
-        }
-        if (entity.get宛名() != null) {
-            set宛名改頁(source, entity.get宛名());
-        }
-        if (entity.get計算後情報() != null) {
-            set計算後情報改頁(source, entity.get計算後情報());
-        }
-        if (entity.get対象者_追加含む情報() != null) {
-            set対象者_追加含む情報改頁(source, entity.get対象者_追加含む情報());
-        }
-        if (entity.get納組() != null) {
-            set納組(source, entity.get納組());
+        if (entity != null) {
+            if (entity.get宛先() != null) {
+                set宛先改頁(source, entity.get宛先());
+            }
+            if (entity.get宛名() != null) {
+                set宛名改頁(source, entity.get宛名());
+            }
+            if (entity.get計算後情報() != null) {
+                set計算後情報改頁(source, entity.get計算後情報());
+            }
+            if (entity.get対象者_追加含む情報() != null) {
+                set対象者_追加含む情報改頁(source, entity.get対象者_追加含む情報());
+            }
+            if (entity.get納組() != null) {
+                set納組(source, entity.get納組());
+            }
         }
 
         if (帳票作成日時 != null && !帳票作成日時.isEmpty()) {
