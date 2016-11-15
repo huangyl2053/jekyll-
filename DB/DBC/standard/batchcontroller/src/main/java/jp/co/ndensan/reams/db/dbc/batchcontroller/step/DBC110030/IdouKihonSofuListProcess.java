@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannKihonSofuTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouDetaToriGaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouSofuListTempEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.honnsanteifuka.HonnSanteiFukaManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -21,10 +21,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2770-050 jinjue
  */
-public class IdouKihonSofuListProcess extends BatchProcessBase<IdouChuukannKihonSofuTempEntity> {
+public class IdouKihonSofuListProcess extends BatchProcessBase<IdouDetaToriGaTempEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper.select異動中間基本送付");
+            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper.select異動データ取得");
     private static final RString TABLE_送付対象リスト情報一時 = new RString("IdouSofuListTemp");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 送付対象リスト情報一時;
@@ -41,7 +41,7 @@ public class IdouKihonSofuListProcess extends BatchProcessBase<IdouChuukannKihon
     }
 
     @Override
-    protected void process(IdouChuukannKihonSofuTempEntity entity) {
+    protected void process(IdouDetaToriGaTempEntity entity) {
     }
 
     @Override

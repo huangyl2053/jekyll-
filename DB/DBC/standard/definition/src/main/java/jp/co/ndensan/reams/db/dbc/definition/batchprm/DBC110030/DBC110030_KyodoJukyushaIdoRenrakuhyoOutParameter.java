@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110030;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.honnsanteifuka.HonnsanteiFukaProcessParamter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
@@ -40,6 +44,7 @@ public class DBC110030_KyodoJukyushaIdoRenrakuhyoOutParameter extends BatchParam
      * @return HonnsanteiFukaProcessParamter
      */
     public HonnsanteiFukaProcessParamter toProcessParamter() {
-        return new HonnsanteiFukaProcessParamter(処理年月.toDateString(), 再処理区分, 抽出条件);
+        RString 合併区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        return new HonnsanteiFukaProcessParamter(処理年月.toDateString(), 再処理区分, 合併区分);
     }
 }

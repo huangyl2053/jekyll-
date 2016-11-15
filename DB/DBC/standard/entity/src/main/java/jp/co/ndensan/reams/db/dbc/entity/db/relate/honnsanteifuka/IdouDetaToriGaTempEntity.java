@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 異動データ取得トリガEntity項目定義クラスです。
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-@OnNextSchema("rgdb")
 public class IdouDetaToriGaTempEntity extends DbTableEntityBase<IdouDetaToriGaTempEntity> implements IDbAccessable {
 
     private FlexibleDate 異動年月日;

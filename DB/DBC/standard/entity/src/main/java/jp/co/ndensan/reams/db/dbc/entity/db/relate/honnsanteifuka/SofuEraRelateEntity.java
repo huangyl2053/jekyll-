@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * エラーリストEntity項目定義クラスです。
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-@OnNextSchema("rgdb")
 public class SofuEraRelateEntity extends DbTableEntityBase<SofuEraRelateEntity> implements IDbAccessable {
 
     private HihokenshaNo 被保険者番号;
