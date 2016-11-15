@@ -164,6 +164,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
 
         div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(true);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(true);
+        div.getShinseishoHakkoParameters().getBtniHokenSearch().setDisabled(true);
     }
 
     /**
