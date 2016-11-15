@@ -1385,8 +1385,8 @@ public class SokujiFukaKouseiMainHandler {
                     更正前後徴収方法.get更正後().get徴収方法6月());
             is3期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法6月(),
                     更正前後徴収方法.get更正後().get徴収方法8月());
-            is4期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法8月(),
-                    更正前後徴収方法.get更正後().get徴収方法10月())
+            is4期入力可 = (ChoshuHoho.特別徴収_地共済.getコード().equals(更正前後徴収方法.get更正後().get徴収方法10月())
+                    || ChoshuHoho.特別徴収_厚生労働省.getコード().equals(更正前後徴収方法.get更正後().get徴収方法10月()))
                     || is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月(),
                             更正前後徴収方法.get更正後().get徴収方法12月());
             is5期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月(),
@@ -1395,16 +1395,14 @@ public class SokujiFukaKouseiMainHandler {
                     更正前後徴収方法.get更正後().get徴収方法2月());
         }
         if (is本算定処理済フラグ) {
-            boolean is両方とも未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴10月捕捉)
-                    && is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴4月捕捉);
             boolean is4月捕捉未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴4月捕捉);
             boolean is6月捕捉未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴6月捕捉);
             boolean is8月捕捉未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴8月捕捉);
             is1期入力可 = Boolean.FALSE;
             is2期入力可 = Boolean.FALSE;
             is3期入力可 = Boolean.FALSE;
-            is4期入力可 = !is4期入力可 ? Boolean.FALSE : is4月捕捉未処理 || is両方とも未処理;
-            is5期入力可 = !is5期入力可 ? Boolean.FALSE : is4月捕捉未処理 || is6月捕捉未処理 || is両方とも未処理;
+            is4期入力可 = !is4期入力可 ? Boolean.FALSE : is4月捕捉未処理;
+            is5期入力可 = !is5期入力可 ? Boolean.FALSE : is4月捕捉未処理 || is6月捕捉未処理;
             is6期入力可 = !is6期入力可 ? Boolean.FALSE : is8月捕捉未処理;
         } else {
             is1期入力可 = Boolean.FALSE;

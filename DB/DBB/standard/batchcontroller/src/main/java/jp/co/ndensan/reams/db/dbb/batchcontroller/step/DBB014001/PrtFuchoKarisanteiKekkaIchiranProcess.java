@@ -133,7 +133,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         mybatisParameter = parameter.toMybatisParameter();
         mybatisParameter.set特別徴収対象者情報(TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード());
         mybatisParameter.set特別徴収追加候補者情報(TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード());
-        調定年度開始日 = new RDate(parameter.get調定年度().getYearValue(), NUM_4, NUM_1);
+        調定年度開始日 = new RDate(parameter.get調定年度().getYearValue() - NUM_1, NUM_4, NUM_1);
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         連番 = 0;
         if (parameter.get出力順ID() != null) {
