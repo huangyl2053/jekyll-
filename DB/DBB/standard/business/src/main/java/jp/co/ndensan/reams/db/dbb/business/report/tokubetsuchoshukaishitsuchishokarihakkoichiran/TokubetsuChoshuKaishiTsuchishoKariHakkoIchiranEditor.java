@@ -6,9 +6,22 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.TsuchishoDataTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -44,6 +57,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
     private final Association association;
     private final List<RString> 改頁項目リスト;
     private final List<RString> 出力項目リスト;
+    private final TsuchishoDataTempEntity entity;
 
     /**
      * コンストラクタです
@@ -55,10 +69,12 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
      * @param association Association
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
+     * @param entity
      */
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
             FlexibleYear 調定年度, YMDHMS 帳票作成日時,
-            int 連番, Association association, List<RString> 出力項目リスト, List<RString> 改頁項目リスト) {
+            int 連番, Association association, List<RString> 出力項目リスト, List<RString> 改頁項目リスト,
+            TsuchishoDataTempEntity entity) {
         this.編集後仮算定通知書共通情報entity = 編集後仮算定通知書共通情報entity;
         this.調定年度 = 調定年度;
         this.帳票作成日時 = 帳票作成日時;
@@ -66,10 +82,28 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         this.association = association;
         this.出力項目リスト = 出力項目リスト;
         this.改頁項目リスト = 改頁項目リスト;
+        this.entity = entity;
     }
 
     @Override
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource edit(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
+        initializeSource(source);
+        if (entity.get宛先() != null) {
+            set宛先改頁(source, entity.get宛先());
+        }
+        if (entity.get宛名() != null) {
+            set宛名改頁(source, entity.get宛名());
+        }
+        if (entity.get計算後情報() != null) {
+            set計算後情報改頁(source, entity.get計算後情報());
+        }
+        if (entity.get対象者_追加含む情報() != null) {
+            set対象者_追加含む情報改頁(source, entity.get対象者_追加含む情報());
+        }
+        if (entity.get納組() != null) {
+            set納組(source, entity.get納組());
+        }
+
         if (帳票作成日時 != null && !帳票作成日時.isEmpty()) {
             RString 帳票作成日 = 帳票作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -97,6 +131,116 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             source.listLower_10 = 仮徴収月8月;
         }
         return source;
+    }
+
+    private void initializeSource(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
+        source.listUpper_2 = RString.EMPTY;
+        source.listLower_2 = RString.EMPTY;
+        source.listUpper_5 = RString.EMPTY;
+        source.listUpper_6 = RString.EMPTY;
+        source.hokenshaNo = RString.EMPTY;
+        source.atesaki_choikiCode = RString.EMPTY;
+        source.atesaki_banchiCode1 = RString.EMPTY;
+        source.atesaki_banchiCode2 = RString.EMPTY;
+        source.atesaki_banchiCode3 = RString.EMPTY;
+        source.atesaki_banchiCode4 = RString.EMPTY;
+        source.atesaki_gyoseikuCode = RString.EMPTY;
+        source.atesaki_chikuCode1 = RString.EMPTY;
+        source.atesaki_chikuCode2 = RString.EMPTY;
+        source.atesaki_chikuCode3 = RString.EMPTY;
+        source.atena_shikibetsuCode = RString.EMPTY;
+        source.atena_kanaMeisho = RString.EMPTY;
+        source.dbT2015KeisangoJoho_fukaShichosonCode = RString.EMPTY;
+        source.nenkinTokuchoKaifuJoho_nenkinCode = RString.EMPTY;
+        source.dbT2015KeisangoJoho_seihofujoShurui = RString.EMPTY;
+        source.caT0714SeikyuHoho_nokumiCode = RString.EMPTY;
+        source.dbT2015KeisangoJoho_choteiJiyu1 = RString.EMPTY;
+    }
+
+    private void set宛先改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source, UaFt250FindAtesakiEntity 宛先) {
+        ChoikiCode 町域コード = 宛先.getChoikiCode();
+        BanchiCode 番地コード1 = 宛先.getBanchiCode1();
+        BanchiCode 番地コード2 = 宛先.getBanchiCode2();
+        BanchiCode 番地コード3 = 宛先.getBanchiCode3();
+        BanchiCode 番地コード4 = 宛先.getBanchiCode4();
+        GyoseikuCode 行政区コード = 宛先.getGyoseikuCode();
+        ChikuCode 地区１ = 宛先.getChikuCode1();
+        ChikuCode 地区２ = 宛先.getChikuCode2();
+        ChikuCode 地区３ = 宛先.getChikuCode3();
+        if (町域コード != null) {
+            source.atesaki_choikiCode = 町域コード.value();
+        }
+        if (番地コード1 != null) {
+            source.atesaki_banchiCode1 = 番地コード1.value();
+        }
+        if (番地コード2 != null) {
+            source.atesaki_banchiCode2 = 番地コード2.value();
+        }
+        if (番地コード3 != null) {
+            source.atesaki_banchiCode3 = 番地コード3.value();
+        }
+        if (番地コード4 != null) {
+            source.atesaki_banchiCode4 = 番地コード4.value();
+        }
+        if (行政区コード != null) {
+            source.atesaki_gyoseikuCode = 行政区コード.value();
+        }
+        if (地区１ != null) {
+            source.atesaki_chikuCode1 = 地区１.value();
+        }
+        if (地区２ != null) {
+            source.atesaki_chikuCode2 = 地区２.value();
+        }
+        if (地区３ != null) {
+            source.atesaki_chikuCode3 = 地区３.value();
+        }
+    }
+
+    private void set宛名改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
+            UaFt200FindShikibetsuTaishoEntity 宛名) {
+
+        ShikibetsuCode 識別コード = 宛名.getShikibetsuCode();
+        AtenaKanaMeisho 氏名５０音カナ = 宛名.getKanaMeisho();
+        if (識別コード != null) {
+            source.atena_shikibetsuCode = 識別コード.value();
+        }
+        if (氏名５０音カナ != null) {
+            source.atena_kanaMeisho = 氏名５０音カナ.value();
+        }
+    }
+
+    private void set計算後情報改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
+            DbTKeisangoJohoTempTableEntity 計算後情報) {
+        RString 生活保護種別 = 計算後情報.getSeihofujoShurui();
+        LasdecCode 賦課市町村コード = 計算後情報.getFukaShichosonCode();
+        RString 調定事由 = 計算後情報.getChoteiJiyu1();
+        if (生活保護種別 != null) {
+            source.dbT2015KeisangoJoho_seihofujoShurui = 生活保護種別;
+        }
+        if (賦課市町村コード != null) {
+            source.dbT2015KeisangoJoho_fukaShichosonCode = 賦課市町村コード.value();
+        }
+        if (調定事由 != null) {
+            source.dbT2015KeisangoJoho_choteiJiyu1 = 調定事由;
+        }
+    }
+
+    private void set対象者_追加含む情報改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
+            UeT0511NenkinTokuchoKaifuJohoEntity 対象者_追加含む情報) {
+        RString 年金コード = 対象者_追加含む情報.getNenkinCode();
+        if (年金コード != null) {
+            source.dbT2015KeisangoJoho_fukaShichosonCode = 年金コード;
+        }
+    }
+
+    private void set納組(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
+            CaFt703FindNokumiEntity 納組) {
+        if (納組.getNokumi() != null) {
+            RString 納組コード = 納組.getNokumi().getNokumiCode();
+            if (納組コード != null) {
+                source.caT0714SeikyuHoho_nokumiCode = 納組コード;
+            }
+        }
     }
 
     private void set出力改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
@@ -139,6 +283,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             source.listUpper_3 = 編集後仮算定通知書共通情報entity.get編集後宛先().get編集後住所();
             source.listUpper_4 = 編集後仮算定通知書共通情報entity.get編集後宛先().get宛先行政区();
         }
+
     }
 
     private void set編集後個人(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
@@ -180,5 +325,4 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             }
         }
     }
-
 }
