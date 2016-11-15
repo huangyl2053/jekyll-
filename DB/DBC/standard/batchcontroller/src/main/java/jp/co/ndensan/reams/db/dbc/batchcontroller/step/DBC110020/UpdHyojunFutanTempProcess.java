@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -133,6 +133,11 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
         全項目 = concatDate(全項目, 標準負担.get適用終了日());
         全項目 = concatDate(全項目, 標準負担.get申請日());
         全項目 = concatDate(全項目, 標準負担.get決定年月日());
+        if (!RString.isNullOrEmpty(標準負担.get決定区分())) {
+            全項目 = 全項目.concat(標準負担.get決定区分()).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        }
         return 全項目;
     }
 

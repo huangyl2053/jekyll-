@@ -543,7 +543,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         for (KyotakuEntity 居宅計画entity : 居宅計画List) {
-            if (!isDateEmpty(居宅計画entity.get適用終了日())) {
+            if (!isDateEmpty(居宅計画entity.get適用開始日())) {
                 continue;
             }
             if (!コード_1.equals(居宅計画entity.get居宅サービス計画作成区分コード())
@@ -554,8 +554,8 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 if (!コート_1.equals(受給者台帳.getYukoMukoKubun())) {
                     continue;
                 }
-                if (!(isBeforeDate(受給者台帳.getNinteiYukoKikanKaishiYMD(), 居宅計画entity.get適用開始日())
-                        && isBeforeDate(居宅計画entity.get適用開始日(), 受給者台帳.getNinteiYukoKikanShuryoYMD()))) {
+                if (!(isBeforeYearMonth(受給者台帳.getNinteiYukoKikanKaishiYMD(), 居宅計画entity.get適用開始日())
+                        && isBeforeYearMonth(居宅計画entity.get適用開始日(), 受給者台帳.getNinteiYukoKikanShuryoYMD()))) {
                     continue;
                 }
                 Code 要介護認定状態区分コード = 受給者台帳.getYokaigoJotaiKubunCode();
@@ -574,7 +574,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         for (KyotakuEntity 居宅計画entity : 居宅計画List) {
-            if (!isDateEmpty(居宅計画entity.get適用終了日())) {
+            if (!isDateEmpty(居宅計画entity.get適用開始日())) {
                 continue;
             }
             if (!コード_4.equals(居宅計画entity.get居宅サービス計画作成区分コード())) {
@@ -584,8 +584,8 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 if (!コート_1.equals(受給者台帳.getYukoMukoKubun())) {
                     continue;
                 }
-                if (!(isBeforeDate(受給者台帳.getNinteiYukoKikanKaishiYMD(), 居宅計画entity.get適用開始日())
-                        && isBeforeDate(居宅計画entity.get適用開始日(), 受給者台帳.getNinteiYukoKikanShuryoYMD()))) {
+                if (!(isBeforeYearMonth(受給者台帳.getNinteiYukoKikanKaishiYMD(), 居宅計画entity.get適用開始日())
+                        && isBeforeYearMonth(居宅計画entity.get適用開始日(), 受給者台帳.getNinteiYukoKikanShuryoYMD()))) {
                     continue;
                 }
                 Code 要介護認定状態区分コード = 受給者台帳.getYokaigoJotaiKubunCode();
@@ -1287,6 +1287,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.set適用終了日(new FlexibleDate(居宅計画Info.get(ORDER_1)));
         entity.set申請日(new FlexibleDate(居宅計画Info.get(ORDER_2)));
         entity.set決定年月日(new FlexibleDate(居宅計画Info.get(ORDER_3)));
+        entity.set決定区分(居宅計画Info.get(ORDER_4));
         return entity;
     }
 
@@ -1663,6 +1664,16 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.set処理年月(processParameter.get処理年月().toDateString());
         hasCheckErr = true;
         return entity;
+    }
+
+    private boolean isBeforeYearMonth(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date2)) {
+            return true;
+        }
+        if (isDateEmpty(date1)) {
+            return false;
+        }
+        return date1.getYearMonth().isBefore(date2.getYearMonth());
     }
 
     private boolean isBeforeDate(FlexibleDate date1, FlexibleDate date2) {

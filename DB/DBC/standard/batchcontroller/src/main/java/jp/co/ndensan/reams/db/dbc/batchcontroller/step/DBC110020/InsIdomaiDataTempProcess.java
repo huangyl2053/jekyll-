@@ -1175,7 +1175,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
         FlexibleDate 適用開始年月日 = get月初(負担割合.getYukoKaishiYMD());
-        insertEntity.set利用者負担割合有効開始日(new RString(適用開始年月日.toString()));
+        if (適用開始年月日 != null) {
+            insertEntity.set利用者負担割合有効開始日(new RString(適用開始年月日.toString()));
+        }
         insertEntity.set利用者負担割合有効終了日(new RString(異動年月日.toString()));
         insertEntity.setエラーフラグ(エラーなし);
     }
