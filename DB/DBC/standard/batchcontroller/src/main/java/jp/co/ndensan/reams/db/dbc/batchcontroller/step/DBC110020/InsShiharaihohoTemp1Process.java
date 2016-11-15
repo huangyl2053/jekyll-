@@ -543,7 +543,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         for (KyotakuEntity 居宅計画entity : 居宅計画List) {
-            if (!isDateEmpty(居宅計画entity.get適用開始日())) {
+            if (isDateEmpty(居宅計画entity.get適用開始日())) {
                 continue;
             }
             if (!コード_1.equals(居宅計画entity.get居宅サービス計画作成区分コード())
