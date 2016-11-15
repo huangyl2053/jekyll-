@@ -126,9 +126,9 @@ public class PrtShirakamiHakkoProcess extends SimpleBatchProcessBase {
             report.writeBy(dbc12ReportSourceWriter);
             dbc12BatchReportWriter.close();
         } else {
-            dbc11BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_申請分.getReportId().value()).create();
+            dbc11BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_Ari.getReportId().value()).create();
             dbc11ReportSourceWriter = new ReportSourceWriter<>(dbc11BatchReportWriter);
-            認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_申請分.getReportId(), FlexibleDate.getNowDate(),
+            認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_Ari.getReportId(), FlexibleDate.getNowDate(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbc11ReportSourceWriter);
 
             KogakuOshiraseTsuchiTeshutsuKigenAriEntity param = new KogakuOshiraseTsuchiTeshutsuKigenAriEntity();
