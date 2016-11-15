@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKari
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FuchoKariKeisanGoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FutsuChoshuKarisanteiKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.NenkinCode;
@@ -42,8 +44,15 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -80,6 +89,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200006");
     private static final RString CSVFILENAME = new RString("FutsuChoshuKarisanteiKekkaIchiranData.csv");
+    private final ReportId 帳票分類ID = new ReportId(new RString("DBB200009_HonsanteiKekkaIcihiran"));
     private static final RString TITLE_調定年度 = new RString("【調定年度】　");
     private static final RString TITLE_賦課年度 = new RString("【賦課年度】　");
     private static final RString 定数_年度 = new RString("年度");
@@ -304,7 +314,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
                 parameter.get調定年度(), parameter.get賦課年度(), new YMDHMS(parameter.getバッチ起動日時()),
                 地方公共団体情報, 出力項目リスト, 改頁項目リスト, 連番);
         report.writeBy(reportSourceWriter);
-        FutyoKarisanteiKekkaIcihiranDataCSVEntity csvEntity = getCsvEntity(普徴仮算定計算後賦課Entity);
+        FutyoKarisanteiKekkaIcihiranDataCSVEntity csvEntity = getCsvEntity(普徴仮算定計算後賦課Entity, 連番);
         csvWriter.writeLine(csvEntity);
     }
 
@@ -338,26 +348,33 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         return 出力条件;
     }
 
-    private FutyoKarisanteiKekkaIcihiranDataCSVEntity getCsvEntity(FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課Entity) {
+    private FutyoKarisanteiKekkaIcihiranDataCSVEntity getCsvEntity(FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課Entity, int 連番) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(普徴仮算定計算後賦課Entity.get宛名の情報());
+        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
+        EditedKojin 編集後個人 = new EditedKojin(kojin, 帳票制御共通, null);
         FutyoKarisanteiKekkaIcihiranDataCSVEntity csvEntity = new FutyoKarisanteiKekkaIcihiranDataCSVEntity();
-
         csvEntity.set作成年月日(dateFormat32(parameter.getバッチ起動日時().getDate()));
         csvEntity.set作成時刻(共通ポリシーパターン141(parameter.getバッチ起動日時().getTime()));
         csvEntity.set賦課年度(dateFormat308(parameter.get賦課年度()));
-
-        csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-        csvEntity.set住所(kojin.get住所().get住所());
+        csvEntity.set連番(new RString(連番));
+        YubinNo yubinNo = 普徴仮算定計算後賦課Entity.get宛名の情報().getYubinNo();
+        csvEntity.set郵便番号(yubinNo == null ? RString.EMPTY : yubinNo.getYubinNo());
+        csvEntity.set住所(編集後個人.get編集後住所());
         csvEntity.set町域管内管外住所(kojin.get住所().get住所());
-        csvEntity.set番地(kojin.get住所().get番地().getBanchi().getColumnValue());
-        csvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().getColumnValue());
-        csvEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
-        csvEntity.set生年月日(dateFormat32(kojin.get生年月日().toFlexibleDate()));
+        AtenaBanchi banchi = 普徴仮算定計算後賦課Entity.get宛名の情報().getBanchi();
+        csvEntity.set番地(banchi == null ? RString.EMPTY : banchi.getColumnValue());
+        GyoseikuCode gyoseikuCode = 普徴仮算定計算後賦課Entity.get宛名の情報().getGyoseikuCode();
+        csvEntity.set行政区コード(gyoseikuCode == null ? RString.EMPTY : gyoseikuCode.getColumnValue());
+        csvEntity.set行政区(普徴仮算定計算後賦課Entity.get宛名の情報().getGyoseikuName());
+        csvEntity.set生年月日(dateFormat32(普徴仮算定計算後賦課Entity.get宛名の情報().getSeinengappiYMD()));
         csvEntity.set性別(kojin.get性別().getName().getShortJapanese());
-        csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
+        AtenaMeisho setainushiMei = 普徴仮算定計算後賦課Entity.get宛名の情報().getSetainushiMei();
+        csvEntity.set世帯主名(setainushiMei == null ? RString.EMPTY : setainushiMei.getColumnValue());
         csvEntity.set通知書番号(普徴仮算定計算後賦課Entity.get通知書番号().getColumnValue());
-        csvEntity.set世帯コード(kojin.get世帯コード().getColumnValue());
-        csvEntity.set被保険者氏名(kojin.get日本人氏名().getName().getColumnValue());
+        SetaiCode setaiCode = 普徴仮算定計算後賦課Entity.get宛名の情報().getSetaiCode();
+        csvEntity.set世帯コード(setaiCode == null ? RString.EMPTY : setaiCode.getColumnValue());
+        AtenaKanaMeisho kanaMeisho = 普徴仮算定計算後賦課Entity.get宛名の情報().getKanaMeisho();
+        csvEntity.set被保険者氏名(kanaMeisho == null ? RString.EMPTY : kanaMeisho.getColumnValue());
         csvEntity.set特別徴収業務者コード(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
         csvEntity.set特別徴収義務者(new TokubetsuChoshuGimushaCode(普徴仮算定計算後賦課Entity.get特別徴収業務者コード()).getMeisho());
         csvEntity.set特別徴収対象年金コード(普徴仮算定計算後賦課Entity.get仮徴収年金コード());
