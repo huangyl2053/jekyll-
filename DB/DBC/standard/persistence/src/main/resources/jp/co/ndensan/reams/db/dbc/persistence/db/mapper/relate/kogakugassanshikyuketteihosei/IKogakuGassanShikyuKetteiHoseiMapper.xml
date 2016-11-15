@@ -46,6 +46,7 @@
         SET
         "isDeleted" ='true',
         "updateCount" = "updateCount" + 1,
+        "lastUpdateReamsLoginId" = #{loginId},
         "lastUpdateTimestamp" = now()
         WHERE
         "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{更新前交換情報識別番号}
@@ -108,6 +109,7 @@
             "shikyuGaku" = #{更新後支給額},
         </if>
         "shoKisaiHokenshaNo" = #{更新後証記載保険者番号},
+        "lastUpdateReamsLoginId" = #{loginId},
         "updateCount" = "updateCount" + 1,
         "lastUpdateTimestamp" = now()
         WHERE
