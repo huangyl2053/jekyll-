@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD511001.KoshinTaishoshaKanriSelectTableProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD511001.KoshinTaishoshaKanriProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511001.DBD511001_KoshinTaishoshaKanriParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5610001.KoshinTaishoshaKanriProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -34,7 +34,7 @@ public class DBD511001_KoshinTaishoshaKanri extends BatchFlowBase<DBD511001_Kosh
      */
     @Step(SELECT_TABLE)
     protected IBatchFlowCommand selectTable() {
-        return loopBatch(KoshinTaishoshaKanriSelectTableProcess.class)
+        return loopBatch(KoshinTaishoshaKanriProcess.class)
                 .arguments(createProcessParameter()).define();
     }
 

@@ -49,11 +49,11 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
  *
  * @reamsid_L DBD-1460-020 liuyl
  */
-public class KoshinTaishoshaKanriSelectTableProcess extends BatchProcessBase<KoshinTaishoshaKanriEntity> {
+public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishoshaKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinsehhinseirirekininteikekkajoho."
-                    + "INinteishinsehhinseirirekininteikekkajohoMapper.get更新申請対象者情報");
+            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinTaishoshaKanri."
+                    + "IKoshinTaishoshaKanriMapper.get更新申請対象者情報");
     private static final EdabanCode 認定申請枝番コード = new EdabanCode(new RString("000"));
     private static final Code 認定申請区分申請時コード = new Code(new RString("B"));
     private static final Code 広域内転居区分 = new Code(new RString("0"));

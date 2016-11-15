@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinsehhinseirirekininteikekkajoho;
+package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinTaishoshaKanri;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5610001.KoshinTaishoshaKanriMyBatisParameter;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5610001.KoshinTaishoshaKan
  *
  * @reamsid_L DBD-1460-020 liuyl
  */
-public interface INinteishinsehhinseirirekininteikekkajohoMapper {
+public interface IKoshinTaishoshaKanriMapper {
 
     /**
      * 更新申請対象者情報を取得します。

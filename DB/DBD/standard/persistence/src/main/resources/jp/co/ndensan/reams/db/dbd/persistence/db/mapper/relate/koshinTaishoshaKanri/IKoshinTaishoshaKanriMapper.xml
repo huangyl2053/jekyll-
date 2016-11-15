@@ -3,7 +3,7 @@
 
 <!--@reamsid_L DBD-1460-020 liuyl-->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinsehhinseirirekininteikekkajoho.INinteishinsehhinseirirekininteikekkajohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinTaishoshaKanri.IKoshinTaishoshaKanriMapper">
     <resultMap id="NNinteishinsehhinseirirekininteikekkajohoResult" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5610001.KoshinTaishoshaKanriEntity">
         <association  property="dbT4101NinteiShinseiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association  property="dbT4121ShinseiRirekJohoEntity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.ResultMap_DbT4121ShinseiRirekiJohoEntity"/>
