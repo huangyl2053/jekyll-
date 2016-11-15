@@ -105,6 +105,8 @@ public class TokubetsuChoshuKaishiSource implements IReportSource {
     public RString seihoFlag;
     @ReportItem(name = "tokuchoKaishi10", length = 30, order = 46)
     public RString tokuchoKaishi10;
+    @ReportItem(name = "banchiCode", length = 30, order = 47)
+    public RString banchiCode;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
