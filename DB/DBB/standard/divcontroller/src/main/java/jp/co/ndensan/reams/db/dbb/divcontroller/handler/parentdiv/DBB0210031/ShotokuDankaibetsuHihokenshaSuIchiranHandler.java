@@ -13,12 +13,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 画面設計_DBBGM21004_段階別被保険者数一覧表作成
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
 
     private final ShotokuDankaibetsuHihokenshaSuIchiranDiv div;
+    private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
     private static final RString 開始年度 = new RString("2000");
     private static final RString 導入形態コード_111 = new RString("111");
     private static final RString 導入形態コード_112 = new RString("112");
@@ -75,9 +78,9 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranHandler {
             }
         }
 
-       // ShichosonSelectorModel model = new ShichosonSelectorModel();
-        // div.setKyuShichoson(DataPassingConverter.serialize(model));
-        // model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
+        ShichosonSelectorModel model = new ShichosonSelectorModel();
+        model.setShichosonModel(KOUSEI_MODO_KOUSEI);
+        div.setKyuShichoson(DataPassingConverter.serialize(model));
         div.getTxtShikakuKijunYMD().setValue(システム日付);
         div.getTxtChoteiKijunYMD().setValue(システム日付);
     }
