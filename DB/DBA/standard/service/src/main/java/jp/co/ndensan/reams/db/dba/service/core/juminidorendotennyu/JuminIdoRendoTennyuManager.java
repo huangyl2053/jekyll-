@@ -62,8 +62,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.ZenkokuJushoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -336,7 +334,7 @@ public class JuminIdoRendoTennyuManager {
             登録届出日 = 転入前Entity.get年齢到達日();
             年齢到達日 = 転入前Entity.get年齢到達日();
         }
-        if (直近被保データ.getShikakuSoshitsuJiyuCode().equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
+        if (ShikakuSoshitsuJiyu.死亡.getコード().equals(直近被保データ.getShikakuSoshitsuJiyuCode())) {
             転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.転入_取得不能_死亡者.getコード());
             転入処理後Entity.set作成事由(TennyuSakuseiJiyu.死亡喪失.getコード());
             return 転入処理後Entity;
@@ -1031,21 +1029,6 @@ public class JuminIdoRendoTennyuManager {
             }
         }
         return 資格取得フラグ;
-    }
-
-    /**
-     * 連動保留特定住所判定です。
-     *
-     * @param 現全国地方公共団体コード 市町村コード
-     * @param 町域コード 住所コード
-     * @param 番地コード1 番地コード１
-     * @param 番地コード2 番地コード2
-     * @param 番地コード3 番地コード3
-     * @return 判定結果
-     */
-    public boolean isRendoHoryuTokuteiJusho(LasdecCode 現全国地方公共団体コード, ChoikiCode 町域コード,
-            BanchiCode 番地コード1, BanchiCode 番地コード2, BanchiCode 番地コード3) {
-        return false;
     }
 
     /**
