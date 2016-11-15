@@ -165,7 +165,8 @@ public class JuminIdoRendoTennyuManager {
         転入前Entity.set年齢到達日(FlexibleDate.EMPTY);
         転入前Entity.set年齢(0);
         転入前Entity.set処理対象区分(ShikakuKubun._１号.getコード());
-        boolean 連動保留特定住所フラグ = isRendoHoryuTokuteiJusho(処理対象者.getGenLasdecCode(),
+        JuminIdoRendoShikakuToroku business = new JuminIdoRendoShikakuToroku();
+        boolean 連動保留特定住所フラグ = business.isRendoHoryuTokuteiJusho(処理対象者.getGenLasdecCode(),
                 処理対象者.getChoikiCode(),
                 処理対象者.getBanchiCode1(),
                 処理対象者.getBanchiCode2(),
