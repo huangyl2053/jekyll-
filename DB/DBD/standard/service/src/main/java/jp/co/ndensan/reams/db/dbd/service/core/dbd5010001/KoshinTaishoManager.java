@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.service.core.koshintaisho;
+package jp.co.ndensan.reams.db.dbd.service.core.dbd5010001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd5010001.KoshinTaishoBussiness;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.KoshinTaishoCsvEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5010001.KoshinTaishoCsvEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJohoEntity;

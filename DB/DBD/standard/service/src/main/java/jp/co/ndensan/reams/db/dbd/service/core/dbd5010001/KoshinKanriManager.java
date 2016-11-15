@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.service.core.koshintaisho;
+package jp.co.ndensan.reams.db.dbd.service.core.dbd5010001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.koshintaisho.KoshinTaishoMybatisParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.SelectSyuuShadeTaCsvEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.SelectSyuuShadeTaEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshintaisho.IKoshinTaishoMapper;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5010001.ChosaDataMobileMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5010001.SelectSyuuShadeTaCsvEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5010001.ChosaDataMobileEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.chosadatamobile.IChosaDataMobileMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping06A;
@@ -62,7 +62,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBD-2030-010 x_youyj
  */
-public class KoshinTaishoFinder {
+public class KoshinKanriManager {
 
     private final MapperProvider mapperProvider;
 
@@ -81,7 +81,7 @@ public class KoshinTaishoFinder {
     /**
      * コンストラクタです。
      */
-    KoshinTaishoFinder() {
+    KoshinKanriManager() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -90,8 +90,8 @@ public class KoshinTaishoFinder {
      *
      * @return 画面設計_DBD5010001_完了処理・更新管理のビジネス
      */
-    public static KoshinTaishoFinder createInstance() {
-        return InstanceProvider.create(KoshinTaishoFinder.class);
+    public static KoshinKanriManager createInstance() {
+        return InstanceProvider.create(KoshinKanriManager.class);
     }
 
     /**
@@ -103,10 +103,10 @@ public class KoshinTaishoFinder {
     @Transaction
     public SharedFileEntryDescriptor get調査データの取得(List<RString> 申請書管理番号) {
 
-        KoshinTaishoMybatisParameter parameter = new KoshinTaishoMybatisParameter(申請書管理番号);
-        IKoshinTaishoMapper mapper = mapperProvider.create(IKoshinTaishoMapper.class);
+        ChosaDataMobileMybatisParameter parameter = new ChosaDataMobileMybatisParameter(申請書管理番号);
+        IChosaDataMobileMapper mapper = mapperProvider.create(IChosaDataMobileMapper.class);
 
-        List<SelectSyuuShadeTaEntity> 調査データ情報List = mapper.get調査データの取得(parameter);
+        List<ChosaDataMobileEntity> 調査データ情報List = mapper.get調査データの取得(parameter);
 
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSV調査ファイル名);
         try (CsvWriter<SelectSyuuShadeTaCsvEntity> csvdeTeWriter
@@ -116,7 +116,7 @@ public class KoshinTaishoFinder {
                         .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
                         .setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             if (調査データ情報List != null && !調査データ情報List.isEmpty()) {
-                for (SelectSyuuShadeTaEntity entity : 調査データ情報List) {
+                for (ChosaDataMobileEntity entity : 調査データ情報List) {
                     csvdeTeWriter.writeLine(setdetaEntity(entity));
                 }
             }
@@ -135,7 +135,7 @@ public class KoshinTaishoFinder {
      * @param shinseishoKanriNo RString
      */
     public void get認定調査依頼情報の取得(RString shinseishoKanriNo) {
-        IKoshinTaishoMapper mapper = mapperProvider.create(IKoshinTaishoMapper.class);
+        IChosaDataMobileMapper mapper = mapperProvider.create(IChosaDataMobileMapper.class);
         DbT4201NinteichosaIraiJohoEntity 認定調査依頼情報 = mapper.get認定調査依頼情報の取得(shinseishoKanriNo);
         if (認定調査依頼情報 != null) {
             認定調査依頼情報.setMobileDataShutsuryokuZumiFlag(MobileDataShutsuryokuFlag.出力済.isモバイルデータ出力());
@@ -151,7 +151,7 @@ public class KoshinTaishoFinder {
      * @param shinseishoKanriNo RString
      */
     public void get要介護認定申請情報の取得(RString shinseishoKanriNo) {
-        IKoshinTaishoMapper mapper = mapperProvider.create(IKoshinTaishoMapper.class);
+        IChosaDataMobileMapper mapper = mapperProvider.create(IChosaDataMobileMapper.class);
         DbT4101NinteiShinseiJohoEntity 認定申請情報 = mapper.get要介護認定申請情報の取得(shinseishoKanriNo);
         if (認定申請情報 != null) {
 //            認定申請情報.setNinteiShinseiShinseijiKubunCode(new Code(NinteiShinseiShinseijiKubunCode.更新申請.getコード()));
@@ -167,7 +167,7 @@ public class KoshinTaishoFinder {
      * @param sqlEntity SelectSyuuShadeTaEntity
      * @return SelectSyuuShadeTaEntity
      */
-    private SelectSyuuShadeTaCsvEntity setdetaEntity(SelectSyuuShadeTaEntity sqlEntity) {
+    private SelectSyuuShadeTaCsvEntity setdetaEntity(ChosaDataMobileEntity sqlEntity) {
         SelectSyuuShadeTaCsvEntity entity = new SelectSyuuShadeTaCsvEntity();
         entity.set被保険者番号(sqlEntity.get被保険者番号());
         if (sqlEntity.get厚労省IF識別コード() != null && !sqlEntity.get厚労省IF識別コード().isEmpty()) {
@@ -213,7 +213,7 @@ public class KoshinTaishoFinder {
         setVoidEntity(entity, sqlEntity);
         return entity;
     }
-    private void setVoidEntity2(SelectSyuuShadeTaCsvEntity entity, SelectSyuuShadeTaEntity sqlEntity) {
+    private void setVoidEntity2(SelectSyuuShadeTaCsvEntity entity, ChosaDataMobileEntity sqlEntity) {
         if (sqlEntity.get認定調査実施場所コード() != null && !sqlEntity.get認定調査実施場所コード().isEmpty()) {
             entity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(sqlEntity.get認定調査実施場所コード()).get名称());
         }
@@ -251,7 +251,7 @@ public class KoshinTaishoFinder {
         }
     }
 
-    private void setVoidEntity(SelectSyuuShadeTaCsvEntity entity, SelectSyuuShadeTaEntity sqlEntity) {
+    private void setVoidEntity(SelectSyuuShadeTaCsvEntity entity, ChosaDataMobileEntity sqlEntity) {
         if (sqlEntity.get委託先の調査委託区分() != null && !sqlEntity.get委託先の調査委託区分().isEmpty()) {
             entity.set委託先の調査委託区分(ChosaItakuKubunCode.toValue(sqlEntity.get委託先の調査委託区分()).get名称());
         }
@@ -356,7 +356,7 @@ public class KoshinTaishoFinder {
      * @param shinseishoKanriNo RString
      */
     public void insert受給者台帳情報(RString shinseishoKanriNo) {
-        IKoshinTaishoMapper mapper = mapperProvider.create(IKoshinTaishoMapper.class);
+        IChosaDataMobileMapper mapper = mapperProvider.create(IChosaDataMobileMapper.class);
         DbT4001JukyushaDaichoEntity 受給者台帳情報 = mapper.get受給者台帳情報(shinseishoKanriNo); 
         if (受給者台帳情報 != null) {
 

@@ -3,11 +3,11 @@
 <!-- @reamsid_L DBD-2030-010 x_youyj -->
 
 
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshintaisho.IKoshinTaishoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.chosadatamobile.IChosaDataMobileMapper">
 
     <select resultOrdered="true" id="get調査データの取得"
-            resultType = "jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.SelectSyuuShadeTaEntity"
-            parameterType = "jp.co.ndensan.reams.db.dbd.definition.mybatisprm.koshintaisho.KoshinTaishoMybatisParameter"
+            resultType = "jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5010001.ChosaDataMobileEntity"
+            parameterType = "jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5010001.ChosaDataMobileMybatisParameter"
             fetchSize="500">
         SELECT 
             要介護認定申請情報."shinseishoKanriNo" AS 申請書管理番号,

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshintaisho;
+package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.chosadatamobile;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.koshintaisho.KoshinTaishoMybatisParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.SelectSyuuShadeTaEntity;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5010001.ChosaDataMobileMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5010001.ChosaDataMobileEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJohoEntity;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-2030-010 x_youyj
  */
-public interface IKoshinTaishoMapper {
+public interface IChosaDataMobileMapper {
 
     /**
      * 調査データ（モバイル用）の抽出
@@ -26,7 +26,7 @@ public interface IKoshinTaishoMapper {
      * @param parameter KoshinTaishoMybatisParameter
      * @return List<selectSyuuShadeTaEntity>
      */
-    List<SelectSyuuShadeTaEntity> get調査データの取得(KoshinTaishoMybatisParameter parameter);
+    List<ChosaDataMobileEntity> get調査データの取得(ChosaDataMobileMybatisParameter parameter);
 
     /**
      * 認定調査依頼情報の取得
