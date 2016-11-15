@@ -762,6 +762,10 @@ public enum ReportIdDBC {
      * 振込明細一覧表（事業高額合算） 帳票ＩＤです。
      */
     DBC200103(new ReportId("DBC200103_FurikomiMeisaiIchiranJigyoKogakuGassan"), new RString("振込明細一覧表（事業高額合算）"));
+    /**
+     * 帳票設計_DBC100075_基準収入額適用申請書(年次)の帳票ＩＤです。
+     */
+    DBC100075(new ReportId("DBC100075_KijunShunyugakuTekiyoShinseishoNenji"), new RString("基準収入額適用申請書(年次)"));
 
     private final ReportId reportId;
 
