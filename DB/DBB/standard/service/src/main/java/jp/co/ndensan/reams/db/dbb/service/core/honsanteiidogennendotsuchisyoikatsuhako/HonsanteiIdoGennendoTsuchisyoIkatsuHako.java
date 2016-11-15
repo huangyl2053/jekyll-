@@ -625,11 +625,15 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
 
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-        List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
+        List<TokuchoKaishiTsuchishoInfo> 編集後本算定通知書共通情報List = new ArrayList<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         SourceDataCollection sourceDataCollection;
         try (ReportManager reportManager = new ReportManager()) {
             for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
+                TokuchoKaishiTsuchishoInfo tokuchoKaishiTsuchishoInfo = new TokuchoKaishiTsuchishoInfo();
+                tokuchoKaishiTsuchishoInfo.set生活保護区分(tmpResult.get生活保護区分());
+                tokuchoKaishiTsuchishoInfo.set特徴8月開始者区分(tmpResult.get特徴8月開始者区分());
+                tokuchoKaishiTsuchishoInfo.set特徴10月開始者区分(tmpResult.get特徴10月開始者区分());
                 HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
                 本算定通知書情報.set現年度_過年度区分(GennenKanen.現年度);
                 本算定通知書情報.set発行日(発行日);
@@ -672,7 +676,9 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
                 } else if (ReportIdDBB.DBB100040.getReportId().equals(帳票ID)) {
                     new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printA4Tate(entities, reportManager);
                 }
-                編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
+                tokuchoKaishiTsuchishoInfo.set本算定通知書情報(本算定通知書情報);
+                tokuchoKaishiTsuchishoInfo.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+                編集後本算定通知書共通情報List.add(tokuchoKaishiTsuchishoInfo);
             }
             sourceDataCollection = reportManager.publish();
         }
@@ -784,11 +790,15 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(決定変更通知書_帳票分類ID);
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-        List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
+        List<TokuchoKaishiTsuchishoInfo> 編集後本算定通知書共通情報List = new ArrayList<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         SourceDataCollection sourceDataCollection;
         try (ReportManager reportManager = new ReportManager()) {
             for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
+                TokuchoKaishiTsuchishoInfo tokuchoKaishiTsuchishoInfo = new TokuchoKaishiTsuchishoInfo();
+                tokuchoKaishiTsuchishoInfo.set生活保護区分(tmpResult.get生活保護区分());
+                tokuchoKaishiTsuchishoInfo.set特徴8月開始者区分(tmpResult.get特徴8月開始者区分());
+                tokuchoKaishiTsuchishoInfo.set特徴10月開始者区分(tmpResult.get特徴10月開始者区分());
                 HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
                 本算定通知書情報.set現年度_過年度区分(GennenKanen.現年度);
                 本算定通知書情報.set発行日(発行日);
@@ -831,7 +841,9 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
                     new KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService().printA4Tate(entities, reportManager);
 
                 }
-                編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
+                tokuchoKaishiTsuchishoInfo.set本算定通知書情報(本算定通知書情報);
+                tokuchoKaishiTsuchishoInfo.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+                編集後本算定通知書共通情報List.add(tokuchoKaishiTsuchishoInfo);
             }
             sourceDataCollection = reportManager.publish();
         }

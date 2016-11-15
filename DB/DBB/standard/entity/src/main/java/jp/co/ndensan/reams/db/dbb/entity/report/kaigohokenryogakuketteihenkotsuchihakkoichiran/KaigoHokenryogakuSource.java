@@ -72,6 +72,35 @@ public class KaigoHokenryogakuSource implements IReportSource {
     public RString listLower_6;
     @ReportItem(name = "listLower_7", length = 38, order = 31)
     public RString listLower_7;
+
+    @ReportItem(name = "choikiCode", length = 15, order = 32)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 15, order = 33)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chikuCode1", length = 15, order = 34)
+    public RString chikuCode1;
+    @ReportItem(name = "chikuCode2", length = 15, order = 35)
+    public RString chikuCode2;
+    @ReportItem(name = "chikuCode3", length = 15, order = 36)
+    public RString chikuCode3;
+    @ReportItem(name = "shikibetsuCode", length = 15, order = 37)
+    public RString shikibetsuCode;
+    @ReportItem(name = "kanaMeisho", length = 30, order = 38)
+    public RString kanaMeisho;
+    @ReportItem(name = "nenkinCode", length = 15, order = 39)
+    public RString nenkinCode;
+    @ReportItem(name = "nokumiCode", length = 15, order = 40)
+    public RString nokumiCode;
+    @ReportItem(name = "seihoFlag", length = 15, order = 41)
+    public RString seihoFlag;
+    @ReportItem(name = "seihoFlag1", length = 15, order = 42)
+    public RString seihoFlag1;
+    @ReportItem(name = "tokuchoKaishi8", length = 30, order = 43)
+    public RString tokuchoKaishi8;
+    @ReportItem(name = "tokuchoKaishi10", length = 30, order = 44)
+    public RString tokuchoKaishi10;
+    @ReportItem(name = "banchiCode", length = 30, order = 45)
+    public RString banchiCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -21,6 +21,7 @@ public class TokuchoKaishiTsuchishoInfo {
 
     private HonSanteiTsuchiShoKyotsu 本算定通知書情報;
     private RString 生活保護区分;
+    private RString 特徴8月開始者区分;
     private RString 特徴10月開始者区分;
     private EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
 }

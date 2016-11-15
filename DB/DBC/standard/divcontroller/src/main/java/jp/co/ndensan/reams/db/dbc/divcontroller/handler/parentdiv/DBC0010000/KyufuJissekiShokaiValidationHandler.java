@@ -60,9 +60,10 @@ public class KyufuJissekiShokaiValidationHandler {
      * 「検索する」ボタンを押下する場合、チックを実行します。
      *
      * @param 給付実績情報照会情報 給付実績情報照会情報
+     * @param 検索対象 検索対象
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs do検索チェック(KyufuJissekiPrmBusiness 給付実績情報照会情報) {
+    public ValidationMessageControlPairs do検索チェック(KyufuJissekiPrmBusiness 給付実績情報照会情報, RString 検索対象) {
 
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (給付実績情報照会情報 == null) {
@@ -72,14 +73,23 @@ public class KyufuJissekiShokaiValidationHandler {
             if (一覧データ == null) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.該当の給付データ));
             } else {
-                if (一覧データ.get給付実績基本居宅サービス計画費データ() == null || 一覧データ.get給付実績基本居宅サービス計画費データ().isEmpty()
-                        || 一覧データ.get給付実績基本集計データ() == null || 一覧データ.get給付実績基本集計データ().isEmpty()
-                        || 一覧データ.get給付実績高額介護サービス費データ() == null || 一覧データ.get給付実績高額介護サービス費データ().isEmpty()) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.該当の給付データ));
-                }
+                do検索チェック_2(validPairs, 給付実績情報照会情報, 検索対象);
             }
         }
         return validPairs;
+    }
+
+    private void do検索チェック_2(ValidationMessageControlPairs validPairs, KyufuJissekiPrmBusiness 給付実績情報照会情報, RString 検索対象) {
+        if (new RString("key0").equals(検索対象)) {
+            if ((null == 給付実績情報照会情報.getCsData_A() || 給付実績情報照会情報.getCsData_A().isEmpty())
+                    && (null == 給付実績情報照会情報.getCsData_I() || 給付実績情報照会情報.getCsData_I().isEmpty())) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.該当の給付データ));
+            }
+        } else {
+            if (null == 給付実績情報照会情報.getCsData_A() || 給付実績情報照会情報.getCsData_A().isEmpty()) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.該当の給付データ));
+            }
+        }
     }
 
     private static enum RRVMessages implements IValidationMessage {
