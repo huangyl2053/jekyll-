@@ -50,7 +50,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassanProcessParamter implements IB
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
     private static final RString 区分_3 = new RString("3");
-    private static final RString 年報区分 = new RString("99");
+    private static final RString 年報区分 = new RString("00");
     private static final int 連番_4 = 4;
     private static final int INDEX = 8;
 

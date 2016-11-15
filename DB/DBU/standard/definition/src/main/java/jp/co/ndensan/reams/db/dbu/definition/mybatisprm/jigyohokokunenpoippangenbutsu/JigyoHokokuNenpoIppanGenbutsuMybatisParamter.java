@@ -259,7 +259,7 @@ public final class JigyoHokokuNenpoIppanGenbutsuMybatisParamter implements IMyBa
 
     private static RString get集計年月(RString 年度) {
         if (!RString.isNullOrEmpty(年度)) {
-            return 年度.concat("99");
+            return 年度.concat("00");
         }
         return RString.EMPTY;
     }
