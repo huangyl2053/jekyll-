@@ -780,7 +780,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
     }
 
     private boolean isDo利用者負担減免申請日Check(DbT4014RiyoshaFutangakuGengakuEntity 利用者負担entity) {
-        if (isDateEmpty(利用者負担entity.getTekiyoKaishiYMD()) && isDateEmpty(利用者負担entity.getTekiyoShuryoYMD())) {
+        if (!isDateEmpty(利用者負担entity.getTekiyoKaishiYMD()) || !isDateEmpty(利用者負担entity.getTekiyoShuryoYMD())) {
             return false;
         }
         if (!isDateEmpty(利用者負担entity.getKetteiYMD())) {
@@ -1045,8 +1045,12 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 if (isDateEmpty(居宅計画.get適用開始日()) || isDateEmpty(居宅計画.get届出年月日())) {
                     continue;
                 }
-                if (isBeforeOrEqDate(総合事業対象者entity.getTekiyoKaishiYMD(), 居宅計画.get適用開始日())
-                        && isBeforeOrEqDate(総合事業対象者entity.getTekiyoKaishiYMD(), 居宅計画.get届出年月日())
+                FlexibleDate 届出年月日 = 居宅計画.get届出年月日();
+                if (isBeforeDate(居宅計画.get届出年月日(), MIN_DATE)) {
+                    届出年月日 = MIN_DATE;
+                }
+                if (isEqYearMonth(総合事業対象者entity.getTekiyoKaishiYMD(), 居宅計画.get適用開始日())
+                        && isEqYearMonth(総合事業対象者entity.getTekiyoKaishiYMD(), 届出年月日)
                         && 区分_4.equals(居宅計画.get居宅サービス計画作成区分コード())) {
                     continue;
                 }
@@ -1674,6 +1678,16 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return false;
         }
         return date1.getYearMonth().isBeforeOrEquals(date2.getYearMonth());
+    }
+
+    private boolean isEqYearMonth(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date2)) {
+            return false;
+        }
+        if (isDateEmpty(date1)) {
+            return false;
+        }
+        return date1.getYearMonth().equals(date2.getYearMonth());
     }
 
     private boolean isBeforeDate(FlexibleDate date1, FlexibleDate date2) {
