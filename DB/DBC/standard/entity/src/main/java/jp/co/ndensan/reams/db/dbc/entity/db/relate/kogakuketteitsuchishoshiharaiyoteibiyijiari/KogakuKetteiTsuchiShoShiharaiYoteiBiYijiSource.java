@@ -158,45 +158,45 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource implements IReportSo
     public RString tsuchibunMixTwo2;
     @ReportItem(name = "yubinNo", length = 8, order = 69)
     public RString yubinNo;
-    @ReportItem(name = "gyoseiku2", length = 14, order = 70)
-    public RString gyoseiku2;
-    @ReportItem(name = "jusho4", length = 20, order = 71)
-    public RString jusho4;
+    @ReportItem(name = "gyoseiku", length = 14, order = 70)
+    public RString gyoseiku;
+    @ReportItem(name = "jusho1", length = 20, order = 71)
+    public RString jusho1;
     @ReportItem(name = "jushoText", order = 72)
     public RString jushoText;
-    @ReportItem(name = "jusho5", length = 20, order = 73)
-    public RString jusho5;
-    @ReportItem(name = "jusho6", length = 20, order = 74)
-    public RString jusho6;
+    @ReportItem(name = "jusho2", length = 20, order = 73)
+    public RString jusho2;
+    @ReportItem(name = "jusho3", length = 20, order = 74)
+    public RString jusho3;
     @ReportItem(name = "katagakiText", order = 75)
     public RString katagakiText;
-    @ReportItem(name = "katagaki3", length = 20, order = 76)
-    public RString katagaki3;
+    @ReportItem(name = "katagaki1", length = 20, order = 76)
+    public RString katagaki1;
     @ReportItem(name = "katagakiSmall2", length = 30, order = 77)
     public RString katagakiSmall2;
-    @ReportItem(name = "katagaki4", length = 20, order = 78)
-    public RString katagaki4;
+    @ReportItem(name = "katagaki2", length = 20, order = 78)
+    public RString katagaki2;
     @ReportItem(name = "katagakiSmall1", length = 30, order = 79)
     public RString katagakiSmall1;
-    @ReportItem(name = "shimei5", length = 20, order = 80)
-    public RString shimei5;
+    @ReportItem(name = "shimei1", length = 20, order = 80)
+    public RString shimei1;
     @ReportItem(name = "shimeiSmall2", length = 40, order = 81)
     public RString shimeiSmall2;
     @ReportItem(name = "shimeiText", order = 82)
     public RString shimeiText;
-    @ReportItem(name = "meishoFuyo2", length = 3, order = 83)
+    @ReportItem(name = "meishoFuyo2", length = 2, order = 83)
     public RString meishoFuyo2;
     @ReportItem(name = "shimeiSmall1", length = 40, order = 84)
     public RString shimeiSmall1;
     @ReportItem(name = "dainoKubunMei", length = 8, order = 85)
     public RString dainoKubunMei;
-    @ReportItem(name = "shimei6", length = 20, order = 86)
-    public RString shimei6;
-    @ReportItem(name = "meishoFuyo1", length = 3, order = 87)
+    @ReportItem(name = "shimei2", length = 20, order = 86)
+    public RString shimei2;
+    @ReportItem(name = "meishoFuyo1", length = 2, order = 87)
     public RString meishoFuyo1;
     @ReportItem(name = "samabunShimeiText", order = 88)
     public RString samabunShimeiText;
-    @ReportItem(name = "samaBun2", length = 3, order = 89)
+    @ReportItem(name = "samaBun2", length = 2, order = 89)
     public RString samaBun2;
     @ReportItem(name = "samabunShimeiSmall2", length = 40, order = 90)
     public RString samabunShimeiSmall2;
@@ -212,7 +212,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource implements IReportSo
     public RString kakkoLeft1;
     @ReportItem(name = "samabunShimei1", length = 20, order = 96)
     public RString samabunShimei1;
-    @ReportItem(name = "samaBun1", length = 3, order = 97)
+    @ReportItem(name = "samaBun1", length = 2, order = 97)
     public RString samaBun1;
     @ReportItem(name = "samabunShimeiSmall1", length = 40, order = 98)
     public RString samabunShimeiSmall1;
