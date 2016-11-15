@@ -118,6 +118,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             if (処理モード.equals(修正モード_TWO)) {
                 RString 訂正区分コード = JukyushaIF_TeiseiKubunCode.修正.getコード();
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
+                        set履歴番号(訂正対象データ.get履歴番号() + 1).build();
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
                         set送付年月(new FlexibleYearMonth(システムタイム.getYearMonth().toDateString())).build();
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
                         set訂正年月日(new FlexibleDate(システムタイム.toDateString())).build();
@@ -279,6 +281,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
             JukyushaIdoRenrakuhyo 訂正対象データ) {
         受給者訂正連絡票登録画面Div = get登録用Entity_one(受給者訂正連絡票登録画面Div, 訂正対象データ);
+
+        受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                createBuilderForEdit().set履歴番号(訂正対象データ.get履歴番号() + 1).build();
         if (!RString.isNullOrEmpty(訂正対象データ.get特定入所者介護サービス区分コード())
                 && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get特定入所者介護サービス区分コード())) {
             受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
@@ -373,6 +378,10 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get標準負担区分コード())) {
             受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
                     createBuilderForEdit().set標準負担区分コード(半角アスタリスク).build();
+        }
+        if (new RString("space").equals(受給者訂正連絡票登録画面Div.get標準負担区分コード())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set標準負担区分コード(RString.EMPTY).build();
         }
         return get登録用Entity_two(受給者訂正連絡票登録画面Div, 訂正対象データ);
     }
