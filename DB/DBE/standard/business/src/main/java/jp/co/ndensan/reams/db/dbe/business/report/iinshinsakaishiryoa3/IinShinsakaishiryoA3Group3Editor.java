@@ -6,12 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 特記事項2枚目以降A3版Editorです。
@@ -69,18 +67,22 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
+    private final RString reportId;
 
     /**
      * インスタンスを生成します。
      *
      * @param item IchijihanteikekkahyoA3Entity
      * @param 特記事項List List<RString>
+     * @param reportId 帳票ＩＤ
      * @param index int
      * @param page int
      */
-    protected IinShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item, List<RString> 特記事項List, int index, int page) {
+    protected IinShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item,
+            List<RString> 特記事項List, RString reportId, int index, int page) {
         this.item = item;
         this.特記事項List = 特記事項List;
+        this.reportId = reportId;
         this.index = index;
         this.page = page;
     }
@@ -131,12 +133,11 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
                 source = set特記事項イメージ(source);
             }
         }
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
-            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    item.get申請書管理番号());
+        if (ReportIdDBE.DBE517915.getReportId().value().equals(reportId)) {
+            source.layout = Layouts.四頁目;
+        } else {
+            source.layout = Layouts.任意;
         }
-        source.layout = Layouts.四頁目;
         return source;
     }
 

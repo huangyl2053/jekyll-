@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaokenshain;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -50,7 +51,6 @@ public class SogojigyohiSaishinsaKetteiHokenshaInSource implements IReportSource
     public RString kaipage4;
     @ReportItem(name = "kaipage5", length = 20, order = 18)
     public RString kaipage5;
-    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 19)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 20, order = 20)
@@ -115,6 +115,8 @@ public class SogojigyohiSaishinsaKetteiHokenshaInSource implements IReportSource
     public RString sogojigyohiChoseiFutangaku;
     @ReportPerson(id = "X")
     public RString shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

@@ -90,7 +90,7 @@ public class DBC200203GassanJigyobunJikofutangakuKeisanKekkaIchiranPageBreak ext
             flag = !currentRecord.getSource().list_2.equals(nextRecord.getSource().list_2);
         }
         if (!flag && this.keys.contains(DBC200203GassanJigyobunJikofutangakuKeisanKekkaIchiranOutputOrder.市町村コード.get項目ID())) {
-            flag = !currentRecord.getSource().shichosonCd.equals(nextRecord.getSource().shichosonCd);
+            flag = !currentRecord.getSource().shichosonCode.equals(nextRecord.getSource().shichosonCode);
         }
         if (!flag && this.keys.contains(DBC200203GassanJigyobunJikofutangakuKeisanKekkaIchiranOutputOrder.証記載保険者番号.get項目ID())) {
             flag = !currentRecord.getSource().hokenshaNo.equals(nextRecord.getSource().hokenshaNo);

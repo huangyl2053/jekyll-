@@ -176,7 +176,9 @@ public class DvKogakuServiceJuryoInin {
      * @return 画面
      */
     public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_btnSeitaiIchiran(DvKogakuServiceJuryoIninDiv div) {
-        KogakuServiceData 引き継ぎ情報 = getHandler(div).onClick_btnSeitaiIchiran();
+        TaishoshaKey 引き継ぎデータ = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        KogakuServiceData 引き継ぎ情報 = getHandler(div).onClick_btnSeitaiIchiran(引き継ぎデータ);
         ViewStateHolder.put(ViewStateKeys.該当者一覧キー, 引き継ぎ情報);
         return ResponseData.of(div).forwardWithEventName(DBC0330011TransitionEventName.世帯情報表示).respond();
     }

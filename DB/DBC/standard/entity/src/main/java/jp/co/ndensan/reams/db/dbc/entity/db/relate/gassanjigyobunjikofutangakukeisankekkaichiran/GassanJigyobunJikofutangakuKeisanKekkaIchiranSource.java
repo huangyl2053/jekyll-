@@ -74,6 +74,8 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranSource implements IRep
     public RString gyoseikuCode;
     @ReportItem(name = "hokenshaNo")
     public RString hokenshaNo;
+    @ReportItem(name = "shichosonCode")
+    public RString shichosonCode;
 
     /**
      * GassanJigyobunJikofutangakuKeisanKekkaIchiranSourceのENUM

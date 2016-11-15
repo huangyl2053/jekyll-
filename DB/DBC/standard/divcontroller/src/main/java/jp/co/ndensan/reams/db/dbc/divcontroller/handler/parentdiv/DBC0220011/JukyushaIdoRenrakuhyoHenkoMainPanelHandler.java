@@ -54,8 +54,6 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanelHandler {
         RString 表示モード = RString.EMPTY;
         if (受給者異動連絡票変更登録.equals(メニューID)) {
             表示モード = 修正モード;
-            div.setTitle(表示モード);
-
         } else if (受給者異動_訂正連絡票発行.equals(メニューID) || 受給者異動連絡票情報照会.equals(メニューID)) {
             表示モード = 選択モード;
         }

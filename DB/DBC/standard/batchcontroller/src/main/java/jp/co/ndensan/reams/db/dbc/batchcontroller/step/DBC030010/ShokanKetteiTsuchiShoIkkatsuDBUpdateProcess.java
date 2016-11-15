@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.SelectMaxEdabanParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanHanteiKekkaUpdataParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -38,9 +39,12 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
             + "shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.get償還払支給判定結果情報");
     private static final RString 抽出モード_受付日 = new RString("1");
     private static final RString 抽出モード_決定日 = new RString("2");
-    private static final RString 初期連番 = new RString("0001");
+    private static final RString 更新する = new RString("2");
+    private static final RString 初期連番 = new RString("0000");
+    private static final RString 初期年度 = new RString("0000");
     private static final int MAXLENGTH = 4;
     private static final RString ZERO = new RString("0");
+    private static final RString 発行有無_2 = new RString("２号発行有無");
 
     @BatchWriter
     BatchPermanentTableWriter<DbT3036ShokanHanteiKekkaEntity> dbT3036Writer;
@@ -50,8 +54,15 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
 
     @Override
     protected IBatchReader createReader() {
+        ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
+        RString 発行有無 = RString.EMPTY;
+        ChohyoSeigyoHanyo 帳票制御汎発行有無 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                FlexibleYear.MIN, 発行有無_2);
+        if (帳票制御汎発行有無 != null) {
+            発行有無 = 帳票制御汎発行有無.get設定値();
+        }
         ShokanHanteiKekkaUpdataParameter sqlParam = ShokanHanteiKekkaUpdataParameter.createParam(parameter.getChusyuMode(),
-                parameter.getInsho(), parameter.getDataFrom(), parameter.getDataTo(), parameter.getKetteishaUketsukeYM());
+                parameter.getInsho(), parameter.getDataFrom(), parameter.getDataTo(), parameter.getKetteishaUketsukeYM(), 発行有無);
         return new BatchDbReader(償還払支給判定結果情報取得SQL, sqlParam);
     }
 
@@ -64,7 +75,7 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
     @Override
     protected void process(DbT3036ShokanHanteiKekkaEntity entity) {
         RDate 決定日 = parameter.getKetteiYMD();
-        if (決定日 != null) {
+        if (決定日 != null && 更新する.endsWith(parameter.get決定日一括更新区分())) {
             entity.setKetteiYMD(new FlexibleDate(決定日.getYearValue(), 決定日.getMonthValue(), 決定日.getDayValue()));
         }
         entity.setKetteiTsuchishoSakuseiYMD(parameter.getHakkoYMD());
@@ -73,13 +84,14 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
 
     @Override
     protected void afterExecute() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        LasdecCode 市町村コード = association.get地方公共団体コード();
+        LasdecCode 市町村コード = new LasdecCode(new RString("000000"));
+        FlexibleYear 年度 = new FlexibleYear(初期年度);
+        RString 処理枝番 = 初期連番;
         RString 処理名;
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
         entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         entity.setShichosonCode(市町村コード);
-        entity.setNendo(new FlexibleYear(RDate.getNowDate().getNendo().toDateString()));
+        entity.setNendo(年度);
 
         if (抽出モード_受付日.equals(parameter.getChusyuMode()) || 抽出モード_決定日.equals(parameter.getChusyuMode())) {
             if (抽出モード_受付日.equals(parameter.getChusyuMode())) {
@@ -100,15 +112,16 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
         }
         IShokanKetteiTsuchiShoIkkatsuSakuseiMapper mapper = getMapper(IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.class);
         DbT7022ShoriDateKanriEntity dbt7022Entity = mapper.get最大枝番(new SelectMaxEdabanParameter(SubGyomuCode.DBC介護給付,
-                市町村コード, 処理名, new FlexibleYear(RDate.getNowDate().getNendo().toDateString())));
+                市町村コード, 処理名, 処理枝番, 年度));
         if (dbt7022Entity == null) {
             entity.setNendoNaiRenban(初期連番);
             entity.setShoriEdaban(初期連番);
+            entity.setShoriName(処理名);
+            dbT7072Writer.insert(entity);
         } else {
-            entity.setShoriEdaban(new RString(Integer.parseInt(dbt7022Entity.getShoriEdaban().toString()) + 1).padLeft(ZERO, MAXLENGTH));
-            entity.setNendoNaiRenban(new RString(Integer.parseInt(dbt7022Entity.getNendoNaiRenban().toString()) + 1).padLeft(ZERO, MAXLENGTH));
+            dbt7022Entity.setTaishoKaishiYMD(entity.getTaishoKaishiYMD());
+            dbt7022Entity.setTaishoShuryoYMD(entity.getTaishoShuryoYMD());
+            dbT7072Writer.update(dbt7022Entity);
         }
-        entity.setShoriName(処理名);
-        dbT7072Writer.insert(entity);
     }
 }

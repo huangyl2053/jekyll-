@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsKariHenkoTsu
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsNenkinTokuchoKaifuJoho1Process;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsNenkinTokuchoKaifuJoho2Process;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsShikakuSoshitsuTempProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsTokuchoIraiTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsTokuchoTeishiTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsTokuchoTsuikaIraiTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsTokuchoTsuikaIraiTsuikaTempProcess;
@@ -54,7 +53,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Width;
  */
 public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_TokuchoSofuJohoSakuseiParameter> {
 
-    private static final String 特徴依頼のデータ抽出 = "insTokuchoIraiTempProcess";
     private static final String 年金特徴回付情報追加用データ作成 = "insNenkinTokuchoKaifuJoho1Process";
     private static final String 介護徴収方法の追加 = "insChoshuHohoProcess";
     private static final String 介護特別徴収情報取込履歴の登録 = "insTorikomiRirekiProcess";
@@ -111,7 +109,6 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     @Override
     protected void defineFlow() {
         if (is処理対象月が7月()) {
-            executeStep(特徴依頼のデータ抽出);
             executeStep(年金特徴回付情報追加用データ作成);
             executeStep(介護徴収方法の追加);
             executeStep(介護特別徴収情報取込履歴の登録);
@@ -145,17 +142,6 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
         }
 
         executeStep(処理日付管理テーブル更新);
-    }
-
-    /**
-     * 特徴依頼のデータ抽出する。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(特徴依頼のデータ抽出)
-    protected IBatchFlowCommand insTokuchoIraiTempProcess() {
-        return loopBatch(InsTokuchoIraiTempProcess.class)
-                .arguments(getParameter().toInsTokuchoIraiTempProcessParameter()).define();
     }
 
     /**

@@ -533,7 +533,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends BatchProcessBase<
 
     private int publish特徴開始通知書_その他(HonsanteifukaBatchTyouhyou 出力帳票一覧, EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
         if (ReportIdDBB.DBB100036.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            new TokubetsuChoshuKaishiTsuchishoB52Report(編集後本算定通知書共通情報, 宛名連番, dbb100036NinshoshaSource).
+            new TokubetsuChoshuKaishiTsuchishoB52Report(編集後本算定通知書共通情報, 宛名連番, 地方公共団体, dbb100036NinshoshaSource).
                     writeBy(dbb100036ReportSourceWriter);
             return dbb100036ReportSourceWriter.pageCount().value();
         } else if (ReportIdDBB.DBB100037.getReportId().equals(出力帳票一覧.get帳票ID())) {

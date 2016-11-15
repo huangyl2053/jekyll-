@@ -51,7 +51,7 @@
      "layoutName": "DBC0030012",
      "layoutTitle": "高額介護サービス費照会",
      "eventName": "検索結果一覧",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0030011",
@@ -108,7 +108,7 @@
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
-     "toState": "検索条件"
+     "toState": "検索条件sub"
     },
     {
      "id": "9",
@@ -130,7 +130,7 @@
      "layoutSubGyomuCode": "DBZ",
      "layoutName": "DBZ0200001",
      "layoutTitle": "対象者検索",
-     "eventName": "終了",
+     "eventName": "戻る",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",

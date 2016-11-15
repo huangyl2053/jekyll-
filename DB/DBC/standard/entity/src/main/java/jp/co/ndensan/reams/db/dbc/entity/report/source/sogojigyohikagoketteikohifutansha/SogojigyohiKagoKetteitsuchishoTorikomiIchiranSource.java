@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteikohifutansha;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -62,7 +63,6 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource implements IRep
     public RString listUpper_9;
     @ReportItem(name = "listLower_1", length = 18, order = 24)
     public RString listLower_1;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_2", length = 10, order = 25)
     public RString listLower_2;
     @ReportItem(name = "listLower_3", length = 4, order = 26)
@@ -85,9 +85,11 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource implements IRep
     public RString sogojigyohiTanisu;
     @ReportItem(name = "sogojigyohiFutangaku", length = 17, order = 35)
     public RString sogojigyohiFutangaku;
-    @ReportPerson(id = "A")
+    @ReportPerson(id = "X")
     @ReportItem(name = "shikibetsuCode", length = 36)
     public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

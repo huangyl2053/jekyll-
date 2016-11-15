@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kyufujissekikoshinkekkaichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.chohyoshutsuryokutaishodate.ChohyoShutsuryokuTaishoDateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinkekkaichiran.KyufujissekiKoshinkekkaIchiranSource;
@@ -61,6 +62,8 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     private static final RString 図形_THREE = new RString("●");
     private static final RString 事業者名不明_定数 = new RString("事業者名不明");
     private static final RString 合計件数タイトル = new RString("合計件数");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -146,8 +149,10 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             editor給付実績_レコード件数(source);
             editorAdd(source);
             editor集計(source);
-            if (!RString.isNullOrEmpty(entity.get被保険者_識別コード())) {
+            if (entity.get被保険者_識別コード() != null) {
                 source.shikibetuCode = new ShikibetsuCode(entity.get被保険者_識別コード());
+            } else {
+                source.shikibetuCode = ShikibetsuCode.EMPTY;
             }
             source.kyufuJissekiKubun = getNotNull(entity.get給付実績_給付実績区分());
             source.yubinNo = getNotNull(entity.get被保険者_郵便番号());
@@ -155,8 +160,9 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             source.gyoseikuCode = getNotNull(entity.get被保険者_行政区コード());
             source.shimei50onKana = getNotNull(entity.get被保険者_氏名50音カナ());
             source.shichosonCode = getNotNull(entity.get被保険者_市町村コード());
+            source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                    ReportKomokuEditorUtil.get非空文字列(source.listUpper_5));
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_5);
         return source;
     }
 

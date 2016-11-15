@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.Hu
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.JuutakuKaishuuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KeikakuHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KinkyuuziShisetuRyouyouEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.MeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShakaiHukushiHouzinKeigenEntity;
@@ -26,17 +25,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.To
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiShinryouHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoReportSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaTmpMapper;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -47,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * @reamsid_L DBC-3080-030 dongyabin
  *
  */
-public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonRelateEntity> {
+public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaKyufujissekiDaichoMapper."
@@ -71,6 +66,8 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonRelateEntit
     List<ShoteiShikkanEntity> 所定疾患施設療養費;
     List<ShuukeiEntity> 集計;
     List<KihonEntity> 給付実績高額;
+    private RString 保険者コード;
+    private RString 保険者名;
 
     @BatchWriter
     private BatchReportWriter<JukyushaKyufuJissekidaichoReportSource> batchReportWriter;
@@ -79,12 +76,10 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonRelateEntit
     @Override
     protected void initialize() {
         mapper = getMapper(IJukyushaTmpMapper.class);
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        parameter.setPsmShikibetsuTaisho(new RString(uaFt200Psm.getParameterMap().
-                get("psmShikibetsuTaisho").toString()));
         edit = new JukyushaKyufuDaichoEdit();
+        保険者コード = AssociationFinderFactory.createInstance().getAssociation()
+                .getLasdecCode_().value();
+        保険者名 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
     }
 
     @Override
@@ -116,10 +111,26 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonRelateEntit
     }
 
     @Override
-    protected void process(KihonRelateEntity entity) {
+    protected void process(KihonEntity entity) {
         flag = true;
         jukyushaKyufuDaicho = new JukyushaKyufuJissekidaichoData();
-        edit.report受給者給付台帳(entity, jukyushaKyufuDaicho, reportSourceWriter);
+        edit.report受給者給付台帳(entity,
+                給付実績高額,
+                jukyushaKyufuDaicho,
+                reportSourceWriter,
+                明細,
+                集計,
+                特定入所者介護サービス費用,
+                緊急時施設療養,
+                特定診療費,
+                計画費,
+                所定疾患施設療養費,
+                福祉用具,
+                住宅改修,
+                ケアマネジメント費,
+                社会福祉法人軽減額,
+                保険者コード,
+                保険者名);
     }
 
     @Override

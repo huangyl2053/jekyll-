@@ -34,6 +34,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class KaigojuminHyotrukuProcess {
 
+    private static final RString 連番用 = new RString("0");
+    private static final int 桁目_3 = 4;
+
     /**
      *
      * @param 抽出開始日時 RDateTime
@@ -106,8 +109,8 @@ public class KaigojuminHyotrukuProcess {
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
         entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
         entity.setShichosonCode(new LasdecCode(processParameter.getShichosonCode()));
-        entity.setShoriEdaban(new RString(String.valueOf(Integer.valueOf(dateentity.getShoriEdaban().toString()) + 1)));
-        entity.setNendoNaiRenban(new RString(String.valueOf(Integer.valueOf(dateentity.getNendoNaiRenban().toString()) + 1)));
+        entity.setShoriEdaban(new RString(String.valueOf(Integer.valueOf(dateentity.getShoriEdaban().toString()) + 1)).padLeft(連番用, 桁目_3));
+        entity.setNendoNaiRenban(new RString(String.valueOf(Integer.valueOf(dateentity.getNendoNaiRenban().toString()) + 1)).padLeft(連番用, 桁目_3));
         entity.setShoriName(ShoriName.住民異動連携情報登録_他社住基用.get名称());
         entity.setNendo(new FlexibleYear("0000"));
         entity.setKijunYMD(new FlexibleDate(processParameter.getShoriTimestamp().getDate().toString()));
@@ -135,8 +138,8 @@ public class KaigojuminHyotrukuProcess {
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
         entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
         entity.setShichosonCode(new LasdecCode(processParameter.getShichosonCode()));
-        entity.setShoriEdaban(new RString("1"));
-        entity.setNendoNaiRenban(new RString("1"));
+        entity.setShoriEdaban(new RString("0001"));
+        entity.setNendoNaiRenban(new RString("0001"));
         entity.setShoriName(ShoriName.住民異動連携情報登録_他社住基用.get名称());
         entity.setNendo(new FlexibleYear("0000"));
         entity.setKijunYMD(new FlexibleDate(processParameter.getShoriTimestamp().getDate().toString()));

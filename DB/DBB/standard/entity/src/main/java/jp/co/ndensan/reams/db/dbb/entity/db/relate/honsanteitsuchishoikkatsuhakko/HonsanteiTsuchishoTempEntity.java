@@ -39,4 +39,6 @@ public class HonsanteiTsuchishoTempEntity implements Serializable {
     private RString 生活保護区分;
     private RString 決定変更区分;
     private RString 出力順グループ指定;
+    private RString 特徴8月開始者区分;
+    private RString 特徴10月開始者区分;
 }

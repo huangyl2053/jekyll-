@@ -507,7 +507,9 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         }
         if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            handler.get前排他を解除(被保険者番号.getColumnValue());
+            if (null != 被保険者番号) {
+                handler.get前排他を解除(被保険者番号.getColumnValue());
+            }
             return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.再検索).respond();
         }
         return ResponseData.of(div).respond();
@@ -533,7 +535,9 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         }
         if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            handler.get前排他を解除(被保険者番号.getColumnValue());
+            if (null != 被保険者番号) {
+                handler.get前排他を解除(被保険者番号.getColumnValue());
+            }
             return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.検索結果一覧).respond();
         }
         return ResponseData.of(div).respond();
@@ -605,7 +609,9 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
             KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
         KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        handler.get前排他を解除(被保険者番号.getColumnValue());
+        if (null != 被保険者番号) {
+            handler.get前排他を解除(被保険者番号.getColumnValue());
+        }
         return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.検索結果一覧).respond();
     }
 

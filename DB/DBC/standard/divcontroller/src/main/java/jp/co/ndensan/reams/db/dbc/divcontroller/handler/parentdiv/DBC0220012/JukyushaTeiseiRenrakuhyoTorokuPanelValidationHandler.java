@@ -43,7 +43,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelValidationHandler {
         if (div.getOutputJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoHenkoPrintSetting().getIssueDate() == null) {
             validPairs.add(new ValidationMessageControlPair(
                     new JukyushaTeiseiRenrakuhyoTorokuPanelValidationHandler.IdocheckMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, 発行日.toString())));
+                            UrErrorMessages.必須項目_追加メッセージあり, 発行日.toString()),
+                    div.getOutputJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoHenkoPrintSetting().getTxtIssueDate()));
         }
         return validPairs;
     }

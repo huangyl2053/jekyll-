@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TyouhyouResult {
+public class TyouhyouResult implements Serializable {
 
     private final TyouhyouEntity entity;
 

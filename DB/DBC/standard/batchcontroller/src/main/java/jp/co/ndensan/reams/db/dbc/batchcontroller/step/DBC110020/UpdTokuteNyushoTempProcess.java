@@ -128,18 +128,18 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
 
     private RString 特定入所者全項目(TokuteiNyusyoshaInfoEntity 特定入所者) {
         RString 全項目 = RString.EMPTY;
-        全項目 = 全項目.concat(特定入所者.get減免_減額種類()).concat(SPLIT)
-                .concat(特定入所者.get適用開始日().toString()).concat(SPLIT)
-                .concat(特定入所者.get適用終了日().toString()).concat(SPLIT)
-                .concat(特定入所者.get食費負担限度額().toString()).concat(SPLIT)
-                .concat(特定入所者.getユニット型個室().toString()).concat(SPLIT)
-                .concat(特定入所者.getユニット型準個室().toString()).concat(SPLIT)
-                .concat(特定入所者.get従来型個室_特養等().toString()).concat(SPLIT)
-                .concat(特定入所者.get従来型個室_老健_療養等().toString()).concat(SPLIT)
-                .concat(特定入所者.get多床室().toString()).concat(SPLIT)
-                .concat(特定入所者.get旧措置者区分()).concat(SPLIT)
-                .concat(特定入所者.get決定区分()).concat(SPLIT)
-                .concat(特定入所者.get申請日().toString()).concat(SPLIT);
+        全項目 = 全項目.concat(特定入所者.get減免_減額種類()).concat(SPLIT);
+        全項目 = cancatYMD(特定入所者.get適用開始日(), 全項目);
+        全項目 = cancatYMD(特定入所者.get適用終了日(), 全項目);
+        全項目 = cancatDecimal(特定入所者.get食費負担限度額(), 全項目);
+        全項目 = cancatDecimal(特定入所者.getユニット型個室(), 全項目);
+        全項目 = cancatDecimal(特定入所者.getユニット型準個室(), 全項目);
+        全項目 = cancatDecimal(特定入所者.get従来型個室_特養等(), 全項目);
+        全項目 = cancatDecimal(特定入所者.get従来型個室_老健_療養等(), 全項目);
+        全項目 = cancatDecimal(特定入所者.get多床室(), 全項目);
+        全項目 = cancatRString(特定入所者.get旧措置者区分(), 全項目);
+        全項目 = cancatRString(特定入所者.get決定区分(), 全項目);
+        全項目 = cancatYMD(特定入所者.get申請日(), 全項目);
         return 全項目;
     }
 
@@ -148,5 +148,26 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
             return true;
         }
         return false;
+    }
+
+    private RString cancatYMD(FlexibleDate date, RString 全項目) {
+        if (date != null) {
+            return 全項目.concat(new RString(date.toString())).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
+    }
+
+    private RString cancatDecimal(Decimal 項目, RString 全項目) {
+        if (項目 != null) {
+            return 全項目.concat(項目.toString()).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
+    }
+
+    private RString cancatRString(RString 項目, RString 全項目) {
+        if (!RString.isNullOrEmpty(項目)) {
+            return 全項目.concat(項目.toString()).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
     }
 }

@@ -435,4 +435,23 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
         }
         return iTrueFalseCriteria;
     }
+
+    /**
+     * 検索した被保番号が　受給者異動送付に検索
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT3001JukyushaIdoRenrakuhyoEntity
+     */
+    @Transaction
+    public List<DbT3001JukyushaIdoRenrakuhyoEntity> selectHihokenshaNo(
+            HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3001JukyushaIdoRenrakuhyo.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, 論理削除フラグ))).
+                toList(DbT3001JukyushaIdoRenrakuhyoEntity.class);
+    }
 }

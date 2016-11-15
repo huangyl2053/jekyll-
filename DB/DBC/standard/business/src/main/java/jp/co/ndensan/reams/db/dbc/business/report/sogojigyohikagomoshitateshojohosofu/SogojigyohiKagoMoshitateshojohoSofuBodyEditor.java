@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
@@ -94,7 +95,8 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
         source.listUpper_13 = 送付一覧表データ.getDbWT1001Entity().getGyoseikuCode();
         source.listUpper_14 = 送付一覧表データ.getDbWT1001Entity().getShimei50onKana();
         source.listUpper_15 = getColumnValue(送付一覧表データ.getDbWT1001Entity().getShichosonCode());
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_5);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                ReportKomokuEditorUtil.get非空文字列(source.listUpper_4));
         return source;
     }
 

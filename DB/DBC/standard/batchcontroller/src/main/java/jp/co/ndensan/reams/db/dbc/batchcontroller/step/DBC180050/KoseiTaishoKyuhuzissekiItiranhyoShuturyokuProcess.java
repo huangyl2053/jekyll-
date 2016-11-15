@@ -317,14 +317,9 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
             給付実績一覧表合計Entity.set高額サービス費用額(entity.get高額サービス費用額());
             給付実績一覧表合計Entity.set自己負担差額(entity.get自己負担額差額());
         } else {
-            if (null == 給付実績一覧表合計Entity.get高額サービス費用額()) {
-                給付実績一覧表合計Entity.set高額サービス費用額(Decimal.ZERO);
-            }
-            if (null == 給付実績一覧表合計Entity.get自己負担差額()) {
-                給付実績一覧表合計Entity.set自己負担差額(Decimal.ZERO);
-            }
-            給付実績一覧表合計Entity.set高額サービス費用額(給付実績一覧表合計Entity.get高額サービス費用額().add(entity.get高額サービス費用額()));
-            給付実績一覧表合計Entity.set自己負担差額(給付実績一覧表合計Entity.get自己負担差額().add(entity.get自己負担額差額()));
+            給付実績一覧表合計Entity.set高額サービス費用額(set合計金額(給付実績一覧表合計Entity.get高額サービス費用額(),
+                    entity.get高額サービス費用額()));
+            給付実績一覧表合計Entity.set自己負担差額(set合計金額(給付実績一覧表合計Entity.get自己負担差額(), entity.get自己負担額差額()));
         }
     }
 
@@ -377,12 +372,6 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
             合計CSVEntity.set自己負担額差額(entity.get自己負担額差額());
             合計CSVEntity.set高額サービス費用額(entity.get高額サービス費用額());
         } else {
-            if (null == 合計CSVEntity.get自己負担額差額()) {
-                合計CSVEntity.set自己負担額差額(Decimal.ZERO);
-            }
-            if (null == 合計CSVEntity.get高額サービス費用額()) {
-                合計CSVEntity.set高額サービス費用額(Decimal.ZERO);
-            }
             合計CSVEntity.set自己負担額差額(合計CSVEntity.get自己負担額差額().add(entity.get自己負担額差額()));
             合計CSVEntity.set高額サービス費用額(合計CSVEntity.get高額サービス費用額().add(entity.get高額サービス費用額()));
         }
@@ -426,5 +415,17 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
             return 和暦日.concat(RString.HALF_SPACE).concat(和暦時);
         }
         return RString.EMPTY;
+    }
+
+    private Decimal set合計金額(Decimal 金額1, Decimal 金額2) {
+        if (金額1 != null && 金額2 != null) {
+            return 金額1.add(金額2);
+        } else if (金額1 != null) {
+            return 金額1;
+        } else if (金額2 != null) {
+            return 金額2;
+        }
+        return null;
+
     }
 }

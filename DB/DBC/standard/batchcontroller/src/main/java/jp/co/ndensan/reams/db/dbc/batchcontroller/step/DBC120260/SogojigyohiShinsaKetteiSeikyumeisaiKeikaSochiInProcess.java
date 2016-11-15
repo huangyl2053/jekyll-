@@ -94,7 +94,6 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess
     private static final RString SAKUSEI = new RString("作成");
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "sogojigyohishinsaketteiseikyumeisaikeikasochiin.ISogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInMapper.get帳票出力対象データ");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY \"DbWT1613SinsaKetteiSeikyuGokei\".\"shoKisaiHokenshaNo\" ASC ");
     private static final RString 引用符_1 = new RString("**********");
     private static final RString 文字_合計 = new RString("合計");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
@@ -112,23 +111,12 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess
         改頁項目名リスト = new ArrayList<>();
         出力順Map = new HashMap<>();
         並び順 = get並び順(parameter.get帳票ID(), parameter.get出力順ID());
-        RString 出力順 = MyBatisOrderByClauseCreator
-                .create(SogojigyohiShinsaKetteiSeikyumeisaihyoOutPutOrder.class, 並び順);
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
+        RString 出力順 = MyBatisOrderByClauseCreator
+                .create(SogojigyohiShinsaKetteiSeikyumeisaihyoOutPutOrder.class, 並び順);
         帳票データの取得Parameter.set出力順(出力順);
         int i = 0;
         for (ISetSortItem item : 並び順.get設定項目リスト()) {

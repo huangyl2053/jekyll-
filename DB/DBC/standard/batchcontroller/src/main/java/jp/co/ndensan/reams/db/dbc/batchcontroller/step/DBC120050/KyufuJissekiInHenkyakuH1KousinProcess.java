@@ -37,7 +37,6 @@ public class KyufuJissekiInHenkyakuH1KousinProcess extends BatchProcessBase<Kyuf
     @BatchWriter
     private IBatchTableWriter 給付実績H1tableWriter;
     private static final RString 給付実績H1一時_TABLE_NAME = new RString("DbWT111AKyufuJissekiH1");
-    private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
 
     @Override
     protected void initialize() {

@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -954,7 +955,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
                                 eq(shichosonCode, 市町村コード),
                                 eq(shoriName, 処理名),
-                                eq(nendo, RDate.getNowDate().getNendo())))
+                                eq(nendo, new RYear(年度_0000))))
                 .order(new OrderBy(shoriEdaban, Order.DESC, NullsOrder.LAST),
                         new OrderBy(nendoNaiRenban, Order.DESC, NullsOrder.LAST)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
@@ -1929,6 +1930,38 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendo, 年度_0000),
                                 eq(shoriEdaban, 処理枝番))).
                 order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 前回の実行情報を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 市町村コード ShichosonCode
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select前回の実行情報(SubGyomuCode サブ業務コード, LasdecCode 市町村コード, RString 処理名,
+            RString 処理枝番) throws NullPointerException {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, 処理名),
+                                eq(nendo, new FlexibleYear(年度_0000)),
+                                eq(shoriEdaban, 処理枝番))).
+                order(
+                        by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 

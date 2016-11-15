@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintCont
 
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /*
  * このコードはツールによって生成されました。
@@ -44,4 +45,12 @@ public interface IPrintContentsSettingDiv extends ICommonChildDivBaseProperties 
      * @param flag True:非活性　False:活性
      */
     public void setSendDateDisable(boolean flag);
+
+    /**
+     * 発行日を取得します。
+     *
+     * @return TextBoxDate
+     */
+    public TextBoxDate getTxtIssueDate();
+
 }

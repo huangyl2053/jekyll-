@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojyuminhyokoukiu;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
@@ -20,27 +20,49 @@ import lombok.Getter;
 @Getter
 public final class KaiGoJuminHyokouKiuMapperParameter implements IMyBatisParameter {
 
-    private final List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList;
+    private final RString shichosonCode;
+    private final RDateTime dateFrom;
+    private final RDateTime dateTo;
+    private final boolean checkKaishiFlag;
+    private final boolean checkShuryoFlag;
 
     /**
      * コンストラクタです。
      *
      */
     private KaiGoJuminHyokouKiuMapperParameter(
-            List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList) {
-
-        this.kobetsuKoikiunyoParameterList = kobetsuKoikiunyoParameterList;
+            RString shichosonCode,
+            RDateTime dateFrom,
+            RDateTime dateTo,
+            boolean checkKaishiFlag,
+            boolean checkShuryoFlag) {
+        this.shichosonCode = shichosonCode;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.checkKaishiFlag = checkKaishiFlag;
+        this.checkShuryoFlag = checkShuryoFlag;
     }
 
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param kobetsuKoikiunyoParameterList kobetsuKoikiunyoParameterList
+     * @param shichosonCode RString
+     * @param dateFrom RDateTime
+     * @param dateTo RDateTime
      * @return KaiGoJuminHyokouKiuMapperParameter
      */
     public static KaiGoJuminHyokouKiuMapperParameter createParam(
-            List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList) {
-        return new KaiGoJuminHyokouKiuMapperParameter(kobetsuKoikiunyoParameterList);
+            RString shichosonCode,
+            RDateTime dateFrom,
+            RDateTime dateTo) {
+        boolean checkKaishiFlag = false;
+        boolean checkShuryoFlag = false;
+        if (dateFrom == null) {
+            checkShuryoFlag = true;
+        } else {
+            checkKaishiFlag = true;
+        }
+        return new KaiGoJuminHyokouKiuMapperParameter(shichosonCode, dateFrom, dateTo, checkKaishiFlag, checkShuryoFlag);
     }
 
 }

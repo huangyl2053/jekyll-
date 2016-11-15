@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBU-1050-020 wanghui -->
 <!-- 概要： 宛名情報を取得しのマッピング用XMLです。 -->
 
 <!-- 概要： 境界層管理マスタリスト情報のマッピング用XMLです。 -->
@@ -172,11 +173,11 @@
             DbT1006Kyo."tekiyoShuryoYMD"  <![CDATA[<=]]> #{date_TO}
         </if>
         </where>
-         <if test = "order_ID">
+         <if test = "isDate_TOFlag">
              ${order_ID},
              DbT1006Kyo."hihokenshaNo"
          </if>
-         <if test = "!order_ID">
+         <if test = "isDate_TOFlag">
             ORDER BY
              DbT1006Kyo."hihokenshaNo"
          </if>

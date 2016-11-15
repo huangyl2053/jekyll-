@@ -53,23 +53,30 @@ public class UpdKoukiTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     private RString 後期高齢者全項目(DbT7124KokiKoreishaInfoEntity 後期高齢者) {
         RString 全項目 = RString.EMPTY;
+        全項目 = cancatRString(後期高齢者.getShikakuSoshitsuYMD(), 全項目);
+        全項目 = cancatRString(後期高齢者.getKokikoreiHihokenshaNo(), 全項目);
+        全項目 = cancatRString(後期高齢者.getKokiHokenshaNoCity(), 全項目);
         全項目 = 全項目
                 .concat(後期高齢者.getInsertDantaiCd()).concat(SPLIT)
                 .concat(後期高齢者.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT)
                 .concat(後期高齢者.getTorokuKubun()).concat(SPLIT)
                 .concat(後期高齢者.getShikibetsuCd().getColumnValue()).concat(SPLIT)
-                .concat(後期高齢者.getRirekiNo()).concat(SPLIT)
-                .concat(後期高齢者.getKokiHokenshaNoCity()).concat(SPLIT)
-                .concat(後期高齢者.getKokiHokenshaNoKoiki()).concat(SPLIT)
-                .concat(後期高齢者.getKokikoreiHihokenshaNo()).concat(SPLIT)
-                .concat(後期高齢者.getShikakuShutokuJiyuCode()).concat(SPLIT)
-                .concat(後期高齢者.getShikakuShutokuYMD()).concat(SPLIT)
-                .concat(後期高齢者.getShikakuSoshitsuJiyuCode()).concat(SPLIT)
-                .concat(後期高齢者.getShikakuSoshitsuYMD()).concat(SPLIT)
-                .concat(後期高齢者.getHokenshaKaishiYMD()).concat(SPLIT)
-                .concat(後期高齢者.getHokenshaShuryoYMD()).concat(SPLIT)
-                .concat(後期高齢者.getKojinKubunCode()).concat(SPLIT)
-                .concat(後期高齢者.getTorokuKubun());
+                .concat(後期高齢者.getRirekiNo()).concat(SPLIT);
+        全項目 = cancatRString(後期高齢者.getKokiHokenshaNoKoiki(), 全項目);
+        全項目 = cancatRString(後期高齢者.getShikakuShutokuJiyuCode(), 全項目);
+        全項目 = cancatRString(後期高齢者.getShikakuShutokuYMD(), 全項目);
+        全項目 = cancatRString(後期高齢者.getShikakuSoshitsuJiyuCode(), 全項目);
+        全項目 = cancatRString(後期高齢者.getHokenshaKaishiYMD(), 全項目);
+        全項目 = cancatRString(後期高齢者.getHokenshaShuryoYMD(), 全項目);
+        全項目 = cancatRString(後期高齢者.getKojinKubunCode(), 全項目);
+        全項目 = cancatRString(後期高齢者.getTorokuKubun(), 全項目);
         return 全項目;
+    }
+
+    private RString cancatRString(RString 項目, RString 全項目) {
+        if (!RString.isNullOrEmpty(項目)) {
+            return 全項目.concat(項目).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
     }
 }

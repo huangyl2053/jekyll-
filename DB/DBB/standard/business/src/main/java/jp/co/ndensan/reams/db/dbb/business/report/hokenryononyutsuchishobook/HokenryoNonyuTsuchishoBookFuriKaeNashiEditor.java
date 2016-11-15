@@ -460,24 +460,28 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
                 }
             }
         }
-        for (SpecialIncomeInformation 特徴収入情報 : 編集後本算定通知書共通情報.get特徴収入情報リスト()) {
-            if (特徴収入情報.get期月() == null) {
-                continue;
-            }
-            if (new RString("4").equals(特徴収入情報.get期月().get期())) {
-                納期別明細書特徴納付済額１ = 特徴収入情報.get収入額();
-                source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku1 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額１, 0);
-            }
-            if (new RString("5").equals(特徴収入情報.get期月().get期())) {
-                納期別明細書特徴納付済額２ = 特徴収入情報.get収入額();
-                source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku2 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額２, 0);
-            }
-            if (new RString("6").equals(特徴収入情報.get期月().get期())) {
-                納期別明細書特徴納付済額３ = 特徴収入情報.get収入額();
-                source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku3 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額３, 0);
+        if (null != 編集後本算定通知書共通情報.get特徴収入情報リスト()) {
+            for (SpecialIncomeInformation 特徴収入情報 : 編集後本算定通知書共通情報.get特徴収入情報リスト()) {
+                if (特徴収入情報.get期月() == null) {
+                    continue;
+                }
+                if (new RString("4").equals(特徴収入情報.get期月().get期())) {
+                    納期別明細書特徴納付済額１ = 特徴収入情報.get収入額();
+                    source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku1 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額１, 0);
+                }
+                if (new RString("5").equals(特徴収入情報.get期月().get期())) {
+                    納期別明細書特徴納付済額２ = 特徴収入情報.get収入額();
+                    source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku2 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額２, 0);
+                }
+                if (new RString("6").equals(特徴収入情報.get期月().get期())) {
+                    納期別明細書特徴納付済額３ = 特徴収入情報.get収入額();
+                    source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku3 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額３, 0);
+                }
             }
         }
-
+        納期別明細書特徴納付額１ = null == 納期別明細書特徴納付額１ ? Decimal.ZERO : 納期別明細書特徴納付額１;
+        納期別明細書特徴納付額２ = null == 納期別明細書特徴納付額２ ? Decimal.ZERO : 納期別明細書特徴納付額２;
+        納期別明細書特徴納付額３ = null == 納期別明細書特徴納付額３ ? Decimal.ZERO : 納期別明細書特徴納付額３;
         Decimal 納期別明細書特徴差額１ = 納期別明細書特徴納付額１.subtract(納期別明細書特徴納付済額１);
         Decimal 納期別明細書特徴差額２ = 納期別明細書特徴納付額２.subtract(納期別明細書特徴納付済額２);
         Decimal 納期別明細書特徴差額３ = 納期別明細書特徴納付額３.subtract(納期別明細書特徴納付済額３);

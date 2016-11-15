@@ -123,11 +123,18 @@ public class TokuchoInfoFDownloadHandler {
         div.getTokuchoInfoDownloadShoriNaiyo().getTxtShoriNendo().setValue(調定年度);
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().getKey();
-        AuthorityItem 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(
-                ControlDataHolder.getUserId()).get(INT_0);
+        List<AuthorityItem> authorityItem = ShichosonSecurityJoho.getShichosonShikibetsuId(
+                ControlDataHolder.getUserId());
+        AuthorityItem 市町村識別ID = null;
+        if (authorityItem != null && !authorityItem.isEmpty()) {
+            市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(
+                    ControlDataHolder.getUserId()).get(INT_0);
+        }
         処理対象月制御();
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
-            市町村制御(市町村識別ID.getItemId());
+            if (市町村識別ID != null) {
+                市町村制御(市町村識別ID.getItemId());
+            }
             div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().setDisabled(true);
             RString selectKey = div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().getSelectedKey();
             市町村処理対象グリッド設定(selectKey);

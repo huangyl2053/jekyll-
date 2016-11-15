@@ -25,15 +25,18 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class SonotashiryoA4Editor implements ISonotashiryoA4Editor {
 
     private final JimuSonotashiryoBusiness business;
+    private final int index;
     private static final int INT_4 = 4;
 
     /**
      * コンストラクタです。
      *
      * @param business {@link JimuSonotashiryoBusiness}
+     * @param index index
      */
-    protected SonotashiryoA4Editor(JimuSonotashiryoBusiness business) {
+    protected SonotashiryoA4Editor(JimuSonotashiryoBusiness business, int index) {
         this.business = business;
+        this.index = index;
     }
 
     /**
@@ -64,8 +67,10 @@ public class SonotashiryoA4Editor implements ISonotashiryoA4Editor {
         source.shinsaYY = get年(business.get介護認定審査会開催年月日());
         source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
-        source.imgSonotashiryo = business.getその他資料();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (index < business.getその他資料().size()) {
+            source.imgSonotashiryo = business.getその他資料().get(index);
+        }
+        source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
 
         if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),

@@ -4,6 +4,9 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_rdbShikyuKubun = function () {
+                return "onChange_rdbShikyuKubun";
+            };
             return Events;
         })();
         KogakuServicehiDetail.Events = Events;

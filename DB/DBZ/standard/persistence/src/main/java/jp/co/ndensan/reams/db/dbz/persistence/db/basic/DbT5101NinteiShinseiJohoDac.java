@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -113,7 +114,7 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
      * @return DbT5101NinteiShinseiJohoEntity
      */
     @Transaction
-    public DbT5101NinteiShinseiJohoEntity get要介護認定申請情報ForCheck(RString 証記載保険者番号, RString 被保険者番号,
+    public List<DbT5101NinteiShinseiJohoEntity> get要介護認定申請情報ForCheck(RString 証記載保険者番号, RString 被保険者番号,
             FlexibleDate 認定申請年月日, Code 認定申請区分_申請時_コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -124,6 +125,6 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(ninteiShinseiYMD, 認定申請年月日),
                                 eq(ninteiShinseiShinseijiKubunCode, 認定申請区分_申請時_コード))).
-                toObject(DbT5101NinteiShinseiJohoEntity.class);
+                toList(DbT5101NinteiShinseiJohoEntity.class);
     }
 }

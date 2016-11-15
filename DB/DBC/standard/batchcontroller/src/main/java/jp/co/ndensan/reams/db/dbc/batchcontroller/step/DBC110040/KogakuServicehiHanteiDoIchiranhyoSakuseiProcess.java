@@ -86,7 +86,6 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
     private List<PersonalData> personalDataList;
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3411.\"hokenshaNo\" ASC");
     private static final RString 固定付加出力順 = new RString(" , DbWT3411.\"hihokenshaNo\" ASC, DbWT3411.\"serviceTeikyoYM\" ASC");
     private static final RString 出力ファイル名 = new RString("DBC200019_KogakuServicehiKyufuHanteiKekkaSofuIchiran.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200019");
@@ -138,17 +137,6 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
                     出力順リスト.add(item.get項目名());
                 }
                 i = i + 1;
-            }
-        }
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
             }
         }
         出力順 = 出力順.concat(固定付加出力順);

@@ -58,6 +58,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInBodyEditor
         source.listMeisai_2 = 審査決定請求明細一時TBL.get事業所名();
         source.listMeisai_3 = doパターン54(審査決定請求明細一時TBL.getサービス提供年月());
         source.listMeisai_4 = 審査決定請求明細一時TBL.getサービス種類名();
+        source.serviceShuruiCode = getColumnValue(審査決定請求明細一時TBL.getサービス種類コード());
         source.listMeisai_5 = doカンマ編集(審査決定請求明細一時TBL.get件数());
         source.listMeisai_6 = doカンマ編集(審査決定請求明細一時TBL.get日数_回数());
         source.listMeisai_7 = doカンマ編集(審査決定請求明細一時TBL.get単位数());

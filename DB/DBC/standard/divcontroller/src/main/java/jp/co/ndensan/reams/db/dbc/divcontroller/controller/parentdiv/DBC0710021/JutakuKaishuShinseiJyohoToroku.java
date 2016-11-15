@@ -176,10 +176,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, 画面モード, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
-        if (valid2.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid2).respond();
+        if (!画面モード_取消.equals(画面モード) && !画面モード_削除.equals(画面モード)) {
+            ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                    div, 画面モード, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
+            if (valid2.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(valid2).respond();
+            }
         }
 
         boolean 内容変更 = new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
@@ -508,10 +510,10 @@ public class JutakuKaishuShinseiJyohoToroku {
         if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
                 && 画面提供着工年月 != null
                 && (old提供着工年月 == null
-                || old提供着工年月.getYear().getYearValue() != 画面提供着工年月.getYear().getYearValue())) {
+                || !old提供着工年月.toDateString().equals(画面提供着工年月.getYearMonth().toDateString()))) {
             div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
                     SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
-                    new FlexibleYear(画面提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
+                    new FlexibleYear(画面提供着工年月.getNendo().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         }
 
         if (div.getTxtTeikyoYM().getValue() != null) {
@@ -655,6 +657,9 @@ public class JutakuKaishuShinseiJyohoToroku {
         } else {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
+            if (!画面モード_照会.equals(画面モード)) {
+                排他キーRelease(被保険者番号.getColumnValue());
+            }
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .parameter(画面モード_照会);
         }

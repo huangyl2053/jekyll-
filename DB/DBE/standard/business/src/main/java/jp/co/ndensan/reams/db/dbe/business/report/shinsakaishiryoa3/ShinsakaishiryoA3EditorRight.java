@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoA3ReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -58,6 +59,7 @@ public class ShinsakaishiryoA3EditorRight implements IShinsakaishiryoA3Editor {
             source.listShinsei2_11 = RString.EMPTY;
             source.listZenkaiｙukokikan2_1 = business.get前回期間_下();
             source.listYukokikan2_1 = RString.EMPTY;
+            source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
         }
         return source;
     }

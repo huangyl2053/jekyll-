@@ -196,6 +196,8 @@ public class InsKyufuJissekiChukanKogakuTmpProcess7 extends BatchProcessBase<Ins
         給付実績中間高額一時7Entity.setShotokuHantei_honninKazeiKubun(entity.getShotokuHantei_honninKazeiKubun());
         給付実績中間高額一時7Entity.setShotokuHantei_setaiKazeiKubun(entity.getShotokuHantei_setaiKazeiKubun());
         給付実績中間高額一時7Entity.setShotokuHantei_tsuzukigaraCodeNen(entity.getShotokuHantei_tsuzukigaraCodeNen());
+        給付実績中間高額一時7Entity.setKogakuServicehiJogengakuGengakuGaitoFlag(entity.getKogakuServicehiJogengakuGengakuGaitoFlag());
+        給付実績中間高額一時7Entity.setKogakuServicehiJogengakuGengakugoJogengaku(entity.getKogakuServicehiJogengakuGengakugoJogengaku());
         return 給付実績中間高額一時7Entity;
     }
 

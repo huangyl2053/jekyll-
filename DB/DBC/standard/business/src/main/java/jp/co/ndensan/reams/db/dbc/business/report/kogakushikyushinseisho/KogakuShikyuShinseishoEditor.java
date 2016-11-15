@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshi
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseisho.KogakuShikyuShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyushinseisho.KogakuShikyuShinseishoSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
@@ -40,6 +42,8 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
     private static final RString 文字_支店 = new RString("支店");
     private static final RString 文字_出張所 = new RString("出張所");
     private static final RString 文字_支所 = new RString("支所");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -71,6 +75,7 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
             source.hihokenshaNo = getColumnValue(帳票出力対象データ.getHihokenshaNoChohyo());
             source.kojinNo = getColumnValue(帳票出力対象データ.getKojinNoChohyo());
             source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
+            source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
         }
         source.hakkoubi = doパターン12(システム日付);
         source.ninshoshaYakushokuMei = 認証者役職名;
@@ -85,6 +90,7 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
         source.shuccho = 文字_出張所;
         source.shisho = 文字_支所;
         source.remban = 連番;
+
         return source;
     }
 

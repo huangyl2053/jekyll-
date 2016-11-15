@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -24,7 +25,6 @@ public class FutanWariaiShoSource implements IReportSource {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     @ReportItem(name = "kofuYmd", length = 20, order = 1)
     public RString kofuYmd;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 25, order = 2)
     public RString hihokenshaNo;
     @ReportItem(name = "jusho", order = 3)
@@ -92,6 +92,8 @@ public class FutanWariaiShoSource implements IReportSource {
     public ShikibetsuCode shikibetsuCode;
     @ReportItemGroup(groupName = "CompSofubutsuAtesaki", order = 34)
     public SofubutsuAtesakiSource compSofubutsuAtesakiSource;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

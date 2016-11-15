@@ -457,7 +457,7 @@ public class ShikyugakuCalcProcess extends BatchKeyBreakBase<ShikyugakuCalcTempE
         Decimal 全明細_負担額_70歳未満_合計 = addDecimal(addDecimal(事業_負担額_70歳未満, 支給額_負担額_70歳未満), 前事業_負担額_70歳未満);
         Decimal 全明細_負担額_合計 = addDecimal(addDecimal(事業_負担額, 支給額_負担額), 前事業_負担額);
         Decimal 全明細_支給額_70歳以上_合計 = addDecimal(addDecimal(事業_支給額_70歳以上, 支給額_支給額_70歳以上), 前事業_支給額_70歳以上);
-        Decimal 全明細_支給額_70歳未満_合計 = addDecimal(addDecimal(事業_支給額_70歳未満, 支給額_支給額_70歳未満), 前事業_支給額_70歳以上);
+        Decimal 全明細_支給額_70歳未満_合計 = addDecimal(addDecimal(事業_支給額_70歳未満, 支給額_支給額_70歳未満), 前事業_支給額_70歳未満);
         Decimal 全明細_支給額_合計 = addDecimal(addDecimal(事業_支給額, 支給額_支給額), 前事業_支給額);
         for (HihokenshaFutangaku 高額合算 : 事業高額合算) {
             if (is登録済(高額合算.get明細被保険者番号(), 支給額計算一時_区分1.getTaishoNendo(),

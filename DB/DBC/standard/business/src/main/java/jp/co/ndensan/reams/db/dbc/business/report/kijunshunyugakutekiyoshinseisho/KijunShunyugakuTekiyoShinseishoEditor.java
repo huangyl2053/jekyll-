@@ -7,12 +7,14 @@ package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseis
 
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyoshinseisho.KijunShunyugakuTekiyoShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseisho.KijunShunyugakuTekiyoShinseishoSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 帳票設計_DBC100064_基準収入額適用申請書 Editorクラスです。
@@ -71,7 +73,12 @@ public class KijunShunyugakuTekiyoShinseishoEditor implements IKijunShunyugakuTe
         if (基準収入額適用申請書Entity.get識別コード３() != null) {
             source.shikibetsuCode3 = 基準収入額適用申請書Entity.get識別コード３().value();
         }
-
+        source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo1));
+        source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName1));
+        source.拡張情報B1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo2));
+        source.拡張情報B2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName2));
+        source.拡張情報C1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo3));
+        source.拡張情報C2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName3));
         return source;
     }
 
@@ -80,6 +87,13 @@ public class KijunShunyugakuTekiyoShinseishoEditor implements IKijunShunyugakuTe
             return RString.EMPTY;
         }
         return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }

@@ -346,7 +346,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     public void print主治医意見書依頼該当者履歴一覧(List<IkenshoirairirekiIchiran> 主治医意見書依頼該当者履歴一覧ItemList,
             ReportManager reportManager) {
         List<IkenshoirairirekiIchiranReport> list = new ArrayList<>();
-        list.add(new IkenshoirairirekiIchiranReport(主治医意見書依頼該当者履歴一覧ItemList));
+        list.add(IkenshoirairirekiIchiranReport.createFrom(主治医意見書依頼該当者履歴一覧ItemList));
         IkenshoirairirekiIchiranProperty property = new IkenshoirairirekiIchiranProperty();
         try (ReportAssembler<IkenshoirairirekiIchiranReportSource> assembler = createAssembler(property, reportManager)) {
             for (IkenshoirairirekiIchiranReport report : list) {

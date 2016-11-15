@@ -170,7 +170,7 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
             source.listChukanhyoka_4 = item.get中間評価リスト().get(index).get第4群();
             source.listChukanhyoka_5 = item.get中間評価リスト().get(index).get第5群();
         }
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shikibetuCode = new ShikibetsuCode(item.get識別コード());
         if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }

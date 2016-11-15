@@ -120,7 +120,7 @@ public class MainPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 ViewStateHolder.put(ViewStateKeys.識別コード, parameter.get識別コード());
-                ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
+                ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(parameter.getサービス提供年月().toDateString()));
                 ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
                 ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
                 ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
@@ -129,7 +129,7 @@ public class MainPanel {
             }
         } else {
             ViewStateHolder.put(ViewStateKeys.識別コード, parameter.get識別コード());
-            ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(parameter.getサービス提供年月().toDateString()));
             ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
             ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
             ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());

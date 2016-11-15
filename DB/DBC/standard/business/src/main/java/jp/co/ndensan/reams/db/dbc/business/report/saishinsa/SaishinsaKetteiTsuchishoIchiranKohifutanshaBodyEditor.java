@@ -5,13 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.saishinsa;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishinsaKetteiTsuchishoChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.saishinsa.SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -41,6 +44,7 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaBodyEditor
     private static final RString 調整負担額タイトル = new RString("公費負担額");
     private static final RString 介護給付費タイトル = new RString("介護給付費");
     private static final RString 高額介護サービス費タイトル = new RString("高額介護サービス費");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -80,6 +84,8 @@ public class SaishinsaKetteiTsuchishoIchiranKohifutanshaBodyEditor
         source.listUpper_11 = doカンマ編集(帳票出力対象データ.get調整単位数());
         if (null != 帳票出力対象データ.get被保険者番号()) {
             source.listLower_1 = 帳票出力対象データ.get被保険者番号().getColumnValue();
+            source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                    ReportKomokuEditorUtil.get非空文字列(source.listLower_1));
         }
         source.listLower_2 = 帳票出力対象データ.get公費受給者名();
         if (null != 帳票出力対象データ.get申立事由コード()) {

@@ -53,7 +53,6 @@ public class SogojigyohiKagoMoshitateshojohoSofuSource implements IReportSource 
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 20, order = 19)
     public RString listUpper_3;
-    @ReportPerson(id = "A")
     @ReportItem(name = "listUpper_4", length = 10, order = 20)
     public RString listUpper_4;
     @ReportItem(name = "listUpper_5", length = 30, order = 21)
@@ -74,6 +73,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuSource implements IReportSource 
     public RString gokeiKensuTitle;
     @ReportItem(name = "gokeiKensu", length = 8, order = 29)
     public RString gokeiKensu;
+    @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
     @ReportItem(name = "listUpper_11", length = 20, order = 30)

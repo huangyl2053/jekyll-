@@ -89,8 +89,8 @@ public class TokubetsuKyufuJigyoshaService {
      * @return int
      */
     public int count事業者情報(RString 入力された事業者コード) {
-
-        return 市町村特別給付サービス事業者Dac.selectCount(入力された事業者コード);
+        ITokubetsuKyufuJigyoshaSearchMapper mapper = mapperProvider.create(ITokubetsuKyufuJigyoshaSearchMapper.class);
+        return mapper.selectCount(入力された事業者コード);
     }
 
     /**

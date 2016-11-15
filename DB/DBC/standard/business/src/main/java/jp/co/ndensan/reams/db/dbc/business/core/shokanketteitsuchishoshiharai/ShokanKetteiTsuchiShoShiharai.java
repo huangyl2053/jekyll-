@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -111,7 +112,10 @@ public class ShokanKetteiTsuchiShoShiharai {
      * @return 郵便番号
      */
     public RString get郵便番号() {
-        return entity.getYubinNo();
+        if (null == entity.get宛先Entity() || entity.get宛先Entity().getYubinNo() == null) {
+            return RString.EMPTY;
+        }
+        return new RString(entity.get宛先Entity().getYubinNo().toString());
     }
 
     /**
@@ -418,5 +422,73 @@ public class ShokanKetteiTsuchiShoShiharai {
      */
     public ShikibetsuCode get識別コード() {
         return entity.getShikibetsuCode();
+    }
+
+    /**
+     * 支払場所を取得します。
+     *
+     * @return 支払場所
+     */
+    public RString get支払場所() {
+        return entity.getShiharaiBasho();
+    }
+
+    /**
+     * 支店コードを取得します。
+     *
+     * @return 支店コード
+     */
+    public RString get支店コード() {
+        return entity.getKinyuKikanShitenCode();
+    }
+
+    /**
+     * 口座名義人を取得します。
+     *
+     * @return 口座名義人
+     */
+    public RString get口座名義人() {
+        return entity.getKozaMeiginin();
+    }
+
+    /**
+     * 被保険者区分コードを取得します。
+     *
+     * @return 被保険者区分コード
+     */
+    public RString get被保険者区分コード() {
+
+        return entity.getHihokennshaKubunCode();
+    }
+
+    /**
+     * 差止被保険者番号を取得します。
+     *
+     * @return 差止被保険者番号
+     */
+    public RString get差止被保険者番号() {
+        return entity.getSashitomeHiHokenshaNo();
+    }
+
+    /**
+     * 差止被保険者番号を取得します。
+     *
+     * @return 差止控除番号
+     */
+    public RString get差止控除番号() {
+        return entity.getSashitomeKojoNo();
+    }
+
+    /**
+     * 差額金額合計を取得します。
+     *
+     * @return 差額金額合計
+     */
+    public Decimal get差額金額合計() {
+        return entity.getSagakuKingakuGokei();
+    }
+    
+    public TokuteiKozaRelateEntity get口座() {
+        return entity.get口座();
     }
 }

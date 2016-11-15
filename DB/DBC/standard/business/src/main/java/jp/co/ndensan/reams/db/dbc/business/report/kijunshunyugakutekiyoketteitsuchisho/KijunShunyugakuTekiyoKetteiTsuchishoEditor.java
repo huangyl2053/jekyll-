@@ -8,10 +8,13 @@ package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteits
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyomongon.ChohyoMongonYoshiki;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchisho.KijunShunyugakuTekiyoKetteiTsuchishoSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -24,6 +27,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
 
     private final KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ;
     private static final int INT_0 = 0;
+    private static final int INT_40 = 40;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     /**
@@ -50,7 +54,11 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.hihokenshaNo1 = 基準収入額適用決定通知書パラメータ.get被保険者番号１().value();
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者名カナ１() != null) {
-            source.hihokenshaNameKana1 = 基準収入額適用決定通知書パラメータ.get被保険者名カナ１().value();
+            RString 被保険者名カナ１ = 基準収入額適用決定通知書パラメータ.get被保険者名カナ１().value();
+            if (被保険者名カナ１.length() > INT_40) {
+                被保険者名カナ１ = 被保険者名カナ１.substring(INT_0, INT_40);
+            }
+            source.hihokenshaNameKana1 = 被保険者名カナ１;
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名１() != null) {
             source.hihokenshaName1 = 基準収入額適用決定通知書パラメータ.get被保険者氏名１().value();
@@ -59,19 +67,28 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.hihokenshaNo2 = 基準収入額適用決定通知書パラメータ.get被保険者番号２().value();
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者名カナ２() != null) {
-            source.hihokenshaNameKana2 = 基準収入額適用決定通知書パラメータ.get被保険者名カナ２().value();
+            RString 被保険者名カナ２ = 基準収入額適用決定通知書パラメータ.get被保険者名カナ２().value();
+            if (被保険者名カナ２.length() > INT_40) {
+                被保険者名カナ２ = 被保険者名カナ２.substring(INT_0, INT_40);
+            }
+            source.hihokenshaNameKana2 = 被保険者名カナ２;
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名２() != null) {
+
             source.hihokenshaName2 = 基準収入額適用決定通知書パラメータ.get被保険者氏名２().value();
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者番号３() != null) {
             source.hihokenshaNo3 = 基準収入額適用決定通知書パラメータ.get被保険者番号３().value();
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者名カナ３() != null) {
-            source.hihokenshaNameKana3 = 基準収入額適用決定通知書パラメータ.get被保険者名カナ３().value();
+            RString 被保険者名カナ３ = 基準収入額適用決定通知書パラメータ.get被保険者名カナ３().value();
+            if (被保険者名カナ３.length() > INT_40) {
+                被保険者名カナ３ = 被保険者名カナ３.substring(INT_0, INT_40);
+            }
+            source.hihokenshaNameKana3 = 被保険者名カナ３;
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名３() != null) {
-            source.hihokenshaName3 = 基準収入額適用決定通知書パラメータ.get被保険者氏名３().value();
+            source.hihokenshaName2 = 基準収入額適用決定通知書パラメータ.get被保険者氏名３().value();
         }
         source.sonotaHihokensha = 基準収入額適用決定通知書パラメータ.getその他被保険者();
         if (基準収入額適用決定通知書パラメータ.getCompNinshoshaソース() != null) {
@@ -128,6 +145,12 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.shikibetsuCode3 = 基準収入額適用決定通知書パラメータ.get識別コード３().value();
         }
         set帳票制御共通(source);
+        source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo1));
+        source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName1));
+        source.拡張情報B1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo2));
+        source.拡張情報B2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName2));
+        source.拡張情報C1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo3));
+        source.拡張情報C2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.hihokenshaName3));
         return source;
     }
 
@@ -173,5 +196,12 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.shinseiYMD = 基準収入額適用決定通知書パラメータ.get申請年月日().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         }
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

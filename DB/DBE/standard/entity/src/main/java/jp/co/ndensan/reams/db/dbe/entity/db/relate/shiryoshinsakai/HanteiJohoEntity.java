@@ -24,6 +24,7 @@ public class HanteiJohoEntity {
     private Code shinseijiKubunCode;
     private RString hihokenshaKubunCode;
     private RString hihokenshaNo;
+    private RString shoKisaiHokenshaNo;
     private AtenaMeisho hihokenshaName;
     private Code seibetsu;
     private int age;

@@ -23,15 +23,18 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class IinShinsakaishiryoA4Group7Editor implements IIinShinsakaishiryoA4Editor {
 
     private final JimuSonotashiryoBusiness business;
+    private final int index;
     private static final int INT_4 = 4;
 
     /**
      * コンストラクタです。
      *
      * @param business {@link JimuSonotashiryoBusiness}
+     * @param index index
      */
-    protected IinShinsakaishiryoA4Group7Editor(JimuSonotashiryoBusiness business) {
+    protected IinShinsakaishiryoA4Group7Editor(JimuSonotashiryoBusiness business, int index) {
         this.business = business;
+        this.index = index;
     }
 
     /**
@@ -62,7 +65,9 @@ public class IinShinsakaishiryoA4Group7Editor implements IIinShinsakaishiryoA4Ed
         source.six_shinsaYY = get年(business.get介護認定審査会開催年月日());
         source.six_shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.six_shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
-        source.six_imgSonotashiryo = business.getその他資料();
+        if (index < business.getその他資料().size()) {
+            source.six_imgSonotashiryo = business.getその他資料().get(index);
+        }
         source.layout = Layouts.七頁目;
         return source;
     }

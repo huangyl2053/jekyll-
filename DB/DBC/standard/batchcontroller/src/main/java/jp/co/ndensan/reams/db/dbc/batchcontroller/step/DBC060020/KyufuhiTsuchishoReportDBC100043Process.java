@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -47,31 +47,26 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBC-2280-030 lizhuoxuan
  */
-public class KyufuhiTsuchishoReportDBC100043Process extends BatchProcessBase<KyufuhiTuchiHakkoEntity> {
+public class KyufuhiTsuchishoReportDBC100043Process extends BatchKeyBreakBase<KyufuhiTuchiHakkoEntity> {
 
     private static final RString 介護給付費福祉用具貸与品目情報取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyufuhitsuchisho.IKyufuhiTsuchishoMapper.getSeikatsuHogoJukyusha");
-    private RString 被保険者番号;
-    private RString サービス年月;
     private RString 通知文1;
     private RString 通知文3;
-    private int index;
     private int 分子;
     private static final int 数値_11 = 11;
-    private static final int 数値_15 = 15;
+    private static final int 数値_3 = 3;
     private KyufuhiTsuchishoProcessParameter processParameter;
     private AtesakiPSMSearchKeyBuilder 宛先builder;
     private static final ReportId REPORT_DBC100043 = ReportIdDBC.DBC100043.getReportId();
+    private KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity 福祉用具貸与品目情報 = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity();
     @BatchWriter
     private BatchReportWriter<KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource> batchWrite;
     private ReportSourceWriter<KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
-        被保険者番号 = RString.EMPTY;
-        サービス年月 = RString.EMPTY;
-        index = 0;
-        分子 = 0;
+        分子 = 1;
     }
 
     @Override
@@ -95,33 +90,37 @@ public class KyufuhiTsuchishoReportDBC100043Process extends BatchProcessBase<Kyu
     }
 
     @Override
-    protected void process(KyufuhiTuchiHakkoEntity entity) {
-        if (!被保険者番号.equals(entity.get被保険者番号())) {
-            分子++;
-        }
-        KyufuhiTsuchishoFukushiYoguTaiyoHinmoku tsuchisho = new KyufuhiTsuchishoFukushiYoguTaiyoHinmoku();
-        KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity coverEntity = tsuchisho.帳票データ作成(entity, processParameter);
-        coverEntity.set通知文1(通知文1);
-        coverEntity.set通知文3(通知文3);
-        coverEntity.setページ分子(分子);
-        coverEntity.setページ分母(entity.getCount());
-        boolean isBreak = isBreak(entity);
-        if (!isBreak || index % 数値_15 == 0) {
-            coverEntity.setサービス年月(entity.getサービス提供年月());
-        } else if (!isBreak) {
-            coverEntity.setサービス年月(RString.EMPTY);
-        }
-        index++;
-        被保険者番号 = entity.get被保険者番号();
-        サービス年月 = entity.getサービス提供年月();
-        if (entity.getRelateEntity() != null) {
-            KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport report = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport(coverEntity);
+    protected void keyBreakProcess(KyufuhiTuchiHakkoEntity entity) {
+        if (isBreak(entity)) {
+            KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport report = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport(福祉用具貸与品目情報);
             report.writeBy(reportSourceWriter);
+            福祉用具貸与品目情報.clear();
         }
     }
 
+    @Override
+    protected void usualProcess(KyufuhiTuchiHakkoEntity entity) {
+        if (getBefore() != null && !getBefore().get被保険者番号().equals(entity.get被保険者番号())) {
+            分子++;
+        }
+        entity.getRelateEntity();
+        KyufuhiTsuchishoFukushiYoguTaiyoHinmoku tsuchisho = new KyufuhiTsuchishoFukushiYoguTaiyoHinmoku();
+        福祉用具貸与品目情報 = tsuchisho.帳票データ作成(entity, processParameter, 福祉用具貸与品目情報);
+        福祉用具貸与品目情報.set通知文1(通知文1);
+        福祉用具貸与品目情報.set通知文3(通知文3);
+        // TODO ページ分子とページ分母の実装を確認してください。
+        福祉用具貸与品目情報.setページ分子(分子);
+        福祉用具貸与品目情報.setページ分母(entity.getCount());
+    }
+
     private boolean isBreak(KyufuhiTuchiHakkoEntity entity) {
-        return 被保険者番号.equals(entity.get被保険者番号()) && サービス年月.equals(entity.getサービス提供年月());
+        KyufuhiTuchiHakkoEntity beforeEntity = getBefore();
+        if (entity.getRelateEntity() != null) {
+            return !beforeEntity.get被保険者番号().equals(entity.get被保険者番号())
+                    || (福祉用具貸与品目情報.size() >= 数値_3);
+        } else {
+            return false;
+        }
     }
 
     private IShikibetsuTaishoPSMSearchKey get宛名PSM検索きー() {
@@ -142,5 +141,13 @@ public class KyufuhiTsuchishoReportDBC100043Process extends BatchProcessBase<Kyu
         builder.set住民状態(住民状態);
         builder.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
         return builder.build();
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (福祉用具貸与品目情報.size() != 0) {
+            KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport report = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport(福祉用具貸与品目情報);
+            report.writeBy(reportSourceWriter);
+        }
     }
 }

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteitsuchishohakko.TmpIdoFukaJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokaritsuchishoikkatsuhakko.FuchoKariTsuchishoIkkatsuHakkoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokaritsuchishoikkatsuhakko.FukaJohoZenendoTmpEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -32,6 +31,7 @@ import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuSeidoCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCode;
+import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -199,30 +199,47 @@ public class IdoFukaJohoTempEntitySet {
             UeT0511NenkinTokuchoKaifuJohoEntity 年金特徴回付情報_更正前) {
         異動賦課情報一時.setUeT0511_gyomuCode(年金特徴回付情報_更正前.getGyomuCode());
         異動賦課情報一時.setUeT0511_shoriNendo(年金特徴回付情報_更正前.getShoriNendo());
-        異動賦課情報一時.setUeT0511_tsuchiNaiyoCode(年金特徴回付情報_更正前.getTsuchiNaiyoCode());
+        if (年金特徴回付情報_更正前.getTsuchiNaiyoCode() != null) {
+            異動賦課情報一時.setUeT0511_tsuchiNaiyoCode(年金特徴回付情報_更正前.getTsuchiNaiyoCode().getColumnValue());
+        }
         異動賦課情報一時.setUeT0511_shoriTaishoYM(年金特徴回付情報_更正前.getShoriTaishoYM());
         異動賦課情報一時.setUeT0511_kisoNenkinNo(年金特徴回付情報_更正前.getKisoNenkinNo());
         異動賦課情報一時.setUeT0511_nenkinCode(年金特徴回付情報_更正前.getNenkinCode());
         異動賦課情報一時.setUeT0511_koseiCityCode(年金特徴回付情報_更正前.getKoseiCityCode());
         異動賦課情報一時.setUeT0511_renban(年金特徴回付情報_更正前.getRenban());
         異動賦課情報一時.setUeT0511_shoriTimestamp(年金特徴回付情報_更正前.getShoriTimestamp());
-        異動賦課情報一時.setUeT0511_renkeiShubetsu(年金特徴回付情報_更正前.getRenkeiShubetsu());
+        RenkeiShubetsu renkeiShubetsu = 年金特徴回付情報_更正前.getRenkeiShubetsu();
+        if (renkeiShubetsu != null) {
+            異動賦課情報一時.setUeT0511_renkeiShubetsu(renkeiShubetsu.getColumnValue());
+        }
         異動賦課情報一時.setUeT0511_hosokuTsuki(年金特徴回付情報_更正前.getHosokuTsuki());
         異動賦課情報一時.setUeT0511_tenbikiTsuki(年金特徴回付情報_更正前.getTenbikiTsuki());
         異動賦課情報一時.setUeT0511_shikibetsuCode(年金特徴回付情報_更正前.getShikibetsuCode());
         異動賦課情報一時.setUeT0511_hihokenshaNo(年金特徴回付情報_更正前.getHihokenshaNo());
         異動賦課情報一時.setUeT0511_kokuhoSetaiCode(年金特徴回付情報_更正前.getKokuhoSetaiCode());
         異動賦課情報一時.setUeT0511_dtCityCode(年金特徴回付情報_更正前.getDtCityCode());
-        異動賦課情報一時.setUeT0511_dtTokubetsuChoshuGimushaCode(年金特徴回付情報_更正前.getDtTokubetsuChoshuGimushaCode());
-        異動賦課情報一時.setUeT0511_dtTsuchiNaiyoCode(年金特徴回付情報_更正前.getDtTsuchiNaiyoCode());
+        TokubetsuChoshuGimushaCode tokubetsuChoshuGimushaCode = 年金特徴回付情報_更正前.getDtTokubetsuChoshuGimushaCode();
+        if (tokubetsuChoshuGimushaCode != null) {
+            異動賦課情報一時.setUeT0511_dtTokubetsuChoshuGimushaCode(tokubetsuChoshuGimushaCode.getColumnValue());
+        }
+        TsuchiNaiyoCode tsuchiNaiyoCode = 年金特徴回付情報_更正前.getDtTsuchiNaiyoCode();
+        if (tsuchiNaiyoCode != null) {
+            異動賦課情報一時.setUeT0511_dtTsuchiNaiyoCode(tsuchiNaiyoCode.getColumnValue());
+        }
         異動賦課情報一時.setUeT0511_dtBaitaiCode(年金特徴回付情報_更正前.getDtBaitaiCode());
-        異動賦課情報一時.setUeT0511_dtTokubetsuChoshuSeidoCode(年金特徴回付情報_更正前.getDtTokubetsuChoshuSeidoCode());
+        TokubetsuChoshuSeidoCode tokubetsuChoshuSeidoCode = 年金特徴回付情報_更正前.getDtTokubetsuChoshuSeidoCode();
+        if (tokubetsuChoshuSeidoCode != null) {
+            異動賦課情報一時.setUeT0511_dtTokubetsuChoshuSeidoCode(tokubetsuChoshuSeidoCode.getColumnValue());
+        }
         異動賦課情報一時.setUeT0511_dtSakuseiYMD(年金特徴回付情報_更正前.getDtSakuseiYMD());
         異動賦課情報一時.setUeT0511_dtKisoNenkinNo(年金特徴回付情報_更正前.getDtKisoNenkinNo());
         異動賦課情報一時.setUeT0511_dtNenkinCode(年金特徴回付情報_更正前.getDtNenkinCode());
         異動賦課情報一時.setUeT0511_dtYobi1(年金特徴回付情報_更正前.getDtYobi1());
         異動賦課情報一時.setUeT0511_dtBirthDay(年金特徴回付情報_更正前.getDtBirthDay());
-        異動賦課情報一時.setUeT0511_dtSeibetsu(年金特徴回付情報_更正前.getDtSeibetsu());
+        SeibetsuCodeNenkinTokucho seibetsuCodeNenkinTokucho = 年金特徴回付情報_更正前.getDtSeibetsu();
+        if (seibetsuCodeNenkinTokucho != null) {
+            異動賦課情報一時.setUeT0511_dtSeibetsu(seibetsuCodeNenkinTokucho.getColumnValue());
+        }
         異動賦課情報一時.setUeT0511_dtKanaShimei(年金特徴回付情報_更正前.getDtKanaShimei());
         異動賦課情報一時.setUeT0511_dtShiftCode1(年金特徴回付情報_更正前.getDtShiftCode1());
         異動賦課情報一時.setUeT0511_dtKanjiShimei(年金特徴回付情報_更正前.getDtKanjiShimei());
@@ -939,30 +956,48 @@ public class IdoFukaJohoTempEntitySet {
     private void 年金特徴回付情報_更正後値設定(TmpIdoFukaJohoEntity entity, final UeT0511NenkinTokuchoKaifuJohoEntity 年金特徴回付情報_更正後) {
         entity.setUeT0511after_gyomuCode(年金特徴回付情報_更正後.getGyomuCode());
         entity.setUeT0511after_shoriNendo(年金特徴回付情報_更正後.getShoriNendo());
-        entity.setUeT0511after_tsuchiNaiyoCode(年金特徴回付情報_更正後.getTsuchiNaiyoCode());
+        TsuchiNaiyoCode tsuchiNaiyoCode = 年金特徴回付情報_更正後.getTsuchiNaiyoCode();
+        if (tsuchiNaiyoCode != null) {
+            entity.setUeT0511after_tsuchiNaiyoCode(tsuchiNaiyoCode.getColumnValue());
+        }
         entity.setUeT0511after_shoriTaishoYM(年金特徴回付情報_更正後.getShoriTaishoYM());
         entity.setUeT0511after_kisoNenkinNo(年金特徴回付情報_更正後.getKisoNenkinNo());
         entity.setUeT0511after_nenkinCode(年金特徴回付情報_更正後.getNenkinCode());
         entity.setUeT0511after_koseiCityCode(年金特徴回付情報_更正後.getKoseiCityCode());
         entity.setUeT0511after_renban(年金特徴回付情報_更正後.getRenban());
         entity.setUeT0511after_shoriTimestamp(年金特徴回付情報_更正後.getShoriTimestamp());
-        entity.setUeT0511after_renkeiShubetsu(年金特徴回付情報_更正後.getRenkeiShubetsu());
+        RenkeiShubetsu renkeiShubetsu = 年金特徴回付情報_更正後.getRenkeiShubetsu();
+        if (renkeiShubetsu != null) {
+            entity.setUeT0511after_renkeiShubetsu(renkeiShubetsu.getColumnValue());
+        }
         entity.setUeT0511after_hosokuTsuki(年金特徴回付情報_更正後.getHosokuTsuki());
         entity.setUeT0511after_tenbikiTsuki(年金特徴回付情報_更正後.getTenbikiTsuki());
         entity.setUeT0511after_shikibetsuCode(年金特徴回付情報_更正後.getShikibetsuCode());
         entity.setUeT0511after_hihokenshaNo(年金特徴回付情報_更正後.getHihokenshaNo());
         entity.setUeT0511after_kokuhoSetaiCode(年金特徴回付情報_更正後.getKokuhoSetaiCode());
         entity.setUeT0511after_dtCityCode(年金特徴回付情報_更正後.getDtCityCode());
-        entity.setUeT0511after_dtTokubetsuChoshuGimushaCode(年金特徴回付情報_更正後.getDtTokubetsuChoshuGimushaCode());
-        entity.setUeT0511after_dtTsuchiNaiyoCode(年金特徴回付情報_更正後.getDtTsuchiNaiyoCode());
+        TokubetsuChoshuGimushaCode tokubetsuChoshuGimushaCode = 年金特徴回付情報_更正後.getDtTokubetsuChoshuGimushaCode();
+        if (tokubetsuChoshuGimushaCode != null) {
+            entity.setUeT0511after_dtTokubetsuChoshuGimushaCode(tokubetsuChoshuGimushaCode.getColumnValue());
+        }
+        TsuchiNaiyoCode dTTsuchiNaiyoCode = 年金特徴回付情報_更正後.getDtTsuchiNaiyoCode();
+        if (dTTsuchiNaiyoCode != null) {
+            entity.setUeT0511after_dtTsuchiNaiyoCode(dTTsuchiNaiyoCode.getColumnValue());
+        }
         entity.setUeT0511after_dtBaitaiCode(年金特徴回付情報_更正後.getDtBaitaiCode());
-        entity.setUeT0511after_dtTokubetsuChoshuSeidoCode(年金特徴回付情報_更正後.getDtTokubetsuChoshuSeidoCode());
+        TokubetsuChoshuSeidoCode tokubetsuChoshuSeidoCode = 年金特徴回付情報_更正後.getDtTokubetsuChoshuSeidoCode();
+        if (tokubetsuChoshuSeidoCode != null) {
+            entity.setUeT0511after_dtTokubetsuChoshuSeidoCode(tokubetsuChoshuSeidoCode.getColumnValue());
+        }
         entity.setUeT0511after_dtSakuseiYMD(年金特徴回付情報_更正後.getDtSakuseiYMD());
         entity.setUeT0511after_dtKisoNenkinNo(年金特徴回付情報_更正後.getDtKisoNenkinNo());
         entity.setUeT0511after_dtNenkinCode(年金特徴回付情報_更正後.getDtNenkinCode());
         entity.setUeT0511after_dtYobi1(年金特徴回付情報_更正後.getDtYobi1());
         entity.setUeT0511after_dtBirthDay(年金特徴回付情報_更正後.getDtBirthDay());
-        entity.setUeT0511after_dtSeibetsu(年金特徴回付情報_更正後.getDtSeibetsu());
+        SeibetsuCodeNenkinTokucho seibetsuCodeNenkinTokucho = 年金特徴回付情報_更正後.getDtSeibetsu();
+        if (seibetsuCodeNenkinTokucho != null) {
+            entity.setUeT0511after_dtSeibetsu(seibetsuCodeNenkinTokucho.getColumnValue());
+        }
         entity.setUeT0511after_dtKanaShimei(年金特徴回付情報_更正後.getDtKanaShimei());
         entity.setUeT0511after_dtShiftCode1(年金特徴回付情報_更正後.getDtShiftCode1());
         entity.setUeT0511after_dtKanjiShimei(年金特徴回付情報_更正後.getDtKanjiShimei());
@@ -1003,7 +1038,7 @@ public class IdoFukaJohoTempEntitySet {
         entity.setGyomuCode(年金特徴回付情報_転換前.getGyomuCode());
         entity.setShoriNendo(年金特徴回付情報_転換前.getShoriNendo());
         if (年金特徴回付情報_転換前.getTsuchiNaiyoCode() != null) {
-            entity.setTsuchiNaiyoCode(new TsuchiNaiyoCode(年金特徴回付情報_転換前.getTsuchiNaiyoCode()));
+            entity.setTsuchiNaiyoCode(年金特徴回付情報_転換前.getTsuchiNaiyoCode());
         }
         entity.setShoriTaishoYM(年金特徴回付情報_転換前.getShoriTaishoYM());
         entity.setKisoNenkinNo(年金特徴回付情報_転換前.getKisoNenkinNo());
@@ -1012,7 +1047,7 @@ public class IdoFukaJohoTempEntitySet {
         entity.setRenban(年金特徴回付情報_転換前.getRenban());
         entity.setShoriTimestamp(年金特徴回付情報_転換前.getShoriTimestamp());
         if (年金特徴回付情報_転換前.getRenkeiShubetsu() != null) {
-            entity.setRenkeiShubetsu(new RenkeiShubetsu(年金特徴回付情報_転換前.getRenkeiShubetsu()));
+            entity.setRenkeiShubetsu(年金特徴回付情報_転換前.getRenkeiShubetsu());
         }
         entity.setHosokuTsuki(年金特徴回付情報_転換前.getHosokuTsuki());
         entity.setTenbikiTsuki(年金特徴回付情報_転換前.getTenbikiTsuki());
@@ -1021,14 +1056,14 @@ public class IdoFukaJohoTempEntitySet {
         entity.setKokuhoSetaiCode(年金特徴回付情報_転換前.getKokuhoSetaiCode());
         entity.setDtCityCode(年金特徴回付情報_転換前.getDtCityCode());
         if (年金特徴回付情報_転換前.getDtTokubetsuChoshuGimushaCode() != null) {
-            entity.setDtTokubetsuChoshuGimushaCode(new TokubetsuChoshuGimushaCode(年金特徴回付情報_転換前.getDtTokubetsuChoshuGimushaCode()));
+            entity.setDtTokubetsuChoshuGimushaCode(年金特徴回付情報_転換前.getDtTokubetsuChoshuGimushaCode());
         }
         if (年金特徴回付情報_転換前.getDtTsuchiNaiyoCode() != null) {
-            entity.setDtTsuchiNaiyoCode(new TsuchiNaiyoCode(年金特徴回付情報_転換前.getDtTsuchiNaiyoCode()));
+            entity.setDtTsuchiNaiyoCode(年金特徴回付情報_転換前.getDtTsuchiNaiyoCode());
         }
         entity.setDtBaitaiCode(年金特徴回付情報_転換前.getDtBaitaiCode());
         if (年金特徴回付情報_転換前.getDtTokubetsuChoshuSeidoCode() != null) {
-            entity.setDtTokubetsuChoshuSeidoCode(new TokubetsuChoshuSeidoCode(年金特徴回付情報_転換前.getDtTokubetsuChoshuSeidoCode()));
+            entity.setDtTokubetsuChoshuSeidoCode(年金特徴回付情報_転換前.getDtTokubetsuChoshuSeidoCode());
         }
         entity.setDtSakuseiYMD(年金特徴回付情報_転換前.getDtSakuseiYMD());
         entity.setDtKisoNenkinNo(年金特徴回付情報_転換前.getDtKisoNenkinNo());
@@ -1036,7 +1071,7 @@ public class IdoFukaJohoTempEntitySet {
         entity.setDtYobi1(年金特徴回付情報_転換前.getDtYobi1());
         entity.setDtBirthDay(年金特徴回付情報_転換前.getDtBirthDay());
         if (年金特徴回付情報_転換前.getDtSeibetsu() != null) {
-            entity.setDtSeibetsu(new SeibetsuCodeNenkinTokucho(年金特徴回付情報_転換前.getDtSeibetsu()));
+            entity.setDtSeibetsu(年金特徴回付情報_転換前.getDtSeibetsu());
         }
         entity.setDtKanaShimei(年金特徴回付情報_転換前.getDtKanaShimei());
         entity.setDtShiftCode1(年金特徴回付情報_転換前.getDtShiftCode1());

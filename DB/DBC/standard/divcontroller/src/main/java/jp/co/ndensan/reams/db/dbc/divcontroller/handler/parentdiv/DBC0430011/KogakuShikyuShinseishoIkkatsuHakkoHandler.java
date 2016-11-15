@@ -192,6 +192,9 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             }
         }
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDataSource(datasource);
+        if (!datasource.isEmpty()) {
+            div.getShinseishoHakkoParameters().getDdlServiceYM().setSelectedIndex(BEGININDEX);
+        }
     }
 
     /**

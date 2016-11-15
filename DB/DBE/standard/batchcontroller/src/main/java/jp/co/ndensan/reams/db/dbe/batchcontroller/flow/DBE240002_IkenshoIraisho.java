@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSa
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSakuseiRyoSeikyushoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSeikyuIchiranProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoTeishutsuIraishoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkensho_DBE230004Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkensho_DBE231002Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkensho_DBE231012Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkensho_DBE231014Process;
@@ -41,6 +42,7 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
     private static final String SHUJIIIKENSHO_DBE231002PROCESS = "ShujiiIkensho_DBE231002Process";
     private static final String SHUJIIIKENSHO_DBE231014PROCESS = "ShujiiIkensho_DBE231014Process";
     private static final String SHUJIIIKENSHO_DBE231012PROCESS = "ShujiiIkensho_DBE231012Process";
+    private static final String SHUJIIIKENSHO_DBE230004PROCESS = "ShujiiIkensho_DBE230004Process";
     private static final String DBT5301INSERTPROCESS = "DbT5301InsertProcess";
     private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString CONFIGVALUE2 = new RString("2");
@@ -71,6 +73,9 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
         }
         if (getParameter().isIkenshoTeishutu()) {
             executeStep(SHUJIIIKENSHOTEISHUTSUIRAISHO);
+        }
+        if (getParameter().isIkenshoirairirekiIchiranKubun()) {
+            executeStep(SHUJIIIKENSHO_DBE230004PROCESS);
         }
         executeStep(DBT5301INSERTPROCESS);
     }
@@ -243,6 +248,17 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
     @Step(SHUJIIIKENSHO_DBE231012PROCESS)
     protected IBatchFlowCommand callShujiiIkensho_DBE231012Process() {
         return loopBatch(ShujiiIkensho_DBE231012Process.class)
+                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+    }
+
+    /**
+     * 帳票「DBE230004_主治医意見書作成依頼履歴一覧」を出力します。
+     *
+     * @return ShujiiIkensho_DBE230004Process
+     */
+    @Step(SHUJIIIKENSHO_DBE230004PROCESS)
+    protected IBatchFlowCommand callShujiiIkensho_DBE230004Process() {
+        return loopBatch(ShujiiIkensho_DBE230004Process.class)
                 .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
     }
 

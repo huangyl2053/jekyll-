@@ -194,7 +194,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
      */
     public SourceDataCollection 帳票印刷(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, RString 支払予定日印字有無) {
         RString 様式 = 画面_初回申請用様式;
-        if (定数_初回申請用.equals(div.getRadSyoukaiSinnsei().getSelectedKey())) {
+        if (!定数_初回申請用.equals(div.getRadSyoukaiSinnsei().getSelectedKey())) {
             様式 = 画面_自動償還用様式;
         }
         FlexibleDate 支払予定日 = FlexibleDate.EMPTY;

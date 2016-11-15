@@ -39,6 +39,7 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
     private final RString hakkobi;
     private final RString teishutsuKigen;
     private final RString kyotsuHizuke;
+    private final boolean is認定調査依頼履歴一覧;
 
     /**
      * コンストラクタです。
@@ -61,6 +62,7 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
      * @param hakkobi 発行日
      * @param teishutsuKigen 提出期限
      * @param kyotsuHizuke 共通日付
+     * @param is認定調査依頼履歴一覧 認定調査依頼履歴一覧
      *
      */
     public HomonChosaIraishoProcessParamter(RString ninteioChosaIraisho,
@@ -80,7 +82,8 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
             RString iraiToYMD,
             RString hakkobi,
             RString teishutsuKigen,
-            RString kyotsuHizuke) {
+            RString kyotsuHizuke,
+            boolean is認定調査依頼履歴一覧) {
         this.ninteioChosaIraisho = ninteioChosaIraisho;
         this.ninteiChosahyo = ninteiChosahyo;
         this.ninteiChosaIraiList = ninteiChosaIraiList;
@@ -99,6 +102,7 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
         this.hakkobi = hakkobi;
         this.teishutsuKigen = teishutsuKigen;
         this.kyotsuHizuke = kyotsuHizuke;
+        this.is認定調査依頼履歴一覧 = is認定調査依頼履歴一覧;
     }
 
     /**

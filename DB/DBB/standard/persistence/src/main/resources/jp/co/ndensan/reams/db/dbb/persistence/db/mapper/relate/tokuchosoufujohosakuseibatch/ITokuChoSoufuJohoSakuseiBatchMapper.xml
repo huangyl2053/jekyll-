@@ -2,9 +2,8 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBB-1840-040 xuzhao -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper">
-<select resultOrdered="true" id="特徴依頼のデータ抽出"
-resultType ="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.TokuChoIraiTempEntity"
-parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectTokuChoIraiDataMyBatisParameter">
+
+<sql id="特徴依頼のデータ抽出">
     SELECT
     <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />
     FROM
@@ -12,11 +11,12 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
     WHERE
     T."gyomuCode" = 'DB' AND
     T."shoriNendo" = #{賦課年度} AND
-    T."tsuchiNaiyoCode" = #{通知内容コード} AND
+    T."tsuchiNaiyoCode" = '00' AND
     T."hosokuTsuki" = '04'
-</select>
+</sql>
 
-<select resultOrdered="true" id="特徴依頼のデータを取得" resultMap="resultMap_特徴依頼のデータを取得">
+<select resultOrdered="true" id="特徴依頼のデータを取得" resultMap="resultMap_特徴依頼のデータを取得" 
+        parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectTokuChoIraiDataMyBatisParameter">
     SELECT
         <include refid="allColumns_特徴依頼Temp" />,
         <include refid="allColumns_被保険者台帳管理Newest" />,
@@ -25,25 +25,26 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
         調定共通_介護継承."choteigaku",
         <include refid="allColumns_徴収方法Newest" />
     FROM
-        "特徴依頼Temp" AS 特徴依頼Temp
+       (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.特徴依頼のデータ抽出" />)
+        AS 特徴依頼Temp
     LEFT JOIN rgdb."DbV2001ChoshuHoho" AS 徴収方法Newest
         ON 特徴依頼Temp."処理年度" = 徴収方法Newest."fukaNendo"
         AND 特徴依頼Temp."捕捉月" = 徴収方法Newest."honHosokuM"
         AND 特徴依頼Temp."基礎年金番号" = 徴収方法Newest."honNenkinNo"
         AND 特徴依頼Temp."年金コード" = 徴収方法Newest."honNenkinCode"
-    INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理Newest
+    LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理Newest
         ON 被保険者台帳管理Newest."hihokenshaNo" = 徴収方法Newest."hihokenshaNo"
-    INNER JOIN rgdb."DbV2002Fuka" AS 賦課Newest
+    LEFT JOIN rgdb."DbV2002Fuka" AS 賦課Newest
         ON 賦課Newest."choteiNendo" = 徴収方法Newest."fukaNendo"
         AND 賦課Newest."fukaNendo" = 徴収方法Newest."fukaNendo"
         AND 賦課Newest."hihokenshaNo" = 徴収方法Newest."hihokenshaNo"
-    INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別
+    LEFT JOIN rgdb."DbT2003Kibetsu" AS 介護期別
         ON 介護期別."choteiNendo" = 賦課Newest."choteiNendo"
         AND 介護期別."fukaNendo" = 賦課Newest."fukaNendo"
         AND 介護期別."tsuchishoNo" = 賦課Newest."tsuchishoNo"
         AND 介護期別."rirekiNo" = 賦課Newest."rirekiNo"
         AND 介護期別."choshuHouhou" = '1'
-    INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
+    LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
         ON 調定共通_介護継承."choteiId" = 介護期別."choteiId"
     ORDER BY
         賦課Newest."choteiNendo",
@@ -127,7 +128,7 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
                        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
                     (SELECT ARRAY_AGG(CAST ("ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode" AS TEXT))
-                    FROM master)
+                    FROM master WHERE "ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode" <![CDATA[<>]]>'')
             ) AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = master."ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode"
         <if test="出力順Flag">
@@ -142,8 +143,8 @@ parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujoho
             特徴依頼追加Temp."koseiCityCode" AS 構成市町村コード,
             特徴依頼追加Temp."dtTokubetsuChoshuGimushaCode" AS dT特別徴収義務者コード,
             COUNT(特徴依頼追加Temp.*) AS 件数,
-            SUM(CAST(特徴依頼追加Temp."dtKakushuKingaku1"  AS float )) AS 金額1,
-            SUM(CAST(特徴依頼追加Temp."dtKakushuKingaku2"  AS float )) AS 金額2
+            SUM(CAST(COALESCE(NULLIF(特徴依頼追加Temp."dtKakushuKingaku1",''),'0') AS numeric)) AS 金額1,
+            SUM(CAST(COALESCE(NULLIF(特徴依頼追加Temp."dtKakushuKingaku2",''),'0') AS numeric)) AS 金額2
         FROM
             "特徴依頼追加Temp" AS 特徴依頼追加Temp
         GROUP BY
@@ -875,43 +876,43 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         特徴依頼Temp."識別コード" AS  "ueT0511NenkinTokuchoKaifuJoho_shikibetsuCode",
         特徴依頼Temp."被保険者番号" AS  "ueT0511NenkinTokuchoKaifuJoho_hihokenshaNo",
         特徴依頼Temp."国保世代コード" AS  "ueT0511NenkinTokuchoKaifuJoho_kokuhoSetaiCode",
-        特徴依頼Temp."dT市町村コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtCityCode",
-        特徴依頼Temp."dT特別徴収義務者コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode",
-        特徴依頼Temp."dT通知内容コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode",
-        特徴依頼Temp."dT媒体コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtBaitaiCode",
-        特徴依頼Temp."dT特別徴収制度コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode",
-        特徴依頼Temp."dT作成年月日" AS  "ueT0511NenkinTokuchoKaifuJoho_dtSakuseiYMD",
-        特徴依頼Temp."dT基礎年金番号" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKisoNenkinNo",
-        特徴依頼Temp."dT年金コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtNenkinCode",
-        特徴依頼Temp."dT予備1" AS  "ueT0511NenkinTokuchoKaifuJoho_dtYobi1",
-        特徴依頼Temp."dT生年月日" AS  "ueT0511NenkinTokuchoKaifuJoho_dtBirthDay",
-        特徴依頼Temp."dT性別" AS  "ueT0511NenkinTokuchoKaifuJoho_dtSeibetsu",
-        特徴依頼Temp."dTカナ氏名" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKanaShimei",
-        特徴依頼Temp."dTシフトコード1" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode1",
-        特徴依頼Temp."dT漢字氏名" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKanjiShimei",
-        特徴依頼Temp."dTシフトコード2" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode2",
-        特徴依頼Temp."dT郵便番号" AS  "ueT0511NenkinTokuchoKaifuJoho_dtYubinNo",
-        特徴依頼Temp."dTカナ住所" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKanaJusho",
-        特徴依頼Temp."dTシフトコード3" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode3",
-        特徴依頼Temp."dT漢字住所" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKanjiJusho",
-        特徴依頼Temp."dTシフトコード4" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode4",
-        特徴依頼Temp."dT各種区分" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKubun",
-        特徴依頼Temp."dT処理結果" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShoriKekka",
-        特徴依頼Temp."dT後期移管コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKokiIkanCode",
-        特徴依頼Temp."dT各種年月日" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuYMD",
-        特徴依頼Temp."dT各種金額欄１" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku1",
-        特徴依頼Temp."dT各種金額欄２" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku2",
-        特徴依頼Temp."dT各種金額欄3" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku3",
-        特徴依頼Temp."dT予備2" AS  "ueT0511NenkinTokuchoKaifuJoho_dtYobi2",
-        特徴依頼Temp."dT共済年金証書記号番号" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKyosaiNenkinshoshoKigoNo",
-        特徴依頼Temp."dT各種金額欄4" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku4",
-        特徴依頼Temp."dT各種金額欄5" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku5",
-        特徴依頼Temp."dT各種金額欄6" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku6",
-        特徴依頼Temp."dT各種金額欄7" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku7",
-        特徴依頼Temp."dT各種金額欄8" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8",
-        特徴依頼Temp."dT停止年月" AS  "ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM",
-        特徴依頼Temp."dT予備4住民税" AS  "ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei",
-        特徴依頼Temp."dT個人番号" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo"
+        特徴依頼Temp."dt市町村コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtCityCode",
+        特徴依頼Temp."dt特別徴収義務者コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode",
+        特徴依頼Temp."dt通知内容コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode",
+        特徴依頼Temp."dt媒体コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtBaitaiCode",
+        特徴依頼Temp."dt特別徴収制度コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode",
+        特徴依頼Temp."dt作成年月日" AS  "ueT0511NenkinTokuchoKaifuJoho_dtSakuseiYMD",
+        特徴依頼Temp."dt基礎年金番号" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKisoNenkinNo",
+        特徴依頼Temp."dt年金コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtNenkinCode",
+        特徴依頼Temp."dt予備1" AS  "ueT0511NenkinTokuchoKaifuJoho_dtYobi1",
+        特徴依頼Temp."dt生年月日" AS  "ueT0511NenkinTokuchoKaifuJoho_dtBirthDay",
+        特徴依頼Temp."dt性別" AS  "ueT0511NenkinTokuchoKaifuJoho_dtSeibetsu",
+        特徴依頼Temp."dtカナ氏名" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKanaShimei",
+        特徴依頼Temp."dtシフトコード1" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode1",
+        特徴依頼Temp."dt漢字氏名" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKanjiShimei",
+        特徴依頼Temp."dtシフトコード2" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode2",
+        特徴依頼Temp."dt郵便番号" AS  "ueT0511NenkinTokuchoKaifuJoho_dtYubinNo",
+        特徴依頼Temp."dtカナ住所" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKanaJusho",
+        特徴依頼Temp."dtシフトコード3" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode3",
+        特徴依頼Temp."dt漢字住所" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKanjiJusho",
+        特徴依頼Temp."dtシフトコード4" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode4",
+        特徴依頼Temp."dt各種区分" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKubun",
+        特徴依頼Temp."dt処理結果" AS  "ueT0511NenkinTokuchoKaifuJoho_dtShoriKekka",
+        特徴依頼Temp."dt後期移管コード" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKokiIkanCode",
+        特徴依頼Temp."dt各種年月日" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuYMD",
+        特徴依頼Temp."dt各種金額欄１" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku1",
+        特徴依頼Temp."dt各種金額欄２" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku2",
+        特徴依頼Temp."dt各種金額欄3" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku3",
+        特徴依頼Temp."dt予備2" AS  "ueT0511NenkinTokuchoKaifuJoho_dtYobi2",
+        特徴依頼Temp."dt共済年金証書記号番号" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKyosaiNenkinshoshoKigoNo",
+        特徴依頼Temp."dt各種金額欄4" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku4",
+        特徴依頼Temp."dt各種金額欄5" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku5",
+        特徴依頼Temp."dt各種金額欄6" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku6",
+        特徴依頼Temp."dt各種金額欄7" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku7",
+        特徴依頼Temp."dt各種金額欄8" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8",
+        特徴依頼Temp."dt停止年月" AS  "ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM",
+        特徴依頼Temp."dt予備4住民税" AS  "ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei",
+        特徴依頼Temp."dt個人番号" AS  "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo"
     </sql>
     
     <sql id="allColumns_特徴依頼追加Temp">

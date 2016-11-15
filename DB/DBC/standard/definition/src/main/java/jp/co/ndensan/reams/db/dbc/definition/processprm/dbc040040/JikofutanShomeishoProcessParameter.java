@@ -31,7 +31,7 @@ public class JikofutanShomeishoProcessParameter implements IBatchProcessParamete
     private FlexibleYearMonth 受取年月;
     private KaigoGassan_JikoFutanShomeisho_Insho 印書;
     private FlexibleDate 発行日;
-    private long 出力順ID;
+    private Long 出力順ID;
     private RString 文書情報;
     private KaigoGassan_DataSakuseiKubun 抽出対象;
 

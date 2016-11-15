@@ -19,12 +19,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 画面設計_DBCMN71001_給付費通知減免情報補正登録Handlerクラスです。
@@ -93,7 +97,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_RESEARCH, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_RESEARCH_RESULT, false);
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().clearValue();
-        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務, false);
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList().loadHokenshaList();
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxFudangoukei().clearValue();
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxNumHiyouGoukei().clearValue();
     }
@@ -134,10 +138,20 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
             div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput().initialize(row.getTxtServiceShurui().substring(NUM_0, NUM_2));
         }
         if (!row.getTxtFutangakuGokei().isEmpty()) {
-            div.getTextBoxFudangoukei().setValue(new Decimal(row.getTxtFutangakuGokei().toString()));
+            List<RString> futangakuGokeiList = row.getTxtFutangakuGokei().split(",");
+            RString 利用者負担額 = RString.EMPTY;
+            for (RString rst : futangakuGokeiList) {
+                利用者負担額 = 利用者負担額.concat(rst);
+            }
+            div.getTextBoxFudangoukei().setValue(new Decimal(利用者負担額.toString()));
         }
         if (!row.getTxtServicehiGokei().isEmpty()) {
-            div.getTextBoxNumHiyouGoukei().setValue(new Decimal(row.getTxtServicehiGokei().toString()));
+            List<RString> servicehiGokeiList = row.getTxtServicehiGokei().split(",");
+            RString サービス費用合計額 = RString.EMPTY;
+            for (RString rst : servicehiGokeiList) {
+                サービス費用合計額 = サービス費用合計額.concat(rst);
+            }
+            div.getTextBoxNumHiyouGoukei().setValue(new Decimal(サービス費用合計額.toString()));
         }
     }
 
@@ -175,6 +189,8 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         div.getTextBoxFudangoukei().clearValue();
         div.getTextBoxNumHiyouGoukei().clearValue();
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setVisible(false);
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(false);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(false);
     }
 
     /**
@@ -211,13 +227,14 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
 
     private void setRow(DataGridItiran_Row row) {
         row.setTxtShokisaiNo(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue());
-        row.setTxtServiceNengetsu(div.getTextBoxDateSaabisu().getValue().toDateString().substring(NUM_0, NUM_6));
+        row.setTxtServiceNengetsu(new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0, NUM_6))
+        .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         row.setTxtJigyoshaNo(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo());
         row.setTxtJigyoshaName(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
         row.setTxtServiceShurui(div.getCcdServiceTypeInput().getサービス種類コード().concat(RString.HALF_SPACE)
                 .concat(div.getCcdServiceTypeInput().getサービス種類名称()));
-        row.setTxtFutangakuGokei(new RString(div.getTextBoxFudangoukei().getValue().toString()));
-        row.setTxtServicehiGokei(new RString(div.getTextBoxNumHiyouGoukei().getValue().toString()));
+        row.setTxtFutangakuGokei(DecimalFormatter.toコンマ区切りRString(div.getTextBoxFudangoukei().getValue(), 0));
+        row.setTxtServicehiGokei(DecimalFormatter.toコンマ区切りRString(div.getTextBoxNumHiyouGoukei().getValue(), 0));
     }
 
     private void setDataGrid(List<KyufuhigenmenjyouhouRegisterResult> list) {
@@ -242,7 +259,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         if (result.getサービス提供年月().isEmpty()) {
             row.setTxtServiceNengetsu(RString.EMPTY);
         } else {
-            row.setTxtServiceNengetsu(result.getサービス提供年月().toDateString());
+            row.setTxtServiceNengetsu(result.getサービス提供年月().wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         }
         if (result.get事業者番号().isEmpty()) {
             row.setTxtJigyoshaNo(RString.EMPTY);
@@ -262,12 +279,12 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         if (null == result.get利用者負担額()) {
             row.setTxtFutangakuGokei(RString.EMPTY);
         } else {
-            row.setTxtFutangakuGokei(new RString(result.get利用者負担額().toString()));
+            row.setTxtFutangakuGokei(DecimalFormatter.toコンマ区切りRString(result.get利用者負担額(), 0));
         }
         if (result.getサービス費用合計額() == null) {
             row.setTxtServicehiGokei(RString.EMPTY);
         } else {
-            row.setTxtServicehiGokei(new RString(result.getサービス費用合計額().toString()));
+            row.setTxtServicehiGokei(DecimalFormatter.toコンマ区切りRString(result.getサービス費用合計額(), 0));
         }
         return row;
     }

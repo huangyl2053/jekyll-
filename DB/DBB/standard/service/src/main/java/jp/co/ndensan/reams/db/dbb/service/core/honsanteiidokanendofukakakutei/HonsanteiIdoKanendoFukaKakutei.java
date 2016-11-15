@@ -108,7 +108,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
         List<KanendoIdoFukaKakutei> fukaKakuteiList = new ArrayList<>();
         IFukaKakuteiMapper mapper = mapperProvider.create(IFukaKakuteiMapper.class);
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
-        Kitsuki kitsuki = koseiTsukiHantei.find更正月(調定日時.getRDateTime().getDate());
+        Kitsuki kitsuki = koseiTsukiHantei.find過年度更正月(調定日時.getRDateTime().getDate());
         FukaKakuteiParameter parameter = new FukaKakuteiParameter(
                 FlexibleYear.EMPTY,
                 FlexibleYear.EMPTY,
@@ -127,7 +127,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
         }
         for (KanendoIdoFukaKakutei idofukaKakutei : fukaKakuteiList) {
             List<DbT2002FukaEntity> dbtFukaList = fukaDac.select更正前のデータ(idofukaKakutei.getFukaKakuteiEntity().
-                    get通知書番号());
+                    get通知書番号(), idofukaKakutei.getFukaKakuteiEntity().get賦課年度());
             if (dbtFukaList != null && !dbtFukaList.isEmpty()) {
                 set更正前項目(dbtFukaList, idofukaKakutei);
             }

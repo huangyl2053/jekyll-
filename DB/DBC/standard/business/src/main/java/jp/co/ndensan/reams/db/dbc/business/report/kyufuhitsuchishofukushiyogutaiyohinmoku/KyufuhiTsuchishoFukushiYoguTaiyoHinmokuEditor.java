@@ -46,11 +46,6 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor implements IKyufuhiTs
         source.shukeiserviceEDYM = new FlexibleDate(item.getサービス集計終了年月()).wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.tsuchibun1 = item.get通知文1();
-        source.listRiyoFukushiyogu_1 = new FlexibleDate(item.getサービス年月()).wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        source.listRiyoFukushiyogu_2 = item.getサービス事業所();
-        source.listRiyoFukushiyogu_3 = item.getタイコード();
-        source.listRiyoFukushiyogu_4 = item.get福祉用具商品名();
         source.sankouShiryoTitle1 = item.get参考資料タイトル1();
         source.sankouShiryoTitle2 = item.get参考資料タイトル2();
         source.sankouShiryoTitle3 = item.get参考資料タイトル3();

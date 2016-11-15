@@ -366,16 +366,31 @@
     
     <!-- 住基（宛名）異動の取得に本人以外の異動情報の判断 -->
     <select resultOrdered="true" id="get住基異動_本人以外の異動情報" resultMap="resultMap_IdoEntity" parameterType="java.util.Map" fetchSize="500">
-        SELECT
-           DISTINCT B."hihokenshaNo"
-        FROM
-            rgdb."DbT1001HihokenshaDaicho" AS B
-        INNER JOIN
+         WITH master AS(   
+            SELECT
+               DISTINCT B."hihokenshaNo",
+               B."shikibetsuCode"
+            FROM
+                rgdb."DbT1001HihokenshaDaicho" AS B
+            WHERE
+                B."shikakuSoshitsuYMD" IS NULL
+            OR  B."shikakuSoshitsuYMD" = ''
+            OR  #{choteiNendoYMD} <![CDATA[<=]]> B."shikakuSoshitsuYMD")
+          SELECT
+            DISTINCT master."hihokenshaNo"
+          FROM
+            master
+            INNER JOIN
             rgua."UaFt200FindShikibetsuTaisho"('3','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+            (SELECT
+                        ARRAY_AGG (CAST (master. "shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )) AS 宛名
         ON
-            宛名."shikibetsuCode" = B."shikibetsuCode"
+            宛名."shikibetsuCode" = master."shikibetsuCode"
         INNER JOIN
             (SELECT A.*,
                 宛名."setaiCode",
@@ -385,17 +400,18 @@
              INNER JOIN
                 rgua."UaFt200FindShikibetsuTaisho"('3','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+            (SELECT
+                        ARRAY_AGG (CAST ( C. "shikibetsuCode" AS TEXT))
+                    FROM
+                        "TmpShuki" AS C
+                )) AS 宛名
             ON
                 宛名."shikibetsuCode" = A."shikibetsuCode"
             AND (宛名."setaiCode" IS NOT NULL AND 宛名."setaiCode" <![CDATA[<>]]> '')
             ) AS T
         ON
             宛名."setaiCode" = T."setaiCode"
-        WHERE
-            B."shikakuSoshitsuYMD" IS NULL
-        OR  B."shikakuSoshitsuYMD" = ''
-        OR  #{choteiNendoYMD} <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 住基（宛名）異動の取得に本人の異動を「異動Temp」に追加する-->
@@ -493,16 +509,32 @@
     
     <!-- 所得異動の取得に本人以外の異動情報の判断 -->
     <select resultOrdered="true" id="get所得異動_本人以外の異動情報" resultMap="resultMap_IdoEntity" parameterType="java.util.Map" fetchSize="500">
+       WITH master AS(
         SELECT
-           DISTINCT B."hihokenshaNo"
+           DISTINCT B."hihokenshaNo",
+           B."shikibetsuCode"
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS B
+        
+        WHERE
+           B."shikakuSoshitsuYMD" IS NULL 
+        OR B."shikakuSoshitsuYMD" = ''
+        OR #{choteiNendoYMD} <![CDATA[<=]]> B."shikakuSoshitsuYMD")
+      SELECT
+        DISTINCT master."hihokenshaNo"
+      FROM
+        master
         INNER JOIN
             rgua."UaFt200FindShikibetsuTaisho"('3','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (SELECT
+                    ARRAY_AGG(CAST(master."shikibetsuCode" AS TEXT) )
+                FROM
+                    master
+                )) AS 宛名
         ON
-            宛名."shikibetsuCode" = B."shikibetsuCode"
+            宛名."shikibetsuCode" = master."shikibetsuCode"
         INNER JOIN
             (SELECT A.*,
                 宛名."setaiCode",
@@ -512,17 +544,18 @@
              INNER JOIN
                 rgua."UaFt200FindShikibetsuTaisho"('3','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+            (SELECT
+                    ARRAY_AGG(CAST(C."shikibetsuCode" AS TEXT) )
+                FROM
+                    "TmpShotoku" AS C
+                )) AS 宛名
             ON
                 宛名."shikibetsuCode" = A."shikibetsuCode"
             AND (宛名."setaiCode" IS NOT NULL AND 宛名."setaiCode" <![CDATA[<>]]> '')
             ) AS T
         ON
             宛名."setaiCode" = T."setaiCode"
-        WHERE
-           B."shikakuSoshitsuYMD" IS NULL 
-        OR B."shikakuSoshitsuYMD" = ''
-        OR #{choteiNendoYMD} <![CDATA[<=]]> B."shikakuSoshitsuYMD"
     </select>
     
     <!-- 所得異動の取得に本人の異動を「異動Temp」に追加する-->
@@ -1047,10 +1080,6 @@
          WHERE
             A."hihokennshaKubunCode" = '1'
         AND A."logicalDeletedFlag" = FALSE
-        AND (A."shikakuSoshitsuYMD" IS NULL OR A."shikakuSoshitsuYMD" = ''
-            OR A."shikakuSoshitsuYMD" <![CDATA[>]]> #{賦課年度} || '0401')
-        AND A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 賦課の情報として取得 -->
@@ -1932,26 +1961,36 @@
      <!--本算定異動（現年度）情報の取得します。-->
     <select resultOrdered="true" id="get本算定異動情報" resultMap="resultMap_HonsanteiIdoKekkaEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.HonsanteiIdoKekkaParameter" fetchSize="500">
-        SELECT
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho" />,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-            口座.*
-        FROM
-            rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
-        INNER JOIN
-            rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-        ON 
-            "DbT2015KeisangoJoho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS 口座
-        ON "DbT2015KeisangoJoho"."shikibetsuCode" = 口座."uaT0310Koza_shikibetsuCode"
-        WHERE
-           "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
-        AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
-        AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '異動賦課'
+        WITH master AS(  
+            SELECT
+                <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho" />,
+                口座.*
+            FROM
+                rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
+            LEFT JOIN
+                (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS 口座
+            ON "DbT2015KeisangoJoho"."shikibetsuCode" = 口座."uaT0310Koza_shikibetsuCode"
+            WHERE
+               "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
+            AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
+            AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '異動賦課')
         <!--AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}-->
+      SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+      FROM
+        master
+      INNER JOIN
+                rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',FALSE,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                (SELECT
+                    ARRAY_AGG(CAST(master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT) )
+                FROM
+                    master
+                )) AS "ShikibetsuTaisho"
+            ON 
+                master."dbT2015KeisangoJoho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"  
         ${出力順},
         "dbT2015KeisangoJoho_choteiNendo",
         "dbT2015KeisangoJoho_fukaNendo",
@@ -1995,14 +2034,14 @@
           FROM
             master AS master
           LEFT JOIN
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>
+             rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
             (SELECT
                 ARRAY_AGG(CAST(master."shikibetsuCode" AS TEXT) )
             FROM
                 master
-            )
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
-            AS "ShikibetsuTaisho"
+            )) AS "ShikibetsuTaisho"
             ON master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
             ${出力順}
     </select>

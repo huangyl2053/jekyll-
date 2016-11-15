@@ -115,8 +115,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-    private static final RString 一覧EUCエンティティID = new RString("DBU900002");
-    private static final RString CSVFILENAME = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString 一覧EUCエンティティID = new RString("DBC900004");
+    private static final RString CSVFILENAME = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
@@ -313,6 +313,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         reportList.set認定有効開始日(entity.get認定有効期間開始日());
         reportList.set認定有効終了日(entity.get認定有効期間終了日());
         reportList.set認定日(entity.get認定年月日());
+        reportList.set市町村コード(entity.get市町村コード());
         reportList.set計画届出日(entity.get計画届出日());
         reportList.set計画適用開始日(entity.get適用開始年月日());
         reportList.set計画適用終了日(entity.get適用終了年月日());
@@ -373,22 +374,19 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             return true;
         }
         if (未提出者のみ.equals(processParameter.getTodokeidejyoukyou())
-                && entity.get適用開始年月日() != null
-                && !entity.get適用開始年月日().isEmpty()
-                && processParameter.getKijyunbi() != null
-                && !processParameter.getKijyunbi().isEmpty()
-                && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi())
-                && ((entity.get適用終了年月日() == null
-                || entity.get適用終了年月日().isEmpty())
-                || processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日()))) {
+                && (entity.get居宅給付計画届出_被保険者番号() == null
+                || ((entity.get適用終了年月日() != null
+                && !entity.get適用終了年月日().isEmpty())
+                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())))) {
             return true;
         }
         return 提出者のみ.equals(processParameter.getTodokeidejyoukyou())
-                && entity.get適用終了年月日() != null
-                && !entity.get適用終了年月日().isEmpty()
-                && processParameter.getKijyunbi() != null
-                && !processParameter.getKijyunbi().isEmpty()
-                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi());
+                && (entity.get適用開始年月日() != null
+                && !entity.get適用開始年月日().isEmpty()
+                && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi()))
+                && (entity.get適用終了年月日() == null
+                || entity.get適用終了年月日().isEmpty()
+                || processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日()));
     }
 
 }

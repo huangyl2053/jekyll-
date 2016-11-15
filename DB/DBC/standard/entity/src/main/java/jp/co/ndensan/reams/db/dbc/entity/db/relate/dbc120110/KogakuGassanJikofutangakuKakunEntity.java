@@ -37,5 +37,10 @@ public class KogakuGassanJikofutangakuKakunEntity {
     private Decimal 自己負担額合計_うち70_74歳;
     private Decimal 高額介護サービス費;
     private ShikibetsuCode 識別コード;
+    private RString 被保険者_郵便番号;
+    private RString 被保険者_町域コード;
+    private RString 被保険者_行政区コード;
+    private RString 被保険者_氏名50音カナ;
+    private RString 被保険者_市町村コード;
 
 }

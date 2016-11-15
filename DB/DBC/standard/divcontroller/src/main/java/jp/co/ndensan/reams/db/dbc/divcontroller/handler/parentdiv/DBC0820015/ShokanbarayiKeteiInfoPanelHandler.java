@@ -117,7 +117,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             JigyoshaNo 事業者番号 = new JigyoshaNo(row.getJigyoshaNo());
             RString 様式番号 = row.getYoshikiNo();
             int 件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号);
+                    サービス年月, 整理番号, 事業者番号, 様式番号, new RString("2"));
             if (件数 != 0) {
                 flag = false;
                 break;

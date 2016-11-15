@@ -5,10 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -25,25 +21,25 @@ public class KyufuJikoSakuseiEntityResult {
 
     private RString 事業者;
     private RString サービス;
-    private Decimal 単位;
-    private HokenKyufuRitsu 割引適用後率;
-    private Decimal 割引適用後単位;
-    private Decimal 回数;
+    private RString 単位;
+    private RString 割引適用後率;
+    private RString 割引適用後単位;
+    private RString 回数;
     private Decimal サービス単位;
     private Decimal 種類限度超過単位;
     private Decimal 種類限度内単位;
-    private Decimal 単位数単価;
+    private RString 単位数単価;
     private Decimal 区分限度超過単位;
     private Decimal 区分限度内単位;
-    private HokenKyufuRitsu 給付率;
+    private RString 給付率;
     private Decimal 給付計画単位数;
     private Decimal 費用総額;
     private Decimal 保険給付額;
     private Decimal 保険対象利用者負担額;
     private Decimal 全額利用者負担額;
-    private JigyoshaNo 事業者コード;
-    private ServiceShuruiCode サービス種類コード;
-    private ServiceKomokuCode サービス項目コード;
+    private RString 事業者コード;
+    private RString サービス種類コード;
+    private RString サービス項目コード;
     private RString ステータス;
     private boolean 合計フラグ;
     private RString 限度額対象外フラグ;

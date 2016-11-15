@@ -90,6 +90,18 @@ public class JigyoKogakuShikyuHanteiKekkaBuilder {
     }
 
     /**
+     * 履歴番号枝番を設定します。
+     *
+     * @param 履歴番号枝番 履歴番号枝番
+     * @return {@link KogakuShikyuHanteiKekkaBuilder}
+     */
+    public JigyoKogakuShikyuHanteiKekkaBuilder set履歴番号枝番(int 履歴番号枝番) {
+        requireNonNull(履歴番号枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("決定年月日"));
+        entity.setRirekiEdaNo(履歴番号枝番);
+        return this;
+    }
+
+    /**
      * 決定年月日を設定します。
      *
      * @param 決定年月日 決定年月日

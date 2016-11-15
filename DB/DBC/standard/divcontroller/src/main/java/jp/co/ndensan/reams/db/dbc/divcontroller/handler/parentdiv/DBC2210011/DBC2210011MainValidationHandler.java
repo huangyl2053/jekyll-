@@ -9,15 +9,13 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011.DBC2210011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011.DBC2210011MainDivSpec;
 import jp.co.ndensan.reams.db.dbc.service.core.tokubetsukyufujigyosha.TokubetsuKyufuJigyoshaService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.CheckDigitFactory;
-import jp.co.ndensan.reams.uz.uza.math.CheckDigitKind;
-import jp.co.ndensan.reams.uz.uza.math.ICheckDigit;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -32,7 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class DBC2210011MainValidationHandler {
 
-    private static final int FOUR = 4;
+    private static final int NO_0 = 0;
+    private static final int NO_2 = 2;
     private static final RString 情報存在 = new RString("1");
 
     /**
@@ -79,28 +78,21 @@ public class DBC2210011MainValidationHandler {
      * @return pairs
      */
     public ValidationMessageControlPairs 事業者コード重複チェック(ValidationMessageControlPairs pairs, DBC2210011MainDiv div) {
-        RString 県コード = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getDdlSearchKenCode().getSelectedKey();
-        RString 事業者区分 = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchJigyoshaKubun().getValue();
-        RString 郡市コード = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchGunshiCode().getValue();
-        RString cd = RString.EMPTY;
-        RString 連番 = RString.EMPTY;
-        if (div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue() != null) {
-            連番 = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchRenban().getValue().padLeft("0", FOUR);
-        }
-        if (div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchCheckDigit().getValue() != null) {
-            cd = div.getTokubetsuKyufuJigyoshaSearch().getTokubetsuKyufuSearchJigyoshaCode().getTxtSearchCheckDigit().getValue();
-        }
-        ICheckDigit icheckgigit = CheckDigitFactory.getInstance(CheckDigitKind.Modulus10);
-        RString 入力された事業者コード = icheckgigit.appendModulus(県コード.concat(事業者区分).concat(郡市コード).concat(連番).concat(cd));
+        RString 県コード = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().getSelectedValue().substring(NO_0, NO_2);
+        RString 事業者区分 = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtJigyoshaKubun().getValue();
+        RString 郡市コード = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtGunshiCode().getValue();
+        RString 連番 = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtRenban().getValue();
+        RString cd = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtCheckDigit().getValue();
+        JigyoshaNo 市町村特別給付用事業者番号 = new JigyoshaNo(県コード.concat(事業者区分).concat(郡市コード).concat(連番).concat(cd));
         TokubetsuKyufuJigyoshaService service = TokubetsuKyufuJigyoshaService.createTokubetsuKyufuJigyoshaService();
-        if (0 < service.count事業者情報(入力された事業者コード)) {
+        if (0 < service.count事業者情報(市町村特別給付用事業者番号.getColumnValue())) {
             div.set事業者情報件数(情報存在);
         }
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(DBC2210011MainDivSpec.特別給付サービス重複チェック)
-                .thenAdd(NoInputMessages.特別給付サービス重複チェック).messages());
+        messages.add(ValidateChain.validateStart(div).ifNot(DBC2210011MainDivSpec.事業者コード重複チェック)
+                .thenAdd(NoInputMessages.事業者コード重複チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.特別給付サービス重複チェック)
+                NoInputMessages.事業者コード重複チェック)
                 .build().check(messages));
         return pairs;
     }

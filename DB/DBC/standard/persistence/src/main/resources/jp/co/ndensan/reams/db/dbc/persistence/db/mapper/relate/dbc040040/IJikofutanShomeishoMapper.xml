@@ -32,7 +32,7 @@
             ) AS "DbT3070KogakuGassanJikoFutanGaku"
         ON  "DbT3068KogakuGassanShinseisho"."hihokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo"
             AND "DbT3068KogakuGassanShinseisho"."taishoNendo" = "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo"   
-            AND "DbT3068KogakuGassanShinseisho"."hokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo"   
+            AND SUBSTR("DbT3068KogakuGassanShinseisho"."hokenshaNo",3,8)  = "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo"   
             AND "DbT3068KogakuGassanShinseisho"."shikyuShinseishoSeiriNo" = "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
         WHERE 
             "DbT3068KogakuGassanShinseisho"."shinseiJokyoKubun" = '2'
@@ -274,10 +274,10 @@
         WHERE 
             "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
             AND  "DbT7022ShoriDateKanri"."shoriName" = '自己負担証明書作成_一括'
+            AND  "nendo"='0000'
             AND  "DbT7022ShoriDateKanri"."shoriEdaban" = '0001' 
             AND  "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
         ORDER BY
-            "DbT7022ShoriDateKanri"."nendo" DESC, 
             "DbT7022ShoriDateKanri"."nendoNaiRenban" DESC 
             LIMIT 1
     </select>

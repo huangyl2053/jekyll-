@@ -33,8 +33,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -85,6 +83,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_7 = 7;
+    private static final int 履歴番号枝番 = 1;
 
     /**
      * 初期化
@@ -203,8 +202,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();
             高額支給判定結果entity = 高額支給判定結果entity.modified();
-            if (result != null && result.get高額介護サービス費支給審査決定Entity() != null) {
-                修正前支給区分 = result.get高額介護サービス費支給審査決定Entity().get支給区分コード();
+            if (result != null && result.get高額介護サービス費支給判定結果Entity() != null) {
+                修正前支給区分 = result.get高額介護サービス費支給判定結果Entity().get支給区分コード();
             }
         } else if (削除モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.deleted();
@@ -218,7 +217,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity.set高額介護サービス費支給判定結果Entity(高額支給判定結果entity);
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().is更新処理(entity, メニューID);
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().dealKyufujisseki(
-                result, 修正前支給区分, 画面モード, 被保険者番号,
+                修正前支給区分, 高額支給判定結果entity.get支給区分コード(), 画面モード, 被保険者番号,
                 サービス年月, 証記載保険者番号, 履歴番号, 給付実績編集用entity);
     }
 
@@ -253,8 +252,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();
             高額支給判定結果entity = 高額支給判定結果entity.modified();
-            if (result != null && result.get高額介護サービス費支給審査決定Entity() != null) {
-                修正前支給区分 = result.get高額介護サービス費支給審査決定Entity().get支給区分コード();
+            if (result != null && result.get事業高額介護サービス費支給判定結果Entity() != null) {
+                修正前支給区分 = result.get事業高額介護サービス費支給判定結果Entity().get支給区分コード();
             }
         } else if (削除モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.deleted();
@@ -268,7 +267,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity.set事業高額介護サービス費支給判定結果Entity(高額支給判定結果entity);
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().is更新処理(entity, メニューID);
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().dealKyufujisseki(
-                result, 修正前支給区分, 画面モード, 被保険者番号,
+                修正前支給区分, 高額支給判定結果entity.get支給区分コード(), 画面モード, 被保険者番号,
                 サービス年月, 証記載保険者番号, 履歴番号, 給付実績編集用entity);
     }
 
@@ -551,7 +550,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().set算定基準額(row.getData6().getValue()).build();
         entity = entity.createBuilderForEdit().set支払済金額合計(row.getData7().getValue()).build();
         entity = entity.createBuilderForEdit().set高額支給額(row.getData8().getValue()).
-                set世帯集約番号(row.getData15()).build();
+                set世帯集約番号(row.getData15()).
+                set対象者受取年月(FlexibleYearMonth.EMPTY).
+                set対象者判定審査年月(FlexibleYearMonth.EMPTY).build();
         if (ZERO.equals(row.getData16())) {
             entity = entity.createBuilderForEdit().set自動償還対象フラグ(true).build();
         } else {
@@ -574,7 +575,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().set算定基準額(row.getData6().getValue()).build();
         entity = entity.createBuilderForEdit().set支払済金額合計(row.getData7().getValue()).build();
         entity = entity.createBuilderForEdit().set事業高額支給額(row.getData8().getValue()).
-                set世帯集約番号(row.getData15()).build();
+                set世帯集約番号(row.getData15()).set対象者受取年月(FlexibleYearMonth.EMPTY).
+                set対象者判定審査年月(FlexibleYearMonth.EMPTY).build();
         if (ZERO.equals(row.getData16())) {
             entity = entity.createBuilderForEdit().set自動償還対象フラグ(true).build();
         } else {
@@ -644,6 +646,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 && !div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get電話番号().isEmpty()) {
             entity = entity.createBuilderForEdit().set申請者電話番号(new TelNo((div.getShinseiTorokuPanel().
                     getCcdKogakuServicehiDetail().get電話番号()))).build();
+        } else {
+            entity = entity.createBuilderForEdit().set申請者電話番号(TelNo.EMPTY).build();
         }
         entity = entity.createBuilderForEdit().set支払方法区分コード(div.getShinseiTorokuPanel().
                 getCcdKogakuServicehiDetail().getCcdShiharaiHohoJyoho().getShiharaiHohoRad()).build();
@@ -653,11 +657,15 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 getCcdShiharaiHohoJyoho().getStartYMD() != null) {
             entity = entity.createBuilderForEdit().set支払期間開始年月日(new FlexibleDate(div.getShinseiTorokuPanel().
                     getCcdKogakuServicehiDetail().getCcdShiharaiHohoJyoho().getStartYMD().toString())).build();
+        } else {
+            entity = entity.createBuilderForEdit().set支払期間開始年月日(FlexibleDate.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                 getCcdShiharaiHohoJyoho().getEndYMD() != null) {
             entity = entity.createBuilderForEdit().set支払期間終了年月日(new FlexibleDate(div.getShinseiTorokuPanel().
                     getCcdKogakuServicehiDetail().getCcdShiharaiHohoJyoho().getEndYMD().toString())).build();
+        } else {
+            entity = entity.createBuilderForEdit().set支払期間終了年月日(FlexibleDate.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                 getCcdShiharaiHohoJyoho().getStartHHMM() != null) {
@@ -665,6 +673,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     getCcdShiharaiHohoJyoho().getStartHHMM().toString());
             entity = entity.createBuilderForEdit().set支払窓口開始時間(
                     時間.substring(NUM_0, NUM_2).concat(時間.substring(NUM_3, NUM_5))).build();
+        } else {
+            entity = entity.createBuilderForEdit().set支払窓口開始時間(RString.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                 getCcdShiharaiHohoJyoho().getEndHHMM() != null) {
@@ -672,6 +682,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     getCcdShiharaiHohoJyoho().getEndHHMM().toString());
             entity = entity.createBuilderForEdit().set支払窓口終了時間(
                     時間.substring(NUM_0, NUM_2).concat(時間.substring(NUM_3, NUM_5))).build();
+        } else {
+            entity = entity.createBuilderForEdit().set支払窓口終了時間(RString.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                 getCcdShiharaiHohoJyoho().getKozaNo() != null
@@ -727,6 +739,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 && !div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get電話番号().isEmpty()) {
             entity = entity.createBuilderForEdit().set申請者電話番号(new TelNo((div.getShinseiTorokuPanel().
                     getCcdKogakuServicehiDetail().get電話番号()))).build();
+        } else {
+            entity = entity.createBuilderForEdit().set申請者電話番号(TelNo.EMPTY).build();
         }
         entity = entity.createBuilderForEdit().set支払方法区分コード(div.getShinseiTorokuPanel().
                 getCcdKogakuServicehiDetail().getCcdShiharaiHohoJyoho().getShiharaiHohoRad()).build();
@@ -736,11 +750,15 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                 getCcdShiharaiHohoJyoho().getStartYMD() != null) {
             entity = entity.createBuilderForEdit().set支払期間開始年月日(new FlexibleDate(div.getShinseiTorokuPanel().
                     getCcdKogakuServicehiDetail().getCcdShiharaiHohoJyoho().getStartYMD().toString())).build();
+        } else {
+            entity = entity.createBuilderForEdit().set支払期間開始年月日(FlexibleDate.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                 getCcdShiharaiHohoJyoho().getEndYMD() != null) {
             entity = entity.createBuilderForEdit().set支払期間終了年月日(new FlexibleDate(div.getShinseiTorokuPanel().
                     getCcdKogakuServicehiDetail().getCcdShiharaiHohoJyoho().getEndYMD().toString())).build();
+        } else {
+            entity = entity.createBuilderForEdit().set支払期間終了年月日(FlexibleDate.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                 getCcdShiharaiHohoJyoho().getStartHHMM() != null) {
@@ -748,6 +766,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     getCcdShiharaiHohoJyoho().getStartHHMM().toString());
             entity = entity.createBuilderForEdit().set支払窓口開始時間(
                     時間.substring(NUM_0, NUM_2).concat(時間.substring(NUM_3, NUM_5))).build();
+        } else {
+            entity = entity.createBuilderForEdit().set支払窓口開始時間(RString.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                 getCcdShiharaiHohoJyoho().getEndHHMM() != null) {
@@ -755,6 +775,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     getCcdShiharaiHohoJyoho().getEndHHMM().toString());
             entity = entity.createBuilderForEdit().set支払窓口終了時間(
                     時間.substring(NUM_0, NUM_2).concat(時間.substring(NUM_3, NUM_5))).build();
+        } else {
+            entity = entity.createBuilderForEdit().set支払窓口終了時間(RString.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                 getCcdShiharaiHohoJyoho().getKozaNo() != null
@@ -781,7 +803,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             entity = new KogakuShikyuHanteiKekka(被保険者番号,
                     サービス年月, 証記載保険者番号, 履歴番号).createBuilderForEdit().build();
         }
+
         entity = clearKogakuShikyuHanteiKekka(entity);
+        entity = entity.createBuilderForEdit().set履歴番号枝番(履歴番号枝番).build();
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日() != null) {
             entity = entity.createBuilderForEdit().set決定年月日(new FlexibleDate(
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日().toString())).build();
@@ -811,6 +835,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             entity = new JigyoKogakuShikyuHanteiKekka(被保険者番号,
                     サービス年月, 証記載保険者番号, new Decimal(履歴番号)).createBuilderForEdit().build();
         }
+        entity = entity.createBuilderForEdit().set履歴番号枝番(履歴番号枝番).build();
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日() != null) {
             entity = entity.createBuilderForEdit().set決定年月日(new FlexibleDate(
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日().toString())).build();
@@ -840,6 +865,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             entity = entity.createBuilderForEdit().set受付年月日(
                     new FlexibleDate(div.getShinseiTorokuPanel().
                             getCcdKogakuServicehiDetail().get受付日().toString())).build();
+        } else {
+            entity = entity.createBuilderForEdit().set受付年月日(FlexibleDate.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日() != null) {
             entity = entity.createBuilderForEdit().set決定年月日(new FlexibleDate(
@@ -847,7 +874,11 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             entity = entity.createBuilderForEdit().set審査年月(new FlexibleYearMonth(
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                     get決定日().getYearMonth().toString())).build();
+        } else {
+            entity = entity.createBuilderForEdit().set決定年月日(FlexibleDate.EMPTY).build();
+            entity = entity.createBuilderForEdit().set審査年月(FlexibleYearMonth.EMPTY).build();
         }
+
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支払金額合計() != null) {
             entity = entity.createBuilderForEdit().set利用者負担額(
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支払金額合計().intValue()).build();
@@ -902,8 +933,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
      * @return Boolean
      */
     public Boolean is前排他キーのセット(HihokenshaNo 被保険者番号) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
+        LockingKey 排他キー = new LockingKey(被保険者番号);
         return RealInitialLocker.tryGetLock(排他キー);
     }
 

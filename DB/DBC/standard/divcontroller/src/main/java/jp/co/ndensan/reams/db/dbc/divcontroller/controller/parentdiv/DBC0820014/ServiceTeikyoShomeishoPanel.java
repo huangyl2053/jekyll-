@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820014
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.DBC0820014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseiken
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -150,7 +150,6 @@ public class ServiceTeikyoShomeishoPanel {
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.証明書選択チェック();
-        handler.事業者番号チェック();
         handler.サービス提供証明書の存在チェック(整理番号, サービス年月, 被保険者番号);
         putViewStateDown(処理モード_登録, div);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();
@@ -233,16 +232,13 @@ public class ServiceTeikyoShomeishoPanel {
         } else {
             様式番号 = row.getData4();
         }
-        RString 明細番号 = RString.EMPTY;
+        RString 明細番号 = null;
         if (!処理モード_登録.equals(処理モード)) {
             明細番号 = row.getData3();
         }
         ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
                 被保険者番号, サービス年月, 申請日, 整理番号, 事業者番号, 様式番号, 明細番号);
-        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = new ShoukanharaihishinseikensakuParameter(
-                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
-        ViewStateHolder.put(ViewStateKeys.申請検索キー, 償還払費申請検索);
         ViewStateHolder.put(ViewStateKeys.明細検索キー, parameter);
     }
 

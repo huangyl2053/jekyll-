@@ -218,6 +218,9 @@ public final class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter
         if (new RString("1").equals(ishokenFlag)) {
             hokenFlag = true;
         }
+        if (RString.isNullOrEmpty(order_ID)) {
+            isDate_TOFlag = true;
+        }
         return new KyokaisoGaitoshaMybatisParameter(
                 mode,
                 range,

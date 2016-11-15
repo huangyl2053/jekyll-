@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -77,12 +78,12 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
         return accessor.select().
                 table(DbT3038ShokanKihon.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(yoshikiNo, 様式番号),
-                                eq(meisaiNo, 明細番号))).
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(seiriNo, 整理番号),
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(yoshikiNo, 様式番号),
+                        eq(meisaiNo, 明細番号))).
                 toObject(DbT3038ShokanKihonEntity.class);
     }
 
@@ -155,11 +156,46 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
         return accessor.select().
                 table(DbT3038ShokanKihon.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(yoshikiNo, 様式番号))).getCount();
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(seiriNo, 整理番号),
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(yoshikiNo, 様式番号))).getCount();
+    }
+
+    /**
+     * 取得された件数2を返却する
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @return 取得された件数
+     * @throws NullPointerException Exception
+     */
+    public int selectデータ件数2(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3038ShokanKihon.class).
+                where(and(
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        not(eq(seiriNo, 整理番号)),
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(yoshikiNo, 様式番号))).getCount();
     }
 
     /**
@@ -184,10 +220,10 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
         return accessor.select().
                 table(DbT3038ShokanKihon.class).
                 where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 開始桁, 終了桁), "21D"))).
+                        eq(hiHokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(seiriNo, 整理番号),
+                        eq(substr(yoshikiNo, 開始桁, 終了桁), "21D"))).
                 order(by(serviceTeikyoYM, Order.DESC)).
                 toList(DbT3038ShokanKihonEntity.class);
     }

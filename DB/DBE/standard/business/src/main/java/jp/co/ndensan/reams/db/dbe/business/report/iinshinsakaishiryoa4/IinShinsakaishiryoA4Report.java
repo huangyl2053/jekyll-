@@ -122,10 +122,20 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 reportSourceWriter.writeLine(builder1);
             }
         }
-        //TODO 複数件の場合、実装なし。
-        IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group7Editor(sonotashiryoBusiness);
-        IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
-        reportSourceWriter.writeLine(builder2);
+        if (sonotashiryoBusiness != null) {
+            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
+            if (ファイルPathList != null && 0 < ファイルPathList.size()) {
+                for (int i = 0; i < ファイルPathList.size(); i++) {
+                    IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, i);
+                    IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
+            } else {
+                IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, 0);
+                IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
+                reportSourceWriter.writeLine(builder2);
+            }
+        }
     }
 
     private List<RString> get短冊リスト(List<TokkiA4Entity> 短冊情報リスト) {
@@ -141,7 +151,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
 
     private void テキスト全面Editor(ReportSourceWriter<IinShinsakaishiryoA4ReportSource> reportSourceWriter,
             List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List) {
-        if (TokkijikoTextImageKubun.イメージ.getコード().equals(tokkiTextBusiness.get特記事項テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(tokkiTextBusiness.get特記事項テキスト_イメージ区分())) {
             for (int i = 0; i < テキスト全面List.size(); i++) {
                 if (0 < i) {
                     IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group4Editor(

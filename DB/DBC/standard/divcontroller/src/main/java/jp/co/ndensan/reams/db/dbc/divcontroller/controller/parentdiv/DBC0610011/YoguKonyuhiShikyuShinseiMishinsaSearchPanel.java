@@ -43,7 +43,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     private final RString 保存 = new RString("btnSave");
     private final RString 審査 = new RString("審査");
     private static final RString 参照 = new RString("参照");
-    private final RString 保存MSG = new RString(" 福祉用具購入費支給申請審査結果を更新");
+    private final RString 保存MSG = new RString(" 福祉用具購入費支給申請審査結果の更新");
 
     /**
      * 画面初期化メソッドです。

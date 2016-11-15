@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  *
- * @author liuyl
+ * 市町村特別給付・サービス事業者のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBC-3430-010 liuwei2
  */
 public enum DBC2210011MainDivSpec implements IPredicate<DBC2210011MainDiv> {
 
@@ -60,7 +62,7 @@ public enum DBC2210011MainDivSpec implements IPredicate<DBC2210011MainDiv> {
                 @Override
                 public boolean apply(DBC2210011MainDiv div) {
                     RString 情報存在 = new RString("1");
-                    return 情報存在.equals(div.get事業者情報件数());
+                    return !情報存在.equals(div.get事業者情報件数());
                 }
             },
     サービス情報作成チェック {
@@ -74,7 +76,7 @@ public enum DBC2210011MainDivSpec implements IPredicate<DBC2210011MainDiv> {
                 public boolean apply(DBC2210011MainDiv div) {
                     for (dgTokubetsuKyufuJigyoshaDetailServiceList_Row row : div.getTokubetsuKyufuJigyoshaDetail().
                     getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().getDataSource()) {
-                        if (RowState.Deleted.equals(row.getRowState())) {
+                        if (!RowState.Deleted.equals(row.getRowState())) {
                             return true;
                         }
                     }

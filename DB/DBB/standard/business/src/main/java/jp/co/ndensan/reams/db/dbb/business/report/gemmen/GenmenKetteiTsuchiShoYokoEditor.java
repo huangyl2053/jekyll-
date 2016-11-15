@@ -88,7 +88,8 @@ public class GenmenKetteiTsuchiShoYokoEditor implements IGenmenKetteiTsuchiShoYo
             if (賦課年度 != null) {
                 source.fukaNendo = 賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
             }
-            source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(減免決定通知書情報.get減免の情報更正後().get減免状態区分()).get名称();
+            source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(減免決定通知書情報.get減免の情報更正後().get減免状態区分()).get名称()
+                    .replace(new RString("決定_"), RString.EMPTY);
         }
         if (表示コード != null) {
             source.hyojicodeName1 = 表示コード.get表示コード名１();

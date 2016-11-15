@@ -14,9 +14,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1171011.Sho
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
 import jp.co.ndensan.reams.db.dbc.service.core.shoridatekanri.ShoriDateKanriFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -48,9 +49,10 @@ public class ShomeishoSakuseiParameter {
      */
     public ResponseData<ShomeishoSakuseiParameterDiv> onLoad(ShomeishoSakuseiParameterDiv div) {
         RDate newDate = RDate.getNowDate();
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        LasdecCode 市町村コード = association.get地方公共団体コード();
         ShoriDateKanriFinder finder = ShoriDateKanriFinder.createInstance();
-        ShoriDateKanri 前回の実行情報 = finder.get前回の実行情報(new LasdecCode(
-                DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, newDate, SubGyomuCode.DBU介護統計報告)));
+        ShoriDateKanri 前回の実行情報 = finder.get前回の実行情報(市町村コード);
         KokuhorenInterfaceKanriManager manager = new KokuhorenInterfaceKanriManager();
         KokuhorenInterfaceKanri 実行された最新のデータ = manager.get実行された最新のデータ(
                 DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算自己負担額確認情報_交換情報識別番号,
@@ -90,7 +92,7 @@ public class ShomeishoSakuseiParameter {
         param.set印書(KaigoGassan_JikoFutanShomeisho_Insho.toValue(div.getDdlInsho().getSelectedKey()));
         param.set発行日(RString.isNullOrEmpty(div.getTxtHakkoDate().getValue().wareki().toDateString())
                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtHakkoDate().getValue().toString()));
-        param.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
+        param.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID() == null ? 0L : div.getCcdChohyoShutsuryokujun().get出力順ID());
         param.set文書情報(div.getCcdBunshoBango().get文書番号());
         if ((!RString.isNullOrEmpty(div.getRadJikoFutangaku().getSelectedKey())) && is自己負担) {
             param.set抽出対象(KaigoGassan_DataSakuseiKubun.自己負担額確認情報括);

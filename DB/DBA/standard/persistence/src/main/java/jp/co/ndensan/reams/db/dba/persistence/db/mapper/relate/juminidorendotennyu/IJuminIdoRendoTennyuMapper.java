@@ -23,4 +23,12 @@ public interface IJuminIdoRendoTennyuMapper {
      * @return List<JuminIdoRendoTennyuRelateEntity>
      */
     List<JuminIdoRendoTennyuRelateEntity> getデータ抽出(JuminIdoRendoTennyuManagerMybatisParameter parameter);
+
+    /**
+     * 宛名識別対象PSMと被保険者台帳を結合して抽出する。
+     *
+     * @param parameter JuminIdoRendoTennyuManagerMybatisParameter
+     * @return List<JuminIdoRendoTennyuRelateEntity>
+     */
+    List<JuminIdoRendoTennyuRelateEntity> get処理対象者(JuminIdoRendoTennyuManagerMybatisParameter parameter);
 }

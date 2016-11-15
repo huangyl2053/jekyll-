@@ -18,14 +18,17 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraiskkttcsrysmuke.Sho
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanbaraiskkttcsrysmuke.IShokanBaraiSkKtTcsRysmukeMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
-import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -112,11 +115,13 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
      * @param batchPram バッチパラメータ
      * @param reportSourceWriter ReportSourceWriter
      * @param 種類Map 種類Map
+     * @param 帳票制御共通情報 帳票制御共通情報
      * @return List<ShokanKetteiTsuchiShoHihokenshabunItem>
      */
     public List<ShokanKetteiTsuchiShoHihokenshabunItem> shokanBaraiShikyuKetteiTsuchishoRiyoshamuke(
             List<ShokanKetteiTsuchiShoShiharai> businessList,
-            ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter, Map<RString, RString> 種類Map) {
+            ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter, Map<RString, RString> 種類Map,
+            ChohyoSeigyoKyotsu 帳票制御共通情報) {
 
         List<ShokanKetteiTsuchiShoHihokenshabunItem> retList = new ArrayList<>();
 
@@ -135,7 +140,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             item = new ShokanKetteiTsuchiShoHihokenshabunItem();
             key = getJufukuKey(shoShiharai);
             支給金額 = shoShiharai.get支給額();
-            給付の種類 = 種類Map.get(key);
+            給付の種類 = 種類Map.get(key) == null ? RString.EMPTY : 種類Map.get(key);
             増減理由等 = shoShiharai.get増減理由等();
             if (給付の種類.length() <= 文字数_38) {
                 item.setKyufuShu1(給付の種類);
@@ -187,9 +192,10 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             item = set通知文(item, batchPram);
             setJigyoshoJoho(item, shoShiharai);
             setNinshosha(item, ninshoshaSource);
-            SofubutsuAtesakiSource atesakiSource
-                    = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(shoShiharai.get宛先情報()).build()).buildSource();
-            setSofubutsuAtesaki(item, atesakiSource);
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(shoShiharai.get市町村コード(), FlexibleDate.getNowDate());
+            EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(shoShiharai.get宛先情報(), 地方公共団体, 帳票制御共通情報);
+            SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+            setSofubutsuAtesaki(item, 送付物宛先ソースデータ);
             retList.add(item);
         }
         return retList;

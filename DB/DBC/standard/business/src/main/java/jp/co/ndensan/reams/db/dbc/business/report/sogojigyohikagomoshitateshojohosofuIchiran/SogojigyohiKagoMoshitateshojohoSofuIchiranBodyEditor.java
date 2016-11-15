@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -38,6 +39,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
     private static final int NUM_0 = 0;
     private static final RString 合計件数 = new RString("合計件数");
     private static final RString 漢字_件 = new RString("件");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -64,6 +66,8 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
         source.listUpper_3 = 過誤申立一時TBL.getJigyoshaName();
 
         source.listUpper_4 = 過誤申立一時TBL.getHiHokenshaNo().getColumnValue();
+        source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                source.listUpper_4);
         source.listUpper_5 = 被保険者一時TBL.getKanaMeisho();
 
         source.listLower_1 = 被保険者一時TBL.getMeisho();

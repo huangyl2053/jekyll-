@@ -28,6 +28,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
 
     private static final RString テキスト全面イメージ = new RString("1");
     private static final int INT_25 = 25;
+    private static final int PAGECOUN = 15;
     private static final int MAXCOUNT = 30;
     private static final int PAGETWO_MAXCOUNT = 34;
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
@@ -97,9 +98,18 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
             }
         }
         if (sonotashiryoBusiness != null) {
-            IJimuShinsakaishiryoA3Editor editor2 = new JimuShinsakaishiryoA3Group5Editor(sonotashiryoBusiness);
-            IJimuShinsakaishiryoA3Builder builder2 = new JimuShinsakaishiryoA3Builder(editor2);
-            reportSourceWriter.writeLine(builder2);
+            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
+            if (ファイルPathList != null && 0 < ファイルPathList.size()) {
+                for (int i = 0; i < (int) Math.ceil((double) ファイルPathList.size() / 2); i++) {
+                    IJimuShinsakaishiryoA3Editor editor2 = new JimuShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, i + 1);
+                    IJimuShinsakaishiryoA3Builder builder2 = new JimuShinsakaishiryoA3Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
+            } else {
+                IJimuShinsakaishiryoA3Editor editor2 = new JimuShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, 0);
+                IJimuShinsakaishiryoA3Builder builder2 = new JimuShinsakaishiryoA3Builder(editor2);
+                reportSourceWriter.writeLine(builder2);
+            }
         }
     }
 
@@ -141,7 +151,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
 
     private void 短冊Editor(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter,
             List<RString> 短冊リスト, List<TokkiJikou> 短冊情報リスト) {
-        int totalPages = (int) Math.ceil((double) 短冊情報リスト.size() / PAGETWO_MAXCOUNT);
+        int totalPages = (int) Math.ceil((double) (短冊情報リスト.size() - PAGECOUN) / PAGETWO_MAXCOUNT) + 1;
         for (int i = 0; i < 短冊リスト.size(); i++) {
             int page = (i + PAGETWO_MAXCOUNT) / PAGETWO_MAXCOUNT + 1;
             if (page <= totalPages) {

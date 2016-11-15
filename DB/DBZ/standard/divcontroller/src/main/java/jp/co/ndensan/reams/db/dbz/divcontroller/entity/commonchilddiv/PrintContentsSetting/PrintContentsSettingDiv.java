@@ -1,4 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -36,11 +37,12 @@ public class PrintContentsSettingDiv extends Panel implements IPrintContentsSett
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * gettxtIssueDate
      * @return txtIssueDate
      */
     @JsonProperty("txtIssueDate")
+    @Override
     public TextBoxDate getTxtIssueDate() {
         return txtIssueDate;
     }

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ChosairairirekiIchiranReport extends Report<ChosairairirekiIchiranReportSource> {
 
     private final List<ChosairairirekiIchiranBusiness> businessList;
+    private final ChosairairirekiIchiranBusiness business;
 
     /**
      * インスタンスを生成します。
@@ -26,6 +27,17 @@ public class ChosairairirekiIchiranReport extends Report<ChosairairirekiIchiranR
      */
     public ChosairairirekiIchiranReport(List<ChosairairirekiIchiranBusiness> businessList) {
         this.businessList = businessList;
+        this.business = null;
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param business 要介護認定判定結果一覧表Ａ３版のentity
+     */
+    public ChosairairirekiIchiranReport(ChosairairirekiIchiranBusiness business) {
+        this.businessList = null;
+        this.business = business;
     }
 
     /**
@@ -35,10 +47,16 @@ public class ChosairairirekiIchiranReport extends Report<ChosairairirekiIchiranR
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosairairirekiIchiranReportSource> reportSourceWriter) {
-        for (ChosairairirekiIchiranBusiness business : businessList) {
+        if (business != null) {
             IChosairairirekiIchiranEditor editor = new ChosairairirekiIchiranEditorImpl(business);
             IChosairairirekiIchiranBuilder builder = new ChosairairirekiIchiranBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
+        } else {
+            for (ChosairairirekiIchiranBusiness item : businessList) {
+                IChosairairirekiIchiranEditor editor = new ChosairairirekiIchiranEditorImpl(item);
+                IChosairairirekiIchiranBuilder builder = new ChosairairirekiIchiranBuilderImpl(editor);
+                reportSourceWriter.writeLine(builder);
+            }
         }
     }
 }

@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -261,15 +260,16 @@ public class DvKogakuServiceJuryoIninHandler {
     /**
      * ｢世帯一覧を表示する｣ボタンの変更を処理します。
      *
+     * @param 引き継ぎデータ 引き継ぎデータ
      * @return KogakuServiceData
      */
-    public KogakuServiceData onClick_btnSeitaiIchiran() {
+    public KogakuServiceData onClick_btnSeitaiIchiran(TaishoshaKey 引き継ぎデータ) {
         KogakuServiceData 引き継ぎ情報 = new KogakuServiceData();
         引き継ぎ情報.set被保険者番号(new HihokenshaNo(div.getCddShikakuKihon().get被保険者番号()));
         引き継ぎ情報.setサービス提供年月(FlexibleDate.getNowDate().getYearMonth());
         引き継ぎ情報.set履歴番号(null);
         引き継ぎ情報.set証記載保険者番号(HokenshaNo.EMPTY);
-        引き継ぎ情報.set識別コード(ShikibetsuCode.EMPTY);
+        引き継ぎ情報.set識別コード(引き継ぎデータ.get識別コード());
         return 引き継ぎ情報;
     }
 

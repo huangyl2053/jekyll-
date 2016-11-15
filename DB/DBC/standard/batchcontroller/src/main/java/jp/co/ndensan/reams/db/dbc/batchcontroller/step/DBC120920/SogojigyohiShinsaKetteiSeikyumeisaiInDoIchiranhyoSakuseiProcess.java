@@ -95,7 +95,6 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess
             = new RString("DBC200084_SogojigyohiShinsaKetteiSeikyumeisaihyo.csv");
     private static final RString ダブル引用符 = new RString("\"");
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
-    private static final RString デフォルト出力順 = new RString(" ORDER BY \"DbWT1613SinsaKetteiSeikyuGokei\".\"shoKisaiHokenshaNo\" ASC ");
     private static final RString SAKUSEI = new RString("作成");
 
     @BatchWriter
@@ -122,17 +121,6 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcess
         }
         RString 出力順 = MyBatisOrderByClauseCreator
                 .create(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.class, 並び順);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
         int index = 0;
         for (ISetSortItem item : 並び順.get設定項目リスト()) {
             if (item.is改頁項目()) {

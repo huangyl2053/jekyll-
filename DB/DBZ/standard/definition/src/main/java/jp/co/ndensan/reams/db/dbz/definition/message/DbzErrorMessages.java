@@ -89,7 +89,7 @@ public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
     資格取得日時点２号被保険者年齢でない(73, "取得日時点で２号被保険者ではありません。"),
     該当資格異動情報なし(74, "該当データが存在しないため、資格訂正登録はできません。"),
     資格喪失登録不可(75, "資格取得者ではないため資格喪失登録はできません。"),
-    重複あり(76, "%1が重複しています。");
+    重複あり(76, "?が重複しています。");
 
     private final transient Message message;
 

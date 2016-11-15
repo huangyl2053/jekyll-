@@ -6,11 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchiichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchiichiran.KijunShunyugakuTekiyoKetteiTsuchiIchiranSource;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -34,7 +39,12 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
 
     @Override
     public KijunShunyugakuTekiyoKetteiTsuchiIchiranSource edit(KijunShunyugakuTekiyoKetteiTsuchiIchiranSource source) {
-        source.printTimeStamp = YMDHMS.now().toDateString();
+        RDateTime dateTime = RDate.getNowDateTime();
+        source.printTimeStamp = dateTime.getDate()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
+                .concat(" ")
+                .concat(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
+                .concat(" 作成");
         if (基準収入額決定通知一覧表パラメータ.get市町村番号() != null) {
             source.shichosonNo = 基準収入額決定通知一覧表パラメータ.get市町村番号().value();
         }
@@ -85,8 +95,16 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
         source.choikiCode = 基準収入額決定通知一覧表パラメータ.get町域コード();
         source.gyoseikuCode = 基準収入額決定通知一覧表パラメータ.get行政区コード();
         source.shichosonCode = 基準収入額決定通知一覧表パラメータ.get市町村コード();
-
+        source.拡張情報1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.listHakkoTaishosha_4));
+        source.拡張情報2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), get非空文字列(source.listHakkoTaishosha_5));
         return source;
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }

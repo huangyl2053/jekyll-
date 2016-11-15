@@ -81,7 +81,6 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
     private static final RString CSV_標準開始日 = new RString("標準開始日");
     private static final RString CSV_標準終了日 = new RString("標準終了日");
     private static final RString CSV_被下開始日 = new RString("被下開始日");
-//    private static final RString CSV_ページ数 = new RString("ページ数");
     private static final RString CSV_作成年月日 = new RString("作成年月日");
     private static final RString CSV_処理年月 = new RString("処理年月");
     private static final RString RST_SPACE = new RString(" ");
@@ -174,7 +173,6 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
         headerList.add(CSV_標準開始日);
         headerList.add(CSV_標準終了日);
         headerList.add(CSV_被下開始日);
-//        headerList.add(CSV_ページ数);
         headerList.add(CSV_作成年月日);
         headerList.add(CSV_処理年月);
         return headerList;
@@ -236,11 +234,7 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
         bodyList.add(dateChangeToRString(entity.get標準負担適用終了日()));
         bodyList.add(dateChangeToRString(entity.get給付率引下げ開始日()));
         bodyList.add(作成年月日);
-        if (entity.get処理年月() != null) {
-            bodyList.add(entity.get処理年月().toDateString());
-        } else {
-            bodyList.add(RString.EMPTY);
-        }
+        bodyList.add(entity.get処理年月());
         return bodyList;
     }
 
@@ -297,7 +291,7 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
         entity.set引下開始日(soufuErrorTblEntity.get給付率引下げ開始日());
         entity.set作成年月日(soufuErrorTblEntity.get作成年月日());
         if (soufuErrorTblEntity.get処理年月() != null) {
-            entity.set処理年月(new FlexibleYearMonth(soufuErrorTblEntity.get処理年月().toDateString()));
+            entity.set処理年月(new FlexibleYearMonth(soufuErrorTblEntity.get処理年月()));
         }
         return entity;
     }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410025;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120210.DBC120210_KohiJukyushaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410025.TsuchishoJoho641Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
@@ -50,17 +50,19 @@ public class TsuchishoJoho641 {
      * @param div TsuchishoJoho641Div
      * @return ResponseData
      */
-    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(TsuchishoJoho641Div div) {
-        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
+    public ResponseData<DBC120210_KohiJukyushaInParameter> onClick_btnExcute(TsuchishoJoho641Div div) {
+        DBC120210_KohiJukyushaInParameter parameter = new DBC120210_KohiJukyushaInParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
         RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
-        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
-        parameter.setShutsuryokujunId(new RString(出力順ID));
+        parameter.set処理年月(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
+        if (出力順ID != null) {
+            parameter.set出力順ID(出力順ID);
+        }
         if (SaiShoriKubun.再処理.get名称().equals(再処理区分)) {
-            parameter.setSaishoriKubun(SaiShoriKubun.再処理);
+            parameter.set再処理区分(SaiShoriKubun.再処理);
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
-            parameter.setSaishoriKubun(SaiShoriKubun.空白);
+            parameter.set再処理区分(SaiShoriKubun.空白);
         }
         return ResponseData.of(parameter).respond();
     }

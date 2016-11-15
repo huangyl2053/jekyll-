@@ -13,11 +13,18 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.Koga
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoHandler;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -31,6 +38,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     private static final RString メニューID_DBCMNL3001 = new RString("DBCMNL3001");
     private static final RString 高額サービス費給付お知らせ通知書作成 = new RString("高額サービス費給付お知らせ通知書作成");
     private static final RString 事業高額サービス費給付お知らせ通知書作成 = new RString("事業高額サービス費給付お知らせ通知書作成");
+    private static final RString 出力順 = new RString("出力順");
     private static final int INT_10 = 10;
 
     /**
@@ -76,14 +84,19 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHihokenshaNo(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        RString menuID = ResponseHolder.getMenuID();
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setDisabled(true);
         div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(false);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(false);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
         div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(false);
-        getHandler(div).setサービス年月DDL(menuID);
+        if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().isEmpty()) {
+            div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().clear();
+        } else {
+            RString menuID = ResponseHolder.getMenuID();
+            getHandler(div).setサービス年月DDL(menuID);
+            return isError(div);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -104,6 +117,38 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     }
 
     /**
+     * 被保険者番号入力ガイドonOkCloseのメソッドです。
+     *
+     * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onOkClose(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
+        if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo() != null) {
+            getHandler(div).setサービス年月DDL(menuID);
+            return isError(div);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 被保険者番号入力ガイドonOkCloseのメソッドです。
+     *
+     * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> isError(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        if (div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey().equals(new RString("default"))
+                || div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().isEmpty()) {
+            ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 被保険者番号入力ガイドのメソッドです
      *
      * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
@@ -120,8 +165,13 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> txtHihokenshaNo_onBlur(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        RString 被保険者番号入力 = div.getTxtHihokenshaNo().getValue();
-        div.getTxtHihokenshaNo().setValue(被保険者番号入力.padZeroToLeft(INT_10));
+        RString menuID = ResponseHolder.getMenuID();
+        if (div.getShinseishoHakkoParameters().getTxtHihokenshaNo() != null) {
+            RString 被保険者番号入力 = div.getTxtHihokenshaNo().getValue();
+            div.getTxtHihokenshaNo().setValue(被保険者番号入力.padZeroToLeft(INT_10));
+            getHandler(div).setサービス年月DDL(menuID);
+            return isError(div);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -132,22 +182,21 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onBeforeOpenDialog(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-
-        if (!div.getShinseishoHakkoParameters().getTxtHihokenshaNo().getValue().isEmpty()
-                && div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue().isEmpty()) {
-            ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getCcdShuturyokujun().get出力順ID() == null) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new IdocheckMessages(
+                            UrErrorMessages.未指定, 出力順.toString())));
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-
         if (div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty() && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcWarningMessages.申請書提出期限未入力.getMessage()).respond();
         }
 
         if (!div.getShutsuryokuTaisho().getTxtShinseishoTeishutsuKigen().getValue().isEmpty() && !ResponseHolder.isReRequest()) {
             FlexibleDate 決定日 = div.getShinseishoHakkoParameters().getTxtKetteiDate().getValue();
-            return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage().replace(決定日.toString())).respond();
+            RString 決定日format = 決定日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).toDateString();
+            return ResponseData.of(div).addMessage(DbcWarningMessages.自動償還確認.getMessage().replace(決定日format.toString())).respond();
         }
 
         if (new RString(DbcWarningMessages.申請書提出期限未入力.getMessage().getCode()).equals(
@@ -184,6 +233,20 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
 
     private KogakuShikyuValidationHandler getCheckHandler() {
         return new KogakuShikyuValidationHandler();
+    }
+
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 
 }

@@ -214,6 +214,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         set費用額合計など入力不可();
         set申請者区分DataSource();
         set国保連再送付表示非表示(償還);
+        if (!画面モード_取消.equals(画面モード)) {
+            div.getTabShinseiJyoho().getDdlShinseiTorikesuJiyu().setRequired(false);
+        }
         if (画面モード_登録.equals(画面モード)) {
             登録モード画面初期化(識別コード, 住宅改修費事前申請, 被保険者番号, サービス提供年月, 住宅改修費支給申請, 画面モード, param, 導入形態);
         } else if (画面モード_事前申請.equals(画面モード)) {
@@ -434,7 +437,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             JutakuGaisuViewStateHolderParameter param, ShichosonSecurityJoho 導入形態) {
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
                 SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
-                new FlexibleYear(サービス提供年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
+                new FlexibleYear(サービス提供年月.getNendo().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         ShokanJutakuKaishuJizenShinsei 申請情報 = 住宅改修費事前申請.getJutakuKaishuJizenShinseiJyoho(被保険者番号,
                 サービス提供年月, 整理番号);
         if (申請情報 == null) {
@@ -478,7 +481,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getTxtTeikyoYM().setValue(提供着工年月);
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
                 SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
-                new FlexibleYear(提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
+                new FlexibleYear(提供着工年月.getNendo().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
         model.set被保険者番号(被保険者番号);
         model.set状態(改修状態_登録);
@@ -880,15 +883,14 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         List<UzT0007CodeEntity> costlist = CodeMaster.getCode(
                 SubGyomuCode.DBC介護給付, DBCCodeShubetsu.住宅改修費申請取消事由コード.getコード(), FlexibleDate.getNowDate());
         List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
-        torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
+        torikesuJiyu.add(new KeyValueDataSource());
         for (UzT0007CodeEntity list : costlist) {
             KeyValueDataSource dataSource = new KeyValueDataSource(list.getコード().value(), list.getコード略称());
             torikesuJiyu.add(dataSource);
         }
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(
                 torikesuJiyu);
-        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
-                申請取消事由_空);
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedIndex(0);
         if (!RString.isNullOrEmpty(申請取消事由コード)) {
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
                     申請取消事由コード);

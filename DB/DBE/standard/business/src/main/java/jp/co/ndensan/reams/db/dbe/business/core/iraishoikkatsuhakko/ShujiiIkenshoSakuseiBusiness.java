@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * バッチ設計_DBE240002_主治医意見書提出依頼書発行のRelateBusinessクラスです。
+ * バッチ設計_DBE230003_主治医意見書作成依頼発行一覧表のRelateBusinessクラスです。
  *
  * @reamsid_L DBE-0080-150 duanzhanli
  */
@@ -30,13 +30,13 @@ public class ShujiiIkenshoSakuseiBusiness {
                 processParamter.getIraiToYMD(),
                 processParamter.getShujiiIkenshoSakuseiIraisho());
     }
+
     /*
      * 帳票「帳票設計_DBE230002_主治医意見書作成依頼一覧表」Bodyデータを作成するメッソドです。
      *
      * @param entity entity
      * @return SyujiyikenshosakuseyiraihakouBodyItem
      */
-
     public SyujiyikenshosakuseyiraihakouBodyItem setBodyItem(ShujiiIkenshoSakuseiRelateEntity entity) {
         return new SyujiyikenshosakuseyiraihakouBodyItem(entity.get被保険者番号(),
                 entity.get被保険者氏名(),

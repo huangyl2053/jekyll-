@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoSer
 import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishikyuushinnseitouroku.KougakuSabisuhiShikyuuShinnseiTourokuEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishikyuushinnseitouroku.KougakuSabisuhiShikyuuShinnseiTourokuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.KougakuSabisuhiShousaiNaiyouResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
@@ -61,15 +62,12 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
     private static final RString 高額サービス費支給申請書登録 = new RString("DBCMN42001");
     private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMNL2001");
     private static final RString 最新番号 = new RString("最新番号");
-    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString 追加モード = new RString("追加モード");
     private static final RString 修正モード = new RString("修正モード");
     private static final RString 削除モード = new RString("削除モード");
-    private static final RString 不支給 = new RString("不支給");
-    private static final RString 支給 = new RString("支給");
     private static final KokanShikibetsuNo 定値_交換情報識別番号1 = new KokanShikibetsuNo("1131");
     private static final KokanShikibetsuNo 定値_交換情報識別番号2 = new KokanShikibetsuNo("1132");
     private static final KokanShikibetsuNo 定値_交換情報識別番号3 = new KokanShikibetsuNo("1133");
@@ -203,7 +201,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
     /**
      * 給付実績情報の登録、更新処理を行う。
      *
-     * @param 高額サービス費詳細内容Entity KougakuSabisuhiShousaiNaiyouResult
+     * @param 修正後支給区分 RString
      * @param 修正前支給区分 RString
      * @param 処理モード RString
      * @param 被保険者番号 HihokenshaNo
@@ -212,23 +210,19 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
      * @param 履歴番号 int
      * @param 給付実績編集用entity KyufujissekiKogakuKaigoServicehi
      */
-    public void dealKyufujisseki(KougakuSabisuhiShousaiNaiyouResult 高額サービス費詳細内容Entity,
-            RString 修正前支給区分, RString 処理モード, HihokenshaNo 被保険者番号,
+    public void dealKyufujisseki(RString 修正前支給区分, RString 修正後支給区分, RString 処理モード, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号,
             int 履歴番号, KyufujissekiKogakuKaigoServicehi 給付実績編集用entity) {
         RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (ONE.equals(受託区分)) {
-            if (追加モード.equals(処理モード) && ((高額サービス費詳細内容Entity != null && 高額サービス費詳細内容Entity.
-                    get高額介護サービス費支給審査決定Entity() != null
-                    && ShikyuFushikyuKubun.支給.getコード().equals(高額サービス費詳細内容Entity.
-                            get高額介護サービス費支給審査決定Entity().get支給区分コード())))) {
+            if (追加モード.equals(処理モード) && (ShikyuFushikyuKubun.支給.getコード().equals(修正後支給区分))) {
                 dealKyufutsuika(被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, ONE, 給付実績編集用entity);
             } else if (修正モード.equals(処理モード)) {
-                set受託なしと修正モードの給付実績情報(高額サービス費詳細内容Entity, 修正前支給区分,
+                set受託なしと修正モードの給付実績情報(修正前支給区分, 修正後支給区分,
                         被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 給付実績編集用entity);
             } else if (削除モード.equals(処理モード)) {
-                set受託なしと削除モードの給付実績情報(高額サービス費詳細内容Entity, 被保険者番号, サービス年月,
+                set受託なしと削除モードの給付実績情報(修正後支給区分, 被保険者番号, サービス年月,
                         証記載保険者番号, 履歴番号);
             }
         } else if (TWO.equals(受託区分)) {
@@ -287,6 +281,8 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
             給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
                     set交換情報識別番号(定値_交換情報識別番号8).build();
         }
+        給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().set公費１負担番号(RString.EMPTY)
+                .set公費２負担番号(RString.EMPTY).set公費３負担番号(RString.EMPTY).build();
         if (EntityDataState.Added.equals(給付実績編集用entity.toEntity().getState())) {
             給付実績高額介護サービス費Dac.save(給付実績編集用entity.toEntity());
         }
@@ -591,45 +587,27 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         }
     }
 
-    private void set受託なしと修正モードの給付実績情報(KougakuSabisuhiShousaiNaiyouResult 高額サービス費詳細内容Entity,
-            RString 修正前支給区分, HihokenshaNo 被保険者番号,
+    private void set受託なしと修正モードの給付実績情報(RString 修正前支給区分, RString 修正後支給区分, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号,
             int 履歴番号, KyufujissekiKogakuKaigoServicehi 給付実績編集用entity) {
-        if (不支給.equals(修正前支給区分)
-                && (高額サービス費詳細内容Entity != null && 高額サービス費詳細内容Entity.
-                get高額介護サービス費支給審査決定Entity() != null
-                && ONE.equals(高額サービス費詳細内容Entity.
-                        get高額介護サービス費支給審査決定Entity().get支給区分コード()))) {
+        if (ShikyuKubun.不支給.getコード().equals(修正前支給区分) && ShikyuKubun.支給.getコード().equals(修正後支給区分)) {
             dealKyufutsuika(被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, ONE, 給付実績編集用entity);
-        } else if (支給.equals(修正前支給区分)
-                && (高額サービス費詳細内容Entity != null && 高額サービス費詳細内容Entity.
-                get高額介護サービス費支給審査決定Entity() != null
-                && ONE.equals(高額サービス費詳細内容Entity.
-                        get高額介護サービス費支給審査決定Entity().get支給区分コード()))) {
-            KyufujissekiKogakuKaigoServicehi 給付実績entity
-                    = dealKyufujissekiDataShutoku(被保険者番号, サービス年月, 証記載保険者番号);
+        } else if (ShikyuKubun.支給.getコード().equals(修正前支給区分) && ShikyuKubun.支給.getコード().equals(修正後支給区分)) {
+            KyufujissekiKogakuKaigoServicehi 給付実績entity = dealKyufujissekiDataShutoku(被保険者番号, サービス年月, 証記載保険者番号);
             if (給付実績entity != null) {
                 dealKyufutsuika(被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, TWO, 給付実績entity);
             }
-        } else if (支給.equals(修正前支給区分)
-                && (高額サービス費詳細内容Entity != null && 高額サービス費詳細内容Entity.
-                get高額介護サービス費支給審査決定Entity() != null
-                && ZERO.equals(高額サービス費詳細内容Entity.
-                        get高額介護サービス費支給審査決定Entity().get支給区分コード()))) {
-            KyufujissekiKogakuKaigoServicehi 給付実績entity
-                    = dealKyufujissekiDataShutoku(被保険者番号, サービス年月, 証記載保険者番号);
+        } else if (ShikyuKubun.支給.getコード().equals(修正前支給区分) && ShikyuKubun.不支給.getコード().equals(修正後支給区分)) {
+            KyufujissekiKogakuKaigoServicehi 給付実績entity = dealKyufujissekiDataShutoku(被保険者番号, サービス年月, 証記載保険者番号);
             if (給付実績entity != null) {
                 dealKyufutsuika(被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, THREE, 給付実績entity);
             }
         }
     }
 
-    private void set受託なしと削除モードの給付実績情報(KougakuSabisuhiShousaiNaiyouResult 高額サービス費詳細内容Entity,
+    private void set受託なしと削除モードの給付実績情報(RString 修正後支給区分,
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号) {
-        if ((高額サービス費詳細内容Entity != null && 高額サービス費詳細内容Entity.
-                get高額介護サービス費支給審査決定Entity() != null
-                && ShikyuFushikyuKubun.支給.getコード().equals(高額サービス費詳細内容Entity.
-                        get高額介護サービス費支給審査決定Entity().get支給区分コード()))) {
+        if (ShikyuFushikyuKubun.支給.getコード().equals(修正後支給区分)) {
             KyufujissekiKogakuKaigoServicehi 給付実績entity
                     = dealKyufujissekiDataShutoku(被保険者番号, サービス年月, 証記載保険者番号);
             if (給付実績entity != null) {

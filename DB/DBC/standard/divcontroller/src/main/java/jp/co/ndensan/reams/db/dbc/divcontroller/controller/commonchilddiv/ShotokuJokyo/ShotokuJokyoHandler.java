@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
@@ -99,7 +100,7 @@ public class ShotokuJokyoHandler {
         div.setHdnGyomuCode(業務コード);
         List<SetaiinShotoku> 世帯員所得情報リスト = SetaiinShotokuJohoFinder.createInstance().
                 get世帯員所得情報(hdnShikibetuCode, hdnShoriNendo.getNendo(), 所得基準年月日);
-        List<dgSteaiinShotoku_Row> rowList = set世帯員所得情報Grid(世帯員所得情報リスト, hdnKijunYMD);
+        List<dgSteaiinShotoku_Row> rowList = set世帯員所得情報Grid(世帯員所得情報リスト, new FlexibleDate(RDateTime.now().getDate().toDateString()));
         div.getDgSteaiinShotoku().setDataSource(rowList);
 
         MemoNyuryokuHandler.dataGridupdateImage(new GyomuCode(div.getHdnGyomuCode()), SubGyomuCode.DBC介護給付, div.getDgSteaiinShotoku(),

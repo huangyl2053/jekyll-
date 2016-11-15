@@ -93,7 +93,6 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
                     + "ISogoKohifutanshaChohyoMapper.get帳票出力対象データ");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200086");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3061.\"kohiFutanshaNo\" ASC");
     private static final RString コンマ = new RString(",");
     private static final RString 固定改頁項目ID = new RString("0134");
     private static final RString 作成 = new RString("作成");
@@ -142,17 +141,6 @@ public class SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess extends
                     出力順Map.put(KEY_並び順の６件目, item.get項目名());
                 }
                 i = i + 1;
-            }
-        }
-        if (RString.isNullOrEmpty(orderByStr)) {
-            orderByStr = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = orderByStr.split(コンマ.toString());
-            orderByStr = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    orderByStr = orderByStr.concat(コンマ).concat(出力順BODY.get(i));
-                }
             }
         }
         帳票データの取得Parameter.set出力順(orderByStr);

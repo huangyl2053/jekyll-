@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kyotakuservicekeikakusa;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -45,4 +46,5 @@ public class KyotakuServiceKeikakuSaList {
     private RString 事業者名称;
     private RString 備考1;
     private RString 備考2;
+    private LasdecCode 市町村コード;
 }

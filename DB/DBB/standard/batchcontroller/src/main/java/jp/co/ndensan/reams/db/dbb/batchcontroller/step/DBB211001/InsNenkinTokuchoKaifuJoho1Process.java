@@ -69,7 +69,7 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toSelectTokuChoIraiDataMyBatisParameter());
     }
 
     @Override
@@ -81,6 +81,9 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
 
     @Override
     protected void process(TokuchoIraiDataEntity t) {
+        if (t.get賦課Newest() == null) {
+            return;
+        }
         if (!t.get賦課Newest().getTsuchishoNo().equals(通知書番号)
                 || !t.get賦課Newest().getFukaNendo().equals(賦課年度)
                 || !t.get賦課Newest().getChoteiNendo().equals(調定年度)) {
@@ -96,6 +99,7 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
         通知書番号 = t.get賦課Newest().getTsuchishoNo();
         賦課年度 = t.get賦課Newest().getFukaNendo();
         調定年度 = t.get賦課Newest().getChoteiNendo();
+
     }
 
     @Override

@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -52,21 +54,28 @@ public class ShokanKetteiTsuchiShoTempTableEntity extends DbTableEntityBase<Shok
     private RString shikyuHushikyuKetteiKubun;
     private Decimal shiharaiKingaku;
     private Decimal shiharaiKingakuUchiwakeRiyoshabun;
+    private Decimal sagakuKingakuGokei;
     @PrimaryKey
     private KinyuKikanCode kinyuKikanCode;
+    private RString kinyuKikanMeisi;
     @PrimaryKey
     private KinyuKikanShitenCode kinyuKikanShitenCode;
+    private RString kinyuKikanShitenMeisi;
     private RString yokinShubetsu;
+    private RString yokinShubetsuMeisho;
     private RString kozaNo;
+    private AtenaKanaMeisho kozaMeiginin;
     private AtenaMeisho kozaMeigininKanji;
     private FlexibleDate kaishiYMD;
     private FlexibleDate shuryoYMD;
     private ShikibetsuCode shikibetsuCode;
+    private Code hihokennshaKubunCode;
+    private LasdecCode shichosonCode;
     private Code yokaigoJotaiKubunCode;
     private FlexibleDate ninteiYukoKikanKaishiYMD;
     private FlexibleDate ninteiYukoKikanShuryoYMD;
     private RString meisho;
-    private RString jusho;
-    private RString yubinNo;
-    private RString banchi;
+    private HihokenshaNo sashitomeHiHokenshaNo;
+    private RString sashitomeKojoNo;
+    private int kozaId;
 }

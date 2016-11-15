@@ -47,7 +47,9 @@ public class JukyushaIdoRenrakuhyoTorokuPanelValidationHandler {
 
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(JukyushaIdoRenrakuhyoTorokuPanelValidationMessage.発行日の必須チェック)
+                .add(JukyushaIdoRenrakuhyoTorokuPanelValidationMessage.発行日の必須チェック,
+                        div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel()
+                        .getOutputJukyushaIdoRenrakuhyo().getOutputJukyushaIdoRenrakuhyoSetting().getTxtIssueDate())
                 .build();
     }
 

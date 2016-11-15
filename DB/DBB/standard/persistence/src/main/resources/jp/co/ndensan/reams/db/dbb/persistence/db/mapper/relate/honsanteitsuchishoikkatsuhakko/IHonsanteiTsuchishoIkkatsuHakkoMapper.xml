@@ -730,7 +730,23 @@
         WHERE A."dbT2015KeisangoJoho_seihoKaishiYMD" IS NOT NULL
               AND A."dbT2015KeisangoJoho_seihoKaishiYMD" <![CDATA[!=]]> ''
     </update>
-
+    
+    <update id="update特徴8月開始者区分">
+        UPDATE "TmpHonsanteiTsuchisho" AS A
+        SET 
+         "特徴8月開始者区分" = '1'
+        WHERE A."dbT2015KeisangoJoho_choshuHoho7gatsu" NOT IN('1','2')
+              AND A."dbT2015KeisangoJoho_choshuHoho8gatsu" IN('1','2')
+    </update>
+    
+    <update id="update特徴10月開始者区分">
+        UPDATE "TmpHonsanteiTsuchisho" AS A
+        SET 
+         "特徴10月開始者区分" = '1'
+        WHERE A."dbT2015KeisangoJoho_choshuHoho9gatsu" NOT IN('1','2')
+              AND A."dbT2015KeisangoJoho_choshuHoho10gatsu" IN('1','2')
+    </update>
+    
     <resultMap id="resultMap_HonsanteiTsuchishoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempEntity" autoMapping="false">
         <id column="dbT2015KeisangoJoho_choteiNendo"/>
         <id column="dbT2015KeisangoJoho_fukaNendo"/>
@@ -741,6 +757,8 @@
         <result property="生活保護区分" column="生活保護区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="決定変更区分" column="決定変更区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="出力順グループ指定" column="出力順グループ指定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特徴8月開始者区分" column="特徴8月開始者区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特徴10月開始者区分" column="特徴10月開始者区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報_更正後" resultMap="ResultMap_DbT2015KeisangoJohoEntity_after"/>
         <association property="計算後情報_更正前" resultMap="ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="対象者_追加含む_情報_更正後" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity_after"/>

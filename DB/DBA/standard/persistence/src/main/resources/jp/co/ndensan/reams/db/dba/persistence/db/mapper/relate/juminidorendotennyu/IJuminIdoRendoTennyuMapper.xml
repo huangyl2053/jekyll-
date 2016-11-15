@@ -25,4 +25,22 @@
             ORDER BY "DbT1001HihokenshaDaicho"."idoYMD" DESC,
                      "DbT1001HihokenshaDaicho"."edaNo" DESC
     </select>
+    <select resultOrdered="true" id="get処理対象者" resultMap="ResultMap_データ抽出"
+         parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminidorendotennyumanager.JuminIdoRendoTennyuManagerMybatisParameter" fetchSize="500">
+	SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />,
+	    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+	FROM
+	   rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+       LEFT JOIN
+           rgua.${宛名識別対象PSM} AS  "ShikibetsuTaisho"  
+        ON
+          "DbT1001HihokenshaDaicho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+       WHERE
+          "ShikibetsuTaisho"."kanaMeisho"= #{カナ名称} 
+       AND
+         "ShikibetsuTaisho"."seinengappiYMD" = #{生年月日}
+       AND
+         "ShikibetsuTaisho"."seibetsuCode" = #{性別コード}
+	</select>
 </mapper>

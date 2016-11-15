@@ -50,6 +50,7 @@ public class KagoKetteiKohifutanshaInProperty
         return breakers.add(catalog.new SimplePageBreaker(
 
 
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KagoKetteiKohifutanshaInSource> occuredBreak(
@@ -76,19 +77,19 @@ public class KagoKetteiKohifutanshaInProperty
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
+        郵便番号(new RString("0019"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("listLower_2"), new RString("DbWT0001.\"choikiCode\"")),
+        町域コード(new RString("0020"), new RString("listLower_2"), new RString("DbWT0001.\"choikiCode\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("listLower_4"), new RString("DbWT0001.\"gyoseikuCode\"")),
+        行政区コード(new RString("0021"), new RString("listLower_4"), new RString("DbWT0001.\"gyoseikuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
+        氏名５０音カナ(new RString("0022"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
         /**
          * 被保険者番号
          */

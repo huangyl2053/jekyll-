@@ -76,7 +76,6 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
     private static final RString 作成 = new RString("作成");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY SHINSAKETTEITEMP.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 出力ファイル名
@@ -101,17 +100,6 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
         Map<String, Object> mybatisParameter = new HashMap<>();
         RString 出力順 = MyBatisOrderByClauseCreator.create(
                 KogakuShikyuFushikyuKetteishaIchiranProperty.KogakuShikyuFushikyuKetteishaIchiranBreakerFieldsEnum.class, order);
-        if (RString.isNullOrEmpty(出力順)) {
-            出力順 = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = 出力順.split(コンマ.toString());
-            出力順 = デフォルト出力順;
-            if (出力順BODY.size() > 1) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    出力順 = 出力順.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
         mybatisParameter.put(キー_出力順.toString(), 出力順);
         KogakuKyufuKetteiJohoManager johoManager = KogakuKyufuKetteiJohoManager.createInstance();
         List<KogakuKyufuKetteiChohyoDataEntity> list = johoManager.get帳票出力対象データ(mybatisParameter);

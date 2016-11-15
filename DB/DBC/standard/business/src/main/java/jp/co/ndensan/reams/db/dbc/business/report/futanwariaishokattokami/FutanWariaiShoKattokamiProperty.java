@@ -40,9 +40,21 @@ public class FutanWariaiShoKattokamiProperty extends ReportPropertyBase<FutanWar
          */
         町域コード(new RString("0002"), new RString(""), new RString("\"atesaki_choikiCode\"")),
         /**
-         * 番地コード
+         * 番地コード1
          */
-        番地コード(new RString("0003"), new RString(""), new RString("\"atesaki_banchi\"")),
+        番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"atesaki_banchiCode1\"")),
+        /**
+         * 番地コード2
+         */
+        番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"atesaki_banchiCode2\"")),
+        /**
+         * 番地コード3
+         */
+        番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"atesaki_banchiCode3\"")),
+        /**
+         * 番地コード4
+         */
+        番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"atesaki_banchiCode4\"")),
         /**
          * 行政区コード
          */

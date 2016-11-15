@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080.GassanJigyobunJikofutangakuKeisanKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.CalcKogakuShikyugakuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.DBC040010ShoriCsvProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.InitJissekiCheckProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.InsShiharaihohoHenkoTempBeforeProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040010.InsShiharaihohoHenkoTempProcess;
@@ -51,6 +52,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
     private static final String SETFUTANGAKUPROCESS = "SetFutangakuProcess";
     private static final String SETFUTANGAKUAFTERPROCESS = "SetFutangakuAfterProcess";
     private static final String GASSANJIGYOBUNJIKOFUTANGAKUKEISANKEKKAICHAIRAN = "GassanJigyobunJikofutangakuKeisanKekkaIchiranProcess";
+    private static final String DBC040010SHORICSVPROCESS = "DBC040010ShoriCsvProcess";
     private static final String UPDSHORIDATEKANRIPROCESS = "UpdShoriDateKanriProcess";
     private static final RString BACKUPTABLE = new RString("DbT3070KogakuGassanJikoFutanGaku");
     private static final RString TEMPTABLE = new RString("DbT3070TempTable");
@@ -76,6 +78,7 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
         if (getParameter().isShuturyokuFlg()) {
             executeStep(GASSANJIGYOBUNJIKOFUTANGAKUKEISANKEKKAICHAIRAN);
         }
+        executeStep(DBC040010SHORICSVPROCESS);
         executeStep(UPDSHORIDATEKANRIPROCESS);
     }
 
@@ -155,6 +158,13 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan extends BatchFlow
         param.set市町村コード(getParameter().getDantaiCd());
         param.set帳票出力順ID(getParameter().getShutsuryokujunId());
         return loopBatch(GassanJigyobunJikofutangakuKeisanKekkaIchiranProcess.class).arguments(param).define();
+    }
+
+    @Step(DBC040010SHORICSVPROCESS)
+    IBatchFlowCommand dBC040010ShoriCsvProcess() {
+        DBC040010ProcessParameter param = new DBC040010ProcessParameter();
+        param.set処理日時(getParameter().getShoriTime());
+        return loopBatch(DBC040010ShoriCsvProcess.class).arguments(param).define();
     }
 
     @Step(UPDSHORIDATEKANRIPROCESS)

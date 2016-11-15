@@ -47,8 +47,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KogakuGassanShikyuKetteiHoseiPanel {
 
-    private static final RString 高額合算支給決定情報補正 = new RString("高額合算支給決定情報補正（単）");
-    private static final RString 事業高額合算支給決定情報補正 = new RString("事業分高額合算支給決定情報補正（単）");
+    private static final RString 高額合算支給決定情報補正 = new RString("高額合算支給決定情報補正");
+    private static final RString 事業高額合算支給決定情報補正 = new RString("事業分支給決定情報補正（単）");
     private static final RString 支給額決定情報の更新が正常に行われました = new RString("支給額決定情報の更新が正常に行われました");
     private static final RString 新規 = new RString("新規");
     private static final RString 修正 = new RString("修正");
@@ -474,10 +474,15 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onStateTransition(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         getHandler(div).set保存ボタン();
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        ShoriModeHanteiResult 処理モー = getHandler(div).get処理モード(被保険者番号, 画面モード);
-        getHandler(div).getエラーメッセージ(処理モー.getWkメッセージ());
+        if (!ResponseHolder.isReRequest()) {
+            RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            ShoriModeHanteiResult 処理モー = getHandler(div).get処理モード(被保険者番号, 画面モード);
+            return ResponseData.of(div).addMessage(getHandler(div).getエラーメッセージ(処理モー.getWkメッセージ())).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

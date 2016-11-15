@@ -360,6 +360,15 @@ public class JimuShinsakaishiryoBusiness {
         return 前回期間_下.toRString();
     }
 
+    /**
+     * 識別コードは証記載保険者番号（左から5桁）+被保険者番号を設定してください。
+     *
+     * @return 識別コード
+     */
+    public RString get識別コード() {
+        return johoEntity.getShoKisaiHokenshaNo().substring(0, SIZE_5).concat(johoEntity.getHihokenshaNo());
+    }
+
     private RString get前回期間(int 期間) {
         if (期間 == 0) {
             return RString.EMPTY;

@@ -93,7 +93,7 @@ public class FutyoKarisanteiKekkaIcihiranDataCSVEntity {
     @CsvField(order = 37, name = "普通徴収仮徴収額（8月）")
     private RString 普通徴収仮徴収額_8月;
     @CsvField(order = 38, name = "普通徴収仮徴収額（9月）")
-    private RString 普通徴収仮徴収額__9月;
+    private RString 普通徴収仮徴収額_9月;
     @CsvField(order = 39, name = "備考")
     private RString 備考;
 }

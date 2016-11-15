@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseis
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -83,8 +85,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         source.listIchiran_2 = 発行対象者.get世帯番号();
         source.listIchiran_3 = 発行対象者.get世帯課税();
         source.listIchiran_4 = doカンマ編集(発行対象者.get総合計());
-        source.listIchiran_5 = 発行対象者.get被保番号();
-        source.listIchiran_6 = 発行対象者.get氏名();
+        source.listIchiran_5 = get非空文字列(発行対象者.get被保番号());
+        source.listIchiran_6 = get非空文字列(発行対象者.get氏名());
         source.listIchiran_7 = 発行対象者.get年齢();
         source.listIchiran_9 = doカンマ編集(発行対象者.get課税所得());
         source.listIchiran_10 = doカンマ編集(発行対象者.get課税所得_控除後());
@@ -109,6 +111,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         source.gyoseikuCode = 発行対象者.get行政区コード();
         source.setaiCode = 発行対象者.get世帯コード();
         source.shichosonCode = 発行対象者.get市町村コード();
+        source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listIchiran_5);
+        source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.listIchiran_6);
         return source;
     }
 
@@ -157,5 +161,12 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(日時作成);
         return sakuseiYMD.toRString();
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

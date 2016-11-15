@@ -304,11 +304,11 @@ public class GenmenKetteiTsuchiShoPrintService {
         KoseiZengoKiwariGaku 更正前後期割額 = new KoseiZengoKiwariGaku();
         if (期月特徴.isPresent()) {
             if (期月特徴.get期().length() < 2) {
-                更正前後期割額.set特徴期(期月特徴.get期().insert(INDEX_ZERO, 定数.toString()));
+                更正前後期割額.set特徴期(format月と期(期月特徴.get期().insert(INDEX_ZERO, 定数.toString())));
             } else {
-                更正前後期割額.set特徴期(期月特徴.get期());
+                更正前後期割額.set特徴期(format月と期(期月特徴.get期()));
             }
-            更正前後期割額.set特徴月(get月(期月特徴));
+            更正前後期割額.set特徴月(format月と期(get月(期月特徴)));
             Decimal 特徴期別金額更正前 = set特徴期別金額更正前(期月特徴.get期(), 減免決定通知書情報);
             if (特徴期別金額更正前 != null) {
                 更正前後期割額.set特徴期別金額更正前(DecimalFormatter
@@ -331,11 +331,11 @@ public class GenmenKetteiTsuchiShoPrintService {
         }
         if (期月普徴.isPresent()) {
             if (期月普徴.get期().length() < 2) {
-                更正前後期割額.set普徴期(期月普徴.get期().insert(INDEX_ZERO, 定数.toString()));
+                更正前後期割額.set普徴期(format月と期(期月普徴.get期().insert(INDEX_ZERO, 定数.toString())));
             } else {
-                更正前後期割額.set普徴期(期月普徴.get期());
+                更正前後期割額.set普徴期(format月と期(期月普徴.get期()));
             }
-            更正前後期割額.set普徴月(get月(期月普徴));
+            更正前後期割額.set普徴月(format月と期(get月(期月普徴)));
             Decimal 普徴期別金額更正前 = set普徴期別金額更正前(期月普徴.get期(), 減免決定通知書情報);
             if (普徴期別金額更正前 != null) {
                 更正前後期割額.set普徴期別金額更正前(DecimalFormatter
@@ -358,6 +358,13 @@ public class GenmenKetteiTsuchiShoPrintService {
             更正前後期割額.set普徴期別金額更正後(RString.EMPTY);
         }
         return 更正前後期割額;
+    }
+
+    private RString format月と期(RString value) {
+        if (value.isEmpty()) {
+            return value;
+        }
+        return new RString(Integer.valueOf(value.trim().toString())).padLeft(RString.HALF_SPACE, 2);
     }
 
     private RString get月(Kitsuki 期月) {

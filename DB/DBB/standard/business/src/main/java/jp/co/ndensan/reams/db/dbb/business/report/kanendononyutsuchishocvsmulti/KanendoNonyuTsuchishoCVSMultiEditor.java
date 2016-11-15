@@ -215,7 +215,7 @@ public class KanendoNonyuTsuchishoCVSMultiEditor implements IKanendoNonyuTsuchis
             source.gimushaShimei = item.get納付書共通().get被代納人氏名();
         }
         NonyuTsuchiShoKiJoho 納付書 = null;
-        if (item.get納入通知書期情報リスト() != null) {
+        if (item.get納入通知書期情報リスト() != null && !item.get納入通知書期情報リスト().isEmpty()) {
             納付書 = item.get納入通知書期情報リスト().get(0);
         }
 

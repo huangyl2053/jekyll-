@@ -53,8 +53,17 @@ public class UpdKokuhoShikakuTempProcess extends BatchProcessBase<IdouTempEntity
 
     private RString 国保資格全項目(DbT7123KokuhoShikakuInfoEntity 国保資格) {
         RString 全項目 = RString.EMPTY;
-        全項目 = 全項目.concat(国保資格.getKokuhoHokenshaNo()).concat(SPLIT)
-                .concat(国保資格.getKokuhoKojinNo());
+        全項目 = cancatRString(国保資格.getKokuhoHokenshaNo(), 全項目);
+        全項目 = cancatRString(国保資格.getKokuhoHokenshoNo(), 全項目);
+        全項目 = cancatRString(国保資格.getKokuhoKojinNo(), 全項目);
+        全項目 = cancatRString(国保資格.getShikakuSoshitsuYMD(), 全項目);
         return 全項目;
+    }
+
+    private RString cancatRString(RString 項目, RString 全項目) {
+        if (!RString.isNullOrEmpty(項目)) {
+            return 全項目.concat(項目).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
     }
 }

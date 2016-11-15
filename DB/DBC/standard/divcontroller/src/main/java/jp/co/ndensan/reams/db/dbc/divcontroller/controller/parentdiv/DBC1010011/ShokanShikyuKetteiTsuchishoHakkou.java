@@ -88,10 +88,10 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         List<SogoJigyoTaishosha> 総合事業対象者List = finder.get総合事業対象者(被保険者番号);
         List<ShokanHanteiKekka> 償還払支給判定結果 = finder.select償還払支給判定結果(被保険者番号);
         if (!ResponseHolder.isReRequest() && (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty())) {
-            InformationMessage message = new InformationMessage(DbcInformationMessages.対象の償還決定データが存在しません.getMessage().getCode(),
-                    DbcInformationMessages.対象の償還決定データが存在しません.getMessage().evaluate());
+            InformationMessage message = new InformationMessage(DbcInformationMessages.受給共通_受給者_事業対象者登録なし.getMessage().getCode(),
+                    DbcInformationMessages.受給共通_受給者_事業対象者登録なし.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
-        } else if (new RString(DbcInformationMessages.対象の償還決定データが存在しません.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+        } else if (new RString(DbcInformationMessages.受給共通_受給者_事業対象者登録なし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).forwardWithEventName(DBC1010011TransitionEventName.完了).respond();
         }
         if (!ResponseHolder.isReRequest() && 償還払支給判定結果.isEmpty()) {

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB013001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.PrtKaigoFukaTokuchoHeijunkaCore;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.DBB200005_HeijunkaKeisanIchiran;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranReport;
@@ -20,12 +19,10 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaJohoTmpHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TokuchoHeijunkaRokuBatchTaishogaiHachiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranSource;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -114,7 +111,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     private static final RString 時分秒 = new RString("00:00:00");
     private TokuchoHeinjunka8GatsuProcessParameter parameter;
     private IOutputOrder outputOrder;
-    private HokenryoDankaiManager 保険料段階取得;
     private Association 導入団体クラス;
     private CsvListWriter csvWriter;
     private RString eucFilePath;
@@ -160,7 +156,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     @Override
     protected void beforeExecute() {
         count = new OutputParameter<>();
-        保険料段階取得 = new HokenryoDankaiManager();
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200005.getReportId());
     }
@@ -200,10 +195,9 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
     protected void usualProcess(TokuchoHeijunkaRokuBatchTaishogaiHachiEntity entity) {
         TokuchoHeijyunkaTaishogaiEntity taishogaiEntity = get特徴平準化計算対象外entity(
                 entity.get対象外データTemp(), entity);
-        RString 算定年額保険料 = taishogaiEntity.get保険料算定段階2() == null ? taishogaiEntity.get保険料算定段階1()
-                : taishogaiEntity.get保険料算定段階2();
-        Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(parameter.get賦課年度(), 算定年額保険料);
-        Decimal 今年度保険料率 = 今年度保険料率取得(保険料段階);
+        Decimal 算定年額保険料 = taishogaiEntity.get算定年額保険料2() == null ? taishogaiEntity.get算定年額保険料1()
+                : taishogaiEntity.get算定年額保険料2();
+        Decimal 今年度保険料率 = null == 算定年額保険料 ? Decimal.ZERO : 算定年額保険料;
         int 調整金額 = 調整金額取得(今年度保険料率, parameter.get賦課年度());
         TokuchoHeijunkaRokuBatchTaishogaiIchiran taishogai = new TokuchoHeijunkaRokuBatchTaishogaiIchiran(
                 taishogaiEntity, 今年度保険料率, new Decimal(調整金額));
@@ -317,7 +311,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
         bodyList.add(RString.EMPTY);
         bodyList.add(RString.EMPTY);
         bodyList.add(RString.EMPTY);
-        bodyList.add(特徴平準化結果対象外.get保険料段階仮算定時());
         金額設定(特徴平準化結果対象外, bodyList);
         bodyList.add(備考名を転換(編集備考));
     }
@@ -374,14 +367,6 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
             期別端数int = Integer.parseInt(期別端数.toString());
         }
         return 調整金額.divide(期別端数int).intValue() * 期別端数int;
-    }
-
-    private Decimal 今年度保険料率取得(Optional<HokenryoDankai> 保険料段階) {
-        Decimal 今年度保険料率 = Decimal.ZERO;
-        if (保険料段階.isPresent()) {
-            今年度保険料率 = 保険料段階.get().get保険料率();
-        }
-        return 今年度保険料率;
     }
 
     private RString 備考名を転換(RString 編集コード) {

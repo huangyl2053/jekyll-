@@ -6,16 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kogakusogojigyoservicehitaishoshaichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakusogojigyoservicehitaishoshaichiran.KogakuSogoJigyoServiceHiTaishoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakusogojigyoservicehitaishoshaichiran.KogakuSogoJigyoServiceHiTaishoshaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -27,6 +30,8 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
 
     private static final RString SAKUSEI = new RString("作成");
     private static final RString 単独合算 = new RString("単");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
     private final KogakuSogoJigyoServiceHiTaishoshaIchiranEntity 高額総合事業サービス費対象者一覧表;
     private final YMDHMS システム日時;
     private final Association association;
@@ -93,11 +98,15 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
         }
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get識別コード() != null) {
             source.shikibetsuCode = 高額総合事業サービス費対象者一覧表.get識別コード().getColumnValue();
+        } else {
+            source.shikibetsuCode = RString.EMPTY;
         }
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.getサービス提供年月() != null) {
             source.listTaishoshaIchiran_3 = 高額総合事業サービス費対象者一覧表.getサービス提供年月().toDateString();
         }
         付値(source);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listTaishoshaIchiran_2));
         return source;
     }
 

@@ -2575,6 +2575,7 @@
           LEFT JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
              ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
+            AND koza."uaT0310Koza_gyomubetsuPrimaryKey"='017'
           INNER JOIN 
               rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
@@ -3295,6 +3296,7 @@
           LEFT JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
              ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
+             AND koza."uaT0310Koza_gyomubetsuPrimaryKey"='017'
           INNER JOIN 
               rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
@@ -4476,7 +4478,7 @@
         FROM
             "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS A
         WHERE 
-               1 = 1
+               (1 = 1
             <if test="出力期 == 1">              
                 OR A."dbT2015KeisangoJoho_fuKibetsuGaku01" <![CDATA[>]]> '0'   
             </if>
@@ -4519,6 +4521,7 @@
             <if test="14 >= 出力期">              
                 OR A."dbT2015KeisangoJoho_fuKibetsuGaku14" <![CDATA[>]]> '0'   
             </if>
+            )
             <if test="口座区分 != null">              
                 AND A."dbT2015KeisangoJoho_kozaKubun" = #{口座区分} 
             </if>

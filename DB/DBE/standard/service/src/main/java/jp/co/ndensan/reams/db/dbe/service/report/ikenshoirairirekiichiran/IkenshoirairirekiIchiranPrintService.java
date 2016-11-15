@@ -28,6 +28,6 @@ public class IkenshoirairirekiIchiranPrintService {
      */
     public SourceDataCollection print(List<IkenshoirairirekiIchiran> businessList) {
         IkenshoirairirekiIchiranProperty property = new IkenshoirairirekiIchiranProperty();
-        return new Printer<IkenshoirairirekiIchiranReportSource>().spool(property, new IkenshoirairirekiIchiranReport(businessList));
+        return new Printer<IkenshoirairirekiIchiranReportSource>().spool(property, IkenshoirairirekiIchiranReport.createFrom(businessList));
     }
 }

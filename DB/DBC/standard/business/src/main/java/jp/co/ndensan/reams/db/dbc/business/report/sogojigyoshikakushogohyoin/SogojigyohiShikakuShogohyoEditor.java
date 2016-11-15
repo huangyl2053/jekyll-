@@ -5,18 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyoshikakushogohyoin;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -32,6 +35,7 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
     private static final RString KEN = new RString("件");
     private static final RString SAKUSEI = new RString("作成");
     private static final RString ティルデ = new RString("～");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final int DIVIDE_100 = 100;
     private static final int 小数点 = 2;
     private final SogojigyohiShikakuShogohyoInEntity entity;
@@ -76,6 +80,8 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
         source.listUpper_1 = new RString(entity.get連番());
         if (null != entity.get被保険者_被保険者番号()) {
             source.listUpper_2 = entity.get被保険者_被保険者番号().getColumnValue();
+            source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                    ReportKomokuEditorUtil.get非空文字列(source.listUpper_2));
         }
         if (導入形態コード.is広域() && null != entity.get証記載保険者番号()) {
             source.listUpper_3 = entity.get証記載保険者番号().getColumnValue();

@@ -166,7 +166,7 @@ public class FutanWariaisho {
             }
             HokenshaNo 保険者コード取得 = getHokenshaCode(被保険者番号);
             FutanWariaiShoReport report = new FutanWariaiShoReport(entity, 認証者ソースデータ, 被保険者番号, 編集後個人,
-                    保険者コード取得, kojinList, 送付物宛先ソースデータ);
+                    保険者コード取得, kojinList, 送付物宛先ソースデータ, 識別コード);
             report.writeBy(reportSourceWriter);
 
         }

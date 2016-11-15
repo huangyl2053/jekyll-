@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteiin.SogojigyohiKagoKetteiInSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -29,6 +32,8 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
     private static final RString 単位数タイトル = new RString("単位数");
     private static final RString 負担額タイトル = new RString("保険者負担額");
     private static final RString 総合事業費タイトル = new RString("総合事業費");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -68,6 +73,8 @@ public class SogojigyohiKagoKetteiInBodyEditor implements ISogojigyohiKagoKettei
         source.listLower_3 = 帳票出力対象データ.get過誤申立事由();
         source.listLower_4 = decimalFormatter(帳票出力対象データ.get保険者負担額(), 0);
         source.shikibetuCode = 帳票出力対象データ.get識別コード();
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listUpper_4));
     }
 
     private void edit集計(SogojigyohiKagoKetteiInSource source) {

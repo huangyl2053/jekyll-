@@ -51,5 +51,5 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity {
     private RString 主治医意見書別途診療費;
     private RString 主治医意見書報酬支払年月日;
     private int 最大依頼履歴番号;
-
+    private RString 直近区分;
 }

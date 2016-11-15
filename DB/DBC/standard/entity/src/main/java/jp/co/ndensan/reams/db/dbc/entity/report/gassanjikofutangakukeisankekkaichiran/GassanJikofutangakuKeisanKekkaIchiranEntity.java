@@ -46,4 +46,5 @@ public class GassanJikofutangakuKeisanKekkaIchiranEntity {
     private RString choikiCode;
     private RString gyoseikuCode;
     private RString hokenshaNo;
+    private RString shichosonCode;
 }

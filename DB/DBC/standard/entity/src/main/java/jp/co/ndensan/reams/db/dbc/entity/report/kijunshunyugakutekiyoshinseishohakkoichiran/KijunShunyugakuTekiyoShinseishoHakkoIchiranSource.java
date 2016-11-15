@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseishohakkoichiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -50,10 +51,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranSource implements IRepor
     public RString listIchiran_3;
     @ReportItem(name = "listIchiran_4", length = 11, order = 18)
     public RString listIchiran_4;
-    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "listIchiran_5", length = 10, order = 19)
     public RString listIchiran_5;
-    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "listIchiran_6", length = 12, order = 20)
     public RString listIchiran_6;
     @ReportItem(name = "listIchiran_7", length = 3, order = 21)
@@ -95,4 +94,8 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranSource implements IRepor
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報A1;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報A2;
 }
