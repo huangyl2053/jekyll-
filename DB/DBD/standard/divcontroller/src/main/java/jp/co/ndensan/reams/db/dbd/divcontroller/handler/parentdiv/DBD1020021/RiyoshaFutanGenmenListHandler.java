@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020021;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020021.RiyoshaFutanGenmenListDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -37,8 +36,8 @@ public class RiyoshaFutanGenmenListHandler {
      */
     public void onLoad() {
         div.getCcdChohyoShuturyokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200002.getReportId());
-        div.getTxtKijunYMD().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
-        div.getTxtShotokuNendo().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
+        div.getTxtKijunYMD().setValue(RDate.getNowDate());
+        div.getTxtShotokuNendo().setValue(RDate.getNowDate());
         if (div.getRadTaishoList().getSelectedKey().equals(該当者リスト)) {
             div.getRadJukyushaKubun().setDisplayNone(false);
             div.getChkShoriTaisho().setDisplayNone(false);

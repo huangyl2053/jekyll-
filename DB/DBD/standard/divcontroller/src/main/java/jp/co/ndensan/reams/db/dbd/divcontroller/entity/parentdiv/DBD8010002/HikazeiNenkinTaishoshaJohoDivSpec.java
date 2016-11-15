@@ -121,7 +121,7 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
                     }
 
                     RString line = div.getHdnLine();
-                    if (null == line || line.isEmpty()) {
+                    if (null == line || line.isEmpty() || line.length() < 通知内容コード終了位置) {
                         return false;
                     }
 

@@ -200,4 +200,88 @@
         EXISTS ( SELECT 1 FROM rgdb."DbT4037HikazeNenkinTaishosha" AS L WHERE L."hihokenshano" = #{被保険者番号} )  AS had非課税年金受給
     </select>
 
+    <select resultOrdered="true" id="get履歴情報"
+            resultType = "jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteichosajokyo.NinteiChosaJokyoDataPassEntity"
+            fetchSize="500">
+        SELECT
+        T4913."ninteiChosainCode" AS 認定調査員コード,
+        T4913."chosainShimei" AS 調査員氏名,
+        T4910."ninteichosaItakusakiCode" AS 認定調査委託先コード,
+        T4910."jigyoshaMeisho" AS 事業者名称,
+        T4910."yubinNo" AS 認定郵便番号,
+        T4910."jusho" AS 認定住所,
+        T4910."telNo" AS 認定電話番号,
+        T4201."ninteichosaIraiYMD" AS 認定調査依頼年月日,
+        T4123."ninteichosaYoteiYMD" AS 認定調査予定年月日,
+        T4910."chosaItakuKubun" AS 調査委託区分,
+        T4101."homonChosasakiName" AS 訪問調査先名称,
+        T4101."homonChosasakiYubinNo" AS 訪問調査先郵便番号,
+        T4101."homonChosasakiJusho" AS 訪問調査先住所,
+        T4101."homonChosasakiTelNo" AS 訪問調査先電話番号,
+        T4301."ikenshoSakuseiIraiYMD" AS 主治医意見書作成依頼年月日,
+        T4123."ikenshoTorokuYoteiYMD" AS 主治医意見書登録予定年月日,
+        T4116."ichijiHanteiKekkaCode" AS 要介護認定一次判定結果コード,
+        T4116."ichijiHanteiYMD" AS 要介護認定一次判定年月日,
+        T4116."ichijiHanteiKekkaNinchishoKasanCode" AS 要介護認定一次判定結果コード_認知症加算,
+        T4102."shinsakaiShiryoSakuseiYMD" AS 介護認定審査会資料作成年月日,
+        T4123."ninteiShinsakaiYoteiYMD" AS 認定審査会予定年月日,
+        T4102."nijiHanteiYMD" AS 二次判定年月日,
+        T4102."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
+        T4102."nijiHanteiNinteiYukoKikan" AS 二次判定認定有効期間,
+        T4102."nijiHanteiNinteiYukoKaishiYMD" AS 二次判定認定有効開始年月日,
+        T4102."nijiHanteiNinteiYukoShuryoYMD" AS 二次判定認定有効終了年月日,
+        T4101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日,
+        T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数,
+        T4101."shinseishoKanriNo" AS 申請書管理番号
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS T4001
+        INNER JOIN rgdb."DbT4101NinteiShinseiJoho" T4101
+        ON T4001."hihokenshaNo" = T4101."hihokenshaNo"
+        AND T4101."logicalDeletedFlag"=false
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051
+        ON T7051."shoKisaiHokenshaNo" = T4101."shoKisaiHokenshaNo"
+        LEFT JOIN rgdb."DbT4201NinteichosaIraiJoho" T4201
+        ON T4101."shinseishoKanriNo"=T4201."shinseishoKanriNo"
+        AND T4201."logicalDeletedFlag"=false
+        AND NOT EXISTS(
+        SELECT 'X'
+        FROM rgdb."DbT4201NinteichosaIraiJoho" AS B1
+        WHERE
+        T4201."shinseishoKanriNo"=B1."shinseishoKanriNo"
+        AND B1."logicalDeletedFlag"=false
+        AND T4201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
+        )
+        LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" T4910
+        ON T4910."shichosonCode" = T7051."shichosonCode"
+        AND T4910."ninteichosaItakusakiCode" = T4201."ninteichosaItakusakiCode"
+        AND  T4910."jokyoFlag" = true
+        LEFT JOIN rgdb."DbT4913ChosainJoho" T4913
+        ON T4913."shichosonCode" = T7051."shichosonCode"
+        AND T4913."ninteiChosaItakusakiCode" = T4201."ninteichosaItakusakiCode"
+        AND T4913."ninteiChosainCode" = T4201."ninteiChosainCode"
+        AND T4913."jokyoFlag" = true
+        LEFT JOIN rgdb."DbT4301ShujiiIkenshoIraiJoho" T4301
+        ON T4101."shinseishoKanriNo"=T4301."shinseishoKanriNo"
+        AND T4301."logicalDeletedFlag"=false
+        AND NOT EXISTS(
+        SELECT 'X'
+        FROM rgdb."DbT4301ShujiiIkenshoIraiJoho" B2
+        WHERE
+        T4301."shinseishoKanriNo"=B2."shinseishoKanriNo"
+        AND B2."logicalDeletedFlag"=false
+        AND T4301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo"
+        )
+        LEFT JOIN rgdb."DbT4123NinteiKeikakuJoho" T4123
+        ON T4101."shinseishoKanriNo" = T4123."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT4116IchijiHanteiKekkaJoho" T4116
+        ON T4101."shinseishoKanriNo" = T4116."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" T4102
+        ON T4101."shinseishoKanriNo" = T4102."shinseishoKanriNo"
+        WHERE
+        T4001."hihokenshaNo" = #{被保険者番号}
+        AND T4001."ninteiYMD" <![CDATA[<=]]> #{認定日}
+        AND T4001."logicalDeletedFlag"=false
+        ORDER BY T4001."ninteiYMD" DESC
+        Limit 2
+    </select>
 </mapper>

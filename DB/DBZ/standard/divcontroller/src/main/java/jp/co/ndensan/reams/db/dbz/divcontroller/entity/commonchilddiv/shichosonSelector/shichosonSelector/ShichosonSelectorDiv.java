@@ -4,12 +4,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shichoson
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
@@ -17,8 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  *
  */
 public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +34,8 @@ public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv
     private Button btnDecision;
     @JsonProperty("kyuShichoson")
     private RString kyuShichoson;
+    @JsonProperty("kijun")
+    private RString kijun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -132,6 +133,25 @@ public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv
         this.kyuShichoson = kyuShichoson;
     }
 
+    /*
+     * getkijun
+     * @return kijun
+     */
+    @JsonProperty("kijun")
+    public RString getKijun() {
+        return kijun;
+    }
+
+    /*
+     * setkijun
+     * @param kijun kijun
+     */
+    @JsonProperty("kijun")
+    public void setKijun(RString kijun) {
+        this.kijun = kijun;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+
 }

@@ -827,6 +827,20 @@ public class NinteiChosaIraiHandler {
     }
 
     /**
+     * 提出期限のonChange処理です。
+     */
+    public void onChange_radKigen() {
+        RString key = div.getRadkigen().getSelectedKey();
+        if (new RString("2").equals(key)) {
+            div.getTxtkigenymd().setReadOnly(false);
+            div.getTxtkigenymd().setValue(RDate.getNowDate());
+        } else {
+            div.getTxtkigenymd().clearValue();
+            div.getTxtkigenymd().setReadOnly(true);
+        }
+    }
+
+    /**
      * 認定調査依頼書印刷用パラメータを作成します。
      *
      * @return 認定調査依頼書印刷用パラメータ
@@ -994,6 +1008,13 @@ public class NinteiChosaIraiHandler {
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
             List<RString> 認定調査員コードリスト = get認定調査員コード(row.getNinteiChosainCode());
             List<RString> 認定調査委託先コードリスト = get認定調査委託先コード(row.getNinteiChosaItakusakiCode());
+            ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getShichosonCode()),
+                    new ChosaItakusakiCode(row.getNinteiChosaItakusakiCode()),
+                    new ChosainCode(row.getNinteiChosainCode()));
+            RString 調査員氏名 = RString.EMPTY;
+            if (調査員情報 != null && !RString.isNullOrEmpty(調査員情報.get調査員氏名())) {
+                調査員氏名 = 調査員情報.get調査員氏名();
+            }
             RString 生年月日 = row.getSeinengappiYMD();
             RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
             RString 前回認定年月日 = RString.isNullOrEmpty(row.getZenkaiNinteiYMD()) ? RString.EMPTY
@@ -1035,7 +1056,7 @@ public class NinteiChosaIraiHandler {
                     認定調査員コードリスト.get(INDEX_5),
                     認定調査員コードリスト.get(INDEX_6),
                     認定調査員コードリスト.get(INDEX_7),
-                    div.getTxtChosainShimei().getValue(),
+                    調査員氏名,
                     認定調査委託先コードリスト.get(0),
                     認定調査委託先コードリスト.get(1),
                     認定調査委託先コードリスト.get(2),
@@ -1048,7 +1069,7 @@ public class NinteiChosaIraiHandler {
                     認定調査委託先コードリスト.get(INDEX_9),
                     認定調査委託先コードリスト.get(INDEX_10),
                     認定調査委託先コードリスト.get(INDEX_11),
-                    row.getZenkaiChosaItakusaki(),
+                    div.getTxtChosaItakusakiMeisho().getValue(),
                     row.getHihokenshaKana(),
                     row.getHihokenshaShimei(),
                     Seibetsu.男.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
@@ -1094,6 +1115,7 @@ public class NinteiChosaIraiHandler {
             List<RString> 証記載保険者番号リスト = get被保険者番号(row.getHokenshaNo());
             item = createChosahyoKihonchosa(証記載保険者番号リスト, ninteiShinseiDay, 被保険者番号リスト);
             itemList.add(item);
+
         }
         return itemList;
     }

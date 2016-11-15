@@ -229,7 +229,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数41) {
-            div.getBtnModoru().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(外出すると戻れないKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数41) {
@@ -258,7 +257,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数40) {
-            div.getBtnHaikai().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(徘徊Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数40) {
@@ -287,7 +285,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数39) {
-            div.getBtnBasho().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(場所の理解Keys, 調査項目);
         }
         if (前回連番 == 整数39) {
@@ -318,7 +315,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数38) {
-            div.getBtnKisetsu().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(今の季節を理解するKeys, 調査項目);
         }
         if (前回連番 == 整数38) {
@@ -348,7 +344,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数37) {
-            div.getBtnNameInfo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(自分の名前を言うKeys, 調査項目);
         }
         if (前回連番 == 整数37) {
@@ -377,7 +372,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数36) {
-            div.getBtnDankiKioku().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(短期記憶Keys, 調査項目);
         }
         if (前回連番 == 整数36) {
@@ -407,7 +401,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数35) {
-            div.getBtnInfo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(生年月日や年齢を言うKeys, 調査項目);
         }
         if (前回連番 == 整数35) {
@@ -437,7 +430,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数34) {
-            div.getBtnNikka().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目が2(毎日の日課を理解Keys, 調査項目);
         }
         if (前回連番 == 整数34) {
@@ -466,7 +458,6 @@ public class KihonChosaInputHandler3 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数33) {
-            div.getBtnIshiDentatsu().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(意思の伝達Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数33) {

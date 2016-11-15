@@ -413,13 +413,15 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
             csvEntity.set前年度情報の最終月別年額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo1().toString()));
         }
         csvEntity.set前年度情報の最終普徴額(get前年度情報の最終普徴額(普徴仮算定計算後賦課Entity));
+        FlexibleYear 前年度 = 普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null
+                ? 普徴仮算定計算後賦課Entity.get前年度賦課の情報().getFukaNendo() : parameter.get賦課年度().minusYear(NUM_1);
+        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil(前年度);
+        KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
+        Kitsuki 最終法定納期 = 普徴期月リスト.get最終法定納期();
+        int 期 = 最終法定納期.get期AsInt();
+        csvEntity.set前年度情報の計算納期数(new RString(期));
         if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null) {
             csvEntity.set前年度情報の確定保険料額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getKakuteiHokenryo().toString()));
-            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getFukaNendo());
-            KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
-            Kitsuki 最終法定納期 = 普徴期月リスト.get最終法定納期();
-            int 期 = 最終法定納期.get期AsInt();
-            csvEntity.set前年度情報の計算納期数(new RString(期));
             csvEntity.set前年度情報の賦課納期数(get賦課納期数(調定年度開始日, 普徴仮算定計算後賦課Entity.get前年度賦課の情報(), 期, 普徴期月リスト));
         }
         csvEntity.set仮算定時保険料段階(保険料段階List.getBy段階区分(普徴仮算定計算後賦課Entity.get保険料段階仮算定時()).get表記());

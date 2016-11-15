@@ -236,7 +236,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数19) {
-            div.getBtnShiryoku().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(視力Keys, 調査項目, true, true);
         }
         if (前回連番 == 整数19) {
@@ -265,7 +264,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数20) {
-            div.getBtnChoryoku().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(聴力Keys, 調査項目, true, true);
         }
         if (前回連番 == 整数20) {
@@ -294,7 +292,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数18) {
-            div.getBtnTumeKiri().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(つめ切りKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数18) {
@@ -323,7 +320,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数17) {
-            div.getBtnSenshin().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(洗身Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数17) {
@@ -352,7 +348,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数16) {
-            div.getBtnKataAshi().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(片足での立位Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数16) {
@@ -381,7 +376,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数15) {
-            div.getBtnTachiAgari().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(立ち上がりKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数15) {
@@ -410,7 +404,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数14) {
-            div.getBtnBuko().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(歩行Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数14) {
@@ -439,7 +432,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数13) {
-            div.getBtnRyoAshi().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(両足での立位保持Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数13) {
@@ -468,7 +460,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数12) {
-            div.getBtnZai().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(座位保持Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数12) {
@@ -497,7 +488,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数10) {
-            div.getBtnNeKaeri().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(寝返りKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数10) {
@@ -511,7 +501,6 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数11) {
-            div.getBtnOkiAgari().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(起き上がりKeys, 調査項目, false, false);
         }
         if (前回連番 == 整数11) {
@@ -570,9 +559,6 @@ public class KihonChosaInputHandler1 {
         int 前回連番 = 認定調査基本情報.get前回調査連番();
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
-        if (連番 >= 整数6 && 連番 <= 整数9) {
-            div.getBtnKoshuku().setDisabled(!認定調査基本情報.is特記事項有無());
-        }
         if (調査項目ある.equals(調査項目)) {
             if (連番 == 整数6) {
                 拘縮の有無Keys.add(KEY1);
@@ -602,9 +588,6 @@ public class KihonChosaInputHandler1 {
         int 前回連番 = 認定調査基本情報.get前回調査連番();
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
-        if (連番 >= 1 && 連番 <= 整数5) {
-            div.getBtnMahi().setDisabled(!認定調査基本情報.is特記事項有無());
-        }
         if (調査項目ある.equals(調査項目)) {
             if (連番 == 1) {
                 麻痺等の有無Keys.add(KEY1);

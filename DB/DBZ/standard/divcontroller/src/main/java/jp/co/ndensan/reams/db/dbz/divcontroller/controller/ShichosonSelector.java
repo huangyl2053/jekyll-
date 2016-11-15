@@ -43,18 +43,20 @@ public class ShichosonSelector {
      */
     public ResponseData<ShichosonSelectorDiv> onLoad(ShichosonSelectorDiv div) {
         ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
+        RString 構成市町村モード = model.getShichosonModel();
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
-        if (model != null) {
-            SearchResult<ShichosonSelectorResult> resultList = SearchResult.of(Collections.<ShichosonSelectorResult>emptyList(), 0, false);
-            RString 構成市町村モード = model.getShichosonModel();
-            if (KOUSEI_MODO_KYU.equals(構成市町村モード)) {
-                resultList = service.getGapeiShichosonSentaku(FlexibleDate.getNowDate());
-            }
-            if (KOUSEI_MODO_KOUSEI.equals(構成市町村モード)) {
-                resultList = service.getKouseiShichosonSentaku(FlexibleDate.getNowDate());
-            }
-            getHandler(div).set一覧表示グリッド(resultList.records());
+        SearchResult<ShichosonSelectorResult> resultList = SearchResult.of(Collections.<ShichosonSelectorResult>emptyList(), 0, false);
+        if (RString.isNullOrEmpty(div.getKijun())) {
+        if (KOUSEI_MODO_KYU.equals(構成市町村モード)) {
+            resultList = service.getGapeiShichosonSentaku(FlexibleDate.getNowDate());
         }
+        if (KOUSEI_MODO_KOUSEI.equals(構成市町村モード)) {
+            resultList = service.getKouseiShichosonSentaku(FlexibleDate.getNowDate());
+        }
+        } else {
+            resultList = service.getGapeiShichosonSentaku();
+        }
+        getHandler(div).set一覧表示グリッド(resultList.records());
         response.data = div;
         return response;
     }

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -37,6 +38,7 @@ public class TsukibetsuHanteiTaishoshaTempProcess extends BatchProcessBase<Tsuki
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RString STR_06 = new RString("06");
     private static final RString TABLENAME月別判定対象者 = new RString("TsukibetsuHanteiTaishoshaTemp");
     private static final RString TABLENAME被保険者番号 = new RString("HanteiHihokenshaNoTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
@@ -72,7 +74,6 @@ public class TsukibetsuHanteiTaishoshaTempProcess extends BatchProcessBase<Tsuki
         List<UaFt200FindShikibetsuTaishoEntity> atenas = entity.get宛名();
         UaFt200FindShikibetsuTaishoEntity 宛名 = !atenas.isEmpty() ? atenas.get(0) : null;
         SetaiCode setaiCode = 宛名 == null ? null : 宛名.getSetaiCode();
-        RString setaiCd = setaiCode == null ? RString.EMPTY : setaiCode.getColumnValue();
         HanteiTaishoshaTempEntity insertEntity = new HanteiTaishoshaTempEntity();
         RYear taishoNendo = parameter.getTaishoNendo();
         insertEntity.setTaishoNendo(taishoNendo == null ? null : new FlexibleYear(taishoNendo.toDateString()));
@@ -86,9 +87,9 @@ public class TsukibetsuHanteiTaishoshaTempProcess extends BatchProcessBase<Tsuki
             insertEntity.setShikakuShiyutokiDate(被保険者台帳.getShikakuShutokuYMD());
             insertEntity.setFirstShikakuShiyutokiDate(被保険者台帳.getIchigoShikakuShutokuYMD());
             insertEntity.setHihokenshaKubunCode(被保険者台帳.getHihokennshaKubunCode());
-            insertEntity.setSetaiCode(new SetaiCode(setaiCd));
         }
         if (宛名 != null) {
+            insertEntity.setSetaiCode(setaiCode);
             insertEntity.setAtenaIdobi(宛名.getIdoYMD());
             insertEntity.setAtenaIdoJiyu(宛名.getIdoJiyuCode());
         }
@@ -106,10 +107,11 @@ public class TsukibetsuHanteiTaishoshaTempProcess extends BatchProcessBase<Tsuki
         }
         List<DbT4001JukyushaDaichoEntity> dbt4001Entities = entity.get受給者台帳();
         List<DbT3105SogoJigyoTaishoshaEntity> dbt3105Entities = entity.get総合事業対象者();
-
         if (!dbt4001Entities.isEmpty()) {
             DbT4001JukyushaDaichoEntity 受給者台帳 = dbt4001Entities.get(0);
             insertEntity.setKyuSochishaFlag(受給者台帳.getKyuSochishaFlag());
+            Code 要介護認定状態区分コード = 受給者台帳.getYokaigoJotaiKubunCode();
+            insertEntity.setYoKaigoninteiJoutaiKubunCode(要介護認定状態区分コード == null ? RString.EMPTY : 要介護認定状態区分コード.value());
             insertEntity.setTaishoKubun(ONE);
             insertEntity.setCityCode(受給者台帳.getShichosonCode().value());
             insertEntity.setRirekiNo(受給者台帳.getRirekiNo());
@@ -119,6 +121,7 @@ public class TsukibetsuHanteiTaishoshaTempProcess extends BatchProcessBase<Tsuki
             insertEntity.setNinteiYukoShuryoDate(受給者台帳.getNinteiYukoKikanShuryoYMD());
             insertEntity.setNinteiDate(受給者台帳.getNinteiYMD());
         } else if (!dbt3105Entities.isEmpty()) {
+            insertEntity.setYoKaigoninteiJoutaiKubunCode(STR_06);
             DbT3105SogoJigyoTaishoshaEntity 総合事業対象者 = dbt3105Entities.get(0);
             insertEntity.setTaishoKubun(TWO);
             insertEntity.setCityCode(RString.EMPTY);

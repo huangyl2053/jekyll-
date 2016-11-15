@@ -162,7 +162,7 @@
             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoSyutoku"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
-        '第' || "shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiMei"
+        '第' || "shinsakaiKaisaiNo" || '回　合' || "gogitaiNo" AS "shinsakaiKaisaiMei"
         ,"shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
         ,"shinsakaiKaisaiYoteiYMD"  AS "shinsakaiKaisaiYoteiYMD"
         ,"shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"

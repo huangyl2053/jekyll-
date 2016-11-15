@@ -29,7 +29,7 @@ public enum RiyoshaFutanDankaiHanni {
     /**
      * コード:4 名称:利用者負担4段階_高齢者複数世帯 略称:定義なし
      */
-    利用者負担4段階_高齢者複数世帯("4", "利用者負担４段階（高齢者複数世帯） ");
+    利用者負担4段階_高齢者複数世帯("4", "利用者負担4段階（高齢者複数世帯） ");
 
     private final RString code;
     private final RString fullName;

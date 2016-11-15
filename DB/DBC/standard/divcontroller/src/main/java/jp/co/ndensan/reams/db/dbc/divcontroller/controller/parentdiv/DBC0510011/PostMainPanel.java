@@ -84,6 +84,7 @@ public class PostMainPanel {
      */
     public ResponseData<PostMainPanelDiv> onClick_btnTorikomi(PostMainPanelDiv div) {
         div.getFileUpload().setDisabled(false);
+        div.getFileUpload().getBtnUpload().setDisabled(false);
         メニューID = ResponseHolder.getMenuID();
         if (メニューID.equals(DBCMN82001)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, true);
@@ -110,6 +111,7 @@ public class PostMainPanel {
      */
     public ResponseData<PostMainPanelDiv> onClick_btnCancel(PostMainPanelDiv div) {
         div.getFileUpload().setDisabled(true);
+        div.getFileUpload().getBtnUpload().setDisabled(true);
         メニューID = ResponseHolder.getMenuID();
         if (メニューID.equals(DBCMN82001)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);
@@ -160,6 +162,8 @@ public class PostMainPanel {
                 row.getBtnTorikomiKoiki().setDisabled(false);
             }
         }
+        div.getFileUpload().setDisabled(true);
+        div.getFileUpload().getBtnUpload().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
