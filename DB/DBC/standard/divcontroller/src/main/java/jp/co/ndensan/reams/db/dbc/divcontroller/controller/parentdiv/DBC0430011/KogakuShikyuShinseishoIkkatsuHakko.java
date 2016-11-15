@@ -139,7 +139,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> isError(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         if (div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey().equals(new RString("default"))
-                || div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedValue().isEmpty()) {
+                || div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().isEmpty()) {
             ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
