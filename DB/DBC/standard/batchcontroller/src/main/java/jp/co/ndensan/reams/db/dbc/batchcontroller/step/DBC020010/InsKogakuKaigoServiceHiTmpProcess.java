@@ -110,13 +110,13 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
         RString nowKeyBreak = 被保険者番号.concat(DELIMITER).concat(サービス提供年月).concat(DELIMITER)
                 .concat(データ区分).concat(DELIMITER).concat(サービス種類コード);
         RString マッチキー = 被保険者番号.concat(DELIMITER).concat(サービス提供年月);
-        if (keyBreak == null) {
+        boolean isFirstProcess = false;
+        if (keyBreak == null || beforeマッチキー == null) {
+            isFirstProcess = true;
             keyBreak = nowKeyBreak;
-        }
-        if (beforeマッチキー == null) {
             beforeマッチキー = マッチキー;
         }
-        if (nowKeyBreak.equals(keyBreak)) {
+        if (!isFirstProcess && nowKeyBreak.equals(keyBreak)) {
             return;
         }
         if (beforeマッチキー.equals(マッチキー)) {
@@ -132,9 +132,6 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
 
     @Override
     protected void afterExecute() {
-        if (結果全件List == null || 結果全件List.isEmpty()) {
-            return;
-        }
         do高額更新処理();
     }
 
