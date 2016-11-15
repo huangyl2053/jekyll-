@@ -171,12 +171,11 @@ public class PrtTaishoshaIchiranKogakuProcess extends BatchProcessBase<KogakuKai
                 : KyusochishaKubun.旧措置者以外.getコード());
         対象者一覧表Entity.set要介護認定状態区分コード(entity.get要介護認定状態区分コード());
         対象者一覧表Entity.set認定有効開始年月日(entity.get認定有効期間開始年月日());
-        対象者一覧表Entity.set認定有効開始年月日(entity.get認定有効期間終了年月日());
+        対象者一覧表Entity.set認定有効終了年月日(entity.get認定有効期間終了年月日());
         対象者一覧表Entity.set世帯コード(entity.get世帯コード());
         対象者一覧表Entity.set利用者負担額(entity.get利用者負担額());
         対象者一覧表Entity.set支給予定金額(entity.get支給予定金額());
         対象者一覧表Entity.set備考(entity.get備考欄個人所得区分());
-
         return 対象者一覧表Entity;
     }
 
