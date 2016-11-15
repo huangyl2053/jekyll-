@@ -57,8 +57,7 @@ public class KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess extends Batch
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
 
-    private NinshoshaSource 認証者情報_通常分;
-    private NinshoshaSource 認証者情報_償還分;
+    private NinshoshaSource 認証者情報;
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private Association 地方公共団体;
     private RString 通常分通知文1;
@@ -69,11 +68,8 @@ public class KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess extends Batch
     private int count2;
 
     @BatchWriter
-    private BatchReportWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> 通常分BatchReportWriter;
-    private ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> 通常分ReportSourceWriter;
-    @BatchWriter
-    private BatchReportWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> 自動償還分BatchReportWriter;
-    private ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> 自動償還分ReportSourceWriter;
+    private BatchReportWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> batchReportWriter;
+    private ReportSourceWriter<KogakuOshiraseTsuchiTeshutsuKigenAriSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
@@ -101,19 +97,14 @@ public class KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess extends Batch
 
     @Override
     protected void createWriter() {
-        通常分BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_Ari.getReportId().value()).create();
-        通常分ReportSourceWriter = new ReportSourceWriter<>(通常分BatchReportWriter);
-
-        自動償還分BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_Ari.getReportId().value()).create();
-        自動償還分ReportSourceWriter = new ReportSourceWriter<>(自動償還分BatchReportWriter);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_Ari.getReportId().value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
     protected void beforeExecute() {
-        認証者情報_通常分 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_Ari.getReportId(), FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, 通常分ReportSourceWriter);
-        認証者情報_償還分 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_Ari.getReportId(), FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, 自動償還分ReportSourceWriter);
+        認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_Ari.getReportId(), FlexibleDate.getNowDate(),
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
 
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ＩＤ);
@@ -129,26 +120,26 @@ public class KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess extends Batch
             param.set通知文1(償還分通知文1);
             param.set通知文2(償還分通知文2);
             param.set連番(new RString(count1));
-            param.set認証者(認証者情報_償還分);
+            param.set認証者(認証者情報);
             param.set文書番号文字列(parameter.getBunshoMojiretsu());
             param.setタイトル(高額サービス給付のお知らせ通知書自動償還分);
             param.set送付別宛先(EditedAtesakiBuilder.create編集後宛先(AtesakiFactory.createInstance(entity.get宛先()), 地方公共団体,
                     帳票制御共通).getSofubutsuAtesakiSource().get送付物宛先ソース());
             KogakuOshiraseTsuchiTeshutsuKigenAriReport report = new KogakuOshiraseTsuchiTeshutsuKigenAriReport(param);
-            report.writeBy(自動償還分ReportSourceWriter);
+            report.writeBy(reportSourceWriter);
             count1 = count1 + 1;
         } else {
             param.set自動償還(false);
             param.set通知文1(通常分通知文1);
             param.set通知文2(通常分通知文2);
             param.set連番(new RString(count2));
-            param.set認証者(認証者情報_通常分);
+            param.set認証者(認証者情報);
             param.setタイトル(高額サービス給付のお知らせ通知書);
             param.set文書番号文字列(parameter.getBunshoMojiretsu());
             param.set送付別宛先(EditedAtesakiBuilder.create編集後宛先(AtesakiFactory.createInstance(entity.get宛先()), 地方公共団体,
                     帳票制御共通).getSofubutsuAtesakiSource().get送付物宛先ソース());
             KogakuOshiraseTsuchiTeshutsuKigenAriReport report = new KogakuOshiraseTsuchiTeshutsuKigenAriReport(param);
-            report.writeBy(通常分ReportSourceWriter);
+            report.writeBy(reportSourceWriter);
             count2 = count2 + 1;
         }
     }
