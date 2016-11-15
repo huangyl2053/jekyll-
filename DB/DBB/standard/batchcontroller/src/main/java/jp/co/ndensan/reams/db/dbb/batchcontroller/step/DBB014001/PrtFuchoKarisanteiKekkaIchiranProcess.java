@@ -424,7 +424,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         }
         csvEntity.set仮算定時保険料段階(保険料段階List.getBy段階区分(普徴仮算定計算後賦課Entity.get保険料段階仮算定時()).get表記());
         csvEntity.set新規資格適用段階対象者(普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号() == null
-                ? DOT : 普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号().getColumnValue());
+                ? RString.EMPTY : DOT);
         csvEntity.set徴収方法(get徴収方法(普徴仮算定計算後賦課Entity));
         csvEntity.set普通徴収仮徴収額_4月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額01()));
         csvEntity.set普通徴収仮徴収額_5月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額02()));
