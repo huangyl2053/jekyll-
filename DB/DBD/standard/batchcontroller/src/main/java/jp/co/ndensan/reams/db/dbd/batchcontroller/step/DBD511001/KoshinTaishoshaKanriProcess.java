@@ -12,6 +12,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.KoikinaiTenkyoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiYukoKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity;
@@ -55,14 +60,9 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinTaishoshaKanri."
                     + "IKoshinTaishoshaKanriMapper.get更新申請対象者情報");
     private static final EdabanCode 認定申請枝番コード = new EdabanCode(new RString("000"));
-    private static final Code 認定申請区分申請時コード = new Code(new RString("B"));
-    private static final Code 広域内転居区分 = new Code(new RString("0"));
-    private static final Code 認定申請有効区分 = new Code(new RString("1"));
     private static final RString 認定年度内連番 = new RString("0012");
     private static final RString 新年度内連番 = new RString("0001");
     private static final RString 処理枝番 = new RString("0001");
-    private static final Code 処理状態区分 = new Code(new RString("0"));
-    private static final Code 取下区分コード = new Code(new RString("1"));
     private KoshinTaishoshaKanriProcessParameter parameter;
     private boolean isInsert = false;
     private RString 厚労省IF識別コード;
@@ -176,13 +176,13 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
         entity.setShichosonRenrakuJiko(dbEntity.getShichosonRenrakuJiko());
         entity.setShinsakaiYusenWaritsukeKubunCode(dbEntity.getShinsakaiYusenWaritsukeKubunCode());
         entity.setNinteiShinseiHoreiKubunCode(Code.EMPTY);
-        entity.setNinteiShinseiShinseijiKubunCode(認定申請区分申請時コード);
-        entity.setTorisageKubunCode(取下区分コード);
+        entity.setNinteiShinseiShinseijiKubunCode(new Code(NinteiShinseiShinseijiKubunCode.更新申請_事前.getコード()));
+        entity.setTorisageKubunCode(new Code(TorisageKubunCode.認定申請有効.getコード()));
         entity.setAge(FlexibleDate.getNowDate().getYearValue() - entity.getSeinengappiYMD().getYearValue());
         entity.setChikuCode(ChikuCode.EMPTY);
         entity.setMinashiNigoEtcTaishoFlag(false);
-        entity.setKoikinaiTenkyoKubun(広域内転居区分);
-        entity.setNinteiShinseiYukoKubunCode(認定申請有効区分);
+        entity.setKoikinaiTenkyoKubun(new Code(KoikinaiTenkyoKubun.対象外.getコード()));
+        entity.setNinteiShinseiYukoKubunCode(new Code(NinteiShinseiYukoKubunCode.有効.getコード()));
         entity.setShinseiServiceDeleteRiyu(RString.EMPTY);
         entity.setZenYokaigoKubunCode(ninteiEntity.getYokaigoJotaiKubunCode());
         entity.setZenkaiNinteiYMD(ninteiEntity.getNinteiYMD());
@@ -196,7 +196,7 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
         entity.setShujiiCode(RString.EMPTY);
         entity.setShiteiiFlag(false);
         entity.setIkenshoDataShubetsu(Code.EMPTY);
-        entity.setShoriJotaiKubun(処理状態区分);
+        entity.setShoriJotaiKubun(new Code(ShoriJotaiKubun.通常.getコード()));
         entity.setTorisageYMD(FlexibleDate.EMPTY);
         entity.setTorisageRiyu(RString.EMPTY);
         entity.setKyakkaYMD(FlexibleDate.EMPTY);
