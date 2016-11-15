@@ -91,6 +91,24 @@ public class TokkiNyuryokuDiv extends Panel {
     private RString hidden登録グループコード;
     @JsonProperty("hiddenサンプル文書")
     private RString hiddenサンプル文書;
+    @JsonProperty("hdnTextMasking")
+    private RString hdnTextMasking;
+    @JsonProperty("hiddenFirstTokkiJiko")
+    private RString hiddenFirstTokkiJiko;
+    @JsonProperty("hiddenSecondTokkiJiko")
+    private RString hiddenSecondTokkiJiko;
+    @JsonProperty("hiddenThirdTokkiJiko")
+    private RString hiddenThirdTokkiJiko;
+    @JsonProperty("hiddenFourthTokkiJiko")
+    private RString hiddenFourthTokkiJiko;
+    @JsonProperty("hiddenFifthTokkiJiko")
+    private RString hiddenFifthTokkiJiko;
+    @JsonProperty("hiddenGaikyoTokkiNyurokuMap_MASK")
+    private RString hiddenGaikyoTokkiNyurokuMap_MASK;
+    @JsonProperty("hiddenOriginalGaikyoTokkiNyurokuMap")
+    private RString hiddenOriginalGaikyoTokkiNyurokuMap;
+    @JsonProperty("hiddenOriginalGaikyoTokkiNyurokuMap_MASK")
+    private RString hiddenOriginalGaikyoTokkiNyurokuMap_MASK;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -708,6 +726,168 @@ public class TokkiNyuryokuDiv extends Panel {
     @JsonProperty("hiddenサンプル文書")
     public void setHiddenサンプル文書(RString hiddenサンプル文書) {
         this.hiddenサンプル文書 = hiddenサンプル文書;
+    }
+
+    /*
+     * gethdnTextMasking
+     * @return hdnTextMasking
+     */
+    @JsonProperty("hdnTextMasking")
+    public RString getHdnTextMasking() {
+        return hdnTextMasking;
+    }
+
+    /*
+     * sethdnTextMasking
+     * @param hdnTextMasking hdnTextMasking
+     */
+    @JsonProperty("hdnTextMasking")
+    public void setHdnTextMasking(RString hdnTextMasking) {
+        this.hdnTextMasking = hdnTextMasking;
+    }
+
+    /*
+     * gethiddenFirstTokkiJiko
+     * @return hiddenFirstTokkiJiko
+     */
+    @JsonProperty("hiddenFirstTokkiJiko")
+    public RString getHiddenFirstTokkiJiko() {
+        return hiddenFirstTokkiJiko;
+    }
+
+    /*
+     * sethiddenFirstTokkiJiko
+     * @param hiddenFirstTokkiJiko hiddenFirstTokkiJiko
+     */
+    @JsonProperty("hiddenFirstTokkiJiko")
+    public void setHiddenFirstTokkiJiko(RString hiddenFirstTokkiJiko) {
+        this.hiddenFirstTokkiJiko = hiddenFirstTokkiJiko;
+    }
+
+    /*
+     * gethiddenSecondTokkiJiko
+     * @return hiddenSecondTokkiJiko
+     */
+    @JsonProperty("hiddenSecondTokkiJiko")
+    public RString getHiddenSecondTokkiJiko() {
+        return hiddenSecondTokkiJiko;
+    }
+
+    /*
+     * sethiddenSecondTokkiJiko
+     * @param hiddenSecondTokkiJiko hiddenSecondTokkiJiko
+     */
+    @JsonProperty("hiddenSecondTokkiJiko")
+    public void setHiddenSecondTokkiJiko(RString hiddenSecondTokkiJiko) {
+        this.hiddenSecondTokkiJiko = hiddenSecondTokkiJiko;
+    }
+
+    /*
+     * gethiddenThirdTokkiJiko
+     * @return hiddenThirdTokkiJiko
+     */
+    @JsonProperty("hiddenThirdTokkiJiko")
+    public RString getHiddenThirdTokkiJiko() {
+        return hiddenThirdTokkiJiko;
+    }
+
+    /*
+     * sethiddenThirdTokkiJiko
+     * @param hiddenThirdTokkiJiko hiddenThirdTokkiJiko
+     */
+    @JsonProperty("hiddenThirdTokkiJiko")
+    public void setHiddenThirdTokkiJiko(RString hiddenThirdTokkiJiko) {
+        this.hiddenThirdTokkiJiko = hiddenThirdTokkiJiko;
+    }
+
+    /*
+     * gethiddenFourthTokkiJiko
+     * @return hiddenFourthTokkiJiko
+     */
+    @JsonProperty("hiddenFourthTokkiJiko")
+    public RString getHiddenFourthTokkiJiko() {
+        return hiddenFourthTokkiJiko;
+    }
+
+    /*
+     * sethiddenFourthTokkiJiko
+     * @param hiddenFourthTokkiJiko hiddenFourthTokkiJiko
+     */
+    @JsonProperty("hiddenFourthTokkiJiko")
+    public void setHiddenFourthTokkiJiko(RString hiddenFourthTokkiJiko) {
+        this.hiddenFourthTokkiJiko = hiddenFourthTokkiJiko;
+    }
+
+    /*
+     * gethiddenFifthTokkiJiko
+     * @return hiddenFifthTokkiJiko
+     */
+    @JsonProperty("hiddenFifthTokkiJiko")
+    public RString getHiddenFifthTokkiJiko() {
+        return hiddenFifthTokkiJiko;
+    }
+
+    /*
+     * sethiddenFifthTokkiJiko
+     * @param hiddenFifthTokkiJiko hiddenFifthTokkiJiko
+     */
+    @JsonProperty("hiddenFifthTokkiJiko")
+    public void setHiddenFifthTokkiJiko(RString hiddenFifthTokkiJiko) {
+        this.hiddenFifthTokkiJiko = hiddenFifthTokkiJiko;
+    }
+
+    /*
+     * gethiddenGaikyoTokkiNyurokuMap_MASK
+     * @return hiddenGaikyoTokkiNyurokuMap_MASK
+     */
+    @JsonProperty("hiddenGaikyoTokkiNyurokuMap_MASK")
+    public RString getHiddenGaikyoTokkiNyurokuMap_MASK() {
+        return hiddenGaikyoTokkiNyurokuMap_MASK;
+    }
+
+    /*
+     * sethiddenGaikyoTokkiNyurokuMap_MASK
+     * @param hiddenGaikyoTokkiNyurokuMap_MASK hiddenGaikyoTokkiNyurokuMap_MASK
+     */
+    @JsonProperty("hiddenGaikyoTokkiNyurokuMap_MASK")
+    public void setHiddenGaikyoTokkiNyurokuMap_MASK(RString hiddenGaikyoTokkiNyurokuMap_MASK) {
+        this.hiddenGaikyoTokkiNyurokuMap_MASK = hiddenGaikyoTokkiNyurokuMap_MASK;
+    }
+
+    /*
+     * gethiddenOriginalGaikyoTokkiNyurokuMap
+     * @return hiddenOriginalGaikyoTokkiNyurokuMap
+     */
+    @JsonProperty("hiddenOriginalGaikyoTokkiNyurokuMap")
+    public RString getHiddenOriginalGaikyoTokkiNyurokuMap() {
+        return hiddenOriginalGaikyoTokkiNyurokuMap;
+    }
+
+    /*
+     * sethiddenOriginalGaikyoTokkiNyurokuMap
+     * @param hiddenOriginalGaikyoTokkiNyurokuMap hiddenOriginalGaikyoTokkiNyurokuMap
+     */
+    @JsonProperty("hiddenOriginalGaikyoTokkiNyurokuMap")
+    public void setHiddenOriginalGaikyoTokkiNyurokuMap(RString hiddenOriginalGaikyoTokkiNyurokuMap) {
+        this.hiddenOriginalGaikyoTokkiNyurokuMap = hiddenOriginalGaikyoTokkiNyurokuMap;
+    }
+
+    /*
+     * gethiddenOriginalGaikyoTokkiNyurokuMap_MASK
+     * @return hiddenOriginalGaikyoTokkiNyurokuMap_MASK
+     */
+    @JsonProperty("hiddenOriginalGaikyoTokkiNyurokuMap_MASK")
+    public RString getHiddenOriginalGaikyoTokkiNyurokuMap_MASK() {
+        return hiddenOriginalGaikyoTokkiNyurokuMap_MASK;
+    }
+
+    /*
+     * sethiddenOriginalGaikyoTokkiNyurokuMap_MASK
+     * @param hiddenOriginalGaikyoTokkiNyurokuMap_MASK hiddenOriginalGaikyoTokkiNyurokuMap_MASK
+     */
+    @JsonProperty("hiddenOriginalGaikyoTokkiNyurokuMap_MASK")
+    public void setHiddenOriginalGaikyoTokkiNyurokuMap_MASK(RString hiddenOriginalGaikyoTokkiNyurokuMap_MASK) {
+        this.hiddenOriginalGaikyoTokkiNyurokuMap_MASK = hiddenOriginalGaikyoTokkiNyurokuMap_MASK;
     }
 
     /*

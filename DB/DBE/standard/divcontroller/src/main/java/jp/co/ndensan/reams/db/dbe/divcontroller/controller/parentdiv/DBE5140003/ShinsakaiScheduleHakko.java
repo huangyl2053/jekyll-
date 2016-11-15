@@ -41,6 +41,7 @@ public class ShinsakaiScheduleHakko {
         div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().clear();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearFromValue();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearToValue();
+        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().setWidth(new RString("310px"));
         div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().getSelectedKeys().clear();
         div.getShinsakaiScheduleSrch().getTxtNendo().clearValue();
         CommonButtonHolder.setVisibleByCommonButtonFieldName(JIKO_BTTON, false);
@@ -105,6 +106,7 @@ public class ShinsakaiScheduleHakko {
         List<dgShinsakaiScheduleKagami_Row> dgShinsakaiScheduleKagamiRow = new ArrayList<>();
         for (ShinsakaiIinJohoGoitaiBusiness shinsakai : shoriDateKanri.records()) {
             dgShinsakaiScheduleKagami_Row row = new dgShinsakaiScheduleKagami_Row();
+            row.setSelected(Boolean.TRUE);
             row.setShinsakaiIinCode(shinsakai.get介護認定審査会委員コード());
             row.setShinsakaiIinName(shinsakai.get介護認定審査会委員氏名());
             row.setShozokuGogitaiBango(new RString(String.valueOf(shinsakai.get合議体番号())));

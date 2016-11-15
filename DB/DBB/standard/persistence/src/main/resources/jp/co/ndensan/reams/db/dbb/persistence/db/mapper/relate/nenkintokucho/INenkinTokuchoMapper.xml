@@ -143,22 +143,4 @@
         <result property="yobi2" column="Trail_yobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-
-    <select id="select年金特徴回付情報" resultOrdered="true"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb241001.TokuchoHaishinDataTorikomiMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" fetchSize="500">
-        SELECT  
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
-        FROM 
-            rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
-        WHERE 
-            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = #{gyomuCode}
-            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
-            AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = #{tsuchiNaiyoCode}
-            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM" = #{shoriTaishoYM}
-            AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = #{kisoNenkinNo}
-            AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = #{nenkinCode}
-            AND "UeT0511NenkinTokuchoKaifuJoho"."koseiCityCode" = #{koseiCityCode}
-            AND "UeT0511NenkinTokuchoKaifuJoho"."renban" = #{renban}
-    </select>
 </mapper>

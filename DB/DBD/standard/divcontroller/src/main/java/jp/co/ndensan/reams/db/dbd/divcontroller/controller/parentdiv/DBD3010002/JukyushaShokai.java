@@ -265,6 +265,20 @@ public class JukyushaShokai {
     }
 
     /**
+     * 調査状況ボタン用のデータを準備する
+     *
+     * @param div NinteiShinseiTorokuUketsukeDiv
+     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
+     */
+    public ResponseData<JukyushaShokaiDiv> onBeforeOpenDialog_btnChosaJokyo(JukyushaShokaiDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        div.setHiddenHihokenshaNo(被保険者番号.getColumnValue());
+        getHandler(div).onBeforeOpenDialog_btnChosaJokyo();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「検索結果一覧へ」ボタン押下時の処理です。
      *
      * @param div JukyushaShokaiDiv

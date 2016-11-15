@@ -79,7 +79,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBE-0270-010 liangbc
  */
 public class NinteichosaItakusakiMaster {
-    
+
     private static final RString 状況フラグ有効 = new RString("有効");
     private static final RString 自動割付フラグ可能 = new RString("可能");
     private static final RString 特定調査員表示フラグ表示 = new RString("表示");
@@ -123,7 +123,7 @@ public class NinteichosaItakusakiMaster {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 検索条件入力項目をクリアする。
      *
@@ -160,6 +160,7 @@ public class NinteichosaItakusakiMaster {
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnInsert(NinteichosaItakusakiMasterDiv div) {
+        div.set状態(追加状態コード);
         getHandler(div).set追加状態();
         return ResponseData.of(div).setState(DBE9030001StateName.詳細);
     }
@@ -171,6 +172,7 @@ public class NinteichosaItakusakiMaster {
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onSelectByModifyButton_dgChosainIchiran(NinteichosaItakusakiMasterDiv div) {
+        div.set状態(修正状態コード);
         getHandler(div).set修正状態();
         return ResponseData.of(div).setState(DBE9030001StateName.詳細);
     }
@@ -243,7 +245,7 @@ public class NinteichosaItakusakiMaster {
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnChosaininsert(NinteichosaItakusakiMasterDiv div) {
         ViewStateHolder.put(SaibanHanyokeyName.調査委託先コード, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
         ViewStateHolder.put(ViewStateKeys.市町村コード, div.getChosaitakusakiJohoInput().getTxtShichoson().getValue());
-        
+
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         DBE9030001ErrorMessage 編集なしで更新不可 = new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可);
@@ -251,9 +253,11 @@ public class NinteichosaItakusakiMaster {
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックREPLACE.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
                 UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue() == null
-                                       ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
-        messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
-                .thenAdd(編集なしで更新不可).messages());
+                ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
+        if (!div.get状態().equals(追加状態コード) && !div.get状態().equals(修正状態コード)) {
+            messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
+                    .thenAdd(編集なしで更新不可).messages());
+        }
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.市町村の合法性チェック)
                 .thenAdd(入力値が不正_追加メッセージあり).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先コードの重複チェック)
@@ -267,7 +271,7 @@ public class NinteichosaItakusakiMaster {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        
+
         if (div.get状態().equals(追加状態コード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
@@ -276,8 +280,8 @@ public class NinteichosaItakusakiMaster {
             }
             if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
                 NinteichosaItakusakiJohoManager johoManager = NinteichosaItakusakiJohoManager.createInstance();
 
                 NinteichosaItakusaki ninteichosaItakusaki = new NinteichosaItakusaki();
@@ -316,12 +320,12 @@ public class NinteichosaItakusakiMaster {
                 johoRelate.getEntity().set認定調査委託先情報Entity(ninteichosaItakusaki.getEntity());
                 NinteichosaItakusakiJoho joho = new NinteichosaItakusakiJoho(johoRelate.getEntity());
                 johoManager.save(joho);
-                
+
                 int selectID = -1;
                 if (!RString.isNullOrEmpty(div.getHdnSelectID())) {
                     selectID = Integer.valueOf(div.getHdnSelectID().toString());
                 }
-                
+
                 TextBoxCode 認定調査委託先コード = new TextBoxCode();
                 TextBoxNum 割付定員 = new TextBoxNum();
                 認定調査委託先コード.setValue(div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
@@ -372,7 +376,7 @@ public class NinteichosaItakusakiMaster {
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnTorikeshi(NinteichosaItakusakiMasterDiv div) {
         if (!ResponseHolder.isReRequest()
-            && (div.get状態().equals(追加状態コード) || div.get状態().equals(修正状態コード))) {
+                && (div.get状態().equals(追加状態コード) || div.get状態().equals(修正状態コード))) {
             if (getHandler(div).is調査委託先情報登録エリア編集有り()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
@@ -382,7 +386,7 @@ public class NinteichosaItakusakiMaster {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             getHandler(div).clear();
             ViewStateHolder.put(ViewStateKeys.状態, true);
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
@@ -407,7 +411,7 @@ public class NinteichosaItakusakiMaster {
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックREPLACE.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
                 UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue() == null
-                                       ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
+                ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
                 .thenAdd(編集なしで更新不可).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.市町村の合法性チェック)
@@ -444,7 +448,7 @@ public class NinteichosaItakusakiMaster {
         } else {
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                    && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
                 return onLoad(div);
             }
             return ResponseData.of(div).respond();
@@ -474,7 +478,7 @@ public class NinteichosaItakusakiMaster {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             int rowIndex = 0;
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
                 if (削除状態.equals(row.getJotai())
@@ -630,7 +634,7 @@ public class NinteichosaItakusakiMaster {
         csvEntity.set状況フラグ(row.getJokyoFlag());
         return csvEntity;
     }
-    
+
     private static class DBE9030001ErrorMessage implements IMessageGettable, IValidationMessage {
 
         private final Message message;

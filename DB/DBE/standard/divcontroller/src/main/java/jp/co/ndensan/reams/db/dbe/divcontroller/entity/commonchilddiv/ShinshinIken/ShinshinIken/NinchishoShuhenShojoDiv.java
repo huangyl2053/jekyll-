@@ -13,15 +13,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * 
  */
 public class NinchishoShuhenShojoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkNinchishoShuhenShojoUmu")
-    private CheckBoxList chkNinchishoShuhenShojoUmu;
+    @JsonProperty("radNinchishoShuhenShojoUmu")
+    private RadioButton radNinchishoShuhenShojoUmu;
     @JsonProperty("chkNinchishoShuhenShojo")
     private CheckBoxList chkNinchishoShuhenShojo;
     @JsonProperty("chkNinchishoShuhenShojoSonota")
@@ -36,21 +36,21 @@ public class NinchishoShuhenShojoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkNinchishoShuhenShojoUmu
-     * @return chkNinchishoShuhenShojoUmu
+     * getradNinchishoShuhenShojoUmu
+     * @return radNinchishoShuhenShojoUmu
      */
-    @JsonProperty("chkNinchishoShuhenShojoUmu")
-    public CheckBoxList getChkNinchishoShuhenShojoUmu() {
-        return chkNinchishoShuhenShojoUmu;
+    @JsonProperty("radNinchishoShuhenShojoUmu")
+    public RadioButton getRadNinchishoShuhenShojoUmu() {
+        return radNinchishoShuhenShojoUmu;
     }
 
     /*
-     * setchkNinchishoShuhenShojoUmu
-     * @param chkNinchishoShuhenShojoUmu chkNinchishoShuhenShojoUmu
+     * setradNinchishoShuhenShojoUmu
+     * @param radNinchishoShuhenShojoUmu radNinchishoShuhenShojoUmu
      */
-    @JsonProperty("chkNinchishoShuhenShojoUmu")
-    public void setChkNinchishoShuhenShojoUmu(CheckBoxList chkNinchishoShuhenShojoUmu) {
-        this.chkNinchishoShuhenShojoUmu = chkNinchishoShuhenShojoUmu;
+    @JsonProperty("radNinchishoShuhenShojoUmu")
+    public void setRadNinchishoShuhenShojoUmu(RadioButton radNinchishoShuhenShojoUmu) {
+        this.radNinchishoShuhenShojoUmu = radNinchishoShuhenShojoUmu;
     }
 
     /*

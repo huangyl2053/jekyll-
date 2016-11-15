@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 対象世帯員クラスTempに更新4のバッチ処理フロークラスです
@@ -122,8 +123,8 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
 
     private void getAge(UpdTaishoSeitaiyinTemp4Entity entity) {
         TaishoSetaiinEntity 対象世帯員2 = entity.get対象世帯員2();
-        RString 対象世帯員重複 = 対象世帯員2.getShotaiCode().concat(コンマ).concat(対象世帯員2.getHihokenshaNo().getColumnValue()).concat(コンマ)
-                .concat(対象世帯員2.getShikibetsuCode().getColumnValue());
+        RString 対象世帯員重複 = 対象世帯員2.getShotaiCode().concat(コンマ).concat(getColumnValue(対象世帯員2.getHihokenshaNo())).concat(コンマ)
+                .concat(getColumnValue(対象世帯員2.getShikibetsuCode()));
         if (!対象世帯員重複Set.contains(対象世帯員重複)) {
             if ((!RString.isNullOrEmpty(対象世帯員2.getAge()) && 対象世帯員2.getAge().compareTo(RSTRING_16) < 0)
                     && (this.getDecimal(対象世帯員2.getNenkinShunyuGaku())
@@ -146,16 +147,16 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
         TaishoSetaiinEntity 対象世帯員1 = entity.get対象世帯員1();
         TaishoSetaiinEntity 対象世帯員2 = entity.get対象世帯員2();
         if (RSTRING_01.equals(対象世帯員2.getHennshuuZokugaraCode())) {
-            this.識別コードSet.add(対象世帯員2.getShikibetsuCode().getColumnValue());
+            this.識別コードSet.add(getColumnValue(対象世帯員2.getShikibetsuCode()));
         }
-        if (this.識別コードSet.contains(対象世帯員1.getShikibetsuCode().getColumnValue())) {
-            this.識別コードFlgSet.add(対象世帯員1.getShikibetsuCode().getColumnValue());
+        if (this.識別コードSet.contains(getColumnValue(対象世帯員1.getShikibetsuCode()))) {
+            this.識別コードFlgSet.add(getColumnValue(対象世帯員1.getShikibetsuCode()));
         }
     }
 
     private void get課税所得_控除後(TaishoSetaiinEntity 対象世帯員1) {
         Decimal 控除後;
-        if (識別コードFlgSet.contains(対象世帯員1.getShikibetsuCode().getColumnValue())) {
+        if (識別コードFlgSet.contains(getColumnValue(対象世帯員1.getShikibetsuCode()))) {
             控除後 = getDecimal(対象世帯員1.getKazeiShotokuGaku()).subtract(DECIMAL_33.multiply(this.ageLess16).add(DECIMAL_12.multiply(this.age16_18)));
             if (控除後.compareTo(Decimal.ZERO) < 0) {
                 控除後 = Decimal.ZERO;
@@ -170,6 +171,13 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
             return decimal;
         }
         return Decimal.ZERO;
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
 }

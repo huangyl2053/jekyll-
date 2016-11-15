@@ -37,7 +37,7 @@
      "layoutName": "DBE5710001",
      "layoutTitle": "要介護認定イメージ情報管理",
      "eventName": "検索へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",
