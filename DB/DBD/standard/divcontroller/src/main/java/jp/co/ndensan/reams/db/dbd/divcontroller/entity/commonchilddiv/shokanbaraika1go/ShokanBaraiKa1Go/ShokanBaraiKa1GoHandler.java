@@ -594,7 +594,7 @@ public class ShokanBaraiKa1GoHandler {
     }
     
     private RDate FromFlexibleDateToRDate(FlexibleDate fDate) {
-        if (fDate == null) {
+        if (fDate == null || fDate.toString().isEmpty()) {
             return null;
         } else {
             return new RDate(fDate.toString());

@@ -22,7 +22,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtGengakuKetteiYMD")
-    private TextBoxFlexibleDate txtGengakuKetteiYMD;
+    private TextBoxDate txtGengakuKetteiYMD;
     @JsonProperty("txtZenkaiKikanKaishiYMD")
     private TextBoxFlexibleDate txtZenkaiKikanKaishiYMD;
     @JsonProperty("txtZenkaiKikanShuryoYMD")
@@ -30,19 +30,19 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
     @JsonProperty("txtKyufuGengakuTsuchiHakkoYMD")
     private TextBoxFlexibleDate txtKyufuGengakuTsuchiHakkoYMD;
     @JsonProperty("txtKonkaiKikanKaishiYMD")
-    private TextBoxFlexibleDate txtKonkaiKikanKaishiYMD;
+    private TextBoxDate txtKonkaiKikanKaishiYMD;
     @JsonProperty("txtKonkaiKikanShuryoYMD")
-    private TextBoxFlexibleDate txtKonkaiKikanShuryoYMD;
+    private TextBoxDate txtKonkaiKikanShuryoYMD;
     @JsonProperty("ddlMenjoShinseiJokyo")
     private DropDownList ddlMenjoShinseiJokyo;
     @JsonProperty("txtMenjoShinseiUketsukeYMD")
-    private TextBoxFlexibleDate txtMenjoShinseiUketsukeYMD;
+    private TextBoxDate txtMenjoShinseiUketsukeYMD;
     @JsonProperty("txtMenjoShinseiYMD")
-    private TextBoxFlexibleDate txtMenjoShinseiYMD;
+    private TextBoxDate txtMenjoShinseiYMD;
     @JsonProperty("ddlIMenjoShinseiRiyu")
     private DropDownList ddlIMenjoShinseiRiyu;
     @JsonProperty("txtMenjoNaiyoKetteiYMD")
-    private TextBoxFlexibleDate txtMenjoNaiyoKetteiYMD;
+    private TextBoxDate txtMenjoNaiyoKetteiYMD;
     @JsonProperty("ddlMenjoShinseiShinsaKekka")
     private DropDownList ddlMenjoShinseiShinsaKekka;
 
@@ -57,7 +57,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @return txtGengakuKetteiYMD
      */
     @JsonProperty("txtGengakuKetteiYMD")
-    public TextBoxFlexibleDate getTxtGengakuKetteiYMD() {
+    public TextBoxDate getTxtGengakuKetteiYMD() {
         return txtGengakuKetteiYMD;
     }
 
@@ -66,7 +66,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @param txtGengakuKetteiYMD txtGengakuKetteiYMD
      */
     @JsonProperty("txtGengakuKetteiYMD")
-    public void setTxtGengakuKetteiYMD(TextBoxFlexibleDate txtGengakuKetteiYMD) {
+    public void setTxtGengakuKetteiYMD(TextBoxDate txtGengakuKetteiYMD) {
         this.txtGengakuKetteiYMD = txtGengakuKetteiYMD;
     }
 
@@ -129,7 +129,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @return txtKonkaiKikanKaishiYMD
      */
     @JsonProperty("txtKonkaiKikanKaishiYMD")
-    public TextBoxFlexibleDate getTxtKonkaiKikanKaishiYMD() {
+    public TextBoxDate getTxtKonkaiKikanKaishiYMD() {
         return txtKonkaiKikanKaishiYMD;
     }
 
@@ -138,7 +138,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @param txtKonkaiKikanKaishiYMD txtKonkaiKikanKaishiYMD
      */
     @JsonProperty("txtKonkaiKikanKaishiYMD")
-    public void setTxtKonkaiKikanKaishiYMD(TextBoxFlexibleDate txtKonkaiKikanKaishiYMD) {
+    public void setTxtKonkaiKikanKaishiYMD(TextBoxDate txtKonkaiKikanKaishiYMD) {
         this.txtKonkaiKikanKaishiYMD = txtKonkaiKikanKaishiYMD;
     }
 
@@ -147,7 +147,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @return txtKonkaiKikanShuryoYMD
      */
     @JsonProperty("txtKonkaiKikanShuryoYMD")
-    public TextBoxFlexibleDate getTxtKonkaiKikanShuryoYMD() {
+    public TextBoxDate getTxtKonkaiKikanShuryoYMD() {
         return txtKonkaiKikanShuryoYMD;
     }
 
@@ -156,7 +156,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @param txtKonkaiKikanShuryoYMD txtKonkaiKikanShuryoYMD
      */
     @JsonProperty("txtKonkaiKikanShuryoYMD")
-    public void setTxtKonkaiKikanShuryoYMD(TextBoxFlexibleDate txtKonkaiKikanShuryoYMD) {
+    public void setTxtKonkaiKikanShuryoYMD(TextBoxDate txtKonkaiKikanShuryoYMD) {
         this.txtKonkaiKikanShuryoYMD = txtKonkaiKikanShuryoYMD;
     }
 
@@ -183,7 +183,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @return txtMenjoShinseiUketsukeYMD
      */
     @JsonProperty("txtMenjoShinseiUketsukeYMD")
-    public TextBoxFlexibleDate getTxtMenjoShinseiUketsukeYMD() {
+    public TextBoxDate getTxtMenjoShinseiUketsukeYMD() {
         return txtMenjoShinseiUketsukeYMD;
     }
 
@@ -192,7 +192,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @param txtMenjoShinseiUketsukeYMD txtMenjoShinseiUketsukeYMD
      */
     @JsonProperty("txtMenjoShinseiUketsukeYMD")
-    public void setTxtMenjoShinseiUketsukeYMD(TextBoxFlexibleDate txtMenjoShinseiUketsukeYMD) {
+    public void setTxtMenjoShinseiUketsukeYMD(TextBoxDate txtMenjoShinseiUketsukeYMD) {
         this.txtMenjoShinseiUketsukeYMD = txtMenjoShinseiUketsukeYMD;
     }
 
@@ -201,7 +201,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @return txtMenjoShinseiYMD
      */
     @JsonProperty("txtMenjoShinseiYMD")
-    public TextBoxFlexibleDate getTxtMenjoShinseiYMD() {
+    public TextBoxDate getTxtMenjoShinseiYMD() {
         return txtMenjoShinseiYMD;
     }
 
@@ -210,7 +210,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @param txtMenjoShinseiYMD txtMenjoShinseiYMD
      */
     @JsonProperty("txtMenjoShinseiYMD")
-    public void setTxtMenjoShinseiYMD(TextBoxFlexibleDate txtMenjoShinseiYMD) {
+    public void setTxtMenjoShinseiYMD(TextBoxDate txtMenjoShinseiYMD) {
         this.txtMenjoShinseiYMD = txtMenjoShinseiYMD;
     }
 
@@ -237,7 +237,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @return txtMenjoNaiyoKetteiYMD
      */
     @JsonProperty("txtMenjoNaiyoKetteiYMD")
-    public TextBoxFlexibleDate getTxtMenjoNaiyoKetteiYMD() {
+    public TextBoxDate getTxtMenjoNaiyoKetteiYMD() {
         return txtMenjoNaiyoKetteiYMD;
     }
 
@@ -246,7 +246,7 @@ public class GengakuTorokuOrMenjoShinseiDiv extends Panel {
      * @param txtMenjoNaiyoKetteiYMD txtMenjoNaiyoKetteiYMD
      */
     @JsonProperty("txtMenjoNaiyoKetteiYMD")
-    public void setTxtMenjoNaiyoKetteiYMD(TextBoxFlexibleDate txtMenjoNaiyoKetteiYMD) {
+    public void setTxtMenjoNaiyoKetteiYMD(TextBoxDate txtMenjoNaiyoKetteiYMD) {
         this.txtMenjoNaiyoKetteiYMD = txtMenjoNaiyoKetteiYMD;
     }
 

@@ -52,11 +52,11 @@ var DBD;
             };
 
             Controls.prototype.txtGengakuTekiyoKikanKaishiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtGengakuTekiyoKikanKaishiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtGengakuTekiyoKikanKaishiYMD"));
             };
 
             Controls.prototype.txtGengakuTekiyoKikanShuryoYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtGengakuTekiyoKikanShuryoYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtGengakuTekiyoKikanShuryoYMD"));
             };
 
             Controls.prototype.txtChoshukenShometsuKikan = function () {
@@ -76,7 +76,7 @@ var DBD;
             };
 
             Controls.prototype.txtGengakuKetteiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtGengakuKetteiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtGengakuKetteiYMD"));
             };
 
             Controls.prototype.txtZenkaiKikanKaishiYMD = function () {
@@ -92,11 +92,11 @@ var DBD;
             };
 
             Controls.prototype.txtKonkaiKikanKaishiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKonkaiKikanKaishiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtKonkaiKikanKaishiYMD"));
             };
 
             Controls.prototype.txtKonkaiKikanShuryoYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKonkaiKikanShuryoYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtKonkaiKikanShuryoYMD"));
             };
 
             Controls.prototype.ddlMenjoShinseiJokyo = function () {
@@ -104,11 +104,11 @@ var DBD;
             };
 
             Controls.prototype.txtMenjoShinseiUketsukeYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtMenjoShinseiUketsukeYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtMenjoShinseiUketsukeYMD"));
             };
 
             Controls.prototype.txtMenjoShinseiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtMenjoShinseiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtMenjoShinseiYMD"));
             };
 
             Controls.prototype.ddlIMenjoShinseiRiyu = function () {
@@ -116,7 +116,7 @@ var DBD;
             };
 
             Controls.prototype.txtMenjoNaiyoKetteiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtMenjoNaiyoKetteiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtMenjoNaiyoKetteiYMD"));
             };
 
             Controls.prototype.ddlMenjoShinseiShinsaKekka = function () {
