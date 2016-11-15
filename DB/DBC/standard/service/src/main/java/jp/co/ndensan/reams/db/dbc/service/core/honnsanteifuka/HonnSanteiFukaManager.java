@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannKihonSofuTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannKooGakuTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannShouKannTempEntity;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriKooG
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriShouKannTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.ShotaiinHaakuIttokiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.setaiyin.SetaiYinEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3116KijunShunyugakuTekiyoKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.report.jukyushaidorenrakuhyooutcsv.JukyushaIdoRenrakuhyoOutCSV;
@@ -32,6 +34,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
@@ -69,15 +72,20 @@ public class HonnSanteiFukaManager {
     private final IHonnSanteiFukaMapper mapper;
     private final DbT7055GappeiJohoDac 合併情報Dac;
     private final DbT1006KyokaisoGaitoshaDac dbT1006Dac;
+    private final DbT3116KijunShunyugakuTekiyoKanriDac dbT3116Dac;
     private static final RString 区分_0 = new RString("0");
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
     private static final RString 区分_3 = new RString("3");
+    private static final RString 区分_4 = new RString("4");
     private static final RString 区分_8 = new RString("8");
     private static final RString 区分_9 = new RString("9");
     private static final RString 区分_01 = new RString("01");
     private static final RString 区分_04 = new RString("04");
     private static final RString 区分_99 = new RString("99");
+    private static final Decimal 算定基準額_44400 = new Decimal(44400);
+    private static final Decimal 算定基準額_37200 = new Decimal(37200);
+    private static final Decimal 算定基準額_1450000 = new Decimal(1450000);
     private static final int 月分_6 = 6;
     private static final int 月分_7 = 7;
     private static final int 月分_8 = 8;
@@ -111,6 +119,7 @@ public class HonnSanteiFukaManager {
         this.mapper = mapperProvider.create(IHonnSanteiFukaMapper.class);
         this.合併情報Dac = InstanceProvider.create(DbT7055GappeiJohoDac.class);
         this.dbT1006Dac = InstanceProvider.create(DbT1006KyokaisoGaitoshaDac.class);
+        this.dbT3116Dac = InstanceProvider.create(DbT3116KijunShunyugakuTekiyoKanriDac.class);
     }
 
     /**
@@ -175,7 +184,7 @@ public class HonnSanteiFukaManager {
                         public int compare(DbT1001HihokenshaDaichoEntity entity1, DbT1001HihokenshaDaichoEntity entity2) {
                             FlexibleDate str1 = entity1.getIdoYMD();
                             FlexibleDate str2 = entity2.getIdoYMD();
-                            return str1.compareTo(str2);
+                            return str2.compareTo(str1);
                         }
                     });
                     if (get合併被保険者台帳(合併情報, 被保険者台帳) != null) {
@@ -261,7 +270,9 @@ public class HonnSanteiFukaManager {
                     if (資格取得年月日 == null || 資格取得年月日.isEmpty()) {
                         資格取得年月日 = FlexibleDate.MIN;
                     }
-                    if (資格喪失年月日 != null && !資格喪失年月日.isEmpty()
+                    if (認定有効期間開始年月日 == null || 認定有効期間開始年月日.isEmpty()) {
+                        continue;
+                    } else if (資格喪失年月日 != null && !資格喪失年月日.isEmpty()
                             && 資格取得年月日.isBeforeOrEquals(認定有効期間開始年月日)
                             && !資格喪失年月日.isBefore(認定有効期間開始年月日)) {
                         kihonSofuTempEntity.add(set古異動情報(被保険者番号Entity, 被保険者台帳, 連番, 処理対象年月));
@@ -361,12 +372,16 @@ public class HonnSanteiFukaManager {
         chuukannKihon.set住所(住所の編集.toRString());
         chuukannKihon.set電話番号(被保険者番号.get宛名Entity().getRenrakusaki1());
         chuukannKihon.set送付年月(new FlexibleYearMonth(処理対象年月));
-        chuukannKihon.set市町村コード(被保険者台帳.getShichosonCode().value());
+        chuukannKihon.set市町村コード(被保険者台帳.getShichosonCode());
         chuukannKihon.set資格取得年月日(被保険者台帳.getShikakuShutokuYMD());
         chuukannKihon.set資格喪失年月日(被保険者台帳.getShikakuSoshitsuYMD());
         chuukannKihon.set認定有効期間開始年月日(被保険者番号.get受給者台帳Entity().getNinteiYukoKikanKaishiYMD());
         chuukannKihon.set認定有効期間終了年月日(被保険者番号.get受給者台帳Entity().getNinteiYukoKikanShuryoYMD());
         chuukannKihon.set論理削除フラグ(false);
+        chuukannKihon.set住所地特例フラグ(被保険者台帳.getJushochiTokureiFlag());
+        chuukannKihon.set住所カナ(RString.EMPTY);
+        chuukannKihon.set訂正区分コード(RString.EMPTY);
+        chuukannKihon.set訂正年月日(FlexibleDate.EMPTY);
         return chuukannKihon;
     }
 
@@ -385,8 +400,11 @@ public class HonnSanteiFukaManager {
             市町村名 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         }
         if (構成市町村情報取得 != null && 構成市町村情報取得.get導入形態コード().is広域()) {
-            証記載番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            市町村名 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            DbT7051KoseiShichosonMasterEntity 構成市町村Entity = mapper.select構成市町村情報();
+            if (構成市町村Entity != null) {
+                証記載番号 = 構成市町村Entity.getShoKisaiHokenshaNo().value();
+                市町村名 = 構成市町村Entity.getShichosonMeisho();
+            }
         }
         証記載保険者番号と市町村名.add(証記載番号);
         証記載保険者番号と市町村名.add(市町村名);
@@ -406,8 +424,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<JukyushaDaichoRelateEntity> 受給者台帳リスト = new ArrayList<>();
-        for (RString keys : data_map.keySet()) {
-            受給者台帳リスト.add(data_map.get(keys).get(0));
+        for (List<JukyushaDaichoRelateEntity> keys : data_map.values()) {
+            受給者台帳リスト.add(keys.get(0));
         }
         return 受給者台帳リスト;
     }
@@ -425,8 +443,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<DbT1001HihokenshaDaichoEntity> 異動情報リスト = new ArrayList<>();
-        for (RString keys : data_map1.keySet()) {
-            異動情報リスト.add(data_map1.get(keys).get(0));
+        for (List<DbT1001HihokenshaDaichoEntity> keys : data_map1.values()) {
+            異動情報リスト.add(keys.get(0));
         }
         return 異動情報リスト;
     }
@@ -478,7 +496,9 @@ public class HonnSanteiFukaManager {
                     if (資格取得年月日 == null || 資格取得年月日.isEmpty()) {
                         資格取得年月日 = FlexibleDate.MIN;
                     }
-                    if (資格喪失年月日 != null && !資格喪失年月日.isEmpty()
+                    if (認定有効期間開始年月日 == null || 認定有効期間開始年月日.isEmpty()) {
+                        continue;
+                    } else if (資格喪失年月日 != null && !資格喪失年月日.isEmpty()
                             && 資格取得年月日.isBeforeOrEquals(認定有効期間開始年月日)
                             && !資格喪失年月日.isBefore(認定有効期間開始年月日)) {
                         shouKannTempEntity.add(set償還古異動情報(被保険者番号Entity, 被保険者台帳, 連番, 処理対象年月));
@@ -540,7 +560,7 @@ public class HonnSanteiFukaManager {
                         public int compare(DbT1001HihokenshaDaichoEntity entity1, DbT1001HihokenshaDaichoEntity entity2) {
                             FlexibleDate str1 = entity1.getIdoYMD();
                             FlexibleDate str2 = entity2.getIdoYMD();
-                            return str1.compareTo(str2);
+                            return str2.compareTo(str1);
                         }
                     });
                     if (get合併被保険者台帳(合併情報, 被保険者台帳) != null) {
@@ -595,6 +615,12 @@ public class HonnSanteiFukaManager {
         chuukannKihon.set差止決定年月日(被保険者番号.get受給者台帳Entity().getNinteiYukoKikanKaishiYMD());
         chuukannKihon.set差止解除年月日(被保険者番号.get受給者台帳Entity().getNinteiYukoKikanShuryoYMD());
         chuukannKihon.set論理削除フラグ(false);
+        chuukannKihon.set保険給付支払一時差止開始年月日(FlexibleDate.EMPTY);
+        chuukannKihon.set保険給付支払一時差止終了年月日(FlexibleDate.EMPTY);
+        chuukannKihon.set保険給付支払一時差止区分コード(RString.EMPTY);
+        chuukannKihon.set保険給付支払一時差止金額(Decimal.ZERO);
+        chuukannKihon.set訂正区分コード(RString.EMPTY);
+        chuukannKihon.set訂正年月日(FlexibleDate.EMPTY);
         return chuukannKihon;
     }
 
@@ -670,7 +696,9 @@ public class HonnSanteiFukaManager {
                     if (資格取得年月日 == null || 資格取得年月日.isEmpty()) {
                         資格取得年月日 = FlexibleDate.MIN;
                     }
-                    if (資格喪失年月日 != null && !資格喪失年月日.isEmpty()
+                    if (認定有効期間開始年月日 == null || 認定有効期間開始年月日.isEmpty()) {
+                        continue;
+                    } else if (資格喪失年月日 != null && !資格喪失年月日.isEmpty()
                             && 資格取得年月日.isBeforeOrEquals(認定有効期間開始年月日)
                             && !資格喪失年月日.isBefore(認定有効期間開始年月日)) {
                         kooGakuTempEntity.add(set高額古異動情報(被保険者番号Entity, 被保険者台帳, 連番, 処理対象年月));
@@ -732,7 +760,7 @@ public class HonnSanteiFukaManager {
                         public int compare(DbT1001HihokenshaDaichoEntity entity1, DbT1001HihokenshaDaichoEntity entity2) {
                             FlexibleDate str1 = entity1.getIdoYMD();
                             FlexibleDate str2 = entity2.getIdoYMD();
-                            return str1.compareTo(str2);
+                            return str2.compareTo(str1);
                         }
                     });
                     if (get合併被保険者台帳(合併情報, 被保険者台帳) != null) {
@@ -808,6 +836,8 @@ public class HonnSanteiFukaManager {
         if (保険者氏名 != null) {
             chuukannKihon.set被保険者氏名(保険者氏名.value());
         }
+        chuukannKihon.set訂正区分コード(RString.EMPTY);
+        chuukannKihon.set訂正年月日(FlexibleDate.EMPTY);
         chuukannKihon.set送付年月(new FlexibleYearMonth(処理対象年月));
         chuukannKihon.set市町村コード(被保険者台帳.getShichosonCode());
         chuukannKihon.set資格取得年月日(被保険者台帳.getShikakuShutokuYMD());
@@ -825,19 +855,19 @@ public class HonnSanteiFukaManager {
             if (月分_8 <= chuukannKihon.get基準年月日().getMonthValue()) {
                 chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().getNendo());
             } else {
-                chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().plusYear(1).getNendo());
+                chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().minusYear(1).getNendo());
             }
         } else if (new FlexibleYear(new RString("2006")).isBeforeOrEquals(chuukannKihon.get基準年月日().getYear())) {
             if (月分_7 <= chuukannKihon.get基準年月日().getMonthValue()) {
                 chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().getNendo());
             } else {
-                chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().plusYear(1).getNendo());
+                chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().minusYear(1).getNendo());
             }
         } else {
             if (月分_6 <= chuukannKihon.get基準年月日().getMonthValue()) {
                 chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().getNendo());
             } else {
-                chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().plusYear(1).getNendo());
+                chuukannKihon.set世帯把握用所得年度(chuukannKihon.get基準年月日().minusYear(1).getNendo());
             }
         }
         return chuukannKihon;
@@ -849,9 +879,10 @@ public class HonnSanteiFukaManager {
      * @param chuukannKihon 異動中間高額
      * @param 世帯員所得情報 世帯員所得情報
      * @param entityData 世帯員所得情報リスト
+     * @param 処理対象年月 処理対象年月
      */
     public void set高額選別情報(IdouChuukannKooGakuTempEntity chuukannKihon,
-            SetaiYinEntity 世帯員所得情報, List<SetaiYinEntity> entityData) {
+            SetaiYinEntity 世帯員所得情報, List<SetaiYinEntity> entityData, RString 処理対象年月) {
         boolean 世帯課税区分フラグ = false;
         boolean 激変緩和区分フラグ = false;
         for (SetaiYinEntity entity : entityData) {
@@ -888,6 +919,9 @@ public class HonnSanteiFukaManager {
             } else {
                 chuukannKihon.set世帯所得区分コード(区分_2);
             }
+            if (new FlexibleDate("20150801").isBeforeOrEquals(世帯員所得情報.getJukyuYMD()) && 区分_1.equals(世帯員所得情報.getShotokukubunCode())) {
+                chuukannKihon.set世帯所得区分コード(set世帯所得区分コード(世帯員所得情報, chuukannKihon, 処理対象年月));
+            }
             if (!区分_1.equals(世帯員所得情報.getShoubokubun()) && 区分_1.equals(世帯員所得情報.getHonninnkubun())) {
                 chuukannKihon.set所得区分コード(世帯員所得情報.getHonninkazeikubnn());
             } else if (!区分_1.equals(世帯員所得情報.getShoubokubun()) && new FlexibleDate("20150801").isBeforeOrEquals(世帯員所得情報.getJukyuYMD())
@@ -896,10 +930,92 @@ public class HonnSanteiFukaManager {
             }
             set高額情報設定(chuukannKihon, 世帯員所得情報);
         }
-        if (RString.isNullOrEmpty(世帯員所得情報.getShotaishotokukubunCode())) {
-            if (!区分_3.equals(chuukannKihon.get世帯所得区分コード())) {
-                set再度設定(chuukannKihon, 世帯員所得情報, 世帯課税区分フラグ, 激変緩和区分フラグ);
+        if (RString.isNullOrEmpty(世帯員所得情報.getShotaishotokukubunCode())
+                && !区分_3.equals(chuukannKihon.get世帯所得区分コード())) {
+            set再度設定(chuukannKihon, 世帯員所得情報, 世帯課税区分フラグ, 激変緩和区分フラグ);
+        }
+    }
+
+    private RString set世帯所得区分コード(SetaiYinEntity 世帯員所得情報,
+            IdouChuukannKooGakuTempEntity chuukannKihon, RString 処理対象年月) {
+        RStringBuilder builder = new RStringBuilder();
+        if (区分_1.equals(世帯員所得情報.getJuushotitokureigaitou())) {
+            builder.append(new RString("90000"));
+        }
+        builder.append(世帯員所得情報.getShotaiCode());
+        builder.append(世帯員所得情報.getShotokuNendo());
+        List<DbT3116KijunShunyugakuTekiyoKanriEntity> 基準収入額適用管理 = dbT3116Dac.selectAll();
+        Collections.sort(基準収入額適用管理, new Comparator<DbT3116KijunShunyugakuTekiyoKanriEntity>() {
+            @Override
+            public int compare(DbT3116KijunShunyugakuTekiyoKanriEntity entity1, DbT3116KijunShunyugakuTekiyoKanriEntity entity2) {
+                FlexibleYearMonth str1 = entity1.getTekiyoKaishiYMD();
+                FlexibleYearMonth str2 = entity2.getTekiyoKaishiYMD();
+                if (str2 == null || str2.isEmpty()) {
+                    str2 = FlexibleYearMonth.MIN;
+                }
+                if (str1 == null || str1.isEmpty()) {
+                    str1 = FlexibleYearMonth.MIN;
+                }
+                return str2.compareTo(str1);
             }
+        });
+
+        Map<RString, List<DbT3116KijunShunyugakuTekiyoKanriEntity>> data_map = new HashMap<>();
+        for (DbT3116KijunShunyugakuTekiyoKanriEntity entity : 基準収入額適用管理) {
+            if (!new Decimal(0).equals(entity.getSanteiKijungaku())) {
+                if (data_map.containsKey(entity.getSetaiCode().value().concat(entity.getNendo().toDateString()))) {
+                    List<DbT3116KijunShunyugakuTekiyoKanriEntity> map = data_map.get(entity.getSetaiCode().value()
+                            .concat(entity.getNendo().toDateString()));
+                    map.add(entity);
+                } else {
+                    List<DbT3116KijunShunyugakuTekiyoKanriEntity> map = new ArrayList<>();
+                    map.add(entity);
+                    data_map.put(entity.getSetaiCode().value().concat(entity.getNendo().toDateString()), map);
+                }
+            }
+        }
+        List<DbT3116KijunShunyugakuTekiyoKanriEntity> 基準収入額リスト = new ArrayList<>();
+        for (List<DbT3116KijunShunyugakuTekiyoKanriEntity> keys : data_map.values()) {
+            基準収入額リスト.add(keys.get(0));
+        }
+        for (DbT3116KijunShunyugakuTekiyoKanriEntity entity : 基準収入額リスト) {
+            if (builder.toRString().equals(entity.getSetaiCode().value().concat(entity.getNendo().toDateString()))) {
+                if (算定基準額_44400.equals(entity.getSanteiKijungaku())) {
+                    return 区分_4;
+                } else if (算定基準額_37200.equals(entity.getSanteiKijungaku())) {
+                    return 区分_1;
+                } else {
+                    return get世帯員の人数(entity, chuukannKihon, 処理対象年月);
+                }
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get世帯員の人数(DbT3116KijunShunyugakuTekiyoKanriEntity 基準収入額情報,
+            IdouChuukannKooGakuTempEntity chuukannKihon, RString 処理対象年月) {
+        List<SetaiYinEntity> 世帯員所得情報 = mapper.select世帯員所得情報();
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳情報 = mapper
+                .select被保険者台帳情報(HonnsanteiFukaMybatisParamter.createSofuDataParam(処理対象年月, RString.EMPTY));
+        int ren = 0;
+        for (SetaiYinEntity entity : 世帯員所得情報) {
+            for (DbT1001HihokenshaDaichoEntity dbt1001 : 被保険者台帳情報) {
+                if (entity.getHihokenshaNo().equals(dbt1001.getHihokenshaNo())
+                        && (区分_1.equals(dbt1001.getHihokennshaKubunCode()) || 区分_3.equals(dbt1001.getHihokennshaKubunCode()))
+                        && entity.getHihokenshaNo().equals(chuukannKihon.get被保険者番号())
+                        && chuukannKihon.get資格取得年月日().isBeforeOrEquals(entity.getJukyuYMD())
+                        && entity.getJukyuYMD().isBefore(chuukannKihon.get資格喪失年月日())
+                        && 算定基準額_1450000.compareTo(基準収入額情報.getSanteiKijungaku()) < 0) {
+                    ren = ren + 1;
+                }
+            }
+        }
+        if (ren == 0) {
+            return 区分_1;
+        } else if (2 <= ren) {
+            return 区分_4;
+        } else {
+            return RString.EMPTY;
         }
     }
 
@@ -920,18 +1036,19 @@ public class HonnSanteiFukaManager {
         List<DbT1006KyokaisoGaitoshaEntity> dbt1006Entity = dbT1006Dac.selectAll();
         if (dbt1006Entity == null || dbt1006Entity.isEmpty()) {
             chuukannKihon.set激変緩和境界層区分(区分_0);
-        }
-        for (DbT1006KyokaisoGaitoshaEntity entity : dbt1006Entity) {
-            if (entity.getHihokenshaNo().equals(世帯員所得情報.getHihokenshaNo())
-                    && entity.getTekiyoKaishiYMD().isBeforeOrEquals(世帯員所得情報.getJukyuYMD())
-                    && 世帯員所得情報.getJukyuYMD().isBeforeOrEquals(entity.getTekiyoShuryoYMD())
-                    && entity.getKogakuServicehiJogengakuGengakugoJogengaku() == 上限額_2) {
-                chuukannKihon.set激変緩和境界層区分(区分_2);
-            } else if (entity.getHihokenshaNo().equals(世帯員所得情報.getHihokenshaNo())
-                    && entity.getTekiyoKaishiYMD().isBeforeOrEquals(世帯員所得情報.getJukyuYMD())
-                    && 世帯員所得情報.getJukyuYMD().isBeforeOrEquals(entity.getTekiyoShuryoYMD())
-                    && entity.getKogakuServicehiJogengakuGengakugoJogengaku() == 上限額_1) {
-                chuukannKihon.set激変緩和境界層区分(区分_1);
+        } else {
+            for (DbT1006KyokaisoGaitoshaEntity entity : dbt1006Entity) {
+                if (entity.getHihokenshaNo().equals(世帯員所得情報.getHihokenshaNo())
+                        && entity.getTekiyoKaishiYMD().isBeforeOrEquals(世帯員所得情報.getJukyuYMD())
+                        && 世帯員所得情報.getJukyuYMD().isBeforeOrEquals(entity.getTekiyoShuryoYMD())
+                        && entity.getKogakuServicehiJogengakuGengakugoJogengaku() == 上限額_2) {
+                    chuukannKihon.set激変緩和境界層区分(区分_2);
+                } else if (entity.getHihokenshaNo().equals(世帯員所得情報.getHihokenshaNo())
+                        && entity.getTekiyoKaishiYMD().isBeforeOrEquals(世帯員所得情報.getJukyuYMD())
+                        && 世帯員所得情報.getJukyuYMD().isBeforeOrEquals(entity.getTekiyoShuryoYMD())
+                        && entity.getKogakuServicehiJogengakuGengakugoJogengaku() == 上限額_1) {
+                    chuukannKihon.set激変緩和境界層区分(区分_1);
+                }
             }
         }
     }
@@ -960,9 +1077,9 @@ public class HonnSanteiFukaManager {
         }
         if (区分_0.equals(chuukannKihon.get激変緩和境界層区分())
                 && new FlexibleYear(DbBusinessConfig.get(ConfigNameDBU.平１８激変緩和期間_適用開始年度,
-                                RDate.getNowDate(), SubGyomuCode.DBC介護給付)).isBeforeOrEquals(世帯員所得情報.getShotokuNendo())
+                                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)).isBeforeOrEquals(世帯員所得情報.getShotokuNendo())
                 && 世帯員所得情報.getShotokuNendo().isBeforeOrEquals(new FlexibleYear(DbBusinessConfig.
-                                get(ConfigNameDBU.平１８激変緩和期間_適用終了年度, RDate.getNowDate(), SubGyomuCode.DBC介護給付)))
+                                get(ConfigNameDBU.平１８激変緩和期間_適用終了年度, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))
                 && 世帯課税区分フラグ) {
             if (激変緩和区分フラグ) {
                 chuukannKihon.set利用者負担第２段階有フラグ(false);
@@ -995,18 +1112,18 @@ public class HonnSanteiFukaManager {
                 = HonnsanteiFukaMybatisParamter.createParam(処理対象年月,
                         new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳情報リスト = mapper.select被保険者台帳情報(sqlParam);
-        for (DbT1001HihokenshaDaichoEntity 被保険者台帳情報 : 被保険者台帳情報リスト) {
-            ShotaiinHaakuIttokiTempEntity entity = new ShotaiinHaakuIttokiTempEntity();
-            entity.set被保険者番号(被保険者台帳情報.getHihokenshaNo());
-            entity.set識別コード(被保険者台帳情報.getShikibetsuCode());
-            entity.set住所地特例該当(被保険者台帳情報.getJushochiTokureiFlag());
-            for (IdouChuukannKooGakuTempEntity 異動中間高額送付 : 異動中間高額送付情報) {
+        for (IdouChuukannKooGakuTempEntity 異動中間高額送付 : 異動中間高額送付情報) {
+            for (DbT1001HihokenshaDaichoEntity 被保険者台帳情報 : 被保険者台帳情報リスト) {
                 if (被保険者台帳情報.getHihokenshaNo().equals(異動中間高額送付.get被保険者番号())) {
+                    ShotaiinHaakuIttokiTempEntity entity = new ShotaiinHaakuIttokiTempEntity();
+                    entity.set被保険者番号(被保険者台帳情報.getHihokenshaNo());
+                    entity.set識別コード(被保険者台帳情報.getShikibetsuCode());
+                    entity.set住所地特例該当(被保険者台帳情報.getJushochiTokureiFlag());
                     entity.set基準年月日(異動中間高額送付.get基準年月日());
                     entity.set所得年度(異動中間高額送付.get世帯把握用所得年度());
+                    shotaiinTempEntity.add(entity);
                 }
             }
-            shotaiinTempEntity.add(entity);
         }
         return shotaiinTempEntity;
     }
@@ -1032,8 +1149,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<KyodoShoriKihonSofuTempEntity> リスト = new ArrayList<>();
-        for (RString keys : data_map1.keySet()) {
-            リスト.add(data_map1.get(keys).get(0));
+        for (List<KyodoShoriKihonSofuTempEntity> keys : data_map1.values()) {
+            リスト.add(keys.get(0));
         }
         Map<RString, List<IdouChuukannKihonSofuTempEntity>> data_map2 = new HashMap<>();
         for (IdouChuukannKihonSofuTempEntity entity : 異動中間基本送付) {
@@ -1047,8 +1164,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<IdouChuukannKihonSofuTempEntity> リスト2 = new ArrayList<>();
-        for (RString keys : data_map2.keySet()) {
-            リスト2.add(data_map2.get(keys).get(0));
+        for (List<IdouChuukannKihonSofuTempEntity> keys : data_map2.values()) {
+            リスト2.add(keys.get(0));
         }
         for (IdouChuukannKihonSofuTempEntity list2 : リスト2) {
             for (KyodoShoriKihonSofuTempEntity list : リスト) {
@@ -1067,19 +1184,17 @@ public class HonnSanteiFukaManager {
                         entity.set変更項目(get変更項目(list, list2));
                         送付対象リスト.add(entity);
                     }
-                } else {
-                    if (異動年月日.isBeforeOrEquals(list2.get異動年月日())) {
-                        IdouSofuListTempEntity entity = new IdouSofuListTempEntity();
-                        entity.set被保険者番号(list2.get被保険者番号().value());
-                        entity.set氏名(list2.get被保険者氏名());
-                        entity.set区分(JukyushaIF_IdoKubunCode.toValue(list2.get異動区分コード()).get名称());
-                        entity.set異動年月日(list2.get異動年月日());
-                        entity.set要介護度(RString.EMPTY);
-                        entity.set開始認定日(list2.get認定有効期間開始年月日());
-                        entity.set終了認定日(list2.get認定有効期間終了年月日());
-                        entity.set変更項目(get変更項目(list, list2));
-                        送付対象リスト.add(entity);
-                    }
+                } else if (異動年月日.isBeforeOrEquals(list2.get異動年月日())) {
+                    IdouSofuListTempEntity entity = new IdouSofuListTempEntity();
+                    entity.set被保険者番号(list2.get被保険者番号().value());
+                    entity.set氏名(list2.get被保険者氏名());
+                    entity.set区分(JukyushaIF_IdoKubunCode.toValue(list2.get異動区分コード()).get名称());
+                    entity.set異動年月日(list2.get異動年月日());
+                    entity.set要介護度(RString.EMPTY);
+                    entity.set開始認定日(list2.get認定有効期間開始年月日());
+                    entity.set終了認定日(list2.get認定有効期間終了年月日());
+                    entity.set変更項目(get変更項目(list, list2));
+                    送付対象リスト.add(entity);
                 }
             }
         }
@@ -1088,25 +1203,26 @@ public class HonnSanteiFukaManager {
 
     private RString get変更項目(KyodoShoriKihonSofuTempEntity 共同処理用受給者異動基本送付,
             IdouChuukannKihonSofuTempEntity 異動中間基本送付) {
-        if (共同処理用受給者異動基本送付.get証記載保険者番号() != 異動中間基本送付.get証記載保険者番号()) {
-            return 証記載保険者番号;
+        RStringBuilder builder = new RStringBuilder();
+        if (!共同処理用受給者異動基本送付.get証記載保険者番号().equals(異動中間基本送付.get証記載保険者番号())) {
+            builder.append(証記載保険者番号);
         }
         if (!異動中間基本送付.get被保険者氏名().equals(共同処理用受給者異動基本送付.get被保険者氏名())) {
-            return 被保険者氏名;
+            builder.append(被保険者氏名);
         }
-        if (異動中間基本送付.get郵便番号() != 共同処理用受給者異動基本送付.get郵便番号()) {
-            return 郵便番号;
+        if (!異動中間基本送付.get郵便番号().equals(共同処理用受給者異動基本送付.get郵便番号())) {
+            builder.append(郵便番号);
         }
         if (!異動中間基本送付.get住所().equals(共同処理用受給者異動基本送付.get住所())) {
-            return 住所;
+            builder.append(住所);
         }
         if (!異動中間基本送付.get住所カナ().equals(共同処理用受給者異動基本送付.get住所カナ())) {
-            return 住所カナ;
+            builder.append(住所カナ);
         }
-        if (異動中間基本送付.get電話番号() != 共同処理用受給者異動基本送付.get電話番号()) {
-            return 電話番号;
+        if (!異動中間基本送付.get電話番号().equals(共同処理用受給者異動基本送付.get電話番号())) {
+            builder.append(電話番号);
         }
-        return RString.EMPTY;
+        return builder.toRString();
     }
 
     /**
@@ -1129,8 +1245,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<KyodoShoriKihonSofuTempEntity> リスト = new ArrayList<>();
-        for (RString keys : data_map1.keySet()) {
-            リスト.add(data_map1.get(keys).get(0));
+        for (List<KyodoShoriKihonSofuTempEntity> keys : data_map1.values()) {
+            リスト.add(keys.get(0));
         }
         Map<RString, List<IdouChuukannKihonSofuTempEntity>> data_map2 = new HashMap<>();
         for (IdouChuukannKihonSofuTempEntity entity : 異動中間基本送付) {
@@ -1144,8 +1260,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<IdouChuukannKihonSofuTempEntity> リスト2 = new ArrayList<>();
-        for (RString keys : data_map2.keySet()) {
-            リスト2.add(data_map2.get(keys).get(0));
+        for (List<IdouChuukannKihonSofuTempEntity> keys : data_map2.values()) {
+            リスト2.add(keys.get(0));
         }
         for (IdouChuukannKihonSofuTempEntity list2 : リスト2) {
             for (KyodoShoriKihonSofuTempEntity list : リスト) {
@@ -1191,8 +1307,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<KyodoShoriShouKannTempEntity> リスト = new ArrayList<>();
-        for (RString keys : data_map1.keySet()) {
-            リスト.add(data_map1.get(keys).get(0));
+        for (List<KyodoShoriShouKannTempEntity> keys : data_map1.values()) {
+            リスト.add(keys.get(0));
         }
         Map<RString, List<IdouChuukannShouKannTempEntity>> data_map2 = new HashMap<>();
         for (IdouChuukannShouKannTempEntity entity : 異動中間償還送付) {
@@ -1206,8 +1322,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<IdouChuukannShouKannTempEntity> リスト2 = new ArrayList<>();
-        for (RString keys : data_map2.keySet()) {
-            リスト2.add(data_map2.get(keys).get(0));
+        for (List<IdouChuukannShouKannTempEntity> keys : data_map2.values()) {
+            リスト2.add(keys.get(0));
         }
         for (IdouChuukannShouKannTempEntity list2 : リスト2) {
             for (KyodoShoriShouKannTempEntity list : リスト) {
@@ -1228,19 +1344,17 @@ public class HonnSanteiFukaManager {
                         entity.set変更項目(get償還変更項目(list, list2));
                         送付対象リスト.add(entity);
                     }
-                } else {
-                    if (異動年月日.isBeforeOrEquals(list2.get異動年月日())) {
-                        IdouSofuListTempEntity entity = new IdouSofuListTempEntity();
-                        entity.set被保険者番号(list2.get被保険者番号().value());
-                        entity.set氏名(list2.get被保険者氏名());
-                        entity.set区分(JukyushaIF_IdoKubunCode.toValue(list2.get異動区分コード()).get名称());
-                        entity.set異動年月日(list2.get異動年月日());
-                        entity.set要介護度(RString.EMPTY);
-                        entity.set開始認定日(list2.get保険給付支払一時差止開始年月日());
-                        entity.set終了認定日(list2.get保険給付支払一時差止終了年月日());
-                        entity.set変更項目(get償還変更項目(list, list2));
-                        送付対象リスト.add(entity);
-                    }
+                } else if (list2.get被保険者番号() != null && 異動年月日.isBeforeOrEquals(list2.get異動年月日())) {
+                    IdouSofuListTempEntity entity = new IdouSofuListTempEntity();
+                    entity.set被保険者番号(list2.get被保険者番号().value());
+                    entity.set氏名(list2.get被保険者氏名());
+                    entity.set区分(JukyushaIF_IdoKubunCode.toValue(list2.get異動区分コード()).get名称());
+                    entity.set異動年月日(list2.get異動年月日());
+                    entity.set要介護度(RString.EMPTY);
+                    entity.set開始認定日(list2.get保険給付支払一時差止開始年月日());
+                    entity.set終了認定日(list2.get保険給付支払一時差止終了年月日());
+                    entity.set変更項目(get償還変更項目(list, list2));
+                    送付対象リスト.add(entity);
                 }
             }
         }
@@ -1267,8 +1381,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<KyodoShoriShouKannTempEntity> リスト = new ArrayList<>();
-        for (RString keys : data_map1.keySet()) {
-            リスト.add(data_map1.get(keys).get(0));
+        for (List<KyodoShoriShouKannTempEntity> keys : data_map1.values()) {
+            リスト.add(keys.get(0));
         }
         Map<RString, List<IdouChuukannShouKannTempEntity>> data_map2 = new HashMap<>();
         for (IdouChuukannShouKannTempEntity entity : 異動中間償還送付) {
@@ -1282,8 +1396,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<IdouChuukannShouKannTempEntity> リスト2 = new ArrayList<>();
-        for (RString keys : data_map2.keySet()) {
-            リスト2.add(data_map2.get(keys).get(0));
+        for (List<IdouChuukannShouKannTempEntity> keys : data_map2.values()) {
+            リスト2.add(keys.get(0));
         }
         for (IdouChuukannShouKannTempEntity list2 : リスト2) {
             for (KyodoShoriShouKannTempEntity list : リスト) {
@@ -1308,25 +1422,26 @@ public class HonnSanteiFukaManager {
 
     private RString get償還変更項目(KyodoShoriShouKannTempEntity 共同処理用受給者異動償還送付,
             IdouChuukannShouKannTempEntity 異動中間償還送付一時) {
-        if (共同処理用受給者異動償還送付.get証記載保険者番号() != 異動中間償還送付一時.get証記載保険者番号()) {
-            return 証記載保険者番号;
+        RStringBuilder builder = new RStringBuilder();
+        if (!異動中間償還送付一時.get証記載保険者番号().equals(共同処理用受給者異動償還送付.get証記載保険者番号())) {
+            builder.append(証記載保険者番号);
         }
         if (!異動中間償還送付一時.get被保険者番号().equals(共同処理用受給者異動償還送付.get被保険者番号())) {
-            return 被保険者番号;
+            builder.append(被保険者番号);
         }
-        if (異動中間償還送付一時.get保険給付支払一時差止開始年月日() != 共同処理用受給者異動償還送付.get保険給付支払一時差止開始年月日()) {
-            return 保険給付支払一時差止開始年月日;
+        if (!異動中間償還送付一時.get保険給付支払一時差止開始年月日().equals(共同処理用受給者異動償還送付.get保険給付支払一時差止開始年月日())) {
+            builder.append(保険給付支払一時差止開始年月日);
         }
-        if (異動中間償還送付一時.get保険給付支払一時差止終了年月日() != (共同処理用受給者異動償還送付.get保険給付支払一時差止終了年月日())) {
-            return 保険給付支払一時差止終了年月日;
+        if (!異動中間償還送付一時.get保険給付支払一時差止終了年月日().equals(共同処理用受給者異動償還送付.get保険給付支払一時差止終了年月日())) {
+            builder.append(保険給付支払一時差止終了年月日);
         }
         if (!異動中間償還送付一時.get保険給付支払一時差止区分コード().equals(共同処理用受給者異動償還送付.get保険給付支払一時差止区分コード())) {
-            return 保険給付支払一時差止区分コード;
+            builder.append(保険給付支払一時差止区分コード);
         }
-        if (異動中間償還送付一時.get保険給付支払一時差止金額() != 共同処理用受給者異動償還送付.get保険給付支払一時差止金額()) {
-            return 保険給付支払一時差止金額;
+        if (!異動中間償還送付一時.get保険給付支払一時差止金額().equals(共同処理用受給者異動償還送付.get保険給付支払一時差止金額())) {
+            builder.append(保険給付支払一時差止金額);
         }
-        return RString.EMPTY;
+        return builder.toRString();
     }
 
     /**
@@ -1350,8 +1465,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<KyodoShoriKooGakuTempEntity> リスト = new ArrayList<>();
-        for (RString keys : data_map1.keySet()) {
-            リスト.add(data_map1.get(keys).get(0));
+        for (List<KyodoShoriKooGakuTempEntity> keys : data_map1.values()) {
+            リスト.add(keys.get(0));
         }
         Map<RString, List<IdouChuukannKooGakuTempEntity>> data_map2 = new HashMap<>();
         for (IdouChuukannKooGakuTempEntity entity : 異動中間高額送付) {
@@ -1365,8 +1480,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<IdouChuukannKooGakuTempEntity> リスト2 = new ArrayList<>();
-        for (RString keys : data_map2.keySet()) {
-            リスト2.add(data_map2.get(keys).get(0));
+        for (List<IdouChuukannKooGakuTempEntity> keys : data_map2.values()) {
+            リスト2.add(keys.get(0));
         }
         for (IdouChuukannKooGakuTempEntity list2 : リスト2) {
             for (KyodoShoriKooGakuTempEntity list : リスト) {
@@ -1387,19 +1502,17 @@ public class HonnSanteiFukaManager {
                         entity.set変更項目(get高額変更項目(list, list2));
                         送付対象リスト.add(entity);
                     }
-                } else {
-                    if (異動年月日.isBeforeOrEquals(list2.get異動年月日())) {
-                        IdouSofuListTempEntity entity = new IdouSofuListTempEntity();
-                        entity.set被保険者番号(list2.get被保険者番号().value());
-                        entity.set氏名(list2.get被保険者氏名());
-                        entity.set区分(JukyushaIF_IdoKubunCode.toValue(list2.get異動区分コード()).get名称());
-                        entity.set異動年月日(list2.get異動年月日());
-                        entity.set要介護度(RString.EMPTY);
-                        entity.set開始認定日(list2.get認定有効期間開始年月日());
-                        entity.set終了認定日(list2.get認定有効期間終了年月日());
-                        entity.set変更項目(get高額変更項目(list, list2));
-                        送付対象リスト.add(entity);
-                    }
+                } else if (list2.get被保険者番号() != null && 異動年月日.isBeforeOrEquals(list2.get異動年月日())) {
+                    IdouSofuListTempEntity entity = new IdouSofuListTempEntity();
+                    entity.set被保険者番号(list2.get被保険者番号().value());
+                    entity.set氏名(list2.get被保険者氏名());
+                    entity.set区分(JukyushaIF_IdoKubunCode.toValue(list2.get異動区分コード()).get名称());
+                    entity.set異動年月日(list2.get異動年月日());
+                    entity.set要介護度(RString.EMPTY);
+                    entity.set開始認定日(list2.get認定有効期間開始年月日());
+                    entity.set終了認定日(list2.get認定有効期間終了年月日());
+                    entity.set変更項目(get高額変更項目(list, list2));
+                    送付対象リスト.add(entity);
                 }
             }
         }
@@ -1426,8 +1539,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<KyodoShoriKooGakuTempEntity> リスト = new ArrayList<>();
-        for (RString keys : data_map1.keySet()) {
-            リスト.add(data_map1.get(keys).get(0));
+        for (List<KyodoShoriKooGakuTempEntity> keys : data_map1.values()) {
+            リスト.add(keys.get(0));
         }
         Map<RString, List<IdouChuukannKooGakuTempEntity>> data_map2 = new HashMap<>();
         for (IdouChuukannKooGakuTempEntity entity : 異動中間高額送付) {
@@ -1441,8 +1554,8 @@ public class HonnSanteiFukaManager {
             }
         }
         List<IdouChuukannKooGakuTempEntity> リスト2 = new ArrayList<>();
-        for (RString keys : data_map2.keySet()) {
-            リスト2.add(data_map2.get(keys).get(0));
+        for (List<IdouChuukannKooGakuTempEntity> keys : data_map2.values()) {
+            リスト2.add(keys.get(0));
         }
         for (IdouChuukannKooGakuTempEntity list2 : リスト2) {
             for (KyodoShoriKooGakuTempEntity list : リスト) {
@@ -1469,24 +1582,25 @@ public class HonnSanteiFukaManager {
 
     private RString get高額変更項目(KyodoShoriKooGakuTempEntity 共同処理用受給者異動高額送付,
             IdouChuukannKooGakuTempEntity 異動中間高額送付一時) {
-        if (共同処理用受給者異動高額送付.get証記載保険者番号() != 異動中間高額送付一時.get証記載保険者番号()) {
-            return 証記載保険者番号;
+        RStringBuilder builder = new RStringBuilder();
+        if (!共同処理用受給者異動高額送付.get証記載保険者番号().equals(異動中間高額送付一時.get証記載保険者番号())) {
+            builder.append(証記載保険者番号);
         }
-        if (異動中間高額送付一時.get世帯集約番号() != 共同処理用受給者異動高額送付.get世帯集約番号()) {
-            return 世帯集約番号;
+        if (!異動中間高額送付一時.get世帯集約番号().equals(共同処理用受給者異動高額送付.get世帯集約番号())) {
+            builder.append(世帯集約番号);
         }
         if (!異動中間高額送付一時.get世帯所得区分コード().equals(共同処理用受給者異動高額送付.get世帯所得区分コード())) {
-            return 世帯所得区分コード;
+            builder.append(世帯所得区分コード);
         }
         if (!異動中間高額送付一時.get所得区分コード().equals(共同処理用受給者異動高額送付.get所得区分コード())) {
-            return 所得区分コード;
+            builder.append(所得区分コード);
         }
         if (異動中間高額送付一時.is老齢福祉年金受給有フラグ() != 共同処理用受給者異動高額送付.is老齢福祉年金受給有フラグ()) {
-            return 老齢福祉年金受給有フラグ;
+            builder.append(老齢福祉年金受給有フラグ);
         }
         if (異動中間高額送付一時.is利用者負担第２段階有フラグ() != 共同処理用受給者異動高額送付.is利用者負担第２段階有フラグ()) {
-            return 利用者負担第２段階有フラグ;
+            builder.append(利用者負担第２段階有フラグ);
         }
-        return RString.EMPTY;
+        return builder.toRString();
     }
 }

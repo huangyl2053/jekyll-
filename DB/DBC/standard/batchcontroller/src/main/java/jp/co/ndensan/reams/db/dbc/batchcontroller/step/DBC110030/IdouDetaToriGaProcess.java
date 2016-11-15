@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannKihonSofuTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouDetaToriGaTempEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -26,6 +28,9 @@ public class IdouDetaToriGaProcess extends BatchProcessBase<IdouDetaToriGaTempEn
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka."
             + "IHonnSanteiFukaMapper.select異動データ取得");
     private static final RString TABLE_異動データ取得トリガ = new RString("IdouDetaToriGaTemp");
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter<IdouChuukannKihonSofuTempEntity> 異動中間基本送付一時;
+    private static final RString TABLE_異動中間基本送付一時 = new RString("IdouChuukannKihonSofuIttokiTemp");
     private IHonnSanteiFukaMapper mapper;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動データ取得トリガ;
@@ -39,6 +44,8 @@ public class IdouDetaToriGaProcess extends BatchProcessBase<IdouDetaToriGaTempEn
     protected void createWriter() {
         異動データ取得トリガ = new BatchEntityCreatedTempTableWriter(TABLE_異動データ取得トリガ,
                 IdouDetaToriGaTempEntity.class);
+        異動中間基本送付一時 = new BatchEntityCreatedTempTableWriter(TABLE_異動中間基本送付一時,
+                IdouChuukannKihonSofuTempEntity.class);
     }
 
     @Override
@@ -49,7 +56,11 @@ public class IdouDetaToriGaProcess extends BatchProcessBase<IdouDetaToriGaTempEn
     @Override
     protected void process(IdouDetaToriGaTempEntity entity) {
         異動データ取得トリガ.insert(entity);
-        mapper.update異動中間基本送付一時(HonnsanteiFukaMybatisParamter.
+        List<IdouChuukannKihonSofuTempEntity> idouKihonEntity = mapper.update異動中間基本送付一時(HonnsanteiFukaMybatisParamter.
                 createIdouDateParam(entity.get異動年月日(), entity.get被保険者番号()));
+        for (IdouChuukannKihonSofuTempEntity idouKihon : idouKihonEntity) {
+            idouKihon.set論理削除フラグ(false);
+            異動中間基本送付一時.update(idouKihon);
+        }
     }
 }
