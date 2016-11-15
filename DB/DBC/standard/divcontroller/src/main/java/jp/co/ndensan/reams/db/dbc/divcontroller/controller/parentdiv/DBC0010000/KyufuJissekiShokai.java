@@ -193,9 +193,10 @@ public class KyufuJissekiShokai {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
+        RString 検索対象 = div.getRadTaisho1().getSelectedKey();
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
-                get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了);
-        ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(給付実績情報照会情報);
+                get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了, KEY.equals(検索対象));
+        ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(給付実績情報照会情報, 検索対象);
         if (validationMessages.iterator().hasNext()) {
             div.getKyufuJissekiSearchPanel().setIsOpen(true);
             div.getKyufuJissekiListPanel().setIsOpen(false);
