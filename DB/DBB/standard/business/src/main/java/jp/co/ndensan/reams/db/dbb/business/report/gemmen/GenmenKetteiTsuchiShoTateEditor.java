@@ -140,7 +140,7 @@ public class GenmenKetteiTsuchiShoTateEditor implements IGenmenKetteiTsuchiShoTa
         if (isNotNull(減免決定通知書情報.get減免の情報更正後())) {
             TsuchishoNo 通知書番号 = 減免決定通知書情報.get減免の情報更正後().get通知書番号();
             source.tsuchisjoNo = 通知書番号 != null ? 通知書番号.value() : RString.EMPTY;
-            SetaiCode 世帯コード = 減免決定通知書情報.get減免の情報更正後().get世帯コード();
+            SetaiCode 世帯コード = 減免決定通知書情報.get宛名().get世帯コード();
             source.setaiCode = 世帯コード != null ? 世帯コード.value() : RString.EMPTY;
             HihokenshaNo 被保険者番号 = 減免決定通知書情報.get減免の情報更正後().get被保険者番号();
             source.hihokenshaNo = 被保険者番号 != null ? 被保険者番号.value() : RString.EMPTY;

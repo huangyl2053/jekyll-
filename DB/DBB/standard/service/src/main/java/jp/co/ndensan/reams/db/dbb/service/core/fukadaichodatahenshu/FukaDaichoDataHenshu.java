@@ -392,8 +392,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.HALF_SPACE)
                 .concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)).
                 concat(RString.HALF_SPACE).concat(定値_作成));
-        編集後本算定賦課台帳情報.set世帯コード(賦課の情報_更正後.get賦課情報().get世帯コード() != null
-                ? 賦課の情報_更正後.get賦課情報().get世帯コード().getColumnValue() : RString.EMPTY);
+        編集後本算定賦課台帳情報.set世帯コード(賦課の情報_更正後.get宛名().get世帯コード() != null
+                ? 賦課の情報_更正後.get宛名().get世帯コード().getColumnValue() : RString.EMPTY);
         編集後本算定賦課台帳情報.setタイトル(定値_本算定タイトル);
         編集後本算定賦課台帳情報.set通知書NO(賦課の情報_更正後.get賦課情報().get通知書番号() != null
                 ? 賦課の情報_更正後.get賦課情報().get通知書番号().getColumnValue() : RString.EMPTY);
@@ -663,8 +663,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.HALF_SPACE)
                 .concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)).
                 concat(RString.HALF_SPACE).concat(定値_作成));
-        編集後仮算定賦課台帳情報.set世帯コード(賦課の情報_更正後.get賦課情報().get世帯コード() != null
-                ? 賦課の情報_更正後.get賦課情報().get世帯コード().getColumnValue() : RString.EMPTY);
+        編集後仮算定賦課台帳情報.set世帯コード(賦課の情報_更正後.get宛名().get世帯コード() != null
+                ? 賦課の情報_更正後.get宛名().get世帯コード().getColumnValue() : RString.EMPTY);
         編集後仮算定賦課台帳情報.setタイトル(定値_仮算定タイトル);
         編集後仮算定賦課台帳情報.set通知書NO(賦課の情報_更正後.get賦課情報().get通知書番号() != null
                 ? 賦課の情報_更正後.get賦課情報().get通知書番号().getColumnValue() : RString.EMPTY);

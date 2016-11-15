@@ -277,7 +277,7 @@ public class JimuGaikyouTokkiBusiness {
             if (件数 < 概況特記一覧表情報.size() && (index + (no / 件数) * 件数) < 概況特記一覧表情報.size()) {
                 return get項目(index + (no / 件数) * 件数);
             }
-            if (概況特記一覧表情報.size() < 件数 && index < 概況特記一覧表情報.size()) {
+            if (概況特記一覧表情報.size() <= 件数 && index < 概況特記一覧表情報.size()) {
                 return get項目(index);
             }
         }

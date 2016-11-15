@@ -68,7 +68,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_shinsaYM(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setDisabled(false);
-        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(true);
+        div.getShinseishoHakkoParameters().getBtniHokenSearch().setDisabled(true);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(true);
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
@@ -85,7 +85,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHihokenshaNo(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setDisabled(true);
-        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(false);
+        div.getShinseishoHakkoParameters().getBtniHokenSearch().setDisabled(false);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(false);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHakushiInsatsu().clearSelectedItem();
@@ -108,7 +108,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> btnOnClick_radHakushiInsatsu(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
         div.getShinseishoHakkoParameters().getTxtShinsaYM().setDisabled(true);
-        div.getShinseishoHakkoParameters().getBtnHihokenshaSearch().setDisabled(true);
+        div.getShinseishoHakkoParameters().getBtniHokenSearch().setDisabled(true);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(true);
         div.getShinseishoHakkoParameters().getRadShinsaYM().clearSelectedItem();
         div.getShinseishoHakkoParameters().getRadHihokenshaNo().clearSelectedItem();
