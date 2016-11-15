@@ -39,8 +39,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWariaiHanteiJohoEntity> {
 
+    private static final RString 一号被保険者 = new RString("1");
     private static final int NUM12 = 12;
-    private static final RString 根拠TABLENAME = new RString("RiyoshaFutanWariaiKonkyoTemp");
     private static final RString 根拠TABLENAME08 = new RString("RiyoshaFutanWariaiKonkyo08Temp");
     private static final RString 根拠TABLENAME09 = new RString("RiyoshaFutanWariaiKonkyo09Temp");
     private static final RString 根拠TABLENAME10 = new RString("RiyoshaFutanWariaiKonkyo10Temp");
@@ -53,7 +53,6 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     private static final RString 根拠TABLENAME05 = new RString("RiyoshaFutanWariaiKonkyo05Temp");
     private static final RString 根拠TABLENAME06 = new RString("RiyoshaFutanWariaiKonkyo06Temp");
     private static final RString 根拠TABLENAME07 = new RString("RiyoshaFutanWariaiKonkyo07Temp");
-
     private static final RString 明細TABLENAME08 = new RString("RiyoshaFutanWariaiMeisai08Temp");
     private static final RString 明細TABLENAME09 = new RString("RiyoshaFutanWariaiMeisai09Temp");
     private static final RString 明細TABLENAME10 = new RString("RiyoshaFutanWariaiMeisai10Temp");
@@ -66,7 +65,6 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     private static final RString 明細TABLENAME05 = new RString("RiyoshaFutanWariaiMeisai05Temp");
     private static final RString 明細TABLENAME06 = new RString("RiyoshaFutanWariaiMeisai06Temp");
     private static final RString 明細TABLENAME07 = new RString("RiyoshaFutanWariaiMeisai07Temp");
-
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select負担割合判定月次");
     private DBC180020ProcessParameter parameter;
@@ -81,6 +79,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     private RiyoshaFutanWariaiHantei service;
     private List<BatchEntityCreatedTempTableWriter> 明細Writers;
     private List<BatchEntityCreatedTempTableWriter> 根拠Writers;
+    private RString 被保険者区分コード;
 
     @Override
     protected void initialize() {
@@ -203,6 +202,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
 
     @Override
     protected void usualProcess(FutanWariaiHanteiJohoEntity entity) {
+        被保険者区分コード = entity.get判定対象者().getHihokenshaKubunCode();
         if (getBefore() == null) {
             entities.add(entity);
             return;
@@ -256,6 +256,9 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
             }
             if (所得管理 != null) {
                 insert根拠Temp.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getRirekiNo()));
+            }
+            if (!一号被保険者.equals(被保険者区分コード)) {
+                return;
             }
             根拠Writer.insert(insert根拠Temp);
             if (taishoTsuki.equals(util.getTsuki(parameter.getKijunbi()))) {
