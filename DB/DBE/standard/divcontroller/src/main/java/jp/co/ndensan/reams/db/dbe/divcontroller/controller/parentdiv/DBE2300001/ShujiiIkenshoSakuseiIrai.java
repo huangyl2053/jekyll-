@@ -917,7 +917,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private void toPrint(ReportManager reportManager) {
         RDate date = RDate.getNowDate();
         ShujiiIkenshoSakuseiIraiReportOutputService outputService = ShujiiIkenshoSakuseiIraiReportOutputService.createInstance();
-        IkenshokinyuyoshiPrintService printService = new IkenshokinyuyoshiPrintService();
+        IkenshokinyuyoshiPrintService printService = new IkenshokinyuyoshiPrintService(reportManager);
         if (!主治医意見書作成依頼情報ItemList.isEmpty()) {
             outputService.print主治医意見書作成依頼情報(主治医意見書作成依頼情報ItemList, reportManager);
         }
