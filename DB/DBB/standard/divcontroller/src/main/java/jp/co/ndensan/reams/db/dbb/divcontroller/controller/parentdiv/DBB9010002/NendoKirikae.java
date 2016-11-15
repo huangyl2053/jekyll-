@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB901002.DBB901002_NendoK
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9010002.NendoKirikaeDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9010002.NendoKirikaeHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 年度切替のクラスです
@@ -16,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  * @reamsid_L DBB-5722-010 zhengshenlei
  */
 public class NendoKirikae {
+
+    private static final RString BTN_実行する = new RString("btBatch");
 
     /**
      * 画面初期化です。
@@ -25,6 +29,7 @@ public class NendoKirikae {
      */
     public ResponseData<NendoKirikaeDiv> onload(NendoKirikaeDiv div) {
         getHandler(div).initialize();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_実行する, false);
         return ResponseData.of(div).respond();
     }
 
