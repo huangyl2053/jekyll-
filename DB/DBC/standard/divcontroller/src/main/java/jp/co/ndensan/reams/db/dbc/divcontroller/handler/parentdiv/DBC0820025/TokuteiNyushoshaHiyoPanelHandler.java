@@ -6,17 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820025;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.TokuteiNyushoshaHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.dgdTokuteiYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
@@ -29,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定入所者費用）のハンドラクラスです。
@@ -46,6 +46,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     private static final RString 登録 = new RString("登録");
     private static final int SIX = 6;
     private static final RString FORMAT = new RString("%02d");
+    private static final RString 確定する = new RString("btnKakutei");
 
     /**
      * コンストラクタです。
@@ -82,38 +83,30 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * ボタンを制御のメソッドます。
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
-     * @param meisaiPar 償還払費申請明細検索キー
+     * @param count 償還払費申請明細検索キー
      */
-    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
+    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
 
-        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
-        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
-        RString 整理番号 = meisaiPar.get整理番号();
-        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
-        RString 様式番号 = meisaiPar.get様式番号();
-        RString 明細番号 = meisaiPar.get明細番号();
-        set基本情報ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set給付費明細ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set特定診療費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        setサービス計画費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        set基本情報ボタン制御(shikibetsuNoKanri, count);
+        set給付費明細ボタン制御(shikibetsuNoKanri, count);
+        set特定診療費ボタン制御(shikibetsuNoKanri, count);
+        setサービス計画費ボタン制御(shikibetsuNoKanri, count);
         div.getPanelHead().getBtnTokuteiNyushosya().setDisabled(true);
         div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
-        set給付費明細_住特ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set緊急時_所定疾患ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set緊急時施設療養費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set食事費用ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set請求額集計ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set社福軽減額ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        set給付費明細_住特ボタン制御(shikibetsuNoKanri, count);
+        set緊急時_所定疾患ボタン制御(shikibetsuNoKanri, count);
+        set緊急時施設療養費ボタン制御(shikibetsuNoKanri, count);
+        set食事費用ボタン制御(shikibetsuNoKanri, count);
+        set請求額集計ボタン制御(shikibetsuNoKanri, count);
+        set社福軽減額ボタン制御(shikibetsuNoKanri, count);
     }
 
-    private void set基本情報ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set基本情報ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get基本設定区分())) {
-            int count1 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanKihonCount(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count1 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Complete);
@@ -123,14 +116,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void set給付費明細ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set給付費明細ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get明細設定区分())) {
-            int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count2 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Complete);
@@ -140,14 +131,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void setサービス計画費ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void setサービス計画費ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
-            int count4 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count4 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Complete);
@@ -157,14 +146,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void set特定診療費ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set特定診療費ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryouhi().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
-            int count3 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count3 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnTokuteiShinryouhi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnTokuteiShinryouhi().setIconNameEnum(IconName.Complete);
@@ -174,14 +161,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void set給付費明細_住特ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set給付費明細_住特ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get明細住所地特例設定区分())) {
-            int count6 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanMeisaiJushochiTokureiCount(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count6 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Complete);
@@ -191,14 +176,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void set緊急時_所定疾患ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set緊急時_所定疾患ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShoteiShikan().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分())) {
-            int count7 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShoteiShikkanShisetsuRyoyo(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count7 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Complete);
@@ -208,14 +191,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void set緊急時施設療養費ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set緊急時施設療養費ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get緊急時施設療養設定区分())) {
-            int count8 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanKinkyuShisetsuRyoyo(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count8 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setIconNameEnum(IconName.Complete);
@@ -225,14 +206,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void set食事費用ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set食事費用ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get食事費用設定区分())) {
-            int count9 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShokujiHiyo(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count9 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.Complete);
@@ -242,14 +221,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void set請求額集計ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set請求額集計ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get集計設定区分())) {
-            int count10 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShukei(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count10 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Complete);
@@ -259,14 +236,12 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void set社福軽減額ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+    private void set社福軽減額ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, int count) {
         if (設定不可.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
-            int count11 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count11 != 0) {
+
+            if (count != 0) {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Complete);
@@ -282,10 +257,23 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * @param list List<ShokanTokuteiNyushoshaKaigoServiceHiyo>
      */
     public void set特定入所者費用一覧グリッド(List<ShokanTokuteiNyushoshaKaigoServiceHiyo> list) {
+
+        if (list == null || list.isEmpty()) {
+            div.getPanelTokutei().getDgdTokuteiYichiran().setDataSource(Collections.EMPTY_LIST);
+        } else {
+            setグリッド(list);
+        }
+
+        set特定入所者費用一覧の合計エリア();
+    }
+
+    private void setグリッド(List<ShokanTokuteiNyushoshaKaigoServiceHiyo> list) {
         List<dgdTokuteiYichiran_Row> dataSource = new ArrayList<>();
+
         for (ShokanTokuteiNyushoshaKaigoServiceHiyo entity : list) {
             dgdTokuteiYichiran_Row row = new dgdTokuteiYichiran_Row();
             RStringBuilder builder = new RStringBuilder();
+
             if (entity.getサービス種類コード() != null) {
                 builder.append(entity.getサービス種類コード().value());
             }
@@ -302,8 +290,8 @@ public class TokuteiNyushoshaHiyoPanelHandler {
             row.setNumber(entity.get連番());
             dataSource.add(row);
         }
+
         div.getPanelTokutei().getDgdTokuteiYichiran().setDataSource(dataSource);
-        set特定入所者費用一覧の合計エリア();
     }
 
     /**
@@ -314,13 +302,17 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         Decimal 費用額合計 = Decimal.ZERO;
         Decimal 保険分請求額合計 = Decimal.ZERO;
         Decimal 利用者負担額合計 = Decimal.ZERO;
+
         for (dgdTokuteiYichiran_Row row : rowList) {
+
             if (!RowState.Deleted.equals(row.getRowState())) {
+
                 費用額合計 = 費用額合計(row, 費用額合計);
                 保険分請求額合計 = 保険分請求額合計(row, 保険分請求額合計);
                 利用者負担額合計 = 利用者負担額合計(row, 利用者負担額合計);
             }
         }
+
         div.getPanelTokutei().getTxtHiyogakuTotal().setValue(費用額合計);
         div.getPanelTokutei().getTxtHokenbunTotal().setValue(保険分請求額合計);
         div.getPanelTokutei().getTxtRiyoshaFutangakuTotal().setValue(利用者負担額合計);
@@ -536,14 +528,13 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     /**
-     * 「申請を保存する」ボタンのメソッドます。
+     * 「確定する」ボタンのメソッドます。
      *
      * @param meisaiPar 償還払費申請明細検索キー
-     * @param 処理モード RString
      * @param serviceHiyoList 償還払請求特定入所者介護サービス費用データ
+     * @return 更新いた償還払請求特定入所者介護サービス費用データのリスト
      */
-    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
-            RString 処理モード,
+    public List<ShokanTokuteiNyushoshaKaigoServiceHiyo> 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
             List<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyoList) {
 
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
@@ -552,27 +543,18 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
-        if (削除.equals(処理モード)) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else {
-            Map<RString, ShokanTokuteiNyushoshaKaigoServiceHiyo> map = new HashMap<>();
-            List<ShokanTokuteiNyushoshaKaigoServiceHiyo> 特定入所者費用List = new ArrayList<>();
-            int 連番 = 0;
-            for (ShokanTokuteiNyushoshaKaigoServiceHiyo entity : serviceHiyoList) {
-                map.put(entity.get連番(), entity);
-                if (連番 < Integer.valueOf(entity.get連番().toString())) {
-                    連番 = Integer.valueOf(entity.get連番().toString());
-                }
+        Map<RString, ShokanTokuteiNyushoshaKaigoServiceHiyo> map = new HashMap<>();
+        List<ShokanTokuteiNyushoshaKaigoServiceHiyo> 特定入所者費用List = new ArrayList<>();
+        int 連番 = 0;
+        for (ShokanTokuteiNyushoshaKaigoServiceHiyo entity : serviceHiyoList) {
+            map.put(entity.get連番(), entity);
+            if (連番 < Integer.valueOf(entity.get連番().toString())) {
+                連番 = Integer.valueOf(entity.get連番().toString());
             }
-            特定入所者費用List = save特定入所者費用(map, 特定入所者費用List, 被保険者番号, サービス年月, 事業者番号, 整理番号,
-                    様式番号, 明細番号, 連番);
-            int 合計 = div.getPanelTokutei().getTxtHiyogakuTotal().getValue().intValue();
-            ShokanKihonParameter parameter = ShokanKihonParameter.createSelectByKeyParam(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 合計);
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiNyushoshaKaigoServiceHiyo(
-                    parameter, 特定入所者費用List);
         }
+        return save特定入所者費用(map, 特定入所者費用List, 被保険者番号, サービス年月, 事業者番号, 整理番号,
+                様式番号, 明細番号, 連番);
+
     }
 
     private List<ShokanTokuteiNyushoshaKaigoServiceHiyo> save特定入所者費用(
@@ -586,15 +568,21 @@ public class TokuteiNyushoshaHiyoPanelHandler {
             RString 明細番号,
             int 連番) {
         for (dgdTokuteiYichiran_Row dgdRow : div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource()) {
+
             if (RowState.Modified.equals(dgdRow.getRowState())) {
                 ShokanTokuteiNyushoshaKaigoServiceHiyo entityModified = map.get(dgdRow.getNumber());
+                entityModified = entityModified.modifiedModel();
                 entityModified = buildShokanTokuteiNyushoshaKaigoServiceHiyo(entityModified, dgdRow);
                 特定入所者費用List.add(entityModified);
-            } else if (RowState.Deleted.equals(dgdRow.getRowState())) {
+            }
+
+            if (RowState.Deleted.equals(dgdRow.getRowState())) {
                 ShokanTokuteiNyushoshaKaigoServiceHiyo entityDeleted = map.get(dgdRow.getNumber());
                 entityDeleted = entityDeleted.deleted();
                 特定入所者費用List.add(entityDeleted);
-            } else if (RowState.Added.equals(dgdRow.getRowState())) {
+            }
+
+            if (RowState.Added.equals(dgdRow.getRowState())) {
                 連番 = 連番 + 1;
                 ShokanTokuteiNyushoshaKaigoServiceHiyo entityAdded = new ShokanTokuteiNyushoshaKaigoServiceHiyo(
                         被保険者番号,
@@ -731,6 +719,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * 削除モードの初期化のメソッドます。
      */
     public void set削除状態() {
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(確定する, true);
         div.getPanelTokutei().getBtnAdd().setDisabled(true);
         div.getPanelTokutei().getDgdTokuteiYichiran().setReadOnly(true);
     }
