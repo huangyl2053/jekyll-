@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.dbd5010001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5010001.ChosaDataMobileMybatisParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5010001.SelectSyuuShadeTaCsvEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5010001.ChosaDataMobileCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5010001.ChosaDataMobileEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.chosadatamobile.IChosaDataMobileMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -109,9 +109,9 @@ public class KoshinKanriManager {
         List<ChosaDataMobileEntity> 調査データ情報List = mapper.get調査データの取得(parameter);
 
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSV調査ファイル名);
-        try (CsvWriter<SelectSyuuShadeTaCsvEntity> csvdeTeWriter
+        try (CsvWriter<ChosaDataMobileCsvEntity> csvdeTeWriter
                 = new CsvWriter.InstanceBuilder(filePath)
-                        .alwaysWriteHeader(SelectSyuuShadeTaCsvEntity.class)
+                        .alwaysWriteHeader(ChosaDataMobileCsvEntity.class)
                         .canAppend(false)
                         .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
                         .setNewLine(NewLine.CRLF).hasHeader(true).build()) {
@@ -167,8 +167,8 @@ public class KoshinKanriManager {
      * @param sqlEntity SelectSyuuShadeTaEntity
      * @return SelectSyuuShadeTaEntity
      */
-    private SelectSyuuShadeTaCsvEntity setdetaEntity(ChosaDataMobileEntity sqlEntity) {
-        SelectSyuuShadeTaCsvEntity entity = new SelectSyuuShadeTaCsvEntity();
+    private ChosaDataMobileCsvEntity setdetaEntity(ChosaDataMobileEntity sqlEntity) {
+        ChosaDataMobileCsvEntity entity = new ChosaDataMobileCsvEntity();
         entity.set被保険者番号(sqlEntity.get被保険者番号());
         if (sqlEntity.get厚労省IF識別コード() != null && !sqlEntity.get厚労省IF識別コード().isEmpty()) {
             entity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(sqlEntity.get厚労省IF識別コード()).get名称());
@@ -213,7 +213,7 @@ public class KoshinKanriManager {
         setVoidEntity(entity, sqlEntity);
         return entity;
     }
-    private void setVoidEntity2(SelectSyuuShadeTaCsvEntity entity, ChosaDataMobileEntity sqlEntity) {
+    private void setVoidEntity2(ChosaDataMobileCsvEntity entity, ChosaDataMobileEntity sqlEntity) {
         if (sqlEntity.get認定調査実施場所コード() != null && !sqlEntity.get認定調査実施場所コード().isEmpty()) {
             entity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(sqlEntity.get認定調査実施場所コード()).get名称());
         }
@@ -251,7 +251,7 @@ public class KoshinKanriManager {
         }
     }
 
-    private void setVoidEntity(SelectSyuuShadeTaCsvEntity entity, ChosaDataMobileEntity sqlEntity) {
+    private void setVoidEntity(ChosaDataMobileCsvEntity entity, ChosaDataMobileEntity sqlEntity) {
         if (sqlEntity.get委託先の調査委託区分() != null && !sqlEntity.get委託先の調査委託区分().isEmpty()) {
             entity.set委託先の調査委託区分(ChosaItakuKubunCode.toValue(sqlEntity.get委託先の調査委託区分()).get名称());
         }

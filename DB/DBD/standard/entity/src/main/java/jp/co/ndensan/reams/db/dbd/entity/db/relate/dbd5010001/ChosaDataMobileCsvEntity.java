@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SelectSyuuShadeTaCsvEntity {
+public class ChosaDataMobileCsvEntity {
 
     @CsvField(order = 1, name = "申請書管理番号")
     private RString 申請書管理番号;
