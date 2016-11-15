@@ -407,33 +407,33 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
 
     private RString get前年度情報の最終普徴額(FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課Entity) {
         Decimal 前年度情報の最終普徴額 = Decimal.ZERO;
-        if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額01().compareTo(Decimal.ZERO)) {
+        if (普徴仮算定計算後賦課Entity.get普徴収入額01() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額01().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額01();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額02().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額02() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額02().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額02();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額03().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額03() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額03().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額03();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額04().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額04() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額04().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額04();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額05().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額05() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額05().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額05();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額06().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額06() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額06().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額06();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額07().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額07() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額07().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額07();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額08().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額08() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額08().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額08();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額09().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額09() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額09().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額09();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額10().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額10() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額10().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額10();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額11().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額11() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額11().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額11();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額12().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額12() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額12().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額12();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額13().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額13() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額13().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額13();
-        } else if (0 < 普徴仮算定計算後賦課Entity.get普徴収入額14().compareTo(Decimal.ZERO)) {
+        } else if (普徴仮算定計算後賦課Entity.get普徴収入額14() != null && 0 < 普徴仮算定計算後賦課Entity.get普徴収入額14().compareTo(Decimal.ZERO)) {
             前年度情報の最終普徴額 = 普徴仮算定計算後賦課Entity.get普徴収入額14();
         }
         return new RString(前年度情報の最終普徴額.toString());
