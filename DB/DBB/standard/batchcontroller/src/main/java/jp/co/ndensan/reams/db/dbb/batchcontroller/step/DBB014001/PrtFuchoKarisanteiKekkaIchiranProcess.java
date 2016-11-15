@@ -466,14 +466,14 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku13());
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku14());
         for (int i = 1; i <= 期; i++) {
-            boolean flag = true;
+            boolean flag = false;
             for (Kitsuki kitsuki : 期月リスト.get期の月(i)) {
                 int 月 = kitsuki.get月AsInt();
                 Decimal 月処理区分 = new Decimal(月処理区分list.get(月 - 1).toString());
                 Decimal 普徴期別金額 = 普徴期別金額list.get(i - 1) == null ? Decimal.ZERO : 普徴期別金額list.get(i - 1);
                 if (月処理区分.compareTo(月処理区分_5) <= 0
                         && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
-                    flag = false;
+                    flag = true;
                 }
             }
             if (flag) {
