@@ -30,7 +30,7 @@ public class ShinseishoTorokuValidationHandler {
     private static final RString 世帯員把握基準日 = new RString("世帯員把握基準日");
     private static final RString 平成27年度以降 = new RString("平成27年度以降");
     private static final RString 出力対象 = new RString("出力対象");
-    private static final RString 処理年度の範囲 = new RString("処理年度xx8月1日から処理年度aaa7月31日の範囲");
+    private static final RString 処理年度の範囲 = new RString("xx8月1日からaaa7月31日の範囲");
     private static final RString 引数_XX = new RString("xx");
     private static final RString 引数_AAA = new RString("aaa");
     private static final int INDEX_1 = 1;
@@ -83,7 +83,7 @@ public class ShinseishoTorokuValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(
                 new ShinseishoTorokuValidationMessages(
-                        UrErrorMessages.未入力, 出力対象.toString()), div.getChkIchiranhyoCsv()));
+                        UrErrorMessages.未入力, 出力対象.toString()), div.getChkIchiranhyoCsv(), div.getChkShinseisho(), div.getChkTsuchisho()));
         return validPairs;
     }
 
