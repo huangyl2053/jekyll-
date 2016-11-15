@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710020.DBD710020_HanyoListJukyushaDaicho2Parameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1300001.JukyushaDaichoPanelDiv;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -64,6 +65,13 @@ public class JukyushaDaichoPanelHandler {
         listCSV.add(連番付加);
         listCSV.add(日付_編集);
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(listCSV);
+        div.getCcdAtenaJoken().initialize();
+        div.getCcdAtenaJoken().set保険者();
+        div.getCcdAtenaJoken().set地区(Chiku.全て.getコード());
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdGyoseikuFrom().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdJushoFrom().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdJushoTo().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdHokenshaList().setDisplayNone(false);
     }
 
     /**

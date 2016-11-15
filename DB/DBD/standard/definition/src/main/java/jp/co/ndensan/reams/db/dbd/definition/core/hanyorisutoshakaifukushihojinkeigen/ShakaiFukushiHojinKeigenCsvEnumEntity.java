@@ -154,7 +154,7 @@ public enum ShakaiFukushiHojinKeigenCsvEnumEntity {
     /**
      * コード:360 名称:get前住所番地方書 略称:定義なし
      */
-    get前住所番地方書("360", "get前住所番地方書"),
+    get前住所番地方書("360", "get前住＋所番地＋方書"),
     /**
      * コード:370 名称:get前住所 略称:定義なし
      */
@@ -206,7 +206,7 @@ public enum ShakaiFukushiHojinKeigenCsvEnumEntity {
     /**
      * コード:490 名称:get送付先住所番地方書 略称:定義なし
      */
-    get送付先住所番地方書("490", "get送付先住所番地方書"),
+    get送付先住所番地方書("490", "get送付先住所＋番地＋方書"),
     /**
      * コード:500 名称:get送付先住所 略称:定義なし
      */

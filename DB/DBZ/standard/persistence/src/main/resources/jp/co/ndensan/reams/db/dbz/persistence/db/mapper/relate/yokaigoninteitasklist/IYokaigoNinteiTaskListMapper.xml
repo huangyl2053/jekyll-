@@ -989,7 +989,7 @@
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            LEFT  JOIN  rgdb."DbT5116IchijiHanteiKekkaJoho" DbT5116
+            INNER  JOIN  rgdb."DbT5116IchijiHanteiKekkaJoho" DbT5116
                 ON  DbT5116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         WHERE
                 DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL

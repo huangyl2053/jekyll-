@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,6 +26,23 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
                     return div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate() != null;
+                }
+            },
+    調査実施日の妥当性チェック {
+                /**
+                 * 調査実施日の妥当性チェックです。
+                 *
+                 * @param div SaiketukekaTorokuPanelDiv
+                 * @return true:調査実施日が妥当です、false:調査実施日が妥当でないです。
+                 */
+                @Override
+                public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
+                    FlexibleDate 調査実施日 = new FlexibleDate(div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getText());
+                    if (div.getCcdChosaJisshishaJoho().getTxtNinteiShinseiDate().getValue().isBeforeOrEquals(調査実施日)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             },
     実施場所の非空チェック {

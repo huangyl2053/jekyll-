@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomo
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_22;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_23;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_24;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_25;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_1;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_10;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_11;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomo
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_29;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_3;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_30;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_31;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_4;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_5;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku06A_6;
@@ -63,6 +65,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomo
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_3;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_30;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_31;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_32;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_4;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_5;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09A_6;
@@ -82,6 +85,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomo
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_2;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_20;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_21;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_22;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_24;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_25;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_26;
@@ -91,6 +95,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomo
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_3;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_30;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_31;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_32;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_4;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_5;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_6;
@@ -101,6 +106,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomo
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_18;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_19;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_20;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_21;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoServiceJyokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
@@ -175,6 +181,11 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private static final int データベース内連番_18 = 18;
     private static final int データベース内連番_19 = 19;
     private static final int データベース内連番_20 = 20;
+    private static final int 第二群開始連番 = 21;
+    private static final int 第三群開始連番 = 33;
+    private static final int 第四群開始連番 = 42;
+    private static final int 第五群開始連番 = 57;
+    private static final int 自立度群開始連番 = 75;
     private static final int データベース内連番_63 = 63;
     private static final int データベース内連番_64 = 64;
     private static final int データベース内連番_65 = 65;
@@ -187,6 +198,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private static final int データベース内連番_72 = 72;
     private static final int データベース内連番_73 = 73;
     private static final int データベース内連番_74 = 74;
+    private static final int データベース内連番_76 = 76;
     private static final RString 第1群の連番_有無 = new RString(",1,2,3,4,5,6,7,8,9,");
     private static final RString 第1群の連番 = new RString(",10,11,12,13,14,15,16,17,18,19,20,");
     private static final RString 第2群の連番 = new RString(",21,22,23,24,25,26,27,28,29,30,31,32,");
@@ -200,6 +212,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private static final RString 認定調査前回結果表示 = new RString("1");
     private static final RString 基本調査入力OK = new RString("1");
     private static final RString 基本調査入力NG = new RString("0");
+    private static final RString KEY1 = new RString("第1群");
+    private static final RString KEY2 = new RString("第2群");
+    private static final RString KEY3 = new RString("第3群");
+    private static final RString KEY4 = new RString("第4群");
+    private static final RString KEY5 = new RString("第5群");
+    private static final RString KEY6 = new RString("特別な医療群");
+    private static final RString KEY7 = new RString("自立度群");
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
@@ -505,11 +524,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<dgRiyoShisetsu_Row> riyoShisetsuList = new ArrayList<>();
 
         if (厚労省IF識別コード_99A.equals(temp_厚労省IF識別コード)) {
+            riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_21.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_17.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_18.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_19.介護療養型医療施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_20.介護保険施設外の施設.get名称()));
         } else if (厚労省IF識別コード_02A.equals(temp_厚労省IF識別コード)) {
+            riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_25.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_17.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_18.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_19.介護療養型医療施設.get名称()));
@@ -519,6 +540,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_23.医療機関_療養以外.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_24.その他の施設.get名称()));
         } else if (厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)) {
+            riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_31.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_23.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_24.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_25.介護療養型医療施設.get名称()));
@@ -528,6 +550,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_29.医療機関_療養病床以外.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_30.その他の施設.get名称()));
         } else if (厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード)) {
+            riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_32.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_24.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_25.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_26.介護療養型医療施設.get名称()));
@@ -537,6 +560,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_30.医療機関_療養病床以外.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_31.その他の施設.get名称()));
         } else if (厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
+            riyoShisetsuList.add(施設データ(GaikyochosaKomoku09B_32.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09B_24.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09B_25.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09B_26.介護療養型医療施設.get名称()));
@@ -578,17 +602,19 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         List<NinteichosahyoServiceJokyo> johoList = manager.get認定調査票_概況調査_サービスの状況By連番List(申請書管理番号, 認定調査履歴番号, 連番);
         NinteichosahyoServiceJokyo joho;
-        int index = 0;
 
         if (halfList != null && !halfList.isEmpty()) {
             予防給付状況 = RString.EMPTY;
             for (dgRiyoServiceJyokyo_Row row : halfList) {
-                joho = johoList.get(index++);
+                joho = johoList.isEmpty() ? null : johoList.get(0);
                 if (joho != null) {
                     row.getServiceJokyo().setValue(new Decimal(joho.getサービスの状況()));
                     予防給付状況 = 予防給付状況.concat(new RString(Integer.valueOf(joho.getサービスの状況()).toString())).concat(カンマ);
                 } else {
                     予防給付状況 = 予防給付状況.concat(カンマ);
+                }
+                if (!johoList.isEmpty()) {
+                    johoList.remove(0);
                 }
             }
         }
@@ -622,12 +648,15 @@ public class NinnteiChousaKekkaTouroku1Handler {
         if (halfList != null && !halfList.isEmpty()) {
             介護給付状況 = RString.EMPTY;
             for (dgRiyoServiceJyokyo_Row row : halfList) {
-                joho = johoList.get(index++);
+                joho = johoList.isEmpty() ? null : johoList.get(0); 
                 if (joho != null) {
                     row.getServiceJokyo().setValue(new Decimal(joho.getサービスの状況()));
                     介護給付状況 = 介護給付状況.concat(new RString(Integer.valueOf(joho.getサービスの状況()).toString())).concat(カンマ);
                 } else {
                     介護給付状況 = 介護給付状況.concat(カンマ);
+                }
+                if (!johoList.isEmpty()) {
+                    johoList.remove(0);
                 }
             }
         }
@@ -661,12 +690,15 @@ public class NinnteiChousaKekkaTouroku1Handler {
         if (shisetsuList != null && !shisetsuList.isEmpty()) {
             施設利用 = RString.EMPTY;
             for (dgRiyoShisetsu_Row row : shisetsuList) {
-                joho = johoList.get(index++);
+                joho = johoList.isEmpty() ? null : johoList.get(0); 
                 if (joho != null && joho.is施設利用フラグ()) {
                     row.setShisetsuRiyoUmu(Boolean.TRUE);
                     施設利用 = 施設利用.concat(new RString(Boolean.TRUE.toString())).concat(カンマ);
                 } else {
                     施設利用 = 施設利用.concat(new RString(Boolean.FALSE.toString())).concat(カンマ);
+                }
+                if (!johoList.isEmpty()) {
+                    johoList.remove(0);
                 }
             }
         }
@@ -809,6 +841,58 @@ public class NinnteiChousaKekkaTouroku1Handler {
         div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo().clearValue();
         div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho().setDomain(new AtenaJusho(RString.EMPTY));
         div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().setDomain(new TelNo(RString.EMPTY));
+    }
+
+    public Map<RString, ArrayList<KihonChosaInput>> 規定値設定の前処理(Map<RString, ArrayList<KihonChosaInput>> map) {
+        ArrayList<KihonChosaInput> 第1群List = map.get(KEY1);
+        第1群List.clear();
+        ArrayList<KihonChosaInput> 第2群List = map.get(KEY2);
+        第2群List.clear();
+        ArrayList<KihonChosaInput> 第3群List = map.get(KEY3);
+        第3群List.clear();
+        ArrayList<KihonChosaInput> 第4群List = map.get(KEY4);
+        第4群List.clear();
+        ArrayList<KihonChosaInput> 第5群List = map.get(KEY5);
+        第5群List.clear();
+        ArrayList<KihonChosaInput> 特別な医療List = map.get(KEY6);
+        特別な医療List.clear();
+        ArrayList<KihonChosaInput> 自立度List = map.get(KEY7);
+        自立度List.clear();
+
+        for (int i = データベース内連番_1; i < データベース内連番_76 + 1; i++) {
+            if (i < 第二群開始連番) {
+                第1群List.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
+                        i, 調査項目_ない, new Code(), new Code(), i, RString.EMPTY));
+            } else if (i < 第三群開始連番) {
+                第2群List.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
+                        i, 調査項目_ない, new Code(), new Code(), i, RString.EMPTY));
+            } else if (i < 第四群開始連番) {
+                第3群List.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
+                        i, 調査項目_ない, new Code(), new Code(), i, RString.EMPTY));
+            } else if (i < 第五群開始連番) {
+                第4群List.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
+                        i, 調査項目_ない, new Code(), new Code(), i, RString.EMPTY));
+            } else if (i < データベース内連番_63) {
+                第5群List.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
+                        i, 調査項目_ない, new Code(), new Code(), i, RString.EMPTY));
+            } else if (i < 自立度群開始連番) {
+                特別な医療List.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
+                        i, 調査項目_ない, new Code(), new Code(), i, RString.EMPTY));
+            } else {
+                自立度List.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
+                        i, 調査項目_ない, new Code(), new Code(), i, RString.EMPTY));
+            }
+        }
+
+        map.put(KEY1, 第1群List);
+        map.put(KEY2, 第2群List);
+        map.put(KEY3, 第3群List);
+        map.put(KEY4, 第4群List);
+        map.put(KEY5, 第5群List);
+        map.put(KEY6, 特別な医療List);
+        map.put(KEY7, 自立度List);
+
+        return map;
     }
 
     /**
@@ -1082,6 +1166,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         if (厚労省IF識別コード_02A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)
                 || 厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
+            連番List.add(データベース内連番_1);
             連番List.add(データベース内連番_2);
             連番List.add(データベース内連番_3);
             連番List.add(データベース内連番_4);
@@ -1091,6 +1176,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             連番List.add(データベース内連番_8);
             連番List.add(データベース内連番_9);
         } else if (厚労省IF識別コード_99A.equals(temp_厚労省IF識別コード)) {
+            連番List.add(データベース内連番_1);
             連番List.add(データベース内連番_2);
             連番List.add(データベース内連番_3);
             連番List.add(データベース内連番_4);
@@ -1465,7 +1551,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ArrayList<KihonChosaInput> 規定値基本調査群 = new ArrayList<>();
         for (KihonChosaInput 基本情報 : 基本調査群) {
             KihonChosaInput 規定値基本情報 = new KihonChosaInput(基本情報.get申請書管理番号(),
-                    基本情報.get認定調査依頼履歴番号(), new Code(NinchishoNichijoSeikatsuJiritsudoCode.自立.getコード()), 
+                    基本情報.get認定調査依頼履歴番号(), new Code(NinchishoNichijoSeikatsuJiritsudoCode.自立.getコード()),
                     new Code(ShogaiNichijoSeikatsuJiritsudoCode.自立.getコード()), 基本情報.get調査連番(), 項目値１,
                     基本情報.get前回認知症高齢者自立度(), 基本情報.get前回障害高齢者自立度(), 基本情報.get前回調査連番(), 基本情報.get前回調査項目());
             規定値基本調査群.add(規定値基本情報);

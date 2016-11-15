@@ -154,7 +154,7 @@ public class KoshinTaishoFinder {
         IKoshinTaishoMapper mapper = mapperProvider.create(IKoshinTaishoMapper.class);
         DbT4101NinteiShinseiJohoEntity 認定申請情報 = mapper.get要介護認定申請情報の取得(shinseishoKanriNo);
         if (認定申請情報 != null) {
-            認定申請情報.setNinteiShinseiShinseijiKubunCode(new Code(NinteiShinseiShinseijiKubunCode.更新申請.getコード()));
+//            認定申請情報.setNinteiShinseiShinseijiKubunCode(new Code(NinteiShinseiShinseijiKubunCode.更新申請.getコード()));
             認定申請情報.setKoshinTsuchiHakkoKanryoYMD(FlexibleDate.getNowDate());
             KoshinTaishoManager manger = KoshinTaishoManager.createInstance();
             manger.updateDbt4101johon(認定申請情報);
