@@ -143,7 +143,7 @@ public class KyotakuServiceRiyohyoMainHandler {
         } else {
             div.getTodokedesha().getTxtTodokedeshaShimeiKana().setDomain(居宅給付計画届出.get届出者氏名カナ());
         }
-        if (居宅給付計画届出.get届出者関係区分() == null) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出者関係区分())) {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().clearValue();
         } else {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(
