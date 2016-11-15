@@ -119,7 +119,7 @@ public class ChikuShichosonSelectHandler {
                 div.getKoikiShichoson().setDisplayNone(true);
                 set選択対象DDL(適用基準日);
             }
-            if (コード_事務広域.equals(導入形態コード.value()) || コード_事務構成市町村.equals(導入形態コード.value())) {
+            if (コード_事務広域.equals(導入形態コード.value())) {
                 div.getTanitsuShichoson().setDisplayNone(true);
                 div.getKoikiShichoson().setDisplayNone(false);
                 div.getDdlKyushichosonKoiki().setDisplayNone(true);
