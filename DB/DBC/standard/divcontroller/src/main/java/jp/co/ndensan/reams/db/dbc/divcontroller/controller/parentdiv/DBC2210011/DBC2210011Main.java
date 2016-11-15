@@ -229,8 +229,9 @@ public class DBC2210011Main {
             List<TokubetsuKyufuJigyoshaSearchBusiness> サービス事業者情報
                     = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者List, ArrayList.class);
             TokubetsuKyufuJigyoshaSearchBusiness 削除情報 = getHandler(div).get情報と状態BySelectDataSouce(サービス事業者情報);
-            削除情報.get市町村特別給付サービス事業者().get事業者().setState(EntityDataState.Deleted);
             削除情報.createBuilderForEdit().set論理削除フラグ(true);
+            削除情報.get市町村特別給付サービス事業者().get事業者().setState(EntityDataState.Modified);
+
             ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者List, new ArrayList(サービス事業者情報));
         }
         return ResponseData.of(div).respond();
@@ -431,7 +432,8 @@ public class DBC2210011Main {
     private void set情報削除Model(DBC2210011MainDiv div, List<TokubetsuKyufuJigyoshaSearchBusiness> サービス事業者情報) {
         if (削除モード.equals(div.getHiddenModelOne())) {
             for (TokubetsuKyufuJigyoshaSearchBusiness 事業者とサービス : サービス事業者情報) {
-                事業者とサービス.get市町村特別給付サービス事業者().get事業者().setState(EntityDataState.Deleted);
+                事業者とサービス.get市町村特別給付サービス事業者().get事業者().setLogicalDeletedFlag(true);
+                事業者とサービス.get市町村特別給付サービス事業者().get事業者().setState(EntityDataState.Modified);
             }
         }
     }

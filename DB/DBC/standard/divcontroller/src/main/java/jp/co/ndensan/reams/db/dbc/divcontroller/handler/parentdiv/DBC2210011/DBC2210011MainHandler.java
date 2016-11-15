@@ -878,7 +878,6 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtRenban().setReadOnly(flag);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getTxtCheckDigit().setReadOnly(flag);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getBtnSetCheckDigit().setDisabled(flag);
-
     }
 
     private void set事業者情報(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
@@ -932,22 +931,22 @@ public class DBC2210011MainHandler {
             newRow.setHdnServiceCode(情報.get市町村特別給付用サービスコード().value());
             newRow.setTxtService(情報.get市町村特別給付サービス事業者().getサービス().getServiceRyakushoName());
             newRow.setTxtKanrisha(情報.get事業所管理者氏名());
-            if (情報.getサービス事業所事業開始年月日() != null && !事業者情報.getサービス事業所事業開始年月日().toString().isEmpty()) {
+            if (情報.getサービス事業所事業開始年月日() != null && !情報.getサービス事業所事業開始年月日().toString().isEmpty()) {
                 newRow.getTxtJigyoKaishiYMD().setValue(new RDate(情報.getサービス事業所事業開始年月日().wareki().toDateString().toString()));
             }
-            if (情報.getサービス事業所事業休止年月日() != null && !事業者情報.getサービス事業所事業休止年月日().toString().isEmpty()) {
+            if (情報.getサービス事業所事業休止年月日() != null && !情報.getサービス事業所事業休止年月日().toString().isEmpty()) {
                 newRow.getTxtJigyoKyushiYMD().setValue(new RDate(情報.getサービス事業所事業休止年月日().wareki().toDateString().toString()));
             }
-            if (情報.getサービス事業所事業廃止年月日() != null && !事業者情報.getサービス事業所事業廃止年月日().toString().isEmpty()) {
+            if (情報.getサービス事業所事業廃止年月日() != null && !情報.getサービス事業所事業廃止年月日().toString().isEmpty()) {
                 newRow.getTxtJigyoHaishiYMD().setValue(new RDate(情報.getサービス事業所事業廃止年月日().wareki().toDateString().toString()));
             }
-            if (情報.getサービス事業所事業再開年月日() != null && !事業者情報.getサービス事業所事業再開年月日().toString().isEmpty()) {
+            if (情報.getサービス事業所事業再開年月日() != null && !情報.getサービス事業所事業再開年月日().toString().isEmpty()) {
                 newRow.getTxtJigyoSaikaiYMD().setValue(new RDate(情報.getサービス事業所事業再開年月日().wareki().toDateString().toString()));
             }
-            if (情報.get市町村特別給付登録開始年月日() != null && !事業者情報.get市町村特別給付登録開始年月日().toString().isEmpty()) {
+            if (情報.get市町村特別給付登録開始年月日() != null && !情報.get市町村特別給付登録開始年月日().toString().isEmpty()) {
                 newRow.getTxtTorokuKaishiYMD().setValue(new RDate(情報.get市町村特別給付登録開始年月日().wareki().toDateString().toString()));
             }
-            if (情報.get市町村特別給付登録終了年月日() != null && !事業者情報.get市町村特別給付登録終了年月日().toString().isEmpty()) {
+            if (情報.get市町村特別給付登録終了年月日() != null && !情報.get市町村特別給付登録終了年月日().toString().isEmpty()) {
                 newRow.getTxtTorokuShuryoYMD().setValue(new RDate(情報.get市町村特別給付登録終了年月日().wareki().toDateString().toString()));
             }
             newRow.setTxtJuryoInin(TokubetsukyufuJuryoIninKubun.toValue(情報.get受領委任区分()).get名称());
@@ -980,10 +979,6 @@ public class DBC2210011MainHandler {
         }
         div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaName()
                 .setValue(事業者情報.get事業所管理者氏名());
-        if (事業者情報.get事業所管理者氏名カナ() != null && !事業者情報.get事業所管理者氏名カナ().isEmpty()) {
-            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaNameKana()
-                    .setValue(事業者情報.get事業所管理者氏名カナ());
-        }
         setサービス情報Detail(事業者情報);
         if (事業者情報.getサービス事業所事業開始年月日() != null && !事業者情報.getサービス事業所事業開始年月日().toString().isEmpty()) {
             div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailJigyosha().getTxtJigyoKaishiYMD()
@@ -1117,7 +1112,10 @@ public class DBC2210011MainHandler {
     }
 
     private void setサービス情報Detail(TokubetsuKyufuJigyoshaSearchBusiness 事業者情報) {
-
+        if (事業者情報.get事業所管理者氏名カナ() != null && !事業者情報.get事業所管理者氏名カナ().isEmpty()) {
+            div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaNameKana()
+                    .setValue(事業者情報.get事業所管理者氏名カナ());
+        }
         if (事業者情報.get事業所管理者郵便番号() != null && !事業者情報.get事業所管理者郵便番号().isEmpty()) {
             div.getTokubetsuKyufuJigyoshaDetailServiceInfo().getTokubetsuKyufuJigyoshaDetailKanrisha().getTxtKanrishaYubinNo()
                     .setValue(事業者情報.get事業所管理者郵便番号());
