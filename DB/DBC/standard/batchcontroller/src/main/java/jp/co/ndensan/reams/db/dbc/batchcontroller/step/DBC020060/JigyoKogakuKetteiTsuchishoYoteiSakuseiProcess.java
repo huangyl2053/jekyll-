@@ -194,7 +194,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         帳票ID = DbBusinessConfig.get(ConfigNameDBC.事業高額決定通知書_帳票ID,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
-        ChohyoSeigyoHanyo キー_支払方法抽出区分 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100007_支給.getReportId(),
+        ChohyoSeigyoHanyo キー_支払方法抽出区分 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100007.getReportId(),
                 FlexibleYear.MIN, 帳票制御汎用キー_支払方法抽出区分);
         ChohyoSeigyoHanyo キー_帳票タイプ = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, 帳票分類ID,
                 FlexibleYear.MIN, 帳票制御汎用キー_帳票タイプ);
