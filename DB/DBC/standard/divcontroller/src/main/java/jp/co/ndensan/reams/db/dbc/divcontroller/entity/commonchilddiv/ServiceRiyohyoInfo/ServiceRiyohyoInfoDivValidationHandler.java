@@ -119,11 +119,10 @@ public class ServiceRiyohyoInfoDivValidationHandler {
         return createvalidateサービス単位必須Dictionary().check(message);
     }
 
-    private ValidationDictionary createvalidateサービス種類必須Dictionary() {
-        return new ValidationDictionaryBuilder()
-                .add(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目).build();
-    }
-
+//    private ValidationDictionary createvalidateサービス種類必須Dictionary() {
+//        return new ValidationDictionaryBuilder()
+//                .add(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目).build();
+//    }
     /**
      * サービス単位必須のチェックです。
      *
