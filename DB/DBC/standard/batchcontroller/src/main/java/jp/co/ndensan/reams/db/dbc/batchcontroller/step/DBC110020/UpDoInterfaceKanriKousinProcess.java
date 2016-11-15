@@ -17,13 +17,13 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
  */
 public class UpDoInterfaceKanriKousinProcess extends SimpleBatchProcessBase {
 
-    private JukyushaIdoRenrakuhyoOutProcessParameter parameter;
+    private JukyushaIdoRenrakuhyoOutProcessParameter processParameter;
 
     @Override
     protected void process() {
         UpDoInterfaceKanriKousinManager 国保連インタフェース管理更新Manager
                 = UpDoInterfaceKanriKousinManager.createInstance();
-        国保連インタフェース管理更新Manager.updateInterfaceKanriTbl(parameter.get処理年月(), parameter.get再処理区分(),
-                YMDHMS.now(), parameter.get異動連絡票件数());
+        国保連インタフェース管理更新Manager.updateInterfaceKanriTbl(processParameter.get処理年月(), processParameter.get再処理区分(),
+                YMDHMS.now(), processParameter.get異動連絡票件数());
     }
 }

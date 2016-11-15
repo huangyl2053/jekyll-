@@ -7,11 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -99,30 +97,6 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilder {
     public ShichosonTokubetsuKyufuJigyoshaBuilder set介護国保連ＩＦ異動年月日(FlexibleDate 介護国保連ＩＦ異動年月日) {
         requireNonNull(介護国保連ＩＦ異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護国保連ＩＦ異動年月日"));
         entity.setIdoYMD(介護国保連ＩＦ異動年月日);
-        return this;
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正区分を設定します。
-     *
-     * @param 介護国保連ＩＦ訂正区分 介護国保連ＩＦ訂正区分
-     * @return {@link ShichosonTokubetsuKyufuJigyoshaBuilder}
-     */
-    public ShichosonTokubetsuKyufuJigyoshaBuilder set介護国保連ＩＦ訂正区分(RString 介護国保連ＩＦ訂正区分) {
-        requireNonNull(介護国保連ＩＦ訂正区分, UrSystemErrorMessages.値がnull.getReplacedMessage("介護国保連ＩＦ訂正区分"));
-        entity.setTeiseiKubun(介護国保連ＩＦ訂正区分);
-        return this;
-    }
-
-    /**
-     * 介護国保連ＩＦ訂正年月日を設定します。
-     *
-     * @param 介護国保連ＩＦ訂正年月日 介護国保連ＩＦ訂正年月日
-     * @return {@link ShichosonTokubetsuKyufuJigyoshaBuilder}
-     */
-    public ShichosonTokubetsuKyufuJigyoshaBuilder set介護国保連ＩＦ訂正年月日(FlexibleDate 介護国保連ＩＦ訂正年月日) {
-        requireNonNull(介護国保連ＩＦ訂正年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護国保連ＩＦ訂正年月日"));
-        entity.setTeiseiYMD(介護国保連ＩＦ訂正年月日);
         return this;
     }
 
@@ -487,18 +461,6 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilder {
     }
 
     /**
-     * 介護保険証記載保険者番号を設定します。
-     *
-     * @param 介護保険証記載保険者番号 介護保険証記載保険者番号
-     * @return {@link ShichosonTokubetsuKyufuJigyoshaBuilder}
-     */
-    public ShichosonTokubetsuKyufuJigyoshaBuilder set介護保険証記載保険者番号(HokenshaNo 介護保険証記載保険者番号) {
-        requireNonNull(介護保険証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険証記載保険者番号"));
-        entity.setShokisaiHokenshaNo(介護保険証記載保険者番号);
-        return this;
-    }
-
-    /**
      * 受領委任区分を設定します。
      *
      * @param 受領委任区分 受領委任区分
@@ -543,30 +505,6 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilder {
     public ShichosonTokubetsuKyufuJigyoshaBuilder set生活保護法による指定の有(boolean 生活保護法による指定の有) {
         requireNonNull(生活保護法による指定の有, UrSystemErrorMessages.値がnull.getReplacedMessage("生活保護法による指定の有"));
         entity.setSeikatsuhogoShiteiFlag(生活保護法による指定の有);
-        return this;
-    }
-
-    /**
-     * 市町村コードを設定します。
-     *
-     * @param 市町村コード 市町村コード
-     * @return {@link ShichosonTokubetsuKyufuJigyoshaBuilder}
-     */
-    public ShichosonTokubetsuKyufuJigyoshaBuilder set市町村コード(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        entity.setShichosonCode(市町村コード);
-        return this;
-    }
-
-    /**
-     * 地域区分を設定します。
-     *
-     * @param 地域区分 地域区分
-     * @return {@link ShichosonTokubetsuKyufuJigyoshaBuilder}
-     */
-    public ShichosonTokubetsuKyufuJigyoshaBuilder set地域区分(RString 地域区分) {
-        requireNonNull(地域区分, UrSystemErrorMessages.値がnull.getReplacedMessage("地域区分"));
-        entity.setChiikiKubun(地域区分);
         return this;
     }
 

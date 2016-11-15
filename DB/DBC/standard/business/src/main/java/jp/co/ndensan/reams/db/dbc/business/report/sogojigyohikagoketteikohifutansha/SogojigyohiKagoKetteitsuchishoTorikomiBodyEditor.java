@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteikohifuta
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagoketteikohifutansha.SogoKohifutanshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikagoketteikohifutansha.SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -29,6 +31,8 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiBodyEditor implements ISogoji
     private static final RString 単位数タイトル = new RString("単位数");
     private static final RString 負担額タイトル = new RString("公費負担額");
     private static final RString 総合事業費タイトル = new RString("総合事業費");
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -76,6 +80,7 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiBodyEditor implements ISogoji
         source.listLower_3 = getColumnValue(帳票出力対象データ.get過誤申立事由コード());
         source.listLower_4 = 帳票出力対象データ.get過誤申立事由();
         source.listLower_5 = decimalFormatter(帳票出力対象データ.get保険者負担額(), 0);
+        source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listLower_2);
     }
 
     /**

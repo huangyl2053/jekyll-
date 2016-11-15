@@ -205,6 +205,27 @@ public class SetaiinFinder {
     }
 
     /**
+     * 指定した識別コードに合致する世帯員リストを返します。
+     *
+     * @param 識別コード 識別コード
+     * @param 基準年月日 基準年月日
+     * @return 世帯員識別コードリスト
+     */
+    @Transaction
+    public IKojins get世帯員リスト(ShikibetsuCode 識別コード, FlexibleDate 基準年月日) {
+        requireNonNull(識別コード, UrErrorMessages.検索キーの誤り.getMessage().toString());
+        requireNonNull(基準年月日, UrErrorMessages.検索キーの誤り.getMessage().toString());
+
+        ISetaiFinder 世帯Finder = ShikibetsuTaishoService.getSetaiFinder();
+        ISetai 世帯 = 世帯Finder.findBy識別コード住民のみ(GyomuCode.DB介護保険, 識別コード, 基準年月日);
+        if (世帯 == null) {
+            return null;
+        } else {
+            return 世帯.get世帯員リスト();
+        }
+    }
+
+    /**
      * 指定した識別コードリストに合致する世帯員の宛名情報（住登外優先）リストを返します。
      *
      * @param 世帯員識別コードリスト 世帯員識別コードリスト

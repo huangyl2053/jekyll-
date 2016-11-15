@@ -82,10 +82,9 @@ public class GetChukibetuRankJohoProcess extends BatchProcessBase<DbT1001Hihoken
                 get月別ランク情報(new HihokenshaDaicho(entity));
                 rankuEntity.setHihokenshaNo(entity.getHihokenshaNo());
                 set月別ランク(rankuEntity, 月別ランク情報リスト);
-
+                月別ランクTemp一時tableWriter.insert(rankuEntity);
             }
         }
-        月別ランクTemp一時tableWriter.insert(rankuEntity);
     }
 
     private void get月別ランク情報(HihokenshaDaicho 資格の情報) {

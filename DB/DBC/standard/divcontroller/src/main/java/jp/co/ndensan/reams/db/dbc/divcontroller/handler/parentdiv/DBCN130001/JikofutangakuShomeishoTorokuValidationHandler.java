@@ -96,26 +96,12 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
         if (shichosonSecurityJoho != null) {
             DonyuKeitaiCode 導入形態コード = shichosonSecurityJoho.get導入形態コード();
             RString 証記載保険者番号 = div.getTxtShinkiTuikaShokisaiHokenshaNo().getValue();
-            if (DonyuKeitaiCode.事務単一.equals(導入形態コード)) {
-
-                if (!証記載保険者番号.equals(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value())) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(
-                            UrErrorMessages.入力値が不正_追加メッセージあり, "妥当な証記載保険者番号ではありません。"),
-                            div.getTxtShinkiTuikaShokisaiHokenshaNo()));
-                }
+            if (DonyuKeitaiCode.事務単一.equals(導入形態コード) && !証記載保険者番号.equals(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value())) {
+                validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(
+                        UrErrorMessages.入力値が不正_追加メッセージあり, "妥当な証記載保険者番号ではありません。"),
+                        div.getTxtShinkiTuikaShokisaiHokenshaNo()));
             } else if (DonyuKeitaiCode.事務広域.equals(導入形態コード) || DonyuKeitaiCode.事務構成市町村.equals(導入形態コード)) {
-                List<KoseiShichoson> list = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
-                boolean is存在 = false;
-                for (KoseiShichoson koseiShichoson : list) {
-                    if (証記載保険者番号.equals(koseiShichoson.get証記載保険者番号().value())) {
-                        is存在 = true;
-                    }
-                }
-                if (!is存在) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(
-                            UrErrorMessages.入力値が不正_追加メッセージあり, "妥当な証記載保険者番号ではありません。"),
-                            div.getTxtShinkiTuikaShokisaiHokenshaNo()));
-                }
+                check証記載保険者番号(validPairs, 証記載保険者番号);
             }
         }
 
@@ -139,6 +125,21 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
         return validPairs;
     }
 
+    private void check証記載保険者番号(ValidationMessageControlPairs validPairs, RString 証記載保険者番号) {
+        List<KoseiShichoson> list = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
+        boolean is存在 = false;
+        for (KoseiShichoson koseiShichoson : list) {
+            if (証記載保険者番号.equals(koseiShichoson.get証記載保険者番号().value())) {
+                is存在 = true;
+            }
+        }
+        if (!is存在) {
+            validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(
+                    UrErrorMessages.入力値が不正_追加メッセージあり, "妥当な証記載保険者番号ではありません。"),
+                    div.getTxtShinkiTuikaShokisaiHokenshaNo()));
+        }
+    }
+
     /**
      * 検索処理を行うために必要な項目の妥当性チェック処理です。
      *
@@ -152,6 +153,17 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
                     UrErrorMessages.項目に対する制約, "対象年度", "平成26年度以降"), div.getDdlKoshinTaishoNendo()));
         }
 
+        return validPairs;
+    }
+
+    /**
+     * 検索対象データなし。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 検索対象データなし() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(UrErrorMessages.対象データなし)));
         return validPairs;
     }
 
@@ -192,7 +204,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
         RDate txtTaishoKikanFrom = div.getTxtTaishoKikan().getFromValue();
         RDate txtTaishoKikanTo = div.getTxtTaishoKikan().getToValue();
         if (!(対象年度_開始.isBeforeOrEquals(txtTaishoKikanFrom)
-                && txtTaishoKikanFrom.isBeforeOrEquals(txtTaishoKikanTo)
+                && txtTaishoKikanFrom.isBefore(txtTaishoKikanTo)
                 && txtTaishoKikanTo.isBeforeOrEquals(対象年度_終了))) {
             validPairs.add(new ValidationMessageControlPair(
                     new ValidationCheckMessages(UrErrorMessages.項目に対する制約, "計算対象期間", "対象年度内"), div.getTxtTaishoKikan()));
@@ -217,42 +229,52 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
 
         }
 
-        Decimal jikofutangakuGokei = div.getTxtJikofutangaku8().getValue()
-                .add(div.getTxtJikofutangaku9().getValue())
-                .add(div.getTxtJikofutangaku10().getValue())
-                .add(div.getTxtJikofutangaku11().getValue())
-                .add(div.getTxtJikofutangaku12().getValue())
-                .add(div.getTxtJikofutangaku1().getValue())
-                .add(div.getTxtJikofutangaku2().getValue())
-                .add(div.getTxtJikofutangaku3().getValue())
-                .add(div.getTxtJikofutangaku4().getValue())
-                .add(div.getTxtJikofutangaku7().getValue());
+        Decimal jikofutangakuGokei = nullToZero(div.getTxtJikofutangaku8().getValue())
+                .add(nullToZero(div.getTxtJikofutangaku9().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku10().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku11().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku12().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku1().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku2().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku3().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku4().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku5().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku6().getValue()))
+                .add(nullToZero(div.getTxtJikofutangaku7().getValue()));
 
-        if (jikofutangakuGokei.equals(div.getTxtJikofutangakuGokei().getValue())) {
+        if (!jikofutangakuGokei.equals(nullToZero(div.getTxtJikofutangakuGokei().getValue()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new ValidationCheckMessages(DbcErrorMessages.合計ボタン未押下),
                     div.getTxtJikofutangakuGokei()));
         }
-        Decimal uchiFutangakuGokei = div.getTxtUchiFutangaku8().getValue()
-                .add(div.getTxtUchiFutangaku9().getValue())
-                .add(div.getTxtUchiFutangaku10().getValue())
-                .add(div.getTxtUchiFutangaku11().getValue())
-                .add(div.getTxtUchiFutangaku12().getValue())
-                .add(div.getTxtUchiFutangaku1().getValue())
-                .add(div.getTxtUchiFutangaku2().getValue())
-                .add(div.getTxtUchiFutangaku3().getValue())
-                .add(div.getTxtUchiFutangaku4().getValue())
-                .add(div.getTxtUchiFutangaku5().getValue())
-                .add(div.getTxtUchiFutangaku6().getValue())
-                .add(div.getTxtUchiFutangaku7().getValue());
+        Decimal uchiFutangakuGokei = nullToZero(div.getTxtUchiFutangaku8().getValue())
+                .add(nullToZero(div.getTxtUchiFutangaku9().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku10().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku11().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku12().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku1().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku2().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku3().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku4().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku5().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku6().getValue()))
+                .add(nullToZero(div.getTxtUchiFutangaku7().getValue()));
 
-        if (uchiFutangakuGokei.equals(div.getTxtUchiFutangakuGokei().getValue())) {
+        if (!uchiFutangakuGokei.equals(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new ValidationCheckMessages(DbcErrorMessages.合計ボタン未押下),
                     div.getTxtJikofutangakuGokei()));
         }
 
         return validPairs;
+    }
+
+    private Decimal nullToZero(Decimal obj) {
+        if (obj == null) {
+            return Decimal.ZERO;
+        } else {
+            return obj;
+        }
     }
 
     private static class ValidationCheckMessages implements IValidationMessage {

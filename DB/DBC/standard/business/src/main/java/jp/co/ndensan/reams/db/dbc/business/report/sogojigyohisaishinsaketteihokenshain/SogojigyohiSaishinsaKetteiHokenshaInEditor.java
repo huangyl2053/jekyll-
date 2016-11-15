@@ -5,7 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohisaishinsaketteihokenshain;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaokenshain.SogojigyohiSaishinsaKetteiHokenshaInSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 総合事業費再審査決定通知書情報取込一覧表帳票Editor
@@ -15,6 +19,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaokens
 public class SogojigyohiSaishinsaKetteiHokenshaInEditor implements ISogojigyohiSaishinsaKetteiHokenshaInEditor {
 
     private final SogojigyohiSaishinsaKetteiHokenshaInItem item;
+    private static final Code CODE = new Code("0003");
+    private static final RString NAME = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
@@ -77,6 +83,8 @@ public class SogojigyohiSaishinsaKetteiHokenshaInEditor implements ISogojigyohiS
         source.sogojigyohiChoseiTanisu = item.get総合事業費_調整_単位数();
         source.sogojigyohiChoseiFutangaku = item.get総合事業費_調整_負担額();
         source.shikibetuCode = item.get識別コード();
+        source.拡張情報 = new ExpandedInformation(CODE, NAME,
+                ReportKomokuEditorUtil.get非空文字列(source.listLower_1));
         return source;
     }
 

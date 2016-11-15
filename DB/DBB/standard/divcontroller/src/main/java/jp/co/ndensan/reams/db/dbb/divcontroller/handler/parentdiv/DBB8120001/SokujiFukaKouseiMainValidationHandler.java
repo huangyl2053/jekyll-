@@ -234,17 +234,20 @@ public class SokujiFukaKouseiMainValidationHandler {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
                     DbbErrorMessages.特徴期別額不正_大小関係)));
         }
-        if (!ZERO.equals(div.getTokuchoNofugakuValue10())
+        if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue10())
+                && !ZERO.equals(div.getTokuchoNofugakuValue10())
                 && 納付額_４期.compareTo(Decimal.ZERO) == 0) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
                     DbbErrorMessages.特徴期別額不正_特徴0円, FOUR.toString())));
         }
-        if (!ZERO.equals(div.getTokuchoNofugakuValue12())
+        if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue12())
+                && !ZERO.equals(div.getTokuchoNofugakuValue12())
                 && 納付額_５期.compareTo(Decimal.ZERO) == 0) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
                     DbbErrorMessages.特徴期別額不正_特徴0円, FIVE.toString())));
         }
-        if (!ZERO.equals(div.getTokuchoNofugakuValue02())
+        if (!RString.isNullOrEmpty(div.getTokuchoNofugakuValue02())
+                && !ZERO.equals(div.getTokuchoNofugakuValue02())
                 && 納付額_６期.compareTo(Decimal.ZERO) == 0) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(
                     DbbErrorMessages.特徴期別額不正_特徴0円, SIX.toString())));

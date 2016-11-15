@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000011.Nenj
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -40,6 +41,7 @@ public class NenjiRiyoshaFutanWariaiHantei {
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RYear TZOF = new RYear("2014");
+    private static final RString 利用者負担割合判定管理_年次負担割合処理済年度 = new RString("利用者負担割合判定管理_年次負担割合処理済年度");
 
     /**
      * 画面の初期化です。
@@ -56,36 +58,38 @@ public class NenjiRiyoshaFutanWariaiHantei {
             throw new ApplicationException(DbcErrorMessages.年次判定処理不可.getMessage());
 
         }
-        RString configValue = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
-                SubGyomuCode.DBC介護給付);
-        RYear 年次負担割合処理済年度;
-        if (configValue.isEmpty()) {
-            年次負担割合処理済年度 = RDate.getNowDate().getNendo();
-        } else {
-            年次負担割合処理済年度 = new RYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
-                    SubGyomuCode.DBC介護給付));
-        }
         RString 処理状態 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態, 現在時刻,
                 SubGyomuCode.DBC介護給付);
-        div.getPanelAll().getTxtShoriJotai().setValue(未処理);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
-
-        if (年次負担割合処理済年度.equals(年度)) {
-            if (ONE.equals(処理状態)) {
-                div.getPanelAll().getTxtShoriJotai().setValue(処理済);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, true);
-
-            } else if (TWO.equals(処理状態)) {
-                div.getPanelAll().getTxtShoriJotai().setValue(再処理前);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
-
-            }
-        }
+        RString configValue = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 現在時刻,
+                SubGyomuCode.DBC介護給付);
         RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, 現在時刻,
                 SubGyomuCode.DBC介護給付);
         RDate 基準 = new RDate(((年度.toDateString()).concat(月日)).toString());
         RDate 基準日 = 基準.plusDay(1);
         div.getPanelAll().getTxtKijunbi().setValue(基準日);
+        if (RString.isNullOrEmpty(configValue)) {
+            div.getPanelAll().getTxtShoriJotai().setValue(RString.EMPTY);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, true);
+            throw new ApplicationException(DbxErrorMessages.業務コンフィグなし.getMessage().replace(
+                    利用者負担割合判定管理_年次負担割合処理済年度.toString()).evaluate());
+
+        } else {
+            RYear 年次負担割合処理済年度 = new RYear(configValue);
+
+            div.getPanelAll().getTxtShoriJotai().setValue(未処理);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
+
+            if (年次負担割合処理済年度.equals(年度) && ONE.equals(処理状態)) {
+
+                div.getPanelAll().getTxtShoriJotai().setValue(処理済);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, true);
+
+            } else if (年次負担割合処理済年度.equals(年度) && TWO.equals(処理状態)) {
+                div.getPanelAll().getTxtShoriJotai().setValue(再処理前);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, false);
+
+            }
+        }
 
         if ((div.getPanelAll().getTxtShoriJotai().getValue().equals(未処理)) || (div.getPanelAll().getTxtShoriJotai().getValue().equals(処理済))) {
             div.getPanelAll().setDisplayNone(false);

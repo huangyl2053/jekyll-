@@ -148,12 +148,18 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
     private Decimal 三一にかかる支給額_合計 = Decimal.ZERO;
     private Decimal 三一にかかる支給額_高額合算小計 = Decimal.ZERO;
     private Decimal 三一にかかる支給額_事業合算小計 = Decimal.ZERO;
+    private Decimal 五四一三_合計 = Decimal.ZERO;
+    private Decimal 五四一三_高額合算小計 = Decimal.ZERO;
+    private Decimal 五四一三_事業合算小計 = Decimal.ZERO;
     private Decimal 七十歳未満負担額_合計 = Decimal.ZERO;
     private Decimal 七十歳未満負担額_高額合算小計 = Decimal.ZERO;
     private Decimal 七十歳未満負担額_事業高額合算小計 = Decimal.ZERO;
     private Decimal 五に係る支給額_合計 = Decimal.ZERO;
     private Decimal 五に係る支給額_高額合算小計 = Decimal.ZERO;
     private Decimal 五に係る支給額_事業高額合算小計 = Decimal.ZERO;
+    private Decimal 八三七_合計 = Decimal.ZERO;
+    private Decimal 八三七_高額合算小計 = Decimal.ZERO;
+    private Decimal 八三七_事業合算小計 = Decimal.ZERO;
 
     private boolean hasData;
 
@@ -260,17 +266,24 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
         三一にかかる支給額_合計 = 三一にかかる支給額_合計.add(getDecimal2(entity.getShikyugakuMeisai_over70_Shikyugaku()));
         七十歳未満負担額_合計 = 七十歳未満負担額_合計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Futangaku()));
         五に係る支給額_合計 = 五に係る支給額_合計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Shikyugaku()));
-        if (!保険制度コード5.equals(entity.getShikyugakuMeisai_hokenSeidoCode())) {
+        五四一三_合計 = 五四一三_合計.add(getDecimal2(entity.getShikyugakuMeisai_futangaku()));
+        八三七_合計 = 八三七_合計.add(getDecimal2(entity.getShikyugakuMeisai_shikyugaku()));
+        if (区分２.equals(entity.getKubun()) && !保険制度コード5.equals(entity.getShikyugakuMeisai_hokenSeidoCode())) {
             七十歳以上負担額_高額合算小計 = 七十歳以上負担額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_over70_Futangaku()));
             三一にかかる支給額_高額合算小計 = 三一にかかる支給額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_over70_Shikyugaku()));
             七十歳未満負担額_高額合算小計 = 七十歳未満負担額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Futangaku()));
-            五に係る支給額_高額合算小計 = 五に係る支給額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Futangaku()));
+            五に係る支給額_高額合算小計 = 五に係る支給額_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Shikyugaku()));
+            五四一三_高額合算小計 = 五四一三_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_futangaku()));
+            八三七_高額合算小計 = 八三七_高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_shikyugaku()));
         }
-        if (保険制度コード5.equals(entity.getShikyugakuMeisai_hokenSeidoCode())) {
+        if ((区分３.equals(entity.getKubun()) || 区分４.equals(entity.getKubun()))
+                && 保険制度コード5.equals(entity.getShikyugakuMeisai_hokenSeidoCode())) {
             七十歳以上負担額_事業高額合算小計 = 七十歳以上負担額_事業高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_over70_Futangaku()));
             三一にかかる支給額_事業合算小計 = 三一にかかる支給額_事業合算小計.add(getDecimal2(entity.getShikyugakuMeisai_over70_Shikyugaku()));
             七十歳未満負担額_事業高額合算小計 = 七十歳未満負担額_事業高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Futangaku()));
             五に係る支給額_事業高額合算小計 = 五に係る支給額_事業高額合算小計.add(getDecimal2(entity.getShikyugakuMeisai_under70_Shikyugaku()));
+            五四一三_事業合算小計 = 五四一三_事業合算小計.add(getDecimal2(entity.getShikyugakuMeisai_futangaku()));
+            八三七_事業合算小計 = 八三七_事業合算小計.add(getDecimal2(entity.getShikyugakuMeisai_shikyugaku()));
         }
     }
 
@@ -363,26 +376,23 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
             csvEntity.set一七十歳以上負担額(ReportKomokuEditorUtil.金額1(七十歳以上負担額_合計));
             csvEntity.set三一にかかる支給額(ReportKomokuEditorUtil.金額1(三一にかかる支給額_合計));
             csvEntity.set四七十歳未満負担額(ReportKomokuEditorUtil.金額1(七十歳未満負担額_合計));
-            csvEntity.set五四一三(ReportKomokuEditorUtil.金額1(三一にかかる支給額_合計.minusToZero().
-                    add(七十歳未満負担額_合計).add(七十歳以上負担額_合計)));
+            csvEntity.set五四一三(ReportKomokuEditorUtil.金額1(五四一三_合計));
             csvEntity.set七五に係る支給額(ReportKomokuEditorUtil.金額1(五に係る支給額_合計));
-            csvEntity.set八三七(ReportKomokuEditorUtil.金額1(五に係る支給額_合計.add(三一にかかる支給額_合計)));
+            csvEntity.set八三七(ReportKomokuEditorUtil.金額1(八三七_合計));
         } else if (高額合算小計.equals(csvEntity.getデータ内容())) {
             csvEntity.set一七十歳以上負担額(ReportKomokuEditorUtil.金額1(七十歳以上負担額_高額合算小計));
             csvEntity.set三一にかかる支給額(ReportKomokuEditorUtil.金額1(三一にかかる支給額_高額合算小計));
             csvEntity.set四七十歳未満負担額(ReportKomokuEditorUtil.金額1(七十歳未満負担額_高額合算小計));
-            csvEntity.set五四一三(ReportKomokuEditorUtil.金額1(三一にかかる支給額_高額合算小計.minusToZero().
-                    add(七十歳未満負担額_高額合算小計).add(七十歳以上負担額_高額合算小計)));
+            csvEntity.set五四一三(ReportKomokuEditorUtil.金額1(五四一三_高額合算小計));
             csvEntity.set七五に係る支給額(ReportKomokuEditorUtil.金額1(五に係る支給額_高額合算小計));
-            csvEntity.set八三七(ReportKomokuEditorUtil.金額1(五に係る支給額_高額合算小計.add(三一にかかる支給額_高額合算小計)));
+            csvEntity.set八三七(ReportKomokuEditorUtil.金額1(八三七_高額合算小計));
         } else if (事業高額合算小計.equals(csvEntity.getデータ内容())) {
             csvEntity.set一七十歳以上負担額(ReportKomokuEditorUtil.金額1(七十歳以上負担額_事業高額合算小計));
             csvEntity.set三一にかかる支給額(ReportKomokuEditorUtil.金額1(三一にかかる支給額_事業合算小計));
             csvEntity.set四七十歳未満負担額(ReportKomokuEditorUtil.金額1(七十歳未満負担額_事業高額合算小計));
-            csvEntity.set五四一三(ReportKomokuEditorUtil.金額1(三一にかかる支給額_事業合算小計.minusToZero().
-                    add(七十歳未満負担額_事業高額合算小計).add(七十歳以上負担額_事業高額合算小計)));
+            csvEntity.set五四一三(ReportKomokuEditorUtil.金額1(五四一三_事業合算小計));
             csvEntity.set七五に係る支給額(ReportKomokuEditorUtil.金額1(五に係る支給額_事業高額合算小計));
-            csvEntity.set八三七(ReportKomokuEditorUtil.金額1(五に係る支給額_事業高額合算小計.add(三一にかかる支給額_事業合算小計)));
+            csvEntity.set八三七(ReportKomokuEditorUtil.金額1(八三七_事業合算小計));
         } else {
             csvEntity.set一七十歳以上負担額(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_over70_Futangaku())));
             csvEntity.set三一にかかる支給額(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_over70_Shikyugaku())));
@@ -547,6 +557,12 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
         五に係る支給額_合計 = Decimal.ZERO;
         五に係る支給額_高額合算小計 = Decimal.ZERO;
         五に係る支給額_事業高額合算小計 = Decimal.ZERO;
+        五四一三_合計 = Decimal.ZERO;
+        五四一三_高額合算小計 = Decimal.ZERO;
+        五四一三_事業合算小計 = Decimal.ZERO;
+        八三七_合計 = Decimal.ZERO;
+        八三七_高額合算小計 = Decimal.ZERO;
+        八三七_事業合算小計 = Decimal.ZERO;
     }
 
     private RString パターン142(RString time) {

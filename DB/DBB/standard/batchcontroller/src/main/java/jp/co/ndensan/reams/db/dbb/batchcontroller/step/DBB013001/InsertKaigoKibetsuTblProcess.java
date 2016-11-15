@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.CaluculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.FukaTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.InsFukaErrorTbl1TmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.KuBunnGaTsurakuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.LogBetsuSeigyoJouhouEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka8gatsu.TaishoshaHachiTmpEntity;
@@ -112,8 +113,11 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
     private static final RString 資格情報TEMP_TABLE_NAME = new RString("ShiKakuJohoTemp");
     private static final RString 対象外データTEMP_TABLE_NAME = new RString("TmpTaishogai");
     private static final RString 対象者データTEMP_TABLE_NAME = new RString("TmpTaishosha");
+    private static final RString 賦課エラー一覧 = new RString("InsFukaErrorTbl3Temp");
+    private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
+    private static final RString バッチID = new RString("DBB0130001");
+    private static final RString ERRORCODE_04 = new RString("04");
     private TokuchoHeinjunka8GatsuProcessParameter processParameter;
-    private FukaTempEntity 賦課情報;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 対象外データ一時tableWriter;
     @BatchWriter
@@ -122,6 +126,8 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
     private BatchEntityCreatedTempTableWriter fukaWriter;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 資格の情報Writer;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 賦課エラー一時tableWriter;
     private HonnSanteiFuka manager;
     private CreatFukaEntity creatEntity;
     private List<SeikatsuHogoJukyusha> 生保の情報;
@@ -189,12 +195,14 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
         fukaWriter = new BatchEntityCreatedTempTableWriter(賦課情報一時テーブル_NAME, FukaJohoTempEntity.class);
         資格の情報Writer = new BatchEntityCreatedTempTableWriter(資格情報TEMP_TABLE_NAME,
                 DbT1001HihokenshaDaichoEntity.class, true);
+        賦課エラー一時tableWriter = new BatchEntityCreatedTempTableWriter(賦課エラー一覧,
+                InsFukaErrorTbl1TmpEntity.class);
     }
 
     @Override
     protected void process(CaluculateFukaEntity entity) {
         fukaEntity = entity;
-        賦課情報 = fukaEntity.get賦課の情報Entity();
+        FukaTempEntity 賦課情報 = fukaEntity.get賦課の情報Entity();
 
         if (count == INDEX_1) {
             set区分Key(fukaEntity);
@@ -470,12 +478,13 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
         if (賦課の情報Entity != null) {
             if (Decimal.ZERO.compareTo(賦課の情報.get減免額()) < 0 && null != entity.get資格の情報Entity()) {
                 資格の情報Writer.delete(entity.get資格の情報Entity());
+                do賦課エラー出力(賦課の情報);
             } else if (Decimal.ZERO.equals(賦課の情報Entity.getDbT2002_gemmenGaku())) {
-                FukaKonkyo 賦課根拠 = get賦課根拠(生保の情報のリスト, 老福の情報のリスト, 世帯員所得情報List);
-                HokenryoDankaiHanteiParameter 保険料段階パラメータ = get保険料段階パラメータ(賦課根拠);
+                FukaKonkyo 賦課根拠 = get賦課根拠(生保の情報のリスト, entity.get賦課の情報Entity(), 老福の情報のリスト, 世帯員所得情報List);
+                HokenryoDankaiHanteiParameter 保険料段階パラメータ = get保険料段階パラメータ(賦課根拠, entity.get賦課の情報Entity());
                 HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
                 TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
-                NengakuHokenryo 年額保険料 = get年額保険料(調定年度, 月別ランク, 資格の情報, 月別保険料段階);
+                NengakuHokenryo 年額保険料 = get年額保険料(調定年度, 月別ランク, 資格の情報, 月別保険料段階, entity.get賦課の情報Entity());
 
                 FukaKokyoBatchParameter fukaKokyoBatchParameter = new FukaKokyoBatchParameter();
                 fukaKokyoBatchParameter.set賦課年度(調定年度);
@@ -485,7 +494,7 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
                 fukaKokyoBatchParameter.set老福の情報のリスト(老福の情報のリスト);
                 fukaKokyoBatchParameter.set境界層の情報のリスト(境界層の情報のリスト);
                 fukaKokyoBatchParameter.set調定日時(processParameter.get調定日時());
-                HeijunkaOutput 平準化計算処理結果 = get平準化計算処理結果(年額保険料);
+                HeijunkaOutput 平準化計算処理結果 = get平準化計算処理結果(年額保険料, entity.get賦課の情報Entity());
                 do平準化計算処理(平準化計算処理結果, 資格の情報, 賦課の情報, 徴収方法の情報, fukaKokyoBatchParameter, 調定年度, 賦課の情報Entity);
             }
         }
@@ -502,7 +511,7 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
         }
     }
 
-    private HokenryoDankaiHanteiParameter get保険料段階パラメータ(FukaKonkyo 賦課根拠) {
+    private HokenryoDankaiHanteiParameter get保険料段階パラメータ(FukaKonkyo 賦課根拠, FukaTempEntity 賦課情報) {
         HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
         保険料段階パラメータ.setFukaNendo(賦課情報.getDbT2002_fukaNendo());
         保険料段階パラメータ.setFukaKonkyo(賦課根拠);
@@ -510,7 +519,7 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
         return 保険料段階パラメータ;
     }
 
-    private FukaKonkyo get賦課根拠(List<SeikatsuHogoJukyusha> 生保の情報のリスト,
+    private FukaKonkyo get賦課根拠(List<SeikatsuHogoJukyusha> 生保の情報のリスト, FukaTempEntity 賦課情報,
             List<RoreiFukushiNenkinJukyusha> 老福の情報のリスト, List<SetaiShotokuEntity> 世帯員所得情報List) {
         FukaKonkyoBatchParameter 賦課根拠param = new FukaKonkyoBatchParameter();
         賦課根拠param.set賦課基準日(賦課情報.getDbT2002_fukaYMD());
@@ -522,7 +531,7 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
     }
 
     private NengakuHokenryo get年額保険料(FlexibleYear 調定年度, KuBunnGaTsurakuTempEntity 月別ランク,
-            HihokenshaDaicho 資格の情報, TsukibetsuHokenryoDankai 月別保険料段階) {
+            HihokenshaDaicho 資格の情報, TsukibetsuHokenryoDankai 月別保険料段階, FukaTempEntity 賦課情報) {
         NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
         年額保険料パラメータ.set賦課年度(調定年度);
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
@@ -600,12 +609,12 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
         set出力用賦課情報設定(賦課の情報_更正後, 平準化結果);
     }
 
-    private HeijunkaOutput get平準化計算処理結果(NengakuHokenryo 年額保険料) {
+    private HeijunkaOutput get平準化計算処理結果(NengakuHokenryo 年額保険料, FukaTempEntity 賦課情報) {
         Heijunka 平準化計算処理 = new Heijunka();
-        return 平準化計算処理.calculateHeijunka(getHeijunkaInput(年額保険料));
+        return 平準化計算処理.calculateHeijunka(getHeijunkaInput(年額保険料, 賦課情報));
     }
 
-    private HeijunkaInput getHeijunkaInput(NengakuHokenryo 年額保険料) {
+    private HeijunkaInput getHeijunkaInput(NengakuHokenryo 年額保険料, FukaTempEntity 賦課情報) {
         HeijunkaInput input = new HeijunkaInput();
         input.set年保険料額(年額保険料.getHokenryoNengaku());
         List<Decimal> 特徴期別額List = new ArrayList();
@@ -730,5 +739,24 @@ public class InsertKaigoKibetsuTblProcess extends BatchProcessBase<CaluculateFuk
         対象外データ一時tableWriter.insert(対象データ);
         対象データ.set備考コード(備考コード1);
         対象者データ一時tableWriter.delete(対象データ);
+    }
+
+    private void do賦課エラー出力(FukaJoho 賦課の情報) {
+        InsFukaErrorTbl1TmpEntity insFukaErrorTbl1TmpEntity = new InsFukaErrorTbl1TmpEntity();
+        insFukaErrorTbl1TmpEntity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
+        insFukaErrorTbl1TmpEntity.setNaibuChouhouID(内部帳票ID);
+        insFukaErrorTbl1TmpEntity.setNaibuChouhouSakuseiTime(processParameter.get調定日時());
+        insFukaErrorTbl1TmpEntity.setFukaNendo(processParameter.get賦課年度());
+        insFukaErrorTbl1TmpEntity.setTsuchishoNo(賦課の情報.get通知書番号());
+        insFukaErrorTbl1TmpEntity.setBatchID(バッチID);
+        insFukaErrorTbl1TmpEntity.setBatchKidouTime(processParameter.get調定日時().getRDateTime());
+        insFukaErrorTbl1TmpEntity.setErrorCode(ERRORCODE_04);
+        insFukaErrorTbl1TmpEntity.setHihokenshaNo(賦課の情報.get被保険者番号());
+        insFukaErrorTbl1TmpEntity.setShikibetsuCode(賦課の情報.get識別コード());
+        insFukaErrorTbl1TmpEntity.setShikakuShutokuYMD(賦課の情報.get資格取得日());
+        insFukaErrorTbl1TmpEntity.setShikakuShutokuJiyuCode(賦課の情報.get資格取得事由());
+        insFukaErrorTbl1TmpEntity.setShikakuSoshitsuYMD(賦課の情報.get資格喪失日());
+        insFukaErrorTbl1TmpEntity.setShikakuSoshitsuJiyuCode(賦課の情報.get資格喪失事由());
+        賦課エラー一時tableWriter.insert(insFukaErrorTbl1TmpEntity);
     }
 }

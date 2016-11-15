@@ -121,7 +121,8 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
         source.gyoseikuCode = entity.get被保険者_行政区コード();
         source.shimei50onKana = entity.get被保険者_氏名50音カナ();
         source.shichosonCode = entity.get被保険者_市町村コード();
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list_3);
+        source.shikibetsuCode = entity.get被保険者_識別コード();
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.list_3));
         return source;
     }
 
@@ -163,5 +164,12 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

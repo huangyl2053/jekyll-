@@ -181,7 +181,6 @@ public class DBC120020_HenreiHoryuIn extends BatchFlowBase<DBC120020_HenreiHoryu
                 = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
         parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
         parameter.set帳票ID(帳票ID);
-        parameter.set出力順ID(getParameter().getShutsuryokuJunID());
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.setシステム日付(RDateTime.now());
         return loopBatch(HenreiHoryuInIchiranhyoSakuseiProcess.class).arguments(parameter).

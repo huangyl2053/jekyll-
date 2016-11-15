@@ -1,8 +1,9 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyoshinseishohakkoichiransource;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
@@ -44,7 +45,6 @@ public class KogakuJigyoShinseishoHakkoIchiranSource implements IReportSource {
     @ReportItem(name = "listHakkoTaishosha_1", length = 4, order = 14)
     public RString listHakkoTaishosha_1;
     @ReportItem(name = "listHakkoTaishosha_2", length = 10, order = 15)
-    @ReportExpandedInfo(id = "X")
     public RString listHakkoTaishosha_2;
     @ReportItem(name = "listHakkoTaishosha_3", length = 6, order = 16)
     public RString listHakkoTaishosha_3;
@@ -78,6 +78,8 @@ public class KogakuJigyoShinseishoHakkoIchiranSource implements IReportSource {
     public RString listHakkoTaishosha_17;
     @ReportPerson(id = "X")
     public ShikibetsuCode 識別コード;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

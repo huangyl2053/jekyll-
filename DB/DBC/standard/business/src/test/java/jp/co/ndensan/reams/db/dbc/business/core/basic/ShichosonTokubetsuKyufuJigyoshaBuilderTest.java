@@ -4,12 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -84,18 +83,6 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilderTest extends DbcTestBase {
         public void 戻り値の介護国保連ＩＦ異動年月日は_設定した値と同じ介護国保連ＩＦ異動年月日を返す() {
             business = sut.set介護国保連ＩＦ異動年月日(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_介護国保連ＩＦ異動年月日).build();
             assertThat(business.get介護国保連ＩＦ異動年月日(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_介護国保連ＩＦ異動年月日));
-        }
-
-        @Test
-        public void 戻り値の介護国保連ＩＦ訂正区分は_設定した値と同じ介護国保連ＩＦ訂正区分を返す() {
-            business = sut.set介護国保連ＩＦ訂正区分(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_介護国保連ＩＦ訂正区分).build();
-            assertThat(business.get介護国保連ＩＦ訂正区分(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_介護国保連ＩＦ訂正区分));
-        }
-
-        @Test
-        public void 戻り値の介護国保連ＩＦ訂正年月日は_設定した値と同じ介護国保連ＩＦ訂正年月日を返す() {
-            business = sut.set介護国保連ＩＦ訂正年月日(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_介護国保連ＩＦ訂正年月日).build();
-            assertThat(business.get介護国保連ＩＦ訂正年月日(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_介護国保連ＩＦ訂正年月日));
         }
 
         @Test
@@ -279,12 +266,6 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の介護保険証記載保険者番号は_設定した値と同じ介護保険証記載保険者番号を返す() {
-            business = sut.set介護保険証記載保険者番号(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_介護保険証記載保険者番号).build();
-            assertThat(business.get介護保険証記載保険者番号(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_介護保険証記載保険者番号));
-        }
-
-        @Test
         public void 戻り値の受領委任区分は_設定した値と同じ受領委任区分を返す() {
             business = sut.set受領委任区分(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_受領委任区分).build();
             assertThat(business.get受領委任区分(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_受領委任区分));
@@ -306,18 +287,6 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilderTest extends DbcTestBase {
         public void 戻り値の生活保護法による指定の有は_設定した値と同じ生活保護法による指定の有を返す() {
             business = sut.set生活保護法による指定の有(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_生活保護法による指定の有).build();
             assertThat(business.is生活保護法による指定の有(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_生活保護法による指定の有));
-        }
-
-        @Test
-        public void 戻り値の市町村コードは_設定した値と同じ市町村コードを返す() {
-            business = sut.set市町村コード(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村コード).build();
-            assertThat(business.get市町村コード(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村コード));
-        }
-
-        @Test
-        public void 戻り値の地域区分は_設定した値と同じ地域区分を返す() {
-            business = sut.set地域区分(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_地域区分).build();
-            assertThat(business.get地域区分(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_地域区分));
         }
 
     }

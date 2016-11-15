@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -35,28 +36,22 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoSource implements IReportSource
     public RString tekiyouStartYM;
     @ReportItem(name = "santeiKijunGaku", length = 13, order = 7)
     public RString santeiKijunGaku;
-    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "hihokenshaNo1", length = 10, order = 8)
     public RString hihokenshaNo1;
     @ReportItem(name = "hihokenshaNameKana1", length = 40, order = 9)
     public RString hihokenshaNameKana1;
-    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "hihokenshaName1", order = 10)
     public RString hihokenshaName1;
-    @ReportExpandedInfo(id = "B")
     @ReportItem(name = "hihokenshaNo2", length = 10, order = 11)
     public RString hihokenshaNo2;
     @ReportItem(name = "hihokenshaNameKana2", length = 40, order = 12)
     public RString hihokenshaNameKana2;
-    @ReportExpandedInfo(id = "B")
     @ReportItem(name = "hihokenshaName2", order = 13)
     public RString hihokenshaName2;
-    @ReportExpandedInfo(id = "C")
     @ReportItem(name = "hihokenshaNo3", length = 10, order = 14)
     public RString hihokenshaNo3;
     @ReportItem(name = "hihokenshaNameKana3", length = 40, order = 15)
     public RString hihokenshaNameKana3;
-    @ReportExpandedInfo(id = "C")
     @ReportItem(name = "hihokenshaName3", order = 16)
     public RString hihokenshaName3;
     @ReportItem(name = "sonotaHihokensha", length = 15, order = 17)
@@ -168,4 +163,16 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoSource implements IReportSource
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報A1;
+    @ReportExpandedInfo(id = "A")
+    public ExpandedInformation 拡張情報A2;
+    @ReportExpandedInfo(id = "B")
+    public ExpandedInformation 拡張情報B1;
+    @ReportExpandedInfo(id = "B")
+    public ExpandedInformation 拡張情報B2;
+    @ReportExpandedInfo(id = "C")
+    public ExpandedInformation 拡張情報C1;
+    @ReportExpandedInfo(id = "C")
+    public ExpandedInformation 拡張情報C2;
 }

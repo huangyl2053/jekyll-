@@ -78,10 +78,11 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
     再処理対象データ存在チェック {
                 @Override
                 public boolean apply(DBC8010001MainDiv div) {
-                    RString 委託者ID = div.getTxtItakushaCode().getValue();
+                    RString 委託者ID = div.getItakusha().getItakushaId();
                     div.getTxtFurikomiShiteiYMD().getValue();
                     KozaFurikomiMapperParameter parameter;
-                    parameter = KozaFurikomiMapperParameter.createSelectParameter(new Decimal(委託者ID.toString()), div.getTxtFurikomiShiteiYMD().getValue(), SubGyomuCode.DBC介護給付);
+                    parameter = KozaFurikomiMapperParameter.createSelectParameter(new Decimal(委託者ID.toString()),
+                            div.getTxtFurikomiShiteiYMD().getValue(), SubGyomuCode.DBC介護給付);
                     KozaFurikomiManager manager = KozaFurikomiManager.createInstance();
                     int size = manager.get口座振込リストBy検索条件(parameter).records().size();
                     return 0 != size;
@@ -93,9 +94,10 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
     修正対象データ存在チェック {
                 @Override
                 public boolean apply(DBC8010001MainDiv div) {
-                    RString 委託者ID = div.getTxtItakushaCode().getValue();
+                    RString 委託者ID = div.getItakusha().getItakushaId();
                     KozaFurikomiMapperParameter parameter;
-                    parameter = KozaFurikomiMapperParameter.createSelectParameter(new Decimal(委託者ID.toString()), div.getTxtFurikomiShiteiYMD().getValue(), SubGyomuCode.DBC介護給付);
+                    parameter = KozaFurikomiMapperParameter.createSelectParameter(new Decimal(委託者ID.toString()),
+                            div.getTxtWrongFurikomiShiteiYMD().getValue(), SubGyomuCode.DBC介護給付);
                     KozaFurikomiManager manager = KozaFurikomiManager.createInstance();
                     int size = manager.get口座振込リストBy検索条件(parameter).records().size();
                     return 0 != size;

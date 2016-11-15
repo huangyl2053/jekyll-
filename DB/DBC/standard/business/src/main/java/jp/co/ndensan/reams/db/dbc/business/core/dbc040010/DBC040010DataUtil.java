@@ -1627,6 +1627,7 @@ public class DBC040010DataUtil {
         result.setChoikiCode(entity.getIchiranChoikiCode());
         result.setGyoseikuCode(entity.getIchiranGyoseikuCode());
         result.setHokenshaNo(entity.getHokenshaNo());
+        result.setShichosonCode(entity.getIchiranShichosonCode());
         return result;
     }
 

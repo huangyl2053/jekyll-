@@ -46,6 +46,8 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
     private static final RString 特徴期別金額6期 = new RString("6期");
     private static final int MULTIPLY = 3;
     private static final RString TOKEN = new RString("～");
+    private static final Code DATA_3 = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
@@ -83,12 +85,14 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
         if (編集後本算定通知書共通情報.get被保険者番号() != null) {
             source.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().value();
         }
-        source.拡張情報 = new ExpandedInformation(Code.EMPTY, RString.EMPTY, source.hihokenshaNo);
+        source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
         if (編集後本算定通知書共通情報.get通知書番号() != null) {
             source.tuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
         }
         if (編集後本算定通知書共通情報.get識別コード() != null) {
             source.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
+        } else {
+            source.shikibetsuCode = RString.EMPTY;
         }
         if (編集後本算定通知書共通情報.get編集後個人() != null) {
             if (編集後本算定通知書共通情報.get編集後個人().get世帯コード() != null) {

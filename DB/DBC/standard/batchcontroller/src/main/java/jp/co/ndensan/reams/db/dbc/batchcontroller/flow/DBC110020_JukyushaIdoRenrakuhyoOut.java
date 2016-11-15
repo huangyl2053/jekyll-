@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DataCompareShoriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DelJukyushaIdoRenrakuhyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsIdoTempProcess;
@@ -13,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsJukyushaIdoR
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.SoufuErrorOutProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdAtenaTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdFutanWariaiTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdGengakuTempProcess;
@@ -30,12 +31,14 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdSeihoTempPro
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdShafukuTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdSogoJigyoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdTokuteNyushoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110020.DBC110020_JukyushaIdoRenrakuhyoOutParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110020.JukyushaIdoRenrakuhyoOutProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020.JukyushaIdoRenrakuhyoOutFlowEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -71,6 +74,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 受給者異動の抽出 = "insJukyushaIdoRenrakuhyoTemp";
     private static final String データ比較処理 = "dataCompareShori";
     private static final String 国保連インタフェース管理更新 = "upDoInterfaceKanriKousin";
+    private static final RString 交換情報識別番号 = new RString("531");
     private JukyushaIdoRenrakuhyoOutFlowEntity returnEntity;
 
     @Override
@@ -277,11 +281,16 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
 
     @Step(国保連インタフェース管理更新)
     IBatchFlowCommand upDoInterfaceKanriKousin() {
-        JukyushaIdoRenrakuhyoOutProcessParameter processParameter = getParameter().
-                toProcessParameter();
-        processParameter.set異動連絡票件数(returnEntity.get異動連絡票件数());
-        processParameter.set訂正連絡票件数(returnEntity.get訂正連絡票件数());
-        return simpleBatch(UpDoInterfaceKanriKousinProcess.class).arguments(processParameter)
-                .define();
+        KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter parameter
+                = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
+        FlexibleYearMonth 処理年月 = new FlexibleYearMonth(getParameter().get処理年月().toDateString());
+        parameter.set処理年月(処理年月);
+        parameter.set交換情報識別番号(交換情報識別番号);
+        parameter.set処理対象年月(処理年月);
+        parameter.setレコード件数合計(returnEntity.get異動連絡票件数());
+        List<RString> fileNameList = new ArrayList<>();
+        fileNameList.add(getParameter().getファイル名());
+        parameter.setFileNameList(fileNameList);
+        return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
     }
 }

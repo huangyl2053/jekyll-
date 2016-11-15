@@ -86,6 +86,8 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
             final ShikibetsuCode shikibetsuCode = 宛名の情報.getShikibetsuCode();
             if (shikibetsuCode != null) {
                 source.shikibetsuCode = shikibetsuCode.getColumnValue();
+            } else {
+                source.shikibetsuCode = RString.EMPTY;
             }
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
             source.listUpper_4 = JushoHenshu.editJusho(帳票制御共通, iKojin, association);

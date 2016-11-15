@@ -154,7 +154,7 @@ public class JikoFutangakuKeisanIkkatsuPanel {
             parameter.setUketoriym(null);
         } else {
             出力対象区分 = 出力対象_1;
-            parameter.setUketoriym(new FlexibleYearMonth(div.getTxtUketoriYM().getValue().toDateString()));
+            parameter.setUketoriym(new FlexibleYearMonth(div.getTxtUketoriYM().getValue().getYearMonth().toDateString()));
             parameter.setHihokenshano(null);
             parameter.setNendo(null);
         }

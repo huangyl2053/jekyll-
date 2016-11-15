@@ -12,32 +12,24 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatena
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * DBC2000022PanelAll のクラスファイル
- *
- * @reamsid_L DBC-5010-011 zhaowei
+ * DBC2000022PanelAll のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class DBC2000022PanelAllDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("lin1")
     private HorizontalLine lin1;
     @JsonProperty("PanelHyoji")
@@ -52,8 +44,6 @@ public class DBC2000022PanelAllDiv extends Panel {
     private PanelHosokuItemDiv PanelHosokuItem;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
-    @JsonProperty("ccdKaigoAtenaInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("EditMode")
     private RString EditMode;
     @JsonProperty("hdnShikibetsuCode")
@@ -67,6 +57,15 @@ public class DBC2000022PanelAllDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
+    }
+
     /*
      * getlin1
      * @return lin1
@@ -185,15 +184,6 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     /*
-     * getccdKaigoAtenaInfo
-     * @return ccdKaigoAtenaInfo
-     */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return ccdKaigoAtenaInfo;
-    }
-
-    /*
      * getEditMode
      * @return EditMode
      */
@@ -256,7 +246,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlNendo(DropDownList ddlNendo) {
+    public void  setDdlNendo(DropDownList ddlNendo) {
         this.getPanelHyoji().setDdlNendo(ddlNendo);
     }
 
@@ -266,7 +256,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlRirekiNo(DropDownList ddlRirekiNo) {
+    public void  setDdlRirekiNo(DropDownList ddlRirekiNo) {
         this.getPanelHyoji().setDdlRirekiNo(ddlRirekiNo);
     }
 
@@ -276,7 +266,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnHyoji(Button btnHyoji) {
+    public void  setBtnHyoji(Button btnHyoji) {
         this.getPanelHyoji().setBtnHyoji(btnHyoji);
     }
 
@@ -286,7 +276,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClear(Button btnClear) {
+    public void  setBtnClear(Button btnClear) {
         this.getPanelHyoji().setBtnClear(btnClear);
     }
 
@@ -296,7 +286,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHanteibi(TextBoxDate txtHanteibi) {
+    public void  setTxtHanteibi(TextBoxDate txtHanteibi) {
         this.getPanelHyoji().setTxtHanteibi(txtHanteibi);
     }
 
@@ -306,7 +296,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHanteiKubun(TextBox txtHanteiKubun) {
+    public void  setTxtHanteiKubun(TextBox txtHanteiKubun) {
         this.getPanelHyoji().setTxtHanteiKubun(txtHanteiKubun);
     }
 
@@ -316,7 +306,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSeikatsuHogo(ButtonDialog btnSeikatsuHogo) {
+    public void  setBtnSeikatsuHogo(ButtonDialog btnSeikatsuHogo) {
         this.getPanelHyoji().setBtnSeikatsuHogo(btnSeikatsuHogo);
     }
 
@@ -326,7 +316,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnAddBefore(Button btnAddBefore) {
+    public void  setBtnAddBefore(Button btnAddBefore) {
         this.getPanelEditButton().setBtnAddBefore(btnAddBefore);
     }
 
@@ -336,7 +326,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnAddNext(Button btnAddNext) {
+    public void  setBtnAddNext(Button btnAddNext) {
         this.getPanelEditButton().setBtnAddNext(btnAddNext);
     }
 
@@ -346,7 +336,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnEdit(Button btnEdit) {
+    public void  setBtnEdit(Button btnEdit) {
         this.getPanelEditButton().setBtnEdit(btnEdit);
     }
 
@@ -356,7 +346,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlShikaku(DropDownList ddlShikaku) {
+    public void  setDdlShikaku(DropDownList ddlShikaku) {
         this.getPanelEdit().setDdlShikaku(ddlShikaku);
     }
 
@@ -366,7 +356,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlFutanWariai(DropDownList ddlFutanWariai) {
+    public void  setDdlFutanWariai(DropDownList ddlFutanWariai) {
         this.getPanelEdit().setDdlFutanWariai(ddlFutanWariai);
     }
 
@@ -376,7 +366,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTekiyoKaishibi(TextBoxDate txtTekiyoKaishibi) {
+    public void  setTxtTekiyoKaishibi(TextBoxDate txtTekiyoKaishibi) {
         this.getPanelEdit().setTxtTekiyoKaishibi(txtTekiyoKaishibi);
     }
 
@@ -386,7 +376,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTekiyoShuryobi(TextBoxDate txtTekiyoShuryobi) {
+    public void  setTxtTekiyoShuryobi(TextBoxDate txtTekiyoShuryobi) {
         this.getPanelEdit().setTxtTekiyoShuryobi(txtTekiyoShuryobi);
     }
 
@@ -396,7 +386,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHonninGokeiShotoku(TextBoxNum txtHonninGokeiShotoku) {
+    public void  setTxtHonninGokeiShotoku(TextBoxNum txtHonninGokeiShotoku) {
         this.getPanelEdit().setTxtHonninGokeiShotoku(txtHonninGokeiShotoku);
     }
 
@@ -406,7 +396,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSetaiinsu(TextBoxNum txtSetaiinsu) {
+    public void  setTxtSetaiinsu(TextBoxNum txtSetaiinsu) {
         this.getPanelEdit().setTxtSetaiinsu(txtSetaiinsu);
     }
 
@@ -416,7 +406,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNenkinShunyuGokei(TextBoxNum txtNenkinShunyuGokei) {
+    public void  setTxtNenkinShunyuGokei(TextBoxNum txtNenkinShunyuGokei) {
         this.getPanelEdit().setTxtNenkinShunyuGokei(txtNenkinShunyuGokei);
     }
 
@@ -426,7 +416,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSonotaGokei(TextBoxNum txtSonotaGokei) {
+    public void  setTxtSonotaGokei(TextBoxNum txtSonotaGokei) {
         this.getPanelEdit().setTxtSonotaGokei(txtSonotaGokei);
     }
 
@@ -436,7 +426,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtBiko(TextBoxMultiLine txtBiko) {
+    public void  setTxtBiko(TextBoxMultiLine txtBiko) {
         this.getPanelEdit().setTxtBiko(txtBiko);
     }
 
@@ -446,18 +436,8 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setPanelEditItem(PanelEditItemDiv PanelEditItem) {
+    public void  setPanelEditItem(PanelEditItemDiv PanelEditItem) {
         this.getPanelEdit().setPanelEditItem(PanelEditItem);
-    }
-
-    @JsonIgnore
-    public Button getBtnKakutei() {
-        return this.getPanelEdit().getPanelEditItem().getBtnKakutei();
-    }
-
-    @JsonIgnore
-    public void setBtnKakutei(Button btnKakutei) {
-        this.getPanelEdit().getPanelEditItem().setBtnKakutei(btnKakutei);
     }
 
     @JsonIgnore
@@ -466,8 +446,18 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnCancel(Button btnCancel) {
+    public void  setBtnCancel(Button btnCancel) {
         this.getPanelEdit().getPanelEditItem().setBtnCancel(btnCancel);
+    }
+
+    @JsonIgnore
+    public Button getBtnKakutei() {
+        return this.getPanelEdit().getPanelEditItem().getBtnKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnKakutei(Button btnKakutei) {
+        this.getPanelEdit().getPanelEditItem().setBtnKakutei(btnKakutei);
     }
 
     @JsonIgnore
@@ -476,7 +466,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkShokkenHenko(CheckBoxList chkShokkenHenko) {
+    public void  setChkShokkenHenko(CheckBoxList chkShokkenHenko) {
         this.getPanelHosokuItem().setChkShokkenHenko(chkShokkenHenko);
     }
 
@@ -486,18 +476,8 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkShoHakkoFuyo(CheckBoxList chkShoHakkoFuyo) {
+    public void  setChkShoHakkoFuyo(CheckBoxList chkShoHakkoFuyo) {
         this.getPanelHosokuItem().setChkShoHakkoFuyo(chkShoHakkoFuyo);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlHakkoKubun() {
-        return this.getPanelHosokuItem().getDdlHakkoKubun();
-    }
-
-    @JsonIgnore
-    public void setDdlHakkoKubun(DropDownList ddlHakkoKubun) {
-        this.getPanelHosokuItem().setDdlHakkoKubun(ddlHakkoKubun);
     }
 
     @JsonIgnore
@@ -506,8 +486,18 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKijunbi(TextBoxDate txtKijunbi) {
+    public void  setTxtKijunbi(TextBoxDate txtKijunbi) {
         this.getPanelHosokuItem().setTxtKijunbi(txtKijunbi);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlHakkoKubun() {
+        return this.getPanelHosokuItem().getDdlHakkoKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlHakkoKubun(DropDownList ddlHakkoKubun) {
+        this.getPanelHosokuItem().setDdlHakkoKubun(ddlHakkoKubun);
     }
 
     @JsonIgnore
@@ -516,7 +506,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHakkobi(TextBoxDate txtHakkobi) {
+    public void  setTxtHakkobi(TextBoxDate txtHakkobi) {
         this.getPanelHosokuItem().setTxtHakkobi(txtHakkobi);
     }
 
@@ -526,7 +516,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKofubi(TextBoxDate txtKofubi) {
+    public void  setTxtKofubi(TextBoxDate txtKofubi) {
         this.getPanelHosokuItem().setTxtKofubi(txtKofubi);
     }
 
@@ -536,7 +526,7 @@ public class DBC2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
+    public void  setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
         this.getPanelHosokuItem().setDdlKofuJiyu(ddlKofuJiyu);
     }
 

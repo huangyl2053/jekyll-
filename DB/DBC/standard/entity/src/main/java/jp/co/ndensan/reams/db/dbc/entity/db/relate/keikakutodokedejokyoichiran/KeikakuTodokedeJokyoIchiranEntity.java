@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -49,5 +50,7 @@ public class KeikakuTodokedeJokyoIchiranEntity extends DbTableEntityBase<Keikaku
     private TelNo 電話番号;
     private FlexibleDate 変更年月日;
     private RString 事業者名称;
+    private HihokenshaNo 居宅給付計画届出_被保険者番号;
+    LasdecCode 市町村コード;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
 }

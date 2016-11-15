@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -32,6 +33,7 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
     private final SaishinsaMoshitateIchiranhyoTaisyoEntity 送付一覧表データ;
     private static final RString 合計件数タイトル = new RString("合計件数");
     private static final RString 件数 = new RString("件");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final int NUM_ZERO = 0;
     private static final int NUM_TWO = 2;
     private static final int LENGTH_ZERO = 0;
@@ -101,6 +103,8 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
 
         if (送付一覧表データ.get再審査申立_被保険者番号() != null) {
             source.listUpper_4 = 送付一覧表データ.get再審査申立_被保険者番号().value();
+            source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                    source.listUpper_4);
         }
         source.listUpper_5 = 送付一覧表データ.get被保険者_宛名カナ名称();
         source.listUpper_6 = 送付一覧表データ.get再審査申立_サービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)

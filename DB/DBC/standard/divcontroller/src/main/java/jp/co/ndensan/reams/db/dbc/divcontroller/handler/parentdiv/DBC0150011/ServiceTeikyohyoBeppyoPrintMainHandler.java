@@ -97,39 +97,40 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
 
         Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップ = new TreeMap<>();
         for (KyufuJikoSakuseiEntityResult result : 計画resultList) {
-            if (事業者別マップ.get(result.get事業者コード()) == null) {
+            JigyoshaNo 事業者コード = new JigyoshaNo(result.get事業者コード());
+            if (事業者別マップ.get(事業者コード) == null) {
                 List<KyufuJikoSakuseiEntityResult> 新規List = new ArrayList<>();
                 KyufuJikoSakuseiEntityResult 新規Result = result新規(合計Entity);
                 新規Result.set事業者(合計行名_事業者);
                 新規Result.setサービス(合計行名_サービス);
                 新規List.add(新規Result);
                 新規List.add(result);
-                事業者別マップ.put(result.get事業者コード(), 新規List);
+                事業者別マップ.put(new JigyoshaNo(result.get事業者コード()), 新規List);
             } else {
-                事業者別マップ.get(result.get事業者コード()).add(1, result);
+                事業者別マップ.get(事業者コード).add(1, result);
             }
             if (result.is合計フラグ()) {
                 if (零.equals(result.get限度額対象外フラグ())) {
-                    事業者別マップ.get(result.get事業者コード()).get(0).setサービス単位(事業者別マップ.
-                            get(result.get事業者コード()).get(0).getサービス単位().subtract(result.getサービス単位()));
-                    事業者別マップ.get(result.get事業者コード()).get(0).set種類限度内単位(事業者別マップ.
-                            get(result.get事業者コード()).get(0).get種類限度内単位().subtract(result.get種類限度内単位()));
-                    事業者別マップ.get(result.get事業者コード()).get(0).set種類限度超過単位(事業者別マップ.
-                            get(result.get事業者コード()).get(0).get種類限度超過単位().subtract(result.get種類限度超過単位()));
-                    事業者別マップ.get(result.get事業者コード()).get(0).set区分限度内単位(事業者別マップ.
-                            get(result.get事業者コード()).get(0).get区分限度内単位().subtract(result.get区分限度内単位()));
-                    事業者別マップ.get(result.get事業者コード()).get(0).set区分限度超過単位(事業者別マップ.
-                            get(result.get事業者コード()).get(0).get区分限度超過単位().subtract(result.get区分限度超過単位()));
+                    事業者別マップ.get(事業者コード).get(0).setサービス単位(事業者別マップ.
+                            get(事業者コード).get(0).getサービス単位().subtract(result.getサービス単位()));
+                    事業者別マップ.get(事業者コード).get(0).set種類限度内単位(事業者別マップ.
+                            get(事業者コード).get(0).get種類限度内単位().subtract(result.get種類限度内単位()));
+                    事業者別マップ.get(事業者コード).get(0).set種類限度超過単位(事業者別マップ.
+                            get(事業者コード).get(0).get種類限度超過単位().subtract(result.get種類限度超過単位()));
+                    事業者別マップ.get(事業者コード).get(0).set区分限度内単位(事業者別マップ.
+                            get(事業者コード).get(0).get区分限度内単位().subtract(result.get区分限度内単位()));
+                    事業者別マップ.get(事業者コード).get(0).set区分限度超過単位(事業者別マップ.
+                            get(事業者コード).get(0).get区分限度超過単位().subtract(result.get区分限度超過単位()));
                 }
-                事業者別マップ.get(result.get事業者コード()).get(0).set費用総額(事業者別マップ.
-                        get(result.get事業者コード()).get(0).get費用総額().subtract(result.get費用総額()));
-                事業者別マップ.get(result.get事業者コード()).get(0).set保険給付額(事業者別マップ.
-                        get(result.get事業者コード()).get(0).get保険給付額().subtract(result.get保険給付額()));
-                事業者別マップ.get(result.get事業者コード()).get(0).set保険対象利用者負担額(事業者別マップ.
-                        get(result.get事業者コード()).get(0).get保険対象利用者負担額().
+                事業者別マップ.get(事業者コード).get(0).set費用総額(事業者別マップ.
+                        get(事業者コード).get(0).get費用総額().subtract(result.get費用総額()));
+                事業者別マップ.get(事業者コード).get(0).set保険給付額(事業者別マップ.
+                        get(事業者コード).get(0).get保険給付額().subtract(result.get保険給付額()));
+                事業者別マップ.get(事業者コード).get(0).set保険対象利用者負担額(事業者別マップ.
+                        get(事業者コード).get(0).get保険対象利用者負担額().
                         subtract(result.get保険対象利用者負担額()));
-                事業者別マップ.get(result.get事業者コード()).get(0).set全額利用者負担額(事業者別マップ.
-                        get(result.get事業者コード()).get(0).get全額利用者負担額().subtract(result.get全額利用者負担額()));
+                事業者別マップ.get(事業者コード).get(0).set全額利用者負担額(事業者別マップ.
+                        get(事業者コード).get(0).get全額利用者負担額().subtract(result.get全額利用者負担額()));
             }
         }
         return 事業者別マップ;

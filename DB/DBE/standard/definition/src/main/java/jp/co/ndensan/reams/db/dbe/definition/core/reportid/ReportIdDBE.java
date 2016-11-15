@@ -350,7 +350,7 @@ public enum ReportIdDBE {
     /**
      * 委員用予備判定記入表の帳票ＩＤです。
      */
-    DBE517022(new ReportId("DBE517022_IinYobihanteiKinyuhyo"), new RString("委員用予備判定記入表")),
+    DBE517022(new ReportId("DBE517022_IinYobihanteiKinyuhyo"), new RString("予備判定記入表（委員用）")),
     /**
      * 委員用予備判定記入表の帳票ＩＤです。
      */

@@ -413,18 +413,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         mapper.createTmpHonsantei();
         mapper.createTmpTsukibetsuRanku();
         dbの処理(資格の情報, 賦課の情報, param);
-        for (FukaJoho fukaEntity : 賦課の情報) {
-            boolean flg = true;
-            for (HihokenshaDaicho daichoEntity : 資格の情報) {
-                if (fukaEntity.get被保険者番号().equals(daichoEntity.get被保険者番号())) {
-                    flg = false;
-                    break;
-                }
-            }
-            if (flg) {
-                賦課エラー登録処理(fukaEntity, 賦課年度, new Code(ErrorCode.被保険者台帳データなし.getコード()));
-            }
-        }
     }
 
     private void sort資格の情報(List<HihokenshaDaicho> 資格の情報) {

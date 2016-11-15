@@ -15,6 +15,7 @@
         <result property="認定有効期間開始日" column="DbT4001_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定有効期間終了日" column="DbT4001_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定年月日" column="DbT4001_ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="市町村コード" column="DbT4001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="識別コード" column="DbT1001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="資格取得年月日" column="DbT1001_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="資格喪失年月日" column="DbT1001_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -30,6 +31,7 @@
         <result property="電話番号" column="居宅サービス計画_jigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="変更年月日" column="居宅サービス計画_jigyoshaHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="事業者名称" column="居宅サービス計画_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居宅給付計画届出_被保険者番号" column="居宅給付計画届出_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <association property="宛名" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
@@ -45,6 +47,7 @@
             ,受給者台帳."ninteiYukoKikanKaishiYMD" AS DbT4001_ninteiYukoKikanKaishiYMD
             ,受給者台帳."ninteiYukoKikanShuryoYMD" AS DbT4001_ninteiYukoKikanShuryoYMD
             ,受給者台帳."ninteiYMD" AS DbT4001_ninteiYMD
+            ,受給者台帳."shichosonCode" AS DbT4001_shichosonCode
             , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
             ,被保険者台帳."shikibetsuCode" AS DbT1001_shikibetsuCode
             ,被保険者台帳."shikakuShutokuYMD" AS DbT1001_shikakuShutokuYMD
@@ -61,6 +64,7 @@
             ,居宅サービス計画."事業者電話番号" AS 居宅サービス計画_jigyoshaTelNo
             ,居宅サービス計画."変更年月日" AS 居宅サービス計画_jigyoshaHenkoYMD
             ,居宅サービス計画."事業者名称" AS 居宅サービス計画_jigyoshaName
+            ,居宅サービス計画."hihokenshaNo" AS 居宅給付計画届出_hihokenshaNo
         FROM
             rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
         LEFT JOIN
@@ -77,9 +81,10 @@
             FROM
                 rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
             WHERE
-                (被保険者台帳管理."shikakuShutokuYMD" <![CDATA[ <= ]]> #{ 基準日 }
-                AND #{ 基準日 } <![CDATA[ < ]]> 被保険者台帳管理."shikakuSoshitsuYMD"
-                OR 被保険者台帳管理."shikakuSoshitsuYMD" IS NULL)
+                被保険者台帳管理."shikakuShutokuYMD" <![CDATA[ <= ]]> #{ 基準日 }
+                AND (#{ 基準日 } <![CDATA[ < ]]> 被保険者台帳管理."shikakuSoshitsuYMD"
+                OR 被保険者台帳管理."shikakuSoshitsuYMD" IS NULL
+                OR 被保険者台帳管理."shikakuSoshitsuYMD" = '')
                 AND 被保険者台帳管理."logicalDeletedFlag" = FALSE
                 ) AS 被保険者台帳
             ON  被保険者台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo"
@@ -107,7 +112,7 @@
                 ,ROW_NUMBER() OVER (PARTITION BY 居宅給付計画届出. "hihokenshaNo",
                                     居宅給付計画届出. "taishoYM" 
                                     ORDER BY 居宅給付計画届出."rirekiNo" DESC) AS 最大順
-            FROM	
+            FROM
                 rgdb."DbT3005KyotakuKeikakuTodokede" AS 居宅給付計画届出
             LEFT JOIN
                 (SELECT	

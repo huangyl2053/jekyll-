@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.NinteiChosaIr
 
 /**
  *
- * バッチ設計_DBE240002_主治医意見書提出依頼書発行のRelateBusinessクラスです。
+ * バッチ設計_DBE220003_認定調査依頼発行一覧表のRelateBusinessクラスです。
  *
  * @reamsid_L DBE-0080-130 duanzhanli
  */

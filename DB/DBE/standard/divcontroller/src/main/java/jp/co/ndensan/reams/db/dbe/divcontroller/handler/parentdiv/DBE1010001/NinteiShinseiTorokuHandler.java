@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -132,26 +131,23 @@ public class NinteiShinseiTorokuHandler {
     /**
      * 届出情報の氏名・カナ氏名・続柄・郵便番号・住所・電話番号を設定します
      *
-     * @param 宛名情報 宛名情報
      * @return 介護認定申請届出者情報
      */
-    public NinteiShinseiTodokedeshaDataPassModel set届出情報(IKojin 宛名情報) {
+    public NinteiShinseiTodokedeshaDataPassModel set届出情報() {
         NinteiShinseiTodokedeshaDataPassModel datapass = new NinteiShinseiTodokedeshaDataPassModel();
-        if (宛名情報 != null) {
-            if (宛名情報.get名称().getKana() != null) {
-                datapass.setカナ氏名(宛名情報.get名称().getKana().value());
-            }
-            if (宛名情報.get名称().getName() != null) {
-                datapass.set氏名(宛名情報.get名称().getName().value());
-            }
-            if (宛名情報.get住所().get郵便番号() != null) {
-                datapass.set郵便番号(宛名情報.get住所().get郵便番号().value());
-            }
-            if (宛名情報.get連絡先１() != null) {
-                datapass.set電話番号(宛名情報.get連絡先１().value());
-            }
-            datapass.set住所(宛名情報.get住所().get住所());
+        if (!RString.isNullOrEmpty(div.getCcdAtenaInfo().get被保険者氏名カナ())) {
+            datapass.setカナ氏名(div.getCcdAtenaInfo().get被保険者氏名カナ());
         }
+        if (!RString.isNullOrEmpty(div.getCcdAtenaInfo().get被保険者氏名())) {
+            datapass.set氏名(div.getCcdAtenaInfo().get被保険者氏名());
+        }
+        if (div.getCcdAtenaInfo().get郵便番号() != null && !div.getCcdAtenaInfo().get郵便番号().isEmpty()) {
+            datapass.set郵便番号(div.getCcdAtenaInfo().get郵便番号().value());
+        }
+        if (!RString.isNullOrEmpty(div.getCcdAtenaInfo().get電話番号())) {
+            datapass.set電話番号(div.getCcdAtenaInfo().get電話番号());
+        }
+        datapass.set住所(div.getCcdAtenaInfo().get住所());
         datapass.set続柄(new RString("本人"));
         return datapass;
     }

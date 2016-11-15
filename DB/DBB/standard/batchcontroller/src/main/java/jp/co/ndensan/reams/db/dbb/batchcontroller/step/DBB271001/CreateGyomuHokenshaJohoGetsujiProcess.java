@@ -84,13 +84,16 @@ public class CreateGyomuHokenshaJohoGetsujiProcess extends BatchProcessBase<Toku
     protected void process(TokuchoTaishoshaDoteiCombineEntity entity) {
         FlexibleDate now = FlexibleDate.getNowDate();
         Map.Entry<ShikibetsuCode, DoteiFuitchiRiyu> entry = get不一致理由_月次(entity, now, parameter.get開始月());
-        if (null != entry.getValue()) {
-            GyomuHihokenshaTempEntity 業務被保険者情報一時 = new GyomuHihokenshaTempEntity();
-            業務被保険者情報一時.setShikibetsuCode(entry.getKey().getColumnValue());
+
+        GyomuHihokenshaTempEntity 業務被保険者情報一時 = new GyomuHihokenshaTempEntity();
+        業務被保険者情報一時.setShikibetsuCode(entry.getKey().getColumnValue());
+        if (null == entry.getValue()) {
+            業務被保険者情報一時.setFuitchiRiyuCode(null);
+        } else {
             業務被保険者情報一時.setFuitchiRiyuCode(entry.getValue().getコード());
-            業務被保険者情報一時.setState(EntityDataState.Added);
-            業務被保険者情報一時tableWriter.insert(業務被保険者情報一時);
         }
+        業務被保険者情報一時.setState(EntityDataState.Added);
+        業務被保険者情報一時tableWriter.insert(業務被保険者情報一時);
     }
 
     private Map.Entry<ShikibetsuCode, DoteiFuitchiRiyu> get不一致理由_月次(TokuchoTaishoshaDoteiCombineEntity entity,

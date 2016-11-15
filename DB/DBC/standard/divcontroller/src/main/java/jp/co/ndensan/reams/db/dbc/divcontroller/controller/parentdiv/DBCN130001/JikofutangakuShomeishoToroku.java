@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBCN130001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeisho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeishoMeisai;
@@ -13,13 +14,13 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishoto
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.DBCN130001StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.DBCN130001TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.JikofutangakuShomeishoTorokuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.dgShomeishoRireki_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN130001.JikofutangakuShomeishoTorokuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN130001.JikofutangakuShomeishoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -27,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -119,13 +118,14 @@ public class JikofutangakuShomeishoToroku {
         List<RString> keys = div.getChkIsRirekiHyoji().getSelectedKeys();
         List<JigyoKogakuGassanJikoFutanGakuShomeisho> 証明書情報List;
         if (keys.isEmpty()) {
-            証明書情報List = manager.get事業高額合算自己負担額証明書情報(parameter).records();
-        } else {
             証明書情報List = manager.get事業高額合算自己負担額証明書履歴情報(parameter).records();
+        } else {
+            証明書情報List = manager.get事業高額合算自己負担額証明書情報(parameter).records();
         }
 
         if (証明書情報List.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            div.getDgShomeishoRireki().setDataSource(new ArrayList<dgShomeishoRireki_Row>());
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).検索対象データなし()).respond();
         }
         getHandler(div).set証明書履歴GRD(証明書情報List);
         return ResponseData.of(div).respond();
@@ -164,7 +164,7 @@ public class JikofutangakuShomeishoToroku {
         JikofutangakuShomeishoTorokuParameter parameter = getHandler(div).getParameterSelectRow(被保険者番号);
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         List<JikofutangakuShomeishoTorokuBusiness> list = manager.get事業高額合算支給申請書情報(parameter).records();
-        if (!list.isEmpty()) {
+        if (!list.isEmpty() && list.get(0) != null) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
         }
@@ -532,6 +532,14 @@ public class JikofutangakuShomeishoToroku {
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_btnResearch_TorokuGamen(JikofutangakuShomeishoTorokuDiv div) {
         JikofutangakuShomeishoTorokuBusiness business
                 = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
+        if (is照会OR削除(div)) {
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            RString 前排他キー = 排他キー.concat(被保険者番号.value());
+            LockingKey key = new LockingKey(前排他キー);
+            RealInitialLocker.release(key);
+            return ResponseData.of(div).forwardWithEventName(DBCN130001TransitionEventName.対象者検索に戻る).respond();
+        }
         if (getHandler(div).is証明書登録画面変更(business)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
@@ -560,6 +568,14 @@ public class JikofutangakuShomeishoToroku {
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_btnBackSearchResult_TorokuGamen(JikofutangakuShomeishoTorokuDiv div) {
         JikofutangakuShomeishoTorokuBusiness business
                 = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
+        if (is照会OR削除(div)) {
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            RString 前排他キー = 排他キー.concat(被保険者番号.value());
+            LockingKey key = new LockingKey(前排他キー);
+            RealInitialLocker.release(key);
+            return ResponseData.of(div).forwardWithEventName(DBCN130001TransitionEventName.検索結果一覧に戻る).respond();
+        }
         if (getHandler(div).is証明書登録画面変更(business)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
@@ -588,14 +604,23 @@ public class JikofutangakuShomeishoToroku {
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_btnBack(JikofutangakuShomeishoTorokuDiv div) {
         JikofutangakuShomeishoTorokuBusiness business
                 = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
+        if (is照会OR削除(div)) {
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            RString 前排他キー = 排他キー.concat(被保険者番号.value());
+            LockingKey key = new LockingKey(前排他キー);
+            RealInitialLocker.release(key);
+            getHandler(div).set登録情報();
+            return ResponseData.of(div).setState(DBCN130001StateName.証明書検索);
+        }
         if (getHandler(div).is証明書登録画面変更(business)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if ((new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
                 TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
                 HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
                 RString 前排他キー = 排他キー.concat(被保険者番号.value());
@@ -608,6 +633,10 @@ public class JikofutangakuShomeishoToroku {
         return ResponseData.of(div).respond();
     }
 
+    private boolean is照会OR削除(JikofutangakuShomeishoTorokuDiv div) {
+        return STATUS_照会.equals(div.getExecutionStatus()) || STATUS_削除.equals(div.getExecutionStatus());
+    }
+
     /**
      * 更新用BTN処理を行う。
      *
@@ -617,9 +646,11 @@ public class JikofutangakuShomeishoToroku {
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_btnUpdate(JikofutangakuShomeishoTorokuDiv div) {
         JikofutangakuShomeishoTorokuBusiness business
                 = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
         RStringBuilder 完了メッセージ = new RStringBuilder("対象者の自己負担額証明書情報の、");
         if (STATUS_新規.equals(div.getExecutionStatus())) {
@@ -639,8 +670,8 @@ public class JikofutangakuShomeishoToroku {
         messageTaisho1.append(new RString("："));
         messageTaisho1.append(div.getCcdAtenaInfo().get氏名漢字());
         RStringBuilder messageTaisho2 = new RStringBuilder();
-        messageTaisho2.append(new RString("支給申請書整理番号"));
-        messageTaisho2.append(business.get事業高額合算自己負担額証明書情報().get支給申請書整理番号());
+        messageTaisho2.append(new RString("支給申請書整理番号："));
+        messageTaisho2.append(div.getTxtTorokuShikyuShinseishoSeiriNo().getValue());
 
         div.getCcdKanryoMessage().setMessage(
                 完了メッセージ.toRString(), RString.EMPTY,
@@ -668,26 +699,26 @@ public class JikofutangakuShomeishoToroku {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
         if (shomeisho.get転入前保険者番号().value().equals(div.getCcdTennyumaeHokensha().getHokenjaNo())) {
-            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
-            manager.save事業高額合算自己負担額証明書(shomeisho.createBuilderForEdit().set自己負担額証明書整理番号(div.getTxtJikofutangakuShomeishoSeiriNo().getValue())
-                    .set転入前保険者名(div.getCcdTennyumaeHokensha().getHokenjaName())
-                    .set対象計算期間開始年月日(new FlexibleDate(div.getTxtTaishoKikan().getFromValue().toDateString()))
-                    .set対象計算期間終了年月日(new FlexibleDate(div.getTxtTaishoKikan().getToValue().toDateString()))
-                    .set被保険者期間開始年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getFromValue().toDateString()))
-                    .set被保険者期間終了年月日(new FlexibleDate(div.getTxtHihokenshaKikan().getToValue().toDateString()))
-                    .set発行年月日(div.getTxtHakkoDate().getValue())
-                    .set合計合計_自己負担額(div.getTxtJikofutangakuGokei().getValue())
-                    .set合計_70_74自己負担額_内訳(div.getTxtUchiFutangakuGokei().getValue())
-                    .set支給額計算結果連絡先郵便番号(div.getTxtYubinNo().getValue())
-                    .set支給額計算結果連絡先住所(div.getTxtRenrakusakiJusho().getValue())
-                    .set支給額計算結果連絡先名称1(div.getTxtRenrakusakiMei1().getValue())
-                    .set支給額計算結果連絡先名称2(div.getTxtRenrakusakiMei2().getValue())
-                    .set受付年月日(div.getTxtUketsukeDate().getValue()).build(), meisaiList, getHandler(div).get更新用事業高額合算自己負担額証明書明細(被保険者番号, meisaiList));
+
+            Decimal 履歴番号 = manager.get事業高額合算自己負担額証明書最新履歴番号(getHandler(div).getParameterFor登録(被保険者番号));
+            if (履歴番号 != null && !Decimal.ZERO.equals(履歴番号)) {
+                manager.save事業高額合算自己負担額証明書(getHandler(div).get更新用事業高額合算自己負担額証明書1(被保険者番号, shomeisho),
+                        getHandler(div).get更新用事業高額合算自己負担額証明書明細1(被保険者番号, meisaiList));
+            } else {
+                JigyoKogakuGassanJikoFutanGakuShomeisho updateShomeisho = getHandler(div).get更新用事業高額合算自己負担額証明書(被保険者番号, shomeisho);
+                manager.save事業高額合算自己負担額証明書(updateShomeisho,
+                        getHandler(div).get更新用事業高額合算自己負担額証明書明細(被保険者番号, meisaiList));
+            }
 
         } else {
-            manager.save事業高額合算自己負担額証明書and明細(getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, Decimal.ZERO),
-                    getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, Decimal.ZERO));
+
+            manager.save事業高額合算自己負担額証明書and明細(
+                    getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, Decimal.ZERO),
+                    getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, Decimal.ZERO),
+                    getHandler(div).get更新用事業高額合算自己負担額証明書1(被保険者番号, shomeisho),
+                    getHandler(div).get更新用事業高額合算自己負担額証明書明細1(被保険者番号, meisaiList));
         }
     }
 

@@ -92,7 +92,7 @@ public class GassanHoseizumiJikofutangakuSofuchiranBodyEditor implements IGassan
         } else {
             source.list_15 = RString.EMPTY;
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list_3);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.list_3));
         return source;
     }
 
@@ -113,5 +113,12 @@ public class GassanHoseizumiJikofutangakuSofuchiranBodyEditor implements IGassan
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 }

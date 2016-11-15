@@ -1,4 +1,4 @@
-/// <reference path="JukyushaIdoRenrakuhyo_Design.ts" />
+﻿/// <reference path="JukyushaIdoRenrakuhyo_Design.ts" />
 
 // 共有子Divモード記述TypeScriptソースです。
 
@@ -14,7 +14,7 @@ module DBC
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
- 
+
             public priorities(): Array<string> {
                 return ["DisplayMode"];
             }
@@ -26,7 +26,7 @@ module DBC
                 return new Modes.DisplayMode(this.controls);
             }
         }
-        
+
         export module Modes {
             export class DisplayMode {
                 private controls: Controls;
@@ -49,11 +49,11 @@ module DBC
                     this.controls.txtShoKisaiHokenshaNo().disabled = false;	//証記載保険者番号
                     this.controls.txtKoikiHokenshaNo().disabled = true;	//広域保険者番号
                     this.controls.txtSofuYM().disabled = true;	//送付年月
-                    
+
                     this.controls.JukyushaIdoRenrakuhyoTeisei().visible = false;
                     //this.controls.txtTeiseiYMD().disabled = false;	//訂正日
                     //this.controls.radTeiseiKubunCode().disabled = false;	//訂正区分
-                    
+
                     //要介護認定エリア
                     //this.controls.YokaigoNinteiPanel().disabled = true;
                     this.controls.btnYokaigoninteiRireki().disabled = false;
@@ -113,7 +113,7 @@ module DBC
                     this.controls.txtRojinHokenJukyushaNo().disabled = false;
                     this.controls.txtKohiFutanshaNo().disabled = false;
                 }
-                
+
                 //訂正モード
                 public teisei(): void {
                     this.controls.txtIdoYMD().disabled = true;	//異動日
@@ -128,11 +128,11 @@ module DBC
                     this.controls.txtShoKisaiHokenshaNo().disabled = false;	//証記載保険者番号
                     this.controls.txtKoikiHokenshaNo().disabled = true;	//広域保険者番号
                     this.controls.txtSofuYM().disabled = true;	//送付年月
-                    
+
                     this.controls.JukyushaIdoRenrakuhyoTeisei().disabled = false;
                     this.controls.txtTeiseiYMD().disabled = false;	//訂正日
                     this.controls.radTeiseiKubunCode().disabled = false;	//訂正区分
-                    
+
                     //要介護認定エリア
                     //this.controls.YokaigoNinteiPanel().disabled = true;
                     this.controls.btnYokaigoninteiRireki().disabled = false;
@@ -177,28 +177,27 @@ module DBC
                     //this.controls.KyufuSeigenPanel().disabled = true;
                     this.controls.btnKyufuSeigenRireki().disabled = false;
                     this.controls.radKohiFutanJogenGengakuAriFlag().disabled = false;
-                    this.controls.txtShokanbaraikaYMD().disabled = true;
-                    this.controls.txtKyufuritsuHikisage().disabled = true;
+                    this.controls.txtShokanbaraikaYMD().disabled = false;
+                    this.controls.txtKyufuritsuHikisage().disabled = false;
                     //二割負担
                     //this.controls.RiyosyaFutanWariaiPanel().disabled = true;
                     this.controls.txtRiyosyaFutanWariaiYukoYMD().disabled = false;
                     //二次予防事業エリア
                     //this.controls.NijiyoboJigyoPanel().disabled = true;
                     this.controls.radNijiyoboJigyoKubun().disabled = false;
-                    this.controls.txtNijiyoboJigyoYukoDateRange().disabled = false;
                     //老人保健エリア
                     //this.controls.RojinHokenPanel().disabled = true;
                     this.controls.txtRojinHokenShichosonNo().disabled = false;
                     this.controls.txtRojinHokenJukyushaNo().disabled = false;
                     this.controls.txtKohiFutanshaNo().disabled = false;
                 }
-                
+
                 //再発行モード
                 public saihakko(): void {
                     //照会モード同様
                     this.shokai();
                 }
-                
+
                 //照会モード
                 public shokai(): void {
                     this.controls.txtIdoYMD().disabled = true;	//異動日
@@ -213,11 +212,11 @@ module DBC
                     this.controls.txtShoKisaiHokenshaNo().disabled = true;	//証記載保険者番号
                     this.controls.txtKoikiHokenshaNo().disabled = true;	//広域保険者番号
                     this.controls.txtSofuYM().disabled = true;	//送付年月
-                    
+
                     this.controls.JukyushaIdoRenrakuhyoTeisei().disabled = true;
                     this.controls.txtTeiseiYMD().disabled = true;	//訂正日
                     this.controls.radTeiseiKubunCode().disabled = true;	//訂正区分
-                    
+
                     //要介護認定エリア
                     //this.controls.YokaigoNinteiPanel().disabled = true;
                     this.controls.btnYokaigoninteiRireki().disabled = false;
@@ -279,7 +278,7 @@ module DBC
                 }
             }
         }
-        
+
 
     }
 }

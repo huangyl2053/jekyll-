@@ -143,8 +143,8 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
                     && is第2段階(get金額_5(gendoNichigakuGetter.getユニット型個室_基準費用額(連絡票作成日)), 負担限度額認定_ユニット型個室)));
             renrakuhyo.set基準額_個室金額(get金額_5(gendoNichigakuGetter.getユニット型個室_基準費用額(連絡票作成日)));
             renrakuhyo.set第1段階_準個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第1段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室１(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
-            renrakuhyo.set第1段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室１(連絡票作成日)));
+                    && is第1段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室１(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
+            renrakuhyo.set第1段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室１(連絡票作成日)));
             renrakuhyo.set第2_1段階_準個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
                     && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の１(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
             renrakuhyo.set第2_1段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の１(連絡票作成日)));
@@ -152,8 +152,8 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
                     && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の２(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
             renrakuhyo.set第2_2段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室２の２(連絡票作成日)));
             renrakuhyo.set第3段階_準個室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
-                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室３(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
-            renrakuhyo.set第3段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型個室３(連絡票作成日)));
+                    && is第2段階(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室３(連絡票作成日)), 負担限度額認定_ユニット型準個室)));
+            renrakuhyo.set第3段階_準個室金額(get金額_5(gendoNichigakuGetter.get旧措軽減ユニット型準個室３(連絡票作成日)));
         }
         renrakuhyo = getKaigohokenRenrakuhyo1(renrakuhyo, hold);
         renrakuhyo = getKaigohokenRenrakuhyo(renrakuhyo, hold);

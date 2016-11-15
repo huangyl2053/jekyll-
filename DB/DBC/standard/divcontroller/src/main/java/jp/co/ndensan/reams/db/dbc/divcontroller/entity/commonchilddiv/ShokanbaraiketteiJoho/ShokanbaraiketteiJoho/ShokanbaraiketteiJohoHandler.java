@@ -154,6 +154,8 @@ public class ShokanbaraiketteiJohoHandler {
             div.getTxtFushikyuriyu2().setDisabled(true);
             div.getRdoShikyukubun().setDisabled(true);
         }
+        div.getTxtShiharaikingakugoke().setDisabled(true);
+        div.getTxtZogentani().setDisabled(true);
     }
 
     private boolean isFlexibleDateNullOrEmpty(FlexibleDate date) {
@@ -222,14 +224,6 @@ public class ShokanbaraiketteiJohoHandler {
 
     private void set決定情報(KetteJoho 決定情報, RString 支給区分) {
 
-        if (決定情報 != null) {
-            if (支給区分_不支給.equals(支給区分)) {
-                div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
-            } else {
-                div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
-            }
-        }
-
         if (支給区分_支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(false);
             div.getTxtFuSyikyuriyu1().setDisabled(true);
@@ -247,6 +241,7 @@ public class ShokanbaraiketteiJohoHandler {
             } else {
                 div.getTxtZogentani().setValue(Decimal.ZERO);
             }
+            div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
         } else if (支給区分_不支給.equals(支給区分)) {
             div.getTxtZogenriyu().setDisabled(true);
             div.getTxtFuSyikyuriyu1().setDisabled(false);

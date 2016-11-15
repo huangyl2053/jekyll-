@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -137,13 +136,6 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString RSTRING_67 = new RString("67");
     private static final RString SERVICETANI = new RString("serviceTani");
 
-    private static final RString 種類限度単位指定エラー = new RString(
-            "種類限度単位指定エラー：【サービス単位＝種類超過＋種類限度内】になっていません。");
-    private static final RString 区分限度単位指定エラー = new RString(
-            "区分限度単位指定エラー：【種類限度内点数＝区分超過＋区分限度内】になっていません。");
-    private static final RString 種類区分限度単位指定エラー = new RString(
-            "種類限度単位・区分限度単位指定エラー：【サービス単位＝種類超過＋区分超過＋区分限度内】になっていません。");
-
     /**
      * コンストラクタです。
      *
@@ -234,6 +226,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getGridSetting()
                     .getColumn(COLUMN_保険給付額).setColumnName(事業者請求額);
         }
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getBtnKakutei().setDisplayNone(true);
     }
 
     private void set初期化状態(RString 表示モード) {
@@ -243,6 +236,8 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getChkZanteiKubun().setDisabled(true);
         div.getTxtKubunShikyuGendogaku().setDisabled(true);
         div.getTxtGendoKanriKikan().setDisabled(true);
+        div.getBtnShowShuruiGendogaku().setDisabled(false);
+        div.getServiceRiyohyoBeppyoList().setDisabled(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoRiyoNissu().getTxtRuikeiRiyoNissu().setDisabled(true);
@@ -469,6 +464,8 @@ public class ServiceRiyohyoInfoDivHandler {
                         短期入所情報.get予防短期入所情報().get更新区分(), 短期入所情報.get予防短期入所情報().get暫定区分());
             }
 
+        } else {
+            div.getDdlKoshinKbn().setSelectedKey(KyufukanrihyoSakuseiKubun.新規.getコード());
         }
         if (居宅.equals(居宅総合事業区分)) {
             int count = jigoSakusei.load利用年月チェック(被保険者番号, 利用年月);
@@ -537,10 +534,6 @@ public class ServiceRiyohyoInfoDivHandler {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         List<KyufuJikoSakuseiResult> サービス利用票情報 = jigoSakusei.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号, 利用年月);
         List<dgServiceRiyohyoBeppyoList_Row> rowList = new ArrayList<>();
-        if (サービス利用票情報 == null || サービス利用票情報.isEmpty()) {
-            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
-            return;
-        }
         int i = 0;
         for (KyufuJikoSakuseiResult result : サービス利用票情報) {
             dgServiceRiyohyoBeppyoList_Row row = setRow(result);
@@ -630,11 +623,15 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void setパネルにデータ反映() {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
+        RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (削除.equals(表示モード)) {
+            row.setRowState(RowState.Deleted);
+        }
         if (合計なし.equals(row.getHdnGokeiGyoFlag())) {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス種類コード(row.getHdnServiceShuruiCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス項目コード(row.getHdnServiceKomokuCode());
-            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().initialize(row.getHdnServiceShuruiCode());
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
         }
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
 
@@ -1048,8 +1045,8 @@ public class ServiceRiyohyoInfoDivHandler {
         Decimal 給付率Decimal = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue()
                 == null ? Decimal.ZERO : div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue();
         HokenKyufuRitsu 給付率 = new HokenKyufuRitsu(給付率Decimal);
-        種類支給額チェック(種類限度内単位, 種類限度超過単位);
-        区分支給額チェック(区分限度内単位, 区分限度超過単位, 種類限度超過単位, サービス単位);
+//        種類支給額チェック(種類限度内単位, 種類限度超過単位);
+//        区分支給額チェック(区分限度内単位, 区分限度超過単位, 種類限度超過単位, サービス単位);
         JigoSakuseiMeisaiTouroku service = JigoSakuseiMeisaiTouroku.createInstance();
         GokeiKeisan 合計計算処理結果 = service.getGokeiKeisan(利用者負担額, 種類限度超過単位, 種類限度内単位,
                 単位数単価, 区分限度超過単位, 区分限度内単位, 給付率, サービス単位);
@@ -1057,45 +1054,44 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoGokei().getBtnBeppyoGokeiKakutei().setDisabled(false);
     }
 
-    private void 種類支給額チェック(Decimal 種類限度内単位, Decimal 種類限度超過単位) {
-        Decimal サービス単位 = div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue() == null
-                ? Decimal.ZERO : div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue();
-        if (Decimal.ZERO.compareTo(種類限度内単位.add(種類限度超過単位)) < 0
-                && !種類限度内単位.add(種類限度超過単位).equals(サービス単位)) {
-            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
-                    .replace(種類限度単位指定エラー.toString()));
-        } else if (div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().isDisabled() && !Decimal.ZERO.equals(サービス単位)) {
-            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
-                    .replace(区分限度単位指定エラー.toString()));
-        }
-    }
-
-    private void 区分支給額チェック(Decimal 区分限度内単位, Decimal 区分限度超過単位, Decimal 種類限度超過単位, Decimal サービス単位) {
-        if (Decimal.ZERO.compareTo(区分限度内単位.add(区分限度超過単位)) < 0) {
-            Decimal ワークサービス単位;
-            RString ワークメッセージ編集;
-            if (Decimal.ZERO.compareTo(区分限度内単位) < 0) {
-                ワークサービス単位 = 区分限度内単位;
-                ワークメッセージ編集 = 区分限度単位指定エラー;
-            } else if (div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().isDisabled()) {
-                ワークサービス単位 = サービス単位;
-                ワークメッセージ編集 = 種類区分限度単位指定エラー;
-            } else {
-                ワークサービス単位 = Decimal.ZERO;
-                ワークメッセージ編集 = 種類区分限度単位指定エラー;
-            }
-            if (!ワークサービス単位.equals(区分限度内単位.add(種類限度超過単位).add(区分限度超過単位))) {
-                throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
-                        .replace(ワークメッセージ編集.toString()));
-            }
-        } else if (!サービス単位.equals(区分限度内単位.add(種類限度超過単位).add(区分限度超過単位))
-                && (!div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().isDisabled()
-                || !RSTRING_ONE.equals(div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().getValue()))) {
-            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
-                    .replace(種類区分限度単位指定エラー.toString()));
-        }
-    }
-
+//    private void 種類支給額チェック(Decimal 種類限度内単位, Decimal 種類限度超過単位) {
+//        Decimal サービス単位 = div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue() == null
+//                ? Decimal.ZERO : div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue();
+//        if (Decimal.ZERO.compareTo(種類限度内単位.add(種類限度超過単位)) < 0
+//                && !種類限度内単位.add(種類限度超過単位).equals(サービス単位)) {
+//            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
+//                    .replace(種類限度単位指定エラー.toString()));
+//        } else if (div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().isDisabled() && !Decimal.ZERO.equals(サービス単位)) {
+//            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
+//                    .replace(区分限度単位指定エラー.toString()));
+//        }
+//    }
+//
+//    private void 区分支給額チェック(Decimal 区分限度内単位, Decimal 区分限度超過単位, Decimal 種類限度超過単位, Decimal サービス単位) {
+//        if (Decimal.ZERO.compareTo(区分限度内単位.add(区分限度超過単位)) < 0) {
+//            Decimal ワークサービス単位;
+//            RString ワークメッセージ編集;
+//            if (Decimal.ZERO.compareTo(区分限度内単位) < 0) {
+//                ワークサービス単位 = 区分限度内単位;
+//                ワークメッセージ編集 = 区分限度単位指定エラー;
+//            } else if (div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().isDisabled()) {
+//                ワークサービス単位 = サービス単位;
+//                ワークメッセージ編集 = 種類区分限度単位指定エラー;
+//            } else {
+//                ワークサービス単位 = Decimal.ZERO;
+//                ワークメッセージ編集 = 種類区分限度単位指定エラー;
+//            }
+//            if (!ワークサービス単位.equals(区分限度内単位.add(種類限度超過単位).add(区分限度超過単位))) {
+//                throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
+//                        .replace(ワークメッセージ編集.toString()));
+//            }
+//        } else if (!サービス単位.equals(区分限度内単位.add(種類限度超過単位).add(区分限度超過単位))
+//                && (!div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().isDisabled()
+//                || !RSTRING_ONE.equals(div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().getValue()))) {
+//            throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
+//                    .replace(種類区分限度単位指定エラー.toString()));
+//        }
+//    }
     private void 合計結果画面設定(GokeiKeisan 合計計算処理結果) {
         if (合計計算処理結果.get費用総額() == null) {
             div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().setValue(Decimal.ZERO);
@@ -1271,21 +1267,14 @@ public class ServiceRiyohyoInfoDivHandler {
                 給付率 = 給付率_100.subtract(二割);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.給付率, 給付率);
+        ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(給付率));
         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(給付率);
 
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(true);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(true);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setDisabled(true);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(true);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);
-        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(false);
-        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(false);
+        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(サービス単位計算());
     }
 
     /**
@@ -1866,10 +1855,10 @@ public class ServiceRiyohyoInfoDivHandler {
 
     private Decimal サービス単位計算() {
         Decimal サービス単位合計 = Decimal.ZERO;
-        RString 事業者 = div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho();
-        RString サービス種類コード = div.getCcdServiceTypeInput().getサービス種類コード();
+        RString 事業者 = div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo();
+        RString サービス種類コード = div.getCcdServiceCodeInput().getサービスコード1();
         for (dgServiceRiyohyoBeppyoList_Row row : div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource()) {
-            if (row.getJigyosha() != null && row.getJigyosha().equals(事業者)
+            if (row.getHdnJigyoshaCode() != null && row.getHdnJigyoshaCode().equals(事業者)
                     && row.getHdnServiceShuruiCode() != null && row.getHdnServiceShuruiCode().equals(サービス種類コード)) {
                 サービス単位合計 = サービス単位合計.add(RString.isNullOrEmpty(row.getServiceTani().getText()) ? Decimal.ZERO
                         : row.getServiceTani().getValue());

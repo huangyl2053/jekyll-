@@ -6,17 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 主治医意見書（A3版）のEditorです。
@@ -27,14 +25,17 @@ public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Ed
 
     private static final int INT_4 = 4;
     private final JimuShinsakaiWariateJohoBusiness business;
+    private final RString reportId;
 
     /**
      * インスタンスを生成します。
      *
      * @param business {@link JimuShinsakaiWariateJohoBusiness}
+     * @param reportId 帳票ＩＤ
      */
-    protected IinShinsakaishiryoA3Group4Editor(JimuShinsakaiWariateJohoBusiness business) {
+    protected IinShinsakaishiryoA3Group4Editor(JimuShinsakaiWariateJohoBusiness business, RString reportId) {
         this.business = business;
+        this.reportId = reportId;
     }
 
     @Override
@@ -64,13 +65,11 @@ public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Ed
         source.five_shinsaDD = get日(business.get今回認定審査年月日());
         source.five_imgIkensho1 = business.get左の主治医意見書イメージ();
         source.five_imgIkensho2 = business.get右の主治医意見書イメージ();
-        if (business.is事務局()) {
-            source.shikibetuCode = ShikibetsuCode.EMPTY;
-            if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
-                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
-            }
+        if (ReportIdDBE.DBE517915.getReportId().value().equals(reportId)) {
+            source.layout = Layouts.任意;
+        } else {
+            source.layout = Layouts.四頁目;
         }
-        source.layout = Layouts.任意;
         return source;
     }
 

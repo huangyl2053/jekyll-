@@ -24,10 +24,10 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    if (!div.getTxtTekiyoKikanKaishi().getValue().isEmpty() && !div.getTxtTekiyoKikanShuryo().getValue().isEmpty()) {
+                    if (!div.getTxtTekiyoKikanKaishi().getValue().toString().isEmpty() && !div.getTxtTekiyoKikanShuryo().getValue().toString().isEmpty()) {
                         return div.getTxtTekiyoKikanKaishi().getValue().isBefore(div.getTxtTekiyoKikanShuryo().getValue());
                     } else {
-                        return !div.getTxtTekiyoKikanKaishi().getValue().isEmpty() || !div.getTxtTekiyoKikanShuryo().getValue().isEmpty();
+                        return !div.getTxtTekiyoKikanKaishi().getValue().toString().isEmpty() || !div.getTxtTekiyoKikanShuryo().getValue().toString().isEmpty();
                     }
                 }
             },
@@ -40,7 +40,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtBemmeiUketsukeYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtBemmeiUketsukeYMD().getValue().toString().isEmpty();
                 }
             },
     弁明内容決定日入力チェック {
@@ -52,7 +52,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtBemmeiNaiyoKetteiYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtBemmeiNaiyoKetteiYMD().getValue().toString().isEmpty();
                 }
             },
     適用期間終了入力チェック {
@@ -64,7 +64,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return !div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(new RString("申請受理")) || !div.getTxtTekiyoKikanShuryo().getValue().isEmpty();
+                    return !div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(new RString("申請受理")) || !div.getTxtTekiyoKikanShuryo().getValue().toString().isEmpty();
                 }
             },
     申請受付日入力チェック {
@@ -76,7 +76,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiUketsukeYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiUketsukeYMD().getValue().toString().isEmpty();
                 }
             },
     申請日入力チェック {
@@ -88,7 +88,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiYMD().getValue().toString().isEmpty();
                 }
             },
     申請内容決定日入力チェック {
@@ -100,7 +100,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiNaiyoKetteiYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiNaiyoKetteiYMD().getValue().toString().isEmpty();
                 }
             },
     弁明審査結果選択チェック {

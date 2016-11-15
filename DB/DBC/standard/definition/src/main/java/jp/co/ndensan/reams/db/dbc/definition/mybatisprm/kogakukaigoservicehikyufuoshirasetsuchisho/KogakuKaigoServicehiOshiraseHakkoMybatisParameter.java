@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyu
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufu.KogakuKyufu_OshiraseTsuchi_ChushutsuJoken;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.definition.core.KensakuYoShikibetsuCode;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
@@ -38,7 +37,7 @@ public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter implements IMyBat
 
     private final FlexibleYearMonth shoriYm;
     private final FlexibleDate sakuseibi;
-    private final HihokenshaNo hihokenshaNo;
+    private final RString hihokenshaNo;
     private final boolean isShinseishoHakko;
     private final boolean isOshiraseTsuchishoHakko;
     private final boolean isHakkoIchiranhyoHakko;
@@ -121,7 +120,7 @@ public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter implements IMyBat
      * @param 権限有科目リスト 権限有科目リスト
      */
     public KogakuKaigoServicehiOshiraseHakkoMybatisParameter(FlexibleYearMonth shoriYm, FlexibleDate sakuseibi,
-            HihokenshaNo hihokenshaNo, boolean isShinseishoHakko, boolean isOshiraseTsuchishoHakko,
+            RString hihokenshaNo, boolean isShinseishoHakko, boolean isOshiraseTsuchishoHakko,
             boolean isHakkoIchiranhyoHakko, boolean isKinyuKikanHyoji, FlexibleDate shiseibi, FlexibleDate uketsukebi,
             FlexibleDate keteibi, FlexibleDate shinseishoTeishutsuKigen, KogakuKyufu_OshiraseTsuchi_ChushutsuJoken chushutsuJoken, RString menuId,
             boolean isJutakuAri, RString orderBy, RString 保険者番号, RString 事業高額, RString 初回申請把握基準日,

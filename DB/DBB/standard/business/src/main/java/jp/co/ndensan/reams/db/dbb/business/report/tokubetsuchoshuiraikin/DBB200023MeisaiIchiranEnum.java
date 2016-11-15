@@ -18,8 +18,8 @@ public enum DBB200023MeisaiIchiranEnum implements IReportItems {
     /**
      * 住所コード
      */
-    住所コード(new RString("0002"), new RString("住所コード"),
-            Contents.FORMAT.concat(new RString("ShikibetsuTaisho_jusho")).concat(Contents.FORMAT)),
+    町域コード(new RString("0002"), new RString("町域コード"),
+            Contents.FORMAT.concat(new RString("ShikibetsuTaisho_choikiCode")).concat(Contents.FORMAT)),
     /**
      * 行政区コード
      */
@@ -33,17 +33,17 @@ public enum DBB200023MeisaiIchiranEnum implements IReportItems {
     /**
      * 住民コード
      */
-    住民コード(new RString("0009"), new RString("住民コード"),
-            Contents.FORMAT.concat(new RString("ShikibetsuTaisho_zenkokuJushoCode")).concat(Contents.FORMAT)),
+    識別コード(new RString("0009"), new RString("識別コード"),
+            Contents.FORMAT.concat(new RString("ShikibetsuTaisho_shikibetsuCode")).concat(Contents.FORMAT)),
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0021"), new RString("市町村コード"),
-            Contents.FORMAT.concat(new RString("ShikibetsuTaisho_genLasdecCode")).concat(Contents.FORMAT)),
+    市町村コード(new RString("0016"), new RString("市町村コード"),
+            Contents.FORMAT.concat(new RString("fukaShichosonCode")).concat(Contents.FORMAT)),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0031"), new RString("被保険者番号"),
+    被保険者番号(new RString("0104"), new RString("被保険者番号"),
             Contents.FORMAT.concat(new RString("hihokenshaNo")).concat(Contents.FORMAT));
 
     private final RString 項目ID;

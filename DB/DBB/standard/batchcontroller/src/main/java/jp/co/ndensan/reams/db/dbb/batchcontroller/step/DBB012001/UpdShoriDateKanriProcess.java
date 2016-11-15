@@ -30,6 +30,7 @@ public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
         TokuchoHeinjunka6GatsuMyBatisParameter parameter = new TokuchoHeinjunka6GatsuMyBatisParameter();
         parameter.set調定年度(processParameter.get調定年度());
         parameter.setシステーム日時(processParameter.get調定日時().getRDateTime());
+        parameter.set調定日時(processParameter.get調定日時());
         mapper.updateShoriDateKanri(parameter);
     }
 }

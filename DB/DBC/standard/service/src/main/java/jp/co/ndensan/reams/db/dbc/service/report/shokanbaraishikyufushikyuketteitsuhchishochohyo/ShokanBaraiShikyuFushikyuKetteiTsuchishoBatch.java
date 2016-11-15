@@ -15,20 +15,30 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
-import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.service.core.maskedkoza.MaskedKozaCreator;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -80,6 +90,16 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
     private static final RString フォント大 = new RString("2");
     private static final RString フォント混在_上大下小 = new RString("3");
     private static final RString フォント混在_上小下大 = new RString("4");
+    private static final RString 更新しない = new RString("1");
+    private static final int RSTRING_12 = 12;
+    private static final RString 午前 = new RString("午前");
+    private static final RString 午後 = new RString("午後");
+    private static final KinyuKikanCode ゆうちょ銀行 = new KinyuKikanCode("9900");
+    private static final RString 帳票制御汎用キー_ゆうちょ銀行店名表示 = new RString("ゆうちょ銀行店名表示");
+    private static final RString 帳票制御汎用キー_口座名義人カナ優先区分 = new RString("口座名義人カナ優先区分");
+    private static final RString 印字する = new RString("1");
+    private static final RString カナ氏名 = new RString("2");
+            
 
     /**
      * 帳票データを作成します。
@@ -88,16 +108,18 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
      * @param batchPram バッチパラメータ
      * @param reportSourceWriter IReportWriter
      * @param 種類Map 種類Map
+     * @param 帳票制御共通情報 帳票制御共通情報
      * @return 償還払支給（不支給）決定通知書（受領委任払い・被保険者用）のITEM
      */
     public List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> getShokanHaraiShikyuFushikyuKetteiTsuhchishoChohyoData(
             List<ShokanKetteiTsuchiShoShiharai> shiharaiList, ShokanKetteiTsuchiShoSealerBatchParameter batchPram,
-            ReportSourceWriter reportSourceWriter, Map<RString, RString> 種類Map) {
-        return 帳票データ作成(shiharaiList, batchPram, reportSourceWriter, 種類Map);
+            ReportSourceWriter reportSourceWriter, Map<RString, RString> 種類Map, ChohyoSeigyoKyotsu 帳票制御共通情報) {
+        return 帳票データ作成(shiharaiList, batchPram, reportSourceWriter, 種類Map,  帳票制御共通情報);
     }
 
     private List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> 帳票データ作成(List<ShokanKetteiTsuchiShoShiharai> shiharaiList,
-            ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter, Map<RString, RString> 種類Map) {
+            ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter, Map<RString, RString> 種類Map,
+            ChohyoSeigyoKyotsu 帳票制御共通情報) {
 
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(), batchPram.getHakkoYMD(),
@@ -108,7 +130,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         RString kyufuShu = RString.EMPTY;
         for (ShokanKetteiTsuchiShoShiharai shiharai : shiharaiList) {
             item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
-            kyufuShu = 種類Map.get(getJufukuKey(shiharai));
+            kyufuShu = 種類Map.get(getJufukuKey(shiharai)) == null ? RString.EMPTY : 種類Map.get(getJufukuKey(shiharai));
             item.setBunshoNo(batchPram.get文書番号());
             if (kyufuShu.length() <= 文字数_38) {
                 item.setKyufuShu1(kyufuShu);
@@ -120,10 +142,11 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
                 item.setKyufuShu2(kyufuShu.substring(文字数_38, 文字数_76));
                 item.setKyufuShu3(kyufuShu.substring(文字数_76));
             }
-            SofubutsuAtesakiSource atesakiSource
-                    = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(shiharai.get宛先情報()).build()).buildSource();
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(shiharai.get市町村コード(), FlexibleDate.getNowDate());
+            EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(shiharai.get宛先情報(), 地方公共団体, 帳票制御共通情報);
+            SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             
-            item = create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, atesakiSource);
+            item = create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, 送付物宛先ソースデータ);
             帳票ソースデータ.add(item);
         }
         return 帳票ソースデータ;
@@ -189,32 +212,56 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         item.setTorikeshiShiharaibasho(RString.EMPTY);
         item.setTorikeshiShiharaikikan(RString.EMPTY);
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
-        item.setMochimono1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言１));
-        item.setMochimono2(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言２));
-        item.setMochimono3(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言３));
-        item.setShiharaiBasho(batchPram.getShiharaiBasho());
-        item.setShiharaiStartYMD(shiharai.get支払期間開始年月日() == null
-                ? RString.EMPTY : shiharai.get支払期間開始年月日().wareki().eraType(
-                        EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                        Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        item.setShiharaiEndYMD(shiharai.get支払期間終了年月日() == null
-                ? RString.EMPTY : shiharai.get支払期間終了年月日().wareki().eraType(
-                        EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                        Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        item.setShiharaiStartHMS(setDataTimeFomart(shiharai.get支払窓口開始時間()));
-        item.setShiharaiEndHMS(setDataTimeFomart(shiharai.get支払窓口終了期間()));
-        if (!RString.isNullOrEmpty(shiharai.get支払窓口開始時間()) && !RString.isNullOrEmpty(shiharai.get支払窓口終了期間())) {
-            item.setKaraFugo(KARA);
+        if (ShiharaiHohoKubun.窓口払.getコード().equals(shiharai.get支払方法区分コード())
+                && ShikyuFushikyuKubun.支給.getコード().equals(shiharai.get支給不支給決定区分())) {
+            item.setMochimono1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言１));
+            item.setMochimono2(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言２));
+            item.setMochimono3(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_持ち物内容文言３));
+            if (更新しない.equals(batchPram.get窓口払い一括更新区分())) {
+                item.setShiharaiBasho(shiharai.get支払場所());
+                item.setShiharaiStartYMD(setFlexibleDateYMD(shiharai.get支払期間開始年月日()));
+                item.setShiharaiEndYMD(setFlexibleDateYMD(shiharai.get支払期間終了年月日()));
+                item.setShiharaiStartHMS(setDataTimeFomart(shiharai.get支払窓口開始時間()));
+                item.setShiharaiEndHMS(setDataTimeFomart(shiharai.get支払窓口終了期間()));
+            } else {
+                item.setShiharaiBasho(batchPram.getShiharaiBasho());
+                item.setShiharaiStartYMD(setDateYMD(batchPram.get支払期間From()));
+                item.setShiharaiEndYMD(setDateYMD(batchPram.get支払期間To()));
+                item.setShiharaiStartHMS(setDataTimeFomart2(batchPram.get開始時間()));
+                item.setShiharaiEndHMS(setDataTimeFomart2(batchPram.get終了時間()));
+            }
+            if (!RString.isNullOrEmpty(item.getShiharaiStartHMS()) && !RString.isNullOrEmpty(item.getShiharaiEndHMS())) {
+                item.setKaraFugo(KARA);
+            }
         }
-        item.setBankName(shiharai.get金融機関名称());
-        item.setBranchBankName(shiharai.get支店名称());
-        item.setKouzaShu(shiharai.get預金種別名称());
-        item.setKouzaNo(shiharai.get口座番号());
-        item.setKouzaMeigi(shiharai.get口座名義人漢字());
-        item.setSihaYoYmd(batchPram.getHurikomiYMD() == null
-                ? RString.EMPTY : batchPram.getHurikomiYMD().wareki().eraType(
-                        EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                        Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        
+        if (ShiharaiHohoKubun.口座払.getコード().equals(shiharai.get支払方法区分コード())
+                && ShikyuFushikyuKubun.支給.getコード().equals(shiharai.get支給不支給決定区分())
+                && shiharai.get口座() != null
+                && shiharai.get口座().getUaT0310KozaEntity().getKozaId() != 0L) {
+            IKoza 口座情報 = do口座マスク編集(shiharai.get口座());
+            
+            item.setBankName(口座情報.get金融機関().get金融機関名称());
+            item.setKouzaShu(口座情報.get店番());
+            if (!ゆうちょ銀行.equals(口座情報.get金融機関コード())) {
+                item.setBranchBankName(口座情報.get支店().get支店名称());
+                item.setKouzaShu(口座情報.get預金種別名称());
+            } else if (印字する.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_ゆうちょ銀行店名表示))) {
+                item.setBranchBankName(口座情報.get支店().get支店名称());
+            }
+            
+            item.setKouzaNo(口座情報.get口座番号());
+            
+            if (カナ氏名.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_口座名義人カナ優先区分))) {
+                item.setKouzaMeigi(口座情報.get口座名義人().value());
+            } else {
+                item.setKouzaMeigi(口座情報.get口座名義人漢字().value());
+            }
+            item.setSihaYoYmd(batchPram.getHurikomiYMD() == null
+                    ? RString.EMPTY : batchPram.getHurikomiYMD().wareki().eraType(
+                            EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
+                            Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        }
         item.setSeirino(shiharai.get整理番号());
         item.setTsuchino(shiharai.get決定通知No());
         RString タイトル = RString.EMPTY;
@@ -264,6 +311,11 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         return item;
     }
 
+    private IKoza do口座マスク編集(TokuteiKozaRelateEntity koza) {
+        MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
+        return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
+    }
+
     private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
         RString 設定値 = RString.EMPTY;
         ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
@@ -275,13 +327,14 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
     }
 
     private RString get種別タイトル(ShokanKetteiTsuchiShoShiharai business) {
-        if (!ShikyuFushikyuKubun.不支給.getコード().equals(business.get支給不支給決定区分())) {
+        if (ShikyuFushikyuKubun.不支給.getコード().equals(business.get支給不支給決定区分())) {
             return 種別タイトル_口座種別;
         }
         RString 種別タイトル = RString.EMPTY;
         if (ShiharaiHohoKubun.窓口払.getコード().equals(business.get支払方法区分コード())) {
             種別タイトル = 種別タイトル_口座種別;
-        } else if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())) {
+        } else if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())
+                && null != business.get金融機関コード()) {
             if (金融機関コード_郵便局.equals(business.get金融機関コード().value())) {
                 種別タイトル = 種別タイトル_店番;
             } else {
@@ -365,14 +418,48 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         if (RString.isNullOrEmpty(time)) {
             return RString.EMPTY;
         }
-        RStringBuilder 支払窓口終了期間Builder = new RStringBuilder();
         RTime 支払窓口終了期間 = new RTime(time);
-        支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getHour()));
+        return setDataTimeFomart2(支払窓口終了期間);
+    }
+    
+    private RString setDataTimeFomart2(RTime 支払窓口終了期間) {
+        if (null == 支払窓口終了期間) {
+            return RString.EMPTY;
+        }
+        RStringBuilder 支払窓口終了期間Builder = new RStringBuilder();
+        int hour = 支払窓口終了期間.getHour();
+        if (hour < RSTRING_12) {
+            支払窓口終了期間Builder.append(午前);
+        } else {
+            hour = hour - RSTRING_12;
+            支払窓口終了期間Builder.append(午後);
+        }
+        支払窓口終了期間Builder.append(String.format("%02d", hour));
         支払窓口終了期間Builder.append(new RString("時"));
-        支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getMinute()));
-        支払窓口終了期間Builder.append(new RString("分"));
-        支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getSecond()));
-        支払窓口終了期間Builder.append(new RString("秒"));
+        if (0 < 支払窓口終了期間.getMinute()) {
+            支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getMinute()));
+            支払窓口終了期間Builder.append(new RString("分"));
+        }
         return 支払窓口終了期間Builder.toRString();
+    }
+    
+    private RString setFlexibleDateYMD(FlexibleDate 年月日) {
+        if (null == 年月日 || 年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        RString str年月日 = 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
+                                Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        RString 曜日 = new RString(年月日.getDayOfWeek().getInFullParentheses());
+        return str年月日.concat(曜日);
+    }
+    
+    private RString setDateYMD(RDate 年月日) {
+        if (null == 年月日) {
+            return RString.EMPTY;
+        }
+        RString str年月日 = 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
+                                Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        RString 曜日 = new RString(年月日.getDayOfWeek().getInFullParentheses());
+        return str年月日.concat(曜日);
     }
 }

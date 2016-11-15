@@ -79,7 +79,7 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
         }
         if (shinsakaiWariateJoho != null) {
             if (ReportIdDBE.DBE517915.getReportId().value().equals(reportId)) {
-                IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho);
+                IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
                 IIinShinsakaishiryoA3Builder builder1 = new IinShinsakaishiryoA3Builder(editor1);
                 reportSourceWriter.writeLine(builder1);
             }
@@ -95,15 +95,24 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
         }
         if (shinsakaiWariateJoho != null) {
             if (ReportIdDBE.DBE517916.getReportId().value().equals(reportId)) {
-                IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho);
+                IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
                 IIinShinsakaishiryoA3Builder builder1 = new IinShinsakaishiryoA3Builder(editor1);
                 reportSourceWriter.writeLine(builder1);
             }
         }
         if (sonotashiryoBusiness != null) {
-            IIinShinsakaishiryoA3Editor editor2 = new IinShinsakaishiryoA3Group5Editor(sonotashiryoBusiness);
-            IIinShinsakaishiryoA3Builder builder2 = new IinShinsakaishiryoA3Builder(editor2);
-            reportSourceWriter.writeLine(builder2);
+            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
+            if (ファイルPathList != null && 0 < ファイルPathList.size()) {
+                for (int i = 0; i < (int) Math.ceil((double) ファイルPathList.size() / 2); i++) {
+                    IIinShinsakaishiryoA3Editor editor2 = new IinShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, i + 1);
+                    IIinShinsakaishiryoA3Builder builder2 = new IinShinsakaishiryoA3Builder(editor2);
+                    reportSourceWriter.writeLine(builder2);
+                }
+            } else {
+                IIinShinsakaishiryoA3Editor editor2 = new IinShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, 0);
+                IIinShinsakaishiryoA3Builder builder2 = new IinShinsakaishiryoA3Builder(editor2);
+                reportSourceWriter.writeLine(builder2);
+            }
         }
     }
 
@@ -124,7 +133,8 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
             int totalPages = (int) Math.ceil((double) (テキスト全面List.size() - 1) / 2) + 1;
             for (int i = 0; i < テキスト全面List.size(); i++) {
                 if ((i + 2) <= totalPages) {
-                    IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(ichijihanteikekkahyoA3Entity, 短冊リスト, i + 2, i + 2);
+                    IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(
+                            ichijihanteikekkahyoA3Entity, 短冊リスト, reportId, i + 2, i + 2);
                     IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
                     reportSourceWriter.writeLine(builder);
                 }
@@ -133,7 +143,8 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
             int totalPages = (int) Math.ceil((double) (イメージ全面List.size() - 1) / 2) + 1;
             for (int i = 0; i < イメージ全面List.size(); i++) {
                 if ((i + 2) <= totalPages) {
-                    IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(ichijihanteikekkahyoA3Entity, 短冊リスト, i + 2, i + 2);
+                    IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(
+                            ichijihanteikekkahyoA3Entity, 短冊リスト, reportId, i + 2, i + 2);
                     IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
                     reportSourceWriter.writeLine(builder);
                 }
@@ -147,7 +158,8 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
         for (int i = 0; i < 短冊リスト.size(); i++) {
             int page = (i + PAGETWO_MAXCOUNT) / PAGETWO_MAXCOUNT + 1;
             if (page <= totalPages) {
-                IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(ichijihanteikekkahyoA3Entity, 短冊リスト, i, page);
+                IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(
+                        ichijihanteikekkahyoA3Entity, 短冊リスト, reportId, i, page);
                 IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
                 reportSourceWriter.writeLine(builder);
             }

@@ -483,12 +483,11 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         return FlexibleYearMonth.EMPTY;
     }
 
-    private FlexibleYear get処理年度(FlexibleDate 作成年月日) {
-        if (作成年月日.getMonthValue() == INT_11 || 作成年月日.getMonthValue() == INT_12) {
-            return 作成年月日.plusYear(INT_1).getYear();
-        } else {
-            return 作成年月日.getYear();
+    private FlexibleYear get処理年度(FlexibleYearMonth 処理対象年月) {
+        if (!FlexibleYearMonth.EMPTY.equals(処理対象年月)) {
+            return 処理対象年月.getYear();
         }
+        return FlexibleYear.EMPTY;
     }
 
     private boolean is出力(RString 通知内容コード, FlexibleYearMonth 処理対象年月) {
@@ -533,10 +532,11 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     private TokuchoHaishinDataTorikomiMybatisParameter setMybatisParameter(TorikomiFileKaifuJohoTempEntity entity) {
 
         TokuchoHaishinDataTorikomiMybatisParameter param = new TokuchoHaishinDataTorikomiMybatisParameter();
+        FlexibleYearMonth 処理対象年月 = get処理対象年月(entity.getTsuchiNaiyoCode(), entity.getSakuseiYMD());
         param.setGyomuCode(GyomuCode.DB介護保険);
-        param.setShoriNendo(get処理年度(entity.getSakuseiYMD()));
+        param.setShoriNendo(get処理年度(処理対象年月));
         param.setTsuchiNaiyoCode(entity.getTsuchiNaiyoCode());
-        param.setShoriTaishoYM(get処理対象年月(entity.getTsuchiNaiyoCode(), entity.getSakuseiYMD()));
+        param.setShoriTaishoYM(処理対象年月);
         param.setKisoNenkinNo(entity.getKisoNenkinNo());
         param.setNenkinCode(entity.getNenkinCode());
         param.setKoseiCityCode(entity.getShichosoCode());

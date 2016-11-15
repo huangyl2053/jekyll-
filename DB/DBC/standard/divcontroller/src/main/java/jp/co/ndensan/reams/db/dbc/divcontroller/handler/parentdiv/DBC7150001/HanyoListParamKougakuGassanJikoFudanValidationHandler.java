@@ -23,6 +23,7 @@ public class HanyoListParamKougakuGassanJikoFudanValidationHandler {
 
     private final HanyoListParamKougakuGassanJikoFudanDiv div;
     private static final RString 交付申請書整理番号 = new RString("交付申請書整理番号");
+    private static final RString 出力順 = new RString("出力順");
 
     /**
      * コンストラクタです。
@@ -51,8 +52,10 @@ public class HanyoListParamKougakuGassanJikoFudanValidationHandler {
             if (支給申請書整理番号T < 支給申請書整理番号F) {
                 pairs.add(new ValidationMessageControlPair(
                         new IdocheckMessages(UrErrorMessages.大小関係が不正, 交付申請書整理番号.toString())));
-                return pairs;
             }
+        }
+        if (div.getCcdShutsuryokujun().get出力順ID() == null) {
+            pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.未指定, 出力順.toString())));
         }
         return pairs;
     }

@@ -3,21 +3,25 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000022;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Aug 16 19:04:00 CST 2016
+ * Sat Nov 12 17:03:00 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
+
 /**
- * dgFutanWariai_Row のクラスファイル
- *
- * @reamsid_L DBC-5010-011 zhaowei
+ * dgFutanWariai_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgFutanWariai_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
     private RString shikaku;
     private RString futanWariai;

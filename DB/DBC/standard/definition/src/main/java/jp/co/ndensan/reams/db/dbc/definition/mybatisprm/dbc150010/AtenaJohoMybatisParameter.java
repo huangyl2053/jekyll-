@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc150010;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,4 +24,5 @@ public class AtenaJohoMybatisParameter implements IMyBatisParameter {
 
     private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
     private FlexibleYearMonth サービス提供年月;
+    private RString psmShikibetsuTaisho;
 }

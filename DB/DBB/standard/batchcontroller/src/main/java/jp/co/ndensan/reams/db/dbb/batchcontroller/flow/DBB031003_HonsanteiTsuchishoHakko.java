@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.PrtTokuchoKaish
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsuchishoTmpKouseiMaeDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsuchishoTmpSeikahoboKubunProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsuchishoTmpTaisyoshaDataProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsuchishoTmpTokuchoAugProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsuchishoTmpTokuchoDecProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpKouseiMaeDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpSeikahoboKubunProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpTaisyoshaDataProcess;
@@ -58,6 +60,9 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
     private static final String 計算後情報_更正前情報を更新 = "updHonsanteiTsuchishoTmpKouseiMaeDataProcess";
     private static final String 対象者追加含む情報_更正前情報を更新 = "updHonsanteiTsuchishoTmpTaisyoshaDataProcess";
     private static final String 生活保護区分を更新 = "updHonsanteiTsuchishoTmpSeikahoboKubunProcess";
+
+    private static final String 特徴8月開始者区分を更新 = "updHonsanteiTsuchishoTmpTokuchoAugProcess";
+    private static final String 特徴10月開始者区分を更新 = "updHonsanteiTsuchishoTmpTokuchoDecProcess";
 
     private static final String 特徴開始通知書の発行 = "prtTokuchoKaishiTsuchishoHonsanteiProcess";
 
@@ -107,6 +112,8 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
                 executeStep(計算後情報_更正前情報を更新_全件);
                 executeStep(対象者追加含む情報_更正前情報を更新_全件);
                 executeStep(生活保護区分を更新_全件);
+                executeStep(特徴8月開始者区分を更新);
+                executeStep(特徴10月開始者区分を更新);
                 executeStep(特徴開始通知書の発行);
             } else if (決定変更通知書_帳票分類ID.equals(出力帳票一覧.get帳票分類ID()) && is決定通知書(出力帳票一覧.get帳票ID())) {
                 if (parameter.is一括発行起動フラグ()) {
@@ -120,6 +127,8 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
                 executeStep(計算後情報_更正前情報を更新);
                 executeStep(対象者追加含む情報_更正前情報を更新);
                 executeStep(生活保護区分を更新);
+                executeStep(特徴8月開始者区分を更新);
+                executeStep(特徴10月開始者区分を更新);
                 executeStep(決定変更通知書出力判定);
                 executeStep(決定通知書の発行);
             } else if (決定変更通知書_帳票分類ID.equals(出力帳票一覧.get帳票分類ID()) && is変更通知書(出力帳票一覧.get帳票ID())) {
@@ -134,6 +143,8 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
                 executeStep(計算後情報_更正前情報を更新);
                 executeStep(対象者追加含む情報_更正前情報を更新);
                 executeStep(生活保護区分を更新);
+                executeStep(特徴8月開始者区分を更新);
+                executeStep(特徴10月開始者区分を更新);
                 executeStep(決定変更通知書出力判定);
                 executeStep(変更通知書の発行);
             } else if (納入通知書_帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
@@ -148,6 +159,8 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
                 executeStep(計算後情報_更正前情報を更新);
                 executeStep(対象者追加含む情報_更正前情報を更新);
                 executeStep(生活保護区分を更新);
+                executeStep(特徴8月開始者区分を更新);
+                executeStep(特徴10月開始者区分を更新);
                 executeStep(納入通知書の発行);
             }
             if (計算後情報作成区分) {
@@ -235,6 +248,26 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
     @Step(生活保護区分を更新_全件)
     protected IBatchFlowCommand updZenkenFukaInfoTmpSeikahoboKubunProcess() {
         return simpleBatch(UpdZenkenFukaInfoTmpSeikahoboKubunProcess.class).define();
+    }
+
+    /**
+     * 特徴8月開始者区分を更新するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(特徴8月開始者区分を更新)
+    protected IBatchFlowCommand updHonsanteiTsuchishoTmpTokuchoAugProcess() {
+        return simpleBatch(UpdHonsanteiTsuchishoTmpTokuchoAugProcess.class).define();
+    }
+
+    /**
+     * 特徴10月開始者区分を更新するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(特徴10月開始者区分を更新)
+    protected IBatchFlowCommand updHonsanteiTsuchishoTmpTokuchoDecProcess() {
+        return simpleBatch(UpdHonsanteiTsuchishoTmpTokuchoDecProcess.class).define();
     }
 
     /**

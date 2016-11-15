@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000023;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigokanryomessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,12 +28,12 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
      */
     @JsonProperty("lblNote")
     private Label lblNote;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("PanelHakko")
     private PanelHakkoDiv PanelHakko;
     @JsonProperty("PanelShutsuryokuNaiyo")
     private PanelShutsuryokuNaiyoDiv PanelShutsuryokuNaiyo;
-    @JsonProperty("ccdKaigoKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("lbl2wariKaishiYmdValue")
     private RString lbl2wariKaishiYmdValue;
     @JsonProperty("lbl2wariShuryoYmdValue")
@@ -65,6 +65,15 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     @JsonProperty("lblNote")
     public void setLblNote(Label lblNote) {
         this.lblNote = lblNote;
+    }
+
+    /*
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
+     */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
     }
 
     /*
@@ -101,15 +110,6 @@ public class RiyoshaFutanWariaiKoushiConfDiv extends Panel {
     @JsonProperty("PanelShutsuryokuNaiyo")
     public void setPanelShutsuryokuNaiyo(PanelShutsuryokuNaiyoDiv PanelShutsuryokuNaiyo) {
         this.PanelShutsuryokuNaiyo = PanelShutsuryokuNaiyo;
-    }
-
-    /*
-     * getccdKaigoKanryoMessage
-     * @return ccdKaigoKanryoMessage
-     */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
-        return ccdKaigoKanryoMessage;
     }
 
     /*

@@ -9,7 +9,12 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kyotakuservicekeikakusakusei.Kyo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -45,6 +50,9 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
     public KyotakuServiceKeikakuSakuseiSource edit(KyotakuServiceKeikakuSakuseiSource source) {
         if (target.get計画届出状況情報リスト() != null) {
             KyotakuServiceKeikakuSaList 帳票情報 = target.get計画届出状況情報リスト();
+            if (帳票情報.get市町村コード() != null) {
+                source.shichosonCode = 帳票情報.get市町村コード().getColumnValue();
+            }
             if (帳票情報.get宛名() != null) {
                 IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(帳票情報.get宛名()).to個人();
                 source.listList1_2 = 宛名.get名称().getKana().value();
@@ -54,6 +62,7 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
                 source.listList1_4 = 宛名.get行政区画().getGyoseiku().getコード().getColumnValue();
                 source.listList2_3 = 宛名.get住所().get住所();
                 source.listList3_2 = 宛名.get行政区画().getGyoseiku().get名称();
+                setBreak宛名(source, 帳票情報.get宛名());
             }
 
             if (帳票情報.get識別コード() != null) {
@@ -111,6 +120,24 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
         }
         return source;
 
+    }
+
+    private void setBreak宛名(KyotakuServiceKeikakuSakuseiSource source, UaFt200FindShikibetsuTaishoEntity 宛名) {
+        YubinNo 郵便番号 = 宛名.getYubinNo();
+        source.yubinNo = 郵便番号 == null ? RString.EMPTY : 郵便番号.getYubinNo();
+        ChoikiCode 町域コード = 宛名.getChoikiCode();
+        source.choikiCode = 町域コード == null ? RString.EMPTY : 町域コード.getColumnValue();
+        BanchiCode 番地コード1 = 宛名.getBanchiCode1();
+        BanchiCode 番地コード2 = 宛名.getBanchiCode2();
+        BanchiCode 番地コード3 = 宛名.getBanchiCode3();
+        BanchiCode 番地コード4 = 宛名.getBanchiCode4();
+        source.banchiCode1 = 番地コード1 == null ? RString.EMPTY : 番地コード1.getColumnValue();
+        source.banchiCode2 = 番地コード2 == null ? RString.EMPTY : 番地コード2.getColumnValue();
+        source.banchiCode3 = 番地コード3 == null ? RString.EMPTY : 番地コード3.getColumnValue();
+        source.banchiCode4 = 番地コード4 == null ? RString.EMPTY : 番地コード4.getColumnValue();
+        AtenaKanaMeisho 氏名５０音カナ = 宛名.getKanaMeisho();
+        source.kanaMeisho = 氏名５０音カナ == null ? RString.EMPTY : 氏名５０音カナ.getColumnValue();
+        source.seibetsuCode = 宛名.getSeibetsuCode();
     }
 
     private void editAccessLog(KyotakuServiceKeikakuSaList 帳票情報, KyotakuServiceKeikakuSakuseiSource source)

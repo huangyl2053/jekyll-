@@ -54,7 +54,7 @@ public class SogojigyohiKagoKetteiHokenshaBodyEditor
         if (集計Flag) {
             edit集計(source);
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_4);
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.listUpper_4));
         return source;
     }
 
@@ -103,6 +103,13 @@ public class SogojigyohiKagoKetteiHokenshaBodyEditor
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }

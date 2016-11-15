@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE514002;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiReport;
@@ -53,7 +51,6 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
     private NinshoshaSource compNinshosha;
     private Map<Integer, RString> 通知文Map;
     private IKaigoNinteiShinsakaiScheduleKagamiMapper kagamiMapper;
-    private List<ShinsaschedulekagamiItem> itemList;
     private KaigoNinteiShinsakaiScheduleKagamiProcessParamter processParamter;
     @BatchWriter
     private BatchReportWriter<ShinsaschedulekagamiReportSource> batchWriter;
@@ -61,11 +58,7 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
 
     @Override
     protected void initialize() {
-        itemList = new ArrayList<>();
         kagamiMapper = getMapper(IKaigoNinteiShinsakaiScheduleKagamiMapper.class);
-        compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 1);
     }
 
     @Override
@@ -80,16 +73,16 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
     }
 
     @Override
-    protected void process(KaigoNinteiShinsakaiScheduleKagamiRelateEntity entity) {
-        itemList.add(setItem(entity));
+    protected void beforeExecute() {
+        compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
+                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 1);
     }
 
     @Override
-    protected void afterExecute() {
-        if (itemList != null && !itemList.isEmpty()) {
-            ShinsaschedulekagamiReport report = ShinsaschedulekagamiReport.createFrom(itemList);
-            report.writeBy(reportSourceWriter);
-        }
+    protected void process(KaigoNinteiShinsakaiScheduleKagamiRelateEntity entity) {
+        ShinsaschedulekagamiReport report = new ShinsaschedulekagamiReport(setItem(entity));
+        report.writeBy(reportSourceWriter);
     }
 
     private ShinsaschedulekagamiItem setItem(KaigoNinteiShinsakaiScheduleKagamiRelateEntity entity) {

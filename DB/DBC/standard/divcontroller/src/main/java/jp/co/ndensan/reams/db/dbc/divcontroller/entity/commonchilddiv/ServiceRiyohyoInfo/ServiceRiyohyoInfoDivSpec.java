@@ -22,9 +22,8 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     サービスコード必須入力チェック {
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
-                    return div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().isDisplayNone()
-                    || (!RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
-                    && !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード2()));
+                    return !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
+                    && !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード2());
                 }
             },
     /**
@@ -51,6 +50,15 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
      * サービス単位必須入力のチェックです。
      */
     サービス単位必須入力チェック {
+                @Override
+                public boolean apply(ServiceRiyohyoInfoDiv div) {
+                    return !RString.isNullOrEmpty(div.getCcdServiceTypeInput().getサービス種類コード());
+                }
+            },
+    /**
+     * サービス種類必須入力のチェックです。
+     */
+    サービス種類必須入力チェック {
                 @Override
                 public boolean apply(ServiceRiyohyoInfoDiv div) {
                     return !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getText());

@@ -118,8 +118,6 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 利用者負担割合明細07Temp;
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter 利用者負担割合根拠Temp;
-    @BatchWriter
     private BatchEntityCreatedTempTableWriter 利用者負担割合根拠08Temp;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 利用者負担割合根拠09Temp;
@@ -171,7 +169,6 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
         明細Writers.add(利用者負担割合明細05Temp);
         明細Writers.add(利用者負担割合明細06Temp);
         明細Writers.add(利用者負担割合明細07Temp);
-        利用者負担割合根拠Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME, RiyoshaFutanWariaiKonkyoTempEntity.class);
         利用者負担割合根拠08Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME08, RiyoshaFutanWariaiKonkyoTempEntity.class);
         利用者負担割合根拠09Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME09, RiyoshaFutanWariaiKonkyoTempEntity.class);
         利用者負担割合根拠10Temp = new BatchEntityCreatedTempTableWriter(根拠TABLENAME10, RiyoshaFutanWariaiKonkyoTempEntity.class);

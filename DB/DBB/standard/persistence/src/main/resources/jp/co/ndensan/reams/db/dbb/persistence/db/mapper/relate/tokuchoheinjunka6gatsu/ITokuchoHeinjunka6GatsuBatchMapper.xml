@@ -479,6 +479,7 @@
         rgdb."DbT7022ShoriDateKanri"
         SET
         "lastUpdateTimestamp" = #{システーム日時},
+        "kijunTimestamp" = #{調定日時},
         "updateCount" = "updateCount" + 1
         WHERE 1=1
         AND "subGyomuCode" = 'DBB'

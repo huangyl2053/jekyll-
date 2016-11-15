@@ -42,7 +42,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInPageBreak extends PageBreaker<
         if (!currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flag = true;
         } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス種類コード.get項目ID())
-                && !currentSource.getSource().listMeisai_4.equals(nextSource.getSource().listMeisai_4)) {
+                && !currentSource.getSource().serviceShuruiCode.equals(nextSource.getSource().serviceShuruiCode)) {
             flag = true;
         } else if (this.breakKeysList.contains(SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder.サービス提供年月.get項目ID())
                 && !currentSource.getSource().listMeisai_3.equals(nextSource.getSource().listMeisai_3)) {

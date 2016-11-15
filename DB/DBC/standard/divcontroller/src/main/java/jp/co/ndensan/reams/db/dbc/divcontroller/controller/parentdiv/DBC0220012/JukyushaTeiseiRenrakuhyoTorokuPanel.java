@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -100,7 +99,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
-                        引き継ぎ情報.get被保番号().getColumnValue()));
+                引き継ぎ情報.get被保番号().getColumnValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -217,7 +216,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
         JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div = div.getJukyushaIdoRenrakuhyo().get受給者異動送付();
         div.getCcdKanryoMessage().setMessage(
-                UrInformationMessages.保存終了,
+                new RString("受給者異動連絡票の登録が完了しました。"),
                 受給者訂正連絡票登録画面Div.get被保険者番号().value(),
                 受給者訂正連絡票登録画面Div.get被保険者氏名カナ(), true);
         return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
@@ -295,7 +294,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             AccessLogger.log(AccessLogType.更新,
                     getHandler(div).toPersonalData(識別コード,
-                            引き継ぎ情報.get被保番号().getColumnValue()));
+                    引き継ぎ情報.get被保番号().getColumnValue()));
             if (登録件数 == 1) {
                 getHandler(div).is前排他キーのセット(引き継ぎ情報.get被保番号());
                 List<RString> チェック状態 = getHandler(div).getチェックボックス状態();
@@ -303,7 +302,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                     return ResponseData.of(div).respond();
                 } else {
                     div.getCcdKanryoMessage().setMessage(
-                            UrInformationMessages.保存終了,
+                            new RString("受給者異動連絡票の登録が完了しました。"),
                             受給者訂正連絡票登録画面Div.get被保険者番号().value(),
                             受給者訂正連絡票登録画面Div.get被保険者氏名カナ(), true);
                     return ResponseData.of(div).setState(DBC0220012StateName.完了メッセージ);
@@ -346,6 +345,17 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                     受給者訂正連絡票登録画面Div, null, 初期化データ, 照会モード);
         }
         return 登録件数;
+    }
+
+    /**
+     * 「登録処理を続ける」ボタンクリック時の事件です。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaTeiseiRenrakuhyoTorokuPanelDiv> onClick_btnContinue(
+            JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
+        return ResponseData.of(div).respond();
     }
 
     private JukyushaTeiseiRenrakuhyoTorokuPanelHandler getHandler(JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {

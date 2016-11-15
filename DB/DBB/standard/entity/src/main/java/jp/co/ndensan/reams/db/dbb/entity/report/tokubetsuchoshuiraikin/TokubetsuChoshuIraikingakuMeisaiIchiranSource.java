@@ -86,6 +86,10 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranSource implements IReportSou
     public RString listLower_6;
     @ReportItem(name = "keisanHoho", length = 80, order = 35)
     public RString keisanHoho;
+    @ReportItem(name = "choikiCode", length = 80, order = 36)
+    public RString choikiCode;
+    @ReportItem(name = "shichosonCode", length = 80, order = 37)
+    public RString shichosonCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation 拡張情報;
 
@@ -133,7 +137,9 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranSource implements IReportSou
         listLower_4,
         listLower_5,
         listLower_6,
-        keisanHoho
+        keisanHoho,
+        choikiCode,
+        shichosonCode
     }
 // </editor-fold>
 }

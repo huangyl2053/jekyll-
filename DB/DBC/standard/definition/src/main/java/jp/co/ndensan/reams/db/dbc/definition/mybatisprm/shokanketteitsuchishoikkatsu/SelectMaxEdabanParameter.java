@@ -24,6 +24,7 @@ public class SelectMaxEdabanParameter implements IMyBatisParameter {
     private SubGyomuCode subGyomuCode;
     private LasdecCode shichosonCode;
     private RString shoriName;
+    private RString shoriEdaban;
     private FlexibleYear nendo;
 
     /**
@@ -32,12 +33,15 @@ public class SelectMaxEdabanParameter implements IMyBatisParameter {
      * @param subGyomuCode サブ業務コード
      * @param shichosonCode 市町村コード
      * @param shoriName 処理名
+     * @param shoriEdaban 処理枝番
      * @param nendo 年度
      */
-    public SelectMaxEdabanParameter(SubGyomuCode subGyomuCode, LasdecCode shichosonCode, RString shoriName, FlexibleYear nendo) {
+    public SelectMaxEdabanParameter(SubGyomuCode subGyomuCode, LasdecCode shichosonCode, RString shoriName,
+            RString shoriEdaban, FlexibleYear nendo) {
         this.subGyomuCode = subGyomuCode;
         this.shichosonCode = shichosonCode;
         this.shoriName = shoriName;
+        this.shoriEdaban = shoriEdaban;
         this.nendo = nendo;
     }
 }

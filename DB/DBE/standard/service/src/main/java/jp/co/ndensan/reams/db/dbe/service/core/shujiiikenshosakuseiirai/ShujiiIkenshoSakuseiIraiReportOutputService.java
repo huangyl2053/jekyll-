@@ -346,7 +346,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     public void print主治医意見書依頼該当者履歴一覧(List<IkenshoirairirekiIchiran> 主治医意見書依頼該当者履歴一覧ItemList,
             ReportManager reportManager) {
         List<IkenshoirairirekiIchiranReport> list = new ArrayList<>();
-        list.add(new IkenshoirairirekiIchiranReport(主治医意見書依頼該当者履歴一覧ItemList));
+        list.add(IkenshoirairirekiIchiranReport.createFrom(主治医意見書依頼該当者履歴一覧ItemList));
         IkenshoirairirekiIchiranProperty property = new IkenshoirairirekiIchiranProperty();
         try (ReportAssembler<IkenshoirairirekiIchiranReportSource> assembler = createAssembler(property, reportManager)) {
             for (IkenshoirairirekiIchiranReport report : list) {
@@ -359,7 +359,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     private List<ShujiiIkenshoTeishutsuIraishoItem> setNishosha(List<ShujiiIkenshoTeishutsuIraishoItem> itemList, NinshoshaSource ninshosha) {
         List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
         for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
-            item.setHakkoYMD1(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
@@ -377,7 +376,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             NinshoshaSource ninshosha) {
         List<IkenshoSakuseiIraiIchiranhyoItem> resultList = new ArrayList<>();
         for (IkenshoSakuseiIraiIchiranhyoItem item : itemList) {
-            item.setHakkoYMD(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
@@ -397,7 +395,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
                 ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_1);
         for (KaigohokenShindanMeireishoHeaderItem item : itemList) {
-            item.setHakkoYMD(ninshosha.hakkoYMD);
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);

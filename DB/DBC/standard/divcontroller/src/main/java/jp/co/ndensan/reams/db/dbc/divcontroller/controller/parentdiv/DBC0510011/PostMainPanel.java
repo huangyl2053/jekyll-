@@ -198,7 +198,9 @@ public class PostMainPanel {
         if (div.getTxtRenkekeishiki().isVisible() && !div.getTxtRenkekeishiki().getValue().isEmpty()
                 && !div.getTxtRenkekeishiki().getValue().isNull()) {
             parameter.setInsurerDistinction(STRING_1);
-            parameter.setShoriShichoson(null);
+            List<RString> list = new ArrayList<>();
+            list.add(RString.EMPTY);
+            parameter.setShoriShichoson(list);
         } else {
             parameter.setInsurerDistinction(STRING_2);
             List<RString> listresult = new ArrayList();
@@ -237,7 +239,9 @@ public class PostMainPanel {
         if (div.getTxtRenkekeishiki().isVisible() && !div.getTxtRenkekeishiki().getValue().isEmpty()
                 && !div.getTxtRenkekeishiki().getValue().isNull()) {
             parameter.setInsurerDistinction(STRING_1);
-            parameter.setShoriShichoson(null);
+            List<RString> list = new ArrayList<>();
+            list.add(RString.EMPTY);
+            parameter.setShoriShichoson(list);
         } else {
             parameter.setInsurerDistinction(STRING_2);
             List<RString> listresult = new ArrayList();

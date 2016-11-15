@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.gassanjikofutangakukeisankekk
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -88,6 +90,8 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         }
         if (高額合算自己負担額計算結果一覧表 != null && 高額合算自己負担額計算結果一覧表.get識別コード() != null) {
             source.shikibetuCode = 高額合算自己負担額計算結果一覧表.get識別コード();
+        } else {
+            source.shikibetuCode = RString.EMPTY;
         }
         source.shichosonName = 市町村名称;
         source.shutsuryokujun1 = 出力順1;
@@ -124,6 +128,7 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
             editThree(source);
             editFour(source);
         }
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.list_1));
         return source;
     }
 
@@ -174,6 +179,14 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         source.choikiCode = 高額合算自己負担額計算結果一覧表.getChoikiCode();
         source.gyoseikuCode = 高額合算自己負担額計算結果一覧表.getGyoseikuCode();
         source.hokenshaNo = 高額合算自己負担額計算結果一覧表.getHokenshaNo();
+        source.shichosonCode = 高額合算自己負担額計算結果一覧表.getShichosonCode();
+    }
+
+    private RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
     }
 
 }

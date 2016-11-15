@@ -184,6 +184,9 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
                 && 現住所コード.equals(LasdecCode.EMPTY)) {
             set世帯員();
             setKey();
+            NushiJuminJohoResult result = creat所得照会票データ();
+            new ShotokuShokaihyoTateReport(result, sourceBuilder, 文書タイトル, 送付先担当課名称).writeBy(sourceWriter);
+            世帯員リスト.clear();
             flag = true;
         } else if (送付先住所コード.equals(所得照会票データ.getZenkokuJushoCode())
                 && 世帯コード.equals(所得照会票データ.getSetaiCode())

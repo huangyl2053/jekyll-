@@ -605,7 +605,17 @@ public class ShiharaiHohoJyohoHandler {
      * @param kozaID 口座番号
      */
     public void 口座払いエリアの初期化(Koza 口座情報, Long kozaID) {
-        div.getDdlKozaID().setSelectedKey(new RString(String.valueOf(kozaID)));
+        RString 口座ID = new RString(String.valueOf(kozaID));
+        List<RString> ddlKozaIDList = new ArrayList<>();
+        for (KeyValueDataSource item : div.getDdlKozaID().getDataSource()) {
+            ddlKozaIDList.add(item.getKey());
+        }
+        if (null != kozaID && !口座ID.isEmpty() && ddlKozaIDList.contains(口座ID)) {
+            div.getDdlKozaID().setSelectedKey(new RString(String.valueOf(kozaID)));
+        } else {
+            div.getDdlKozaID().setSelectedIndex(0);
+        }
+        
         KinyuKikanCode 金融機関コード = 口座情報.get金融機関コード() == null
                 ? new KinyuKikanCode(RString.EMPTY) : 口座情報.get金融機関コード();
         div.getTxtKinyuKikanCode().setDomain(金融機関コード);

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -465,12 +465,12 @@ public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoD
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtSashitomeTorokuYMD() {
+    public TextBoxDate getTxtSashitomeTorokuYMD() {
         return this.getShokanJoho().getSashitomeKojoJokyo().getTxtSashitomeTorokuYMD();
     }
 
     @JsonIgnore
-    public void  setTxtSashitomeTorokuYMD(TextBoxFlexibleDate txtSashitomeTorokuYMD) {
+    public void  setTxtSashitomeTorokuYMD(TextBoxDate txtSashitomeTorokuYMD) {
         this.getShokanJoho().getSashitomeKojoJokyo().setTxtSashitomeTorokuYMD(txtSashitomeTorokuYMD);
     }
 
@@ -485,22 +485,22 @@ public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoD
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtSashitomeNofuKigenYMD() {
+    public TextBoxDate getTxtSashitomeNofuKigenYMD() {
         return this.getShokanJoho().getSashitomeKojoJokyo().getTxtSashitomeNofuKigenYMD();
     }
 
     @JsonIgnore
-    public void  setTxtSashitomeNofuKigenYMD(TextBoxFlexibleDate txtSashitomeNofuKigenYMD) {
+    public void  setTxtSashitomeNofuKigenYMD(TextBoxDate txtSashitomeNofuKigenYMD) {
         this.getShokanJoho().getSashitomeKojoJokyo().setTxtSashitomeNofuKigenYMD(txtSashitomeNofuKigenYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtSashitomeKaijoYMD() {
+    public TextBoxDate getTxtSashitomeKaijoYMD() {
         return this.getShokanJoho().getSashitomeKojoJokyo().getTxtSashitomeKaijoYMD();
     }
 
     @JsonIgnore
-    public void  setTxtSashitomeKaijoYMD(TextBoxFlexibleDate txtSashitomeKaijoYMD) {
+    public void  setTxtSashitomeKaijoYMD(TextBoxDate txtSashitomeKaijoYMD) {
         this.getShokanJoho().getSashitomeKojoJokyo().setTxtSashitomeKaijoYMD(txtSashitomeKaijoYMD);
     }
 
@@ -515,12 +515,12 @@ public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoD
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKojoKetteiYMD() {
+    public TextBoxDate getTxtKojoKetteiYMD() {
         return this.getShokanJoho().getSashitomeKojoJokyo().getTxtKojoKetteiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtKojoKetteiYMD(TextBoxFlexibleDate txtKojoKetteiYMD) {
+    public void  setTxtKojoKetteiYMD(TextBoxDate txtKojoKetteiYMD) {
         this.getShokanJoho().getSashitomeKojoJokyo().setTxtKojoKetteiYMD(txtKojoKetteiYMD);
     }
 
@@ -535,12 +535,12 @@ public class IchijiSashitome1GoDiv extends Panel implements IIchijiSashitome1GoD
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtHokenshoTeishutsuKigenYMD() {
+    public TextBoxDate getTxtHokenshoTeishutsuKigenYMD() {
         return this.getShokanJoho().getSashitomeKojoJokyo().getTxtHokenshoTeishutsuKigenYMD();
     }
 
     @JsonIgnore
-    public void  setTxtHokenshoTeishutsuKigenYMD(TextBoxFlexibleDate txtHokenshoTeishutsuKigenYMD) {
+    public void  setTxtHokenshoTeishutsuKigenYMD(TextBoxDate txtHokenshoTeishutsuKigenYMD) {
         this.getShokanJoho().getSashitomeKojoJokyo().setTxtHokenshoTeishutsuKigenYMD(txtHokenshoTeishutsuKigenYMD);
     }
 

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @reamsid_L DBA-0070-010 chengsanyuan
  */
 public class ServiceTypeCommonChildDivDiv extends Panel implements IServiceTypeCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -115,7 +115,11 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTxtTodokedeKubun().setValue(居宅給付計画届出.get届出区分());
         }
-        div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
+        if (row.getTekiyoKaishiYMD() == null) {
+            div.getTxtTekiyoKikan().clearFromValue();
+        } else {
+            div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
+        }
         if (row.getTekiyoShuryoYMD() == null) {
             div.getTxtTekiyoKikan().clearToValue();
         } else {
@@ -135,7 +139,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTodokedesha().getTxtTodokedeshaShimeiKana().setDomain(居宅給付計画届出.get届出者氏名カナ());
         }
-        if (居宅給付計画届出.get届出者関係区分() == null) {
+        if (居宅給付計画届出.get届出者関係区分().isNullOrEmpty()) {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().clearValue();
         } else {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(
@@ -164,7 +168,9 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         for (TaishoshaIchiranResult result : 対象情報一覧) {
             dgRiyoNentstsuIchiran_Row row = new dgRiyoNentstsuIchiran_Row();
             row.getRiyoYM().setValue(new RDate(result.get利用年月().toString()));
-            row.setKoshinKubun(KyufukanrihyoSakuseiKubun.toValue(result.get更新区分()).get名称());
+            if (!result.get更新区分().isNullOrEmpty()) {
+                row.setKoshinKubun(KyufukanrihyoSakuseiKubun.toValue(result.get更新区分()).get名称());
+            }
             row.getKoshinYMD().setValue(DateConverter.flexibleDateToRDate(result.get更新年月日()));
             row.getSofuYM().setValue(result.get送付年月() == null
                     || RString.EMPTY.equals(result.get送付年月().toDateString()) ? null

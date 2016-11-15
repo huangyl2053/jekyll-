@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -59,16 +60,6 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
      * 介護国保連ＩＦ異動年月日
      */
     idoYMD(2147483647, 0),
-    /**
-     * 介護国保連ＩＦ訂正区分
-     * <br/>訂正の場合、必須
-     */
-    teiseiKubun(2, 0),
-    /**
-     * 介護国保連ＩＦ訂正年月日
-     * <br/>訂正の場合、必須
-     */
-    teiseiYMD(2147483647, 0),
     /**
      * 介護国保連ＩＦ法人種別
      */
@@ -190,10 +181,6 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
      */
     serviceJigyoshoJigyoSaikaiYMD(2147483647, 0),
     /**
-     * 介護保険証記載保険者番号
-     */
-    shokisaiHokenshaNo(2147483647, 0),
-    /**
      * 受領委任区分
      */
     juryoIninKubu(1, 0),
@@ -210,14 +197,6 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
      */
     seikatsuhogoShiteiFlag(1, 0),
     /**
-     * 市町村コード
-     */
-    shichosonCode(2147483647, 0),
-    /**
-     * 地域区分
-     */
-    chiikiKubun(1, 0),
-    /**
      * 論理削除フラグ
      */
     logicalDeletedFlag(1, 0);
@@ -232,7 +211,7 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -241,7 +220,7 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

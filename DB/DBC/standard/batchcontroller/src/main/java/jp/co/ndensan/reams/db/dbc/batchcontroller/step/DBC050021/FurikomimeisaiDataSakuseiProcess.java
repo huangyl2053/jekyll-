@@ -111,7 +111,8 @@ public class FurikomimeisaiDataSakuseiProcess extends BatchProcessBase<FurikomiD
     private KozaFurikomiTempTableEntity setKozaFurikomiTempTableEntity(FurikomiDataSakuseiEntity entity) {
         KozaFurikomiTempTableEntity tempTable1 = new KozaFurikomiTempTableEntity();
         tempTable1.setFurikomiId(Long.valueOf(RSTRING_0.toString()));
-        tempTable1.setItakushaId(Decimal.ZERO);
+        tempTable1.setItakushaId(parameter.get委託者ID() == null || parameter.get委託者ID().isEmpty()
+                ? Decimal.ZERO : new Decimal(parameter.get委託者ID().toString()));
         tempTable1.setFurikomiYMD(parameter.get振込指定年月日());
         tempTable1.setSakuseiKaisu(Decimal.ONE);
         tempTable1.setSubGyomuCode(SubGyomuCode.DBC介護給付);
@@ -158,6 +159,7 @@ public class FurikomimeisaiDataSakuseiProcess extends BatchProcessBase<FurikomiD
         tempTable1.setBaitaiSakuseizumiFlag(false);
         tempTable1.setIraishoSakuseizumiFlag(false);
         tempTable1.setSakujoFlag(false);
+        tempTable1.setGyomuKoyuKey(entity.getKozaNayoseKey());
 
         return tempTable1;
 

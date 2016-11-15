@@ -24,10 +24,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JimuSonotashiryoBusiness {
 
-    private final RString ファイル名_G0001 = new RString("G0001.png");
+    private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private static final int INDEX_5 = 5;
+    private static final boolean あり = true;
+    private static final boolean 無し = false;
     private final ShinsakaiSiryoKyotsuEntity entity;
     private final List<RString> ファイル名List;
-    private int index;
+    private final int 存在ファイルindex;
 
     /**
      * コンストラクタです。
@@ -42,7 +45,7 @@ public class JimuSonotashiryoBusiness {
         } else {
             this.ファイル名List = getその他資料原本イメージファイル名();
         }
-        index = 存在ファイルindex;
+        this.存在ファイルindex = 存在ファイルindex;
     }
 
     /**
@@ -70,6 +73,15 @@ public class JimuSonotashiryoBusiness {
      */
     public RString get被保険者番号() {
         return entity.getHihokenshaNo();
+    }
+
+    /**
+     * 識別コードは証記載保険者番号（左から5桁）+被保険者番号を設定してください。
+     *
+     * @return 識別コード
+     */
+    public RString get識別コード() {
+        return entity.getShoKisaiHokenshaNo().substring(0, INDEX_5).concat(entity.getHihokenshaNo());
     }
 
     /**
@@ -111,19 +123,29 @@ public class JimuSonotashiryoBusiness {
     /**
      * 左のその他資料イメージを取得します。
      *
+     * @param index index
      * @return 左のその他資料イメージ
      */
-    public RString get左のその他資料イメージ() {
-        return getその他資料();
+    public RString get左のその他資料イメージ(int index) {
+        List<RString> ファイルPathList = getその他資料();
+        if (ファイルPathList != null && index < ファイルPathList.size()) {
+            return ファイルPathList.get(index);
+        }
+        return RString.EMPTY;
     }
 
     /**
      * 右のその他資料イメージを取得します。
      *
+     * @param index index
      * @return 右のその他資料イメージ
      */
-    public RString get右のその他資料イメージ() {
-        return getその他資料();
+    public RString get右のその他資料イメージ(int index) {
+        List<RString> ファイルPathList = getその他資料();
+        if (ファイルPathList != null && index < ファイルPathList.size()) {
+            return ファイルPathList.get(index);
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -140,28 +162,33 @@ public class JimuSonotashiryoBusiness {
      *
      * @return その他資料
      */
-    public RString getその他資料() {
+    public List<RString> getその他資料() {
+        List<RString> ファイルPathList = new ArrayList<>();
         if (entity.getImageSharedFileId() == null) {
-            return RString.EMPTY;
+            return ファイルPathList;
         }
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         boolean is存在;
-        for (int i = index; i < ファイル名List.size(); i++) {
+        int index = 0;
+        for (int i = 0; i < ファイル名List.size(); i++) {
             RString ファイル名 = ファイル名List.get(i);
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), entity.getImageSharedFileId());
             try {
                 SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-                is存在 = true;
+                is存在 = あり;
             } catch (Exception e) {
-                is存在 = false;
+                is存在 = 無し;
             }
-            if (is存在) {
+            if (is存在 && index < INDEX_5) {
+                ファイルPathList.add(Path.combinePath(new RString("/db/dbe/image/"), ファイル名));
                 index = i + 1;
-                return ファイル名;
+            }
+            if (INDEX_5 <= index) {
+                return ファイルPathList;
             }
         }
-        return RString.EMPTY;
+        return ファイルPathList;
     }
 
     /**
@@ -170,7 +197,7 @@ public class JimuSonotashiryoBusiness {
      * @return その他資料
      */
     public int get存在ファイルIndex() {
-        return index;
+        return 存在ファイルindex;
     }
 
     private List<RString> getその他資料マスキング後イメージファイル名() {

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 帳票設計_DBCMN43002_高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）Sourceするクラスです。
  *
- * @reamsid_L DBC-2000-070 lijianKogakuKetteiTsuchiShoSealer2Source
+ * @reamsid_L DBC-2000-070 lijian
  */
 public class KogakuKetteiTsuchiShoSealer2Source implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

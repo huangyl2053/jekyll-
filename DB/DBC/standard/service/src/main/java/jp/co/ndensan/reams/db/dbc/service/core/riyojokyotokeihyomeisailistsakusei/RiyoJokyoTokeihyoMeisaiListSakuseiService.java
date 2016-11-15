@@ -85,7 +85,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 利用状況統計表（明細リスト）作成サービスクラスです。
  *
- * @reamsid_L DBC-1000-020 zuotao
+ * @reamsid_L DBC-3500-030 zuotao
  */
 public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
 
@@ -1307,7 +1307,7 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
             entity.setShoKisaiHokenshaNo(ShoKisaiHokenshaNo.EMPTY);
             entity.setShichosonMeisho(RString.EMPTY);
         }
-        return null;
+        return entity;
     }
 
     /**

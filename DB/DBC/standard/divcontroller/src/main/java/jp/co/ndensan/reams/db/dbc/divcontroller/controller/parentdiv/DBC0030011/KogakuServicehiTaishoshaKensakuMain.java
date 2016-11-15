@@ -14,8 +14,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.Koga
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
+import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.view.HihokenshaDaichoAliveManager;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -76,11 +78,18 @@ public class KogakuServicehiTaishoshaKensakuMain {
             if (被保番号 == null || 被保番号.isEmpty()) {
                 throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
             }
+            HihokenshaDaichoAlive 被保番号entity = new HihokenshaDaichoAliveManager().get最新の被保険者台帳履歴(被保番号);
+            KogakuServicehiTaishoshaKensakuMainValidationHandler validationHandler = new KogakuServicehiTaishoshaKensakuMainValidationHandler(div);
+            ValidationMessageControlPairs pairs = null;
+            if (被保番号entity == null) {
+                pairs = validationHandler.validate対象データなし();
+            }
+            if (pairs != null && pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             div.getKogakuServicehiSearch().getHihokenshaShitei().getHihokenshaKensakuJoken().getTxtHihoNo().setValue(被保番号.getColumnValue());
             boolean 対象データなしflag = getHandler(div).set被保険者名(被保番号, 資格対象者.get識別コード());
-            ValidationMessageControlPairs pairs = null;
             if (対象データなしflag) {
-                KogakuServicehiTaishoshaKensakuMainValidationHandler validationHandler = new KogakuServicehiTaishoshaKensakuMainValidationHandler(div);
                 pairs = validationHandler.validate対象データなし();
             }
             if (pairs != null && pairs.iterator().hasNext()) {

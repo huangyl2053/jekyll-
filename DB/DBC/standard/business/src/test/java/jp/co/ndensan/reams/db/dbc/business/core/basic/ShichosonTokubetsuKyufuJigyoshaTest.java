@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -143,16 +142,6 @@ public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
         @Test
         public void get介護国保連ＩＦ異動年月日は_entityが持つ介護国保連ＩＦ異動年月日を返す() {
             assertThat(sut.get介護国保連ＩＦ異動年月日(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getIdoYMD()));
-        }
-
-        @Test
-        public void get介護国保連ＩＦ訂正区分は_entityが持つ介護国保連ＩＦ訂正区分を返す() {
-            assertThat(sut.get介護国保連ＩＦ訂正区分(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getTeiseiKubun()));
-        }
-
-        @Test
-        public void get介護国保連ＩＦ訂正年月日は_entityが持つ介護国保連ＩＦ訂正年月日を返す() {
-            assertThat(sut.get介護国保連ＩＦ訂正年月日(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getTeiseiYMD()));
         }
 
         @Test
@@ -306,11 +295,6 @@ public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
         }
 
         @Test
-        public void get介護保険証記載保険者番号は_entityが持つ介護保険証記載保険者番号を返す() {
-            assertThat(sut.get介護保険証記載保険者番号(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getShokisaiHokenshaNo()));
-        }
-
-        @Test
         public void get受領委任区分は_entityが持つ受領委任区分を返す() {
             assertThat(sut.get受領委任区分(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getJuryoIninKubu()));
         }
@@ -328,16 +312,6 @@ public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
         @Test
         public void get生活保護法による指定の有は_entityが持つ生活保護法による指定の有を返す() {
             assertThat(sut.is生活保護法による指定の有(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getSeikatsuhogoShiteiFlag()));
-        }
-
-        @Test
-        public void get市町村コードは_entityが持つ市町村コードを返す() {
-            assertThat(sut.get市町村コード(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getShichosonCode()));
-        }
-
-        @Test
-        public void get地域区分は_entityが持つ地域区分を返す() {
-            assertThat(sut.get地域区分(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getChiikiKubun()));
         }
     }
 

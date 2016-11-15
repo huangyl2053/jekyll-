@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchiichiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -51,10 +52,8 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranSource implements IReportSo
     public RString listHakkoTaishosha_2;
     @ReportItem(name = "listHakkoTaishosha_3", length = 3, order = 16)
     public RString listHakkoTaishosha_3;
-    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "listHakkoTaishosha_4", length = 10, order = 17)
     public RString listHakkoTaishosha_4;
-    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "listHakkoTaishosha_5", length = 15, order = 18)
     public RString listHakkoTaishosha_5;
     @ReportItem(name = "listHakkoTaishosha_6", length = 10, order = 19)
@@ -78,6 +77,10 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranSource implements IReportSo
     public RString gyoseikuCode;
     @ReportItem(name = "shichosonCode", length = 20, order = 28)
     public RString shichosonCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報1;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報2;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

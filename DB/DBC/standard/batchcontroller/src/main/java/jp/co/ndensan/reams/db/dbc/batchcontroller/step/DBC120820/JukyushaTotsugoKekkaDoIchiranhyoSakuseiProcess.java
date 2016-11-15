@@ -125,7 +125,6 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
                     + "IJukyushaKoshinKekkaMapper.get帳票出力対象データ");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200058");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY JUKYUSHAJOHOTEMP.\"hokenshaNo\" ASC");
     private static final RString コンマ = new RString(",");
     private static final RString 帳票分類ID = new RString("DBC200058_JukyushaTotsugokekkaIchiran");
     private static final RString SAKUSEI = new RString("作成");
@@ -153,17 +152,6 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         pageBreakKeys = new ArrayList<>();
         pageBreakKeys.add(new RString(JukyushaKoshinKekkaIchiranSource.ReportSourceFields.hokenshaNo.name()));
         RString orderByStr = MyBatisOrderByClauseCreator.create(JukyushaKoshinKekkaIchiranOutputOrder.class, 出力順情報);
-        if (RString.isNullOrEmpty(orderByStr)) {
-            orderByStr = デフォルト出力順;
-        } else {
-            List<RString> 出力順BODY = orderByStr.split(コンマ.toString());
-            orderByStr = デフォルト出力順;
-            if (1 < 出力順BODY.size()) {
-                for (int i = 1; i < 出力順BODY.size(); i++) {
-                    orderByStr = orderByStr.concat(コンマ).concat(出力順BODY.get(i));
-                }
-            }
-        }
         int i = 0;
         this.改頁リスト = new ArrayList();
         for (ISetSortItem item : 出力順情報.get設定項目リスト()) {

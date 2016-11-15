@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011.DBC1
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011.DataGridItiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011.KyufuTsuchiGenmenHoseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1300011.KyufuTsuchiGenmenHoseiTorokuHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1300011.KyufuTsuchiGenmenHoseiTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KyufuhiTuchiHoseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouRegisterManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -85,6 +87,10 @@ public class KyufuTsuchiGenmenHoseiToroku {
      * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonSearch(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        ValidationMessageControlPairs pair = getValidationHandler(div).validate検索する();
+        if (pair.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pair).respond();
+        }
         KyufuhigenmenjyouhouRegisterManager manager = KyufuhigenmenjyouhouRegisterManager.createInstance();
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo hiHokenshaNo = 資格対象者.get被保険者番号();
@@ -252,6 +258,10 @@ public class KyufuTsuchiGenmenHoseiToroku {
      * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonKakutei(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        ValidationMessageControlPairs pair = getValidationHandler(div).validate確定する();
+        if (pair.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pair).respond();
+        }
         div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(false);
         div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(false);
         if (changeCheck(div)) {
@@ -388,6 +398,10 @@ public class KyufuTsuchiGenmenHoseiToroku {
 
     private KyufuTsuchiGenmenHoseiTorokuHandler getHandler(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         return new KyufuTsuchiGenmenHoseiTorokuHandler(div);
+    }
+    
+    private KyufuTsuchiGenmenHoseiTorokuValidationHandler getValidationHandler(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        return new KyufuTsuchiGenmenHoseiTorokuValidationHandler(div);
     }
 
     private boolean changeCheck(KyufuTsuchiGenmenHoseiTorokuDiv div) {

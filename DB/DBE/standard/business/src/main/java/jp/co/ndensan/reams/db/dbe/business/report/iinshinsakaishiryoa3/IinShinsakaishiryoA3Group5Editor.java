@@ -8,15 +8,12 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * その他資料A3版Editorです。
@@ -26,15 +23,18 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Editor {
 
     private final JimuSonotashiryoBusiness business;
+    private final int index;
     private static final int INT_4 = 4;
 
     /**
      * コンストラクタです。
      *
      * @param business {@link JimuSonotashiryoBusiness}
+     * @param index index
      */
-    protected IinShinsakaishiryoA3Group5Editor(JimuSonotashiryoBusiness business) {
+    protected IinShinsakaishiryoA3Group5Editor(JimuSonotashiryoBusiness business, int index) {
         this.business = business;
+        this.index = index;
     }
 
     /**
@@ -65,13 +65,8 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
         source.seven_shinsaYY = get年(business.get介護認定審査会開催年月日());
         source.seven_shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.seven_shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
-        source.seven_imgSonotashiryo1 = business.get左のその他資料イメージ();
-        source.seven_imgSonotashiryo2 = business.get右のその他資料イメージ();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
-            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    business.get申請書管理番号());
-        }
+        source.seven_imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
+        source.seven_imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
         source.layout = Layouts.五頁目;
         return source;
     }

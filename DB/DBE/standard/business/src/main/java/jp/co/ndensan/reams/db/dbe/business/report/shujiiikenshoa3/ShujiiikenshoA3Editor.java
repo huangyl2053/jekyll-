@@ -64,7 +64,7 @@ public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
         source.imgIkensho1 = business.get左の主治医意見書イメージ();
         source.imgIkensho2 = business.get右の主治医意見書イメージ();
         if (business.is事務局()) {
-            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
             if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
                 source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
             }

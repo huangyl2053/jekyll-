@@ -282,7 +282,8 @@ public class KyokaisoGaitoshaPanel {
 
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(
                     jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
-            dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
+            dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getSelectedItems().size() > 0 ? 
+                    div.getDgKyokaisouGaitouItran().getSelectedItems().get(0) : null;
             KyokaisoGaitoshaParameter parameter = KyokaisoGaitoshaParameter.createParamFor被保険者番号(被保険者番号);
             int 最新履歴番号 = KyokaisoGaitoshaManager.createInstance().get最新履歴番号(parameter).intValue();
             int 最新リンク番号 = KyokaisoGaitoshaManager.createInstance().get最新リンク番号(parameter).intValue();

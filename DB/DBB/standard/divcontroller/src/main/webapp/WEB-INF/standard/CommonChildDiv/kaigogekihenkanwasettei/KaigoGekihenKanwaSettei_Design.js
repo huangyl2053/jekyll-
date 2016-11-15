@@ -4,12 +4,12 @@ var DBB;
         var Events = (function () {
             function Events() {
             }
-            Events.onClickBtnClose = function () {
-                return "onClickBtnClose";
-            };
-
             Events.onClickBtnKakutei = function () {
                 return "onClickBtnKakutei";
+            };
+
+            Events.onClickBtnClose = function () {
+                return "onClickBtnClose";
             };
             return Events;
         })();
@@ -39,12 +39,12 @@ var DBB;
                 return new UZA.DataGrid(this.convFiledName("dgGekihenKanwa"));
             };
 
-            Controls.prototype.btnClose = function () {
-                return new UZA.Button(this.convFiledName("btnClose"));
-            };
-
             Controls.prototype.btnKakutei = function () {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
             };
             return Controls;
         })();

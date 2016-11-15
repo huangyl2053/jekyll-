@@ -53,8 +53,32 @@ public class GassanJikofutangakuKakunPageBreak extends PageBreaker<GassanJikofut
         } else if (this.breakKeysList.contains(GassanJikofutangakuKakunOutPutOrder.申請書整理番号.get項目ID())
                 && !currentSource.getSource().list_4.equals(nextSource.getSource().list_4)) {
             flag = true;
+        } else {
+            flag = isBreak_1(currentSource, nextSource);
         }
         return flag;
 
+    }
+
+    private boolean isBreak_1(ReportLineRecord<GassanJikofutangakuKakuninSource> currentSource,
+            ReportLineRecord<GassanJikofutangakuKakuninSource> nextSource) {
+        boolean flag = false;
+        if (this.breakKeysList.contains(GassanJikofutangakuKakunOutPutOrder.郵便番号.get項目ID())
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanJikofutangakuKakunOutPutOrder.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanJikofutangakuKakunOutPutOrder.行政区コード.get項目ID())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanJikofutangakuKakunOutPutOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanJikofutangakuKakunOutPutOrder.市町村コード.get項目ID())
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
+            flag = true;
+        }
+        return flag;
     }
 }

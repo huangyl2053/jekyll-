@@ -10,12 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb241001.TokuchoHaishinDataTorikomiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -32,22 +29,10 @@ public class DBB241001_TokuchoHaishinDataTorikomiParameter extends BatchParamete
 
     private static final RString FILTER_Z1A = new RString("Z1%");
 
-    @BatchParameter(key = "保存先フォルダのパス", name = "保存先フォルダのパス")
-    private FilesystemPath 保存先フォルダのパス;
-    @BatchParameter(key = "fileNameList", name = "fileNameList")
-    private List<RString> fileNameList;
     @BatchParameter(key = "sharedFileEntryDescriptorList", name = "sharedFileEntryDescriptorList")
     private List<SharedFileEntryDescriptor> sharedFileEntryDescriptorList;
     @BatchParameter(key = "shoriYMDHM", name = "shoriYMDHM")
     private RDateTime shoriYMDHM;
-    @BatchParameter(key = "shoriTaishoYM", name = "shoriTaishoYM")
-    private FlexibleYearMonth shoriTaishoYM;
-    @BatchParameter(key = "shoriNendo", name = "shoriNendo")
-    private FlexibleYear shoriNendo;
-    @BatchParameter(key = "hosokuTsuki", name = "hosokuTsuki")
-    private RString hosokuTsuki;
-    @BatchParameter(key = "tenbikiTsuki", name = "tenbikiTsuki")
-    private RString tenbikiTsuki;
 
     /**
      * コンストラクタです
@@ -68,12 +53,9 @@ public class DBB241001_TokuchoHaishinDataTorikomiParameter extends BatchParamete
      * processのパラメータを生成します。
      *
      * @param fileName RString
-     * @param fileID RDateTime
-     * @param filePath RString
      * @return processパラメータ
      */
-    public TokuchoHaishinDataTorikomiProcessParameter toProcessParameter(RString fileName, RDateTime fileID, RString filePath) {
-        return new TokuchoHaishinDataTorikomiProcessParameter(fileName, fileID, this.shoriYMDHM, this.shoriTaishoYM,
-                this.shoriNendo, this.hosokuTsuki, this.tenbikiTsuki, filePath);
+    public TokuchoHaishinDataTorikomiProcessParameter toProcessParameter(RString fileName) {
+        return new TokuchoHaishinDataTorikomiProcessParameter(fileName, this.shoriYMDHM);
     }
 }

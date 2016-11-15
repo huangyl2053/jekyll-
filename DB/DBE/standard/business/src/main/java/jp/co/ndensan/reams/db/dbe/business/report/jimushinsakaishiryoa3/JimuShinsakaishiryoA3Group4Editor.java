@@ -9,15 +9,12 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWar
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 主治医意見書A3版Editorです。
@@ -68,12 +65,6 @@ public class JimuShinsakaishiryoA3Group4Editor implements IJimuShinsakaishiryoA3
         source.three_shinsaDD = get日(business.get今回認定審査年月日());
         source.three_imgIkensho1 = business.get左の主治医意見書イメージ();
         source.three_imgIkensho2 = business.get右の主治医意見書イメージ();
-        if (business.is事務局()) {
-            source.shikibetuCode = ShikibetsuCode.EMPTY;
-            if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
-                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
-            }
-        }
         if (ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
             source.layout = Layouts.任意;
         } else {

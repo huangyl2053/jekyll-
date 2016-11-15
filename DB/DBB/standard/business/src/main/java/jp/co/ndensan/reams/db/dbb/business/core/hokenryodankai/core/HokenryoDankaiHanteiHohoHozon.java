@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public abstract class HokenryoDankaiHanteiHohoHozon {
 
-    private final Map<RString, List<IHanteiHoho>> hanteiHoho = new HashMap<>();
+    private final Map<RString, List<IHanteiHoho>> hanteiHoho = new LinkedHashMap<>();
 
     /**
      * 世帯非課税最大段階数取得
@@ -58,12 +58,10 @@ public abstract class HokenryoDankaiHanteiHohoHozon {
                     result = hanteiDankai;
                     atokagen = maekagen;
 
-                } else {
-                    if (atokagen.compareTo(maejogen) < 0 || maejogen.compareTo(new Decimal(-1)) == 0) {
-                        result = hanteiDankai;
-                        atokagen = maekagen;
+                } else if (atokagen.compareTo(maejogen) < 0 || maejogen.compareTo(new Decimal(-1)) == 0) {
+                    result = hanteiDankai;
+                    atokagen = maekagen;
 
-                    }
                 }
             }
         }
@@ -109,11 +107,9 @@ public abstract class HokenryoDankaiHanteiHohoHozon {
                 if (result == null || result.isEmpty()) {
                     result = hanteiDankai;
                     atokagen = maekagen;
-                } else {
-                    if (atokagen.compareTo(maejogen) < 0 || maejogen.compareTo(new Decimal(-1)) == 0) {
-                        result = hanteiDankai;
-                        atokagen = maekagen;
-                    }
+                } else if (atokagen.compareTo(maejogen) < 0 || maejogen.compareTo(new Decimal(-1)) == 0) {
+                    result = hanteiDankai;
+                    atokagen = maekagen;
                 }
             }
         }

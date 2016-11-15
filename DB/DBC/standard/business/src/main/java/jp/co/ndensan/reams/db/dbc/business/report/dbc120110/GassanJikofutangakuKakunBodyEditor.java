@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc120110;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120110.KogakuGassanJikofutangakuKakunEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.dbc120110.GassanJikofutangakuKakuninSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -30,6 +32,7 @@ public class GassanJikofutangakuKakunBodyEditor implements IGassanJikofutangakuK
     private final int 連番;
     private final RString line = new RString(" ～ ");
     private final RString nendo = new RString("年度");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです
@@ -46,6 +49,8 @@ public class GassanJikofutangakuKakunBodyEditor implements IGassanJikofutangakuK
     public GassanJikofutangakuKakuninSource edit(GassanJikofutangakuKakuninSource source) {
         source.list_1 = new RString(連番);
         source.list_2 = 帳票出力対象データ.get被保険者番号();
+        source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                source.list_2);
         source.list_3 = 帳票出力対象データ.get被保険者氏名();
         source.list_4 = 帳票出力対象データ.get支給申請書整理番号();
         source.list_5 = doパターン307(帳票出力対象データ.get対象年度());

@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.Kiju
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.dgIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.dgMeisai_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.kijunshunyugaku.KijunShunyuShinseiTourokuManager;
+import jp.co.ndensan.reams.db.dbc.service.core.kyufutsuchisakuseiikatu.HihokenshaDaichoAliveManager;
+import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
@@ -39,6 +41,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.view.ShotokuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojins;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
@@ -66,7 +70,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -105,9 +111,11 @@ public class KijunShunyuShinseiTourokuHandler {
     private static final RString KEY_修正 = new RString("修正");
     private static final RString KEY_削除 = new RString("削除");
     private static final RString KEY_1号 = new RString("1");
-    private static final RString 歳_16 = new RString("16歳");
-    private static final RString 歳_18 = new RString("18歳");
-    private static final RString 区分_本人 = new RString("本人");
+    private static final RString 歳_16 = new RString("16");
+    private static final RString 歳_18 = new RString("18");
+    private static final RString 歳_65 = new RString("65");
+    private static final RString 区分_本人 = new RString("1");
+    private static final RString 世帯主 = new RString("世帯主");
     private static final RString 識別対象区分 = new RString("個人");
     private static final RString KEY_未満人数 = new RString("未満人数");
     private static final RString KEY_以上人数 = new RString("以上人数");
@@ -140,10 +148,11 @@ public class KijunShunyuShinseiTourokuHandler {
     private static final RString コンマ = new RString(",");
     private static final RString メモ = new RString("memo");
     private static final RString 識別対象コード = new RString("shikibetsuCode");
-    private static final RString 歳以上_65 = new RString("65");
+    private static final int 歳以上_65 = 65;
     private static final Decimal 円_145万 = new Decimal("1450000");
     private static final Decimal 円_383万 = new Decimal("3830000");
     private static final Decimal 円_520万 = new Decimal("5200000");
+    private static final RString 日付_1231 = new RString("1231");
 
     /**
      * コンストラクタです。
@@ -243,7 +252,7 @@ public class KijunShunyuShinseiTourokuHandler {
             List<KijunShunyuShinseiDate> 基準収入額データList) {
         row.setSetaiCode(管理情報.get世帯コード().getColumnValue());
         row.setShoriNendo(getWarekiYear(管理情報.get年度()));
-        row.setRirekiNo(new RString(管理情報.get履歴番号()));
+        row.setRirekiNo(new RString(管理情報.get履歴番号()).padLeft("0", NUM_4));
         row.setSetaikijunYMD(toWarekiHalf_Zero(管理情報.get申請書作成の世帯基準日()));
         row.setShinseiYMD(toWarekiHalf_Zero(管理情報.get申請日()));
         row.setShinseishoSakuseiYMD(toWarekiHalf_Zero(管理情報.get申請書作成日()));
@@ -430,7 +439,7 @@ public class KijunShunyuShinseiTourokuHandler {
             Map<RString, Integer> 人数 = 計算控除対象人数(識別コード, new FlexibleYear(所得年度));
             div.getMeisai().getTxtUnder16().setValue(new Decimal(人数.get(KEY_未満人数)));
             div.getMeisai().getTxtOver16().setValue(new Decimal(人数.get(KEY_以上人数)));
-            div.getMeisai().getTxtTotalShunyu().setValue(null);
+            div.getMeisai().getTxtTotalShunyu().setValue(new Decimal(0));
             div.setHdnRirekiNo(new RString(getMax履歴番号() + NUM_1));
             基準収入額データList = get明細Gird(識別コード);
             追加状態定義();
@@ -661,7 +670,7 @@ public class KijunShunyuShinseiTourokuHandler {
     public void set1231状況隠し項目() {
         FlexibleYear 処理年度 = new FlexibleYear(div.getMeisai().getTxtShoriNendo().getValue().toString().substring(NUM_0, NUM_4));
         FlexibleDate 計算基準日 = new FlexibleDate(処理年度.minusYear(NUM_1).toDateString().concat(KEY_月日).toString());
-        div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(計算基準日));
+        div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(div.getMeisai().getTxtShoriNendo().getValue()));
         div.getMeisai().setHdnHenkomaeSetaiinHaakuKijunYMD(DataPassingConverter.serialize(計算基準日));
     }
 
@@ -685,10 +694,12 @@ public class KijunShunyuShinseiTourokuHandler {
         FlexibleDate 世帯員把握基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
         FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
         FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
+        FlexibleDate 前年度基準日 = new FlexibleDate(年度.minusYear(NUM_1).toDateString().concat(日付_1231).toString());
         int count = NUM_0;
         List<SetaiinJoho> 世帯員情報List = SetaiinFinder.createInstance().get世帯員情報By識別コード(識別コード, 世帯員把握基準日);
         List<HihokenshaDaicho> 被保険者台帳情報List = new ArrayList<>();
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
+        List<SetaiinShotoku> 世帯員所得List = new ArrayList<>();
         for (SetaiinJoho 世帯員情報 : 世帯員情報List) {
             if (識別コードList.contains(世帯員情報.get識別対象().get識別コード())) {
                 continue;
@@ -702,19 +713,23 @@ public class KijunShunyuShinseiTourokuHandler {
             }
         }
         for (HihokenshaDaicho 被保険者台帳 : 被保険者台帳情報List) {
-            List<SetaiinShotoku> 世帯員所得List = SetaiinShotokuJohoFinder.createInstance().get世帯員所得情報(
+            List<SetaiinShotoku> 世帯員所得 = SetaiinShotokuJohoFinder.createInstance().get世帯員所得情報(
                     被保険者台帳.get識別コード(), 年度, new YMDHMS(世帯員把握基準日.toString().concat(KEY_HMS.toString())));
-            RString システム日付 = RDate.getNowDate().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            if (世帯員所得List == null || 世帯員所得List.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                        .replace(MESSAGE_登録されている住民.replace(MESSAGE_XXXX, システム日付).toString()));
-            } else if (is非課税(世帯員所得List)) {
-                throw new ApplicationException(DbzErrorMessages.実行不可.getMessage()
-                        .replace(MESSAGE_世帯課税区分.toString(), MESSAGE_登録.toString()));
-            } else {
-                count = count + set基準収入額データ(世帯員所得List, 基準収入額データList, 世帯員把握基準日);
+            世帯員所得 = filter世帯員所得(世帯員所得);
+            if (世帯員所得 != null && !世帯員所得.isEmpty()) {
+                世帯員所得List.addAll(世帯員所得);
             }
+        }
+        RString システム日付 = RDate.getNowDate().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (世帯員所得List == null || 世帯員所得List.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                    .replace(MESSAGE_登録されている住民.replace(MESSAGE_XXXX, システム日付).toString()));
+        } else if (is非課税(世帯員所得List)) {
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage()
+                    .replace(MESSAGE_世帯課税区分.toString(), MESSAGE_登録.toString()));
+        } else {
+            count = count + set基準収入額データ(世帯員所得List, 基準収入額データList, 世帯員把握基準日, 前年度基準日);
         }
         if (NUM_0 == count) {
             throw new ApplicationException(DbzErrorMessages.実行不可.getMessage()
@@ -726,12 +741,30 @@ public class KijunShunyuShinseiTourokuHandler {
         return 基準収入額データList;
     }
 
+    private List<SetaiinShotoku> filter世帯員所得(List<SetaiinShotoku> 世帯員所得List) {
+        List<SetaiinShotoku> 世帯員所得情報 = new ArrayList<>();
+        HihokenshaDaichoAliveManager manager = new HihokenshaDaichoAliveManager();
+        HihokenshaDaichoAlive hihokenshaDaichoAlive;
+        for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
+            FlexibleDate 計算基準日 = new FlexibleDate(RDateTime.now().getDate().toDateString());
+            AgeCalculator 年齢 = new AgeCalculator(DateOfBirthFactory.createInstance(世帯員所得.get生年月日()),
+                    JuminJotai.住民, 世帯員所得.get住民情報_異動日(), 計算基準日);
+            if (!is年齢以上(年齢.get年齢(), 歳_65)) {
+                continue;
+            }
+            hihokenshaDaichoAlive = manager.get最新の被保険者台帳情報(世帯員所得.get被保険者番号().value());
+            if (hihokenshaDaichoAlive == null || hihokenshaDaichoAlive.get資格喪失事由コード().isNullOrEmpty()) {
+                世帯員所得情報.add(世帯員所得);
+            }
+        }
+        return 世帯員所得情報;
+    }
+
     private int set基準収入額データ(List<SetaiinShotoku> 世帯員所得List,
             List<KijunShunyuShinseiDate> 基準収入額データList,
-            FlexibleDate 世帯員把握基準日) {
+            FlexibleDate 世帯員把握基準日,
+            FlexibleDate 前年度基準日) {
         KijunShunyuShinseiDate 基準収入額データ;
-        FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
-        FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
         int count = NUM_0;
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
             HihokenshaNo 被保険者番号 = 世帯員所得.get被保険者番号();
@@ -742,7 +775,7 @@ public class KijunShunyuShinseiTourokuHandler {
             基準収入額データ.set氏名カナ(世帯員所得.getカナ氏名());
             基準収入額データ.set生年月日(世帯員所得.get生年月日());
             基準収入額データ.set性別(世帯員所得.get性別());
-            FlexibleDate 計算基準日 = new FlexibleDate(年度.minusYear(NUM_1).toDateString().concat(KEY_月日).toString());
+            FlexibleDate 計算基準日 = new FlexibleDate(RDateTime.now().getDate().toDateString());
             AgeCalculator 年齢 = new AgeCalculator(DateOfBirthFactory.createInstance(世帯員所得.get生年月日()),
                     JuminJotai.住民, 世帯員所得.get住民情報_異動日(), 計算基準日);
             基準収入額データ.set年齢(年齢.get年齢());
@@ -790,20 +823,31 @@ public class KijunShunyuShinseiTourokuHandler {
                 } else {
                     基準収入額データ.set課税所得_控除後(課税所得_控除後);
                 }
-                基準収入額データ.set前年12月31日時点の世帯主(true);
             } else {
                 基準収入額データ.set課税所得_控除後(課税所得額);
-                基準収入額データ.set前年12月31日時点の世帯主(false);
             }
-
+            IKojins 世帯員リスト = SetaiinFinder.createInstance().get世帯員リスト(世帯員所得.get識別コード(), 前年度基準日);
+            基準収入額データ.set前年12月31日時点の世帯主(is前年12月31日時点の世帯主(世帯員所得.get識別コード(), 世帯員リスト));
             基準収入額データList.add(基準収入額データ);
         }
         return count;
     }
 
+    private boolean is前年12月31日時点の世帯主(ShikibetsuCode 識別コード, IKojins 世帯員リスト) {
+        for (IKojin 世帯員 : 世帯員リスト) {
+            if (識別コード.value().equals(世帯員.get識別コード().value())) {
+                return 世帯員.is世帯主();
+            }
+        }
+        return false;
+    }
+
     private boolean is非課税(List<SetaiinShotoku> 世帯員所得List) {
         RString 非課税 = KazeiKubun.非課税.getコード();
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
+            if (世帯員所得.get課税区分_住民税減免後().isNullOrEmpty()) {
+                continue;
+            }
             if (!非課税.equals(世帯員所得.get課税区分_住民税減免後())) {
                 return false;
             }
@@ -815,17 +859,17 @@ public class KijunShunyuShinseiTourokuHandler {
         Map<RString, Integer> 人数Map = new HashMap<>();
         List<SetaiinShotoku> 世帯員所得List = SetaiinShotokuJohoFinder.createInstance().get世帯員所得情報(
                 識別コード, 所得年度, null);
-        FlexibleDate 計算基準日 = new FlexibleDate(所得年度.minusYear(NUM_1).toDateString().concat(KEY_月日).toString());
+        FlexibleDate 計算基準日 = new FlexibleDate(RDateTime.now().getDate().toDateString());
         int 未満人数 = 0;
         int 以上人数 = 0;
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
             AgeCalculator 年齢 = new AgeCalculator(DateOfBirthFactory.createInstance(世帯員所得.get生年月日()),
                     JuminJotai.住民, 世帯員所得.get住民情報_異動日(), 計算基準日);
-            if (0 < 歳_16.compareTo(年齢.get年齢())
+            if (is年齢未満(年齢.get年齢(), 歳_16)
                     && 0 < 円_38万.compareTo(世帯員所得.get合計所得金額() == null ? Decimal.ZERO : 世帯員所得.get合計所得金額())) {
                 未満人数 = 未満人数 + 1;
             }
-            if (歳_16.compareTo(年齢.get年齢()) <= 0 && 0 < 歳_18.compareTo(年齢.get年齢())
+            if (is年齢以上(年齢.get年齢(), 歳_16) && is年齢未満(年齢.get年齢(), 歳_18)
                     && 0 < 円_38万.compareTo(世帯員所得.get合計所得金額() == null ? Decimal.ZERO : 世帯員所得.get合計所得金額())) {
                 以上人数 = 以上人数 + 1;
             }
@@ -833,6 +877,20 @@ public class KijunShunyuShinseiTourokuHandler {
         人数Map.put(KEY_未満人数, 未満人数);
         人数Map.put(KEY_以上人数, 以上人数);
         return 人数Map;
+    }
+
+    private boolean is年齢未満(RString 年齢, RString 基準年齢) {
+        if (年齢.isNullOrEmpty()) {
+            return true;
+        }
+        return Integer.parseInt(年齢.toString()) < Integer.parseInt(基準年齢.toString());
+    }
+
+    private boolean is年齢以上(RString 年齢, RString 基準年齢) {
+        if (年齢.isNullOrEmpty()) {
+            return false;
+        }
+        return Integer.parseInt(年齢.toString()) >= Integer.parseInt(基準年齢.toString());
     }
 
     private boolean is世帯員所得(ShikibetsuCode 識別コード, FlexibleYear 所得年度) {
@@ -885,6 +943,9 @@ public class KijunShunyuShinseiTourokuHandler {
         Decimal 給与;
         Decimal 以外の収入;
         for (dgMeisai_Row row : rowList) {
+            if (RowState.Deleted.equals(row.getRowState())) {
+                continue;
+            }
             公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
             給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
             以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
@@ -982,11 +1043,18 @@ public class KijunShunyuShinseiTourokuHandler {
         }
         List<KijunShunyugakuDate> 選択世帯員List = DataPassingConverter.deserialize(
                 div.getMeisai().getHdnDaialogSelectSetaiinJoho(), List.class);
+        RStringBuilder builder = new RStringBuilder();
         for (KijunShunyugakuDate 選択世帯員 : 選択世帯員List) {
             if (識別コードList.contains(選択世帯員.get識別コード())) {
-                throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage()
-                        .replace(MESSAGE_識別コード.replace(MESSAGE_XXXX, 選択世帯員.get識別コード()).toString()));
+                if (builder.length() > 0) {
+                    builder.append(コンマ);
+                }
+                builder.append(選択世帯員.get識別コード());
             }
+        }
+        if (builder.length() > 0) {
+            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage()
+                    .replace(MESSAGE_識別コード.replace(MESSAGE_XXXX, builder.toRString()).toString()));
         }
         set世帯員(選択世帯員List, rowList);
     }
@@ -1051,11 +1119,11 @@ public class KijunShunyuShinseiTourokuHandler {
             if (公的年金 == null) {
                 公的年金 = Decimal.ZERO;
             }
-            給与 = row.getNenkinShunyu().getValue();
+            給与 = row.getKyuyo().getValue();
             if (給与 == null) {
                 給与 = Decimal.ZERO;
             }
-            年金給与以外の収入 = row.getNenkinShotoku().getValue();
+            年金給与以外の収入 = row.getOtherIncome().getValue();
             if (年金給与以外の収入 == null) {
                 年金給与以外の収入 = Decimal.ZERO;
             }
@@ -1091,7 +1159,7 @@ public class KijunShunyuShinseiTourokuHandler {
         FlexibleYear 年度 = new FlexibleYear(処理年度.toString().substring(NUM_0, NUM_4));
         row.setSetaiCode(div.getMeisai().getTxtSetaiCode().getValue());
         row.setShoriNendo(getWarekiYear(年度));
-        row.setRirekiNo(div.getHdnRirekiNo());
+        row.setRirekiNo(div.getHdnRirekiNo().padLeft("0", NUM_4));
         row.setSetaikijunYMD(toWarekiHalf_Zero(div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue()));
         row.setShinseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseiYMD().getValue()));
         row.setShinseishoSakuseiYMD(toWarekiHalf_Zero(div.getMeisai().getTxtShinseishoSakuseiYMD().getValue()));
@@ -1486,15 +1554,15 @@ public class KijunShunyuShinseiTourokuHandler {
         Decimal 給与;
         Decimal 以外の収入;
         Decimal 課税所得;
-        RString 年齢;
+        int 年齢;
         for (dgMeisai_Row row : rowList) {
-            年齢 = row.getAge();
+            年齢 = get年齢(row.getAge());
             課税所得 = row.getKazeiShotokuKojogo().getValue() == null ? Decimal.ZERO : row.getKazeiShotokuKojogo().getValue();
             公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
             給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
             以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
             一人で総収入金額 = 公的年金.add(給与).add(以外の収入);
-            if (歳以上_65.compareTo(年齢) < NUM_1) {
+            if (歳以上_65 <= 年齢) {
                 if (円_145万.compareTo(課税所得) < NUM_1
                         && (円_383万.compareTo(一人で総収入金額) == NUM_1 || 円_520万.compareTo(二人以上で総収入金額) == NUM_1)
                         && !SanteiKijungaku.算定基準額_44_400円.get略称().equals(算定基準額)) {
@@ -1523,5 +1591,40 @@ public class KijunShunyuShinseiTourokuHandler {
             }
         }
         return false;
+    }
+
+    /**
+     * 総収入額チェックのメソッドです。
+     *
+     * @return 総収入額チェック結果
+     */
+    public boolean is総収入額チェック() {
+        Decimal 総収入額 = div.getMeisai().getTxtTotalShunyu().getValue();
+        return 総収入額.equals(get明細行総収入金額());
+    }
+
+    private Decimal get明細行総収入金額() {
+        List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+        Decimal 明細行総収入金額 = Decimal.ZERO;
+        Decimal 公的年金;
+        Decimal 給与;
+        Decimal 以外の収入;
+        for (dgMeisai_Row row : rowList) {
+            if (get年齢(row.getAge()) < 歳以上_65 || RowState.Deleted.equals(row.getRowState())) {
+                continue;
+            }
+            公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
+            給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
+            以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
+            明細行総収入金額 = 明細行総収入金額.add(公的年金).add(給与).add(以外の収入);
+        }
+        return 明細行総収入金額;
+    }
+
+    private int get年齢(RString 年齢) {
+        if (年齢.isNullOrEmpty()) {
+            return 0;
+        }
+        return Integer.parseInt(年齢.toString());
     }
 }

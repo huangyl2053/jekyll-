@@ -81,7 +81,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class SokujiFukaKouseiMain {
 
-    private static final RString 保存する = new RString("SokujiFukaKouseibtn2");
+    private static final RString 保存する = new RString("SokujiFukaKouseibtn");
     private static final RString DBB_HIHOKENSHANO = new RString("DBBHihokenshaNo");
     private static final RString 翌年度の情報を表示する = new RString("翌年度の情報を表示する");
     private static final RString 前年度の情報を表示する = new RString("前年度の情報を表示する");
@@ -355,7 +355,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblTokuchoZogenValue04().setText(get金額のカンマ編集(
                 (tablePanel.getTxtTokuchoKoseiGo04().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtTokuchoKoseiGo04().getValue()).subtract(
+                        : tablePanel.getTxtTokuchoKoseiGo04().getValue()).subtract(
                         getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue04().getText()))));
         tablePanel.getLblTokuchoKoseiGoSum().setText(handler.get特別徴収の更正後合計());
         tablePanel.getLblTokuchoZogenSum().setText(handler.get特別徴収の増減合計());
@@ -374,7 +374,7 @@ public class SokujiFukaKouseiMain {
         tablePanel.getTxtTokuchoKoseiGo08().setValue(特別徴収_6月);
         tablePanel.getLblTokuchoZogenValue06().setText(get金額のカンマ編集(
                 (tablePanel.getTxtTokuchoKoseiGo06().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtTokuchoKoseiGo06().getValue()).subtract(
+                        : tablePanel.getTxtTokuchoKoseiGo06().getValue()).subtract(
                         getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue06().getText()))));
         return onBlur_txtTokuchoKoseiGo08(div);
     }
@@ -390,7 +390,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblTokuchoZogenValue08().setText(get金額のカンマ編集(
                 (tablePanel.getTxtTokuchoKoseiGo08().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtTokuchoKoseiGo08().getValue()).subtract(
+                        : tablePanel.getTxtTokuchoKoseiGo08().getValue()).subtract(
                         getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue08().getText()))));
         tablePanel.getLblTokuchoKoseiGoSum().setText(handler.get特別徴収の更正後合計());
         tablePanel.getLblTokuchoZogenSum().setText(handler.get特別徴収の増減合計());
@@ -408,7 +408,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblTokuchoZogenValue10().setText(get金額のカンマ編集(
                 (tablePanel.getTxtTokuchoKoseiGo10().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtTokuchoKoseiGo10().getValue()).subtract(
+                        : tablePanel.getTxtTokuchoKoseiGo10().getValue()).subtract(
                         getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue10().getText()))));
         tablePanel.getLblTokuchoKoseiGoSum().setText(handler.get特別徴収の更正後合計());
         tablePanel.getLblTokuchoZogenSum().setText(handler.get特別徴収の増減合計());
@@ -427,7 +427,7 @@ public class SokujiFukaKouseiMain {
         tablePanel.getTxtTokuchoKoseiGo02().setValue(特別徴収_12月);
         tablePanel.getLblTokuchoZogenValue12().setText(get金額のカンマ編集(
                 (tablePanel.getTxtTokuchoKoseiGo12().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtTokuchoKoseiGo12().getValue()).subtract(
+                        : tablePanel.getTxtTokuchoKoseiGo12().getValue()).subtract(
                         getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue12().getText()))));
         return onBlur_txtTokuchoKoseiGo02(div);
     }
@@ -443,7 +443,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblTokuchoZogenValue02().setText(get金額のカンマ編集(
                 (tablePanel.getTxtTokuchoKoseiGo02().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtTokuchoKoseiGo02().getValue()).subtract(
+                        : tablePanel.getTxtTokuchoKoseiGo02().getValue()).subtract(
                         getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue02().getText()))));
         tablePanel.getLblTokuchoKoseiGoSum().setText(handler.get特別徴収の更正後合計());
         tablePanel.getLblTokuchoZogenSum().setText(handler.get特別徴収の増減合計());
@@ -461,7 +461,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue04().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo04().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo04().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo04().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue04().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -479,7 +479,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue05().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo05().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo05().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo05().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue05().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -497,7 +497,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue06().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo06().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo06().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo06().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue06().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -515,7 +515,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue07().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo07().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo07().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo07().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue07().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -533,7 +533,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue08().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo08().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo08().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo08().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue08().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -551,7 +551,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue09().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo09().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo09().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo09().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue09().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -569,7 +569,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue10().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo10().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo10().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo10().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue10().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -587,7 +587,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue11().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo11().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo11().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo11().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue11().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -605,7 +605,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue12().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo12().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo12().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo12().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue12().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -623,7 +623,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue01().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo01().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo01().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo01().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue01().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -641,7 +641,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue02().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo02().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo02().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo02().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue02().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -659,7 +659,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValue03().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGo03().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGo03().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGo03().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValue03().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -677,7 +677,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValueYoku04().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGoYoku04().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGoYoku04().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGoYoku04().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValueYoku04().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -695,7 +695,7 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getLblFuchoZogenValueYoku05().setText(get金額のカンマ編集(
                 (tablePanel.getTxtFuchoKoseiGoYoku05().getValue() == null ? Decimal.ZERO
-                : tablePanel.getTxtFuchoKoseiGoYoku05().getValue()).subtract(
+                        : tablePanel.getTxtFuchoKoseiGoYoku05().getValue()).subtract(
                         getFormat金額(tablePanel.getLblFuchoKoseiMaeValueYoku05().getText()))));
         tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
@@ -1336,11 +1336,15 @@ public class SokujiFukaKouseiMain {
                     set会計年度(new RYear(賦課の情報.get賦課年度().getYearValue())).
                     set処理年度(new RYear(賦課の情報.get賦課年度().getYearValue())).
                     set調定事由コード(調定事由コード_更正).
-                    set調定年月日(賦課の情報.get調定日時() == null ? null : 賦課の情報.get調定日時().getDate()).
                     set調定額(期別金額).
                     set消費税額(Decimal.ZERO).
-                    set納期限(textBoxDate == null ? null : textBoxDate.getValue()).
                     set賦課処理状況(Boolean.FALSE).build();
+            if (賦課の情報.get調定日時() != null) {
+                調定共通 = 調定共通.createBuilderForEdit().set調定年月日(賦課の情報.get調定日時().getDate()).build();
+            }
+            if (textBoxDate != null) {
+                調定共通 = 調定共通.createBuilderForEdit().set納期限(textBoxDate.getValue()).build();
+            }
             Kibetsu 介護期別情報 = new Kibetsu(
                     賦課の情報.get調定年度(),
                     賦課の情報.get賦課年度(),

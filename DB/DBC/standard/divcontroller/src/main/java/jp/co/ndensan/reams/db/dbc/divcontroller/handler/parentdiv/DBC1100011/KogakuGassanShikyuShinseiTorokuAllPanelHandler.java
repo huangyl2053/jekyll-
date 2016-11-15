@@ -78,18 +78,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString DBCMN61011 = new RString("DBCMN61011");
     private static final RString DBCMN61012 = new RString("DBCMN61012");
 
-    private static final RString タイトル1 = new RString("高額合算　支給申請書登録・新規");
-    private static final RString タイトル2 = new RString("高額合算　支給申請書登録・変更");
-    private static final RString タイトル3 = new RString("高額合算　支給申請書登録・取下げ");
-    private static final RString タイトル4 = new RString("高額合算　支給申請書・訂正");
-    private static final RString タイトル5 = new RString("高額合算　支給申請書（写）・新規");
-    private static final RString タイトル6 = new RString("高額合算　支給申請書（写）・変更");
-    private static final RString タイトル7 = new RString("高額合算　支給申請書（写）・取下げ");
-    private static final RString タイトル8 = new RString("高額合算　支給申請書（写）・訂正");
-    private static final RString タイトル9 = new RString("高額合算　自己負担額証明書交付申請書登録・新規");
-    private static final RString タイトル10 = new RString("高額合算　自己負担額証明書交付申請書登録・変更");
-    private static final RString タイトル11 = new RString("高額合算　自己負担額証明書交付申請書登録・取下げ");
-    private static final RString タイトル12 = new RString("高額合算　自己負担額証明書交付申請書登録・訂正");
+    private static final RString タイトル1 = new RString("高額合算支給申請書登録・新規申請");
+    private static final RString タイトル2 = new RString("高額合算支給申請書登録・変更申請");
+    private static final RString タイトル3 = new RString("高額合算支給申請書登録・取下げ申請");
+    private static final RString タイトル4 = new RString("高額合算支給申請書訂正");
+    private static final RString タイトル5 = new RString("高額合算支給申請書（写）・新規申請");
+    private static final RString タイトル6 = new RString("高額合算支給申請書（写）・変更申請");
+    private static final RString タイトル7 = new RString("高額合算支給申請書（写）・取下げ申請");
+    private static final RString タイトル8 = new RString("高額合算支給申請書（写）訂正");
+    private static final RString タイトル9 = new RString("高額合算自己負担額証明書交付申請書登録・新規申請");
+    private static final RString タイトル10 = new RString("高額合算自己負担額証明書交付申請書登録・変更申請");
+    private static final RString タイトル11 = new RString("高額合算自己負担額証明書交付申請書登録・取下げ申請");
+    private static final RString タイトル12 = new RString("高額合算自己負担額証明書交付申請書登録・訂正");
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
@@ -652,8 +652,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             row.setTxtHihokenshaNo(item.get被保険者番号().getColumnValue());
             KogakuGassanShikyuShinseiToroku bussiness = KogakuGassanShikyuShinseiToroku.createInstance();
             IShikibetsuTaisho 被保険者情報 = bussiness.被保険者名の取得(item.get被保険者番号());
-            row.setTxtHihokenshaName(被保険者情報.get名称() == null
-                    ? null : 被保険者情報.get名称().getName().getColumnValue());
+            if (被保険者情報 != null) {
+                row.setTxtHihokenshaName(被保険者情報.get名称() == null
+                        ? null : 被保険者情報.get名称().getName().getColumnValue());
+            }
             row.setTxtJikoFutanKeisanYM(item.get自己負担額計算年月() == null
                     ? null : item.get自己負担額計算年月().toDateString());
             row.setTxtKokiHihokenshaNo(item.get後期被保険者番号());
@@ -668,7 +670,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             row.setTxtRirekiNo(new RString(item.get履歴番号().intValue()));
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                     名称_被保険者番号, item.get被保険者番号().getColumnValue());
-            PersonalData personalData = PersonalData.of(被保険者情報.get識別コード(), expandedInfo);
+            PersonalData personalData = PersonalData.of(被保険者情報 == null
+                    ? ShikibetsuCode.EMPTY : 被保険者情報.get識別コード(), expandedInfo);
             personalDataList.add(personalData);
             rowList.add(row);
         }
@@ -1195,12 +1198,14 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         Long 口座ID = 高額合算申請書.get口座ID();
         KogakuGassanShikyuShinseiToroku bussiness = KogakuGassanShikyuShinseiToroku.createInstance();
         IShikibetsuTaisho 被保険者情報 = bussiness.被保険者名の取得(高額合算申請書.get被保険者番号());
-        ShikibetsuCode 最新の識別コード = 被保険者情報.get識別コード();
-        div.getCcdKaigoAtenaInfo().initialize(最新の識別コード);
-        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         SikyuSinseiJyohoParameter pram = new SikyuSinseiJyohoParameter();
+        if (被保険者情報 != null) {
+            ShikibetsuCode 最新の識別コード = 被保険者情報.get識別コード();
+            div.getCcdKaigoAtenaInfo().initialize(最新の識別コード);
+            pram.setShikibetsuCode(最新の識別コード);
+        }
+        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         pram.setHihokenshaNo(被保険者番号);
-        pram.setShikibetsuCode(最新の識別コード);
         pram.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(高額合算申請書.get支払方法区分()));
         pram.setKozaId(口座ID);
         pram.setStartYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間開始年月日()));

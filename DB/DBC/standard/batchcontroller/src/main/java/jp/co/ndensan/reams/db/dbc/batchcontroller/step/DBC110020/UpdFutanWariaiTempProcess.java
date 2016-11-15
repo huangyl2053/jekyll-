@@ -122,9 +122,9 @@ public class UpdFutanWariaiTempProcess extends BatchProcessBase<IdouTempEntity> 
                 .concat(new RString(二割負担.getRirekiNo())).concat(SPLIT)
                 .concat(new RString(二割負担.getEdaNo())).concat(SPLIT)
                 .concat(二割負担.getInsertDantaiCd()).concat(SPLIT)
-                .concat(二割負担.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT)
-                .concat(二割負担.getShikakuKubun()).concat(SPLIT)
-                .concat(二割負担.getFutanWariaiKubun()).concat(SPLIT);
+                .concat(二割負担.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT);
+        全項目 = cancatRString(二割負担.getShikakuKubun(), 全項目);
+        全項目 = cancatRString(二割負担.getFutanWariaiKubun(), 全項目);
         全項目 = cancatDecimal(二割負担.getHonninGoukeiShotokuGaku(), 全項目);
         全項目 = 全項目.concat(new RString(二割負担.getSetaiIchigouHihokenshaSu())).concat(SPLIT);
         全項目 = cancatDecimal(二割負担.getNenkinShunyuGoukei(), 全項目);
@@ -156,6 +156,13 @@ public class UpdFutanWariaiTempProcess extends BatchProcessBase<IdouTempEntity> 
     private RString cancatSetaiCode(SetaiCode 項目, RString 全項目) {
         if (項目 != null) {
             return 全項目.concat(項目.getColumnValue()).concat(SPLIT);
+        }
+        return 全項目.concat(RString.EMPTY).concat(SPLIT);
+    }
+
+    private RString cancatRString(RString 項目, RString 全項目) {
+        if (!RString.isNullOrEmpty(項目)) {
+            return 全項目.concat(項目.toString()).concat(SPLIT);
         }
         return 全項目.concat(RString.EMPTY).concat(SPLIT);
     }

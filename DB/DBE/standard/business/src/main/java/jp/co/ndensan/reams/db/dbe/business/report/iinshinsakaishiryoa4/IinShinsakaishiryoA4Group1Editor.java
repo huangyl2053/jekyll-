@@ -8,10 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa4;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 介護認定審査対象者一覧表Editorです。
@@ -69,12 +66,6 @@ public class IinShinsakaishiryoA4Group1Editor implements IIinShinsakaishiryoA4Ed
         source.one_listShinsei_11 = business.get基準時間();
         source.one_listShinsei_12 = RString.EMPTY;
         source.one_listShinsei_13 = RString.EMPTY;
-        if (business.is事務局()) {
-            source.shikibetuCode = ShikibetsuCode.EMPTY;
-            if (business.get申請書管理番号() != null && !business.get申請書管理番号().isEmpty()) {
-                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
-            }
-        }
         source.layout = Layouts.鑑;
         return source;
     }

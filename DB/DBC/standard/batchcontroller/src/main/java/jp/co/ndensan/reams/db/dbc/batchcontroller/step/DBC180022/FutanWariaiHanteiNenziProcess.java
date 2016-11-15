@@ -211,7 +211,7 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
                 insert3115Entity.setSetaiinHihokenshaNo(世帯員情報.getHihokenshaNo());
             }
             if (所得管理 != null) {
-                insert3115Entity.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getMotoRirekiNo()));
+                insert3115Entity.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getRirekiNo()));
             }
             if (insert3115Entity.getSetaiinHihokenshaNo() == null || insert3115Entity.getSetaiinShotokuRirekiNo() == null) {
                 return;

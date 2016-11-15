@@ -93,6 +93,11 @@ public class GassanJikofutangakuKakunHeaderEditor implements IGassanJikofutangak
         source.kaipage3 = get改頁(INDEX_3);
         source.kaipage4 = get改頁(INDEX_4);
         source.kaipage5 = get改頁(INDEX_5);
+        source.yubinNo = 帳票出力対象データ.get被保険者_郵便番号();
+        source.choikiCode = 帳票出力対象データ.get被保険者_町域コード();
+        source.gyoseikuCode = 帳票出力対象データ.get被保険者_行政区コード();
+        source.shimei50onKana = 帳票出力対象データ.get被保険者_氏名50音カナ();
+        source.shichosonCode = 帳票出力対象データ.get被保険者_市町村コード();
         return source;
     }
 

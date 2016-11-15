@@ -88,15 +88,6 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 }
             },
     /**
-     * 申請取消事由入力必須チェック
-     */
-    申請取消事由が入力 {
-                @Override
-                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
-                    return SpecHelper.is申請取消事由が入力(div);
-                }
-            },
-    /**
      * 住宅所有者入力必須チェック
      */
     住宅所有者が入力 {
@@ -172,11 +163,6 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
 
         public static boolean is証明書が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
             return !div.getCommHeadPanel().getDdlSyomeisyo().getSelectedKey().isEmpty();
-        }
-
-        public static boolean is申請取消事由が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return !RString.isNullOrEmpty(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu()
-                    .getSelectedKey());
         }
 
         public static boolean is給付率が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {

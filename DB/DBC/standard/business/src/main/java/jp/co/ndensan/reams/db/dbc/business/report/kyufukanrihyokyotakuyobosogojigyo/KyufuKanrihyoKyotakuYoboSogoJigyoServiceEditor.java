@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufukanrihyokyotakuyobosogojigyo;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.JigyoshoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyokyotakuyobosogojigyo.KyufuKanrihyoKyotakuYoboSogoJigyoServiceEntity;
@@ -135,7 +136,8 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceEditor implements IKyufuKan
             source.gokeiTanisu = new RString(帳票出力対象データ.get給付計画単位数().toString());
         }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 帳票出力対象データ.get被保険者番号());
+        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+                ReportKomokuEditorUtil.get非空文字列(帳票出力対象データ.get被保険者番号()));
         return source;
     }
 

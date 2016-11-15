@@ -136,4 +136,18 @@ public final class ReportKomokuEditorUtil {
     public static RString get金融機関支店コード(KinyuKikanShitenCode code) {
         return code == null ? RString.EMPTY : code.getColumnValue();
     }
+
+    /**
+     * 非空文字列を取得します。
+     *
+     * @param 文字列 RString
+     * @return 非空文字列
+     */
+    public static RString get非空文字列(RString 文字列) {
+        if (RString.isNullOrEmpty(文字列)) {
+            return RString.EMPTY;
+        }
+        return 文字列;
+    }
+
 }

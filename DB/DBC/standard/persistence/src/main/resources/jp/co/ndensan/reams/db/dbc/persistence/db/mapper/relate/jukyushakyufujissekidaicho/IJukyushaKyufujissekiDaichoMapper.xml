@@ -1092,6 +1092,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_KeikakuHiRelateEntity" fetchSize="500">
         SELECT 
+                DbT7131."serviceName" AS サービス名称,
                 DbT3118."ryakusho" AS "dbT3118_ryakusho", 
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3025KyufujissekiKyotakuServiceMapper.allColumns_DbT3025KyufujissekiKyotakuService" />
@@ -1107,6 +1108,8 @@
                         ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
                         AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
                         AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                LEFT JOIN rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131
+                        ON "DbT3025KyufujissekiKyotakuService"."serviceCode" = (DbT7131."serviceShuruiCd",DbT7131."serviceKoumokuCd")
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>

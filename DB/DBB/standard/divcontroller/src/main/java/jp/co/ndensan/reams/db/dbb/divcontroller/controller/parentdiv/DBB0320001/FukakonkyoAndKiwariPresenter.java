@@ -150,13 +150,20 @@ public class FukakonkyoAndKiwariPresenter {
     }
 
     private static void set賦課根拠(tblFukakonkyoMeisaiDiv div, Fuka model) {
-        div.getLblFukakijunYMD().setText(model.get賦課期日().wareki().toDateString());
-        div.getLblShikakuShutokuYMD().setText(model.get資格取得日().wareki().toDateString());
-        div.getLblShikakuSoshitsuYMD().setText(model.get資格喪失日().wareki().toDateString());
-        div.getLblSeihoKaishiYMD().setText(model.get生保開始日().wareki().toDateString());
-        div.getLblSeihoShuryoYMD().setText(model.get生保廃止日().wareki().toDateString());
-        div.getLblRonenKaishiYMD().setText(model.get老年開始日().wareki().toDateString());
-        div.getLblRonenShuryoYMD().setText(model.get老年廃止日().wareki().toDateString());
+        div.getLblFukakijunYMD().setText((null == model.get賦課期日() || model.get賦課期日().isEmpty())
+                ? RString.EMPTY : model.get賦課期日().wareki().toDateString());
+        div.getLblShikakuShutokuYMD().setText((null == model.get資格取得日() || model.get資格取得日().isEmpty())
+                ? RString.EMPTY : model.get資格取得日().wareki().toDateString());
+        div.getLblShikakuSoshitsuYMD().setText((null == model.get資格喪失日() || model.get資格喪失日().isEmpty())
+                ? RString.EMPTY : model.get資格喪失日().wareki().toDateString());
+        div.getLblSeihoKaishiYMD().setText((null == model.get生保開始日() || model.get生保開始日().isEmpty())
+                ? RString.EMPTY : model.get生保開始日().wareki().toDateString());
+        div.getLblSeihoShuryoYMD().setText((null == model.get生保廃止日() || model.get生保廃止日().isEmpty())
+                ? RString.EMPTY : model.get生保廃止日().wareki().toDateString());
+        div.getLblRonenKaishiYMD().setText((null == model.get老年開始日() || model.get老年開始日().isEmpty())
+                ? RString.EMPTY : model.get老年開始日().wareki().toDateString());
+        div.getLblRonenShuryoYMD().setText((null == model.get老年廃止日() || model.get老年廃止日().isEmpty())
+                ? RString.EMPTY : model.get老年廃止日().wareki().toDateString());
     }
 
     private void set賦課根拠Of本算定(tblFukakonkyoMeisaiDiv div, Fuka model) {
@@ -196,7 +203,7 @@ public class FukakonkyoAndKiwariPresenter {
         div.getLblHokenryoritsu1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
         div.getLblHokenryoSansyutsu1().setText(calc保険料算出額(model.get算定年額保険料1(), 月数1));
 
-        if (model.get月割開始年月2().isValid()) {
+        if (null != model.get月割開始年月2() && model.get月割開始年月2().isValid()) {
             RString 月数2 = getBetweenMonths(model.get月割開始年月2(), model.get月割終了年月2());
             HokenryoDankai 保険料段階2 = 保険料段階取得.get保険料段階ListIn(model.get賦課年度())
                     .getBy段階区分(model.get保険料算定段階2());
@@ -287,7 +294,7 @@ public class FukakonkyoAndKiwariPresenter {
     }
 
     private static RString get保険料算定段階(Fuka model) {
-        if (model.get保険料算定段階2().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(model.get保険料算定段階2())) {
             return model.get保険料算定段階1();
         } else {
             return model.get保険料算定段階2();

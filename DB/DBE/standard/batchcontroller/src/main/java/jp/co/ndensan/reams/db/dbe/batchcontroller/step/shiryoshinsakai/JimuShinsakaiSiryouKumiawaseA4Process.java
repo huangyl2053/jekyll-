@@ -39,6 +39,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -47,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -65,7 +71,8 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
             new RString(JimuShinsakaishiryoA4ReportSource.ReportSourceFields.three_tokkiText.name()),
             new RString(JimuShinsakaishiryoA4ReportSource.ReportSourceFields.three_tokkiImg.name())));
     private static final RString 印字する = new RString("1");
-    private static final RString 両面 = new RString("2");
+    private static final RString 両面 = new RString("1");
+    private static final int INT_4 = 4;
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IJimuShiryoShinsakaiIinMapper mapper;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
@@ -112,7 +119,6 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         } else {
             reportId = ReportIdDBE.DBE517901.getReportId().value();
         }
-
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
@@ -134,10 +140,14 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         List<ShinseishoKanriNo> 申請書管理番号List = new ArrayList<>();
         for (ItiziHanteiEntity entity : itiziHanteiEntityList) {
-            申請書管理番号List.add(entity.getShinseishoKanriNo());
+            if (!申請書管理番号List.contains(entity.getShinseishoKanriNo())) {
+                申請書管理番号List.add(entity.getShinseishoKanriNo());
+            }
         }
         for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiSiryoKyotsuEntityList) {
-            申請書管理番号List.add(entity.getShinseishoKanriNo());
+            if (!申請書管理番号List.contains(entity.getShinseishoKanriNo())) {
+                申請書管理番号List.add(entity.getShinseishoKanriNo());
+            }
         }
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
             JimuShinsakaishiryoA4Report report = new JimuShinsakaishiryoA4Report(jimuShinsakaishiryoBusinessList,
@@ -250,5 +260,61 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         myBatisParameter.setShinseishoKanriNoList(申請書管理番号リスト);
         myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
         return mapper.get事務局特記情報(myBatisParameter);
+    }
+
+    @Override
+    protected void afterExecute() {
+        outputJokenhyoFactory(ReportIdDBE.DBE517011.getReportId().value(), get帳票名());
+        outputJokenhyoFactory(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517181.getReportId().value(), new RString("一次判定結果票"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517134.getReportId().value(), new RString("特記事項（2枚目以降）"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517151.getReportId().value(), new RString("主治医意見書（表）"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517152.getReportId().value(), new RString("主治医意見書（裏）"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517016.getReportId().value(), new RString("その他資料"));
+    }
+
+    private RString get帳票名() {
+        RString 介護認定審査会開催番号 = paramter.getShinsakaiKaisaiNo();
+        RStringBuilder 帳票名 = new RStringBuilder();
+        帳票名.append(介護認定審査会開催番号.substring(介護認定審査会開催番号.length() - INT_4));
+        帳票名.append(new RString("　審査会"));
+        return 帳票名.toRString();
+    }
+
+    private void outputJokenhyoFactory(RString id, RString 帳票名) {
+        RString 総ページ数 = new RString(batchReportWriter.getPageCount());
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
+                id,
+                association.getLasdecCode_().getColumnValue(),
+                association.get市町村名(),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
+                帳票名,
+                総ページ数,
+                RString.EMPTY,
+                RString.EMPTY,
+                出力条件());
+        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
+    }
+
+    private List<RString> 出力条件() {
+        List<RString> list = new ArrayList<>();
+        RStringBuilder builder1 = new RStringBuilder();
+        builder1.append("【合議体番号】")
+                .append(" ")
+                .append(paramter.getGogitaiNo());
+        RStringBuilder builder2 = new RStringBuilder();
+        builder2.append("【介護認定審査会開催予定年月日】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
+        RStringBuilder builder3 = new RStringBuilder();
+        builder3.append("【介護認定審査会開催番号】")
+                .append(" ")
+                .append(paramter.getShinsakaiKaisaiNo());
+        list.add(builder1.toRString());
+        list.add(builder2.toRString());
+        list.add(builder3.toRString());
+        return list;
     }
 }

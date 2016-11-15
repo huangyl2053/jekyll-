@@ -140,6 +140,7 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
         source.choikiCode = 帳票出力対象データ.getChoikiCode();
         source.gyoseikuCode = 帳票出力対象データ.getGyoseikuCode();
         source.hokenshaNo = 帳票出力対象データ.getHokenshaNo();
+        source.shichosonCode = 帳票出力対象データ.getShichosonCode();
     }
 
 }

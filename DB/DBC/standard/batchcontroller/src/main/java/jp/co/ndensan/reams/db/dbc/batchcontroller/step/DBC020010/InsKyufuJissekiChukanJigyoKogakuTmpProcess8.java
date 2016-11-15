@@ -46,14 +46,13 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
     private static final RString ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
             + "select給付実績中間事業高額一時の作成8");
-    private static final RString TABLE_給付実績基本情報事業高額一時8 = new RString("TempKyufujissekiKihonJigyo8");
+    private static final RString TABLE_給付実績基本情報事業高額一時8 = new RString("TempKyufujissekiTyukannJigyo8");
     private static final RString 作成区分_取消 = new RString("3");
     private static final RString TEXT_現 = new RString("現");
     private static final RString TEXT_般 = new RString("般");
     private static final RString KEY_利用者負担第2段階 = new RString("利用者負担第2段階");
     private static final RString KEY_支給予定額 = new RString("支給予定額");
     private static final RString KEY_個人算定基準額 = new RString("個人算定基準額");
-    private static final FlexibleYearMonth 年月_200508 = new FlexibleYearMonth("200508");
     private static final FlexibleYearMonth 年月_201508 = new FlexibleYearMonth("200518");
     private static final RString 日期_1231 = new RString("1231");
     private static final Decimal 金額_800000 = new Decimal("800000");
@@ -66,21 +65,22 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString FIVE = new RString("5");
+    private static final int INT_0 = 0;
     private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
     private static final int INT_8 = 8;
     private static final int INT_15 = 15;
     private static final int INT_18 = 18;
     private Decimal サービス費用額合計;
     private Decimal 利用者負担額合計;
-    private Decimal サービス費用額合計_総合事業分;
     private Decimal 利用者負担額合計_総合事業分;
     private Decimal 支給予定額合計;
     private Decimal 算定基準額合計;
     private KyufuJissekiChukanKogakuJigyo8Entity beforeEntity;
     private KyufuJissekiChukanKogakuJigyo8Entity before処理対象;
     private List<KyufuJissekiChukanKogakuJigyo8Entity> 処理対象List;
-    private List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間高額一時明細List;
-    private List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間高額一時取消明細List;
+    private List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間事業高額一時明細List;
+    private List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間事業高額一時取消明細List;
     private RString 高額自己負担上限額_15000;
     private RString 高額自己負担上限額_24600;
     private RString 高額自己負担上限額_37200;
@@ -102,8 +102,8 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         before処理対象 = null;
         clear合計();
         処理対象List = new ArrayList<>();
-        給付実績中間高額一時明細List = new ArrayList<>();
-        給付実績中間高額一時取消明細List = new ArrayList<>();
+        給付実績中間事業高額一時明細List = new ArrayList<>();
+        給付実績中間事業高額一時取消明細List = new ArrayList<>();
         高額自己負担上限額_15000 = DbBusinessConfig.get(ConfigNameDBC.高額自己負担上限額_15000,
                 sysDate, SubGyomuCode.DBC介護給付);
         高額自己負担上限額_24600 = DbBusinessConfig.get(ConfigNameDBC.高額自己負担上限額_24600,
@@ -145,7 +145,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         List<KyufuJissekiChukanKogakuJigyo8Entity> 処理対象リスト = get処理対象List();
         処理対象List = new ArrayList<>();
         for (KyufuJissekiChukanKogakuJigyo8Entity 処理対象 : 処理対象リスト) {
-            do給付実績中間高額一時の作成(処理対象);
+            do給付実績中間事業高額一時の作成(処理対象);
         }
     }
 
@@ -153,12 +153,12 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
     protected void afterExecute() {
         List<KyufuJissekiChukanKogakuJigyo8Entity> 処理対象リスト = get処理対象List();
         for (KyufuJissekiChukanKogakuJigyo8Entity 処理対象 : 処理対象リスト) {
-            do給付実績中間高額一時の作成(処理対象);
+            do給付実績中間事業高額一時の作成(処理対象);
         }
         do取消分合計と明細追加();
     }
 
-    private void do給付実績中間高額一時の作成(KyufuJissekiChukanKogakuJigyo8Entity 処理対象) {
+    private void do給付実績中間事業高額一時の作成(KyufuJissekiChukanKogakuJigyo8Entity 処理対象) {
         if (before処理対象 == null) {
             before処理対象 = 処理対象;
         }
@@ -169,14 +169,14 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
                 || !before給付実績中間.getShotokuHantei_shoboKubun().equals(給付実績中間.getShotokuHantei_shoboKubun())
                 || !before給付実績中間.getServiceTeikyoYM().equals(給付実績中間.getServiceTeikyoYM())) {
             do取消分合計と明細追加();
-            給付実績中間高額一時明細List = new ArrayList<>();
-            給付実績中間高額一時取消明細List = new ArrayList<>();
+            給付実績中間事業高額一時明細List = new ArrayList<>();
+            給付実績中間事業高額一時取消明細List = new ArrayList<>();
             clear合計();
         }
         if (作成区分_取消.equals(給付実績中間.getKyufuSakuseiKubunCode())) {
-            給付実績中間高額一時取消明細List.add(処理対象);
+            給付実績中間事業高額一時取消明細List.add(処理対象);
         } else {
-            給付実績中間高額一時明細List.add(処理対象);
+            給付実績中間事業高額一時明細List.add(処理対象);
         }
         before処理対象 = 処理対象;
     }
@@ -229,33 +229,24 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
     }
 
     private void do取消分合計と明細追加() {
-        List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間高額一時List = new ArrayList<>();
-        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間高額一時取消明細List) {
+        List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間事業高額一時List = new ArrayList<>();
+        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間事業高額一時取消明細List) {
             HihokenshaNo 被保険者番号 = entity.get給付実績基本情報事業高額一時().getHiHokenshaNo();
             if (!is明細に存在する(被保険者番号)) {
-                TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
-                Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間);
-                Decimal 総合事業分利用者負担額 = get総合事業分利用者負担額を算出(給付実績中間);
-                利用者負担額合計 = 利用者負担額合計.add(利用者負担額);
-                getサービス費用合計を算出(給付実績中間);
-                if (is総合事業分(entity)) {
-                    利用者負担額合計_総合事業分 = 利用者負担額合計.add(総合事業分利用者負担額);
-                    get総合事業分サービス費用合計を算出(給付実績中間);
-                }
-                insert給付実績中間高額一時8の新規2(entity.get給付実績基本情報事業高額一時());
-                給付実績中間高額一時List.add(entity);
+                insert給付実績中間事業高額一時8の新規2(entity);
+                給付実績中間事業高額一時List.add(entity);
             }
         }
-        if (給付実績中間高額一時List.isEmpty()) {
+        if (給付実績中間事業高額一時List.isEmpty()) {
             return;
         }
-        insert給付実績中間高額一時8の新規1();
+        insert給付実績中間事業高額一時8の新規1(給付実績中間事業高額一時List.get(0));
         clear合計();
-        get世帯合算処理(給付実績中間高額一時List);
+        get世帯合算処理(給付実績中間事業高額一時List);
     }
 
     private boolean is明細に存在する(HihokenshaNo 被保険者番号) {
-        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間高額一時明細List) {
+        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間事業高額一時明細List) {
             if (被保険者番号.equals(entity.get給付実績基本情報事業高額一時().getHiHokenshaNo())) {
                 return true;
             }
@@ -263,20 +254,20 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         return false;
     }
 
-    private void get世帯合算処理(List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間高額一時List) {
+    private void get世帯合算処理(List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間事業高額一時List) {
         List<KyufuJissekiChukanKogakuJigyo8Entity> 単独分List = new ArrayList<>();
         List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯分List = new ArrayList<>();
-        if (給付実績中間高額一時List.size() == INT_1) {
-            単独分List.add(給付実績中間高額一時List.get(0));
-            return;
-        }
-        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間高額一時List) {
-            TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
-            if (ONE.equals(給付実績中間.getShotokuHantei_jushochiTokureiFlag())
-                    && ONE.equals(給付実績中間.getShotokuHantei_shoboKubun())) {
-                単独分List.add(entity);
-            } else {
-                世帯分List.add(entity);
+        if (給付実績中間事業高額一時List.size() == INT_1) {
+            単独分List.add(給付実績中間事業高額一時List.get(0));
+        } else {
+            for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間事業高額一時List) {
+                TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
+                if (ONE.equals(給付実績中間.getShotokuHantei_jushochiTokureiFlag())
+                        && ONE.equals(給付実績中間.getShotokuHantei_shoboKubun())) {
+                    単独分List.add(entity);
+                } else {
+                    世帯分List.add(entity);
+                }
             }
         }
         if (!単独分List.isEmpty()) {
@@ -292,17 +283,16 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
             TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
             Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間);
             Decimal 総合事業分利用者負担額 = get総合事業分利用者負担額を算出(給付実績中間);
-            利用者負担額合計 = 利用者負担額合計.add(利用者負担額);
-            getサービス費用合計を算出(給付実績中間);
             if (is総合事業分(entity)) {
                 利用者負担額合計_総合事業分 = 利用者負担額合計_総合事業分.add(総合事業分利用者負担額);
-                get総合事業分サービス費用合計を算出(給付実績中間);
+            } else {
+                利用者負担額合計 = 利用者負担額合計.add(利用者負担額);
             }
         }
         for (KyufuJissekiChukanKogakuJigyo8Entity entity : 単独分List) {
-            insert給付実績中間高額一時8の新規4(entity);
+            insert給付実績中間事業高額一時8の新規4(entity);
         }
-        insert給付実績中間高額一時8の新規3(単独分List.get(0));
+        insert給付実績中間事業高額一時8の新規3(単独分List.get(0));
         clear合計();
     }
 
@@ -311,17 +301,16 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
             TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
             Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間);
             Decimal 総合事業分利用者負担額 = get総合事業分利用者負担額を算出(給付実績中間);
-            利用者負担額合計 = 利用者負担額合計.add(利用者負担額);
-            getサービス費用合計を算出(給付実績中間);
             if (is総合事業分(entity)) {
                 利用者負担額合計_総合事業分 = 利用者負担額合計_総合事業分.add(総合事業分利用者負担額);
-                get総合事業分サービス費用合計を算出(給付実績中間);
+            } else {
+                利用者負担額合計 = 利用者負担額合計.add(利用者負担額);
             }
         }
         for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯分List) {
-            insert給付実績中間高額一時8の新規6(entity, 世帯分List);
+            insert給付実績中間事業高額一時8の新規6(entity, 世帯分List);
         }
-        insert給付実績中間高額一時8の新規5(世帯分List.get(0));
+        insert給付実績中間事業高額一時8の新規5(世帯分List.get(0));
         clear合計();
     }
 
@@ -333,156 +322,167 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         }
     }
 
-    private void insert給付実績中間高額一時8の新規1() {
-        TempKyufujissekiTyukannJigyoEntity 給付実績中間高額一時
-                = 給付実績中間高額一時取消明細List.get(0).get給付実績基本情報事業高額一時();
-        給付実績中間高額一時.setShotokuHantei_setaiinShikibetsuCode(null);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakuGaitoFlag(null);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakugoJogengaku(null);
-        給付実績中間高額一時.setHokenRiyoshaFutangaku(利用者負担額合計);
-        給付実績中間高額一時.setDataKubun(ONE);
-        給付実績中間高額一時.setServiceHiyougakuGokei(サービス費用額合計);
-        給付実績中間高額一時.setSikyugaku(Decimal.ZERO);
-        給付実績中間高額一時.setSanteiKijungaku(Decimal.ZERO);
-        給付実績中間高額一時.setKogakuHanteiKekka(ONE);
-        給付実績中間高額一時.setSagakuKubun(null);
-        給付実績中間高額一時.setKoogakuKetteiKubun(null);
-        給付実績中間高額一時.setBeikoSetaishotokuKubun(get備考欄世帯所得区分(給付実績中間高額一時));
-        給付実績中間高額一時.setBeikoKojinshotokuKubun(get備考欄個人所得区分(給付実績中間高額一時));
-        給付実績中間高額一時.setRiyoFitanDankai2(RString.EMPTY);
-        kyufujissekiTyukann8Writer.insert(給付実績中間高額一時);
+    private void insert給付実績中間事業高額一時8の新規1(KyufuJissekiChukanKogakuJigyo8Entity entity) {
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時
+                = 給付実績中間事業高額一時取消明細List.get(0).get給付実績基本情報事業高額一時();
+        Decimal サービス費用額;
+        if (is総合事業分(entity)) {
+            サービス費用額 = get総合事業分サービス費用合計を算出(給付実績中間事業高額一時);
+        } else {
+            サービス費用額 = getサービス費用合計を算出(給付実績中間事業高額一時);
+        }
+        給付実績中間事業高額一時.setHokenRiyoshaFutangaku(利用者負担額合計);
+        給付実績中間事業高額一時.setDataKubun(ONE);
+        給付実績中間事業高額一時.setServiceHiyougakuGokei(サービス費用額);
+        給付実績中間事業高額一時.setSikyugaku(Decimal.ZERO);
+        給付実績中間事業高額一時.setSanteiKijungaku(Decimal.ZERO);
+        給付実績中間事業高額一時.setKogakuHanteiKekka(ONE);
+        給付実績中間事業高額一時.setSagakuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setKoogakuKetteiKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setBeikoSetaishotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setRiyoFitanDankai2(RString.EMPTY);
+        kyufujissekiTyukann8Writer.insert(給付実績中間事業高額一時);
     }
 
-    private void insert給付実績中間高額一時8の新規2(TempKyufujissekiTyukannJigyoEntity 給付実績中間高額一時) {
-        給付実績中間高額一時.setKyufuSakuseiKubunCode(作成区分_取消);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakuGaitoFlag(RString.EMPTY);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakugoJogengaku(null);
-        給付実績中間高額一時.setKogakuKaigoServicehi(null);
-        Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間高額一時);
-        給付実績中間高額一時.setHokenRiyoshaFutangaku(利用者負担額);
-        給付実績中間高額一時.setDataKubun(TWO);
-        給付実績中間高額一時.setServiceHiyougakuGokei(サービス費用額合計);
-        // 支給（予定）額　QA確認中
-        給付実績中間高額一時.setSikyugaku(Decimal.ZERO);
-        給付実績中間高額一時.setSanteiKijungaku(Decimal.ZERO);
-        給付実績中間高額一時.setKogakuHanteiKekka(ZERO);
-        給付実績中間高額一時.setSagakuKubun(RString.EMPTY);
-        給付実績中間高額一時.setKoogakuKetteiKubun(null);
-        給付実績中間高額一時.setBeikoSetaishotokuKubun(get備考欄世帯所得区分(給付実績中間高額一時));
-        給付実績中間高額一時.setBeikoKojinshotokuKubun(get備考欄個人所得区分(給付実績中間高額一時));
-        給付実績中間高額一時.setRiyoFitanDankai2(RString.EMPTY);
-        kyufujissekiTyukann8Writer.insert(給付実績中間高額一時);
+    private void insert給付実績中間事業高額一時8の新規2(KyufuJissekiChukanKogakuJigyo8Entity entity) {
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時 = entity.get給付実績基本情報事業高額一時();
+        Decimal サービス費用額;
+        Decimal 利用者負担額;
+        if (is総合事業分(entity)) {
+            サービス費用額 = get総合事業分サービス費用合計を算出(給付実績中間事業高額一時);
+            利用者負担額 = get総合事業分利用者負担額を算出(給付実績中間事業高額一時);
+            利用者負担額合計_総合事業分 = 利用者負担額合計.add(利用者負担額);
+        } else {
+            サービス費用額 = getサービス費用合計を算出(給付実績中間事業高額一時);
+            利用者負担額 = get利用者負担額を算出(給付実績中間事業高額一時);
+            利用者負担額合計 = 利用者負担額合計.add(利用者負担額);
+        }
+        給付実績中間事業高額一時.setKyufuSakuseiKubunCode(作成区分_取消);
+        給付実績中間事業高額一時.setHokenRiyoshaFutangaku(利用者負担額);
+        給付実績中間事業高額一時.setDataKubun(TWO);
+        給付実績中間事業高額一時.setServiceHiyougakuGokei(サービス費用額);
+        給付実績中間事業高額一時.setSikyugaku(Decimal.ZERO);
+        給付実績中間事業高額一時.setSanteiKijungaku(Decimal.ZERO);
+        給付実績中間事業高額一時.setKogakuHanteiKekka(get備考欄1(給付実績中間事業高額一時));
+        給付実績中間事業高額一時.setSagakuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setKoogakuKetteiKubun(ZERO);
+        給付実績中間事業高額一時.setBeikoSetaishotokuKubun(get備考欄(給付実績中間事業高額一時));
+        給付実績中間事業高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setRiyoFitanDankai2(RString.EMPTY);
+        kyufujissekiTyukann8Writer.insert(給付実績中間事業高額一時);
     }
 
-    private void insert給付実績中間高額一時8の新規3(KyufuJissekiChukanKogakuJigyo8Entity entity) {
-        TempKyufujissekiTyukannJigyoEntity 給付実績中間高額一時 = entity.get給付実績基本情報事業高額一時();
-        給付実績中間高額一時.setShotokuHantei_gekihenKanwaKubun(RString.EMPTY);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakuGaitoFlag(null);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakugoJogengaku(null);
-        給付実績中間高額一時.setKogakuKaigoServicehi(null);
-        給付実績中間高額一時.setHokenRiyoshaFutangaku(利用者負担額合計);
-        給付実績中間高額一時.setDataKubun(ONE);
-        給付実績中間高額一時.setServiceHiyougakuGokei(サービス費用額合計);
-        給付実績中間高額一時.setSikyugaku(支給予定額合計);
-        給付実績中間高額一時.setSanteiKijungaku(算定基準額合計);
-        給付実績中間高額一時.setKogakuHanteiKekka(ONE);
-        給付実績中間高額一時.setSagakuKubun(RString.EMPTY);
-        給付実績中間高額一時.setKoogakuKetteiKubun(RString.EMPTY);
-        // TODO
-        給付実績中間高額一時.setBeikoSetaishotokuKubun(get備考欄世帯所得区分(給付実績中間高額一時));
-        給付実績中間高額一時.setBeikoKojinshotokuKubun(get備考欄個人所得区分(給付実績中間高額一時));
-        給付実績中間高額一時.setRiyoFitanDankai2(RString.EMPTY);
-        kyufujissekiTyukann8Writer.insert(給付実績中間高額一時);
+    private void insert給付実績中間事業高額一時8の新規3(KyufuJissekiChukanKogakuJigyo8Entity entity) {
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時 = entity.get給付実績基本情報事業高額一時();
+        給付実績中間事業高額一時.setHokenRiyoshaFutangaku(利用者負担額合計);
+        給付実績中間事業高額一時.setDataKubun(ONE);
+        給付実績中間事業高額一時.setServiceHiyougakuGokei(サービス費用額合計);
+        給付実績中間事業高額一時.setSikyugaku(支給予定額合計);
+        給付実績中間事業高額一時.setSanteiKijungaku(算定基準額合計);
+        給付実績中間事業高額一時.setKogakuHanteiKekka(ONE);
+        給付実績中間事業高額一時.setSagakuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setKoogakuKetteiKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setBeikoSetaishotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setRiyoFitanDankai2(RString.EMPTY);
+        kyufujissekiTyukann8Writer.insert(給付実績中間事業高額一時);
     }
 
-    private void insert給付実績中間高額一時8の新規4(KyufuJissekiChukanKogakuJigyo8Entity entity) {
-        TempKyufujissekiTyukannJigyoEntity 給付実績中間高額一時 = entity.get給付実績基本情報事業高額一時();
-//        RString 激変緩和区分 = get激変緩和区分(給付実績中間高額一時);
-        Decimal 算定基準額 = get単一合算の算定基準額(給付実績中間高額一時);
-        // 高額ｻｰﾋﾞｽ費支給額 QA確認中
-        Decimal 高額ｻｰﾋﾞｽ費支給額 = Decimal.ZERO;
+    private void insert給付実績中間事業高額一時8の新規4(KyufuJissekiChukanKogakuJigyo8Entity entity) {
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時 = entity.get給付実績基本情報事業高額一時();
+        Decimal 算定基準額 = get単一合算の算定基準額(給付実績中間事業高額一時);
+        Decimal 高額ｻｰﾋﾞｽ費支給額 = 給付実績中間事業高額一時.getKogakuKaigoServicehi();
         Decimal 支給予定額 = Decimal.ZERO;
-        if (算定基準額.compareTo(利用者負担額合計_総合事業分.subtract(高額ｻｰﾋﾞｽ費支給額)) < 0) {
-            支給予定額 = 利用者負担額合計_総合事業分.subtract(高額ｻｰﾋﾞｽ費支給額).subtract(算定基準額);
+        Decimal サービス費用額;
+        if (is総合事業分(entity)) {
+            サービス費用額 = get総合事業分サービス費用合計を算出(給付実績中間事業高額一時);
+        } else {
+            サービス費用額 = getサービス費用合計を算出(給付実績中間事業高額一時);
+        }
+        if (nullToZero(算定基準額).compareTo(nullToZero(利用者負担額合計_総合事業分)
+                .subtract(nullToZero(高額ｻｰﾋﾞｽ費支給額))) < 0) {
+            支給予定額 = nullToZero(利用者負担額合計_総合事業分)
+                    .subtract(nullToZero(高額ｻｰﾋﾞｽ費支給額)).subtract(nullToZero(算定基準額));
         }
         Decimal 現システム算定基準額 = get現システム算定基準額(entity, 算定基準額);
+        サービス費用額合計 = サービス費用額合計.add(サービス費用額);
         支給予定額合計 = 支給予定額合計.add(支給予定額);
         算定基準額合計 = 算定基準額合計.add(現システム算定基準額);
-        給付実績中間高額一時.setShotokuHantei_gekihenKanwaKubun(RString.EMPTY);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakuGaitoFlag(RString.EMPTY);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakugoJogengaku(null);
-        給付実績中間高額一時.setKogakuKaigoServicehi(null);
-        Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間高額一時);
-        給付実績中間高額一時.setHokenRiyoshaFutangaku(利用者負担額);
-        給付実績中間高額一時.setDataKubun(TWO);
-        給付実績中間高額一時.setServiceHiyougakuGokei(サービス費用額合計);
-        給付実績中間高額一時.setSikyugaku(支給予定額);
-        給付実績中間高額一時.setSanteiKijungaku(現システム算定基準額);
-        給付実績中間高額一時.setKogakuHanteiKekka(ZERO);
-        給付実績中間高額一時.setSagakuKubun(RString.EMPTY);
-        // TODO
-        給付実績中間高額一時.setKoogakuKetteiKubun(RString.EMPTY);
-        給付実績中間高額一時.setBeikoSetaishotokuKubun(get備考欄世帯所得区分(給付実績中間高額一時));
-        給付実績中間高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
-        給付実績中間高額一時.setRiyoFitanDankai2(RString.EMPTY);
-        kyufujissekiTyukann8Writer.insert(給付実績中間高額一時);
+        給付実績中間事業高額一時.setShotokuHantei_gekihenKanwaKubun(RString.EMPTY);
+        Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間事業高額一時);
+        給付実績中間事業高額一時.setHokenRiyoshaFutangaku(利用者負担額);
+        給付実績中間事業高額一時.setDataKubun(TWO);
+        給付実績中間事業高額一時.setServiceHiyougakuGokei(サービス費用額);
+        給付実績中間事業高額一時.setSikyugaku(支給予定額);
+        給付実績中間事業高額一時.setSanteiKijungaku(現システム算定基準額);
+        給付実績中間事業高額一時.setKogakuHanteiKekka(ZERO);
+        給付実績中間事業高額一時.setSagakuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setKoogakuKetteiKubun(get備考欄1(給付実績中間事業高額一時));
+        給付実績中間事業高額一時.setBeikoSetaishotokuKubun(get備考欄(給付実績中間事業高額一時));
+        給付実績中間事業高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setRiyoFitanDankai2(RString.EMPTY);
+        kyufujissekiTyukann8Writer.insert(給付実績中間事業高額一時);
     }
 
-    private void insert給付実績中間高額一時8の新規5(KyufuJissekiChukanKogakuJigyo8Entity entity) {
-        TempKyufujissekiTyukannJigyoEntity 給付実績中間高額一時 = entity.get給付実績基本情報事業高額一時();
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakuGaitoFlag(null);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakugoJogengaku(null);
-        給付実績中間高額一時.setKogakuKaigoServicehi(null);
-        給付実績中間高額一時.setHokenRiyoshaFutangaku(利用者負担額合計);
-        給付実績中間高額一時.setDataKubun(ONE);
-        給付実績中間高額一時.setServiceHiyougakuGokei(サービス費用額合計);
-        給付実績中間高額一時.setSikyugaku(支給予定額合計);
-        給付実績中間高額一時.setSanteiKijungaku(算定基準額合計);
-        給付実績中間高額一時.setKogakuHanteiKekka(ONE);
-        給付実績中間高額一時.setSagakuKubun(RString.EMPTY);
-        給付実績中間高額一時.setKoogakuKetteiKubun(RString.EMPTY);
-        給付実績中間高額一時.setBeikoSetaishotokuKubun(RString.EMPTY);
-        給付実績中間高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
-        給付実績中間高額一時.setRiyoFitanDankai2(RString.EMPTY);
-        kyufujissekiTyukann8Writer.insert(給付実績中間高額一時);
+    private void insert給付実績中間事業高額一時8の新規5(KyufuJissekiChukanKogakuJigyo8Entity entity) {
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時 = entity.get給付実績基本情報事業高額一時();
+        給付実績中間事業高額一時.setKogakuServicehiJogengakuGengakuGaitoFlag(null);
+        給付実績中間事業高額一時.setKogakuServicehiJogengakuGengakugoJogengaku(null);
+        給付実績中間事業高額一時.setKogakuKaigoServicehi(null);
+        給付実績中間事業高額一時.setHokenRiyoshaFutangaku(利用者負担額合計);
+        給付実績中間事業高額一時.setDataKubun(ONE);
+        給付実績中間事業高額一時.setServiceHiyougakuGokei(サービス費用額合計);
+        給付実績中間事業高額一時.setSikyugaku(支給予定額合計);
+        給付実績中間事業高額一時.setSanteiKijungaku(算定基準額合計);
+        給付実績中間事業高額一時.setKogakuHanteiKekka(ONE);
+        給付実績中間事業高額一時.setSagakuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setKoogakuKetteiKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setBeikoSetaishotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setRiyoFitanDankai2(RString.EMPTY);
+        kyufujissekiTyukann8Writer.insert(給付実績中間事業高額一時);
     }
 
-    private void insert給付実績中間高額一時8の新規6(KyufuJissekiChukanKogakuJigyo8Entity entity,
+    private void insert給付実績中間事業高額一時8の新規6(KyufuJissekiChukanKogakuJigyo8Entity entity,
             List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯分List) {
-        TempKyufujissekiTyukannJigyoEntity 給付実績中間高額一時 = entity.get給付実績基本情報事業高額一時();
-
-        Map 出力Map = get世帯合算処理の算定基準額(給付実績中間高額一時, 世帯分List);
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時 = entity.get給付実績基本情報事業高額一時();
+        Map 出力Map = get世帯合算処理の算定基準額(給付実績中間事業高額一時, 世帯分List);
         Decimal 算定基準額 = (Decimal) 出力Map.get(KEY_個人算定基準額);
-//        RString 利用者負担第2段階 = (RString) 出力Map.get(KEY_利用者負担第2段階);
         Decimal 支給予定額 = (Decimal) 出力Map.get(KEY_支給予定額);
-        Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間高額一時);
+        Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間事業高額一時);
         Decimal 現システム算定基準額 = get現システム算定基準額(entity, 算定基準額);
+        Decimal サービス費用額;
+        if (is総合事業分(entity)) {
+            サービス費用額 = get総合事業分サービス費用合計を算出(給付実績中間事業高額一時);
+        } else {
+            サービス費用額 = getサービス費用合計を算出(給付実績中間事業高額一時);
+        }
+        支給予定額合計 = 支給予定額合計.add(支給予定額);
         算定基準額合計 = 算定基準額合計.add(現システム算定基準額);
-        給付実績中間高額一時.setShotokuHantei_gekihenKanwaKubun(RString.EMPTY);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakuGaitoFlag(null);
-        給付実績中間高額一時.setKogakuServicehiJogengakuGengakugoJogengaku(null);
-        給付実績中間高額一時.setKogakuKaigoServicehi(null);
-        給付実績中間高額一時.setHokenRiyoshaFutangaku(利用者負担額);
-        給付実績中間高額一時.setDataKubun(TWO);
-        給付実績中間高額一時.setServiceHiyougakuGokei(Decimal.ZERO);
-        給付実績中間高額一時.setSikyugaku(支給予定額);
-        給付実績中間高額一時.setSanteiKijungaku(現システム算定基準額);
-        給付実績中間高額一時.setKogakuHanteiKekka(RString.EMPTY);
-        給付実績中間高額一時.setSagakuKubun(RString.EMPTY);
-        給付実績中間高額一時.setKoogakuKetteiKubun(ZERO);
-        給付実績中間高額一時.setBeikoSetaishotokuKubun(get備考欄世帯所得区分(給付実績中間高額一時));
-        給付実績中間高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
-        給付実績中間高額一時.setRiyoFitanDankai2(RString.EMPTY);
-        kyufujissekiTyukann8Writer.insert(給付実績中間高額一時);
+        サービス費用額合計 = サービス費用額合計.add(サービス費用額);
+        給付実績中間事業高額一時.setShotokuHantei_gekihenKanwaKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setHokenRiyoshaFutangaku(利用者負担額);
+        給付実績中間事業高額一時.setDataKubun(TWO);
+        給付実績中間事業高額一時.setServiceHiyougakuGokei(サービス費用額);
+        給付実績中間事業高額一時.setSikyugaku(支給予定額);
+        給付実績中間事業高額一時.setSanteiKijungaku(現システム算定基準額);
+        給付実績中間事業高額一時.setKogakuHanteiKekka(RString.EMPTY);
+        給付実績中間事業高額一時.setSagakuKubun(get備考欄2(給付実績中間事業高額一時));
+        給付実績中間事業高額一時.setKoogakuKetteiKubun(ZERO);
+        給付実績中間事業高額一時.setBeikoSetaishotokuKubun(get備考欄(給付実績中間事業高額一時));
+        給付実績中間事業高額一時.setBeikoKojinshotokuKubun(RString.EMPTY);
+        給付実績中間事業高額一時.setRiyoFitanDankai2(RString.EMPTY);
+        kyufujissekiTyukann8Writer.insert(給付実績中間事業高額一時);
     }
 
-    private void getサービス費用合計を算出(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
+    private Decimal getサービス費用合計を算出(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
         if (作成区分_取消.equals(給付実績中間.getKyufuSakuseiKubunCode())) {
-            return;
+            return Decimal.ZERO;
         }
-        サービス費用額合計 = サービス費用額合計.
+        return 給付実績中間.getServiceHiyougakuGokei().
                 add(給付実績中間.getServiceHiyougakuGokei()).
-                add(給付実績中間.getMaeHokenSeikyugaku()).
+                add(給付実績中間.getHokenSeikyugaku()).
                 add(給付実績中間.getHokenDekidakaSeikyugaku()).
                 add(給付実績中間.getHokenDekidakaIryohiRiyoshaFutangaku()).
                 add(給付実績中間.getKohi1Seikyugaku()).
@@ -499,27 +499,26 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
                 add(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku());
     }
 
-    private void get総合事業分サービス費用合計を算出(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
+    private Decimal get総合事業分サービス費用合計を算出(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
         if (作成区分_取消.equals(給付実績中間.getKyufuSakuseiKubunCode())) {
-            return;
+            return Decimal.ZERO;
         }
-        サービス費用額合計_総合事業分 = サービス費用額合計_総合事業分.
-                add(給付実績中間.getServiceHiyougakuGokei()).
-                add(給付実績中間.getMaeHokenSeikyugaku()).
-                add(給付実績中間.getHokenDekidakaSeikyugaku()).
-                add(給付実績中間.getHokenDekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi1Seikyugaku()).
-                add(給付実績中間.getKohi1HonninFutangaku()).
-                add(給付実績中間.getKohi1DekidakaSeikyugaku()).
-                add(給付実績中間.getKohi1DekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi2Seikyugaku()).
-                add(給付実績中間.getKohi2HonninFutangaku()).
-                add(給付実績中間.getKohi2DekidakaSeikyugaku()).
-                add(給付実績中間.getKohi2DekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi3Seikyugaku()).
-                add(給付実績中間.getKohi3HonninFutangaku()).
-                add(給付実績中間.getKohi3DekidakaSeikyugaku()).
-                add(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku());
+        return nullToZero(給付実績中間.getServiceHiyougakuGokei()).
+                add(nullToZero(給付実績中間.getHokenSeikyugaku())).
+                add(nullToZero(給付実績中間.getHokenDekidakaSeikyugaku())).
+                add(nullToZero(給付実績中間.getHokenDekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi1Seikyugaku())).
+                add(nullToZero(給付実績中間.getKohi1HonninFutangaku())).
+                add(nullToZero(給付実績中間.getKohi1DekidakaSeikyugaku())).
+                add(nullToZero(給付実績中間.getKohi1DekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi2Seikyugaku())).
+                add(nullToZero(給付実績中間.getKohi2HonninFutangaku())).
+                add(nullToZero(給付実績中間.getKohi2DekidakaSeikyugaku())).
+                add(nullToZero(給付実績中間.getKohi2DekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi3Seikyugaku())).
+                add(nullToZero(給付実績中間.getKohi3HonninFutangaku())).
+                add(nullToZero(給付実績中間.getKohi3DekidakaSeikyugaku())).
+                add(nullToZero(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku()));
     }
 
     private boolean is総合事業分(KyufuJissekiChukanKogakuJigyo8Entity 処理対象) {
@@ -531,12 +530,13 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
 
     private Decimal get利用者負担額を算出(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
         return new Decimal(給付実績中間.getAtoHokenRiyoshaFutangaku()).
+                add(給付実績中間.getAtoHokenRiyoshaFutangaku()).
                 add(給付実績中間.getAtoKohi1RiyoshaFutangaku()).
                 add(給付実績中間.getAtoKohi2RiyoshaFutangaku()).
                 add(給付実績中間.getAtoKohi3RiyoshaFutangaku()).
-                add(給付実績中間.getKohi1DekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi2DekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku());
+                add(nullToZero(給付実績中間.getKohi1DekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi2DekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku()));
     }
 
     private Decimal get総合事業分利用者負担額を算出(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
@@ -544,9 +544,9 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
                 add(給付実績中間.getAtoKohi1RiyoshaFutangaku()).
                 add(給付実績中間.getAtoKohi2RiyoshaFutangaku()).
                 add(給付実績中間.getAtoKohi3RiyoshaFutangaku()).
-                add(給付実績中間.getKohi1DekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi2DekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku());
+                add(nullToZero(給付実績中間.getKohi1DekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi2DekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku()));
     }
 
     private Decimal get単一合算の算定基準額(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
@@ -568,7 +568,6 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         } else {
             if (給付実績中間.getShotokuHantei_gokeiShotokuGaku().
                     add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku()).compareTo(金額_800000) <= 0) {
-                // 利用者負担第２段階 に "1" をセット。
                 return get算定基準額コンフィグ(高額自己負担上限額_15000);
             } else {
                 return get算定基準額コンフィグ(高額自己負担上限額_24600);
@@ -630,8 +629,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
             Decimal 個人の支給予定額) {
         Map 出力Map = new HashMap<>();
         RString 利用者負担第2段階 = RString.EMPTY;
-        // 高額ｻｰﾋﾞｽ費支給額 QA確認中
-        Decimal 高額ｻｰﾋﾞｽ費支給額 = Decimal.ZERO;
+        Decimal 高額ｻｰﾋﾞｽ費支給額 = 給付実績中間.getKogakuKaigoServicehi();
         Decimal 実質的な利用者負担額 = 利用者負担額.subtract(高額ｻｰﾋﾞｽ費支給額).subtract(個人の支給予定額);
         Decimal decWKGokeiGK = 給付実績中間.getShotokuHantei_gokeiShotokuGaku().
                 add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku());
@@ -663,7 +661,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         return RString.isNullOrEmpty(高額自己負担上限額) ? Decimal.ZERO : new Decimal(高額自己負担上限額.toString());
     }
 
-    private RString get備考欄世帯所得区分(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
+    private RString get備考欄2(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
         if (ONE.equals(給付実績中間.getShotokuHantei_honninKubun())) {
             return get備考欄(給付実績中間);
         } else {
@@ -671,7 +669,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         }
     }
 
-    private RString get備考欄個人所得区分(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
+    private RString get備考欄1(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {
         if (ONE.equals(給付実績中間.getShotokuHantei_honninKubun())) {
             return RString.EMPTY;
         } else {
@@ -713,7 +711,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         if (!is課税世帯パターン1(entity)) {
             return Decimal.ZERO;
         }
-        if (給付実績中間.getServiceTeikyoYM().compareTo(年月_200508) < 0) {
+        if (給付実績中間.getServiceTeikyoYM().compareTo(年月_201508) < 0) {
             return 算定基準額;
         } else {
             return get算定基準額コンフィグ(高額自己負担上限額_37200);
@@ -722,31 +720,60 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
 
     private Decimal get課税世帯基準額パターン2(KyufuJissekiChukanKogakuJigyo8Entity entity, Decimal 算定基準額) {
         TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
-        if (給付実績中間.getServiceTeikyoYM().compareTo(年月_200508) < 0) {
+        if (給付実績中間.getServiceTeikyoYM().compareTo(年月_201508) < 0) {
             return 算定基準額;
-        } else if (is145万円以上と144万円の世帯主存在する()) {
+        } else if (is145万円以上と144万円の世帯主1名存在する()) {
             return get年少扶養控除の計算が必要なパターン(entity);
-        } else {
+        } else if (is145万円以上の世帯主が存在しない()
+                || is145万円以上の世帯主が2名存在する()) {
             return get算定基準額コンフィグ(高額自己負担上限額_37200);
         }
+        return Decimal.ZERO;
     }
 
-    private boolean is145万円以上と144万円の世帯主存在する() {
-        boolean is145万円以上存在 = false;
-        boolean is144万円存在 = false;
-        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間高額一時 = new ArrayList<>();
-        世帯内給付実績中間高額一時.addAll(給付実績中間高額一時明細List);
-        世帯内給付実績中間高額一時.addAll(給付実績中間高額一時取消明細List);
-        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間高額一時) {
+    private boolean is145万円以上と144万円の世帯主1名存在する() {
+        int 課税所得145万円以上存在Count = INT_0;
+        int 課税所得144万円存在Count = INT_0;
+        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間事業高額一時 = new ArrayList<>();
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時明細List);
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時取消明細List);
+        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間事業高額一時) {
             TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
-            if (金額_145万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) < 0) {
-                is145万円以上存在 = true;
+            if (金額_145万.compareTo(nullToZero(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) < 0) {
+                課税所得145万円以上存在Count++;
             }
-            if (金額_144万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) == 0) {
-                is144万円存在 = true;
+            if (金額_144万.compareTo(nullToZero(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) == 0) {
+                課税所得144万円存在Count++;
             }
         }
-        return is145万円以上存在 && is144万円存在;
+        return 課税所得145万円以上存在Count == INT_1 && 課税所得144万円存在Count == INT_1;
+    }
+
+    private boolean is145万円以上の世帯主が存在しない() {
+        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間事業高額一時 = new ArrayList<>();
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時明細List);
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時取消明細List);
+        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間事業高額一時) {
+            TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
+            if (金額_145万.compareTo(nullToZero(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean is145万円以上の世帯主が2名存在する() {
+        int 課税所得145万円以上存在Count = INT_0;
+        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間事業高額一時 = new ArrayList<>();
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時明細List);
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時取消明細List);
+        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間事業高額一時) {
+            TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
+            if (金額_145万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) < 0) {
+                課税所得145万円以上存在Count++;
+            }
+        }
+        return 課税所得145万円以上存在Count == INT_2;
     }
 
     private Decimal get年少扶養控除の計算が必要なパターン(KyufuJissekiChukanKogakuJigyo8Entity entity) {
@@ -757,7 +784,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
             int 十八歳以下の人数 = get十八歳以下の人数(基準年月日);
             Decimal 年少扶養控除後の課税所得 = entity.get給付実績基本情報事業高額一時().getShotokuHantei_kazeiShotokuGaku().
                     subtract(金額_33万.multiply(十五歳以下の人数).add(金額_12万.multiply(十八歳以下の人数)));
-            if (年少扶養控除後の課税所得.compareTo(金額_145万) < 0) {
+            if (nullToZero(年少扶養控除後の課税所得).compareTo(金額_145万) < 0) {
                 return get算定基準額コンフィグ(高額自己負担上限額_37200);
             } else {
                 return get算定基準額コンフィグ(高額自己負担上限額_44400);
@@ -768,10 +795,10 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
     }
 
     private boolean is世帯主である(FlexibleDate 基準年月日) {
-        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間高額一時 = new ArrayList<>();
-        世帯内給付実績中間高額一時.addAll(給付実績中間高額一時明細List);
-        世帯内給付実績中間高額一時.addAll(給付実績中間高額一時取消明細List);
-        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間高額一時) {
+        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間事業高額一時 = new ArrayList<>();
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時明細List);
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時取消明細List);
+        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間事業高額一時) {
             TempSetaiinShotokuHanteiEntity 世帯員所得判定明細高額一時３ = entity.get世帯員所得判定明細事業高額一時３();
             if (世帯員所得判定明細高額一時３ == null) {
                 break;
@@ -785,10 +812,10 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
 
     private int get十五歳以下の人数(FlexibleDate 基準年月日) {
         int 十五歳以下の人数 = 0;
-        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間高額一時 = new ArrayList<>();
-        世帯内給付実績中間高額一時.addAll(給付実績中間高額一時明細List);
-        世帯内給付実績中間高額一時.addAll(給付実績中間高額一時取消明細List);
-        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間高額一時) {
+        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間事業高額一時 = new ArrayList<>();
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時明細List);
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時取消明細List);
+        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間事業高額一時) {
             TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
             TempSetaiinShotokuHanteiEntity 世帯員所得判定明細高額一時３ = entity.get世帯員所得判定明細事業高額一時３();
             if (世帯員所得判定明細高額一時３ == null) {
@@ -805,10 +832,10 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
 
     private int get十八歳以下の人数(FlexibleDate 基準年月日) {
         int 十八歳以下の人数 = 0;
-        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間高額一時 = new ArrayList<>();
-        世帯内給付実績中間高額一時.addAll(給付実績中間高額一時明細List);
-        世帯内給付実績中間高額一時.addAll(給付実績中間高額一時取消明細List);
-        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間高額一時) {
+        List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯内給付実績中間事業高額一時 = new ArrayList<>();
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時明細List);
+        世帯内給付実績中間事業高額一時.addAll(給付実績中間事業高額一時取消明細List);
+        for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯内給付実績中間事業高額一時) {
             TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
             TempSetaiinShotokuHanteiEntity 世帯員所得判定明細高額一時３ = entity.get世帯員所得判定明細事業高額一時３();
             if (世帯員所得判定明細高額一時３ == null) {
@@ -833,25 +860,35 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
     private boolean is課税世帯パターン1(KyufuJissekiChukanKogakuJigyo8Entity entity) {
         TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
         DbT3116KijunShunyugakuTekiyoKanriEntity 基準収入額適用管理一時 = entity.get基準収入額適用管理一時();
-        if (!給付実績中間.getHiHokenshaNo().equals(基準収入額適用管理一時.getHihokenshaNo())) {
-            return false;
-        }
-        if (!給付実績中間.getShotokuHantei_setaiCode().equals(基準収入額適用管理一時.getSetaiCode())) {
+        if (給付実績中間.getHiHokenshaNo().equals(基準収入額適用管理一時.getHihokenshaNo())
+                && !給付実績中間.getShotokuHantei_setaiCode().equals(基準収入額適用管理一時.getSetaiCode())) {
             return true;
         }
         FlexibleYear 年度 = getサービス提供年月より求めた年度(給付実績中間.getServiceTeikyoYM());
-        if (!年度.equals(基準収入額適用管理一時.getNendo())) {
+        if (!給付実績中間.getHiHokenshaNo().equals(基準収入額適用管理一時.getHihokenshaNo())
+                && 給付実績中間.getShotokuHantei_setaiCode().equals(基準収入額適用管理一時.getSetaiCode())
+                && !年度.equals(基準収入額適用管理一時.getNendo())) {
             return true;
         }
-        return 給付実績中間.getServiceTeikyoYM().compareTo(基準収入額適用管理一時.getTekiyoKaishiYMD()) <= 0;
+        return !給付実績中間.getHiHokenshaNo().equals(基準収入額適用管理一時.getHihokenshaNo())
+                && 給付実績中間.getShotokuHantei_setaiCode().equals(基準収入額適用管理一時.getSetaiCode())
+                && 年度.equals(基準収入額適用管理一時.getNendo())
+                && 給付実績中間.getServiceTeikyoYM().compareTo(基準収入額適用管理一時.getTekiyoKaishiYMD()) <= 0;
     }
 
     private void clear合計() {
         サービス費用額合計 = Decimal.ZERO;
         利用者負担額合計 = Decimal.ZERO;
-        サービス費用額合計_総合事業分 = Decimal.ZERO;
         利用者負担額合計_総合事業分 = Decimal.ZERO;
         支給予定額合計 = Decimal.ZERO;
         算定基準額合計 = Decimal.ZERO;
     }
+
+    private Decimal nullToZero(Decimal num) {
+        if (num == null) {
+            return Decimal.ZERO;
+        }
+        return num;
+    }
+
 }

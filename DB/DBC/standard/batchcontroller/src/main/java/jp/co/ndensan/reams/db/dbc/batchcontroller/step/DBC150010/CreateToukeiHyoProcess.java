@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.riyojokyotokeihyo.RiyoJok
 import jp.co.ndensan.reams.db.dbc.service.core.riyojokyotokeihyomeisailistsakusei.RiyoJokyoTokeihyoMeisaiListSakuseiService;
 import jp.co.ndensan.reams.db.dbc.service.core.riyojokyotokeihyomeisailistsakusei.RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService;
 import jp.co.ndensan.reams.db.dbc.service.core.riyojokyotokeihyomeisailistsakusei.RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiShukeiService;
+import jp.co.ndensan.reams.db.dbc.service.core.tokeihyoserviceshuruihenkan.TokeihyoServiceShuruiHenkan;
 import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -58,10 +59,6 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     private static final RString なし = new RString("なし");
     private static final int 数字_7 = 7;
     private static final int 数字_6 = 6;
-    private static final int 数字_5 = 5;
-    private static final int 数字_4 = 4;
-    private static final int 数字_3 = 3;
-    private static final int 数字_2 = 2;
     private static final int 数字_1 = 1;
     private static final int 数字_0 = 0;
     private RiyojokyoTokeihyoMeisaiListProcessParameter parameter;
@@ -81,6 +78,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
 
     @Override
     protected void initialize() {
+        service = new RiyoJokyoTokeihyoMeisaiListSakuseiService();
         利用実人員集計用MAP = new HashMap<>();
         y軸の添え字 = RString.EMPTY;
         利用状況統計表集計結果Map = new HashMap<>();
@@ -109,19 +107,18 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         if (!被保険者番号.equals(entity.getHihokenshaNo())) {
             利用実人員集計用MAP = new HashMap<>();
         }
+        TokeiServiceShurui 統計用サービス = TokeihyoServiceShuruiHenkan.creatInstance().getTokeiServiceShurui(entity.getServiceShuruiCode());
         RStringBuilder keyBuilder = new RStringBuilder();
-        keyBuilder.append(y軸の添え字);// TODO
+        keyBuilder.append(統計用サービス.getY軸());
         keyBuilder.append(entity.getServiceTeikyoYM());
         if (利用実人員集計用MAP.containsKey(keyBuilder.toRString())) {
             利用実人員登録フラグ = false;
         } else {
-//            if(entity.getYoKaigoJotaiKubunCode()){
-//
-//            }
+
             利用実人員登録フラグ = true;
             利用実人員集計用MAP.put(keyBuilder.toRString(), Decimal.ONE);
         }
-        RString 統計用サービス種類 = RString.EMPTY;// TODO
+        RString 統計用サービス種類 = 統計用サービス.getコード();
         createService().get利用実人員(entity, 統計用サービス種類);
         get回数件数日数外泊数(entity, 統計用サービス種類);
         createService().get単位数(entity, 統計用サービス種類);

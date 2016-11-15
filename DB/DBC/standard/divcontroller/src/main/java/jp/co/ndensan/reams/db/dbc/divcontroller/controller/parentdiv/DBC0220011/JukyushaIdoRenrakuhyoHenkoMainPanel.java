@@ -258,6 +258,22 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
     }
 
     /**
+     * onActive
+     *
+     * @param div JukyushaIdoRenrakuhyoHenkoMainPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaIdoRenrakuhyoHenkoMainPanelDiv> onActive(
+            JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (資格対象者 != null && 資格対象者.get被保険者番号() != null && !資格対象者.get被保険者番号().isEmpty()) {
+            div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                    getTxtSearchHihoNo().setValue(資格対象者.get被保険者番号().getColumnValue());
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「修正ボタン」押下
      *
      * @param div JukyushaIdoRenrakuhyoHenkoMainPanelDiv

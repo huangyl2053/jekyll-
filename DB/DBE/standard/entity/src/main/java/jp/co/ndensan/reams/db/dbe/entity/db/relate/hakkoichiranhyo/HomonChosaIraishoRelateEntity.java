@@ -69,4 +69,5 @@ public class HomonChosaIraishoRelateEntity {
     private RString 今回認知症高齢者自立度;
     private RString 今回連番;
     private RString 今回連番に対する調査項目;
+    private RString 直近区分;
 }

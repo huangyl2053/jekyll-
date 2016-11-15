@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.sonotashiryoa3;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa3.SonotashiryoA3ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -31,9 +33,20 @@ public class SonotashiryoA3Report extends Report<SonotashiryoA3ReportSource> {
     @Override
     public void writeBy(ReportSourceWriter<SonotashiryoA3ReportSource> reportSourceWriter) {
 
-        ISonotashiryoA3Editor editor = new SonotashiryoA3Editor(data);
-        ISonotashiryoA3Builder builder = new SonotashiryoA3Builder(editor);
-        reportSourceWriter.writeLine(builder);
+        if (data != null) {
+            List<RString> ファイルPathList = data.getその他資料();
+            if (ファイルPathList != null && 0 < ファイルPathList.size()) {
+                for (int i = 0; i < (int) Math.ceil((double) ファイルPathList.size() / 2); i++) {
+                    ISonotashiryoA3Editor editor = new SonotashiryoA3Editor(data, i + 1);
+                    ISonotashiryoA3Builder builder = new SonotashiryoA3Builder(editor);
+                    reportSourceWriter.writeLine(builder);
+                }
+            } else {
+                ISonotashiryoA3Editor editor = new SonotashiryoA3Editor(data, 0);
+                ISonotashiryoA3Builder builder = new SonotashiryoA3Builder(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        }
 
     }
 }

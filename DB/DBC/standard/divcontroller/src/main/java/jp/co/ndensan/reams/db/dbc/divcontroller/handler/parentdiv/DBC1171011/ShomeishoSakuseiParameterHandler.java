@@ -64,9 +64,13 @@ public class ShomeishoSakuseiParameterHandler {
                 div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setFromValue(
                         new RDate(前回の実行情報.get対象終了年月日().plusDay(1).toString()));
             } else {
+                div.getJikoFutanShomeishoSakusei().getTxtZenkaiTaishoDate().clearFromValue();
+                div.getJikoFutanShomeishoSakusei().getTxtZenkaiTaishoDate().clearFromValue();
                 div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setFromValue(new RDate(平成20年7月1日.toString()));
             }
         } else {
+            div.getJikoFutanShomeishoSakusei().getTxtZenkaiTaishoDate().clearFromValue();
+            div.getJikoFutanShomeishoSakusei().getTxtZenkaiTaishoDate().clearFromValue();
             div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setFromValue(new RDate(平成20年7月1日.toString()));
         }
         div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setToValue(RDate.getNowDate());

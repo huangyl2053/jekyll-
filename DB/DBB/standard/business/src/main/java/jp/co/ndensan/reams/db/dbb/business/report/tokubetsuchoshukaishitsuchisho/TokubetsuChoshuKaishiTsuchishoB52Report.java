@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52Source;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -22,6 +23,7 @@ public class TokubetsuChoshuKaishiTsuchishoB52Report extends Report<TokubetsuCho
 
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 宛名連番;
+    private final Association 地方公共団体;
     private final NinshoshaSource sourceBuilder;
 
     /**
@@ -29,21 +31,24 @@ public class TokubetsuChoshuKaishiTsuchishoB52Report extends Report<TokubetsuCho
      *
      * @param 編集後本算定通知書共通情報 編集後本算定通知書共通情報
      * @param 宛名連番 宛名連番
+     * @param 地方公共団体 地方公共団体
      * @param sourceBuilder sourceBuilder
      */
     public TokubetsuChoshuKaishiTsuchishoB52Report(
             @NonNull EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RString 宛名連番,
+            Association 地方公共団体,
             NinshoshaSource sourceBuilder) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.宛名連番 = 宛名連番;
+        this.地方公共団体 = 地方公共団体;
         this.sourceBuilder = sourceBuilder;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoB52Source> writer) {
         ITokubetsuChoshuKaishiTsuchishoB52Editor editor = new TokubetsuChoshuKaishiTsuchishoB52Editor(編集後本算定通知書共通情報,
-                宛名連番, sourceBuilder);
+                宛名連番, 地方公共団体, sourceBuilder);
         ITokubetsuChoshuKaishiTsuchishoB52Builder builder = new TokubetsuChoshuKaishiTsuchishoB52Builder(editor);
         writer.writeLine(builder);
     }

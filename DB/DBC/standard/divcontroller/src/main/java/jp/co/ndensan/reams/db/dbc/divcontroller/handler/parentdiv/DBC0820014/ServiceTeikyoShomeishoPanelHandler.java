@@ -8,13 +8,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820014;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -48,7 +47,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
     private static final RString 画面モード_新規 = new RString("新規");
     private static final RString 処理モード_参照 = new RString("参照");
     private static final RString 処理モード_修正 = new RString("修正");
-    private static final int 定数_十 = 10;
+    private static final RString チェック区分 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -197,23 +196,6 @@ public class ServiceTeikyoShomeishoPanelHandler {
     }
 
     /**
-     * 「追加する」ボタンを押下する、事業者番号入力有無と桁数チェックです。
-     */
-    public void 事業者番号チェック() {
-        RString 事業者番号_入力 = div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo();
-        if (事業者番号_入力 == null || 事業者番号_入力.isEmpty()) {
-            // TODO DBCErrorMessage.事業者番号未入力がありません。
-            throw new ApplicationException(DbcErrorMessages.対象年月入力不正
-                    .getMessage().replace(証明書.toString()).evaluate());
-        }
-        if (定数_十 < 事業者番号_入力.length()) {
-            // TODO DBCErrorMessage.事業者番号未入力がありません。
-            throw new ApplicationException(DbcErrorMessages.対象年月入力不正
-                    .getMessage().replace(証明書.toString()).evaluate());
-        }
-    }
-
-    /**
      * 「追加する」ボタンを押下する、チェックです。
      *
      * @param 整理番号 RString
@@ -229,7 +211,8 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 サービス年月,
                 整理番号,
                 事業者番号,
-                様式番号);
+                様式番号,
+                チェック区分);
         if (証明書件数 > 0) {
             throw new ApplicationException(UrErrorMessages.既に登録済
                     .getMessage().replace(証明書.toString()).evaluate());

@@ -33,7 +33,7 @@ public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcess
     private RDateTime 共有ファイルID;
     private RString 処理区分;
     private YMDHMS 処理日時;
-    private RString CsvファイルPath;
+    private RString csvファイルPath;
 
     /**
      * コンストラクタです。

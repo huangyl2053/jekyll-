@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -354,9 +355,9 @@ public class ShokanBaraiKa1GoHandler {
         } else {
             builder.set弁明審査結果区分(ShiharaiHenkoBenmeiShinsaKekkaKubun.申請却下.getコード());
         }
-        builder.set弁明書受付年月日(div.getTxtBemmeiUketsukeYMD().getValue())
+        builder.set弁明書受付年月日(FromRDateToFlexibleDate(div.getTxtBemmeiUketsukeYMD().getValue()))
                 .set弁明理由コード(div.getDdlBemmeiRiyu().getSelectedKey())
-                .set弁明審査決定年月日(div.getTxtBemmeiNaiyoKetteiYMD().getValue());
+                .set弁明審査決定年月日(FromRDateToFlexibleDate(div.getTxtBemmeiNaiyoKetteiYMD().getValue()));
         if (null != builder.build().getState()
                 && !builder.build().getState().equals(EntityDataState.Added)) {
             builder.setState(EntityDataState.Modified);
@@ -367,8 +368,8 @@ public class ShokanBaraiKa1GoHandler {
     private void update支払方法変更_1号予告者() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        builder.set予告登録年月日(div.getTxtYokokuTorokuYMD().getValue())
-                .set弁明書提出期限(div.getTxtBemmeishoTeishutsuKigenYMD().getValue());
+        builder.set予告登録年月日(FromRDateToFlexibleDate(div.getTxtYokokuTorokuYMD().getValue()))
+                .set弁明書提出期限(FromRDateToFlexibleDate(div.getTxtBemmeishoTeishutsuKigenYMD().getValue()));
         if (null != builder.build().getState()
                 && !builder.build().getState().equals(EntityDataState.Added)) {
             builder.setState(EntityDataState.Modified);
@@ -417,9 +418,9 @@ public class ShokanBaraiKa1GoHandler {
     private void update支払方法変更_償還払い化登録() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        builder.set適用開始年月日(div.getTxtTekiyoKikanKaishi().getValue())
-                .set償還払化決定年月日(div.getTxtHenkoKetteiYMD().getValue())
-                .set被保険者証提出期限(div.getTxtHokenshoTeishutsuKigenYMD().getValue());
+        builder.set適用開始年月日(FromRDateToFlexibleDate(div.getTxtTekiyoKikanKaishi().getValue()))
+                .set償還払化決定年月日(FromRDateToFlexibleDate(div.getTxtHenkoKetteiYMD().getValue()))
+                .set被保険者証提出期限(FromRDateToFlexibleDate(div.getTxtHokenshoTeishutsuKigenYMD().getValue()));
         if (null != builder.build().getState()
                 && !builder.build().getState().equals(EntityDataState.Added)) {
             builder.setState(EntityDataState.Modified);
@@ -430,12 +431,12 @@ public class ShokanBaraiKa1GoHandler {
     private void update支払方法変更_償還払い化終了申請() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        builder.set適用終了年月日(div.getTxtTekiyoKikanShuryo().getValue())
+        builder.set適用終了年月日(FromRDateToFlexibleDate(div.getTxtTekiyoKikanShuryo().getValue()))
                 .set終了区分(div.getDdlShuryoJokyo().getSelectedKey())
-                .set終了申請書受付年月日(div.getTxtShinseiUketsukeYMD().getValue())
-                .set終了申請年月日(div.getTxtShinseiYMD().getValue())
+                .set終了申請書受付年月日(FromRDateToFlexibleDate(div.getTxtShinseiUketsukeYMD().getValue()))
+                .set終了申請年月日(FromRDateToFlexibleDate(div.getTxtShinseiYMD().getValue()))
                 .set終了申請理由コード(div.getDdlShinseiRiyu().getSelectedKey())
-                .set終了申請審査決定年月日(div.getTxtShinseiNaiyoKetteiYMD().getValue())
+                .set終了申請審査決定年月日(FromRDateToFlexibleDate(div.getTxtShinseiNaiyoKetteiYMD().getValue()))
                 .set終了申請審査結果区分(div.getDdlShinseiShinsaKekka().getSelectedKey());
         if (null != builder.build().getState()
                 && !builder.build().getState().equals(EntityDataState.Added)) {
@@ -539,16 +540,16 @@ public class ShokanBaraiKa1GoHandler {
                     div.getTxtTekiyoKikanKaishi().setValue(null);
                     div.getTxtTekiyoKikanShuryo().setValue(null);
                     div.getTxtIraiJuriYMD().setValue(null);
-                    div.getTxtYokokuTorokuYMD().setValue(FlexibleDate.getNowDate());
-                    div.getTxtBemmeishoTeishutsuKigenYMD().setValue(FlexibleDate.getNowDate());
+                    div.getTxtYokokuTorokuYMD().setValue(RDate.getNowDate());
+                    div.getTxtBemmeishoTeishutsuKigenYMD().setValue(RDate.getNowDate());
                     div.getTxtYokokuTsuchiHakkoYMD().setValue(null);
                     break;
                 case 償還払い化登録:
                     div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun._１号償還払い化登録.get名称());
-                    div.getTxtTekiyoKikanKaishi().setValue(FlexibleDate.getNowDate());
+                    div.getTxtTekiyoKikanKaishi().setValue(RDate.getNowDate());
                     div.getTxtTekiyoKikanShuryo().setValue(null);
-                    div.getTxtHenkoKetteiYMD().setValue(FlexibleDate.getNowDate());
-                    div.getTxtHokenshoTeishutsuKigenYMD().setValue(FlexibleDate.getNowDate());
+                    div.getTxtHenkoKetteiYMD().setValue(RDate.getNowDate());
+                    div.getTxtHokenshoTeishutsuKigenYMD().setValue(RDate.getNowDate());
                     div.getTxtHenkoTsuchiHakkoYMD().setValue(null);
                     break;
                 default:
@@ -559,30 +560,30 @@ public class ShokanBaraiKa1GoHandler {
                 div.getDdlShuryoJokyo().setSelectedKey(shiharaiHohoHenko.get終了区分());
             }
             div.getTxtTorokuJokyo().setValue(ShiharaiHenkoTorokuKubun.toValue(shiharaiHohoHenko.get登録区分()).get名称());
-            div.getTxtTekiyoKikanKaishi().setValue(shiharaiHohoHenko.get適用開始年月日());
-            div.getTxtTekiyoKikanShuryo().setValue(shiharaiHohoHenko.get適用終了年月日());
+            div.getTxtTekiyoKikanKaishi().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get適用開始年月日()));
+            div.getTxtTekiyoKikanShuryo().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get適用終了年月日()));
             switch (ShoriKubun.toValue(div.getKey_Button())) {
                 case _1号予告者登録:
                     div.getTxtIraiJuriYMD().setValue(null);
-                    div.getTxtYokokuTorokuYMD().setValue(shiharaiHohoHenko.get予告登録年月日());
-                    div.getTxtBemmeishoTeishutsuKigenYMD().setValue(shiharaiHohoHenko.get弁明書提出期限());
-                    div.getTxtYokokuTsuchiHakkoYMD().setValue(shiharaiHohoHenko.get予告通知書発行年月日());
+                    div.getTxtYokokuTorokuYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get予告登録年月日()));
+                    div.getTxtBemmeishoTeishutsuKigenYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get弁明書提出期限()));
+                    div.getTxtYokokuTsuchiHakkoYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get予告通知書発行年月日()));
                     break;
                 case _1号弁明書受理:
-                    div.getTxtBemmeiUketsukeYMD().setValue(shiharaiHohoHenko.get弁明書受付年月日());
-                    div.getTxtBemmeiNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get弁明審査決定年月日());
+                    div.getTxtBemmeiUketsukeYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get弁明書受付年月日()));
+                    div.getTxtBemmeiNaiyoKetteiYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get弁明審査決定年月日()));
                     div.getDdlBemmeiRiyu().setSelectedKey(shiharaiHohoHenko.get弁明理由コード());
                     div.getDdlBemmeiShinsaKekka().setSelectedKey(shiharaiHohoHenko.get弁明審査結果区分());
                     break;
                 case 償還払い化登録:
-                    div.getTxtHenkoKetteiYMD().setValue(shiharaiHohoHenko.get償還払化決定年月日());
-                    div.getTxtHokenshoTeishutsuKigenYMD().setValue(shiharaiHohoHenko.get被保険者証提出期限());
-                    div.getTxtHenkoTsuchiHakkoYMD().setValue(shiharaiHohoHenko.get償還払化通知書発行年月日());
+                    div.getTxtHenkoKetteiYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get償還払化決定年月日()));
+                    div.getTxtHokenshoTeishutsuKigenYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get被保険者証提出期限()));
+                    div.getTxtHenkoTsuchiHakkoYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get償還払化通知書発行年月日()));
                     break;
                 case 償還払い化終了申請:
-                    div.getTxtShinseiUketsukeYMD().setValue(shiharaiHohoHenko.get終了申請書受付年月日());
-                    div.getTxtShinseiYMD().setValue(shiharaiHohoHenko.get終了申請年月日());
-                    div.getTxtShinseiNaiyoKetteiYMD().setValue(shiharaiHohoHenko.get終了申請審査決定年月日());
+                    div.getTxtShinseiUketsukeYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get終了申請書受付年月日()));
+                    div.getTxtShinseiYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get終了申請年月日()));
+                    div.getTxtShinseiNaiyoKetteiYMD().setValue(FromFlexibleDateToRDate(shiharaiHohoHenko.get終了申請審査決定年月日()));
                     div.getDdlShinseiRiyu().setSelectedKey(shiharaiHohoHenko.get終了申請理由コード());
                     div.getDdlShinseiShinsaKekka().setSelectedKey(shiharaiHohoHenko.get終了申請審査結果区分());
                     break;
@@ -591,5 +592,20 @@ public class ShokanBaraiKa1GoHandler {
             }
         }
     }
+    
+    private RDate FromFlexibleDateToRDate(FlexibleDate fDate) {
+        if (fDate == null || fDate.toString().isEmpty()) {
+            return null;
+        } else {
+            return new RDate(fDate.toString());
+        }
+    }
 
+    private FlexibleDate FromRDateToFlexibleDate(RDate rDate) {
+        if (rDate.toString().isEmpty()) {
+            return null;
+        } else {
+            return new FlexibleDate(rDate.toString());
+        }
+    }
 }

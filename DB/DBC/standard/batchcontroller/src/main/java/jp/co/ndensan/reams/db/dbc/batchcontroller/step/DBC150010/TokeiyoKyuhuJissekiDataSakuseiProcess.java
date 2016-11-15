@@ -5,9 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KyufuJissekiSetteiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoTop3Keta;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3022KyufujissekiShokujiHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3025KyufujissekiKyotakuServiceEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
@@ -113,11 +114,7 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
         service = RiyoJokyoTokeihyoMeisaiListSakuseiService.createInstance();
     }
 
-    @Override
-    protected void process(DbWT1510KyufuJissekiKihonEntity entity) {
-        clear();
-        RString キー項目 = createキー項目(entity.getHiHokenshaNo(), entity.getServiceTeikyoYM(), entity.getJigyoshoNo(),
-                entity.getInputShikibetsuNo(), entity.getToshiNo());
+    private void return給付実績明細ワーク(RString キー項目) {
         for (KyuhuJissekiMeisaiEntity 給付実績 : 給付実績明細) {
             RString key = createキー項目(給付実績.getEntity().getHiHokenshaNo(), 給付実績.getEntity().getServiceTeikyoYM(),
                     給付実績.getEntity().getJigyoshoNo(), 給付実績.getEntity().getInputShikibetsuNo(),
@@ -128,13 +125,9 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
                 break;
             }
         }
-        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getMeisaiSetteiKubun()) && !給付実績明細ワーク.isEmpty())
-                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getMeisaiSetteiKubun()) && 給付実績明細ワーク.isEmpty())) {
+    }
 
-            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
-            return;
-        }
-
+    private void return給付実績明細ワーク2(RString キー項目) {
         for (DbT3022KyufujissekiShokujiHiyoEntity 給付実績食事 : 給付実績食事費用) {
             RString key = createキー項目(給付実績食事.getHiHokenshaNo(), 給付実績食事.getServiceTeikyoYM(),
                     給付実績食事.getJigyoshoNo(), 給付実績食事.getInputShikibetsuNo(), 給付実績食事.getToshiNo());
@@ -144,13 +137,9 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
                 break;
             }
         }
-        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getShokujiHiyosetteiKubun()) && !給付実績食事費用ワーク.isEmpty())
-                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getShokujiHiyosetteiKubun()) && 給付実績食事費用ワーク.isEmpty())) {
+    }
 
-            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
-            return;
-        }
-
+    private void return給付実績明細ワーク3(RString キー項目) {
         for (DbT3025KyufujissekiKyotakuServiceEntity サービス計画 : 給付実績居宅サービス計画費) {
             RString key = createキー項目(サービス計画.getHiHokenshaNo(), サービス計画.getServiceTeikyoYM(),
                     サービス計画.getJigyoshoNo(), サービス計画.getInputShikibetsuNo(), サービス計画.getToshiNo());
@@ -160,13 +149,9 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
                 break;
             }
         }
-        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getKyotakuKeikakuSetteiKubun()) && !給付実績居宅サービス計画費ワーク.isEmpty())
-                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getKyotakuKeikakuSetteiKubun()) && 給付実績居宅サービス計画費ワーク.isEmpty())) {
+    }
 
-            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
-            return;
-        }
-
+    private void return給付実績明細ワーク4(RString キー項目) {
         for (DbT3026KyufujissekiFukushiYoguHanbaihiEntity 給付実績福祉 : 給付実績福祉用具販売費) {
             RString key = createキー項目(給付実績福祉.getHiHokenshaNo(), 給付実績福祉.getServiceTeikyoYM(),
                     給付実績福祉.getJigyoshoNo(), 給付実績福祉.getInputShikibetsuNo(), 給付実績福祉.getToshiNo());
@@ -176,12 +161,9 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
                 break;
             }
         }
-        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getFukushiyoguKonyuSetteiKubun()) && !給付実績福祉用具販売費ワーク.isEmpty())
-                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getFukushiyoguKonyuSetteiKubun()) && 給付実績福祉用具販売費ワーク.isEmpty())) {
+    }
 
-            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
-            return;
-        }
+    private void return給付実績明細ワーク5(RString キー項目) {
         for (DbT3027KyufujissekiJutakuKaishuhiEntity 給付実績住宅 : 給付実績住宅改修費) {
             RString key = createキー項目(給付実績住宅.getHiHokenshaNo(), 給付実績住宅.getServiceTeikyoYM(),
                     給付実績住宅.getJigyoshoNo(), 給付実績住宅.getInputShikibetsuNo(), 給付実績住宅.getToshiNo());
@@ -191,12 +173,9 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
                 break;
             }
         }
-        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getJutakuKaishuSetteiKubun()) && !給付実績住宅改修費ワーク.isEmpty())
-                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getJutakuKaishuSetteiKubun()) && 給付実績住宅改修費ワーク.isEmpty())) {
+    }
 
-            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
-            return;
-        }
+    private void return給付実績明細ワーク6(RString キー項目) {
         for (DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity 特定入所者 : 給付実績特定入所者介護サービス費用) {
             RString key = createキー項目(特定入所者.getHiHokenshaNo(), 特定入所者.getServiceTeikyoYM(),
                     特定入所者.getJigyoshoNo(), 特定入所者.getInputShikibetsuNo(), 特定入所者.getToshiNo());
@@ -206,12 +185,9 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
                 break;
             }
         }
-        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getTokuteiNyushoshaSetteiKubun()) && !給付実績特定入所者介護サービス費用ワーク.isEmpty())
-                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getTokuteiNyushoshaSetteiKubun()) && 給付実績特定入所者介護サービス費用ワーク.isEmpty())) {
+    }
 
-            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
-            return;
-        }
+    private void return給付実績明細ワーク7(RString キー項目) {
         for (DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity 社会福祉 : 給付実績社会福祉法人軽減額) {
             RString key = createキー項目(社会福祉.getHiHokenshaNo(), 社会福祉.getServiceTeikyoYM(),
                     社会福祉.getJigyoshoNo(), 社会福祉.getInputShikibetsuNo(), 社会福祉.getToshiNo());
@@ -221,12 +197,9 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
                 break;
             }
         }
-        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getShakaiFukushiKeigenSetteiKubun()) && !給付実績社会福祉法人軽減額ワーク.isEmpty())
-                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getShakaiFukushiKeigenSetteiKubun()) && 給付実績社会福祉法人軽減額ワーク.isEmpty())) {
+    }
 
-            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
-            return;
-        }
+    private void return給付実績明細ワーク8(RString キー項目) {
         for (DbT3033KyufujissekiShukeiEntity 集計 : 給付実績集計) {
             RString key = createキー項目(集計.getHiHokenshaNo(), 集計.getServiceTeikyoYM(),
                     集計.getJigyoshoNo(), 集計.getInputShikibetsuNo(), 集計.getToshiNo());
@@ -236,16 +209,12 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
                 break;
             }
         }
-        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getShukeiSetteiKubun()) && !給付実績集計ワーク.isEmpty())
-                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getShukeiSetteiKubun()) && 給付実績集計ワーク.isEmpty())) {
+    }
 
-            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
-            return;
-        }
-
+    private void return給付実績明細ワーク9(RString キー項目, DbWT1510KyufuJissekiKihonEntity entity) {
         RString 入力識別番号上3桁 = entity.getInputShikibetsuNo().value().substring(ZERO, THREE);
-        // TODO DBC.ENUM.入力識別番号上３桁未提供
-        if (入力識別番号上3桁.equals(new RString("812")) || 入力識別番号上3桁.equals(new RString("21B"))) {
+        if (入力識別番号上3桁.equals(NyuryokuShikibetsuNoTop3Keta.現物_居宅サービス計画費.getコード())
+                || 入力識別番号上3桁.equals(NyuryokuShikibetsuNoTop3Keta.償還_居宅サービス計画費.getコード())) {
             if (entity.getServiceTeikyoYM().isBefore(制度改正施行年月H21)) {
                 for (DbT3025KyufujissekiKyotakuServiceEntity 計画費 : 給付実績居宅サービス計画費ワーク) {
                     利用状況統計表一時TBL.insert(service.create給付実績データ(entity, 計画費));
@@ -264,15 +233,74 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
         }
     }
 
+    @Override
+    protected void process(DbWT1510KyufuJissekiKihonEntity entity) {
+        clear();
+        RString キー項目 = createキー項目(entity.getHiHokenshaNo(), entity.getServiceTeikyoYM(), entity.getJigyoshoNo(),
+                entity.getInputShikibetsuNo(), entity.getToshiNo());
+        return給付実績明細ワーク(キー項目);
+        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getMeisaiSetteiKubun()) && !給付実績明細ワーク.isEmpty())
+                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getMeisaiSetteiKubun()) && 給付実績明細ワーク.isEmpty())) {
+
+            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
+            return;
+        }
+        return給付実績明細ワーク2(キー項目);
+        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getShokujiHiyosetteiKubun()) && !給付実績食事費用ワーク.isEmpty())
+                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getShokujiHiyosetteiKubun()) && 給付実績食事費用ワーク.isEmpty())) {
+
+            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
+            return;
+        }
+        return給付実績明細ワーク3(キー項目);
+        if ((KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getKyotakuKeikakuSetteiKubun()) && !給付実績居宅サービス計画費ワーク.isEmpty())
+                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getKyotakuKeikakuSetteiKubun()) && 給付実績居宅サービス計画費ワーク.isEmpty())) {
+
+            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
+            return;
+        }
+        return給付実績明細ワーク4(キー項目);
+        if (isEntity(entity, 給付実績福祉用具販売費ワーク)) {
+            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
+            return;
+        }
+        return給付実績明細ワーク5(キー項目);
+        if (isEntity(entity, 給付実績住宅改修費ワーク)) {
+            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
+            return;
+        }
+        return給付実績明細ワーク6(キー項目);
+        if (isEntity(entity, 給付実績特定入所者介護サービス費用ワーク)) {
+            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
+            return;
+        }
+        return給付実績明細ワーク7(キー項目);
+        if (isEntity(entity, 給付実績社会福祉法人軽減額ワーク)) {
+            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
+            return;
+        }
+        return給付実績明細ワーク8(キー項目);
+        if (isEntity(entity, 給付実績集計ワーク)) {
+            処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
+            return;
+        }
+        return給付実績明細ワーク9(キー項目, entity);
+    }
+
+    private boolean isEntity(DbWT1510KyufuJissekiKihonEntity entity, List listEntity) {
+        return (KyufuJissekiSetteiKubun.設定不可.getコード().equals(entity.getShukeiSetteiKubun()) && !listEntity.isEmpty())
+                || (KyufuJissekiSetteiKubun.必須.getコード().equals(entity.getShukeiSetteiKubun()) && listEntity.isEmpty());
+    }
+
     private void clear() {
-        給付実績明細ワーク = Collections.EMPTY_LIST;
-        給付実績食事費用ワーク = Collections.EMPTY_LIST;
-        給付実績居宅サービス計画費ワーク = Collections.EMPTY_LIST;
-        給付実績福祉用具販売費ワーク = Collections.EMPTY_LIST;
-        給付実績住宅改修費ワーク = Collections.EMPTY_LIST;
-        給付実績特定入所者介護サービス費用ワーク = Collections.EMPTY_LIST;
-        給付実績社会福祉法人軽減額ワーク = Collections.EMPTY_LIST;
-        給付実績集計ワーク = Collections.EMPTY_LIST;
+        給付実績明細ワーク = new ArrayList<>();
+        給付実績食事費用ワーク = new ArrayList<>();
+        給付実績居宅サービス計画費ワーク = new ArrayList<>();
+        給付実績福祉用具販売費ワーク = new ArrayList<>();
+        給付実績住宅改修費ワーク = new ArrayList<>();
+        給付実績特定入所者介護サービス費用ワーク = new ArrayList<>();
+        給付実績社会福祉法人軽減額ワーク = new ArrayList<>();
+        給付実績集計ワーク = new ArrayList<>();
     }
 
     private void 給付実績データ作成(DbWT1510KyufuJissekiKihonEntity entity) {

@@ -55,6 +55,7 @@ public class SogojigyohiKagoKetteiTorikomiIchiranSource implements IReportSource
     @ReportItem(name = "listUpper_3", length = 10, order = 19)
     public RString listUpper_3;
     @ReportPerson(id = "X")
+    @ReportItem(name = "shikibetsuCode", length = 15)
     public ShikibetsuCode shikibetuCode;
     @ReportItem(name = "listUpper_4", length = 10, order = 20)
     public RString listUpper_4;
@@ -90,7 +91,7 @@ public class SogojigyohiKagoKetteiTorikomiIchiranSource implements IReportSource
     public RString sogojigyohiTanisu;
     @ReportItem(name = "sogojigyohiFutangaku", length = 17, order = 36)
     public RString sogojigyohiFutangaku;
-    @ReportExpandedInfo(id = "A")
+    @ReportExpandedInfo(id = "X")
     public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

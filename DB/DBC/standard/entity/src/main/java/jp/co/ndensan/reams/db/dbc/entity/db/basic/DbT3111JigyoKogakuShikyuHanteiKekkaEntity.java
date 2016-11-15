@@ -39,6 +39,7 @@ public class DbT3111JigyoKogakuShikyuHanteiKekkaEntity extends DbTableEntityBase
     private HokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private Decimal rirekiNo;
+    private int rirekiEdaNo;
     private FlexibleDate ketteiYMD;
     private Decimal honninShiharaiGaku;
     private RString shiharaiKubunCode;
@@ -51,6 +52,24 @@ public class DbT3111JigyoKogakuShikyuHanteiKekkaEntity extends DbTableEntityBase
     private RString shinsaKekkaHaneiKubun;
     private FlexibleDate ketteiTsuchishoSakuseiYMD;
     private FlexibleDate furikomiMeisaishoSakuseiYMD;
+
+    /**
+     * rirekiEdaNoのgetメソッドです。
+     *
+     * @return rirekiEdaNo
+     */
+    public int getRirekiEdaNo() {
+        return rirekiEdaNo;
+    }
+
+    /**
+     * rirekiEdaNoのsetメソッドです。
+     *
+     * @param rirekiEdaNo rirekiEdaNo
+     */
+    public void setRirekiEdaNo(int rirekiEdaNo) {
+        this.rirekiEdaNo = rirekiEdaNo;
+    }
 
     /**
      * insertDantaiCdのgetメソッドです。

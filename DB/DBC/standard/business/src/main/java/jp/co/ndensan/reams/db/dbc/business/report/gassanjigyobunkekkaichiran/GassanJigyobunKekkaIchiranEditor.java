@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanjigyobunkekkaichiran.Ga
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanjigyobunkekkaichiran.GassanJigyobunKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -100,6 +102,8 @@ public class GassanJigyobunKekkaIchiranEditor implements
         } else {
             if (帳票用データ.get支給額_被保険者番号() != null) {
                 source.List1_1 = 帳票用データ.get支給額_被保険者番号().value();
+                source.expandedInformation = new ExpandedInformation(Code.EMPTY, RString.EMPTY,
+                        source.List1_1);
             }
 
             if (帳票用データ.get件数() > INDEX_0) {
@@ -203,19 +207,19 @@ public class GassanJigyobunKekkaIchiranEditor implements
         }
 
         if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-            改頁１ = list.get(0).get項目名();
+            改頁１ = list.get(0).get項目ID();
         }
         if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-            改頁２ = list.get(INDEX_1).get項目名();
+            改頁２ = list.get(INDEX_1).get項目ID();
         }
         if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-            改頁３ = list.get(INDEX_2).get項目名();
+            改頁３ = list.get(INDEX_2).get項目ID();
         }
         if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-            改頁４ = list.get(INDEX_3).get項目名();
+            改頁４ = list.get(INDEX_3).get項目ID();
         }
         if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-            改頁５ = list.get(INDEX_4).get項目名();
+            改頁５ = list.get(INDEX_4).get項目ID();
         }
 
         if (list.size() > INDEX_0) {

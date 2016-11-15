@@ -63,6 +63,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     private static final RString メッセージ_市町村コード = new RString("市町村コード");
     private static final RString メッセージ_申請書管理番号 = new RString("申請書管理番号");
     private static final RString メッセージ_世帯基準日 = new RString("世帯基準日");
+    private static final Code YUKOMUKOKUBUN_無効 = new Code("0");
     @InjectSession
     private SqlSession session;
 
@@ -658,7 +659,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号),
-                                eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
+                                eq(yukoMukoKubun, YUKOMUKOKUBUN_無効),
                                 eq(shinseiJokyoKubun, 申請状況区分_0),
                                 eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false)))
                 .order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
