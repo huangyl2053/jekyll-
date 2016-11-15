@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -77,4 +78,5 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private RString shichosonCode;
     private RString sashitomeHiHokenshaNo;
     private RString sashitomeKojoNo;
+    private TokuteiKozaRelateEntity 口座;
 }

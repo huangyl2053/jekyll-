@@ -9,10 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 介護認定審査対象者一覧表（A3版）のEditorです。
@@ -77,12 +74,6 @@ public class IinShinsakaishiryoA3Group1Editor implements IIinShinsakaishiryoA3Ed
             source.one_listShinsei1_11 = RString.EMPTY;
             source.one_listZenkaiｙukokikan1_1 = shinsakaishiryoList.get(index).get前回期間_下();
             source.one_listYukokikan1_1 = RString.EMPTY;
-            source.shikibetuCode = ShikibetsuCode.EMPTY;
-            if (shinsakaishiryoList.get(index).is事務局() && shinsakaishiryoList.get(index).get申請書管理番号() != null
-                    && !shinsakaishiryoList.get(index).get申請書管理番号().isEmpty()) {
-                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        shinsakaishiryoList.get(index).get申請書管理番号().getColumnValue());
-            }
         }
         if ((index + INT_25) < shinsakaishiryoList.size()) {
             source.one_listShinsei2_1 = shinsakaishiryoList.get(index + INT_25).get審査会審査順().padZeroToLeft(INT_2);

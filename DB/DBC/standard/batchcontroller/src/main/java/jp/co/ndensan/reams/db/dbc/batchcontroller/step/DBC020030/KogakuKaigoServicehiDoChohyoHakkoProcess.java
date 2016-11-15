@@ -35,19 +35,34 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
+import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
+import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesakiEditor;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.maskedkoza.MaskedKozaCreator;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
@@ -60,7 +75,10 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -77,6 +95,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -99,7 +118,12 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             + "kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.get高額サービス帳票出力データ");
     private static final ReportId 帳票分類ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
     private static final RString 帳票タイトル_0 = new RString("介護保険高額介護サービス費支給（不支給）決定通知一覧表");
-    private static final RString 帳票タイトル = new RString("高額介護サービス費支給（不支給）決定通知一覧表");
+    private static final RString 帳票制御汎用キー_支払方法抽出区分 = new RString("支払方法抽出区分");
+    private static final RString 帳票制御汎用キー_帳票タイプ = new RString("帳票タイプ");
+    private static final RString 帳票タイプ_1 = new RString("1");
+    private static final RString 帳票タイプ_2 = new RString("2");
+    private static final RString 帳票タイプ_3 = new RString("3");
+    private static final RString 帳票タイプ_4 = new RString("4");
     private static final RString SAKUSEI = new RString("作成");
     private static final RString 自動償還フラグ_TRUE = new RString("※");
     private static final RString 被保険者氏名_出力ない = new RString("該当データがありません");
@@ -153,6 +177,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
     private NinshoshaSource ninshoshaSource3;
     private NinshoshaSource ninshoshaSource4;
     private RString 帳票ID;
+    private RString 帳票タイプ;
+    private RString 支払方法抽出区分;
     private KogakuShikyuFushikyuKetteiTsuchiHakkoEntity lastReportEntity;
 
     BatchReportWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> batchReportWriter1;
@@ -192,44 +218,72 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         } else {
             通知書定型文 = get通知書定型文();
         }
+        ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
+        ChohyoSeigyoHanyo キー_帳票タイプ = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100007_支給.getReportId(),
+                FlexibleYear.MIN, 帳票制御汎用キー_帳票タイプ);
+        ChohyoSeigyoHanyo キー_支払方法抽出区分 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100007_支給.getReportId(),
+                FlexibleYear.MIN, 帳票制御汎用キー_支払方法抽出区分);
+        支払方法抽出区分 = キー_支払方法抽出区分 == null ? null : キー_支払方法抽出区分.get設定値();
+        帳票タイプ = キー_帳票タイプ == null ? RString.EMPTY : キー_帳票タイプ.get設定値();
     }
 
     @Override
     protected BatchDbReader createReader() {
         ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
         IShunoKamoku 介護給付_高額 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_高額);
-        IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
+        IKozaSearchKey kozaSearchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
                 .setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set科目コード(介護給付_高額.getコード())
                 .set基準日(FlexibleDate.getNowDate()).build();
         List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
                 get参照権限科目コード(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
+
+        IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
+        IAtesakiPSMSearchKey atesakiPSMSearchKey = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー).build();
+
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        List<JuminShubetsu> 住民種別 = new ArrayList<>();
+        住民種別.add(JuminShubetsu.日本人);
+        住民種別.add(JuminShubetsu.外国人);
+        住民種別.add(JuminShubetsu.住登外個人_外国人);
+        住民種別.add(JuminShubetsu.住登外個人_日本人);
+        List<JuminJotai> 住民状態 = new ArrayList<>();
+        住民状態.add(JuminJotai.住民);
+        住民状態.add(JuminJotai.住登外);
+        住民状態.add(JuminJotai.消除者);
+        住民状態.add(JuminJotai.転出者);
+        住民状態.add(JuminJotai.死亡者);
+        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = builder
+                .set住民種別(住民種別)
+                .set住民状態(住民状態)
+                .set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない)
+                .build();
+
         mybatisParameter = new JigyoKogakuKetteiTsuchishoReportParameter(出力順情報,
-                DbBusinessConfig.get(ConfigNameDBC.高額決定通知書_支払方法抽出区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付),
-                searchKey, kamokuList);
+                支払方法抽出区分,
+                kozaSearchKey, kamokuList, atesakiPSMSearchKey, shikibetsuTaishoPSMSearchKey);
         return new BatchDbReader(MAPPERPATH, mybatisParameter);
     }
 
     @Override
     protected void createWriter() {
-
-        if (ReportIdDBC.DBC100007_支給.getReportId().getColumnValue().equals(帳票ID)) {
+        if (帳票タイプ_1.equals(帳票タイプ)) {
             batchReportWriter1 = BatchReportFactory.createBatchReportWriter(帳票ID).create();
             reportSourceWriter1 = new ReportSourceWriter<>(batchReportWriter1);
             ninshoshaSource1 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleDate.getNowDate(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter1);
-        } else if (ReportIdDBC.DBC100008.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_2.equals(帳票タイプ)) {
             batchReportWriter2 = BatchReportFactory.createBatchReportWriter(帳票ID).create();
             reportSourceWriter2 = new ReportSourceWriter<>(batchReportWriter2);
             ninshoshaSource2 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleDate.getNowDate(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter2);
-        } else if (ReportIdDBC.DBC100009.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_3.equals(帳票タイプ)) {
             batchReportWriter3 = BatchReportFactory.createBatchReportWriter(帳票ID).create();
             reportSourceWriter3 = new ReportSourceWriter<>(batchReportWriter3);
             ninshoshaSource3 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleDate.getNowDate(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter3);
-        } else if (ReportIdDBC.DBC100010.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_4.equals(帳票タイプ)) {
             batchReportWriter4 = BatchReportFactory.createBatchReportWriter(帳票ID).create();
             reportSourceWriter4 = new ReportSourceWriter<>(batchReportWriter4);
             ninshoshaSource4 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleDate.getNowDate(),
@@ -252,6 +306,9 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         dataFlag = false;
         連番 = 連番 + INT_1;
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(entity.get宛名());
+        IAtesaki atesaki = AtesakiFactory.createInstance(entity.get宛先());
+        ReportAtesakiEditor editor = new SofubutsuAtesakiEditorBuilder(atesaki).build();
+        SofubutsuAtesakiSource compSofubutsuAtesakiソース = new SofubutsuAtesakiSourceBuilder(editor).buildSource();
         IKoza 口座情報 = null;
         if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0L) {
             口座情報 = do口座マスク編集(entity.get口座());
@@ -259,24 +316,24 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         RString 金融機関コード = 口座情報 == null || 口座情報.get金融機関コード() == null ? RString.EMPTY
                 : 口座情報.get金融機関コード().getColumnValue();
         KetteiTsuchishoInfoTempEntity 一時Entity = entity.get一時Entity();
-        if (ReportIdDBC.DBC100007_支給.getReportId().getColumnValue().equals(帳票ID)) {
+        if (帳票タイプ_1.equals(帳票タイプ)) {
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity1 = getReportEntity(一時Entity, 宛名情報, 口座情報);
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport report1
                     = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaReport(reportEntity1, 連番, getタイトル(一時Entity), 通知書定型文,
                             ninshoshaSource1, 帳票制御共通情報, 金融機関コード);
             report1.writeBy(reportSourceWriter1);
-        } else if (ReportIdDBC.DBC100008.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_2.equals(帳票タイプ)) {
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity2 = getReportEntity(一時Entity, 宛名情報, 口座情報);
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport report2
                     = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity2, 連番, getタイトル(一時Entity), 通知書定型文,
-                            ninshoshaSource2, 帳票制御共通情報, 金融機関コード);
+                            ninshoshaSource2, 帳票制御共通情報, 金融機関コード, compSofubutsuAtesakiソース);
             report2.writeBy(reportSourceWriter2);
-        } else if (ReportIdDBC.DBC100009.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_3.equals(帳票タイプ)) {
             KogakuKetteiTsuchiShoEntity reportEntity3 = getShoSealerReportEntity(一時Entity, 宛名情報, 口座情報);
             KogakuKetteiTsuchiShoSealerReport report3 = new KogakuKetteiTsuchiShoSealerReport(reportEntity3, parameter.get文書番号(),
                     通知書定型文, インフォ, ninshoshaSource3, タイトルlist, 連番);
             report3.writeBy(reportSourceWriter3);
-        } else if (ReportIdDBC.DBC100010.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_4.equals(帳票タイプ)) {
             KogakuKetteiTsuchiShoEntity reportEntity4 = getShoSealer2ReportEntity(一時Entity, 宛名情報, 口座情報);
             KogakuKetteiTsuchiShoSealer2Report report4
                     = new KogakuKetteiTsuchiShoSealer2Report(getタイトル(一時Entity), reportEntity4, ninshoshaSource4, parameter.get文書番号(), 連番);
@@ -310,13 +367,13 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             KogakuShikyuFushikyuKetteiTsuchiHakkoReport report = new KogakuShikyuFushikyuKetteiTsuchiHakkoReport(lastReportEntity, 連番, true);
             report.writeBy(reportSourceWriter5);
         }
-        if (ReportIdDBC.DBC100007_支給.getReportId().getColumnValue().equals(帳票ID)) {
+        if (帳票タイプ_1.equals(帳票タイプ)) {
             batchReportWriter1.close();
-        } else if (ReportIdDBC.DBC100008.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_2.equals(帳票タイプ)) {
             batchReportWriter2.close();
-        } else if (ReportIdDBC.DBC100009.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_3.equals(帳票タイプ)) {
             batchReportWriter3.close();
-        } else if (ReportIdDBC.DBC100010.getReportId().getColumnValue().equals(帳票ID)) {
+        } else if (帳票タイプ_4.equals(帳票タイプ)) {
             batchReportWriter4.close();
         }
         batchReportWriter5.close();
@@ -584,7 +641,11 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             IShikibetsuTaisho 宛名情報, RString 住所) {
         KogakuShikyuFushikyuKetteiTsuchiHakkoEntity returnEntity = new KogakuShikyuFushikyuKetteiTsuchiHakkoEntity();
         set出力順と改頁(returnEntity);
-        returnEntity.setテスト印刷(帳票タイトル);
+        if (フラグ_TRUE.equals(parameter.getテスト出力フラグ())) {
+            returnEntity.setテスト印刷(new RString("テスト印刷"));
+        } else {
+            returnEntity.setテスト印刷(RString.EMPTY);
+        }
         KetteiTsuchishoInfoTempEntity 一時Entity = entity.get一時Entity();
         returnEntity.set決定通知No(一時Entity.getTsuchishoNo() == null ? RString.EMPTY : 一時Entity.getTsuchishoNo());
         if (null != 一時Entity.getHihokenshaNo()) {

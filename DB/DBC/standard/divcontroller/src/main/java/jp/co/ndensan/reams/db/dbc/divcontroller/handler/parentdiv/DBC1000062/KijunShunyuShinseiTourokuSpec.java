@@ -263,7 +263,7 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
 
         public static boolean is総収入額チェック(KijunShunyuShinseiTourokuDiv div) {
             Decimal 総収入額 = div.getMeisai().getTxtTotalShunyu().getValue();
-            return (総収入額 != null);
+            return 総収入額 != null;
         }
 
         public static boolean is世帯課税チェック(KijunShunyuShinseiTourokuDiv div) {
@@ -343,21 +343,25 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
 
         public static boolean is算定基準額チェック(KijunShunyuShinseiTourokuDiv div) {
             List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
-            Decimal 二人以上で総収入金額 = Decimal.ZERO;
+            return getチェック(div, rowList, get明細行総収入金額(div));
+        }
+
+        private static Decimal get明細行総収入金額(KijunShunyuShinseiTourokuDiv div) {
+            List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+            Decimal 明細行総収入金額 = Decimal.ZERO;
             Decimal 公的年金;
             Decimal 給与;
             Decimal 以外の収入;
             for (dgMeisai_Row row : rowList) {
-                if (get年齢(row.getAge()) < 歳以上_65) {
+                if (get年齢(row.getAge()) < 歳以上_65 || RowState.Deleted.equals(row.getRowState())) {
                     continue;
                 }
                 公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
                 給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
                 以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
-                二人以上で総収入金額 = 二人以上で総収入金額.add(公的年金).add(給与).add(以外の収入);
+                明細行総収入金額 = 明細行総収入金額.add(公的年金).add(給与).add(以外の収入);
             }
-
-            return getチェック(div, rowList, 二人以上で総収入金額);
+            return 明細行総収入金額;
         }
 
         private static int get年齢(RString 年齢) {
@@ -383,7 +387,7 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
                 給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
                 以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
                 一人で総収入金額 = 公的年金.add(給与).add(以外の収入);
-                if (get年齢(row.getAge()) < 歳以上_65) {
+                if (get年齢(row.getAge()) < 歳以上_65 || RowState.Deleted.equals(row.getRowState())) {
                     continue;
                 }
                 if (円_145万.compareTo(課税所得) < NUM_1

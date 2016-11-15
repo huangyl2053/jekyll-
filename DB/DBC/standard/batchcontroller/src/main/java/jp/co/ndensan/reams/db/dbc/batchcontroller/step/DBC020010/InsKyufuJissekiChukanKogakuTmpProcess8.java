@@ -223,6 +223,9 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
         Collections.sort(処理対象List, new Comparator<KyufuJissekiChukanKogaku8Entity>() {
             @Override
             public int compare(KyufuJissekiChukanKogaku8Entity arg0, KyufuJissekiChukanKogaku8Entity arg1) {
+                if (arg0.get基準収入額適用管理一時() == null || arg1.get基準収入額適用管理一時() == null) {
+                    return -1;
+                }
                 if (arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD().
                         compareTo(arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD()) == 0) {
                     return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
@@ -728,7 +731,8 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
                 世帯算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_37200);
             }
         } else {
-            世帯算定基準額 = 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku();
+            世帯算定基準額 = 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku() == null ? Decimal.ZERO
+                    : 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku();
         }
         boolean is最小の個人算定基準額 = true;
         Decimal 最小の個人算定基準額 = new Decimal(世帯算定基準額.multiply(get利用者負担額を算出(給付実績中間)).

@@ -67,12 +67,16 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
      * @return ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv>
      */
     public ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv> onClick_appurodo(YogaigoNinteiKekkaRenkeiDataTorikomiDiv div, FileData... files) {
+        boolean check = false;
         if (files.length > 0) {
             getHandler(div).before_onClick(files);
             YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler validationHandler = new YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler(div);
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             if (!div.getHdNum().getValue().equals(new RString("0")) && !div.getUploadTool().getRemainUnUploadedFiles().get(0).
                     equalsIgnoreCase(div.getDataGridFile().getDataSource().get(0).getFileName())) {
+                check = true;
+            }
+            if (check) {
                 if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
                     throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("日次進捗情報ファイル"));
                 } else {
@@ -86,6 +90,8 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
+        } else {
+
         }
         return ResponseData.of(div).setState(DBD4920001StateName.一覧表示);
 

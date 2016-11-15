@@ -49,6 +49,7 @@ public class KijunShunyuShinseiTouroku {
     private static final Decimal KEY_100億円 = new Decimal("10000000000");
     private static final Decimal KEY_99億円 = new Decimal("9999999999");
     private static final RString MESSAGE_合計 = new RString("所得情報の収入合計＞入力した収入合計になっています。");
+    private static final RString MESSAGE_総収入金額算出 = new RString("総収入金額算出ボタンを押下してください。");
     private static final RString チェックなし = new RString("0");
     private static final RString チェック済み = new RString("1");
 
@@ -338,6 +339,9 @@ public class KijunShunyuShinseiTouroku {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
+        if (!getHandler(div).is総収入額チェック()) {
+            throw new ApplicationException(MESSAGE_総収入金額算出.toString());
+        }
 
         ValidationMessageControlPairs validPairs = getValidationHandler(div).明細パネルチェックValidate();
         validPairs.add(getValidationHandler(div).明細確定時のチェック処理());
@@ -411,4 +415,5 @@ public class KijunShunyuShinseiTouroku {
     private KijunShunyuShinseiTourokuValidationHandler getValidationHandler(KijunShunyuShinseiTourokuDiv div) {
         return new KijunShunyuShinseiTourokuValidationHandler(div);
     }
+
 }

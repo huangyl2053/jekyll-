@@ -9,13 +9,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
-import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 委員審査会資料組み合わせ一覧A3のReportSourceです。
@@ -754,11 +750,6 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
         LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
     }
 // </editor-fold>
-
-    @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation shinseishoKanriNo;
 
     /**
      * 改ページ条件のキーです。

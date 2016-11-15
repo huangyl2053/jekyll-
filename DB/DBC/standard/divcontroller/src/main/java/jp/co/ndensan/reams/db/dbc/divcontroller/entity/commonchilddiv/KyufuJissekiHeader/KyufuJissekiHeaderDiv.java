@@ -4,14 +4,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -22,8 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  * @reamsid_L DBC-2970-160 linghuhang
  */
 public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,12 +47,18 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     private TextBoxDate txtTeikyoNengetsu;
     @JsonProperty("txtJissekiKubun")
     private TextBox txtJissekiKubun;
+    @JsonProperty("txtSakuseiKubun")
+    private TextBox txtSakuseiKubun;
     @JsonProperty("txtSeiriNo")
     private TextBox txtSeiriNo;
-    @JsonProperty("txtHokensha")
-    private TextBox txtHokensha;
+    @JsonProperty("txtShokisaiHokenshaNo")
+    private TextBox txtShokisaiHokenshaNo;
     @JsonProperty("txtYoshikiNo")
     private TextBox txtYoshikiNo;
+    @JsonProperty("txtYoshikiMeisho")
+    private TextBox txtYoshikiMeisho;
+    @JsonProperty("txtJigyoshaNo")
+    private TextBox txtJigyoshaNo;
     @JsonProperty("txtJigyosha")
     private TextBox txtJigyosha;
     @JsonProperty("hiddenJigyoshaCode")
@@ -232,6 +237,24 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
+     * gettxtSakuseiKubun
+     * @return txtSakuseiKubun
+     */
+    @JsonProperty("txtSakuseiKubun")
+    public TextBox getTxtSakuseiKubun() {
+        return txtSakuseiKubun;
+    }
+
+    /*
+     * settxtSakuseiKubun
+     * @param txtSakuseiKubun txtSakuseiKubun
+     */
+    @JsonProperty("txtSakuseiKubun")
+    public void setTxtSakuseiKubun(TextBox txtSakuseiKubun) {
+        this.txtSakuseiKubun = txtSakuseiKubun;
+    }
+
+    /*
      * gettxtSeiriNo
      * @return txtSeiriNo
      */
@@ -250,21 +273,21 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
-     * gettxtHokensha
-     * @return txtHokensha
+     * gettxtShokisaiHokenshaNo
+     * @return txtShokisaiHokenshaNo
      */
-    @JsonProperty("txtHokensha")
-    public TextBox getTxtHokensha() {
-        return txtHokensha;
+    @JsonProperty("txtShokisaiHokenshaNo")
+    public TextBox getTxtShokisaiHokenshaNo() {
+        return txtShokisaiHokenshaNo;
     }
 
     /*
-     * settxtHokensha
-     * @param txtHokensha txtHokensha
+     * settxtShokisaiHokenshaNo
+     * @param txtShokisaiHokenshaNo txtShokisaiHokenshaNo
      */
-    @JsonProperty("txtHokensha")
-    public void setTxtHokensha(TextBox txtHokensha) {
-        this.txtHokensha = txtHokensha;
+    @JsonProperty("txtShokisaiHokenshaNo")
+    public void setTxtShokisaiHokenshaNo(TextBox txtShokisaiHokenshaNo) {
+        this.txtShokisaiHokenshaNo = txtShokisaiHokenshaNo;
     }
 
     /*
@@ -283,6 +306,42 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     @JsonProperty("txtYoshikiNo")
     public void setTxtYoshikiNo(TextBox txtYoshikiNo) {
         this.txtYoshikiNo = txtYoshikiNo;
+    }
+
+    /*
+     * gettxtYoshikiMeisho
+     * @return txtYoshikiMeisho
+     */
+    @JsonProperty("txtYoshikiMeisho")
+    public TextBox getTxtYoshikiMeisho() {
+        return txtYoshikiMeisho;
+    }
+
+    /*
+     * settxtYoshikiMeisho
+     * @param txtYoshikiMeisho txtYoshikiMeisho
+     */
+    @JsonProperty("txtYoshikiMeisho")
+    public void setTxtYoshikiMeisho(TextBox txtYoshikiMeisho) {
+        this.txtYoshikiMeisho = txtYoshikiMeisho;
+    }
+
+    /*
+     * gettxtJigyoshaNo
+     * @return txtJigyoshaNo
+     */
+    @JsonProperty("txtJigyoshaNo")
+    public TextBox getTxtJigyoshaNo() {
+        return txtJigyoshaNo;
+    }
+
+    /*
+     * settxtJigyoshaNo
+     * @param txtJigyoshaNo txtJigyoshaNo
+     */
+    @JsonProperty("txtJigyoshaNo")
+    public void setTxtJigyoshaNo(TextBox txtJigyoshaNo) {
+        this.txtJigyoshaNo = txtJigyoshaNo;
     }
 
     /*

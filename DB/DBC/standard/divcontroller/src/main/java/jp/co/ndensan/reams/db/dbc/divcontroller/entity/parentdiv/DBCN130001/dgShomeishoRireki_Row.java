@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Nov 02 17:17:07 CST 2016 
+ * Mon Nov 14 22:19:26 CST 2016 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgShomeishoRireki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
     private Button shokai;
     private Button shusei;

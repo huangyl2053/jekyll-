@@ -77,4 +77,5 @@ public class ShokanKetteiTsuchiShoTempTableEntity extends DbTableEntityBase<Shok
     private RString meisho;
     private HihokenshaNo sashitomeHiHokenshaNo;
     private RString sashitomeKojoNo;
+    private int kozaId;
 }

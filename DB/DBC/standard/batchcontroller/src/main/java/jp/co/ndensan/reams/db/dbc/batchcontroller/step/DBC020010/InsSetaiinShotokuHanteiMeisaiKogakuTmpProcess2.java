@@ -27,6 +27,7 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2 extends BatchProcess
             + "kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
             + "select世帯員所得判定明細一時");
     private static final RString TABLE_世帯員所得判定明細高額一時2 = new RString("TempSetaiinShotokuHantei2");
+    private static final RString TABLE_世帯員所得判定明細高額一時3 = new RString("TempSetaiinShotokuHantei3");
     private static final FlexibleYear YEAR_2006 = new FlexibleYear("2006");
     private static final FlexibleYear YEAR_2015 = new FlexibleYear("2015");
     private static final RString RS_01 = new RString("01");
@@ -42,6 +43,8 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2 extends BatchProcess
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter setaiinShotokuHantei2Writer;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter setaiinShotokuHantei3Writer;
 
     @Override
     protected void initialize() {
@@ -60,6 +63,8 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2 extends BatchProcess
     protected void createWriter() {
         setaiinShotokuHantei2Writer = new BatchEntityCreatedTempTableWriter(
                 TABLE_世帯員所得判定明細高額一時2, TempSetaiinShotokuHanteiEntity.class);
+        setaiinShotokuHantei3Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_世帯員所得判定明細高額一時3, TempSetaiinShotokuHanteiEntity.class);
     }
 
     @Override
@@ -93,5 +98,6 @@ public class InsSetaiinShotokuHanteiMeisaiKogakuTmpProcess2 extends BatchProcess
 
     @Override
     protected void afterExecute() {
+        setaiinShotokuHantei3Writer.getInsertCount();
     }
 }

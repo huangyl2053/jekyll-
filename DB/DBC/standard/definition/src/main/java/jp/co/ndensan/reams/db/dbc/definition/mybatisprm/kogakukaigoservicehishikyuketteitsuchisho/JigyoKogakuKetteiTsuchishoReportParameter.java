@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho;
 
 import java.util.List;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyoKogakuKetteiTsuchishoReportParameter extends KozaSearchParameter implements IMyBatisParameter {
+public class JigyoKogakuKetteiTsuchishoReportParameter extends _JigyoKogakuKetteiTsuchishoReportParameter implements IMyBatisParameter {
 
     private RString 出力順;
     private RString 支払方法抽出区分;
@@ -33,11 +34,14 @@ public class JigyoKogakuKetteiTsuchishoReportParameter extends KozaSearchParamet
      *
      * @param 出力順 RString
      * @param 支払方法抽出区分 RString
-     * @param key 口座検索用の検索キークラス
+     * @param kozaSearchKey 口座検索用の検索キークラス
      * @param list 科目コードリスト
+     * @param atesakiPSMSearchKey 宛先検索用の検索キークラス
+     * @param shikibetsuTaishoPSMSearchKey 宛名検索用の検索キークラス
      */
-    public JigyoKogakuKetteiTsuchishoReportParameter(RString 出力順, RString 支払方法抽出区分, IKozaSearchKey key, List<KamokuCode> list) {
-        super(key, list);
+    public JigyoKogakuKetteiTsuchishoReportParameter(RString 出力順, RString 支払方法抽出区分, IKozaSearchKey kozaSearchKey, List<KamokuCode> list,
+            IAtesakiPSMSearchKey atesakiPSMSearchKey, IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
+        super(kozaSearchKey, atesakiPSMSearchKey, list, shikibetsuTaishoPSMSearchKey);
         this.出力順 = 出力順;
         this.支払方法抽出区分 = 支払方法抽出区分;
     }

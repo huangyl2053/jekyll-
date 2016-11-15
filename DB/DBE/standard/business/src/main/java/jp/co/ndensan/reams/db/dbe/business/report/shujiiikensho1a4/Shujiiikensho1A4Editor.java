@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1a4;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiikensho1A4ReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -72,6 +73,7 @@ public class Shujiiikensho1A4Editor implements IShujiiikensho1A4Editor {
             source.hihokenshaNo = RString.EMPTY;
             source.hihokenshaName = RString.EMPTY;
         }
+        source.layout = Layouts.鑑;
         return source;
     }
 

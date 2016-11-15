@@ -65,8 +65,8 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
         source.seven_shinsaYY = get年(business.get介護認定審査会開催年月日());
         source.seven_shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.seven_shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
-        source.seven_imgSonotashiryo1 = business.get左のその他資料イメージ(index);
-        source.seven_imgSonotashiryo2 = business.get右のその他資料イメージ(index);
+        source.seven_imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
+        source.seven_imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
         source.layout = Layouts.五頁目;
         return source;
     }

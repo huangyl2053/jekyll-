@@ -123,8 +123,9 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
             }
         }
         if (sonotashiryoBusiness != null) {
-            if (sonotashiryoBusiness.getその他資料() != null && 0 < sonotashiryoBusiness.getその他資料().size()) {
-                for (int i = 0; i < sonotashiryoBusiness.getその他資料().size(); i++) {
+            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
+            if (ファイルPathList != null && 0 < ファイルPathList.size()) {
+                for (int i = 0; i < ファイルPathList.size(); i++) {
                     IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, i);
                     IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
                     reportSourceWriter.writeLine(builder2);

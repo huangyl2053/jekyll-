@@ -41,6 +41,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
     private HokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private int rirekiNo;
+    private int rirekiEdaNo;
     private FlexibleDate ketteiYMD;
     private Decimal honninShiharaiGaku;
     private RString shikyuKubunCode;
@@ -70,6 +71,24 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
         this.insertDantaiCd = insertDantaiCd;
+    }
+
+    /**
+     * rirekiEdaNoのgetメソッドです。
+     *
+     * @return rirekiEdaNo
+     */
+    public int getRirekiEdaNo() {
+        return rirekiEdaNo;
+    }
+
+    /**
+     * rirekiEdaNoのsetメソッドです。
+     *
+     * @param rirekiEdaNo rirekiEdaNo
+     */
+    public void setRirekiEdaNo(int rirekiEdaNo) {
+        this.rirekiEdaNo = rirekiEdaNo;
     }
 
     /**

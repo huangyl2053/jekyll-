@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShi
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouEntityResult;
-import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyou;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -180,7 +180,7 @@ public class KogakuShinseiListDivHandler {
             row.getData6().setValue(koga.getEntity().get高額支給額());
             row.getData7().setValue(koga.getEntity().get決定支給額());
             if (koga.getEntity().get支給区分() != null && !koga.getEntity().get支給区分().isEmpty()) {
-                row.setData8(ShikyuFushikyuKubun.toValue(koga.getEntity().get支給区分()).get名称());
+                row.setData8(ShikyuKubun.toValue(koga.getEntity().get支給区分()).get名称());
             }
             if (受託区分.equals(TWO)) {
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(EIGHT).setVisible(true);

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -485,5 +486,9 @@ public class ShokanKetteiTsuchiShoShiharai {
      */
     public Decimal get差額金額合計() {
         return entity.getSagakuKingakuGokei();
+    }
+    
+    public TokuteiKozaRelateEntity get口座() {
+        return entity.get口座();
     }
 }

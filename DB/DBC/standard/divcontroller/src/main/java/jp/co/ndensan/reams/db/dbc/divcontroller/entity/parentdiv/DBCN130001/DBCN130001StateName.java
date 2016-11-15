@@ -17,7 +17,8 @@ public enum DBCN130001StateName implements IStateEnumerations {
     NoChange(""),
     証明書検索("証明書検索"),
     証明書登録("証明書登録"),
-    処理完了("処理完了");
+    処理完了("処理完了"),
+    証明書登録照会("証明書登録照会");
 
     private final RString name;
 

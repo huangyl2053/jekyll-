@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -702,11 +701,13 @@ public class JikofutangakuShomeishoToroku {
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
         if (shomeisho.get転入前保険者番号().value().equals(div.getCcdTennyumaeHokensha().getHokenjaNo())) {
-            JigyoKogakuGassanJikoFutanGakuShomeisho updateShomeisho = getHandler(div).get更新用事業高額合算自己負担額証明書(被保険者番号, shomeisho);
-            if (manager.get履歴番号(updateShomeisho) != null) {
+
+            Decimal 履歴番号 = manager.get事業高額合算自己負担額証明書最新履歴番号(getHandler(div).getParameterFor登録(被保険者番号));
+            if (履歴番号 != null && !Decimal.ZERO.equals(履歴番号)) {
                 manager.save事業高額合算自己負担額証明書(getHandler(div).get更新用事業高額合算自己負担額証明書1(被保険者番号, shomeisho),
                         getHandler(div).get更新用事業高額合算自己負担額証明書明細1(被保険者番号, meisaiList));
             } else {
+                JigyoKogakuGassanJikoFutanGakuShomeisho updateShomeisho = getHandler(div).get更新用事業高額合算自己負担額証明書(被保険者番号, shomeisho);
                 manager.save事業高額合算自己負担額証明書(updateShomeisho,
                         getHandler(div).get更新用事業高額合算自己負担額証明書明細(被保険者番号, meisaiList));
             }

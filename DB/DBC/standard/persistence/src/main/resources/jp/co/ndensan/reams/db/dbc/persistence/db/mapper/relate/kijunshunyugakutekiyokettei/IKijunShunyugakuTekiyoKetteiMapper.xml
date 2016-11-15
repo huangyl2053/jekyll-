@@ -72,10 +72,11 @@
             AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[>=]]> #{開始日}
             AND "DbT3116KijunShunyugakuTekiyoKanri"."ketteiYMD" <![CDATA[<=]]> #{終了日}
         </if>
-        <if test="印書 == 2">
-            AND （"DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" = '' OR "DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" IS NULL）
+        <if test="印書 == 0">
+            AND ("DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" = '' OR "DbT3116KijunShunyugakuTekiyoKanri"."ketteiTsuchishoHakkoYMD" IS NULL)
         </if>)
         SELECT
+        DISTINCT
         master.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
         FROM

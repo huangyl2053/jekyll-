@@ -71,6 +71,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     private static final RString RSTRING_THREE = new RString("3");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
     private static final RString 申請情報を保存する = new RString("btnSaveHenkoTorisage");
+    private static final RString 申請情報を保存する_申請登録 = new RString("btnSaveShinseiToroku");
     private static final int INT_6 = 6;
     private static final RString 完了メッセージ = new RString("高額合算支給申請情報の登録が完了しました。");
     private static final RString 支給申請書整理番号 = new RString("支給申請書整理番号：");
@@ -88,13 +89,32 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
      * @return ResponseData
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onLoad(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+        KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
+        if (ResponseHolder.isReRequest()
+                && new RString(UrErrorMessages.該当データなし
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            ViewStateHolder.put(ViewStateKeys.チェック回数, false);
+            handler.申請登録状態初期表示に設定();
+            handler.onChange_ddlShinseiTaisyoNendo();
+            handler.onChange_ddlShokisaiHokenshaNo();
+            div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
+            div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
+            div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
+            return ResponseData.of(div).setState(DBC1100011StateName.申請登録);
+        }
+        ViewStateHolder.put(ViewStateKeys.チェック回数, true);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, null);
         ViewStateHolder.put(ViewStateKeys.加入歴状態, null);
         KogakuGassanShinseishoDataResult 引き継ぎデータ
                 = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         RString 照会モード = ViewStateHolder.get(ViewStateKeys.照会モード, RString.class);
-        KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
         KogakuGassanShinseishoHoji 高額合算申請書保持 = handler.initialize(引き継ぎデータ, 照会モード);
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString メニューID = controlData.getMenuID();
+        if (!申請登録状態(メニューID) && 高額合算申請書保持.get高額合算申請書().isEmpty()) {
+            return ResponseData.of(div).addMessage(UrErrorMessages.該当データなし.getMessage()).respond();
+        }
         ViewStateHolder.put(ViewStateKeys.高額合算申請書保持Entity, 高額合算申請書保持);
         if (RString.isNullOrEmpty(照会モード)) {
             前排他の設定(div);
@@ -166,6 +186,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             div.getTabShinseiTorokuPanel2().setVisible(true);
             div.getTabShinseiTorokuPanel3().setVisible(true);
             div.getTabShinseiTorokuPanel4().setVisible(true);
+        }
+        boolean flg
+                = ViewStateHolder.get(ViewStateKeys.チェック回数, Boolean.class);
+        if (DBC1100011StateName.申請登録.getName().equals(ResponseHolder.getState())
+                && !flg) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する_申請登録, true);
         }
         return ResponseData.of(div).rootTitle(タイトル).respond();
     }
@@ -250,7 +276,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoHoji 高額合算申請書保持
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
         handler.onClick_btnShinseiJohoModoru();
-        if (DBCMN61001.equals(メニューID) || DBCMN61005.equals(メニューID) || DBCMN61009.equals(メニューID)) {
+        if (申請登録状態(メニューID)) {
             handler.申請登録状態初期設定();
             handler.onChange_ddlShinseiTaisyoNendo();
             handler.onChange_ddlShokisaiHokenshaNo();
@@ -285,6 +311,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         ViewStateHolder.put(ViewStateKeys.高額合算申請書, 高額合算申請書Relate);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 追加);
         return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
+    }
+
+    private boolean 申請登録状態(RString メニューID) {
+        return DBCMN61001.equals(メニューID) || DBCMN61005.equals(メニューID) || DBCMN61009.equals(メニューID);
     }
 
     /**

@@ -83,6 +83,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_7 = 7;
+    private static final int 履歴番号枝番 = 1;
 
     /**
      * 初期化
@@ -802,7 +803,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             entity = new KogakuShikyuHanteiKekka(被保険者番号,
                     サービス年月, 証記載保険者番号, 履歴番号).createBuilderForEdit().build();
         }
+
         entity = clearKogakuShikyuHanteiKekka(entity);
+        entity = entity.createBuilderForEdit().set履歴番号枝番(履歴番号枝番).build();
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日() != null) {
             entity = entity.createBuilderForEdit().set決定年月日(new FlexibleDate(
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日().toString())).build();
@@ -832,6 +835,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             entity = new JigyoKogakuShikyuHanteiKekka(被保険者番号,
                     サービス年月, 証記載保険者番号, new Decimal(履歴番号)).createBuilderForEdit().build();
         }
+        entity = entity.createBuilderForEdit().set履歴番号枝番(履歴番号枝番).build();
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日() != null) {
             entity = entity.createBuilderForEdit().set決定年月日(new FlexibleDate(
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日().toString())).build();
@@ -861,6 +865,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             entity = entity.createBuilderForEdit().set受付年月日(
                     new FlexibleDate(div.getShinseiTorokuPanel().
                             getCcdKogakuServicehiDetail().get受付日().toString())).build();
+        } else {
+            entity = entity.createBuilderForEdit().set受付年月日(FlexibleDate.EMPTY).build();
         }
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日() != null) {
             entity = entity.createBuilderForEdit().set決定年月日(new FlexibleDate(
@@ -868,7 +874,11 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             entity = entity.createBuilderForEdit().set審査年月(new FlexibleYearMonth(
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                     get決定日().getYearMonth().toString())).build();
+        } else {
+            entity = entity.createBuilderForEdit().set決定年月日(FlexibleDate.EMPTY).build();
+            entity = entity.createBuilderForEdit().set審査年月(FlexibleYearMonth.EMPTY).build();
         }
+
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支払金額合計() != null) {
             entity = entity.createBuilderForEdit().set利用者負担額(
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支払金額合計().intValue()).build();
