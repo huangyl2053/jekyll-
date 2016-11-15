@@ -127,7 +127,10 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
         } else {
             excute総合事業分();
         }
-        executeStep(白紙発行);
+        
+        if (KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.白紙 == getParameter().getChushutsuJoken()) {
+            executeStep(白紙発行);
+        }
     }
 
     private void excute高額分() {
