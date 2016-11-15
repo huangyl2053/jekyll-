@@ -160,6 +160,11 @@ public class HonsanteiIdoKanendoFukaKakutei {
                 idofukaKakutei.getFukaKakuteiEntity().set更正前減免額(dbtFukaEntity.
                         getNengakuHokenryo2());
                 idofukaKakutei.getFukaKakuteiEntity().set更正前確定介護保険料(dbtFukaEntity.getKakuteiHokenryo());
+                idofukaKakutei.getFukaKakuteiEntity().set更正前履歴番号(dbtFukaEntity.getRirekiNo());
+                idofukaKakutei.getFukaKakuteiEntity().set更正前被保険者番号(dbtFukaEntity.getHihokenshaNo());
+                idofukaKakutei.getFukaKakuteiEntity().set更正前更正月(dbtFukaEntity.getKoseiM());
+                idofukaKakutei.getFukaKakuteiEntity().set更正前調定日時(dbtFukaEntity.getChoteiNichiji());
+                idofukaKakutei.getFukaKakuteiEntity().set更正前賦課期日(dbtFukaEntity.getFukaYMD());
             }
         }
     }
