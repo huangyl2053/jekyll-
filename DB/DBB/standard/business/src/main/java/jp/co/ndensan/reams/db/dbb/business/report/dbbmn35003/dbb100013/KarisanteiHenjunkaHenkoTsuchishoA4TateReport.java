@@ -184,13 +184,15 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<Karisan
 
             if (編集後仮算定通知書共通情報.get編集後口座().isゆうちょ銀行()) {
                 item.setBankName(RString.EMPTY);
+                item.setKozaShurui(RString.EMPTY);
             } else if (!RString.isNullOrEmpty(編集後仮算定通知書共通情報.get編集後口座().get金融機関コード())
                     && !RString.isNullOrEmpty(編集後仮算定通知書共通情報.get編集後口座().get支店コード())) {
                 item.setBankName(編集後仮算定通知書共通情報.get編集後口座().get金融機関名CombinedWith支店名());
+                item.setKozaShurui(編集後仮算定通知書共通情報.get編集後口座().get口座種別略称());
             } else {
                 item.setBankName(RString.EMPTY);
+                item.setKozaShurui(RString.EMPTY);
             }
-            item.setKozaShurui(編集後仮算定通知書共通情報.get編集後口座().get口座種別略称());
             item.setKozaNo(編集後仮算定通知書共通情報.get編集後口座().get番号名称());
             item.setKozaMeigi(編集後仮算定通知書共通情報.get編集後口座().get口座名義人優先());
         }
