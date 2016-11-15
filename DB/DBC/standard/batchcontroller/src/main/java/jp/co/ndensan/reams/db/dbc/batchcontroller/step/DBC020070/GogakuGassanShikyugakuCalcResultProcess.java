@@ -56,6 +56,7 @@ public class GogakuGassanShikyugakuCalcResultProcess extends BatchProcessBase<Db
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
+    private List<RString> breakItemIds;
 
     /**
      * 送付対象データ取得です。
@@ -85,6 +86,7 @@ public class GogakuGassanShikyugakuCalcResultProcess extends BatchProcessBase<Db
 
     @Override
     protected void initialize() {
+        breakItemIds = new ArrayList<>();
         hasData = false;
         dataFlag = new OutputParameter<>();
         出力順 = ReportUtil.get出力順ID(SubGyomuCode.DBC介護給付, parameter.get出力順ID(), ReportIdDBC.DBC200204.getReportId());
@@ -191,7 +193,7 @@ public class GogakuGassanShikyugakuCalcResultProcess extends BatchProcessBase<Db
             param.set市町村名(自市町村名);
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200204.getReportId().value()).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-            GassanJigyobunKekkaIchiranReport report = new GassanJigyobunKekkaIchiranReport(param, 出力順, 自市町村コード);
+            GassanJigyobunKekkaIchiranReport report = new GassanJigyobunKekkaIchiranReport(param, 出力順, 自市町村コード, breakItemIds);
             report.writeBy(reportSourceWriter);
             batchReportWriter.close();
         }
