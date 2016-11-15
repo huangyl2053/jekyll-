@@ -94,6 +94,12 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setShikakuShutokuJiyu(資格情報.get資格取得事由コード());
         賦課情報.setShikakuSoshitsuYMD(資格情報.get資格喪失年月日());
         賦課情報.setShikakuSoshitsuJiyu(資格情報.get資格喪失事由コード());
+
+        賦課情報.setSeihofujoShurui(RString.EMPTY);
+        賦課情報.setSeihoKaishiYMD(FlexibleDate.EMPTY);
+        賦課情報.setSeihoHaishiYMD(FlexibleDate.EMPTY);
+        賦課情報.setRonenKaishiYMD(FlexibleDate.EMPTY);
+        賦課情報.setRonenHaishiYMD(FlexibleDate.EMPTY);
         FlexibleDate 賦課年度開始日 = new FlexibleDate(調定年度.getYearValue(), NUM_4, NUM_1);
         FlexibleDate 賦課年度終了日 = new FlexibleDate(調定年度.getYearValue() + NUM_1, NUM_3, NUM_31);
         FlexibleDate 生保情報_受給開始日;

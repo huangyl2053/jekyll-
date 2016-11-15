@@ -1436,7 +1436,7 @@ public class SokujiFukaKouseiMainHandler {
                 return Boolean.FALSE;
             }
         }
-        return 処理状況リスト.isEmpty();
+        return Boolean.TRUE;
     }
 
     private void set過年度の徴収情報(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
