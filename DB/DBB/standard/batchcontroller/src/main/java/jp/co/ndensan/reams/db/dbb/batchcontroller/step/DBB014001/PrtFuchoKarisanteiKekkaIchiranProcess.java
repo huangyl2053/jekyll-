@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -371,7 +372,8 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         csvEntity.set連番(new RString(連番));
         YubinNo yubinNo = 普徴仮算定計算後賦課Entity.get宛名の情報().getYubinNo();
         csvEntity.set郵便番号(yubinNo == null ? RString.EMPTY : yubinNo.getYubinNo());
-        csvEntity.set住所(編集後個人.get編集後住所());
+        AtenaJusho jusho = 普徴仮算定計算後賦課Entity.get宛名の情報().getJusho();
+        csvEntity.set住所(jusho == null ? RString.EMPTY : jusho.getColumnValue());
         csvEntity.set町域管内管外住所(kojin.get住所().get住所());
         AtenaBanchi banchi = 普徴仮算定計算後賦課Entity.get宛名の情報().getBanchi();
         csvEntity.set番地(banchi == null ? RString.EMPTY : banchi.getColumnValue());
