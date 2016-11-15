@@ -80,15 +80,10 @@ public enum ReportIdDBC {
      */
     DBC200097(new ReportId("DBC200097_KyufuJissekiTorikeshiIchiran"), new RString("給付実績取消一覧表")),
     /**
-     * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
+     * 高額サービス給付のお知らせ通知書（提出期限あり）
      */
-    DBC100011_申請分(new ReportId("DBC100011_KogakuOshiraseTsuchiTeshutsuKigenAriShoShokai"),
-            new RString("高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）")),
-    /**
-     * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
-     */
-    DBC100011_償還分(new ReportId("DBC100011_KogakuOshiraseTsuchiShoTeshutsuKigenAriJidoShokan"),
-            new RString("高額サービス給付のお知らせ通知書（自動償還分）（提出期限あり）")),
+    DBC100011_Ari(new ReportId("DBC100011_KogakuOshiraseTsuchiTeshutsuKigenAri"),
+            new RString("高額サービス給付のお知らせ通知書（提出期限あり）")),
     /**
      * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限なし）
      */

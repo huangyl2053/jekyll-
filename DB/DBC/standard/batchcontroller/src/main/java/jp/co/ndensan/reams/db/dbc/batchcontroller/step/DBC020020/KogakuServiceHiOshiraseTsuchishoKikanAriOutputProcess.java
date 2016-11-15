@@ -101,18 +101,18 @@ public class KogakuServiceHiOshiraseTsuchishoKikanAriOutputProcess extends Batch
 
     @Override
     protected void createWriter() {
-        通常分BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_申請分.getReportId().value()).create();
+        通常分BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_Ari.getReportId().value()).create();
         通常分ReportSourceWriter = new ReportSourceWriter<>(通常分BatchReportWriter);
 
-        自動償還分BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_償還分.getReportId().value()).create();
+        自動償還分BatchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100011_Ari.getReportId().value()).create();
         自動償還分ReportSourceWriter = new ReportSourceWriter<>(自動償還分BatchReportWriter);
     }
 
     @Override
     protected void beforeExecute() {
-        認証者情報_通常分 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_申請分.getReportId(), FlexibleDate.getNowDate(),
+        認証者情報_通常分 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_Ari.getReportId(), FlexibleDate.getNowDate(),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, 通常分ReportSourceWriter);
-        認証者情報_償還分 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_償還分.getReportId(), FlexibleDate.getNowDate(),
+        認証者情報_償還分 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100011_Ari.getReportId(), FlexibleDate.getNowDate(),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, 自動償還分ReportSourceWriter);
 
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
