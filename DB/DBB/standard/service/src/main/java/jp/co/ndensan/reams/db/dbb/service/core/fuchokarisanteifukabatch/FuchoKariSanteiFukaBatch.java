@@ -235,11 +235,11 @@ public class FuchoKariSanteiFukaBatch {
         List<Decimal> 普徴期別金額リスト = new ArrayList<>();
         Decimal 金額リスト0 = Decimal.ZERO;
         Decimal 金額リスト1 = Decimal.ZERO;
-        RDate 調定年度開始日 = new RDate(調定年度.getYearValue(), NUM_4, NUM_1);
+        RDate 調定年度開始日 = new RDate(調定年度.getYearValue() - NUM_1, NUM_4, NUM_1);
         RString 仮算定端数調整有無 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無, 調定年度開始日, SubGyomuCode.DBB介護賦課);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
         KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
-        int 期 = 期月リスト.filtered仮算定期間().toList().size();
+        int 期 = 期月リスト.get最終法定納期().get期AsInt();
         if (区分_新規.equals(区分)) {
             int 納期数 = 0;
             RString 仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
