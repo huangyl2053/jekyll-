@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.Juky
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo.IJukyushaIdoRenrakuhyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0210011.JukyushaIdoRenrakuhyoTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoToroku;
+import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotoroku.JukyushaTeiseiRenrakuhyoToroku;
 import jp.co.ndensan.reams.db.dbc.service.report.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoPrintSevice;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -71,6 +73,21 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
         ExpandedInformation expandedInfo = new ExpandedInformation(THREE, 被保険者番号R, 被保険者番号);
         return PersonalData.of(識別コード, expandedInfo);
+    }
+
+    /**
+     * Save時アクセスログ出力します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return boolean
+     */
+    public boolean get被保険者番号チェック(HihokenshaNo 被保険者番号) {
+        if (JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanDbT4001JukyushaDaicho(被保険者番号)) {
+            if (JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanDbT3105SogoJigyoTaishosha(被保険者番号)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

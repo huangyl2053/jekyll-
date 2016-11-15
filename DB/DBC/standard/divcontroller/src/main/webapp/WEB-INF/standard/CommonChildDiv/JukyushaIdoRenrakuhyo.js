@@ -77,8 +77,8 @@ var DBC;
 
                     this.controls.btnKyufuSeigenRireki().disabled = false;
                     this.controls.radKohiFutanJogenGengakuAriFlag().disabled = false;
-                    this.controls.txtShokanbaraikaYMD().disabled = true;
-                    this.controls.txtKyufuritsuHikisage().disabled = true;
+                    this.controls.txtShokanbaraikaYMD().disabled = false;
+                    this.controls.txtKyufuritsuHikisage().disabled = false;
 
                     this.controls.txtRiyosyaFutanWariaiYukoYMD().disabled = false;
 
