@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaig
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuhi.ServiceKeikakuHiRealtEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokanShinseiJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
@@ -213,7 +214,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     /**
      * 償還払データ登録更新。
      *
-     * @param DB情報 DB情報
+     * @param db情報 DbJohoViewState
      * @param 修正前支給区分 修正前支給区分
      * @param 決定日 決定日
      * @param 被保険者番号 被保険者番号
@@ -223,7 +224,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * @param 識別コード 識別コード
      */
     public void insupdShokan(
-            RString DB情報,
+            DbJohoViewState db情報,
             RString 修正前支給区分,
             FlexibleDate 決定日,
             HihokenshaNo 被保険者番号,
@@ -231,6 +232,17 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             RString 整理番号,
             RString 画面モード,
             ShikibetsuCode 識別コード) {
+        InsupdShokanManager manager = InsupdShokanManager.createInstance();
+
+        if (db情報.getShokanShinsei() != null) {
+            manager.update償還払支給申請(db情報);
+        }
+        manager.update証明書(db情報, サービス提供年月);
+        ShokanHanteiKekka shokanHanteiKekka = db情報.getShokanHanteiKekka();
+        if (shokanHanteiKekka != null) {
+            manager.update償還払支給判定結果(shokanHanteiKekka);
+        }
+        manager.実績編集の処理(修正前支給区分, 決定日, 被保険者番号, サービス提供年月, 整理番号, 画面モード, 識別コード);
 
     }
 
