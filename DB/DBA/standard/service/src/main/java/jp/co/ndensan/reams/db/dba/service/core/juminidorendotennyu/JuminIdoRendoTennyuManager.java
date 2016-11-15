@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.KouikiGappeiJyoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
@@ -574,8 +572,6 @@ public class JuminIdoRendoTennyuManager {
             FlexibleDate 登録届出日,
             UaFt200FindShikibetsuTaishoEntity 処理対象者,
             HihokenshaNo 被保険者番号) {
-        HihokenshaDaicho business = new HihokenshaDaicho(被保険者番号, 登録異動日, 枝番);
-        HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setState(EntityDataState.Added);
         entity.setHihokenshaNo(被保険者番号);
@@ -595,7 +591,6 @@ public class JuminIdoRendoTennyuManager {
         entity.setJushochiTokureiFlag(特例フラグ);
         entity.setKoikinaiJushochiTokureiFlag(特例フラグ);
         entity.setLogicalDeletedFlag(false);
-        喪失被保険者list.add(builder.build().toEntity());
         dbT1001Dac.save(entity);
         喪失被保険者list.add(entity);
     }
