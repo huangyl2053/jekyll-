@@ -97,6 +97,12 @@ public class JikofutangakuShomeishoToroku {
         div.setExecutionStatus(STATUS_新規);
         getHandler(div).set登録情報();
         getHandler(div).set証明書登録To読取専用(false);
+        div.getTxtTorokuTaishoNendo().setReadOnly(true);
+        div.getTxtTorokuShokisaiHokenshaNo().setReadOnly(true);
+        div.getTxtTorokuShikyuShinseishoSeiriNo().setReadOnly(true);
+        div.getTxtTorokuRirekiNo().setReadOnly(true);
+        div.getTxtJikofutangakuGokei().setReadOnly(true);
+        div.getTxtUchiFutangakuGokei().setReadOnly(true);
         return ResponseData.of(div).setState(DBCN130001StateName.証明書登録);
     }
 
@@ -169,6 +175,12 @@ public class JikofutangakuShomeishoToroku {
             getHandler(div).set登録情報(list);
         }
         getHandler(div).set証明書登録To読取専用(false);
+        div.getTxtTorokuTaishoNendo().setReadOnly(true);
+        div.getTxtTorokuShokisaiHokenshaNo().setReadOnly(true);
+        div.getTxtTorokuShikyuShinseishoSeiriNo().setReadOnly(true);
+        div.getTxtTorokuRirekiNo().setReadOnly(true);
+        div.getTxtJikofutangakuGokei().setReadOnly(true);
+        div.getTxtUchiFutangakuGokei().setReadOnly(true);
         div.setExecutionStatus(STATUS_修正);
         return ResponseData.of(div).respond();
     }
