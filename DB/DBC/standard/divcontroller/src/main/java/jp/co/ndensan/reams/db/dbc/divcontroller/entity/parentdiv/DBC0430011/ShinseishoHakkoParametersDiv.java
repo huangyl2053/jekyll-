@@ -4,28 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * ShinseishoHakkoParameters のクラスファイル
- *
- * @reamsid_L DBC-4770-010 zhengshenlei
+ * ShinseishoHakkoParameters のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,8 +36,8 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     private RadioButton radHihokenshaNo;
     @JsonProperty("txtHihokenshaNo")
     private TextBox txtHihokenshaNo;
-    @JsonProperty("btnHihokenshaSearch")
-    private ButtonDialog btnHihokenshaSearch;
+    @JsonProperty("btniHokenSearch")
+    private Button btniHokenSearch;
     @JsonProperty("ddlServiceYM")
     private DropDownList ddlServiceYM;
     @JsonProperty("radHakushiInsatsu")
@@ -152,21 +146,21 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     /*
-     * getbtnHihokenshaSearch
-     * @return btnHihokenshaSearch
+     * getbtniHokenSearch
+     * @return btniHokenSearch
      */
-    @JsonProperty("btnHihokenshaSearch")
-    public ButtonDialog getBtnHihokenshaSearch() {
-        return btnHihokenshaSearch;
+    @JsonProperty("btniHokenSearch")
+    public Button getBtniHokenSearch() {
+        return btniHokenSearch;
     }
 
     /*
-     * setbtnHihokenshaSearch
-     * @param btnHihokenshaSearch btnHihokenshaSearch
+     * setbtniHokenSearch
+     * @param btniHokenSearch btniHokenSearch
      */
-    @JsonProperty("btnHihokenshaSearch")
-    public void setBtnHihokenshaSearch(ButtonDialog btnHihokenshaSearch) {
-        this.btnHihokenshaSearch = btnHihokenshaSearch;
+    @JsonProperty("btniHokenSearch")
+    public void setBtniHokenSearch(Button btniHokenSearch) {
+        this.btniHokenSearch = btniHokenSearch;
     }
 
     /*
@@ -259,7 +253,7 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtSakuseiDate(TextBoxFlexibleDate txtSakuseiDate) {
+    public void  setTxtSakuseiDate(TextBoxFlexibleDate txtSakuseiDate) {
         this.getShutsuryokuTaisho().setTxtSakuseiDate(txtSakuseiDate);
     }
 
@@ -269,7 +263,7 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
+    public void  setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
         this.getShutsuryokuTaisho().setChkShutsuryokuTaisho(chkShutsuryokuTaisho);
     }
 
@@ -279,7 +273,7 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setRadKinyoKikanmeiHyoji(RadioButton radKinyoKikanmeiHyoji) {
+    public void  setRadKinyoKikanmeiHyoji(RadioButton radKinyoKikanmeiHyoji) {
         this.getShutsuryokuTaisho().setRadKinyoKikanmeiHyoji(radKinyoKikanmeiHyoji);
     }
 
@@ -289,7 +283,7 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtShinseishoTeishutsuKigen(TextBoxFlexibleDate txtShinseishoTeishutsuKigen) {
+    public void  setTxtShinseishoTeishutsuKigen(TextBoxFlexibleDate txtShinseishoTeishutsuKigen) {
         this.getShutsuryokuTaisho().setTxtShinseishoTeishutsuKigen(txtShinseishoTeishutsuKigen);
     }
 
@@ -299,7 +293,7 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setChkHakkoIchiranhyoHakko(CheckBoxList chkHakkoIchiranhyoHakko) {
+    public void  setChkHakkoIchiranhyoHakko(CheckBoxList chkHakkoIchiranhyoHakko) {
         this.getShutsuryokuTaisho().setChkHakkoIchiranhyoHakko(chkHakkoIchiranhyoHakko);
     }
 
@@ -314,7 +308,7 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
+    public void  setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
         this.getJidoShokanTaishoJohoSettei().setTxtShinseiDate(txtShinseiDate);
     }
 
@@ -324,7 +318,7 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtUketsukeDate(TextBoxFlexibleDate txtUketsukeDate) {
+    public void  setTxtUketsukeDate(TextBoxFlexibleDate txtUketsukeDate) {
         this.getJidoShokanTaishoJohoSettei().setTxtUketsukeDate(txtUketsukeDate);
     }
 
@@ -334,7 +328,7 @@ public class ShinseishoHakkoParametersDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtKetteiDate(TextBoxFlexibleDate txtKetteiDate) {
+    public void  setTxtKetteiDate(TextBoxFlexibleDate txtKetteiDate) {
         this.getJidoShokanTaishoJohoSettei().setTxtKetteiDate(txtKetteiDate);
     }
 
