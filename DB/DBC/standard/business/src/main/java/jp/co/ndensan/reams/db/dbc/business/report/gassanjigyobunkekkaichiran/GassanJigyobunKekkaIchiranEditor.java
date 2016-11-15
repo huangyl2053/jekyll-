@@ -214,16 +214,16 @@ public class GassanJigyobunKekkaIchiranEditor implements
         if (returnList.size() > INDEX_0) {
             改頁１ = returnList.get(INDEX_0);
         }
-        if (list.size() > INDEX_1) {
+        if (returnList.size() > INDEX_1) {
             改頁２ = RString.EMPTY;
         }
-        if (list.size() > INDEX_2) {
+        if (returnList.size() > INDEX_2) {
             改頁３ = returnList.get(INDEX_2);
         }
-        if (list.size() > INDEX_3) {
+        if (returnList.size() > INDEX_3) {
             改頁４ = RString.EMPTY;
         }
-        if (list.size() > INDEX_4) {
+        if (returnList.size() > INDEX_4) {
             改頁５ = returnList.get(INDEX_4);
         }
 
