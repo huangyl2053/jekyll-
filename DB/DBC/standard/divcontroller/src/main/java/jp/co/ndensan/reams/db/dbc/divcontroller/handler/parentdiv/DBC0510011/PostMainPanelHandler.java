@@ -72,6 +72,9 @@ public class PostMainPanelHandler {
     private static final RString 広域の場合 = new RString("広域の場合");
     private static final RString 単一国保情報 = new RString("21_DBU_KOKUHO_0000.txt");
     private static final RString 広域後期情報 = new RString("22_DBU_KOUKI_0000.txt");
+    private static final RString 国保情報 = new RString("21_DBU_KOKUHO_処理枝番.txt");
+    private static final RString 後期情報 = new RString("22_DBU_KOUKI_処理枝番.txt");
+    private static final RString 定値_処理枝番 = new RString("処理枝番");
     private final Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).
             get導入形態コード();
 
@@ -101,18 +104,19 @@ public class PostMainPanelHandler {
                     getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報().get市町村コード().toString()));
             ShoriDateKanri 処理日付管理マスタ;
             ShoriDateKanriManager manager = new ShoriDateKanriManager();
-            if (ResponseHolder.getMenuID().equals(DBCMN82001) && SharedFile.searchSharedFile(単一国保情報) != null) {
+            if (ResponseHolder.getMenuID().equals(DBCMN82001) && SharedFile.searchSharedFile(単一国保情報) != null
+                    && SharedFile.searchSharedFile(単一国保情報).get(0) != null) {
                 処理日付管理マスタ = manager.get処理日付管理マスタ(国保情報取り込み, 処理枝番);
                 処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに国保の情報);
                 List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(単一国保情報);
                 setTime(国保情報List.get(0).getSharedFileId());
-            } else {
-                if (ResponseHolder.getMenuID().equals(DBCMN82002) && SharedFile.searchSharedFile(広域後期情報) != null) {
-                    処理日付管理マスタ = manager.get処理日付管理マスタ(後期高齢者情報取り込み, 処理枝番);
-                    処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに後期高齢の情報);
-                    List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(広域後期情報);
-                    setTime(後期情報List.get(0).getSharedFileId());
-                }
+            }
+            if (ResponseHolder.getMenuID().equals(DBCMN82002) && SharedFile.searchSharedFile(広域後期情報) != null
+                    && SharedFile.searchSharedFile(広域後期情報).get(0) != null) {
+                処理日付管理マスタ = manager.get処理日付管理マスタ(後期高齢者情報取り込み, 処理枝番);
+                処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに後期高齢の情報);
+                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(広域後期情報);
+                setTime(後期情報List.get(0).getSharedFileId());
             }
             RString 連携形式 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保格納場所, RDate.getNowDate(),
                     SubGyomuCode.DBC介護給付);
@@ -191,7 +195,7 @@ public class PostMainPanelHandler {
             dgShichoson_Row items = new dgShichoson_Row();
             items.setBango(new RString(String.valueOf(bango)));
             if (!市町村識別ID.equals(NUM_00)) {
-                items.setSelectable(Boolean.FALSE);
+//                items.setSelectable(Boolean.FALSE);
                 items.setSelected(Boolean.TRUE);
             }
             if (!RString.isNullOrEmpty(item.get(0))) {
@@ -217,6 +221,20 @@ public class PostMainPanelHandler {
                 items.setKoikiTorikomiNitiji(RString.EMPTY);
             }
             items.setShichosonShikibetuID(new RString(item.get(NUM_4).toString()));
+            RString 後期 = 後期情報.replace(定値_処理枝番, NUM_00.concat(items.getShichosonShikibetuID()));
+            if (ResponseHolder.getMenuID().equals(DBCMN82002) && SharedFile.searchSharedFile(後期) != null
+                    && SharedFile.searchSharedFile(後期).size() > 0 && SharedFile.searchSharedFile(後期).get(0) != null) {
+                List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期);
+                items.setFileNitiji(new RString(DateConverter.toWarekiHalf_Zero(後期情報List.get(0).getSharedFileId().getDate()).toString().
+                        concat(RString.HALF_SPACE.toString()).concat(DateConverter.getTime141(後期情報List.get(0).getSharedFileId().getTime()).toString())));
+            }
+            RString 国保 = 国保情報.replace(定値_処理枝番, NUM_00.concat(items.getShichosonShikibetuID()));
+            if (ResponseHolder.getMenuID().equals(DBCMN82001) && SharedFile.searchSharedFile(国保) != null
+                    && SharedFile.searchSharedFile(国保).size() > 0 && SharedFile.searchSharedFile(国保).get(0) != null) {
+                List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(国保);
+                items.setFileNitiji(new RString(DateConverter.toWarekiHalf_Zero(国保情報List.get(0).getSharedFileId().getDate()).toString().
+                        concat(RString.HALF_SPACE.toString()).concat(DateConverter.getTime141(国保情報List.get(0).getSharedFileId().getTime()).toString())));
+            }
             bango = bango + 1;
             listDataSource.add(items);
         }
