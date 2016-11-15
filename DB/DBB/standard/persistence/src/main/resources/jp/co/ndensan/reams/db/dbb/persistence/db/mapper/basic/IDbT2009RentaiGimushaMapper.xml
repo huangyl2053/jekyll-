@@ -56,5 +56,16 @@
         FROM
         rgdb."DbT2009RentaiGimusha"
     </select>
+    
+    <select resultOrdered="true" id="selectBy連帯納付義務者_履歴番号" parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+            resultMap="ResultMap_DbT2009RentaiGimushaEntity" fetchSize="500">
+        SELECT
+        <include refid="allColumns_DbT2009RentaiGimusha" />
+        FROM
+        rgdb."DbT2009RentaiGimusha"
+        WHERE
+            "hihokenshaNo" = #{hihokenshaNo}
+        ORDER BY "rirekiNo" DESC Limit 1
+    </select>
 
 </mapper>
