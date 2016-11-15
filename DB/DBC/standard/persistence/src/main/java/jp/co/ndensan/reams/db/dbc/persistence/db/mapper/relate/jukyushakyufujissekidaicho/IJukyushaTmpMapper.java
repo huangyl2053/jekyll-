@@ -45,14 +45,14 @@ public interface IJukyushaTmpMapper {
      *
      * @return List<KinkyuuziShisetuRyouyouEntity>
      */
-    List<KinkyuuziShisetuRyouyouEntity> get緊急時施設療養();
+    List<KinkyuuziShisetuRyouyouEntity> get施設療養();
 
     /**
      * 特定診療費・特別療養費取得です。
      *
      * @return List<TokuteiShinryouHiEntity>
      */
-    List<TokuteiShinryouHiEntity> get特定診療費();
+    List<TokuteiShinryouHiEntity> get特別療養();
 
     /**
      * 計画費取得です。
