@@ -17,9 +17,15 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.FutyoKarisanteiKekkaIcihiranDataCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FuchoKariKeisanGoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FutsuChoshuKarisanteiKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -92,9 +98,14 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     private final ReportId 帳票分類ID = new ReportId(new RString("DBB200009_HonsanteiKekkaIcihiran"));
     private static final RString TITLE_調定年度 = new RString("【調定年度】　");
     private static final RString TITLE_賦課年度 = new RString("【賦課年度】　");
+    private static final RString 徴収方法_普通徴収 = new RString("普通徴収");
+    private static final RString 徴収方法_併用徴収 = new RString("併用徴収");
     private static final RString 定数_年度 = new RString("年度");
     private static final RString CSV出力有無_有り = new RString("有り");
     private static final RString DOT = new RString("*");
+    private static final Decimal 月処理区分_5 = new Decimal("5");
+    private static final int NUM_1 = 1;
+    private static final int NUM_4 = 4;
     private RString eucFilePath;
     FileSpoolManager spoolManager;
     private DbT2015KeisangoJohoEntity 計算後情報;
@@ -106,6 +117,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     private List<RString> pageBreakKeys;
     private List<RString> 出力項目リスト;
     private List<RString> 改頁項目リスト;
+    private RDate 調定年度開始日;
 
     @BatchWriter
     private BatchReportWriter<FutsuChoshuKarisanteiKekkaIchiranSource> batchReportWriter;
@@ -121,7 +133,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         mybatisParameter = parameter.toMybatisParameter();
         mybatisParameter.set特別徴収対象者情報(TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード());
         mybatisParameter.set特別徴収追加候補者情報(TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード());
-
+        調定年度開始日 = new RDate(parameter.get調定年度().getYearValue(), NUM_4, NUM_1);
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         連番 = 0;
         if (parameter.get出力順ID() != null) {
@@ -401,13 +413,17 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         csvEntity.set前年度情報の最終普徴額(get前年度情報の最終普徴額(普徴仮算定計算後賦課Entity));
         if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null) {
             csvEntity.set前年度情報の確定保険料額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getKakuteiHokenryo().toString()));
+            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getFukaNendo());
+            KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
+            Kitsuki 最終法定納期 = 普徴期月リスト.get最終法定納期();
+            int 期 = 最終法定納期.get期AsInt();
+            csvEntity.set前年度情報の計算納期数(new RString(期));
+            csvEntity.set前年度情報の賦課納期数(get賦課納期数(調定年度開始日, 普徴仮算定計算後賦課Entity.get前年度賦課の情報(), 期, 普徴期月リスト));
         }
-        csvEntity.set前年度情報の計算納期数(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
-        csvEntity.set前年度情報の賦課納期数(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
         csvEntity.set仮算定時保険料段階(保険料段階List.getBy段階区分(普徴仮算定計算後賦課Entity.get保険料段階仮算定時()).get表記());
         csvEntity.set新規資格適用段階対象者(普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号() == null
                 ? DOT : 普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号().getColumnValue());
-
+        csvEntity.set徴収方法(get徴収方法(普徴仮算定計算後賦課Entity));
         csvEntity.set普通徴収仮徴収額_4月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額01()));
         csvEntity.set普通徴収仮徴収額_5月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額02()));
         csvEntity.set普通徴収仮徴収額_6月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額03()));
@@ -415,6 +431,71 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         csvEntity.set普通徴収仮徴収額_8月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額05()));
         csvEntity.set普通徴収仮徴収額_9月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額06()));
         return csvEntity;
+    }
+
+    private RString get賦課納期数(RDate 調定年度開始日, FukaJohoTempEntity 前年度賦課情報, int 期, KitsukiList 期月リスト) {
+        int 納期数 = 0;
+        List<RString> 月処理区分list = new ArrayList<>();
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分1, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分2, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分3, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分4, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分5, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分6, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分7, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分8, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分9, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分10, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分11, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分12, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分13, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        月処理区分list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分14, 調定年度開始日, SubGyomuCode.DBB介護賦課));
+        List<Decimal> 普徴期別金額list = new ArrayList<>();
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku01());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku02());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku03());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku04());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku05());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku06());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku07());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku08());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku09());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku10());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku11());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku12());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku13());
+        普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku14());
+        for (int i = 1; i <= 期; i++) {
+            boolean flag = true;
+            for (Kitsuki kitsuki : 期月リスト.get期の月(i)) {
+                int 月 = kitsuki.get月AsInt();
+                Decimal 月処理区分 = new Decimal(月処理区分list.get(月 - 1).toString());
+                Decimal 普徴期別金額 = 普徴期別金額list.get(i - 1) == null ? Decimal.ZERO : 普徴期別金額list.get(i - 1);
+                if (月処理区分.compareTo(月処理区分_5) <= 0
+                        && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
+                    flag = false;
+                }
+            }
+            if (flag) {
+                納期数++;
+            }
+        }
+        return new RString(納期数);
+    }
+
+    private RString get徴収方法(FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課Entity) {
+        Decimal 特徴期別金額01 = 普徴仮算定計算後賦課Entity.get特徴期別金額01() == null
+                ? Decimal.ZERO : 普徴仮算定計算後賦課Entity.get特徴期別金額01();
+        Decimal 特徴期別金額02 = 普徴仮算定計算後賦課Entity.get特徴期別金額02() == null
+                ? Decimal.ZERO : 普徴仮算定計算後賦課Entity.get特徴期別金額02();
+        Decimal 特徴期別金額03 = 普徴仮算定計算後賦課Entity.get特徴期別金額03() == null
+                ? Decimal.ZERO : 普徴仮算定計算後賦課Entity.get特徴期別金額03();
+        Decimal 合計値 = 特徴期別金額01.add(特徴期別金額02).
+                add(特徴期別金額03);
+        if (NUM_1 <= 合計値.intValue()) {
+            return 徴収方法_併用徴収;
+        }
+        return 徴収方法_普通徴収;
     }
 
     private RString getDecimal(Decimal dec) {

@@ -13,11 +13,11 @@ public enum KyuSochiNyushoshaTokureiCode {
     /**
      * コード:1 名称:無し 略称:定義なし
      */
-    無し("1", "無し"),
+    無し("0", "無し"),
     /**
      * コード:2 名称:有り 略称:定義なし
      */
-    有り("2", "有り");
+    有り("1", "有り");
 
     private final RString code;
     private final RString fullName;
