@@ -1626,7 +1626,8 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.PrtKetteiTsuchishoParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*,
+            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
             "TmpHonsanteiTsuchisho" AS A
         WHERE

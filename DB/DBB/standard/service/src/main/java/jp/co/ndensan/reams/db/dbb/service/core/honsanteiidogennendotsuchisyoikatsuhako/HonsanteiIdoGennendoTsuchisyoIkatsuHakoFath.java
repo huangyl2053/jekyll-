@@ -451,12 +451,12 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
      *
      * @param 帳票作成日時 RDateTime
      * @param 決定変更区分 RString
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集本算定通知書共通情報List List<TokuchoKaishiTsuchishoInfo>
      * @param eucEntityId EucEntityId
      * @param eucFileName RString
      */
     public void publish決定変更通知書発行一覧表(RDateTime 帳票作成日時, RString 決定変更区分,
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, EucEntityId eucEntityId, RString eucFileName) {
+            List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報List, EucEntityId eucEntityId, RString eucFileName) {
 
         List<RString> headerList = new ArrayList<>();
         headerList.add(タイトル_作成日時);
@@ -499,7 +499,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
                 .hasHeader(true).setHeader(headerList)
                 .build()) {
             int 連番 = INT_1;
-            for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+            for (TokuchoKaishiTsuchishoInfo 編集本算定通知書共通情報 : 編集本算定通知書共通情報List) {
+                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 編集本算定通知書共通情報.get編集後本算定通知書共通情報();
                 List<RString> bodyList = new ArrayList<>();
                 bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
                 bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
@@ -1006,6 +1007,9 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
         List<HonsanteiTsuchishoTempResult> tmpResultList = new ArrayList<>();
         for (HonsanteiTsuchishoTempEntity entity : entityList) {
             HonsanteiTsuchishoTempResult result = new HonsanteiTsuchishoTempResult();
+            result.set生活保護区分(entity.get生活保護区分());
+            result.set特徴8月開始者区分(entity.get特徴8月開始者区分());
+            result.set特徴10月開始者区分(entity.get特徴10月開始者区分());
             result.set計算後情報_更正後(entity.get計算後情報_更正後());
             result.set計算後情報_更正前(entity.get計算後情報_更正前());
             result.set賦課の情報_更正前(get賦課の情報_更正前後(entity, false));

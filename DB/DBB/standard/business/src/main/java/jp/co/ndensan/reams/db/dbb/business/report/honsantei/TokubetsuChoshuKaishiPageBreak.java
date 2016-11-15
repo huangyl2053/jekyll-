@@ -82,7 +82,7 @@ public class TokubetsuChoshuKaishiPageBreak extends PageBreaker<TokubetsuChoshuK
                 && !currentSource.getSource().hihokenshaNo.equals(nextSource.getSource().hihokenshaNo)) {
             flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.年金コード.get項目ID())
-                && !currentSource.getSource().hihokenshaNo.equals(nextSource.getSource().hihokenshaNo)) {
+                && !currentSource.getSource().nenkinCode.equals(nextSource.getSource().nenkinCode)) {
             flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.納組コード.get項目ID())
                 && !currentSource.getSource().nokumiCode.equals(nextSource.getSource().nokumiCode)) {

@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.TokuchoKaishiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
@@ -146,8 +147,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo.class);
@@ -159,8 +159,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
      * @param entityList List<HonsanteiTsuchishoTempEntity>
      * @param 口座振替分出力様式 RString
      * @return List<HonsanteiTsuchishoTempResult> 賦課情報リスト
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課の情報_更正前後が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課の情報_更正前後が取得できない場合、Exception
      */
     public List<HonsanteiTsuchishoTempResult> get賦課情報(
             List<HonsanteiTsuchishoTempEntity> entityList, RString 口座振替分出力様式) throws InvocationTargetException {
@@ -200,12 +199,12 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
      * 決定変更通知書発行一覧表ＣＳＶの出力メソッドです。
      *
      * @param 帳票作成日時 RDateTime
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集本算定通知書共通情報List List<TokuchoKaishiTsuchishoInfo>
      * @param eucEntityId EucEntityId
      * @param eucFileName RString
      */
     public void publish決定変更通知書発行一覧表(RDateTime 帳票作成日時,
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, EucEntityId eucEntityId, RString eucFileName) {
+            List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報List, EucEntityId eucEntityId, RString eucFileName) {
 
         List<RString> headerList = new ArrayList<>();
         headerList.add(タイトル_作成日時);
@@ -245,11 +244,12 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                 .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true).setHeader(headerList)
                 .build()) {
-            for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+            for (TokuchoKaishiTsuchishoInfo 編集本算定通知書共通情報 : 編集本算定通知書共通情報List) {
+                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 編集本算定通知書共通情報.get編集後本算定通知書共通情報();
                 List<RString> bodyList = new ArrayList<>();
                 bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
                 bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-                bodyList.add(new RString(編集後本算定通知書共通情報List.indexOf(編集後本算定通知書共通情報) + 1));
+                bodyList.add(new RString(編集本算定通知書共通情報List.indexOf(編集後本算定通知書共通情報) + 1));
                 bodyList.add(isNull(編集後本算定通知書共通情報.get通知書番号())
                         ? RString.EMPTY : 編集後本算定通知書共通情報.get通知書番号().getColumnValue());
                 bodyList.add(isNull(編集後本算定通知書共通情報.get被保険者番号())
