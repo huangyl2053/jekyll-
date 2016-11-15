@@ -344,22 +344,22 @@ public class ShokanBaraiKa1GoDiv extends Panel implements IShokanBaraiKa1GoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTekiyoKikanKaishi() {
+    public TextBoxDate getTxtTekiyoKikanKaishi() {
         return this.getTorokuJokyo().getTxtTekiyoKikanKaishi();
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoKikanKaishi(TextBoxFlexibleDate txtTekiyoKikanKaishi) {
+    public void  setTxtTekiyoKikanKaishi(TextBoxDate txtTekiyoKikanKaishi) {
         this.getTorokuJokyo().setTxtTekiyoKikanKaishi(txtTekiyoKikanKaishi);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTekiyoKikanShuryo() {
+    public TextBoxDate getTxtTekiyoKikanShuryo() {
         return this.getTorokuJokyo().getTxtTekiyoKikanShuryo();
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoKikanShuryo(TextBoxFlexibleDate txtTekiyoKikanShuryo) {
+    public void  setTxtTekiyoKikanShuryo(TextBoxDate txtTekiyoKikanShuryo) {
         this.getTorokuJokyo().setTxtTekiyoKikanShuryo(txtTekiyoKikanShuryo);
     }
 
@@ -374,52 +374,52 @@ public class ShokanBaraiKa1GoDiv extends Panel implements IShokanBaraiKa1GoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtIraiJuriYMD() {
+    public TextBoxDate getTxtIraiJuriYMD() {
         return this.getUketsukeKetteibi().getTxtIraiJuriYMD();
     }
 
     @JsonIgnore
-    public void  setTxtIraiJuriYMD(TextBoxFlexibleDate txtIraiJuriYMD) {
+    public void  setTxtIraiJuriYMD(TextBoxDate txtIraiJuriYMD) {
         this.getUketsukeKetteibi().setTxtIraiJuriYMD(txtIraiJuriYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtYokokuTorokuYMD() {
+    public TextBoxDate getTxtYokokuTorokuYMD() {
         return this.getUketsukeKetteibi().getTxtYokokuTorokuYMD();
     }
 
     @JsonIgnore
-    public void  setTxtYokokuTorokuYMD(TextBoxFlexibleDate txtYokokuTorokuYMD) {
+    public void  setTxtYokokuTorokuYMD(TextBoxDate txtYokokuTorokuYMD) {
         this.getUketsukeKetteibi().setTxtYokokuTorokuYMD(txtYokokuTorokuYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtBemmeishoTeishutsuKigenYMD() {
+    public TextBoxDate getTxtBemmeishoTeishutsuKigenYMD() {
         return this.getUketsukeKetteibi().getTxtBemmeishoTeishutsuKigenYMD();
     }
 
     @JsonIgnore
-    public void  setTxtBemmeishoTeishutsuKigenYMD(TextBoxFlexibleDate txtBemmeishoTeishutsuKigenYMD) {
+    public void  setTxtBemmeishoTeishutsuKigenYMD(TextBoxDate txtBemmeishoTeishutsuKigenYMD) {
         this.getUketsukeKetteibi().setTxtBemmeishoTeishutsuKigenYMD(txtBemmeishoTeishutsuKigenYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtYokokuTsuchiHakkoYMD() {
+    public TextBoxDate getTxtYokokuTsuchiHakkoYMD() {
         return this.getUketsukeKetteibi().getTxtYokokuTsuchiHakkoYMD();
     }
 
     @JsonIgnore
-    public void  setTxtYokokuTsuchiHakkoYMD(TextBoxFlexibleDate txtYokokuTsuchiHakkoYMD) {
+    public void  setTxtYokokuTsuchiHakkoYMD(TextBoxDate txtYokokuTsuchiHakkoYMD) {
         this.getUketsukeKetteibi().setTxtYokokuTsuchiHakkoYMD(txtYokokuTsuchiHakkoYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtBemmeiUketsukeYMD() {
+    public TextBoxDate getTxtBemmeiUketsukeYMD() {
         return this.getUketsukeKetteibi().getTxtBemmeiUketsukeYMD();
     }
 
     @JsonIgnore
-    public void  setTxtBemmeiUketsukeYMD(TextBoxFlexibleDate txtBemmeiUketsukeYMD) {
+    public void  setTxtBemmeiUketsukeYMD(TextBoxDate txtBemmeiUketsukeYMD) {
         this.getUketsukeKetteibi().setTxtBemmeiUketsukeYMD(txtBemmeiUketsukeYMD);
     }
 
@@ -434,12 +434,12 @@ public class ShokanBaraiKa1GoDiv extends Panel implements IShokanBaraiKa1GoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtBemmeiNaiyoKetteiYMD() {
+    public TextBoxDate getTxtBemmeiNaiyoKetteiYMD() {
         return this.getUketsukeKetteibi().getTxtBemmeiNaiyoKetteiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtBemmeiNaiyoKetteiYMD(TextBoxFlexibleDate txtBemmeiNaiyoKetteiYMD) {
+    public void  setTxtBemmeiNaiyoKetteiYMD(TextBoxDate txtBemmeiNaiyoKetteiYMD) {
         this.getUketsukeKetteibi().setTxtBemmeiNaiyoKetteiYMD(txtBemmeiNaiyoKetteiYMD);
     }
 
@@ -454,42 +454,42 @@ public class ShokanBaraiKa1GoDiv extends Panel implements IShokanBaraiKa1GoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtHenkoKetteiYMD() {
+    public TextBoxDate getTxtHenkoKetteiYMD() {
         return this.getUketsukeKetteibi().getTxtHenkoKetteiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtHenkoKetteiYMD(TextBoxFlexibleDate txtHenkoKetteiYMD) {
+    public void  setTxtHenkoKetteiYMD(TextBoxDate txtHenkoKetteiYMD) {
         this.getUketsukeKetteibi().setTxtHenkoKetteiYMD(txtHenkoKetteiYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtHokenshoTeishutsuKigenYMD() {
+    public TextBoxDate getTxtHokenshoTeishutsuKigenYMD() {
         return this.getUketsukeKetteibi().getTxtHokenshoTeishutsuKigenYMD();
     }
 
     @JsonIgnore
-    public void  setTxtHokenshoTeishutsuKigenYMD(TextBoxFlexibleDate txtHokenshoTeishutsuKigenYMD) {
+    public void  setTxtHokenshoTeishutsuKigenYMD(TextBoxDate txtHokenshoTeishutsuKigenYMD) {
         this.getUketsukeKetteibi().setTxtHokenshoTeishutsuKigenYMD(txtHokenshoTeishutsuKigenYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtHenkoTsuchiHakkoYMD() {
+    public TextBoxDate getTxtHenkoTsuchiHakkoYMD() {
         return this.getUketsukeKetteibi().getTxtHenkoTsuchiHakkoYMD();
     }
 
     @JsonIgnore
-    public void  setTxtHenkoTsuchiHakkoYMD(TextBoxFlexibleDate txtHenkoTsuchiHakkoYMD) {
+    public void  setTxtHenkoTsuchiHakkoYMD(TextBoxDate txtHenkoTsuchiHakkoYMD) {
         this.getUketsukeKetteibi().setTxtHenkoTsuchiHakkoYMD(txtHenkoTsuchiHakkoYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShinseiUketsukeYMD() {
+    public TextBoxDate getTxtShinseiUketsukeYMD() {
         return this.getUketsukeKetteibi().getTxtShinseiUketsukeYMD();
     }
 
     @JsonIgnore
-    public void  setTxtShinseiUketsukeYMD(TextBoxFlexibleDate txtShinseiUketsukeYMD) {
+    public void  setTxtShinseiUketsukeYMD(TextBoxDate txtShinseiUketsukeYMD) {
         this.getUketsukeKetteibi().setTxtShinseiUketsukeYMD(txtShinseiUketsukeYMD);
     }
 
@@ -504,22 +504,22 @@ public class ShokanBaraiKa1GoDiv extends Panel implements IShokanBaraiKa1GoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShinseiYMD() {
+    public TextBoxDate getTxtShinseiYMD() {
         return this.getUketsukeKetteibi().getTxtShinseiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtShinseiYMD(TextBoxFlexibleDate txtShinseiYMD) {
+    public void  setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
         this.getUketsukeKetteibi().setTxtShinseiYMD(txtShinseiYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShinseiNaiyoKetteiYMD() {
+    public TextBoxDate getTxtShinseiNaiyoKetteiYMD() {
         return this.getUketsukeKetteibi().getTxtShinseiNaiyoKetteiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtShinseiNaiyoKetteiYMD(TextBoxFlexibleDate txtShinseiNaiyoKetteiYMD) {
+    public void  setTxtShinseiNaiyoKetteiYMD(TextBoxDate txtShinseiNaiyoKetteiYMD) {
         this.getUketsukeKetteibi().setTxtShinseiNaiyoKetteiYMD(txtShinseiNaiyoKetteiYMD);
     }
 
