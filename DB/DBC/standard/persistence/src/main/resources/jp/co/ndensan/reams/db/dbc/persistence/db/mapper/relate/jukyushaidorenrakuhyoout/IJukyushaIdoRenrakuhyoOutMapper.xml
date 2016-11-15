@@ -206,7 +206,8 @@
                 "TEMPINFO"."被保険者番号"
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" <![CDATA[<>]]> '2'
+        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" <![CDATA[<>]]> '2' OR
+         "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" IS NULL
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_特定入所者" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -283,7 +284,7 @@
                 "TEMPINFO"."被保険者番号"
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" <![CDATA[<>]]> '2'
+        WHERE "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" <![CDATA[<>]]> '2' OR "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" IS NULL
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_利用者負担" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -322,6 +323,7 @@
             rgdb."DbT4012HyojunFutangakuGemmen"."shinseiYMD" AS "申請日",
             rgdb."DbT4012HyojunFutangakuGemmen"."ketteiKubun" AS "決定区分"
            FROM rgdb."DbT4012HyojunFutangakuGemmen" WHERE rgdb."DbT4012HyojunFutangakuGemmen"."ketteiKubun" <![CDATA[<>]]> '2'
+            OR rgdb."DbT4012HyojunFutangakuGemmen"."ketteiKubun" IS NULL
           ) A
         INNER JOIN  "IdouTemp"
         ON "IdouTemp"."被保険者番号" = A."被保険者番号"
