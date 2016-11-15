@@ -132,8 +132,12 @@ public class HanyoListParam {
      */
     public ResponseData<HanyoListParamDiv> onClick_onBeforeBatchParameterRegister(HanyoListParamDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            ValidationMessageControlPairs 帳票出力項目MessagePairs = getValidationHandler(div).validate帳票出力項目チェック();
-            if (帳票出力項目MessagePairs.existsError()) {
+            ValidationMessageControlPairs 帳票出力項目MessagePairs = null;
+            if (!div.getCcdShutsuryokuKomoku().isDisabled()) {
+                帳票出力項目MessagePairs = getValidationHandler(div).validate帳票出力項目チェック();
+                
+            }
+            if (帳票出力項目MessagePairs != null && 帳票出力項目MessagePairs.existsError()) {
                 return ResponseData.of(div).addValidationMessages(帳票出力項目MessagePairs).respond();
             }
             ValidationMessageControlPairs warningMessagePairs = getValidationHandler(div).validate表題();

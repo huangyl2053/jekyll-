@@ -1387,7 +1387,11 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_社会福祉法人軽減() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1405,7 +1409,8 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目選択ができるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_特別地域加算減免() {
