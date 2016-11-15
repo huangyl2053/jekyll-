@@ -161,4 +161,23 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
                                 leq(適用日, tekiyoShuryoYMD))).
                 toList(DbT3105SogoJigyoTaishoshaEntity.class);
     }
+
+    /**
+     * 事業対象者を検索。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT3105SogoJigyoTaishoshaEntity 事業対象者のデータ
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3105SogoJigyoTaishoshaEntity> get事業対象者(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3105SogoJigyoTaishosha.class).
+                where(eq(hihokenshaNo, 被保険者番号))
+                .toList(DbT3105SogoJigyoTaishoshaEntity.class);
+    }
 }
