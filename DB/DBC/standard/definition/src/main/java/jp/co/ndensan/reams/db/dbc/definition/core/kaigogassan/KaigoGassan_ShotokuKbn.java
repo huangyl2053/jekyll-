@@ -50,7 +50,7 @@ public enum KaigoGassan_ShotokuKbn {
     /**
      * コード:"" 名称:区分ウ 略称:定義なし
      */
-    国保被保険者以外("", "国保被保険者以外");
+    国保被保険者以外(" ", "国保被保険者以外");
 
     private final RString code;
     private final RString fullName;

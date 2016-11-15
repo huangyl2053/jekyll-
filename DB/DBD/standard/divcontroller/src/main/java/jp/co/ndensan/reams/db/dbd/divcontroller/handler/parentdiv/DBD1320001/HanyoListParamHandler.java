@@ -901,7 +901,9 @@ public class HanyoListParamHandler {
         restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
-    private void restore汎用リスト_事業対象者BatchParameter(BatchParameterMap batchParameterMap) {
+    private void restore汎用リスト_事業対象者BatchParameter(BatchParameterMap batchParameterMap) { 
+        div.getRadChushutsuJokenB1().clearSelectedItem();
+        div.getRadChushutsuJokenB2().clearSelectedItem();
         restore事業対象者データ抽出(batchParameterMap, 事業対象者データ抽出パラメータ名称);
         restore共通(batchParameterMap);
         restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
@@ -1407,7 +1409,11 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_特別地域加算減免() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1425,7 +1431,8 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目選択ができるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_負担限度額認定() {

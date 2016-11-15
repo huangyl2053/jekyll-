@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 本算定通知書一時テーブル情報クラスです。
@@ -37,4 +38,7 @@ public class HonsanteiTsuchishoTempResult {
     private NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前;
     private NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正後;
     private ShunyuJoho 収入情報;
+    private RString 生活保護区分;
+    private RString 特徴8月開始者区分;
+    private RString 特徴10月開始者区分;
 }

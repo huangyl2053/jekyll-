@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennendotsuchisyoika
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.PrtTokuchoKaishiTsuchishoHonsanteiResult;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.TokuchoKaishiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuProperty.OutputOrderEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.karisantei.IdoKarisanteigakuTsuchishoOutPutOrder;
@@ -408,11 +409,11 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
      * 特徴開始通知書(本算定）の発行メソッドです。
      *
      * @param result PrtTokuchoKaishiTsuchishoHonsanteiResult
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集後本算定通知書共通情報List List<TokuchoKaishiTsuchishoInfo>
      * @param 総ページ数 int
      */
     public void publish特徴開始通知書本算定(PrtTokuchoKaishiTsuchishoHonsanteiResult result,
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, int 総ページ数) {
+            List<TokuchoKaishiTsuchishoInfo> 編集後本算定通知書共通情報List, int 総ページ数) {
 
         publish特別徴収開始通知書発行一覧表(result.get調定年度(), result.get帳票作成日時(), 編集後本算定通知書共通情報List);
         new TokubetsuChoshuKaishiPrintService().printSingle(編集後本算定通知書共通情報List,
@@ -624,11 +625,15 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
 
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-        List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
+        List<TokuchoKaishiTsuchishoInfo> 編集後本算定通知書共通情報List = new ArrayList<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         SourceDataCollection sourceDataCollection;
         try (ReportManager reportManager = new ReportManager()) {
             for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
+                TokuchoKaishiTsuchishoInfo tokuchoKaishiTsuchishoInfo = new TokuchoKaishiTsuchishoInfo();
+                tokuchoKaishiTsuchishoInfo.set生活保護区分(tmpResult.get生活保護区分());
+                tokuchoKaishiTsuchishoInfo.set特徴8月開始者区分(tmpResult.get特徴8月開始者区分());
+                tokuchoKaishiTsuchishoInfo.set特徴10月開始者区分(tmpResult.get特徴10月開始者区分());
                 HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
                 本算定通知書情報.set現年度_過年度区分(GennenKanen.現年度);
                 本算定通知書情報.set発行日(発行日);
@@ -671,7 +676,9 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
                 } else if (ReportIdDBB.DBB100040.getReportId().equals(帳票ID)) {
                     new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printA4Tate(entities, reportManager);
                 }
-                編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
+                tokuchoKaishiTsuchishoInfo.set本算定通知書情報(本算定通知書情報);
+                tokuchoKaishiTsuchishoInfo.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+                編集後本算定通知書共通情報List.add(tokuchoKaishiTsuchishoInfo);
             }
             sourceDataCollection = reportManager.publish();
         }
@@ -783,11 +790,15 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(決定変更通知書_帳票分類ID);
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-        List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
+        List<TokuchoKaishiTsuchishoInfo> 編集後本算定通知書共通情報List = new ArrayList<>();
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         SourceDataCollection sourceDataCollection;
         try (ReportManager reportManager = new ReportManager()) {
             for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
+                TokuchoKaishiTsuchishoInfo tokuchoKaishiTsuchishoInfo = new TokuchoKaishiTsuchishoInfo();
+                tokuchoKaishiTsuchishoInfo.set生活保護区分(tmpResult.get生活保護区分());
+                tokuchoKaishiTsuchishoInfo.set特徴8月開始者区分(tmpResult.get特徴8月開始者区分());
+                tokuchoKaishiTsuchishoInfo.set特徴10月開始者区分(tmpResult.get特徴10月開始者区分());
                 HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
                 本算定通知書情報.set現年度_過年度区分(GennenKanen.現年度);
                 本算定通知書情報.set発行日(発行日);
@@ -830,7 +841,9 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
                     new KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService().printA4Tate(entities, reportManager);
 
                 }
-                編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
+                tokuchoKaishiTsuchishoInfo.set本算定通知書情報(本算定通知書情報);
+                tokuchoKaishiTsuchishoInfo.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+                編集後本算定通知書共通情報List.add(tokuchoKaishiTsuchishoInfo);
             }
             sourceDataCollection = reportManager.publish();
         }
@@ -948,19 +961,17 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
             } else if (全件出力.equals(別々に出力区分)) {
                 最終期 = 本算定期間.getLast().get期AsInt();
             }
-        } else {
-            if (別々に出力.equals(別々に出力区分) && 当初出力_中期開始期 != null && !RString.isNullOrEmpty(当初出力_中期開始期.get設定値())
-                    && 当初出力_後期開始期 != null && !RString.isNullOrEmpty(当初出力_後期開始期.get設定値())) {
-                if (出力期AsInt < Integer.parseInt(当初出力_中期開始期.get設定値().toString())) {
-                    最終期 = Integer.parseInt(当初出力_中期開始期.get設定値().toString()) - INT_1;
-                } else if (Integer.parseInt(当初出力_後期開始期.get設定値().toString()) <= 出力期AsInt) {
-                    最終期 = 本算定期間.getLast().get期AsInt();
-                } else {
-                    最終期 = Integer.parseInt(当初出力_後期開始期.get設定値().toString()) - INT_1;
-                }
-            } else {
+        } else if (別々に出力.equals(別々に出力区分) && 当初出力_中期開始期 != null && !RString.isNullOrEmpty(当初出力_中期開始期.get設定値())
+                && 当初出力_後期開始期 != null && !RString.isNullOrEmpty(当初出力_後期開始期.get設定値())) {
+            if (出力期AsInt < Integer.parseInt(当初出力_中期開始期.get設定値().toString())) {
+                最終期 = Integer.parseInt(当初出力_中期開始期.get設定値().toString()) - INT_1;
+            } else if (Integer.parseInt(当初出力_後期開始期.get設定値().toString()) <= 出力期AsInt) {
                 最終期 = 本算定期間.getLast().get期AsInt();
+            } else {
+                最終期 = Integer.parseInt(当初出力_後期開始期.get設定値().toString()) - INT_1;
             }
+        } else {
+            最終期 = 本算定期間.getLast().get期AsInt();
         }
         KitsukiList 期月リスト = 期月リスト_普徴.subListBy期(出力期AsInt, 最終期);
         List<Kitsuki> kitsukiList = 期月リスト.toList();
@@ -1222,19 +1233,17 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
             } else if (全件出力.equals(別々に出力区分)) {
                 最終期 = 本算定期間.getLast().get期AsInt();
             }
-        } else {
-            if (別々に出力.equals(別々に出力区分) && 当初出力_中期開始期 != null && !RString.isNullOrEmpty(当初出力_中期開始期.get設定値())
-                    && 当初出力_後期開始期 != null && !RString.isNullOrEmpty(当初出力_後期開始期.get設定値())) {
-                if (出力期AsInt < Integer.parseInt(当初出力_中期開始期.get設定値().toString())) {
-                    最終期 = Integer.parseInt(当初出力_中期開始期.get設定値().toString()) - INT_1;
-                } else if (Integer.parseInt(当初出力_後期開始期.get設定値().toString()) <= 出力期AsInt) {
-                    最終期 = 本算定期間.getLast().get期AsInt();
-                } else {
-                    最終期 = Integer.parseInt(当初出力_後期開始期.get設定値().toString()) - INT_1;
-                }
-            } else {
+        } else if (別々に出力.equals(別々に出力区分) && 当初出力_中期開始期 != null && !RString.isNullOrEmpty(当初出力_中期開始期.get設定値())
+                && 当初出力_後期開始期 != null && !RString.isNullOrEmpty(当初出力_後期開始期.get設定値())) {
+            if (出力期AsInt < Integer.parseInt(当初出力_中期開始期.get設定値().toString())) {
+                最終期 = Integer.parseInt(当初出力_中期開始期.get設定値().toString()) - INT_1;
+            } else if (Integer.parseInt(当初出力_後期開始期.get設定値().toString()) <= 出力期AsInt) {
                 最終期 = 本算定期間.getLast().get期AsInt();
+            } else {
+                最終期 = Integer.parseInt(当初出力_後期開始期.get設定値().toString()) - INT_1;
             }
+        } else {
+            最終期 = 本算定期間.getLast().get期AsInt();
         }
         KitsukiList 期月リスト = 期月リスト_普徴.subListBy期(出力期AsInt, 最終期);
         List<Kitsuki> 期月List = 期月リスト.toList();

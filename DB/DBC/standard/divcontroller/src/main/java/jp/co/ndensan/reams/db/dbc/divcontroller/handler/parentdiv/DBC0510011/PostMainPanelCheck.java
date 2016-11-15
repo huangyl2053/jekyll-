@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -251,7 +252,7 @@ public class PostMainPanelCheck {
      * @param 導入形態コード int
      * @param row int
      * @param sharedFileId RDateTime
-     * @param 市町村コード
+     * @param 市町村コード RString
      */
     public void 長さ判定(int 長さ判定, RString fileName, int num, int from, int to, Code 導入形態コード,
             dgShichoson_Row row, RDateTime sharedFileId, RString 市町村コード) {
@@ -277,11 +278,11 @@ public class PostMainPanelCheck {
                             .replace(国保取込ファイルのフォーマット.toString()).evaluate());
                 }
             } else {
-                if (hasread.length() != num && ResponseHolder.getMenuID().equals(DBCMN82002)) {
+                if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82002)) {
                     throw new ApplicationException(UrErrorMessages.不正.getMessage()
                             .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
                 }
-                if (hasread.length() != num && ResponseHolder.getMenuID().equals(DBCMN82001)) {
+                if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82001)) {
                     throw new ApplicationException(UrErrorMessages.不正.getMessage()
                             .replace(国保取込ファイルのフォーマット.toString()).evaluate());
                 } else {

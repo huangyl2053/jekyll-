@@ -161,7 +161,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数32) {
-            div.getBtnHindo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(外出頻度Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数32) {
@@ -190,7 +189,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数31) {
-            div.getBtnZubon().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(ズボン等の着脱Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数31) {
@@ -219,7 +217,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数30) {
-            div.getBtnUwagi().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(上衣の着脱Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数30) {
@@ -248,7 +245,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数29) {
-            div.getBtnSeihatsu().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(整髪Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数29) {
@@ -277,7 +273,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数28) {
-            div.getBtnSengan().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(洗顔Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数28) {
@@ -306,7 +301,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数27) {
-            div.getBtnKokou().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(口腔清潔Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数27) {
@@ -335,7 +329,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数26) {
-            div.getBtnHaiben().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(排便Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数26) {
@@ -364,7 +357,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数25) {
-            div.getBtnHainyo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(排尿Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数25) {
@@ -393,7 +385,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数24) {
-            div.getBtnShokuji().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(食事摂取Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数24) {
@@ -422,7 +413,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数23) {
-            div.getBtnEnka().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(えん下Keys, 調査項目, false, false);
         }
         if (前回連番 == 整数23) {
@@ -451,7 +441,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数22) {
-            div.getBtnIdou().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(移動Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数22) {
@@ -480,7 +469,6 @@ public class KihonChosaInputHandler2 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数21) {
-            div.getBtnIjyo().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(移乗Keys, 調査項目, true, false);
         }
         if (前回連番 == 整数21) {

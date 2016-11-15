@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210002
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.gaikyotokki.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.gaikyotokki.GaikyoTokkiBuilder;
+import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.DBE2210002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.GaikyoTokkiNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210002.GaikyoTokkiNyurokuHandler;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 概況特記登録のクラス。
@@ -53,7 +55,7 @@ public class GaikyoTokkiNyuroku {
 
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-        
+
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         model.set申請書管理番号(申請書管理番号.getColumnValue());
         model.set認定申請日(ViewStateHolder.get(ViewStateKeys.申請日, RString.class));
@@ -193,7 +195,7 @@ public class GaikyoTokkiNyuroku {
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onBeforeOpenDialog_setDialogParameter(GaikyoTokkiNyurokuDiv div) {
         div.setHidden登録業務コード(GyomuCode.DB介護保険.getColumnValue());
-        div.setHidden登録グループコード(登録グループコード_1);
+        div.setHidden登録グループコード(SampleBunshoGroupCodes.調査票概況調査特記事項.getコード());
         return ResponseData.of(div).respond();
     }
 
@@ -261,6 +263,9 @@ public class GaikyoTokkiNyuroku {
         GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分);
         if (認定調査票_概況特記 == null) {
             認定調査票_概況特記 = new GaikyoTokki(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分);
+            認定調査票_概況特記.toEntity().setState(EntityDataState.Added);
+        } else {
+            認定調査票_概況特記.toEntity().setState(get認定調査票_概況特記EntityDataState(div, 認定調査票_概況特記));
         }
         GaikyoTokkiBuilder builder = 認定調査票_概況特記.createBuilderForEdit();
         builder.set住宅改修(div.getTxtJutakuKaishu().getValue());
@@ -269,6 +274,25 @@ public class GaikyoTokkiNyuroku {
         builder.set概況特記事項_居住環境(div.getTxtChosaTaishoKyojuKankyo().getValue());
         builder.set概況特記事項_機器_器械(div.getTxtNichijoShiyoKikiUmu().getValue());
         manager.save認定調査票_概況特記(builder.build());
+    }
+
+    private EntityDataState get認定調査票_概況特記EntityDataState(GaikyoTokkiNyurokuDiv div, GaikyoTokki 認定調査票_概況特記) {
+        if (認定調査票_概況特記.get住宅改修().equals(div.getTxtJutakuKaishu().getValue())) {
+            return EntityDataState.Modified;
+        }
+        if (認定調査票_概況特記.get概況特記事項_主訴().equals(div.getTxtChosaTaishoShuso().getValue())) {
+            return EntityDataState.Modified;
+        }
+        if (認定調査票_概況特記.get概況特記事項_家族状況().equals(div.getTxtChosaTishoKazokuJokyo().getValue())) {
+            return EntityDataState.Modified;
+        }
+        if (認定調査票_概況特記.get概況特記事項_居住環境_().equals(div.getTxtChosaTaishoKyojuKankyo().getValue())) {
+            return EntityDataState.Modified;
+        }
+        if (認定調査票_概況特記.get概況特記事項_機器_器械().equals(div.getTxtNichijoShiyoKikiUmu().getValue())) {
+            return EntityDataState.Modified;
+        }
+        return EntityDataState.Unchanged;
     }
 
     private GaikyoTokkiNyurokuHandler getHandler(GaikyoTokkiNyurokuDiv div) {

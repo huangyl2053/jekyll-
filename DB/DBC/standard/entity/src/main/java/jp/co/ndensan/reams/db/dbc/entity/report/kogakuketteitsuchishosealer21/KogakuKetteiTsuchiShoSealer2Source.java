@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.entity.kogakuketteitsuchishosealer2;
+package jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer21;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;

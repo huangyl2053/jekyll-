@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.KaigoninteiShikakuInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv.ShokaiButtonType;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -114,6 +115,8 @@ public class ShinseihakkoMeiseiHandler {
                         new RDate(entity.get認定申請年月日().toString()));
             }
             div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBD介護受給, entity.get申請書管理番号(), 画面区分);
+        } else {
+            div.getShinseihakkoMeisei2().getCcdZenkaiNinteiKekkaJoho().setMode_ShokaiButtonType(ShokaiButtonType.ShokaiButtonDisabledMode);
         }
         div.getShinseihakkoMeisei2().getCcdKyotakuServiceKeikakuInfo().initialize(被保険者番号);
         div.getShinseihakkoMeisei2().getCcdShusetSunyushoInfo().onLoad(shikibetsuCode);

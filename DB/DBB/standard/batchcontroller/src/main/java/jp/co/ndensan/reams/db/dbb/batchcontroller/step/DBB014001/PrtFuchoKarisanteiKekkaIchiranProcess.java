@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -371,8 +372,9 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         csvEntity.set連番(new RString(連番));
         YubinNo yubinNo = 普徴仮算定計算後賦課Entity.get宛名の情報().getYubinNo();
         csvEntity.set郵便番号(yubinNo == null ? RString.EMPTY : yubinNo.getYubinNo());
+        AtenaJusho jusho = 普徴仮算定計算後賦課Entity.get宛名の情報().getJusho();
         csvEntity.set住所(編集後個人.get編集後住所());
-        csvEntity.set町域管内管外住所(kojin.get住所().get住所());
+        csvEntity.set町域管内管外住所(jusho == null ? RString.EMPTY : jusho.getColumnValue());
         AtenaBanchi banchi = 普徴仮算定計算後賦課Entity.get宛名の情報().getBanchi();
         csvEntity.set番地(banchi == null ? RString.EMPTY : banchi.getColumnValue());
         GyoseikuCode gyoseikuCode = 普徴仮算定計算後賦課Entity.get宛名の情報().getGyoseikuCode();
@@ -411,18 +413,20 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
             csvEntity.set前年度情報の最終月別年額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo1().toString()));
         }
         csvEntity.set前年度情報の最終普徴額(get前年度情報の最終普徴額(普徴仮算定計算後賦課Entity));
+        FlexibleYear 前年度 = 普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null
+                ? 普徴仮算定計算後賦課Entity.get前年度賦課の情報().getFukaNendo() : parameter.get賦課年度().minusYear(NUM_1);
+        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil(前年度);
+        KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
+        Kitsuki 最終法定納期 = 普徴期月リスト.get最終法定納期();
+        int 期 = 最終法定納期.get期AsInt();
+        csvEntity.set前年度情報の計算納期数(new RString(期));
         if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null) {
             csvEntity.set前年度情報の確定保険料額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getKakuteiHokenryo().toString()));
-            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getFukaNendo());
-            KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
-            Kitsuki 最終法定納期 = 普徴期月リスト.get最終法定納期();
-            int 期 = 最終法定納期.get期AsInt();
-            csvEntity.set前年度情報の計算納期数(new RString(期));
             csvEntity.set前年度情報の賦課納期数(get賦課納期数(調定年度開始日, 普徴仮算定計算後賦課Entity.get前年度賦課の情報(), 期, 普徴期月リスト));
         }
         csvEntity.set仮算定時保険料段階(保険料段階List.getBy段階区分(普徴仮算定計算後賦課Entity.get保険料段階仮算定時()).get表記());
         csvEntity.set新規資格適用段階対象者(普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号() == null
-                ? DOT : 普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号().getColumnValue());
+                ? RString.EMPTY : DOT);
         csvEntity.set徴収方法(get徴収方法(普徴仮算定計算後賦課Entity));
         csvEntity.set普通徴収仮徴収額_4月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額01()));
         csvEntity.set普通徴収仮徴収額_5月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額02()));
@@ -466,14 +470,14 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku13());
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku14());
         for (int i = 1; i <= 期; i++) {
-            boolean flag = true;
+            boolean flag = false;
             for (Kitsuki kitsuki : 期月リスト.get期の月(i)) {
                 int 月 = kitsuki.get月AsInt();
                 Decimal 月処理区分 = new Decimal(月処理区分list.get(月 - 1).toString());
                 Decimal 普徴期別金額 = 普徴期別金額list.get(i - 1) == null ? Decimal.ZERO : 普徴期別金額list.get(i - 1);
                 if (月処理区分.compareTo(月処理区分_5) <= 0
                         && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
-                    flag = false;
+                    flag = true;
                 }
             }
             if (flag) {

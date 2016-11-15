@@ -135,6 +135,7 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
         source.banchiCode2 = 番地コード2 == null ? RString.EMPTY : 番地コード2.getColumnValue();
         source.banchiCode3 = 番地コード3 == null ? RString.EMPTY : 番地コード3.getColumnValue();
         source.banchiCode4 = 番地コード4 == null ? RString.EMPTY : 番地コード4.getColumnValue();
+        source.banchiCode1 = source.banchiCode1.concat(source.banchiCode2).concat(source.banchiCode3).concat(source.banchiCode4);
         AtenaKanaMeisho 氏名５０音カナ = 宛名.getKanaMeisho();
         source.kanaMeisho = 氏名５０音カナ == null ? RString.EMPTY : 氏名５０音カナ.getColumnValue();
         source.seibetsuCode = 宛名.getSeibetsuCode();

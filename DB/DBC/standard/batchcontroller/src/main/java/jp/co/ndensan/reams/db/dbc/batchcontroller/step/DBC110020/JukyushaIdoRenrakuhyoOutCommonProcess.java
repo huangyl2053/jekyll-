@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.HyojunFutanEntity;
@@ -83,13 +85,16 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     private static final RString 星 = new RString("*");
     private static final RString STR_06 = new RString("06");
     private static final Code コート_06 = new Code("06");
+    private static final RString STR_11 = new RString("11");
     private static final RString STR_12 = new RString("12");
     private static final RString STR_13 = new RString("13");
+    private static final RString STR_17 = new RString("17");
     private static final RString STR_21 = new RString("21");
     private static final RString STR_22 = new RString("22");
     private static final RString STR_23 = new RString("23");
     private static final RString STR_24 = new RString("24");
     private static final RString STR_25 = new RString("25");
+    private static final FlexibleDate MIX_DATE = new FlexibleDate("20150401");
 
     private JukyushaIdoRenrakuhyoOutCommonProcess() {
     }
@@ -112,6 +117,47 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         return 受給者台帳List;
     }
 
+    private static List<DbT1001HihokenshaDaichoEntity> getチェック使用被保険者台帳(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        if (被保険者台帳List.isEmpty()) {
+            return new ArrayList<>();
+        }
+        sort被保険者台帳ListBy異動日枝番(被保険者台帳List);
+        List<DbT1001HihokenshaDaichoEntity> チェック使用被保険者台帳 = new ArrayList<>();
+        boolean lastRecordAdd = true;
+        for (int i = ORDER_0; i < 被保険者台帳List.size(); i++) {
+            DbT1001HihokenshaDaichoEntity 被保険者台帳 = 被保険者台帳List.get(i);
+            if (!isDateEmpty(被保険者台帳.getShikakuSoshitsuYMD())) {
+                チェック使用被保険者台帳.add(被保険者台帳);
+            } else if (STR_11.equals(被保険者台帳.getShikakuShutokuJiyuCode())
+                    || STR_13.equals(被保険者台帳.getShikakuShutokuJiyuCode())
+                    || STR_17.equals(被保険者台帳.getShikakuShutokuJiyuCode())) {
+                チェック使用被保険者台帳.add(被保険者台帳);
+            }
+            if (i == 被保険者台帳List.size() - ORDER_1) {
+                lastRecordAdd = false;
+            }
+        }
+        if (lastRecordAdd) {
+            チェック使用被保険者台帳.add(被保険者台帳List.get(被保険者台帳List.size() - ORDER_1));
+        }
+        return チェック使用被保険者台帳;
+    }
+
+    private static void sort被保険者台帳ListBy異動日枝番(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        Collections.sort(被保険者台帳List, new Comparator<DbT1001HihokenshaDaichoEntity>() {
+            @Override
+            public int compare(DbT1001HihokenshaDaichoEntity o1, DbT1001HihokenshaDaichoEntity o2) {
+                if (o1.getIdoYMD().isBefore(o2.getIdoYMD())) {
+                    return -1;
+                }
+                if (o2.getIdoYMD().isBefore(o1.getIdoYMD())) {
+                    return 1;
+                }
+                return o1.getEdaNo().compareTo(o2.getEdaNo());
+            }
+        });
+    }
+
     /**
      * 被保険者台帳帳取得
      *
@@ -127,7 +173,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             }
             被保険者台帳List.add(被保険者台帳);
         }
-        return 被保険者台帳List;
+        return getチェック使用被保険者台帳(被保険者台帳List);
     }
 
     /**
@@ -286,18 +332,73 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
      * 住所地特例取得
      *
      * @param 異動一時List List<IdouTblEntity>
+     * @param 被保険者台帳List List<DbT1001HihokenshaDaichoEntity>
      * @return List<JushochitokureiInfoEntity>
      */
-    public static List<JushochitokureiInfoEntity> get住所地特例(List<IdouTblEntity> 異動一時List) {
+    public static List<JushochitokureiInfoEntity> get住所地特例(List<IdouTblEntity> 異動一時List,
+            List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳Check = 抽出対象被保険者台帳(被保険者台帳List);
         List<JushochitokureiInfoEntity> 住所地特例List = new ArrayList<>();
         for (IdouTblEntity 異動一時 : 異動一時List) {
             JushochitokureiInfoEntity 住所地特例 = get住所地特例entity(異動一時.get住所地特例());
             if (住所地特例 == null) {
                 continue;
             }
+            if (!is住所地特例OK(被保険者台帳Check, 住所地特例)) {
+                continue;
+            }
             住所地特例List.add(住所地特例);
         }
         return 住所地特例List;
+    }
+
+    private static boolean is住所地特例OK(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳Check, JushochitokureiInfoEntity 住所地特例) {
+        if (!isDateEmpty(住所地特例.get住所地特例適用開始日())
+                && 住所地特例.get住所地特例適用開始日().isBeforeOrEquals(MIX_DATE)) {
+            return false;
+        }
+        for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳Check) {
+            if (isBeforeDate(住所地特例.get住所地特例適用終了日(), 被保険者台帳.getJushochitokureiTekiyoYMD())) {
+                return false;
+            }
+            if (isBeforeDate(被保険者台帳.getJushochitokureiKaijoYMD(), 住所地特例.get住所地特例適用開始日())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static List<DbT1001HihokenshaDaichoEntity> 抽出対象被保険者台帳(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        List<DbT1001HihokenshaDaichoEntity> retrunList = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> sortList = new ArrayList<>();
+        for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
+            if (!isDateEmpty(被保険者台帳.getJushochitokureiTekiyoYMD())) {
+                sortList.add(被保険者台帳);
+            }
+            if (!isDateEmpty(被保険者台帳.getJushochitokureiKaijoYMD())) {
+                retrunList.add(被保険者台帳);
+            }
+        }
+        if (!sortList.isEmpty()) {
+            sort被保険者台帳ListBy異動日(sortList);
+            retrunList.add(sortList.get(sortList.size() - ORDER_1));
+        }
+        return retrunList;
+    }
+
+    private static void sort被保険者台帳ListBy異動日(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        Collections.sort(被保険者台帳List, new Comparator<DbT1001HihokenshaDaichoEntity>() {
+            @Override
+            public int compare(DbT1001HihokenshaDaichoEntity o1, DbT1001HihokenshaDaichoEntity o2) {
+                if (o2.getIdoYMD().isBefore(o1.getIdoYMD())) {
+                    return -1;
+                }
+                if (o1.getIdoYMD().isBefore(o2.getIdoYMD())) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
     }
 
     /**

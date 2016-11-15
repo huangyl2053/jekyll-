@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 基準収入額適用申請書_異動分作成の基準収入額管理マスタに登録 クラスです
@@ -56,7 +57,7 @@ public class InsSetaiyinShotokuJyohoTemp3Process extends BatchProcessBase<Taisho
     @Override
     protected void process(TaishoSetaiinEntity entity) {
         RString key = entity.getShotaiCode().concat(symbol).concat(parameter.get処理年度().toDateString())
-                .concat(symbol).concat(entity.getHihokenshaNo().getColumnValue()).concat(symbol).concat(entity.getKoushinnNo().toString());
+                .concat(symbol).concat(getColumnValue(entity.getHihokenshaNo())).concat(symbol).concat(entity.getKoushinnNo().toString());
         if (!keySet.contains(key)) {
             DbT3116KijunShunyugakuTekiyoKanriEntity dbT3116Entity = new DbT3116KijunShunyugakuTekiyoKanriEntity();
             dbT3116Entity.setSetaiCode(new SetaiCode(entity.getShotaiCode()));
@@ -105,4 +106,10 @@ public class InsSetaiyinShotokuJyohoTemp3Process extends BatchProcessBase<Taisho
         }
     }
 
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
+    }
 }

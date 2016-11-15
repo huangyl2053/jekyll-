@@ -206,7 +206,9 @@ public class FuchoKariSanteiFukaBatch {
         List<Decimal> 普徴期別金額リスト = 調定計算(調定年度, 更正前賦課情報, 計算用保険料, 区分, 前年度賦課情報);
         賦課情報.setFuKibetsuGaku01(普徴期別金額リスト.get(0));
         賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
-        賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
+        if (普徴期別金額リスト.size() == NUM_3) {
+            賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
+        }
         Decimal 普徴期別金額合計 = sum普徴期別金額(普徴期別金額リスト);
         if (0 < 普徴期別金額合計.intValue() && 口座Entity != null && 口座Entity.getUaT0310KozaEntity() != null
                 && 口座Entity.getUaT0310KozaEntity().getKozaId() != 0L) {
@@ -348,14 +350,14 @@ public class FuchoKariSanteiFukaBatch {
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku13());
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku14());
         for (int i = 1; i <= 期; i++) {
-            boolean flag = true;
+            boolean flag = false;
             for (Kitsuki kitsuki : 期月リスト.get期の月(i)) {
                 int 月 = kitsuki.get月AsInt();
                 Decimal 月処理区分 = new Decimal(月処理区分list.get(月 - 1).toString());
                 Decimal 普徴期別金額 = 普徴期別金額list.get(i - 1) == null ? Decimal.ZERO : 普徴期別金額list.get(i - 1);
                 if (月処理区分.compareTo(月処理区分_5) <= 0
                         && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
-                    flag = false;
+                    flag = true;
                 }
             }
             if (flag) {

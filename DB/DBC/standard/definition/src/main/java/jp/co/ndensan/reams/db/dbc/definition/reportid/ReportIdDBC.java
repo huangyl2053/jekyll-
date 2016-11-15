@@ -85,15 +85,10 @@ public enum ReportIdDBC {
     DBC100011_Ari(new ReportId("DBC100011_KogakuOshiraseTsuchiTeshutsuKigenAri"),
             new RString("高額サービス給付のお知らせ通知書（提出期限あり）")),
     /**
-     * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限なし）
+     * 高額サービス給付のお知らせ通知書（提出期限なし）
      */
-    DBC100012_申請分(new ReportId("DBC100012_KogakuOshiraseTsuchiTeshutsuKigenNashiShoShokai"),
-            new RString("高額サービス給付のお知らせ通知書（初回申請分）（提出期限なし）")),
-    /**
-     * 高額サービス給付のお知らせ通知書（自動償還分）（提出期限なし）
-     */
-    DBC100012_償還分(new ReportId("DBC100012_KogakuOshiraseTsuchiShoTeshutsuKigenNashiJidoShokan"),
-            new RString("高額サービス給付のお知らせ通知書（自動償還分）（提出期限なし）")),
+    DBC100012_Nashi(new ReportId("DBC100012_KogakuOshiraseTsuchiTeshutsuKigenNashi"),
+            new RString("高額サービス給付のお知らせ通知書（提出期限なし）")),
     /**
      * 総合事業分自己負担額計算結果一覧表
      */

@@ -5,10 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0150001;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.TyouhyouResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015001.DBB015001_KarisanteiIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
@@ -48,10 +44,8 @@ public class KarisanteiIdoFukaPanel {
         if (getHandler(div).is基準日時()) {
             throw new ApplicationException(DbbErrorMessages.異動賦課の確定処理が未処理.getMessage());
         }
-        List<TyouhyouResult> 帳票IDList = new ArrayList<>();
-        boolean flag = getHandler(div).initialize(帳票IDList);
+        boolean flag = getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
-        ViewStateHolder.put(ViewStateKeys.仮算定異動賦課_帳票IDリスト, (Serializable) 帳票IDList);
         if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(ResponseData.of(div).setState(
                     DBB0150001StateName.仮算定異動賦課).data).rootTitle(特徴仮算定賦課).respond();
@@ -83,8 +77,7 @@ public class KarisanteiIdoFukaPanel {
      * @return ResponseData
      */
     public ResponseData<DBB015001_KarisanteiIdoFukaParameter> onClick_btnSantei(KarisanteiIdoFukaPanelDiv div) {
-        List<TyouhyouResult> 帳票IDList = ViewStateHolder.get(ViewStateKeys.仮算定異動賦課_帳票IDリスト, List.class);
-        DBB015001_KarisanteiIdoFukaParameter paramter = getHandler(div).getバッチパラメータ(帳票IDList);
+        DBB015001_KarisanteiIdoFukaParameter paramter = getHandler(div).getバッチパラメータ();
         return ResponseData.of(paramter).respond();
     }
 
@@ -95,8 +88,7 @@ public class KarisanteiIdoFukaPanel {
      * @return ResponseData
      */
     public ResponseData<DBB015003_KarisanteiIdoTsuchishoHakkoParameter> onClick_btnIkkatsuHakko(KarisanteiIdoFukaPanelDiv div) {
-        List<TyouhyouResult> 帳票IDList = ViewStateHolder.get(ViewStateKeys.仮算定異動賦課_帳票IDリスト, List.class);
-        DBB015001_KarisanteiIdoFukaParameter paramter = getHandler(div).getバッチパラメータ(帳票IDList);
+        DBB015001_KarisanteiIdoFukaParameter paramter = getHandler(div).getバッチパラメータ();
         return ResponseData.of(paramter.toDBB015003_KarisanteiIdoTsuchishoHakkoParameter()).respond();
     }
 

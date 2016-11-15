@@ -224,9 +224,6 @@ public class KihonChosaInputHandler6 {
         int 前回連番 = 認定調査基本情報.get前回調査連番();
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
-        if (連番 >= 整数72 && 連番 <= 整数74) {
-            div.getBtnTokiTaiou().setDisabled(!認定調査基本情報.is特記事項有無());
-        }
         if (調査項目ある.equals(調査項目)) {
             if (連番 == 整数72) {
                 特別な対応Keys.add(KEY0);
@@ -265,9 +262,6 @@ public class KihonChosaInputHandler6 {
     private void set処置内容Keys(List<RString> 処置内容Keys, List<RString> 前回処置内容Keys, KihonChosaInput 認定調査基本情報) {
         int 連番 = 認定調査基本情報.get調査連番();
         RString 調査項目 = 認定調査基本情報.get調査項目();
-        if (連番 >= 整数63 && 連番 <= 整数71) {
-            div.getBtnShochiNaiyo().setDisabled(!認定調査基本情報.is特記事項有無());
-        }
         if (調査項目ある.equals(調査項目)) {
             if (連番 == 整数63) {
                 処置内容Keys.add(KEY0);
