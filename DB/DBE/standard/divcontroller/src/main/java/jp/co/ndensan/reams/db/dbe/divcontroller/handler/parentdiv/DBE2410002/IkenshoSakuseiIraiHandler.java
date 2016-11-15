@@ -184,8 +184,6 @@ public class IkenshoSakuseiIraiHandler {
         } else {
             div.getMeireishoPanel().setDisplayNone(true);
         }
-        div.getTxtHakobi().setValue(RDate.getNowDate());
-        div.getTxtKigenymd().setValue(RDate.getNowDate());
         if (SELECTED_KEY2.equals(div.getRadKigen().getSelectedKey())) {
             div.getTxtKigenymd().setDisabled(false);
         } else {
