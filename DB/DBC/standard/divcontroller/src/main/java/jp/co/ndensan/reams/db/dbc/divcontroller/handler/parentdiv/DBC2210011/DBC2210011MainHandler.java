@@ -821,9 +821,9 @@ public class DBC2210011MainHandler {
 
     private dgTokubetsuKyufuJigyoshaList_Row set事業者情報該当一覧(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者情報) {
         dgTokubetsuKyufuJigyoshaList_Row row = new dgTokubetsuKyufuJigyoshaList_Row();
-        if (JukyushaIF_IdoKubunCode.変更.getコード().equals(事業者情報.get(0).get介護国保連ＩＦ異動区分())) {
+        if (JukyushaIF_IdoKubunCode.変更.getコード().padLeft("0", TWO).equals(事業者情報.get(0).get介護国保連ＩＦ異動区分())) {
             row.setTxtIdoKubun(JukyushaIF_IdoKubunCode.変更.get名称());
-        } else if (JukyushaIF_IdoKubunCode.新規.getコード().equals(事業者情報.get(0).get介護国保連ＩＦ異動区分())) {
+        } else if (JukyushaIF_IdoKubunCode.新規.getコード().padLeft("0", TWO).equals(事業者情報.get(0).get介護国保連ＩＦ異動区分())) {
             row.setTxtIdoKubun(JukyushaIF_IdoKubunCode.新規.get名称());
         } else {
             row.setTxtIdoKubun(JukyushaIF_IdoKubunCode.終了.get名称());
@@ -832,7 +832,7 @@ public class DBC2210011MainHandler {
         row.getTxtIdoYMD().setValue(new RDate(事業者情報.get(0).get介護国保連ＩＦ異動年月日().wareki().toDateString().toString()));
         row.setTxtJigyoshaCode(事業者情報.get(0).get市町村特別給付用事業者番号().value());
         row.setTxtShinseishaShimei(事業者情報.get(0).get申請者氏名_漢字());
-        row.setTxtShinseishaJusho(事業者情報.get(0).get事業所代表者住所());
+        row.setTxtShinseishaJusho(事業者情報.get(0).get申請者住所());
         RString 市町村特別給付用サービス名 = RString.EMPTY;
         for (TokubetsuKyufuJigyoshaSearchBusiness tkjsb : 事業者情報) {
             if (tkjsb.get市町村特別給付サービス事業者().getサービス().getServiceRyakushoName() != null && !tkjsb.get市町村特別給付サービス事業者().getサービス().getServiceRyakushoName().isEmpty()) {
