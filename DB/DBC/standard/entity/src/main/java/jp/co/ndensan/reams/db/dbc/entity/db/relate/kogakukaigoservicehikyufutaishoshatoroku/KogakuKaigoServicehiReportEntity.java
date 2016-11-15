@@ -35,7 +35,6 @@ public class KogakuKaigoServicehiReportEntity {
     private ShikibetsuCode 識別コード;
     private FlexibleYearMonth サービス提供年月;
     private SetaiCode 世帯コード;
-    private RString 高額判定結果;
     private Decimal 利用者負担額;
     private Decimal 支給予定金額;
     private LasdecCode 市町村コード;
