@@ -130,16 +130,11 @@
             "shikibetsuCode"."juminShubetsuCode" as "juminShubetsuCode"
        FROM
             master
-       INNER JOIN
+       LEFT JOIN
             rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
             true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',        
-                (
-                    SELECT
-                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
-                    FROM
-                        master
-                )      
+            '{}'      
             ) AS "shikibetsuCode"       
        ON
             "master"."shikibetsuCode" = "shikibetsuCode"."shikibetsuCode"  
