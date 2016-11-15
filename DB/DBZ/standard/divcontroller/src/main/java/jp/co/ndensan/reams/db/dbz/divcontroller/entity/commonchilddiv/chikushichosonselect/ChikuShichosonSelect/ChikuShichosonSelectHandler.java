@@ -109,7 +109,7 @@ public class ChikuShichosonSelectHandler {
      */
     public void initialize(Code 導入形態コード) {
         RDate 適用基準日 = RDate.getNowDate();
-        if (導入形態コード != null && !導入形態コード.isEmpty() && !導入形態コード.value().isNullOrEmpty()) {
+        if (導入形態コード != null && !導入形態コード.isEmpty() && !RString.isNullOrEmpty(導入形態コード.value())) {
             div.setHdnTxtDonyuKeitaiCode(導入形態コード.value());
             if (コード_事務単一.equals(導入形態コード.value())) {
                 div.getTanitsuShichoson().setDisplayNone(false);
