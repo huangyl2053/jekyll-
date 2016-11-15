@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -143,13 +144,13 @@ public class PostMainPanelHandler {
                         getShichosonShikibetsuId(ControlDataHolder.getUserId()).get(0).getItemId();
                 if (市町村識別ID.equals(NUM_00)) {
                     List<List> resultList = 市町村識別ID00処理();
-                    一覧エリア(resultList);
+                    一覧エリア(市町村識別ID, resultList);
                     div.getTxtZenkaiYMD().setValue(new RDate(resultList.get(0).get(NUM_2).toString().substring(0, NUM_8)));
                     div.getTxtZenkaiTime().setValue(new RTime(new RString(resultList.get(0).get(NUM_2).
                             toString().substring(NUM_8, NUM_14))));
                 } else {
                     List<List> resultList = 市町村識別ID処理(市町村識別ID);
-                    一覧エリア(resultList);
+                    一覧エリア(市町村識別ID, resultList);
                     RString 格納処理日時 = new RString(resultList.get(0).get(NUM_2).toString());
                     div.getTxtZenkaiYMD().setValue(new RDate(格納処理日時.toString().substring(0, NUM_8)));
                     div.getTxtZenkaiTime().setValue(new RTime(格納処理日時.substring(NUM_8, NUM_14)));
@@ -176,12 +177,16 @@ public class PostMainPanelHandler {
     /**
      * 一覧エリアのメソッドます。
      */
-    private List<dgShichoson_Row> 一覧エリア(List<List> resultList) {
+    private List<dgShichoson_Row> 一覧エリア(RString 市町村識別ID, List<List> resultList) {
         List<dgShichoson_Row> listDataSource = new ArrayList();
         int bango = 1;
         for (List<RString> item : resultList) {
             dgShichoson_Row items = new dgShichoson_Row();
             items.setBango(new RString(String.valueOf(bango)));
+            if (!市町村識別ID.equals(NUM_00)) {
+                items.setSelected(Boolean.TRUE);
+                items.setRowState(RowState.Unchanged);
+            }
             if (!RString.isNullOrEmpty(item.get(0))) {
                 items.setShichosonMei(new RString(item.get(0).toString())
                         .concat(RString.HALF_SPACE).concat(item.get(1).toString()));
