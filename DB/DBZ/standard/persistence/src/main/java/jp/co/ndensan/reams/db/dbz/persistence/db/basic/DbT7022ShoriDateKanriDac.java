@@ -1332,7 +1332,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, SubGyomuCode.DBD介護受給),
                                 eq(shichosonCode, 市町村コード),
                                 eq(shoriName, ShoriName.更新申請者管理.get名称()),
-                                eq(shoriEdaban, 処理枝番))).order(by(nendo, Order.DESC)).limit(1).
+                                eq(shoriEdaban, 処理枝番))).order(by(nendo, Order.DESC), by(nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
