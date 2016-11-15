@@ -82,7 +82,8 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
     private static final RString MARU = new RString("○○");
-    private static final RString 審査会名称 = new RString("第○○回審査会");
+    private static final RString BATU = new RString("×");
+    private static final RString 審査会名称 = new RString("第○○回　合×");
     private static final RString 汎用キー = new RString("審査会開催番号");
     private static final RString NENNDO = new RString("年");
     private static final RString GETSU = new RString("月");
@@ -634,8 +635,9 @@ public class ShinsakaiKaisaiYoteiToroku {
                 if (Integer.parseInt(開催番号.toString()) == INDEX_0) {
                     開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー).nextString();
                 }
+                RString 合議体番号 = new RString(entity.get合議体番号());
                 entity.set開催番号(開催番号);
-                entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号));
+                entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号).replace(BATU, 合議体番号));
             }
             yoteiJohoEntityList2.addAll(shinkiList);
         }
