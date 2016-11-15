@@ -150,7 +150,6 @@ var DBC;
                     this.controls.txtRiyosyaFutanWariaiYukoYMD().disabled = false;
 
                     this.controls.radNijiyoboJigyoKubun().disabled = false;
-                    this.controls.txtNijiyoboJigyoYukoDateRange().disabled = false;
 
                     this.controls.txtRojinHokenShichosonNo().disabled = false;
                     this.controls.txtRojinHokenJukyushaNo().disabled = false;
