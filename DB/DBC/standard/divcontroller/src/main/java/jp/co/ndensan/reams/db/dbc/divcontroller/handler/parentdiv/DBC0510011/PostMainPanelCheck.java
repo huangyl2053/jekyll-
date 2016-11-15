@@ -93,7 +93,8 @@ public class PostMainPanelCheck {
                 List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(広域後期情報);
                 単一messeges(後期情報List);
                 RDateTime sharedFileId = 後期情報List.get(0).getSharedFileId();
-                if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null, sharedFileId);
+                RString 市町村コード = div.getHdnShichosonCD().getValue();
+                if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null, sharedFileId, 市町村コード);
             }
             if (導入形態コード.toString().equals(NUM_111.toString())
                     || 導入形態コード.toString().equals(NUM_112.toString())) {
@@ -102,7 +103,8 @@ public class PostMainPanelCheck {
                         後期情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
                 単一messeges(後期情報List);
                 RDateTime sharedFileId = 後期情報List.get(0).getSharedFileId();
-                if種類(後期ＩＦ種類, 導入形態コード, 後期情報, row, sharedFileId);
+                RString 市町村コード = row.getShichosonMei().substring(0, NUM_6);
+                if種類(後期ＩＦ種類, 導入形態コード, 後期情報, row, sharedFileId, 市町村コード);
 
             }
         }
@@ -122,7 +124,8 @@ public class PostMainPanelCheck {
                 List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(広域後期情報);
                 単一messeges(後期情報List);
                 RDateTime sharedFileId = 後期情報List.get(0).getSharedFileId();
-                if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null, sharedFileId);
+                RString 市町村コード = div.getHdnShichosonCD().getValue();
+                if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null, sharedFileId, 市町村コード);
             }
             if (導入形態コード.toString().equals(NUM_111.toString())
                     || 導入形態コード.toString().equals(NUM_112.toString())) {
@@ -131,7 +134,8 @@ public class PostMainPanelCheck {
                             後期情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
                     単一messeges(後期情報List);
                     RDateTime sharedFileId = 後期情報List.get(0).getSharedFileId();
-                    if種類(後期ＩＦ種類, 導入形態コード, 後期情報, row, sharedFileId);
+                    RString 市町村コード = row.getShichosonMei().substring(0, NUM_6);
+                    if種類(後期ＩＦ種類, 導入形態コード, 後期情報, row, sharedFileId, 市町村コード);
 
                 }
             }
@@ -148,7 +152,8 @@ public class PostMainPanelCheck {
                 国保情報List = SharedFile.searchSharedFile(単一国保情報);
                 単一messeges(国保情報List);
                 RDateTime sharedFileId = 国保情報List.get(0).getSharedFileId();
-                if種類(国保ＩＦ種類, 導入形態コード, 単一国保情報, null, sharedFileId);
+                RString 市町村コード = div.getHdnShichosonCD().getValue();
+                if種類(国保ＩＦ種類, 導入形態コード, 単一国保情報, null, sharedFileId, 市町村コード);
             }
 
             if (導入形態コード.toString().equals(NUM_111.toString())
@@ -158,7 +163,8 @@ public class PostMainPanelCheck {
                         国保情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
                 単一messeges(国保情報List);
                 RDateTime sharedFileId = 国保情報List.get(0).getSharedFileId();
-                if種類(国保ＩＦ種類, 導入形態コード, 国保情報, row, sharedFileId);
+                RString 市町村コード = row.getShichosonMei().substring(0, NUM_6);
+                if種類(国保ＩＦ種類, 導入形態コード, 国保情報, row, sharedFileId, 市町村コード);
             }
         }
     }
@@ -173,7 +179,8 @@ public class PostMainPanelCheck {
                 国保情報List = SharedFile.searchSharedFile(単一国保情報);
                 単一messeges(国保情報List);
                 RDateTime sharedFileId = 国保情報List.get(0).getSharedFileId();
-                if種類(国保ＩＦ種類, 導入形態コード, 単一国保情報, null, sharedFileId);
+                RString 市町村コード = div.getHdnShichosonCD().getValue();
+                if種類(国保ＩＦ種類, 導入形態コード, 単一国保情報, null, sharedFileId, 市町村コード);
             }
 
             if (導入形態コード.toString().equals(NUM_111.toString())
@@ -183,52 +190,53 @@ public class PostMainPanelCheck {
                             国保情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
                     単一messeges(国保情報List);
                     RDateTime sharedFileId = 国保情報List.get(0).getSharedFileId();
-                    if種類(国保ＩＦ種類, 導入形態コード, 国保情報, row, sharedFileId);
+                    RString 市町村コード = row.getShichosonMei().substring(0, NUM_6);
+                    if種類(国保ＩＦ種類, 導入形態コード, 国保情報, row, sharedFileId, 市町村コード);
                 }
             }
         }
     }
 
-    private void if種類(RString 種類, Code 導入形態コード, RString fileName, dgShichoson_Row row, RDateTime sharedFileId) {
+    private void if種類(RString 種類, Code 導入形態コード, RString fileName, dgShichoson_Row row, RDateTime sharedFileId, RString 市町村コード) {
         if (種類.equals(NUM_1)) {
-            getNum1長さ判定(fileName, 導入形態コード, row, sharedFileId);
+            getNum1長さ判定(fileName, 導入形態コード, row, sharedFileId, 市町村コード);
         }
         if (種類.equals(NUM_2)) {
-            getNum2長さ判定(fileName, 導入形態コード, row, sharedFileId);
+            getNum2長さ判定(fileName, 導入形態コード, row, sharedFileId, 市町村コード);
         }
     }
 
-    private void getNum1長さ判定(RString fileName, Code 導入形態コード, dgShichoson_Row row, RDateTime sharedFileId) {
+    private void getNum1長さ判定(RString fileName, Code 導入形態コード, dgShichoson_Row row, RDateTime sharedFileId, RString 市町村コード) {
         if (fileName.equals(単一国保情報)) {
-            長さ判定(INT_1, 単一国保情報, NUM_90, 0, NUM_6, 導入形態コード, null, sharedFileId);
+            長さ判定(INT_1, 単一国保情報, NUM_90, 0, NUM_6, 導入形態コード, null, sharedFileId, 市町村コード);
         }
         if (fileName.equals(国保情報)) {
             長さ判定(INT_1, 国保情報.replace(定値_処理枝番, NUM_00.concat(row.
-                    getShichosonShikibetuID())), NUM_90, 0, NUM_6, 導入形態コード, row, sharedFileId);
+                    getShichosonShikibetuID())), NUM_90, 0, NUM_6, 導入形態コード, row, sharedFileId, 市町村コード);
         }
         if (fileName.equals(広域後期情報)) {
-            長さ判定(INT_1, 広域後期情報, NUM_62, 0, NUM_6, 導入形態コード, null, sharedFileId);
+            長さ判定(INT_1, 広域後期情報, NUM_62, 0, NUM_6, 導入形態コード, null, sharedFileId, 市町村コード);
         }
         if (fileName.equals(後期情報)) {
             長さ判定(INT_1, 後期情報.replace(定値_処理枝番, NUM_00.concat(row.
-                    getShichosonShikibetuID())), NUM_62, 0, NUM_6, 導入形態コード, row, sharedFileId);
+                    getShichosonShikibetuID())), NUM_62, 0, NUM_6, 導入形態コード, row, sharedFileId, 市町村コード);
         }
     }
 
-    private void getNum2長さ判定(RString fileName, Code 導入形態コード, dgShichoson_Row row, RDateTime sharedFileId) {
+    private void getNum2長さ判定(RString fileName, Code 導入形態コード, dgShichoson_Row row, RDateTime sharedFileId, RString 市町村コード) {
         if (fileName.equals(単一国保情報)) {
-            長さ判定(INT_2, 単一国保情報, NUM_341, NUM_38, NUM_43, 導入形態コード, null, sharedFileId);
+            長さ判定(INT_2, 単一国保情報, NUM_341, NUM_38, NUM_43, 導入形態コード, null, sharedFileId, 市町村コード);
         }
         if (fileName.equals(国保情報)) {
             長さ判定(INT_2, 国保情報.replace(定値_処理枝番, NUM_00.concat(row.
-                    getShichosonShikibetuID())), NUM_341, NUM_38, NUM_43, 導入形態コード, row, sharedFileId);
+                    getShichosonShikibetuID())), NUM_341, NUM_38, NUM_43, 導入形態コード, row, sharedFileId, 市町村コード);
         }
         if (fileName.equals(広域後期情報)) {
-            長さ判定(INT_2, 広域後期情報, NUM_492, NUM_322, NUM_328, 導入形態コード, null, sharedFileId);
+            長さ判定(INT_2, 広域後期情報, NUM_492, NUM_322, NUM_328, 導入形態コード, null, sharedFileId, 市町村コード);
         }
         if (fileName.equals(後期情報)) {
             長さ判定(INT_2, 後期情報.replace(定値_処理枝番, NUM_00.concat(row.
-                    getShichosonShikibetuID())), NUM_492, NUM_322, NUM_328, 導入形態コード, row, sharedFileId);
+                    getShichosonShikibetuID())), NUM_492, NUM_322, NUM_328, 導入形態コード, row, sharedFileId, 市町村コード);
         }
     }
 
@@ -243,8 +251,10 @@ public class PostMainPanelCheck {
      * @param 導入形態コード int
      * @param row int
      * @param sharedFileId RDateTime
+     * @param 市町村コード
      */
-    public void 長さ判定(int 長さ判定, RString fileName, int num, int from, int to, Code 導入形態コード, dgShichoson_Row row, RDateTime sharedFileId) {
+    public void 長さ判定(int 長さ判定, RString fileName, int num, int from, int to, Code 導入形態コード,
+            dgShichoson_Row row, RDateTime sharedFileId, RString 市町村コード) {
         try {
             RString path = new RString(SharedFile.getBasePath().concat(File.separator)
                     .concat(DB.toString()).concat(File.separator)
@@ -275,7 +285,7 @@ public class PostMainPanelCheck {
                     throw new ApplicationException(UrErrorMessages.不正.getMessage()
                             .replace(国保取込ファイルのフォーマット.toString()).evaluate());
                 } else {
-                    市町村コード(長さ判定, 導入形態コード, hasread, from, to, row);
+                    市町村コード(長さ判定, 導入形態コード, hasread, from, to, row, 市町村コード);
                 }
                 bufferedReader.close();
             }
@@ -305,15 +315,15 @@ public class PostMainPanelCheck {
      * @param row dgShichoson_Row
      * @param from int
      * @param to int
+     * @param 市町村コード RString
      */
-    public void 市町村コード(int 長さ判定, Code 導入形態コード, RString hasread, int from, int to, dgShichoson_Row row) {
+    public void 市町村コード(int 長さ判定, Code 導入形態コード, RString hasread, int from, int to, dgShichoson_Row row, RString 市町村コード) {
         if (ResponseHolder.getMenuID().equals(DBCMN82001) && 長さ判定 == INT_2) {
-            RString 市町村コード = row.getShichosonMei().substring(0, NUM_5);
+            市町村コード = 市町村コード.substring(0, NUM_5);
             if (!hasread.substring(from, to).equals(市町村コード)) {
                 messeges();
             }
         } else {
-            RString 市町村コード = div.getHdnShichosonCD().getValue();
             if (!hasread.substring(from, to).equals(市町村コード)) {
                 messeges();
             }

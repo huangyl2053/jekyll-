@@ -25,12 +25,13 @@ import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -69,6 +70,8 @@ public class PostMainPanelHandler {
     private static final RString 差分 = new RString("差分");
     private static final RString 単一の場合 = new RString("単一の場合");
     private static final RString 広域の場合 = new RString("広域の場合");
+    private static final RString 単一国保情報 = new RString("21_DBU_KOKUHO_0000.txt");
+    private static final RString 広域後期情報 = new RString("22_DBU_KOUKI_0000.txt");
     private final Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).
             get導入形態コード();
 
@@ -98,13 +101,17 @@ public class PostMainPanelHandler {
                     getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報().get市町村コード().toString()));
             ShoriDateKanri 処理日付管理マスタ;
             ShoriDateKanriManager manager = new ShoriDateKanriManager();
-            if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
+            if (ResponseHolder.getMenuID().equals(DBCMN82001) && SharedFile.searchSharedFile(単一国保情報) != null) {
                 処理日付管理マスタ = manager.get処理日付管理マスタ(国保情報取り込み, 処理枝番);
                 処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに国保の情報);
+                List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(単一国保情報);
+                setTime(国保情報List.get(0).getSharedFileId());
             } else {
-                if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+                if (ResponseHolder.getMenuID().equals(DBCMN82002) && SharedFile.searchSharedFile(広域後期情報) != null) {
                     処理日付管理マスタ = manager.get処理日付管理マスタ(後期高齢者情報取り込み, 処理枝番);
                     処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに後期高齢の情報);
+                    List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(広域後期情報);
+                    setTime(後期情報List.get(0).getSharedFileId());
                 }
             }
             RString 連携形式 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保格納場所, RDate.getNowDate(),
@@ -184,8 +191,8 @@ public class PostMainPanelHandler {
             dgShichoson_Row items = new dgShichoson_Row();
             items.setBango(new RString(String.valueOf(bango)));
             if (!市町村識別ID.equals(NUM_00)) {
+                items.setSelectable(Boolean.FALSE);
                 items.setSelected(Boolean.TRUE);
-                items.setRowState(RowState.Unchanged);
             }
             if (!RString.isNullOrEmpty(item.get(0))) {
                 items.setShichosonMei(new RString(item.get(0).toString())
