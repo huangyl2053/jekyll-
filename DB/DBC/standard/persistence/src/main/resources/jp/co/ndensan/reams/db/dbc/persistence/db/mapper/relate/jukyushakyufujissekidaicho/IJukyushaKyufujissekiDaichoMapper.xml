@@ -119,15 +119,6 @@
             , DbT1001_tmp2."DbT1001_tmp1_hihokenshaNo" as "dbT1001_tmp2_hihokenshaNo"
             , DbT1001_tmp2."DbT1001_tmp1_idoYMD" as "dbT1001_tmp2_idoYMD"
             , DbT1001_tmp2."DbT1001_tmp1_edaNo" as "dbT1001_tmp2_edaNo"
-            , DbT1001_tmp2."DbT1001_tmp1_insertDantaiCd" as "dbT1001_tmp2_insertDantaiCd"
-            , DbT1001_tmp2."DbT1001_tmp1_insertTimestamp" as "dbT1001_tmp2_insertTimestamp"
-            , DbT1001_tmp2."DbT1001_tmp1_insertReamsLoginId" as "dbT1001_tmp2_insertReamsLoginId"
-            , DbT1001_tmp2."DbT1001_tmp1_insertContextId" as "dbT1001_tmp2_insertContextId"
-            , DbT1001_tmp2."DbT1001_tmp1_isDeleted" as "dbT1001_tmp2_isDeleted"
-            , DbT1001_tmp2."DbT1001_tmp1_updateCount" as "dbT1001_tmp2_updateCount"
-            , DbT1001_tmp2."DbT1001_tmp1_lastUpdateTimestamp" as "dbT1001_tmp2_lastUpdateTimestamp"
-            , DbT1001_tmp2."DbT1001_tmp1_lastUpdateReamsLoginId" as "dbT1001_tmp2_lastUpdateReamsLoginId"
-            , DbT1001_tmp2."DbT1001_tmp1_idoJiyuCode" as "dbT1001_tmp2_idoJiyuCode"
             , DbT1001_tmp2."DbT1001_tmp1_shichosonCode" as "dbT1001_tmp2_shichosonCode"
             , DbT1001_tmp2."DbT1001_tmp1_shikibetsuCode" as "dbT1001_tmp2_shikibetsuCode"
             , DbT1001_tmp2."DbT1001_tmp1_shikakuShutokuJiyuCode" as "dbT1001_tmp2_shikakuShutokuJiyuCode"
@@ -347,7 +338,7 @@
             , DbT1001_tmp2."PSM_gaikokujinKanaName" as "psm_tmp2_gaikokujinKanaName"
             , DbT1001_tmp2."PSM_kanaTsushoName" as "psm_tmp2_kanaTsushoName"
             , DbT1001_tmp2."PSM_jukiTorokuNo" as "psm_tmp2_jukiTorokuNo"
-            , DbT3017."jigyoshaName" AS "dbT7060_jigyoshaName"
+            , DbT7060."jigyoshaName" AS "dbT7060_jigyoshaName"
             , DbT3118."meisho" AS "dbT3118_meisho"
             , DbT3118."ryakusho" AS "dbT3118_ryakusho"
           FROM
@@ -357,14 +348,6 @@
                                   DbT1001_tmp1."hihokenshaNo" as "DbT1001_tmp1_hihokenshaNo"
                                 , DbT1001_tmp1."idoYMD" as "DbT1001_tmp1_idoYMD"
                                 , DbT1001_tmp1."edaNo" as "DbT1001_tmp1_edaNo"
-                                , DbT1001_tmp1."insertDantaiCd" as "DbT1001_tmp1_insertDantaiCd"
-                                , DbT1001_tmp1."insertTimestamp" as "DbT1001_tmp1_insertTimestamp"
-                                , DbT1001_tmp1."insertReamsLoginId" as "DbT1001_tmp1_insertReamsLoginId"
-                                , DbT1001_tmp1."insertContextId" as "DbT1001_tmp1_insertContextId"
-                                , DbT1001_tmp1."isDeleted" as "DbT1001_tmp1_isDeleted"
-                                , DbT1001_tmp1."updateCount" as "DbT1001_tmp1_updateCount"
-                                , DbT1001_tmp1."lastUpdateTimestamp" as "DbT1001_tmp1_lastUpdateTimestamp"
-                                , DbT1001_tmp1."lastUpdateReamsLoginId" as "DbT1001_tmp1_lastUpdateReamsLoginId"
                                 , DbT1001_tmp1."idoJiyuCode" as "DbT1001_tmp1_idoJiyuCode"
                                 , DbT1001_tmp1."shichosonCode" as "DbT1001_tmp1_shichosonCode"
                                 , DbT1001_tmp1."shikibetsuCode" as "DbT1001_tmp1_shikibetsuCode"
@@ -824,14 +807,16 @@
                   DbT3017."kyotakuKaigoShienJigyoshoNo" = #{計画作成事業者番号}
               </if>
               <if test="!給付率flag">
-                  AND
                   <if test="給付率区分flag1">
+                      AND
                       DbT3017."hokenKyufuritsu" = #{給付率}
                   </if>
                   <if test="給付率区分flag2">
+                      AND
                       #{給付率} <![CDATA[<]]> DbT3017."hokenKyufuritsu"
                   </if>
                   <if test="給付率区分flag3">
+                      AND
                       DbT3017."hokenKyufuritsu" <![CDATA[<]]> #{給付率}
                   </if>
               </if>
@@ -1069,9 +1054,9 @@
                         AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
                         LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
-                            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
-                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
-                            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                            ON DbT3118."shikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                            AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
 	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
 	<include refid="subsql"/>
@@ -1105,11 +1090,11 @@
                         AND	"DbT3025KyufujissekiKyotakuService"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3025KyufujissekiKyotakuService"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
                 LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
-                        ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
-                        AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
-                        AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                        ON DbT3118."shikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo" 
+                        AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
                 LEFT JOIN rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131
-                        ON "DbT3025KyufujissekiKyotakuService"."serviceCode" = (DbT7131."serviceShuruiCd",DbT7131."serviceKoumokuCd")
+                        ON "DbT3025KyufujissekiKyotakuService"."serviceCode" = concat(DbT7131."serviceShuruiCd",DbT7131."serviceKoumokuCd")
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1142,9 +1127,9 @@
                         AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
         LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
-                      ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
-                      AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
-                      AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                      ON DbT3118."shikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo" 
+                      AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                      AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1177,9 +1162,9 @@
                         AND	"DbT3027KyufujissekiJutakuKaishuhi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3027KyufujissekiJutakuKaishuhi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
                 LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
-                            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
-                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
-                            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                            ON DbT3118."shikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                            AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1248,9 +1233,9 @@
                         AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
                 LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
-                            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
-                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
-                            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                            ON DbT3118."shikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                            AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1283,9 +1268,9 @@
                         AND	"DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3031KyufuJissekiCareManagementHi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
                 LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
-                            ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo" 
-                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
-                            AND DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                            ON DbT3118."shikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                            AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1347,6 +1332,9 @@
                         AND	"DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                         AND	"DbT3106KyufujissekiMeisaiJushochiTokurei"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3106KyufujissekiMeisaiJushochiTokurei"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+          LEFT JOIN rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131
+                        ON      DbT7131."serviceShuruiCd" = "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceShuruiCode"
+                        AND     DbT7131."serviceKoumokuCd" = "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceKomokuCode"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1436,14 +1424,6 @@
             , DbT1001_tmp2."DbT1001_tmp1_hihokenshaNo" as "dbt1001_tmp2_hihokenshaNo"
             , DbT1001_tmp2."DbT1001_tmp1_idoYMD" as "dbt1001_tmp2_idoYMD"
             , DbT1001_tmp2."DbT1001_tmp1_edaNo" as "dbt1001_tmp2_edaNo"
-            , DbT1001_tmp2."DbT1001_tmp1_insertDantaiCd" as "dbt1001_tmp2_insertDantaiCd"
-            , DbT1001_tmp2."DbT1001_tmp1_insertTimestamp" as "dbt1001_tmp2_insertTimestamp"
-            , DbT1001_tmp2."DbT1001_tmp1_insertReamsLoginId" as "dbt1001_tmp2_insertReamsLoginId"
-            , DbT1001_tmp2."DbT1001_tmp1_insertContextId" as "dbt1001_tmp2_insertContextId"
-            , DbT1001_tmp2."DbT1001_tmp1_isDeleted" as "dbt1001_tmp2_isDeleted"
-            , DbT1001_tmp2."DbT1001_tmp1_updateCount" as "dbt1001_tmp2_updateCount"
-            , DbT1001_tmp2."DbT1001_tmp1_lastUpdateTimestamp" as "dbt1001_tmp2_lastUpdateTimestamp"
-            , DbT1001_tmp2."DbT1001_tmp1_lastUpdateReamsLoginId" as "dbt1001_tmp2_lastUpdateReamsLoginId"
             , DbT1001_tmp2."DbT1001_tmp1_idoJiyuCode" as "dbt1001_tmp2_idoJiyuCode"
             , DbT1001_tmp2."DbT1001_tmp1_shichosonCode" as "dbt1001_tmp2_shichosonCode"
             , DbT1001_tmp2."DbT1001_tmp1_shikibetsuCode" as "dbt1001_tmp2_shikibetsuCode"
@@ -1673,14 +1653,6 @@
                                   DbT1001_tmp1."hihokenshaNo" as "DbT1001_tmp1_hihokenshaNo"
                                 , DbT1001_tmp1."idoYMD" as "DbT1001_tmp1_idoYMD"
                                 , DbT1001_tmp1."edaNo" as "DbT1001_tmp1_edaNo"
-                                , DbT1001_tmp1."insertDantaiCd" as "DbT1001_tmp1_insertDantaiCd"
-                                , DbT1001_tmp1."insertTimestamp" as "DbT1001_tmp1_insertTimestamp"
-                                , DbT1001_tmp1."insertReamsLoginId" as "DbT1001_tmp1_insertReamsLoginId"
-                                , DbT1001_tmp1."insertContextId" as "DbT1001_tmp1_insertContextId"
-                                , DbT1001_tmp1."isDeleted" as "DbT1001_tmp1_isDeleted"
-                                , DbT1001_tmp1."updateCount" as "DbT1001_tmp1_updateCount"
-                                , DbT1001_tmp1."lastUpdateTimestamp" as "DbT1001_tmp1_lastUpdateTimestamp"
-                                , DbT1001_tmp1."lastUpdateReamsLoginId" as "DbT1001_tmp1_lastUpdateReamsLoginId"
                                 , DbT1001_tmp1."idoJiyuCode" as "DbT1001_tmp1_idoJiyuCode"
                                 , DbT1001_tmp1."shichosonCode" as "DbT1001_tmp1_shichosonCode"
                                 , DbT1001_tmp1."shikibetsuCode" as "DbT1001_tmp1_shikibetsuCode"

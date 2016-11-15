@@ -29,7 +29,7 @@ public class MeisaiJuushoListCreateProcess extends BatchProcessBase<MeisaiJuusho
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaKyufujissekiDaichoMapper."
-            + "get明細");
+            + "get明細住所地特例");
     private static final RString 住所地特例_区分 = new RString("2");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 明細List;
