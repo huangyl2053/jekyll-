@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.futsuchoshukarisanteikekkaichiranreport.FutsuChoshuKarisanteiKekkaIchiranOutputOrder;
 import jp.co.ndensan.reams.db.dbb.business.report.futsuchoshukarisanteikekkaichiranreport.FutsuChoshuKarisanteiKekkaIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.futsuchoshukarisanteikekkaichiranreport.FutsuChoshuKarisanteiKekkaIchiranReport;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FuchoKariKeisanGoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FutsuChoshuKarisanteiKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.NenkinCode;
@@ -80,6 +82,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     private static final RString TITLE_賦課年度 = new RString("【賦課年度】　");
     private static final RString 定数_年度 = new RString("年度");
     private static final RString CSV出力有無_有り = new RString("有り");
+    private static final RString DOT = new RString("*");
     private RString eucFilePath;
     FileSpoolManager spoolManager;
     private DbT2015KeisangoJohoEntity 計算後情報;
@@ -292,6 +295,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
                 ? 特別徴収業務者コード.getColumnValue().getColumnValue() : RString.EMPTY);
         普徴仮算定計算後賦課Entity.set資格適用対象の通知書番号(計算後情報.getTsuchishoNo());
         普徴仮算定計算後賦課Entity.set前年度賦課の情報(entity.get介護賦課前年度());
+        普徴仮算定計算後賦課Entity.set資格適用対象の通知書番号(entity.getTsuchishoNo());
         普徴仮算定計算後賦課Entity.set徴収方法(entity.getChoshuHoho());
         普徴仮算定計算後賦課Entity.set特徴開始月(entity.getTkKaishiM());
         FutsuChoshuKarisanteiKekkaIchiranReport report = new FutsuChoshuKarisanteiKekkaIchiranReport(普徴仮算定計算後賦課Entity,
@@ -356,11 +360,21 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         csvEntity.set特別徴収義務者(new TokubetsuChoshuGimushaCode(普徴仮算定計算後賦課Entity.get特別徴収業務者コード()).getMeisho());
         csvEntity.set特別徴収対象年金コード(普徴仮算定計算後賦課Entity.get仮徴収年金コード());
         csvEntity.set特別徴収対象年金(new NenkinCode(普徴仮算定計算後賦課Entity.get仮徴収年金コード()).getMeisho());
-        csvEntity.set特別徴収仮徴収額_4月(new RString(普徴仮算定計算後賦課Entity.get特徴期別金額01().toString()));
-        csvEntity.set特別徴収仮徴収額_6月(new RString(普徴仮算定計算後賦課Entity.get特徴期別金額02().toString()));
-        csvEntity.set特別徴収仮徴収額_8月(new RString(普徴仮算定計算後賦課Entity.get特徴期別金額03().toString()));
-        //csvEntity.set前年度情報の最終所得段階(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
-        if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null && 普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo2() != null) {
+        csvEntity.set特別徴収仮徴収額_4月(getDecimal(普徴仮算定計算後賦課Entity.get特徴期別金額01()));
+        csvEntity.set特別徴収仮徴収額_6月(getDecimal(普徴仮算定計算後賦課Entity.get特徴期別金額02()));
+        csvEntity.set特別徴収仮徴収額_8月(getDecimal(普徴仮算定計算後賦課Entity.get特徴期別金額03()));
+        HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
+                get保険料段階ListIn(普徴仮算定計算後賦課Entity.get賦課年度());
+        if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null && RString.isNullOrEmpty(
+                普徴仮算定計算後賦課Entity.get前年度賦課の情報().getHokenryoDankai2())) {
+            csvEntity.set前年度情報の最終所得段階(保険料段階List.getBy段階区分(普徴仮算定計算後賦課Entity.get前年度賦課の情報().
+                    getHokenryoDankai2()).get表記());
+        } else if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null) {
+            csvEntity.set前年度情報の最終所得段階(保険料段階List.getBy段階区分(普徴仮算定計算後賦課Entity.get前年度賦課の情報().
+                    getHokenryoDankai1()).get表記());
+        }
+        if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null
+                && 普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo2() != null) {
             csvEntity.set前年度情報の最終月別年額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo2().toString()));
         } else if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null) {
             csvEntity.set前年度情報の最終月別年額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo1().toString()));
@@ -371,10 +385,24 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         }
         csvEntity.set前年度情報の計算納期数(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
         csvEntity.set前年度情報の賦課納期数(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
-        csvEntity.set特別徴収業務者コード(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
-        csvEntity.set特別徴収業務者コード(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
+        csvEntity.set仮算定時保険料段階(保険料段階List.getBy段階区分(普徴仮算定計算後賦課Entity.get保険料段階仮算定時()).get表記());
+        csvEntity.set新規資格適用段階対象者(普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号() == null
+                ? DOT : 普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号().getColumnValue());
 
+        csvEntity.set普通徴収仮徴収額_4月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額01()));
+        csvEntity.set普通徴収仮徴収額_5月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額02()));
+        csvEntity.set普通徴収仮徴収額_6月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額03()));
+        csvEntity.set普通徴収仮徴収額_7月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額04()));
+        csvEntity.set普通徴収仮徴収額_8月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額05()));
+        csvEntity.set普通徴収仮徴収額_9月(getDecimal(普徴仮算定計算後賦課Entity.get普徴期別金額06()));
         return csvEntity;
+    }
+
+    private RString getDecimal(Decimal dec) {
+        if (dec == null) {
+            return new RString(Decimal.ZERO.toString());
+        }
+        return new RString(dec.toString());
     }
 
     private RString get前年度情報の最終普徴額(FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課Entity) {
