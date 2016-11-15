@@ -4,27 +4,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * pnlShinsei のクラスファイル
- *
- * @reamsid_L DBC-1030-160 xupeng
+ * pnlShinsei のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class pnlShinseiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,10 +32,10 @@ public class pnlShinseiDiv extends Panel {
     private TextBoxCode txtKisaiHokensyaBango;
     @JsonProperty("chkKokuhorenSaiso")
     private CheckBoxList chkKokuhorenSaiso;
-    @JsonProperty("txtShimeikana")
-    private TextBoxAtenaKanaMeisho txtShimeikana;
     @JsonProperty("txtShimeiKanji")
     private TextBoxAtenaMeisho txtShimeiKanji;
+    @JsonProperty("txtShimeikana")
+    private TextBoxAtenaKanaMeisho txtShimeikana;
     @JsonProperty("txtTelNo")
     private TextBoxTelNo txtTelNo;
     @JsonProperty("txtMulShinseiRiyu")
@@ -153,24 +144,6 @@ public class pnlShinseiDiv extends Panel {
     }
 
     /*
-     * gettxtShimeikana
-     * @return txtShimeikana
-     */
-    @JsonProperty("txtShimeikana")
-    public TextBoxAtenaKanaMeisho getTxtShimeikana() {
-        return txtShimeikana;
-    }
-
-    /*
-     * settxtShimeikana
-     * @param txtShimeikana txtShimeikana
-     */
-    @JsonProperty("txtShimeikana")
-    public void setTxtShimeikana(TextBoxAtenaKanaMeisho txtShimeikana) {
-        this.txtShimeikana = txtShimeikana;
-    }
-
-    /*
      * gettxtShimeiKanji
      * @return txtShimeiKanji
      */
@@ -186,6 +159,24 @@ public class pnlShinseiDiv extends Panel {
     @JsonProperty("txtShimeiKanji")
     public void setTxtShimeiKanji(TextBoxAtenaMeisho txtShimeiKanji) {
         this.txtShimeiKanji = txtShimeiKanji;
+    }
+
+    /*
+     * gettxtShimeikana
+     * @return txtShimeikana
+     */
+    @JsonProperty("txtShimeikana")
+    public TextBoxAtenaKanaMeisho getTxtShimeikana() {
+        return txtShimeikana;
+    }
+
+    /*
+     * settxtShimeikana
+     * @param txtShimeikana txtShimeikana
+     */
+    @JsonProperty("txtShimeikana")
+    public void setTxtShimeikana(TextBoxAtenaKanaMeisho txtShimeikana) {
+        this.txtShimeikana = txtShimeikana;
     }
 
     /*
