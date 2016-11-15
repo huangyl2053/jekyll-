@@ -135,6 +135,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString RSTRING_17 = new RString("17");
     private static final RString RSTRING_67 = new RString("67");
     private static final RString SERVICETANI = new RString("serviceTani");
+    private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
 
     /**
      * コンストラクタです。
@@ -533,6 +534,9 @@ public class ServiceRiyohyoInfoDivHandler {
     public void setサービス利用票(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月, int 履歴番号, FlexibleYearMonth 利用年月) {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         List<KyufuJikoSakuseiResult> サービス利用票情報 = jigoSakusei.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号, 利用年月);
+        if (サービス利用票情報 == null || サービス利用票情報.isEmpty()) {
+            throw new ApplicationException(前月の明細情報エラー.toString());
+        }
         List<dgServiceRiyohyoBeppyoList_Row> rowList = new ArrayList<>();
         int i = 0;
         for (KyufuJikoSakuseiResult result : サービス利用票情報) {
@@ -627,11 +631,13 @@ public class ServiceRiyohyoInfoDivHandler {
         if (削除.equals(表示モード)) {
             row.setRowState(RowState.Deleted);
         }
-        if (合計なし.equals(row.getHdnGokeiGyoFlag())) {
+        if (!合計有り.equals(row.getHdnGokeiFlag())) {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス種類コード(row.getHdnServiceShuruiCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス項目コード(row.getHdnServiceKomokuCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
+        } else {
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
         }
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
 
@@ -862,7 +868,7 @@ public class ServiceRiyohyoInfoDivHandler {
         List<dgServiceRiyohyoBeppyoList_Row> rowList
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
         for (dgServiceRiyohyoBeppyoList_Row row : rowList) {
-            if (合計有り.equals(row.getHdnGokeiGyoFlag())
+            if (RSTRING_ONE.equals(row.getHdnGokeiGyoFlag())
                     && row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo())
                     && row.getHdnServiceShuruiCode().equals(サービス種類Tmp)) {
                 int 単位数 = 利用サービス.get単位数();

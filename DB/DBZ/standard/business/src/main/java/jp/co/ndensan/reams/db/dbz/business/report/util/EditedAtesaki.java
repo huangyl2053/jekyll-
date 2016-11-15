@@ -277,4 +277,40 @@ public class EditedAtesaki {
     public RString get管内管外区分() {
         return 宛先.toEntity().getKannaiKangaiKubun();
     }
+
+    /**
+     * 町域コードを返します。
+     *
+     * @return 町域コード
+     */
+    public RString get町域コード() {
+        return 宛先.get宛先住所().get町域コード().getColumnValue();
+    }
+
+    /**
+     * 地区１を返します。
+     *
+     * @return 地区１
+     */
+    public RString get地区１() {
+        return 宛先.get地区１().getコード().getColumnValue();
+    }
+
+    /**
+     * 地区２を返します。
+     *
+     * @return 地区２
+     */
+    public RString get地区２() {
+        return 宛先.get地区２().getコード().getColumnValue();
+    }
+
+    /**
+     * 地区３を返します。
+     *
+     * @return 地区３
+     */
+    public RString get地区３() {
+        return 宛先.get地区３().getコード().getColumnValue();
+    }
 }

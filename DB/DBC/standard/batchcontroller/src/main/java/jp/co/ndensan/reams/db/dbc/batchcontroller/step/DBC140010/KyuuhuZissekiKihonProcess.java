@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaKyufujissekiDaichoMapper."
+            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaTmpMapper."
             + "get基本");
     private static final ReportId ID = ReportIdDBC.DBC100055.getReportId();
     private static final RString MESSAGE = new RString("**　対象データは存在しません　**");
@@ -85,8 +85,8 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonEntity> {
     @Override
     protected void beforeExecute() {
         明細 = mapper.get明細();
-        緊急時施設療養 = mapper.get緊急時施設療養();
-        特定診療費 = mapper.get特定診療費();
+        緊急時施設療養 = mapper.get施設療養();
+        特定診療費 = mapper.get特別療養();
         計画費 = mapper.get計画費();
         福祉用具 = mapper.get福祉用具();
         住宅改修 = mapper.get住宅改修();

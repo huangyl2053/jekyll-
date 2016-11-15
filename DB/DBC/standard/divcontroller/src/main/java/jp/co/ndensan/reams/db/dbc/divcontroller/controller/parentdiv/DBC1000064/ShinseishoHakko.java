@@ -83,7 +83,9 @@ public class ShinseishoHakko {
      */
     public ResponseData<ShinseishoHakkoDiv> onActive(ShinseishoHakkoDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        div.getTxtHihokenshaNo().setValue(資格対象者.get被保険者番号().getColumnValue());
+        if (資格対象者 != null && 資格対象者.get被保険者番号() != null) {
+            div.getTxtHihokenshaNo().setValue(資格対象者.get被保険者番号().getColumnValue());
+        }
         return ResponseData.of(div).respond();
     }
 

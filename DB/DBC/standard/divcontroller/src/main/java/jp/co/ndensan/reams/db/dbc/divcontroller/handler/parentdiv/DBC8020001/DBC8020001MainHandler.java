@@ -227,11 +227,13 @@ public class DBC8020001MainHandler {
             div.getTxtKonkaiTaishoYmdRange().clearFromValue();
             div.getTxtKonkaiTaishoYmdRange().setToValue(RDate.getNowDate());
         } else {
-            div.getTxtKonkaiTaishoYmdRange().setFromValue(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()).plusDay(1));
-            if (RDate.getNowDate().isBeforeOrEquals(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()))) {
-                div.getTxtKonkaiTaishoYmdRange().setToValue(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()).plusDay(1));
-            } else {
-                div.getTxtKonkaiTaishoYmdRange().setToValue(RDate.getNowDate());
+            if (dbc.getEntity().getTaishoShuryoYMD() != null) {
+                div.getTxtKonkaiTaishoYmdRange().setFromValue(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()).plusDay(1));
+                if (RDate.getNowDate().isBeforeOrEquals(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()))) {
+                    div.getTxtKonkaiTaishoYmdRange().setToValue(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()).plusDay(1));
+                } else {
+                    div.getTxtKonkaiTaishoYmdRange().setToValue(RDate.getNowDate());
+                }
             }
         }
         div.getTxtKetteishaUketoriYmRange().clearFromValue();

@@ -23,6 +23,7 @@ public enum TokubetsuChoshuKaishiPageOutPutOrder implements IReportItems {
      * 町域コード
      */
     町域コード(new RString("0002"), new RString("町域コード"), new RString("\"atesaki_choikiCode\"")),
+    //TODO 実装確認
     /**
      * 番地コード1
      */
@@ -98,8 +99,7 @@ public enum TokubetsuChoshuKaishiPageOutPutOrder implements IReportItems {
     /**
      * 10月特徴開始者
      */
-    //QA1854 確認中
-    十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\""));
+    十月特徴開始者(new RString("0219"), new RString("10月特徴開始者"), new RString("\"特徴10月開始者区分\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

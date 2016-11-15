@@ -133,7 +133,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         mybatisParameter = parameter.toMybatisParameter();
         mybatisParameter.set特別徴収対象者情報(TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード());
         mybatisParameter.set特別徴収追加候補者情報(TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード());
-        調定年度開始日 = new RDate(parameter.get調定年度().getYearValue(), NUM_4, NUM_1);
+        調定年度開始日 = new RDate(parameter.get調定年度().getYearValue() - NUM_1, NUM_4, NUM_1);
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         連番 = 0;
         if (parameter.get出力順ID() != null) {
@@ -466,14 +466,14 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku13());
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku14());
         for (int i = 1; i <= 期; i++) {
-            boolean flag = true;
+            boolean flag = false;
             for (Kitsuki kitsuki : 期月リスト.get期の月(i)) {
                 int 月 = kitsuki.get月AsInt();
                 Decimal 月処理区分 = new Decimal(月処理区分list.get(月 - 1).toString());
                 Decimal 普徴期別金額 = 普徴期別金額list.get(i - 1) == null ? Decimal.ZERO : 普徴期別金額list.get(i - 1);
                 if (月処理区分.compareTo(月処理区分_5) <= 0
                         && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
-                    flag = false;
+                    flag = true;
                 }
             }
             if (flag) {
