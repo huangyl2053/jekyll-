@@ -51,8 +51,8 @@ public class KaigoHihokenshaInfoValidationHandler {
         return new ValidationDictionaryBuilder()
                 .add(KaigoHihokenshaInfoValidationMessage.連帯納付義務者が選択されていない)
                 .add(KaigoHihokenshaInfoValidationMessage.初期状態からの変更有無)
-                .add(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
                 .add(KaigoHihokenshaInfoValidationMessage.開始日未入力)
+                .add(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
                 .add(KaigoHihokenshaInfoValidationMessage.同一日における複数連帯納付義務者登録)
                 .add(KaigoHihokenshaInfoValidationMessage.前履歴より前の期間指定)
                 .add(KaigoHihokenshaInfoValidationMessage.同一世帯コード)
@@ -85,10 +85,10 @@ public class KaigoHihokenshaInfoValidationHandler {
                     .thenAdd(KaigoHihokenshaInfoValidationMessage.連帯納付義務者が選択されていない)
                     .ifNot(KaigoHihokenshaInfoSpec.初期状態からの変更有無)
                     .thenAdd(KaigoHihokenshaInfoValidationMessage.初期状態からの変更有無)
-                    .ifNot(KaigoHihokenshaInfoSpec.開始日と終了日の前後順)
-                    .thenAdd(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
                     .ifNot(KaigoHihokenshaInfoSpec.開始日未入力)
                     .thenAdd(KaigoHihokenshaInfoValidationMessage.開始日未入力)
+                    .ifNot(KaigoHihokenshaInfoSpec.開始日と終了日の前後順)
+                    .thenAdd(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
                     .messages());
             return messages;
         }

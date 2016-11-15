@@ -103,6 +103,11 @@ public class KaigoHihokenshaInfoPanel {
         return ResponseData.of(div).respond();
     }
 
+    public ResponseData<KaigoHihokenshaInfoPanelDiv> onActive(KaigoHihokenshaInfoPanelDiv div) {
+        onLoad(div);
+        return ResponseData.of(div).respond();
+    }
+
     /**
      * Dgdの直近世帯一覧行選択ボタンの処理です。
      *
@@ -149,16 +154,19 @@ public class KaigoHihokenshaInfoPanel {
         RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
         ShikibetsuCode 識別コード = div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().getDomain();
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
+        RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
+        RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
         if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
-            Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
+            Decimal 最新履歴番号 = manager.getNoIsDeleted最新履歴番号(被保険者番号);
             if (最新履歴番号 == null) {
                 履歴番号 = ONE;
             } else {
-                履歴番号 = new RString(最新履歴番号.intValue());
+                RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
+                        被保険者番号, new Decimal(最新履歴番号.toString()));
+                RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
+                履歴番号 = 新履歴番号(result, 履歴番号, 最新履歴番号);
             }
         }
-        RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
-        RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
         RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                 被保険者番号, new Decimal(履歴番号.toString()));
         RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
@@ -202,6 +210,15 @@ public class KaigoHihokenshaInfoPanel {
         handler.setDgRentaiNofuGimushaIchiran(rentaiList, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.連帯納付義務者情報, holder);
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者情報一覧);
+    }
+
+    private RString 新履歴番号(RentaiGimusha result, RString 履歴番号, Decimal 最新履歴番号) {
+        if (result == null) {
+            履歴番号 = new RString(最新履歴番号.intValue() + 1);
+        } else {
+            履歴番号 = new RString(最新履歴番号.intValue());
+        }
+        return 履歴番号;
     }
 
     /**
@@ -333,8 +350,6 @@ public class KaigoHihokenshaInfoPanel {
         for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
             if (entity.hasChanged() && entity.isModified()) {
                 manager.saveModify(entity);
-            } else if (entity.hasChanged() && entity.isDeleted()) {
-                manager.データを物理削除する(entity.toEntity());
             } else {
                 manager.save(entity);
             }
@@ -358,6 +373,7 @@ public class KaigoHihokenshaInfoPanel {
     public ResponseData<KaigoHihokenshaInfoPanelDiv> onClick_ReSearch(
             KaigoHihokenshaInfoPanelDiv div) {
         RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+        ViewStateHolder.put(ViewStateKeys.連帯納付義務者情報初期, holder);
         if (DBB6110001StateName.連帯納付義務者更新結果確認.getName().equals(ResponseHolder.getState())) {
             return ResponseData.of(div).forwardWithEventName(DBB6110001TransitionEventName.一覧へ戻る).respond();
         }
