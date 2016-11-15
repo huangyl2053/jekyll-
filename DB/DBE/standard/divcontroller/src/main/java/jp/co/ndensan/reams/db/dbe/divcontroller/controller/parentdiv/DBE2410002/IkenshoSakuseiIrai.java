@@ -355,45 +355,6 @@ public class IkenshoSakuseiIrai {
         }
     }
 
-    private RString getReportId(RString 用紙タイプ) {
-        RDate date = RDate.getNowDate();
-        RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援);
-        RString reportId = RString.EMPTY;
-        if (CONFIGVALUE2.equals(用紙タイプ)) {
-            if (CONFIGVALUE1.equals(印刷タイプ)) {
-                reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面, date, SubGyomuCode.DBE認定支援);
-            } else if (CONFIGVALUE2.equals(印刷タイプ)) {
-                reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面, date, SubGyomuCode.DBE認定支援);
-            }
-        }
-        if (CONFIGVALUE3.equals(用紙タイプ)) {
-            if (CONFIGVALUE1.equals(印刷タイプ)) {
-                reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面, date, SubGyomuCode.DBE認定支援);
-            } else if (CONFIGVALUE2.equals(印刷タイプ)) {
-                reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面, date, SubGyomuCode.DBE認定支援);
-            }
-        }
-        if (RString.isNullOrEmpty(reportId)) {
-            return RString.EMPTY;
-        }
-        return reportId;
-    }
-
-    private RString getOCRReportId() {
-        RDate date = RDate.getNowDate();
-        RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援);
-        RString reportId = RString.EMPTY;
-        if (CONFIGVALUE1.equals(印刷タイプ)) {
-            reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date, SubGyomuCode.DBE認定支援);
-        } else if (CONFIGVALUE2.equals(印刷タイプ)) {
-            reportId = DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面, date, SubGyomuCode.DBE認定支援);
-        }
-        if (RString.isNullOrEmpty(reportId)) {
-            return RString.EMPTY;
-        }
-        return reportId;
-    }
-
     private List<IkenshokinyuyoshiBusiness> get主治医意見書記入用紙(IkenshoSakuseiIraiDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
 
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
