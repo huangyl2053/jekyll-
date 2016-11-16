@@ -73,6 +73,7 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
         住民状態List.add(JuminJotai.消除者);
         住民状態List.add(JuminJotai.転出者);
         住民状態List.add(JuminJotai.死亡者);
+        住民状態List.add(JuminJotai.住民);
         key.set住民種別(住民種別List);
         key.set住民状態(住民状態List);
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
@@ -108,7 +109,7 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
         } else {
             taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getShichosonCode()));
         }
-        taiShoEntity.setHihokenshaNo(世帯員所得情報一時.getHihokenshaNo());
+        taiShoEntity.setHihokenshaNo(entity.get被保険者台帳管理Newest().getHihokenshaNo());
         taiShoEntity.setShikibetsuCode(世帯員所得情報一時.getShikibetsuCode());
         taiShoEntity.setKazeiKubun(世帯員所得情報一時.getKazeiKubunGemmenGo());
         taiShoEntity.setKazeiShotokuGaku(世帯員所得情報一時.getKazeiShotokuGaku());
