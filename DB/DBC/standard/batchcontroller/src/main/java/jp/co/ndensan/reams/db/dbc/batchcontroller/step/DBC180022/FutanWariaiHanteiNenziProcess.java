@@ -95,7 +95,6 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
 
     @Override
     protected void usualProcess(FutanWariaiHanteiJohoEntity entity) {
-        被保険者区分コード = entity.get判定対象者().getHihokenshaKubunCode();
         if (getBefore() == null) {
             entities.add(entity);
             return;
@@ -107,6 +106,7 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
             entities.add(entity);
             return;
         }
+        被保険者区分コード = entities.get(0).get判定対象者().getHihokenshaKubunCode();
         DbT3113RiyoshaFutanWariaiEntity insertDbt3113Entity = new DbT3113RiyoshaFutanWariaiEntity();
         insertDbt3113Entity.setNendo(nendo);
         insertDbt3113Entity.setHihokenshaNo(beforeNo);
@@ -133,6 +133,7 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
         if (entities == null || entities.isEmpty()) {
             return;
         }
+        被保険者区分コード = entities.get(0).get判定対象者().getHihokenshaKubunCode();
         DbT3113RiyoshaFutanWariaiEntity insertDbt3113Entity = new DbT3113RiyoshaFutanWariaiEntity();
         insertDbt3113Entity.setNendo(nendo);
         insertDbt3113Entity.setHihokenshaNo(entities.get(0).get判定対象者().getHihokenshaNo());
