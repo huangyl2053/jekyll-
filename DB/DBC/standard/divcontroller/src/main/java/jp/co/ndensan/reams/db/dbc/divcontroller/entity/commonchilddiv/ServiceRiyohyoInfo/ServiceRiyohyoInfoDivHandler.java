@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
-import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -144,7 +143,8 @@ public class ServiceRiyohyoInfoDivHandler {
             "区分限度単位指定エラー：【種類限度内点数＝区分超過＋区分限度内】になっていません。");
     private static final RString 種類区分限度単位指定エラー = new RString(
             "種類限度単位・区分限度単位指定エラー：【サービス単位＝種類超過＋区分超過＋区分限度内】になっていません。");
-    private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
+    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
+    private static final RString 適用除外者 = new RString("適用除外者");
 
     /**
      * コンストラクタです。
@@ -211,6 +211,8 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.対象年月, 対象年月);
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        ViewStateHolder.put(ViewStateKeys.適用除外者, 適用除外者);
         非活性または活性(false);
         set初期化状態(表示モード);
         画面初期化の値のクリア();
@@ -264,8 +266,6 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setVisible(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setVisible(true);
-        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().getRadKaigoHokenShisetsu()
-                .setSelectedKey(ShisetsuType.介護保険施設.getコード());
         if (追加.equals(表示モード)) {
             div.getDdlKoshinKbn().setDisabled(false);
             div.getTxtKoshinYMD().setDisabled(false);
@@ -545,7 +545,7 @@ public class ServiceRiyohyoInfoDivHandler {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         List<KyufuJikoSakuseiResult> サービス利用票情報 = jigoSakusei.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号, 利用年月);
         if (サービス利用票情報 == null || サービス利用票情報.isEmpty()) {
-            throw new ApplicationException(前月の明細情報エラー.toString());
+            return;
         }
         List<dgServiceRiyohyoBeppyoList_Row> rowList = new ArrayList<>();
         int i = 0;
