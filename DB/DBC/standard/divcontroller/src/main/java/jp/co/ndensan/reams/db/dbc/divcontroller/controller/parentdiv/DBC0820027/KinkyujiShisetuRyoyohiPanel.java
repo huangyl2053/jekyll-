@@ -273,14 +273,14 @@ public class KinkyujiShisetuRyoyohiPanel {
         ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = set入力内容保存(div);
 
         SyokanbaraihiShikyuShinseiManager manager = SyokanbaraihiShikyuShinseiManager.createInstance();
-        RString 証明書入力済区分 = manager.緊急時施設療養証明書InputCheck(
-                flag.get緊急時施設療養費_証明書入力済フラグ().getCode(), kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
-        if (必要な分証明書入力済.equals(証明書入力済区分)) {
-            //TODO
-        }
-        if (証明書入力未済あり.equals(証明書入力済区分)) {
-            throw new ApplicationException("");
-        }
+//        RString 証明書入力済区分 = manager.緊急時施設療養証明書InputCheck(
+//                flag.get緊急時施設療養費_証明書入力済フラグ().getCode(), kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
+//        if (必要な分証明書入力済.equals(証明書入力済区分)) {
+//            //TODO
+//        }
+//        if (証明書入力未済あり.equals(証明書入力済区分)) {
+//            throw new ApplicationException("");
+//        }
 
         return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
     }
