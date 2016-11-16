@@ -156,11 +156,11 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             return;
         }
         被保険者番号 = entity.get被保険者番号();
-        if (!被保険者番号.equals(new HihokenshaNo("2015123457"))) {
-            異動一時List.clear();
-            異動一時Map.clear();
-            return;
-        }
+//        if (!被保険者番号.equals(new HihokenshaNo("2015123457"))) {
+//            異動一時List.clear();
+//            異動一時Map.clear();
+//            return;
+//        }
         FlexibleYearMonth 処理年月 = new FlexibleYearMonth(processParameter.get処理年月().toDateString());
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = JukyushaIdoRenrakuhyoOutCommonProcess.get受給者台帳(異動一時List);
         List<KyotakuEntity> 居宅計画List = JukyushaIdoRenrakuhyoOutCommonProcess.get居宅計画(異動一時List);

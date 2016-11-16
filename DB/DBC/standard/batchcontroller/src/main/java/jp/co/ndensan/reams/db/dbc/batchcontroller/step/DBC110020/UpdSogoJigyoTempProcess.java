@@ -123,9 +123,17 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
         RString 全項目 = RString.EMPTY;
         FlexibleDate 適用開始年月日 = 総合事業対象者.getTekiyoKaishiYMD();
         if (適用開始年月日 != null) {
-            全項目 = 全項目.concat(適用開始年月日.toString());
+            全項目 = 全項目.concat(適用開始年月日.toString()).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         }
-        return 全項目.concat(SPLIT);
+        FlexibleDate 適用終了年月日 = 総合事業対象者.getTekiyoShuryoYMD();
+        if (適用終了年月日 != null) {
+            全項目 = 全項目.concat(適用終了年月日.toString()).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        }
+        return 全項目;
     }
 
 }
