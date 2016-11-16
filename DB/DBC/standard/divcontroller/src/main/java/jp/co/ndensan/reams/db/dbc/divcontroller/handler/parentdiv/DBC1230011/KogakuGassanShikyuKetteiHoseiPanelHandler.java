@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011.Koga
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011.dgKogakuGassanShikyuFushikyuKettei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc1230011.KogakuGassanShikyuKetteiHoseiDetailParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHosei;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
@@ -160,8 +161,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             List<SogoJigyoTaishosha> 総合事業対象者データ = KogakuGassanShikyuKetteiHosei.
                     createInstance().get総合事業対象者データ(被保険者番号);
             if ((受給者台帳データ == null || 受給者台帳データ.isEmpty())
-                    || (総合事業対象者データ == null || 総合事業対象者データ.isEmpty())) {
-                throw new ApplicationException(DbcInformationMessages.被保険者または事業対象者でないデータ.getMessage());
+                    && (総合事業対象者データ == null || 総合事業対象者データ.isEmpty())) {
+                throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
             }
         } else {
             if (受給者台帳データ == null || 受給者台帳データ.isEmpty()) {

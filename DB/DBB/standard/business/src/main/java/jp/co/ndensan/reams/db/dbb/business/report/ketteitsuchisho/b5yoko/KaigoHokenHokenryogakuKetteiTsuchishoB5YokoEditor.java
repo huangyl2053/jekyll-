@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbb.business.report.ketteitsuchisho.KaigoHokenHoke
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.entity.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -84,12 +84,14 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         reportSource.hokenSanshutsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
 
         HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
-        reportSource.hyojicode1 = 表示コード.get表示コード１();
-        reportSource.hyojicode2 = 表示コード.get表示コード２();
-        reportSource.hyojicode3 = 表示コード.get表示コード３();
-        reportSource.hyojicodeName1 = 表示コード.get表示コード名１();
-        reportSource.hyojicodeName2 = 表示コード.get表示コード名２();
-        reportSource.hyojicodeName3 = 表示コード.get表示コード名３();
+        if (表示コード != null) {
+            reportSource.hyojicode1 = 表示コード.get表示コード１();
+            reportSource.hyojicode2 = 表示コード.get表示コード２();
+            reportSource.hyojicode3 = 表示コード.get表示コード３();
+            reportSource.hyojicodeName1 = 表示コード.get表示コード名１();
+            reportSource.hyojicodeName2 = 表示コード.get表示コード名２();
+            reportSource.hyojicodeName3 = 表示コード.get表示コード名３();
+        }
         reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
         reportSource.kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
         reportSource.korekaraChoshuho = 更正後.get徴収方法();

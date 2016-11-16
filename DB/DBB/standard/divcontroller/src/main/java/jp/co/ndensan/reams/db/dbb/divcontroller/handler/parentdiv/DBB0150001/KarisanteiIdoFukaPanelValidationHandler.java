@@ -105,6 +105,8 @@ public class KarisanteiIdoFukaPanelValidationHandler {
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.納入通知書の発行日入力チェック)
                         .ifNot(KarisanteiIdoFukaPanelSpec.納入通知書_対象者)
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.納入通知書の対象者の選択チェック)
+                        .ifNot(KarisanteiIdoFukaPanelSpec.処理対象と出力期の一致)
+                        .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.処理対象と出力期の一致チェック)
                         .messages());
             }
             if (特徴開始通知書_仮算定) {
@@ -113,10 +115,6 @@ public class KarisanteiIdoFukaPanelValidationHandler {
                         .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.特徴開始通知書仮算定の発行日入力チェック)
                         .messages());
             }
-            messages.add(ValidateChain.validateStart(div)
-                    .ifNot(KarisanteiIdoFukaPanelSpec.処理対象と出力期の一致)
-                    .thenAdd(KarisanteiIdoFukaHandlerValidationMessages.処理対象と出力期の一致チェック)
-                    .messages());
             return messages;
         }
     }

@@ -95,7 +95,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private List<KijunShunyugakuTekiyoKetteiEntity> 基準収入額適用管理List;
     private KijunShunyugakuTekiyoKanriManager 基準収入額適用管理manager;
     private int 一覧表_通番;
-    private boolean is検索結果データあり;
     private SetaiCode 一覧表_世帯コード;
     private FlexibleYear 一覧表_年度;
     private static final ReportId 帳票ID_通知書 = new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho");
@@ -324,26 +323,30 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         通知文_4 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票ID_通知書, KamokuCode.EMPTY, INT_4);
 
         if (通知文_1 != null && !通知文_1.isEmpty()) {
-            基準収入額適用決定通知書Parameter.set通知文１(rule.editText(通知文_1.get(INT_1)));
+            基準収入額適用決定通知書Parameter.set通知文１(rule.editText(checkNull(通知文_1.get(INT_1))));
         }
         if (通知文_1 != null && !通知文_1.isEmpty()) {
-            基準収入額適用決定通知書Parameter.set通知文２(rule.editText(通知文_1.get(INT_2)));
+            基準収入額適用決定通知書Parameter.set通知文２(rule.editText(checkNull(通知文_1.get(INT_2))));
         }
         if (通知文_2 != null && !通知文_2.isEmpty()) {
-            基準収入額適用決定通知書Parameter.set通知文３_大(rule.editText(通知文_2.get(INT_2)));
+            基準収入額適用決定通知書Parameter.set通知文３_大(rule.editText(checkNull(通知文_2.get(INT_2))));
         }
         if (通知文_3 != null && !通知文_3.isEmpty()) {
-            基準収入額適用決定通知書Parameter.set通知文4_上小(rule.editText(通知文_3.get(INT_2)));
+            基準収入額適用決定通知書Parameter.set通知文4_上小(rule.editText(checkNull(通知文_3.get(INT_2))));
         }
         if (通知文_3 != null && !通知文_3.isEmpty()) {
-            基準収入額適用決定通知書Parameter.set通知文5_下大(rule.editText(通知文_3.get(INT_3)));
+            基準収入額適用決定通知書Parameter.set通知文5_下大(rule.editText(checkNull(通知文_3.get(INT_3))));
         }
         if (通知文_4 != null && !通知文_4.isEmpty()) {
-            基準収入額適用決定通知書Parameter.set通知文6_上大(rule.editText(通知文_4.get(INT_2)));
+            基準収入額適用決定通知書Parameter.set通知文6_上大(rule.editText(checkNull(通知文_4.get(INT_2))));
         }
         if (通知文_4 != null && !通知文_4.isEmpty()) {
-            基準収入額適用決定通知書Parameter.set通知文7_下小(rule.editText(通知文_4.get(INT_3)));
+            基準収入額適用決定通知書Parameter.set通知文7_下小(rule.editText(checkNull(通知文_4.get(INT_3))));
         }
+    }
+
+    private RString checkNull(RString rstring) {
+        return rstring == null ? RString.EMPTY : rstring;
     }
 
     private void set宛名識別対象情報_3件目(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter) throws ClassCastException {

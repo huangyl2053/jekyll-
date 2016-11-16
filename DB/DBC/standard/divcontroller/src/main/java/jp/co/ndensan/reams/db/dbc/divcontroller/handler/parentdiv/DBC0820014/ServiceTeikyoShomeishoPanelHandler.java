@@ -8,12 +8,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820014;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -201,9 +210,11 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @param 整理番号 RString
      * @param サービス年月 FlexibleYearMonth
      * @param 被保険者番号 HihokenshaNo
+     * @param 償還払ViewStateDB情報 DbJohoViewState
      * @return サービス提供証明書の存在チェック
      */
-    public Boolean サービス提供証明書の存在チェック(RString 整理番号, FlexibleYearMonth サービス年月, HihokenshaNo 被保険者番号) {
+    public Boolean サービス提供証明書の存在チェック(RString 整理番号, FlexibleYearMonth サービス年月,
+            HihokenshaNo 被保険者番号, DbJohoViewState 償還払ViewStateDB情報) {
         JigyoshaNo 事業者番号 = new JigyoshaNo(div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
         RString 様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedKey();
         int 証明書件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(
@@ -216,6 +227,39 @@ public class ServiceTeikyoShomeishoPanelHandler {
         if (証明書件数 > 0) {
             throw new ApplicationException(UrErrorMessages.既に登録済
                     .getMessage().replace(証明書.toString()).evaluate());
+        }
+        if (null != 償還払ViewStateDB情報) {
+            List<DbT3038ShokanKihonEntity> 償還払請求基本データList = new ArrayList<>();
+            List<DbT3047ShokanServicePlan200904Entity> 償還払請求サービス計画200904データList = new ArrayList<>();
+            List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList = new ArrayList<>();
+            List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList = new ArrayList<>();
+            for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
+                償還払請求基本データList.add(償還払請求基本.toEntity());
+            }
+            for (ShokanServicePlan200904 償還払請求サービス計画200904 : 償還払ViewStateDB情報.get償還払請求サービス計画200904データList()) {
+                償還払請求サービス計画200904データList.add(償還払請求サービス計画200904.toEntity());
+            }
+            for (ShokanServicePlan200604 償還払請求サービス計画200604 : 償還払ViewStateDB情報.get償還払請求サービス計画200604データList()) {
+                償還払請求サービス計画200604データList.add(償還払請求サービス計画200604.toEntity());
+            }
+            for (ShokanServicePlan200004 償還払請求サービス計画200004 : 償還払ViewStateDB情報.get償還払請求サービス計画200004データList()) {
+                償還払請求サービス計画200004データList.add(償還払請求サービス計画200004.toEntity());
+            }
+            int 証明書件数ViewState = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShomeishoKensu(
+                    被保険者番号,
+                    サービス年月,
+                    整理番号,
+                    事業者番号,
+                    様式番号,
+                    チェック区分,
+                    償還払請求基本データList,
+                    償還払請求サービス計画200904データList,
+                    償還払請求サービス計画200604データList,
+                    償還払請求サービス計画200004データList);
+            if (証明書件数ViewState > 0) {
+                throw new ApplicationException(UrErrorMessages.既に登録済
+                        .getMessage().replace(証明書.toString()).evaluate());
+            }
         }
         return true;
     }
