@@ -76,10 +76,6 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1514Shori
     protected void createWriter() {
         処理結果確認リスト一時TBL = new BatchEntityCreatedTempTableWriter(TABLE_処理結果確認リスト一時,
                 DbWT1514ShoriKekkaKakuninListEntity.class);
-    }
-
-    @Override
-    protected void afterExecute() {
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         csvFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(), csvFileName);
@@ -91,6 +87,10 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1514Shori
                 .setHeader(getHeaderList())
                 .setNewLine(NewLine.CRLF)
                 .build();
+    }
+
+    @Override
+    protected void afterExecute() {
         csvListWriter.close();
     }
 
@@ -150,6 +150,8 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1514Shori
             bodyList.add(FlexibleDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().concat(RDate.getNowTime().
                             toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)).concat(作成_内容));
+        } else {
+            bodyList.add(RString.EMPTY);
         }
         bodyList.add(Tokeihyo_ErrorKubun.toValue(entity.get処理名()).get名称());
         bodyList.add(entity.get証記載保険者番号());
