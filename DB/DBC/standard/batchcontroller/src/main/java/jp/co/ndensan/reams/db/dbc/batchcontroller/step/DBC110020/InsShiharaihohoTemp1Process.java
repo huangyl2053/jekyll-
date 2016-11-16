@@ -182,6 +182,10 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         被保険者番号 = entity.get被保険者番号();
+//        if (!被保険者番号.equals(new HihokenshaNo("2015123459"))) {
+//            異動一時List.clear();
+//            return;
+//        }
         hasCheckErr = false;
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = get受給者台帳();
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = get被保険者台帳();
@@ -982,8 +986,10 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return true;
         }
         boolean falg1 = 居宅計画サービス届出日Check1(総合事業対象者List, 居宅計画List, 宛名情報);
-        boolean falg2 = 居宅計画サービス届出日Check2(総合事業対象者List, 居宅計画List, 宛名情報);
-
+        boolean falg2 = true;
+        if (falg1) {
+            falg2 = 居宅計画サービス届出日Check2(総合事業対象者List, 居宅計画List, 宛名情報);
+        }
         return (falg1 && falg2);
     }
 
@@ -1243,6 +1249,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.setサービス種類コード(居宅計画Info.get(ORDER_3));
         entity.set有効終了日(new FlexibleDate(居宅計画Info.get(ORDER_4)));
         entity.set適用終了日(new FlexibleDate(居宅計画Info.get(ORDER_6)));
+        entity.set届出年月日(new FlexibleDate(居宅計画Info.get(ORDER_7)));
         return entity;
     }
 
@@ -1323,6 +1330,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         DbT3105SogoJigyoTaishoshaEntity entity = new DbT3105SogoJigyoTaishoshaEntity();
         List<RString> 総合事業対象者Info = 総合事業対象者.split(SPLIT.toString());
         entity.setTekiyoKaishiYMD(new FlexibleDate(総合事業対象者Info.get(ORDER_0)));
+        entity.setTekiyoShuryoYMD(new FlexibleDate(総合事業対象者Info.get(ORDER_1)));
         return entity;
     }
 
