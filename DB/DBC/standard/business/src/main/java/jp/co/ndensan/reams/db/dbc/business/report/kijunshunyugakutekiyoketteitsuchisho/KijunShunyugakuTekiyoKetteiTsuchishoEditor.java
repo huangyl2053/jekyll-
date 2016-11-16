@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -27,7 +27,6 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
 
     private final KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ;
     private static final int INT_0 = 0;
-    private static final int INT_40 = 40;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     /**
@@ -55,9 +54,6 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者名カナ１() != null) {
             RString 被保険者名カナ１ = 基準収入額適用決定通知書パラメータ.get被保険者名カナ１().value();
-            if (被保険者名カナ１.length() > INT_40) {
-                被保険者名カナ１ = 被保険者名カナ１.substring(INT_0, INT_40);
-            }
             source.hihokenshaNameKana1 = 被保険者名カナ１;
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名１() != null) {
@@ -68,9 +64,6 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者名カナ２() != null) {
             RString 被保険者名カナ２ = 基準収入額適用決定通知書パラメータ.get被保険者名カナ２().value();
-            if (被保険者名カナ２.length() > INT_40) {
-                被保険者名カナ２ = 被保険者名カナ２.substring(INT_0, INT_40);
-            }
             source.hihokenshaNameKana2 = 被保険者名カナ２;
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名２() != null) {
@@ -82,9 +75,6 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者名カナ３() != null) {
             RString 被保険者名カナ３ = 基準収入額適用決定通知書パラメータ.get被保険者名カナ３().value();
-            if (被保険者名カナ３.length() > INT_40) {
-                被保険者名カナ３ = 被保険者名カナ３.substring(INT_0, INT_40);
-            }
             source.hihokenshaNameKana3 = 被保険者名カナ３;
         }
         if (基準収入額適用決定通知書パラメータ.get被保険者氏名３() != null) {
@@ -179,21 +169,22 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
 
     private void set適用開始年月(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (基準収入額適用決定通知書パラメータ.get適用開始年月() != null) {
-            source.tekiyouStartYM = 基準収入額適用決定通知書パラメータ.get適用開始年月().wareki().toDateString();
+            source.tekiyouStartYM = 基準収入額適用決定通知書パラメータ.get適用開始年月().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
     }
 
     private void set決定年月日(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (基準収入額適用決定通知書パラメータ.get決定年月日() != null) {
             source.ketteiYMD = 基準収入額適用決定通知書パラメータ.get決定年月日().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
     }
 
     private void set申請年月日(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (基準収入額適用決定通知書パラメータ.get申請年月日() != null) {
             source.shinseiYMD = 基準収入額適用決定通知書パラメータ.get申請年月日().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
     }
 
