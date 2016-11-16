@@ -84,7 +84,8 @@ public class ServiceTeikyoShomeishoPanel {
         handler.load宛名と基本情報(識別コード, 被保険者番号);
         handler.loadボタンエリア(償還払支給申請.is国保連再送付フラグ());
         handler.load申請共通エリア(画面モード, サービス年月, 整理番号);
-        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報);
+        DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報);
         ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
         if (null == 証明書入力済フラグ) {
             setShomeishoNyuryokuFlag();
