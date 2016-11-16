@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinTaishoshaKanri;
+package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.dbd511001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5610001.KoshinTaishoshaKanriMyBatisParameter;
