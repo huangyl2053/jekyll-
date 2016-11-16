@@ -238,7 +238,8 @@ public class FuchoKariSanteiFukaBatch {
         List<Decimal> 普徴期別金額リスト = new ArrayList<>();
         Decimal 金額リスト0 = Decimal.ZERO;
         Decimal 金額リスト1 = Decimal.ZERO;
-        RDate 調定年度開始日 = new RDate(調定年度.getYearValue() - NUM_1, NUM_4, NUM_1);
+        RDate 調定年度開始日 = new RDate(調定年度.getYearValue(), NUM_4, NUM_1);
+        RDate 前年度開始日 = new RDate(調定年度.getYearValue() - NUM_1, NUM_4, NUM_1);
         RString 仮算定端数調整有無 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無, 調定年度開始日, SubGyomuCode.DBB介護賦課);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
         KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
@@ -254,7 +255,7 @@ public class FuchoKariSanteiFukaBatch {
                 期月リスト = 月期対応取得_普徴.get期月リスト();
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
             } else if (仮算定賦課方法_06.equals(仮算定賦課方法)) {
-                納期数 = get賦課納期数(納期数, 調定年度開始日, 前年度賦課情報, 期, 期月リスト);
+                納期数 = get賦課納期数(納期数, 前年度開始日, 前年度賦課情報, 期, 期月リスト);
             }
             if (仮算定賦課方法_01.equals(仮算定賦課方法)) {
                 Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
