@@ -25,4 +25,6 @@ public class KyufuJissekiSearchDataBusiness implements Serializable {
     private List<KyufuJissekiKihonShukeiBusiness> 給付実績基本集計データ;
     private List<KyufuJissekiKihonKyotakuServiceBusiness> 給付実績基本居宅サービス計画費データ;
     private List<KyufujissekiKogakuKaigoServicehi> 給付実績高額介護サービス費データ;
+    private List<KyufuJissekiShukeiKekka> 給付実績集計結果明細データ;
+    private List<KyufuJissekiShukeiKekka> 給付実績集計結果合計データ;
 }
