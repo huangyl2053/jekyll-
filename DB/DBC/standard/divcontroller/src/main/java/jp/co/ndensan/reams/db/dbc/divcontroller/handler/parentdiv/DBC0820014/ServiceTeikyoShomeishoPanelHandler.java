@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820014;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
@@ -255,14 +255,14 @@ public class ServiceTeikyoShomeishoPanelHandler {
             for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
                 償還払請求基本データList.add(償還払請求基本.toEntity());
             }
-            for (ShokanServicePlan200904 償還払請求サービス計画200904 : 償還払ViewStateDB情報.get償還払請求サービス計画200904データList()) {
-                償還払請求サービス計画200904データList.add(償還払請求サービス計画200904.toEntity());
+            for (ShokanServicePlan200904Result 償還払請求サービス計画200904Result : 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()) {
+                償還払請求サービス計画200904データList.add(償還払請求サービス計画200904Result.getEntity().toEntity());
             }
-            for (ShokanServicePlan200604 償還払請求サービス計画200604 : 償還払ViewStateDB情報.get償還払請求サービス計画200604データList()) {
-                償還払請求サービス計画200604データList.add(償還払請求サービス計画200604.toEntity());
+            for (ShokanServicePlan200604Result 償還払請求サービス計画200604Result : 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()) {
+                償還払請求サービス計画200604データList.add(償還払請求サービス計画200604Result.getEntity().toEntity());
             }
-            for (ShokanServicePlan200004 償還払請求サービス計画200004 : 償還払ViewStateDB情報.get償還払請求サービス計画200004データList()) {
-                償還払請求サービス計画200004データList.add(償還払請求サービス計画200004.toEntity());
+            for (ShokanServicePlan200004Result 償還払請求サービス計画200004Result : 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()) {
+                償還払請求サービス計画200004データList.add(償還払請求サービス計画200004Result.getEntity().toEntity());
             }
             int 証明書件数ViewState = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShomeishoKensu(
                     被保険者番号,
