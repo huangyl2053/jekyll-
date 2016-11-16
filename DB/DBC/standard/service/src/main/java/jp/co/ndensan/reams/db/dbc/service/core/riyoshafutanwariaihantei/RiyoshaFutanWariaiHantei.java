@@ -522,8 +522,7 @@ public class RiyoshaFutanWariaiHantei {
             List<RiyoshaFutanWariaiKonkyoTempEntity> 利用者負担割合根拠情報,
             FlexibleYear 対象年度) {
         if (利用者負担割合明細情報 == null || 利用者負担割合明細情報.isEmpty()
-                || 利用者負担割合根拠情報 == null || 利用者負担割合根拠情報.isEmpty()
-                || 対象年度 == null) {
+                || 利用者負担割合根拠情報 == null || 対象年度 == null) {
             throw new NullPointerException();
         }
         Map<RString, List<RiyoshaFutanWariaiKonkyoTempEntity>> 根拠情報map = new HashMap<>();
