@@ -1446,7 +1446,7 @@ public class JukyushaIdoRenrakuhyoHandler {
     /**
      * 認定申請中区分チェック
      */
-    public void onChange_niteBun() {
+    public void onChange_認定申請中区分() {
         if (THREE.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                 getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())) {
             div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
