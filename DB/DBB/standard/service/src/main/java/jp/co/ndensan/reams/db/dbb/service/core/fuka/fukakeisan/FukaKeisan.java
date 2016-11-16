@@ -621,16 +621,20 @@ public class FukaKeisan extends FukaKeisanFath {
         Boolean isHas過年度賦課 = false;
         if (調定年度.equals(param.get賦課年度())) {
             調定計算用年度分賦課リスト.set現年度(賦課の情報);
-            isHas過年度賦課 = true;
         } else if (調定年度.equals(param.get賦課年度().plusYear(INT_1))) {
+            isHas過年度賦課 = true;
             調定計算用年度分賦課リスト.set過年度1(賦課の情報);
         } else if (調定年度.equals(param.get賦課年度().plusYear(INT_2))) {
+            isHas過年度賦課 = true;
             調定計算用年度分賦課リスト.set過年度2(賦課の情報);
         } else if (調定年度.equals(param.get賦課年度().plusYear(INT_3))) {
+            isHas過年度賦課 = true;
             調定計算用年度分賦課リスト.set過年度3(賦課の情報);
         } else if (調定年度.equals(param.get賦課年度().plusYear(INT_4))) {
+            isHas過年度賦課 = true;
             調定計算用年度分賦課リスト.set過年度4(賦課の情報);
         } else if (調定年度.equals(param.get賦課年度().plusYear(INT_5))) {
+            isHas過年度賦課 = true;
             調定計算用年度分賦課リスト.set過年度5(賦課の情報);
         }
         調定計算用年度分賦課リスト.set最新賦課の情報(賦課の情報);
@@ -1200,7 +1204,7 @@ public class FukaKeisan extends FukaKeisanFath {
         }
         List<RString> dankaiList = new ArrayList<>();
         HokenryoDankaiList hokenryoDankaiList = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課年度);
-        
+
         dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階04月()).get段階区分());
         dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階05月()).get段階区分());
         dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階06月()).get段階区分());
