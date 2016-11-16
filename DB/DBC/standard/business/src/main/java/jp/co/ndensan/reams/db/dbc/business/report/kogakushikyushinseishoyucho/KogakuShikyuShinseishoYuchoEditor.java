@@ -99,7 +99,7 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
             }
         }
         source.remban = 連番;
-        if (帳票出力対象データ != null && 帳票出力対象データ.getShikibetsuCodeChohyo() != null) {
+        if (帳票出力対象データ.getShikibetsuCodeChohyo() != null) {
             source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
         } else {
             source.識別コード = ShikibetsuCode.EMPTY;

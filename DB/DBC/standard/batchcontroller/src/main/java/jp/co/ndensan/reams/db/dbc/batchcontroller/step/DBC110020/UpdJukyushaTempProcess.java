@@ -131,10 +131,11 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = concatDate(全項目, 受給者台帳.getJukyuShinseiYMD());
         全項目 = 全項目.concat(受給者台帳.getRirekiNo()).concat(SPLIT);
         if (RString.isNullOrEmpty(受給者台帳.getShinseiJokyoKubun())) {
-            全項目 = 全項目.concat(RString.EMPTY);
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         } else {
-            全項目 = 全項目.concat(受給者台帳.getShinseiJokyoKubun());
+            全項目 = 全項目.concat(受給者台帳.getShinseiJokyoKubun()).concat(SPLIT);
         }
+        全項目 = concatDate(全項目, 受給者台帳.getNinteiYMD());
         return 全項目;
     }
 

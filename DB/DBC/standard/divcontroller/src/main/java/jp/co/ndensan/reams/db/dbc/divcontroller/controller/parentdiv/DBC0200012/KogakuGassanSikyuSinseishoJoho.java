@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 保険者情報送付データ作成_(371)高額合算支給申請書情報のクラスです。
@@ -29,6 +31,8 @@ public class KogakuGassanSikyuSinseishoJoho {
     private RString 再処理区分;
     private RString 外部ＣＳＶファイル名;
     private static final RString 状態パターン = new RString("1");
+    private final RString バッチID = new RString("ExecutionBatchId");
+    private final RString フロー固定ID_給報出力 = new RString("DBC110060_KogakugassanShikyushinseishoOut");
 
     /**
      * onLoadのメソッドです。
@@ -61,6 +65,8 @@ public class KogakuGassanSikyuSinseishoJoho {
         DBC110060_KogakugassanShikyushinseishoOutParameter parameter = new DBC110060_KogakugassanShikyushinseishoOutParameter();
         parameter.set再処理区分(再処理区分);
         parameter.set処理年月(処理年月);
+        FlowParameters fp = FlowParameters.of(バッチID, フロー固定ID_給報出力);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 }

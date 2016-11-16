@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 月別負担割合現Temp作成のクラスです。<br/>
- * 処理詳細9
+ * 処理詳細10
  *
  * @reamsid_L DBC-4950-030 liuyang
  */

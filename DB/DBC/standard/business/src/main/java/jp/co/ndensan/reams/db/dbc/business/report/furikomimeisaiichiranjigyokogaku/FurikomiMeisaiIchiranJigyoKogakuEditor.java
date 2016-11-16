@@ -23,10 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -74,15 +71,11 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
             editHead(source);
             edit振込データ(source);
             edit集計(source);
-            if (target.get振込明細一時() != null
-                    && target.get振込明細一時().getHihokenshaNo() != null
-                    && target.get振込明細一時().getShikibetsuCode() != null) {
-                PersonalData personalData = PersonalData.of(target.get振込明細一時().getShikibetsuCode(),
-                        new ExpandedInformation(new Code("003"), 文_被保険者番号, target.get振込明細一時().getHihokenshaNo().getColumnValue()));
-                AccessLogger.log(AccessLogType.照会, personalData);
+            source.shikibetsuCode = target.get振込明細一時() == null ? RString.EMPTY : target.get振込明細一時().getShikibetsuCode().getColumnValue();
+            if (source.list1_1 != null) {
+                source.拡張情報 = new ExpandedInformation(new Code("0003"), 文_被保険者番号, source.list1_1);
             }
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), 文_被保険者番号, source.list1_1);
         return source;
     }
 

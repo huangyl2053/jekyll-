@@ -202,7 +202,6 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
 
     @Override
     protected void usualProcess(FutanWariaiHanteiJohoEntity entity) {
-        被保険者区分コード = entity.get判定対象者().getHihokenshaKubunCode();
         if (getBefore() == null) {
             entities.add(entity);
             return;
@@ -221,6 +220,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     private void insertHandle() {
         レコード数 = entities.size();
         HanteiTaishoshaTempEntity 判定対象者 = entities.get(0).get判定対象者();
+        被保険者区分コード = 判定対象者.getHihokenshaKubunCode();
         List<SeikatsuHogoGaitoJohoTempEntity> 生活保護該当情報リスト = entities.get(0).get生活保護該当情報();
         SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報 = 生活保護該当情報リスト.isEmpty() ? null : 生活保護該当情報リスト.get(0);
         BatchEntityCreatedTempTableWriter 明細Writer = 明細Writers.get(対象月Index);

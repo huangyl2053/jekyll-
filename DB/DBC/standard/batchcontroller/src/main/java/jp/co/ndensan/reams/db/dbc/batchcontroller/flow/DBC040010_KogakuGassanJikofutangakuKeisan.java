@@ -54,15 +54,13 @@ public class DBC040010_KogakuGassanJikofutangakuKeisan
     private static final String SHORICSVPROCESS = "DBC040010ShoriCsvProcess";
     private static final String SHORIDATEKANRIUPDPROCESS = "DBC040010ShoriDateKanriUpdProcess";
     private static final String BACKUP_TO_TEMPORARYTABLE = "backup_To_TemporaryTable";
-    private RString importTableNamePermanent;
-    private RString exportTableNameTemporary;
-
     private static final RString BACKUPTABLE1 = new RString("DbT3068KogakuGassanShinseisho");
     private static final RString BACKUPTABLE2 = new RString("DbT3070KogakuGassanJikoFutanGaku");
     private static final RString TEMPTABLE1 = new RString("DbT3068TempTable");
     private static final RString TEMPTABLE2 = new RString("DbT3070TempTable");
-
     private static final RString 処理区分_呼び出し元自己負担額計算 = new RString("3");
+    private RString exportTableNameTemporary;
+    private RString importTableNamePermanent;
 
     @Override
     protected void initialize() {

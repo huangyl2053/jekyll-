@@ -138,8 +138,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
                 KogakuGassanShinseishoIdentifier identifier = new KogakuGassanShinseishoIdentifier(
                         被保険者番号, 対象年度, 保険者番号, 整理番号, 履歴番号);
                 KogakuGassanShinseishoRelate 高額合算申請書 = 高額合算申請書保持.get高額合算申請書(identifier);
-                ViewStateHolder.put(ViewStateKeys.高額合算申請書, 高額合算申請書);
-                handler.initializePanel(高額合算申請書);
+                正常の場合(高額合算申請書, handler);
                 ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 修正);
             }
             div.getDdlShinseiTaishoNendo().setReadOnly(true);
@@ -756,6 +755,13 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             return null;
         }
         return new FlexibleDate(date.toString());
+    }
+
+    private void 正常の場合(KogakuGassanShinseishoRelate 高額合算申請書, KogakuGassanShikyuShinseiTorokuAllPanelHandler handler) {
+        if (高額合算申請書 != null) {
+            ViewStateHolder.put(ViewStateKeys.高額合算申請書, 高額合算申請書);
+            handler.initializePanel(高額合算申請書);
+        }
     }
 
     private KogakuGassanShikyuShinseiTorokuAllPanelHandler getHandler(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
