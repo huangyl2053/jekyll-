@@ -523,7 +523,7 @@
         <association property="支払方法変更" 
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity" />
     </resultMap>
-    
+
     <resultMap id="ResultMap_DbT3170MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DbT3170MatchingEntity" autoMapping="true" >
         <id column="temp_hihokenshaNo" />
         <id column="temp_taishoNendo" />
