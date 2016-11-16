@@ -436,6 +436,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 return o1.get被保険者番号().compareTo(o2.get被保険者番号());
             }
         });
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         List<HihokenshaDaicho> daichoList = new ArrayList<>();
         boolean isFirst = true;
         HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
@@ -454,7 +457,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 daichoList.add(daicho);
             } else {
                 sort資格の情報(daichoList);
-                process一時表(daichoList, 賦課情報Map.get(被保険者番号), param);
+                process一時表(daichoList, 賦課情報Map.get(被保険者番号), param, 市町村セキュリティ情報, 合併情報区分);
                 daichoList.clear();
                 被保険者番号 = daicho.get被保険者番号();
                 daichoList.add(daicho);
@@ -463,10 +466,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         if (daichoList.isEmpty()) {
             return;
         }
-        process一時表(daichoList, 賦課情報Map.get(daichoList.get(0).get被保険者番号()), param);
+        process一時表(daichoList, 賦課情報Map.get(daichoList.get(0).get被保険者番号()), param, 市町村セキュリティ情報, 合併情報区分);
     }
 
-    private void process一時表(List<HihokenshaDaicho> 資格の情報, FukaJoho 賦課の情報, TsuchishoNoCreateParameter param) {
+    private void process一時表(List<HihokenshaDaicho> 資格の情報, FukaJoho 賦課の情報, TsuchishoNoCreateParameter param,
+            ShichosonSecurityJoho 市町村セキュリティ情報, RString 合併情報区分) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         if (賦課の情報 == null) {
             for (HihokenshaDaicho daicho : 資格の情報) {
@@ -504,7 +508,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 mapper.insertTmpHonsantei(entity);
             }
         }
-        load月別ランク(資格の情報, param.get賦課年度());
+        load月別ランク(資格の情報, param.get賦課年度(), 市町村セキュリティ情報, 合併情報区分);
     }
 
     private void set資格の情報Entity(HihokenshaDaicho 資格の情報, HonsanteiEntity entity,
@@ -546,13 +550,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
     }
 
-    private void load月別ランク(List<HihokenshaDaicho> 資格の情報, FlexibleYear 賦課年度) {
+    private void load月別ランク(List<HihokenshaDaicho> 資格の情報, FlexibleYear 賦課年度,
+            ShichosonSecurityJoho 市町村セキュリティ情報, RString 合併情報区分) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null
                 && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
             if (合併情報区分_合併あり.equals(合併情報区分)) {
                 HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
                 List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格の情報, 賦課年度);
@@ -756,12 +758,10 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 .set徴収方法履歴番号(調定計算.get徴収方法の情報().get履歴番号() + INT_1);
         if (!is普徴期別金額あり(調定計算.get賦課の情報())) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
+        } else if (!賦課計算の情報.get口座().isEmpty()) {
+            builder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
-            if (!賦課計算の情報.get口座().isEmpty()) {
-                builder.set口座区分(KozaKubun.口座振替.getコード());
-            } else {
-                builder.set口座区分(KozaKubun.現金納付.getコード());
-            }
+            builder.set口座区分(KozaKubun.現金納付.getコード());
         }
         builder.set職権区分(ShokkenKubun.非該当.getコード());
         HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
@@ -834,12 +834,10 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                     .set徴収方法履歴番号(徴収方法の情報.get履歴番号() + INT_1);
             if (!is普徴期別金額あり(賦課の情報_更正後)) {
                 builder.set口座区分(KozaKubun.現金納付.getコード());
+            } else if (!賦課計算の情報.get口座().isEmpty()) {
+                builder.set口座区分(KozaKubun.口座振替.getコード());
             } else {
-                if (!賦課計算の情報.get口座().isEmpty()) {
-                    builder.set口座区分(KozaKubun.口座振替.getコード());
-                } else {
-                    builder.set口座区分(KozaKubun.現金納付.getコード());
-                }
+                builder.set口座区分(KozaKubun.現金納付.getコード());
             }
             HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
             List<HihokenshaDaicho> 資格 = new ArrayList<>();
@@ -1367,16 +1365,14 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             kiwariKeisanInput.set特徴開始停止区分(INT_8);
             set特徴停止とする期(kiwariKeisanInput, 資格喪失事由コード, 資格喪失日,
                     特徴喪失日の特徴期, 特別徴収_年金支払い日);
-        } else {
-            if (!is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法11月())
-                    && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法12月())) {
-                kiwariKeisanInput.set特徴開始停止区分(INT_1);
-                kiwariKeisanInput.set特徴開始停止期(INT_5);
-            } else if (!is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法1月())
-                    && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法2月())) {
-                kiwariKeisanInput.set特徴開始停止区分(INT_1);
-                kiwariKeisanInput.set特徴開始停止期(INT_6);
-            }
+        } else if (!is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法11月())
+                && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法12月())) {
+            kiwariKeisanInput.set特徴開始停止区分(INT_1);
+            kiwariKeisanInput.set特徴開始停止期(INT_5);
+        } else if (!is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法1月())
+                && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法2月())) {
+            kiwariKeisanInput.set特徴開始停止区分(INT_1);
+            kiwariKeisanInput.set特徴開始停止期(INT_6);
         }
     }
 
