@@ -108,7 +108,6 @@ public class KyufuhiTsuchishoReportDBC100043Process extends BatchKeyBreakBase<Ky
         福祉用具貸与品目情報 = tsuchisho.帳票データ作成(entity, processParameter, 福祉用具貸与品目情報);
         福祉用具貸与品目情報.set通知文1(通知文1);
         福祉用具貸与品目情報.set通知文3(通知文3);
-        // TODO ページ分子とページ分母の実装を確認してください。
         福祉用具貸与品目情報.setページ分子(分子);
         福祉用具貸与品目情報.setページ分母(entity.getCount());
     }
