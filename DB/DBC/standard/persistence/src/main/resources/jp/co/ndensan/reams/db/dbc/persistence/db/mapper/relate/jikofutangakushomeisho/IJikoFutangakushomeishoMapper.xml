@@ -7,225 +7,63 @@
             resultMap="resultMap_KogakuGassanJohoEntity1" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
             fetchSize="500">
-        select
-        * 
-        from
-        ( 
-        select
-        * 
-        from
-        ( 
-        select
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.allColumns_DbT3068KogakuGassanShinseisho" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
-        from
-        rgdb."DbT3068KogakuGassanShinseisho"
-        ) as "DbT3068KogakuGassanShinseisho" 
-        where
-        rank_number = 1
-        ) AS "DbT3068KogakuGassanShinseisho" JOIN ( 
-        select
-        * 
-        from
-        ( 
-        select
+        SELECT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
-        from
-        rgdb."DbT3070KogakuGassanJikoFutanGaku"
-        ) as "DbT3070KogakuGassanJikoFutanGaku" 
-        where
-        rank_number = 1
-        ) AS "DbT3070KogakuGassanJikoFutanGaku" 
-        ON "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_hihokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."dbT3070KogakuGassanJikoFutanGaku_hihokenshaNo"
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_taishoNendo" = "DbT3070KogakuGassanJikoFutanGaku"."dbT3070KogakuGassanJikoFutanGaku_taishoNendo"
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_hokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."dbT3070KogakuGassanJikoFutanGaku_hokenshaNo" 
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_shikyuShinseishoSeiriNo" = "DbT3070KogakuGassanJikoFutanGaku"."dbT3070KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo"
-        JOIN ( 
-        select
-        * 
-        from
-        ( 
-        select
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
-        from
-        rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
-        ) as "DbT3071KogakuGassanJikoFutanGakuMeisai"
-        where
-        rank_number = 1
-        ) AS "DbT3071KogakuGassanJikoFutanGakuMeisai" 
-        ON "DbT3070KogakuGassanJikoFutanGaku"."dbT3070KogakuGassanJikoFutanGaku_hihokenshaNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."dbT3071KogakuGassanJikoFutanGakuMeisai_hihokenshaNo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."dbT3070KogakuGassanJikoFutanGaku_taishoNendo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."dbT3071KogakuGassanJikoFutanGakuMeisai_taishoNendo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."dbT3070KogakuGassanJikoFutanGaku_hokenshaNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."dbT3071KogakuGassanJikoFutanGakuMeisai_hokenshaNo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."dbT3070KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."dbT3071KogakuGassanJikoFutanGakuMeisai_shikyuShinseishoSeiriNo"
-        WHERE																
-        "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_hihokenshaNo" = #{被保険者番号}															
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_taishoNendo" = #{対象年度}															
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_hokenshaNo" = #{保険者番号}															
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_shikyuShinseishoSeiriNo" = #{支給申請書整理番号}					 
-        ORDER BY
-        "DbT3071KogakuGassanJikoFutanGakuMeisai"."dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" ASC
-
+        , <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
+        FROM
+        rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku" 
+        INNER JOIN rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071KogakuGassanJikoFutanGakuMeisai"
+        ON  "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"
+        AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo"="DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo"
+        AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo"="DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo"
+        AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"
+        AND "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo"="DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo"
+        WHERE "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = #{被保険者番号}
+        AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = #{対象年度}
+        AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" =#{保険者番号}
+        AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" =#{支給申請書整理番号}
+        AND "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo"=#{履歴番号}
     </select>
     <resultMap id="resultMap_KogakuGassanJohoEntity1" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.KogakuGassanJohoEntity">
-        <id column="dbT3068KogakuGassanShinseisho_hihokenshaNo"/>
-        <id column="dbT3068KogakuGassanShinseisho_taishoNendo"/>
-        <id column="dbT3068KogakuGassanShinseisho_hokenshaNo"/>
-        <id column="dbT3068KogakuGassanShinseisho_seiriNo"/>
-        <id column="dbT3068KogakuGassanShinseisho_rirekiNo"/>
-        <id column="dbT3070KogakuGassanJikoFutanGaku_hihokenshaNo"/>
-        <id column="dbT3070KogakuGassanJikoFutanGaku_taishoNendo"/>
-        <id column="dbT3070KogakuGassanJikoFutanGaku_hokenshaNo"/>
-        <id column="dbT3070KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo"/>
-        <id column="dbT3070KogakuGassanJikoFutanGaku_rirekiNo" />
-        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_hihokenshaNo"/>
-        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoNendo"/>
-        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_hokenshaNo"/>
-        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_shikyuShinseishoSeiriNo"/>
-        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_rirekiNo"/>
-        <id column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM"/>
-        <association property="高額合算申請書entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.ResultMap_DbT3068KogakuGassanShinseishoEntity"/>
+        <id column="高額合算自己負担額entity.dbT3070KogakuGassanJikoFutanGaku_hihokenshaNo"/>
+        <id column="高額合算自己負担額entity.dbT3070KogakuGassanJikoFutanGaku_taishoNendo"/>
+        <id column="高額合算自己負担額entity.dbT3070KogakuGassanJikoFutanGaku_hokenshaNo"/>
+        <id column="高額合算自己負担額entity.dbT3070KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo"/>
+        <id column="高額合算自己負担額entity.dbT3070KogakuGassanJikoFutanGaku_rirekiNo" />
         <association property="高額合算自己負担額entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
-        <association property="高額合算自己負担額明細entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
+        <collection property="高額合算自己負担額明細entity"  ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity" />
     </resultMap>
     <select resultOrdered="true" id="get高額合算情報2" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
             resultMap="resultMap_KogakuGassanJohoEntity2" 
             fetchSize="500">
-        select
-        * 
-        from
-        ( 
-        select
-        * 
-        from
-        ( 
-        select
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.allColumns_DbT3068KogakuGassanShinseisho" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
-        from
-        rgdb."DbT3068KogakuGassanShinseisho"
-        ) as "DbT3068KogakuGassanShinseisho" 
-        where
-        rank_number = 1
-        ) AS "DbT3068KogakuGassanShinseisho" JOIN ( 
-        select
-        * 
-        from
-        ( 
-        select
+        SELECT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.allColumns_DbT3170JigyoKogakuGassanJikoFutanGaku" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
-        from
-        rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku"
-        ) as "DbT3170JigyoKogakuGassanJikoFutanGaku" 
-        where
-        rank_number = 1
-        ) AS "DbT3170JigyoKogakuGassanJikoFutanGaku" 
-        ON "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_hihokenshaNo" = "DbT3170JigyoKogakuGassanJikoFutanGaku"."dbT3170_hihokenshaNo"
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_taishoNendo" = "DbT3170JigyoKogakuGassanJikoFutanGaku"."dbT3170_taishoNendo"
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_hokenshaNo" = "DbT3170JigyoKogakuGassanJikoFutanGaku"."dbT3170_hokenshaNo" 
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_shikyuShinseishoSeiriNo" = "DbT3170JigyoKogakuGassanJikoFutanGaku"."dbT3170_shikyuShinseishoSeiriNo"
-        JOIN ( 
-        select
-        * 
-        from
-        ( 
-        select
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
-        from
-        rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
-        ) as "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
-        where
-        rank_number = 1
-        ) AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" 
-        ON "DbT3170JigyoKogakuGassanJikoFutanGaku"."dbT3170_hihokenshaNo" = "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."dbT3171_hihokenshaNo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."dbT3170_taishoNendo" = "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."dbT3171_taishoNendo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."dbT3170_hokenshaNo" = "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."dbT3171_hokenshaNo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."dbT3170_shikyuShinseishoSeiriNo" = "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."dbT3171_shikyuShinseishoSeiriNo"
-		
-        WHERE																
-        "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_hihokenshaNo" = #{被保険者番号}															
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_taishoNendo" = #{対象年度}															
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_hokenshaNo" = #{保険者番号}															
-        AND "DbT3068KogakuGassanShinseisho"."dbT3068KogakuGassanShinseisho_shikyuShinseishoSeiriNo" = #{支給申請書整理番号}					 
-        ORDER BY
-        "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."dbT3171_taishoM" ASC
-
-
+        , <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" />
+        FROM
+        rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "DbT3170JigyoKogakuGassanJikoFutanGaku" 
+        INNER JOIN rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
+        ON  "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoNendo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hokenshaNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."rirekiNo"
+        WHERE "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo" = #{被保険者番号}
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo" = #{対象年度}
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo" =#{保険者番号}
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"=#{履歴番号}       
     </select>
     <resultMap id="resultMap_KogakuGassanJohoEntity2" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.KogakuGassanJohoEntity">
-        <id column="dbT3068KogakuGassanShinseisho_hihokenshaNo" />
-        <id column="dbT3068KogakuGassanShinseisho_taishoNendo" />
-        <id column="dbT3068KogakuGassanShinseisho_hokenshaNo" />
-        <id column="dbT3068KogakuGassanShinseisho_seiriNo" />
-        <id column="dbT3068KogakuGassanShinseisho_rirekiNo" />
-        <id column="dbT3170_hihokenshaNo" />
-        <id column="dbT3170_taishoNendo" />
-        <id column="dbT3170_hokenshaNo" />
-        <id column="dbT3170_shikyuShinseishoSeiriNo" />
-        <id column="dbT3170_rirekiNo" />
-        <id column="dbT3171_hihokenshaNo" />
-        <id column="dbT3171_taishoNendo" />
-        <id column="dbT3171_hokenshaNo" />
-        <id column="dbT3171_shikyuShinseishoSeiriNo" />
-        <id column="dbT3171_rirekiNo" />
-        <id column="dbT3171_taishoM" />
-        <association property="高額合算申請書entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.ResultMap_DbT3068KogakuGassanShinseishoEntity"/>
+        <id column="事業高額合算自己負担額entity.dbT3170_hihokenshaNo" />
+        <id column="事業高額合算自己負担額entity.dbT3170_taishoNendo" />
+        <id column="事業高額合算自己負担額entity.dbT3170_hokenshaNo" />
+        <id column="事業高額合算自己負担額entity.dbT3170_shikyuShinseishoSeiriNo" />
+        <id column="事業高額合算自己負担額entity.dbT3170_rirekiNo" />
         <association property="事業高額合算自己負担額entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.ResultMap_DbT3170JigyoKogakuGassanJikoFutanGakuEntity"/>
-        <association property="事業高額合算自己負担額明細entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity"/>
+        <collection property="事業高額合算自己負担額明細entity" ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get宛名から被保険者の個人情報" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
@@ -268,107 +106,158 @@
         <association property="被保険者台帳entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="uaFt200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
-    <select resultOrdered="true" id="get対象者データ" 
+    <resultMap id="対象者データTaisyousyaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.TaisyousyaEntity" autoMapping="true">
+        <result property="対象年度" column="taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="保険者番号" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="支給申請書整理番号" column="shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="rirekiNo" />
+        <result property="自己負担額証明書整理番号" column="jikoFutanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="自己負担額証明書作成年月日" column="shomeiShoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="get対象者データ1" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
-            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.ResultMap_DbT3068KogakuGassanShinseishoEntity"
+            resultMap="対象者データTaisyousyaEntity"
             fetchSize="500">
-        SELECT * FROM (
+        WITH 自己負担額 AS ( 
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.allColumns_DbT3068KogakuGassanShinseisho" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
+        * 
         FROM
-        rgdb."DbT3068KogakuGassanShinseisho" AS "DbT3068KogakuGassanShinseisho" 
+        rgdb."DbT3070KogakuGassanJikoFutanGaku" AS mst 
         WHERE
-      
-        "DbT3068KogakuGassanShinseisho"."hihokenshaNo" = #{被保険者番号} 
-        AND "DbT3068KogakuGassanShinseisho"."hokenshaNo" = #{保険者番号} 
-        AND "DbT3068KogakuGassanShinseisho"."shinseiJokyoKubun" = #{申請状況区分} 
-        AND NOT "DbT3068KogakuGassanShinseisho"."shikyuShinseiKubun" = #{支給申請区分}
-        AND ( "DbT3068KogakuGassanShinseisho"."jikoFutan_KeisanYM" IS NOT NULL OR "DbT3068KogakuGassanShinseisho"."jikoFutan_KeisanYM" <![CDATA[<>]]>'')
+        mst."hihokenshaNo" = #{被保険者番号} 
+        AND NOT EXISTS ( 
+        SELECT
+        * 
+        FROM
+        rgdb."DbT3070KogakuGassanJikoFutanGaku" AS slv 
+        WHERE
+        mst."hihokenshaNo" = slv."hihokenshaNo" 
+        AND mst."taishoNendo" = slv."taishoNendo" 
+        AND mst."hokenshaNo" = slv."hokenshaNo" 
+        AND mst."shikyuShinseishoSeiriNo" = slv."shikyuShinseishoSeiriNo" 
+        AND mst."rirekiNo"<![CDATA[<]]> slv."rirekiNo"
+        )
+        ) 
+        SELECT
+       
+        "taishoNendo"
+        , "hokenshaNo" 
+        , "shikyuShinseishoSeiriNo"
+        , "rirekiNo"
+        , "jikoFutanSeiriNo"
+        ,"shomeiShoSakuseiYMD" 
+        FROM
+        自己負担額 
+        WHERE
+        自己負担額."isDeleted" = FALSE 
+        AND 自己負担額."dataSakuseiKubun" = #{介護合算_データ作成区分_国保連取込情報}
+        AND ( 
+        自己負担額."shomeisho_UketoriYM" IS NOT NULL 
+        OR 自己負担額."shomeisho_UketoriYM" <![CDATA[<>]]> ''
+        ) 
+        
+        UNION 
+        
+        SELECT
+        "taishoNendo"
+        , "hokenshaNo"
+        , "shikyuShinseishoSeiriNo"
+        , "rirekiNo"
+        , "jikoFutanSeiriNo"
+        ,"shomeiShoSakuseiYMD" 
+        FROM
+        自己負担額 
+        WHERE
+        自己負担額."isDeleted" = FALSE 
+        AND 自己負担額."dataSakuseiKubun" = #{介護合算_データ作成区分_計算処理時_申請書有}
+        AND EXISTS ( 
+        SELECT
+        'X' 
+        FROM
+        rgdb."DbT3068KogakuGassanShinseisho" AS mst 
+        WHERE
+        mst."hihokenshaNo" = 自己負担額."hihokenshaNo" 
+        AND mst."shikyuShinseishoSeiriNo" = 自己負担額."shikyuShinseishoSeiriNo" 
+        AND NOT EXISTS ( 
+        SELECT
+        'X' 
+        FROM
+        rgdb."DbT3068KogakuGassanShinseisho" AS slv 
+        WHERE
+        mst."hihokenshaNo" = slv."hihokenshaNo" 
+        AND mst."taishoNendo" = slv."taishoNendo" 
+        AND mst."hokenshaNo" = slv."hokenshaNo" 
+        AND mst."seiriNo" = slv."seiriNo" 
+        AND mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo"
+        ) 
+        AND mst."shinseiJokyoKubun" = #{申請状況区分} 
+        AND mst."shikyuShinseiKubun" <![CDATA[<>]]>  #{支給申請区分} 
+        AND ( 
+        mst."jikoFutan_KeisanYM" IS NOT NULL 
+        OR mst."jikoFutan_KeisanYM"<![CDATA[<>]]> ''
+        ) 
+        AND mst."isDeleted" = FALSE
+        ) 
         ORDER BY
-        "DbT3068KogakuGassanShinseisho"."taishoNendo" DESC 
-        ,"DbT3068KogakuGassanShinseisho"."seiriNo" ASC ) AS "dbT3068KogakuGassanShinseisho" WHERE rank_number =1
+        "taishoNendo" DESC
+        , "shikyuShinseishoSeiriNo" ASC
+
     </select>
-    <select resultOrdered="true" id="get高額合算自己負担額" 
+    <select resultOrdered="true" id="get対象者データ2" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
-            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"
+            resultMap="対象者データTaisyousyaEntity"
             fetchSize="500">
-        SELECT * FROM (
+        WITH 自己負担額 AS ( 
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
+        * 
         FROM
-        rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku" 
+        rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS mst 
         WHERE
-        "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = #{被保険者番号}															
-        AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = #{対象年度}															
-        AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = #{保険者番号}															
-        AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = #{支給申請書整理番号}	
-        ) AS "dbT3070KogakuGassanJikoFutanGaku" WHERE rank_number =1
-    </select>
-    <select resultOrdered="true" id="get事業高額合算自己負担額" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
-            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.ResultMap_DbT3170JigyoKogakuGassanJikoFutanGakuEntity"
-            fetchSize="500">
-        SELECT * FROM (
+        mst."hihokenshaNo" = #{被保険者番号} 
+        AND NOT EXISTS ( 
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.allColumns_DbT3170JigyoKogakuGassanJikoFutanGaku" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        , "shikyuShinseishoSeiriNo" 
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
+        * 
         FROM
-        rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "DbT3170JigyoKogakuGassanJikoFutanGaku" 
+        rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS slv 
         WHERE
-        "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo" = #{被保険者番号}															
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo" = #{対象年度}															
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo" = #{保険者番号}															
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = #{支給申請書整理番号}	
-        ) AS "dbT3170JigyoKogakuGassanJikoFutanGaku" WHERE rank_number =1
+        mst."hihokenshaNo" = slv."hihokenshaNo" 
+        AND mst."taishoNendo" = slv."taishoNendo" 
+        AND mst."hokenshaNo" = slv."hokenshaNo" 
+        AND mst."shikyuShinseishoSeiriNo" = slv."shikyuShinseishoSeiriNo" 
+        AND mst."rirekiNo"<![CDATA[<]]> slv."rirekiNo"
+        )
+        ) 
+        SELECT
+       
+        "taishoNendo"
+        , "hokenshaNo"
+        , "shikyuShinseishoSeiriNo"
+        , "rirekiNo"
+        , "jikoFutanSeiriNo"
+        ,"shomeiShoSakuseiYMD" 
+        FROM
+        自己負担額 
+        WHERE
+        自己負担額."isDeleted" = FALSE 
+        ORDER BY
+        "taishoNendo" DESC
+        ,"shikyuShinseishoSeiriNo" ASC
     </select>
     <select resultOrdered="true" id="get再計算区分" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.ResultMap_DbT3068KogakuGassanShinseishoEntity"
             fetchSize="500">
-        SELECT * FROM (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3068KogakuGassanShinseishoMapper.allColumns_DbT3068KogakuGassanShinseisho" />
-        , row_number() over ( 
-        partition by
-        "hihokenshaNo"
-        , "taishoNendo"
-        , "hokenshaNo"
-        order by
-        "rirekiNo" DESC
-        ) AS rank_number 
+        DbT3068KogakuGassanShinseisho."saiKeisanKubun" 
         FROM
-        rgdb."DbT3068KogakuGassanShinseisho" AS "DbT3068KogakuGassanShinseisho" 
+        rgdb."DbT3068KogakuGassanShinseisho" AS DbT3068KogakuGassanShinseisho 
         WHERE
-      
-        "DbT3068KogakuGassanShinseisho"."hihokenshaNo" = #{被保険者番号}															
-        AND "DbT3068KogakuGassanShinseisho"."taishoNendo" = #{対象年度}															
-        AND "DbT3068KogakuGassanShinseisho"."hokenshaNo" = #{保険者番号}															
-        ) AS "dbT3068KogakuGassanShinseisho" WHERE rank_number =1
+        DbT3068KogakuGassanShinseisho."hihokenshaNo" =#{被保険者番号}
+        AND DbT3068KogakuGassanShinseisho."shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
+        ORDER BY
+        DbT3068KogakuGassanShinseisho."rirekiNo" 
+        LIMIT
+        1
+
     </select>
 </mapper>
