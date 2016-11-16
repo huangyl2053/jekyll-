@@ -319,6 +319,7 @@
             AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
             AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
             AND "DbT2015KeisangoJoho"."sakuseiShoriName" = #{作成処理名}
+            AND "DbT2015KeisangoJoho"."choteiNichiji" = #{処理日付}
             AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" in ( #{特別徴収対象者情報} , #{特別徴収追加候補者情報} )
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{調定前年度}
         )
@@ -373,6 +374,7 @@
             AND "DbT2015KeisangoJoho"."fukaNendo" =  #{賦課年度}
             AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
             AND "DbT2015KeisangoJoho"."sakuseiShoriName" = #{作成処理名}
+            AND "DbT2015KeisangoJoho"."choteiNichiji" = #{処理日付}
      </select>
      
      <update id="update処理日付管理" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb014001.FuchoKarisanteiFukaMybatisParameter">
