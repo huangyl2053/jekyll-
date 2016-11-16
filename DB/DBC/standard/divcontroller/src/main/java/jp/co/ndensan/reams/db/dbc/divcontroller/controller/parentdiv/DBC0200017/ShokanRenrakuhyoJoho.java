@@ -37,6 +37,7 @@ public class ShokanRenrakuhyoJoho {
     private static final ReportId 帳票ID = ReportIdDBC.DBC200025.getReportId();
     private final RString バッチID = new RString("ExecutionBatchId");
     private final RString フロー固定ID_給報出力 = new RString("DBC110050_ShokanRenrakuhyoOut");
+    private static final RString 帳票出力順の取得メッセージ引数 = new RString("帳票出力順の取得");
 
     /**
      * onLoadのメソッドです。
@@ -67,12 +68,13 @@ public class ShokanRenrakuhyoJoho {
                 KokuhorenDataSofuViewState.class);
         再処理区分 = parmater.get再処理区分();
         処理年月 = parmater.get処理年月();
+        FlowParameters fp = FlowParameters.of(バッチID, フロー固定ID_給報出力);
+        FlowParameterAccessor.merge(fp);
         if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
             return ResponseData.of(getHandler(div).setBatchParameter(再処理区分, 処理年月)).respond();
         }
-        FlowParameters fp = FlowParameters.of(バッチID, フロー固定ID_給報出力);
-        FlowParameterAccessor.merge(fp);
-        return ResponseData.of(new DBC110050_ShokanRenrakuhyoOutParameter()).respond();
+
+        throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(帳票出力順の取得メッセージ引数.toString()).evaluate());
     }
 
     private ShokanRenrakuhyoJohoHandler getHandler(ShokanRenrakuhyoJohoDiv div) {
