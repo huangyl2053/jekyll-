@@ -401,6 +401,8 @@
             B1."sakuseiKubunCode" AS "居宅サービス計画作成区分コード",
             A1."zanteiKubun" AS "暫定区分",
             A1."rirekiNo" AS "履歴番号",
+            A1."taishoYM" AS "taishoYM1",
+            B1."taishoYM" AS "taishoYM2",
             A1."todokedeYMD" AS "届出年月日"
         FROM rgdb."DbT3005KyotakuKeikakuTodokede" A1
             INNER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" B1
@@ -416,6 +418,8 @@
             C1."sakuseiKubunCode" AS "居宅サービス計画作成区分コード",
             A2."zanteiKubun" AS "暫定区分",
             A2."rirekiNo" AS "履歴番号",
+            A2."taishoYM" AS "taishoYM1",
+            C1."taishoYM" AS "taishoYM2",
             A2."todokedeYMD" AS "届出年月日"
         FROM rgdb."DbT3005KyotakuKeikakuTodokede" A2
             INNER JOIN rgdb."DbT3007KyotakuKeikakuJikoSakusei" C1
@@ -440,6 +444,9 @@
     <resultMap id="resultMap_居宅計画" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
         <id column="idouTemp_被保険者番号"/>
         <id column="idouTemp_連番"/>
+        <id column="履歴番号"/>
+        <id column="taishoYM1"/>
+        <id column="taishoYM2"/>
         <id column="居宅計画種類"/>
         <association property="居宅計画" resultMap="resultMap_居宅計画Entity"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
@@ -824,6 +831,8 @@
     </resultMap>
     <resultMap id="resultMap_居宅計画Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.KyotakuEntity" autoMapping="true">
         <result property="居宅計画種類" column="居宅計画種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishoYM2" column="taishoYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="taishoYM1" column="taishoYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="適用開始日" column="適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="適用終了日" column="適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
