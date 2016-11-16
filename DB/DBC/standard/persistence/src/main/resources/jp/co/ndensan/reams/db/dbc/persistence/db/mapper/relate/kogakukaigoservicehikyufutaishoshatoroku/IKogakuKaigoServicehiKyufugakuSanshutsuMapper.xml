@@ -1387,17 +1387,12 @@
        "saiShoriFukaKubun" = false,
        "shoriJikkoKaisu" = "DbT3104KokuhorenInterfaceKanri"."shoriJikkoKaisu"  + 1,
        "kagoCtrlRecordKensu" = (
-        SELECT "TempKokuhorenIfJigyo"."recordKensu"
-        FROM "TempKokuhorenIfJigyo"
-        WHERE
-        "TempKokuhorenIfJigyo"."shoriTaishoYM" = #{処理年月} AND
-        "TempKokuhorenIfJigyo"."kokanShikibetsuNo" = 'KGK2') ,
-        "kagoCtrlShoriYM" = (
-        SELECT "TempKokuhorenIfJigyo"."shoriTaishoYM"
-        FROM "TempKokuhorenIfJigyo" 
-        WHERE
-        "TempKokuhorenIfJigyo"."shoriTaishoYM" = #{処理年月} AND
-        "TempKokuhorenIfJigyo"."kokanShikibetsuNo" = 'KGK2')
+        SELECT COUNT(*)
+        FROM "TempJigyoKogakuKyufuTaishoshaGokeiZen") ,
+         "kagoCtrlShoriYM" = (
+        SELECT "TempJigyoKogakuKyufuTaishoshaGokeiZen"."taishoshaHanteiShinsaYM"
+        FROM "TempJigyoKogakuKyufuTaishoshaGokeiZen"
+        LIMIT 1)
         WHERE
         rgdb."DbT3104KokuhorenInterfaceKanri"."shoriYM" = #{処理年月} AND
         rgdb."DbT3104KokuhorenInterfaceKanri"."kokanShikibetsuNo" = 'KGK2'
@@ -2742,7 +2737,7 @@
                C."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
                C."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日
              FROM 
-               "TempKyufujissekiTyukannJigyo5" AS A
+               "TempKyufujissekiTyukannJigyo9" AS A
              INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
              ON A."hiHokenshaNo" = C."hihokenshaNo"
              WHERE 
