@@ -178,6 +178,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return txtNyuryokuShisetsuMeisho
      */
     @JsonProperty("txtNyuryokuShisetsuMeisho")
+    @Override
     public TextBox getTxtNyuryokuShisetsuMeisho() {
         return txtNyuryokuShisetsuMeisho;
     }

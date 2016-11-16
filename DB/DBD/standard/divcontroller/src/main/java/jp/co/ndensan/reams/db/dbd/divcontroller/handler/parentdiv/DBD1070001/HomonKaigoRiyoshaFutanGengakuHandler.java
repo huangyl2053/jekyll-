@@ -45,13 +45,13 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -123,6 +123,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             div.getBtnAddShinseiJoho().setText(承認情報を確定する);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(保存する, "承認情報を");
         }
+        ボタン制御();
         close情報エリア(true);
         PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.照会, personalData);
@@ -137,6 +138,20 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             法別区分.add(new KeyValueDataSource(hobetsuKubun.getコード(), hobetsuKubun.get名称()));
         }
         return 法別区分;
+    }
+
+    public void ボタン制御() {
+        for (dgShinseiList_Row row : div.getDgShinseiList().getDataSource()) {
+            if (row.getKetteiKubun() == null || row.getKetteiKubun().isEmpty()) {
+                div.getBtnAddShinsei().setDisabled(true);
+            } else {
+                if (申請メニュー.equals(ResponseHolder.getMenuID())) {
+                    row.setModifyButtonState((DataGridButtonState.Disabled));
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectable(Boolean.FALSE);
+                }
+            }
+        }
     }
 
     /**
@@ -228,6 +243,16 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             row.setDataId(DataPassingConverter.serialize(情報.identifier()));
             rowList.add(row);
         }
+        if (rowList.size() < 2) {
+            return rowList;
+        }
+        for (int i = 0; i < rowList.size(); i++) {
+            dgShinseiList_Row Row = rowList.get(i);
+            if (Row.getKetteiKubun() == null || Row.getKetteiKubun().isEmpty()) {
+                rowList.remove(i);
+                rowList.add(0, Row);
+            }
+        }
         return rowList;
     }
 
@@ -289,7 +314,19 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
                 }
             }
         }
+        履歴番号修正(情報と状態ArrayList);
         div.getDgShinseiList().setDataSource(getDataSource(情報と状態ArrayList));
+        ボタン制御();
+    }
+
+    private void 履歴番号修正(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList) {
+        int 履歴番号 = 1;
+        for (int index = 情報と状態ArrayList.size() - 1; index >= 0; index--) {
+            if (情報と状態ArrayList.get(index).get新履歴番号() != 0 && !情報と状態ArrayList.get(index).get状態().equals(状態_削除)) {
+                情報と状態ArrayList.get(index).set新履歴番号(履歴番号);
+                履歴番号 += 1;
+            }
+        }
     }
 
     /**
@@ -333,7 +370,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
     }
 
     private void set申請情報_追加(ShikibetsuCode 識別コード) {
-        div.getTxtShinseiYMD().clearValue();
+        div.getTxtShinseiYMD().setValue(FlexibleDate.getNowDate());
         div.getTxtShinseiRiyu().clearValue();
         div.getCcdShinseiJoho().initialize(識別コード);
         div.getRadShogaishaTechoUmu().setSelectedKey(障害者手帳_有_Key);
@@ -344,9 +381,16 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         div.getTxtShogaishaTechoNo().setDisabled(false);
         div.getTxtShogaishaTechoKofuYMD().setDisabled(false);
         div.getDdlKettaiKubun().setSelectedKey(承認する_Key);
-        div.getTxtKettaiYmd().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
-        div.getTxtTekiyoYmd().clearValue();
-        div.getTxtYukoKigen().clearValue();
+        if (申請メニュー.equals(ResponseHolder.getMenuID())) {
+            div.getTxtKettaiYmd().clearValue();
+            div.getTxtTekiyoYmd().clearValue();
+            div.getTxtYukoKigen().clearValue();
+        } else {
+            div.getTxtKettaiYmd().setValue(FlexibleDate.getNowDate());
+            div.getTxtTekiyoYmd().setValue(get適用日初期値());
+            HomonKaigoRiryoshaFutangakuGengakuService service = HomonKaigoRiryoshaFutangakuGengakuService.createIntance();
+            div.getTxtYukoKigen().setValue(service.estimate有効期限(div.getTxtTekiyoYmd().getValue()));
+        }
         div.getTxtKohiFutanshaNo().clearValue();
         div.getTxtKohiJyukyshaNo().clearValue();
         div.getTxtHiShoninRiyu().clearValue();
@@ -359,6 +403,21 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         }
     }
 
+    private FlexibleDate get適用日初期値() {
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        if (rows.isEmpty()) {
+            return FlexibleDate.getNowDate();
+        } else {
+            for (dgShinseiList_Row row : rows) {
+                if (row.getKetteiKubun().equals(漢字承認する)) {
+                    return new FlexibleDate(row.getTxtYukoKigen().
+                            getValue().plusDay(1).toString());
+                }
+            }
+        }
+        return FlexibleDate.getNowDate();
+    }
+
     /**
      * 「障害者手帳有無」を押下処理です。
      *
@@ -369,6 +428,9 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             div.getTxtShogaishaTechoNo().setDisabled(false);
             div.getTxtShogaishaTechoKofuYMD().setDisabled(false);
         } else {
+            div.getTxtShogaishaTechoTokyu().clearValue();
+            div.getTxtShogaishaTechoNo().clearValue();
+            div.getTxtShogaishaTechoKofuYMD().clearValue();
             div.getTxtShogaishaTechoTokyu().setDisabled(true);
             div.getTxtShogaishaTechoNo().setDisabled(true);
             div.getTxtShogaishaTechoKofuYMD().setDisabled(true);
@@ -381,19 +443,20 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
      */
     public void onChange_ddlKettaiKubun() {
         if (承認する_Key.equals(div.getDdlKettaiKubun().getSelectedKey())) {
+            div.getTxtHiShoninRiyu().clearValue();
             div.getBtnOpenHiShoninRiyu().setDisabled(true);
             div.getTxtHiShoninRiyu().setDisabled(true);
-            div.getTxtTekiyoYmd().setDisabled(false);
-            div.getTxtYukoKigen().setDisabled(false);
             div.getDdlHobetsuKubun().setDisabled(false);
             div.getTxtKyufuRitsu().setDisabled(false);
             div.getTxtKohiFutanshaNo().setDisabled(false);
             div.getTxtKohiJyukyshaNo().setDisabled(false);
         } else {
+            div.getDdlHobetsuKubun().setSelectedValue(RString.EMPTY);
+            div.getTxtKyufuRitsu().clearValue();
+            div.getTxtKohiFutanshaNo().clearValue();
+            div.getTxtKohiJyukyshaNo().clearValue();
             div.getBtnOpenHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
-            div.getTxtTekiyoYmd().setDisabled(true);
-            div.getTxtYukoKigen().setDisabled(true);
             div.getDdlHobetsuKubun().setDisabled(true);
             div.getTxtKyufuRitsu().setDisabled(true);
             div.getTxtKohiFutanshaNo().setDisabled(true);
@@ -456,8 +519,10 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
      *
      */
     public void onBlur_txtTekiyoYmd() {
-        HomonKaigoRiryoshaFutangakuGengakuService service = HomonKaigoRiryoshaFutangakuGengakuService.createIntance();
-        div.getTxtYukoKigen().setValue(service.estimate有効期限(div.getTxtTekiyoYmd().getValue()));
+        if (div.getTxtYukoKigen() == null || div.getTxtYukoKigen().getValue().isEmpty()) {
+            HomonKaigoRiryoshaFutangakuGengakuService service = HomonKaigoRiryoshaFutangakuGengakuService.createIntance();
+            div.getTxtYukoKigen().setValue(service.estimate有効期限(div.getTxtTekiyoYmd().getValue()));
+        }
     }
 
     /**
@@ -505,7 +570,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         close申請一覧エリア(true);
         set申請情報エリア(情報と状態);
         if (申請メニュー.equals(ResponseHolder.getMenuID())) {
-            一覧申請修正制御(状態_追加.equals(情報と状態.get状態()));
+            一覧申請修正制御();
         } else {
             一覧承認修正制御(情報と状態);
         }
@@ -516,10 +581,10 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         div.getTxtShinseiYMD().setDisabled(!is追加);
         div.getTxtShinseiRiyu().setDisabled(!is追加);
         div.getTxtKettaiYmd().setDisabled(false);
+        div.getTxtTekiyoYmd().setDisabled(false);
+        div.getTxtYukoKigen().setDisabled(false);
         div.getDdlKettaiKubun().setDisabled(false);
         if (承認しない.equals(情報と状態.get訪問介護利用者負担額減額情報().get決定区分())) {
-            div.getTxtTekiyoYmd().setDisabled(true);
-            div.getTxtYukoKigen().setDisabled(true);
             div.getDdlHobetsuKubun().setDisabled(true);
             div.getTxtKyufuRitsu().setDisabled(true);
             div.getTxtKohiFutanshaNo().setDisabled(true);
@@ -527,8 +592,6 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             div.getBtnOpenHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
         } else {
-            div.getTxtTekiyoYmd().setDisabled(false);
-            div.getTxtYukoKigen().setDisabled(false);
             div.getDdlHobetsuKubun().setDisabled(false);
             div.getTxtKyufuRitsu().setDisabled(false);
             div.getTxtKohiFutanshaNo().setDisabled(false);
@@ -547,9 +610,9 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         }
     }
 
-    private void 一覧申請修正制御(boolean is追加修正) {
-        div.getTxtShinseiYMD().setDisabled(!is追加修正);
-        div.getTxtShinseiRiyu().setDisabled(!is追加修正);
+    private void 一覧申請修正制御() {
+        div.getTxtShinseiYMD().setDisabled(false);
+        div.getTxtShinseiRiyu().setDisabled(false);
         div.getCcdShinseiJoho().setDisabled(false);
         div.getShogaishaTecho().setDisabled(false);
         div.getDdlKettaiKubun().setDisabled(true);
@@ -573,6 +636,9 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             div.getRadShogaishaTechoUmu().setSelectedKey(障害者手帳_有_Key);
         } else {
             div.getRadShogaishaTechoUmu().setSelectedKey(障害者手帳_無_Key);
+            div.getTxtShogaishaTechoTokyu().setDisabled(true);
+            div.getTxtShogaishaTechoNo().setDisabled(true);
+            div.getTxtShogaishaTechoKofuYMD().setDisabled(true);
         }
         div.getTxtShogaishaTechoTokyu().setValue(情報.get障害者手帳等級());
         div.getTxtShogaishaTechoNo().setValue(情報.get障害者手帳番号());
@@ -588,16 +654,23 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         }
         if (情報.get決定年月日() != null) {
             div.getTxtKettaiYmd().setValue(情報.get決定年月日());
+        } else if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
+            div.getTxtKettaiYmd().setValue(FlexibleDate.getNowDate());
         } else {
             div.getTxtKettaiYmd().clearValue();
         }
         if (情報.get適用開始年月日() != null) {
             div.getTxtTekiyoYmd().setValue(情報.get適用開始年月日());
+        } else if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
+            div.getTxtTekiyoYmd().setValue(get適用日初期値());
         } else {
             div.getTxtTekiyoYmd().clearValue();
         }
         if (情報.get適用終了年月日() != null) {
             div.getTxtYukoKigen().setValue(情報.get適用終了年月日());
+        } else if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
+            HomonKaigoRiryoshaFutangakuGengakuService service = HomonKaigoRiryoshaFutangakuGengakuService.createIntance();
+            div.getTxtYukoKigen().setValue(service.estimate有効期限(div.getTxtTekiyoYmd().getValue()));
         } else {
             div.getTxtYukoKigen().clearValue();
         }
@@ -614,10 +687,11 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         }
         if (!RString.isNullOrEmpty(情報.get公費受給者番号())) {
             div.getTxtKohiJyukyshaNo().setValue(情報.get公費受給者番号().substring(0, 情報.get公費受給者番号().length()));
+            div.getTxtKohiJyukyushaNoCheckDigit().setValue(情報.get公費受給者番号().substring(情報.get公費受給者番号().length() - 1));
         } else {
             div.getTxtKohiJyukyshaNo().clearValue();
+            div.getTxtKohiJyukyushaNoCheckDigit().clearValue();
         }
-        div.getTxtKohiJyukyushaNoCheckDigit().clearValue();
         if (情報.get非承認理由() != null) {
             div.getTxtHiShoninRiyu().setValue(情報.get非承認理由());
         } else {
@@ -670,207 +744,47 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
      * 「申請情報を確定する」（また「承認情報を確定する」）ボタンを押下処理です。
      *
      * @param 情報と状態ArrayList 情報と状態ArrayList
-     * @param 編集情報 編集情報
+     * @param 編集前情報 編集情報
      * @param 追加履歴番号 追加履歴番号
-     * @param 最初情報 最初情報
      * @param 被保険者番号 被保険者番号
      */
     public void onClick_btnConfirm(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList,
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 編集情報, Integer 追加履歴番号,
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 最初情報, HihokenshaNo 被保険者番号) {
-        if (null == 編集情報) {
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 画面情報 = get情報と状態From画面(追加履歴番号, 被保険者番号);
+            HomonKaigoRiyoshaFutangakuGengakuToJotai 編集前情報, Integer 追加履歴番号, HihokenshaNo 被保険者番号) {
+
+        HomonKaigoRiyoshaFutangakuGengakuToJotai 画面情報 = get情報と状態From画面(追加履歴番号, 被保険者番号);
+
+        if (編集前情報 == null) {
             追加処理(情報と状態ArrayList, 画面情報);
         } else {
-            if (状態_追加.equals(編集情報.get状態())) {
-                追加修正処理(情報と状態ArrayList, 編集情報);
+            if (状態_追加.equals(編集前情報.get状態())) {
+                削除処理(情報と状態ArrayList, 編集前情報);
+                追加処理(情報と状態ArrayList, 画面情報);
             } else {
-                修正処理(情報と状態ArrayList, 編集情報, 最初情報);
+                削除処理(情報と状態ArrayList, 編集前情報);
+                修正情報と状態(編集前情報);
+                追加処理(情報と状態ArrayList, 編集前情報);
             }
         }
         div.getDgShinseiList().setDataSource(getDataSource(情報と状態ArrayList));
         close情報エリア(true);
         close申請一覧エリア(false);
+        ボタン制御();
     }
 
-    private void 修正処理(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList,
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 編集情報, HomonKaigoRiyoshaFutangakuGengakuToJotai 最初情報) {
+    private void 削除処理(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList,
+            HomonKaigoRiyoshaFutangakuGengakuToJotai 編集情報) {
+
         HomonKaigoRiyoshaFutangakuGengaku 情報 = 編集情報.get訪問介護利用者負担額減額情報();
         HomonKaigoRiyoshaFutangakuGengakuIdentifier id = 情報.identifier();
         int size = 情報と状態ArrayList.size();
+
         for (int index = 0; index < size; index++) {
             HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態 = 情報と状態ArrayList.get(index);
             if (id.equals(情報と状態.get訪問介護利用者負担額減額情報().identifier())) {
-                if (!is修正(最初情報)) {
-                    最初情報.set状態(RString.EMPTY);
-                    最初情報.set新履歴番号(情報と状態.get新履歴番号());
-                    情報と状態ArrayList.remove(index);
-                    add情報と状態(情報と状態ArrayList, 最初情報, index, size);
-                } else {
-                    修正情報と状態(情報と状態);
-                }
-            }
-        }
-        div.getDgShinseiList().setDataSource(getDataSource(情報と状態ArrayList));
-    }
-
-    private void add情報と状態(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList,
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態, int index, int size) {
-        if (index == size) {
-            情報と状態ArrayList.add(情報と状態);
-        } else {
-            情報と状態ArrayList.add(index, 情報と状態);
-        }
-    }
-
-    private boolean is修正(HomonKaigoRiyoshaFutangakuGengakuToJotai 最初情報) {
-        HomonKaigoRiyoshaFutangakuGengaku 申請 = 最初情報.get訪問介護利用者負担額減額情報();
-        if (!申請.get申請年月日().equals(div.getTxtShinseiYMD().getValue())
-                || !isEquals(申請.get申請事由(), div.getTxtShinseiRiyu().getValue())
-                || is障害者手帳修正(申請)) {
-            return true;
-        }
-        if (!申請メニュー.equals(ResponseHolder.getMenuID()) && is承認情報修正(申請)) {
-            return true;
-        }
-        return is減免減額申請修正(申請);
-    }
-
-    private boolean is障害者手帳修正(HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報) {
-        if (障害者手帳_有_Key.equals(div.getRadShogaishaTechoUmu().getSelectedKey())) {
-            if (!訪問介護利用者負担額減額情報.is障害者手帳有無()) {
-                return true;
-            }
-            return !isEquals(div.getShogaishaTecho().getTxtShogaishaTechoTokyu().getValue(),
-                    訪問介護利用者負担額減額情報.get障害者手帳等級())
-                    || !isEquals(div.getShogaishaTecho().getTxtShogaishaTechoNo().getValue(),
-                            訪問介護利用者負担額減額情報.get障害者手帳番号())
-                    || !isEquals(div.getShogaishaTecho().getTxtShogaishaTechoKofuYMD().getValue(),
-                            訪問介護利用者負担額減額情報.get障害者手帳交付年月日());
-        }
-        return 訪問介護利用者負担額減額情報.is障害者手帳有無();
-    }
-
-    private boolean is承認情報修正(HomonKaigoRiyoshaFutangakuGengaku 申請) {
-        if (!isEquals(div.getTxtKettaiYmd().getValue(), 申請.get決定年月日())) {
-            return true;
-        }
-        if (承認する_Key.equals(div.getDdlKettaiKubun().getSelectedKey())) {
-            if (!承認する.equals(申請.get決定区分())) {
-                return true;
-            }
-            return !isEquals(div.getTxtTekiyoYmd().getValue(), 申請.get適用開始年月日())
-                    || !isEquals(div.getTxtYukoKigen().getValue(), 申請.get適用終了年月日())
-                    || !isEquals(div.getDdlHobetsuKubun().getSelectedKey(), 申請.get法別区分())
-                    || !isEquals(div.getTxtKyufuRitsu().getValue(), 申請.get給付率())
-                    || !isEquals(div.getTxtKohiFutanshaNo().getValue(), 申請.get公費負担者番号())
-                    || !isEquals(div.getTxtKohiJyukyshaNo().getValue().concat(div.getTxtKohiJyukyushaNoCheckDigit().getValue()),
-                            申請.get公費受給者番号());
-        } else {
-            if (承認する.equals(申請.get決定区分())) {
-                return true;
-            }
-            return !isEquals(div.getTxtHiShoninRiyu().getValue(), 申請.get非承認理由());
-        }
-    }
-
-    private boolean is減免減額申請修正(HomonKaigoRiyoshaFutangakuGengaku 障がい書控除申請) {
-        List<GemmenGengakuShinsei> gemmenGengakuShinseiList = 障がい書控除申請.getGemmenGengakuShinseiList();
-        if (gemmenGengakuShinseiList.isEmpty()) {
-            return true;
-        }
-        GemmenGengakuShinsei 減免減額申請 = gemmenGengakuShinseiList.get(0);
-        ShinseiJoho 画面減免減額申請 = div.getCcdShinseiJoho().get減免減額申請情報();
-        return !isEquals(減免減額申請.get事業者区分(), null == 画面減免減額申請.get事業者区分() ? null : 画面減免減額申請.get事業者区分().getCode())
-                || !isEquals(減免減額申請.get申請届出者氏名カナ(), 画面減免減額申請.get申請届出者氏名カナ())
-                || !isEquals(減免減額申請.get申請届出者氏名(), 画面減免減額申請.get申請届出者氏名())
-                || !isEquals(減免減額申請.get申請届出者続柄(), 画面減免減額申請.get申請届出者続柄())
-                || !isEquals(減免減額申請.get申請届出者郵便番号(), 画面減免減額申請.get申請届出者郵便番号())
-                || !isEquals(減免減額申請.get申請届出者電話番号(), 画面減免減額申請.get申請届出者電話番号())
-                || !isEquals(減免減額申請.get申請届出者住所(), 画面減免減額申請.get申請届出者住所())
-                || !isEquals(減免減額申請.get申請届出代行区分(),
-                        null == 画面減免減額申請.get申請届出代行区分() ? null : 画面減免減額申請.get申請届出代行区分().getCode());
-    }
-
-    private boolean isEquals(FlexibleDate value1, FlexibleDate value2) {
-        if (null == value1 || value1.isEmpty()) {
-            return null == value2 || value2.isEmpty();
-        } else {
-            return value1.equals(value2);
-        }
-    }
-
-    private boolean isEquals(AtenaKanaMeisho value1, AtenaKanaMeisho value2) {
-        if (null == value1 || value1.isEmpty()) {
-            return null == value2 || value2.isEmpty();
-        } else {
-            return value1.equals(value2);
-        }
-    }
-
-    private boolean isEquals(Decimal value1, HokenKyufuRitsu value2) {
-        if (null == value2) {
-            return null == value1;
-        } else {
-            return value2.getColumnValue().equals(value1);
-        }
-    }
-
-    private boolean isEquals(YubinNo value1, YubinNo value2) {
-        if (null == value1 || value1.isEmpty()) {
-            return null == value2 || value2.isEmpty();
-        } else {
-            return value1.equals(value2);
-        }
-    }
-
-    private boolean isEquals(AtenaJusho value1, AtenaJusho value2) {
-        if (null == value1 || value1.isEmpty()) {
-            return null == value2 || value2.isEmpty();
-        } else {
-            return value1.equals(value2);
-        }
-    }
-
-    private boolean isEquals(TelNo value1, TelNo value2) {
-        if (null == value1 || value1.isEmpty()) {
-            return null == value2 || value2.isEmpty();
-        } else {
-            return value1.equals(value2);
-        }
-    }
-
-    private boolean isEquals(AtenaMeisho value1, AtenaMeisho value2) {
-        if (null == value1 || value1.isEmpty()) {
-            return null == value2 || value2.isEmpty();
-        } else {
-            return value1.equals(value2);
-        }
-    }
-
-    private boolean isEquals(RString value1, RString value2) {
-        if (null == value1 || value1.isEmpty()) {
-            return null == value2 || value2.isEmpty();
-        } else {
-            return value1.equals(value2);
-        }
-    }
-
-    private void 追加修正処理(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList,
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 編集情報) {
-        HomonKaigoRiyoshaFutangakuGengaku 情報 = 編集情報.get訪問介護利用者負担額減額情報();
-        HomonKaigoRiyoshaFutangakuGengakuIdentifier id = 情報.identifier();
-        boolean isDeleteed = false;
-        for (int index = 0; index < 情報と状態ArrayList.size() && !isDeleteed; index++) {
-            if (id.equals(情報と状態ArrayList.get(index).get訪問介護利用者負担額減額情報().identifier())) {
                 情報と状態ArrayList.remove(index);
-                isDeleteed = true;
-            } else {
-                情報と状態ArrayList.get(index).set新履歴番号(情報と状態ArrayList.get(index).get新履歴番号() - 1);
+                return;
             }
         }
-        修正情報と状態(編集情報);
-        追加処理(情報と状態ArrayList, 編集情報);
     }
 
     private void 修正情報と状態(HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態) {
@@ -891,6 +805,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             builder.set障害者手帳等級(RString.EMPTY);
             builder.set障害者手帳交付年月日(FlexibleDate.EMPTY);
         }
+
         builder.set申請年月日(div.getTxtShinseiYMD().getValue());
         if (div.getTxtShinseiRiyu().getValue() != null) {
             builder.set申請事由(div.getTxtShinseiRiyu().getValue());
@@ -900,8 +815,6 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         if (!申請メニュー.equals(ResponseHolder.getMenuID()) && 承認する_Key.equals(div.getDdlKettaiKubun().getSelectedKey())) {
             builder.set非承認理由(RString.EMPTY);
             builder.set決定区分(承認する);
-            builder.set適用開始年月日(div.getTxtTekiyoYmd().getValue());
-            builder.set適用終了年月日(div.getTxtYukoKigen().getValue());
             builder.set法別区分(div.getDdlHobetsuKubun().getSelectedKey());
             builder.set給付率(new HokenKyufuRitsu(div.getTxtKyufuRitsu().getValue()));
             builder.set公費負担者番号(div.getTxtKohiFutanshaNo().getValue());
@@ -910,11 +823,11 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         }
         if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
             builder.set決定年月日(div.getTxtKettaiYmd().getValue());
+            builder.set適用開始年月日(div.getTxtTekiyoYmd().getValue());
+            builder.set適用終了年月日(div.getTxtYukoKigen().getValue());
             if (承認しない_Key.equals(div.getDdlKettaiKubun().getSelectedKey())) {
                 builder.set決定区分(承認しない);
                 builder.set非承認理由(div.getTxtHiShoninRiyu().getValue());
-                builder.set適用開始年月日(FlexibleDate.EMPTY);
-                builder.set適用終了年月日(FlexibleDate.EMPTY);
                 builder.set法別区分(RString.EMPTY);
                 builder.set給付率(null);
                 builder.set公費負担者番号(RString.EMPTY);
@@ -983,35 +896,51 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
 
     private void 追加処理(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList,
             HomonKaigoRiyoshaFutangakuGengakuToJotai 画面情報) {
-        if (情報と状態ArrayList.isEmpty()) {
-            if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
-                画面情報.set新履歴番号(1);
-            } else {
-                画面情報.set新履歴番号(0);
-            }
+
+        if (申請メニュー.equals(ResponseHolder.getMenuID())) {
+            画面情報.set新履歴番号(0);
             情報と状態ArrayList.add(画面情報);
             return;
         }
+
+        if (!申請メニュー.equals(ResponseHolder.getMenuID()) && 情報と状態ArrayList.isEmpty()) {
+            画面情報.set新履歴番号(1);
+            情報と状態ArrayList.add(画面情報);
+            return;
+        }
+
         int size = 情報と状態ArrayList.size();
+        int 履歴番号 = 1;
         boolean isAdded = false;
-        int 履歴番号 = 情報と状態ArrayList.get(size - 1).get新履歴番号();
-        for (int index = 0; index <= size; index++) {
-            if (!isAdded) {
-                if (index == size) {
+        for (int index = size - 1; index >= 0; index--) {
+            HomonKaigoRiyoshaFutangakuGengakuToJotai 情報 = 情報と状態ArrayList.get(index);
+            if (情報.get訪問介護利用者負担額減額情報().get決定区分() == null
+                    || 情報.get訪問介護利用者負担額減額情報().get決定区分().isEmpty()) {
+                continue;
+            }
+            if (画面情報.get訪問介護利用者負担額減額情報().get適用開始年月日()
+                    .isBefore(情報.get訪問介護利用者負担額減額情報().get適用開始年月日()) && !isAdded) {
+                画面情報.set新履歴番号(履歴番号);
+                情報と状態ArrayList.add(index + 1, 画面情報);
+                履歴番号 += 1;
+                isAdded = true;
+            } else if (画面情報.get訪問介護利用者負担額減額情報().get適用開始年月日()
+                    .equals(情報.get訪問介護利用者負担額減額情報().get適用開始年月日()) && !isAdded) {
+                if (画面情報.get訪問介護利用者負担額減額情報().get決定区分().equals(漢字承認しない)) {
                     画面情報.set新履歴番号(履歴番号);
-                    情報と状態ArrayList.add(画面情報);
-                    continue;
-                }
-                HomonKaigoRiyoshaFutangakuGengakuToJotai 情報 = 情報と状態ArrayList.get(index);
-                if (!画面情報.get訪問介護利用者負担額減額情報().get申請年月日()
-                        .isBeforeOrEquals(情報.get訪問介護利用者負担額減額情報().get申請年月日())) {
-                    画面情報.set新履歴番号(情報.get新履歴番号() + 1);
-                    情報と状態ArrayList.add(index, 画面情報);
+                    情報と状態ArrayList.add(index + 1, 画面情報);
+                    履歴番号 += 1;
                     isAdded = true;
-                } else {
-                    情報.set新履歴番号(情報.get新履歴番号() + 1);
                 }
             }
+            if (!情報.get状態().equals(状態_削除)) {
+                情報.set新履歴番号(履歴番号);
+                履歴番号 += 1;
+            }
+        }
+        if (!isAdded) {
+            画面情報.set新履歴番号(履歴番号);
+            情報と状態ArrayList.add(0, 画面情報);
         }
     }
 
@@ -1022,6 +951,8 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         builder.set申請年月日(div.getTxtShinseiYMD().getValue());
         if (div.getTxtShinseiRiyu().getValue() != null) {
             builder.set申請事由(div.getTxtShinseiRiyu().getValue());
+        } else {
+            builder.set申請事由(RString.EMPTY);
         }
         if (障害者手帳_有_Key.equals(div.getRadShogaishaTechoUmu().getSelectedKey())) {
             builder.set障害者手帳有無(true);
@@ -1029,14 +960,22 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             builder.set障害者手帳等級(div.getTxtShogaishaTechoTokyu().getValue());
             if (div.getTxtShogaishaTechoKofuYMD() != null) {
                 builder.set障害者手帳交付年月日(div.getTxtShogaishaTechoKofuYMD().getValue());
+            } else {
+                builder.set障害者手帳交付年月日(FlexibleDate.EMPTY);
             }
+        } else {
+            builder.set障害者手帳有無(false);
+            builder.set障害者手帳番号(RString.EMPTY);
+            builder.set障害者手帳等級(RString.EMPTY);
+            builder.set障害者手帳交付年月日(FlexibleDate.EMPTY);
         }
+
         if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
             builder.set決定年月日(div.getTxtKettaiYmd().getValue());
+            builder.set適用開始年月日(div.getTxtTekiyoYmd().getValue());
+            builder.set適用終了年月日(div.getTxtYukoKigen().getValue());
             if (承認する_Key.equals(div.getDdlKettaiKubun().getSelectedKey())) {
                 builder.set決定区分(承認する);
-                builder.set適用開始年月日(div.getTxtTekiyoYmd().getValue());
-                builder.set適用終了年月日(div.getTxtYukoKigen().getValue());
                 builder.set法別区分(div.getDdlHobetsuKubun().getSelectedKey());
                 builder.set給付率(new HokenKyufuRitsu(div.getTxtKyufuRitsu().getValue()));
                 builder.set公費負担者番号(div.getTxtKohiFutanshaNo().getValue());
@@ -1045,6 +984,10 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             } else {
                 builder.set決定区分(承認しない);
                 builder.set非承認理由(div.getTxtHiShoninRiyu().getValue());
+                builder.set法別区分(RString.EMPTY);
+                builder.set給付率(null);
+                builder.set公費負担者番号(RString.EMPTY);
+                builder.set公費受給者番号(RString.EMPTY);
             }
         }
         builder.setGemmenGengakuShinsei(get減免減額申請From画面(証記載保険者番号, 追加履歴番号, 被保険者番号));
