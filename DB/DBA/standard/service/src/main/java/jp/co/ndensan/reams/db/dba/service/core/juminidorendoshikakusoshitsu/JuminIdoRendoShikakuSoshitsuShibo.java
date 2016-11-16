@@ -58,7 +58,7 @@ public class JuminIdoRendoShikakuSoshitsuShibo {
         JuminIdoRendoShikakuTorokuEntity entity = new JuminIdoRendoShikakuTorokuEntity();
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().get関連テーブル(住民異動情報, 被保険者台帳, entity);
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance()
-                .shiKakuSousituJogai(住民異動情報, storeConfigParamter, ShikakuSoshitsuJiyu.転出.getコード(), entity);
+                .shiKakuSousituJogai(住民異動情報, storeConfigParamter, ShikakuSoshitsuJiyu.死亡.getコード(), entity);
         if ((!RString.isNullOrEmpty(entity.get不整合コード())
                 || !RString.isNullOrEmpty(entity.get転出保留作成事由コード()))
                 && 不整合コード_9999.equals(entity.get不整合コード())) {
@@ -66,7 +66,7 @@ public class JuminIdoRendoShikakuSoshitsuShibo {
             return entity;
         }
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().
-                shikakuSousituTatoku(住民異動情報, storeConfigParamter, ShikakuSoshitsuJiyu.転出.getコード(), entity);
+                shikakuSousituTatoku(住民異動情報, storeConfigParamter, ShikakuSoshitsuJiyu.死亡.getコード(), entity);
         if ((!RString.isNullOrEmpty(entity.get不整合コード())
                 || !RString.isNullOrEmpty(entity.get転出保留作成事由コード()))
                 && 不整合コード_9999.equals(entity.get不整合コード())) {
