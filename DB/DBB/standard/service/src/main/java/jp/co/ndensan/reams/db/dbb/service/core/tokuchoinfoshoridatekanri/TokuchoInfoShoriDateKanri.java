@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.fld.FldReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -45,6 +46,8 @@ public class TokuchoInfoShoriDateKanri {
     private static final RString FILTER_Z12_市町村 = new RString("Z12%_市町村.DTA");
     private static final RString 市町村 = new RString("市町村");
     private static final RString Z1A = new RString("Z1A");
+    private static final RString COM1 = new RString(":");
+    private static final RString COM2 = new RString("-");
     private static final RString 特別徴収異動情報 = new RString("特別徴収異動情報");
     private static final RString 特別徴収依頼情報 = new RString("特別徴収依頼情報");
     private static final int INDEX_4 = 4;
@@ -267,6 +270,8 @@ public class TokuchoInfoShoriDateKanri {
     private List<TokuchoInfoFDownloadInfo> changeToTokuchoInfoFDownloadInfo(
             List<UzT0885SharedFileEntryEntity> entityList) {
         List<TokuchoInfoFDownloadInfo> ファイル対象List = new ArrayList<>();
+        RString path = Path.combinePath(Path.getTmpDirectoryPath(),
+                new RString(RDate.getNowDateTime().toString()).replace(COM1, RString.EMPTY).replace(COM2, RString.EMPTY));
         for (UzT0885SharedFileEntryEntity ファイル対象 : entityList) {
             RString ファイル名 = ファイル対象.getSharedFileName();
             TokuchoInfoFDownloadInfo entity = new TokuchoInfoFDownloadInfo();
@@ -277,6 +282,13 @@ public class TokuchoInfoShoriDateKanri {
                 entity.set情報名(特別徴収依頼情報);
             }
             entity.set作成日時(ファイル対象.getSharedFileId());
+            FilesystemPath tempPath = get共有ファイル(
+                    FilesystemPath.fromString(path), ファイル対象);
+            if (tempPath == null) {
+                entity.setファイル存在(false);
+            } else {
+                entity.setファイル存在(true);
+            }
             ファイル対象List.add(entity);
         }
         return ファイル対象List;
