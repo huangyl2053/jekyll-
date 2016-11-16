@@ -1315,8 +1315,11 @@ public class FukaKeisan extends FukaKeisanFath {
         賦課の情報List.add(賦課の情報クローン(param.get年度分賦課リスト_更正前().get過年度4()));
         賦課の情報List.add(賦課の情報クローン(param.get年度分賦課リスト_更正前().get過年度5()));
         KanendoKoseiKeisan kanendoKoseiKeisan = KanendoKoseiKeisan.createInstance();
+        ChoshuHoho 徴収方法の情報_更正前 = null == param.get徴収方法の情報_更正前()
+                ? new ChoshuHoho(new DbT2001ChoshuHohoEntity()) : param.get徴収方法の情報_更正前();
         KoseigoFukaResult koseigoFukaResult = kanendoKoseiKeisan.getKoseigoFuka(賦課の情報List,
-                new ChoshuHoho(param.get徴収方法の情報_更正前().toEntity()), 調定年度, param.get調定日時());
+                new ChoshuHoho(徴収方法の情報_更正前.toEntity()),
+                調定年度, param.get調定日時());
 
         List<FukaJoho> 賦課の情報リスト = koseigoFukaResult.get賦課の情報リスト();
         ChoshuHoho 徴収方法の情報 = koseigoFukaResult.getChoshuHoho();
@@ -1334,8 +1337,8 @@ public class FukaKeisan extends FukaKeisanFath {
 
         ChoteiJiyuParameter choteiJiyuParameter = new ChoteiJiyuParameter();
         choteiJiyuParameter.set現年度(param.get年度分賦課リスト_更正前().get現年度());
-        choteiJiyuParameter.set更正前徴収方法(param.get徴収方法の情報_更正前());
-        choteiJiyuParameter.set更正後徴収方法(param.get徴収方法の情報_更正前());
+        choteiJiyuParameter.set更正前徴収方法(徴収方法の情報_更正前);
+        choteiJiyuParameter.set更正後徴収方法(徴収方法の情報_更正前);
 
         List<FukaJohoList> 更正後賦課リスト = new ArrayList<>();
         FukaJohoList johoList = new FukaJohoList();

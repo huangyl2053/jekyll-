@@ -94,6 +94,14 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
     @Override
     protected void defineFlow() {
         createParameter();
+        if (KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.白紙 == getParameter().getChushutsuJoken()) {
+            executeStep(白紙発行);
+        } else {
+            execute非白紙発行();
+        }
+    }
+
+    private void execute非白紙発行() {
         if (高額介護サービス費.equals(processParameter.getMenuId())) {
             executeStep(KOGAKU_MASTER_SHINSEI);
             executeStep(HIHOKENSHADAICHO_SHINSEI);
@@ -126,10 +134,6 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchisho
             excute高額分();
         } else {
             excute総合事業分();
-        }
-        
-        if (KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.白紙 == getParameter().getChushutsuJoken()) {
-            executeStep(白紙発行);
         }
     }
 

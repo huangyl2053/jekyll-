@@ -99,7 +99,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
-                引き継ぎ情報.get被保番号().getColumnValue()));
+                        引き継ぎ情報.get被保番号().getColumnValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -151,7 +151,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             }
             setエラー有無(div, result);
         }
-        if (0 == result.getエラー有無()) {
+        List<RString> チェック状態 = getHandler(div).getチェックボックス状態();
+        if (0 == result.getエラー有無() && !チェック状態.isEmpty()) {
             div.getHdnFlag().setValue(起動);
         } else {
             div.getHdnFlag().setValue(停止);
@@ -165,7 +166,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (0 == result.getエラー有無()) {
+            if (停止.equals(div.getHdnFlag().getValue())) {
+                getErrorMessages(result);
                 return get更新と状態遷移(div, 受給者訂正連絡票登録画面Div, 引き継ぎ情報);
             } else {
                 getErrorMessages(result);
@@ -271,9 +273,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
 
     private void getErrorMessages(
             JukyushaTeiseiRenrakuhyoTorokuManagerResult result) {
-        if (result.getエラーメッセージコード().equals(T_S_Z)) {
+        if (1 == result.getエラー有無() && result.getエラーメッセージコード().equals(T_S_Z)) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
-        } else if (result.getエラーメッセージコード().equals(T_O_Z)) {
+        } else if (1 == result.getエラー有無() && result.getエラーメッセージコード().equals(T_O_Z)) {
             throw new ApplicationException(UrErrorMessages.既に存在.getMessage().replace(
                     履歴番号.toString()));
         }
@@ -294,7 +296,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             AccessLogger.log(AccessLogType.更新,
                     getHandler(div).toPersonalData(識別コード,
-                    引き継ぎ情報.get被保番号().getColumnValue()));
+                            引き継ぎ情報.get被保番号().getColumnValue()));
             if (登録件数 == 1) {
                 getHandler(div).is前排他キーのセット(引き継ぎ情報.get被保番号());
                 List<RString> チェック状態 = getHandler(div).getチェックボックス状態();

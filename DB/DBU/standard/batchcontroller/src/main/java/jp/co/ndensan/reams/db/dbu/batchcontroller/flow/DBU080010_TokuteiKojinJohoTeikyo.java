@@ -280,7 +280,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     protected IBatchFlowCommand exeRiyoshaFutanwariaiUpdate() {
         RiyoshaFutanwariaiProcessParameter processParameter = parameter.toRiyoshaFutanwariaiProcessParameter();
         processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
-        return loopBatch(RiyoshaFutanwariaiUpdateProcess.class).define();
+        return loopBatch(RiyoshaFutanwariaiUpdateProcess.class).arguments(processParameter).define();
     }
 
     /**
