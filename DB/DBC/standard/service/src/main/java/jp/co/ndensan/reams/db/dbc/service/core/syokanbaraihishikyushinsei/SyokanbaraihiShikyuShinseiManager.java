@@ -60,7 +60,7 @@ public class SyokanbaraihiShikyuShinseiManager {
         if (!基本証明書InputCheck(証明書入力済フラグ.get基本情報_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
             return 証明書入力未済あり;
         }
-        if (!明細証明書InputCheck(証明書入力済フラグ.get給付費明細_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {// TODO
+        if (!明細証明書InputCheck(証明書入力済フラグ.get給付費明細_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
             return 証明書入力未済あり;
         }
         if (!特定診療費証明書InputCheck(証明書入力済フラグ.get特定診療費_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
