@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
@@ -243,6 +244,8 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnConfirm(KyufuShiharayiMeisaiPanelDiv div) {
+        List<ShokanMeisaiResult> emptyList
+                = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
         ValidationMessageControlPairs pairs = getValidationHandler(div).必須チェックValidate();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -254,7 +257,7 @@ public class KyufuShiharayiMeisaiPanel {
         } else {
             row = getHandler(div).selectRow();
         }
-        getHandler(div).modifyRow(row, state);
+        // getHandler(div).modifyRow(row, state, emptyList);
         setRowSort(div);
         getHandler(div).制御(false);
         return createResponse(div);
@@ -332,9 +335,10 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnConfirmCommon(KyufuShiharayiMeisaiPanelDiv div) {
         ShomeishoNyuryokuFlag flag = new ShomeishoNyuryokuFlag();
-        RString 入力済フラグ = getHandler(div).is入力済() ? flag.get給付費明細_証明書入力済フラグ().入力あり.getCode() : flag.get給付費明細_証明書入力済フラグ().入力なし.getCode();
+        ShomeishoNyuryokuKubunType 入力済フラグ = getHandler(div).is入力済() ? flag.get給付費明細_証明書入力済フラグ().入力あり : flag.get給付費明細_証明書入力済フラグ().入力なし;
         RString 変更済フラグ = getHandler(div).is変更済() ? 変更あり : 変更なし;
-        ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, 入力済フラグ);
+        flag.set給付費明細_証明書入力済フラグ(入力済フラグ);
+        ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, flag);
         ViewStateHolder.put(ViewStateKeys.証明書変更済フラグ, 変更済フラグ);
         DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         償還払ViewStateDB.set償還払請求明細データList(set保存処理(div));
@@ -490,10 +494,10 @@ public class KyufuShiharayiMeisaiPanel {
     }
 
     private void set証明書入力済チェック() {
-        RString 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, RString.class);
+        ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        RString 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().明細証明書InputCheck(証明書入力済フラグ, 様式番号, サービス年月);
+        RString 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(証明書入力済フラグ, 様式番号, サービス年月);
 
         if (入力完了.equals(証明書入力済区分)) {
             ViewStateHolder.put(ViewStateKeys.証明書入力完了フラグ, 入力完了);
