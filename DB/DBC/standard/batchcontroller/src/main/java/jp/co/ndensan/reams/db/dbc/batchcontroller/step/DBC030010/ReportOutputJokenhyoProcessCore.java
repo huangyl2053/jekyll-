@@ -160,12 +160,14 @@ public class ReportOutputJokenhyoProcessCore {
             return RString.EMPTY;
         }
         RStringBuilder 支払窓口終了期間Builder = new RStringBuilder();
-        if (支払窓口終了期間.getHour() < RSTRING_12) {
+        int hour = 支払窓口終了期間.getHour();
+        if (hour < RSTRING_12) {
             支払窓口終了期間Builder.append(午前);
         } else {
+            hour = hour - RSTRING_12;
             支払窓口終了期間Builder.append(午後);
         }
-        支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getHour()));
+        支払窓口終了期間Builder.append(String.format("%02d", hour));
         支払窓口終了期間Builder.append(new RString("時"));
         if (0 < 支払窓口終了期間.getMinute()) {
             支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getMinute()));
