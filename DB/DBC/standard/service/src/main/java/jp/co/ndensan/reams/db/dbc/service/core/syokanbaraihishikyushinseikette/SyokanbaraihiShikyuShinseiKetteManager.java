@@ -234,11 +234,11 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             ShikibetsuCode 識別コード) {
         InsupdShokanManager manager = InsupdShokanManager.createInstance();
 
-        if (db情報.getShokanShinsei() != null) {
+        if (db情報.get償還払支給申請() != null) {
             manager.update償還払支給申請(db情報);
         }
         manager.update証明書(db情報, サービス提供年月);
-        ShokanHanteiKekka shokanHanteiKekka = db情報.getShokanHanteiKekka();
+        ShokanHanteiKekka shokanHanteiKekka = db情報.get償還払支給判定結果();
         if (shokanHanteiKekka != null) {
             manager.update償還払支給判定結果(shokanHanteiKekka);
         }

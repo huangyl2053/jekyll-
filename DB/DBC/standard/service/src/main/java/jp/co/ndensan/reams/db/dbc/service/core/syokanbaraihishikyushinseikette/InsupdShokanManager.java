@@ -121,7 +121,7 @@ public class InsupdShokanManager {
      *
      */
     public void update償還払支給申請(DbJohoViewState db情報) {
-        DbT3034ShokanShinseiEntity dbt3034entity = db情報.getShokanShinsei().toEntity();
+        DbT3034ShokanShinseiEntity dbt3034entity = db情報.get償還払支給申請().toEntity();
         if (EntityDataState.Added.equals(dbt3034entity.getState())
                 || EntityDataState.Modified.equals(dbt3034entity.getState())) {
             償還払支給申請Dac.save(dbt3034entity);
@@ -238,20 +238,20 @@ public class InsupdShokanManager {
 
     private void update償還払請求サービス計画(DbJohoViewState db情報, FlexibleYearMonth サービス提供年月) {
         if (サービス年月_200904.isBeforeOrEquals(サービス提供年月)) {
-            List<ShokanServicePlan200904> 償還払請求サービス計画200904データList = db情報.getShokanServicePlan200904();
+            List<ShokanServicePlan200904> 償還払請求サービス計画200904データList = db情報.get償還払請求サービス計画200904データList();
             if (償還払請求サービス計画200904データList != null && !償還払請求サービス計画200904データList.isEmpty()) {
                 サービス計画200904(償還払請求サービス計画200904データList);
             }
 
         } else if (サービス年月_200604.isBeforeOrEquals(サービス提供年月)
                 && サービス提供年月.isBeforeOrEquals(サービス年月_200903)) {
-            List<ShokanServicePlan200604> 償還払請求サービス計画200604データList = db情報.getShokanServicePlan200604();
+            List<ShokanServicePlan200604> 償還払請求サービス計画200604データList = db情報.get償還払請求サービス計画200604データList();
             if (償還払請求サービス計画200604データList != null && !償還払請求サービス計画200604データList.isEmpty()) {
                 サービス計画200604(償還払請求サービス計画200604データList);
             }
 
         } else if (サービス提供年月.isBeforeOrEquals(サービス年月_200603)) {
-            List<ShokanServicePlan200004> 償還払請求サービス計画200004データList = db情報.getShokanServicePlan200004();
+            List<ShokanServicePlan200004> 償還払請求サービス計画200004データList = db情報.get償還払請求サービス計画200004データList();
             if (償還払請求サービス計画200004データList != null && !償還払請求サービス計画200004データList.isEmpty()) {
                 サービス計画200004(償還払請求サービス計画200004データList);
             }
@@ -371,25 +371,25 @@ public class InsupdShokanManager {
     }
 
     private void set償還払請求1(DbJohoViewState db情報, FlexibleYearMonth サービス提供年月) {
-        List<ShokanKihon> 償還払請求基本データList = db情報.getShokanKihon();
+        List<ShokanKihon> 償還払請求基本データList = db情報.get償還払請求基本データList();
         if (償還払請求基本データList != null && !償還払請求基本データList.isEmpty()) {
             update償還払請求基本(償還払請求基本データList);
         }
-        List<ShokanMeisaiJushochiTokurei> 住所地特例データList = db情報.getShokanMeisaiJushochiTokurei();
+        List<ShokanMeisaiJushochiTokurei> 住所地特例データList = db情報.get住所地特例データList();
         if (住所地特例データList != null && !住所地特例データList.isEmpty()) {
             update償還払請求明細_住所地特例(住所地特例データList);
         }
-        List<ShokanMeisai> 償還払請求明細List = db情報.getShokanMeisai();
+        List<ShokanMeisai> 償還払請求明細List = db情報.get償還払請求明細データList();
         if (償還払請求明細List != null && !償還払請求明細List.isEmpty()) {
             update償還払請求明細(償還払請求明細List);
         }
         if (サービス提供年月.isBeforeOrEquals(サービス年月_200303)) {
-            List<ShokanTokuteiShinryohi> 償還払請求特定診療費データList = db情報.getShokanTokuteiShinryohi();
+            List<ShokanTokuteiShinryohi> 償還払請求特定診療費データList = db情報.get償還払請求特定診療費データList();
             if (償還払請求特定診療費データList != null && !償還払請求特定診療費データList.isEmpty()) {
                 update償還払請求特定診療費(償還払請求特定診療費データList);
             }
         } else if (サービス年月_200304.isBeforeOrEquals(サービス提供年月)) {
-            List<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList = db情報.getShokanTokuteiShinryoTokubetsuRyoyo();
+            List<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList = db情報.get特別療養費データList();
             if (特別療養費データList != null && !特別療養費データList.isEmpty()) {
                 update償還払請求特定診療費_特別療養費(特別療養費データList);
             }
@@ -398,29 +398,29 @@ public class InsupdShokanManager {
 
     private void set償還払請求2(DbJohoViewState db情報) {
         List<ShokanTokuteiNyushoshaKaigoServiceHiyo> 償還払請求特定入所者介護サービス費用データList
-                = db情報.getShokanTokuteiNyushoshaKaigoServiceHiyo();
+                = db情報.get償還払請求特定入所者介護サービス費用データList();
         if (償還払請求特定入所者介護サービス費用データList != null && !償還払請求特定入所者介護サービス費用データList.isEmpty()) {
             update償還払請求特定入所者介護サービス費用(償還払請求特定入所者介護サービス費用データList);
         }
         List<ShokanShakaiFukushiHojinKeigengaku> 償還払請求社会福祉法人軽減額データList
-                = db情報.getShokanShakaiFukushiHojinKeigengaku();
+                = db情報.get償還払請求社会福祉法人軽減額データList();
         if (償還払請求社会福祉法人軽減額データList != null && !償還払請求社会福祉法人軽減額データList.isEmpty()) {
             update償還払請求社会福祉法人軽減額(償還払請求社会福祉法人軽減額データList);
         }
         List<ShokanShoteiShikkanShisetsuRyoyo> 償還払請求所定疾患施設療養費等データList
-                = db情報.getShokanShoteiShikkanShisetsuRyoyo();
+                = db情報.get償還払請求所定疾患施設療養費等データList();
         if (償還払請求所定疾患施設療養費等データList != null && !償還払請求所定疾患施設療養費等データList.isEmpty()) {
             update償還払請求所定疾患施設療養費等(償還払請求所定疾患施設療養費等データList);
         }
-        List<ShokanKinkyuShisetsuRyoyo> 償還払請求緊急時施設療養データList = db情報.getShokanKinkyuShisetsuRyoyo();
+        List<ShokanKinkyuShisetsuRyoyo> 償還払請求緊急時施設療養データList = db情報.get償還払請求緊急時施設療養データList();
         if (償還払請求緊急時施設療養データList != null && !償還払請求緊急時施設療養データList.isEmpty()) {
             update償還払請求緊急時施設療養(償還払請求緊急時施設療養データList);
         }
-        List<ShokanShukei> 償還払請求集計データList = db情報.getShokanShukei();
+        List<ShokanShukei> 償還払請求集計データList = db情報.get償還払請求集計データList();
         if (償還払請求集計データList != null && !償還払請求集計データList.isEmpty()) {
             update償還払請求集計(償還払請求集計データList);
         }
-        List<ShokanShokujiHiyo> 償還払請求食事費用データList = db情報.getShokanShokujiHiyo();
+        List<ShokanShokujiHiyo> 償還払請求食事費用データList = db情報.get償還払請求食事費用データList();
         if (償還払請求食事費用データList != null && !償還払請求食事費用データList.isEmpty()) {
             update償還払請求食事費用(償還払請求食事費用データList);
         }
