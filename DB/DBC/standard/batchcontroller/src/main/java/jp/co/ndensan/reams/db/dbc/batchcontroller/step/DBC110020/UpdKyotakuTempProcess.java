@@ -60,9 +60,6 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
-        if (!entity.get居宅計画().get被保険者番号().equals(new HihokenshaNo("2015123461"))) {
-            return;
-        }
         RString key = 居宅計画Key(entity.get居宅計画());
         if (居宅計画List.contains(key)) {
             return;
