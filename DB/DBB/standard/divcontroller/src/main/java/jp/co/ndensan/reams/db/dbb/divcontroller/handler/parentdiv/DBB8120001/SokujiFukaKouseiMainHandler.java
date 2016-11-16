@@ -1664,8 +1664,8 @@ public class SokujiFukaKouseiMainHandler {
             row.getFuchoSaishutsuKanpu().setValue(更正後過年度.get普徴歳出還付額());
             if (!更正前.equals(Decimal.ZERO)
                     || !更正後.equals(Decimal.ZERO)
-                    || !更正後過年度.get特徴歳出還付額().equals(Decimal.ZERO)
-                    || !更正後過年度.get普徴歳出還付額().equals(Decimal.ZERO)) {
+                    || (null != 更正後過年度.get特徴歳出還付額() && !Decimal.ZERO.equals(更正後過年度.get特徴歳出還付額()))
+                    || (null != 更正後過年度.get普徴歳出還付額() && !Decimal.ZERO.equals(更正後過年度.get普徴歳出還付額()))) {
                 div.getDgFuchoKanendo().getDataSource().add(row);
             }
         }
