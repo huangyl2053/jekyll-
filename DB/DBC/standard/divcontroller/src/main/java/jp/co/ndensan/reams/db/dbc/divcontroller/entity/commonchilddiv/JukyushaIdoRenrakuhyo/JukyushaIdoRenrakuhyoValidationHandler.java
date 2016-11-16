@@ -132,13 +132,20 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
                         div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.住特適用期間が不正,
                         div.getJushochiTokureiPanel().getTxtJushochiTokureiTekiyoYMD())
+                .add(JukyushaIdoRenrakuhyoValidationMessage.住特適用情報が不正,
+                        div.getJushochiTokureiPanel())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.利用者負担適用期間が不正,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                         getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.社会福祉法人軽減情報適用期間が不正,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                         getJukyushaIdoRenrakuhyoFukushiHojinKeigen().getTxtKeigenritsuTekiyoYMD())
-                .add(JukyushaIdoRenrakuhyoValidationMessage.標準負担と異動日が不正)
+                .add(JukyushaIdoRenrakuhyoValidationMessage.社会福祉法人軽減情報が不正,
+                        div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                        getJukyushaIdoRenrakuhyoFukushiHojinKeigen())
+                .add(JukyushaIdoRenrakuhyoValidationMessage.標準負担と異動日が不正,
+                        div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                        getJukyushaIdoRenrakuhyoHyojunFutan())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.標準負担適用期間が不正,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                         getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD())
