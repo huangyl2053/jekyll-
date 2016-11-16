@@ -110,7 +110,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         if (source.shikibetsuCode == null) {
             source.shikibetsuCode = RString.EMPTY;
         }
-        source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.hihokenshaNo));
+        source.拡張情報 = new ExpandedInformation(new Code("0003"), 文_被保険者番号, get非空文字列(source.hihokenshaNo));
         return source;
     }
 
