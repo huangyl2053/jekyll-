@@ -227,6 +227,7 @@ public class ServiceRiyohyoInfoDivHandler {
             setサービス利用票(被保険者番号, 対象年月, 履歴番号, 利用年月);
         } else {
             div.getTxtRiyoYM().setDisabled(false);
+            div.getDdlKoshinKbn().setSelectedKey(KyufukanrihyoSakuseiKubun.新規.getコード());
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
         }
         if (居宅.equals(居宅総合事業区分)) {
@@ -266,6 +267,8 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setVisible(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setVisible(true);
+
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().initialize();
         if (追加.equals(表示モード)) {
             div.getDdlKoshinKbn().setDisabled(false);
             div.getTxtKoshinYMD().setDisabled(false);
