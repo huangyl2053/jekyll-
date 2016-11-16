@@ -284,7 +284,7 @@ public class HonsanteiIdoHandler {
             if (処理日時 != null) {
                 RString 年月日 = 処理日時.getDate().wareki().toDateString();
                 RString 時刻 = 処理日時.getTime().
-                        toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+                        toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
                 RString 基準日時 = 年月日.concat(RString.HALF_SPACE).concat(時刻);
                 row.setTxtShoriNichiji(基準日時);
             }
