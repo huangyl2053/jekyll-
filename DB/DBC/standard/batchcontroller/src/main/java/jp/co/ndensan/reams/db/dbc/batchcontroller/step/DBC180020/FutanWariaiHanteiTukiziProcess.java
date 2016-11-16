@@ -79,7 +79,6 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     private RiyoshaFutanWariaiHantei service;
     private List<BatchEntityCreatedTempTableWriter> 明細Writers;
     private List<BatchEntityCreatedTempTableWriter> 根拠Writers;
-    private RString 被保険者区分コード;
 
     @Override
     protected void initialize() {
@@ -220,7 +219,6 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
     private void insertHandle() {
         レコード数 = entities.size();
         HanteiTaishoshaTempEntity 判定対象者 = entities.get(0).get判定対象者();
-        被保険者区分コード = 判定対象者.getHihokenshaKubunCode();
         List<SeikatsuHogoGaitoJohoTempEntity> 生活保護該当情報リスト = entities.get(0).get生活保護該当情報();
         SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報 = 生活保護該当情報リスト.isEmpty() ? null : 生活保護該当情報リスト.get(0);
         BatchEntityCreatedTempTableWriter 明細Writer = 明細Writers.get(対象月Index);
@@ -257,7 +255,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
             if (所得管理 != null) {
                 insert根拠Temp.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getRirekiNo()));
             }
-            if (!一号被保険者.equals(被保険者区分コード)) {
+            if (!一号被保険者.equals(判定対象者.getHihokenshaKubunCode())) {
                 return;
             }
             根拠Writer.insert(insert根拠Temp);
