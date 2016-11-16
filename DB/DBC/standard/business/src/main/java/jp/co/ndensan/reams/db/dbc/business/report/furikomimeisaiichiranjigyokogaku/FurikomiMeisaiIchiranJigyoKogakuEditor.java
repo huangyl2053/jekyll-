@@ -215,7 +215,8 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
         }
     }
 
-    private void editList24(DbWT0510FurikomiMeisaiTempEntity 振込明細, FurikomiMeisaiIchiranJigyoKogakuSource source) throws IllegalArgumentException, IllegalStateException {
+    private void editList24(DbWT0510FurikomiMeisaiTempEntity 振込明細, FurikomiMeisaiIchiranJigyoKogakuSource source)
+            throws IllegalArgumentException, IllegalStateException {
         if (null == 振込明細 || null == 振込明細.getYokaigoJotaiKubunCode()) {
             return;
         }
