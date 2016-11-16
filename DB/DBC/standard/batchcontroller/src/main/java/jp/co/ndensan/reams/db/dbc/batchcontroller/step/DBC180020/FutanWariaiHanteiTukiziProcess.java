@@ -285,8 +285,8 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
         insertTemp.setNinteiYukoKaishiDate(判定対象者.getNinteiYukoKaishiDate());
         insertTemp.setAtenaIdobi(判定対象者.getAtenaIdobi());
         if (生活保護該当情報 != null) {
-            insertTemp.setJukyuKaishiYMD(new FlexibleDate(生活保護該当情報.getJukyuKaishiYMD()));
-            insertTemp.setJukyuHaishiYMD(new FlexibleDate(生活保護該当情報.getJukyuHaishiYMD()));
+            insertTemp.setJukyuKaishiYMD(new FlexibleDate(nonullRStr(生活保護該当情報.getJukyuKaishiYMD())));
+            insertTemp.setJukyuHaishiYMD(new FlexibleDate(nonullRStr(生活保護該当情報.getJukyuHaishiYMD())));
         }
         FutanWariaiHanteiJoho joho = util.getFutanWariaiHanteiJoho(entities);
         FutanWariaiHanteiResult hanteiResult = service.futanWariaiHantei(joho);
@@ -307,5 +307,9 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
 
     @Override
     protected void keyBreakProcess(FutanWariaiHanteiJohoEntity t) {
+    }
+
+    private RString nonullRStr(RString rstr) {
+        return RString.isNullOrEmpty(rstr) ? RString.EMPTY : rstr;
     }
 }
