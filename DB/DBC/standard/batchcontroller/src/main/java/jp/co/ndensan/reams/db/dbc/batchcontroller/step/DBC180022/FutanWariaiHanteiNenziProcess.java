@@ -58,7 +58,6 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
     private RiyoshaFutanWariaiHantei service;
     private RString 対象年度開始日;
     private RString 対象年度終了日;
-    private RString 被保険者区分コード;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 今回利用者負担割合情報Temp;
@@ -106,7 +105,6 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
             entities.add(entity);
             return;
         }
-        被保険者区分コード = entities.get(0).get判定対象者().getHihokenshaKubunCode();
         DbT3113RiyoshaFutanWariaiEntity insertDbt3113Entity = new DbT3113RiyoshaFutanWariaiEntity();
         insertDbt3113Entity.setNendo(nendo);
         insertDbt3113Entity.setHihokenshaNo(beforeNo);
@@ -133,7 +131,6 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
         if (entities == null || entities.isEmpty()) {
             return;
         }
-        被保険者区分コード = entities.get(0).get判定対象者().getHihokenshaKubunCode();
         DbT3113RiyoshaFutanWariaiEntity insertDbt3113Entity = new DbT3113RiyoshaFutanWariaiEntity();
         insertDbt3113Entity.setNendo(nendo);
         insertDbt3113Entity.setHihokenshaNo(entities.get(0).get判定対象者().getHihokenshaNo());
@@ -220,10 +217,9 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
             if (insert3115Entity.getSetaiinHihokenshaNo() == null || insert3115Entity.getSetaiinShotokuRirekiNo() == null) {
                 return;
             }
-            if (!一号被保険者.equals(被保険者区分コード)) {
-                return;
+            if (一号被保険者.equals(判定対象者.getHihokenshaKubunCode())) {
+                利用者負担割合根拠.insert(insert3115Entity);
             }
-            利用者負担割合根拠.insert(insert3115Entity);
         }
     }
 
