@@ -44,7 +44,7 @@ public class ServiceRiyohyoInfoDivValidator {
                 .ifNot(ServiceRiyohyoInfoDivSpec.サービス単位必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.割引適用後率入力値が不正チェック)
-                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.割引適用後率入力値が不正)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.割引適用後率入力値が不正チェック)
                 .messages());
         return messages;
     }
@@ -58,7 +58,7 @@ public class ServiceRiyohyoInfoDivValidator {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
                 .ifNot(ServiceRiyohyoInfoDivSpec.割引適用後率入力値が不正チェック)
-                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.割引適用後率入力値が不正)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.割引適用後率入力値が不正チェック)
                 .messages());
         return messages;
     }
@@ -141,8 +141,8 @@ public class ServiceRiyohyoInfoDivValidator {
     public IValidationMessages validateサービス単位必須以外() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
-                .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
-                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
+//                .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
+//                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.単位必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.単位必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.回数必須入力チェック)
