@@ -253,6 +253,7 @@ public class HanyoListParamHandler {
         }
         div.getRadShuturyokuHoho().setDataSource(出力方法list);
         if (汎用リスト_施設入退所メニューID.equals(menuID)) {
+            div.setTitle(new RString("汎用リスト　施設入退所"));
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_施設入退所帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_施設入退所帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_施設入退所表題);
@@ -1320,6 +1321,8 @@ public class HanyoListParamHandler {
 
     private void 初期化_施設入退所() {
         div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        // TODO : 帳票発行することがあるかわからないけど選択できるようにするならここを表示にする
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
         div.getRadShuturyokuHoho().setDisabled(非表示);
         set年度基準日パネル(非表示);
         set基準日RbGr();
@@ -1337,11 +1340,16 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目を設定できるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_利用者負担額減免() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1360,11 +1368,16 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目を設定できるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_訪問介護利用者負担額減額() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1383,11 +1396,16 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目を設定できるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_社会福祉法人軽減() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1405,7 +1423,8 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目を設定できるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_特別地域加算減免() {
@@ -1436,7 +1455,11 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_負担限度額認定() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 表示, 非表示);
@@ -1454,11 +1477,16 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目選択ができるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_国保() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 表示, 非表示, 非表示);
@@ -1475,11 +1503,16 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目選択ができるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_後期高齢者() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 表示, 非表示, 非表示);
@@ -1496,11 +1529,16 @@ public class HanyoListParamHandler {
         div.getDdlSoshitsuKubun().setSelectedKey(SoshitsuKubun.資格判定なし.getコード());
         set宛名抽出条件パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目選択ができるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_事業対象者() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(非表示, 非表示, 非表示, 表示);
@@ -1527,11 +1565,16 @@ public class HanyoListParamHandler {
         get宛名抽出条件子Div().getTxtSeinengappi().setDisplayNone(非表示);
         set宛名抽出条件共有パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目選択ができるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private void 初期化_利用者負担割合() {
-        init出力方法ラジオボタン_グループ();
+        // TODO : 帳票も出力するようになったら下を採用
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisplayNone(非表示);
+        div.getRadShuturyokuHoho().setDisabled(非表示);
+//        init出力方法ラジオボタン_グループ();
         set年度基準日パネル(表示);
         div.getRadChushutsuJokenA1().setSelectedKey(年度KEY);
         div.getDdlKijunNendo().setSelectedKey(NendoUtil.getNendo(RDate.getNowDate()).toDateString());
@@ -1560,7 +1603,8 @@ public class HanyoListParamHandler {
         get宛名抽出条件子Div().getTxtSeinengappi().setDisabled(非表示);
         set宛名抽出条件共有パネル();
         setCSV編集条件パネル();
-        set出力項目選択(表示);
+        // TODO : 出力項目選択ができるようになったら表示に変える
+        set出力項目選択(非表示);
     }
 
     private HanyoListAtenaSelectDiv get宛名抽出条件子Div() {
