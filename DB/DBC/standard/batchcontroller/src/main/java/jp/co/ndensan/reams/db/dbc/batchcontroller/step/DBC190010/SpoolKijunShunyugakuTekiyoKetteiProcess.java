@@ -95,7 +95,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private List<KijunShunyugakuTekiyoKetteiEntity> 基準収入額適用管理List;
     private KijunShunyugakuTekiyoKanriManager 基準収入額適用管理manager;
     private int 一覧表_通番;
-    private boolean is検索結果データあり;
     private SetaiCode 一覧表_世帯コード;
     private FlexibleYear 一覧表_年度;
     private static final ReportId 帳票ID_通知書 = new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho");
