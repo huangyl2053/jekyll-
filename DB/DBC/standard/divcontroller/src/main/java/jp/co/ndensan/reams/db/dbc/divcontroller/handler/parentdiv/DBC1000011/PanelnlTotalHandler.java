@@ -269,11 +269,10 @@ public class PanelnlTotalHandler {
             paramter.set利用者向け決定通知書フラグ(フラグ_FALSE);
         }
         if (div.getPnlShokanbaraiShikyuKeteiTuchisho().getChkOutputTargetKubun().getSelectedKeys().contains(受領委任者向け決定通知書)) {
-            paramter.set利用者向け決定通知書フラグ(フラグ_TRUE);
+            paramter.set受領委任者向け決定通知書フラグ(フラグ_TRUE);
         } else {
-            paramter.set利用者向け決定通知書フラグ(フラグ_FALSE);
+            paramter.set受領委任者向け決定通知書フラグ(フラグ_FALSE);
         }
-        paramter.set受領委任者向け決定通知書フラグ(受託区分_2);
         paramter.set振込予定日(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get振込予定日());
         paramter.set支払場所(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get支払場所());
         paramter.set支払期間From(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get支払期間FROM());

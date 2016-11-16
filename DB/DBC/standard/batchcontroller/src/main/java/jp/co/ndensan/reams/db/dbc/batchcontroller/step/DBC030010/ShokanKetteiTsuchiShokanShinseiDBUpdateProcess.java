@@ -32,6 +32,7 @@ public class ShokanKetteiTsuchiShokanShinseiDBUpdateProcess extends BatchProcess
     private static final RString 償還払支給申請情報取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.get償還払支給申請情報");
     private static final RString 発行有無_2 = new RString("２号発行有無");
+    private static final int NUM_4 = 4;
 
     @BatchWriter
     BatchPermanentTableWriter<DbT3034ShokanShinseiEntity> dbT3034Writer;
@@ -61,12 +62,12 @@ public class ShokanKetteiTsuchiShokanShinseiDBUpdateProcess extends BatchProcess
         entity.setShiharaiBasho(parameter.get支払場所());
         entity.setShiharaiKaishiYMD(parameter.get支払期間From() == null
                 ? FlexibleDate.EMPTY : new FlexibleDate(parameter.get支払期間From().toDateString()));
-        entity.setShiharaiKaishiYMD(parameter.get支払期間To() == null
+        entity.setShiharaiShuryoYMD(parameter.get支払期間To() == null
                 ? FlexibleDate.EMPTY : new FlexibleDate(parameter.get支払期間To().toDateString()));
         entity.setShiharaiKaishiTime(parameter.get開始時間() == null
-                ? RString.EMPTY : parameter.get開始時間().toFormattedTimeString(DisplayTimeFormat.AMHH));
+                ? RString.EMPTY : parameter.get開始時間().toFormattedTimeString(DisplayTimeFormat.HH時mm分).remove(2).remove(NUM_4));
         entity.setShiharaiShuryoTime(parameter.get終了時間() == null
-                ? RString.EMPTY : parameter.get終了時間().toFormattedTimeString(DisplayTimeFormat.AMHH));
+                ? RString.EMPTY : parameter.get終了時間().toFormattedTimeString(DisplayTimeFormat.HH時mm分).remove(2).remove(NUM_4));
         dbT3034Writer.update(entity);
     }
 
