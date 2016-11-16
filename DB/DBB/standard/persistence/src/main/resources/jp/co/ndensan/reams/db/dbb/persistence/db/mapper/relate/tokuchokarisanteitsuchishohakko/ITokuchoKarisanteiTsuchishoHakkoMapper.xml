@@ -6,10 +6,10 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteitsuchishohakko.ITokuchoKarisanteiTsuchishoHakkoMapper">
     
     <resultMap id="resultMap_TsuchishoDataTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.TsuchishoDataTempEntity" autoMapping="true">
-        <id column="choteiNendo"/>
-        <id column="fukaNendo"/>
-        <id column="tsuchishoNo"/>
-        <id column="shikibetsuCode"/>
+        <id column="dbT2015KeisangoJoho_choteiNendo"/>
+        <id column="dbT2015KeisangoJoho_fukaNendo"/>
+        <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
+        <id column="dbT2015KeisangoJoho_shikibetsuCode"/>
         <association property="計算後情報" resultMap="resultMap_計算後情報"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
