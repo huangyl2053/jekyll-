@@ -379,10 +379,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
                     createBuilderForEdit().set標準負担区分コード(半角アスタリスク).build();
         }
-        if (new RString("space").equals(受給者訂正連絡票登録画面Div.get標準負担区分コード())) {
-            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
-                    createBuilderForEdit().set標準負担区分コード(RString.EMPTY).build();
-        }
         return get登録用Entity_two(受給者訂正連絡票登録画面Div, 訂正対象データ);
     }
 

@@ -99,7 +99,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
-                        引き継ぎ情報.get被保番号().getColumnValue()));
+                引き継ぎ情報.get被保番号().getColumnValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -296,7 +296,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             AccessLogger.log(AccessLogType.更新,
                     getHandler(div).toPersonalData(識別コード,
-                            引き継ぎ情報.get被保番号().getColumnValue()));
+                    引き継ぎ情報.get被保番号().getColumnValue()));
             if (登録件数 == 1) {
                 getHandler(div).is前排他キーのセット(引き継ぎ情報.get被保番号());
                 List<RString> チェック状態 = getHandler(div).getチェックボックス状態();
@@ -358,10 +358,11 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     public ResponseData<JukyushaTeiseiRenrakuhyoTorokuPanelDiv> onClick_btnContinue(
             JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
 
+        ViewStateHolder.put(ViewStateKeys.退避用データ, null);
         KyodoJukyushaTaishoshaEntity 引き継ぎ情報 = ViewStateHolder.get(
                 ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
         getHandler(div).前排他キーの解除(引き継ぎ情報.get被保番号());
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0220012TransitionEventName.検索条件).respond();
     }
 
     private JukyushaTeiseiRenrakuhyoTorokuPanelHandler getHandler(JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
