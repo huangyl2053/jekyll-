@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 画面設計_DBCMNF1001_保険者情報送付データ作成_[341]高額介護サービス費給付判定結果情報のクラスです。
@@ -33,6 +35,8 @@ public class KogakuKaigoSabisuhiKyufuHanteiKekkaJoho {
     private RString 外部ＣＳＶファイル名;
     private static final RString 状態パターン = new RString("1");
     private static final ReportId 帳票ID = ReportIdDBC.DBC200019.getReportId();
+    private final RString バッチID = new RString("ExecutionBatchId");
+    private final RString フロー固定ID_給報出力 = new RString("DBC110040_KogakuServicehiHanteikekkaOut");
 
     /**
      * onLoadのメソッドです。
@@ -66,6 +70,8 @@ public class KogakuKaigoSabisuhiKyufuHanteiKekkaJoho {
         if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
             return ResponseData.of(getHandler(div).setBatchParameter(再処理区分, 処理年月)).respond();
         }
+        FlowParameters fp = FlowParameters.of(バッチID, フロー固定ID_給報出力);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(new DBC110040_KogakuServicehiHanteikekkaOutParameter()).respond();
     }
 
