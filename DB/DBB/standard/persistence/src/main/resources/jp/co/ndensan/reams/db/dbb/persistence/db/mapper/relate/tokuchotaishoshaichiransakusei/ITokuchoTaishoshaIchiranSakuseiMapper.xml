@@ -174,7 +174,7 @@
         master
         LEFT JOIN 
         <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
-        (SELECT ARRAY_AGG(CAST (master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" AS TEXT)) FROM master)
+        '{}'
         <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
         AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
         ON master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" =
