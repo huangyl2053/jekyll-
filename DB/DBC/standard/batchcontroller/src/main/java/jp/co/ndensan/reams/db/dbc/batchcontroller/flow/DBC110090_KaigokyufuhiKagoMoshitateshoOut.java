@@ -227,7 +227,9 @@ public class DBC110090_KaigokyufuhiKagoMoshitateshoOut extends BatchFlowBase<DBC
         KaigokyufuhiKagoMoshitateshoGetKagoMoshitateListProcessParameter parameter
                 = new KaigokyufuhiKagoMoshitateshoGetKagoMoshitateListProcessParameter();
         parameter.set再処理区分(getParameter().get再処理区分());
-        parameter.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
+        if (getParameter().get処理年月() != null) {
+            parameter.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
+        }
         parameter.set送付対象情報(getParameter().get送付対象情報のｺｰﾄﾞ());
         parameter.set申立書区分コード(書区分コード);
         return loopBatch(KaigokyufuhiKagoMoshitateshoOutGetKagoMoshitateListProcess.class).arguments(parameter).define();
