@@ -213,7 +213,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             }
             RString 指定バイト数な文字列 = get指定バイト数な文字列(九十, result);
             setEntity(指定バイト数な文字列);
-            if (九十 == バイト数) {
+            if (九十 != バイト数) {
                 取込国保情報Entity.setエラーコード(エラーコード_01);
                 取込国保情報Entity.setエラー文言(コード文言_フォーマットエラー);
                 取込国保情報Entity.setエラー区分(エラー区分_1);
@@ -230,7 +230,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             }
             RString 指定バイト数な文字列 = get指定バイト数な文字列(三百四十一, result);
             setEntityDensanNi(指定バイト数な文字列);
-            if (三百四十一 == バイト数) {
+            if (三百四十一 != バイト数) {
                 取込国保情報Entity.setエラーコード(エラーコード_51);
                 取込国保情報Entity.setエラー文言(コード文言_フォーマットエラー);
                 取込国保情報Entity.setエラー区分(エラー区分_1);
