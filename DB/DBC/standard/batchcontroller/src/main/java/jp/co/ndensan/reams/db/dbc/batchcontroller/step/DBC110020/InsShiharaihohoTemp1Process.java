@@ -181,10 +181,6 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         被保険者番号 = entity.get被保険者番号();
-        if (!被保険者番号.equals(new HihokenshaNo("2015123461"))) {
-            異動一時List.clear();
-            return;
-        }
         hasCheckErr = false;
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = get受給者台帳();
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = get被保険者台帳();
