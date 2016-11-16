@@ -49,7 +49,7 @@ public class KitsukiHyoki {
      */
     public RString asX期() {
         if (!RString.isNullOrEmpty(期)) {
-            RStringBuilder sb = new RStringBuilder(期);
+            RStringBuilder sb = new RStringBuilder(new RString(Integer.valueOf(期.toString())));
             sb.append(文字列_期);
             return sb.toRString();
         }

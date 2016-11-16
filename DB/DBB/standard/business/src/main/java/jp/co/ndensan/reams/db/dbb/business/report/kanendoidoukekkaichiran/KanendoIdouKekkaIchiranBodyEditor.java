@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -16,10 +17,15 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 KanendoIdouKekkaIchiranBodyEditorです。
@@ -50,6 +56,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     private static final char CHAR_0 = '0';
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
+    private static final RString 年 = new RString("年");
     private final RString 並び順の１件目;
     private final RString 並び順の２件目;
     private final RString 並び順の３件目;
@@ -90,19 +97,21 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         set出力順And改ページ(source);
         if (null != 計算後情報_宛名_口座_更正前Entity) {
             if (null != 計算後情報_宛名_口座_更正前Entity.get調定年度()) {
-                source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定年度().toDateString();
+                source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定年度()
+                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
             }
             if (null != 計算後情報_宛名_口座_更正前Entity.get賦課年度()) {
-                source.list2_2 = 計算後情報_宛名_口座_更正前Entity.get賦課年度().toDateString();
+                source.list2_2 = 計算後情報_宛名_口座_更正前Entity.get賦課年度()
+                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
             }
             if (null != 計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額()) {
-                source.list2_3 = new RString(計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額().toString());
+                source.list2_3 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額());
             }
             if (null != 計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額()) {
-                source.list2_4 = new RString(計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額().toString());
+                source.list2_4 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額());
             }
             if (null != 計算後情報_宛名_口座_更正前Entity.get減免額()) {
-                source.list2_5 = new RString(計算後情報_宛名_口座_更正前Entity.get減免額().toString());
+                source.list2_5 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get減免額());
             }
             set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
             set特徴期別金額_更正前(source);
@@ -113,37 +122,43 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
             source.list1_1 = 計算後情報_宛名_口座_更正後Entity.get通知書番号().value();
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額()) {
-            source.list2_18 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額().toString());
+            source.list2_18 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get調定年度()) {
-            source.list3_1 = 計算後情報_宛名_口座_更正後Entity.get調定年度().toDateString();
+            source.list3_1 = 計算後情報_宛名_口座_更正後Entity.get調定年度()
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get賦課年度()) {
-            source.list3_2 = 計算後情報_宛名_口座_更正後Entity.get賦課年度().toDateString();
+            source.list3_2 = 計算後情報_宛名_口座_更正後Entity.get賦課年度()
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額()) {
-            source.list3_3 = new RString(計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額().toString());
+            source.list3_3 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額()) {
-            source.list3_4 = new RString(計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額().toString());
+            source.list3_4 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get減免額()) {
-            source.list3_5 = new RString(計算後情報_宛名_口座_更正後Entity.get減免額().toString());
+            source.list3_5 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get減免額());
         }
         set月別取得段階(計算後情報_宛名_口座_更正後Entity, source);
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴歳出還付額()) {
-            source.list3_18 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴歳出還付額().toString());
+            source.list3_18 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴歳出還付額());
         }
 
-        source.list4_1 = 調定日時.getDate().wareki().toDateString();
-        source.list5_1 = 調定日時.getDate().wareki().toDateString();
+        source.list4_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
+        source.list5_1 = 計算後情報_宛名_口座_更正後Entity.get調定日時().getDate().wareki().toDateString();
         set特徴期別金額_更正後(source);
         set普徴期別金額_更正後1(source);
 
-        source.list6_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由1();
-        source.list7_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由2();
-        source.list8_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
-        source.list9_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由4();
+        source.list6_1 = RString.isNullOrEmpty(計算後情報_宛名_口座_更正後Entity.get調定事由1())
+                ? RString.EMPTY : ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由1()).get名称();
+        source.list7_1 = RString.isNullOrEmpty(計算後情報_宛名_口座_更正後Entity.get調定事由2())
+                ? RString.EMPTY : ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由2()).get名称();
+        source.list8_1 = RString.isNullOrEmpty(計算後情報_宛名_口座_更正後Entity.get調定事由3())
+                ? RString.EMPTY : ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由3()).get名称();
+        source.list9_1 = RString.isNullOrEmpty(計算後情報_宛名_口座_更正後Entity.get調定事由4())
+                ? RString.EMPTY : ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由4()).get名称();
         source.list10_1 = RString.EMPTY;
         set追加項目(source);
         return source;
@@ -157,7 +172,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
             }
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座_更正後Entity.get宛名Entity());
             if (null != kojin && null != kojin.get住所()) {
-                source.list1_3 = kojin.get住所().get住所();
+                source.list1_3 = kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
+                        .concat(kojin.get住所().get方書().getColumnValue());
             }
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get口座Entity()) {
@@ -180,141 +196,141 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
 
     private void set特徴期別金額_更正前(KanendoIdouKekkaIchiranSource source) {
         if (null != 計算後情報_宛名_口座_更正前Entity.get特徴期別金額01()) {
-            source.list4_2 = new RString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01().toString());
+            source.list4_2 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get特徴期別金額02()) {
-            source.list4_3 = new RString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02().toString());
+            source.list4_3 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get特徴期別金額03()) {
-            source.list4_4 = new RString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03().toString());
+            source.list4_4 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get特徴期別金額04()) {
-            source.list4_5 = new RString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額04().toString());
+            source.list4_5 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get特徴期別金額04());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get特徴期別金額05()) {
-            source.list4_6 = new RString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額05().toString());
+            source.list4_6 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get特徴期別金額05());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get特徴期別金額06()) {
-            source.list4_7 = new RString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額06().toString());
+            source.list4_7 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get特徴期別金額06());
         }
     }
 
     private void set普徴期別金額_更正前1(KanendoIdouKekkaIchiranSource source) {
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額01() && !source.listFuchoKi_1.isEmpty()) {
-            source.list4_8 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01().toString());
+            source.list4_8 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額02() && !source.listFuchoKi_2.isEmpty()) {
-            source.list4_9 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02().toString());
+            source.list4_9 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額03() && !source.listFuchoKi_3.isEmpty()) {
-            source.list4_10 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03().toString());
+            source.list4_10 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額04() && !source.listFuchoKi_4.isEmpty()) {
-            source.list4_11 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04().toString());
+            source.list4_11 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額05() && !source.listFuchoKi_5.isEmpty()) {
-            source.list4_12 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05().toString());
+            source.list4_12 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額06() && !source.listFuchoKi_6.isEmpty()) {
-            source.list4_13 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06().toString());
+            source.list4_13 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額07() && !source.listFuchoKi_7.isEmpty()) {
-            source.list4_14 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07().toString());
+            source.list4_14 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07());
         }
         set普徴期別金額_更正前2(source);
     }
 
     private void set普徴期別金額_更正前2(KanendoIdouKekkaIchiranSource source) {
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額08() && !source.listFuchoKi_8.isEmpty()) {
-            source.list4_15 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額08().toString());
+            source.list4_15 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額08());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額09() && !source.listFuchoKi_9.isEmpty()) {
-            source.list4_16 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額09().toString());
+            source.list4_16 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額09());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額10() && !source.listFuchoKi_10.isEmpty()) {
-            source.list4_17 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額10().toString());
+            source.list4_17 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額10());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額11() && !source.listFuchoKi_11.isEmpty()) {
-            source.list4_18 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額11().toString());
+            source.list4_18 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額11());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額12() && !source.listFuchoKi_12.isEmpty()) {
-            source.list4_19 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額12().toString());
+            source.list4_19 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額12());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額13() && !source.listFuchoKi_13.isEmpty()) {
-            source.list4_20 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額13().toString());
+            source.list4_20 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額13());
         }
         if (null != 計算後情報_宛名_口座_更正前Entity.get普徴期別金額14() && !source.listFuchoKi_14.isEmpty()) {
-            source.list4_21 = new RString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額14().toString());
+            source.list4_21 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get普徴期別金額14());
         }
     }
 
     private void set特徴期別金額_更正後(KanendoIdouKekkaIchiranSource source) {
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴期別金額01()) {
-            source.list5_2 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01().toString());
+            source.list5_2 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴期別金額02()) {
-            source.list5_3 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02().toString());
+            source.list5_3 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴期別金額03()) {
-            source.list5_4 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03().toString());
+            source.list5_4 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴期別金額04()) {
-            source.list5_5 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額04().toString());
+            source.list5_5 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get特徴期別金額04());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴期別金額05()) {
-            source.list5_6 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額05().toString());
+            source.list5_6 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get特徴期別金額05());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴期別金額06()) {
-            source.list5_7 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額06().toString());
+            source.list5_7 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get特徴期別金額06());
         }
     }
 
     private void set普徴期別金額_更正後1(KanendoIdouKekkaIchiranSource source) {
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額01() && !source.listFuchoKi_1.isEmpty()) {
-            source.list5_8 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01().toString());
+            source.list5_8 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額02() && !source.listFuchoKi_2.isEmpty()) {
-            source.list5_9 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02().toString());
+            source.list5_9 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額03() && !source.listFuchoKi_3.isEmpty()) {
-            source.list5_10 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03().toString());
+            source.list5_10 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額04() && !source.listFuchoKi_4.isEmpty()) {
-            source.list5_11 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04().toString());
+            source.list5_11 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額05() && !source.listFuchoKi_5.isEmpty()) {
-            source.list5_12 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05().toString());
+            source.list5_12 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額06() && !source.listFuchoKi_6.isEmpty()) {
-            source.list5_13 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06().toString());
+            source.list5_13 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額07() && !source.listFuchoKi_7.isEmpty()) {
-            source.list5_14 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07().toString());
+            source.list5_14 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07());
         }
         set普徴期別金額_更正後2(source);
     }
 
     private void set普徴期別金額_更正後2(KanendoIdouKekkaIchiranSource source) {
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額08() && !source.listFuchoKi_8.isEmpty()) {
-            source.list5_15 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額08().toString());
+            source.list5_15 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額08());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額09() && !source.listFuchoKi_9.isEmpty()) {
-            source.list5_16 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額09().toString());
+            source.list5_16 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額09());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額10() && !source.listFuchoKi_10.isEmpty()) {
-            source.list5_17 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額10().toString());
+            source.list5_17 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額10());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額11() && !source.listFuchoKi_11.isEmpty()) {
-            source.list5_18 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額11().toString());
+            source.list5_18 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額11());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額12() && !source.listFuchoKi_12.isEmpty()) {
-            source.list5_19 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額12().toString());
+            source.list5_19 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額12());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額13() && !source.listFuchoKi_13.isEmpty()) {
-            source.list5_20 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額13().toString());
+            source.list5_20 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額13());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴期別金額14() && !source.listFuchoKi_14.isEmpty()) {
-            source.list5_21 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額14().toString());
+            source.list5_21 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴期別金額14());
         }
     }
 
@@ -487,6 +503,10 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
             return RString.EMPTY;
         }
         return column.getColumnValue();
+    }
+
+    private RString toカンマ編集(Decimal 金額) {
+        return DecimalFormatter.toコンマ区切りRString(金額, 0);
     }
 
 }
