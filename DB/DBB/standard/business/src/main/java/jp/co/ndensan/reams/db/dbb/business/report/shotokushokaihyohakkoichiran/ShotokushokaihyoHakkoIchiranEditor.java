@@ -163,8 +163,8 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         if (照会年月日 != null) {
             source.listUpper_5 = 照会年月日.wareki().toDateString();
         }
-        if (!RString.isNullOrEmpty(所得照会票発行一覧.getTorokuTodokedeYMD())) {
-            source.listUpper_6 = new FlexibleDate(所得照会票発行一覧.getTorokuTodokedeYMD()).wareki().toDateString();
+        if (所得照会票発行一覧.getIdoYMD() != null) {
+            source.listUpper_6 = new FlexibleDate(所得照会票発行一覧.getIdoYMD().toString()).wareki().toDateString();
         }
         set種別(source);
         if (所得照会票発行一覧.getShikibetsuCode() != null) {
@@ -175,7 +175,12 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         }
         source.listLower_3 = 所得照会票発行一覧.getGenjusho();
         set性別コード(source);
-        source.listLower_5 = RString.EMPTY;
+        RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
+        if (候補者区分 != null && 候補者区分_転入者.equals(候補者区分)) {
+            source.listLower_5 = 所得照会票発行一覧.getTorokuTodokedeYMD();
+        } else if (候補者区分 != null && 候補者区分_住特者.equals(候補者区分)) {
+            source.listLower_5 = RString.EMPTY;
+        }
         if (所得照会票発行一覧.getHihokenshaNo() != null) {
             source.listLower_6 = 所得照会票発行一覧.getHihokenshaNo().getColumnValue();
         }
