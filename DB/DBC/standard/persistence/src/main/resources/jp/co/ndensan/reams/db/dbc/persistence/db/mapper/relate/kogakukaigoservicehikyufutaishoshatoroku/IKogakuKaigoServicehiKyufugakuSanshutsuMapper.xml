@@ -2699,7 +2699,8 @@
         "ShikibetsuTaisho"."kanaMeisho" AS カナ名称,
         "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
         "ShikibetsuTaisho"."choikiCode" AS 町域コード,
-        "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード
+        "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
+        "ShikibetsuTaisho"."katakanaHyoki" AS 氏名５０音カナ
         FROM master
         LEFT OUTER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,'','','','',
         '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
@@ -2750,7 +2751,8 @@
             "ShikibetsuTaisho"."kanaMeisho" AS カナ名称,
             "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
             "ShikibetsuTaisho"."choikiCode" AS 町域コード,
-            "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード
+            "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
+            "ShikibetsuTaisho"."katakanaHyoki" AS 氏名５０音カナ
          FROM master
          LEFT OUTER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,'','','','',
             '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
@@ -2978,6 +2980,7 @@
         <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="町域コード" column="町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
         <result property="行政区コード" column="行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="氏名５０音カナ" column="氏名５０音カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <sql id="allColumns_TmpSetaiShotoku">

@@ -70,8 +70,18 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranSource implements IReportSo
     public RString listTaishoshaIchiran_10;
     @ReportItem(name = "listTaishoshaIchiran_11", length = 85, order = 25)
     public RString listTaishoshaIchiran_11;
+    @ReportItem(name = "listTaishoshaIchiran_12", length = 85, order = 26)
+    public RString listTaishoshaIchiran_12;
+    @ReportItem(name = "listTaishoshaIchiran_13", length = 85, order = 27)
+    public RString listTaishoshaIchiran_13;
+    @ReportItem(name = "listTaishoshaIchiran_14", length = 85, order = 28)
+    public RString listTaishoshaIchiran_14;
+    @ReportItem(name = "listTaishoshaIchiran_15", length = 85, order = 29)
+    public RString listTaishoshaIchiran_15;
+    @ReportItem(name = "listTaishoshaIchiran_16", length = 85, order = 30)
+    public RString listTaishoshaIchiran_16;
     @ReportPerson(id = "A")
-    @ReportItem(name = "shikibetsuCode", length = 85, order = 26)
+    @ReportItem(name = "shikibetsuCode", length = 85, order = 31)
     public RString shikibetsuCode;
     @ReportExpandedInfo(id = "A")
     public ExpandedInformation 拡張情報;
@@ -112,6 +122,11 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranSource implements IReportSo
         listTaishoshaIchiran_9,
         listTaishoshaIchiran_10,
         listTaishoshaIchiran_11,
+        listTaishoshaIchiran_12,
+        listTaishoshaIchiran_13,
+        listTaishoshaIchiran_14,
+        listTaishoshaIchiran_15,
+        listTaishoshaIchiran_16,
         shikibetsuCode
     }
 }

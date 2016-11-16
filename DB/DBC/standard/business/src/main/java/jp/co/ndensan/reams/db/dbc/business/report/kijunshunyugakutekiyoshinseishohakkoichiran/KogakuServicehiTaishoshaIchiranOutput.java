@@ -35,7 +35,7 @@ public class KogakuServicehiTaishoshaIchiranOutput {
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"shikibetsuTaisho_kanaMeisho\"")),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho\".\"katakanaHyoki\"")),
         /**
          * 市町村コード
          */
