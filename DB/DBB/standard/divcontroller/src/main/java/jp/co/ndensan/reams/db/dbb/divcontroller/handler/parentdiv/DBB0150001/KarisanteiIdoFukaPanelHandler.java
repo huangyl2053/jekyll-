@@ -654,8 +654,11 @@ public class KarisanteiIdoFukaPanelHandler {
         List<dgChushutsuKikan_Row> 抽出日時List = div.getKarisanteiIdoFukaKanriInfo().getDgChushutsuKikan().getDataSource();
         if (!抽出日時List.isEmpty()) {
             dgChushutsuKikan_Row 抽出日時 = 抽出日時List.get(NUM_0);
-            parameter.set抽出開始日時(new RString(抽出日時.getTxtChushutsuStYMD().getValue().toString())
-                    .concat(抽出日時.getTxtChushutsuStTime().getValue().toString()));
+            if (抽出日時.getTxtChushutsuStYMD().getValue() != null
+                    && 抽出日時.getTxtChushutsuStTime().getValue() != null) {
+                parameter.set抽出開始日時(new RString(抽出日時.getTxtChushutsuStYMD().getValue().toString())
+                        .concat(抽出日時.getTxtChushutsuStTime().getValue().toString()));
+            }
             parameter.set抽出終了日時(new RString(抽出日時.getTxtChushutsuEdYMD().getValue().toString())
                     .concat(抽出日時.getTxtChushutsuEdTime().getValue().toString()));
         }
