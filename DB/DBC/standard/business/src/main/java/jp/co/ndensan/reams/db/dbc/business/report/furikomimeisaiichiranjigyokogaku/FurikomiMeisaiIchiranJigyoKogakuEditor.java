@@ -72,7 +72,7 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
             edit振込データ(source);
             edit集計(source);
             source.shikibetsuCode = target.get振込明細一時() == null ? RString.EMPTY : target.get振込明細一時().getShikibetsuCode().getColumnValue();
-            if (source.hokenshaNo != null) {
+            if (source.list1_1 != null) {
                 source.拡張情報 = new ExpandedInformation(new Code("0003"), 文_被保険者番号, source.list1_1);
             }
         }
