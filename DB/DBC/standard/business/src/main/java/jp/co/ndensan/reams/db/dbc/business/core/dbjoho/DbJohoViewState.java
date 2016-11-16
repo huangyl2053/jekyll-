@@ -19,10 +19,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisets
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 
 /**
  * ViewStateクラスです
@@ -47,7 +47,7 @@ public class DbJohoViewState implements Serializable {
     private List<ShokanShakaiFukushiHojinKeigengaku> 償還払請求社会福祉法人軽減額データList;
     private List<ShokanShoteiShikkanShisetsuRyoyo> 償還払請求所定疾患施設療養費等データList;
     private List<ShokanKinkyuShisetsuRyoyo> 償還払請求緊急時施設療養データList;
-    private List<ShokanShukei> 償還払請求集計データList;
+    private List<ShokanShukeiResult> 償還払請求集計データList;
     private List<ShokanShokujiHiyo> 償還払請求食事費用データList;
     private ShokanHanteiKekka 償還払支給判定結果;
 

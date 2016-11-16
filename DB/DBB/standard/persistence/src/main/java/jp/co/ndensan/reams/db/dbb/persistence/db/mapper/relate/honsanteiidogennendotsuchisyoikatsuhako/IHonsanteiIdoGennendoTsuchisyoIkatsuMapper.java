@@ -141,4 +141,16 @@ public interface IHonsanteiIdoGennendoTsuchisyoIkatsuMapper {
      * @return List<HonsanteiTsuchishoTempEntity> 全件賦課情報
      */
     List<HonsanteiTsuchishoTempEntity> select全件賦課情報_納入(IdoNonyuTsuchishoParameter parameter);
+
+    /**
+     * 特徴8月開始者区分を更新するメソッドです。
+     *
+     */
+    void update特徴8月開始者区分();
+
+    /**
+     * 特徴10月開始者区分を更新するメソッドです。
+     *
+     */
+    void update特徴10月開始者区分();
 }
