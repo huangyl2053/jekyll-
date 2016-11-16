@@ -47,6 +47,7 @@ public class FuchoKariSanteiFukaBatch {
     private static final RString 仮算定賦課方法_03 = new RString("03");
     private static final RString 仮算定賦課方法_04 = new RString("04");
     private static final RString 仮算定賦課方法_05 = new RString("05");
+    private static final RString 仮算定賦課方法_06 = new RString("06");
     private static final RString 仮算定賦課方法_10 = new RString("10");
     private static final RString 仮算定賦課方法_11 = new RString("11");
     private static final RString 境界層区分_非該当 = new RString("0");
@@ -252,7 +253,7 @@ public class FuchoKariSanteiFukaBatch {
                 月期対応取得_普徴 = new FuchoKiUtil(調定年度.minusYear(1));
                 期月リスト = 月期対応取得_普徴.get期月リスト();
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
-            } else {
+            } else if (仮算定賦課方法_06.equals(仮算定賦課方法)) {
                 納期数 = get賦課納期数(納期数, 調定年度開始日, 前年度賦課情報, 期, 期月リスト);
             }
             if (仮算定賦課方法_01.equals(仮算定賦課方法)) {
