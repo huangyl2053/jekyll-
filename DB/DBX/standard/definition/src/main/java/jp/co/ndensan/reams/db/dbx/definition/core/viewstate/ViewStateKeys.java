@@ -2630,5 +2630,9 @@ public enum ViewStateKeys {
     /**
      * 償還払ViewStateDB
      */
-    償還払ViewStateDB;
+    償還払ViewStateDB,
+    /**
+     * 開始時点の償還払サービス計画費
+     */
+    開始時点の償還払サービス計画費;
 }
