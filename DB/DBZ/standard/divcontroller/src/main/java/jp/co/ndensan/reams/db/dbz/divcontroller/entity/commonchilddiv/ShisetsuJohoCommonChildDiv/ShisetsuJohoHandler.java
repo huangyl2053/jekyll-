@@ -105,6 +105,10 @@ public class ShisetsuJohoHandler {
                 div.getRadOtherTokureiShisetsu().setVisible(false);
                 div.getRadTekiyoJyogaiShisetsu().setVisible(false);
                 div.getDdlDaichoShubetsu().setVisible(false);
+                div.getRadKaigoHokenShisetsu().setDisplayNone(true);
+                div.getRadOtherTokureiShisetsu().setDisplayNone(false);
+                div.getRadTekiyoJyogaiShisetsu().setDisplayNone(false);
+                div.getDdlDaichoShubetsu().setDisplayNone(false);
             }
         }
     }

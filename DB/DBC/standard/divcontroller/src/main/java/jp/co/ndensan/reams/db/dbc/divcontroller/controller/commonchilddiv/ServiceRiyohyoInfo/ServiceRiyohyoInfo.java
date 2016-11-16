@@ -345,7 +345,7 @@ public class ServiceRiyohyoInfo {
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnGokeiKeisan(ServiceRiyohyoInfoDiv div) {
         ServiceRiyohyoInfoDivValidationHandler validationhandler = getValidatioHandler(div);
         RString サービス種類Tmp;
-        if (div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo() != null) {
+        if (!RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())) {
             サービス種類Tmp = div.getCcdServiceCodeInput().getサービスコード1();
         } else {
             サービス種類Tmp = div.getCcdServiceTypeInput().getサービス種類コード();
