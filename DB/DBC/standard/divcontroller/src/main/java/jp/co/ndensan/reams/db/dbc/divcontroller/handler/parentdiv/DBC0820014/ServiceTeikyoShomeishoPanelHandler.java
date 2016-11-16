@@ -233,16 +233,16 @@ public class ServiceTeikyoShomeishoPanelHandler {
             List<DbT3047ShokanServicePlan200904Entity> 償還払請求サービス計画200904データList = new ArrayList<>();
             List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList = new ArrayList<>();
             List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList = new ArrayList<>();
-            for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.getShokanKihon()) {
+            for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
                 償還払請求基本データList.add(償還払請求基本.toEntity());
             }
-            for (ShokanServicePlan200904 償還払請求サービス計画200904 : 償還払ViewStateDB情報.getShokanServicePlan200904()) {
+            for (ShokanServicePlan200904 償還払請求サービス計画200904 : 償還払ViewStateDB情報.get償還払請求サービス計画200904データList()) {
                 償還払請求サービス計画200904データList.add(償還払請求サービス計画200904.toEntity());
             }
-            for (ShokanServicePlan200604 償還払請求サービス計画200604 : 償還払ViewStateDB情報.getShokanServicePlan200604()) {
+            for (ShokanServicePlan200604 償還払請求サービス計画200604 : 償還払ViewStateDB情報.get償還払請求サービス計画200604データList()) {
                 償還払請求サービス計画200604データList.add(償還払請求サービス計画200604.toEntity());
             }
-            for (ShokanServicePlan200004 償還払請求サービス計画200004 : 償還払ViewStateDB情報.getShokanServicePlan200004()) {
+            for (ShokanServicePlan200004 償還払請求サービス計画200004 : 償還払ViewStateDB情報.get償還払請求サービス計画200004データList()) {
                 償還払請求サービス計画200004データList.add(償還払請求サービス計画200004.toEntity());
             }
             int 証明書件数ViewState = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShomeishoKensu(

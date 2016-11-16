@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.H
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.PrtTokuchoKaishiTsuchishoHonsanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.TokuchoKaishiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.honsantei.KaigoHokenryogakuOutPutOrder;
+import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuProperty.OutputOrderEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.karisantei.IdoKarisanteigakuTsuchishoOutPutOrder;
 import jp.co.ndensan.reams.db.dbb.business.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiProperty.BreakerFieldsEnum;
@@ -1016,7 +1016,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         } else if (特別徴収開始通知書仮算定_帳票分類ID.equals(帳票分類ID)) {
             出力順 = MyBatisOrderByClauseCreator.create(IdoKarisanteigakuTsuchishoOutPutOrder.class, outputOrder);
         } else if (決定変更通知書_帳票分類ID.equals(帳票分類ID)) {
-            出力順 = MyBatisOrderByClauseCreator.create(KaigoHokenryogakuOutPutOrder.class, outputOrder);
+            出力順 = MyBatisOrderByClauseCreator.create(OutputOrderEnum.class, outputOrder);
         }
         return 出力順;
     }
