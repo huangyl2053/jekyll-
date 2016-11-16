@@ -32,6 +32,8 @@ public class JukyushaIdoRenrakuhyoToroku {
     private static final RString THREE = new RString("3");
     private static final RString 既存の異動日 = new RString("既存の異動日");
     private static final RString 異動区分不正 = new RString("異動区分不正");
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
 
     /**
      * コンストラクタです。
@@ -148,7 +150,11 @@ public class JukyushaIdoRenrakuhyoToroku {
             if (futangaku != null) {
                 jukyuEntity.set標準負担額(new RString(futangaku.toString()));
             }
-            jukyuEntity.set公費負担上限額減額(entity.getKohiFutanJogenGengakuAriFlag());
+            if (entity.getKohiFutanJogenGengakuAriFlag()) {
+                jukyuEntity.set公費負担上限額減額(TWO);
+            } else {
+                jukyuEntity.set公費負担上限額減額(ONE);
+            }
             jukyuEntity.set認定申請中区分(entity.getTokuteiNyushoshaNinteiShinseichuKubunCode());
             jukyuEntity.setｻｰﾋﾞｽ区分(entity.getTokuteiNyushoshaKaigoServiceKubunCode());
             jukyuEntity.set特例減額措置対象(entity.getKaizeisoTokureiGengakuSochiTaishoFlag());
@@ -167,8 +173,24 @@ public class JukyushaIdoRenrakuhyoToroku {
             }
             jukyuEntity.set老人保健市町村番号(entity.getRojinHokenShichosonNo());
             jukyuEntity.set老人保健受給者番号(entity.getRojinHokenJukyushaNo());
-            jukyuEntity.set軽減率(entity.getKeigenritsu());
-            jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag());
+            RString 軽減率 = entity.getKeigenritsu();
+            if (null != 軽減率 && !軽減率.isEmpty()) {
+                int count = 軽減率.length();
+                if (INT_1 == count) {
+                    jukyuEntity.set軽減率(ZERO.concat(ZERO).concat(ZERO).concat(軽減率));
+                } else if (INT_2 == count) {
+                    jukyuEntity.set軽減率(ZERO.concat(ZERO).concat(軽減率));
+                } else {
+                    jukyuEntity.set軽減率(ZERO.concat(軽減率));
+                }
+            } else {
+                jukyuEntity.set軽減率(new RString(""));
+            }
+            if (entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag()) {
+                jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(TWO);
+            } else {
+                jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(ONE);
+            }
             jukyuEntity.set二次予防事業区分(entity.getNijiyoboJigyoKubunCode());
             jukyuEntity.set二次予防有効期間開始年月日(entity.getNijiyoboJigyoYukoKikanKaishiYMD());
             jukyuEntity.set二次予防有効期間終了年月日(entity.getNijiyoboJigyoYukoKikanShuryoYMD());

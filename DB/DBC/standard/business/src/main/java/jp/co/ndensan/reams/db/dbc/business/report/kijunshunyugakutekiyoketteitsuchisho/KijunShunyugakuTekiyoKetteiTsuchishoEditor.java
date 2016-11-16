@@ -179,8 +179,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
 
     private void set適用開始年月(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (基準収入額適用決定通知書パラメータ.get適用開始年月() != null) {
-            source.tekiyouStartYM = 基準収入額適用決定通知書パラメータ.get適用開始年月().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+            source.tekiyouStartYM = 基準収入額適用決定通知書パラメータ.get適用開始年月().wareki().toDateString();
         }
     }
 

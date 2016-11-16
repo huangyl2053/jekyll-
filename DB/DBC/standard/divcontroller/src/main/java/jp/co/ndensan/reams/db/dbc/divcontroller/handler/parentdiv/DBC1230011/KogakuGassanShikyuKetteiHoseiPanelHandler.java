@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanshikyuketteihosei.Kog
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -485,6 +487,11 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             }
             KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShoriJigyo(事業高額合算決定entity, 処理モード);
         } else {
+            KogakuGassanShikyuGakuKeisanKekkaUpdateParameter parameter = new KogakuGassanShikyuGakuKeisanKekkaUpdateParameter();
+            parameter.set更新後被保険者番号(被保険者番号);
+            parameter.set更新後証記載保険者番号(保険者番号);
+            parameter.set更新後支給申請書整理番号(支給申請書整理番号);
+            get高額合算給付実績(parameter, para);
             if (新規.equals(画面モード)) {
                 int 履歴番号 = KogakuGassanShikyuKetteiHosei.createInstance().get高額決定Max履歴番号(
                         被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
@@ -493,15 +500,16 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 高額決定result = buid高額決定(高額決定result).added();
                 処理モード = ONE;
                 KoshinShoriResult result = new KoshinShoriResult();
+                Decimal 支給額 = KogakuGassanShikyuKetteiHosei.createInstance().get支給額(
+                        div.getShinkiPanel().getTxtShinkiShikyuSeiriNo().getValue()).add(
+                                div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                                getTxtShikyugaku().getValue());
+                parameter.set更新後支給額(支給額);
+                result.setUpdate合算給付実績パラメータ(parameter);
                 result.set高額合算支給不支給決定Entity(高額決定result);
                 KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShori(result, 処理モード);
                 return;
             }
-            KogakuGassanShikyuGakuKeisanKekkaUpdateParameter parameter = new KogakuGassanShikyuGakuKeisanKekkaUpdateParameter();
-            parameter.set更新後被保険者番号(被保険者番号);
-            parameter.set更新後証記載保険者番号(保険者番号);
-            parameter.set更新後支給申請書整理番号(支給申請書整理番号);
-            get高額合算給付実績(parameter, para);
             for (KogakuGassanShikyuKetteiHoseiResult 決定情報 : 決定情報list) {
                 RStringBuilder builder = new RStringBuilder();
                 builder.append(決定情報.get高額合算決定entity().get被保険者番号().value());
@@ -527,6 +535,14 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             rowBuilder.append(row.getTxtRenrakuhyoSeiriNo());
             rowBuilder.append(アンダーライン);
             rowBuilder.append(row.getTxtRirekiNo());
+            Decimal 更新前支給額 = Decimal.ZERO;
+            if (row.getTxtShikyugaku() != null) {
+                更新前支給額 = row.getTxtShikyugaku().getValue();
+            }
+            Decimal 支給額 = KogakuGassanShikyuKetteiHosei.createInstance().get支給額(
+                    row.getTxtRenrakuhyoSeiriNo()).add(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                            getTxtShikyugaku().getValue()).subtract(更新前支給額);
+            parameter.set更新後支給額(支給額);
             KogakuGassanShikyuFushikyuKettei 高額合算決定entity = 高額合算決定map.get(rowBuilder.toRString());
             if (高額合算決定entity == null) {
                 return;
@@ -558,8 +574,9 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 getTxtKetteiYMD().getValue().toDateString()));
         parameter.set更新後自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                 getTxtJikoFutanSogaku().getValue());
-        parameter.set更新後支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue());
         parameter.setFlag(is支給区分_支給金額フラグ(para));
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        parameter.setLoginId(controlData.getLoginInfo().getUserId());
 
     }
 

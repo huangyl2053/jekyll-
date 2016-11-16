@@ -355,6 +355,10 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
      */
     public ResponseData<JukyushaTeiseiRenrakuhyoTorokuPanelDiv> onClick_btnContinue(
             JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
+
+        KyodoJukyushaTaishoshaEntity 引き継ぎ情報 = ViewStateHolder.get(
+                ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
+        getHandler(div).前排他キーの解除(引き継ぎ情報.get被保番号());
         return ResponseData.of(div).respond();
     }
 

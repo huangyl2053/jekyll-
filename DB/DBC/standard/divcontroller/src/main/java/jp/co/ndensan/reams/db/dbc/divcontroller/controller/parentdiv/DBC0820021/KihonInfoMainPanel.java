@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820021.KihonInfoMainPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820021.KihonInfoMainPanelValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
@@ -95,10 +94,8 @@ public class KihonInfoMainPanel {
                     被保険者番号, サービス年月, 申請日, 整理番号, 事業者番号, 様式番号, 固定明細番号);
             ViewStateHolder.put(ViewStateKeys.明細検索キー, parameter);
         }
-        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.申請検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
-        SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
-                償還払費申請検索.getServiceTeikyoYM());
+        SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(meisaiPar.get様式番号(),
+                meisaiPar.getサービス年月());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         getHandler(div).setヘッダエリア(識別コード, 被保険者番号);
@@ -487,11 +484,12 @@ public class KihonInfoMainPanel {
     }
 
     private void getViewState(KihonInfoMainPanelDiv div) {
-        ShoukanharaihishinseikensakuParameter paramter = getHandler(div).putViewState(
+        ShoukanharaihishinseimeisaikensakuParameter paramter = getHandler(div).putViewState(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
+                ViewStateHolder.get(ViewStateKeys.申請日, RDate.class),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請検索キー, paramter);
+        ViewStateHolder.put(ViewStateKeys.明細検索キー, paramter);
     }
 
     private KihonInfoMainPanelHandler getHandler(KihonInfoMainPanelDiv div) {

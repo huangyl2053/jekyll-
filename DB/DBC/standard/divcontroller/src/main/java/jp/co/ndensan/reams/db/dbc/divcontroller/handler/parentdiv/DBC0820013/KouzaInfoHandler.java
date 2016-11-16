@@ -6,12 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820013;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokanShinseiJoho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.KouzaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -175,8 +177,9 @@ public class KouzaInfoHandler {
      * @param 整理番号 RString
      * @param サービス年月 FlexibleYearMonth
      * @param 被保険者番号 HihokenshaNo
+     * @return ShokanShinseiJoho 償還払い費支給申請決定用情報
      */
-    public void 保存_修正(ShokanShinsei entityView, RString 整理番号, FlexibleYearMonth サービス年月, HihokenshaNo 被保険者番号) {
+    public ShokanShinseiJoho 保存_修正(ShokanShinsei entityView, RString 整理番号, FlexibleYearMonth サービス年月, HihokenshaNo 被保険者番号) {
         IShiharaiHohoJyohoDiv 支払方法情報共有DIV = div.getPnlCommon().getCcdShinseiNaiyo();
         RString 支払方法区分コード = 支払方法情報共有DIV.getShiharaiHohoRad();
         if (窓口払_コード.equals(支払方法区分コード)) {
@@ -240,7 +243,7 @@ public class KouzaInfoHandler {
                     .set支払方法区分コード(支払方法区分コード)
                     .set受領委任契約番号(受領委任契約番号).build();
         }
-        SyokanbaraihiShikyuShinseiKetteManager.createInstance().updDbT3034ShokanShinsei(entityView);
+        return SyokanbaraihiShikyuShinseiKetteManager.createInstance().updDbT3034ShokanShinsei1(entityView);
     }
 
     /**
@@ -270,6 +273,7 @@ public class KouzaInfoHandler {
         List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         if (支給申請一覧情報リスト.isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnDelete"), false);
             return new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
         }
         return 支給申請一覧情報リスト.get(0);

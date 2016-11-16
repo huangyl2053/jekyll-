@@ -5,14 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.ServiceRiyohyoInfo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDivHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDivValidationHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.dgServiceRiyohyoBeppyoList_Row;
+import jp.co.ndensan.reams.db.dbc.service.core.jigosakuseimeisaitouroku.JigoSakuseiMeisaiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -20,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -35,6 +44,10 @@ public class ServiceRiyohyoInfo {
     private static final RString RSTRING_TWO = new RString("2");
     private static final RString プラス値入力不可 = new RString("単位：プラス値入力不可");
     private static final RString マイナス値入力不可 = new RString("単位：マイナス値入力不可");
+    private static final RString 給付率値 = new RString(" & viewState.給付率 & ");
+    private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
+    private static final RString 前月の明細情報の確認 = new RString("明細行が前月の状態に置き換わります。よろしいですか？");
+    private static final RString RSTRING_ZERO = new RString("0");
 //    private static final RString RSTRING_17 = new RString("17");
 //    private static final RString RSTRING_67 = new RString("67");
 //    private static final RString RSTRING_88 = new RString("88");
@@ -66,11 +79,46 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnZengetsuCopy(ServiceRiyohyoInfoDiv div) {
+        RDate 利用年月日 = div.getTxtRiyoYM().getValue();
+        if (利用年月日 == null) {
+            throw new ApplicationException(前月の明細情報エラー.toString());
+        }
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth 対象年月 = ViewStateHolder.get(ViewStateKeys.対象年月, FlexibleYearMonth.class);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
-        FlexibleYearMonth 利用年月 = new FlexibleYearMonth(div.getTxtRiyoYM().getValue().getYearMonth().toDateString());
-        getHandler(div).setサービス利用票(被保険者番号, 対象年月, 履歴番号, 利用年月.minusMonth(1));
+        FlexibleYearMonth 利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
+        JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
+        List<KyufuJikoSakuseiResult> サービス利用票情報 = jigoSakusei.getServiceRiyouHyo(被保険者番号, 対象年月, 履歴番号,
+                利用年月.minusMonth(1));
+        if (サービス利用票情報 == null || サービス利用票情報.isEmpty()) {
+            throw new ApplicationException(前月の明細情報エラー.toString());
+        }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    前月の明細情報の確認.toString());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        List<dgServiceRiyohyoBeppyoList_Row> rowList = new ArrayList<>();
+        int i = 0;
+        for (KyufuJikoSakuseiResult result : サービス利用票情報) {
+            dgServiceRiyohyoBeppyoList_Row row = handler.setRow(result);
+            if (i == サービス利用票情報.size() - 1) {
+                row.setHdnGokeiGyoFlag(RSTRING_ONE);
+                handler.setRowButtonState(row);
+            } else {
+                row.setHdnGokeiGyoFlag(RSTRING_ZERO);
+            }
+            rowList.add(row);
+            i++;
+        }
+        div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
+        ViewStateHolder.put(ViewStateKeys.給付計画自己作成EntityList, (Serializable) サービス利用票情報);
         return ResponseData.of(div).respond();
     }
 
@@ -118,6 +166,8 @@ public class ServiceRiyohyoInfo {
 
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         div.setAddType(RSTRING_ONE);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().getRadKaigoHokenShisetsu()
+                .setSelectedKey(ShisetsuType.介護保険施設.getコード());
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
@@ -152,9 +202,13 @@ public class ServiceRiyohyoInfo {
         div.getServiceRiyohyoBeppyoList().setDisabled(true);
 
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
+        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
 
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().getRadKaigoHokenShisetsu()
+                .setSelectedKey(ShisetsuType.介護保険施設.getコード());
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
@@ -167,6 +221,13 @@ public class ServiceRiyohyoInfo {
         handler.事業者サービスクリア();
         handler.明細情報クリア();
         handler.合計情報クリア();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RDate 利用年月日 = div.getTxtRiyoYM().getValue();
+        FlexibleYearMonth 利用年月 = null;
+        if (利用年月日 != null) {
+            利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
+        }
+        getHandler(div).onClick_btnKakutei(被保険者番号, 利用年月);
         return ResponseData.of(div).respond();
     }
 
@@ -275,6 +336,7 @@ public class ServiceRiyohyoInfo {
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoList().setDisabled(false);
+        div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
         handler.入力を取り消す();
         return ResponseData.of(div).respond();
     }
@@ -332,11 +394,13 @@ public class ServiceRiyohyoInfo {
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         if (給付率.compareTo(給付率div) != 0) {
             if (給付率.compareTo(DECIMAL_90) == 0 && !ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(
-                        DbcQuestionMessages.給付率修正確認.getMessage().replace(RSTRING_ONE.toString())).respond();
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.給付率修正確認.getMessage()
+                        .replace(RSTRING_ONE.toString())
+                        .replace(給付率値.toString(), 給付率.toString())).respond();
             } else if (給付率.compareTo(DECIMAL_80) == 0 && !ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(
-                        DbcQuestionMessages.給付率修正確認.getMessage().replace(RSTRING_TWO.toString())).respond();
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.給付率修正確認.getMessage()
+                        .replace(RSTRING_TWO.toString())
+                        .replace(給付率値.toString(), 給付率.toString())).respond();
             }
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())
@@ -349,6 +413,7 @@ public class ServiceRiyohyoInfo {
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoList().setDisabled(false);
+        div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
         handler.入力を取り消す();
         return ResponseData.of(div).respond();
     }
@@ -375,13 +440,18 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onBlur_txtRiyoYM(ServiceRiyohyoInfoDiv div) {
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();
-        if (利用年月日 == null) {
-            return ResponseData.of(div).respond();
+        if (利用年月日 != null) {
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
+            FlexibleYearMonth 利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
+            getHandler(div).set区分支給限度額(被保険者番号, 居宅総合事業区分, 利用年月);
+        } else {
+            div.getChkZanteiKubun().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getTxtKubunShikyuGendogaku().clearValue();
+            div.getTxtGendoKanriKikan().clearFromValue();
+            div.getTxtGendoKanriKikan().clearToValue();
+            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
         }
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
-        FlexibleYearMonth 利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
-        getHandler(div).set区分支給限度額(被保険者番号, 居宅総合事業区分, 利用年月);
         return ResponseData.of(div).respond();
     }
 

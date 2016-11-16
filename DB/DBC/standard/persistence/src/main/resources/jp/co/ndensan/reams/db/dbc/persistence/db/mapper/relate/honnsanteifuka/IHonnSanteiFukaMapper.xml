@@ -12,12 +12,38 @@
         FROM
           rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
     </select>
-
+    
+    <sql id="allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu">
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hiHokenshaNo" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_hiHokenshaNo",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."idoYMD" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoYMD",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."rirekiNo" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_rirekiNo",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."insertDantaiCd" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertDantaiCd",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."insertTimestamp" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertTimestamp",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."insertReamsLoginId" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertReamsLoginId",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."insertContextId" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertContextId",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."isDeleted" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_isDeleted",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."updateCount" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_updateCount",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."lastUpdateTimestamp" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_lastUpdateTimestamp",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."lastUpdateReamsLoginId" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_lastUpdateReamsLoginId",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."idoKubunCode" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoKubunCode",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."jukyushaIdoJiyu" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_jukyushaIdoJiyu",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."shoKisaiHokenshaNo" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_shoKisaiHokenshaNo",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hokenKyufuIchijiSashitomeKaishiYMD" as "hokenKyufuIchijiSashitomeKaishiYMD",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hokenKyufuIchijiSashitomeShuryoYMD" as "hokenKyufuIchijiSashitomeShuryoYMD",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hokenkyufuIchijiSashitomeKubunCode" as "hokenkyufuIchijiSashitomeKubunCode",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."hokenkyufuIchijiSashitomeKingaku" as "hokenkyufuIchijiSashitomeKingaku",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."teiseiRenrakuhyoFlag" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiRenrakuhyoFlag",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."sofuYM" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_sofuYM",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."teiseiKubunCode" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiKubunCode",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."teiseiYMD" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiYMD",
+         "DbT3003KyodoShoriyoJukyushaIdoShokanSofu"."logicalDeletedFlag" as "dbT3003KyodoShoriyoJukyushaIdoShokanSofu_logicalDeletedFlag"
+    </sql>
+    
     <select id="select共同処理償還送付"
-            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity"
+            resultMap="resultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity"
             fetchSize="500" resultOrdered="true">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu" />
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper.allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu" />
         FROM
           rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu"
     </select>
@@ -41,21 +67,21 @@
           rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
         WHERE "logicalDeletedFlag" <![CDATA[<>]]> TRUE
             <if test="処理区分フラグ">
-               AND "sofuYM" = #{処理対象年月}
+               AND "sofuYM" <![CDATA[<>]]> #{処理対象年月}
             </if>
     </select>
 
     <select id="select共同処理償還送付一時"
-            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.ResultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity"
+            resultMap="resultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
             fetchSize="500" resultOrdered="true">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3003KyodoShoriyoJukyushaIdoShokanSofuMapper.allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu" />
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper.allColumns_DbT3003KyodoShoriyoJukyushaIdoShokanSofu" />
         FROM
           rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu"
         WHERE "logicalDeletedFlag" <![CDATA[<>]]> TRUE
             <if test="処理区分フラグ">
-               AND "sofuYM" = #{処理対象年月}
+               AND "sofuYM" <![CDATA[<>]]> #{処理対象年月}
             </if>
     </select>
 
@@ -69,11 +95,11 @@
           rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
         WHERE "logicalDeletedFlag" <![CDATA[<>]]> TRUE
             <if test="処理区分フラグ">
-               AND "sofuYM" = #{処理対象年月}
+               AND "sofuYM" <![CDATA[<>]]> #{処理対象年月}
             </if>
     </select>
     
-<!--    <select id="select受給者台帳情報" resultMap="resultMap_JukyushaDaichoEntity" 
+    <select id="select受給者台帳情報" resultMap="resultMap_JukyushaDaichoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
             fetchSize="500" resultOrdered="true">
         SELECT
@@ -85,7 +111,7 @@
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
             ON "DbT4001JukyushaDaicho"."shikibetsuCode" =  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
-            AND SUBSTRING("DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<]]> #{処理対象年月}
+        WHERE SUBSTRING("DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<]]> #{処理対象年月}
             AND "DbT4001JukyushaDaicho"."yukoMukoKubun" = '1'
         ORDER BY "DbT4001JukyushaDaicho"."hihokenshaNo","DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD"
     </select>
@@ -139,7 +165,7 @@
     
     <resultMap id="resultMap_IdouChuukannEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouDetaToriGaTempEntity" autoMapping="true">
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
     <select id="select異動データ取得" resultMap="resultMap_IdouChuukannEntity" 
@@ -163,9 +189,9 @@
             <include refid="allColumns_送付エラー一時" />
         FROM
           "SoufuError"
-        WHERE <foreach collection="list" item="item" index="index" separator="or" >  
-            ("SoufuError"."異動年月日" = #{item.異動年月日} AND "SoufuError"."被保険者番号" = #{item.被保険者番号})
-            </foreach> 
+<!--        WHERE <foreach collection="list" item="item" index="index" separator="or" >  
+             ("SoufuError"."被保険者番号" = #{item.被保険者番号})
+            </foreach> -->
     </select>
     
     <select id="select送付エラーデータ" resultMap="resultMap_送付エラー一時"
@@ -175,14 +201,38 @@
         FROM
           "SofuEraDetaTemp" AS "SoufuError"
     </select>
-      <update id="update異動中間基本送付一時" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" 
-            fetchSize="500">
-        UPDATE
-          "IdouChuukannKihonSofuIttokiTemp"
-        SET "IdouChuukannKihonSofuIttokiTemp"."論理削除フラグ" = FALSE
-        WHERE "IdouChuukannKihonSofuIttokiTemp"."被保険者番号" = #{被保険者番号}
-        AND "IdouChuukannKihonSofuIttokiTemp"."異動年月日" = #{異動年月日}
-    </update>
+    
+    <select id="update異動中間基本送付一時" resultMap="resultMap_CompareDataTempAEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        異動中間基本送付."異動年月日",
+        異動中間基本送付."異動区分コード",
+        異動中間基本送付."受給者異動事由",
+        異動中間基本送付."証記載保険者番号",
+        異動中間基本送付."被保険者番号",
+        異動中間基本送付."履歴番号",
+        異動中間基本送付."被保険者氏名",
+        異動中間基本送付."郵便番号",
+        異動中間基本送付."住所カナ",
+        異動中間基本送付."住所",
+        異動中間基本送付."電話番号",
+        異動中間基本送付."帳票出力順序コード",
+        異動中間基本送付."訂正連絡票フラグ",
+        異動中間基本送付."送付年月",
+        異動中間基本送付."訂正区分コード",
+        異動中間基本送付."訂正年月日",
+        異動中間基本送付."市町村コード",
+        異動中間基本送付."資格取得年月日",
+        異動中間基本送付."資格喪失年月日",
+        異動中間基本送付."認定有効期間開始年月日",
+        異動中間基本送付."認定有効期間終了年月日",
+        異動中間基本送付."論理削除フラグ",
+        異動中間基本送付."住所地特例フラグ"
+        FROM "IdouChuukannKihonSofuIttokiTemp" AS 異動中間基本送付
+        WHERE 異動中間基本送付."被保険者番号" = #{被保険者番号}
+        AND 異動中間基本送付."異動年月日" = #{異動年月日}
+    </select>
+    
     <select id="select共同処理用受給者異動基本送付" resultMap="resultMap_KyodoShoriKihonSofuTempEntity" fetchSize="500" resultOrdered="true">
         SELECT
         共同処理用受給者異動基本送付."異動年月日",
@@ -206,8 +256,7 @@
         ORDER BY 共同処理用受給者異動基本送付."異動年月日" DESC
     </select>
     
-    <select id="select異動中間基本送付" resultMap="resultMap_CompareDataTempAEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
+    <select id="select異動中間基本送付" resultMap="resultMap_CompareDataTempAEntity" fetchSize="500" resultOrdered="true">
         SELECT
         異動中間基本送付."異動年月日",
         異動中間基本送付."異動区分コード",
@@ -230,7 +279,8 @@
         異動中間基本送付."資格喪失年月日",
         異動中間基本送付."認定有効期間開始年月日",
         異動中間基本送付."認定有効期間終了年月日",
-        異動中間基本送付."論理削除フラグ"
+        異動中間基本送付."論理削除フラグ",
+        異動中間基本送付."住所地特例フラグ"
         FROM "IdouChuukannKihonSofuIttokiTemp" AS 異動中間基本送付
         ORDER BY 異動中間基本送付."異動年月日" DESC
     </select>
@@ -430,9 +480,9 @@
     </select>
     
     <resultMap id="resultMap_AEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouSofuListTempEntity" autoMapping="true">
-        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="区分" column="区分" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="区分" column="区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="異動年月日" column="異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="要介護度" column="要介護度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="開始認定日" column="開始認定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -476,6 +526,7 @@
         <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="論理削除フラグ" column="論理削除フラグ" />
+        <result property="住所地特例フラグ" column="住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <resultMap id="resultMap_KyodoShoriKihonSofuTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriKihonSofuTempEntity" autoMapping="true">
@@ -589,7 +640,7 @@
         <result property="給付率引下げ開始日" column="給付率引下げ開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="エラーコード" column="エラーコード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="エラー内容" column="エラー内容" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    </resultMap>-->
+    </resultMap>
     
     <select id="select国保連インターフェース管理"
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper.ResultMap_DbT3104KokuhorenInterfaceKanriEntity"
@@ -598,5 +649,75 @@
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper.allColumns_DbT3104KokuhorenInterfaceKanri" />
         FROM
           rgdb."DbT3104KokuhorenInterfaceKanri"
+    </select>
+    
+    <resultMap id="resultMap_DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="idoYMD" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="rirekiNo" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_isDeleted" />
+        <result property="updateCount" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoKubunCode" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_idoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyushaIdoJiyu" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_jukyushaIdoJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="hokenKyufuIchijiSashitomeKaishiYMD" column="hokenKyufuIchijiSashitomeKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hokenKyufuIchijiSashitomeShuryoYMD" column="hokenKyufuIchijiSashitomeShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hokenkyufuIchijiSashitomeKubunCode" column="hokenkyufuIchijiSashitomeKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenkyufuIchijiSashitomeKingaku" column="hokenkyufuIchijiSashitomeKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="teiseiRenrakuhyoFlag" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiRenrakuhyoFlag" />
+        <result property="sofuYM" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="teiseiKubunCode" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teiseiYMD" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_teiseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT3003KyodoShoriyoJukyushaIdoShokanSofu_logicalDeletedFlag" />
+    </resultMap>
+    
+    <select id="select構成市町村情報"
+            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity" 
+            resultOrdered="true">
+        WITH A AS ( 
+            SELECT
+             一時."被保険者番号" AS "被保険者番号"
+            ,一時."異動年月日" AS "異動年月日"
+            ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
+            FROM
+              "IdouChuukannKooGakuIttokiTemp" AS 一時 
+              INNER JOIN rgdb."DbT1001HihokenshaDaicho"
+                ON 一時."被保険者番号" = "DbT1001HihokenshaDaicho"."hihokenshaNo" 
+                AND "DbT1001HihokenshaDaicho"."idoYMD" <![CDATA[<=]]> 一時."異動年月日" 
+                AND "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = FALSE
+          ) 
+          SELECT
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster" />
+          FROM
+            ( 
+              SELECT
+                mst.*
+                ,CASE mst."dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag" WHEN '1' THEN mst."dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode"
+                  ELSE mst."dbT1001HihokenshaDaicho_shichosonCode" 
+                  END AS 対象市町村コード 
+              FROM
+                A AS mst 
+              WHERE
+                NOT EXISTS ( 
+                  SELECT
+                    'x' 
+                  FROM
+                    A AS slv 
+                  WHERE
+                    mst."被保険者番号" = slv."被保険者番号" 
+                    AND mst."異動年月日" <![CDATA[<]]> slv."異動年月日" 
+                    AND (mst."dbT1001HihokenshaDaicho_idoYMD" <![CDATA[<]]> slv."dbT1001HihokenshaDaicho_idoYMD" OR mst."dbT1001HihokenshaDaicho_edaNo" <![CDATA[<]]> slv."dbT1001HihokenshaDaicho_edaNo")
+                )
+            ) AS B 
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
+              ON "DbT7051KoseiShichosonMaster"."shichosonCode" = B.対象市町村コード 
+              AND "DbT7051KoseiShichosonMaster"."gappeiKyuShichosonKubun" = '0'
+              limit(1)
     </select>
 </mapper>

@@ -71,7 +71,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
      */
     public ResponseData<JukyushaIdoRenrakuhyoTorokuPanelDiv> onLoad(JukyushaIdoRenrakuhyoTorokuPanelDiv div) {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).forwardWithEventName(DBC0210011TransitionEventName.検索条件).respond();
+            return ResponseData.of(div).respond();
         }
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
@@ -87,6 +87,13 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
             throw new PessimisticLockingException();
+        }
+        if (handler.get被保険者番号チェック(資格対象者.get被保険者番号())) {
+            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().setDisabled(true);
+            div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(ボタン名, true);
+            return ResponseData.of(div).addMessage(
+                    DbcInformationMessages.受給共通_受給者_事業対象者登録なし.getMessage()).respond();
         }
         div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo()
                 .initialize(新規モード, 資格対象者.get識別コード(), 資格対象者.get被保険者番号(), 0, false, FlexibleDate.getNowDate());
@@ -181,8 +188,11 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         JukyushaIdoRenrakuhyoTorokuPanelHandler handler = getHandler(div);
         if (ZERO.equals(エラー有無)) {
             JukyushaIdoRenrakuhyo result = getDataEdit(被保険者番号, 異動日, div, manager);
-            result.toEntity().setState(EntityDataState.Added);
-            boolean flag = manager.save受給者異動送付(result);
+            boolean falg = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo()
+                    .getChkJukyushaIdoRearakuhyoHakkou().isAllSelected();
+            JukyushaIdoRenrakuhyo resultEntity = result.createBuilderForEdit().set訂正連絡票フラグ(falg).build();
+            resultEntity.toEntity().setState(EntityDataState.Added);
+            boolean flag = manager.save受給者異動送付(resultEntity);
             handler.printLog識別コード更新(資格対象者.get識別コード(), 資格対象者.get被保険者番号().getColumnValue());
             List<RString> チェック状態 = handler.getチェックボックス状態();
             if (flag && !チェック状態.isEmpty()) {

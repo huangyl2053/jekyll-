@@ -82,6 +82,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString NUM1 = new RString("1");
     private static final RString NUM41 = new RString("41");
     private static final RString NUM44 = new RString("44");
+    private static final RString ANTE_MERIDIEM = new RString("AM");
+    private static final RString POST_MERIDIEM = new RString("PM");
+    private static final int NUM_0 = 0;
+    private static final int NUM_2 = 2;
+    private static final int NUM_4 = 4;
     private static final RString 証明書コード1 = new RString("21C1");
     private static final RString 証明書コード2 = new RString("21C2");
     private static final RString 保存確認 = new RString("保存確認");
@@ -98,6 +103,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString 品目コード = new RString("品目コード");
     private static final RString 福祉用具購入費明細情報が0件 = new RString("福祉用具購入費明細情報が0件");
     private static final RString 事業者選択 = new RString("DBC0300011_事業者選択");
+    private static final RString 事業者選択_戻る = new RString("DBC0300011_戻る");
 
     /**
      * onLoad事件
@@ -286,10 +292,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             para.setEndYMD(new RDate(shshResult.get支払期間終了年月日().toString()));
         }
         if (shshResult.get支払窓口開始時間() != null && !shshResult.get支払窓口開始時間().isEmpty()) {
-            para.setStartHHMM(new RTime(shshResult.get支払窓口開始時間()));
+            para.setStartHHMM(setRTime(shshResult.get支払窓口開始時間()));
         }
         if (shshResult.get支払窓口終了時間() != null && !shshResult.get支払窓口終了時間().isEmpty()) {
-            para.setEndHHMM(new RTime(shshResult.get支払窓口終了時間()));
+            para.setEndHHMM(setRTime(shshResult.get支払窓口終了時間()));
         }
         para.setKozaId(shshResult.get口座ID());
         para.setShiharaiBasho(shshResult.get支払場所());
@@ -302,6 +308,20 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
                     para, 修正);
         }
+    }
+
+    private RTime setRTime(RString timeString) {
+        RStringBuilder tempBuilder = new RStringBuilder(timeString);
+        if (!RString.isNullOrEmpty(timeString) && timeString.length() != NUM_4) {
+            if (ANTE_MERIDIEM.equals(timeString.substring(NUM_0, NUM_2)) || POST_MERIDIEM.equals(timeString.substring(NUM_0, NUM_2))) {
+                tempBuilder.insert(NUM_2, BLANK);
+            } else {
+                while (tempBuilder.length() < NUM_4) {
+                    tempBuilder.append(BLANK);
+                }
+            }
+        }
+        return new RTime(tempBuilder.toRString());
     }
 
     /**
@@ -928,11 +948,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onActive(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
         if (事業者選択.equals(イベント名)) {
+            ViewStateHolder.put(ViewStateKeys.状態, div.getMode());
             JuryoininKeiyakuJigyosha tmp = ViewStateHolder.get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
             if (tmp != null) {
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().set契約事業者(tmp.get契約事業者番号());
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().set契約事業者名(tmp.get契約事業者名称());
             }
+        }
+        if (事業者選択_戻る.equals(イベント名)) {
+            ViewStateHolder.put(ViewStateKeys.状態, div.getMode());
         }
         return ResponseData.of(div).respond();
     }
@@ -944,6 +968,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      * @return ResponseData
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnKeiyakuNo(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        div.setMode(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
         ViewStateHolder.put(ViewStateKeys.状態, 参照);
         return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.契約事業者検索).respond();
     }

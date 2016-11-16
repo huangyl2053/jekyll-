@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriKooG
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriShouKannTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.SofuEraRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.setaiyin.SetaiYinEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**
@@ -103,8 +104,9 @@ public interface IHonnSanteiFukaMapper {
      * 異動中間基本送付一時のデータを削除する。
      *
      * @param paramter 異動データ取得トリガ
+     * @return 異動データ情報
      */
-    void update異動中間基本送付一時(HonnsanteiFukaMybatisParamter paramter);
+    List<IdouChuukannKihonSofuTempEntity> update異動中間基本送付一時(HonnsanteiFukaMybatisParamter paramter);
 
     /**
      * 異動データ取得トリガ情報を取得する。
@@ -183,4 +185,11 @@ public interface IHonnSanteiFukaMapper {
      * @return 国保連情報
      */
     List<DbT3104KokuhorenInterfaceKanriEntity> select国保連インターフェース管理();
+
+    /**
+     * 構成市町村情報を取得します。
+     *
+     * @return 構成市町村情報
+     */
+    DbT7051KoseiShichosonMasterEntity select構成市町村情報();
 }

@@ -43,6 +43,8 @@ public class ServiceRiyohyoInfoDivValidator {
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.回数必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.サービス単位必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目)
+                .ifNot(ServiceRiyohyoInfoDivSpec.割引適用後率入力値が不正チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.割引適用後率入力値が不正)
                 .messages());
         return messages;
     }

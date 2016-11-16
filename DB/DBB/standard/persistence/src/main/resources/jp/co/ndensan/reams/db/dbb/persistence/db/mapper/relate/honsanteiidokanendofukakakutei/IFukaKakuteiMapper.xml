@@ -23,6 +23,9 @@ and open the template in the editor.
         Fuka."gemmenGaku" as "減免額",
         Fuka."kakuteiHokenryo" as "確定介護保険料",
         Fuka."koseiM" as "更正月",
+        Fuka."hihokenshaNo" as "被保険者番号",
+        Fuka."choteiNichiji" as "調定日時",
+        Fuka."fukaYMD" as "賦課期日",
         ChoteiKyotsu."choteigaku" as "調定額",
         ChoteiKyotsu."nokigenYMD" as "納期限"
         FROM

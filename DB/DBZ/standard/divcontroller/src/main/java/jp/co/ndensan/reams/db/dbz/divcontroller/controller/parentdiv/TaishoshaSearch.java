@@ -72,6 +72,7 @@ public class TaishoshaSearch {
     private static final ISearchCondition 条件無 = null;
     private static final int 最近処理者検索数 = 1;
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
+    private static final RString MENUID_DBCMN55004 = new RString("DBCMN55004");
 
     /**
      * 「初期化」時の処理です。
@@ -307,9 +308,19 @@ public class TaishoshaSearch {
      * @return ResponseData<TaishoshaSearchDiv>
      */
     public ResponseData<TaishoshaSearchDiv> onClick_Back(TaishoshaSearchDiv div) {
+
         ViewStateHolder.put(ViewStateKeys.モード, null);
         ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, null);
         ViewStateHolder.put(ViewStateKeys.資格対象者, null);
+        RString menuID = ResponseHolder.getMenuID();
+        if (MENUID_DBCMN55004.equals(menuID)) {
+            RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+            if (!RString.isNullOrEmpty(被保険者番号)) {
+                put対象者Key(new TaishoshaKey(new HihokenshaNo(被保険者番号), ShikibetsuCode.EMPTY, SetaiCode.EMPTY));
+            } else {
+                put対象者Key(new TaishoshaKey(HihokenshaNo.EMPTY, ShikibetsuCode.EMPTY, SetaiCode.EMPTY));
+            }
+        }
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
 
@@ -486,13 +497,13 @@ public class TaishoshaSearch {
     private RString to名称(IName name) {
         return name == null ? RString.EMPTY
                 : name.getName() == null ? RString.EMPTY
-                : name.getName().value();
+                        : name.getName().value();
     }
 
     private RString to名称カナ(IName name) {
         return name == null ? RString.EMPTY
                 : name.getKana() == null ? RString.EMPTY
-                : name.getKana().value();
+                        : name.getKana().value();
     }
 
     private RString to生年月日(IDateOfBirth 生年月日) {
@@ -503,19 +514,19 @@ public class TaishoshaSearch {
     private RString to郵便番号(IJusho jusho) {
         return jusho == null ? RString.EMPTY
                 : jusho.get郵便番号() == null ? RString.EMPTY
-                : jusho.get郵便番号().getEditedYubinNo();
+                        : jusho.get郵便番号().getEditedYubinNo();
     }
 
     private RString to住所(IJusho jusho) {
         return jusho == null ? RString.EMPTY
                 : jusho.get住所() == null ? RString.EMPTY
-                : jusho.get住所();
+                        : jusho.get住所();
     }
 
     private RString to番地(IJusho jusho) {
         return jusho == null ? RString.EMPTY
                 : jusho.get番地() == null ? RString.EMPTY
-                : jusho.get番地().getBanchi() == null ? RString.EMPTY
-                : jusho.get番地().getBanchi().value();
+                        : jusho.get番地().getBanchi() == null ? RString.EMPTY
+                                : jusho.get番地().getBanchi().value();
     }
 }

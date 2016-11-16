@@ -57,6 +57,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaUpdateParameter {
     private FlexibleYearMonth 更新後送付年月;
     private RString 更新前データ区分;
     private RString 更新後データ区分;
+    private RString loginId;
     private boolean 更新前論理削除;
     private boolean 更新後論理削除;
     private boolean flag;

@@ -88,9 +88,9 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
     }
 
     private IinTokkiTextA3ReportSource editSource(IinTokkiTextA3ReportSource source) {
-        source.two_hokenshaNo = item.get特記事項保険者番号();
-        source.two_hihokenshaNo = item.get特記事項被保険者番号();
-        source.two_hihokenshaName = item.get名前();
+        source.two_hokenshaNo = RString.EMPTY;
+        source.two_hihokenshaNo = RString.EMPTY;
+        source.two_hihokenshaName = RString.EMPTY;
         source.two_sakuseiGengo = get元号(item.get認定申請年月日());
         source.two_sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);

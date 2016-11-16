@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030.IdouDetaTyuushu
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030.IdouKihonSofuCsvProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030.IdouKihonSofuListProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030.IdouKooGakuSofuListProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030.IdouKoushinnProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030.IdouShouKannSembetsuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030.IdouShouKannSofuListProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030.KokuhorenInterfaceKanrikosinnProcess;
@@ -50,6 +51,7 @@ public class DBC110030_KyodoJukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC11
     private static final String 共同処理異動高額送付一時 = "共同処理異動高額送付一時";
     private static final String 世帯員把握トリガ一時 = "世帯員把握トリガ一時";
     private static final String 異動中間送付一時 = "異動中間送付一時";
+    private static final String 異動中間更新 = "異動中間更新";
     private static final String 異動データ取得トリガ = "異動データ取得トリガ";
     private static final String 送付エラー一時 = "送付エラー一時";
     private static final String 帳票とCSV作成 = "帳票とCSV作成";
@@ -71,6 +73,7 @@ public class DBC110030_KyodoJukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC11
         executeStep(世帯員把握トリガ一時);
         executeStep(CALL_FLOW_DBC110910);
         executeStep(異動中間送付一時);
+        executeStep(異動中間更新);
         executeStep(異動データ取得トリガ);
         executeStep(送付エラー一時);
         executeStep(帳票とCSV作成);
@@ -186,6 +189,16 @@ public class DBC110030_KyodoJukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC11
     @Step(異動中間送付一時)
     protected IBatchFlowCommand create異動中間送付一時プロセス() {
         return loopBatch(IdouShouKannSembetsuProcess.class).arguments(getParameter().toProcessParamter()).define();
+    }
+
+    /**
+     * 異動中間更新データ作成処理です。
+     *
+     * @return IdouShouKannSembetsuProcess
+     */
+    @Step(異動中間更新)
+    protected IBatchFlowCommand create異動中間更新プロセス() {
+        return loopBatch(IdouKoushinnProcess.class).arguments(getParameter().toProcessParamter()).define();
     }
 
     /**

@@ -202,8 +202,9 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onBeforeOpenDialog(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        if (div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey().equals(new RString("default"))
-                || div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().size() == 1) {
+        if ((div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey().equals(new RString("default"))
+                || div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().size() == 1)
+                && !div.getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();

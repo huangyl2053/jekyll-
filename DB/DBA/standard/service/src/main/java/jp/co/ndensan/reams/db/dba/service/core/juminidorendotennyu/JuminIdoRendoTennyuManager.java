@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.KouikiGappeiJyoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
@@ -62,8 +60,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.ZenkokuJushoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -165,7 +161,8 @@ public class JuminIdoRendoTennyuManager {
         転入前Entity.set年齢到達日(FlexibleDate.EMPTY);
         転入前Entity.set年齢(0);
         転入前Entity.set処理対象区分(ShikakuKubun._１号.getコード());
-        boolean 連動保留特定住所フラグ = isRendoHoryuTokuteiJusho(処理対象者.getGenLasdecCode(),
+        JuminIdoRendoShikakuToroku business = new JuminIdoRendoShikakuToroku();
+        boolean 連動保留特定住所フラグ = business.isRendoHoryuTokuteiJusho(処理対象者.getGenLasdecCode(),
                 処理対象者.getChoikiCode(),
                 処理対象者.getBanchiCode1(),
                 処理対象者.getBanchiCode2(),
@@ -335,7 +332,7 @@ public class JuminIdoRendoTennyuManager {
             登録届出日 = 転入前Entity.get年齢到達日();
             年齢到達日 = 転入前Entity.get年齢到達日();
         }
-        if (直近被保データ.getShikakuSoshitsuJiyuCode().equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
+        if (ShikakuSoshitsuJiyu.死亡.getコード().equals(直近被保データ.getShikakuSoshitsuJiyuCode())) {
             転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.転入_取得不能_死亡者.getコード());
             転入処理後Entity.set作成事由(TennyuSakuseiJiyu.死亡喪失.getコード());
             return 転入処理後Entity;
@@ -575,8 +572,6 @@ public class JuminIdoRendoTennyuManager {
             FlexibleDate 登録届出日,
             UaFt200FindShikibetsuTaishoEntity 処理対象者,
             HihokenshaNo 被保険者番号) {
-        HihokenshaDaicho business = new HihokenshaDaicho(被保険者番号, 登録異動日, 枝番);
-        HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setState(EntityDataState.Added);
         entity.setHihokenshaNo(被保険者番号);
@@ -596,7 +591,6 @@ public class JuminIdoRendoTennyuManager {
         entity.setJushochiTokureiFlag(特例フラグ);
         entity.setKoikinaiJushochiTokureiFlag(特例フラグ);
         entity.setLogicalDeletedFlag(false);
-        喪失被保険者list.add(builder.build().toEntity());
         dbT1001Dac.save(entity);
         喪失被保険者list.add(entity);
     }
@@ -1030,21 +1024,6 @@ public class JuminIdoRendoTennyuManager {
             }
         }
         return 資格取得フラグ;
-    }
-
-    /**
-     * 連動保留特定住所判定です。
-     *
-     * @param 現全国地方公共団体コード 市町村コード
-     * @param 町域コード 住所コード
-     * @param 番地コード1 番地コード１
-     * @param 番地コード2 番地コード2
-     * @param 番地コード3 番地コード3
-     * @return 判定結果
-     */
-    public boolean isRendoHoryuTokuteiJusho(LasdecCode 現全国地方公共団体コード, ChoikiCode 町域コード,
-            BanchiCode 番地コード1, BanchiCode 番地コード2, BanchiCode 番地コード3) {
-        return false;
     }
 
     /**

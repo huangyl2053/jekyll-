@@ -93,9 +93,9 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     }
 
     private IinShinsakaishiryoA3ReportSource editSource(IinShinsakaishiryoA3ReportSource source) {
-        source.six_hokenshaNo = item.get特記事項保険者番号();
-        source.six_hihokenshaNo = item.get特記事項被保険者番号();
-        source.six_hihokenshaName = item.get名前();
+        source.six_hokenshaNo = RString.EMPTY;
+        source.six_hihokenshaNo = RString.EMPTY;
+        source.six_hihokenshaName = RString.EMPTY;
         source.six_sakuseiGengo = get元号(item.get認定申請年月日());
         source.six_sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);

@@ -62,9 +62,11 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
     @Override
     public void writeBy(ReportSourceWriter<IinShinsakaishiryoA3ReportSource> reportSourceWriter) {
         for (int i = 0; i < INT_25; i++) {
-            IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group1Editor(shinsakaishiryoList, i);
-            IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
-            reportSourceWriter.writeLine(builder);
+            if (i < shinsakaishiryoList.size()) {
+                IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group1Editor(shinsakaishiryoList, i);
+                IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
+                reportSourceWriter.writeLine(builder);
+            }
         }
         List<TokkiJikou> 短冊情報リスト = new ArrayList<>();
         List<RString> 短冊リスト = new ArrayList<>();

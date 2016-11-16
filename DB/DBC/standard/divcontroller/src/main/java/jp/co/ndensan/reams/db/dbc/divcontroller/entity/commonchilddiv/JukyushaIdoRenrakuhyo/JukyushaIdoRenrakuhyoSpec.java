@@ -25,328 +25,319 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
      * 異動日の必須チェックです。
      */
     異動日の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check異動日の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check異動日の必須(div);
+        }
+    },
     /**
      * 異動区分の必須チェックです。
      */
     異動区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check異動区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check異動区分の必須(div);
+        }
+    },
     /**
      * 異動事由の必須チェックです。
      */
     異動事由の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check異動事由の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check異動事由の必須(div);
+        }
+    },
     /**
      * 被保番号の必須チェックです。
      */
     被保番号の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check被保番号の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check被保番号の必須(div);
+        }
+    },
     /**
      * 資格取得日の必須チェックです。
      */
     資格取得日の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check資格取得日の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check資格取得日の必須(div);
+        }
+    },
     /**
      * 証記載保険者番号の必須チェックです。
      */
     証記載保険者番号の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check証記載保険者番号の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check証記載保険者番号の必須(div);
+        }
+    },
     /**
      * 訂正日の必須チェックです。
      */
     訂正日の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check訂正日の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check訂正日の必須(div);
+        }
+    },
     /**
      * 訂正区分の必須チェックです。
      */
     訂正区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check訂正区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check訂正区分の必須(div);
+        }
+    },
     /**
      * 状態区分の必須チェックです。
      */
     状態区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check状態区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check状態区分の必須(div);
+        }
+    },
     /**
      * 認定期間　Fromの必須チェックです。
      */
     認定期間_Fromの必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check認定期間_Fromの必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check認定期間_Fromの必須(div);
+        }
+    },
     /**
      * 認定期間　Toの必須チェックです。
      */
     認定期間_Toの必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check認定期間_Toの必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check認定期間_Toの必須(div);
+        }
+    },
     /**
      * 申請種別の必須チェックです。
      */
     申請種別の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check申請種別の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check申請種別の必須(div);
+        }
+    },
     /**
      * 変更申請中区分の必須チェックです。
      */
     変更申請中区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check変更申請中区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check変更申請中区分の必須(div);
+        }
+    },
     /**
      * みなし区分の必須チェックです。
      */
     みなし区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.checkみなし区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.checkみなし区分の必須(div);
+        }
+    },
     /**
      * 計画作成区分の必須チェックです。
      */
     計画作成区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check計画作成区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check計画作成区分の必須(div);
+        }
+    },
     /**
      * 減免申請中区分の必須チェックです。
      */
     減免申請中区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check減免申請中区分の必須(div);
-                }
-            },
-    /**
-     * 利用者負担区分の必須チェックです。
-     */
-    利用者負担区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check利用者負担区分の必須(div);
-                }
-            },
-    /**
-     * 標準負担区分の必須チェックです。
-     */
-    標準負担区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check標準負担区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check減免申請中区分の必須(div);
+        }
+    },
     /**
      * 認定申請中区分の必須チェックです。
      */
     認定申請中区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check認定申請中区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check認定申請中区分の必須(div);
+        }
+    },
     /**
      * サービス区分の必須チェックです。
      */
     サービス区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.checkサービス区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.checkサービス区分の必須(div);
+        }
+    },
     /**
      * 特例減額措置対象の必須チェックです。
      */
     特例減額措置対象の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check特例減額措置対象の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check特例減額措置対象の必須(div);
+        }
+    },
     /**
      * 公費負担上限額減額(生活保護等)の必須チェックです。
      */
     公費負担上限額減額_生活保護等の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check公費負担上限額減額_生活保護等の必須(div);
-                }
-            },
-    /**
-     * 二次予防事業区分の必須チェックです。
-     */
-    二次予防事業区分の必須チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check二次予防事業区分の必須(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check公費負担上限額減額_生活保護等の必須(div);
+        }
+    },
     /**
      * (旧訪問通所)　管理適用期間の関連チェックです。
      */
     旧訪問通所_管理適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check旧訪問通所_管理適用期間の関連(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check旧訪問通所_管理適用期間の関連(div);
+        }
+    },
     /**
      * (旧短期入所)　管理適用期間の関連チェックです。
      */
     旧短期入所_管理適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check旧短期入所_管理適用期間の関連(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check旧短期入所_管理適用期間の関連(div);
+        }
+    },
     /**
      * 居宅適用期間の関連チェックです。
      */
     居宅適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check居宅適用期間の関連(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check居宅適用期間の関連(div);
+        }
+    },
     /**
      * 住特適用期間の関連チェックです。
      */
     住特適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !(SpecHelper.check住特適用期間の関連(div) || SpecHelper.check住特適用期間の送付年月関連(div)
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !(SpecHelper.check住特適用期間の関連(div) || SpecHelper.check住特適用期間の送付年月関連(div)
                     || SpecHelper.check住特適用期間の異動日関連(div));
-                }
-            },
+        }
+    },
     /**
      * 利用者負担適用期間の関連チェックです。
      */
     利用者負担適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check利用者負担適用期間の関連(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check利用者負担適用期間の関連(div);
+        }
+    },
     /**
      * 社会福祉法人軽減情報適用期間の関連チェックです。
      */
     社会福祉法人軽減情報適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !(SpecHelper.check社会福祉法人軽減情報適用期間の関連(div)
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !(SpecHelper.check社会福祉法人軽減情報適用期間の関連(div)
                     || SpecHelper.check社会福祉法人軽減情報適用期間の送付年月関連(div)
                     || SpecHelper.check社会福祉法人軽減情報適用期間の異動日関連(div));
-                }
-            },
+        }
+    },
+    /**
+     * 標準負担と異動日の関連チェックです。
+     */
+    標準負担と異動日の関連チェック {
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check標準負担と異動日の関連(div);
+        }
+    },
     /**
      * 標準負担適用期間の関連チェックです。
      */
     標準負担適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check標準負担適用期間の関連(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check標準負担適用期間の関連(div);
+        }
+    },
     /**
      * 食費限度額適用期間の関連チェックです。
      */
     食費限度額適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !(SpecHelper.check食費限度額適用期間の関連(div) || SpecHelper.check食費限度額適用期間の送付年月関連(div)
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !(SpecHelper.check食費限度額適用期間の関連(div) || SpecHelper.check食費限度額適用期間の送付年月関連(div)
                     || SpecHelper.check食費限度額適用期間の異動日関連(div));
-                }
-            },
+        }
+    },
     /**
      * 償還払化期間の関連チェックです。
      */
     償還払化期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check償還払化期間の関連(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check償還払化期間の関連(div);
+        }
+    },
     /**
      * 給付率引下げ期間の関連チェックです。
      */
     給付率引下げ期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !SpecHelper.check給付率引下げ期間の関連(div);
-                }
-            },
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check給付率引下げ期間の関連(div);
+        }
+    },
     /**
      * 二割負担事業適用期間の関連チェックです。
      */
     二割負担事業適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !(SpecHelper.check二割負担事業適用期間の関連(div) || SpecHelper.check二割負担事業適用期間の送付年月関連(div)
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !(SpecHelper.check二割負担事業適用期間の関連(div) || SpecHelper.check二割負担事業適用期間の送付年月関連(div)
                     || SpecHelper.check二割負担事業適用期間の異動日関連(div));
-                }
-            },
+        }
+    },
     /**
      * 二次予防事業適用期間の関連チェックです。
      */
     二次予防事業適用期間の関連チェック {
-                @Override
-                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
-                    return !(SpecHelper.check二次予防事業適用期間の関連(div) || SpecHelper.check二次予防事業適用期間の送付年月関連(div)
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !(SpecHelper.check二次予防事業適用期間の関連(div) || SpecHelper.check二次予防事業適用期間の送付年月関連(div)
                     || SpecHelper.check二次予防事業適用期間の異動日関連(div));
-                }
-            };
+        }
+    },
+    /**
+     * 認定負担限度額の関連チェックです。
+     */
+    認定負担限度額の関連チェック {
+        @Override
+        public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+            return !SpecHelper.check認定負担限度額の関連(div);
+        }
+    };
 
     private static class SpecHelper {
 
         private static final RString 空KEY = new RString("space");
-
+        private static final RString THREE = new RString("3");
         private static final RString 画面ID_DBC0220012 = new RString("DBCMN81002");
 
         /**
@@ -580,7 +571,10 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean checkサービス区分の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString サービス区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                     getRadTokuteiNyushoshaKaigoServiceKubun().getSelectedKey();
-            return (RString.isNullOrEmpty(サービス区分) || 空KEY.equals(サービス区分));
+            return ((RString.isNullOrEmpty(サービス区分) || 空KEY.equals(サービス区分))
+                    && THREE.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                            getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())
+                    && ("shinki".equals(div.getMode_DisplayMode().toString()) || "teisei".equals(div.getMode_DisplayMode().toString())));
         }
 
         /**
@@ -592,7 +586,10 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean check特例減額措置対象の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 特例減額措置対象 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                     getRadKaizeisoTokureiGengakuSochiTaishoFlag().getSelectedKey();
-            return (RString.isNullOrEmpty(特例減額措置対象) || 空KEY.equals(特例減額措置対象));
+            return ((RString.isNullOrEmpty(特例減額措置対象) || 空KEY.equals(特例減額措置対象))
+                    && THREE.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                            getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())
+                    && ("shinki".equals(div.getMode_DisplayMode().toString()) || "teisei".equals(div.getMode_DisplayMode().toString())));
         }
 
         /**
@@ -604,17 +601,6 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         public static boolean check公費負担上限額減額_生活保護等の必須(JukyushaIdoRenrakuhyoDiv div) {
             RString 公費負担上限額減額_生活保護 = div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().getSelectedKey();
             return (RString.isNullOrEmpty(公費負担上限額減額_生活保護) || 空KEY.equals(公費負担上限額減額_生活保護));
-        }
-
-        /**
-         * 二次予防事業区分の必須です。
-         *
-         * @param div JukyushaIdoRenrakuhyoDiv
-         * @return 「false」エラー 「true」正常
-         */
-        public static boolean check二次予防事業区分の必須(JukyushaIdoRenrakuhyoDiv div) {
-            RString 二次予防事業区分 = div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().getSelectedKey();
-            return (RString.isNullOrEmpty(二次予防事業区分) || 空KEY.equals(二次予防事業区分));
         }
 
         /**
@@ -732,6 +718,33 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
             return (異動日 != null && !異動日.toString().isEmpty() && 異動日.isBefore(new FlexibleDate(check年月.toString())))
                     && 期間いずれか設定チェック(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                             getJukyushaIdoRenrakuhyoFukushiHojinKeigen().getTxtKeigenritsuTekiyoYMD());
+        }
+
+        /**
+         * 標準負担と異動日の関連チェックです。
+         *
+         * @param div JukyushaIdoRenrakuhyoDiv
+         * @return 「false」エラー 「true」正常
+         */
+        public static boolean check標準負担と異動日の関連(JukyushaIdoRenrakuhyoDiv div) {
+
+            FlexibleDate 異動日 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue();
+            RString 標準負担区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                    getJukyushaIdoRenrakuhyoHyojunFutan().getRadHyojunFutanKubun().getSelectedKey();
+            RString 標準負担額 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                    getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangaku().getText();
+            RString 標準適用期間From = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                    getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getFromText();
+            RString 標準適用期間To = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                    getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getToText();
+            RDate check年月 = new RDate("平成17年9月30日");
+
+            return ("shinki".equals(div.getMode_DisplayMode().toString()) || "teisei".equals(div.getMode_DisplayMode().toString()))
+                    && (異動日 != null && !異動日.toString().isEmpty() && 異動日.isAfter(new FlexibleDate(check年月.toString())))
+                    && ((!RString.isNullOrEmpty(標準負担区分) && !空KEY.equals(標準負担区分))
+                    || !RString.isNullOrEmpty(標準負担額)
+                    || !RString.isNullOrEmpty(標準適用期間From)
+                    || !RString.isNullOrEmpty(標準適用期間To));
         }
 
         /**
@@ -874,6 +887,38 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
             RDate check年月 = new RDate("平成24年3月31日");
             return (異動日 != null && !異動日.toString().isEmpty() && 異動日.isBefore(new FlexibleDate(check年月.toString())))
                     && 期間いずれか設定チェック(div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange());
+        }
+
+        /**
+         * check認定負担限度額の関連チェックです。
+         *
+         * @param div JukyushaIdoRenrakuhyoDiv
+         * @return 「false」エラー 「true」正常
+         */
+        public static boolean check認定負担限度額の関連(JukyushaIdoRenrakuhyoDiv div) {
+
+            RString 食費負担限度額 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtShokuhiFutanGendogaku().getText();
+            RString 従来型個室 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuTokuyoFutanGendogaku().getText();
+            RString 老健_療養 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().getText();
+            RString 多床室 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtTashoshitsu().getText();
+            RString ユニット型個室 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitKoshitsuGendogaku().getText();
+            RString ユニット型準個室 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitJunKoshitsuFutanGendogaku().getText();
+
+            return ("shinki".equals(div.getMode_DisplayMode().toString()) || "teisei".equals(div.getMode_DisplayMode().toString()))
+                    && THREE.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                            getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())
+                    && (!RString.isNullOrEmpty(食費負担限度額)
+                    || !RString.isNullOrEmpty(従来型個室)
+                    || !RString.isNullOrEmpty(老健_療養)
+                    || !RString.isNullOrEmpty(多床室)
+                    || !RString.isNullOrEmpty(ユニット型個室)
+                    || !RString.isNullOrEmpty(ユニット型準個室));
         }
 
         private static boolean 期間関連チェック(TextBoxDateRange textBoxDateRange) {

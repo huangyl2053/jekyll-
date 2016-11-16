@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 送付対象リスト一時テーブルEntity項目定義クラスです。
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-@OnNextSchema("rgdb")
 public class IdouSofuListTempEntity extends DbTableEntityBase<IdouSofuListTempEntity> implements IDbAccessable {
 
     private RString 被保険者番号;

@@ -94,6 +94,12 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSVファイル名_なし = new RString("-");
     private static final RString CSVファイル名_あり = new RString("介護保険所得情報一覧表");
+    private static final RString 市町村コードRSTRING = new RString("市町村コード:");
+    private static final RString 市町村名RSTRING = new RString("市町村名:");
+    private static final RString 処理状態 = new RString("処理状態:");
+    private static final RString 表示用処理状態 = new RString("表示用処理状態:");
+    private static final RString 最新処理日時 = new RString("最新処理日時:");
+    private static final RString 処理区分RSTRING = new RString("処理区分:");
 
     private ShutokuJohoShuchutsuRenkeiProcessParameter processParameter;
     private IOutputOrder 出力順情報;
@@ -162,7 +168,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         KaigoHokenShotokuJohoIchiranReport report = new KaigoHokenShotokuJohoIchiranReport(item, 導入形態コード, 市町村コード, 市町村名称,
                 並び順リスト, 改頁リスト, association, 連番);
         report.writeBy(reportSourceWriter);
-        連番 = 連番 + 1;
+        連番 += 1;
         ShotokuJohoIchiranCSVEntity csvEntity = getCsvEntity(entity);
         eucCsvWriter.writeLine(csvEntity);
     }
@@ -219,12 +225,22 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
                 RString 処理日時R = 処理日時 == null || 処理日時.isEmpty() ? RString.EMPTY
                         : 処理日時.getDate().toDateString().concat(RString.FULL_SPACE)
                         .concat(処理日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-                RString 出力条件 = 出力_市町村情報リスト.concat(市町村コードR).concat(コンマ)
-                        .concat(市町村情報.get市町村名()).concat(コンマ)
-                        .concat(市町村情報.get処理状態()).concat(コンマ)
-                        .concat(市町村情報.get表示用処理状態()).concat(コンマ)
-                        .concat(処理日時R).concat(コンマ)
-                        .concat(市町村情報.get処理区分());
+                RString 出力条件 = 出力_市町村情報リスト.concat(市町村コードRSTRING).concat(市町村コードR);
+                if (市町村情報.get市町村名() != null) {
+                    出力条件 = 出力条件.concat(コンマ).concat(市町村名RSTRING).concat(市町村情報.get市町村名());
+                }
+                if (市町村情報.get処理状態() != null) {
+                    出力条件 = 出力条件.concat(コンマ).concat(処理状態).concat(市町村情報.get処理状態());
+                }
+                if (市町村情報.get処理区分() != null) {
+                    出力条件 = 出力条件.concat(コンマ).concat(処理区分RSTRING).concat(市町村情報.get処理区分());
+                }
+                if (市町村情報.get表示用処理状態() != null) {
+                    出力条件 = 出力条件.concat(コンマ).concat(表示用処理状態).concat(市町村情報.get表示用処理状態());
+                }
+                if (処理日時R != null) {
+                    出力条件 = 出力条件.concat(コンマ).concat(最新処理日時).concat(処理日時R);
+                }
                 出力条件リスト.add(出力条件);
             }
         }

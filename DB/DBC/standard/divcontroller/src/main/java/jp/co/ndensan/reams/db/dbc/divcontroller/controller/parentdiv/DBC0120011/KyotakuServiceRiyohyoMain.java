@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KyotakuKeikakuTodokedeManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -258,6 +259,7 @@ public class KyotakuServiceRiyohyoMain {
         }
         div.getCcdServiceRiyohyoInfo().init保存処理(居宅総合事業区分, サービス利用票情報);
         RealInitialLocker.release(key);
+        div.getCcdKanryoMessage().setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBC0120011StateName.完了);
     }
 
@@ -286,6 +288,7 @@ public class KyotakuServiceRiyohyoMain {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getCcdServiceRiyohyoInfo().DB削除処理(居宅総合事業区分, 短期入所情報);
                 RealInitialLocker.release(key);
+                div.getCcdKanryoMessage().setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBC0120011StateName.完了);
             }
         } else {
@@ -299,6 +302,7 @@ public class KyotakuServiceRiyohyoMain {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getCcdServiceRiyohyoInfo().DB削除処理(居宅総合事業区分, 短期入所情報);
                 RealInitialLocker.release(key);
+                div.getCcdKanryoMessage().setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBC0120011StateName.完了);
             }
         }
@@ -342,6 +346,7 @@ public class KyotakuServiceRiyohyoMain {
         }
         div.getCcdServiceRiyohyoInfo().init保存処理(居宅総合事業区分, サービス利用票情報);
         RealInitialLocker.release(key);
+        div.getCcdKanryoMessage().setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBC0120011StateName.完了);
     }
 

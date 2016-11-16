@@ -161,7 +161,7 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
         高額介護サービス費判定エラーEntity.set識別コード(entity.get識別コード());
         高額介護サービス費判定エラーEntity.setサービス提供年月(entity.getサービス提供年月());
         高額介護サービス費判定エラーEntity.set世帯コード(getColumnValue(entity.get世帯コード()));
-        if (RString.isNullOrEmpty(entity.getエラーコード())) {
+        if (!RString.isNullOrEmpty(entity.getエラーコード())) {
             高額介護サービス費判定エラーEntity.setエラーコード(KogakuServicehiKyufugakuCalc_ErrorKubun.toValue(entity.getエラーコード()).get名称());
         }
         高額介護サービス費判定エラーEntity.set世帯員識別コード(getColumnValue(entity.get世帯員識別コード()));
@@ -215,7 +215,9 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
             csvEntity.setサービス提供年月(サービス提供年月.toDateString());
         }
         csvEntity.set被保険者名(getColumnValue(entity.get被保険者名()));
-        csvEntity.setエラーコード(entity.getエラーコード());
+        if (!RString.isNullOrEmpty(entity.getエラーコード())) {
+            csvEntity.setエラーコード(KogakuServicehiKyufugakuCalc_ErrorKubun.toValue(entity.getエラーコード()).get名称());
+        }
         csvEntity.set世帯コード(getColumnValue(entity.get世帯コード()));
         csvEntity.set世帯員識別コード(getColumnValue(entity.get世帯員識別コード()));
 
@@ -266,15 +268,15 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
                 if (setSortItem.is改頁項目()) {
                     改頁項目リスト.add(setSortItem.get項目名());
                 }
-                if (i == INT_0) {
+                if (i == INT_1) {
                     並び順の１件目 = setSortItem.get項目名();
-                } else if (i == INT_1) {
-                    並び順の２件目 = setSortItem.get項目名();
                 } else if (i == INT_2) {
-                    並び順の３件目 = setSortItem.get項目名();
+                    並び順の２件目 = setSortItem.get項目名();
                 } else if (i == INT_3) {
-                    並び順の４件目 = setSortItem.get項目名();
+                    並び順の３件目 = setSortItem.get項目名();
                 } else if (i == INT_4) {
+                    並び順の４件目 = setSortItem.get項目名();
+                } else if (i == INT_5) {
                     並び順の５件目 = setSortItem.get項目名();
                 }
             }

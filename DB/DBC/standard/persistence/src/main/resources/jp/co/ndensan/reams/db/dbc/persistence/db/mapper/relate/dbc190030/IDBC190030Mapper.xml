@@ -22,14 +22,21 @@
                 INNER JOIN rgdb."DbT4001JukyushaDaicho" AS B
                 ON A."hihokenshaNo" = B."hihokenshaNo"
                 WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
-                AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                AND (#{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                     OR A."shikakuSoshitsuYMD" IS NULL 
+                     OR A."shikakuSoshitsuYMD" = ''
+                    )
                 UNION																							
                 SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
                 FROM rgdb."DbV1001HihokenshaDaicho" AS A
                 INNER JOIN rgdb."DbT3100NijiYoboJigyoTaishosha" AS C
                 ON A."hihokenshaNo" = C."hihokenshaNo"
                 WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
-                AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD") AS A
+                AND (#{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                     OR A."shikakuSoshitsuYMD" IS NULL 
+                     OR A."shikakuSoshitsuYMD" = ''
+                   )
+                ) AS A
             ORDER BY A.TEMP_hihokenshaNo
     </select>
     
@@ -39,7 +46,10 @@
         SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
         FROM rgdb."DbT1001HihokenshaDaicho" AS A
         WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
-        AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+        AND (#{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+             OR A."shikakuSoshitsuYMD" IS NULL 
+             OR A."shikakuSoshitsuYMD" = ''
+            )
         ORDER BY A."hihokenshaNo"
     </select>
     
@@ -53,14 +63,21 @@
                 INNER JOIN rgdb."DbT4001JukyushaDaicho" AS B
                 ON A."hihokenshaNo" = B."hihokenshaNo"
                 WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
-                AND #{世帯員把握基準日2} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                AND (#{世帯員把握基準日2} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                     OR A."shikakuSoshitsuYMD" IS NULL 
+                     OR A."shikakuSoshitsuYMD" = ''
+                    )
                 UNION																							
                 SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
                 FROM rgdb."DbV1001HihokenshaDaicho" AS A
                 INNER JOIN rgdb."DbT3100NijiYoboJigyoTaishosha" AS C
                 ON A."hihokenshaNo" = C."hihokenshaNo"
                 WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
-                AND #{世帯員把握基準日2}<![CDATA[<]]>A."shikakuSoshitsuYMD") AS A
+                AND (#{世帯員把握基準日2}<![CDATA[<]]>A."shikakuSoshitsuYMD"
+                     OR A."shikakuSoshitsuYMD" IS NULL 
+                     OR A."shikakuSoshitsuYMD" = ''
+                    )
+                ) AS A
             ORDER BY A.TEMP_hihokenshaNo
     </select>
     
