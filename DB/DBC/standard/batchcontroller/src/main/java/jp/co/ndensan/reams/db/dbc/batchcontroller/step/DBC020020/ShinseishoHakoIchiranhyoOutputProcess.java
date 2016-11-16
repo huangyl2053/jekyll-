@@ -14,8 +14,11 @@ import jp.co.ndensan.reams.db.dbc.business.report.kogakujigyoshinseishohakkoichi
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.ShinseishoHakkoIchiranhyoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200017.KogakuShikyuShinseishoHakkoIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -80,6 +83,7 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
     private BatchReportWriter<KogakuShikyuShinseishoHakkoIchiranSource> batchReportWriter;
     private ReportSourceWriter<KogakuShikyuShinseishoHakkoIchiranSource> reportSourceWriter;
 
+    private RString 保険者情報_保険者名称;
     private RString csvFileName;
     private FileSpoolManager manager;
     private IOutputOrder 出力順;
@@ -102,6 +106,9 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
                 concat(parameter.getSakuseibi().toString()).concat(CSV);
         出力順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100011.getReportId(), parameter.getShutsuryokujunId());
+
+        保険者情報_保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (出力順 != null) {
             parameter.setOrderBy(MyBatisOrderByClauseCreator.create(
                     KogakuShikyuShinseishoHakkoIchiranOrder.class, 出力順).replace(ORDER_BY, RString.EMPTY));
@@ -141,7 +148,7 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
         param.set出力順(出力順);
         param.set連番(new RString(count));
         param.setシステム日付(システム日付);
-        param.set市町村名(entity.get市町村名称());
+        param.set市町村名(保険者情報_保険者名称);
         KogakuShikyuShinseishoHakkoIchiranReport report = new KogakuShikyuShinseishoHakkoIchiranReport(param);
         report.writeBy(reportSourceWriter);
         csvWriter.writeLine(new ShinseishoHakkoIchiranhyoCsvEntity(
@@ -172,6 +179,21 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
 
     @Override
     protected void afterExecute() {
+        if (count == 1) {
+            KogakuJigyoShinseishoHakkoIchiranParamter param = new KogakuJigyoShinseishoHakkoIchiranParamter();
+            ShinseiJohoChohyoTempEntity 申請情報 = new ShinseiJohoChohyoTempEntity();
+            申請情報.setJushoChohyo(new AtenaJusho(new RString("該当者なし")));
+            申請情報.setKyuSochishaFlagChohyo(false);
+            申請情報.setHojinKeigenTaishoFlagChohyo(false);
+            申請情報.setJidoShokanTaishoFlagChohyo(false);
+            param.set帳票出力対象データ(申請情報);
+            param.set出力順(出力順);
+            param.set連番(new RString(count));
+            param.setシステム日付(システム日付);
+            param.set市町村名(保険者情報_保険者名称);
+            KogakuShikyuShinseishoHakkoIchiranReport report = new KogakuShikyuShinseishoHakkoIchiranReport(param);
+            report.writeBy(reportSourceWriter);
+        }
         csvWriter.close();
         manager.spool(SubGyomuCode.DBC介護給付, csvFileName);
     }
