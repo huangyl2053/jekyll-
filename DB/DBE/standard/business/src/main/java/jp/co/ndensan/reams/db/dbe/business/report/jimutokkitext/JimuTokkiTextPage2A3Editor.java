@@ -106,7 +106,8 @@ public class JimuTokkiTextPage2A3Editor implements IJimuTokkiTextA3Editor {
         source.two_chosaMM = new RString(システム日付.getMonthValue());
         source.two_chosaDD = new RString(システム日付.getDayValue());
         source.two_shinseiGengo = get元号(item.get認定調査実施年月日());
-        source.two_shinseiYY = get年(item.get認定調査実施年月日());
+        source.two_shinseiYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
+                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
         source.two_shinseiMM = new RString(item.get認定調査実施年月日().getMonthValue());
         source.two_shinseiDD = new RString(item.get認定調査実施年月日().getDayValue());
         source.two_shinsaGengo = get元号(item.get介護認定審査会開催年月日());

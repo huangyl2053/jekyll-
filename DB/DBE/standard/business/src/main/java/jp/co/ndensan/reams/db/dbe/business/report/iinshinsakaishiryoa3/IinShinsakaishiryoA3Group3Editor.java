@@ -108,7 +108,8 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
         source.six_chosaMM = new RString(システム日付.getMonthValue());
         source.six_chosaDD = new RString(システム日付.getDayValue());
         source.six_shinseiGengo = get元号(item.get認定調査実施年月日());
-        source.six_shinseiYY = get年(item.get認定調査実施年月日());
+        source.six_shinseiYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
+                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
         source.six_shinseiMM = new RString(item.get認定調査実施年月日().getMonthValue());
         source.six_shinseiDD = new RString(item.get認定調査実施年月日().getDayValue());
         source.six_shinsaGengo = get元号(item.get介護認定審査会開催年月日());
