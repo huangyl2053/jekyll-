@@ -48,7 +48,7 @@
             ,受給者台帳."ninteiYukoKikanShuryoYMD" AS DbT4001_ninteiYukoKikanShuryoYMD
             ,受給者台帳."ninteiYMD" AS DbT4001_ninteiYMD
             ,受給者台帳."shichosonCode" AS DbT4001_shichosonCode
-            "ShikibetsuTaisho"."banchiCode1"||"ShikibetsuTaisho"."banchiCode2"||"ShikibetsuTaisho"."banchiCode3"||"ShikibetsuTaisho"."banchiCode4" AS "atesaki_banchiCode"
+            ,"ShikibetsuTaisho"."banchiCode1"||"ShikibetsuTaisho"."banchiCode2"||"ShikibetsuTaisho"."banchiCode3"||"ShikibetsuTaisho"."banchiCode4" AS "atesaki_banchiCode"
             , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
             ,被保険者台帳."shikibetsuCode" AS DbT1001_shikibetsuCode
             ,被保険者台帳."shikakuShutokuYMD" AS DbT1001_shikakuShutokuYMD
