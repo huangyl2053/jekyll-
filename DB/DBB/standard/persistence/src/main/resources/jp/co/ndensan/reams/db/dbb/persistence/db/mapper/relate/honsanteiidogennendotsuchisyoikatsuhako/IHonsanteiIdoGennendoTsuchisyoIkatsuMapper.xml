@@ -819,7 +819,9 @@
          "uaT0303KinyuKikanShiten_kanaName" character varying(150),
          "uaT0303KinyuKikanShiten_hyojijun" integer,
          "更正前情報有無区分" character varying(1) DEFAULT 0,
-         "生活保護区分" character varying(1) DEFAULT 0
+         "生活保護区分" character varying(1) DEFAULT 0,
+         "特徴8月開始者区分" character varying(1),
+         "特徴10月開始者区分" character varying(1)
         )
     </insert>
     
@@ -2558,7 +2560,9 @@
             koza."uaT0303KinyuKikanShiten_kanaName",
             koza."uaT0303KinyuKikanShiten_hyojijun",
             '0',
-            '0'
+            '0',
+            '',
+            ''
         FROM 
           rgdb."DbT2015KeisangoJoho" AS 計算後情報
           INNER JOIN 
@@ -3279,7 +3283,9 @@
             koza."uaT0303KinyuKikanShiten_kanaName",
             koza."uaT0303KinyuKikanShiten_hyojijun",
             '0',
-            '0'
+            '0',
+            '',
+            ''
         FROM 
           "DbT2015KeisangoJohoTemp" AS 計算後情報
           INNER JOIN 
@@ -3666,6 +3672,23 @@
         WHERE A."dbT2015KeisangoJoho_seihoKaishiYMD" IS NOT NULL
               AND A."dbT2015KeisangoJoho_seihoKaishiYMD" <![CDATA[!=]]> ''
     </update>
+    
+    <update id="update特徴8月開始者区分">
+        UPDATE "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS A
+        SET 
+         "特徴8月開始者区分" = '1'
+        WHERE A."dbT2015KeisangoJoho_choshuHoho7gatsu" NOT IN('1','2')
+              AND A."dbT2015KeisangoJoho_choshuHoho8gatsu" IN('1','2')
+    </update>
+    
+    <update id="update特徴10月開始者区分">
+        UPDATE "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS A
+        SET 
+         "特徴10月開始者区分" = '1'
+        WHERE A."dbT2015KeisangoJoho_choshuHoho9gatsu" NOT IN('1','2')
+              AND A."dbT2015KeisangoJoho_choshuHoho10gatsu" IN('1','2')
+    </update>
+    
 
     <resultMap id="ResultMap_DbT2002FukaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity" autoMapping="false">
         <id property="choteiNendo" column="dbT2002FukaBefore_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -3835,6 +3858,8 @@
         <id column="dbT2015KeisangoJoho_sakuseiShoriName"/>
         <result property="更正前情報有無区分" column="更正前情報有無区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="生活保護区分" column="生活保護区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特徴8月開始者区分" column="特徴8月開始者区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特徴10月開始者区分" column="特徴10月開始者区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報_更正後" resultMap="ResultMap_DbT2015KeisangoJohoEntity_after"/>
         <association property="計算後情報_更正前" resultMap="ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="対象者_追加含む_情報_更正後" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity_after"/>
@@ -3847,7 +3872,8 @@
     <select resultOrdered="true" id="select全件賦課情報" resultMap="resultMap_HonsanteiTsuchishoTemp"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS A
         WHERE 1=1
@@ -4388,7 +4414,8 @@
     <select resultOrdered="true" id="select全件賦課情報_決定" resultMap="resultMap_HonsanteiTsuchishoTemp"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS A
         WHERE
@@ -4399,7 +4426,8 @@
     <select resultOrdered="true" id="select全件賦課情報_変更" resultMap="resultMap_HonsanteiTsuchishoTemp"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS A
         WHERE
@@ -4474,7 +4502,8 @@
     <select resultOrdered="true" id="select全件賦課情報_納入" resultMap="resultMap_HonsanteiTsuchishoTemp"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidogennendotsuchisyoikatsuhako.IdoNonyuTsuchishoParameter" fetchSize="500">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS A
         WHERE 

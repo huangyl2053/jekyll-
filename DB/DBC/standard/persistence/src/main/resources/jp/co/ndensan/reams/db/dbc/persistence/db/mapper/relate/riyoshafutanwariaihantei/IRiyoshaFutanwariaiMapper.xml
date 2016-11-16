@@ -1433,6 +1433,8 @@
         <id column="HanteiTaishoshaTemp_shikibetsuCode"  />
         <id column="HanteiTaishoshaTemp_setaiCode"  />
         <id column="SetainJohoTemp_shikibetsuCode"  />
+        <id column="SetainJohoTemp_taishoTsuki" />
+        <id column="SetainJohoTemp_hihokenshaNo" />
         <result property="判定基準日" column="hanteiKijunYMD"
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <association property="判定対象者" 
@@ -1446,6 +1448,7 @@
         <id column="SetainJohoTemp_taishoTsuki"  />
         <id column="SetainJohoTemp_setaiCode"  />
         <id column="SetainJohoTemp_shikibetsuCode"  />
+        <id column="SetainJohoTemp_hihokenshaNo" />
         <association property="世帯員情報" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainJohoTempMapper.ResultMap_SetainJohoTempEntity" />
         <association property="介護所得情報" 

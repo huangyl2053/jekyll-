@@ -151,7 +151,20 @@ public class TokubetsuChoshuKaishiSource implements IReportSource {
         listLower_8,
         listLower_9,
         listLower_10,
-        listLower_11
+        listLower_11,
+        choikiCode,
+        gyoseikuCode,
+        chikuCode1,
+        chikuCode2,
+        chikuCode3,
+        shikibetsuCode,
+        kanaMeisho,
+        hihokenshaNo,
+        nenkinCode,
+        nokumiCode,
+        seihoFlag,
+        tokuchoKaishi10,
+        banchiCode
     }
 // </editor-fold>
 }
