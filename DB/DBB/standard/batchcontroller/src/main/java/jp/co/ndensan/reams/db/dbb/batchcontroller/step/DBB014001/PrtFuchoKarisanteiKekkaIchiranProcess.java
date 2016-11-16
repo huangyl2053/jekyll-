@@ -356,7 +356,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         出力条件.add(TITLE_調定年度.concat(dateFormat308(parameter.get調定年度())).concat(定数_年度));
         出力条件.add(TITLE_賦課年度.concat(dateFormat308(parameter.get賦課年度())).concat(定数_年度));
         if (出力順 != null) {
-            出力条件.add(出力順.getFormated出力順名());
+            出力条件.add(出力順.getFormated出力順項目());
         }
         return 出力条件;
     }

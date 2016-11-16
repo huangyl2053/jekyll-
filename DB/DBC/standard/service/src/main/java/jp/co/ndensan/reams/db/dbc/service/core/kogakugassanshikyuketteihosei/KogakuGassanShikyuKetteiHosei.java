@@ -344,7 +344,7 @@ public class KogakuGassanShikyuKetteiHosei {
             新規data.setShikyuShinseiSeiriNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後支給申請書整理番号());
             新規data.setSeiriNo(整理番号);
             新規data.setJikoFutanSeiriNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後自己負担額証明書整理番号());
-            新規data.setHokenSeidoCode(KaigoGassan_HokenSeido.国保.getCode());
+            新規data.setHokenSeidoCode(KaigoGassan_HokenSeido.介護.getCode());
             新規data.setKyufuJissekiSakuseiKubunCode(ONE);
             新規data.setShoKisaiHokenshaNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後証記載保険者番号());
             新規data.setShinseiYMD(画面DIV.getUpdate合算給付実績パラメータ().get更新後申請年月日());

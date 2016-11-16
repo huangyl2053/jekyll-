@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -43,6 +44,8 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     private TextBox txtSeibetsu;
     @JsonProperty("txtSeinengappi")
     private TextBoxDate txtSeinengappi;
+    @JsonProperty("lin01")
+    private HorizontalLine lin01;
     @JsonProperty("txtTeikyoNengetsu")
     private TextBoxDate txtTeikyoNengetsu;
     @JsonProperty("txtJissekiKubun")
@@ -55,12 +58,12 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     private TextBox txtShokisaiHokenshaNo;
     @JsonProperty("txtYoshikiNo")
     private TextBox txtYoshikiNo;
-    @JsonProperty("txtYoshikiMeisho")
-    private TextBox txtYoshikiMeisho;
-    @JsonProperty("txtJigyoshaNo")
-    private TextBox txtJigyoshaNo;
     @JsonProperty("txtJigyosha")
     private TextBox txtJigyosha;
+    @JsonProperty("txtJigyoshaNo")
+    private TextBox txtJigyoshaNo;
+    @JsonProperty("txtYoshikiMeisho")
+    private TextBox txtYoshikiMeisho;
     @JsonProperty("hiddenJigyoshaCode")
     private RString hiddenJigyoshaCode;
     @JsonProperty("hiddenYoshikiNo")
@@ -201,6 +204,24 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
+     * getlin01
+     * @return lin01
+     */
+    @JsonProperty("lin01")
+    public HorizontalLine getLin01() {
+        return lin01;
+    }
+
+    /*
+     * setlin01
+     * @param lin01 lin01
+     */
+    @JsonProperty("lin01")
+    public void setLin01(HorizontalLine lin01) {
+        this.lin01 = lin01;
+    }
+
+    /*
      * gettxtTeikyoNengetsu
      * @return txtTeikyoNengetsu
      */
@@ -309,21 +330,21 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
-     * gettxtYoshikiMeisho
-     * @return txtYoshikiMeisho
+     * gettxtJigyosha
+     * @return txtJigyosha
      */
-    @JsonProperty("txtYoshikiMeisho")
-    public TextBox getTxtYoshikiMeisho() {
-        return txtYoshikiMeisho;
+    @JsonProperty("txtJigyosha")
+    public TextBox getTxtJigyosha() {
+        return txtJigyosha;
     }
 
     /*
-     * settxtYoshikiMeisho
-     * @param txtYoshikiMeisho txtYoshikiMeisho
+     * settxtJigyosha
+     * @param txtJigyosha txtJigyosha
      */
-    @JsonProperty("txtYoshikiMeisho")
-    public void setTxtYoshikiMeisho(TextBox txtYoshikiMeisho) {
-        this.txtYoshikiMeisho = txtYoshikiMeisho;
+    @JsonProperty("txtJigyosha")
+    public void setTxtJigyosha(TextBox txtJigyosha) {
+        this.txtJigyosha = txtJigyosha;
     }
 
     /*
@@ -345,21 +366,21 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
-     * gettxtJigyosha
-     * @return txtJigyosha
+     * gettxtYoshikiMeisho
+     * @return txtYoshikiMeisho
      */
-    @JsonProperty("txtJigyosha")
-    public TextBox getTxtJigyosha() {
-        return txtJigyosha;
+    @JsonProperty("txtYoshikiMeisho")
+    public TextBox getTxtYoshikiMeisho() {
+        return txtYoshikiMeisho;
     }
 
     /*
-     * settxtJigyosha
-     * @param txtJigyosha txtJigyosha
+     * settxtYoshikiMeisho
+     * @param txtYoshikiMeisho txtYoshikiMeisho
      */
-    @JsonProperty("txtJigyosha")
-    public void setTxtJigyosha(TextBox txtJigyosha) {
-        this.txtJigyosha = txtJigyosha;
+    @JsonProperty("txtYoshikiMeisho")
+    public void setTxtYoshikiMeisho(TextBox txtYoshikiMeisho) {
+        this.txtYoshikiMeisho = txtYoshikiMeisho;
     }
 
     /*
@@ -434,7 +455,7 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     public void initialize(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号, NyuryokuShikibetsuNo 識別番号) {
         getHandler().initialize(被保険者番号, サービス提供年月, 整理番号, 識別番号);
     }
-
+    
     /**
      * サービス提供年月を設定します。
      *

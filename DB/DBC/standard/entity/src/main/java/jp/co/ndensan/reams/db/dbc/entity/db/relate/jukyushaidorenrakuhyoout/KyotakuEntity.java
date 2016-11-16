@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,4 +35,6 @@ public class KyotakuEntity {
     private RString サービス種類コード;
     private FlexibleDate 有効終了日;
     private int 履歴番号;
+    private FlexibleYearMonth taishoYM1;
+    private FlexibleYearMonth taishoYM2;
 }

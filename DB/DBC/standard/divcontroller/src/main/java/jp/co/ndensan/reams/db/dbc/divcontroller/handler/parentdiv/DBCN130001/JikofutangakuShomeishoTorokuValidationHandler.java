@@ -263,7 +263,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
         if (!uchiFutangakuGokei.equals(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new ValidationCheckMessages(DbcErrorMessages.合計ボタン未押下),
-                    div.getTxtJikofutangakuGokei()));
+                    div.getTxtUchiFutangakuGokei()));
         }
 
         return validPairs;

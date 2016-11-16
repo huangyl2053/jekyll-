@@ -146,10 +146,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
             総ページ数 = 総ページ数 + publish特徴開始通知書(出力帳票一覧, 編集後本算定通知書共通情報, result, 本算定通知書情報);
             tokuchoKaishiTsuchishoInfo.set本算定通知書情報(本算定通知書情報);
             tokuchoKaishiTsuchishoInfo.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
-
-            //TODO 仕様変更未対応
-            tokuchoKaishiTsuchishoInfo.set生活保護区分(RString.EMPTY);
-            tokuchoKaishiTsuchishoInfo.set特徴10月開始者区分(RString.EMPTY);
+            tokuchoKaishiTsuchishoInfo.set生活保護区分(tmpResult.get生活保護区分());
+            tokuchoKaishiTsuchishoInfo.set特徴10月開始者区分(tmpResult.get特徴10月開始者区分());
 
             編集本算定通知書共通情報List.add(tokuchoKaishiTsuchishoInfo);
         }

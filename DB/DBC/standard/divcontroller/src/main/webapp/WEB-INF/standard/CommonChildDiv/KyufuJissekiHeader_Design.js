@@ -56,6 +56,10 @@ var DBC;
                 return new UZA.TextBoxDate(this.convFiledName("txtSeinengappi"));
             };
 
+            Controls.prototype.lin01 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin01"));
+            };
+
             Controls.prototype.txtTeikyoNengetsu = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtTeikyoNengetsu"));
             };
@@ -80,16 +84,16 @@ var DBC;
                 return new UZA.TextBox(this.convFiledName("txtYoshikiNo"));
             };
 
-            Controls.prototype.txtYoshikiMeisho = function () {
-                return new UZA.TextBox(this.convFiledName("txtYoshikiMeisho"));
+            Controls.prototype.txtJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyosha"));
             };
 
             Controls.prototype.txtJigyoshaNo = function () {
                 return new UZA.TextBox(this.convFiledName("txtJigyoshaNo"));
             };
 
-            Controls.prototype.txtJigyosha = function () {
-                return new UZA.TextBox(this.convFiledName("txtJigyosha"));
+            Controls.prototype.txtYoshikiMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtYoshikiMeisho"));
             };
             return Controls;
         })();

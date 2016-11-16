@@ -97,7 +97,9 @@ public class KagoMoshitateHouPanelHandler {
                     servive_Row.setDefaultDataName1(jigyoshaInput.getサービス事業所番号().value());
                 }
                 servive_Row.setDefaultDataName2(jigyoshaInput.getサービス事業者名());
-                servive_Row.setDefaultDataName3(ServiceShikibetsuCode.toValue(jigyoshaInput.get指定_基準該当_地域密着型サービス識別コード()).get名称());
+                if (jigyoshaInput.get指定_基準該当_地域密着型サービス識別コード() != null && !jigyoshaInput.get指定_基準該当_地域密着型サービス識別コード().isEmpty()) {
+                    servive_Row.setDefaultDataName3(ServiceShikibetsuCode.toValue(jigyoshaInput.get指定_基準該当_地域密着型サービス識別コード()).get名称());
+                }
                 if (jigyoshaInput.getサービス種類コード() != null && (!jigyoshaInput.getサービス種類コード().isEmpty())) {
                     servive_Row.setDefaultDataName4(ServiceCategoryShurui.toValue(jigyoshaInput.getサービス種類コード().value()).get名称());
                 }

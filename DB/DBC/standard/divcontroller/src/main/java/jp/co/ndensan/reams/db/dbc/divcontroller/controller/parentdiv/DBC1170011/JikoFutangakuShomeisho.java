@@ -7,8 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1170011
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
+import jp.co.ndensan.reams.db.dbc.business.core.jikofutangakushomeisho.KogakuGassanShinSeisho;
 import jp.co.ndensan.reams.db.dbc.business.kogakugassan.KogakuGassanKey;
+import jp.co.ndensan.reams.db.dbc.business.kogakugassan.KogakuGassanNendoKey;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoData;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFromData;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -33,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -46,7 +48,9 @@ public class JikoFutangakuShomeisho {
     private static final int 年_2008 = 2008;
     private static final int 年_2009 = 2009;
     private static final RString 再計算区分_1 = new RString("1");
-    private final RString メニューID = ResponseHolder.getMenuID();
+    private static final RString メニューID_DBCMN63001 = new RString("DBCMN63001");
+    //private final RString メニューID = ResponseHolder.getMenuID();
+    private static final RString メニューID = new RString("DBCMN63001");
 
     /**
      * 自己負担額証明書作成画面 初期化を処理します。
@@ -56,12 +60,17 @@ public class JikoFutangakuShomeisho {
      */
     public ResponseData<JikoFutangakuShomeishoDiv> onLoad(JikoFutangakuShomeishoDiv div) {
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        List<KogakuGassanShinseisho> 対象者データ = getHandler(div).get対象者データ(getKey().get被保険者番号());
+        List<KogakuGassanShinSeisho> 対象者データ = getHandler(div).get対象者データ(メニューID, getKey().get被保険者番号());
         InformationMessage message = new InformationMessage(
                 DbcInformationMessages.自己負担額データなし.getMessage().getCode(),
                 DbcInformationMessages.自己負担額データなし.getMessage().evaluate());
         if (対象者データ.isEmpty()) {
             return ResponseData.of(div).addMessage(message).respond();
+        } else {
+            Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー = getHandler(div).get高額合算キークラス(対象者データ);
+            KogakuGassanKey kogakuGassanKey = new KogakuGassanKey();
+            kogakuGassanKey.set年度毎キー(年度毎キー);
+            setKey高額合算キークラス(kogakuGassanKey);
         }
         getHandler(div).onLoad(メニューID, システム日付, getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), getKey().get識別コード());
         FlexibleYear 択された年度 = new FlexibleYear(div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().getSelectedKey());
@@ -97,7 +106,7 @@ public class JikoFutangakuShomeisho {
      * @return ResponseData<JikoFutangakuShomeishoDiv>
      */
     public ResponseData<JikoFutangakuShomeishoDiv> onChange_shikyuShinseishoSeiriNoDDL(JikoFutangakuShomeishoDiv div) {
-        getHandler(div).onChange_shikyuShinseishoSeiriNoDDLSelect(メニューID);
+        getHandler(div).onChange_shikyuShinseishoSeiriNoDDLSelect(getKey高額合算キークラス().get年度毎キー());
         return ResponseData.of(div).respond();
     }
 
@@ -108,9 +117,9 @@ public class JikoFutangakuShomeisho {
      * @return ResponseData
      */
     public ResponseData<JikoFutangakuShomeishoDiv> onClickBeforeCheck(JikoFutangakuShomeishoDiv div) {
-        KogakuGassanShinseisho 再計算区分 = getHandler(div).get再計算区分();
-        if (再計算区分 != null) {
-            if (再計算区分_1.equals(再計算区分.get再計算区分())) {
+        if (メニューID_DBCMN63001.equals(メニューID)) {
+            KogakuGassanShinseisho 再計算区分 = getHandler(div).get再計算区分(getKey().get被保険者番号());
+            if (再計算区分 != null && 再計算区分_1.equals(再計算区分.get再計算区分())) {
                 return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算申請書情報の再計算前.getMessage()).respond();
             }
         }
@@ -130,7 +139,7 @@ public class JikoFutangakuShomeisho {
     public ResponseData<SourceDataCollection> onClick_HakkouBtn(JikoFutangakuShomeishoDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         try (ReportManager reportManager = new ReportManager()) {
-            JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(getKey().get被保険者番号(), メニューID);
+            JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
             AccessLogger.log(AccessLogType.照会, toPersonalData(data));
             printData(data, reportManager);
             response.data = reportManager.publish();
@@ -147,7 +156,7 @@ public class JikoFutangakuShomeisho {
     public ResponseData<SourceDataCollection> onClick_youHakkouBtn(JikoFutangakuShomeishoDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         try (ReportManager reportManager = new ReportManager()) {
-            JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(getKey().get被保険者番号(), メニューID);
+            JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
             AccessLogger.log(AccessLogType.照会, toPersonalData(data));
             printyouData(data, div, reportManager);
             response.data = reportManager.publish();
@@ -177,6 +186,10 @@ public class JikoFutangakuShomeisho {
 
     private TaishoshaKey getKey() {
         return ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+    }
+
+    private void setKey高額合算キークラス(KogakuGassanKey kogakuGassanKey) {
+        ViewStateHolder.put(ViewStateKeys.高額合算キークラス, kogakuGassanKey);
     }
 
     private KogakuGassanKey getKey高額合算キークラス() {

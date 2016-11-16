@@ -502,7 +502,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         }
         output.set受給申請事由(get受給申請事由(受給者台帳));
         output.set受給申請日(get日付項目(受給者台帳.getJukyuShinseiYMD()));
-        if (受給者台帳.getYokaigoJotaiKubunCode() != null) {
+        if (受給者台帳.getYokaigoJotaiKubunCode() != null && !Code.EMPTY.equals(受給者台帳.getYokaigoJotaiKubunCode())) {
             IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(
                     システム日付, getColumnValue(受給者台帳.getYokaigoJotaiKubunCode()));
             output.set受給要介護度(要介護状態区分 != null ? 要介護状態区分.getName() : RString.EMPTY);
@@ -547,7 +547,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
                 output.set所得区分(所得区分.get名称());
             }
         }
-        if (高額合算支給額計算結果.getOver70_ShotokuKubun() != null) {
+        if (高額合算支給額計算結果.getOver70_ShotokuKubun() != null && !RString.EMPTY.equals(高額合算支給額計算結果.getOver70_ShotokuKubun())) {
             KaigoGassan_Over70_ShotokuKbn 区分_70歳以上 = KaigoGassan_Over70_ShotokuKbn.toValue(高額合算支給額計算結果.getOver70_ShotokuKubun());
             output.set係る所得区分_70歳以上の者に(区分_70歳以上 != null ? 区分_70歳以上.get名称() : RString.EMPTY);
         }

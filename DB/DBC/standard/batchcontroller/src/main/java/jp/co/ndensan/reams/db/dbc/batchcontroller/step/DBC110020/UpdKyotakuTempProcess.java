@@ -60,11 +60,12 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
-        RString 全項目 = 居宅計画全項目(entity.get居宅計画());
-        if (居宅計画List.contains(全項目)) {
+        RString key = 居宅計画Key(entity.get居宅計画());
+        if (居宅計画List.contains(key)) {
             return;
         }
-        居宅計画List.add(全項目);
+        居宅計画List.add(key);
+        RString 全項目 = 居宅計画全項目(entity.get居宅計画());
         Decimal 連番 = 連番Map.get(entity.get居宅計画().get被保険者番号());
         if (連番 == null) {
             連番Map.put(entity.get居宅計画().get被保険者番号(), Decimal.ONE);
@@ -128,6 +129,15 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
         }
         全項目 = concatRString(全項目, 居宅計画.get暫定区分());
         全項目 = concatDate(全項目, 居宅計画.get届出年月日());
+        return 全項目;
+    }
+
+    private RString 居宅計画Key(KyotakuEntity 居宅計画) {
+        RString 全項目 = RString.EMPTY;
+        全項目 = concatRString(全項目, 居宅計画.get居宅計画種類());
+        全項目 = 全項目.concat(居宅計画.getTaishoYM1().toDateString());
+        全項目 = 全項目.concat(居宅計画.getTaishoYM2().toDateString());
+        全項目 = 全項目.concat(new RString(居宅計画.get履歴番号()));
         return 全項目;
     }
 

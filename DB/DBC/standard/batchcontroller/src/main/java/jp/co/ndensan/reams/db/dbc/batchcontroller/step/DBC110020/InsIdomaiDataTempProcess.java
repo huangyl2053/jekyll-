@@ -163,8 +163,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
         FlexibleYearMonth 処理年月 = new FlexibleYearMonth(processParameter.get処理年月().toDateString());
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = JukyushaIdoRenrakuhyoOutCommonProcess.get受給者台帳(異動一時List);
-        List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List = JukyushaIdoRenrakuhyoOutCommonProcess.get総合事業対象者(異動一時List);
         List<KyotakuEntity> 居宅計画List = JukyushaIdoRenrakuhyoOutCommonProcess.get居宅計画(異動一時List);
+        List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List
+                = JukyushaIdoRenrakuhyoOutCommonProcess.get総合事業対象者(異動一時List, 居宅計画List);
         総合事業対象者適用開始年月日設定(総合事業対象者List, 居宅計画List);
         受給者台帳処理(受給者台帳List, 処理年月, 総合事業対象者List);
         List<DbT3100NijiYoboJigyoTaishoshaEntity> 二次予防List = JukyushaIdoRenrakuhyoOutCommonProcess.get二次予防(異動一時List);
