@@ -235,6 +235,10 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
             ViewStateHolder.put(ViewStateKeys.高額介護申請書用データ, dataResult);
             ViewStateHolder.put(ViewStateKeys.照会モード, null);
             return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.選択).respond();
+        } else if (new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
         }
         if ((div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
                 .getClickedItem().getTxtShinseiKubun().equals(一)
