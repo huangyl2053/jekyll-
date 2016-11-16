@@ -256,7 +256,7 @@ public class FutanWariaiHanteiTukiziProcess extends BatchKeyBreakBase<FutanWaria
                 insert根拠Temp.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getRirekiNo()));
             }
             if (!一号被保険者.equals(判定対象者.getHihokenshaKubunCode())) {
-                return;
+                continue;
             }
             根拠Writer.insert(insert根拠Temp);
             if (taishoTsuki.equals(util.getTsuki(parameter.getKijunbi()))) {
