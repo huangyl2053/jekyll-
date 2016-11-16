@@ -93,7 +93,7 @@ public class JikoFutangakuKeisanIkkatsuPanelHandler {
         RString 処理状態区分 = ShoriJotaiKubun.終了.getコード();
         RString 交換情報識別番号 = getConfig値(ConfigNameDBC.国保連取込_高額合算自己負担額確認情報_交換情報識別番号,
                 適用基準日);
-        国保連インターフェース管理 = 国保連管理Manager.get新国保連インターフェース管理(処理状態区分, 交換情報識別番号);
+        国保連インターフェース管理 = 国保連管理Manager.get処理年月Max(処理状態区分, 交換情報識別番号);
         if (国保連インターフェース管理 != null) {
             FlexibleYearMonth 受取年月TXT = 国保連インターフェース管理.get処理年月();
             div.getTxtUketoriYM().setValue(new RDate(受取年月TXT.toString()));
