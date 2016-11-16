@@ -8,6 +8,14 @@ var DBD;
                 return "onClick_btnKensaku";
             };
 
+            Events.onOkClose_BtnDispGengakuJoho = function () {
+                return "onOkClose_BtnDispGengakuJoho";
+            };
+
+            Events.onBeforeOpenDialog_BtnDispGengakuJoho = function () {
+                return "onBeforeOpenDialog_BtnDispGengakuJoho";
+            };
+
             Events.onClick_btnReturn = function () {
                 return "onClick_btnReturn";
             };

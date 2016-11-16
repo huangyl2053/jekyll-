@@ -24,10 +24,10 @@ public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
                  */
                 @Override
                 public boolean apply(KyufuGengaku1GoDiv div) {
-                    if (!div.getTxtKonkaiKikanKaishiYMD().getValue().toString().isEmpty() && !div.getTxtKonkaiKikanShuryoYMD().getValue().toString().isEmpty()) {
+                    if (div.getTxtKonkaiKikanKaishiYMD().getValue() != null && !div.getTxtKonkaiKikanKaishiYMD().getValue().toString().isEmpty() && !div.getTxtKonkaiKikanShuryoYMD().getValue().toString().isEmpty()) {
                         return div.getTxtKonkaiKikanKaishiYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiKikanShuryoYMD().getValue());
                     } else {
-                        return !div.getTxtKonkaiKikanKaishiYMD().getValue().toString().isEmpty() || !div.getTxtKonkaiKikanShuryoYMD().getValue().toString().isEmpty();
+                        return div.getTxtKonkaiKikanKaishiYMD().getValue() == null || !div.getTxtKonkaiKikanKaishiYMD().getValue().toString().isEmpty() || !div.getTxtKonkaiKikanShuryoYMD().getValue().toString().isEmpty();
                     }
                 }
             },
